@@ -48,9 +48,9 @@ public class LinkCommand extends Command {
             model.linkWith(person, lesson);
             // parser make sure the state is either STUDENT or SCHEDULE
             State state = model.getState();
-            if (state == State.STUDENT && person.equals(model.getCurrentlyDisplayedPerson())) {
+            if (model.sameState(State.STUDENT) && person.equals(model.getCurrentlyDisplayedPerson())) {
                 model.showPerson(person);
-            } else if (state == State.SCHEDULE && lesson.equals(model.getCurrentlyDisplayedLesson())) {
+            } else if (model.sameState(State.SCHEDULE) && lesson.equals(model.getCurrentlyDisplayedLesson())) {
                 model.showLesson(lesson);
             }
             return new CommandResult("Linked " + person.getName() + " to " + lesson.getName());
