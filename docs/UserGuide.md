@@ -35,6 +35,7 @@ Teaching Assistant Manager (TAManager) is a desktop application for managing tea
 6. Refer to the [Features](#features) section below for details on each command.
 
 <span style="float:right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command Format
@@ -437,6 +438,7 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 </div>
 
 <span style="float:right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
