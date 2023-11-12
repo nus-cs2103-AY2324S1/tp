@@ -75,7 +75,7 @@ through an all-in-one user-friendly platform!
 It is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a **Graphical User Interface** (GUI).
 If you are an engineering hiring manager who has a good understanding of CLI-based applications and can type fast, **InterviewHub** can get your interview and applicant management tasks done faster than traditional GUI apps.
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -102,7 +102,7 @@ Before we begin, the table below describes some symbols and syntax you may see t
 | `Highlighted text block`                  | Commands or parameters relevant to the application                                                                      |
 | [Hyperlinks](#how-to-use-this-user-guide) | Clickable links that direct you to specific sections within this document or to external resources for more information |
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -143,7 +143,7 @@ Before we begin, the table below describes some symbols and syntax you may see t
 
 8. Refer to the [Features](#features) below for details of each command.
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -176,7 +176,7 @@ For each **interview**, we see the following details:
 | **End Time**         | Projected end time of the interview                            |
 | **Rating**           | Interview performance rating of the applicant (from 0.0 - 5.0) |
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -237,7 +237,7 @@ A pop-up window, containing the link as shown below, will appear to guide you to
 
 Format: `help`
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 ### Exiting the program : `exit`
 
@@ -245,7 +245,7 @@ Exits **InterviewHub**.
 
 Format: `exit`
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 ### Clearing all applicants and interviews : `clear`
 
@@ -258,13 +258,13 @@ Format: `clear`
 * This action is irreversible. Please proceed with caution.
 </div>
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 ### Saving the data
 
 Data in InterviewHub are automatically saved to the hard disk after any command that changes the data. There is no need for manual saving.
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 ## Applicant Management Features
 
@@ -287,7 +287,7 @@ Examples:
 * `add-a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Engineer t/Frontend`.
 ![Result of `add-a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Engineer t/Frontend`](images/addApplicantResult.png)
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 
 ### Deleting an applicant : `delete-a`
@@ -310,7 +310,7 @@ Examples:
 * `delete-a 1` deletes the 1st applicant in the address book.
 
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 ### Editing an applicant : `edit-a`
 
@@ -344,7 +344,7 @@ Examples:
    After:
    ![result for 'edit-a 2 p/91234567 e/johndoe@example.com'](images/editApplicantResult.png)
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 ### Finding applicants : `find-a`
 
@@ -382,7 +382,7 @@ Examples:
   `Serangoon Gardens Street`, `Ang Mo Kio`<br>
   ![result for 'find-a p/874 a/serangoon ang'](images/findPhoneAddress.png)
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 ### Listing all applicants : `list-a`
 
@@ -390,7 +390,7 @@ Shows a list of all applicants in **InterviewHub** on the GUI.
 
 Format: `list-a`
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 ## Interview Management Features
 
@@ -430,7 +430,7 @@ please refer to the informative error message or [accepted formats list](#featur
 After `add-i app/4 jr/Software engineer start/Next Tuesday 4pm end/6pm that day`:
 ![Result of `add-i app/4 jr/Software engineer start/Next Tuesday 4pm end/6pm that day`](images/addInterviewFailure.png)
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 ### Deleting an interview : `delete-i`
 
@@ -463,7 +463,7 @@ that should assist you with troubleshooting:
 
 ![result of `delete-i 5`](images/afterdeletei5.png)
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 ### Editing an interview : `edit-i`
 
@@ -506,7 +506,7 @@ View of the application after `edit-i 1 jr/Network Engineer`:
 ![result of `edit-i 1 jr/Network Engineer`](images/aftereditisuccess.png)
 You can see that Alex Yeoh's role has been updated from Frontend Engineer to Network Engineer
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 ### Finding interviews by job role : `find-i`
 
@@ -533,7 +533,7 @@ Format: `find-i KEYWORD(S)`
 Examples:
 * `find-i software data` returns `Software Engineer` and `Data Analyst`.
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 ### Listing all interviews : `list-i`
 
@@ -544,7 +544,7 @@ Format: `list-i`
 After `list-i`: You should see a success message in the command result box and the full list of interviews in the interview list
 ![result of `list-i`](images/afterlisti.png)
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 ### Listing all free timings for the given date : `list-freetime`
 
@@ -582,7 +582,7 @@ Examples:
 * `list-freetime 03-11-2024`
 * `list-freetime 5-5-2025`
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 ### Listing all interviews for today : `list-i-today`
 
@@ -613,7 +613,7 @@ We have three interviews scheduled on 09/11/2023 as shown below:
 Result of `list-i-today` on 09/11/2023.
 ![Results of `list-i-today`](images/listInterviewsTodayResult.png)
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 ### Marking an interview as done : `mark`
 
@@ -635,7 +635,7 @@ Examples:
 * Marking an interview that is already done will result in an error message.
 </div>
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 ### Rating an interview : `rate`
 
@@ -663,7 +663,7 @@ Before rating the interview at `INTERVIEW_INDEX` 1:
 After rating the interview at `INTERVIEW_INDEX` 1 with a `RATING` of 4.0:
 ![afterrate](images/afterrate.png)
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 ### Listing all completed interviews : `list-i-done`
 
@@ -681,7 +681,7 @@ Before `list-i-done`:
 After `list-i-done`:
 ![afterlistidone](images/afterlistidone.png)
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 ### Listing all incomplete interviews : `list-i-not-done`
 
@@ -699,7 +699,7 @@ Before `list-i-not-done`:
 After `list-i-not-done`:
 ![afterlistinotdone](images/afterlistinotdone.png)
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 ### Sorting interviews by rating : `sort-rate`
 
@@ -717,7 +717,7 @@ Before `sort-rate`:
 After `sort-rate`:
 ![aftersort](images/aftersort.png)
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 ### Sorting interviews by start time : `sort-time`
 
@@ -737,7 +737,7 @@ Before `sort-time`:
 After `sort-time`:
 ![aftersorttime](images/aftersorttime.png)
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 
 ### Editing the data file
@@ -748,7 +748,7 @@ InterviewHub data are saved automatically as a JSON file `[JAR file location]/da
 If your changes to the data file makes its format invalid, InterviewHub will not work. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -766,7 +766,7 @@ The correct version of Java required to run **InterviewHub** is **Java 11**. If 
 ### **Q**: Do I need an active internet connection to use InterviewHub?<br>
 **A**: No. It is an offline app.
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -774,7 +774,7 @@ The correct version of Java required to run **InterviewHub** is **Java 11**. If 
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -790,7 +790,7 @@ The correct version of Java required to run **InterviewHub** is **Java 11**. If 
 | **Help**                                | `help`           |
 | **Exit**                                | `exit`           |
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 ## Applicant Management Commands
 
@@ -802,7 +802,7 @@ The correct version of Java required to run **InterviewHub** is **Java 11**. If 
 | **Find applicant**   | `find-a [n/KEYWORD(S)] [p/NUMBER] [e/KEYWORD(S)] [a/KEYWORD(S)] [t/KEYWORD(S)]` <br> e.g., `find-a n/John Bob p/98765432 e/john@example.com`              |
 | **List applicants**  | `list-a`                                                                                                                                                  |
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 ## Interview Management Commands
 
@@ -822,7 +822,7 @@ The correct version of Java required to run **InterviewHub** is **Java 11**. If 
 | **Sort interviews by rating**     | `sort-rate` <br/> e.g. `sort-rate`                                                                                                                                              |
 | **Sort interviews by start time** | `sort-time` <br/> e.g. `sort-time`                                                                                                                                              |
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -835,4 +835,4 @@ The correct version of Java required to run **InterviewHub** is **Java 11**. If 
 | **CLI**       | A CLI (Command Line Interface) is a means of interacting with a computer program by inputting lines of text called command-lines.                                                                        |
 | **GUI**       | A GUI (Graphical User Interface) is user interface that allows users to interact with the program with interactive visual components instead of text-based UIs, typed command labels or text navigation. |
 
-[Back to the Table of Contents](#table-of-contents)
+[Return to the Table of Contents](#table-of-contents)
