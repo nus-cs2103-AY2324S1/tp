@@ -422,6 +422,52 @@ The following activity diagram summarises what happens when a user executes the 
     * Pros: Shorter command execution, one less point of failure by eliminating the `ReportStorage` class.
     * Cons: Less OOP, may violate SLAP within the command class.
 
+### Find Employee feature
+
+The find employee feature allows HouR to find employees that match the given search criteria from the employee list.
+
+#### Implementation
+
+The find employee command mechanism is facilitated by the `FindCommandParser` class which implements the `Parser` interface.
+
+`FindCommandParser#parse()` is exposed in the `Parser` interface as `Parser#parse()`.
+
+`FindCommandParser` implements the following operations:
+
+* `FindCommandParser#parse()` — Parses the input argument, splits it into an array of keywords, creates an instance of `EmployeeContainsKeywordsPredicate` using the keywords, and creates a new `FindCommand` object with the newly-created predicate instance.
+
+The `FindCommand` object then communicates with the `Model` API by calling the `Model#updateFilteredEmployeeList(Predicate)` method, which updates the view of the application to show all employees that match the given search criteria.
+
+The method `FindCommand#execute()` returns a `CommandResult` object, which stores information about the completion of the command.
+
+The diagram below details how the operation of finding an employee works.
+
+![Find Sequence Diagram](images/FindSequenceDiagram.png)
+
+Given below is an example usage scenario for the command.
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `find KEYWORD [MORE_KEYWORDS]…​` command in the CLI.
+
+**Step 3**: The employee list will be updated to show only employees that match the given search criteria.
+
+The following activity diagram summarises what happens when a user executes the find command:
+
+![Find Activity Diagram](images/FindActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: Command-Model Interaction:**
+
+* **Alternative 1 (current choice)**: Utilise `model#updateFilteredEmployeeList` to update the view of the application to show all employees that match the given search criteria.
+    * Pros: Maintains data, maintain immutability within the FindCommand and Model classes.
+    * Cons: Longer command execution, requiring more parts to work together.
+
+* **Alternative 2**: Edit the employee list directly from `FindCommand#execute()` to display only employees that match the given search criteria.
+   * Pros: Shorter command execution, one less point of failure by eliminating the `model` class.
+   * Cons: May violate immutability within FindCommand and Model classes as well as SLAP by having `FindCommand#execute()` perform the editing directly.
+
 ### Reset feature
 
 The reset feature allows HouR to reset employee overtime hours and leaves.
