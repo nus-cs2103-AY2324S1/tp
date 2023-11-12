@@ -25,9 +25,14 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_multipleWords_throwsParseException() {
+
+        assertThrows(ParseException.class, () -> parser.parse("n/Alex Yeoh sb/Math"));
+
         assertThrows(ParseException.class, () -> parser.parse("sb/Math Chemistry"));
 
-        assertThrows(ParseException.class, () -> parser.parse("n/Alex Bernice"));
+        assertThrows(ParseException.class, () -> parser.parse("n/Alex Yeoh sb/Math"));
+
+        assertThrows(ParseException.class, () -> parser.parse("n/Alex sb/Math Chemistry"));
     }
 
     @Test
@@ -36,7 +41,6 @@ public class FindCommandParserTest {
 
         parser.parse(" sb/Math");
     }
-
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
