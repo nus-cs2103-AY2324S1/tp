@@ -1404,7 +1404,7 @@ testers are expected to do more *exploratory* testing.
    iv. Other incorrect edit commands to try: `edit 1 /l -15`, `edit x /l 15` (where x is larger than the list size, excluding negative, non-integer and extremely large integers)<br>
    	- Expected: Similar to previous.
   
-9. Editing the multiple fields of an employee
+9. Editing multiple fields of an employee
 
    i. Prerequisites:
    	- List all employees using the `list` command. Multiple employees in the list.
@@ -1508,12 +1508,12 @@ testers are expected to do more *exploratory* testing.
   
 2. Toggle to the previous month
    
-  i. Test case: `pm`<br>
+   i. Test case: `pm`<br>
    	- Expected: The calendar should transition to the calendar of the previous month.
 
 2. Toggle to the current month
    
-  i. Test case: `cm`<br>
+   i. Test case: `cm`<br>
    	- Expected: The calendar should transition to the calendar of the current month.
   	  
 ### Saving data
