@@ -18,14 +18,16 @@ public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE =
+        COMMAND_WORD
             + ": Deletes the job identified by the index number used in the displayed job list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_JOB_SUCCESS = "Deleted Job: %1$s";
-
+    public static final Boolean CLEARS_DETAILS_PANEL = false;
     private final Index targetIndex;
+
 
     /**
      * Constructs a DeleteCommand with the specified target index.
@@ -55,7 +57,8 @@ public class DeleteCommand extends Command {
 
         Job jobToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteJob(jobToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_JOB_SUCCESS, Messages.format(jobToDelete)));
+        return new CommandResult(String.format(MESSAGE_DELETE_JOB_SUCCESS, Messages.format(jobToDelete)),
+            CLEARS_DETAILS_PANEL);
     }
 
     /**
@@ -87,7 +90,7 @@ public class DeleteCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
-                .toString();
+                   .add("targetIndex", targetIndex)
+                   .toString();
     }
 }

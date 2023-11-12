@@ -29,13 +29,14 @@ public class ListCommandTest {
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
         String expectedMessage = String.format(ListCommand.MESSAGE_SUCCESS, 7);
-        assertCommandSuccess(new ListCommand(), model, expectedMessage, expectedModel);
+        assertCommandSuccess(new ListCommand(), model, expectedMessage, true, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showJobAtIndex(model, INDEX_FIRST);
         String expectedMessage = String.format(ListCommand.MESSAGE_SUCCESS, 7);
-        assertCommandSuccess(new ListCommand(), model, expectedMessage, expectedModel);
+        assertCommandSuccess(new ListCommand(), model,
+            expectedMessage, ListCommand.CLEARS_DETAILS_PANEL, expectedModel);
     }
 }

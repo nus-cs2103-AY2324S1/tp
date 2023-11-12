@@ -43,6 +43,13 @@ public class CommandResult {
     }
 
     /**
+     * Constructs a {@code CommandResult} with specifying whether to clear Job Details Panel.
+     */
+    public CommandResult(String feedbackToUser, boolean clearDetailsPanel) {
+        this(feedbackToUser, false, false, clearDetailsPanel, -1);
+    }
+
+    /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
      * and other fields set to their default value.
      */

@@ -36,6 +36,7 @@ public class FindCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_COMPANY + "Google";
 
     public static final String MESSAGE_EMPTY_KEYWORDS = "Missing keywords";
+    public static final Boolean CLEARS_DETAILS_PANEL = true;
 
     private final CombinedPredicate predicate;
 
@@ -49,7 +50,7 @@ public class FindCommand extends Command {
         model.updateFilteredJobList(predicate);
         return new CommandResult(
             String.format(Messages.MESSAGE_JOBS_LISTED_OVERVIEW, model.getFilteredJobList().size()),
-            false, false, true, -1);
+            CLEARS_DETAILS_PANEL);
     }
 
     @Override
