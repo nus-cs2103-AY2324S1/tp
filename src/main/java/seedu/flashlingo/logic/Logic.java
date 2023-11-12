@@ -1,6 +1,4 @@
-//@@author A1WAYSD-reused
-//Reused from AB-3 Logic.java with minor modifications
-//Added getTheme() method
+//@@author
 package seedu.flashlingo.logic;
 
 import java.nio.file.Path;
@@ -52,6 +50,7 @@ public interface Logic {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
+    //@@author A1WAYSD
     /**
      * Returns the user prefs' theme.
      */
