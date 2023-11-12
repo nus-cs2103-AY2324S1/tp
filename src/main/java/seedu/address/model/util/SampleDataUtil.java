@@ -157,15 +157,15 @@ public class SampleDataUtil {
                 )
             ),
             new Person(
-            new Name("Noor Muhammad"),
-            new Phone("93210283"),
-            new Email("noormuhammad@yahoo.com"),
-            new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-            getTagSet("friends"),
-            new Nric("743G"),
-            new LicencePlate("SBA8473A"),
-            EMPTY_REMARK,
-            new Policy(
+                new Name("Noor Muhammad"),
+                new Phone("93210283"),
+                new Email("noormuhammad@yahoo.com"),
+                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
+                getTagSet("friends"),
+                new Nric("743G"),
+                new LicencePlate("SBA8473A"),
+                EMPTY_REMARK,
+                new Policy(
                     new Company("NTUC Income"),
                     new PolicyNumber("NI49383"),
                     new PolicyDate("20-12-2022"),
