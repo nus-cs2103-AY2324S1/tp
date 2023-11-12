@@ -53,6 +53,7 @@ Person *--> "*" Tag
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
+Name -[hidden]right-> Phone
 Name -[hidden]right-> ID
 
 ModelManager --> "~* filtered" Person
