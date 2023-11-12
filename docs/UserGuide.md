@@ -153,7 +153,7 @@ Acceptable values for each parameter:
 
 | Parameters     | Accepted input                                             |
 |----------------|------------------------------------------------------------|
-| `NAME`         | Alphabets                                                  |
+| `NAME`         | Alphabets and Numbers                                      |
 | `PHONE_NUMBER` | At least 3 digits                                          |                                                  |
 | `EMAIL`        | Email with the pattern x@x.com where ‘x’ are alphanumerics |
 | `ADDRESS`      | Alphanumerics and ascii characters i.e. #, -               |
