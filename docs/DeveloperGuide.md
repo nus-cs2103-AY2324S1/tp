@@ -282,22 +282,22 @@ The following exceptions may be thrown during this process, namely:
 - CommandException for identical appointments
 - CommandException for appointments with clashing timeslots
 
--- user input -- 
+-- user input --  
 Step 1. User executes reschedule command with correct and valid arguments.
 
--- `AddressBookParser` --
+-- `AddressBookParser` --  
 Step 2. Returns new `RescheduleCommandParser`.
 
--- `RescheduleCommandParser` --
-Step 3. Verify that all argument prefixes are present.
-Step 4. Verify that provided arguments are valid.
-Step 5. Returns new `RescheduleCommand`.
+-- `RescheduleCommandParser` --  
+Step 3. Verify that all argument prefixes are present.  
+Step 4. Verify that provided arguments are valid.  
+Step 5. Returns new `RescheduleCommand`.  
 
--- `RescheduleCommand` --
-Step 6. Verify that the given index exist in UniqueAppointmentList.
-Step 7. Verify that the new appointment to be added does not have time conflict with another appointment on the same day.
-Step 8. Verify that the same appointment has not already been added.
-Step 9. Appointment is rescheduled.
+-- `RescheduleCommand` --  
+Step 6. Verify that the given index exist in UniqueAppointmentList.  
+Step 7. Verify that the new appointment to be added does not have time conflict with another appointment on the same day.  
+Step 8. Verify that the same appointment has not already been added.  
+Step 9. Appointment is rescheduled.  
 
 The following activity diagram shows how the reschedule operation works:
 
@@ -308,7 +308,7 @@ The following activity diagram shows how the reschedule operation works:
 [FindAppointmentCommandParser.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/parser/appointmentparser/FindAppointmentCommandParser.java
 [FindAppointmentCommand.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/commands/appointmentcommands/FindAppointmentCommand.java
 
-### Implementation
+#### Implementation
 
 For _FindAppointment_ command, the noteworthy classes involved are:
 
@@ -365,6 +365,7 @@ The feature is implemented by sorting the unfiltered patient list stored in the 
 
 
 The following sequence diagram shows how the sort patient command works:
+
 ![SortPatientCommandSequenceDiagram](images/SortPatientCommandSequenceDiagram.png)
 
 #### Design considerations:
@@ -388,6 +389,11 @@ For _Undo/Redo_ command, the noteworthy classes are:
 - [`UndoCommand.java`][UndoCommand.java] - For execution.
 - [`RedoCommand.java`][UndoCommand.java] - For execution.
 
+
+The following sequence diagram shows how the undo patient command works:
+
+![UndoCommandSequenceDiagram](images/UndoCommandSequenceDiagram.png)
+
 The following exceptions may be thrown during this process, namely:
 - ParseException for additional arguments with undo/redo command
 - CommandException for attempting to execute undo when there is no command to undo
@@ -395,28 +401,37 @@ The following exceptions may be thrown during this process, namely:
 
 Given below is an example usage scenario of how the _Undo_ command executes.
 
--- user input --
+-- user input --  
 Step 1. User executes a valid `add` command.
 
--- `AddCommand` --
-Step 2. Adds the `add` command as recent command.
-Step 3. Adds the added `person` as new patient.
+-- `AddCommand` --  
+Step 2. Adds the `add` command as recent command.  
+Step 3. Adds the added `person` as new patient.  
 
--- user input --
+-- user input --  
 Step 4. User executes `undo` command.
 
--- `UndoCommand` --
-Step 5. Verify that there is a command to undo.
-Step 6. Undo the most recent command (deletes the new patient).
+-- `UndoCommand` --  
+Step 5. Verify that there is a command to undo.  
+Step 6. Undo the most recent command (deletes the new patient).  
 
--- `RedoCommand` --
-Step 7. Verify that there is an undone command to undo.
-Step 8. Redo the most recent undone command (restores the deleted patient).
+-- `RedoCommand` --  
+Step 7. Verify that there is an undone command to undo.  
+Step 8. Redo the most recent undone command (restores the deleted patient).  
 
 The execution can be seen in the activity diagram given below.
 
 _Activity Diagram for a typical `undo` command_
 ![UndoCommandActivityDiagram.png](images/UndoCommandActivityDiagram.png)
+
+#### Design considerations:
+1. undoHistory and redoHistory are implemented with Stacks as the behavior of always operating on the most recent action is consistent with the Last-In-First-Out (LIFO) nature of a Stack.
+2. Although storing the state of the program after every user action is not memory efficient, our test runs revealed that the memory usage was insignificant and thus this design can be safely implemented.
+3. The undo/redo commands does not support the following commands: `appointments`, `find`, `today`, `upcoming`, `find-i`, `find-p`, `patients`, `exit`, `help` and `list`. The rationale is as such:
+    * The `find`, `today` and `upcoming` commands can be undone by the `appointments` and `list` command and vice versa.
+    * The `find-i` and `find-p` commands can be undone by the `patients` and `list` vice versa.
+    * The `exit` and `help` commands do not operate on the data, hence there is no need for them to be undone
+
 
 --------------------------------------------------------------------------------------------------------------------
 

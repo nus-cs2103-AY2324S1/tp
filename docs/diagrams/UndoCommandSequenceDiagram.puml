@@ -1,0 +1,75 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "u:UndoCommand" as UndoCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+end box
+
+box Commons COMMONS_COLOR_T1
+participant ":UserHistoryManager" as UserHistoryManager COMMONS_COLOR
+end box
+
+[-> LogicManager : execute(undo)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(undo)
+activate AddressBookParser
+
+create UndoCommand
+AddressBookParser -> UndoCommand
+activate UndoCommand
+
+UndoCommand --> AddressBookParser
+deactivate UndoCommand
+
+AddressBookParser --> LogicManager : u
+deactivate AddressBookParser
+
+LogicManager -> UndoCommand : execute()
+activate UndoCommand
+
+UndoCommand -> ModelManager : undoHistory()
+activate ModelManager
+
+ModelManager -> UserHistoryManager : undo()
+activate UserHistoryManager
+UserHistoryManager --> ModelManager
+deactivate UserHistoryManager
+
+ModelManager -> UserHistoryManager : getUndoHistory()
+activate UserHistoryManager
+UserHistoryManager -> ModelManager : undoHistory
+deactivate UserHistoryManager
+
+ModelManager -> AddressBook : setPersons()
+activate AddressBook
+AddressBook --> ModelManager
+deactivate AddressBook
+
+ModelManager -> AddressBook : setAppointments()
+activate AddressBook
+AddressBook --> ModelManager
+deactivate AddressBook
+
+AddressBook -> AddressBook : resetData(ReadOnlyAddressBook)
+AddressBook --> ModelManager
+
+ModelManager --> UndoCommand
+deactivate ModelManager
+
+UndoCommand --> LogicManager : result
+deactivate UndoCommand
+UndoCommand -[hidden]-> LogicManager : result
+destroy UndoCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
