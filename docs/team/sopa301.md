@@ -40,7 +40,7 @@ Given below are my contributions to the project.
   * Updated references to code files in the `Design` section.
   * Added implementation details for enhanced `find` command.
   * Drafted Planned Enhancements section.
-  * Contributed to `Instructions for Manual Testing` in DG.
+  * Contributed to `Instructions for manual testing` in DG.
 
 * **Contributions to team-based tasks**:
   * Maintained issue tracker.
