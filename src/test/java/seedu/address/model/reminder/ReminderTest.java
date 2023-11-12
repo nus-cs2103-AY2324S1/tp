@@ -8,8 +8,8 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.person.Interaction;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.interaction.Interaction;
 
 public class ReminderTest {
 

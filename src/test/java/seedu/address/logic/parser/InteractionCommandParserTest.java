@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.InteractionCommand;
-import seedu.address.model.person.interaction.Interaction;
+import seedu.address.model.person.Interaction;
 
 public class InteractionCommandParserTest {
 
