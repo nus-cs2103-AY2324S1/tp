@@ -331,7 +331,7 @@ and type `list` again when you want to go back to the main window.
 
 --------------------------------------------------------------------------------------------------------------------
 
-The following commands are for managing teams
+**The following commands are for managing teams**
 
 ### Create teams
 #### What this command does:
