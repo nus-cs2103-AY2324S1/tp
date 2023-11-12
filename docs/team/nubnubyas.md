@@ -27,9 +27,6 @@ Given below are my contributions to the project.
   * Enhance `delete` and `edit` feature to affect original list after `find` command.
     * What it Does: Allows users to edit or delete a patient without having to go back to the original list if they are currently in a filtered list after a find command.
     * Justification: This feature improves the efficiency of users as they will not have to return to the original list everytime. This enhancement works well with the logger tab since the logger tab can save records of find command, hence aidding the deletion of patients through already filtered list of patients.
-  * Enhance `Appointment` to be case insensitive.
-  * Enhance `Email` to have tighter restrictions on format.
-  * Enhance `Id` to be capitalised regardless of input case.
 
 
 * **Documentation**:
