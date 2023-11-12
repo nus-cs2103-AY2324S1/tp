@@ -134,12 +134,15 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedEvent);
 
         Predicate<? super Person> personPredicate = this.filteredPersons.getPredicate();
+        Predicate<? super Event> eventPredicate = this.filteredEvents.getPredicate();
 
         // Reset the current persons list first
         this.filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
+        this.filteredEvents.setPredicate(PREDICATE_SHOW_ALL_EVENTS);
         this.addressBook.setEvent(target, editedEvent);
         sort();
         this.filteredPersons.setPredicate(personPredicate);
+        this.filteredEvents.setPredicate(eventPredicate);
     }
 
     @Override
@@ -157,18 +160,22 @@ public class ModelManager implements Model {
 
     @Override
     public void updateGroups() {
-        /*
+
+        // Get the predicate
         Predicate<? super Person> personPredicate = this.filteredPersons.getPredicate();
+        Predicate<? super Event> eventPredicate = this.filteredEvents.getPredicate();
 
         //Reset the current persons list first
         this.filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
+        this.filteredEvents.setPredicate(PREDICATE_SHOW_ALL_EVENTS);
         for (Event event: filteredEvents) {
             event.updateGroups();
             setEvent(event, event);
         }
         this.filteredPersons.setPredicate(personPredicate);
-        */
-        this.addressBook.updateGroups();
+        this.filteredEvents.setPredicate(eventPredicate);
+
+//        this.addressBook.updateGroups();
     }
 
     //=========== Filtered Person List Accessors =============================================================
