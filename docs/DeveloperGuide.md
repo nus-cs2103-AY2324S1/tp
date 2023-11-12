@@ -205,7 +205,7 @@ class.
 1. The `AddMemberCommand`/`AddApplicantCommand` object's execute() method is called.
 2. The `Member`/`Applicant` to be added is checked against the `AddressBook` to ensure that there are no duplicates.
 3. The `Member`/`Applicant` is added into the `AddressBook` if it is unique, else an error message is thrown.
-o
+
 <img src="images/AddApplicantActivityDiagram.png">
 
 The diagram above describes the behaviour of adding an applicant to the `AddressBook`.
@@ -220,11 +220,11 @@ then set it to unfiltered again.
 
 ### Delete a `Member`/`Applicant`
 
-Deletes a existing `Member`/ `Applicant` indentified by their `MEMBER_INDEX`/`APPLICANT_INDEX` in the displayed applicant/member list.
+Deletes an existing `Member`/ `Applicant` indentified by their `MEMBER_INDEX`/`APPLICANT_INDEX` in the displayed member/applicant list.
 The commands are implemented in the `DeleteMemberCommand` and `DeleteApplicantCommand` classes which extend the `Command` class.
 
 * Step 1. The `DeleteMemberCommand`/`DeleteApplicantCommand` object's `execute()` method is called.
-* Step 2. The `MEMBER_INDEX`/`APPLICANT_INDEX` is checked to be within the valid range of the displayed applicant/member list. If the `MEMBER_INDEX`/`APPLICANT_INDEX` given is invalid(i.e out of range), a `CommandException` is thrown.
+* Step 2. The `MEMBER_INDEX`/`APPLICANT_INDEX` is checked to be within the valid range of the displayed member/applican list. If the `MEMBER_INDEX`/`APPLICANT_INDEX` given is invalid(i.e out of range), a `CommandException` is thrown.
 * Step 3. The `Member`/`Applicant` at the given `MEMBER_INDEX`/`APPLICANT_INDEX` is referenced.
 * Step 4. The model object's `deleteMember()`/`deleteApplicant()` method is called. The input parameter is the referenced `Member`/`Applicant`.
 * Step 5. The `Member`/`Applicant` is deleted from the member/applicant list.
@@ -240,8 +240,8 @@ The sequence diagram below also shows the interaction between the various compon
 
 ### Find a `Member`/`Applicant`
 
-Finds any `Member`(s)/`Applicant`(s) that have any fields with the specified `KEYWORD`(s). The commands are implemented in the FindMemberCommand
-and FindApplicant command classes, which extend the `Command` class.
+Finds any `Member`(s)/`Applicant`(s) that have any fields with the specified `KEYWORD`(s). The commands are implemented in the `FindMemberCommand`
+and `FindApplicantCommand` command classes, which extend the `Command` class.
 
 * Step 1. The `FindMemberCommand`/`FindApplicantCommand` object's `execute()` method is called.
 * Step 2. The `KEYWORD`(s) are parsed and are searched for in each field for each `Member`/`Applicant`.
