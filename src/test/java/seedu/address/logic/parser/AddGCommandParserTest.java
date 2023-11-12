@@ -59,5 +59,8 @@ public class AddGCommandParserTest {
 
         // no index
         assertParseFailure(parser, AddGCommand.COMMAND_WORD + " " + nonEmptyUsername, expectedMessage);
+
+        //no username
+        assertParseFailure(parser, AddGCommand.COMMAND_WORD + " 1", expectedMessage);
     }
 }

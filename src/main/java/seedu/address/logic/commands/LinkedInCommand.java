@@ -52,4 +52,19 @@ public class LinkedInCommand extends Command {
 
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof LinkedInCommand)) {
+            return false;
+        }
+
+        LinkedInCommand otherLinkedInCommand = (LinkedInCommand) other;
+        return this.index.equals(otherLinkedInCommand.index);
+    }
 }

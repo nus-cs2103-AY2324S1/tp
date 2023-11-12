@@ -52,4 +52,19 @@ public class GithubCommand extends Command {
 
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof GithubCommand)) {
+            return false;
+        }
+
+        GithubCommand otherGithubCommand = (GithubCommand) other;
+        return this.index.equals(otherGithubCommand.index);
+    }
 }

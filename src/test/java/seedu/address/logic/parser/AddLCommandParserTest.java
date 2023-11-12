@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.AddGCommand;
 import seedu.address.logic.commands.AddLCommand;
 import seedu.address.model.person.LinkedIn;
 
@@ -59,5 +60,8 @@ public class AddLCommandParserTest {
 
         // no index
         assertParseFailure(parser, AddLCommand.COMMAND_WORD + " " + nonEmptyUsername, expectedMessage);
+
+        //no username
+        assertParseFailure(parser, AddLCommand.COMMAND_WORD + " 1", expectedMessage);
     }
 }
