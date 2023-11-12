@@ -109,55 +109,54 @@ Examples:
 
 <hr class="feature-class-separator">
 
-### Event commands
+### Event Commands
+
+As a CCA head, keeping track of event details is a major responsibility. CCACommander allows you to do so with the event-related commands below:
 
 #### Create an Event : `createEvent`
 
-Creates a new event with accompanying details (name, location, date, tag).
+Creating a new event is no longer a hassle as it can be done with just one simple command - `createEvent`!
 
-Format: `createEvent n/EVENT_NAME l/LOCATION d/DATE [t/TAG]...`
+Here is how you can use it:<br>
+`createEvent n/EVENT_NAME l/LOCATION d/DATE [t/TAG]...`
 
-* Acceptable values for `DATE`: Dates in the format of `YYYY-MM-DD`.
+Here is an example command where we create an event **named** Party held at the **location** Raffles Hall on the
+**date** 2023-09-16, with **tag** Dinner and **tag** Sem1:<br>
+`createEvent n/Party l/Raffles Hall d/2023-09-16 t/Dinner t/Sem1`
 
-Examples:
-* `createEvent n/Party l/Raffles Hall d/2023-09-16` creates an event `Party` in CCACommander.
+<figure>
+    <img src="images/CreateEventPostCommand.png"
+         alt="createEvent Post Command">
+    <figcaption>After executing the `createEvent` command</figcaption>
+</figure>
+
+<hr class="command-separator">
+
+#### Edits an Event : `editEvent`
+
+If you forgot to note any important details, or realise that you made a mistake in any field of the event created,
+the `editEvent` command is here to help
+
+Here is how you can use it:<br>
+`editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]...`
+
+Here is an example command where we edit an **event** at index 1, changing the **location** to be MBS and the **date** to be 2023-10-20.<br>
+`editEvent 1 l/MBS d/2023-10-20`
 
 <hr class="command-separator">
 
 #### Delete an Event: `deleteEvent`
 
-Deletes the event at the specified index.
+Are the number of events piling up? To clear the clutter, you can delete any unwanted event from CCACommander with `deleteEvent`!
 
-Format: `deleteEvent EVENT_INDEX`
+Here is how you can use it:<br>
+`deleteEvent EVENT_INDEX`
 
-* Deletes the event at the specified `EVENT_INDEX`.
-* The index refers to the index number shown in the **currently displayed** event list.
-* The index **must be a positive integer** that is within the range of the length of the event list.
+Here is an example command where we delete the event at index 1:<br>
+`deleteEvent 1`
 
-Examples:
-* `deleteEvent 1` deletes the 1st event in the event list.
-* `deleteEvent 10` deletes the 10th event in the event list.
-
-<hr class="command-separator">
-
-#### Edit an Event : `editEvent`
-
-Edits the event at the specified index with the specified attributes.
-
-Format: `editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]...`
-
-* The index refers to the index number shown in the **currently displayed** event list.
-* The index **must be a positive integer** that is within the range of the length of the member list.
-* At least one field to edit must be provided.
-* `EVENT_NAME` **must only contain** Alphanumeric Characters and spaces, and it should not be blank
-* `LOCATION` **must not** be blank and can take in any values.
-* `DATE` **must be a valid date** in the format of **YYYY-MM-DD**.
-* `TAG` **must only contain** Alphanumeric Characters with no space in between.
-
-Examples:
-* `editEvent 5 n/Halloween Surprise Party l/UTR d/2023-10-31 t/sem1` edits the 5th event in the event list to change the name to `Halloween
-  Surprise Party`, the location to `UTR`, the date to `2023-10-31` and the tag to `sem1`.
-* `editEvent 3 l/UCC Theater` edits the 3rd event in the event list to change the location to `UCC Theater`.
+<div markdown="block" class="alert alert-primary">:bulb: The `EVENT_INDEX` parameter refers to the index number shown in the **currently displayed** event list.
+</div>
 
 <hr class="feature-class-separator">
 
