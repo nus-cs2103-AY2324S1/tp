@@ -853,6 +853,9 @@ Use case ends.
 * **Flashcard**: A two-sided card containing a question and an answer
 * **Tag**: A label used to categorise flashcards
 * **Deck**: A series of cards that is stored in lesSON
+* **Index**: The position of the card in the deck
+* **CLI**: A text-based interface where you interact with the software by typing commands into a terminal or command prompt, providing more direct and precise control over the system.
+* **GUI**: A user-friendly interface that allows you to interact with the software through visual elements like windows, icons, buttons, and menus, making it easy to navigate with a mouse and keyboard.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -882,29 +885,150 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+
+### Adding a card
+
+1. Adding a card with question and answer parameters.
+
+   1. Prerequisites: List all cards using the `list` command. Multiple cards in the list.
+   
+   1. Test case: `add q/What is the opcode for R-format instructions a/000000` <br>
+     Expected: Addition of card with its details shown in the result display. Card is added to deck.
+
+   2. Test case: `add q/What is the opcode for R-format instructions` <br>
+     Expected: Card is not created, error message appears mentioning correct format to follow.
+
+   3. Test case: `add q/What is the opcode for R-format instructions a/000000` <br>
+                `add q/What is the opcode for R-format instructions a/000000` <br>
+     Expected: Duplicate card is detected, error message appears mentioning no duplicate cards allowed
+
+      
 ### Deleting a card
 
 1. Deleting a card while all card are being shown
 
    1. Prerequisites: List all cards using the `list` command. Multiple cards in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First card is deleted from the list. Details of the deleted card shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `delete 1`<br>
+      Expected: First card is deleted from the list. Details of the deleted card shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No card is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `delete 0`<br>
+      Expected: No card is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Listing cards
 
-### Saving data
+1. Listing all cards
+   1. Prerequisites: List all cards using the `list` command. Multiple cards in the list.
 
-1. Dealing with missing/corrupted data files
+   2. Test case: `list t/CS2100`<br>
+      Expected: All cards with the CS2100 tag is shown in the deck.
+   
+   3. Test case: `list q/What`<br>
+      Expected: All cards starting with What is shown in the deck.
+   
+   4. Test case: `list potato`<br>
+      Expected: All cards in deck is shown, extraneous input is ignored.
+   
+### Editing a card
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. Editing a card's question
+   1. Prerequisite: A card which you wish to edit is already in the deck.
+   
+   2. Test case: `edit 1 q/Question 1`<br>
+      Expected: Edits the first card's question to be set as Question 1.
+   
+   3. Test case: `edit 1 q/ `<br>
+      Expected: Blank input detected after parameter, error message appears.
 
-1. _{ more test cases …​ }_
+   4. Other incorrect edit commands to try: `edit`, `edit 1 x/`, `...` (where x is other prefixes)<br>
+      Expected: Similar to previous.
+   
+2. Editing a card's answer
+    1. Prerequisite: A card which you wish to edit is already in the deck.
 
+    2. Test case: `edit 1 a/Answer 1`<br>
+       Expected: Edits the first card's Answer to be set as Answer 1.
+
+    3. Test case: `edit 1 a/ `<br>
+       Expected: Blank input detected after parameter, error message appears.
+   
+   4. Other incorrect edit commands to try: `edit`, `edit 1 x/`, `...` (where x is other prefixes)<br>
+      Expected: Similar to previous.
+   
+3. Editing a card's tag
+    1. Prerequisite: A card which you wish to edit is already in the deck.
+
+    2. Test case: `edit 1 t/Tag 1`<br>
+       Expected: Edits the first card's Tag to be set as Tag 1.
+
+    3. Test case: `edit 1 t/`<br>
+       Expected: Removes the tag from the card.
+
+    4. Other incorrect edit commands to try: `edit`, `edit 1 x/`, `...` (where x is other prefixes)<br>
+       Expected: Error message appears.
+   
+
+4. Editing a card's hint
+    1. Prerequisite: A card which you wish to edit is already in the deck.
+
+    2. Test case: `edit 1 h/Hint 1`<br>
+       Expected: Edits the first card's Tag to be set as Tag 1.
+
+    3. Test case: `edit 1 h/`<br>
+       Expected: Blank input detected after parameter, error message appears.
+
+    4. Other incorrect edit commands to try: `edit`, `edit 1 x/`, `...` (where x is other prefixes)<br>
+       Expected: Similar to previous.
+
+
+### Practising a card
+
+1. Practising a card
+    1. Prerequisite: A card which you wish to practise is already in the deck.
+
+    2. Test case: `practise 1`<br>
+       Expected: Practises the first card in the deck.
+
+    3. Test case: `practise 1 potato`<br>
+       Expected: Additional input detected after index, error message appears.
+
+    4. Other incorrect practise commands to try: `practise`, `practise 1 x/`, `...` (where x is other prefixes)<br>
+       Expected: Similar to previous.
+
+### Choosing a random card
+
+1. Selecting a random card
+    1. Prerequisite: There are multiple cards shown in the deck.
+
+    2. Test case: `random`<br>
+       Expected: Randomly chooses a card in the deck and sets its index as `r`
+
+    3. Test case: `random x`<br>
+       Expected: Additional input detected after index, error message appears.
+
+    4. Other incorrect random commands to try: `random`, `random 1 x/`, `...` (where x is other prefixes)<br>
+       Expected: Similar to previous.
+
+### Clearing a deck
+
+1. Cleansing a deck of all cards
+    1. Prerequisite: There are multiple cards shown in the deck.
+
+    2. Test case: `clear`<br>
+       Expected: Removes all cards in the deck.
+
+    4. Other incorrect random commands to try: `clearx` (where x is other prefixes)<br>
+       Expected: Error message appears.
+
+### Getting help
+
+1. Getting help from user guide
+
+   1. Test case: `help`<br>
+       Expected: Help window pops up with the link to user guide.
+   2. Other incorrect random commands to try: `helpx` (where x is other prefixes)<br>
+   Expected: Error message appears.
 
