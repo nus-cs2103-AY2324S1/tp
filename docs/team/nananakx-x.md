@@ -65,7 +65,7 @@ Given below are my contributions to the project.
         * Added implementation details of the `sort` feature
         * Added sequence diagram for `sort` feature
         * Added user stories and use cases related to `add`, `sort` and `undo`
-        * Added non-functional requirements and instructions for manual testing of `add` under the appendix 
+        * Added non-functional requirements and instructions for manual testing of `add` and `sort` 
         * Added planned enhancements for:
             * Phone number input
             * Preventing Foster Family from crashing due to corruption of data file
@@ -75,7 +75,8 @@ Given below are my contributions to the project.
   * Pull requests: [#30](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/30), [#48](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/48), 
   [#65](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/65), [#73](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/73), 
   [#82](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/82), [#91](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/91), 
-  [#98](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/98), [#144](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/144)
+  [#98](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/98), [#144](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/144),
+  [#147](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/147)
 
 
 * **Project management**:
