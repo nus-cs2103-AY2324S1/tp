@@ -21,6 +21,7 @@ import seedu.address.model.interval.Interval;
 import seedu.address.model.interval.IntervalBegin;
 import seedu.address.model.interval.IntervalDay;
 import seedu.address.model.interval.IntervalEnd;
+import seedu.address.model.person.exceptions.ClashingScheduleException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
@@ -71,6 +72,15 @@ public class UniquePersonListTest {
     public void add_duplicatePerson_throwsDuplicatePersonException() {
         uniquePersonList.add(ALICE);
         assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(ALICE));
+    }
+
+    @Test
+    public void add_clashingSchedule_throwsClashingScheduleException() {
+        uniquePersonList.add(ALICE);
+        Person clashingSchedule = new PersonBuilder().withDay(ALICE.getDay().toString())
+                                .withBegin(ALICE.getBegin().toString())
+                                .withEnd(ALICE.getEnd().toString()).build();
+        assertThrows(ClashingScheduleException.class, () -> uniquePersonList.add(clashingSchedule));
     }
 
     @Test
