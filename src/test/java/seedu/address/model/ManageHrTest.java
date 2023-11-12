@@ -30,6 +30,7 @@ import seedu.address.model.department.exceptions.DepartmentNotFoundException;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.exceptions.DuplicateEmployeeException;
 import seedu.address.model.employee.exceptions.SubordinatePresentException;
+import seedu.address.model.employee.exceptions.SupervisorNotFoundException;
 import seedu.address.testutil.EmployeeBuilder;
 
 public class ManageHrTest {
@@ -72,10 +73,39 @@ public class ManageHrTest {
     }
 
     @Test
+    public void setEmployee_employeeWithWrongSupervisor_throwsSupervisorNotFoundException() {
+        ManageHr typicalManageHr = getTypicalManageHr();
+        Employee editedBenson = new EmployeeBuilder(BENSON).withSupervisors(VALID_NAME_BOB).build();
+        assertThrows(SupervisorNotFoundException.class, () -> typicalManageHr.setEmployee(BENSON, editedBenson));
+    }
+
+    @Test
+    public void setEmployee_employeeWithPreviousSupervisor_throwsSupervisorNotFoundException() {
+        // This case is impossible to test for. To hit this, an employee must:
+        // target.isSupervisorOf(editedEmployee) has to be true
+        // so by extension employees.hasSubordinates(target) has to be true
+        // So target.isSameEmployee(editedEmployee) has to be true for the error to occur
+        // Which means only way to test it is to have the employee be its own manager,
+        // Which is currently impossible.
+    }
+
+    @Test
+    public void removeEmployee_employeeWithSubordinates_throwsSubordinatePresentException() {
+        ManageHr typicalManageHr = getTypicalManageHr();
+        assertThrows(SubordinatePresentException.class, () -> typicalManageHr.removeEmployee(BENSON));
+    }
+
+    @Test
     public void setEmployee_employeeWithSubordinatesChangesRole_throwsCommandException() {
         ManageHr typicalManageHr = getTypicalManageHr();
         Employee editedBenson = new EmployeeBuilder(BENSON).withRole(VALID_ROLE_BOB).build();
         assertThrows(CommandException.class, () -> typicalManageHr.setEmployee(BENSON, editedBenson));
+    }
+
+    @Test
+    public void setEmployees_listWithoutDepartment_throwsDepartmentNotFoundException() {
+        List<Employee> listWithoutDepartment = Collections.singletonList(AMY);
+        assertThrows(DepartmentNotFoundException.class, () -> manageHr.setEmployees(listWithoutDepartment));
     }
 
     @Test
@@ -126,6 +156,17 @@ public class ManageHrTest {
         manageHr.removeDepartment(DEPARTMENT_LOGISTICS);
         ManageHr manageHr1 = new ManageHr();
         assertEquals(manageHr, manageHr1);
+    }
+
+    @Test
+    public void removeDepartment_removalOfWholeDepartment_success() {
+        ReadOnlyManageHr typicalManageHr = getTypicalManageHr(); // Must be a ReadOnly to prevent modifying
+        // JsonSerializableManageHrTest, causing a failure.
+        ManageHr manageHr1 = new ManageHr();
+        manageHr1.resetData(typicalManageHr);
+        manageHr1.removeDepartment(DEPARTMENT_LOGISTICS);
+        assertEquals(manageHr1, manageHr1);
+        manageHr1.addDepartment(DEPARTMENT_LOGISTICS);
     }
 
 
