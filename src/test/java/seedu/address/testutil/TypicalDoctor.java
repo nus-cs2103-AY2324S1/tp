@@ -62,6 +62,10 @@ public class TypicalDoctor {
             .withAddress(VALID_ADDRESS_DEREK).withIc(VALID_NRIC_DEREK).withGender(VALID_GENDER_MALE)
             .build();
 
+    public static final Doctor KENNY = new DoctorBuilder().withName("Kenny Pickett").withPhone("98884444")
+            .withEmail("kenny@gmail.com").withAddress("Woodlands Dr 55").withIc("S4445555Q").withGender("M")
+            .build();
+
     public static final String KEYWORD_MATCHING_DAVID = "Beckham"; // A keyword that matches MEIER
 
     private TypicalDoctor() {
