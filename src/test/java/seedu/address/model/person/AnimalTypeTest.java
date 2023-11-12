@@ -74,8 +74,13 @@ public class AnimalTypeTest {
 
     @Test
     public void isValidAnimalType_invalidAnimalType_returnsFalse() {
+        // invalid animal type, anything other than 'nil', 'able.Dog/Cat', 'current.Dog/Cat'
         assertFalse(AnimalType.isValidAnimalType("invalidDog", AnimalType.VALIDATION_REGEX_AVAILABLE));
         assertFalse(AnimalType.isValidAnimalType("invalidCat", AnimalType.VALIDATION_REGEX_NOT_AVAILABLE));
+
+        // blank animal type
+        assertFalse(AnimalType.isValidAnimalType("", AnimalType.VALIDATION_REGEX_NIL)); // empty string
+        assertFalse(AnimalType.isValidAnimalType(" ", AnimalType.VALIDATION_REGEX_NIL)); // spaces only
     }
 
     @Test
