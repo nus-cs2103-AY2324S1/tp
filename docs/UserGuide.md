@@ -588,7 +588,7 @@ Format: `remind [NUM_OF_DAYS]`
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes on `list_events` command:**<br>
+**:information_source: Notes on `remind` command:**<br>
 * `NUM_OF_DAYS` is optional. It specifies the number of days you would like to look ahead for events and birthdays.
 * If `NUM_OF_DAYS` is not specified, the default value is 7 days.
 
@@ -641,19 +641,46 @@ Input: `find_all friends`
 
 ### Listing all persons and events: `list_all`
 
-Displays all persons and events stored in FumbleLog
-
-- You should see a list of all persons and events under the persons and events column. 
+If you would like to list all your contacts and events, you can use the `list_all` command to display the full list of contacts and events.
 
 Format: `list_all`
+
+**Below is an example on how to use `list_all` command:**
+* `list_all`: Lists all your contacts and events in FumbleLog.
+
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes on `list_all` command:**<br>
+- Events are sorted by date and time, with the earliest event at the top of the list.
+- Any text after the `list_all` command will be ignored and the command will be executed as normal.
+
+</div>
+
 
 [Scroll back to Table of Contents](#table-of-contents)
 
 ### Clearing all entries : `clear`
 
-Clears all contacts and events from the FumbleLog. Be very sure before using this command as it cannot be undone. 
+Clears all contacts and events from the FumbleLog.
 
 Format: `clear`
+
+**Below is an example on how to use `clear` command:**
+* `clear`: Clears all your contacts and events data in FumbleLog.
+
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes on `clear` command:**<br>
+- Events are sorted by date and time, with the earliest event at the top of the list.
+- Any text after the `clear` command will be ignored and the command will be executed as normal.
+
+</div>
+
+<div markdown="span" class="alert alert-warning">
+:exclamation: **Warning: This command is irreversible and data cannot be recovered once cleared! Be very sure you would like to erase all of your data before executing this command!**.<br>
+
 
 ### Exiting the program : `exit`
 
