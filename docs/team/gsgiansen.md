@@ -21,7 +21,7 @@ Given below are my contributions to the project.
   * Justification: Ease of access to a user guide link
   * Highlights: New window pop up that allows for automatic copying of link
 
-* **New Feature**: ClearCommand
+* **New Feature**: ClearCommand [\#130](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/130)
   * What it does: Removes all cards in the deck, giving users an empty deck [\#124](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/124)
   * Justification: For advance users to clear the deck and add own cards
   * Highlights: Ability to wipe lesSON with a clear command to allow ease of reset
