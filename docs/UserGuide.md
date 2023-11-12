@@ -340,10 +340,12 @@ Format: `list_persons`
 **Below are some examples on how to use `list_persons` command:**<br>
 * `list_persons`: Lists all your entire contacts list in FumbleLog.
 
+<div markdown="block" class="alert alert-info">
 
-**Notes on the `list_persons` command:**
+**:information_source: Notes on `list_persons` command:**<br>
 * Any text after `list_persons` command will be ignored and the command will be executed as normal.
 
+</div>
 
 [Scroll back to Table of Contents](#table-of-contents)
 
@@ -366,17 +368,19 @@ Format: `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAM
 | `PERSON_NAME`               | Multiple persons can be assigned to an event but only existing persons name can be added. | `John Doe`        |
 | `GROUP`                     | Multiple groups can be assigned to an event but only existing groups can be added.        | `CS2103T`         |
 
-<br>
 
-> **Below are some examples on how to use `add_event` command:**
->
-> * `add_event m/FumbleLog presentation d/2023-10-30`: Adds an event with name "FumbleLog presentation" and with date "2023-10-30".
-> * `add_event m/FumbleLog meeting d/2023-10-30 g/Team2`: Adds an event with name "FumbleLog meeting" , with date "2023-10-30", and assigns contact in group "Team2" to the event.
-> * `add_event m/CS2101 OP2 d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`: Adds an event with name "CS2101 OP2", with date "2023-10-05", with start time "1500", with end time "1700", assigns contact with name "Ken" and groups "CS2103T" and "CS2101" to the event.
 
-<br>
+**Below are some examples on how to use `add_event` command:**
 
-**Notes on the `add_event` command:**
+* `add_event m/FumbleLog presentation d/2023-10-30`: Adds an event with name "FumbleLog presentation" and with date "2023-10-30".
+* `add_event m/FumbleLog meeting d/2023-10-30 g/Team2`: Adds an event with name "FumbleLog meeting" , with date "2023-10-30", and assigns contact in group "Team2" to the event.
+* `add_event m/CS2101 OP2 d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`: Adds an event with name "CS2101 OP2", with date "2023-10-05", with start time "1500", with end time "1700", assigns contact with name "Ken" and groups "CS2103T" and "CS2101" to the event.
+
+
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes on `add_event` command:**<br>
 - `START_TIME` and `END_TIME` are optional.
 - `PERSON_NAME` and `GROUP` is optional. 
 -  Multiple persons and groups can be added at once, however only existing groups and persons can be added.
@@ -388,7 +392,7 @@ Format: `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAM
 
 ![Person appearing multiple times](images/DuplicatePersonInDifferentGroups.png)
 
-<br>
+</div>
 
 **This should be the expected output when the command succeeds:**
 Input: `add_event m/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`
@@ -416,18 +420,20 @@ Format: `edit_event EVENT_INDEX [m/EVENT_NAME] [d/DATE] [s/START_TIME] [e/END_TI
 | `PERSON_NAME`               | Multiple persons can be assigned to an event but only existing persons name can be added.                    | `John Doe`        |
 | `GROUP`                     | Multiple groups can be assigned to an event but only existing groups can be added.                           | `CS2103T`         |
 
-<br>
 
-> **Below are some examples on how to use `edit_event` command:**
->
-> * `edit_event 1 m/FumbleLog meeting`: Edits the name of event at index 1 to "FumbleLog meeting".
-> * `edit_event 1 s/1500 e/1700`: Edits the start and end time to "1500" and "1700" respectively. If the event initially does not have a start and end time, the respective times will be added to the event.
-> * `edit_event 1 g/CS2103T ug/CS2101`: Assigns group "CS2103T" to the event and unassigns group "CS2101".
-> * `edit_event 1 u/Ken`: Unassigns the person "Ken" from the event.
 
-<br>
+**Below are some examples on how to use `edit_event` command:**
 
-**Notes on the `edit_event` command:**
+* `edit_event 1 m/FumbleLog meeting`: Edits the name of event at index 1 to "FumbleLog meeting".
+* `edit_event 1 s/1500 e/1700`: Edits the start and end time to "1500" and "1700" respectively. If the event initially does not have a start and end time, the respective times will be added to the event.
+* `edit_event 1 g/CS2103T ug/CS2101`: Assigns group "CS2103T" to the event and unassigns group "CS2101".
+* `edit_event 1 u/Ken`: Unassigns the person "Ken" from the event.
+
+
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes on `edit_event` command:**<br>
 * At least one of the optional parameters required.
 * Existing values will be updated to the input values, except for `PERSON` AND `GROUP`.
 * Only parameters `s/` and `e/` can be empty strings. Doing so will remove the current values. i.e. `edit_event 1 s/` will remove the current `START_TIME`.
@@ -443,8 +449,23 @@ Format: `edit_event EVENT_INDEX [m/EVENT_NAME] [d/DATE] [s/START_TIME] [e/END_TI
   * In contrast with the above scenario, using an [add_event](#adding-an-event--addevent) command will automatically bring back the whole list of events, to show you that your new event has been added to FumbleLog.
 
 * ![Person appearing multiple times](images/DuplicatePersonInDifferentGroups.png)
+</div>
 
-<br>
+<div markdown="span" class="alert alert-warning">
+:exclamation: **Disclaimer: Editing a person with a filtered contacts list might cause the person to disappear. Do not worry, your data is not deleted**.<br>
+
+* Note the following scenario:
+  * You have an event stored in FumbleLog, e.g an event named `TP meeting` and you used `find_event meeting` as a command. See: [find_event](#locating-events-by-name-group-or-person-findevent)
+  * The event list is filtered to show all the persons with `meeting` in their name.
+  * You edit `TP meeting` event name to be something else, e.g, `TP sprint`.
+  * `TP meeting` disappears form the person list. Do not worry, your data is not deleted, this is because your previous search term `meeting` no longer matches the new name of the event, `TP sprint`.
+  * To see `TP sprint` in the event list again, you can use the [list_events](#listing-all-events-listevents) command to bring back the whole list of events.
+  * In contrast with the above scenario, using an [add_event](#adding-an-event--addevent) command will automatically bring back the whole list of events, to show you that your new event has been added to FumbleLog.
+
+* ![Person appearing multiple times](images/DuplicatePersonInDifferentGroups.png)
+
+</div>
+
 
 **This should be the expected output when the command succeeds:**
 Input: `edit_event 1 m/tP week 3 meeting d/2023-10-05 s/1500 e/1700`
@@ -465,16 +486,19 @@ Format: `delete_event EVENT_INDEX`
 |---------------|------------------------------------------------------------------------------------------------------------|----------------------------------|
 | `EVENT_INDEX` | A positive integer that is smaller than or equal to the number of events currently displayed in FumbleLog. | `1`                              |
 
-<br>
 
-> **Below are some examples on how to use `add_event` command:**
-> * `delete_event 1`: Deletes the 1st event in the event list.
-> * * `find_all meeting` followed by `delete_event 1`: Deletes the 1st event in the results of the `find` command. 
 
-<br>
+**Below are some examples on how to use `delete_event` command:**
+* `delete_event 1`: Deletes the 1st event in the event list.
+* `find_all meeting` followed by `delete_event 1`: Deletes the 1st event in the results of the `find` command. 
 
-**Notes on the `delete_event` command:**
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes on `delete_event` command:**<br>
 - The index refers to the index number shown in the displayed person list.
+
+</div>
 
 **This should be the expected output when the command succeeds:**
 * Input: `delete_event 1`
@@ -495,12 +519,14 @@ Format: `find_event KEYWORD [MORE_KEYWORDS]`
 |------------------------------|----------------------------------------------------------------------------|---------------------|
 | `KEYWORD`  or `MORE_KEYWORDS` | Use any characters including whitespace. Must not only contain whitespaces | `Alice` or `Friends` |
 
-**Below are some examples on how to use `add_event` command:**
+**Below are some examples on how to use `find_event` command:**
 * `find_event meeting`: Returns `meeting` and `CS2103T meeting`
 * `find_event friends` returns `meeting` if it contains the `friends` group.
 
 
-**Notes on the `find_event` command:**
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes on `find_event` command:**<br>
 * `find_event` searches the name of the `Event`, `Group` and `Person` that they are assigned
   to and will display them accordingly.
 * Only full words will be matched e.g. `meeting` will not match `meetings`
@@ -509,8 +535,9 @@ Format: `find_event KEYWORD [MORE_KEYWORDS]`
 * Events matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Meetings TP` will return `Meetings`, `TP deadline`
 
+</div>
 
-**This should be the expected output when the command succeeds:**
+**This should be the expected output when the command succeeds:**<br>
 Input: `find_event meeting family`
 
 ![EventFind](images/Eventfind.png)
@@ -527,10 +554,13 @@ Format: `list_events`
 * `list_persons`: Lists all your saved contacts in FumbleLog.
 
 
-**Notes on the `list_events` command:**
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes on `list_events` command:**<br>
 - Events are sorted by date and time, with the earliest event at the top of the list.
 - Any text after the `list_events` command will be ignored and the command will be executed as normal.
 
+</div>
 
 [Scroll back to Table of Contents](#table-of-contents)
 
@@ -542,20 +572,30 @@ Format: `list_events`
 If you would like to have a quick overview of your upcoming commitments, you can use the `remind` command and FumbleLog will display all upcoming 
 events and birthdays.
 
-Format: `remind [NUMBER_OF_DAYS]` 
+Format: `remind [NUM_OF_DAYS]` 
+
+**Acceptable values for each parameter:**
+
+| Parameter     | Format                                               | Example                          |
+|---------------|------------------------------------------------------|----------------------------------|
+| `NUM_OF_DAYS` | A positive integer with maximum value of 999999999.  | `1`                              |
 
 
+**Below are some examples on how to use `remind` command:**
+* `remind`: Shows all events and birthdays happening in the next 7 days.
+* `remind 3`: Shows all events and birthdays happening in the next 3 days.
 
-* Shows all events and birthdays happening in the next `[NUMBER_OF_DAYS]` days.
-* If `[NUMBER_OF_DAYS]` is not specified, the default value is 7 days.
-* `[NUMBER_OF_DAYS]` **must be a positive integer** 1,2,3, ...
 
-Examples:
-* `remind` shows all events and birthdays happening in the next 7 days.
-* `remind 3` shows all events and birthdays happening in the next 3 days.
+<div markdown="block" class="alert alert-info">
 
-Expected output when command succeeds: 
+**:information_source: Notes on `list_events` command:**<br>
+* `NUM_OF_DAYS` is optional. It specifies the number of days you would like to look ahead for events and birthdays.
+* If `NUM_OF_DAYS` is not specified, the default value is 7 days.
 
+</div>
+
+
+**Expected output when the command succeeds:**<br>
 Input: `remind`
 
 ![Remind](images/Remind.png)
@@ -564,21 +604,38 @@ Input: `remind`
 
 ### Finding persons and events: `find_all`
 
-Find persons and events whose names or groups contain any of the given keywords.
+If you would like to search for your contacts and events at the same time, you can use the `find_all` command to find all
+persons and events whose names or groups contain any of the given keywords.
 
 Format: `find_all KEYWORD [MORE_KEYWORDS]`
 
-* **Only full words will be matched** e.g. `Han` will not match `Hans`
-  * FumbleLog will return an empty person/event list when there are no keyword matches.
-* The search is case-insensitive. e.g `hans` will match `Hans`
+**Acceptable values for each parameter:**
+
+| Parameter                    | Format                                                                     | Example             |
+|------------------------------|----------------------------------------------------------------------------|---------------------|
+| `KEYWORD`  or `MORE_KEYWORDS` | Use any characters including whitespace. Must not only contain whitespaces | `Alice` or `Friends` |
+
+**Below are some examples on how to use `find_event` command:**
+* `find_all John`: Returns `john` and `John Doe` in the persons list and `John's birthday` in the events list.
+* `find_all friends`: Returns `Alex Yeoh` as he belongs to the `friends` group in the persons list,
+  and `CS2103T meeting` as it contains the `friends` group in the events list.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes on `find_all` command:**<br>
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* FumbleLog will return an empty person/event list when there are no keyword matches.
+* The search is **not** case-sensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Persons and events matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-Examples:
-* `find_all John` returns `john` and `John Doe` in the persons list and `John's birthday` in the events list.
-* `find_all friends` returns `Alex Yeoh` as he belongs to the `friends` group in the persons list. 
-and `CS2103T meeting` as it contains the `friends` group in the events list.
+</div>
+
+**Expected output when the command succeeds:**<br>
+Input: `find_all friends`
+
+![Findall](images/Findall.png)
 
 [Scroll back to Table of Contents](#table-of-contents)
 
