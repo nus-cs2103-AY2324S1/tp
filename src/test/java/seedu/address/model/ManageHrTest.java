@@ -168,7 +168,6 @@ public class ManageHrTest {
         manageHr1.removeDepartment(DEPARTMENT_LOGISTICS);
         assertEquals(manageHr1, manageHr1);
     }*/
-    
     @Test
     public void toStringMethod() {
         String expected = ManageHr.class.getCanonicalName() + "{employees=" + manageHr.getEmployeeList() + "}";
