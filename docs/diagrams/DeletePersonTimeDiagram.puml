@@ -14,10 +14,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute(deleteTime n/Alex Yeoh t/mon 1200 - mon 1400)
+[-> LogicManager : execute("deleteTime n/Alex Yeoh t/mon 1200 - mon 1400")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(deleteTime...)
+LogicManager -> AddressBookParser : parseCommand("deleteTime n/Alex Yeoh t/mon 1200 - mon 1400")
 activate AddressBookParser
 
 create DeleteTimeCommandParser
@@ -27,7 +27,7 @@ activate DeleteTimeCommandParser
 DeleteTimeCommandParser --> AddressBookParser
 deactivate DeleteTimeCommandParser
 
-AddressBookParser -> DeleteTimeCommandParser : parse(n/Alex Yeoh t/...)
+AddressBookParser -> DeleteTimeCommandParser : parse("n/Alex Yeoh t/mon 1200 - mon 1400")
 activate DeleteTimeCommandParser
 
 create DeleteTimeCommand
