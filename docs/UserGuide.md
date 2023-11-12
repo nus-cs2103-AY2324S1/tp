@@ -44,18 +44,18 @@ This guide aims to
 
 ### Navigating the User Guide
 **Information Box**
-<div markdown="block" class="alert alert-info">
-**:information_source: Info:** I am an example info box! I provide useful information.
+<div markdown="block" class="alert alert-info">**:information_source: Info:**
+I am an example info box! I provide useful information.
 </div>
 
 **Tip Box**
-<div markdown="block" class="alert alert-success">
-**:bulb: Tip:** I am an example tip box! I provide pointers to advanced users to enhance experience.
+<div markdown="block" class="alert alert-success">**:bulb: Tip:**
+I am an example tip box! I provide pointers to advanced users to enhance experience.
 </div>
 
 **Warning Box**
-<div markdown="block" class="alert alert-danger">
-**:exclamation: Warning:** I am an example warning box! I show important messages to take note to avoid any unintended effects.
+<div markdown="block" class="alert alert-warning">:exclamation: **Warning:**
+I am an example warning box! I show important messages to take note to avoid any unintended effects.
 </div>
 
 
@@ -139,6 +139,10 @@ Format: `help`
 
 ### 3.1 Basic Course Management
 
+<div markdown="block" class="alert alert-warning">**:exclamation: Warning:**
+The parameter `COURSE_CODE` is used for all course management commands, it can be any string, including an empty one. In addition, if `COURSE_CODE` specified is too long, the end of the string will be truncated!
+</div>
+
 #### 3.1.1 Creating an addressbook: `course create`
 
 ![course create](images/courseCreate.png)
@@ -148,8 +152,6 @@ Creates a new addressbook.
 Format: `course create course/COURSE_CODE`
 
 * Creates a new addressbook with course code `COURSE_CODE`
-* `COURSE_CODE` should be a string made up of alphanumeric characters, with no special characters.
-* `COURSE_CODE` must be specified.
 * `COURSE_CODE` address book must not exist.
 
 Example:
@@ -164,8 +166,6 @@ Delete an addressbook.
 Format: `course delete course/COURSE_CODE`
 
 * Deletes the addressbook with course code `COURSE_CODE`
-* `COURSE_CODE` should be a string made up of alphanumeric characters, with no special characters.
-* `COURSE_CODE` must be specified.
 * `COURSE_CODE` address book must exist.
 
 Example:
@@ -180,8 +180,6 @@ Switches the active addressbook.
 Format: `course switch course/COURSE_CODE`
 
 * Switches to the addressbook with course code `COURSE_CODE`
-* `COURSE_CODE` should be a string made up of alphanumeric characters, with no special characters.
-* `COURSE_CODE` must be specified.
 * `COURSE_CODE` address book must exist.
 
 Example:
@@ -196,8 +194,6 @@ Edits the active addressbook course code.
 Format: `course edit course/COURSE_CODE`
 
 * Changes the course code of active addressbook to `COURSE_CODE`
-* `COURSE_CODE` should be a string made up of alphanumeric characters, with no special characters.
-* `COURSE_CODE` must be specified.
 * `COURSE_CODE` address book must not exist.
 
 Example:
@@ -254,8 +250,8 @@ Examples:
 Format: `mark n/STUDENT_NAME[, STUDENT_NAME]… | id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEK_NUMBER
 [r/REASON_OF_ABSENCE]`
 
-<div markdown="block" class="alert alert-danger">
-**:exclamation: Warning:** Kindly take note the following!
+<div markdown="block" class="alert alert-warning">**:exclamation: Warning:**
+Kindly take note the following!
 * `mark` command is case-sensitive!
 * `mark` command currently does not support marking of students with same `STUDENT_NAME`! Please work around this by marking with `STUDENT_ID` instead!
 * `mark` command currently only supports **EITHER** `STUDENT_NAME` **OR** `STUDENT_ID` only and not both!
@@ -399,7 +395,7 @@ TAvigator data are saved in the hard disk automatically after any command that c
 
 TAvigator data are saved automatically as a JSON file `[JAR file location]/data/tavigator.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
 If your changes to the data file makes its format invalid, TAvigator will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
