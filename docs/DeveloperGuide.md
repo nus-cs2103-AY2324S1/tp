@@ -197,6 +197,14 @@ The add applicant feature allows users to add an applicant to the applicant list
 4. If the check is successful, the `AddCommand#execute()` checks if the applicant exists in the applicant list.
 5. If the applicant does not exist, the `Model#addApplicant()` adds the applicant to the applicant list.
 
+The following sequence diagram shows how the add command works:
+
+<puml src="diagrams/AddSequenceDiagram.puml" alt="AddSequenceDiagram" />
+
+The following activity diagram summarizes what happens when a user executes the `add` command:
+
+<puml src="diagrams/AddActivityDiagram.puml" alt="AddActivityDiagram" />
+
 #### Design considerations
 
 ##### Aspect: Format for adding applicants and interviews
@@ -1323,5 +1331,20 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Effort**
 
-- Challenges were faced in evolving the AB3 codebase to support the new features. This was especially true when implementing the Interview features. Since we evolved the Interview components out of the original Tag components, there were many changes that had to be made in order to accommodate the functionalities we intended. For example, we wanted the ability to cumulatively add interviews to an applicant, but the original AB3 Tag system would reset the entire Tag list whenever it was edited.
-- We also faced challenges in implementing the `import` feature. This was because we had to learn how to use the OpenCSV library and decide which functionalities to include. We also had to learn how to use the `CsvToBeanBuilder<T>` class under the `com.opencsv.bean` package to parse the CSV file. While the use of OpenCSV helped to simplify the parsing process, there were still many modification we made to enable the `import` feature. For example, we also had to create a separate intermediate class `CsvApplicant` to store the data parsed from the CSV file before converting it into an `Applicant` object.
+### Challenges Faced
+Challenges were faced in evolving the AB3 codebase to support the new features. This was especially true when implementing the Interview features. Since we evolved the Interview components out of the original Tag components, there were many changes that had to be made in order to accommodate the functionalities we intended. For example, we wanted the ability to cumulatively add interviews to an applicant, but the original AB3 Tag system would reset the entire Tag list whenever it was edited.
+
+We also faced challenges in implementing the `import` feature. This was because we had to learn how to use the OpenCSV library and decide which functionalities to include. We also had to learn how to use the `CsvToBeanBuilder<T>` class under the `com.opencsv.bean` package to parse the CSV file. While the use of OpenCSV helped to simplify the parsing process, there were still many modification we made to enable the `import` feature. For example, we also had to create a separate intermediate class `CsvApplicant` to store the data parsed from the CSV file before converting it into an `Applicant` object.
+
+### Effort Required
+The team implemented proactive strategies such as establishing coding conventions, adopting branching strategies, and breaking down
+tasks into manageable units. Regular meetings were held to discuss the progress of the project
+and regular communication channels were maintained for team members to update, seek assistance and share insights.
+
+Regular testing and debugging sessions were conducted to identify and address any issues that arose during the
+integration process. This was crucial to maintain a bug-free, reliable and stable application.
+
+### Achievements
+Despite all the challenges faced, we managed to overcome them as a team, picking up valuable skills along the way. We are
+proud of what we have achieved and are confident that Staff-Snap will be a useful tool for Hiring Managers to manage the
+hiring and tracking of their applicants.
