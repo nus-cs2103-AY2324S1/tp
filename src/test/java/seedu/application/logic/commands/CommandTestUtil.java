@@ -2,7 +2,15 @@ package seedu.application.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.application.logic.parser.CliSyntax.*;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_INDUSTRY;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_INTERVIEW_ADDRESS;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_INTERVIEW_DATETIME;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_INTERVIEW_TYPE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_JOB_TYPE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.application.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -37,7 +45,7 @@ public class CommandTestUtil {
     public static final String VALID_INTERVIEW_TYPE_CHEF = "Onsite";
     public static final String VALID_INTERVIEW_TYPE_CLEANER = "Group";
     public static final String VALID_INTERVIEW_DATETIME_CHEF = "Dec 31 2050 1200";
-    public static final String VALID_INTERVIEW_DATETIME_CLEANER = "Dec 31 2060 1200";
+    public static final String VALID_INTERVIEW_DATETIME_CLEANER = "Dec 31 2030 1200";
     public static final String VALID_INTERVIEW_ADDRESS_CHEF = "Hungry Street";
     public static final String VALID_INTERVIEW_ADDRESS_CLEANER = "Dirty Street";
     public static final String ROLE_DESC_CHEF = " " + PREFIX_ROLE + VALID_ROLE_CHEF;
@@ -50,31 +58,36 @@ public class CommandTestUtil {
     public static final String DEADLINE_DESC_CLEANER = " " + PREFIX_DEADLINE + VALID_DEADLINE_CLEANER;
     public static final String JOB_TYPE_DESC_CHEF = " " + PREFIX_JOB_TYPE + VALID_JOB_TYPE_CHEF;
     public static final String JOB_TYPE_DESC_CLEANER = " " + PREFIX_JOB_TYPE + VALID_JOB_TYPE_CLEANER;
-    public static final String INTERVIEW_TYPE_DESC_CLEANER = " " + PREFIX_INTERVIEW_TYPE + VALID_INTERVIEW_TYPE_CLEANER;
-    public static final String INTERVIEW_TYPE_DESC_CHEF = " " + PREFIX_INTERVIEW_TYPE + VALID_INTERVIEW_TYPE_CHEF;
-    public static final String INTERVIEW_DATETIME_DESC_CLEANER = " " + PREFIX_INTERVIEW_DATETIME
-            + VALID_INTERVIEW_DATETIME_CLEANER;
-    public static final String INTERVIEW_DATETIME_DESC_CHEF = " " + PREFIX_INTERVIEW_DATETIME
-            + VALID_INTERVIEW_DATETIME_CHEF;
-    public static final String INTERVIEW_ADDRESS_DESC_CLEANER = " " + PREFIX_INTERVIEW_ADDRESS
-            + VALID_INTERVIEW_ADDRESS_CLEANER;
-    public static final String INTERVIEW_ADDRESS_DESC_CHEF = " " + PREFIX_INTERVIEW_ADDRESS
-            + VALID_INTERVIEW_ADDRESS_CHEF;
     public static final String INDUSTRY_DESC_CHEF = " " + PREFIX_INDUSTRY + VALID_INDUSTRY_CHEF;
     public static final String INDUSTRY_DESC_CLEANER = " " + PREFIX_INDUSTRY + VALID_INDUSTRY_CLEANER;
+    public static final String INTERVIEW_TYPE_DESC_CHEF =
+        " " + PREFIX_INTERVIEW_TYPE + VALID_INTERVIEW_TYPE_CHEF;
+    public static final String INTERVIEW_TYPE_DESC_CLEANER =
+        " " + PREFIX_INTERVIEW_TYPE + VALID_INTERVIEW_TYPE_CLEANER;
+    public static final String INTERVIEW_DATETIME_DESC_CHEF =
+        " " + PREFIX_INTERVIEW_DATETIME + VALID_INTERVIEW_DATETIME_CHEF;
+    public static final String INTERVIEW_DATETIME_DESC_CLEANER =
+        " " + PREFIX_INTERVIEW_DATETIME + VALID_INTERVIEW_DATETIME_CLEANER;
+    public static final String INTERVIEW_ADDRESS_DESC_CHEF =
+        " " + PREFIX_INTERVIEW_ADDRESS + VALID_INTERVIEW_ADDRESS_CHEF;
+    public static final String INTERVIEW_ADDRESS_DESC_CLEANER =
+        " " + PREFIX_INTERVIEW_ADDRESS + VALID_INTERVIEW_ADDRESS_CLEANER;
     public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + "&"; // '&' not allowed in roles
     public static final String INVALID_COMPANY_DESC = " " + PREFIX_COMPANY + "    "; // company cannot be blank
     public static final String INVALID_DEADLINE_DESC =
-            " " + PREFIX_DEADLINE + "Nov 12 2023"; // deadline must be in the future
-    public static final String INVALID_STATUS_DESC = " " + PREFIX_STATUS + "SUBMITTED";
+            " " + PREFIX_DEADLINE + "Nov 12 2023"; // deadline must be in correct format
+    public static final String INVALID_STATUS_DESC =
+        " " + PREFIX_STATUS + "SUBMITTED"; // status must be selected from the list of options
     public static final String INVALID_JOB_TYPE_DESC =
             " " + PREFIX_JOB_TYPE + "OTHER"; // job type must be selected from the list of options
     public static final String INVALID_INDUSTRY_DESC =
             " " + PREFIX_INDUSTRY + "    "; //industry cannot be blank
     public static final String INVALID_INTERVIEW_TYPE_DESC =
-            " " + PREFIX_INTERVIEW_TYPE + "Zoo Meeting"; //interview type must be selected from the list of options
+        " " + PREFIX_INTERVIEW_TYPE + "FUN"; // interview type must be selected from the list of options
     public static final String INVALID_INTERVIEW_DATETIME_DESC =
-            " " + PREFIX_INTERVIEW_DATETIME + "26 Jun 1999"; //interview datetime must be in the future
+        " " + PREFIX_INTERVIEW_DATETIME + "Nov 12 2012"; // interview datetime must be in the correct format
+    public static final String INVALID_INTERVIEW_ADDRESS_DESC =
+        " " + PREFIX_INTERVIEW_ADDRESS + "    "; // interview address cannot be empty
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
