@@ -22,7 +22,7 @@ public class CopyApplicantCommand extends Command {
     public static final String COMMAND_WORD = "copyapplicant";
     public static final String COMMAND_ALIAS = "cpa";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_ALIAS
             + ": Copies the name and phone number of the applicant at the specified index to clipboard.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";

@@ -22,10 +22,10 @@ public class ApplicantTest {
         // null -> returns false
         assertFalse(ALICE_APPLICANT.isSamePerson(null));
 
-        // same name, all other attributes different -> returns true
+        // same name, all other attributes different -> returns false
         Person editedAlice = new ApplicantBuilder(ALICE_APPLICANT).withPhone(VALID_PHONE_BOB)
                 .build();
-        assertTrue(ALICE_APPLICANT.isSamePerson(editedAlice));
+        assertFalse(ALICE_APPLICANT.isSamePerson(editedAlice));
 
         // same phone, all other attributes different -> returns true
         editedAlice = new ApplicantBuilder(ALICE_APPLICANT).withName(VALID_NAME_BOB)

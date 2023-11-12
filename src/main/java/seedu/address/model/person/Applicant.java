@@ -57,9 +57,9 @@ public class Applicant extends Person {
         }
 
         Applicant otherApplicant = (Applicant) other;
-        // applicants are considered the same if they have the same name or phone
-        return getName().equals(otherApplicant.getName())
-            || this.phone.equals(otherApplicant.phone);
+
+        // phone required to be unique across applicants
+        return this.phone.equals(otherApplicant.phone);
     }
 
     public Phone getPhone() {

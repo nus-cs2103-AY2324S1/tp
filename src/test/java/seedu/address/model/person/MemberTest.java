@@ -36,25 +36,25 @@ public class MemberTest {
         // null -> returns false
         assertFalse(ALAN_MEMBER.isSamePerson(null));
 
-        // same name, all other attributes different -> returns true
+        // same name, all other attributes different -> returns false
         Member editedAlan = new MemberBuilder(ALAN_MEMBER).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withTelegram(VALID_TELEGRAM_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALAN_MEMBER.isSamePerson(editedAlan));
+        assertFalse(ALAN_MEMBER.isSamePerson(editedAlan));
 
         // same phone, all other attributes different -> returns true
         editedAlan = new MemberBuilder(ALAN_MEMBER).withName(VALID_NAME_BOB).withEmail(VALID_EMAIL_BOB)
                 .withTelegram(VALID_TELEGRAM_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALAN_MEMBER.isSamePerson(editedAlan));
 
-        // same email, all other attributes different -> returns true
+        // same email, all other attributes different -> returns false
         editedAlan = new MemberBuilder(ALAN_MEMBER).withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withTelegram(VALID_TELEGRAM_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALAN_MEMBER.isSamePerson(editedAlan));
+        assertFalse(ALAN_MEMBER.isSamePerson(editedAlan));
 
-        // same telegram, all other attributes different -> returns true
+        // same telegram, all other attributes different -> returns false
         editedAlan = new MemberBuilder(ALAN_MEMBER).withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALAN_MEMBER.isSamePerson(editedAlan));
+        assertFalse(ALAN_MEMBER.isSamePerson(editedAlan));
     }
 
     @Test

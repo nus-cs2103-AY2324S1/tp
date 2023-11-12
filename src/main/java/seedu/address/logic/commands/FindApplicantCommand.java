@@ -17,7 +17,8 @@ public class FindApplicantCommand extends Command {
     public static final String COMMAND_WORD = "findapplicant";
     public static final String COMMAND_ALIAS = "finda";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all applicants whose information contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_ALIAS
+            + ": Finds all applicants whose information contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice 91119111 design";
