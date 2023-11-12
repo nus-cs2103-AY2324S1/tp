@@ -220,10 +220,8 @@ Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BI
 
 </div>
 
-<div markdown="block" class="alert alert-warning">
-  <i class="bi bi-exclamation-triangle-fill"></i> 
-  <div markdown="span" style="margin-left: 0.7em;">
-**Note when editing a person in a filtered contacts list:**<br>
+<div markdown="span" class="alert alert-warning">
+:exclamation: **Note when editing a person in a filtered contacts list:**<br>
 
   * You used the command `find_person Alex`, to show all the persons with `Alex` in their name.  See: [find_person](#locating-persons-by-name-or-group-findperson)
   * The person list is filtered to show all the persons with `Alex` in their name.
@@ -231,7 +229,6 @@ Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BI
   * `Alex` will disappear form the person list. **Do not worry, your data is not deleted**, this is because your previous search term `Alex` no longer matches the new name of the person, `Bob`.
   * To see `Bob` in the person list again, you can use the [list_persons](#listing-all-persons--listpersons) command to bring back the whole list of persons.
   * In contrast with the above scenario, using an [add_person](#adding-a-person-addperson) command will automatically bring back the whole list of persons, to show you that your new person has been added to FumbleLog.
-  </div>
 </div>
 
 **Expected output when the command succeeds:**
@@ -302,13 +299,10 @@ Format: `find_person KEYWORD [MORE_KEYWORDS]`
 
 </div>
 
-<div markdown="block" class="alert alert-warning">
-<i class="bi bi-exclamation-triangle-fill"></i> 
-  <div markdown="span" style="margin-left: 0.7em;">
-**Disclaimer when using the `find_person` command:**<br>
+<div markdown="span" class="alert alert-warning">
+:exclamation: **Disclaimer when using the `find_person` command:**<br>
 
 * FumbleLog will return an empty person list when there are no keyword matches. **Your data will not be deleted.**
-</div>
 </div>
 
 **Expected output when the command succeeds:**
