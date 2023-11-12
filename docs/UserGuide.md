@@ -120,11 +120,6 @@ A doctor can have any number of tags (including 0). Duplicate tags, however, are
 and the format for each field is adhered to.
 - A person can either be a doctor or a patient, but not both. Hence if the doctor's IC is already in the app
 as a patient, it may result in an error.
-- Adding additional prefixes (eg. `b/O+`) not specified by the command format above will be considered as a **parameter input**. For example:</br>
-  `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/O+` will result
-  in Address inputted as `a/John street, block 123, #01-01 b/O+`. </br>
-  Do avoid adding  your own prefixes as it may lead to unwanted errors!
-- However, inputting `r/REMARKS` will be ignored and automatically removed by the system. To add remarks, use the Edit Command mentioned later below.
 
 </div>
 
@@ -177,9 +172,10 @@ corresponding error message since no field supports empty inputs.
 3. Adding custom prefixes <br>
 Adding custom prefixes will mostly cause the preceding flag to become invalid. <br>
 Exceptions:
-   * Adding 'custom' flags to the address or condition field will, however, be accepted as
-Addresses may involve the usage of the `/` character. Hence, take note to use the address field carefully.
-   * Adding the 'custom' flag before any other field will recognise the input to be of Invalid Command Format.
+   * Adding 'custom' flags after the address or condition field will, however, be accepted as
+addresses or conditions may involve the usage of the `/` character. Hence, take note to use these fields carefully.
+   * However, adding the remark prefix `r/` and everything attached to it will be ignored by the system.
+   * Adding the 'custom' flag after any other field will recognise the input to be of Invalid Command Format.
 <br>
 Examples:
    * `add-doctor pic/ n/Faiz ic/S9851486G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/surgeon`
@@ -267,7 +263,7 @@ Format: `find-appt NRIC`
 **:information_source: Take Note:**<br>
 
 - All fields are Required.
-- NRIC must contain the valid NRIC of a Patient or Doctor in the Database.
+- NRIC must contain the valid NRIC of a Patient or Doctor in the Database and **must** be in caps.
 - Either Doctor NRIC or Patient NRIC can be used in the search
 - It is recommended to use `list` to restore the view of all data after a `find` command.
 
@@ -289,7 +285,7 @@ Edits an existing person in the MediLink Contacts.
 
 Format: `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person with the specified `NRIC`. The NRIC **must be a valid IC number**
+* Edits the person with the specified `NRIC`. The NRIC provided **must be a valid IC number** and is not case-sensitive.
 * At least one of the optional fields must be provided.
 * If the provided fields are the same as the original, the command will still work.
 * Must edit appropriate fields based on whether the person is a patient or doctor (e.g. can't update condition of a
@@ -318,7 +314,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * When searching names, only full words will be matched e.g. `Han` will not match `Hans`.
 * When searching names, Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
-* Note that if the name coincides with other find commands, it will be interpreted as the other find command first and extraneous paremeters will be ignored. e.g. `find F Kennedy John` will search for all female persons. 
+* Note that if the name coincides with other find commands, it will be interpreted as the other find command first and extraneous paremeters will be ignored. e.g. `find F Kennedy John` will search for all female persons.
 * It is recommended to use `list` to restore the view of all data after a `find` command.
 
 Examples:
@@ -366,6 +362,14 @@ Examples:
 
 * `find Blood Type A+` returns all Patients with blood type A+.
 
+<div markdown="block" class="alert alert-info">
+**:information_source: Take Note:**<br>
+
+- The default `find` command would be by name, if the input does not match any of the other types of `find` commands.
+- Example: `find f` performs a find by name command with the keyword `f` instead of a find by gender command since `f` is not capitalised.
+
+</div>
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -389,6 +393,7 @@ Format: `clear`
 <div markdown="block" class="alert alert-info">
 **:information_source: Take Note:**<br>
 
+- `undo` does not apply to `find` and `list` commands, as they do not make any direct changes to the MediLink Contacts.
 - Upon restarting the app, you will no longer be able to undo actions previously performed before exiting the app.
 
 </div>
