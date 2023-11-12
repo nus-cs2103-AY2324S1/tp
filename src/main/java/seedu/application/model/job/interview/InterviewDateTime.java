@@ -38,8 +38,8 @@ public class InterviewDateTime {
      * Returns true if a given string is a valid interview date time.
      */
     public static boolean isValidInterviewDateTime(String test) {
-        if (test.equals(null)) {
-            return false;
+        if (test == null) {
+            throw new NullPointerException();
         }
         try {
             LocalDateTime dateTime = LocalDateTime.parse(test, DATE_TIME_FORMATTER);
