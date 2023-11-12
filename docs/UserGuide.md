@@ -221,8 +221,8 @@ Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BI
 * At least one of the parameters must be provided.
 * Existing values will be updated to the input values for all values except for `GROUP`
   * Parameters `p/`, `e/`, `a/` and `b/` can be empty strings. Doing so will clear the current values for the respective fields. i.e. `edit_person 1 a/` will remove the current `ADDRESS`.
-  * Parameter `g/` is used to assign a person to a group. If the person is already assigned to the group, the group will not be added again.
-  * Parameter `ug/` is used to unassign a person from a group. Once unassigned, the person's name will not be displayed in events that the group is assigned to.
+  * Parameter `g/` is used to **assign a person** to a group. If the person is already assigned to the group, the group will not be added again.
+  * Parameter `ug/` is used to **unassign a person** from a group. Once unassigned, the person's name will not be displayed in events that the group is assigned to.
 * When you edit a person's name, the person's name will be updated in all [events](#commands-for-events) that the person is assigned to. Same for groups if the person's group is assigned to events.
 
 </div>
@@ -230,13 +230,14 @@ Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BI
 <div markdown="span" class="alert alert-warning">
 :exclamation: **Disclaimer: Editing a person with a filtered contacts list might cause the person to disappear. Do not worry, your data is not deleted**.<br>
 
-  * Take this scenario:
-    * You used the command `find_person Alex`, to show all the persons with `Alex` in their name.  See: [find_person](#locating-persons-by-name-or-group-findperson)
-    * The person list is filtered to show all the persons with `Alex` in their name.
-    * You then edit the person `Alex`'s name to `Bob`.
-    * `Alex` will disappear from the person list, because your previous search term `Alex` no longer matches the new name of the person, `Bob`.
-    * To see `Bob` in the person list again, you can use the [`list_persons`](#listing-all-persons--listpersons) command to bring back the whole list of persons.
-    * In contrast with the above scenario, using an [`add_person`](#adding-a-person-addperson) command will automatically bring back the whole list of persons, to show you that your new person has been added to FumbleLog.
+* Take this scenario:
+
+  * You used the command `find_person Alex`, to show all the persons with `Alex` in their name.  See: [find_person](#locating-persons-by-name-or-group-findperson)
+  * The person list is filtered to show all the persons with `Alex` in their name.
+  * You then edit the person `Alex`'s name to `Bob`.
+  * `Alex` will disappear from the person list, because your previous search term `Alex` no longer matches the new name of the person, `Bob`.
+  * To see `Bob` in the person list again, you can use the [`list_persons`](#listing-all-persons--listpersons) command to bring back the whole list of persons.
+  * In contrast with the above scenario, using an [`add_person`](#adding-a-person-addperson) command will automatically bring back the whole list of persons, to show you that your new person has been added to FumbleLog.
 </div>
 
 **Expected output when the command succeeds:**
@@ -271,7 +272,7 @@ Format: `delete_person PERSON_INDEX`
 
 </div>
 
-**This should be the expected output when the command succeeds:**
+**Expected output when the command succeeds:**
 
 Input: `delete_person 1` deletes the first person on the list.
 
@@ -311,7 +312,7 @@ Format: `find_person KEYWORD [MORE_KEYWORDS]`
 
 **:exclamation: Disclaimer when using the `find_person` command:**<br>
 
-* FumbleLog will return an empty person list when there are no keyword matches. **Your data will not be deleted.**
+* FumbleLog will return an **empty person list** when there are no keyword matches. **Your data will not be deleted.**
 </div>
 
 **Expected output when the command succeeds:**
