@@ -896,6 +896,12 @@ company in general can be found with the command.
 However, some users may accidentally mark an unfinished interview as done. In the future, an unmark feature will
 be implemented to allow users to change the status of interviews from done to not done.
 
+8. Currently, if any field belonging to an applicant or interview is too long (e.g. a very long name), the UI will
+truncate the text with an ellipsis. In normal use, this is unlikely to occur as the text has to be unreasonably long
+to cause the truncation. However, this will be fixed in a future implementation which
+will allow horizontal scrolling on the applicant or interview card so that the user can 
+see the full text.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
