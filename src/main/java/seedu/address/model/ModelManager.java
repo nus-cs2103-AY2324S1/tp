@@ -157,18 +157,20 @@ public class ModelManager implements Model {
 
     @Override
     public void updateGroups() {
-        /*
         Predicate<? super Person> personPredicate = this.filteredPersons.getPredicate();
+        Predicate<? super Event> eventPredicate = this.filteredEvents.getPredicate();
 
+        // Reset the current persons list first
         //Reset the current persons list first
         this.filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
+        this.filteredEvents.setPredicate(PREDICATE_SHOW_ALL_EVENTS);
         for (Event event: filteredEvents) {
             event.updateGroups();
             setEvent(event, event);
         }
         this.filteredPersons.setPredicate(personPredicate);
-        */
-        this.addressBook.updateGroups();
+        this.filteredEvents.setPredicate(eventPredicate);
+
     }
 
     //=========== Filtered Person List Accessors =============================================================
