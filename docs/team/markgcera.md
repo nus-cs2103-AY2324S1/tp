@@ -17,17 +17,21 @@ Given below are my contributions to the project.
   * Highlights: Implementing this feature required an understanding of both the UI components and logic of the commands.
   It involved changing the constructor of the CommandResult.java class to accept a boolean `showRoomStatistics` parameter, which essentially enables me to integrate the pie chart to every single one of the commands and to manipulate the behaviour of the pie chart for each command.
 
+
 * **New Feature**: JSON Injection Parser. (Pull request [#179](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/179))
   * What it does: Prevents the user from inputting any characters that may constitute a JSON command which could be executed when data is being read or written to the JSON storage file.
   * Justification: This feature is a simple cybersecurity feature meant to prevent any manipulation in the backend of the application.
   * Highlights: Simple to implement, and picked this up during the training provided for NUS Bug Bounty 2023.
 
+
 * **Code contributed**: [Reposense Link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=markgcera&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
+
 
 * **Project management**: 
   * Created the UI Mockup at the start of the project to give the team direction in what we want our first iteration to look like (Pull request [#78](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/78/files)).
   * Provided tasks done and possible next tasks to be done via the team's group chat as well as in PRs eg: (Pull request [#100](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/100))
   * Created and assigned some issues to teammates.
+
 
 * **Enhancements to existing features**:
   * Created the initial skeleton for CheckMate which included: (Pull request [#100](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/100))
@@ -38,6 +42,7 @@ Given below are my contributions to the project.
   * Created the User Interface (UI) Overhaul which is the foundation of our application's current UI (Pull request [#166](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/166)).
   * Abstracted out the Command Parse Exceptions into their own package for OOP purposes (Pull request [#250](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/250))
 
+
 * **Documentation**:
   * User Guide:
     * Added a Table of Contents for the UG and updated it to match the then-capabilities of our application (Pull request [#127](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/127)).
@@ -46,5 +51,7 @@ Given below are my contributions to the project.
     * Added implementation details of the `Room Statistics PieChart`, `JsonInjectionParser` features.
     * Added `Appendix: Effort` and `Appendix: Planned Enhancements`. (Pull request [#268](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/268))
     * Added `Appendix: Instructions for manual testing`. (Pull request [#270](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/270))
+
+
 * **Community**:
   * Provided 9 bug reports for the team I was assigned during the PE-D.
