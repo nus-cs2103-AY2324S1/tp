@@ -503,11 +503,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 Use case ends.
 
 **Extensions**
-* 2a. User does not provide the correct information for a person to be added.
-    * 2a1. JABPro shows an error message and provides course of action for remedy.  
+* 1a. User does not provide the correct information for a person to be added.
+    * 1a1. JABPro shows an error message and provides course of action for remedy.  
     Use case resumes at step 1.
-* 2b. User has already been added to the list of persons.
-    * 2b1. JABPro shows an error message and provides course of action for remedy.   
+* 1b. User has already been added to the list of persons.
+    * 1b1. JABPro shows an error message and provides course of action for remedy.   
     Use case resumes at step 1.
 
 **Use case: Add a remark to a person**
@@ -521,11 +521,11 @@ Use case ends.
 Use case ends.
 
 **Extensions**
-* 2a. User provides invalid index.
-    * 2a1. JABPro shows an error message and provides course of action for remedy.  
+* 1a. User provides invalid index.
+    * 1a1. JABPro shows an error message and provides course of action for remedy.  
     Use case resumes at step 1.
-* 2b. User does not provide a remark.
-    * 2b1. JABPro adds an empty remark to the person, remark no longer seen.  
+* 1b. User does not provide a remark.
+    * 1b1. JABPro adds an empty remark to the person, remark no longer seen.  
     Use case ends.
 
 **Use case: List all persons**
@@ -739,7 +739,6 @@ Use case ends.
 * **Keyword**: Search parameter
 
 --------------------------------------------------------------------------------------------------------------------
-## Appendix 
 
 ## Appendix: Planned Enhancements
 
