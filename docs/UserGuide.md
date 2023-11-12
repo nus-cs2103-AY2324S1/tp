@@ -764,6 +764,8 @@ Format: `reset`, followed by `reset confirm`
 
    * User is prompted to enter `reset confirm` to confirm and execute the deletion of all data entries.
 ![Reset](images/screenshots/ResetConfirm.png)
+   * In the case where the user attempts to reset the address book by entering `reset confirm` without first entering the `reset` command, the user will be prompted to enter the `reset` command first.
+     ![Reset](images/screenshots/ResetPrompt.png)
    * In the case where the user wishes to cancel the reset, he/she just has to proceed and type any other command in the command box.
 
 </div>
