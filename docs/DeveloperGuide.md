@@ -448,7 +448,7 @@ The following sequence diagram shows the referenced process of calculating payro
 
 The following activity diagram summarises the process of payroll calculation for an employee:
 
-![PayrollCalculationActivityDiagram](images/PayrollCalculationAdActivityDiagram.png)
+![PayrollCalculationActivityDiagram](images/PayrollCalculationActivityDiagram.png)
 
 ### Payslip Generation
 
