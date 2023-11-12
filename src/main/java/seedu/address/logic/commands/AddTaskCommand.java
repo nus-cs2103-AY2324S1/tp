@@ -96,7 +96,7 @@ public class AddTaskCommand extends Command {
         }
     }
     public static String getUsageInfo() {
-        return "\nUsage: addTask/task + [lesson index] [description]. "
+        return "\nUsage: addTask + [lesson index] [description]. "
                 + "You could omit the lesson index when adding task to showing lesson."
                 + "\nExample1: " + COMMAND_WORD + " 1 do homework"
                 + "\nExample2 (a lesson is shown): " + COMMAND_WORD + " do homework"

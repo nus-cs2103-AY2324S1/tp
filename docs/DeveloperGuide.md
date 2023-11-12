@@ -178,7 +178,7 @@ The `Model` component,
 * stores the task data of all the lessons i.e., all `task` objects (which are contained in the `TaskList` objects of each `Lesson` object).
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 * links to the UI component to display the Show Details Panel in the UI (to reduce code complexity).
-* stores a `State` object that represents the current state of the app. Currently, the only 3 possible states are `STUDENT`, `SCHEDULE` and `NONE`.
+* stores a `State` object that represents the current state of the app. Currently, there are 3 main states: `STUDENT`, `SCHEDULE` and `TASK` state.
 
 <box type="info" seamless>
 
@@ -215,19 +215,83 @@ The `Storage` component,
 
 This section describes some noteworthy details on how certain features are implemented.
 
-## List feature
+### App State 
 
-### Purpose
+#### Background
 
-The list feature is the core feature that handles the current state of the app. Depending on what the user specifies to list out, the user interface will change accordingly to show the appropriate list panels.
-It also handles displaying the relevant student details specified by the user when the student list is shown, in order to not overcrowd the interface.
+TutorMate has 3 main "modes" each to cater to the main features. We refer to them as "states", where we implement it using the `State` enum.
+The different states have their own set of Ui layout and commands, while some commands work for all states but has different behaviours between them.
+The 3 main states are `STUDENT`, `SCHEDULE` and `TASK`.
+* `STUDENT` state handles the student management system feature.
+* `SCHEDULE` state handles lessons and schedules.
+* `TASK` state handles tasks for lessons.
 
 #### Implementation
 
-The list feature is facilitated by `ListCommand` which extends the abstract `Command` class. The `ListCommand` will change the current state of the Model (either `STUDENT`, `SCHEDULE` or `NONE`) when the `execute` method is called.
-The `MainWindow` receives changes to the app's state and renders the required panels accordingly.
-It also stores an array of display parameters which will specifies what student details are shown by the `Ui` component in the student list. The `LogicManager` will detect changes in display parameters and set the required displayed fields.
+The `ModelManager` class stores the current state of the app. The default state is `SCHEDULE`. It implements the following operations for the show command:
 
+The `ModelManager#getState()` returns the current state of the app, `ModelManager#setState()` sets the app's state, and `ModelManager#sameState()` checks if the given state is the same as the app's state.
+
+
+##### 1. Parser Overloading
+
+States allows the same command word to be mapped to different commands based on the current app state. `AddressBookParser#parseCommand()` handles the parsing of user input into its respective parsers and commands.
+
+For example, the "add" command word is overloaded, where using the `ModelManager#sameState()` method:
+* If its in `STUDENT` state, it returns the `AddPersonCommandParser`, which returns the `AddPersonCommand` command class.
+* If its in `SCHEDULE` state, it returns the `AddLessonCommandParser`, which returns the `AddLessonCommand` command class.
+
+##### 2. Command Overloading
+
+States allows the same command to have differing behaviours based on the current app state.
+Commands can easily enable this by modifying its `execute` method and implement a switch statement that executes different functions based on the model state.
+
+For example, the "find" command is overloaded, where using the `ModelManager#sameState()` method:
+* If its in `STUDENT` state, it searches through the list of students.
+* If its in `SCHEDULE` state, it searches through the list of lessons.
+
+##### 3. Ui updates
+
+When commands change the app state (i.e. model state), using the `ModelManager#setState()` method, it will automatically call the `UiManager` class to make necessary Ui changes.
+The `UiManager` class calls the `MainWindow#changeLayout()` method to make necessary changes to the layout based on the new state:
+* If the new state is `STUDENT` state, only show the `PersonList` (list for students) and `studentDetailList`.
+* If the new state is `SCHEDULE` state, only show the `ScheduleList` and `lessonDetailList`.
+* If the new state is `TASK` state, only show the `fullTaskList` and `taskDetailListPanel`.
+
+#### Example execution
+Given below is an example usage scenario of the `addPerson` command changes the model state and Ui layout.
+
+Step 1. The user launches the application for the first time. The initial state of the Model will be set to `SCHEDULE`. The schedule list will be initialized with the initial schedule.
+
+Step 2. User enters the command `addPerson -name Alice`. The `execute` method of the `AddPersonCommand` will be called by the logicManager. The `execute` command will call the `addPerson` method in the `ModelManager` class to add a new person to the app.
+
+Step 3. `AddPersonCommand` will change the app state to `STUDENT` by calling the `ModelManager#setState()` method, which changes the model state to `STUDENT`.
+
+Step 4. Since the current model state is `SCHEDULE`, the `ModelManager#setState()` method will call the `UiManager#changeLayout()` method, which calls the `MainWindow#changeLayout()` method.
+
+Step 5. The `MainWindow#changeLayout()` method will hide all panels and only show the `PersonList` (list for students) and `studentDetailList`.
+
+Step 6. `AddPersonCommand` will then call the `ModelManager#showPerson()` method, which will display the newly added person's details (not shown in diagram, described in next section).
+
+The following sequence diagram shows how the flow of the example execution:
+
+<puml src="diagrams/AddSequenceDiagram.puml" alt="AddSequenceDiagram" />
+
+#### Design considerations:
+
+**Aspect: How to structure app to work with the 3 main modes:**
+
+* **Alternative 1 (current choice):** Implement app state, where commands can check and modify the current app state.
+    * Pros: 
+      * Commands can be overloaded since they can have different behaviours based on app state, reducing number of commands for user to remember.
+      * Commands do not need to handle changing of Ui layouts (specifying panels it requires), since similar features (e.g. managing students) all require the same panels. The `UiManager` will make required Ui changes based on desired state.
+    * Cons: Increase complexity of the code.
+
+* **Alternative 2:** Have a collection of related commands that are grouped to work with each main mode.
+    * Pros: Easy to implement
+    * Cons: 
+      * Many commands for user to remember, although they have similar ideas (e.g. `addPerson`, `addLesson` both involving adding a new object, which the user could have used a generic `add` method.)
+      * Commands have to manually call the Ui to specify which Ui panels to show.
 
 ### Show feature
 
