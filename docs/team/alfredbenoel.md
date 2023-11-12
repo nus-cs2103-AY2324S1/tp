@@ -29,7 +29,9 @@ Below is a summary of my contributions to the project.
   * Wrote the section on adding, editing and deleting tasks assigned to members
   * Updated screenshots for the aforementioned sections
 * Contributions to the DG:
-  * to be added soon
+  * Wrote the section on adding tasks to members
+  * Wrote the section of viewing tasks assigned to members
+  * Updated UML and activity diagrams for the aforementioned sections
 * Contributions to team-based tasks:
   * Constantly made sure the tp tracker was up-to-date and all deadlines were met
   * Updated the issue tracker regularly by closing issues that were resolved by a PR I reviewed
@@ -39,5 +41,5 @@ Below is a summary of my contributions to the project.
   * PRs I reviewed include:
     * [Pull Request #53](https://github.com/AY2324S1-CS2103T-W15-3/tp/pull/53)
     * [Pull Request #145](https://github.com/AY2324S1-CS2103T-W15-3/tp/pull/145)
-* Contributions beyond the project team:
-  * to be added soon
+    * [Pull Request #263](https://github.com/AY2324S1-CS2103T-W15-3/tp/pull/263)
+    * [Pull Request #288](https://github.com/AY2324S1-CS2103T-W15-3/tp/pull/288)
