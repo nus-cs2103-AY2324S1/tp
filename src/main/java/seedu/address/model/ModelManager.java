@@ -152,7 +152,7 @@ public class ModelManager implements Model {
      * @param group  Group in consideration.
      * @throws CommandException if person has already been assigned to group.
      */
-    private void assignGroup(Person person, Group group) throws CommandException {
+    public void assignGroup(Person person, Group group) throws CommandException {
         group.addPerson(person);
         person.addGroup(group);
     }
@@ -164,7 +164,7 @@ public class ModelManager implements Model {
      * @param group  Group in consideration.
      * @throws CommandException if person has already been assigned to group.
      */
-    private void unassignGroup(Person person, Group group) throws CommandException {
+    public void unassignGroup(Person person, Group group) throws CommandException {
         group.removePerson(person);
         person.removeGroup(group);
     }
@@ -182,6 +182,7 @@ public class ModelManager implements Model {
         // both throw exception if not exists exact match
         Person person = addressBook.getPerson(personName);
         Group group = addressBook.getGroup(groupName);
+
         this.assignGroup(person, group);
         forceUpdateList();
         Pair<Person, Group> output = new Pair<>(person, group);

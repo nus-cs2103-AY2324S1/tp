@@ -38,6 +38,7 @@ public class PersonBuilder {
         timeIntervalList = new TimeIntervalList();
     }
 
+
     /**
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
@@ -47,6 +48,19 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         grpList = personToCopy.getGroups();
         timeIntervalList = personToCopy.getTime();
+    }
+
+
+    /**
+     * Default person builder
+     * @param groupToCopy groupList to copy
+     */
+    public PersonBuilder(GroupList groupToCopy) {
+        name = new Name(DEFAULT_NAME);
+        phone = new Phone(DEFAULT_PHONE);
+        email = new Email(DEFAULT_EMAIL);
+        grpList = groupToCopy;
+        timeIntervalList = new TimeIntervalList();
     }
 
     /**

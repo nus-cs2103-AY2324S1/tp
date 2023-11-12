@@ -248,7 +248,7 @@ public class UngroupPersonCommandTest {
          * @param group  Group in consideration.
          * @throws CommandException if person has already been assigned to group.
          */
-        private void unassignGroup(Person person, Group group) throws CommandException {
+        public void unassignGroup(Person person, Group group) throws CommandException {
             group.removePerson(person);
             person.removeGroup(group);
         }
@@ -296,7 +296,7 @@ public class UngroupPersonCommandTest {
          * @param group  Group in consideration.
          * @throws CommandException if person has already been assigned to group.
          */
-        private void unassignGroup(Person person, Group group) throws CommandException {
+        public void unassignGroup(Person person, Group group) throws CommandException {
             group.removePerson(person);
             person.removeGroup(group);
         }
