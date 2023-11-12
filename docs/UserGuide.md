@@ -223,7 +223,7 @@ To learn more about **editing a fosterer through the profile page**, refer to th
 
 <br> 
 
-### Viewing Help for Commands : `help`
+### Viewing help for Commands : `help`
 
 Opens a pop-up window, providing you with the link to our User Guide for help.
 
@@ -586,9 +586,9 @@ Deletes the index-th fosterer in the list currently displayed in your address bo
 
 Format: `delete INDEX [INDEX...]`
 
-<div markdown="block" class="alert alert-danger">
+<div markdown="block" class="alert alert-warning">
 
-**:exclamation: Important:**<br>
+**:warning: Caution:**<br>
 
 The index of a fosterer is not fixed. It is relative to the current list of fosterers you are handling.
 
@@ -596,9 +596,9 @@ The index of a fosterer is not fixed. It is relative to the current list of fost
 
 Parameters:
 
-| Parameter | About                                                                                                                                                                     | Example |
-|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
-| `INDEX`     | - The index of a fosterer displayed in the list obtained from a `list`/`find` command <br/> - At least one index must be provided<br/> - Index must be a positive integer | `1`, `2`, `3` |
+| Parameter  | About                                                                                                                                                                      | Example       |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+| `INDEX`    | - The index of a fosterer displayed in the list obtained from a `list`/`find` command <br/> - At least one index must be provided<br/> - Index must be a positive integer  | `1`, `2`, `3` |
 
 <div markdown="block" class="alert alert-primary">
 
@@ -619,7 +619,8 @@ Examples:
 * `list` followed by `delete 1 3 7` 
   * deletes the 1st, 3rd and 7th fosterers in your address book.
     ![Delete](images/screenshots/Delete.png)
-In this example, Alex, Bernice and Charlotte are the fosterers deleted. <br>
+In this example, Alex, Bernice and Charlotte are the fosterers deleted. 
+<br>
   
 
 * `list` followed by `delete 3 3 3 3` 
@@ -668,10 +669,12 @@ Therefore, please ensure that the current list is the list you want your statist
 
 Examples:
 * `list` followed by `stats avail` 
-  * calculates statistics of available fosterers, based on all fosterers in your address book.<br>
-  Here, your have 6 fosterers in your address book, and 3 of them are available to foster.
+  * calculates statistics of available fosterers, based on all fosterers in your address book.
 
-    ![Stats](images/screenshots/StatsAvail.png)<br>
+
+Here, you have 6 fosterers in your address book, and 3 of them are available to foster.
+![Stats](images/screenshots/StatsAvail.png)
+<br>
 
 
 * `find cat` followed by `stats avail` 
@@ -682,7 +685,7 @@ Examples:
 
 **:warning: Caution:**<br>
 
-For all stat commands, percentages may not add up to 100.00%.<br>
+For all stat commands, **percentages may not add up to 100.00%**.<br>
 Suppose you have 3 available fosterers: 1 can foster a dog, 1 can foster a cat and 1 unknown.<br>
 * The calculated percentages will add up to 99.99%, instead of 100.00%.<br> 
 * Hence, it can be assumed that each group takes up 1/3 of 100.00%.
@@ -700,9 +703,12 @@ Format: `stats current`
 
 Examples:
 * `list` followed by `stats current` 
-  * calculates statistics of current fosterers, based on all fosterers in your address book. <br>
+  * calculates statistics of current fosterers, based on all fosterers in your address book.
+
+
   Here, you have 6 fosterers in your address book, and 2 of them are currently fostering.
-  ![Stats](images/screenshots/StatsCurrent.png)<br>
+  ![Stats](images/screenshots/StatsCurrent.png)
+<br>
 
 
 * `find dog` followed by `stats current`
@@ -717,9 +723,12 @@ Format: `stats housing`
 
 Examples:
 * `list` followed by `stats housing`
-  * calculates housing statistics based on all fosterers in your address book.<br>
-  Here, out of the 6 fosterers in your address book, 3 live in HDBs, 1 live in a Condo, and 2 live in Landed properties.
-    ![Stats](images/screenshots/StatsHousing.png)<br>
+  * calculates housing statistics based on all fosterers in your address book.
+
+
+Here, out of the 6 fosterers in your address book, 3 live in HDBs, 1 live in a Condo, and 2 live in Landed properties.
+    ![Stats](images/screenshots/StatsHousing.png)
+<br>
   
 
 * `find available` followed by `stats housing` 
@@ -762,7 +771,7 @@ Format: `reset`, followed by `reset confirm`
 
    * User is prompted to enter `reset confirm` to confirm and execute the deletion of all data entries.
 ![Reset](images/screenshots/ResetConfirm.png)
-   * In the case where the user wishes to cancel the reset, he/she just has to proceed and type any other command in the command box.
+   * In the case where the user wishes to cancel the reset, he/she just has to proceed and type any other valid command in the command box.
 
 </div>
 
@@ -777,9 +786,10 @@ Format: `exit`
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command:**<br>
+On the profile page,<br>
 
-* On the profile page, entering <code>exit</code> leads you out of the page back to the main window. 
-* On the profile page, attempting to <code>exit</code> without saving changes with <code>save</code> prompts a warning message (refer to [User Interface: The Profile Page: Exiting the profile page](#exiting-the-profile-page)). 
+* Entering <code>exit</code> leads you out of the page back to the main window. 
+* Attempting to <code>exit</code> without first saving changes with <code>save</code> prompts a warning message (please refer to [User Interface: The Profile Page: Exiting the profile page](#exiting-the-profile-page) for more information). 
 </div>
 
 <br> 
@@ -800,8 +810,8 @@ edits using our user-friendly interface instead.
 
 **:warning: Caution:**<br>
 
-* If your changes to the data file makes its format invalid, Foster Family will discard all data and start with an empty data file at the next run. Hence, it is recommended to make a backup of the file before editing it.<br>
-* If your changes create an invalid fosterer, the app will not start. You will have to rectify the error in order to restart the app. <br>
+* If your changes to the data file makes its format invalid, Foster Family **will discard all data** and start with an empty data file at the next run. Hence, it is recommended to **make a backup of the file** before editing it.<br>
+* If your changes create an invalid fosterer, **the app will not start**. You will have to rectify the error in order to restart the app. <br>
 Please refer to the section [Adding a fosterer through the main window: add](#adding-a-fosterer-through-the-main-window-add) for more details.
 
 </div>
