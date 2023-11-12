@@ -177,35 +177,39 @@ Format: `help`
 ### Creating tags: `create`
 
 Creates a tag and categorises it to the specified category.
-You can customize these categories as per your needs and tags will be 
-color coded by the different categories. 
-
-The only restriction is that you can only define up to 6 different categories (including the *assessment* category for score-related tags. Hence if you have
-defined a tag category *assessment* for score-related tags, you will only be able to define 5 other categories).
 
 Format: `create t/CATEGORY TAGNAME…​`
 
-* CATEGORY is a MANDATORY field. 
+Type | Prefix                 | Constraints                                                                                                                                               
+----------|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Mandatory  | `t/CATEGORY TAGNAME`   |  `TAGNAME` must be alphanumeric (letters and numbers, no spaces and symbols allowed such as `/`, `,` ...)
+
+**Note:**
+* JABPro offers 3 predefined tag categories namely `employment`, `role`, and `dept`. However, you can define up to 3 more tag categories of your own!
+* The tags created using this command can be used to tag candidates using the `add` or `edit` command. Tagging
+candidates without previously categorising the tags using `create` would still work but the tags would be *uncategorised*.
+* `create` only allows tags to be categorised at creation meaning tags that have already been created, cannot be categorised further.
 
 <box type="tip" seamless>
 
-**Tip:** 
-* You can create multiple tags at once!
-* Use this command for frequently used tags for better efficiency in tagging candidates!
-</box>
+**Tip:**
+* You can create multiple tags at once i.e. `create t/dept marketing t/role developer ...`
+* Use this command for frequently used tags for better efficiency in tagging candidates.
+* You can view all of your tags by keying in the `listT` command.
+  </box>
 
-**Note:**
-* The tags created using this command can be used to tag candidates using the `add` or `edit` command. Tagging
-candidates without previously categorising the tags would still work but the tags would be *uncategorised*.
-* `create` only allows tags to be categorised at creation meaning tags that have already been created, cannot be categorised further.
-This feature will be supported in future iterations of JABPro through the `edit tags` command.
+Failed to create tags? Here's some possible reasons why:
+1. Missing mandatory field i.e. `create`
+2. Did not specify category i.e. `create t/developer`
+3. Invalid tag name (contained spaces) i.e. `create t/role software developer`
+4. Tag already exists
 
-Examples:
-* `create t/role developer`
-* `create t/dept software t/dept marketing`
+An example of the `create` command being successfully executed:
+1. Enter the command `create t/dept marketing t/role developer`
+2. This is what you should see upon successful execution of command.
+![create-success](images/create-success.png)
+3. View your newly created tags using the `listT` command.
 
-An example of the `create` command in action:
-![Create](images/create.png)
 
 <a name="adding-an-applicant"></a>
 ### Adding an applicant: `add`
