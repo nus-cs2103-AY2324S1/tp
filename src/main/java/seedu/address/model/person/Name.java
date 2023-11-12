@@ -44,6 +44,10 @@ public class Name {
         return fullName;
     }
 
+    /**
+     * Returns true when the two case-insensitive names are the same, ignoring the presence of
+     * multiple spaces between words.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {

@@ -79,9 +79,9 @@ public class Person {
     }
 
     /**
-     * Returns boolean value to check if animal name is valid based on availability status.
+     * Returns boolean value to check if availability is valid based on presence of animal name.
      *
-     * @return a boolean value which represents if animal name is valid.
+     * @return a boolean value which represents if availability is valid.
      */
     boolean isAvailabilityValidWhenAnimalNameNotNil() {
         String avail = availability.value;
