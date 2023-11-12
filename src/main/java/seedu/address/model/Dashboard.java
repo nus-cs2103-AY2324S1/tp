@@ -11,9 +11,9 @@ import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.util.Pair;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.interaction.Interaction;
-import seedu.address.model.reminder.DateReminders;
 import seedu.address.model.reminder.Reminder;
 
 /**
@@ -172,11 +172,11 @@ public class Dashboard {
         return reminderList;
     }
 
-    public ObservableList<DateReminders> getDateReminders() {
+    public ObservableList<Pair<LocalDate, ObservableList<Reminder>>> getDateReminders() {
         updateDashboardIfDirty();
         ObservableList<LocalDate> sortedKeys = FXCollections.observableArrayList(
                 new TreeSet<>(dateToReminderMap.keySet()));
-        return sortedKeys.stream().map(date -> new DateReminders(date, getDateSpecificReminder(date)))
+        return sortedKeys.stream().map(date -> new Pair<>(date, getDateSpecificReminder(date)))
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
