@@ -1094,9 +1094,6 @@ Guarantees: Staff-Snap exits.
 
   Use case resumes at step 2.
 
-
-*{More to be added}*
-
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -1106,7 +1103,7 @@ Guarantees: Staff-Snap exits.
    compared to a hypothetical GUI-only version of the app.
 5. The product is for single-users. The application should not be running in a shared computer and with
    different people using it at different times.
-6. The software should respond to user input within 2 seconds under normal load conditions.
+6. The software should respond to user input within 5 seconds under normal load conditions.
 7. There should be no shared file storage mechanism. The data file created by one user should not be accessed by
    another user during regular operations.
 8. The data should be stored locally and should be in a _human editable text file_.
@@ -1301,6 +1298,19 @@ testers are expected to do more *exploratory* testing.
 
     4. Other incorrect filter commands to try: `filter`, `filter n/`<br>
        Expected: Similar to previous.
+
+### Importing from CSV
+
+1. Importing applicants from a CSV file
+
+    1. Prerequisites: Download a sample CSV file [here](demo.csv). The correctly formatted CSV file `demo.csv` should be placed in the home folder of Staff-Snap (i.e. the same folder as the Staff-Snap JAR file).
+
+    2. Test case: `import f/demo.csv`<br>
+       Expected: The applicants are imported into Staff-Snap.
+       Success message shown in the response area. Applicant area shows the updated list of applicants.
+
+    3. Test case: `import f/.csv`<br>
+       Expected: No applicants are not imported. Error details shown in the response area. Applicant list in applicant area remains the same.
 
 --------------------------------------------------------------------------------------------------------------------
 
