@@ -72,7 +72,10 @@ Given below are my contributions to the project.
     * Added sequence and activity diagrams for Add and Delete commands [#213](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/213)
     * Added object diagrams illustrating Card and Deck classes [#213](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/213)
 
+* **Community**
+  * Reviewed close to 48 PRs across the totality of the project
+  * Reported bugs and provide suggestions for other teams ([Issues](https://github.com/GSgiansen/ped/issues))
+  
 
 * **Tools**:
   * Integrated codecov into GitHub actions and CodeCov badge [\#107](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/107)
-
