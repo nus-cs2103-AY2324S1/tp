@@ -153,6 +153,56 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### List Contact with Tags feature
+
+This feature allows users to filter the contact list by tags. It serves as an effective way to search through a long list of contacts.
+The filtered contact list will then be reflected in the UI, which is facilitated by the `Model` interface through this following operation:
+
+* `Model#updateFilteredPlanList(Predicate)` - Filters the contact list based on the predicate input.
+
+The execution of the list command starts with parsing the arguments using `ListCommandParser` and `ListPersonCommandParser`
+, which then the `ListContactCommand` result will be executed and reflected in the UI.
+
+#### Implementing `ListPersonCommandParser`
+
+Using the `Parser` interface, it first checks for tags in the command.
+These tags will then be parsed into a `Set` and passed on to create `ListPersonCommand` object.
+An empty set will be passed in the case where no tags are given.
+
+#### Implementing `ListPersonCommand`
+
+From the `Set<tag>` passed to construct the `ListPersonCommand` object, the `Set` can be empty or non-empty.
+This is how the `execute` method is implemented:
+
+* In the case where the `Set` is empty, it will simply use `Model#updateFilteredPlanList(Predicate)`
+  where the predicate will be `PREDICATE_SHOW_ALL_PERSONS` which will show the entire contact list.
+
+* In the case where the `Set` is not empty (there are tag inputs),
+  the `Predicate` used in `Model#updateFilteredPlanList(Predicate)` will be
+  checking whether one of the tags in the contact is in the `Set`.
+  This will result in showing only the contacts with at least one of the tags from the `Set`.
+
+Given below is an example usage scenario and how the `list contact` command mechanism behaves at each step.
+
+Step 1. The user launches the application, it will show the list of all contacts.
+
+Step 2. The user executes `list contact -t friends` command
+to list only the contacts containing the tag friends.
+As described by the above implementations, a `ListPersonCommand` object will be created.
+
+Step 3. The `LogicManager` will call `ListPersonCommand#execute`
+where it will then call `Model#updateFilteredPlanList(Predicate)` and return the `CommandResult`.
+
+Step 4. The filtered list and success message will be reflected in the UI.
+
+The following sequence diagram shows how the `list contact` command works:
+
+![list-contact-sequence-diagram](diagrams/ListContactSequenceDiagram.png)
+
+The following activity diagram shows how the `list contact` command works:
+
+![list-contact-activity-diagram](diagrams/ListContactActivityDiagram.png)
+
 ### Tag feature
 This feature allows users to add and remove `Tag` to any `Person` in the contact list. It provides an easy way for users to catrgorize their contacts.
 
