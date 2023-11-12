@@ -144,7 +144,7 @@ Here is how you can use it:<br>
 :information_source: At least one field must be provided.
 </div>
 
-Here is an example command where we edit an **event** at index 1, changing the **location** to be "MBS" and the **date** to be "2023-10-20".<br>
+Here is an example command where we edit an event at **index** 1, changing the **location** to be "MBS" and the **date** to be "2023-10-20".<br>
 `editEvent 1 l/MBS d/2023-10-20`
 
 <hr class="command-separator">
@@ -156,7 +156,7 @@ Are the number of events piling up? To clear the clutter, you can delete any unw
 Here is how you can use it:<br>
 `deleteEvent EVENT_INDEX`
 
-Here is an example command where we delete the event at index 1:<br>
+Here is an example command where we delete the event at **index** 1:<br>
 `deleteEvent 1`
 
 <div markdown="block" class="alert alert-info">:information_source: The `EVENT_INDEX` parameter refers to the index number shown in the **currently displayed** event list.
@@ -175,7 +175,7 @@ Now that you have added all your members and all your events, keeping track of y
 Here’s how you can use it:<br>
 `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
 
-Here is an example command where we want to enrol the **member** at index 1 to the **event** at index 1, where our member
+Here is an example command where we enrol the member at **member index** 1 to the event at **event index** 1, where our member
 has contributed 2 **hours**, and we want to make a "Role: Photographer" **remark** to reflect their role as a photographer:<br>
 `enrol m/1 e/1 h/2 r/Role: Photographer`
 
@@ -183,7 +183,7 @@ has contributed 2 **hours**, and we want to make a "Role: Photographer" **remark
 
 #### Edit an enrolment: `editEnrolment`
 Accidentally mixed up two members, and gave them the wrong number of hours or wrong remarks for the event they are involved in?
-You can fix this with no problem by using the `editEnrolment` command!
+You can fix this with ease by using the `editEnrolment` command!
 
 Here’s how you can use it:<br>
 `editEnrolment m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
@@ -192,7 +192,7 @@ Here’s how you can use it:<br>
 :information_source: At least one field must be provided.
 </div>
 
-Here is an example command where we want to edit the enrolment of the **member** at index 1 to the **event** at index 2,
+Here is an example command where we edit the enrolment of the member at **member index** 1 to the event at **event index** 2,
 changing the number of **hours** to 5 and the **remark** to "Role: Exco" to reflect the member’s role as an exco member:<br>
 `editEnroment m/1 e/2 h/5 r/Role: Exco`
 
