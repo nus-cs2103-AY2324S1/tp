@@ -13,9 +13,9 @@ import seedu.classmanager.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new ConfigCommand object
  */
 public class ConfigCommandParser implements Parser<ConfigCommand> {
-    public static final String MESSAGE_INVALID_COUNT_VALUE_TOO_SMALL = "Invalid count values!"
+    public static final String MESSAGE_INVALID_COUNT_VALUE_TOO_SMALL = "Invalid count values! "
             + "The count value of %1$s cannot be less than 1.";
-    public static final String MESSAGE_INVALID_COUNT_VALUE_TOO_LARGE = "Invalid count values!"
+    public static final String MESSAGE_INVALID_COUNT_VALUE_TOO_LARGE = "Invalid count values! "
             + "The count value of %1$s cannot be more than 40.";
     public static final String MESSAGE_INVALID_CONFIG_COMMAND_FORMAT = "Invalid count values! Please input an "
             + "integer between 1 to 40 inclusive for both tutorial count and assignment count."

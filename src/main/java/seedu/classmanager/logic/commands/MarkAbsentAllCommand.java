@@ -21,7 +21,7 @@ public class MarkAbsentAllCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the attendance of all displayed students as "
             + "absent.\n"
             + "Parameters: "
-            + PREFIX_TUTORIAL_INDEX + "TUTORIAL_SESSION\n"
+            + PREFIX_TUTORIAL_INDEX + "TUTORIAL_INDEX\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TUTORIAL_INDEX + "1";
     private final Index index;
