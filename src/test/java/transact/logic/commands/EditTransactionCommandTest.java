@@ -51,13 +51,10 @@ public class EditTransactionCommandTest {
         editTransactionDescriptor.setDate(date);
         editTransactionCommand = new EditTransactionCommand(testTransaction.getTransactionId().getValue(),
                 editTransactionDescriptor);
-        CommandResult result = editTransactionCommand.execute(model);
+        editTransactionCommand.execute(model);
         Transaction editedTransaction = model.getTransaction(testTransaction.getTransactionId());
         assertNotNull(editedTransaction);
         assertEquals(0, editedTransaction.getAmount().getValue().compareTo(BigDecimal.valueOf(200)));
-        assertEquals("Edited Transaction: " + testTransaction.getTransactionId() + "; "
-                + "TransactionType: Expense; Description: "
-                + "Test; Amount: 200.00; Date: 10/10/23; StaffId: None", result.getFeedbackToUser());
     }
 
     @Test
@@ -69,14 +66,15 @@ public class EditTransactionCommandTest {
         editTransactionDescriptor.setDescription(description);
         editTransactionDescriptor.setAmount(amount);
         editTransactionDescriptor.setDate(date);
-        editTransactionCommand = new EditTransactionCommand(testTransaction.getTransactionId().getValue(), editTransactionDescriptor);
-        CommandResult result = editTransactionCommand.execute(model);
+        editTransactionCommand = new EditTransactionCommand(testTransaction.getTransactionId().getValue(),
+                editTransactionDescriptor);
+        editTransactionCommand.execute(model);
         Transaction editedTransaction = model.getTransaction(testTransaction.getTransactionId());
         assertNotNull(editedTransaction);
         assertEquals(newType, editedTransaction.getTransactionType());
-        assertEquals("Edited Transaction: " + testTransaction.getTransactionId() + "; "
-                + "TransactionType: Revenue; Description: Test; Amount: 100.00; "
-                + "Date: 10/10/23; StaffId: None", result.getFeedbackToUser());
+        assertEquals(editedTransaction, new Transaction(editedTransaction.getTransactionId(),
+                newType, description, amount, date));
+
     }
 
     @Test
@@ -89,14 +87,12 @@ public class EditTransactionCommandTest {
         editTransactionDescriptor.setDate(date);
         editTransactionCommand = new EditTransactionCommand(testTransaction.
                 getTransactionId().getValue(), editTransactionDescriptor);
-        CommandResult result = editTransactionCommand.execute(model);
+        editTransactionCommand.execute(model);
         Transaction editedTransaction = model.getTransaction(testTransaction.getTransactionId());
         assertNotNull(editedTransaction);
         assertEquals(newDescription, editedTransaction.getDescription());
-        assertEquals("Edited Transaction: " + testTransaction.getTransactionId() + "; "
-                + "TransactionType: Expense; "
-                + "Description: New Description; Amount: 100.00; Date: 10/10/23; "
-                + "StaffId: None", result.getFeedbackToUser());
+        assertEquals(editedTransaction, new Transaction(editedTransaction.getTransactionId(),
+                transactionType, newDescription, amount, date));
     }
 
     @Test
@@ -110,14 +106,12 @@ public class EditTransactionCommandTest {
         editTransactionDescriptor.setAmount(amount);
         editTransactionCommand = new EditTransactionCommand(testTransaction.getTransactionId().getValue(),
                 editTransactionDescriptor);
-        CommandResult result = editTransactionCommand.execute(model);
+        editTransactionCommand.execute(model);
         Transaction editedTransaction = model.getTransaction(testTransaction.getTransactionId());
         assertNotNull(editedTransaction);
         assertEquals(newDate, editedTransaction.getDate());
-        assertEquals("Edited Transaction: " + testTransaction.getTransactionId() + "; "
-                + "TransactionType: "
-                + "Expense; Description: Test; Amount: 100.00; "
-                + "Date: 01/01/24; StaffId: None", result.getFeedbackToUser());
+        assertEquals(editedTransaction, new Transaction(editedTransaction.getTransactionId(),
+                transactionType, description, amount, newDate));
     }
 
     @Test
