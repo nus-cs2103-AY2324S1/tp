@@ -48,9 +48,6 @@ online dating journey.
 
 ## **Glossary**
 
-
-
-
 | Term                                                                                           | Definition                                                                                                                             |
 |------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
 | Date                                                                                           | A person that the user is interested in and is currently seeing.                                                                       |
@@ -351,10 +348,12 @@ Finds a date in the LoveBook by a specific name(s)
 
 Format: `find NAME [MORE_NAMES]`
 
+<div markdown="span" class="alert alert-success">
+<strong>:bulb: Tip</strong>: 
 Parameter constraints:
-
 - Name should be a non-empty string.
 - More names can be added to the command line, and the search will be conducted for all names provided
+</div>
 
 Example:
 
@@ -372,13 +371,20 @@ Filters the dates in the LoveBook by a specific metric.
 
 Format: `filter METRIC/ARG`
 
-* Parameter constraints:
-* Filter must be from list of metrics
-* Metric is limited to `gender, age, name, height` only
-* Arg can only be one keyword
+<div markdown="span" class="alert alert-success">
+<strong>:bulb: Tip</strong>: 
+Parameter constraints:
+- Filter must be from list of metrics
+- Metric is limited to `gender, age, name, height` only
+- Arg can only be one keyword
+</div>
+
+<div markdown="span" class="alert alert-danger">
+<strong>:exclamation: Caution</strong>:
+Unlike the find commmand, you cannot use filter to filter for more than a single name, like so `filter name/kevin name/wayne`
+</div>
 
 Example:
-
 - `filter name/Cleon`
 - `filter gender/M`
 - `filter gender/M name/Cleon`
@@ -394,22 +400,25 @@ Sorts the dates in the LoveBook by a specific metric.
 
 Format: `sort METRIC/ORDER`
 
+<div markdown="span" class="alert alert-success">
+<strong>:bulb: Tip</strong>:
 Parameter constraints:
+The relevant metrics are
+- `name/ORDER`
+- `age/ORDER`
+- `height/ORDER`
+- `income/ORDER`
+- `horoscope/ORDER`
 
-<box type="info" seamless>
+Order is limited to `increasing` or `decreasing` only
+</div>
 
-**Caution:**
-
-* The relevant metrics are
-  * `name/ORDER`
-  * `age/ORDER`
-  * `height/ORDER`
-  * `income/ORDER`
-  * `horoscope/ORDER`
-
-* Order is limited to `increasing` or `decreasing` only
-
-</box>
+<div markdown="span" class="alert alert-danger">
+<strong>:exclamation: Caution</strong>:
+When sorting dates by a field where both have an equal value, say Kevin and Wayne are sorted by income and both have
+an income of 2000, applying commands such as edit or star, can affect the stability of the sort. However, the overall
+sorting order by value is preserved.
+</div>
 
 Example:
 
@@ -423,18 +432,18 @@ Expected Output: `Lists the dates in the order specified`
 
 ### **Managing Preferences and Getting Matches**
 
-<box type="info" seamless>
+<div markdown="span" class="alert alert-success">
+<strong>:bulb: Tip</strong>:
+By default, Date Preference is set to:
+AGE: 21
+HEIGHT: 170
+INCOME: 10000
+HOROSCOPE: ARIES
 
-* By default, Date Preference is set to:
-  * AGE: 21
-  * HEIGHT: 170
-  * INCOME: 10000
-  * HOROSCOPE: ARIES
+If you wish to change your Date Preference, please use the [`setP`](#setting-your-date-preferences-setp) command.
+The [`bestMatch`](#getting-a-recommended-date-bestmatch) command will use the Date Preference set by the user.
+</div>
 
-* If you wish to change your Date Preference, please use the [`setP`](#setting-your-date-preferences-setp) command.
-* The [`bestMatch`](#getting-a-recommended-date-bestmatch) command will use the Date Preference set by the user.
-
-</box>
 
 #### **Showing your date preferences: `showP`**
 
@@ -451,20 +460,18 @@ Expected output: `Here are your preferences: Age: 22; Height: 180; Income: 2000;
 
 Sets the user's preferences for the matching algorithm.
 
-<div markdown="block" class="alert alert-info">
 
-**:information_source: Note:**<br>
+<div markdown="span" class="alert alert-success">
+<strong>:bulb: Tip</strong>:
+Note: At least one field to edit must be provided.
+The user's preferences will be used in the [`bestMatch`](#getting-a-recommended-date-bestmatch) command.
+Gender is not taken into account here
 
-* At least one field to edit must be provided.
-* The user's preferences will be used in the [`bestMatch`](#getting-a-recommended-date-bestmatch) command.
-* Gender is not taken into account here
-
-* The relevant fields are
-  * `age/AGE`
-  * `height/HEIGHT`
-  * `income/INCOME`
-  * `horoscope/HOROSCOPE`
-
+The relevant fields are
+`age/AGE`
+`height/HEIGHT`
+`income/INCOME`
+`horoscope/HOROSCOPE`
 </div>
 
 Format: `setP [age/AGE] [height/HEIGHT] [income/INCOME] [horoscope/HOROSCOPE]`
