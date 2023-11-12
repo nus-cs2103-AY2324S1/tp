@@ -29,6 +29,7 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.policy.PolicyExpirationDateComparator;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -99,6 +100,19 @@ public class TypicalPersons {
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
         for (Person person : getTypicalPersons()) {
+            ab.addPerson(person);
+        }
+        return ab;
+    }
+
+    /**
+     * Returns an {@code AddressBook} with all the typical persons in sorted order.
+     */
+    public static AddressBook getTypicalSortedAddressBook() {
+        AddressBook ab = new AddressBook();
+        List<Person> listOfPeople = getTypicalPersons();
+        listOfPeople.sort(new PolicyExpirationDateComparator());
+        for (Person person : listOfPeople) {
             ab.addPerson(person);
         }
         return ab;
