@@ -282,22 +282,22 @@ The following exceptions may be thrown during this process, namely:
 - CommandException for identical appointments
 - CommandException for appointments with clashing timeslots
 
--- user input -- 
+-- user input --  
 Step 1. User executes reschedule command with correct and valid arguments.
 
--- `AddressBookParser` --
+-- `AddressBookParser` --  
 Step 2. Returns new `RescheduleCommandParser`.
 
--- `RescheduleCommandParser` --
-Step 3. Verify that all argument prefixes are present.
-Step 4. Verify that provided arguments are valid.
-Step 5. Returns new `RescheduleCommand`.
+-- `RescheduleCommandParser` --  
+Step 3. Verify that all argument prefixes are present.  
+Step 4. Verify that provided arguments are valid.  
+Step 5. Returns new `RescheduleCommand`.  
 
--- `RescheduleCommand` --
-Step 6. Verify that the given index exist in UniqueAppointmentList.
-Step 7. Verify that the new appointment to be added does not have time conflict with another appointment on the same day.
-Step 8. Verify that the same appointment has not already been added.
-Step 9. Appointment is rescheduled.
+-- `RescheduleCommand` --  
+Step 6. Verify that the given index exist in UniqueAppointmentList.  
+Step 7. Verify that the new appointment to be added does not have time conflict with another appointment on the same day.  
+Step 8. Verify that the same appointment has not already been added.  
+Step 9. Appointment is rescheduled.  
 
 The following activity diagram shows how the reschedule operation works:
 
@@ -308,7 +308,7 @@ The following activity diagram shows how the reschedule operation works:
 [FindAppointmentCommandParser.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/parser/appointmentparser/FindAppointmentCommandParser.java
 [FindAppointmentCommand.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/commands/appointmentcommands/FindAppointmentCommand.java
 
-### Implementation
+#### Implementation
 
 For _FindAppointment_ command, the noteworthy classes involved are:
 
@@ -365,6 +365,7 @@ The feature is implemented by sorting the unfiltered patient list stored in the 
 
 
 The following sequence diagram shows how the sort patient command works:
+
 ![SortPatientCommandSequenceDiagram](images/SortPatientCommandSequenceDiagram.png)
 
 #### Design considerations:
@@ -388,6 +389,11 @@ For _Undo/Redo_ command, the noteworthy classes are:
 - [`UndoCommand.java`][UndoCommand.java] - For execution.
 - [`RedoCommand.java`][UndoCommand.java] - For execution.
 
+
+The following sequence diagram shows how the undo patient command works:
+
+![UndoCommandSequenceDiagram](images/UndoCommandSequenceDiagram.png)
+
 The following exceptions may be thrown during this process, namely:
 - ParseException for additional arguments with undo/redo command
 - CommandException for attempting to execute undo when there is no command to undo
@@ -395,28 +401,37 @@ The following exceptions may be thrown during this process, namely:
 
 Given below is an example usage scenario of how the _Undo_ command executes.
 
--- user input --
+-- user input --  
 Step 1. User executes a valid `add` command.
 
--- `AddCommand` --
-Step 2. Adds the `add` command as recent command.
-Step 3. Adds the added `person` as new patient.
+-- `AddCommand` --  
+Step 2. Adds the `add` command as recent command.  
+Step 3. Adds the added `person` as new patient.  
 
--- user input --
+-- user input --  
 Step 4. User executes `undo` command.
 
--- `UndoCommand` --
-Step 5. Verify that there is a command to undo.
-Step 6. Undo the most recent command (deletes the new patient).
+-- `UndoCommand` --  
+Step 5. Verify that there is a command to undo.  
+Step 6. Undo the most recent command (deletes the new patient).  
 
--- `RedoCommand` --
-Step 7. Verify that there is an undone command to undo.
-Step 8. Redo the most recent undone command (restores the deleted patient).
+-- `RedoCommand` --  
+Step 7. Verify that there is an undone command to undo.  
+Step 8. Redo the most recent undone command (restores the deleted patient).  
 
 The execution can be seen in the activity diagram given below.
 
 _Activity Diagram for a typical `undo` command_
 ![UndoCommandActivityDiagram.png](images/UndoCommandActivityDiagram.png)
+
+#### Design considerations:
+1. undoHistory and redoHistory are implemented with Stacks as the behavior of always operating on the most recent action is consistent with the Last-In-First-Out (LIFO) nature of a Stack.
+2. Although storing the state of the program after every user action is not memory efficient, our test runs revealed that the memory usage was insignificant and thus this design can be safely implemented.
+3. The undo/redo commands does not support the following commands: `appointments`, `find`, `today`, `upcoming`, `find-i`, `find-p`, `patients`, `exit`, `help` and `list`. The rationale is as such:
+    * The `find`, `today` and `upcoming` commands can be undone by the `appointments` and `list` command and vice versa.
+    * The `find-i` and `find-p` commands can be undone by the `patients` and `list` vice versa.
+    * The `exit` and `help` commands do not operate on the data, hence there is no need for them to be undone
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -473,7 +488,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `MediFlowR (MFR)` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a patient**
+**Use case 1 (UC1): Add a patient**
 
 **MSS**
 
@@ -497,7 +512,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 1.
 
-**Use case: Edit a patient**
+**Use case 2 (UC2): Edit a patient**
 
 **MSS**
 
@@ -527,7 +542,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 1.
 
-**Use case: Delete a patient**
+**Use case 3 (UC3): Delete a patient**
 
 **MSS**
 
@@ -545,7 +560,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 1.
 
-**Use case: List all patients**
+**Use case 4 (UC4): List all patients**
 
 **MSS**
 
@@ -555,7 +570,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: Search for a patient**
+**Use case 5 (UC5): Search for a patient**
 
 **MSS**
 
@@ -565,7 +580,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: Search for a patient with a certain illness**
+**Use case 6 (UC6): Search for a patient with a certain illness**
 
 **MSS**
 
@@ -575,7 +590,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: Add illness to a patient**
+**Use case 7 (UC7): Add illness to a patient**
 
 **MSS**
 
@@ -599,7 +614,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 1.
 
-**Use case: Remove illness from a patient**
+**Use case 8 (UC8): Remove illness from a patient**
 
 **MSS**
 
@@ -623,7 +638,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 1.
 
-**Use case: Sort patients**
+**Use case 9 (UC9): Sort patients**
 
 **MSS**
 
@@ -641,7 +656,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-**Use case: Schedule an appointment**
+**Use case 10 (UC10): Schedule an appointment**
 
 **MSS**
 
@@ -671,7 +686,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 1.
 
-**Use case: Reschedule an appointment**
+**Use case 11 (UC11): Reschedule an appointment**
 
 **MSS**
 
@@ -701,7 +716,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 1.
 
-**Use case: Cancel an appointment**
+**Use case 12 (UC12): Cancel an appointment**
 
 **MSS**
 
@@ -719,7 +734,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 1.
 
-**Use case: List all appointments**
+**Use case 13 (UC13): List all appointments**
 
 **MSS**
 
@@ -729,7 +744,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: Sort appointments**
+**Use case 14 (UC14): Sort appointments**
 
 **MSS**
 
@@ -747,7 +762,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 1.
 
-**Use case: Search for appointment for a patient**
+**Use case 15 (UC15): Search for appointment for a patient**
 
 **MSS**
 
@@ -757,7 +772,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: Toggle dark/light mode**
+**Use case 16 (UC16): Undo a command**
+
+**MSS**
+
+1.  User requests to undo previous command
+2.  MFR displays a confirmation message
+
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User has not executed any commands that are undo-able.
+
+    * 1a1. MFR shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case 17 (UC17): Redo a command**
+
+**MSS**
+
+1.  User requests to redo a command that was undone
+2.  MFR displays a confirmation message
+
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User has not undone any command.
+
+    * 1a1. MFR shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case 18 (UC18): Toggle dark/light mode**
 
 **MSS**
 
@@ -767,7 +818,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: Clear Database**
+**Use case 19 (UC19): Clear Database**
 
 **MSS**
 
@@ -777,7 +828,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: Ask For Help**
+**Use case 20 (UC20): Ask For Help**
 
 **MSS**
 
@@ -816,7 +867,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## **Appendix: Instructions for manual testing**
 
-Given below are instructions to test the app manually.
+Given below are a series of instructions that can be followed to perform manual testing of the application.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
@@ -829,41 +880,272 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file  
+      **Expected**: Shows the GUI with a set of sample contacts and appointments.
 
-2. Saving window preferences
+2. Normal launch
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   1. Launch the application again  
+      **Expected**: Shows the GUI with a set of sample contacts and appointments.
 
-   2. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+3. Restarting the application with existing data
+   1. Click on the ‘X’ button located in the top-right corner of the screen
+   2. Double-click the jar file  
+      **Expected**: Shows the GUI with the existing data unchanged.
 
-3. _{ more test cases …​ }_
+### Adding a patient
 
-### Deleting a person
+1. Adding a patient that has not yet been added to the patient list
 
-1. Deleting a person while all persons are being shown
+    1. Execute the command: `add name=John Doe gender=MALE 
+       birthdate=2000/10/20 phone=98765432 email=johnd@example.com 
+       address=311, Clementi Ave 2, #02-25 illnesses=fever`  
+       **Expected**: The patient has been successfully added to the patient list
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+2. Adding a patient that already exists in patient list
 
-   2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Execute the command: `add name=John Doe gender=MALE
+       birthdate=2000/10/20 phone=98765432 email=johnd@example.com
+       address=311, Clementi Ave 2, #02-25 illnesses=fever`  
+       **Expected**: The Status Box displays the message "This patient already exists in the records"
 
-   3. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+### Deleting a patient
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+1. Deleting a patient from a patient list with 3 patients
 
-2. _{ more test cases …​ }_
+   1. Prerequisites: List all patients using the `list` command. 3 patients in the list. 
 
-### Saving data
+   2. Execute the command: `delete 1`<br>
+      **Expected**: First contact is deleted from the list. Details of the deleted contact shown in the status box. 
+   3. Execute the command: `delete 0`<br>
+      **Expected**: No person is deleted. Error details shown in the status box. Patient list remains the same.
+   4. Execute the command: `delete 10`<br>
+      **Expected**: No person is deleted. Error details shown in the status box. Patient list remains the same.
 
-1. Dealing with missing/corrupted data files
+### Updating a patient’s details
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. Updating a patient's details with valid data
 
-2. _{ more test cases …​ }_
+    1. Prerequisites: Ensure that at least one patient is displayed in the list.
+    2. Execute the command: `edit 1 birthdate=2001/12/14 phone=93842738`  
+       **Expected**: The patient at index 1 is updated with the new birthdate and phone number. The updated details are reflected in the patient list.
+
+2. Updating a patient's details with invalid data
+
+    1. Prerequisites: Ensure that at least one patient is displayed in the list.
+    2. Execute the command: `edit 1 birthdate=14/12/2001 phone=93842738`  
+       **Expected**: No details are updated. Error details are shown in the status box indicating the date format is incorrect.
+
+### Diagnosing a patient
+
+1. Diagnosing a patient with valid illness data
+
+    1. Prerequisites: Ensure that at least one patient is displayed in the list.
+    2. Execute the command: `diagnose 1 illnesses=fever`  
+       **Expected**: The patient at index 1 has 'fever' added to their list of illnesses. The updated illness list is reflected in the patient details.
+
+2. Diagnosing a patient with multiple illnesses
+
+    1. Prerequisites: Ensure that at least one patient is displayed in the list.
+    2. Execute the command: `diagnose 1 illnesses=fever,flu`  
+       **Expected**: The patient at index 1 has both 'fever' and 'flu' added to their list of illnesses.
+
+### Undiagnosing a patient
+
+1. Removing an illness from a patient
+
+    1. Prerequisites: Ensure that at least one patient with the illness 'fever' is displayed in the list.
+    2. Execute the command: `undiagnose 1 illnesses=fever`  
+       **Expected**: The illness 'fever' is removed from the patient at index 1. The updated illness list is reflected in the patient details.
+
+### Finding patients
+
+1. Finding patients by name
+
+    1. Execute the command: `find-p alex david`  
+       **Expected**: All patients with names containing 'alex' or 'david' are displayed in the list.
+
+2. Finding patients by illness
+
+    1. Execute the command: `find-i fever flu`  
+       **Expected**: All patients with illnesses containing 'fever' or 'flu' are displayed in the list.
+
+### Sorting patients
+
+1. Sorting patients by name
+
+    1. Execute the command: `sort-p asc by=name`  
+       **Expected**: The patients are sorted by name in ascending order.
+
+2. Sorting patients by birthdate
+
+    1. Execute the command: `sort-p desc by=birthday`  
+       **Expected**: The patients are sorted by birthday in descending order.
+
+### Viewing all patients
+
+1. Displaying all patients
+
+    1. Execute the command: `patients`  
+       **Expected**: A list of all patients currently recorded in the application is displayed.
+
+### Scheduling a new appointment
+
+1. Scheduling an appointment for an existing patient
+
+    1. Prerequisites: Ensure that a patient with name "Alex Yeoh" is displayed in the list.
+    2. Execute the command: `schedule patient=Alex Yeoh start=2023/10/20 12:00 end=2023/10/20 13:00 description=Follow up on Chest X-Ray priority=high`  
+       **Expected**: A new high priority appointment for Alex Yeoh on 20 October 2023 from 12pm to 1pm is scheduled and displayed in the appointments list.
+
+2. Scheduling an appointment with overlapping times
+
+    1. Prerequisites: Ensure an appointment exists for a patient at a given time.
+    2. Execute the command: `schedule patient=Alex Yeoh start=2023/10/20 12:00 end=2023/10/20 13:00 description=Follow up on Chest X-Ray priority=high`  
+      **Expected**: No new appointment is scheduled. Error details are shown in the status box indicating the time conflict.
+
+
+### Rescheduling an appointment
+
+1. Rescheduling an existing appointment
+
+    1. Prerequisites: Ensure at least one appointment is displayed in the appointments list.
+    2. Execute the command: `reschedule 1 start=2023/05/02 09:00 end=2023/05/02 11:00`  
+       **Expected**: The appointment with index 1 is rescheduled to 2 May 2023, from 9am to 11am, and the change is reflected in the appointments list.
+
+
+2. Rescheduling an appointment to an invalid time
+
+    1. Prerequisites: Ensure at least one appointment is displayed in the appointments list.
+
+    2. Execute the command: `reschedule 1 start=2023/10/20 13:00 end=2023/10/20 12:00`  
+      **Expected**: The appointment is not rescheduled. Error details are shown in the status box indicating that the start time is after the end time.
+
+### Triaging an appointment
+
+1. Changing the priority of an existing appointment
+
+    1. Prerequisites: Ensure at least one appointment is displayed in the appointments list.
+
+    2. Execute the command: `triage 1 priority=high`  
+       **Expected**: The priority of the appointment with index 1 is changed to high, and the update is reflected in the appointments list.
+
+2. Changing the priority of a non-existent appointment
+
+    1. Prerequisites: Ensure the appointments list is empty or the index provided does not exist.
+
+    2. Execute the command: `triage 2 priority=high` where index 2 does not exist  
+      **Expected**: Priority is not changed. Error details are shown in the status box indicating an invalid index.
+
+### Cancelling an appointment
+
+1. Cancelling an existing appointment
+
+    1. Prerequisites: Ensure at least one appointment is displayed in the appointments list.
+
+    2. Execute the command: `cancel 1`  
+       **Expected**: The appointment with index 1 is cancelled and removed from the appointments list.
+
+2. Cancelling an appointment with an invalid index
+
+    1. Prerequisites: Ensure the appointments list is empty or the index provided does not exist.
+
+    2. Execute the command: `cancel 3` where index 3 does not exist  
+      **Expected**: No appointment is cancelled. Error details are shown in the status box indicating an invalid index.
+
+### Displaying all appointments
+
+1. Displaying the full list of appointments
+
+    1. Execute the command: `appointments`  
+       **Expected**: All scheduled appointments are displayed in the appointments list.
+
+### Finding appointments by patient name
+
+1. Finding appointments by patient name
+
+    1. Execute the command: `find-a alex david`  
+       **Expected**: All appointments with patient names containing 'alex' or 'david' are displayed in the appointments list.
+
+### Displaying today's appointments
+
+1. Displaying appointments for today
+
+    1. Execute the command: `today`  
+       **Expected**: All appointments scheduled to start on the current date are displayed in the appointments list.
+
+### Displaying upcoming appointments
+
+1. Displaying upcoming appointments
+
+    1. Execute the command: `upcoming`  
+       **Expected**: All upcoming appointments are displayed in the appointments list.
+
+### Sorting appointments
+
+1. Sorting appointments by date or priority
+
+    1. Execute the command: `sort-a asc by=time`  
+       **Expected**: The appointments are sorted by their start times in ascending order and displayed in the appointments list.
+
+### Undoing a command
+
+1. **Undoing a command that changes data**
+    1. Prerequisites: Perform a command that changes data, such as `add`, `delete`, `schedule`, `reschedule`, `triage`, or `cancel`.
+    2. Execute the command: `undo`  
+        **Expected**: The most recent data-changing command is undone. The application's state reverts to before the command was executed.
+
+2. **Undoing a command that does not change data**
+    - Prerequisites: Perform a command that does not change data, such as `find`, `today`, `upcoming`, `find-i`, `find-p`, `patients`, `exit`, `help`, or `list`.
+    - Execute the command: `undo`  
+      **Expected**: No changes occur. An appropriate message indicating that the command cannot be undone is displayed.
+
+### Redoing a command
+
+1. **Redoing a previously undone command**
+    1. Prerequisites: Perform an `undo` operation.
+    2. Execute the command: `redo`  
+      **Expected**: The previously undone command is redone. The application's state updates to reflect the redone command.
+
+2. **Redoing a command without an `undo`**
+    1. Prerequisites: Without having used `undo`, attempt to `redo`.
+    2. Execute the command: `redo`  
+      **Expected**: No changes occur. An appropriate message indicating that there is no command to redo is displayed.
+
+### Listing all records
+
+1. **Displaying all patient records and appointments**
+   1. Execute the command: `list`  
+      **Expected**: All patient records and all appointments are displayed.
+
+### Clearing all records
+
+1. Clearing all patient records and appointments
+
+    1. Execute the command: `clear`  
+       **Expected**: All patient records and appointments are cleared from the application.
+
+### Toggling dark/light mode
+
+1. Toggling between dark and light modes
+
+    1. Execute the command: `mode`  
+       **Expected**: The application's theme toggles between dark and light mode.
+
+### Exiting the program
+
+1. Exiting the program
+
+    1. Execute the command: `exit`  
+       **Expected**: The application closes.
+
+### Viewing help
+
+1. Viewing help information
+
+    1. Execute the command: `help`  
+       **Expected**: Help information is displayed, explaining how to access the help page.
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -900,6 +1182,8 @@ such that birthdates after the current date will not be considered a valid birth
 
 8. Currently, the find command only is able to find by name. We plan to add the functionality to find anything that 
 matches the given conditions that could be other variables of a patient or appointment such as range of birthdays.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
 

@@ -74,20 +74,6 @@ public class UserHistoryManager {
     }
 
     /**
-     * @return the size of the undo history.
-     */
-    public int getUndoHistorySize() {
-        return undoHistory.size();
-    }
-
-    /**
-     * @return the size of the redo history.
-     */
-    public int getRedoHistorySize() {
-        return redoHistory.size();
-    }
-
-    /**
      * @return the undo history.
      */
     public Stack<Pair<List<Person>, List<Appointment>>> getUndoHistory() {
