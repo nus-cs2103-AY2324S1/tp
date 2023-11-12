@@ -43,25 +43,18 @@ public class AppointmentTest {
     @Test
     public void secondConstructor_nullDoctor_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Appointment(null, new Ic(VALID_NRIC_AMY),
-                new AppointmentTime(VALID_DATE_1), "Follow-Up"));
+                new AppointmentTime(VALID_DATE_1)));
     }
 
     @Test
     public void secondConstructorr_nullPatient_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Appointment(new Ic(VALID_NRIC_DEREK), null,
-                new AppointmentTime(VALID_DATE_1), "Follow-Up"));
+                new AppointmentTime(VALID_DATE_1)));
     }
 
     @Test
     public void secondConstructor_nullAppointmentTime_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Appointment(new Ic(VALID_NRIC_DEREK), new Ic(VALID_NRIC_AMY),
-                null, "Follow-Up"));
-    }
-
-    @Test
-    public void constructor_nullStatus() { // should this throw a nullPointerException?
-        assertThrows(NullPointerException.class, (
-        ) -> new Appointment(new Ic(VALID_NRIC_DEREK), new Ic(VALID_NRIC_AMY), new AppointmentTime(VALID_DATE_1),
                 null));
     }
 

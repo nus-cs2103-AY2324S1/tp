@@ -114,8 +114,11 @@ A doctor can have any number of tags (including 0). Duplicate tags, however, are
 
 **:information_source: Take Note:**<br>
 
-- A doctor cannot have the same NRIC as another person.
-- A person can either be a doctor or a patient, but not both. Hence, if the doctor's NRIC is already in the app
+- A doctor **MUST** have all fields non-empty except TAG.
+  Failure to include these details may result in an error.
+- The order is not important (i.e, IC can come before NAME). What matters is that all the mandatory fields are declared,
+and the format for each field is adhered to.
+- A person can either be a doctor or a patient, but not both. Hence if the doctor's IC is already in the app
 as a patient, it may result in an error.
 - Adding additional prefixes (eg. `b/O+`) not specified by the command format above will be considered as a **parameter input**. For example:</br>
   `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/O+` will result
@@ -129,6 +132,64 @@ Examples:
 
 * `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Pediatrician`
 * `add-doctor n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Common Errors:**<br>
+1. Invalid Command Format <br>
+All fields are mandatory except the tag field. Omission of the fields will throw an error stating
+that an invalid command has been given, and specify the correct format for the `add-doctor command`. <br>
+Example: `add-doctor ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon`<br>
+Error Message: `Invalid command format!` <br>
+   `add-doctor: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS g/GENDER ic/NRIC [t/TAG]...`
+2. Invalid/Empty Field <br>
+   Fields have specific formats to be followed. Failure to adhere to this format will lead to an error message
+that specifies the format to be used for that field. Usage of flags without any message will lead to the same 
+corresponding error message since no field supports empty inputs.
+   ```
+   add-doctor n/ ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon
+   Names should only contain alphanumeric characters and spaces, and it should not be blank
+   
+   add-doctor n/Betsy Crowe ic/999 g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon
+   Ic should start with S or T, followed by 7 numbers, and ends with a letter. Letters inputs are case-insensitive. Empty strings are not allowed
+   
+   add-doctor n/Betsy Crowe ic/S9851586G g/B p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon
+   Gender should only be M for Male or F for Female
+   
+   add-doctor n/Betsy Crowe ic/S9851586G g/F p/phoneNumber e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon
+   Phone numbers should only contain numbers, and it should be at least 3 digits long
+   
+   add-doctor n/Betsy Crowe ic/S9851586G g/F p/98765433 e/ a/#104-C, Wakanda St 42 t/Surgeon
+   Emails should be of the format local-part@domain and adhere to the following constraints:
+   1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+   2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+      The domain name must:
+       - end with a domain label at least 2 characters long
+       - have each domain label start and end with alphanumeric characters
+       - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+   
+   add-doctor n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/ t/Surgeon
+   Addresses can take any values, and it should not be blank
+   
+   add-doctor n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/BestDoctor
+   Doctor tag should be a valid specialisation.
+      ```
+3. Adding custom prefixes <br>
+Adding custom prefixes will mostly cause the preceding flag to become invalid. <br>
+Exceptions:
+   * Adding 'custom' flags to the address or condition field will, however, be accepted as
+Addresses may involve the usage of the `/` character. Hence, take note to use the address field carefully.
+   * Adding the 'custom' flag before any other field will recognise the input to be of Invalid Command Format.
+<br>
+Examples:
+   * `add-doctor pic/ n/Faiz ic/S9851486G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/surgeon`
+   * `add-doctor n/Faiz pic/ ic/S9851486G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/surgeon`
+   * `add-doctor n/Faiz ic/S9851486G g/F p/98765433 e/betsycrowe@example.com a/#104/C, Wakanda St 42 t/surgeon`
+4. Special Cases <br>
+Names with special characters may not adhere to the current format for names, and may be recognised as an invalid input.
+Example:
+   * `add-doctor n/David s/o Beckham ic/S9851486G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/surgeon`
+</div>
 
 ### Adding a Patient: `add-patient`
 
