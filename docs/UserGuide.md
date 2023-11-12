@@ -270,7 +270,7 @@ Switches the active addressbook.
 <div markdown="block" class="alert alert-secondary">
 
 * `course switch course/CS2103T` 
-  * Switches to the addressbook with course code CS2103T.
+* Switches to the addressbook with course code CS2103T.
 
 </div>
 
@@ -667,18 +667,18 @@ _Details coming soon ..._
 
 ### 7.1 Prefix summary
 
-| Parameter      | Prefix | Rules                                                                                                                                                                                                              |
+| Prefix      | Parameter | Rules                                                                                                                                                                                                              |
 |----------------|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Course code    | course/| - Should only contain alphanumeric characters.<br>- Should not contain spaces.                                                                                                                                 |
-| Name           | n/     | - Should only contain alphanumeric characters and spaces, no numbers or special characters.                                                                                                                                                         |
-| Student ID     | id/    | - Should be in the format `AxxxxxxxL`, <br>where `x` represents digit and `L` represents capital letters. Student ID is unique for all students.                                                                                                        |
-| Phone          | p/     | - Should only contain digits.                                                                                                                                               |
-| Email          | e/     | - Should only be of the form `local@domain` and only accept alphanumeric characters<br>- `local` allows for special characters `+`, `_`, `.` and `-` as well.<br>- `domain` must be at least 2 letters long<br> |
-| Tutorial group | t/     | - Should only contain alphanumeric characters.<br>- Should not contain spaces.<br>- Used in `add` and `edit` commands.                                                                                                                               |
-| Tutorial group | tg/    | - Should only contain alphanumeric characters.<br>- Should not contain spaces.<br>- Used in `list attendance` and `delete all` commands.                                                                                                                              |
-| Attendance     | a/     | - Should only be 0 or 1.<br>- 0 representing absence and 1 representing present.                                                                                                                                                                                          |
-| Week number    | w/     | - Should be an integer from 0 to 13.                                                                                                                                                                               |
-| Reason         | r/     | - Can be any character.                                                                                                                                                                                            |
+| course/ | Course code    | - Can be any string, including empty string `""`. |
+| n/      | Name           | - Should only contain alphanumeric characters and spaces, no special characters.|
+| id/     | Student ID     | - Should be in the format `AxxxxxxxL`, <br>where `x` represents digit and `L` represents capital letters. Student ID is unique for all students. |
+| p/      | Phone          | - Should only contain digits. |
+| e/      | Email          | - Should only be of the form `local@domain` and only accept alphanumeric characters <br>- `local` allows for special characters `+`, `_`, `.` and `-` as well. <br>- `domain` must be at least 2 letters long<br> |
+| t/      | Tutorial group | - Should only contain alphanumeric characters. <br>- Should not contain spaces.<br>- Used in `add` and `edit` commands.|
+| tg/     | Tutorial group | - Should only contain alphanumeric characters. <br>- Should not contain spaces.<br>- Used in `list attendance` and `delete all` commands. |
+| a/      | Attendance     | - Should only be 0 or 1.<br>- 0 representing absence and 1 representing present. |
+| w/      | Week number    | - Should be an integer from 0 to 13. |
+| r/      | Reason         | - Can be any string, except empty string `""`. |
 
 
 ### 7.2 Command summary
