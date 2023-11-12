@@ -139,6 +139,7 @@ public class PersonTest {
 
     @Test
     public void isContacting() {
+        assertEquals(0, ALICE.getInteractions().size());
         assertEquals(false, ALICE.isContacting());
         assertEquals(true, BENSON.isContacting());
         assertEquals(false, ELLE.isContacting());
