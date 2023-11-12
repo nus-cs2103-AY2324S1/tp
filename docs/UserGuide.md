@@ -73,7 +73,7 @@ Let us dive into **InterviewHub** and transform the way you recruit!
 through an all-in-one user-friendly platform!
 
 It is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a **Graphical User Interface** (GUI).
-If you are an engineering hiring manager who have a good understanding in CLI-based application and can type fast, **InterviewHub** can get your Interview and applicant management tasks done faster than traditional GUI apps.
+If you are an engineering hiring manager who has a good understanding of CLI-based applications and can type fast, **InterviewHub** can get your interview and applicant management tasks done faster than traditional GUI apps.
 
 [Back to the Table of Contents](#table-of-contents)
 
