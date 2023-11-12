@@ -64,8 +64,10 @@ public class RoomPieChart extends UiPart<Region> {
             case SUITES:
                 availableSuites--;
                 break;
-            default:
+            case PRESIDENTIAL_SUITE:
                 availablePresidentialSuites--;
+                break;
+            default:
                 break;
             }
         }
