@@ -188,7 +188,7 @@ class JsonAdaptedPerson {
             if (!Income.isValidIncome(income)) {
                 throw new IllegalValueException(String.format(Income.MESSAGE_CONSTRAINTS));
             }
-            personBuilder = personBuilder.withIncome(new Income(Integer.valueOf(income)));
+            personBuilder = personBuilder.withIncome(new Income(income));
         }
         if (details != null) {
             if (!Details.isValidDetails(details)) {

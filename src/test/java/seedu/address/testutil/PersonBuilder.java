@@ -57,7 +57,7 @@ public class PersonBuilder {
         lead = Lead.of(DEFAULT_LEAD);
         telegram = new TelegramHandle(DEFAULT_TELEGRAM);
         profession = new Profession(DEFAULT_PROFESSION);
-        income = new Income(Integer.valueOf(DEFAULT_INCOME));
+        income = new Income(DEFAULT_INCOME);
         details = new Details(DEFAULT_DETAILS);
         interactions = new ArrayList<>();
     }
@@ -147,7 +147,7 @@ public class PersonBuilder {
      * Sets the {@code Income} of the {@code Person} that we are building.
      */
     public PersonBuilder withIncome(String income) {
-        this.income = new Income(Integer.valueOf(income));
+        this.income = new Income(income);
         return this;
     }
 
