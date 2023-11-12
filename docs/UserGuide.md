@@ -16,7 +16,50 @@ This is why we are excited to introduce **Class Manager 2023**, an all-in-one ap
 This user guide is your key to mastering **Class Manager 2023**, with step-by-step instructions on how you can install and use our application. **Class Manager 2023** is designed to be intuitive and easy to use, so you can get started right away!
 
 <!-- * Table of Contents -->
+
 <page-nav-print />
+
+--------------------------------------------------------------------------------------------------------------------
+
+# UserGuide Guide
+
+Here are some quick tips on how the read and navigate our UserGuide.
+
+1. There are 3 different kinds of boxes that provide extra information. They are tip, notice and warning boxes.
+
+   * *Tip boxes* provide helpful advise on how to use a certain feature in Class Manager 2023.
+
+     <box type="tip" seamless>
+
+     **Tip:** This is a tip box.
+
+     </box>
+
+   * *Notice boxes* provide considerations to take note of when reading the UserGuide or executing commands.
+
+     <box type="info" seamless>
+
+     **Notice:** This is a notice box.
+
+     </box>
+
+   * *Warning boxes* provide warnings about certain outcomes that might be undesirable if executed.
+
+     <box tyoe="warning" seamless>
+
+     **Warning:** This is a warning box.
+
+     </box>
+
+2. Words that are <u>underlined</u> or [highlighted in blue](#welcome-to-class-manager-2023) (this will link you the top of the UserGuide) are hyperlinked and will send you to a different part of the UserGuide or an external link once clicked.
+
+   <box type="tip" seamless>
+
+    **Tip:** Hover over the hyperlink for a brief moment to check where the hyperlink sends you.
+
+  </box>
+
+3. Refer to [Feature](#features) to understand how to interpret the formats of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -42,7 +85,7 @@ This user guide is your key to mastering **Class Manager 2023**, with step-by-st
 
 3. Copy the file to the folder you want to use as the _home folder_ for **Class Manager 2023**.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar class-manager-2023.jar` command to run the application.
+4. Open a command terminal, [<u>`cd`</u>](#glossary) into the folder where you put the jar file in, and enter the `java -jar class-manager-2023.jar` command to run the application.
    Note the app contains some sample data.<br>
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -104,9 +147,10 @@ The **GUI** has 6 notable sections:
 
 * Extraneous parameters for commands that **do** take in parameters will be considered as invalid. <br>
   e.g. if the command specifies `delete 123 s/A0249112A` or `delete s/A0249112A c/T11`, it will be considered as invalid. <br>
-  Please **<u>refrain</u>** from using prefixes as input under another prefix.
+  Please **refrain** from using prefixes as input under another prefix.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
 </box>
 
 ## Class Number
@@ -360,13 +404,14 @@ Format: `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]…�
 * **ALL** the fields must be provided.
 * The `NAME` field is case-sensitive.
 * `PHONE` must be a 3 to 20 digit positive integer.
-* [`STUDENT_NUMBER`](#student-number) needs to be unique, and must not be blank.
+* [<u>`STUDENT_NUMBER`</u>](#student-number) needs to be unique, and must not be blank.
 * When a student is added, their grades, attendance and class participation details will be initialised to `0`, `absent` and `false` respectively for all tutorials.
 * Comment for a student can only be added after the student is instantiated.
 
 <box type="tip" seamless>
 
 **Tip:** A student can have any number of tags (including 0)
+
 </box>
 
 Examples:
@@ -381,7 +426,7 @@ Adds or replaces a comment of an existing student in **Class Manager 2023**.
 
 Format: `comment s/STUDENT_NUMBER cm/COMMENT`
 
-* The [`STUDENT_NUMBER`](#student-number) must be valid and exist.
+* The [<u>`STUDENT_NUMBER`</u>](#student-number) must be valid and exist.
 * Every student can only have 1 comment.
 * The `COMMENT` must be a valid string.
     * Take note that the `COMMENT` string must not include any prefix.
@@ -412,7 +457,7 @@ Deletes an existing student in **Class Manager 2023** by specifying the student 
 
 Format: `delete s/STUDENT_NUMBER`
 
-* The [`STUDENT_NUMBER`](#student-number) must be valid and exist.
+* The [<u>`STUDENT_NUMBER`</u>](#student-number) must be valid and exist.
 
 Example:
 * `delete s/A0249112A`
@@ -425,14 +470,15 @@ Edits an existing student's details in **Class Manager 2023**. One or more detai
 
 Format: `edit STUDENT_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`
 
-<box type="warning" seamless>
+<box type="info" seamless>
 
 **Note:**
 The student number entered __without__ the `s/` prefix is the **current** student number.
+
 </box>
 
-* [`STUDENT_NUMBER`](#student-number) must be valid and exist.
-* [`STUDENT_NUMBER`](#student-number) must be entered before the details to be modified.
+* [<u>`STUDENT_NUMBER`</u>](#student-number) must be valid and exist.
+* [<u>`STUDENT_NUMBER`</u>](#student-number) must be entered before the details to be modified.
 * Replace the student's existing student number with `NEW_STUDENT_NUMBER`.
 * `PHONE` must be a positive integer with 3 or more digits.
 * At least one of the optional fields must be provided.
@@ -459,11 +505,12 @@ Search and display students satisfying all given fields (Only one keyword needs 
 
 Format: `lookup [c/CLASS_NUMBER] [p/PHONE] [n/NAME] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]`
 
-<box type="warning" seamless>
+<box type="info" seamless>
 
-**Caution:**
+**Note:**
 - _At least one_ of the optional fields must be provided. `lookup` alone is not allowed. <br>
 - This command will not check for field validation. e.g. `lookup c/class 11` is allowed even though `class 11` is not a valid class number.
+
 </box>
 
 * The command is **case-insensitive**. e.g. `hans` will match `Hans`
@@ -489,7 +536,7 @@ Tags the existing student in **Class Manager 2023**.
 
 Format: `tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…​`
 
-* Tags the student with the specified `STUDENT_NUMBER`.
+* Tags the student with the specified [<u>`STUDENT_NUMBER`</u>](#student-number).
 * When editing tags without `/add` or `/delete`, the existing tags of the student will be overwritten.
 * You can remove all the student’s tags by typing `t/` without specifying any tags after it.
 
@@ -510,7 +557,7 @@ Mark the tutorial attendance for an existing student as absent in **Class Manage
 
 Format: `absent s/STUDENT_NUMBER tut/TUTORIAL_INDEX`
 
-* The `STUDENT_NUMBER` must be valid and exist.
+* The [<u>`STUDENT_NUMBER`</u>](#student-number) must be valid and exist.
 * The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configure-class-manager-2023--config) command.
 
 Examples:
@@ -524,7 +571,7 @@ Mark the tutorial attendance for an existing student as present in **Class Manag
 
 Format: `present s/STUDENT_NUMBER tut/TUTORIAL_INDEX`
 
-* The `STUDENT_NUMBER` must be valid and exist.
+* The [<u>`STUDENT_NUMBER`</u>](#student-number) must be valid and exist.
 * The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configure-class-manager-2023--config) command.
 
 Examples:
@@ -538,7 +585,7 @@ Mark the tutorial attendance for all students in the current list displayed as a
 
 Format: `absent-all tut/TUTORIAL_INDEX`
 
-* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configure-class-manager-2023--config)) command.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configure-class-manager-2023--config) command.
 
 Examples:
 * `absent-all tut/1`
@@ -562,15 +609,16 @@ Examples:
 
 Record the class participation for an existing student in **Class Manager 2023**.
 
-<box type="warning" seamless>
+<box type="info" seamless>
 
-**Caution:** Currently, we allow a student not present for a tutorial session to have their class participation recorded as `true`.
+**Note:** Currently, we allow a student not present for a tutorial session to have their class participation recorded as `true`.
 This will be changed in the future.
+
 </box>
 
 Format: `class-part s/STUDENT_NUMBER tut/TUTORIAL_SESSION part/PARTICIPATION`
 
-* `STUDENT_NUMBER` must be valid and exist.
+* [<u>`STUDENT_NUMBER`</u>](#student-number) must be valid and exist.
 * `TUTORIAL_SESSION` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configure-class-manager-2023--config) command.
 * `PARTICIPATION` must be either `true` or `false`.
     * The `true` value indicates that the student has participated in the tutorial, while the `false` value indicates that the student has not participated in the tutorial.
@@ -589,7 +637,7 @@ Setting an assignment grade for an existing student in **Class Manager 2023**.
 
 Format: `grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE`
 
-* The `STUDENT_NUMBER` must be valid and exist.
+* The [<u>`STUDENT_NUMBER`</u>](#student-number) must be valid and exist.
 * The `ASSIGNMENT_INDEX` must be a valid positive integer, within the configured assignment count given in the [**<u>`config`</u>**](#configure-class-manager-2023--config) command.
 * The `GRADE` must be a valid integer between 0 and 100.
 
@@ -604,8 +652,7 @@ View the class information of a student that will be displayed on the right side
 
 Format: `view s/STUDENT_NUMBER`
 
-* The STUDENT_NUMBER must be valid.
-* The STUDENT_NUMBER must belong to a student in **Class Manager 2023**.
+* The [<u>`STUDENT_NUMBER`</u>](#student-number) must be valid and belong to a student in **Class Manager 2023**.
 
 Example:
 
