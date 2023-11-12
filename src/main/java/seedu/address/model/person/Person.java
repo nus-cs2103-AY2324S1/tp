@@ -7,7 +7,9 @@ import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Objects;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 /**
  * Represents a Person in the address book.
@@ -29,6 +31,8 @@ public class Person {
     private Date beginTime;
     private Date endTime;
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
+
     /**
      * Every field must be present and not null.
      */
@@ -49,7 +53,7 @@ public class Person {
             this.beginTime = convertTime(begin.toString());
             this.endTime = convertTime(end.toString());
         } catch (ParseException e) {
-            //something
+            logger.info("Error parsing begin and end.");
         }
 
     }
