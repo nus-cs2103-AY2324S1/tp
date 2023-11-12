@@ -71,7 +71,7 @@ When you first start CCACommander and want to populate CCACommander with your me
 Here is how you can use it:<br>
 `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
-Here is an example command where we create a member **named** `Lim Jun Jie` with **gender** `Male`, **phone number** of `83498018`, **email** of `limjunjie@gmail.com`, home **address** of `19 Kent Ridge Crescent, Singapore 119278` and a `publicity` **tag** to indicate he is in the publicity department:
+Here is an example command where we create a member **named** "Lim Jun Jie" with **gender** "Male", **phone number** of "83498018", **email** of "limjunjie@gmail.com", home **address** of "19 Kent Ridge Crescent, Singapore 119278" and a "publicity" **tag** to indicate he is in the publicity department:
 
 `createMember n/Lim Jun Jie g/Male p/83498018 e/limjunjie@gmail.com a/19 Kent Ridge Crescent, Singapore 119278 t/publicity`
 
@@ -93,7 +93,7 @@ Here is how you can use it:<br>
 :bulb: At least one field must be provided
 </div>
 
-Here is an example command where we edit the first **member** in the displayed list, changing their **phone number** to `91234567` and **email** to `johndoe@example.com`:
+Here is an example command where we edit the first **member** in the displayed list, changing their **phone number** to "91234567" and **email** to "johndoe@example.com":
 
 `editMember 1 p/91234567 e/johndoe@example.com`
 
