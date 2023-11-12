@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.RemindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.RemindPredicate;
+import seedu.address.model.person.predicates.RemindPredicate;
 
 /**
  * Parses input arguments and creates a new RemindCommand object

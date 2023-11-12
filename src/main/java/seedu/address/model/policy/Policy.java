@@ -116,6 +116,8 @@ public class Policy {
 
     /**
      * Returns true if both policies have the same number
+     * @param otherPolicy policy compared to
+     * @return whether policies have the same number
      */
     public boolean hasSamePolicyNumber(Policy otherPolicy) {
         if (!this.policyNumber.toString().equals(PolicyNumber.DEFAULT_VALUE)
@@ -150,7 +152,7 @@ public class Policy {
      * @return the string representation of the Policy.
      */
     public String toDisplay(boolean isPersonCard) {
-        if (policyNumber.toString().equals(PolicyNumber.DEFAULT_VALUE)) {
+        if (this.hasDefaultParameter()) {
             // Policy does not actually exist
             return "No Policy Found";
         }

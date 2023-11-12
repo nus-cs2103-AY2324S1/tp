@@ -1,6 +1,7 @@
-package seedu.address.model.person;
+package seedu.address.model.person.predicates;
 
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.person.Person;
 
 
 /**
@@ -13,8 +14,7 @@ public class PolicyNumberContainsKeywordsPredicate extends FieldPredicates {
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
+        return !person.hasDefaultPolicy() && keywords.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
                         person.getPolicy().getPolicyNumber().value, keyword));
     }
 

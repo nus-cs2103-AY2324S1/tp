@@ -31,14 +31,14 @@ public class LicencePlate {
     public LicencePlate(String licencePlate) {
         requireNonNull(licencePlate);
         checkArgument(isValidLicencePlate(licencePlate), MESSAGE_CONSTRAINTS);
-        value = licencePlate;
+        value = licencePlate.toUpperCase();
     }
 
     /**
      * Returns true if a given string is a valid licence plate.
      */
     public static boolean isValidLicencePlate(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.toUpperCase().matches(VALIDATION_REGEX);
     }
 
     @Override

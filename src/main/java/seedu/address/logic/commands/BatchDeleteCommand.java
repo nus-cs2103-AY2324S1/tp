@@ -14,10 +14,10 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.month.DeleteMonth;
-import seedu.address.model.person.CompanyContainsKeywordsPredicate;
-import seedu.address.model.person.HasPolicyPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PolicyExpiryInDeleteMonthPredicate;
+import seedu.address.model.person.predicates.CompanyContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.HasPolicyPredicate;
+import seedu.address.model.person.predicates.PolicyExpiryInDeleteMonthPredicate;
 import seedu.address.model.policy.Company;
 
 /**

@@ -28,7 +28,7 @@ public class PolicyNumber {
     public PolicyNumber(String policyNumber) {
         requireNonNull(policyNumber);
         checkArgument(isValidPolicyNumber(policyNumber), MESSAGE_CONSTRAINTS);
-        value = policyNumber;
+        value = policyNumber.toUpperCase();
     }
 
     /**
