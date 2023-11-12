@@ -183,6 +183,8 @@ Classes used by multiple components are in the `seedu.staffsnap.commons` package
 
 This section describes some noteworthy details on how certain features are implemented.
 
+<br>
+
 ### Add applicant feature
 
 #### Implementation
@@ -206,6 +208,11 @@ The add applicant feature allows users to add an applicant to the applicant list
 - Alternative 2: Same command `add` for adding applicants and interviews.
     - Pros: More convenient for user to add an applicant with interviews.
     - Cons: Still necessary to have a separate `addi` command for user to add a new interview to an existing applicant.
+ 
+<br>
+
+---
+<br>
 
 ### Edit applicant feature
 
@@ -231,6 +238,11 @@ The edit applicant feature allows users to edit the details of an applicant.
     - Pros: Easier to implement due to similarity to add feature.
     - Cons: More areas for error as fields not meant to be edited might be edited due to a typo.
 
+<br>
+
+---
+<br>
+
 ### Help feature
 
 
@@ -251,6 +263,11 @@ The edit applicant feature allows users to edit the details of an applicant.
 
 1. Help can be called anytime and has no format to follow. The popup screen is disabled to avoid confusion but can be
    enabled in the future if need be.
+
+<br>
+
+---
+<br>
 
 ### Confirmation + Clear command
 
@@ -273,6 +290,11 @@ The edit applicant feature allows users to edit the details of an applicant.
 2. Currently, it follows the default commands if a word other than yes is given. But this will be improved in a future update.
 3. The state of the parser, rather than the app is used to reduce the chances of accidental clears.
 
+<br>
+
+---
+<br>
+
 ### Interview feature
 
 #### Purpose
@@ -289,6 +311,11 @@ The `Interview` class is used to store the information of each interview. It con
 #### Design Considerations
 
 In deciding the data structure to house our Interview objects, we were torn between using a `PriorityQueue` and a `List`. A `PriorityQueue` would have been useful in sorting the interviews by rating, but it would have been difficult to implement the `EditInterviewCommand` and `DeleteInterviewCommand` as the `PriorityQueue` does not have a `get()` method. Also, if we wanted to extend a sorting function for interviews in the future, a `PriorityQueue` would make it more difficult for us to change the comparator for `Interview` objects. For the sake of extensibility of the codebase, we decided to use a `List` instead. This is because a `List` provides us with greater abstraction and code flexibility in extending various functions for the `Interview` class. 
+
+<br>
+
+---
+<br>
 
 ### Sort feature
 
@@ -336,6 +363,11 @@ The following diagram summarises what happens when a user executes a Sort comman
 - Alternative 3: `sort d/ [valid field] o/ [a/d]` where `o/` is optional
     - Pros: Retains the ability to sort in either order, but also the conciseness of Alternative 1.
     - Cons: Users who are not aware of the `o/` feature may not use it.
+
+<br>
+
+---
+<br>
 
 ### Filter feature
 
@@ -400,6 +432,11 @@ The following diagram summarises what happens when a user executes a Filter comm
       of alternative 2 when few fields are required.
     - Cons: Unfamiliar users may not know that fields can be optional anc continue to key in the full command at all
       times.
+
+<br>
+
+---
+<br>
 
 ### Find feature
 
@@ -473,6 +510,29 @@ A future extension to this find command is to allow it to find applicants by oth
 handphone number. 
 As handphone numbers and emails are likely to be distinct for each applicant, it is possible to
 enhance the find feature so that it can also search for applicants by these fields.
+
+<br>
+
+---
+<br>
+
+### Import feature
+
+#### Purpose
+
+The `import` feature allows users to import data from a CSV file into Staff-Snap. This allows users to populate Staff-Snap with data from other sources via the commonly used CSV format. By allowing users to import large amounts of data from other sources without manually typing it in, Staff-Snap becomes more versatile and useful to users.
+
+#### Implementation
+
+The `import` feature is implemented as a command that takes in a CSV file name as an argument. The command is parsed by the `ImportCommandParser` class, which then calls the `ImportCommand` class to execute the command. The `ImportCommand` class uses the `CsvApplicantParser` to parse the applicant data into a `List<CsvApplicant>` with the help of the `CsvToBeanBuilder<T>` class under `com.opencsv.bean` package. If the `List<CsvApplicant>` has been successfully parsed, we then call the `ParserUtil::parseApplicantFromCsv()` method to convert the `CsvApplicant` to `Applicant`. Lastly, we call the `ModelManager` class to import the data from the `List<Applicant>` into Staff-Snap.
+
+Below is the sequence diagram for the `import` feature:
+
+<puml src="diagrams/ImportSequenceDiagram.puml" alt="ImportSequenceDiagram" />
+
+#### Design Considerations
+
+In
 
    
 --------------------------------------------------------------------------------------------------------------------
