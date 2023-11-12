@@ -392,6 +392,8 @@ Format: `star INDEX`
 
 Example: `star 1`
 
+![starCommandExample-1](images/user-commands/starCommandExample1.png)
+
 Expected output: `Starred Date: John Doe; Age: 21; Gender: F; Height: 245; Income: 3000; Horoscope: LIBRA`
 
 [Scroll back to *Table of Contents*](#table-of-contents)
@@ -413,6 +415,8 @@ Format: `unstar INDEX`
 </box>
 
 Example: `unstar 1`
+
+![unstarCommandExample](images/user-commands/unstarCommandExample.png)
 
 Expected output: `Unstarred Date: John Doe; Age: 21; Gender: M; Height: 123; Income: 3000; Horoscope: LIBRA`
 
@@ -518,16 +522,6 @@ Order is limited to `increasing` or `decreasing` only
   an income of 2000, applying commands such as edit or star, can affect the stability of the sort. However, the overall
   sorting order by value is preserved.
 
-* The relevant metrics are
-
-    * `name/ORDER`
-    * `age/ORDER`
-    * `height/ORDER`
-    * `income/ORDER`
-    * `horoscope/ORDER`
-
-* Order is limited to `increasing` or `decreasing` only
-
 </box>
 
 Example:
@@ -618,7 +612,7 @@ Expected Output: `Here's your best match!`
 
 #### **Getting a blind date: `blindDate`**
 
-Outputs a blind date from the LoveBook.
+Outputs a random date from the LoveBook.
 
 Format: `blindDate`
 
