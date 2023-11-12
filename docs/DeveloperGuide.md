@@ -206,9 +206,17 @@ class.
 2. The `Member`/`Applicant` to be added is checked against the `AddressBook` to ensure that there are no duplicates.
 3. The `Member`/`Applicant` is added into the `AddressBook` if it is unique, else an error message is thrown.
 
+The diagram below describes the behaviour of adding an applicant to the `AddressBook`, the execution of adding a member
+the `AddressBook` is almost identical.
+
 <img src="images/AddApplicantActivityDiagram.png">
 
-The diagram above describes the behaviour of adding an applicant to the `AddressBook`.
+The sequence diagram below also shows the interaction between the various components during the execution of the 
+`AddApplicantCommand`. The execution of the `AddMemberCommand` is almost identical, except that it uses the 
+`Member` class instead of the `Applicant` class.
+
+<img src="images/AddApplicantSequenceDiagram.png">
+
 ### View all `Member`/`Applicant` feature
 
 Lists all members/applicants in the address book to the user. For example, if the previous list was filtered (say by `FindMemberCommand` or `FindApplicantCommand`),
