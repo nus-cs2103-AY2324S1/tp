@@ -48,8 +48,8 @@ solution to manage your student details, including attendance records and assign
 - [7. Summary](#7-summary)
   - [7.1 Prefix Summary](#71-prefix-summary)
   - [7.2 Command Summary](#72-command-summary)
-    - [7.2.1 Basic Course Management](#721-basic-course-management)
-    - [7.2.2 Basic Student Management](#722-basic-student-management)
+    - [7.2.1 Basic Course Management](#721-basic-course-management-commands)
+    - [7.2.2 Basic Student Management](#722-basic-student-management-commands)
 
 --------------------------------------------------------------------------------------------------------------------
 ## 2. About this User Guide
@@ -63,13 +63,13 @@ This guide aims to
 
 ### 2.1 Navigating the User Guide
 **Information Box**
-<div markdown="block" class="alert alert-info">
-**:information_source: Info:** I am an example info box! I provide useful information.
+<div markdown="block" class="alert alert-info">**:information_source: Info:**
+I am an example info box! I provide useful information.
 </div>
 
 **Tip Box**
-<div markdown="block" class="alert alert-success">
-**:bulb: Tip:** I am an example tip box! I provide pointers to advanced users to enhance experience.
+<div markdown="block" class="alert alert-success">**:bulb: Tip:**
+I am an example tip box! I provide pointers to advanced users to enhance experience.
 </div>
 
 **Warning Box**
@@ -198,6 +198,10 @@ Shows a message explaining how to access the help page.
 
 ### 4.2 Basic Course Management
 
+<div markdown="block" class="alert alert-warning">**:exclamation: Warning:**
+The parameter `COURSE_CODE` is used for all course management commands, it can be any string, including an empty one. In addition, if `COURSE_CODE` specified is too long, the end of the string will be truncated!
+</div>
+
 #### 4.2.1 Creating an addressbook: `course create`
 
 ![course create](images/courseCreate.png)
@@ -209,8 +213,6 @@ Creates a new addressbook.
 <div markdown="block" class="alert alert-info">
 
 * Creates a new addressbook with course code `COURSE_CODE`
-* `COURSE_CODE` should be a string made up of alphanumeric characters, with no special characters.
-* `COURSE_CODE` must be specified.
 * `COURSE_CODE` address book must not exist.
 
 </div>
@@ -235,8 +237,6 @@ Delete an addressbook.
 <div markdown="block" class="alert alert-info">
 
 * Deletes the addressbook with course code `COURSE_CODE`
-* `COURSE_CODE` should be a string made up of alphanumeric characters, with no special characters.
-* `COURSE_CODE` must be specified.
 * `COURSE_CODE` address book must exist.
 
 </div>
@@ -261,8 +261,6 @@ Switches the active addressbook.
 <div markdown="block" class="alert alert-info">
 
 * Switches to the addressbook with course code `COURSE_CODE`
-* `COURSE_CODE` should be a string made up of alphanumeric characters, with no special characters.
-* `COURSE_CODE` must be specified.
 * `COURSE_CODE` address book must exist.
 
 </div>
@@ -272,7 +270,7 @@ Switches the active addressbook.
 <div markdown="block" class="alert alert-secondary">
 
 * `course switch course/CS2103T` 
-  * Switches to the addressbook with course code CS2103T.
+* Switches to the addressbook with course code CS2103T.
 
 </div>
 
@@ -287,8 +285,6 @@ Edits the active addressbook course code.
 <div markdown="block" class="alert alert-info">
 
 * Changes the course code of active addressbook to `COURSE_CODE`
-* `COURSE_CODE` should be a string made up of alphanumeric characters, with no special characters.
-* `COURSE_CODE` must be specified.
 * `COURSE_CODE` address book must not exist.
 
 </div>
@@ -641,7 +637,7 @@ TAvigator data are saved in the hard disk automatically after any command that c
 
 TAvigator data are saved automatically as a JSON file `[JAR file location]/data/tavigator.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
 If your changes to the data file makes its format invalid, TAvigator will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
@@ -671,18 +667,18 @@ _Details coming soon ..._
 
 ### 7.1 Prefix summary
 
-| Parameter      | Prefix | Rules                                                                                                                                                                                                              |
+| Prefix      | Parameter | Rules                                                                                                                                                                                                              |
 |----------------|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Course code    | course/| - Should only contain alphanumeric characters.<br>- Should not contain spaces.                                                                                                                                 |
-| Name           | n/     | - Should only contain alphanumeric characters and spaces, no numbers or special characters.                                                                                                                                                         |
-| Student ID     | id/    | - Should be in the format `AxxxxxxxL`, <br>where `x` represents digit and `L` represents capital letters. Student ID is unique for all students.                                                                                                        |
-| Phone          | p/     | - Should only contain digits.                                                                                                                                               |
-| Email          | e/     | - Should only be of the form `local@domain` and only accept alphanumeric characters<br>- `local` allows for special characters `+`, `_`, `.` and `-` as well.<br>- `domain` must be at least 2 letters long<br> |
-| Tutorial group | t/     | - Should only contain alphanumeric characters.<br>- Should not contain spaces.<br>- Used in `add` and `edit` commands.                                                                                                                               |
-| Tutorial group | tg/    | - Should only contain alphanumeric characters.<br>- Should not contain spaces.<br>- Used in `list attendance` and `delete all` commands.                                                                                                                              |
-| Attendance     | a/     | - Should only be 0 or 1.<br>- 0 representing absence and 1 representing present.                                                                                                                                                                                          |
-| Week number    | w/     | - Should be an integer from 0 to 13.                                                                                                                                                                               |
-| Reason         | r/     | - Can be any character.                                                                                                                                                                                            |
+| course/ | Course code    | - Can be any string, including empty string `""`. |
+| n/      | Name           | - Should only contain alphanumeric characters and spaces, no special characters.|
+| id/     | Student ID     | - Should be in the format `AxxxxxxxL`, <br>where `x` represents digit and `L` represents capital letters. Student ID is unique for all students. |
+| p/      | Phone          | - Should only contain digits. |
+| e/      | Email          | - Should only be of the form `local@domain` and only accept alphanumeric characters <br>- `local` allows for special characters `+`, `_`, `.` and `-` as well. <br>- `domain` must be at least 2 letters long<br> |
+| t/      | Tutorial group | - Should only contain alphanumeric characters. <br>- Should not contain spaces.<br>- Used in `add` and `edit` commands.|
+| tg/     | Tutorial group | - Should only contain alphanumeric characters. <br>- Should not contain spaces.<br>- Used in `list attendance` and `delete all` commands. |
+| a/      | Attendance     | - Should only be 0 or 1.<br>- 0 representing absence and 1 representing present. |
+| w/      | Week number    | - Should be an integer from 0 to 13. |
+| r/      | Reason         | - Can be any string, except empty string `""`. |
 
 
 ### 7.2 Command summary
