@@ -17,33 +17,47 @@ This user guide is your key to mastering **Class Manager 2023**, with step-by-st
 
 --------------------------------------------------------------------------------------------------------------------
 <!-- * Table of Contents -->
-# Table of Content
+# Table of Contents
 
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
-# UserGuide Guide
+# Overview
 
-First time using **Class Manager 2023**? Fear not for this user guide will guide you on how to maximise **Class Manager 2023** and you will be managing a class like a walk in the park.
+**Class Manager 2023** is an offline desktop application for CS2103/T: Software Engineering Teaching Assistants (TAs) in National University of Singapore (NUS) to manage their students' contacts and class information.
 
-To start using **Class Manager 2023**, refer to [Quick Start](#quick-start) which will guide you on how to set-up your very own **Class Manager 2023**.
+**Class Manager 2023** allows users to:
+* store and manage student's contact information,
+* keep track of and visualise student's class information such as attendance, class participation and assignment grades,
+* easily mark the attendance of multiple students for each tutorial session,
+* and much more!
 
-Familiarise yourself with our GUI over at [GUI Overview](#gui-overview) where the GUI breakdown is given.
+**Class Manager 2023** is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Since CS2103/T TAs have an adequate understanding of CLI, **Class Manager 2023** will allow class management tasks to be completed faster than traditional GUI apps.
 
-Want to find a specific section of the UserGuide? Look up the [Table of Content](#table-of-content) where it might lead you to the section that you are finding.
+--------------------------------------------------------------------------------------------------------------------
 
-Alternatively, consider the [Command Summary](#command-summary) which provides the command format for each command.
+# How to use our User Guide
 
-For difficult jargon that you might encounter, the [Glossary](#glossary) might have an explanation for it.
+First time using **Class Manager 2023**? Fear not! This tutorial will guide you on how to maximise **Class Manager 2023**.
 
-If you have any questions, check out the [FAQ](#faq) which might have the answer to your burning question. If not, find us at our [website](https://ay2324s1-cs2103t-t11-1.github.io/tp/index.html)
+To start using **Class Manager 2023**, refer to [Quick Start](#quick-start), which will guide you on how to set up your very own **Class Manager 2023**.
 
-Before reading the rest of the UserGuide, here are some quick tips on how the read and navigate our UserGuide.
+Familiarise yourself with our GUI at [GUI Overview](#gui-overview), where the GUI is explained clearly.
 
-1. There are 3 different kinds of boxes that provide extra information. They are tip, notice and warning boxes.
+Want to find a specific section of the User Guide? Look up the [Table of Contents](#table-of-contents), where it will lead you to the relevant section.
 
-   * *Tip boxes* provide helpful advise on how to use a certain feature in Class Manager 2023.
+You can also browse the [Command Summary](#command-summary) which provides an overview for the command format.
+
+For any terms that you are unsure of, the [Glossary](#glossary) might have an explanation for it.
+
+If you have any questions, check out the [FAQ](#faq) which might answer your burning questions. If not, find us at our [website](https://ay2324s1-cs2103t-t11-1.github.io/tp/index.html)
+
+Before reading our User Guide, here are some quick tips:
+
+1. There are 3 different kinds of boxes that provide extra information.
+
+   * *Tip boxes* provide helpful advise on how to use a certain feature in **Class Manager 2023**.
 
      <box type="tip" seamless>
 
@@ -61,35 +75,21 @@ Before reading the rest of the UserGuide, here are some quick tips on how the re
 
    * *Warning boxes* provide warnings about certain outcomes that might be undesirable if executed.
 
-     <box tyoe="warning" seamless>
+     <box type="warning" seamless>
 
      **Warning:** This is a warning box.
 
      </box>
 
-2. Words that are <u>underlined</u> or [highlighted in blue](#welcome-to-class-manager-2023) (this will link you the top of the UserGuide) are hyperlinked and will send you to a different part of the UserGuide or an external link once clicked.
+2. Words that are <u>underlined</u> or [highlighted in blue](#welcome-to-class-manager-2023) (this will link you the top of the UserGuide) are hyperlinked and will redirect you to a different part of the User Guide or an external link once clicked.
 
    <box type="tip" seamless>
 
-    **Tip:** Hover over the hyperlink for a brief moment to check where the hyperlink sends you.
+    **Tip:** Hover over the hyperlink for a moment to inspect where the hyperlink redirects you.
 
   </box>
 
-3. Refer to [Feature](#features) to understand how to interpret the formats of each command.
-
---------------------------------------------------------------------------------------------------------------------
-
-# Overview
-
-**Class Manager 2023** is an offline desktop application for CS2103/T: Software Engineering Teaching Assistants (TAs) in National University of Singapore (NUS) to manage their students' contacts and class information. 
-
-**Class Manager 2023** allows users to:
-* store and manage student's contact information,
-* keep track of and visualise student's class information such as attendance, class participation and assignment grades,
-* easily mark the attendance of multiple students for each tutorial session,
-* and much more!
-
-**Class Manager 2023** is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Since CS2103/T TAs have an adequate understanding of CLI, **Class Manager 2023** will allow class management tasks to be completed faster than traditional GUI apps.
+3. Refer to [Feature](#features) for a detailed explanation of each command and its format.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -163,7 +163,7 @@ The **GUI** has 6 notable sections:
 
 * Extraneous parameters for **commands that take in parameters** will invalidate the command. <br>
   e.g. if the input command is `delete 123 s/A0249112A` or `delete s/A0249112A c/T11`, the command will be invalid. <br>
-  Please **<u>refrain</u>** from using prefixes as input for another prefix.
+  Please **refrain** from using prefixes as input for another prefix.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines, as space characters surrounding line breaks may be omitted when copied over to the application.
 
@@ -440,7 +440,7 @@ Format: `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]…�
 * The `NAME` field is case-sensitive.
 * `PHONE` must be a 3 to 20 digit positive integer.
 
-* [<u>`STUDENT_NUMBER`</u>](#student-number) needs to be unique, and must not be blank.
+* [`STUDENT_NUMBER`](#student-number) needs to be unique, and must not be blank.
 * When a student is added, their grades, attendance and class participation details will be initialised to `0`, `absent` and `false` respectively, for all tutorials.
 * Comment for a student can only be added after the student is added to the Student List.
 
@@ -464,7 +464,7 @@ Adds or replaces a comment of an existing student in **Class Manager 2023**.
 
 Format: `comment s/STUDENT_NUMBER cm/COMMENT`
 
-* The [<u>`STUDENT_NUMBER`</u>](#student-number) must be valid and exist.
+* The [`STUDENT_NUMBER`](#student-number) must be valid and exist.
 * Every student can only have 1 comment.
 * The `COMMENT` must be a valid string.
     * Note that the `COMMENT` string must not include any prefix.
@@ -499,7 +499,7 @@ Deletes an existing student in **Class Manager 2023** by specifying the student 
 
 Format: `delete s/STUDENT_NUMBER`
 
-* The [<u>`STUDENT_NUMBER`</u>](#student-number) must be valid and exist.
+* The [`STUDENT_NUMBER`](#student-number) must be valid and exist.
 
 Example:
 * `delete s/A0249112A`
@@ -521,8 +521,8 @@ The student number entered __without__ the `s/` prefix is the **current** studen
 
 </box>
 
-* [<u>`STUDENT_NUMBER`</u>](#student-number) must be valid and exist.
-* [<u>`STUDENT_NUMBER`</u>](#student-number) must be entered before the details to be modified.
+* [`STUDENT_NUMBER`](#student-number) must be valid and exist.
+* [`STUDENT_NUMBER`](#student-number) must be entered before the details to be modified.
 * Replace the student's existing student number with `NEW_STUDENT_NUMBER`.
 * `PHONE` must be a positive integer with 3 or more digits.
 * At least one of the optional fields must be provided.
@@ -586,7 +586,7 @@ Tags the existing student in **Class Manager 2023**.
 
 Format: `tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…​`
 
-* Tags the student with the specified [<u>`STUDENT_NUMBER`</u>](#student-number).
+* Tags the student with the specified [`STUDENT_NUMBER`](#student-number).
 
 <box type="warning" seamless>
 
@@ -622,11 +622,11 @@ Other success messages of the `tag` command:
 3. Deleting all tags: `Removed all tags from Student...`
 
 Possible errors and their corresponding error messages:
-* If [<u>`STUDENT_NUMBER`</u>](#student-number) input is invalid.
+* If [`STUDENT_NUMBER`](#student-number) input is invalid.
   * Error message: `Student Number can take any value starting with capital 'A', followed by numbers, and ending with a single alphabet.`
 * If `Tag` input is invalid.
   * Error message: `Tag names should be alphanumeric`
-* If [<u>`STUDENT_NUMBER`</u>](#student-number) does not belong to any student in **Class Manager 2023**.
+* If [`STUDENT_NUMBER`](#student-number) does not belong to any student in **Class Manager 2023**.
   * Error message: `There is no student with the given student number.`
 
 [Back to Table of Contents](#table-of-contents)
@@ -642,7 +642,7 @@ Mark the tutorial attendance for an existing student as absent in **Class Manage
 
 Format: `absent s/STUDENT_NUMBER tut/TUTORIAL_INDEX`
 
-* The [<u>`STUDENT_NUMBER`</u>](#student-number) must be valid and exist.
+* The [`STUDENT_NUMBER`](#student-number) must be valid and exist.
 * The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configure-class-manager-2023--config) command.
 
 Examples:
@@ -658,7 +658,7 @@ Mark the tutorial attendance for an existing student as present in **Class Manag
 
 Format: `present s/STUDENT_NUMBER tut/TUTORIAL_INDEX`
 
-* The [<u>`STUDENT_NUMBER`</u>](#student-number) must be valid and exist.
+* The [`STUDENT_NUMBER`](#student-number) must be valid and exist.
 * The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configure-class-manager-2023--config) command.
 
 Examples:
@@ -710,7 +710,7 @@ Record the class participation for an existing student in **Class Manager 2023**
 
 Format: `class-part s/STUDENT_NUMBER tut/TUTORIAL_SESSION part/PARTICIPATION`
 
-* [<u>`STUDENT_NUMBER`</u>](#student-number) must be valid and exist.
+* [`STUDENT_NUMBER`](#student-number) must be valid and exist.
 * `TUTORIAL_SESSION` must be a valid positive integer, within the configured tutorial count given in the [**<u>`config`</u>**](#configure-class-manager-2023--config) command.
 * `PARTICIPATION` must be either `true` or `false`.
     * The `true` value indicates that the student has participated in the tutorial, while the `false` value indicates that the student has not participated in the tutorial.
@@ -731,7 +731,7 @@ Setting an assignment grade for an existing student in **Class Manager 2023**.
 
 Format: `grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE`
 
-* The [<u>`STUDENT_NUMBER`</u>](#student-number) must be valid and exist.
+* The [`STUDENT_NUMBER`](#student-number) must be valid and exist.
 * The `ASSIGNMENT_INDEX` must be a valid positive integer, within the configured assignment count given in the [**<u>`config`</u>**](#configure-class-manager-2023--config) command.
 * The `GRADE` must be a valid integer between 0 and 100.
 
@@ -748,7 +748,7 @@ View the class information of a student that will be displayed on the right side
 
 Format: `view s/STUDENT_NUMBER`
 
-* The [<u>`STUDENT_NUMBER`</u>](#student-number) must be valid and belong to a student in **Class Manager 2023**.
+* The [`STUDENT_NUMBER`](#student-number) must be valid and belong to a student in **Class Manager 2023**.
 
 Example:
 
@@ -757,7 +757,7 @@ Example:
 <img alt="result for 'view s/A0245234A'" src="images/ViewCommand.png" width="700" >
 
 Possible error and their corresponding message:
-* If [<u>`STUDENT_NUMBER`</u>](#student-number) does not belong to any student in **Class Manager 2023**.
+* If [`STUDENT_NUMBER`](#student-number) does not belong to any student in **Class Manager 2023**.
   * Error message: `Please check that the student exist in Class Manager.`
 
 [Back to Table of Contents](#table-of-contents)
