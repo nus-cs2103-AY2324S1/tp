@@ -51,7 +51,7 @@ DoConnek Pro is a **desktop app** that helps **General Practitioner Clinic Manag
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add -pa n/NAME`, `NAME` is a parameter which can be used as `add -pa n/John Doe`.
 
-* Certain commands require `-PERSON_TYPE` as a parameter. This parameter can only take two values: `-pa` or `-sp`
+* Certain commands require `-PERSON_TYPE` as a flag. This flag can only take two values: `-pa` or `-sp`
 and specifies whether the command is to act on the patients (`-pa`) or on the specialists (`-sp`) in the address book.
 
 * Items in square brackets are optional.<br>
@@ -64,7 +64,8 @@ and specifies whether the command is to act on the patients (`-pa`) or on the sp
   e.g. `[m/MEDICAL_HISTORY]…​` can be used as ` ` (i.e. 0 times), `m/Osteoporosis`, `m/Osteoporosis m/Asthma` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable. The order of the `-PERSON_TYPE` flag
+however is not flexible in this way.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -101,7 +102,8 @@ A specialist can have any number of tags (including 0)
 </div>
 
 Parameter specifications: 
-* `NAME`, `EMAIL`, `LOCATION`, `TAG`, `MEDICAL_HISTORY`, and `SPECIALISATION` can only contain alphanumeric characters.
+* `NAME`, `LOCATION`, `TAG`, `MEDICAL_HISTORY`, and `SPECIALISATION` can only contain alphanumeric characters.
+* `EMAIL` can take alphanumeric and certain special characters and must be of the format "local-part@domain".
 * `PHONE` can only contain 4 numeric characters or more.
 * `AGE` can contain any integer in the range 0 to 149 inclusive.
 
