@@ -99,7 +99,6 @@ Keep an eye out for them!
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
-[Back to Table of Contents](#table-of-contents)
 
 <div markdown="block" class="alert alert-success">
 
@@ -145,7 +144,6 @@ add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​  [i/INSTRUMENT]…​  [g/GENRE]
 
 --------------------------------------------------------------------------------------------------------------------
 ### Features for managing musicians
-[Back to Table of Contents](#table-of-contents)
 
 #### Add musician: `add`
 
