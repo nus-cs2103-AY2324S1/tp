@@ -28,7 +28,7 @@ AddTagCommandParser -> AddTagCommand : Create instance
 activate AddTagCommand
 
 
-AddTagCommand -> FlashCard: setTags(Set<Tag>)
+AddTagCommand -> FlashCard: setTags()
 activate FlashCard
 deactivate FlashCard
 AddTagCommand -> Model: updateFilteredFlashCardList()
