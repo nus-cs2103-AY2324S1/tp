@@ -68,7 +68,7 @@ The vitality of a CCA lies in its members. CCACommander allows you to manage you
 #### Create a Member: `createMember`
 When you first start CCACommander and want to populate CCACommander with your members, you can do it with just one simple command - `createMember`!
 
-Here is how you can use it:
+Here is how you can use it:<br>
 `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 Here is an example command where we create a member **named** `Lim Jun Jie` with **gender** `Male`, **phone number** of `83498018`, **email** of `limjunjie@gmail.com`, home **address** of `19 Kent Ridge Crescent, Singapore 119278` and a `publicity` **tag** to indicate he is in the publicity department:
@@ -80,14 +80,14 @@ Here is an example command where we create a member **named** `Lim Jun Jie` with
 #### Edit a Member: `editMember`
 If you accidentally make a typo while creating your member, do not worry! You can quickly fix it with the `editMember` command.
 
-Here is how you can use it:
+Here is how you can use it:<br>
 `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 <div markdown="block" class="alert alert-primary">
 :bulb: At least one field must be provided
 </div>
 
-Here is an example command where we edit the first **member** in the displayed list, changing their **phone number** to `91234567` and **email** to `johndoe@example.com`
+Here is an example command where we edit the first **member** in the displayed list, changing their **phone number** to `91234567` and **email** to `johndoe@example.com`:
 
 `editMember 1 p/91234567 e/johndoe@example.com`
 
@@ -96,7 +96,7 @@ Here is an example command where we edit the first **member** in the displayed l
 
 If a member leaves your CCA, get over the disappointment by swiftly removing them from CCACommander using the `deleteMember` command!
 
-Here is how you can use it:
+Here is how you can use it:<br>
  `deleteMember MEMBER_INDEX`
 
 Here is an example command where we delete the first **member** in the displayed list:
