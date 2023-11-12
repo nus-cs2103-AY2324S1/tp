@@ -342,6 +342,10 @@ the `AddMemberTaskCommand` class, which extend the `Command` class.
 * Step 5: After the execution of the `AddMemberTaskCommand`, the member's details are successfully edited in the member
   list.
 
+The diagram below describes this behaviour concisely. It shows how a user's command is processed and what message is ultimately shown when the task is added to a member.
+
+<img src="images/AddMemberTaskCommandActivityDiagram.png">
+
 The sequence diagram below also shows the interaction between the various components during the execution of the 
 `AddMemberTask`.
 
