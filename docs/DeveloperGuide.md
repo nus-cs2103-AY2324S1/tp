@@ -1323,4 +1323,5 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Effort**
 
-1. very effortful
+- Challenges were faced in evolving the AB3 codebase to support the new features. This was especially true when implementing the Interview features. Since we evolved the Interview components out of the original Tag components, there were many changes that had to be made in order to accommodate the functionalities we intended. For example, we wanted the ability to cumulatively add interviews to an applicant, but the original AB3 Tag system would reset the entire Tag list whenever it was edited.
+- We also faced challenges in implementing the `import` feature. This was because we had to learn how to use the OpenCSV library and decide which functionalities to include. We also had to learn how to use the `CsvToBeanBuilder<T>` class under the `com.opencsv.bean` package to parse the CSV file. While the use of OpenCSV helped to simplify the parsing process, there were still many modification we made to enable the `import` feature. For example, we also had to create a separate intermediate class `CsvApplicant` to store the data parsed from the CSV file before converting it into an `Applicant` object.
