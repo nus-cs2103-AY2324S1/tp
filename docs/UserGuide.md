@@ -2,15 +2,25 @@
 layout: page
 title: User Guide
 ---
-# TuitionConnect User Guide
+# Welcome to TuitionConnect's User Guide!
+:rocket: Introducing **TuitionConnect**: Revolutionizing your Tutoring Business! :teacher:
 
-TuitionConnect is a **desktop app for simplifying the process of administration and finance management for private tutors, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, you can maximise tracking tutee-specific details, teaching-schedule management, and finance management.
+Fed up with setting up numerous unorganized spreadsheets on Microsoft Excel or Google Sheets to handle the administrative side of you tutoring business?
+
+Or feeling overwhelmed with the ugly-looking chaos of your Google Calendar as your number of teaching schedules increase?
+
+Say goodbye to all this mess with the help of **TuitionConnect**: the ultimate desktop app designed to streamline the administrative and financial tasks of your tuition business!
+
+This user guide will teach you how to install **TuitionConnect** from scratch, as well as providing information about the interesting features of **TuitionConnect**. 
 
 ## Table of Contents
 
 <!-- TOC -->
 * [TuitionConnect User Guide](#tuitionconnect-user-guide)
   * [Table of Contents](#table-of-contents)
+  * [Introduction](#introduction)
+  * [Using this guide](#using-this-guide)
+  * [Symbols and Syntax](#symbols-and-syntax)
   * [Quick start](#quick-start)
   * [Input Formats](#input-formats)
     * [Command Format](#command-format)
@@ -38,6 +48,38 @@ TuitionConnect is a **desktop app for simplifying the process of administration 
 <!-- TOC -->
 
 --------------------------------------------------------------------------------------------------------------------
+## Introduction
+TuitionConnect is a **desktop app** built for tutors and tutoring businesses or simplifying the process of 
+administration and finance management for private tutors, optimized for use via a **Command Line Interface** (CLI) while 
+still having the benefits of a Graphical User Interface (GUI). 
+
+If you love to type, then **TuitionConnect** is the app for you! It helps you to track tutee-specific details, teaching-schedule management,
+and other financial and administrative tasks faster than your old and conventional apps like Google Calendar or Microsoft Excel
+
+Even if you are not a huge fan of typing, panic not! **TuitionConnect** was designed with you in mind! With this comprehensive User Guide,
+paired up with simple and beginner-friendly features, anyone can learn how to use **TuitionConnect** in no time!
+
+:sparkles: **Key Features:**
+1. **Effortless Administration:** Manage your tutoring schedules, student details, and lesson plans in one central hub. No more endless scrolling through messy spreadsheets or confusing calendar views!
+2. **Finance Made Easy**: Keep track of payments, and monitor your earnings effortlessly. 
+3. **Calendar Sanity**: Prevent clashes in your schedules, and find slots where you are available!
+
+:bulb: **Make the Switch Today!**
+Transform your tutoring experience with **TuitionConnect!** Jump straight to the [Quick Start Section](#quick-start) and experience **TuitionConnect** today!
+
+## Using this guide
+
+## Symbols and Syntax
+
+Throughout this User Guide, there might 
+
+| Symbol/Syntax                                  | Meaning                                                                                                                                         |
+|------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| :information_source: **Notes**                 | Information that you need to pay attention to.                                                                                                  |
+| :bulb: **Tip**                                 | Information that you may find helpful.                                                                                                          |
+| :exclamation: **Caution**                      | Information that you need to know before executing a [command](#command)                                                                        |
+| `Highlighted text block`                       | [Commands](#command) or [parameters](#parameter) that you can enter into our application, or text that is directly displayed in our application |
+| [Hyperlinked text in blue](#symbols-and-syntax) | When it is pressed, it should lead you to another section in the document or to an external link.                                               |
 
 ## Quick start
 
@@ -121,6 +163,7 @@ Shows a message that helps redirects you to the user guide.
 
 **Expected Output when the command fails**:
 
+
 * **Invalid Name**: Names should only contain alphanumeric characters and spaces, and it should not be blank
 * **Duplicate tutee**: This tutee already exists
 * **Invalid Phone number**: Phone numbers should only contain numbers, and it should be at least 3 digits long
@@ -132,6 +175,10 @@ Shows a message that helps redirects you to the user guide.
 * **Invalid Begin**: Begin has a format of HHMM
 * **Invalid End**: That is not a valid time format. End has a format of HHMM
 * **Invalid PayRate**: PayRate can be either integers or decimals of up to 2 decimal places. It cannot be negative
+* **Duplicate tutee**: This tutee already exists
+* **Clashing Schedules**: This date and time clashes with an existing schedule. 
+  * This error occurs if the tutee that is
+  trying to be added has DAY/BEGIN/END fields that overlaps with an exisiting tutee.
 
 **Examples**:
 * `add n/John Doe p/98765432 e/johnny@example.com a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 end/1600 pr/20.00`
