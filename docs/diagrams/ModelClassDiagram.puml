@@ -19,7 +19,9 @@ Class Groups
 Class Name
 Class Phone
 Class FreeTimes
-
+Class GroupList
+class TimeIntervalList
+class TimeInterval
 Class I #FFFFFF
 }
 
@@ -37,11 +39,17 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
+
+AddressBook *--> "1" GroupList
+GroupList --> "*" Groups
+
 Person *--> Name
 Person *--> Phone
-Person *--> "*" Groups
+Person *--> "1" GroupList
 Person *--> Email
-Person *--> "*" FreeTimes
+Person *--> "1" TimeIntervalList
+
+TimeIntervalList --> "*" TimeInterval
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I

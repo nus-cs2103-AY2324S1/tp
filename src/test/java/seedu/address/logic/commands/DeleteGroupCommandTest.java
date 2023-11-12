@@ -4,9 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.DeletePersonCommand.MESSAGE_DELETE_PERSON_SUCCESS;
+import static seedu.address.logic.commands.DeleteGroupCommand.MESSAGE_DELETE_GROUP_SUCCESS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalGroups.CS2103;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -29,96 +29,100 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupRemark;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
  * {@code DeleteCommand}.
  */
-public class DeletePersonCommandTest {
+public class DeleteGroupCommandTest {
 
     @Test
-    public void execute_existingPersonWithNoGroup_deleteSuccessful() throws Exception {
-        Person validPerson = new PersonBuilder().withName(PersonBuilder.DEFAULT_NAME).build();
-        DeletePersonCommandTest.ModelStubWithPersonToDelete modelStub =
-                new DeletePersonCommandTest.ModelStubWithPersonToDelete(validPerson);
+    public void execute_existingGroupWithNoMembers_deleteSuccessful() throws Exception {
+        Group validGroup = new GroupBuilder().withName(GroupBuilder.DEFAULT_GROUP_NAME).build();
+        DeleteGroupCommandTest.ModelStubWithGroupToDelete modelStub =
+                new DeleteGroupCommandTest.ModelStubWithGroupToDelete(validGroup);
 
         CommandResult commandResult =
-                new DeletePersonCommand(validPerson.getName().toString()).execute(modelStub);
+                new DeleteGroupCommand(validGroup.getGroupName()).execute(modelStub);
 
-        assertEquals(String.format(MESSAGE_DELETE_PERSON_SUCCESS, PersonBuilder.DEFAULT_NAME),
+        assertEquals(String.format(MESSAGE_DELETE_GROUP_SUCCESS, GroupBuilder.DEFAULT_GROUP_NAME),
                 commandResult.getFeedbackToUser());
-        ArrayList<Person> emptyPersonList = new ArrayList<>();
-        assertEquals(emptyPersonList, modelStub.persons); // checks person removed from contact list
-
+        ArrayList<Group> emptyGroupList = new ArrayList<>();
+        assertEquals(emptyGroupList, modelStub.groups); // checks group removed from contact list
     }
 
     @Test
-    public void execute_existingPersonWithGroup_deleteSuccessful() throws Exception {
-        String grpName = "CS2103";
-        Person validPerson =
-                new PersonBuilder().withName(PersonBuilder.DEFAULT_NAME).withGroupList(grpName).build();
-        DeletePersonCommandTest.ModelStubWithPersonToDelete modelStub =
-                new DeletePersonCommandTest.ModelStubWithPersonToDelete(validPerson);
-        CommandResult commandResult =
-                new DeletePersonCommand(validPerson.getName().toString()).execute(modelStub);
+    public void execute_existingGroupWithMembers_deleteSuccessful() throws Exception {
+        Person member = new PersonBuilder().withName(PersonBuilder.DEFAULT_NAME).build();
+        Group validGroup =
+                new GroupBuilder().withName(GroupBuilder.DEFAULT_GROUP_NAME).build();
 
-        assertEquals(String.format(String.format(MESSAGE_DELETE_PERSON_SUCCESS, PersonBuilder.DEFAULT_NAME)),
+        validGroup.addPerson(member);
+        member.addGroup(validGroup);
+
+        DeleteGroupCommandTest.ModelStubWithGroupToDelete modelStub =
+                new DeleteGroupCommandTest.ModelStubWithGroupToDelete(validGroup);
+        CommandResult commandResult =
+                new DeleteGroupCommand(validGroup.getGroupName()).execute(modelStub);
+
+        assertEquals(String.format(String.format(MESSAGE_DELETE_GROUP_SUCCESS, GroupBuilder.DEFAULT_GROUP_NAME)),
                 commandResult.getFeedbackToUser());
 
-        ArrayList<Person> emptyPersonList = new ArrayList<>();
-        assertEquals(emptyPersonList, modelStub.persons); // checks person removed from contact list
-        assertFalse(modelStub.groups.get(0).contains(validPerson)); // checks if person is deleted from grp
+        ArrayList<Group> emptyGroupList = new ArrayList<>();
+        assertEquals(emptyGroupList, modelStub.groups); // checks group removed from contact list
+        assertFalse(modelStub.persons.get(0).containsGroup(validGroup)); // checks if group is deleted from members
     }
 
     @Test
-    public void execute_nonexistentPerson_throwsCommandException() {
-        // person does not exist in address book
-        Person nonexistentPerson = new PersonBuilder().build();
-        DeletePersonCommand deletePersonCommand =
-                new DeletePersonCommand(nonexistentPerson.getName().toString());
-        DeletePersonCommandTest.ModelStub modelStub =
-                new DeletePersonCommandTest.ModelStubDeletingPerson();
+    public void execute_nonexistentGroup_throwsCommandException() {
+        // group does not exist in address book
+        Group nonexistentGroup = new GroupBuilder().build();
+        DeleteGroupCommand deleteGroupCommand =
+                new DeleteGroupCommand(nonexistentGroup.getGroupName());
+        DeleteGroupCommandTest.ModelStub modelStub =
+                new DeleteGroupCommandTest.ModelStubDeletingGroup();
 
         assertThrows(CommandException.class,
-                Messages.MESSAGE_NO_PERSON_WITH_NAME_FOUND, () -> deletePersonCommand.execute(modelStub));
+                Messages.MESSAGE_NO_GROUP_WITH_NAME_FOUND, () -> deleteGroupCommand.execute(modelStub));
 
         // empty input
         String emptyInput = "";
-        assertThrows(CommandException.class, Messages.MESSAGE_NO_PERSON_WITH_NAME_FOUND, () ->
-                new DeletePersonCommand(emptyInput).execute(modelStub));
+        assertThrows(CommandException.class,
+                Messages.MESSAGE_NO_GROUP_WITH_NAME_FOUND, () -> new DeleteGroupCommand(emptyInput).execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        DeletePersonCommand deleteAliceCommand = new DeletePersonCommand(alice.getName().fullName);
-        DeletePersonCommand deleteBobCommand = new DeletePersonCommand(bob.getName().fullName);
+        Group cs2103 = new GroupBuilder().withName("CS2103").build();
+        Group cs2103T = new GroupBuilder().withName("CS2103T").build();
+        DeleteGroupCommand deleteCS2103Command = new DeleteGroupCommand(cs2103.getGroupName());
+        DeleteGroupCommand deleteCS2103TCommand = new DeleteGroupCommand(cs2103T.getGroupName());
 
         // same object -> returns true
-        assertTrue(deleteAliceCommand.equals(deleteAliceCommand));
+        assertTrue(deleteCS2103Command.equals(deleteCS2103Command));
 
         // same values -> returns true
-        DeletePersonCommand deleteAliceCommandCopy = new DeletePersonCommand(alice.getName().fullName);
-        assertTrue(deleteAliceCommand.equals(deleteAliceCommandCopy));
+        DeleteGroupCommand deleteCS2103CommandCopy = new DeleteGroupCommand(CS2103.getGroupName());
+        assertTrue(deleteCS2103Command.equals(deleteCS2103CommandCopy));
 
         // different types -> returns false
-        assertFalse(deleteAliceCommand.equals(1));
+        assertFalse(deleteCS2103Command.equals(1));
 
         // null -> returns false
-        assertFalse(deleteAliceCommand.equals(null));
+        assertFalse(deleteCS2103Command.equals(null));
 
         // different person -> returns false
-        assertFalse(deleteAliceCommand.equals(deleteBobCommand));
+        assertFalse(deleteCS2103Command.equals(deleteCS2103TCommand));
     }
 
     @Test
     public void toStringMethod() {
-        DeletePersonCommand deletePersonCommand = new DeletePersonCommand(ALICE.getName().fullName);
+        DeleteGroupCommand deleteGroupCommand = new DeleteGroupCommand(CS2103.getGroupName());
         String expected =
-                DeletePersonCommand.class.getCanonicalName() + "{name=" + ALICE.getName().fullName + "}";
-        assertEquals(expected, deletePersonCommand.toString());
+                DeleteGroupCommand.class.getCanonicalName() + "{group name=" + CS2103.getGroupName() + "}";
+        assertEquals(expected, deleteGroupCommand.toString());
     }
 
     /**
@@ -284,9 +288,9 @@ public class DeletePersonCommandTest {
 
 
     /**
-     * A Model stub that deletes the person.
+     * A Model stub that deletes the group.
      */
-    private class ModelStubDeletingPerson extends DeletePersonCommandTest.ModelStub {
+    private class ModelStubDeletingGroup extends DeleteGroupCommandTest.ModelStub {
         final ArrayList<Person> persons = new ArrayList<>();
 
         final ArrayList<Group> groups = new ArrayList<>();
@@ -298,15 +302,15 @@ public class DeletePersonCommandTest {
         }
 
         @Override
-        public Person deletePerson(String personName) throws CommandException {
-            requireNonNull(personName);
-            for (Person person : persons) {
-                if (person.getName().fullName.equals(personName)) {
-                    persons.remove(person);
-                    return person;
+        public Group deleteGroup(String groupName) throws CommandException {
+            requireNonNull(groupName);
+            for (Group group : groups) {
+                if (group.getGroupName().equals(groupName)) {
+                    groups.remove(group);
+                    return group;
                 }
             }
-            throw new CommandException(Messages.MESSAGE_NO_PERSON_WITH_NAME_FOUND);
+            throw new CommandException(Messages.MESSAGE_NO_GROUP_WITH_NAME_FOUND);
         }
 
         @Override
@@ -319,18 +323,19 @@ public class DeletePersonCommandTest {
         public AddressBook getAddressBook() {
             return new AddressBook();
         }
+
     }
 
     /**
-     * A Model stub that contains a single person to be deleted.
+     * A Model stub that contains a single group to be deleted.
      */
-    private class ModelStubWithPersonToDelete extends DeletePersonCommandTest.ModelStubDeletingPerson {
+    private class ModelStubWithGroupToDelete extends DeleteGroupCommandTest.ModelStubDeletingGroup {
 
-        ModelStubWithPersonToDelete(Person person) {
-            requireNonNull(person);
-            super.persons.add(person);
-            person.getGroups().toStream().forEach(
-                    g -> super.groups.add(g)
+        ModelStubWithGroupToDelete(Group group) {
+            requireNonNull(group);
+            super.groups.add(group);
+            group.getListOfGroupMates().forEach(
+                    p -> super.persons.add(p)
             );
         }
     }
