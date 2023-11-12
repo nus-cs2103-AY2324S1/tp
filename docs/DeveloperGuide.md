@@ -370,33 +370,60 @@ This section describes some enhancement that can be made to the existing app.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                | So that I can…​                                                                                                             |
-|----------|--------------------------------------------|-----------------------------|-----------------------------------------------------------------------------------------------------------------------------|
-| `* * *`  | new user                                               | get a list of the commands  | know how to use the commands and their parameters                                                                           |
-| `* * *`  | user                                                       | add a new contact           | record one person's phone number and email address                                                                          |
-| `* * *`  | user                                                       | delete a contact            | remove a contact (by name) that I do not need                                                                               |
-| `* * *`  | user                                                       | view all contact            | easily see and know what contacts are currently stored in the application in one place                                      |
-| `* *`    | user                                                        | view all notes              | easily see and know what notes are currently stored in the application in one place                                         |
-| `* *`    | user                                                        | add notes to a contact      | record additional information about that contact as a note                                                                  |
-| `* *`    | user                                                        | delete notes to a contact   | remove additional information about that contact that are no longer relevant                                                |
-| `* *`    | user who has some event to do             | add an event                | record an event with start time and also end time, location and any additional information like what to do during the event |
-| `* *`    | user who has/had some event to do      | delete an event             | remove an event after it is obsolete, cancelled or no longer needed to be recorded                                          |
-| `* *`    | tidy user | tag a contact with a label  | keep my contacts oraganised and categorised                                                                                 |
-| `* *`    | tidy user | delete a tag from a contact | remove tags that are no longer relevant                                                                                     |
-| `* * *`  | user who finishes using the application  | exit the program            | exit the program normally while ensuring all my data is currectly saved                                                     |
+| Priority | As a …​                            | I want to …​                  | So that I can…​                                                                                                             |
+|----------|------------------------------------|-------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | new user                           | get help on commands          | know how to use the commands and their parameters                                                                           |
+| `* * *`  | user                               | add a new contact             | record one person's phone number and email address                                                                          |
+| `* * *`  | user                               | delete a contact              | remove a contact (by name) that I do not need                                                                               |
+| `* * *`  | user                               | view all contacts             | easily see and know what contacts are currently stored in the application in one place                                      |
+| `* *`    | user                               | find a contact                | easily find contacts which names match one of the specified keywords.                                                       |
+| `* *`    | user                               | add a note to a contact       | record additional information about that contact as a note                                                                  |
+| `* *`    | user                               | delete a note from a contact  | remove additional information about that contact that are no longer relevant                                                |
+| `* *`    | user who has some event to do      | add an event                  | record an event with start time and also end time, location and any additional information like what to do during the event |
+| `* *`    | user who has/had some event to do  | delete an event               | remove an event after it is obsolete, cancelled or no longer needed to be recorded                                          |
+| `* *`    | user who has some event to do      | filter events                 | easily see and know which events are within a specified time interval                                                       |
+| `* *`    | tidy user                          | tag a contact with a label    | keep my contacts oraganised and categorised                                                                                 |
+| `* *`    | tidy user                          | delete tags from a contact    | remove tags that are no longer relevant                                                                                     |
+| `* *`    | tidy user                          | filter contacts based on tags | easily see and know which contacts contain one of the specified tags                                                        |
+| `* *`    | user                               | clear all data                | remove all unused data and start managing a new contact list                                                                |
+| `* * *`  | user who finishes using the application | exit the program              | exit the program normally while ensuring all my data is currectly saved                                                     |
 
 ### Use cases
 
 (For all use cases below, the **System** is the `KeepInTouch` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - View command list**
+**Use case: UC01 - Get help on commands**
 
 **MSS**
 
-1.  User requests to view command list.
-2.  KeepInTouch shows the command list.
+1.  User requests for help.
+2.  KeepInTouch returns relevant documentation.
 
     Use case ends.
+
+**Extensions**
+
+* 1a. User inputs with no extra argument.
+
+    * 1a1. KeepInTouch shows a list of all command words.
+
+      Use case ends.
+
+* 1b. User inputs with an extra argument corresponding to a command.
+
+    * 1b1. Extra argument is a command word.
+
+        * KeepInTouch returns documentation on that command word.
+
+    * 1b2. Extra argument is not a command word, but is quite similar to a command.
+
+        * KeepInTouch suggests the command word with the highest degree of similarity to the command input.
+
+    * 1b3. Extra argument is not a command word, and isn't recognizably close to a command word.
+
+        * KeepInTouch lets the user know that the command is unrecognizable.
+
+      Use case ends.
 
 **Use case: UC02 - Add a new contact**
 
@@ -432,12 +459,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. KeepInTouch shows a message indicating that the contact cannot be found.
       Use case ends.
 
-* 2a. The contact list is empty.
-
-    * 2a1. KeepInTouch shows a message indicating the empty contact list.
-
-      Use case ends.
-
 **Use case: UC04 - View all contacts**
 
 **MSS**
@@ -447,15 +468,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Extensions**
+**Use case: UC05 - Find a contact**
 
-* 2a. The contact list is empty.
+**MSS**
 
-    * 2a1. KeepInTouch shows a message indicating the empty contact list.
+1.  User requests to find contacts which name matches one of the specified keywords.
+2.  KeepInTouch shows contacts with matching names.
 
-      Use case ends.
+    Use case ends.
 
-**Use case: UC05 - Add a note to a contact**
+**Use case: UC06 - Add a note to a contact**
 
 **MSS**
 
@@ -478,7 +500,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-**Use case: UC06 - Delete a note from a contact**
+**Use case: UC07 - Delete a note from a contact**
 
 **MSS**
 
@@ -507,7 +529,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC07 - Add an event**
+**Use case: UC08 - Add an event**
 
 **MSS**
 
@@ -524,7 +546,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-**Use case: UC08 - Delete an event**
+**Use case: UC09 - Delete an event**
 
 **MSS**
 
@@ -547,40 +569,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC09 - Get help on commands**
+**Use case: UC10 - Filter events**
 
 **MSS**
 
-1.  User requests for help.
-2.  KeepInTouch returns relevant documentation.
+1.  User requests to find events within a specified time interval.
+2.  KeepInTouch shows the events within the specified time interval.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User inputs with no extra argument.
+* 1a. User inputs incomplete or invalid data.
 
-    * 1a1. KeepInTouch shows a list of all command words.
-
-      Use case ends.
-
-* 1b. User inputs with an extra argument corresponding to a command.
-
-    * 1b1. Extra argument is a command word.
-
-      * KeepInTouch returns documentation on that command word.
-
-    * 1b2. Extra argument is not a command word, but is quite similar to a command.
-
-      * KeepInTouch suggests the command word with the highest degree of similarity to the command input.
-
-    * 1b3. Extra argument is not a command word, and isn't recognizably close to a command word.
-
-      * KeepInTouch lets the user know that the command is unrecognizable.
+    * 1a1. KeepInTouch shows a message indicating incomplete or invalid data.
 
       Use case ends.
 
-**Use case: UC10 - Adding tags to a contact**
+**Use case: UC11 - Add tags to a contact**
 
 **MSS**
 
@@ -608,7 +614,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC11 - Delete tags from a contact**
+**Use case: UC12 - Delete tags from a contact**
 
 **MSS**
 
@@ -636,7 +642,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC12 - Exit the program**
+**Use case: UC13 - Filter contacts based on tags**
+
+**MSS**
+
+1.  User requests to find contacts with one of the specified tags.
+2.  KeepInTouch shows the filtered contacts.
+
+    Use case ends.
+
+**Use case: UC14 - Clear all data**
+
+**MSS**
+
+1.  User requests to remove all unused data.
+2.  KeepInTouch clears all the data.
+
+    Use case ends.
+
+**Use case: UC15 - Exit the program**
 
 **MSS**
 
