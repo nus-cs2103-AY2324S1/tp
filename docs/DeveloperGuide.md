@@ -206,7 +206,9 @@ The `Storage` component,
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
 ### Common classes
+
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components. They are in the `seedu.addressbook.commons` package.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
