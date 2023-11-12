@@ -147,7 +147,7 @@ like `toString()` would throw errors, violating type safety.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" width="600" />
 
 </div>
 
@@ -613,7 +613,7 @@ Should work on any _mainstream OS_ as long as it has Java `11` or above installe
 
 ## **Appendix: Instructions for manual testing**
 
-Given below are instructions to test the app manually.
+Given below are instructions to test the application manually.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
@@ -661,3 +661,50 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+{To be filled by Yao Xuan}
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+Below are the planned enhancements to add in the near future to existing features.
+
+### Deleting policy attached to client
+
+1. The current implementation of `edit` does not restrict the users to pass in the default values for the Policy fields 
+i.e. `!@#NO_COMPANY!@#` for `Company`, `NOPOLICY` for `PolicyNumber` and `01-01-1000` for `PolicyDate`
+2. Hence, if any of the default values of the Policy fields is passed in the `edit` command 
+e.g. `edit 1 c/!@#NO_COMPANY!@#` or `edit 1 pn/NOPOLICY`, it deletes the policy attached to that client at index 1
+3. We plan to make a separate command (potential name: `policydelete`) to allow users to delete the policy attached to a client, and restrict the user
+from using the default values in the `edit` command
+
+![DeletePolicyFromEdit](images/DeletePolicyFromEdit.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The `add` command does not restrict the user from using default values for the Policy fields as well. 
+However, it doesn't matter since the Policy field in `add` is optional. </div>
+
+### Display clients with expired policy
+
+1. The current implementation of `remind` only shows clients with policy expiry dates that are approaching within a certain number of days as specified by the user
+e.g. `remind 30` will show clients with policy expiry dates within the next 30 days, `remind 60` will show clients with policy expiry dates within the next 60 days
+2. However, for clients whose policy expiry dates passed the current date, `remind` does not display those clients
+3. Hence, the `remind` command will not be able to accurately display the list of clients as it excludes those clients whose policy expiry dates passed the current date
+4. We plan to make a separate command (potential name: `expiry`) to display the list of clients that has policy expiry dates passed the current date
+
+### Successful commands are cleared from the command box
+
+1. The current implementations of all commands is as such:
+   1. If the command fails, the command will be highlighted in red and presents the error message in the result box
+   ![CommandFail](images/CommandFail.png)
+   2. If the command succeed, the result of the command will be shown in the result box and the changes to the client list
+   ![CommandSuccess](images/CommandSuccess.png)
+2. With each successful command, the command box will be cleared and the result box will show the latest successful command
+3. Hence, if there are multiple successful commands, the user will have no ability to keep track on what commands he used so far
+4. We plan to allow the recovery of previously succeeded commands using the _up arrow key_ (Just like in UNIX OS)
+
+
