@@ -20,7 +20,7 @@ So, no more waiting! Let's start creating your first dream band now!
 --------------------------------------------------------------------------------------------------------------------
 
 ## Using the Guide
-This user guide walks you through the essential features of *BandConnect++*, familiarises you with the [CLI](#glossary) commands, and provides the best help we can if problem arises. We have made this guide beginner-friendly so that anyone who has used a software application before should have no trouble understanding it!
+This user guide walks you through the essential features of *BandConnect++*, familiarises you with the [CLI](#glossary) commands, [GUI](#glossary) interface, and provides the best help we can if problem arises. We have made this guide beginner-friendly so that anyone who has used a software application before should have no trouble understanding it!
 
 Whether you are new to our application or a seasoned user, you can always find something useful in this guide. 
 
@@ -61,7 +61,7 @@ Keep an eye out for them!
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
-1. Ensure you have Java 11 or above installed in your Computer. If you have never downloaded it before, download from [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
+1. Ensure you have [Java 11](#glossary) or above installed in your Computer. If you have never downloaded it before, download from [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
 
 2. Download the latest version of [BandConnect++](https://github.com/AY2324S1-CS2103T-W11-3/tp/releases/latest).
@@ -93,6 +93,7 @@ Keep an eye out for them!
    * `exit` : Exits the app.
    
     <br>
+   
     Please refer to the [Features](#features) below for details of each command.
 
 
@@ -163,7 +164,7 @@ Name, phone number, email, tag, instrument, genre about the musician can all be 
 * `add n/Betsy Crowe e/pianistbetsy@smtp.com p/87988039 i/piano g/pop g/rock`
 
 **Things to Note**
-* To add the instruments and genres the musician specialises in using the `i/` and `g/` prefixes, you can only add the instruments and genres included in a pre-defined list of instruments and genres. Refer to the [tags](#show-all-valid-instruments-and-genres-tags) command for more information.
+* To add the instruments and genres the musician specialises in using the `i/` and `g/` prefixes, you can only add the instruments and genres included in a [pre-defined list](#show-all-valid-instruments-and-genres-tags) of instruments and genres. 
 
 
 **Upon success:**
@@ -592,14 +593,22 @@ If you wish, please refer to the below section for a more succinct [command summ
 
 ## Command summary
 
+### List of Valid Instruments/Genres
+
+|    Type     |                               Acceptable Values (lowercase only)                                |
+|:-----------:|:-----------------------------------------------------------------------------------------------:|
+| Instruments |  bass, cello, clarinet, drums, flute, guitar, piano, saxophone, trumpet, violin, voice, other   |
+|   Genres    | blues, classical, country, electronic, folk, hiphop, jazz, latin, metal, pop, rock, soul, other |
+
+
 ### Musician Command summary
 
-| Action                                         | Format                                                                                   | Examples                                                                                                        |
-|------------------------------------------------|------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
-| **[Add Musician](#add-musician-add)**          | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`               | `add n/Betsy Crowe e/pianistbetsy@smtp.com p/87988039 i/piano g/pop g/rock`                                     |
-| **[Delete Musician](delete-musician--delete)** | `delete INDEX`                                                                           | `delete 1`                                                                                                      |
-| **[Edit Musician](#edit-musician--edit)**      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`  | `edit 2 e/pianistbetsy@edited.com i/violin t/available`                                                         |
-| **[Find Musicians](#find-musicians--find)**    | `find [n/NAME]…​ [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`                                 | `find n/John i/Piano`                                                                                           |
+| Action                                        | Format                                                                                   | Examples                                                                                                        |
+|-----------------------------------------------|------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
+| **[Add Musician](#add-musician-add)**         | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`               | `add n/Betsy Crowe e/pianistbetsy@smtp.com p/87988039 i/piano g/pop g/rock`                                     |
+| **[Delete Musician](delete-musician-delete)** | `delete INDEX`                                                                           | `delete 1`                                                                                                      |
+| **[Edit Musician](#edit-musician-edit)**      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`  | `edit 2 e/pianistbetsy@edited.com i/violin t/available`                                                         |
+| **[Find Musicians](#find-musicians-find)**    | `find [n/NAME]…​ [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`                                 | `find n/John i/Piano`                                                                                           |
 
 
 ### Band Command summary
@@ -607,20 +616,20 @@ If you wish, please refer to the below section for a more succinct [command summ
 | Action                                                              | Format                                                                                   | Examples                                                 |
 |---------------------------------------------------------------------|------------------------------------------------------------------------------------------|----------------------------------------------------------|
 | **[Create Band](#create-band-addb)**                                | `addb n/BANDNAME [g/GENRE]…​`                                                            | `addb n/Ace Jazz g/jazz g/blues`                         |
-| **[Delete Band](#delete-a-band--deleteb)**                          | `deleteb INDEX`                                                                          | `deleteb 1`                                              |
-| **[Edit Band](#edit-a-band--editb)**                                | `editb INDEX n/BANDNAME [g/GENRE]…​`                                                     | `editb 1 n/Ace Jazz g/jazz`                              |
-| **[Add Musicians to Band](#add-musician-to-band--addm)**            | `addm b/BAND_INDEX m/MUSICIAN_INDEX…​`                                                   | `addm b/1 m/1 m/2`                                       |
+| **[Delete Band](#delete-a-band-deleteb)**                           | `deleteb INDEX`                                                                          | `deleteb 1`                                              |
+| **[Edit Band](#edit-a-band-editb)**                                 | `editb INDEX n/BANDNAME [g/GENRE]…​`                                                     | `editb 1 n/Ace Jazz g/jazz`                              |
+| **[Add Musicians to Band](#add-musician-to-band-addm)**             | `addm b/BAND_INDEX m/MUSICIAN_INDEX…​`                                                   | `addm b/1 m/1 m/2`                                       |
 | **[Remove Musician from Band](#remove-musician-from-band-removem)** | `removem b/BANDINDEX m/MUSICIANINDEX`                                                    | `removem b/1 m/1`                                        |
-| **[Find Band](#find-band--findb)**                                  | `findb BANDNAME`                                                                         | `findb theory X`                                         |
+| **[Find Band](#find-band-findb)**                                   | `findb BANDNAME`                                                                         | `findb theory X`                                         |
  
 ### General Command summary
 
-| Action                                                                  | Format                                                                                    |
-|-------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
-| **[Show All Tags](#show-all-valid-instruments-and-genres--tags)**       | `tags`                                                                                    |  
-| **[List All Musicians and Bands](#list-all-musicians-and-bands--list)** | `list`                                                                                    |
-| **[Clear Data](#clear-data--clear)**                                    | `clear`                                                                                   |
-| **[Exit App](#exit-app--exit)**                                         | `exit`                                                                                    |
+| Action                                                                 | Format                                                                                    |
+|------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| **[Show All Tags](#show-all-valid-instruments-and-genres-tags)**       | `tags`                                                                                    |  
+| **[List All Musicians and Bands](#list-all-musicians-and-bands-list)** | `list`                                                                                    |
+| **[Clear Data](#clear-data-clear)**                                    | `clear`                                                                                   |
+| **[Exit App](#exit-app-exit)**                                         | `exit`                                                                                    |
 
 [Back To ToC](#table-of-contents)
 
