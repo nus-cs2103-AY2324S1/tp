@@ -251,7 +251,7 @@ If you want to view the members which a particular event has, you can do so via 
 Here’s how you can use it:
 `viewEvent EVENT_INDEX`
 
-Here is an example command where we want to view the members that the event at index 1 of our event list has:
+Here is an example command where we want to view the members that the **event** at index 1 of our event list has:
 
 `viewEvent 1`
 
@@ -266,13 +266,6 @@ Here is an example command where we want to view the members that the event at i
          alt="viewEvent Post Command">
     <figcaption>After executing the <code>viewEvent</code> command</figcaption>
 </figure>
-
-<div markdown="block" class="alert alert-primary">:bulb:
-It is strongly recommended that you list all members and events using the `list` command first to ensure you have a 
-full view of all members and events in CCACommander before carrying out the `viewMember` or `viewEvent` command. This 
-is because the `MEMBER_INDEX` in `viewMember` and `EVENT_INDEX` in `viewIndex` are based on the indexes in the currently 
-displayed list view.
-</div>
 
 <hr class="command-separator">
 
