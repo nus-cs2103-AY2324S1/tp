@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User inputs Sort Command;
+
+if () then ([else])
+  :Display error message;
+else ([Valid command format])
+  if () then ([else])
+    :Display error message;
+  else ([Valid field])
+    if () then ([else])
+        :Display error message;
+    else ([Valid order])
+        : Sort all employees by specified field and order;
+    endif
+  endif
+endif
+
+stop
+
+@enduml

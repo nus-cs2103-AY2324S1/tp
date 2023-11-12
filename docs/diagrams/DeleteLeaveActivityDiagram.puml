@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User inputs Delete Leave Command;
+
+if () then ([else])
+  :Display error message;
+else ([Valid command format])
+  if () then ([else])
+    :Display error message;
+  else ([Valid ID])
+    if () then ([else])
+        :Display error message;
+    else ([Valid date format])
+        if () then ([else])
+            :Display error message;
+        else ([no leave found between start and end dates])
+            if () then ([else])
+                :Display error message;
+            else ([leaves found between start and end dates])
+                : Delete leaves found between start and end dates;
+            endif
+        endif
+    endif
+  endif
+endif
+
+stop
+
+@enduml
