@@ -324,6 +324,21 @@ The `ClearCommand` class implements this command.
 
 ---
 
+### Interview and Interview Commands
+
+
+#### Implementation
+
+The following sequence diagram illustrates the process of invocation for the command:
+
+(insert UML sequence diagram)
+
+The `ClearCommand` class implements this command.
+
+#### Design considerations
+
+---
+
 ## **Appendix A: Requirements**
 
 ### Product scope
