@@ -75,7 +75,7 @@ Refer to the table below for details on each GUI component
 | Index             | Displays the index of the person in the contact list. This index is used for commands such as editing and deleting persons or events.             |
 |Event list         | Displays the list of events in your FumbleLog. You can scroll through the list of events using the scroll bar on the right of the list.          |
 
-
+[Scroll back to Table of Contents](#table-of-contents)
 
 # FumbleLog Tutorial
 This tutorial is designed for new users looking to get started using FumbleLog. In this tutorial, you will find step-by-step instructions on how to use commands in FumbleLog to help you manage
@@ -95,6 +95,7 @@ your contacts and events better.
 7. Finally, when the event is over, you can **delete the event** easily by using the index of the event (in this case 1): `delete_event 1`.
 8. **Well done!** You have mastered the basics of FumbleLog! Now you can visit the [Features section](#features) to learn advanced commands!
 
+[Scroll back to Table of Contents](#table-of-contents)
 
 # Features
 
