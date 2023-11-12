@@ -141,7 +141,19 @@ For more details about the parsing and command execution processes, refer to "[I
 ### Model Component
 
 ### Storage Component
+**API:**
+[`Storage.java`](https://github.com/AY2324S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/application/storage/Storage.java)
 
+**Description:**
+The `Storage` component is responsible for storing the job applications data in JSON format.
+
+**Functionality:**
+The `Storage` component,
+* can save `Userpref` objects in json format and read it back.
+* can save the job application data in json format and read it back.
+
+**Component Structure:**
+<img src="images/developer-guide/StorageClassDiagram.png" width="900" />
 ### Common Classes
 
 ---
@@ -338,9 +350,42 @@ The clear command allows the user to delete all job applications.
 
 The following sequence diagram illustrates the process of invocation for the command:
 
-(insert UML sequence diagram)
+<img src="images/developer-guide/ClearCommandSequenceDiagram.png" />
 
 The `ClearCommand` class implements this command.
+
+#### Design considerations
+
+---
+
+### Interview and Interview Commands
+
+#### Implementation
+
+
+#### Interview
+
+<img src="images/developer-guide/InterviewClassDiagram.png" />
+
+#### Interview Commands
+
+<img src="images/developer-guide/InterviewCommandClassDiagram.png" />
+
+#### Interview Add Command
+
+
+<img src="images/developer-guide/InterviewAddCommandSequenceDiagram.png" />
+<img src="images/developer-guide/InterviewAddCommandParserSequenceDiagram.png" />
+
+#### Interview Delete Command
+
+<img src="images/developer-guide/InterviewDeleteCommandSequenceDiagram.png" />
+<img src="images/developer-guide/InterviewDeleteCommandParserSequenceDiagram.png" />
+
+#### Interview Edit Command
+
+<img src="images/developer-guide/InterviewEditCommandSequenceDiagram.png" />
+<img src="images/developer-guide/InterviewEditCommandParserSequenceDiagram.png" />
 
 #### Design considerations
 

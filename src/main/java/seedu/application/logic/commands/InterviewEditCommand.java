@@ -7,7 +7,6 @@ import static seedu.application.logic.parser.CliSyntax.PREFIX_INTERVIEW_DATETIME
 import static seedu.application.logic.parser.CliSyntax.PREFIX_INTERVIEW_TYPE;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_JOB_SOURCE;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -72,13 +71,12 @@ public class InterviewEditCommand extends InterviewCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Job> lastShownList = model.getFilteredJobList();
 
-        if (jobIndex.getZeroBased() >= lastShownList.size()) {
+        if (jobIndex.getZeroBased() >= model.getFilteredJobList().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_JOB_DISPLAYED_INDEX);
         }
 
-        Job jobToEditInterview = lastShownList.get(jobIndex.getZeroBased());
+        Job jobToEditInterview = getJob(model, jobIndex);
 
         if (interviewIndex.getZeroBased() >= jobToEditInterview.interviewLength()) {
             throw new CommandException(Messages.MESSAGE_INVALID_INTERVIEW);

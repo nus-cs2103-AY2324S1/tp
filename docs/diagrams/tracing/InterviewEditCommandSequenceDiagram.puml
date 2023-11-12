@@ -1,0 +1,39 @@
+@startuml
+!include ../style.puml
+skinparam ArrowFontStyle plain
+
+box Logic #skyblue
+Participant ":InterviewEditCommand" as iec LOGIC_COLOR
+Participant ":CommandResult" as cr LOGIC_COLOR
+end box
+
+box Model #pink
+Participant "jobToEditInterview:Job" as j MODEL_COLOR
+Participant "editedInterview:Interview" as i MODEL_COLOR
+end box
+
+[-> iec ++: execute()
+iec -> j ++: getJob()
+j --> iec--: jobToEditInterview
+
+iec -> j ++: getInterview()
+j --> iec--: interviewToEdit
+
+iec -> iec: createEditedInterview()
+activate iec
+create i
+iec -> i ++: Interview()
+i --> iec --: editedInterview
+iec --> iec
+
+deactivate iec
+
+iec -> j ++: setInterview(interviewToEdit, editedInterview)
+deactivate j
+
+create cr
+iec -> cr ++: CommandResult()
+cr -->iec --: result
+iec -->[ --: result
+
+@enduml
