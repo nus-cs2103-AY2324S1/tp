@@ -134,6 +134,9 @@ class BalanceTest {
 
         addedBalance = defaultBalance.add(new Balance(-500));
         assertEquals(new Balance(-500), addedBalance);
+
+        Balance sameBalance = defaultBalance.add(null);
+        assertEquals(defaultBalance, sameBalance);
     }
 
     @Test
@@ -153,6 +156,7 @@ class BalanceTest {
     @Test
     void equals() {
         assertTrue(defaultBalance.equals(new Balance(0)));
+        assertTrue(defaultBalance.equals(defaultBalance));
         assertFalse(defaultBalance.equals(new Balance(1000)));
         assertFalse(defaultBalance.equals(null));
         assertFalse(defaultBalance.equals("SomeString"));
