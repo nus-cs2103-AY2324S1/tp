@@ -27,12 +27,16 @@ This user guide contains **all** the commands available to you, along with **ste
 3. Copy the file to the folder you want to use as the _home folder_ for Foster Family.
 
 4. Open a command terminal.
+
 5. Navigate to the home folder you put the jar file in using the command `cd <path_to_home_folder>`, replacing `<path_to_home_folder>`  with your file path. 
+
 6. Use the `java -jar FosterFamily.jar` command to run the application.<br>
+
    The Foster Family GUI should appear on screen, similar to the screenshot attached below. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 7. Type a command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
+
    Some example commands you can try:
 
 * `list` : Lists all fosterers.
@@ -43,30 +47,30 @@ This user guide contains **all** the commands available to you, along with **ste
 
 * `reset`, followed by `reset confirm` : Deletes all fosterers.
 
-* `exit` : Exits Foster Family.
+* `exit` : Exits Foster Family.<br>
 
-8. Refer to the [Features](#features) section for details of each command.
+Please refer to the [Features](#features) section for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Useful Notations
 These are symbols we will be using to highlight certain information to you.
 
-| Symbol               | Meaning                                                                          |
-|----------------------|----------------------------------------------------------------------------------|
-| :information_source: | General notes about command                                                      |
-| :exclamation:        | Important notes about command                                                    |
-| :warning:            | Warnings about command, where action may lead to data loss or  misinterpretation |
-| :bulb:               | Tips to optimise the use of Foster Family                                        |
+| Symbol               | Meaning                                                                           |
+|----------------------|-----------------------------------------------------------------------------------|
+| :information_source: | General notes about command                                                       |
+| :exclamation:        | Important notes about command                                                     |
+| :warning:            | Warnings about command, where action may lead to data loss or  misinterpretation  |
+| :bulb:               | Tips to optimise the use of Foster Family                                         |
 
 ## Technical Terms
-These are the explanations of some technical terms you may come across in this user guide.
+These are some technical terms you may come across in this user guide.
 
-| Term                 | Definition                                                                                 |
-|----------------------|--------------------------------------------------------------------------------------------|
-| Command              | Keywords that Foster Family recognises to invoke specific functions                        |
-| Parameter / Argument | Information to be passed to the commands as inputs                                         |
-| Index                | The number next to a fosterer's name in the list shown in the main window                  |
-| Field                | Attributes associated with a fosterer entry in Foster Family, such as name and email, etc. |
+| Term                  | Definition                                                                                 |
+|-----------------------|--------------------------------------------------------------------------------------------|
+| Command               | Keywords that Foster Family recognises to invoke specific functions                        |
+| Parameter / Argument  | Information to be passed to commands as inputs                                             |
+| Index                 | The number next to a fosterer's name in the list shown in the main window                  |
+| Field                 | Attributes associated with a fosterer entry in Foster Family, such as name and email, etc. |
 
 --------------------------------------------------------------------------------------------------------------------
 ## User Interface (UI)
@@ -79,26 +83,24 @@ These are the two different screens you will be interacting with in Foster Famil
 
 This is the main view that welcomes you when you start up Foster Family.
 
-<br>
-
 ### The Profile Page 
+![ProfileExample](images/screenshots/EditExample.png)
 
 This is the profile view that you can use to add a fosterer or edit the details of an existing fosterer. 
 
-<br>
 
 #### How to open the profile page
 There are two ways you can use to navigate to the profile page. 
 1. Enter <code>add</code> to view an _empty_ profile page to [add](#adding-a-fosterer-through-the-profile-page-add) a fosterer.
 2. Enter either <code>edit INDEX</code> or <code>view INDEX</code> to [edit](#editing-a-fosterers-detail-through-the-profile-page-edit) or [view](#viewing-a-fosterers-detail-view) the fosterer at index <code>INDEX</code> in Foster Family.
 
-Let's say you want to open the profile page of a fosterer name Benson Meie who is currently at index 1. 
-![Benson](images/screenshots/BensonMeieView.png)
+Let's say you want to open the profile page of a fosterer name Alex Yeoh who is currently at index 1. 
+![Benson](images/screenshots/ViewCommandExample.png)
 
 <br>
 
 
-To do so, enter <code>view 1</code> as shown in the image above, which opens the profile page of the fosterer at index 1, Benson Meie. 
+To do so, enter <code>view 1</code> as shown in the image above, which opens the profile page of the fosterer at index 1, Alex Yeoh. 
 
 ![Example profile](images/screenshots/EditExample.png)
 
@@ -111,7 +113,7 @@ Typing in the name of the field you want to edit, or substrings of the field, di
 
 <br>
 
-In the example above, entering <code>name</code>, or a substring of name like <code>nam</code> brings the focus to the name field.
+In the example above, entering <code>name</code>, or a substring of name like <code>nam</code>, brings the focus to the name field.
 
 <br>
 
@@ -125,7 +127,7 @@ If you wish to revert back to the original value of the field while editing in t
 
 ![Cursor back to commandbox](images/screenshots/CursorBackToCommandbox.png)
 
-In the example above, after changing name from 'Meie' to 'Mei' the Enter key was pressed. 
+In the example above, after changing name from 'Yeoh' to 'Yeo' the Enter key was pressed. 
 
 The same process can be applied to other fields.
 
