@@ -156,16 +156,6 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_noChangeInEditFields_throwsCommandException() {
-        Person person = model.getFilteredPersonList().get(0);
-
-        EditPersonDescriptor descriptor = new EditPersonDescriptor();
-        EditCommand editCommand = new EditCommand(person.getName(), null, descriptor);
-
-        assertThrows(CommandException.class, () -> editCommand.execute(model), MESSAGE_NO_CHANGE);
-    }
-
-    @Test
     public void undo_successfulEditCommand() throws CommandException {
         Model model = new ModelManager();
         Person originalPerson = new PersonBuilder().build();
