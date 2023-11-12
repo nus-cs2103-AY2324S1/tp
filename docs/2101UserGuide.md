@@ -344,9 +344,15 @@ Here's a list of commands you can redo:
 <hr class="command-separator">
 
 #### Clear all Members and Events: `clear`
-Clears all Member and Event entries from CCACommander.
+Is it time for a new academic year when you need to remove all your previous members and events for new members and 
+events? You can use the `clear` command to instantly remove all your members and events without needing to delete them one by one.
 
-Format: `clear`
+Here’s how you can use it: `clear`
+
+<div markdown="block" class="alert alert-primary">:bulb: Accidentally cleared your list? 
+Worry not as you can use the `undo` command to retrieve your data! 
+
+</div>
 
 <hr class="command-separator">
 
