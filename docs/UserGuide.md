@@ -158,10 +158,10 @@ Unsuccessful output:
 * Contact already exists: `This contact already exists in the contact list`
 * Invalid format<br>
 ```
-Invalid command format! 
-add contact: Adds a contact to the contact list. 
+Invalid command format!
+add contact: Adds a contact to the contact list.
 Usage: add contact -n NAME -p PHONE -e EMAIL -a ADDRESS [-t TAGNAME...]
-Example: add contact -n John Doe -p 98765432 -e johnd@example.com -a 311, Clementi Ave 2, #02-25 -t frontend 
+Example: add contact -n John Doe -p 98765432 -e johnd@example.com -a 311, Clementi Ave 2, #02-25 -t frontend
 ```
 * Invalid email:<br>
 ```
@@ -192,7 +192,7 @@ Unsuccessful output:
 * Invalid index (out of range): `The person index provided is invalid`
 * Invalid format:<br>
 ```
-Invalid command format! 
+Invalid command format!
 delete contact: Deletes a contact by its index number used in the displayed contact list.
 Parameters: INDEX (must be a positive integer)
 Example: delete contact 1
@@ -230,7 +230,7 @@ Unsuccessful output:
 * Invalid index (out of range): `Can not find the target contact with ID: 100`
 * Invalid format:<br>
 ```
-Invalid command format! 
+Invalid command format!
 add tag: Adds tags to a contact from the contact list.
 Usage:  add tag -id CONTACT_ID -t TAGNAME...
 ```
@@ -254,7 +254,7 @@ Unsuccessful output:
 * Invalid index (out of range): `Can not find the target contact with ID: 100`
 * Invalid format:<br>
 ```
-Invalid command format! 
+Invalid command format!
 delete tag: Delete one or more tags from a contact.
 Usage:  delete tag -id CONTACT_ID -t TAGNAME...
 ```
@@ -276,7 +276,7 @@ Unsuccessful output:
 * Invalid index (out of range): `Can not find the target contact with ID: 100`
 * Invalid format:<br>
 ```
-Invalid command format! 
+Invalid command format!
 add note: Adds a note to a contact from the contact list.
 Usage:  add note -id CONTACT_ID -tit NOTE_TITLE -con NOTE_CONTENT
 ```
@@ -300,7 +300,7 @@ Unsuccessful output:
 * Invalid note index: `Note not found: ID = 5`
 * Invalid format:<br>
 ```
-Invalid command format! 
+Invalid command format!
 delete note: Deletes a note from a contact.
 Usage:  delete note -id CONTACT_ID -nid NOTE_ID
 ```
@@ -331,7 +331,7 @@ Successful output:
 Unsuccessful ouput:
 * Invalid format:<br>
 ```
-Invalid command format! 
+Invalid command format!
 list events: Shows a list of all events or events within a specified time interval.
 Usage: list events [-descending] [-st filter_start_time] [-et filter_end_time] (-st and -et must either both present or both not present)
 ```
@@ -358,7 +358,7 @@ Unsuccessful output:
 * Invalid time format: `Invalid date-time format! Text '29/05/2024' could not be parsed at index 2`
 * Invalid command format:<br>
 ```
-Invalid command format! 
+Invalid command format!
 add event: Adds an event to a contact.
 Usage:  add event -id CONTACT_ID -en EVENT_NAME -st START_TIME [-et END_TIME] [-loc LOCATION] [-info INFORMATION]
 ```
@@ -383,7 +383,7 @@ Unsuccessful output:
 * Invalid note index: `Event not found: ID = 5`
 * Invalid format:<br>
 ```
-Invalid command format! 
+Invalid command format!
 delete event: Deletes an event from a contact.
 Usage:  delete event -id CONTACT_ID -eid EVENT_ID
 ```

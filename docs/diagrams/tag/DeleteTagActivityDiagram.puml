@@ -13,7 +13,7 @@ if () then ([person exists])
     from those that do not;
     :Delete only those that exists in the tag list;
     :Model updates the person in the address book;
-    :Returns result message with a list of tags that have 
+    :Returns result message with a list of tags that have
     been deleted and a list of tags that cannot be found;
 else ([else])
     :Throw CommandException;

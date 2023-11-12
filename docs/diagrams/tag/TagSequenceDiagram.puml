@@ -41,7 +41,7 @@ deactivate AddTagCommandParser
 AddTagCommandParser -[hidden]-> AddCommandParser
 destroy AddTagCommandParser
 
-AddCommandParser --> AddressBookParser 
+AddCommandParser --> AddressBookParser
 deactivate AddCommandParser
 AddCommandParser -[hidden]-> AddressBookParser
 destroy AddCommandParser
