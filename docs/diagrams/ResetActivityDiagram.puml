@@ -1,0 +1,26 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes a command;
+:AddressBookParser parses the command;
+
+if () then ([Command is "reset"])
+
+  :Set finalConfirmation to TRUE;
+
+else ([else])
+  if() then ([Command is "reset confirm"])
+    if() then ([finalConfirmation == TRUE])
+    :Reset the entire address book;
+    else([else])
+    :Display message to user to enter "reset" first;
+    endif
+  else ([else])
+    :Display error message;
+    :Set finalConfirmation to FALSE;
+  endif
+endif
+stop
+@enduml
