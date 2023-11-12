@@ -46,14 +46,14 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         logger.log(Level.INFO, "Successfully parsed FindCommand.");
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            assert ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()) != null :
-                    "Parsed name cannot be null";
+            assert ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()) != null
+                    : "Parsed name cannot be null";
             ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         }
 
         if (argMultimap.getValue(PREFIX_SUBJECT).isPresent()) {
-            assert ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get()) != null :
-                    "Parsed subject cannot be null";
+            assert ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get()) != null
+                    : "Parsed subject cannot be null";
             ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
         }
 
