@@ -33,7 +33,7 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 
 1. Ensure you have _Java_ <sup>[3](#glossary)</sup>  11 or above installed in your Computer. You can check by opening a _command terminal_ <sup>[4](#glossary)</sup> and typing `java -version`.
 
-2. Download the latest `tutormate.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-3/tp/releases).
+2. Download the latest `tutormate.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-3/tp/releases/latest).
 
 3. Copy the file to the folder you want to use as the _home folder_ <sup>[5](#glossary)</sup> for your TutorMate.
 
@@ -77,8 +77,8 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 ![Ui](images/Ui.png)
 
 ### Terminologies / Symbols
-* Flag: A flag is a tab started with dash "-" that is used to identify the type of information that is being provided e.g. -name.
-<!-- todo, validate that all boxes thing works, as IDE does not show it -->
+* Flag: A flag is a word starting with a dash "-" that is used to identify the type of information that is being provided e.g. -name.
+
 * Text formatted as code snippets are either commands e.g. `list schedule`, command formats e.g. `list [LIST][KEYWORDS]` or parameters e.g. `NAME`.
 * <box type="info" seamless>This box denotes additional information.</box>
 * <box type="tip" seamless>This box denotes tips to improve usability.</box>
@@ -99,18 +99,21 @@ This box denotes command outputs.
   e.g. both `link -student student name -lesson lesson name` and `link -lesson lesson name -student student name` are acceptable.
 * Parameters without a flag need to strictly follow the order specified.<br>
   e.g. For delete command which specifies `delete INDEX`, the "index" parameter must immediately follow the command name "delete".<br>
-* All command name are case-insensitive. <br>
+* All command names are case-insensitive. <br>
   e.g. `linkTo` is the same as `linkto` or `LiNkTo`.
 * When applicable, extraneous parameters and flags for commands will be ignored .<br>
   e.g. if the command entered is `add info -name new name -notValid flagBody -subject physics`, it will be interpreted as `add -name new name -subject physics`. "info " and "-notValid flagBody" will be ignored. <br>
   e.g. However, `delete extra 3` will not be accepted as delete command specifies that the index parameter must immediately follow the command name.
+*   For commands that take in an index, only the first valid integer will be processed and everything else will be ignored. <br>
+e.g. `delete 5,2` will be processed as `delete 5`.
+
 </box>
 
 ### Other Notes
 <box type="warning" seamless>
 
-* Please avoid using " -" in the value of a parameter as tutorMate treats " -" as a reserved word that signifies the start of a new flag.
-* Please do not abuse the parser of tutorMate. For example, do not game it with special characters or __code injections_<sup>[6](#glossary)</sup>_<sup>[4](#glossary)</sup>. TutorMate does not guarantee the behaviour of the application on deliberate and malicious abuse beyond supported normal usage.
+* Please avoid using " -" in the value of a parameter as TutorMate treats " -" as a reserved word that signifies the start of a new flag.
+* Please do not abuse the parser of TutorMate. For example, do not game it with special characters or __code injections_<sup>[6](#glossary)</sup>_<sup>[4](#glossary)</sup>. TutorMate does not guarantee the behaviour of the application on deliberate and malicious abuse beyond supported normal usage.
 * TutorMate supports a maximum of 99999 students, 99999 lessons and 99999 tasks. Further data beyond this limit might be lost and not accessible in the application.
 * Please avoid manually modifying the data files in the _home folder_<sup>[5](#glossary)</sup>. Doing so may result in unexpected behaviour and data loss.
 * Please avoid running multiple instances of TutorMate at the same time. Doing so may result in unexpected behaviour and data loss.
@@ -146,7 +149,7 @@ It will display the specified list and its corresponding details panel.
 
 Format: `list [LIST] [KEYWORDS]`
 * Shows the list and associated detail panel for the specified `[LIST]`.
-* The `[KEYWORDS]` is for which specifying student details to display, and is only valid for ___STUDENTS list___. When used for ___SCHEDULE list___ and ___TASKS list___, they will be ignored.
+* The `[KEYWORDS]` parameter is for specifying which student details to display, and is only valid for ___STUDENTS list___. When used for ___SCHEDULE list___ and ___TASKS list___, they will be ignored.
 * Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
@@ -160,7 +163,7 @@ Format: `list [LIST] [KEYWORDS]`
 
 Example usages:
 * `list students` displays all the students with their names (including previously specified fields).
-* `list students subjects email` displays all the students with their names, a list of subjects for each student and their email.
+* `list students subjects email` displays all the students with their names, the list of subjects for each student and their email.
 
 Success outputs:
 * Input: `list students` (with no additional student details):
@@ -298,7 +301,7 @@ The lesson index provided is invalid
 
 ### Add Feature
 
-Adds a student/lesson/task to the students/schedule list of the application or the task list of a lesson in the application.
+Adds a student/lesson/task to the ___STUDENTS list___, ___SCHEDULE list___ or the task list of a lesson in the application.
 
 #### For Student:
 
@@ -341,7 +344,6 @@ For example, addPerson -name John -phone 91234567
 If you are currently displaying student list, you could use 'add' inplace of 'addPerson'. 
 Note you must provide a 'name' not already in the address book.
  ```
-![Failure for addPerson](images/add-person/add_person_failure.png)
 
 
 #### For Schedule:
@@ -457,7 +459,8 @@ Format: `deletePerson INDEX`
 
 Example usages:
 * `deletePerson 1`
-* In ___STUDENTS list___ : `delete 1`
+* In ___STUDENTS list___ : 
+  * `delete 1`
 
 Success outputs:
 * Input: `deletePerson 1`
@@ -1218,26 +1221,27 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 
 ## Command Summary
 
-| Action       | Format                   | Examples                                             | List              | Remarks                                                             |
-|--------------|--------------------------|------------------------------------------------------|-------------------|---------------------------------------------------------------------|
-| **List**     | `list [LIST] [KEYWORDS]` | `list students email`, `list schedule`, `list tasks` | Any               | `list` without optional parameters displays the ___SCHEDULE list___ |
-| **Find**     | `find SEARCH_STRING`     | `find bernice`, `find lesson`                        | Student, Schedule | Disabled in ___TASKS list___                                        |
-| **Feature2** | `command format`         | `sample valid command`                               | Any               | Any additional remarks here                                         |
+| Action       | Format                   | Examples                                             | List              | Remarks                                                                    |
+|--------------|--------------------------|------------------------------------------------------|-------------------|----------------------------------------------------------------------------|
+| **List**     | `list [LIST] [KEYWORDS]` | `list students email`, `list schedule`, `list tasks` | Any               | `list` without optional parameters displays the ___SCHEDULE list___        |
+| **Show**     | `show INDEX`             | `show 1`, `show 3`                                   | Any               | `show` will show the specified item at the given index of the current list |
+| **Find**     | `find SEARCH_STRING`     | `find bernice`, `find lesson`                        | Student, Schedule | Disabled in ___TASKS list___                                               |
+| **Feature2** | `command format`         | `sample valid command`                               | Any               | Any additional remarks here                                                |
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
 
-| id | Term                 | Definition                                                                                                                                                                                                          |
-|----|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1  | **CLI**              | Abbreviation for Command Line Interface, which allow user to interact with the application by inputting commands, and receive feedback from the application in the form of text.                                    |
-| 2  | **GUI**              | Abbreviation for graphical user interface, which allow user to interact with with the application via graphical components such as icons, buttons, and menus.                                                       |
-| 3  | **Java**             | A programming language that you need to install before you are able to launch tutorMate. You could refer to FAQ for tips on how to verify whether you already have Java installed and how to install it.            |                                                              |
-| 4  | **Command Terminal** | A text based user interface where most of the interaction is done by inputting commands. You can search for "terminal" to find and launch the inbuilt terminal in your operating system (Windows, Linus and MacOS). |
-| 5  | **Home Folder**      | The folder TutorMate is located at while running. This will be the folder where tutorMate read the date from and write the data to.                                                                                 |
-| 6  | **Code Injection**   | A computer attack in which malicious code is inserted into an application program.                                                                                                                                  |
-| 7  | **String**           | A sequence of characters. Can be taken as just any text.                                                                                                                                                            |
-| 8  | **Pointer**          | A variable that stores the memory address of another variable.                                                                                                                                                      |
-| 9  | **Hard Disk**        | The long term storage device of the computer. The memory will remain even after the computer is turned off.                                                                                                         |
-| 10 | **JSON**             | Abbreviation for JavaScript Object Notation. It is a format for storing data                                                                                                                                        |
-| 11 | **URL**              | Abbreviation for uniform resource locator. It is a reference to a web resource that specifies its location on a computer network and a mechanism for retrieving it.                                                 |
+| id  | Term                 | Definition                                                                                                                                                                                                          |
+|-----|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1   | **CLI**              | Abbreviation for Command Line Interface, which allow user to interact with the application by inputting commands, and receive feedback from the application in the form of text.                                    |
+| 2   | **GUI**              | Abbreviation for graphical user interface, which allow user to interact with with the application via graphical components such as icons, buttons, and menus.                                                       |
+| 3   | **Java**             | A programming language that you need to install before you are able to launch tutorMate. You could refer to FAQ for tips on how to verify whether you already have Java installed and how to install it.            |                                                              |
+| 4   | **Command Terminal** | A text based user interface where most of the interaction is done by inputting commands. You can search for "terminal" to find and launch the inbuilt terminal in your operating system (Windows, Linus and MacOS). |
+| 5   | **Home Folder**      | The folder TutorMate is located at while running. This will be the folder where tutorMate read the date from and write the data to.                                                                                 |
+| 6   | **Code Injection**   | A computer attack in which malicious code is inserted into an application program.                                                                                                                                  |
+| 7   | **String**           | A sequence of characters. Can be taken as just any text.                                                                                                                                                            |
+| 8   | **Pointer**          | A variable that stores the memory address of another variable.                                                                                                                                                      |
+| 9   | **Hard Disk**        | The long term storage device of the computer. The memory will remain even after the computer is turned off.                                                                                                         |
+| 10  | **JSON**             | Abbreviation for JavaScript Object Notation. It is a format for storing data                                                                                                                                        |
+| 11  | **URL**              | Abbreviation for uniform resource locator. It is a reference to a web resource that specifies its location on a computer network and a mechanism for retrieving it.                                                 |
