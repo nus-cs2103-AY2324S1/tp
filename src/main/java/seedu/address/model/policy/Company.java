@@ -16,7 +16,7 @@ public class Company {
      * Company name should not be empty, and can contain alphanumeric and/or special characters and whitespaces.
      */
     public static final String VALIDATION_REGEX = "\\S.*";
-    public static final String DEFAULT_VALUE = "NOCOMPANY";
+    public static final String DEFAULT_VALUE = "!@#NO_COMPANY!@#";
 
     public final String value;
 
