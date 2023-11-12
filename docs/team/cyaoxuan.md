@@ -28,6 +28,7 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Added implementation for `remark` feature
     * Extended documentation for the Model component on the new attributes added and design considerations
+    * Add use cases for features in MVP
 
 * **Project management**:
   * Assigned issues to the team and manage milestones in `v1.1` 

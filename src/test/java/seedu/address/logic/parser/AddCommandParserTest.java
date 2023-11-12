@@ -15,8 +15,8 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.LICENSE_PLATE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.LICENSE_PLATE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.LICENCE_PLATE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.LICENCE_PLATE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_AMY;
@@ -66,7 +66,7 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + NRIC_DESC_BOB + LICENSE_PLATE_DESC_BOB + ADDRESS_DESC_BOB
+                + NRIC_DESC_BOB + LICENCE_PLATE_DESC_BOB + ADDRESS_DESC_BOB
                 + TAG_DESC_FRIEND + COMPANY_DESC_BOB + POLICY_NO_DESC_BOB
                 + POLICY_ISSUE_DATE_DESC_BOB
                 + POLICY_EXPIRY_DATE_DESC_BOB, new AddCommand(expectedPerson));
@@ -76,7 +76,7 @@ public class AddCommandParserTest {
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NRIC_DESC_BOB
-                        + LICENSE_PLATE_DESC_BOB + ADDRESS_DESC_BOB
+                        + LICENCE_PLATE_DESC_BOB + ADDRESS_DESC_BOB
                         + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
                         + COMPANY_DESC_BOB + POLICY_NO_DESC_BOB + POLICY_ISSUE_DATE_DESC_BOB
                         + POLICY_EXPIRY_DATE_DESC_BOB,
@@ -86,7 +86,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + NRIC_DESC_BOB + LICENSE_PLATE_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND;
+                + NRIC_DESC_BOB + LICENCE_PLATE_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -153,7 +153,7 @@ public class AddCommandParserTest {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                        + NRIC_DESC_AMY + LICENSE_PLATE_DESC_AMY + ADDRESS_DESC_AMY + COMPANY_DESC_AMY
+                        + NRIC_DESC_AMY + LICENCE_PLATE_DESC_AMY + ADDRESS_DESC_AMY + COMPANY_DESC_AMY
                         + POLICY_NO_DESC_AMY + POLICY_ISSUE_DATE_DESC_AMY + POLICY_EXPIRY_DATE_DESC_AMY,
                 new AddCommand(expectedPerson));
     }
@@ -164,7 +164,7 @@ public class AddCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage);
         assertParseFailure(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + NRIC_DESC_BOB + LICENSE_PLATE_DESC_BOB + ADDRESS_DESC_BOB
+                        + NRIC_DESC_BOB + LICENCE_PLATE_DESC_BOB + ADDRESS_DESC_BOB
                         + TAG_DESC_FRIEND + COMPANY_DESC_BOB
                         + POLICY_NO_DESC_BOB + POLICY_ISSUE_DATE_DESC_BOB,
                 expectedMessage);
@@ -179,37 +179,37 @@ public class AddCommandParserTest {
 
         // missing name prefix
         assertParseFailure(parser,
-                PHONE_DESC_BOB + EMAIL_DESC_BOB + NRIC_DESC_BOB + LICENSE_PLATE_DESC_BOB + ADDRESS_DESC_BOB,
+                PHONE_DESC_BOB + EMAIL_DESC_BOB + NRIC_DESC_BOB + LICENCE_PLATE_DESC_BOB + ADDRESS_DESC_BOB,
                 expectedMessage + "- Name(n/) ");
 
         // missing phone prefix
         assertParseFailure(parser,
-                NAME_DESC_BOB + EMAIL_DESC_BOB + NRIC_DESC_BOB + LICENSE_PLATE_DESC_BOB + ADDRESS_DESC_BOB,
+                NAME_DESC_BOB + EMAIL_DESC_BOB + NRIC_DESC_BOB + LICENCE_PLATE_DESC_BOB + ADDRESS_DESC_BOB,
                 expectedMessage + "- Phone(p/) ");
 
         // missing email prefix
         assertParseFailure(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + NRIC_DESC_BOB + LICENSE_PLATE_DESC_BOB + ADDRESS_DESC_BOB,
+                NAME_DESC_BOB + PHONE_DESC_BOB + NRIC_DESC_BOB + LICENCE_PLATE_DESC_BOB + ADDRESS_DESC_BOB,
                 expectedMessage + "- Email(e/) ");
 
         // missing nric prefix
         assertParseFailure(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + LICENSE_PLATE_DESC_BOB + ADDRESS_DESC_BOB,
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + LICENCE_PLATE_DESC_BOB + ADDRESS_DESC_BOB,
                 expectedMessage + "- NRIC(i/) ");
 
-        //missing license plate prefix
+        //missing licence plate prefix
         assertParseFailure(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NRIC_DESC_BOB + ADDRESS_DESC_BOB,
-                expectedMessage + "- License Plate(l/) ");
+                expectedMessage + "- Licence Plate(l/) ");
 
         // missing address prefix
         assertParseFailure(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + NRIC_DESC_BOB + EMAIL_DESC_BOB + LICENSE_PLATE_DESC_BOB,
+                NAME_DESC_BOB + PHONE_DESC_BOB + NRIC_DESC_BOB + EMAIL_DESC_BOB + LICENCE_PLATE_DESC_BOB,
                 expectedMessage + "- Address(a/) ");
 
         // all prefixes missing
         assertParseFailure(parser, "",
-                expectedMessage + "- Name(n/) - Phone(p/) - Email(e/) - NRIC(i/) - License Plate(l/) - Address(a/) ");
+                expectedMessage + "- Name(n/) - Phone(p/) - Email(e/) - NRIC(i/) - Licence Plate(l/) - Address(a/) ");
     }
 
     @Test
@@ -217,37 +217,37 @@ public class AddCommandParserTest {
         // invalid name
         assertParseFailure(parser,
                 INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + NRIC_DESC_BOB
-                + LICENSE_PLATE_DESC_BOB + ADDRESS_DESC_BOB
+                + LICENCE_PLATE_DESC_BOB + ADDRESS_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + NRIC_DESC_BOB
-                + LICENSE_PLATE_DESC_BOB + ADDRESS_DESC_BOB
+                + LICENCE_PLATE_DESC_BOB + ADDRESS_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + NRIC_DESC_BOB
-                + LICENSE_PLATE_DESC_BOB + ADDRESS_DESC_BOB
+                + LICENCE_PLATE_DESC_BOB + ADDRESS_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NRIC_DESC_BOB
-                + LICENSE_PLATE_DESC_BOB + INVALID_ADDRESS_DESC
+                + LICENCE_PLATE_DESC_BOB + INVALID_ADDRESS_DESC
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NRIC_DESC_BOB
-                + LICENSE_PLATE_DESC_BOB + ADDRESS_DESC_BOB
+                + LICENCE_PLATE_DESC_BOB + ADDRESS_DESC_BOB
                 + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + NRIC_DESC_BOB
-                + LICENSE_PLATE_DESC_BOB + INVALID_ADDRESS_DESC,
+                + LICENCE_PLATE_DESC_BOB + INVALID_ADDRESS_DESC,
                 Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NRIC_DESC_BOB
-                + LICENSE_PLATE_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                + LICENCE_PLATE_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_PREAMBLE_DETECTED));
     }
 }

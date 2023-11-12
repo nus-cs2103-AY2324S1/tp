@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 public class DeleteMonth {
     public static final String VALIDATION_MONTH_FORMAT = "MM-yyyy";
 
-    public static final String MESSAGE_CONSTRAINTS = "delete month should be in the format " + VALIDATION_MONTH_FORMAT;
+    public static final String MESSAGE_CONSTRAINTS = "Delete month should be in the format " + VALIDATION_MONTH_FORMAT;
 
     public final YearMonth month;
 

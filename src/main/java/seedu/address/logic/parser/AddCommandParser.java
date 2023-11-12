@@ -72,7 +72,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 errorMessage += "- NRIC(" + PREFIX_NRIC + ") ";
             }
             if (argMultimap.getValue(PREFIX_LICENCE_PLATE).isEmpty()) {
-                errorMessage += "- License Plate(" + PREFIX_LICENCE_PLATE + ") ";
+                errorMessage += "- Licence Plate(" + PREFIX_LICENCE_PLATE + ") ";
             }
             if (argMultimap.getValue(PREFIX_ADDRESS).isEmpty()) {
                 errorMessage += "- Address(" + PREFIX_ADDRESS + ") ";
