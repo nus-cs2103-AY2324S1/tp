@@ -103,9 +103,9 @@ This box denotes command outputs.
   e.g. `linkTo` is the same as `linkto` or `LiNkTo`.
 * When applicable, extraneous parameters and flags for commands will be ignored .<br>
   e.g. if the command entered is `add info -name new name -notValid flagBody -subject physics`, it will be interpreted as `add -name new name -subject physics`. "info " and "-notValid flagBody" will be ignored. <br>
+  e.g. if the command entered is `delete 3 extra`, it will be interpreted as `delete 3`<br>
   e.g. However, `delete extra 3` will not be accepted as delete command specifies that the index parameter must immediately follow the command name.
-*   For commands that take in an index, only the first valid integer will be processed and everything else will be ignored. <br>
-e.g. `delete 5,2` will be processed as `delete 5`.
+
 
 </box>
 
