@@ -1039,6 +1039,9 @@ testers are expected to do more *exploratory* testing.
 7. Test case: `view 1`
    Expected: Displays the detailed attendance records for the first student in the currently displayed list.
 
+8. Test case: `mark n/Zong Jin, Fu Yiqiao id/A0123456E, A0123457E a/1 w/1`
+   Expected: No attendance marked. Error message displayed.
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
