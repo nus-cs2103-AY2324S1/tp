@@ -36,7 +36,18 @@
 
 ## Product Overview
 
-Are you tired of managing candidate applications through cumbersome spreadsheets? Upgrade your hiring process with JABPro (JobApplicationsBook Pro), a CLI based desktop app that allows you to easily manage candidate applications, schedule interviews, and gain valuable insights on their interview performance. From interns to full-time roles, software to marketing, JABPro’s versatile interface allows you to keep track of all kinds of job applicants in various industries. Access our self-curated user guide below to learn more on how you can integrate various JABPro’s functions into your workflow.
+Are you tired of managing candidate applications through cumbersome spreadsheets? 
+
+Upgrade your hiring process with **JABPro (JobApplicationsBook Pro)**, a CLI based desktop app that allows you to:
+
+* easily manage candidate applications
+* schedule interviews
+* gain valuable insights on their interview performance
+From interns to full-time roles, software to marketing, JABPro’s versatile interface allows you to keep track of all kinds of job applicants in various industries. 
+
+**If you are a Hiring Manager, looking to improve your applications management workflow, JABPro is the tool for you!**
+
+Access our self-curated user guide below to learn more on how you can integrate various JABPro’s functions into your workflow.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -94,12 +105,12 @@ Go to the [Table of Contents](#table-of-contents) to navigate to the feature tha
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jabpro.jar` command to run the application.<br>  
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>  
-   ![Ui](images/Ui.png)  
+   ![Ui](images/main.png)  
 <br>
 5. If your UI looks **compressed and words are being cut off such as that seen below**, you should **resize** the window to a larger size by dragging the corners of the application window. The UI should now look like the example given above.<br>  
-    ![Ui](images/UiCompressed.png)
+    ![Ui](images/UICompressed.png)
 
-    **Here's what each part of the GUI signifies:**
+    **Here's what each part of the GUI signifies:** <br>
     ![UiBreakdown](images/uibreak.png)
 
    | Colour                                                   | Component                   | Description                                                                                                                                    |
@@ -168,11 +179,31 @@ Go to the [Table of Contents](#table-of-contents) to navigate to the feature tha
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
-
-![help message](images/helpMessage.png)
+Opens the `Help window` that leads you to the User Guide for assistance on working with JABPro.
 
 Format: `help`
+
+<box type="tip" seamless>
+
+**Tip:** The `Help window` can also be accessed by clicking `Help > Help F1` in the menu bar, located at the top of the window.
+
+<img src="images/helptip.png">
+
+Additionally, pressing the `F1` key also opens the `Help Window`.
+
+
+</box>
+
+**Example of successful execution of the `help` command:**
+
+1. Enter the command `help`
+2. This is the result of the successful `help` command:
+
+![Help](images/helpwindow-mh.png)
+
+The `Help Window` opens up as follows:
+
+![HelpWindow](images/hw.png)
 
 ### Creating tags: `create`
 
@@ -823,9 +854,20 @@ There is no possibility of a "failed" execution of the `schedule` command.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from JABPro - including candidates and events.
 
 Format: `clear`
+
+**Notes regarding the `clear` command:**
+
+* Usage of the `clear` command empties all records, not only in the current running instance of JABPro, but from the `json` files as well where the data is written to/read from. Hence, a subsequent launch of JABPro will display an empty application.
+* `clear` command can be invoked on an already empty instance of JABPro as well, without any errors being raised. There is no effect of running this command.
+
+**Example of the successful execution of the `clear` command:**
+
+![Clear](images/clear.png)
+
+
 
 ### Exporting all entries : `export`
 
