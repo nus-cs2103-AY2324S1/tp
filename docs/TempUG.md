@@ -548,7 +548,7 @@ Please use show lessonIndex before deleting task!
 
 Edits the specified item in the student/schedule list of the application.
 
-#### For student list:
+#### For Student:
 Format: `editPerson [INDEX] [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS]
 [-subject SUBJECTS] [-tag TAG] [-remark REMARK]`
 * Edits the student at the specified `INDEX` if it is provided, otherwise edits the currently/lastly shown student.
