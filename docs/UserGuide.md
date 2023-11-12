@@ -227,7 +227,7 @@ Format: `new-appt pic/IC dic/IC time/yyyy-MM-dd HH:mm`
 - All fields are Required.
 - PATIENT must contain the valid IC of a Patient in the Database.
 - DOCTOR must contain the valid IC of a Doctor in the Database.
-- There must not be conflicting Appointments. (eg. the doctor already has an appointment with another patient at the same time) However, the duration of each appointment is flexible and up to the users. As long as appointments are not at the exact same time, users can add it in.
+- There must not be conflicting Appointments. (eg. the doctor already has an appointment with another patient at the same time). However, the duration of each appointment is flexible and up to the users. As long as appointments are not at the exact same time, users can add it in.
 
 </div>
 
