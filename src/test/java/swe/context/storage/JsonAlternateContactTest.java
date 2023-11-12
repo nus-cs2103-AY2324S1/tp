@@ -1,13 +1,13 @@
 package swe.context.storage;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.Test;
 
 import swe.context.commons.exceptions.IllegalValueException;
 import swe.context.model.alternate.AlternateContact;
 import swe.context.testutil.TestData;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class JsonAlternateContactTest {
 
