@@ -62,50 +62,50 @@ CCACommander Ultra Promax Xtra 9000PLUS is the one-stop app for CCA Heads to man
 
 <hr class="feature-class-separator">
 
-### Member commands
+### Member Commands
+The vitality of a CCA lies in its members. CCACommander allows you to manage your members with the commands below:
 
 #### Create a Member: `createMember`
-Creates a new member with accompanying personal details (name, gender, phone number, email address, home address, tag).
+When you first start CCACommander and want to populate CCACommander with your members, you can do it with just one simple command - `createMember`!
 
-Format: `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Here is how you can use it:
+`createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
-* Acceptable values for `GENDER`: `Male`, `Female`, `Others`.
-* Acceptable values for `EMAIL`: A string with an email extension (e.g. `@gmail.com`).
+Here is an example command where we create a member **named** `Lim Jun Jie` with **gender** `Male`, **phone number** of `83498018`, **email** of `limjunjie@gmail.com`, home **address** of `19 Kent Ridge Crescent, Singapore 119278` and a `publicity` **tag** to indicate he is in the publicity department:
 
-Examples:
-* `createMember n/CHU WEI RONG g/Male p/98765432 e/chuweirongrocks@gmail.com a/19 Kent Ridge Crescent, Singapore 119278 t/Leader` creates a member `CHU WEI RONG` in CCACommander.
-
-<hr class="command-separator">
-
-#### Delete a Member : `deleteMember`
-
-Deletes the member at the specified index.
-
-Format: `deleteMember MEMBER_INDEX`
-
-* Deletes the member at the specified `MEMBER_INDEX`.
-* The index refers to the index number shown in the **currently displayed** member list.
-* The index **must be a positive integer** that is within the range of the length of the member list.
-
-Examples:
-* `deleteMember 1` deletes the 1st member in the member list.
-* `deleteMember 10` deletes the 10th member in the member list.
+`createMember n/Lim Jun Jie g/Male p/83498018 e/limjunjie@gmail.com a/19 Kent Ridge Crescent, Singapore 119278 t/publicity`
 
 <hr class="command-separator">
 
 #### Edit a Member: `editMember`
-Edits the member at the specified index with the specified fields.
+If you accidentally make a typo while creating your member, do not worry! You can quickly fix it with the `editMember` command.
 
-Format: `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Here is how you can use it:
+`editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
-* The index refers to the index number shown in the **currently displayed** member list.
-* The index **must be a positive integer** that is within the range of the length of the member list.
-* At least one field to edit must be provided.
-* Acceptable values for `GENDER`: `Male`, `Female`, `Others`.
-* Acceptable values for `EMAIL`: A string with an email extension (e.g. `@gmail.com`).
+<div markdown="block" class="alert alert-primary">
+:bulb: At least one field must be provided
+</div>
 
-Examples:
-* `editMember 1 a/RH t/Musician` edits the address and the tag fields of the 1st member in the member list.
+Here is an example command where we edit the first **member** in the displayed list, changing their **phone number** to `91234567` and **email** to `johndoe@example.com`
+
+`editMember 1 p/91234567 e/johndoe@example.com`
+
+<hr class="command-separator">
+#### Delete a Member : `deleteMember`
+
+If a member leaves your CCA, get over the disappointment by swiftly removing them from CCACommander using the `deleteMember` command!
+
+Here is how you can use it:
+ `deleteMember MEMBER_INDEX`
+
+Here is an example command where we delete the first **member** in the displayed list:
+
+`deleteMember 1`
+
+<div markdown="block" class="alert alert-primary">
+:bulb: The `MEMBER_INDEX` parameter refers to the index number shown in the **currently displayed** member list. We recommend you to use the `list` command to see the full member list before using the `editMember` or `deleteMember` commands.
+</div>
 
 <hr class="feature-class-separator">
 
