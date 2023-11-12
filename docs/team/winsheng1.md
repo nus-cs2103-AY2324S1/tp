@@ -25,6 +25,8 @@ Below is a summary of my contributions to the project.
       * Edited all inputs, outputs, success and failure cases for all features that differed from the first draft.
   * Developer Guide:
     * Edited target user profile, user stories and use cases for the first draft.
+    * Wrote section for edit member/applicant.
+    * Drew Activity Diagrams and Sequence Diagrams for this section.
 * **Review/mentoring contributions**:
   * Helped team members with some of the problems they encountered with their code.
     * i.e. Helped a peer with `Add Task` function.
