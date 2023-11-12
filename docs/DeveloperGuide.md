@@ -862,6 +862,31 @@ testers are expected to do more *exploratory* testing.
       `add n/John Poh p/98765432 e/johnpoe@gmail.com a/ 311, Clementi Ave 2, #02-25 r/ 2 years of experience in software development`  
       **Note**:  The current AddressBook should contain a person named `John Poh`
       Expected: No person is added. Error details shown in the status message. List of persons remains the same.
-
    
+
+--------------------------------------------------------------------------------------------------------------------
+## Planned Enhancements
+
+### Deleting tags : `delete tag`
+
+While certainly useful, JABPro currently does not have feature to delete existing tags. However, this feature will be implemented
+in future iterations.
+
+<box type="tip" seamless>
+
+**Tip:**
+* If you are an advanced user, you are welcome to delete your tags manually by editing the json file!
+  </box>
+
+### Editing tags : `edit tag`
+
+JABPro currently does not support editing tags i.e. editing tag name or category. This feature will be implemented in future iterations.
+
+**Tip:**
+* If you are an advanced user, you are welcome to edit your tags manually by editing the json file!
+  </box>
+
+### Exporting events : `export`
+
+JABPro currently does not support exporting Events. This feature will be implemented in future iterations.
 
