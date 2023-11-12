@@ -60,7 +60,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
-
     }
 
     //// person-level operations
@@ -111,6 +110,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         setPersons(sortedList);
     }
 
+    //// tag-level operations
+
+    /**
+     * Adds a tag to the address book.
+     * The tag must not already exist in the address book.
+     */
     public void addTag(Tag tag) {
         this.tags.add(tag);
     }
@@ -121,6 +126,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasTag(Tag tag) {
         requireNonNull(tag);
         return tags.contains(tag);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeTag(Tag key) {
+        tags.remove(key);
     }
 
 
