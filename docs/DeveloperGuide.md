@@ -1171,9 +1171,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Employee**: A staff in the company
 * **Parameters**: 
 
-### Planned Enhancements
+--------------------------------------------------------------------------------------------------------------------
+
+## **Planned enhancement**
 1. Modify the `add` feature to restrict the user from adding employees with the same name but in different cases (e.g. John Tan and john tan).
     This can be done by modifying the `equals()` method in the `[Person](https://github.com/AY2324S1-CS2103T-W12-2/tp/blob/master/src/main/java/seedu/address/model/person/Person.java)` class to ignore the case of the name, i.e. changing `name.equals(other.name)` to `name.toLowerCase().equals(other.name.toLowerCase())`.
+
+2. Adjust the width and height of the UI boxes to align with our desired specifications, preventing issues such as message wrapping to the next line and ensuring optimal alignment. For example :
+   ![Wrapped text in UI](images/Wrapped.png)
+  	To resolve this, we plan to modify the minWidth, minHeight, maxWidth, and maxHeight parameters of the respective boxes for a more refined and cohesive appearance.
+
+3. Currently, users need to input commands to switch between months in the UI calendar. In our future plans, we intend to implement a user-friendly dropdown menu along with dedicated next and previous buttons, providing a more intuitive interface for toggling between months.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
 
 
 --------------------------------------------------------------------------------------------------------------------
