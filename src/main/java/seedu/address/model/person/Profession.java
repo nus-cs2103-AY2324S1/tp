@@ -36,4 +36,11 @@ public class Profession {
     public String toString() {
         return value;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+            || (other instanceof Profession
+            && value.equals(((Profession) other).value));
+    }
 }

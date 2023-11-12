@@ -41,4 +41,11 @@ public class Details {
     public String toString() {
         return value;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+            || (other instanceof Details
+            && value.equals(((Details) other).value));
+    }
 }

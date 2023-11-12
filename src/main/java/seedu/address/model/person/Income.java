@@ -44,9 +44,9 @@ public class Income {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Income // instanceof handles nulls
-                && value.equals(((Income) other).value)); // state check
+        return other == this
+                || (other instanceof Income
+                && value.equals(((Income) other).value));
     }
 
     @Override

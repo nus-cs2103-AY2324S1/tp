@@ -171,7 +171,6 @@ public class ParserUtil {
         if (!Income.isValidIncome(trimmedIncome)) {
             throw new ParseException(Income.MESSAGE_CONSTRAINTS);
         }
-
         return new Income(trimmedIncome);
     }
 
