@@ -51,7 +51,7 @@ DoConnek Pro is a **desktop app** that helps **General Practitioner Clinic Manag
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add -pa n/NAME`, `NAME` is a parameter which can be used as `add -pa n/John Doe`.
 
-* Certain commands require `-PERSON_TYPE` as a parameter. This parameter can only take two values: `-pa` or `-sp`
+* Certain commands require `-PERSON_TYPE` as a flag. This flag can only take two values: `-pa` or `-sp`
 and specifies whether the command is to act on the patients (`-pa`) or on the specialists (`-sp`) in the address book.
 
 * Items in square brackets are optional.<br>
@@ -64,7 +64,8 @@ and specifies whether the command is to act on the patients (`-pa`) or on the sp
   e.g. `[m/MEDICAL_HISTORY]…​` can be used as ` ` (i.e. 0 times), `m/Osteoporosis`, `m/Osteoporosis m/Asthma` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable. The order of the `-PERSON_TYPE` flag
+however is not flexible in this way.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -101,8 +102,9 @@ A specialist can have any number of tags (including 0)
 </div>
 
 Parameter specifications: 
-* `NAME`, `EMAIL`, `LOCATION`, `TAG`, `MEDICAL_HISTORY`, and `SPECIALISATION` can contain 1 - 255 alphanumeric characters.
-* `PHONE` can contain 4 - 15 numeric characters.
+* `NAME`, `LOCATION`, `TAG`, `MEDICAL_HISTORY`, and `SPECIALISATION` can only contain alphanumeric characters.
+* `EMAIL` can take alphanumeric and certain special characters and must be of the format "local-part@domain".
+* `PHONE` can only contain 4 numeric characters or more.
 * `AGE` can contain any integer in the range 0 to 149 inclusive.
 
 Examples:
@@ -187,18 +189,17 @@ Format (for patients): `edit [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...​ [a/AGE] 
 
 Format (for specialists): `edit [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...​ [l/LOCATION] [s/SPECIALTY]`
 
-* When entering an `edit` command, at least one valid prefix must be present. 
-I.e. entering `edit` (without any prefixes) will result in an error message being displayed.
+* When entering an `edit` command, at least one valid parameter must be present. 
+i.e. entering `edit` (without any parameters) will result in an error message being displayed.
 * Only the patient or specialist in the view panel will be edited. Hence, when editing a specialist specific attribute
 while viewing a patient (or vice versa), an error message be displayed.
   * e.g. when a patient is present in the view panel, `edit s/Dentistry` will result in an error message being displayed as
   patients do not have the specialisation attribute.
-* The new values of compulsory attributes for a patient or specialist cannot be empty.
+* For the `edit` command exclusively, in order to clear the content of optional attributes, the new values can be made empty.
+    * e.g. `edit t/` (empty Tag attribute) will remove the tags of the patient or specialist being displayed in the view panel.
+* However, the new values of compulsory attributes for a patient or specialist cannot be empty.
   * e.g. `edit s/` (empty Specialty attribute) will result in an error when trying to edit a specialist.
   * e.g. `edit n/` (empty Name attribute) will result in an error when trying to edit a patient or specialist.
-* The new values of optional attributes can be empty. This is useful when you want to clear the content of optional attributes 
-in a patient or specialist.
-  * e.g. `edit t/` (empty Tag attribute) will remove the tags of the patient or specialist being displayed in the view panel.
 
 Examples:
 * `list -pa` > `view 1` > `edit n/John Wick` modifies the name of the first patient in the list to **John Wick**.
@@ -278,8 +279,8 @@ Examples:
 
 Changes the theme of the application. The default theme on launch is always the dark theme.
 
-Format: `theme THEMETYPE`
-* `THEMETYPE` has the following possibilities: `dark`, `light` (case-insensitive)
+Format: `theme TYPE`
+* `TYPE` can only take the following values: `dark`, `light` (case-insensitive)
 
 Examples:
 * `theme dark` sets the application theme to the dark theme.
