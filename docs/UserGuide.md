@@ -67,74 +67,145 @@ Choose a topic from the table of contents below to find out how to manage your c
 
 --------------------------------------------------------------------------------------------------------------------
 
-# **If you're new**: what are commands?
+# Graphical User Interface Components
 
-Commands start with a command word.
+<figure>
+   <img src="images/Ui.png" alt="Connectify's Graphical User Interface (GUI)">
+   <figcaption align="center">
+       <em>Connectify's Graphical User Interface (GUI): The Dashboard</em>
+   </figcaption>
+</figure>
+<figure>
+   <img src="images/ExampleInteractionAfter.png" alt="Connectify's Graphical User Interface (GUI)">
+   <figcaption align="center">
+       <em>Connectify's Graphical User Interface (GUI): The Client List</em>
+   </figcaption>
+</figure>
+<br>
 
-  - e.g. In `create n/John Doe...` example gave above, `create` is the command word. 
+Let's first discuss the top half of the interface.
 
-Other command words are `lead`, `edit` and `view`.
+<figure>
+   <img src="images/UiTopHalf.png" alt="The navigation bar, command box, and output window.">
+   <figcaption align="center">
+       <em>The navigation bar, command box, and output window.</em>
+   </figcaption>
+</figure>
+<br>
 
-Sometimes these commands require additional information, as we see in the case above we have to specify the name of the client we want to create. These are done through ***parameters***.
+1. **Navigation Bar**
+   - **File:** a dropdown menu containing the exit button, which quits the application.
+   - **Help:** a dropdown menu containing the help button, which provides the link to this user guide.
 
-***Parameters*** are additional information to be supplied by the user.
+2. **Command Box:** a box where you can type [commands](#if-youre-new-what-are-commands). When it is empty, it prompts you with `Enter Command Here...`.
 
-- e.g. in `n/NAME`, `NAME` is a parameter which can be used as `n/John Doe`.
+3. **Output Window:** a box where the results of your [commands](#if-youre-new-what-are-commands) will be displayed. Any errors that arise will also be shown here.
 
-For most commands, to input parameters in, they have to be prefixed by ***flags***.
-Flags are indicators to differentiate various parts of the command. They follow the format of a `<letter>` followed by a `/`.
+    <figure id="dashboard-information">
+       <img src="images/UiBottomHalf.png" alt="Connectify's Analytics (left) and Upcoming Follow-ups (right)">
+       <figcaption align="center">
+           <em>Connectify's Analytics (left) and Upcoming Follow-ups (right)</em>
+       </figcaption>
+    </figure>
 
- - e.g. in `n/NAME`, `n/` is the flag for the `NAME` parameter.
+4. **Connectify's Analytics:** insightful statistics that are automatically calculated for you. This includes:
+    - Number of uncontacted / contacted / closed clients
+    - Average interactions among all clients
+    - Breakdown of the different interaction outcomes
+    - Number of hot / warm / cold [leads](#marking-a-client-as-a-hot-warm-or-cold-lead)
+
+5. **Upcoming Follow-ups:** upcoming meetings for each client. Follow-up dates are determined automatically by the latest interaction date and the lead of the client. See [how Connectify calculates follow-up dates.](#follow-up-calculation)
+
+    <figure>
+       <img src="images/UiClientList.png" alt="Connectify's List of Clients">
+       <figcaption align="center">
+           <em>Connectify's List of Clients</em>
+       </figcaption>
+    </figure>
+
+6. **Client List:** a scrollable list of clients that you have. You can see the details of each client, including:
+   - **Index:** the number and order of each client in your client list. The numbering can change using the [***find*** command](#finding-a-client-by-name-find).
+   - **Name:** the name of the client, specified after the index number.
+   - **Lead:** the lead of the client, represented by either a red, orange, or light blue box.
+   - **Tags:** a row of dark green boxes, representing additional information of each client.
+   - **Phone Number:** the client's phone number.
+   - **Email:** the client's email address.
+
+   <br>
+   <figure>
+       <img src="images/UiDetailedView.png" alt="Detailed View of Client">
+       <figcaption align="center">
+           <em>Detailed View of Bernice Yu's Profile</em>
+       </figcaption>
+    </figure>
+
+7. **Detailed View:** a detailed view of each client's profile, showing additional information, including:
+   - **Telegram Handle:** the client's telegram handle, starting with the letter `@`.
+   - **Address:** the home address of the client.
+   - **Profession:** the client's profession/job.
+   - **Income:** the client's income.
+   - **Past Interactions:** the list of past interactions or meetings with the clients, along with its date, interaction outcome (interested), and meeting notes.
+
+   <br>
+   <figure>
+       <img src="images/UiStatusBar.png" alt="Status Bar">
+       <figcaption align="center">
+           <em>The Status Bar (at the bottom of the application window)</em>
+       </figcaption>
+    </figure>
+
+8. **Status Bar:** the location of where Connectify is storing your data in your computer.
 
 [↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Reading the examples in this user guide
+# **If you're new**: what are commands?
 
-The examples in this guide are formatted with the following conventions:
-* **Command** - The command to be typed into the command box.
+Commands are the string of text you type into the command box. They usually start with a command word.
 
-* **Command word** - Words that specify the type of command to be executed. Written in ***bold italics***, always at the start of a line.
+- e.g. `create n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` is a command. ***create*** is the command word.
 
-* **Flags** - Indicators to differentiate various parts of the command. It takes the format `$/` followed by a **Parameter**. The `$` varies depending on the type of flag.
+Sometimes these commands require additional information. When creating our client, we need to specify the name, phone number, etc. These fields are called **parameters**.
 
-    e.g. `o/` in ***interaction*** command specifies the **Outcome** of the interaction, while `l/` in ***edit*** command specifies the **Lead** of the client.
+**Parameters** are additional information to be supplied by the user.
 
-* **Parameters** - Component of the command that usually follows a **Flag**. In this guide, parameters are given in `UPPER_CASE`.
+- e.g. In `n/NAME`, `NAME` is a parameter which can be used as `n/John Doe`.
 
-    e.g. `INDEX` following an ***edit*** command specifies the index of the client to be edited.
+For most commands, **parameters** are prefixed by **flags**. They are indicators to differentiate various parts of the command. They consist of a letter, followed by a `/`.
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Technical notes about commands**<br>
-
-- Commands, flags and parameters are case-sensitive, unless otherwise specified.
-  
-- Items in square brackets are optional.
-
-   e.g. `n/NAME [tg/TELEGRAM]` can be used as `n/John Doe tg/@johndoe` or as `n/John Doe`.
-
-- Items with `...` after them can be repeated any number of times, including zero.
-
-   e.g. `[t/TAG]...` can be used as ` ` (0 times), `t/friend`, or `t/friend t/neighbour`, while
-`n/NAME` has to be used exactly once.
-
-- Parameters can be entered in any order.
-
-   e.g. If the command specifies its parameters as `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
-
-- Extraneous parameters for commands that do not take in parameters will be ignored.
-
-    e.g. The ***list*** command does not take in any parameters. If the command `list 123` is entered, it will be interpreted as `list`.
-
-</div>
+- e.g. In `n/NAME`, `n/` is the flag for the `NAME` parameter.
 
 [↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
 # Features
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about commands**<br>
+
+- Commands, flags and parameters are case-sensitive, unless otherwise specified.
+
+- Items in square brackets are optional.
+
+  e.g. `n/NAME [tg/TELEGRAM]` can be used as `n/John Doe tg/@johndoe` or as `n/John Doe`.
+
+- Items with `...` after them can be repeated any number of times, including zero.
+
+  e.g. `[t/TAG]...` can be used as <code> </code> (0 times), `t/friend`, or `t/friend t/neighbour`, while
+  `n/NAME` has to be used exactly once.
+
+- Parameters can be entered in any order.
+
+  e.g. If the command specifies its parameters as `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
+
+- Extraneous parameters for commands that do not take in parameters will be ignored.
+
+  e.g. The ***list*** command does not take in any parameters. If the command `list 123` is entered, it will be interpreted as `list`.
+
+</div>
 
 ## Viewing help: ***help***
 
@@ -146,6 +217,10 @@ Shows a message explaining how to access the user guide.
         <em>Pop-up message that appears after running help.</em>
     </figcaption>
 </figure>
+
+[↑ Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Adding
 
@@ -204,11 +279,13 @@ interaction INDEX o/OUTCOME [DETAILS]
 
 **:information_source: Notes about the interaction command**<br>
 
+- `INDEX` refers to the index of the client profile in the displayed list of clients.
+
 - At least one of the `OUTCOME` or `DETAILS` parameters must be provided.
 
 - `OUTCOME` must be one of the following: `INTERESTED`, `NOT_INTERESTED`, `CLOSED`, `UNKNOWN`.
 
-- `OUTCOME` is case insensitive.
+- `OUTCOME` is not case sensitive. `interested` is also a valid outcome.
 
 </div>
 
@@ -310,7 +387,7 @@ view 4
 
 ### Finding a client by name: ***find***
 
-Managing a large client list can be difficult. Sometimes their index on the list can be hard to remember and this could affect your experience keying in certain commands. Don't worry though, we have a solution for you! The ***find*** command allows you to search for a client by name, and you use this client's index (usually 1) in other commands.
+Managing a large client list can be difficult. Sometimes their index on the list can be hard to remember and this could affect your experience keying in certain commands. Don't worry though, we have a solution for you! The ***find*** command allows you to search for a client by name, and you can use this client's index (usually 1) in other commands.
 
 **Format**
 ```text
@@ -361,21 +438,14 @@ dashboard
 You should see the following dashboard view in the application window.
 
 <figure>
-   <img src="images/Dashboard.png" alt="Dashboard view">
+   <img src="images/Ui.png" alt="Dashboard view">
    <figcaption align="center">
        <em>The dashboard view. Data shown may vary.</em>
    </figcaption>
 </figure>
 <br>
 
-On the left, we have Connectify's statistics which show:
-
-1. Uncontacted / Contacted / Closed clients
-2. Average interactions among all clients
-2. Breakdown of the different interaction outcomes
-3. Number of HOT / WARM / COLD leads
-
-On the right, we have the follow-ups section which shows upcoming follow-ups. Follow-up dates are determined automatically by the latest interaction date and the lead of the client.
+See [what each section of the dashboard means.](#dashboard-information)
 
 [↑ Back to Table of Contents](#table-of-contents)
 
@@ -385,8 +455,7 @@ On the right, we have the follow-ups section which shows upcoming follow-ups. Fo
 
 ### Editing a client profile: ***edit***
 
-Each different client may be marked with different leads (hot, warm, cold) that may change over time.
-Not only that, you might need to update the details of a client profile. Use the command ***edit*** to edit the specified client profile in your client list.
+As time passes, you might need to update the details of a client profile. Use the command ***edit*** to edit the specified client profile in your client list.
 
 **Format**
 ```text
@@ -394,7 +463,15 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]... [l/LEAD]
 [tg/TELEGRAM] [pf/PROFESSION] [i/INCOME] [d/DETAILS]
 ```
 
-Note that at least one of the optional parameters must be provided.
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the edit command**<br>
+
+- `INDEX` refers to the index of the client profile in the displayed list of clients.
+
+- At least one of the optional parameters must be provided.
+
+</div>
 
 Example
 1. `edit 1 l/HOT`
@@ -416,39 +493,47 @@ Example
 </figure>
 <br>
 
-<div markdown="block" class="alert alert-warning">
-
-**:bulb: Clearing all tags of a particular client**<br>
+#### Clearing all tags of a client
 
 You can use the ***edit*** command to clear all tags of a client by supplying an empty tag parameter! For example, if you wish to clear the tags of a client at index 4, you can use `edit 4 t/`.
 
-</div>
+#### Marking a client as a hot, warm or cold lead
 
-[↑ Back to Table of Contents](#table-of-contents)
+As salespeople, we need to gauge the potential of each client, which represents how likely they are to become a buying customer. We use hot leads to represent a customer with high potential, and cold leads to represent customers with low potential.
 
-### Editing a single field
+You can use the ***edit*** command to mark a client as a hot, warm or cold lead. For example, if you wish to mark a client at index 4 as a cold lead, you can use `edit 4 l/cold`.
+
+#### Editing a single field
 
 We understand the edit command can be a little tedious to use if you only want to edit a single field of a client profile. Hence, we have provided a shortcut for you to edit a single field of a client profile.
 
-This command is special because it's command word is the same as the field you want to edit. For example, if you want to edit the name of a client profile, you can use the ***name*** command.
+This command is special because its command word is the same as the field you want to edit. For example, if you want to edit the name of a client profile, you can use the ***name*** command.
 
 **Format**
 ```text
 FIELD INDEX NEW_VALUE
 ```
 
-Example
+**Example**
 
-1. `name 1 John Doe`
-2. `email 2 johndoe@example.com`
+- `name 1 John Doe`
 
-The first will edit the name of the client at index 1 to `John Doe`.
-The second will edit the email of the client at index 2 to `johndoe@example.com`.
+    Changes the name of the client at index 1 to `John Doe`.
+
+- `email 2 johndoe@example.com`
+
+    Changes the email of the client at index 2 to `johndoe@exmaple.com`.
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the edit commands**<br>
-This does not work for tags and interactions.
+**:information_source: Notes about this shortcut**<br>
+
+- `INDEX` refers to the index of the client profile in the displayed list of clients.
+
+- All valid `FIELD` parameters: ***name***, ***phone***, ***email***, ***address***, ***lead***, ***telegram***, ***profession***, ***income***, ***details***.
+
+- This does not work for the client's tags.
+
 </div>
 
 [↑ Back to Table of Contents](#table-of-contents)
@@ -477,18 +562,31 @@ delete 1
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Exiting the program: ***exit***
+
+Quits the Connectify application.
+
+**Format**
+```text
+exit
+```
+
+[↑ Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
 # Miscellaneous Notes
 
 ## Follow-up Calculation
 
 The follow-up date is calculated by the day of last interaction plus a follow-up period, determined by lead type as shown:
 
-| LeadType | Follow-Up Time |
-|----------|----------------|
-| HOT      | 1 week         |
-| WARM     | 4 weeks        |
-| COLD     | 8 weeks        |
-| UNKNOWN  | 4 weeks        |
+| Lead Type | Follow-Up Time |
+|-----------|----------------|
+| HOT       | 1 week         |
+| WARM      | 4 weeks        |
+| COLD      | 8 weeks        |
+| UNKNOWN   | 4 weeks        |
 
 
 For example, if your last interaction with John is on `1 Jan 2021` and he is a `HOT` lead, the follow-up date will be 1 week after `1 Jan 2021`, which is `8 Jan 2021`.
@@ -497,7 +595,15 @@ For example, if your last interaction with John is on `1 Jan 2021` and he is a `
 ## Command history
 You can use the up arrow key <kbd>&uarr;</kbd> to view your past commands and press <kbd>Enter</kbd> to execute them again.
 
-## `INCOME` Parameter
+## PHONE NUMBER Parameter
+
+Phone numbers should only contain numbers and they should be 3 - 15 digits long. An optional `+` sign is allowed in front.
+
+## TAG Parameter
+
+The tag parameter `t/TAG` only allows alphanumeric inputs with no spaces. For example, `t/familyfriend` is allowed, but `t/family friend` or `t/family-friend` is not allowed.
+
+## INCOME Parameter
 
 Incomes must only consist of numerical inputs. Connectify does not yet support:
 * Decimal values `600.50`
@@ -515,16 +621,16 @@ Incomes must only consist of numerical inputs. Connectify does not yet support:
 **Q**: How do I transfer my data to another computer?
 <br>
 **A**: 
-1) Find your data folder, it should be in the same directory as your Connectify jar file.
-   If your Connectify jar file is at `C:\Users\John\Desktop\Connectify\connectify.jar`, the data file will be at `C:\Users\John\Desktop\Connectify\data`
-2) Download Connectify on the other computer.
-3) Paste the data folder in the same directory as your Connectify jar file in your new computer.
+<br>
+1. Find your data folder - it should be in the same directory as your `connectify.jar` file.
+
+    If your Connectify jar file is at `C:\Users\John\Desktop\Connectify\connectify.jar`, the data folder will be at `C:\Users\John\Desktop\Connectify\data`.
+
+2. [Download Connectify](#quick-start) on the other computer.
+
+3. Paste the data folder in the same directory as your `connectify.jar` file in your other computer.
 
 [↑ Back to Table of Contents](#table-of-contents)
-
---------------------------------------------------------------------------------------------------------------------
-
-# Known issues 
 
 --------------------------------------------------------------------------------------------------------------------
 
