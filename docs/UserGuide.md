@@ -322,6 +322,8 @@ Format: `star INDEX`
 
 Example: `star 1`
 
+![starCommandExample-1](images/user-commands/starCommandExample1.png)
+
 Expected output: `Starred Date: John Doe; Age: 21; Gender: F; Height: 245; Income: 3000; Horoscope: LIBRA`
 
 [Scroll back to *Table of Contents*](#table-of-contents)
@@ -334,6 +336,8 @@ Unstars a date in the LoveBook.
 Format: `unstar INDEX`
 
 Example: `unstar 1`
+
+![unstarCommandExample](images/user-commands/unstarCommandExample.png)
 
 Expected output: `Unstarred Date: John Doe; Age: 21; Gender: M; Height: 123; Income: 3000; Horoscope: LIBRA`
 
@@ -351,6 +355,7 @@ Format: `find NAME [MORE_NAMES]`
 <box type="tip">
 
 **Tips:**
+
 Parameter constraints:
 * Name should be a non-empty string.
 * More names can be added to the command line, and the search will be conducted for all names provided
@@ -425,7 +430,7 @@ Order is limited to `increasing` or `decreasing` only
 
 **Caution:**
 
-When sorting dates by a field where both have an equal value, say Kevin and Wayne are sorted by income and both have
+When sorting dates by a field where both have an equal value, let's say Kevin and Wayne are sorted by income and both have
 an income of 2000, applying commands such as edit or star, can affect the stability of the sort. However, the overall
 sorting order by value is preserved.
 </box>
@@ -519,7 +524,7 @@ Expected Output: `Here's your best match!`
 
 #### **Getting a blind date: `blindDate`**
 
-Outputs a blind date from the LoveBook.
+Outputs a random date from the LoveBook.
 
 Format: `blindDate`
 
