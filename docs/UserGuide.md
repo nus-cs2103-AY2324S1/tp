@@ -33,7 +33,7 @@ to help you streamline your accounting.
 
 4. Double click `transact.jar` to start the app. The GUI below should appear in a few seconds.
 
-![Ui](images/Ui-Overview.png)
+![Ui](images/Ui.png)
 
 > **❗ If the above does not work, try this method:**
 >
@@ -81,7 +81,7 @@ Tran$act's GUI is simple and gives you access to all of its features with just o
 
 This should be what you see when you open Tran$act for the first time:
 
-![Ui](images/Ui-Overview.png)
+![Ui](images/Ui.png)
 
 The menu bar contains three tabs:
 

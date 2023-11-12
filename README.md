@@ -3,7 +3,7 @@
 
 # Tran$act
 
-![Ui](docs/images/Ui-Overview.png)
+![Ui](docs/images/Ui.png)
 
 Tran$act is a simple and easy to use transaction recorder and tracker built in Java and based on the **[Address Book Project](https://se-education.org/addressbook-level3)**.
 
