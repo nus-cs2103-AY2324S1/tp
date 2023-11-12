@@ -5,8 +5,44 @@ title: User Guide
 
 Teaching Assistant Manager (TAManager) is a desktop application for managing teaching assistants (TAs), optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TAM can help you manage your teaching assistant tasks more efficiently than traditional GUI apps.
 
+
+### 🌟 Welcome to TAManager - Your Teaching Assistant's Best Friend! 🌟
+
+Are you ready to turbocharge your teaching assistant management experience? Meet TAManager - the desktop application designed to make your life easier, whether you're a seasoned pro or just starting out.
+
+### 🚀 Why TAManager?
+TAManager isn't your average app. It's like having a teaching assistant for your teaching assistants! Imagine a tool that's as fast as typing and as intuitive as a friendly chat. That's TAManager for you.
+
+### 💡 Who is it for?
+TAManager is crafted with both experienced educators and newbies in mind. If you're someone who types faster than you can click, this is the tool for you! Whether you're managing one assistant or a whole team, TAManager is your go-to solution.
+
+
+### 🎉 What can TAManager do for you?
+- Effortlessly manage teaching assistant tasks
+- Navigate tasks with the speed of a command line interface
+- Enjoy the perks of a sleek graphical user interface
+
+Ready to revolutionize your teaching assistant game? Let's dive into the world of TAManager and make managing tasks a breeze! 🚀
+
+
+## Using this Guide
+
+This section will guide you on the various features of TAManager and how to use them.
+
+If you are a new user, we recommend that you read this guide starting from the [Quick Start](#quick-start) section.
+
+If you are an experienced user, you can use the [Table of Contents](#table-of-contents) below to quickly locate the relevant section. Alternatively, you can jump to the [Command Summary](#command-summary) section for an overview of the command syntax.
+
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: This block indicates command success.
+</div>
+
+<div markdown="block" class="alert alert-danger">
+:x: This block indicates command failure.
+</div>
+
 ## Table of Contents
-* Table of Contents
+
 {:toc}
 
 ---
@@ -27,16 +63,18 @@ Teaching Assistant Manager (TAManager) is a desktop application for managing tea
    Here are some example commands you can try:
 
    - `list`: Lists all teaching assistants.
-   - `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10`: Adds a teaching assistant named Snowball to the list.
+   - `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball t/fulltime c/CS1231S h/10`: Adds a teaching assistant named Snowball to the list.
    - `delete 3`: Deletes the 3rd teaching assistant shown in the current list.
    - `clear`: Deletes all teaching assistants.
    - `exit`: Exits the app.
 
 6. Refer to the [Features](#features) section below for details on each command.
 
+
 <span style="float:right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
 
 --------------------------------------------------------------------------------------------------------------------
+
 
 ## Command Format
 
@@ -87,11 +125,11 @@ Example:
 :heavy_check_mark: When the command succeeds:
 <div markdown="block" class="code">
 ```
-New teaching assistant added: Rayner Toh; Phone: 93812311; Email: rayner@example.com; Telegram: @raynertjx; 
-Free Time:  Tags: [parttime]; 
+New teaching assistant added: Rayner Toh; Phone: 93812311; Email: rayner@example.com; Telegram: @raynertjx;
+Free Time:  Tags: [parttime];
 Courses:
 Name: Software Engineering
-Lessons: [CS2103T Lecture 10:00-12:00, CS2103T Tutorial 10:00-12:00, CS2103T Laboratory 10:00-12:00]; 
+Lessons: [CS2103T Lecture 10:00-12:00, CS2103T Tutorial 10:00-12:00, CS2103T Laboratory 10:00-12:00];
 Work Hour: 4
 ```
 </div>
@@ -104,6 +142,7 @@ Work Hour: 4
 - Invalid parameter: The corresponding error message will be displayed.<br/>
 e.g. Invalid Telegram handle: `Telegram handle should be between 5-32 characters and should start with @, and it cannot contain any special characters except underscore.`
 </div>
+
 
 ### Editing a Teaching Assistant: `edit`
 
@@ -130,17 +169,17 @@ Example: `edit INDEX tele/@raynertohjingxiang`
 <div markdown="block" class="code">
 
 ```
-Edited Teaching Assistant: Rayner Toh; Phone: 93812311; Email: rayner@example.com; Telegram: @raynertohjingxiang; 
-Free Time: 
+Edited Teaching Assistant: Rayner Toh; Phone: 93812311; Email: rayner@example.com; Telegram: @raynertohjingxiang;
+Free Time:
 Mon: 08:00-12:00
 Tue: 08:00-12:00
 Wed: 08:00-12:00
 Thu: 08:00-12:00
 Fri: 08:00-12:00
-Tags: [parttime]; 
+Tags: [parttime];
 Courses:
 Name: Software Engineering
-Lessons: [CS2103T Lecture 10:00-12:00, CS2103T Tutorial 10:00-12:00, CS2103T Laboratory 10:00-12:00]; 
+Lessons: [CS2103T Lecture 10:00-12:00, CS2103T Tutorial 10:00-12:00, CS2103T Laboratory 10:00-12:00];
 Work Hour: 4
 ```
 </div>
@@ -153,6 +192,7 @@ Work Hour: 4
 - Invalid parameter: The corresponding error message will be displayed.<br/>
 e.g. Invalid course code: `Course codes should have 2-3 alphabets, followed by 4 digits, and optionally end with an alphabet.`
 </div>
+
 
 ### Removing a Teaching Assistant: `delete`
 
@@ -175,17 +215,17 @@ Examples:
 :heavy_check_mark: When the command succeeds:
 <div markdown="block" class="code">
 ```
-Deleted Teaching Assistant: Rayner Toh; Phone: 93812311; Email: rayner@example.com; Telegram: @raynertohjingxiang; 
-Free Time: 
+Deleted Teaching Assistant: Rayner Toh; Phone: 93812311; Email: rayner@example.com; Telegram: @raynertohjingxiang;
+Free Time:
 Mon: 08:00-12:00
 Tue: 08:00-12:00
 Wed: 08:00-12:00
 Thu: 08:00-12:00
 Fri: 08:00-12:00
-Tags: [parttime]; 
+Tags: [parttime];
 Courses:
 Name: Software Engineering
-Lessons: [CS2103T Lecture 10:00-12:00, CS2103T Tutorial 10:00-12:00, CS2103T Laboratory 10:00-12:00]; 
+Lessons: [CS2103T Lecture 10:00-12:00, CS2103T Tutorial 10:00-12:00, CS2103T Laboratory 10:00-12:00];
 Work Hour: 4
 ```
 </div>
@@ -210,7 +250,7 @@ e.g. `find c/CS2103T` or `find d/1 from/10:00 to/12:00`.
 - For the free time, all three prefixes `d/ from/ to/` must be present and all respective parameters need to be correctly given.
 - The search is case-insensitive. e.g `alex` will match `Alex`, `cs1231s` will match `CS1231S`.
 - Only full words will be matched e.g. `Alex` will not match `Alexis`, `cs1231` will not match `cs1231s`.
-- You can apply multiple search filters to narrow down the search results, through including multiple filters in 
+- You can apply multiple search filters to narrow down the search results, through including multiple filters in
 one command.
 - Teaching assistants matching all the search parameters will be returned.
 - The search filters are applied to the original list of TAs, not the current view of TAs.
@@ -293,7 +333,7 @@ Hour updated to all TAs identified!
 - Invalid command format (updated new hour is invalid, either below 0 or above 9999): `Invalid command format!`
 </div>
 
-### Edit free time for a teaching assistant: `editft`
+### Editing free time for a Teaching Assistant: `editft`
 
 You can edit the free time on a specified day for a specific teaching assistant.
 
@@ -361,7 +401,7 @@ Format: `teach c/COURSE_CODE`
 Expected outcome:
 - Updates the name of the window with the default course.
 - Filters the list of TAs teaching under the course automatically.
-- The default course is saved even after you close the application. 
+- The default course is saved even after you close the application.
 - The next time you open the application, the list of TAs will be automatically filtered based on your default course.
 
 Example: `teach c/CS2103T` sets the default course to the course CS2103T.

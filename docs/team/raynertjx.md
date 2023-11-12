@@ -34,7 +34,7 @@ Given below are my contributions to the project.
 * **Documentation for Developer Guide**:
     * Edited developer guide based on changes to `FindCommand` [\#64](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/64)
     * Modified Storage component diagram due to addition of `CoursesStorage` [\#150](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/150)
-  
+
 * **Documentation for User Guide**:
     * Updated UG based on changes made to `FindCommand` [\#60](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/60)
     * Standardised screenshots and fixed inconsistent formatting in UG [\#75](https://github.com/AY2324S1-CS2103T-T10-1/tp/pull/75)

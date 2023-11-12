@@ -7,7 +7,7 @@
   Example usages:
   * Access TA's contact details and availability for relief classes
   * Track TA's renumeration details
-  
+
 * It is named `TAManager` (`TAM` for short) because it was intended for easy management of TAs.
 * For detailed information about this project, including a user guide and a developer guide, visit our **[product page](https://ay2324s1-cs2103t-t10-1.github.io/tp/)**
 * The project builds on a brownfield software project called _AddressBook_ used for managing contact details.
