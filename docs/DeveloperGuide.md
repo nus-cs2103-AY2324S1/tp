@@ -949,9 +949,13 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
+  1. Delete the data file. <br>
+     Expected: The app launches normally and is pre-populated with a set of sample student data.
 
-  1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. Dealing with corrupted data files
+  1. Delete a random chunk of lines from the data file. <br>
+     Expected: The app launches normally with an empty data file.
 
 ## **Appendix: Effort**
 If the implementation effort required to create AB3 from scratch is 10, we estimate that the effort we spent to create
