@@ -17,6 +17,9 @@ Given below are my contributions to the project.
         * <u>What it does</u>: Deletes schedules from TutorConnect.
     * **Updated feature [#103](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/103)**: Added system's ability to save schedule objects to/from json.
         * <u>What it does</u>: Allows system to read schedules from json and serialize it to `Model`'s type which is `Schedule` object, and vice versa for writing.
+
+<div style="page-break-after: always;"></div>
+
 * **Documentation**:
     * <u>User Guide</u>:
         * **[#227](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/227)**: Added details of feature to find schedule.
