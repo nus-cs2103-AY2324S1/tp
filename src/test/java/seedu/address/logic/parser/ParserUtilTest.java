@@ -15,6 +15,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.BloodType;
+import seedu.address.model.person.Condition;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Ic;
 import seedu.address.model.person.Name;
@@ -30,6 +32,9 @@ public class ParserUtilTest {
     private static final String INVALID_IC2 = "T934865H";
     private static final String INVALID_PATIENT_TAG = "priority: HIGHEST";
     private static final String INVALID_DOCTOR_TAG1 = "NURSE";
+    private static final String INVALID_BLOOD_TYPE1 = "o+";
+    private static final String INVALID_BLOOD_TYPE2 = "O";
+    private static final String INVALID_CONDITION = " ";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -43,6 +48,8 @@ public class ParserUtilTest {
     private static final String VALID_PATIENT_TAG2 = "priority: HIGH";
     private static final String VALID_DOCTOR_TAG1 = "SURGEON";
     private static final String VALID_DOCTOR_TAG2 = "CARDIOLOGIST";
+    private static final String VALID_BLOOD_TYPE = "O+";
+    private static final String VALID_CONDITION = "appendicitis";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -252,5 +259,42 @@ public class ParserUtilTest {
                 new Tag(VALID_DOCTOR_TAG2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseBloodType_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseBloodType((String) null));
+    }
+
+    @Test
+    public void parseBloodType_BloodTypeWithoutCaps_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBloodType(INVALID_BLOOD_TYPE1));
+    }
+
+    @Test
+    public void parseBloodType_invalidBloodType_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBloodType(INVALID_BLOOD_TYPE2));
+    }
+
+    @Test
+    public void parseBloodType_validBloodType_returnsBloodType() throws Exception {
+        BloodType expectedBloodType = new BloodType(VALID_BLOOD_TYPE);
+        assertEquals(expectedBloodType, ParserUtil.parseBloodType(VALID_BLOOD_TYPE));
+    }
+
+    @Test
+    public void parseCondition_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCondition((String) null));
+    }
+
+    @Test
+    public void parseCondition_invalidCondition_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCondition(INVALID_CONDITION));
+    }
+
+    @Test
+    public void parseCondition_validCondition_returnsCondition() throws Exception {
+        Condition expectedCondition = new Condition(VALID_CONDITION);
+        assertEquals(expectedCondition, ParserUtil.parseCondition(VALID_CONDITION));
     }
 }
