@@ -9,6 +9,7 @@ pageNav: 3
 <!-- * Table of Contents -->
 <page-nav-print />
 --------------------------------------------------------------------------------------------------------------------
+
 ## **1. Introduction**
 
 ### **1.1. Product Overview**
@@ -88,7 +89,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-`GroupTimeContainer` is a helper class that process the data from the `model` in `Calendar` and passes the processed data to `DayCard` which will be then displayed in the `UI`. 
+`GroupTimeContainer` is a helper class that process the data from the `model` in `Calendar` and passes the processed data to `DayCard` which will be then displayed in the `UI`.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
@@ -272,74 +273,7 @@ Below is a sequence diagram that summarizes how a user creates a new group:
     * Pros: Users can reuse commonly used group names
     * Cons: Users may get confused as to what each group is meant for
 
-### Delete feature
-
-#### Implementation
-
-The proposed delete person/group mechanism is facilitated by `AddressBook`. It implements the following operations:
-
-* `AddressBook#removePerson(Person p)` — Removes Person p from the address book.
-* `AddressBook#removeGroup(Group g)` — Remove Group g from the address book.
-
-These operations are exposed in the `Model` interface as `Model#deletePerson()`, `Model#deleteGroup()` respectively.
-
-##### Delete Person
-
-Given below is an example usage scenario and how the Delete Person mechanism behaves at each step.
-
-Step 1. The user executes `delete n/Alex Yeoh` command to delete a person named 'Alex Yeoh' in the address book. After parsing, a new `DeletePersonCommand` object will be returned.
-
-Step 2. `DeletePersonCommand` is executed, in which `Model#deletePerson()` is called, removing the Person with name 'Alex Yeoh' from the address book while returning the `Person` object.
-
-<box type="info" seamless>
-
-**Note:** If no such person named 'Alex Yeoh' exists, a `CommandException` will be thrown.
-
-</box>
-
-Step 3. `Person#getGroups()` is called to obtain a `GroupList` of groups the target person is part of.
-
-Step 4. The `GroupList` is converted into a stream, where each element is a `Group`. `Group#removePerson()` is called for each Group in the stream, removing the target Person from all `ObserverableList<Person> listOfGroupMates` in `Group`.
-
-The following sequence diagram shows how the Delete Person operation works:
-
-<puml src="diagrams/DeletePersonSequenceDiagram.puml" alt="DeletePersonSequence" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `DeletePersonCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-##### Delete Group
-
-Given below is an example usage scenario and how the Delete Group mechanism behaves at each step.
-
-Step 1. The user executes `delete g/CS2100` command to delete a group named 'CS2100' in the address book. After parsing, a new `DeleteGroupCommand` object will be returned.
-
-Step 2. `DeleteGroupCommand` is executed, in which `Model#deleteGroup()` is called, removing the `Group` with name 'CS2100' (the target group) from the address book while returning the `Group` object.
-
-<box type="info" seamless>
-
-**Note:** If no such group named 'CS2100' exists, a `CommandException` will be thrown.
-
-</box>
-
-Step 3. `Group#getListOfGroupMates()` is called to obtain a `ObservableList<Person>` of Persons that are a part of the target group.
-
-Step 4. The `ObservableList<Person>` is converted into a stream, where each element is a `Person`. `Person#removeGroup()` is called for each Person in the stream, removing the target Group from all `GroupList groups` in `Person`.
-
-Step 5. `DeleteGroupCommand` creates a new `CommandResult` with the corresponding message, and returns the result to the `LogicManager`.
-
-The following sequence diagram shows how the Delete Group operation works:
-
-<puml src="diagrams/DeleteGroupSequenceDiagram.puml" alt="DeleteGroupSequence" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `DeleteGroupCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
+--------------------------------------------------------------------------------------------------------------------
 
 ### Group Remark Feature
 
@@ -462,7 +396,216 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Easier to load from storage. One centralized place to store data. Less coupling.
     * Cons: Searching might become more costly.
 
-* --------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
+
+### List
+
+#### Implementation
+
+The List mechanism is facilitated by the `Model` class.
+
+The operations they implement are exposed in the `Model` interface as `Model#updateFilteredPersonList(Predicate<Person> predicate)`.
+
+Given below is an example usage scenario and how the list mechanism behaves at each step.
+
+**Step 1:** User executes `list` command to view all contacts. After parsing, a new `ListCommand` object will be returned.
+
+**Step 2:** `FindPersonCommand` is executed, in which `Model#updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)` is called with the Predicate<Person> which will be true for all contacts. This updates the address book view, showing all the contacts in the address book to the user.
+
+The following activity diagram summarizes what happens when a user executes a list command:
+
+<puml src="diagrams/ListCommandSequenceDiagram.puml" alt="ListCommandSequence" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `ListCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Find Person and Find Group features
+
+#### Implementation
+
+The Find person/group mechanisms are facilitated by the `Model` class.
+
+The operations they implement are exposed in the `Model` interface as `Model#updateFilteredPersonList(Predicate<Person> predicate)`.
+
+Both `FindPersonCommand` and `FindGroupCommand` implement an abstract class `FindCommand`, which helps to encapsulate the similarities between these two commands.
+
+Since both Find Person and Find Group commands utilise the same command word, the `FindCommandParser` will create either a `FindPersonCommand` or  `FindGroupCommand` and return it as a `FindCommand` after parsing the user input.
+
+The following activity diagram summarizes what happens when a user executes a find command:
+
+<puml src="diagrams/FindCommandActivityDiagram.puml" alt="FindCommandActivity" />
+
+### Find Person
+
+Given below is an example usage scenario and how the Find Person mechanism behaves at each step.
+
+Step 1. The user executes `find n/Alex John` command to find all contacts whose names contain either 'Alex' or 'John' in the address book. After parsing, a new `FindPersonCommand` object will be returned along with the corresponding `Predicate<Person>`.
+
+Step 2. `FindPersonCommand` is executed, in which `Model#updateFilteredPersonList()` is called with the Predicate<Person>. This through all the contacts in the address book, showing the updated list of contacts whose names start with 'Alex' or 'John' to the user.
+
+<box type="info" seamless>
+
+**Note:** If there are no contacts whose name contains 'Alex, or 'John', no contacts will be shown.
+
+</box>
+
+
+The following sequence diagram shows how the Find Person operation works:
+
+
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `FindPersonCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+### Find Group
+
+The Find Group mechanism works like the Find Person mechanism, but it calls on an extra method `Group#getGroupRemark()`.
+
+Given below is an example usage scenario and how the Find Group mechanism behaves at each step.
+
+Step 1. The user executes `find g/CS2100` command to find all contacts belonging in a group named 'CS2100' in the address book. After parsing, a new `FindGroupCommand` object will be returned along with the corresponding `Predicate<Person>`.
+
+Step 2.  `FindGroupCommand` is executed, in which `Model#updateFilteredPersonList()` is called with the Predicate<Person>. This through all the contacts in the address book, showing the updated list of contacts who belong in the group 'CS2100'.
+
+<box type="info" seamless>
+
+**Note:** If no such group named 'CS2100' exists, a `CommandException` will be thrown.
+
+</box>
+
+Step 3. `Group#getGroupRemarks()` is called, and the previously saved group remarks is displayed to the user.
+
+The following sequence diagram shows how the Find Group operation works:
+
+
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `FindGroupCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+#### Design Considerations
+
+**Aspect: How to handle two similar but different commands (find by group and find by name)**
+
+* **Alternative 1 (current choice):** Use the same command word
+  * Pros: Reduces the amount of command words that users have to remember
+  * Cons: Users may get confused because one command word can be used for different things
+
+* **Alternative 2:** Use different command words for both commands
+  * Pros: Less confusing as it is intuitive that different command words are used for different commands
+  * Cons: Users have to remember more command words which may take more time to get used to
+
+**Aspect: Case-sensitivity for find by name**
+
+* **Alternative 1 (current choice):** Not case-sensitive
+  * Pros: Fulfils its functionality better as users can search freely for their contacts even if they do not remember the exact name their contacts were saved under
+  * Cons: Users may get confused because aside from find by name, other user inputs are all case-sensitive
+
+* **Alternative 2:** Case sensitive
+  * Pros: Less confusing as it is more intuitive that all user inputs are case-sensitive, and users will be able to find specific contacts easily if they remember how exactly they were saved by
+  * Cons: Might hinder some more forgetful users from finding their contacts in mind if they do not remember how they capitalised their contacts when adding them
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Delete Person and Delete Group features
+
+#### Implementation
+
+The Delete person/group mechanisms are facilitated by `AddressBook`, involving other classes like `Person` and `Group`. It implements the following operations:
+
+* `AddressBook#removePerson(Person p)` — Removes Person p from the address book.
+* `AddressBook#removeGroup(Group g)` — Removes Group g from the address book.
+
+These operations are exposed in the `Model` interface as `Model#deletePerson()`, `Model#deleteGroup()` respectively.
+
+Both `DeletePersonCommand` and `DeleteGroupCommand` implement an abstract class `DeleteCommand`, which helps to encapsulate the similarities between these two commands.
+
+Since both Delete Person and Delete Group commands utilise the same command word, the `DeleteCommandParser` will create either a `DeletePersonCommand` or  `DeleteGroupCommand` and return it as a `DeleteCommand` after parsing the user input.
+
+The following activity diagram summarizes what happens when a user executes a delete command:
+
+<puml src="diagrams/DeleteCommandActivityDiagram.puml" alt="DeleteCommandActivity" />
+
+### Delete Person
+
+Given below is an example usage scenario and how the Delete Person mechanism behaves at each step.
+
+Step 1. The user executes `delete n/Alex Yeoh` command to delete a person named 'Alex Yeoh' in the address book. After parsing, a new `DeletePersonCommand` object will be returned.
+
+Step 2. `DeletePersonCommand` is executed, in which `Model#deletePerson("Alex Yeoh")` is called.
+
+<box type="info" seamless>
+
+**Note:** If no such person named 'Alex Yeoh' exists, a `CommandException` will be thrown.
+
+</box>
+
+Step 3. `Model#deletePerson()` will also call `AddressBook#removePerson(Alex Yeoh)` which will remove the contact named 'Alex Yeoh' from the address book while removing it from all the groups it was part of.
+
+The following sequence diagram shows how the Delete Person operation works:
+
+<puml src="diagrams/DeletePersonSequenceDiagram.puml" alt="DeletePersonSequence" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `DeletePersonCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+### Delete Group
+
+Given below is an example usage scenario and how the Delete Group mechanism behaves at each step.
+
+Step 1. The user executes `delete g/CS2100` command to delete a group named 'CS2100' in the address book. After parsing, a new `DeleteGroupCommand` object will be returned.
+
+Step 2. `DeleteGroupCommand` is executed, in which `Model#deleteGroup("CS2100")` is called, removing the `Group` with name 'CS2100' (the target group) from the address book while returning the `Group` object.
+
+<box type="info" seamless>
+
+**Note:** If no such group named 'CS2100' exists, a `CommandException` will be thrown.
+
+</box>
+
+Step 3. `Group#getListOfGroupMates()` is called to obtain a `ObservableList<Person>` of Persons that are a part of the target group.
+
+Step 4. The `ObservableList<Person>` is converted into a stream, where each element is a `Person`. `Person#removeGroup(CS2100)` is called for each Person in the stream, removing the target Group from the `GroupList` in `Person`.
+
+Step 5. `DeleteGroupCommand` creates a new `CommandResult` with the corresponding message, and returns the result to the `LogicManager`.
+
+The following sequence diagram shows how the Delete Group operation works:
+
+<puml src="diagrams/DeleteGroupSequenceDiagram.puml" alt="DeleteGroupSequence" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `DeleteGroupCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+#### Design Considerations
+
+**Aspect: How to handle two similar but different commands (delete group and delete person)**
+
+* **Alternative 1 (current choice):** Use the same command word
+  * Pros: Reduces the amount of command words that users have to remember
+  * Cons: Users may get confused because one command word can be used for different things
+
+* **Alternative 2:** Use different command words for both commands
+  * Pros: Less confusing as it is intuitive that different command words are used for different commands
+  * Cons: Users have to remember more command words which may take more time to get used to
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## 4. Planned Enhancements
 
 ### 4.1. Undo/redo feature

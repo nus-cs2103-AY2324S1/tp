@@ -9,8 +9,8 @@ if () then ([else])
 :ProjectPRO throws an error;
 else ([One group specified])
 :Check if group exists;
-if () then ([Group does not exist[)
-:ProjectPRO creates new group;
+if () then ([Group does not exist])
+:ProjectPro creates new group;
 else([Else])
 :ProjectPRO throws an error;
 endif
