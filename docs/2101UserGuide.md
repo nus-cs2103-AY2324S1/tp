@@ -90,7 +90,7 @@ Here is how you can use it:<br>
 `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 <div markdown="block" class="alert alert-info">
-:information_source: At least one field must be provided.
+:information_source: Remember to provide at least one field to be edited!
 </div>
 
 Here is an example command where we edit the member at **index** 1 in the displayed list, changing their **phone number** to "91234567" and **email** to "johndoe@example.com":
