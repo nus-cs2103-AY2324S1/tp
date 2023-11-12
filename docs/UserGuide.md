@@ -83,7 +83,7 @@ This should be what you see when you open Tran$act for the first time:
 
 ![Ui](images/Ui.png)
 
-The menu bar contains three tabs:
+The menu bar contains three menu buttons:
 
 1. **File** — Contains actions like exporting data and exiting the program.
    1. Export
@@ -98,8 +98,8 @@ The menu bar contains three tabs:
 
 Under the menu bar contains three tabs:
 
-1. **Overview** — This tab shows you a monthly summary of your finances based on the transactions you have entered. Although it's empty right now, when you have added a few transactions it will begin to show graphs.
-2. **Transactions** — This tab shows you the transactions you have entered in a row-by-row format
+1. **Overview** — This tab shows you a monthly summary of your finances based on the transactions you have entered. When you have transactions, the graph will be populated.
+2. **Transactions** — This tab shows you the transactions you have entered in a table.
    ![Ui](images/Ui-Transactions.png)
 3. **Staff List** — This tab shows you the persons or parties you have entered in a list format.
    ![Ui](images/Ui-Staff.png)
@@ -108,8 +108,8 @@ Under the menu bar contains three tabs:
 >
 > The indexing serves as a way to link transactions to the respective staff
 
-The input field below this with the grey text `Enter command here...` is the command box, where you can enter your commands.
-Below the command box is the output window. This is where messages Tran$act has will be provided to you, from success messages to command input errors. You can clear it with `clear`.
+The input field with the grey text `Enter command here...` is the command box, where you can enter your commands.
+Below the command box is the output window. This is where Tran$act's messages will be shown to you, from success messages to command input errors. You can clear it with `clear`.
 
 ## Features
 
@@ -124,12 +124,11 @@ optionally, the associated person. The system validates your input data and reco
 
 **2. Removing Transactions**
 
-Remove transactions from your records with ease. Simply select the transaction you wish to delete, and the system will
-confirm the removal before removing it from the database.
+Remove transactions from your records with ease. Simply specify the ID of the transaction you wish to delete, and the system will remove it from the database.
 
 **3. Viewing All Transactions**
 
-View a comprehensive list of all recorded transactions for reference. This list provides an overview of all financial
+View a comprehensive list of all recorded transactions in one table. This list provides an overview of all financial
 activities in one place.
 
 **4. Editing Transactions**
@@ -139,7 +138,7 @@ your records are accurate.
 
 **5. Filtering Transactions**
 
-Need to find transactions meeting a specific criteria, and order them? Tran$act allows you to filter transactions by
+Need to find transactions meeting a specific criteria? Tran$act allows you to filter transactions by
 date, amount and person.
 
 **6. Sorting Transactions**
