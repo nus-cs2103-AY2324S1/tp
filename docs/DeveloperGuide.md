@@ -392,7 +392,7 @@ Given below is an example usage scenario for the command:
 
 **Step 1**: The user launches the application.
 
-**Step 2**: The user executes the `report id/EMPLOYEE_ID` command in the CLI.
+**Step 2**: The user executes the `report EMPLOYEE_ID` command in the CLI.
 
 **Step 3**: A report will be generated for the employee with the given ID.
 
@@ -669,7 +669,7 @@ The method `EditLeaveCommand#execute()` returns a new `CommandResult` object, wh
 
 The following sequence diagram below shows how the edit leave operation works:
 
-![Edit Leaave Sequence Diagram](images/EditLeaveSequenceDiagram.png)
+![Edit Leave Sequence Diagram](images/EditLeaveSequenceDiagram.png)
 
 Given below is an example usage scenario for the command:
 
@@ -732,6 +732,61 @@ Given below is an example usage scenario for the command.
 
 
 _{more aspects and alternatives to be added}_
+
+### Overtime feature
+
+The overtime feature allows HouR users to manage employee overtime hours.
+
+#### Implementation
+
+The overtime command mechanism is facilitated by `OvertimeCommandParser` class which implements the `Parser` interface.
+
+`OvertimeCommandParser#parse()` is exposed in the `Parser` interface as `Parse#parse()`.
+
+`OvertimeCommandParser` implements the following operations:
+
+* `OvertimeCommandParser#parse()` — Parses the input arguments by storing the index and the prefix of its 
+respective values as an `ArgumentMultimap`, and creates a new `OvertimeCommand` object with the parsed id and overtime 
+hours.
+
+The `OvertimeCommand` object then communicates with the `Model` API by calling the following methods:
+
+* `Model#setEmployee(Employee, Employee)` — Sets the employee in the existing employee list to the new `Employee` 
+object which has been edited by `OvertimeCommand#execute()`.
+
+The method `OvertimeCommand#execute()` returns a new `CommandResult` object, which stores information about the 
+completion of the command.
+
+The following sequence diagram below shows how the overtime operation works:
+
+![Overtime Sequence Diagram](images/OvertimeSequenceDiagram.png)
+
+Given below is an example usage scenario for the command:
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `overtime id/EMPLOYEE_ID o/OPERATION a/AMOUNT` command in the CLI.
+* `OPERATION` is either `inc` or `dec`.
+* 
+**Step 3**: The given overtime hours will be added to the employee with the provided ID.
+
+**Aspect: Model-Employee Interaction:**
+
+* **Alternative 1 (current choice)**: Utilise `model#setEmployee` to add the edited employee into the model, doing the 
+direct editing in `OvertimeCommand#execute()`.
+    * Pros: More code reuse. Maintain immutability within Employee and Model classes. 
+    * Cons: Potentially violates SRP.
+
+* **Alternative 2**: Create methods in model specifically to edit the `overtimeHours` attribute of the employee.
+    * Pros: More OOP, follows SRP by not having `OvertimeCommand#execute()` perform the editing directly.
+    * Cons: More code duplication. Longer command execution, requires more parts to work together.
+
+The following activity diagram summarizes what happens when a user executes the overtime command:
+
+![Overtime Activity Diagram](images/OvertimeActivityDiagram.png)
+
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
