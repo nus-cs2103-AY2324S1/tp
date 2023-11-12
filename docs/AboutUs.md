@@ -33,7 +33,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/tanyyyming.png" width="200px">
 
-[[github](http://github.com/tanyyming)] 
+[[github](http://github.com/tanyyyming)] 
 [[portfolio](team/tanyyyming.md)]
 
 * Role: Developer
