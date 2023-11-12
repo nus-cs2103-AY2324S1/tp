@@ -11,6 +11,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -48,8 +49,12 @@ public class TimeSlot {
     public static List<TimeSlot> parseIntervals(List<String> timeSlots) throws ParseException {
         List<TimeSlot> timeSlotObjects = new ArrayList<>();
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        Pattern timePattern = Pattern.compile("\\d{2}:\\d{2}");
         for (String timeSlot : timeSlots) {
+            assert timeSlot.charAt(6) == '-';
             String[] times = timeSlot.split(" - ");
+            assert timePattern.matcher(times[0]).matches();
+            assert timePattern.matcher(times[1]).matches();
             Date start = dateFormat.parse(times[0]);
             Date end = dateFormat.parse(times[1]);
             timeSlotObjects.add(new TimeSlot(start, end));
