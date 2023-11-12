@@ -74,7 +74,6 @@ Given below are my contributions to the project.
     * Implement schedule structure: update AddressBook to include schedules. (Pull request 
     [#98](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/98),
     [#101](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/101))
-    * Triage PED bugs.
     * Standardising formatting and proofreading UG and DG.
 
 * **Review/ mentoring contributions**:
