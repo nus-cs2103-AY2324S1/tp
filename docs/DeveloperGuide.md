@@ -509,7 +509,7 @@ The GUI then updates to show this information to the user.
   - Pros: Unambiguous that the term to be searched for is the name.
   - Cons: As the current find function only supports searching by name, adding the additional `n/` is unnecessary.
 
-- Alternative 2 (current chocie): `find KEYWORDS [MORE_KEYWORDS]`
+- Alternative 2 (current choice): `find KEYWORDS [MORE_KEYWORDS]`
   - Pros: Allows for faster typing as users do not need to input the unnecessary `n/` tag.
   - Cons: Not immediately clear that the `find` command finds applications by name. 
   This will have to be explained in the user guide.
@@ -1015,19 +1015,19 @@ Guarantees: The applicant list will be populated with data from the imported CSV
   
     Use case ends.
 
-* 1d. User uses an file with duplicate applicants.
+* 1d. User uses a file with duplicate applicants.
 
     * 1d1. Staff-Snap shows an error message.
 
       Use case ends.
 
-* 1e. User uses an file with applicants that are already in Staff-Snap.
+* 1e. User uses a file with applicants that are already in Staff-Snap.
 
     * 1e1. Staff-Snap shows an error message.
 
       Use case ends.
 
-* 1f. User uses an file with invalid fields.
+* 1f. User uses a file with invalid fields.
 
     * 1f1. Staff-Snap shows an error message.
 
