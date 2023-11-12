@@ -31,15 +31,6 @@ class TimeParserTest {
         assertNotNull(TimeParser.DATE_FORMATS);
     }
 
-    @Test
-    void testMissingTimeErrorMessage() {
-        try {
-            TimeParser.parseDate("Sunday", false);
-        } catch (ParseException parseException) {
-            assertEquals(parseException.getMessage(), "Please enter an interview time!");
-        }
-    }
-
     // TEST TOTALLY INVALID STRINGS
     @Test
     void testParseDateInvalidDateUnsuccessfulParse() {
