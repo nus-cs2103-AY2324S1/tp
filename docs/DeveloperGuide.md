@@ -173,7 +173,7 @@ In this example, the user enters `list students`.
 
 The following sequence diagram shows how `ListAttendanceCommand` works:
 ![ListAttendanceSeqDiagram](images/ListAttendanceSeqDiagram.png)
-In this example, the user enters `list attendance w/1 tg/G2`.
+In this example, the user enters `list attendance w/1 tg/G2`, where there are valid students in Tutorial Group G2.
 
 The following activity diagram summarizes what happens when the user executes a `ListAttendanceCommand`.
 ![ListAttendanceSeqDiagram](images/ListAttendanceActivityDiagram.png)
@@ -661,7 +661,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. User leaves the tutorial group ID blank.
-    * 1a1. TAvigator shows a summary of all attendance records of students in the course and the contact list of all absentees for the week specified.
+    * 1a1. TAvigator shows a summary of attendance records of all students in the course for the week specified.
 
       Use case ends.
 
@@ -687,7 +687,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to view a list of students.
-2.  TAvigator shows a list of all students in the current course.
+2.  TAvigator shows a list of all students in the course.
 
     Use case ends.
 
