@@ -234,6 +234,7 @@ Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BI
 </div>
 
 <div markdown="span" class="alert alert-warning">
+
 :exclamation: **Disclaimer: Editing a person with a filtered contacts list might cause the person to disappear. Do not worry, your data is not deleted**.<br>
 
 * Take this scenario:
@@ -243,6 +244,7 @@ Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BI
   * `Alex` will disappear from the person list, because your previous search term `Alex` no longer matches the new name of the person, `Bob`.
   * To see `Bob` in the person list again, you can use the [`list_persons`](#listing-all-persons--listpersons) command to bring back the whole list of persons.
   * In contrast with the above scenario, using an [`add_person`](#adding-a-person-addperson) command will automatically bring back the whole list of persons, to show you that your new person has been added to FumbleLog.
+
 </div>
 
 **Expected output when the command succeeds:**
