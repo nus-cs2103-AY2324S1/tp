@@ -19,25 +19,25 @@ Given below are my contributions to the project:
 * **New Feature**: `config` command (PR: [#82](https://github.com/AY2324S1-CS2103T-T11-1/tp/pull/82))
   * What it does: Allows users to configure Class Manager with the tutorial and assignment count of the module.
   * Justification: This feature allows users to configure the application based on their module, as the tutorial and assignment count may vary across classes. The correct number of tutorials and assignments can then be displayed for accurate recording of student's attendance, class participation and assignment grades.
-  * Highlights: Implementing this feature also requires sufficient understanding of the `Model` and `Storage` components of the application. In order for `config` to be used multiple times, I had to reset the class details of existing students whenever the user configured Class Manager. The previous states of Class Manager also had to be reset to prevent users from using `undo` commands to reach a state before Class Manager was configured.
+  * Highlights: Implementing this feature also requires sufficient understanding of the `Model` and `Storage` components of the application. For `config` to be used multiple times, I had to reset the class details of existing students whenever the user configured Class Manager. The previous states of Class Manager also had to be reset to prevent users from using `undo` commands to reach a state before Class Manager was configured.
 
 * **Enhancement to existing AB-4 features**: `undo` and `redo` command (PR: [#119](https://github.com/AY2324S1-CS2103T-T11-1/tp/pull/119))
   * What it does: Allows users to undo and redo commands that modify the state of Class Manager.
   * Justification: This feature allows users to undo and redo commands that modify the data of Class Manager. This is especially useful for TAs who may have accidentally deleted a student or recorded the wrong attendance for a student.
-  * Highlights: Reusing this AB-4 feature requires a comprehensive understanding of all components of Class Manager, as almost every component had to be updated to support undo and redo. There was also deliberate effort to ensure that only relevant commands could be undone and redone. For example, the `list` command cannot be undone as it is not a command that modifies the data of Class Manager.
+  * Highlights: Reusing this AB-4 feature requires a comprehensive understanding of all components of Class Manager, as almost every component had to be updated to support undo and redo. There was also a deliberate effort to ensure that only relevant commands could be undone and redone. For example, the `list` command cannot be undone as it is not a command that modifies the data of Class Manager.
   * Credits: This feature reused the code of `undo` and `redo` commands from [AddressBook-Level4](https://github.com/se-edu/addressbook-level4).
 
 * **Documentation**:
     * User Guide:
-      * Added documentation for the following features: `load`, `config`, `undo`, `redo`, `history`, `help`, `exit`.
+      * Added documentation for the following features: `load`, `config`, `undo`, `redo`, `history`, `help` and `exit`.
       * Added introduction and overview sections.
       * Added features section that provides helpful tips to users.
       * Formatted the command summary table into relevant sections.
-      * Handled formatting and spell checking of the User Guide.
+      * Handled formatting and spell-checking of the User Guide.
     * Developer Guide:
-      * Added implementation details of the following features: `load`, `config`, `undo`, `redo`.
+      * Added implementation details of the following features: `load`, `config`, `undo` and `redo`.
       * Added user stories and use cases.
-      * Added manual testing for the following features: `config`, `history`.
+      * Added manual testing for the following features: `config` and `history`.
 
 * **Team-based tasks**:
   * Set up the GitHub team organisation and repository.
