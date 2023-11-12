@@ -126,7 +126,8 @@ public class PersonTest {
     @Test
     public void isUncontacted() {
         assertEquals(ALICE.getInteractions().get(0).getOutcome(), Interaction.Outcome.INTERESTED);
-        assertEquals(ALICE.getInteractions().get(0).getDate().isEqual(LocalDate.of(2023,10,27)), true);
+        assertEquals(ALICE.getInteractions().get(0).getDate().isEqual(
+            LocalDate.of(2023, 10, 27)), true);
         assertEquals(true, ALICE.isUncontacted());
         assertEquals(false, BENSON.isUncontacted());
         assertEquals(false, ELLE.isUncontacted());
