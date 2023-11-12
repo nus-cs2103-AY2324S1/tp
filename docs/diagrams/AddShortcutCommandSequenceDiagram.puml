@@ -1,7 +1,8 @@
 @startuml
 !include style.puml
 skinparam ArrowFontStyle plain
-
+skinparam defaultFontSize 20
+'
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
@@ -15,10 +16,10 @@ participant ":Model" as Model MODEL_COLOR
 participant ":ShortcutSettings" as ShortcutSettings MODEL_COLOR
 end box
 
-[-> LogicManager : execute("addsc sc/del kw/delete")
+[-> LogicManager : execute\n("addsc sc/del kw/delete")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("addsc sc/del kw/delete")
+LogicManager -> AddressBookParser : parseCommand\n("addsc sc/del kw/delete")
 activate AddressBookParser
 
 create AddShortcutCommandParser
@@ -28,7 +29,7 @@ activate AddShortcutCommandParser
 AddShortcutCommandParser --> AddressBookParser
 deactivate AddShortcutCommandParser
 
-AddressBookParser -> AddShortcutCommandParser : parse("sc/del kw/delete")
+AddressBookParser -> AddShortcutCommandParser : parse\n("sc/del kw/delete")
 activate AddShortcutCommandParser
 
 create AddShortcutCommand
@@ -50,13 +51,13 @@ deactivate AddressBookParser
 LogicManager -> AddShortcutCommand : execute()
 activate AddShortcutCommand
 
-AddShortcutCommand -> Model : registerShortcut(del, delete)
+AddShortcutCommand -> Model : registerShortcut\n(del, delete)
 activate Model
 
-Model -> ShortcutSettings : registerShortcut(del, delete)
+Model -> ShortcutSettings : registerShortcut\n(del, delete)
 activate ShortcutSettings
 
-ShortcutSettings -> Model
+ShortcutSettings --> Model
 deactivate ShortcutSettings
 
 Model --> AddShortcutCommand

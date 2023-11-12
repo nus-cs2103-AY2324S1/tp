@@ -15,7 +15,7 @@ import seedu.address.model.Model;
 public class AddShortcutCommand extends Command {
     public static final String COMMAND_WORD = "addsc";
     public static final String MESSAGE_SUCCESS = "New shortcut added: %1$s";
-    public static final String MESSAGE_DUPLICATE = "That short cut already exists: %1$s;";
+    public static final String MESSAGE_DUPLICATE = "That shortcut already exists: %1$s;";
     public static final String MESSAGE_REPLACED = "Old shortcut %1$s was removed as a result.";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Registers the shortcut to the valid command keyword for future use.\n"

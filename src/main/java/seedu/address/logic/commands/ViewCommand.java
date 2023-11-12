@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Displays a person's detailed information in the view panel.
  */
 public class ViewCommand extends Command {
 

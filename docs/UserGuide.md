@@ -17,7 +17,7 @@ DoConnek Pro is a **desktop app** that helps **General Practitioner Clinic Manag
 
 1. Copy the file to the folder you want to use as the _home folder_ for your DoConnek Pro.
 
-1. Open a command terminal (You can search for the "Command Prompt" application on Windows or the "Terminal" application on MacOS).
+1. Open a command terminal (You can search for the "Command Prompt" application on Windows or the "Terminal" application on macOS).
 
 1. `cd` into the folder you put the jar file in ([How to use `cd`](https://www.lifewire.com/change-directories-in-command-prompt-5185508#:~:text=In%20the%20command%20prompt%20window%2C%20type%20cd%20followed%20by%20the,the%20one%20you're%20in.&text=If%20you%20want%20to%20go,back%20to%20the%20original%20option.)).
 
@@ -51,11 +51,11 @@ DoConnek Pro is a **desktop app** that helps **General Practitioner Clinic Manag
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add -pa n/NAME`, `NAME` is a parameter which can be used as `add -pa n/John Doe`.
 
-* Certain command require `-PERSON_TYPE` as a parameter. This parameter can only take two values: `-pa` or `-sp`
+* Certain commands require `-PERSON_TYPE` as a parameter. This parameter can only take two values: `-pa` or `-sp`
 and specifies whether the command is to act on the patients (`-pa`) or on the specialists (`-sp`) in the address book.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [m/MEDICAL_HISTORY]` can be used as `n/John Doe m/Osteoporosis` or as `n/John Doe`.
+  e.g. `n/NAME [m/MEDICAL_HISTORY]` can be used as `n/John Doe m/Osteoporosis` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times but must include at least one entry.<br>
   e.g. `INDEX…​` can be used as `1` , `1 2 3`, `4 5 6 7 8`, but _**not**_ ` ` (i.e. 0 times).
@@ -77,7 +77,7 @@ and specifies whether the command is to act on the patients (`-pa`) or on the sp
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -86,7 +86,7 @@ Format: `help`
 
 ### Adding a patient or specialist: `add`
 
-Adds a patient or specialist to the address book.
+Adds a patient or specialist to DoConnek Pro records.
 
 Format (for patients): `add -pa n/NAME p/PHONE e/EMAIL [t/TAG]...​ a/AGE [m/MEDICAL_HISTORY]...​` <br>
 
@@ -155,6 +155,7 @@ Examples:
 **:information_source: About the list header:**<br>
 
 DoConnek Pro's interface comes with a handy list header that shows whether you are viewing `Patients` or `Specialists`.
+
 If for any reason there is no data to show, for example:
 * There is no existing `Patient` data when listing `Patients`.
 * A `find` query returns no matching results.
@@ -165,7 +166,8 @@ The list header will show `No data found` instead.
 
 ### Viewing a patient or specialist record in more detail `view`
 
-Displays the detailed contents of a patient or specialist on the view panel.
+Displays detailed information about a patient or specialist in the view panel.
+The view panel is located to the right of the person list.
 
 Format: `view INDEX`
 
@@ -173,13 +175,13 @@ Format: `view INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​ with a maximum value of the list size.
 
 Example:
-* `list -pa` followed by `view 2` displays the detailed contents of the 2nd listed patient on the view panel.
+* `list -pa` followed by `view 2` displays the detailed information of the 2nd listed patient in the view panel.
 
 ### Editing a pre-existing patient or specialist record: `edit`
 
-Changes the content of a pre-existing patient or specialist record in the view panel.
+Edits the data of the pre-existing patient or specialist record currently being displayed in the view panel.
 Multiple attributes of a person can be changed at once. The view panel will be updated with the
-modified results immediately after each successful command execution.
+modified results immediately after each successful `edit` command execution.
 
 Format (for patients): `edit [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...​ [a/AGE] [m/MEDICAL HISTORY]...​`
 
@@ -274,7 +276,7 @@ Examples:
 
 ### Changing the Theme : `theme`
 
-Changes the theme of the application. The default theme on launch is the dark theme.
+Changes the theme of the application. The default theme on launch is always the dark theme.
 
 Format: `theme THEMETYPE`
 * `THEMETYPE` has the following possibilities: `dark`, `light` (case-insensitive)
@@ -311,7 +313,7 @@ If the user goes too far back in history, they can 'undo' an 'up arrow' by press
 
 ### Save and Load Data
 
-The patient and specialist data will automatically be saved to the device’s harddrive every time the data is updated, and will automatically be loaded when the user starts the application. The user does not need to manually save any data.
+The patient and specialist data will automatically be saved to the device’s hard drive every time the data is updated, and will automatically be loaded when the user starts the application. The user does not need to manually save any data.
 
 ### Editing the data file
 
@@ -326,7 +328,7 @@ If your changes to the data file makes its format invalid, DoConnek Pro will dis
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the data folder it creates with the data folder in your previous DoConnekPro home directory.
+**A**: Install the app in the other computer and overwrite the data folder it creates with the data folder in your previous DoConnek Pro home directory.
 
 --------------------------------------------------------------------------------------------------------------------
 
