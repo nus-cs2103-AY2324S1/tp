@@ -63,7 +63,7 @@ Given below are my contributions to the project.
     * Addition of user guide for export and import functionality [\#190](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/190)
     * Add updated screenshots for `v1.2` release [\#44](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/44)
     * Add updated screenshots for `v1.3` release [\#110](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/110)
-    * Add updated screenshots for `v1.3b` release [\#190](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull190)
+    * Add updated screenshots for `v1.3b` release [\#190](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/190)
 
   * Developer Guide:
     * Add search implementation for future developments [\#98](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/98)
