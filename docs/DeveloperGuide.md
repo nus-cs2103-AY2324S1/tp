@@ -1046,6 +1046,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  The app should be reasonably responsive to the entire set of user requests(i.e. within 1 second at maximum load).
 4.  The system should have an interface that is very easy to pick up for our target audience(i.e. Engineering Hiring Managers
 that have many years of programming experience).
+5. This app is designed only to add interviewees and schedule interviews. Other parts of the interview process such as contacting applicants are not supported.
+6. The app should be ready for use within 5 seconds of the user launching the app
+7. It should support various screen resolutions and aspect ratios for optimal user experience on different devices.
+8. The application should be optimized to consume minimal system resources, such as CPU and memory, to ensure it runs smoothly on a wide range of desktop configurations.
+9. Users should receive clear and informative error messages in case of any issues, guiding them on how to resolve or report problems.
+10. The project is expected to adhere to a strict schedule that rolls out bug fixes and new features based on the needs of the clients.
 
 ### Glossary
 
@@ -1089,7 +1095,7 @@ On the other hand, the duplication of phone number and email will be handled in 
 company in general. We plan to allow find-i to search for "" (empty string) and " " (whitespaces) so that interviews with applicants that are applying to the
 company in general can be found with the command.
 
-7. Currently there is no way to unmark an interview after marking the interview since an interview's status cannot change once it is done. 
+7. Currently, there is no way to unmark an interview after marking the interview since an interview's status cannot change once it is done. 
 However, some users may accidentally mark an unfinished interview as done. In the future, an unmark feature will
 be implemented to allow users to change the status of interviews from done to not done.
 
@@ -1122,7 +1128,7 @@ Please refer to the [User Guide](https://ay2324s1-cs2103t-t11-2.github.io/tp/Use
 ### Viewing help
 Command: `help`
 
-1. Test case: `help`<br>Expected: Help window with the User Guide URL is displayed. Status message remained unchanged.
+1. Test case: `help`<br>Expected: Help window with the User Guide URL is displayed.
 
 ### Clearing all the data
 Command: `clear`
@@ -1141,6 +1147,8 @@ Command: `add-a`
    1. Test case: `add-a n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/engineer t/frontend` <br>
        Expected: An applicant `John Doe` is added with the phone number `98765432`, email `johnd@example.com`, 
        address `311, Clementi Ave 2, #02-25` and the tags `engineer` and `frontend`.
+2. Adding an applicant that has duplicate name
+   1. Prerequisites: The applicant named `John Doe` added in the previous test is not deleted or changed name.
    2. Test case: `add-a n/John Doe` <br>
        Expected: No applicant is added. Error details shown in the status message.
 
@@ -1223,7 +1231,7 @@ Command: `edit-i`
 
 1. Editing an interview while all interviews are being shown
     1. Prerequisites: List all interviews using the `list-i` command. Multiple interviews in the list.
-       Ensure that the selected interview index chosen for step `ii` belongs to an interview that is not marked as done (border around interview is red). 
+       Ensure that the selected interview index chosen for step `2` belongs to an interview that is not marked as done (border around interview is red). 
     2. Test case: `edit-i 2 jr/PE Tester` <br>
        Expected: The second interview's job role is edited to `PE Tester`. Details of the edited interview shown in the status message.
     3. Test case: `edit-i 0` <br>
@@ -1265,11 +1273,19 @@ Command: `list-freetime`<br>
 
 ### Listing all interviews for today
 Command: `list-i-today`
+
 1. Listing all interviews today
-    1. Test case: `list-a`<br>Expected: Shows all interviews scheduled for today (i.e. the date when the command was executed) in the interview list. Success message is displayed.
+    1. Test case: `list-i-today`<br>Expected: Shows all interviews scheduled for today (i.e. the date when the command was executed) in the interview list. Success message is displayed.
 
 ### Marking an interview as done
 Command: `mark`
+
+1. Marking an interview as done
+   1. Prerequisites: the interview must not be marked as done(red border displayed).
+   2. Test case: `mark 1`<br>Expected: Mark the first interview as done(green border). Success message is displayed.
+2. Marking an interview that has already been marked as done
+    1. Prerequisites: the interview must already been marked as done(green border displayed).
+    2. Test case: `mark 1`<br>Expected: Error message is displayed.
 
 ### Rating an interview
 Command: `rate`
