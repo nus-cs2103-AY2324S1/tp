@@ -29,9 +29,9 @@ solution to manage your student details, including attendance records and assign
     - [Deleting multiple students : `delete all`](#328-deleting-multiple-students--delete-all)
     - [Merging two students : `merge`](#329-merging-two-students--merge)
     - [Viewing detailed attendance records : `view`](#3210-viewing-detailed-attendance-records--view)
-- [4. FAQ](#5-faq)
-- [5. Known issues](#6-known-issues)
-- [6. Command summary](#7-command-summary)
+- [4. FAQ](#4-faq)
+- [5. Known issues](#5-known-issues)
+- [6. Command summary](#6-command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 ## 1. About this User Guide
