@@ -24,6 +24,7 @@ Given below are my contributions to the project.
   * Highlights: This feature requires tweaks to the existing `DeleteCommand`, and also a new class to encapsulate the multiple indices inputted.
   * Pull requests: [#59](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/59), [#80](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/80)
 
+<div style="page-break-after: always;"></div>
 
 * **Other enhancements to existing features**:
   * Designed the draft UI
