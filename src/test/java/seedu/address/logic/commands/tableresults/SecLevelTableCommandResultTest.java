@@ -15,21 +15,10 @@ import seedu.address.logic.commands.CommandResult;
 public class SecLevelTableCommandResultTest {
     @Test
     public void equals() {
-        Map<String, Integer> titlesValuesMapping1 = new HashMap<>();
-        titlesValuesMapping1.put("Sec 1", 20);
-        titlesValuesMapping1.put("Sec 2", 30);
-        titlesValuesMapping1.put("Sec 3", 40);
-        titlesValuesMapping1.put("Sec 4", 50);
-        Map<String, Integer> titlesValuesMapping2 = new HashMap<>();
-        titlesValuesMapping2.put("Sec 1", 20);
-        titlesValuesMapping2.put("Sec 2", 30);
-        titlesValuesMapping2.put("Sec 3", 40);
-        titlesValuesMapping2.put("Sec 4", 50);
-        Map<String, Integer> titlesValuesMapping3 = new HashMap<>();
-        titlesValuesMapping3.put("Sec 1", 10);
-        titlesValuesMapping3.put("Sec 2", 10);
-        titlesValuesMapping3.put("Sec 3", 20);
-        titlesValuesMapping3.put("Sec 4", 30);
+        Map<String, Integer> titlesValuesMapping1 = getSampleTitlesValuesMapping1();
+        Map<String, Integer> titlesValuesMapping2 = getSampleTitlesValuesMapping1();
+        Map<String, Integer> titlesValuesMapping3 = getSampleTitlesValuesMapping2();
+
         CommandResult commandResult1 = new SecLevelTableCommandResult(titlesValuesMapping1);
         CommandResult commandResult2 = new SecLevelTableCommandResult(titlesValuesMapping2);
         CommandResult commandResult3 = new SecLevelTableCommandResult(titlesValuesMapping3);
@@ -55,21 +44,10 @@ public class SecLevelTableCommandResultTest {
 
     @Test
     public void hashcode() {
-        Map<String, Integer> titlesValuesMapping1 = new HashMap<>();
-        titlesValuesMapping1.put("Sec 1", 20);
-        titlesValuesMapping1.put("Sec 2", 30);
-        titlesValuesMapping1.put("Sec 3", 40);
-        titlesValuesMapping1.put("Sec 4", 50);
-        Map<String, Integer> titlesValuesMapping2 = new HashMap<>();
-        titlesValuesMapping2.put("Sec 1", 20);
-        titlesValuesMapping2.put("Sec 2", 30);
-        titlesValuesMapping2.put("Sec 3", 40);
-        titlesValuesMapping2.put("Sec 4", 50);
-        Map<String, Integer> titlesValuesMapping3 = new HashMap<>();
-        titlesValuesMapping3.put("Sec 1", 10);
-        titlesValuesMapping3.put("Sec 2", 10);
-        titlesValuesMapping3.put("Sec 3", 20);
-        titlesValuesMapping3.put("Sec 4", 30);
+        Map<String, Integer> titlesValuesMapping1 = getSampleTitlesValuesMapping1();
+        Map<String, Integer> titlesValuesMapping2 = getSampleTitlesValuesMapping1();
+        Map<String, Integer> titlesValuesMapping3 = getSampleTitlesValuesMapping2();
+
         CommandResult commandResult1 = new SecLevelTableCommandResult(titlesValuesMapping1);
         CommandResult commandResult2 = new SecLevelTableCommandResult(titlesValuesMapping2);
         CommandResult commandResult3 = new SecLevelTableCommandResult(titlesValuesMapping3);
@@ -101,16 +79,30 @@ public class SecLevelTableCommandResultTest {
 
     @Test
     public void parseMappingCorrectly() {
-        Map<String, Integer> titlesValuesMapping = new HashMap<>();
-        titlesValuesMapping.put("Sec 1", 20);
-        titlesValuesMapping.put("Sec 2", 30);
-        titlesValuesMapping.put("Sec 3", 40);
-        titlesValuesMapping.put("Sec 4", 50);
+        Map<String, Integer> titlesValuesMapping = getSampleTitlesValuesMapping1();
         SecLevelTableCommandResult commandResult = new SecLevelTableCommandResult(titlesValuesMapping);
 
         assertEquals(commandResult.getSec1Count(), 20);
         assertEquals(commandResult.getSec2Count(), 30);
         assertEquals(commandResult.getSec3Count(), 40);
         assertEquals(commandResult.getSec4Count(), 50);
+    }
+
+    private Map<String, Integer> getSampleTitlesValuesMapping1() {
+        Map<String, Integer> titlesValuesMapping1 = new HashMap<>();
+        titlesValuesMapping1.put("Sec 1", 20);
+        titlesValuesMapping1.put("Sec 2", 30);
+        titlesValuesMapping1.put("Sec 3", 40);
+        titlesValuesMapping1.put("Sec 4", 50);
+        return titlesValuesMapping1;
+    }
+
+    private Map<String, Integer> getSampleTitlesValuesMapping2() {
+        Map<String, Integer> titlesValuesMapping2 = new HashMap<>();
+        titlesValuesMapping2.put("Sec 1", 10);
+        titlesValuesMapping2.put("Sec 2", 10);
+        titlesValuesMapping2.put("Sec 3", 20);
+        titlesValuesMapping2.put("Sec 4", 30);
+        return titlesValuesMapping2;
     }
 }
