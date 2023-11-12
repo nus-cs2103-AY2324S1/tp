@@ -47,7 +47,7 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar keepintouch.jar` command to run the application. (   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.)
 ![GUI example](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will show the list of all available commands.<br>
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -87,7 +87,7 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
 * `PHONE_NUMBER` should be numbers at least 3 digits long.
 
 * `EMAIL` should be of the format local-part@domain:
-  *  The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+  *  The local-part should only contain alphanumeric characters and the special characters `+`, `_`, `.`, `-`. The local-part should not start or end with any special characters.
   * The domain name should:
     *  end with a domain label at least 2 characters long
     * have each domain label start and end with alphanumeric characters
@@ -95,7 +95,7 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
 
 * `TAGNAME` should be alphanumeric, with no spaces.
 
-* `TAGNAME` is case-sensitive. For example, a [contact](#contact) can have [tags](#tag) `HR REPRESENTITIVE` and `HR representitive` at the same time.
+* `TAGNAME` is case-sensitive. For example, a [contact](#contact) can have [tags](#tag) `HR REPRESENTATIVE` and `HR representative` at the same time.
 
 * `START_TIME` and `END_TIME` can be in one of the following formats:
   * Both date and time: `yyyy-MM-dd HH:mm[:ss]`
