@@ -358,9 +358,15 @@ Worry not as you can use the `undo` command to retrieve your data!
 
 #### Help: `help`
 
-Displays a pop-out window that shows a link to this User Guide.
+Forgot how to edit a specific enrolment or how to unenrol members? The `help` command will allow you to clarify and recall any features of the app by redirecting you to our friendly and informative user guide.
 
-Format: `help`
+Here’s how you can use it: `help`
+
+<figure>
+<img src="images/helpWindow.png"
+alt="Help Window">
+<figcaption>A help pop-up window will appear upon entering the `help` command</figcaption>
+</figure>
 
 <hr class="command-separator">
 
