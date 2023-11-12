@@ -125,7 +125,8 @@ public class PersonTest {
 
     @Test
     public void isUncontacted() {
-        assertEquals(ALICE.getInteractions().get(0), null);
+        assertEquals(ALICE.getInteractions().get(0).getOutcome(), Interaction.Outcome.INTERESTED);
+        assertEquals(ALICE.getInteractions().get(0).getDate().isEqual(LocalDate.of(2023,10,27)), true);
         assertEquals(true, ALICE.isUncontacted());
         assertEquals(false, BENSON.isUncontacted());
         assertEquals(false, ELLE.isUncontacted());
@@ -133,7 +134,9 @@ public class PersonTest {
 
     @Test
     public void isClosed() {
-        assertEquals(ALICE.getInteractions().get(0).getDate().isAfter(LocalDate.now()), true);
+        assertEquals(ALICE.getInteractions().get(1).getOutcome(), Interaction.Outcome.INTERESTED);
+        assertEquals(ALICE.getInteractions().get(1).getDate().isBefore(LocalDate.now()), true);
+        assertEquals(ALICE.getInteractions().get(1).getInteractionNote(), "Test note");
         assertEquals(false, ALICE.isClosed());
         assertEquals(false, BENSON.isClosed());
         assertEquals(true, ELLE.isClosed());
@@ -141,7 +144,9 @@ public class PersonTest {
 
     @Test
     public void isContacting() {
-        assertEquals(ALICE.getInteractions().get(1).getOutcome(), Interaction.Outcome.INTERESTED);
+        assertEquals(ALICE.getInteractions().get(0).getOutcome(), Interaction.Outcome.INTERESTED);
+        assertEquals(ALICE.getInteractions().get(0).getDate().isEqual(LocalDate.now()), true);
+        assertEquals(ALICE.getInteractions().get(0).getInteractionNote(), "Test note");
         assertEquals(false, ALICE.isContacting());
         assertEquals(true, BENSON.isContacting());
         assertEquals(false, ELLE.isContacting());
@@ -165,9 +170,8 @@ public class PersonTest {
     @Test
     public void testAddInteractions() {
         assertEquals(ALICE.getInteractions().get(0).getOutcome(), Interaction.Outcome.INTERESTED);
-        assertEquals(ALICE.getInteractions().get(0).getDate(), InteractionTest.EXAMPLE_DATE);
-        assertEquals(ALICE.getInteractions().get(0).getInteractionNote(), "Met up for lunch");
-        assertEquals(ALICE.getInteractions().get(0), INTERACTION_LIST_ONE.get(0));
+        assertEquals(ALICE.getInteractions().get(0).getDate().isBefore(LocalDate.now()), true);
+        assertEquals(ALICE.getInteractions().get(0).getInteractionNote(), "Test note");
         Person aliceCopy = new PersonBuilder(ALICE).build();
         assertEquals(0, aliceCopy.getInteractions().size());
         List<Interaction> result = aliceCopy.addInteractions(INTERACTION_LIST_ONE);
