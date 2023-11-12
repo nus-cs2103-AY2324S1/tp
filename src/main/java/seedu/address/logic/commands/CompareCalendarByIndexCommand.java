@@ -19,7 +19,7 @@ public class CompareCalendarByIndexCommand extends Command {
     public static final String COMMAND_WORD = "compareCalendars";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": compare calendars with specified people index. "
             + "Parameters: "
-            + "ONE/MULTIPLE VALID PERSON INDEX \n"
+            + "NONE/ONE/MULTIPLE VALID PERSON INDEX \n"
             + "Example: " + COMMAND_WORD + " "
             + "1 2 3";
 

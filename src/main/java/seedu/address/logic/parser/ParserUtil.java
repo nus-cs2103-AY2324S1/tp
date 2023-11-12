@@ -86,7 +86,7 @@ public class ParserUtil {
         try {
             return parseIndex(oneBasedIndex);
         } catch (ParseException pe) {
-            throw new RuntimeException();
+            throw new RuntimeParseException();
         }
     }
 

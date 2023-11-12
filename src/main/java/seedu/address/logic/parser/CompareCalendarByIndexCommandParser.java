@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,11 +20,14 @@ public class CompareCalendarByIndexCommandParser implements Parser<CompareCalend
     @Override
     public CompareCalendarByIndexCommand parse(String userInput) throws ParseException {
         try {
+            List<Index> indexList = new ArrayList<Index>();
             String personIndexString = userInput.trim();
-            String[] personIndexArray = personIndexString.split(splitRegex);
-            List<Index> indexList = Arrays.stream(personIndexArray)
-                    .map(ParserUtil::parseIndexSafe)
-                    .collect(Collectors.toList());
+            if (!personIndexString.isEmpty()) {
+                String[] personIndexArray = personIndexString.split(splitRegex);
+                indexList = Arrays.stream(personIndexArray)
+                        .map(ParserUtil::parseIndexSafe)
+                        .collect(Collectors.toList());
+            }
             return new CompareCalendarByIndexCommand(indexList);
         } catch (RuntimeParseException pe) {
             throw new ParseException(String.format(
