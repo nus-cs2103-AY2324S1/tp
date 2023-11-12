@@ -546,7 +546,7 @@ Please use show lessonIndex before deleting task!
 
 ### Edit Feature
 
-Edits the specified item in the student/schedule list of the application.
+Edits the specified item in the  ___STUDENT list___ or ___SCHEDULE list___ of the application.
 
 #### For Student:
 Format: `editPerson [INDEX] [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS]
@@ -633,7 +633,6 @@ Failure outputs:
 ```
 No edit detected. Please edit at least one field: name, start, end, subject, day to different value.
 ```
-Failure outputs:
 * Input: `editLesson -name a new name` (assuming no lesson is currently shown)
   * Error: No lesson shown. Show a lesson with the `show` command.
 ```
@@ -643,7 +642,6 @@ For example, edit 1 -name lesson2 -subject English -day 23/12 -start 14:30 -end 
 If you want to edit the currently shown lesson, you could omit the index. 
 Note your edited 'name' must not already in the schedule and 'start' must be before 'end'.
 ```
-Failure outputs:
 * Input: `editLesson 1 -start 12:35 -end 14:35 -day 2023/11/21` (assuming there is already another lesson with clashing time)
   * Error: The lesson cannot clash (same day, start and end all specified and are overlapping) in time with other lessons  in the schedule list.
 ```
@@ -651,7 +649,6 @@ Time clash detected.
 Edited: Lesson lesson1 from 12:35 PM to 2:35 PM on 21-11-2023 for ENGLISH
 Clashes with: Lesson lesson2 from 1:30 PM to 3:30 PM on 21-11-2023 for PHYSICS.
 ```
-
 * Input: `editLesson 1 -name lesson2` (assuming there is already another lesson named lesson2)
   * Error: The name of the lesson after editing cannot be the same as other existing lessons in the schedule list.
 ```
