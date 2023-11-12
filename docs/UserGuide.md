@@ -49,7 +49,7 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/ug-pics/Ui.png)
 
-5. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type a command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `help`: Shows help window with link to user guide.
@@ -136,8 +136,8 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* For all commands except for `find` and `listleave`, the entire employee list will be called after the command is executed successfully.<br>
-  e.g. if the employee list was previously filtered through the `find` and `listleave` commands, the employee list panel will change to show the entire employee list.
+* For all commands except for `find`, `sort` and `listleave`, the entire employee list will be called after the command is executed **successfully**.<br>
+  e.g. if the employee list was previously filtered through the `find` or `listleave` command, the employee list panel will change to show the entire employee list.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
@@ -482,6 +482,7 @@ Examples:
 * `report EID1234-5678` generates and downloads a report for the employee with employee id EID1234-5678.
 
 ![report success](images/ug-pics/reportSuccess.png)
+
 ![report txt file](images/ug-pics/reportTxtFile.png)
 
 * `report EID0000-0000` is invalid because the id does not exist.

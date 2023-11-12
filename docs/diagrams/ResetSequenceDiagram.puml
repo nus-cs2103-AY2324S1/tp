@@ -47,10 +47,12 @@ deactivate AddressBookParser
 LogicManager -> ResetCommand : execute()
 activate ResetCommand
 
+loop number of employees in employee book
 ResetCommand -> Model : setEmployee(targetEmployee, editedEmployee)
 activate Model
 
 Model --> ResetCommand
+end
 
 ResetCommand -> Model : updateFilteredEmployeeList()
 
