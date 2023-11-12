@@ -5,7 +5,7 @@ title: User Guide
 **Foster Family** is a desktop app built for the **foster managers of cat and dog shelters** to help them perform **foster family management tasks**. 
 
 Some tasks Foster Family can help you with: 
-* **Store and update** the important details of animal fosterers (people who temporarily cares for an animal in their own homes)
+* **Store and update** the important details of animal fosterers (people who temporarily care for an animal in their own homes)
 * Search for a fosterer using _**any**_ detail you can remember of them
 * **Gain insights** on the current status of fosterers
 
@@ -273,7 +273,7 @@ Valid cases:
 * For invalid cases, error messages will be shown when you enter the invalid commands. For example:
   ![Add](images/screenshots/AddErrorMessage.png)
 
-<div markdown="span" class="alert alert-danger">
+<div markdown="block" class="alert alert-danger">
 
 **:exclamation: Important:**<br>
 
@@ -386,7 +386,7 @@ Parameters:
 |-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
 | `INDEX`     | - Index of a fosterer displayed in the list obtained from a `list`/`find` command <br/> - Index must be a positive integer | `1`, `2`, `3` |
 
-<div markdown="span" class="alert alert-danger">
+<div markdown="block" class="alert alert-danger">
 
 **:exclamation: Important:**<br>
 
@@ -523,7 +523,7 @@ Examples:
 *  `find` or `list` followed by `edit 2` 
    * opens the profile page of the 2nd fosterer in the address book since parameters are not provided.
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning">
 
 **:warning: Caution:**<br>
 
@@ -563,7 +563,7 @@ profile page.
  
 </div>
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning">
 
 **:warning: Caution:**<br>
 
@@ -588,7 +588,7 @@ Deletes the index-th fosterer in the list currently displayed in your address bo
 
 Format: `delete INDEX [INDEX...]`
 
-<div markdown="span" class="alert alert-danger">
+<div markdown="block" class="alert alert-danger">
 
 **:exclamation: Important:**<br>
 
@@ -639,7 +639,7 @@ Format: `sort`
 
 <br> 
 
-<div markdown="span" class="alert alert-danger">
+<div markdown="block" class="alert alert-danger">
 
 **:exclamation: Important:**<br>
 
@@ -803,7 +803,8 @@ edits using our user-friendly interface instead.
 **:warning: Caution:**<br>
 
 * If your changes to the data file makes its format invalid, Foster Family will discard all data and start with an empty data file at the next run. Hence, it is recommended to make a backup of the file before editing it.<br>
-* If your changes create an [invalid fosterer](#adding-a-fosterer-through-the-main-window--add), the app will not start. You will have to rectify the error in order to restart the app.
+* If your changes create an invalid fosterer, the app will not start. You will have to rectify the error in order to restart the app. <br>
+Please refer to the section [Adding a fosterer through the main window: add](#adding-a-fosterer-through-the-main-window-add) for more details.
 
 </div>
 

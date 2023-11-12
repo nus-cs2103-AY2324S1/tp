@@ -467,7 +467,7 @@ Given below is an example usage scenario and how the statistics feature behaves 
 
 Step 1. The user enters the `stats avail` command. 
 
-Step 2. `StatsCommandParser` is then invoked to parse the argument inputted with the `stats` command, in this case it is `avail`. If the argument is not `avail`, `curr` or `housing`, the `StatsCommandParser` will generate an error message to the user, indicating that the requested statistic is not available. 
+Step 2. `StatsCommandParser` is then invoked to parse the argument inputted with the `stats` command, in this case it is `avail`. If the argument is not `avail`, `current` or `housing`, the `StatsCommandParser` will generate an error message to the user, indicating that the requested statistic is not available. 
 
 Step 3. The `StatsAvailCommand` will then call relevant methods to obtain the needed numbers and percentages, done in the `execute` command.
 
@@ -478,7 +478,7 @@ Step 3. The `StatsAvailCommand` will then call relevant methods to obtain the ne
 
 Step 4. A success message with the statistics will then be displayed to the user.
 
-The other commands `stats curr` and `stats housing` have a similar execution path, replacing `StatsAvailCommand` with `StatsCurrCommand` and `StatsHousingCommand` respectively.
+The other commands `stats current` and `stats housing` have a similar execution path, replacing `StatsAvailCommand` with `StatsCurrCommand` and `StatsHousingCommand` respectively.
 
 #### Design considerations:
 
