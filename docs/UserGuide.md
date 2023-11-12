@@ -83,7 +83,7 @@ If you are an engineering hiring manager who has a good understanding of CLI-bas
 
 # How to use this user guide
 
-To quickly find the information you need, refer to the [Table of Contents](#table-of-contents) located at the beginning of this guide.
+To quickly find the information you need, please refer to the [Table of Contents](#table-of-contents) located at the beginning of this guide.
 It lists all the chapters and sections, allowing you to jump directly to the relevant content.
 
 Next, to get you started, we have included a [Quick Start](#quick-start) section in this user guide to ensure that you have no trouble setting up **InterviewHub**.
@@ -94,13 +94,13 @@ Along the way if you encounter unfamiliar terms, our [Glossary](#glossary) provi
 
 Before we begin, the table below describes some symbols and syntax you may see throughout our guide:
 
-| Symbol                                    | Meaning                                                                                          |
-|-------------------------------------------|--------------------------------------------------------------------------------------------------|
-| :warning: **Warning**                     | Important information that must be understood as the action may leads to unexpected consequences |
-| :information_source: **Note**             | Important information that you should pay attention to                                           |
-| :bulb: **Tip**                            | Helpful information to improve your experience                                                   |
-| `Highlighted text block`                  | Commands or parameters relevant to the application                                               |
-| [Hyperlinks](#how-to-use-this-user-guide) | When clicked, you will be led to a designated section within this document or an external link   |
+| Symbol                                    | Meaning                                                                                                                 |
+|-------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| :warning: **Warning**                     | Important information requiring attention as the action may lead to unexpected consequences                             |
+| :information_source: **Note**             | Important information that you should pay attention to                                                                  |
+| :bulb: **Tip**                            | Helpful information to improve your experience                                                                          |
+| `Highlighted text block`                  | Commands or parameters relevant to the application                                                                      |
+| [Hyperlinks](#how-to-use-this-user-guide) | Clickable links that direct you to specific sections within this document or to external resources for more information |
 
 [Back to the Table of Contents](#table-of-contents)
 
