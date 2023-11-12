@@ -270,7 +270,7 @@ Given below is an example usage scenario for the command:
 
 **Step 3**: The list of all employees in the employee book will be sorted accordingly.
 
-The following activity diagram summarizes what happens when a user executes the reset command:
+The following activity diagram summarizes what happens when a user executes the sort command:
 
 ![Sort Activity Diagram](images/SortActivityDiagram.png)
 
@@ -696,7 +696,7 @@ Given below is an example usage scenario for the command:
 **Step 3**: Leave appointments that fall between the start and end dates will be deleted from the employee specified with the employee ID input.
 * If no leave appointments exist between the start and end dates, an error will be produced and shown to the user.
 
-The following activity diagram summarizes what happens when a user executes the edit leave command:
+The following activity diagram summarizes what happens when a user executes the delete leave command:
 
 ![Delete Leave Activity Diagram](images/DeleteLeaveActivityDiagram.png)
 
