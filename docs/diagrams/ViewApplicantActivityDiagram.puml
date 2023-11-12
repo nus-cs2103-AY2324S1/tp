@@ -11,6 +11,7 @@ else ([else])
     if () then ([invalid applicant])
         : Invalid Applicant Index error message is shown;
     else ([else])
+        : Update the applicant list in the GUI;
         :Success message is shown;
     endif
 endif
