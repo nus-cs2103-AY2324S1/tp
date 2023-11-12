@@ -1,6 +1,5 @@
 @startuml
 !include style.puml
-skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
@@ -14,10 +13,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("listleave 2023-11-11")
+[-> LogicManager : execute("listleave on/2023-11-11")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("listleave 2023-11-11")
+LogicManager -> AddressBookParser : parseCommand("listleave on/2023-11-11")
 activate AddressBookParser
 
 create ListLeaveCommandParser
@@ -27,7 +26,7 @@ activate ListLeaveCommandParser
 ListLeaveCommandParser --> AddressBookParser
 deactivate ListLeaveCommandParser
 
-AddressBookParser -> ListLeaveCommandParser : parse("2023-11-11")
+AddressBookParser -> ListLeaveCommandParser : parse("on/2023-11-11")
 activate ListLeaveCommandParser
 
 create ListLeaveCommand
@@ -50,6 +49,10 @@ LogicManager -> ListLeaveCommand : execute()
 activate ListLeaveCommand
 
 ListLeaveCommand -> Model : updateFilteredEmployeeList()
+activate Model
+
+Model --> ListLeaveCommand
+deactivate Model
 
 create CommandResult
 ListLeaveCommand -> CommandResult

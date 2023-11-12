@@ -464,7 +464,7 @@ The `AddLeaveCommand` object then communicates with the `Model` API by calling t
 
 The method `AddLeaveCommand#execute()` returns a `CommandResult` object, which stores information about the completion of the command.
 
-The diagram below details how the operation of adding an appointment works.
+The diagram below details how the operation of adding leave date(s) works.
 
 ![Add Leave Sequence Diagram](images/uml-diagrams/AddLeaveSequenceDiagram.png)
 
@@ -559,7 +559,7 @@ The `ListLeaveCommand` object then communicates with the `Model` API by calling 
 
 The method `ListLeaveCommand#execute()` returns a `CommandResult` object, which stores information about the completion of the command.
 
-The diagram below details how the operation of adding an appointment works.
+The diagram below details how the operation of listing employees on leave on the specified date works.
 
 ![List Leave Sequence Diagram](images/uml-diagrams/ListLeaveSequenceDiagram.png)
 
