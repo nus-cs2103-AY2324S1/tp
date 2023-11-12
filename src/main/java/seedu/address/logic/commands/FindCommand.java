@@ -27,9 +27,9 @@ import seedu.address.model.person.PersonType;
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
     private static final String MESSAGE_USAGE_GENERAL = "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_TAG + "TAG]... ";
 
     private static final String PERSON_EXAMPLE =
@@ -44,8 +44,8 @@ public class FindCommand extends Command {
             + ": Finds all Patients whose attributes contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers. \n"
             + MESSAGE_USAGE_GENERAL
-            + PREFIX_AGE + "AGE "
-            + PREFIX_MEDICALHISTORY + "MEDICAL HISTORY \n"
+            + "[" + PREFIX_AGE + "AGE] "
+            + "[" + PREFIX_MEDICALHISTORY + "MEDICAL HISTORY]... \n"
             + "Example: " + COMMAND_WORD + " "
             + PATIENT_TAG + " "
             + PERSON_EXAMPLE
@@ -57,8 +57,8 @@ public class FindCommand extends Command {
             + ": Finds all Specialists whose attributes contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers. \n"
             + MESSAGE_USAGE_GENERAL
-            + PREFIX_LOCATION + "LOCATION "
-            + PREFIX_SPECIALTY + "SPECIALTY \n"
+            + "[" + PREFIX_LOCATION + "LOCATION] "
+            + "[" + PREFIX_SPECIALTY + "SPECIALTY] \n"
             + "Example: " + COMMAND_WORD + " "
             + SPECIALIST_TAG + " "
             + PERSON_EXAMPLE
@@ -70,7 +70,7 @@ public class FindCommand extends Command {
     private final PersonType personType;
 
     /**
-     * @param findPredicateMap The predicate that describes the name being searched for
+     * @param findPredicateMap The predicate map that encapsulates the attributes being searched for
      * @param personType The type of person being searched for i.e. patient or specialist
      */
     public FindCommand(FindPredicateMap findPredicateMap, PersonType personType) {
@@ -79,12 +79,13 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory commandHistory) {
+    public CommandResult execute(Model model) {
         requireNonNull(model);
         Predicate<Person> predicate = person -> findPredicateMap.getAllPredicates().stream()
                 .map(pred -> pred.test(person))
                 .reduce(true, (x, y) -> x && y);
         model.updateFilteredPersonList(predicate.and(personType.getSearchPredicate()));
+        model.commit();
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }

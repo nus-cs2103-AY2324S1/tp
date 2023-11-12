@@ -28,7 +28,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons = new UniquePersonList();
     }
 
-    public AddressBook() {}
+    public AddressBook() {
+    }
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -49,11 +50,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code AddressBook} with {@code newData} and {@code shortcutSettings}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
         setPersons(newData.getPersonList());
     }
 
@@ -107,7 +107,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
     }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {

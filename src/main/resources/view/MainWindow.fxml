@@ -13,7 +13,7 @@
 
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="DoConnek Pro" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         title="DoConnek Pro" minWidth="900" minHeight="750" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -40,7 +40,7 @@
           </padding>
         </StackPane>
 
-        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="70.0" prefHeight="100.0" styleClass="pane-with-border" VBox.vgrow="NEVER">
+        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="150" minHeight="100.0" prefHeight="150.0" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
             <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
           </padding>

@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Age {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Age should only contain numbers between 0 and 149 both inclusive.";
+            "Age should only contain integers between 0 and 149 both inclusive.";
     public static final String VALIDATION_REGEX = "\\b[0-9]|[1-9][0-9]|1[0-4][0-9]\\b";
     public final String value;
 
@@ -57,4 +57,7 @@ public class Age {
         return value.hashCode();
     }
 
+    public Age getCopy() {
+        return new Age(this.value);
+    }
 }

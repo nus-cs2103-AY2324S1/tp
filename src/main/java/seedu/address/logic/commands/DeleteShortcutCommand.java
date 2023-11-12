@@ -21,7 +21,7 @@ public class DeleteShortcutCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the previously registered shortcut(s).\n"
             + "Parameters: "
-            + PREFIX_SHORTCUT + "SHORTCUT "
+            + PREFIX_SHORTCUT + "SHORTCUT...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_SHORTCUT + "del "
             + PREFIX_SHORTCUT + "li ";
@@ -36,7 +36,7 @@ public class DeleteShortcutCommand extends Command {
         this.shortcutAliasList = shortcutAlias;
     }
     @Override
-    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         StringBuilder message = new StringBuilder();
         shortcutAliasList.forEach(shortcutAlias -> {
@@ -47,6 +47,7 @@ public class DeleteShortcutCommand extends Command {
                 message.append(String.format(MESSAGE_SUCCESS, shortcutAlias + " --> " + feedback));
             }
         });
+        model.commit();
         return new CommandResult(message.toString());
     }
 

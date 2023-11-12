@@ -31,7 +31,7 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_null_throwsNullPointerException() {
+    public void resetData_nullData_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
     }
 

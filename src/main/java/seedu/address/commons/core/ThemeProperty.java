@@ -77,4 +77,9 @@ public class ThemeProperty implements Property<Theme> {
     public void setValue(Theme value) {
         delegate.setValue(value);
     }
+    public ThemeProperty getCopy() {
+        ThemeProperty newTheme = new ThemeProperty();
+        newTheme.setValue(this.getValue());
+        return newTheme;
+    }
 }

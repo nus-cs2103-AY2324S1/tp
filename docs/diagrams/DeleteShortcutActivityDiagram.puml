@@ -7,8 +7,8 @@ start
 
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
-if () then ([Request parsed successfully)
-if () then ([Shortcuts exist])
+if () then ([Request parsed successfully])
+if () then ([Shortcuts are mapped])
     :Remove shortcuts;
 else ([else])
     :Notify user shortcut does not exist;

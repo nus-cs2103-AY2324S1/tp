@@ -38,7 +38,7 @@ FindPredicateMap --> FindCommandParser : m
 deactivate FindPredicateMap
 
 create FindCommand
-FindCommandParser -> FindCommand : m
+FindCommandParser -> FindCommand : FindCommand(m, PersonType.PATIENT)
 activate FindCommand
 
 FindCommand --> FindCommandParser : f

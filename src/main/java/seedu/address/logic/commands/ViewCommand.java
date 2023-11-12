@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Displays a person's detailed information in the view panel.
  */
 public class ViewCommand extends Command {
 
@@ -36,7 +36,7 @@ public class ViewCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -46,6 +46,7 @@ public class ViewCommand extends Command {
 
         Person personToView = lastShownList.get(targetIndex.getZeroBased());
         model.updateSelectedPerson(personToView);
+        model.commit();
         return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, Messages.format(personToView)));
     }
 

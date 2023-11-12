@@ -13,18 +13,20 @@ import seedu.address.model.Model;
 public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reverses the effect of the most recent command.\n"
+            + "No parameters are required.";
     public static final String MESSAGE_SUCCESS = "Last command has been undone!";
     public static final String MESSAGE_FAILURE = "No commands to undo!";
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         if (!model.hasHistory()) {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
-        model.undoAddressBook();
+        model.undo();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

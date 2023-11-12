@@ -1,16 +1,16 @@
-
 ---
 layout: page
 title: Developer Guide
 ---
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* Small snippets of code written with the help of AI tool (can be found in `PersonListPanel.java` and `ShortcutSettings.java`).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -37,7 +37,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S1-CS2103T-W13-1/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2324S1-CS2103T-W13-1/tp/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -59,7 +59,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -69,13 +69,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-W13-1/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-W13-1/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-W13-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -86,7 +86,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-W13-1/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -115,7 +115,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-W13-1/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -125,6 +125,8 @@ The `Model` component,
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores a `ThemeProperty` object which represents the theme of the application.
+* stores a `CommandStringStash` object which has the history of recently executed commands.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
@@ -155,41 +157,50 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
 
-#### Proposed Implementation
+The undo/redo mechanism is facilitated by `ModelManager`. It implements `Model` with an undo/redo history, stored internally as an `modelManagerStateList` and `currentStatePointer`.
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+`modelManagerStateList` contains a list of `ReadOnlyModelManager`
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+Each `ReadOnlyModelManager` contains : 
+*  `addressBook`
+*  `filteredPersons`
+*  `userPrefs`
+*  `selectedPerson`
+*  `themeProperty`
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+Additionally, ModelManager implements the following operations:
+
+* `ModelManager#commit()` — Saves the current ModelManager state in its history.
+* `ModelManager#undo()` — Restores the previous ModelManager state from its history.
+* `ModelManager#redo()` — Restores a previously undone ModelManager state from its history.
+
+These operations are exposed in the `Model` interface as `Model#commit()`, `Model#undo()` and `Model#redo()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `ModelManager` will be initialized and `ModelManager#Commit` is called with the initial ModelManager state, and the `currentStatePointer` pointing to that single ReadOnlyModelManager state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the current list. The `delete` command calls `Model#commit()`, causing the modified state of the ModelManager after the `delete 5` command executes to be saved in the `modelManagerStateList`, and the `currentStatePointer` is shifted to the newly inserted ModelManager state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add -pa n/David …​` to add a new person. The `add` command also calls `Model#commit()`, causing another modified ModelManager state to be saved into the `ModelManagerStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commit()`, so the ModelManager state will not be saved into the `ModelManagerStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undo()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous ModelManager state, and restores the ModelManager to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial ModelManager state, then there are no previous ModelManager states to restore. The `undo` command uses `ModelManager#hasHistory()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -202,38 +213,21 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redo()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the ModelManager to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `ModelManagerStateList.size() - 1`, pointing to the latest ModelManager state, then there are no undone ModelManager states to restore. The `redo` command uses `ModelManager#canRedo()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list -pa`. Since this command modifies the ModelManager, `Model#commit()` is called.
+Since the `currentStatePointer` is not pointing at the end of the `ModelManagerStateList`, all ModelManager states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add -pa n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
 
 <br>
 
@@ -281,13 +275,13 @@ The following operations are implemented by the `CommandStringStash`:
 * `CommandStringStash#getPrevCommandString(String commandInputString)` - Cycles one command further back in history.
 * `CommandStringStash#getPassedCommandString(String commandInputString)` - Cycles one command further forward in history.
 
-<div markdown="span" class="alert alert-info">:information_source: **note:** Cycling fowards or backwards may not always be
+<div markdown="span" class="alert alert-info">:information_source: **note:** Cycling forwards or backwards may not always be
 valid operations. No cycling forward or backward can be done if the stash is empty. No cycling backward
 can be done if the user is already on the least recent command in the stash, and no cycling forward can be done
 if the user has not yet cycled backward. To consider all these cases, the `commandInputString` is passed as a parameter
 to `CommandStringStash#getPrevCommandString(String commandInputString)` and `CommandStringStash#getPassedCommandString(String commandInputString)`.
 The `commandInputString` is the current command in the CLI textbox and is returned from these methods in the case of invalid operations
-so there is no change to the CLI textbox.
+so that there is no change to the CLI textbox.
 
 </div>
 
@@ -304,10 +298,10 @@ Step 2. The user executes the `list -sp` command to list the specialists in DoCo
 
 ![Recall Step 2](images/RecallStep2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **note:** After an addition, the `currentCmdIndex` is set to point
-one index after the last element in the `CommandStringStash`. The `Logic#getPrevCommandString` method decrements
-this index before returning the String pointed to by `currentCmdIndex` so this works as a way of 'resetting' the state
-allowing the user to start to cycle back from the most recently added command again.
+<div markdown="span" class="alert alert-info">:information_source: **note:** After `Logic#getPrevCommandString` is called,
+the `currentCmdIndex` is set to point one index after the last element in the `CommandStringStash`. 
+This 'resets' the state allowing the users to start to cycle back from the most recently added command again.
+The `Logic#getPrevCommandString` method decrements the `currentCmdIndex` before returning the String allowing the mechanism to work as intended.
 
 </div>
 
@@ -316,7 +310,7 @@ Step 3. The user executes two more commands `help` and `delete 1` in the respect
 
 ![Recall Step 3](images/RecallStep3.png)
 
-The following activity diagram summarises how the `CommandStringStash` is updated hen a user executes a command.
+The following activity diagram summarises how the `CommandStringStash` is updated when a user executes a command.
 
 ![Add Command String](images/AddCommandStringActivityDiagram.png)
 
@@ -334,7 +328,7 @@ To cycle forward in history, a similar sequence is followed, but `Logic#getPasse
 corresponding methods are called instead.
 
 Step 5. The user presses the up arrow again, and this time `Logic#getPrevCommandString` returns `help` which is displayed
-on the user's CLI, so they can execute `help` easily.
+on the user's CL. They can now easily execute `help`.
 
 ![Recall Step 5](images/RecallStep5.png)
 
@@ -342,9 +336,9 @@ The following activity diagram summarises what happens when a user presses the u
 
 ![Up Arrow Activity Diagram](images/UpArrowActivityDiagram.png)
 
-Step 6. The user realises they don't need help and actually want to delete the first specialist currently displayed.
+Step 6. Instead of executing `help` the user decides to delete the first specialist currently displayed.
 They press the down arrow on the keyboard to recall the `delete 1` command they just passed.
-This results in `Logic#getPrevCommandString` being called which returns `delete 1`.  The user's CLI text box is then set to display `delete 1`.
+This results in `Logic#getPassedCommandString` being called which returns `delete 1`.  The user's CLI text box is then set to display `delete 1`.
 
 ![Recall Step 6](images/RecallStep6.png)
 
@@ -381,7 +375,7 @@ is instantiated by their corresponding arguments and are mapped to their prefixe
 
 ![FindPredicateMapExample](images/FindPredicateMapExample.png)
 
-The predicates are combined into a single `Predicate<Person>` in `FindCommand::execute` and applied to each `Person` in the 
+The predicates are combined into a single `Predicate<Person>` in `FindCommand#execute` and applied to each `Person` in the 
 `FilteredPersonList` of the `Model`.
 
 To find a specialist, a similar parse and execution flow is conducted. 
@@ -390,9 +384,9 @@ To find a specialist, a similar parse and execution flow is conducted.
 
 ### Shortcut management feature
 
-User defined shortcuts are managed by `ShortcutSettings`. Internally it contains a `shortcutMap` that stores mappings of 
+User defined shortcuts are managed by `ShortcutSettings`. Internally it contains a `shortcutMap` that stores _mappings_ of 
 user defined _shortcut aliases_ to existing valid _command keywords_. This class provides functionality for registering new shortcuts,
-removing previously defined shortcuts, and querying the map to see check if a shortcut has previously been defined.
+removing previously defined shortcuts, and querying the map to check if a shortcut has previously been defined.
 
 These shortcut mappings need to be updated by command execution, as well as used in parsing of user input. Thus, the following design decisions have been made:
 1. Shortcut operations are exposed in the `Model` interface as 
@@ -428,7 +422,7 @@ The following activity diagrams summarise the process of adding and removing sho
 ![Delete Shortcut Activity](images/DeleteShortcutActivityDiagram.png)
 
 #### Saving between sessions
-ShortcutSettings implements the `Serializable` interface, thus is saved to `json` format as a part of `UserPrefs`. 
+`ShortcutSettings` implements the `Serializable` interface, thus is saved to `json` format as a part of `UserPrefs`. 
 
 #### Design considerations:
 **Aspect: How shortcuts are stored and accessed:**
@@ -441,8 +435,8 @@ ShortcutSettings implements the `Serializable` interface, thus is saved to `json
     * Pros: Will use less memory (No extra data structure created).
     * Cons: Difficult to manage duplicate shortcut mappings.
 
-
 --------------------------------------------------------------------------------------------------------------------
+
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -477,49 +471,53 @@ The target users...
 
 Priorities: Essential (must have) - `* * *`, Typical (nice to have) - `* *`, Novel (unlikely to have) - `*`
 
-| Priority | As a …​                  | I want to …​                                                           | So that I can…​                                                       |
-|---------|--------------------------|------------------------------------------------------------------------|-----------------------------------------------------------------------|
-| `* * *` | new user                 | see usage instructions                                                 | refer to instructions when I forget how to use the App                |
-| `* * *` | user                     | deal with patient and specialist records separately                    | easily do patient-specific or specialist-specific operations          |
-| `* * *` | user                     | add a new patient to the records                                       | keep track of details of new patients                                 |
-| `* * *` | user                     | delete individual patient details                                      | delete records of patients I no longer take care                      |
-| `* *`   | user                     | edit details of existing patients                                      | make sure the patients' details are up to date                        |
-| `* *`   | user                     | easily search for patient by name                                      | find relevant patient information quickly                             |
-| `* * *` | user                     | access a patient's medical history                                     | provide more informed care based on the patient's medical history     |
-| `* * *` | user                     | access a patient's contact number                                      | quickly get in contact with the patient                               |
-| `* * *` | user                     | access a patient's age                                                 | provide age-specific care and treatment to the patient                |
-| `* *`   | user                     | filter patient records by criteria such as medical condition and age   | simplify the process of finding specific patient information          |
-| `*`     | user                     | customise tags for my patients                                         | have control over the organisation of my patients                     |
-| `*`     | user                     | group delete patients by category or tag                               | save time when removing large amount of patient records               |
-| `* * *` | user                     | add a new specialist to the records                                    | keep track of details of new specialists patients can be referred to  |
-| `* *`   | user                     | edit details of existing specialists                                   | make sure the specialist details are up to date                       |
-| `* * *` | user                     | delete specialist details                                              | delete records of specialists I no longer work with                   |
-| `* * *` | user                     | access specialist details                                              | provide relevant details to the patient I am refering                 |
-| `* *`   | user                     | search for specialists by location                                     | refer patients to convenient specialists to minimise time             | 
-| `* *`   | user                     | search for specialists by their speciality                             | refer patients to the right experts                                   |
-| `*`     | user with poor eyesight  | customise font size and style of the App                               | easily read the information on the screen                             |
-| `*`     | user who is colour blind | customise colour schemes of the App                                    | meet my accessibility needs                                           |
-| `*`     | user who is a fast typer | perform all tasks will the CLI rather than the GUI                     | be more efficient in managing records                                 |
-| `* *`   | user who is impatient    | add new keyboard shortcuts to the App                                  | save time when performing frequently repeated tasks                   |
-| `*`     | lazy user                | import App data previously stored as a .CSV file directly into the App | save time on setting up the application                               |
-| `*`     | lazy user                | export App data                                                        | share the data easily when required                                   |
-| `* * *` | user                     | save the App data                                                      | retain data for future reference                                      |
-| `* * *` | user                     | load previously saved App data                                         | examine past records/information                                      |
-| `*`     | experienced user         | manipulate the save file directly                                      | make quick changes to data without having to open the application     |
-*{More to be added}*
+| Priority | As a …​                  | I want to …​                                        | So that I can…​                                                      |
+|---------|--------------------------|-----------------------------------------------------|----------------------------------------------------------------------|
+| `* * *` | new user                 | see usage instructions                              | refer to instructions when I forget how to use the App               |
+| `* * *` | user                     | deal with patient and specialist records separately | easily do patient-specific or specialist-specific operations         |
+| `* * *` | user                     | add a new patient to the records                    | keep track of details of new patients                                |
+| `* *`   | user                     | edit details of existing patients                   | make sure the patients' details are up to date                       |
+| `* * *` | user                     | delete individual patient details                   | delete records of patients I no longer take care                     |
+| `* *`   | user                     | easily filter patient records by any criteria       | find relevant patient information quickly                            |
+| `* * *` | user                     | access a patient's name                          | identify the patient                                              |
+| `* * *` | user                     | access a patient's medical history                  | provide more informed care based on the patient's medical history    |
+| `* * *` | user                     | access a patient's contact number                   | quickly get in contact with the patient                              |
+| `* * *` | user                     | access a patient's email                            | have an alternate means of contacting the patient                    |
+| `* * *` | user                     | access a patient's age                              | provide age-specific care and treatment to the patient               |
+| `*`     | user                     | customise tags for my patients                      | have control over the organisation of my patients                    |
+| `*`     | user                     | group delete patients                               | save time when removing large amount of patient records              |
+| `* * *` | user                     | add a new specialist to the records                 | keep track of details of new specialists patients can be referred to |
+| `* *`   | user                     | edit details of existing specialists                | make sure the specialist details are up to date                      |
+| `* * *` | user                     | delete specialist details                           | delete records of specialists I no longer work with                  |
+| `* *`   | user                     | easily filter specialist records by any criteria       | find relevant specialist information quickly                            |
+| `* * *` | user                     | access a specialist's name                          | identify the specialist                                              |
+| `* * *` | user                     | access a specialist's contact number                | quickly get in contact with the specialist                           |
+| `* * *` | user                     | access a specialist's email                         | have an alternate means of contacting the specialist                 |
+| `* * *` | user                     | access a specialist's specialty                     | refer patients to appropriate specialists                            |
+| `*`     | user                     | customise tags for my specialists                   | have control over the organisation of my specialists                 |
+| `* *`   | user                     | search for specialists by location                  | refer patients to convenient specialists to minimise time            | 
+| `* *`   | user                     | search for specialists by their speciality          | refer patients to the right experts                                  |
+| `*`     | user                     | customise colour schemes of the App                 | customise the look of my application                                 |
+| `*`     | user who is a fast typer | perform all tasks will the CLI rather than the GUI  | be more efficient in managing records                                |
+| `* *`   | impatient user           | add new keyboard shortcuts to the App               | save time when performing frequently repeated tasks                  |
+| `* *`   | impatient user           | recall recently executed commands                   | save time when performing frequently repeated tasks                  |
+| `* *`   | careless user            | undo and redo commands                              | correct mistakes I've made                                           |
+| `* * *` | user                     | save the App data                                   | retain data for future reference                                     |
+| `* * *` | user                     | load previously saved App data                      | examine past records/information                                     |
+| `*`     | experienced user         | manipulate the save file directly                   | make quick changes to data without having to open the application    |
 
 ### Use cases
 
 (For all use cases below, the **System** is the `DoConnek Pro` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a patient from the records**
 
 **MSS**
 
-1.  User requests to list persons
-2.  System shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  System deletes the person
+1.  User requests to list some patients.
+2.  System shows a list of patients.
+3.  User requests to delete a specific patient in the list.
+4.  System deletes the patient.
 
     Use case ends.
 
@@ -529,97 +527,77 @@ Priorities: Essential (must have) - `* * *`, Typical (nice to have) - `* *`, Nov
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. System detects invalid request format.
 
     * 3a1. System shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
-**Use case: Add a patient**
+**Use case: Add a patient to the records**
 
 **MSS**
 
-1. User searches list to check if patient is already in the system
-2. System shows that there are no entries matching the patient's name
-3. User adds patient to the system
-4. System confirms that the person has been added
-
+1. User searches list to check if patient is already in the system.
+2. System shows that there are no entries matching the patient's name.
+3. User requests to add patient to the system.
+4. System confirms that the person has been added.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The given parameters are invalid.
+* 1a. System shows that there is an existing patient with that name.
+
+    Use case ends.
+
+* 3a. System detects invalid request format.
 
   * 3a1. System shows an error message.
 
-    Use case resumes at step 2.
+    Use case resumes at step 3.
 
-**Use case: Listing all patients**
-
-**MSS**
-
-1. User requests to list all patients
-2. System shows a list of all patients stored 
-   
-    Use case ends.
-
-**Extensions**
-
-* 1a. System detects invalid request format
-
-    * 1a1. System shows an error message.
-  
-      Use case ends.
-
-**Use case: Listing all specialists**
+**Use case: List all patients in the records**
 
 **MSS**
 
-1. User requests to list all specialists
-2. System shows a list of all specialists stored 
+1. User requests to list all patients.
+2. System shows a list of all patients stored.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. System detects invalid request format
+* 1a. System detects invalid request format.
 
     * 1a1. System shows an error message.
 
       Use case ends.
 
-**Use case: Searching for patients**
+**Use case: Search for patients in the records**
 
 **MSS**
 
 1. User requests to find patients from a keyword.
-2. System shows a list of patients that match the keyword with their names.
+2. System shows a list of patients that match the keyword.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. System detects invalid request format
+* 1a. System detects invalid request format.
 
     * 1a1. System shows an error message.
 
       Use case ends.
 
-* 1b. System could not find any patient from the keyword
-
-    * 1b1. System shows an error message.
-
-      Use case ends.
-
-**Use case: View a person**
+**Use case: View details of a patient in the records**
 
 **MSS**
 
-1.  User requests to list persons
-2.  System shows a list of persons
-3.  User requests to view the details a specific person in the list
-4.  System shows the person details
+1.  User requests to list some patients.
+2.  System shows a list of patients.
+3.  User requests to view the details of a specific patient in the list.
+4.  System shows the patient's details.
 
     Use case ends.
 
@@ -629,7 +607,7 @@ Priorities: Essential (must have) - `* * *`, Typical (nice to have) - `* *`, Nov
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. System detects invalid request format.
 
     * 3a1. System shows an error message.
 
@@ -639,16 +617,14 @@ Priorities: Essential (must have) - `* * *`, Typical (nice to have) - `* *`, Nov
 
 **MSS**
 
-1.  User requests to exit the program
-2.  System exits the program
+1.  User requests to exit the program.
+2.  System exits the program.
 
 * 1a. System detects invalid request format.
 
   * 1a1. System shows an error message.
 
     Use case ends.
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -671,8 +647,9 @@ Priorities: Essential (must have) - `* * *`, Typical (nice to have) - `* *`, Nov
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **CLI**: Command Line Interface.
+* **GUI**: Graphical User Interface.
+* **Mainstream OS**: Windows, Linux, Unix, OS-X.
 * **Appropriate third party frameworks/libraries/systems**: Those frameworks/libraries/systems that are free, open-source, have permissive license terms, don't require installation by the users and don't violate other constraints.
 * **GUI should work well**: The GUI should not cause resolution-related inconveniences for the user.
 * **GUI should be usable**: The GUI's functions can all be used, although user-experience may be suboptimal.
@@ -684,7 +661,7 @@ Priorities: Essential (must have) - `* * *`, Typical (nice to have) - `* *`, Nov
 Given below are instructions to test the app manually.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+testers are welcomed to do more *exploratory* testing.
 
 </div>
 
@@ -703,47 +680,206 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a patient or specialist
 
-### Deleting a person
+Adding a patient to the existing list.
+    
+1. Recommendation: List all patients by entering `list -pa` to better observe the results.
 
-1. Deleting a person while all persons are being shown
+2. Test case: `add -pa n/Abigail Lim p/89074463 e/abilim@test.com t/friends a/22 m/Bronchitis m/Fever`<br>
+   Expected: A patient by the name of Abigail Lim is added to the list of patients. The details of the newly added patient can be seen via the `view` command.
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+3. Test case: `add -pa n/Abigail Lim e/abilim@test.com t/friends a/22 m/Bronchitis` (missing `p/PHONE` field)<br>
+Expected: No patient is added to the list. Error message is shown in the command result box.
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+4. Test Case: `add -pa n/Abigail Lim p/89074463 e/abilim@test.com t/friends a/twenty-two m/Bronchitis` (invalid `a/AGE` field)<br>
+   Expected: No patient is added to the list. Error message of accepted `a/AGE` format is shown.
 
-    1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+Similar tests for adding a specialists can be done using the `add` command format for specified for specialists.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+### Viewing a patient or specialist
 
-1. _{ more test cases …​ }_
+Viewing a patient while all patients are being shown in the list panel.
 
-### Viewing a person
+1. Prerequisites: List all patients using the `list - pa` command. Multiple patients in the list.
 
-1. Viewing a person while all persons are being shown
+2. Test case: `view 1`<br>
+   Expected: First patient is selected to be viewed. Details of the viewed patient are shown in the view panel.
+   Details of the viewed patients is also displayed in the command result box.
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+3. Test case: `view 0`<br>
+   Expected: No person is viewed. Error details shown in command result box.
 
-    1. Test case: `view 1`<br>
-       Expected: First person is selected to be viewed. Details of the viewed person shown in the View Person Panel.
-Timestamp in the status bar is updated.
+4. Other incorrect view commands to try: `view`, `view x`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
 
-    1. Test case: `view 0`<br>
-       Expected: No person is viewed. Error details shown in the status message. Status bar remains the same.
+Similar tests for viewing a specialist can be done using the `view` command after listing all specialists via `list -sp` command.
 
-    1. Other incorrect view commands to try: `view`, `view x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+### Editing a patient or specialist
 
-1. _{ more test cases …​ }_
+ Editing a specialist while a specialist is being viewed in the view panel.
 
-### Saving data
+1. Prerequisites: Viewing a specialist in the view panel.
 
-1. Dealing with missing/corrupted data files
+2. Test case: `edit n/Jonathan Holland` (editing a single attribute)<br>
+   Expected: The name of the specialist being viewed is modified to **Jonathan Holland**.
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+3. Test case: `edit n/John Holland p/88889009 s/Dentistry` (editing multiple attributes)<br>
+   Expected: The specialist being viewed is modified to have the **name John Holland** with **phone number 88889009** and has **Dentistry as a specialisation**.
 
-1. _{ more test cases …​ }_
+4. Test case: `edit t/`(clearing tags)<br>
+   Expected: The specialist being viewed is modified to have no tags.
+
+5. Test case: `edit n/`<br>
+   Expected: The specialist being viewed is not modified. Error message indicating arguments cannot be blank is shown.
+
+Similar tests for editing a patient can be done using the `edit` command after viewing a patient in the view panel using the `view` command.
+    
+### Deleting a patient or specialist
+
+Deleting a specialist while all specialist are being shown.
+
+1. Prerequisites: List all specialists using the `list -sp` command. Multiple specialists in the list.
+
+2. Test case: `delete 1`<br>
+   Expected: First specialist is deleted from the specialist list. Shorter details of the deleted specialists is shown in the command result box.
+
+3. Test case: `delete 2 3 4`<br>
+   Expected: Second, third and fourth specialist is deleted from the specialist list. Shorter details of the deleted specialists is shown in the command result box.
+
+4. Test case: `delete 0`<br>
+   Expected: No person is deleted. Error details shown in the status message.
+
+5. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
+
+Similar tests for deleting a patient can be done by first listing all patients using the `list -pa` command with multiple patients listed.
+
+### Finding patients or specialists
+
+Finding a patient that has been added into the patient list.
+
+1. Prerequisites: Follow the instructions for adding a patient for manual testing above [here](#adding-a-patient-or-specialist).
+
+2. Test case: `find -pa n/Abigail`<br>
+   Expected: The patient list displays patients with name containing "Abigail" only.
+
+3. Test case: `find -pa n/Abigail m/Bronchitis` (multiple arguments)<br>
+   Expected: The patient list displays patients with the name containing "Abigail" _**and**_ has "Bronchitis" in their medical history.
+
+4. Test case: `find -pa a/` (blank `a/AGE` field)<br>
+   Expected: No changes can be observed from the patient list. Error message indicating arguments cannot be blank is shown in the command result box.
+
+Similar tests for finding specialists can be conducted by using the `find` command with a multiple specialists in the specialist list.
+
+### Undo and redo commands
+
+Undo and redo commands executed successfully.
+
+Test case:
+
+1. Enter `theme dark` followed by `theme light`<br>
+   Expected: Colour theme of the application changes from dark mode to light mode.
+
+2. Enter `undo`<br>
+   Expected: Colour theme of the application changes to dark mode.
+
+3. Enter `redo`<br>
+   Expected: Colour theme of the application changes to light mode.
+
+4. Enter `add -pa n/Charlie Wong p/89073323 e/cwong@test.com t/neighbour a/35 m/Flu`<br>
+   Expected: A patient by the name of "Charlie Wong" is added to the patient list.
+
+5. Enter `redo`<br>
+   Expected: No changes is made to the patient list. Error message indicating no command to be undone is displayed in result box.
+
+6. Enter `undo`<br>
+   Expected: The patient previously added in step 5 is removed from the patient list.
+
+### Shortcut aliases
+
+1. Adding a shortcut alias for `list` command
+
+   1. Test case: `addsc sc/ls kw/list` followed by `ls -pa`<br>
+   Expected: New shortcut alias `ls` is added. Command result box displays message of successful mapping. All patients are listed upon entering `ls -pa`.
+
+   2. Test case: `addsc sc/ls kw/list`<br>
+   Expected: No new shortcut alias is added. Command result box displays message of shortcut alias already existing.
+   
+   3. Test case: `addsc sc/ls kw/delete` (same shortcut alias but different command keyword)<br>
+   Expected: New shortcut alias is added, `ls` now behaves like a `delete` command. The command result box displays a message of the new mapping of `ls` to `delete` command.
+             A message of the removal of the old mapping of `ls` to `list` command is displayed as well.
+
+2. Deleting a shortcut alias
+
+    1. Prerequisite: Follow the manual testing instructions **adding shortcut alias** written above. No other shortcut alias has been previously added.
+   
+    2. Test case: `delsc sc/ls`<br>
+       Expected: Shortcut alias `ls` is removed. Using `ls` instead of `delete` command now results in an unknown command error being displayed in the command result box.
+
+    3. Test case: `delsc sc/remove` (deleting non-existent shortcut alias)<br>
+       Expected: No shortcut alias is removed. The command result box displays a useful error message indicating shortcut alias was not previously registered.
+
+### Theme Command
+
+1. Prerequisite: Set theme of the application to dark using the `theme dark` command.     
+
+2. Test case: `theme light`<br>
+Expected: Theme of the application changes from dark to light.
+
+3. Test case: `theme DaRk`<br>
+Expected: Theme of the application changes from light to dark.
+
+4. Test case: `theme colourful`<br>
+Expected: No change in the theme of the application. Command box displays error message.
+
+### Recall Command
+
+1. Recalling recently executed commands in the application
+
+   1. Prerequisite: Enter the following commands in order:`list -pa`, `list -sp`, `theme light` and `theme dark`.
+   
+   2. Test case: Press the up arrow four times and then enter <br> 
+   Expected: The list panel updates to display patients.
+   
+   3. Test case: Press the up arrow four times and then the down arrow once and then enter <br>
+   Expected: The theme of the application changes from dark to light.
+   
+2. Recalling commands when no commands have been executed yet
+
+   1. Prerequisite: Restart the application and don't enter any commands.
+   
+   2. Test case: Type in `list -pa`. Don't enter. Press the up arrow. <br>
+   Expected: There is no change to the command input text box.
+   
+
+## **Appendix: Planned Enhancements**
+
+1. Currently, the view panel can only be updated using the view command. 
+However, we are planning on implementing a feature that will allow users to update the view panel by simply clicking on a person in the list panel.
+This change is driven by our goal to enhance user experience: although our application primarily caters to CLI users, such  behaviour
+still seems intuitive and reasonable to expect.
+
+2. Currently, when the `delete` command encounters invalid indexes, it generates an error and does not delete any patient or specialist records.
+In contrast, the `delsc` command handles invalid shortcuts by recognizing and ignoring them, while continuing to remove any valid shortcuts in the command.
+The inconsistency between these two delete functions has been identified, and we have plans to address it in the future.
+Our upcoming improvement will entail modifying the `delete` command to acknowledge and ignore invalid indexes while effectively deleting records specified by valid indexes provided by the user.
+
+3. DoConnek Pro currently checks for duplicate persons by name. This means that people with the same names cannot be added even if they have different parameters (like `Phone` or `Email`). This
+checking of duplicates is also case-sensitive, whereas names, in general, are not case-sensitive. To resolve these two problems concurrently,
+we plan on implementing a `NRIC` field for patients and a `MCR` field for specialists as unique identifiers. 
+
+
+4. DoConnek Pro currently disallows the use of "/" in a person name because it is used as a command delimiter.
+Users may face problems due to this if they have to, for example, add a person with "s/o" in their name.
+Future updates to the application plan to account for such cases.
+
+
+5. DoConnek Pro is currently not intelligent enough to detect incorrect-but-close-enough flags. Users must enter the
+commands in the exact format specified in the user guide. For example, even if users input `tag/` instead of `t/`, DoConnek
+Pro will not accept this as a valid input format. In the future we plan to make DoConnek Pro more flexible in this regard.
+
+
+6. DoConnek Pro allows users to add multiple entries for certain attributes, notably `MEDICAL_HISTORY` and `TAG`. However, 
+it cannot guarantee the ordering of these entries as inputted by the user in the command line. 
+We plan on rectifying DoConnek Pro to maintain this user-specified ordering in the future.

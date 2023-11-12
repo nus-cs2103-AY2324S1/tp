@@ -36,6 +36,9 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindPredicateMap;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.ThemeCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -108,11 +111,13 @@ public class AddressBookParserTest {
                 .withMedicalHistory("MedHistory1")
                 .withTags("Tag1", "Tag2")
                 .build();
+        model.addPerson(patient);
         model.updateSelectedPerson(patient);
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(patient).build();
         String input = EditCommand.COMMAND_WORD + " " + PatientUtil.getEditPatientDescriptorDetails(descriptor);
         EditCommand command = (EditCommand) parser.parseCommand(input);
         assertEquals(new EditCommand(descriptor), command);
+        model.deletePerson(patient);
     }
 
     @Test
@@ -122,12 +127,14 @@ public class AddressBookParserTest {
                 .withLocation("TestLocation")
                 .withTags("Tag1", "Tag2")
                 .build();
+        model.addPerson(specialist);
         model.updateSelectedPerson(specialist);
         EditSpecialistDescriptor descriptor = new EditSpecialistDescriptorBuilder(specialist).build();
         String input = EditCommand.COMMAND_WORD
                 + " " + SpecialistUtil.getEditSpecialistDescriptorDetails(descriptor);
         EditCommand command = (EditCommand) parser.parseCommand(input);
         assertEquals(new EditCommand(descriptor), command);
+        model.deletePerson(specialist);
     }
 
     @Test
@@ -143,14 +150,16 @@ public class AddressBookParserTest {
                 .build();
         String userInput1 = EditCommand.COMMAND_WORD + " " + PATIENT_TAG;
         String userInput2 = EditCommand.COMMAND_WORD + " " + SPECIALIST_TAG;
-
+        model.addPerson(patient);
         model.updateSelectedPerson(patient);
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EditCommand.MESSAGE_USAGE_PATIENT), () -> parser.parseCommand(userInput1));
-
+        model.deletePerson(patient);
+        model.addPerson(specialist);
         model.updateSelectedPerson(specialist);
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EditCommand.MESSAGE_USAGE_SPECIALIST), () -> parser.parseCommand(userInput2));
+        model.deletePerson(specialist);
     }
 
     @Test
@@ -217,5 +226,44 @@ public class AddressBookParserTest {
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, ()
                 -> parser.parseCommand("unknownCommand"));
+    }
+
+    @Test
+    public void parseCommand_basicCommandAsComplexCommand_throwsParseException() {
+
+        String deleteInput = DeleteCommand.COMMAND_WORD + " " + PATIENT_TAG;
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), ()
+                        -> parser.parseCommand(deleteInput));
+
+        String undoInput = UndoCommand.COMMAND_WORD + " " + SPECIALIST_TAG;
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndoCommand.MESSAGE_USAGE), ()
+                        -> parser.parseCommand(undoInput));
+
+        String redoInput = RedoCommand.COMMAND_WORD + " " + PATIENT_TAG;
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, RedoCommand.MESSAGE_USAGE), ()
+                        -> parser.parseCommand(redoInput));
+
+        String addShortcutInput = AddShortcutCommand.COMMAND_WORD + " " + SPECIALIST_TAG;
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddShortcutCommand.MESSAGE_USAGE), ()
+                        -> parser.parseCommand(addShortcutInput));
+
+        String delShortcutInput = DeleteShortcutCommand.COMMAND_WORD + " " + PATIENT_TAG;
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteShortcutCommand.MESSAGE_USAGE), ()
+                        -> parser.parseCommand(delShortcutInput));
+
+        String viewInput = ViewCommand.COMMAND_WORD + " " + SPECIALIST_TAG;
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE), ()
+                        -> parser.parseCommand(viewInput));
+
+        String themeInput = ThemeCommand.COMMAND_WORD + " " + PATIENT_TAG;
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ThemeCommand.MESSAGE_USAGE), ()
+                        -> parser.parseCommand(themeInput));
     }
 }

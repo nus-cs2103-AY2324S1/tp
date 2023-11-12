@@ -15,8 +15,10 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.PatientBuilder;
 
 public class ModelManagerTest {
 
@@ -98,6 +100,7 @@ public class ModelManagerTest {
         assertEquals(modelManager.getSelectedPerson(), null);
     }
 
+
     @Test
     public void getSelectedPerson_validPerson_success() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
@@ -107,6 +110,13 @@ public class ModelManagerTest {
         assertEquals(modelManager.getSelectedPerson(), modelManager.getFilteredPersonList().get(0));
 
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Test
+    public void updateSelectedPerson_invalidPerson_returnsNull() {
+        Patient patient = new PatientBuilder().withAge("30").build();
+        modelManager.updateSelectedPerson(patient);
+        assertEquals(modelManager.getSelectedPerson(), null);
     }
 
     @Test

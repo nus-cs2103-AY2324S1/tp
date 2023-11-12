@@ -64,4 +64,8 @@ public class Name {
         return fullName.hashCode();
     }
 
+    public Name getCopy() {
+        return new Name(this.fullName);
+    }
+
 }

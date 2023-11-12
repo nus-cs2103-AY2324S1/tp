@@ -64,6 +64,7 @@ public class ShortcutSettings implements Serializable {
      * Duplicate keys are handled automatically.
      */
     public ShortcutSettings removeBadMappings() {
+        // Use of Iterator in solution inspired by AI tool output
         Iterator<Map.Entry<String, String>> iterator = shortcutMap.entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry<String, String> mapping = iterator.next();
@@ -75,6 +76,15 @@ public class ShortcutSettings implements Serializable {
             }
         }
         return this;
+    }
+
+    public ShortcutSettings getCopy() {
+        return new ShortcutSettings(new LinkedHashMap<>(shortcutMap));
+    }
+
+    public void setShortcutSettings(ShortcutSettings shortcutSettings) {
+        this.shortcutMap.clear();
+        this.shortcutMap.putAll(shortcutSettings.shortcutMap);
     }
 
 

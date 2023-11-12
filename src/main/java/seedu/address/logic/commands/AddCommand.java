@@ -47,11 +47,10 @@ public class AddCommand extends Command {
             + ": Adds a patient to the address book. \n"
             + MESSAGE_USAGE_GENERAL
             + PREFIX_AGE + "AGE "
-            + PREFIX_MEDICALHISTORY + "MEDICAL HISTORY \n"
+            + "[" + PREFIX_MEDICALHISTORY + "MEDICAL HISTORY]... \n"
             + "Example: " + COMMAND_WORD + " "
             + PATIENT_TAG + " "
             + PERSON_EXAMPLE
-            + PREFIX_TAG + "owesMoney "
             + PREFIX_AGE + "30 "
             + PREFIX_MEDICALHISTORY + "Osteoporosis";
 
@@ -78,7 +77,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
@@ -91,7 +90,7 @@ public class AddCommand extends Command {
         } else {
             model.updateFilteredPersonList(PersonType.SPECIALIST.getSearchPredicate());
         }
-        model.commitAddressBook();
+        model.commit();
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

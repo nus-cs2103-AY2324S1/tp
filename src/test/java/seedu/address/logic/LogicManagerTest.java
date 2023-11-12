@@ -177,7 +177,7 @@ public class LogicManagerTest {
         Person expectedPerson = new PatientBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
-        expectedModel.commitAddressBook();
+        expectedModel.commit();
 
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }

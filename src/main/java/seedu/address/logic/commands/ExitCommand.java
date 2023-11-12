@@ -12,7 +12,7 @@ public class ExitCommand extends Command {
     public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting DoConnek Pro as requested ...";
 
     @Override
-    public CommandResult execute(Model model, CommandHistory commandHistory) {
+    public CommandResult execute(Model model) {
         return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true);
     }
 

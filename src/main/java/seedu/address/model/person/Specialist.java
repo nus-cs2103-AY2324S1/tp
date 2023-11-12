@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.util.StringUtil;
@@ -73,5 +74,22 @@ public class Specialist extends Person {
         }
 
         return false;
+    }
+
+    @Override
+    public Specialist getCopy() {
+        Set<Tag> tagCopies = new HashSet<Tag>();
+        for (Tag originalTag : super.getTags()) {
+            Tag copy = originalTag.getCopy();
+            tagCopies.add(copy);
+        }
+        return new Specialist(
+                super.getName().getCopy(),
+                super.getPhone().getCopy(),
+                super.getEmail().getCopy(),
+                this.location.getCopy(),
+                tagCopies,
+                this.getSpecialty().getCopy()
+        );
     }
 }

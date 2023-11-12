@@ -31,38 +31,35 @@ public class AddCommandIntegrationTest {
     @Test
     public void execute_newPatient_success() {
         Person validPerson = new PatientBuilder().build();
-        CommandHistory commandHistory = new CommandHistory();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);
         expectedModel.updateFilteredPersonList(PersonType.PATIENT.getSearchPredicate());
-        expectedModel.commitAddressBook();
+        expectedModel.commit();
 
         assertCommandSuccess(new AddCommand(validPerson), model,
                 String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
-                expectedModel, commandHistory);
+                expectedModel);
     }
 
     @Test
     public void execute_newSpecialist_success() {
         Person validPerson = new SpecialistBuilder().build();
-        CommandHistory commandHistory = new CommandHistory();
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);
         expectedModel.updateFilteredPersonList(PersonType.SPECIALIST.getSearchPredicate());
-        expectedModel.commitAddressBook();
+        expectedModel.commit();
 
         assertCommandSuccess(new AddCommand(validPerson), model,
                 String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
-                expectedModel, commandHistory);
+                expectedModel);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        CommandHistory commandHistory = new CommandHistory();
         Person personInList = model.getAddressBook().getPersonList().get(0);
         assertCommandFailure(new AddCommand(personInList), model,
-                AddCommand.MESSAGE_DUPLICATE_PERSON, commandHistory);
+                AddCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
 }

@@ -19,8 +19,6 @@ import seedu.address.model.UserPrefs;
  */
 public class ListCommandTest {
 
-    private CommandHistory commandHistory = new CommandHistory();
-
     private Model model;
     private Model expectedModel;
 
@@ -33,20 +31,19 @@ public class ListCommandTest {
     @Test
     public void executePatient_listIsNotFiltered_showsSameList() {
         assertCommandSuccess(new ListCommand(PATIENT), model, ListCommand.PATIENT_MESSAGE_SUCCESS,
-                expectedModel, commandHistory);
+                expectedModel);
     }
 
     @Test
     public void executeSpecialist_listIsNotFiltered_showsSameList() {
         expectedModel.updateFilteredPersonList(SPECIALIST.getSearchPredicate());
         assertCommandSuccess(new ListCommand(SPECIALIST), model, ListCommand.SPECIALIST_MESSAGE_SUCCESS,
-                expectedModel, commandHistory);
+                expectedModel);
     }
 
     @Test
     public void executePatient_listIsFiltered_showsEverything() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        assertCommandSuccess(new ListCommand(PATIENT), model, ListCommand.PATIENT_MESSAGE_SUCCESS, expectedModel,
-                commandHistory);
+        assertCommandSuccess(new ListCommand(PATIENT), model, ListCommand.PATIENT_MESSAGE_SUCCESS, expectedModel);
     }
 }
