@@ -1,7 +1,5 @@
 package seedu.address.model.employee;
 
-import static seedu.address.model.employee.Employee.MAX_NUM_OF_LEAVES;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
