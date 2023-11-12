@@ -12,6 +12,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.CLOSED_INTERACTION_LIST_ONE;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.INTERACTION_LIST_ONE;
 
@@ -125,6 +126,7 @@ public class PersonTest {
 
     @Test
     public void isUncontacted() {
+        assertEquals(CLOSED_INTERACTION_LIST_ONE.get(0), ALICE.getInteractions().get(0));
         assertEquals(true, ALICE.isUncontacted());
         assertEquals(false, BENSON.isUncontacted());
         assertEquals(false, ELLE.isUncontacted());
