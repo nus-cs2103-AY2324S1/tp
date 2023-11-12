@@ -45,6 +45,7 @@ Given below are my contributions to the project.
     * Added implementation details for the `present` feature.
     * Added user stories.
     * Added manual testing.
+    * Added Planned Enhancements section.(PR: [#205](https://github.com/AY2324S1-CS2103T-T11-1/tp/pull/205))
 
 * **Team-based tasks**:
   * Reviewed and merged pull requests.
