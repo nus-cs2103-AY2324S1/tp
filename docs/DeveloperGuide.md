@@ -823,7 +823,7 @@ Given below are the fixes proposed to add in the near future.
    2. Proposed solution: We plan to trim the values of leading and trailing whitespaces before reading into `jsonAdaptedPerson.java`, so that even if there is leading whitespaces, the values can still be read. 
 2. #### Expansion of `filter` feature
    1. In the current implementation, `filter` only works for 1 field. The user may want to filter for multiple fields so that they can have an easier time finding people of interest.
-   2. Proposed solution: We plan to let `filter` take in multiple fields.
+   2. Proposed solution: We plan to let `filter` filter for multiple fields.
 3. #### Expansion of `tag` feature
     1. Currently, the only way to modify tags is via the `edit` command which overwrites the entire tag list when executed.
     2. This can result in notable user inconvenience in at least one of two ways :
