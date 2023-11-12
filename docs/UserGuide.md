@@ -89,11 +89,14 @@ Keep an eye out for them!
    * `list` : Lists all contacts. 
    * `add n/Alice Lovelace p/98757287 e/alicel@example.com i/bass g/rock`: Adds rock bassist Alice Lovelace.
    * `addb n/Maverick g/rock`: Adds a rock band named Maverick.
-   * `findb TheoryX`: Finds the band named TheoryX and checks its members.
+   * `findb TheoryX`: Finds the band named "TheoryX" and views its members.
    * `exit` : Exits the app.
    
     <br>
     Please refer to the [Features](#features) below for details of each command.
+
+
+[Back To ToC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -138,8 +141,11 @@ add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​  [i/INSTRUMENT]…​  [g/GENRE]
 * The order of the parameters does not affect the result. For example, `p/PHONE_NUMBER` can be entered before `n/NAME`, and the command still works the same.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, or `tags`) will be ignored.
-
+  
+ 
+[Back To ToC](#table-of-contents)
 </div>
+
 
 --------------------------------------------------------------------------------------------------------------------
 ### Features for managing musicians
@@ -174,7 +180,7 @@ If you input a musician which is already in your contact book (i.e. a musician w
 ```
 This musician already exists in your contact list
 ```
-
+[Back To ToC](#table-of-contents)
 #### Delete musician: `delete`
 
 Deletes a musician from your contact list.
@@ -204,6 +210,7 @@ The musician index provided is invalid
 
 Please verify that the index is correct and try again.
 
+[Back To ToC](#table-of-contents)
 
 #### Edit musician: `edit`
 
@@ -250,6 +257,8 @@ Edited Musician: John Doe; Phone: 98765430; Email: johnd@example.com; Tags: [bes
     The musician index provided is invalid
     ```
     Please verify that the index is correct and try again.
+   
+[Back To ToC](#table-of-contents)
 
 #### Find musicians: `find`
 
@@ -289,6 +298,8 @@ For example, when the input command is `find g/rock i/guitar i/piano`
     The argument(s) provided must not contain more than one word.
     ```
 
+[Back To ToC](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Features for managing bands
@@ -321,6 +332,9 @@ Should you try to add a band with empty genre tags, i.e., addb My Garage Band g/
 Genre tags names should be a valid genre name.
 For a list of valid genres, please use the command 'tags'
 ```
+
+[Back To ToC](#table-of-contents)
+
 #### Add musician to band: `addm`
 
 Adds a musician to a specified band.
@@ -365,7 +379,7 @@ when there is 1 band), you will see an error message below:
     ```
     You can only add musicians to one band at a time
     ```
-
+[Back To ToC](#table-of-contents)
 
 #### Remove musician from band: `removem`
 
@@ -393,6 +407,7 @@ In addition, if the musician does not exist in the band, you will see an error m
 ![removem_notinband.png](images/band-features/removem_notinband.png)
 Please verify that the index of the musician is correct or input a different musician, and try again.
 
+[Back To ToC](#table-of-contents)
 
 #### Find band: `findb`
 Finds the band with the given input name. Lists the band members of the selected band. From `My Bands` panel, find the complete band name of the band.
@@ -410,6 +425,8 @@ Finds the band with the given input name. Lists the band members of the selected
 
 **Upon failure:**
 If you input an invalid band name, an error message `Band does not exist!` will be displayed. Please input a valid band name and enter the command again.
+
+[Back To ToC](#table-of-contents)
 
 #### Edit a band: `editb`
 
@@ -454,6 +471,8 @@ Genre tags names should be a valid genre name.
 For a list of valid genres, please use the command 'tags'
 ```
 
+[Back To ToC](#table-of-contents)
+
 #### Delete a band: `deleteb`
 
 Deletes a band from your contact list.
@@ -482,6 +501,8 @@ The band index provided is invalid
 
 Please verify that the index is correct and try again.
 
+[Back To ToC](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### General features
@@ -499,10 +520,14 @@ You will see a window like below, click `Copy URL`, paste the link in any web br
 * Extraneous parameters will be ignored.
 * e.g. if the command specifies `help 1`, it will be interpreted as `help`.
 
+[Back To ToC](#table-of-contents)
+
 #### List all musicians and bands: `list`
 View all musicians and bands in their separate panels.
 
 **Format:** `list`
+
+[Back To ToC](#table-of-contents)
 
 #### Show all valid instruments and genres: `tags`
 
@@ -525,9 +550,13 @@ The `My Musicians` and `My Bands` panels will remain unchanged.
 
 ![tags.png](images%2Fmusician-features%2Ftags.png)
 
+[Back To ToC](#table-of-contents)
+
 #### Save data
 
 BandConnect++ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+[Back To ToC](#table-of-contents)
 
 #### Clear data: `clear`
 
@@ -541,6 +570,8 @@ This command is irreversible, and all data will be lost. Please use this command
 
 </div>
 
+[Back To ToC](#table-of-contents)
+
 #### Exit app : `exit`
 
 Exits the program.
@@ -552,6 +583,8 @@ Format: `exit`
 :information_source: **Congratulations! You are now ready to use _BandConnect++_ !**
 
 If you wish, please refer to the below section for a more succinct [command summary](#command-summary).
+
+[Back To ToC](#table-of-contents)
 
 </div>
 
@@ -589,7 +622,7 @@ If you wish, please refer to the below section for a more succinct [command summ
 | **Clear All Data**                             | `clear`                                                                                   |
 | **Exit**                                       | `exit`                                                                                    |
 
-
+[Back To ToC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -597,10 +630,14 @@ If you wish, please refer to the below section for a more succinct [command summ
 
 [to be added soon]
 
+[Back To ToC](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Troubleshooting
 Some Mac users have encountered issues when attempting to launch BandConnect++. If you face any issues, visit [this](https://nus-cs2103-ay2324s1.github.io/website/admin/programmingLanguages.html) website for instructions on how to fix it.
+
+[Back To ToC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -609,3 +646,5 @@ Some Mac users have encountered issues when attempting to launch BandConnect++. 
 | Term   | Definition                                                                                                                                                                                                                                                                      |
 |--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | CLI    | Command Line Interface (CLI) is a text-based user interface that allows users to interact with a computer program by typing in commands through a keyboard. <br/> Since a mouse is not needed for CLI, it is often **a more efficient interaction method for fast typists.**    |
+
+[Back To ToC](#table-of-contents)
