@@ -45,8 +45,8 @@ public class InterviewCard extends UiPart<Region> {
         super(FXML);
         this.interview = interview;
         id.setText(displayedIndex + ". ");
-        applicant.setText(interview.getInterviewApplicant().getName().fullName); // Todo: Change needed
-        jobRole.setText(interview.getJobRole()); // Todo: Change needed
+        applicant.setText(interview.getInterviewApplicant().getName().fullName);
+        jobRole.setText(interview.getJobRole());
         interviewStartTime.setText(interview.getInterviewStartTimeAsString());
         interviewEndTime.setText(interview.getInterviewEndTimeAsString());
         rating.setText(interview.getRating().rating);

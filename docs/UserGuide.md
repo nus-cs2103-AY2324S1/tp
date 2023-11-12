@@ -120,7 +120,7 @@ Before we begin, the table below describes some symbols and syntax you may see t
 
 5. Launch the app by using the command `java -jar InterviewHub.jar` in your terminal. 
 
-6. The Graphical User Interface(GUI) should appear in a few seconds. Note that the app contains some sample data.
+6. The Graphical User Interface(GUI) should appear in a few seconds. Note that the app initially contains some sample data.
 
 7. Type the command in the command box and press Enter to execute it. E.g. typing **`help`** and pressing Enter will
    open the help window.<br>
@@ -131,7 +131,8 @@ Before we begin, the table below describes some symbols and syntax you may see t
    * **`list-a`** : Lists all job applicants.
 
    * **`add-a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665`** :
-     Adds an applicant information for `James Ho` to **InterviewHub**. 
+     Adds a job applicant's information to **InterviewHub**.
+     * The applicant's name is `James Ho`,
      * The applicant's phone number is `22224444`, 
      * the applicant's email address is `jamesho@example.com`, and 
      * the applicant's residential address is at `123, Clementi Rd, 1234665`.
