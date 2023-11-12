@@ -60,6 +60,7 @@ public class ReminderTest {
 
     @Test
     public void compareTo() {
+        assertTrue(VALID_FUTURE_REMINDER.compareTo(VALID_FUTURE_REMINDER.getFollowUpDate()) == 0);
         assertTrue(VALID_FUTURE_REMINDER.compareTo(LocalDate.now()) == 1);
         assertTrue(VALID_PAST_REMINDER.compareTo(LocalDate.now()) == -1);
     }

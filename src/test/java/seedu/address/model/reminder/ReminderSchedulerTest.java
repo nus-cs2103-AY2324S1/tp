@@ -54,5 +54,4 @@ public class ReminderSchedulerTest {
 
         assertTrue(!reminderScheduler.isAlive());
     }
-
 }
