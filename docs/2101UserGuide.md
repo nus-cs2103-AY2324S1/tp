@@ -298,12 +298,15 @@ Examples:
 <hr class="feature-class-separator">
 
 ### Utility commands
+CCACommander provides you with powerful utility commands to make your admin tasks even more of a breeze than it was.
 
 #### Undoing a command: `undo`
 
-Undoes the previous command that the user has entered, which has changed the data within CCACommander.
+The `undo` command is the ultimate safety net for CCACommander. You no longer have to fear accidentally deleting 
+the wrong event or enrolling the wrong member. Simply enter the `undo` command to undo your previous command, 
+and it will revert to the state it was before.
 
-Format: `undo`
+Here’s how you can use it: `undo`
 
 List of commands that can be undone:
 * `clear`
