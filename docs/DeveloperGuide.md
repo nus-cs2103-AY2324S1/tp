@@ -632,3 +632,17 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Planned Enhancements**
+
+### Batch Processing for Paid Command:
+
+Reason: This enhancement allows users to mark multiple persons as paid in a single command, improving efficiency.
+
+Idea: Modify the paid command parser to accept a list of person identifiers (e.g., "paid 1, 2, 3"), and update the command execution logic to iterate through the list and mark each person as paid.
+
+### Scheduled Unpaid Marking
+
+Reason: Introduce a scheduling feature within the unpaid command to set future unpaid statuses for individuals. This would be beneficial for scenarios where payments should automatically lapse after a set period.
+
+Idea: Add a scheduling mechanism within the command execution to mark individuals as unpaid after a specified future date or duration.
