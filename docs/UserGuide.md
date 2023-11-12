@@ -898,7 +898,7 @@ If your changes to the data file makes its format invalid, ManaGease will not ru
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ManaGease home folder.
 
-**Q**: I am using multiple screens. If I move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen.<br>
+**Q**: I am using multiple screens. If I move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. What should I do?<br>
 **A**: Delete the `preferences.json` file created by the application before running the application again.
 
 **Q**: Is internet access necessary for the application? <br>
