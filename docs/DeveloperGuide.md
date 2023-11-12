@@ -345,52 +345,117 @@ The `CombinedPredicate` simply represents the logical AND of multiple `Predicate
 
 ---
 
-### Clear Command
-
-The clear command allows the user to delete all job applications.
-
-#### Implementation
-
-The following sequence diagram illustrates the process of invocation for the command:
-
-<img src="images/developer-guide/ClearCommandSequenceDiagram.png" />
-
-The `ClearCommand` class implements this command.
-
-#### Design considerations
-
----
-
 ### Interview and Interview Commands
 
 #### Implementation
+The feature to allow users to add interviews is mainly implemented through adding `Interview` to the `Model` component
+and implementing `InterviewCommands` in the `Logic` component. 
 
+Each job application created has a list of interviews that can be added, edited and deleted accordingly with the 
+Interview Sub Commands.
 
 #### Interview
+An `Interview` will consist of a:
+* `InterviewType` - There are 9 types of interview types specified by using enumerations
+* `InterviewDateTime`- Makes use of `LocalDateTime` and `DateTimeFormatter` to store the date and time of interview
+* `InterviewAddress`
+
+The following class diagram illustrates the structure of an `Interview` Object:
 
 <img src="images/developer-guide/InterviewClassDiagram.png" />
 
 #### Interview Commands
+The Interview commands are implemented with `InterviewCommand` and `InterviewCommandParser`.
 
+During parsing of user input in `ApplicationBookParser`, if the input starts with `interview` the remaining input
+is passed as an argument to the `InterviewCommandParser` which parses it and invokes the respective 
+sub command parsers.
+
+The abstract `InterviewCommand` class extends the `Command` class to hide the internal logic
+and execution of the Interview Sub Commands.
+
+It implements the `getJob()` method which retrieves the job of an interview so that the execution of the sub commands 
+can be carried out on the `Job` that contains the `Interview` to be modified.
+
+There are 3 sub-commands to access and modify an `Interview`:
+* `interview add` - To add an interview to a `Job`.
+* `interview delete` - To delete an interview from a `Job`.
+* `interview edit`- To edit an interview from a `Job`.
+
+The following class diagram illustrates the structure of an `InterviewCommand` Object and the sub commands 
+it is associated with:
 <img src="images/developer-guide/InterviewCommandClassDiagram.png" />
 
 #### Interview Add Command
+Adding of an interview to a specified `Job` is implemented with `InterviewAddCommand` and `InterviewAddCommandParser`.
 
+When the `InterviewAddCommandParser` is invoked from the `InterviewCommandParser`, the `ArgumentTokenizer` class 
+parses the arguments to determine the index of the `Job`, `interviewType`, `interviewDateTime` and `interviewAddress`. 
 
-<img src="images/developer-guide/InterviewAddCommandSequenceDiagram.png" />
+* If the user input does not conform to the expected prefixes, a `ParseException` is thrown. 
+
+* If the user input is valid, a new `Interview` is created with the `interviewType`,`interviewDateTime` and 
+`interviewAddress` parsed. An `InterviewAddCommand` is then generated with the job `index` and the created `Interview`
+
+During execution of `InterviewAddCommand`, the new `Interview` is passed to the `Job` to handle the adding of the 
+`Interview` to it's list of interviews.
+
+The following sequence diagram illustrates the process of parsing and invocation for the command:
 <img src="images/developer-guide/InterviewAddCommandParserSequenceDiagram.png" />
+<img src="images/developer-guide/InterviewAddCommandSequenceDiagram.png" />
 
 #### Interview Delete Command
+Deleting of an interview from a specified `Job` is implemented with `InterviewDeleteCommand` and 
+`InterviewDeleteCommandParser`.
 
-<img src="images/developer-guide/InterviewDeleteCommandSequenceDiagram.png" />
+When the `InterviewDeleteCommandParser` is invoked from the `InterviewCommandParser`, the `ArgumentTokenizer` class
+parses the arguments to determine the index of the `Interview` to be deleted and the index of the `Job` it 
+is to be deleted from.
+
+* If the user input does not conform to the expected prefixes, a `ParseException` is thrown.
+
+* If the user input is valid, an `InterviewDeleteCommand` is generated with the `jobIndex` and `interviewindex`
+
+During execution of `InterviewDeleteCommand`, the `Job` and `Interview` is passed to the `model` to handle the deletion 
+of the `Interview` from the `Job`.
+
+The following sequence diagram illustrates the process of parsing and invocation for the command:
 <img src="images/developer-guide/InterviewDeleteCommandParserSequenceDiagram.png" />
+<img src="images/developer-guide/InterviewDeleteCommandSequenceDiagram.png" />
 
 #### Interview Edit Command
+Editing of an interview from a specified `Job` is implemented with `InterviewEditCommand` and 
+`InterviewEditCommandParser`.
 
-<img src="images/developer-guide/InterviewEditCommandSequenceDiagram.png" />
+When the `InterviewEditommandParser` is invoked from the `InterviewCommandParser`, the `ArgumentTokenizer` class
+parses the arguments to determine the index of the `Interview` to be edited, index of the `Job` it
+is to be edited from and the fields to be edited.
+
+* If the user input does not conform to the expected prefixes, a `ParseException` is thrown.
+
+* If the user input is valid, an `EditInterviewDescriptor` is created to store the details to edit the interview with.
+  An `InterviewEditCommand` is then generated with the `jobIndex`, `interviewindex` and the `editInterviewDescriptor`
+
+During execution of `InterviewEditCommand`, the `interviewToBeEdited` and `editedInterview` created is passed to the
+`Job` to handle the modification of the `Interview`.
+
+The following sequence diagram illustrates the process of parsing and invocation for the command:
 <img src="images/developer-guide/InterviewEditCommandParserSequenceDiagram.png" />
+<img src="images/developer-guide/InterviewEditCommandSequenceDiagram.png" />
 
 #### Design considerations
+1. **How to implement multiple interviews in for a Job Application**
+    * *Chosen implementation*: Each `Job` stores a list of interviews as `List<Interviews>` 
+      * Pros: Easy to implement
+      * Cons: Limited Abstraction
+    * This method was chosen as the interview features was only implemented in v1.3 where there was
+   limited time to abstract the interviews.
+    * *Alternative*: Create a `InterviewList` class to store the list of interviews and 
+   handle the changes to the interviews. Each `Job` would have a `InterviewList` instead
+      * Pros: Provides a higher level of abstraction and encapsulation
+      * Cons: Complexity overhead. Currently, there are minimal commands to manage the interviews and adding an extra 
+      layer may add unnecessary complication to the codebase.
+    * This method can be implemented in the future as the more Interview Sub Commands are implemented.
 
 ---
 
