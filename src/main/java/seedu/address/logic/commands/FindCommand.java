@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
@@ -11,11 +13,18 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.NameSubjectPredicate;
 import seedu.address.model.person.SubjectContainsKeywordsPredicate;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
+
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
  * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
+
+    private static final Logger logger = LogsCenter.getLogger(FindCommand.class);
 
     public static final String COMMAND_WORD = "find";
 
@@ -37,6 +46,7 @@ public class FindCommand extends Command {
      * @param subject the keyword to be searched which starts with the prefix sb/
      */
     public FindCommand(NameContainsKeywordsPredicate predicate, SubjectContainsKeywordsPredicate subject) {
+        requireAllNonNull(predicate, subject);
         this.predicate = predicate;
         this.subject = subject;
     }
@@ -46,6 +56,9 @@ public class FindCommand extends Command {
         requireNonNull(model);
         NameSubjectPredicate nameSubject = new NameSubjectPredicate(predicate, subject);
         model.updateFilteredPersonList(nameSubject);
+
+        logger.log(Level.INFO, "FindCommand executed with predicate: " + predicate + "and subject:" + subject);
+
         return new CommandResult(
                 String.format(Messages.MESSAGE_TUTEES_LISTED_OVERVIEW,
                         model.getFilteredPersonList().size()));
