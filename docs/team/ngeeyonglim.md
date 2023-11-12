@@ -9,7 +9,7 @@ title: "Ngee Yong's Project Portfolio Page"
 
 Given below are my contributions to the project.
 
-* **Code Contributed**:[RepoSense link](https://nus*cs2103*ay2324s1.github.io/tp*dashboard/?search=ngeeyonglim&breakdown=true)
+* **Code Contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=ngeeyonglim&breakdown=true)
 
 * **New Feature**: Edited Student to be referenced by Student Number instead of position in the list. (PR: [#51](https://github.com/AY2324S1-CS2103T-T11-1/tp/pull/51))
   * What it does: This allows for easier and more accurate referencing of students in the list.
@@ -53,7 +53,7 @@ Given below are my contributions to the project.
 
 * **Team-based tasks**:
   * Helped out teammates whenever they needed
-  * Helped review PRs of teammates
+  * Helped review pull requests of teammates
   * Helped in setting up the GitHub team repository
   * Maintaining the issue tracker 
   * Updating user/developer docs that are not specific to a feature e.g. documenting the target user profile
