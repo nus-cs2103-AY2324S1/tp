@@ -815,6 +815,24 @@ testers are expected to do more *exploratory* testing.
    Expected: No lesson is added. Error indicating existing lesson clashes with lesson to be added with the details of the existing lesson in the schedule shown in the response box.
 
 ##### Adding a task to a lesson in ___SCHEDULE list___.
+1. Prerequisites:
+    * List all lessons using the `list` command.
+    * There is currently no tasks with the name "Mark Alkanes Practice" and "Make Forces Notes" in all the lessons in the application.
+    * There is a task with the description "Mark Practice Paper" in all the lessons in the application.
+    * There are more than 2 and less than 80 lessons in the displayed list of lessons.
+   
+2. Test case: `addTask 2 Mark Alkanes Practice` <br>
+   Expected: A new task is added to the second lesson in the displayed list of lessons, with description "Mark Alkanes Practice". The details of the added task is shown in the response box.
+
+3. Test case: `show 1` followed by `addTask Make Forces Notes` <br>
+   Expected: A new task is added to the first lesson in the displayed list of lessons, with description "Make Forces Notes". The details of the added task is shown in the response box.
+
+4. Test case: `addTask 1 Mark Practice Paper` <br>
+   Expected: No task is added to the first lesson in the displayed list of lessons. Error indicating existing task with same description in the specified lesson shown in the response box.
+
+5. Test case: `addTask` <br>
+   Expected: No task is added to any of the lessons in the list. Error indicating invalid description shown in the response box.
+
 
 ### Deleting a person/lesson
 
