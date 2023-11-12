@@ -35,6 +35,7 @@ The tags with a P-prefix [[P\#80](https://github.com/AY2324S1-CS2103T-W08-1/tp/p
   * **Highlights**: This enhancement required careful and thorough error handling and input validation in order to prevent erroneous data from being added into Staff-Snap. 
   * **Credits**: The third-party library [OpenCSV](https://opencsv.sourceforge.net/) was used to parse the input CSV in the implementation of this feature.
 
+<br>
 
 <div style="page-break-after: always;"></div>
 
