@@ -1,5 +1,6 @@
 package profplan.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -8,10 +9,20 @@ import org.junit.jupiter.api.Test;
 
 import profplan.model.Model;
 import profplan.model.ModelManager;
+import profplan.model.UserConfigs;
+import profplan.model.UserPrefs;
 import profplan.model.task.Task;
 import profplan.testutil.Assert;
 import profplan.testutil.TaskBuilder;
+import profplan.testutil.TypicalTasks;
+
 public class MarkCommandTest {
+
+
+    private Model model = new ModelManager(TypicalTasks.getTypicalProfPlan(), new UserPrefs(), new UserConfigs());
+
+    private Model expectedModel = new ModelManager(TypicalTasks.getTypicalProfPlan(),
+        new UserPrefs(), new UserConfigs());
 
 
     @Test
@@ -75,6 +86,14 @@ public class MarkCommandTest {
 
         assertFalse(markCommand1.equals(notMarkCommand));
     }
+
+    @Test
+    public void toString_indexToMark_success() {
+        MarkCommand markCommand = new MarkCommand(1);
+        String expectedStatus = MarkCommand.class.getCanonicalName() + "{taskNumber=" + 1 + "}";
+        assertEquals(markCommand.toString(), expectedStatus);
+    }
+
 }
 
 

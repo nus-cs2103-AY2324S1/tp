@@ -1,7 +1,9 @@
 package profplan.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
+import profplan.logic.commands.MarkCommand;
 import profplan.logic.commands.UnmarkCommand;
 
 public class UnmarkCommandParserTest {
@@ -43,5 +45,7 @@ public class UnmarkCommandParserTest {
     public void parse_validNumberWithWhitespace_returnsMarkCommand() {
         CommandParserTestUtil.assertParseSuccess(parser, " 3 ", new UnmarkCommand(3));
     }
+
+
 
 }
