@@ -372,46 +372,56 @@ alt="Help Window">
 
 #### Exit: `exit`
 
-Closes CCACommander and its display window.
+If it’s time to call it a day for your CCA tasks, you can use the `exit` command to quit the app.
 
-Format: `exit`
+Here’s how you can use it: `exit`
 
-<hr class="command-separator">
-
-#### Recall previous commands
-
-CCA Leaders can quickly recall previously entered commands for convenience. Example use cases include marking attendance for a group of members, editing slightly wrong details and more.
-
-CCACommander stores almost all (see the info card below to see what commands are stored) commands entered by the user. Users can use the <kbd>↑</kbd> to <kbd>↓</kbd> key to navigate through the commands entered upon selecting the command box.
-
-Example:
-1. A CCA Leader has just marked attendance for the first member in the member list using the `editEnrolment m/1 e/1 r/Present` command.
-2. The CCA Leader can then use <kbd>↑</kbd> to get `editEnrolment m/1 e/1 r/Present`
-3. The CCA Leader can edit the member index to get `editEnrolment m/2 e/1 r/Present` to mark the second member as present.
-
-<div markdown="block" class="alert alert-info">:information_source: CCACommander will not store 2 of the same commands if they were entered twice in a row. Likewise, "commands" containing exclusively of blank spaces will not be stored as well. 
-
-Upon entering the <kbd>⌫ Backspace</kbd> or the <kbd>↵ Enter</kbd> key, users will have to re-navigate from the most recent command as it was treated as an edit or entry of command.
+<div markdown="block" class="alert alert-info">:information_source: The exit command exists for your convenience. 
+It performs the same task as the cross in the top bar and the Exit button in the File submenu item
 </div>
 
 <hr class="command-separator">
 
 #### Saving the data
 
-CCACommander data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+CCACommander data are saved automatically after any command that changes the data. There is no need to save manually.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CCACommander home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CCACommander folder.
+
+**Q**: Do I need Wi-Fi connection to use CCACommander?<br>
+**A**: No, you can use CCACommander offline.
+
+**Q**: How much storage space do I need for CCACommander?<br>
+**A**: CCACommander is so lightweight that you only need 30 MB on your computer.
+
+**Q**: What happens if my laptop battery dies suddenly?<br>
+**A**: Rest assured, your data remains securely stored on your laptop. 
+Once your laptop is recharged, you can regain access to all your stored information.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+2. **Edit** commands go back to the main view no matter what view you were in.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+This glossary provides definitions for the special terms used in this user guide.
+
+**CCA**: Co-curricular activity
+
+**Command**: The text typed in by the user as a CCA Head for CCACommander.
+
+**Index**: The number beside the corresponding entry in a list.
+
+**Tag**: A word or phrase that labels a member or an event.
 
 --------------------------------------------------------------------------------------------------------------------
 
