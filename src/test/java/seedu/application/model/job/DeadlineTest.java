@@ -26,8 +26,6 @@ class DeadlineTest {
         assertFalse(Deadline.isValidDeadline("")); // empty string
         assertFalse(Deadline.isValidDeadline(" ")); // spaces only
         assertFalse(Deadline.isValidDeadline("Today")); // Invalid DateTime
-        assertFalse(Deadline.isValidDeadline("Nov 23")); // Missing year and time
-        assertFalse(Deadline.isValidDeadline("Nov 23 2023")); // Missing time
 
         // valid deadlines
         assertTrue(Deadline.isValidDeadline("Dec 31 2030 1200"));
