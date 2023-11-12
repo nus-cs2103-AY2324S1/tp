@@ -17,7 +17,7 @@ import seedu.address.model.UserPrefs;
 public class ReminderSchedulerTest {
 
     private Model model;
-private Object mutex = new Object();
+    private Object mutex = new Object();
 
     @BeforeEach
     public void setUp() {
@@ -25,7 +25,7 @@ private Object mutex = new Object();
     }
 
     @Test
-    public void threadStartAndShutdownTest() throws Exception{
+    public void threadStartAndShutdownTest() throws Exception {
         ReminderScheduler reminderScheduler = new ReminderScheduler(model, mutex);
 
         reminderScheduler.start();
@@ -46,7 +46,7 @@ private Object mutex = new Object();
         Field isRunningField = ReminderScheduler.class.getDeclaredField("isRunning");
         isRunningField.setAccessible(true);
         boolean isRunning = (boolean) isRunningField.get(reminderScheduler);
-        
+
         assertTrue(!isRunning);
 
         // Wait for the thread to die
@@ -55,5 +55,4 @@ private Object mutex = new Object();
         assertTrue(!reminderScheduler.isAlive());
     }
 
-    
 }
