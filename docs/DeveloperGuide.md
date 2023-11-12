@@ -745,7 +745,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Show Feature
 
-##### Showing a student in ___STUDENTS list___.
+##### Showing a student in ___STUDENTS list___
 
 1. Prerequisites: List all students using the `list students` command. There are more than 2 and less than 80 students in the displayed list of students.
 
@@ -755,7 +755,7 @@ testers are expected to do more *exploratory* testing.
 3. Test case: `show 80` <br>
    Expected: Details panel remains the same. Error indicating index is invalid is shown in the response box.
 
-##### Showing a lesson in ___SCHEDULE list___.
+##### Showing a lesson in ___SCHEDULE list___
 
 1. Prerequisites: List all lessons using the `list` command. There are more than 2 and less than 80 lessons in the displayed list of lessons.
 
@@ -765,7 +765,7 @@ testers are expected to do more *exploratory* testing.
 3. Test case: `show1` <br>
    Expected: Details panel remains the same. Error indicating unknown command is shown in the response box.
 
-##### Showing a task in ___TASK list___.
+##### Showing a task in ___TASK list___
 
 1. Prerequisites: List all tasks using the `list tasks` command. There are more than 2 and less than 80 tasks in the displayed list of tasks.
 
@@ -778,7 +778,7 @@ testers are expected to do more *exploratory* testing.
    
 ### Add Feature
 
-##### Adding a person in ___STUDENTS list___.
+##### Adding a person in ___STUDENTS list___
 
    1. Prerequisites: List all students using the `list students` command. There is currently no student with the name "Leah", "Riley" and "Max".
 
@@ -797,7 +797,7 @@ testers are expected to do more *exploratory* testing.
    6. Test case: `addPerson` <br>
       Expected: No student is added. Error indicating invalid format and flag name not found shown in the response box.<br><br>
 
-##### Adding a lesson in ___SCHEDULE list___.
+##### Adding a lesson in ___SCHEDULE list___
 
 1. Prerequisites:
     * List all lessons using the `list` command.
@@ -814,29 +814,33 @@ testers are expected to do more *exploratory* testing.
 4. Test case: `addLesson -name Biology Lesson at Tai Seng -day 2023/12/11 -start 12:00 -end 14:00`<br>
    Expected: No lesson is added. Error indicating existing lesson clashes with lesson to be added with the details of the existing lesson in the schedule shown in the response box.
 
-##### Adding a task to a lesson in ___SCHEDULE list___.
+##### Adding a task to a lesson in ___SCHEDULE list___
+
 1. Prerequisites:
     * List all lessons using the `list` command.
     * There is currently no tasks with the name "Mark Alkanes Practice" and "Make Forces Notes" in all the lessons in the application.
     * There is a task with the description "Mark Practice Paper" in all the lessons in the application.
-    * There are more than 2 and less than 80 lessons in the displayed list of lessons.
+    * There are more than 2 and less than 80 lessons in the displayed list of lessons. <br><br>
    
 2. Test case: `addTask 2 Mark Alkanes Practice` <br>
    Expected: A new task is added to the second lesson in the displayed list of lessons, with description "Mark Alkanes Practice". The details of the added task is shown in the response box.
 
-3. Test case: `show 1` followed by `addTask Make Forces Notes` <br>
+3. Test case: `addTask Make Forces Notes` (no lesson is shown in details panel) <br>
+   Expected: No task is added to any of the lessons in the list. Error indicating no lesson is displayed and use show lessonIndex before adding task is shown in the response box.
+
+4. Test case: `show 1` followed by `addTask Make Forces Notes` <br>
    Expected: A new task is added to the first lesson in the displayed list of lessons, with description "Make Forces Notes". The details of the added task is shown in the response box.
 
-4. Test case: `addTask 1 Mark Practice Paper` <br>
+5. Test case: `addTask 1 Mark Practice Paper` <br>
    Expected: No task is added to the first lesson in the displayed list of lessons. Error indicating existing task with same description in the specified lesson shown in the response box.
 
-5. Test case: `addTask` <br>
+6. Test case: `addTask` <br>
    Expected: No task is added to any of the lessons in the list. Error indicating invalid description shown in the response box.
 
 
-### Deleting a person/lesson
+### Delete feature
 
-Deleting a person in ___STUDENTS list___.
+##### Deleting a person in ___STUDENTS list___
 
    1. Prerequisites: There are more than 2 students in the displayed list of students.
 
@@ -855,9 +859,9 @@ Deleting a person in ___STUDENTS list___.
    6. Test case: `deletePerson` <br>
       Expected: No student is deleted. Error indicating invalid command format is shown in the response box.
 
-Deleting a lesson in ___SCHEDULE list___.
+##### Deleting a lesson in ___SCHEDULE list___
 
-1. Prerequisites: List all lessons using the `list` command. There are more than 5 and less than 80 students in the displayed list of lessons.<br><br>
+1. Prerequisites: List all lessons using the `list` command. There are more than 5 and less than 80 students in the displayed list of lessons.<br>
 
 2. Test case: `deleteLesson 1`<br>
    Expected: First lesson is deleted from the list. Details of the deleted lesson is shown in the response box.
@@ -871,7 +875,23 @@ Deleting a lesson in ___SCHEDULE list___.
 5. Test case: `deleteLesson` <br>
    Expected: No lesson is deleted. Error indicating invalid command format is shown in the response box.
 
+##### Deleting a task from a lesson in ___SCHEDULE list___
 
+1. Prerequisites:
+    * List all lessons using the `list` command. There are more than 2 lessons in the displayed list of lessons.
+    * All lessons have more than 2 and less than 10 tasks. <br><br>
+
+2. Test case: `show 1` followed by `deleteTask 2` <br>
+   Expected: The second task in the task list of the first lesson in the displayed list of lessons is deleted. Details of the deleted task is shown in the response box.
+
+3. Test case: `deleteTask 1` <br>
+   Expected: No task is deleted. Error indicating the use of show lesson before deleting task is shown in the response box.
+
+4. Test case: `deleteTask 1` (in ___STUDENTS list___)
+   Expected: No task is deleted. Error indicating deleting of tasks only in schedule list is shown in the response box.
+
+5. Test case: `deleteTask 1` (in ___TASKS list___)
+   Expected: No task is deleted. Error indicating deleting of tasks only in schedule list is shown in the response box.
 
 ### Saving data
 
