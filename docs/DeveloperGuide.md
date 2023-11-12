@@ -23,7 +23,7 @@ title: Developer Guide
    - [Markdown Support](#markdown-support-feature)
    - [Space Repetition](#spaced-repetition-feature)
    - [Data Transfer](#data-transfer-functionality)
-   - [Undo/Redo](#proposed-undoredo-feature)
+   - [(Proposed) Undo/Redo](#proposed-undoredo-feature)
 5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 6. [Appendix: Planned Enhancements](#appendix-planned-enhancements)
 7. [Appendix: Effort](#appendix-effort)
@@ -401,12 +401,12 @@ to create a new `Card`.
     * Pros: Scope of support can be determined by developer.
     * Cons:
         1. Time-consuming.
-        2. Potentital for Bugs
+        2. Potential for Bugs
 
 
 **Finalised Implementation:**
 
-Settled on using alternative 2 as it allows us to be flexible on what Markdown syntax we want to implement. We decided to implement bold, 
+Settled on using alternative 2 as it allows us to be flexible on what Markdown Syntax we want to implement. We decided to implement bold, 
 italic and underline since they are the most commonly used ones. This also greatly reduces the application file size.
 
 
@@ -609,22 +609,65 @@ The following activity diagram summarizes what happens when a user executes a ne
 --------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Planned Enhancements**
 
-1. Tag
-    - Currently duplicate tags can be created through the edit and add function.
+1. The current logic for adding and editing `tag` allows for duplicate `tag` for a single flashcard.
+    - Users that use the `edit` or `add` command with duplicate `tags` in the command can create a flashcard with redundant
+      tags for a single flashcard.
+    - We plan to enforce uniqueness in the list of `tags` by using a Java Set data structure instead of
+      a Java List data structure.
 
-2. Currently, `hint` does not support the use of `r` index
+2. The current parser logic for `hint` does not support the use of `r` index.
    - Users that use `random` to practise a random question are unable to use `hint r` to check the hint of the question.
    - We plan to allow `hint` command to accept `r` index to that it can show the user the hint of the randomly selected question.
 
-3. Markdown stacking syntax
-    - We are unable to stack multiple markdown syntax for a particular phrase
-
-    
+3. Current logic for Markdown syntax does not allow for the multiple Markdown syntax to be stacked for a single phrase.
+    - Users that want to create a bold and underlined phrase might try `<u>**WORD**</u>`. However, this does not result
+      in the expected outcome "<u>**WORD**</u>" and cause unexpected styling in the DisplayView.
+    - We plan to refine the parsing of Markdown syntax to ensure the parsing of syntax for a particular phrase checks
+      for every syntax instead of the first valid syntax, so that user can apply more than 1 font styles to a part of the text.
 
 ---------------------------------------------------------------------------
 
 ## **Appendix: Effort**
 
+### Project Overview
+
+Our project, lesSON, emerged from the adaptation of AB3 code into a dynamic flashcard application. Users engage in a 
+two-phase learning process, viewing flashcards initially and then practicing recall. The collaborative efforts of our 
+5-person team resulted in a feature-rich app encompassing CRUD operations, dual-phase learning, spaced repetition, and 
+additional features like hints and goal-setting.
+
+### Project Challenges
+
+Adapting existing code required meticulous modifications to align with the unique requirements of a flashcard app. The main differentiating 
+design consideration was the transition from AB3, which was mainly an information hub, to lesSON which required a 2 stage
+design so that the user can create and practise cards with ease.
+
+### Development Effort
+
+The development effort invested in lesSON covered various aspects, including feature implementation, refactoring, and 
+quality assurance. The team dedicated substantial time to refine and optimize the codebase, ensuring a robust and 
+user-friendly flashcard application. Additionally, the presence of the automated codecov bot ensured that the code we pushed
+was well covered and would flag out any possible flaws in our implementation that was not covered by automated testing.
+
+### Achievements
+
+Noteworthy achievements include successful CRUD operations, dual-phase learning, spaced repetition, and additional 
+user-centric features.
+
+### Comparison with AB3
+
+lesSON differentiates itself from AB3 by introducing a more dynamic and engaging learning experience. The two-phase 
+structure, combined with features like difficulty settings and prioritized card ordering, positions lesSON as a more 
+advanced and versatile educational tool. We introduced the element of spaced repetition so that our users can benefit the most
+from the studying experience. Additionally, we also include an auto priority system that would place cards that required more attention
+at the very front so that users can practise them more often.
+
+### Conclusion
+
+The successful transformation of AB3 into lesSON highlights the team's adaptability and technical expertise. Overcoming 
+challenges, especially during the refactoring phase, demonstrates our commitment to delivering a robust and innovative 
+flashcard application. Despite the similar looking UI, much of the consideration and design implementation went towards 
+brainstorming how the 2 stages were to be implemented such that they complement each other and were intuitive to the user.
 
 
 
@@ -698,18 +741,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. lesSON displays a success message.
 3. The answer generated is not visible to the user until card selected is practised.
 
-   Use case ends.
+Use case ends.
 
 **Extension:**
 
-- 2a. lesSON detects that the given tags are invalid
-    - 2a1. lesSON displays a error message, use case resumes at step 1.
-- 2b. lesSON detects that the necessary tags are missing
-    - 2b1. lesSON displays a error message, use case resumes at step 1.
-- 2c. lesSON detects any input after tags is blank
-    - 2c1. lesSON displays a error message, use case resumes at step 1.
-- 2d. lesSON detects that the given tags are in the wrong sequence
-    - 2a1. lesSON displays a error message, use case resumes at step 1.
+- 1a. lesSON detects that the given parameters are invalid
+    - 1a1. lesSON displays an error message.
+
+Use case ends.
+
+- 1b. lesSON detects that the necessary parameters are missing
+    - 1b1. lesSON displays an error message.
+  
+Use case ends
+
+- 1c. lesSON detects that any parameters input is empty (no input after prefix)
+    - 1c1. lesSON displays an error message.
+
+Use case ends.
+
 
 **Use case: UC02 deleting a card**
 
@@ -719,12 +769,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. User inputs command to delete a card, along with the index of the card.
 3. lesSON displays a success message.
 
-   Use case ends.
+Use case ends.
 
 **Extension:**
 
-- 2a. lesSON detects that the given index is invalid
-  - 2a1. lesSON displays a error message, use case resumes at step 1.
+- 1a. lesSON detects that the given index is invalid
+    - 1a1. lesSON displays an error message.
+
+Use case ends.
 
 
 
@@ -736,13 +788,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. User inputs command to filter the cards, including the tags to filter the deck.
 3. lesSON displays the cards that fulfill the condition using the tags.
 
-    Use case ends.
+Use case ends.
 
 **Extension:**
 
-- 2a. lesSON detects the given tags are invalid
-    - 2a1. lesSON displays a error message, use case resumes at step 1.
+-   1a. lesSON detects the given parameters are invalid
+    - 1a1. lesSON displays an error message.
 
+Use case ends.
 
 **Use case: UC04 displaying all cards**
 
@@ -751,7 +804,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User inputs command to view all cards.
 2. lesSON displays all cards.
 
-    Use case ends.
+Use case ends.
 
 
 
@@ -763,14 +816,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. User inputs command to edit a card, along with the necessary details.
 3. lesSON displays a success message.
 
-    Use case ends.
+Use case ends.
 
 **Extension:**
 
-- 2a. lesSON detects that the given tags are invalid
-    - 2a1. lesSON displays a error message, use case resumes at step 1.
-- 2b. lesSON detects that the given index is invalid
-    - 2a1. lesSON displays a error message, use case resumes at step 1.
+- 1a. lesSON detects that the given parameters are invalid
+    - 1a1. lesSON displays a error message.
+
+Use case ends.
+
 
 **Use case: UC06 practise a card**
 
@@ -780,12 +834,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. User inputs command to practise a card with its index.
 3. lesSON displays the question of the specified card.
 
-   Use case ends.
+Use case ends.
 
 **Extension:**
 
-- 2a. lesSON detects that the given index is invalid
-    - 2a1. lesSON displays a error message, use case resumes at step 1.
+- 1a. lesSON detects that the given index is invalid
+    - 1a1. lesSON displays a error message.
+
+Use case ends.
 
 **Use case: UC07 solve a card**
 
@@ -795,12 +851,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. User inputs command to solve a card with its index.
 3. lesSON displays the question and the answer of the specified card.
 
-   Use case ends.
+Use case ends.
 
 **Extension:**
 
-- 2a. lesSON detects that the given index is invalid
-    - 2a1. lesSON displays a error message, use case resumes at step 1.
+- 1a. lesSON detects that the given index is invalid
+    - 1a1. lesSON displays a error message.
+
+Use case ends.
 
 **Use case: UC08 set difficulty for a card**
 
@@ -810,18 +868,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. User inputs command to set a difficulty of a card, by specifying its index and the difficulty.
 3. lesSON displays the question and the answer of the specified card.
 
-   Use case ends.
+Use case ends.
 
 **Extension:**
 
-- 2a. lesSON detects that the given index is invalid
-    - 2a1. lesSON displays a error message, use case resumes at step 1.
-- 2b. lesSON detects that any of the given tag is invalid
-    - 2a1. lesSON displays a error message, use case resumes at step 1.
-- 2c. lesSON detects that the given difficulty is invalid
-    - 2a1. lesSON displays a error message, use case resumes at step 1.
+- 1a. lesSON detects that the given parameters are invalid
+    - 1a1. lesSON displays a error message
 
-
+Use case ends.
 
 ### Non-Functional Requirements
 
@@ -838,6 +892,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Flashcard**: A two-sided card containing a question and an answer
 * **Tag**: A label used to categorise flashcards
 * **Deck**: A series of cards that is stored in lesSON
+* **Index**: The position of the card in the deck
+* **CLI**: A text-based interface where you interact with the software by typing commands into a terminal or command prompt, providing more direct and precise control over the system.
+* **GUI**: A user-friendly interface that allows you to interact with the software through visual elements like windows, icons, buttons, and menus, making it easy to navigate with a mouse and keyboard.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -865,31 +922,201 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Exiting the application
 
+   1. Press the exit button in the`File` menu button or enter the `exit` command.
+
+   2. Application window should close and exit as normal.
+
+
+### Adding a card
+
+1. Adding a card with question and answer parameters.
+
+   1. Prerequisites: List all cards using the `list` command. Multiple cards in the list.
+   
+   1. Test case: `add q/What is the opcode for R-format instructions a/000000` <br>
+     Expected: Addition of card with its details shown in the result display. Card is added to deck.
+
+   2. Test case: `add q/What is the opcode for R-format instructions` <br>
+     Expected: Card is not created, error message appears mentioning correct format to follow.
+
+   3. Test case: `add q/What is the opcode for R-format instructions a/000000` <br>
+                `add q/What is the opcode for R-format instructions a/000000` <br>
+     Expected: Duplicate card is detected, error message appears mentioning no duplicate cards allowed
+
+      
 ### Deleting a card
 
 1. Deleting a card while all card are being shown
 
    1. Prerequisites: List all cards using the `list` command. Multiple cards in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First card is deleted from the list. Details of the deleted card shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `delete 1`<br>
+      Expected: First card is deleted from the list. Details of the deleted card shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No card is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `delete 0`<br>
+      Expected: No card is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Listing cards
 
-### Saving data
+1. Listing all cards
+   1. Prerequisites: List all cards using the `list` command. Multiple cards in the list.
+   2. Test case: `list t/CS2100`<br>
+      Expected: All cards with the CS2100 tag is shown in the deck.
+   
+   3. Test case: `list q/What`<br>
+      Expected: All cards starting with What is shown in the deck.
+   
+   4. Test case: `list potato`<br>
+      Expected: All cards in deck is shown, extraneous input is ignored.
+   
+### Editing a card
 
-1. Dealing with missing/corrupted data files
+1. Editing a card's question
+   1. Prerequisite: A card which you wish to edit is already in the deck.
+   
+   2. Test case: `edit 1 q/Question 1`<br>
+      Expected: Edits the first card's question to be set as Question 1.
+   
+   3. Test case: `edit 1 q/ `<br>
+      Expected: Blank input detected after parameter, error message appears.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   4. Other incorrect edit commands to try: `edit`, `edit 1 x/`, `...` (where x is other prefixes)<br>
+      Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. Editing a card's answer
+    1. Prerequisite: A card which you wish to edit is already in the deck.
 
+    2. Test case: `edit 1 a/Answer 1`<br>
+       Expected: Edits the first card's Answer to be set as Answer 1.
+
+    3. Test case: `edit 1 a/ `<br>
+       Expected: Blank input detected after parameter, error message appears.
+   
+   4. Other incorrect edit commands to try: `edit`, `edit 1 x/`, `...` (where x is other prefixes)<br>
+      Expected: Similar to previous.
+   
+3. Editing a card's tag
+    1. Prerequisite: A card which you wish to edit is already in the deck.
+
+    2. Test case: `edit 1 t/Tag 1`<br>
+       Expected: Edits the first card's Tag to be set as Tag 1.
+
+    3. Test case: `edit 1 t/`<br>
+       Expected: Removes the tag from the card.
+
+    4. Other incorrect edit commands to try: `edit`, `edit 1 x/`, `...` (where x is other prefixes)<br>
+       Expected: Error message appears.
+   
+
+4. Editing a card's hint
+    1. Prerequisite: A card which you wish to edit is already in the deck.
+
+    2. Test case: `edit 1 h/Hint 1`<br>
+       Expected: Edits the first card's Tag to be set as Tag 1.
+
+    3. Test case: `edit 1 h/`<br>
+       Expected: Blank input detected after parameter, error message appears.
+
+    4. Other incorrect edit commands to try: `edit`, `edit 1 x/`, `...` (where x is other prefixes)<br>
+       Expected: Similar to previous.
+
+
+### Practising a card
+
+1. Practising a card
+    1. Prerequisite: A card which you wish to practise is already in the deck.
+
+    2. Test case: `practise 1`<br>
+       Expected: Practises the first card in the deck.
+
+    3. Test case: `practise 1 potato`<br>
+       Expected: Additional input detected after index, error message appears.
+
+    4. Other incorrect practise commands to try: `practise`, `practise 1 x/`, `...` (where x is other prefixes)<br>
+       Expected: Similar to previous.
+
+### Solving a card
+
+1. Solving a card
+
+   1. Prerequisites: List all cards using the `list` command. Multiple cards in the list.
+   1. Test case: `solve`<br>
+      Expected: The answer of the first card is displayed.
+   1. Test case: `solve 2`<br>
+         Expected: The answer of the second card is displayed.
+   1. Test case: `solve 0`<br>
+      Expected: No card is solved. Error details shown in the status message.
+   1. Other incorrect delete commands to try: `solve x`, `...` (where x is larger than the list size or negative)<br>
+      Expected: Similar to previous.
+
+### Setting difficulty of a card
+
+1. Setting difficulty of a card
+
+    1. Prerequisites: List all cards using the `list` command. Multiple cards in the list.
+    1. Test case: `set d/easy`<br>
+       Expected: The difficulty of the first card is set to easy and new difficulty is displayed. The 'due date' of the
+       card is changed to reflect the difficulty based on the spaced repetition system.
+    1. Test case: `set 2 d/medium`<br>
+       Expected: Similar to previous but difficulty is now medium and new 'due date' is later.
+    1. Test case: `set d/invalid`<br>
+       Expected: Difficulty is not set. Error details shown in the status message.
+    1. Test case: `set 0 d/hard`<br>
+       Expected: Difficulty is not set. Error details shown in the status message.
+    1. Other incorrect delete commands to try: `set x d/hard`, `set d/y`, `...`
+       (where x is larger than the list size or negative and y is any other invalid difficulty)<br>
+       Expected: Similar to previous.
+
+### Setting a goal
+
+1. Setting goal of a session
+
+    1. Test case: `goal 1`<br>
+       Expected: Goal of the session is set to 1 and displayed in the goal box. 
+    1. Test case: `goal invalid`<br>
+       Expected: Goal is not updated. Error details shown in the status message.
+    1. Test case: `goal 0`<br>
+       Expected: Goal is not updated. Error details shown in the status message.
+    1. Other incorrect delete commands to try: `goal`, `goal x`, `...`
+       (where x is larger than the MAX_INTEGER or negative)<br>
+       Expected: Similar to previous.
+
+### Choosing a random card
+
+1. Selecting a random card
+    1. Prerequisite: There are multiple cards shown in the deck.
+
+    2. Test case: `random`<br>
+       Expected: Randomly chooses a card in the deck and sets its index as `r`
+
+    3. Test case: `random x`<br>
+       Expected: Additional input detected after index, error message appears.
+
+    4. Other incorrect random commands to try: `random`, `random 1 x/`, `...` (where x is other prefixes)<br>
+       Expected: Similar to previous.
+
+### Clearing a deck
+
+1. Cleansing a deck of all cards
+    1. Prerequisite: There are multiple cards shown in the deck.
+
+    2. Test case: `clear`<br>
+       Expected: Removes all cards in the deck.
+
+    4. Other incorrect random commands to try: `clearx` (where x is other prefixes)<br>
+       Expected: Error message appears.
+
+### Getting help
+
+1. Getting help from user guide
+
+   1. Test case: `help`<br>
+       Expected: Help window pops up with the link to user guide.
+   2. Other incorrect random commands to try: `helpx` (where x is other prefixes)<br>
+   Expected: Error message appears.
 
