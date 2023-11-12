@@ -70,11 +70,9 @@ If you are an experienced user, you can use the [Table of Contents](#table-of-co
 
 6. Refer to the [Features](#features) section below for details on each command.
 
-
 <span style="float:right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
 
 --------------------------------------------------------------------------------------------------------------------
-
 
 ## Command Format
 
