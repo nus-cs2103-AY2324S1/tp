@@ -132,13 +132,17 @@ Here is an example command where we create an event **named** "Party" held at th
 
 <hr class="command-separator">
 
-#### Edits an Event : `editEvent`
+#### Edit an Event : `editEvent`
 
 If you forgot to note any important details, or realise that you made a mistake in any field of the event created,
 the `editEvent` command is here to help.
 
 Here is how you can use it:<br>
 `editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]...`
+
+<div markdown="block" class="alert alert-info">
+:information_source: At least one field must be provided.
+</div>
 
 Here is an example command where we edit an **event** at index 1, changing the **location** to be "MBS" and the **date** to be "2023-10-20".<br>
 `editEvent 1 l/MBS d/2023-10-20`
@@ -155,7 +159,7 @@ Here is how you can use it:<br>
 Here is an example command where we delete the event at index 1:<br>
 `deleteEvent 1`
 
-<div markdown="block" class="alert alert-primary">:bulb: The `EVENT_INDEX` parameter refers to the index number shown in the **currently displayed** event list.
+<div markdown="block" class="alert alert-info">:information_source: The `EVENT_INDEX` parameter refers to the index number shown in the **currently displayed** event list.
 </div>
 
 <hr class="feature-class-separator">
@@ -184,6 +188,10 @@ You can fix this with no problem by using the `editEnrolment` command!
 Here’s how you can use it:<br>
 `editEnrolment m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
 
+<div markdown="block" class="alert alert-info">
+:information_source: At least one field must be provided.
+</div>
+
 Here is an example command where we want to edit the enrolment of the **member** at index 1 to the **event** at index 2,
 changing the number of **hours** to 5 and the **remark** to "Role: Exco" to reflect the member’s role as an exco member:<br>
 `editEnroment m/1 e/2 h/5 r/Role: Exco`
@@ -199,7 +207,7 @@ Here’s how you can use it:<br>
 Here is an example command where we want to unenrol the **member** at index 1 from the **event** at index 1:<br>
 `unenrol m/1 e/1`
 
-<div markdown="block" class="alert alert-primary">:bulb: The `MEMBER_INDEX`/`EVENT_INDEX` parameter refers to the index number shown in the **currently displayed** member/event list.
+<div markdown="block" class="alert alert-info">:information_source: The `MEMBER_INDEX`/`EVENT_INDEX` parameter refers to the index number shown in the **currently displayed** member/event list.
 </div>
 <hr class="feature-class-separator">
 
