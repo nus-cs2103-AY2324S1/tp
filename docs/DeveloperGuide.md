@@ -238,12 +238,12 @@ The view command feature allows the user to view the details of a specific patie
 Given below is an example usage scenario and how the view mechanism behaves at each step.
 
 Step 1. The user launches the application. The List of person will be initialized with the initial
-state, and the `Current Selected Person` pointer pointing to the first person on the list. <br>
+state, and the `Current Selected Person` pointer will be pointing to the first person on the list. <br>
 
 ![ViewState1](images/ViewState1.png)
 
 
-Step 2. The user executes `view 2` command to view the 2nd person details in the `DoConnek Pro`.
+Step 2. The user executes `view 2` to view the 2nd person details in the `DoConnek Pro`.
 The `view` command update the `Current Selected Person` pointer with the corresponding index from the
 input. <br>
 
