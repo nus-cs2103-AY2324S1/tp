@@ -1007,7 +1007,7 @@ testers are expected to do more *exploratory* testing.
    Expected: Five lessons are shown in the list panel (three lessons on 14/12/2023 & two lessons with no date specified). A message indicating filtered schedule list successfully is shown in the response box.
 
 5. Test case: `filter -before 2023/10/10` <br>
-   Expected: No lessons are shown. A message indicating filtered schedule list successfully is shown in the response box.
+   Expected: No lessons are shown in the list panel. A message indicating filtered schedule list successfully is shown in the response box.
 
 
 ### Saving data
