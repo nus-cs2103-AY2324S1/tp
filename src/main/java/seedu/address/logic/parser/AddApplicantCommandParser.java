@@ -7,8 +7,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddApplicantCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Applicant;
@@ -20,6 +22,8 @@ import seedu.address.model.person.fields.Phone;
  * Parses input arguments and creates a new AddApplicantCommand object
  */
 public class AddApplicantCommandParser implements Parser<AddApplicantCommand> {
+    private final Logger logger = LogsCenter.getLogger(AddApplicantCommandParser.class);
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddApplicantCommand
      * and returns an AddApplicantCommand object for execution.
@@ -44,6 +48,7 @@ public class AddApplicantCommandParser implements Parser<AddApplicantCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE)
             || !argMultimap.getPreamble().isEmpty()) {
+            logger.fine("Missing prefixes: " + missingPrefixes);
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     formatMissingPrefixesErrorMessage(missingPrefixes) + AddApplicantCommand.MESSAGE_USAGE));
         }

@@ -7,11 +7,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AddApplicantCommandParser;
 import seedu.address.model.Model;
 import seedu.address.model.person.Member;
+
+import java.util.logging.Logger;
 
 /**
  * Adds a member to the address book.
@@ -41,6 +45,7 @@ public class AddMemberCommand extends Command {
     public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in the member list";
 
     private final Member toAdd;
+    private final Logger logger = LogsCenter.getLogger(AddApplicantCommandParser.class);
 
     /**
      * Creates an AddMemberCommand to add the specified {@code Member}
@@ -57,6 +62,7 @@ public class AddMemberCommand extends Command {
         requireNonNull(model);
 
         if (model.hasMember(toAdd)) {
+            logger.info("Duplicate member detected: " + toAdd);
             throw new CommandException(MESSAGE_DUPLICATE_MEMBER);
         }
 
