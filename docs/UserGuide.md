@@ -17,24 +17,24 @@ _Find Your Success with JobFindr_
 4. [Key Information](#key-information)
     * [User Interface](#user-interface)
     * [Structure of a job application](#structure-of-a-job-application)
-    * [Valid statuses](#valid-statuses)
-    * [Valid job types](#valid-job-types)
-    * [Structure of an interview](#structure-of-an-interview)
-    * [Valid interview types](#valid-interview-types)
+    * [Valid Statuses](#valid-statuses)
+    * [Valid Job Types](#valid-job-types)
+    * [Structure of an Interview](#structure-of-an-interview)
+    * [Valid Interview Types](#valid-interview-types)
     * [Command Format](#command-format)
 5. [Features](#features)
     * [Command Summary](#command-summary)
     * [System Features](#general-features)
-        * [Asking for help: `help`](#asking-for-help-help)
+        * [Asking for Help: `help`](#asking-for-help-help)
         * [Exiting the Programme: `exit`](#exiting-the-programme-exit)
     * [Job Application Features](#job-application-features)
-        * [Listing all applications: `list`](#listing-all-applications--list)
-        * [Adding an application: `add`](#adding-an-application--add)
-        * [Deleting an application: `delete`](#deleting-an-application--delete)
-        * [Editing an application: `edit`](#editing-an-application--edit)
+        * [Listing all Applications: `list`](#listing-all-applications--list)
+        * [Adding an Application: `add`](#adding-an-application--add)
+        * [Deleting an Application: `delete`](#deleting-an-application--delete)
+        * [Editing an Application: `edit`](#editing-an-application--edit)
         * [Clearing All Applications: `clear`](#clearing-all-applications-clear)
-        * [Finding an application: `find`](#finding-an-application--find)
-        * [Sorting the applications: `sort`](#sorting-all-applications--sort)
+        * [Finding an Application: `find`](#finding-an-application--find)
+        * [Sorting the Applications: `sort`](#sorting-all-applications--sort)
     * [Interview Features](#interview-features)
         * [Adding an Interview: `interview add`](#adding-an-interview-interview-add)
         * [Deleting an Interview: `interview delete`](#deleting-an-interview-interview-delete)
@@ -380,7 +380,7 @@ _Exits the program._
 
 ### **Job Application Features**
 
-### Listing all applications : `list`
+### Listing all Applications : `list`
 
 _Shows a list of all job applications in alphabetical order of the company name._
 
@@ -401,7 +401,7 @@ _Shows a list of all job applications in alphabetical order of the company name.
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Adding an application : `add`
+### Adding an Application : `add`
 
 _Adds a job application to the list._
 
@@ -419,29 +419,31 @@ _Adds a job application to the list._
 
 * This command adds a job application for the company **Google** with the role **Software Engineer**.
 * Optional fields like deadline, status, industry, and job type are not provided, so they will use their default values.
-  <img src="images/user-guide/AddCommandEg1.png" style="display: block; margin: auto;" width="600" alt="">
+
+![AddCommandEg1](images/user-guide/AddCommandEg1.png)
 
 **Step 2:** You will see a new [Job Card](#user-interface) added to the Job List Panel. Click on it and will see its Job
 Details Panel appear on the right side of the window.<br>
+
 ![AddCommandEg2](images/user-guide/AddCommandEg2.png)
 
 ***Common Errors:***
 
-1. Missing required fields: `add r/Data Analyst`
+* Missing required fields: `add r/Data Analyst`
+    * This command is invalid because it doesn't provide the `c/COMPANY` field, which is compulsory.
+    * Try adding a company with company field included eg. `add c/Facebook r/Data Analyst`
 
-* This command is invalid because it doesn't provide the `c/COMPANY` field, which is compulsory.
+![AddCommandEg3](images/user-guide/AddCommandEg4.png)
 
-![AddCommandEg3](images/user-guide/AddCommandEg3.png)
-
-2. Invalid Job Type: `add c/Apple r/Software Developer t/Part-Time`
-
-* This command is invalid because `t/Part-Time` is not a valid job type. It should be `t/PART_TIME`.
+* Invalid Job Type: `add c/Apple r/Software Developer t/Part-Time`
+    * This command is invalid because `t/t/PART-TIME` is not a valid job type due to the **dash** `-`. It should
+      be an **underscore** `_` instead enter `t/PART_TIME`.
 
 ![AddCommandEg4](images/user-guide/AddCommandEg4.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Deleting an application : `delete`
+### Deleting an Application : `delete`
 
 _Deletes the specified application from the list using the specified `INDEX`._
 
@@ -468,16 +470,17 @@ press **Enter**.
 
 ***Common Errors:***
 
-1. Invalid job index: `delete 10` when there is no job application at index 10.
+* Invalid job index: `delete 10` when there is no job application at index 10.
+    * This command is invalid because 10 is not a valid job index. Use list command to find the job application and its
+      index on its Job Card.
 
-* This command is invalid because 10 is not a valid job index.
-  ![DeleteCommandEg3](images/user-guide/DeleteCommandEg3.png)
+![DeleteCommandEg3](images/user-guide/DeleteCommandEg3.png)
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Editing an application : `edit`
+### Editing an Application : `edit`
 
 _Edits the application to the company at the specified `INDEX`_
 
@@ -519,22 +522,19 @@ Type `edit 2 c/Amazon r/Product Manager d/Dec 15 2023 1000 s/APPROVED` and press
 
 ***Common Errors:***
 
-1. Missing index: `edit c/Google r/Software Engineer`
-
-* This command is invalid because it doesn't specify the index of the job application to edit.
+* Missing index: `edit c/Google r/Software Engineer`
+    * This command is invalid because it doesn't specify the index of the job application to edit.
 
 ![EditCommandEg5](images/user-guide/EditCommandEg5.png)
 
-2. Invalid field: `edit 3 q/Designer`
-
-* This command is invalid because `q/Designer` is not a valid field. It should be `r/Designer`.
+* Invalid field: `edit 3 q/Designer`
+    * This command is invalid because `q/Designer` is not a valid field. It should be `r/Designer`.
 
 ![EditCommandEg6](images/user-guide/EditCommandEg6.png)
 
-3. Invalid Job Type: `edit 4 t/PART-TIME`
-
-* This command is invalid because `t/t/PART-TIME` is not a valid job type due to the **dash** `-`. It should
-  be an **underscore** `_` instead: `t/PART_TIME`.
+* Invalid Job Type: `edit 4 t/PART-TIME`
+    * This command is invalid because `t/t/PART-TIME` is not a valid job type due to the **dash** `-`. It should
+      be an **underscore** `_` instead enter `t/PART_TIME`.
 
 ![EditCommandEg7](images/user-guide/EditCommandEg7.png)
 
@@ -542,7 +542,7 @@ Type `edit 2 c/Amazon r/Product Manager d/Dec 15 2023 1000 s/APPROVED` and press
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Clearing all applications: `clear`
+### Clearing all Applications: `clear`
 
 _Clears all job applications from JobFindr._
 
@@ -557,7 +557,7 @@ _Clears all job applications from JobFindr._
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Finding an application : `find`
+### Finding an Application : `find`
 
 _Finds all applications whose fields match the keywords provided._
 
@@ -584,9 +584,7 @@ _Finds all applications whose fields match the keywords provided._
 * Applications with partially matching keywords **will not be listed**.
     * e.g. searching for the keyword `Goo` will not list applications containing `Google`.
 * Characters not separated by white space are considered _ONE_ word.
-    * e.g. searching for the keyword "ADD" will not list applications containing "TO_ADD_DEADLINE".
-* Searches for deadline must be formatted correctly. Refer to
-  "[Structure of a job application](#structure-of-a-job-application)" for the correct format of a deadline.
+    * e.g. searching for the keyword `ADD` will not list applications containing `TO_ADD_DEADLINE`.
 </div>
 
 ***Successful Examples:***
@@ -597,34 +595,38 @@ _Finds all applications whose fields match the keywords provided._
 Type `find c/Tiktok` and press **Enter**.
 
 * This command searches for all job applications with `Tiktok` in the company name.<br>
-  ![FindCommandEg1](images/user-guide/FindCommandEg1.png)
+
+![FindCommandEg1](images/user-guide/FindCommandEg1.png)
 
 **Step 2:** All matching job applications will be displayed in the Job List Panel.
 
 * Click the Job Card to display its details in the Job Details Panel.<br>
-  ![FindCommandEg2](images/user-guide/FindCommandEg2.png)
+
+![FindCommandEg2](images/user-guide/FindCommandEg2.png)
 
 ***Find by Multiple Conditions:***
 
 **Step 1:** Let's try finding job application with by applying multiple conditions in the find command.
 Type `find Project c/Deloitte` and press **Enter**.
 
-* This command searches for all job applications with `Project` in any field and the words `Deloitte` its `company`
-  field.<br>
-  ![FindCommandEg3](images/user-guide/FindCommandEg3.png)
+* This command searches for all job applications with `Project` in **any field** and the words `Deloitte` its **company
+  field**.<br>
+
+![FindCommandEg3](images/user-guide/FindCommandEg3.png)
 
 **Step 2:** All matching job applications will be displayed in the Job List Panel.
 
 * Click the Job Card to display its details in the Job Details Panel.<br>
-  ![FindCommandEg4](images/user-guide/FindCommandEg4.png)
+
+![FindCommandEg4](images/user-guide/FindCommandEg4.png)
 
 ***Common Errors:***
 
-1. Missing keywords: `find`
+* Missing keywords: `find`
+    * This command is invalid because it doesn't specify any keywords to search for. Please provide **at least one
+      keyword** after `find`.
 
-* This command is invalid because it doesn't specify any keywords to search for. Please provide **at least one keyword**
-  after `find`.
-  ![FindCommandEg5](images/user-guide/FindCommandEg5.png)
+![FindCommandEg5](images/user-guide/FindCommandEg5.png)
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
@@ -643,15 +645,13 @@ _Sorts the list based on the prefix provided._
 </div>
 
 <div markdown="block" class="alert alert-info">
-**:information_source: Notes about KEYWORDS Parameter:**<br>
-* The sort order cannot be reversed.
-    * e.g. when sorting by company, companies cannot be listed from Z-A.
+**:information_source: Notes:**<br>
+* The sort order **cannot be reversed**.
+    * e.g. when sorting by `company`, companies cannot be listed from Z-A.
 * For optional fields, applications with empty fields will be listed first.
 </div>
 
-**Examples:**
-
-***Successful Commands:***
+***Successful Examples:***
 
 ***Sort by Company:***
 
@@ -678,15 +678,14 @@ _Sorts the list based on the prefix provided._
 
 ***Common Errors:***
 
-1. Multiple prefixes: `sort r/ c/`
-
-* This command is invalid because only one prefix is accepted.
+* Multiple prefixes: `sort r/ c/`
+    * This command is invalid because only one prefix is accepted.
 
 ![SortCommandEg5](images/user-guide/SortCommandEg5.png)
 
-2. Input following prefix: `sort r/Software`
-
-* This command is invalid because there should be nothing following the prefix provided.
+* Input following prefix: `sort r/Software`
+    * This command is invalid because there should be nothing following the `prefix` provided. Enter the `sort` command
+      without any keyword after the `prefix`.
 
 ![SortCommandEg6](images/user-guide/SortCommandEg6.png)
 
@@ -696,97 +695,153 @@ _Sorts the list based on the prefix provided._
 
 ### **Interview Features**
 
-### Adding an interview: `interview add`
+### Adding an Interview: `interview add`
 
-Adds an interview to the specified application from the list.
+_Adds an interview to a specified job application._
 
 **Format:** `interview add INDEX t/TYPE d/DATETIME a/ADDRESS`
 
-**Successful command:**
+<div markdown="block" class="alert alert-danger">
+**:exclamation: Warning:**<br>
+* All fields (Index, Type, DateTime, Address) are compulsory.
+</div>
 
-* When an interview is successfully added, display “New interview added: (`TYPE`) interview; Date and
-  Time: (`DATETIME`); Address: (`ADDRESS`)”.
+**Successful Examples:**
 
-**Failed command:**
+**Step 1:** Let us add an interview to the first job application in our list of job application. Start by listing all
+the available jobs on JobFindr. Type `list` and press **Enter**.
 
-* If any fields or prefixes are not included with the command,
-  display "Invalid command format!" and the correct format for interview add command.
+**Step 2:** Identify the first job application in the list by looking at the [Job List Panel](#user-interface). Click on
+the first job's Job Card to display its Job Details Panel.
 
-* If any fields have invalid input, display the possible valid inputs for that field.
+![IntAddCommandEg1](images/user-guide/IntAddCommandEg1.png)
 
-**Examples:**
+**Step 3:** Type `interview add 1 t/Technical d/Nov 19 2023 1200 a/Home` and press **Enter**.
 
-* `interview add 1 t/Technical d/Nov 12 2024 1200 a/Home`
+* This command adds a **technical interview** on **Nov 19 2023 1200** that will be done at **Home** to the first
+  application in the list.
 
-  Adds a technical interview at Nov 12 2024 1200 at Home to the first application in the list.
+![IntAddCommandEg2](images/user-guide/IntAddCommandEg2.png)
 
-**UI mockup:**
-![](images/user-guide/IntAddCommand.png)
+**Step 4:** You will see a new interview being added to the Interview List of the first job application, in this case it
+is for **Shopee**.
+
+![IntAddCommandEg3](images/user-guide/IntAddCommandEg3.png)
+<br>
+
+**Common Errors:**
+
+* Missing Compulsory Fields: `interview add 1 t/Behavioural a/Office`.
+    * This command is invalid as there is missing `d/DATETIME`. All the fields are compulsory and cannot be left out.
+      Include all fields for the command to be valid.
+    * eg. `interview add 1 t/Behavioural a/Office d/Dec 01 2023 1000`
+
+![IntAddCommandEg4](images/user-guide/IntAddCommandEg4.png)
+
+* Invalid/Missing input for any field: `interview add 1 t/NOT SURE a/Office d/Dec 01 2023 1000`
+    * If any fields have invalid/missing input, Result Display will show the possible valid inputs for that field.
+    * So instead of putting `NOT SURE` for the interview `type`, we can put `OTHER` instead.
+
+![IntAddCommandEg5](images/user-guide/IntAddCommandEg5.png)
+
+* Invalid/Missing index: `interview add t/OTHER a/Office d/Dec 01 2023 1000`
+    * Without a valid index, JobFindr will not be able to identify the application you wish to add the interview to.
+    * Provide a valid index for the job application. eg. `interview add 1 t/OTHER a/Office d/Dec 01 2023 1000`
+
+![IntAddCommandEg6](images/user-guide/IntAddCommandEg6.png)
+
 [&uarr; Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Deleting an interview: `interview delete`
+### Deleting an Interview: `interview delete`
 
-Deletes an interview of the specified application from the list.
+_Deletes the interview at the `INTERVIEW_INDEX` from the job application at `JOB_INDEX`_
 
 **Format:** `interview delete INTERVIEW_INDEX from/JOB_INDEX`
 
-* Deletes the interview at the specified `INTERVIEW_INDEX` of the application at the specified `JOB_INDEX`.
+<div markdown="block" class="alert alert-danger">
+**:exclamation: Warning:**<br>
+* Both indexes for job application and interview must be provided and valid.
+</div>
 
-**Successful command:**
+**Successful Examples:**
 
-* When an interview is successfully deleted, display “Interview deleted: (`TYPE`) interview; Date and
-  Time: (`DATETIME`); Address: (`ADDRESS`)”.
+**Step 1:** Identify the interview and its job application that you want to delete. Try using `list` or `find` command
+to find the specific job application. Click on the job's Job Card to display its interview.
 
-**Failed command:**
+* Let's try to delete `Behavioral Interview` from `Shopee`.
 
-* If any fields or prefixes are not included with the command,
-  display "Invalid command format!" and the correct format for interview delete command.
+![IntDeleteCommandEg1](images/user-guide/IntDeleteCommandEg1.png)
 
-**Examples:**
+**Step 2:** So we have identified that the interview we want to delete is the **2nd interview** in the **1st job
+application**.
+Let's type `interview delete 2 from/ 1` and press **Enter**.
 
-* `interview delete 1 from/2`
+![IntDeleteCommandEg2](images/user-guide/IntDeleteCommandEg2.png)
 
-  Deletes the 1st interview from the 2nd job application in the list.
+**Step 3:** We will now see that the `Behavioral Interview` from `Shopee` has been removed.
 
-**UI mockup:**
-![](images/user-guide/IntDeleteCommand.png)
+![IntDeleteCommandEg3](images/user-guide/IntDeleteCommandEg3.png)
+
+**Common Errors:**
+
+* Invalid/Missing index: `interview delete 5 from/1`
+    * This is invalid if there is no interview at index 5 for the 1st job application.
+    * Click on the Job Card of the 1st application to check the correct index for interview.
+
+![IntDeleteCommandEg4](images/user-guide/IntDeleteCommandEg4.png)
+
 [&uarr; Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Editing an interview: `interview edit`
+### Editing an Interview: `interview edit`
 
-Edits an interview of the specified application from the list.
+_Edits the interview at the `INTERVIEW_INDEX` from the job application at `JOB_INDEX`_
 
 **Format:** `interview edit INTERVIEW_INDEX from/JOB_INDEX [t/TYPE] [d/DATETIME] [a/ADDRESS]`
 
-* Edits the interview at the specified `INTERVIEW_INDEX` of the application at the specified `JOB_INDEX`.
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes:**<br>
 * At least one of the optional fields must be provided.
+</div>
 
-**Successful command:**
+**Successful Examples:**
 
-* When an interview is successfully edited, display “Interview successfully edited: (`TYPE`) interview; Date and
-  Time: (`DATETIME`); Address: (`ADDRESS`)”.
+**Step 1:** Identify the interview and its job application that you want to edit. Try using `list` or `find` command
+to find the specific job application. Click on the job's Job Card to display its interview.
 
-**Failed command:**
+* Let's edit the `Case Interview` from `Shopee`.
 
-* If any fields or prefixes are not included with the command,
-  display "Invalid command format!" and the correct format for interview edit command.
+![IntEditCommandEg1](images/user-guide/IntEditCommandEg1.png)
 
-**Examples:**
+**Step 2:** Looking at the Interview List Panel, we can see that the interview we want to delete is the
+**2nd interview** in the **1st job application**.
+Let's type `interview edit 2 from/ 1 d/Jan 20 2024 1200` and press **Enter**.
 
-* `interview edit 2 from/4 t/GROUP d/Jan 20 2025 1200`
+* This command will edit the date of the interview to `Jan 20 2024 1200`
 
-  Edits the interview type and date time for the 2nd interview from the 4th job application in the list.
+![IntEditCommandEg2](images/user-guide/IntEditCommandEg2.png)
 
-* `interview edit 4 from/8 a/NTU`
+**Step 3:** Look at the Interview Card for the `Case Interview` from `Shopee`, the `date` will be edited.
 
-  Edits the address for the 4th interview from the 8th job application in the list.
+![IntEditCommandEg3](images/user-guide/IntEditCommandEg3.png)
 
-**UI mockup:**
-![](images/user-guide/IntEditCommand.png)
+**Common Errors:**
+
+* Invalid/Missing index: `interview edit 5 from/1 t/Technical`
+    * This is invalid if there is no interview at index 5 for the 1st job application.
+    * Click on the Job Card of the 1st application to check the correct index for interview.
+
+![IntEditCommandEg4](images/user-guide/IntEditCommandEg4.png)
+
+* Invalid/Missing input for any field: `interview edit 2 from/1 d/Dec 31 2023`
+    * If any fields have invalid/missing input, Result Display will show the possible valid inputs for that field.
+    * As `Dec 31 2023` is not a valid `DATETIME` format, please specify the time as well. Eg. `Dec 31 2023 2359`
+
+![IntEditCommandEg5](images/user-guide/IntEditCommandEg5.png)
+
 [&uarr; Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
