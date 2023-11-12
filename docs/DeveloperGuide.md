@@ -347,60 +347,78 @@ finding the perfect match.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| As a …​      | I want to …​                                                                                    | So that I can…​                                                                             |
-|--------------|-------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
-| new user     | be greeted with a welcome message when i launch the app                                         | so that I feel welcome                                                                      |
-| new user     | be able to key in my height in my preferences                                                   | so that the algorithm can recommend me a suitable date based on our height compatibility    |
-| new user     | be able to key in my horoscope in my preferences                                                | so that the algorithm can recommend me a suitable date based on our horoscope compatibility |
-| new user     | be able to key in my own income in my preferences                                               | so that the algorithm can recommend me a suitable date based on our income compatibility    |
-| new user     | to be able to key in my own gender in my preferences                                            | so that the algorithm can match me to the appropriate gender                                |
-| serial dater | be able to pull up a list of my previous dates                                                  | so that I can keep track of who I have dated in the past                                    |
-| serial dater | be able to delete dates from my list                                                            | so that my dating list is only limited to those who I am still interested in                |
-| serial dater | to be able create a new date entry with his/her gender, name, income, height, horoscope and age | so that I can keep my list growing                                                          |
-| serial dater | to be able to edit the details of my date                                                       | so that I can keep my dates details up to date                                              |
-| serial dater | to be able to be recommended a complete random date                                             | so that I can have an exciting surprise date that day                                       |
-| serial dater | to be able to filter my past dates based on a particular metric                                 | so that I can find dates that I am interested in amidst my long and ever growing list       |
-| serial dater | to be able to be recommended the most compatible date for me                                    | so that I optimize my chance of finding my one true love                                    |
-| serial dater | to be able to star dates                                                                        | so that I can keep track of outstanding dates                                               |
-| serial dater | to be able to unstar dates                                                                      | so that I can keep focused on people who are still outstanding to me                        |
-*{More to be added}*
-
+| Priority | As a …​  | I want to …​                                                                                    | So that I can…​                                                         |
+|----------|----------|-------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| `* *`    | new user | be greeted with a welcome message when i launch the app                                         | feel welcome                                                            |
+ | `* *`    | new user | be able to get help when i'm stuck                                                              | better navigate through the application                                 |
+| `* * *`  | dater    | be able to key my preferred height in my preferences                                            | get recommended a suitable date based on our height compatibility       |
+| `* * *`  | dater    | be able to key in my preferred horoscope in my preferences                                      | get recommended a suitable date based on our horoscope compatibility    |
+| `* * *`  | dater    | be able to key in my preferred income in my preferences                                         | get recommended a suitable date based on our income compatibility       |
+ | `* * *` | dater | be able to key in my preferred age in my preferences                                            | get recommended a suitable date based on our age compatibility          |
+| `* * *` | dater | be able to edit my entered preferences                                                          | change my preferences in the event I change my mind                     |
+ | `* * *` | dater | be able to view my preferences                                                                  | know what my preferences are in the event I forget                      |
+| `* * *`  | dater    | be able to pull up a list of my previous dates                                                  | keep track of who I have dated in the past                              |
+| `* * *`  | dater    | be able to delete dates from my list                                                            | limit my dating list to those who I am still interested in              |
+| `* * *`  | dater    | to be able create a new date entry with his/her gender, name, income, height, horoscope and age | keep my list growing                                                    |
+| `* * *`  | dater    | to be able to edit the details of my date                                                       | keep my dates details up to date                                        |
+| `* * *`  | dater    | to be able to be recommended a complete random date                                             | have an exciting surprise date that day                                 |
+| `* * *`  | dater    | to be able to filter my dates based on a particular metric                                      | find dates that I am interested in amidst my long and ever growing list |
+| `* * *`  | dater    | to be able to be recommended the most compatible date for me                                    | optimize my chance of finding my one true love                          |
+| `* * *`  | dater    | to be able to star dates                                                                        | keep track of outstanding dates                                         |
+| `* * *`  | dater    | to be able to unstar dates                                                                      | keep focused on people who are still outstanding to me                  |
+| `* * *`  | dater    | to be able to sort my dates based on a particular metric                                        | find dates that I am interested in amidst my long and ever growing list |
+ | `* * *` | dater | to be able to find dates based on their name                                                    | locate a date easily                                                    |
+| `* *`    | lazy user | to be able to clear all the dates in my list                                                    | start afresh with a new date list                                       | 
+ 
 ### Use cases
 
 (For all use cases below, the **System** is the `LoveBook` and the **Actor** is the `user`, unless specified otherwise)
+
+#### Use Case: List All Dates
+
+**Main Success Scenario (MSS):**
+
+1. User requests to list all dates.
+2. LoveBook shows a list of dates.
+
+**Extensions:**
+
+2a. The list is empty.
+
+- Use case ends.
 
 #### Use Case: Add a Date
 
 **Main Success Scenario (MSS):**
 
 1. User requests to add a new date to the LoveBook.
-2. LoveBook prompts the user to provide the date's details, including name, age number, and gender.
+2. LoveBook prompts the user to provide the date's details, including name, age, gender, height, income and horoscope.
 3. User enters the required details.
 4. LoveBook validates the input.
 5. LoveBook adds the new date to the LoveBook.
 6. LoveBook displays a confirmation message.
 
+    Use case ends. <br>
+
 **Extensions:**
 
-2a. User cancels the operation.
-
-- Use case ends.
-
-4a. The input is invalid (e.g., missing name or an invalid gender height).
+4a. The input is invalid (e.g., invalid gender, height, horoscope).
 
 - LoveBook shows an error message.
 - User is prompted to re-enter the details.
-- Use case resumes at step 3.
+- Use case resumes at step 2.
 
-#### Use Case: Search for a Date
+#### Use Case: Finding a Date
 
 **Main Success Scenario (MSS):**
 
 1. User requests to search for a date in the LoveBook.
-2. LoveBook prompts the user to enter a search query (e.g., name or age number).
-3. User enters the search query.
+2. LoveBook prompts the user to enter a search query by name.
+3. User enters the necessary command.
 4. LoveBook performs a search based on the query.
 5. LoveBook displays a list of dates matching the search query.
+
+Use case ends. <br>
 
 **Extensions:**
 
@@ -408,125 +426,156 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - LoveBook displays a message indicating that no matching dates were found.
 
-#### Use Case: Edit Date Details
+#### Use Case: Edit a Date's Details
 
 **Main Success Scenario (MSS):**
 
-1. User requests to edit the details of a specific date.
+1. User requests to list all the dates.
 2. LoveBook shows a list of dates.
-3. User selects the date they want to edit from the list.
-4. LoveBook prompts the user to provide the updated details for the selected date.
-5. User enters the updated details.
-6. LoveBook validates the input.
-7. LoveBook updates the date's details with the new information.
-8. LoveBook displays a confirmation message.
+3. User selects the date and the relevant fields they want to edit from the list.
+4. LoveBook updates the date's details with the new information.
+5. LoveBook displays a confirmation message.
+
+Use case ends. <br>
 
 **Extensions:**
 
 2a. The list is empty.
 
-- LoveBook displays a message indicating that there are no dates to edit.
 - Use case ends.
 
-3a. The selected date does not exist.
+4a. The selected date does not exist (e.g., index provided is greater than number of dates).
 
-- LoveBook displays an error message.
-- User is prompted to select a valid date.
-- Use case resumes at step 3.
+- 4a1. LoveBook displays an error message.
+- Use case resumes at step 2.
 
-6a. The input is invalid (e.g., missing name or an invalid age number).
+4b. The new field entry is invalid (e.g., missing name, incorrect gender).
 
-- LoveBook shows an error message.
-- User is prompted to re-enter the details.
-- Use case resumes at step 5.
-
-#### Use Case: View Date Details
-
-**Main Success Scenario (MSS):**
-
-1. User requests to view the details of a specific date.
-2. LoveBook shows a list of dates.
-3. User selects the date they want to view from the list.
-4. LoveBook displays the date's details, including name, age number, and gender.
-
-**Extensions:**
-
-2a. The list is empty.
-
-- LoveBook displays a message indicating that there are no dates to view.
-- Use case ends.
-
-3a. The selected date does not exist.
-
-- LoveBook displays an error message.
-- User is prompted to select a valid date.
-- Use case resumes at step 3.
+- 4b1. LoveBook displays an error message.
+- Use case resumes at step 2.
 
 #### Use Case: Delete a Date
 
 **Main Success Scenario (MSS):**
 
-1. User requests to delete a specific date from the LoveBook.
+1. User requests to list all the dates.
 2. LoveBook shows a list of dates.
-3. User selects the date they want to delete from the list.
-4. LoveBook confirms the deletion with the user.
-5. User confirms the deletion.
-6. LoveBook deletes the date from the LoveBook.
-7. LoveBook displays a confirmation message.
+3. User requests to delete a specific date in the list.
+4. LoveBook deletes the date from the LoveBook.
+
+Use case ends. <br>
 
 **Extensions:**
 
 2a. The list is empty.
 
-- LoveBook displays a message indicating that there are no dates to delete.
 - Use case ends.
 
 3a. The selected date does not exist.
 
-- LoveBook displays an error message.
-- User is prompted to select a valid date.
-- Use case resumes at step 3.
+- 3a1. LoveBook displays an error message.
+- Use case resumes at step 2.
 
-5a. User cancels the deletion.
+#### Use Case: Set Preferences
+
+**Main Success Scenario (MSS):**
+
+1. User requests to set preferences.
+2. LoveBook updates the preferences with the new information.
+
+Use case ends. <br>
+
+**Extensions:**
+
+2a. The entered preferences are invalid.
+
+- 2a1. LoveBook displays an error message.
+- Use case resumes at step 1.
+
+#### Use Case: View Preferences
+
+**Main Success Scenario (MSS):**
+
+1. User requests to view preferences.
+2. LoveBook displays the preferences.
+
+Use case ends. <br>
+
+#### Use Case: Get Blind Date
+
+**Main Success Scenario (MSS):**
+
+1. User requests for a blind date.
+2. LoveBook displays a blind date.
+
+Use case ends. <br>
+
+**Extensions:**
+
+2a. The list is empty.
+
+- LoveBook displays a message indicating that there are no dates.
+- Use case ends.
+
+#### Use Case: Filter Dates
+
+**Main Success Scenario (MSS):**
+
+1. User requests to list all the dates.
+2. LoveBook shows a list of dates.
+3. User requests to filter the list of dates by a specific metric.
+4. LoveBook filters the list of dates by the specified metric.
+
+Use case ends. <br>
+
+**Extensions:**
+
+2a. The list is empty.
 
 - Use case ends.
+
+3a. The specified metric does not exist or entered input is invalid (e.g., invalid gender).
+
+- 3a1. LoveBook displays an error message.
+- Use case resumes at step 2.
+
+#### Use Case: Sort Dates
+
+**Main Success Scenario (MSS):**
+
+1. User requests to list all the dates.
+2. LoveBook shows a list of dates.
+3. User requests to sort the list of dates by a specific metric.
+4. LoveBook sorts the list of dates by the specified metric.
+
+Use case ends. <br>
+
+**Extensions:**
+
+2a. The list is empty.
+
+- Use case ends.
+
+3a. The specified metric does not exist or entered input is invalid (e.g., invalid gender).
+
+- 3a1. LoveBook displays an error message.
+- Use case resumes at step 2.
 
 #### Use Case: Get Best Match
 
 **Main Success Scenario (MSS):**
 
-1. User requests his/her best match.
+1. User requests for their best match.
+2. LoveBook displays the best match.
+
+Use case ends. <br>
 
 **Extensions:**
+
 1a. The list is empty.
 
-- LoveBook displays a message indicating that there are no dates.
+- 1a1. LoveBook displays a message indicating that there are no dates.
 - Use case ends.
-
-#### Use Case: View Preferences for Dates
-
-**Main Success Scenario (MSS):**
-
-1. User requests to edit the details of a specific date.
-2. LoveBook shows the user's preferences.
-3. LoveBook prompts the user to provide the updated details for the selected preference.
-4. User enters the updated details.
-5. LoveBook validates the input.
-6. LoveBook updates the preference's details with the new information.
-7. LoveBook displays a confirmation message.
-
-**Extensions:**
-
-2a. User did not set a preference.
-
-- LoveBook displays a message indicating a default preference.
-- Use case ends.
-
-5a. The input is invalid (e.g., missing date or an invalid age number).
-
-- LoveBook shows an error message.
-- User is prompted to re-enter the details.
-- Use case resumes at step 5.
 
 ### Non-Functional Requirements
 
@@ -583,15 +632,15 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding Dates
 
-1. Adding an Date
+1. Adding a Date
     * Type the following add command into the text field.<br>
       `add name/Cleon age/22 gender/F height/176 horoscope/Taurus income/3000`
     * Press enter.
-    * Expected: The GUI shows the added Date in the LoveBook.
+    * Expected: The GUI shows the added date in the LoveBook.
 
 ### Best Match Dates
 
-1. Getting the best match using your Date Preferences
+1. Getting the best match using your Date Preferences [Ensure that you have added at least 1 Date]
     * Type the following best match command into the text field.<br>
       `bestMatch`
     * Press enter.
@@ -603,7 +652,7 @@ testers are expected to do more *exploratory* testing.
     * Type the following clear command into the text field.<br>
       `clear`
     * Press enter.
-    * Expected: The GUI shows no Dates in the LoveBook.
+    * Expected: The GUI shows no dates in the LoveBook.
 
 ### Deleting Dates
 
@@ -611,12 +660,12 @@ testers are expected to do more *exploratory* testing.
     * Type the following delete command into the text field.<br>
       `delete 1`
     * Press enter.
-    * Expected: The date the specified Index is removed from LoveBook in the GUI.
+    * Expected: The date the specified index is removed from LoveBook.
 
 ### Editing Dates
 
 1. Editing a Date by index
-    * Type the following edit elderly command into the text field.<br>
+    * Type the following edit date command into the text field.<br>
       `edit 3 horoscope/Cancer name/Cleon`
     * Press enter.
     * Expected: The GUI shows the new fields for the Date at the specified index. (Sequence doesn't matter)
@@ -627,32 +676,32 @@ testers are expected to do more *exploratory* testing.
     * Type the following find command into the text field.<br>
       `find John`
     * Press enter.
-    * Expected: The Date with name in the find command.
+    * Expected: The date with specified name shown.
 
-1. Finding Dates by multiple names
+2. Finding Dates by multiple names
     * Type the following find command into the text field.<br>
       `find John Cleon`
     * Press enter.
-    * Expected: The Dates with names in the find command.
+    * Expected: The dates with the specified names shown.
 
-1. Listing all Dates
+3. Listing all Dates
     * Type the following list command into the text field.<br>
       `list`
     * Press enter.
-    * Expected: The GUI shows all Dates in LoveBook.
+    * Expected: The GUI shows all dates in LoveBook.
 
 ### Filtering Dates
 
 1. Filtering Dates by metric (e.g. name, age, height)
     * Type the following filter command into the text field.<br>
-      `filter age/John`
+      `filter age/19`
     * Press enter.
-    * Expected: The GUI shows the Dates with age in the filter command.
+    * Expected: The GUI shows all dates with age 19 in LoveBook.
 
 ### Finding a Blind Date
 
-1. Finding a Blind Date
-    * Type the following random command into the text field.<br>
+1. Finding a Blind Date [Ensure that you have added at least 1 Date]
+    * Type the following command into the text field.<br>
       `blindDate`
     * Press enter.
     * Expected: The GUI shows a blind date in LoveBook.
