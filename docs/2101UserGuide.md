@@ -217,7 +217,7 @@ Examples:
 
 ### View commands
 In CCACommander, you can quickly change the view to fit your current use case, be it to check for the enrolment of an event, 
-filtering for a member and more!
+searching for a member and more!
 
 #### View Events of Member : `viewMember`
 
