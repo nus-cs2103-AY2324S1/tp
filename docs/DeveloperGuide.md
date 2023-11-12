@@ -263,35 +263,25 @@ The sequence diagram below also shows the interaction between the various compon
 
 <img src="images/FindMemberSequenceDiagram.png">
 
-### Edit a member
+### Edit a `Member`/`Applicant`
 
-Edits the details of an existing member identified by their index number in the displayed member list. Existing values
-will be overwritten by the input values.
+Edits the details of an existing `Member`/ `Applicant` identified by their `MEMBER_INDEX`/`APPLICANT_INDEX` in the displayed member/applicant list.
+The commands are implemented in the `EditMemberCommand` and `EditApplicantCommand` classes which extend the `Command` class.
 
-* Step 1: The `EditMemberCommand` object's `execute()` method is called.
-* Step 2: The member index is checked to be within the valid range of the member list. If the member index given is
-  invalid (e.g., out of range), a `CommandException` is thrown.
-* Step 3: The member at the given index is referenced based on the provided member index.
-* Step 4: The `EditMemberCommand` calls the model object's `setMember()` method. It updates the member with the new
-  details
-  provided, effectively modifying the existing member's information.
-* Step 5: After the execution of the `EditMemberCommand`, the member's details are successfully edited in the member
-  list.
+* Step 1. The `EditMemberCommand`/`EditApplicantCommand` object's `execute()` method is called.
+* Step 2. The `MEMBER_INDEX`/`APPLICANT_INDEX` is checked to be within the valid range of the displayed member/applicant list. If the `MEMBER_INDEX`/`APPLICANT_INDEX` given is invalid(i.e out of range), a `CommandException` is thrown.
+* Step 3. The `Member`/`Applicant` at the given `MEMBER_INDEX`/`APPLICANT_INDEX` is referenced.
+* Step 4. The number of fields to be edited are checked. If there are no fields to be edited, a `CommandException` is thrown.
+* Step 4. The model object's `setMember()`/`setApplicant()` method is called. The input parameter is the referenced `Member`/`Applicant` and the new `Member`/`Applicant` with the updated details.
+* Step 5. The `Member's`/`Applicant's` field(s) are edited.
 
-### Edit an applicant
+The diagram below describes this behaviour concisely. It shows how a user’s command is processed and what message is ultimately shown if they decide, for example, to edit an applicant.
 
-Edits the details of an existing applicant identified by their index number in the displayed applicant list. Existing
-values will be overwritten by the input values.
+<img src="images/EditApplicantActivityDiagram.png">
 
-* Step 1: The `EditApplicantCommand` object's `execute()` method is called.
-* Step 2: The applicant index is checked to be within the valid range of the applicant list. If the applicant index
-  given is invalid (e.g., out of range), a `CommandException` is thrown.
-* Step 3: The applicant at the given index is referenced based on the provided applicant index.
-* Step 4: The `EditApplicantCommand` calls the model object's `setApplicant()` method. It updates the member with the
-  new
-  details provided, effectively modifying the existing applicant's information.
-* Step 5: After the execution of the `EditApplicantCommand`, the applicant's details are successfully edited in the
-  applicant list.
+The sequence diagram below also shows the interaction between the various components during the execution of the `EditApplicantCommand`. The execution of the `EditMemberCommand` is almost identical, except that it uses the `Member` class instead of the `Applicant` class.
+
+<img src="images/EditApplicantSequenceDiagram.png">
 
 ### Copy a `Member`/`Applicant`
 

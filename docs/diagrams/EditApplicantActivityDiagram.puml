@@ -1,0 +1,26 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+:User enters command to edit an Applicant;
+
+if () then ([command is invalid])
+    :Show error message for invalid command;
+else ([else])
+    if () then ([index is invalid])
+        :Show error message for invalid index;
+    else ([else])
+        if () then ([no field is entered])
+            :Show error message indicating no fields entered for editing;
+        else ([else])
+            :Edit the details of the applicant in the applicant list;
+            :Update the applicant list in the GUI;
+            :Show success message with applicant's name;
+        endif
+    endif
+endif
+
+stop
+@enduml
