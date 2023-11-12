@@ -13,12 +13,16 @@ Class ModelManager
 Class UserPrefs
 
 Class UniqueApplicantList
+Class UniqueInterviewList
 Class Applicant
+Class Interview
 Class Address
 Class Email
 Class Name
 Class Phone
 Class Tag
+Class Rating
+Class Time
 
 Class I #FFFFFF
 }
@@ -31,17 +35,23 @@ AddressBook .up.|> ReadOnlyAddressBook
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+ModelManager -down-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniqueApplicantList
+AddressBook *--> "1" UniqueInterviewList
 UniqueApplicantList --> "~* all" Applicant
+UniqueInterviewList --> "~* all" Interview
 Applicant *--> Name
 Applicant *--> Phone
 Applicant *--> Email
 Applicant *--> Address
 Applicant *--> "*" Tag
+Interview --> "1" Applicant
+Interview *-right-> "startTime" Time
+Interview *-right-> "endTime" Time
+Interview *--> Rating
 
 Applicant -[hidden]up--> I
 UniqueApplicantList -[hidden]right-> I
@@ -51,4 +61,5 @@ Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Applicant
+ModelManager --> "~* filtered" Interview
 @enduml

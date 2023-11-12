@@ -47,7 +47,9 @@ MainWindow -left-|> UiPart
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
 ApplicantListPanel --|> UiPart
+InterviewListPanel --|> UiPart
 ApplicantCard --|> UiPart
+InterviewCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
