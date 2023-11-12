@@ -7,12 +7,6 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
-
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
---------------------------------------------------------------------------------------------------------------------
-
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
@@ -253,7 +247,8 @@ The following sequence diagram displays how updating hour Feature is implemented
 
 **Value proposition**:
 * Fast access to TA contact details and availability
-* Track teaching hours and claimable hours conveniently
+* Track teaching hours conveniently
+* Easily view course information and TAs for the course
 
 
 ### User stories
@@ -271,14 +266,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user    | update the availability of my TA                             | contact the TA for replacement sessions if needed      |
 | `* *`    | user    | update the teaching hours of my TA                           | keep track of the TA's teaching hours                  |
 | `* *`    | user    | update the tags and courses of my TA                         | keep track of the TA's responsibilities                |
+| `* *`    | user    | have my records saved for the next session                   | use the information over multiple sessions             |
 | `*`      | user    | find a TA by name                                            | find the contact details of a specific TA              |
 | `*`      | user    | find a TA by course                                          | focus on management of a specific course               |
 | `*`      | user    | find a TA by tag                                             | easily sort my TAs                                     |
 | `* `     | user    | find a TA by free time                                       | find potential replacement TAs                         |
-| `*`      | user    | have my records saved for the next session                   | use the information over multiple sessions             |
 | `*`      | user    | set a course to prioritise                                   | filter TAs on startup and save time                    |
 | `*`      | user    | remove my prioritised course                                 | view all TAs on startup                                |
 | `*`      | user    | view the list of courses I'm teaching and their assigned TAs | filter TAs based on the courses they can teach         |
+| `*`      | user    | view the lesson timeslots of my course                       | plan for TA availability around these timeslots        |
+| `*`      | user    | use a prepopulated data file                                 | skip the process of populating the data manually       |
 
 
 ### Use cases
@@ -362,12 +359,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 TA entries without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Data should persist across user sessions
 5.  Project should be able to handle information from across academic years
-
-*{More to be added}*
+6.  Project should be able to handle any invalid input without crashing
 
 ### Glossary
 
