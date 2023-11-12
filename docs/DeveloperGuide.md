@@ -193,6 +193,8 @@ Step 3. LinkTree provides a feedback based on whether the operation was successf
 
 **Note:** If a command fails its execution, it will not call `Model#addTeam()`, so the `team` will not be saved to `TeamBook`.
 
+</box>
+
 #### Step-by-Step Implementation
 
 1. Create a newteam parser class called `AddTeamCommandParser` to parse input from user. This implements the `Parser` interface for type `AddTeamCommand`
@@ -206,7 +208,9 @@ Step 3. LinkTree provides a feedback based on whether the operation was successf
 9. If not such exception is thrown, create the new team at this point. 
 10. Run the `Model#addTeam` method to add the created team to TeamBook.
 11. `Model#addTeam` calls `TeamBook#addTeam` which in turn calls `UniqueTeamList#add`. Finally this method calls the `ObservableList#add` which adds the `team` to the list.
-</box>
+
+<puml src="diagrams/AddTeamCommandDiagram.puml" width="574" />
+
 
 #### Design considerations:
 
@@ -219,6 +223,64 @@ Step 3. LinkTree provides a feedback based on whether the operation was successf
 * **Alternative 2:** Store the teams in the same class as Persons in the class AddressBook.
   * Pros: Easier implementation.
   * Cons: Breaks principle of abstraction and OOP. Information hiding is also not done.
+
+
+### Feature: Add developers to an existing team
+
+####  Introduction
+
+The add dev to team feature is facilitated by the AddDevToTeamCommand. It extends `Command` class.
+
+The operations are exposed in the `Model` interface as `Model#addToTeam()`.
+
+#### Usage
+Given below is an example usage scenario and how the add team behaves at each step.
+
+Step 1. The user launches the application and uses the `dev2team` command and specifies a `teamname` and `developer` name.
+
+
+
+Step 2. The user executes the `dev2team` command `dev2team tn/Team1 n/Jason` to add a developer `Jason` to the team `Team1`.
+
+
+
+Step 3. LinkTree provides a feedback based on whether the operation was successful or not.
+
+
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, it will not call `Model#addToTeam()`, so the specified `developer` will not be added to the `team`.
+
+</box>
+
+#### Step-by-Step Implementation
+
+1. Create a dev2team parser class called `AddDevToTeamParser` to parse input from user. This implements the `Parser` interface for type `AddDevToTeamCommand`
+2. Create a `parse` method in `AddDevToTeamParser` that parses the user input and specify the user flags that are used `tn/` for teamName and `n/` for developer name.
+3. The flags for user input can be added to class `CliSyntax`.
+4. For the `AddDevToTeamCommand` class, specify the Command Word. In this case, it is `dev2team`.
+5. Add relevant messages for use cases like `Team not found`, `Duplicate developer`, `Developer is the teamleader` and `Developer not found` errors.
+6. Implement the `execute` method in `AddDevToTeamCommand`. Handle the cases where a team with specified `teamName` does not exist and also one where specified developer to be added does not exist. 
+7. You will also need to handle the cases where either the given developer is already in the team or the developer is currently the leader of the given team.
+7. Use the `Model#InvalidAddToTeam`, `Model#containsPerson`, `Model#personAlreadyInTeam` and `Model#isLeaderOfTeam` methods to do these checks.
+8. Throw exceptions in the cases where adding the developer is not possible.
+9. If not such exception is thrown, add the developer to the given team at this point.
+10. The `Model#addToTeam` method performs the addition of the developer to the specified team.
+
+<puml src="diagrams/AddDevToTeamCommandDiagram.puml" width="1100"/>
+
+
+#### Design considerations:
+
+**Aspect: Can a team leader also be a developer in his team? :**
+
+* **Alternative 1 (current choice):** Team leader of a team cannot be added as a developer in his team.
+
+* **Alternative 2:** Store the teams in the same class as Persons in the class AddressBook.
+* Generally, though a team leader also works on the code that he is in charge of, adding himself as a developer in the team that he manages would be redundant. Hence we settled with this current design.
+
+<br>
 
 ### Feature: Remove an existing Team
 
