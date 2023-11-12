@@ -34,11 +34,11 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredEmployeeList(Model.PREDICATE_SHOW_ALL_EMPLOYEES);
-        List<Employee> lastShownList = model.getFilteredEmployeeList();
+        List<Employee> employeeList = model.getAddressBook().getEmployeeList();
 
-        for (Employee employee : lastShownList) {
+        for (Employee employee : employeeList) {
             if (employee.getId().equals(targetId)) {
+                model.updateFilteredEmployeeList(Model.PREDICATE_SHOW_ALL_EMPLOYEES);
                 model.deleteEmployee(employee);
                 return new CommandResult(String.format(MESSAGE_DELETE_EMPLOYEE_SUCCESS, Messages.format(employee)));
             }

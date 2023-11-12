@@ -12,10 +12,10 @@ end box
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
-[-> LogicManager : execute("reset overtime")
+[-> LogicManager : execute("reset f/overtime")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("reset overtime")
+LogicManager -> AddressBookParser : parseCommand("reset f/overtime")
 activate AddressBookParser
 
 create ResetCommandParser
@@ -25,7 +25,7 @@ activate ResetCommandParser
 ResetCommandParser --> AddressBookParser
 deactivate ResetCommandParser
 
-AddressBookParser -> ResetCommandParser : parse("overtime")
+AddressBookParser -> ResetCommandParser : parse("f/overtime")
 activate ResetCommandParser
 
 create ResetCommand
@@ -47,8 +47,17 @@ deactivate AddressBookParser
 LogicManager -> ResetCommand : execute()
 activate ResetCommand
 
+loop number of employees in employee book
 ResetCommand -> Model : setEmployee(targetEmployee, editedEmployee)
+activate Model
+
+Model --> ResetCommand
+end
+
 ResetCommand -> Model : updateFilteredEmployeeList()
+
+Model --> ResetCommand
+deactivate Model
 
 create CommandResult
 ResetCommand -> CommandResult
