@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -47,6 +48,12 @@ public class JsonCoursesStorage implements CoursesStorage {
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataLoadingException(ive);
+        } catch (IllegalArgumentException iae) {
+            logger.info("Illegal arguments found in " + filePath + ": " + iae.getMessage());
+            throw new DataLoadingException(iae);
+        } catch (DateTimeParseException dtpe) {
+            logger.info("Illegal date format found in " + filePath + ": " + dtpe.getMessage());
+            throw new DataLoadingException(dtpe);
         }
     }
 
