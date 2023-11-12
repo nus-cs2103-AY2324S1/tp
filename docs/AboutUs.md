@@ -18,7 +18,7 @@ You can reach us at the email `shuenjin@u.nus.edu`
 [[github](https://github.com/leezhanpeng)]
 [[portfolio](team/leezhanpeng.md)]
 
-* Role: Head Developer
+* Role: Developer
 * Responsibilities: UI, Administrative
 
 ### Eric Xiong
