@@ -196,7 +196,7 @@ For each **interview**, we see the following details:
   e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list-i`, `list-a`, `list-i-done`, `list-i-not-done`,
-  `list-today`, `sort-rate`, `sort-time`, `exit`, and `clear`) will be ignored.<br>
+  `list-i-today`, `sort-rate`, `sort-time`, `exit`, and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * List of accepted date formats:
