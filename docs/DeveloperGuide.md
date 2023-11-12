@@ -119,19 +119,20 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103-F13-1/tp/blob/master/src/main/java/connexion/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="900" />
 
 
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+    * also stores a `detailedPerson` object for the `Person` to be shown on the detail panel. 
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" width="900" />
 
 </div>
 
@@ -140,7 +141,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2324S1-CS2103-F13-1/tp/blob/master/src/main/java/connexion/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" width="900" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -173,21 +174,20 @@ The sequence diagram below shows the interaction between Logic and Model compone
 ![Interactions Inside the Logic and Model Components for the `filter c/Google` Command](images/FilterSequenceDiagram.png)
 
 The reason behind implementing the feature this way is that this feature is partly inspired
-by the prior implementation of the find feature in AB3. This is just an enhancement of the feature, in which the target
-user is more likely to find filtering contacts via a specified field, especially company and job, useful.
+by the prior implementation of the find feature in AB3.
 
-### LastModified (implemented by Xavier)
-Each `Person` has a last modified detailing when it was last modified.
+### Last Modified Date & Time (implemented by Xavier)
+Each `Person` has a last modified date & time detailing when it was last modified.
 
 This necessitates the implementation of an internal `Clock` object in the `Model` and `Logic` classes.
 
-The `Model` has a `Clock` object (as described in the [Java time API](https://docs.oracle.com/javase/8/docs/api/java/time/Clock.html)), which is set to
-the current system time on instantiation. The methods `setClock` and `getClock` are exposed to modify the clock used, for testing or for extension.
+The `Model` has a `Clock` object (as described in the [Java time API](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/Clock.html)), which is set to
+the current system time on instantiation of `Model`. The methods `setClock` and `getClock` are exposed to modify the clock used, for testing or for extension.
 
 The `Logic` object reads the `Model`'s clock to reference what clock operations should use, and instantiates a version of `AddressBookParser` that uses that clock via chained method `withClock`.
 The new `AddressBookParser` then further passes the clock via method chaining to any `ClockDependentParser`s, or ignores the clock for commands that do not need to care about the clock.
 
-Currently, the only `ClockDependentParser`s are `AddCommandParser`,`EditCommandParser`,`ScheduleParser` and `NoteParser`.
+Currently, the only `ClockDependentParser`s are `AddCommandParser`,`EditCommandParser`,`ScheduleCommandParser`,`ClearScheduleCommandParser` and `NoteCommandParser`, `AddressBookParser`.
 
 Finally, the relevant parsers read the clock via `LocalDateTime.now(clock)` to extract the correct `LocalDateTime` object as needed.
 
@@ -199,34 +199,31 @@ This `LocalDateTime` is passed into the `LastModifiedDateTime` constructor for f
 Furthermore, `LastModifiedDateTime` truncates the `LocalDateTime` to precision of seconds.
 
 Of note, this means that :
-* `LastModifiedDateTime` will have its notion of "current" time set to some time during parsing
-* It is possible to inject `Clock` objects for testing/extension into the following objects : `Logic`, `Model`, all `ClockDependentParsers` (including `AddressBookParser`)
-* `LastModifiedDateTime`s that vary by milliseconds will evaluate to be the same object
+* `LastModifiedDateTime` will have its notion of "current" time set to some time during parsing.
+* It is possible to inject `Clock` objects for testing/extension into the following objects : `Logic`, `Model`, all `ClockDependentParsers` (including `AddressBookParser`).
+* `LastModifiedDateTime`s that vary by milliseconds will be evaluated as the same object under `equals()`.
 
 ##### Summary of recommendations for future extension of commands that should modify the last-modified :
-* The command should implement `ClockDependentParser`
-* An instance of your parser class generated by `withClock` should be used to ensure proper clock synchronisation between your parser class and the parent `Logic` class
+* The command should implement `ClockDependentParser`.
+* An instance of your parser class generated by `withClock` should be used to ensure proper clock synchronisation between your parser class and the parent `Logic` class.
 * Your class should have a `Clock` object internally, and instantiate a `LastModifiedDateTime` using that `Clock` somehow.
 
 
 ### Schedule feature (implemented by Geoff)
 The user can schedule meetings with contacts.
 
-Through `ScheduleCommandParser`, the index of the person in the list and the field prefixes `i/` and `a/` (if there is) are read. Keywords are then parsed and read into a `ScheduleDescripter`
+Through `ScheduleCommandParser`, the index of the person in the list and the field prefixes `i/` and `a/` (if there is) are read. Keywords are then parsed and read into a `ScheduleDescriptor`
 object, where it is used construct a `ScheduleCommand` object.
 
 Through `ScheduleCommand#execute()`, the `scheduleDescriptor` is then used to create a `Person` object with the added or edited schedule and schedule name.
 Through `model#setPerson()`, the `Person` object created then replaces the original `Person` object in the list.
 
 The sequence diagram below shows the interaction between Logic and Model components after the API call `execute("schedule 1 {params}")`,
-where {params} refers to `i/2023-12-27-07-00 a/Seminar`
-![Interactions Between Logic and Model Components for the `schedule 1 i/2023-12-27-07-00 a/Seminar` Command](images/ScheduleSequenceDiagram.png)
-
+where {params} refers to `i/2023-12-27-07-00 a/Seminar`.
+<img src="images/ScheduleSequenceDiagram.png" width="1800"/>
 The reason behind implementing this feature this way is partly inspired by the prior implementation of edit feature in AB3.
 By using ScheduleDescriptor object, we are able to keep the same level of abstraction.
 
-An alternative is to create a ClearSchedule feature that clears the schedule and scheduleName, as the schedule feature can only
-write and override, but not remove.
 
 ### Clearing of schedule (implemented by Xavier)
 The sister command to the above command, this allows clearing of schedules.
@@ -240,20 +237,20 @@ Through `ClearScheduleCommand#execute()`, the `ClearScheduleDescriptor` is then 
 Through `model#setPerson()`, the `Person` object created then replaces the original `Person` object in the list.
 
 The sequence diagram below shows the interaction between Logic and Model components after the API call `execute("clearschedule 1")`
-![Interactions Between Logic and Model Components for the `clearschedule 1` Command](images/ClearScheduleSequenceDiagram.png)![Interactions Between Logic and Model Components for the `schedule 1 i/2023-12-27-07-00 a/Seminar` Command](images/ScheduleSequenceDiagram.png)
+![Interactions Between Logic and Model Components for the `clearschedule 1` Command](images/ClearScheduleSequenceDiagram.png)
 
-The reasoning behind this implementation mirrors the reasoning for the above schedule implementation, in wanting to continue the precedent set by the edit feature, and maintaining abstraction.
+The reasoning behind this implementation mirrors the reasoning for the above `schedule` implementation, in wanting to continue the precedent set by the edit feature, and maintaining abstraction.
 
 The reason the `ScheduleDescriptor` class is not re-used is to similarly attempt to reduce coupling, as `ScheduleDescriptor` is fairly tightly coupled to `Schedule` by necessity.
 
 ### Mark Feature (implemented by Angel)
 The user can mark contacts of interest through the Mark Command respectively.
 
-The `Mark` attribute has been added to the `Person` Model, and the boolean value of `markStatus` in the `Mark` Class is set to true via the method `mark()`.
+The `Mark` attribute has been added to the `Person` object, and the boolean value of `markStatus` in the `Mark` Class is set to true via the method `mark()`.
 
 When the `MarkCommand` is executed, `markPerson()` is called to the model object with the person chosen by index from the displayed person list.
 
-When a new `person` is created via the `AddCommand`, the markStatus is set to false by default.
+When a new `Person` is created via the `AddCommand`, the markStatus is set to false by default.
 
 If a contact has been marked, the UI will display "★" as the string representation for the `Mark` attribute, otherwise, it represents the attribute as "☆".
 
@@ -263,9 +260,7 @@ The following sequence diagram shows how the mark operation works:
 ### Unmark Feature (implemented by Angel)
 The user can un-mark contacts of interest through the UnMark Command.
 
-The `Mark` attribute has been added to the `Person` Model, and the boolean value of `markStatus` in the `Mark` Class is set to false via the method `unmark()`.
-
-When a new `person` is created via the `AddCommand`, the markStatus is set to false by default.
+The `Mark` attribute has been added to the `Person` object, and the boolean value of `markStatus` in the `Mark` Class is set to false via the method `unmark()`.
 
 If a contact has been un-marked, the UI will display "☆" as the string representation for the `Mark` attribute.
 
@@ -273,13 +268,13 @@ The following sequence diagram shows how the un-mark operation works:
 ![UnMarkSequenceDiagram](images/UnMarkSequenceDiagram.png)
 
 ### Detail Feature (implemented by Angel & Kwok Yong)
-The user can view the details of their contact by updating the PersonViewPanel().
+The user can view the details of their contact by updating the `PersonViewPanel`.
 
-Details include name, tags, phone number, email, company, job, lastModified, scheduled meetings, and notes.
+Details include name, tags, phone number, email, company, job, last modified date & time, scheduled meetings, and notes.
 
-Based on the index input from the user in the `DetailCommand`, the `Person` object at that index is retrieved.  The `detailedPerson` in `AddressBook` is set via the `setDetailedPerson(Person p)` in `Model`.
+Based on the index input from the user in the `DetailCommand`, the `Person` object at that index is retrieved.  The `detailedPerson` in `AddressBook` is set via `Model#setDetailedPerson(Person p)`.
 
-This Person object is updated and fed to the PersonViewPanel after `executeCommand(String commandText)` is executed. Displays "To view a person's detail, type 'detail INDEX'" if `Person` object is null.
+This Person object is updated and fed to the `PersonViewPanel` after `MainWindow#executeCommand(String commandText)` is executed. Displays "To view a person's detail, type 'detail INDEX'" if `Person` object is null.
 
 The following sequence diagram shows how the detail operation works:
 ![DetailSequenceDiagram](images/DetailSequenceDiagram.png)
@@ -295,7 +290,7 @@ Through `model#setPerson()`, the `Person` object created then replaces the origi
 
 The sequence diagram below shows the interaction between Logic and Model components after the API call `execute("note 1 o/This is a note!")`
 
-![Interactions Inside the Logic and Model Components for the `note 1 o/This is a note!` Command](images/NoteSequenceDiagram.png)
+<img src="images/NoteSequenceDiagram.png" width="1324" />
 
 Similar to the edit feature in AB3, by using NoteDescriptor object, we are able to keep the same level of abstraction. Moreover,
 it ensures the immutability of `Person`.
@@ -391,7 +386,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. Connexion shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
 **Use case: UC03 - Add a contact**
 
@@ -408,7 +403,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. Connexion shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
 **Use case: UC04 - Filter for contacts via a specified field**
 
@@ -426,13 +421,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. Connexion shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
 * 1b. The specified field requires keywords but none is provided.
 
     * 1b1. Connexion shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
 **Use case: UC05 - Update a contact**
 
@@ -451,13 +446,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1.  Connexion shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
 * 2b. Connexion detects an error in the entered details.
 
     * 2b1. Connexion shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
 **Use case: UC06 - Mark a contact**
 
@@ -476,7 +471,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. Connexion shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
 **Use case: UC07 - List details of a contact**
 
@@ -494,7 +489,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. Connexion shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
 **Use case: UC08 - Schedule a meeting with a contact**
 
@@ -513,20 +508,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1.  Connexion shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
 * 2b. Meeting time provided is invalid.
 
     * 2b1. Connexion shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
+* 2c. Meeting name provided is invalid.
 
-**Use case: UC09 - Clear schedule with a contact**
+    * 2c1. Connexion shows an error message.
+      
+    * Use case ends.
+
+**Use case: UC09 - Clear schedule of a contact**
 
 **MSS**
 
 1.  User <ins>lists contacts (UC01)</ins>.
-2.  User requests to clear schedule with a contact.
+2.  User requests to clear schedule of a contact.
 3.  Connexion clears the contact's schedule.
 4.  Connexion displays the contact with the schedule cleared.
 
@@ -538,7 +538,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. Connexion shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
 * 2b. No schedule is found for the contact.
 
@@ -563,43 +563,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. Connexion shows an error message.
 
-      Use case resumes at step 1.
+      Use case ends.
 
-* 2b. The note provided contains invalid characters.
+* 2b. The note provided is invalid.
 
     * 2a1. Connexion shows an error message.
 
-      Use case resumes at step 1.
-
+      Use case ends.
     
 ### Non-Functional Requirements
 
-1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed
-2. Setup should be possible without configuration (should just be running binaries)
-3. Should respond to all inputs within approx. 2 seconds maximum
-4. Final size of application should be under 50MB
-5. Should not run out of memory with 64MB RAM
-6. Only supports one user at a time
-7. Should be able to run with or without internet
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Setup should be possible without configuration (should just be running binaries).
+3. Should respond to all inputs within approx. 2 seconds maximum.
+4. Final size of application should be under 50MB.
+5. Should not run out of memory with 64MB RAM.
+6. Only supports one user at a time.
+7. Should be able to run with or without internet.
 8. Should NOT crash under recoverable circumstances, excluding irrecoverable errors like a `OutOfMemoryError`, application being killed, etc.
-9. Should be similar to other shell-like / terminal-like CLI for familiarity for tech field users
+9. Should be similar to other shell-like / terminal-like CLI for familiarity for tech field users.
 
 
 ### Glossary
 
-* **Clock**: A Java class, implemented by the app to keep track of current datetime
-* **CLI**: Command Line Interface
-* **Contact**: A person who is added to the list, containing details like name, phone number etc 
-* **Extensions**: Possible flow of events in use cases
-* **Field**: An attribute to a contact, used to input contact details or filter contacts
-* **GUI**: Graphical User Interface
-* **Index**: A number that references the position of contact in the contact list
-* **LastModifiedDateTime**: The latest datetime when a contact's detail was modified
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **MSS**: Main Success Scenario, assumes that nothing goes wrong in use cases
-* **Note**: A brief record attributed to a contact
-* **Person View Panel**: The right half of the GUI, used to view details of a contact 
-* **Schedule**: A plan for carrying out a process. Each contact can only have maximum one schedule
+* **Clock**: A Java class, implemented by the app to keep track of current datetime.
+* **CLI**: Command Line Interface.
+* **Contact**: A person who is added to the list, containing details like name, phone number etc.
+* **Extensions**: Possible flow of events in use cases.
+* **Field**: An attribute to a contact, used to input contact details or filter contacts.
+* **GUI**: Graphical User Interface.
+* **Index**: A number that references the position of contact in the contact list.
+* **LastModifiedDateTime**: The latest datetime when a contact's detail was modified.
+* **Mainstream OS**: Windows, Linux, Unix, OS-X.
+* **MSS**: Main Success Scenario, assumes that nothing goes wrong in use cases.
+* **Note**: A brief record attributed to a contact.
+* **PersonViewPanel**: The right half of the GUI, used to view details of a contact.
+* **Schedule**: A date & time for an event to occur with a contact. Each contact can only have maximum one schedule.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -618,20 +617,20 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder.
 
-   2. Double-click the jar file. <br>
+   2. [Run the jar file via command line](https://docs.oracle.com/javase/tutorial/deployment/jar/run.html). <br>
       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   2. Re-launch the app by double-clicking the jar file. <br>
+   2. Re-launch the app [via command line](https://docs.oracle.com/javase/tutorial/deployment/jar/run.html). <br>
        Expected: The most recent window size and location is retained.
 
 3. Exiting Connexion
    1. Click the Close Window button X on Connexion’s GUI.
    2. Type `exit` command in Connexion's Command box.
-   3. Click `File` on the top left of the GUI, and click Exit. 
+   3. Click `File` on the top left of the GUI, and click `Exit`. 
    
    Expected: Connexion will shut down.
 
@@ -639,9 +638,9 @@ testers are expected to do more *exploratory* testing.
 1. Adding a contact in Connexion.
    1. Prerequisites: Contact to be added does not currently exist in Connexion, in which duplicate contacts are detected by having the same name.
    2. Test case with all fields: `add n/Joseph Wong p/96790543 e/Josephwg@gmail.com c/DSTA j/Senior Developer t/supervisor`<br>
-      Expected: The details of the newly added contact is added onto the list view. Success message of adding the contact is displayed.
+      Expected: The details of the newly added contact is added onto the contact list view. Success message of adding the contact is displayed.
    3. Test case with all fields: `add n/Mary Leong p/87650245 e/Maryle0ng@gmail.com c/NUS j/Professor`<br>
-      Expected: The details of the newly added contact is added onto the list view without any tags. Success message of adding the contact is displayed.
+      Expected: The details of the newly added contact is added onto the contact list view without any tags. Success message of adding the contact is displayed.
    4. Test case: `add n/Bruce Wayne e/Imnotbatman@gmail.com c/ j/CEO t/millionaire` <br>
       Expected: No new contact is added as a compulsory field is missing. Error message for invalid command format is displayed.
    
@@ -652,10 +651,10 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
 
    2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
    3. Test case: `delete 0`<br>
-      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No contact is deleted. Error details shown in the status message. Contact list view remains the same.
 
    4. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
@@ -664,41 +663,41 @@ testers are expected to do more *exploratory* testing.
 1. Prerequisites: Contact to edited must already exist in Connexion and be displayed on the list view.
 2. Editing the name of a contact 
    1. Test case: `edit 1 n/Gordon Tan`<br>
-      Expected: The name of the contact at index 1 is changed to _Gordan Tan_.
+      Expected: Name of the contact at index 1 is changed to _Gordon Tan_.
    2. Test case: `edit 1 n/` <br>
-      Expected: name does not change. Error message is displayed.
+      Expected: Name does not change. Error message is displayed.
    3. Test case: `edit 1 n/John!!` <br>
-      Expected: name does not change. Error message is displayed.
+      Expected: Name does not change. Error message is displayed.
 3. Editing the phone number of a contact
    1. Test case: `edit 1 p/98331245`<br>
-      Expected: The phone number of the contact at index 1 is changed to _98331245_.
+      Expected: Phone number of the contact at index 1 is changed to _98331245_.
    2. Test case: `edit 1 p/`<br>
-      Expected: phone number does not change. Error message is displayed.
+      Expected: Phone number does not change. Error message is displayed.
    3. Test case: `edit 1 p/9833 1245`<br>
-      Expected: phone number does not change. Error message is displayed.
+      Expected: Phone number does not change. Error message is displayed.
    4. Test case: `edit 1 p/98`<br>
-      Expected: phone number does not change. Error message is displayed.
+      Expected: Phone number does not change. Error message is displayed.
 4. Editing the email of a contact
    1. Test case: `edit 1 e/dianaprinceww123@example.com`<br>
       Expected: The email of the contact at index 1 is changed to _dianaprinceww123@example.com_.
    2. Test case: `edit 1 e/`<br>
-      Expected: email does not change. Error message is displayed.
+      Expected: Email does not change. Error message is displayed.
    3. Test case: `edit 1 e/dianaprinceww123example.com`<br>
-      Expected: email does not change. Error message is displayed.
+      Expected: Email does not change. Error message is displayed.
 5. Editing the company of a contact
    1. Test case: `edit 1 c/Deloitte`<br>
-      Expected: The company of the contact at index 1 is changed to _Deloitte_.
+      Expected: Company of the contact at index 1 is changed to _Deloitte_.
    2. Test case: `edit 1 c/` <br>
-      Expected: company does not change. Error message is displayed.
+      Expected: Company does not change. Error message is displayed.
    3. Test case: `edit 1 c/Deloitte!`<br>
-      Expected: The company of the contact at index 1 is changed to _Deloitte!_.
+      Expected: Company of the contact at index 1 is changed to _Deloitte!_.
 6. Editing the job of a contact
    1. Test case: `edit 1 j/Senior Developer`<br>
-   Expected: The job of the contact at index 1 is changed to _Senior Developer_.
+      Expected: Job of the contact at index 1 is changed to _Senior Developer_.
    2. Test case: `edit 1 j/` <br>
-      Expected: job does not change. Error message is displayed.
+      Expected: Job does not change. Error message is displayed.
    3. Test case: `edit 1 j/Senior-Developer`<br>
-      Expected: The job of the contact at index 1 is changed to _Senior-Developer_.
+      Expected: Job of the contact at index 1 is changed to _Senior-Developer_.
 7. Editing the tags of a contact
     1. Test case: `edit 1 t/Valedictorian`<br>
        Expected: Contact at index 1 only has the tag _Valedictorian_.
@@ -729,7 +728,7 @@ testers are expected to do more *exploratory* testing.
 1. Prerequisites: Contacts must already exist in Connexion and be displayed on the list view.
 2. Filtering a contact by name
    1. Test case: `filter n/marcus` <br>
-      Expected: Displays all contacts with marcus (case-insensitive) in their name in the list view.
+      Expected: Displays all contacts with "marcus" (case-insensitive) in their name in the list view.
    2. Test case: `filter n/` <br>
       Expected: No filtering takes place. Error message is displayed.
 3. Filtering a contact by phone
@@ -739,17 +738,17 @@ testers are expected to do more *exploratory* testing.
        Expected: No filtering takes place. Error message is displayed.
 4. Filtering a contact by company
    1. Test case: `filter c/google` <br>
-      Expected: Displays all contacts with Google (case-insensitive) as their company in the list view.
+      Expected: Displays all contacts with "google" (case-insensitive) as their company in the list view.
    2. Test case: `filter c/` <br>
       Expected: No filtering takes place. Error message is displayed.
 5. Filtering a contact by job
     1. Test case: `filter j/ceo` <br>
-       Expected: Displays all contacts with CEO (case-insensitive) as their job in the list view.
+       Expected: Displays all contacts with "ceo" (case-insensitive) as their job in the list view.
     2. Test case: `filter j/` <br>
        Expected: No filtering takes place. Error message is displayed.
 6. Filtering a contact by tags
     1. Test case: `filter t/important` <br>
-       Expected: Displays all contacts with important (case-insensitive) as their tag in the list view.
+       Expected: Displays all contacts with "important" (case-insensitive) as their tag in the list view.
     2. Test case: `filter t/` <br>
        Expected: No filtering takes place. Error message is displayed.
 7. Filtering a contact by marked status
@@ -759,7 +758,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Displays all marked contacts (denoted by ★) in the list view.
 8. Filtering a contact by un-marked status
     1. Test case: `filter u/` <br>
-       Expected: Displays all um-marked contacts (denoted by ☆) in the list view.
+       Expected: Displays all un-marked contacts (denoted by ☆) in the list view.
     2. Test case: `filter u/important` <br>
        Expected: Displays all un-marked contacts (denoted by ☆) in the list view.
 
@@ -780,36 +779,36 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `schedule 1 i/2023-12-07-13-45 a/CS2103 Finals` <br>
       Expected: Contact at index 1 has a new scheduled meeting displayed on the person view panel, with the schedule name of `CS2103 Finals` and time at `7 Dec 2023, 13:45:00`
    3. Test case: `schedule 1 i/` <br>
-      Expected: No schedule is added due to missing index. Error message is displayed.
+      Expected: No schedule is added due to missing schedule time. Error message is displayed.
    4. Test case: `schedule 1 i/2023-13-01-13-45` <br>
       Expected: No schedule is added due to invalid datetime. Error message is displayed.
 
 ### Clearing a scheduled meeting
-1. Prerequisites: Contact to clear schedule must already have and existing schedule and be displayed on the list view.
+1. Prerequisites: Contact to clear scheduled meeting with must already have an existing schedule and be displayed on the list view.
 2. Clearing a schedule
    1. Test case: `clearschedule 1` <br>
       Expected: Contact at index 1 no longer has a schedule.
    2. Test case: `clearschedule 0` <br>
       Expected: No changes are made. Error message is displayed.
-   3. Other incorrect detail commands to try: `clearschedule`, `clearschedule x` (where x is larger than the list size)
+   3. Other incorrect detail commands to try: `clearschedule`, `clearschedule x` (where x is larger than the list size).
    
 ### Adding a note to a specific contact
-1. Prerequisites: Contact to add note to with must exist and be displayed on the list view.
+1. Prerequisites: Contact to add note to must exist and be displayed on the list view.
 2. Adding a note to a contact
    1. Test case: `note 1 o/This guy is really important!` <br>
       Expected: Contact at index 1 has the note _This guy is really important!_.
    2. Test case: `note 1` <br>
       Expected: No changes are made. Error message is displayed.
-   3. Other incorrect detail commands to try: `note`, `note x` (where x is smaller/larger than the list size)
+   3. Other incorrect detail commands to try: `note`, `note x` (where x is larger than the list size)
    
 ### Saving data
 <div markdown="span" class="alert alert-primary">:bulb: **Note about corrupted file:**
-If a JSON file is corrupted (see test case 2 and 3 below) upon launching Connexion, subsequent future commands (e.g. `add`) wipes out the corrupted JSON file and updates the file with new data from commands.
+If a JSON file is corrupted (see test case 2 and 3 below) upon launching Connexion, subsequent future commands (e.g. `add`) wipe out the corrupted JSON file and update the file with new data from commands.
 </div>
 
 1. Dealing with missing/corrupted data files
    1. Test case: Delete the file named `addressbook.json` in the data folder, relative to the path of the jar file. Launch the jar file. <br>
-      Expected: Shows the GUI with the default start page with a sample dataset.
+      Expected: Shows the GUI with the default start page with an example dataset.
    2. Test case: Edit the file named `addressbook.json` in the data folder, relative to the path of the jar file such that it does not have a valid JSON format. Launch the jar file. <br>
       Expected: Shows the GUI with the default start page. Contact list will be empty.
    3. Test case: Edit the file named `addressbook.json` in the data folder, relative to the path of the jar file such that a field does not have a valid input (e.g. name field has special characters). Launch the jar file. <br>
@@ -834,7 +833,7 @@ Given below are the fixes proposed to add in the near future.
         1. E.g. `at/` to add a tag.
         2. E.g. `et/` to mark a tag for editing, with whitespace-delimited before-after.
             1. I.e. `edit et/ before after` could change the tag `before` to the tag `after`.
-        3. `dt/` could delete a tag.
+        3. E.g. `dt/` could delete a tag.
 4. #### Substring enhancement for all fields
     1. Currently, for all features, any duplicate prefixes are not allowed. However, the user may want to enter prefixes as values such as `e/`, `n/` etc, through the app.
     2. This can result in user inconvenience in at least one of two ways :
@@ -844,20 +843,20 @@ Given below are the fixes proposed to add in the near future.
           1. E.g. If the user wants to add a company name "at and t/bellsouth", the user can enter "at and \t/bellsouth".
           2. E.g. If the user wants to add a job name like "Software Engineer e/brains", the user can enter "Software Engineer \e/brains".
 5. #### Enhance checking of schedule and scheduleName
-   1. Currently, upon editing the `addressbook.json` file in the data folder, `schedule` can exist in the app without `ScheduleName`, and vice-versa. However, this is an unintended behaviour as `schedule` should have a `scheduleName` and vice-versa.
-   2. Proposed solution: After reading from the `addressbook.json` file in the data folder, we can check `schedule` field and `scheduleName` field to make sure if one is empty and the other is not, it throws an error.
+   1. Currently, upon editing the `addressbook.json` file in the data folder, `Schedule` can exist in the app without `ScheduleName`, and vice-versa. However, this is an unintended behaviour as `Schedule` should have a `ScheduleName` and vice-versa.
+   2. Proposed solution: After reading from the `addressbook.json` file in the data folder, we can check `Schedule` field and `scheduleName` field to make sure if one is empty and the other is not, it is treated as an invalid field during JSON deserialization.
    
 6. #### Deal with text-wrapping and truncation in UI
-   1. The current implementation of the personViewPanel truncates text subjective to the window size, making users unable to view extremely long text even with text wrapping enabled in the UI.
+   1. The current implementation of the `PersonViewPanel` truncates text subjective to the window size, making users unable to view extremely long text even with text wrapping enabled in the UI.
    2. Current implementation also restricts note field to 1000 characters.
-   3. Proposed solution: To enable the personViewPanel to be scrollable, so when text is wrapped, the panel expands vertically so text is no longer truncated.
+   3. Proposed solution: To enable the `PersonViewPanel` to be scrollable, so when text is wrapped, the panel expands vertically so text is no longer truncated.
 
-7. #### Add "bubbling up" of error messages for index errors (and possibly other errors)
+7. #### Expand error messages for index errors (and possibly other errors)
    1. Currently, error messages for indices related to parsing failure do not display the underlying reason.
    2. The reason for this is a try-catch block in all `Parser` classes that catch invalid-format-index-related `ParseException`s and throw new `ParseException`s.
    3. The message contained within the `ParseException` thrown during index parsing is not used or displayed in any way.
       1. E.g. `edit 0` would display a message informing the user of the wrong format instead of that their index was wrong.
-      2. Other field errors, like `edit 1 n/inv@lid name`, which is invalid due to the `@` would inform the user of the fact that the name field was wrong.\
+      2. Other field errors, like `edit 1 n/inv@lid name`, which is invalid due to the `@` would inform the user of the fact that the name field was wrong.
       3. This could lead to potentially confusing error messages that are still accurate given the app's parsing rules.
         * E.g. `schedule 1 i/2023-10-10-10-10 n/test` would display a message relating to a wrong schedule time error, as `n/` is an invalid field and interpreted as part of the input to the `i/` parameter.
    4. Proposed solution 1 : Display the index error's message instead of the `Parser`'s error message.
@@ -872,3 +871,4 @@ Given below are the fixes proposed to add in the near future.
 8. #### Deal with input restriction in `Name`, `ScheduleName` field
     1. In the current implementation, `Name` and `ScheduleName` limit user input to alphanumeric characters. This may be a problem as for example, some people may want to add non-alphanumeric characters like "interview @ Marina Bay Office" into `ScheduleName` field, which is not allowed.
     2. Proposed solution: Change most disallowed inputs to be warnings instead of disallowing them.
+
