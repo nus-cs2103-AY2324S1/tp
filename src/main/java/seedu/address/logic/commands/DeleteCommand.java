@@ -88,6 +88,7 @@ public class DeleteCommand extends Command {
             model.deletePerson(person);
         }
 
+        // Delete event(s) with deleted person(s)
         List<Event> eventsToDelete = lastShownEventList.stream()
                 .filter(event -> personsToDelete.stream()
                         .anyMatch(person -> event.getPerson().isSamePerson(person)))
@@ -96,7 +97,6 @@ public class DeleteCommand extends Command {
         for (Event event : eventsToDelete) {
             model.deleteEvent(event);
         }
-
 
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
                 personsToDelete.size() == 1 ? Messages.format(personsToDelete.get(0))
