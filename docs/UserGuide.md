@@ -46,7 +46,7 @@ CheckMate is a **desktop app for streamlining the process of room bookings by ho
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![LandingGUI](images/Ui.png)
 
-5. Clicking on a booking will allow you to see its details.
+5. Double-clicking on a booking will allow you to see its details.
    ![ClickBooking.png](images%2FClickBooking.png)
 
 6. Here is a quick summary of the Graphical User Interface (GUI), or what you can see on your screen right now.
