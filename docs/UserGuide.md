@@ -99,6 +99,26 @@ Go to the [Table of Contents](#table-of-contents) to navigate to the feature tha
 5. If your UI looks **compressed and words are being cut off such as that seen below**, you should **resize** the window to a larger size by dragging the corners of the application window. The UI should now look like the example given above.<br>  
     ![Ui](images/UiCompressed.png)
 
+    **Here's what each part of the GUI signifies:**
+    ![UiBreakdown](images/uibreak.png)
+
+   | Colour                                                   | Component                   | Description                                                                                                                                    |
+   |----------------------------------------------------------|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+   | <img src="images/red_1.png" width="10px" height="10px">  | Menu Bar                    | Provides buttons for exiting, opening Help window, and opening Events window                                                                   |
+   | <img src="images/orange.png" width="10px" height="10px"> | Command Box                 | Allows you to enter a command                                                                                                                  |
+   | <img src="images/yellow.png" width="10px" height="10px"> | Result Display              | Displays the result of the command execution                                                                                                   |
+   | <img src="images/green.png" width="10px" height="10px">  | Candidate List Panel        | Displays a list of all candidates in JABPro                                                                                                    |
+   | <img src="images/blue.png" width="10px" height="10px">   | Candidate Card              | Displays certain details of a candidate for quick view, such as name, address, phone, email, tags, LinkedIn/Github username                    |
+   | <img src="images/purple.png" width="10px" height="10px"> | Candidate Information Panel | Displays a detailed view of a candidate, providing information of status and remarks, in addition to the basic information about the candidate |
+   | <img src="images/brown.png" width="10px" height="10px">  | Summary Statistics Panel    | Displays summary statistics for a particular candidate pertaining to a specific tag                                                            |
+
+    In addition, there are windows such as:
+* Help Window [accessed by the `help` command, or through Menu Bar]
+* Events Window [accessed by the `schedule` command, or through Menu Bar]
+* TagList window [accessed through the `listT` command]
+
+    Details for each have been provided with the respective commands.
+
 5. Type the command in the command box and press Enter to execute it.<br>
    Some example commands you can try:
 
@@ -342,25 +362,71 @@ Adds the username for their social profile [LinkedIn/Github] to the existing con
 
 Format: `addL INDEX u/USERNAME` or `addG INDEX u/USERNAME`
 
-* User is expected to enter a valid username for the specified social profile, and an account must exist
-* The username gets added as an attribute to the existing details of a candidate
+| Type                        | Parameter   | Constraints |
+|-----------------------------|-------------| ----------- |
+| Mandatory                   | `INDEX`     | `INDEX` must be a non-zero unsigned integer and it must not be greater than the total number of candidates in JABPro |
+| Mandatory [only the prefix] | `u/USERNAME` | `USERNAME` must be a string value |
 
-Examples:
-* `addG 2 u/MadLamprey`
-* `addL 4 u/aditya-misra`
+**Notes regarding `addL` and `addG` command:***
+
+* User is expected to ensure that `USERNAME` is a valid username for the respective social profile. If it is not a valid username, user will be redirected to the error page of the corresponding social profile when `linkedin` or `github` command is invoked. JABPro does not perform checks for the validity of the username for the corresponding social profile.
+* Invoking the `addL` or `addG` command for a candidate for whom a username has already been added, will simply overwrite the existing username with the new one.
+* User may run the command `addL INDEX u/` or `addG INDEX u/`, i.e providing no username, or simply providing blanks for the username. Such inputs are accepted by JABPro. However, it will prove to be erroneous when `linkedin` or `github` command is invoked.
+
+**Example of successful execution of the `addL` command:**
+
+1. Enter the command `addL 1 u/alexyeoh`
+2. This is the result of the successful `addL` command [It is assumed a candidate exists in JABPro]:
+
+![AddL](images/addL.png)
+
+`addG` command is invoked in the same way.
+
+**Example of failed execution of the `addG` command due to missing parameter:**
+
+1. Enter the command `addG 1`
+2. This is the result of the failed `addG` command:
+
+![AddGFailure](images/addLfail.png)
 
 ### Opening user LinkedIn or GitHub account: `linkedin` or `github`
 
-Redirect user to candidate's LinkedIn or Github account.
+Redirects user to candidate's LinkedIn or Github account.
 
 Format: `linkedin INDEX` or `github INDEX`
 
-* Browser window opens, showing the profile
-* If the user has not provided a valid username for the corresponding social profile, an appropriate message is displayed on the interface of the social profile (JABPro does not perform error handling for this case).
+| Type                        | Parameter   | Constraints |
+|-----------------------------|-------------| ----------- |
+| Mandatory                   | `INDEX`     | `INDEX` must be a non-zero unsigned integer and it must not be greater than the total number of candidates in JABPro |
 
-Examples:
-* `linkedin 1`
-* `github 2`
+**Notes regarding `LinkedIn` and `Github` commands:**
+
+* User is expected to enter `INDEX` for a candidate for whom username [that is not blank, or does not comprise of only spaces] has been added previously.
+* User is redirected to the page of the social profile regardless of the validity of the username for that particular social profile.
+
+**Example of successful execution of `github` command:**
+
+1. Enter the command `github 1`
+2. This is the result of the successful `github` command [It is assumed a candidate exists in JABPro, with Github username previously added]:
+
+![Github](images/linkedin.png)
+
+The Github window opens as follows, displaying the profile with the specified username, or error page in case profile with that username does not exist:
+
+![GithubProfile](images/github.png)
+
+`linkedin` command is invoked in the same manner.
+
+**Example of failed execution of `linkedin` command due to use of `INDEX` that does not have LinkedIn account associated with it:**
+
+1. Enter the command `linkedin 2`
+2. This is the result of the failed `linkedin` command [It is assumed there are more than one candidate in JABPro, with no username linked to the second candidate]:
+
+![LinkedInFailure](images/linkedinfail.png)
+
+`github` commands reacts in the same way in case of missing account.
+
+
 
 ### Listing all persons : `list`
 
@@ -685,15 +751,39 @@ Examples:
 
 ### Adding an Event: `event`
 
-Adds an event to JABPro.
+Adds an event, associated with a candidate, to JABPro.
 
 Format: `event INDEX d/DESCRIPTION bt/BEGIN_TIME et/END_TIME`
 
-* `BEGIN_TIME` and `END_TIME` must be in the format `yyyy-MM-dd HH:mm`
-* Event gets added to the current list of events, and also gets written to the `eventbook.json` file
+| Type                    | Parameter       | Constraints |
+|-------------------------|-----------------| ----------- |
+| Mandatory               | `INDEX`         | `INDEX` must be a non-zero unsigned integer and it must not be greater than the total number of candidates in JABPro |
+| Mandatory [only prefix] | `d/DESCRIPTION` | `DESCRIPTION` must be a string value |
+| Mandatory               | `bt/BEGIN_TIME` | `BEGIN_TIME` must be a valid date-time, in the format `yyyy-MM-dd HH:mm` |
+| Mandatory               | `et/END_TIME` | `END_TIME` must be a valid date-time, in the format `yyyy-MM-dd HH:mm` |
 
-Example:
-* `event 1 d/Interview bt/2023-10-27 18:00 et/2023-10-27 21:00` adds an event to the list, and stores the name of the person the event is associated with, the description, start time and end time, in a JSON file.
+**Notes regarding the `event` command:**
+
+* JABPro allows the addition of multiple events associated with the same candidate, having the same description. It is up to the user to provided detailed descriptions to distinguish events from one another.
+* Events added to JABPro can also be found in the `data/eventbook.json` file. Existing events are also read from the file when JABPro starts up.
+* Events with empty `DESCRIPTION`s can also be added. However, the prefix `d/` must still be present.
+
+**Example of successful execution of `event` command:**
+
+1. Enter the command `event 1 d/Interview bt/2023-11-12 10:00 et/2023-11-12 12:00`
+2. This is the result of the successful `event` command [It is assumed a candidate called Alex Yeoh exists in JABPro]:
+
+![Event](images/event.png)
+
+The changes in UI take place in the `Events Window`. Please find more details in [Viewing Events](UserGuide.md#viewing-events-schedule).
+
+**Example of failed execution of `event` command due to missing parameter:**
+
+1. Enter the command `event 1 d/Interview bt/2023-11-12 10:00`
+2. This is the result of the failed `event` command [It is assumed a candidate exists in JABPro]:
+
+![EventFailure](images/eventfail.png)
+
 
 ### Viewing events: `schedule`
 
@@ -701,10 +791,31 @@ Displays all events that have been added to JABPro.
 
 Format: `schedule`
 
-* Opens the `Events` window, which can also be accessed by clicking on `Events > Event` in the menu bar
+**Note regarding `schedule` command:**
 
-Example:
-* First, entering `event 1 d/Interview bt/2023-10-27 18:00 et/2023-10-27 21:00` adds the event, and entering `schedule` displays this event in a separate window, titled `Events`
+* `schedule` command will open the `Events` window regardless of whether there are events in JABPro or not.
+
+<box type="tip" seamless>
+
+**Tip:** The `Events` window can also be accessed by clicking `Events > Event` in the menu bar, located at the top of the window.
+        <img src="images/eventstab.png">
+
+
+</box>
+
+**Example of successful execution of `schedule` command:**
+
+1. Enter the command `schedule`
+2. This is the result of the successful `schedule` command [It is assumed that an event was previously added using the command `event 1 d/Interview bt/2023-11-12 10:00 et/2023-11-12 12:00]:
+
+![Schedule](images/schedule.png)
+
+The `Events` window opens up:
+
+![EventWindow](images/eventwin.png)
+
+There is no possibility of a "failed" execution of the `schedule` command.
+
 
 ### Clearing all entries : `clear`
 
