@@ -1093,7 +1093,7 @@ less relevant schedules are at the bottom of the list.
 * can type fast
 * prefers typing to mouse interactions
 
-**Value proposition**: help tuition centre managers easily track, schedule, and notify tutors of their upcoming schedule
+**Value proposition**: help tuition centre managers easily manage tutors and allocate their schedules without conflict.
 
 
 
