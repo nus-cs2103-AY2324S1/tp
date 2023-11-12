@@ -33,6 +33,13 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void parse_nonEmptyPreamble_throwsParseException() {
+        String rawFindCommand = "doo doo" + PREFIX_NAME + "Alice " + PREFIX_NAME + "Bob";
+        assertParseFailure(parser, rawFindCommand,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
