@@ -924,7 +924,7 @@ point for testers to work on; testers are expected to do more *exploratory* test
    2. Test case: `add n/name p/987 a/address e/email@email nk/nokname nkp/654`<br>
       Expected: New contact with the above details is added to the bottom of the list.
 
-   3. Test case: `add n/name`<br>
+   3. Test case: `add n/invalidName! p/987 a/address e/email@email nk/nokname nkp/654`<br>
       Expected: No person is added. Error details shown in the status message. Status bar remains the same.
 
 ### Editing a person
@@ -978,15 +978,69 @@ point for testers to work on; testers are expected to do more *exploratory* test
    3. Test case: `find n/Invalid Name!`<br>
       Expected: List remains unchanged. Error details shown in the status message. Status bar remains the same.
 
-2. Finding a person by tag or financial plan can be tested in a similar manner.
+2. Finding a person by tag or financial plan can be tested in a similar manner as above.
 
 ### Gathering emails
 
+1. Gathering emails by tag.
+
+   1. Prerequisites: At least 1 person in the contact book with the tag `TestTag`.
+
+   2. Test case: `gather t/Tag`<br>
+      Expected: The email of the person with the tag `TestTag` appears in the status message.
+
+   3. Test case: `gather t/WrongTag!`<br>
+      Expected: Error details shown in the status message. Status bar remains the same.
+
+2. Gathering emails by financial plan can be tested in a similar manner as above.
+
 ### Sorting the contact book
+
+1. Sorting by names.
+
+   1. Prerequisites: List all persons using the `list` command. At least 2 people in the contact book.
+
+   2. Test case: `sort name`<br>
+      Expected: The contact book is sorted by names in alphabetical order.
+
+   3. Test case: `sort names`<br>
+      Expected: List remains unchanged. Error details shown in the status message. Status bar remains the same.
+
+2. Sorting by appointments can be tested in a similar manner as above.
 
 ### Scheduling an appointment
 
+1. Scheduling an appointment.
+
+   1. Prerequisites: List all persons using the `list` command. At least 1 person in the contact book.
+
+   2. Test case: `schedule 1 ap/Appointment Name d/11-11-2025 09:00`<br>
+      Expected: The first person in the list is updated to contain the appointment details. The appointment sidebar is
+      updated as well.
+
+   3. Test case: `schedule 1 ap/Appointment Name d/11-30-2025 09:00`<br>
+      Expected: Error details shown in the status message. List, status bar and appointment sidebar remains the same.
+
 ### Completing an appointment
+
+1. Completing by index.
+
+   1. Prerequisites: List all persons using the `list` command. At least 1 person in the contact book with a scheduled
+      appointment.
+
+   2. Test case: `complete 1`<br>
+      Expected: Appointment details removed from the first person in the list. The appointment sidebar is updated as well.
+
+   3. Test case: `complete 0`<br>
+      Expected: Error details shown in the status message. List, status bar and appointment sidebar remains the same.
+
+2. Completing by appointment date.
+
+   1. Prerequisites: List all persons using the `list` command. Exactly 2 people in the contact book with a scheduled
+      appointment on `11-11-2025`.
+
+   2. Test case: `complete d/11-11-2025`<br>
+      Expected: Appointment details removed from the 2 people in the list. The appointment sidebar is updated as well.
 
 ### Saving data
 
