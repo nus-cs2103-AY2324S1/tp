@@ -243,7 +243,7 @@ state, and the `Current Selected Person` pointer will be pointing to the first p
 ![ViewState1](images/ViewState1.png)
 
 
-Step 2. The user executes `view 2` to view the 2nd person's details in the `DoConnek Pro`.
+Step 2. The user executes `view 2` to view the 2nd person's details in `DoConnek Pro`.
 The `view` command updates the `Current Selected Person` pointer with the corresponding index from the
 input. <br>
 
