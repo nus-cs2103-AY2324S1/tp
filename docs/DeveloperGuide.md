@@ -672,87 +672,144 @@ testers are welcomed to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 ### Adding a patient or specialist
-1. Adding a patient to the existing list.
-    
-    1. Recommendation: List all patients by entering `list -pa` to better observe the results.
 
-    2. Test case: `add -pa n/Abigail Lim p/89074463 e/abilim@test.com t/friends a/22 m/Bronchitis m/Fever`<br>
-       Expected: A patient by the name of Abigail Lim is added to the list of patients. The details of the newly added patient can be seen via the `view` command.
-   
-    3. Test case: `add -pa n/Abigail Lim e/abilim@test.com t/friends a/22 m/Bronchitis` (missing `p/PHONE` field)<br>
-    Expected: No patient is added to the list. Error message is shown in the command result box.
-   
-    4. Test Case: `add -pa n/Abigail Lim p/89074463 e/abilim@test.com t/friends a/twenty-two m/Bronchitis` (invalid `a/AGE` field)<br>
-       Expected: No patient is added to the list. Error message of accepted `a/AGE` format is shown.
+Adding a patient to the existing list.
+    
+1. Recommendation: List all patients by entering `list -pa` to better observe the results.
+
+2. Test case: `add -pa n/Abigail Lim p/89074463 e/abilim@test.com t/friends a/22 m/Bronchitis m/Fever`<br>
+   Expected: A patient by the name of Abigail Lim is added to the list of patients. The details of the newly added patient can be seen via the `view` command.
+
+3. Test case: `add -pa n/Abigail Lim e/abilim@test.com t/friends a/22 m/Bronchitis` (missing `p/PHONE` field)<br>
+Expected: No patient is added to the list. Error message is shown in the command result box.
+
+4. Test Case: `add -pa n/Abigail Lim p/89074463 e/abilim@test.com t/friends a/twenty-two m/Bronchitis` (invalid `a/AGE` field)<br>
+   Expected: No patient is added to the list. Error message of accepted `a/AGE` format is shown.
 
 Similar tests for adding a specialists can be done using the `add` command format for specified for specialists.
 
 ### Viewing a patient or specialist
 
-1. Viewing a patient while all patients are being shown in the list panel.
+Viewing a patient while all patients are being shown in the list panel.
 
-    1. Prerequisites: List all patients using the `list - pa` command. Multiple patients in the list.
+1. Prerequisites: List all patients using the `list - pa` command. Multiple patients in the list.
 
-    2. Test case: `view 1`<br>
-       Expected: First patient is selected to be viewed. Details of the viewed patient are shown in the view panel.
-       Details of the viewed patients is also displayed in the command result box.
+2. Test case: `view 1`<br>
+   Expected: First patient is selected to be viewed. Details of the viewed patient are shown in the view panel.
+   Details of the viewed patients is also displayed in the command result box.
 
-    3. Test case: `view 0`<br>
-       Expected: No person is viewed. Error details shown in command result box.
+3. Test case: `view 0`<br>
+   Expected: No person is viewed. Error details shown in command result box.
 
-    4. Other incorrect view commands to try: `view`, `view x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+4. Other incorrect view commands to try: `view`, `view x`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
 
 Similar tests for viewing a specialist can be done using the `view` command after listing all specialists via `list -sp` command.
 
 ### Editing a patient or specialist
 
-1. Editing a specialist while a specialist is being viewed in the view panel.
+ Editing a specialist while a specialist is being viewed in the view panel.
 
-    1. Prerequisites: Viewing a specialist in the view panel.
+1. Prerequisites: Viewing a specialist in the view panel.
 
-    2. Test case: `edit n/Jonathan Holland` (editing a single attribute)<br>
-       Expected: The name of the specialist being viewed is modified to **Jonathan Holland**.
+2. Test case: `edit n/Jonathan Holland` (editing a single attribute)<br>
+   Expected: The name of the specialist being viewed is modified to **Jonathan Holland**.
 
-    3. Test case: `edit n/John Holland p/88889009 s/Dentistry` (editing multiple attributes)<br>
-       Expected: The specialist being viewed is modified to have the **name John Holland** with **phone number 88889009** and has **Dentistry as a specialisation**.
+3. Test case: `edit n/John Holland p/88889009 s/Dentistry` (editing multiple attributes)<br>
+   Expected: The specialist being viewed is modified to have the **name John Holland** with **phone number 88889009** and has **Dentistry as a specialisation**.
 
-    4. Test case: `edit t/`(clearing tags)<br>
-       Expected: The specialist being viewed is modified to have no tags.
+4. Test case: `edit t/`(clearing tags)<br>
+   Expected: The specialist being viewed is modified to have no tags.
 
-    5. Test case: `edit n/`
-       Expected: The specialist being viewed is not modified. Error message indicating arguments cannot be blank is shown.
+5. Test case: `edit n/`<br>
+   Expected: The specialist being viewed is not modified. Error message indicating arguments cannot be blank is shown.
 
 Similar tests for editing a patient can be done using the `edit` command after viewing a patient in the view panel using the `view` command.
     
 ### Deleting a patient or specialist
 
-1. Deleting a person while all persons are being shown
+Deleting a specialist while all specialist are being shown.
 
-    1. Prerequisites: List all specialists using the `list -sp` command. Multiple specialists in the list.
+1. Prerequisites: List all specialists using the `list -sp` command. Multiple specialists in the list.
 
-    2. Test case: `delete 1`<br>
-       Expected: First specialist is deleted from the specialist list. Shorter details of the deleted specialists is shown in the command result box.
+2. Test case: `delete 1`<br>
+   Expected: First specialist is deleted from the specialist list. Shorter details of the deleted specialists is shown in the command result box.
 
-    3. Test case: `delete 2 3 4`<br>
-       Expected: Second, third and fourth specialist is deleted from the specialist list. Shorter details of the deleted specialists is shown in the command result box.
+3. Test case: `delete 2 3 4`<br>
+   Expected: Second, third and fourth specialist is deleted from the specialist list. Shorter details of the deleted specialists is shown in the command result box.
 
-    4. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message.
+4. Test case: `delete 0`<br>
+   Expected: No person is deleted. Error details shown in the status message.
 
-    5. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+5. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
 
 Similar tests for deleting a patient can be done by first listing all patients using the `list -pa` command with multiple patients listed.
 
 ### Finding patients or specialists
-_To be added._
+
+Finding a patient that has been added into the patient list.
+
+1. Prerequisites: Follow the instructions for adding a patient for manual testing above [here](#adding-a-patient-or-specialist).
+
+2. Test case: `find -pa n/Abigail`<br>
+   Expected: The patient list displays patients with name containing "Abigail" only.
+
+3. Test case: `find -pa n/Abigail m/Bronchitis` (multiple arguments)<br>
+   Expected: The patient list displays patients with the name containing "Abigail" _**and**_ has "Bronchitis" in their medical history.
+
+4. Test case: `find -pa a/` (blank `a/AGE` field)<br>
+   Expected: No changes can be observed from the patient list. Error message indicating arguments cannot be blank is shown in the command result box.
+
+Similar tests for finding specialists can be conducted by using the `find` command with a multiple specialists in the specialist list.
 
 ### Undo and redo commands
-_To be added._
+
+Undo and redo commands executed successfully.
+
+Test case:
+
+1. Enter `theme dark` followed by `theme light`<br>
+   Expected: Colour theme of the application changes from dark mode to light mode.
+
+2. Enter `undo`<br>
+   Expected: Colour theme of the application changes to dark mode.
+
+3. Enter `redo`<br>
+   Expected: Colour theme of the application changes to light mode.
+
+4. Enter `add -pa n/Charlie Wong p/89073323 e/cwong@test.com t/neighbour a/35 m/Flu`<br>
+   Expected: A patient by the name of "Charlie Wong" is added to the patient list.
+
+5. Enter `redo`<br>
+   Expected: No changes is made to the patient list. Error message indicating no command to be undone is displayed in result box.
+
+6. Enter `undo`<br>
+   Expected: The patient previously added in step 5 is removed from the patient list.
 
 ### Shortcut aliases
-_To be added._
+
+1. Adding a shortcut alias for `list` command
+
+   1. Test case: `addsc sc/ls kw/list` followed by `ls -pa`<br>
+   Expected: New shortcut alias `ls` is added. Command result box displays message of successful mapping. All patients are listed upon entering `ls -pa`.
+
+   2. Test case: `addsc sc/ls kw/list`<br>
+   Expected: No new shortcut alias is added. Command result box displays message of shortcut alias already existing.
+   
+   3. Test case: `addsc sc/ls kw/delete` (same shortcut alias but different command keyword)<br>
+   Expected: New shortcut alias is added, `ls` now behaves like a `delete` command. The command result box displays a message of the new mapping of `ls` to `delete` command.
+             A message of the removal of the old mapping of `ls` to `list` command is displayed as well.
+
+2. Deleting a shortcut alias
+
+    1. Prerequisite: Follow the manual testing instructions **adding shortcut alias** written above. No other shortcut alias has been previously added.
+   
+    2. Test case: `delsc sc/ls`<br>
+       Expected: Shortcut alias `ls` is removed. Using `ls` instead of `delete` command now results in an unknown command error being displayed in the command result box.
+
+    3. Test case: `delsc sc/remove` (deleting non-existent shortcut alias)<br>
+       Expected: No shortcut alias is removed. The command result box displays a useful error message indicating shortcut alias was not previously registered.
 
 ## **Appendix: Planned Enhancements**
 
