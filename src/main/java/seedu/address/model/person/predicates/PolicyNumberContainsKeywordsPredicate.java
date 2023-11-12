@@ -14,8 +14,7 @@ public class PolicyNumberContainsKeywordsPredicate extends FieldPredicates {
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
+        return !person.hasDefaultPolicy() && keywords.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
                         person.getPolicy().getPolicyNumber().value, keyword));
     }
 

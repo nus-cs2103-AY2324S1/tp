@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.predicates.RemindPredicate;
@@ -37,5 +38,27 @@ public class RemindCommand extends Command {
         model.updateFilteredPersonList(remindPredicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof RemindCommand)) {
+            return false;
+        }
+
+        RemindCommand otherFindCommand = (RemindCommand) other;
+        return remindPredicate.equals(otherFindCommand.remindPredicate);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("remind predicate", remindPredicate)
+                .toString();
     }
 }
