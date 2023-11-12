@@ -17,7 +17,6 @@ Choose a topic from the table of contents below to find out how to manage your c
 * Table of Contents
 {:toc}
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 # Quick start
@@ -68,7 +67,7 @@ Choose a topic from the table of contents below to find out how to manage your c
 
 --------------------------------------------------------------------------------------------------------------------
 
-# ***If you're new***: What are Commands?
+# **If you're new**: what are commands?
 
 Commands start with a command word.
 
@@ -129,7 +128,7 @@ The examples in this guide are formatted with the following conventions:
 
     e.g. The ***list*** command does not take in any parameters. If the command `list 123` is entered, it will be interpreted as `list`.
 
-<div>
+</div>
 
 [↑ Back to Table of Contents](#table-of-contents)
 
@@ -379,22 +378,6 @@ On the left, we have Connectify's statistics which shows:
 
 On the right, we have the follow-ups section which shows upcoming follow-ups. Follow-up dates are determined automatically by the latest interaction date and the lead of the client.
 
-<details>
-<summary>Detailed explanation of follow-up calculation</summary>
-<br>
-The follow up date is calculated by the day of last interaction plus a follow-up period, determined by lead type as shown:
-
-| LeadType | Follow-Up Time |
-|----------|----------------|
-| HOT      | 1 week         |
-| WARM     | 4 weeks        |
-| COLD     | 8 weeks        |
-| UNKNOWN  | 4 weeks        |
-
-
-Say your last interaction with John is on 1st Jan 2021 and he is a HOT lead. The follow-up date will be 1 week after 1st Jan 2021, which is 8th Jan 2021. 
-</details>
-
 [↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -496,6 +479,21 @@ delete 1
 --------------------------------------------------------------------------------------------------------------------
 
 # Miscellaneous Notes
+
+## Follow-up Calculation
+
+The follow-up date is calculated by the day of last interaction plus a follow-up period, determined by lead type as shown:
+
+| LeadType | Follow-Up Time |
+|----------|----------------|
+| HOT      | 1 week         |
+| WARM     | 4 weeks        |
+| COLD     | 8 weeks        |
+| UNKNOWN  | 4 weeks        |
+
+
+For example, if your last interaction with John is on `1 Jan 2021` and he is a `HOT` lead, the follow-up date will be 1 week after `1 Jan 2021`, which is `8 Jan 2021`.
+
 
 ## Command history
 You can use the up arrow key <kbd>&uarr;</kbd> to view your past commands and press <kbd>Enter</kbd> to execute them again.
