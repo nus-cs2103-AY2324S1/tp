@@ -28,6 +28,9 @@ deactivate ListCommandParser
 DeckParser -> ListCommandParser : parse("list t/CS2103T")
 activate ListCommandParser
 
+ListCommandParser -> ListCommandParser : parseQuestionPrefix()
+ListCommandParser -> ListCommandParser : parseTagPrefix()
+
 create ListCommand
 ListCommandParser -> ListCommand : new ListCommand(predicates)
 activate ListCommand
