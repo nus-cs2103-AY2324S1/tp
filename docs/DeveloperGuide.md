@@ -989,11 +989,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse. 
 4. The commands should be intuitive to use and easy to remember for the average user (i.e. no complex commands)
-5. The system should be usable by a novice who has never managed HR data 
-6. The product is not required to handle the printing of reports 
+5. The system should be usable by a novice who has never managed HR data before, without a steep learning curve.
+6. The product is required to handle the export of reports as text files, but not their printing.
 7. The app only supports English.
-
-*{More to be added}*
+8. The system should be able to recover from crashes gracefully, and should not corrupt the data file if one occurs.
+9. The system should provide clear and comprehensive error messages in the event of invalid user input.
+10. The system should have a low resource footprint, i.e. it should not consume a lot of memory or CPU resources.
 
 ### Glossary
 
