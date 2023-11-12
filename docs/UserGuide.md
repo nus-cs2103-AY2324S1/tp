@@ -317,6 +317,9 @@ After using FumbleLog `find_person` or `find_all` command which filters the cont
 
 Format: `list_persons`
 
+**Notes on the `list_persons` command:**
+* Any text after `list_persons` command will be ignored and the command will be executed as normal.
+
 > Below are some examples on how to use `list_persons` command:
 >
 > * `list_persons`: Lists all your saved contacts in FumbleLog.
@@ -465,6 +468,8 @@ FumbleLog also allows you to quickly search for events whose name or groups cont
 
 Format: `find_event KEYWORD [MORE_KEYWORDS]`
 
+**Acceptable values for each parameter:**
+
 | Parameter                    | Format                                                                     | Example             |
 |------------------------------|----------------------------------------------------------------------------|---------------------|
 | `KEYWORD`  or `MORE_KEYWORDS` | Use any characters including whitespace. Must not only contain whitespaces | `Alice` or `Friends` |
@@ -493,12 +498,18 @@ Input: `find_event meeting family`
 
 ### Listing all events: `list_events`
 
-Displays all events stored in FumbleLog.
-
-- Events are sorted by date and time, with the earliest event at the top of the list.
-- You should see a list of all events under the Events column.
+After using FumbleLog `find_event` or `find_all` command which filters the event list, you can use `list_events` to display the full event list again.
 
 Format: `list_events`
+
+**Below is an example on how to use `list_persons` command:**
+* `list_persons`: Lists all your saved contacts in FumbleLog.
+
+
+**Notes on the `list_events` command:**
+- Events are sorted by date and time, with the earliest event at the top of the list.
+- Any text after the `list_events` command will be ignored and the command will be executed as normal.
+
 
 [Scroll back to Table of Contents](#table-of-contents)
 
@@ -507,9 +518,12 @@ Format: `list_events`
 
 ### Show all upcoming events and birthdays : `remind`
 
-Shows all events and birthdays that are happening in the next specified number of days.
+If you would like to have a quick overview of your upcoming commitments, you can use the `remind` command and FumbleLog will display all upcoming 
+events and birthdays.
 
 Format: `remind [NUMBER_OF_DAYS]` 
+
+
 
 * Shows all events and birthdays happening in the next `[NUMBER_OF_DAYS]` days.
 * If `[NUMBER_OF_DAYS]` is not specified, the default value is 7 days.
