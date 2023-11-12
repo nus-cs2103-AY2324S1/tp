@@ -21,6 +21,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
@@ -68,6 +70,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-W12-2/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -86,6 +90,8 @@ The `UI` component,
 * produces a calendar function, allowing users to easily observe the daily count of employees on leave.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -117,6 +123,8 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-W12-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -130,7 +138,7 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -149,15 +157,17 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Read feature
+### Read feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed implementation involves the ReadCommand and some associated classes:
+The implementation involves the ReadCommand and some associated classes:
 
 * `ReadCommand` — This class is responsible for executing the "Read" command. It parses the user input, retrieves information from the model, and passes the results to the UI for display.
 
@@ -213,23 +223,19 @@ The user enters the command "read 1 /a" and executes it. The command is then par
   * Pros: User-friendly, especially when users are more likely to identify persons by name.
   * Cons: This may result in slower execution when many persons exist in the address book.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
+<div style="page-break-after: always;"></div>
 
 ### Deductions and Benefits
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed deductions and benefits feature comprises 2 sub-features:
+The deductions and benefits feature comprises 2 sub-features:
 
 1. Add Deduction Feature
 2. Add Benefit Feature
 
 #### 1. Add Deduction Feature
-The proposed Add Deduction feature is facilitated by `Deduction`, `DeductCommand`, `DeductCommandParser`, `Person`, `PayrollStorage`, `Payroll` and `Salary` classes.
+The Add Deduction feature is facilitated by `Deduction`, `DeductCommand`, `DeductCommandParser`, `Person`, `PayrollStorage`, `Payroll` and `Salary` classes.
 
 The `Deduction` class is responsible for storing the deduction data for a specific employee.
 
@@ -298,7 +304,7 @@ The following activity diagram summarises the process of adding deduction for an
 ![AddDeductionActivityDiagram](images/AddDeductionActivityDiagram.png)
 
 #### 2. Add Benefit Feature
-The proposed Add Benefit feature is facilitated by `Benefit`, `BenefitCommand`, `BenefitCommandParser`, `Person`, `PayrollStorage`, `Payroll` and `Salary` classes.
+The Add Benefit feature is facilitated by `Benefit`, `BenefitCommand`, `BenefitCommandParser`, `Person`, `PayrollStorage`, `Payroll` and `Salary` classes.
 
 The `Benefit` class is responsible for storing the benefit data for a specific employee.
 
@@ -367,11 +373,13 @@ The following activity diagram summarises the process of adding benefit for an e
 
 ![AddBenefitActivityDiagram](images/AddBenefitActivityDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Payroll
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed payroll feature comprises 1 sub-features:
+The payroll feature comprises 1 sub-feature:
 
 1. Payroll Calculation Feature
 
@@ -452,11 +460,13 @@ The following activity diagram summarises the process of payroll calculation for
 
 ![PayrollCalculationActivityDiagram](images/PayrollCalculationActivityDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Payslip Generation
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed payslip generation feature is facilitated by `PayslipGenerator`, `PayslipCommand` and `PayslipCommandParser` classes.
+The payslip generation feature is facilitated by `PayslipGenerator`, `PayslipCommand` and `PayslipCommandParser` classes.
 
 The `PayslipGenerator` class is responsible for generating the payslip for a specific employee.
 
@@ -513,17 +523,20 @@ The following activity diagram summarises the process of generating a payslip fo
 
 ![PayslipActivityDiagram](images/PayslipActivityDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Leave Tracking
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed leave tracking feature comprises 2 sub-features:
+The leave tracking feature comprises 3 sub-features:
 
 1. Add Leave Feature
 2. Delete Leave Feature
+3. View Leave Feature
 
 #### 1. Add Leave Feature
-The proposed Add Leave feature is facilitated by `AnnualLeave`, `AddLeaveCommand`, `AddLeaveCommandParser` and `Person` classes.
+The Add Leave feature is facilitated by `AnnualLeave`, `AddLeaveCommand`, `AddLeaveCommandParser` and `Person` classes.
 
 The `AnnualLeave` class is responsible for storing the leave data for a specific employee.
 
@@ -560,7 +573,7 @@ The following activity diagram summarises the process of adding leave for an emp
   * Cons: Not much useful information that can be used (e.g. we do not know the working status of each employee for each day)
 
 #### 2. Delete Leave Feature
-The proposed Delete Leave feature is facilitated by `AnnualLeave`, `DeleteLeaveCommand`, `DeleteLeaveCommandParser` and `Person` classes.
+The Delete Leave feature is facilitated by `AnnualLeave`, `DeleteLeaveCommand`, `DeleteLeaveCommandParser` and `Person` classes.
 
 The `AnnualLeave` class is responsible for storing the leave data for a specific employee.
 
@@ -597,7 +610,7 @@ The following activity diagram summarises the process of adding leave for an emp
     * Cons: Can be confusing to users as to what have been deleted, and also harder to maintain.
 
 #### 3. View Leave Feature
-The proposed View Leave feature is facilitated by `ViewLeaveCommandParser`and `ViewLeaveCommand`
+The View Leave feature is facilitated by `ViewLeaveCommandParser`and `ViewLeaveCommand`
 
 The `ViewLeaveCommand` class is responsible for executing the `viewleave` command.
 
@@ -629,11 +642,13 @@ The following activity diagram summarises the process of viewing leave for an em
     * Pros: Simpler implementation, providing a quick count of employees on leave.
     * Cons: Users only obtain the number of employees on leave without individual details.
 
+<div style="page-break-after: always;"></div>
+
 ### Attendance 
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed attendance marking feature comprises 2 sub-features:
+The attendance marking feature comprises 2 sub-features:
 1. Mark attendance feature
 2. Attendance Report feature
 
@@ -700,6 +715,8 @@ Sequence diagram is as shown below:
     
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -724,7 +741,7 @@ Sequence diagram is as shown below:
 
 **Value proposition**: Contact management app to simplify and centralize information for full-time employees. It offers easy access to essential details such as name, email, phone number, address, bank accounts, salary, joining date, and annual leave. With all the information, the app can help to track employees’ annual leave and also generate their payroll automatically. This helps to reduce errors and enhance overall operational efficiency. This results in time and cost savings, improved organization, and a smoother workflow for your business.
 
-
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -746,13 +763,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user                                       | have the ability to sort employees by their join date/salary                                            | make informed decisions and efficiently manage the workforce based on the sorted list.        |
 | `*`      | user                                       | have an application capable of detecting and preventing the input of duplicate employee information     | ensure the system does not mix up or duplicate payroll data and also helps to prevent errors. |
 
-*{More to be added}*
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
 (For all use cases below, the **System** is the `ManaGease` and the **Actor** is the `user`, unless specified otherwise)
 
-<u>**Use case: UC01 – Add a new full-time employee**</u>
+**<ins>Use case: UC01 – Add a new full-time employee</ins>**
 
 **Guarantees:**
 * Entered employee will be added.
@@ -793,11 +811,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br>
 
-<u>**Use case: UC02 – List all employees**</u>
+**<ins>Use case: UC02 – List all employees</ins>**
 
 **MSS**
 1. User requests to list all employees.
 2. ManaGease displays all the employees in the employee database.
+  
+   Use case ends.
 
 **Extensions**
 
@@ -807,7 +827,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
     Use case ends.
 
-<u>**Use case: UC03 – Edit information of existing full-time employee**</u>
+**<ins>Use case: UC03 – Edit information of existing full-time employee</ins>**
 
 **Pre-conditions:**
 * Employee to edit should exist in the list.
@@ -826,9 +846,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. Invalid command parameters are given.
 
- 	* 3a1. ManaGease shows an error message.
+  * 3a1. ManaGease shows an error message.
 
-       Use case continues from step 3.
+    Use case continues from step 3.
 
 * 3b. Same information is given to edit the person to.
 
@@ -836,7 +856,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br>
 
-<u>**Use case: UC04 – View one piece of information on a full-time employee**</u>
+**<ins>Use case: UC04 – View one piece of information on a full-time employee</ins>**
 
 **Guarantees:**
 * Information required from the specified employee will be displayed for the user.
@@ -863,7 +883,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br>
 
-<u>**Use case: UC05 – Delete and existing employee**</u>
+**<ins>Use case: UC05 – Delete and existing employee</ins>**
 
 **Guarantees:**
 * Entered employee will be deleted.
@@ -903,7 +923,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br>
 
-<u>**Use case: UC06 – Add deductions/benefits to the monthly salary of an employee**</u>
+**<ins>Use case: UC06 – Add deductions/benefits to the monthly salary of an employee</ins>**
 
 **Guarantees:**
 * Specified employee's deductions/benefits for the month will be added.
@@ -931,7 +951,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br>
 
-<u>**Use case: UC07 – Generate a PDF payslip for a specific employee**</u>
+**<ins>Use case: UC07 – Generate a PDF payslip for a specific employee</ins>**
 
 **Pre-conditions:**
 * Employee to generate payslip for to should be in the list.
@@ -949,19 +969,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. Invalid command parameters are given.
+* 3a. Invalid command parameters are given.
 
-    * 1a1. ManaGease shows an error message.
+    * 3a1. ManaGease shows an error message.
 
       Use case resumes at Step 3.
 
-* 2a. Template file for the payslip is not found.
+* 4a. Template file for the payslip is not found.
 
-    * 2a1. ManaGease shows an error message, requesting user to add a template file for payslip.
+    * 4a1. ManaGease shows an error message, requesting user to add a template file for payslip.
 
       Use case ends.
 
-<u>**Use case: UC08 – Add leave for a specific employee**</u>
+**<ins>Use case: UC08 – Add leave for a specific employee</ins>**
 
 **Guarantees:**
 * Specified employee's days of leave will be added –– they will be considered taken.
@@ -1000,7 +1020,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes at Step 3.
 
 
-<u>**Use case: UC09 – Delete leave from a specific employee**</u>
+**<ins>Use case: UC09 – Delete leave from a specific employee</ins>**
 
 **Guarantees:**
 * Specified employee's days of leave will be deleted –– they will no longer be considered taken.
@@ -1038,7 +1058,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
     Use case resumes at Step 3.
 
-<u>**Use case: UC10 – View employee who is on leave on a specific date**</u>
+**<ins>Use case: UC10 – View employee who is on leave on a specific date</ins>**
 
 **Guarantees:**
 * Employees who are on leave on that specific date will be displayed to the user.
@@ -1063,8 +1083,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. ManaGease shows an error message.
 
       Use case resumes at Step 3.  
-    
-<u>**Use case: UC11 – Mark an employee's attendance**</u>
+
+**<ins>Use case: UC11 – Mark an employee's attendance</ins>**
 
 **MSS**
 1. User <u>lists the employees</u>.(UC02)
@@ -1101,7 +1121,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-<u>**Use case: UC12 – Calculate the monthly payroll of an employee**</u>
+**<ins>Use case: UC12 – Calculate the monthly payroll of an employee</ins>**
 
 **Guarantees:**
 * Specified employee's payroll details for the month will be displayed.
@@ -1113,7 +1133,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User <u>lists the employees</u>.(UC02)
 2. ManaGease shows a list of all the employees.
 3. User requests to calculate monthly payroll of an employee.
-5. ManaGease displays a a message containing the payroll details.
+5. ManaGease displays a message containing the payroll details.
 
    Use case ends.
 
@@ -1133,8 +1153,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br>
 
-*{More to be added}*
-
+<div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
 
@@ -1144,7 +1163,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. The application is designed and available exclusively in the English language.
 5. The application is not required to handle the printing of the reports.
 
-*{More to be added}*
 
 ### Glossary
 
@@ -1153,9 +1171,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Employee**: A staff in the company
 * **Parameters**: 
 
-### Future Enhancements
+### Planned Enhancements
 1. Modify the `add` feature to restrict the user from adding employees with the same name but in different cases (e.g. John Tan and john tan).
-    This can be done by modifying the `equals()` method in the `Person` class to ignore the case of the name, i.e. changing `name.equals(other.name)` to `name.toLowerCase().equals(other.name.toLowerCase())`.
+    This can be done by modifying the `equals()` method in the `[Person](https://github.com/AY2324S1-CS2103T-W12-2/tp/blob/master/src/main/java/seedu/address/model/person/Person.java)` class to ignore the case of the name, i.e. changing `name.equals(other.name)` to `name.toLowerCase().equals(other.name.toLowerCase())`.
 
 
 --------------------------------------------------------------------------------------------------------------------
