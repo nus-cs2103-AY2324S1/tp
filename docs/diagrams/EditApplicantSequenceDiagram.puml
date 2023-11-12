@@ -1,0 +1,77 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EditApplicantCommandParser" as EditApplicantCommandParser LOGIC_COLOR
+participant "e:EditApplicantCommand" as EditApplicantCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("edita 1 /name Johnny Doe /phone 91234567")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("edita 1 /name Johnny Doe /phone 91234567")
+activate AddressBookParser
+
+create EditApplicantCommandParser
+AddressBookParser -> EditApplicantCommandParser
+activate EditApplicantCommandParser
+
+EditApplicantCommandParser --> AddressBookParser
+deactivate EditApplicantCommandParser
+
+AddressBookParser -> EditApplicantCommandParser : parse("1 /name Johnny Doe /phone 91234567")
+activate EditApplicantCommandParser
+
+create EditApplicantCommand
+EditApplicantCommandParser -> EditApplicantCommand
+activate EditApplicantCommand
+
+EditApplicantCommand --> EditApplicantCommandParser : e
+deactivate EditApplicantCommand
+
+EditApplicantCommandParser --> AddressBookParser : e
+deactivate EditApplicantCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditApplicantCommandParser -[hidden]-> AddressBookParser
+destroy EditApplicantCommandParser
+
+AddressBookParser --> LogicManager : e
+deactivate AddressBookParser
+
+LogicManager -> EditApplicantCommand : execute()
+activate EditApplicantCommand
+
+EditApplicantCommand -> Model : getFilteredApplicantList()
+activate Model
+
+Model --> EditApplicantCommand
+deactivate Model
+
+EditApplicantCommand -> Model : setApplicant(applicantToEdit, editedApplicant)
+activate Model
+
+Model --> EditApplicantCommand
+deactivate Model
+
+create CommandResult
+EditApplicantCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditApplicantCommand : result
+deactivate CommandResult
+
+EditApplicantCommand --> LogicManager : result
+deactivate EditApplicantCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
