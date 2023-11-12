@@ -30,7 +30,7 @@ public class Leave {
     }
 
     /**
-     * Returns true if the appointment date is in the valid format.
+     * Returns true if the leave date is in the valid format.
      *
      * @param test Date to be tested.
      * @return True if the date is in the valid format.
@@ -42,18 +42,6 @@ public class Leave {
             return false;
         }
         return true;
-    }
-
-    /**
-     * Returns true if the date is the present date or in the future.
-     *
-     * @param test Date to be tested.
-     * @return True if date is not in the past.
-     */
-    public static boolean isFutureDate(String test) {
-        LocalDate currDate = LocalDate.now();
-        LocalDate testDate = LocalDate.parse(test, VALID_DATE_FORMAT);
-        return !testDate.isBefore(currDate);
     }
 
     @Override
