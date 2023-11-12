@@ -435,6 +435,69 @@ The `lookup` command is facilitated by `LookupCommand` and `LookupCommandParser`
     * Pros: Users have more flexibility when searching for students.
     * Cons: There will be more coupling between classes.
 
+**Aspect: Criteria Validation**
+* **Alternative 1 (current choice):** The `LookupCommandParser` does not apply any validation to the user input.
+    * Pros: Easy to implement.
+    * Cons: Users may enter invalid criteria for lookup, and the `LookupCommand` will still be executed. This can cause some confusion for the user.
+
+* **Alternative 2:** The `LookupCommandParser` will apply validation to the user input.
+    * Pros: Less confusion for the user, and behaviour is consistent with other commands.
+    * Cons: The implementation will be more complicated.
+
+**Aspect: Criteria Combination for complicated lookup**
+
+* **Alternative 1 (current choice):** Within a field the operation is _OR_, and between fields the operation is _AND_.
+
+    For example, `lookup n/alex david c/T11 T12` will have the criteria:
+    ```
+    (name contains alex OR david) AND (class number is T11 OR T12)
+    ```
+
+    * Pros: The behaviour is consistent with other commands.
+    * Cons: This combination may not be intuitive for the user.
+
+* **Alternative 2:** The combination can be specified by the user.
+
+    For example (Proposed), `lookup n/alex \AND david \OR c/T11 \OR T12` will have the criteria:
+    ```
+    (name contains alex AND david) OR (class number is T11 OR T12)
+    ```
+
+    * Pros: The user can specify any combination of criteria.
+    * Cons: The command will be more complicated to implement. As it involves changing the `LookupCommandParser` and the `StudentContainsKeywordsPredicate` class. In addition, the syntax can be confusing for the user.
+
+
+### Theme feature
+
+The `theme` command allows TAs to toggle/switch between _light_ and _dark_ themes.
+
+#### Implementation
+The `theme` feature is facilitated by the `ThemeCommand`, and inside the `Model` component, the `UserPrefs` class stores the current color theme settings. 
+
+Here is a step by step example of how the theme command might be executed.
+
+1. The user inputs the `theme` command.
+2. The `Logic` component will receive the input and create a new `ThemeCommand` object.
+3. When `ThemeCommand` is executed, it will call `Model#toggleTheme()` to update the color theme settings in the `UserPrefs` class.
+4. The `MainWindow` class in the `UI` component will then fetch the new color theme settings from the `UserPrefs` class.
+5. The `MainWindow` class will then update the GUI color theme accordingly.
+
+Below is a sequence diagram that shows how the `theme` command is executed.
+
+<puml src="diagrams/ThemeSequenceDiagram.puml" alt="Theme Sequence Diagram" />
+
+#### Design considerations:
+
+**Aspect: Fetching the new color theme setting**
+
+* **Alternative 1 (current choice):** The `MainWindow` class fetches the new color theme through the `Logic` component.
+  * Pros: Easy to implement.
+  * Cons: Additional operations are required to fetch the new setting from the `UserPrefs` class.
+
+* **Alternative 2:** The new setting is contained in the `CommandResult` object.
+  * Pros: The `MainWindow` class can use the new setting directly from the `CommandResult` object.
+  * Cons: The `CommandResult` class will be modified to contain the new setting.
+
 
 ### Class Details feature
 
@@ -560,7 +623,7 @@ The following sequence diagram will show what happens when a user executes a `vi
 
 The following activity diagram will show what happens when a user executes a `view` command:
 
-<puml src="diagrams/ViewCommandActivityDiagram/puml" alt="ViewCommandActivityDiagram" />
+<puml src="diagrams/ViewCommandActivityDiagram.puml" alt="ViewCommandActivityDiagram" />
 
 #### Design Considerations
 
