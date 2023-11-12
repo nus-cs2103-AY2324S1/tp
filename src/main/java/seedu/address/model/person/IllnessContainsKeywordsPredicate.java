@@ -29,6 +29,27 @@ public class IllnessContainsKeywordsPredicate implements Predicate<Person> {
                 });
     }
 
+    private boolean areStringListsEqualCaseInsensitive(List<String> keywords1, List<String> keywords2) {
+        // Check if both lists have the same size
+        if (keywords1.size() != keywords2.size()) {
+            return false;
+        }
+
+        // Iterate through the elements and compare them in a case-insensitive manner
+        for (int i = 0; i < keywords1.size(); i++) {
+            String str1 = keywords1.get(i);
+            String str2 = keywords2.get(i);
+
+            // Use equalsIgnoreCase for case-insensitive comparison
+            if (!str1.equalsIgnoreCase(str2)) {
+                return false;
+            }
+        }
+
+        // If all elements are equal, return true
+        return true;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -42,7 +63,7 @@ public class IllnessContainsKeywordsPredicate implements Predicate<Person> {
 
         IllnessContainsKeywordsPredicate otherIllnessContainsKeywordsPredicate =
                 (IllnessContainsKeywordsPredicate) other;
-        return keywords.equals(otherIllnessContainsKeywordsPredicate.keywords);
+        return areStringListsEqualCaseInsensitive(keywords, otherIllnessContainsKeywordsPredicate.keywords);
     }
 
     @Override
