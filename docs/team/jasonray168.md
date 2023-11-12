@@ -12,7 +12,6 @@ Given below are my contributions to the project.
 * **New Attribute**: [OvertimeHours]
     * What it represents: It keeps track of the number of overtime hours taken by an employee.
     * Justification: Users will need to keep track of employee overtime hours to make changes their bonus salary and performance measures.
-
 * **New Feature**: [Sort]
     * What it does: It sorts the list of all employees based on a field and an order.
     * Justification: Users will want to check for employee with the highest salary, the highest overtime hours taken, etc.
@@ -30,11 +29,12 @@ Given below are my contributions to the project.
 
 * **Project management**: Reviewing and approving pull requests on GitHub, assign bug issues to my account on GitHub.
 
-* **Enhancements to existing features**:
-
 * **Documentation**:
-    * User Guide: Added guides for sort, add leave, and delete leave features.
-    * Developer Guide: Added implementation guide for sort feature.
+    * User Guide: Add guides for sort, add leave, and delete leave features.
+    * Developer Guide:
+      * Add implementation details for sort and delete leave features.
+      * Add instructions for manual testing for sort and delete leave features.
+      * Add details for planned enhancements.
 
 * **Community**:
 

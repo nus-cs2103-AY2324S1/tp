@@ -62,7 +62,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -246,22 +246,33 @@ _{Explain here how the data archiving feature will be implemented}_
 
 #### Implementation
 
-The proposed sorting mechanism is facilitated by `UniqueEmployeeList`. It implements the following operations:
+The sorting mechanism is facilitated by `SortCommandParser`. It implements the following operations:
 
-* `UniqueEmployeeList#sortEmployees(String attribute)` — sorts the internal list according to the attribute given.
+* `SortCommandParser#parse()` — Parses the input arguments by storing the prefixes of its respective values as an `ArgumentMultimap`,
+and creates a new `SortCommand` object with the parsed field and order.
 
-These operations are exposed in the `Model` interface as `Model#updateSortedEmployeeList(String attribute)`,  and in `AddressBook `class as `AddressBook#sortEmployees(String attribute)`
+The `SortCommand` object then communicates with the `Model` API by calling the following methods:
 
-Given below is an example usage scenario where the user attempts to sort the list by salary.
+* `Model#updateSortedEmployeeList(field, order)` — Calls `sortEmployees` method of `AddressBook` class.
+* `AddressBook#sortEmployees(field, order)` — Calls `sortEmployees` method of `UniqueEmployeeList` class.
+* `UniqueEmployeeList#sortEmployees(field, order)` — Sorts the internal list according to the field and order given.
 
-The user keys in `sort f/ salary`
+The following sequence diagram below shows how the sort operation works:
 
-the `sort` command will call `Model#updateSortedEmployeeList()`, which in turn calls `AddressBook#sortEmployees()`
-which then calls `UniqueEmployeeList#sortEmployees()`.
+![Sort Sequence Diagram](images/SortSequenceDiagram.png)
 
-This will call the `List#sort()` method of the observable list `internalList`, which contains the full list of employees.
+Given below is an example usage scenario for the command:
 
-Finally, the update to the internalList will change the view of the displayed list in the GUI.
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `sort f/FIELD in/ORDER` command in the CLI
+(note that only `name`, `salary`, `overtime` and `leaves` fields, as well as `asc` and `desc` orders are valid).
+
+**Step 3**: The list of all employees in the employee book will be sorted accordingly.
+
+The following activity diagram summarizes what happens when a user executes the sort command:
+
+![Sort Activity Diagram](images/SortActivityDiagram.png)
 
 #### Design considerations:
 
@@ -647,6 +658,61 @@ Given below is an example usage scenario for the command.
     * Pros: More OOP, follows the Single Responsibility Principle by not having `AddLeaveCommand#execute()` perform the editing directly.
     * Cons: Longer command execution, requires more parts to work together.
 
+
+### Delete Leave feature
+
+The delete leave feature allows HouR to delete employee leaves.
+
+#### Implementation
+
+The delete leave command mechanism is facilitated by `DeleteLeaveCommandParser`. It implements the following operations:
+
+The delete leave command mechanism is facilitated by the `DeleteLeaveCommandParser` class which extends the `AddressbookParser`.
+
+`DeleteLeaveCommandParser#parse()` overrides  `Parser#parse()` in the Parser interface.
+
+`DeleteLeaveCommandParser` implements the following operations:
+
+* `DeleteLeaveCommandParser#parse()` — Parses the input arguments by storing the prefixes of its respective values as an `ArgumentMultimap`, and creates a new `DeleteLeaveCommand` object with the parsed employee ID, start date and end date.
+
+The `DeleteLeaveCommand` object then communicates with the `Model` API by calling the following methods:
+
+* `Model#setEmployee(Employee, Employee)` — Sets the employee in the existing employee list to the new `Employee` object which has been edited by `DeleteLeaveCommand#execute()`.
+* `Model#updateFilteredEmployeeList(Predicate)` — Updates the view of the application to show all employees.
+
+The method `DeleteLeaveCommand#execute()` returns a `CommandResult` object, which stores information about the completion of the command.
+
+The following sequence diagram below shows how the operation of deleting a leave appointment works:
+
+![Delete Leave Sequence Diagram](images/DeleteLeaveSequenceDiagram.png)
+
+Given below is an example usage scenario for the command:
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `deleteleave id/EMPLOYEE_ID from/START_DATE to/END_DATE` command in the CLI.
+* `START_DATE` and `END_DATE` are inputs of format `yyyy-MM-dd`.
+
+**Step 3**: Leave appointments that fall between the start and end dates will be deleted from the employee specified with the employee ID input.
+* If no leave appointments exist between the start and end dates, an error will be produced and shown to the user.
+
+The following activity diagram summarizes what happens when a user executes the delete leave command:
+
+![Delete Leave Activity Diagram](images/DeleteLeaveActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: Model-Employee Interaction:**
+
+* **Alternative 1 (current choice)**: Utilise `model#setEmployee` to add the edited employee into the model, doing the direct editing in AddLeaveCommand#execute().
+    * Pros: Maintain immutability within Employee and Model classes.
+    * Cons: Potentially violates the Single Responsibility Principle.
+
+* **Alternative 2**: Create methods in model specifically to edit the `leaveList` attribute of the employee.
+    * Pros: More OOP, follows the Single Responsibility Principle by not having `DeleteLeaveCommand#execute()` perform the editing directly.
+    * Cons: Longer command execution, requires more parts to work together, which can cause more bugs.
+
+
 ### Edit Leave feature
 
 The edit leave feature allows HouR to edit employee leaves.
@@ -669,7 +735,7 @@ The method `EditLeaveCommand#execute()` returns a new `CommandResult` object, wh
 
 The following sequence diagram below shows how the edit leave operation works:
 
-![Edit Leaave Sequence Diagram](images/EditLeaveSequenceDiagram.png)
+![Edit Leave Sequence Diagram](images/EditLeaveSequenceDiagram.png)
 
 Given below is an example usage scenario for the command:
 
@@ -1032,7 +1098,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Shutdown using the UI
 
-   1. Click the `X` button on the top right corner of the window.<br>
+   1. Click the `X` button in the top right corner of the window.<br>
        Expected: The window closes.
 
 1. Shutdown using the `exit` command
@@ -1173,6 +1239,37 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `report`<br>
       Expected: Invalid command format error message is shown in the status bar.
 
+
+### Sorting a list
+
+1. Sorting the list of employees while all employees are being shown
+
+   1. Prerequisites: List all employees using the `list` command. At least 1 employee is in the list.
+
+   2. Test case: `sort f/salary in/asc`<br>
+   Expected: Employees will be sorted based on their salaries in ascending order. 
+   Details of the sorted employee list shown in the status message.
+
+   3. Test case: `sort f/phone in/asc` or `sort f/department in/desc`<br>
+   Expected: List is not sorted (field phone cannot be used to sort). Error details shown in the status message.
+
+   4. Test case: `sort f/name in/ascending` or `sort f/department in/random`<br>
+   Expected: List is not sorted (order parameter can only be asc or desc). Error details shown in the status message.
+
+   5. Test case: `sort f/name` or `sort in/desc`<br>
+   Expected: List is not sorted (missing parameters). Error details shown in the status message.
+   
+   6. Test case: `sort f/name in/` or `sort f/ in/desc`<br>
+      Expected: List is not sorted (empty parameters). Error details shown in the status message.
+
+2. Sorting the list of employees when only some employees are being shown
+
+   1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
+
+   2. Try the test cases in the previous section (Sorting the list of employees while all employees are being shown)
+      Expected: Same as the previous section
+
+
 ### Adding Leave for an Employee
 
 1. Adding leave while all employees are being shown
@@ -1200,15 +1297,54 @@ testers are expected to do more *exploratory* testing.
      Expected: No employee leave is added (leave date(s) already exists). Error details shown in the result display.
 
    8. Test case: `addleave id/EID1234-5678 from/2023-12-05 to/2023-12-04`<br>
-     Expected: No employee leave is added (invalid date order). Error details shown in the result display.
+      Expected: No employee leave is added (invalid date order). Error details shown in the result display.
 
-1. Adding leave while only some employees are being shown 
+2. Adding leave while only some employees are being shown 
 
    1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
      Employee with id "EID1234-5678" has leaves "2023-11-11" and "2023-11-12" and is not in displayed list.
 
    2. Try the test cases in the previous section (Adding leave while all employees are being shown)
      Expected: Same as the previous section
+
+
+### Deleting Leave for an Employee
+
+1. Deleting leave while all employees are being shown
+
+   1. Prerequisites: List all employees using the `list` command. At least 1 employee is in the list.
+      Employee with employee ID "EID1234-5678" is in the list, and has leaves "2023-12-01", "2023-12-02", and "2023-12-03".
+
+   2. Test case: `deleteleave id/EID1234-5678 from/2023-12-01 to/2023-12-02`<br>
+      Expected: The leave dates "2023-12-01" and "2023-12-02" are deleted from the leave list of the employee with ID "EID1234-5678".
+      Details of the employee's leave list shown in the result display.
+
+   3. Test case: `deleteleave id/EID0000-0000 from/2023-12-04 to/2023-12-05`<br>
+      Expected: No employee leave is deleted (ID does not exist). Error details shown in the result display.
+
+   4. Test case: `deleteleave id/EID12345678 from/2023-12-04 to/2023-12-05` or `deleteleave id/EID1234-5678 from/2023-30-11 to/2023-30-11`<br>
+      Expected: No employee leave is deleted (incorrect field format). Error details shown in the result display.
+
+   5. Test case: `deleteleave id/ from/2023-12-04 to/2023-12-05` or `deleteleave id/EID1234-5678 from/ to/2023-12-05` or `deleteleave id/EID1234-5678 from/2023-12-04 to/`<br>
+      Expected: No employee leave is deleted (empty fields). Error details shown in the result display.
+
+   6. Test case: `deleteleave from/2023-12-04 to/2023-12-05` or `deleteleave id/EID1234-5678 to/2023-12-05` or `deleteleave id/EID1234-5678 from/2023-12-04`<br>
+      Expected: No employee leave is deleted (missing parameters). Error details shown in the result display.
+
+   7. Test case: `deleteleave id/EID1234-5678 from/2023-12-05 to/2023-12-04`<br>
+      Expected: No employee leave is deleted (invalid date order). Error details shown in the result display.
+
+   8. Test case: `deleteleave id/EID1234-5678 from/2023-12-04 to/2023-12-05`<br>
+      Expected: No employee leave is deleted (no leaves exist between "2023-12-04" and "2023-12-05"). Error details shown in the result display.
+
+2. Deleting leave while only some employees are being shown
+
+   1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
+      Employee with id "EID1234-5678" has leaves "2023-12-01", "2023-12-02", and "2023-12-03" and is not in displayed list.
+
+   2. Try the test cases in the previous section (Deleting leave while all employees are being shown)
+      Expected: Same as the previous section
+
 
 ### Editing Leave for an Employee
 
@@ -1390,7 +1526,7 @@ There were a few challenging features, such as the `sort` command, which require
 
 Writing our own tests as well as modifying existing tests, while not particularly difficult, was quite time-consuming, and required us to spend a significant amount of time understanding the existing tests and how they worked.
 
-Finally, writing documentation was a novel experience to us, and necessitated both a deep understanding of the codebase as well as a good grasp of documentation best practices. Making UML diagrams for the documentation was a particular challenge because of our inexperience with coding in UML. However, after writing the documentation for a few methods, the rest were relatively straightforward to write.
+Finally, writing documentation was a novel experience to us, and necessitated both a deep understanding of the codebase and a good grasp of documentation best practices. Making UML diagrams for the documentation was a particular challenge because of our inexperience with coding in UML. However, after writing the documentation for a few methods, the rest were relatively straightforward to write.
 
 Given the challenges we faced and the novelty of some parts of the project, we would rate the difficulty level of this project as **π/5**.
 
@@ -1404,7 +1540,7 @@ Initially, we had a hard time understanding the architecture of the project. We 
 
 * **Forking workflow**
 
-Initially, we started with the forking workflow for our project, which was extremely tedious and time-consuming, and led to a lot of merge conflicts. We had to spend a lot of time resolving merge conflicts, and this slowed down our development process. Also, it was difficult to contribute to each others' code, and even minor revisions required a long, inefficient process of sync'ing the fork, resolving merge conflicts, making the revision, creating a pull request, and merging it. We eventually switched to the branching workflow for v1.3, which was much more efficient and streamlined while maintaining our code quality.
+Initially, we started with the forking workflow for our project, which was extremely tedious and time-consuming, and led to a lot of merge conflicts. We had to spend a lot of time resolving merge conflicts, and this slowed down our development process. Also, it was difficult to contribute to each other's code, and even minor revisions required a long, inefficient process of syncing the fork, resolving merge conflicts, making the revision, creating a pull request, and merging it. We eventually switched to the branching workflow for v1.3, which was much more efficient and streamlined while maintaining our code quality.
 
 * **Renaming `person` to `employee`**
 
@@ -1445,3 +1581,111 @@ One of the things that we are most proud of is the bettering of the UI. Though t
 Another feature we are proud of is our `report` feature that allows our users to generate reports as txt files for each employee. While it might not contain a lot of information yet, we believe that it was a great starting point considering the time-constraint we had for this project and we plan to extend and further develop this feature, improving the experience for our users.
 
 Overall, we are proud of our project and we believe that we have done our best with all the constraints and challenges we faced. We are happy with the result and believe that our product will meet the needs of our target audience.
+
+## Planned Enhancements
+
+### Remark not shown in GUI employee list
+
+Problem:
+* In our current implementation, the remark is not displayed on the employee list in GUI. 
+* Users have to use report command to display employee remarks in message box.
+
+Solution:
+* We will update the employee card in the GUI to display remarks of the employees upon clicking on it.
+* This is to ensure the displayed employee card is not cluttered with too much information.
+
+### Deleting a remark requires typing the whole remark
+
+Problem:
+* In our current implementation, deleting a remark requires the user to type in the remark exactly as it is
+  typed in when added, i.e. exactly as it is shown in the message box.
+* This can be tedious, especially for long remarks.
+
+Solution:
+* A solution is to address a remark by its index (based on date added) instead of its value, so that
+  `deleteremark id/EMPLOYEE_ID 1` is enough to delete the first remark of employee with
+  employee id EMPLOYEE_ID.
+
+### Adding a leave with a date far in the past and future
+
+Problem:
+* In our current implementation, users are able to add a leave for an employee with date that is too far in the past
+  and in the future, such as `1111-11-11` and `2222-12-12`.
+* While users should be able to add a past and future dates as leaves for record keeping purposes,
+  we see that being able to input a date this extreme is excessive and highly unrealistic.
+
+Solution:
+* We will enhance the leave list so that there are three separate lists, one for the current year, one for the previous year, and one for the following year.
+* Users will only be allowed to add leave dates that fall within the time period of the beginning of the previous year to the end of the following year,
+  and the number of annual leaves allocated will be calculated accordingly.
+* For example, users will be able to add leave dates that fall in 2022, 2023, and 2024. Leaves taken in each year will be tracked separately.
+
+### No efficient way to view a specific employee's leave dates
+
+Problem:
+* In our current implementation, users can only view which employees are on leave on specific dates using `listleave` command.
+  There is currently no specific command that allows users to view leave dates taken by a specific employee.
+* The list of an employee's leave date can only be displayed when a user adds, edits, or deletes a leave date of that employee.
+
+Solution:
+* A possible solution is to display the leaves taken by an employee when the user executes a report command on the employee.
+
+### Two employees are allowed to have the same phone number or email
+
+Problem:
+* In our current implementation, adding an employee with the same phone number or email as another existing employee is allowed.
+* This is caused by our decision to only check same employee by comparing by employee id.
+* This might lead to unintended duplicates.
+
+Solution:
+* We will update the check for the same employee to check not only by employee id but also by phone number and email.
+
+### Unable to view the number of leaves remaining when adding a leave period that exceeds maximum number of leaves
+
+Problem:
+* In our current implementation, if a user tries to add a leave for an employee but that exceeds the maximum number of allowed employee leaves,
+  the app only displays an error message telling the user it exceeds the remaining number of leaves.
+* However, the app does not show the remaining number of leaves, so the fastest method is to use report command to display the current amount of
+  leaves taken by the employee and perform manual subtraction to obtain remaining number of leaves.
+
+Solution:
+* We plan to revamp the error messages pertaining to this issue to display as much information as possible to the user, 
+  in this case the remaining number of leaves.
+* In this case, it is to change the error message into this:<br>
+  `This leave period exceeds the number of leaves remaining for this employee`<br>
+  `Number of leaves remaining: 1`
+
+### Unclear error message for invalid email address
+
+Problem:
+* In our current implementation, when a user keys in an invalid email address, the error message shown is very long and slightly inconsistent.
+* This will highly confuse users who have very complex email addresses and keys the wrong email address by mistake.
+
+Solution:
+* We intend to keep error messages as short but as unambiguous as possible, so that users are able to identify
+  their misinputs and fix them accordingly.
+* In this case, it is to shorten the email error message into this:<br>
+  `Emails should be of the format local-part@domain-name and adhere to the following constraints:`<br>
+  `1. The local-part should only contain alphanumeric , +, _, ., or - characters.
+   The local-part must not start or end with any special characters.`<br>
+  `2. The domain-name is made up of domain labels separated by either hyphens or periods. The domain name must:`<br>
+     `- end with a domain label at least 2 characters long.`<br>
+     `- have each domain label contain only alphanumeric characters.`<br>
+
+### Edit command error message is inconsistent with respect to invalid id
+
+Problem:
+* In our current implementation, when a user inputs an invalid index in an edit command, the error messages
+  differ with different user inputs.
+* If index is less than one, i.e. 0 and below, the error message indicates an invalid command format due to the parser
+  checking if index is less than one.
+* If index is more than number of employees currently displayed, the error message only indicates an invalid index due to the
+  command class being the one checking if index is too high.
+* This inconsistency between error messages on the same issue can be confusing for users.
+
+Solution:
+* We plan to let the command class take care of determining whether an index is invalid or not while the parser class
+  only needs to check if index is an integer.
+* This will establish consistency when a user inputs a wrong index regardless if it's below one or above current number
+  of employees displayed.
+* It will still keep the invalid command format error message if index input is not an integer.
