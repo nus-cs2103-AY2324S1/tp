@@ -61,7 +61,7 @@ Before reading the rest of the UserGuide, here are some quick tips on how the re
 
    * *Warning boxes* provide warnings about certain outcomes that might be undesirable if executed.
 
-     <box tyoe="warning" seamless>
+     <box type="warning" seamless>
 
      **Warning:** This is a warning box.
 
@@ -208,7 +208,7 @@ The size of the `attendanceTracker` and `classParticipationTracker` arrays must 
 
 <box type="warning" seamless>
 
-**Caution:**
+**Warning:**
 If your changes to the data file make its format invalid (missing value pairs or not matching the configured tutorial and assignment count), **Class Manager 2023** will discard all data and start with an empty data file at the next run. Hence, creating a backup of the file before editing is recommended.
 
 </box>
@@ -223,7 +223,7 @@ If your changes to the data file make its format invalid (missing value pairs or
 
 <box type="warning" seamless>
 
-**Caution:**
+**Warning:**
 Configuring **Class Manager 2023** resets all students' class information (grades, attendance and class participation details), as well as the past states of **Class Manager 2023**. This **cannot** be undone using the `undo` command. It is recommended to configure **Class Manager 2023** before adding students.
 </box>
 
@@ -794,44 +794,44 @@ Possible error and their corresponding message:
 # Command summary
 
 ## Essential commands
-| Action                                                                  | Format, Examples                                                            |
-|-------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| Action                                                                   | Format, Examples                                                            |
+|--------------------------------------------------------------------------|-----------------------------------------------------------------------------|
 | [**Configure Class Manager 2023**](#configure-class-manager-2023-config) | `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`<br> e.g. `config #t/10 #a/3` |
-| [**Open help window**](#open-help-window-help)                          | `help`                                                                      |
+| [**Open help window**](#open-help-window-help)                           | `help`                                                                      |
 
 ## Miscellaneous commands
-| Action                                                       | Format, Examples                                 |
-|--------------------------------------------------------------|--------------------------------------------------|
-| [**Exit Class Manager 2023**](#exit-class-manager-2023-exit) | `exit`                                           |
-| [**View command history**](#view-command-history-history)    | `history`                                        |
-| [**Load a save file**](#load-a-save-file-load)               | `load f/FILE_NAME`<br> e.g. `load f/sample`      |
+| Action                                                           | Format, Examples                                 |
+|------------------------------------------------------------------|--------------------------------------------------|
+| [**Exit Class Manager 2023**](#exit-class-manager-2023-exit)     | `exit`                                           |
+| [**View command history**](#view-command-history-history)        | `history`                                        |
+| [**Load a save file**](#load-a-save-file-load)                   | `load f/FILE_NAME`<br> e.g. `load f/sample`      |
 | [**Randomly select students**](#randomly-select-students-random) | `random NUMBER_OF_STUDENTS` <br> e.g. `random 2` |
-| [**Redo a command**](#redo-a-command-redo)                   | `redo`                                           |
-| [**Undo a command**](#undo-a-command-undo)                   | `undo`                                           |
-| [**Toggle UI theme**](#toggle-ui-theme-theme)                | `theme`                                          |
+| [**Redo a command**](#redo-a-command-redo)                       | `redo`                                           |
+| [**Undo a command**](#undo-a-command-undo)                       | `undo`                                           |
+| [**Toggle UI theme**](#toggle-ui-theme-theme)                    | `theme`                                          |
 
 ## Student list commands
-| Action                                                   | Format, Examples                                                                                                                                             |
-|----------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [**Add a student**](#add-a-student-add)                  | `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com s/A0245234A c/T11 t/friend` |
-| [**Comment on a student**](#comment-on-a-student-comment) | `comment s/STUDENT_NUMBER cm/COMMENT` <br> e.g. `comment s/A0249112A cm/This student is very hardworking.`                                                   |
-| [**Delete all students**](#delete-all-students-clear)    | `clear`                                                                                                                                                      |
-| [**Delete one student**](#delete-one-student-delete)     | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                                      |
-| [**Edit a student's details**](#edit-a-students-details-edit) | `edit STUDENT_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`<br> e.g.`edit A0245234A n/John Bob p/98761234 e/johnd@exp.com`    |
-| [**List all students**](#list-all-students-list)         | `list`                                                                                                                                                       |
-| [**Lookup students**](#lookup-students-lookup)           | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                                                   |
-| [**Tag a student**](#tag-a-student-tag)                  | `tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag s/A0123456N t/smart t/shy`                                                                  |
+| Action                                                         | Format, Examples                                                                                                                                             |
+|----------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [**Add a student**](#add-a-student-add)                        | `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com s/A0245234A c/T11 t/friend` |
+| [**Comment on a student**](#comment-on-a-student-comment)      | `comment s/STUDENT_NUMBER cm/COMMENT` <br> e.g. `comment s/A0249112A cm/This student is very hardworking.`                                                   |
+| [**Delete all students**](#delete-all-students-clear)          | `clear`                                                                                                                                                      |
+| [**Delete one student**](#delete-one-student-delete)           | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                                      |
+| [**Edit a student's details**](#edit-a-student-s-details-edit) | `edit STUDENT_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`<br> e.g.`edit A0245234A n/John Bob p/98761234 e/johnd@exp.com`    |
+| [**List all students**](#list-all-students-list)               | `list`                                                                                                                                                       |
+| [**Lookup students**](#lookup-students-lookup)                 | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                                                   |
+| [**Tag a student**](#tag-a-student-tag)                        | `tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag s/A0123456N t/smart t/shy`                                                                  |
 
 ## Class information commands
-| Action                                                                                          | Format, Examples                                                                                                         |
-|-------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
-| [**Mark a student as absent**](#mark-a-student-as-absent-absent)                                | `absent s/STUDENT_NUMBER tut/TUTORIAL_SESSION` <br> e.g. `absent s/A0245234A tut/1`                                      |
-| [**Mark a student as present**](#mark-a-student-as-present-present)                             | `present s/STUDENT_NUMBER tut/TUTORIAL_SESSION` <br> e.g. `present s/A0245234A tut/1`                                    |
-| [**Mark all displayed students as absent**](#mark-all-displayed-students-as-absent-absent-all)  | `absent-all tut/TUTORIAL_SESSION` <br> e.g. `absent-all tut/1`                                                           |
-| [**Mark all displayed students as present**](#mark-all-displayed-students-as-present-present-all) | `present-all tut/TUTORIAL_SESSION` <br> e.g. `present-all tut/1`                                                         |
+| Action                                                                                               | Format, Examples                                                                                                         |
+|------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| [**Mark a student as absent**](#mark-a-student-as-absent-absent)                                     | `absent s/STUDENT_NUMBER tut/TUTORIAL_SESSION` <br> e.g. `absent s/A0245234A tut/1`                                      |
+| [**Mark a student as present**](#mark-a-student-as-present-present)                                  | `present s/STUDENT_NUMBER tut/TUTORIAL_SESSION` <br> e.g. `present s/A0245234A tut/1`                                    |
+| [**Mark all displayed students as absent**](#mark-all-displayed-students-as-absent-absent-all)       | `absent-all tut/TUTORIAL_SESSION` <br> e.g. `absent-all tut/1`                                                           |
+| [**Mark all displayed students as present**](#mark-all-displayed-students-as-present-present-all)    | `present-all tut/TUTORIAL_SESSION` <br> e.g. `present-all tut/1`                                                         |
 | [**Record class participation for a student**](#record-class-participation-for-a-student-class-part) | `class-part s/STUDENT_NUMBER tut/TUTORIAL_SESSION part/PARTICIPATION` <br> e.g. `class-part s/A0245234A tut/1 part/true` |
-| [**Set assignment grade for a student**](#set-assignment-grade-for-a-student-grade)             | `grade s/STUDENT_NUMBER a/ASSIGNMENT_NUMBER g/GRADE` <br> e.g. `grade s/A0245234A a/1 g/100`                             |
-| [**View a student's class information**](#view-a-students-class-information-view)               | `view s/STUDENT_NUMBER` <br> e.g. `view s/A0245234A`                                                                     |
+| [**Set assignment grade for a student**](#set-assignment-grade-for-a-student-grade)                  | `grade s/STUDENT_NUMBER a/ASSIGNMENT_NUMBER g/GRADE` <br> e.g. `grade s/A0245234A a/1 g/100`                             |
+| [**View a student's class information**](#view-a-student-s-class-information-view)                   | `view s/STUDENT_NUMBER` <br> e.g. `view s/A0245234A`                                                                     |
 
 [Back to Table of Contents](#table-of-contents)
 
