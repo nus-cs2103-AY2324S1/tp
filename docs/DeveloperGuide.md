@@ -599,14 +599,14 @@ otherwise)
 
 * 1a. The copy member command format is invalid.
   * 1a1. ClubMembersContact shows an error message.
-  * 1a2. User corrects input.
     <br/>
-    Use case resumes at step 2.
+    Use case resumes at step 1.
+
 
 * 1b. The member index is invalid or out of range.
   * 1b1. ClubMembersContact shows an error message.
     <br/>
-    Use case resumes at step 2.
+    Use case resumes at step 1.
 
 ---
 
