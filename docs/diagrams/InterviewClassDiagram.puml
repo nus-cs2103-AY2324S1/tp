@@ -1,0 +1,43 @@
+@startuml
+!include style.puml
+skinparam classAttributeIconSize 0
+skinparam arrowThickness 1.1
+skinparam arrowColor DeepSkyBlue
+skinparam classBackgroundColor DeepSkyBlue
+skinparam defaultFontColor black
+
+package Interview as InterviewPackage {
+
+class "Interview" as i {
++ isSameInterview(): boolean
+}
+class "InterviewAddress" as ia {
+{static} + isValidInterviewAddress(): boolean
+}
+class "InterviewType" as it {
+{static} + isValidInterviewType(): boolean
+{static} + isEmptyInterviewType(): boolean
+}
+class "InterviewDateTime" as idt {
+{static} + isValidInterviewDateTime(): boolean
+{static} + isEmptyInterviewEmpty(): boolean
+}
+
+enum InterviewTypes <<enumeration>> {
+    BEHAVIOURAL
+    TECHNICAL
+    CASE
+    GROUP
+    PHONE
+    VIDEO
+    ONLINE
+    ONSITE
+    OTHER
+}
+
+i *-down-> "1" idt
+i *-down-> "1" ia
+i *-down-> "1" it
+}
+
+@enduml

@@ -329,14 +329,31 @@ The `ClearCommand` class implements this command.
 
 ### Interview and Interview Commands
 
-
 #### Implementation
 
-The following sequence diagram illustrates the process of invocation for the command:
 
-(insert UML sequence diagram)
+#### Interview
 
-The `ClearCommand` class implements this command.
+<img src="images/developer-guide/InterviewClassDiagram.png" />
+
+#### Interview Commands
+
+(insert interview command class diagram)
+
+#### Interview Add Command
+
+(insert interview add sequence diagram)
+(insert interview add parser sequence diagram)
+
+#### Interview Delete Command
+
+(insert interview delete sequence diagram)
+(insert interview delete parser sequence diagram)
+
+#### Interview Edit Command
+
+(insert interview edit sequence diagram)
+(insert interview edit parser sequence diagram)
 
 #### Design considerations
 
