@@ -13,7 +13,7 @@
 **KeepInTouch is a Desktop application developed for jobseekers.** It is meant to help them track connections in their professional network, along with events related to their professional development. While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
 * If you are interested in using KeepInTouch, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing KeepInTouch, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+* If you are interested in developing KeepInTouch, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 
 
 **Acknowledgements**
