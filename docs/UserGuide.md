@@ -22,6 +22,7 @@ Managing clients and a busy schedule has never been easier. With OutBook, all yo
 - [Navigating OutBook](#navigating-outbook)
 - [Features](#features)
   - [Contact Commands](#contact-commands)
+    - [Contact Parameters](#contact-parameters)
     - [Adding a contact: `addc`](#adding-a-contact--addc)
     - [Listing all contacts: `listc`](#listing-all-contacts--listc)
     - [Deleting a contact: `deletec`](#deleting-a-contact--deletec)
@@ -29,6 +30,7 @@ Managing clients and a busy schedule has never been easier. With OutBook, all yo
     - [Viewing detailed contact information: `viewc`](#viewing-detailed-contact-information--viewc)
     - [Finding contacts: `findc`](#finding-contacts--findc)
   - [Meeting Commands](#meeting-commands)
+    - [Meeting Parameters](#meeting-parameters)
     - [Adding a meeting: `addm`](#adding-a-meeting--addm)
     - [Listing all meetings: `listm`](#listing-all-meetings--listm)
     - [Deleting a meeting: `deletem`](#deleting-a-meeting--deletem)
@@ -129,20 +131,28 @@ ___
 
 ## Contact Commands
 
+### Contact Parameters
+| Parameter             | Description​                                                                                                                                                                                                      | Examples​                                                      |
+|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
+| `NAME`                | The name of the contact. <br/> <br/> It should only contain alphanumeric characters and spaces, and it should not be blank.                                                                                       | <ul><li>`John Doe`</li><li>`Miguel-James Lee`</li></ul>        |
+| `PHONE`               | The phone number of the contact. <br/> <br/> It must contain only numbers, and be at least 3 digits long.                                                                                                         | <ul><li>`999`</li><li>`91243253`</li></ul>                     |
+| `EMAIL`               | The email address of the contact. <br/> <br/> It must adhere to the format `[LOCAL-PART]@[SERVER].[DOMAIN]`.                                                                                                      | <ul><li>`example@mail.com`</li><li>`john@hotmail.sg`</li></ul> |
+| `LAST_CONTACTED_TIME` | The last date and time you had a meeting with the contact. <br/> <br/> It must contain both date and time in the format `DD.MM.YYYY HHMM` or left blank.                                                          | <ul><li>`29.10.2023 1000`</li><li>`05.01.2023 2200`</li></ul>  |
+| `STATUS`              | The status of the contact with regards to the insurance sales process. <br/> <br/> It must be one of `NIL, Prospective, Active, Inactive, Claimant, Renewal` (case-insensitive) or blank.                         | <ul><li>`active`</li><li>`Prospective`</li></ul>               |
+| `REMARK`              | The remark you have about the contact, if any.                                                                                                                                                                    | <ul><li>`has 4 cars`</li><li>`Loves coffee`</li></ul>          |
+| `TAG`                 | The tag you want to associate with the contact, if any. A contact can have more than 1 tag. <br/> <br/> It must be alphanumeric, i.e. special and non-alphanumeric characters (including spaces) are not allowed. | <ul><li>`Friend`</li><li>`TermLife`</li></ul>                  |
+| `CONTACT_INDEX`       | The number shown beside each contact's name in the displayed contacts list. <br/> <br/> It must be a positive integer and not more than the total number of contacts.                                             | <ul><li>`1`</li></ul>                                          |
+
 ### Adding a contact: `addc`
 
 Adds a contact to OutBook.
 
-Format: `addc n/NAME p/PHONE_NUMBER e/EMAIL [lc/LAST_CONTACTED_TIME] [s/STATUS] [r/REMARK] [t/TAG]…​`
+Format: `addc n/NAME p/PHONE e/EMAIL [lc/LAST_CONTACTED_TIME] [s/STATUS] [r/REMARK] [t/TAG]…​`
 
-- Duplicate contacts are not allowed. Contacts are duplicates if they have the same name, phone number, or email.
-- `NAME`, `PHONE_NUMBER`, and `EMAIL` are compulsory fields:
-  - `PHONE_NUMBER` must contain only numbers, and be at least 3 digits long.
-  - `EMAIL` must adhere to the format LOCAL-PART@SERVER.DOMAIN, e.g. `example@mail.com`.
+- Duplicate contacts are not allowed. Contacts are duplicates if they have the same `NAME`, `PHONE`, or `EMAIL`.
+- `NAME`, `PHONE`, and `EMAIL` are compulsory fields.
 - `LAST_CONTACTED_TIME`, `STATUS`, `REMARK` and `TAG` are optional fields:
-  - `LAST_CONTACTED_TIME` must contain both date and time and adhere to the `DD.MM.YYYY HHMM` format, e.g. 1st October 2023, 10:00am will be written as `01.10.2023 1000`.
     - If `LAST_CONTACTED_TIME` is not specified, it will be defaulted to the minimum datetime provided by Java (i.e. `LocalDateTime.MIN`) and displayed as `NA` in the contacts list.
-  - `STATUS` must be one of `NIL, Prospective, Active, Inactive, Claimant, Renewal` or blank.
     - If `STATUS` is not specified, it will be defaulted to `NIL`.
 - This command may change the contact that is currently displayed in the details list via the `viewc` command, as detailed [here](#viewing-detailed-contact-information--viewc).
 
@@ -170,11 +180,9 @@ Format: `listc`
 
 Deletes a contact from OutBook.
 
-Format: `deletec INDEX`
+Format: `deletec CONTACT_INDEX`
 
-- Deletes the contact at the specified `INDEX`.
-- The `INDEX` refers to the number shown beside each contact's name in the contacts list.
-- The `INDEX` **must be a positive integer** 1, 2, 3, …​
+- Deletes the contact at the specified `CONTACT_INDEX`.
 - This command clears the contact that is currently displayed in the details list via the `viewc` command.
 
 Examples:
@@ -187,11 +195,9 @@ Examples:
 
 Edits an existing contact in OutBook.
 
-Format: `editc INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [lc/LAST_CONTACTED_TIME] [s/STATUS] [r/REMARK] [t/TAG]…​`
+Format: `editc CONTACT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [lc/LAST_CONTACTED_TIME] [s/STATUS] [r/REMARK] [t/TAG]…​`
 
-- Edits the contact at the specified `INDEX`. 
-- The `INDEX` refers to the number shown beside each contact's name in the contacts list. 
-- The `INDEX` **must be a positive integer** 1, 2, 3, …​
+- Edits the contact at the specified `CONTACT_INDEX`. 
 - All fields are optional, but at least one must be provided.
 - Existing values in each specified field will be updated to the corresponding input values.
 - When editing tags, the existing tags of the contact will be removed i.e. adding of tags is not cumulative.
@@ -207,12 +213,10 @@ Examples:
 
 Displays detailed information of a contact in the details list.
 
-Format: `viewc INDEX`
+Format: `viewc CONTACT_INDEX`
 
-- Displays the name, phone number, email, last contacted time, status, remarks and tags of the contact at the specified `INDEX`.
-- The `INDEX` refers to the number shown beside each contact's name in the contacts list.
-- The `INDEX` **must be a positive integer** 1, 2, 3, …​
-- As this command displays the contact at the specified `INDEX` in the contacts list, the contact displayed in the details list may change due to a modification in list order through the use of `addc`, `editc` or `listc` commands. This is intentional.
+- Displays the `NAME`, `PHONE`, `EMAIL`, `LAST_CONTACTED_TIME`, `STATUS`, `REMARK` and `TAG` of the contact at the specified `CONTACT_INDEX`.
+- As this command displays the contact at the specified `CONTACT_INDEX` in the contacts list, the contact displayed in the details list may change due to a modification in list order through the use of `addc`, `editc` or `listc` commands. This is intentional.
 - The displayed contact is cleared from the details list when the `deletec` and `findc` commands are used.
 
 Examples:
@@ -222,7 +226,7 @@ Examples:
 <div style="page-break-after: always;"></div>
 
 ### Finding contacts: `findc`
-Finds contact(s) that match the keywords specified for at least 1 of these fields: `NAME`, `PHONE_NUMBER`, `EMAIL`, `LAST_CONTACTED_TIME`, `STATUS`, `TAG`. The contacts list will be filtered to show only the results of this command. 
+Finds contact(s) that match the keywords specified for at least 1 of these fields: `NAME`, `PHONE`, `EMAIL`, `LAST_CONTACTED_TIME`, `STATUS`, `TAG`. The contacts list will be filtered to show only the results of this command. 
 
 Format: `findc [n/KEYWORDS] [p/KEYWORDS] [e/KEYWORDS] [lc/DATETIME] [s/KEYWORDS] [t/KEYWORDS]`
 
@@ -230,7 +234,7 @@ Format: `findc [n/KEYWORDS] [p/KEYWORDS] [e/KEYWORDS] [lc/DATETIME] [s/KEYWORDS]
 * The order of the keywords does not matter, e.g. `Shop Meet` will return `Meet Shop`.
 * For `NAME`, `STATUS` and `TAG`, only full words will be matched, e.g. `John` will return `John Lee` but not `Johnny`.
 * For `EMAIL`, any email addresses that contains the sequence of characters specified in the inputs will be given as a result, e.g.  `_` will return `m_e@gmail.com`.
-* For `PHONE_NUMBER`, any phone number that contains the sequence of digits specified in the inputs will be given as a result, e.g. `913` will return `90091300` but not `90103000`.
+* For `PHONE`, any phone number that contains the sequence of digits specified in the inputs will be given as a result, e.g. `913` will return `90091300` but not `90103000`.
 * For `LAST_CONTACTED_TIME`, the input must adhere to the `DD.MM.YYYY HHMM` format, e.g. 9th October 2023, 10.30am will be written as `09.10.2023 1030`.
 * If only one field is provided, all contacts matching at least one keyword will be returned (i.e. `OR` search).
 * If multiple fields are provided, only contacts matching at least one keyword in each field will be returned (i.e. `AND` search).
@@ -258,6 +262,19 @@ Examples:
 
 - Meetings are allowed to overlap and multiple meetings can be occurring at the same time.
 
+### Meeting Parameters
+
+| Parameter        | Description                                                                                                                                                                                                                                      | Examples                                                             |
+|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------|
+| `TITLE`          | The title of the meeting. <br></br> It can take any values, but should not be blank.                                                                                                                                                             | <ul><li>`1st Meeting with Alex`</li><li>`Quick-chat`</li></ul>       |
+| `LOCATION`       | The location of the meeting. <br></br> It can take any values, but should not be blank.                                                                                                                                                          | <ul><li>`Zoom`</li><li>`21 Lower Kent Ridge Rd, S(119077)`</li></ul> |
+| `START` / `END`  | The start/end times of the meeting. <br></br> They must contain both date and time and adhere to the `DD.MM.YYYY HHMM` format. `START` must be equal or before `END`.                                                                            | <ul><li>`29.10.2023 1000`</li><li>`05.01.2023 2200`</li></ul>        |
+| `TAG`            | The tag you want to associate with the meeting, if any. A meeting can have more than 1 tag. <br></br> It must be alphanumeric, i.e. special and non-alphanumeric characters (including spaces) are not allowed.                                  | <ul><li>`Casual`</li><li>`Remote`</li></ul>                          |
+| `ATTENDEE_NAME`  | The name of the contact added to the meeting as an attendee via the [`addmc`](#adding-contact-to-meeting--addmc) command.                                                                                                                        | <ul>-</ul>                                                           |
+| `ATTENDEE_INDEX` | The number shown beside each attendee's name in the detailed view of the meeting (as described [here](#viewing-detailed-meeting-information--viewm)). <br/> <br/> It must be a positive integer and not more than the total number of attendees. | <ul><li>`2`</li></ul>                                                |
+| `MEETING_INDEX`  | The number shown beside each meeting's title in the displayed meetings list. <br/> <br/> It must be a positive integer and not more than the total number of meetings.                                                                           | <ul><li>`1`</li></ul>                                                |                                                                      |
+
+
 </div>
 
 ### Adding a meeting: `addm`
@@ -267,7 +284,6 @@ Adds a meeting to OutBook.
 Format: `addm m/TITLE a/LOCATION s/START e/END [t/TAG]…​`
 
 * `TITLE`, `LOCATION`, `START` and `END` are compulsory fields. `TAG` is optional.
-* `START` and `END` must contain both date and time and adhere to the `DD.MM.YYYY HHMM` format, e.g. 1st October 2023, 10:00am will be written as `01.10.2023 1000`.
 * This command may change the meeting that is currently displayed in the details list via the `viewm` command, as detailed [here](#viewing-detailed-meeting-information--viewm).
 
 Examples:
@@ -288,11 +304,9 @@ Format: `listm`
 
 Deletes a meeting from OutBook.
 
-Format: `deletem INDEX`
+Format: `deletem MEETING_INDEX`
 
-- Deletes the meeting at the specified `INDEX`.
-- The `INDEX` refers to the number shown beside each meeting's title in the meetings list.
-- The `INDEX` **must be a positive integer** 1, 2, 3, …​
+- Deletes the meeting at the specified `MEETING_INDEX`.
 - This command clears the meeting that is currently displayed in the details list via the `viewm` command.
 
 Examples:
@@ -303,10 +317,9 @@ Examples:
 
 Edits an existing meeting in OutBook.
 
-Format: `editm INDEX [m/TITLE] [a/LOCATION] [s/START] [e/END] [t/TAG]…​`
+Format: `editm MEETING_INDEX [m/TITLE] [a/LOCATION] [s/START] [e/END] [t/TAG]…​`
 
-- Edits the meeting at the specified `INDEX`. The index refers to the number shown beside each meeting's title in the meetings list. 
-- The `INDEX` **must be a positive integer** 1, 2, 3, …​
+- Edits the meeting at the specified `MEETING_INDEX`.
 - All fields are optional, but at least one must be provided.
 - Existing values in each specified field will be updated to the corresponding input values.
 - When editing tags, the existing tags of the meeting will be removed, i.e. adding of tags is not cumulative.
@@ -323,12 +336,10 @@ Examples:
 
 Displays detailed information of a meeting in the details list.
 
-Format: `viewm INDEX`
+Format: `viewm MEETING_INDEX`
 
-- Displays the title, location, start and end times, attendees and tags of the meeting at the specified `INDEX`.
-- The `INDEX` refers to the number shown beside each meeting's title in the meetings list.
-- The `INDEX` **must be a positive integer** 1, 2, 3, …​
-- As this command displays the contact at the specified `INDEX` in the meetings list, the meeting displayed in the details list may change due to a modification in list order through the use of `addm`, `editm` and `listm` commands. This is intentional.
+- Displays the `TITLE`, `LOCATION`, `START`, `END`, `TAG` and attendees of the meeting at the specified `INDEX`.
+- As this command displays the contact at the specified `MEETING_INDEX` in the meetings list, the meeting displayed in the details list may change due to a modification in list order through the use of `addm`, `editm` and `listm` commands. This is intentional.
 - The displayed meeting is cleared from the details list when the `deletem` and `findm` commands are used.
 
 Examples:
@@ -374,10 +385,6 @@ Adds a contact to a meeting as an attendee.
 Format: `addmc MEETING_INDEX CONTACT_INDEX`
 
 - Adds the contact at the specified `CONTACT_INDEX` to the meeting specified at `MEETING_INDEX`.
-- `MEETING_INDEX` refers to the number beside each meeting's title in the meetings list.
-- `CONTACT_INDEX` refers to the number beside each contact's name in the contacts list.
-- The indexes **must be positive integers** 1, 2, 3, …​
-- Both `MEETING_INDEX` & `CONTACT_INDEX` must refer to the index of an existing meeting and contact respectively.
 - The specified contact's name will be listed under "Attendees" in the detailed view of the specified meeting when [`viewm`](#viewing-detailed-meeting-information--viewm) is used.
 
 Examples:
@@ -390,10 +397,6 @@ Removes a contact from a meeting.
 Format: `rmmc MEETING_INDEX ATTENDEE_INDEX`
 
 - Removes a contact at the specified `ATTENDEE_INDEX` to the meeting at the specified `MEETING_INDEX`.
-- `MEETING_INDEX` refers to the number beside each meeting's title in the meetings list.
-- `ATTENDEE_INDEX` refers to the number beside each attendee's name when [`viewm MEETING_INDEX`](#viewing-detailed-meeting-information--viewm) is used.
-- The indexes **must be positive integers** 1, 2, 3, …​
-- Both `MEETING_INDEX` & `ATTENDEE_INDEX` must refer to the index of an existing meeting or attendee.
 
 Examples:
 - `rmmc 3 2` removes the 2nd attendee from the 3rd meeting.
@@ -402,13 +405,12 @@ Examples:
 
 ### Marking a meeting as complete : `mark`
 
-Marks a meeting as complete. All attendees of the meeting will have their `LAST_CONTACTED_TIME` field updated to the `END` time of the meeting.
+Marks a meeting as complete.
 
-Format: `mark INDEX`
+Format: `mark MEETING_INDEX`
 
-- Marks the meeting at the specified `INDEX` as complete.
-- The `INDEX` refers to the index number shown in the displayed meeting list.
-- The `INDEX` **must be a positive integer** such as 1, 2, 3, …​
+- Marks the meeting at the specified `MEETING_INDEX` as complete.
+- All attendees of the meeting will have their `LAST_CONTACTED_TIME` field updated to the `END` time of the meeting
 
 Examples:
 - `listm` followed by `mark 2` marks the 2nd meeting in the unfiltered meetings list returned by [`listm`](#listing-all-meetings--listm).
@@ -453,25 +455,26 @@ If your changes to the data file render its format invalid, OutBook will discard
 
 ## Command summary
 
-| Action                          | Format, Example                                                                                                                                                                         |
-|---------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add contact**                 | `addc n/NAME p/PHONE_NUMBER e/EMAIL [lc/LAST_CONTACTED_TIME] [r/REMARK] [t/TAG]…​` <br> e.g., `addc n/James Ho p/22224444 e/jamesho@example.com lc/09.09.2023 0000 t/friend t/colleague` |
-| **Add contact to meeting**      | `addmc MEETING_INDEX CONTACT_INDEX` <br> e.g., `addmc 2 1`                                                                                                                               |
-| **Add meeting**                 | `addm m/TITLE a/LOCATION s/START e/END [t/TAG]…​` <br> e.g., `addm m/Lunch a/Cafeteria s/20.09.2023 1200 e/20.09.2023 1300`                                                              |
-| **Clear**                       | `clear`                                                                                                                                                                                  |
-| **Delete contact**              | `deletec INDEX` <br> e.g., `deletec 3`                                                                                                                                                   |
-| **Delete meeting**              | `deletem INDEX` <br> e.g., `deletem 3`                                                                                                                                                   |
-| **Edit contact**                | `editc INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [lc/LAST_CONTACTED_TIME] [r/REMARK] [t/TAG]…​`<br> e.g.,`editc 2 n/James Lee e/jameslee@example.com`                                    |
-| **Edit meeting**                | `editm INDEX [m/TITLE] [a/LOCATION] [s/START] [e/END] [t/TAG]…​`<br> e.g.,`editm 1 a/Hawker Centre s/15.09.2023 1500`                                                                    |
-| **Find contact**                | `findc [n/KEYWORDS] [p/KEYWORDS] [e/KEYWORDS] [lc/LAST_CONTACTED_TIME] [s/KEYWORDS] [t/KEYWORDS]` <br> e.g., `findc n/James Jake s/active claimant`                                      |
-| **Find meeting**                | `findm [m/KEYWORDS] [a/KEYWORDS] [t/KEYWORDS] [n/ATTENDEE_NAME] [s/START e/END]` <br> e.g., `findm m/Zoom Meet s/09.09.2023 0000 e/09.10.2023 0000`                                      |
-| **Help**                        | `help`                                                                                                                                                                                   |
-| **List contacts**               | `listc`                                                                                                                                                                                  |
-| **List meetings**               | `listm`                                                                                                                                                                                  |
-| **Remove contact from meeting** | `rmmc MEETING_INDEX ATTENDEE_INDEX` <br> e.g., `rmmc 2 2`                                                                                                                                |
-| **View contact details**        | `viewc INDEX` <br> e.g., `viewc 4`                                                                                                                                                       |
-| **View meeting details**        | `viewm INDEX` <br> e.g., `viewm 4`                                                                                                                                                       |
-| **Exit**                        | `exit`                                                                                                                                                                                   |
+| Action                          | Format, Example                                                                                                                                                                   |
+|---------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add contact**                 | `addc n/NAME p/PHONE e/EMAIL [lc/LAST_CONTACTED_TIME] [r/REMARK] [t/TAG]…​` <br> e.g., `addc n/James Ho p/22224444 e/jamesho@example.com lc/09.09.2023 0000 t/friend t/colleague` |
+| **Add contact to meeting**      | `addmc MEETING_INDEX CONTACT_INDEX` <br> e.g., `addmc 2 1`                                                                                                                        |
+| **Add meeting**                 | `addm m/TITLE a/LOCATION s/START e/END [t/TAG]…​` <br> e.g., `addm m/Lunch a/Cafeteria s/20.09.2023 1200 e/20.09.2023 1300`                                                       |
+| **Clear**                       | `clear`                                                                                                                                                                           |
+| **Delete contact**              | `deletec CONTACT_INDEX` <br> e.g., `deletec 3`                                                                                                                                    |
+| **Delete meeting**              | `deletem MEETING_INDEX` <br> e.g., `deletem 3`                                                                                                                                    |
+| **Edit contact**                | `editc CONTACT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [lc/LAST_CONTACTED_TIME] [r/REMARK] [t/TAG]…​`<br> e.g.,`editc 2 n/James Lee e/jameslee@example.com`                            |
+| **Edit meeting**                | `editm MEETING_INDEX [m/TITLE] [a/LOCATION] [s/START] [e/END] [t/TAG]…​`<br> e.g.,`editm 1 a/Hawker Centre s/15.09.2023 1500`                                                     |
+| **Find contact**                | `findc [n/KEYWORDS] [p/KEYWORDS] [e/KEYWORDS] [lc/LAST_CONTACTED_TIME] [s/KEYWORDS] [t/KEYWORDS]` <br> e.g., `findc n/James Jake s/active claimant`                               |
+| **Find meeting**                | `findm [m/KEYWORDS] [a/KEYWORDS] [t/KEYWORDS] [n/ATTENDEE_NAME] [s/START e/END]` <br> e.g., `findm m/Zoom Meet s/09.09.2023 0000 e/09.10.2023 0000`                               |
+| **Help**                        | `help`                                                                                                                                                                            |
+| **List contacts**               | `listc`                                                                                                                                                                           |
+| **List meetings**               | `listm`                                                                                                                                                                           |
+| **Mark meeting**                | `mark MEETING_INDEX` <br> e.g., `mark 1 `                                                                                                                                         |
+| **Remove contact from meeting** | `rmmc MEETING_INDEX ATTENDEE_INDEX` <br> e.g., `rmmc 2 2`                                                                                                                         |
+| **View contact details**        | `viewc CONTACT_INDEX` <br> e.g., `viewc 4`                                                                                                                                        |
+| **View meeting details**        | `viewm MEETING_INDEX` <br> e.g., `viewm 4`                                                                                                                                        |
+| **Exit**                        | `exit`                                                                                                                                                                            |
 
 [Click here to return to the Table of Contents](#table-of-contents)
 
