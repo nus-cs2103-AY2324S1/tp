@@ -308,7 +308,7 @@ and it will revert to the state it was before.
 
 Here’s how you can use it: `undo`
 
-List of commands that can be undone:
+Here's a list of commands you can undo:
 * `clear`
 * `createMember`
 * `deleteMember`
@@ -324,9 +324,22 @@ List of commands that can be undone:
 
 #### Redoing a command: `redo`
 
-Redoes a command that the user has undone previously.
+Accidentally used `undo`? Don’t worry, you can redo your undone commands to retrieve your previous data too!
 
-Format: `redo`
+Here’s how you can use it: `redo`
+
+Here's a list of commands you can redo:
+* `clear`
+* `createMember`
+* `deleteMember`
+* `editMember`
+* `createEvent`
+* `deleteEvent`
+* `editEvent`
+* `enrol`
+* `unenrol`
+* `editEnrolment`
+
 
 <hr class="command-separator">
 
