@@ -32,6 +32,8 @@ pageNav: 3
 8. [Known Issues](#known-issues)
 9. [Contact Us](#contact-us)
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Introduction
@@ -73,6 +75,7 @@ Being comfortable and efficient at typing will help you make the most of the app
 
 [Go to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -104,6 +107,8 @@ The red block contains crucial warnings for ensuring the proper functionality of
 </div>
 
 [Go to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -268,10 +273,12 @@ testing your memory with the most difficult flashcard.
 
 [Go to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
-
 # Feature list
+
 ## Command Summary
 
 | Command                                         | Description                             |
@@ -728,6 +735,7 @@ _Closes <span style="color: green;">lesSON</span>._
 [Go to Command Summary](#command-summary) <br>
 [Go to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -853,6 +861,8 @@ to see their new decks.
 </div>
 
 [Go to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
