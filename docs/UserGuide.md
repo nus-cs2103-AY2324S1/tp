@@ -171,7 +171,6 @@ The **GUI** has 6 notable sections:
 
 ## Class Number
 
-* Class Number refers to the tutorial class number of a particular course.
 * Class Number is case-sensitive and must begin with a capital "T", followed by any number of characters. Class Numbers must not be blank.
 * Class Number is stored verbatim based on your input, with the case being preserved. 
 * Here are some valid examples of Class Numbers:
@@ -238,13 +237,13 @@ Format: `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`
 * `config` resets the state history of **Class Manager 2023**, preventing you from using the `undo` command to reach a state of **Class Manager 2023** before executing the `config` command.
 
 Examples:
-* `config #t/13 #a/1`
+* `config #t/6 #a/5`
 
-Before `config` is executed:
+Before `config #t/6 #a/5` is executed:
 
 <img alt="config before" src="images/config-before.png" width="700">
 
-After `config` is executed successfully and `view s/A0247243A` is executed to view the first student's class information:
+After `config #t/6 #a/5` is executed successfully and `view s/A0247243A` is executed to view the first student's class information:
 
 <img alt="config success" src="images/config-success.png" width="700">
 
@@ -273,7 +272,7 @@ Format: `help`
 
 After `help` is executed successfully:
 
-<img alt="help message" src="images/helpMessage.png" width="900">
+<img alt="help message" src="images/helpMessage.png" width="700">
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -325,7 +324,7 @@ Before `load f/sample` is executed:
 
 After `load f/sample` is executed successfully:
 
-<img alt="load success" src="images/load-outcome.png" width="750"> <br><br>
+<img alt="load success" src="images/load-outcome.png" width="700"> <br><br>
 
 The file path at the bottom left of the application is updated to `.\data\sample.json`.
 
@@ -573,9 +572,9 @@ Format: `lookup [c/CLASS_NUMBER] [p/PHONE] [n/NAME] [e/EMAIL] [s/STUDENT_NUMBER]
 Examples:
 
 * `lookup n/alex david` returns `Alex Yeoh`, `David Li`<br>
-  <img alt="result for 'lookup n/alex david'" src="images/lookupNameResult.png" width="700"> </br></br>
+  <img alt="result for 'lookup n/alex david'" src="images/lookupNameResult.png" width="680"> </br></br>
 * `lookup c/T11` returns all students in class number T11<br>
-  <img alt="result for 'lookup c/T11'" src="images/lookupClassResult.png" width="700"> </br></br>
+  <img alt="result for 'lookup c/T11'" src="images/lookupClassResult.png" width="680"> </br></br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -755,7 +754,7 @@ Example:
 
 * `view s/A0245234A`
 
-<img alt="result for 'view s/A0245234A'" src="images/ViewCommand.png" width="750" >
+<img alt="result for 'view s/A0245234A'" src="images/ViewCommand.png" width="700" >
 
 Possible error and their corresponding message:
 * If [<u>`STUDENT_NUMBER`</u>](#student-number) does not belong to any student in **Class Manager 2023**.
