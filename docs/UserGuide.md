@@ -285,7 +285,7 @@ Even though all the fields are optional, **at least one field** has to be specif
 
 </div>
 
-<div markdown="span" class="alert alert-warning">:exclamation: **CAUTION:**
+<div markdown="block" class="alert alert-warning">:exclamation: **CAUTION:**
 
 * When editing a member's tag, the new tag(s) will replace any old existing tag(s).
   If you want to add a new tag to a member, you will have to include **both** the old tag(s)
@@ -754,15 +754,11 @@ that the addressbook.json file used is **correct and accurate.**
 ## 6. Common Mistakes
 These are some common mistakes that you might make while using our application.
 
-1. Problem: I can't seem to add an interview time, the error says that the input date is invalid. Why?
-
-    Answer: Please make sure that the month or date has 2 digits in them. For example, January will have to be `01` and not `1`. If you are trying to cancel the interview scheduled, ensure that nothing is capitalised in `cancel` as it is case-sensitive.
-
-2. Problem: I am trying to delete a certain member off the member list. However, it seems to be deleting the wrong member. Why?
+1. Problem: I am trying to delete a certain member off the member list. However, it seems to be deleting the wrong member. Why?
 
     Answer: The `INDEX` used will have to be the current index shown on the screen. If you are deleting the wrong member, make sure you are following the correct index shown currently shown on the screen, and not an index from a previous view. You can refer to [here](#413-viewing-members-viewmembers-or-viewm) to view the entire list of members again.
 
-3. Problem: I can't seem to see the full interview time. How can I fix this?
+2. Problem: I can't seem to see the full interview time. How can I fix this?
 
     Answer: On start-up, the resolution of the window may not be optimal for your screen size and the interview time may be cut off as a result. To fix this, you may readjust the dimensions of the CMC window by dragging the corners of the window, or maximising the view by clicking the button on the top right hand corner of the window.
 
