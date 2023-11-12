@@ -67,6 +67,99 @@ Choose a topic from the table of contents below to find out how to manage your c
 
 --------------------------------------------------------------------------------------------------------------------
 
+# Graphical User Interface Components
+
+<figure>
+   <img src="images/Ui.png" alt="Connectify's Graphical User Interface (GUI)">
+   <figcaption align="center">
+       <em>Connectify's Graphical User Interface (GUI): The Dashboard</em>
+   </figcaption>
+</figure>
+<figure>
+   <img src="images/ExampleInteractionAfter.png" alt="Connectify's Graphical User Interface (GUI)">
+   <figcaption align="center">
+       <em>Connectify's Graphical User Interface (GUI): The Client List</em>
+   </figcaption>
+</figure>
+<br>
+
+Let's first discuss the top half of the interface.
+
+<figure>
+   <img src="images/UiTopHalf.png" alt="The navigation bar, command box, and output window.">
+   <figcaption align="center">
+       <em>The navigation bar, command box, and output window.</em>
+   </figcaption>
+</figure>
+<br>
+
+1. **Navigation Bar**
+   - **File:** a dropdown menu containing the exit button, which quits the application.
+   - **Help:** a dropdown menu containing the help button, which provides the link to this user guide.
+
+2. **Command Box:** a box where you can type [commands](#if-youre-new-what-are-commands). When it is empty, it prompts you with `Enter Command Here...`.
+
+3. **Output Window:** a box where the results of your [commands](#if-youre-new-what-are-commands) will be displayed. Any errors that arise will also be shown here.
+
+    <figure id="dashboard-information">
+       <img src="images/UiBottomHalf.png" alt="Connectify's Analytics (left) and Upcoming Follow-ups (right)">
+       <figcaption align="center">
+           <em>Connectify's Analytics (left) and Upcoming Follow-ups (right)</em>
+       </figcaption>
+    </figure>
+
+4. **Connectify's Analytics:** insightful statistics that are automatically calculated for you. This includes:
+    - Number of uncontacted / contacted / closed clients
+    - Average interactions among all clients
+    - Breakdown of the different interaction outcomes
+    - Number of hot / warm / cold [leads](#marking-a-client-as-a-hot-warm-or-cold-lead)
+
+5. **Upcoming Follow-ups:** upcoming meetings for each client. Follow-up dates are determined automatically by the latest interaction date and the lead of the client. See [how Connectify calculates follow-up dates.](#follow-up-calculation)
+
+    <figure>
+       <img src="images/UiClientList.png" alt="Connectify's List of Clients">
+       <figcaption align="center">
+           <em>Connectify's List of Clients</em>
+       </figcaption>
+    </figure>
+
+6. **Client List:** a scrollable list of clients that you have. You can see the details of each client, including:
+   - **Index:** the number and order of each client in your client list. The numbering can change using the [***find*** command](#finding-a-client-by-name-find).
+   - **Name:** the name of the client, specified after the index number.
+   - **Lead:** the lead of the client, represented by either a red, orange, or light blue box.
+   - **Tags:** a row of dark green boxes, representing additional information of each client.
+   - **Phone Number:** the client's phone number.
+   - **Email:** the client's email address.
+
+   <br>
+   <figure>
+       <img src="images/UiDetailedView.png" alt="Detailed View of Client">
+       <figcaption align="center">
+           <em>Detailed View of Bernice Yu's Profile</em>
+       </figcaption>
+    </figure>
+
+7. **Detailed View:** a detailed view of each client's profile, showing additional information, including:
+   - **Telegram Handle:** the client's telegram handle, starting with the letter `@`.
+   - **Address:** the home address of the client.
+   - **Profession:** the client's profession/job.
+   - **Income:** the client's income.
+   - **Past Interactions:** the list of past interactions or meetings with the clients, along with its date, interaction outcome (interested), and meeting notes.
+
+   <br>
+   <figure>
+       <img src="images/UiStatusBar.png" alt="Status Bar">
+       <figcaption align="center">
+           <em>The Status Bar (at the bottom of the application window)</em>
+       </figcaption>
+    </figure>
+
+8. **Status Bar:** the location of where Connectify is storing your data in your computer.
+
+[↑ Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
 # **If you're new**: what are commands?
 
 Commands are the string of text you type into the command box. They usually start with a command word.
@@ -345,21 +438,14 @@ dashboard
 You should see the following dashboard view in the application window.
 
 <figure>
-   <img src="images/Dashboard.png" alt="Dashboard view">
+   <img src="images/Ui.png" alt="Dashboard view">
    <figcaption align="center">
        <em>The dashboard view. Data shown may vary.</em>
    </figcaption>
 </figure>
 <br>
 
-On the left, we have Connectify's statistics which show:
-
-1. Number of uncontacted / contacted / closed clients
-2. Average interactions among all clients
-2. Breakdown of the different interaction outcomes
-3. Number of hot / warm / cold leads
-
-On the right, we have the follow-ups section which shows upcoming follow-ups. Follow-up dates are determined automatically by the latest interaction date and the lead of the client. See [how Connectify calculates follow-up dates.](#follow-up-calculation)
+See [what each section of the dashboard means.](#dashboard-information)
 
 [↑ Back to Table of Contents](#table-of-contents)
 
@@ -470,6 +556,19 @@ delete INDEX
 **Example**
 ```
 delete 1
+```
+
+[↑ Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Exiting the program: ***exit***
+
+Quits the Connectify application.
+
+**Format**
+```text
+exit
 ```
 
 [↑ Back to Table of Contents](#table-of-contents)
