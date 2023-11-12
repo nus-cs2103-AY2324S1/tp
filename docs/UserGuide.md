@@ -5,7 +5,7 @@ title: User Guide
 **Foster Family** is a desktop app built for the **foster managers of cat and dog shelters** to help them perform **foster family management tasks**. 
 
 Some tasks Foster Family can help you with: 
-* **Store and update** the important details of animal fosterers
+* **Store and update** the important details of animal fosterers (people who temporarily cares for an animal in their own homes)
 * Search for a fosterer using _**any**_ detail you can remember of them
 * **Gain insights** on the current status of fosterers
 
@@ -286,9 +286,12 @@ e.g. <code>"Anne Tay"</code> is the same person as <code>"anne tay"</code> and <
 Examples:
 * `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/NotAvailable animal/Dexter animalType/current.Cat t/Urgent`
   * adds a fosterer named Jerry Tan with the following details:
+    <br/><br/>
     ![Add](images/screenshots/AddJerry.png)
+    <br/><br/>
 * `add n/Pete Tay p/98765411 e/pete@example.com a/Happy street, block 5, #27-01 housing/Condo availability/Available animal/nil animalType/able.Cat`
   * adds a fosterer named Pete Tay with the following details:
+    <br/><br/>
     ![Add](images/screenshots/AddPete.png)
 
 In the case where duplicates field descriptions are given, the last one will be chosen:
@@ -402,7 +405,7 @@ To learn more about profile page, please refer to the section [User Interface: T
 
 #### Editing a fosterer’s details in profile page:
 
-<<<<<<< HEAD
+
 Here is a step-by-step explanation of how you can edit a fosterer's details in profile page. 
 
 1. Enter a fosterer’s profile page with `view INDEX`. e.g. `view 1`.
@@ -745,7 +748,8 @@ Format: `undo`
 
 <br> 
 
-### Clearing all entries : `reset` and `reset confirm`
+### Clearing all entries : `reset`, followed by `reset confirm`
+
 
 Clears all your entries from the address book.
 

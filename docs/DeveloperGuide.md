@@ -152,7 +152,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## **Selected Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
@@ -726,25 +726,29 @@ required to read long error messages with details that might be irrelevant to th
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …                  | I want to …                                                                                   | So that I can…                                                                                                   |
-|----------|-------------------------|-----------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
-| `* * *`  | foster manager          | delete a fosterer from the list when they want to stop fostering with us                      | update the list to see the fosterers who are currently in our program                                            |
-| `* * *`  | foster manager          | delete multiple fosterers at once                                                             | perform mass deletions quickly                                                                                   |
-| `* * *`  | foster manager          | add each fosterer's details efficiently                                                       | know how to contact the fosterer should I have animals that require fostering                                    |
-| `* * *`  | foster manager          | provide details of the fostered animal of concern to the fosterer                             | ensure that the animal is well taken care by informing the fosterer of existing health conditions to prepare for |
-| `* * *`  | foster manager          | update a fosterer's details                                                                   | keep track of fosterer's most up-to-date information, including information about the animal fostered            |
-| `* * *`  | foster manager          | search for a specific animal / fosterer’s detail  instead of browsing through the entire list | be more productive when searching for suitable fosterers for the animal that needs fostering                     |
-| `* * *`  | foster manager          | to be aware of the address of the fosterer                                                    | conduct checks on the fosterer to ensure the animal is well taken care of                                        |
-| `* * *`  | foster manager          | retrieve the information about the foster family                                              | provide the necessary information to the Nparks authorities for audit                                            |
-| `* * *`  | foster manager          | sort the list of fosterers alphabetically                                                     | have a neater, and more organised view of all the fosterers                                                      |
-| `* * * ` | foster manager          | know the distribution of the different housing types among fosterers                          | correctly allocate the animals to foster homes that are able to accommodate them                                 |
-| `* * *`  | foster manager          | obtain statistics about the currently available fosterers                                     | better estimate shelter capacity                                                                                 |
-| `* * `   | foster manager          | have the fosterer’s important information collated neatly                                     | get all the information I need with one glance                                                                   |
-| `* * `   | foster manager          | have an easily accessible and visible help button                                             | get help when I am unsure of what command to use                                                                 |
-| `* * `   | foster manager          | undo my previous command                                                                      | quickly resolve errors caused by the erroneous command                                                           |
-| `* *`    | new foster manager      | have my initial data file pre-populated with sample data                                      | work with this sample data as an introduction to the app                                                         |
-| `* *`    | new foster manager      | purge all current data from address book                                                      | remove all sample/ experimental data I used to explore the app                                                   |
-| `* *`    | careless foster manager | be asked to confirm my decision before purging all fosterer data                              | prevent myself from accidentally deleting all fosterer records                                                   |
+| Priority  | As a …                  | I want to …                                                                                    | So that I can…                                                                                                                                  |
+|-----------|-------------------------|------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| `* * *`   | foster manager          | delete a fosterer from the list when they want to stop fostering with us                       | update the list to see the fosterers who are currently in our program                                                                           |
+| `* * *`   | foster manager          | delete multiple fosterers at once                                                              | perform mass deletions quickly                                                                                                                  |
+| `* * *`   | foster manager          | add each fosterer's details efficiently                                                        | know how to contact the fosterer should I have animals that require fostering                                                                   |
+| `* * *`   | foster manager          | provide details of the fostered animal of concern to the fosterer                              | ensure that the animal is well taken care by informing the fosterer of existing health conditions to prepare for                                |
+| `* * *`   | foster manager          | update a fosterer's details                                                                    | keep track of fosterer's most up-to-date information, including information about the animal fostered                                           |
+| `* * *`   | foster manager          | search for a specific animal / fosterer’s detail  instead of browsing through the entire list  | be more productive when searching for suitable fosterers for the animal that needs fostering                                                    |
+| `* * *`   | foster manager          | to be aware of the address of the fosterer                                                     | conduct checks on the fosterer to ensure the animal is well taken care of                                                                       |
+| `* * *`   | foster manager          | retrieve information about the foster family                                                   | provide the necessary information to the Nparks authorities for audit                                                                           |
+| `* * *`   | foster manager          | sort the list of fosterers alphabetically                                                      | have a neater, and more organised view of all the fosterers                                                                                     |
+| `* * * `  | foster manager          | know the distribution of the different housing types among fosterers                           | correctly allocate the animals to foster homes that are able to accommodate them                                                                |
+| `* * *`   | foster manager          | obtain statistics about the currently available fosterers                                      | better estimate shelter capacity                                                                                                                |
+| `* * `    | foster manager          | have the fosterer’s important information collated neatly                                      | get all the information I need with one glance                                                                                                  |
+| `* * `    | foster manager          | have an easily accessible and visible help button                                              | get help when I am unsure of what command to use                                                                                                |
+| `* * `    | foster manager          | undo my previous command                                                                       | quickly resolve errors caused by the erroneous command                                                                                          |
+| `* *`     | new foster manager      | have my initial data file pre-populated with sample data                                       | work with this sample data as an introduction to the app                                                                                        |
+| `* *`     | new foster manager      | purge all current data from address book                                                       | remove all sample/ experimental data I used to explore the app                                                                                  |
+| `* *`     | careless foster manager | be asked to confirm my decision before purging all fosterer data                               | prevent myself from accidentally deleting all fosterer records                                                                                  |
+| `* *`     | foster manager          | view which volunteer is assigned to which animal                                               | properly balance workload and ensure that no volunteer is overburdened                                                                          |
+| `* *`     | foster manager          | retrieve documentation of all species of pet under purview of the shelter                      | ensure compliance with regulations for wildlife, protected or endangered species (Nparks audit)                                                 |
+| `* *`     | foster manager          | retrieve inventory information about food supplies for fostered animals                        | verify that the requirement of a “well-balanced and nutritional diet” is met, and is not expired (Nparks audit)                                 |
+| `* *`     | foster manager          | retrieve history of whereabouts of an animal                                                   | ensure accountability for pets’ accommodations, and verify that pets are monitored daily for signs of illness, injury or disease (Nparks audit) |
 
 
 ### Use cases
@@ -773,7 +777,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes from step 2.
   
     
-**Use case: UC2 - List Fosterers**
+**Use case: UC2 - List / Find Fosterers**
 
 **MSS**
 
@@ -866,7 +870,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. System detects an error in the entered command.
     * 1a1. System indicates the error.
-    * 1a2. Foster Manager <u>requests for command 'help' (UC7)</u>.
+    * 1a2. Foster Manager <u>requests for command 'help' (UC8)</u>.
     * 1a3. Foster Manager enters new command.
 
       Steps 1a1 - 1a3 are repeated until the command entered is correct.
@@ -955,24 +959,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 fosterers without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 500 fosterers without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The system should be usable by a novice foster manager who has never tried out keeping track of fosterers through this new system. 
 5.  The system should respond within two seconds. (i.e. each time a valid command is entered or there is any use action)
-6. The user interface should be intuitive enough for users who are not IT-savvy. 
-7. The user guide should be easily understood by target users. (foster managers of animal shelters, assuming they have no relevant technical knowledge)
-8. The system should be able to detect invalidity of command within 2 seconds. 
-9. The system must be able to scale up or down as needed (in the case where there is a sudden fosterers).
-10. The system must comply with all applicable laws and regulations like the Personal Data Protection Act (PDPA). 
-11. The system should be reliable, easy to maintain, and accessible 24/7. 
-12. The product should be able to run on mainstream OS.
+6.  The user interface should be intuitive enough for users who are not IT-savvy. 
+7.  The user guide should be easily understood by target users. (foster managers of animal shelters, assuming they have no relevant technical knowledge)
+8.  The system should be able to detect invalidity of command within 2 seconds. 
+9.  The system must be able to scale up or down as needed (in the case where there is a sudden fosterers).
+10. The system should not contain the fosterer's private information in the case that the fosterer did not give consent.
+11. The system must comply with all applicable laws and regulations like the Personal Data Protection Act (PDPA). 
+12. The system should be reliable, easy to maintain, and accessible 24/7. 
+13. The product should be able to run on mainstream OS.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Fosterer**: A person who temporarily cares for an animal in their own home
 * **Housing type**: Categorised into HDB, Condo, Landed
-* **Types of animal fostered**: Categorised into solely cats and/or dogs (current.dog/cat or able.dog/cat depends on availability of fosterer)
+* **Types of animal fostered**: Categorised into solely cats and/or dogs (current.Dog/Cat or able.Dog/Cat depends on availability of fosterer)
 * **Current list**: The currently displayed list obtained from a list command or its variants
 
 --------------------------------------------------------------------------------------------------------------------
@@ -1001,21 +1006,46 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+### Adding a fosterer
 
-### Deleting a person
+1. Adding a fosterer after collecting all the mandatory details to be inputted
 
-1. Deleting a person while all fosterers are being shown
+    1. Prerequisites: Foster Manager has collected fosterer details such as name, phone number, email, address, housing type, availability, name of animal fostered 
+   (if currently fostering) and type of animal fostered (if currently fostering).
 
-   1. Prerequisites: List all persons using the `list` or `find` command. At least 3 fosterers in the list.
+    1. Test case (valid): `add n/Anne Lim p/98765422 e/anne123@example.com a/Baker street, block 6, #27-01 housing/Landed availability/NotAvailable animal/Bucky animalType/current.Dog`<br>
+       Expected: Fosterer named Anne Lim is added to the list. Details of the added fosterer are shown in the status message.
+
+    1. Test case (invalid):<br>
+
+| Scenario                                                                                                                        | Example command                                                                                                                                                                 | Expected Error Message                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+|---------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Without any of the following: `n/`, `p/`,`e/`, `a/`, `housing/`, `availability/`, `animal/`, `animalType/`                      | `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB animal/Dexter animalType/current.Cat t/Urgent`                                   | `Invalid command format! add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS housing/HOUSING availability/AVAILABILITY animal/ANIMAL_NAME animalType/ANIMAL_TYPE [t/TAG]... Note: If information for that field is not available, put 'nil'. Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 housing/HDB availability/NotAvailable animal/Dexter animalType/current.Dog t/Urgent t/goodWithDogs` |
+| `availability/nil` but `animal/` is not 'nil'                                                                                   | `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/nil animal/Dexter animalType/nil t/Urgent`                          | `When an animal name is provided, availability should not be 'Available' or 'nil'.`                                                                                                                                                                                                                                                                                                                                                                                    |
+| `availability/Available` but `animal/` is not 'nil'                                                                             | `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/Available animal/Dexter animalType/nil t/Urgent`                    | `When an animal name is provided, availability should not be 'Available' or 'nil'.`                                                                                                                                                                                                                                                                                                                                                                                    |
+| `housing/` with values other than ‘HDB’, ‘Condo’, ‘Landed’, ‘nil’                                                               | `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/hdb availability/NotAvailable animal/Dexter animalType/current.Cat t/Urgent`         | `Housing type should be either 'HDB', 'Condo', 'Landed' or 'nil'`                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `availability/` with values other than ‘Available’, ‘NotAvailable’, ‘nil’                                                       | `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/available animal/Dexter animalType/current.Cat t/Urgent`            | `Availability should be either 'Available', 'NotAvailable' or 'nil'`                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `availability/nil` but `animalType/` is not 'nil'                                                                               | `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/nil animal/nil animalType/able.Cat t/Urgent`                        | `If fosterer is available, animal type should be 'able.Dog' / 'able.Cat'. If animal type information is not available, it should be inputted as 'nil'. If fosterer is NOT available and is currently fostering, animal type should be 'current.Dog' / 'current.Cat'. If fosterer is currently unable to foster, animal type should be inputted as 'nil'. If availability is 'nil', animal type should be 'nil' too.`                                                   |
+| `availability/Available` with `animalType/` values set to other values which are NOT ‘able.Cat’ or ‘able.Dog’ or 'nil'          | `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/Available animal/nil animalType/current.Cat t/Urgent`               | `If fosterer is available, animal type should be 'able.Dog' / 'able.Cat'. If animal type information is not available, it should be inputted as 'nil'. If fosterer is NOT available and is currently fostering, animal type should be 'current.Dog' / 'current.Cat'. If fosterer is currently unable to foster, animal type should be inputted as 'nil'. If availability is 'nil', animal type should be 'nil' too.`                                                   |
+| `availability/NotAvailable` with `animalType/` values set to other values which are NOT ‘current.Cat’ or ‘current.Dog' or 'nil' | `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/NotAvailable animal/Dexter animalType/able.Cat t/Urgent`            | `If fosterer is available, animal type should be 'able.Dog' / 'able.Cat'. If animal type information is not available, it should be inputted as 'nil'. If fosterer is NOT available and is currently fostering, animal type should be 'current.Dog' / 'current.Cat'. If fosterer is currently unable to foster, animal type should be inputted as 'nil'. If availability is 'nil', animal type should be 'nil' too.`                                                   |
+| `availability/NotAvailable` with `animalType/` values set to 'nil' but `animal/` values NOT 'nil'                               | `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/NotAvailable animal/Dexter animalType/nil t/Urgent`                 | `When availability is 'NotAvailable', animal name and type have to either be both 'nil' or both not 'nil'.`                                                                                                                                                                                                                                                                                                                                                            |
+| `availability/NotAvailable` with `animal/` values set to 'nil' but `animalType/` values NOT 'nil'                               | `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/NotAvailable animal/nil animalType/current.Cat t/Urgent`            | `When availability is 'NotAvailable', animal name and type have to either be both 'nil' or both not 'nil'.`                                                                                                                                                                                                                                                                                                                                                            |
+
+
+### Deleting a fosterer
+
+1. Deleting a fosterer while all fosterers are being shown
+
+   1. Prerequisites: List all fosterers using the `list` or `find` command. At least 3 fosterers in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First fosterer is deleted from the list. Details of the deleted fosterer shown in the status message.
+      Expected: First fosterer is deleted from the list. Details of the deleted fosterer are shown in the status message.
    
    1. Test case: `delete 1 2 3`<br>
       Expected: First, second and third fosterers are deleted from the list. Number of deleted fosterers, and their details are shown in the status message.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message.
+      Expected: No person is deleted. Error details are shown in the status message.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`,  (where x is larger than the list size)<br>
       Expected: Similar to previous.
