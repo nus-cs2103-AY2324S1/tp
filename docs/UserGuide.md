@@ -282,9 +282,14 @@ Please do not use negative integers, non-integers and extremely large integers(i
 
 * The `NAME` must be in the correct [format](#parameter-formats).
 
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+To allow greater flexibility in terms of searching, if there are 2 or more employees with same name, i.e. Amy Tan and Amy Teo, entering the command <code>delete /n FULLNAME</code> of any of the employee will still return a list of these employees instead of deleting the employee that matches the full name. 
+</div>
+
 **Examples:**
 * `list` followed by `delete 2` deletes the 2nd employee in the employee directory.
 * `find Betsy` followed by `delete 1` deletes the 1st employee in the results of the `find` command.
+* `delete /n Betsy` will delete the employee with the name 'Betsy' if there is only one such employee with this name. If there is no such employee, there will be an error message displayed. Otherwise, it will return you a list of employees with the name 'Betsy' and you will have to follow up with a `delete INDEX` command to delete the 'Betsy' that you want using the index displayed in the list.
 
 **Output:**
 * If the index is valid or there is only one employee in the list, whose name contains the keyword, ManaGease should display a confirmation message indicating that the employee information has been successfully deleted.
