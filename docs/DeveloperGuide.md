@@ -122,7 +122,7 @@ The `Storage` component,
 * can save the job application data in json format and read it back.
 
 **Component Structure:**
-<img src="images/StorageClassDiagram.png" width="900" />
+<img src="images/developer-guide/StorageClassDiagram.png" width="900" />
 ### Common Classes
 
 ---
@@ -319,7 +319,7 @@ The clear command allows the user to delete all job applications.
 
 The following sequence diagram illustrates the process of invocation for the command:
 
-(insert UML sequence diagram)
+<img src="images/developer-guide/ClearCommandSequenceDiagram.png" />
 
 The `ClearCommand` class implements this command.
 
