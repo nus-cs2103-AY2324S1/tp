@@ -588,13 +588,6 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -658,8 +651,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user            | add and edit status of work submissions                            | keep track of the students’ work                                                          |
 | `*`      | user            | track the submission status of each student's assignments          | be aware of who has or hasn't turned in their work                                        |
 | `*`      | user            | add and view my student’s preferred name                           | call on them with the correct name                                                        |
-
-*{More to be added}*
 
 ### Use cases
 
