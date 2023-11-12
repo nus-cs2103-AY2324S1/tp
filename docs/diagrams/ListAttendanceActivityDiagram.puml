@@ -1,0 +1,39 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes ListAttendanceCommand;
+if () then ([Valid input])
+:Clear all current filters;
+:Check if any tutorial group ID was entered;
+    if () then ([Tutorial group\n ID entered])
+    :Add filter to list of\ncontacts to show students\nin the tutorial group;
+    :Check if any students are\nin the tutorial group;
+        if () then([There are no students\n in the tutorial group])
+        :Show a message that\nthere are no students\nin the tutorial group;
+        else ([Else])
+        :Check if any students\nin the tutorial group has\nunmarked attendance;
+            if () then ([There are students with\n unmarked attendance])
+            :Show a message with\nthe list of students with\nunmarked attendance;
+            else ([Else])
+            :Add filter to list of\nstudents to show absent\nstudents in tutorial group;
+            :Generate the attendance\nsummary message;
+            :Show the attendance\nsummary message;
+            endif
+        endif
+    else ([Else])
+        :Check if any student\nin the course has\nunmarked attendance;
+            if () then ([There are students with\n unmarked attendance])
+            :Show a message with\nthe list of students \nin the course with\nunmarked attendance;
+            else ([Else])
+            :Add filter to list of\nstudents to show absent\nstudents in the course;
+            :Generate the attendance\nsummary message;
+            :Show the attendance\nsummary message;
+            endif
+    endif
+else ([Else])
+:Show invalid Command message;
+endif
+stop
+@enduml
