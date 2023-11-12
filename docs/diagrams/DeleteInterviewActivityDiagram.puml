@@ -1,7 +1,6 @@
 @startuml
-skin rose
-skinparam ActivityFontSize 15
-skinparam ArrowFontSize 12
+'https://plantuml.com/activity-diagram-beta
+
 start
 :User enters deletei command;
 
