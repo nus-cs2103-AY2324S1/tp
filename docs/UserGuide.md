@@ -35,7 +35,7 @@ to help you streamline your accounting.
 
 ![Ui](images/Ui-Overview.png)
 
-> **❗If the above does not work, try this method:**
+> **❗ If the above does not work, try this method:**
 >
 > Open a command terminal, `cd` into the folder you put the jar file in, type `java -jar transact.jar` and press Enter
 > to run the application.<br>
@@ -104,7 +104,7 @@ Under the menu bar contains three tabs:
 3. **Staff List** — This tab shows you the persons or parties you have entered in a list format.
    ![Ui](images/Ui-Staff.png)
 
-> ❗**Staff List Indexing** will not be in order after editing the list
+> ❗ **Staff List Indexing** will not be in order after editing the list
 >
 > The indexing serves as a way to link transactions to the respective staff
 
@@ -180,7 +180,7 @@ file.
 
 <div markdown="block" class="alert alert-info">
 
-|                | **Notes about the command format**                              |
+| Parameter      | Description                                                     |
 |----------------|-----------------------------------------------------------------|
 | [ ]            | Optional field                                                  |
 | \<DESCRIPTION> | Any string                                                      |
@@ -198,9 +198,9 @@ file.
 | \<SORT TYPE>   | asc (ascending) or desc (descending)                            |
 | ...            | Multiple entries allowed, separated by a space                  |
 
-- Extraneous parameters for commands that do not take in parameters (such as help, list, exit, clearstaff,
-  cleartransaction, and clear) will be ignored. For example, if the command specifies 'help 123,' it will be interpreted
-  as 'help.'
+> ❗ Extraneous parameters for commands that do not take in parameters (such as help, list, exit, clearstaff,
+> cleartransaction, and clear) will be ignored. For example, if the command `help 123` is entered, it will be interpreted
+> as `help`.
 
 </div>
 
@@ -300,7 +300,7 @@ Examples:
 - `filter more/100 less/200`
 - `filter ty/R before/10/10/23 by/1`
 
-> **❗`filter` will not affect values displayed on the dashboard overview**
+> **❗ `filter` will not affect values displayed on the dashboard overview**
 >
 > The overview page takes all transactions into account regardless of filter rules.<br>
 
