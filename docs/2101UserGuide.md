@@ -304,7 +304,7 @@ CCACommander provides you with powerful utility commands to make your admin task
 
 The `undo` command is the ultimate safety net for CCACommander. You no longer have to fear accidentally deleting 
 the wrong event or enrolling the wrong member. Simply enter the `undo` command to undo your previous command, 
-and it will revert to the state it was before.
+and it will return to the previous state.
 
 Here’s how you can use it: `undo`
 
@@ -324,22 +324,9 @@ Here's a list of commands you can undo:
 
 #### Redoing a command: `redo`
 
-Accidentally used `undo`? Don’t worry, you can redo your undone commands to retrieve your previous data too!
+Accidentally used `undo`? Don’t worry, you can redo your undone commands too!
 
 Here’s how you can use it: `redo`
-
-Here's a list of commands you can redo:
-* `clear`
-* `createMember`
-* `deleteMember`
-* `editMember`
-* `createEvent`
-* `deleteEvent`
-* `editEvent`
-* `enrol`
-* `unenrol`
-* `editEnrolment`
-
 
 <hr class="command-separator">
 
@@ -350,7 +337,7 @@ events? You can use the `clear` command to instantly remove all your members and
 Here’s how you can use it: `clear`
 
 <div markdown="block" class="alert alert-primary">:bulb: Accidentally cleared your list? 
-Worry not as you can use the `undo` command to retrieve your data! 
+Worry not as you can use the `undo` command to recover your data! 
 
 </div>
 
@@ -358,7 +345,7 @@ Worry not as you can use the `undo` command to retrieve your data!
 
 #### Help: `help`
 
-Forgot how to edit a specific enrolment or how to unenrol members? The `help` command will allow you to clarify and recall any features of the app by redirecting you to our friendly and informative user guide.
+Forgot how to edit a specific enrolment or how to unenrol members? The `help` command will allow you to clarify and recall any features of the app by providing you a link to our friendly and informative user guide.
 
 Here’s how you can use it: `help`
 
@@ -415,7 +402,7 @@ Once your laptop is recharged, you can regain access to all your stored informat
 ## Glossary
 This glossary provides definitions for the special terms used in this user guide.
 
-**CCA**: Co-curricular activity
+**CCA**: Co-curricular activity.
 
 **Command**: The text typed in by the user as a CCA Head for CCACommander.
 
