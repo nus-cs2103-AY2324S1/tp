@@ -197,7 +197,6 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Add `Member`/`Applicant` feature
 
-
 The `addMember` and `addApplicant` command is used to add a member or an applicant to the address book.
 The commands are implemented in the `AddMemberCommand` and `AddApplicantCommand` class, which extends the `Command`
 class.
@@ -328,12 +327,41 @@ list.
 
 ### Scheduling an interview for an `Applicant`
 
-### \[Proposed\] Allocating tasks to Members(need to change!)
+### Allocating tasks to Members
+
+Assign tasks to members identified by their index number in the displayed member list. The commands are implemented in
+the `AddMemberTaskCommand` class, which extend the `Command` class.
+
+* Step 1: The `AddMemberTaskCommand` object's `execute()` method is called.
+* Step 2: The member index is checked to be within the valid range of the member list. If the member index given is
+  invalid (e.g., out of range), a `CommandException` is thrown.
+* Step 3: The member at the given index is referenced based on the provided member index.
+* Step 4: The `AddMemberTaskCommand` calls the model object's `setMember()` method. It updates the member with the new
+  details
+  provided, effectively modifying the existing member's information.
+* Step 5: After the execution of the `AddMemberTaskCommand`, the member's details are successfully edited in the member
+  list.
+
+The sequence diagram below also shows the interaction between the various components during the execution of the 
+`AddMemberTask`.
+
+<img src="images/AddMemberTaskSequenceDiagram.png">
+
+### View Member task feature
+
+Lists all tasks assigned to a member in the address book to the user under the `Tasks` column.
+
+1. The `viewMemberTaskCommand` object's execute() method is called.
+2. This updates the model via its `updateFilteredMemberList()` method which is called with its predicate as always returning true.
+3. Then the `setTaskListForMember(memberToView)` method is called to set the task list for the chosen member.
+4. The `TaskListPanel` UI component is updated with the task list for the chosen member.
+
+### \[Proposed\] Better Task Management
 
 #### Proposed Implementation
 
 The proposed allocating tasks to `Member` objects is implemented using either `ToDo` or `Deadline` or `Events` object.
-They extend from the `Tasks` class. A `Tasklist` object will be instantiated for each `Member` object, used to store the
+They extend from the `Task` class. A `Tasklist` object will be instantiated for each `Member` object, used to store the
 list of tasks assigned to each individual. Additionally, it implements the following operations:
 
 * `ToDo#markAsDone()`— Will be used to mark the todo of each Member as done
@@ -619,13 +647,87 @@ Use case ends.
 
 **Use case: UC07 - Allocating a task to a member**
 
+**MSS**
+
+1. User enters command to allocate a task to a member.
+2. ClubMembersContact adds the task to the member's list of tasks.
+3. ClubMembersContact displays a success message.
+   <br/>
+   Use case ends.
+
+**Extensions**
+
+* 1a. The add task command format is invalid.
+    * 1a1. ClubMembersContact shows an error message.
+      <br/>
+      Use case resumes at step 1.
+
+
+* 1b. The member index is invalid or out of range.
+    * 1b1. ClubMembersContact shows an error message.
+      <br/>
+      Use case resumes at step 1.
+
 ---
 
 **Use case: UC08 - Viewing all tasks allocated to a member**
 
+**MSS**
+
+1. User requests to view all tasks allocated to a member.
+2. ClubMembersContact displays the list of tasks allocated to the member under the task box.
+   <br/>
+   Use case ends.
+
+**Extensions**
+
+* 1a. The view task command format is invalid.
+    * 1a1. ClubMembersContact shows an error message.
+      <br/>
+      Use case resumes at step 1.
+
+
+* 1b. The member index is invalid or out of range.
+    * 1b1. ClubMembersContact shows an error message.
+      <br/>
+      Use case resumes at step 1.
+
+* 2a. The tasklist is empty.
+    * 2a1. ClubMembersContact shows a blank task box.
+      <br/>
+      Use case resumes at step 1.
 ---
 
 **Use case: UC09 - Deleting a task allocated to a member**
+
+**MSS**
+
+1. User requests to delete a task from list of tasks allocated to a member.
+2. ClubMembersContact deletes the task from the list of tasks allocated to the member.
+   <br/>
+   Use case ends.
+
+**Extensions**
+
+* 1a. Delete task command format is invalid.
+    * 1a1. ClubMembersContact shows an error message.
+      <br/>
+      Use case resumes at step 1.
+
+* 1b. The member index is invalid or out of range.
+    * 1b1. ClubMembersContact shows an error message.
+      <br/>
+      Use case resumes at step 1.
+
+* 1c. The task index is invalid or out of range.
+    * 1b1. ClubMembersContact shows an error message.
+      <br/>
+      Use case resumes at step 1.
+
+* 2a. The tasklist is empty.
+    * 2a1. ClubMembersContact shows a blank task box.
+      <br/>
+      Use case resumes at step 1.
 
 ---
 

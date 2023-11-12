@@ -39,5 +39,6 @@ Below is a summary of my contributions to the project.
   * PRs I reviewed include:
     * [Pull Request #53](https://github.com/AY2324S1-CS2103T-W15-3/tp/pull/53)
     * [Pull Request #145](https://github.com/AY2324S1-CS2103T-W15-3/tp/pull/145)
+    * [Pull Request #263](https://github.com/AY2324S1-CS2103T-W15-3/tp/pull/263)
 * Contributions beyond the project team:
   * to be added soon
