@@ -1,6 +1,5 @@
 @startuml
 !include style.puml
-skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
@@ -14,10 +13,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("addleave EID1234-5678 2023-11-11 2023-11-11")
+[-> LogicManager : execute("addleave id/EID1234-5678 from/2023-11-11 to/2023-11-11")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("addleave EID1234-5678 2023-11-11 2023-11-11")
+LogicManager -> AddressBookParser : parseCommand("addleave id/EID1234-5678 from/2023-11-11 to/2023-11-11")
 activate AddressBookParser
 
 create AddLeaveCommandParser
@@ -27,7 +26,7 @@ activate AddLeaveCommandParser
 AddLeaveCommandParser --> AddressBookParser
 deactivate AddLeaveCommandParser
 
-AddressBookParser -> AddLeaveCommandParser : parse("EID1234-5678 2023-11-11 2023-11-11")
+AddressBookParser -> AddLeaveCommandParser : parse("id/EID1234-5678 from/2023-11-11 to/2023-11-11")
 activate AddLeaveCommandParser
 
 create AddLeaveCommand
@@ -50,8 +49,13 @@ LogicManager -> AddLeaveCommand : execute()
 activate AddLeaveCommand
 
 AddLeaveCommand -> Model : updateFilteredEmployeeList()
+activate Model
+
+Model --> AddLeaveCommand
 
 AddLeaveCommand -> Model : setEmployee(targetEmployee, editedEmployee)
+Model --> AddLeaveCommand
+deactivate Model
 
 create CommandResult
 AddLeaveCommand -> CommandResult
