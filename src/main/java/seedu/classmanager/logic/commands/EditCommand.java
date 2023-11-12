@@ -35,7 +35,7 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified.\n"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: STUDENT_NUMBER "
             + "[" + PREFIX_NAME + "NAME] "

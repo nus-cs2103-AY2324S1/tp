@@ -38,11 +38,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         StudentNumber studentNumber;
-        try {
-            studentNumber = ParserUtil.parseStudentNumber(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
-        }
+        studentNumber = ParserUtil.parseStudentNumber(argMultimap.getPreamble());
 
         EditStudentDescriptor editStudentDescriptor = new EditStudentDescriptor();
 
