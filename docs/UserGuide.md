@@ -615,7 +615,7 @@ Displays a list of all schedules in TutorConnect. List can be filtered by tutors
 
 **Scenario**
 
-You wish to view schedules assigned to tutor **Irfan Ibrahim** that have been marked as `COMPLETED`.
+You wish to view schedules assigned to tutor **Irfan Ibrahim** that have been marked as COMPLETED.
 
 Use the list schedule function!
 
@@ -627,7 +627,7 @@ Use the list schedule function!
 **What you can expect to see**
 
 Tada! For step 2, the schedule list has now been updated to show schedules assigned to tutor Irfan Ibrahim that are 
-marked as `COMPLETED`.
+marked as COMPLETED.
 
 <img src="images/list-schedules/list-s-tutor-completed.png" height="400px">
 
@@ -641,9 +641,9 @@ Good news! `list-s` command is equipped with various options to view a list of s
 scenarios:
 - `list-s` : To show all schedules.
 - `list-s TUTOR_INDEX` : To show schedules assigned to the tutor with index `TUTOR_INDEX`.
-- `list-s m/0` : To show all schedules marked as `MISSED`.
-- `list-s m/1` : To show all schedules marked as `COMPLETED`.
-- `list-s TUTOR_INDEX m/0` : To show schedules assigned to the tutor with index `TUTOR_INDEX` marked as `MISSED`.
+- `list-s m/0` : To show all schedules marked as MISSED.
+- `list-s m/1` : To show all schedules marked as COMPLETED.
+- `list-s TUTOR_INDEX m/0` : To show schedules assigned to the tutor with index `TUTOR_INDEX` marked as MISSED.
 
 </div>
 
