@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RELATIONSHIP;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.index.Index;
@@ -60,10 +61,12 @@ public class NextOfKinCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
+            logger.log(Level.WARNING, "Error: Invalid index");
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToModify = lastShownList.get(index.getZeroBased());
         if (!(personToModify instanceof Patient)) {
+            logger.log(Level.WARNING, "Error: Invalid role");
             throw new CommandException(Messages.MESSAGE_INVALID_ROLE);
         }
         Patient modifiedPerson = (Patient) personToModify;
