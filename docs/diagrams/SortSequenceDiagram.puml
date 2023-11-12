@@ -34,7 +34,7 @@ activate SortCommand
 SortCommand -> Model : sortPersonList()
 activate Model
 
-Model -> VersionedAddressBook : sort()
+Model -> VersionedAddressBook : sortPersons()
 activate VersionedAddressBook
 
 VersionedAddressBook -> VersionedAddressBook :saveAddressBook(ReadOnlyAddressBook)

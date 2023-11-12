@@ -304,6 +304,10 @@ Given below is an example of how the sort function works at each step. We will s
 5. The GUI then reads in the json file to obtain the order of addresses and populates the sorted list with the sorting criteria provided.
 6. The success message is returned as a `CommandResult` and displayed on the GUI result display panel.
 
+Here's a sequence diagram to summarise the steps above:
+
+<puml src="diagrams/SortSequenceDiagram.puml" width="550"/>
+
 **Design considerations**
 
 * The design of the `sort` command is dependent on the structure of the `AddressBookStorage` object. Should the structure
