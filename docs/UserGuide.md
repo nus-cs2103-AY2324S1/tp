@@ -3,19 +3,24 @@ layout: page
 title: User Guide
 ---
 # Welcome to TuitionConnect's User Guide!
+:rocket: Introducing **TuitionConnect**: Revolutionizing your Tutoring Business! :teacher:
 
 Fed up with setting up numerous unorganized spreadsheets on Microsoft Excel or Google Sheets to handle the administrative side of you tutoring business?
 
-Or are you perhaps finding it increasingly difficult 
+Or feeling overwhelmed with the ugly-looking chaos of your Google Calendar as your number of teaching schedules increase?
 
+Say goodbye to all this mess with the help of **TuitionConnect**: the ultimate desktop app designed to streamline the administrative and financial tasks of your tuition business!
 
-TuitionConnect is a **desktop app for simplifying the process of administration and finance management for private tutors, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, you can maximise tracking tutee-specific details, teaching-schedule management, and finance management.
+This user guide will teach you how to install **TuitionConnect** from scratch, as well as providing information about the interesting features of **TuitionConnect**. 
 
 ## Table of Contents
 
 <!-- TOC -->
 * [TuitionConnect User Guide](#tuitionconnect-user-guide)
   * [Table of Contents](#table-of-contents)
+  * [Introduction](#introduction)
+  * [Using this guide](#using-this-guide)
+  * [Symbols and Syntax](#symbols-and-syntax)
   * [Quick start](#quick-start)
   * [Input Formats](#input-formats)
     * [Command Format](#command-format)
@@ -43,6 +48,38 @@ TuitionConnect is a **desktop app for simplifying the process of administration 
 <!-- TOC -->
 
 --------------------------------------------------------------------------------------------------------------------
+## Introduction
+TuitionConnect is a **desktop app** built for tutors and tutoring businesses or simplifying the process of 
+administration and finance management for private tutors, optimized for use via a **Command Line Interface** (CLI) while 
+still having the benefits of a Graphical User Interface (GUI). 
+
+If you love to type, then **TuitionConnect** is the app for you! It helps you to track tutee-specific details, teaching-schedule management,
+and other financial and administrative tasks faster than your old and conventional apps like Google Calendar or Microsoft Excel
+
+Even if you are not a huge fan of typing, panic not! **TuitionConnect** was designed with you in mind! With this comprehensive User Guide,
+paired up with simple and beginner-friendly features, anyone can learn how to use **TuitionConnect** in no time!
+
+:sparkles: **Key Features:**
+1. **Effortless Administration:** Manage your tutoring schedules, student details, and lesson plans in one central hub. No more endless scrolling through messy spreadsheets or confusing calendar views!
+2. **Finance Made Easy**: Keep track of payments, and monitor your earnings effortlessly. 
+3. **Calendar Sanity**: Prevent clashes in your schedules, and find slots where you are available!
+
+:bulb: **Make the Switch Today!**
+Transform your tutoring experience with **TuitionConnect!** Jump straight to the [Quick Start Section](#quick-start) and experience **TuitionConnect** today!
+
+## Using this guide
+
+## Symbols and Syntax
+
+Throughout this User Guide, there might 
+
+| Symbol/Syntax                                  | Meaning                                                                                                                                         |
+|------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| :information_source: **Notes**                 | Information that you need to pay attention to.                                                                                                  |
+| :bulb: **Tip**                                 | Information that you may find helpful.                                                                                                          |
+| :exclamation: **Caution**                      | Information that you need to know before executing a [command](#command)                                                                        |
+| `Highlighted text block`                       | [Commands](#command) or [parameters](#parameter) that you can enter into our application, or text that is directly displayed in our application |
+| [Hyperlinked text in blue](#symbols-and-syntax) | When it is pressed, it should lead you to another section in the document or to an external link.                                               |
 
 ## Quick start
 
