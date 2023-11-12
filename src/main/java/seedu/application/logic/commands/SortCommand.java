@@ -15,10 +15,12 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
     public static final String MESSAGE_SUCCESS = "Sorted jobs";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the list of jobs based on "
+    public static final String MESSAGE_USAGE =
+        COMMAND_WORD + ": Sorts the list of jobs based on "
             + "the specified field and displays them as a list with index numbers.\n"
             + "Parameters: PREFIX\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_ROLE;
+    public static final Boolean CLEARS_DETAILS_PANEL = true;
 
     private final FieldComparator comparator;
 
@@ -34,7 +36,7 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.sortJobs(comparator);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, CLEARS_DETAILS_PANEL);
     }
 
     @Override

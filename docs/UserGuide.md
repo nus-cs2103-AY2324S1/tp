@@ -42,9 +42,6 @@ _Find Your Success with JobFindr_
 6. [FAQ](#faq)
 7. [Glossary](#glossary)
 
-* TOC
-  {:toc}
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Introduction**
@@ -99,12 +96,14 @@ _Good to see you back here! How we can help you?_
        over [here](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
        to install Java `11`
 2. Download the latest `JobFindr.jar` from [here](https://github.com/AY2324S1-CS2103T-W12-3/tp/releases).
+   <br>
    ![DownloadJar](images/user-guide/DownloadJar.png)
+   <br>
 3. Copy the file to the folder you want to use as the **home folder** for your AddressBook.
 4. [Open a command terminal](#2-how-do-i-open-up-terminal-on-my-computer), `cd` into the folder you put the jar file in,
    and enter the command `java -jar JobFindr.jar` to run the application.
 5. A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br><br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/user-guide/QuickStartUi.png)
 6. Get started on JobFindr with our guided [Quick Tutorial](#quick-tutorial) to learn the basics of using JobFindr in a
    few minutes.
 7. Refer to [Key Information](#key-information) below for details of each command.
@@ -113,7 +112,7 @@ _Good to see you back here! How we can help you?_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick Tutorial
+## **Quick Tutorial**
 
 Let us help you begin your job search journey with JobFindr. Here is a quick tutorial to help you understand the basic
 features to get started on JobFindr.
@@ -129,14 +128,19 @@ application onto JobFindr.
 
 **Step 1**: Find the [Command Box](#user-interface) on JobFindr and type in `add c/Google r/Software Engineer` before
 pressing **Enter**.<br>
-<img src="images/user-guide/QuickTutorial1.png" style="display: block; margin: auto;" width="700">
 
 * Learn more about the structure of a job application [here](#structure-of-a-job-application).
+  <img src="images/user-guide/QuickTutorial1.png" style="display: block; margin: auto;" width="700">
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes:**<br>
+* * Learn more about the structure of a job application [here](#structure-of-a-job-application).
+</div>
 
 **Step 2**: You should see a new entry added to the Job List Panel just like this: <br>
-<img src="images/user-guide/QuickTutorial2.png"  width="300">
 
 * You may need to scroll down the list to view the new entry by using the scroll bar.
+  <img src="images/user-guide/QuickTutorial2.png" style="display: block; margin: auto;" width="300">
 
 _[Optional]_ Good job! You have added your first application onto JobFindr! Now, you may try out adding other
 applications with different field inputs. Try entering or copy-paste the following into the Command Box:
@@ -152,14 +156,13 @@ added application? Let's try using the edit feature.
 
 **Step 1**: Locate the [index](#command-format) of the application you want to edit. Let's edit our newly added
 application to `Google` for now. <br>
-<img src="images/user-guide/QuickTutorial3.png"  width="300">
 
 * You may want to enter the [`list`](#listing-all-applications--list) command to list all available applications.
+  <img src="images/user-guide/QuickTutorial3.png" style="display: block; margin: auto;" width="300">
 
 **Step 2**: Type `edit 8 r/Java Programmer` into the Command Box and press **Enter**. You should see an update to the
-application's
-role.<br>
-<img src="images/user-guide/QuickTutorial4.png"  width="300">
+application's role.<br>
+<img src="images/user-guide/QuickTutorial4.png" style="display: block; margin: auto;" width="300">
 
 _[Optional]_ Great! You have now edited the role of your application. Try editing other fields as well:
 
@@ -173,7 +176,7 @@ let's do exactly that now.
 
 **Step 1**: Locate the [index](#command-format) of the application you want to edit. Let's edit our newly added
 application to `Google` for now. <br>
-<img src="images/user-guide/QuickTutorial5.png"  width="300">
+<img src="images/user-guide/QuickTutorial5.png" style="display: block; margin: auto;" width="300">
 
 * You may want to enter the [`list`](#listing-all-applications--list) command to list all available applications.
 
@@ -286,7 +289,7 @@ The following are valid interview types:
 | `ONSITE`       | An onsite interview     |
 | `OTHER`        | Other interviews        |
 
-### Command format
+### Command Format
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
   as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -325,7 +328,7 @@ The following are valid interview types:
 
 ## **Features**
 
-### Command summary
+### Command Summary
 
 | Action               | Format                                                                                   |
 |----------------------|------------------------------------------------------------------------------------------|
@@ -385,12 +388,13 @@ _Shows a list of all job applications in alphabetical order of the company name.
 
 **Successful Example:** <br>
 **Step 1:** Type `list` in the Command Box and press **Enter**.<br>
+<br>
 <img src="images/user-guide/ListCommandEg1.png" style="display: block; margin: auto;" width="700">
 ![ListCommandEg2](images/user-guide/ListCommandEg2.png)
 
 <div markdown="block" class="alert alert-success">
 **:bulb: Useful Tips:**<br>
-* You may navigate through the Job List Panel using the Up/Down arrow keys or use the scrollbar. 
+* You may navigate through the Job List Panel using the Up/Down arrow keys or use the Scroll Bar. 
 </div>
 
 [&uarr; Back to Table of Contents](#table-of-contents)
@@ -411,7 +415,7 @@ _Adds a job application to the list._
 
 ***Successful Example:***
 
-**Step 1:** Enter a basic job application into the Command Box and press **Enter:** `add c/Google r/Software Engineer`
+**Step 1:** Enter a basic job application into the Command Box `add c/Google r/Software Engineer` and press **Enter**.
 
 * This command adds a job application for the company **Google** with the role **Software Engineer**.
 * Optional fields like deadline, status, industry, and job type are not provided, so they will use their default values.
@@ -452,13 +456,14 @@ _Deletes the specified application from the list using the specified `INDEX`._
 
 **Step 1:** Enter the [list command](#listing-all-applications--list) to list all the available job applications.
 
-**Step 2:** Locate the index of the job application you want to delete.<br> Let's try `delete 2`
+**Step 2:** Locate the index of the job application you want to delete.<br> Let's try typing `delete 2` and
+press **Enter**.
 
 * This command deletes the job application at the 2nd index in the list.
 * This is provided that this job application indeed exists.
   ![DeleteCommandEg1](images/user-guide/DeleteCommandEg1.png)
 
-**Step 3:** Press **enter** to execute the command. Now you will see the 2nd application removed from the list of jobs.
+**Step 3:** Now you will see the 2nd application removed from the list of jobs.
 ![DeleteCommandEg2](images/user-guide/DeleteCommandEg2.png)
 
 ***Common Errors:***
@@ -489,26 +494,28 @@ _Edits the application to the company at the specified `INDEX`_
 ***Editing One Field***
 
 **Step 1:** Now you realised you have seen the job listing wrongly and wish to change the role of the job complication
-to `Google`. Type `edit 8 r/Test Engineer`
+to `Google`. Type `edit 8 r/Test Engineer` and press **Enter**.
 
 * This command edits the role of the `Google` application to `Test Engineer`
 
 ![EditCommandEg1](images/user-guide/EditCommandEg1.png)
 
-**Step 2:** Press **enter** and you will see the newly updated Job Card for the role field at `Google`.<br>
-<img src="images/user-guide/EditCommandEg2.png"  width="300">
+**Step 2:** You will see the newly updated Job Card for the role field at `Google`.<br>
+<br>
+<img src="images/user-guide/EditCommandEg2.png" style="display: block; margin: auto;" width="300">
 
 ***Editing Multiple Fields***
 
 **Step 1:** Trying editing multiple fields for a job application with one command.
-Type `edit 2 c/Amazon r/Product Manager d/Dec 15 2023 1000 s/APPROVED`
+Type `edit 2 c/Amazon r/Product Manager d/Dec 15 2023 1000 s/APPROVED` and press **Enter**.
 
 * This command edits the company, role, deadline, and status of the second job application.
+* Make sure there is a job application at index 2.
 
 ![EditCommandEg3](images/user-guide/EditCommandEg3.png)
 
-**Step 2:** Press **enter** and you will see the 2nd Job Card in the list being updated.<br>
-<img src="images/user-guide/EditCommandEg4.png"  width="300">
+**Step 2:** You will see the 2nd Job Card in the list being updated.<br>
+<img src="images/user-guide/EditCommandEg4.png" style="display: block; margin: auto;" width="300">
 
 ***Common Errors:***
 
@@ -524,9 +531,12 @@ Type `edit 2 c/Amazon r/Product Manager d/Dec 15 2023 1000 s/APPROVED`
 
 ![EditCommandEg6](images/user-guide/EditCommandEg6.png)
 
-3. Invalid Job Type: `edit 4 t/Part-Time`
+3. Invalid Job Type: `edit 4 t/PART-TIME`
 
-* This command is invalid because "t/Part-Time" is not a valid job type. It should be "t/PART_TIME."
+* This command is invalid because `t/t/PART-TIME` is not a valid job type due to the **dash** `-`. It should
+  be an **underscore** `_` instead: `t/PART_TIME`.
+
+![EditCommandEg7](images/user-guide/EditCommandEg7.png)
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
@@ -534,9 +544,14 @@ Type `edit 2 c/Amazon r/Product Manager d/Dec 15 2023 1000 s/APPROVED`
 
 ### Clearing all applications: `clear`
 
-Clears all applications from the application book.
+_Clears all job applications from JobFindr._
 
 **Format:** `clear`
+
+<div markdown="block" class="alert alert-danger">
+**:exclamation: Warning:**<br>
+* This command is **irreversible**! Be aware of using this command.
+</div>
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
@@ -544,86 +559,137 @@ Clears all applications from the application book.
 
 ### Finding an application : `find`
 
-Finds all applications whose fields match the keywords provided.
+_Finds all applications whose fields match the keywords provided._
 
 **Format:** `find [KEYWORDS] [c/COMPANY] [r/ROLE] [s/STATUS] [d/DEADLINE] [i/INDUSTRY] [t/JOB_TYPE]`
 
-* At least one optional parameter must be provided. Multiple parameters can be provided.
-* If a [prefix](#prefix) is given, the search will only find applications containing the given keywords in the specified
+<div markdown="block" class="alert alert-danger">
+**:exclamation: Warning:**<br>
+* **At least one** of the parameters above must be provided. Multiple parameters can be included in one command.
+* An application will be listed only if it contains **ALL** the keywords provided.
+</div>
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes about Command Format:**<br>
+* **No Prefix** - If `KEYWORDS` are provided without [prefix](#prefix), the command will find all applications that contains the `KEYWORDS` in **any field**.
+* **Prefix Given** - If a [prefix](#prefix) is given, the search will only find applications containing the given keywords in the specified
   field.
-* Multiple keywords can be provided for one parameter.
+</div>
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes about KEYWORDS Parameter:**<br>
+* Keywords are **case-insensitive**.
+* Multiple words can be provided for one `KEYWORDS` parameter.
     * e.g. `find r/Software Engineer` is a valid command.
-* Keywords are case-insensitive.
-* If `KEYWORDS` is provided, the command will find all applications that contains the `KEYWORDS` in any field.
-* An application will be listed only if it contains _ALL_ the keywords provided.
-* Applications with partially matching keywords will not be listed.
-    * e.g. searching for the keyword "Goo" will not list applications containing "Google".
+* Applications with partially matching keywords **will not be listed**.
+    * e.g. searching for the keyword `Goo` will not list applications containing `Google`.
 * Characters not separated by white space are considered _ONE_ word.
     * e.g. searching for the keyword "ADD" will not list applications containing "TO_ADD_DEADLINE".
 * Searches for deadline must be formatted correctly. Refer to
   "[Structure of a job application](#structure-of-a-job-application)" for the correct format of a deadline.
+</div>
 
-**Examples:**
+***Successful Examples:***
 
-***Successful Commands:***
+***Find by Specific Field:***
 
-1. Finding by company: `find c/Google`
+**Step 1:** Let's try finding job application with the `company` field.
+Type `find c/Tiktok` and press **Enter**.
 
-* This command searches for all job applications with "Google" in the company name.
+* This command searches for all job applications with `Tiktok` in the company name.<br>
+  ![FindCommandEg1](images/user-guide/FindCommandEg1.png)
 
-2. Finding using multiple conditions: `find Google r/Software Engineer`
+**Step 2:** All matching job applications will be displayed in the Job List Panel.
 
-* This command searches for all job applicaitons with "Google" in any field and the words "Software" and "Engineer".
+* Click the Job Card to display its details in the Job Details Panel.<br>
+  ![FindCommandEg2](images/user-guide/FindCommandEg2.png)
 
-***Failed Commands:***
+***Find by Multiple Conditions:***
+
+**Step 1:** Let's try finding job application with by applying multiple conditions in the find command.
+Type `find Project c/Deloitte` and press **Enter**.
+
+* This command searches for all job applications with `Project` in any field and the words `Deloitte` its `company`
+  field.<br>
+  ![FindCommandEg3](images/user-guide/FindCommandEg3.png)
+
+**Step 2:** All matching job applications will be displayed in the Job List Panel.
+
+* Click the Job Card to display its details in the Job Details Panel.<br>
+  ![FindCommandEg4](images/user-guide/FindCommandEg4.png)
+
+***Common Errors:***
 
 1. Missing keywords: `find`
 
-* This command is invalid because it doesn't specify any keywords to search for.
+* This command is invalid because it doesn't specify any keywords to search for. Please provide **at least one keyword**
+  after `find`.
+  ![FindCommandEg5](images/user-guide/FindCommandEg5.png)
 
-**UI mockup:**
-![](images/user-guide/FindCommand.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ### Sorting all applications : `sort`
 
-Sorts the list based on the prefix provided.
+_Sorts the list based on the prefix provided._
 
 **Format:** `sort PREFIX`
 
+<div markdown="block" class="alert alert-danger">
+**:exclamation: Warning:**<br>
 * A single valid `PREFIX` must be provided. Refer to "[Structure of a job application](#structure-of-a-job-application)"
   for the list of valid prefixes.
+</div>
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes about KEYWORDS Parameter:**<br>
 * The sort order cannot be reversed.
     * e.g. when sorting by company, companies cannot be listed from Z-A.
 * For optional fields, applications with empty fields will be listed first.
+</div>
 
 **Examples:**
 
 ***Successful Commands:***
 
-1. Sort by company: `sort c/`
+***Sort by Company:***
 
-* This command sorts all job applications in ascending alphabetical order of company name.
+**Step 1:** Let's start by sorting the job application by `company` name. Type `sort c/` and press **Enter**.
 
-2. Sort by role: `sort r/`
+* This command sorts all job applications in ascending alphabetical order of company name.<br>
+
+![SortCommandEg1](images/user-guide/SortCommandEg1.png)
+
+**Step 2:** A sorted list of job applications by `company` will be displayed in the Job List Panel. <br>
+![SortCommandEg2](images/user-guide/SortCommandEg2.png)
+
+***Sort by Deadline:***
+
+**Step 1:** Let's try another prefix and sort the job application by `deadline`. Type `sort d/` and press **Enter**.
 
 * This command sorts all job applications in chronological order of deadline, starting from applications with the
-  earliest deadline.
+  **earliest deadline**.<br>
 
-***Failed Commands:***
+![SortCommandEg3](images/user-guide/SortCommandEg3.png)
+
+**Step 2:** A sorted list of job applications by `deadline` will be displayed in the Job List Panel. <br>
+![SortCommandEg4](images/user-guide/SortCommandEg4.png)
+
+***Common Errors:***
 
 1. Multiple prefixes: `sort r/ c/`
 
 * This command is invalid because only one prefix is accepted.
 
+![SortCommandEg5](images/user-guide/SortCommandEg5.png)
+
 2. Input following prefix: `sort r/Software`
 
 * This command is invalid because there should be nothing following the prefix provided.
 
-**UI mockup:**
-![](images/user-guide/SortCommand.png)
+![SortCommandEg6](images/user-guide/SortCommandEg6.png)
+
 [&uarr; Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -730,7 +796,7 @@ Edits an interview of the specified application from the list.
 ### 1. How do I make sure I have installed the correct Java version?
 
 - [Open up terminal](#2-how-do-i-open-up-terminal-on-my-computer) on your computer.
-- Type `java -version` in your terminal and press enter. You will see the following if you have installed Java 11
+- Type `java -version` in your terminal and press **Enter**. You will see the following if you have installed Java 11
   correctly:<br>
   ![CheckJavaVer](images/user-guide/FaqCheckJavaVer.png)
 - If you do not have Java 11 installed, please refer

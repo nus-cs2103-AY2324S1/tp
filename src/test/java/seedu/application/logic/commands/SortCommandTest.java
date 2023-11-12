@@ -37,42 +37,48 @@ public class SortCommandTest {
     public void execute_listIsSortedByCompany_showsSortedListByCompany() {
         FieldComparator fieldComparator = new FieldComparator(PREFIX_COMPANY);
         expectedModel.sortJobs(fieldComparator);
-        assertCommandSuccess(new SortCommand(fieldComparator), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new SortCommand(fieldComparator), model,
+            SortCommand.MESSAGE_SUCCESS, SortCommand.CLEARS_DETAILS_PANEL, expectedModel);
     }
 
     @Test
     public void execute_listIsSortedByRoles_showsSortedListByRole() {
         FieldComparator fieldComparator = new FieldComparator(PREFIX_ROLE);
         expectedModel.sortJobs(fieldComparator);
-        assertCommandSuccess(new SortCommand(fieldComparator), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new SortCommand(fieldComparator), model,
+            SortCommand.MESSAGE_SUCCESS, SortCommand.CLEARS_DETAILS_PANEL, expectedModel);
     }
 
     @Test
     public void execute_listIsSortedByStatus_showsSortedListByStatus() {
         FieldComparator fieldComparator = new FieldComparator(PREFIX_STATUS);
         expectedModel.sortJobs(fieldComparator);
-        assertCommandSuccess(new SortCommand(fieldComparator), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new SortCommand(fieldComparator), model,
+            SortCommand.MESSAGE_SUCCESS, SortCommand.CLEARS_DETAILS_PANEL, expectedModel);
     }
 
     @Test
     public void execute_listIsSortedByIndustry_showsSortedListByIndustry() {
         FieldComparator fieldComparator = new FieldComparator(PREFIX_INDUSTRY);
         expectedModel.sortJobs(fieldComparator);
-        assertCommandSuccess(new SortCommand(fieldComparator), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new SortCommand(fieldComparator), model,
+            SortCommand.MESSAGE_SUCCESS, SortCommand.CLEARS_DETAILS_PANEL, expectedModel);
     }
 
     @Test
     public void execute_listIsSortedByDeadline_showsSortedListByDeadline() {
         FieldComparator fieldComparator = new FieldComparator(PREFIX_DEADLINE);
         expectedModel.sortJobs(fieldComparator);
-        assertCommandSuccess(new SortCommand(fieldComparator), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new SortCommand(fieldComparator), model,
+            SortCommand.MESSAGE_SUCCESS, SortCommand.CLEARS_DETAILS_PANEL, expectedModel);
     }
 
     @Test
     public void execute_listIsSortedByJobType_showsSortedListByJobType() {
         FieldComparator fieldComparator = new FieldComparator(PREFIX_JOB_TYPE);
         expectedModel.sortJobs(fieldComparator);
-        assertCommandSuccess(new SortCommand(fieldComparator), model, SortCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new SortCommand(fieldComparator), model,
+            SortCommand.MESSAGE_SUCCESS, SortCommand.CLEARS_DETAILS_PANEL, expectedModel);
     }
 
     @Test
