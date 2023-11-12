@@ -44,24 +44,32 @@ public class RandomCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_NUM_OF_STUDENTS);
         }
 
-        Random random = new Random();
-        HashSet<Integer> distinctInt = new HashSet<>();
-
-        while (distinctInt.size() < numOfStudents) {
-            int i = random.nextInt(lastShownList.size());
-            distinctInt.add(i);
-        }
-
-        Integer[] randomInt = distinctInt.toArray(new Integer[0]);
+        Integer[] randomInt = generateRandomInt(numOfStudents, lastShownList.size());
 
         StringBuilder result = new StringBuilder(MESSAGE_RANDOM_SUCCESS);
-
         for (Integer i : randomInt) {
             Student s = lastShownList.get(i);
             result.append(s.getName()).append(" ").append(s.getStudentNumber()).append("\n");
         }
 
         return new CommandResult(result.toString());
+    }
+
+    /**
+     * Generates an array of distinct non-negative random integers.
+     *
+     * @param size the size of the array.
+     * @param upper the upper bound.
+     */
+    private Integer[] generateRandomInt(int size, int upper) {
+        HashSet<Integer> distinctInt = new HashSet<>();
+        Random random = new Random();
+        while (distinctInt.size() < size) {
+            int i = random.nextInt(upper);
+            distinctInt.add(i);
+        }
+        Integer[] randomInt = distinctInt.toArray(new Integer[0]);
+        return randomInt;
     }
 
     @Override
