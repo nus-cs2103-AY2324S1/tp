@@ -1248,7 +1248,7 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: `sort f/salary in/asc`<br>
    Expected: Employees will be sorted based on their salaries in ascending order. 
-   Details of the deleted employee shown in the status message.
+   Details of the sorted employee list shown in the status message.
 
    3. Test case: `sort f/phone in/asc` or `sort f/department in/desc`<br>
    Expected: List is not sorted (field phone cannot be used to sort). Error details shown in the status message.
@@ -1335,7 +1335,7 @@ testers are expected to do more *exploratory* testing.
       Expected: No employee leave is deleted (invalid date order). Error details shown in the result display.
 
    8. Test case: `deleteleave id/EID1234-5678 from/2023-12-04 to/2023-12-05`<br>
-      Expected: No employee leave is deleted (no leaves exist between "2023-12-03" and "2023-12-05"). Error details shown in the result display.
+      Expected: No employee leave is deleted (no leaves exist between "2023-12-04" and "2023-12-05"). Error details shown in the result display.
 
 2. Deleting leave while only some employees are being shown
 
@@ -1592,14 +1592,14 @@ Problem:
 
 Solution:
 * We will update the employee card in the GUI to display remarks of the employees upon clicking on it.
-* This decision is to ensure the displayed employee card is not too cluttered with too much information.
+* This is to ensure the displayed employee card is not cluttered with too much information.
 
 ### Deleting a remark requires typing the whole remark
 
 Problem:
 * In our current implementation, deleting a remark requires the user to type in the remark exactly as it is
   typed in when added, i.e. exactly as it is shown in the message box.
-* This is highly inefficient and time-consuming.
+* This can be tedious, especially for long remarks.
 
 Solution:
 * A solution is to address a remark by its index (based on date added) instead of its value, so that
@@ -1615,9 +1615,10 @@ Problem:
   we see that being able to input a date this extreme is excessive and highly unrealistic.
 
 Solution:
-* We will enhance the leave list so that there are three separate lists, one for current year, one for last year, and one for next year.
-* Users will only be allowed to add leaves from last year to next year, and only the list for the current year will be
-  considered when counting the number of annual leaves allocated.
+* We will enhance the leave list so that there are three separate lists, one for the current year, one for the previous year, and one for the following year.
+* Users will only be allowed to add leave dates that fall within the time period of the beginning of the previous year to the end of the following year,
+  and the number of annual leaves allocated will be calculated accordingly.
+* For example, users will be able to add leave dates that fall in 2022, 2023, and 2024. Leaves taken in each year will be tracked separately.
 
 ### No efficient way to view a specific employee's leave dates
 
