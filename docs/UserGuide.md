@@ -79,6 +79,12 @@ Refer to the table below for details on each GUI component
 | Event list        | Displays the list of events in FumbleLog. You can scroll through the list of events using the scroll bar on the right of the list.                       |
 | Index             | Displays the index of the person or event in their respective lists. This index is used in certain commands. i.e. editing persons or events.             |
 
+![Expired Event](images/ExpiredEvent.png)
+
+<div markdown="block" class="alert alert-warning">
+An expired event will appear red in the event list. This is to highlight to you that the event has passed.
+</div>
+
 # FumbleLog Tutorial
 This tutorial is designed for new users looking to get started using FumbleLog. In this tutorial, you will find step-by-step instructions on how to use commands in FumbleLog to help you manage
 your contacts and events.
@@ -96,7 +102,6 @@ your contacts and events.
 ![Tutorial Event Edit](images/tutorialEventEdit.png)
 7. Finally, once the event is over, you can **delete the event** by using the index of the event (in this case 1): `delete_event 1`.
 8. **Well done! 👍** You have mastered the basics of FumbleLog! You can now visit the [Features](#features) section to learn advanced commands!
-
 
 # Features
 
