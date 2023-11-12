@@ -723,9 +723,62 @@ testers are expected to do more *exploratory* testing.
     * The right side has the details panel, which shows details of any specific item in the list.
       ![Ui](images/Ui.png)
 
-### Adding a person
+### Viewing ___STUDENTS list___, ___SCHEDULE list___ and  ___TASKS list___
 
-Adding a person in ___STUDENTS list___.
+* In ___STUDENTS list___:
+  * Test case: `list students` <br>
+    Expected: A list of all students with their names is displayed in the list panel. Showing list students is shown in the response box.
+  
+  * Test case: `list students email` <br>
+    Expected: A list of all students with their names and emails is displayed in the list panel.
+
+* In ___SCHEDULE list___:
+  * Test case: `list` <br>
+    Expected: A list of all lessons with their names, date, start and end time is displayed in the list panel. Showing list schedule is shown in the response box.
+  
+  * Test case: `list schedule` <br>
+    Expected: A list of all lessons with their names, date, start and end time is displayed in the list panel. Showing list schedule is shown in the response box.
+
+* In ___TASKS list___:
+    * Test case: `list tasks` <br>
+      Expected: The full task list with task description is displayed in the list panel. Showing list tasks is shown in the response box.
+
+### Show Feature
+
+##### Showing a student in ___STUDENTS list___.
+
+1. Prerequisites: List all students using the `list students` command. There are more than 2 and less than 80 students in the displayed list of students.
+
+2. Test case: `show 1`<br>
+   Expected: The first student in the displayed list of students is shown in the details panel. The details of the first student in the displayed list is shown in the response box.
+
+3. Test case: `show 80` <br>
+   Expected: Details panel remains the same. Error indicating index is invalid is shown in the response box.
+
+##### Showing a lesson in ___SCHEDULE list___.
+
+1. Prerequisites: List all lessons using the `list` command. There are more than 2 and less than 80 lessons in the displayed list of lessons.
+
+2. Test case: `show 2`<br>
+   Expected: The second lesson in the displayed list of lessons is shown in the details panel. The details of the second lesson in the displayed list is shown in the response box.
+
+3. Test case: `show1` <br>
+   Expected: Details panel remains the same. Error indicating unknown command is shown in the response box.
+
+##### Showing a task in ___TASK list___.
+
+1. Prerequisites: List all tasks using the `list tasks` command. There are more than 2 and less than 80 tasks in the displayed list of tasks.
+
+2. Test case: `show 2`<br>
+   Expected: The second task in the displayed list of tasks is shown in the details panel. The details of the second task in the displayed list is shown in the response box.
+
+3. Test case: `show -2`<br>
+   Expected: Details panel remains the same. Error indicating invalid command format with the usage message of show is shown in the response box.
+
+   
+### Add Feature
+
+##### Adding a person in ___STUDENTS list___.
 
    1. Prerequisites: List all students using the `list students` command. There is currently no student with the name "Leah", "Riley" and "Max".
 
@@ -742,14 +795,32 @@ Adding a person in ___STUDENTS list___.
       Expected: No student is added. Error indicating invalid format with the phone number constraints shown in the response box.
 
    6. Test case: `addPerson` <br>
-         Expected: No student is added. Error indicating invalid format and flag name not found shown in the response box.
+      Expected: No student is added. Error indicating invalid format and flag name not found shown in the response box.<br><br>
 
+##### Adding a lesson in ___SCHEDULE list___.
 
-### Deleting a person
+1. Prerequisites:
+    * List all lessons using the `list` command.
+    * There is currently no lessons with the name "Chemistry Lesson at Bedok" and "Biology Lesson at Tai Seng".
+    * There are no existing lessons from 12 December 2023 to 15 December 2023 in the application.
+    * There is an existing lesson on 11 December 2023 from 11:00 AM to 1:00 PM.<br><br>
+
+2. Test case: `addLesson -name Chemistry Lesson at Bedok -day 2023/12/12 -subject chemistry -start 11:00 -end 13:30`<br>
+   Expected: A new lesson is added, with name "Chemistry Lesson at Bedok" from 11:00 AM to 1:30 PM on "2023/12/12" with subject "CHEMISTRY". The details of the added lesson is shown in the response box.
+
+3. Test case: `addLesson -name Biology Lesson at Tai Seng -day 2023/12/13 -start 15:00 -end 14:00`<br>
+   Expected: No lesson is added. Error indicating invalid lesson format and that the end time cannot be before start time is shown in the response box.
+
+4. Test case: `addLesson -name Biology Lesson at Tai Seng -day 2023/12/11 -start 12:00 -end 14:00`<br>
+   Expected: No lesson is added. Error indicating existing lesson clashes with lesson to be added with the details of the existing lesson in the schedule shown in the response box.
+
+##### Adding a task to a lesson in ___SCHEDULE list___.
+
+### Deleting a person/lesson
 
 Deleting a person in ___STUDENTS list___.
 
-   1. Prerequisites: There are more than 2 students in the displayed ___STUDENTS list___.
+   1. Prerequisites: There are more than 2 students in the displayed list of students.
 
    2. Test case: `deletePerson 1`<br>
       Expected: First student is deleted from the list. Details of the deleted student is shown in the response box. 
@@ -766,30 +837,9 @@ Deleting a person in ___STUDENTS list___.
    6. Test case: `deletePerson` <br>
       Expected: No student is deleted. Error indicating invalid command format is shown in the response box.
 
-### Adding a lesson
-
-Adding a lesson in ___SCHEDULE list___.
-
-1. Prerequisites: 
-    * List all lessons using the `list` command.
-    * There is currently no lessons with the name "Chemistry Lesson at Bedok" and "Biology Lesson at Tai Seng".
-    * There are no existing lessons from 12 December 2023 to 15 December 2023 in the application.
-    * There is an existing lesson on 11 December 2023 from 11:00 AM to 1:00 PM.
-
-2. Test case: `addLesson -name Chemistry Lesson at Bedok -day 2023/12/12 -subject chemistry -start 11:00 -end 13:30`<br>
-   Expected: A new lesson is added, with name "Chemistry Lesson at Bedok" from 11:00 AM to 1:30 PM on "2023/12/12" with subject "CHEMISTRY". The details of the added lesson is shown in the response box.
-
-3. Test case: `addLesson -name Biology Lesson at Tai Seng -day 2023/12/13 -start 15:00 -end 14:00`<br>
-   Expected: No lesson is added. Error indicating invalid lesson format and that the end time cannot be before start time is shown in the response box.
-
-4. Test case: `addLesson -name Biology Lesson at Tai Seng -day 2023/12/11 -start 12:00 -end 14:00`<br>
-   Expected: No lesson is added. Error indicating existing lesson clashes with lesson to be added with the details of the existing lesson in the schedule shown in the response box.
-
-### Deleting a lesson
-
 Deleting a lesson in ___SCHEDULE list___.
 
-1. Prerequisites: List all lessons using the `list` command. There are more than 5 and less than 80 students in the displayed list ___SCHEDULE list___.
+1. Prerequisites: List all lessons using the `list` command. There are more than 5 and less than 80 students in the displayed list of lessons.<br><br>
 
 2. Test case: `deleteLesson 1`<br>
    Expected: First lesson is deleted from the list. Details of the deleted lesson is shown in the response box.
