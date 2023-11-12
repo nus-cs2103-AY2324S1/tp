@@ -897,7 +897,7 @@ testers are expected to do more *exploratory* testing.
 5. Test case: `deleteTask 1` (in ___TASKS list___)
    Expected: No task is deleted. Error indicating deleting of tasks only in schedule list is shown in the response box.
 
-### Edit feature
+### Edit Feature
 
 ##### Editing a student in ___STUDENTS list___
 
@@ -905,7 +905,7 @@ testers are expected to do more *exploratory* testing.
     * List all students using the `list students` command. 
     * There is currently no student with the name "Leah" and "Max".
     * There is an existing student with the name "Riley".
-    * There are more than 2 students in the displayed list of students.
+    * There are more than 2 students in the displayed list of students. <br><br>
 
 2. Test case: `editPerson 1 -name Leah` <br>
    Expected: The name of the first student in the displayed list of students is edited to "Leah". Details of the edited student is shown in the response box.
@@ -923,7 +923,7 @@ testers are expected to do more *exploratory* testing.
     * List all lessons using the `list` command.
     * There is currently no lessons with the name "Chemistry Lesson at Bedok", "Biology Lesson at Tai Seng" and "Lesson".
     * There is an existing lesson on 2023/12/12 from 13:00 to 15:00.
-    * There are more than 2 lessons in the displayed list of lessons.
+    * There are more than 2 lessons in the displayed list of lessons. <br><br>
 
 2. Test case: `editLesson 1 -name Chemistry Lesson at Bedok` <br>
    Expected: The name of the first lesson in the displayed list of lessons is edited to "Chemistry Lesson at Bedok". Details of the edited lesson is shown in the response box.
@@ -940,7 +940,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Prerequisites:
     * List all students using the `list students` command.
-    * There are currently four students with names "Alex Wong", "Alex Yeoh", "Willy Wonka" and "Wong Max".
+    * There are currently four students with names "Alex Wong", "Alex Yeoh", "Willy Wonka" and "Wong Max". <br><br>
    
 2. Test case: `find Alex` <br>
    Expected: Only students with the name "Alex Wong" and "Alex Yeoh" are shown. A message indicating the number of students listed is shown in the response box.
@@ -955,7 +955,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Prerequisites:
     * List all lessons using the `list` command.
-    * There are currently three lessons with names "Chemistry Lesson at bedok", "lesson chem at kovan" and "bedok eng".
+    * There are currently three lessons with names "Chemistry Lesson at bedok", "lesson chem at kovan" and "bedok eng". <br><br>
 
 2. Test case: `find chem` <br>
    Expected: Only lessons with the name "Chemistry Lesson at bedok" and "lesson chem at kovan" are shown. A message indicating the number of lessons listed is shown in the response box.
@@ -965,6 +965,50 @@ testers are expected to do more *exploratory* testing.
 
 4. Test case: `find x` <br>
    Expected: No lessons are shown. A message indicating 0 lessons listed is shown in the response box.
+
+
+### Filter Feature
+
+##### Filtering a student in ___STUDENTS list___
+1. Prerequisites:
+    * List all students using the `list students` command.
+    * There are currently four students with "ENGLISH" as subjects. 
+    * There are currently three students with "new" tag. 
+    * There are currently two students with "yet to pay" remark. <br><br>
+
+2. Test case: `filter -subject english` <br>
+   Expected: Four students are shown in the list panel. A message indicating filtered student list successfully is shown in the response box.
+
+3. Test case: `filter -tag new` <br>
+   Expected: Three students are shown in the list panel. A message indicating filtered student list successfully is shown in the response box.
+
+4. Test case: `filter -remark yet to pay` <br>
+   Expected: Two students are shown in the list panel. A message indicating filtered student list successfully is shown in the response box.
+
+5. Test case: `filter -subject bio` <br>
+   Expected: List panel remains the same. A message indicating invalid filter format and subject constraints is shown in the response box.
+
+
+##### Filtering a lesson in ___SCHEDULE list___
+
+1. Prerequisites:
+    * List all lessons using the `list` command.
+    * There are currently four lessons with "PHYSICS" as subjects.
+    * There are currently two lessons on 12/12/2023, one lesson on 13/12/2023, three lessons on 14/12/2023. 
+    * There are currently two lessons with no date specified. <br><br>
+
+2. Test case: `filter -subject physics` <br>
+   Expected: Four lessons are shown in the list panel. A message indicating filtered schedule list successfully is shown in the response box.
+
+3. Test case: `filter -on 2023/12/12` <br>
+   Expected: Two lessons are shown in the list panel. A message indicating filtered schedule list successfully is shown in the response box.
+
+4. Test case: `filter -after 2023/12/13` <br>
+   Expected: Five lessons are shown in the list panel (three lessons on 14/12/2023 & two lessons with no date specified). A message indicating filtered schedule list successfully is shown in the response box.
+
+5. Test case: `filter -before 2023/10/10` <br>
+   Expected: No lessons are shown. A message indicating filtered schedule list successfully is shown in the response box.
+
 
 ### Saving data
 
