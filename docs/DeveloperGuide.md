@@ -463,7 +463,7 @@ It serves as a one-stop addressbook for managing job applications.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​          | I want to …​                                                                                                     | So that I can…​                                                                                                                            |
+| Priority | As a …​          | I want to …​                                                                                                     | So that…​                                                                                                                                  |
 |----------|------------------|------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | `* * *`  | Hiring Manager   | add a candidate's contact information, including name, email, phone number                                       | I can easily access and reach out to candidates when needed                                                                                |
 | `* * *`  | Hiring Manager   | add notes and comments to candidate profiles to document interview feedback and impressions                      | I can maintain a record of interactions and feedback                                                                                       |
@@ -474,16 +474,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Hiring Manager   | update the application status for a candidate (e.g. "Interviewed", "Rejected", "Offered")                        | I can keep track of each candidate's progress in the hiring process                                                                        |
 | `* * *`  | Hiring Manager   | record the score of the different activities such as interviewsor assessments that an applicant might go through | I can use them for effective comparison and filter the candidates easily                                                                   |
 | `* * *`  | Hiring Manager   | compare candidates using their performance in their assessments or interviews                                    | I can choose the best candidates to move to the next stage of the hiring process and get the best performing candidates objectively        |
-| `* * `   | Hiring Manager   | collate job applicants who were rejected but have potential for other positions in the company                   | I can forward this data to other departments who might need it                                                                             |
-| `* * `   | Hiring Manager   | collate job applicants who were offered the job and accepted it as well as deleting their details from JABPro    | I can send this data to the HR department that manages existing employees                                                                  |
-| `* * `   | Hiring Manager   | collate job applicants who were offered the job but rejected it                                                  | I can contact them to ask why they rejected the offer and get feedback                                                                     |
-| `* * `   | Hiring Manager   | add candidates key features into a multi-formatted form                                                          | I can have a organised way to objectively view a candidates skills and information                                                         |
 | `* *`    | Hiring Manager | view a schedule/summary of events relating to the candidates                                                     | I can make preparations and arrangements for the events beforehand, and also get an idea of where each candidate is in the hiring process. |
-| `*`      | Hiring Manager   | easily get summary statistics such as total offers given out, rejections, cost associated with total offers      | I can have a summary overview without going into each candidate data specifically                                                          |
+| `**`     | Hiring Manager   | export candidate information and application data to a spreadsheet        <br/>                                  | I can perform further analysis using alternate tools on candidate data                                                                     |
 | `*`      | Hiring Manager   | get data on which positions are lacking job applicants                                                           | I can update the external recruitment team to focus on head hunting applicants for these roles                                             |
 | `*`      | Hiring Manager   | get data on which positions already have too many applicants                                                     | I can forward this to the department heads to see if they still want to keep the job posting or close it                                   |
-| `*`      | Hiring Manager   | get a visual alert or a section to display urgent task                                                           | I can stay organized and ensure that remain up to date and on task with the hiring process                                                 |
-| `*`      | Hiring Manager   | export candidate information and application data to a spreadsheet        <br/>                                  | I can perform further analysis using alternate tools on candidate data                                                                     |
 *{More to be added}*
 
 ### Use cases
@@ -734,7 +728,7 @@ Use case ends.
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Hiring Manager**: Inter-changable with users in this context
-* **Candidate**: Inter-changable with persons/applicants in this context
+* **Candidate**: Inter-changable with persons/applicants
 * **AddressBook**: Inter-changable with JABPro in this context since this is an evolve project built on-top of AB3 functionality
 * **Keyword**: Search parameter
 
@@ -788,6 +782,16 @@ This makes it more intuitive and logical for the user to use since the user woul
 
 
 ## **Appendix: Effort**
+
+### Based on over-arching features
+
+
+### Storage Complications and Effort
+In relation to saving of data to storage, we largely followed the same format as AB3. The only strict deviation from the AB3 method of saving was using a different data structure.
+In the case of `ScoreList` and `UniqueTagList`, we used a hashmap to save the details of the score and tags for `ScoreList` or tag category and tag name for `Tags`. This was more complicated to implement as the conversion from hashmap to json and vice versa was more complicated than the conversion of a list to json and vice versa.
+
+
+
 
 
 
@@ -850,12 +854,12 @@ testers are expected to do more *exploratory* testing.
 1. Adding a person while all persons are being shown  
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
     
-   1. Test case:   
+   1. Test case 1 (Positive Test Case):   
       `add n/John Poh p/98765432 e/johnpoe@gmail.com a/ 311, Clementi Ave 2, #02-25 r/ 2 years of experience in software development`  
    
       **Note**:  The current AddressBook cannot contain anyone named `John Poh`  
       Expected: New person is added to the list. Details of the new person shown in the status message. 
-   2. Test case:   
+   2. Test case (Negative Test Case):   
       `add n/John Poh p/98765432 e/johnpoe@gmail.com a/ 311, Clementi Ave 2, #02-25 r/ 2 years of experience in software development`  
       **Note**:  The current AddressBook should contain a person named `John Poh`
       Expected: No person is added. Error details shown in the status message. List of persons remains the same.
@@ -868,7 +872,7 @@ testers are expected to do more *exploratory* testing.
       2. Create an `assessment` type tag named `Interview` using the `create` command. This is done by entering `create t/assessment Interview` in the command box.
       
     
-2. Test case 1:   
+2. Test case 1 (Positive Test Case):   
 `edit 1 t/Interview sc/Interview 70`  
 **Note**: The score value should be a positive integer and must contain a space between the tag and the score value.  
 **Expected**: Score for the assessment type tag `Interview` is updated to 70.   
