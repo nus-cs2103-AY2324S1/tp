@@ -74,7 +74,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. Most of these, excluding the `ClockComponent`, `CalendarComponent` and `YearMonthComponent`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -82,6 +82,8 @@ The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
+* develops a live clock feature to provide users with a convenient visual representation of the current time while efficiently managing employee data.
+* produces a calendar function, allowing users to easily observe the daily count of employees on leave.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
@@ -1036,7 +1038,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
     Use case resumes at Step 3.
 
-<u>**Use case: UC10 – Mark an employee's attendance**</u>
+<u>**Use case: UC10 – View employee who is on leave on a specific date**</u>
+
+**Guarantees:**
+* Employees who are on leave on that specific date will be displayed to the user.
+
+**MSS**
+1. User requests to view employees who are on leave on a specific date.
+2. ManaGease check for employees who are on leave on that specific date.
+3. ManaGease displays the employees' names who are on leave on that specific date.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. Invalid command parameters are given.
+
+    * 3a1. ManaGease shows an error message.
+
+      Use case resumes at Step 3.
+
+* 3b. Invalid date(s) are given.
+
+    * 3b1. ManaGease shows an error message.
+
+      Use case resumes at Step 3.  
+    
+<u>**Use case: UC11 – Mark an employee's attendance**</u>
 
 **MSS**
 1. User <u>lists the employees</u>.(UC02)
@@ -1073,7 +1101,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-<u>**Use case: UC11 – Calculate the monthly payroll of an employee**</u>
+<u>**Use case: UC12 – Calculate the monthly payroll of an employee**</u>
 
 **Guarantees:**
 * Specified employee's payroll details for the month will be displayed.

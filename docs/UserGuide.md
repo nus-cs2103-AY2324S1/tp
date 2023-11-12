@@ -56,7 +56,7 @@ We hope you enjoy using ManaGease as much as we enjoyed building it.
     * [Saving the data](#saving-the-data)
     * [Editing the data file](#editing-the-data-file)
   * [FAQ](#faq)
-  * * [Glossary](#glossary)
+  * [Glossary](#glossary)
   * [Command summary](#command-summary)
 <!-- TOC -->
 
