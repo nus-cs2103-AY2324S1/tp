@@ -140,8 +140,6 @@ Output:
     * `add w/雪 t/snow`
     * `add w/雪 t/snow wl/Chinese tl/English`
     * `add w/雪 t/snow wl/Japanese tl/English`
-* Users are allowed to add a flash card with the **empty word language or translation language**<br>
-> Users do not need to specify the language if the language is blank (`""`)
 * Users are **not allowed** to add a flash card with the **same word and translation**<br>
   The following command will cause duplicate error:
     * `add w/sorry t/sorry`
@@ -181,13 +179,13 @@ Output:
 | **After edit** | ![img.png](images/AfterEdit.png)  |
 
 **Note**
-* Users are not allowed to edit a flash card to an existing flash card
 * `<INDEX>` is the index of each flash card in the `list`
-* Users change at **LEAST** one certain parameter by using certain prefix
+* Users must change at **LEAST** one certain parameter by using certain prefix
     * Word: `w/WORD`
     * Word Language: `wl/WORD_LANGUAGE`
     * Translation: `t/TRANSLATION`
     * Translation Language: `tl/TRANSLATION_LANGUAGE`
+* Users are not allowed to edit a flash card to an existing flash card
 > The error message: <br>
 > `This flash card already exists in Flashlingo!`
 
@@ -206,15 +204,13 @@ Output:
 
 **Note**
 * `list` command cannot be used during a review session
-   * To ensure retention, only the flash cards - with the words to be reviewed - can be seen during the review session.
+   * To facilitate learning, only the flash cards - that are to be reviewed - can be seen during the review session.
    * As soon as the review session ends, all the flash cards can be listed once again.
 
 ### Finding a flash card : `find`
 
 Filters the flash card list by the given keywords. All the flash cards whose word or translation contains the keywords will be displayed.
 * The search is case-insensitive. e.g `food` will match `Food`
-* Users can search for specific substring. e.g `oo` will match `food`
-* Users can search for multiple keywords. e.g `food, bye` will match `food` and `bye`
 
 [Command Format](#commands): `find <KEYWORDS...>`
 
@@ -234,7 +230,7 @@ Output:
 Filter the list of flash cards by the specified language. All the flash cards whose word or translation is in the specified language will be displayed.
 * The search is case-insensitive. e.g `french` will match `French`
 
-[Command Format](#commands): `language <SPECIFIED_LANGUAGE>`
+[Command Format](#commands): `language [<SPECIFIED_LANGUAGE>]`
 
 Examples:
 * `language French` displays a list where each word or translation is from French language.
@@ -243,13 +239,13 @@ Examples:
 * Unlike the `find` command, the `language` command uses exact search. So it will not display the flash cards whose word or translation contains the specified language as a substring or keyword.
     * e.g. `language Chinese` will not display following flash cards:
         * `w/读书 t/read book wl/简体中文 tl/English`
-        * `w/讀書 t/I wl/Traditional Chinses tl/English`
+        * `w/讀書 t/I wl/Traditional Chinese tl/English`
 * `language` without any parameter will display all the flash cards with default language `""`.
 
 ### Getting list for revision : `review`
 
 Displays the flash cards of all the words to be reviewed that day
-* The review command will present flash cards selected by Flashlingo based on your level, utilizing the Leitner system.
+* The review command will present flash cards selected by Flashlingo based on your level, as well as the interval between the last review, utilizing the Leitner system.
 * If you wish to view all your saved flash cards without the [Leitner system's](https://en.wikipedia.org/wiki/Leitner_system#) selection criteria, please use the `list` command.
 
 [Command Format](#commands): `review ...`
@@ -260,7 +256,7 @@ Output:
 
 **Note**
 * The message `0 flashcards listed!` occurs when:
-    * There are no flash cards scheduled for today's review.
+    * There are no flash cards scheduled for review at the time when the command is executed.
     
 
 ###  Starts review session : `start`
@@ -272,7 +268,7 @@ Starts a new review session.
 Output: `Review Session has been started.`
 
 **Note**
-* If there are no words to review, users will not be able to start review session. `You have no more words to review!`
+* If there are no words to review, users will not be able to start review session. <br> `You have no more words to review!`
   will be displayed.
 
 
@@ -322,8 +318,6 @@ they will be automatically shown in the section below. Otherwise, review session
 Output:  
 
 ![img.png](images/No.png)
-
-if there's no word left in the review session.  
 
 **Note**
 * Pressing `no` button will have the same effect.
@@ -383,9 +377,9 @@ Switches between light and dark appearance of UI dashboard.
 
 Output:
 
-|  light theme   | ![img.png](images/LightTheme.png) |
+|  Light theme   | ![img.png](images/LightTheme.png) |
 |:--------------:|:---------------------------------:|
-| **dark theme** | ![img.png](images/DarkTheme.png)  |
+| **Dark theme** | ![img.png](images/DarkTheme.png)  |
 
 ### Viewing help : `help`
 
@@ -443,25 +437,27 @@ Then, use the `load` command to import the data.
 
 ## Command summary
 
+Refer to [Commands](#commands) if unsure of how to interpret the format.
+
 | Action                  | Format, Examples                                                                                                           | Supported Period       |
 |-------------------------|----------------------------------------------------------------------------------------------------------------------------|------------------------|
 | **Add**                 | `add w/<WORD> t/<TRANSLATION> [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]` <br> e.g., `add w/regarder t/look`         | Outside review session |
-| **Delete**              | `delete <Index>`<br> e.g., `delete 1`                                                                                      | Outside review session |
+| **Delete**              | `delete <INDEX>`<br> e.g., `delete 1`                                                                                      | Outside review session |
 | **Edit**                | `edit <INDEX> [w/<WORD>] [t/<TRANSLATION>] [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]`<br> e.g., `edit 1 w/bye t/再见` | Outside review session |
-| **Find**                | `find KEYWORD`<br> e.g., `find bye`                                                                                        | Outside review session |
-| **List**                | `list`                                                                                                                     | Outside review session |
-| **Review**              | `review`                                                                                                                   | Outside review session |
-| **Start**               | `start`                                                                                                                    | Outside review session |
-| **End**                 | `end`                                                                                                                      | Inside review session  |
-| **Reveal**              | `reveal <INDEX>`                                                                                                           | Both                   |
-| **Yes**                 | `yes`                                                                                                                      | Inside review session  |
-| **No**                  | `no`                                                                                                                       | Inside review session  |
-| **Learning Statistics** | `stats`                                                                                                                    | Outside review session |
-| **Language**            | `language SPECIFIED_LANGUAGE`<br> e.g., `language French`                                                                  | Outside review session |
+| **Find**                | `find <KEYWORD...>`<br> e.g., `find bye`                                                                                   | Outside review session |
+| **List**                | `list ...`                                                                                                                 | Outside review session |
+| **Review**              | `review ...`                                                                                                               | Outside review session |
+| **Start**               | `start ...`                                                                                                                | Outside review session |
+| **End**                 | `end ...`                                                                                                                  | Inside review session  |
+| **Reveal**              | `reveal [<INDEX>]`                                                                                                         | Both                   |
+| **Yes**                 | `yes ...`                                                                                                                  | Inside review session  |
+| **No**                  | `no ...`                                                                                                                   | Inside review session  |
+| **Learning Statistics** | `stats ...`                                                                                                                | Outside review session |
+| **Language**            | `language [<SPECIFIED_LANGUAGE>]`<br> e.g., `language French`                                                              | Outside review session |
 | **Load**                | `load <FILE_NAME>`<br> e.g., `load SampleData.xlsx`                                                                        | Outside review session |
-| **Switch**              | `switch`                                                                                                                   | Both                   |
-| **Help**                | `help`                                                                                                                     | Outside review session |
-| **Exit**                | `exit`                                                                                                                     | Both                   |
+| **Switch**              | `switch ...`                                                                                                               | Both                   |
+| **Help**                | `help ...`                                                                                                                 | Outside review session |
+| **Exit**                | `exit ...`                                                                                                                 | Both                   |
 
 
 --------------------------------------------------------------------------------------------------------------------
