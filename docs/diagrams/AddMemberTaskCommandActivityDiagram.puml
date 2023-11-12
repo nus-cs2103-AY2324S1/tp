@@ -15,7 +15,7 @@ else ([else])
             : Invalid Task Index error message is shown;
         else ([else])
             :Task is added to member;
-            : Update the tasklist for the member in the GUI;
+            :Update the tasklist for the member in the GUI;
             :Success message is shown;
            endif
     endif
