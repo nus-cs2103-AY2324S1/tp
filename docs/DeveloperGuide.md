@@ -664,11 +664,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User requests to list all clients.
-2. UNOFAS shows a list of all patients.\
+2. UNOFAS shows a list of all clients.\
     Use case ends.
 
 **Extensions**
-* 2a. the list is empty.\
+* 2a. The list is empty.\
     Use case ends.
 
 **Use Case: UC02 - Add a client** \
@@ -676,14 +676,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Guarantees**: A client contact is added into UNOFAS only if the data entered is correct.
 
 **MSS**
-1.  User request to add a client to the list
-2.  UNOFAS adds the client
+1. User request to add a client to the list via the `add` command. 
+2. UNOFAS checks the correctness of the request.
+3. UNOFAS adds the client and displays updated client list.
 
     Use case ends.
 
 **Extensions**
-* 1a. Client details are invalid.
-    * 1a1. System shows an error message.
+* 2a. User did not specify all required fields.
+    * 2a1. UNOFAS shows an error message.
 
       Use case resumes at step 1.
 
@@ -693,19 +694,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to <u>list clients (UC01)</u>
-2.  User request to edit client’s contacts from the list
-3.  UNOFAS changes the client’s contacts
+1. User requests to <u>list clients (UC01)</u>
+2. User request to edit client’s contacts from the list via the `edit` command.
+3. UNOFAS checks the correctness of the request. 
+4. UNOFAS changes the client’s contacts
 
     Use case ends.
 
 **Extensions**
 
-* 2a. User enters the wrong details.
+* 3a. User enters the wrong details.
 
-    * 2a1. System shows an error message.
+    * 3a1. UNOFAS shows an error message.
 
       Use case resumes at step 2.
+* 3b. There is a contact with the exact same name. 
+  * 3b1. UNOFAS notifies user that contact exist.
+    
+    Use case resumes at step 2. 
 
 **Use Case: UC04 - Delete a client** \
 **Precondition:** NIL\
@@ -713,17 +719,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to <u>list clients (UC01)</u>
-2. User requests to delete a specific client in the list
-3. System deletes the client
+1. User requests to <u>list clients (UC01)</u>.
+2. User requests to delete a specific client in the list via the `delete` command.
+3. UNOFAS checks the correctness of the request.
+3. UNOFAS deletes the client.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The specified client is non-existent.
+* 3a. User inputs an invalid index.
 
-    * 2a1. System shows an error message.
+    * 3a1. UNOFAS shows an error message.
 
       Use case resumes at step 2.
 
@@ -733,14 +740,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to find client
-2.  System shows a list of clients which match search query
+1.  User requests to find client.
+2. UNOFAS checks for the correctness of the request.
+3. UNOFAS shows a list of clients which match search query
 
     Use case ends.
 
 **Extensions**
-
-* 2a. The list is empty.
+* 2a. User inputs invalid data for the command.
+  * 2a1. UNOFAS shows an error message.
+    Use case resumes at step 1.
+* 3a. The list is empty.
 
   Use case ends.
 
@@ -750,18 +760,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to <u>list clients (UC01)</u>
-2.  UNOFAS shows a list of clients
-3.  User request to <u>add financial plan to client’s contacts (UC03)</u>
-4.  UNOFAS changes the client’s contacts
+1.  User requests to <u>list clients (UC01)</u>.
+2.  UNOFAS shows a list of clients.
+3.  User request to <u>add financial plan to client’s contacts (UC03)</u>.
+4. UNOFAS checks for the correctness of the request.
+5. UNOFAS changes the client’s contacts.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. User enters the wrong details.
+* 4a. User enters the wrong details.
 
-    * 3a1. System shows an error message.
+    * 4a1. UNOFAS shows an error message.
 
       Use case resumes at step 1.
 
@@ -772,16 +783,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to <u>list clients (UC01)</u>
-2. UNOFAS shows a list of clients
-3. User requests to sort list of clients (by appointment time or name)
-4. UNOFAS updates ordering of clients' contacts.
+2. UNOFAS shows a list of clients.
+3. User requests to sort list of clients (by appointment time or name) via `sort` command.
+4. UNOFAS checks for the correctness of the request.
+5. UNOFAS updates ordering of clients' contacts.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. User enters the wrong details.
-    * 3a1. System shows an error message.
+* 4a. User enters the wrong details.
+    * 4a1. UNOFAS shows an error message.
       Use case resumes at step 1.
 
 **Use Case: UC08 - Schedule appointment for a client** \
@@ -791,21 +803,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to <u>list clients (UC01)</u>
-2.  UNOFAS shows a list of clients
-3.  User request to schedule appointment for client via the `schedule` command
-4.  UNOFAS changes the client’s contacts
+2.  UNOFAS shows a list of clients.
+3.  User request to schedule appointment for client via the `schedule` command.
+4. UNOFAS checks the correctness of the request.
+5. UNOFAS changes the client’s contacts.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. User enters the wrong details.
-    * 3a1. System shows an error message.
+* 4a. User enters the wrong details.
+    * 4a1. System shows an error message.
       Use case resumes at step 1.
 
-* 3b. User has an existing appointment scheduled.
-    * 3a1. System shows a warning message.
-      Use case resumes at step 4.
+* 4b. Client's contact has an existing appointment scheduled.
+    * 4b1. UNOFAS shows a warning message.
+    * 4b2. User confirms to replace the existing appointment.
+      Use case resumes at step 5.
 
 **Use Case: UC09 - Complete appointment for a client** \
 **Precondition:** Appointment and client must exist before completing appointment.\
@@ -814,24 +828,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to <u>list clients (UC01)</u>
-2.  UNOFAS shows a list of clients
-3.  User requests to complete appointment for client via the `complete` command
-4.  UNOFAS removes appointment from appointment list and client's contact card
+2.  UNOFAS shows a list of clients.
+3.  User requests to complete appointment for client via the `complete` command.
+4. UNOFAS checks for the correctness of the command.
+5. UNOFAS removes appointment from appointment list and client's contact card
 
     Use case ends.
 
 **Extensions**
 
-* 3a. User enters the wrong details.
-    * 3a1. System shows an error message.
-      Use case resumes at step 1.
+* 4a. User enters the wrong details.
+    * 4a1. UNOFAS shows an error message.
+      Use case resumes at step 3.
 
-* 3b. User does not have an existing appointment scheduled.
-    * 3b1. System shows a warning message.
+* 4b. Client's contact chosen does not have an existing appointment scheduled.
+    * 4b1. UNOFAS shows a warning message.
       Use case ends.
 
-* 3c. User does not exist according to index provided.
-    * 3c1. System shows a warning message.
+* 4c. No clients' appointments in contacts matches date input by user.
+    * 4c1. UNOFAS shows a warning message.
       Use case ends.
 
 ### Non-Functional Requirements
