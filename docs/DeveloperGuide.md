@@ -62,7 +62,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -735,7 +735,7 @@ The method `EditLeaveCommand#execute()` returns a new `CommandResult` object, wh
 
 The following sequence diagram below shows how the edit leave operation works:
 
-![Edit Leaave Sequence Diagram](images/EditLeaveSequenceDiagram.png)
+![Edit Leave Sequence Diagram](images/EditLeaveSequenceDiagram.png)
 
 Given below is an example usage scenario for the command:
 
@@ -853,7 +853,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | intermediate user       | filter and search certain employees based on criteria like department and salaries | look for the data I need                                                          |
 | `* *`    | intermediate user       | batch delete records                                                               | keep my database organised and clutter-free                                       |
 | `* *`    | intermediate user       | sort the data / records by date and categories                                     | view relevant data in a more organised manner                                     |
-| `* *`    | long-time user          | private individuals’ employeeal details                                              | minimise the chance of someone else seeing them by accident and violating PDPA.   |
+| `* *`    | long-time user          | private individuals’ employee details                                              | minimise the chance of someone else seeing them by accident and violating PDPA.   |
 | `*`      | new user                | access a quick tutorial or guided tour                                             | learn how to use basic features of the application                                |
 | `*`      | forgetful beginner user | access a command summary                                                           | easily know which commands to use                                                 |
 | `*`      | intermediate user       | create keyboard shortcuts for tasks                                                | save time on frequently performed tasks                                           |
@@ -1097,7 +1097,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Shutdown using the UI
 
-   1. Click the `X` button on the top right corner of the window.<br>
+   1. Click the `X` button in the top right corner of the window.<br>
        Expected: The window closes.
 
 1. Shutdown using the `exit` command
@@ -1526,7 +1526,7 @@ There were a few challenging features, such as the `sort` command, which require
 
 Writing our own tests as well as modifying existing tests, while not particularly difficult, was quite time-consuming, and required us to spend a significant amount of time understanding the existing tests and how they worked.
 
-Finally, writing documentation was a novel experience to us, and necessitated both a deep understanding of the codebase as well as a good grasp of documentation best practices. Making UML diagrams for the documentation was a particular challenge because of our inexperience with coding in UML. However, after writing the documentation for a few methods, the rest were relatively straightforward to write.
+Finally, writing documentation was a novel experience to us, and necessitated both a deep understanding of the codebase and a good grasp of documentation best practices. Making UML diagrams for the documentation was a particular challenge because of our inexperience with coding in UML. However, after writing the documentation for a few methods, the rest were relatively straightforward to write.
 
 Given the challenges we faced and the novelty of some parts of the project, we would rate the difficulty level of this project as **π/5**.
 
@@ -1540,7 +1540,7 @@ We faced the following challenges during the development of this project:
 
 * **Forking workflow**
 
-   Initially, we started with the forking workflow for our project, which was extremely tedious and time-consuming, and led to a lot of merge conflicts. We had to spend a lot of time resolving merge conflicts, and this slowed down our development process. Also, it was difficult to contribute to each others' code, and even minor revisions required a long, inefficient process of sync'ing the fork, resolving merge conflicts, making the revision, creating a pull request, and merging it. We eventually switched to the branching workflow for v1.3, which was much more efficient and streamlined while maintaining our code quality.
+   Initially, we started with the forking workflow for our project, which was extremely tedious and time-consuming, and led to a lot of merge conflicts. We had to spend a lot of time resolving merge conflicts, and this slowed down our development process. Also, it was difficult to contribute to each other's code, and even minor revisions required a long, inefficient process of syncing the fork, resolving merge conflicts, making the revision, creating a pull request, and merging it. We eventually switched to the branching workflow for v1.3, which was much more efficient and streamlined while maintaining our code quality.
 
 * **Renaming `person` to `employee`**
 
@@ -1556,11 +1556,11 @@ We faced the following challenges during the development of this project:
 
 * **Implementing the `sort` command**
 
-   For the `sort` command, after exploring and struggling with various approaches from creating separate list views to copying the list, we decided to go ahead with modifying the existing list. This involved adding methods at various layers of abstraction all the way down to the `UniqueEmployeeList` class, which implemented the actual sorting. This was a challenge as it was initially difficult to understand how the different components of the project interacted with each other at each layer of abstraction. This change also broke all of the methods that relied on index for employee selection by making their results unpredictable, and we had to go through all of the methods to change the index to the employee ID. This was a tedious process, and we had to spend a lot of time modifying methods such as `delete` to use the employee ID instead of index, and then debugging them.
+   For the `sort` command, after exploring and struggling with various approaches from creating separate list views to copying the list, we decided to go ahead with modifying the existing list. This involved adding methods at various layers of abstraction all the way down to the `UniqueEmployeeList` class, which implemented the actual sorting. This was a challenge as it was initially difficult to understand how the different components of the project interacted with each other at each layer of abstraction. This change also broke all methods that relied on index for employee selection by making their results unpredictable, and we had to go through these methods to change the index to the employee ID. This was a tedious process, and we had to spend a lot of time modifying methods such as `delete` to use the employee ID instead of index, and then debugging them.
 
 * **Documentation**
 
-   Being new to writing user and developer guides or creating UML diagrams, we had to spend a signficant amount of time looking at existing docs and learning to write our own. We also had to spend a lot of time ensuring that the documentation was consistent with the code and our implementation. This was a challenge because it required an in-depth understanding of the codebase, and so we had to defer most of the technical parts of our documentation towards the end of the project.
+   Being new to writing user and developer guides or creating UML diagrams, we had to spend a significant amount of time looking at existing docs and learning to write our own. We also had to spend a lot of time ensuring that the documentation was consistent with the code and our implementation. This was a challenge because it required an in-depth understanding of the codebase, and so we had to defer most of the technical parts of our documentation towards the end of the project.
 
 ### Effort Required
 
@@ -1641,7 +1641,7 @@ Problem:
 
 Solution:
 * We intend to keep error messages as short but as unambiguous as possible, so that users are able to identify
-  their misinput and fix them accordingly.
+  their misinputs and fix them accordingly.
 
 ### Edit command error message is inconsistent with respect to invalid id
 
