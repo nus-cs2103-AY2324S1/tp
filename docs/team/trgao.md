@@ -30,5 +30,6 @@ Given below are my contributions to the project.
 
 * **Contributions to developer's guide**:
   * Added the "Appendix: Planned Enhancements" section
-  * Added the UML diagrams and explanations for `upcoming` and `triage` commands
-  * Updated the UML diagrams in the "UI" and "Model" sections to include the Appointment class
+  * Added the UML Class diagram for the general implementation of an appointment command
+  * Added the UML diagrams and explanations for `upcoming` commands
+  * Updated the UML diagrams in the "UI", "Model" and "Storage" sections to include the Appointment class

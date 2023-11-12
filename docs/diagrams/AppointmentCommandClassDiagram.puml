@@ -1,0 +1,45 @@
+@startuml
+skinparam backgroundColor #ffffff
+skinparam classAttributeIconSize 0
+skinparam classBackgroundColor #FFFFAA
+hide circle
+
+class Model <<interface>> {
+    + addAppointment(patient : Appointment) : void
+    + deleteAppointment(patient : Appointment) : void
+    + setAppointment(patient : Appointment) : void
+    + getFilteredAppointmentList(): ObservableList<Appointment>
+}
+
+class ReadOnlyAddressBook <<interface>> {
+    + getPatientList() : ObservableList<Appointment>
+}
+
+abstract class "{abstract}\nCommand" {
+    + {abstract} execute(model : Model) : CommandResult
+}
+
+class AppointmentXYZCommand {
+    /' Attributes '/
+    <u> + COMMAND_WORD = "XYZ"
+    <u> + MESSAGE_SUCCESS = "Command XYZ has succeeded"
+
+    /' Methods '/
+    + execute(model : Model) : CommandResult
+}
+
+interface "Parser<T>" <<interface>> {
+    parse(userInput : String) : AppointmentXYZCommand
+}
+
+class AppointmentXYZCommandParser implements "Parser<T>" {
+    /' Methods '/
+    + parse(args : String) : AppointmentXYZCommand
+}
+
+Model ..> ReadOnlyAddressBook
+
+AppointmentXYZCommand <..left AppointmentXYZCommandParser
+AppointmentXYZCommand ..> Model
+AppointmentXYZCommand --up|> "{abstract}\nCommand"
+@enduml

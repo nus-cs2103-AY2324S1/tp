@@ -156,85 +156,12 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Implementation of appointments commands
 
-#### Proposed Implementation
+The following diagram shows the overview of a generic appointment command `AppointmentXYZCommand` and the associated classes.
+The generic appointment command can be `Schedule`, `Reschedule`, etc..
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
+![AppointmentCommandClassDiagram](images/AppointmentCommandClassDiagram.png)
 
 ### View all appointments feature
 
@@ -510,7 +437,7 @@ _Activity Diagram for a typical `undo` command_
 **Target user profile**:
 Healthcare Professionals who
 
-* has a need to manage a significant number of patients at any given time
+* have a need to manage a significant number of patients at any given time
 * can add, update, delete and search patient records
 * are required to update, access and track multiple patients' treatment history
 * manage the scheduling, rescheduling and cancelling of appointments
@@ -520,7 +447,6 @@ Healthcare Professionals who
 * are reasonably comfortable using CLI apps
 
 **Value proposition**: manage patients' medical records faster than a typical GUI driven app in a systematic manner
-
 
 ### User stories
 
@@ -533,15 +459,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | healthcare professional | delete patient records as needed                                                               | remove unused/outdated patient records                                           |
 | `* * *`  | healthcare professional | search and retrieve patient records using their name quickly                                   | find the necessary information efficiently without going through the entire list |
 | `* * *`  | healthcare professional | list all patients currently recorded in the system                                             | see the general workload of the service.                                         |
-| `* *`    | healthcare professional | add custom remarks to a patient's records                                                      | give them detailed instructions and feedback after consultation                  |
+| `* * *`  | healthcare professional | sort patients by their name or birthdate                                                       | quickly organise the patients in the order I want                                |
 | `* * *`  | healthcare professional | schedule appointments for patients                                                             | set the date and time of patients' next appointment                              |
 | `* * *`  | healthcare professional | reschedule appointments when necessary                                                         | make sure my schedule does not clash with the appointments                       |
 | `* * *`  | healthcare professional | cancel appointments when necessary                                                             | clear up my schedule if a patient is not able to make it                         |
+| `* * *`  | healthcare professional | sort appointments by date or patient name                                                      | quickly organise the appointments in a chronological order                       |
+| `* *`    | healthcare professional | add custom remarks to a patient's appointment                                                  | give them detailed instructions and feedback after consultation                  |
 | `* *`    | healthcare professional | view a calendar with all scheduled appointments                                                | plan my day effectively                                                          |
 | `*`      | healthcare professional | schedule appointments for patients and assign them to specific doctors with matching schedules | efficiently match patients with free doctors                                     |
 | `*`      | healthcare professional | set reminders to patients for follow-up appointments                                           | ensure that patients know about the follow-up appointments                       |
-
-*{More to be added}*
 
 ### Use cases
 
@@ -557,35 +483,67 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: Clear Database**
+**Extensions**
+
+* 1a. Another patient with the same name already exists in the list.
+
+    * 1a1. MFR shows duplicate patient error message.
+
+        Use case resumes at step 1.
+
+* 1b. The user inputs are invalid/incomplete.
+
+    * 1b1. MFR shows an error message.
+
+        Use case resumes at step 1.
+
+**Use case: Edit a patient**
 
 **MSS**
 
-1.  User requests clear all patients
-2.  MFR clears the list and displays a confirmation message
-
-
-    Use case ends.
-
-
-**Use case: Delete a patient**
-
-**MSS**
-
-1. User requests to delete a patient using ID
-2. MFR deletes the person and displays a confirmation message
+1.  User requests to edit a patient's information at an index
+2.  MFR edits the patient's information and displays a confirmation message
 
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The given ID is invalid.
+* 1a. The given index is invalid
 
-    * 2a1. MFR shows an error message.
-  
+    * 1a1. MFR shows invalid index error message.
+
+        Use case resumes at step 1.
+
+* 1b. Another patient with the same name already exists in the list.
+
+    * 1b1. MFR shows duplicate patient error message.
+
+      Use case resumes at step 1.
+
+* 1c. The user inputs are invalid/incomplete.
+
+    * 1c1. MFR shows an error message.
+
+        Use case resumes at step 1.
+
+**Use case: Delete a patient**
+
+**MSS**
+
+1. User requests to delete a patient at an index
+2. MFR deletes the patient and displays a confirmation message
+
 
     Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid
+
+    * 1a1. MFR shows invalid index error message.
+
+        Use case resumes at step 1.
 
 **Use case: List all patients**
 
@@ -597,39 +555,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Extensions**
-
-* 2a. The list is empty.
-
-    * 2a1. MFR displays a message "The list is empty"
-  
-
-    Use case ends.
-
-**Use case: Search a patient**
+**Use case: Search for a patient**
 
 **MSS**
 
-1.  User searches for a name
+1.  User searches for a name of a patient
 2.  MFR displays a list of patients which contain that name
 
 
     Use case ends.
 
-**Extensions**
-
-* 2a. The list is empty.
-  
-    * 2a1. MFR displays a message "No such user found" 
-  
-
-    Use case ends.
-
-**Use case: Update a patient's illness**
+**Use case: Search for a patient with a certain illness**
 
 **MSS**
 
-1.  User uses the command to update the patient with that ID with the new illness
+1.  User searches for an illness name
+2.  MFR displays a list of patients which have an illness with that name
+
+
+    Use case ends.
+
+**Use case: Add illness to a patient**
+
+**MSS**
+
+1.  User uses the command to add one or more new illnesses to a patient at an index
 2.  MFR displays a confirmation message
 
 
@@ -637,10 +587,193 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The given ID is invalid.
+* 1a. The given index is invalid
 
-    * 2a1. MFR shows an error message.
-  
+    * 1a1. MFR shows invalid index error message.
+
+        Use case resumes at step 1.
+
+* 1b. The given illness is not valid
+
+    * 1b1. MFR shows invalid illness error message.
+
+        Use case resumes at step 1.
+
+**Use case: Remove illness from a patient**
+
+**MSS**
+
+1.  User uses the command to remove one or more new illnesses from a patient at an index
+2.  MFR displays a confirmation message
+
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid
+
+    * 1a1. MFR shows invalid index error message.
+
+        Use case resumes at step 1.
+
+* 1b. The given illness is not valid
+
+    * 1b1. MFR shows invalid illness error message.
+
+        Use case resumes at step 1.
+
+**Use case: Sort patients**
+
+**MSS**
+
+1.  User wants the current list of patients to be sorted by an attribute
+2.  MFR displays a list of patients sorted by the given attribute
+
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user inputs are invalid/incomplete.
+
+    * 1a1. MFR shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: Schedule an appointment**
+
+**MSS**
+
+1.  User requests to schedule an appointment for a patient
+2.  MFR adds the appointment and displays a confirmation message
+
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The patient does not exist in the list
+
+    * 1a1. MFR shows patient does not exist error message.
+
+        Use case resumes at step 1.
+
+* 1b. Another appointment with the same start and end already exists in the list
+
+    * 1b1. MFR shows duplicate timeslot error message.
+
+        Use case resumes at step 1.
+
+* 1c. The user inputs are invalid/incomplete.
+
+    * 1c1. MFR shows an error message.
+
+        Use case resumes at step 1.
+
+**Use case: Reschedule an appointment**
+
+**MSS**
+
+1.  User requests to reschedule an appointment's start and end at an index
+2.  MFR edits the appointment's start and end and displays a confirmation message
+
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid
+
+    * 1a1. MFR shows invalid index error message.
+
+        Use case resumes at step 1.
+
+* 1b. Another appointment with the same start and end already exists in the list
+
+    * 1b1. MFR shows duplicate timeslot error message.
+
+        Use case resumes at step 1.
+
+* 1c. The user inputs are invalid/incomplete.
+
+    * 1c1. MFR shows an error message.
+
+        Use case resumes at step 1.
+
+**Use case: Cancel an appointment**
+
+**MSS**
+
+1. User requests to cancel an appointment at an index
+2. MFR deletes the appointment and displays a confirmation message
+
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid
+
+    * 1a1. MFR shows invalid index error message.
+
+        Use case resumes at step 1.
+
+**Use case: List all appointments**
+
+**MSS**
+
+1.  User asks for a list of all appointments
+2.  MFR displays a list of all appointments
+
+
+    Use case ends.
+
+**Use case: Sort appointments**
+
+**MSS**
+
+1.  User wants the current list of appointments to be sorted by an attribute
+2.  MFR displays a list of appointments sorted by the given attribute
+
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user inputs are invalid/incomplete.
+
+    * 1a1. MFR shows an error message.
+
+        Use case resumes at step 1.
+
+**Use case: Search for appointment for a patient**
+
+**MSS**
+
+1.  User searches for a name of a patient
+2.  MFR displays a list of appointments scheduled for patients which contain that name
+
+
+    Use case ends.
+
+**Use case: Toggle dark/light mode**
+
+**MSS**
+
+1. User requests to toggle dark/light mode
+2. MFR changes the display to dark/light mode
+
+
+    Use case ends.
+
+**Use case: Clear Database**
+
+**MSS**
+
+1.  User requests clear all patients
+2.  MFR clears the list and displays a confirmation message
+
 
     Use case ends.
 
@@ -654,62 +787,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-*{More to be added}*
-
-
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 patients without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. Every operation should run in less than 100 milliseconds.
-5. The application should be able to scale horizontally and vertically to accommodate increasing data of user loads.
-6. The uptime percentage of the application should be greater than or equal 99.9%.
-7. The app should be able to handle unexpected input and edge cases, without making the app to crash or any data loss.
-8. The user interface should be friendly enough for users who are not tech-savvy.
-9. Testing should be implemented to avoid errors.
-10. The application does not require for internet connection to work properly.
-11. The size of the application in the hard disk should be no larger than 100MB, exclusive of the data.
-
-*{More to be added}*
+4. The application should be able to be resized horizontally and vertically.
+5. The app should be able to handle unexpected input and edge cases, without making the app to crash or any data loss.
+6. The user interface should be friendly enough for users who are not tech-savvy.
+7. The application does not require for internet connection to work properly.
+8. The size of the application in the hard disk should be no larger than 100MB, exclusive of the data.
 
 ### Glossary
 
 - **Mainstream OS**:
-    - Refers to the most commonly used operating systems in the market, including Windows, Linux, Unix, and OS-X (MacOS).
+  - Refers to the most commonly used operating systems in the market, including Windows, Linux, Unix, and OS-X (MacOS). 
 
-- **Private contact detail**:
-    - A specific piece of information or data about a contact that isn't intended for public view or distribution.
+- **Command Line Interface (CLI)**:
+  - A text-based interface way of interacting with a software by inputting commands.
 
-- **.puml files**:
-    - Files used to define and create diagrams in the PlantUML format. These are typically used for illustrating software design or architecture.
-
-- **JavaFx UI framework**:
-    - A Java library used for developing user interfaces. It provides functionalities for creating windows, dialogs, buttons, text fields, and other UI components.
-
-- **JSON**:
-    - Stands for JavaScript Object Notation. It's a lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate.
-
-- **MSS**:
-    - Stands for Main Success Scenario. It describes the primary pathway of a use case that leads to a successful outcome.
-
-- **API**:
-    - Stands for Application Programming Interface. It's a set of tools, definitions, and protocols for building and interacting with software and applications.
-
-- **AddressBook**:
-    - In the context of the provided document, it refers to the core data structure or component in the application that keeps a record of contacts or persons.
-
-- **ObservableList**:
-    - A list that allows listeners to track changes when they occur. Typically used in GUI applications to update the UI when underlying data changes.
-
-- **UI**:
-    - Stands for User Interface. Refers to the space where interactions between humans and machines occur. The goal of this interaction is effective operation and control of the machine from the human end.
+- **User Interface (UI)**:
+  - Refers to the application that the user interacts with.
 
 - **Command**:
-    - In the context of the provided document, it refers to a directive given by the user to perform certain operations or functions in the application.
-
-- **PlantUML**:
-    - A component that allows to quickly write diagrams in a plain text format, which it then processes to produce visual diagrams.
+  - Refers to the input given by the user to perform certain operations or functions in the application.
 
 --------------------------------------------------------------------------------------------------------------------
 
