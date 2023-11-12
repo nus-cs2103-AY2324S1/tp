@@ -168,4 +168,5 @@ ___
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, submitting in the format `p/PHONE_NUMBER n/NAME`, such as in `p/91472381 n/John Doe`, is also acceptable.
 
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines. This is to avoid deletion of space characters surrounding line-breaks when lengthy text is copied over to the application.
+
 </div>
