@@ -51,26 +51,6 @@ public abstract class Lead {
     }
 
     /**
-     * The factory method for leads given the {@code LeadType} enum. Checks if the leadType is non-null;
-     *
-     * @param leadType the type of lead
-     * @return the {@code Lead} object corresponding to the type
-     */
-    public static Lead of(LeadType leadType) throws IllegalArgumentException {
-        assert Objects.nonNull(leadType);
-        switch (leadType) {
-        case HOT:
-            return HotLead.getInstance();
-        case WARM:
-            return WarmLead.getInstance();
-        case COLD:
-            return ColdLead.getInstance();
-        default:
-            return UnknownLead.getInstance();
-        }
-    }
-
-    /**
      * Determines whether a given string is a valid lead.
      * A valid lead is either "hot", "warm", "cold", or "unknown".
      *

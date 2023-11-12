@@ -11,7 +11,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.lead.Lead;
-import seedu.address.model.person.lead.LeadType;
 
 public class EditCommandMacroParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
@@ -24,7 +23,7 @@ public class EditCommandMacroParserTest {
     public void parse_validCommandWord_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
         EditPersonDescriptor descriptor = new EditPersonDescriptor();
-        descriptor.setLead(Lead.of(LeadType.HOT));
+        descriptor.setLead(Lead.of("HOT"));
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         String userInput = "1 HOT";
 
@@ -34,7 +33,7 @@ public class EditCommandMacroParserTest {
     @Test
     public void parse_validCommandWordInvalidInput_failure() {
         EditPersonDescriptor descriptor = new EditPersonDescriptor();
-        descriptor.setLead(Lead.of(LeadType.HOT));
+        descriptor.setLead(Lead.of("HOT"));
         String userInput = "1 medium";
 
         assertParseFailure(goodCommandWordParser, userInput, Lead.MESSAGE_CONSTRAINTS);
