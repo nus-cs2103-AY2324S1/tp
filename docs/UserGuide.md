@@ -38,6 +38,7 @@ On top of these functionalities, we believe that patient management must be effi
 Therefore, MediFlowR is optimised for keyboard users. By simply typing, MediFlowR can get your
 hospital management tasks done faster than the other apps in the industry.
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Table of Contents
@@ -120,6 +121,7 @@ Tips:
 If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as the format might be different when copied over to the application.
 </div>
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
@@ -153,6 +155,7 @@ Here are **some common formats** that you need to follow when entering commands:
 Return to the [Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Navigating the application
 
@@ -168,6 +171,7 @@ Return to the [Table of Contents](#table-of-contents)
 
 Return to the [Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -194,6 +198,7 @@ Return to the [Table of Contents](#table-of-contents)
 
 Return to the [Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Tutorial for new users
@@ -213,18 +218,21 @@ of MediFlowR. Please follow the instructions [here](#quick-start) first to set u
 
 - You should get this result screen. Scroll down in the patients list to confirm that patient _John Doe_ has indeed been added. Try adding a few more patients into the patient records with the same format to familiarise yourself with the command.
 
+<div style="page-break-after: always;"></div>
+
 - Let us try **editing a patient** in our patient records. Enter the command `edit 7 birthdate=2001/12/14 phone=93842738` in the command box.
 
 ![Command result for add](images/userguide/EditPatient.png)
 
 - You should get this result screen. Scroll down in the patients list to confirm that the birthdate and phone of patient _John Doe_ have indeed been edited. Try editing other attributes or editing other patients to familiarise yourself with the command.
 
-
 - Let us try **finding a patient**. Enter the command `find-p alex bernice` in the command box.
 
 ![Command result for find](images/userguide/FindPatient.png)
 
 - You should get this result screen. This command will find all patients with either the name `alex` or `bernice`.
+
+<div style="page-break-after: always;"></div>
 
 - Let us try **scheduling an appointment** now that we have a patient in our records. Enter the command `schedule patient=John Doe start=2023/10/20 12:00 end=2023/10/20 13:00 description=Follow up on Chest X-Ray priority=high` in the command box.
 
@@ -243,6 +251,7 @@ You can learn more about the different commands [here](#features).
 
 Return to the [Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -287,6 +296,8 @@ Tips:
 You can enter more than one illness for a patient, e.g. `illnesses=fever, flu` will add both fever and flu as a patient's illnesses.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Updating a patient's details: `edit`
 
 This command updates a patient's personal information and contact details. It will update the details of the patient at
@@ -316,6 +327,8 @@ the patient's birthdate to _2001/12/14_ and phone number to _93842738_.
 - A patient's email must be a _valid email address_, i.e. of the form `name@domain.com`.
 
 - You do not have to enter the illness when adding a patient.
+
+<div style="page-break-after: always;"></div>
 
 ### Diagnosing a patient: `diagnose`
 
@@ -361,6 +374,8 @@ _fever_ from the patient's illnesses.
 You can enter more than one illness for a patient, e.g. `illnesses=fever, flu` will remove both fever and flu from a patient's illnesses.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Removing a patient: `delete`
 
 This commands removes the specified patient from the patient list. It will remove the patient at
@@ -385,6 +400,8 @@ If you delete a patient, all appointments for that patient will also be deleted.
 This command shows a list of all patients currently recorded in the MediFlowR application under the patients section.
 
 :clipboard: **Format**: `patients`
+
+<div style="page-break-after: always;"></div>
 
 ### Finding patients by name: `find-p`
 
@@ -424,6 +441,8 @@ This example command will find all patients with illnesses that contain either `
   with illnesses that contain the full `flu` but will not find patients
   with illnesses such as `influenza`.
 
+<div style="page-break-after: always;"></div>
+
 ### Sorting patients: `sort-p`
 
 This command sorts the patients list by name or birthday, in ascending or descending order.
@@ -443,6 +462,8 @@ This example command will sort the patients by the _names_ in _ascending order_.
 - The direction can only be `asc` or `desc`, i.e. ascending or descending order respectively.
 
 - The attribute to sort the patients by can only be `name` or `birthday`.
+
+<div style="page-break-after: always;"></div>
 
 ## Appointment Commands
 
@@ -469,6 +490,8 @@ from _12pm_ to _1pm_ for his _follow-up appointment on his chest X-Ray_.
 - An appointment description can only consist of _letters and numbers_.
 
 - An appointment priority can only be `high`, `medium`, or `low`.
+
+<div style="page-break-after: always;"></div>
 
 ### Rescheduling an appointment: `reschedule`
 
@@ -497,6 +520,8 @@ _2 May 2023_, from _9am_ to _11am_.
 - An appointment description can only consist of _letters and numbers_.
 
 - An appointment priority can only be `high`, `medium`, or `low`.
+
+<div style="page-break-after: always;"></div>
 
 ### Triaging an appointment: `triage`
 
@@ -536,6 +561,8 @@ This command shows a list of all appointments currently scheduled.
 
 :clipboard: **Format**: `appointments`
 
+<div style="page-break-after: always;"></div>
+
 ### Finding appointments by patient name: `find-a`
 
 This command finds appointments with patient names that contain any of the keywords that you specified.
@@ -568,6 +595,8 @@ This command shows a list of all upcoming appointments currently scheduled.
 
 :clipboard: **Format**: `upcoming`
 
+<div style="page-break-after: always;"></div>
+
 ### Sorting appointments: `sort-a`
 
 This command sorts the appointments list by date or priority, in ascending or descending order.
@@ -587,6 +616,8 @@ the appointments that were found by the previous command.
 - The direction can only be `asc` or `desc`, i.e. ascending or descending order respectively.
 
 - The attribute to sort the appointments by can only be `time` or `priority`.
+
+<div style="page-break-after: always;"></div>
 
 ## Miscellaneous commands
 
@@ -622,6 +653,8 @@ This command clears all patient records and appointments from the application.
 
 :clipboard: **Format**: `clear`
 
+<div style="page-break-after: always;"></div>
+
 ### Toggling dark/light mode: `mode`
 
 This command toggles the dark/light mode for the application.
@@ -644,6 +677,7 @@ Shows a message explaining how to access the help page.
 
 Return to the [Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Commands summary
@@ -678,6 +712,7 @@ Return to the [Table of Contents](#table-of-contents)
 
 Return to the [Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -707,6 +742,7 @@ If your changes to the data file makes its format invalid, the application will 
 
 Return to the [Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
