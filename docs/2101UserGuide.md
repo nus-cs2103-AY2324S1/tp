@@ -233,13 +233,13 @@ Here is an example command where we want to view the events in which the member 
 <figure>
     <img src="images/viewMemberPreCommand.png"
          alt="viewMember Pre Command">
-    <figcaption>Before executing the viewMember command</figcaption>
+    <figcaption>Before executing the <code>viewMember</code> command</figcaption>
 </figure>
 <br>
 <figure>
     <img src="images/viewMemberPostCommand.png"
          alt="viewMember Post Command">
-    <figcaption>After executing the viewMember command</figcaption>
+    <figcaption>After executing the <code>viewMember</code> command</figcaption>
 </figure>
 
 <hr class="command-separator">
@@ -258,13 +258,13 @@ Here is an example command where we want to view the members that the event at i
 <figure>
     <img src="images/viewEventPreCommand.png"
          alt="viewEvent Pre Command">
-    <figcaption>Before executing the viewEvent command</figcaption>
+    <figcaption>Before executing the <code>viewEvent</code> command</figcaption>
 </figure>
 <br>
 <figure>
     <img src="images/viewEventPostCommand.png"
          alt="viewEvent Post Command">
-    <figcaption>After executing the viewEvent command</figcaption>
+    <figcaption>After executing the <code>viewEvent</code> command</figcaption>
 </figure>
 
 <div markdown="block" class="alert alert-primary">:bulb:
@@ -286,7 +286,7 @@ Do you want to find multiple members? Worry not as you can simply add more names
 Here’s how you can use it:
 `findMember MEMBER_NAME [MORE_NAMES]`
 
-Here is an example command where we find all members with the names of Anthony and Nicholas:
+Here is an example command where we find all members with the names of "Anthony" and "Nicholas":
 
 `findMember anthony nicholas`
 
@@ -299,7 +299,7 @@ Similar to `findMember`, `findEvent` allows you to instantly find your event amo
 Here’s how you can use it:
 `findEvent EVENT_NAME [MORE_NAMES]`
 
-Here is an example command where we find all events with the event name of Party:
+Here is an example command where we find all events with the event name of "Party":
 
 `findEvent party`
 
