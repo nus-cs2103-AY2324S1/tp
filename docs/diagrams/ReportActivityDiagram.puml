@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User inputs Report Command;
+
+if () then ([else])
+  :Display error message;
+else ([Valid command format])
+  if () then ([else])
+    :Display error message;
+  else ([Valid ID])
+    if () then ([else])
+        :Display error message;
+    else ([Employee exists])
+    :Generate report;
+    :Display report;
+    :Save report to file;
+    endif
+    endif
+endif
+
+stop
+
+@enduml

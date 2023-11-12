@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User inputs Find Command;
+
+if () then ([else])
+  :Display error message;
+else ([Valid command format])
+    :Search for employees with matching keywords;
+    if () then ([else])
+        :Display nothing;
+    else ([Matching employees found])
+        :Display matching employees;
+    endif
+endif
+
+stop
+
+@enduml

@@ -50,6 +50,10 @@ LogicManager -> SortCommand : execute()
 activate SortCommand
 
 SortCommand -> SortCommand : handleSortingOrder(model, "salary", "asc")
+activate SortCommand
+
+SortCommand --> SortCommand
+deactivate SortCommand
 
 SortCommand -> Model : updateSortedEmployeeListAscending("salary");
 activate Model
