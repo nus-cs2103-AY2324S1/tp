@@ -168,6 +168,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeGroup(Group g) {
         groups.remove(g);
+
         g.toStream().forEach(p -> {
             try {
                 p.removeGroup(g);
