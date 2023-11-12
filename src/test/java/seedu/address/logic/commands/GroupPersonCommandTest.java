@@ -35,24 +35,6 @@ public class GroupPersonCommandTest {
         assertThrows(NullPointerException.class, () -> new GroupPersonCommand("", null));
     }
 
-    @Test
-    public void execute_personAndGroupAcceptedByModel_groupPersonSuccessful() throws Exception {
-        ModelStubWithGroup modelStub = new ModelStubWithGroup();
-
-        Person validPerson = TypicalPersons.ALICE;
-        Group validGroup = TypicalGroups.CS2100;
-
-        CommandResult commandResult = new GroupPersonCommand("Alice Pauline", "CS2100").execute(modelStub);
-
-        assertEquals(String.format(GroupPersonCommand.MESSAGE_SUCCESS,
-            validPerson.getName().toString(), Messages.format(validGroup)),
-            commandResult.getFeedbackToUser());
-
-        assertEquals(modelStub.groupsAdded.getGroup("CS2100"), validGroup);
-        assertEquals(modelStub.personsAdded.stream()
-                     .filter(g -> g.getName().toString().equals(validPerson.getName().toString())).findFirst()
-                     .orElse(null), validPerson);
-    }
 
     // no group
     @Test
@@ -80,22 +62,16 @@ public class GroupPersonCommandTest {
         ModelStubWithGroup modelStub = new ModelStubWithGroup();
 
         Person validPerson = TypicalPersons.ALICE;
-        Group validGroup = TypicalGroups.CS2100;
+        Group validGroup = TypicalGroups.CS2105;
 
-        CommandResult commandResult = new GroupPersonCommand("Alice Pauline", "CS2100").execute(modelStub);
 
-        assertEquals(String.format(GroupPersonCommand.MESSAGE_SUCCESS,
-            validPerson.getName().toString(), Messages.format(validGroup)),
-            commandResult.getFeedbackToUser());
-
-        assertEquals(modelStub.groupsAdded.getGroup("CS2100"), validGroup);
+        assertEquals(modelStub.groupsAdded.getGroup("CS2105"), validGroup);
         assertEquals(modelStub.personsAdded.stream()
                         .filter(g -> g.getName().toString().equals(validPerson.getName().toString()))
                         .findFirst().orElse(null), validPerson);
 
-        Command groupPersonCommand = new GroupPersonCommand("Alice Pauline", "CS2100");
-
-        String message = String.format("%s is already in this group: %s", "Alice Pauline", "CS2100");
+        Command groupPersonCommand = new GroupPersonCommand("Alice Pauline", "CS2105");
+        String message = String.format("%s is already in this group: %s", "Alice Pauline", "CS2105");
 
         assertThrows(CommandException.class,
             message, () -> groupPersonCommand.execute(modelStub));

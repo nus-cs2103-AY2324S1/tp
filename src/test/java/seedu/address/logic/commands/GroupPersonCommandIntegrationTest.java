@@ -33,7 +33,6 @@ public class GroupPersonCommandIntegrationTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.assignGroup(validPerson, validGroup);
-        model.assignGroup(validPerson, validGroup);
 
         assertCommandSuccess(new GroupPersonCommand(validPerson.getName().toString(),
             validGroup.getGroupName()),
@@ -66,7 +65,7 @@ public class GroupPersonCommandIntegrationTest {
 
         assertCommandFailure(new GroupPersonCommand(validPerson.getName().toString(),
             validGroup.toString()), model,
-            Messages.MESSAGE_NO_GROUP_WITH_NAME_FOUND);
+            Messages.MESSAGE_NO_PERSON_WITH_NAME_FOUND);
     }
 
     // person is already in the group

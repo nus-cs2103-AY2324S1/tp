@@ -74,8 +74,7 @@ public class TypicalPersons {
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
-        Group group = TypicalGroups.getTypicalGroup().get(0);
-        ab.addGroup(group);
+
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
@@ -83,6 +82,7 @@ public class TypicalPersons {
             ab.addGroup(g);
         }
         return ab;
+
     }
 
     public static ArrayList<Person> getTypicalPersons() {
