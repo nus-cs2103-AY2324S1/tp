@@ -151,7 +151,7 @@ Expected outputs when the command fails:
 Edits an existing patient's details in HealthSync.
 
  * Edits the patient with the specified [Name](#name) and/or [ID](#ID).
- * If an invalid Name or ID is passed, an error message will be logged.
+ * If an invalid Name and/or ID is passed, an error message will be logged.
  * At least one [field](#fields) to edit must be provided.
  * Existing fields will be updated to the input values.
  * If the particular field does not exist, the corresponding field with details will be added.
