@@ -126,7 +126,7 @@ It will open a new help window, that shows all the commands in linktree.
 
  ![Understanding GUI](images/UG_images/Understanding%20GUI.png)
 
-* Linktree's GUI is simple and easy to understand!
+Linktree's GUI has been designed to be simple and user-friendly. This guide will mention some of these UI elements:
 1. **Command Box**: You'll have to type the commands in this box.
 2. **Result Display**: Based on the inputs given, your result will be displayed in this box.
 3. **Help Button**: Type `help` into the command box, and you will see a help window pop up, giving you the link to 
@@ -159,7 +159,7 @@ Click [here](#table-of-contents) to go back to contents.
 
 ## Features
 
-Remember to check out how to use this guide [here](#how-to-use-this-guide).
+Remember to check out how to use this guide [here](#how-to-use-this-guide) before continuing.
 
 <br>
 
@@ -207,8 +207,7 @@ When you enter the command (Hi):
 <div markdown="block" class="alert alert-primary">
 
 **:information_source: Note:**<br>
-* You can use `add` and `newdev` command interchangeably as both achieves the same result. Users have the option to choose 
-the one which suits them.
+* The `add` command allows for numbers and other special characters for the `name` parameter. This is to allow for more flexibility with naming.
 </div>
 <br>
 
@@ -261,6 +260,12 @@ of developers.
 
 **:information_source: Note:**<br>
 * Index must be a positive integer.
+* The name of a person cannot be changed to one that already exists in the addressbook. This is to prevent the unintentional consequence of having duplicate names.
+</div>
+
+<div markdown="block" class="alert alert-warning">
+
+**:bulb: Tips:**<br>
 * You **do not need to provide** the arguments that you do not want to edit. In the
   given example above, I only want to edit this person's name and email address and nothing else,
   so I only provided this person's index `1`, new name `n/John Wick`
@@ -717,9 +722,12 @@ Click [here](#table-of-contents) to go back to contents.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Future Enhancement
+## Future Enhancements
+**We have several feature enhancements and quality of life improvements in the pipeline.**
+**Some of them are as follows:**
 
-
+1. Prevent the addition of persons with the same phone number or email. We are aware of the issues that this flaw might cause. A fix for this has been scheduled for a future release.
+2. Currently, when the tree is displayed, if there are not enough teams to display to fill the windows, a white background fills up the empty space by default. This will be patched in a future release to provide for a better user experience.
 Click [here](#table-of-contents) to go back to contents.
 
 --------------------------------------------------------------------------------------------------------------------
