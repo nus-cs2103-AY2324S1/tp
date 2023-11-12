@@ -47,9 +47,13 @@ Given below are my contributions to the project.
         * Modified the guide for the extended `find` command to include the new fields that can be used to find employees.
         * Added guides and examples for the `report` command.
     * Developer Guide:
-        * Add implementation details for the `report` command.
-        * TO BE CONTINUED
+        * Add implementation details including UML sequence and activity diagrams and  for the `add`, `delete`, `find`, and `report` commands.
+        * Updated the product scope.
+        * Updated the non-functional requirements.
+        * Added testing instructions for launch and shutdown.
+        * Added testing instructions for the `find` and `report` commands.
+        * Added the challenges faced and the difficulty level of the project.
 
 * **Community**:
 
-* **Tools**:
+* **Tools**: VSCode, Git, GitHub, IntelliJ, JavaFX SceneBuilder
