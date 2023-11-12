@@ -75,6 +75,12 @@ Here is an example command where we create a member **named** `Lim Jun Jie` with
 
 `createMember n/Lim Jun Jie g/Male p/83498018 e/limjunjie@gmail.com a/19 Kent Ridge Crescent, Singapore 119278 t/publicity`
 
+<figure>
+    <img src="images/createMemberPostCommand.png"
+         alt="createMember Post Command">
+    <figcaption>After executing the `createMember` command</figcaption>
+</figure>
+
 <hr class="command-separator">
 
 #### Edit a Member: `editMember`
