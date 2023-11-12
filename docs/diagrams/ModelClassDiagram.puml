@@ -51,11 +51,11 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
-Person *--> "*" Lead
-Person *--> "*" Telegram
-Person *--> "*" Profession
-Person *--> "*" Income
-Person *--> "*" Details
+Person *--> "0..1" Lead
+Person *--> "0..1" Telegram
+Person *--> "0..1" Profession
+Person *--> "0..1" Income
+Person *--> "0..1" Details
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
