@@ -157,15 +157,17 @@ public class ModelManager implements Model {
 
     @Override
     public void updateGroups() {
-//        Predicate<? super Person> personPredicate = this.filteredPersons.getPredicate();
+        /*
+        Predicate<? super Person> personPredicate = this.filteredPersons.getPredicate();
 
-        // Reset the current persons list first
-//        this.filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
-//        for (Event event: filteredEvents) {
-//            event.updateGroups();
-//            setEvent(event, event);
-//        }
-//        this.filteredPersons.setPredicate(personPredicate);
+        //Reset the current persons list first
+        this.filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
+        for (Event event: filteredEvents) {
+            event.updateGroups();
+            setEvent(event, event);
+        }
+        this.filteredPersons.setPredicate(personPredicate);
+        */
         this.addressBook.updateGroups();
     }
 
