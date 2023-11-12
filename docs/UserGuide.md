@@ -75,6 +75,8 @@ through an all-in-one user-friendly platform!
 It is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a **Graphical User Interface** (GUI).
 If you are an engineering hiring manager who have a good understanding in CLI-based application and can type fast, **InterviewHub** can get your Interview and applicant management tasks done faster than traditional GUI apps.
 
+[Back to the Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always"></div>
@@ -99,6 +101,8 @@ Before we begin, the table below describes some symbols and syntax you may see t
 | :bulb: **Tip**                            | Helpful information to improve your experience                                                   |
 | `Highlighted text block`                  | Commands or parameters relevant to the application                                               |
 | [Hyperlinks](#how-to-use-this-user-guide) | When clicked, you will be led to a designated section within this document or an external link   |
+
+[Back to the Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -137,6 +141,8 @@ Before we begin, the table below describes some symbols and syntax you may see t
    * **`exit`** : Exits **InterviewHub**.
 
 8. Refer to the [Features](#features) below for details of each command.
+
+[Back to the Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -220,10 +226,6 @@ For each **interview**, we see the following details:
   * If the date is a parameter for the `list-freetime` command, please omit `TIME` and enter the date only (e.g. `16 May 2024`)
 </div>
 
-[Back to the Table of Contents](#table-of-contents)
-
---------------------------------------------------------------------------------------------------------------------
-
 ## General Features
 
 ### Viewing help : `help`
@@ -234,11 +236,15 @@ A pop-up window, containing the link as shown below, will appear to guide you to
 
 Format: `help`
 
+[Back to the Table of Contents](#table-of-contents)
+
 ### Exiting the program : `exit`
 
 Exits **InterviewHub**.
 
 Format: `exit`
+
+[Back to the Table of Contents](#table-of-contents)
 
 ### Clearing all applicants and interviews : `clear`
 
@@ -250,6 +256,8 @@ Format: `clear`
 **:warning: Warning:** <br>
 * This action is irreversible, therefore do proceed with caution!
 </div>
+
+[Back to the Table of Contents](#table-of-contents)
 
 ### Saving the data
 
@@ -501,7 +509,7 @@ You can see that Alex Yeoh's role has been updated from Frontend Engineer to Net
 
 ### Finding interviews by job role : `find-i`
 
-Find interviews which jobs roles contain any of the given keywords.
+Find interviews in which job roles contain any of the given keywords.
 
 Format: `find-i KEYWORD(S)`
 
@@ -781,6 +789,8 @@ The correct version of Java required to run **InterviewHub** is **Java 11**. If 
 | **Help**                                | `help`           |
 | **Exit**                                | `exit`           |
 
+[Back to the Table of Contents](#table-of-contents)
+
 ## Applicant Management Commands
 
 | Action               | Format, Examples                                                                                                                                          |
@@ -790,6 +800,8 @@ The correct version of Java required to run **InterviewHub** is **Java 11**. If 
 | **Edit applicant**   | `edit-a APPLICANT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`<br> e.g.,`edit-a 2 n/John Doe`                                               |
 | **Find applicant**   | `find-a [n/KEYWORD(S)] [p/NUMBER] [e/KEYWORD(S)] [a/KEYWORD(S)] [t/KEYWORD(S)]` <br> e.g., `find-a n/John Bob p/98765432 e/john@example.com`              |
 | **List applicants**  | `list-a`                                                                                                                                                  |
+
+[Back to the Table of Contents](#table-of-contents)
 
 ## Interview Management Commands
 
