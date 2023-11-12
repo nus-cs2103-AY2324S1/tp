@@ -6,7 +6,31 @@ title: Developer Guide
 
 ---
 ## **Table of Contents**
-{:toc}
+
+- [Acknowledgements](#acknowledgements)
+- [Setting up, getting started](#setting-up-getting-started)
+- [Design](#design)
+  - [Architecture](#architecture)
+  - [UI component](#ui-component)
+  - [Logic component](#logic-component)
+  - [Model component](#model-component)
+  - [Storage component](#storage-component)
+  - [Common classes](#common-classes)
+- [Implementation](#implementation)
+- [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+- [Appendix: Requirements](#appendix-requirements)
+  - [Product scope](#product-scope)
+  - [User stories](#user-stories)
+  - [Use cases](#use-cases)
+  - [Non-Functional Requirements](#non-functional-requirements)
+  - [Glossary](#glossary)
+- [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+- [Appendix: Efforts](#appendix-efforts)
+  - [Difficulty Level](#difficulty-level)
+  - [Challenges Faced](#challenges-faced)
+  - [Effort Required](#effort-required)
+  - [Achievements of the Project](#achievements-of-the-project)
+- [Planned Enhancements](#planned-enhancements)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -236,11 +260,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the employee being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 ### Sort feature
 
