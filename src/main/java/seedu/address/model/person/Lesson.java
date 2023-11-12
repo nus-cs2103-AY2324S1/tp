@@ -1,10 +1,7 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.core.LogsCenter;
-
 import static java.util.Objects.requireNonNull;
 
-import java.time.DateTimeException;
 import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -12,6 +9,7 @@ import java.time.LocalTime;
 import java.time.temporal.TemporalAdjusters;
 import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 
 /**
  * Represents the day and time when the Tutee has tuition every week.
