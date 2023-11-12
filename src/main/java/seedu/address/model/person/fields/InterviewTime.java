@@ -19,7 +19,7 @@ public class InterviewTime {
 
     public static final String VALIDATION_REGEX = "^\\d{1,2}/\\d{1,2}/\\d{4} \\d{4}$";
 
-    public static final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    private static final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
 
     private final String time;
 
