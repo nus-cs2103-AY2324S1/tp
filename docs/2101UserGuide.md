@@ -71,7 +71,7 @@ When you first start CCACommander and want to populate CCACommander with your me
 Here is how you can use it:<br>
 `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
-Here is an example command where we create a member **named** "Lim Jun Jie" with **gender** "Male", **phone number** of "83498018", **email** of "limjunjie@gmail.com", home **address** of "19 Kent Ridge Crescent, Singapore 119278" and a "publicity" **tag** to indicate he is in the publicity department:
+Here is an example command where we create a member **named** "Lim Jun Jie" with **gender** "Male", **phone number** of "83498018", **email** of "limjunjie@gmail.com", home **address** of "19 Kent Ridge Crescent, Singapore 119278" and a "publicity" **tag**:
 
 `createMember n/Lim Jun Jie g/Male p/83498018 e/limjunjie@gmail.com a/19 Kent Ridge Crescent, Singapore 119278 t/publicity`
 
@@ -89,11 +89,11 @@ If you accidentally make a typo while creating your member, do not worry! You ca
 Here is how you can use it:<br>
 `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
-<div markdown="block" class="alert alert-primary">
-:bulb: At least one field must be provided
+<div markdown="block" class="alert alert-info">
+:information_source: At least one field must be provided.
 </div>
 
-Here is an example command where we edit the first **member** in the displayed list, changing their **phone number** to "91234567" and **email** to "johndoe@example.com":
+Here is an example command where we edit the member at **index** 1 in the displayed list, changing their **phone number** to "91234567" and **email** to "johndoe@example.com":
 
 `editMember 1 p/91234567 e/johndoe@example.com`
 
@@ -105,12 +105,12 @@ If a member leaves your CCA, get over the disappointment by swiftly removing the
 Here is how you can use it:<br>
  `deleteMember MEMBER_INDEX`
 
-Here is an example command where we delete the first **member** in the displayed list:
+Here is an example command where we delete the member at **index** 1 in the displayed list:
 
 `deleteMember 1`
 
-<div markdown="block" class="alert alert-primary">
-:bulb: The `MEMBER_INDEX` parameter refers to the index number shown in the **currently displayed** member list. We recommend you to use the `list` command to see the full member list before using the `editMember` or `deleteMember` commands.
+<div markdown="block" class="alert alert-info">
+:information_source: The `MEMBER_INDEX` parameter refers to the index number shown in the **currently displayed** member list.
 </div>
 
 <hr class="feature-class-separator">
