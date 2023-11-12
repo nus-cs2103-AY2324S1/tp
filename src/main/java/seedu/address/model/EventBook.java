@@ -11,8 +11,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Wraps all data at the event-book level
  */
 public class EventBook implements ReadOnlyEventBook {
     private final UniqueEventList events;
@@ -31,7 +30,7 @@ public class EventBook implements ReadOnlyEventBook {
     public EventBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an EventBook using the Events in the {@code toBeCopied}
      */
     public EventBook(ReadOnlyEventBook toBeCopied) {
         this();
@@ -41,31 +40,21 @@ public class EventBook implements ReadOnlyEventBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the event list with {@code events}.
      */
     public void setEvents(List<Event> events) {
         this.events.setEvents(events);
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code EventBook} with {@code newData}.
      */
     public void resetData(ReadOnlyEventBook newData) {
         requireNonNull(newData);
         setEvents(newData.getEventList());
-
     }
 
-    //// person-level operations
-
-    /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
-     */
-    public boolean hasEvent(Event event) {
-        requireNonNull(event);
-        return events.contains(event);
-    }
+    //// event-level operations
     public void addEvent(Event e) {
         events.add(e);
     }
@@ -75,15 +64,19 @@ public class EventBook implements ReadOnlyEventBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code EventBook}.
+     * {@code key} must exist in the event book.
      */
     public void removeEvent(Event key) {
         events.remove(key);
     }
 
+    public boolean hasEvent(Event event) {
+        return events.contains(event);
+    }
+
     /**
-     * Sorts the address book using the provided comparator.
+     * Sorts the event book using the provided comparator.
      *
      * @param comparator The comparator used to determine the sorting order.
      */

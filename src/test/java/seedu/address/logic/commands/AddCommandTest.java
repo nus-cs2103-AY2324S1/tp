@@ -172,11 +172,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasEvent(Event event) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public boolean hasTag(Tag tag) {
             throw new AssertionError("This method should not be called.");
         }
