@@ -69,11 +69,6 @@ public class InteractionCommandParserTest {
 
     @Test
     public void parse_uncapitalisedOutcome_success() {
-        // Interaction interaction = new Interaction("note about interaction", Interaction.Outcome.INTERESTED);
-        // InteractionCommand expectedCommand = new InteractionCommand(targetIndex, interaction);
-        // assertParseSuccess(parser, userInput, expectedCommand);
-
-
         Index targetIndex = Index.fromOneBased(1);
         String userInput = targetIndex.getOneBased()
                 + " " + CliSyntax.PREFIX_OUTCOME + "interested note about interaction in small case";

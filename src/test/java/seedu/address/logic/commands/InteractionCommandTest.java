@@ -33,7 +33,8 @@ public class InteractionCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() throws CommandException {
-        Person personToAddInteractions = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToAddInteractions =
+            new Person.PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased())).build();
         List<Interaction> interactions = personToAddInteractions.getInteractions();
         Interaction interactionToAdd = new Interaction(INTERACTION_NOTE_STUB, INTERACTION_OUTCOME_STUB);
         interactions.add(interactionToAdd);
