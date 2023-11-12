@@ -18,9 +18,6 @@ public class InterviewDateTime {
             + "MMM dd yyyy HHmm\n"
             + "Eg. Dec 31 2030 1200";
 
-    public static final String TO_ADD_INTERVIEW_DATE_TIME = "TO_ADD_INTERVIEW_DATE_TIME";
-    public static final InterviewDateTime DEFAULT_INTERVIEW_DATE_TIME =
-        new InterviewDateTime(TO_ADD_INTERVIEW_DATE_TIME);
     public static final String DEFAULT_DATETIME_FORMAT = "MMM dd yyyy HHmm";
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DEFAULT_DATETIME_FORMAT);
 
@@ -34,20 +31,15 @@ public class InterviewDateTime {
     public InterviewDateTime(String dateTime) {
         requireNonNull(dateTime);
         AppUtil.checkArgument(isValidInterviewDateTime(dateTime), MESSAGE_CONSTRAINTS);
-
-        if (isEmptyInterviewDateTime(dateTime)) {
-            this.interviewDateTime = TO_ADD_INTERVIEW_DATE_TIME;
-        } else {
-            this.interviewDateTime = dateTime;
-        }
+        this.interviewDateTime = dateTime;
     }
 
     /**
      * Returns true if a given string is a valid interview date time.
      */
     public static boolean isValidInterviewDateTime(String test) {
-        if (test.equals(TO_ADD_INTERVIEW_DATE_TIME)) {
-            return true;
+        if (test.equals(null)) {
+            return false;
         }
         try {
             LocalDateTime dateTime = LocalDateTime.parse(test, DATE_TIME_FORMATTER);
@@ -57,49 +49,10 @@ public class InterviewDateTime {
         }
     }
 
-    /**
-     * Returns true if a given string is an empty interview date time.
-     */
-    private static boolean isEmptyInterviewDateTime(String test) {
-        return test.equals(TO_ADD_INTERVIEW_DATE_TIME);
-    }
-
-    /**
-     * Checks if the date and time represented by this {@code InterviewDateTime} is earlier
-     * than the other InterviewDateTime. Empty interviewDateTimes are considered to be earlier.
-     *
-     * @param other The other {@code InterviewDateTime} to be compared to.
-     * @return -1 if this InterviewDateTime is earlier, 0 if they are equal, and 1 if it is later.
-     */
-    public int compareTo(InterviewDateTime other) {
-        if (this.interviewDateTime.equals(TO_ADD_INTERVIEW_DATE_TIME)) {
-            return other.interviewDateTime.equals(TO_ADD_INTERVIEW_DATE_TIME) ? 0 : -1;
-        }
-
-        if (other.interviewDateTime.equals(TO_ADD_INTERVIEW_DATE_TIME)) {
-            return 1;
-        }
-
-        LocalDateTime thisDateTime = LocalDateTime.parse(this.interviewDateTime, DATE_TIME_FORMATTER);
-        LocalDateTime otherDateTime = LocalDateTime.parse(other.interviewDateTime, DATE_TIME_FORMATTER);
-
-        if (thisDateTime.equals(otherDateTime)) {
-            return 0;
-        } else if (thisDateTime.isAfter(otherDateTime)) {
-            return 1;
-        } else {
-            return -1;
-        }
-    }
-
     @Override
     public String toString() {
-        if (isEmptyInterviewDateTime(interviewDateTime)) {
-            return TO_ADD_INTERVIEW_DATE_TIME;
-        } else {
-            LocalDateTime parsedInterviewDateTime = LocalDateTime.parse(interviewDateTime, DATE_TIME_FORMATTER);
-            return parsedInterviewDateTime.format(DATE_TIME_FORMATTER);
-        }
+        LocalDateTime parsedInterviewDateTime = LocalDateTime.parse(interviewDateTime, DATE_TIME_FORMATTER);
+        return parsedInterviewDateTime.format(DATE_TIME_FORMATTER);
     }
 
     @Override

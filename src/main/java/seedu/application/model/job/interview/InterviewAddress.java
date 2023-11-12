@@ -9,13 +9,10 @@ import seedu.application.commons.util.AppUtil;
  * Guarantees: immutable; is valid as declared in {@link #isValidInterviewAddress(String)}
  */
 public class InterviewAddress {
+
     public static final String MESSAGE_CONSTRAINTS =
             "Address descriptions should adhere to the following constraints:\n"
                     + "1. The first character must not be a whitespace \n";
-
-    public static final String TO_ADD_INTERVIEW_ADDRESS = "TO_ADD_INTERVIEW_ADDRESS";
-    public static final InterviewAddress DEFAULT_INTERVIEW_ADDRESS =
-            new InterviewAddress(TO_ADD_INTERVIEW_ADDRESS);
 
     /*
      * The first character of interview address must not be a whitespace,
