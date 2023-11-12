@@ -68,7 +68,7 @@ public class Balance {
     /**
      * Returns true if a given integer is within the balance limit.
      */
-    public static boolean isWithinLimits(Integer balanceInCents) {
+    public static boolean isWithinBalanceLimit(Integer balanceInCents) {
         return balanceInCents <= MAX_VALUE && balanceInCents >= MIN_VALUE;
     }
 

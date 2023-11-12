@@ -31,14 +31,14 @@ class BalanceTest {
 
     @Test
     void isWithinLimits_inputBalanceWithinLimits_returnTrue() {
-        assertTrue(Balance.isWithinLimits(0));
-        assertTrue(Balance.isWithinLimits(Balance.MAX_VALUE));
-        assertTrue(Balance.isWithinLimits(Balance.MIN_VALUE));
+        assertTrue(Balance.isWithinBalanceLimit(0));
+        assertTrue(Balance.isWithinBalanceLimit(Balance.MAX_VALUE));
+        assertTrue(Balance.isWithinBalanceLimit(Balance.MIN_VALUE));
     }
     @Test
     void isWithinLimits_inputBalanceExceedLimits_returnFalse() {
-        assertFalse(Balance.isWithinLimits(Balance.MAX_VALUE + 1));
-        assertFalse(Balance.isWithinLimits(Balance.MIN_VALUE - 1));
+        assertFalse(Balance.isWithinBalanceLimit(Balance.MAX_VALUE + 1));
+        assertFalse(Balance.isWithinBalanceLimit(Balance.MIN_VALUE - 1));
     }
 
     @Test
