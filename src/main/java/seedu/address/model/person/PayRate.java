@@ -31,7 +31,7 @@ public class PayRate {
         requireNonNull(payRate);
         checkArgument(isValidPayRate(payRate), MESSAGE_CONSTRAINTS);
         value = Double.parseDouble(payRate);
-        assert value >= 0; // payrate cannot be negative
+        assert value >= 0.0 : "payrate cannot be negative";
     }
 
     public static boolean isValidPayRate(String test) {

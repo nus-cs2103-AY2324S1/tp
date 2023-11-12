@@ -1,0 +1,17 @@
+@startuml
+skinparam conditionStyle diamond
+
+start
+:User executes Add command;
+note :Valid Input Format: \n"add n/NAME p/PHONE e/EMAIL \na/ADDRESS sb/SUBJECT d/DAY \nb/START end/END pr/PAYRATE"
+:Checks for duplicate tutees and clashing schedules;
+if () then ([Tutee does\nnot exist in\ntutee list\nor has clashing \nschedules with \nother tutees]\n)
+  :Add tutee to tutee list;
+
+else ([Else]\n)
+  :Display error message;
+endif
+
+stop
+
+@enduml
