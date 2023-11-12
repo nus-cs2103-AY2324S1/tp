@@ -237,20 +237,23 @@ Here is an example command where we want to view the events in which the member 
 
 #### View Members of Event : `viewEvent`
 
-Lists all the members of a specified event index.
+If you want to view the members which a particular event has, you can do so via the `viewEvent` command.
 
-Format: `viewEvent EVENT_INDEX`
-* Views the members of the event at the specified `EVENT_INDEX`.
-* The index refers to the index number shown in the **currently displayed** event list.
-* The index **must be a positive integer** that is within the range of the length of the event list.
+Here’s how you can use it:
+`viewEvent EVENT_INDEX`
 
-Examples:
-* `viewEvent 1` displays members of the 1st event in the event list.
-* `viewEvent 10` displays members of the 10th event in the event list.
+Here is an example command where we want to view the members that the event at index 1 of our event list has:
 
-A GUI similar to the one below will be shown after entering the command if the event has members enrolled in it.
-The hours and remarks for each member is reflected here.
-![viewEvent](images/viewEvent.png)
+`viewEvent 1`
+
+![viewEventPreCommand](images/viewEventPreCommand.png)
+![viewEventPostCommand](images/viewEventPostCommand.png)
+
+<div markdown="block" class="alert alert-primary">:bulb: </div>
+It is strongly recommended that you list all members and events using the `list` command first to ensure you have a 
+full view of all members and events in CCACommander before carrying out the `viewMember` or `viewEvent` command. This 
+is because the `MEMBER_INDEX` in `viewMember` and `EVENT_INDEX` in `viewIndex` are based on the indexes in the currently 
+displayed list view.
 
 <hr class="command-separator">
 
