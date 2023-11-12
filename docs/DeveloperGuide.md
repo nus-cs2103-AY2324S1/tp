@@ -168,12 +168,22 @@ The following is a class diagram depicting `ListCommand`, `ListStudentsCommand` 
 ![ListCommandClassDiagram](images/ListCommandClassDiagram.png)
 
 The following sequence diagram shows how `ListStudentsCommand` works:
+
 ![ListStudentsSeqDiagram](images/ListStudentsSeqDiagram.png)
+
 In this example, the user enters `list students`.
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ListCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
 The following sequence diagram shows how `ListAttendanceCommand` works:
+
 ![ListAttendanceSeqDiagram](images/ListAttendanceSeqDiagram.png)
+
 In this example, the user enters `list attendance w/1 tg/G2`, where there are valid students in Tutorial Group G2.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ListCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 The following activity diagram summarizes what happens when the user executes a `ListAttendanceCommand`.
 ![ListAttendanceSeqDiagram](images/ListAttendanceActivityDiagram.png)
@@ -232,6 +242,11 @@ The following sequence diagram shows how the `MarkAttendanceCommand` works:
 
 ![MarkAttendanceSeqDiagram](images/MarkAttendanceSeqDiagram.png)
 
+In this example, the user enters `mark`, followed by a string of arguments.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MarkAttendanceCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
 The following activity diagram shows how the `MarkAttendanceCommand` works:
 
 ![MarkAttendanceActivityDiagram](images/MarkAttendanceActivityDiagram.png)
@@ -256,7 +271,7 @@ The following activity diagram shows how the `MarkAttendanceCommand` works:
     **Evaluation:**
 
     The current implementation is preferred as it is simpler and more straightforward. It reduces the need for users to remember additional commands, while resolving potential user mistakes behind the scene, providing convenience and a better user experience. The additional complexity introduced by having a separate command for updating attendance is not justified.
-
+    
 
 - Not checking for same week's attendance
 
@@ -308,6 +323,11 @@ The following sequence diagram shows how the ViewCommand function works:
 
 ![ViewSeqDiagram](images/ViewSeqDiagram.png)
 
+In this example, the user enters `view 1`.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ViewCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
 The following activity diagram summarizes what happens when a user executes a ViewCommand:
 
 ![ViewActivityDiagram](images/ViewActivityDiagram.png)
@@ -345,6 +365,11 @@ The following sequence diagram shows how the FindCommand function works:
 
 ![FindSeqDiagram](images/FindSeqDiagram.png)
 
+In this example, the user enters `find n/Anthony`.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
 The following activity diagram summarizes what happens when a user executes a ViewCommand:
 
 ![FindActivityDiagram](images/FindActivityDiagram.png)
@@ -380,6 +405,11 @@ The following sequence diagram shows how the MergeCommand function works:
 
 ![MergeSeqDiagram](images/MergeSeqDiagram.png)
 
+In this example, the user enters `merge 1 2`.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MergeCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
 The following activity diagram summarizes what happens when a user executes a MergeCommand:
 
 ![MergeActivityDiagram](images/MergeActivityDiagram.png)
@@ -411,8 +441,13 @@ Two types of delete commands, `delete INDEX` and `delete all`, have been impleme
 Both delete commands are parsed with `DeleteCommandParser`. If parsed successfully, it returns a `DeleteCommand`.
 
 The following sequence diagram shows how `DeleteCommand` works:
+
 ![ListStudentsSeqDiagram](images/DeleteAllSeqDiagram.png)
+
 In this example, the user enters `delete all tg/G1`, where there are valid students in Tutorial Group G1.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 #### Design considerations:
 `DeleteCommand` is implemented to give users greater flexibility, as it allows them to delete a student by index, delete multiple students in the course by tutorial group or delete all students in the course.
