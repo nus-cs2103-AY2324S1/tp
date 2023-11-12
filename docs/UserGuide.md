@@ -90,7 +90,7 @@ The following glossary table provides clarification on commonly-used terms as we
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar hour.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/ug-pics/Ui.png)
+   ![Ui](images/Ui.png)
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution to Mac users:**
 Performing these instructions may result in non-deterministic behaviour of data loading in HouR. This was tested on multiple MacOS Systems:
