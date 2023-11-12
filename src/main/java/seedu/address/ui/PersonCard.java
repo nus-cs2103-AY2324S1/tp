@@ -73,12 +73,12 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(financialPlan -> financialPlan.financialPlanName))
                 .forEach(financialPlan -> financialPlans.getChildren()
                         .add(new Label(financialPlan.financialPlanName)));
-        financialPlans.getChildren().forEach(label -> ((Label) label).setMaxWidth(500));
+        financialPlans.getChildren().forEach(label -> ((Label) label).setPrefWidth(500));
         financialPlans.getChildren().forEach(label -> ((Label) label).setWrapText(true));
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        tags.getChildren().forEach(label -> ((Label) label).setMaxWidth(500));
+        tags.getChildren().forEach(label -> ((Label) label).setPrefWidth(500));
         tags.getChildren().forEach(label -> ((Label) label).setWrapText(true));
     }
 }
