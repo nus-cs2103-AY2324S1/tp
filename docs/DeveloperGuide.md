@@ -1054,6 +1054,124 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is an invalid employee ID)<br>
       Expected: Similar to previous.
 
+### Finding an employee
+
+1. Finding an employee while all employees are being shown
+
+   1. Prerequisites: List all employees using the `list` command. Multiple employees in the list. Employee with name "Alex" is in the list. Employee with position "manager" is in the list. Employee with employee ID "EID1234-5678" is in the list. Employee with employee ID "EID0000-0000" is not in the list. Employee with position "notAManager" is not in the list.
+
+   1. Test case: `find Alex`<br>
+      Expected: Employee with name "Alex" is shown in the list. The status bar shows the number of employees shown in the list.
+
+   1. Test case: `find abcdef`<br>
+      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
+
+   1. Test case: `find manager`<br>
+      Expected: All employees with the word "manager" in their position are shown in the list. The status bar shows the number of employees shown in the list.
+   
+   1. Test case: `find notAManager`<br>
+      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
+   
+   1. Test case: `find EID1234-5678`<br>
+      Expected: Employee with employee ID "EID1234-5678" is shown in the list. The status bar shows the number of employees shown in the list.
+   
+   1. Test case: `find EID0000-0000`<br>
+      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
+
+   1. Test case: `find`<br>
+      Expected: Invalid command format error message is shown in the status bar.
+
+1. Finding an employee when only some employees are being shown.
+
+   1. Prerequisites: List only some employees using the `find manager` command. Multiple employees in the list. Employee with name "Alex" is in the list. Three employees with position "manager" are in the list. Employee with employee ID "EID1234-5678" is in the list. Employee with employee ID "EID0000-0000" is not in the list. Employee with position "notAManager" is not in the list.
+
+   1. Test case: `find Alex`<br>
+      Expected: Employee with name "Alex" is shown in the list. The status bar shows the number of employees shown in the list.
+   
+   1. Test case: `find abcdef`<br>
+      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
+   
+   1. Test case: `find manager`<br>
+      Expected: All employees with the word "manager" in their position are shown in the list. The status bar shows the number of employees shown in the list.
+   
+   1. Test case: `find notAManager`<br>
+      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
+
+   1. Test case: `find EID1234-5678`<br>
+      Expected: Employee with employee ID "EID1234-5678" is shown in the list. The status bar shows the number of employees shown in the list.
+   
+   1. Test case: `find EID0000-0000`<br>
+      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
+   
+   1. Test case: `find`<br>
+      Expected: Invalid command format error message is shown in the status bar.
+
+1. Finding an employee in an empty employee book
+
+   1. Prerequisites: Clear the employee book using the `clear` command.
+
+   1. Test case: `find Alex`<br>
+      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
+
+   1. Test case: `find abcdef`<br>
+      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
+   
+   1. Test case: `find manager`<br>
+      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
+   
+   1. Test case: `find notAManager`<br>
+      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
+   
+   1. Test case: `find EID1234-5678`<br>
+      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
+
+   1. Test case: `find EID0000-0000`<br>
+      Expected: No employee is shown in the list. The status bar shows the number of employees shown in the list.
+   
+   1. Test case: `find`<br>
+      Expected: Invalid command format error message is shown in the status bar.
+
+### Generating a report for an employee
+
+1. Generating report while all employees are being shown
+
+   1. Prerequisites: List all employees using the `list` command. Multiple employees in the list. Employee with employee ID "EID1234-5678" is in the list. Employee with employee ID "EID0000-0000" is not in the list.
+
+   1. Test case: `report EID1234-5678`<br>
+      Expected: The report of employee with employee ID "EID1234-5678" is shown in the status bar. The report is also downloaded as a text file in a directory called "reports" in the same directory as the jar file.
+   
+   1. Test case: `report EID0000-0000`<br>
+      Expected: No report is shown in the status bar. Error details about the invalid employee ID shown in the status bar. No report is downloaded.
+   
+   1. Test case: `report`<br>
+      Expected: Invalid command format error message is shown in the status bar.
+
+1. Generating report while only some employees are being shown.
+
+   1. Prerequisites: List only some employees using the `find manager` command. Multiple employees in the list. Employee with employee ID "EID1234-5678" is in the list. Employee with employee ID "EID0000-0000" is not in the list.
+
+   1. Test case: `report EID1234-5678`<br>
+      Expected: The report of employee with employee ID "EID1234-5678" is shown in the status bar. The report is also downloaded as a text file in a directory called "reports" in the same directory as the jar file.
+   
+   1. Test case: `report EID0000-0000`<br>
+      Expected: No report is shown in the status bar. Error details about the invalid employee ID shown in the status bar. No report is downloaded.
+   
+   1. Test case: `report`<br>
+      Expected: Invalid command format error message is shown in the status bar.
+
+1. Generating report with an empty employee book
+
+   1. Prerequisites: Clear the employee book using the `clear` command.
+
+   1. Test case: `report EID1234-5678`<br>
+      Expected: No report is shown in the status bar. Error details about the invalid employee ID shown in the status bar. No report is downloaded.
+   
+   1. Test case: `report EID0000-0000`<br>
+      Expected: No report is shown in the status bar. Error details about the invalid employee ID shown in the status bar. No report is downloaded.
+   
+   1. Test case: `report`<br>
+      Expected: Invalid command format error message is shown in the status bar.
+
 ### Adding Leave for an Employee
 
 1. Adding leave while all employees are being shown
