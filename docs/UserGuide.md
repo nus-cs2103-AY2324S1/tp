@@ -31,9 +31,9 @@ enjoyable experience tracking and scheduling tuition classes.
 A warm welcome to TutorConnect! Before we dive into the details, let's get you started with a quick overview of how 
 to navigate and use this User Guide successfully.
 
-For **Beginner Users**, we're thrilled to have you onboard! Get started with a [Tutorial](#tutorconnect-tutorial-for-new-users) here.
+For :star: **First time users**, we're thrilled to have you onboard! Get started with a [Tutorial](#tutorconnect-tutorial-for-new-users) here.
 
-For **Experienced Users**, thank you for choosing TutorConnect! You may refer to the [Command Summary](#command-summary) here.
+For :star::star::star: **Experienced users**, thank you for choosing TutorConnect! You may refer to the [Command Summary](#command-summary) here.
 
 ### Navigating the User Guide
 TutorConnect's User Guide is made with you in mind. It is designed to be user-friendly and easy to navigate. Here are a 
@@ -44,8 +44,7 @@ few tips for smooth navigation:
   you to the Table of Contents.
 
 ### Common Notation
-Throughout this User Guide, you will also find some common notations, to provide you with extra information you may 
-need. Look out for these coloured boxes!
+Throughout this User Guide, you will also find some extra information provided. Look out for these coloured boxes!
 
 <div markdown="block" class="alert alert-success">
 
@@ -518,8 +517,8 @@ Wow! The new schedule for Bernice Yu has now been added to the list of schedules
 
 **:information_source: Position of new schedule**<br>
 
-Too many schedules? Don't worry! Upcoming and past schedules are displayed as separate lists. Schedules are also sorted 
-in order of closest to current date.
+Too many schedules? Don’t worry! Upcoming and past schedules are displayed as separate lists. Schedules are also sorted 
+with those closest to the current date on top.
 
 </div>
 
@@ -556,8 +555,8 @@ Edits an existing schedule in TutorConnect.
 
 **Scenario**
 
-One day, tutor Bernice Yu requested to change the timing of a class on 15th September, so that it starts at 8am 
-instead of 9am.
+One day, tutor **Bernice Yu** requested to change the timing of a class on **15th September**, so that it starts at **8am** 
+instead of **9am**.
 
 The edit schedule function is here for that!
 
