@@ -38,6 +38,9 @@ class RegularExpressionUtilTest {
         assertFalse(match(RegularExpressionUtil.STARTING_WITH_ONE_TO_FIVE_DIGITS, "a12345"));
         assertFalse(match(RegularExpressionUtil.STARTING_WITH_ONE_TO_FIVE_DIGITS, "12345a"));
         assertFalse(match(RegularExpressionUtil.STARTING_WITH_ONE_TO_FIVE_DIGITS, "-12345a"));
+        assertTrue(match(RegularExpressionUtil.STARTING_WITH_ONE_TO_FIVE_DIGITS, "123 "));
+        assertTrue(match(RegularExpressionUtil.STARTING_WITH_ONE_TO_FIVE_DIGITS, "123 a"));
+        assertFalse(match(RegularExpressionUtil.STARTING_WITH_ONE_TO_FIVE_DIGITS, "123a"));
     }
 
     @Test

@@ -20,10 +20,7 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
             throw new ParseException("Invalid description: "
                     + Task.MESSAGE_CONSTRAINTS + AddTaskCommand.getUsageInfo());
         }
-        if (description.charAt(0) != ' ') {
-            index = null;
-            description = args;
-        }
+
         Task task = new Task(description);
         return new AddTaskCommand(index, task);
     }

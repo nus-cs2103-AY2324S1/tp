@@ -89,7 +89,7 @@ public class TypeParsingUtil {
         } else if (p2.matcher(input).find()) {
             throw new InvalidInputException("Index input is too large, allowed range: 1-99999");
         } else if (m.find()) {
-            String found = m.group(0);
+            String found = m.group(1);
             int ans = parseNum(found);
             if (ans == 0) {
                 throw new InvalidInputException("Index input can not be zero, allowed range: 1-99999");
