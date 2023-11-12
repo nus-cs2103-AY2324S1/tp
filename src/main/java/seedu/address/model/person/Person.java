@@ -164,6 +164,14 @@ public class Person {
     }
 
     /**
+     * Returns a person with the same non policy attributes but default policy attributes
+     */
+    public Person cloneWithoutPolicy() {
+        Policy newDefaultPolicy = Policy.createNewDefaultPolicy();
+        return new Person(name, phone, email, address, tags, nric, licencePlate, remark, newDefaultPolicy);
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
