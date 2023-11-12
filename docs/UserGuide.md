@@ -11,13 +11,13 @@ Connectify is a **desktop app for managing clients, optimized for use via a Comm
 
 In this user guide, you will find instructions on how to install Connectify and use its many features to manage your clients.
 
-Choose a topic from the table of contents below to find out how to manage your clients using Connectify!
+Choose a topic from the table of contents to find out how to manage your clients using Connectify!
 
 <div style="page-break-after: always;"></div>
 
 # Table of Contents
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -31,18 +31,18 @@ Choose a topic from the table of contents below to find out how to manage your c
 3. Copy the file over to the folder you would want to use as the home folder for Connectify. An option is to create a folder named `Connectify` in your`Desktop` and place the file there.
 
 4. Open the command terminal.
-   
-    a. For Windows, you can open `Command Prompt` from your list of installed applications.
 
-    b. For macOS and other operating systems, open the `Terminal` app.
+   a. For Windows, you can open `Command Prompt` from your list of installed applications.
+
+   b. For macOS and other operating systems, open the `Terminal` app.
 
 5. Change the directory of the terminal by using the `cd` command.
 
-    a. For example, if you saved your file at `C:\Users\John\Desktop\Connectify\connectify.jar`, run the command `cd C:\Users\John\Desktop\Connectify` in your terminal.
+   a. For example, if you saved your file at `C:\Users\John\Desktop\Connectify\connectify.jar`, run the command `cd C:\Users\John\Desktop\Connectify` in your terminal.
 
 6. Run `java -jar connectify.jar` to start the application.
 
-<div style="page-break-after: always;"></div>
+    <div style="page-break-after: always;"></div>
 
 7. A window similar to the one below should appear in a few seconds, containing sample data.
 
@@ -53,18 +53,18 @@ Choose a topic from the table of contents below to find out how to manage your c
        </figcaption>
    </figure>
    <br>
-   
+
 8. Type the command in the command box and press `Enter` to execute it.
-   
+
    Some examples you can try:
 
-   - `list`: Lists all client profiles.
-   
-   - `create n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: Creates a client named `John Doe` in the client list.
-   
-   - `delete 3`: Deletes the 3rd contact currently shown in the displayed client list.
-   
-   - `exit`: Exits the app.
+    - `list`: Lists all client profiles.
+
+    - `create n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: Creates a client named `John Doe` in the client list.
+
+    - `delete 3`: Deletes the 3rd contact currently shown in the displayed client list.
+
+    - `exit`: Exits the app.
 
 9. Refer to [Features](#features) below for more commands and details for each command.
 
@@ -76,13 +76,17 @@ Choose a topic from the table of contents below to find out how to manage your c
 # Graphical User Interface Components
 
 <figure>
-   <img src="images/Ui.png" alt="Connectify's Graphical User Interface (GUI)">
+   <p align="center">
+      <img src="images/Ui.png" alt="Connectify's Graphical User Interface (GUI)" width="500">
+   </p>
    <figcaption align="center">
        <em>Connectify's Graphical User Interface (GUI): The Dashboard</em>
    </figcaption>
 </figure>
 <figure>
-   <img src="images/ExampleInteractionAfter.png" alt="Connectify's Graphical User Interface (GUI)">
+   <p align="center">
+      <img src="images/ExampleInteractionAfter.png" alt="Connectify's Graphical User Interface (GUI)" width="500">
+   </p>
    <figcaption align="center">
        <em>Connectify's Graphical User Interface (GUI): The Client List</em>
    </figcaption>
@@ -99,11 +103,10 @@ Let's first discuss the top half of the interface.
        <em>The navigation bar, command box, and output window.</em>
    </figcaption>
 </figure>
-<br>
 
 1. **Navigation Bar**
-   - **File:** a dropdown menu containing the exit button, which quits the application.
-   - **Help:** a dropdown menu containing the help button, which provides the link to this user guide.
+    - **File:** a dropdown menu containing the exit button, which quits the application.
+    - **Help:** a dropdown menu containing the help button, which provides the link to this user guide.
 
 2. **Command Box:** a box where you can type [commands](#if-youre-new-what-are-commands). When it is empty, it prompts you with `Enter Command Here...`.
 
@@ -124,7 +127,7 @@ Let's first discuss the top half of the interface.
 
 5. **Upcoming Follow-ups:** upcoming meetings for each client. Follow-up dates are determined automatically by the latest interaction date and the lead of the client. See [how Connectify calculates follow-up dates.](#follow-up-calculation)
 
-<div style="page-break-after: always;"></div>
+    <div style="page-break-after: always;"></div>
 
     <figure>
        <img src="images/UiClientList.png" alt="Connectify's List of Clients">
@@ -134,14 +137,14 @@ Let's first discuss the top half of the interface.
     </figure>
 
 6. **Client List:** a scrollable list of clients that you have. You can see the details of each client, including:
-   - **Index:** the number and order of each client in your client list. The numbering can change using the [***find*** command](#finding-a-client-by-name-find).
-   - **Name:** the name of the client, specified after the index number.
-   - **Lead:** the lead of the client, represented by either a red, orange, or light blue box.
-   - **Tags:** a row of dark green boxes, representing additional information of each client.
-   - **Phone Number:** the client's phone number.
-   - **Email:** the client's email address.
+    - **Index:** the number and order of each client in your client list. The numbering can change using the [***find*** command](#finding-a-client-by-name-find).
+    - **Name:** the name of the client, specified after the index number.
+    - **Lead:** the lead of the client, represented by either a red, orange, or light blue box.
+    - **Tags:** a row of dark green boxes, representing additional information of each client.
+    - **Phone Number:** the client's phone number.
+    - **Email:** the client's email address.
 
-<div style="page-break-after: always;"></div>
+   <div style="page-break-after: always;"></div>
    <br>
    <figure>
        <img src="images/UiDetailedView.png" alt="Detailed View of Client">
@@ -151,11 +154,11 @@ Let's first discuss the top half of the interface.
     </figure>
 
 7. **Detailed View:** a detailed view of each client's profile, showing additional information, including:
-   - **Telegram Handle:** the client's telegram handle, starting with the letter `@`.
-   - **Address:** the home address of the client.
-   - **Profession:** the client's profession/job.
-   - **Income:** the client's income.
-   - **Past Interactions:** the list of past interactions or meetings with the clients, along with its date, interaction outcome (interested), and meeting notes.
+    - **Telegram Handle:** the client's telegram handle, starting with the letter `@`.
+    - **Address:** the home address of the client.
+    - **Profession:** the client's profession/job.
+    - **Income:** the client's income.
+    - **Past Interactions:** the list of past interactions or meetings with the clients, along with its date, interaction outcome (interested), and meeting notes.
 
    <br>
    <figure>
@@ -220,12 +223,16 @@ For most commands, **parameters** are prefixed by **flags**. They are indicators
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ## Viewing help: ***help***
 
 Shows a message explaining how to access the user guide.
 
 <figure>
-    <img src="images/HelpMessage.png" alt="Help Message">
+   <p align="center">
+       <img src="images/HelpMessage.png" alt="Help Message" width="600">
+   </p>
     <figcaption align="center">
         <em>Pop-up message that appears after running help.</em>
     </figcaption>
@@ -234,7 +241,6 @@ Shows a message explaining how to access the user guide.
 [↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ## Adding
 
@@ -281,9 +287,7 @@ You should directly see the client profile added to the list of clients in the a
 
 ### Adding a client interaction: ***interaction***
 
-After adding a client profile, their information is now recorded and easily accessible for you to contact them!
-After contacting them, you may also want a way to log your interactions with the client. 
-Use the ***interaction*** command when you want to record an interaction you had with a client.
+After contacting your client, you may want to log your interactions with them. Use the ***interaction*** command when you want to record an interaction you had with a client.
 
 **Format**
 ```text
@@ -310,14 +314,18 @@ interaction 7 o/INTERESTED First meeting with client, she seems interested!
 ```
 
 <figure>
-    <img src="images/ExampleInteractionBefore.png" alt="Profile before adding an interaction">
+   <p align="center">
+       <img src="images/ExampleInteractionBefore.png" alt="Profile before adding an interaction" width="500">
+   </p>
     <figcaption align="center">
         <em>There are initially no past interactions for Bernice Yu's profile.</em>
     </figcaption>
 </figure>
 
 <figure>
-    <img src="images/ExampleInteractionAfter.png" alt="Profile after adding an interaction">
+   <p align="center">
+       <img src="images/ExampleInteractionAfter.png" alt="Profile after adding an interaction" width="500">
+   </p>
     <figcaption align="center">
         <em>Result of adding an interaction for Bernice Yu's profile.</em>
     </figcaption>
@@ -339,8 +347,7 @@ This section contains multiple commands that allow you to view various details o
 
 ### Viewing the list of clients: ***list***
 
-From the Dashboard page, you may wish to see a comprehensive list of your clients. 
-Use the ***list*** command to view all clients.
+From the dashboard, you may wish to see a comprehensive list of your clients. Use the ***list*** command to view all clients.
 
 **Format**
 ```text
@@ -348,7 +355,9 @@ list
 ```
 
 <figure>
-    <img src="images/ExampleEditBefore.png" alt="Client list view">
+   <p align="center">
+       <img src="images/ExampleEditBefore.png" alt="Client list view" width="450">
+   </p>
     <figcaption align="center">
         <em>The client list view. Data shown may vary.</em>
     </figcaption>
@@ -385,7 +394,9 @@ view 4
 ```
 
 <figure>
-    <img src="images/ExampleEditBefore.png" alt="Client list view">
+   <p align="center">
+       <img src="images/ExampleEditBefore.png" alt="Client list view" width="500">
+   </p>
     <figcaption align="center">
         <em>The client list view. Note that David's profile is at index 4.</em>
     </figcaption>
@@ -393,7 +404,9 @@ view 4
 <br>
 
 <figure>
-    <img src="images/ExampleViewAfter.png" alt="Detailed view of David's profile">
+   <p align="center">
+       <img src="images/ExampleViewAfter.png" alt="Detailed view of David's profile" width="500">
+   </p>
     <figcaption align="center">
         <em>Result of executing the above view command: David's profile details are shown.</em>
     </figcaption>
@@ -401,7 +414,6 @@ view 4
 <br>
 
 [↑ Back to Table of Contents](#table-of-contents)
-<div style="page-break-after: always;"></div>
 
 ### Finding a client by name: ***find***
 
@@ -426,7 +438,9 @@ find David
 ```
 
 <figure>
-    <img src="images/ExampleEditBefore.png" alt="Client list view">
+   <p align="center">
+       <img src="images/ExampleEditBefore.png" alt="Client list view" width="500">
+   </p>
     <figcaption align="center">
         <em>The client list view. Data shown may vary.</em>
     </figcaption>
@@ -434,7 +448,9 @@ find David
 <br>
 
 <figure>
-    <img src="images/ExampleFindAfter.png" alt="Client list containing David's profile">
+   <p align="center">
+       <img src="images/ExampleFindAfter.png" alt="Client list containing David's profile" width="500">
+   </p>
     <figcaption align="center">
         <em>Result of executing the above find command: David's profile is found at index 1. Indices may be different.</em>
     </figcaption>
@@ -499,14 +515,18 @@ Example
 3. `edit 3 t/buddies t/relatives`
 
 <figure>
-    <img src="images/ExampleEditBefore.png" alt="Clients before editing">
+   <p align="center">
+       <img src="images/ExampleEditBefore.png" alt="Clients before editing" width="500">
+   </p>
     <figcaption align="center">
         <em>Initial state of 4 contacts.</em>
     </figcaption>
 </figure>
 
 <figure>
-    <img src="images/ExampleEditAfter.png" alt="Clients after editing">
+   <p align="center">
+       <img src="images/ExampleEditAfter.png" alt="Clients after editing" width="500">
+   </p>
     <figcaption align="center">
         <em>Result of running commands (1) to (3).</em>
     </figcaption>
@@ -527,9 +547,7 @@ You can use the ***edit*** command to mark a client as a hot, warm or cold lead.
 
 #### Editing a single field
 
-We understand the edit command can be a little tedious to use if you only want to edit a single field of a client profile. Hence, we have provided a shortcut for you to edit a single field of a client profile.
-
-This command is special because its command word is the same as the field you want to edit. For example, if you want to edit the name of a client profile, you can use the ***name*** command.
+We understand the edit command can be a little tedious to use if you only want to edit a single field of a client profile. Hence, we have provided a shortcut for you to edit a single field of a client profile. This command is special because its command word is the same as the field you want to edit.
 
 **Format**
 ```text
@@ -540,11 +558,7 @@ FIELD INDEX NEW_VALUE
 
 - `name 1 John Doe`
 
-    Changes the name of the client at index 1 to `John Doe`.
-
-- `email 2 johndoe@example.com`
-
-    Changes the email of the client at index 2 to `johndoe@exmaple.com`.
+  Changes the name of the client at index 1 to `John Doe`.
 
 <div markdown="block" class="alert alert-info">
 
@@ -561,7 +575,6 @@ FIELD INDEX NEW_VALUE
 [↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ## Deleting
 
@@ -623,6 +636,8 @@ You can use the up arrow key <kbd>&uarr;</kbd> to view your past commands and pr
 
 Phone numbers should only contain numbers and they should be 3 - 15 digits long. An optional `+` sign is allowed in front.
 
+<div style="page-break-after: always;"></div>
+
 ## TAG Parameter
 
 The tag parameter `t/TAG` only allows alphanumeric inputs with no spaces. For example, `t/familyfriend` is allowed, but `t/family friend` or `t/family-friend` is not allowed.
@@ -647,11 +662,11 @@ Incomes must only consist of numerical inputs. Connectify does not yet support:
 
 **Q**: How do I transfer my data to another computer?
 <br>
-**A**: 
+**A**:
 <br>
 1. Find your data folder - it should be in the same directory as your `connectify.jar` file.
 
-    If your Connectify jar file is at `C:\Users\John\Desktop\Connectify\connectify.jar`, the data folder will be at `C:\Users\John\Desktop\Connectify\data`.
+   If your Connectify jar file is at `C:\Users\John\Desktop\Connectify\connectify.jar`, the data folder will be at `C:\Users\John\Desktop\Connectify\data`.
 
 2. [Download Connectify](#quick-start) on the other computer.
 
