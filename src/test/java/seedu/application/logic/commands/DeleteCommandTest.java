@@ -33,12 +33,13 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_JOB_SUCCESS,
-                Messages.format(jobToDelete));
+            Messages.format(jobToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getApplicationBook(), new UserPrefs());
         expectedModel.deleteJob(jobToDelete);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteCommand, model, expectedMessage,
+            DeleteCommand.CLEARS_DETAILS_PANEL, expectedModel);
     }
 
     @Test
@@ -57,13 +58,14 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_JOB_SUCCESS,
-                Messages.format(jobToDelete));
+            Messages.format(jobToDelete));
 
         Model expectedModel = new ModelManager(model.getApplicationBook(), new UserPrefs());
         expectedModel.deleteJob(jobToDelete);
         showNoJob(expectedModel);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteCommand, model, expectedMessage,
+            DeleteCommand.CLEARS_DETAILS_PANEL, expectedModel);
     }
 
     @Test

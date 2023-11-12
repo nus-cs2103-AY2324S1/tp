@@ -1,7 +1,12 @@
 package seedu.application.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.application.logic.parser.CliSyntax.*;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_INDUSTRY;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_JOB_TYPE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.application.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import seedu.application.commons.util.ToStringBuilder;
 import seedu.application.logic.Messages;
@@ -16,26 +21,27 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a job to the application book.\n"
-        + "Parameters: "
-        + PREFIX_COMPANY + "COMPANY "
-        + PREFIX_ROLE + "ROLE "
-        + "[" + PREFIX_STATUS + "STATUS] "
-        + "[" + PREFIX_DEADLINE + "DEADLINE] "
-        + "[" + PREFIX_JOB_TYPE + "JOB TYPE] "
-        + "[" + PREFIX_INDUSTRY + "INDUSTRY]\n"
-        + "Example: "
-        + COMMAND_WORD + " "
-        + PREFIX_COMPANY + "Google "
-        + PREFIX_ROLE + "Software Engineer "
-        + PREFIX_STATUS + "PENDING "
-        + PREFIX_DEADLINE + "Dec 31 2030 1200 "
-        + PREFIX_JOB_TYPE + "INTERNSHIP "
-        + PREFIX_INDUSTRY + "Technology\n";
+    public static final String MESSAGE_USAGE =
+        COMMAND_WORD + ": Adds a job to the application book.\n"
+            + "Parameters: "
+            + PREFIX_COMPANY + "COMPANY "
+            + PREFIX_ROLE + "ROLE "
+            + "[" + PREFIX_STATUS + "STATUS] "
+            + "[" + PREFIX_DEADLINE + "DEADLINE] "
+            + "[" + PREFIX_JOB_TYPE + "JOB TYPE] "
+            + "[" + PREFIX_INDUSTRY + "INDUSTRY]\n"
+            + "Example: "
+            + COMMAND_WORD + " "
+            + PREFIX_COMPANY + "Google "
+            + PREFIX_ROLE + "Software Engineer "
+            + PREFIX_STATUS + "PENDING "
+            + PREFIX_DEADLINE + "Dec 31 2030 1200 "
+            + PREFIX_JOB_TYPE + "INTERNSHIP "
+            + PREFIX_INDUSTRY + "Technology\n";
 
     public static final String MESSAGE_SUCCESS = "New job added: %1$s";
     public static final String MESSAGE_DUPLICATE_JOB = "This job already exists in the application book";
-
+    public static final Boolean CLEARS_DETAILS_PANEL = false;
     private final Job toAdd;
 
     /**
@@ -55,7 +61,7 @@ public class AddCommand extends Command {
         }
 
         model.addJob(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), CLEARS_DETAILS_PANEL);
     }
 
     @Override
@@ -76,7 +82,7 @@ public class AddCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("toAdd", toAdd)
-            .toString();
+                   .add("toAdd", toAdd)
+                   .toString();
     }
 }

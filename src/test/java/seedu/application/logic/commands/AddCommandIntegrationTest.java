@@ -34,15 +34,15 @@ public class AddCommandIntegrationTest {
         expectedModel.addJob(validJob);
 
         assertCommandSuccess(new AddCommand(validJob), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validJob)),
-                expectedModel);
+            String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validJob)), AddCommand.CLEARS_DETAILS_PANEL,
+            expectedModel);
     }
 
     @Test
     public void execute_duplicateJob_throwsCommandException() {
         Job jobInList = model.getApplicationBook().getJobList().get(0);
         assertCommandFailure(new AddCommand(jobInList), model,
-                AddCommand.MESSAGE_DUPLICATE_JOB);
+            AddCommand.MESSAGE_DUPLICATE_JOB);
     }
 
 }

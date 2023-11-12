@@ -22,7 +22,8 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all jobs that contain all of "
+    public static final String MESSAGE_USAGE =
+        COMMAND_WORD + ": Finds all jobs that contain all of "
             + "the specified keywords (case-insensitive) in the corresponding fields and displays them as a list with "
             + "index numbers. At least one keyword must be provided.\n"
             + "Parameters: "
@@ -35,6 +36,7 @@ public class FindCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_COMPANY + "Google";
 
     public static final String MESSAGE_EMPTY_KEYWORDS = "Missing keywords";
+    public static final Boolean CLEARS_DETAILS_PANEL = true;
 
     private final CombinedPredicate predicate;
 
@@ -47,7 +49,8 @@ public class FindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredJobList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_JOBS_LISTED_OVERVIEW, model.getFilteredJobList().size()));
+            String.format(Messages.MESSAGE_JOBS_LISTED_OVERVIEW, model.getFilteredJobList().size()),
+            CLEARS_DETAILS_PANEL);
     }
 
     @Override
@@ -68,7 +71,7 @@ public class FindCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicate", predicate)
-                .toString();
+                   .add("predicate", predicate)
+                   .toString();
     }
 }
