@@ -1090,8 +1090,6 @@ The help window can also be accessed by the button in the menu bar (above the co
 
 [Back To Top](#table-of-contents)
 
-<div style="page-break-after: always;"></div>
-
 #### Exiting the program: `exit`
 
 Exits TutorConnect.
