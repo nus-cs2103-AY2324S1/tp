@@ -21,7 +21,6 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.interaction.Interaction;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {

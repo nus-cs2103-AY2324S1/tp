@@ -1,4 +1,4 @@
-package seedu.address.model.person.interaction;
+package seedu.address.model.person;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -111,7 +111,10 @@ public class Interaction {
         }
 
         Interaction otherInteraction = (Interaction) other;
+
+        //Interactions are considered equal if they have the same interactionNote, outcome and date.
         return otherInteraction.interactionNote.equals(this.interactionNote)
-                && otherInteraction.outcome.equals(this.outcome);
+                && otherInteraction.outcome.equals(this.outcome)
+                && otherInteraction.date.equals(this.date);
     }
 }

@@ -11,31 +11,23 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.person.Interaction;
+import seedu.address.model.person.InteractionTest;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.interaction.Interaction;
-import seedu.address.model.person.interaction.Interaction.Outcome;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
  */
 public class TypicalPersons {
-    public static final LocalDate EXAMPLE_DATE = LocalDate.of(2023, 10, 27);
-
-    public static final Interaction INTERACTION_ONE =
-        new Interaction("Met up for lunch", Outcome.INTERESTED, EXAMPLE_DATE);
-
-    public static final Interaction CLOSED_INTERACTION_ONE =
-        new Interaction("Bought after lunch", Outcome.CLOSED, EXAMPLE_DATE);
-
-    public static final List<Interaction> INTERACTION_LIST_ONE = new ArrayList<>(Arrays.asList(INTERACTION_ONE));
+    public static final List<Interaction> INTERACTION_LIST_ONE =
+        new ArrayList<>(Arrays.asList(InteractionTest.INTERACTION_ONE));
     public static final List<Interaction> CLOSED_INTERACTION_LIST_ONE =
-        new ArrayList<>(Arrays.asList(INTERACTION_ONE, CLOSED_INTERACTION_ONE));
+        new ArrayList<>(Arrays.asList(InteractionTest.INTERACTION_ONE, InteractionTest.CLOSED_INTERACTION_ONE));
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
