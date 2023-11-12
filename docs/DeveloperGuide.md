@@ -1001,7 +1001,7 @@ Testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
+      <br><br>
 
 ### Deleting a student
 
@@ -1009,19 +1009,19 @@ Testers are expected to do more *exploratory* testing.
 
    1. Test case: `delete s/STUDENT_NUMBER`<br>
       Expected: STUDENT_NUMBER is a valid Student Number that exists in the Class Manager. The student with STUDENT_NUMBER is deleted from the list. Details of the deleted student shown in the result display box.
-
+      <br><br>
 2. Deleting a student that is not in Class Manager.
 
    1. Test case: `delete s/vnqvq1924`<br>
       Expected: No student is deleted. Student Number error details shown in the result display box.
-
+      <br><br>
 3. Deleting a student with an invalid student number.
 
    1. Other incorrect delete commands to try: `delete`, `delete s/x`, `...` (where x is an invalid student number)<br>
       Expected: No student is deleted. Command format error details shown in the result display box.
    2. Test case: `delete`<br>
       Expected: No student is deleted. Command format error details shown in the result display box.
-
+      <br><br>
 
 ### Loading data files
 ###### Setup
@@ -1045,7 +1045,8 @@ Testers are expected to do more *exploratory* testing.
 3. Loading a missing data file
    - Enter: `load f/t3`<br>
        Expected: The status bar on the bottom left is unchanged. File error details shown in the result display box.
-
+     <br><br>
+   
 ### Undo/redo commands
 ###### Test cases
 1. Undoing a command
@@ -1061,7 +1062,8 @@ Testers are expected to do more *exploratory* testing.
 
     2.  Test case: `add` -> `add` -> `undo` -> `undo` -> `redo` (Add 2 students, and then 2 undo with 1 redo)<br>
         Expected: The first `add` command is redone. The first student is added back to the list of students.
-
+        <br><br>
+   
 ### Configuring Class Manager
 
 ###### Setup
@@ -1087,7 +1089,7 @@ Testers are expected to do more *exploratory* testing.
 2. Configuring Class Manager with tutorial count less than 1
     - Enter: `config #t/0 #a/3`<br>
       Expected: Error message `Invalid count values! The count value of tutorials cannot be less than 1.`
-
+      <br><br>
 3. Configuring Class Manager with valid tutorial count but missing assignment count
     - Enter: `config #t/10`<br>
       Expected: Error message: `Invalid command format!
@@ -1096,7 +1098,8 @@ Testers are expected to do more *exploratory* testing.
                                 The default Class Manager is configured with 13 tutorials and 6 assignments.
                                 Parameters: #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT
                                 Example: config #t/10 #a/4`
-
+      <br><br>
+   
 ### History
 
 ###### Setup
@@ -1105,14 +1108,15 @@ Testers are expected to do more *exploratory* testing.
 ###### Test cases
 1. Viewing command history
     - Enter: `history`<br>
-        Expected: The command history is shown in the result display box. The command history is empty.
+      Expected: The command history is shown in the result display box. The command history is empty.
     - Enter: `list`<br>
-      - Expected: The list of students is shown in the student list. The command history is updated to show the command `list`.
+      Expected: The list of students is shown in the student list. The command history is updated to show the command `list`.
     - Enter: `help`<br>
-      - Expected: The help window is shown. The command history is updated to show the command `help`.
+      Expected: The help window is shown. The command history is updated to show the command `help`.
     - Enter: `history`<br>
-      - Expected: The command history is shown in the result display box. The command history shows `help` as the most recent command at the top of the list, followed by `list` below it.
-
+      Expected: The command history is shown in the result display box. The command history shows `help` as the most recent command at the top of the list, followed by `list` below it.
+    <br><br>
+      
 ### Launch with erroneous data files
 ###### Setup
 - Move the JAR file to a fresh directory.
@@ -1168,7 +1172,8 @@ Testers are expected to do more *exploratory* testing.
 3. Adding a student without some required fields <br>
    1. Test Case: `add n/NAME s/STUDENT_NUMBER e/EMAIL`, `add n/NAME s/PHONE e/EMAIL`<br>
       Expected: No student is added. Error details shown in the result display box.
-
+      <br><br>
+   
 ### Editing a student
 
 1. Editing a student's details in the current students list.
@@ -1182,14 +1187,16 @@ Testers are expected to do more *exploratory* testing.
 
    1. Test case: Edit command with Student Number that is not present in the list <br>
       Expected: No student is edited. Error details shown in the result display box.
-
+      <br><br>
+   
 ### Adding a comment to a student
 
 1. Adding a comment to a student in Class Manager.
 
    1. Test case: `comment s/STUDENT_NUMBER cm/COMMENT`<br>
       Expected: The student with STUDENT_NUMBER is edited to have the new COMMENT.
-
+      <br><br>
+   
 2. Adding a comment to a student where the student is not in Class Manager (Invalid Student Number). 
 
    1. Test case: Comment command with Student Number that is not present in the list <br>
@@ -1200,14 +1207,15 @@ Testers are expected to do more *exploratory* testing.
 
    1. Test case: `comment s/STUDENT_NUMBER cm/`<br>
       Expected: Student is edited to have an empty comment.
-
+      <br><br>
+   
 ### Tagging a student
 
 1. Tagging an existing student in the current students list.
 
    1. Test case: `tag s/STUDENT_NUMBER t/TAG`<br>
       Expected: All tags of student with STUDENT_NUMBER will be replaced with TAG.
-
+      <br><br>
 2. Adding a tags to student.
 
    1. Test case: `tag s/STUDENT_NUMBER /add t/TAG`<br>
@@ -1229,33 +1237,68 @@ Testers are expected to do more *exploratory* testing.
     **Note:** Even if the student does not have TAG tagged, the command ensures that the student will not have TAG as one of the tags.
 
     </box>
-
 4. Deleting all tags from student.
 
    1. Test case: `tag s/STUDENT_NUMBER t/`<br>
       Expected: The student with STUDENT_NUMBER will have all tags removed.
-
+      <br><br>
 5. Attempt to tag a student not in the currently student list.
 
    1. Test case: `tag` command with a student number that is not in the list.
       Expected: Error message is shown in the display result.
-
+      <br><br>
+   
 ### Viewing a student
 
 1. Viewing a student in Class Manager
 
    1. Test case: `view s/STUDENT_NUMBER`<br>
       Expected: The class information of the student with STUDENT_NUMBER will be displayed in the class information panel on the right.
-
+      <br><br>
 2. Viewing a student not in Class Manager
 
    1. Test case: `view` command with a student number not in Class Manager<br>
       Expected: Error message shown in the display result.
-
+      <br><br>
 3. Invalid Student number
 
-   1. Test case: `view s/b012345N`<br>
+   1. Test case: `view s/x` (where x is an invalid student number)<br>
       Expected: Error message shown in the display result.
+      <br><br>
+
+### Lookup students
+
+1. Lookup students in Class Manager using valid criteria.
+
+   1. Test case: `lookup n/NAME`<br>
+      Expected: The list of students with NAME will be displayed in the student list.
+   2. Test case: `lookup c/CLASS_NUMBER`<br>
+      Expected: The list of students in CLASS_NUMBER will be displayed in the student list.
+   3. Test case: `lookup t/TAG c/CLASS_NUMBER`<br>
+      Expected: The list of students with TAG and in CLASS_NUMBER will be displayed in the student list.
+      <br><br>
+2. Lookup students in Class Manager using invalid criteria.
+
+   1. Test case: `lookup s/x` (where x is an invalid student number)<br>
+      Expected: The display result will show `No match found!`. This is because the lookup command does not do field validation.
+   2. Test case: `lookup c/class 11 n/john` (where "class 11" is an invalid class number)<br>
+      Expected: The display result will show `No match found!`. This is because the lookup command does not do field validation.
+      <br><br>
+3. Lookup with no criteria given.
+
+   1. Test case: `lookup`<br>
+      Expected: Error message shown in the display result.
+   2. Test case: `lookup c/`<br>
+      Expected: Error message shown in the display result.
+      <br><br>
+
+### Toggling color theme
+
+1. Toggle color theme
+
+   1. Test case: `theme`<br>
+      Expected: The color theme of the app will be switched. If the current theme is dark, it will be switched to light and vice versa.
+      <br><br>
 
 ### Listing students
 
@@ -1289,3 +1332,5 @@ Testers are expected to do more *exploratory* testing.
 2. Class Numbers are currently limited to tutorials that begin with T. We plan to allow Class Numbers to be any sensible alphanumeric string, such as `R15` and `SG06`.
 3. Clicking on a student in the student list currently highlights the student's card. We plan to disable this interaction as it affects the visibility of the student's contact details and visualised graphs.
 4. Class Participation is currently limited to being true or false for each tutorial session. We plan to allow Class Participation to be an enum level instead, such as `NONE`, `MINIMAL`, `SUFFICIENT`, `ACTIVE`, `VERY_ACTIVE` etc. to allow for better representation of student's efforts in class.
+5. Users currently can only search for basic student information. We plan to allow users to search based on class information in the future. For example, users can search for students with a certain grade or attendance percentage.
+6. The lookup command currently does not check for invalid fields. We plan to add field validation to the lookup command in the future.
