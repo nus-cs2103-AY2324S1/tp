@@ -146,7 +146,7 @@ Name, phone number, email, tag, instrument, genre about the musician can all be 
 * `add n/Betsy Crowe e/pianistbetsy@smtp.com p/87988039 i/piano g/pop g/rock`
 
 **Things to Note**
-* To add the instruments and genres the musician specialises in using the `i/` and `g/` prefixes, you can only add the instruments and genres included in a pre-defined list of instruments and genres. Refer to the [tags](#show-all-valid-instruments-and-genres--tags) command for more information.
+* To add the instruments and genres the musician specialises in using the `i/` and `g/` prefixes, you can only add the instruments and genres included in a pre-defined list of instruments and genres. Refer to the [tags](#show-all-valid-instruments-and-genres-tags) command for more information.
 
 
 **Upon success:**
@@ -212,7 +212,7 @@ Name, phone number, email, tag, instrument, genre about the musician can all be 
 * If you would like to edit a musician not currently shown, please use the 'list' command first before editing.
 * When editing tags/instruments/genres, the existing tags/instruments/genres of the musician will be removed i.e adding of tags/instruments/genres is not cumulative.
 * You can remove all tags/instruments/genres of the musician by inputting an empty tag/instrument/genre field, e.g. `edit 1 t/ i/ g/`.
-* You can only edit the instruments and genres of the musician using the ones included in a pre-defined list. Refer to the [tags](#show-all-valid-instruments-and-genres--tags) command for more information.
+* You can only edit the instruments and genres of the musician using the ones included in a pre-defined list. Refer to the [tags](#show-all-valid-instruments-and-genres-tags) command for more information.
 
 **Upon success:**
 A success message like below will be displayed.
@@ -245,9 +245,9 @@ Edited Musician: John Doe; Phone: 98765430; Email: johnd@example.com; Tags: [bes
 
 View all valid instrument and genre tags for musicians and bands.
 
-The instrument and genre tags can be added/edited for a musician using the [add](#add-musician--add) and [edit](#edit-musician--edit) command with prefix `i/` and `g/` respectively.
+The instrument and genre tags can be added/edited for a musician using the [add](#add-musician-add) and [edit](#edit-musician-edit) command with prefix `i/` and `g/` respectively.
 
-The genre tags can also be added/edited for a band using the [addb](#create-band--addb) and [editb](#edit-band--editb) command with prefix `g/`. Currently, band does not support instrument tags.
+The genre tags can also be added/edited for a band using the [addb](#create-band-addb) and [editb](#edit-band-editb) command with prefix `g/`. Currently, band does not support instrument tags.
 
 **Format:** `tags`
 
@@ -339,7 +339,7 @@ Adds a musician to a specified band.
 
 **Things to Note:**
 * `BANDINDEX` and `MUSICIANINDEX` must be positive integers 1, 2, 3, …​
-* Before adding any musicians to any band, you should first use the [list](#list-all-musicians-and-bands--list) command to list all musicians and bands.
+* Before adding any musicians to any band, you should first use the [list](#list-all-musicians-and-bands-list) command to list all musicians and bands.
 * You can only add musicians to a single band. Adding musicians to multiple bands is currently not supported.
 
 Examples:
