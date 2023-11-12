@@ -693,7 +693,7 @@ The process of adding tags to a flashcard through the AddTagCommand would be as 
 
 The following sequence diagram summarizes the workflow when a user executes a `AddTag` command:
 
-![img.png](images/AddTagCommandSequenceDiagram.png)
+![img.png](images/AddTagsSequenceDiagram.png)
 
 A similar structure is followed for the `EditTagCommand` and `DeleteTagCommand`, but with the respective methods (`replaceTags` and `deleteTags`)
 
@@ -706,7 +706,7 @@ The Tag commands can be used in the following ways:
 ### Design Considerations
 
 **Aspect: What is the most effective method of tagging Flashcards:**
-In enhancing the functionality of our flashcard system, we considered how users should tag flashcards to optimize their learning experience.
+In enhancing the functionality of our flashcard system, we considered how users could tag flashcards to optimize their learning experience.
 
 * Alternative 1 (current choice): Choosing from a predefined set of tags.
 
