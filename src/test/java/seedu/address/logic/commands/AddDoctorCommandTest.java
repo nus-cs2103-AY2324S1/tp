@@ -33,7 +33,7 @@ import seedu.address.testutil.DoctorBuilder;
 public class AddDoctorCommandTest {
     @Test
     public void constructor_nullDoctor_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+        assertThrows(NullPointerException.class, () -> new AddDoctorCommand(null));
     }
 
 
@@ -42,9 +42,9 @@ public class AddDoctorCommandTest {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Doctor validDoctor = new DoctorBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validDoctor).execute(modelStub);
+        CommandResult commandResult = new AddDoctorCommand(validDoctor).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validDoctor)),
+        assertEquals(String.format(AddDoctorCommand.MESSAGE_SUCCESS, Messages.format(validDoctor)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validDoctor), modelStub.personsAdded);
     }
@@ -52,10 +52,11 @@ public class AddDoctorCommandTest {
     @Test
     public void execute_duplicateDoctor_throwsCommandException() {
         Doctor validDoctor = new DoctorBuilder().build();
-        AddDoctorCommand addCommand = new AddDoctorCommand(validDoctor);
+        AddDoctorCommand addDoctorCommand = new AddDoctorCommand(validDoctor);
         ModelStub modelStub = new ModelStubWithDoctor(validDoctor);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddDoctorCommand.MESSAGE_DUPLICATE_PERSON, () ->
+                addDoctorCommand.execute(modelStub));
     }
 
     @Test
@@ -84,9 +85,9 @@ public class AddDoctorCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddDoctorCommand addCommand = new AddDoctorCommand(WAYNE);
+        AddDoctorCommand addDoctorCommand = new AddDoctorCommand(WAYNE);
         String expected = AddDoctorCommand.class.getCanonicalName() + "{toAdd=" + WAYNE + "}";
-        assertEquals(expected, addCommand.toString());
+        assertEquals(expected, addDoctorCommand.toString());
     }
 
     /**
@@ -148,7 +149,6 @@ public class AddDoctorCommandTest {
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
-
         @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
@@ -162,19 +162,6 @@ public class AddDoctorCommandTest {
         @Override
         public void addAppointment(Appointment appointment) {
             throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAppointment(Appointment target, Appointment editedAppointment) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        /**
-         * Returns an unmodifiable view of the filtered person list
-         */
-        @Override
-        public ObservableList<Person> getFilteredPersonList() {
-            return null; // not sure abt this method
         }
 
         @Override
@@ -264,6 +251,10 @@ public class AddDoctorCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+        @Override
+        public boolean hasIc(Ic nric) {
+            return personsAdded.stream().anyMatch(person -> person.getIc().equals(nric));
         }
     }
 

@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LOW;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalAppointment.APPOINTMENT_1;
 import static seedu.address.testutil.TypicalPatient.ALICE;
 
 import java.util.Arrays;
@@ -23,6 +24,7 @@ import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.testutil.AppointmentBuilder;
 import seedu.address.testutil.PatientBuilder;
 
 public class AddressBookTest {
@@ -79,6 +81,29 @@ public class AddressBookTest {
         Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_LOW)
                 .build();
         assertTrue(addressBook.hasPatient(editedAlice));
+    }
+
+    @Test
+    public void hasAppointment_nullAppointment_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasAppointment(null));
+    }
+
+    @Test
+    public void hasAppointment_appointmentNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasAppointment(APPOINTMENT_1));
+    }
+
+    @Test
+    public void hasAppointment_appointmentInAddressBook_returnsTrue() {
+        addressBook.addAppointment(APPOINTMENT_1);
+        assertTrue(addressBook.hasAppointment(APPOINTMENT_1));
+    }
+
+    @Test
+    public void hasAppointment_appointmentWithSameFieldsInAddressBook_returnsTrue() {
+        addressBook.addAppointment(APPOINTMENT_1);
+        Appointment appointment = new AppointmentBuilder().build();
+        assertTrue(addressBook.hasAppointment(appointment));
     }
 
     @Test

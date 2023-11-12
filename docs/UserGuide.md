@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-MediLink Contacts(MLC) is a **desktop app for managing patients and doctors details, optimized for use via a Command
+MediLink Contacts (MLC) is a **desktop app for managing patients and doctors details, optimized for use via a Command
 Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MLC
 can get your patients management tasks done faster than traditional GUI apps.
 
@@ -19,16 +19,16 @@ can get your patients management tasks done faster than traditional GUI apps.
 1. Ensure you have Java `11` or above installed in your Computer. If you don't, install it for your relevant operating
     system at this link https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html
 
-1. Download the latest `MediLink.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-3/tp/releases).
+2. Download the latest `MediLink.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your MLC.
+3. Copy the file to the folder you want to use as the _home folder_ for your MLC.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar Medilink.jar` command
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar MediLink.jar` command
    to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
    open the help window.<br>
    Some example commands you can try:
 
@@ -43,9 +43,27 @@ can get your patients management tasks done faster than traditional GUI apps.
 
     * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+## Parameters
+
+The list below contains the parameters that are used in various commands as well as their various constraints. Failing to input valid parameters will lead to errors when entering commands.
+
+| Parameter           | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Valid Examples                                                                                                  | Invalid Examples                   |
+|:--------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------|:-----------------------------------|
+| NRIC                | Starting with S or T, followed by 7 numbers, and ends with a letter. Not case-sensitive.                                                                                                                                                                                                                                                                                                                                                                                              | T0123456G, s33344476i                                                                                           | T01234567G, “”, t12367K            |
+| Doctor/Patient Name | Empty strings are not allowed. Name must contain only alphanumeric characters.                                                                                                                                                                                                                                                                                                                                                                                                        | Cristiano Ronaldo, Tanveer Singh                                                                                | “”, 高橋紳助, s/o someone              |
+| Contact Number      | 3 digit or more integer as phone number. Empty strings are not allowed.                                                                                                                                                                                                                                                                                                                                                                                                               | 91234569                                                                                                        | “”,  99                            |
+| Email               | Must be of the format `local-name`@`domain`. `local-name` should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-), and may not start or end with any special characters. `domain` is made up of domain labels separated by periods, and must end with a domain label at least 2 characters long. Domain labels start and end with alphanumeric characters, consist of alphanumeric characters, separated only by hyphens, if any. | j@Email.com, isaac@a-b.com                                                                                      | isaac@a+b.com, james.com           |
+| Blood Type          | Accepts only strings containing valid blood types, that is a combination of A/B/AB/O and +/-. Letters must be in caps.                                                                                                                                                                                                                                                                                                                                                                | B+, O+, B-, AB+                                                                                                 | J, K, A, O                         |
+| Address             | Any non-empty string.                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Clementi, OneCare@Hougang Avenue                                                                                | ""                                 |
+| Gender              | Either the character “M” or “F”. Must be in caps.                                                                                                                                                                                                                                                                                                                                                                                                                                     | M, F                                                                                                            | G, girl, male, f                   |
+| Emergency Contact   | Valid Contact number. Same constraints as the Contact Number parameter.                                                                                                                                                                                                                                                                                                                                                                                                               | 91234569                                                                                                        | “”, 99                             |
+| Condition           | Any non-empty string.                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Knee Injury, appendicitis                                                                                       | ""                                 |
+| Patient Tag         | Accepts only strings containing valid priority levels, either low, medium or high. Not case-sensitive.                                                                                                                                                                                                                                                                                                                                                                                | low, MEDIUM, hiGh                                                                                               | extreme, med                       |
+| Doctor Tag          | Accepts only strings containing valid specialisations. Not case-sensitive. The current allowed specialisations are listed in the examples box.                                                                                                                                                                                                                                                                                                                                        | CARDIOLOGIST, ORTHOPEDIC, PEDIATRICIAN, DERMATOLOGIST, NEUROLOGIST, GENERAL_PRACTITIONER, PSYCHIATRIST, SURGEON | Nurse, Head-Doctor                 |
+| Time                | Accepts only strings that follow the specified format (ie. `yyyy-MM-dd HH:mm`), where `HH:mm` follows the 24hr format.                                                                                                                                                                                                                                                                                                                                                                | 2016-10-10 18:00, </br> 2000-01-30 23:59                                                                        | 2005-10-32 18:00, 2016-11-02 27:00 |
 
 ## Features
 
@@ -76,7 +94,7 @@ can get your patients management tasks done faster than traditional GUI apps.
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -84,7 +102,7 @@ Format: `help`
 
 ### Adding a Doctor: `add-doctor`
 
-Adds a Doctor to the hospital database.
+Adds a Doctor to the clinic database.
 
 Format: `add-doctor n/NAME ic/IC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -96,19 +114,18 @@ A doctor can have any number of tags (including 0). Duplicate tags, however, are
 
 **:information_source: Take Note:**<br>
 
-- A doctor **MUST** have a non-empty NAME and a valid IC at the very least.
+- A doctor **MUST** have all fields non-empty except TAG.
   Failure to include these details may result in an error.
+- The order is not important (i.e, IC can come before NAME). What matters is that all the mandatory fields are declared,
+and the format for each field is adhered to.
 - A person can either be a doctor or a patient, but not both. Hence if the doctor's IC is already in the app
 as a patient, it may result in an error.
-- Phone Numbers and Emails have to be in a valid format.
-- PHONE_NUMBER must have exactly 8 digits.
-- EMAIL must contain email domain (eg. `@gmail.com`).
-- PATIENT must contain the valid IC of a Patient in the Database.
-- Tags for doctors represent the specialisation(s) of the doctor. Only tags from the list below are supported 
-in our current version:
+- Adding additional prefixes (eg. `b/O+`) not specified by the command format above will be considered as a **parameter input**. For example:</br>
+  `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/O+` will result
+  in Address inputted as `a/John street, block 123, #01-01 b/O+`. </br>
+  Do avoid adding  your own prefixes as it may lead to unwanted errors!
+- However, inputting `r/REMARKS` will be ignored and automatically removed by the system. To add remarks, use the Edit Command mentioned later below.
 
-  `CARDIOLOGIST, ORTHOPEDIC, PEDIATRICIAN, DERMATOLOGIST, NEUROLOGIST, GENERAL_PRACTITIONER, PSYCHIATRIST, SURGEON`
-- Tags are not case-sensitive (e.g. `t/SURGEON` and `t/surgeon` are both valid inputs).
 </div>
 
 Examples:
@@ -116,39 +133,91 @@ Examples:
 * `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Pediatrician`
 * `add-doctor n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon`
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Common Errors:**<br>
+1. Invalid Command Format <br>
+All fields are mandatory except the tag field. Omission of the fields will throw an error stating
+that an invalid command has been given, and specify the correct format for the `add-doctor command`. <br>
+Example: `add-doctor ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon`<br>
+Error Message: `Invalid command format!` <br>
+   `add-doctor: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS g/GENDER ic/NRIC [t/TAG]...`
+2. Invalid/Empty Field <br>
+   Fields have specific formats to be followed. Failure to adhere to this format will lead to an error message
+that specifies the format to be used for that field. Usage of flags without any message will lead to the same 
+corresponding error message since no field supports empty inputs.
+   ```
+   add-doctor n/ ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon
+   Names should only contain alphanumeric characters and spaces, and it should not be blank
+   
+   add-doctor n/Betsy Crowe ic/999 g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon
+   Ic should start with S or T, followed by 7 numbers, and ends with a letter. Letters inputs are case-insensitive. Empty strings are not allowed
+   
+   add-doctor n/Betsy Crowe ic/S9851586G g/B p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon
+   Gender should only be M for Male or F for Female
+   
+   add-doctor n/Betsy Crowe ic/S9851586G g/F p/phoneNumber e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon
+   Phone numbers should only contain numbers, and it should be at least 3 digits long
+   
+   add-doctor n/Betsy Crowe ic/S9851586G g/F p/98765433 e/ a/#104-C, Wakanda St 42 t/Surgeon
+   Emails should be of the format local-part@domain and adhere to the following constraints:
+   1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+   2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+      The domain name must:
+       - end with a domain label at least 2 characters long
+       - have each domain label start and end with alphanumeric characters
+       - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+   
+   add-doctor n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/ t/Surgeon
+   Addresses can take any values, and it should not be blank
+   
+   add-doctor n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/BestDoctor
+   Doctor tag should be a valid specialisation.
+      ```
+3. Adding custom prefixes <br>
+Adding custom prefixes will mostly cause the preceding flag to become invalid. <br>
+Exceptions:
+   * Adding 'custom' flags to the address or condition field will, however, be accepted as
+Addresses may involve the usage of the `/` character. Hence, take note to use the address field carefully.
+   * Adding the 'custom' flag before any other field will recognise the input to be of Invalid Command Format.
+<br>
+Examples:
+   * `add-doctor pic/ n/Faiz ic/S9851486G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/surgeon`
+   * `add-doctor n/Faiz pic/ ic/S9851486G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/surgeon`
+   * `add-doctor n/Faiz ic/S9851486G g/F p/98765433 e/betsycrowe@example.com a/#104/C, Wakanda St 42 t/surgeon`
+4. Special Cases <br>
+Names with special characters may not adhere to the current format for names, and may be recognised as an invalid input.
+Example:
+   * `add-doctor n/David s/o Beckham ic/S9851486G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/surgeon`
+</div>
+
 ### Adding a Patient: `add-patient`
 
-Adds a Patient to the hospital database.
+Adds a Patient to the clinic database.
 
-Format: `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e/EMAIL a/ADDRESS [t/TAG] [d/DOCTOR] [c/CONDITION] [b/BLOODTYPE] ​`
+Format: `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e/EMAIL a/ADDRESS c/CONDITION b/BLOODTYPE  [t/TAG] ​`
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Take Note:**<br>
 
-- A patient **MUST** have a non-empty NAME and a valid IC at the very least. Failure to include these details may result
-  in an error.
+- A patient cannot have the same NRIC as another person.
 - A person can either be a doctor or a patient, but not both. Hence, if the patient's IC is already in the app
     as a doctor, it may result in an error.
-- Phone Numbers and Emails have to be in a valid format.
-    - PHONE_NUMBER must have at least 3 digits
-    - EMAIL must contain email domain (eg. `@gmail.com`).
-- TAG must indicate Priority Level of the Patient and be one of the following:
-  - Low
-  - Medium
-  - High
-- EMERGENCY_CONTACT must contain valid emergency contact number, which needs to be a valid phone number.
-- Blood type must be a combination of A/B/AB/O and +/-.
+- EMERGENCY_CONTACT must contain valid emergency contact number, which needs to be a valid phone number. This number can be the same the person's contact number.
 - A patient can only have up to one tag at any time.
-- Tags for patients represent the priority level of the patient. Only the following tags are allowed: Low, Medium, High.
-- Tags are not case-sensitive (e.g. `t/LOW` and `t/low` are both valid inputs).
+- Adding additional prefixes (eg. `k/Always Injured`) not specified by the command format above will be considered as a **parameter input**. For example:</br>
+  `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 c/pneumothorax k/Always Injured b/O+` will result
+  in Condition inputted as `pneumothorax k/Always Injured`. </br>
+  Do avoid adding  your own prefixes as it may lead to unwanted errors!
+- However, inputting `r/REMARKS` will be ignored and automatically removed by the system. To add remarks, use the Edit Command mentioned later below.
 
 </div>
 
 Examples:
 
 * `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 c/pneumothorax b/O+ t/Low`
-* `add-patient n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 c/AIDS b/O+ t/High`
+* `add-patient n/Betsy Crowe ic/S9851586G g/F p/98765433 ec/12345678 e/betsycrowe@example.com a/#104-C, Wakanda St 42 c/AIDS b/O+ t/High`
 
 ### Creating an Appointment : `new-appt`
 
@@ -160,10 +229,9 @@ Format: `new-appt pic/IC dic/IC time/yyyy-MM-dd HH:mm`
 **:information_source: Take Note:**<br>
 
 - All fields are Required.
-- TIME must follow the specified format (ie. `yyyy-MM-dd HH:mm`), where `HH:mm` follows the 24hr format.
 - PATIENT must contain the valid IC of a Patient in the Database.
 - DOCTOR must contain the valid IC of a Doctor in the Database.
-- There must not be conflicting Appointments (eg the doctor already has an appointment with another patient at the same time)
+- There must not be conflicting Appointments. (eg. the doctor already has an appointment with another patient at the same time) However, the duration of each appointment is flexible and up to the users. As long as appointments are not at the exact same time, users can add it in.
 
 </div>
 
@@ -211,7 +279,7 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the MediLink Contacts.
+Shows a list of all persons and appointments in the MediLink Contacts.
 
 Format: `list`
 
@@ -221,22 +289,22 @@ Edits an existing person in the MediLink Contacts.
 
 Format: `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `NRIC`. The NRIC **must be a valid IC number**
+* Edits the person with the specified `NRIC`. The NRIC **must be a valid IC number**
 * At least one of the optional fields must be provided.
 * If the provided fields are the same as the original, the command will still work.
 * Must edit appropriate fields based on whether the person is a patient or doctor (e.g. can't update condition of a
-  doctor)
+  doctor).
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
-* Note: In our app, the Remark Section will be left blank by default. Edit Command can be used to add any misc info not captured by other fields such as possible allergies, medical history, etc.
+* Note: In our app, the Remark Section will be left blank by default. The edit Command can be used to add any miscellaneous info not captured by other fields such as possible allergies, medical history, etc.
 
 Examples:
 
-* `edit T0123456A p/91234567 e/johndoe@example.com g/F` Edits the phone number and email address of the 1st person to
+* `edit T0123456A p/91234567 e/johndoe@example.com g/F` edits the phone number and email address of the 1st person to
   be `91234567` and `johndoe@example.com` respectively.
-* `edit S9876543B n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all
+* `edit S9876543B n/Betsy Crower t/` edits the name of the 2nd person to be `Betsy Crower` and clears all
   existing tags.
 
 ### Locating persons by name: `find`
@@ -245,42 +313,42 @@ Finds persons that match the query.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* When searching names, the search is case-insensitive. e.g `hans` will match `Hans`
-* When searching names, the order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* When searching names, only full words will be matched e.g. `Han` will not match `Hans`
+* When searching names, the search is case-insensitive. e.g `hans` will match `Hans`.
+* When searching names, the order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+* When searching names, only full words will be matched e.g. `Han` will not match `Hans`.
 * When searching names, Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 * Note that if the name coincides with other find commands, it will be interpreted as the other find command first and extraneous paremeters will be ignored. e.g. `find F Kennedy John` will search for all female persons. 
-* It is recommended to use `list` to restore the view of all data after a `find` command
+* It is recommended to use `list` to restore the view of all data after a `find` command.
 
 Examples:
 
-* `find John` returns `john` and `John Doe`
-* `find kenny pickens` returns `Kenny Pickett`, `George Pickens`<br>
+* `find John` returns `john` and `John Doe`.
+* `find kenny pickens` returns `Kenny Pickett`, `George Pickens`. <br>
   ![result for 'find alex david'](images/findpickettpickensresult.png)
 
 
 ### Locating a person by NRIC : `find` ###
 
-Finds person that matches the NRIC query
+Finds person that matches the NRIC query.
 
 Format: `find NRIC`
 
 * NRIC input must be capitalised!
-* It is recommended to use `list` to restore the view of all data after a `find` command
+* It is recommended to use `list` to restore the view of all data after a `find` command.
 
 Examples:
 
-* `find T1125726G` returns the person with the matching NRIC
+* `find T1125726G` returns the person with the matching NRIC.
 
 ### Locating people by gender : `find M`, `find F` ###
 
-Finds all persons with matching gender
+Finds all persons with matching gender.
 
 Format: `find M` or `find F`
 
-* M and F must be capitalised
-* It is recommended to use `list` to restore the view of all data after a `find` command
+* M and F must be capitalised.
+* It is recommended to use `list` to restore the view of all data after a `find` command.
 
 Examples:
 
@@ -288,17 +356,15 @@ Examples:
 
 ### Locating people by blood types : `find Blood Type` ###
 
-Finds all Patients with query blood type
+Finds all Patients with query blood type.
 
 Format: `find Blood Type QUERY` 
 
-* All blood type inputs must be capitalised
-* Acceptable blood types are A, A+, B, B+, O, O+, AB and AB+
-* It is recommended to use `list` to restore the view of all data after a `find` command
+* It is recommended to use `list` to restore the view of all data after a `find` command.
 
 Examples:
 
-* `find Blood Type A+` returns all Patients with blood type A+
+* `find Blood Type A+` returns all Patients with blood type A+.
 
 ### Deleting a person : `delete`
 
@@ -307,12 +373,10 @@ Deletes the specified person from the address book.
 Format: `delete NRIC`
 
 * Deletes the person with the specified NRIC.
-* The NRIC **must be a valid NRIC format** and must belong to a person in the addressbook.
-* The NRIC is case-sensitive. e.g `tXXXXXXXz` is not the same as `TXXXXXXXZ`
 
 Examples:
 
-* `delete S1234567J` deletes Jonathan who has the NRIC `S1234567J`
+* `delete S1234567J` deletes Jonathan who has the NRIC `S1234567J`.
 
 ### Clearing all entries : `clear`
 
@@ -322,6 +386,13 @@ Format: `clear`
 
 ### Undo last action : `undo`
 
+<div markdown="block" class="alert alert-info">
+**:information_source: Take Note:**<br>
+
+- Upon restarting the app, you will no longer be able to undo actions previously performed before exiting the app.
+
+</div>
+
 Undoes the effect of the last command.
 
 Format: `undo`
@@ -330,7 +401,14 @@ Format: `undo`
 
 ### Redo last action : `redo`
 
-Repeats the previous command; an `undo` for an `undo` command.
+<div markdown="block" class="alert alert-info">
+**:information_source: Take Note:**<br>
+
+- Upon restarting the app, you will no longer be able to redo actions previously undone before exiting the app.
+
+</div>
+
+Restores the effects of actions that were previously undone using the undo command. 
 
 Format: `redo`
 
@@ -349,12 +427,11 @@ need to save manually.
 
 ### Editing the data file
 
-MediLink Contacts data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced
-users are welcome to update data directly by editing that data file.
+MediLink Contacts data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file. However, please ensure that the edits are valid, else it may cause unexpected behaviours when the invalid data is not detected by the system.
 
 <div markdown="span" class="alert alert-warning">
 :exclamation: **Caution:**
-If your changes to the data file makes its format invalid, MediLink Contacts will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, MediLink Contacts may discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it. Some changes may also be invalid, but not detected by the system. In that case, there may be many unexpected behaviours due to those undetected errors.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -381,20 +458,20 @@ the data of your previous MediLink Contacts home folder.
 
 ## Command summary
 
-| Action                 | Format, Examples                                                                                                                                                                                                                                                             |
-|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **New Doctor**         | `add-doctor n/NAME ic/IC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Pediatrician`                                                             |
+| Action                 | Format, Examples                                                                                                                                                                                                                                                                   |
+|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **New Doctor**         | `add-doctor n/NAME ic/IC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Pediatrician`                                                                   |
 | **New Patient**        | `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e/EMAIL a/ADDRESS [t/TAG] [d/DOCTOR] [c/CONDITION] [b/BLOODTYPE] …​` <br> e.g., `add-patient n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 c/AIDS b/O+ t/High` |
-| **New Appointment**    | `new-appt pic/IC dic/IC time/yyyy-MM-dd HH:mm` <br> e.g., `new-appt pic/T0123456H dic/S9851586G time/2023-10-30 13:00`                                                                                                                                                       |
-| **Delete Appointment** | `delete-appt INDEX`  <br> e.g., delete-appt 1                                                                                                                                                                                                                                |
-| **Find Appointment**   | `find-appt NRIC` <br> e.g., find-appt T00012220                                                                                                                                                                                                                              |
-| **Clear**              | `clear`                                                                                                                                                                                                                                                                      |
-| **Undo**               | `undo`                                                                                                                                                                                                                                                                       |
-| **Redo**               | `redo`                                                                                                                                                                                                                                                                       |
+| **New Appointment**    | `new-appt pic/IC dic/IC time/yyyy-MM-dd HH:mm` <br> e.g., `new-appt pic/T0123456H dic/S9851586G time/2023-10-30 13:00`                                                                                                                                                             |
+| **Delete Appointment** | `delete-appt INDEX`  <br> e.g., delete-appt 1                                                                                                                                                                                                                                      |
+| **Find Appointment**   | `find-appt NRIC` <br> e.g., find-appt T00012220                                                                                                                                                                                                                                    |
+| **Clear**              | `clear`                                                                                                                                                                                                                                                                            |
+| **Undo**               | `undo`                                                                                                                                                                                                                                                                             |
+| **Redo**               | `redo`                                                                                                                                                                                                                                                                             |
 | **Delete**             | `delete NRIC`<br> e.g., `delete T0666485G`                                                                                                                                                                                                                                         |
-| **Edit**               | `edit NRIC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit S9760431H n/James Lee e/jameslee@example.com`                                                                                                                                                |
-| **Find**               | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                                   |
-| **List**               | `list`                                                                                                                                                                                                                                                                       |
-| **Help**               | `help`                                                                                                                                                                                                                                                                       |
-| **Exit**               | `exit`                                                                                                                                                                                                                                                                       |
+| **Edit**               | `edit NRIC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit S9760431H n/James Lee e/jameslee@example.com`                                                                                                                                                 |
+| **Find**               | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                                         |
+| **List**               | `list`                                                                                                                                                                                                                                                                             |
+| **Help**               | `help`                                                                                                                                                                                                                                                                             |
+| **Exit**               | `exit`                                                                                                                                                                                                                                                                             |
 

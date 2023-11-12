@@ -157,12 +157,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         doctors.setObject(target, editedDoctor);
     }
 
-    public void setAppointment(Appointment target, Appointment editedAppointment) {
-        requireNonNull(editedAppointment);
-
-        appointments.setObject(target, editedAppointment);
-    }
-
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
@@ -232,6 +226,7 @@ public class AddressBook implements ReadOnlyAddressBook {
                 && doctors.equals((otherAddressBook.doctors))
                 && appointments.equals((otherAddressBook.appointments));
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(patients, doctors, appointments);
