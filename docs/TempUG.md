@@ -109,8 +109,8 @@ This box denotes command outputs.
 ### Other Notes
 <box type="warning" seamless>
 
-* Please avoid using " -" in the value of a parameter as tutorMate treats " -" as a reserved word that signifies the start of a new flag.
-* Please do not abuse the parser of tutorMate. For example, do not game it with special characters or __code injections__<sup>[6](#glossary)</sup>_<sup>[4](#glossary)</sup>. TutorMate does not guarantee the behaviour of the application on deliberate and malicious abuse beyond supported normal usage.
+* Please avoid using " -" in the value of a parameter as TutorMate treats " -" as a reserved word that signifies the start of a new flag.
+* Please do not abuse the parser of TutorMate. For example, do not game it with special characters or __code injections__<sup>[6](#glossary)</sup>_<sup>[4](#glossary)</sup>. TutorMate does not guarantee the behaviour of the application on deliberate and malicious abuse beyond supported normal usage.
 * TutorMate supports a maximum of 99999 students, 99999 lessons and 99999 tasks. Further data beyond this limit might be lost and not accessible in the application.
 * Please avoid manually modifying the data files in the _home folder_<sup>[5](#glossary)</sup>. Doing so may result in unexpected behaviour and data loss.
 * Please avoid running multiple instances of TutorMate at the same time. Doing so may result in unexpected behaviour and data loss.
@@ -1242,9 +1242,9 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 |-----|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 1   | **CLI**              | Abbreviation for Command Line Interface, which allow user to interact with the application by inputting commands, and receive feedback from the application in the form of text.                                    |
 | 2   | **GUI**              | Abbreviation for graphical user interface, which allow user to interact with with the application via graphical components such as icons, buttons, and menus.                                                       |
-| 3   | **Java**             | A programming language that you need to install before you are able to launch tutorMate. You could refer to FAQ for tips on how to verify whether you already have Java installed and how to install it.            |                                                              |
+| 3   | **Java**             | A programming language that you need to install before you are able to launch TutorMate. You could refer to FAQ for tips on how to verify whether you already have Java installed and how to install it.            |                                                              |
 | 4   | **Command Terminal** | A text based user interface where most of the interaction is done by inputting commands. You can search for "terminal" to find and launch the inbuilt terminal in your operating system (Windows, Linus and MacOS). |
-| 5   | **Home Folder**      | The folder TutorMate is located at while running. This will be the folder where tutorMate read the date from and write the data to.                                                                                 |
+| 5   | **Home Folder**      | The folder TutorMate is located at while running. This will be the folder where TutorMate read the date from and write the data to.                                                                                 |
 | 6   | **Code Injection**   | A computer attack in which malicious code is inserted into an application program.                                                                                                                                  |
 | 7   | **String**           | A sequence of characters. Can be taken as just any text.                                                                                                                                                            |
 | 8   | **Pointer**          | A variable that stores the memory address of another variable.                                                                                                                                                      |
