@@ -821,9 +821,9 @@ Given below are the fixes proposed to add in the near future.
 1. #### Deal with values having leading whitespaces in data files
    1. The current implementation will not load the `addressbook.json` file in the data folder when there are leading whitespaces.
    2. Proposed solution: We plan to trim the values of leading and trailing whitespaces before reading into `jsonAdaptedPerson.java`, so that even if there is leading whitespaces, the values can still be read. 
-2. #### Deal with phone numbers having more than 15 digits long
-   1. The current implementation will accept any phone number length more than 2, including numbers that are more than 15 digits long. However, the maximum phone number length in the world is 15.
-   2. Proposed solution: We plan to limit the phone number length so that it is 3 to 15 digits long, since all phone number with length more than 15 are technically invalid.
+2. #### Expansion of `filter` feature
+   1. In the current implementation, `filter` only works for 1 field, and it does not filter for the `Note`, `Schedule` and `ScheduleName` fields. The user may want to filter for multiple different fields so that they can have an easier time finding people of interest.
+   2. Proposed solution: We plan to let `filter` filter for `Note`, `Schedule` and `ScheduleName` fields, and also filter for multiple fields.
 3. #### Expansion of `tag` feature
     1. Currently, the only way to modify tags is via the `edit` command which overwrites the entire tag list when executed.
     2. This can result in notable user inconvenience in at least one of two ways :
@@ -868,7 +868,7 @@ Given below are the fixes proposed to add in the near future.
             1. Possible user information overload.
             2. Implementation & testing overhead due to more complex behaviour.
 
-8. #### Renaming of `clearschedule`
-    1. This is mostly regarding `clearschedule`, as `clearschedule` could easily be mis-entered as `clear schedule`, which would clear the addressbook.
-    2. Proposed solution 1 : Rename `clearschedule`.
-    3. Proposed solution 2 : Make `clear` not allow any input after `clear`.
+8. #### Deal with input restriction in `Name`, `ScheduleName` field
+    1. In the current implementation, `Name` and `ScheduleName` limit user input to alphanumeric characters. This may be a problem as for example, some people may want to add non-alphanumeric characters like "interview @ Marina Bay Office" into `ScheduleName` field, which is not allowed.
+    2. Proposed solution: Change most disallowed inputs to be warnings instead of disallowing them.
+
