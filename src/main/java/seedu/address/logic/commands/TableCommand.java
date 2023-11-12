@@ -60,18 +60,17 @@ public class TableCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        switch(this.args) {
-        case "g/":
-            return executeGender(model);
-        case "l/":
-            return executeSecLevel(model);
-        case "s/":
-            return executeSubject(model);
-        case "d/":
-            return executeEnrolDate(model);
-        default:
-            throw new CommandException(MESSAGE_INCORRECT_COMMAND);
 
+        if (args.equals(PREFIX_GENDER.getPrefix())) {
+            return executeGender(model);
+        } else if (args.equals(PREFIX_SEC_LEVEL.getPrefix())) {
+            return executeSecLevel(model);
+        } else if (args.equals(PREFIX_SUBJECT.getPrefix())) {
+            return executeSubject(model);
+        } else if (args.equals(PREFIX_ENROL_DATE.getPrefix())) {
+            return executeEnrolDate(model);
+        } else {
+            throw new CommandException(MESSAGE_INCORRECT_COMMAND);
         }
     }
 

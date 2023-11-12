@@ -163,7 +163,7 @@ public class UpdateSecLevelCommandTest {
 
     }
 
-    public Student getSec4Student(String name) {
+    private Student getSec4Student(String name) {
         return new PersonBuilder().withName(name)
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
                 .withPhone("94351253").withGender("F").withSecLevel("4")
@@ -171,7 +171,7 @@ public class UpdateSecLevelCommandTest {
                 .withSubjects("Chinese").build();
     }
 
-    public Student[] getNonSec4Students() {
+    private Student[] getNonSec4Students() {
         return new Student[] {
                 new PersonBuilder().withName("A")
                         .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")

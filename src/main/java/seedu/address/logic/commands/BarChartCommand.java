@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENROL_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEC_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
@@ -56,18 +57,19 @@ public class BarChartCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        switch(this.args) {
-        case "g/":
+
+        if (args.equals(PREFIX_GENDER.getPrefix())) {
             return executeGender(model);
-        case "l/":
+        } else if (args.equals(PREFIX_SEC_LEVEL.getPrefix())) {
             return executeSecLevel(model);
-        case "s/":
+        } else if (args.equals(PREFIX_SUBJECT.getPrefix())) {
             return executeSubject(model);
-        case "d/":
+        } else if (args.equals(PREFIX_ENROL_DATE.getPrefix())) {
             return executeEnrolDate(model);
-        default:
+        } else {
             throw new CommandException(MESSAGE_INCORRECT_COMMAND);
         }
+
     }
 
     /**

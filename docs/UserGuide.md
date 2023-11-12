@@ -72,6 +72,8 @@ If you are using Mac, click on the Launchpad icon in the Dock, type Terminal in 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
+* For commands that take in index(e.g. delete, edit), the index can only be an integer from 1 to 2,147,483,647, otherwise an invalid command message will be displayed.
+
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
@@ -183,8 +185,9 @@ Examples:
 
 ### Update sec level : `uplevel`, `undolevel`
 
-- `uplevel` : updates the sec levels for students from Secondary 1 to 3 and deletes all Secondary 4 students.
-  - `undolevel` : revert the student record to be before the previous sec level update.
+- `uplevel` : update the sec levels for all students and remove all sec level 4 students.
+- `undolevel` : revert the student record to be before previous sec level update (to undo an `uplevel`).
+
   Format: `uplevel`, `undolevel`
 
 * Command is case-sensitive.

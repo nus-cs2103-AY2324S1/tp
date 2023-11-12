@@ -100,20 +100,14 @@ public class TableWindow extends UiPart<Stage> {
      */
     private static TableView<SecLevelTableCommandResult> createSecLevelTable(SecLevelTableCommandResult commandResult) {
         TableView<SecLevelTableCommandResult> tableToCreate = new TableView<>();
+        String[] columnNames = new String[] {"Sec 1", "Sec 2", "Sec 3", "Sec 4"};
+        String[] fieldNames = new String[] {"sec1Count", "sec2Count", "sec3Count", "sec4Count"};
 
-        TableColumn<SecLevelTableCommandResult, Integer> sec1Column = new TableColumn<>("Sec 1");
-        sec1Column.setCellValueFactory(new PropertyValueFactory<>("sec1Count"));
-        TableColumn<SecLevelTableCommandResult, Integer> sec2Column = new TableColumn<>("Sec 2");
-        sec2Column.setCellValueFactory(new PropertyValueFactory<>("sec2Count"));
-        TableColumn<SecLevelTableCommandResult, Integer> sec3Column = new TableColumn<>("Sec 3");
-        sec3Column.setCellValueFactory(new PropertyValueFactory<>("sec3Count"));
-        TableColumn<SecLevelTableCommandResult, Integer> sec4Column = new TableColumn<>("Sec 4");
-        sec4Column.setCellValueFactory(new PropertyValueFactory<>("sec4Count"));
-
-        tableToCreate.getColumns().add(sec1Column);
-        tableToCreate.getColumns().add(sec2Column);
-        tableToCreate.getColumns().add(sec3Column);
-        tableToCreate.getColumns().add(sec4Column);
+        for (int i = 0; i < fieldNames.length; i++) {
+            TableColumn<SecLevelTableCommandResult, Integer> secColumn = new TableColumn<>(columnNames[i]);
+            secColumn.setCellValueFactory(new PropertyValueFactory<>(fieldNames[i]));
+            tableToCreate.getColumns().add(secColumn);
+        }
 
         tableToCreate.getItems().add(commandResult);
 
@@ -129,38 +123,16 @@ public class TableWindow extends UiPart<Stage> {
      */
     private static TableView<SubjectTableCommandResult> createSubjectTable(SubjectTableCommandResult commandResult) {
         TableView<SubjectTableCommandResult> tableToCreate = new TableView<>();
+        String[] columnNames = new String[] {Subject.ENG, Subject.CHI, Subject.EMATH, Subject.AMATH, Subject.PHY,
+                                                Subject.CHEMI, Subject.BIO, Subject.GEOG, Subject.HIST, Subject.SOC};
+        String[] fieldNames = new String[] {"engCount", "chiCount", "emathCount", "amathCount", "phyCount",
+                                            "chemiCount", "bioCount", "geogCount", "histCount", "socCount"};
 
-        TableColumn<SubjectTableCommandResult, Integer> engColumn = new TableColumn<>(Subject.ENG);
-        engColumn.setCellValueFactory(new PropertyValueFactory<>("engCount"));
-        TableColumn<SubjectTableCommandResult, Integer> chiColumn = new TableColumn<>(Subject.CHI);
-        chiColumn.setCellValueFactory(new PropertyValueFactory<>("chiCount"));
-        TableColumn<SubjectTableCommandResult, Integer> emathColumn = new TableColumn<>(Subject.EMATH);
-        emathColumn.setCellValueFactory(new PropertyValueFactory<>("emathCount"));
-        TableColumn<SubjectTableCommandResult, Integer> amathColumn = new TableColumn<>(Subject.AMATH);
-        amathColumn.setCellValueFactory(new PropertyValueFactory<>("amathCount"));
-        TableColumn<SubjectTableCommandResult, Integer> phyColumn = new TableColumn<>(Subject.PHY);
-        phyColumn.setCellValueFactory(new PropertyValueFactory<>("phyCount"));
-        TableColumn<SubjectTableCommandResult, Integer> chemiColumn = new TableColumn<>(Subject.CHEMI);
-        chemiColumn.setCellValueFactory(new PropertyValueFactory<>("chemiCount"));
-        TableColumn<SubjectTableCommandResult, Integer> bioColumn = new TableColumn<>(Subject.BIO);
-        bioColumn.setCellValueFactory(new PropertyValueFactory<>("bioCount"));
-        TableColumn<SubjectTableCommandResult, Integer> geogColumn = new TableColumn<>(Subject.GEOG);
-        geogColumn.setCellValueFactory(new PropertyValueFactory<>("geogCount"));
-        TableColumn<SubjectTableCommandResult, Integer> histColumn = new TableColumn<>(Subject.HIST);
-        histColumn.setCellValueFactory(new PropertyValueFactory<>("histCount"));
-        TableColumn<SubjectTableCommandResult, Integer> socColumn = new TableColumn<>(Subject.SOC);
-        socColumn.setCellValueFactory(new PropertyValueFactory<>("socCount"));
-
-        tableToCreate.getColumns().add(engColumn);
-        tableToCreate.getColumns().add(chiColumn);
-        tableToCreate.getColumns().add(emathColumn);
-        tableToCreate.getColumns().add(amathColumn);
-        tableToCreate.getColumns().add(phyColumn);
-        tableToCreate.getColumns().add(chemiColumn);
-        tableToCreate.getColumns().add(bioColumn);
-        tableToCreate.getColumns().add(geogColumn);
-        tableToCreate.getColumns().add(histColumn);
-        tableToCreate.getColumns().add(socColumn);
+        for (int i = 0; i < fieldNames.length; i++) {
+            TableColumn<SubjectTableCommandResult, Integer> subjectColumn = new TableColumn<>(columnNames[i]);
+            subjectColumn.setCellValueFactory(new PropertyValueFactory<>(fieldNames[i]));
+            tableToCreate.getColumns().add(subjectColumn);
+        }
 
         tableToCreate.getItems().add(commandResult);
 
@@ -176,44 +148,16 @@ public class TableWindow extends UiPart<Stage> {
     private static TableView<EnrolDateTableCommandResult> createEnrolDateTable(EnrolDateTableCommandResult
                                                                                        commandResult) {
         TableView<EnrolDateTableCommandResult> tableToCreate = new TableView<>();
+        String[] columnNames = new String[] {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                                                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+        String[] fieldNames = new String[] {"janCount", "febCount", "marCount", "aprCount", "mayCount", "junCount",
+                                            "julCount", "augCount", "sepCount", "octCount", "novCount", "decCount"};
 
-        TableColumn<EnrolDateTableCommandResult, Integer> janColumn = new TableColumn<>("Jan");
-        janColumn.setCellValueFactory(new PropertyValueFactory<>("janCount"));
-        TableColumn<EnrolDateTableCommandResult, Integer> febColumn = new TableColumn<>("Feb");
-        febColumn.setCellValueFactory(new PropertyValueFactory<>("febCount"));
-        TableColumn<EnrolDateTableCommandResult, Integer> marColumn = new TableColumn<>("Mar");
-        marColumn.setCellValueFactory(new PropertyValueFactory<>("marCount"));
-        TableColumn<EnrolDateTableCommandResult, Integer> aprColumn = new TableColumn<>("Apr");
-        aprColumn.setCellValueFactory(new PropertyValueFactory<>("aprCount"));
-        TableColumn<EnrolDateTableCommandResult, Integer> mayColumn = new TableColumn<>("May");
-        mayColumn.setCellValueFactory(new PropertyValueFactory<>("mayCount"));
-        TableColumn<EnrolDateTableCommandResult, Integer> junColumn = new TableColumn<>("Jun");
-        junColumn.setCellValueFactory(new PropertyValueFactory<>("junCount"));
-        TableColumn<EnrolDateTableCommandResult, Integer> julColumn = new TableColumn<>("Jul");
-        julColumn.setCellValueFactory(new PropertyValueFactory<>("julCount"));
-        TableColumn<EnrolDateTableCommandResult, Integer> augColumn = new TableColumn<>("Aug");
-        augColumn.setCellValueFactory(new PropertyValueFactory<>("augCount"));
-        TableColumn<EnrolDateTableCommandResult, Integer> sepColumn = new TableColumn<>("Sep");
-        sepColumn.setCellValueFactory(new PropertyValueFactory<>("sepCount"));
-        TableColumn<EnrolDateTableCommandResult, Integer> octColumn = new TableColumn<>("Oct");
-        octColumn.setCellValueFactory(new PropertyValueFactory<>("octCount"));
-        TableColumn<EnrolDateTableCommandResult, Integer> novColumn = new TableColumn<>("Nov");
-        novColumn.setCellValueFactory(new PropertyValueFactory<>("novCount"));
-        TableColumn<EnrolDateTableCommandResult, Integer> decColumn = new TableColumn<>("Dec");
-        decColumn.setCellValueFactory(new PropertyValueFactory<>("decCount"));
-
-        tableToCreate.getColumns().add(janColumn);
-        tableToCreate.getColumns().add(febColumn);
-        tableToCreate.getColumns().add(marColumn);
-        tableToCreate.getColumns().add(aprColumn);
-        tableToCreate.getColumns().add(mayColumn);
-        tableToCreate.getColumns().add(junColumn);
-        tableToCreate.getColumns().add(julColumn);
-        tableToCreate.getColumns().add(augColumn);
-        tableToCreate.getColumns().add(sepColumn);
-        tableToCreate.getColumns().add(octColumn);
-        tableToCreate.getColumns().add(novColumn);
-        tableToCreate.getColumns().add(decColumn);
+        for (int i = 0; i < fieldNames.length; i++) {
+            TableColumn<EnrolDateTableCommandResult, Integer> enrolDateColumn = new TableColumn<>(columnNames[i]);
+            enrolDateColumn.setCellValueFactory(new PropertyValueFactory<>(fieldNames[i]));
+            tableToCreate.getColumns().add(enrolDateColumn);
+        }
 
         tableToCreate.getItems().add(commandResult);
 
