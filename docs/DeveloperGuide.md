@@ -556,7 +556,7 @@ We also implemented a robust error-handling mechanism to gracefully manage scena
 ### Product scope
 
 **Target user profile**:
-* has a need to manage a significant number of applicants (around 250 - 500 applicants)
+* Hiring Manager of a Small Medium Enterprise who has a need to manage a significant number of applicants (around 250 - 500 applicants)
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
