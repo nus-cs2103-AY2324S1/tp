@@ -4,9 +4,7 @@ title: Developer Guide
 ---
 * Table of Contents
 {:toc}
-
---------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always;"></div>
 ## **Acknowledgements**
 
 * The foundational code was derived from [Addressbook-level3](https://se-education.org/addressbook-level3/)
@@ -16,11 +14,9 @@ title: Developer Guide
 
 ## **Setting up, getting started**
 
-
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
---------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always;"></div>
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
@@ -91,7 +87,7 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<img src="images/LogicClassDiagram.png" width="450"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete-t 1")` API call as an example.
 
@@ -107,19 +103,19 @@ How the `Logic` component works:
 3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
+<div style="page-break-after: always;"></div>
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
-
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddTutorCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddTutorCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddTutorCommandParser`, `DeleteTutorCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T17-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
-
 
 The `Model` component,
 
@@ -144,8 +140,7 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
---------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always;"></div>
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
@@ -156,7 +151,7 @@ The "Add Tutor" feature allows users to add a new tutor to the address book. Bel
 
 The following shows the activity diagram from when a user executes the `add-t` command:
 
-![AddTutorActivityDiagram](images/AddTutorActivityDiagram.png)
+<img src="images/AddTutorActivityDiagram.png" width="550" />
 
 #### Implementation details
 {:.no_toc}
@@ -197,6 +192,7 @@ The `add-t` command was designed this way to ensure consistency with the previou
     * Pros: Easier to implement, and less error prone.
     * Cons: Users must have every field filled before they can add a tutor.
 
+<div style="page-break-after: always;"></div>
 **Aspect: Non-unique phone number and email restriction**
 * **Alternative 1:** Allow only unique phone numbers and emails or tutors.
     * Pros: Decreases erroneous user input when duplicated tutors are entered.
@@ -221,6 +217,8 @@ The `add-t` command was designed this way to ensure consistency with the previou
     * Pros: More representative of various name types, especially those with commas in their names.
     * Cons: Allowing too many special characters decreases the ability to locate and reference the tutors in the future 
       (e.g. ABC,123@!?:" should not be accepted as a valid name).
+
+<div style="page-break-after: always;"></div>
 
 ### List tutor feature
 
@@ -247,6 +245,7 @@ method with the `PREDICATE_SHOW_ALL_PERSONS` predicate in the `ModelManager` to 
 
 Step 5. Finally, the `ListTutorCommand` object returns the `CommandResult`.
 
+<div style="page-break-after: always;"></div>
 The following sequence diagram shows how the above steps for list tutor operation works:
 
 ![Interactions Inside the Logic Component for the `list-t` Command](images/ListTutorSequenceDiagram.png)
@@ -255,6 +254,8 @@ The following sequence diagram shows how the above steps for list tutor operatio
 {:.no_toc}
 
 The `list-t` command was designed this way to ensure consistency with the previous `list` command in AB3.
+
+<div style="page-break-after: always;"></div>
 
 ### Edit tutor feature 
 
@@ -273,7 +274,7 @@ Step 2. The user executes `list-t` to view all added tutors.
 
 Step 3. The user executes `edit-t 1 n/John Doe` to edit the first tutor's name in the list of tutors displayed. 
 The command is parsed in `AddressBookParser`.
-
+<div style="page-break-after: always;"></div>
 Step 4. `EditTutorCommandParser` is created, and constructs an `EditPersonDescriptor` which describes the edited 
 `Person` (omitted in sequence diagram below for brevity). An `EditTutorCommand` object is then constructed with this 
 `EditPersonDescriptor` and the specified tutor index.
@@ -298,6 +299,7 @@ The lifeline for `EditTutorCommandParser` should end at the destroy marker (X) b
 the lifeline reaches the end of diagram.
 </div>
 
+<div style="page-break-after: always;"></div>
 #### Design rationale
 {:.no_toc}
 
@@ -322,13 +324,14 @@ the lifeline reaches the end of diagram.
     - Cons: Names are case-sensitive. This means that users need to accurately input the name with the correct 
       capitalization, which can add an extra layer of precision required from the user.
 
+<div style="page-break-after: always;"></div>
 ### Find tutor feature
 
 The "Find Tutor" feature allows users to search for tutors based on the tutor's name. 
 
 The following shows the activity diagram from when a user executes the `find-t` command:
 
-![Activity Diagram for find-t Command](images/FindTutorActivityDiagram.png)
+<img src="images/FindTutorActivityDiagram.png" width="550"/>
 
 #### Implementation details
 {:.no_toc}
@@ -370,6 +373,7 @@ the lifeline reaches the end of diagram.
       tutor's name.
     - Cons: If a user has incomplete or incorrect information about the tutor's name, they may not be able to find the 
       desired tutor.
+<div style="page-break-after: always;"></div>
 - **Alternative 2:** Specifying search criteria like tutor phone number or email.
     - Pros: Users would have the ability to search for tutors based on a wider range of criteria, such as phone
       number and email.
@@ -385,7 +389,7 @@ each step.
 The following shows the activity diagram when a user executes the `delete-t` command:
 
 ![Activity diagram for delete-t command](images/DeleteTutorActivityDiagram.png)
-
+<div style="page-break-after: always;"></div>
 #### Implementation details
 {:.no_toc}
 
@@ -443,6 +447,7 @@ The `delete-t` command was designed this way to ensure consistency with the prev
   - Cons: Names are case-sensitive. This means that users need to accurately input the name with the correct
     capitalization, which can add an extra layer of precision required from the user.
 
+<div style="page-break-after: always;"></div>
 ### Add schedule feature
 
 The “Add Schedule” feature allows users to add a new schedule to the address book. Below, we provide an example usage
@@ -460,7 +465,7 @@ to add a schedule to a `Model`. Additionally, it implements the following operat
 * `AddScheduleCommand#execute(Model)` — Adds the schedule to the `Model`.
 
 This operation is exposed in the abstract `Command` class as an abstract method.
-
+<div style="page-break-after: always;"></div>
 Given below is an example usage scenario and how the add schedule command behaves.
 
 Step 1. The user has the application launched with at least 1 tutor added.
@@ -493,7 +498,7 @@ Step 4. The `AddScheduleCommand#execute(Model)` will perform the following check
 
 If any of these checks fail, a `CommandException` with an appropriate error message will be thrown. Otherwise, it will 
 create a `Schedule` and use `Model::addSchedule` to add the schedule to the `Model`.
-
+<div style="page-break-after: always;"></div>
 The following sequence diagram shows how the operation works:
 
 ![AddScheduleSequenceDiagram](images/AddScheduleSequenceDiagram.png)
@@ -559,7 +564,7 @@ Step 7. `EditScheduleCommand` object then calls the `setSchedule` method in the 
 This method sets the specified `Schedule` in the model to be that edited `Schedule`.
 
 Step 8. Finally, the `EditScheduleCommand` object updates the schedule list to display the edited `Schedule`.
-
+<div style="page-break-after: always;"></div>
 The following sequence diagram shows how the above steps for edit schedule operation works:
 
 ![EditScheduleSequenceDiagram](images/EditScheduleSequenceDiagram.png)
@@ -649,7 +654,7 @@ the lifeline reaches the end of diagram.
 The "Find Schedule" feature allows users to search for schedules based on the tutor's name.
 The following shows the activity diagram from when a user executes the `find-s` command:
 
-![FindScheduleActivityDiagram](images/FindScheduleActivityDiagram.png)
+<img src="images/FindScheduleActivityDiagram.png" width="550">
 
 #### Implementation details
 {:.no_toc}
@@ -679,7 +684,7 @@ The following sequence diagram shows how the above steps for find tutor operatio
 The lifeline for `FindScheduleCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML,
 the lifeline reaches the end of diagram.
 </div>
-
+<div style="page-break-after: always;"></div>
 #### Design Rationale
 {:.no_toc}
 
@@ -737,7 +742,7 @@ specified `Schedule` in the model to be that edited `Schedule` with completed st
 
 Step 9. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from
 `Logic`.
-
+<div style="page-break-after: always;"></div>
 The following sequence diagram shows how the above steps for mark schedule operation works:
 
 ![Sequence diagram for mark command](images/MarkScheduleSequenceDiagram.png)
@@ -764,7 +769,7 @@ the lifeline reaches the end of diagram.
     alike must account for an additional state, potentially increasing the system's complexity.
   - Cons: The definition and usage of the `pending` status may vary among users, potentially leading to ambiguity in
     its interpretation.
-
+<div style="page-break-after: always;"></div>
 **Aspect: Format of schedule status**
 - **Alternative 1 (current choice):** Users input integers `0` or `1` to mark a schedule as `missed` or `completed`.
   - Pros: Using integers provides a clear and unambiguous way for users to specify which status they want to
@@ -793,7 +798,7 @@ the lifeline reaches the end of diagram.
 - **Alternative 2:** Users input only one `m/` tag. Multiple tags will result in an error.
   - Pros: The command is unambiguous to use, since multiple (hence conflicting) tags are not accepted. 
   - Cons: It is inconvenient for fast typists to have to go back to previously typed commands to edit fields.
-
+<div style="page-break-after: always;"></div>
 ### Unmark schedule feature
 
 The "Unmark Schedule" feature allows users to unmark a schedule that was previously marked as completed or missed. 
@@ -859,7 +864,7 @@ the lifeline reaches the end of diagram.
       alike must account for an additional state, potentially increasing the system's complexity.
     - Cons: The definition and usage of the "pending" status may vary among users, potentially leading to ambiguity in 
       its interpretation.
-
+<div style="page-break-after: always;"></div>
 ### Delete schedule feature
 
 The "Delete Schedule" feature allows users to delete an existing schedule in the address book given a schedule index.
@@ -916,7 +921,7 @@ The "Show Calendar" feature allows users to view schedules based on a specific d
 
 The following shows the activity diagram from when a user executes the `show` command:
 
-![Activity Diagram for show Command](images/ShowCalendarActivityDiagram.png)
+<img src="images/ShowCalendarActivityDiagram.png" width="550">
 
 #### Implementation details
 {:.no_toc}
@@ -964,7 +969,7 @@ the lifeline reaches the end of diagram.
     - Cons: May not be as suitable for administrators or users managing multiple tutors, as they may need to switch 
       between tutors to view their respective schedules.
     - Cons: Users may need to specify the tutor they want to view, requiring additional input.
-
+<div style="page-break-after: always;"></div>
 ### Change theme feature
 
 The "Change Theme" feature allows users to change the colour theme of the address book. Below, we provide an example 
@@ -994,7 +999,7 @@ In order for the app to apply the last used theme when run again, the theme has 
 This is not depicted in the following sequence diagram, which focuses on implementation of changing theme.
 
 </div>
-
+<div style="page-break-after: always;"></div>
 The following sequence diagram shows how the above steps for change theme operation works:
 
 ![ChangeThemeSequenceDiagram](images/ChangeThemeSequenceDiagram.png)
@@ -1070,7 +1075,7 @@ that are most relevant to the user at that point in time, is at the very top.
 Past schedules are sorted in descending order, this keeps the more recent schedules readily accessible, while the older, 
 less relevant schedules are at the bottom of the list.
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -1164,7 +1169,7 @@ otherwise.
 * 2a. The list is empty.
 
   Use case ends.
-
+<div style="page-break-after: always;"></div>
 * 3a. The given index is invalid.
 
     * 3a1. TutorConnect shows an error message.
@@ -1214,7 +1219,7 @@ otherwise.
 4.  TutorConnect adds the schedule and displays a list of schedule
 
     Use case ends.
-
+<div style="page-break-after: always;"></div>
 **Extensions**
 
 * 2a. The list is empty.
@@ -1264,7 +1269,7 @@ otherwise.
 
     Use case resumes at step 2.
 
-
+<div style="page-break-after: always;"></div>
 #### **Use case: List schedules**
 {:.no_toc}
 
@@ -1317,7 +1322,6 @@ otherwise.
 * 2a. The list is empty.
 
   Use case ends.
-
 * 3a. The given index is invalid.
 
     * 3a1. TutorConnect shows an error message.
@@ -1366,7 +1370,7 @@ otherwise.
 * 2a. The list is empty.
 
   Use case ends.
-
+<div style="page-break-after: always;"></div>
 * 3a. The given index is invalid.
 
     * 3a1. TutorConnect shows an error message.
@@ -1451,7 +1455,7 @@ testers are expected to do more *exploratory* testing.
    
    2. Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent theme is retained. 
-
+<div style="page-break-after: always;"></div>
 ### Adding a tutor
 
 Adding a tutor while all tutors are being shown
@@ -1528,7 +1532,7 @@ Finds a tutor while all tutors are being shown
 
    3. Test case: `find-t`<br>
       Expected: No tutors are found. Error details shown in the status message.
-
+<div style="page-break-after: always;"></div>
 ### Adding a schedule
 
 Adds a schedule while all schedules are being shown
@@ -1696,6 +1700,8 @@ unexpected behaviours. Please proceed only if you are confident.
 
 </div>
 
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Appendix: Planned enhancements** 
 
 Given below are the planned enhancements for future iterations of the app.
@@ -1755,7 +1761,7 @@ An extra validation should be included in the `execute` method within the `MarkS
 scheduleToEdit's start and end times are earlier than the current datetime.
 
 If this validation fails, a `CommandException` with a clear and descriptive error message should be thrown.
-
+<div style="page-break-after: always;"></div>
 ### Streamline datetime input
 In the current implementation, the users have to enter `yyyy-MM-ddTHH:mm` each time for both `StartTime` and `EndTime`.
 However, since a `Schedule` is not allowed to start and end on different days, the user is unnecessarily repeating the
@@ -1767,7 +1773,7 @@ to make it shorter and more user-friendly.
 The current `st/` and `et/` prefixes will be updated to take in `HH:mm` only. Additionally, this would require a new 
 prefix `d/` which will parse user input in the `yyyy-MM-dd` format into a `Date`.
 
-For example, any command that uses the `st/` or `et/` prefix will now use `... d/yyyy-MM-dd st/HH:mm et/HH:m` instead.
+For example, any command that uses the `st/` or `et/` prefix will now use `... d/yyyy-MM-dd st/HH:mm et/HH:mm` instead.
 
 ### Tutor and schedule information view
 In the current implementation, tutors and schedules with long fields of over 40 characters are truncated. They can 
@@ -1788,7 +1794,7 @@ can only be viewed in the `list-s` view.
 
 In the `CalendarRow`, the column constraints should be removed. This will add a horizontal scroll bar in the event 
 the information to be displayed is too long.
-
+<div style="page-break-after: always;"></div>
 ### Switching back to list view from calendar view
 In the current system, when executing any commands, including actions like marking, unmarking, or deleting schedules 
 while in the calendar view, the GUI switches back to the main view displaying the list of tutors and schedules. This 
@@ -1840,7 +1846,7 @@ word after the command word `theme` is accepted.
 In our current implementation, `list-s` only filters schedule by `COMPLETED` or `MISSED` status. Any schedules that have 
 not been assigned one of these statuses are categorised as unmarked, and it's important to include them in the list-s results.
 
-**Proposed implementation**:
+**Proposed implementation**
 
 1. Update `list-s` command and `m/` parameter value to accept an additional value for unmarked status to filter by, such as `m/u`.
 2. This can be done by modifying `ListScheduleCommandParser.java` and `Status.java` to map an integer to enum `Status` that represents umarked status.
