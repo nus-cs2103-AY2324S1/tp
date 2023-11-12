@@ -60,6 +60,11 @@ public class FindCommandParser implements Parser<FindCommand> {
             predicateList.add(namePredicate);
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            String trimmedArgs = argMultimap.getValue(PREFIX_PHONE).get().trim();
+            if (trimmedArgs.isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            }
             phonePredicate = new PhoneContainsNumberPredicate(argMultimap.getValue(PREFIX_PHONE).get());
             predicateList.add(phonePredicate);
         }

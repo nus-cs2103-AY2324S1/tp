@@ -29,6 +29,7 @@ public class MarkCommandTest {
         Interview doneInterview = new Interview(
                 interviewToMark.getInterviewApplicant(),
                 interviewToMark.getJobRole(),
+                interviewToMark.getRating(),
                 interviewToMark.getInterviewStartTime(),
                 interviewToMark.getInterviewEndTime(),
                  true);

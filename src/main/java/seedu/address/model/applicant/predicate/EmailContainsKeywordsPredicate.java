@@ -24,7 +24,9 @@ public class EmailContainsKeywordsPredicate implements Predicate<Applicant> {
         String domain = email.getDomain();
 
         return keywords.stream()
-                .anyMatch(keyword -> keyword.equalsIgnoreCase(localPart) || keyword.equalsIgnoreCase(domain));
+                .anyMatch(keyword -> keyword.equalsIgnoreCase(localPart)
+                        || keyword.equalsIgnoreCase(domain)
+                        || keyword.equalsIgnoreCase(email.value));
     }
 
     @Override

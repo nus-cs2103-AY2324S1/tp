@@ -21,12 +21,15 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindInterviewCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListFreeTimeCommand;
 import seedu.address.logic.commands.ListInterviewCommand;
+import seedu.address.logic.commands.ListInterviewsDoneCommand;
+import seedu.address.logic.commands.ListInterviewsNotDoneCommand;
+import seedu.address.logic.commands.ListInterviewsTodayCommand;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.commands.RateCommand;
-import seedu.address.logic.commands.ShowDoneCommand;
-import seedu.address.logic.commands.ShowUndoneCommand;
 import seedu.address.logic.commands.SortRateCommand;
+import seedu.address.logic.commands.SortTimeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -103,6 +106,12 @@ public class AddressBookParser {
         case ListInterviewCommand.COMMAND_WORD:
             return new ListInterviewCommand();
 
+        case ListInterviewsTodayCommand.COMMAND_WORD:
+            return new ListInterviewsTodayCommand();
+
+        case ListFreeTimeCommand.COMMAND_WORD:
+            return new ListFreeTimeCommandParser().parse(arguments);
+
         case EditInterviewCommand.COMMAND_WORD:
             return new EditInterviewCommandParser().parse(arguments);
 
@@ -112,11 +121,14 @@ public class AddressBookParser {
         case SortRateCommand.COMMAND_WORD:
             return new SortRateCommand();
 
-        case ShowDoneCommand.COMMAND_WORD:
-            return new ShowDoneCommand();
+        case SortTimeCommand.COMMAND_WORD:
+            return new SortTimeCommand();
 
-        case ShowUndoneCommand.COMMAND_WORD:
-            return new ShowUndoneCommand();
+        case ListInterviewsDoneCommand.COMMAND_WORD:
+            return new ListInterviewsDoneCommand();
+
+        case ListInterviewsNotDoneCommand.COMMAND_WORD:
+            return new ListInterviewsNotDoneCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

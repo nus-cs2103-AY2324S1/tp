@@ -1,0 +1,36 @@
+@startuml
+skinparam activityBackgroundColor LightYellow
+skinparam activityBorderColor Blue
+skinparam activityArrowColor Black
+skinparam activityArrowFontSize 10
+skinparam activityFontSize 12
+
+start
+
+:User use the RateInterview command;
+
+if () then ([command format is invalid])
+    :Show invalid command
+    error message;
+
+else ([else])
+    if () then ([index is out of bound])
+        :Show invalid interview index
+        error message;
+    else ([else]))
+        if () then ([rating is invalid])
+            :Show invalid command
+            error message;
+        else ([else])
+            if () then ([interview is not mark done])
+                    :Show invalid interview status
+                    error message;
+            else ([else])
+                    :Rate the interview with the given rating;
+            endif
+        endif
+    endif
+endif
+stop
+
+@enduml

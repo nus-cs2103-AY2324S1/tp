@@ -17,31 +17,29 @@ import org.junit.jupiter.api.Test;
 public class InterviewTest {
 
     @Test
-    public void isNotValidOrNewInterview() {
+    public void isSameInterview() {
         // same object -> returns true
         assertTrue(STANDARD_INTERVIEW.isSameInterview(STANDARD_INTERVIEW));
 
         // null -> returns false
         assertFalse(STANDARD_INTERVIEW.isSameInterview(null));
 
-        System.out.println(STANDARD_INTERVIEW.isSameInterview(STANDARD_INTERVIEW_DIFFERENT_ROLE));
-        System.out.println(STANDARD_INTERVIEW);
-        System.out.println(STANDARD_INTERVIEW_DIFFERENT_ROLE);
         // same Applicant and time, all other attributes different -> returns true
         assertTrue(STANDARD_INTERVIEW.isSameInterview(STANDARD_INTERVIEW_DIFFERENT_ROLE));
 
         // different Applicant, all other attributes same -> returns false
         assertFalse(STANDARD_INTERVIEW.isSameInterview(STANDARD_INTERVIEW_DIFFERENT_APPLICANT));
 
-        // different Time, all other attributes same -> return false
-        assertFalse(STANDARD_INTERVIEW.isSameInterview(STANDARD_INTERVIEW_DIFFERENT_TIME));
+        // different Time, all other attributes same -> return true
+        assertTrue(STANDARD_INTERVIEW.isSameInterview(STANDARD_INTERVIEW_DIFFERENT_TIME));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
         Interview standardInterviewCopy = new Interview(STANDARD_INTERVIEW.getInterviewApplicant(),
-                STANDARD_INTERVIEW.getJobRole(), STANDARD_INTERVIEW.getInterviewStartTime(),
+                STANDARD_INTERVIEW.getJobRole(), STANDARD_INTERVIEW.getRating(),
+                STANDARD_INTERVIEW.getInterviewStartTime(),
                 STANDARD_INTERVIEW.getInterviewEndTime(), STANDARD_INTERVIEW.isDone());
         assertTrue(STANDARD_INTERVIEW.equals(standardInterviewCopy));
 
@@ -59,20 +57,23 @@ public class InterviewTest {
 
         // different Applicant -> returns false
         Interview editedStandardinterview = new Interview(STANDARD_INTERVIEW_2.getInterviewApplicant(),
-                STANDARD_INTERVIEW.getJobRole(), STANDARD_INTERVIEW.getInterviewStartTime(),
-                STANDARD_INTERVIEW.getInterviewEndTime(), STANDARD_INTERVIEW.isDone());
+                STANDARD_INTERVIEW.getJobRole(), STANDARD_INTERVIEW.getRating(),
+                STANDARD_INTERVIEW.getInterviewStartTime(), STANDARD_INTERVIEW.getInterviewEndTime(),
+                STANDARD_INTERVIEW.isDone());
         assertFalse(STANDARD_INTERVIEW.equals(editedStandardinterview));
 
         // different job role -> returns false
         editedStandardinterview = new Interview(STANDARD_INTERVIEW.getInterviewApplicant(),
-                STANDARD_INTERVIEW_2.getJobRole(), STANDARD_INTERVIEW.getInterviewStartTime(),
-                STANDARD_INTERVIEW.getInterviewEndTime(), STANDARD_INTERVIEW.isDone());
+                STANDARD_INTERVIEW_2.getJobRole(), STANDARD_INTERVIEW.getRating(),
+                STANDARD_INTERVIEW.getInterviewStartTime(), STANDARD_INTERVIEW.getInterviewEndTime(),
+                STANDARD_INTERVIEW.isDone());
         assertFalse(STANDARD_INTERVIEW.equals(editedStandardinterview));
 
         // different Timing -> returns false
         editedStandardinterview = new Interview(STANDARD_INTERVIEW.getInterviewApplicant(),
-                STANDARD_INTERVIEW.getJobRole(), STANDARD_INTERVIEW_2.getInterviewStartTime(),
-                STANDARD_INTERVIEW.getInterviewEndTime(), STANDARD_INTERVIEW.isDone());
+                STANDARD_INTERVIEW.getJobRole(), STANDARD_INTERVIEW.getRating(),
+                STANDARD_INTERVIEW_2.getInterviewStartTime(), STANDARD_INTERVIEW.getInterviewEndTime(),
+                STANDARD_INTERVIEW.isDone());
         assertFalse(STANDARD_INTERVIEW.equals(editedStandardinterview));
     }
 }

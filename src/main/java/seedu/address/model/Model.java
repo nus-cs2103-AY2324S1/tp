@@ -2,9 +2,11 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.interview.Interview;
@@ -98,6 +100,12 @@ public interface Model {
     boolean hasInterview(Interview interview);
 
     /**
+     * Returns true if an interview with a timing that clashes with {@code interview}
+     * exists in the address book.
+     */
+    public boolean hasInterviewClash(Interview interview);
+
+    /**
      * Adds the given interview.
      * {@code interview} must not already exist in the address book.
      */
@@ -128,4 +136,9 @@ public interface Model {
      * @throws NullPointerException if {@code comparator} is null.
      */
     void sortInterviewList(Comparator<Interview> comparator);
+
+    /**
+     * Lists the pockets of time on a given day.
+     */
+    List<Pair<Time, Time>> listPocketsOfTimeOnGivenDay(Time day);
 }

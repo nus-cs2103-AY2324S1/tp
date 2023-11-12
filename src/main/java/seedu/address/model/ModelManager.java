@@ -5,11 +5,13 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.applicant.Applicant;
@@ -79,7 +81,7 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== AddressBook Applicants ===========================================================================
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
@@ -99,11 +101,6 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteApplicant(Applicant target) {
-        if (target.hasInterview()) {
-            Interview interviewWithTarget = addressBook.findInterviewWithApplicant(target);
-            addressBook.removeInterview(interviewWithTarget);
-        }
-
         addressBook.removeApplicant(target);
     }
 
@@ -139,6 +136,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasInterviewClash(Interview interview) {
+        requireNonNull(interview);
+        return addressBook.hasInterviewClash(interview);
+    }
+
+
+    @Override
     public void addInterview(Interview interview) {
         addressBook.addInterview(interview);
         updateFilteredInterviewList(PREDICATE_SHOW_ALL_INTERVIEWS);
@@ -158,7 +162,18 @@ public class ModelManager implements Model {
         addressBook.removeInterview(target);
     }
 
-    //=========== Filtered Applicant List Accessors =============================================================
+    /**
+     * Lists the pockets of time on a given day.
+     *
+     * @author Tan Kerway
+     * @param day the day to list pockets of time on
+     * @return a list of pockets of time available on the given day
+     */
+    public List<Pair<Time, Time>> listPocketsOfTimeOnGivenDay(Time day) {
+        return addressBook.listPocketsOfTimeOnGivenDay(day);
+    }
+
+    //=========== Filtered Applicant and Interview List Accessors =================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Applicant} backed by the internal list of
@@ -213,5 +228,4 @@ public class ModelManager implements Model {
                 && filteredApplicants.equals(otherModelManager.filteredApplicants)
                 && filteredInterviews.equals(otherModelManager.filteredInterviews);
     }
-
 }

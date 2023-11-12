@@ -1,135 +1,64 @@
 package seedu.address.model.interview;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-
 import seedu.address.logic.parser.TimeParser;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Time;
 import seedu.address.model.applicant.Applicant;
 
 /**
  * Represents an Interview in the address book.
  */
 public class Interview {
-    private static final LocalTime WORK_START = LocalTime.of(9, 0);
-    private static final LocalTime WORK_END = LocalTime.of(17, 0);
     private final Applicant applicant;
     private final String jobRole;
     private final Rating rating;
-    private final LocalDateTime startTime;
-    private final LocalDateTime endTime;
+    private final Time startTime;
+    private final Time endTime;
     private final boolean isDone;
 
     /**
-     * Default constructor for Interview object.
-     */
-    public Interview(Applicant app, String role, String startTimeString, String endTimeString)
-            throws ParseException {
-        requireAllNonNull(app, role, startTimeString, endTimeString);
-        this.applicant = app;
-        this.jobRole = role;
-        this.rating = new Rating("0.0");
-        this.startTime = TimeParser.parseDate(startTimeString);
-        this.endTime = TimeParser.parseDate(endTimeString);
-        this.isDone = false;
-    }
-
-    /**
-     * Creates an Interview object from storage.
+     * Constructs an instance of an Interview loaded from the json file.
      *
      * @author Tan Kerway
-     * @param app the applicant loaded from the db
-     * @param role the applicant's role that they applied for
-     * @param startTimeString the start time of the interview
-     * @param endTimeString the end time of the interview
-     * @param rating the rating of the interviewee
-     * @throws ParseException if the start and/or end time string are invalid
-     */
-    public Interview(Applicant app, String role, String startTimeString, String endTimeString,
-                     Rating rating, boolean isDone)
-            throws ParseException {
-        requireAllNonNull(app, role, startTimeString, endTimeString);
-        this.applicant = app;
-        this.jobRole = role;
-        this.startTime = TimeParser.parseDate(startTimeString);
-        this.endTime = TimeParser.parseDate(endTimeString);
-        this.rating = rating;
-        this.isDone = isDone;
-    }
-
-    /**
-     * Constructor for creating Interview object from storage
-     *
-     * @author Tan Kerway
-     * @param app the applicant loaded from the db
-     * @param role the applicant's role that they applied for
-     * @param startTimeString the start time of the interview
-     * @param endTimeString the end time of the interview
-     * @throws ParseException if the start and/or end time string are invalid
-     */
-    public Interview(Applicant app, String role, String startTimeString, String endTimeString, boolean isDone)
-            throws ParseException {
-        requireAllNonNull(app, role, startTimeString, endTimeString);
-        this.applicant = app;
-        this.jobRole = role;
-        this.startTime = TimeParser.parseDate(startTimeString);
-        this.endTime = TimeParser.parseDate(endTimeString);
-        this.rating = new Rating("0.0");
-        this.isDone = isDone;
-    }
-
-    /**
-     * Alternative constructor for creating Interview object from storage.
-     */
-    public Interview(Applicant app, String role, LocalDateTime startTime,
-                     LocalDateTime endTime, boolean isDone) {
-        requireAllNonNull(app, role, startTime, endTime, isDone);
-        this.applicant = app;
-        this.jobRole = role;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.rating = new Rating("0.0");
-        this.isDone = isDone;
-    }
-
-    /**
-     * Alternative constructor for creating Interview object from editing.
-     */
-    public Interview(Applicant app, String role, LocalDateTime startTime, LocalDateTime endTime,
-                     Rating rate, boolean isDone) {
-        requireAllNonNull(app, role, startTime, endTime, rate, isDone);
-        this.applicant = app;
-        this.jobRole = role;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.rating = rate;
-        this.isDone = isDone;
-    }
-
-    /**
-     * Constructs a new instance of Interview.
-     *
-     * @author Tan Kerway
-     * @param app the instance of the applicant class which represents the applicant
-     * @param role the role of the applicant
+     * @param applicant the applicant loaded from the json file
+     * @param jobRole the job role of the applicant
+     * @param rating the rating of the applicant
      * @param startTime the start time of the interview
      * @param endTime the end time of the interview
+     * @param isDone whether the interview loaded is done or not
      */
-    public Interview(Applicant app, String role, LocalDateTime startTime,
-                     LocalDateTime endTime) {
-        requireAllNonNull(app, role, startTime, endTime);
-        applicant = app;
-        jobRole = role;
+    public Interview(Applicant applicant,
+                     String jobRole, Rating rating,
+                     Time startTime, Time endTime, boolean isDone) {
+        this.applicant = applicant;
+        this.jobRole = jobRole;
+        this.rating = rating;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.isDone = isDone;
+    }
+
+    /**
+     * Constructs an instance of the Interview class when add-i
+     * command is executed.
+     *
+     * @author Tan Kerway
+     * @param applicant the Applicant object instance containing the
+     *                  details of the applicant
+     * @param jobRole the job role of the applicant is applying for
+     * @param startTime the start time of the interview to be added
+     * @param endTime the end time of the interview to be added
+     */
+    public Interview(Applicant applicant, String jobRole, Time startTime, Time endTime) {
+        this.applicant = applicant;
+        this.jobRole = jobRole;
         this.rating = new Rating("0.0");
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.isDone = false;
     }
 
     /**
-     * Returns true if both Interviews have the same Applicant & Timing or if both Interviews are the same object
+     * Returns true if both Interviews have the same Applicant or if both Interviews are the same object
      * Adapted from AB3's Person.isSamePerson() method
      */
     public boolean isSameInterview(Interview otherInterview) {
@@ -138,8 +67,6 @@ public class Interview {
         }
 
         return otherInterview != null
-                && otherInterview.startTime.equals(startTime)
-                && otherInterview.endTime.equals(endTime)
                 && otherInterview.getInterviewApplicant().equals(getInterviewApplicant());
     }
 
@@ -149,19 +76,27 @@ public class Interview {
      */
     public boolean isValid() {
         return startTime.isBefore(endTime)
-                && isWithinWorkingHours(startTime)
-                && isWithinWorkingHours(endTime)
-                && startTime.toLocalDate().isEqual(endTime.toLocalDate());
+                && startTime.isWithinWorkingHours()
+                && endTime.isWithinWorkingHours()
+                && startTime.getDate().equals(endTime.getDate());
     }
 
     /**
-     * Returns true if startTime and endTime are within working hours,
-     * which is defined to be between 0900 and 1700.
+     * Returns true if this interview instance clashes with
+     * the given otherInterview in the argument.
      */
-    public boolean isWithinWorkingHours(LocalDateTime dateTime) {
-        LocalTime time = dateTime.toLocalTime();
-        return (time.isAfter(WORK_START) || time.equals(WORK_START))
-                && (time.isBefore(WORK_END) || time.equals(WORK_END));
+    public boolean isClashingWith(Interview otherInterview) {
+        // Interviews do not clash with themselves
+        if (isSameInterview(otherInterview)) {
+            return false;
+        }
+
+        Time otherStartTime = otherInterview.getInterviewStartTime();
+        Time otherEndTime = otherInterview.getInterviewEndTime();
+
+        return (startTime.isBetween(otherStartTime, otherEndTime) || startTime.equals(otherStartTime))
+                || (endTime.isBetween(otherStartTime, otherEndTime) || endTime.equals(otherEndTime))
+                || otherStartTime.isBetween(startTime, endTime);
     }
 
     public Applicant getInterviewApplicant() {
@@ -173,19 +108,19 @@ public class Interview {
     }
 
     public String getInterviewStartTimeAsString() {
-        return TimeParser.formatDate(startTime);
+        return TimeParser.formatDate(startTime.getDateAndTime());
     }
 
-    public LocalDateTime getInterviewStartTime() {
-        return startTime.plusDays(0);
+    public Time getInterviewStartTime() {
+        return startTime;
     }
 
     public String getInterviewEndTimeAsString() {
-        return TimeParser.formatDate(endTime);
+        return TimeParser.formatDate(endTime.getDateAndTime());
     }
 
-    public LocalDateTime getInterviewEndTime() {
-        return endTime.plusDays(0);
+    public Time getInterviewEndTime() {
+        return endTime;
     }
 
     public Rating getRating() {

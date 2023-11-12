@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
+import seedu.address.model.Time;
+
 /**
  * This class encapsulates the methods that are part of the TimeParser API.
  *
@@ -14,13 +16,7 @@ import java.time.format.DateTimeFormatter;
 public class TimeParser {
     protected static final LocalDateTime DEFAULT_DATE = LocalDateTime.of(1970, 1, 1, 0, 0);
     protected static final String[][] DATE_FORMATS = new String[][] {
-            // time string with day and time (formatID == 0)
-            {
-            "E HHmm",
-            "E h'.'mma",
-            "E ha"
-            },
-            // time with all required information: year, month, day of month, time (formatID == 1)
+            // time with all required information: year, month, day of month, time (formatID == 0)
             {
             "d MMM yyyy HHmm",
             "d MMM yyyy h'.'mma",
@@ -32,7 +28,7 @@ public class TimeParser {
             "d/M/y hh'.'mma",
             "d/M/y ha"
             },
-            // time with these information: month, day of month, time (formatID == 2)
+            // time with these information: month, day of month, time (formatID == 1)
             {
             "dd MMM HHmm",
             "dd MMM hh'.'mma",
@@ -54,22 +50,37 @@ public class TimeParser {
             },
     };
 
-    private static final String MISSING_TIME_ERROR_MESSAGE = "Please enter an interview time!";
-    // todo: make this more meaningful (e.g. Date cannot be in the past!)
-    private static final String PAST_DATE_ERROR_MESSAGE = "Please specify a valid date!";
+    protected static final String[][] DATE_ONLY_FORMATS = new String[][] {
+            // time with all required information: year, month, day of month (formatID == 0)
+            {
+            "d MMM yyyy",
+            "dd-MM-y",
+            "d/M/y"
+            },
+            // time with these information: month, day of month, time (formatID == 1)
+            {
+            "dd MMM",
+            "d/M"
+            },
+    };
+
+    protected static final String MISSING_TIME_ERROR_MESSAGE = "Please enter an interview time!";
 
     /**
-     * Converts the string date into a Datetime object.
+     * Converts the string date into a LocalDatetime object. Only accepts valid time Strings
+     * that have time as their suffix.
      *
      * @author Tan Kerway
      * @param time the String that contains the data for the date
      * @return datetime object that represents the string
+     * @throws seedu.address.logic.parser.exceptions.ParseException when the time String is not valid
      */
-    public static LocalDateTime parseDate(String time)
+    public static Time parseDate(String time, boolean dateOnly)
             throws seedu.address.logic.parser.exceptions.ParseException {
-        for (int currentFormatID = 0; currentFormatID < DATE_FORMATS.length; currentFormatID++) {
+        String[][] formatList = dateOnly ? DATE_ONLY_FORMATS : DATE_FORMATS;
+        for (int currentFormatID = 0; currentFormatID < formatList.length; currentFormatID++) {
             // find a date format string that matches the user pattern
-            for (String formatString : DATE_FORMATS[currentFormatID]) {
+            for (String formatString : formatList[currentFormatID]) {
                 try {
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(formatString);
                     simpleDateFormat.setLenient(false);
@@ -78,7 +89,11 @@ public class TimeParser {
                             .toInstant()
                             .atZone(ZoneId.systemDefault())
                             .toLocalDateTime();
-                    return addMissingDateFields(temp, currentFormatID);
+                    Time res = new Time(addMissingDateFields(temp, currentFormatID, dateOnly));
+                    if (res.getDate().getYear() > 9999) {
+                        throw new seedu.address.logic.parser.exceptions.ParseException("Please specify a valid date!");
+                    }
+                    return res;
                 } catch (ParseException ignored) {
                     String s = "";
                 }
@@ -94,24 +109,21 @@ public class TimeParser {
      * @param currentFormatID the given type of date object
      * @return a LocalDateTime object that has all the required information
      */
-    private static LocalDateTime addMissingDateFields(LocalDateTime temp, int currentFormatID)
+    private static LocalDateTime addMissingDateFields(LocalDateTime temp, int currentFormatID, boolean dateOnly)
             throws seedu.address.logic.parser.exceptions.ParseException {
         switch (currentFormatID) {
-        case 0: // case where user entered a day of the week and time
-            temp = addDay(temp);
+        case 0: // case where user entered a year, month, day of month, and time
             break;
-        case 1: // case where user entered a year, month, day of month, and time
-            break;
-        case 2: // case where the user entered a month, day of month, and time
+        case 1: // case where the user entered a month, day of month, and time
             temp = addYear(temp);
             break;
         default: // case where the user did not enter an interview time
             // inform the user that their input is missing an interview time
-            throw new seedu.address.logic.parser.exceptions.ParseException(MISSING_TIME_ERROR_MESSAGE);
-        }
-        // guard clause: the given date is before today's date even after parsing
-        if (temp.isBefore(LocalDateTime.now())) {
-            throw new seedu.address.logic.parser.exceptions.ParseException(PAST_DATE_ERROR_MESSAGE);
+            if (!dateOnly) {
+                throw new seedu.address.logic.parser.exceptions.ParseException(MISSING_TIME_ERROR_MESSAGE);
+            }
+            // exit normally if the user does not need a time
+            break;
         }
         return temp;
     }
@@ -168,6 +180,6 @@ public class TimeParser {
      */
     public static String formatDate(LocalDateTime time) {
         assert time != null : "time should be not null";
-        return time.format(DateTimeFormatter.ofPattern("d/M/yy HHmm"));
+        return time.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
     }
 }

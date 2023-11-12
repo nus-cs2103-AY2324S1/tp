@@ -3,13 +3,14 @@ package seedu.address.model.interview;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+//@@author jonyxzx
 /**
  * Represents an Interview's rating in the address book.
  */
 public class Rating implements Comparable<Rating> {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Rating should only contain a number with one decimal place and between 0.0 to 5.0 inclusive";
+            "Rating should only contain a non-negative number with one decimal place and between 0.0 to 5.0 inclusive";
     public static final String RATING_REGEX = "^([0-4]\\.\\d|5\\.0)$";
     public final String rating;
 
@@ -58,5 +59,4 @@ public class Rating implements Comparable<Rating> {
     public int hashCode() {
         return rating.hashCode();
     }
-
 }

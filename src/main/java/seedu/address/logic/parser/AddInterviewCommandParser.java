@@ -7,12 +7,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 
-import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddInterviewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Time;
 
 /**
  * Parses input arguments and creates a new AddInterviewCommand object
@@ -41,12 +41,12 @@ public class AddInterviewCommandParser implements Parser<AddInterviewCommand> {
                 PREFIX_START_TIME, PREFIX_END_TIME);
         String applicantArgs = argMultimap.getValue(PREFIX_APPLICANT).get().trim();
         String jobRole = argMultimap.getValue(PREFIX_JOB_ROLE).get().trim();
-        LocalDateTime startTime = TimeParser.parseDate(argMultimap.getValue(PREFIX_START_TIME).get().trim());
-        LocalDateTime endTime = TimeParser.parseDate(argMultimap.getValue(PREFIX_END_TIME).get().trim());
-
-        if (endTime.isBefore(startTime)) {
-            throw new ParseException(AddInterviewCommand.MESSAGE_INVALID_TIME);
-        }
+        Time startTime = TimeParser.parseDate(
+                argMultimap.getValue(PREFIX_START_TIME).get().trim(),
+                false);
+        Time endTime = TimeParser.parseDate(
+                argMultimap.getValue(PREFIX_END_TIME).get().trim(),
+                false);
 
         Index applicantIndex;
         try {
