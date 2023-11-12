@@ -66,9 +66,6 @@ Choose a topic from the table of contents below to find out how to manage your c
 
 [↑ Back to Table of Contents](#table-of-contents)
 
-
-<div markdown="block" class="alert alert-info">
-
 --------------------------------------------------------------------------------------------------------------------
 
 # ***If you're new***: What are Commands?
@@ -89,8 +86,6 @@ For most commands, to input parameters in, they have to be prefixed by ***flags*
 Flags are indicators to differentiate various parts of the command. They follow the format of a `<letter>` followed by a `/`.
 
  - e.g. in `n/NAME`, `n/` is the flag for the `NAME` parameter.
-
-</div>
 
 [↑ Back to Table of Contents](#table-of-contents)
 
@@ -197,8 +192,8 @@ You should directly see the client profile added to the list of clients in the a
 
 ### Adding a client interaction: ***interaction***
 
-After adding a client profile, their information is now recorded and easily accessible!
-But you may also want a way to log your interactions with the client. 
+After adding a client profile, their information is now recorded and easily accessible for you to contact them!
+After contacting them, you may also want a way to log your interactions with the client. 
 Use the ***interaction*** command when you want to record down an interaction you had with a client.
 
 **Format**
@@ -249,6 +244,28 @@ You should directly see the interaction added to the client profile in the appli
 Sometimes, you may want to view the details of a client profile or the interactions you have had with a client to quickly catch up before contacting them.
 
 This section contains multiple commands that allow you to view various details of your clients that is collated in a single view for your convenience.
+
+### Viewing the list of clients: ***list***
+
+From the Dashboard page, you may wish to see a comprehensive list of your clients. 
+Use the ***list*** command to view all clients.
+
+**Format**
+```text
+list
+```
+
+<figure>
+    <img src="images/ExampleEditBefore.png" alt="Client list view">
+    <figcaption align="center">
+        <em>The client list view. Data shown may vary.</em>
+    </figcaption>
+</figure>
+<br>
+
+You should then see the list of clients in the application window.
+
+[↑ Back to Table of Contents](#table-of-contents)
 
 ### Viewing the full details of a client: ***view***
 
@@ -334,7 +351,9 @@ find David
 
 ### Viewing the dashboard: ***dashboard***
 
+To keep track of a broad view of statistics of your clients, Connectify provides you with the ***dashboard*** command.
 Use the ***dashboard*** command to view a summarised information of all your clients and their interactions with you in a single place.
+This page also shows you upcoming follow-ups that you have to do.
 
 **Format**
 ````text
@@ -375,27 +394,6 @@ The follow up date is calculated by the day of last interaction plus a follow-up
 
 Say your last interaction with John is on 1st Jan 2021 and he is a HOT lead. The follow-up date will be 1 week after 1st Jan 2021, which is 8th Jan 2021. 
 </details>
-
-[↑ Back to Table of Contents](#table-of-contents)
-
-### Viewing the list of clients: ***list***
-
-You might want to go back to the list of clients you have added to Connectify. Use the ***list*** command to view all clients.
-
-**Format**
-```text
-list
-```
-
-<figure>
-    <img src="images/ExampleEditBefore.png" alt="Client list view">
-    <figcaption align="center">
-        <em>The client list view. Data shown may vary.</em>
-    </figcaption>
-</figure>
-<br>
-
-You should then see the list of clients in the application window.
 
 [↑ Back to Table of Contents](#table-of-contents)
 
