@@ -634,32 +634,44 @@ Prefix      | Constraints
 `st/STATUS` | `STATUS` must either be `preliminary`, `interviewed`, `offered`, `rejected`.
 `t/TAG` | `TAG` must be alphanumeric and contains no spaces.
 
-Note:
+**Note**:
 * `search` requires at least ONE search parameter i.e. `n/NAME`, `st/STATUS`, or `t/TAGNAME`.
 * Each prefix can only be used at most once.
 * Multiple search parameters for a specific category are divided by spaces (not commas!) i.e. `search st/preliminary interviewed`
 
 <box type="tip" seamless>
-Tip:
+
+**Tip**:
+
 * You can combine multiple search categories in a single `search` command.
 * Search parameters are case-insensitive.
 
 Examples of successful command execution:
 1. `search n/alex bernice`
 <br>
+<br>
 ![search-success-1](images/search-success-1.png)
+<br>
+<br>
 The above `search` command displayed all candidates whose name match ANY of the given keywords. This is because
 `search` does an `OR` search within a specific category.
-   
-2.`search n/alex bernice st/interviewed t/intern`
+<br>
+<br>
+2. `search n/alex bernice st/interviewed t/intern`
+<br>
 <br>
 ![search-success](images/search-success.png)
+<br>
+<br>
 Notice how the above `search` command did not display "Alex" despite his profile matching
 the `name` and `tag` categories. This is because `search` does an `AND` search across multiple categories.
 
 <box type="tip" seamless>
+
 What does it mean to do an `OR` search within a single category and an `AND` search across multiple categories?
+<br>
 It's best to explain this by breaking down an example `search` command!
+<br>
 `search n/alex bernice st/interviewed t/intern` will output applicants whose:
   * names contain either Alex `OR` Bernice
   * `AND` status is either interviewed
