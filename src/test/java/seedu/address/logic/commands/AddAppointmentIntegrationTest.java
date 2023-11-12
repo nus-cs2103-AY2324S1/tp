@@ -5,7 +5,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalDoctor.CHERYL;
-import static seedu.address.testutil.TypicalDoctor.DEREK;
+import static seedu.address.testutil.TypicalDoctor.KENNY;
 import static seedu.address.testutil.TypicalPatient.AMY;
 import static seedu.address.testutil.TypicalPatient.BOB;
 
@@ -38,12 +38,12 @@ public class AddAppointmentIntegrationTest {
 
     @Test
     public void execute_newAppointment_success() {
-        Doctor derek = new DoctorBuilder(DEREK).build();
+        Doctor kenny = new DoctorBuilder(KENNY).build();
         Patient bob = new PatientBuilder(BOB).build();
-        model.addPerson(derek);
+        model.addPerson(kenny);
         model.addPerson(bob);
         Appointment validAppointment =
-                new AppointmentBuilder().withDoctorIc(derek.getIc()).withPatientIc(bob.getIc()).build();
+                new AppointmentBuilder().withDoctorIc(kenny.getIc()).withPatientIc(bob.getIc()).build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addAppointment(validAppointment);
@@ -54,7 +54,7 @@ public class AddAppointmentIntegrationTest {
 
         // check that the appointments have been added to all patients, doctors and appointment list
         Set<Appointment> patientAppointments = bob.getAppointments();
-        Set<Appointment> doctorAppointments = derek.getAppointments();
+        Set<Appointment> doctorAppointments = kenny.getAppointments();
         assertTrue(patientAppointments.contains(validAppointment));
         assertTrue(doctorAppointments.contains(validAppointment));
         assertTrue(model.getFilteredAppointmentList().contains(validAppointment));
@@ -62,12 +62,12 @@ public class AddAppointmentIntegrationTest {
 
     @Test
     public void execute_appointmentWithPatientNotInModel_throwsCommandException() {
-        Doctor derek = new DoctorBuilder(DEREK).build();
+        Doctor kenny = new DoctorBuilder(KENNY).build();
         Patient bob = new PatientBuilder(BOB).build();
         // only add doctor
-        model.addPerson(derek);
+        model.addPerson(kenny);
         Appointment invalidAppointment =
-                new AppointmentBuilder().withDoctorIc(derek.getIc()).withPatientIc(bob.getIc()).build();
+                new AppointmentBuilder().withDoctorIc(kenny.getIc()).withPatientIc(bob.getIc()).build();
 
         assertCommandFailure(new AddAppointmentCommand(invalidAppointment), model,
                 AddAppointmentCommand.MESSAGE_INVALID_PATIENT);
@@ -75,12 +75,12 @@ public class AddAppointmentIntegrationTest {
 
     @Test
     public void execute_appointmentWithDoctorNotInModel_throwsCommandException() {
-        Doctor derek = new DoctorBuilder(DEREK).build();
+        Doctor kenny = new DoctorBuilder(KENNY).build();
         Patient bob = new PatientBuilder(BOB).build();
         // only add patient
         model.addPerson(bob);
         Appointment invalidAppointment =
-                new AppointmentBuilder().withDoctorIc(derek.getIc()).withPatientIc(bob.getIc()).build();
+                new AppointmentBuilder().withDoctorIc(kenny.getIc()).withPatientIc(bob.getIc()).build();
 
         assertCommandFailure(new AddAppointmentCommand(invalidAppointment), model,
                 AddAppointmentCommand.MESSAGE_INVALID_DOCTOR);
@@ -88,12 +88,12 @@ public class AddAppointmentIntegrationTest {
 
     @Test
     public void execute_appointmentWithDoctorHasAppointmentAtTheSameTime_throwsCommandException() {
-        Doctor derek = new DoctorBuilder(DEREK).build();
+        Doctor kenny = new DoctorBuilder(KENNY).build();
         Patient bob = new PatientBuilder(BOB).build();
-        model.addPerson(derek);
+        model.addPerson(kenny);
         model.addPerson(bob);
         Appointment validAppointment =
-                new AppointmentBuilder().withDoctorIc(derek.getIc()).withPatientIc(bob.getIc()).build();
+                new AppointmentBuilder().withDoctorIc(kenny.getIc()).withPatientIc(bob.getIc()).build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addAppointment(validAppointment);
@@ -104,9 +104,9 @@ public class AddAppointmentIntegrationTest {
 
         Patient amy = new PatientBuilder(AMY).build();
         model.addPerson(amy);
-        // create another appointment between Amy and Doctor Derek at the same time
+        // create another appointment between Amy and Doctor kenny at the same time
         Appointment invalidAppointment =
-                new AppointmentBuilder().withDoctorIc(derek.getIc()).withPatientIc(amy.getIc()).build();
+                new AppointmentBuilder().withDoctorIc(kenny.getIc()).withPatientIc(amy.getIc()).build();
 
         assertCommandFailure(new AddAppointmentCommand(invalidAppointment), model,
                 AddAppointmentCommand.MESSAGE_DUPLICATE_APPOINTMENT_DOCTOR);
@@ -114,12 +114,12 @@ public class AddAppointmentIntegrationTest {
 
     @Test
     public void execute_appointmentWithPatientHasAppointmentAtTheSameTime_throwsCommandException() {
-        Doctor derek = new DoctorBuilder(DEREK).build();
+        Doctor kenny = new DoctorBuilder(KENNY).build();
         Patient bob = new PatientBuilder(BOB).build();
-        model.addPerson(derek);
+        model.addPerson(kenny);
         model.addPerson(bob);
         Appointment validAppointment =
-                new AppointmentBuilder().withDoctorIc(derek.getIc()).withPatientIc(bob.getIc()).build();
+                new AppointmentBuilder().withDoctorIc(kenny.getIc()).withPatientIc(bob.getIc()).build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addAppointment(validAppointment);
@@ -140,12 +140,12 @@ public class AddAppointmentIntegrationTest {
 
     @Test
     public void execute_duplicateAppointment_throwsCommandException() {
-        Doctor derek = new DoctorBuilder(DEREK).build();
+        Doctor kenny = new DoctorBuilder(KENNY).build();
         Patient bob = new PatientBuilder(BOB).build();
-        model.addPerson(derek);
+        model.addPerson(kenny);
         model.addPerson(bob);
         Appointment validAppointment =
-                new AppointmentBuilder().withDoctorIc(derek.getIc()).withPatientIc(bob.getIc()).build();
+                new AppointmentBuilder().withDoctorIc(kenny.getIc()).withPatientIc(bob.getIc()).build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addAppointment(validAppointment);
