@@ -916,7 +916,9 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
+### Adding a person
+
+### Editing a person
 
 ### Deleting a person
 
@@ -931,10 +933,20 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
+
+### Finding a person
+
+### Gathering emails
+
+### Sorting the contact book
+
+### Scheduling an appointment
+
+### Completing an appointment
 
 ### Saving data
 
