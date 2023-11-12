@@ -778,14 +778,14 @@ testers are expected to do more *exploratory* testing.
    
 ### Add Feature
 
-##### Adding a person in ___STUDENTS list___
+##### Adding a student in ___STUDENTS list___
 
    1. Prerequisites: List all students using the `list students` command. There is currently no student with the name "Leah", "Riley" and "Max".
 
    2. Test case: `addPerson -name Leah -phone 88888888 -subject biology -remark new student -tag new`<br>
       Expected: A new student is added, with name "Leah", phone "88888888", subject "BIOLOGY", remark "new student" and tag "new". The details of the added student is shown in the response box.
 
-   3. Test case: `add -name Riley -phone 81818181` <br>
+   3. Test case: `add -name Riley -phone 81818181` (in ___STUDENTS list___) <br>
       Expected: A new student is added, with name "Riley" and phone "81818181". The details of the added student is shown in the response box.
 
    4. Test case: `addPerson -name Lea_h -phone 88888888 -subject biology -remark new student -tag new`<br>
@@ -814,6 +814,10 @@ testers are expected to do more *exploratory* testing.
 4. Test case: `addLesson -name Biology Lesson at Tai Seng -day 2023/12/11 -start 12:00 -end 14:00`<br>
    Expected: No lesson is added. Error indicating existing lesson clashes with lesson to be added with the details of the existing lesson in the schedule shown in the response box.
 
+5. Test case: `add -name Biology Lesson at Tai Seng` (in ___SCHEDULE list___) <br>
+   Expected: A new lesson is added, with name "Biology Lesson at Tai Seng". The details of the added lesson is shown in the response box.
+
+
 ##### Adding a task to a lesson in ___SCHEDULE list___
 
 1. Prerequisites:
@@ -840,14 +844,14 @@ testers are expected to do more *exploratory* testing.
 
 ### Delete feature
 
-##### Deleting a person in ___STUDENTS list___
+##### Deleting a student in ___STUDENTS list___
 
    1. Prerequisites: There are more than 2 students in the displayed list of students.
 
    2. Test case: `deletePerson 1`<br>
       Expected: First student is deleted from the list. Details of the deleted student is shown in the response box. 
 
-   3. Test case: `delete 1` <br>
+   3. Test case: `delete 1` (in ___STUDENTS list___) <br>
       Expected: First student is deleted from the list. Details of the deleted student is shown in the response box.
 
    4. Test case: `deletePerson 0`<br>
@@ -866,7 +870,7 @@ testers are expected to do more *exploratory* testing.
 2. Test case: `deleteLesson 1`<br>
    Expected: First lesson is deleted from the list. Details of the deleted lesson is shown in the response box.
 
-3. Test case: `delete 3` <br>
+3. Test case: `delete 3` (in ___SCHEDULE list___) <br>
    Expected: Third lesson is deleted from the list. Details of the deleted lesson is shown in the response box.
 
 4. Test case: `deleteLesson 80`<br>
@@ -892,6 +896,28 @@ testers are expected to do more *exploratory* testing.
 
 5. Test case: `deleteTask 1` (in ___TASKS list___)
    Expected: No task is deleted. Error indicating deleting of tasks only in schedule list is shown in the response box.
+
+### Edit feature
+
+##### Editing a student in ___STUDENTS list___
+
+1. Prerequisites:
+    * List all students using the `list students` command. 
+    * There is currently no student with the name "Leah" and "Max".
+    * There is an existing student with the name "Riley"
+    * There are more than 2 students in the displayed list of students
+
+2. Test case: `editPerson 1 -name Leah` <br>
+   Expected: The name of the first student in the displayed list of students is edited to "Leah". Details of the edited student is shown in the response box.
+
+3. Test case: `edit 2 -name Max -subject biology` (in ___STUDENTS list___) <br>
+   Expected: The name of the second student in the displayed list of students is edited to "Max" and the subject of this student is set to "BIOLOGY". Details of the edited student is shown in the response box.
+
+4. Test case: `editPerson 1 -name Riley` <br>
+   Expected: No student is edited. 
+
+
+##### Editing a lesson in ___SCHEDULE list___
 
 ### Saving data
 
