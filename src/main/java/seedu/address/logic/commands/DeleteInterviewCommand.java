@@ -21,7 +21,7 @@ public class DeleteInterviewCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the interview identified by the index number used in the displayed interview list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Parameters: INTERVIEW_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_INTERVIEW_SUCCESS = "Deleted Interview: %1$s";

@@ -24,9 +24,6 @@ public class InterviewTest {
         // null -> returns false
         assertFalse(STANDARD_INTERVIEW.isSameInterview(null));
 
-        System.out.println(STANDARD_INTERVIEW.isSameInterview(STANDARD_INTERVIEW_DIFFERENT_ROLE));
-        System.out.println(STANDARD_INTERVIEW);
-        System.out.println(STANDARD_INTERVIEW_DIFFERENT_ROLE);
         // same Applicant and time, all other attributes different -> returns true
         assertTrue(STANDARD_INTERVIEW.isSameInterview(STANDARD_INTERVIEW_DIFFERENT_ROLE));
 

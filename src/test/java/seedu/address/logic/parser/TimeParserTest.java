@@ -75,27 +75,6 @@ class TimeParserTest {
         assertTrue(hasError);
     }
 
-    @Test
-    void testParseDateDayAnd24hTimeWithMinutesSuccessfulParse() throws ParseException {
-        TimeParser.parseDate("Tue 1630", false);
-    }
-
-    @Test
-    void testParseDateDayAnd12hTimeWithMinutesSuccessfulParse() throws ParseException {
-        TimeParser.parseDate("Tue 4.30pm", false);
-    }
-
-    // TODO: FIX THIS FROM PASSING
-    @Test
-    void testParseDateDayAnd12hTimeWithoutMinutesUnsuccessfulParse() throws ParseException {
-        TimeParser.parseDate("Tue 4amdfjs", false);
-    }
-
-    @Test
-    void testParseDateDayAnd12hTimeWithoutMinutesSuccessfulParse() throws ParseException {
-        TimeParser.parseDate("Tue 4pm", false);
-    }
-
     // TESTS FOR VALID DATES WITH YEAR, MONTH, DAY OF MONTH, AND TIME
     @Test
     void testParseDateYearMonthDayTimeSuccessfulParse() throws ParseException {

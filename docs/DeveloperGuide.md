@@ -25,7 +25,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the
+[`docs/diagrams`](https://github.com/AY2324S1-CS2103T-T11-2/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -38,7 +39,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S1-CS2103T-T11-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2324S1-CS2103T-T11-2/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -49,11 +50,11 @@ The bulk of the app's work is done by the following four components:
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](#common-classes) represents a collection of classes used by multiple components above.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete-a 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -62,7 +63,7 @@ Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside components being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <img src="images/ComponentManagers.png" width="300" />
 
@@ -70,13 +71,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T11-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ApplicantListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the [`src/main/resources/view`](https://github.com/AY2324S1-CS2103T-T11-2/tp/tree/master/src/main/resources/view) folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-T11-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T11-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -87,13 +88,13 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T11-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete-a 1")` API call as an example.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
@@ -104,7 +105,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-3. The command can communicate with the `Model` when it is executed (e.g. to delete a applicant).
+3. The command can communicate with the `Model` when it is executed (e.g. to delete an applicant).
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -116,14 +117,14 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T11-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Applicant` objects (which are contained in a `UniqueApplicantList` object).
+* stores the address book data i.e., all `Applicant` objects (which are contained in a `UniqueApplicantList` object) as well as all `Interview` objects (which are contained in a `UniqueInterviewList` object).
 * stores the currently 'selected' `Applicant` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Applicant>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -137,7 +138,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T11-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -148,7 +149,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -187,7 +188,7 @@ For easier of viewing, 2 sequence diagrams will be used to show how the `add-i` 
 Step 1 to 4:
 
 ![AddInterviewSequenceDiagram1](images/AddInterviewSequenceDiagram1.png)
-The activation bar of `LogicManager` is intended to not end since it continues being in the activated state.
+The activation bar of `LogicManager` is intended to not end since it continues being in the activated state for the steps that follow.
 
 Step 5 to 9:
 
@@ -683,164 +684,360 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `InterviewHub` and the **Actor** is the `hiring manager`, unless specified otherwise)
+(For all use cases below, the **System** is the `InterviewHub` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 Add an interview**
+**Use case: UC01 - View help**
 
 **MSS**
 
-1. Hiring manager requests to add an interview.
-2. InterviewHub adds the interview.
+1. User requests to view help.
+2. InterviewHub displays the help instructors.
+
+    Use case ends.
+
+---
+
+**Use case: UC02 - Clear all data**
+
+**MSS**
+
+1. User requests to clear all data.
+2. InterviewHub deletes all data.
+
+   Use case ends.
+
+---
+
+**Use case: UC03 - View all applicants**
+
+**MSS**
+
+1. User requests to list all applicants.
+2. InterviewHub displays a list of all applicants.
+
+   Use case ends.
+
+---
+
+**Use case: UC04 - View all interviews**
+
+**MSS**
+
+1. User requests to list all interviews.
+2. InterviewHub displays a list of all interviews.
+
+   Use case ends.
+
+---
+
+**Use case: UC05 - Exit the application**
+
+**MSS**
+
+1. User requests to exit the application.
+2. InterviewHub terminates gracefully.
+
+   Use case ends.
+
+---
+
+**Use case: UC06 Add a new applicant**
+
+**MSS**
+
+1. User requests to add a new applicant.
+2. InterviewHub adds the new applicant.
 
     Use case ends.
 
 **Extensions**
-* 1a. One of the user-provided parameters is invalid
+* 1a. The given command is invalid or one of the user-provided parameters is invalid.
     * 1a1. InterviewHub shows an error message.
 
       Use case resumes at step 1.
 
-**Use case: UC02 List all interview**
+* 1b. The given applicant already exists in InterviewHub.
+    * 1b1. InterviewHub shows an error message.
+
+      Use case resumes at step 1.
+---
+
+**Use case: UC07 Add a new interview**
 
 **MSS**
 
-1. Hiring manager requests to list all interviews.
-2. InterviewHub displays all scheduled interviews.
-
-    Use case ends.
-
-**Extensions**
-* 1a. The list is empty
-  * 1a1. InterviewHub shows an error message.
-
-    Use case ends.
-
-**Use case: UC03 Delete an Interview**
-
-**MSS**
-
-1. Hiring manager <u> views the list of all interviews (UC02) </u>
-2. Hiring manager requests to delete a specific interview
-3. InterviewHub deletes the specified interview
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The provided index is invalid
-  * 2a1. InterviewHub shows an error message.
-
-    Use case resumes at step 2.
-
-**Use case: UC04 Add a job role**
-
-**MSS**
-
-1. Hiring manager requests to add a job role.
-2. InterviewHub adds the job role.
-
-    Use case ends.
-
-**Extensions**
-* 1a. One of the user-provided parameters is invalid
-  * 1a1. InterviewHub shows an error message.
-
-    Use case resumes at step 1.
-
-**Use case: UC05 List all job roles**
-
-**MSS**
-
-1. Hiring manager requests to list all job roles.
-2. InterviewHub displays all job roles.
-
-    Use case ends.
-
-**Extensions**
-* 1a. The list is empty
-  * 1a1. InterviewHub shows an error message.
-
-    Use case ends.
-
-**Use case: UC06 List all applicants for a job role**
-
-**MSS**
-
-1. Hiring manager <u> views the list of all job roles (UC05) </u>
-2. Hiring manager requests to view all applicants for a specific job role.
-3. InterviewHub displays all the applicants for the specific job role.
-
-    Use case ends.
-
-* 2a. The provided index is invalid
-  * 2a1. InterviewHub shows an error message.
-
-    Use case resumes at step 2.
-
-**Use case: UC07 Delete a job role**
-
-**MSS**
-
-1. Hiring manager <u> views the list of all job roles (UC02) </u>
-2. Hiring manager requests to delete a specific job role
-3. InterviewHub deletes the specified job role
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The provided index is invalid
-  * 2a1. InterviewHub shows an error message.
-
-    Use case resumes at step 2.
-
-
-**Use case: UC08 Add an applicant**
-
-**MSS**
-
-1. Hiring manager requests to add an applicant.
-2. InterviewHub adds the applicant.
+1. User requests to add a new interview.
+2. InterviewHub adds the new interview.
 
    Use case ends.
 
 **Extensions**
-* 1a. One of the user-provided parameters is invalid
-  * 1a1. InterviewHub shows an error message.
+* 1a. The given command is invalid or one of the user-provided parameters is invalid.
+    * 1a1. InterviewHub shows an error message.
 
-    Use case resumes at step 1.
+      Use case resumes at step 1.
 
-**Use case: UC09 List all applicants**
+* 1b. The given interview already exists in InterviewHub.
+    * 1b1. InterviewHub shows an error message.
+
+      Use case resumes at step 1.
+
+* 1c. The given interview causes a schedule clash.
+    * 1c1. InterviewHub shows an error message.
+
+      Use case resumes at step 1.
+---
+
+**Use case: UC08 Delete an applicant**
 
 **MSS**
 
-1. Hiring manager requests to list all applicants.
-2. InterviewHub displays all scheduled applicants.
+1. User <u> views the list of all applicants (UC03).</u>
+2. User requests to delete a specific applicant.
+3. InterviewHub deletes the specified applicant and any interviews the applicant was associated with.
 
-   Use case ends.
+    Use case ends.
 
 **Extensions**
-* 1a. The list is empty
-  * 1a1. InterviewHub shows an error message.
 
-      Use case ends.
+* 2a. The provided index is invalid.
+  * 2a1. InterviewHub shows an error message.
 
-**Use case: UC010 Delete an applicant**
+    Use case resumes at step 2.
+
+--- 
+
+**Use case: UC09 Delete an interview**
 
 **MSS**
 
-1. Hiring manager <u> views the list of all applicants (UC09) </u>
-2. Hiring manager requests to delete a specific applicant
-3. InterviewHub deletes the specified applicant
+1. User <u> views the list of all interviews (UC04).</u>
+2. User requests to delete a specific interview.
+3. InterviewHub deletes the specified interview.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The provided index is invalid
+* 2a. The provided index is invalid.
     * 2a1. InterviewHub shows an error message.
 
       Use case resumes at step 2.
+
+--- 
+
+**Use case: UC10 Edit an applicant**
+
+**MSS**
+
+1. User <u> views the list of all applicants (UC03).</u>
+2. User requests to edit a specific applicant.
+3. InterviewHub edits the specified applicant and any interviews the applicant was associated with.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The given command is invalid or one of the user-provided parameters is invalid.
+    * 2a1. InterviewHub shows an error message.
+
+      Use case resumes at step 2.
+
+* 2b. The edited applicant already exists in InterviewHub
+    * 2b1. InterviewHub shows an error message.
+
+      Use case resumes at step 2.
+
+--- 
+
+**Use case: UC11 Edit an interview**
+
+**MSS**
+
+1. User <u> views the list of all interviews (UC04).</u>
+2. User requests to edit a specific interview.
+3. InterviewHub edits the specified interview.
+
+   Use case ends.
+
+**Extensions**
+* 2a. The given command is invalid or one of the user-provided parameters is invalid.
+    * 2a1. InterviewHub shows an error message.
+
+      Use case resumes at step 2.
+
+* 2b. The edited interview already exists in InterviewHub.
+    * 2b1. InterviewHub shows an error message.
+
+      Use case resumes at step 2.
+
+* 2c. The edited interview causes a schedule clash.
+    * 2c1. InterviewHub shows an error message.
+
+      Use case resumes at step 2.
+
+* 2d. The selected interview to be edited is marked as done.
+    * 2d1. InterviewHub shows an error message.
+
+      Use case resumes at step 2.
+
+--- 
+
+**Use case: UC12 - Find applicants**
+
+**MSS**
+
+1. User requests to find applicants.
+2. InterviewHub finds and displays the applicants that match the user provided input.
+
+   Use case ends.
+
+---
+
+**Use case: UC13 - Find interviews**
+
+**MSS**
+
+1. User requests to find interviews.
+2. InterviewHub finds and displays the interviews that match the user provided input.
+
+   Use case ends.
+
+---
+
+**Use case: UC14 - Marking an interview as done**
+
+**MSS**
+
+1. User requests to mark an interview.
+2. InterviewHub marks the selected interview as done.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The provided index is invalid.
+    * 1a1. InterviewHub shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. The selected interview is already marked as done.
+    * 1b1. InterviewHub shows an error message.
+
+      Use case resumes at step 1.
+
+---
+
+**Use case: UC15 - Rating an interview**
+
+**MSS**
+
+1. User requests to rate an interview.
+2. InterviewHub updates the rating of the selected interview.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The provided index is invalid.
+    * 1a1. InterviewHub shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. The selected interview is not yet marked as done.
+    * 1b1. InterviewHub shows an error message.
+
+      Use case resumes at step 1.
+
+* 1c. The provided rating is an invalid value
+    * 1c1. InterviewHub shows an error message.
+
+      Use case resumes at step1.
+
+---
+
+**Use case: UC16 - View all completed interviews**
+
+**MSS**
+
+1. User requests to list all completed interviews.
+2. InterviewHub displays a list of all completed interviews.
+
+   Use case ends.
+
+---
+
+**Use case: UC17 - View all incomplete interviews**
+
+**MSS**
+
+1. User requests to list all incomplete interviews.
+2. InterviewHub displays a list of all incomplete interviews.
+
+   Use case ends.
+
+---
+
+**Use case: UC18 - View all interviews scheduled for today**
+
+**MSS**
+
+1. User requests to list all interviews scheduled for today.
+2. InterviewHub displays a list of all interviews scheduled for today.
+
+   Use case ends.
+
+---
+
+**Use case: UC19 - View all free time on a given date**
+
+**MSS**
+
+1. User requests to list all free time on a given date.
+2. InterviewHub displays a list of all free time on a given date.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The provided date is invalid.
+    * 1a1. InterviewHub shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. The provided date is in the past.
+    * 1b1. InterviewHub shows an error message.
+
+      Use case resumes at step 1.
+
+* 1c. The provided date contains no free time.
+    * 1c1. InterviewHub shows a blank message to denote that there is no free time.
+
+      Use case ends.
+
+---
+
+**Use case: UC20 - Sort interviews in descending order of rating**
+
+**MSS**
+
+1. User requests to sort interviews in descending order of rating.
+2. InterviewHub sorts the current list of interviews in descending order of rating.
+
+   Use case ends.
+
+---
+
+**Use case: UC21 - Sort interviews in chronological order**
+
+**MSS**
+
+1. User requests to sort interviews in chronological order.
+2. InterviewHub sorts the current list of interviews in chronological order.
+
+   Use case ends.
+
+---
 
 ### Non-Functional Requirements
 

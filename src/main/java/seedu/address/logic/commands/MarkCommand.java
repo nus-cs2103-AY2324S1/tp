@@ -16,8 +16,8 @@ import seedu.address.model.interview.Interview;
 public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks as done the interview identified by the index number used in the displayed applicant list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + ": Marks as done the interview identified by the index number used in the displayed interview list.\n"
+            + "Parameters: INTERVIEW_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_MARK_INTERVIEW_SUCCESS = "Marked Interview: %s as done.";
     public static final String MESSAGE_ALREADY_DONE = "Interview: %s is already done.";

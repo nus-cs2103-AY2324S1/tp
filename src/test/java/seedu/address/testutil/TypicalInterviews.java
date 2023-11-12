@@ -18,8 +18,8 @@ public class TypicalInterviews {
     public static final Interview STANDARD_INTERVIEW = new Interview(TypicalApplicants.ALICE,
                     "StandardJobRole",
             new Rating("0.0"),
-            new Time(LocalDateTime.of(2024, 12, 21, 19, 0)),
-            new Time(LocalDateTime.of(2024, 12, 21, 21, 0)),
+            new Time(LocalDateTime.of(2024, 12, 21, 12, 0)),
+            new Time(LocalDateTime.of(2024, 12, 21, 13, 0)),
                             false);
     public static final Interview STANDARD_INTERVIEW_2 = new Interview(TypicalApplicants.BENSON,
                     "StandardJobRole2",
