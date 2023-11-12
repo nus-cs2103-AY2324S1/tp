@@ -3,6 +3,8 @@ layout: page
 title: User Guide
 ---
 
+## 1. Introduction
+
 TAvigator is a **desktop app** targeted towards Teaching Assistants **for managing contacts, optimized for use via a
 Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type
 fast, TAvigator can get your contact management tasks done faster than traditional GUI apps. We offer a one-stop
@@ -10,31 +12,40 @@ solution to manage your student details, including attendance records and assign
 
 ### Table of Contents
 
-- [1. About this User Guide](#1-about-this-user-guide)
-- [2. Quick start](#2-quick-start)
-- [3. Features](#3-features)
-  - [3.1 Basic Course Management](#31-basic-course-management)
-    - [Creating an addressbook: `course create`](#311-creating-an-addressbook-course-create)
-    - [Deleting an addressbook: `course delete`](#312-deleting-an-addressbook-course-delete)
-    - [Switching an addressbook: `course switch`](#313-switching-an-addressbook-course-switch)
-    - [Editing an addressbook: `course edit`](#314-editing-an-addressbook-course-edit)
-  - [3.2 Basic Student Management](#32-basic-student-management)
-    - [Adding a new contact: `add`](#321-adding-a-new-contact-add)
-    - [Editing a contact : `edit`](#322-editing-a-contact--edit)
-    - [Marking attendance of student: `mark`](#323-marking-attendance-of-student-mark)
-    - [Viewing summary of attendance : `list attendance`](#324-viewing-summary-of-attendance--list-attendance)
-    - [Searching for student's contact via keyword : `find`](#325-searching-for-students-contact-via-keyword--find)
-    - [Listing students : `list students`](#326-listing-students--list-students)
-    - [Deleting a student : `delete`](#327-deleting-a-student--delete)
-    - [Deleting multiple students : `delete all`](#328-deleting-multiple-students--delete-all)
-    - [Merging two students : `merge`](#329-merging-two-students--merge)
-    - [Viewing detailed attendance records : `view`](#3210-viewing-detailed-attendance-records--view)
-- [4. FAQ](#5-faq)
-- [5. Known issues](#6-known-issues)
-- [6. Command summary](#7-command-summary)
+- [1. Introduction](#1-introduction)
+- [2. About this User Guide](#2-about-this-user-guide)
+  - [2.1 Navigating the User Guide](#21-navigating-the-user-guide)
+- [3. Quick start](#3-quick-start)
+  - [3.1 Prerequisites](#31-prerequisites)
+  - [3.2 Installation](#32-installation)
+  - [3.3 Utilization](#33-utilization)
+  - [3.4 Navigating the GUI](#34-navigating-the-gui)
+- [4. Features](#4-features)
+  - [4.1 Basic Course Management](#41-basic-course-management)
+    - [4.1.1 Creating an addressbook: `course create`](#411-creating-an-addressbook-course-create)
+    - [4.1.2 Deleting an addressbook: `course delete`](#412-deleting-an-addressbook-course-delete)
+    - [4.1.3 Switching an addressbook: `course switch`](#413-switching-an-addressbook-course-switch)
+    - [4.1.4 Editing an addressbook: `course edit`](#414-editing-an-addressbook-course-edit)
+  - [4.2 Basic Student Management](#42-basic-student-management)
+    - [4.2.1 Adding a new contact: `add`](#421-adding-a-new-contact-add)
+    - [4.2.2 Editing a contact : `edit`](#422-editing-a-contact--edit)
+    - [4.2.3 Marking attendance of student: `mark`](#423-marking-attendance-of-student-mark)
+    - [4.2.4 Viewing summary of attendance : `list attendance`](#424-viewing-summary-of-attendance--list-attendance)
+    - [4.2.5 Searching for student's contact via keyword : `find`](#425-searching-for-students-contact-via-keyword--find)
+    - [4.2.6Listing students : `list students`](#426-listing-students--list-students)
+    - [4.2.7 Deleting a student : `delete`](#427-deleting-a-student--delete)
+    - [4.2.8 Deleting multiple students : `delete all`](#428-deleting-multiple-students--delete-all)
+    - [4.2.9 Merging two students : `merge`](#429-merging-two-students--merge)
+    - [4.2.10 Viewing detailed attendance records : `view`](#4210-viewing-detailed-attendance-records--view)
+- [5. FAQ](#5-faq)
+- [6. Known issues](#6-known-issues)
+- [7. Summary](#7-summary)
+  - [7.1 Prefix Summary](#71-prefix-summary)
+  - [7.2 Command Summary](#72-command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
-## 1. About this User Guide
+## 2. About this User Guide
+
 This guide aims to
 * Teach first-time users how to start using TAvigator
 * Explain the features of each command and how to use them.
@@ -54,17 +65,19 @@ This guide aims to
 </div>
 
 **Warning Box**
-<div markdown="block" class="alert alert-danger">
-**:exclamation: Warning:** I am an example warning box! I show important messages to take note to avoid any unintended effects.
+<div markdown="block" class="alert alert-warning">
+**:exclamation: Caution:** I am an example warning box! I show important messages to take note to avoid any unintended effects.
 </div>
 
+## 3. Quick start
 
-## 2. Quick start
+### 3.1 Prerequisites
 
-1. Ensure you have Java `11` or above installed in your Computer.
+Ensure you have Java `11` or above installed in your Computer.
 
 <div markdown="block" class="alert alert-success">
 **:bulb: Tip:** **Not sure how to check your Java version?**
+
 **Step 1.** Open up **Command Prompt** (Windows) or **Terminal** (Mac and Linux).
 
 **Step 2.** Type and run the command `java -version`.
@@ -79,15 +92,37 @@ An example is shown below.
   ```
 </div>
 
-2. Download the latest `tavigator.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-4/tp/releases).
+### 3.2 Installation
 
-3. Copy the file to the folder you want to use as the _home folder_ for your TAvigator.
+1. Download the latest `tavigator.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-4/tp/releases).
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tavigator.jar` command to run the application.<br>
+2. Copy the file to the folder you want to use as the _home folder_ for your TAvigator.
+
+3. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tavigator.jar` command to run the application.<br>
+
+    <div markdown="block" class="alert alert-success">
+    **:bulb: Tip:** **Not sure how to check your Java version?**
+    
+    **Step 1.** Open up **Command Prompt** (Windows) or **Terminal** (Mac and Linux).
+    
+    **Step 2.** Type the command `java -jar ` (Note the space at the end). 
+    
+    **Step 3.** Drag the `tavigator.jar` file into the terminal and press Enter.
+    
+    An example of the final resulting command is shown below.
+    
+      ```
+      > java -jar /Users/johndoe/Downloads/tavigator.jar
+      ```
+    </div>
+
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+### 3.3 Utilization
+
+Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list students` : Lists all students in the current course.
@@ -98,11 +133,27 @@ An example is shown below.
 
    * `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+Refer to the [Features](#4-features) below for details of each command.
+
+### Navigating the GUI
+
+![UI Overview](images/UiOverview.png)
+
+**<span style="color:red;">Command Box</span>**<br>
+Enter your command here.
+
+**<span style="color:mediumseagreen;">Result Display Box</span>**<br>
+Displays a feedback message after a command is executed.
+
+**<span style="color:dodgerblue;">Navigation Tab</span>**<br>
+Displays the  course tabs that you can navigate to.
+
+**<span style="color:grey;">Main Display</span>**<br>
+Displays the list of your chosen tab.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 3. Features
+## 4. Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -137,25 +188,34 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### 3.1 Basic Course Management
+### 4.1 Basic Course Management
 
-#### 3.1.1 Creating an addressbook: `course create`
+#### 4.1.1 Creating an addressbook: `course create`
 
 ![course create](images/courseCreate.png)
 
 Creates a new addressbook.
 
-Format: `course create course/COURSE_CODE`
+**Format:** `course create course/COURSE_CODE`
+
+<div markdown="block" class="alert alert-secondary">
 
 * Creates a new addressbook with course code `COURSE_CODE`
 * `COURSE_CODE` should be a string made up of alphanumeric characters, with no special characters.
 * `COURSE_CODE` must be specified.
 * `COURSE_CODE` address book must not exist.
 
-Example:
+</div>
+
+**Example:**
+
+<div markdown="block" class="alert alert-secondary">
+
 * `course create course/CS2103T` creates a new addressbook with course code CS2103T.
 
-#### 3.1.2 Deleting an addressbook: `course delete`
+</div>
+
+#### 4.1.2 Deleting an addressbook: `course delete`
 
 ![course delete](images/courseDelete.png)
 
@@ -171,7 +231,7 @@ Format: `course delete course/COURSE_CODE`
 Example:
 * `course delete course/CS2103T` deletes the addressbook with course code CS2103T.
 
-#### 3.1.3 Switching an addressbook: `course switch`
+#### 4.1.3 Switching an addressbook: `course switch`
 
 ![course switch](images/courseSwitch.png)
 
@@ -187,7 +247,7 @@ Format: `course switch course/COURSE_CODE`
 Example:
 * `course switch course/CS2103T` switches to the addressbook with course code CS2103T.
 
-#### 3.1.4 Editing an addressbook: `course edit`
+#### 4.1.4 Editing an addressbook: `course edit`
 
 ![course edit](images/courseEdit.png)
 
@@ -203,9 +263,9 @@ Format: `course edit course/COURSE_CODE`
 Example:
 * `course edit course/CS2103T` changes the active addressbook's course code to CS2103T.
 
-### 3.2 Basic Student Management
+### 4.2 Basic Student Management
 
-#### 3.2.1 Adding a new contact: `add`
+#### 4.2.1 Adding a new contact: `add`
 
 Creates a new contact in the course with the specified name and details.
 
@@ -228,7 +288,7 @@ Examples:
 * `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234568E`
 * `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234569E t/G2`
 
-#### 3.2.2 Editing a contact : `edit`
+#### 4.2.2 Editing a contact : `edit`
 
 Edits the contact details.
 
@@ -249,13 +309,13 @@ Examples:
 *  `edit 1 n/Tan Liyan` Edits the name of the first person to be Tan Liyan.
 *  `edit 2 p/92345678 t/` Edits the phone number of the second person and removes all tutorial groups from contact.
 
-#### 3.2.3 Marking attendance of student: `mark`
+#### 4.2.3 Marking attendance of student: `mark`
 
 Format: `mark n/STUDENT_NAME[, STUDENT_NAME]… | id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEK_NUMBER
 [r/REASON_OF_ABSENCE]`
 
-<div markdown="block" class="alert alert-danger">
-**:exclamation: Warning:** Kindly take note the following!
+<div markdown="block" class="alert alert-warning">
+**:exclamation: Caution:** Kindly take note the following!
 * `mark` command is case-sensitive!
 * `mark` command currently does not support marking of students with same `STUDENT_NAME`! Please work around this by marking with `STUDENT_ID` instead!
 * `mark` command currently only supports **EITHER** `STUDENT_NAME` **OR** `STUDENT_ID` only and not both!
@@ -279,7 +339,7 @@ Examples:
 * `mark id/A0123456E, A0123457E a/1 w/1` Marks students with student IDs, A0123456E and A0123457E, as present for the tutorial in Week 1.
 * `mark id/A0123456E a/0 w/1 r/no valid reason` Marks student with student ID, A0123456E, as absent for the tutorial in Week 1 with no valid reason.
 
-#### 3.2.4 Viewing summary of attendance : `list attendance`
+#### 4.2.4 Viewing summary of attendance : `list attendance`
 
 Shows a summary of attendance records including list of absentees.
 
@@ -296,7 +356,7 @@ Examples:
 * `list attendance w/1` Shows a list of absentees and a summary of attendance records of all students in the course for Week 1.
 * `list attendance w/3 tg/G01` Shows a list of absentees and a summary of attendance records of the students in the tutorial group G01 in the course for Week 3.
 
-#### 3.2.5 Searching for student's contact via keyword : `find`
+#### 4.2.5 Searching for student's contact via keyword : `find`
 
 Finds a student's or multiple students' contact either via their name or student ID.
 
@@ -311,7 +371,7 @@ Examples:
 *  `find n/Anthony Yiqiao` Finds all contacts with the name "Anthony" and/or "Yiqiao".
 *  `find id/A0123456H` Finds all contacts with the student ID "A0123456H".
 
-#### 3.2.6 Listing students : `list students`
+#### 4.2.6 Listing students : `list students`
 
 Shows a list of students in the course.
 
@@ -321,7 +381,7 @@ Format: `list students`
 *  Shows a list of all students in the course.
 
 
-#### 3.2.7 Deleting a student : `delete`
+#### 4.2.7 Deleting a student : `delete`
 
 Deletes the specified person from TAvigator.
 
@@ -337,7 +397,7 @@ Examples:
 * `list students` followed by `delete 2` deletes the 2nd person in the course.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-#### 3.2.8 Deleting multiple students : `delete all`
+#### 4.2.8 Deleting multiple students : `delete all`
 
 Deletes all students from the course or all students from the specified tutorial group in the course.
 
@@ -354,7 +414,7 @@ Examples:
 * `delete all` deletes all students from the course.
 * `delete all tg/G02` deletes all students from tutorial group G02 in the course.
 
-#### 3.2.9 Merging two students : `merge`
+#### 4.2.9 Merging two students : `merge`
 
 Merges two students in the current address book.
 
@@ -369,7 +429,7 @@ Format: `merge PRIMARY_INDEX SECONDARY_INDEX`
 Examples:
 * `merge 1 2` merges the information of the first two displayed students.
 
-#### 3.2.10 Viewing detailed attendance records : `view`
+#### 4.2.10 Viewing detailed attendance records : `view`
 
 Displays the detailed attendance record of the specified student.
 
@@ -409,20 +469,23 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 4. FAQ
+## 5. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TAvigator home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 5. Known issues
+## 6. Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 6. Command summary
+## 7. Summary 
+
+### 7.2 Command summary
+
 
 | Action     | Format, Examples                                                                                                                                                                                               |
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
