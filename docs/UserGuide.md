@@ -13,16 +13,19 @@ We understand your struggles in managing your students' information. We know it 
 
 This is why we are excited to introduce **Class Manager 2023**, an all-in-one application designed to streamline your class management duties. **Class Manager 2023** will help you to save time, streamline your TA duties and allow you to focus on what matters most - your students.
 
-This user guide is your key to mastering **Class Manager 2023**, with step-by-step instructions on installing and using our application. **Class Manager 2023** is designed to be intuitive and easy to use so you can get started immediately!
+This user guide is your key to mastering **Class Manager 2023**, with step-by-step instructions on installing and using our application. **Class Manager 2023** is designed to be intuitive and easy to use, so you can get started immediately!
 
+--------------------------------------------------------------------------------------------------------------------
 <!-- * Table of Contents -->
+# Table of Contents
+
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
 # Overview
 
-**Class Manager 2023** is an offline desktop application for CS2103/T: Software Engineering Teaching Assistants (TAs) in National University of Singapore (NUS) to manage their students' contacts and class information. 
+**Class Manager 2023** is an offline desktop application for CS2103/T: Software Engineering Teaching Assistants (TAs) in National University of Singapore (NUS) to manage their students' contacts and class information.
 
 **Class Manager 2023** allows users to:
 * store and manage student's contact information,
@@ -34,6 +37,62 @@ This user guide is your key to mastering **Class Manager 2023**, with step-by-st
 
 --------------------------------------------------------------------------------------------------------------------
 
+# How to use our User Guide
+
+First time using **Class Manager 2023**? Fear not! This tutorial will guide you on how to maximise **Class Manager 2023**.
+
+* To get started with **Class Manager 2023**, refer to [Quick Start](#quick-start), which will guide you on how to set up your very own **Class Manager 2023**.
+
+* Familiarise yourself with our GUI at [GUI Overview](#gui-overview), where the GUI is explained clearly.
+
+* Want to find a specific section of the User Guide? Check out the [Table of Contents](#table-of-contents), where it will lead you to the relevant section.
+
+* You can also browse the [Command Summary](#command-summary) which provides an overview for the command format.
+
+* For any terms that you are unsure of, the [Glossary](#glossary) might have an explanation for it.
+
+* If you have any burning questions, the answers may lie in the [FAQ](#faq). If not, find us at our [website](https://ay2324s1-cs2103t-t11-1.github.io/tp/index.html)
+
+Before reading our User Guide, here are some quick tips:
+
+1. There are 3 different kinds of boxes that provide extra information.
+
+   * *Tip boxes* provide helpful advise on how to use a certain feature in **Class Manager 2023**.
+
+     <box type="tip" seamless>
+
+     **Tip:** This is a tip box.
+
+     </box>
+
+   * *Notice boxes* provide important information that you should to pay attention to.
+
+     <box type="info" seamless>
+
+     **Notice:** This is a notice box.
+
+     </box>
+
+   * *Warning boxes* provide warnings about certain outcomes that might be undesirable if executed.
+
+     <box type="warning" seamless>
+
+     **Warning:** This is a warning box.
+
+     </box>
+
+2. Words that are <span style="color:#0d6efd">in blue</span> are hyperlinks. They will redirect you to a different part of the User Guide or an external link when you click on them. For example, [this hyperlink](#welcome-to-class-manager-2023) will redirect you to the first page of the User Guide.
+
+   <box type="tip" seamless>
+
+    **Tip:** Hover over the hyperlink to inspect where the hyperlink redirects you.
+
+  </box>
+
+3. Refer to [Feature](#features) for a detailed explanation of each command and its format.
+
+--------------------------------------------------------------------------------------------------------------------
+
 # Quick start
 
 1. Ensure you have Java `11` or above installed on your computer.
@@ -42,7 +101,8 @@ This user guide is your key to mastering **Class Manager 2023**, with step-by-st
 
 3. Copy the file to the folder you want to use as the _home folder_ for **Class Manager 2023**.
 
-4. Open a command terminal, `cd` into the folder in which you put the jar file, and use the `java -jar class-manager-2023.jar` command to run the application.
+4. Open a command terminal, [`cd`](#glossary) into the folder where you put the jar file in, and enter the `java -jar class-manager-2023.jar` command to run the application.
+
    Note the app contains some sample data.<br>
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -103,14 +163,14 @@ The **GUI** has 6 notable sections:
 
 * Extraneous parameters for **commands that take in parameters** will invalidate the command. <br>
   e.g. if the input command is `delete 123 s/A0249112A` or `delete s/A0249112A c/T11`, the command will be invalid. <br>
-  Please **<u>refrain</u>** from using prefixes as input for another prefix.
+  Please **refrain** from using prefixes as input for another prefix.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines, as space characters surrounding line breaks may be omitted when copied over to the application.
+
 </box>
 
 ## Class Number
 
-* Class Number refers to the tutorial class number of a particular course.
 * Class Number is case-sensitive and must begin with a capital "T", followed by any number of characters. Class Numbers must not be blank.
 * Class Number is stored verbatim based on your input, with the case being preserved. 
 * Here are some valid examples of Class Numbers:
@@ -148,10 +208,10 @@ The size of the `attendanceTracker` and `classParticipationTracker` arrays must 
 
 <box type="warning" seamless>
 
-**Caution:**
+**Warning:**
 If your changes to the data file make its format invalid (missing value pairs or not matching the configured tutorial and assignment count), **Class Manager 2023** will discard all data and start with an empty data file at the next run. Hence, creating a backup of the file before editing is recommended.
-</box>
 
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -163,7 +223,7 @@ If your changes to the data file make its format invalid (missing value pairs or
 
 <box type="warning" seamless>
 
-**Caution:**
+**Warning:**
 Configuring **Class Manager 2023** resets all students' class information (grades, attendance and class participation details), as well as the past states of **Class Manager 2023**. This **cannot** be undone using the `undo` command. It is recommended to configure **Class Manager 2023** before adding students.
 </box>
 
@@ -177,13 +237,13 @@ Format: `config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT`
 * `config` resets the state history of **Class Manager 2023**, preventing you from using the `undo` command to reach a state of **Class Manager 2023** before executing the `config` command.
 
 Examples:
-* `config #t/5 #a/7`
+* `config #t/6 #a/5`
 
-Before `config` is executed:
+Before `config #t/6 #a/5` is executed:
 
 <img alt="config before" src="images/config-before.png" width="800">
 
-After `config` is executed successfully and `view s/A0247243A` is executed to view the first student's class information:
+After `config #t/6 #a/5` is executed successfully and `view s/A0247243A` is executed to view the first student's class information:
 
 <img alt="config success" src="images/config-success.png" width="800">
 
@@ -200,6 +260,8 @@ Possible errors and their corresponding error messages:
 * If `TUTORIAL_COUNT` or `ASSIGNMENT_COUNT` is more than 40
     * Error message: `Invalid count values! The count value of tutorials/assignments cannot be more than 40.`
 
+[Back to Table of Contents](#table-of-contents)
+
 ---
 
 ### Open help window : `help`
@@ -210,7 +272,9 @@ Format: `help`
 
 After `help` is executed successfully:
 
-<img alt="help message" src="images/helpMessage.png" width="800">
+<img alt="help message" src="images/helpMessage.png" width="700">
+
+[Back to Table of Contents](#table-of-contents)
 
 ---
 
@@ -222,6 +286,8 @@ Exits **Class Manager 2023** immediately.
 
 Format: `exit`
 
+[Back to Table of Contents](#table-of-contents)
+
 ---
 
 ### View command history : `history`
@@ -231,6 +297,8 @@ Shows a list of all previously entered inputs, with the most recent inputs at th
 Format: `history`
 
 After `history` is executed successfully: Result display box shows `Entered commands (from most recent to earliest):` and lists all previously entered inputs.
+
+[Back to Table of Contents](#table-of-contents)
 
 ---
 
@@ -256,7 +324,7 @@ Before `load f/sample` is executed:
 
 After `load f/sample` is executed successfully:
 
-<img alt="load success" src="images/load-outcome.png" width="800"> <br><br>
+<img alt="load success" src="images/load-outcome.png" width="700"> <br><br>
 
 The file path at the bottom left of the application is updated to `.\data\sample.json`.
 
@@ -265,6 +333,8 @@ Possible errors and their corresponding error messages:
   * Error message: `The file sample.json cannot be found. Please make sure the file is in the /data folder.`
 * The file name entered is not a valid JSON file, or the tutorial and assignment count does not match the current configuration of **Class Manager 2023**
   * Error message: `The file sample.json cannot be loaded. Please make sure the file is formatted correctly.`
+
+[Back to Table of Contents](#table-of-contents)
 
 ---
 
@@ -279,6 +349,8 @@ Format: `random NUMBER_OF_STUDENTS`
 Example:
 
 * `random 2`
+
+[Back to Table of Contents](#table-of-contents)
 
 ---
 
@@ -307,6 +379,8 @@ Displayed result if undo is successful: `Undo success!`
 
 Displayed result if there are no more commands to undo: `No more commands to undo!`
 
+[Back to Table of Contents](#table-of-contents)
+
 ---
 
 ### Redo a command : `redo`
@@ -334,6 +408,8 @@ Displayed result if redo is successful: `Redo success!`
 
 Displayed result if there are no more commands to redo: `No more commands to redo!`
 
+[Back to Table of Contents](#table-of-contents)
+
 ---
 
 ### Toggle UI theme : `theme`
@@ -348,6 +424,8 @@ Format: `theme`
 #### Light theme
 <img alt="theme_light" src="images/theme-light.png" width="800" >
 
+[Back to Table of Contents](#table-of-contents)
+
 ---
 
 ## Student list commands
@@ -361,18 +439,22 @@ Format: `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]…�
 * **ALL** the fields must be provided.
 * The `NAME` field is case-sensitive.
 * `PHONE` must be a 3 to 20 digit positive integer.
-* `STUDENT_NUMBER` needs to be unique, and must not be blank.
+
+* [`STUDENT_NUMBER`](#student-number) needs to be unique, and must not be blank.
 * When a student is added, their grades, attendance and class participation details will be initialised to `0`, `absent` and `false` respectively, for all tutorials.
 * Comment for a student can only be added after the student is added to the Student List.
 
 <box type="tip" seamless>
 
 **Tip:** A student can have any number of tags (including 0)
+
 </box>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com s/A0245234A c/T11 t/friends t/owesMoney`
 * `add n/John Doe p/98765432 e/johnd@example.com s/A0245234A c/T11`
+
+[Back to Table of Contents](#table-of-contents)
 
 ---
 
@@ -382,7 +464,7 @@ Adds or replaces a comment of an existing student in **Class Manager 2023**.
 
 Format: `comment s/STUDENT_NUMBER cm/COMMENT`
 
-* The `STUDENT_NUMBER` must be valid and exist.
+* The [`STUDENT_NUMBER`](#student-number) must be valid and exist.
 * Every student can only have 1 comment.
 * The `COMMENT` must be a valid string.
     * Note that the `COMMENT` string must not include any prefix.
@@ -397,6 +479,8 @@ Examples:
 * `comment s/A0249112A cm/This student is very hardworking and smart.`
 * `comment s/A0249112A cm/` (_This deletes the comment_)
 
+[Back to Table of Contents](#table-of-contents)
+
 ---
 
 ### Delete all students : `clear`
@@ -404,6 +488,8 @@ Examples:
 Deletes all existing students from **Class Manager 2023**. This command will not delete the data file. Use the `undo` command to undo this command.
 
 Format: `clear`
+
+[Back to Table of Contents](#table-of-contents)
 
 ---
 
@@ -413,10 +499,12 @@ Deletes an existing student in **Class Manager 2023** by specifying the student 
 
 Format: `delete s/STUDENT_NUMBER`
 
-* The `STUDENT_NUMBER` must be valid and exist.
+* The [`STUDENT_NUMBER`](#student-number) must be valid and exist.
 
 Example:
 * `delete s/A0249112A`
+
+[Back to Table of Contents](#table-of-contents)
 
 ---
 
@@ -426,14 +514,15 @@ Edits an existing student's details in **Class Manager 2023**. One or more detai
 
 Format: `edit STUDENT_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`
 
-<box type="warning" seamless>
+<box type="info" seamless>
 
-**Caution:**
-The student number entered __without__ the `s/` prefix will be the **old** student number.
+**Note:**
+The student number entered __without__ the `s/` prefix is the **current** student number.
+
 </box>
 
-* `STUDENT_NUMBER` must be valid and exist.
-* `STUDENT_NUMBER` must be entered before the details to be modified.
+* [`STUDENT_NUMBER`](#student-number) must be valid and exist.
+* [`STUDENT_NUMBER`](#student-number) must be entered before the details to be modified.
 * Replace the student's existing student number with `NEW_STUDENT_NUMBER`.
 * `PHONE` must be a positive integer with 3 or more digits.
 * At least one of the optional fields must be provided.
@@ -444,6 +533,8 @@ Examples:
 *  `edit A0245234A p/91234567 e/johndoe@example.com` Edits the phone number and email address of the student with `STUDENT_NUMBER` A0245234A to be `91234567` and `johndoe@example.com` respectively.
 *  `edit A0223344A n/Betsy Crower` Edits the name of the student with `STUDENT_NUMBER` A0223344A to be `Betsy Crower`.
 
+[Back to Table of Contents](#table-of-contents)
+
 ---
 
 ### List all students : `list`
@@ -451,6 +542,8 @@ Examples:
 Shows a list of all students in **Class Manager 2023**.
 
 Format: `list`
+
+[Back to Table of Contents](#table-of-contents)
 
 ---
 
@@ -460,11 +553,12 @@ Search and display students satisfying all given fields (Only one keyword needs 
 
 Format: `lookup [c/CLASS_NUMBER] [p/PHONE] [n/NAME] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]`
 
-<box type="warning" seamless>
+<box type="info" seamless>
 
-**Caution:**
+**Note:**
 - _At least one_ of the optional fields must be provided. `lookup` alone is not allowed. <br>
 - This command will not check for field validation. e.g. `lookup c/class 11` is allowed even though `class 11` is not a valid class number.
+
 </box>
 
 * The command is **case-insensitive**. e.g. `hans` will match `Hans`
@@ -479,10 +573,12 @@ Examples:
 
 * `lookup n/alex david` returns `Alex Yeoh`, `David Li`<br>
 
-<img alt="result for 'lookup n/alex david'" src="images/lookupNameResult.png" width="800"> </br></br>
+<img alt="result for 'lookup n/alex david'" src="images/lookupNameResult.png" width="680"> </br></br>
 * `lookup c/T11` returns all students in class number T11<br>
 
-<img alt="result for 'lookup c/T11'" src="images/lookupClassResult.png" width="800"> </br></br>
+<img alt="result for 'lookup c/T11'" src="images/lookupClassResult.png" width="680"> </br></br>
+
+[Back to Table of Contents](#table-of-contents)
 
 ---
 
@@ -492,15 +588,50 @@ Tags the existing student in **Class Manager 2023**.
 
 Format: `tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…​`
 
-* Tags the student with the specified `STUDENT_NUMBER`.
-* When editing tags without `/add` or `/delete`, the existing tags of the student will be overwritten.
-* You can remove all the student’s tags by typing `t/` without specifying any tags after it.
+* Tags the student with the specified [`STUDENT_NUMBER`](#student-number).
+
+<box type="warning" seamless>
+
+**Warning:** When editing tags without `/add` or `/delete`, the existing tags of the student will be overwritten.
+
+</box>
+
+<box type="tip" seamlesss>
+
+**Tip:** You can remove all the student’s tags by typing `t/` without specifying any tags after it.
+
+</box>
 
 Examples:
 * `tag s/A1234567N t/smart t/shy t/funny` replace all tags of the specified student with `smart`, `shy` and `funny`.
 * `tag s/A1234567N /add t/Java` adds the `Java` tag to the specified student.
 * `tag s/A1234567N /delete t/shy` removes the `shy` tag from the specified student.
 * `tag s/A1234567N t/` clears all tags from the specified student.
+
+The following image shows a successful execution of the `tag` command that replaces all the students tags.
+
+<img src="images/tag-success.png" alt="result for `tag s/A0231017A t/smart" width="700" />
+
+<box type="info" seamless>
+
+**Note:** Tags will appear below the names of the student and will be arranged in alphabetical order.
+
+</box>
+
+Other success messages of the `tag` command:
+1. Adding of tags: `Added following tags to Student...`
+2. Deleting of tags: `Removed following tags from Student...`
+3. Deleting all tags: `Removed all tags from Student...`
+
+Possible errors and their corresponding error messages:
+* If [`STUDENT_NUMBER`](#student-number) input is invalid.
+  * Error message: `Student Number can take any value starting with capital 'A', followed by numbers, and ending with a single alphabet.`
+* If `Tag` input is invalid.
+  * Error message: `Tag names should be alphanumeric`
+* If [`STUDENT_NUMBER`](#student-number) does not belong to any student in **Class Manager 2023**.
+  * Error message: `There is no student with the given student number.`
+
+[Back to Table of Contents](#table-of-contents)
 
 ---
 
@@ -513,11 +644,13 @@ Mark the tutorial attendance for an existing student as absent in **Class Manage
 
 Format: `absent s/STUDENT_NUMBER tut/TUTORIAL_INDEX`
 
-* The `STUDENT_NUMBER` must be valid and exist.
-* The `TUTORIAL_INDEX` must be a valid positive integer within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
+* The [`STUDENT_NUMBER`](#student-number) must be valid and exist.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**`config`**](#configure-class-manager-2023--config) command.
 
 Examples:
 * `absent s/A0245234A tut/1`
+
+[Back to Table of Contents](#table-of-contents)
 
 ---
 
@@ -527,11 +660,13 @@ Mark the tutorial attendance for an existing student as present in **Class Manag
 
 Format: `present s/STUDENT_NUMBER tut/TUTORIAL_INDEX`
 
-* The `STUDENT_NUMBER` must be valid and exist.
-* The `TUTORIAL_INDEX` must be a valid positive integer within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
+* The [`STUDENT_NUMBER`](#student-number) must be valid and exist.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**`config`**](#configure-class-manager-2023--config) command.
 
 Examples:
 * `present s/A0245234A tut/1`
+
+[Back to Table of Contents](#table-of-contents)
 
 ---
 
@@ -541,10 +676,12 @@ Mark the tutorial attendance for all students in the current list displayed as a
 
 Format: `absent-all tut/TUTORIAL_INDEX`
 
-* The `TUTORIAL_INDEX` must be a valid positive integer within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**`config`**](#configure-class-manager-2023-config) command.
 
 Examples:
 * `absent-all tut/1`
+
+[Back to Table of Contents](#table-of-contents)
 
 ---
 
@@ -554,10 +691,12 @@ Mark the tutorial attendance for all students in the current list displayed as p
 
 Format: `present-all tut/TUTORIAL_INDEX`
 
-* The `TUTORIAL_INDEX` must be a valid positive integer within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**`config`**](#configure-class-manager-2023-config) command.
 
 Examples:
 * `present-all tut/1`
+
+[Back to Table of Contents](#table-of-contents)
 
 ---
 
@@ -565,15 +704,16 @@ Examples:
 
 Record the class participation for an existing student in **Class Manager 2023**.
 
-<box type="warning" seamless>
+<box type="info" seamless>
 
-**Caution:** Currently, we allow an absent student have their class participation recorded as `true`. This will be changed in the future.
+**Note:** Currently, we allow an absent student have their class participation recorded as `true`. This will be changed in the future.
+
 </box>
 
 Format: `class-part s/STUDENT_NUMBER tut/TUTORIAL_SESSION part/PARTICIPATION`
 
-* `STUDENT_NUMBER` must be valid and exist.
-* `TUTORIAL_SESSION` must be a valid positive integer within the configured tutorial count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
+* [`STUDENT_NUMBER`](#student-number) must be valid and exist.
+* `TUTORIAL_SESSION` must be a valid positive integer, within the configured tutorial count given in the [**`config`**](#configure-class-manager-2023--config) command.
 * `PARTICIPATION` must be either `true` or `false`.
     * The `true` value indicates that the student has participated in the tutorial, while the `false` value indicates that the student has not participated in the tutorial.
 * `PARTICIPATION` is case-insensitive.
@@ -583,6 +723,8 @@ Format: `class-part s/STUDENT_NUMBER tut/TUTORIAL_SESSION part/PARTICIPATION`
 Examples:
 * `class-part s/A0249112A tut/1 part/true`
 
+[Back to Table of Contents](#table-of-contents)
+
 ---
 
 ### Set assignment grade for a student : `grade`
@@ -591,12 +733,14 @@ Setting an assignment grade for an existing student in **Class Manager 2023**.
 
 Format: `grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE`
 
-* The `STUDENT_NUMBER` must be valid and exist.
-* The `ASSIGNMENT_INDEX` must be a valid positive integer within the configured assignment count given in the [**<u>`config`</u>**](#configuring-class-manager-config) command.
+* The [`STUDENT_NUMBER`](#student-number) must be valid and exist.
+* The `ASSIGNMENT_INDEX` must be a valid positive integer, within the configured assignment count given in the [**`config`**](#configure-class-manager-2023--config) command.
 * The `GRADE` must be a valid integer between 0 and 100.
 
 Examples:
 * `grade s/A0249112A a/1 g/100`
+
+[Back to Table of Contents](#table-of-contents)
 
 ---
 
@@ -606,16 +750,19 @@ View the class information of a student that will be displayed on the right side
 
 Format: `view s/STUDENT_NUMBER`
 
-* The STUDENT_NUMBER must be valid.
-* The STUDENT_NUMBER must belong to a student in **Class Manager 2023**.
+* The [`STUDENT_NUMBER`](#student-number) must be valid and belong to a student in **Class Manager 2023**.
 
 Example:
 
 * `view s/A0241243A`
 
-<img alt="result for 'view s/A0241243A'" src="images/ViewCommand.png" width="800" >
+<img alt="result for 'view s/A0241243A'" src="images/ViewCommand.png" width="700" >
 
----
+Possible error and their corresponding message:
+* If [`STUDENT_NUMBER`](#student-number) does not belong to any student in **Class Manager 2023**.
+  * Error message: `Please check that the student exist in Class Manager.`
+
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -641,6 +788,8 @@ Example:
 <br><br>
 **Q**: I have found a bug with **Class Manager 2023**. How can I report it?<br>
 **A**: Please report the bug by creating a new issue on the [Class Manager 2023 issue tracker](https://github.com/AY2324S1-CS2103T-T11-1/tp/issues).
+
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -684,7 +833,9 @@ Example:
 | [**Mark all displayed students as present**](#mark-all-displayed-students-as-present-present-all)    | `present-all tut/TUTORIAL_SESSION` <br> e.g. `present-all tut/1`                                                         |
 | [**Record class participation for a student**](#record-class-participation-for-a-student-class-part) | `class-part s/STUDENT_NUMBER tut/TUTORIAL_SESSION part/PARTICIPATION` <br> e.g. `class-part s/A0245234A tut/1 part/true` |
 | [**Set assignment grade for a student**](#set-assignment-grade-for-a-student-grade)                  | `grade s/STUDENT_NUMBER a/ASSIGNMENT_NUMBER g/GRADE` <br> e.g. `grade s/A0245234A a/1 g/100`                             |
-| [**View a student's class information**](#view-a-student-s-class-information-view)                           | `view s/STUDENT_NUMBER` <br> e.g. `view s/A0245234A`                                                                     |
+| [**View a student's class information**](#view-a-student-s-class-information-view)                   | `view s/STUDENT_NUMBER` <br> e.g. `view s/A0245234A`                                                                     |
+
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -698,3 +849,5 @@ Example:
 * **JSON**: JavaScript Object Notation, a lightweight data-interchange format.
 * **JAR**: Java Archive, a package file format used to aggregate many Java class files and associated metadata and resources (text, images, etc.) into one file to distribute application software or libraries on the Java platform.
 * **Class information**: The grades, attendance and class participation details of a student in **Class Manager 2023**.
+
+[Back to Table of Contents](#table-of-contents)
