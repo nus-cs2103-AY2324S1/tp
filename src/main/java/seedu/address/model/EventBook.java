@@ -114,9 +114,4 @@ public class EventBook implements ReadOnlyEventBook {
         EventBook otherEventBook = (EventBook) other;
         return events.equals(otherEventBook.events);
     }
-
-    @Override
-    public int hashCode() {
-        return events.hashCode();
-    }
 }
