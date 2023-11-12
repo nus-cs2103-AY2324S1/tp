@@ -17,7 +17,7 @@ Choose a topic from the table of contents to find out how to manage your clients
 
 # Table of Contents
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -58,13 +58,13 @@ Choose a topic from the table of contents to find out how to manage your clients
 
    Some examples you can try:
 
-    - `list`: Lists all client profiles.
+   - `list`: Lists all client profiles.
 
-    - `create n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: Creates a client named `John Doe` in the client list.
+   - `create n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: Creates a client named `John Doe` in the client list.
 
-    - `delete 3`: Deletes the 3rd contact currently shown in the displayed client list.
+   - `delete 3`: Deletes the 3rd contact currently shown in the displayed client list.
 
-    - `exit`: Exits the app.
+   - `exit`: Exits the app.
 
 9. Refer to [Features](#features) below for more commands and details for each command.
 
@@ -105,8 +105,8 @@ Let's first discuss the top half of the interface.
 </figure>
 
 1. **Navigation Bar**
-    - **File:** a dropdown menu containing the exit button, which quits the application.
-    - **Help:** a dropdown menu containing the help button, which provides the link to this user guide.
+   - **File:** a dropdown menu containing the exit button, which quits the application.
+   - **Help:** a dropdown menu containing the help button, which provides the link to this user guide.
 
 2. **Command Box:** a box where you can type [commands](#if-youre-new-what-are-commands). When it is empty, it prompts you with `Enter Command Here...`.
 
@@ -120,10 +120,10 @@ Let's first discuss the top half of the interface.
     </figure>
 
 4. **Connectify's Analytics:** insightful statistics that are automatically calculated for you. This includes:
-    - Number of uncontacted / contacted / closed clients
-    - Average interactions among all clients
-    - Breakdown of the different interaction outcomes
-    - Number of hot / warm / cold [leads](#marking-a-client-as-a-hot-warm-or-cold-lead)
+   - Number of uncontacted / contacted / closed clients
+   - Average interactions among all clients
+   - Breakdown of the different interaction outcomes
+   - Number of hot / warm / cold [leads](#marking-a-client-as-a-hot-warm-or-cold-lead)
 
 5. **Upcoming Follow-ups:** upcoming meetings for each client. Follow-up dates are determined automatically by the latest interaction date and the lead of the client. See [how Connectify calculates follow-up dates.](#follow-up-calculation)
 
@@ -137,12 +137,12 @@ Let's first discuss the top half of the interface.
     </figure>
 
 6. **Client List:** a scrollable list of clients that you have. You can see the details of each client, including:
-    - **Index:** the number and order of each client in your client list. The numbering can change using the [***find*** command](#finding-a-client-by-name-find).
-    - **Name:** the name of the client, specified after the index number.
-    - **Lead:** the lead of the client, represented by either a red, orange, or light blue box.
-    - **Tags:** a row of dark green boxes, representing additional information of each client.
-    - **Phone Number:** the client's phone number.
-    - **Email:** the client's email address.
+   - **Index:** the number and order of each client in your client list. The numbering can change using the [***find*** command](#finding-a-client-by-name-find).
+   - **Name:** the name of the client, specified after the index number.
+   - **Lead:** the lead of the client, represented by either a red, orange, or light blue box.
+   - **Tags:** a row of dark green boxes, representing additional information of each client.
+   - **Phone Number:** the client's phone number.
+   - **Email:** the client's email address.
 
    <div style="page-break-after: always;"></div>
    <br>
@@ -154,11 +154,11 @@ Let's first discuss the top half of the interface.
     </figure>
 
 7. **Detailed View:** a detailed view of each client's profile, showing additional information, including:
-    - **Telegram Handle:** the client's telegram handle, starting with the letter `@`.
-    - **Address:** the home address of the client.
-    - **Profession:** the client's profession/job.
-    - **Income:** the client's income.
-    - **Past Interactions:** the list of past interactions or meetings with the clients, along with its date, interaction outcome (interested), and meeting notes.
+   - **Telegram Handle:** the client's telegram handle, starting with the letter `@`.
+   - **Address:** the home address of the client.
+   - **Profession:** the client's profession/job.
+   - **Income:** the client's income.
+   - **Past Interactions:** the list of past interactions or meetings with the clients, along with its date, interaction outcome (interested), and meeting notes.
 
    <br>
    <figure>
@@ -547,7 +547,7 @@ You can use the ***edit*** command to mark a client as a hot, warm or cold lead.
 
 #### Editing a single field
 
-We understand the edit command can be a little tedious to use if you only want to edit a single field of a client profile. Hence, we have provided a shortcut for you to edit a single field of a client profile. This command is special because its command word is the same as the field you want to edit.
+We understand the edit command can be a little tedious to use if you only want to edit a single field of a client profile. Hence, we have provided a shortcut for you to edit a single field of a client profile. This command is special because its command word is the same as the field you want to edit. 
 
 **Format**
 ```text
