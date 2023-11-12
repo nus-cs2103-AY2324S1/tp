@@ -32,14 +32,6 @@ public abstract class InterviewCommand extends Command {
         + PREFIX_INTERVIEW_ADDRESS + "Home\n";
 
     public static final String MESSAGE_CONSTRAINTS = "interview can only be followed by add, delete, or edit";
-
-    /**
-     * Enum representing valid sub-command words for interview-related commands.
-     */
-    public enum SubCommandWords {
-        add, delete, edit
-    }
-
     /**
      * Retrieves the job associated with a given index in the filtered job list.
      *
@@ -57,20 +49,5 @@ public abstract class InterviewCommand extends Command {
         }
 
         return lastShownList.get(index.getZeroBased());
-    }
-
-    /**
-     * Checks if a given sub-command word is a valid sub-command for interview commands.
-     *
-     * @param subCommandWord The sub-command word to validate.
-     * @return True if the sub-command word is valid, false otherwise.
-     */
-    public static boolean isValidSubCommandWord(String subCommandWord) {
-        for (InterviewCommand.SubCommandWords w : InterviewCommand.SubCommandWords.values()) {
-            if (subCommandWord.equalsIgnoreCase(w.toString())) {
-                return true;
-            }
-        }
-        return false;
     }
 }
