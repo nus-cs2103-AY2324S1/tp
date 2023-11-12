@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-- The features `undo`, `redo`, `history` and arrow key command navigation (including the code) was reused with some changes from AddressBook-Level4.
+- The features `undo`, `redo`, `history` and arrow key command navigation (including the code) was reused with some changes from [AddressBook-Level4](https://github.com/se-edu/addressbook-level4).
 - Our book icon favicon was taken from [Smashicons at Flaticon](https://www.flaticon.com/free-icon/book_2232688).
 
 --------------------------------------------------------------------------------------------------------------------

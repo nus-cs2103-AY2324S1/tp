@@ -5,7 +5,7 @@ title: "Boh Shin's Project Portfolio Page"
 
 ### Class Manager 2023
 
-Class Manager 2023 aims to provide fast access to NUS TAs who need help in maintaining student information across multiple classes. It also helps TAs visualise students’ grades, attendance and class participation.
+Class Manager 2023 aims to provide fast access to CS2103/T TAs who need help in maintaining student information across multiple classes. It also helps TAs visualise students’ grades, attendance and class participation.
 
 Given below are my contributions to the project.
 
