@@ -324,8 +324,8 @@ The following sequence diagram provides a visual representation of the JsonInjec
 - **Alternative:** Sanitise the input, ie: remove the banned characters from the input and execute the command.
     - Pros: Less inconvenience to the user.
     - Cons:
-        -More complex implementation.
-        -Due to the input having some characters removed, the command may either may no sense at all, or in successful execution the details of the command may not make sense to the user at all.
+        - More complex implementation.
+        - Due to the input having some characters removed, the command may either may no sense at all, or in successful execution the details of the command may not make sense to the user at all.
 
 --------------------------------------------------------------------------------------------------------------------
 
