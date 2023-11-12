@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalEvents.getTypicalCalendar;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -29,7 +30,6 @@ import seedu.address.model.event.EventPeriod;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.TaskManager;
 import seedu.address.testutil.EditEventDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
 
 public class EditContactEventCommandTest {
 
@@ -37,9 +37,9 @@ public class EditContactEventCommandTest {
             new UserPrefs());
 
     @Test
-    public void execute_allFieldsSpecifiedUnfilteredList_success2() {
-        Person editedPerson = new PersonBuilder().withName("Alice Pauline").withPhone("94351253")
-                .withEmail("alice@example.com").withTags("friends").withCalendar().build();
+    public void execute_allFieldsSpecifiedUnfilteredList_success() {
+        int personIdx = 0;
+        Person editedPerson = model.getFilteredPersonList().get(personIdx);
         EventDescription expectedEventDescription = new EventDescription("Eat Tacos");
         EditContactEventCommand.EditEventDescriptor descriptor = new EditContactEventCommand.EditEventDescriptor();
         descriptor.setEventDescription(expectedEventDescription);
@@ -51,20 +51,18 @@ public class EditContactEventCommandTest {
         indexArrayList.add(INDEX_FIRST_PERSON);
         indexArrayList.add(INDEX_FIRST_EVENT);
         EditContactEventCommand editContactEventCommand = new EditContactEventCommand(indexArrayList, descriptor);
-
-        EventDescription newDescription = new EventDescription("Nap");
         EventPeriod newEventPeriod = new EventPeriod(startTime, endTime);
 
         Event editEvent = new Event(expectedEventDescription, newEventPeriod);
-        editedPerson.getCalendar().getEventList().set(0, editEvent);
+        editedPerson.getCalendar().getEventList().set(personIdx, editEvent);
         String expectedMessage = String.format(EditContactEventCommand.MESSAGE_EDIT_PERSON_SUCCESS,
                 Messages.formatCalendar(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 model.getCalendar(), model.getTaskManager(), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setPerson(model.getFilteredPersonList().get(personIdx), editedPerson);
 
-        assertTrue(true);
+        assertCommandSuccess(editContactEventCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
