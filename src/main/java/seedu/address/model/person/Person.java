@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import seedu.address.model.person.fields.Name;
 
 /**
@@ -19,7 +17,7 @@ public abstract class Person {
      * @param name The name of the person.
      */
     public Person(Name name) {
-        assert name != null: "Name cannot be null";
+        assert name != null : "Name cannot be null";
         this.name = name;
     }
 

@@ -38,7 +38,7 @@ public class Applicant extends Person {
      */
     public Applicant(Name name, Phone phone) {
         super(name);
-        assert phone != null: "Phone number cannot be null";
+        assert phone != null : "Phone number cannot be null";
         this.phone = phone;
         this.interviewTime = new InterviewTime("cancel");
     }

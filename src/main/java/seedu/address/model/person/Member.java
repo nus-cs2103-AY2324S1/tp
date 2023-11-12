@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -42,7 +40,7 @@ public class Member extends Person {
      */
     public Member(Name name, Phone phone, Email email, Telegram telegram, Set<Tag> tags) {
         super(name);
-        assert phone != null && email != null && telegram != null && tags != null: "Fields cannot be null";
+        assert phone != null && email != null && telegram != null && tags != null : "Fields cannot be null";
         this.phone = phone;
         this.email = email;
         this.telegram = telegram;
@@ -61,7 +59,7 @@ public class Member extends Person {
      */
     public Member(Name name, Phone phone, Email email, Telegram telegram, Set<Tag> tags, List<Task> tasks) {
         super(name);
-        assert phone != null && email != null && telegram != null && tags != null && tasks != null: "Fields cannot be "
+        assert phone != null && email != null && telegram != null && tags != null && tasks != null : "Fields cannot be "
             + "null";
         this.phone = phone;
         this.email = email;
