@@ -59,7 +59,7 @@ Click on the relevant links to easily navigate through the guide and access the 
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe`
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 nk/David nkp/91234567` : Adds a contact named `John Doe`
    to the Contact Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
