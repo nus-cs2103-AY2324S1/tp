@@ -33,6 +33,14 @@ If you are a new user, we recommend that you read this guide starting from the [
 
 If you are an experienced user, you can use the [Table of Contents](#table-of-contents) below to quickly locate the relevant section. Alternatively, you can jump to the [Command Summary](#command-summary) section for an overview of the command syntax.
 
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: This block indicates command success.
+</div>
+
+<div markdown="block" class="alert alert-danger">
+:x: This block indicates command failure.
+</div>
+
 ## Table of Contents
 
 {:toc}
@@ -62,7 +70,10 @@ If you are an experienced user, you can use the [Table of Contents](#table-of-co
 
 6. Refer to the [Features](#features) section below for details on each command.
 
-You can click here to return to [Table of Contents](#table-of-contents).
+
+<span style="float:right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
+--------------------------------------------------------------------------------------------------------------------
+
 
 ## Command Format
 
@@ -87,8 +98,6 @@ You can click here to return to [Table of Contents](#table-of-contents).
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
-
-<span style="float:right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
 
 ## Teaching Assistant Commands
 
@@ -461,12 +470,13 @@ TAManager data are saved in the hard disk automatically after any command that c
 ## Editing the data file
 
 TAManager data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-<span style="float:right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
+
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
+<span style="float:right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
