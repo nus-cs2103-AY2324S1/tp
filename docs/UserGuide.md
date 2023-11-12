@@ -279,8 +279,8 @@ Examples:
 
 Changes the theme of the application. The default theme on launch is always the dark theme.
 
-Format: `theme THEMETYPE`
-* `THEMETYPE` has the following possibilities: `dark`, `light` (case-insensitive)
+Format: `theme TYPE`
+* `TYPE` can only take the following values: `dark`, `light` (case-insensitive)
 
 Examples:
 * `theme dark` sets the application theme to the dark theme.
