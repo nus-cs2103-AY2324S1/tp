@@ -6,9 +6,9 @@
 
 # Tutorium User Guide
 
-Welcome to Tutorium! Tutorium is a **desktop application for tuition centre administrative staff** to conduct data analysis for the planning of marketing strategies. Users can interact with it using a Command Line Interface (CLI), and it has a Graphical User Interface(GUI) created with JavaFX.
+Welcome to Tutorium! Tutorium is a **desktop application for tuition centre administrative staff** to conduct data analysis for the planning of marketing strategies. Users can interact with it using a Command Line Interface (CLI).
 
-Currently, Tutorium caters to the needs of tuition centre administrative staff under the O-Level and IP systems in Singapore, and supports adding data of students from Secondary 1 up to Secondary 4.
+Currently, Tutorium supports administrative work relating to students from Secondary 1 to Secondary 4, under the O-Level and IP systems in Singapore.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -17,13 +17,18 @@ Currently, Tutorium caters to the needs of tuition centre administrative staff u
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed in your computer.
 
 1. Download the latest `tutorium.jar` file from [here](https://github.com/AY2324S1-CS2103T-W13-2/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for the Tutorium app.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tutorium.jar` command to run the application.<br>
+1. Open a command terminal. If you are using Windows, press the Windows key + R on your keyboard, type `cmd` and press Enter. 
+If you are using Mac, click on the Launchpad icon in the Dock, type Terminal in the search field, and then click Terminal.
+
+1. `cd` into the folder you put the `tutorium.jar` file in. For example, if you put it in a folder named `Tutorium`, then type this command into the terminal: `cd Tutorium`
+
+1. Key the `java -jar tutorium.jar` command in the terminal to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -41,9 +46,7 @@ Currently, Tutorium caters to the needs of tuition centre administrative staff u
     * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
-
 --------------------------------------------------------------------------------------------------------------------
-
 ## Features
 
 <box type="info" seamless>
@@ -54,15 +57,17 @@ Currently, Tutorium caters to the needs of tuition centre administrative staff u
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [s/SUBJECT]` can be used as `n/John Doe s/English` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[s/SUBJECT]…​` can be used as ` ` (i.e. 0 times), `s/English`, `s/English s/Chinese` etc.
 
 * When providing parameters starting with any of the prefixes used by Tutorium `(n/, p/, e/, a/, g/, l/, n/, s/ and d/)` to fields,
-  users are discouraged from adding spaces between the prefix for that field and the input value. This is because the addition
-  of spaces will cause Tutorium to interpret the prefix in the input value as an actual prefix for a field and not as part of the input value.
+  users should not add spaces between the prefix for that field and the input value. 
   e.g. Filtering students with the address `e/house` should be done with the command `filter a/e/house` rather than `filter a/ e/house`.
+
+* Parameters containing words (other than the first word) that start with any of the prefixes used by Tutorium `(n/, p/, e/, a/, g/, l/, n/, s/ and d/)` 
+  are not accepted in Tutorium.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -71,6 +76,15 @@ Currently, Tutorium caters to the needs of tuition centre administrative staff u
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* The accepted range of sec levels is from Secondary 1 to Secondary 4.
+
+* If no enrol date is provided, the date on which the command was executed will be applied to all subjects listed in the command.
+    * If only 1 enrol date is provided, the same enrol date will be applied to all subjects listed.
+    * If the number of enrol dates provided is the same as the number of subjects listed, the order in which enrol dates are applied to subjects will be the same as the order in which they are provided.
+    * Any mismatch between the number of subjects and the number of enrol dates provided (other than the cases listed above) will result in an error.
+
+* Simply providing 1 enrol date without providing any corresponding subject(s) will result in an error.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
@@ -88,14 +102,7 @@ Format: `help`
 
 Adds a student's data to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER l/SEC_LEVEL m/MRT STATION [s/SUBJECT]… [d/ENROL_DATE]…​`
-
-* The accepted range of secondary school levels is from Secondary 1 to Secondary 4.
-* When adding subjects, if no enrol date is provided, the date on which the command was executed will be applied to all subjects listed by default.
-  * If only 1 enrol date is provided, the same enrol date will be applied to all subjects listed.
-  * If the number of enrol dates provided is the same as the number of subjects listed, the order in which enrol dates are applied to subjects will be the same as the order in which they are provided.
-  * Any mismatch between the number of subjects and the number of enrol dates provided (other than the cases listed above) will result in an error.
-* Simply providing 1 enrol date without providing any corresponding subject(s) will result in an error.
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER l/SEC_LEVEL m/MRT_STATION [s/SUBJECT]… [d/ENROL_DATE]…​`
 
 Examples:
 * `add n/John Doe p/12345678 e/johnd@example.com a/John street, block 123, #01-01 g/M l/2 m/KR mrt s/Chemistry s/Physics`
@@ -132,21 +139,15 @@ Examples:
 Edits an existing student's data in the address book.
 
 Format:
-1. `edit INDEX prefix/[field name]` or `edit NAME prefix/[field name]` (you can either specify the student you want to edit by index or his/her name)
-2. `edit INDEX prefix1/[field1] prefix2/[field2]`  or `edit NAME prefix/[field] prefix/[field] prefix/[field]` (change multiple fields)
+1. `edit INDEX prefix/FIELD_VALUE` or `edit NAME prefix/FIELD_VALUE` (you can specify the student you want to edit by index or by his/her name)
+2. `edit INDEX prefix1/FIELD_1_VALUE prefix2/FIELD_2_VALUE`  or `edit NAME prefix1/FIELD_1_VALUE prefix2/FIELD_2_VALUE prefix3/FIELD_3_VALUE` (change multiple fields)
 
-* At least one of the optional fields must be provided.
+* At least one field to edit must be provided.
 * Existing values will be updated to the input values.
-* The accepted range of secondary school levels is from Secondary 1 to Secondary 4.
-* When editing subjects, if no enrol date is provided, the date on which the command was executed will be applied to all subjects listed by default.
-  * If only 1 enrol date is provided, the same enrol date will be applied to all subjects listed.
-  * If the number of enrol dates provided is the same as the number of subjects listed, the order in which enrol dates are applied to subjects will be the same as the order in which they are provided.
-  * Any mismatch between the number of subjects and the number of enrol dates provided (other than the cases listed above) will result in an error.
-* Simply providing 1 enrol date without providing any corresponding subject(s) will result in an error.
 
 Examples:
-*  `edit John Doe n/Joe` specify that you want to edit John Doe's name to "Joe".
-*  `edit 2 n/joey e/joey123@example.com` Edits the student (with index 2)'s name and email to be `joey` and `joey123@example.com`.
+*  `edit John Doe n/Joe` edits John Doe's name to "Joe".
+*  `edit 2 n/joey e/joey123@example.com` Edits the student (with index 2)'s name and email to be `joey` and `joey123@example.com` respectively.
    <br>
    ![result for 'edit John Doe n/Joe'](images/ug_images/editedResult.png)
 
@@ -171,9 +172,9 @@ Examples:
 
 Deletes data of a specified student.
 
-Format: `delete [NAME]` or `delete [INDEX]`
+Format: `delete NAME` or `delete INDEX`
 
-* Deletes the student with the specified `NAME` or `[INDEX]`.
+* Deletes the student with the specified `NAME` or `INDEX`.
 * `NAME`: The deletion is case-insensitive, but it must be the full name of the student.
 
 Examples:
@@ -185,13 +186,14 @@ Examples:
 ### Update sec level : `uplevel`, `undolevel`
 
 - `uplevel` : update the sec levels for all students and remove all sec level 4 students.
-  - `undolevel` : revert the student record to be before previous sec level update (to undo an `uplevel`).
+- `undolevel` : revert the student record to be before previous sec level update (to undo an `uplevel`).
+
   Format: `uplevel`, `undolevel`
 
-* Command is case-sensitive
+* Command is case-sensitive.
 * No prefix is required, only the command.
-* Note that `undolevel` feature is provided in case when the user accidentally enter `uplevel` AND the user do not close application immediately.
-* That means after doing `uplevel`, followed by any other `edit`, `add` or `delete` commands etc and then do `undolevel`, the commands in between will be invalid because the students records are revert back to before previous `uplevel`.
+* Note that `undolevel` feature is provided in case the user accidentally enters `uplevel` AND the user does not close the application immediately.
+* That means after doing `uplevel`, followed by any other `edit`, `add` or `delete` commands etc and then do `undolevel`, the commands in between will be invalid because the students records are reverted back to before the previous `uplevel`.
 * `undolevel` can be performed only when there is / are `uplevel` performed (and has not been undone) since user open application.
 
 
@@ -224,7 +226,7 @@ Examples:
 
 Sort the list of students data by name.
 
-Format: `sort in/[DESCRIPTION]`
+Format: `sort in/DESCRIPTION`
 
 * `DESCRIPTION` should be `ASC` or `DESC`, non-case-sensitive.
 
@@ -286,8 +288,10 @@ Below is the chart generated after entering `bar l/`.
 Showing a line chart describing number of students enrolled in each month in a specific year.
 
 Format: `trend y/YEAR`
-* {year} is a 4 digit number representing year
-* {} is not required
+
+* Students will be categorised according to their earliest enrol date. e.g. if John Doe enrolled in Physics in May 2020
+and Chemistry in July 2021, his data will be found in the line chart shown when `trend y/2020` is used, but not in the line chart shown
+when `trend y/2021` is used.
 
 Examples:
 * `trend y/2023` will show a line chart describing number of students enrolled
@@ -305,7 +309,7 @@ Format: `export v/VISUAL`
 * `VISUAL` should be `TABLE` or `BAR`, non-case-sensitive.
 * `TABLE` indicates exporting the table created, while `BAR` indicates exporting the bar chart created.
 * A table should be created before exporting, this applies to exporting bar chart as well.
-* The visual representation exported will be the one that is recently created.
+* The visual representation exported for each type of visual will be the one that is most recently created.
   * i.e. if two bar charts are created consecutively, `export v/BAR` will export the most recent bar chart created (the 2nd bar chart)
 
 Examples:
@@ -322,7 +326,7 @@ Tutorium data are saved automatically as a JSON file `[JAR file location]/data/a
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, Tutorium will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, Tutorium will discard all data and start with an empty data file at the next run.  Hence, it is recommended to make a backup of the file before editing it.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -333,8 +337,8 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Tutorium home folder.
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Install the app in the other computer. Next, overwrite the data file created on launching the app with the file containing your Tutorium data.
 
 --------------------------------------------------------------------------------------------------------------------
 

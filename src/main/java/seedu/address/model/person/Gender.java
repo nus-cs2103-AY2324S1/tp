@@ -47,14 +47,7 @@ public class Gender {
             g = Genders.FEMALE;
         }
 
-        switch (g) {
-        case MALE:
-            return true;
-        case FEMALE:
-            return true;
-        default:
-            return false;
-        }
+        return g != Genders.INVALID;
     }
 
     @Override

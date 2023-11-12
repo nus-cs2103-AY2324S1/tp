@@ -54,18 +54,7 @@ public class SecLevel {
             level = SecLevels.SECONDARY_FOUR;
         }
 
-        switch (level) {
-        case SECONDARY_ONE:
-            return true;
-        case SECONDARY_TWO:
-            return true;
-        case SECONDARY_THREE:
-            return true;
-        case SECONDARY_FOUR:
-            return true;
-        default:
-            return false;
-        }
+        return level != SecLevels.INVALID;
     }
 
     /**
