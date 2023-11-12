@@ -241,11 +241,11 @@ Examples:
 
 Before `config #t/6 #a/5` is executed:
 
-<img alt="config before" src="images/config-before.png" width="800">
+<img alt="config before" src="images/config-before.png" width="700">
 
 After `config #t/6 #a/5` is executed successfully and `view s/A0247243A` is executed to view the first student's class information:
 
-<img alt="config success" src="images/config-success.png" width="800">
+<img alt="config success" src="images/config-success.png" width="700">
 
 Possible errors and their corresponding error messages:
 * If `TUTORIAL_COUNT` or `ASSIGNMENT_COUNT` is missing
@@ -320,7 +320,7 @@ Example:
 
 Before `load f/sample` is executed:
 
-<img alt="load before" src="images/load-before.png" width="800"> <br><br>
+<img alt="load before" src="images/load-before.png" width="700"> <br><br>
 
 After `load f/sample` is executed successfully:
 
@@ -419,10 +419,10 @@ Toggles between light and dark colour themes.
 Format: `theme`
 
 #### Dark theme
-<img alt="theme_dark" src="images/theme-dark.png" width="800" > <br><br>
+<img alt="theme_dark" src="images/theme-dark.png" width="700" > <br><br>
 
 #### Light theme
-<img alt="theme_light" src="images/theme-light.png" width="800" >
+<img alt="theme_light" src="images/theme-light.png" width="700" >
 
 [Back to Table of Contents](#table-of-contents)
 
