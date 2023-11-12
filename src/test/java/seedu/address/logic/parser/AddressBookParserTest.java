@@ -15,8 +15,22 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.CreateTagCommand;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.ExportCommand;
+import seedu.address.logic.commands.FilterCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListTCommand;
+import seedu.address.logic.commands.RemarkCommand;
+import seedu.address.logic.commands.SetCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -165,7 +179,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_createTag() throws ParseException {
         assertTrue(parser.parseCommand(CreateTagCommand.COMMAND_WORD + " t/dept software") instanceof CreateTagCommand);
-        assertTrue(parser.parseCommand(CreateTagCommand.COMMAND_WORD + " t/role developer t/dept software") instanceof CreateTagCommand);
+        assertTrue(parser.parseCommand(CreateTagCommand.COMMAND_WORD + " t/role developer t/dept software")
+                instanceof CreateTagCommand);
     }
 
     @Test

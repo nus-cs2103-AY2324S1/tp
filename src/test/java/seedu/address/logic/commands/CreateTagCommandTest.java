@@ -1,20 +1,7 @@
 package seedu.address.logic.commands;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.EventBook;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-
-import seedu.address.model.tag.UniqueTagList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalTags.TEST_TAG;
 import static seedu.address.testutil.TypicalTags.TEST_TAG_2;
@@ -24,14 +11,22 @@ import static seedu.address.testutil.TypicalTags.TEST_TAG_5;
 import static seedu.address.testutil.TypicalTags.TEST_TAG_6;
 import static seedu.address.testutil.TypicalTags.TEST_TAG_7;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.EventBook;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.tag.UniqueTagList;
+
 public class CreateTagCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new EventBook(), new UserPrefs());
-    private UniqueTagList uniqueTagList = new UniqueTagList();
     public static final String MESSAGE_DUPLICATE_TAG = "This tag already exists in the address book!";
     public static final String MESSAGE_FAILURE = "Oops! You've reached the maximum limit for categories";
-
-
+    private Model model = new ModelManager(getTypicalAddressBook(), new EventBook(), new UserPrefs());
+    private UniqueTagList uniqueTagList = new UniqueTagList();
     @BeforeEach
     public void clearTestData() {
         if (uniqueTagList.contains(TEST_TAG)) {

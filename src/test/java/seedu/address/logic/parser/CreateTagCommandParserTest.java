@@ -1,12 +1,14 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.CreateTagCommand;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 public class CreateTagCommandParserTest {
 
@@ -33,7 +35,8 @@ public class CreateTagCommandParserTest {
     public void parse_invalidArgsEmptyTag_throwsParseException() {
         // no leading and trailing whitespaces
         assertParseFailure(parser, " ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateTagCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, " t/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateTagCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " t/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                CreateTagCommand.MESSAGE_USAGE));
 
     }
 
@@ -49,8 +52,10 @@ public class CreateTagCommandParserTest {
 
     @Test
     public void parse_invalidArgsWithNoCategory_throwsParseException() {
-        assertParseFailure(parser, " t/tagname", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateTagCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " t/tagname", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                CreateTagCommand.MESSAGE_USAGE));
 
-        assertParseFailure(parser, " t/  \n    \t tagname", String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateTagCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " t/  \n    \t tagname", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                CreateTagCommand.MESSAGE_USAGE));
     }
 }

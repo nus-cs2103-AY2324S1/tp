@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.ParserUtil.*;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -15,7 +15,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Score;
+import seedu.address.model.person.StatusTypes;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -253,12 +258,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseSinglePrefixTags_collectionWithNonExistingTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseSinglePrefixTags(Arrays.asList(VALID_TAG_1 + VALID_TAG_2)));
+        assertThrows(ParseException.class, () -> ParserUtil.parseSinglePrefixTags(Arrays.asList(VALID_TAG_1
+                + VALID_TAG_2)));
     }
 
     @Test
     public void parseTags_collectionWIthInvalidTagsCategorySpecified_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList("employment " + VALID_TAG_1, "dept " + VALID_TAG_2)));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList("employment " + VALID_TAG_1, "dept "
+                + VALID_TAG_2)));
     }
 
     @Test
@@ -278,7 +285,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseTagCategories_collectionWithIncompleteAndCompleteTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTagCategories(Arrays.asList(VALID_TAG_2, "employment" + VALID_TAG_1)));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTagCategories(Arrays.asList(VALID_TAG_2, "employment"
+                + VALID_TAG_1)));
     }
 
 

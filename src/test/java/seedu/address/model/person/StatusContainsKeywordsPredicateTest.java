@@ -1,13 +1,16 @@
 package seedu.address.model.person;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.testutil.PersonBuilder;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.PersonBuilder;
 
 public class StatusContainsKeywordsPredicateTest {
 
@@ -39,7 +42,8 @@ public class StatusContainsKeywordsPredicateTest {
     @Test
     public void test_statusContainsKeywords_returnsTrue() {
         // One keyword
-        StatusContainsKeywordsPredicate predicate = new StatusContainsKeywordsPredicate(Collections.singletonList("interviewed"));
+        StatusContainsKeywordsPredicate predicate = new StatusContainsKeywordsPredicate(
+                Collections.singletonList("interviewed"));
         assertTrue(predicate.test(new PersonBuilder().withStatus("interviewed").build()));
 
         // Only one matching keyword
