@@ -18,15 +18,15 @@ Table of Contents
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `ManageHR.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `ManageHR.jar` from [here](https://github.com/AY2324S1-CS2103-T16-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your app.
+3. Copy the file to the folder you want to use as the _home folder_ for your app.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ManageHR.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ManageHR.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all employees.
@@ -39,7 +39,7 @@ Table of Contents
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -53,7 +53,7 @@ Table of Contents
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [d/Department]` can be used as `n/John Doe d/Investment` or as `n/John Doe`.
+  e.g. `n/NAME [d/Department]` can be used as `n/John Doe d/Investment` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[d/DEPARTMENTS]…​` can be used as ` ` (i.e. 0 times), `d/Investment`, `d/Sales d/Logistic` etc.
@@ -79,9 +79,9 @@ supervisors and subordinates.
 
 1. Only employees with `manager` role can be in charge of other employees.
 2. Each employee must either be `manager` and `subordinate` but not both.
-2. Both employees that are either `manager` or `subordinate` can have multiple `manager` in charge of them.
-3. An employee could have no designated "manager" responsible for overseeing them.
-4. A `manager` employee could not edit their `role` and `name` attribute when he or she is in charge of any subordinates.
+3. Both employees that are either `manager` or `subordinate` can have multiple `manager` in charge of them.
+4. An employee could have no designated "manager" responsible for overseeing them.
+5. A `manager` employee could not edit their `role` and `name` attribute when he or she is in charge of any subordinates.
 
 ### Usage Instructions
 
@@ -104,7 +104,7 @@ When editing an existing employee in ManageHR, you can also establish or modify 
     - The `MANAGER NAME` stated must correspond with an existing employee with the same name and is also a `manager`.
 
 #### Deleting an Existing Employee with Manager-Subordinate Relationships
-hen deleting an existing employee from ManageHR, you will need to account for the manager-subordinate relationships. Follow these steps:
+When deleting an existing employee from ManageHR, you will need to account for the manager-subordinate relationships. Follow these steps:
 1. The employee to be deleted must not be in charge of any employees.
     - If the employee to be deleted has employees under him, all the employees under said employee must be reassigned.
 
@@ -122,9 +122,9 @@ Example:
 
 Acceptable values for each parameter:
 
-| Paramters | Accepted input                                           |
-|-----------|----------------------------------------------------------|
-| command   | A command word present in ManageHR. Alternatively empty. |
+| Parameters | Accepted input                                           |
+|------------|----------------------------------------------------------|
+| command    | A command word present in ManageHR. Alternatively empty. |
 
 Expected outputs:
 
@@ -179,21 +179,11 @@ Description: Lists all employees currently stored
 
 Format: `list`
 
-Acceptable values for each parameter:
-
-| Parameters  | Accepted input |
-|-------------|----------------|
-| nil         | -              |
-
-Succeed:
-
-* Outcome: If the command is successful, it lists all employees and
-  displays a message "Listed all employees" along with a table of employee data as shown below.
+| Outcome     | Output                                                                                                                |
+|-------------|-----------------------------------------------------------------------------------------------------------------------|
+| **Success** | Lists all employees and displays a message "Listed all employees" along with a table of employee data as shown below. |
 
 ![Display from list Command](images/listDisplay.png)
-
-Fail:
-* Outcome: If the command format is incorrect, it displays a warning message "Unknown command."
 
 ### Editing an employee : `edit`
 
@@ -217,7 +207,7 @@ Finds people whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -235,7 +225,7 @@ Filters employees by prefix parameters.
 
 Format: `filter [n/NAME] [e/EMAIL] [a/ADDRESS] [s/SALARY] [l/LEAVE] [r/ROLE] [m/MANAGERNAME] [d/DEPARTMENT]`
 
-* The filter is case-sensetive. eg. `R&D` will not match `r&d`
+* The filter is case-sensitive. e.g. `R&D` will not match `r&d`
 * At least one of the optional fields must be provided.
 
 Examples:
@@ -285,7 +275,7 @@ Examples:
 Constraints:
 * [Manager-subordinate relationship](#deleting-an-existing-employee-with-manager-subordinate-relationships)
 
-### Fitering Employees : `filter`
+### Filtering Employees : `filter`
 Filters current employee list by constraints given. Displays all filtered employees at-a-glance.
 
 ### Exiting the program : `exit`
@@ -296,11 +286,11 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ManageHR data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+ManageHR data are saved automatically as a JSON file `[JAR file location]/data/managehr.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ManageHR will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
@@ -318,7 +308,7 @@ If your changes to the data file makes its format invalid, ManageHR will discard
 
 2. Locate the empty data file that the app creates on the new computer.
 
-3. Replace the empty data file with the file containing the data from your previous AddressBook home folder.
+3. Replace the empty data file with the file containing the data from your previous ManageHR home folder.
 
 Now, your data should be successfully transferred to the new computer.
 
