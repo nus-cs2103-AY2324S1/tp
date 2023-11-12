@@ -158,7 +158,7 @@ Tagging a student with `Tag` is facilitated by 3 commands:
 * `AddTagCommand` will add input tags to existing tags of the student.
 * `DeleteTagCommand` will delete input tags from the existing tags of the student.
 
-These commands will be executed based on the users input. The `TagCommandParser` will be responsible for parsing the user input and create the correct command object to execute.
+These commands will be executed based on the user's input. The `TagCommandParser` will be responsible for parsing the user input and create the correct command object to execute.
 Only 1 of the 3 commands will be executed per user input.
 
 Here is an example step by step of how the 3 different commands might be executed.
@@ -269,7 +269,7 @@ In order to implement `undo` and `redo` in Class Manager, `load` and `config` co
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+<puml src="diagrams/CommitActivityDiagram.puml" width="450" />
 
 #### Design considerations:
 
@@ -331,7 +331,7 @@ The `load` command is facilitated by `LoadCommand` and `LoadCommandParser`. `Loa
 1. The user inputs the `load` command.
 2. The `ClassManagerParser` processes the input and creates a new `LoadCommandParser`.
 3. The `LoadCommandParser` then calls ArgumentTokenizer#tokenize(String argString, Prefix... prefixes) to extract the file name. If there are duplicate prefixes, a ParseException would be thrown.
-4. The file name is then check to ensure that it is valid. If the file name is missing, null or contains a forward slash, a ParseException would be thrown.
+4. The file name is then checked to ensure that it is valid. If the file name is missing, null or contains a forward slash, a ParseException would be thrown.
 5. The `LoadCommandParser` then creates the `LoadCommand` based on the processed input.
 
 #### Design considerations:
@@ -360,18 +360,18 @@ The `config` command is facilitated by `ConfigCommand` and `ConfigCommandParser`
 1. The user inputs the `config` command.
 2. The `ClassManagerParser` processes the input and creates a new `ConfigCommandParser`.
 3. The `ConfigCommandParser` then calls ArgumentTokenizer#tokenize(String argString, Prefix... prefixes) to extract the tutorial count and assignment count. If there are duplicate prefixes, a ParseException would be thrown.
-4. The tutorial and assignment counts are then check to ensure that they are integers between 1 and 40 inclusive. If any of the counts are not valid, a ParseException would be thrown.
+4. The tutorial and assignment counts are then checked to ensure that they are integers between 1 and 40 inclusive. If any of the counts are not valid, a ParseException would be thrown.
 5. The `ConfigCommandParser` then creates the `ConfigCommand` based on the processed input.
 
 #### Design considerations:
 
-Initially in v1.3, `config` was implemented as a command that users could only execute once before they started using Class Manager. This allows `ClassDetails` to create fixed length arrays for `AssignmentTracker`, `AttendanceTracker` and `ClassParticipationTracker`. 
+Initially in v1.2, `config` was implemented as a command that users could only execute once before they started using Class Manager. This allows `ClassDetails` to create fixed length arrays for `AssignmentTracker`, `AttendanceTracker` and `ClassParticipationTracker`. 
 
-However, this implementation was changed in v1.4 to allow users to execute `config` multiple times. This allows users to reconfigure Class Manager if they have entered the wrong information previously. We decided to reset the class information of a student back to the default values of 0 for attendance, class participation and assignment grades, as it ensures a consistent implementation of `config` regardless of whether the new tutorial count and assignment count was smaller or larger than the previous configuration.
+However, this implementation was changed in v1.3 to allow users to execute `config` multiple times. This allows users to reconfigure Class Manager if they have entered the wrong information previously. We decided to reset the class information of a student back to the default values of 0 for attendance, class participation and assignment grades, as it ensures a consistent implementation of `config` regardless of whether the new tutorial count and assignment count was smaller or larger than the previous configuration.
 
 In addition, the tutorial and assignment count was limited to an integer between 1 and 40 inclusive in v1.4. This prevents division by zero bugs encountered in data visualisation, as well as Class Manager being unresponsive when the user enters a large number of tutorials and assignments.
 
-**Aspect: Number of times Class Manager can be configured:**
+**Aspect: Number of times Class Manager can be configured**
 
 * **Alternative 1 (current choice):** Class Manager can be configured multiple times.
   * Pros: Provides more flexibility to TAs as they may enter the wrong information when configuring.
@@ -379,6 +379,39 @@ In addition, the tutorial and assignment count was limited to an integer between
 * **Alternative 2:** Class Manager can only be configured once.
   * Pros: Ensures that Class Manager will not run into issues with data visualisation.
   * Cons: Unable to change the tutorial and assignment count of Class Manager after it has been configured.
+
+
+### Lookup feature
+
+The `lookup` command allows TAs to search and filter for students in the Class Manager. This allows TAs to quickly find the student they are looking for, and do subsequent operations such as editing class information for student(s). This also provides more flexibility to TAs as they may want to search for students based on different criteria.
+
+#### How it is implemented
+
+<puml src="diagrams/LookupCommand.puml" alt="Lookup Command" />
+
+The `lookup` command is facilitated by `LookupCommand` and `LookupCommandParser`. 
+
+`LookupCommandParser` will parse the user input and create a corresponding `StudentContainsKeywordsPredicate`, which implements the `Predicate<Student>` _interface_.
+
+`LookupCommand` will then call `Model#updateFilteredStudentList()` to update the student list by utilizing the `StudentContainsKeywordsPredicate` to test whether a student satisfies the given criteria or not. The filtered list will then be displayed in the UI.
+
+#### Parsing user input
+
+1. The user inputs the `lookup` command.
+2. The `ClassManagerParser` processes the input and creates a new `LookupCommandParser`.
+3. The `LookupCommandParser` then calls `ArgumentTokenizer#tokenize(String argString, Prefix... prefixes)` to extract the criteria provided by the user. If there are duplicate prefixes, a ParseException would be thrown.
+4. A `StudentContainsKeywordsPredicate` is then created based on the processed input.
+5. The `LookupCommandParser` then creates the `LookupCommand` based on the processed input.
+
+#### Design considerations:
+
+**Aspect: Criteria for lookup**
+* **Alternative 1 (current choice):** Only basic student information can be used as criteria for lookup.
+    * Pros: Easy to implement.
+    * Cons: Users may want to use other types of student information as criteria for lookup.
+* **Alternative 2:** Allows users to use any type of student information (Including class information) as criteria for lookup.
+    * Pros: Users have more flexibility when searching for students.
+    * Cons: There will be more coupling between classes.
 
 
 ### Class Details feature
@@ -416,6 +449,7 @@ The tracker classes will be stored in the `ClassDetails` class, which will be co
 These tracker classes will inherit from a `tracker` *interface*. They will also support the following operations:
 * `getPercentage()` - Returns the average grade of the student for the specific tracker class. For example, the average
 tutorial attendance percentage, or the average assignment score.
+* `getJson()` - Returns a Json Friendly representation of the tracker.
 
 Each of these tracker classes will be able to be initialized with a specific size, which will be the number of tutorials
 or assignment grade.
