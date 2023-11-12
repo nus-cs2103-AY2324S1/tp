@@ -405,16 +405,18 @@ The following sequence diagram shows how unpaidAll command works:
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                | So that I can…​                                                       |
-| ------ |--------------------------------------------|---------------------------------------------|-----------------------------------------------------------------------|
-| `* * *` | tutor                                      | view a list of all tutees                   |                                                                       |
+| Priority | As a …​                                    | I want to …​                                | So that I can…​                                                        |
+| ------ |--------------------------------------------|---------------------------------------------|------------------------------------------------------------------------|
+| `* * *` | tutor                                      | view a list of all tutees                   |                                                                        |
 | `* *`  | tutor                                      | view a list tutees on a specified day       | so that I can be reminded if I have any classes on that particular day |
-| `* * *` | tutor                                      | view the specific details of a single tutee |                                                                       |
-| `* * *` | tutor                                      | add a new tutee                             |                                                                       |
-| `* * *` | tutor                                      | edit their details                          | account for changes in their information e.g. change in address       |
-| `* *`  | tutor                                      | remove tutees from the list                 | keep track of tutees that I have stopped teaching                     |
-| `* *`  | tutor                                      | mark students that have already paid        | keep track of students' payment statuses                              |
-| `* *`  | tutor                                      | check all students who haven't paid         | easily remind students who haven't paid                               |
+| `* * *` | tutor                                      | view the specific details of a single tutee |                                                                        |
+| `* * *` | tutor                                      | add a new tutee                             |                                                                        |
+| `* * *` | tutor                                      | edit their details                          | account for changes in their information e.g. change in address        |
+| `* *`  | tutor                                      | remove tutees from the list                 | keep track of tutees that I have stopped teaching                      |
+| `* *`  | tutor                                      | mark students that have already paid        | keep track of students' payment statuses                               |
+| `* *`  | tutor                                      | check all students who haven't paid         | easily remind students who haven't paid                                |
+| `* *`  | tutor                                      | calculate my total monthly revnue           | better financially plan for my tutoring business                       |
+
 
 *{More to be added}*
 
@@ -539,6 +541,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User views the list of tutees.
 2.  User requests mark all the tutees in the current list as not paid.
 3.  System marks all the tutee in the list as not paid.
+
+    Use case ends.
+
+**Use case: UC07 - Get monthly revenue**
+
+**MSS**
+
+1. User requests for monthly revenue.
+2. User receives monthly revenue figure.
 
     Use case ends.
 
