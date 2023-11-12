@@ -231,4 +231,39 @@ public class PersonTest {
         assertEquals(aliceWithPolicy.cloneWithoutPolicy(),
                 defaultPolicyAlice);
     }
+
+    @Test
+    public void dummyCompareDatesTest() {
+        Policy defaultPolicy = new Policy(new Company(Company.DEFAULT_VALUE),
+                new PolicyNumber(PolicyNumber.DEFAULT_VALUE),
+                new PolicyDate(PolicyDate.DEFAULT_VALUE),
+                new PolicyDate(PolicyDate.DEFAULT_VALUE));
+        Person defaultPolicyAlice = new Person(ALICE.getName(),
+                ALICE.getPhone(),
+                ALICE.getEmail(),
+                ALICE.getAddress(),
+                ALICE.getTags(),
+                ALICE.getNric(),
+                ALICE.getLicencePlate(),
+                ALICE.getRemark(),
+                defaultPolicy);
+        assertTrue(defaultPolicyAlice.comparePolicyDates() == 0);
+    }
+
+    @Test
+    public void defaultPolicyDateComparison() {
+        Policy filledPolicy = new Policy(new Company(VALID_COMPANY_BOB),
+                new PolicyNumber(VALID_POLICY_NO_AMY), new PolicyDate(VALID_POLICY_ISSUE_DATE_AMY),
+                new PolicyDate(VALID_POLICY_EXPIRY_DATE_AMY));
+        Person aliceWithPolicy = new Person(ALICE.getName(),
+                ALICE.getPhone(),
+                ALICE.getEmail(),
+                ALICE.getAddress(),
+                ALICE.getTags(),
+                ALICE.getNric(),
+                ALICE.getLicencePlate(),
+                ALICE.getRemark(),
+                filledPolicy);
+        assertTrue(aliceWithPolicy.comparePolicyDates() > 0);
+    }
 }
