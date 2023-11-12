@@ -121,6 +121,8 @@ The `Model` component,
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores a `UniqueReminderList` object that represents the reminders and a `ReminderScheduler` that periodically updates the reminders. This is exposed to the outside as a `ReadOnlyReminderList` objects.
+* stores a `Dashboard` object that represents the statistics of the address book.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
@@ -184,8 +186,10 @@ It is currently implemented as a `DashboardCommand` that is executed by the `Log
 - Percentage of person with `INTERESTED` outcome.
 - Percentage of person with `NOT_INTERESTED` outcome.
 
-#### Design Considerations
+The following sequence diagram shows how the dashboard feature is currently implemented.
+![Ui](images/UiSequenceDiagram.png)
 
+#### Design Considerations
 
 ### \[Proposed\] Undo/redo feature
 
@@ -288,21 +292,34 @@ To exit out of the profile view, the user can enter the `list` command, which wi
 
 _{Explain here how the data archiving feature will be implemented}_
 
-### \[Proposed\] Reminder feature
+### Reminder feature
 
 #### Proposed Implementation
 
-The proposed Reminder mechanism is facilitated by `Reminder` and `UniqueReminderList`.
+The proposed Reminder mechanism is facilitated by `Reminder` and `UniqueReminderList` as shown below
 
-Step 1. The user launches the application and the User's data such as interactions and leads are loaded. `Reminder`s are derived from the `Person.lead` and `Person.interactions` data, with the `Reminder` date being X + the date of the latest `Interaction`, and X is dependant on the `Lead`'s `LeadCategory`. These initial `Reminder`s will be stored in the `UniqueReminderList`.
+![ReminderClassDiagram](images/ReminderClassDiagram.png)
 
-Step 2. The user executes `interaction 1 o/INTERESTED Thinking of giving it a shot` command to add an interaction to the 1st person in the address book. The `interaction` command will make `UniqueReminderList` dirty; The `Reminder` should later be updated to the latest `Interaction` date + X. Note this change should also happen when `EditCommand` is executed since the `Person.lead` or `Person.name` might have been changed.
+Step 1. The user launches the application and the User's data such as interactions and leads are loaded. `Reminder` is derived from the `Person.lead` and `Person.interactions` data, with the `Reminder` date being X + the date of the latest `Interaction`, and X is dependant on the `Lead`'s `LeadCategory`. These initial list of `Reminder` will be stored in the `UniqueReminderList`.
 
-Step 3. When displaying the `Reminder`'s, the `UniqueReminderList` will then be updated and should be sorted by date, and the `Reminder` that is due the soonest should be displayed first. `UniqueReminderList` should also be updated daily with `ReminderScheduler` class.
+Step 2. The user executes `interaction 1 o/INTERESTED Thinking of giving it a shot` command to add an interaction to the 1st person in the address book. The `Reminder` should later be updated to the latest `Interaction` date + X. Note this change should also happen when `EditCommand` is executed since the `Person.lead` or `Person.name` might have been changed.
+
+Step 3. When displaying the `Reminder`'s, the `UniqueReminderList` will then be updated and should be sorted by date, and the `Reminder` that is due the soonest should be displayed first. 
+
+Step 4. `UniqueReminderList` should also be updated daily with `ReminderScheduler` class. This will ensure that if the user leaves the dashboard open for prolonged periods of time, the reminders will be able to sync up to account for the time passed
 
 #### Design considerations:
 
 **Aspect: How Reminders executes:**
+
+* **Alternative 1 (current choice):** Updates the reminderList only when the dashboard is being viewed
+    * Pros: No need to update every single time a command is executed, increasing performance
+    * Cons: In the future, if we want to stay on the dashboard view when other commands are executed, we would require the setting of the "DirtyFlag" in order to update the reminderList
+
+* **Alternative 2:** Updates Reminders when commands are executed
+    * Pros: Reminders will always be up to date
+    * Cons: Will require more processing power and might slow down the application
+
 
 --------------------------------------------------------------------------------------------------------------------
 
