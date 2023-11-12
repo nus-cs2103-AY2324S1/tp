@@ -224,6 +224,67 @@ The following activity diagram summarizes what happens when the `DeleteTagComman
   * Pros: Users will be made aware of their mistake. Does not waste time on correcting the command if the command was intentional.
   * Cons: Harder to implement. 
 
+### Notes feature
+This feature allows users to add and remove `Note` to any `Person` in the contact list. It provides an easy way for users to record additional information about the contacts.
+
+#### Overview:
+The adding and removing of `Note` begins with the parsing of the `AddNoteCommand` and `DeleteNoteCommand` using the `AddNoteCommandParser` and `DeleteNoteCommandParser` respectively. The `AddNoteCommand` and `DeleteNoteCommand` will then be executed by the `Model`.
+
+The activity diagram below shows the action sequence of adding a `Note` to a contact.
+
+<puml src="diagrams/note/NoteSequenceDiagram.puml"/>
+
+<box type="info" seamless>
+
+**Note:** The sequence diagram for removing `Note` is similar to adding `Note`. Simply replace `AddCommandParser` with `DeleteCommandParser`, `AddNoteCommandParser` with `DeleteNoteCommandParser`, and `AddNoteCommand` with `DeleteNoteCommand`.
+
+</box>
+
+##### Implementing `AddNoteCommandParser`
+Implements the `Parser` interface, parsing three main arguments:
+1. `contactId`: the one-based index of the contact shown in the GUI.
+2. `noteTitle`: the title of the note to add.
+3. `noteContent`: the content of the note to add.
+
+`noteTitle` and `noteContent` are then used to create the `Note` object. After that, `contactId` and the `Note` object created are then used to create the `AddNoteCommand` object.
+
+For the details of how parsing works, see the section on [Logic Component](#logic-component).
+
+##### Implementing `DeleteNoteCommandParser`
+Implements the `Parser` interface, parsing two main arguments:
+1. `contactId`: the one-based index of the contact shown in the GUI.
+2. `noteId`: the one-based index of the note shown in the GUI.
+
+`contactId` and `noteId` are then used to create the `DeleteNoteCommand` object.
+
+For the details of how parsing works, see the section on [Logic Component](#logic-component).
+
+##### Implementing `AddNoteCommand`
+`AddNoteCommand` extends from the abstract class `AddCommand`, inheriting `add` as the primary command word and having `note` as its secondary command word. It internally stores `contactId` (the index of the contact) and `toAdd` (the `Note` to add) which is given by the [parser](#implementing-addnotecommandparser).
+
+When the command is executed, it carries out the following operations:
+1. Using the `contactId`, it will first check if the `person` exist in the address book by calling `Model`'s `findPersonByUserFriendlyId` method.
+    * A `CommandException` is thrown if the person does not exist.
+2. The note is then added to the person's note list by calling the `addNote` method in `Person`.
+3. Lastly a `CommandResult` with the success message is returned.
+
+The following activity diagram summarizes what happens when `AddNoteCommand` is executed:
+
+<puml src="diagrams/note/AddNoteActivityDiagram.puml"/>
+
+##### Implementing `DeleteNoteCommand`
+`DeleteNoteCommand` extends from the abstract class `DeleteCommand`, inheriting `delete` as the primary command word and having `note` as its secondary command word. It internally stores `contactId` (the index of the contact) and `noteIdToDelete` (the `Note` to delete) which is given by the [parser](#implementing-deletenotecommandparser).
+
+When the command is executed, it carries out the following operations:
+1. Using the `contactId`, it will first check if the `person` exist in the address book by calling `Model`'s `findPersonByUserFriendlyId` method.
+    * A `CommandException` is thrown if the person does not exist.
+2. Using the `noteIdToDelete`, it will delete the note from the person in the address book by calling `Person`'s `removeNoteByUserFriendlyId` method.
+    * A `CommandException` is thrown if the note does not exist.
+3. Lastly a `CommandResult` with the success message is returned.
+
+The following activity diagram summarizes what happens when the `DeleteNoteCommand` is executed:
+
+<puml src="diagrams/note/DeleteNoteActivityDiagram.puml"/>
 
 ### Enhanced help feature
 
