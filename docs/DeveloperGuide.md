@@ -728,3 +728,17 @@ testers are expected to do more *exploratory* testing.
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+Given below is the evidence for challenges faced and efforts required for our project.
+
+**Challenges & Effort**
+1. AB3 deals with only one entity type, while our project involves two entity types: `Musician` and `Band`. 
+   * We need to create relevant classes of the new entity `Band` in all components (`UI`, `Logic`, `Model`, `Storage`) 
+   * We need to establish a composition relationship between  `Band` and `Musician`. 
+
+2. We have two UI panels to display current musicians and current bands. We need to make sure that all operations, performed standalone or in group, must maintain a synchronized state between the two panels and be intuitive to the users.
+3. Due to the addition in complexity of commands and the addition of two entities in our project, there are much more error-handling to do. We need to customize error messages as well as write many tests.
