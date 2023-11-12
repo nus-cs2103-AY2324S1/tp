@@ -210,7 +210,7 @@ The following sequence diagram shows how the edit command works.
 
 ### List by day feature
 The `ListByDayCommand` extends the `ListCommand` class. It is initialised with a `DayPredicate` and updates
->>>>>>> master
+
 the `FilteredPersonList` to only display Persons whose `Day` field matches the specified input.
 
 The following sequence diagram shows how the list by day command works.
@@ -422,11 +422,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `TuitionConnect` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - View all tutees**
+**Use case: UC01 - List all tutees**
 
 **MSS**
 
-1.  User requests to view all tutees.
+1.  User requests to list all tutees.
 2.  System shows all tutees.
 	
     Use case ends.
@@ -484,13 +484,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 2a. The tutee that the user is trying to delete does not exist in the list.
     - 2a1. System informs that user does not exist.
 
-**Use case: UC04 - Editing a tutee**
+**Use case: UC04 - Edit a tutee**
 
 **MSS**
 
 1.  User views the list of tutees.
 2.  User requests to edit a tutee.
-3.  System edit the tutee
+3.  System edits the tutee.
 
     Use case ends.
 
@@ -517,7 +517,41 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case resumes at 2.
 
-**Use case: UC05 - Mark a tutee as paid**
+**Use case: UC05 - Find a tutee**
+
+**MSS**
+
+1. User requests to find a tutee.
+2. System finds the tutee.
+
+**Extensions**
+
+- 2a. The user inputs more than one word for name field.
+  - 2a1. System informs that name can only take one word.
+
+    Use case resumes at 2.
+  
+- 2b. The user inputs more than one word for subject field.
+  - 2b1. System informs that subject can only take one word.
+
+    Use case resumes at 2.
+  
+- 2c. The user inputs more than one word for name field and one word for subject fields.
+  - 2c1. System informs that name can only take one word.
+
+    Use case resumes at 2.
+  
+- 2d. The user inputs one word for name field and more than one word for subject field.
+  - 2d1. System informs that subject can only take one word.
+
+    Use case resumes at 2.
+  
+- 2e. The user inputs more than one word for both name and subject fields.
+  - 2e1. System informs that name can only take one word.
+
+    Use case resumes at 2.
+  
+**Use case: UC06 - Mark a tutee as paid**
 
 **MSS**
 
@@ -532,7 +566,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 2a. The tutee that the user is trying to mark as paid does not exist in the list.
     - 2a1. System informs that user does not exist.
 
-**Use case: UC06 - Reset all tutees in the list to not paid**
+**Use case: UC07 - Reset all tutees in the list to not paid**
 
 **MSS**
 
@@ -541,6 +575,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  System marks all the tutee in the list as not paid.
 
     Use case ends.
+
+
 
 ### Non-Functional Requirements
 
@@ -624,7 +660,7 @@ testers are expected to do more *exploratory* testing.
 
 ## **Planned Enhancements**
 
-### Batch Processing for Paid Command:
+### Batch Processing for Paid Command
 
 Reason: This enhancement allows users to mark multiple persons as paid in a single command, improving efficiency.
 
@@ -635,3 +671,9 @@ Idea: Modify the paid command parser to accept a list of person identifiers (e.g
 Reason: Introduce a scheduling feature within the unpaid command to set future unpaid statuses for individuals. This would be beneficial for scenarios where payments should automatically lapse after a set period.
 
 Idea: Add a scheduling mechanism within the command execution to mark individuals as unpaid after a specified future date or duration.
+
+### Find using multiple keywords
+
+Reason: To create a more sophisticated find feature for the best results. This enhancement allows users to get more specific results tailored to their criteria.
+
+Idea: Modify the NameContainsKeywordPredicate and SubjectContainsKeywordPredicate to accept multiple word inputs (e.g. "find n/Alex Yeoh sb/Maths Chemistry). 
