@@ -31,11 +31,12 @@ Given below are my contributions to the project.
   * User Guide:
     * Added documentation for the features `read`, `nm`, `pm`, `cm`, and `view leave`.
   * Developer Guide:
-    * Added implementation details of the `read` feature.
+    * Added implementation details of the `read`, `viewleave` feature.
+    * Update new UI class diagram and description
+    * Added use case for `viewleave` feature
       
 * **Community**:
-  * Review teammate's PR and merge\
- 
+  * Review teammate's PR and merge
   * Reported bugs and suggestions for other teams in the class
     
 * **Tools**:
