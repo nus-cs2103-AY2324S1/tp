@@ -79,7 +79,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete EID1234-5678`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -122,7 +122,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete EID1234-5678` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -816,8 +816,6 @@ Given below is an example usage scenario for the command.
 **Step 3**: Employees will be filtered based on whether they are on leave on the specified date.
 * The Employee List will be updated to contain only employees which have leaves taken on the specified date.
 
-
-_{more aspects and alternatives to be added}_
 
 ### Overtime feature
 
@@ -1845,6 +1843,7 @@ One of the things that we are most proud of is the bettering of the UI. Though t
 Another feature we are proud of is our `report` feature that allows our users to generate reports as txt files for each employee. While it might not contain a lot of information yet, we believe that it was a great starting point considering the time-constraint we had for this project, and we plan to extend and further develop this feature, improving the experience for our users.
 
 Overall, we are proud of our project, and we believe that we have done our best with all the constraints and challenges we faced. We are happy with the result and believe that our product will meet the needs of our target audience.
+
 
 ## Planned Enhancements
 
