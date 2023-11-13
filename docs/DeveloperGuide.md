@@ -72,7 +72,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/uml/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `MusicianListPanel`, `BandListPanel`,  `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -81,7 +81,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Musician` object residing in the `Model`.
 
 ### Logic component
 
@@ -121,12 +121,12 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Musician` objects (which are contained in a `UniqueMusicianList` object).
+* stores the currently 'selected' `Musician` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Musician>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Musician` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Musician` needing their own `Tag` objects.<br>
 
 <img src="images/uml/BetterModelClassDiagram.png" width="450" />
 
@@ -155,7 +155,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Add Musician Feature
-The user can add a new musician to the storage through the `add` Command.
+The user can add a new musician to the storage through the `add` command.
 
 Command: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​  [i/INSTRUMENT]…​  [g/GENRE]…​`
 
@@ -164,9 +164,12 @@ Command: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​  [i/INSTRUMENT]…​ 
     1. A success message is returned.
     2. The musician panel immediately reflects the updated musician list with the new musician just added. The band panel shows all bands.
 
-* **Failed Scenario (when musician already exists in storage):**
+* **Failed Scenario:**
     1. An error message is returned.
     2. In the musician panel, it shows all musicians. In the band panel, it shows all bands.
+
+* **Possible Failing Condition:**
+  1. When the musician already exists in storage (same name), or has duplicate information (phone or email) with another musician who already exists in storage.a
 
 #### Implementation
 Within the `execute()` method of the command, a check is done to ensure that the model does not currently contain any musician with the same name, phone, or email. This is achieved through the use of `Model::hasMusician` and `Model::hasDuplicateInfo` method.
@@ -185,7 +188,7 @@ Command: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​  [i/INSTR
 * **Failed Scenario:**
     1. An error message is returned.
     2. In the musician panel, it shows all musicians. In the band panel, it shows all bands.
-* **Failing condition:** When edited information leads to duplicate name, phone or email with another musician already exists in storage.
+* **Possible failing condition:** When edited information leads to duplicate name, phone or email with another musician already exists in storage.
 
 #### Implementation
 ![EditMusicianActivityDiagram.png](images/uml/EditMusicianActivityDiagram.png)
@@ -289,7 +292,7 @@ Command: `addb n/BANDNAME`
 
 #### Implementation
 Within the execute method of the command, a check is done to ensure that the model does not currently contain the band
-to be added. This is achieved through the use of `Model#hasBand(Band)` method.
+to be added. This is achieved through the use of `Model::hasBand` method.
 
 
 ### Add Musician To Band Feature
@@ -318,6 +321,8 @@ Command: `deleteb [INDEX]`
     1. An error message is returned.
     2. In the musician panel, it shows all musicians. In the band panel, it shows all bands.
 
+* **Possible failing condition:**
+  1. Band index is invalid
 #### Implementation
 ![DeleteBandActivityDiagram.png](images/uml/DeleteBandActivityDiagram.png)
 Within the execute method of the command, a check is done to ensure that the index specified is not equal to or greater 
@@ -325,7 +330,7 @@ than the size of the list containing all Bands.
 
 
 ### Find Band Members Feature
-**Command**:`findb [BANDNAME]`
+**Command**:`findb BANDNAME`
 
 This feature lists all the musicians in band with name of `BANDNAME`. 
 
@@ -337,6 +342,8 @@ This feature lists all the musicians in band with name of `BANDNAME`.
 * **Failed Scenario (when band name is invalid):** 
     1. An error message is returned.
     2. In the musician panel, it shows all musicians. In the band panel, it shows all bands.
+
+
 #### Implementation
 The following activity diagram shows the logic flow of this feature.
 ![FindBandActivityDiagram.png](images/uml/FindBandActivityDiagram.png)
@@ -393,7 +400,9 @@ Command: `editb INDEX [n/NAME] [g/GENRE]…​`
 * **Failed Scenario:**
     1. An error message is returned.
     2. In the musician panel, it shows all musicians. In the band panel, it shows all bands.
-* **Failing condition:** When edited information leads to duplicate name, phone or email with another musician already exists in storage.
+  
+* **Possible failing condition:** 
+  1. When there is another band with the same edited band name.
 
 #### Implementation
 ![EditBandActivityDiagram.png](images/uml/EditBandActivityDiagram.png)
@@ -712,6 +721,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a musician with only compulsory fields
    1. Test case: `add n/Hans Leonhart p/98765432 e/hansl@music.com`
+   
         **Expected:** New Musician is added to the Musician List with the details
 
 2. Adding a musician with optional fields
@@ -793,7 +803,7 @@ Given below is the evidence for challenges faced and efforts required for our pr
    * We need to create relevant classes of the new entity `Band` in all components (`UI`, `Logic`, `Model`, `Storage`) 
    * We need to establish a composition relationship between  `Band` and `Musician`. 
 
-2. We have two UI panels to display current musicians and current bands. We need to make sure that all operations, performed standalone or in group, must maintain a synchronized state between the two panels and be intuitive to the users.
+2. We have two UI panels to display current musicians and current bands. We need to make sure that all operations, performed standalone or in group, must maintain a synchronized state between the two panels and do not cause confusion to the users.
 3. Due to the addition in complexity of commands and the addition of two entities in our project, there are much more error-handling to do. We need to customize error messages as well as write many tests.
 
 
@@ -814,3 +824,7 @@ Given below are the planned enhancements for our project.
 5. The current `findb` command is a bit confusing because its main use case is to list all members in a specific band. It has little relevance to finding bands containing a specific keyword. We plan to rename this command to `showmembers` to make it more intuitive to the user.
 
 6. The application currently allows unlimited input length for the name and tag of musicians and bands, e.g. name, email. As a result, the GUI truncates the unusually long input. We plan to limit the length of fields to 100 characters to prevent the UI from breaking.
+
+7. The current design of UI is not intuitive enough for the user. There are times when the two panels are not synced. For example, when the user is filtering musician panel, the band panel remains idle. We propose to improve the UI design by having a home page, a musician page and a band page. By switching between pages, redundant information will be hidden and the user will be able to view only the information of interest.
+
+8. The current allowable musician name and band name are restrictive. Special characters is not allowed but we understand that both musician name and band name may contain special characters, like "/". We plan to support this in the future.
