@@ -201,13 +201,19 @@ The `HelpCommand` displays help for the current command.
   - expected: Displays a link to the user guide.
   - Shows the same content as the user guide.
 
-The following activity diagram summarizes the possible outputs of the help command.
+The following sequence diagram summarizes the possible outputs of the help command.
+![](images/helpSequenceDiagram.png)
+
 
 **Design considerations:**
 
 Basic functionality of referring to the online user guide should always be retained.
 However, due to a host of reasons, the online guide may not be available to our target user.
 As such, offline help is required, by the means of a quick reference with the `help <command>` function.
+
+This help function is intended as a quick reference guide to the user, rather than a comprehensive reference document.
+It is intended to simulate `man` pages in linux, with very simple guides as to how command syntax should be applied.
+Examples are also provided for the quick reference of the user, and are intended to work on the default ManageHR sample.
 
 When presenting users with help, syntax and examples need to be provided to the user.
 The Copy URL button used for the general help can be repurposed to support the quick copying of an example command.
@@ -219,6 +225,50 @@ Upon the addition of a new Command, registration has to occur in ManageHRParser.
 This involves adding a new case to both the parser, and the command use checker.
 By default, this should return the `MESSAGE_USAGE` and `MESSAGE_EXAMPLE`.
 `MESSAGE_EXAMPLE` should be something that can be copy-pasted into the command line.
+
+**Mechanism of Action:**
+
+In order for the help window to be called, the mechanism of the window had to be modified.
+Previously the window just defocused itself upon the user clicking away from it.
+This method results in the window being static, and built upon the launch of ManageHR, with
+limited abilities to re-designate text within the window.
+
+This was solved by closing the window, before re-building and re-focusing the window at every stage.
+Upon typing the help command with no arguments, the default text would change to a link to the User Guide,
+as well as a quick link to copy said user guide.
+After typing a help command together with a Command to discover help for, the help window is closed,
+before text is regenerated, and the button's label is modified to copy examples. The text is then changed to the
+`MESSAGE_USAGE` of the Command, and the text is modified to "Copy Example".
+The button is now configured to copy `MESSAGE_EXAMPLE`, for the quick reference of the user.
+
+
+### Delete feature
+The delete feature allows employees to be deleted with just a simple index.
+-   `delete <index>`
+    - example: `delete 4`
+    - expected: Deletes employee with the current index of 4.
+    - Shows successful deletion of employee.
+
+A sequence diagram of this deletion is shown below.
+![](images/DeleteEmployeeSequenceDiagram.png)
+
+**Design Considerations:**
+
+The delete command is an essential part of the CRUD process. As such, this is the first few items to implement in ManageHR.
+Initially with barebones functions, each employee effectively had an ID assigned on when they joined ManageHR.
+However, this design has changed, due to the implementation of the filter function, where IDs are no longer unique.
+ManageHR now has to be aware of the state of the program, if there are any filters active, and the IDs and people being shown to the user.
+
+The deletion of an employee is relatively easy compared to the deletion of a department. The removal of an employee does not do any updates
+to the department, as there is only unidirectional dependencies of an employee to a department. No update is required to any departments upon the departure of the last employee.
+
+
+**Mechanism of Action:**
+
+This feature is implemented by first modifying the ID state to use ParserUtil to host the current state, and get the current index's validity at the given state.
+Following that, the parser is able to extract out the appropriate employee to refer to. A DeleteCommand is then created, ready to execute.
+Upon calling execute, the Model returns a filtered employee list, and the deletion is done by the model.
+On completion, a command result is thrown back with the appropriate success/failure values.
 
 
 ### Filter feature
