@@ -42,10 +42,20 @@ public class LookupCommand extends Command {
 
     private final StudentContainsKeywordsPredicate predicate;
 
+    /**
+     * Creates a LookupCommand to lookup students with the specified {@code StudentContainsKeywordsPredicate}
+     * @param predicate The predicate to filter the students.
+     */
     public LookupCommand(StudentContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
+    /**
+     * Executes the lookup command to display certain students.
+     * @param model {@code Model} which the command should operate on.
+     * @param commandHistory The command history to record this command.
+     * @return A {@code CommandResult} with the feedback message of the operation result.
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) {
         requireNonNull(model);
