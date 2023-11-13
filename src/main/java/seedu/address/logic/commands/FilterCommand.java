@@ -8,7 +8,7 @@ import seedu.address.model.Model;
 import seedu.address.model.appointment.AppointmentDateMatchesPredicate;
 
 /**
- * Filters and lists appointments in the address book that match the specified date.
+ * Filters and lists appointments in the wellnus storage that match the specified date.
  * Date matching is case insensitive.
  */
 public class FilterCommand extends Command {
