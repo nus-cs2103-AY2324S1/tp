@@ -46,7 +46,7 @@
           <Label fx:id="nric" styleClass="cell_medium_label" text="\$nric" />
           </HBox>
         </VBox>
-        <VBox prefWidth="300" minWidth="200">
+        <VBox prefWidth="300" minWidth="175">
           <Label styleClass="cell_big_label" text="Contacts" />
           <Label fx:id="phone" styleClass="cell_small_label" text="\$phone"/>
           <Label fx:id="email" styleClass="cell_small_label" text="\$email"/>
