@@ -19,14 +19,17 @@ import seedu.classmanager.storage.JsonAdaptedClassDetails;
  */
 public class ClassDetails {
 
-    public static final String MESSAGE_CONSTRAINTS = "Class number should be in the form 'T[Integer]',"
-            + " such as 'T11'";
-    public static final String MESSAGE_INVALID_GRADE = "Grade should be between 0 and 100";
-    public static final String MESSAGE_INVALID_ASSIGNMENT_NUMBER = "Assignment index should an integer "
+    public static final String MESSAGE_CONSTRAINTS = "Class Number must begin with a capital 'T', "
+            + "followed by any number of characters, such as 'T11' or 'TG12'. It must also not be blank.";
+    public static final String MESSAGE_INVALID_GRADE = "Grade should be an integer between 0 and 100.";
+    public static final String MESSAGE_INVALID_ASSIGNMENT_NUMBER = "Assignment index should be an integer "
+            + "between 1 and %s.";
+
+    public static final String MESSAGE_INVALID_TUTORIAL_INDEX = "Tutorial index should be an integer "
             + "between 1 and %s";
-    public static final String MESSAGE_INVALID_TUTORIAL_INDEX = "Tutorial index should an "
-            + "integer(without decimal places) "
-            + "between 1 and %s";
+
+    public static final String MESSAGE_INVALID_PARTICIPATION = "Participation should be "
+            + "either 'true' or 'false'.";
     public static final String MESSAGE_UNEQUAL_LENGTH = "The number of tutorial sessions and "
             + "attendance records should be equal.";
     public static final String MESSAGE_RECONFIGURE = " Please reconfigure Class Manager before "
@@ -56,6 +59,7 @@ public class ClassDetails {
     public ClassDetails(String classNumber) {
         requireNonNull(classNumber);
         checkArgument(isValidClassDetails(classNumber), MESSAGE_CONSTRAINTS);
+        classNumber = classNumber.toUpperCase().trim();
         this.classNumber = classNumber;
         attendanceTracker = new AttendanceTracker(tutorialCount);
         classParticipationTracker = new ClassParticipationTracker(tutorialCount);

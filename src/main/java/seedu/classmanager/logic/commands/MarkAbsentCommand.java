@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_INDEX;
-import static seedu.classmanager.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.logic.CommandHistory;
@@ -23,7 +22,7 @@ public class MarkAbsentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a student's attendance as absent.\n"
             + "Parameters: "
             + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER "
-            + PREFIX_TUTORIAL_INDEX + "TUTORIAL_SESSION\n"
+            + PREFIX_TUTORIAL_INDEX + "TUTORIAL_INDEX\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_STUDENT_NUMBER + "A0245234A "
             + PREFIX_TUTORIAL_INDEX + "1";
@@ -43,6 +42,13 @@ public class MarkAbsentCommand extends Command {
         this.targetStudentNumber = targetStudentNumber;
     }
 
+    /**
+     * Marks a specified student's attendance as absent.
+     * @param model {@code Model} which the command should operate on.
+     * @param commandHistory The command history to record this command.
+     * @return A {@code CommandResult} with the feedback message of the operation result.
+     * @throws CommandException If an error occurs during command execution.
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory)
             throws CommandException {
@@ -57,8 +63,9 @@ public class MarkAbsentCommand extends Command {
 
         markedStudent.markAbsent(this.index);
         model.setStudent(studentToMark, markedStudent);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        model.setSelectedStudent(markedStudent);
+        if (model.isSelectedStudent(studentToMark)) {
+            model.setSelectedStudent(markedStudent);
+        }
         model.commitClassManager();
 
         return new CommandResult(MESSAGE_MARK_SUCCESS);

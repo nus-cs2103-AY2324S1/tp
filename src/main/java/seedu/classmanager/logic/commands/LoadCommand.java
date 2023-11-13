@@ -26,7 +26,7 @@ public class LoadCommand extends Command {
     public static final String COMMAND_WORD = "load";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Load student information from an existing JSON file in the data folder. "
-            + "The file becomes the new default save file. "
+            + "The file becomes the new default save file.\n"
             + "Parameters: " + PREFIX_FILE + "FILE_NAME\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_FILE + "export-v1";
     public static final String MESSAGE_LOAD_SUCCESS = "The file %1$s.json has successfully loaded!\n"
@@ -63,6 +63,15 @@ public class LoadCommand extends Command {
             throw new CommandException(String.format(MESSAGE_FILE_NOT_FOUND, fileName));
         }
         requireNonNull(model);
+        ReadOnlyClassManager newData = getNewData();
+
+        model.setClassManagerFilePath(filePath);
+        model.loadReset(newData);
+
+        return new CommandResult(String.format(MESSAGE_LOAD_SUCCESS, fileName), false, false, true, false);
+    }
+
+    private ReadOnlyClassManager getNewData() throws CommandException {
         ClassManagerStorage tempClassManagerStorage = new JsonClassManagerStorage(filePath);
         Optional<ReadOnlyClassManager> classManagerOptional;
         ReadOnlyClassManager newData;
@@ -72,10 +81,7 @@ public class LoadCommand extends Command {
         } catch (DataLoadingException e) {
             throw new CommandException(String.format(MESSAGE_FILE_CANNOT_LOAD, fileName));
         }
-        model.setClassManagerFilePath(filePath);
-        model.reset(newData);
-
-        return new CommandResult(String.format(MESSAGE_LOAD_SUCCESS, fileName), false, false, true, false);
+        return newData;
     }
 
     /**
@@ -111,7 +117,7 @@ public class LoadCommand extends Command {
 
     /**
      * Returns the hashcode of the file path and file name.
-     * @return
+     * @return Hashcode of the file path and file name.
      */
     @Override
     public int hashCode() {

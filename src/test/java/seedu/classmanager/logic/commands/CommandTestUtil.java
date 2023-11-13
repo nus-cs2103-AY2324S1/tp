@@ -73,10 +73,13 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+    public static final String NONEXISTENT_STUDENT_NUMBER1 = "A00000A";
+    public static final String NONEXISTENT_STUDENT_NUMBER_DESC = " " + PREFIX_STUDENT_NUMBER
+        + NONEXISTENT_STUDENT_NUMBER1;
 
     public static final EditCommand.EditStudentDescriptor DESC_AMY;
     public static final EditCommand.EditStudentDescriptor DESC_BOB;
-    public static final StudentNumber NONEXISTENT_STUDENT_NUMBER = new StudentNumber("A0000000A");
+    public static final StudentNumber NONEXISTENT_STUDENT_NUMBER = new StudentNumber(NONEXISTENT_STUDENT_NUMBER1);
 
     static {
         DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)

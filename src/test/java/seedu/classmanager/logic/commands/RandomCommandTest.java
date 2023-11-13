@@ -1,5 +1,6 @@
 package seedu.classmanager.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.classmanager.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -48,6 +49,14 @@ public class RandomCommandTest {
         RandomCommand negativeRandomCommand = new RandomCommand(-1);
         assertCommandFailure(negativeRandomCommand, model,
             RandomCommand.MESSAGE_INVALID_NUM_OF_STUDENTS, commandHistory);
+    }
+
+    @Test
+    public void generateRandomInt_success() {
+        int length = 1;
+        int upper = 1;
+        Integer[] actual = RandomCommand.generateRandomInt(length, upper);
+        assertEquals(upper - 1, actual[0]);
     }
 
     @Test

@@ -30,13 +30,32 @@ public class ClassDetailsTest {
 
     @Test
     public void constructor_invalidClassDetails_throwsIllegalArgumentException() {
-        String invalidClassDetails = "11";
+        String firstInvalidClassDetails = "11";
+        assertThrows(IllegalArgumentException.class, () -> new ClassDetails(firstInvalidClassDetails));
+        assertThrows(IllegalArgumentException.class, () -> new ClassDetails(firstInvalidClassDetails,
+                new AttendanceTracker(1),
+                new AssignmentTracker(1),
+                new ClassParticipationTracker(1)));
+
+        String secondInvalidClassDetails = "11A";
+        assertThrows(IllegalArgumentException.class, () -> new ClassDetails(secondInvalidClassDetails));
+        assertThrows(IllegalArgumentException.class, () -> new ClassDetails(secondInvalidClassDetails,
+                new AttendanceTracker(1),
+                new AssignmentTracker(1),
+                new ClassParticipationTracker(1)));
+
+    }
+
+    @Test
+    public void constructor_emptyClassDetails_throwsIllegalArgumentException() {
+        String invalidClassDetails = "";
         assertThrows(IllegalArgumentException.class, () -> new ClassDetails(invalidClassDetails));
         assertThrows(IllegalArgumentException.class, () -> new ClassDetails(invalidClassDetails,
                 new AttendanceTracker(1),
                 new AssignmentTracker(1),
                 new ClassParticipationTracker(1)));
     }
+
 
     @Test
     public void constructor_validClassDetails_success() {
@@ -56,11 +75,13 @@ public class ClassDetailsTest {
         // invalid class number
         assertFalse(ClassDetails.isValidClassDetails("")); // empty string
         assertFalse(ClassDetails.isValidClassDetails("11")); // doesn't start with T
+        assertFalse(ClassDetails.isValidClassDetails("11ABC")); // doesn't start with T
+        assertFalse(ClassDetails.isValidClassDetails("A123456C")); // doesn't start with T
 
         // valid class numbers
-        assertTrue(ClassDetails.isValidClassDetails("T01"));
         assertTrue(ClassDetails.isValidClassDetails("T11"));
-        assertTrue(ClassDetails.isValidClassDetails("T02"));
+        assertTrue(ClassDetails.isValidClassDetails("T2222"));
+        assertTrue(ClassDetails.isValidClassDetails("TG10"));
     }
 
     @Test

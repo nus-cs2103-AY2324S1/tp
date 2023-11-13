@@ -2,7 +2,6 @@ package seedu.classmanager.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_INDEX;
-import static seedu.classmanager.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class MarkAbsentAllCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the attendance of all displayed students as "
             + "absent.\n"
             + "Parameters: "
-            + PREFIX_TUTORIAL_INDEX + "TUTORIAL_SESSION\n"
+            + PREFIX_TUTORIAL_INDEX + "TUTORIAL_INDEX\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TUTORIAL_INDEX + "1";
     private final Index index;
@@ -36,10 +35,27 @@ public class MarkAbsentAllCommand extends Command {
         this.index = index;
     }
 
+    /**
+     * Marks all displayed students' attendance as absent.
+     * @param model {@code Model} which the command should operate on.
+     * @param commandHistory The command history to record this command.
+     * @return A {@code CommandResult} with the feedback message of the operation result.
+     * @throws CommandException If an error occurs during command execution.
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
+        markAbsentAll(model);
+        model.commitClassManager();
+        return new CommandResult(MESSAGE_MARK_SUCCESS);
+    }
 
+    /**
+     * Helper function to mark all displayed students' attendance as absent.
+     * @param model {@code Model} which the command should operate on.
+     * @throws CommandException If an error occurs during command execution.
+     */
+    private void markAbsentAll(Model model) throws CommandException {
         List<Student> lastShownList = model.getFilteredStudentList();
 
         for (Student studentToMark : lastShownList) {
@@ -50,10 +66,6 @@ public class MarkAbsentAllCommand extends Command {
                 model.setSelectedStudent(markedStudent);
             }
         }
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        model.commitClassManager();
-
-        return new CommandResult(MESSAGE_MARK_SUCCESS);
     }
 
     @Override

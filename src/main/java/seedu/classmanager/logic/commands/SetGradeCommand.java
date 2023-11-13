@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
-import static seedu.classmanager.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.commons.util.ToStringBuilder;
@@ -48,6 +47,13 @@ public class SetGradeCommand extends Command {
         this.grade = grade;
     }
 
+    /**
+     * Sets the grade of a specified student for a certain assignment.
+     * @param model {@code Model} which the command should operate on.
+     * @param commandHistory The command history to record this command.
+     * @return A {@code CommandResult} with the feedback message of the operation result.
+     * @throws CommandException If an error occurs during command execution.
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory)
             throws CommandException {
@@ -61,8 +67,9 @@ public class SetGradeCommand extends Command {
         Student gradedStudent = studentToGrade.copy();
         gradedStudent.setGrade(assignmentIndex, grade);
         model.setStudent(studentToGrade, gradedStudent);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        model.setSelectedStudent(gradedStudent);
+        if (model.isSelectedStudent(studentToGrade)) {
+            model.setSelectedStudent(gradedStudent);
+        }
         model.commitClassManager();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentNumber)

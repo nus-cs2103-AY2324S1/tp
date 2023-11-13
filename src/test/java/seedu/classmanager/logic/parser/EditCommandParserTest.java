@@ -63,19 +63,29 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
+        // invalid old student number
         assertParseFailure(parser, INVALID_STUDENT_NUMBER + STUDENT_NUMBER_DESC_AMY,
-                MESSAGE_INVALID_FORMAT); // invalid 'old' student number
+                StudentNumber.MESSAGE_CONSTRAINTS);
 
+        // invalid name
         assertParseFailure(parser, VALID_STUDENT_NUMBER_BOB + INVALID_NAME_DESC,
-                Name.MESSAGE_CONSTRAINTS); // invalid name
+                Name.MESSAGE_CONSTRAINTS);
+
+        // invalid phone
         assertParseFailure(parser, VALID_STUDENT_NUMBER_BOB + INVALID_PHONE_DESC,
-                Phone.MESSAGE_CONSTRAINTS); // invalid phone
+                Phone.MESSAGE_CONSTRAINTS);
+
+        // invalid email
         assertParseFailure(parser, VALID_STUDENT_NUMBER_BOB + INVALID_EMAIL_DESC,
-                Email.MESSAGE_CONSTRAINTS); // invalid email
+                Email.MESSAGE_CONSTRAINTS);
+
+        // invalid new student number
         assertParseFailure(parser, VALID_STUDENT_NUMBER_BOB + INVALID_STUDENT_NUMBER_DESC,
-                StudentNumber.MESSAGE_CONSTRAINTS); // invalid 'new' student number
+                StudentNumber.MESSAGE_CONSTRAINTS);
+
+        // invalid class number
         assertParseFailure(parser, VALID_STUDENT_NUMBER_BOB + INVALID_CLASS_NUMBER_DESC,
-                ClassDetails.MESSAGE_CONSTRAINTS); // invalid class number
+                ClassDetails.MESSAGE_CONSTRAINTS);
 
         // invalid phone followed by valid email
         assertParseFailure(parser, VALID_STUDENT_NUMBER_BOB + INVALID_PHONE_DESC + EMAIL_DESC_AMY,
@@ -152,25 +162,19 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_multipleRepeatedFields_failure() {
-        // More extensive testing of duplicate parameter detections is done in
-        // AddCommandParserTest#parse_repeatedNonTagValue_failure()
-
         // valid followed by invalid
         String targetStudentNumber = VALID_STUDENT_NUMBER_BOB;
         String userInput = targetStudentNumber + INVALID_PHONE_DESC + PHONE_DESC_BOB;
-
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // invalid followed by valid
         userInput = targetStudentNumber + PHONE_DESC_BOB + INVALID_PHONE_DESC;
-
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // multiple valid fields repeated
         userInput = targetStudentNumber + PHONE_DESC_AMY + STUDENT_NUMBER_DESC_AMY + CLASS_NUMBER_DESC_AMY
                 + EMAIL_DESC_AMY + PHONE_DESC_AMY + STUDENT_NUMBER_DESC_AMY + EMAIL_DESC_AMY
                 + PHONE_DESC_BOB + EMAIL_DESC_BOB;
-
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_STUDENT_NUMBER));
 
@@ -178,7 +182,6 @@ public class EditCommandParserTest {
         userInput = targetStudentNumber + INVALID_PHONE_DESC + INVALID_STUDENT_NUMBER_DESC
                 + INVALID_EMAIL_DESC + INVALID_PHONE_DESC
                 + INVALID_STUDENT_NUMBER_DESC + INVALID_EMAIL_DESC;
-
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_STUDENT_NUMBER));
     }

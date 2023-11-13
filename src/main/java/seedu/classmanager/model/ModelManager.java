@@ -23,7 +23,7 @@ public class ModelManager implements Model {
 
     private final VersionedClassManager versionedClassManager;
     private final UserPrefs userPrefs;
-    private FilteredList<Student> filteredStudents;
+    private final FilteredList<Student> filteredStudents;
 
     /**
      * Initializes a ModelManager with the given Class Manager and userPrefs.
@@ -102,6 +102,7 @@ public class ModelManager implements Model {
     public void toggleColorTheme() {
         userPrefs.toggleColorTheme();
     }
+
     //=========== ClassManager ================================================================================
 
     @Override
@@ -144,13 +145,20 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Student getSelectedStudent() {
+        return versionedClassManager.getSelectedStudent();
+    }
+
+    @Override
     public void setSelectedStudent(Student student) {
+        requireNonNull(student);
         versionedClassManager.setSelectedStudent(student);
     }
 
     @Override
     public boolean isSelectedStudent(Student student) {
-        return !getSelectedStudent().isEmpty() && getSelectedStudent().get(0).equals(student);
+        requireNonNull(student);
+        return student.isSameStudent(getSelectedStudent());
     }
     //=========== Filtered Student List Accessors =============================================================
 
@@ -164,17 +172,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Student> getSelectedStudent() {
-        return versionedClassManager.getSelectedStudent();
+    public ObservableList<Student> getObservableSelectedStudent() {
+        return versionedClassManager.getObservableSelectedStudent();
     }
 
     @Override
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
-        if (!filteredStudents.isEmpty()) {
-            versionedClassManager.setSelectedStudent(filteredStudents.get(0));
-        }
     }
 
     //@@author Cikguseven-reused
@@ -219,16 +224,24 @@ public class ModelManager implements Model {
     public void commitClassManager() {
         versionedClassManager.commit();
     }
+    //@@author
 
     /**
      * Resets the history of the model after a load command.
      */
     @Override
-    public void reset(ReadOnlyClassManager classManager) {
-        this.versionedClassManager.reset(classManager);
+    public void loadReset(ReadOnlyClassManager classManager) {
+        this.versionedClassManager.loadReset(classManager);
         versionedClassManager.resetSelectedStudent();
     }
-    //@@author
+
+    /**
+     * Resets the history of the model after a config command.
+     */
+    @Override
+    public void configReset() {
+        this.versionedClassManager.configReset();
+    }
 
     /**
      * Resets the selected student after a clear command.

@@ -177,7 +177,7 @@ public class LogicManagerTest {
     @Test
     public void getSelectedStudent_success() {
         logic.setSelectedStudent(AMY);
-        assertEquals(AMY, logic.getSelectedStudent().get(0));
+        assertEquals(AMY, logic.getObservableSelectedStudent().get(0));
     }
 
     @Test
@@ -274,7 +274,7 @@ public class LogicManagerTest {
     private void assertCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) throws IOException {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
-        // Inject LogicManager with an ClassManagerStorage that throws the IOException e when saving
+        // Inject LogicManager with a ClassManagerStorage that throws the IOException e when saving
         JsonClassManagerStorage classManagerStorage = new JsonClassManagerStorage(prefPath) {
             @Override
             public void saveClassManager(ReadOnlyClassManager classManager, Path filePath)
@@ -332,7 +332,7 @@ public class LogicManagerTest {
     private void assertLoadCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
-        // Inject LogicManager with an ClassManagerStorage that throws the IOException e when saving
+        // Inject LogicManager with a ClassManagerStorage that throws the IOException e when saving
         JsonClassManagerStorage classManagerStorage = new JsonClassManagerStorage(prefPath) {
             @Override
             public void saveClassManager(ReadOnlyClassManager classManager, Path filePath)
@@ -360,7 +360,7 @@ public class LogicManagerTest {
         }
         ModelManager expectedModel = new ModelManager();
         expectedModel.setClassManagerFilePath(filePath);
-        expectedModel.reset(newData);
+        expectedModel.loadReset(newData);
         assertCommandFailure(loadCommand, CommandException.class, expectedMessage, expectedModel);
         assertHistoryCorrect(loadCommand);
     }

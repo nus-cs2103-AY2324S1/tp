@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.classmanager.logic.commands.CommandTestUtil.NONEXISTENT_STUDENT_NUMBER;
 import static seedu.classmanager.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.classmanager.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.classmanager.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static seedu.classmanager.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.classmanager.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 
@@ -44,7 +43,7 @@ public class DeleteCommandTest {
         expectedModel.commitClassManager();
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel, commandHistory);
-        assertTrue(model.getSelectedStudent().isEmpty());
+        assertEquals(null, model.getSelectedStudent());
     }
 
     @Test
@@ -102,8 +101,6 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(studentToDelete.getStudentNumber());
         Model expectedModel = new ModelManager(model.getClassManager(), new UserPrefs());
 
-        showStudentAtIndex(model, INDEX_SECOND_STUDENT);
-        studentToDelete = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         expectedModel.deleteStudent(studentToDelete);
         expectedModel.commitClassManager();
 

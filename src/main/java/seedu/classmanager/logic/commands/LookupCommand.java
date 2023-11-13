@@ -29,23 +29,33 @@ public class LookupCommand extends Command {
             + "as a list with index numbers.\n"
             + "Parameters: "
             + "[" + PREFIX_CLASS_NUMBER + "CLASS_NUMBER] "
-            + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER] "
             + "[" + PREFIX_TAG + "TAG]\n"
             + "Examples (Comma separated): "
-            + COMMAND_WORD + " " + PREFIX_NAME + "li, "
-            + COMMAND_WORD + " " + PREFIX_TAG + "t11";
+            + COMMAND_WORD + " " + PREFIX_NAME + "alex david , "
+            + COMMAND_WORD + " " + PREFIX_CLASS_NUMBER + "T11";
 
     public static final String MESSAGE_NO_MATCH = "No match found!";
 
     private final StudentContainsKeywordsPredicate predicate;
 
+    /**
+     * Creates a LookupCommand to lookup students with the specified {@code StudentContainsKeywordsPredicate}
+     * @param predicate The predicate to filter the students.
+     */
     public LookupCommand(StudentContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
+    /**
+     * Executes the lookup command to display certain students.
+     * @param model {@code Model} which the command should operate on.
+     * @param commandHistory The command history to record this command.
+     * @return A {@code CommandResult} with the feedback message of the operation result.
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) {
         requireNonNull(model);

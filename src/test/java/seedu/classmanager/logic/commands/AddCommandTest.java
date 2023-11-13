@@ -186,7 +186,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Student> getSelectedStudent() {
+        public ObservableList<Student> getObservableSelectedStudent() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -229,11 +229,15 @@ public class AddCommandTest {
         }
 
         @Override
-        public void reset(ReadOnlyClassManager classManager) {
+        public void loadReset(ReadOnlyClassManager classManager) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void configReset() {
             throw new AssertionError("This method should not be called.");
         }
         //@@author
-
         @Override
         public void resetSelectedStudent() {
             throw new AssertionError("This method should not be called.");
@@ -241,6 +245,11 @@ public class AddCommandTest {
 
         @Override
         public Student getStudent(StudentNumber studentNumber) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Student getSelectedStudent() {
             throw new AssertionError("This method should not be called.");
         }
     }

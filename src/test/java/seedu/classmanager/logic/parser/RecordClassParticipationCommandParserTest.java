@@ -65,8 +65,7 @@ public class RecordClassParticipationCommandParserTest {
                 ClassDetails.getMessageInvalidTutorialIndex()); // invalid tut
 
         assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + VALID_TUT_DESC + INVALID_PARTICIPATION_DESC,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        RecordClassParticipationCommand.MESSAGE_USAGE)); // invalid participation
+                ClassDetails.MESSAGE_INVALID_PARTICIPATION); // invalid participation
     }
 
     @Test

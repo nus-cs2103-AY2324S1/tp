@@ -105,16 +105,29 @@ public interface Model {
      */
     Student getStudent(StudentNumber studentNumber);
 
+    /**
+     * Gets the selected student.
+     */
+    Student getSelectedStudent();
+
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();
 
     /** Returns view of selected student. */
-    ObservableList<Student> getSelectedStudent();
+    ObservableList<Student> getObservableSelectedStudent();
 
-    /** Sets a student to be selected to view class details. */
+    /**
+     * Sets a student to be selected to view class details.
+     *
+     * @param student to be set as the selected student.
+     */
     void setSelectedStudent(Student student);
 
-    /** Check if the Student is the selected student. */
+    /**
+     * Check if the Student is the selected student.
+     *
+     * @param student to check if is the selected student.
+     */
     boolean isSelectedStudent(Student student);
 
     /**
@@ -150,12 +163,17 @@ public interface Model {
      * Saves the current Class Manager state for undo/redo.
      */
     void commitClassManager();
+    //@@author
 
     /**
      * Resets the history of the model after a load command.
      */
-    void reset(ReadOnlyClassManager classManager);
-    //@@author
+    void loadReset(ReadOnlyClassManager classManager);
+
+    /**
+     * Resets the history of the model after a config command.
+     */
+    void configReset();
 
     /**
      * Resets the selected student after a clear command.

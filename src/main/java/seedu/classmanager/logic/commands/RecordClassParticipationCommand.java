@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_PARTICIPATION;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_INDEX;
-import static seedu.classmanager.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import seedu.classmanager.commons.core.index.Index;
 import seedu.classmanager.commons.util.ToStringBuilder;
@@ -48,6 +47,13 @@ public class RecordClassParticipationCommand extends Command {
         this.hasParticipated = hasParticipated;
     }
 
+    /**
+     * Records the class participation of a specified student in a certain tutorial session.
+     * @param model {@code Model} which the command should operate on.
+     * @param commandHistory The command history to record this command.
+     * @return A {@code CommandResult} with the feedback message of the operation result.
+     * @throws CommandException If an error occurs during command execution.
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory)
             throws CommandException {
@@ -61,8 +67,9 @@ public class RecordClassParticipationCommand extends Command {
         Student markedStudent = studentToMark.copy();
         markedStudent.markClassParticipation(this.tutorialIndex, this.hasParticipated);
         model.setStudent(studentToMark, markedStudent);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        model.setSelectedStudent(markedStudent);
+        if (model.isSelectedStudent(studentToMark)) {
+            model.setSelectedStudent(markedStudent);
+        }
         model.commitClassManager();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentNumber)

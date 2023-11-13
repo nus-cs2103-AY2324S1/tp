@@ -27,8 +27,8 @@ public class TagCommand extends Command {
             + ": Edits the tags of the student identified by the student number.\n"
             + "Existing tags will be overwritten by the input.\n"
             + "Use /add to add or /delete to delete tags without overwriting all tags.\n"
-            + "Parameters: s/STUDENT_NUMBER (exists in Class Manager) [/add] [/delete] t/[TAG]\n"
-            + "Example: " + COMMAND_WORD + " s/A1234567N /add t/smart.";
+            + "Parameters: s/STUDENT_NUMBER [/add] [/delete] t/[TAG]\n"
+            + "Example: " + COMMAND_WORD + " s/A1234567N /add t/smart";
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Added following tags to Student %1$s:\n";
     public static final String MESSAGE_DELETE_TAG_SUCCESS = "Removed following tags from Student %1$s:\n";
     public static final String MESSAGE_REPLACE_ALL_TAG_SUCCESS = "Replace all tags of Student %1$s with:\n";
@@ -49,6 +49,13 @@ public class TagCommand extends Command {
         this.tags = tags;
     }
 
+    /**
+     * Override the existing tags of a specified student with the current set of tags.
+     * @param model {@code Model} which the command should operate on.
+     * @param commandHistory The command history to record this command.
+     * @return A {@code CommandResult} with the feedback message of the operation result.
+     * @throws CommandException If an error occurs during command execution.
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         List<Student> lastShownList = model.getFilteredStudentList();

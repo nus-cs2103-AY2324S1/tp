@@ -35,7 +35,7 @@ public class ClassManager implements ReadOnlyClassManager {
     public ClassManager() {}
 
     /**
-     * Creates an ClassManager using the Students in the {@code toBeCopied}
+     * Creates a ClassManager using the Students in the {@code toBeCopied}
      */
     public ClassManager(ReadOnlyClassManager toBeCopied) {
         this();
@@ -58,6 +58,10 @@ public class ClassManager implements ReadOnlyClassManager {
     public void resetData(ReadOnlyClassManager newData) {
         requireNonNull(newData);
         setStudents(newData.getStudentList());
+        resetSelectedStudent();
+        if (newData.getSelectedStudent() != null) {
+            setSelectedStudent(newData.getSelectedStudent());
+        }
     }
 
     //// student-level operations
@@ -78,6 +82,13 @@ public class ClassManager implements ReadOnlyClassManager {
     public Student getStudent(StudentNumber studentNumber) {
         requireNonNull(studentNumber);
         return students.getStudent(studentNumber);
+    }
+
+    /**
+     * Returns the selected student.
+     */
+    public Student getSelectedStudent() {
+        return students.getSelectedStudent();
     }
 
     /**
@@ -143,8 +154,8 @@ public class ClassManager implements ReadOnlyClassManager {
     }
 
     @Override
-    public ObservableList<Student> getSelectedStudent() {
-        return students.getSelectedStudent();
+    public ObservableList<Student> getObservableSelectedStudent() {
+        return students.getObservableSelectedStudent();
     }
 
     /**

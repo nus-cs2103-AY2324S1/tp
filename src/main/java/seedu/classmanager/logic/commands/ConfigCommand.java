@@ -36,8 +36,6 @@ public class ConfigCommand extends Command {
             + "information:\n"
             + "Tutorial Count: %1$d\n"
             + "Assignment Count: %2$d\n";
-    public static final String MESSAGE_CONFIG_FAILED = "Class Manager has failed to be configured.\n"
-            + "Please try entering the config command again.\n";
 
     private final int tutorialCount;
     private final int assignmentCount;
@@ -59,28 +57,31 @@ public class ConfigCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) {
-        try {
-            requireNonNull(model);
-            ClassDetails.setTutorialCount(tutorialCount);
-            ClassDetails.setAssignmentCount(assignmentCount);
-            model.setTutorialCount(tutorialCount);
-            model.setAssignmentCount(assignmentCount);
-            // This will display the class details of the first student before the configuration is done
-            model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-            List<Student> allStudentList = model.getFilteredStudentList();
-            for (Student student : allStudentList) {
-                ClassDetails newClassDetails = new ClassDetails(student.getClassNumber());
-                Student editedStudent = new Student(student.getName(), student.getPhone(), student.getEmail(),
-                        student.getStudentNumber(), newClassDetails, student.getTags(), student.getComment());
-                model.setStudent(student, editedStudent);
-            }
-            // This will display the class details of the first student after the configuration is done
-            if (!allStudentList.isEmpty()) {
-                model.setSelectedStudent(allStudentList.get(0));
-            }
-            return new CommandResult(String.format(MESSAGE_CONFIG_SUCCESS, tutorialCount, assignmentCount));
-        } catch (Exception e) {
-            return new CommandResult(MESSAGE_CONFIG_FAILED);
+        requireNonNull(model);
+        ClassDetails.setTutorialCount(tutorialCount);
+        ClassDetails.setAssignmentCount(assignmentCount);
+        model.setTutorialCount(tutorialCount);
+        model.setAssignmentCount(assignmentCount);
+
+        // This will display the class details of the first student before the configuration is done
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        List<Student> allStudentList = model.getFilteredStudentList();
+        updateClassInformation(model, allStudentList);
+
+        // Clears the view panel after resetting class details of students
+        model.resetSelectedStudent();
+        model.commitClassManager();
+        model.configReset();
+
+        return new CommandResult(String.format(MESSAGE_CONFIG_SUCCESS, tutorialCount, assignmentCount));
+    }
+
+    private static void updateClassInformation(Model model, List<Student> allStudentList) {
+        for (Student student : allStudentList) {
+            ClassDetails newClassDetails = new ClassDetails(student.getClassNumber());
+            Student editedStudent = new Student(student.getName(), student.getPhone(), student.getEmail(),
+                    student.getStudentNumber(), newClassDetails, student.getTags(), student.getComment());
+            model.setStudent(student, editedStudent);
         }
     }
 
@@ -117,6 +118,10 @@ public class ConfigCommand extends Command {
                 && assignmentCount == e.assignmentCount;
     }
 
+    /**
+     * Returns the hashcode of the {@code ConfigCommand}.
+     * @return Hashcode of the {@code ConfigCommand}.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(tutorialCount, assignmentCount);

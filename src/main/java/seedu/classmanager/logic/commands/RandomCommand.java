@@ -1,6 +1,7 @@
 package seedu.classmanager.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.classmanager.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashSet;
 import java.util.List;
@@ -35,6 +36,13 @@ public class RandomCommand extends Command {
         this.numOfStudents = numOfStudents;
     }
 
+    /**
+     * Selects a specific number of students randomly from the list of displayed students.
+     * @param model {@code Model} which the command should operate on.
+     * @param commandHistory The command history to record this command.
+     * @return A {@code CommandResult} with the feedback message of the operation result.
+     * @throws CommandException If an error occurs during command execution.
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
@@ -44,24 +52,34 @@ public class RandomCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_NUM_OF_STUDENTS);
         }
 
-        Random random = new Random();
-        HashSet<Integer> distinctInt = new HashSet<>();
-
-        while (distinctInt.size() < numOfStudents) {
-            int i = random.nextInt(lastShownList.size());
-            distinctInt.add(i);
-        }
-
-        Integer[] randomInt = distinctInt.toArray(new Integer[0]);
+        Integer[] randomInt = generateRandomInt(numOfStudents, lastShownList.size());
 
         StringBuilder result = new StringBuilder(MESSAGE_RANDOM_SUCCESS);
-
         for (Integer i : randomInt) {
             Student s = lastShownList.get(i);
             result.append(s.getName()).append(" ").append(s.getStudentNumber()).append("\n");
         }
 
         return new CommandResult(result.toString());
+    }
+
+    /**
+     * Generates an array of distinct non-negative random integers.
+     *
+     * @param size the size of the array.
+     * @param upper the upper bound.
+     */
+    public static Integer[] generateRandomInt(int size, int upper) {
+        requireAllNonNull(size, upper);
+        assert upper >= 0 && size >= 0;
+
+        HashSet<Integer> distinctInt = new HashSet<>();
+        Random random = new Random();
+        while (distinctInt.size() < size) {
+            int i = random.nextInt(upper);
+            distinctInt.add(i);
+        }
+        return distinctInt.toArray(new Integer[0]);
     }
 
     @Override

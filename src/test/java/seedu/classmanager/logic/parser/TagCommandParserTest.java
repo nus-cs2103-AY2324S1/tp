@@ -42,32 +42,31 @@ public class TagCommandParserTest {
         // no Student Number specified
         assertParseFailure(parser, TAG_EMPTY, MESSAGE_INVALID_FORMAT);
 
-        // no field specified
+        // no tag specified
         assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY,
             MESSAGE_INVALID_FORMAT);
 
-        // no index and no field specified
-        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
-
+        // no student number and no field specified
+        assertParseFailure(parser, " ", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_invalidArgs_failure() {
         // student number not starting with "A"
-        assertParseFailure(parser, "s/B2103818N" + TAG_EMPTY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " s/B2103818N" + TAG_EMPTY, StudentNumber.MESSAGE_CONSTRAINTS);
 
         // invalid arguments
-        assertParseFailure(parser, "A2103818N some random tag", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " A2103818N some random tag", MESSAGE_INVALID_FORMAT);
 
         // invalid prefix being parsed
-        assertParseFailure(parser, "s/A2103818N /t label", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " s/A2103818N /t label", MESSAGE_INVALID_FORMAT);
 
         // invalid action identifier
         assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + " /asd " + TAG_EMPTY,
             TagCommand.MESSAGE_INVALID_ACTION_IDENTIFIER);
 
         // duplicate prefix
-        assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + " /add /delete " + TAG_EMPTY,
+        assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + " /add /delete" + TAG_EMPTY,
             Messages.getErrorMessageForDuplicatePrefixes(PREFIX_WILDCARD));
     }
 

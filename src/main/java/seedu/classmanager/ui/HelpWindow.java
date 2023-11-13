@@ -15,7 +15,7 @@ import seedu.classmanager.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://ay2324s1-cs2103t-t11-1.github.io/tp/UserGuide.html";
+    public static final String USER_GUIDE_URL = "https://ay2324s1-cs2103t-t11-1.github.io/tp/UserGuide.html";
     public static final String COMMAND_TABLE = "Useful Commands:\n"
             + "Configure Class Manager - config #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT\n"
             + "Open help window - help\n\n"
@@ -24,6 +24,8 @@ public class HelpWindow extends UiPart<Stage> {
             + "Exit Class Manager - exit\n"
             + "View command history - history\n"
             + "List all students - list\n"
+            + "Undo previous command - undo\n"
+            + "Redo previous command - redo\n"
             + "Toggle theme - theme\n\n"
             + "Core Commands with Parameters:\n"
             + "Add - add s/STUDENT_NUMBER n/NAME p/PHONE_NUMBER e/EMAIL c/CLASS_NUMBER [t/TAG]…\n"
@@ -38,14 +40,12 @@ public class HelpWindow extends UiPart<Stage> {
             + "Present All - present-all tut/TUTORIAL_INDEX\n"
             + "Absent All - absent-all tut/TUTORIAL_INDEX\n"
             + "Random - random NUMBER_OF_STUDENTS\n"
-            + "Record Class participation - class-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX "
-            + "part/PARTICIPATION_LEVEL\n"
+            + "Record Class participation - class-part s/STUDENT_NUMBER tut/TUTORIAL_INDEX part/PARTICIPATION\n"
             + "Set Grade - grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE\n"
             + "Tag - tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…\n"
             + "View - view s/STUDENT_NUMBER\n";
 
-    public static final String HELP_MESSAGE = COMMAND_TABLE + "\nRefer to the user guide: " + USERGUIDE_URL;
-
+    public static final String HELP_MESSAGE = COMMAND_TABLE + "\nRefer to the user guide: " + USER_GUIDE_URL;
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
@@ -124,7 +124,7 @@ public class HelpWindow extends UiPart<Stage> {
     private void copyUrl() {
         final Clipboard clipboard = Clipboard.getSystemClipboard();
         final ClipboardContent url = new ClipboardContent();
-        url.putString(USERGUIDE_URL);
+        url.putString(USER_GUIDE_URL);
         clipboard.setContent(url);
     }
 }

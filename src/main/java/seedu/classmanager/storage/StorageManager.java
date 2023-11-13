@@ -1,3 +1,6 @@
+//@@author Cikguseven-reused
+//Refactored from AddressBook-Level 3 (https://github.com/se-edu/addressbook-level3)
+// Not supposed to own code in file.
 package seedu.classmanager.storage;
 
 import java.io.IOException;
@@ -16,9 +19,9 @@ import seedu.classmanager.model.UserPrefs;
  */
 public class StorageManager implements Storage {
 
-    private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private ClassManagerStorage classManagerStorage;
-    private UserPrefsStorage userPrefsStorage;
+    private static Logger logger = LogsCenter.getLogger(StorageManager.class);
+    private final ClassManagerStorage classManagerStorage;
+    private final UserPrefsStorage userPrefsStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code ClassManagerStorage} and {@code UserPrefStorage}.
@@ -76,3 +79,4 @@ public class StorageManager implements Storage {
     }
 
 }
+//@@author

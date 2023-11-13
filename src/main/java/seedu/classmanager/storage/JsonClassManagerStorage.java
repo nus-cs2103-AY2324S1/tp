@@ -1,3 +1,6 @@
+//@@author Cikguseven-reused
+//Refactored from AddressBook-Level 3 (https://github.com/se-edu/addressbook-level3)
+// Not supposed to own code in file.
 package seedu.classmanager.storage;
 
 import static java.util.Objects.requireNonNull;
@@ -21,7 +24,7 @@ public class JsonClassManagerStorage implements ClassManagerStorage {
 
     private static final Logger logger = LogsCenter.getLogger(JsonClassManagerStorage.class);
 
-    private Path filePath;
+    private final Path filePath;
 
     public JsonClassManagerStorage(Path filePath) {
         this.filePath = filePath;
@@ -47,7 +50,7 @@ public class JsonClassManagerStorage implements ClassManagerStorage {
 
         Optional<JsonSerializableClassManager> jsonClassManager = JsonUtil.readJsonFile(
                 filePath, JsonSerializableClassManager.class);
-        if (!jsonClassManager.isPresent()) {
+        if (jsonClassManager.isEmpty()) {
             return Optional.empty();
         }
 
@@ -77,3 +80,4 @@ public class JsonClassManagerStorage implements ClassManagerStorage {
         JsonUtil.saveJsonFile(new JsonSerializableClassManager(classManager), filePath);
     }
 }
+//@@author

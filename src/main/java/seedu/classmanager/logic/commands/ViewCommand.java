@@ -34,6 +34,13 @@ public class ViewCommand extends Command {
         this.studentNumber = studentNumber;
     }
 
+    /**
+     * Executes a view command to display the class information of a specified student in the view panel.
+     * @param model {@code Model} which the command should operate on.
+     * @param commandHistory The command history to record this command.
+     * @return A {@code CommandResult} with the feedback message of the operation result.
+     * @throws CommandException If an error occurs during command execution.
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         if (!model.hasStudent(new Student(studentNumber))) {
@@ -42,6 +49,7 @@ public class ViewCommand extends Command {
 
         Student studentToView = model.getStudent(studentNumber);
         model.setSelectedStudent(studentToView);
+        model.commitClassManager();
 
         return new CommandResult(String.format(MESSAGE_COMMAND_SUCCESS, studentToView.getName()));
     }
