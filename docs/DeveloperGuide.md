@@ -361,13 +361,35 @@ The following activity diagram shows how the reschedule operation works:
 
 For _FindAppointment_ command, the noteworthy classes involved are:
 
+- `LogicManager.java` - Calls the address book parser.
+
+- `AddressBookParser.java` - For passing the arguments to `FindAppointmentCommandParser`.
+
 - [`FindAppointmentCommandParser.java`][FindAppointmentCommandParser.java] - This parses the user input, checks for its validity and creates a new `FindAppointmentCommand` object.
 
 - [`FindAppointmentCommand.java`][FindAppointmentCommand.java] - This command object executes to update the filtered appointments list to show all appointments that is tagged to a patient whose named is specified through the keyword. 
 
-The feature is implemented by first creating a predicate based upon the keywords input by the user. The predicate is then
-used to the update the filtered appointment list stored in the model such that it will only display appointments tagged
-to patients whose name matches the keywords.
+Let's take a valid user input, `find-a John`, as an example.
+
+-- user input: `find-a John` --  
+Step 1. Logic Manager parses the user input through the AddressBookParser.
+
+-- `AddressBookParser` --  
+Step 2. AddressBookParser identifies the command word `find-a`.  
+Step 3. Returns FindAppointmentCommandParser().parse(arguments) (in this case arguments = `John`)
+
+-- `FindAppointmentCommandParser` --  
+Step 4. FindAppointmentCommandParser takes in arguments (`John`) and uses the arguments to create the PatientContainsKeywordsPredicate object.  
+Step 5. Returns a FindAppointmentCommand object which takes in the PatientContainsKeywordsPredicate object as a parameter.
+
+-- `FindAppointmentCommand` --  
+Step 6. The PatientContainsKeywordsPredicate object is saved in the FindAppointmentCommand object.
+
+-- `LogicManager` --  
+Step 7. The FindAppointmentCommand object is returned and its execute(model) method is triggered.   
+Step 8. The filtered appointment list in the model is updated using the PatientContainsKeywordsPredicate.   
+Step 9. Returns a CommandResult which then leads to the updated filtered appointment list to be displayed.
+
 
 Note: 
 1) Multiple keywords, denoted by a space, can be used. 
