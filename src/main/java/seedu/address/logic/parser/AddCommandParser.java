@@ -161,7 +161,8 @@ public class AddCommandParser implements Parser<AddCommand> {
 
     /**
      * Returns a policy based on the given {@code ArgumentMultimap}.
-     * @throws ParseException if the value does not conform the expected format
+     * @throws ParseException if the value does not conform the expected format or
+     *     policy expiry date is not after policy issue date
      */
     private Policy createPolicy(ArgumentMultimap argMultimap) throws ParseException {
         Company company = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get());
@@ -204,7 +205,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     }
 
     /**
-     * Returns true if all of the prefixes contains empty {@code Optional} values in the given
+     * Returns true if all prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      */
     private static boolean arePrefixesAbsent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
