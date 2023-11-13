@@ -414,10 +414,29 @@ the command `blindDate`.
 
 The best match feature is implemented using the `BestMatchCommand` class. The `BestMatchCommand` class iterates
 through the list of Dates, and calls `GetScore` to get the score of the date based on height, age, horoscope and
-income. Each metric will be scored upon 10, and when it deviates from the user's preferences, the score is reduced.
-The maximum score is 40.
+income.
 
 <puml src="diagrams/BestMatchSequence.puml" width="600" />
+
+#### Design Considerations
+
+**Aspect: Scoring Dates**
+* Dates are scored upon 40, where each factor (age, height, income, horoscope) contributing 10 points each.
+* The date's attributes are compared to the user's set preferences.
+* Score for age = 10 - 2 * (age difference)
+* Score for height = 10 - (height difference)
+* Score for income = 10 - (income difference) / 250
+* Score for horoscope = 10 if horoscope is the same, 0 if horoscope is different
+
+**Aspect: Ranking of Scores**
+* When the user requests for a Best Match, the Date with the highest score is taken.
+* A Date with 0 points can be chosen.
+* In cases where Dates are tied in score, the Date that was first input into LoveBook is chosen.
+
+The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
+the command `bestMatch`
+<puml src="diagrams/BestMatchSequence.puml" width="550" />
+>>>>>>> Stashed changes
 
 ### Set preferences
 
@@ -429,7 +448,7 @@ The _Activity_ diagram summarises what happens after the user enters a set prefe
 
 <puml src="diagrams/SetPrefActivity.puml" width="600" />
 
-The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
+The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues the command 'setP age/20'
 
 <puml src="diagrams/SetPrefSequence.puml" width="600" />
 
@@ -579,128 +598,146 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Main Success Scenario (MSS):**
 
-1. User requests to add a new date to the LoveBook.
-2. LoveBook prompts the user to provide the date's details, including name, age, gender, height, income and horoscope.
-3. User enters the required details.
-4. LoveBook validates the input.
-5. LoveBook adds the new date to the LoveBook.
-6. LoveBook displays a confirmation message.
+1. User inputs command for adding date to LoveBook.
+2. LoveBook validates the command.
+3. LoveBook adds the new date to the LoveBook.
+4. LoveBook displays a confirmation message.
 
    Use case ends. <br>
 
 **Extensions:**
 
-4a. The input is invalid (e.g., invalid gender, height, horoscope).
+2a. The command is invalid (Fields do not exist, invalid format).
 
 - LoveBook shows an error message.
-- User is prompted to re-enter the details.
-- Use case resumes at step 2.
+- User is prompted to re-enter the details. A positive example is given.
+- Use case ends.
 
 #### Use Case: Finding a Date
 
 **Main Success Scenario (MSS):**
 
-1. User requests to search for a date in the LoveBook.
-2. LoveBook prompts the user to enter a search query by name.
-3. User enters the necessary command.
-4. LoveBook performs a search based on the query.
-5. LoveBook displays a list of dates matching the search query.
+1. User inputs command to search for a date in LoveBook.
+2. LoveBook displays all Dates with names that match the keyword.
 
 Use case ends. <br>
 
 **Extensions:**
 
-4a. No dates match the search query.
+2a. No dates match the search query.
 
 - LoveBook displays a message indicating that no matching dates were found.
+- Use case ends.
 
 #### Use Case: Edit a Date's Details
 
 **Main Success Scenario (MSS):**
 
-1. User requests to list all the dates.
-2. LoveBook shows a list of dates.
-3. User selects the date and the relevant fields they want to edit from the list.
-4. LoveBook updates the date's details with the new information.
-5. LoveBook displays a confirmation message.
+1. User inputs command to edit a Date's details.
+2. LoveBook validates the command.
+3. LoveBook updates the Date's details with the new information.
+4. LoveBook displays a confirmation message.
 
 Use case ends. <br>
 
 **Extensions:**
 
-2a. The list is empty.
+2a. The command is invalid (Fields do not exist, invalid format).
 
+- LoveBook shows an error message.
+- User is prompted to re-enter the command. A positive example is given.
 - Use case ends.
 
-4a. The selected date does not exist (e.g., index provided is greater than number of dates).
+2b. No fields to edit are given.
 
-- 4a1. LoveBook displays an error message.
-- Use case resumes at step 2.
+- LoveBook displays a message indicating that at least 1 field must be provided to edit.
+- Use case ends.
 
-4b. The new field entry is invalid (e.g., missing name, incorrect gender).
+2c. Edited field(s) are invalid.
 
-- 4b1. LoveBook displays an error message.
-- Use case resumes at step 2.
+- LoveBook displays a message indicating that the field is invalid. It displays the first invalid field detected.
+- Use case ends.
+
+2d. Index provided is invalid.
+
+- LoveBook displays a message indicating that the index is invalid.
+- Use case ends.
 
 #### Use Case: Delete a Date
 
 **Main Success Scenario (MSS):**
 
-1. User requests to list all the dates.
-2. LoveBook shows a list of dates.
-3. User requests to delete a specific date in the list.
-4. LoveBook deletes the date from the LoveBook.
+1. User inputs command to delete Date.
+2. Date is deleted from LoveBook.
+3. LoveBook displays a confirmation message.
 
 Use case ends. <br>
 
 **Extensions:**
 
-2a. The list is empty.
+2a. Index provided is invalid.
 
+- LoveBook displays a message indicating that the index is invalid.
 - Use case ends.
-
-3a. The selected date does not exist.
-
-- 3a1. LoveBook displays an error message.
-- Use case resumes at step 2.
 
 #### Use Case: Set Preferences
 
 **Main Success Scenario (MSS):**
 
-1. User requests to set preferences.
-2. LoveBook updates the preferences with the new information.
+1. User inputs command to set Preferences.
+2. LoveBook validates the command.
+3. LoveBook updates the preferences with the new information.
+4. LoveBook displays a confirmation message.
 
 Use case ends. <br>
 
 **Extensions:**
 
-2a. The entered preferences are invalid.
+2a. The command is invalid (Preference does not exist, invalid format).
 
-- 2a1. LoveBook displays an error message.
-- Use case resumes at step 1.
+- LoveBook shows an error message.
+- User is prompted to re-enter the command. A positive example is given.
+- Use case ends.
 
-#### Use Case: View Preferences
+2b. No Preferences to set are given.
+
+- LoveBook displays a message indicating that at least 1 field must be provided to set. A positive example is given.
+- Use case ends.
+
+2c. Field(s) are invalid.
+
+- LoveBook displays a message indicating that the field is invalid. It displays the first invalid field detected.
+- Use case ends.
+
+#### Use Case: Show Preferences
 
 **Main Success Scenario (MSS):**
 
-1. User requests to view preferences.
+1. User inputs command to show preferences.
 2. LoveBook displays the preferences.
 
 Use case ends. <br>
+
+**Extensions:**
+
+1a. No Preferences were previously set.
+
+- LoveBook displays the default preferences.
+- Use case ends.
 
 #### Use Case: Get Blind Date
 
 **Main Success Scenario (MSS):**
 
-1. User requests for a blind date.
-2. LoveBook displays a blind date.
+1. User inputs command to get a blind Date.
+2. LoveBook displays a random Date.
+3. LoveBook displays a confirmation message.
 
 Use case ends. <br>
 
 **Extensions:**
 
-2a. The list is empty.
+1a. The list is empty.
 
 - LoveBook displays a message indicating that there are no dates.
 - Use case ends.
@@ -709,10 +746,9 @@ Use case ends. <br>
 
 **Main Success Scenario (MSS):**
 
-1. User requests to list all the dates.
-2. LoveBook shows a list of dates.
-3. User requests to filter the list of dates by a specific metric.
-4. LoveBook filters the list of dates by the specified metric.
+1. User inputs command to filter dates.
+2. LoveBook validates the command.
+3. LoveBook shows a list of dates which are filtered based on the metric(s) given.
 
 Use case ends. <br>
 
@@ -722,19 +758,29 @@ Use case ends. <br>
 
 - Use case ends.
 
-3a. The specified metric does not exist or entered input is invalid (e.g., invalid gender).
+2b. The command is invalid (Metrics do not exist, invalid format).
 
-- 3a1. LoveBook displays an error message.
-- Use case resumes at step 2.
+- LoveBook shows an error message.
+- User is prompted to re-enter the command. A positive example is given.
+- Use case ends.
+
+2c. No metric to filter by are given.
+
+- LoveBook displays a message indicating that at least 1 metric must be provided to filter. A positive example is given.
+- Use case ends.
+
+2d. Field(s) are invalid.
+
+- LoveBook displays a message indicating that the field is invalid. It displays the first invalid field detected.
+- Use case ends.
 
 #### Use Case: Sort Dates
 
 **Main Success Scenario (MSS):**
 
-1. User requests to list all the dates.
-2. LoveBook shows a list of dates.
-3. User requests to sort the list of dates by a specific metric.
-4. LoveBook sorts the list of dates by the specified metric.
+1. User inputs command to sort Dates
+2. LoveBook validated the command.
+3. LoveBook shows a list of dates which are sorted based on the comparator given.
 
 Use case ends. <br>
 
@@ -744,10 +790,21 @@ Use case ends. <br>
 
 - Use case ends.
 
-3a. The specified metric does not exist or entered input is invalid (e.g., invalid gender).
+2b. The command is invalid (Comparator does not exist, invalid format).
 
-- 3a1. LoveBook displays an error message.
-- Use case resumes at step 2.
+- LoveBook shows an error message.
+- User is prompted to re-enter the command. A positive example is given.
+- Use case ends.
+
+2c. No comparator to sort is given.
+
+- LoveBook displays a message indicating that at least 1 comparator must be provided to set. A positive example is given.
+- Use case ends.
+
+2d. Comparator is invalid.
+
+- LoveBook displays a message indicating that the comparator is invalid. A positive example is given.
+- Use case ends.
 
 #### Use Case: Get Best Match
 
@@ -762,7 +819,7 @@ Use case ends. <br>
 
 1a. The list is empty.
 
-- 1a1. LoveBook displays a message indicating that there are no dates.
+- LoveBook displays a message indicating that there are no dates.
 - Use case ends.
 
 ### Non-Functional Requirements

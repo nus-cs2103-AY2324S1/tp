@@ -23,7 +23,7 @@ create ListCommand
 LoveBookParser -> ListCommand
 activate ListCommand
 
-ListCommand --> LoveBookParser
+ListCommand --> LoveBookParser : l
 deactivate ListCommand
 
 LoveBookParser --> LogicManager : l
