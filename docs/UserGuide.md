@@ -627,7 +627,7 @@ You can add time slots when your contacts are available.
     <img src="icons/checked.png" width="20" height="20" style="margin-right: 5px;">
     <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable values</h5>
   </div>
-  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">    NAME</code>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">NAME</code>
      must be alphanumeric and cannot be blank.
   </p>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">FREE_TIME</code>
@@ -1020,6 +1020,9 @@ ProjectPRO saves automatically after any command changes the data. There is no n
 ### Editing the data file
 ProjectPRO's data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 <div style="border-left: 4px solid #d9534f; background-color: #FFD4D4; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
-  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">:exclamation: Warning!</h5>
+  <div style="display: flex; align-items: center;">
+    <img src="icons/exclamation.png" width="20" height="20" style="margin-right: 5px;">
+    <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;;">Warning</h5>
+  </div>
     If your changes to the data file makes its format invalid, ProjectPRO will discard all data and start with a sample data file. Hence, it is recommended to take a backup of the file before editing it.
 </div>
