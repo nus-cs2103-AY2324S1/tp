@@ -131,8 +131,9 @@ ___
 
 ## Contact Commands
 
+
 ### Contact Parameters
-| Parameter             | Description​                                                                                                                                                                                                      | Examples​                                                      |
+| Parameter             | Description                                                                                                                                                                                                       | Examples                                                       |
 |-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
 | `NAME`                | The name of the contact. <br/> <br/> It should only contain alphanumeric characters and spaces, and it should not be blank.                                                                                       | <ul><li>`John Doe`</li><li>`Miguel-James Lee`</li></ul>        |
 | `PHONE`               | The phone number of the contact. <br/> <br/> It must contain only numbers, and be at least 3 digits long.                                                                                                         | <ul><li>`999`</li><li>`91243253`</li></ul>                     |
@@ -142,6 +143,7 @@ ___
 | `REMARK`              | The remark you have about the contact, if any.                                                                                                                                                                    | <ul><li>`has 4 cars`</li><li>`Loves coffee`</li></ul>          |
 | `TAG`                 | The tag you want to associate with the contact, if any. A contact can have more than 1 tag. <br/> <br/> It must be alphanumeric, i.e. special and non-alphanumeric characters (including spaces) are not allowed. | <ul><li>`Friend`</li><li>`TermLife`</li></ul>                  |
 | `CONTACT_INDEX`       | The number shown beside each contact's name in the displayed contacts list. <br/> <br/> It must be a positive integer and not more than the total number of contacts.                                             | <ul><li>`1`</li></ul>                                          |
+
 
 ### Adding a contact: `addc`
 
@@ -262,6 +264,8 @@ Examples:
 
 - Meetings are allowed to overlap and multiple meetings can be occurring at the same time.
 
+</div>
+
 ### Meeting Parameters
 
 | Parameter        | Description                                                                                                                                                                                                                                      | Examples                                                             |
@@ -274,8 +278,6 @@ Examples:
 | `ATTENDEE_INDEX` | The number shown beside each attendee's name in the detailed view of the meeting (as described [here](#viewing-detailed-meeting-information--viewm)). <br/> <br/> It must be a positive integer and not more than the total number of attendees. | <ul><li>`2`</li></ul>                                                |
 | `MEETING_INDEX`  | The number shown beside each meeting's title in the displayed meetings list. <br/> <br/> It must be a positive integer and not more than the total number of meetings.                                                                           | <ul><li>`1`</li></ul>                                                |                                                                      |
 
-
-</div>
 
 ### Adding a meeting: `addm`
 
