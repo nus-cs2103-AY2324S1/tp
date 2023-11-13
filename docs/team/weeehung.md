@@ -37,6 +37,8 @@ Given below are my contributions to the project.
   * Managed releases [`v1.2.1`](https://github.com/AY2324S1-CS2103T-T14-3/tp/releases/tag/v1.2.1) (1 release) on GitHub
   * Assisted in Jar Release [`v1.3`](https://github.com/AY2324S1-CS2103T-T14-3/tp/releases/tag/v1.3) (1 release) on GitHub
   * Tagged relevant labels and milestones for various Issues and PRs to aid project management 
+  * Managed releases [`v1.4.1`](https://github.com/AY2324S1-CS2103T-T14-3/tp/releases/tag/v1.4.1) (1 release) on GitHub
+
 
 * **Enhancements to existing features**:
   * Added new fields necessary for patient tracking.
