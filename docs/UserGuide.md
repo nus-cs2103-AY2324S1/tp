@@ -436,7 +436,7 @@ Expected Output: `Lists the dates with the name(s) specified`
 
 Filters the dates in the LoveBook by a specific metric.
 
-Format: `filter METRIC/ARG`
+Format: `filter xx METRIC/ARG`
 
 <box type="tip">
 
@@ -460,7 +460,8 @@ Example:
 - `filter name/Cleon`
 - `filter gender/M`
 - `filter gender/M name/Cleon`
-- `filter xx gender/M', where xx can be anything including an invalid metric`
+- `filter hi gender/M`
+- `filter income/20 name/Cleon` (this only returns dates with name Cleon since income is an invalid metric)
 
 Expected Output: `Lists the dates with the valid metric values specified`
 
