@@ -26,9 +26,9 @@ Given below are my contributions to the project.
     * Ensured the quality of various project documents
     * Standardised the format and structure of project documents
   * Did the UI mockup of our intended final product
-    * Ensured the image is roughly the same `hight x width` proportion as the original one
   * Took the initiative to modify sequence diagram in DG
     * Used ref frame to break complicated sequence diagram into two parts
+  * Prepared pdf files of UG, DG, PPP and ensure their quality.
 
 * **Enhancements to existing features**:
   * Extended the current `add` command to deal with the updated `Person` fields as listed below.
@@ -46,6 +46,9 @@ Given below are my contributions to the project.
     * Added documentation for `batchdelete` command.
   * Developer Guide:
     * Added implementation for `batchdelete` command.
+    * Updated **Use cases** section.
+      * Updated UC1 - 5
+      * Add UC6 - 10
 
 * **Community**:
   * PRs reviewed (with non-trivial comments): [#81](https://github.com/AY2324S1-CS2103T-W16-3/tp/pull/81), [#122](https://github.com/AY2324S1-CS2103T-W16-3/tp/pull/122)
