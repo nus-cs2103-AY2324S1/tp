@@ -161,7 +161,7 @@ This section will describe in details the current implementation and design cons
 
 #### Current Implementation
 
-The Interaction feature is implemented using the `Interaction` class. It is a simple class that contains the following fields:
+The Interaction feature is implemented using the `Interaction` class. A person can have a list of interactions and interactions have the following fields:
 
 ![InteractionClassDiagram](images/InteractionClassDiagram.png)
 

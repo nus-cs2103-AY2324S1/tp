@@ -1,0 +1,27 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+class Person {
+    List<Interaction> interactions
+}
+
+class Interaction {
+    String interactionNote
+    Outcome outcome
+    LocalDate date
+}
+
+enum Outcome {
+    CLOSED
+    INTERESTED
+    NOT_INTERESTED
+    FOLLOWUP_REQUIRED
+    UNKNOWN
+}
+
+Person "1" -- "0..*" Interaction
+Interaction -- Outcome
+@enduml
