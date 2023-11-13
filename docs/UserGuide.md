@@ -126,10 +126,10 @@ _Good to have you back! We're thrilled to have you with us again. How can we hel
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
+--------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;">
 
 </div>
---------------------------------------------------------------------------------------------------------------------
 
 ## **Quick Start**
 
