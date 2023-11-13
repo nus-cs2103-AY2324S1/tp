@@ -8,9 +8,12 @@ start
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
 
-if () then ([command successfully
- executed])
-    :Add command string to CommandStringStash;
+if () then ([command successfully executed])
+    if () then ([command string already exists])
+    :Purge old command string from CommandStringStash;
+    else ([else])
+    endif
+    :Add command string to end of CommandStringStash;
     :Move currentCmdIndex to right after the
     last element in the CommandStringStash;
 else ([else])

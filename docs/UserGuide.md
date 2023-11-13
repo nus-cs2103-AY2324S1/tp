@@ -312,6 +312,9 @@ up arrow cycles one command further back in the history.
 
 If the user goes too far back in history, they can 'undo' an 'up arrow' by pressing the down arrow.
 
+Multiple copies of the exact same command are not kept in history. The more recent command
+is kept and the less recent command is purged from history.
+
 ### Save and Load Data
 
 The patient and specialist data will automatically be saved to the device’s hard drive every time the data is updated, and will automatically be loaded when the user starts the application. The user does not need to manually save any data.

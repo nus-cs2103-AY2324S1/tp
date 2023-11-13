@@ -310,9 +310,6 @@ Step 3. The user executes two more commands `help` and `delete 1` in the respect
 
 ![Recall Step 3](images/RecallStep3.png)
 
-The following activity diagram summarises how the `CommandStringStash` is updated when a user executes a command.
-
-![Add Command String](images/AddCommandStringActivityDiagram.png)
 
 Step 4. The user wants to list the patients in DoConnek Pro but forgot how to do so. They decide to execute the `help`
 command. To do so efficiently, they press the up arrow on the keyboard to recall the `help` command they recently entered.
@@ -341,6 +338,16 @@ They press the down arrow on the keyboard to recall the `delete 1` command they 
 This results in `Logic#getPassedCommandString` being called which returns `delete 1`.  The user's CLI text box is then set to display `delete 1`.
 
 ![Recall Step 6](images/RecallStep6.png)
+
+Step 7. The user now executes `delete 1`. As before, `Logic#addCommandString("delete 1")` is called,
+adding this command string to the `CommandStringStash`. Since this command string already exists in the `CommandStringStash`,
+the older version of it is purged from the stash.
+
+![Recall Step 7](images/RecallStep7.png)
+
+The following activity diagram summarises how the `CommandStringStash` is updated when a user executes a command.
+
+![Add Command String](images/AddCommandStringActivityDiagram.png)
 
 <br>
 
