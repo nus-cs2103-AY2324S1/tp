@@ -3,18 +3,14 @@ layout: page
 title: Setting up and getting started
 ---
 
-* Table of Contents
-{:toc}
+* [Setting up the project in your computer](#setting-up-the-project-in-your-computer)
+* [Before writing code](#before-writing-code)
 
-
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Setting up the project in your computer
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-
-Follow the steps in the following guide precisely. Things will not work out if you deviate in some steps.
-</div>
+> Follow the steps in the following guide precisely. Things will not work out if you deviate in some steps.
 
 First, **fork** this repo, and **clone** the fork into your computer.
 
@@ -26,7 +22,7 @@ If you plan to use Intellij IDEA (highly recommended):
    1. Run the `seedu.application.Main` and try a few commands.
    1. [Run the tests](Testing.md) to ensure they all pass.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Before writing code
 
