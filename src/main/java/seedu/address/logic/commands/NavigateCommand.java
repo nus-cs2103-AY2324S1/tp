@@ -15,8 +15,8 @@ public class NavigateCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        State s = model.getState();
-        switch (s) {
+
+        switch (model.getState()) {
         case STUDENT:
             Person person = model.getCurrentlyDisplayedPerson();
             if (person == null) {

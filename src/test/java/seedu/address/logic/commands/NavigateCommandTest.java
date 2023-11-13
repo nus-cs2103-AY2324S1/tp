@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalLessons.getTypicalScheduleList;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -27,7 +28,7 @@ class NavigateCommandTest {
         model.setState(State.STUDENT);
         model.linkWith(p, l);
         new NavigateCommand().execute(model);
-        assertEquals(model.getState(), State.SCHEDULE);
+        assertTrue(model.sameState(State.SCHEDULE));
         assertEquals(model.getCurrentlyDisplayedLesson(), l);
         assertEquals(model.getFilteredScheduleList().get(0), l);
         assertEquals(model.getFilteredScheduleList().size(), 1);
@@ -40,7 +41,7 @@ class NavigateCommandTest {
         model.setState(State.SCHEDULE);
         model.linkWith(p, l);
         new NavigateCommand().execute(model);
-        assertEquals(model.getState(), State.STUDENT);
+        assertTrue(model.sameState(State.STUDENT));
         assertEquals(model.getCurrentlyDisplayedPerson(), p);
         assertEquals(model.getFilteredPersonList().get(0), p);
         assertEquals(model.getFilteredPersonList().size(), 1);
