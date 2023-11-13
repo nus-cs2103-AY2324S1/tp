@@ -236,9 +236,8 @@ Then type `delete 3` to delete that entry.
 
 **:information_source: Note:**<br>
 * Index must be a positive integer.
-* You cannot delete a developer who is a **team leader** for any of the teams. Inorder to delete that developer, we 
-recommend you to change the team leader using `editTeamLeader` command. And then you can remove that developer from the 
-team.
+* You cannot delete a developer who is a **team leader** for any of the teams. To delete that developer, you will have to change the team leader using `editTeamLeader` command. And then you can remove that developer from the 
+addressbook.
  ![DeleteTeamLeader](images/UG_images/DeleteTeamLeader.png)
 </div>
 
