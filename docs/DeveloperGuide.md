@@ -138,6 +138,8 @@ implementation of a component), as illustrated in the (partial) class diagram be
 
 The sections below give more details of each component.
 
+[Scroll back to *Table of Contents*](#table-of-contents)
+
 ### UI component
 
 The **API** of this component is specified
@@ -162,6 +164,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Date` object residing in the `Model`.
+
+[Scroll back to *Table of Contents*](#table-of-contents)
 
 ### Logic component
 
@@ -205,6 +209,8 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
+[Scroll back to *Table of Contents*](#table-of-contents)
+
 ### Model component
 
 **API
@@ -226,6 +232,8 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
   should make sense on their own without depending on other components)
 
+[Scroll back to *Table of Contents*](#table-of-contents)
+
 ### Storage component
 
 **API
@@ -241,6 +249,8 @@ The `Storage` component,
   either one of three (if the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
+
+[Scroll back to *Table of Contents*](#table-of-contents)
 
 ### Common classes
 
@@ -263,6 +273,8 @@ The following class diagram shows the new `Date` class after the changes mention
 <puml src="diagrams/DateClassDiagram.puml" width="600" />
 
 Moving on to the implementation details, the following sections describe how and why the main features of the app work.
+
+[Scroll back to *Table of Contents*](#table-of-contents)
 
 ### Add Dates Feature
 
@@ -329,6 +341,8 @@ The activity diagram notation of the above steps is shown below. <br>
     * Pros: More user-friendly (since user can easily see the date being added to the end of the list)
     * Cons: Not very visually appealing (since the list appears to be unsorted and non uniform)
 
+[Scroll back to *Table of Contents*](#table-of-contents)
+
 ### List Dates
 
 1. The list dates feature begins by passing the user input obtained from the `CommandBox` class in the `Ui` component to
@@ -358,6 +372,8 @@ The sequence diagram notation of the above steps is shown below. <br>
       since you don't have to sort the list on every list command)
     * Cons: Not very visually appealing (since the list appears to be unsorted and non uniform)
 
+[Scroll back to *Table of Contents*](#table-of-contents)
+
 ### Filter dates
 
 The filter feature is implemented using the `FilterCommand` class. The `FilterCommand` class takes in a `Predicate`
@@ -372,6 +388,8 @@ The _Sequence_ Diagram below shows how the components interact with each other f
 the command `filter name/ John`
 
 <puml src="diagrams/FilterSequence.puml" width="600" />
+
+[Scroll back to *Table of Contents*](#table-of-contents)
 
 ### Sort dates
 
@@ -389,12 +407,16 @@ the command `sort name/ increasing`
 
 <puml src="diagrams/SortSequence.puml" width="600" />
 
+[Scroll back to *Table of Contents*](#table-of-contents)
+
 ### Get Blind Date
 
 The random date feature is implemented using the 'RandomCommand' class. The 'RandomCommand' class calls a
 getRandomPerson() method from the model class. Within the getRandomPerson method, a 'Predicate' object is created and
 used to filter the 'Date' objects in the 'Model component'. The 'RandomCommand' class then returns a 'CommandResult'
 object that contains the random 'Date' object.
+
+[Scroll back to *Table of Contents*](#table-of-contents)
 
 ### Get best match
 
@@ -404,6 +426,8 @@ income. Each metric will be scored upon 10, and when it deviates from the user's
 The maximum score is 40.
 
 <puml src="diagrams/BestMatchSequence.puml" width="600" />
+
+[Scroll back to *Table of Contents*](#table-of-contents)
 
 ### Set preferences
 
@@ -446,6 +470,8 @@ The _Sequence_ Diagram notation of the above steps is shown below.
       bestMatch
       algorithm since users may not know how to set their date preferences first.
 
+[Scroll back to *Table of Contents*](#table-of-contents)
+
 ### Star dates
 
 #### Implementation
@@ -469,6 +495,8 @@ The _Sequence_ Diagram below shows how the components interact with each other f
 the command `star 1`
 
 <puml src="diagrams/StarSequence.puml" width="600" />
+
+[Scroll back to *Table of Contents*](#table-of-contents)
 
 ### Unstar dates
 
@@ -495,6 +523,9 @@ the command `unstar 1`
 
 <puml src="diagrams/UnstarSequence.puml" width="600" />
 
+[Scroll back to *Table of Contents*](#table-of-contents)
+
+
 ---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -505,7 +536,9 @@ the command `unstar 1`
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
 
---------------------------------------------------------------------------------------------------------------------
+[Scroll back to *Table of Contents*](#table-of-contents)
+
+---
 
 ## **Effort**
 
@@ -534,6 +567,8 @@ original UI of AB3 into our own new LoveBook UI. As our team was unfamiliar with
 a great amount of time and effort to produce an eventual satisfactory and working UI that we were proud to adopt and
 incorporate into our application.
 
+[Scroll back to *Table of Contents*](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Requirements**
@@ -553,6 +588,8 @@ incorporate into our application.
 LoveBook simplifies the process of storing information of dates and assessing compatibility between user and his/her
 dates by taking into account the user’s preferences, thereby enhancing the efficiency and effectiveness of finding the
 perfect match.
+
+[Scroll back to *Table of Contents*](#table-of-contents)
 
 ### User stories
 
@@ -580,6 +617,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | dater     | to be able to sort my dates based on a particular metric                                        | find dates that I am interested in amidst my long and ever growing list |
 | `* * *`  | dater     | to be able to find dates based on their name                                                    | locate a date easily                                                    |
 | `* *`    | lazy user | to be able to clear all the dates in my list                                                    | start afresh with a new date list                                       | 
+
+[Scroll back to *Table of Contents*](#table-of-contents)
 
 ### Use cases
 
@@ -788,6 +827,8 @@ Use case ends. <br>
 - 1a1. LoveBook displays a message indicating that there are no dates.
 - Use case ends.
 
+[Scroll back to *Table of Contents*](#table-of-contents)
+
 ### Non-Functional Requirements
 
 1. Usability and Accessibility: The application should provide clear and user-friendly CLI prompts and menus.
@@ -800,6 +841,8 @@ Use case ends. <br>
 4. Portability: The CLI application should be compatible with multiple operating systems, including Windows, macOS, and
    Linux.
 
+[Scroll back to *Table of Contents*](#table-of-contents)
+
 ### Glossary
 
 | Term          | Definition                                                                                                        |
@@ -811,6 +854,8 @@ Use case ends. <br>
 | GUI           | Graphical User Interface                                                                                          |
 | CLI           | Command Line Interface                                                                                            |
 | Mainstream OS | Windows, Linux, Unix, OS-X                                                                                        |
+
+[Scroll back to *Table of Contents*](#table-of-contents)
 
 ---
 
@@ -912,6 +957,8 @@ testers are expected to do more *exploratory* testing.
     * Close the app.
     * Expected: A `data` folder is created under the current repository where the jar file is located.
 
+[Scroll back to *Table of Contents*](#table-of-contents)
+
 ---
 
 ## **Appendix: Planned Enhancements**
@@ -952,3 +999,5 @@ testers are expected to do more *exploratory* testing.
     - In the future, we plan to add more presets buttons for all 16 commands in the application.
     - Furthermore, even though there's `clear` command, the button "clear" removes all text in the command box, making
       it ambiguous. We plan to change this in a future iteration like a trash can icon.
+
+[Scroll back to *Table of Contents*](#table-of-contents)
