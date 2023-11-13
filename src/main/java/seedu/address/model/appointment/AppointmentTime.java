@@ -16,7 +16,7 @@ import java.time.format.ResolverStyle;
 public class AppointmentTime implements Comparable<AppointmentTime> {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "AppointmentTime should be valid date and time in the format of yyyy-mm-dd HH:mm:ss\n";
+            "AppointmentTime should be valid date and time in the format of yyyy-mm-dd HH:mm\n";
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm")
             .withResolverStyle(ResolverStyle.STRICT);
     public final LocalDateTime value;
