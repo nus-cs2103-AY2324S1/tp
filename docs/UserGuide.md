@@ -246,6 +246,8 @@ The **domain** name must: <br>
 
 ### Viewing help : `help`
 
+#### If you have trouble using MedBook, use `help` command! 
+
 Opens/focuses the **Help Window** displaying all the commands.
 
 Format: `help`
@@ -254,7 +256,7 @@ Format: `help`
 
 ### Adding a patient: `addpatient`
 
-Adds a patient.
+#### Wants to add a new patient?  Try out the `Addpatient` command!
 
 Format: `addpatient n/NAME i/NRIC e/EMAIL p/PHONE g/GENDER a/AGE bt/BLOODTYPE [al/ALLERGY]...`
 
@@ -281,7 +283,7 @@ Screenshots:
 
 ### Adding Medical Records : `addrecord`
 
-Adds a medical record to a patient.
+#### Don't know how to add a medical record to the patient? Check out the `addrecord` command!
 
 Format: `addrecord PATIENTID d/DATETIME c/CONDITIONS... m/MEDICATIONS...`
 
