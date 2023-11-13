@@ -84,7 +84,7 @@ To achieve this, we have 2 supporting sub-features:
 
 For the calendar system, we work solely with `events`, which differs from `tasks` used in the [task list feature](#main-feature-3-task-management-system).
 - `event` has a `description`, `start date and time` and `end date and time`
-- `task` only has a `description` and `end date and time`
+- `task` only has a `description` and an **optional** `end date and time`
 
 ### Sub-feature 1: Calendar
 
@@ -190,6 +190,9 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+> **Note:** Currently UniMate does not support the use of forward-slash in the name of contacts (e.g. s/o). The developers
+ understand this, and we hope to add support for accepting forward-slashes in the contact's name in a future release.
+
 ![addCommand](images/addCommand.png)
 
 In the example, after executing
@@ -269,8 +272,8 @@ Format: `filter [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * The order of the fields does not matter
 * All provided fields are searched
 * All tags containing the words or part-thereof will be matched (e.g. `Ba` will return `Badminton` or `Basketball` or `Football` or `Backgammon`)
-* Only persons matching all specified fields will be returned (i.e. `and` search)
-* Arguments in a specific field is not delimited (i.e. the argument `John Doe` in `filter n/John Doe` will be treated as a single argument)
+* Only persons matching all specified fields will be returned (i.e. logical `AND` search)
+* Arguments in a specific field are not delimited (i.e. the argument `John Doe` in `filter n/John Doe` will be treated as a single argument)
 * Indicating a field but leaving it blank e.g. `filter n/` will show all contacts.
 
 Examples:
@@ -291,6 +294,8 @@ display all the contacts after using the [find](#locating-persons-by-name-find) 
 Format: `list`
 
 ![listCommand](images/listCommand.png)
+
+In this example, after executing the `list` command, we see the entire AddressBook again.
 
 ### Sort persons : `sort`
 
@@ -430,6 +435,7 @@ Format: `addContactEvent INDEX d/DESCRIPTION ts/START_DATE_TIME ts/END_DATE_TIME
 
 * Adds the event starting from `START_DATE_TIME` and ending at `END_DATE_TIME`
 * `START_DATE_TIME` and `END_DATE_TIME` must be in `yyyy-MM-dd HH:mm` format
+* `START_DATE_TIME` must be before `END_DATE_TIME` for the command to be valid
 
 Example:
 * `addContactEvent 1 d/Team Meeting ts/2024-01-01 09:00 te/2024-01-01 11:00`
@@ -591,7 +597,7 @@ Adds a task to the Task Manager.
 Format: `addTask d/DESCRIPTION [te/DEADLINE]`
 
 * `DESCRIPTION` cannot be empty.
-* `DEADLINE` must be in the same format given above for date and time.
+* `DEADLINE` must be in the same format given [above](#general-definitions) for date and time.
 * `DEADLINE` can also be omitted to create a task with no specified deadline.
 * When adding a task with a deadline with a date that is invalid but with a day of 31 or less, instead adds a task with 
 a deadline on the last day of the month.
@@ -686,24 +692,24 @@ Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Help** | `help`
 **Exit** | `exit`
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Filter** | `filter [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…` <br> e.g., `filter n/John Doe`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Delete** | `delete INDEX`<br> e.g. `delete 3`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
+**Filter** | `filter [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…` <br> e.g. `filter n/John Doe`
 **List** | `list`
-**Sort** | `sort /COMPARATOR` <br> e.g., `sort /byname`
+**Sort** | `sort /COMPARATOR` <br> e.g. `sort /byname`
 **Clear**  | `clear`
-**addEvent** | `addEvent d/DESCRIPTION ts/START_DATE_TIME te/END_DATE_TIME` <br> e.g., `addEvent d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59`
-**deleteEvent** | `deleteEvent DATE_TIME` <br> e.g., `deleteEvent 2023-02-03 12:00`
-**clearEvents** | `clearEvents ts/START_DATE_TIME te/END_DATE_TIME c/CONFIRMATION` <br> e.g., `clearEvents ts/2023-02-03 12:00 te/2023-02-03 14:00 c/CONFIRMED`
+**addEvent** | `addEvent d/DESCRIPTION ts/START_DATE_TIME te/END_DATE_TIME` <br> e.g. `addEvent d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59`
+**deleteEvent** | `deleteEvent DATE_TIME` <br> e.g. `deleteEvent 2023-02-03 12:00`
+**clearEvents** | `clearEvents ts/START_DATE_TIME te/END_DATE_TIME c/CONFIRMATION` <br> e.g. `clearEvents ts/2023-02-03 12:00 te/2023-02-03 14:00 c/CONFIRMED`
 **switchList** | `switchList`
-**addContactEvent** | `addContactEvent INDEX d/DESCRIPTION ts/START_DATE_TIME te/END_DATE_TIME` <br> e.g., `addContactEvent 1 d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59`
-**deleteContactEvent** | `deleteContactEvent INDEX ts/DATE_TIME` <br> e.g., `deleteContactEvent 1 ts/2023-02-03 12:00`
-**editContactEvent** | `editContactEvent PERSON_INDEX EVENT_INDEX [d/DESCRIPTION] [ts/NEW_START_DATE_TIME] [te/NEW_END_DATE_TIME]` <br> e.g., `editContactEvent 1 1 d/Edited Description`
-**viewContactEvents** | `viewContactEvents INDEX` <br> e.g., `viewContactEvents 1`
-**compareCalendars** | `compareCalendars [INDEX]...` <br> e.g., `compareCalendars 1 3 5`
-**compareGroupCalendars** | `compareGroupCalendars [TAG]...` <br> e.g., `compareGroupCalendars school friend`
+**addContactEvent** | `addContactEvent INDEX d/DESCRIPTION ts/START_DATE_TIME te/END_DATE_TIME` <br> e.g. `addContactEvent 1 d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59`
+**deleteContactEvent** | `deleteContactEvent INDEX ts/DATE_TIME` <br> e.g. `deleteContactEvent 1 ts/2023-02-03 12:00`
+**editContactEvent** | `editContactEvent PERSON_INDEX EVENT_INDEX [d/DESCRIPTION] [ts/NEW_START_DATE_TIME] [te/NEW_END_DATE_TIME]` <br> e.g. `editContactEvent 1 1 d/Edited Description`
+**viewContactEvents** | `viewContactEvents INDEX` <br> e.g. `viewContactEvents 1`
+**compareCalendars** | `compareCalendars [INDEX]...` <br> e.g. `compareCalendars 1 3 5`
+**compareGroupCalendars** | `compareGroupCalendars [TAG]...` <br> e.g. `compareGroupCalendars school friend`
 **addTask** | `addTask d/DESCRIPTION [te/DEADLINE]` <br> e.g. `addTask d/Go for a run te/2023-02-14 19:00`
 **deleteTask** | `deleteTask INDEX` <br> e.g. `deleteTask 1`
 **sortTasks** | `sortTasks PARAMETER` <br> e.g. `sortTasks DESCRIPTION` <br> e.g. `sortTasks DEADLINE`
