@@ -934,7 +934,7 @@ testers are expected to do more *exploratory* testing.
    4.  **Test case:** `pay 1 50000`<br>
        **Expected:** The first `Person` in the list will not be paid $50000. Error details shown in the status message.
 
-2. To see if the money is paid to `Person`, use the [find command](https://ay2324s1-cs2103t-t13-2.github.io/tp/UserGuide.html#view-notes-of-contact-viewnotes) to search for the `Person` and verify the money paid.
+2. To see if the money is paid to `Person`, use the [find command](https://ay2324s1-cs2103t-t13-2.github.io/tp/UserGuide.html#contact-search) to search for the `Person` and verify the money paid.
 
 
 ### Owing money to a person
@@ -952,7 +952,7 @@ testers are expected to do more *exploratory* testing.
    4.  **Test case:** `owe 1 50000`<br>
        **Expected:** You will not owe the first `Person` in the list $50000. Error details shown in the status message.
 
-2. To see if the money the `Person` owes is recorded, use the [find command](https://ay2324s1-cs2103t-t13-2.github.io/tp/UserGuide.html#view-notes-of-contact-viewnotes) to search for the `Person` and verify the money owed.
+2. To see if the money the `Person` owes is recorded, use the [find command](https://ay2324s1-cs2103t-t13-2.github.io/tp/UserGuide.html#contact-search) to search for the `Person` and verify the money owed.
 
 
 ### Finding a person
