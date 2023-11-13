@@ -336,8 +336,8 @@ searching for keywords in multiple fields at the same time. We also allow the us
 can search for multiple terms belonging to the same field.
 
 For now, we only allow for searching for `Name`, `FinancialPlan` and `Tag` fields because they are the most commonly
-searched fields, but extending the feature to search in other fields is possible by creating the `Predicate` class and
-modifying the `FindCommandParser`.
+searched fields, but extending the feature to search in other fields is possible by creating the appropriate
+`Predicate` class and modifying the `FindCommandParser`.
 
 #### Design Considerations:
 
