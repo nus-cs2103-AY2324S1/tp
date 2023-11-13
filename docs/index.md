@@ -10,9 +10,8 @@ title: TaskWise
 
 **TaskWise is a desktop GUI/CLI application to help you, as CS2103T Project Managers, to keep track and manage your project tasks!**
 
-* Looking to start using TaskWise? Visit the [**User Guide**](UserGuide.html#quick-start) to start your journey to becoming a proficient TaskWise Wizard!.
-* Looking to develop on TaskWise? Visit the [**Developer Guide**](DeveloperGuide.html) to find out more on how you can contribute to this project!
-
+* Looking to start using TaskWise? Visit the [**User Guide**](UserGuide.html#quick-start) to start your journey to becoming a proficient TaskWise Wizard!
+* Looking to develop on TaskWise? Visit the [**Developer Guide**](DeveloperGuide.html) to find out more about how you can contribute to this project!
 **Acknowledgements**
 
 This project was built on top of the existing [AddressBook Level 3 Code from SE-EDU](https://github.com/se-edu/addressbook-level3).

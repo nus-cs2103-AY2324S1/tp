@@ -531,8 +531,6 @@ Editing a note can also be done using the `EditCommand` class. When the `EditCom
 
 Some attributes within the Tasks are comparable with each other as they implement the `java.lang.Comparable<T>` interface. These attributes are: `Description`, `Status`, `Deadline` and `Priority`.
 
-<div markdown="span" class="alert alert-info">:information_source: **Disclaimer:** Currently, only sorting by Task Description and Status is working, as the other attributes of Task are work-in-progress!</div>
-
 These comparable attributes form the basis on which this Sort Command is built upon. With these comparable attributes, we are able to sort the task list using these attributes to obtain an ordered representation of the task list.
 
 The following diagram shows the association between classes necessary to achieve the sort feature:
