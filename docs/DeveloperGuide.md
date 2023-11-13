@@ -203,11 +203,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 Step 2. The user executes `delete EID1234-5678` command to delete an employee in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete EID1234-5678` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
-<img src="images/UndoRedoState1.png" width="500" />
+<img src="images/UndoRedoState1.png" width="550" />
 
 Step 3. The user executes `add n/David …​` to add a new employee. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
-<img src="images/UndoRedoState2.png" width="500" />
+<img src="images/UndoRedoState2.png" width="550" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
