@@ -9,9 +9,9 @@ If so, **TAManager** is the tool for you!
 
 TAManager, or Teaching Assistant Manager, is your reliable desktop application that helps you manage your TAs, so you can focus on what matters most - **teaching**!
 
-While TAManager mainly focuses on targeting SoC Professors, all educators are welcomed to use TAManager too! With our **user-centric** design, TAManager is crafted with both experienced educators and newbies in mind.
+While TAManager is mainly catered to SoC Professors, all educators are welcomed to use TAManager too! With our **user-centric** design, TAManager is crafted with consideration for both new and experienced educators.
 
-Gone are the days of having to manually managed your TAs. TAManager is here to help you manage your TAs with ease!
+Gone are the days of having to manually manage your TAs. TAManager is here to help you manage your TAs with ease!
 
 ### 💡 Why choose TAManager?
 {:.no_toc}
@@ -34,10 +34,10 @@ Let TAManager handles all your TA management needs, while you power up your lect
 
 ## Using this Guide
 
-Whether you're a new user or an experienced one, this guide is designed to help you make the most of our TAManager.
+Whether you're a new user or an experienced one, this guide is designed to help you make the most of TAManager.
 Follow the instructions below based on your familiarity with TAManager.
 
-- **New Users:** If you're just getting started, we recommend to begin with the [Quick Start](#quick-start) section. This will provide you with a step-by-step introduction to TAManager's essential features.
+- **New Users:** If you're just getting started, we recommend to begin with the [Quick Start](#quick-start) section. This will provide you with step-by-step introductions to TAManager's essential features.
 
 - **Experienced Users:** If you are an experienced user of TAManager, you can use the [Table of Contents](#table-of-contents) to quickly navigate to specific sections of interest. If you're looking for a quick reference, the [Command Summary](#command-summary) provides an overview of the command syntax.
 
