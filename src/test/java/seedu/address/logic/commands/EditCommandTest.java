@@ -66,7 +66,10 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedDoctor));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        System.out.println(model.getFilteredDoctorList().get(0));
         expectedModel.setPerson(model.getFilteredDoctorList().get(0), editedDoctor);
+        System.out.println(expectedModel.getFilteredDoctorList().get(0));
+        System.out.println(model.getFilteredDoctorList().get(0));
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }

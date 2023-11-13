@@ -30,7 +30,7 @@ public class TypicalDoctor {
     public static final Doctor ALICE = new DoctorBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withRemark("She wants to become a Surgeon.").withGender("F").withIc("S9631267K")
-            .withTags("NEUROLOGIST").withAppointments(APPOINTMENT_1, APPOINTMENT_2).build();
+            .withTags("NEUROLOGIST").build();
     public static final Doctor BOYD = new DoctorBuilder().withName("Boyd Anders")
             .withAddress("311, Clementi Ave 2, #02-25").withRemark("His weakness is being a Perfectionist")
             .withEmail("boyda@example.com").withPhone("98765432").withGender("M").withIc("S9331268K")
