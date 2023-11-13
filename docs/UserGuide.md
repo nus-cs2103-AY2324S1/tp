@@ -94,8 +94,8 @@ The following glossary table provides clarification on commonly-used terms as we
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution to Mac users:**
 Performing these instructions may result in non-deterministic behaviour of data loading in HouR. This was tested on multiple MacOS Systems:
-<br/>Right-click `hour.jar` > Open With > JavaLauncher.app 
-<br/>First-time users may be prompted with a warning that the file was downloaded from the Internet. Simply click Open in the prompt to continue.
+<br/>1. Right-click `hour.jar` > Open With > JavaLauncher.app 
+<br/>2. First-time users may be prompted with a warning that the file was downloaded from the Internet. Simply click Open in the prompt to continue.
 
 </div>
 
@@ -460,7 +460,7 @@ Conversely, if **NEW_DATE** is the current date, the **leave status** of the emp
 
 Examples:
 * `editleave id/EID1234-5678 old/2023-12-26 new/2023-12-28` edits the leave on 26 December 2023 to 28 December 2023
-  for employee with id EID1234-5678. The old leave date is replaced by the new leave date in the leave list.
+  for employee with id EID1234-5678. The old leave date is **replaced** by the new leave date in the leave list.
 
 ![editleave success](images/ug-pics/editLeaveSuccess.png)
 
