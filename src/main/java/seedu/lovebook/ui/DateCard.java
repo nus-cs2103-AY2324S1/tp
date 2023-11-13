@@ -14,19 +14,6 @@ public class DateCard extends UiPart<Region> {
 
     private static final String FXML = "DateListCard.fxml";
 
-    private static final String MALE_AVATAR_FILE_PATH = "images/avatars/male/";
-    private static final String FEMALE_AVATAR_FILE_PATH = "images/avatars/female/";
-    private static final String INVALID_IMAGE_FILE_PATH = "images/bot.png";
-    private static final String STAR_IMAGE_FILE_PATH = "images/star.png";
-    private static final String HOROSCOPE_FILE_PATH = "images/horoscopes/";
-    private static final String MALE_GENDER_FILE_PATH = "images/genders/male.png";
-    private static final String FEMALE_GENDER_FILE_PATH = "images/genders/female.png";
-    private static final String AGE_HEIGHT = " years old, with a height of ";
-    private static final String HEIGHT_INCOME = "cm, and an income of $";
-    private static final String INCOME = " per month.";
-    private static final String PNG = ".png";
-
-
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -60,26 +47,26 @@ public class DateCard extends UiPart<Region> {
         this.date = date;
         id.setText(displayedIndex + ". ");
         name.setText(date.getName().fullName);
-        aboutInfo.setText(date.getAge().value + AGE_HEIGHT + date.getHeight().value
-                + HEIGHT_INCOME + date.getIncome().value + INCOME);
+        aboutInfo.setText(date.getAge().value + " years old, with a height of " + date.getHeight().value + "cm, and "
+                + "an income of $" + date.getIncome().value + " per month.");
         displayIcons();
     }
     private void displayIcons() {
         try {
-            horoscopeImage.setImage(new Image(HOROSCOPE_FILE_PATH + date.getHoroscope().value.toLowerCase()
-                    + PNG));
+            horoscopeImage.setImage(new Image("images/horoscopes/" + date.getHoroscope().value.toLowerCase()
+                    + ".png"));
             if (date.getGender().value.equals("M")) {
-                genderImage.setImage(new Image(MALE_GENDER_FILE_PATH));
-                avatarImage.setImage(new Image(MALE_AVATAR_FILE_PATH + date.getAvatar().value + PNG));
+                genderImage.setImage(new Image("images/genders/male.png"));
+                avatarImage.setImage(new Image("images/avatars/male/" + date.getAvatar().value + ".png"));
             } else {
-                genderImage.setImage(new Image(FEMALE_GENDER_FILE_PATH));
-                avatarImage.setImage(new Image(FEMALE_AVATAR_FILE_PATH + date.getAvatar().value + PNG));
+                genderImage.setImage(new Image("images/genders/female.png"));
+                avatarImage.setImage(new Image("images/avatars/female/" + date.getAvatar().value + ".png"));
             }
             if (date.getStar().isStarred.equals("true")) {
-                starImage.setImage(new Image(STAR_IMAGE_FILE_PATH));
+                starImage.setImage(new Image("images/star.png"));
             }
         } catch (IllegalArgumentException e) {
-            horoscopeImage.setImage(new Image(INVALID_IMAGE_FILE_PATH));
+            horoscopeImage.setImage(new Image("images/bot.png"));
         }
     }
 

@@ -54,6 +54,7 @@ public class DatePrefs implements ReadOnlyDatePrefs {
      */
     public void resetData(ReadOnlyDatePrefs newData) {
         requireNonNull(newData);
+
         setPreferences(newData.getPreferences().get(0));
     }
 
