@@ -940,7 +940,7 @@ Command: `adda` or `addapplicant`
 
 --------------------------------------------------------------------------------------------------------------------
 
-Appendix: Effort
+## **Appendix: Effort**
 
 Overall, we felt the difficulty level for ClubMembersContacts was moderately high. When creating the project, we had to,
 which evolved from AB-3, we meticulously considered the overall design, architecture and testing aspects to ensure the
@@ -971,3 +971,5 @@ how the components worked.
 many of the methods were doing and there were so many abstractions that required us to trace the code to really 
 understand what was happening. We had to spend a lot of time tracing the code and understanding how to make use of the
 same level of abstraction for our own test cases to ensure they were robust and well-written.
+
+## **Appendix: Planned Enhancements**
