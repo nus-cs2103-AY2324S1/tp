@@ -1098,11 +1098,3 @@ testers are expected to do more *exploratory* testing. For positive
     1. Prerequisite: The last command to be successfully executed is a command that can be undone (View User Guide for list of commands that can be undone).
     2. Test case: `redo`<br>
        Expected: No command is redone. Error details shown in the result display. Command box remains the same.
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
