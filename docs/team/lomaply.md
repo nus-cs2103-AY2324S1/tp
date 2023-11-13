@@ -5,7 +5,7 @@ title: Linus' Project Portfolio Page
 
 ### Project: OutBook
 
-OutBook is a desktop personal secretary application used for saving contacts and scheduling meetings. Users can link their contacts to their meetings, to keep track of the personnel attending these meetings.
+OutBook is a desktop data management application for freelance insurance agents to manage their numerous contacts and meeting schedule. Users can link their contacts to their meetings, to keep track of the personnel attending these meetings.
 
 My contributions to the project are listed below.
 

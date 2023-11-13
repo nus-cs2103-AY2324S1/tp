@@ -407,7 +407,7 @@ When the command is executed, the meeting is marked as complete by creating a ne
 
 Following this, the last contacted time of all the attendees of the meeting are updated to the end time of the meeting.
 
-<img src="images/mark/Update Attendee LastContactedTime.png" width=1000 /> 
+<img src="images/mark/Update Attendee LastContactedTime.png" width=1000 />
 
 Finally, a `CommandResult` is produced and returned to the `LogicManager`.
 
@@ -921,7 +921,7 @@ Mark a Meeting as completed
 
 ### Data Storage
 
-No save file 
+No save file
 
 1. Launch OutBook <br>
    Expected: The default address book is loaded.
