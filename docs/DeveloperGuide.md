@@ -676,16 +676,15 @@ testers are expected to do more *exploratory* testing.
        ![Ui](images/about.png)
 
 * Shutdown
-    1. Click on the cross at the top of the window.
+  * Click on the cross at the top of the window.
        * MacOs: Red cross button at top left side of the window.
        * Windows & Linux: Cross button at the top right side of the window.
        <br>
-       <br>
      Expected: The application window disappears. 
-  <br>
-    2. Enter `exit` into the command box of the application. <br>
-     Expected: The application window disappears.
-     <br>
+   <br><br>
+  * Enter `exit` into the command box of the application. <br>
+  Expected: The application window disappears.
+  <br><br>
 
 * Subsequent Launches
 
