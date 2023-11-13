@@ -551,11 +551,11 @@ The `FullTaskList` class is implemented as a list to view all the collective tas
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
-* [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
-* [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
+* [Documentation guide](https://ay2324s1-cs2103t-t11-3.github.io/tp/Documentation.html)
+* [Testing guide](https://ay2324s1-cs2103t-t11-3.github.io/tp/Testing.html)
+* [Logging guide](https://ay2324s1-cs2103t-t11-3.github.io/tp/Logging.html)
+* [Configuration guide](https://ay2324s1-cs2103t-t11-3.github.io/tp/Configuration.html)
+* [DevOps guide](https://ay2324s1-cs2103t-t11-3.github.io/tp/DevOps.html)
 
 --------------------------------------------------------------------------------------------------------------------
 
