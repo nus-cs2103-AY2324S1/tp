@@ -44,6 +44,30 @@ public class CommandResult {
         return showHelp;
     }
 
+    /**
+     * Check if this CommandResult instance is meant for showing table window.
+     * @return true if this is a XXXTableCommandResult instance, false otherwise.
+     */
+    public boolean isShowTable() {
+        return false;
+    }
+
+    /**
+     * Check if this CommandResult instance is meant for showing bar chart window.
+     * @return true if this is a XXXBarChartCommandResult instance, false otherwise.
+     */
+    public boolean isShowBarChart() {
+        return false;
+    }
+
+    /**
+     * Check if this CommandResult instance is meant for showing trend window.
+     * @return true if this is a TrendCommandResult instance, false otherwise.
+     */
+    public boolean isShowTrend() {
+        return false;
+    }
+
     public boolean isExit() {
         return exit;
     }
@@ -75,6 +99,9 @@ public class CommandResult {
         return new ToStringBuilder(this)
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
+                .add("showTable", this.isShowTable())
+                .add("showBarChart", this.isShowBarChart())
+                .add("showTrend", this.isShowTrend())
                 .add("exit", exit)
                 .toString();
     }

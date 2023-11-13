@@ -7,16 +7,20 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.NameContainsKeywordPredicate;
+import seedu.address.model.person.Student;
 import seedu.address.testutil.AddressBookBuilder;
+
 
 public class ModelManagerTest {
 
@@ -30,8 +34,49 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getStudentByEitherNameOrIndex_success() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
+        Student lastStudent = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+        Name nameLastPerson = lastStudent.getName();
+
+        assertEquals(lastStudent, model.getStudentFromFilteredPersonListByIndex(indexLastPerson).get());
+        assertEquals(lastStudent, model.getStudentFromFilteredPersonListByName(nameLastPerson).get());
+    }
+
+    @Test
+    public void testGetTableWithNullArgument() {
+        assertThrows(NullPointerException.class, () -> ModelManager.getTable(null));
+    }
+
+    @Test
+    public void testGetBarWithNullArgument() {
+        assertThrows(NullPointerException.class, () -> ModelManager.getBarChart(null));
+    }
+
+    @Test
+    public void testExportWithNullVisual() {
+        assertThrows(NullPointerException.class, () -> modelManager.export(null));
+    }
+
+    @Test
     public void setUserPrefs_nullUserPrefs_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setUserPrefs(null));
+    }
+
+    @Test
+    public void getNullTable_throwsException() {
+        assertThrows(NullPointerException.class, () -> ModelManager.getTable(null));
+    }
+
+    @Test
+    public void getNullBarChart_throwsException() {
+        assertThrows(NullPointerException.class, () -> ModelManager.getBarChart(null));
+    }
+
+    @Test
+    public void exportWithNullVisual_throwsException() {
+        assertThrows(NullPointerException.class, () -> modelManager.export(null));
     }
 
     @Test
@@ -117,8 +162,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredPersonList(new NameContainsKeywordPredicate(ALICE.getName().fullName));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

@@ -1,16 +1,22 @@
 package seedu.address.testutil;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
+import seedu.address.model.person.MrtStation;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.SecLevel;
+import seedu.address.model.person.Student;
+import seedu.address.model.tag.EnrolDate;
+import seedu.address.model.tag.Subject;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -28,15 +34,20 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
+     * Returns an {@code EditPersonDescriptor} with fields containing {@code student}'s details
      */
-    public EditPersonDescriptorBuilder(Person person) {
+    public EditPersonDescriptorBuilder(Student student) {
         descriptor = new EditPersonDescriptor();
-        descriptor.setName(person.getName());
-        descriptor.setPhone(person.getPhone());
-        descriptor.setEmail(person.getEmail());
-        descriptor.setAddress(person.getAddress());
-        descriptor.setTags(person.getTags());
+        descriptor.setName(student.getName());
+        descriptor.setPhone(student.getPhone());
+        descriptor.setEmail(student.getEmail());
+        descriptor.setAddress(student.getAddress());
+        descriptor.setGender(student.getGender());
+        descriptor.setSecLevel(student.getSecLevel());
+        descriptor.setNearestMrtStation(student.getNearestMrtStation());
+        if (!student.getSubjects().isEmpty()) {
+            descriptor.setSubjects(student.getSubjects());
+        }
     }
 
     /**
@@ -72,12 +83,54 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Sets the {@code Gender} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withGender(String gender) {
+        descriptor.setGender(new Gender(gender));
+        return this;
+    }
+
+    /**
+     * Sets the {@code SecLevel} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withSecLevel(String secLevel) {
+        descriptor.setSecLevel(new SecLevel(secLevel));
+        return this;
+    }
+
+    /**
+     * Sets the {@code MrtStation} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withNearestMrtStation(String nearestMrtStation) {
+        descriptor.setNearestMrtStation(new MrtStation(nearestMrtStation));
+        return this;
+    }
+
+    /**
+     * Parses the {@code Set<String> tags} into a {@code Set<Subject>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+    public EditPersonDescriptorBuilder withSubjects(Set<String> tags) {
+        Set<Subject> subjectSet = tags.stream().map(Subject::new).collect(Collectors.toSet());
+        descriptor.setSubjects(subjectSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code Set<String> tags} and {@code Set<String> dates} into a {@code Set<Subject>}
+     * and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withSubjects(Set<String> tags, Collection<String> dates) {
+        Iterator<String> tagIterator = tags.iterator();
+        Iterator<String> dateIterator = dates.iterator();
+        Set<Subject> subjectSet = new HashSet<>();
+        while (tagIterator.hasNext() && dateIterator.hasNext()) {
+            String nextTag = tagIterator.next();
+            EnrolDate nextDate = new EnrolDate(dateIterator.next());
+            subjectSet.add(new Subject(nextTag, nextDate));
+        }
+        descriptor.setSubjects(subjectSet);
         return this;
     }
 
