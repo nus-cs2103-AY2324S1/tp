@@ -31,15 +31,13 @@ effortlessly.
     * **Justification**: Since we intended to repurpose the application to cater to NUS fresh graduates who are
       searching
       for jobs, the current fields were irrelevant.
-    * **Highlights**: This was a tedious process as it required many adjustments throughout the whole code. Not only did
-      the
-      classes representing the fields have to change, the command and parser classes had to be changed to interact with
-      the fields differently. Sample data and test cases had to be changed as well.
+    * **Highlights**: This was a tedious process as it required many adjustments throughout the whole code. The field,
+      command and parser classes had to be changed to interact differently. Sample data and test cases had to be changed
+      as well.
       <br><br>
 2. Improved the `find` command
-    * **What it does**: The `find` command now allows for searching keywords by specific fields when a user provides a
-      prefix. Users can also choose not to provide a prefix if they want to search in all fields. Multiple keywords can
-      be specified, and multiple prefixes can be searched for at the same time.
+    * **What it does**: The `find` command now allows for searching by specific fields. Users can also choose to search
+      in all fields. Multiple keywords and/or prefixes can be searched at the same time.
     * **Justification**: Users might want to search in fields other than company name. By providing flexibility in the
       search process, users can find their job applications more efficiently.
     * **Highlights**: Implementing this functionality required changing the `NameContainsKeywordsPredicate` class to a
@@ -54,13 +52,10 @@ effortlessly.
     * **Highlights**: This was a rather simple feature to implement, but the use of a `FieldComparator` class made this
       function extendable should more fields be added later on.
 
-### Code Contributed
-
-My code contributions can be found
-here: [Reposense Report](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=JeremyYong128&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
-
 ### Other Contributions
 
+* **Code contributed**:
+  * My code contributions can be found here: [Reposense Report](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=JeremyYong128&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
 * **Project management**:
   * Actively assisted peers by providing technical advice and reviewing and approving PRs.
   * Conducted multiple checks on code quality and refactored messy code.

@@ -10,8 +10,9 @@ _Find Your Success with JobFindr_
 ## Table of Contents
 
 1. [Introduction](#introduction)
-    * [First Time at JobFindr](#first-time-at-jobfindr)
-    * [Experience at JobFindr](#experienced-at-jobfindr)
+    * [Navigating the User Guide](#navigating-the-user-guide)
+    * [First Time using JobFindr](#first-time-using-jobfindr)
+    * [Returning JobFindr User](#returning-jobfindr-user)
 2. [Quick Start](#quick-start)
 3. [Quick Tutorial](#quick-tutorial)
 4. [Key Information](#key-information)
@@ -43,58 +44,101 @@ _Find Your Success with JobFindr_
 7. [Glossary](#glossary)
 
 --------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always;">
 ## **Introduction**
+
+Are you an NUS Fresh Graduate looking for a job? Are you struggling to use a spreadsheet to keep track of your job
+applications? Are you looking for a better way to manage your job applications? Well, look no further as **JobFindr** is
+here to help you!
 
 JobFindr is a **Desktop-based Job Application Management App** for NUS Fresh Graduates to record, track and organise
 their job applications.
 
 JobFindr aims to simplify your job application management by targeting the following benefits:
 
-1. _Flexibility_ in **adding**, **deleting** and **editing** job applications and interviews
-2. _Efficiency_ in **finding** the specific application with minimal keywords
-3. _Organisation_ in **sorting** the list of applications to not miss out on key opportunities
+1. _Flexibility_ in **adding**, **deleting** and **editing** job applications and interviews.
+2. _Efficiency_ in **finding** the specific application with minimal keywords.
+3. _Organisation_ in **sorting** the list of applications to not miss out on key opportunities.
 
 JobFindr combines the rapid efficiency of Command Line Interface (CLI) with the visual clarity of
 [Graphical User Interface (GUI)](#user-interface), offering job application management that is suited for your specific
 needs and preferences.
 
-### First Time at JobFindr?
+### Navigating the User Guide
 
-_Welcome onboard! Let us be part of your job search journey!_
+Welcome to the JobFindr User Guide! This document is your key to unlocking all the features and capabilities of
+JobFindr. To enhance your understanding and usage of this tool, we have included a variety of annotations throughout
+this guide. Here's what they mean:
+
+<div markdown="block" class="alert alert-success">
+**:bulb: Useful Tips:**<br>
+* These are practical suggestions to enhance your JobFindr experience.
+* Implement these tips for an efficient and effective job search journey.
+</div>
+
+<div markdown="block" class="alert alert-danger">
+**:exclamation: Warning:**<br>
+* Pay close attention to these sections.
+* They highlight important limitations and common pitfalls in using JobFindr, ensuring you avoid any unnecessary issues.
+</div>
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes:**<br>
+* Dive deeper into the functionalities of JobFindr with these informative notes.
+* They provide expanded insights and additional context, empowering you to leverage JobFindr to its fullest potential.
+</div>
+
+Additionally, you'll encounter different text styles within this guide:
+
+* [Hyperlinks](#navigating-the-user-guide): Easily identifiable, these links lead you to other relevant
+  sections of the guide or to external websites for more information.
+* `Code Text`: Highlighted text that can likely be keyed into the command box or to your computer.
+
+### First Time using JobFindr
+
+_Welcome aboard! We're delighted to be part of your job search journey!_
 
 1. To get started with JobFindr, refer to the [Quick Start](#quick-start) below.
 2. After setting up JobFindr on your computer, you can get started with a [Quick Tutorial](#quick-tutorial) to get
    familiar with the
    features.
-3. You may also explore JobFindr at your own pace, you can refer to the [Feature](#features) section for all the
-   available features on JobFindr.
+3. You may also explore JobFindr at your own pace. You can refer to the [Feature](#features) section for all of
+   JobFindr's features.
 
-### Experienced at JobFindr
+If you have any questions or face challenges, our [FAQ](#faq) Section has solutions to common queries. Let's make your
+JobFindr experience seamless and successful!
 
-_Good to see you back here! How we can help you?_
+### Returning JobFindr User
+
+_Good to have you back! We're thrilled to have you with us again. How can we help you?_
 
 1. Facing problem with specific command?
-    * You may refer to the detailed instruction for each command in the [Features](#features) section or access the
-      hyperlink from our [Table of Contents](#table-of-contents).
+    * You may refer to the detailed instruction for each command in the [Features](#features) section or find direct
+      links in our [Table of Contents](#table-of-contents).
 2. Forgot the commands available on JobFindr?
-    * Please kindly refer to the [Command Summary](#command-summary) for a quick reminder of what you can do on
+    * You may refer to the [Command Summary](#command-summary) for a quick refresher of what you can do on
       JobFindr.
-3. Any other issues faced when using JobFindr?
+3. Encountering any other challenges during your JobFindr journey?
     * You may refer to the [FAQ](#faq) Section for solutions to common issues faced by our users.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Quick Start**
 
-1. Ensure you have Java `11` or above installed in your Computer.
+We are excited to have you on board! Let us help you get started with JobFindr in a few simple steps. You will need to
+have some basic knowledge of terminal commands. You can learn how to use the terminal
+with [this guide](https://www.freecodecamp.org/news/command-line-for-beginners/).
+
+1. Ensure you have **Java 11** or above installed in your computer.
+
     1. To check if you have installed the correct Java version
-       over [here](#1-how-do-i-make-sure-i-have-installed-the-correct-java-version)
+       over [here](#1-how-do-i-make-sure-i-have-installed-the-correct-java-version).
     2. Follow the instruction
        over [here](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
-       to install Java `11`
+       to install **Java 11**
 2. Download the latest `JobFindr.jar` from [here](https://github.com/AY2324S1-CS2103T-W12-3/tp/releases).
    <br>
    ![DownloadJar](images/user-guide/DownloadJar.png)
@@ -102,7 +146,8 @@ _Good to see you back here! How we can help you?_
 3. Copy the file to the folder you want to use as the **home folder** for your AddressBook.
 4. [Open a command terminal](#2-how-do-i-open-up-terminal-on-my-computer), `cd` into the folder you put the jar file in,
    and enter the command `java -jar JobFindr.jar` to run the application.
-5. A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br><br>
+5. A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.
+   <br><br>
    ![Ui](images/user-guide/QuickStartUi.png)
 6. Get started on JobFindr with our guided [Quick Tutorial](#quick-tutorial) to learn the basics of using JobFindr in a
    few minutes.
@@ -123,8 +168,8 @@ features to get started on JobFindr.
 
 ### 1. Add your first job application on JobFindr
 
-Leverage on the power of flexibility by adding applications with minimal mandatory fields. Now let us try to add an
-application onto JobFindr.
+Maximise your flexibility by adding applications with just the essential fields. Now, let us try to add an
+application in JobFindr.
 
 **Step 1**: Find the [Command Box](#user-interface) on JobFindr and type in `add c/Google r/Software Engineer` before
 pressing **Enter**.<br>
@@ -134,16 +179,16 @@ pressing **Enter**.<br>
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Notes:**<br>
-* * Learn more about the structure of a job application [here](#structure-of-a-job-application).
+* Learn more about the structure of a job application [here](#structure-of-a-job-application).
 </div>
 
-**Step 2**: You should see a new entry added to the Job List Panel just like this: <br>
+**Step 2**: You should see a new entry added to the job list just like this: <br>
 
 * You may need to scroll down the list to view the new entry by using the scroll bar.
   <img src="images/user-guide/QuickTutorial2.png" style="display: block; margin: auto;" width="300">
 
 _[Optional]_ Good job! You have added your first application onto JobFindr! Now, you may try out adding other
-applications with different field inputs. Try entering or copy-paste the following into the Command Box:
+applications with different field inputs. Try entering or copying the following into the Command Box:
 
 1. `add c/Apple r/iOS Engineer d/Jan 02 2024 2359`
 2. `add c/Facebook r/Product Manager d/Jan 04 2023 1200 s/Pending`
@@ -151,11 +196,11 @@ applications with different field inputs. Try entering or copy-paste the followi
 
 ### 2. Edit a field in the newly added application
 
-Now you have learnt how to add applications onto JobFindr, what if you want to edit/update a specific field in the newly
-added application? Let's try using the edit feature.
+Now that you have learnt how to add applications in JobFindr, let's explore how to edit or update a specific field in
+the newly added application!
 
-**Step 1**: Locate the [index](#command-format) of the application you want to edit. Let's edit our newly added
-application to `Google` for now. <br>
+**Step 1**: Find the [index](#command-format) of the application you want to edit. Let's edit our newly added
+`Google` application for now. <br>
 
 * You may want to enter the [`list`](#listing-all-applications--list) command to list all available applications.
   <img src="images/user-guide/QuickTutorial3.png" style="display: block; margin: auto;" width="300">
@@ -164,17 +209,18 @@ application to `Google` for now. <br>
 application's role.<br>
 <img src="images/user-guide/QuickTutorial4.png" style="display: block; margin: auto;" width="300">
 
-_[Optional]_ Great! You have now edited the role of your application. Try editing other fields as well:
+_[Optional]_ Great! You have now edited the `role` field in your application. Try editing other fields by entering the
+following commands:
 
 1. `edit 8 s/PENDING`
 2. `edit 8 d/Dec 02 2023 2359`
 
 ### 3. Delete the application
 
-What if the application is no longer relevant to you now? Can we delete the application from our app? Yes, definitely
-let's do exactly that now.
+What if the application is no longer relevant to you? Can we delete the application from our app? Of course! Let's try
+deleting the application we have just added.
 
-**Step 1**: Locate the [index](#command-format) of the application you want to edit. Let's edit our newly added
+**Step 1**: Find the [index](#command-format) of the application you want to edit. Let's edit our newly added
 application to `Google` for now. <br>
 <img src="images/user-guide/QuickTutorial5.png" style="display: block; margin: auto;" width="300">
 
@@ -184,7 +230,7 @@ application to `Google` for now. <br>
 removed from the list of applications.<br>
 <br>
 
-Congrats! You have now master the basics of JobFindr! You may head right below to learn more
+Congrats! You have now master the basics of JobFindr! You may head below to learn more
 about [JobFindr in details](#key-information)
 or go on to learn about [the other commands](#features) you can utilise in JobFindr.
 
@@ -398,6 +444,7 @@ _Shows a list of all job applications in alphabetical order of the company name.
 </div>
 
 [&uarr; Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Adding an Application : `add`
@@ -824,8 +871,7 @@ Let's type `interview edit 2 from/ 1 d/Jan 20 2024 1200` and press **Enter**.
 ![IntEditCommandEg2](images/user-guide/IntEditCommandEg2.png)
 
 **Step 3:** Look at the Interview Card for the `Case Interview` from `Shopee`, the `date` will be edited.
-
-![IntEditCommandEg3](images/user-guide/IntEditCommandEg3.png)
+<img src="images/user-guide/IntEditCommandEg3.png" style="display: block; margin: auto;" width="500">
 
 **Common Errors:**
 
