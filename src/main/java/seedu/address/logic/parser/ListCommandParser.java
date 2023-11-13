@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.ListByDayCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListUnPaidCommand;
@@ -14,6 +17,7 @@ import seedu.address.model.person.PaidPredicate;
  * Parses input arguments and creates a new ListCommand object
  */
 public class ListCommandParser implements Parser<ListCommand> {
+    private final Logger logger = LogsCenter.getLogger(getClass());
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
@@ -34,6 +38,7 @@ public class ListCommandParser implements Parser<ListCommand> {
         try {
             day = new Day(trimmedArgs);
         } catch (IllegalArgumentException e) {
+            logger.info("[ListCommandParser.parse()]: Invalid extraneous parameter");
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListByDayCommand.MESSAGE_USAGE));
         }
