@@ -25,17 +25,18 @@ This user guide contains **all** the commands available to you, along with **ste
 
 
 ## **Quick Start**
-1. Ensure you have Java `11` or above installed in your computer. You can download it from [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
-2. Download the latest `FosterFamily.jar` from [here](https://github.com/AY2324S1-CS2103T-T13-4/tp/releases).
+Step 1. Ensure you have Java `11` or above installed in your computer. You can download it from [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
-3. Copy the file to the folder you want to use as the _home folder_ for Foster Family.
+Step 2. Download the latest `FosterFamily.jar` from [here](https://github.com/AY2324S1-CS2103T-T13-4/tp/releases).
 
-4. Open a command terminal.
+Step 3. Copy the file to the folder you want to use as the _home folder_ for Foster Family.
 
-5. Navigate to the home folder you put the jar file in using the command `cd <path_to_home_folder>`, replacing `<path_to_home_folder>`  with your file path. 
+Step 4. Open a command terminal.
 
-6. Use the `java -jar FosterFamily.jar` command to run the application.<br>
+Step 5. Navigate to the home folder you put the jar file in using the command `cd <path_to_home_folder>`, replacing `<path_to_home_folder>`  with your file path. 
+
+Step 6. Use the `java -jar FosterFamily.jar` command to run the application.<br>
 
    The Foster Family GUI should appear on screen, similar to the screenshot attached below. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png) 
@@ -43,7 +44,7 @@ This user guide contains **all** the commands available to you, along with **ste
 <div style="page-break-after: always;"></div>
 
 
-7. Type a command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
+Step 7. Type a command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
 
    Some example commands you can try:
 
