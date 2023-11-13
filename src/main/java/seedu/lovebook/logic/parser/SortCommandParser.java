@@ -1,8 +1,8 @@
 package seedu.lovebook.logic.parser;
 
 import static seedu.lovebook.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.lovebook.logic.Messages.MESSAGE_INVALID_FILTER_FORMAT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_AGE;
+import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_HOROSCOPE;
 import static seedu.lovebook.logic.parser.CliSyntax.PREFIX_INCOME;
@@ -29,7 +29,7 @@ public class SortCommandParser implements Parser<SortCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_AGE,
-                PREFIX_HEIGHT, PREFIX_INCOME, PREFIX_HOROSCOPE);
+                PREFIX_HEIGHT, PREFIX_INCOME, PREFIX_HOROSCOPE, PREFIX_GENDER);
         argumentMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_AGE, PREFIX_HEIGHT, PREFIX_INCOME,
                 PREFIX_HOROSCOPE);
 
@@ -61,14 +61,19 @@ public class SortCommandParser implements Parser<SortCommand> {
             sequence = argumentMultimap.getValue(PREFIX_HOROSCOPE).get();
             metric = new Prefix("horoscope/");
         }
+        if (argumentMultimap.getValue(PREFIX_GENDER).isPresent()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        }
         if (metric == null || !sequence.equals(SortCommand.SEQUENCE_ASCENDING)
                 && !sequence.equals(SortCommand.SEQUENCE_DESCENDING)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
+        System.out.println("prefixCount: " + prefixCount);
         if (prefixCount > 1) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_FILTER_FORMAT, SortCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
         return new SortCommand(metric, sequence);
     }

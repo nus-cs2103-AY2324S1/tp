@@ -407,7 +407,7 @@ Expected output: `Unstarred Date: John Doe; Age: 21; Gender: M; Height: 123; Inc
 [Scroll back to *Table of Contents*](#table-of-contents)
 <div style="page-break-after: always;"></div>
 
-### **Sorting, Searching for dates**
+### **Sorting, Finding dates**
 
 #### **Finding a date: `find`**
 
@@ -440,9 +440,18 @@ Format: `filter METRIC/ARG`
 
 <box type="tip">
 
-* Filter must be from list of metrics
 * Metric is limited to `gender, age, name, height` only
-* Arg can only be one keyword
+* Arguments should be non-empty and adhere to the constraints of the metric
+* Multiple valid METRIC/ARG pairs can be added to the command line, and the search will be conducted for all pairs
+  provided.
+* Filter format is valid as long as there is one valid METRIC/ARG pair.
+
+</box>
+
+<box type="important">
+
+When filtering dates by a valid metric and an invalid metric, the valid METRIC/ARG pair will be used to filter the dates. 
+Note that the invalid metric will be ignored and there will be no checking of the validity of the invalid metric value.
 
 </box>
 
@@ -451,8 +460,9 @@ Example:
 - `filter name/Cleon`
 - `filter gender/M`
 - `filter gender/M name/Cleon`
+- `filter xx gender/M', where xx can be anything including an invalid metric`
 
-Expected Output: `Lists the dates with the metric specified`
+Expected Output: `Lists the dates with the valid metric values specified`
 
 [Scroll back to *Table of Contents*](#table-of-contents)
 
@@ -466,19 +476,15 @@ Format: `sort METRIC/ORDER`
 
 <box type="tip">
 
-The relevant metrics are
-    * `name/ORDER`
-    * `age/ORDER`
-    * `height/ORDER`
-    * `income/ORDER`
-    * `horoscope/ORDER`
-Order is limited to `increasing` or `decreasing` only
+* Metrics are limited to `name/`, `age/`, `height/`, `income/` and `horoscope/` only.
+* Order is limited to `increasing` or `decreasing` only and is case-sensitive.
+* Sort command is valid as long as there is only one valid METRIC/ORDER pair and no other metrics are provided.
 
 </box>
 
 <box type="important">
 
-When sorting dates by a field where both have an equal value, say Kevin and Wayne are sorted by income and both have
+* When sorting dates by a field where both have an equal value, say Kevin and Wayne are sorted by income and both have
 an income of 2000, applying commands such as edit or star, can affect the stability of the sort. However, the overall
 sorting order by value is preserved.
              
@@ -488,6 +494,7 @@ Example:
 
 - `sort name/increasing`
 - `sort horoscope/decreasing`
+- `sort xx income/decreasing`, where xx is not a metric
 
 Expected Output: `Lists the dates in the order specified`
 

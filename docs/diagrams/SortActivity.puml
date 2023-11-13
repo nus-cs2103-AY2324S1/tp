@@ -2,19 +2,23 @@
 skin rose
 skinparam ActivityFontSize 15
 skinparam ArrowFontSize 12
-
 start
-:User enters sort command;
-if () then ([else])
-  :Parse exception thrown;
-  stop
-else ([All compulsory fields are valid and in the correct format])
-  if () then ([sequence is decreasing])
-    :Returns a list of Dates in decreasing order;
-  else ([sequence is increasing])
-    :Returns a list of Dates in increasing order;
-  endif
-endif
-stop
+:User launches LoveBook;
 
+: User enters a command to sort dates in the GUI;
+
+: Input is passed over to the logic component;
+
+if () then ([command is in the correct format with valid parameters])
+        if () then ([sequence specified is increasing])
+            :Display dates sorted in increasing order;
+            stop
+        else ([else])
+            :Display dates sorted in decreasing order;
+            stop
+        endif
+else ([else])
+    :Display invalid command format error message;
+    stop
+endif
 @enduml

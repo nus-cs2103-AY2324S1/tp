@@ -63,6 +63,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         if (argMultimap.getValue(PREFIX_HEIGHT).isPresent()) {
             keyword = argMultimap.getValue(PREFIX_HEIGHT).get();
             metric = new Prefix("height/");
+            System.out.println("keyword: " + keyword);
             ParserUtil.parseHeight(keyword); // checks validity
             predicates.add(new MetricContainsKeywordPredicate(keyword, metric));
         }
