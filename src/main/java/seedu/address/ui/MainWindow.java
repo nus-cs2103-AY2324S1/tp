@@ -16,7 +16,6 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Dashboard;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -142,14 +141,13 @@ public class MainWindow extends UiPart<Stage> {
     public void fillContent(boolean showDashboard) {
         content.getChildren().clear();
 
-        Dashboard dashboard = logic.getDashboard();
         if (showDashboard) {
-            dashboard.openDashboard();
-            content.getChildren().add(new DashboardDisplay(dashboard).getRoot());
+            logic.openDashboard();
+            content.getChildren().add(new DashboardDisplay(logic.getDashboard()).getRoot());
         } else {
-            dashboard.closeDashboard();
+            logic.closeDashboard();
             content.getChildren()
-                   .add(new ClientDisplay(logic.getFilteredPersonList(), logic.getSelectedPerson()).getRoot());
+                    .add(new ClientDisplay(logic.getFilteredPersonList(), logic.getSelectedPerson()).getRoot());
         }
     }
 

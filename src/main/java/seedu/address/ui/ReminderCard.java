@@ -9,7 +9,7 @@ import seedu.address.model.person.lead.Lead;
 import seedu.address.model.reminder.Reminder;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Reminder}.
  */
 public class ReminderCard extends UiPart<Region> {
 
@@ -30,16 +30,12 @@ public class ReminderCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label phone;
-    @FXML
     private Label followUpDate;
-    @FXML
-    private FlowPane tags;
     @FXML
     private FlowPane lead;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code ReminderCard} with the given {@code Reminder}.
      */
     public ReminderCard(Reminder reminder) {
         super(FXML);
