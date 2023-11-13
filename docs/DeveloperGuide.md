@@ -293,17 +293,26 @@ Pros: Arguably a more OOP approach since all commands that trigger view IS-A `Vi
 Cons: You cannot implement any command that does not involve viewing but inherits from any command that is a children of `ViewCommand`.  
 An example could be trying to create identical commands that does not toggle the UI after execution. This would require duplication of the exact same command code but inheriting from `Command` instead of `ViewCommand`.
 
+### Create Tags feature
+
+#### Implementation
+
+The `create` tags feature is implemented using the `CreateTagCommand` class. It extends the `Command` and overrides the `execute()` method
+to create tags.
+
+The `create` parameters from the user input are parsed using the parse method the `CreateTagCommandParser` class. `CreateTagCommandParser::Parse`
+takes in the tag parameters from the user input and combines them into a list of tags
 
 ### Search feature
 
 #### Implementation
 
-The search feature is implemented using the `SearchCommand` class. It extends `Command` and overrides the `execute()` method to
+The search feature is implemented using the `FindCommand` class. It extends `Command` and overrides the `execute()` method to
 filter users by the specified parameters.
 
-The search parameters from the user input are parsed using the parse method in the `SearchCommandParser` class. `SearchCommandParser::Parse`
+The search parameters from the user input are parsed using the parse method in the `FindCommandParser` class. `FindCommandParser::Parse`
 takes in the search parameters from the user input and combines them into a list of predicates. This list of predicates is then 
-passed as an argument to the `SearchCommand` constructor and the method returns a `SearchCommand` instance with the associated list of predicates.
+passed as an argument to the `FindCommand` constructor and the method returns a `FindCommand` instance with the associated list of predicates.
 
 Currently, the search parameters could belong to any of the three following categories: `Name`, `Status`, and `Tag`. Prefixes
 `n/`, `st/` and `t/` are used to denote the category of the search parameters respectively. E.g. `search n/alex st/interviewed t/swe`
@@ -312,7 +321,7 @@ The list of predicates is a list comprising predicate objects whose classes impl
 Each category has its own predicate class i.e. `NameContainsKeywordPredicate`, `StatusContainsKeywordPredicate`, `TagContainsKeywordPredicate`
 and each class overrides the `test` method which returns true if the persons list contains any of the given names/status/tags.
 
-Finally, the execute method in `SearchCommand` class invokes the `updateFilteredPersonList(predicatesList)` which will 
+Finally, the execute method in `FindCommand` class invokes the `updateFilteredPersonList(predicatesList)` which will 
 update the list of persons displayed.
 
 Given below is an example usage scenario and how the search mechanism behaves at each step.
@@ -324,7 +333,7 @@ offered status and tagged as swe.
 
 The following sequence diagram shows how the search operation works:
 
-**Note:** The lifeline for `SearchCommand` and `SearchCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** The lifeline for `FindCommand` and `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 <puml src="diagrams/SearchSequenceDiagram.puml" alt="SearchSequenceDiagram" />
 
@@ -448,11 +457,9 @@ Cons: It restricts users from entering data that might be understandable or conv
 
 JABPro aims to solve the problem of HR managers having to sort through tons of job applications.
 
-It makes their life easier by allowing them to easily fetch important info about job applicants such as their contact details, application status etc.
-
-It serves as a one-stop addressbook for managing job applications.
-
-
+It makes their life easier by allowing them to easily fetch important info about job applicants such as their contact details, application status etc. In addition, 
+JABPro also provides them with the ability to quickly fetch summary stats to get an insight on the overall performance of applicants in their interviews. Lastly, JABPro also
+has a built-in event management app that allows them to efficiently note down interview schedules with applicants.
 
 
 ### User stories
@@ -465,15 +472,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Hiring Manager   | add notes and comments to candidate profiles to document interview feedback and impressions                      | I can maintain a record of interactions and feedback                                                                                       |
 | `* * *`  | Hiring Manager   | delete job applicants information                                                                                | I can remove redundant/unecessary data bloat and also to abide to privacy laws                                                             |
 | `* * *`  | Hiring Manager   | view a specific job applicant's resume or portfolio                                                              | I can check whether they meet the requirements requested by other department heads                                                         |
-| `* * *`  | Hiring Manager   | search for all job applicants that have a particular skill mentioned in their application                        | I can find suitable candidates for a project                                                                                               |
+| `* * *`  | Hiring Manager   | search for all job applicants matching a given profile                                                           | I can find suitable candidates for a project                                                                                               |
 | `* * *`  | Hiring Manager   | List all candidate's information                                                                                 | I can easily view each candidates information                                                                                              |
 | `* * *`  | Hiring Manager   | update the application status for a candidate (e.g. "Interviewed", "Rejected", "Offered")                        | I can keep track of each candidate's progress in the hiring process                                                                        |
 | `* * *`  | Hiring Manager   | record the score of the different activities such as interviewsor assessments that an applicant might go through | I can use them for effective comparison and filter the candidates easily                                                                   |
+| `* * *`  | Hiring Manager   | create tags and categorise them                                                                                  | I can colour code them based on categories and use them to tag applicants to easily distinguish them                                       |
 | `* * *`  | Hiring Manager   | compare candidates using their performance in their assessments or interviews                                    | I can choose the best candidates to move to the next stage of the hiring process and get the best performing candidates objectively        |
-| `* *`    | Hiring Manager | view a schedule/summary of events relating to the candidates                                                     | I can make preparations and arrangements for the events beforehand, and also get an idea of where each candidate is in the hiring process. |
-| `**`     | Hiring Manager   | export candidate information and application data to a spreadsheet        <br/>                                  | I can perform further analysis using alternate tools on candidate data                                                                     |
+| `* *`    | Hiring Manager   | view a schedule/summary of events relating to the candidates                                                     | I can make preparations and arrangements for the events beforehand, and also get an idea of where each candidate is in the hiring process. |
+| `**`     | Hiring Manager   | export candidate information and application data to a spreadsheet                                               | I can perform further analysis using alternate tools on candidate data                                                                     |
 | `*`      | Hiring Manager   | get data on which positions are lacking job applicants                                                           | I can update the external recruitment team to focus on head hunting applicants for these roles                                             |
 | `*`      | Hiring Manager   | get data on which positions already have too many applicants                                                     | I can forward this to the department heads to see if they still want to keep the job posting or close it                                   |
+
 
 ### Use cases
 
@@ -806,10 +815,6 @@ In the case of `ScoreList` and `UniqueTagList`, we used a hashmap to save the de
 
 
 
-
-
-
-
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -827,56 +832,142 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
-
-### Deleting a person
-
-1. Deleting a person while all persons are being shown
-
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
 
 ## Adding a person while all persons are being shown 
 
 1. Adding a person while all persons are being shown  
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
     
-   1. Test case 1 (Positive Test Case):   
+   2. Test case 1 (Positive Test Case):   
       `add n/John Poh p/98765432 e/johnpoe@gmail.com a/ 311, Clementi Ave 2, #02-25 r/ 2 years of experience in software development`  
    
-      **Note**:  The current AddressBook cannot contain anyone named `John Poh`  
-      Expected: New person is added to the list. Details of the new person shown in the status message. 
-   2. Test case (Negative Test Case):   
+      **Note**:  The current AddressBook cannot contain anyone named `John Poh`<br>
+      **Expected**: New person is added to the list. Details of the new person shown in the status message. 
+   
+   3. Test case (Negative Test Case):   
       `add n/John Poh p/98765432 e/johnpoe@gmail.com a/ 311, Clementi Ave 2, #02-25 r/ 2 years of experience in software development`  
-      **Note**:  The current AddressBook should contain a person named `John Poh`
-      Expected: No person is added. Error details shown in the status message. List of persons remains the same.
+      **Note**:  The current AddressBook should contain a person named `John Poh`<br>
+      **Expected**: No person is added. Error details shown in the status message. List of persons remains the same.
+
+### Deleting a person
+
+1. Deleting a person while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    2. Test case: `delete 1`<br>
+       **Expected**: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+
+    3. Test case: `delete 0`<br>
+       **Expected**: No person is deleted. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       **Expected**: Similar to previous.
+
+### Viewing a person's details while all persons are being shown
+1. Viewing a person's details while all persons are being shown
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    2. Test case 1:   
+       `view 1`  
+       **Expected**: Person information panel is updated to reflect the details of the person.
+
+    3. Test case 2:  
+       `view 0`  
+       **Expected**: No person is viewed. Error details shown in the status message. Person information panel remains the same.
+
+### Adding a remark to a person while all persons are being shown
+
+1. Adding a remark to a person while all persons are being shown
+    1. Prerequisites: List all persons using the `list` command.
+
+    2. Test case 1:   
+       `remark 1 r/John is a good candidate`  
+       **Expected**: New remark is added to the person. Details of remark displayed on the person information panel.
+
+    3. Test case 2:  
+       `remark 1 r/**REMARK** Furthermore, hes capable of working in a team`    
+       **Expected**: Remark is added on from the previous existing remark. Person information panel is updated to reflect the addition of the remark.  
+       Specifically `John is a good candidate` is followed by `Furthermore, hes capable of working in a team` on the person information panel.
+
+    4. Test case 3:   
+       `remark 1 r/`  
+       **Expected**: Previous remark is deleted. Person information panel is updated to reflect the deletion of the remark and is blank.
+
+    5. Test case 4:  
+       `remark 0 r/John is a good candidate`   
+       **Expected**: No remark is added. Error details shown in the status message. Person information panel remains the same.
+
+### Searching for applicants matching a given profile
+
+1. Searching for applicants matching a given profile
+    1. Prerequisites:
+       1. Set one of the applicants' status in the sample data to `interviewed` by doing `set 1 interviewed`
+
+    2. Test case 1:   
+       `search n/alex bernice`  
+       **Note**: JABPro does an `OR` search for each category meaning it will look for applicants whose names match any of the given names.<br>
+       **Expected**: If you are using our sample data, you should see `Alex Yeoh` and `Bernice Yu` being listed.
+
+    3. Test case 2:  
+       `search st/interviewed rejected`  
+       **Note**: JABPro does an `OR` search for each category meaning it will look for applicants whose status match any of the given status.<br>
+       **Expected**: If you are using our sample data, you should see `Alex Yeoh` being displayed as he is the only applicant whose status is `interviewed` 
+       (other applicants' status are `preliminary` by default).
+
+    4. Test case 3:   
+       `search t/intern developer`  
+       **Note**: JABPro does an `OR` search for each category meaning it will look for applicants who have **any** of the given tags.<br>
+       **Expected**: If you are using our sample data, you should see all the applicants listed since all of them 
+       contain either of the given tags.
+
+    5. Test case 4:  
+       `search n/alex bernice st/interviewed rejected t/intern developer`  
+       **Note**: JABPro does an `AND` search for multiple categories meaning it will look for applicants meaning it will look for applicants
+       whose name contains either alex or bernice `AND` status is either interviewed or rejected `AND` has any of the given tags.<br>
+       **Expected**: If you are using our sample data, you should see `Alex Yeoh` being the only applicant listed as he is the only applicant matching
+       the given profile.
+
+    Some incorrect commands to try: `search`, `search n/`, `search t/`, `search st/`, `search n/@`, `search t/@`, `search st/accepted` (note this is incorrect because status has to be either: preliminary, interviewed, rejected or offered)
+    **Expected**: JABPro displays an error message along with a corrective action you can take to amend the command. 
+
+### Creating tags
+
+1. Creating tags
+    1. Prerequisites: nil
+
+    2. Test case 1:   
+       `create t/dept finance`
+       **Expected**: JABPro displays a message indicating the successful execution of command. You can also check that the tag
+       has been successfully created by using the `listT` command to view the newly created tag.
+
+    3. Test case 2:  
+       `create t/finance`  
+       **Note**: The creation of tags **must** specify both the **tag category** and **tag name**.<br>
+       **Expected**: JABPro displays an error message.
+    
+    4. Test case 3:
+       `create t/role analyst, role engineer`
+       **Note**: Creation of multiple tags is done through using multiple tag prefixes i.e. `create t/role analyst t/role engineer`
+       **Expected**: JABPro displays an error message.
+   
+   5. Test case 4:
+      `create t/role software developer`
+      **Note**: Tag names must **not** contain any spaces. Instead, we encourage users to use either `camelCase` or `PascalCase`. This was 
+      done so that the tags would appear neater in the UI. Similarly, any other word keyed in after the tag name and without a proper prefix would prompt an 
+      error for incorrect command format.
+      **Expected**: JABPro displays an error message.
+
+   Some other incorrect commands to try: `create t/`, `create t/role @analyst`
+   **Expected**: JABPro displays an error message along with a corrective action you can take to amend the command.
 
 ### Editing a person's score for an assessment type tag while all persons are being shown
 
@@ -885,54 +976,22 @@ testers are expected to do more *exploratory* testing.
       1. List all persons using the `list` command. The list should have at least one person.
       2. Create an `assessment` type tag named `Interview` using the `create` command. This is done by entering `create t/assessment Interview` in the command box.
       
-    
-2. Test case 1 (Positive Test Case):   
-`edit 1 t/Interview sc/Interview 70`  
-**Note**: The score value should be a positive integer and must contain a space between the tag and the score value.  
-**Expected**: Score for the assessment type tag `Interview` is updated to 70.   
-Both Person List and Person Information Panel is updated to reflect the new `Interview` Tag. The new score is reflected on the Summary Statistics Screen(Third panel from the left).    
+   2. Test case 1 (Positive Test Case):   
+      `edit 1 t/Interview sc/Interview 70`  
+      **Note**: The score value should be a positive integer and must contain a space between the tag and the score value.<br>
+      **Expected**: Score for the assessment type tag `Interview` is updated to 70.   
+      Both Person List and Person Information Panel is updated to reflect the new `Interview` Tag. The new score is reflected on the Summary Statistics Screen(Third panel from the left).
 
-
-3. Test case 2:  
-`edit 1 t/swe sc/swe 70`  
-**Note**: Tag `swe` is not categorised as an assessment type tag. Thus, you cannot edit the score for this tag.  
-**Expected**: Neither score nor tag is updated for person. Error details shown in the status message.  
-   
-3. Test case 3:  
-`edit 1 t/Interview sc/Interview -10`  
-**Note**: The score value should be a positive integer and must contain a space between the tag and the score value.  
-**Expected**: Neither score nor tag is updated for person. Error details shown in the status message.
-
-### Adding a remark to a person while all persons are being shown
-
-1. Adding a remark to a person while all persons are being shown  
-   1. Prerequisites: List all persons using the `list` command. 
-    
-   2. Test case 1:   
-   `remark 1 r/John is a good candidate`  
-   **Expected**: New remark is added to the person. Details of remark displayed on the person information panel.
-   
    3. Test case 2:  
-   `remark 1 r/**REMARK** Furthermore, hes capable of working in a team`    
-   **Expected**: Remark is added on from the previous existing remark. Person information panel is updated to reflect the addition of the remark.  
-   Specifically `John is a good candidate` is followed by `Furthermore, hes capable of working in a team` on the person information panel.  
-   4. Test case 3:   
-   `remark 1 r/`  
-   **Expected**: Previous remark is deleted. Person information panel is updated to reflect the deletion of the remark and is blank.  
-   5. Test case 4:  
-   `remark 0 r/John is a good candidate`   
-    **Expected**: No remark is added. Error details shown in the status message. Person information panel remains the same.
-
-### Viewing a person's details while all persons are being shown
-1. Viewing a person's details while all persons are being shown  
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+      `edit 1 t/swe sc/swe 70`  
+      **Note**: Tag `swe` is not categorised as an assessment type tag. Thus, you cannot edit the score for this tag.<br> 
+      **Expected**: Neither score nor tag is updated for person. Error details shown in the status message.
     
-   2. Test case 1:   
-   `view 1`  
-   **Expected**: Person information panel is updated to reflect the details of the person.  
-   3. Test case 2:  
-   `view 0`  
-   **Expected**: No person is viewed. Error details shown in the status message. Person information panel remains the same.
+   4. Test case 3:  
+      `edit 1 t/Interview sc/Interview -10`  
+      **Note**: The score value should be a positive integer and must contain a space between the tag and the score value.<br> 
+      **Expected**: Neither score nor tag is updated for person. Error details shown in the status message.
+
  
 ### Filtering persons by their scores for a particular tag based on a particular metric while all persons are being shown
 1. Filtering persons by their scores for a particular tag based on a particular metric while all persons are being shown  
@@ -957,14 +1016,22 @@ Both Person List and Person Information Panel is updated to reflect the new `Int
    `filter t/swe met/score val/60`
     **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
    
-    6. Test case 5:
-    `filter t/Interview met/score val/-10`
-    **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
+   6. Test case 5:
+   `filter t/Interview met/score val/-10`
+   **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
    
-    7. Test case 6:
-    `filter t/Interview met/variance val/100` 
-       **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
-    8. Test case 7:
-    `filter t/Interview met/percentile` 
-    **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
+   7. Test case 6:
+   `filter t/Interview met/variance val/100` 
+   **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
+   
+   8. Test case 7:
+   `filter t/Interview met/percentile` 
+   **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
+
+
+### Saving data
+
+1. Dealing with missing/corrupted data files
+
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
