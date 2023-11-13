@@ -37,7 +37,7 @@ ProjectPRO is optimized for use via a Command Line Interface (CLI) while preserv
 --------------------------------------------------------------------------------------------------------------------
 
 ## Table of Contents
-- [1. Introductions](#introductions)
+- [1. Introduction](#introduction)
 - [2. Table of Contents](#table-of-contents)
 - [3. Using Our Guide](#using-our-guide)
 - [4. Quick Start](#quick-start)
