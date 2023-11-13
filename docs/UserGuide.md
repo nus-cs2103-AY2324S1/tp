@@ -582,6 +582,9 @@ Format: `report EMPLOYEE_ID`
 
       ![overtime pay formula](https://latex.codecogs.com/png.latex?1.5\times%20\frac{12%20\times%20\text{Monthly%20Salary}}{52\times%2044}\times{\text{number%20of%20overtime%20hours}})
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The remarks displayed in the report are arranged in the order they were added, i.e. remarks added later will be added to the end of the remark list.
+</div>
 
 Examples:
 * `report EID1234-5678` generates and downloads a report for the employee with employee id EID1234-5678.
