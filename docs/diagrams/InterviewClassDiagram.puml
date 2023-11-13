@@ -1,10 +1,11 @@
 @startuml
 !include style.puml
+show members
 skinparam classAttributeIconSize 0
 skinparam arrowThickness 1.1
-skinparam arrowColor DeepSkyBlue
-skinparam classBackgroundColor DeepSkyBlue
-skinparam defaultFontColor black
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+skinparam defaultFontColor white
 
 package Interview as InterviewPackage {
 

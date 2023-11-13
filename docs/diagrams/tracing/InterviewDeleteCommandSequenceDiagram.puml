@@ -2,29 +2,29 @@
 !include ../style.puml
 skinparam ArrowFontStyle plain
 
-box Logic #skyblue
+box Logic LOGIC_COLOR_T1
 Participant ":InterviewDeleteCommand" as idc LOGIC_COLOR
-Participant ":CommandResult" as cr LOGIC_COLOR
+Participant "result:CommandResult" as cr LOGIC_COLOR
 end box
 
-box Model #pink
-Participant "jobToDeleteInterview:Job" as j MODEL_COLOR
+box Model MODEL_COLOR_T1
 Participant "model:Model" as m MODEL_COLOR
+Participant "jobToDeleteInterview:Job" as j MODEL_COLOR
 end box
 
 [-> idc ++: execute()
-idc -> j ++: getJob()
-j --> idc--: jobToDeleteInterview
+idc -> m ++: getJob()
+m --> idc--: jobToDeleteInterview
 
 idc -> j ++: getInterview()
 j --> idc--: interviewToDelete
 
-idc -> m ++: deleteInterview()
-deactivate m
+idc -> j ++: deleteInterview()
+deactivate j
 
 create cr
-idc -> cr ++: CommandResult()
-cr -->idc --: result
+idc -> cr ++
+cr -->idc --
 idc -->[ --: result
 
 @enduml

@@ -1,0 +1,27 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant "<<class>>\nArgumentTokenizer" as at LOGIC_COLOR
+participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
+participant "job:Job" as job LOGIC_COLOR
+participant "command:AddCommand" as AddCommand LOGIC_COLOR
+
+[-> AddCommandParser ++: parse(args)
+AddCommandParser -> at ++: tokenize user input
+at --> AddCommandParser --: argMultimap
+create job
+AddCommandParser -> job ++
+job --> AddCommandParser --
+loop for each prefix
+    AddCommandParser -> ParserUtil ++: parse prefix value
+    ParserUtil --> AddCommandParser --: parsed value
+    AddCommandParser -> job ++: set corresponding field
+    deactivate job
+end loop
+create AddCommand
+AddCommandParser -> AddCommand ++: AddCommand(job)
+AddCommand --> AddCommandParser --
+AddCommandParser -->[ --: command
+@enduml

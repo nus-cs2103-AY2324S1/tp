@@ -16,27 +16,13 @@ title: Developer Guide
     6. [Common Classes](#common-classes)
 4. [Implementation](#implementation)
     1. [Add Command](#add-command)
-        1. [Implementation](#implementation)
-        2. [Design Considerations](#design-considerations)
     2. [Edit Command](#edit-command)
-        1. [Implementation](#implementation)
-        2. [Design Considerations](#design-considerations)
     3. [Delete Command](#delete-command)
-        1. [Implementation](#implementation)
-        2. [Design Considerations](#design-considerations)
     4. [List Command](#list-command)
-        1. [Implementation](#implementation)
-        2. [Design Considerations](#design-considerations)
     5. [Sort Command](#sort-command)
-        1. [Implementation](#implementation)
-        2. [Design Considerations](#design-considerations)
     6. [Find Command](#find-command)
-        1. [Implementation](#implementation)
-        2. [Design Considerations](#design-considerations)
    7. [Interview and Interview Commands](#interview-and-interview-commands)
-        1. [Implementation](#implementation)
-        2. [Design Considerations](#design-considerations)
-5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+5. [Other Relevant Documentation](#other-relevant-documentation)
 6. [Appendix A: Requirements](#appendix-a-requirements)
     1. [Product scope](#product-scope)
     2. [User stories](#user-stories)
@@ -78,7 +64,7 @@ All code and documentation are either written by ourselves or adopted from the o
 
 ## **Setting Up**
 
-Refer to the guide [Setting up and getting started](SettingUp.md).
+Refer to the guide "[Setting up and getting started](SettingUp.md)".
 
 ---
 
@@ -86,7 +72,7 @@ Refer to the guide [Setting up and getting started](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-Tip: The `.puml` files used to create diagrams in this document can be found in the [diagrams](diagrams) folder. Refer to the [PlantUML Tutorial at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+The `.puml` files used to create diagrams in this document can be found in the [diagrams](diagrams) folder. Refer to the [PlantUML Tutorial](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -101,12 +87,12 @@ A quick overview of the main components and how they interact with each other is
 
 `Main` has two classes: `Main` and `MainApp` which are the entry and exit points of the application.
 
-* At launch: they initialize the components in the correct sequence and connect them together.
-* At exit: they ensure the components are shut down properly and invoke cleanup operations if necessary.
+* At launch: They initialize the components in the correct sequence and connect them together.
+* At exit: They ensure the components are shut down properly and invoke cleanup operations if necessary.
 
 `Commons` represents the common classes used by all components.
 
-The other four component of the App are as follows:
+The other four components of the App are as follows:
 * `UI`: Handles the user interface of the application.
 * `Logic`: Handles command execution and data manipulation.
 * `Model`: Stores the data of the application.
@@ -116,7 +102,7 @@ The other four component of the App are as follows:
 
 The sequence diagram below shows the interactions between components for the `delete 1` command:
 
-<img src="images/developer-guide/ArchitectureSequenceDiagram.png" width="900" />
+<img src="images/developer-guide/ArchitectureSequenceDiagram.png" width="500" />
 
 Each of the four main components:
 
@@ -125,16 +111,15 @@ Each of the four main components:
 
 For example, the `Logic` component's API is defined in `Logic.java`, and its functionality is implemented in `LogicManager.java`. 
 
-Other components interact with a given component (e.g. `Logic`) by calling methods defined in the corresponding API interface (e.g. `Logic.java`) instead of calling methods directly on the implementation class (e.g. `LogicManager.java`). This is to ensure that the caller does not depend on the implementation details of the component. This is illustrated in the class diagram below.
+Other components interact with a given component (e.g. `Logic`) by calling methods defined in the corresponding API interface (e.g. `Logic.java`) instead of calling methods directly on the implementation class (e.g. `LogicManager.java`). This is to ensure that the caller does not depend on the implementation details of the component. This is illustrated in the class diagram below:
 
-<img src="images/developer-guide/ComponentManagers.png" width="900" />
+<img src="images/developer-guide/ComponentManagers.png" width="350" />
 
 ### UI Component
 
 **API:**
 [`Ui.java`](https://github.com/AY2324S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/application/ui/Ui.java)
 
-**Description:**
 
 The `UI` component is responsible for managing the user interface of the application so that it can respond according to
 the user's actions or commands entered.
@@ -145,25 +130,22 @@ the [`MainWindow`](https://github.com/AY2324S1-CS2103T-W12-3/tp/blob/master/src/
 is specified
 in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-W12-3/tp/blob/master/src/main/resources/view/MainWindow.fxml).
 
-**Functionality:**
-
 The UI component,
+
 * Executes user commands using the `Logic` component.
 * Listens for changes to `Model` data so that the UI can be updated with the modified data.
 * Keeps a reference to the `Logic` component, because the UI relies on the Logic to execute commands.
 * Depends on some classes in the `Model` component, as it displays `Job` objects residing in the Model.
 
-**Component Structure:**
+The following is a class diagram of the `UI` component:
 
 <img src="images/developer-guide/UiClassDiagram.png" width="900" />
 
-The UI consists of a `MainWindow` that is made up of parts like `CommandBox` and `ResultDisplay`.
-These parts are always being shown in `MainWindow`, while other parts like `JobListPanel`, `JobDetailsPanel` are only
-visible
-to the user depending on the state of the application e.g. when the job list if not empty, when a job is selected.
-
-etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities
-between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts like `CommandBox` and `ResultDisplay`. These parts are always
+being shown in `MainWindow`, while other parts like `JobListPanel`, `JobDetailsPanel` are only visible to the user
+depending on the state of the application (e.g. when the job list is not empty, or when a job is selected). All these,
+including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes
+that represent parts of the visible GUI.
 
 ### Logic Component
 
@@ -175,12 +157,12 @@ according to the user's instructions.
 
 The following is a partial class diagram of the `Logic` component:
 
-<img src="images/developer-guide/LogicClassDiagram.png" width="900"/>
+<img src="images/developer-guide/LogicClassDiagram.png" width="600"/>
 
-The following depicts the sequence of interactions within the `Logic` component taking `execute("delete 1")` API call as
-an example:
+The following depicts the sequence of interactions within the `Logic` component taking the `execute("delete 1")` API
+call as an example:
 
-<img src="images/developer-guide/LogicSequenceDiagram.png" />
+<img src="images/developer-guide/LogicSequenceDiagram.png" width="900"/>
 
 The Logic component,
 
@@ -195,7 +177,7 @@ The Logic component,
 The following are other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user
 command:
 
-<img src="images/developer-guide/ParserClasses.png"/>
+<img src="images/developer-guide/ParserClasses.png" width="600"/>
 
 For more details about command-specific parsing and execution, refer to "[Implementation](#implementation)".
 
@@ -226,16 +208,20 @@ The `Model` component,
 **API:**
 [`Storage.java`](https://github.com/AY2324S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/application/storage/Storage.java)
 
-**Description:**
-The `Storage` component is responsible for storing the job applications data in JSON format.
+The `Storage` component is responsible for storing the job application data in JSON format.
 
-**Functionality:**
 The `Storage` component,
-* can save `Userpref` objects in json format and read it back.
-* can save the job application data in json format and read it back.
 
-**Component Structure:**
-<img src="images/developer-guide/StorageClassDiagram.png" width="900" />
+* Saves both address book data and user preference data in JSON format, and read them back into corresponding
+  objects.
+* Inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
+  the functionality of only one is needed).
+* Depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
+  that belong to the `Model`).
+
+The following is a class diagram of the `Storage` component:
+
+<img src="images/developer-guide/StorageClassDiagram.png" width="500"/>
 
 ### Common Classes
 
@@ -249,40 +235,34 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Add Command
 
-#### Overview
 The `add` command allows the user to add job applications with various attributes. Attributes can be categorized into
 * Compulsory attributes such as `Company` and `Role`.
 * Optional attributes such as `Status`, `Industry`, `Deadline` and `JobType`
 
-#### Related Classes and Methods
-
-* `AddCommandParser#parse(String)`: Parses command input 
-* `AddCommand#execute(Model)`: Executes add command 
-* `Model#addJob(Job)`, `ApplicationBook#addJob(Job)`, `UniqueJobList#add(Job)`: Adds a job application.
 
 #### Implementation
 
-1. **Parse User Input:** `AddCommandParser` checks for necessary parameters and their validity.
-2. **Create Job Object:** A `Job` object is instantiated during `AddCommandParser#parse(String)` and handed over to the `AddCommand`.
-3. **Execute Command**: `AddCommand#execute(Model)` adds the new job application to the `UniqueJobList` in the `ApplicationBook`.
+The following sequence diagrams illustrate the process of parsing and execution for the `add` command:
 
-The following sequence/activity diagram illustrates the process of invocation for the `AddCommand`:
+<img src="images/developer-guide/AddCommandParserSequenceDiagram.png" width="600" />
+<br>
+<img src="images/developer-guide/AddCommandSequenceDiagram.png" width="400" />
 
-<img src="images/developer-guide/AddSequenceDiagram.png" width="1124" />
+`AddCommandParser` takes in a user input, checking for necessary parameters and their validity. A `Job` object is
+instantiated during `AddCommandParser::parse` and returned to the `AddCommand`. `AddCommand::execute` adds the new job
+application to the `UniqueJobList` in the `ApplicationBook`.
 
 #### Design Considerations
 
 1. **Handling of optional parameters**: 
-   1. With default parameters: The `AddCommandParser` checks for the presence of optional parameters. If the
-      parameters are not present, default parameters are used to instantiate the `Job` object.
-       * *Pros*: This is a simple implementation which does not require any changes to the `AddCommand` class.
-       * *Cons*: This implementation is not flexible as the default parameters are fixed. If the user wants to add a job
-         application with a different set of default parameters, the code has to be changed.
-   2. Without default parameters: If the
-      parameters are not present, a different constructor is used to instantiate the `Job` object.
-       * *Pros*: This implementation is more flexible as the user can specify the parameters they want to add.
-       * *Cons*: This implementation is more complicated as the `AddCommand` class has to be modified to handle the
-         different constructors.
+   * *Chosen implementation*: The `AddCommandParser` checks for the presence of optional parameters. If the
+     parameters are not present, default parameters are used to instantiate the `Job` object. This is a simple
+     implementation which does not require any changes to the `AddCommand` class, but is not flexible as the default
+     parameters are fixed. If the user wants to add a job application with a different set of default parameters, the
+     code has to be changed.
+   * *Alternative*: If the parameters are not present, a different constructor is used to instantiate the `Job` object.
+     This increases flexibility as the user can specify the parameters they want to add, but the implementation is more
+     complicated as the `AddCommand` class has to be modified to handle the different constructors.
 
 ---
 
@@ -296,11 +276,11 @@ The Edit feature is implemented through the `EditCommand` class along with `Edit
 for the command from the user input. It utilises a nested static class, `EditJobDescriptor`, to store the new values for
 the job's attributes.
 
-The following sequence diagram illustrates the process of executing a valid `edit` command.
+The following sequence diagrams illustrate the process of parsing and execution for the `edit` command:
 
-<img src="images/developer-guide/EditCommandParserSequenceDiagram.png" />
-
-<img src="images/developer-guide/EditCommandSequenceDiagram.png" />
+<img src="images/developer-guide/EditCommandParserSequenceDiagram.png" width="600"/>
+<br>
+<img src="images/developer-guide/EditCommandSequenceDiagram.png" width="400"/>
 
 The `EditCommandParser` class parses the user input and creates an `EditCommand` object with the specified index and an
 `EditJobDescriptor` containing the new field values.
@@ -311,16 +291,15 @@ one in the job list with `Model::setJob`.
 
 #### Design considerations
 
-1. **How to Edit Multiple Fields with One Command**
-
-* *Chosen implementation*: To enable the `edit` command to parse and edit multiple fields simultaneously, we decided to
-  nest a static class, `EditJobDescriptor`, within the `EditCommand` itself. This design abstracts the logic of setting
-  new values for each field away from the `ParserUtil` and `EditCommandParser` classes. It allows a single instance of
-  `EditJobDescriptor` to be carried through the execution sequence, instead of creating a separate instance for each
-  field edited. E.g. A new Deadline instance if the deadline is edited
-* *Alternative*: Editing each attribute with separate commands could simplify the command structure and reduce user
-  errors. However, this might lead to increased added complexity in managing multiple instances of edited fields as
-  described above.
+1. **How to edit multiple fields with one command**
+   * *Chosen implementation*: To enable the `edit` command to parse and edit multiple fields simultaneously, nested a
+     static class, `EditJobDescriptor`, within the `EditCommand` itself. This design abstracts the logic of setting new
+     values for each field away from the `ParserUtil` and `EditCommandParser` classes. It allows a single instance of
+     `EditJobDescriptor` to be carried through the execution sequence, instead of creating a separate instance for each
+     field edited (e.g. a new Deadline instance if the deadline is edited).
+   * *Alternative*: Editing each attribute with separate commands could simplify the command structure and reduce user
+     errors. However, this might lead to increased added complexity in managing multiple instances of edited fields as
+     described above.
 
 ---
 
@@ -388,14 +367,16 @@ The sort command allows the user to sort the current list of job applications ba
 
 #### Implementation
 
-The following sequence diagram illustrates the process of parsing and invocation for the command:
-
-<img src="images/developer-guide/SortCommandParserSequenceDiagram.png" />
-
-<img src="images/developer-guide/SortCommandSequenceDiagram.png" />
-
 The `SortCommand` class implements this command. It accepts a `FieldComparator` which will be set as the comparator when
 `Model::sortJobs` is called.
+
+The following sequence diagrams illustrate the process of parsing and execution for the command:
+
+<img src="images/developer-guide/SortCommandParserSequenceDiagram.png" width="600"/>
+<br>
+<img src="images/developer-guide/SortCommandSequenceDiagram.png" width="400"/>
+
+
 
 The `SortCommandParser` class uses the `ArgumentTokenizer` class to parse the arguments for the command from the user
 input. If the user input does not conform to the expected format, a `ParseException` is thrown. If the user input is
@@ -422,12 +403,10 @@ relevant field method must be invoked.
 2. **Implementing sorting by multiple fields**: When multiple prefixes are provided, sort by the prefix listed first,
    and if two applications have the same value in that field, sort by the next prefix listed.
     * *Pros*: This is slightly more complicated to implement, requiring a `Comparator` which can sort fields according
-      to
-      the desired order of importance.
+      to the desired order of importance.
     * *Cons*: Once again, we decided that this is not an important feature, as the primary purpose of the command is to
       allow users to group similar applications together. Grouping by one field should be sufficient for the user to
-      have
-      organised list.
+      have an organised list.
 
 ---
 
@@ -437,11 +416,11 @@ The find command allows the user to get a filtered list of job applications.
 
 #### Implementation
 
-The following sequence diagram illustrates the process of parsing and invocation for the command:
+The following sequence diagrams illustrate the process of parsing and invocation for the command:
 
-<img src="images/developer-guide/FindCommandParserSequenceDiagram.png" />
-
-<img src="images/developer-guide/FindCommandSequenceDiagram.png" />
+<img src="images/developer-guide/FindCommandParserSequenceDiagram.png" width="700"/>
+<br>
+<img src="images/developer-guide/FindCommandSequenceDiagram.png" width="400"/>
 
 The `FindCommand` class implements this command. Its constructor accepts a `CombinedPredicate` which will be set as the
 predicate when `Model::updateFilteredJobList` is called.
@@ -463,8 +442,8 @@ The `CombinedPredicate` simply represents the logical AND of multiple `Predicate
 1. **How to combine multiple conditions**
     * *Chosen implementation*: The constructor of a `FindCommand` accepts a `CombinedPredicate`. This predicate is
       contains multiple other `Predicate` objects chained together with `Predicate::and` and `Predicate::or`. This
-      assigns the responsibility of handling multiple search conditions solely to the `FindCommandParser` class. The
-      `FindCommand` class behaves the same way regardless of the number of conditions specified by the user.
+        assigns the responsibility of handling multiple search conditions solely to the `FindCommandParser` class. The
+        `FindCommand` class behaves the same way regardless of the number of conditions specified by the user.
     * *Alternative*: Allow the constructor of `FindCommand` to accept a list of `FieldContainsKeywordsPredicates`, each
       representing a condition specified by the user. This implementation was not adopted as it would involve changing
       the `FindCommand` class to handle multiple conditions. However, this should be handled purely by the
@@ -475,33 +454,32 @@ The `CombinedPredicate` simply represents the logical AND of multiple `Predicate
 ### Interview and Interview Commands
 
 #### Implementation
-The feature to allow users to add interviews is mainly implemented through adding `Interview` to the `Model` component
-and implementing `InterviewCommands` in the `Logic` component. 
+This feature allows users to add interviews. It is mainly implemented through adding `Interview` to the `Model`
+component and implementing several interview commands in the `Logic` component. 
 
-Each job application created has a list of interviews that can be added, edited and deleted accordingly with the 
-Interview Sub Commands.
+Each `Job` contains a list of interviews. `Interview` objects can be added, edited and deleted accordingly with the
+interview sub-commands.
 
 #### Interview
-An `Interview` will consist of a:
-* `InterviewType` - There are 9 types of interview types specified by using enumerations
-* `InterviewDateTime`- Makes use of `LocalDateTime` and `DateTimeFormatter` to store the date and time of interview
+An `Interview` consists of:
+* `InterviewType`: There are 9 types of interview types specified by using enumerations
+* `InterviewDateTime`: Uses `LocalDateTime` and `DateTimeFormatter` to store the date and time of interview.
 * `InterviewAddress`
 
-The following class diagram illustrates the structure of an `Interview` Object:
+The following class diagram illustrates the structure of an `Interview`:
 
-<img src="images/developer-guide/InterviewClassDiagram.png" />
+<img src="images/developer-guide/InterviewClassDiagram.png" width="800"/>
 
 #### Interview Commands
 The Interview commands are implemented with `InterviewCommand` and `InterviewCommandParser`.
 
-During parsing of user input in `ApplicationBookParser`, if the input starts with `interview` the remaining input
-is passed as an argument to the `InterviewCommandParser` which parses it and invokes the respective 
-sub command parsers.
+During parsing of user input in `ApplicationBookParser`, if the input starts with "interview", the remaining input
+is passed as an argument to the `InterviewCommandParser` which parses it and invokes the respective sub-command parsers.
 
 The abstract `InterviewCommand` class extends the `Command` class to hide the internal logic
-and execution of the Interview Sub Commands.
+and execution of the interview sub-commands.
 
-It implements the `getJob()` method which retrieves the job of an interview so that the execution of the sub commands 
+The `InterviewCommand::getJob` method retrieves the job of an interview so that the execution of the sub commands 
 can be carried out on the `Job` that contains the `Interview` to be modified.
 
 There are 3 sub-commands to access and modify an `Interview`:
@@ -509,83 +487,82 @@ There are 3 sub-commands to access and modify an `Interview`:
 * `interview delete` - To delete an interview from a `Job`.
 * `interview edit`- To edit an interview from a `Job`.
 
-The following class diagram illustrates the structure of an `InterviewCommand` Object and the sub commands 
-it is associated with:
-<img src="images/developer-guide/InterviewCommandClassDiagram.png" />
+The following class diagram illustrates the structure of an `InterviewCommand` and the sub-commands it is associated
+with:
+
+<img src="images/developer-guide/InterviewCommandClassDiagram.png" width="800"/>
 
 #### Interview Add Command
-Adding of an interview to a specified `Job` is implemented with `InterviewAddCommand` and `InterviewAddCommandParser`.
+The adding of an interview to a `Job` is implemented with `InterviewAddCommand` and `InterviewAddCommandParser`.
 
-When the `InterviewAddCommandParser` is invoked from the `InterviewCommandParser`, the `ArgumentTokenizer` class 
-parses the arguments to determine the index of the `Job`, `interviewType`, `interviewDateTime` and `interviewAddress`. 
+The following sequence diagrams illustrate the process of parsing and execution for the `interview add` command:
 
-* If the user input does not conform to the expected prefixes, a `ParseException` is thrown. 
+<img src="images/developer-guide/InterviewAddCommandParserSequenceDiagram.png" width="700" />
+<br>
+<img src="images/developer-guide/InterviewAddCommandSequenceDiagram.png" width="500" />
 
-* If the user input is valid, a new `Interview` is created with the `interviewType`,`interviewDateTime` and 
-`interviewAddress` parsed. An `InterviewAddCommand` is then generated with the job `index` and the created `Interview`
+When the `InterviewAddCommandParser::parse` is invoked by `InterviewCommandParser`, the `ArgumentTokenizer` class parses
+the arguments to determine the index of the `Job`, `interviewType`, `interviewDateTime` and `interviewAddress`. 
+
+If the user input does not conform to the expected prefixes, a `ParseException` is thrown. If the user input is valid,
+a new `Interview` is created with the `interviewType`,`interviewDateTime` and `interviewAddress` parsed. An
+`InterviewAddCommand` is generated with the job `index` and the created `Interview`.
 
 During execution of `InterviewAddCommand`, the new `Interview` is passed to the `Job` to handle the adding of the 
 `Interview` to it's list of interviews.
-
-The following sequence diagram illustrates the process of parsing and invocation for the command:
-<img src="images/developer-guide/InterviewAddCommandParserSequenceDiagram.png" />
-<img src="images/developer-guide/InterviewAddCommandSequenceDiagram.png" />
 
 #### Interview Delete Command
 Deleting of an interview from a specified `Job` is implemented with `InterviewDeleteCommand` and 
 `InterviewDeleteCommandParser`.
 
-When the `InterviewDeleteCommandParser` is invoked from the `InterviewCommandParser`, the `ArgumentTokenizer` class
+The following sequence diagrams illustrate the process of parsing and invocation for the command:
+<img src="images/developer-guide/InterviewDeleteCommandParserSequenceDiagram.png" width="700"/>
+<br>
+<img src="images/developer-guide/InterviewDeleteCommandSequenceDiagram.png" width="500"/>
+
+When the `InterviewDeleteCommandParser::parse` is invoked by `InterviewCommandParser`, the `ArgumentTokenizer` class
 parses the arguments to determine the index of the `Interview` to be deleted and the index of the `Job` it 
 is to be deleted from.
 
-* If the user input does not conform to the expected prefixes, a `ParseException` is thrown.
+If the user input does not conform to the expected prefixes, a `ParseException` is thrown. If the user input is valid,
+an `InterviewDeleteCommand` is generated with the `jobIndex` and `interviewindex`.
 
-* If the user input is valid, an `InterviewDeleteCommand` is generated with the `jobIndex` and `interviewindex`
-
-During execution of `InterviewDeleteCommand`, the `Job` and `Interview` is passed to the `model` to handle the deletion 
-of the `Interview` from the `Job`.
-
-The following sequence diagram illustrates the process of parsing and invocation for the command:
-<img src="images/developer-guide/InterviewDeleteCommandParserSequenceDiagram.png" />
-<img src="images/developer-guide/InterviewDeleteCommandSequenceDiagram.png" />
+During execution of `InterviewDeleteCommand`, the `Job` and `Interview` objects are passed to the `Model` to handle the
+deletion of the `Interview` from the `Job`.
 
 #### Interview Edit Command
 Editing of an interview from a specified `Job` is implemented with `InterviewEditCommand` and 
 `InterviewEditCommandParser`.
 
-When the `InterviewEditommandParser` is invoked from the `InterviewCommandParser`, the `ArgumentTokenizer` class
+The following sequence diagram illustrates the process of parsing and invocation for the command:
+<img src="images/developer-guide/InterviewEditCommandParserSequenceDiagram.png" width="700"/>
+<br>
+<img src="images/developer-guide/InterviewEditCommandSequenceDiagram.png" width="500"/>
+
+When the `InterviewEditommandParser::parse` is invoked by `InterviewCommandParser`, the `ArgumentTokenizer` class
 parses the arguments to determine the index of the `Interview` to be edited, index of the `Job` it
 is to be edited from and the fields to be edited.
 
-* If the user input does not conform to the expected prefixes, a `ParseException` is thrown.
-
-* If the user input is valid, an `EditInterviewDescriptor` is created to store the details to edit the interview with.
-  An `InterviewEditCommand` is then generated with the `jobIndex`, `interviewindex` and the `editInterviewDescriptor`
+If the user input does not conform to the expected prefixes, a `ParseException` is thrown. If the user input is valid,
+an `EditInterviewDescriptor` is created to store the details to edit the interview with. An `InterviewEditCommand` is
+then generated with the `jobIndex`, `interviewindex` and the `editInterviewDescriptor`.
 
 During execution of `InterviewEditCommand`, the `interviewToBeEdited` and `editedInterview` created is passed to the
 `Job` to handle the modification of the `Interview`.
 
-The following sequence diagram illustrates the process of parsing and invocation for the command:
-<img src="images/developer-guide/InterviewEditCommandParserSequenceDiagram.png" />
-<img src="images/developer-guide/InterviewEditCommandSequenceDiagram.png" />
-
 #### Design considerations
 1. **How to implement multiple interviews in for a Job Application**
-    * *Chosen implementation*: Each `Job` stores a list of interviews as `List<Interviews>` 
-      * Pros: Easy to implement
-      * Cons: Limited Abstraction
-    * This method was chosen as the interview features was only implemented in v1.3 where there was
-   limited time to abstract the interviews.
-    * *Alternative*: Create a `InterviewList` class to store the list of interviews and 
-   handle the changes to the interviews. Each `Job` would have a `InterviewList` instead
-      * Pros: Provides a higher level of abstraction and encapsulation
-      * Cons: Complexity overhead. Currently, there are minimal commands to manage the interviews and adding an extra 
+    * *Chosen implementation*: Each `Job` stores a list of interviews as `List<Interviews>`. This was easier to
+      implement, but had less abstraction. Due to the tight timeline as interviews was a feature implemented only in
+      v1.3, we decided to choose this implementation.
+    * *Alternative*: Create an `InterviewList` class to store the list of interviews and handle the changes to the
+      interviews. Each `Job` would have an `InterviewList` instead. This provided a higher level of abstraction,
+      enabling us to easily add more commands to manipulate the list of interviews in the future. However, this would
+      take more time. Additionally, there are currently minimal commands to manage the interviews and adding an extra 
       layer may add unnecessary complication to the codebase.
-    * This method can be implemented in the future as the more Interview Sub Commands are implemented.
 
 ---
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Other Relevant Documentation**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
