@@ -2,6 +2,7 @@
 layout: page
 title: Developer Guide
 ---
+## Table of Contents
 * Table of Contents
 {:toc}
 
@@ -9,7 +10,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -51,7 +52,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete_person 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -83,6 +84,8 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` and `Event` object residing in the `Model`.
 
+[Scroll back to Table of Contents](#table-of-contents)
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -91,17 +94,17 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete_person 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete_person 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeletePersonCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeletePersonCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -110,14 +113,17 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddPersonCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddPersonCommandParser`, `DeletePersonCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+[Scroll back to Table of Contents](#table-of-contents)
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="600" />
 
+[Scroll back to Table of Contents](#table-of-contents)
 
 The `Model` component,
 
@@ -128,25 +134,62 @@ The `Model` component,
 * stores a `Logger` object that is used to log messages of the application's behaviour.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-[//]: # (Not necessary to mention this alternative model, as it is not used in the current implementation)
-[//]: # (<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative &#40;arguably, a more OOP&#41; model is given below. It has a `Group` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Group` object per unique group, instead of each `Group` needing their own `Group` objects.<br>)
-
 <img src="images/BetterModelClassDiagram.png" width="600" />
+
+[Scroll back to Table of Contents](#table-of-contents)
 
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" width="600" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+[Scroll back to Table of Contents](#table-of-contents)
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
+
+[Scroll back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+## **Flow of Program Execution**
+
+The way the user interacts with the program is illustrated as follows.
+
+![FlowOfProgram](images/CommandFlowActivityDiagram.png)
+
+The following is a (partial) explanation of the flow of events:
+1. The user makes their command by issuing a command in the CommandBox.
+2. The command is parsed by the Parser and the corresponding Command object is created.
+3. The Command object is executed.
+4. The Command is executed and returns a CommandResult.
+5. The CommandResult is passed to the UI component to be displayed to the user.
+
+More details are captured in the diagram above.
+
+If the command involves the changing of Models, the Models are updated accordingly at stage 3 during the execution process.
+Changes to the models will also be reflected in Storage in the backend.
+These model changes will also be reflected in the Ui (e.g when a Person or an Event is changed).
+
+The errors during process and execution are also handled accordingly by displaying an error message to the user.
+
+The object diagram below illustrates a possible state of the Models after some commands have been executed.
+
+![Model state](images/AddEventObjectDiagram.png)
+
+Assume that the user just added a `Meeting` which is a subtype of `Event`. They supplied the meeting with a name, a start date and a start time. The user also added some previous events and persons as shown in the diagram.
+
+This shows how the Models are stored for use in the program.
+
+Note that even though EventList stores a list of Events, currently only Meetings (a subtype of Event) are implemented. This is to allow for future extensibility of the program.
+
+[Scroll back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -155,8 +198,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ### Commands
 This section explains the general implementation of all commands.
 
-The following activity diagram generally shows the overall flow of events that the user will experience.
-
+The following activity diagrams shows the overall flow of events that the user will experience.
 
 This section describes some noteworthy details on how certain features are implemented.
 
@@ -188,7 +230,7 @@ The `LogicManager` calls `XYZCommand::execute` where the interaction between the
 Step 7:
 The `XYZCommand` creates a successful `CommandResult` and returns it to the UI.
 
-
+[Scroll back to Table of Contents](#table-of-contents)
 
 ### Ability to add persons
 This section explains the implementation of the Add Task feature via the `add_person` command.
@@ -216,22 +258,22 @@ The `Person` object is now composed of the following optional attributes due to 
 * `Address`: The address of the person. Optional field.
 * `Birthday`: The birthday of the person. Optional field.
 * `Remark`: The remark of the person. Optional field.
-* `Groups`: The groups that the person is associated with. Optional field.
+* `Group`: The groups that the person is associated with. Optional field.
 
 The [**`java.util.Optional<T>`**](https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html) class is used to represent the optional attributes of the `Person` object.
 
 To add a person, the user must specify the name of the person using the `n/` prefix. The user can then specify the optional attributes of the person using the following prefixes:
 
 <box type="info">
-Except for the name, all the fields given to the `add` command are optional.
+Except for the `Name`, all the fields given to the `add_person` command are optional.
 </box>
 
 The flow for the `add_person` command is described by the following sequence diagram:
 
 <img src="images/AddPersonSequenceDiagram2.png" alt="AddPersonSequenceDiagram2" width=600 />
 
-### Feature details
-1. The application will validate the arguments supplied by the user; whether the "NAME" is unique and supplied, and whether the optional fields follow the correct format. 
+#### Feature details
+1. The application will validate the arguments supplied by the user; whether the `Name` is unique and supplied, and whether the optional fields follow the correct format. 
 2. If the arguments are invalid, an error message will be shown to the user and prompts the user for a corrected input.
 3. If the arguments are valid, a `Person` object will be created with the fields supplied and stored in FumbleLog.
 
@@ -242,52 +284,25 @@ The flow for the `add_person` command is described by the following sequence dia
 The original implementation of AB3's `Person` class is refactored to have the capacity of storing optional fields. This is done by using the `java.util.Optional<T>` class to represent the optional attributes of the `Person` object.
 Furthermore, we have added additional fields into the `Person` class to allow users to store more information about the person, such as their birthday.
 
-As the original `add` command already exists in AB3, this feature can be implemented by enhancing the `add` command.
+As the original `add` command already exists in AB3, this feature can be implemented by enhancing the `add` command. In FumbleLog, the `add` command is further changed to `add_person`.
 
 Furthermore, we accounted for empty/null inputs in the optional fields by generating a NULL_INSTANCE for the optional fields when the user does not specify the optional fields. This design decision allowed us to easily check
 for empty/null inputs in the Person object by checking if the optional field is not equal to the NULL_INSTANCE, instead of doing null pointer and empty string checks.
 
-* **Alternative 1 (current choice):** Enhance the existing `add` command.
+* **Alternative 1 (current choice):** Enhance the existing `add_person` command.
   * Pros: 
     * Easier to implement.
-    * Reuses the logic for the `add` command.
+    * Reuses the logic for the `add_person` command.
   * Cons:
     * Have to account for empty/null inputs in the optional fields when saving the data and testing it
     * Have to account for empty/null inputs in the optional fields when displaying the data
-* **Alternative 2**: Create a new `add_optional` command.
+* **Alternative 2**: Create a new `add_person_optional` command.
   * Pros: 
     * Do not have to account for empty/null inputs in the optional fields when saving the data and testing it
   * Cons:
     * Inconveniences the user as they have to remember a new command to add a person with optional fields.
 
-### Flow of Program Execution
-
-The way the user interacts with the program is illustrated as follows.
-
-![FlowOfProgram](images/CommandFlowActivityDiagram.png)
-
-The following is a (partial) explanation of the flow of events: 
-1. The user makes their command by issuing a command in the CommandBox.
-2. The command is parsed by the Parser and the corresponding Command object is created.
-3. The Command object is executed.
-4. The Command is executed and returns a CommandResult.
-5. The CommandResult is passed to the UI component to be displayed to the user.
-
-More details are captured in the diagram above.
-
-If the command involves the changing of Models, the Models are updated accordingly at stage 3 during the execution process.
-Changes to the models will also be reflected in Storage in the backend.
-These model changes will also be reflected in the Ui (e.g when a Person or an Event is changed).
-
-The errors during process and execution are also handled accordingly by displaying an error message to the user.
-
-The object diagram below illustrates a possible state of the Models after some commands have been executed. 
-
-![Model state](images/AddEventObjectDiagram.png)
-
-Assume that the user just added a `Meeting` which is a subtype of `Event`. They supplied the meeting with a name, a start date and a start time. The user also added some previous events and persons as shown in the diagram.
-
-This shows how the Models are stored for use in the program.
+[Scroll back to Table of Contents](#table-of-contents)
 
 ### Ability to delete persons
 
@@ -306,9 +321,11 @@ The `Model` will invoke `removePerson` in `AddressBook`, which in turn calls `re
 Step 3:
 The `DeletePersonCommand` then continues its execution as defined by [this](#parser-commands) sequence diagram.
 
-### Design Considerations:
+#### Design Considerations
 **Aspect: How we execute the DeletePersonCommand:**
 Similar to the `AddPersonCommand`, the main considerations for this command is related to the way that the model is stored.
+
+[Scroll back to Table of Contents](#table-of-contents)
 
 ### Ability to track events
 
@@ -321,18 +338,19 @@ start time, end time, persons involved and groups involved.
 
 <img src="images/EventClassDiagram.png" alt="EventClassDiagram" width=600 />
 
-#### Design considerations:
+#### Design considerations
 
-- Events stores a list of `Name` and a list o1f `Group` that are involved in the event. 
+- Events stores a list of `Name` and a list of `Group` that are involved in the event. 
 This is to facilitate the ability to track persons and groups involved in the event.
 The `Name` class is used to represent the name of the person involved in the event, as names are unique in the `UniquePersonList
-- To make handling `Event` objects easier, the `Meeting` class is created to represent meetings as a subtype of `Event`. 
-This is to allow the `Event` class to be extended to other types of events in the future.
+- We have also made `Event` an abstract class so as to increase extensibility of FumbleLog in the future. For now, when an event is created (i.e. using the AddEventCommand), it defaults to adding a `Meeting` into FumbleLog's `Event` List. Future support for other kinds of `Event` can be possible (i.e. Recurring event) by directly inheriting from `Event`.
 - To track events, we implement an `EventList` to store all events to be displayed in FumbleLog.
 
-### Ability to assign `Person` to an `Event`
+[Scroll back to Table of Contents](#table-of-contents)
 
-### Implementation
+### Ability to assign persons to an event
+
+#### Implementation
 
 - The ability to assign a `Person` to an `Event` is facilitated by `ModelManager`.
 - Each `Event` stores a list of person assigned to it. 
@@ -351,7 +369,9 @@ i.e the `Name` currently exists in FumbleLog.
 This is to facilitate the user to assign more persons without accidentally deleting the previous persons assigned. 
   - To un-assign a `Person`, the user must manually specify `u/` with the `Name` to un-assign the `Person` from the `Event`.
 
-### Ability to assign `Group` to an `Event`
+[Scroll back to Table of Contents](#table-of-contents)
+
+### Ability to assign groups to an event
 
 #### Implementation
 
@@ -368,12 +388,23 @@ A successful `EditEventCommand` that assigns groups should look like this:
 
 <img src="images/AssignGroupsSequenceDiagram.png" alt="AssignGroup" width=600 />
 
+This is a possible object representation of an `Event` with a `Group` and a `Person` assigned to it.
+
+<img src="images/EditEventObjectDiagram.png" alt="AssignGroup" width=600 />
+
+- In this object diagram, the `Event`, `TP meeting` has a `Person`, John, assigned to it and a `Group` CS2103T assigned to it. 
+- In this case, TP meeting only stores these information and will use its respectively `Person` list and `Group` list to display:
+  - John as assigned to it
+  - Bob and Alice as assigned to it within a group.
+
 #### Design considerations
 
 - When adding and displaying groups, persons that has been added individually previously will be displayed twice. To counter that, checks are done to ensure that
 when a group is added, duplicate persons will be deleted from the individual persons list
 - A person can belong to multiple groups, due to the multiplicity between groups and persons. In this case, we allow multiple persons to be displayed, as it is clear which group they belong to.
 - As the persons are searched by their group name only when displaying, adding new persons, editing and deleting persons is simple as the component just reloads and searches for everybody in the groups again.
+
+[Scroll back to Table of Contents](#table-of-contents)
 
 ### Improved find feature
 
@@ -412,6 +443,8 @@ even though the person's name does not fit the keyword(s).
     - Cons:
         - Adding constraint the original command by requiring syntax, which may cause convenience.
 
+[Scroll back to Table of Contents](#table-of-contents)
+
 ### Remind feature
 
 The `remind` command in our application displays a birthdays and events that will happen within a specified number of days.
@@ -432,7 +465,6 @@ The flow for the `remind` command is described by the following sequence diagram
 
 ![RemindSequenceDiagram](images/RemindSequenceDiagram.png)
 
-
 #### Feature details
 1. The `remind` command can accept an optional parameter `days` which specifies the number of days to search for birthdays and events. If `days` is not specified, the default value of 7 days will be used.
 2. The application will validate the argument `days` to ensure that it is a positive integer. If it is not, an error message will be shown to the user and prompts the user for a corrected input.
@@ -452,6 +484,10 @@ The flow for the `remind` command is described by the following sequence diagram
         - Easier to implement.
     - Cons:
         - Performance overhead. New addressbook objects needs to be created.
+
+[Scroll back to Table of Contents](#table-of-contents)
+
+## **Proposed Features**
 
 ### \[Proposed\] Undo/redo feature
 
@@ -533,10 +569,11 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+[Scroll back to Table of Contents](#table-of-contents)
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -595,8 +632,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | university student | view all upcoming events on a separate event column in the GUI | simultaneously view contact details and event details                          |
 | `* * *`  | university student | be reminded on events and birthdays                            | so that i can remember upcoming social activities                              |
 
-
-
+[Scroll back to Table of Contents](#table-of-contents)
 
 ### Use cases
 
@@ -609,20 +645,19 @@ For all use cases below, unless specified otherwise:
 
 **MSS**
 1. User requests to add persons
-2. User supplies all necessary parameters they wish to associate with the person to be added
-3. FumbleLog adds the person
+2. FumbleLog adds the person
 
    Use case ends.
 
 **Extensions**
-* 2a. User supplies the wrong type of parameters
+* 1a. User supplies the wrong type of parameters when adding the person
     
     * 2a1. FumbleLog shows an error message.
 
-      Use case resumes at step 2.
-* 3a. Person is added with a group and that group is assigned to an event
+      Use case resumes at step 1.
+* 2a. Person is added with a group and that group is assigned to an event
   
-    * 3a1. FumbleLog reloaded the event component and displays the newly added person in the event.
+    * 2a1. FumbleLog reloaded the event component and displays the newly added person in the event.
 
       Use case ends.
 
@@ -632,8 +667,7 @@ For all use cases below, unless specified otherwise:
 1. User requests to list persons
 2. FumbleLog shows a list of persons
 3. User request to edit a specific person in the list
-4. User supplies parameters that they want to change
-5. FumbleLog edits the person
+4. FumbleLog edits the person with the new information
 
    Use case ends.
 
@@ -648,22 +682,22 @@ For all use cases below, unless specified otherwise:
 
       Use case resumes at step 2.
 
-* 4a. User modifies the name of the person
+* 3b. User modifies the name of the person
 
-    * 4a1. FumbleLog updates the name of the person in all events that the person is <u> assigned </u> to. This includes persons in groups.
+    * 3b1. FumbleLog updates the name of the person in all events that the person is <u> assigned </u> to. This includes persons in groups.
 
-      Use case resumes at step 5.
+      Use case resumes at step 4.
 
-* 4b. User removes a group(s) from the person and that group(s) is assigned to an event.
+* 3c. User removes a group(s) from the person and that group(s) is assigned to an event.
 
-    * 4b1. FumbleLog removes the person from the corresponding group in all events.
+    * 3c1. FumbleLog removes the person from the corresponding group in all events.
 
-      Use case resumes at step 5.
+      Use case resumes at step 4.
 
-* 4c. User adds a group(s) to the person and that group(s) is assigned to an event.
-    * 4b1. FumbleLog adds the person to the corresponding group(s) in all events.
+* 3d. User adds a group(s) to the person and that group(s) is assigned to an event.
+    * 3d1. FumbleLog adds the person to the corresponding group(s) in all events.
 
-      Use case resumes at step 5.
+      Use case resumes at step 4.
 
 **Use case: UC03 - Delete a person**
 
@@ -698,46 +732,44 @@ For all use cases below, unless specified otherwise:
 
     * 4a1. The group is removed from the event.
 
-      Use case exits.
+      Use case ends.
 
 **Use case: UC04 - Add an event**
 
 **MSS**
 
 1. User requests to add a event
-2. User supplies the necessary parameters for the event
-3. FumbleLog adds the event
+2. FumbleLog adds the event with the supplied information
 
    Use case ends.
 
 **Extensions**
-* 2a. User supplies invalid parameters
+* 1a. User supplies invalid parameters
 
-    * 2a1. FumbleLog shows an error message
+    * 1a1. FumbleLog shows an error message
 
-      Use case resumes at step 2.
-* 2b. User supplies a date that is before the current date
+      Use case resumes at step 1.
+* 1b. User supplies a date that is before the current date
 
-    * 2b1. FumbleLog shows an error message
+    * 1b1. FumbleLog shows an error message
 
-      Use case resumes at step 2.
-* 2c. User supplies a start time that is after the end time
+      Use case resumes at step 1.
+* 1c. User supplies a start time that is after the end time
 
-    * 2c1. FumbleLog shows an error message
+    * 1c1. FumbleLog shows an error message
 
-      Use case resumes at step 2.
-* 2d. User supplies a start time that is before the current time
+      Use case resumes at step 1.
+* 1d. User supplies a start time that is before the current time
 
-    * 2d1. FumbleLog shows an error message
+    * 1d1. FumbleLog shows an error message
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
  **Use case: UC05 - Edit an event**
 
  **MSS**
 1. User request to edit a specific event in the list
-2. User supplies parameters that they want to change
-3. FumbleLog edits the event
+2. FumbleLog edits the event with the new information
 
    Use case ends.
 
@@ -746,34 +778,34 @@ For all use cases below, unless specified otherwise:
 
   Use case ends.
 
-* 2a. User supplies an invalid index to edit
+* 1b. User supplies an invalid index to edit
     
-    * 2a1. FumbleLog shows an error message.
+    * 1b1. FumbleLog shows an error message.
+
+      Use case resumes at step 1.
+* 1c. User supplies an invalid parameter
+   * 1c1. FumbleLog shows an error message.
+
+      Use case resumes at step 1.
+* 1d. User supplies a date that is before the current date
+
+    * 1d1. FumbleLog shows an error message
+
+      Use case resumes at step 1.
+* 1e. User supplies a start time that is after the end time
+
+    * 1e1. FumbleLog shows an error message
+
+      Use case resumes at step 1.
+* 1f. User supplies a start time that is before the current time
+
+    * 1f1. FumbleLog shows an error message
 
       Use case resumes at step 2.
-* 2b. User supplies an invalid parameter
-   * 2b1. FumbleLog shows an error message.
-
-      Use case resumes at step 2.
-* 2c. User supplies a date that is before the current date
-
-    * 2c1. FumbleLog shows an error message
-
-      Use case resumes at step 2.
-* 2d. User supplies a start time that is after the end time
-
-    * 2d1. FumbleLog shows an error message
-
-      Use case resumes at step 2.
-* 2e. User supplies a start time that is before the current time
-
-    * 2e1. FumbleLog shows an error message
-
-      Use case resumes at step 2.
-* 3a. User enters a group and certain members of the group is already 
+* 2a. User enters a group and certain members of the group is already 
 assigned to the event individually.
 
-    * 3a1. For each Event, duplicate members will be removed from the 
+    * 2a1. For each Event, duplicate members will be removed from the 
     individual Persons list.
 
       Use case ends
@@ -782,7 +814,7 @@ assigned to the event individually.
 
 **MSS**
 
-1.  User requests to <u> list events </u> 
+1.  User requests to list events 
 2.  FumbleLog shows a list of events
 3.  User requests to delete a specific event in the list
 4.  FumbleLog deletes the event
@@ -962,6 +994,8 @@ Contacts or groups can be assigned to a single meeting, allowing for efficient m
 * **VCS**: Version Control System
 * **CI**: Continuous Integration
 
+[Scroll back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -996,13 +1030,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list_all` or `list_persons` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   1. Test case: `delete_person 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   1. Test case: `delete_person 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete_person`, `delete_person x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
@@ -1014,3 +1048,5 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+[Scroll back to Table of Contents](#table-of-contents)
