@@ -79,7 +79,8 @@ We hope you enjoy using ManaGease as much as we enjoyed building it.
     Employee information is displayed on the person card below:
     <img src="images/PersonCardAnnotated.png" width="800">
 
-5. Type the command in the command box and press Enter on your keyboard to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. **<ins>For optimised experience, please set the app to full screen.</ins>**
+6. Type the command in the command box and press Enter on your keyboard to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list`: Lists all employees.
