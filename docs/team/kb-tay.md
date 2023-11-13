@@ -35,11 +35,10 @@ Given below are my contributions to the project.
 * **Contributions to the UG**:
   * Added documentation for `schedule` command and `complete` under feature section. [#137](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/137) [#135](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/137) [#210](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/210)
 * **Contributions to the DG**:
-  * Document the overview of how `Command` is executed.
-  * Added documentation, class diagram and sequence diagram for `schedule` feature.
+  * Added documentation, class diagram and sequence diagram for `schedule` feature. [#137](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/137)
   * Added documentation on design considerations for `Appointment` field. [#137](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/137)
   * Added sequence and activity diagram for `complete` feature. [#209](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/209/files)
-  * Added documentation on implementation and design considerations for `complete` feature.
+  * Added documentation on implementation and design considerations for `complete` feature. [#328](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/328)
 * **Community**:
   * Review PRs of teammates. [#109](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/109) [#205](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/205) [#110](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/110) [#256](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/256)
   * Review DG and suggested bug fixes for teammates. [#285](https://github.com/AY2324S1-CS2103T-F12-1/tp/issues/285) [#278](https://github.com/AY2324S1-CS2103T-F12-1/tp/issues/278)
