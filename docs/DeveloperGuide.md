@@ -490,9 +490,15 @@ characteristics:
 
 **MSS:**
 
-1. The accountant selects a transaction to remove from the records.
-2. The system removes the transaction from the database.
+1. The accountant specifies a transaction to remove.
+2. The system removes the transaction from the transaction book.
    <br>Use case ends
+
+**Extensions:**
+
+- 2a. Transaction to remove does not exist
+    - 2a1. The system displays an error message.
+      <br>Use case ends
 
 ### Use Case 3: Viewing All Transactions
 
