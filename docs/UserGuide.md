@@ -224,9 +224,9 @@ command for both assignments and internships.
 <img src="images/NewUserTutAdd1.png" width="550" /> <br>
 
 **Step 4:** Add a few more assignments. Try out filling optional parameters as well, etc
-    - `add-a n/CS2100 Assignment 1 e/2023-11-30 13:00 t/Coding`
-    - `add-a n/CC optional 1 e/2023-11-29 16:00 d/try this out! s/complete p/2023-11-27 t/Optional`
-    - Note: On adding assignments, they will automatically be sorted by their deadlines. The assignment due earliest will be first in the assignments list, which can be viewed using `list-a` <br> 
+- `add-a n/CS2100 Assignment 1 e/2023-11-30 13:00 t/Coding`
+- `add-a n/CC optional 1 e/2023-11-29 16:00 d/try this out! s/complete p/2023-11-27 t/Optional`
+- Note: On adding assignments, they will automatically be sorted by their deadlines. The assignment due earliest will be first in the assignments list, which can be viewed using `list-a` <br> 
 <img src="images/NewUserTutAddMoreAssgn.png" width="550" /> <br> 
 <div style="page-break-after: always;"></div>
 
@@ -250,19 +250,19 @@ With reference the picture above, we will do `delete-a 2` <br> <img src="images/
 **Step 10:**  Now, let's change the view to see internships. Enter the command `list-i` <br> <img src="images/NewUserTutListI.png" width="550" /> <br> <div style="page-break-after: always;"></div>
 
 **Step 11:** Similar to assignments, we can add internship roles (under applications) and tasks! Let's add a few roles now using the command `add-i-role`
-    - `add-i-role n/Google r/SWE c/Summer 2024`
-    - `add-i-role n/FaceBook r/DevOps c/Winter 2024 d/Impress Mr Mark p/9500 o/follow-up l/Florida` <br> <img src="images/NewUserTutAddIRoles.png" width="550" /> <br>
+- `add-i-role n/Google r/SWE c/Summer 2024`
+- `add-i-role n/FaceBook r/DevOps c/Winter 2024 d/Impress Mr Mark p/9500 o/follow-up l/Florida` <br> <img src="images/NewUserTutAddIRoles.png" width="550" /> <br>
 
 **Step 12:** Now, let's add in some tasks relating to our roles, with `add-i-task`
     
-    - `add-i-task n/OA i/1  e/2023-11-30 11:30`
-    - `add-i-task n/Interview i/1 e/2023-12-10 16:00 o/follow-up`
-    - `add-i-task n/OA i/2 e/2023-11-29 17:30 s/complete o/follow-up` <br> <img src="images/NewUserTutAddITasks.png" width="550" /> <br> <div style="page-break-after: always;"></div>
+- `add-i-task n/OA i/1  e/2023-11-30 11:30`
+- `add-i-task n/Interview i/1 e/2023-12-10 16:00 o/follow-up`
+- `add-i-task n/OA i/2 e/2023-11-29 17:30 s/complete o/follow-up` <br> <img src="images/NewUserTutAddITasks.png" width="550" /> <br> <div style="page-break-after: always;"></div>
 
 **Step 13:** We can also mark tasks as complete with `mark-i` and edit tasks and roles using `edit-i-task` and `edit-i-role` respectively. Let's try!
-    - `mark-i 2`
-    - `edit-i-task i/1 o/awaiting`
-    - `edit-i-role i/1 c/Winter 2024 d/Prepare for google questions p/12500 l/Labrador Park` <br> <img src="images/NewUserTutMarkEditI.png" width="550" /> <br>
+- `mark-i 2`
+- `edit-i-task i/1 o/awaiting`
+- `edit-i-role i/1 c/Winter 2024 d/Prepare for google questions p/12500 l/Labrador Park` <br> <img src="images/NewUserTutMarkEditI.png" width="550" /> <br>
 
 **Step 14:** Lastly, let's find Google with `find-i-role google` and delete the completed Google OA task with `delete-i-task 1` <br> <img src="images/NewUserTutFindDeleteI.png" width="550" /> <br> <div style="page-break-after: always;"></div>
 
