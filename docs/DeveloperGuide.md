@@ -542,10 +542,6 @@ testers are expected to do more *exploratory* testing.
    1. Test case: Navigate to the folder with the JAR file, and make arbitrary changes to the `\data\contacts.json` file. Relaunch the app.
       Expected: The app will launch with an empty contact list. 
 
-## Appendix: Effort
-
-//TODO
-
 ## Appendix: Planned enhancements
 
 1. Currently, error messages displayed in ConText are generic.
