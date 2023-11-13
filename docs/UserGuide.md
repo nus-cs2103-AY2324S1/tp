@@ -853,9 +853,7 @@ Invalid filter format: Names should only contain alphanumeric characters and spa
 Usage: filter (any number of unique -[name|subject|tag|remark] [value]). 
 For example, filter -name John -subject physics,english
 ```
-
 <div style="page-break-after: always;"></div>
-
 #### For Schedule:
 <box type="info" seamless>
 
@@ -905,6 +903,7 @@ Usage: filter -(at least one of unique [-name|subject|before|on|after VALUE]).
 For example, filter -before 2023/10/10 -subject physics
 Note you should only use one of -before, -on, -after at a time.
 ```
+<div style="page-break-after: always;"></div>
 
 #### For Task:
 Filtering is not supported in the 💼 ___TASKS list___ at this time!
@@ -1118,6 +1117,7 @@ No student is currently displayed
 ```
 This student has no linked lessons
 ```
+<div style="page-break-after: always;"></div>
 
 #### For Schedule:
 <box type="info" seamless>
