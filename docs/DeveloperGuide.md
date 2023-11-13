@@ -370,7 +370,7 @@ In this section, we focus only on `FindCommand`, which is strictly the more comp
 
 The following class diagram shows all classes involved:
 
-CLASS DIAGRAM GOES HERE
+![FindCommandClassDiagram.png](images/FindCommandClassDiagram.png)
 
 To illustrate how everything works together, we trace the flow of execution as the user searches for `Tom / Sam`. Details involving `MainWindow` and `LogicManager` are ignored, especially since they are common across all commands. 
 
@@ -385,6 +385,9 @@ Step 4. `LogicManager` calls the `execute` function of the command it received. 
 Step 5. `FindCommand` calls `updateFilteredPersonList` of the `Model`, which refreshes the currently displayed list of fosterers.
 
 Step 6. The `list` command stops here, and execution is returned to the `LogicManager`, and then `MainWindow`. The `MainWindow` shows text feedback, together with the updated list of fosterers.
+
+
+The following diagram ignores details for `SearchPredicate`, which will be covered shortly: 
 
 ![FindCommandSequenceDiagram.png](images/FindCommandSequenceDiagram.png)
 
