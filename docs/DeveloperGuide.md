@@ -135,6 +135,8 @@ implementation of a component), as illustrated in the (partial) class diagram be
 
 The sections below give more details of each component.
 
+[Scroll back to *Table of Contents*](#table-of-contents)
+
 ### UI component
 
 The **API** of this component is specified
@@ -160,10 +162,11 @@ The `UI` component,
 - keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 - depends on some classes in the `Model` component, as it displays `Date` object residing in the `Model`.
 
+[Scroll back to *Table of Contents*](#table-of-contents)
+
 ### Logic component
 
-**API
-** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -174,10 +177,11 @@ call as an example.
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
-<box type="info" seamless>
+<box type="info">
 
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of
 PlantUML, the lifeline reaches the end of diagram.
+
 </box>
 
 How the `Logic` component works:
@@ -202,10 +206,11 @@ How the parsing works:
 - All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
+[Scroll back to *Table of Contents*](#table-of-contents)
+
 ### Model component
 
-**API
-** : [`Model.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="550" />
 
@@ -222,10 +227,11 @@ The `Model` component,
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
   should make sense on their own without depending on other components)
 
+[Scroll back to *Table of Contents*](#table-of-contents)
+
 ### Storage component
 
-**API
-** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -237,6 +243,8 @@ The `Storage` component,
   either one of three (if the functionality of only one is needed).
 - depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
+
+[Scroll back to *Table of Contents*](#table-of-contents)
 
 ### Common classes
 
@@ -259,6 +267,8 @@ The following class diagram shows the new `Date` class after the changes mention
 <puml src="diagrams/DateClassDiagram.puml"/>
 
 Moving on to the implementation details, the following sections describe how and why the main features of the app work.
+
+[Scroll back to *Table of Contents*](#table-of-contents)
 
 ### Add Dates Feature
 
@@ -328,6 +338,8 @@ The activity diagram notation of the above steps is shown below. <br>
   - Pros: More user-friendly (since user can easily see the date being added to the end of the list)
   - Cons: Not very visually appealing (since the list appears to be unsorted and non uniform)
 
+[Scroll back to *Table of Contents*](#table-of-contents)
+
 ### List Dates
 
 1. The list dates feature begins by passing the user input obtained from the `CommandBox` class in the `Ui` component to
@@ -358,6 +370,8 @@ The sequence diagram notation of the above steps is shown below. <br>
     since you don't have to sort the list on every list command)
   - Cons: Not very visually appealing (since the list appears to be unsorted and non uniform)
 
+[Scroll back to *Table of Contents*](#table-of-contents)
+
 ### Filter dates
 
 The filter feature is implemented using the `FilterCommand` class. The `FilterCommand` class takes in a `Predicate`
@@ -379,6 +393,8 @@ the command `filter name/John`
 
 <puml src="diagrams/FilterSequence.puml" width="600" />
 
+[Scroll back to *Table of Contents*](#table-of-contents)
+
 ### Sort dates
 
 1. The user specifies a metric (eg. name/) and a sorting order (increasing/ decreasing) to sort by.
@@ -395,6 +411,8 @@ the command `sort name/increasing`.
 
 <puml src="diagrams/SortSequence.puml" width="600" />
 
+[Scroll back to *Table of Contents*](#table-of-contents)
+
 ### Get Blind Date
 
 1. The user will first key in blindDate which is the command word for this feature.
@@ -407,6 +425,8 @@ The _Activity_ diagram summarises what happens after the user enters a sort comm
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `blindDate`.
+
+[Scroll back to *Table of Contents*](#table-of-contents)
 
 ### Get best match
 
@@ -433,34 +453,68 @@ income.
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `bestMatch`
+
 <puml src="diagrams/BestMatchSequence.puml" width="550" />
->>>>>>> Stashed changes
+
+[Scroll back to *Table of Contents*](#table-of-contents)
 
 ### Set preferences
 
-The set preferences feature is implemented using the `SetPrefCommand` class. The `SetPrefCommand` class takes in a
-`DatePref` object as a parameter. The `DatePref` object is used to set the `DatePref` object in the `Model` component.
-The `SetPrefCommand` class then returns a `CommandResult` object that contains the `DatePref` object.
+#### Implementation
 
-The _Activity_ diagram summarises what happens after the user enters a set preferences command.
+1. The set preferences feature begins by passing the user input obtained from the `CommandBox` class in the `Ui`
+   component to the `LogicManager` class in the `Logic` component by invoking the `execute` function.
+2. The `LogicManager` class then passes the user input to the `LoveBookParser` class for parsing and validation.
+3. The `LoveBookParser` class then performs polymorphism and creates a `SetPrefCommandParser` object for SetPrefCommand
+   specific parsing.
+4. The `LoveBookParser` class also separates the command word from the user input and passes the arguments from the user
+   input to the `SetPrefCommandParser` object created above for parsing.
+5. The `SetPrefCommandParser` carries out it's validation checks and creates a new `SetPrefCommand` object if the
+   validation checks pass.
+6. The `SetPrefCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function
+   which then updates the date preferences in the `Model` component.
+
+The `edit` feature is also implemented in a similar manner.
+
+The _Activity_ Diagram notation of the above steps is shown below.
 
 <puml src="diagrams/SetPrefActivity.puml" width="600" />
 
-The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues the command 'setP age/20'
+The _Sequence_ Diagram notation of the above steps is shown below.
 
 <puml src="diagrams/SetPrefSequence.puml" width="600" />
+
+#### Design Considerations
+
+**Aspect: Allowing users to set their date preferences on launch**
+
+* **Alternative 1 (current choice):** Have default date preference (
+  see [this](UserGuide.md#managing-preferences-and-getting-matches))
+    * Pros: Easy to implement (since all you have to do is set the default date preference). `bestMatch` works
+      immediately from the start.
+    * Cons: Not very user-friendly (since the user may not know all the details of the date)
+* **Alternative 2:** Allow users to set their date preferences on launch
+    * Pros: More user-friendly (since user has more flexibility in setting their date preferences)
+    * Cons: Slightly harder to implement (since you have to check which fields are present). Will also affect the
+      bestMatch
+      algorithm since users may not know how to set their date preferences first.
+
+[Scroll back to *Table of Contents*](#table-of-contents)
 
 ### Star dates
 
 #### Implementation
 
-1. The star dates feature begins by passing the user input obtained from the `CommandBox` class in the `Ui` component to the `LogicManager` class in the `Logic` component by invoking the `execute` function.
+1. The star dates feature begins by passing the user input obtained from the `CommandBox` class in the `Ui` component to
+   the `LogicManager` class in the `Logic` component by invoking the `execute` function.
 2. The `LogicManager` class then passes the user input to the `LoveBookParser` class for parsing and validation.
+
 3. The `LoveBookParser` class then performs polymorphism and creates a `StarCommandParser` object for StarCommand specific parsing.
 4. The `LoveBookParser` class also separates the command word from the user input and passes the arguments from the user input to the `StarCommandParser` object created above for parsing.
 5. The `StarCommandParser` carries out it's validation checks and creates a new `StarCommand` object if the validation checks pass.
 6. The `StarCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function which then updates the isStarred field for the date object with the respective index.
-   The _Activity_ diagram summarises what happens after the user enters a star command.
+
+The _Activity_ diagram summarises what happens after the user enters a star command.
 
 <puml src="diagrams/StarActivity.puml" width="600" />
 
@@ -469,16 +523,23 @@ the command `star 1`
 
 <puml src="diagrams/StarSequence.puml" width="600" />
 
+[Scroll back to *Table of Contents*](#table-of-contents)
+
 ### Unstar dates
 
 #### Implementation
 
-1. The star dates feature begins by passing the user input obtained from the `CommandBox` class in the `Ui` component to the `LogicManager` class in the `Logic` component by invoking the `execute` function.
+1. The star dates feature begins by passing the user input obtained from the `CommandBox` class in the `Ui` component to
+   the `LogicManager` class in the `Logic` component by invoking the `execute` function.
 2. The `LogicManager` class then passes the user input to the `LoveBookParser` class for parsing and validation.
-3. The `LoveBookParser` class then performs polymorphism and creates a `UnstarCommandParser` object for UnstarCommand specific parsing.
-4. The `LoveBookParser` class also separates the command word from the user input and passes the arguments from the user input to the `UnstarCommandParser` object created above for parsing.
-5. The `UnstarCommandParser` carries out it's validation checks and creates a new `UnstarCommand` object if the validation checks pass.
-6. The `UnstarCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function which then updates the isStarred field for the date object with the respective index.
+3. The `LoveBookParser` class then performs polymorphism and creates a `UnstarCommandParser` object for UnstarCommand
+   specific parsing.
+4. The `LoveBookParser` class also separates the command word from the user input and passes the arguments from the user
+   input to the `UnstarCommandParser` object created above for parsing.
+5. The `UnstarCommandParser` carries out it's validation checks and creates a new `UnstarCommand` object if the
+   validation checks pass.
+6. The `UnstarCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function
+   which then updates the isStarred field for the date object with the respective index.
 
 The _Activity_ diagram summarises what happens after the user enters a star command.
 
@@ -489,6 +550,9 @@ the command `unstar 1`
 
 <puml src="diagrams/UnstarSequence.puml" width="600" />
 
+[Scroll back to *Table of Contents*](#table-of-contents)
+
+
 ---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -498,6 +562,8 @@ the command `unstar 1`
 - [Logging guide](Logging.md)
 - [Configuration guide](Configuration.md)
 - [DevOps guide](DevOps.md)
+
+[Scroll back to *Table of Contents*](#table-of-contents)
 
 ---
 
@@ -528,6 +594,8 @@ original UI of AB3 into our own new LoveBook UI. As our team was unfamiliar with
 a great amount of time and effort to produce an eventual satisfactory and working UI that we were proud to adopt and
 incorporate into our application.
 
+[Scroll back to *Table of Contents*](#table-of-contents)
+
 ---
 
 ## **Appendix: Requirements**
@@ -547,6 +615,8 @@ incorporate into our application.
 LoveBook simplifies the process of storing information of dates and assessing compatibility between user and his/her
 dates by taking into account the user’s preferences, thereby enhancing the efficiency and effectiveness of finding the
 perfect match.
+
+[Scroll back to *Table of Contents*](#table-of-contents)
 
 ### User stories
 
@@ -574,6 +644,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | dater     | to be able to sort my dates based on a particular metric                                        | find dates that I am interested in amidst my long and ever growing list |
 | `* * *`  | dater     | to be able to find dates based on their name                                                    | locate a date easily                                                    |
 | `* *`    | lazy user | to be able to clear all the dates in my list                                                    | start afresh with a new date list                                       |
+
+[Scroll back to *Table of Contents*](#table-of-contents)
 
 ### Use cases
 
@@ -820,6 +892,8 @@ Use case ends. <br>
 - LoveBook displays a message indicating that there are no dates.
 - Use case ends.
 
+[Scroll back to *Table of Contents*](#table-of-contents)
+
 ### Non-Functional Requirements
 
 1. Usability and Accessibility: The application should provide clear and user-friendly CLI prompts and menus.
@@ -832,6 +906,8 @@ Use case ends. <br>
 4. Portability: The CLI application should be compatible with multiple operating systems, including Windows, macOS, and
    Linux.
 
+[Scroll back to *Table of Contents*](#table-of-contents)
+
 ### Glossary
 
 | Term          | Definition                                                                                                        |
@@ -843,6 +919,8 @@ Use case ends. <br>
 | GUI           | Graphical User Interface                                                                                          |
 | CLI           | Command Line Interface                                                                                            |
 | Mainstream OS | Windows, Linux, Unix, OS-X                                                                                        |
+
+[Scroll back to *Table of Contents*](#table-of-contents)
 
 ---
 
@@ -947,6 +1025,10 @@ testers are expected to do more _exploratory_ testing.
    - Close the app.
    - Expected: A `data` folder is created under the current repository where the jar file is located.
 
+[Scroll back to *Table of Contents*](#table-of-contents)
+
+---
+
 ## **Appendix: Effort**
 Implementing LoveBook was not straightforward and often required us to brainstorm as a team to solve the challenges faced. Given below is a summary of the effort our team has put into developing LoveBook.
 
@@ -955,6 +1037,8 @@ Implementing LoveBook was not straightforward and often required us to brainstor
 Our group undertook a significant refactoring effort in the initial codebase, introducing several new classes and enhancing existing ones to fit into our idea of LoveBook. Noteworthy additions include the creation of the "income" and "horoscope" fields within the Date class, representing crucial attributes for building comprehensive user profiles and calculation of compatibility. Regarding compatibility, our group has spent a tremendous amount of time and effort to brainstorm about the implementation of a compatibility algorithm. The compatibility algorithm is designed to calculate a compatibility score based on user preferences and date attributes. This has proven to be challenging as we had to ensure accuracy in providing the user with the best match by taking into account all the differences between preferences and dates attributes.
 
 Our dedication to enhancing the aesthetics of LoveBook is underscored by our meticulous attention to visual representation. We've transcended conventional textual displays, incorporating visually engaging elements such as gender icons, horoscope symbols, and star command visual cues, all implemented using JavaFX. These features not only contribute to the overall visual appeal of the application but also serve a functional purpose in providing users with quick and intuitive insights into important date attributes. Furthermore, our commitment to a visually pleasing user interface extends to the inclusion of unique avatars for each date, corresponding to their respective genders. This holistic approach to aesthetics reflects our aspiration to create an immersive and enjoyable user experience within the LoveBook application.
+
+[Scroll back to *Table of Contents*](#table-of-contents)
 
 ## **Appendix: Planned Enhancements**
 
@@ -1001,3 +1085,5 @@ Our dedication to enhancing the aesthetics of LoveBook is underscored by our met
     - In the future, we plan to add more presets buttons for all 16 commands in the application.
     - Furthermore, even though there's `clear` command, the button "clear" removes all text in the command box, making
       it ambiguous. We plan to change this in a future iteration like a trash can icon.
+
+[Scroll back to *Table of Contents*](#table-of-contents)
