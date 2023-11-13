@@ -367,7 +367,7 @@ Given below is an example of how the editContactEvent function works at each ste
 
 Here's a sequence diagram to summarise the steps above:
 
-<puml src="diagrams/EditContactEventSequenceDiagram.puml" alt="EditContactEventSequenceDiagram""/>
+<puml src="diagrams/EditContactEventSequenceDiagram.puml" alt="EditContactEventSequenceDiagram"/>
 
 **Design considerations**
 
