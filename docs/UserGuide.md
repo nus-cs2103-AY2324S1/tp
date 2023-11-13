@@ -576,11 +576,21 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAGNAME]…​ [
   specifying any tags after it.
 * There is no current way to keep the existing tags and add new tags to the applicant. You will have to re-tag the applicant with the existing tags and the new tags.
 
+<box type="warning" seamless>
+
+**Caution:**
+If you tag a person with a tag that has not been categorised yet, and then you categorised it as the  `assessment` category, you need to re-tag the person with the same tag name again.
+This is because the tag is not considered to include the `assessment` category until you re-tag the person with the same tag name again. That is tags do not support updating of categories after they have been created.
+
+</box>
+
+
 **Notes on editing the score of the specified applicant for `sc/TAGNAME SCORE`**:
 * The `TAG` in `sc/TAG SCORE` must be a tag of the category `assessment`. You cannot use the `sc/TAG SCORE` field for tags that are not of the `assessment` category.
 * The `sc/TAG SCORE` field can only be used after the `t/TAG` field is used if the tag has not been created  or the `TAG` already exist on the applicant.
 * The `SCORE` in `sc/TAG SCORE` is non-negative, that is `SCORE` must be more than or equal to 0.
 * To clear a tag's score, just re-tag it with the same tag name, but without using the `sc/TAG SCORE` field.
+
 
 
 Notes on rules for `edit` command involving tags with categories for `t/[CATEGORY] TAGNAME`:
