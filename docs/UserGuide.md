@@ -267,6 +267,10 @@ of tags is not cumulative.
 
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+As your list of clients might be long, you can consider using the [Find](#locating-clients-by-name-financial-plan-andor-tag--find) command first to filter the list before editing details of your client.
+</div>
+
 Examples:
 *  `edit 4 n/john doe a/23 woodlands ave 123` Edits the name and address of the 1st client to be `john doe` and `woodlands ave 123` respectively.
 
