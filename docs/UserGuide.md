@@ -288,8 +288,9 @@ If index of a multi-valued field is not specified, it will **default to 1**.
 
 Example usage:
 
-* `delete 1 /link /index 2`
-* `delete 5 /spec`
+* `delete 1 /phone`
+    ![delete phone](images/delete/delete-phone.png)
+* `delete 5 /link /index 2`
 * `delete 10 /priority`
 
 [Table of Contents](#table-of-contents)
