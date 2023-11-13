@@ -11,8 +11,7 @@ LoveBook, is a **dating-focused** application, revolving around providing **seri
 and **enjoyable** tool to enhance their dating experiences. Featuring **user preferences management**, **date
 organization**,
 **customizable filtering options** and **best match algorithms**, LoveBook enhances the **efficiency** and *
-*effectiveness** of your
-online dating journey.
+**effectiveness** of your online dating journey.
 
 ## **Table of Contents**
 
