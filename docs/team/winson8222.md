@@ -75,7 +75,7 @@ Given below are my contributions to the project.
     `solve` and `set` and how they synergise with Spaced-Repetition. [#112](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/112)
     * Added extensions to use cases, to describe the cases when invalid parameters or incorrect command format is entered by the users. [#131](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/131)
     * Added Planed Enhancement to support Markdown Syntax stacking [#225](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/225)
-  *  README:
+  * README:
     * Removed trace of ab3 and revamped README file for lesSON. [#50](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/50)
 
 
