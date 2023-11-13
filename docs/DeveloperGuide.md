@@ -1518,7 +1518,7 @@ testers are expected to do more <i>exploratory testing</i>.
 - **Enhancement**: Error messages will be provided to pinpoint the specific part of the JSON file that does not follow the required format.
 - **Reason**: To improve the usability of the application, especially when users use the JSON file to import large amounts of data, users will be able to identify and correct the exact issue with their JSON data file without having to guess which part was incorrect.
 - **Example**:
-  - Currently, when a user imports an invalid JSON data file, CoordiMate will discard all data and start with an empty data file at the next run. This enhancement will be able to retain the information the user imported and allow the user to correct the format of the JSON file effectively.
+  - Currently, when a user imports an invalid JSON data file, CoordiMate will show an empty contact list and task list. This enhancement will show an error message to inform the user exactly which part of the JSON file is invalid, so that the user can correct the JSON file and import it again.
 
 ### 8. Standardise all command behaviours
 
