@@ -514,7 +514,7 @@ Here’s how you can use it:<br>
 `exit`
 
 <div markdown="block" class="alert alert-info">:information_source: The <code>exit</code> command exists for your convenience. 
-It performs the same task as the cross in the top bar and the Exit button in the File sub-menu item
+It performs the same task as the cross in the top bar and the Exit button in the File sub-menu item.
 </div>
 
 <hr class="command-separator">
