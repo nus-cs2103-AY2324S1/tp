@@ -56,10 +56,6 @@ Each of the four main components:
 
 For example, the `Logic` component's API is defined in `Logic.java`, and its functionality is implemented in `LogicManager.java`.
 
-#### Detailed Component Descriptions:
-
-[More details about each component are provided in the subsequent sections.](#detailed-component-descriptions)
-
 ---
 
 ### Detailed Component Descriptions
