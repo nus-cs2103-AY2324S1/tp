@@ -45,6 +45,9 @@ _Find Your Success with JobFindr_
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;">
+
+</div>
+
 ## **Introduction**
 
 Are you an NUS Fresh Graduate looking for a job? Are you struggling to use a spreadsheet to keep track of your job
@@ -122,8 +125,10 @@ _Good to have you back! We're thrilled to have you with us again. How can we hel
     * You may refer to the [FAQ](#faq) Section for solutions to common issues faced by our users.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
-</div>
 
+<div style="page-break-after: always;">
+
+</div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Quick Start**
