@@ -318,7 +318,7 @@ HealthSync requests of its users.
 
 Therefore, `Appointment` uses a combination of `regex` and `DateTimeFormatter` to resolve its user input.
 
-<puml src="diagrams/AppointmentActivity0.puml" width="800"/>
+<puml src="diagrams/AppointmentActivity0.puml" />
 
 A partial activity diagram illustrating the relevant segment of the parse process.
 
