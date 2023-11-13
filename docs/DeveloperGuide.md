@@ -1045,20 +1045,244 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to sort employees by given attribute
-2.  HouR returns the sorted list of employees by given attribute
+1.  User requests to sort employees by given field and order.
+2.  HouR returns the sorted list of employees based on given field in given order.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User leaves out keyword.
+* 1a. User leaves out at least one of field or order.
     * 1a1. HouR shows an error message.
 
   Use case returns back to step 1.
 
-* 1b. No attribute matches given attribute.
+* 1b. Field is not usable for sorting.
     * 1b1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1c. Order is not asc or desc.
+  * 1c1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+**Use case: Add a leave period for an employee**
+
+**MSS**
+
+1.  User requests to add a leave period for an employee with a given id from given start date
+    to given end date.
+2.  HouR adds the individual dates between the given start and end dates inclusive
+    as leave appointments for the employee with given id.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User leaves out at least one of employee id, start date, or end date.
+  * 1a1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1b. No employee matches given id.
+  * 1b1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1c. Dates are of invalid order or format.
+  * 1c1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1d. Leave date to be added already exists.
+  * 1d1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1e. Adding the leave date causes number of leaves
+  for employee with given employee id to be over 14 days .
+  * 1e1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+**Use case: Delete a leave period for an employee**
+
+**MSS**
+
+1.  User requests to delete allocated leaves for an employee with a given id that falls between
+    given start and end dates.
+2.  HouR deletes the allocated leave dates that fall between the given start and end dates inclusive
+    for the employee with given id.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User leaves out at least one of employee id, start date, or end date.
+  * 1a1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1b. No employee matches given id.
+  * 1b1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1c. Dates are of invalid order or format.
+  * 1c1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1d. No allocated leaves found between given start and end dates.
+  * 1d1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+**Use case: Edit an allocated leave date for an employee**
+
+**MSS**
+
+1.  User requests to edit a given allocated leave date for an employee with a given id to the given new leave date.
+2.  HouR edits the given allocated leave date to the given new leave date for the employee with given id.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User leaves out at least one of employee id, old leave date, or new leave date.
+  * 1a1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1b. No employee matches given id.
+  * 1b1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1c. Dates are of invalid format.
+  * 1c1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1d. Given allocated date to be edited does not exist.
+  * 1d1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1e. Given new date is already allocated.
+  * 1e1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+**Use case: List employees on leave**
+
+**MSS**
+
+1.  User requests to view a list of all employees on leave on a given date.
+2.  HouR filters the displayed employee list to only display employees on leave on the given date.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User leaves out date.
+  * 1a1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1b. Dates are in the wrong format.
+  * 1b1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+**Use case: Add a remark for an employee**
+
+**MSS**
+
+1.  User requests to add a given remark to an employee with a given employee id.
+2.  HouR adds the remark to the list of remarks associated with the employee with the given employee id and
+    shows the list to the user.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User leaves out at least one of employee id or remark.
+  * 1a1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1b. No employee matches given employee id.
+  * 1b1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1c. Remark to be added already exists.
+  * 1c1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+**Use case: Delete a remark for an employee**
+
+**MSS**
+
+1.  User requests to delete a given remark from an employee with a given employee id.
+2.  HouR deletes the remark from the list of remarks associated with the employee with the given employee id
+    and shows it to the user.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User leaves out at least one of employee id or remark.
+  * 1a1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1b. No employee matches given employee id.
+  * 1b1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1c. Remark does not exist in the list of remarks associated with employee with given employee id.
+  * 1c1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+**Use case: Increase or decrease employee overtime hours**
+
+**MSS**
+
+1.  User requests to increase number of overtime hours taken by employee with given employee id by a given amount.
+2.  HouR increases the number of overtime hours taken by employee with given employee id by the given amount.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User leaves out at least one of employee id, operation (inc or dec), and amount.
+  * 1a1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1b. No employee matches given employee id.
+  * 1b1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1c. Operation given is neither inc (for increase) nor dec (for decrease).
+  * 1c1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1d. Amount given is not a positive integer.
+  * 1d1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1e. Updating the number of leaves causes the number to exceed 72 or fall below 0.
+  * 1e1. HouR shows an error message.
 
   Use case returns back to step 1.
 
@@ -1083,15 +1307,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case returns back to step 1.
 
-**Use case: Clear employee book**
-
-**MSS**
-
-1.  User requests to clear employee book
-2.  HouR clears employee book
-
-    Use case ends.
-
 **Use case: Reset field of all employees**
 
 **MSS**
@@ -1113,6 +1328,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case returns back to step 1.
 
+**Use case: Clear employee book**
+
+**MSS**
+
+1.  User requests to clear employee book
+2.  HouR clears employee book
+
+    Use case ends.
+
+**Use case: Open help page**
+
+**MSS**
+
+1.  User requests to open help page
+2.  HouR shows a link that the user can copy and paste on a browser
+
+    Use case ends.
+
 **Use case: Exit HouR**
 
 **MSS**
@@ -1122,7 +1355,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -1610,9 +1842,9 @@ This project has been a very invaluable experience where we got to have a taste 
 
 One of the things that we are most proud of is the bettering of the UI. Though the change was not very extravagant, the change in colour scheme was a feat in itself since we honestly did not aim to care a lot about our UI. We also managed to add icons beside the employee attributes in each employee card which we believe made it more readable for the users.
 
-Another feature we are proud of is our `report` feature that allows our users to generate reports as txt files for each employee. While it might not contain a lot of information yet, we believe that it was a great starting point considering the time-constraint we had for this project and we plan to extend and further develop this feature, improving the experience for our users.
+Another feature we are proud of is our `report` feature that allows our users to generate reports as txt files for each employee. While it might not contain a lot of information yet, we believe that it was a great starting point considering the time-constraint we had for this project, and we plan to extend and further develop this feature, improving the experience for our users.
 
-Overall, we are proud of our project and we believe that we have done our best with all the constraints and challenges we faced. We are happy with the result and believe that our product will meet the needs of our target audience.
+Overall, we are proud of our project, and we believe that we have done our best with all the constraints and challenges we faced. We are happy with the result and believe that our product will meet the needs of our target audience.
 
 ## Planned Enhancements
 
