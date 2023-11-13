@@ -17,7 +17,7 @@ import seedu.address.model.person.Ic;
 import seedu.address.model.person.Patient;
 
 /**
- * Deletes an Appointment identified using it's displayed index from the address book.
+ * Deletes an Appointment identified using its displayed index from the address book.
  */
 public class DeleteAppointmentCommand extends Command {
 
@@ -60,6 +60,13 @@ public class DeleteAppointmentCommand extends Command {
         }
     }
 
+    /**
+     * Finds the patient associated with the given Appointment in the model.
+     *
+     * @param model    The model containing the data.
+     * @param toDelete The Appointment to be deleted.
+     * @return The patient associated with the Appointment or null if not found.
+     */
     private Patient findPatient(Model model, Appointment toDelete) {
         Ic patientIc = toDelete.getPatient();
         List<Patient> patients = model.getFilteredPatientList();
@@ -71,6 +78,13 @@ public class DeleteAppointmentCommand extends Command {
         return null;
     }
 
+    /**
+     * Finds the doctor associated with the given Appointment in the model.
+     *
+     * @param model    The model containing the data.
+     * @param toDelete The Appointment to be deleted.
+     * @return The doctor associated with the Appointment or null if not found.
+     */
     private Doctor findDoctor(Model model, Appointment toDelete) {
         Ic doctorIc = toDelete.getDoctor();
         List<Doctor> doctors = model.getFilteredDoctorList();
