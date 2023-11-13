@@ -45,6 +45,8 @@ Our guide is made for FumbleLog users of all experiences! Refer to the table bel
 - Choose a folder on your computer where you want to store you FumbleLog application, or create a new folder.
 - Copy the `fumblelog.jar` file into the folder you have chosen or created.
 
+<div style="page-break-after: always;"></div>
+
 **4. Launch the application.**
 - In your command terminal, use the `cd` command to navigate to the folder where you have placed the `fumblelog.jar` file.
 - Run the application using the command: `java -jar fumblelog.jar`. You should now be able to see the FumbleLog user interface!
@@ -112,10 +114,16 @@ your contacts and events.
 1. First launch FumbleLog. You may refer to the [Quick Start](#quick-start) guide if you have forgotten how to.
 2. Lets first try **adding a person**, `Mary Lee`, to your contact list. Enter the command: `add_person n/Mary Lee p/91234567 e/mary@gmail.com a/Mary Street #01-01 b/2001-12-12 g/Family`. You should see FumbleLog successfully adding the contact to the contact list:
 ![Tutorial Add](images/tutorialAdd.png)
+
+<div style="page-break-after: always;"></div>
+
 3. Now, lets try **editing the name and email** of your contact. Let's use the index of `Mary Lee` shown in the list (in this case 1), and edit her information: `edit_person 1 n/John Doe e/John@gmail.com`. FumbleLog should reflect the changes to your contact immediately:
 ![Tutorial Edit](images/tutorialEdit.png)
 4. Try adding a few more contacts and assign them to the same `Family` group using the `g/` parameter. Your contact list should look something like this:
 ![Tutorial Add More](images/tutorialAddMore.png)
+
+<div style="page-break-after: always;"></div>
+
 5. Now, lets say `John`'s birthday is in a few weeks. We can **add this event** to FumbleLog using this command: `add_event m/John birthday d/2023-12-12`.
 ![Tutorial Event Add](images/tutorialEventAdd.png)
 6. If everyone in the `Family` group is attending `John`'s birthday, you can easily assign every contact in the group to the event. In this case, simply **edit the event** by assigning the `Family` group, as such: `edit_event 1 g/Family`. Now you should see everyone in the `Family` group is assigned to `John`'s birthday.
@@ -158,6 +166,8 @@ your contacts and events.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing help : `help`
 
 Shows a pop-up window with a link to the user guide for help.
@@ -168,6 +178,8 @@ Format: `help`
 ![Helptab](images/Helptab.png)
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ## Commands for Persons
 
