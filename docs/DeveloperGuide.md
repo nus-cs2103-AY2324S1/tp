@@ -1101,7 +1101,7 @@ The UI also had to be updated accordingly to allows the user to easily switch be
 
 TAvigator has also added support for more viewing options of the list of students.
 This is implemented in the form of more serializable predicates, which are used to check for conditions such as: 
-whether a student is absent from tutorial, whether a tutorial group contains a keyword, whether a name contains a keyword, 
+whether a student is absent from tutorial, whether a student is present in a tutorial group, whether a name contains a keyword, 
 and whether an ID contains a keyword. These predicates allow the user to view students not only by name, but also by ID, 
 tutorial group, and attendance records. We went a step further to save the last viewing option in the preferences.json file, 
 so that the user will be able to quickly refer back to their last viewed option on startup.
