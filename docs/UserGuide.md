@@ -920,6 +920,8 @@ If your changes to the data file makes its format invalid, Foster Family will di
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer, and overwrite the empty data file it creates with the file that contains the data of your previous Foster Family home folder.
 
+**Q**: How do I know which version of Java I am using / have installed on my Computer?<br>
+**A**: Open a command terminal, type `java -version` and press enter. The Java version in use will be displayed as a response message.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Known issues**
