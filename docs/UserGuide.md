@@ -129,7 +129,7 @@ Throughout this guide, you will see different text styles that are used to highl
 
 2. Download the latest `CoordiMate.jar` from [here](https://github.com/AY2324S1-CS2103T-T10-2/tp/releases).
 
-3. Copy `CoordiMate.jar` to the folder you want to use as the _home folder_ for CoordiMate. This folder will be used by CoordiMate to store its data.
+3. Copy `CoordiMate.jar` to the folder you want to use as the home folder for CoordiMate. This folder will be used by CoordiMate to store its data.
 
 4. Open a command terminal, `cd` into the folder you put `CoordiMate.jar` in, and use the `java -jar CoordiMate.jar` command to start CoordiMate.<br>
 
