@@ -30,12 +30,12 @@ public class GenderTest {
 
         // Repeated/Invalid
         assertFalse(Gender.isValidGender("FF")); // repetition of F
-        assertFalse(Gender.isValidGender("MM")); // repetition of F
+        assertFalse(Gender.isValidGender("MM")); // repetition of M
         assertFalse(Gender.isValidGender("T")); // something other than M or F
 
         // valid gender
-        assertTrue(Gender.isValidGender("M")); // underscore in local part
-        assertTrue(Gender.isValidGender("F")); // period in local part
+        assertTrue(Gender.isValidGender("M"));
+        assertTrue(Gender.isValidGender("F"));
     }
 
     @Test

@@ -13,7 +13,7 @@ public class Gender {
     public final String value;
 
     /**
-     * Constructs a {@code Age}.
+     * Constructs a {@code Gender}.
      *
      * @param gender A valid gender.
      */

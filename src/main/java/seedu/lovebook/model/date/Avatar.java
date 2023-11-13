@@ -10,7 +10,7 @@ import static seedu.lovebook.commons.util.AppUtil.checkArgument;
 public class Avatar {
     public static final String MESSAGE_CONSTRAINTS = "Avatar should only contain numbers from 1 to 9.";
     private static final int LOWER_BOUND = 1;
-    private static final int UPPER_BOUND = 10;
+    private static final int UPPER_BOUND = 10; // Exclusive
 
     public final String value;
 

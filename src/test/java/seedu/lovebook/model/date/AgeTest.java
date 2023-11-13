@@ -24,7 +24,7 @@ public class AgeTest {
         // null age number
         assertThrows(NullPointerException.class, () -> Age.isValidAge(null));
 
-        // invalid age numbers
+        // invalid age numbers [Applying Equivalence Partitioning]
         assertFalse(Age.isValidAge("")); // empty string
         assertFalse(Age.isValidAge(" ")); // spaces only
         assertFalse(Age.isValidAge("age")); // non-numeric
@@ -36,9 +36,9 @@ public class AgeTest {
         assertFalse(Age.isValidAge("151")); // Age above 150
 
         // valid age numbers
-        assertTrue(Age.isValidAge("91")); // exactly 3 numbers
+        assertTrue(Age.isValidAge("91"));
         assertTrue(Age.isValidAge("23"));
-        assertTrue(Age.isValidAge("124")); // long age numbers
+        assertTrue(Age.isValidAge("124"));
 
         // EP Boundary Values
         assertTrue(Age.isValidAge("18")); // Age 18

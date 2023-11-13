@@ -29,11 +29,11 @@ public class AvatarTest {
         assertThrows(NumberFormatException.class, () -> Avatar.isValidAvatar(" ")); // spaces only
         assertThrows(NumberFormatException.class, () -> Avatar.isValidAvatar("hello")); // Non-numeric
 
-        // Invalid Values
+        // Invalid Values [Applying Equivalence Partitioning]
         assertFalse(Avatar.isValidAvatar("12")); // Above upper bound
         assertFalse(Avatar.isValidAvatar("0")); // Below lower bound
 
-        // Boundary Values
+        // Boundary Values [Applying Boundary Value Analysis]
         assertTrue(Avatar.isValidAvatar("1")); // Lower bound (inclusive)
         assertTrue(Avatar.isValidAvatar("9")); // Upper bound (inclusive)
     }

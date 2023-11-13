@@ -37,7 +37,7 @@ public class JsonSerializableDatePrefs {
     }
 
     /**
-     * Converts these preferences into the model's {@code Preferences} object.
+     * Converts these preferences into the model's {@code DatePrefs} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
