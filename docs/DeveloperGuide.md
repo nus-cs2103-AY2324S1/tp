@@ -1296,5 +1296,15 @@ testers are expected to do more *exploratory* testing.
       Expected: Only availability statistics shown. `stats` commands will only display the first valid statistic field detected (ie. either `avail`, `current` or `housing`).
 2. Viewing statistics of current fosterers and housing types work similarly, replacing `avail` with `current` and `housing` respectively.
 
-   
+### Resetting the Address Book
+1. Resetting the Address Book
+   1. Prerequisites: `reset` command must be entered first, before entering `reset confirm`.
+   2. Test case: `reset` <br>
+      Expected: Warning displayed of the function of the `reset` command and a prompt of entering `reset confirm` is displayed to continue executing the command.
+   3. Test case: `reset confirm`
+      Expected: A prompt to enter `reset` first followed by `reset confirm` to execute the command.
+   4. Test case: `reset randomArg`
+      Expected: Warning displayed of the function of the `reset` command and a prompt of entering `reset confirm` is displayed to continue executing the command.
+   5. Test case: `reset` followed by `reset confirm`
+      Expected: The Address Book is erased and a command success massage is displayed.
         
