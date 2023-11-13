@@ -352,11 +352,11 @@ It also allows users to specify more than one search parameter for each category
 
 #### Implementation
 
-The search feature is implemented using the `SetCommand` class. It extends `Command` and overrides the `execute()` method to
+The set feature is implemented using the `SetCommand` class. It extends `Command` and overrides the `execute()` method to
 edit the status of the user.
 
-The search parameters from the user input are parsed using the parse method in the `SetCommandParser` class. `SetCommandParser::Parse`
-takes in the search parameters from the user input and combines them into a list of predicates. This list of predicates is then
+The set parameters from the user input are parsed using the parse method in the `SetCommandParser` class. `SetCommandParser::Parse`
+takes in the set parameters from the user input and combines them into a list of predicates. This list of predicates is then
 passed as an argument to the `SetCommand` constructor and the method returns a `SetCommand` instance with the associated list of predicates.
 
 Currently, the parameters are <USERID> <STATUS>, <STATUS> is limited to "Preliminary", "Interviewed", "Rejected", "Accepted".
@@ -364,15 +364,15 @@ Currently, the parameters are <USERID> <STATUS>, <STATUS> is limited to "Prelimi
 Finally, the execute method in `SetCommand` class returns a new updated `Person` which will
 be used to update the status of the Person displayed.
 
-Given below is an example usage scenario and how the search mechanism behaves at each step.
+Given below is an example usage scenario and how the set mechanism behaves at each step.
 
 Step 1. The user launches the application.
 
 Step 2. The user executes `set 1 Interviewed` command to set the first user to "Interviewed".
 
-Step 3. The user should see the update upon calling the `view` command on the Person again.
+Step 3. The user should see the update upon calling the `view` command on the Person again. In this case, `view 1`
 
-The following activity diagram shows how the search operation works:
+The following activity diagram shows how the set operation works:
 
 <puml src="diagrams/SetActivityDiagram.puml" alt="SetActivityDiagram" />
 
@@ -380,16 +380,17 @@ The following activity diagram shows how the search operation works:
 
 #### Implementation
 
-The search feature is implemented using the `ExportCommand` class. It extends `Command` and overrides the `execute()` method to
+The export feature is implemented using the `ExportCommand` class. It extends `Command` and overrides the `execute()` method to
 export to a csv file.
 
-The search parameters from the user input are parsed using the parse method in the `ExportCommandParser` class. `ExportCommandParser::Parse`
-takes in the search parameters from the user input and combines them into a list of predicates. 
-However, export need to be used with any parameters.
+The export parameters from the user input are parsed using the parse method in the `ExportCommandParser` class. `ExportCommandParser::Parse`
+takes in the export parameters from the user input and combines them into a list of predicates. 
+However, export does not need to be used with any parameters.
 
-Finally, the execute method in `ExportCommand` class exports to the /data/export.csv file.
+Finally, the execute method in `ExportCommand` class exports to the /data/export.csv file and returns a `CommandResult` that 
+indicates success or failure.
 
-Given below is an example usage scenario and how the search mechanism behaves at each step.
+Given below is an example usage scenario and how the export mechanism behaves at each step.
 
 Step 1. The user launches the application.
 
