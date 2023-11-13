@@ -55,13 +55,15 @@ public class EditTeamNameCommand extends Command {
             throw new CommandException(MESSAGE_TEAM_NOT_FOUND);
         }
 
+        if (originalTeamName.equals(newTeamName)) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
+        }
+
         if (model.hasTeam(newTeamName)) {
             throw new CommandException(MESSAGE_DUPLICATE_TEAM_NAME);
         }
 
-        if (originalTeamName.equals(newTeamName)) {
-            throw new CommandException(MESSAGE_NOT_EDITED);
-        }
+
 
         model.editTeamName(originalTeamName, newTeamName);
         model.updateFilteredTeamList(PREDICATE_SHOW_ALL_TEAMS);
