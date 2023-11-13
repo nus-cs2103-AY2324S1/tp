@@ -190,7 +190,7 @@ public class UniqueBandListTest {
     @Test
     public void addMusician_musicianAdded_bandGetsUpdated() {
         uniqueBandList.add(ACE);
-        uniqueBandList.addMusician(0, ELLE);
+        uniqueBandList.addMusician(ACE, ELLE);
         assertTrue(uniqueBandList.hasMusician(ACE, ELLE));
     }
 
@@ -198,13 +198,13 @@ public class UniqueBandListTest {
     public void addMusician_nullMusician_throwsNullPointerException() {
         uniqueBandList.add(ACE);
         assertThrows(NullPointerException.class, () -> uniqueBandList.addMusician(
-            0, null));
+            ACE, null));
     }
 
     @Test
     public void addMusician_duplicateMusician_throwsDuplicateMusicianException() {
         uniqueBandList.add(ELISE);
-        assertThrows(DuplicateMusicianException.class, () -> uniqueBandList.addMusician(0, ELLE));
+        assertThrows(DuplicateMusicianException.class, () -> uniqueBandList.addMusician(ELISE, ELLE));
     }
 
     @Test
