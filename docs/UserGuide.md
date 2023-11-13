@@ -137,11 +137,22 @@ Format: `edit INDEX [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [e/EMAIL] [a/ADDRESS] [
 * Edits the client policy details at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * **At least one** of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* ❗️**Note:** 
+  * If you are adding a new policy number, you **must** also add the company, policy issue date and policy expiry date.
+  * In case of already existing policy, individual updates to the policy number, company, policy issue date and policy expiry date are allowed.
+  * To delete an existing policy from a user, you may use any one of the following (using more than one of the below, or using while updating another policy field will still result in the deletion of the policy)
+    * `c/!@#NO_COMPANY!@#` or 
+    * `pi/01-01-1000` or 
+    * `pe/01-01-1000` or 
+    * `pn/NO_POLICY`, as per the 'Format' mentioned above.
 
 
 Examples:
 *  `edit 1 l/SNB9876E` updates the policy at the INDEX number 1 with the new licence plate provided.
 *  `edit 2 pn/AB12345J pe/31-12-2024` updates the policy at the INDEX number 2 with the new policy number and expiry date.
+*  `edit 3 c/!@#NO_COMPANY!@#` deletes the policy at the INDEX number 3.
+*  `edit 4 pn/AB12345J c/!@#NO_COMPANY!@#` deletes the policy at the INDEX number 4.
+*  `edit 5 pn/NO_POLICY c/!@#NO_COMPANY!@# pe/01-01-1000` deletes the policy at the INDEX number 5.
 
 Acceptable values for each parameter:
 * `n/NAME`: Alphanumeric.
