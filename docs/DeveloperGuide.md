@@ -301,7 +301,7 @@ The following sequence diagram shows how the flow of the example execution:
 #### Background
 To boost usability and support more functionalities, many commands in TutorMate support multiple forms of valid user input.
 
-For example, when editing a person, the `INDEX` parameter can be conditionally omitted when editing the currently shown entry, the "edit" command word is overloaded for both "editLesson" and "editPerson" command, and for each of these two commands, many optional flags are available.
+For example, when editing a person, the `INDEX` parameter can be conditionally omitted when editing the currently shown entry, the `edit` command word is overloaded for both `editLesson` and `editPerson` command, and for each of these two commands, many optional flags are available.
 
 Given this flexibility and variety of valid user input, it is a challenge to parse all form of valid user input correctly and efficiently. 
 
@@ -312,18 +312,18 @@ The parsing and execution process of the `EditPersonCommand` is achieved via the
 
 Given a user input that is intended to be parsed into an `EditPersonCommand`, a high level description of the parsing process is as follows:
 
-The first stage is to understand that user intends to invoke the `EditPersonCommand` and delegate the parsing to the specialised parser class, `EditPersonCommmandParser`. This step is done by the `AddressBookParser` class, which behaves like a "simple factory" via a giant "switch" statement. We will not discuss it in depth here as it is not very interesting.
+The first stage is to understand that user intends to invoke the `EditPersonCommand` and delegate the parsing to the specialised parser class, `EditPersonCommmandParser`. This step is done by the `AddressBookParser` class, which behaves like a "simple factory" via a giant "switch" statement. We will not discuss it in depth here.
 
 The second stage is to parse each parameter and flags. This work is delegated to the `typeParsingUtil` class, which is a utility class that contains many static methods that are responsible for parsing different types of user input that is reused across different command parsers.
 
-Then, the `EditPersonCommandParser` class is responsible for combining the results of the previous stage and construct the `EditPersonCommand` object.
+Then, the `EditPersonCommandParser` class is responsible for combining the results of the previous stage and constructing the `EditPersonCommand` object.
 
 Finally, the `EditPersonCommand` class is responsible for executing the command and updating the model accordingly.
 
 The following section will discuss the implementation of the later three groups of classes in more detail.
 
 ##### 1. ListEntry and ListEntryField class
-In TutorMates, Lesson and Person extends `ListEntry` class as they are displayed as items of the ___STUDENTS list___, ___SCHEDULE list___ respectively.
+In TutorMate, Lesson and Person extends `ListEntry` class as they are displayed as items of the ___STUDENTS list___, ___SCHEDULE list___ respectively.
 
 Each `ListEntry` object contains a list of `ListEntryField` objects, which are the fields of the `ListEntry` object. For example, a `Person` object contains a list of `ListEntryField` objects, which are the fields of the `Person` object, such as name, phone number, email address, etc.
 
@@ -347,7 +347,7 @@ public interface Of<T extends ListEntryField> {
     T apply(String str) throws IllegalArgumentException, ParseException;
 }
 ```
-The last parameter, `isOptional`, is a boolean flag that indicates whether the flag is optional or not. If the flag is not found in the user input, this method will throw a `ParseException` if the flag is not optional, but will return a `null` object if the flag is optional. It is overloaded to has a default value of `true` when omitted.
+The last parameter, `isOptional`, is a boolean flag that indicates whether the flag is optional or not. If the flag is not found in the user input, this method will throw a `ParseException` if the flag is not optional, but will return a `null` object if the flag is optional. It is overloaded to have a default value of `true` when omitted.
 
 
 The `parseField` method is reused extensively in multiple parser classes to parse all the flags. The following is an example of how it can be used:
@@ -363,7 +363,7 @@ The `EditPersonCommandParser` class will parse the user input into an `EditPerso
 
 This is achieved by combining the results of parsing flags in the previous stage and construct a `Person` object that contains the updated fields.
 
-Each of the `ListEntryField` has a global and static singleton default instance. For example, the default `Phone` is a `Phone` object with message "To be added."Please also note that it is not possible to create a `Phone` object with such message via public constructor and factory method.
+Each of the `ListEntryField` has a global and static singleton default instance. For example, the default `Phone` is a `Phone` object with message "To be added". Please also note that it is not possible to create a `Phone` object with such message via public constructor and factory method.
 
 Each of the `ListEntry` also has a global and static singleton default instance whose fields are all the default `ListEntryField` objects. We can obtain a clone of the default `ListEntry` object via a static method in the class method.
 
@@ -383,9 +383,9 @@ Person person = Person.getDefaultPerson();
 ##### 4. EditPersonCommand Implementation
 The `EditPersonCommand` class will execute the command and update the model accordingly.
 
-Realising the commonality between all kinds of edit commands, we have created an abstract generic class, `EditCommand`, to serve as template class containing the logic of editing a `ListEntry` object.
+Realising the commonality between all kinds of edit commands, we have created an abstract generic class, `AbstractEditCommand`, to serve as template class containing the logic of editing a `ListEntry` object.
 
-The signature of the `EditCommand` class is as follows:
+The signature of the `AbstractEditCommand` class is as follows:
 ```
 public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> extends Command
 ```
@@ -401,7 +401,7 @@ validateEditedAndWriteBack();
 showMethod.accept(edited);
 return new CommandResult("Edit success.\n from: " + original.toString() + "\n to: " + edited.toString());
 ```
-The `EditPersonCommand` class can be simply implemented by overriding the abstract methods in the `EditCommand` class.
+The `EditPersonCommand` class can be simply implemented by overriding the abstract methods in the `AbstractEditCommand` class.
 
 The most important method to be overridden is the initModelMethods(), which looks like this in the `EditPersonCommand` class:
 ```
@@ -419,22 +419,22 @@ The most important method to be overridden is the initModelMethods(), which look
 
 #### Design considerations:
 
-**Aspect: How to keep the code clean and maintainable while providing the flexibility and variety of valid user input while .
+**Aspect: How to keep the code clean and maintainable while providing the flexibility and variety of valid user input.
 
 * **Alternative 1 (current choice):** Group the parsing and execution of a command into four groups of classes: `AddressBookParser`, `TypeParsingUtil`, `EditPersonCommandParser` and `EditPersonCommand`.
     * Pros:
         * Clear separation of concerns.
         * Easy to maintain, easy to extend as for each new `ListEntryField` and `ListEntry` class that is added and fulfill the contract of the `ListEntryField` and `ListEntry` class, the parsing and execution of the command will almost be automatically supported.
         * Good DRY principle. Only one method is needed to parse all kinds of flags, the knowledge of a given type of processing is encapsulated in a single place.
-    * Cons: Less flexible. It is not easy to add flags that has special parsing logic not supported by the current template.
+    * Cons: Less flexible. It is not easy to add flags that have special parsing logic not supported by the current template.
 
-* **Alternative 2:** Having even stricter constraints on the `ListEntryField` and `ListEntry` class, so that we can use reflection to automatically parse the flags.
+* **Alternative 2:** Having even stricter constraints on the `ListEntryField` and `ListEntry` class, so that we can use reflection feature of Java to automatically parse the flags.
     * Pros: Potentially better extensibility.
     * Cons:
         * Difficult to implement.
         * Even more difficult to debug.
         * Even less flexible.
-        * Not easy to get the correct error message, as reelection call will through a `InvocationTargetException` instead of a `ParseException` when the parsing fails.
+        * Not easy to get the correct error message and type, as if the call via reflection throws exception, `ParseException` for example, the reflection call will always overwrite the original exception and throw an `InvocationTargetException` instead.
 * **Alternative 3:** Writing a separate parser class for each command.
     * Pros: Flexible. Easy to implement.
     * Cons: 
