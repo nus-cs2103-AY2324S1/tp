@@ -6,15 +6,16 @@ start
 :User enters input into UI;
 :Input is passed to the LogicManager;
 :LogicManager sends input to NetworkBookParser;
+:NetworkBookParser checks prefix of input;
 
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
 
-switch (Input starts with)
-case ( "add", "delete", "create", "filter", "sort", "edit")
+switch ()
+case ( prefix = "add", "delete", "create", "filter", "sort", "edit")
     :Parse remaining input with relevant
     Parser and return Command object;
-case ( "help", "redo", "undo", "save", "clear", "list", "exit")
+case ( prefix = "help", "redo", "undo", "save", "clear", "list", "exit")
     :Return the relevant Command object,
     while ignoring the remaining input;
 case ( [prefix not recognized])
