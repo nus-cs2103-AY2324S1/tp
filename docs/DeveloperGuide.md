@@ -1144,18 +1144,12 @@ Please refer to our User Guide for a complete summary of commands.
 
 <box type="info" seamless>
 
-**Important Note:**
+**Important Note to Testers:**
 * Ensure each command formats are correctly followed.
 * Observe the application's response for correctness and any
   unexpected behavior.
 * When testing, it is important to try variations in input
   to cover different scenarios, including edge cases.
-
-</box>
-
-<box type="info" seamless>
-
-**Note to Testers:**
 * Your creative input in devising test scenarios, especially
   those that challenge the system beyond typical usage
   patterns, is invaluable. This appendix aims to set a
