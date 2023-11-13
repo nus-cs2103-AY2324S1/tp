@@ -4,7 +4,7 @@ title: User Guide
 ---
 **Foster Family** is a desktop app built for the **foster managers of cat and dog shelters** to help them perform **foster family management tasks**. 
 
-Some tasks Foster Family can help you with: 
+Here are some tasks which Foster Family can help you with: 
 * **Store and update** the important details of animal fosterers (people who temporarily care for an animal in their own homes)
 * Search for a fosterer using _**any**_ detail you can remember of them
 * **Gain insights** on the current status of fosterers
@@ -921,7 +921,7 @@ If your changes to the data file makes its format invalid, Foster Family will di
 **A**: Install the app in the other computer, and overwrite the empty data file it creates with the file that contains the data of your previous Foster Family home folder.
 
 **Q**: How do I know which version of Java I am using / have installed on my Computer?<br>
-**A**: Open a command terminal, type `java -version` and press enter. The Java version in use will be displayed as a response message.
+**A**: Open a command terminal, type `java -version` and press Enter. The Java version in use will be displayed as a response message.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Known issues**
