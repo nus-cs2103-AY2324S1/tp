@@ -111,28 +111,30 @@ Now that we got the basics out of the way, let's jump right into the guide!
 
 # Installation Guide
 
-1. Ensure that you have Java 11 installed on your computer. Click [here](https://blog.hubspot.com/website/check-java-verison#:~:text=First%2C%20find%20and%20click%20on,get%20your%20current%20version%20details) to learn how to find out what Java version you have! If you do not have Java 11, you can download Java 11 by following the guide below:
+<ol>
+  <li>Ensure that you have Java 11 installed on your computer. Click <a href="https://blog.hubspot.com/website/check-java-verison#:~:text=First%2C%20find%20and%20click%20on,get%20your%20current%20version%20details">here</a> to learn how to find out what Java version you have! If you do not have Java 11, you can download Java 11 by following the guide below:</li>
+  <ul>
+    <li><a href="https://docs.oracle.com/en/java/javase/11/install/installation-jdk-microsoft-windows-platforms.html#GUID-A7E27B90-A28D-4237-9383-A58B416071CA">Windows</a></li>
+    <li><a href="https://docs.oracle.com/en/java/javase/11/install/installation-jdk-macos.html#GUID-2FE451B0-9572-4E38-A1A5-568B77B146DE">MacOS</a></li>
+    <li><a href="https://docs.oracle.com/en/java/javase/11/install/installation-jdk-linux-platforms.html#GUID-737A84E4-2EFF-4D38-8E60-3E29D1B884B8">Linux</a></li>
+  </ul>
+  <li>You might also need to install JavaFX 11. You can find the installation guide <a href="https://openjfx.io/openjfx-docs/#install-javafx">here</a>.</li>
+</ol>
 
-- [Windows](https://docs.oracle.com/en/java/javase/11/install/installation-jdk-microsoft-windows-platforms.html#GUID-A7E27B90-A28D-4237-9383-A58B416071CA)
-- [MacOS](https://docs.oracle.com/en/java/javase/11/install/installation-jdk-macos.html#GUID-2FE451B0-9572-4E38-A1A5-568B77B146DE)
-- [Linux](https://docs.oracle.com/en/java/javase/11/install/installation-jdk-linux-platforms.html#GUID-737A84E4-2EFF-4D38-8E60-3E29D1B884B8)
-
-2. You might also need to install JavaFX 11. You can find the installation guide [here](https://openjfx.io/openjfx-docs/#install-javafx).
-
-<div markdown="span" class="alert alert-info">
-:information_source: In this installation guide, you'll see the term "JDK" being used. Don't worry! JDK stands for "Java Development Kit", and you can treat it as the same as Java!
+<div>
+  <p><strong class="alert-info">:information_source:</strong> In this installation guide, you'll see the term "JDK" being used. Don't worry! JDK stands for "Java Development Kit", and you can treat it as the same as Java!</p>
 </div>
 
-3. Download the latest `taskwise.jar` from [this page](https://github.com/AY2324S1-CS2103T-T17-1/tp/releases/latest).
-4. Drag and drop the file from your computer's downloads into any folder you want.
-5. Open up the [terminal](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac) (Mac), [terminal emulator](https://www.redhat.com/sysadmin/linux-terminal-window) (Linux) or [command prompt](https://support.kaspersky.com/common/windows/14637#block0) (Windows).
-6. Type `cd` followed by the directory path to the folder where you have downloaded TaskWise to navigate there and press `Enter`. For example, if you have downloaded TaskWise to your desktop, you can type the following command:
-
-```
-cd ~/Desktop
-```
-
-7. Use the command `java -jar taskwise.jar` to get the application running.
+<ol start="3">
+  <li>Download the latest <code>taskwise.jar</code> from <a href="https://github.com/AY2324S1-CS2103T-T17-1/tp/releases/latest">this page</a>.</li>
+  <li>Drag and drop the file from your computer's downloads into any folder you want.</li>
+  <li>Open up the <a href="https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac">terminal</a> (Mac), <a href="https://www.redhat.com/sysadmin/linux-terminal-window">terminal emulator</a> (Linux) or <a href="https://support.kaspersky.com/common/windows/14637#block0">command prompt</a> (Windows).</li>
+  <li>Type <code>cd</code> followed by the directory path to the folder where you have downloaded TaskWise to navigate there and press <code>Enter</code>. For example, if you have downloaded TaskWise to your desktop, you can type the following command:</li>
+  
+  <code>cd ~/Desktop</code>
+  
+  <li>Use the command <code>java -jar taskwise.jar</code> to get the application running.</li>
+</ol>
 
 If you have done everything correctly, you should see the TaskWise application open up in a few seconds!
 
