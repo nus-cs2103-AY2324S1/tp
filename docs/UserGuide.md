@@ -341,6 +341,7 @@ Example usage:
 #### Find a contact: `find [name]`
 
 You can use the `find` command to search for contacts by their name if you wish to quickly reference a particular contact's details.
+If the list is currently sorted (using [`sort`](#sort-contacts-list-sort-by-field-name-order-ascdesc)), the returned list will be sorted.
 
 Format: `find [name]`
 
@@ -353,6 +354,10 @@ Example usage:
 * `find Dav`
     ![search](images/find/find.png)
 * `find Kai Jie`
+
+<div markdown="span" class="alert alert-secondary">:information_source: **Note:**
+Using the find command will update the filter status to `Filter by: name`. The find command will also override a filter command if you used it, and vice versa.
+</div>
 
 [Table of Contents](#table-of-contents)
 
