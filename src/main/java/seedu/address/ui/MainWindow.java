@@ -258,6 +258,7 @@ public class MainWindow extends UiPart<Stage> {
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
+            updateDetailPanels();
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
@@ -302,6 +303,20 @@ public class MainWindow extends UiPart<Stage> {
         }
         lessonDetailList.setVisible(true);
         lessonDetailListPanel.setLessonDetails(lesson, model);
+    }
+
+    /**
+     * Updates the detail panels if there is a detail of lesson or person shown.
+     */
+    public void updateDetailPanels() {
+        Person currentPerson = model.getCurrentlyDisplayedPerson();
+        Lesson currentLesson = model.getCurrentlyDisplayedLesson();
+        if (currentLesson != null) {
+            lessonDetailListPanel.setLessonDetails(currentLesson, model);
+        }
+        if (currentPerson != null) {
+            studentDetailListPanel.setPersonDetails(currentPerson, model);
+        }
     }
 
     /**

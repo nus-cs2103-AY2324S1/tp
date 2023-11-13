@@ -735,6 +735,11 @@ Success outputs:
 0 lessons listed!
 ```
 
+#### For Task:
+
+Finding in ___TASKS list___ is not supported at this time!
+
+
 #### General Examples
 
 Failure outputs:
