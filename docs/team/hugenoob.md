@@ -51,11 +51,11 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for `deleteAllPerson`, `addTask`, `editTask`, `deleteTagPerson`, `deleteTagTask`, `help`, `exit`.
+    * Added documentation for `deleteAllPerson`, `addTask`, `editTask`, `deleteTagPerson`, `deleteTagTask`, `help`, `exit`. ([PR #62](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/62), [PR #108](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/108), [PR #160](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/160))
   * Developer Guide:
-    * Added implementation details for `editTask`.
-    * Added user stories and use cases for `deleteAllPerson`, `addTask`, `editTask`, `deleteTagPerson`, `deleteTagTask`, `help`.
-    * Added Non-Functional Requirements.
+    * Added implementation details for `editTask`. ([PR #163](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/163))
+    * Added user stories and use cases for `deleteAllPerson`, `addTask`, `editTask`, `deleteTagPerson`, `deleteTagTask`, `help`. ([PR #100](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/100), [PR #163](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/163))
+    * Added Non-Functional Requirements. ([PR #56](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/56))
 
 * **Community**:
   * PRs reviewed by me can be found [here](https://github.com/AY2324S1-CS2103T-T10-2/tp/pulls?q=is%3Apr+reviewed-by%3AHugeNoob+). As of time of writing, I have reviewed more than 50% of all PRs.
