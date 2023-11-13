@@ -14,7 +14,7 @@ public class SortByAppointmentDateComparator implements Comparator<Appointment> 
     @Override
     public int compare(Appointment apt1, Appointment apt2) {
         if (apt1.getDateTime().isBefore(apt2.getDateTime())) {
-            return 0;
+            return -1;
         }
         return 1;
     }

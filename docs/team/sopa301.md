@@ -17,44 +17,46 @@ Given below are my contributions to the project.
 
 
 * **Enhancements Implemented**:
-  * Added `next-of-kin` and `next-of-kin phone` fields and wrote tests
+  * Added `next-of-kin` and `next-of-kin phone` fields and wrote tests.
     * Justification: As a financial advisor, it would be convenient to have a person's next-of-kin details available for
     business purposes.
     * Pull request [#43](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/43)
-  * Added confirm clear window for `clear` command
+  * Added confirm clear window for `clear` command.
     * Justification: `clear` is a very powerful command that can delete the entirety of a user's work in an instant. To
     safeguard against mistakes, we decided to add an extra confirmation requirement to ensure that the user actually wants
     to wipe the contact book.
     * Highlights: This feature causes the logic flow of the method to change if the clear command is about to be executed, getting a response from the user before deciding whether to continue the execution of the program.
     * Pull request [#75](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/75)
-  * Added available keywords for `help` command
+  * Added available keywords for `help` command.
     * Pull request [#67](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/67)
-  * Enhanced `find` command to accept multiple names, tags and financial plans and wrote tests
+  * Enhanced `find` command to accept multiple names, tags and financial plans and wrote tests.
     * Justification: Users may want to search by other fields, not just name. Also, searching across categories have
     niche uses and can be easily supported.
     * Pull request [#125](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/125)
 
 
 * **Contributions to the UG**:
-  * Updated commands for `add`, `clear`, `edit`, `find` and `help`.
+  * Updated documentation for `add`, `clear`, `edit`, `find` and `help` commands.
+  * Updated the table of contents.
 
 
 * **Contributions to the DG**:
   * Updated references to code files in the `Design` section.
   * Added implementation details for enhanced `find` command.
-  * Drafted Planned Enhancements section.
+  * Drafted `Planned Enhancements` section.
   * Contributed to `Instructions for manual testing` in DG.
+  * Added sequence diagram for `find` command.
+  * Added class diagram for `CombinedPredicate` class.
 
 
 * **Community**:
   * PRs reviewed (with non-trivial comments): [#70](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/70),
     [#256](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/256),
     [#109](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/109),
-    [#110](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/110)
+    [#110](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/110).
 
 
 * **Contributions to team-based tasks**:
   * Maintained issue tracker.
   * Released product for `v1.1` and `v1.3.trial`.
   * Refactored `AddCommandParser` and `EditCommandParser` for better SLAP.
-  [#258](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/258)

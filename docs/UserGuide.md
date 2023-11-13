@@ -4,6 +4,7 @@ title: UNOFAS User Guide
 ---
 
 ## Welcome to UNOFAS!
+Welcome to the User Guide for UNOFAS, your comprehensive solution for efficient and organized client contact management. Ever found yourself spending countless hours sorting and managing your clients' contacts? We understand the importance of managing your school commitments alongside maintaining strong relationships with your clients as dedicated student financial advisors. UNOFAS has been designed to streamline administrative hassles, providing you with the tools you need to manage clients' contacts efficiently.
 
 ## What is UNOFAS?
 UNOFAS (UNO: One FAS: Financial Advisors app) is a **desktop app for Financial Advisors to manage clients contacts and schedule appointments,
@@ -19,12 +20,12 @@ use as financial advisors.
 To help you make the most of this resource, we would recommend that you take some time to read through the entire guide.
 You can then utilize the Table of Contents provided below and click on the relevant links to easily navigate through 
 the guide and access the information you might need or want to take another look at. We hope that this guide serves you well
-to help make managing your clients a more pleasant experience.i
+to help make managing your clients a more pleasant experience.
 
 ## Legend
-:information-source: Important information to take note of. <br>
+:information_source: Important information to take note of. <br>
 :bulb: Useful tips for improving usability of the application. <br>
-:caution: Mistakes to be wary of.
+:exclamation: Mistakes to be wary of.
 
 
 ## Table of Contents

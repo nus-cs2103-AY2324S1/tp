@@ -208,13 +208,22 @@ of schedule command is then returned. The partial class diagram is shown below.
 
 <img src="images/ScheduleClassDiagram.png" width="400"/>
 
+
+In the event the `Person` already has an existing appointment, a different instance of `CommandResult` is instantiated. This
+instance invokes the constructor that contains the `Person` as well as the new proposed `Appointment`. The returned 
+`CommandResult` instead results in the UI being notified that while the `ScheduleCommand` has been executed, the user
+should be prompted to confirm this change on the `OverrideWindow` of the UI. Only after confirmation of this is the 
+overriding of the appointment completed using the appointment and person stored in the `CommandResult`. In the event of
+cancelling the override, the program resumes its functionality, effectively discarding the execution of the rest of the 
+`scheduleCommand`
+
 The following activity diagram summarises what happens the user executes a schedule command.
 
 <img src="images/ScheduleActivityDiagram.png" width="400"/>
 
-**Design Considerations**
+#### **Design Considerations**
 
-**Aspect: How to implement Appointments for Person**
+**Aspect: How to implement appointment for Person**
 
 Alternative 1 (Current Choice): Create an abstract class ScheduleItem and make it a compulsory field for Person.
 
@@ -243,6 +252,28 @@ Alternative 2: Create a hashset of Appointments for each Person.
   * Harder to implement operations such as editing of an appointment for a client. An additional step of finding the
   specified appointment within the hashset is required, which may potentially introduce more bugs.
   * Harder to implement default behaviours for when person has no appointment.
+
+
+**Aspect: How to implement override prompt**
+
+Alternative 1(current solution): Create a separate constructor in CommandResult to handle overriding
+- Pros:
+  * Quick solution to the problem
+  * This "freezes" functionality of the program to force user to acknowledge or cancel the execution of the command
+- Cons:
+  * This creates multiple different constructors within the CommandResult 
+
+Alternative 2: Abstract CommandResult to get a successfulExecutionResult and a PausedExecutionResult
+- Pros:
+  * Improves code readability and reduces coupling in code
+- Cons:
+  * Time-consuming to refactor code
+  * Improper implementation could result in breaking of coding principles
+- Note:
+  * With additional time, alternative 2 can be implemented by refactoring the code to create multiple subclasses. Be wary of the
+    liskov substitution principle when doing so. The earlier alternative 2 is implemented, the better to reduce amount of code
+    that needs to be refactored.
+  * The above implementation can be done in conjunction with the clear command prompt to reduce code coupling.
 
 ### Complete Feature
 
@@ -284,17 +315,19 @@ Cons:
 
 ### Gather Emails Feature
 
-The **Gather Emails** feature in our software system is designed to efficiently collect email addresses. This feature is facilitated by the `GatherCommand` and `GatherCommandParser`. Below is the class diagram of the gather emails feature.
+The **Gather Emails** feature in our software system is designed to efficiently collect email addresses. This feature is facilitated by the `GatherCommand` and `GatherCommandParser`. Below is the class diagram of the `gather emails` feature.
 
 ![GatherClassDiagram](images/GatherClassDiagram.png)
 
 #### Implementation Overview
 
-The `GatherCommand` is initiated by the `GatherCommandParser`. The `GatherCommandParser` checks for the prefixes `fp/` or `t/` in the user's input and creates either a `GatherEmailByFinancialPlan` or `GatherEmailByTag` object respectively.
-Both `GatherEmailByFinancialPlan` or `GatherEmailByTag` implements the `GatherEmailPrompt` interface.
+The `GatherCommand` is initiated by the `GatherCommandParser`. The `GatherCommandParser` parses the arguments and creates either a `GatherEmailByFinancialPlan` or `GatherEmailByTag` object respectively.
+Both `GatherEmailByFinancialPlan` or `GatherEmailByTag` implements the `GatherEmailPrompt` interface. 
 
 The `GatherCommand` takes in the `GatherEmailPrompt` object and passes it into the current `Model`, subsequently interacting with the `AddressBook` class. 
-The `GatherCommand#execute()` executes the gather operation by calling `Model#gatherEmails(GatherEmailPrompt prompt)`. Below shows how the gather operation logic works as described above:
+The `GatherCommand#execute()` executes the gather operation by calling `Model#gatherEmails(GatherEmailPrompt prompt)`. 
+
+The following sequence diagram below shows how the gather operation works as described above:
 
 ![GatherSequenceDiagram1](images/GatherSequenceDiagram1.png)
 
@@ -304,35 +337,47 @@ The `UniquePersonsList` class maintains a list of unique persons. The `UniquePer
 
 - `UniquePersonsList#gatherEmails(GatherEmailPrompt prompt)` —  Iterates through the persons list and calls `GatherEmailPrompt#gatherEmails(Person person)`, passing in each person. 
 
-Depending on the type of `GatherEmailPrompt`, it triggers either: 
+Depending on the type of `GatherEmailPrompt`, the method above triggers either: 
 
-- `Person#gatherEmailsContainsTag(String prompt)` —  Checks if the given prompt is a substring of any Tag names in the `Set<Tag>` of the current person. 
-- `Person#gatherEmailsContainsFinancialPlan(String prompt)` —  Checks if the given prompt is a substring of any Financial Plan names in the `Set<FinancialPlan>` of the current person.
+- `Person#gatherEmailsContainsTag(String prompt)` —  Checks if the given prompt is a substring of any `Tag` names in the `Set<Tag>` of the current person. 
+- `Person#gatherEmailsContainsFinancialPlan(String prompt)` —  Checks if the given prompt is a substring of any `FinancialPlan` names in the `Set<FinancialPlan>` of the current person.
 
-These methods internally utilize `Tag#containsSubstring(String substring)` and `FinancialPlan#containsSubstring(String substring)`, respectively. These substring comparisons are performed in a case-insensitive manner by converting both the prompt and the financial plan/tag names to lowercase before the check.
-This is to make gathering of emails more convenient and flexible. Currently, we only allow gathering emails by `FinancialPlan` and `Tag` as these are the more likely to be searched to gather emails by. However, additional classes implementing the `GatherEmailPrompt` interface can be added to enable the gathering of emails based on a broader range of fields.
+These methods internally utilize `Tag#containsSubstring(String substring)` and `FinancialPlan#containsSubstring(String substring)`, respectively. These substring comparisons are performed in a case-insensitive manner by converting both the prompt and the `FinancialPlan` or `Tag` names to lowercase before the check.
+By allowing partial input, users can efficiently find email addresses associated with lengthy `Tag` or `FinancialPlan` names. The case-insensitive approach enhances user-friendliness, ensuring consistent and reliable results, regardless of input case.  
 
-The following sequence diagram shows how the gather emails by financial plan operation works:
+Currently, we only allow gathering emails by `FinancialPlan` and `Tag` fields as these are the more likely to be searched to gather emails by. However, additional classes implementing the `GatherEmailPrompt` interface can be added to enable the gathering of emails based on a broader range of fields.
+
+The following sequence diagram shows how the gather emails by `FinancialPlan` field operation works:
 
 ![GatherSequenceDiagram2](images/GatherSequenceDiagram2.png)
+
+The following activity diagram illustrates how the complete operation is executed:
+
+![GatherClassActivityDiagram](images/GatherClassActivityDiagram.png)
 
 #### Design Considerations
 
 **Aspect: How many inputs to accept**
+* **Alternative 1 (Current Choice):** User can only search by one `FinancialPlan` or `Tag`.
+  * **Pros:** Easy to implement. Limits the potential for bugs.
+  * **Cons:** Limited filtering options.
 
-**Alternative 1 (Current Choice):** User can only search by one Financial Plan or Tag.
-- **Pros:** Easy to implement. Limits the potential for bugs.
-- **Cons:** Limited filtering options.
-
-**Alternative 2:** User can search by multiple Financial Plans or Tags.
-- **Pros:** More flexible (e.g. gathering by a combination of financial plans and tags).
-- **Cons:** Introduces more complexity and requires additional error handling.
+* **Alternative 2:** User can search by multiple `FinancialPlan` and `Tag` fields.
+  * **Pros:** More flexible (e.g. gathering by a combination of `FinancialPlan` and `Tag`).
+  * **Cons:** Introduces more complexity and requires additional error handling.
 
 
 ### Expanded Find feature
 
 The enhanced find mechanism is facilitated by the `CombinedPredicate` and utilises the existing `FindCommand` structure.
-It extends the `find` command with the ability to search for multiple terms at once, implemented using an array
+
+#### Implementation Overview
+
+Here's a sequence diagram that demonstrates how `FindCommand` works.
+
+![FindCommandSequenceDiagram](images/FindCommandSequenceDiagram.png)
+
+The `CombinedPredicate` class gives the `find` command the ability to search for multiple terms at once, implemented using an array
 of `PersonContainsKeywordsPredicate`. Here's a partial class diagram of the `CombinedPredicate`.
 
 ![CombinedPredicateClassDiagram](images/CombinedPredicateClassDiagram.png)
@@ -340,9 +385,6 @@ of `PersonContainsKeywordsPredicate`. Here's a partial class diagram of the `Com
 All `XYZContainsKeywordsPredicate` classes (e.g., `NameContainsKeywordsPredicate`,
 `FinancialPlanContainsKeywordsPredicate`, ...) inherit from the `PersonContainsKeywordsPredicate` interface so that
 they can be treated similarly in the `CombinedPredicate` class.
-
-In the `FindCommandParser`, `CombinedPredicate` is initialised with a `NameContainsKeywordsPredicate`,
-`FinancialPlanContainsKeywordsPredicate` and `TagContainsKeywordsPredicate`. These predicates check a `Person` if the respective field contains any of the keywords supplied to the predicate.
 
 Note that only `NameContainsKeywordsPredicate` checks for whole words, because it is rare to search for people by
 substrings e.g. `Marc` and `Marcus` should not show up in the same search. On the other hand,
@@ -355,10 +397,10 @@ searching for keywords in multiple fields at the same time. We also allow the us
 can search for multiple terms belonging to the same field.
 
 For now, we only allow for searching for `Name`, `FinancialPlan` and `Tag` fields because they are the most commonly
-searched fields, but extending the feature to search in other fields is possible by creating the `Predicate` class and
-modifying the `FindCommandParser`.
+searched fields, but extending the feature to search in other fields is possible by creating the appropriate
+`Predicate` class and modifying the `FindCommandParser`.
 
-#### Design Considerations:
+#### Design Considerations
 
 **Aspect: How to implement find for multiple fields**
 * **Alternative 1 (current choice):** Use one unified command and format.
@@ -370,7 +412,7 @@ modifying the `FindCommandParser`.
     * Cons: Less flexible, slightly more difficult to implement.
 
 **Aspect: How to implement `CombinedPredicate`**
-* **Alternative 1 (current choice):** Use varargs and a common interface.
+* **Alternative 1 (current choice):** Use `varargs` and a common interface.
     * Pros: More flexible in usage while still testable.
     * Cons: More difficult to modify and the check for equality can be defeated with enough effort.
 
@@ -409,58 +451,46 @@ It contains the following method:
 - ModelManager#sortFilteredPersonList(Comparator<Person> comparator)` —  Carries out the sorting operation by
 setting the comparator on the list of clients wrapped in a SortedList wrapper.
 
-A `CommandResult` class is created and returned
+A `CommandResult` class is created and returned.
 
-**Aspect: Usage Scenario:**
+<img src="images/SortClassSequenceDiagram.png" width = "700"/>
 
-**Scenario 1:**
-User enters a sort command `sort appointment`. The `SortByAppointmentComparator` will be initialized and used to
-instantiate a SortCommand that when executed causes the list to be sorted by appointment, showing the earlier appointment first.
-
-**Scenario 2:**
-User enters a sort command `sort name`. The `SortByNameComparator` will be initialized and used to instantiate a
-SortCommand that when executed causes the list to be sorted by lexicographical ordering of name.
-
-The following sequence diagram shows how the gather operation works:
-
-<img src="images/SortClassSequenceDiagram.png" width="700"/>
 
 #### Design Considerations
 
 **Aspect: How Sort Executes**
 
-**Aspect 1 :** User can sort by name and appointment at any time. As such, calling find on the sorted list will result
+**Alternative 1(current choice):** User can sort by name and appointment at any time. As such, calling find on the sorted list will result
 in the ordering of find to also be sorted.
-- **Pros:** Improved usability of maintaining order of list throughout without the list having to be reordered after
+- Pros: Improved usability of maintaining order of list throughout without the list having to be reordered after
 each command
-- **Cons:** Limited sorting options as of now
-
-**Aspect 2:** After sorting the first time, it will not be possible to return the list to its original ordering
-- **Pros:** Easier implementation of the sorting function.
-- **Cons:** Unlikely, but if for some reason the user wants the list sorted back to its original order, the only way
-is to restart the app at the current moment.
+- Cons: Limited sorting options as of now
 
 
-### Appointment Sidebar Feature
+### Appointment List Feature
 
-The appointment sidebar is facilitated by `ModelManager`. It extends `Model` and stores an additional `SortedList<Appointment>` object that represents all existing appointments.
-The `setAppointmentList()` method checks against `filteredPersons` to look for updates regarding existing `Appointment` objects. The `setAppointmentList()` method is called whenever there is a command that can potentially change the data stored, to ensure that the state of the appointment sidebar is as updated as possible. 
+The appointment list is facilitated by `ModelManager`. It extends `Model` and stores an additional `SortedList<Appointment>` object that represents all existing appointments.
+The `setAppointmentList()` method checks against `filteredPersons` to look for updates regarding existing `Appointment` objects. The `setAppointmentList()` method is called whenever there is a command that can potentially change the data stored, to ensure that the state of the appointment list is as updated as possible. 
 
 The `getAppointmentList()` method is called once during the startup of the program by `getAppointmentList()` in `LogicManager`, which is in turn called by `MainWindow`. It returns the `sortedList<Appointment>` object within `modelManager`.
 
 Do note that appointments are inherently sorted by their date and time, with the earliest appointment showing up at the top.
 
+The following sequence diagram shows how the appointment list is updated. The `setPerson()` method is being called in the `ScheduleCommand#execute()` method. `ModelManager#addToAppointmentIfPresent()` method adds an `Appointment` object into the `ObservableList<Appointment>` if the `Person` object in `filteredPersons` has a `scheduleItem` object that is an instance of `Appointment`.
+
+<img src="images/AppointmentListSequenceDiagram.png" width="700"/>
+
 #### Design Considerations
 
 **Aspect: Where to create** `SortedList<Appointment>`
 * **Alternative 1 (current choice):** Implement it within `modelManager`
-    - Pros: `SortedAppointments` object references `filteredPersons` which ensures that the appointment sidebar
+    - Pros: `SortedAppointments` object references `filteredPersons` which ensures that the appointment list
     corresponds with `persons` from `addressBook`. In this implementation, `persons` acts as the single source of truth which provides all information to `modelManager`.
-    - Cons: Errors with respect to `addressBook` will affect the appointment sidebar rendered.
+    - Cons: Errors with respect to `addressBook` will affect the appointment list rendered.
 
 * **Alternative 2:** Implement it within `addressBook`
     - Pros: `persons` and `appointmentList` are handled separately within `addressBook` and hence the appointment
-    sidebar is not dependent on `persons` in `addressBook`
+    list is not dependent on `persons` in `addressBook`
     - Cons: `filteredPersons` and `sortedAppointments` might not correspond since `sortedAppointments` is no longer
     dependent on `filteredPersons`.
 
@@ -498,23 +528,26 @@ modifying of clients’ data.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                                                   | I want to …​                                                                                                              | So that I can…​                                                                                                                      |
-|----------|---------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| `* * *`  | financial advisor who often works with numerous clients                   | have a central repository for my clients’ contacts details                                                                | effectively manage the intricate details of each of my clients.                                                                      |
-| `* * *`  | financial advisor                                                         | add clients' contacts to the contact book                                                                                 | accumulate contacts for future purposes.                                                                                             |
-| `* * *`  | financial advisor                                                         | remove clients contacts from the contact book                                                                             | keep my contact book compact and relevant.                                                                                           |
-| `* * *`  | financial advisor                                                         | edit clients’ contacts in the contact book                                                                                | keep my information updated.                                                                                                         |
-| `* *`    | financial advisor                                                         | record appointments with my clients                                                                                       | keep track of when my next meeting with the client is.                                                                               |
-| `* *`    | financial advisor                                                         | tag my clients by the plans they purchase                                                                                 | gather groups of clients based on the financial plan(s) they purchased.                                                              |
-| `* *`    | financial advisor                                                         | search for clients with specific financial plans                                                                          | update those people about their plans more efficiently.                                                                              |
-| `* *`    | financial advisor                                                         | sort my clients in certain orders including alphabetical order or appointment time in both ascending and descending order | view my clients in a more systematic manner.                                                                                         |
-| `* *`    | financial advisor                                                         | view my upcoming appointments I have with clients in chronological order                                                  | better plan my time.                                                                                                                 |
-| `* *`    | financial advisor                                                         | complete appointments                                                                                                     | clean up the address book of completed appointments.                                                                                 |
-| `* *`    | financial advisor                                                         | gather emails of clients by their tags such as age group                                                                  | collate and notify people with the same tags on any updates.                                                                         |
-| `* *`    | financial advisor                                                         | search for clients with the same financial plan                                                                           | efficiently provide targeted updates to individuals with the same plan.                                                              |
-| `*`      | busy financial advisor                                                    | streamline administrative tasks like tracking my clients contacts                                                         | focus most of my time on giving personalised financial advice and services to my clients.                                            |
-| `*`      | financial advisor managing a substantial client portfolio                 | follow a standardised format to collect my clients’ information                                                           | manage data consistency among my clients.                                                                                            |
-| `*`      | financial advisor                                                         | search for specific client details                                                                                        | quickly contact my clients.                                                                                                          |
+| Priority | As a …​                                                   | I want to …​                                                                                                              | So that I can…​                                                                           |
+|----------|-----------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| `* * *`  | financial advisor who often works with numerous clients   | have a central repository for my clients’ contacts details                                                                | effectively manage the intricate details of each of my clients.                           |
+| `* * *`  | financial advisor                                         | add clients' contacts to the contact book                                                                                 | accumulate contacts for future purposes.                                                  |
+| `* * *`  | financial advisor                                         | remove clients contacts from the contact book                                                                             | keep my contact book compact and relevant.                                                |
+| `* * *`  | financial advisor                                         | edit clients’ contacts in the contact book                                                                                | keep my information updated.                                                              |
+| `* *`    | financial advisor                                         | record appointments with my clients                                                                                       | keep track of when my next meeting with the client is.                                    |
+| `* *`    | financial advisor                                         | tag my clients by the plans they purchase                                                                                 | gather groups of clients based on the financial plan(s) they purchased.                   |
+| `* *`    | financial advisor                                         | search for clients with specific financial plans                                                                          | update those people about their plans more efficiently.                                   |
+| `* *`    | financial advisor                                         | sort my clients in certain orders including alphabetical order or appointment time in both ascending and descending order | view my clients in a more systematic manner.                                              |
+| `* *`    | financial advisor                                         | view my upcoming appointments I have with clients in chronological order                                                  | better plan my time.                                                                      |
+| `* *`    | financial advisor                                         | complete appointments                                                                                                     | clean up the address book of completed appointments.                                      |
+| `* *`    | financial advisor                                         | gather emails of clients by their tags such as age group                                                                  | collate and notify people with the same tags on any updates.                              |
+| `* *`    | financial advisor                                         | search for clients with the same financial plan                                                                           | efficiently provide targeted updates to individuals with the same plan.                   |
+| `*`      | busy financial advisor                                    | streamline administrative tasks like tracking my clients contacts                                                         | focus most of my time on giving personalised financial advice and services to my clients. |
+| `*`      | financial advisor managing a substantial client portfolio | follow a standardised format to collect my clients’ information                                                           | manage data consistency among my clients.                                                 |
+| `*`      | financial advisor                                         | search for specific client details                                                                                        | quickly contact my clients.                                                               |
+| `*`      | busy financial advisor                                    | have a warning prompt to confirm clearing of contact book                                                                 | prevent accidental clearing of contact book                                               |
+| `*`      | financial advisor with many appointments                  | have a warning when scheduling multiple appointments for the same person                                                  | receive reminders of appointments before making a new one                                 |
+
 
 ### Use cases
 
@@ -889,11 +922,11 @@ point for testers to work on; testers are expected to do more *exploratory* test
    1. Prerequisites: List all persons using the `list` command. At least 1 person in the contact book.
 
    2. Test case: `schedule 1 ap/Appointment Name d/11-11-2025 09:00`<br>
-      Expected: The first person in the list is updated to contain the appointment details. The appointment sidebar is
+      Expected: The first person in the list is updated to contain the appointment details. The appointment list is
       updated as well.
 
    3. Test case: `schedule 1 ap/Appointment Name d/11-30-2025 09:00`<br>
-      Expected: Error details shown in the status message. List, status bar and appointment sidebar remains the same.
+      Expected: Error details shown in the status message. List, status bar and appointment list remains the same.
     
    4. Test case: `schedule 1 ap/Appointment Name d/12-11-2025 09:00` on a person who already has an appointment<br>
       Expected: A prompt will appear that causes program functionality to temporarily stop. The prompt alerts the user
@@ -908,10 +941,10 @@ point for testers to work on; testers are expected to do more *exploratory* test
       appointment.
 
    2. Test case: `complete 1`<br>
-      Expected: Appointment details removed from the first person in the list. The appointment sidebar is updated as well.
+      Expected: Appointment details removed from the first person in the list. The appointment list is updated as well.
 
    3. Test case: `complete 0`<br>
-      Expected: Error details shown in the status message. List, status bar and appointment sidebar remains the same.
+      Expected: Error details shown in the status message. List, status bar and appointment list remains the same.
 
 2. Completing by appointment date.
 
@@ -919,7 +952,7 @@ point for testers to work on; testers are expected to do more *exploratory* test
       appointment on `11-11-2025`.
 
    2. Test case: `complete d/11-11-2025`<br>
-      Expected: Appointment details removed from the 2 people in the list. The appointment sidebar is updated as well.
+      Expected: Appointment details removed from the 2 people in the list. The appointment list is updated as well.
 
 ### Clearing data
 
@@ -948,7 +981,7 @@ point for testers to work on; testers are expected to do more *exploratory* test
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Appendix: Effort
+## **Appendix: Effort**
 This project required a substantial effort to design and implement various features aimed at enhancing
 the functionality of the software system. It was quite hard at the beginning because we were not well-versed with the 
 codebase. After understanding some pertinent classes to implement our enhancements, we also had to refactor and 
@@ -961,14 +994,14 @@ the find command) and the sort command at the same time. We had to spend time un
 JavaFX's `filteredList` and `sortedList` classes to finally come up with a solution to return a sorted and filtered
 list of clients.
 
-In v1.3, we updated the GUI to include an appointment sidebar to show upcoming appointments that clients have with the 
-financial advisor. We found out that the appointment sidebar is not properly updated when there are changes made to the
+In v1.3, we updated the GUI to include an appointment list to show upcoming appointments that clients have with the 
+financial advisor. We found out that the appointment list is not properly updated when there are changes made to the
 data, and they are only updated upon restarting the application. We had to spend time understanding how the Observer
-Pattern works so that changes to the appointment sidebar are being reflected instantaneously. 
+Pattern works so that changes to the appointment list are being reflected instantaneously. 
 
 Moreover, we decided to implement safety features like the clear and override prompts that prevent accidental command executions
 by the user. This required having to trace the entire code logic to understand how commands were executed and also how to 
 pause and split execution of commands to make sure that no bugs were introduced into the code.
 
 The project's difficulty level was notably high due to the complexity of implementing features such as scheduling
-appointments, gathering emails, expanded find functionality, sorting, and the introduction of an appointment sidebar.
+appointments, gathering emails, expanded find functionality, sorting, and the introduction of an appointment list.
