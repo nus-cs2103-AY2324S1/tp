@@ -403,11 +403,11 @@ ep
 | Fields | Prefix | Required | Remarks |
 |--------|--------|:--------:|---------|
 | `INDEX` | No prefix | <img width=30px src='assets/svg/ug/required.svg'> | The person at this index in the displayed person list is edited. The index must be a positive integer (i.e. 1, 2, 3, … , 2147483647). |
-| `NAME` | `n/` | <img width=33px src='assets/svg/ug/not_required.svg'> | Full name of the individual.|
-| `PHONE_NUMBER` | `p/` | <img width=33px src='assets/svg/ug/not_required.svg'> | Phone number of the individual.|
-| `EMAIL` | `e/` | <img width=33px src='assets/svg/ug/not_required.svg'> | Email address of the individual.|
-| `ADDRESS` | `a/` | <img width=33px src='assets/svg/ug/not_required.svg'> | Physical address of the individual.|
-| `TAG` | `t/` | <img width=33px src='assets/svg/ug/not_required.svg'> | Tag(s) for the individual.|
+| `NAME` | `n/` | <img width=33px src='assets/svg/ug/not_required.svg'> | Full name of the person. The name should only contain alphanumeric characters and spaces.|
+| `PHONE_NUMBER` | `p/` | <img width=33px src='assets/svg/ug/not_required.svg'> | Phone number of the person. The number should only contain numbers, and it should be at least 3 digits long.|
+| `EMAIL` | `e/` | <img width=33px src='assets/svg/ug/not_required.svg'> | Email of the person. The email should match this format: `<local>@<domain>.<label>`. <br>The `<local>` part should only contain alphanumberic characters and these special characters: `+_.-`. <br>The `<domain>` and `<label>` parts should contain only alphanumberic characters.|
+| `ADDRESS` | `a/` | <img width=33px src='assets/svg/ug/not_required.svg'> | Physical address of the person.|
+| `TAG` | `t/` | <img width=33px src='assets/svg/ug/not_required.svg'> | Tag(s) for the person. Tags should only contain alphanumeric characters.|
 {: .field-table}
 
 - At least one of the optional fields must be provided for the command to be valid.
