@@ -14,15 +14,20 @@ online dating journey.
 
 Given below are my contributions to the project.
 
-* **New Feature**:
-    * What it does:
-    * Justification:
-    * Highlights:
-    * Credits:
+* **New Feature: Horoscope Field**:
+    * What it does: Added Horoscope field for each user 
+    * Justification: Horoscope plays an important role in dating
 
-* **New Feature**:
+* **New Feature: Show Preferences**:
+    * What it does: Displays user preferences
+    * Justification: Users need to see their preferences so they don't forget, or so that they can change it
 
-* **Code contributed**: [RepoSense link]()
+* **New Feature: Best Match**:
+    * What it does: Displays the most compatible Date, based on user preferences
+    * Justification: Saves Users time in deciding who to go out with
+    * Hightlights; Made an algorithm to compare the user preferences and Dates
+
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=bobscodedump&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
 
 * **Project management**:
 
@@ -30,8 +35,10 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
+       * Added documentation for features such as `Best Match` and `Show Preferences`
     * Developer Guide:
+       * Added documentation for features such as `Best Match` and `Show Preferences`
+       * Added use cases for all features
 
 * **Community**:
-
-* **Tools**:
+   * Reviewed #14, #17, #78

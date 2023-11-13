@@ -40,19 +40,16 @@ online dating journey.
     - [Storage component](#storage-component)
     - [Common classes](#common-classes)
 - [**Implementation**](#implementation)
-    - [Add Dates Feature](#add-dates-feature)
-    - [List Dates](#list-dates)
-    - [Filter dates](#filter-dates)
-    - [Sort dates](#sort-dates)
-    - [Get Blind Date](#get-blind-date)
-    - [Get best match](#get-best-match)
-    - [Set preferences](#set-preferences)
-    - [Star dates](#star-dates)
-    - [Unstar dates](#unstar-dates)
+  - [Add Dates](#add-dates)
+  - [List Dates](#list-dates)
+  - [Filter dates](#filter-dates)
+  - [Sort dates](#sort-dates)
+  - [Get Blind Date](#get-blind-date)
+  - [Get best match](#get-best-match)
+  - [Set preferences](#set-preferences)
+  - [Star dates](#star-dates)
+  - [Unstar dates](#unstar-dates)
 - [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
-- [**Effort**](#effort)
-    - [Evolving of AB3 into LoveBook](#evolving-of-ab3-into-lovebook)
-    - [Revamping of UI](#revamping-of-ui)
 - [**Appendix: Requirements**](#appendix-requirements)
     - [Product scope](#product-scope)
     - [User stories](#user-stories)
@@ -60,15 +57,18 @@ online dating journey.
     - [Non-Functional Requirements](#non-functional-requirements)
     - [Glossary](#glossary)
 - [**Appendix: Instructions for Manual Testing**](#appendix-instructions-for-manual-testing)
-    - [Launch](#launch)
-    - [Viewing Help](#viewing-help)
-    - [Adding Dates](#adding-dates)
-    - [Editing Dates](#editing-dates)
-    - [Finding Dates](#finding-dates)
-    - [Filtering Dates](#filtering-dates)
-    - [Finding a Blind Date](#finding-a-blind-date)
-    - [Exiting the Application](#exiting-the-application)
-    - [Saving (If you haven't already exited)](#saving-if-you-havent-already-exited)
+  - [Launch](#launch)
+  - [Viewing Help](#viewing-help)
+  - [Adding Dates](#adding-dates)
+  - [Editing Dates](#editing-dates)
+  - [Finding Dates](#finding-dates)
+  - [Filtering Dates](#filtering-dates)
+  - [Finding a Blind Date](#finding-a-blind-date)
+  - [Exiting the Application](#exiting-the-application)
+  - [Saving (If you haven't already exited)](#saving-if-you-havent-already-exited)
+- [**Effort**](#effort)
+  - [Evolving of AB3 into LoveBook](#evolving-of-ab3-into-lovebook)
+  - [Revamping of UI](#revamping-of-ui)
 - [**Appendix: Planned Enhancements**](#appendix-planned-enhancements)
 
 ---
@@ -138,7 +138,7 @@ implementation of a component), as illustrated in the (partial) class diagram be
 
 The sections below give more details of each component.
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### UI component
 
@@ -165,7 +165,7 @@ The `UI` component,
 - keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 - depends on some classes in the `Model` component, as it displays `Date` object residing in the `Model`.
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Logic component
 
@@ -210,7 +210,7 @@ How the parsing works:
 - All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Model component
 
@@ -232,7 +232,7 @@ The `Model` component,
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
   should make sense on their own without depending on other components)
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Storage component
 
@@ -250,7 +250,7 @@ The `Storage` component,
 - depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Common classes
 
@@ -274,9 +274,9 @@ The following class diagram shows the new `Date` class after the changes mention
 
 Moving on to the implementation details, the following sections describe how and why the main features of the app work.
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
-### Add Dates Feature
+### Add Dates
 
 #### Implementation
 
@@ -344,7 +344,7 @@ The activity diagram notation of the above steps is shown below. <br>
     - Pros: More user-friendly (since user can easily see the date being added to the end of the list)
     - Cons: Not very visually appealing (since the list appears to be unsorted and non uniform)
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### List Dates
 
@@ -376,7 +376,7 @@ The sequence diagram notation of the above steps is shown below. <br>
       since you don't have to sort the list on every list command)
     - Cons: Not very visually appealing (since the list appears to be unsorted and non uniform)
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Filter dates
 
@@ -401,7 +401,7 @@ the command `filter name/John`
 
 <puml src="diagrams/FilterSequence.puml" width="600" />
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Sort dates
 
@@ -421,7 +421,7 @@ the command `sort name/increasing`.
 
 <puml src="diagrams/SortSequence.puml" width="600" />
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Get Blind Date
 
@@ -438,7 +438,7 @@ The _Activity_ diagram summarises what happens after the user enters a sort comm
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `blindDate`.
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Get best match
 
@@ -446,12 +446,14 @@ The best match feature is implemented using the `BestMatchCommand` class. The `B
 through the list of Dates, and calls `GetScore` to get the score of the date based on height, age, horoscope and
 income.
 
-<puml src="diagrams/BestMatchSequence.puml" width="600" />
+1. The best match feature begins by passing the user input obtained from the `CommandBox` class in the `Ui`
+   component to the `LogicManager` class in the `Logic` component by invoking the `execute` function.
+2. The `LogicManager` class then passes the user input to the `LoveBookParser` class for parsing and validation.
+3. The `LoveBookParser` class then performs polymorphism and creates a `BestMatchCommand` object.
+4. The `BestMatchCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function
+   which then picks the `Date` with the highest score in the `Model` component by calling the `getScore` function for all `Date` objects in the `dateList`.
 
-#### Design Considerations
-
-**Aspect: Scoring Dates**
-
+**Scoring Dates**
 * Dates are scored upon 40, where each factor (age, height, income, horoscope) contributing 10 points each.
 * The date's attributes are compared to the user's set preferences.
 * Score for age = 10 - 2 * (age difference)
@@ -459,8 +461,7 @@ income.
 * Score for income = 10 - (income difference) / 250
 * Score for horoscope = 10 if horoscope is the same, 0 if horoscope is different
 
-**Aspect: Ranking of Scores**
-
+**Ranking of Scores**
 * When the user requests for a Best Match, the Date with the highest score is taken.
 * A Date with 0 points can be chosen.
 * In cases where Dates are tied in score, the Date that was first input into LoveBook is chosen.
@@ -468,9 +469,9 @@ income.
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `bestMatch`
 
-<puml src="diagrams/BestMatchSequence.puml" width="550" />
+<puml src="diagrams/BestMatchSequence.puml" width="600" />
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Set preferences
 
@@ -503,16 +504,37 @@ The _Sequence_ Diagram notation of the above steps is shown below.
 
 **Aspect: Allowing users to set their date preferences on launch**
 
-* **Alternative 1 (current choice):** Have default date preference (
+- **Alternative 1 (current choice):** Have default date preference (
   see [this](UserGuide.md#managing-preferences-and-getting-matches))
-    * Pros: Easy to implement (since all you have to do is set the default date preference). `bestMatch` works
-      immediately from the start.
-    * Cons: Not very user-friendly (since the user may not know all the details of the date)
-* **Alternative 2:** Allow users to set their date preferences on launch
-    * Pros: More user-friendly (since user has more flexibility in setting their date preferences)
-    * Cons: Slightly harder to implement (since you have to check which fields are present). Will also affect the
-      bestMatch
-      algorithm since users may not know how to set their date preferences first.
+  - Pros: Easy to implement (since all you have to do is set the default date preference). `bestMatch` works
+    immediately from the start.
+  - Cons: Not very user-friendly (since the user may not know all the details of the date)
+- **Alternative 2:** Allow users to set their date preferences on launch
+  - Pros: More user-friendly (since user has more flexibility in setting their date preferences)
+  - Cons: Slightly harder to implement (since you have to check which fields are present). Will also affect the
+    bestMatch
+    algorithm since users may not know how to set their date preferences first.
+
+[Scroll back to _Table of Contents_](#table-of-contents)
+
+### Show preferences
+
+#### Implementation
+
+1. The show preferences feature begins by passing the user input obtained from the `CommandBox` class in the `Ui`
+   component to the `LogicManager` class in the `Logic` component by invoking the `execute` function.
+2. The `LogicManager` class then passes the user input to the `LoveBookParser` class for parsing and validation.
+3. The `LoveBookParser` class then performs polymorphism and creates a `ShowPrefCommand` object.
+4. The `SetPrefCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function
+   which then returns the preferences to the `Ui` component.
+
+The _Activity_ Diagram notation of the above steps is shown below.
+
+<puml src="diagrams/SetPrefActivity.puml" />
+
+The _Sequence_ Diagram notation of the above steps is shown below.
+
+<puml src="diagrams/SetPrefSequence.puml" />
 
 [Scroll back to *Table of Contents*](#table-of-contents)
 
@@ -523,25 +545,35 @@ The _Sequence_ Diagram notation of the above steps is shown below.
 1. The star dates feature begins by passing the user input obtained from the `CommandBox` class in the `Ui` component to
    the `LogicManager` class in the `Logic` component by invoking the `execute` function.
 2. The `LogicManager` class then passes the user input to the `LoveBookParser` class for parsing and validation.
-3. The `LoveBookParser` class then performs polymorphism and creates a `StarCommandParser` object for StarCommand
-   specific parsing.
-4. The `LoveBookParser` class also separates the command word from the user input and passes the arguments from the user
-   input to the `StarCommandParser` object created above for parsing.
-5. The `StarCommandParser` carries out it's validation checks and creates a new `StarCommand` object if the validation
-   checks pass.
-6. The `StarCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function
-   which then updates the isStarred field for the date object with the respective index.
+3. The `LoveBookParser` class then performs polymorphism and creates a `StarCommandParser` object for StarCommand specific parsing.
+4. The `LoveBookParser` class also separates the command word from the user input and passes the arguments from the user input to the `StarCommandParser` object created above for parsing.
+5. The `StarCommandParser` carries out it's validation checks and creates a new `StarCommand` object if the validation checks pass.
+6. The `StarCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function which then updates the isStarred field for the date object with the respective index.
 
 The _Activity_ diagram summarises what happens after the user enters a star command.
 
-<puml src="diagrams/StarActivity.puml" width="600" />
+<puml src="diagrams/StarActivity.puml" />
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `star 1`
 
-<puml src="diagrams/StarSequence.puml" width="600" />
+<puml src="diagrams/StarSequence.puml" />
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+#### Design Considerations
+
+**Aspect: Choosing star to be an additional field for the add dates command**
+
+- **Alternative 1 (current choice):** Dates are starred only through the star command
+    - Pros: Users can easily modify the starred status for any one of the dates by calling `star INDEX`
+    - Cons: Users cannot create a date and star it in one go using a single add dates command
+- **Alternative 2:** Let star be a field for the add dates command
+    - Pros: You can create a date and star the date in one go
+    - Cons: Makes the add command extra lengthy. Furthermore, the premise of the star command is that it's to be used on
+            an exceptional few dates. Hence, the time taken to fill in the extra star field, each time the user uses the 
+            add dates command, will exceed any potential time savings.
+      
+
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Unstar dates
 
@@ -568,8 +600,7 @@ the command `unstar 1`
 
 <puml src="diagrams/UnstarSequence.puml" width="600" />
 
-[Scroll back to *Table of Contents*](#table-of-contents)
-
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ---
 
@@ -581,7 +612,7 @@ the command `unstar 1`
 - [Configuration guide](Configuration.md)
 - [DevOps guide](DevOps.md)
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ---
 
@@ -612,7 +643,7 @@ original UI of AB3 into our own new LoveBook UI. As our team was unfamiliar with
 a great amount of time and effort to produce an eventual satisfactory and working UI that we were proud to adopt and
 incorporate into our application.
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ---
 
@@ -634,7 +665,7 @@ LoveBook simplifies the process of storing information of dates and assessing co
 dates by taking into account the user’s preferences, thereby enhancing the efficiency and effectiveness of finding the
 perfect match.
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### User stories
 
@@ -663,7 +694,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | dater     | to be able to find dates based on their name                                                    | locate a date easily                                                    |
 | `* *`    | lazy user | to be able to clear all the dates in my list                                                    | start afresh with a new date list                                       |
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Use cases
 
@@ -675,12 +706,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to list all dates.
 2. LoveBook shows a list of dates.
+   
+    Use case ends. <br>
 
 **Extensions:**
 
 2a. The list is empty.
 
-- Use case ends.
+    2a1. Use case ends.
 
 #### Use Case: Add a Date
 
@@ -697,9 +730,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 2a. The command is invalid (Fields do not exist, invalid format).
 
-- LoveBook shows an error message.
-- User is prompted to re-enter the details. A positive example is given.
-- Use case ends.
+    2a1. LoveBook displays an error message.
+    2a2. Use case ends.
 
 #### Use Case: Finding a Date
 
@@ -714,8 +746,8 @@ Use case ends. <br>
 
 2a. No dates match the search query.
 
-- LoveBook displays a message indicating that no matching dates were found.
-- Use case ends.
+    2a1. LoveBook displays an error message.
+    2a2. Use case ends.
 
 #### Use Case: Edit a Date's Details
 
@@ -732,24 +764,23 @@ Use case ends. <br>
 
 2a. The command is invalid (Fields do not exist, invalid format).
 
-- LoveBook shows an error message.
-- User is prompted to re-enter the command. A positive example is given.
-- Use case ends.
+    2a1. LoveBook shows an error message.
+    2a2. Use case ends.
 
 2b. No fields to edit are given.
 
-- LoveBook displays a message indicating that at least 1 field must be provided to edit.
-- Use case ends.
+    2b1. LoveBook displays an error message. 
+    2b2. Use case ends.
 
 2c. Edited field(s) are invalid.
 
-- LoveBook displays a message indicating that the field is invalid. It displays the first invalid field detected.
-- Use case ends.
+    2c1. LoveBook displays an error message.
+    2c2 Use case ends.
 
 2d. Index provided is invalid.
 
-- LoveBook displays a message indicating that the index is invalid.
-- Use case ends.
+    2d1. LoveBook displays an error message.
+    2d2. Use case ends.
 
 #### Use Case: Delete a Date
 
@@ -765,8 +796,8 @@ Use case ends. <br>
 
 2a. Index provided is invalid.
 
-- LoveBook displays a message indicating that the index is invalid.
-- Use case ends.
+    2a1. LoveBook displays an error message.
+    2a2. Use case ends.
 
 #### Use Case: Set Preferences
 
@@ -783,19 +814,18 @@ Use case ends. <br>
 
 2a. The command is invalid (Preference does not exist, invalid format).
 
-- LoveBook shows an error message.
-- User is prompted to re-enter the command. A positive example is given.
-- Use case ends.
+    2a1. LoveBook displays an error message.
+    2a2. Use case ends.
 
 2b. No Preferences to set are given.
 
-- LoveBook displays a message indicating that at least 1 field must be provided to set. A positive example is given.
-- Use case ends.
+    2b1. LoveBook displays an error message.
+    2b2. Use case ends.
 
 2c. Field(s) are invalid.
 
-- LoveBook displays a message indicating that the field is invalid. It displays the first invalid field detected.
-- Use case ends.
+    2c1. LoveBook displays an error message.
+    2c2. Use case ends.
 
 2d. There are multiple values for a single field
 
@@ -815,8 +845,8 @@ Use case ends. <br>
 
 1a. No Preferences were previously set.
 
-- LoveBook displays the default preferences.
-- Use case ends.
+    1a1. LoveBook displays the default preferences.
+    1a2. Use case ends.
 
 #### Use Case: Get Blind Date
 
@@ -832,8 +862,8 @@ Use case ends. <br>
 
 1a. The list is empty.
 
-- LoveBook displays a message indicating that there are no dates.
-- Use case ends.
+    1a1. LoveBook displays an error message.
+    1a2. Use case ends.
 
 #### Use Case: Filter Dates
 
@@ -849,23 +879,22 @@ Use case ends. <br>
 
 2a. The list is empty.
 
-- Use case ends.
+    2a1. Use case ends.
 
 2b. The command is invalid (Metrics do not exist, invalid format).
 
-- LoveBook shows an error message.
-- User is prompted to re-enter the command. A positive example is given.
-- Use case ends.
+    2b1.LoveBook displays an error message.
+    2b2. Use case ends.
 
 2c. No metric to filter by are given.
 
-- LoveBook displays a message indicating that at least 1 metric must be provided to filter. A positive example is given.
-- Use case ends.
+    2c1. LoveBook displays an error message.
+    2c2. Use case ends.
 
 2d. Field(s) are invalid.
 
-- LoveBook displays a message indicating that the field is invalid. It displays the first invalid field detected.
-- Use case ends.
+    2d1. LoveBook displays an error message.
+    2d2. Use case ends.
 
 #### Use Case: Sort Dates
 
@@ -881,24 +910,22 @@ Use case ends. <br>
 
 2a. The list is empty.
 
-- Use case ends.
+    2a1. Use case ends.
 
 2b. The command is invalid (Comparator does not exist, invalid format).
 
-- LoveBook shows an error message.
-- User is prompted to re-enter the command. A positive example is given.
-- Use case ends.
+    2b1. LoveBook displays an error message.
+    2b2. Use case ends.
 
 2c. No comparator to sort is given.
 
-- LoveBook displays a message indicating that at least 1 comparator must be provided to set. A positive example is
-  given.
-- Use case ends.
+    2c1. LoveBook displays an error message.
+    2c2. Use case ends.
 
 2d. Comparator is invalid.
 
-- LoveBook displays a message indicating that the comparator is invalid. A positive example is given.
-- Use case ends.
+    2d1. LoveBook displays an error message.
+    2d2. Use case ends.
 
 #### Use Case: Get Best Match
 
@@ -913,10 +940,10 @@ Use case ends. <br>
 
 1a. The list is empty.
 
-- LoveBook displays a message indicating that there are no dates.
-- Use case ends.
+    1a1. LoveBook displays an error message.
+    1a2. Use case ends.
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Non-Functional Requirements
 
@@ -930,7 +957,7 @@ Use case ends. <br>
 4. Portability: The CLI application should be compatible with multiple operating systems, including Windows, macOS, and
    Linux.
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Glossary
 
@@ -944,7 +971,7 @@ Use case ends. <br>
 | CLI           | Command Line Interface                                                                                            |
 | Mainstream OS | Windows, Linux, Unix, OS-X                                                                                        |
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ---
 
@@ -1072,7 +1099,7 @@ testers are expected to do more _exploratory_ testing.
     3. Close the app.
     4. Expected: A `data` folder is created under the current repository where the jar file is located.
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ---
 
@@ -1101,7 +1128,7 @@ extends to the inclusion of unique avatars for each date, corresponding to their
 approach to aesthetics reflects our aspiration to create an immersive and enjoyable user experience within the LoveBook
 application.
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ## **Appendix: Planned Enhancements**
 
@@ -1136,21 +1163,22 @@ application.
       planning to allow the user to filter by multiple keywords.
 
 5. Improve the error message to be more comprehensive
-    - Currently, the error message for user that key in multiple invalid keywords only spots the first invalid keyword.
-      We are planning to allow the user to know all the invalid keywords that he/she has keyed in.
+
+   - Currently, the error message for user that key in multiple invalid keywords only spots the first invalid keyword.
+     We are planning to allow the user to know all the invalid keywords that he/she has keyed in.
 
 6. Improve the message displayed when the user tries to perform an operation on an empty list
-    - Currently, for some commands like edit and sort, the message displayed is simply based on the validity check of
-      the parameters and it does not tell the user that the
-      list is empty. For instance, when the user sorts an empty list, the message displayed is "Sorted!" which is not
-      very helpful. Hence, we are planning to tell the user that the list is empty and that the operation cannot be
-      performed.
+   - Currently, for some commands like edit and sort, the message displayed is simply based on the validity check of the parameters and it does not tell the user that the
+     list is empty. For instance, when the user sorts an empty list, the message displayed is "Sorted!" which is not very helpful. Hence, we are planning to tell the user that the list is empty and that the operation cannot be performed.
 
 7. Improve the presets bar feature to be more comprehensive and clear
-    - Currently, the presets bar feature only accommodates for the commands: `add`, `edit`, `delete`, `setP`
-      and `showP`.
-    - In the future, we plan to add more presets buttons for all 16 commands in the application.
-    - Furthermore, even though there's `clear` command, the button "clear" removes all text in the command box, making
-      it ambiguous. We plan to change this in a future iteration like a trash can icon.
+   - Currently, the presets bar feature only accomodates for the commands: `add`, `edit`, `delete`, `setP` and `showP`.
+   - In the future, we plan to add more presets buttons for all 16 commands in the application.
+   - Furthermore, even though there's `clear` command, the button "clear" removes all text in the command box, making
+     it ambiguous. We plan to change this in a future iteration like a trash can icon.
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+8. Improve the best match feature to be more flexible
+   - Currently, the best match feature gives equal weightage to all characteristics: `Income`, `Age`, `Height` and `Horoscope`
+   - To better suit the user preferences, we plan to make the weightage customizable, so users can change the weightage for each characteristic
+
+[Scroll back to _Table of Contents_](#table-of-contents)
