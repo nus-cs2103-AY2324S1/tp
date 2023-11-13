@@ -491,4 +491,3 @@ You should ensure that you have **sufficient candidates of more than 20** with a
 **minimum** is calculated by using the formula `lowest score of all scores with that tag`
 **maximum** is calculated by using the formula `highest score of all scores with that tag`
 **percentile** is calculated by using the formula `number of candidates with a score strictly lower than the candidate/ total number of candidates with that tag`
-
