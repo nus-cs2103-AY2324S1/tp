@@ -521,6 +521,8 @@ Click [here](#table-of-contents) to go back to contents.
 #### What this command does:
 * Displays the list of all the teams in this project.
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="block" class="alert alert-primary">
 
 **:information_source: Note:**<br>
@@ -547,6 +549,8 @@ and type `listt` again when you want to go back to the main window.
 </div>
 
 Click [here](#table-of-contents) to go back to contents.
+
+<div style="page-break-after: always;"></div>
 
 <br>
 
@@ -779,7 +783,7 @@ Click [here](#table-of-contents) to go back to contents.
 | `Hi`               | Format: `Hi`<br/>Example: `Hi`                                                                                                                                             |
 | `add`              | Format: `add n/[Developer Name] p/[Phone] e/[Email] a/[Address] (OPTIONAL r/[Remark] t/[Tags])`<br/>Example: `add n/John p/89789678 e/John@gmail.com a/Singapore t/friend` |
 | `delete`           | Format: `delete [index number]`<br/> Example: `delete 7`                                                                                                                   |
-| `edit`             | Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]...`<br/>Example: `edit 1 n/John Wick e/new.email@example.com`                              |
+| `edit`             | Format: `edit INDEX n/[NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]...`<br/>Example: `edit 1 n/John Wick e/new.email@example.com`                              |
 | `find`             | Format: `find [KEYWORD]`<br/>Example: `find John`                                                                                                                          |
 | `list`             | Format: `list`<br/>Example: `list`                                                                                                                                         |
 | `newteam`          | Format: `newteam tn/[TeamName] tl/[TeamLeader]`<br/> Example: `newteam tn/Team Delta tl/David Li`                                                                          |
@@ -788,7 +792,7 @@ Click [here](#table-of-contents) to go back to contents.
 | `deletedev`        | Format: `deletedev tn/[TeamName] n/[Developer Name]`<br/>Example: `deletedev tn/Team Alpha n/Roy Balakrishnan`                                                             |
 | `editTeamName`     | Format: `editTeamName tn/[Original Team Name] tn/[New Team Name]`<br/>Example: `editTeamName tn/Alpha Team tn/Beta Team`                                                   |
 | `editTeamLeader`   | Format: `editTeamLeader tn/[TeamName] tl/[TeamLeader]`<br/>Example: `editTeamLeader tn/Alpha Team tl/Bob`                                                                  |
-| `findteam`         | Format: `findteam [KEYWORD]...`<br/> Example: `findteam Alpha`                                                                                                                |
+| `findteam`         | Format: `findteam [KEYWORD]...`<br/> Example: `findteam Alpha`                                                                                                             |
 | `listt`            | Format: `listt`<br/>Example: `listt`                                                                                                                                       |
 | `tree`             | Format: `tree`<br/>Example: `tree`                                                                                                                                         |
 | `help` or Press F1 | Format: `help`<br/>Example: `help`                                                                                                                                         |
