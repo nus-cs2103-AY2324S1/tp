@@ -35,8 +35,7 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> AddressBookParser
 HiddenOutside ..> ViewModeParser
 
-AddressBookParser .down.> XYZCommandParser: creates >
-ViewModeParser .down.> XYZCommandParser: creates >
+AddressBookParser ..> XYZCommandParser: creates >
 ViewModeParser ..> Index
 ViewModeParser ..> Person
 

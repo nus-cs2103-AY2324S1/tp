@@ -104,7 +104,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.requestFocus();
     }
 
-    public void setInConfirmationDialog(boolean inConfirmationDialog) {
+    public void setIsInConfirmationDialog(boolean inConfirmationDialog) {
         this.inConfirmationDialog = inConfirmationDialog;
     }
 

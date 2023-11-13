@@ -129,6 +129,10 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    /**
+     * Sorts the list of fosterers/persons in the address book by name in alphabetical order.
+     * Uses the natural order of names as the sorting criteria and updates the state of the address book.
+     */
     @Override
     public void sortByName() {
         Comparator<Person> nameComp = Comparator.comparing(person -> person.getName().toString());

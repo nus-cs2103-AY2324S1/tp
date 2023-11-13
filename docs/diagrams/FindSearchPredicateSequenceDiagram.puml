@@ -1,0 +1,29 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+Participant "SearchPredicate" as sp LOGIC_COLOR
+Participant "Person" as person MODEL_COLOR
+Participant "SearchMatcher" as sm LOGIC_COLOR_T2
+
+create sp
+[-[USER_COLOR]> sp : new(SearchMatcher)
+
+[-[USER_COLOR]> sp : test(Person)
+activate sp LOGIC_COLOR
+
+sp -[LOGIC_COLOR]> person : getFieldsAndAttributes()
+activate person MODEL_COLOR
+
+person --[MODEL_COLOR]-> sp : Map<String, String>
+deactivate person MODEL_COLOR
+
+sp -[LOGIC_COLOR]> sm : test(Map)
+activate sm LOGIC_COLOR_T2
+
+sm --[LOGIC_COLOR_T2]-> sp : FieldRanges
+deactivate sm LOGIC_COLOR_T2
+
+[<-[USER_COLOR]- sp : boolean
+
+@enduml

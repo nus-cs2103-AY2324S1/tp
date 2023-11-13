@@ -1,0 +1,32 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+mainframe **sd** Handle View Exit
+participant "MainWindow" as MainWindow UI_COLOR
+participant "PersonProfile" as PersonProfile UI_COLOR
+participant "CommandBox" as CommandBox UI_COLOR
+
+MainWindow -> MainWindow : handleViewExit()
+activate MainWindow
+
+MainWindow -> CommandBox : getInConfirmationDialog()
+activate CommandBox
+CommandBox --> MainWindow: isShowingConfirmationMessage
+deactivate CommandBox
+
+alt isSaved || isShowingConfirmationMessage
+    MainWindow -> MainWindow : exitProfilePage()
+    activate MainWindow
+    MainWindow --> MainWindow
+    deactivate MainWindow
+else
+    MainWindow -> MainWindow : displayConfirmationMessage()
+    activate MainWindow
+    MainWindow --> MainWindow
+    deactivate MainWindow
+    MainWindow -[hidden]->]
+    deactivate MainWindow
+end
+
+@enduml

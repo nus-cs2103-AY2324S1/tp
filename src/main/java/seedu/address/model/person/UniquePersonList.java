@@ -110,6 +110,12 @@ public class UniquePersonList implements Iterable<Person> {
         return internalList.iterator();
     }
 
+    /**
+     * Sorts the list of persons using the provided comparator.
+     * This method allows for sorting of the list of fosterers based on a specified comparator.
+     *
+     * @param comparator The comparator to use for sorting the list of fosterers.
+     */
     public void sort(Comparator<Person> comparator) {
         internalList.sort(comparator);
     }

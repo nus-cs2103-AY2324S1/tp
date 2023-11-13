@@ -17,7 +17,7 @@ Given below are my contributions to the project.
     * What it does: Sorts the list of fosterers alphabetically, by name.
     * Justification: This feature improves the product because it allows the foster manager to retrieve information efficiently at a glance, without having to type 
   the `find` command if the name of the fosterer is known.
-    * Highlights: This feature requires the use of a comparator, specified based on the person's name.
+    * Highlights: This feature requires the use of a comparator, specified based on the person's name. It can be easily extended in the future to account for new sorting criteria.
     * Pull requests: [#73](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/73)
 
 
@@ -48,11 +48,9 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the feature "Adding a fosterer through the main window: `add`".
-        * Added documentation for the feature "Adding a fosterer through the profile page: `add`".
+        * Added documentation for the feature `add`, through both the main window and profile page
         * Added documentation for the feature `sort`
-        * Added documentation for the feature `undo`
-        * Added documentation for the feature `reset` and `reset confirm`
+        * Added documentation for the feature `undo`, `reset` and `reset confirm`
         * Added technical terms section for better readability
         * Modified the `edit` section by separating it into two separate features - editing through the main window and editing through the profile page, for better 
       readability 
@@ -65,11 +63,8 @@ Given below are my contributions to the project.
         * Added activity diagram for `add` feature
         * Added implementation details of the `sort` feature
         * Added sequence diagram for `sort` feature
-        * Added non-functional requirements
         * Added user stories and use cases related to `add`, `sort` and `undo`
-        * Updated user stories and use cases related to `help` and `reset`
-        * Added user stories related to requirements which are not yet implemented
-        * Added instructions for manual testing of `add` under the appendix 
+        * Added non-functional requirements and instructions for manual testing of `add` and `sort` 
         * Added planned enhancements for:
             * Phone number input
             * Preventing Foster Family from crashing due to corruption of data file
@@ -79,12 +74,12 @@ Given below are my contributions to the project.
   * Pull requests: [#30](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/30), [#48](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/48), 
   [#65](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/65), [#73](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/73), 
   [#82](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/82), [#91](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/91), 
-  [#98](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/98), [#144](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/144)
+  [#98](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/98), [#144](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/144),
+  [#147](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/147)
 
 
 * **Project management**:
-    * Helped to set up the GitHub team org/repo
-    * Helped to set up codecov and the project website
+    * Helped to set up the GitHub team org/repo, codecov and the project website
     * Kept track of deliverables and deadlines
     * Helped to maintain the issue tracker for milestones
 

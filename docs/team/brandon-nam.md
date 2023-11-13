@@ -34,8 +34,9 @@ Given below are my contributions to the project.
         * Updated the class diagram for `Parser` classes.
         * Added explanation of parsing commands in profile page.
         * Added explanation of assigning UI change handler methods in `MainWindow` class. 
-        * Added implementation details of the `edit` feature.
-        * Added implementation details of the `save` feature. 
+        * Added implementation details of editing in a profile page.
+        * Added implementation details of saving changes made in the profile page.
+        * Added implementation details of the exiting the profile page. 
 * **Project Mangement**: 
   * PR reviewed: [#59](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/59)
 

@@ -174,18 +174,24 @@ public class ParserUtil {
         requireNonNull(availability);
 
         String trimmedAnimalType = animalType.trim();
-        if (availability.equals(new Availability("Available")) && !AnimalType.isValidAnimalType(trimmedAnimalType,
-                AnimalType.VALIDATION_REGEX_AVAILABLE)) {
-            throw new ParseException(AnimalType.MESSAGE_CONSTRAINTS);
+        boolean isValidType = false;
+
+        switch (availability.value) {
+        case "Available":
+            isValidType = AnimalType.isValidAnimalType(trimmedAnimalType, AnimalType.VALIDATION_REGEX_AVAILABLE);
+            break;
+        case "NotAvailable":
+            isValidType = AnimalType.isValidAnimalType(trimmedAnimalType, AnimalType.VALIDATION_REGEX_NOT_AVAILABLE);
+            break;
+        case Person.NIL_WORD:
+            isValidType = AnimalType.isValidAnimalType(trimmedAnimalType, AnimalType.VALIDATION_REGEX_NIL);
+            break;
+        default:
+            // no specific action is needed.
+            break;
         }
 
-        if (availability.equals(new Availability("NotAvailable")) && !AnimalType.isValidAnimalType(trimmedAnimalType,
-                AnimalType.VALIDATION_REGEX_NOT_AVAILABLE)) {
-            throw new ParseException(AnimalType.MESSAGE_CONSTRAINTS);
-        }
-
-        if (availability.equals(new Availability(Person.NIL_WORD)) && !AnimalType.isValidAnimalType(trimmedAnimalType,
-                AnimalType.VALIDATION_REGEX_NIL)) {
+        if (!isValidType) {
             throw new ParseException(AnimalType.MESSAGE_CONSTRAINTS);
         }
 

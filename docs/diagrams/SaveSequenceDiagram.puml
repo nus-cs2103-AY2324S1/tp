@@ -27,10 +27,10 @@ activate PersonProfile
 PersonProfile --> MainWindow : get personToEdit
 deactivate PersonProfile
 
-MainWindow -> LogicManager : executeInView("name", personToEdit, targetIndex)
+MainWindow -> LogicManager : executeInView("save", personToEdit, targetIndex)
 activate LogicManager
 
-LogicManager -> ViewModeParser : parseCommand("name", personToEdit, targetIndex)
+LogicManager -> ViewModeParser : parseCommand("save", personToEdit, targetIndex)
 activate ViewModeParser
 
 create SaveCommand
@@ -67,6 +67,12 @@ deactivate SaveCommand
 
 LogicManager --> MainWindow : commandResult
 deactivate LogicManager
+
+MainWindow -> CommandResult : getIsFostererEdited()
+activate CommandResult
+
+CommandResult --> MainWindow : isSaved
+deactivate CommandResult
 
 group ref [Handle Save]
     MainWindow -[hidden]-> PersonProfile

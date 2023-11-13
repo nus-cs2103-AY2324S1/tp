@@ -38,7 +38,7 @@ public class AnimalType {
      * Constructs an {@code AnimalType}.
      *
      * @param value A valid animal type.
-     * @param availability The availability of the fosterer.
+     * @param availability The availability of the fosterer to determine if the animal type is valid.
      */
     public AnimalType(String value, Availability availability) {
         requireNonNull(availability);
@@ -56,6 +56,9 @@ public class AnimalType {
         this.availability = availability;
     }
 
+    /**
+     * Returns true if a given string is a valid animal type.
+     */
     public static boolean isValidAnimalType(String test, String validationRegex) {
         return test.matches(validationRegex);
     }
