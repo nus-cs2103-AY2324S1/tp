@@ -1250,7 +1250,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case returns back to step 1.
 
-**Use case: Increasing or decreasing employee overtime hours**
+**Use case: Increase or decrease employee overtime hours**
 
 **MSS**
 
