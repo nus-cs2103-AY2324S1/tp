@@ -9,7 +9,7 @@ FlashLingo is a desktop application to facilitate the learning of new languages 
 
 Given below are my contributions to the project.
 
-* **New Feature**: 
+* **New Feature**:
   * Added the ability to update the proficiency level of reviewed flash cards.
       * What it does: It receives the user's feedback on the flash card and updates the proficiency level of the flash card accordingly.
       * Justification: The implementation of `Yes` and `No` commands allows users to actively review words, thereby enhancing their memory retention.

@@ -622,7 +622,7 @@ Use case resumes from step 3.
 * Increasing the font size of the words and translations in the flash cards.
 * Adding language tag under the `level` tag on each flash card. This will allow users to distinguish different languages of the translations before calling the `reveal` command.
 
-**Sample UI**  
+**Sample UI**
 
 ![img.png](images/LanguageTag.png)
 
@@ -639,7 +639,7 @@ Some of our current output messages are not formatted properly. For example, the
 **Sample Output**
 
 | Current Output Message               | After Enhancement         |
-|--------------------------------------|---------------------------| 
+|--------------------------------------|---------------------------|
 | ![img.png](images/RevealMessage.png) | Translation: word         |
 | ![img.png](images/ReviewMessage.png) | ...1 flashcard(s) listed! |
 
