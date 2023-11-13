@@ -1169,9 +1169,9 @@ testers are expected to do more *exploratory* testing.
 ## **Appendix C: Effort**
 
 ### Challenges
-* Hard-to-fix Bug where UI did not update upon change 
+* Hard-to-fix bug where UI did not update upon data change 
 * Implementation of `viewMember` / `viewEvent`
-* Designing of `Enrolment` class
+* Design of `Enrolment` class
 
 ### Effort Required and Difficulty:
 * 3 entity types compared to AB3’s 1 entity type
