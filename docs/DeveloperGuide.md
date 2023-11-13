@@ -199,6 +199,12 @@ Step.4 `AddCommand` then calls `Model#addPerson()` which then calls `AddressBook
 The following sequence diagram describes the process of `add` command:
 <puml src="diagrams/AddCommandSequenceDiagram.puml" alt="AddCommandSeqDiagram" />
 
+<box type="info" seamless>
+
+**Note:** The lifeline for `AddCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
 #### Design consideration:
 
 **Aspect: Handling group attribute in user input**
@@ -232,6 +238,12 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 Below is a sequence diagram that summarizes how a user creates a new group:
 <puml src="diagrams/CreateGroupSequenceDiagram.puml" alt="CreateGroupSequenceDiagram"/>
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `CreateGroupCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
 
 #### Design Considerations
 
@@ -288,7 +300,7 @@ The following sequence diagram shows how the Delete Person operation works:
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeletePersonCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
 
@@ -331,7 +343,7 @@ The following activity diagram summarizes what happens when a user executes a li
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `ListCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** The lifeline for `ListCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
 
@@ -356,7 +368,7 @@ The following activity diagram summarizes what happens when a user executes a li
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `ListGroupCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** The lifeline for `ListGroupCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
 
@@ -399,7 +411,7 @@ The following sequence diagram shows how the Find Person operation works:
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `FindPersonCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
 
@@ -496,7 +508,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `GroupRemarkCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** The lifeline for `GroupRemarkCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
 
@@ -553,7 +565,7 @@ The following sequence diagram shows how the Add Time to Person operation works:
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `AddTimeCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** The lifeline for `AddTimeCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
 
@@ -617,6 +629,12 @@ Step 3. The function will be called in the person's `timeInterval` list. The app
 The following sequence diagram summarizes what happens when a user executes a new command:
 
 <puml src="diagrams/DeletePersonTimeDiagram.puml" alt="DeletePersonSequenceTimeDiagram"/>
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `DeleteTimeCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
 
 ### Deleting Time from a Group
 
@@ -697,7 +715,7 @@ The following sequence diagram shows how the List Time from Person operation wor
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `ListTimePersonCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** The lifeline for `ListTimeCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
 
