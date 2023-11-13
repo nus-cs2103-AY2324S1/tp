@@ -27,7 +27,7 @@ Given below are my contributions to the project.
 
 
 * **Enhancements Implemented**:
-  * Gather command to be able to gather emails by tags.
+  * Gather command to be able to gather emails by Tag.
     * Pull request [#109](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/109)
   * Enhancing the UI design for UNOFAS.
     * Justification: Provide financial advisors with a more intuitive, visually appealing interface, optimizing content visibility to reduce the likelihood of overlooking crucial details.

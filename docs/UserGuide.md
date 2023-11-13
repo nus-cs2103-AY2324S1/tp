@@ -161,21 +161,21 @@ Below is a table summarising common arguments used in `add`, `edit`, `find`, `sc
 to view the arguments' prefix, and their acceptable values. Unless specified, having only space characters i.e. an empty
 value, is not an acceptable value and will result in a warning.
 
-| Prefix | Argument              | Acceptable Values                                                                                                          |
-|--------|-----------------------|----------------------------------------------------------------------------------------------------------------------------|
-| -      | INDEX                 | Number (1 to current size of the contact book)                                                                             |
-| `n/`   | NAME                  | Alphabets, numbers, and space characters only                                                                              |
-| `p/`   | PHONE_NUMBER          | Numbers only and at least 3 digits long                                                                                    |
-| `e/`   | EMAIL                 | Alphabets, numbers, and symbols only in a valid email format                                                               |
-| `a/`   | ADDRESS               | Any value is possible.                                                                                                     |
-| `nk/`  | NEXT_KIN              | Alphabets, numbers, and space characters only                                                                              |
-| `nkp/` | NEXT_KIN_PHONE        | Numbers only and at least 3 digits long                                                                                    |
-| `fp/`  | FINANCIAL_PLAN        | Alphabets, numbers, and space characters only. Empty value is accepted when using [Edit](#editing-a-client-contact--edit). |
-| `t/`   | TAG                   | Alphabets and numbers only. Empty value is accepted when using [Edit](#editing-a-client-contact--edit).                    |
-| `ap/`  | APPOINTMENT_NAME      | Alphabets, numbers, and space characters only                                                                              |
-| `d/`   | APPOINTMENT_DATE      | Format: dd-MM-yyyy (e.g., 31-12-2023)                                                                                      |
-| `d/`   | APPOINTMENT_DATE_TIME | Format: dd-MM-yyyy HH:mm (e.g., 31-12-2023 14:30)                                                                          |
-| -      | KEYWORD               | `name` or `appointment`                                                                                                    |
+| Prefix | Argument              | Acceptable Values                                                                                                         |
+|--------|-----------------------|---------------------------------------------------------------------------------------------------------------------------|
+| -      | INDEX                 | Number (1 to current size of the contact book)                                                                            |
+| `n/`   | NAME                  | Alphabets, numbers, and space characters only                                                                             |
+| `p/`   | PHONE_NUMBER          | Numbers only and at least 3 digits long                                                                                   |
+| `e/`   | EMAIL                 | Alphabets, numbers, and symbols only in a valid email format                                                              |
+| `a/`   | ADDRESS               | Any value is possible                                                                                                     |
+| `nk/`  | NEXT_KIN              | Alphabets, numbers, and space characters only                                                                             |
+| `nkp/` | NEXT_KIN_PHONE        | Numbers only and at least 3 digits long                                                                                   |
+| `fp/`  | FINANCIAL_PLAN        | Alphabets, numbers, and space characters only. Empty value is accepted when using [Edit](#editing-a-client-contact--edit) |
+| `t/`   | TAG                   | Alphabets and numbers only. Empty value is accepted when using [Edit](#editing-a-client-contact--edit)                    |
+| `ap/`  | APPOINTMENT_NAME      | Alphabets, numbers, and space characters only                                                                             |
+| `d/`   | APPOINTMENT_DATE      | Format: dd-MM-yyyy (e.g., 31-12-2023)                                                                                     |
+| `d/`   | APPOINTMENT_DATE_TIME | Format: dd-MM-yyyy HH:mm (e.g., 31-12-2023 14:30)                                                                         |
+| -      | KEYWORD               | `name` or `appointment`                                                                                                   |
 
 <div markdown="span" class="alert alert-primary">:information_source:
 **Do note** If the ADDRESS includes any recognized prefixes (leading space + prefix), users should be careful.
@@ -507,7 +507,7 @@ Certain edits to the file may also cause unexpected behaviours. Please only edit
 2. **When sorting the list**, we have chosen to not implement returning sorted list to original ordering due to the lack of necessity. However, due to feedback, we intend to implement this in the next release to enable users to return list to original order should they wish to.
 3. **It is possible to add appointments with dates** before the current date and time.
 4. **On macOS Systems**, you have to use the cursor to manually click the confirm or cancel buttons for the overriding and clear prompts. In contrast, Windows users can choose to hit enter to confirm execution of command.
-5. **No current method to de-conflict clashing appointments**. Users should be advised to check the appointment sidebar to ensure appointments do not clash with each other. The appointment sidebar may display appointments with the same date and time in a different order after adding a new appointment and subsequently reopening the app.
+5. **No current method to de-conflict clashing appointments**. Users should be advised to check the appointment sidebar to ensure appointments do not clash with each other.
 6. **The appointment sidebar** may display appointments with the same date and time in a different order after adding a new appointment and subsequently reopening the app. This will be concurrently resolved when fixing issue 5.
 7. **Checking for duplicate clients** is done by checking their full name, case-sensitive. The future plan is to do this by checking of phone number as it is less likely 2 people share the same phone number than compared to name.
 
