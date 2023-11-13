@@ -1124,9 +1124,9 @@ Please refer to the [User Guide](https://ay2324s1-cs2103t-t11-2.github.io/tp/Use
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Run the application `java -jar InterviewHub.jar` in the folder containing the jar file. <br>Expected: Shows the GUI with a set of sample applicants and interviews. The window size may not be optimum.
 
 2. Saving window preferences
 
