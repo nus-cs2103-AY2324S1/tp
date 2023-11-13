@@ -353,6 +353,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC07 - Filter tags**
 
+**MSS**
+
 1. User requests to filter the list of contacts by a given tag.
 2. ConText displays a filtered list of contacts based on the given tag.
 
