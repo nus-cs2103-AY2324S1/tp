@@ -140,7 +140,8 @@ public class EditCommand extends Command {
      * @param model         The model containing the address book.
      * @param personToEdit  The person to be edited.
      * @return The edited person.
-     * @throws CommandException If there is an issue creating the edited person or if the edited person would be a duplicate.
+     * @throws CommandException If there is an issue creating the edited person or if the
+     *      edited person would be a duplicate.
      */
     private Person getEditedPerson(Model model, Person personToEdit) throws CommandException {
         Person editedPerson;
