@@ -1,1 +1,246 @@
-<?xml version="1.0" encoding="us-ascii" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="531px" preserveAspectRatio="none" style="width:1147px;height:531px;background:#FFFFFF;" version="1.1" viewBox="0 0 1147 531" width="1147px" zoomAndPan="magnify"><defs/><g><!--cluster UI--><g id="cluster_UI"><rect fill="#FFFFFF" height="465" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="854" x="98.24" y="60"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="14" x="518.24" y="74.6738">UI</text></g><!--cluster Model--><g id="cluster_Model"><rect fill="#FFFFFF" height="93" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="157" x="984.24" y="431.5"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="44" x="1040.74" y="446.1738">Model</text></g><!--cluster Logic--><g id="cluster_Logic"><rect fill="#FFFFFF" height="93" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="153" x="984.24" y="162"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="38" x="1041.74" y="176.6738">Logic</text></g><!--class Ui--><g id="elem_Ui"><rect codeLine="7" fill="#1D8900" height="43.5156" id="Ui" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="78" x="570.24" y="94"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="72" x="573.24" y="112.5791">&#171;interface&#187;</text><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="13" x="602.74" y="129.3369">Ui</text></g><!--class UiPart--><g id="elem_UiPart"><rect codeLine="8" fill="#1D8900" height="43.5156" id="UiPart" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="69" x="508.74" y="465"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="63" x="511.74" y="483.5791">{abstract}</text><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="40" x="523.24" y="500.3369">UiPart</text></g><!--class UiManager--><g id="elem_UiManager"><rect codeLine="9" fill="#1D8900" height="26.7578" id="UiManager" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="75" x="683.74" y="102.5"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="69" x="686.74" y="121.0791">UiManager</text></g><!--class MainWindow--><g id="elem_MainWindow"><rect codeLine="10" fill="#1D8900" height="26.7578" id="MainWindow" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="89" x="500.74" y="204"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="83" x="503.74" y="222.5791">MainWindow</text></g><!--class HelpWindow--><g id="elem_HelpWindow"><rect codeLine="11" fill="#1D8900" height="26.7578" id="HelpWindow" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="88" x="566.24" y="291"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="82" x="569.24" y="309.5791">HelpWindow</text></g><!--class ResultDisplay--><g id="elem_ResultDisplay"><rect codeLine="12" fill="#1D8900" height="26.7578" id="ResultDisplay" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="96" x="300.24" y="291"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="90" x="303.24" y="309.5791">ResultDisplay</text></g><!--class PersonListPanel--><g id="elem_PersonListPanel"><rect codeLine="13" fill="#1D8900" height="26.7578" id="PersonListPanel" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="113" x="689.74" y="291"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="107" x="692.74" y="309.5791">PersonListPanel</text></g><!--class PersonCard--><g id="elem_PersonCard"><rect codeLine="14" fill="#1D8900" height="26.7578" id="PersonCard" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="85" x="698.74" y="378"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="79" x="701.74" y="396.5791">PersonCard</text></g><!--class TaskListPanel--><g id="elem_TaskListPanel"><rect codeLine="15" fill="#1D8900" height="26.7578" id="TaskListPanel" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="98" x="838.24" y="291"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="92" x="841.24" y="309.5791">TaskListPanel</text></g><!--class TaskCard--><g id="elem_TaskCard"><rect codeLine="16" fill="#1D8900" height="26.7578" id="TaskCard" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="70" x="856.24" y="378"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="64" x="859.24" y="396.5791">TaskCard</text></g><!--class StatusBarFooter--><g id="elem_StatusBarFooter"><rect codeLine="17" fill="#1D8900" height="26.7578" id="StatusBarFooter" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="113" x="151.74" y="291"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="107" x="154.74" y="309.5791">StatusBarFooter</text></g><!--class CommandBox--><g id="elem_CommandBox"><rect codeLine="18" fill="#1D8900" height="26.7578" id="CommandBox" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="100" x="431.24" y="291"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="94" x="434.24" y="309.5791">CommandBox</text></g><!--class HiddenModel--><g id="elem_HiddenModel"><rect codeLine="22" fill="#FFFFFF" height="26.7578" id="HiddenModel" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="89" x="1027.74" y="473.5"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="83" x="1030.74" y="492.0791">HiddenModel</text></g><!--class HiddenLogic--><g id="elem_HiddenLogic"><rect codeLine="26" fill="#FFFFFF" height="26.7578" id="HiddenLogic" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="86" x="1027.24" y="204"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="80" x="1030.24" y="222.5791">HiddenLogic</text></g><!--class HiddenOutside--><g id="elem_HiddenOutside"><rect codeLine="29" fill="#FFFFFF" height="26.7578" id="HiddenOutside" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="102" x="558.24" y="7"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="96" x="561.24" y="25.5791">HiddenOutside</text></g><!--link HiddenOutside to Ui--><g id="link_HiddenOutside_Ui"><path codeLine="30" d="M609.24,34.11 C609.24,49.36 609.24,69.28 609.24,87.66 " fill="none" id="HiddenOutside-to-Ui" style="stroke:#0E4100;stroke-width:1.1;stroke-dasharray:7.0,7.0;"/><polygon fill="#0E4100" points="609.24,93.66,613.24,84.66,609.24,88.66,605.24,84.66,609.24,93.66" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--reverse link Ui to UiManager--><g id="link_Ui_UiManager"><path codeLine="32" d="M666.62,116 C678.25,116 671.88,116 683.51,116 " fill="none" id="Ui-backto-UiManager" style="stroke:#0E4100;stroke-width:1.1;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="648.62,116,666.62,122,666.62,110,648.62,116" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--link UiManager to MainWindow--><g id="link_UiManager_MainWindow"><path codeLine="33" d="M698.95,129.6 C665.19,148.69 606.6731,181.7671 572.8531,200.8871 " fill="none" id="UiManager-to-MainWindow" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="#0E4100" points="567.63,203.84,577.4332,202.8928,571.9826,201.3793,573.4961,195.9287,567.63,203.84" style="stroke:#0E4100;stroke-width:1.1;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="568.4221" y="193.2442">1</text></g><!--link MainWindow to CommandBox--><g id="link_MainWindow_CommandBox"><path codeLine="34" d="M528.5819,240.6264 C516.4819,256.6964 506.4486,270.0164 494.3286,286.1164 " fill="none" id="MainWindow-CommandBox" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="#0E4100" points="535.8,231.04,528.9955,233.4272,528.5819,240.6264,535.3864,238.2392,535.8,231.04" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="#0E4100" points="490.72,290.91,499.3286,286.1254,493.7271,286.9154,492.9371,281.3139,490.72,290.91" style="stroke:#0E4100;stroke-width:1.1;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="486.1868" y="280.3431">1</text></g><!--link MainWindow to ResultDisplay--><g id="link_MainWindow_ResultDisplay"><path codeLine="35" d="M505.1521,235.7945 C467.9121,251.8645 420.2387,272.4322 382.9387,288.5322 " fill="none" id="MainWindow-ResultDisplay" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="#0E4100" points="516.17,231.04,509.0762,229.7446,505.1521,235.7945,512.2459,237.0899,516.17,231.04" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="#0E4100" points="377.43,290.91,387.2783,291.0158,382.0206,288.9285,384.1079,283.6709,377.43,290.91" style="stroke:#0E4100;stroke-width:1.1;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="381.0271" y="280.3431">1</text></g><!--link MainWindow to PersonListPanel--><g id="link_MainWindow_PersonListPanel"><path codeLine="36" d="M585.9523,235.714 C623.9523,251.784 672.8741,272.4724 710.9341,288.5724 " fill="none" id="MainWindow-PersonListPanel" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="#0E4100" points="574.9,231.04,578.8682,237.0611,585.9523,235.714,581.9842,229.6929,574.9,231.04" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="#0E4100" points="716.46,290.91,709.7295,283.7197,711.8551,288.962,706.6127,291.0876,716.46,290.91" style="stroke:#0E4100;stroke-width:1.1;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="695.732" y="280.3431">1</text></g><!--link MainWindow to TaskListPanel--><g id="link_MainWindow_TaskListPanel"><path codeLine="37" d="M601.5958,232.5042 C665.6958,248.4342 765.807,273.3234 832.267,289.8334 " fill="none" id="MainWindow-TaskListPanel" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="#0E4100" points="589.95,229.61,594.8082,234.939,601.5958,232.5042,596.7376,227.1752,589.95,229.61" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="#0E4100" points="838.09,291.28,830.3198,285.2282,833.2375,290.0745,828.3911,292.9922,838.09,291.28" style="stroke:#0E4100;stroke-width:1.1;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="823.357" y="286.135">1</text></g><!--link MainWindow to StatusBarFooter--><g id="link_MainWindow_StatusBarFooter"><path codeLine="38" d="M488.8542,232.7239 C425.9142,248.5939 329.1078,273.0124 263.6578,289.5224 " fill="none" id="MainWindow-StatusBarFooter" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="#0E4100" points="500.49,229.79,493.6941,227.3784,488.8542,232.7239,495.6501,235.1356,500.49,229.79" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="#0E4100" points="257.84,290.99,267.545,292.6672,262.6881,289.767,265.5883,284.9102,257.84,290.99" style="stroke:#0E4100;stroke-width:1.1;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="269.8563" y="280.4561">1</text></g><!--link MainWindow to HelpWindow--><g id="link_MainWindow_HelpWindow"><path codeLine="39" d="M554.83,231.04 C567.12,247.11 584.6556,270.0436 596.9656,286.1436 " fill="none" id="MainWindow-to-HelpWindow" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="#0E4100" points="600.61,290.91,598.321,281.3308,597.573,286.938,591.9658,286.19,600.61,290.91" style="stroke:#0E4100;stroke-width:1.1;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="22" x="570.1001" y="280.3431">0..1</text></g><!--link PersonListPanel to PersonCard--><g id="link_PersonListPanel_PersonCard"><path codeLine="41" d="M745.5,318.04 C744.56,334.11 743.2834,355.8204 742.3334,371.9204 " fill="none" id="PersonListPanel-to-PersonCard" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="#0E4100" points="741.98,377.91,746.5032,369.1612,742.2745,372.9187,738.5171,368.69,741.98,377.91" style="stroke:#0E4100;stroke-width:1.1;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="5" x="736.254" y="367.3431">*</text></g><!--link TaskListPanel to TaskCard--><g id="link_TaskListPanel_TaskCard"><path codeLine="42" d="M887.83,318.04 C888.59,334.11 889.6071,355.8167 890.3671,371.9167 " fill="none" id="TaskListPanel-to-TaskCard" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="#0E4100" points="890.65,377.91,894.2212,368.7314,890.4142,372.9156,886.2301,369.1086,890.65,377.91" style="stroke:#0E4100;stroke-width:1.1;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="5" x="884.3754" y="367.3431">*</text></g><!--reverse link UiPart to MainWindow--><g id="link_UiPart_MainWindow"><path codeLine="44" d="M490.7444,479.8172 C376.3544,466.2972 45.3,418.45 152.24,291 C197.07,237.58 406.87,223.5 500.54,219.81 " fill="none" id="UiPart-backto-MainWindow" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="none" points="508.62,481.93,491.4487,473.8587,490.0402,485.7758,508.62,481.93" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--link MainWindow to UiPart--><!--link ResultDisplay to UiPart--><g id="link_ResultDisplay_UiPart"><path codeLine="46" d="M361.95,318.19 C395.07,348.85 466.4699,414.9432 507.3099,452.7432 " fill="none" id="ResultDisplay-to-UiPart" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="none" points="520.52,464.97,511.3855,448.3399,503.2343,457.1466,520.52,464.97" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--link CommandBox to UiPart--><g id="link_CommandBox_UiPart"><path codeLine="47" d="M485.6,318.19 C496.13,348.85 517.1801,410.1471 530.1701,447.9471 " fill="none" id="CommandBox-to-UiPart" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="none" points="536.02,464.97,535.8444,445.9971,524.4958,449.8971,536.02,464.97" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--link PersonListPanel to UiPart--><g id="link_PersonListPanel_UiPart"><path codeLine="48" d="M731.97,318.19 C697.49,348.85 622.8513,415.2091 580.3413,453.0091 " fill="none" id="PersonListPanel-to-UiPart" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="none" points="566.89,464.97,584.3282,457.4929,576.3543,448.5253,566.89,464.97" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--link PersonCard to UiPart--><g id="link_PersonCard_UiPart"><path codeLine="49" d="M714.54,405.11 C679.18,421.81 633.0254,443.5917 594.0954,461.9817 " fill="none" id="PersonCard-to-UiPart" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="none" points="577.82,469.67,596.6582,467.4069,591.5327,456.5566,577.82,469.67" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--link TaskListPanel to UiPart--><g id="link_TaskListPanel_UiPart"><path codeLine="50" d="M879.64,318.18 C866.37,339.27 836.93,381.56 801.24,405 C730.02,451.78 647.8728,470.0893 595.7528,478.4493 " fill="none" id="TaskListPanel-to-UiPart" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="none" points="577.98,481.3,596.7031,484.3735,594.8026,472.525,577.98,481.3" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--link TaskCard to UiPart--><g id="link_TaskCard_UiPart"><path codeLine="51" d="M855.96,401.98 C789,419.97 661.654,454.1915 595.224,472.0315 " fill="none" id="TaskCard-to-UiPart" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="none" points="577.84,476.7,596.7802,477.8261,593.6679,466.2368,577.84,476.7" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--link StatusBarFooter to UiPart--><g id="link_StatusBarFooter_UiPart"><path codeLine="52" d="M231.53,318.05 C289.47,349.27 424.5041,422.0215 492.8541,458.8515 " fill="none" id="StatusBarFooter-to-UiPart" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="none" points="508.7,467.39,495.7002,453.5695,490.0079,464.1335,508.7,467.39" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--link HelpWindow to UiPart--><g id="link_HelpWindow_UiPart"><path codeLine="53" d="M605.53,318.19 C594.15,348.85 571.3434,410.2949 557.3134,448.0949 " fill="none" id="HelpWindow-to-UiPart" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="none" points="551.05,464.97,562.9385,450.1827,551.6884,446.0071,551.05,464.97" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--link PersonCard to Model--><g id="link_PersonCard_Model"><path codeLine="55" d="M784.14,398.29 C801.26,400.52 821.17,403.01 839.24,405 C864.31,407.76 931.06,401.81 952.24,415.5 C966.895,424.97 976.7375,441.8075 982.9913,456.6525 C983.3821,457.5803 981.5352,452.9277 981.8983,453.8376 " fill="none" id="PersonCard-to-Model" style="stroke:#0E4100;stroke-width:1.1;stroke-dasharray:7.0,7.0;"/><polygon fill="#0E4100" points="984.1221,459.4103,984.5015,449.5688,982.2689,454.7664,977.0713,452.5338,984.1221,459.4103" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--link TaskCard to Model--><g id="link_TaskCard_Model"><path codeLine="56" d="M926.43,401.09 C935.53,404.5 944.84,409.17 952.24,415.5 C965.5,426.845 975.3,443.74 981.88,458.1463 C982.7025,459.947 981.1368,456.1831 981.8591,457.8905 " fill="none" id="TaskCard-to-Model" style="stroke:#0E4100;stroke-width:1.1;stroke-dasharray:7.0,7.0;"/><polygon fill="#0E4100" points="984.197,463.4162,984.374,453.569,982.2488,458.8114,977.0063,456.6862,984.197,463.4162" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--link UiManager to Logic--><g id="link_UiManager_Logic"><path codeLine="57" d="M758.91,117.7 C816.1,119.42 921.42,125.37 952.24,146 C966.74,155.705 976.5775,172.55 982.8675,187.34 C983.2606,188.2644 983.6399,189.1807 984.0056,190.0868 C984.0513,190.2001 981.8637,184.7442 981.9089,184.8571 " fill="none" id="UiManager-to-Logic" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="#0E4100" points="984.1421,190.4261,984.505,180.5839,982.2811,185.7853,977.0797,183.5614,984.1421,190.4261" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--reverse link Logic to MainWindow--><g id="link_Logic_MainWindow"><path codeLine="58" d="M977.9967,217.5 C976.9496,217.5 980.3318,217.5 979.2847,217.5 C975.0963,217.5 970.9078,217.5 966.7194,217.5 C958.3425,217.5 949.9656,217.5 941.5888,217.5 C924.835,217.5 908.0813,217.5 891.3277,217.5 C857.8203,217.5 824.3131,217.5 790.8063,217.5 C723.7925,217.5 656.78,217.5 589.77,217.5 " fill="none" id="Logic-backto-MainWindow" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="#0E4100" points="983.9967,217.5,974.9967,213.5,978.9967,217.5,974.9967,221.5,983.9967,217.5" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--link PersonListPanel to TaskListPanel--><!--link HelpWindow to PersonListPanel--><!--link CommandBox to HelpWindow--><!--link ResultDisplay to CommandBox--><!--link StatusBarFooter to ResultDisplay--><!--SRC=[VP91J-Cm48Nl-HNUx0sf4PKuLZqGX41grQhRQW-mGhE9IQswTcGx0WJyzxLDKdkSBJsbxttEE6_U3oOgtjMKQFF6QT5sHvxf0nCjA3WIK4g-RFUiEWYgDPaMqzGi9PUAxEwVojLYjNdQNaL0nK7hQwWEZPATg36QPQrreA5M8RFPXbO6HCFfVFwUbUuWoMSp9WnLpr1PzL7iM4v0anqR_7Vugus2odmwSmtAz81xxA4TMuAmKrJ_VmbC_6QYbY-zS4TvYuGDrHqtDqot7DvwRKsLbcB1j5c3e1of9QYw5xQW3odaj0ZvPS1qDXHrAwKvtQgKnoE8-bg-PfyXcAMiASVPa26SErRNL7mHFs_zBpwwa0shlZtwHKH7OtFL6SriAGORgqKnTrl8JjcIWjDdKtnuEQWJ6wgOp4a-pUFSmoEv613FH2dyZt48NiuvAbtNEGxlwnoLhYpY9WwvB0fBHJtAalaXY8iyBWqQZw1JQT0m5_B4X-mBdg4mx5s25P94ykXU8yyDHN9onyGPuKbMo0i98JcUx9hbEntU7gIeM8erUsEpyYKUPpGOwUqVzhx7VpmqQiae7On72uw_14DHXUCTO0YNEDaYHjFkeMyTq13cFm00]--></g></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="533px" preserveAspectRatio="none" style="width:1141px;height:533px;background:#FFFFFF;" version="1.1" viewBox="0 0 1141 533" width="1141px" zoomAndPan="magnify"><defs/><g><!--MD5=[9681dc6e01e10c6b4fe06895ae94f592]
+cluster UI--><g id="cluster_UI"><rect fill="#FFFFFF" height="469" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="854" x="92.59" y="58"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="14" x="512.59" y="74.5332">UI</text></g><!--MD5=[15636c1ca4a123c16a2a1a8e90aca7a9]
+cluster Model--><g id="cluster_Model"><rect fill="#FFFFFF" height="95" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="157" x="978.59" y="431.5"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="44" x="1035.09" y="448.0332">Model</text></g><!--MD5=[8237f0313b7e89f796726a268ea6fa70]
+cluster Logic--><g id="cluster_Logic"><rect fill="#FFFFFF" height="95" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="153" x="978.59" y="162"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="38" x="1036.09" y="178.5332">Logic</text></g><!--MD5=[56c17820b5ec61b985b118caeb6340b1]
+class Ui--><g id="elem_Ui"><rect codeLine="7" fill="#1D8900" height="44.4971" id="Ui" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="98" x="544.59" y="94"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="92" x="547.59" y="113.0698">&lt;&lt;interface&gt;&gt;</text><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="13" x="587.09" y="130.3184">Ui</text></g><!--MD5=[2194e160f11909a32d987932bec8f8fd]
+class UiPart--><g id="elem_UiPart"><rect codeLine="8" fill="#1D8900" height="44.4971" id="UiPart" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="69" x="503.09" y="467"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="63" x="506.09" y="486.0698">{abstract}</text><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="40" x="517.59" y="503.3184">UiPart</text></g><!--MD5=[bb31649cd695b383b0a893153f017b1a]
+class UiManager--><g id="elem_UiManager"><rect codeLine="9" fill="#1D8900" height="27.2485" id="UiManager" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="75" x="678.09" y="102.5"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="69" x="681.09" y="121.5698">UiManager</text></g><!--MD5=[e6c809820d88acc3564faeb20394ab9d]
+class MainWindow--><g id="elem_MainWindow"><rect codeLine="10" fill="#1D8900" height="27.2485" id="MainWindow" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="89" x="495.09" y="206"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="83" x="498.09" y="225.0698">MainWindow</text></g><!--MD5=[6a99d1f66704ead86da80187de9dded6]
+class HelpWindow--><g id="elem_HelpWindow"><rect codeLine="11" fill="#1D8900" height="27.2485" id="HelpWindow" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="88" x="560.59" y="293"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="82" x="563.59" y="312.0698">HelpWindow</text></g><!--MD5=[ea641667e014ba942dc8bca88e7c22f4]
+class ResultDisplay--><g id="elem_ResultDisplay"><rect codeLine="12" fill="#1D8900" height="27.2485" id="ResultDisplay" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="96" x="294.59" y="293"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="90" x="297.59" y="312.0698">ResultDisplay</text></g><!--MD5=[6f328e00a5b597ee0df8530175ebb54b]
+class PersonListPanel--><g id="elem_PersonListPanel"><rect codeLine="13" fill="#1D8900" height="27.2485" id="PersonListPanel" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="113" x="684.09" y="293"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="107" x="687.09" y="312.0698">PersonListPanel</text></g><!--MD5=[a643022b364c985e94cf991eab611446]
+class PersonCard--><g id="elem_PersonCard"><rect codeLine="14" fill="#1D8900" height="27.2485" id="PersonCard" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="85" x="693.09" y="380"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="79" x="696.09" y="399.0698">PersonCard</text></g><!--MD5=[b43def4cf09f850a3ee563cdc3613bba]
+class TaskListPanel--><g id="elem_TaskListPanel"><rect codeLine="15" fill="#1D8900" height="27.2485" id="TaskListPanel" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="98" x="832.59" y="293"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="92" x="835.59" y="312.0698">TaskListPanel</text></g><!--MD5=[a7d6318007d4a6b50fc7bac21914ad0c]
+class TaskCard--><g id="elem_TaskCard"><rect codeLine="16" fill="#1D8900" height="27.2485" id="TaskCard" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="70" x="850.59" y="380"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="64" x="853.59" y="399.0698">TaskCard</text></g><!--MD5=[2b60db2fc160c90f3a0ded0376aa3223]
+class StatusBarFooter--><g id="elem_StatusBarFooter"><rect codeLine="17" fill="#1D8900" height="27.2485" id="StatusBarFooter" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="113" x="146.09" y="293"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="107" x="149.09" y="312.0698">StatusBarFooter</text></g><!--MD5=[bfe415b5c3f0a3f3f66149424b76647d]
+class CommandBox--><g id="elem_CommandBox"><rect codeLine="18" fill="#1D8900" height="27.2485" id="CommandBox" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="100" x="425.59" y="293"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="94" x="428.59" y="312.0698">CommandBox</text></g><!--MD5=[eef5f0b07d2fd263bed9c722d8c1c089]
+class HiddenModel--><g id="elem_HiddenModel"><rect codeLine="22" fill="#FFFFFF" height="27.2485" id="HiddenModel" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="89" x="1022.09" y="475.5"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="83" x="1025.09" y="494.5698">HiddenModel</text></g><!--MD5=[68aa0c86fa78b4986a45cc6cf99a7822]
+class HiddenLogic--><g id="elem_HiddenLogic"><rect codeLine="26" fill="#FFFFFF" height="27.2485" id="HiddenLogic" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="86" x="1021.59" y="206"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="80" x="1024.59" y="225.0698">HiddenLogic</text></g><!--MD5=[f8dc820cca8808bdb695301f77a92b66]
+class HiddenOutside--><g id="elem_HiddenOutside"><rect codeLine="29" fill="#FFFFFF" height="27.2485" id="HiddenOutside" rx="2.5" ry="2.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="102" x="542.59" y="7"/><text fill="#FFFFFF" font-family="Arial" font-size="15" lengthAdjust="spacing" textLength="96" x="545.59" y="26.0698">HiddenOutside</text></g><!--MD5=[a2825086c9e6423d98970e86c37e1f32]
+link HiddenOutside to Ui--><g id="link_HiddenOutside_Ui"><path codeLine="30" d="M593.59,34.11 C593.59,47.93 593.59,70.51 593.59,88.31 " fill="none" id="HiddenOutside-to-Ui" style="stroke:#0E4100;stroke-width:1.1;stroke-dasharray:7.0,7.0;"/><polygon fill="#0E4100" points="593.59,93.66,597.59,84.66,593.59,88.66,589.59,84.66,593.59,93.66" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--MD5=[d23f9412713304e09763acc39549c87b]
+reverse link Ui to UiManager--><g id="link_Ui_UiManager"><path codeLine="32" d="M662.82,116 C667.88,116 672.94,116 677.99,116 " fill="none" id="Ui-backto-UiManager" style="stroke:#0E4100;stroke-width:1.1;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="662.68,123,642.68,116,662.68,109,662.68,123" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--MD5=[f4359266757daa3e145c93b9f63f2a7f]
+link UiManager to MainWindow--><g id="link_UiManager_MainWindow"><path codeLine="33" d="M693.66,129.65 C661.29,148.32 600.83,183.18 566.05,203.24 " fill="none" id="UiManager-to-MainWindow" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="#0E4100" points="561.52,205.85,571.3141,204.8126,565.8497,203.3493,567.313,197.885,561.52,205.85" style="stroke:#0E4100;stroke-width:1.1;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="561.5464" y="195.1107">1</text></g><!--MD5=[92dc039ae140ba7abbe540b6db158255]
+link MainWindow to CommandBox--><g id="link_MainWindow_CommandBox"><path codeLine="34" d="M522.9352,242.6289 C522.9352,242.6289 502.09,270.31 493.02,282.35 " fill="none" id="MainWindow-CommandBox" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="#0E4100" points="485.07,292.91,493.6816,288.1308,488.0797,288.9173,487.2932,283.3153,485.07,292.91" style="stroke:#0E4100;stroke-width:1.1;"/><line style="stroke:#0E4100;stroke-width:1.1;" x1="488.0797" x2="492.895" y1="288.9173" y2="282.52"/><polygon fill="#0E4100" points="530.15,233.04,523.3463,235.4295,522.9352,242.6289,529.7389,240.2394,530.15,233.04" style="stroke:#0E4100;stroke-width:1.1;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="480.3499" y="282.1936">1</text></g><!--MD5=[751f32356d036c385cef4d287122ae87]
+link MainWindow to ResultDisplay--><g id="link_MainWindow_ResultDisplay"><path codeLine="35" d="M499.5033,237.7972 C499.5033,237.7972 417.58,273.14 383.95,287.66 " fill="none" id="MainWindow-ResultDisplay" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="#0E4100" points="371.78,292.91,381.6283,293.01,376.3694,290.9258,378.4537,285.6669,371.78,292.91" style="stroke:#0E4100;stroke-width:1.1;"/><line style="stroke:#0E4100;stroke-width:1.1;" x1="376.3694" x2="383.715" y1="290.9258" y2="287.755"/><polygon fill="#0E4100" points="510.52,233.04,503.4259,231.7464,499.5033,237.7972,506.5974,239.0909,510.52,233.04" style="stroke:#0E4100;stroke-width:1.1;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="374.5743" y="282.1936">1</text></g><!--MD5=[35506723594a39fbe4cc4aca9411b96e]
+link MainWindow to PersonListPanel--><g id="link_MainWindow_PersonListPanel"><path codeLine="36" d="M580.3061,237.7049 C580.3061,237.7049 664.39,273.28 698.82,287.84 " fill="none" id="MainWindow-PersonListPanel" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="#0E4100" points="710.81,292.91,704.0832,285.7162,706.2061,290.9596,700.9627,293.0825,710.81,292.91" style="stroke:#0E4100;stroke-width:1.1;"/><line style="stroke:#0E4100;stroke-width:1.1;" x1="706.2061" x2="698.835" y1="290.9596" y2="287.84"/><polygon fill="#0E4100" points="569.25,233.04,573.2231,239.0578,580.3061,237.7049,576.3331,231.6871,569.25,233.04" style="stroke:#0E4100;stroke-width:1.1;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="691.122" y="282.1936">1</text></g><!--MD5=[55ef3c8d079d39fd3836f24c1fad2c30]
+link MainWindow to TaskListPanel--><g id="link_MainWindow_TaskListPanel"><path codeLine="37" d="M595.9471,234.4987 C595.9471,234.4987 756.07,274.3 819.46,290.06 " fill="none" id="MainWindow-TaskListPanel" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="#0E4100" points="832.44,293.28,824.6676,287.2311,827.587,292.0764,822.7418,294.9959,832.44,293.28" style="stroke:#0E4100;stroke-width:1.1;"/><line style="stroke:#0E4100;stroke-width:1.1;" x1="827.587" x2="819.825" y1="292.0764" y2="290.145"/><polygon fill="#0E4100" points="584.3,231.61,589.1607,236.9367,595.9471,234.4987,591.0865,229.172,584.3,231.61" style="stroke:#0E4100;stroke-width:1.1;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="817.707" y="287.666">1</text></g><!--MD5=[be77818ef8144b1b88291425d82e9084]
+link MainWindow to StatusBarFooter--><g id="link_MainWindow_StatusBarFooter"><path codeLine="38" d="M483.2053,234.7283 C483.2053,234.7283 327.06,274.11 264.93,289.78 " fill="none" id="MainWindow-StatusBarFooter" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="#0E4100" points="252.19,292.99,261.8959,294.6619,257.0375,291.7644,259.9349,286.9059,252.19,292.99" style="stroke:#0E4100;stroke-width:1.1;"/><line style="stroke:#0E4100;stroke-width:1.1;" x1="257.0375" x2="264.795" y1="291.7644" y2="289.81"/><polygon fill="#0E4100" points="494.84,231.79,488.0432,229.3809,483.2053,234.7283,490.0021,237.1374,494.84,231.79" style="stroke:#0E4100;stroke-width:1.1;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="263.3419" y="282.0358">1</text></g><!--MD5=[86d09801fc7f798f389a693fae28d604]
+link MainWindow to HelpWindow--><g id="link_MainWindow_HelpWindow"><path codeLine="39" d="M549.18,233.04 C560.51,247.86 579.4,272.55 591.92,288.93 " fill="none" id="MainWindow-to-HelpWindow" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="#0E4100" points="594.96,292.91,592.6614,283.3331,591.919,288.941,586.3111,288.1987,594.96,292.91" style="stroke:#0E4100;stroke-width:1.1;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="22" x="565.0948" y="282.1936">0..1</text></g><!--MD5=[ea662611cbbc51d115f0c127194e997f]
+link PersonListPanel to PersonCard--><g id="link_PersonListPanel_PersonCard"><path codeLine="41" d="M739.85,320.04 C739,334.48 737.6,358.3 736.64,374.67 " fill="none" id="PersonListPanel-to-PersonCard" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="#0E4100" points="736.33,379.91,740.8633,371.1665,736.6303,374.919,732.8778,370.686,736.33,379.91" style="stroke:#0E4100;stroke-width:1.1;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="5" x="730.659" y="369.1936">*</text></g><!--MD5=[ba61fb863ab91b65175512965fcdc4cc]
+link TaskListPanel to TaskCard--><g id="link_TaskListPanel_TaskCard"><path codeLine="42" d="M882.18,320.04 C882.86,334.48 883.98,358.3 884.75,374.67 " fill="none" id="TaskListPanel-to-TaskCard" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="#0E4100" points="885,379.91,888.5848,370.7367,884.7717,374.9152,880.5932,371.1021,885,379.91" style="stroke:#0E4100;stroke-width:1.1;"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="5" x="878.8219" y="369.1936">*</text></g><!--MD5=[57cdbd9c2a08b96199a6234d10bf0163]
+reverse link UiPart to MainWindow--><g id="link_UiPart_MainWindow"><path codeLine="44" d="M483.01,481.48 C353.05,464.93 45.29,413.73 146.59,293 C191.42,239.58 401.22,225.5 494.89,221.81 " fill="none" id="UiPart-backto-MainWindow" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="none" points="483.97,474.54,502.97,483.93,482.26,488.44,483.97,474.54" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--MD5=[c2b0433d56a858074b2759587ea31389]
+link MainWindow to UiPart--><!--MD5=[6a054d1cbcb280d35d5ed6cf4ddd3c4a]
+link ResultDisplay to UiPart--><g id="link_ResultDisplay_UiPart"><path codeLine="46" d="M356.3,320.19 C385.8,347.49 456.14,412.61 500.02,453.23 " fill="none" id="ResultDisplay-to-UiPart" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="none" points="504.95,448.24,514.87,466.97,495.44,458.52,504.95,448.24" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--MD5=[bbb9937c6b10c921f0d97eaed5a79881]
+link CommandBox to UiPart--><g id="link_CommandBox_UiPart"><path codeLine="47" d="M479.95,320.19 C488.94,346.36 509.85,407.25 523.86,448.03 " fill="none" id="CommandBox-to-UiPart" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="none" points="530.49,445.78,530.37,466.97,517.25,450.33,530.49,445.78" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--MD5=[062b7b64e0791ca63e994fa5ee753224]
+link PersonListPanel to UiPart--><g id="link_PersonListPanel_UiPart"><path codeLine="48" d="M726.32,320.19 C695.54,347.55 622.06,412.89 576.4,453.49 " fill="none" id="PersonListPanel-to-UiPart" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="none" points="580.84,458.91,561.24,466.97,571.54,448.45,580.84,458.91" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--MD5=[e5abfe53cce714a0aa8ca31ebb3d2ec8]
+link PersonCard to UiPart--><g id="link_PersonCard_UiPart"><path codeLine="49" d="M708.89,407.11 C678.64,421.39 628.58,445.03 590.37,463.07 " fill="none" id="PersonCard-to-UiPart" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="none" points="593.25,469.46,572.17,471.67,587.27,456.8,593.25,469.46" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--MD5=[020284d970bec820ebdd09cd91cb03d0]
+link TaskListPanel to UiPart--><g id="link_TaskListPanel_UiPart"><path codeLine="50" d="M873.99,320.18 C860.72,341.27 831.28,383.56 795.59,407 C732.58,448.39 647.1,469.72 592.13,479.88 " fill="none" id="TaskListPanel-to-UiPart" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="none" points="593.23,486.79,572.33,483.3,590.85,473,593.23,486.79" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--MD5=[edb6102449b9c90be40941253aa475f2]
+link TaskCard to UiPart--><g id="link_TaskCard_UiPart"><path codeLine="51" d="M850.31,403.98 C789.36,420.35 664,454.04 591.88,473.41 " fill="none" id="TaskCard-to-UiPart" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="none" points="593.32,480.27,572.19,478.7,589.69,466.75,593.32,480.27" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--MD5=[333db60c48b4ce035180c8fd8b7021d9]
+link StatusBarFooter to UiPart--><g id="link_StatusBarFooter_UiPart"><path codeLine="52" d="M225.88,320.05 C279.18,348.77 411.13,419.87 485.13,459.74 " fill="none" id="StatusBarFooter-to-UiPart" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="none" points="488.76,453.74,503.05,469.39,482.12,466.07,488.76,453.74" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--MD5=[f6ded6870070611f25c393be6d476ca5]
+link HelpWindow to UiPart--><g id="link_HelpWindow_UiPart"><path codeLine="53" d="M599.88,320.19 C590.17,346.36 567.57,407.25 552.43,448.03 " fill="none" id="HelpWindow-to-UiPart" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="none" points="558.92,450.65,545.4,466.97,545.79,445.78,558.92,450.65" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--MD5=[10b56b76ef32f58d5dcb2a8011c87443]
+link PersonCard to Model--><g id="link_PersonCard_Model"><path codeLine="55" d="M778.47,400.46 C795.59,402.71 815.5,405.17 833.59,407 C858.64,409.54 925.4,401.89 946.59,415.5 C961.59,425.13 971.4425,442.44 977.615,457.7313 C977.8079,458.2091 977.9972,458.685 978.1829,459.1586 C978.2758,459.3954 978.3678,459.6316 978.4589,459.8673 " fill="none" id="PersonCard-to-Model" style="stroke:#0E4100;stroke-width:1.1;stroke-dasharray:7.0,7.0;"/><polygon fill="#0E4100" points="978.4589,459.8673,978.9442,450.0304,976.6558,455.2037,971.4825,452.9153,978.4589,459.8673" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--MD5=[fc20418c8506c97ffceec488120350e6]
+link TaskCard to Model--><g id="link_TaskCard_Model"><path codeLine="56" d="M920.81,401.78 C929.91,404.9 939.22,409.3 946.59,415.5 C960.235,426.97 970.045,444.3375 976.535,459.1988 C976.9406,460.1276 977.3333,461.0466 977.7131,461.9538 C977.903,462.4074 978.0897,462.858 978.2732,463.3055 C978.3649,463.5292 978.4559,463.7521 978.5461,463.9742 " fill="none" id="TaskCard-to-Model" style="stroke:#0E4100;stroke-width:1.1;stroke-dasharray:7.0,7.0;"/><polygon fill="#0E4100" points="978.5461,463.9742,978.8669,454.1305,976.6653,459.3414,971.4544,457.1398,978.5461,463.9742" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--MD5=[90aba6ec762193f41687f31212656d8f]
+link UiManager to Logic--><g id="link_UiManager_Logic"><path codeLine="57" d="M753.29,117.65 C810.52,119.31 915.89,125.19 946.59,146 C961.345,156.005 971.19,173.3275 977.42,188.5313 C977.8094,189.4815 978.1846,190.4234 978.5461,191.3548 " fill="none" id="UiManager-to-Logic" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="#0E4100" points="978.5461,191.3548,979.019,181.5173,976.7371,186.6935,971.5609,184.4117,978.5461,191.3548" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--MD5=[07bc7cbf7874720da1634fdfdaf490e2]
+reverse link Logic to MainWindow--><g id="link_Logic_MainWindow"><path codeLine="58" d="M978.3467,219.5 C977.8231,219.5 977.2996,219.5 976.776,219.5 C975.7289,219.5 974.6818,219.5 973.6347,219.5 C969.4463,219.5 965.2578,219.5 961.0694,219.5 C952.6925,219.5 944.3156,219.5 935.9388,219.5 C919.185,219.5 902.4313,219.5 885.6777,219.5 C852.1703,219.5 818.6631,219.5 785.1563,219.5 C718.1425,219.5 651.13,219.5 584.12,219.5 " fill="none" id="Logic-backto-MainWindow" style="stroke:#0E4100;stroke-width:1.1;"/><polygon fill="#0E4100" points="978.3467,219.5,969.3467,215.5,973.3467,219.5,969.3467,223.5,978.3467,219.5" style="stroke:#0E4100;stroke-width:1.1;"/></g><!--MD5=[03c4f14cd6d4beeb0b9338debeb053e2]
+link PersonListPanel to TaskListPanel--><!--MD5=[6304e58fc5c7753a667367f50605245c]
+link HelpWindow to PersonListPanel--><!--MD5=[8655318e6662184a4a769bb45b69b25c]
+link CommandBox to HelpWindow--><!--MD5=[b8f93d5457cb1cca443f250cedc61ee2]
+link ResultDisplay to CommandBox--><!--MD5=[be41e9187af53a708441cf1977ae807e]
+link StatusBarFooter to ResultDisplay--><!--MD5=[1178ad028b838ab8c40e191903072b17]
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR_T4
+skinparam classBackgroundColor UI_COLOR
+
+package UI <<Rectangle>>{
+Class "<<interface>>\nUi" as Ui
+Class "{abstract}\nUiPart" as UiPart
+Class UiManager
+Class MainWindow
+Class HelpWindow
+Class ResultDisplay
+Class PersonListPanel
+Class PersonCard
+Class TaskListPanel
+Class TaskCard
+Class StatusBarFooter
+Class CommandBox
+}
+
+package Model <<Rectangle>> {
+Class HiddenModel #FFFFFF
+}
+
+package Logic <<Rectangle>> {
+Class HiddenLogic #FFFFFF
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Ui
+
+UiManager .left.|> Ui
+UiManager -down-> "1" MainWindow
+MainWindow *-down->  "1" CommandBox
+MainWindow *-down-> "1" ResultDisplay
+MainWindow *-down-> "1" PersonListPanel
+MainWindow *-down-> "1" TaskListPanel
+MainWindow *-down-> "1" StatusBarFooter
+MainWindow - -> "0..1" HelpWindow
+
+PersonListPanel -down-> "*" PersonCard
+TaskListPanel -down-> "*" TaskCard
+
+MainWindow -left-|> UiPart
+
+ResultDisplay - -|> UiPart
+CommandBox - -|> UiPart
+PersonListPanel - -|> UiPart
+PersonCard - -|> UiPart
+TaskListPanel - -|> UiPart
+TaskCard - -|> UiPart
+StatusBarFooter - -|> UiPart
+HelpWindow - -|> UiPart
+
+PersonCard ..> Model
+TaskCard ..> Model
+UiManager -right-> Logic
+MainWindow -left-> Logic
+
+TaskListPanel -[hidden]left- PersonListPanel
+PersonListPanel -[hidden]left- HelpWindow
+HelpWindow -[hidden]left- CommandBox
+CommandBox -[hidden]left- ResultDisplay
+ResultDisplay -[hidden]left- StatusBarFooter
+
+MainWindow -[hidden]-|> UiPart
+@enduml
+
+@startuml
+
+
+
+
+
+
+
+
+skinparam Package {
+    BackgroundColor #FFFFFF
+    BorderThickness 1
+    FontSize 16
+}
+
+skinparam Class {
+    FontColor #FFFFFF
+    FontSize 15
+    BorderThickness 1
+    BorderColor #FFFFFF
+    StereotypeFontColor #FFFFFF
+    FontName Arial
+}
+
+skinparam Actor {
+    BorderColor #000000
+    Color #000000
+    FontName Arial
+}
+
+skinparam Sequence {
+    MessageAlign center
+    BoxFontSize 15
+    BoxPadding 0
+    BoxFontColor #FFFFFF
+    FontName Arial
+}
+
+skinparam Participant {
+    FontColor #FFFFFFF
+    Padding 20
+}
+
+skinparam ArrowFontStyle bold
+skinparam MinClassWidth 50
+skinparam ParticipantPadding 10
+skinparam Shadowing false
+skinparam DefaultTextAlignment center
+skinparam packageStyle Rectangle
+
+hide footbox
+hide members
+hide circle
+skinparam arrowThickness 1.1
+skinparam arrowColor #0E4100
+skinparam classBackgroundColor #1D8900
+
+package UI <<Rectangle>>{
+Class "<<interface>>\nUi" as Ui
+Class "{abstract}\nUiPart" as UiPart
+Class UiManager
+Class MainWindow
+Class HelpWindow
+Class ResultDisplay
+Class PersonListPanel
+Class PersonCard
+Class TaskListPanel
+Class TaskCard
+Class StatusBarFooter
+Class CommandBox
+}
+
+package Model <<Rectangle>> {
+Class HiddenModel #FFFFFF
+}
+
+package Logic <<Rectangle>> {
+Class HiddenLogic #FFFFFF
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Ui
+
+UiManager .left.|> Ui
+UiManager -down-> "1" MainWindow
+MainWindow *-down->  "1" CommandBox
+MainWindow *-down-> "1" ResultDisplay
+MainWindow *-down-> "1" PersonListPanel
+MainWindow *-down-> "1" TaskListPanel
+MainWindow *-down-> "1" StatusBarFooter
+MainWindow - -> "0..1" HelpWindow
+
+PersonListPanel -down-> "*" PersonCard
+TaskListPanel -down-> "*" TaskCard
+
+MainWindow -left-|> UiPart
+
+ResultDisplay - -|> UiPart
+CommandBox - -|> UiPart
+PersonListPanel - -|> UiPart
+PersonCard - -|> UiPart
+TaskListPanel - -|> UiPart
+TaskCard - -|> UiPart
+StatusBarFooter - -|> UiPart
+HelpWindow - -|> UiPart
+
+PersonCard ..> Model
+TaskCard ..> Model
+UiManager -right-> Logic
+MainWindow -left-> Logic
+
+TaskListPanel -[hidden]left- PersonListPanel
+PersonListPanel -[hidden]left- HelpWindow
+HelpWindow -[hidden]left- CommandBox
+CommandBox -[hidden]left- ResultDisplay
+ResultDisplay -[hidden]left- StatusBarFooter
+
+MainWindow -[hidden]-|> UiPart
+@enduml
+
+PlantUML version 1.2022.7(Tue Aug 23 01:01:30 SGT 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: Cp1252
+Language: en
+Country: SG
+--></g></svg>

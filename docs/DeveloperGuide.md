@@ -1518,7 +1518,7 @@ testers are expected to do more <i>exploratory testing</i>.
 - **Enhancement**: Error messages will be provided to pinpoint the specific part of the JSON file that does not follow the required format.
 - **Reason**: To improve the usability of the application, especially when users use the JSON file to import large amounts of data, users will be able to identify and correct the exact issue with their JSON data file without having to guess which part was incorrect.
 - **Example**:
-  - Currently, when a user imports an invalid JSON data file, CoordiMate will discard all data and start with an empty data file at the next run. This enhancement will be able to retain the information the user imported and allow the user to correct the format of the JSON file effectively.
+  - Currently, when a user imports an invalid JSON data file, CoordiMate will show an empty contact list and task list. This enhancement will show an error message to inform the user exactly which part of the JSON file is invalid, so that the user can correct the JSON file and import it again.
 
 ### 8. Standardise all command behaviours
 
@@ -1528,7 +1528,16 @@ testers are expected to do more <i>exploratory testing</i>.
   - Currently, when a user uses the `deleteAllDone` command, the task list resets to show all tasks after deletion. However, when a user uses the other `delete..` commands, the task list does not reset the list after deletion.
   - This enhancement will keep allow the `deleteAllDone` command to not reset the task list after deletion so that users will not get confused of the state of the task list.
 
+### 9. Enhance error messages about leading whitespaces
+
+- **Enhancement**: Modify the error messages for fields with leading whitespaces to be more accurate.
+- **Reason**: To reduce the confusion of the user when the error message differs from what is documented in the user guide and the behaviour of the application.
+- **Example**:
+  - Currently, the error message for `addTask` states that the task title and note cannot start with a whitespace. However, when the user tries to add a task with a title and note that starts with a whitespace, the task is added successfully as the starting whitespace is automatically trimmed.
+  - This enhancement will update the error message to state that leading and trailing whitespaces are automatically trimmed.
+
 ---
+
 <div style="page-break-after: always;"></div>
 
 ## **Appendix: Effort**
@@ -1539,4 +1548,3 @@ testers are expected to do more <i>exploratory testing</i>.
 Tailored for the SoC Computing Club event planners, CoordiMate has expanded from the initial 8 commands in AB3 to a robust suite of 27. Each command was crafted to optimise the event planning workflow, addressing the need for quick and efficient management of contacts and tasks. Our enhancements were directed towards providing practical solutions within the event planning sphere.
 
 With the addition of a new `Task` class and an improved support for managing tags for both tasks and contacts, CoordiMate delivers a selection of commands that each serve a strategic function in the planning of SoC events. Every enhancement has been thoughtfully integrated to support the SoC event planners in creating and managing events that are as organised as they are impactful.
-
