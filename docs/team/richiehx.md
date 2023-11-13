@@ -10,7 +10,7 @@ TutorMate helps private tuition teachers manage their students more easily. It a
 Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to show the details of the selected student/lesson/task. (Pull request [#53](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/53), [#138](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/138))
-  * What it does: allows the user to display the selected item in the show details panel at the right of the User Interface. It allows the user to show students while in the ___STUDENT list___, show lessons while in the ___SCHEDULE list___ and show tasks while in the ___TASK list___.
+  * What it does: allows the user to display the selected item in the show details panel at the right of the User Interface. It allows the user to show students while in the ___STUDENTS list___, show lessons while in the ___SCHEDULE list___ and show tasks while in the ___TASKS list___.
   * Justification: This feature improves the product significantly because this de-clutters the details in the list of students and lessons at the left of the User Interface. It allows the user to view the details of the selected item in a clearer and more detailed view.
   * Highlights: This enhancement affects the coupling between the Model and the UI classes. The current implementation requires the linking between them and required certain considerations as elaborated in the [Developer Guide](https://ay2324s1-cs2103t-t11-3.github.io/tp/DeveloperGuide.html).
   
@@ -44,7 +44,7 @@ Given below are my contributions to the project.
     * tP Team Repo Setup
 
 * **Review/mentoring contributions**:
-    * 42 PRs reviewed (with non-trivial review comments)
+    * 56 PRs reviewed (with non-trivial review comments)
     * Reported bugs and suggestions for other teams
 
 
