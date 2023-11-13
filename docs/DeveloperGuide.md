@@ -313,7 +313,7 @@ Both commands can be executed with the following command words:
 - For indicating successful memorization: `yes`
 - For indicating unsuccessful memorization: `no`
 
-### **Code Structure**
+#### **Code Structure**
 
 The YesCommand and NoCommand classes consist of important methods:
 
@@ -385,39 +385,92 @@ with `UserPrefsStorage` when the application is launched. Then `UI` component wi
 component and set the initial theme. After a `SwitchCommand` is executed by the `LogicManager`, `Model` component will
 update the theme in  `UserPrefs`. Finally, `UI` component will update the theme accordingly.
 
-Step 1: Theme initialization.
+**Step 1: Theme initialization**
 <br>
 Similar to GUI settings, the theme is regarded as a component of user preference stored in `UserPrefs` and in Json
-file **preferences.json**.
+file `preferences.json`.
 
 The initial theme setting works as follows: After constructing the `ModelManager` and `LogicManager` with the
 loaded `UserPrefs`, `MainWindow` will obtain theme preference from `LogicManager` and set the initial theme. If no data
-can be read from the preference file, the **Default** theme will be used by `Logic` and `Model` components, and set by
+can be read from the preference file, the _Default_ theme will be used by `Logic` and `Model` components, and set by
 `UI`.
 
-Step 2: Theme switching.
+**Step 2: Theme switching**
 <br>
 The following sequence diagram shows how the theme switching works. For the discussion purpose, parsing of the command
 and `Storage#saveFlashlingo(ReadOnlyFlashlingo)` are omitted:
 
 ![SwitchSequenceModel](images/SwitchSequenceDiagram.png)
 
-To be added: `Mainwindow#executeCommand`.
-
 #### Design Considerations
 
-**Aspect: How to update UI changes after command execution:**
-* Alternative 1 (current choice): Uses `Logic` component to update `Model` and `Storage`. Add a boolean field **switchTheme**
-  in `CommandResult`, informing `UI` to update similarly to what we did in **help** and **exit** commands.
+**Aspect: How to update UI changes after command execution**
+* **Alternative 1 (current choice): Use `Logic` component to update `Model` and `Storage`.** Add a boolean field `switchTheme`
+  in `CommandResult`, informing `UI` to update similarly to what we did in _help_ and _exit_ commands.
     * Pros: Follows the separation of concerns principle. Each component is responsible for its own work and addresses
       separate concerns, achieving higher cohesion and lower coupling.
-    * Cons: The abstraction and division for different components may be complicated and hard to understand. Additional
-      field needed in `CommandResult` class.
+    * Cons: 
+      * The abstraction and division for different components may be complicated and hard to understand. 
+      * Additional field needed in `CommandResult` class.
 
-* Alternative 2: Let `UI` component update the theme directly after receiving the command.
+* **Alternative 2: Let `UI` component update the theme directly after receiving the command.**
     * Pros: More direct implementation design.
-    * Cons: Needs to include more information returned from the execution of command. A potential gap between current storage
-      and UI theme setting would occur since `UI` wouldn't rely on `Logic` component to update the theme.
+    * Cons: 
+      * Needs to include more information returned from the execution of command. 
+      * A potential gap between current storage and UI theme setting would occur since `UI` wouldn't rely on `Logic` component to update the theme.
+
+### Load data from Excel file
+
+#### Implementation
+The general flow of the `load` command is similar to most other commands, as `model` executes the command to create and add the flash cards, and also update `storage`. Then the `CommandResult` returned will be reflected in `ui`.  
+Due to the complexity of inputs in Excel file, it's crucial to ensure the success of reading the Excel file, actively communicating with `storage` and handling different types of errors.
+
+**Highlight 1: Transferring Excel input to `FlashCard` object**
+
+* The third-party library _**Apache POI OOXML**_ is utilized to read the workbook, sheet to cells in the file. Since Excel is hierarchically composed of smaller elements such as cell, row and column to bigger ones like sheet, workbook, it's necessary to first understand this structure and foresee issues with each layer thoroughly.  
+* `DataFormatter` is used to transfer value in the cell to `String`, which avoids issues caused by numerical input read from Excel.
+* Help function `trimAndVerifyWords` ensures the correctness of every word/translation. Once it detects invalid input, it throws `CommandException` and ends the loading immediately, with no further time and resources wasted.
+
+**Highlight 2: Classifying different types of errors**
+
+The activity diagram below illustrates the flow after calling the `LoadCommand#execute(Model)`. **Four** different error messages can be output after execution.
+
+![LoadCommandActivityDiagram](images/LoadCommandActivityDiagram.png)
+
+![img](images/ReadRowsActivityDiagram.png)
+
+**Highlight 3: handling duplicate cards within the file/with the app**
+1. The method `addFlashCardsToModel` takes in the temporarily built flash cards list and the `model` to check if duplicate cards exist in the temporary list.
+2. After passing the check, `Model#addFlashCards(ArrayList<FlashCard>)` double checks every input card and ensures it is not the same with existing cards in `model` before adding, otherwise the repeated card will be ignored.
+
+#### Design Considerations
+**Aspect: Accepted file type for loading the data**
+* **Alternative 1 (current choice): Use Excel as the input file type.**
+    * Pros: 
+      * The cell-based structure of Excel fits with our word and translation structure of the flash cards, thus it's the most convenient way for users to create and edit data. 
+      * It's a common file type that is familiar to most users.
+    * Cons: Need to use external library to read and handle Excel file.
+* **Alternative 2: Use JSON as the input file type.**
+    * Pros: Similar data loading exists in current project, thus easy to implement.
+    * Cons: 
+      * Users need to follow the specific format to create and edit Json that may not be familiar to them. This process can be error-prone. 
+      * The feature is redundant since advanced users can achieve the same thing by manually adding flash cards to `flashlingo.json`.
+* **Alternative 3: Use TXT, Word or other file type.**
+    * Pros: Introduces a new way for users who prefer using text file.
+    * Cons: Need to use external library to read and handle the unformatted, more complicated input.
+
+**Aspect: How to handle duplicate flash cards**  
+
+There are two situations that need to be considered: duplicate flash cards **within the file** and **with the card existing in the app**.
+* **Alternative 1 (current choice): Check together and "ignore".** Check all loaded flash cards to ensure no duplicate with existing cards in `model`, then check their occurrence in `model` again when adding them one by one. **By ignoring the repeated ones, duplicate cards within the file can be handled.**
+    * Pros: 
+      * Consistent with the role of `Model` and `Logic`.
+      * Existing checker `Model#hasFlashCard(FlashCard)` can be reused.
+    * Cons: Complexity of flow and logic increases.
+* **Alternative 2: Check the two situations separately.**
+  * Pros: Simpler logic and implementation effort required.
+  * Cons: Heavier time and space usage.
+
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -590,18 +643,18 @@ Use case resumes from step 3.
 
 ### Non-Functional Requirements
 
-1.  **Environment** - Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  **Environment** - Should be able to store 1000 words with less than 10MB storage.
+1.  **Environment** - Should work on any _mainstream OS_ as long as it has Java `11` installed.
+2.  **Environment** - Should be able to store 300 flash cards with less than 30MB storage.
 3.  **Performance** - A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  **Performance** - Should be able to handle any user input within 2 seconds.
-5.  **Quality** - Should be able to update learned words according to schedule and maintain the left ones when a learning session accidentally closes.
-6.  **Quality** - Should be able to provide the learner with a reasonable and personalized time schedule for language learning.
+4.  **Performance** - Should be able to handle most of the user input within 2 seconds.
+5.  **Quality** - Should be able to update already memorized words accordingly and maintain the left ones when a learning session accidentally closes.
+6.  **Quality** - Should be able to provide the learner with a reasonable time schedule for language learning.
 7.  **Quality** - Should be able to handle any user input correctly without crashing.
 8.  **Capacity** - Should be able to hold up to 100 flash cards without a noticeable sluggishness(longer than 2 seconds) in performance for typical usage.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Mainstream OS**: Windows, Linux, Unix, macOS
 * **Proficiency level**: A number that indicates how well a user knows a word. The higher the number, the better the user knows the word.
 * **Flashcard**: A virtual card with a word on one side and its translation on the other side
 * **Word**: A word in the language you want to learn
@@ -616,15 +669,19 @@ Use case resumes from step 3.
 **Feature Flaw**
 
 * Users are not able to see the words clearly as the current font size is too small.
+* It is tedious for users to scroll down or right to view the whole error message or tip as the current output font size is too big.
 * Users now are not able to check the translation language unless they enter the `reveal` command. This is not user-friendly as users may want to know the translation language before revealing the translation.
 
 **Proposed Enhancement**
 * Increasing the font size of the words and translations in the flash cards.
+* Decreasing the font size of the output messages.
 * Adding language tag under the `level` tag on each flash card. This will allow users to distinguish different languages of the translations before calling the `reveal` command.
 
-**Sample UI**  
+**Sample UI**
 
-![img.png](images/LanguageTag.png)
+| Flash Card         | ![img.png](images/LanguageTag.png)           |
+|--------------------|----------------------------------------------| 
+| **Output Display** | ![img.png](images/OutputWithSmallerFont.png) |
 
 ### Enhancement 2: Improving the content of output messages
 
@@ -639,7 +696,7 @@ Some of our current output messages are not formatted properly. For example, the
 **Sample Output**
 
 | Current Output Message               | After Enhancement         |
-|--------------------------------------|---------------------------| 
+|--------------------------------------|---------------------------|
 | ![img.png](images/RevealMessage.png) | Translation: word         |
 | ![img.png](images/ReviewMessage.png) | ...1 flashcard(s) listed! |
 
@@ -758,6 +815,21 @@ In enhancing the functionality of our flashcard system, we considered how users 
 |Before the update | ![img.png](images/Stats.png) |
 |:-----------------|-------------------:|
 |**After the update**| ![img.png](images/StatsChart.png) |
+
+### Enhancement 5: Providing more error messages when failing to load the data file
+
+**Feature Flaw**
+
+For advanced users who manually edit the data, they may accidentally introduce invalid data into the file. However, they are not able to know the reason why the data file is valid and that all the data will be discarded when the app starts to process any commands.
+
+**Proposed Enhancement**
+* Changing the behavior of `MainApp#initModelManager`, when `DataLoadingException` is thrown, call the `ui` to display the error message and prohibit `model` from executing any commands.
+* Providing more error messages when failing to load the data file.
+
+**Sample Output**
+
+* `Duplicated flash card ... found in flashlingo.json`: Duplicate combination of word and translation is found in the data file.
+* `Invalid flash card ... with invalid ... found in flashlingo.json`: Flash card with invalid word/translation, level or review date found.
 
 --------------------------------------------------------------------------------------------------------------------
 

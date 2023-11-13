@@ -27,16 +27,19 @@ Given below are my contributions to the project.
     * User Guide:
         * Drafted UI, `list` and `stop` commands, refactored title and layout
         * Added documentation for `switch`, `load` and `help` commands
-        * Unified overall image usage, updated FAQ section
+        * Wrote FAQ section in detail
+        * Updated and cropped all images, improved overall word usage and format
     * Developer Guide:
       * Drafted project scope and NFRs
-      * Added documentation for `switch` command implementation
-      * Updated manual testing section
+      * Adapted the storage design from AB-3 to Flashlingo
+      * Added documentation for `load` and `switch` commands implementation
+      * Wrote manual testing, planned enhancement section and updated NFRs
 
 * **Contributions to team-based tasks**:
     * Milestone v1.1, v1.2, v1.2b and v1.3b creation, issues assignment
-    * v1.2 and v1.3 features demo, postmortem, task assignment: [Doc](https://docs.google.com/document/d/1I7AeOjEK5tkLxLRfuDXVB0-02TU7aJH4cUiQuE5mahE/edit#heading=h.mgdo413wsg9o)
-    * [Refactoring code](https://github.com/AY2324S1-CS2103T-T11-4/tp/pull/75) from AB-3 to Flashlingo
+    * In charge of [project docs](https://docs.google.com/document/d/1I7AeOjEK5tkLxLRfuDXVB0-02TU7aJH4cUiQuE5mahE/edit#heading=h.mgdo413wsg9o), including v1.2 and v1.3 features demo, postmortem
+    * Task assignment and presenter, in-team coordination
+    * Effective [Refactor of code](https://github.com/AY2324S1-CS2103T-T11-4/tp/pull/75) from AB-3 to Flashlingo
     * Documenting FAQ in User Guide, manual testing in Developer Guide
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [#185](https://github.com/AY2324S1-CS2103T-T11-4/tp/pull/185), [#232](https://github.com/AY2324S1-CS2103T-T11-4/tp/pull/232)

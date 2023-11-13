@@ -27,7 +27,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/a1waysd.md)]
 
 * Role: Scheduling and tracking, Lead
-* Responsibilities: UI
+* Responsibilities: Backend, UI
 
 ### TAN SHEN, NATHANAEL MARK
 
@@ -57,4 +57,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/song-mengfei.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Backend and Bug Fixing

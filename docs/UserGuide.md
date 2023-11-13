@@ -11,12 +11,11 @@ title: User Guide
 ## Introduction
 Flashlingo is a versatile desktop application centered around learning words through flash cards. It is optimized for use via a **Command Line Interface** (CLI),
 while also providing the advantages of a **Graphical User Interface** (GUI). Tailored with a focus on **beginner language
-learners** with [to be discussed] proficiency in command line, Flashlingo specializes in expanding vocabulary. If you are not familiar with the command line interface (CLI), you can refer to the [**Glossary**](#glossary) section below,
+learners** with beginner level of  proficiency in command line, Flashlingo specializes in expanding vocabulary. If you are not familiar with the command line interface (CLI), you can refer to the [**Glossary**](#glossary) section below,
 and the [**Command Summary**](#command-summary) section for a quick overview of the commands.
 
 
-The application leverages the scientifically-proven principle of the [**Forgetting Curve**](https://en.wikipedia.org/wiki/Forgetting_curve).
-By incorporating the forgetting curve concept, Flashlingo schedules review sessions, ensuring words are revisited at
+By incorporating [**Leitner system**](https://en.wikipedia.org/wiki/Leitner_system#), Flashlingo schedules review sessions, ensuring words are revisited at
 optimal intervals to enhance long-term memory retention. This method assists users in effectively retaining and expanding their vocabulary over time.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -27,13 +26,13 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
   - Users are given the ability to add, delete and edit flash cards. And each flash card is assigned with a `level`, which
   indicates the proficiency of the user with the word. The level of the flash card will be updated after each review session.
 * **Reviewing flash cards**
-   - In each review session, words that require reviewing will be presented to users one by one. For each word, users can indicate whether
-     - they have memorized the word
+   - In each review session, words that require reviewing will be presented to users one by one. For each word, users can indicate whether they have
+     - memorized the word
      <br>
      This will advance the word into the next `level`, meaning less frequent review for the word in the near future.
-     - they have forgotten the word
+     - forgotten the word
      <br>
-        This will decrease the `level` by 1, meaning more frequent review for the word in the near future.
+      This will decrease the `level` by 1, meaning more frequent review for the word in the near future.
 
 <div markdown="block" class="alert alert-info">
 
@@ -44,6 +43,10 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
 * Words which are indicated as `word mastered` will not appear in review session.
 
 </div>
+
+With each review frequency scientifically determined by **Flashlingo**, it will make your vocabulary learning an absolute breeze,
+meaning you can **spend less time and memorize things more enduringly.**
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -60,11 +63,11 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
     1. Open up the terminal.
     * For mac users, press `Command + Space` to open Spotlight search, type `Terminal`, and press `Enter`.
       ![img.png](images/Terminal.png)
-    * For windows users, press `Windows + R` keys simultaneously, type `cmd` and press `Enter`.
+    * For windows users, press `Windows + R`, type `cmd` and press `Enter`.
     2. Navigate to the folder containing the jar file. In this example, it is in the Downloads folder. So the command is:
-       <br>
-       ```cd Downloads```
-       <br>
+        ```
+        cd Downloads
+        ```
        >Click [here](https://en.wikipedia.org/wiki/Cd_(command)) for more information on how to navigate to a folder in the terminal.
     3. Simply type in `java -jar flashlingo.jar` to get started!
 
@@ -130,7 +133,7 @@ Examples:
 * `add w/雪 t/snow` saves the translation of **雪** as **snow**
 * `add w/雪 wl/Chinese t/snow tl/English` saves the translation of the **Chinese** word **雪** as an **English** word **snow**
 
-Output:  
+Output:
 
 ![img.png](images/AddCommand.png)
 
@@ -212,7 +215,7 @@ Output:
 
 ### Finding a flash card : `find`
 
-Filters the flash card list by the given keywords. All the flash cards whose word or translation contains the keywords will be displayed.
+Filters the flash card list by the given keywords. All the flash cards whose word or translation contains at least one of the keywords will be displayed.
 * The search is case-insensitive. e.g `food` will match `Food`
 
 [Command Format](#commands): `find <KEYWORDS...>`
@@ -220,13 +223,13 @@ Filters the flash card list by the given keywords. All the flash cards whose wor
 Examples:
 * `find food` returns the flash card list and its translation that contains the keyword `food`
 * `find oo` returns the flash card list and its translation that contains the substring `oo`
-* `find food, bye` returns the flash card list and its translation that contains the keyword `food` and `bye`
+* `find food, bye` returns the flash card list and its translation that contains the keyword `food` or `bye`
 
 Output:
 
-|  Before find   | ![img.png](images/BeforeFind.png) |
-|:--------------:|:---------------------------------:|
-| **After find** | ![img.png](images/AfterFind.png)  |
+| **Before find** | ![img.png](images/BeforeFind.png) |
+|:---------------:|:---------------------------------:|
+| **After find**  | ![img.png](images/AfterFind.png)  |
 
 ### Filtering list with specified language : `language`
 
@@ -239,10 +242,10 @@ Examples:
 * `language French` displays a list where each word or translation is from French language.
 
 **Note**
-* Unlike the `find` command, the `language` command uses exact search. So it will not display the flash cards whose word or translation contains the specified language as a substring or keyword.
+* Unlike the `find` command, the `language` command uses **exact search**. So it will not display the flash cards whose word or translation contains the specified language as a substring or keyword.
     * e.g. `language Chinese` will not display following flash cards:
         * `w/读书 t/read book wl/简体中文 tl/English`
-        * `w/讀書 t/I wl/Traditional Chinese tl/English`
+        * `w/讀書 t/read book wl/Traditional Chinese tl/English`
 * `language` without any parameter will display all the flash cards with default language `""`.
 
 ### Getting list for revision : `review`
@@ -253,14 +256,13 @@ Displays the flash cards of all the words to be reviewed that day
 
 [Command Format](#commands): `review ...`
 
-Output:  
+Output:
 
 ![img.png](images/ReviewSuccess.png)
 
 **Note**
 * The message `0 flashcards listed!` occurs when:
     * There are no flash cards scheduled for review at the time when the command is executed.
-    
 
 ###  Starts review session : `start`
 
@@ -285,45 +287,55 @@ Output: `Review Session has ended.`
 
 ### Revealing the other side of the flash card: `reveal`
 
-To show the translation of the flash card in
+Shows the translation of the flash card given by index if it is hidden. Otherwise, hides the translation of the flash card if it is revealed.
 
 [Command Format](#commands): `reveal [<INDEX>]`
 
-Output : `Flashcard has been revealed!...`  
+Output :
 
-![img.png](images/Reveal.png)
+|  **If translation is hidden**  | ![img.png](images/BeforeReveal.png) |
+|:------------------------------:|:-----------------------------------:|
+| **If translation is revealed** | ![img.png](images/AfterReveal.png)  |
 
-**Note**
-* When <INDEX> is omitted, the default value is 1.
+
+<div markdown="block" class="alert alert-info">
+:information_source: Notes:
+
+* When `<INDEX>` is omitted, the default value is 1.
 * Pressing `reveal` or `hide` button will have the same effect.
+* In future enhancement, this command will be renamed to `flip` to better reflect its function.
+
+</div>
 
 ### Indicating user has memorized the word : `yes`
 
-Marks the word as memorized and advances the word into the next level. If there are still remaining words to review,
+Marks the word as memorized and advances the word into the next `level`. If there are still remaining words to review,
 they will be automatically shown in the section below. Otherwise, review session will be closed by default.
 
 [Command Format](#commands): `yes ...`
 
-Output:  
+Output:
 
 ![img.png](images/Yes.png)
 
 **Note**
 * Pressing `yes` button will have the same effect.
+* In the case where there are no more words to review, `The next word is:` will be replaced by `You have no more words to review!`.
 
 ###  Indicating user has forgotten the word : `no`
 
-Marks the word as not grasped and leaves it in its current retention stage. If there are still remaining words to review,
+Marks the word as not grasped and decreases its `level` by 1. If there are still remaining words to review,
 they will be automatically shown in the section below. Otherwise, review session will be closed by default.
 
 [Command Format](#commands): `no ...`
 
-Output:  
+Output:
 
 ![img.png](images/No.png)
 
 **Note**
 * Pressing `no` button will have the same effect.
+* In the case where there are no more words to review, `The next word is:` will be replaced by `You have no more words to review!`.
 
 ### Show learning statistics : `stats`
 
@@ -339,40 +351,40 @@ Output:
 ![img.png](images/Stats.png)
 
 **Note**
-* The success rate is calculated solely on the basis of the current session.  
+* The success rate is calculated solely on the basis of the current session.
 
-
-<div id="load">
 
 ### Loading list of words: `load`
 Loads an Excel file of words into the app. The words will be added to the current list of flash cards and included in the
 review session automatically.
-</div>
 
 [Command Format](#commands): `load <FILE_NAME>`
+<div id="load">
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the file input:**<br>
 * **File format:** The file must be an Excel Workbook with the `.xlsx` extension.
 * **File location:** The file must be located in the **same folder** as the `flashlingo.jar` file.
-* **File content:** The app would only read the **first two columns** of the **first sheet** of the workbook. 
+* **File name:** The file names, with and without the `.xlsx` extension depend on different systems, cannot contain leading or trailing spaces.
+* **File content:** The app would only read the **first two columns** of the **first sheet** of the workbook.
   * The sheet must contain only the following two columns (cannot have blank columns on the left):
     1. Column A - The original words
     2. Column B - The translation of the words
   * The sheet cannot contain empty rows in between all rows with words.
 * **Resources:** A sample file can be found [here](SampleData.xlsx).
 </div>
+</div>
 
 Output:
 * `You have successfully loaded file: ...`: Successful loading.
-* `File not found or accessible`:  
+* `File not found or accessible`:<br>
 ⚠️ Make sure the file is in the correct directory with read permission.
-* `File cannot be read due to invalid content or format`:  
+* `File cannot be read due to invalid content or format`:<br>
 ⚠️ Make sure the file contains only two columns with the valid words/translations.
-* `... flash card already exists!`:  
+* `... flash card already exists!`:<br>
 ⚠️ Modify the duplicated word/translation in the file to avoid duplication with the flash cards in the app.
-* `Word/translation cannot be empty!`:  
+* `Word/translation cannot be empty!`:<br>
 ⚠️ Ensure all words and translations are not empty spaces.
 
 ### Switching color theme : `switch`
@@ -418,7 +430,7 @@ If your changes to the data file makes its format invalid, Flashlingo will disca
 ## FAQ
 
 **Q: How can I check if I have installed and am using the Java `11` version?**<br>
-**A**: 
+**A**:
 * Open up the terminal. Run the `java -version` command. The output should contain similar information to the following:
 `version "11.0.X"`.
 * If Java `11` is not installed, you may download it again.
@@ -433,7 +445,7 @@ If your changes to the data file makes its format invalid, Flashlingo will disca
 Then, use the `load` command to import the data.
 
 **Q: What may be the reasons why my data cannot be loaded into the app?**<br>
-**A**: 
+**A**:
 * First, check your file name by opening the located folder. The file name should be directly displayed. Also, you can right-click the file to view the file name in its detailed info.
 * If Flashlingo still cannot read the file, try inputting file name with and without the extension `.xlsx` in the `load` command. This may solve potential issues with file name loading within different systems.
 * Secondly, ensure the content in your file is correctly formatted and valid. All rules can be found [here](#load).
@@ -480,11 +492,12 @@ Refer to [Commands](#commands) if unsure of how to interpret the format.
 
 ## Glossary
 
-| Term                                  | Definition                                                                                                                                                                                                                                                                                                                      | 
-| ------------------------------------- |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **CLI**                               | A command line interface (CLI) is a text-based interface where you can input commands that interact with a computer's operating system. You can check the tutorial [**here**](https://tutorials.codebar.io/command-line/introduction/tutorial.html)                                                                             |
-| **GUI**                               | A graphical user interface (GUI) is a digital interface in which a user interacts with graphical components such as icons, buttons, and menus.                                                                                                                                                                                  |
-| **JSON** | JSON (JavaScript Object Notation) is a lightweight data format commonly used for representing structured data.                                                                                                                                                                                                                  |
-| **Level**                             | The level represents the proficiency with a specific flash card. The higher the `Level` is, the higher the proficiency of the user with the word is.                                                                                                                                                                            |
-| **Review Session**                    | A review session is a designated phase within the system where words requiring review are presented individually. Users can confirm their understanding or signal a need for further review.                                                                                                                                    |
-| **Forgetting Curve**                  | The forgetting curve illustrates the decline in memory retention over time if information is not periodically reviewed or reinforced. It demonstrates a rapid loss of information shortly after learning, with the most significant decline in the initial hours or days. The rate of forgetting gradually decreases over time. |
+| Term               | Definition                                                                                                                                                                                                                                                                      |
+|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **CLI**            | A command line interface (CLI) is a text-based interface where you can input commands that interact with a computer's operating system. You can check the tutorial [**here**](https://tutorials.codebar.io/command-line/introduction/tutorial.html).                            |
+| **GUI**            | A graphical user interface (GUI) is a digital interface in which a user interacts with graphical components such as icons, buttons, and menus.                                                                                                                                  |
+| **JSON**           | JSON (JavaScript Object Notation) is a lightweight data format commonly used for representing structured data.                                                                                                                                                                  |
+| **Leitner System** | The Leitner system is a widely used method of efficiently using flashcards that was proposed by the German science journalist Sebastian Leitner in 1972. It is a simple implementation of the principle of spaced repetition, where cards are reviewed at increasing intervals. |
+| **Level**          | The level represents the proficiency with a specific flash card. The higher the `Level` is, the higher the proficiency of the user with the word is.                                                                                                                            |
+| **Review Session** | A review session is a designated phase within the system where words requiring review are presented individually, based on Leitner System. Users can confirm their understanding or signal a need for further review.                                                           |
+

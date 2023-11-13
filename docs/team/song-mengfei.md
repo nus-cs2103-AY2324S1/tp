@@ -9,7 +9,7 @@ FlashLingo is a desktop application to facilitate the learning of new languages 
 
 Given below are my contributions to the project.
 
-* **New Feature**: 
+* **New Feature**:
   * Added the ability to update the proficiency level of reviewed flash cards.
       * What it does: It receives the user's feedback on the flash card and updates the proficiency level of the flash card accordingly.
       * Justification: The implementation of `Yes` and `No` commands allows users to actively review words, thereby enhancing their memory retention.
@@ -30,9 +30,10 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the features `add`, `delete`, `edit` and `switch`: [#202](https://github.com/AY2324S1-CS2103T-T11-4/tp/pull/202)
+        * Added documentation for the features `add`, `delete`, `edit`, `find`, `language` and `switch`: [#202](https://github.com/AY2324S1-CS2103T-T11-4/tp/pull/202) [#339](https://github.com/AY2324S1-CS2103T-T11-4/tp/pull/339)
     * Developer Guide:
-        * Added implementation details of the features `yes` and `no` commands: [#176](https://github.com/AY2324S1-CS2103T-T11-4/tp/pull/176)
+        * Update the design of architecture to adopt our current program
+        * Added implementation details of the features `yes` and `no` commands and added YesCommandActivityDiagram and YesSequenceDiagram: [#176](https://github.com/AY2324S1-CS2103T-T11-4/tp/pull/176) [#335](https://github.com/AY2324S1-CS2103T-T11-4/tp/pull/335)
 
 * **Contributions to team-based tasks**:
     * Ensuring coding standard is followed

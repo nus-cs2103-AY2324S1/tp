@@ -1,0 +1,20 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 14
+
+start
+:Execute the LoadCommand;
+:Open the Excel file;
+if () then ([FileNotFoundException/SecurityException])
+  :Throw exception "open file fail";
+  stop
+else ()
+  :Create new XSSFWorkbook;
+  if () then ([IOException])
+    :Throw exception "read file fail";
+  else ()
+    : Read rows and update model       ;
+  endif
+stop
+@enduml
