@@ -199,8 +199,13 @@ The `ListCommandParser` is responsible for returning the appropriate `ListComman
 The `ListByDayCommand`  is initialised with a `DayPredicate` and updates
 
 ### Find feature
-The `findCommand` extends the `Command` class. It allows the user to find for tutees by specifying their names and/or 
-subject using their prefixes.
+The `FindCommand` extends the `Command` class. It allows the user to find for tutees by specifying their names and/or 
+subject using their prefixes. Both parameters are optional, but at least one of them must be specified for the `find`
+command to work properly.
+
+`FindCommand` takes in the following fields:
+* **Name (Optional field)**: String composed of character between A-Z and a-z.
+* **Subject (Optional field)**: String without restriction in characters.
 
 The following sequence diagram shows how the edit command works.
 ![FindSequenceDiagram](images/FindSequenceDiagram.png)
@@ -217,8 +222,21 @@ The following sequence diagram shows how the edit command works.
     * Cons: Users cannot search for tutees by subject.
 
 ### Edit feature
-The `editCommand` extends the `Command` class. It allows the user to edit fields of the tutee by specifying the index
-of the tutee.
+The `EditCommand` extends the `Command` class. It allows the user to edit fields of the tutee by specifying the index
+of the tutee. The command contains checks to prevent any duplicate `Person` object (i.e. same name and phone number) 
+as well as clashes in schedules. If it passes these checks, the person is edited successfully.
+
+`EditCommand` takes in the following fields:
+* **Index (Compulsory Field)**: Numbers between 1 to the number of people inside the list.
+* **Name (Optional field)**: String composed of character between A-Z and a-z.
+* **Phone number (Optional field)**: Any number at least 3 digits long.
+* **Email (Optional field)** String with restrictions in characters (XXXXXXXX@emaildomain)
+* **Address (Optional field)**: String without restriction in characters.
+* **Subject (Optional field)**: String without restriction in characters.
+* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).
+* **Begin (Optional field)**: String with restrictions (HHMM).
+* **End (Optional field)**: String with restrictions (HHMM).
+* **PayRate (Optional field)**: String with restrictions in characters, only numbers allowed (no negative numbers)
 
 The following sequence diagram shows how the edit command works.
 ![EditSequenceDiagram](images/EditSequenceDiagram.png)
@@ -608,23 +626,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 2b1. System informs that subject can only take one word.
 
     Use case resumes at 2.
-  
-- 2c. The user inputs more than one word for name field and one word for subject fields.
-  - 2c1. System informs that name can only take one word.
-
-    Use case resumes at 2.
-  
-- 2d. The user inputs one word for name field and more than one word for subject field.
-  - 2d1. System informs that subject can only take one word.
-
-    Use case resumes at 2.
-  
-- 2e. The user inputs more than one word for both name and subject fields.
-  - 2e1. System informs that name can only take one word.
-
-    Use case resumes at 2.
-    <br>
-    <br>
   
 **Use case: UC06 - Mark a tutee as paid**
 
