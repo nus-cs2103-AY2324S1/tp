@@ -322,7 +322,7 @@ Format: `gather fp/FINANCIAL PLAN` or `gather t/TAG`
   This function currently known to be compatible with gmail and outlook but might not work for all email services.
 * Either **Financial Plan or Tag** can be searched at once, but **not both**.
 * The search is case-insensitive e.g. `financial` will match `FINANCIAL` or `Financial`.
-* A client's email will be gathered if the prompt matches a substring of their financial plan or tag 
+* A client's email will be gathered if the prompt matches a substring of their financial plan or tag.
   eg. `finan` will match `financial` or `financial plan`.
 
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
