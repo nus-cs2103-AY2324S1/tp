@@ -1,10 +1,12 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALGROUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -15,6 +17,7 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new DeleteCommand object.
  */
 public class DeleteCommandParser implements Parser<DeleteCommand> {
+    private final Logger logger = LogsCenter.getLogger(DeleteCommandParser.class);
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand
@@ -24,8 +27,11 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
     public DeleteCommand parse(String args) throws ParseException {
 
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TUTORIAL_GROUP);
         String trimmedArgs = args.trim();
-        if (!trimmedArgs.startsWith("all")) {
+
+        if (!argMultimap.getPreamble().equals("all")) {
+            logger.fine("Parsing delete: " + trimmedArgs);
             try {
                 Index index = ParserUtil.parseIndex(args);
                 return new DeleteCommand(index);
@@ -35,22 +41,15 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             }
         }
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TUTORIALGROUP);
         Optional<Tag> tag = Optional.empty();
 
-        if (argMultimap.getValue(PREFIX_TUTORIALGROUP).isPresent()) {
-            tag = Optional.of(ParserUtil.parseTag(argMultimap.getValue(PREFIX_TUTORIALGROUP).get()));
-        }
-
         if (trimmedArgs.equals("all")) {
+            logger.fine("Parsing delete all: no Tutorial Group");
             return new DeleteCommand(tag, new ContainsTagPredicate(tag));
         }
 
-        if (!argMultimap.getValue(PREFIX_TUTORIALGROUP).isPresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
-        }
-
-
+        tag = Optional.of(ParserUtil.parseTag(argMultimap.getValue(PREFIX_TUTORIAL_GROUP).get()));
+        logger.fine("Parsing delete all: " + tag.get().getTagName());
         return new DeleteCommand(tag, new ContainsTagPredicate(tag));
     }
 }

@@ -5,7 +5,8 @@ title: Liyan's Project Portfolio Page
 
 ### Project: TAvigator
 
-TAvigator is a desktop address book application used by tutors to keep track of students' contact details and attendance. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about (TBA) kLoC.
+Teaching Assistants (TAs) sometimes have many tutorial groups to manage, it could be chaotic to manage all of them. TAvigator is a desktop address book application used by TAs to keep track of students' contact details and attendances. 
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java.
 
 Given below are my contributions to the project.
 
@@ -48,7 +49,7 @@ Given below are my contributions to the project.
         * Added planned enhancements. (PR: [#158](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/158))
 
 * **Review / mentoring contributions**:
-  * PRs reviewed (with non-trivial comments): [#85](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/85), [#155](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/155)
+  * PRs reviewed with non-trivial comments: [#85](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/85), [#155](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/155)
 
 * **Contributions beyond the project team**:
-  * Reported 17 bugs and suggestions for other teams during PE-D.
+  * Reported 17 bugs and suggestions for other teams during PE-D. [(Bugs Reported)](https://github.com/spatuly/ped/issues)
