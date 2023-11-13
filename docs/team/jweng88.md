@@ -5,7 +5,7 @@ title: Joshua Weng Hao’s Project Portfolio Page
 
 ### Project: Tutor Connect
 
-This is an address book made for tuition centre managers to easily track, schedule, 
+This is an **address book made for tuition centre managers** to easily track, schedule, 
 and notify tutors of their upcoming schedule, optimised for users who prefer a CLI.
 
 Given below are my contributions to the project.
@@ -16,7 +16,7 @@ Given below are my contributions to the project.
 * **Enhancements implemented**:
   * **New feature:** Added the ability to mark schedules. 
   (Pull request [#144](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/144))
-    * What it does: Allows the user to mark a specified schedule as MISSED or COMPLETED.
+    * What it does: Allows the user to mark a specified schedule as `MISSED` or `COMPLETED`.
     * Justification: This feature improves the product by allowing users to create and set the status of a specified
     schedule.
     * Highlights: Implementing this feature posed some challenges as it required the addition of the status field in 
@@ -47,7 +47,6 @@ Given below are my contributions to the project.
     * User Guide
         * Added details of list tutor feature [#47](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/47),
         [#105](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/105), 
-        [#161](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/161), 
         [#233](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/233).
         * Added details of delete tutor feature [#48](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/48), 
         [#53](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/53), 
@@ -64,14 +63,14 @@ Given below are my contributions to the project.
         [#161](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/161).
         * Added implementation details of mark schedule feature 
         [#320](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/320).
-        * Added implementation details for SplitMainWindow to display both tutor and schedule list together 
+        * Added implementation details for Split MainWindow to display both tutor and schedule list together 
         [#320](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/320).
-        * Added detailed instructions for manual testing for all features 
+        * Added detailed instructions for manual testing of all features 
         [#320](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/320).
         * Update acknowledgements section [#320](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/320).
 
 * **Contribution to team-based tasks**:
-    * Implement schedule structure: update AddressBook to include schedules. (Pull request 
+    * Implement schedule structure: update AddressBook to include schedules. (Pull requests 
     [#98](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/98),
     [#101](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/101))
     * Standardising formatting and proofreading UG and DG 

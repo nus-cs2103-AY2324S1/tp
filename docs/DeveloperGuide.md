@@ -1165,10 +1165,10 @@ otherwise.
 
 **MSS**
 
-1.  User requests to list tutors
-2.  TutorConnect shows a list of tutors
-3.  User requests to edit a specific tutor information in the list
-4.  TutorConnect modifies the tutor information
+1.  User requests to list tutors.
+2.  TutorConnect shows a list of tutors.
+3.  User requests to edit a specific tutor information in the list.
+4.  TutorConnect modifies the tutor information.
 
     Use case ends.
 
@@ -1196,10 +1196,10 @@ otherwise.
 
 **MSS**
 
-1.  User requests to list tutors
-2.  TutorConnect shows a list of tutors
-3.  User requests to delete a specific tutor in the list
-4.  TutorConnect deletes the tutor
+1.  User requests to list tutors.
+2.  TutorConnect shows a list of tutors.
+3.  User requests to delete a specific tutor in the list.
+4.  TutorConnect deletes the tutor.
 
     Use case ends.
 
@@ -1221,10 +1221,10 @@ otherwise.
 
 **MSS**
 
-1.  User requests to list tutors
-2.  TutorConnect shows a list of tutors
-3.  User requests to add a schedule for a specific tutor in the list
-4.  TutorConnect adds the schedule and displays a list of schedule
+1.  User requests to list tutors.
+2.  TutorConnect shows a list of tutors.
+3.  User requests to add a schedule for a specific tutor in the list.
+4.  TutorConnect adds the schedule and displays a list of schedule.
 
     Use case ends.
 <div style="page-break-after: always;"></div>
@@ -1252,10 +1252,10 @@ otherwise.
 
 **MSS**
 
-1.  User requests to list schedules
-2.  TutorConnect shows a list of schedules
-3.  User requests to edit a specific schedule information in the list
-4.  TutorConnect modifies the schedule information
+1.  User requests to list schedules.
+2.  TutorConnect shows a list of schedules.
+3.  User requests to edit a specific schedule information in the list.
+4.  TutorConnect modifies the schedule information.
 
     Use case ends.
 
@@ -1283,8 +1283,8 @@ otherwise.
 
 **MSS**
 
-1.  User requests to list schedules by tutor and/or schedule status
-2.  TutorConnect shows a list of schedules
+1.  User requests to list schedules by tutor and/or schedule status.
+2.  TutorConnect shows a list of schedules.
 
     Use case ends.
 
@@ -1308,8 +1308,8 @@ otherwise.
 
 **MSS**
 
-1.  User requests to find schedules by typing in keywords
-2.  TutorConnect shows a list of schedules filtered by keyword entered
+1.  User requests to find schedules by typing in keywords.
+2.  TutorConnect shows a list of schedules filtered by keyword entered.
 
     Use case ends.
 
@@ -1318,10 +1318,10 @@ otherwise.
 
 **MSS**
 
-1.  User requests to list schedules
-2.  TutorConnect shows a list of schedules
-3.  User requests to delete a specific schedule in the list
-4.  TutorConnect deletes the schedule
+1.  User requests to list schedules.
+2.  TutorConnect shows a list of schedules.
+3.  User requests to delete a specific schedule in the list.
+4.  TutorConnect deletes the schedule.
 
     Use case ends.
 
@@ -1342,10 +1342,10 @@ otherwise.
 
 **MSS**
 
-1.  User requests to list schedules
-2.  TutorConnect shows a list of schedules
-3.  User requests to mark a specific schedule in the list as completed
-4.  TutorConnect marks the schedule as completed
+1.  User requests to list schedules.
+2.  TutorConnect shows a list of schedules.
+3.  User requests to mark a specific schedule in the list as completed.
+4.  TutorConnect marks the schedule as completed.
 
     Use case ends.
 
@@ -1366,10 +1366,10 @@ otherwise.
 
 **MSS**
 
-1.  User requests to list schedules
-2.  TutorConnect shows a list of schedules
-3.  User requests to unmark a specific schedule in the list
-4.  TutorConnect unmarks the schedule
+1.  User requests to list schedules.
+2.  TutorConnect shows a list of schedules.
+3.  User requests to unmark a specific schedule in the list.
+4.  TutorConnect unmarks the schedule.
 
     Use case ends.
 
@@ -1379,6 +1379,7 @@ otherwise.
 
   Use case ends.
 <div style="page-break-after: always;"></div>
+
 * 3a. The given index is invalid.
 
     * 3a1. TutorConnect shows an error message.
@@ -1391,10 +1392,10 @@ otherwise.
 
 **MSS**
 
-1.  User requests to list tutors
-2.  TutorConnect shows a list of tutors
-3.  User requests to view schedules for a specific tutor in the list
-4.  TutorConnect displays a list of schedules for the tutor
+1.  User requests to list tutors.
+2.  TutorConnect shows a list of tutors.
+3.  User requests to view schedules for a specific tutor in the list.
+4.  TutorConnect displays a list of schedules for the tutor.
 
     Use case ends.
 
@@ -1426,9 +1427,9 @@ otherwise.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Use case**: A description of a set of sequences of actions, including variants, that a system performs to yield an observable result of value to an actor
-* **GUI**: Graphical user interface
+* **Mainstream OS**: Windows, Linux, Unix, OS-X.
+* **Use case**: A description of a set of sequences of actions, including variants, that a system performs to yield an observable result of value to an actor.
+* **GUI**: Graphical user interface.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1445,7 +1446,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
    2. Double-click the jar file Expected: Shows the GUI with a set of sample tutors and schedules. The window size may 
       not be optimum.
