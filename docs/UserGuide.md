@@ -109,7 +109,8 @@ This **darker blue box** with the **lightbulb icon** provides you **extra useful
 
 # Table of Contents
 1. [Quick Start](#quick-start)
-2. [Features](#features)
+2. [Interface Overview](#interface-overview)
+3. [Features](#features)
    - [Contact Management](#contact-management)
      - [Properties of contact](#properties-of-contact)
      - [Add contact: `add`](#add-contact-add)
@@ -131,9 +132,9 @@ This **darker blue box** with the **lightbulb icon** provides you **extra useful
    - [Contact Search](#contact-search)
      - [Basic Filtering](#basic-filtering)
      - [Advanced Filtering](#advanced-filtering)
-3. [FAQ](#faq)
-4. [Planned Enhancements / Known Issues](#planned-enhancements--known-issues)
-5. [Command summary](#command-summary)
+4. [FAQ](#faq)
+5. [Planned Enhancements / Known Issues](#planned-enhancements--known-issues)
+6. [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -166,6 +167,24 @@ This **darker blue box** with the **lightbulb icon** provides you **extra useful
 6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+
+# Interface Overview
+
+CampusConnect's **Graphical User Interface (GUI)** allows users to access contacts through an intuitive display with seamless interaction.
+Here is an overview of the main elements of the interface you should be familiar with to make the most out of CampusConnect.
+
+![GUI Overview](images/GUI.png)
+
+* **(a) Command input box**
+  * The *Command input box* is where you enter *commands*.
+  * Type a command according to the formats described in [features](#features) and press `Enter` to execute the command.
+* **(b) Command output log**
+  * The *Command output log* will display helpful information when commands execute successfully, or display *errors* when commands are unsuccessful.
+* **(c) Contact directory**
+  * The *Contact directory* visually lists contacts in CampusConnect.
+  * Make use of the scroll bar on the right, or your mouse scroll, to navigate the list of contacts.
+  * Use commands such as [`list`](#list-all-contacts-list) and [`find`](#contact-search) to dynamically adjust the actively displayed contacts in the *contact directory*.
+
 
 # Features
 
