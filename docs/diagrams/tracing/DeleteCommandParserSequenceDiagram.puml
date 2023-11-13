@@ -1,0 +1,16 @@
+@startuml
+!include ../style.puml
+skinparam ArrowFontStyle plain
+
+Participant ":DeleteCommandParser" as dcp LOGIC_COLOR
+Participant ":ParserUtil" as pu LOGIC_COLOR
+Participant "command:DeleteCommand" as dc LOGIC_COLOR
+
+[-> dcp ++: parse(args)
+dcp -> pu ++: parseIndex()
+pu --> dcp --: index
+create dc
+dcp -> dc ++: DeleteCommand()
+dc --> dcp --
+dcp -->[ --: command
+@enduml
