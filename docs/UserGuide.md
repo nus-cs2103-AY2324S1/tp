@@ -10,7 +10,7 @@ pageNav: 3
 --------------------------------------------------------------------------------------------------------------------
 
 
-## Introductions
+## Introduction
 
 Achieve simplicity while optimizing efficiency.
 
@@ -66,9 +66,9 @@ ProjectPRO is optimized for use via a Command Line Interface (CLI) while preserv
   - [9.6 Listing Meeting Time from a Group `listtime`](#listing-meeting-time-from-a-group-listtime)
   - [9.7 Finding Free Time of a Group `findfreetime`](#finding-free-time-of-a-group-findfreetime)
 - [10. General Commands](#general-commands)
-  - [10.1 Viewing Help `help`](#viewing-help--help)
-  - [10.2 Clearing All Data `clear`](#clearing-all-data--clear)
-  - [10.3 Exit ProjectPRO `exit`](#exit-projectpro--exit)
+  - [10.1 Viewing Help `help`](#viewing-help-help)
+  - [10.2 Clearing All Data `clear`](#clearing-all-data-clear)
+  - [10.3 Exit ProjectPRO `exit`](#exit-projectpro-exit)
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -222,7 +222,7 @@ Written below are some extra information regarding our command formats:
 --------------------------------------------------------------------------------------------------------------------
 
 
-### Adding a contact `add`
+### Adding a contact: `add`
 You can create a contact in your contact list.
 
 
@@ -263,7 +263,7 @@ You can create a contact in your contact list.
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Deleting a contact `delete`
+### Deleting a contact: `delete`
 You can delete a contact from your contact list.
 
 
@@ -296,7 +296,7 @@ You can delete a contact from your contact list.
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Finding a contact `find`
+### Finding a contact: `find`
 
 You can find all the contacts from your contact list with the matching keywords.
 
@@ -326,7 +326,7 @@ You can find all the contacts from your contact list with the matching keywords.
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Listing contacts `list`
+### Listing contacts: `list`
 You can list all the contacts in your contact list.
 
 **Format:** `list`
@@ -361,7 +361,7 @@ You can list all the contacts in your contact list.
 --------------------------------------------------------------------------------------------------------------------
 
 
-### Adding a group `new`
+### Adding a group: `new`
 
 You can create a new group in your contact list.
 
@@ -393,7 +393,7 @@ You can create a new group in your contact list.
 --------------------------------------------------------------------------------------------------------------------
 
 
-### Deleting a group `delete`
+### Deleting a group: `delete`
 You can delete a group in your contact list.
 
 **Format:** `delete g/GROUP_NAME`
@@ -425,7 +425,7 @@ You can delete a group in your contact list.
 --------------------------------------------------------------------------------------------------------------------
 
 
-### Adding remarks to a group `remark`
+### Adding remarks to a group: `remark`
 
 You can add remarks to a group in your contact list.
 
@@ -460,7 +460,7 @@ You can add remarks to a group in your contact list.
 --------------------------------------------------------------------------------------------------------------------
 
 
-### Finding a group `find`
+### Finding a group: `find`
 You can find a group in your contact list. This allows you to view the group's members and remarks.
 
 
@@ -491,7 +491,7 @@ You can find a group in your contact list. This allows you to view the group's m
 - The group you are trying to find does not exist in your contact list: `No group with such name found. Please provide the group's full name as in the existing contact list`.
 
 
-### Listing a group `listgroup`
+### Listing a group: `listgroup`
 You can list all the groups in your contact list.
 
 **Format:** `listgroup`
@@ -522,7 +522,7 @@ You can list all the groups in your contact list.
 --------------------------------------------------------------------------------------------------------------------
 
 
-### Grouping a Contact `group`
+### Grouping a Contact: `group`
 
 You can add an existing contact to an existing group.
 
@@ -557,7 +557,7 @@ You can add an existing contact to an existing group.
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Ungrouping a Contact `ungroup`
+### Ungrouping a Contact: `ungroup`
 
 You can remove a contact from a group.
 
@@ -596,7 +596,7 @@ You can remove a contact from a group.
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Adding Time to a Contact `addtime`
+### Adding Time to a Contact: `addtime`
 You can add time slots when your contacts are available.
 
 **Format:** `addtime n/NAME t/FREE_TIME`
@@ -614,6 +614,7 @@ You can add time slots when your contacts are available.
   must be a time slot within the current weekly schedule. Eg. <code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">Sat 1000 - Mon 1000</code> is not allowed as the monday here refers to next week, violating the current weekly schedule pattern.</p>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">FREE_TIME</code>
   must be a time slot with some duration. Eg. <code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">Mon 1200 - Mon 1200</code> is not valid as there is no duration.<code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">Mon 1300- Mon 1400</code> is valid.
+It is <strong>not case-sensitive</strong>.</p>
 </div>
 
 <p></p>
@@ -644,7 +645,7 @@ This adds a time slot when Alex Yeoh is available in your contact list.
 - The time slot you are trying to add is not valid.
 
 
-### Removing Time from a Contact `deletetime`
+### Removing Time from a Contact: `deletetime`
 You can remove available time slots of your contacts.
 
 
@@ -660,7 +661,7 @@ You can remove available time slots of your contacts.
      must be alphanumeric and cannot be blank.
   </p>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">FREE_TIME</code>
-  must match to the contact's existing time.</p>
+  must match the contact's existing time. It is <strong>not case-sensitive</strong>.</p>
 </div>
 
 <p></p>
@@ -692,7 +693,7 @@ You can remove available time slots of your contacts.
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Listing Time from a Contact `listtime`
+### Listing Time from a Contact: `listtime`
 You list all available time slots of your contacts.
 
 **Format:** `listtime n/NAME`
@@ -725,7 +726,7 @@ You list all available time slots of your contacts.
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Add Meeting to a Group `addmeeting`
+### Add Meeting to a Group: `addmeeting`
 You can add a meeting time slot for your group.
 
 
@@ -740,7 +741,7 @@ You can add a meeting time slot for your group.
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
     must be alphanumeric and cannot be blank.</p>
 <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">MEETING_TIME</code>
-    must be a time slot within the weekly schedule and must not clash with the group's existing meeting times.</p>
+    must be a time slot within the weekly schedule and must not clash with the group's existing meeting times.  It is <strong>not case-sensitive</strong>.</p>
 </div>
 <p></p>
 
@@ -769,7 +770,7 @@ You can add a meeting time slot for your group.
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Remove Meeting Time from a Group `deletetime`
+### Remove Meeting Time from a Group: `deletetime`
 You can remove meeting times from your groups.
 
 **Format:** `deletetime g/GROUP_NAME t/MEETING_TIME`
@@ -783,7 +784,7 @@ You can remove meeting times from your groups.
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
     must be alphanumeric and cannot be blank.</p>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">MEETING_TIME</code>
-    must be a time slot within a weekly schedule and must be an existing meeting slot of the group.</p>
+    must be a time slot within a weekly schedule and must be an existing meeting slot of the group. It is <strong>not case-sensitive</strong>.</p>
 </div>
 <p></p>
 
@@ -804,7 +805,7 @@ You can remove meeting times from your groups.
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Listing Meeting Time from a Group `listtime`
+### Listing Meeting Time from a Group: `listtime`
 You list meeting time for your groups.
 
 **Format:** `listtime g/GROUP_NAME`
@@ -836,7 +837,7 @@ You list meeting time for your groups.
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Finding Free Time of a Group `findfreetime`
+### Finding Free Time of a Group: `findfreetime`
 You can find a meeting time slot for your group where everyone is available.
 
 
@@ -949,7 +950,7 @@ Clears all entries from the contact list.
 
 **Potential error(s):**
 - Extra inputs detected.
-- 
+
 
 ### Exit ProjectPRO: `exit`
 You can exit ProjectPRO.
