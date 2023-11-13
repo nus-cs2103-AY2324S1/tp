@@ -399,13 +399,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 - **Alternative 1**: The `DeleteCommand` could be implemented as a `DeleteFieldCommand` and a `DeletePersonCommand`. The `DeleteFieldCommand` will delete the specified fields from the patient's profile, while the `DeletePersonCommand` will delete the entire patient profile from the database. This approach will require the user to invoke two commands to delete a patient's profile and the specified fields from the patient's profile. This approach is not chosen as it is less intuitive and requires more effort from the user.
 
-
-### Addition of Interface for Find-type commands
-
-#### Proposed Implementation
-
-_{Explain how there is overlap in function for `find`, `delete`, `edit`}_
-
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
@@ -704,29 +697,30 @@ HealthSync caters to clinic assistants in small private clinic, enabling them to
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                         | I want to …​                                        | So that I can…​                                                           |
+| Priority | As a...                                        | I can...                                           | So that I can...                                                         |
 |----------|------------------------------------------------|----------------------------------------------------|--------------------------------------------------------------------------|
 | `* * *`  | beginner of the app for an important operation | auto-save all my data                              | not lose my data when something goes wrong                               |
-| `* * *`  | busy frontdesk worker                          | retrieve patient information                       | answer their queries                                                     |
+| `* * *`  | frontdesk worker                               | retrieve patient information                       | make use of the patient data when I need them                            |
 | `* * *`  | frontdesk worker                               | create patient entries                             | add entries when new patients visit                                      |
-| `* * *`  | frontdesk worker                               | find a patient by name                             | locate details of persons without having to go through the entire list   |
+| `* * *`  | frontdesk worker                               | find a patient by some field they possess          | locate details of persons without having to go through the entire list   |
 | `* * *`  | frontdesk worker                               | delete a patient entry                             | clean and update the database when patient no longer exist               |
 | `* * *`  | frontdesk worker                               | edit patient entries                               | update their details, especially for upcoming appointment dates          |
-| `* * `   | a new user of the app                          | view hints on commonly used commands               | be familiar with the app as soon as possible                             |
+| `* * *`  | frontdesk worker                               | store patient appointment information              | track when they next come to the clinic                                  |
 | `* * `   | a new user of the app                          | view preloaded sample data                         | know how the basic UI look like when it is populated                     |
+| `* * `   | a new user of the app                          | purge all sample data from the app                 | add my own data easily when I want to use the app                        |
+| `* * `   | a new user of the app                          | have easy access to a help sheet                   | check what commands I can and cannot use in a situation                  |
+| `* * `   | frontdesk worker                               | add medical histories to patients                  | view and filter patients accordingly                                     |
+| `* * `   | frontdesk worker                               | document patient encounters                        | maintain up-to-date records of patient information                       |
 | `* * `   | frontdesk worker                               | use app with shortcuts                             | get my task done very quickly                                            |
-| `* * `   | frontdesk worker                               | have calendar-like UI to create appointments       | show calendar to patients and allow smoother appointment booking process |
 | `* * `   | frontdesk worker                               | see conflicts in appointment schedules             | seamlessly schedule appointments for patients                            |
-| `* * `   | frontdesk worker                               | reminder when patient's appointment is coming soon | call and remind patients accordingly                                     |
-| `* * `   | healthcare provider                            | document patient encounters(ie. exam notes)        | maintain up-to-date records of patient information                       |
-| `* `     | a new user of the app                          | have physical UI Buttons                           | use to execute tasks before I'm familiar with shortcuts                  |
-| `* `     | frontdesk worker                               | have a very optimised app                          | do my task and have data reading almost instantly (O(1))                 |
-| `* `     | frontdesk worker                               | add tags to patients                               | view and filter patients accordingly                                     |
-| `* `     | frontdesk worker                               | leverage on database statistics                    | analyse data (ie. how many appointments booked/ month for doctors)        |
+| `* * `   | frontdesk worker                               | reminder when patient's appointment is coming soon | call-up and remind patients, and prepare for the day accordingly         |
+| `* `     | a new user of the app                          | have physical UI Buttons                           | use them to execute tasks before I'm familiar with shortcuts             |
+| `* `     | a new user of the app                          | access an in-app help sheet                        | easily see what to do when I need help without opening another program   |
+| `* `     | a new user of the app                          | get in-app hints as I use the app                  | quickly acclimatise to using the app as I use it                         |
+| `* `     | frontdesk worker                               | have a very optimised app                          | do my task and have data reading almost instantly                        |
+| `* `     | frontdesk worker                               | leverage on statistics in my patient list          | analyse data (ie. how many appointments booked/ month for doctors)       |
 | `* `     | frontdesk worker                               | save back-up or archive patient details somewhere  | maintain a fast application while still having data securely stored      |
-
-
-*{More to be added}*
+| `* `     | frontdesk worker                               | have calendar-like UI to create appointments       | show calendar to patients and allow smoother appointment booking process |
 
 ### Use cases
 
@@ -1062,9 +1056,44 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Planned Enhancements**
 
-1. Our current app is unable to handle scenarios where patients share the same name. We plan to make it possible for
-   users to add patients with the same name into HealthSync.
-2. Our current app does not handle text wrapping on the UI well, and certain text labels may be obscured when user input
-   is too long. We plan to explicitly denote the labels on the individual UI cards and allow inputs to stretch its
-   container should it be a long input, so users would be able to discern easily what elements they are looking at on
-   the UI.
+1. **Handling Patients with Same Name:**
+Currently, HealthSync cannot manage scenarios where patients share the same name. 
+We plan to enhance this by allowing users to add patients with identical names, 
+providing a more robust and flexible patient management system.
+
+2. **Improved UI Text Wrapping:**
+HealthSync currently struggles with text wrapping on the UI, leading to obscured 
+labels for long user inputs. Our plan is to explicitly denote labels on individual UI 
+cards and enable inputs to stretch their containers, ensuring better visibility for 
+users, even with lengthy inputs.
+
+3. **Enhanced Edit Feature Feedback:**
+The current edit feature does not explicitly handle cases where no fields are 
+edited after a change. For instance, if a patient's phone number remains the same 
+after an edit operation, HealthSync doesn't provide a special message indicating that no 
+fields were edited. We plan to improve this feedback for a more informative user experience.
+
+4. **Standardized Empty Optional Fields:**
+HealthSync currently displays empty optional fields inconsistently in particular, for Appointment and Medical History.
+We intend to standardize the display of empty optional fields to be 'N/A' uniformly, 
+enhancing clarity and consistency in the user interface.
+
+5. **Improved Email Validation:** HealthSync's current email validation is not 
+stringent enough, accepting invalid email formats. We plan to implement more thorough 
+email validation to ensure only valid email addresses are accepted.
+
+6. **Consistent Capitalization of Patient IDs:**
+While IDs are case-insensitive, HealthSync does not enforce consistent capitalization 
+of patient IDs in the patient list. This is a cosmetic enhancement to maintain 
+uniformity in the application.
+
+7. **Case-Insensitive Find Feature for Appointments:** 
+The current Find feature for appointments is case-sensitive, potentially causing 
+inconvenience for users. We plan to enhance this feature to be case-insensitive, 
+ensuring a smoother and more user-friendly experience.
+
+8. **Improved Messaging for Empty Find Results:**
+When a Find command results in an empty set, the output message currently 
+reads '0 patients found.' We propose an enhancement to provide a clearer message 
+such as 'No patients found,' offering better clarity and user understanding.
+
