@@ -484,7 +484,7 @@ You can add an existing contact to an existing group.
 
 **Potential error(s):**
 - Incorrect format (e.g., no prefix, duplicate prefixes).
-- The contact you are trying to add is already a member of the group: `NAME is already in this group: GROUP_NAME`.
+- The contact you are trying to add is already a member of the group: `Alex Yeoh is already in this group: CS2103T`.
 
 
 ### Ungrouping a Contact `ungroup`
@@ -517,7 +517,7 @@ You can remove a contact from a group.
 
 **Potential error(s):**
 - Incorrect format (e.g., no prefix, duplicate prefixes).
-- The contact you are trying to remove is not a member of the group: `Bernice Yu is not in this group: CS2103T`.
+- The contact you are trying to remove is not a member of the group: `Charlotte Oliveiro is not in this group: CS2103T`.
 
 
 ## Commands to Manage Time
@@ -528,14 +528,11 @@ You can add time slots when your contacts are available.
 
 
 **Format:** `addtime n/NAME t/FREE_TIME`
-- Provide the full name of the contact using the `n/` prefix.
-- Provide the time slot of the contact using the `t/` prefix.
-- Time slot is with respect to the weekly schedule.
 
 <p></p>
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
   <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;"> :heavycheckmark: Acceptable values</h5>
-  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">    Name</code>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">    NAME</code>
      must be alphanumeric and cannot be blank.
   </p>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">FREE_TIME</code>
@@ -545,7 +542,7 @@ You can add time slots when your contacts are available.
 <p></p>
 <div style="border-left: 4px solid #d9534f; background-color: #FFD4D4; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
   <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">:exclaimation: Warning!</h5>
-  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">Name</code>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">NAME</code>
   ensure the contact exists in your contact list.</p>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">FREE_TIME</code>
   must not clash with existing time slot to the contact being added to.</p>
@@ -573,14 +570,11 @@ You can remove available time slots of your contacts.
 
 
 **Format:** `deletetime n/NAME t/FREE_TIME`
-- Provide the full name of the contact using the `n/` prefix.
-- Provide the time slot of the contact using the `t/` prefix.
-- Time slot is with respect to the weekly schedule.
 
 <p></p>
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
   <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;"> :heavycheckmark: Acceptable values</h5>
-  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">    Name</code>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">    NAME</code>
      must be alphanumeric and cannot be blank.
   </p>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">FREE_TIME</code>
@@ -590,7 +584,7 @@ You can remove available time slots of your contacts.
 <p></p>
 <div style="border-left: 4px solid #d9534f; background-color: #FFD4D4; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
   <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">:exclaimation: Warning!</h5>
-  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">Name</code>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">NAME</code>
   ensure the contact exists in your contact list.</p>
  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">FREE_TIME</code>
   if more than one time slot is added into the input, it cannot clash with one another.</p>
