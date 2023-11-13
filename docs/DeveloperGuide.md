@@ -476,7 +476,7 @@ There are multiple options to represent money values in the application within t
 The payments feature could be implemented as a single command, with a negative sign to specify whether the payment is a `pay` or `owe` command.
 
 * **Alternative 1 (current choice):** Use two separate `pay` and `owe` commands to represent positive and negative transactions.
- * Pros: Make the concept more straightforward for a human to understand; humans verbalize their thoughts by saying "I pay $X to contact Y" or "I owe $X to contact Y".
+  * Pros: Make the concept more straightforward for a human to understand; humans verbalize their thoughts by saying "I pay $X to contact Y" or "I owe $X to contact Y".
   * Cons: Requires users to remember two separate commands, and requires more code to implement and be maintained.
 * **Alternative 2:** Use a single command that takes in values with negative signs.
   * Pros: Only requires users to remember a single command, and less code maintenance required by maintainers.
