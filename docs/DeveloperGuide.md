@@ -346,6 +346,9 @@ The following sequence diagram shows how the gather emails by financial plan ope
 ### Expanded Find feature
 
 The enhanced find mechanism is facilitated by the `CombinedPredicate` and utilises the existing `FindCommand` structure.
+
+#### Implementation Overview
+
 Here's a sequence diagram that demonstrates how `FindCommand` works.
 
 ![FindCommandSequenceDiagram](images/FindCommandSequenceDiagram.png)
@@ -373,7 +376,7 @@ For now, we only allow for searching for `Name`, `FinancialPlan` and `Tag` field
 searched fields, but extending the feature to search in other fields is possible by creating the appropriate
 `Predicate` class and modifying the `FindCommandParser`.
 
-#### Design Considerations:
+#### Design Considerations
 
 **Aspect: How to implement find for multiple fields**
 * **Alternative 1 (current choice):** Use one unified command and format.
