@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INTEGER_OVERFLOW;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.END_DATE_DESC_EARLIER;
 import static seedu.address.logic.commands.CommandTestUtil.EVENT_DESC_SLEEP;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EVENT;

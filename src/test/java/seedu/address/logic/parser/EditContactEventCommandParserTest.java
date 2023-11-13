@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INTEGER_OVERFLOW;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_START_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
