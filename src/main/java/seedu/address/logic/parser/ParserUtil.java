@@ -186,7 +186,7 @@ public class ParserUtil {
         try {
             LocalDateTime appointmentDate = parseAppointmentDate(appointmentDateString);
             return new Appointment(trimmedAppointmentName, appointmentDate);
-        } catch (DateTimeParseException e) {
+        } catch (ParseException e) {
             throw new ParseException(Appointment.MESSAGE_INVALID_DATE);
         }
     }
@@ -196,15 +196,16 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code date} is invalid.
      */
-    public static LocalDateTime parseAppointmentDate(String appointmentDate) throws ParseException {
-        String date = appointmentDate.split(" ")[0];
+    public static LocalDateTime parseAppointmentDate(String appointmentDateTime) throws ParseException {
+        String date = appointmentDateTime.split(" ")[0];
 
         try {
             YearMonth yearMonth = YearMonth.parse(date, Appointment.DATE_FORMATTER);
             if (!isValidDay(yearMonth, date)) {
                 throw new ParseException(Appointment.MESSAGE_INVALID_DATE);
             }
-            return Appointment.parseAppointmentDate(appointmentDate);
+
+            return Appointment.parseAppointmentDate(appointmentDateTime);
         } catch (DateTimeParseException e) {
             throw new ParseException(Appointment.MESSAGE_INVALID_DATE);
         }
