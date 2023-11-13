@@ -202,9 +202,9 @@ Data visualisation of student's class information is automatically generated in 
 
 **Class Manager 2023's** data is saved as a JSON file at `[JAR file location]/data/classmanager.json`. Advanced users are welcome to update data directly by editing that data file. You can refer to a valid sample of the JSON file in the image below. 
 
-The size of the `attendanceTracker` and `classParticipationTracker` arrays must match the configured tutorial count. Similarly, the size of the `assignmentTracker` array must match the configured assignment count. **Class Manager 2023** is configured to have 13 tutorials and 6 assignments by default. Before loading the edited data file, you can configure **Class Manager 2023** using the `config` command. 
-
 <img alt="sample_contents" src="images/sample-contents.png" width="750"> <br><br>
+
+The size of the `attendanceTracker` and `classParticipationTracker` arrays must match the configured tutorial count. Similarly, the size of the `assignmentTracker` array must match the configured assignment count. **Class Manager 2023** is configured to have 13 tutorials and 6 assignments by default. Before loading the edited data file, you can configure **Class Manager 2023** using the `config` command.
 
 <box type="warning" seamless>
 
