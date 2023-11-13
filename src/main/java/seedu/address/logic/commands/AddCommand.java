@@ -29,17 +29,17 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_TELEGRAM + "TELEGRAM "
+            + "[" + PREFIX_HOUR + "HOUR] "
             + "[" + PREFIX_TAG + "TAG]... "
-            + "[" + PREFIX_COURSE + "COURSE]... "
-            + PREFIX_HOUR + "HOUR \n"
+            + "[" + PREFIX_COURSE + "COURSE]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_TELEGRAM + "@johnd "
+            + PREFIX_HOUR + "10 "
             + PREFIX_TAG + "fulltime "
-            + PREFIX_COURSE + "CS1231S "
-            + PREFIX_HOUR + "10";
+            + PREFIX_COURSE + "CS1231S";
 
     public static final String MESSAGE_SUCCESS = "New teaching assistant added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This teaching assistant already exists in the address book";
