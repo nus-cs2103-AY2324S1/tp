@@ -19,7 +19,7 @@ Class Email
 Class Name
 Class Phone
 Class Tag
-Class AlternatePlatform
+Class AlternateContact
 
 Class I #FFFFFF
 }
@@ -43,7 +43,7 @@ Contact *--> "1" Phone
 Contact *--> "1" Email
 Contact *--> "0..1" Note
 Contact *--> "*" Tag
-Contact *--> "*" AlternatePlatform
+Contact *--> "*" AlternateContact
 
 Contact -[hidden]up--> I
 UniqueContactList -[hidden]right-> I
