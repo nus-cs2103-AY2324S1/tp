@@ -152,7 +152,7 @@ The following fields are used for commands:
 | Name          | n/     | Must only contain alphanumeric, space, dot, slash, <br/> hyphen and single quote characters. Case insensitive | `Roy s//o Balakrishnan`, `Connell O'Brien` |
 | Phone number  | p/     | Must be numeric and be at least 3 digits long                                                                 | `999`, `68741616`                          |
 | Email address | e/     | Must be a valid email address                                                                                 | `roy@gmail.com`, `Alex123@outlook.com`     |
-| Tags          | t/     | Optional for use                                                                                              | `Diabetic`, `Age 72`                       |
+| Tags          | t/     | Must contain alphanumeric characters only (no spaces)                                                         | `Diabetic`, `Elderly`                      |
 | Address       | a/     | Must not be empty                                                                                             | `Sentosa cove`, `Pulau NTU`                |
 | Status        | s/     | Must be a valid Status (Refer to [Status](#status))                                                           | `PENDIND`, `Cc`                            |
 | Medicine      | m/     | Must not be empty and is not case sensitive.                                                                  | `metformin`, `panadol`                     |
@@ -280,7 +280,7 @@ Jump to [TOC](#table-of-contents-toc)
 
 Adds a person to PharmHub.
 
-Format: `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] [no/ALLERGY]…​`
+Format: `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [no/ALLERGY]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags or allergies (including 0)
@@ -500,7 +500,12 @@ Examples:
 
 Shows the order in the info panel.
 
-Format: `viewo`
+Format: `viewo ORDER_NUMBER`
+
+Examples: `viewo 123`
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Unlike `viewp`, `viewo` expects an `Order Number` instead of an `Index` </div>
+
 
 ### Updating the status of an order : `updates`
 
