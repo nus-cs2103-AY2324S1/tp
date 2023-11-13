@@ -131,7 +131,7 @@ Throughout this guide, you will see different text styles that are used to highl
 
 3. Copy `CoordiMate.jar` to the folder you want to use as the home folder for CoordiMate. This folder will be used by CoordiMate to store its data.
 
-4. Open a command terminal. 
+4. Open a command terminal.
 
 5. Change the directory to the folder where you have placed `CoordiMate.jar`. If it is in your `Downloads` folder, type the command below and press `Enter`:
     ```
@@ -488,7 +488,7 @@ To reset the persons view, simply run the <code>listPerson</code> command to lis
 
  Error message | How to resolve
 ---------------|---------------
-`Invalid command format!…` | Ensure that a keyword is provided.
+`Invalid command format! …` | Ensure that a keyword is provided.
 {: .errors-table}
 
 <div style="page-break-after: always;"></div>
@@ -755,7 +755,7 @@ To reset the tasks view, simply run the <code>listTask</code> command to list al
 
  Error message | How to resolve
 ---------------|---------------
-`Invalid command format!…` | Ensure that a keyword is provided.
+`Invalid command format! …` | Ensure that a keyword is provided.
 
 <div style="page-break-after: always;"></div>
 
