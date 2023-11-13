@@ -806,13 +806,6 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `add n/Betsy Crowe p/92939402 e/betsycrowe@example.com a/Newgate Prison sb/Secondary 3 Physics d/mon b/1900 end/1930 pr/35.00`<br>
        Expected: The error message _This tutee already exists_ should be displayed in the status message.
 
-
-3. Adding a tutee that has clashing schedules.
-   1. Prerequisites: Completing the first test case for [Adding a tutee](#adding-a-tutee)
-   2. Test case: `add n/Jason Antonius p/12345678 e/test@gmail.com a/PGPR Residences sb/CS1101S d/mon b/1900 end/1930 pr/20` <br>
-      Expected: The error message _This date and time clashes with an existing schedule_ should be displayed in the status message.
- 
-
 ### Deleting a tutee
 
 1. Deleting a tutee while all tutees are being shown
@@ -820,13 +813,13 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all tutees using the `list` command. Multiple tutees in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First tutee is deleted from the list. Details of the deleted tutee shown in the status message.
+      Expected: First tutee is deleted from the list. Details of the deleted tutee shown in the status message. Timestamp in the status bar is updated.
+=======
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+3. Adding a tutee that has clashing schedules.
+   1. Prerequisites: Completing the first test case for [Adding a tutee](#adding-a-tutee)
+   2. Test case: `add n/Jason Antonius p/12345678 e/test@gmail.com a/PGPR Residences sb/CS1101S d/mon b/1900 end/1930 pr/20` <br>
+      Expected: The error message _This date and time clashes with an existing schedule_ should be displayed in the status message.
 
 ### Editing a tutee
 
@@ -870,6 +863,44 @@ testers are expected to do more *exploratory* testing.
          _Free from 21:00 - 21:30_ <br>
          should be displayed in the status message.
 
+### Marking a tutee as paid
+
+1. Marking a tutee as paid while all tutees are being shown
+
+    1. Prerequisites: List all tutees using the `list` command. Multiple tutees in the list.
+
+    1. Test case: `paid 2`<br>
+       Expected: Second tutee is from the list is marked as paid. The message of marking person paid success will be shown. Timestamp in the status bar is updated.
+
+    1. Test case: `delete 0`<br>
+       Expected: No tutee is marked as paid. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect paid commands to try: `paid`, `paid x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Marking a tutee as not paid
+
+1. Marking a tutee as not paid while all tutees are being shown
+
+    1. Prerequisites: List all tutees using the `list` command. Multiple tutees in the list.
+
+    1. Test case: `unpaid 3`<br>
+       Expected: Second tutee is from the list is marked as not paid. The message of marking person not paid success will be shown. Timestamp in the status bar is updated.
+
+    1. Test case: `unpaid 0`<br>
+       Expected: No tutee is marked as not paid. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect unpaid commands to try: `unpaid`, `unpaid x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Listing all unpaid tutees
+
+1. All tutees who haven't paid will be shown
+
+    1. There are tutees in the list.
+
+    1. Test case: `list unpaid`<br>
+       Expected: All tutees who haven't paid will be shown. The message of how many tutees are unpaid will be shown. Timestamp in the status bar is updated.
 
 ### Undo command
 
