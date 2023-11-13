@@ -15,10 +15,10 @@ Given below are my contributions to the project.
 
 * **New feature**: Added the ability to gather email of clients by Financial plan and Tag.
 
-    * What it does: It takes a prompt as input and retrieves emails of clients where the prompt matches a substring of their Financial Plan or Tag names. 
-    * Justification: This feature significantly improves the product's efficiency by allowing financial advisors to consolidate emails effectively. It simplifies communication, enabling advisors to update multiple clients about changes in their financial plans or schedule crucial meetings promptly. 
+    * What it does: It takes a prompt as input and retrieves emails of clients where the prompt matches a substring of their Financial Plan or Tag names.
+    * Justification: This feature significantly improves the product's efficiency by allowing financial advisors to consolidate emails effectively. It simplifies communication, enabling advisors to update multiple clients about changes in their financial plans or schedule crucial meetings promptly.
     * Highlights:
-      * Provides a foundation for future email gathering implementations, paving the way for potential expansions into other fields. 
+      * Provides a foundation for future email gathering implementations, paving the way for potential expansions into other fields.
       * Required a deep understanding of interfaces and integration with existing codebase.
     * Pull request [#72](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/72)
 

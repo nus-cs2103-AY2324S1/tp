@@ -15,10 +15,10 @@ better than traditional GUI apps.
 ## Purpose of this guide
 This guide provides you with comprehensive instructions on utilizing UNOFAS. It also serves as a mode of referral to
 help learn the various commands required to effectively learn and be able to integrate the application to your daily
-use as financial advisors. 
+use as financial advisors.
 
 To help you make the most of this resource, we would recommend that you take some time to read through the entire guide.
-You can then utilize the Table of Contents provided below and click on the relevant links to easily navigate through 
+You can then utilize the Table of Contents provided below and click on the relevant links to easily navigate through
 the guide and access the information you might need or want to take another look at. We hope that this guide serves you well
 to help make managing your clients a more pleasant experience.
 
@@ -118,7 +118,7 @@ to help make managing your clients a more pleasant experience.
 ![appointmentCardUi](images/appointmentCardUi.png)
 
 * Shows the appointment name, client allocated to the appointment and the appointment date and time.
-* The appointment cards displayed will only include appointments of clients displayed in the contact list. 
+* The appointment cards displayed will only include appointments of clients displayed in the contact list.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -178,8 +178,8 @@ value, is not an acceptable value and will result in a warning.
 | -      | KEYWORD               | `name` or `appointment`                                                                                                    |
 
 <div markdown="span" class="alert alert-primary">:information_source:
-**Do note** If the ADDRESS includes any recognized prefixes (leading space + prefix), users should be careful. 
-For instance, if you input `a/Blk 285 n/Clementi` for the ADDRESS argument, it will trigger the identification of the prefix `n/` in the input and result in an error message
+**Do note** If the ADDRESS includes any recognized prefixes (leading space + prefix), users should be careful.
+For instance, if you input `a/Blk 285 n/Clementi` for the ADDRESS argument, it will trigger the identification of the prefix `n/` in the input and result in an error message.
 </div>
 
 -----------------------
@@ -236,7 +236,7 @@ Tags: [80yo]`
 ------------------
 ### Listing all client-contacts : `list`
 
-Displays a list of all the clients and their contact details that are currently stored in the contact book. 
+Displays a list of all the clients and their contact details that are currently stored in the contact book.
 
 Format: `list`
 
@@ -318,7 +318,7 @@ Gathers all the emails of clients with a desired financial plan or tag.
 
 Format: `gather fp/FINANCIAL PLAN` or `gather t/TAG`
 
-* Generates a list of emails separated by semicolons, making it convenient for copying and pasting into the recipient input of an email application. 
+* Generates a list of emails separated by semicolons, making it convenient for copying and pasting into the recipient input of an email application.
   This function currently known to be compatible with gmail and outlook but might not work for all email services.
 * Either **Financial Plan or Tag** can be searched at once, but **not both**.
 * The search is case-insensitive e.g. `financial` will match `FINANCIAL` or `Financial`.
@@ -371,7 +371,7 @@ Format: `schedule INDEX ap/APPOINTMENT_NAME d/APPOINTMENT_DATE_TIME`
 
 - Schedules appointment with the client contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list.
 - **Both appointment name and date-time** must be provided.
-- Upon successful execution of the command, the scheduled appointment details will be updated in the **Contact list**. The appointment details will also be updated in the **Appointment list**. 
+- Upon successful execution of the command, the scheduled appointment details will be updated in the **Contact list**. The appointment details will also be updated in the **Appointment list**.
 The contact list displayed will be reset to display all clients in the Contact Book.
 
 <div markdown="span" class="alert alert-primary">:information_source:
@@ -387,13 +387,13 @@ Example:
 
 Successful Output: \
 For overridden appointment: `Appointment updated!`\
-For new appointment: `New appointment added: David; Phone: 93234567; Email: davidmiller@gmail.com; Address: Bishan Blk 999 #08-15 569874; Next-of-kin Name: Olivia; Next-of-kin Phone: 56981234; Appointment: Annual review of financial goals, 20-11-2023 15:00; Financial Plans: [Financial Plan A][Financial Plan B]; Tags:` 
+For new appointment: `New appointment added: David; Phone: 93234567; Email: davidmiller@gmail.com; Address: Bishan Blk 999 #08-15 569874; Next-of-kin Name: Olivia; Next-of-kin Phone: 56981234; Appointment: Annual review of financial goals, 20-11-2023 15:00; Financial Plans: [Financial Plan A][Financial Plan B]; Tags:`
 
 ![result for`schedule 1 ap/Annual review of financial goals d/20-11-2023 15:00'](images/scheduleUi.png)
 
 <div markdown="span" class="alert alert-primary">:information_source:
 Upon triggering the overriding prompt, until confirmation or cancellation of command on the prompt, usage of the application
-is temporarily halted (including trying to exit the program). 
+is temporarily halted (including trying to exit the program).
 </div>
 
 ----------
@@ -443,7 +443,7 @@ Example:
 
 <div markdown="span" class="alert alert-primary">:information_source:
 Upon entering the `clear` command, until confirmation or cancellation of command on the prompt, usage of the application
-is temporarily halted (including trying to exit the program). 
+is temporarily halted (including trying to exit the program).
 </div>
 
 ----------------------------
@@ -488,7 +488,7 @@ There is no need to save manually.
 UNOFAS data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning"> :exclamation: **Caution:**
-If your changes to the data file makes its format invalid, UNOFAS will discard all data and start with an empty data file at the next run. 
+If your changes to the data file makes its format invalid, UNOFAS will discard all data and start with an empty data file at the next run.
 Certain edits to the file may also cause unexpected behaviours. Please only edit the file if you are confident that it is correct, and it is recommended to take a backup of the file before editing it.
 </div>
 
