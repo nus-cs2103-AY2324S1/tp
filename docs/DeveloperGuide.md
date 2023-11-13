@@ -251,19 +251,23 @@ Below is a sequence diagram that summarizes how a user creates a new group:
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Group Remark Feature
+### Adding a Group Remark
 
 #### Implementation
 
-The proposed group remark feature is facilitated by the `Group` class. It includes a `Group Remark` field and implements the `Group#setGroupRemark()` operation. This feature is exposed in the `Model` interface as `Model#addGroupRemark()`.
+The Group Remark mechanism is facilitated by the `Group Remark` class, involving other classes like `Group`. It implements the following operation:
+
+* `Group#setGroupRemark()` — Sets the group's remark.
+
+This operation is exposed in the `Model` interface as `Model#addGroupRemark()`.
 
 Here's an example usage scenario and how the group remark mechanism behaves at each step:
 
-**Step 1.** The user creates a group called `CS2103T`. The `Group` is initialized with an empty `groupRemark`.
+**Step 1.** The user creates a group called "CS2103T". The group is initialized with an empty `groupRemark`.
 
-**Step 2.** The user executes the `remark g/CS2103T r/Quiz tomorrow` command to add the remark "Quiz tomorrow" to the `CS2103T` group. The `GroupRemarkCommandParser` extracts the group and remark from the input and creates a `GroupRemarkCommand`, which calls `Model#addGroupRemark(groupName, groupRemark)`. The model retrieves the existing `CS2103T` group from the database and calls the group's `Group#setRemark(groupRemark)`, adding the `groupRemark` to the group.
+**Step 2.** The user executes the `remark g/CS2103T r/Quiz tomorrow` command to add the remark "Quiz tomorrow" to the "CS2103T" group. The `GroupRemarkCommandParser` extracts the group and remark from the input and creates a `GroupRemarkCommand`, which calls `Model#addGroupRemark(groupName, groupRemark)`. The model retrieves the existing "CS2103T" group from the database and calls the group's `Group#setGroupRemark(groupRemark)`, setting the "Quiz tomorrow" as the `groupRemark` of the group.
 
-**Note:** If the user wants to modify the group remark, they can execute the same command with the new remark. The existing remark will be deleted and overwritten, and the new remark is stored in the group.
+**Note:** If the user wants to modify the group remark, they can execute the same command with the new remark. The existing remark will be overwritten, and the new remark is stored in the group.
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
@@ -277,14 +281,17 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Design Considerations
 
-**Aspects:**
+**Aspects: How to change the group remark**
 
-- **Alternative 1 (current choice):** Overrides original remark
-    - Pros: Easy to implement.
-    - Cons: May be troublesome if the user wants to keep contents from the original remark.
-- **Alternative 2:** Edits original remark
-    - Pros: Easy to add more information.
-    - Cons: Could be confusing to edit if there are many changes or remark is too long.
+- **Alternative 1 (current choice):** Override the original remark
+  - Pros: Easy to implement.
+  - Cons: May be troublesome if the user wants to keep contents from the original remark.
+
+- **Alternative 2:** Edit the original remark
+  - Pros: Easy to add more information.
+  - Cons: May be confusing to edit if there are many changes or remark is too long.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Delete Time Feature
 
@@ -425,6 +432,150 @@ The following activity diagram summarizes what happens when a user executes a li
 **Note:** The lifeline for `ListGroupCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Adding Time to a Person or Group
+
+#### Implementation
+
+The Add Time to person/group mechanisms are facilitated by the `TimeInterval` class, involving other classes like `Person` and `Group`. It implements the following operations:
+
+* `Person#addFreeTime()` — Adds the inputted time intervals to the person.
+* `Group#addTime()` — Adds the inputted time intervals to the group.
+
+These operations are exposed in the `Model` interface as `Model#addTimeToPerson()`, `Model#addTimeToGroup()` respectively.
+
+The following activity diagram summarizes what happens when a user executes an add time command:
+
+<puml src="diagrams/AddTimeActivityDiagram.puml" alt="AddTimeActivity" />
+
+### Adding Time to a Person
+
+Given below is an example usage scenario and how the Add Time to Person mechanism behaves at each step.
+
+Step 1. The user executes `addtime n/Alex Yeoh t/mon 1300 - mon 1400 t/tue 1300 - tue 1400` command to add the free time intervals of Monday 1 pm to 2 pm and Tuesday 1 pm to 2 pm to a person named "Alex Yeoh" in the contact list. The `AddTimeCommandParser` will be called to parse the inputs and check if any of the inputted times clash with each other. It will then call the `AddTimeCommand`.
+
+**Note:** Since multiple inputs are allowed, an array list of time intervals is passed around, each of which is to be added.
+
+Step 2. `AddTimeCommand` is executed, in which `Model#addTimeToPerson()` is called.
+
+<box type="info" seamless>
+
+**Note:** If no such person named "Alex Yeoh" exists, a `CommandException` will be thrown.
+
+</box>
+
+Step 3. `Model#addTimeToPerson()` will also call `Person#addFreeTime()` which will add all times stored in the array list to the person's list of free times, given that none of the times clash with the person's existing free time intervals. If clashes do occur, the user will be notified of the problematic time intervals while the problem-free intervals will be added.
+
+The following sequence diagram shows how the Add Time to Person operation works:
+
+<puml src="diagrams/AddTimeSequenceDiagram.puml" alt="AddTimeSequence" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `AddTimeCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+### Adding Time to a Group
+
+The Add Time to Group command mechanism behaves the same as the Add Time to Person command above, except it uses the `Group` class instead of the `Person` class.
+
+#### Design Considerations
+
+**Aspect: How to handle two similar but different commands (add meeting time to group and add free time to person)**
+
+* **Alternative 1 (current choice):** Use different command words for both commands
+  * Pros: Less confusing as the 2 commands add different types of times.
+  * Cons: Users have to remember more command words which may take more time to get used to.
+
+* **Alternative 2:** Use the same command word
+  * Pros: Reduces the amount of command words that users have to remember.
+  * Cons: Users may get confused because the 2 commands do not add the same types of times.
+
+**Aspect: How to handle time clashes**
+
+* **Alternative 1 (current choice):** Add all non-clashing time intervals
+  * Pros: More convenient as users will not need to retype the entire command if there is a clash.
+  * Cons: May no longer want to add certain non-clashing inputs after encountering this clash.
+
+* **Alternative 2:** Reject all time intervals
+  * Pros: Allows users to (heavily) edit their inputted time intervals accordingly to resolve clashes.
+  * Cons: May be troublesome to retype the entire command, especially if it is very long.
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Listing Time for a Person or Group
+
+#### Implementation
+
+The List Time for person/group mechanisms are facilitated by the `TimeInterval` class, involving other classes like `Person` and `Group`. It implements the following operations:
+
+* `Person#getTime()` — Shows the person's time intervals.
+* `Group#getTime()` — Shows the group's time intervals.
+
+These operations are exposed in the `Model` interface as `Model#getTimeFromPerson()`, `Model#getTimeFromGroup()` respectively.
+
+Both `ListTimePersonCommand` and `ListTimeGroupCommand` implement an abstract class `ListTimeCommand`, which helps to encapsulate the similarities between these two commands.
+
+Since both List Time Person and List Time Group commands utilise the same command word `listtime`, the `ListTimeCommandParser` will create either a `ListTimePersonCommand` or  `ListTimeGroupCommand` and return it as a `ListTimeCommand` after parsing the user input.
+
+The following activity diagram summarizes what happens when a user executes an add time command:
+
+<puml src="diagrams/ListTimeActivityDiagram.puml" alt="ListTimeActivity" />
+
+### Listing Time from a Person
+
+Given below is an example usage scenario and how the List Time from Person mechanism behaves at each step.
+
+Step 1. The user executes `listtime n/Alex Yeoh` command to list the free time intervals of a person named "Alex Yeoh" in the contact list. The `ListTimeCommandParser` will be called to parse the inputs. It will then call the `ListTimePersonCommand`.
+
+Step 2. `ListTimePersonCommand` is executed, in which `Model#getTimeFromPerson()` is called.
+
+<box type="info" seamless>
+
+**Note:** If no such person named "Alex Yeoh" exists, a `CommandException` will be thrown.
+
+</box>
+
+Step 3. `Model#getTimeFromPerson()` will also call `Person#getTime()` which will parse all times stored in the array list into an easy-to-read chunk using a StringBuilder, and show it in the output box.
+
+The following sequence diagram shows how the List Time from Person operation works:
+
+<puml src="diagrams/ListTimePersonSequenceDiagram.puml" alt="ListTimePersonSequence" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `ListTimePersonCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+### Listing Time from a Group
+
+The List Time from Group command mechanism behaves the same as the List Time from Person command above, except it uses the `Group` class instead of the `Person` class.
+
+#### Design Considerations
+
+**Aspect: How to handle two similar but different commands (add meeting time to group and add free time to person)**
+
+* **Alternative 1 (current choice):** Use different command words for both commands
+  * Pros: Less confusing as the 2 commands add different types of times.
+  * Cons: Users have to remember more command words which may take more time to get used to.
+
+* **Alternative 2:** Use the same command word
+  * Pros: Reduces the amount of command words that users have to remember.
+  * Cons: Users may get confused because the 2 commands do not add the same types of times.
+
+**Aspect: Display format**
+
+* **Alternative 1 (current choice):** Print raw list of times
+  * Pros: Allows users to copy and paste the intervals shown as they are in the correct format.
+  * Cons: May be too convoluted due to repeated information caused by reiterating the day of the time interval.
+
+* **Alternative 2:** Organise time intervals by day.
+  * Pros: Allows users to better see the intervals in each day.
+  * Cons: May cause inconvenience to users when they need to copy and paste time chunks should they need it again.
 
 --------------------------------------------------------------------------------------------------------------------
 
