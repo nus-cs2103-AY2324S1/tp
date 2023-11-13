@@ -9,9 +9,15 @@ pageNav: 3
 ## **Overview**
 
 LoveBook, is a **dating-focused** application, revolving around providing **online daters** with a **convenient**
-and **enjoyable** tool to enhance their dating experiences. Featuring **user preferences management**, **date organization**,
-**customizable filtering options** and **best match algorithms**, LoveBook enhances the **efficiency** and **effectiveness** of your
+and **enjoyable** tool to enhance their dating experiences. Featuring **user preferences management**, **date
+organization**,
+**customizable filtering options** and **best match algorithms**, LoveBook enhances the **efficiency** and *
+*effectiveness** of your
 online dating journey.
+
+[//]: # "<!-- * Table of Contents -->"
+
+[//]: # "<page-nav-print />"
 
 ## **Acknowledgements**
 
@@ -27,12 +33,12 @@ online dating journey.
 - [**Table of Contents**](#table-of-contents)
 - [**Setting up, getting started**](#setting-up-getting-started)
 - [**Design**](#design)
-  - [Architecture](#architecture)
-  - [UI component](#ui-component)
-  - [Logic component](#logic-component)
-  - [Model component](#model-component)
-  - [Storage component](#storage-component)
-  - [Common classes](#common-classes)
+    - [Architecture](#architecture)
+    - [UI component](#ui-component)
+    - [Logic component](#logic-component)
+    - [Model component](#model-component)
+    - [Storage component](#storage-component)
+    - [Common classes](#common-classes)
 - [**Implementation**](#implementation)
   - [Add Dates](#add-dates)
   - [List Dates](#list-dates)
@@ -45,11 +51,11 @@ online dating journey.
   - [Unstar dates](#unstar-dates)
 - [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
 - [**Appendix: Requirements**](#appendix-requirements)
-  - [Product scope](#product-scope)
-  - [User stories](#user-stories)
-  - [Use cases](#use-cases)
-  - [Non-Functional Requirements](#non-functional-requirements)
-  - [Glossary](#glossary)
+    - [Product scope](#product-scope)
+    - [User stories](#user-stories)
+    - [Use cases](#use-cases)
+    - [Non-Functional Requirements](#non-functional-requirements)
+    - [Glossary](#glossary)
 - [**Appendix: Instructions for Manual Testing**](#appendix-instructions-for-manual-testing)
   - [Launch](#launch)
   - [Viewing Help](#viewing-help)
@@ -163,7 +169,8 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/logic/Logic.java)
+**API
+** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -207,7 +214,8 @@ How the parsing works:
 
 ### Model component
 
-**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/model/Model.java)
+**API
+** : [`Model.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="550" />
 
@@ -228,7 +236,8 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/storage/Storage.java)
+**API
+** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -303,37 +312,37 @@ The activity diagram notation of the above steps is shown below. <br>
 
 - **Alternative 1 (current choice):** Don't allow dates with the same name to be added.
 
-  - Pros: Easy to implement (since all you have to do is find the name in the existing list of dates)
-  - Cons: Not very user-friendly (since the user may be dating multiple people with the same name)
+    - Pros: Easy to implement (since all you have to do is find the name in the existing list of dates)
+    - Cons: Not very user-friendly (since the user may be dating multiple people with the same name)
 
 - **Alternative 2:** Allow dates with the same name to be added.
-  - Pros: More user-friendly (since user has more flexibility in adding dates)
-  - Cons: Slightly harder to implement (equality check will now take into account other details like age, gender,
-    etc.)
+    - Pros: More user-friendly (since user has more flexibility in adding dates)
+    - Cons: Slightly harder to implement (equality check will now take into account other details like age, gender,
+      etc.)
 
 **Aspect: Allowing users to add dates without specifying all fields**
 
 - **Alternative 1 (current choice):** Require users to specify all fields.
 
-  - Pros: Easy to implement (since all you have to do is check if all fields are present)
-  - Cons: Not very user-friendly (since the user may not know all the details of the date)
+    - Pros: Easy to implement (since all you have to do is check if all fields are present)
+    - Cons: Not very user-friendly (since the user may not know all the details of the date)
 
 - **Alternative 2:** Allow users to specify only some fields, and adding placeholder inputs to the remaining fields.
-  - Pros: More user-friendly (since user has more flexibility in adding dates)
-  - Cons: Slightly harder to implement (since you have to check which fields are present). Will also affect the
-    matching algorithm since these placeholder inputs have to be omitted.
+    - Pros: More user-friendly (since user has more flexibility in adding dates)
+    - Cons: Slightly harder to implement (since you have to check which fields are present). Will also affect the
+      matching algorithm since these placeholder inputs have to be omitted.
 
 **Aspect: Adding dates to existing date list**
 
 - **Alternative 1 (current choice):** Sorts the list on every addition, maintaining a lexically sorted list.
 
-  - Pros: Easier to implement (since all you have to do is sort the list by name on every addition) and more visually
-    appealing (since the user can easily see the list sorted by name)
-  - Cons: Not very user-friendly (since the user may want to see the date being added to the end of the list)
+    - Pros: Easier to implement (since all you have to do is sort the list by name on every addition) and more visually
+      appealing (since the user can easily see the list sorted by name)
+    - Cons: Not very user-friendly (since the user may want to see the date being added to the end of the list)
 
 - **Alternative 2:** Adds the date to the end of the list.
-  - Pros: More user-friendly (since user can easily see the date being added to the end of the list)
-  - Cons: Not very visually appealing (since the list appears to be unsorted and non uniform)
+    - Pros: More user-friendly (since user can easily see the date being added to the end of the list)
+    - Cons: Not very visually appealing (since the list appears to be unsorted and non uniform)
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
@@ -357,15 +366,15 @@ The sequence diagram notation of the above steps is shown below. <br>
 
 - **Alternative 1 (current choice):** Sorts the list of dates by name.
 
-  - Pros: Easier to implement (since all you have to do is sort the list by name on every addition) and more visually
-    appealing (since the user can easily see the list sorted by name)
-  - Cons: Not very user-friendly (since the user may want to see the date being added to the end of the list) and less
-    efficient (since you have to sort the list on every command).
+    - Pros: Easier to implement (since all you have to do is sort the list by name on every addition) and more visually
+      appealing (since the user can easily see the list sorted by name)
+    - Cons: Not very user-friendly (since the user may want to see the date being added to the end of the list) and less
+      efficient (since you have to sort the list on every command).
 
 - **Alternative 2:** List the dates in the order they were added.
-  - Pros: More user-friendly (since user can easily see the date being added to the end of the list). More efficient (
-    since you don't have to sort the list on every list command)
-  - Cons: Not very visually appealing (since the list appears to be unsorted and non uniform)
+    - Pros: More user-friendly (since user can easily see the date being added to the end of the list). More efficient (
+      since you don't have to sort the list on every list command)
+    - Cons: Not very visually appealing (since the list appears to be unsorted and non uniform)
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
@@ -376,10 +385,12 @@ object as a parameter. The `Predicate` object is used to filter the `Date` objec
 The `FilterCommand` class then returns a `CommandResult` object that contains the filtered `Date` objects.
 
 1. The user specifies a metric (eg. name/) and a valid value (eg. Emily) to filter by.
-2. If the metric is invalid or the value is not valid, the user will be prompted to enter the command correctly via an error message.
+2. If the metric is invalid or the value is not valid, the user will be prompted to enter the command correctly via an
+   error message.
 3. The value will then be cross-referenced with the current list of dates in the `Model` component.
 4. The model then filters the date list for dates that contain the value in the specified metric.
-5. If step 1 - 4 are successfully completed, the displayed date list in the GUI will be updated to only display dates that match the filter criteria.
+5. If step 1 - 4 are successfully completed, the displayed date list in the GUI will be updated to only display dates
+   that match the filter criteria.
 
 The _Activity_ diagram summarises what happens after the user enters a filter command.
 
@@ -395,9 +406,11 @@ the command `filter name/John`
 ### Sort dates
 
 1. The user specifies a metric (eg. name/) and a sorting order (increasing/ decreasing) to sort by.
-2. If the metric is invalid or the sorting order is invalid, the user will be prompted to enter the command correctly via an error message.
+2. If the metric is invalid or the sorting order is invalid, the user will be prompted to enter the command correctly
+   via an error message.
 3. The model date will then sort the dates by the specified metric and order, via the use of `Comparator`.
-4. If the step 1 - 3 are successfully completed, the displayed list of dates will be sorted by the specified metric and order.
+4. If the step 1 - 3 are successfully completed, the displayed list of dates will be sorted by the specified metric and
+   order.
 
 The _Activity_ diagram summarises what happens after the user enters a sort command.
 
@@ -414,8 +427,10 @@ the command `sort name/increasing`.
 
 1. The user will first key in blindDate which is the command word for this feature.
 2. If the list of dates is empty, the user will be prompted to add a date via an error message.
-3. The model class will then generate a random number, via a random number generator, which will be the index of the date to be returned.
-4. A predicate will be created to filter the current list of dates in the model class and returns true only if the date equals to the date at the index generated in step 2.
+3. The model class will then generate a random number, via a random number generator, which will be the index of the
+   date to be returned.
+4. A predicate will be created to filter the current list of dates in the model class and returns true only if the date
+   equals to the date at the index generated in step 2.
 5. If step 1 - 3 are successfully completed, The list of dates will be updated to display the randomly selected date.
 
 The _Activity_ diagram summarises what happens after the user enters a sort command.
@@ -473,6 +488,7 @@ the command `bestMatch`
    validation checks pass.
 6. The `SetPrefCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function
    which then updates the date preferences in the `Model` component.
+7. (For simplicity sake, this is kept at high level; Refer to the sequence diagram below for more details)
 
 The `edit` feature is also implemented in a similar manner.
 
@@ -656,7 +672,7 @@ perfect match.
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​   | I want to …​                                                                                    | So that I can…​                                                         |
-| -------- | --------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+|----------|-----------|-------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
 | `* *`    | new user  | be greeted with a welcome message when i launch the app                                         | feel welcome                                                            |
 | `* *`    | new user  | be able to get help when i'm stuck                                                              | better navigate through the application                                 |
 | `* * *`  | dater     | be able to key my preferred height in my preferences                                            | get recommended a suitable date based on our height compatibility       |
@@ -811,6 +827,11 @@ Use case ends. <br>
     2c1. LoveBook displays an error message.
     2c2. Use case ends.
 
+2d. There are multiple values for a single field
+
+- LoveBook displays a message indicating that there are multiple values for a single field.
+- Use case ends.
+
 #### Use Case: Show Preferences
 
 **Main Success Scenario (MSS):**
@@ -941,7 +962,7 @@ Use case ends. <br>
 ### Glossary
 
 | Term          | Definition                                                                                                        |
-| ------------- | ----------------------------------------------------------------------------------------------------------------- |
+|---------------|-------------------------------------------------------------------------------------------------------------------|
 | Date          | A person that the user is interested in and is currently seeing.                                                  |
 | Metric        | A certain characteristic of a date. (e.g. Gender, Height)                                                         |
 | Command       | Text that the user types into the application to perform an action.                                               |
@@ -966,94 +987,117 @@ testers are expected to do more _exploratory_ testing.
 
 ### Launch
 
-1. Initial Launch
-   - Download the jar file and copy it into an empty folder.
-   - Double-click the jar file.
-     - Expected output: The program runs and shows the GUI. Note that the window size may not be optimum.
+1. Initial Launch.
+2. Download the jar file and copy it into an empty folder.
+3. Double-click the jar file.
+4. Expected output: The program runs and shows the GUI. Note that the window size may not be optimum.
 
 ### Viewing Help
 
-1. Opening the Help window
-   - Type the following help command into the text field.<br>
-     `help`
-   - Press enter.
-   - Expected: The GUI shows a popup with a message and a link to the User Guide.
+1. Opening the Help window.
+2. Type the following help command into the text field.<br>
+   `help`
+3. Press enter.
+4. Expected Output: The GUI shows a popup with a message and a link to the User Guide.
 
 ### Adding Dates
 
-1. Adding a Date
-   - Type the following add command into the text field.<br>
-     `add name/Cleon age/22 gender/F height/176 horoscope/Taurus income/3000`
-   - Press enter.
-   - Expected: The GUI shows the added date in the LoveBook.
+1. Adding a Date.
+2. Type the following add command into the text field.<br>
+   `add name/Cleon age/22 gender/F height/176 horoscope/Taurus income/3000`
+3. Press enter.
+4. Expected Output: The GUI shows the added date in the LoveBook.
 
 ### Editing Dates
 
-1. Editing a Date by index
-   - Type the following edit date command into the text field.<br>
-     `edit 1 horoscope/Cancer name/John`
-   - Press enter.
-   - Expected: The GUI shows the newly-edited fields for the Date at the specified index. (Sequence doesn't matter)
+<box type="tip">
+
+*Prerequisites:* Have at least 1 date in the LoveBook.
+
+</box>
+
+1. Editing a Date by index.
+2. Type the following edit date command into the text field.<br>
+   `edit 1 horoscope/Cancer name/John`
+3. Press enter.
+4. Expected Output: The GUI shows the newly-edited fields for the Date at the specified index. (Sequence doesn't matter)
 
 ### Finding Dates
 
-1. Finding Dates by name
+#### Finding Dates by single name
 
-   - Type the following find command into the text field.<br>
-     `find John`
-   - Press enter.
-   - Expected: The date with specified name shown.
+<box type="tip">
 
-2. Finding Dates by multiple names
+*Prerequisites:* Have at least 1 date with name containing "John" in the LoveBook.
 
-   - Type the following find command into the text field.<br>
-     `find John Cleon`
-   - Press enter.
-   - Expected: The dates with the specified names shown.
+</box>
 
-3. Listing all Dates
-   - Type the following list command into the text field.<br>
-     `list`
-   - Press enter.
-   - Expected: The GUI shows all dates in LoveBook.
+1. Type the following find command into the text field.<br>
+   `find John`
+2. Press enter.
+3. Expected Output: The date with specified name shown.
+
+#### Finding Dates by multiple names
+
+<box type="tip">
+
+*Prerequisites:* Have at least 2 dates (named "John" and "Cleon") in the LoveBook.
+
+</box>
+
+1. Type the following find command into the text field.<br>
+   `find John Cleon`
+2. Press enter.
+3. Expected Output: The dates with the specified names shown.
+
+#### Listing all Dates
+
+1. Type the following list command into the text field.<br>
+   `list`
+2. Press enter.
+3. Expected Output: The GUI shows all dates in LoveBook.
 
 ### Filtering Dates
 
-1. Filtering Dates by metric (e.g. name, age, height)
-   - Type the following filter command into the text field.<br>
-     `filter age/22`
-   - Press enter.
-   - Expected: The GUI shows all dates with age 22 in LoveBook.
+1. Filtering Dates by metric (e.g. name, age, height).
+2. Type the following filter command into the text field.<br>
+   `filter age/22`
+3. Press enter.
+4. Expected Output: The GUI shows all dates with age 22 in LoveBook.
 
 ### Finding a Blind Date
 
+<box type="tip">
+
+*Prerequisites:* Have at least 1 date in the LoveBook. Best to have more than 5 dates.
+
+</box>
+
 1. Finding a Blind Date
-   - Prerequisites: Have >1 dates in the LoveBook.
-   - Type the following command into the text field.<br>
-     `blindDate`
-   - Press enter.
-   - Expected: The GUI shows a blind date in LoveBook.
+2. Type the following command into the text field.<br>
+   `blindDate`
+3. Press enter.
+4. Expected Output: The GUI shows a blind date in LoveBook.
 
 ### Exiting the Application
 
 1. Exiting the app
-   - Use the `exit` command or click the 'X' button in the top right corner.<br>
-   - Expected: The app closes.
+2. Use the `exit` command or click the 'X' button in the top right corner.
+3. Expected: The app closes.
 
 ### Saving (If you haven't already exited)
 
 1. Saving window preferences
-
-   - Resize the window to an optimum size, preferably full screen. Close the window.
-   - Re-launch the app by double-clicking the jar file.
-   - Expected: The most recent window size and location is retained.
-   - Note: The window looks best under 1920 x 1080 resolution, 125% scale.
+    1. Resize the window to an optimum size, preferably full screen. Close the window.
+    2. Re-launch the app by double-clicking the jar file.
+    3. Expected Output: The most recent window size and location is retained.
+    4. Note: The window looks best under 1920 x 1080 resolution, 125% scale.
 
 2. Saving data
-   - Launch the app by double-clicking the jar file.
-   - Execute an add command to add a `Date` in the database.
-   - Close the app.
-   - Expected: A `data` folder is created under the current repository where the jar file is located.
+    1. Launch the app by double-clicking the jar file.
+    2. Execute an add command to add a `Date` in the database.
+    3. Close the app.
+    4. Expected: A `data` folder is created under the current repository where the jar file is located.
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
@@ -1061,13 +1105,28 @@ testers are expected to do more _exploratory_ testing.
 
 ## **Appendix: Effort**
 
-Implementing LoveBook was not straightforward and often required us to brainstorm as a team to solve the challenges faced. Given below is a summary of the effort our team has put into developing LoveBook.
+Implementing LoveBook was not straightforward and often required us to brainstorm as a team to solve the challenges
+faced. Given below is a summary of the effort our team has put into developing LoveBook.
 
 ### Effort Summary
 
-Our group undertook a significant refactoring effort in the initial codebase, introducing several new classes and enhancing existing ones to fit into our idea of LoveBook. Noteworthy additions include the creation of the "income" and "horoscope" fields within the Date class, representing crucial attributes for building comprehensive user profiles and calculation of compatibility. Regarding compatibility, our group has spent a tremendous amount of time and effort to brainstorm about the implementation of a compatibility algorithm. The compatibility algorithm is designed to calculate a compatibility score based on user preferences and date attributes. This has proven to be challenging as we had to ensure accuracy in providing the user with the best match by taking into account all the differences between preferences and dates attributes.
+Our group undertook a significant refactoring effort in the initial codebase, introducing several new classes and
+enhancing existing ones to fit into our idea of LoveBook. Noteworthy additions include the creation of the "income"
+and "horoscope" fields within the Date class, representing crucial attributes for building comprehensive user profiles
+and calculation of compatibility. Regarding compatibility, our group has spent a tremendous amount of time and effort to
+brainstorm about the implementation of a compatibility algorithm. The compatibility algorithm is designed to calculate a
+compatibility score based on user preferences and date attributes. This has proven to be challenging as we had to ensure
+accuracy in providing the user with the best match by taking into account all the differences between preferences and
+dates attributes.
 
-Our dedication to enhancing the aesthetics of LoveBook is underscored by our meticulous attention to visual representation. We've transcended conventional textual displays, incorporating visually engaging elements such as gender icons, horoscope symbols, and star command visual cues, all implemented using JavaFX. These features not only contribute to the overall visual appeal of the application but also serve a functional purpose in providing users with quick and intuitive insights into important date attributes. Furthermore, our commitment to a visually pleasing user interface extends to the inclusion of unique avatars for each date, corresponding to their respective genders. This holistic approach to aesthetics reflects our aspiration to create an immersive and enjoyable user experience within the LoveBook application.
+Our dedication to enhancing the aesthetics of LoveBook is underscored by our meticulous attention to visual
+representation. We've transcended conventional textual displays, incorporating visually engaging elements such as gender
+icons, horoscope symbols, and star command visual cues, all implemented using JavaFX. These features not only contribute
+to the overall visual appeal of the application but also serve a functional purpose in providing users with quick and
+intuitive insights into important date attributes. Furthermore, our commitment to a visually pleasing user interface
+extends to the inclusion of unique avatars for each date, corresponding to their respective genders. This holistic
+approach to aesthetics reflects our aspiration to create an immersive and enjoyable user experience within the LoveBook
+application.
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
@@ -1075,33 +1134,33 @@ Our dedication to enhancing the aesthetics of LoveBook is underscored by our met
 
 1. Improve the command parser to be more robust. Some examples include:
 
-   - Gender entered while adding a new date is case-sensitive. We are planning to make it case-insensitive.
-   - Adding dates with the same name is currently not allowed. We are planning to allow this.
-   - Allowing some fields to be optional if user doesn't have access to the information. For example, if the user does
-     not know the income of the date, he/she can leave it blank. Currently, this is not allowed. We are planning to
-     allow this.
+    - Gender entered while adding a new date is case-sensitive. We are planning to make it case-insensitive.
+    - Adding dates with the same name is currently not allowed. We are planning to allow this.
+    - Allowing some fields to be optional if user doesn't have access to the information. For example, if the user does
+      not know the income of the date, he/she can leave it blank. Currently, this is not allowed. We are planning to
+      allow this.
 
 2. Improve the income field to be more robust
 
-   - Currently, the income field is unable to accept a range of values, which might not be inclusive of people who
-     have careers with variable income.
-   - Additionally, right now the income field does not accept a value of 0. This is not inclusive towards students
-     who may not have any income. Hence, we plan to modify the field to accept a value of 0, on top of supporting a
-     range of values
+    - Currently, the income field is unable to accept a range of values, which might not be inclusive of people who
+      have careers with variable income.
+    - Additionally, right now the income field does not accept a value of 0. This is not inclusive towards students
+      who may not have any income. Hence, we plan to modify the field to accept a value of 0, on top of supporting a
+      range of values
 
 3. Improve issues regarding sorting stability
 
-   - Currently, you are able to sort the dates by a specific field. However, if we sort by income for instance, and two
-     dates have the same value, then when one of those two dates are modified by operations such as star or edit, the
-     order of the two of them can change. The dates are still sorted in order, just that the stability is disrupted. We
-     intend to improve upon our star and edit commands such that they do not disrupt the stability in the future.
+    - Currently, you are able to sort the dates by a specific field. However, if we sort by income for instance, and two
+      dates have the same value, then when one of those two dates are modified by operations such as star or edit, the
+      order of the two of them can change. The dates are still sorted in order, just that the stability is disrupted. We
+      intend to improve upon our star and edit commands such that they do not disrupt the stability in the future.
 
 4. Improve the filter feature to be more robust. Some examples include:
 
-   - Currently, the filter feature only allows the user to filter by metrics limited to name, age, gender and height.
-     We are planning to allow the user to filter by other metrics such as horoscope and income.
-   - Currently, the filter feature only allows the user to filter by a single keyword for a single metric. We are
-     planning to allow the user to filter by multiple keywords.
+    - Currently, the filter feature only allows the user to filter by metrics limited to name, age, gender and height.
+      We are planning to allow the user to filter by other metrics such as horoscope and income.
+    - Currently, the filter feature only allows the user to filter by a single keyword for a single metric. We are
+      planning to allow the user to filter by multiple keywords.
 
 5. Improve the error message to be more comprehensive
 
@@ -1109,7 +1168,6 @@ Our dedication to enhancing the aesthetics of LoveBook is underscored by our met
      We are planning to allow the user to know all the invalid keywords that he/she has keyed in.
 
 6. Improve the message displayed when the user tries to perform an operation on an empty list
-
    - Currently, for some commands like edit and sort, the message displayed is simply based on the validity check of the parameters and it does not tell the user that the
      list is empty. For instance, when the user sorts an empty list, the message displayed is "Sorted!" which is not very helpful. Hence, we are planning to tell the user that the list is empty and that the operation cannot be performed.
 
