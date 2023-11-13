@@ -97,7 +97,7 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
 
 * `TAGNAME` should be alphanumeric, with no spaces.
 
-* `TAGNAME` is case-sensitive. For example, a [contact](#contact) can have [tags](#tag) `HR REPRESENTATIVE` and `HR representative` at the same time.
+* `TAGNAME` is case-sensitive. For example, a [contact](#contact) can have [tags](#tag) `Frontend` and `frontend` at the same time.
 
 * `START_TIME` and `END_TIME` can be in one of the following formats:
   * Both date and time: `yyyy-MM-dd HH:mm[:ss]`

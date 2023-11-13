@@ -17,6 +17,8 @@ This project is based on the [AddressBook Level-3](https://se-education.org/addr
 
 Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
+https://github.com/rrice/java-string-similarity. Reused the sourcecode of this library to measure string similarity for the `help` command.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -340,17 +342,24 @@ The following activity diagram summarizes what happens when the `DeleteNoteComma
 
 ### Enhanced help feature
 
-#### Design considerations:
-
 **Rationale**
 
-  * Previous help feature simply opens a page with a link to the website, this is bad because:
-    * The flow is lengthy
-    * User may not be able to access website when operating without the internet
+  Previous help feature simply opens a page with a link to the website, this is bad because:
+  * The flow is lengthy
+  * User may not be able to access website when operating without the internet
 
-    Therefore, we want to make this better by simplifying the flow. We do this by adding:
-    * Making the help command return things in the application console
-    * Letting users enter an extra argument to specify what command they need guiding on
+  Therefore, we want to make this better by simplifying the flow. We do this by adding:
+  * Making the help command return things in the application console
+  * Letting users enter an extra argument to specify what command they need guiding 
+  * Give suggestions to users in case of a mistake in the extra argument, i.e. typo
+
+**Implementation details**
+
+  Since the previous help feature needs to let the UI know that it wants to open the help window, this requires the `CommandResult` to have a special boolean attribute for capturing this event. We don't need this anymore, and thus we can perform a refactor to get rid of this attribute.
+
+  Since we want to directly display the help message to the user, we can use the `DisplayResult` UI component to show the message. It is convenient that every `Command` subclasses already has the `MESSAGE_USAGE` string attribute to indicate how the command should be used. Therefore, we can just directly fetch this from the `Command` subclasses if the extra argument the user inputs is valid.
+
+  Finally, we want to give suggestions if the user makes a typo. To do this, we must first be able to recognize if a user-made input is similar to a valid command word. To do this, we can utilise one of the many coefficients out there that can measure the degree of similarity between two strings, For this particular implementation, we will go with the [Sorensen-Dice coefficient](https://en.wikipedia.org/wiki/S%c3%b8rensen%e2%80%93Dice_coefficient). The idea is to check if the maximum degree of similarity between the input and each one of the command words exceeds a certain threshold and, if so, suggest to the user what inputs they need to make. Otherwise, the `ResultDisplay` will just give out an error that the input is unrecognizable.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -527,16 +536,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. Extra argument is a command word.
 
         * KeepInTouch returns documentation on that command word.
+          
+          Use case ends.
 
     * 1b2. Extra argument is not a command word, but is quite similar to a command.
 
         * KeepInTouch suggests the command word with the highest degree of similarity to the command input.
 
+          Use case resumes at step 1.
+
     * 1b3. Extra argument is not a command word, and isn't recognizably close to a command word.
 
         * KeepInTouch lets the user know that the command is unrecognizable.
 
-      Use case ends.
+          Use case resumes at step 1.
 
 **Use case: UC02 - Add a new contact**
 
@@ -570,7 +583,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. User inputs a contact that does not exist.
 
     * 1a1. KeepInTouch shows a message indicating that the contact cannot be found.
-      Use case ends.
+      
+      Use case resumes at step 1.
 
 **Use case: UC04 - View all contacts**
 
@@ -628,19 +642,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. KeepInTouch shows a message indicating incomplete data.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. User inputs a contact that does not exist.
 
     * 1b1. KeepInTouch shows a message indicating that the contact cannot be found.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1c. User inputs a note that does not exist.
 
     * 1c1. KeepInTouch shows a message indicating that the note cannot be found.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 **Use case: UC08 - Add an event**
 
@@ -674,13 +688,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. KeepInTouch shows a message indicating incomplete data.
 
-      Use case ends.
+      Use case reusmes at step 1.
 
 * 1b. User inputs an event that does not exist.
 
     * 1b1. KeepInTouch shows a message indicating that the event cannot be found.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 **Use case: UC10 - Filter events**
 
@@ -697,9 +711,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. KeepInTouch shows a message indicating incomplete or invalid data.
 
-      Use case ends.
+      Use case resumes at step 1.
 
-**Use case: UC11 - Add tags to a contact**
+**Use case: UC10 - Adding tags to a contact**
 
 **MSS**
 
@@ -714,18 +728,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. KeepInTouch shows a message indicating incomplete data.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. User inputs a non-alphanumeric tag.
     * 1b1. KeepInTouch shows a message indicating that tags should be alphanumeric.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1c. User inputs a contact that does not exist.
 
     * 1c1. KeepInTouch shows a message indicating that the contact cannot be found.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 **Use case: UC12 - Delete tags from a contact**
 
@@ -742,18 +756,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. KeepInTouch shows a message indicating incomplete data.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. User inputs a non-alphanumeric tag.
     * 1b1. KeepInTouch shows a message indicating that tags should be alphanumeric.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1c. User inputs a contact that does not exist.
 
     * 1c1. KeepInTouch shows a message indicating that the contact cannot be found.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 **Use case: UC13 - Filter contacts based on tags**
 
@@ -822,7 +836,7 @@ testers are expected to do more *exploratory* testing.
    1. Double-click the jar file 
    Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
@@ -840,47 +854,83 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `delete 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `delete 0`<br>
+      Expected: No person is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. Deleting a person while event list is showing
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Add events to the first person in the index and remove all event from the second person in the index.
+
+    2. Test case: `delete 1`<br>
+        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. All events related to the first contact should be deleted from the event list as well
 
 ### Adding tag
 
 1. Adding tag while all contacts is shown.
     1. Prequisites: List all contacts using the list command. At least one contact shown in the list.<br>
-    1. Test case: `add tag -id 1 -t Frontend -t Java`
-    Expected: The new tags appear below the name of the first contact in the list. The list of tags added is shown in the status message.<br>
-    1. Test case: `add tag -id 0 -t Frontend`
-    Expected: No tag add is added. Error details shown in the status message.<br>
-    1. Test case: `add tag -id 1 -t HR representative`
+
+    1. Test case: `add tag -id 1 -t Frontend -t Java`<br>
+    Expected: The new tags appear below the name of the first contact in the list. The list of tags added is shown in the status message.
+    
+    1. Test case: `add tag -id 0 -t Frontend`<br>
+    Expected: No tag add is added. Error details shown in the status message.
+
+    1. Test case: `add tag -id 1 -t HR representative`<br>
     Expected: No tag is added as tag name should not contain spaces. Error details shown in the status message.<br>
 
 1. Adding duplicate tag to a contact
-    1. Prequisites: List all contacts using the list command. At least one contact shown in the list has at least one tag.<br>
-    1. Test case: `add tag -id 1 -t x`, where x is an already existing tag in the first contact.
-    Expected: The new tag appear below the name of the first contact in the list. The list of tags added is shown in the status message.<br>
-    1. Test case: `add tad -id -t Frontend -t Frontend`
-    Expected: Only one `Frontend` tag is added below the name of the first contact. Only one `Frontend` tag is shown in the list of tags added in the status message.<br>
+    1. Prequisites: List all contacts using the list command. At least one contact shown in the list has at least one tag.
+
+    1. Test case: `add tag -id 1 -t x`, where x is an already existing tag in the first contact.<br>
+    Expected: The new tag appear below the name of the first contact in the list. The list of tags added is shown in the status message.
+
+    1. Test case: `add tag -id -t Frontend -t Frontend`<br>
+    Expected: Only one `Frontend` tag is added below the name of the first contact. Only one `Frontend` tag is shown in the list of tags added in the status message.
+
+ 1. Adding tag while contact list is being filtered
+    1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`. 
+
+    1. Test case: `add tag -id 1 -t Frontend`, when no contact is shown<br>
+    Expected: No tag add is added. Error details shown in the status message.
+
+    1. Test case: `add tag -id 1 -t Frontend`, when at least 1 contact is shown<br>
+    Expected: The new tags appear below the name of the first contact in the filtered list. The list of tags added is shown in the status message. List will go back to showing all contacts.
+      
 
 ### Deleting tag
 
 1. Deleting tag while all contacts is shown and tag exists.
-    1. Prequisites: List all contacts using the list command. At least one contact shown in the list has at least one tag.<br>
-    1. Test case: `delete tag -id 1 -t x`, where x is an existing tag in the first contact.
-    Expected: The tag x is no longer below the name of the first contact in the list. The list of tags deleted is shown in the status message.<br>
-    1. Test case: `delete tag -id 0 -t Frontend`
-    Expected: No tag add is deleted. Error details shown in the status message.<br>
-    1. Test case: `delete tag -id 1 -t HR representative`
+    1. Prequisites: List all contacts using the list command. At least one contact shown in the list has at least one tag.
+
+    1. Test case: `delete tag -id 1 -t x`, where x is an existing tag in the first contact.<br>
+    Expected: The tag x is no longer below the name of the first contact in the list. The list of tags deleted is shown in the status message.
+
+    1. Test case: `delete tag -id 0 -t Frontend`<br>
+    Expected: No tag add is deleted. Error details shown in the status message.
+
+    1. Test case: `delete tag -id 1 -t HR representative`<br>
     Expected: No tag deleted as tag name should not contain spaces. Error details shown in the status message.<br>
 
 1. Deleting tag while all contacts is shown but tag does not exist.
     1. Prequisites: List all contacts using the list command. At least one contact is shown in the list.<br>
-    1. Test case: `add tag -id 1 -t x`, where x is a non-existing tag in the first contact.
-    Expected: No tags is deleted. The list of tags deleted shown in the status message is empty while the list of tags not found contains x.<br>
+
+    1. Test case: `delete tag -id 1 -t x`, where `x` is a non-existing tag in the first contact.<br>
+    Expected: No tags is deleted. The list of tags deleted shown in the status message is empty while the list of tags not found contains `x`.
+
+1. Deleting tag while contact list is being filtered
+    1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`. 
+
+    1. Test case: `delete tag -id 1 -t Frontend`, when no contact is shown<br>
+    Expected: No tag add is deleted. Error details shown in the status message.
+
+    1. Test case: `add tag -id 1 -t x`, when at least 1 contact is shown and `x` is an existing tag in the first contact. <br>
+    Expected: The tag `x` is no longer below the name of the first contact in the list. The list of tags deleted shown in the status message is empty while the list of tags not found contains `x`. List will go back to showing all contacts.
+
+    1. Test case: `add tag -id 1 -t x`, when at least 1 contact is shown and `x` is a non-existing tag in the first contact. <br>
+    Expected: The tag `x` is no longer below the name of the first contact in the list. The list of tags deleted is shown in the status message. List will go back to showing all contacts.
