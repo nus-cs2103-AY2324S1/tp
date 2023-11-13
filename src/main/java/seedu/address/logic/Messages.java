@@ -49,7 +49,7 @@ public class Messages {
                 .append("; Address: ")
                 .append(student.getAddress())
                 .append("; Risk Level: ");
-        student.getTags().forEach(builder::append);
+        student.getRiskLevel().forEach(builder::append);
         return builder.toString();
     }
 

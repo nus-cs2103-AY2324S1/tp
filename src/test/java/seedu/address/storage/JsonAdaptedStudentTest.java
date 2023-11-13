@@ -26,7 +26,7 @@ public class JsonAdaptedStudentTest {
     private static final String VALID_NAME = BENNY.getName().toString();
     private static final String VALID_PHONE = BENNY.getPhone().toString();
     private static final String VALID_ADDRESS = BENNY.getAddress().toString();
-    private static final List<JsonAdaptedRiskLevel> VALID_TAGS = BENNY.getTags().stream()
+    private static final List<JsonAdaptedRiskLevel> VALID_TAGS = BENNY.getRiskLevel().stream()
             .map(JsonAdaptedRiskLevel::new)
             .collect(Collectors.toList());
     private static final String VALID_NOTE = BENNY.getNote().toString();

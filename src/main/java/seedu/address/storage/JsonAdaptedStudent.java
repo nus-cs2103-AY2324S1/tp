@@ -55,7 +55,7 @@ class JsonAdaptedStudent {
         name = source.getName().value;
         phone = source.getPhone().value;
         address = source.getAddress().value;
-        tags.addAll(source.getTags().stream()
+        tags.addAll(source.getRiskLevel().stream()
                 .map(JsonAdaptedRiskLevel::new)
                 .collect(Collectors.toList()));
         note = source.getNote().value;

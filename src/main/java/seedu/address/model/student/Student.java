@@ -55,7 +55,7 @@ public class Student {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<RiskLevel> getTags() {
+    public Set<RiskLevel> getRiskLevel() {
         return Collections.unmodifiableSet(riskLevel);
     }
 

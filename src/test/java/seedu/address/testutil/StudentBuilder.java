@@ -45,7 +45,7 @@ public class StudentBuilder {
         name = studentToCopy.getName();
         phone = studentToCopy.getPhone();
         address = studentToCopy.getAddress();
-        riskLevel = new HashSet<>(studentToCopy.getTags());
+        riskLevel = new HashSet<>(studentToCopy.getRiskLevel());
         note = studentToCopy.getNote();
     }
 
