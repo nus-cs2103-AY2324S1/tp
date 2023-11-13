@@ -494,20 +494,20 @@ x
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 
-| Priority | As a …​ | I want to …​                                            | So that I can…​                                                 |
-|----------|---------|---------------------------------------------------------|-----------------------------------------------------------------|
-| `* * *`  | tutor   | view a list of all tutees                               | see whoever are my tutees that I teach                          |
-| `* * *`  | tutor   | view the specific details of a single tutee             | see the different informations tailored to the tutee            |
-| `* * *`  | tutor   | add a new tutee                                         | keep track of my tutees that I teach                            |
-| `* * *`  | tutor   | find a tutee                                            | search for a specific tutee that I teach                        |
-| `* * *`  | tutor   | edit their details                                      | account for changes in their information e.g. change in address |
-| `* *`    | tutor   | remove tutees from the list                             | keep track of tutees that I have stopped teaching               |
-| `* *`    | tutor   | mark students that have already paid                    | keep track of students' payment statuses                        |
-| `* *`    | tutor   | check all students who haven't paid                     | easily remind students who haven't paid                         |
-| `* *`    | tutor   | undo and redo commands I made in the application        | easily revert any mistakes                                      |
-| `* *`    | tutor   | calculate my total monthly revenue                      | better financially plan for my tutoring business                |
-| `* *`    | tutor   | view a list tutees whose lessons fall on a specific day | be reminded if I have any classes on that particular day        |
-*{More to be added}*
+| Priority | As a …​ | I want to …​                                            | So that I can…​                                               |
+|----------|---------|---------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | tutor   | view a list of all tutees                               | see whoever are my tutees that I teach                                 |
+| `* * *`  | tutor   | view the specific details of a single tutee             | see the different informations tailored to the tutee                   |
+| `* * *`  | tutor   | add a new tutee                                         | keep track of my tutees that I teach                                   |
+| `* * *`  | tutor   | find a tutee                                            | search for a specific tutee that I teach                               |
+| `* * *`  | tutor   | edit their details                                      | account for changes in their information e.g. change in address        |
+| `* *`    | tutor   | remove tutees from the list                             | keep track of tutees that I have stopped teaching                      |
+| `* *`    | tutor   | mark students that have already paid                    | keep track of students' payment statuses                               |
+| `* *`    | tutor   | check all students who haven't paid                     | easily remind students who haven't paid                                |
+| `* *`    | tutor   | undo and redo commands I made in the application        | easily revert any mistakes                                             |
+| `* *`    | tutor   | calculate my total monthly revenue                      | better financially plan for my tutoring business                       |
+| `* *`    | tutor   | view a list tutees whose lessons fall on a specific day | be reminded if I have any classes on that particular day               |
+
 
 ### Use cases
 
@@ -789,6 +789,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * Timeslot: An interval of time from HH:MM to HH:MM
 * Prefix: An abbreviation for the name of the parameter. Prefix should be entered before the actual parameter in a command and always ends with a slash (/).
 * MSS: Main success scenario
+<br>
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
