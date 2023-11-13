@@ -54,7 +54,7 @@ you can access contacts by roles and responsibilities instantly.
 * [Future Enhancement](#future-enhancements)
 * [Glossary](#glossary)
 
-<page-nav-print />
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -79,7 +79,7 @@ used for easy navigation.
 * Want an overview of all the commands? Click [here](#command-summary)!<br>
 * Any further questions that are unresolved? Check out our [FAQ](#faq)!<br>
 * Confused about the terms we have used? Check out our [Glossary](#glossary).<br>
-* You may also contact us at [linktreeltd@gamil.com](mailto:linktreeltd@gamil.com) for further doubts!
+* You may also contact us at [linktreeltd@gmail.com](mailto:linktreeltd@gmail.com) for further doubts!
 
 **Formatting and Icons**: Throughout the guide, we use bold text and colors to emphasize key points and important terms.
 Icons are used to draw your attention to noteworthy tips and additional information. 
