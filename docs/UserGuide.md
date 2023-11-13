@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 # Welcome to TuitionConnect's User Guide!
-:rocket: Introducing **TuitionConnect**: Revolutionizing your Tutoring Business! :teacher:
+:rocket: Introducing **TuitionConnect**: Revolutionizing your Tutoring Business! :rocket:
 
 Fed up with setting up numerous unorganized spreadsheets on Microsoft Excel or Google Sheets to handle the administrative side of you tutoring business?
 
@@ -14,8 +14,41 @@ Say goodbye to all this mess with the help of **TuitionConnect**: the ultimate d
 This user guide will teach you how to install **TuitionConnect** from scratch, as well as providing information about the interesting features of **TuitionConnect**. 
 
 ## Table of Contents
-* Table of Contents
-  {:toc}
+
+<!-- TOC -->
+* [TuitionConnect User Guide](#tuitionconnect-user-guide)
+  * [Table of Contents](#table-of-contents)
+  * [Introduction](#introduction)
+  * [Using this guide](#using-this-guide)
+  * [Symbols and Syntax](#symbols-and-syntax)
+  * [Layout](#layout)
+  * [Quick start](#quick-start)
+  * [Input Formats](#input-formats)
+    * [Command Format](#command-format)
+  * [Features](#features)
+    * [Viewing help : `help`](#viewing-help--help)
+    * [Adding a person : `add`](#adding-a-person--add)
+    * [View the list : `list`](#view-the-list--list)
+    * [View the list of tutees specified by day : `list [DAY]`](#view-the-list-of-tutees-specified-by-day--list-day)
+    * [Finding a tutee : `find`](#finding-a-tutee--find)
+    * [Editing a tutee : `edit`](#editing-a-tutee--edit)
+    * [Deleting a person: `delete`](#deleting-a-person-delete)
+    * [Clearing all entries : `clear`](#clearing-all-entries--clear)
+    * [Marking a person as paid : `paid`](#marking-a-person-as-paid--paid)
+    * [Marking a person as unpaid : `unpaid`](#marking-a-person-as-unpaid--unpaid)
+    * [Show all the unpaid persons : `list unpaid`](#show-all-the-unpaid-persons--list-unpaid)
+    * [Mark all persons as unpaid: `unpaidAll`](#mark-all-persons-as-unpaid-unpaidall)
+    * [Finding Free Time : `freeTime`](#finding-free-time--freetime)
+    * [Undo previous command : `undo`](#undo-previous-command--undo)
+    * [Redo previous command : `redo`](#redo-previous-command--redo)
+    * [Calculating Monthly Revenue: `rev`](#calculating-monthly-revenue-rev)
+    * [Exiting the program : `exit`](#exiting-the-program--exit)
+  * [FAQ](#faq)
+  * [Known issues](#known-issues)
+  * [Command summary](#command-summary)
+  * [Glossary](#glossary)
+<!-- TOC -->
+
 --------------------------------------------------------------------------------------------------------------------
 ## Introduction
 TuitionConnect is a **desktop app** built for tutors and tutoring businesses or simplifying the process of 
@@ -44,6 +77,8 @@ For first-time users, we understand how it feels to open up an application witho
 carefully crafted a [Quick Start](#quick-start) section in this guide to provide you with the knowledge it takes to 
 start using TuitionConnect for your business.
 
+The [Layout](#layout) will also help you understand the different components of TuitionConnect's GUI.
+
 Eager to learn more about what our application can do? Head over to the [Command Format](#command-format) section to 
 learn more about the general formats of the commands and getting yourself prepared before 
 delving into the [Features](#features) section where you are in for the ride of your life! The Features section contains
@@ -67,6 +102,11 @@ Throughout this User Guide, there might
 | :exclamation: **Caution**                       | Information that you need to know before executing a [command](#command)                                                                        |
 | `Highlighted text block`                        | [Commands](#command) or [parameters](#parameter) that you can enter into our application, or text that is directly displayed in our application |
 | [Hyperlinked text in blue](#symbols-and-syntax) | When it is pressed, it should lead you to another section in the document or to an external link.                                               |
+
+## Layout
+The image below describes TuitionConnect's layout with some description for each component.
+![Layout](images/Layout.png)
+
 
 ## Quick start
 
