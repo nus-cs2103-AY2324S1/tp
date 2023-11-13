@@ -183,7 +183,7 @@ By adding tasks to TaskWise, you are able to keep track of all the tasks related
 Within the window, left-click on the command box, and key in the command `add t/Complete CS2103T User Guide d/01-01-2023` into the text box, before pressing the "Enter" or "Return" key.
 
 <div markdown="span" class="alert alert-warning">
-:warning: Due to the current limitations of the features provided in TaskWise in regard to the capitalisation of Task Description, you are encouraged to be consistent with the capitalisation of your Task Descriptions of the Tasks that you create!
+:warning: Due to the current limitations of the sort feature provided in TaskWise with regards to the capitalisation of Task Description, you are encouraged to be consistent with the capitalisation of your Task Descriptions!
 </div>
 
 ![image](images/user_guide/Tutorial_Before.png)
@@ -359,7 +359,7 @@ This is all you really need to add a task! It is the description of your task th
 ANY character is allowed, except for blanks and `/`.
 
 <div markdown="span" class="alert alert-warning">
-:warning: Due to the current limitations of the features provided in TaskWise in regard to the capitalisation of Task Description, you are encouraged to be consistent with the capitalisation of your Task Descriptions of the Tasks that you create!
+:warning: Due to the current limitations of the sort feature provided in TaskWise with regards to the capitalisation of Task Description, you are encouraged to be consistent with the capitalisation of your Task Descriptions!
 <br/><br/>
 Refer to <a href="https://ay2324s1-cs2103t-t17-1.github.io/tp/UserGuide.html#case-insensitive-ordering-of-members">this</a> section for more information on this issue! Rest assured that we are working hard to improve your user experience, and we appreciate your patience on this issue while we work on an appropriate fix for this issue!
 </div>
@@ -588,7 +588,7 @@ This is the description of the task that you want to keep track of. You may wish
 ANY character is allowed, except for blanks and `/`.
 
 <div markdown="span" class="alert alert-warning">
-:warning: Due to the current limitations of the features provided in TaskWise in regard to the capitalisation of Task Description, you are encouraged to be consistent with the capitalisation of your Task Descriptions of the Tasks that you create!
+:warning: Due to the current limitations of the sort feature provided in TaskWise with regards to the capitalisation of Task Description, you are encouraged to be consistent with the capitalisation of your Task Descriptions!
 <br/><br/>
 Refer to <a href="https://ay2324s1-cs2103t-t17-1.github.io/tp/UserGuide.html#case-insensitive-sort">this</a> section for more information on this issue! Rest assured that we are working hard to improve your user experience, and we appreciate your patience on this issue while we work on an appropriate fix for this issue!
 </div>
