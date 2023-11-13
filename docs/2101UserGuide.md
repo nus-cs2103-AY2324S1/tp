@@ -65,7 +65,7 @@ This guide uses the following features to make it easier for you to navigate aro
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
-## Quick start
+## Quick Start
 <div markdown="block" class="alert alert-warning">
 
 :warning: We assume that you have some basic knowledge of terminal commands. You can learn how to use the terminal with [this guide](https://www.freecodecamp.org/news/command-line-for-beginners/)
