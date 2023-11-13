@@ -441,7 +441,7 @@ This is applicable for both members and events!
 <hr class="command-separator">
 
 #### List all Members and all Events: `list`
-If you’re in the event / member view, you can always use the `list` command to return to the default view with all members and events.
+If you’re in the event/member view, you can always use the `list` command to return to the default view with all members and events.
 
 Here’s how you use it: `list`
 
