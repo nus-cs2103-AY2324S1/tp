@@ -16,7 +16,8 @@ title: Developer Guide
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ### 2. Design
 
 <div markdown="span" class="alert alert-primary">
@@ -180,9 +181,33 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
     * Pros: Easier to implement.
     * Cons: User will have to type longer commands since appointment details can be lengthy, which may lead to more complex commands.
 
+### 3.2 Student Notes feature
+
+The adding of student notes is facilitated by `NoteCommand`. It extends `Command` and allows the addition of a `Note`
+to the student at the index specified by the user.
+
+The sequence diagram below illustrates the interactions within the `Logic` component,
+taking `execute("note 1 note/Likes dogs.")` as an example.
+
+![Interactions inside the Logic component for "note 1 note/Likes dogs." command](images/NoteSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How a `Note` should be added to a `Student`**
+
+* **Alternative 1 (current choice):** Create a new `NoteCommand` class which handles the addition of a note
+  to a `Student`.
+    * Pros: User input will be shorter in length and easier to read
+    * Cons: More work to implement
+
+* **Alternative 2:** Add `Note` as a field in the `AddCommand`
+    * Pros: Easier to implement
+    * Cons: User will have to type much longer commands, since `Note` can be up to 200 characters long,
+      leads to very lengthy commands
+
 <div style="page-break-after: always;"></div>
 
-### 3.2 View Feature
+### 3.3 View Feature
 
 This feature is facilitated by the use of the ViewCommand class which extends the Command interface.
 
@@ -196,32 +221,6 @@ View Command handles both the viewing of all students and all appointments. The 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** There should be a diamond connecting the 4 separate branches
 but due to a limitation of PlantUML, the 4 branches leads to the "end" individually .
 </div>
-
-<div style="page-break-after: always;"></div>
-
-### 3.3 Student Notes feature
-
-The adding of student notes is facilitated by `NoteCommand`. It extends `Command` and allows the addition of a `Note`
-to the student at the index specified by the user.
-
-The sequence diagram below illustrates the interactions within the `Logic` component, 
-taking `execute("note 1 note/Likes dogs.")` as an example.
-
-![Interactions inside the Logic component for "note 1 note/Likes dogs." command](images/NoteSequenceDiagram.png)
-
-#### Design considerations:
-
-**Aspect: How a `Note` should be added to a `Student`**
-
-* **Alternative 1 (current choice):** Create a new `NoteCommand` class which handles the addition of a note 
-to a `Student`.
-    * Pros: User input will be shorter in length and easier to read
-    * Cons: More work to implement
-
-* **Alternative 2:** Add `Note` as a field in the `AddCommand`
-    * Pros: Easier to implement
-    * Cons: User will have to type much longer commands, since `Note` can be up to 200 characters long,
-  leads to very lengthy commands
 
 <div style="page-break-after: always;"></div>
 
