@@ -394,6 +394,7 @@ Step 3. `ViewExitCommand` is executed, and `getFilteredPersonList()` method in `
 ![ViewExitSequenceDiagram3.png](images/ViewExitSequenceDiagram3.png)
 
 Step 4. From `MainWindow`, `handleViewExit()` handler method is called. The `getInConfirmationDialog()` method in `CommandBox` UI class is used to check if the user is seeing the confirmation message. If the user already saved the fosterer or is already in confirmation dialog, `exitProfilePage()` is called and user exits the profile. Otherwise, the user is shown the confirmation message telling that they did not save the details. 
+
 ![HandleViewExitSequenceDiagram.png](images/HandleViewExitSequenceDiagram.png)
 
 Step 5. If the user presses Enter in the `CommandBox`, `handleViewExit()` method is called again. This time, the screen is already showing the confirmation message, so isShowingConfirmationMessage is true. Thus, the user is exited out of the profile page. If the user presses Esc instead, `handleCancelViewExit()` method is called lets the user stays in the profile page. 
