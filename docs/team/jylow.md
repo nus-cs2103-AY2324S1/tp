@@ -36,8 +36,8 @@ Given below are my contributions to the project.
     * Proofreading of UG and making changes such as standardising terms used throughout the UG.
 
 * **Contributions to the DG**:
-    * Added documentation for sort function 
-    * Added sequence diagram for sort function
+    * Added documentation for sort function and improved documentation for schedule command
+    * Added sequence and activity diagram for sort function and update activity diagram for scheduleCommand to include overriding
     * Update schedule and clear command documentation to include the warning prompts
 
 * **Community**:
