@@ -1272,6 +1272,21 @@ testers are expected to do more *exploratory* testing.
 
 2. Deleting fosterers while only some fosterers are shown follows similar test cases.
 
+### Listing a fosterer
+
+1. Find through an exact, quoted match with `"`.
+
+   1. Test case: `list "Pete"` <br>
+     Expected: Shown fosterers include "Pete" but not "Peter".
+
+2. Verify operator precedence and parentheses.
+
+   1. Test case: `list Doe & Sam / John` <br>
+     Expected: Equivalent to `list Doe & (Sam / John)`. Shown fosterers include "John Doe" but not "John Snow".
+
+   2. Test case: `list (Doe & Sam) / John` <br>
+     Expected: Shown fosterers include "Sam Doe" and "John Snow".
+
 ### Saving changes in details of fosterer when add is done in the profile page
 
 1. Saving the new fosterer added through the profile page
