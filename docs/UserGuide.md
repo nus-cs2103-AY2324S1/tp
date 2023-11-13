@@ -179,23 +179,23 @@ file.
 
 <div markdown="block" class="alert alert-info">
 
-| Parameter      | Description                                                     |
-|----------------|-----------------------------------------------------------------|
-| [ ]            | Optional field                                                  |
-| \<DESCRIPTION> | Any string                                                      |
-| \<NAME>        | Any string                                                      |
-| \<PHONE>       | Number with at least 3 digits (trailing zeroes are allowed)     |
-| \<EMAIL>       | Any string                                                      |
-| \<ADDRESS>     | Any string                                                      |
-| \<TAG>         | A single word with only alphabets and/or digits, with no spaces |
-| \<KEYWORD>     | A single word with no spaces                                    |
-| \<TYPE>        | R (for Revenue), or E (for Expense)                             |
-| \<AMOUNT>      | Any number                                                      |
-| \<DATE>        | In dd/MM/yy format                                              |
-| \<ID>          | ID of a transaction, an integer                                 |
-| \<STAFF ID>    | ID of staff, an integer                                         |
-| \<SORT TYPE>   | asc (ascending) or desc (descending)                            |
-| ...            | Multiple entries allowed, separated by a space                  |
+| Parameter      | Description                                                          |
+|----------------|----------------------------------------------------------------------|
+| [ ]            | Optional field                                                       |
+| \<DESCRIPTION> | Any string without `/`                                               |
+| \<NAME>        | String containing only letters and/or digits                         |
+| \<PHONE>       | Number with at least 3 digits (trailing zeroes are allowed)          |
+| \<EMAIL>       | See the [addstaff](#adding-staff--addstaff) command for full details |
+| \<ADDRESS>     | Any string without `/`                                               |
+| \<TAG>         | A single word with only alphabets and/or digits, with no spaces      |
+| \<KEYWORD>     | A single word with no spaces                                         |
+| \<TYPE>        | R (for Revenue), or E (for Expense) - case insensitive               |
+| \<AMOUNT>      | Any number                                                           |
+| \<DATE>        | In dd/MM/yy format                                                   |
+| \<ID>          | ID of a transaction, an integer                                      |
+| \<STAFF ID>    | ID of staff, an integer                                              |
+| \<SORT TYPE>   | asc (ascending) or desc (descending)                                 |
+| ...            | Multiple entries allowed, separated by a space                       |
 
 > ❗ Extraneous parameters for commands that do not take in parameters (such as view, help, list, exit, clearstaff,
 > cleartransaction, and clear) will be ignored. For example, if the command `help 123` is entered, it will be interpreted
@@ -332,6 +332,15 @@ Success output:
 Adds a new staff member.
 
 Format: `addstaff n/<NAME> p/<PHONE> e/<EMAIL> a/<ADDRESS> [t/<TAG>...]`
+
+- `EMAIL` should be of the format `local-part@domain` where:
+  - `local-part`:
+    - can only contain alphanumeric characters and `+`, `_`, `.`, `-`.
+    - should not start or end with any special characters.
+  - `domain` is made up of domain labels separated by periods, and must:
+      - end with a domain label at least 2 characters long
+      - have each domain label start and end with alphanumeric characters
+      - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 
 Success output: `New person added: <NAME>; Phone: <PHONE>; Email: <EMAIL>; Address: <ADDRESS>; [Tags: <TAG>...]`
 
