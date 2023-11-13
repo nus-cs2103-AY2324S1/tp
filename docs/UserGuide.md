@@ -9,11 +9,11 @@
 
 To all CS2103/T Teaching Assistants (TAs), 
 
-We understand your struggles in managing your students' information. We know it is difficult to keep track of your students' contact information, attendance, class participation and assignment grades. This is even more challenging when you teach multiple classes while juggling your schoolwork and other commitments.
+We understand your struggles in managing your students' information. We know it is difficult to keep track of your students' contact information, attendance, class participation, and assignment grades. This is even more challenging when you teach multiple classes while juggling your schoolwork and other commitments.
 
-This is why we are excited to introduce **Class Manager 2023**, an all-in-one application designed to streamline your class management duties. **Class Manager 2023** will help you to save time, streamline your TA duties and allow you to focus on what matters most - your students.
+This is why we are excited to introduce **Class Manager 2023**, an all-in-one application designed to streamline your class management duties. **Class Manager 2023** will help you to save time, streamline your TA duties, and allow you to focus on what matters most - your students.
 
-This user guide is your key to mastering **Class Manager 2023**, with step-by-step instructions on installing and using our application. **Class Manager 2023** is designed to be intuitive and easy to use, so you can get started immediately!
+This user guide is your key to mastering **Class Manager 2023**, with step-by-step instructions on installing and using our application. It aims to provide a head start to the new users as well as a reference to the advanced users. **Class Manager 2023** is designed to be intuitive and easy to use, so you can get started immediately!
 
 --------------------------------------------------------------------------------------------------------------------
 <!-- * Table of Contents to be removed after PDF conversion -->
@@ -28,7 +28,7 @@ This user guide is your key to mastering **Class Manager 2023**, with step-by-st
 **Class Manager 2023** is an offline desktop application for CS2103/T: Software Engineering Teaching Assistants (TAs) in National University of Singapore (NUS) to manage their students' contacts and class information.
 
 **Class Manager 2023** allows users to:
-* store and manage student's contact information,
+* store and manage students' contact information,
 * keep track of and visualise student's class information such as attendance, class participation and assignment grades,
 * easily mark the attendance of multiple students for each tutorial session,
 * and much more!
@@ -439,10 +439,13 @@ Format: `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]…�
 * **ALL** the fields must be provided.
 * The `NAME` field is case-sensitive.
 * `PHONE` must be a 3 to 20 digit positive integer.
-
 * [`STUDENT_NUMBER`](#student-number) needs to be unique, and must not be blank.
 * When a student is added, their grades, attendance and class participation details will be initialised to `0`, `absent` and `false` respectively, for all tutorials.
 * Comment for a student can only be added after the student is added to the Student List.
+
+The following image shows a successful execution of the `add` command.
+
+<img alt="add-student-success" src="images/add-student-success.png" width="700" >
 
 <box type="tip" seamless>
 
@@ -479,17 +482,26 @@ Examples:
 * `comment s/A0249112A cm/This student is very hardworking and smart.`
 * `comment s/A0249112A cm/` (_This deletes the comment_)
 
+Displayed result if `comment` is successful: `Comment added successfully.` 
+
+Possible errors and their corresponding error messages:
+* If [`STUDENT_NUMBER`](#student-number) input is invalid.
+    * Error message: `Student Number can take any value starting with capital 'A', followed by numbers, and ending with a single alphabet.`
+* If [`STUDENT_NUMBER`](#student-number) does not belong to any student in **Class Manager 2023**.
+    * Error message: `There is no student with the given student number.`
+
+
 [Back to Table of Contents](#table-of-contents)
 
 ---
 
-### Delete one student : `delete`
+### Delete a student : `delete`
 
 Deletes an existing student in **Class Manager 2023** by specifying the student number.
 
 Format: `delete s/STUDENT_NUMBER`
 
-* The [`STUDENT_NUMBER`](#student-number) must be valid and exist.
+* The [`STUDENT_NUMBER`](#student-number) must be valid and exist in **Class Manager 2023**.
 
 Example:
 * `delete s/A0249112A`
@@ -503,6 +515,9 @@ Example:
 Deletes all existing students from **Class Manager 2023**. This command will not delete the data file. Use the `undo` command to undo this command.
 
 Format: `clear`
+
+Displayed result if `clear` is successful: `Class Manager has been cleared!`
+
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -541,6 +556,8 @@ Examples:
 Shows a list of all students in **Class Manager 2023**.
 
 Format: `list`
+
+Displayed result is `list` is successful: A list of all students in **Class Manager 2023**.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -647,6 +664,16 @@ Format: `present s/STUDENT_NUMBER tut/TUTORIAL_INDEX`
 
 Examples:
 * `present s/A0245234A tut/1`
+
+The following image shows a successful execution of the `present s/A0245234A tut/1` command.
+
+<img src="images/present-success.png" alt="result for `present s/A0245234A tut/1" width="700" />
+
+<box type="info" seamless>
+
+**Note:** `absent`, `present-all`, and `absent-all` have similar success messages.
+
+</box>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -815,7 +842,7 @@ Possible error and their corresponding message:
 |----------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [**Add a student**](#add-a-student-add)                        | `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com s/A0245234A c/T11 t/friend`  |
 | [**Comment on a student**](#comment-on-a-student-comment)      | `comment s/STUDENT_NUMBER cm/COMMENT` <br> e.g. `comment s/A0249112A cm/This student is very hardworking.`                                                    |
-| [**Delete one student**](#delete-one-student-delete)           | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                                       |
+| [**Delete a student**](#delete-a-student-delete)               | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                                       |
 | [**Delete all students**](#delete-all-students-clear)          | `clear`                                                                                                                                                       |
 | [**Edit a student's details**](#edit-a-student-s-details-edit) | `edit STUDENT_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`<br> e.g.`edit A0245234A n/John Doe p/98761234 e/johnd@example.com` |
 | [**List all students**](#list-all-students-list)               | `list`                                                                                                                                                        |
