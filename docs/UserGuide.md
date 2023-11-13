@@ -29,7 +29,7 @@ layout: page
 ## Table of Contents
 {: .no_toc }
 1. Table of Contents
-   {:toc}
+{:toc}
 
 <div style="page-break-after: always;"></div>
 
@@ -77,7 +77,7 @@ This guide uses the following features to make it easier for you to navigate aro
 3. Put the downloaded file into a folder of your choice (preferably a new empty folder).
 
 4. Open a command terminal in the folder you put the CCACommander file in, and use the `java -jar ccacommander.jar` command to run the application. A GUI resembling the one shown below should appear in a few seconds. Note how the app contains some sample data.<br>
-    <figure>
+    <figure style="margin-bottom:200px">
         <img src="images/Ui.png"
              alt="Ui"
              style="margin-top:10px; max-width: 90%">
