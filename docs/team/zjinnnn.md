@@ -39,11 +39,12 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-        * Re-organized sections in User Guide for better flow and readability (PR: [#153](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/153))
-          * Added `About this User Guide` section
+        * Re-organized sections in User Guide for better flow and readability (PR: [#153](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/153), [#166](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/166))
+          * Added `About this User Guide` , `Prefix Summary` section
           * Categorized features for better navigation
           * Added links to relevant sections for better navigation
         * Added details for `markAttendanceCommand` 
+        * Standardised User Guide format
     * Developer Guide:
         * Added implementation details for `markAttendanceCommand`
         * Added use cases
