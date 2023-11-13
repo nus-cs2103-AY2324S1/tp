@@ -21,6 +21,30 @@ public class ListCommandParserTest {
     private ListCommandParser parser = new ListCommandParser();
 
     @Test
+    public void parse_validArgs_returnsListStudentsCommand() {
+        // no leading and trailing whitespaces
+        ListStudentsCommand expectedListStudentsCommand = new ListStudentsCommand();
+        assertParseSuccess(parser, " students", expectedListStudentsCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, "       students      ", expectedListStudentsCommand);
+    }
+
+    @Test
+    public void parse_validArgs_returnsListAttendanceCommand() {
+        // with leading and trailing whitespaces
+        Optional<Tag> tag = Optional.of(new Tag("G02"));
+        Week week = new Week(1);
+        ListAttendanceCommand expectedListAttendanceCommand = new ListAttendanceCommand(tag, week,
+                new ContainsTagPredicate(tag), new AbsentFromTutorialPredicate(week, tag));
+        assertParseSuccess(parser, " attendance tg/G02 w/1 ", expectedListAttendanceCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, "    attendance      tg/     G02     w/    1      ",
+                expectedListAttendanceCommand);
+    }
+
+    @Test
     public void parse_emptyArgs_throwsParseException() {
         assertParseFailure(parser, "     ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
@@ -49,30 +73,5 @@ public class ListCommandParserTest {
     public void parse_listAttendanceExtraPreamble_throwsParseException() {
         assertParseFailure(parser, " attendance abc w/1 tg/G02 ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListAttendanceCommand.MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parse_validArgs_returnsListStudentsCommand() {
-        // no leading and trailing whitespaces
-        ListStudentsCommand expectedListStudentsCommand =
-                new ListStudentsCommand();
-        assertParseSuccess(parser, " students", expectedListStudentsCommand);
-
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, "       students      ", expectedListStudentsCommand);
-    }
-
-    @Test
-    public void parse_validArgs_returnsListAttendanceCommand() {
-        // with leading and trailing whitespaces
-        Optional<Tag> tag = Optional.of(new Tag("G02"));
-        Week week = new Week(1);
-        ListAttendanceCommand expectedListAttendanceCommand = new ListAttendanceCommand(tag, week,
-                new ContainsTagPredicate(tag), new AbsentFromTutorialPredicate(week, tag));
-        assertParseSuccess(parser, " attendance tg/G02 w/1 ", expectedListAttendanceCommand);
-
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, "    attendance      tg/     G02     w/    1      ",
-                expectedListAttendanceCommand);
     }
 }

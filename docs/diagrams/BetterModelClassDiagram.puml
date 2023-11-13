@@ -18,6 +18,6 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> ID
-Person *--> "*" Attendance
+Person *--> "     0...13" Attendance
 
 @enduml

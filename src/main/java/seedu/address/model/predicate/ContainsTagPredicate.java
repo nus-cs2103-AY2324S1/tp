@@ -20,8 +20,11 @@ public class ContainsTagPredicate extends SerializablePredicate {
      * @param tag Tag to check for in a person.
      */
     public ContainsTagPredicate(Optional<Tag> tag) {
-        super(person -> person.getTags().stream().anyMatch(
-                personTag -> personTag.equals(tag.get())));
+        super(person -> {
+            // Tag will always be present at point of invocation
+            assert tag.isPresent();
+            return person.getTags().stream().anyMatch(personTag -> personTag.equals(tag.get()));
+        });
         this.tag = tag;
     }
 
