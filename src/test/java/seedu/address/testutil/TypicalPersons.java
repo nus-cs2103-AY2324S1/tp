@@ -54,13 +54,13 @@ public class TypicalPersons {
             .withPolicy("NTUC", "4532", "29-02-2004", "29-02-2008").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("94822244")
             .withEmail("werner@example.com").withAddress("michegan ave").withNric("573H").withLicencePlate("SHL463C")
-            .withPolicy("NOCOMPANY", "NOPOLICY", "01-01-1000", "01-01-1000").build();
+            .withPolicy("!@#NO_COMPANY!@#", "NOPOLICY", "01-01-1000", "01-01-1000").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("94824277")
             .withEmail("lydia@example.com").withAddress("little tokyo").withNric("743G").withLicencePlate("SBA1Z")
-            .withPolicy("NOCOMPANY", "NOPOLICY", "01-01-1000", "01-01-1000").build();
+            .withPolicy("!@#NO_COMPANY!@#", "NOPOLICY", "01-01-1000", "01-01-1000").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("94824422")
             .withEmail("anna@example.com").withAddress("4th street").withNric("674G").withLicencePlate("SNM9735R")
-            .withPolicy("NOCOMPANY", "NOPOLICY", "01-01-1000", "01-01-1000").build();
+            .withPolicy("!@#NO_COMPANY!@#", "NOPOLICY", "01-01-1000", "01-01-1000").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("84824244")

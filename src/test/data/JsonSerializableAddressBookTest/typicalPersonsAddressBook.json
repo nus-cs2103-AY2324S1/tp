@@ -61,7 +61,7 @@
     "nric" : "573H",
     "licencePlate" : "SHL463C",
     "remark": "",
-    "company" : "NOCOMPANY",
+    "company" : "!@#NO_COMPANY!@#",
     "policyNumber" : "NOPOLICY",
     "policyIssueDate" : "01-01-1000",
     "policyExpiryDate" : "01-01-1000"
@@ -74,7 +74,7 @@
     "nric" : "743G",
     "licencePlate" : "SBA1Z",
     "remark": "",
-    "company" : "NOCOMPANY",
+    "company" : "!@#NO_COMPANY!@#",
     "policyNumber" : "NOPOLICY",
     "policyIssueDate" : "01-01-1000",
     "policyExpiryDate" : "01-01-1000"
@@ -87,7 +87,7 @@
     "nric" : "674G",
     "licencePlate" : "SNM9735R",
     "remark": "",
-    "company" : "NOCOMPANY",
+    "company" : "!@#NO_COMPANY!@#",
     "policyNumber" : "NOPOLICY",
     "policyIssueDate" : "01-01-1000",
     "policyExpiryDate" : "01-01-1000"

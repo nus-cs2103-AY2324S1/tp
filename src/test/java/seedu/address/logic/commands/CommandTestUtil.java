@@ -89,7 +89,6 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    public static final String INVALID_COMPANY_DESC = " " + PREFIX_TAG + ""; // company cannot be empty
 
     public static final String VALID_DELETE_MONTH = "02-2020";
     public static final String VALID_DELETE_MONTH_2 = "10-2020";
