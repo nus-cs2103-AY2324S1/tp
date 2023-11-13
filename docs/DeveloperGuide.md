@@ -358,6 +358,42 @@ The following activity diagram summarizes what happens when a user executes a `t
 
 <div style="page-break-after: always;"></div>
 
+### Trend feature
+
+#### Implementation
+The `trend` command allows users to generate a statistical line graph, showing the trend of tuition enrolments of a specific year.
+
+When the user enters a trend command, the `AddressBookParser` parses the user's input using `TrendCommandParser` and returns a `TrendCommand`.
+
+The parameters entered by user for a trend command are expected to be only `y/`. When the `TrendCommand` instance created by `AddressBookParser` executes, it will return a TrendCommandResult.
+
+The following sequence diagram shows how the `trend` command works. In this example, the user is executing the following command: `trend y/2023`
+
+<puml src="diagrams/TrendSequenceDiagram.puml" alt="TrendSequenceDiagram" />
+
+As shown in the sequence diagram, when the `TrendCommandParser` parses the arguments to the TrendCommand, it creates a TrendCommand instance by passing in `2023` as argument so that when this `TrendCommand` executes, the trend of tuition enrolments of 2023 will be shown.
+
+<div style="page-break-after: always;"></div>
+
+The following activity diagram summarizes what happens when a user executes a `trend` command:
+
+<puml src="diagrams/TrendActivityDiagram.puml" alt="TrendActivityDiagram" width="300" />
+
+#### Design considerations:
+**Aspect: How to parse the argument for trend internally:**
+
+* **Alternative 1 (current choice):** Create a CommandParser specifically for TrendCommand.
+  * Pros: Provides better abstraction.
+  * Cons: May be redundant as we only need to parse a year string.
+
+* **Alternative 2: Parse inside `TrendCommand`.
+  * Pros: Easier to implement, more straightforward and more intuitive.
+  * Cons: Code might be messier and longer, errors are harder to be handled.
+
+* We made the choice of Alternative 1 over Alternative 2 as we found that the creating a TrendCommandParser specifically for TrendCommand has cleaner code, handles error better, and it is generally a better practice.
+
+<div style="page-break-after: always;"></div>
+
 ### Export feature
 
 #### Implementation
