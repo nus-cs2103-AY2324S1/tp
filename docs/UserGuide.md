@@ -15,7 +15,7 @@ Gone are the days of having to manually manage your TAs. TAManager is here to he
 
 ### 💡 Why choose TAManager?
 {:.no_toc}
-- **Easy-to-use**: TAManager is optimized for use via a [Command Line Interface (CLI)](#command-line-interface--cli-), with all the benefits of a [Graphical User Interface (GUI)](#graphical-user-interface--gui-), making it intuitive to use.
+- **Easy-to-use**: TAManager is optimized for use via a [Command Line Interface (CLI)](#command-line-interface-cli), with all the benefits of a [Graphical User Interface (GUI)](#graphical-user-interface-gui), making it intuitive to use.
 - **Efficient**: If you can type fast, TAManager can help you manage your TAs faster than traditional GUI apps, allowing you to save more time.
 
 ### 🎉 What can TAManager do for you?
@@ -369,8 +369,8 @@ delete INDEX
 | `INDEX` | Positive integer (1, 2, 3, ...) | Index of the teaching assistant in the TA List to be deleted. This index is with reference to the **displayed** TA list. |
 
 ##### Examples:
-- [`list`](#13-viewing-teaching-assistants--list) followed by `delete 2` deletes the second teaching assistant in the address book.
-- `find n/Betsy` followed by `delete 1` deletes the first teaching assistant in the results of the [`find`](#14-finding-a-teaching-assistant--find) command.
+- [`list`](#13-viewing-teaching-assistants-list) followed by `delete 2` deletes the second teaching assistant in the address book.
+- `find n/Betsy` followed by `delete 1` deletes the first teaching assistant in the results of the [`find`](#14-finding-a-teaching-assistant-find) command.
 
 ![remove TA](images/deleteTA.png)
 *<center>TAManager deletes the teaching assistant at index <code>7</code>.</center>*
@@ -755,8 +755,20 @@ If your changes to the data file makes its format invalid, TAManager will discar
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in your other computer and overwrite the empty data file it creates with the file that contains the data of your previous TAManager.
 
-**Q**: How do I make backup/restore my data?<br>
-**A**: The data file is automatically saved in the hard disk after any command that changes the data. You can make a backup of this file.
+**Q**: What is default course?<br>
+**A**: The default course is the course that you are currently managing or teaching. It is a useful setting to personalize your TAManager experience.
+
+**Q**: Why can't I add a course to the course list?<br>
+**A**: At the moment, TAManager does not support adding course to the course list. However, advanced users can edit the course list directly by editing the `courses.json` file.
+
+**Q**: Why is free time only available from Monday to Friday?<br>
+**A**: At the moment, TAManager only supports free time from Monday to Friday. As TAs are usually not working on weekends, we have decided to not include weekends in the free time feature.
+
+**Q**: Why can't I add a teaching assistant with the same name as an existing teaching assistant?<br>
+**A**: TAManager does not allow duplicate teaching assistants. This is to prevent confusion when you are managing your teaching assistants.
+
+**Q**: What if I teach multiple courses?<br>
+**A**: Currently TAManager only supports one default course. To manage multiple courses, you can run multiple instances of TAManager as a workaround.
 
 <span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
 
@@ -765,14 +777,23 @@ If your changes to the data file makes its format invalid, TAManager will discar
 ## Glossary 
 
 ### Command Line Interface (CLI)
-CLI is a text-based interface that allows users to interact with a computer or software application by typing commands into a terminal or command prompt. CLI relies on text commands to perform tasks.
+CLI is a text-based interface that allows users to interact with a computer or software application by typing commands into a terminal. CLI relies on text commands to perform tasks.
 
-Example: When a user types `hour 2` and presses Enter, the application will add 2 hours to all TAs in the list.
+TAManager is a CLI application where you can type commands to manage your teaching assistants.
+
+Example: When a user types `hour 2` and presses Enter, TAManager will add 2 hours to all TAs in the list.
 
 ### Graphical User Interface (GUI)
-GUI is a type of interface that facilitates user interactions using visual representations, such as icons, buttons and windows.  
+GUI is a type of interface that uses visual representations, such as icons, buttons and windows to interact with the system.  
+
+TAManager has a GUI that allows you to view and manage the contact information of your teaching assistants.
 
 Example: When a user types `list` and presses Enter, the application will list all TAs and user can scroll through the list to view the list.
+
+### Javascript Object Notation (JSON)
+JSON is a lightweight data-interchange format that is easy for humans to read and write. It is also easy for machines to parse and generate.
+
+We have decided to use JSON as the format for TAManager data so that advanced users can easily edit the data file directly.
 
 <span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
 
@@ -791,24 +812,27 @@ Example: When a user types `list` and presses Enter, the application will list a
 <br>
 **Solution:** Resize the window to view the full field where possible, or consider shorting the field by using initials or abbreviations.
 </div>
+
+<span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
+
 --------------------------------------------------------------------------------------------------------------------
 ## Command Summary
 Commands are arranged in alphabetical order for your easy reference.
 
-| Action                                                                      | Format, Examples                                                                                                                                                                                           |
-|-----------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Add](#11-adding-a-teaching-assistant--add)**                             | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [t/TAG]... [c/COURSE_CODE]... h/HOUR` <br> e.g. `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10`  |
-| **[Clear](#32-clearing-all-entries--clear)**                                | `clear`                                                                                                                                                                                                    |
-| **[Clear default course](#23-reset-the-default-course--clearteach)**        | `clearteach`                                                                                                                                                                                               |
-| **[Course](#21-viewing-course-information--course)**                        | `course c/[COURSE_CODE]`<br> e.g. `course c/CS2103T`                                                                                                                                                       |
-| **[Delete](#15-removing-a-teaching-assistant--delete)**                     | `delete INDEX`<br> e.g. `delete 3`                                                                                                                                                                         |
-| **[Edit](#12-editing-a-teaching-assistant--edit)**                          | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [t/TAG]... [c/COURSE_CODE]... h/HOUR` <br> e.g. `edit n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10` |
-| **[Edit free time](#17-editing-free-time-of-a-teaching-assistant--editft)** | `editft INDEX d/DAY from/FROM to/FROM` <br> e.g. `editft 1 d/2 from/12:30 to/13:30`                                                                                                                        |
-| **[Exit](#33-exiting-the-program--exit)**                                   | `exit`                                                                                                                                                                                                     |
-| **[Find](#14-finding-a-teaching-assistant--find)**                          | `find PREFIX KEYWORD [MORE_KEYWORDS]`<br> e.g. `find n/Alex`, `find c/cs1231s`, `find from/10:00 to/12:00`, `find n/Alex c/cs1231s`, `find c/cs2103t from/10:00 to/12:00`                                  |
-| **[Help](#31-viewing-help--help)**                                          | `help`                                                                                                                                                                                                     |
-| **[Hour](#16-updating-hours-for-teaching-assistants--hour)**                | `hour INTEGER`<br> e.g. `hour 2`                                                                                                                                                                           |
-| **[List](#13-viewing-teaching-assistants--list)**                           | `list`                                                                                                                                                                                                     |
-| **[Teach](#22-adding-a-default-course--teach)**                             | `teach c/[COURSE_CODE]`<br> e.g. `teach c/CS2103T`                                                                                                                                                         |
+| Action                                                                     | Format, Examples                                                                                                                                                                                           |
+|----------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Add](#11-adding-a-teaching-assistant-add)**                             | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [t/TAG]... [c/COURSE_CODE]... h/HOUR` <br> e.g. `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10`  |
+| **[Clear](#32-clearing-all-entries--clear)**                               | `clear`                                                                                                                                                                                                    |
+| **[Clear default course](#23-reset-the-default-course--clearteach)**       | `clearteach`                                                                                                                                                                                               |
+| **[Course](#21-viewing-course-information--course)**                       | `course c/[COURSE_CODE]`<br> e.g. `course c/CS2103T`                                                                                                                                                       |
+| **[Delete](#15-removing-a-teaching-assistant-delete)**                     | `delete INDEX`<br> e.g. `delete 3`                                                                                                                                                                         |
+| **[Edit](#12-editing-a-teaching-assistant-edit)**                          | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [t/TAG]... [c/COURSE_CODE]... h/HOUR` <br> e.g. `edit n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10` |
+| **[Edit free time](#17-editing-free-time-of-a-teaching-assistant-editft)** | `editft INDEX d/DAY from/FROM to/FROM` <br> e.g. `editft 1 d/2 from/12:30 to/13:30`                                                                                                                        |
+| **[Exit](#33-exiting-the-program--exit)**                                  | `exit`                                                                                                                                                                                                     |
+| **[Find](#14-finding-a-teaching-assistant-find)**                          | `find PREFIX KEYWORD [MORE_KEYWORDS]`<br> e.g. `find n/Alex`, `find c/cs1231s`, `find from/10:00 to/12:00`, `find n/Alex c/cs1231s`, `find c/cs2103t from/10:00 to/12:00`                                  |
+| **[Help](#31-viewing-help--help)**                                         | `help`                                                                                                                                                                                                     |
+| **[Hour](#16-updating-hours-for-teaching-assistants-hour)**                | `hour INTEGER`<br> e.g. `hour 2`                                                                                                                                                                           |
+| **[List](#13-viewing-teaching-assistants-list)**                           | `list`                                                                                                                                                                                                     |
+| **[Teach](#22-adding-a-default-course--teach)**                            | `teach c/[COURSE_CODE]`<br> e.g. `teach c/CS2103T`                                                                                                                                                         |
 
 <span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
