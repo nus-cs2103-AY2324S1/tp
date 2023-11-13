@@ -34,7 +34,7 @@ You can reach us at the email `linktreeltd@gmail.com`
 
 <img src="images/adhigop13.png" width="200px">
 
-[[github](http://github.com/adhigop13)] 
+[[github](http://github.com/adhigop13)]
 [[portfolio](team/adhigop13.md)]
 
 * Role: Developer

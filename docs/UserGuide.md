@@ -6,11 +6,11 @@ pageNav: 3
 
 # LinkTree User Guide
 
-LinkTree is a **desktop app optimized for developers engaged in startups** who require organized and streamlined 
-methods for contact management. With LinkTree, swiftly connect with the right stakeholder, ensuring smooth 
+LinkTree is a **desktop app optimized for developers engaged in startups** who require organized and streamlined
+methods for contact management. With LinkTree, swiftly connect with the right stakeholder, ensuring smooth
 project execution and superior collaboration.
 
-This user guide is designed to help our users to understand and make the most of out of LinkTree. This guide is to 
+This user guide is designed to help our users to understand and make the most of out of LinkTree. This guide is to
 provide clear and comprehensive instructions, to assist our users in understanding the core features and functions of
 LinkTree application. It is your **companion** for unlocking the full potential of LinkTree to effectively manage your
 teams.
@@ -29,8 +29,8 @@ you can access contacts by roles and responsibilities instantly.
   * [Understanding the GUI](#understanding-the-gui)
   * [Tutorial on using our Commands](#tutorial-on-using-our-commands)
 * [Features](#features)
-  * [Date & Time Command](#date--time-command)
-  * [Add developer](#add-developer)
+  * [Date & Time Command](#features)
+  * [Add developer](#add-command)
   * [Remove developer](#remove-developer)
   * [Edit developer](#edit-developer)
   * [Find developer](#find-developer)
@@ -47,14 +47,14 @@ you can access contacts by roles and responsibilities instantly.
   * [Help Command](#help-command)
   * [Reset the project](#reset-the-project)
   * [Exit the application](#exit-the-application)
-* [FAQs](#faqs)
+* [FAQs](#faq)
 * [Support](#support)
 * [Known issues](#known-issues)
 * [Command Summary](#command-summary)
-* [Future Enhancement](#future-enhancement)
+* [Future Enhancement](#future-enhancements)
 * [Glossary](#glossary)
 
-<page-nav-print />
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -79,10 +79,10 @@ used for easy navigation.
 * Want an overview of all the commands? Click [here](#command-summary)!<br>
 * Any further questions that are unresolved? Check out our [FAQ](#faq)!<br>
 * Confused about the terms we have used? Check out our [Glossary](#glossary).<br>
-* You may also contact us at [linktreeltd@gamil.com](mailto:linktreeltd@gamil.com) for further doubts!
+* You may also contact us at [linktreeltd@gmail.com](mailto:linktreeltd@gmail.com) for further doubts!
 
 **Formatting and Icons**: Throughout the guide, we use bold text and colors to emphasize key points and important terms.
-Icons are used to draw your attention to noteworthy tips and additional information. 
+Icons are used to draw your attention to noteworthy tips and additional information.
 Here are some symbols you might encounter in our guide, and their respective meanings:
 
 [//]: # (Table inspired by NUSCoursemates https://ay2324s1-cs2103t-t17-4.github.io/tp/UserGuide.html)
@@ -106,7 +106,7 @@ Here are some symbols you might encounter in our guide, and their respective mea
 
 ### Installation
 
-1. Ensure you have Java `11` or above installed on your Computer. 
+1. Ensure you have Java `11` or above installed on your Computer.
 Check out our [FAQ](#faq) if you are not sure how to download Java `11`.
 2. LinkTree is compatible with all major operating systems, including Windows, macOS and Linux.
 3. Download the latest `linktree.jar` from [here](https://github.com/AY2324S1-CS2103T-W11-4/tp/releases).
@@ -121,6 +121,8 @@ Check out our [FAQ](#faq) if you are not sure how to download Java `11`.
 It will open a new help window, that shows all the commands in linktree.
 
 3. Refer to the [features](#features) section for details of each command.
+
+<div style="page-break-after: always;"></div>
 
 
 ### Understanding the GUI
@@ -187,7 +189,11 @@ When you enter the command (Hi):
 - Please ensure that the first letter of the command is uppercase. For instance, use `Hi` instead of `hi` or `HI`.
 - The command does not take any additional arguments or keywords.
 </div>
+
+Click [here](#table-of-contents) to go back to contents.
+
 <br>
+
 
 --------------------------------------------------------------------------------------------------------------------
 **The following commands are for managing developers.** 
@@ -198,7 +204,6 @@ When you enter the command (Hi):
 
 #### Command format: 
 * `add n/[Developer Name] p/[Phone Number] e/[Email] a/[Address] (OPTIONAL r/[Remark] t/Tags)`
-* `newdev n/[Developer Name] p/[Phone Number] e/[Email] a/[Address] (OPTIONAL r/[Remark] t/Tags)`
   
 #### Example usage:
 - For example, to add a new developer John to the addressboook, type
@@ -210,6 +215,9 @@ When you enter the command (Hi):
 **:information_source: Note:**<br>
 * The `add` command allows for numbers and other special characters for the `name` parameter. This is to allow for more flexibility with naming.
 </div>
+
+Click [here](#table-of-contents) to go back to contents.
+
 <br>
 
 ### Remove developer
@@ -230,11 +238,11 @@ Then type `delete 3` to delete that entry.
 
 **:information_source: Note:**<br>
 * Index must be a positive integer.
-* You cannot delete a developer who is a **team leader** for any of the teams. Inorder to delete that developer, we 
-recommend you to change the team leader using `editTeamLeader` command. And then you can remove that developer from the 
-team.
+* You cannot delete a developer who is a **team leader** for any of the teams. To delete that developer, you will have to change the team leader using `editTeamLeader` command. And then you can remove that developer from the addressbook.
  ![DeleteTeamLeader](images/UG_images/DeleteTeamLeader.png)
 </div>
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-danger">
 
@@ -242,7 +250,11 @@ team.
 * Deleting a developer who is not a team leader will remove that developer from all the teams and also from list
 of developers.
 </div>
+
+Click [here](#table-of-contents) to go back to contents.
+
 <br>
+
 
 ### Edit developer
 #### What this command does:
@@ -272,6 +284,9 @@ of developers.
   so I only provided this person's index `1`, new name `n/John Wick`
   and new email address `e/new.email@example.com`.
 </div>
+
+Click [here](#table-of-contents) to go back to contents.
+
 <br>
 
 
@@ -302,7 +317,11 @@ with first or last name being **Alex** or **David**.
 - The order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
 
 </div>
+
+Click [here](#table-of-contents) to go back to contents.
+
 <br>
+
 
 ### List developers
 #### What this command does:
@@ -332,8 +351,10 @@ Use the same command `list`. You will return to the home page.
 When you are at the main window, type `list` to show the developer list
 and type `list` again when you want to go back to the main window.
 </div>
-<br>
 
+Click [here](#table-of-contents) to go back to contents.
+
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -352,7 +373,10 @@ type `newteam tn/Team Delta tl/David Li`
 * In the following example, you can see new team **Team Delta** is added to the team list.
   ![AddTeamCommand](images/UG_images/AddTeamCommand.png)
 
-  
+Click [here](#table-of-contents) to go back to contents.
+
+<br>
+ 
 ### Add developers to team
 #### What this command does:
 * Helps to add existing developers in the addressbook to a team.
@@ -369,6 +393,9 @@ type `newteam tn/Team Delta tl/David Li`
 **:information_source: Note:**<br>
 * The specified developer and team must already exist in the project!
 </div>
+
+Click [here](#table-of-contents) to go back to contents.
+
 <br>
 
 ### Delete team
@@ -383,6 +410,8 @@ type `newteam tn/Team Delta tl/David Li`
 * You need to type `deleteteam tn/Team Alpha`, then the **Team Alpha** will be deleted from the list of teams.
   ![DeleteTeamCommand](images/UG_images/DeleteTeam.png)
 
+Click [here](#table-of-contents) to go back to contents.
+
 <br>
 
 ### Remove developer from team
@@ -395,15 +424,18 @@ type `newteam tn/Team Delta tl/David Li`
 #### Example usage:
 * For example: if you want to delete developer **John Lim** from **Team Bravo**.
 * You need to type `deletedev tn/Team Bravo n/John Lim`, then the developer 
-**John Lim** will be removed from **Team Alpha**.
+**John Lim** will be removed from **Team Bravo**.
   ![DeleteDevFromTeam](images/UG_images/DeleteDevFromTeam.png)
 
 <div markdown="block" class="alert alert-primary">
 
 **:information_source: Note:**<br>
-* You cannot delete a developer who is **team leader**. In order, delete that developer you need to change the
-  team leader using `editTeamLeader` command. Only then you can remove that developer from the team.
+* You cannot delete a developer who is **team leader**. To delete that developer, you'll have to change the
+  team leader of that team using `editTeamLeader` command. Only then you can remove that developer from the team.
 </div>
+
+Click [here](#table-of-contents) to go back to contents.
+
 <br>
 
 ### Edit team name
@@ -414,8 +446,8 @@ type `newteam tn/Team Delta tl/David Li`
 * `editTeamName tn/[Existing team name] tn/[New team name]`
 
 #### Example usage:
-  * Example: `editTeamName tn/Alpha Team tn/Beta Team`
-  - Result: Now, the team with original team name `Alpha Team` changed its team name to `Beta Team`.
+  * For example, if you want edit the team name **Team Alpha** to **Team Romeo**. Type `editTeamName tn/Team Alpha tn/Team Romeo`.
+  * You will now see that `Team Alpha` has been changed to `Team Romeo` in the list of teams.
     ![EditTeamNameCommand](images/UG_images/EditTeamNameCommand.png)
 
 <div markdown="block" class="alert alert-primary">
@@ -423,6 +455,9 @@ type `newteam tn/Team Delta tl/David Li`
 **:information_source: Note:**<br>
 * Remember to check that the new team name that you specify isn't already taken by another team in the teambook.
 </div>
+
+Click [here](#table-of-contents) to go back to contents.
+
 <br>
 
 ### Edit team leader
@@ -433,8 +468,8 @@ type `newteam tn/Team Delta tl/David Li`
 * `editTeamLeader tn/[Team name] tl/[New Team leader]`
 
 #### Example usage: 
-- `editTeamLeader tn/Alpha Team tl/Bob`
-  - Result: Now, the team with team name `Alpha Team` changed its team leader to be `Bob`.
+- For example, if want to change the team leader of `Team Romeo` to `John Lim`, you need to type `editTeamLeader tn/Team Romeo tl/John Lim`.
+- Now, you will see that the team leader for `Team Romeo` has changed to `John Lim`.
   ![EditTeamLeaderCommand](images/UG_images/EditTeamLeaderCommand.png)
   
 <div markdown="block" class="alert alert-primary">
@@ -442,6 +477,9 @@ type `newteam tn/Team Delta tl/David Li`
 **:information_source: Note:**<br>
 * Remember to check that the new leader specified is a person that already exists in the addressbook.
 </div>
+
+Click [here](#table-of-contents) to go back to contents.
+
 <br>
 
 ### Find Team
@@ -455,8 +493,8 @@ type `newteam tn/Team Delta tl/David Li`
 - For example, type `findteam Alpha` to find all the teams with keyword **Alpha**.
 - In the following example, you can see that the matching results are **Team Alpha** and **Alpha Squad**.
   ![FindTeamCommand](images/UG_images/FindTeamCommnd.png)
-- You can also use multiple keywords, for example type `findteam Bravo Charlie` which shows the following teams 
-**Bravo Team**, **Charlie Crew** and **Delta Bravo Charlie Team**.
+- You can also use multiple keywords, for example type `findteam Bravo Charlie` which will show the all the teams 
+with keywords Bravo or Charlie.
 
 
 <div markdown="block" class="alert alert-primary">
@@ -475,9 +513,15 @@ type `newteam tn/Team Delta tl/David Li`
 *  The search is case-insensitive. e.g., "team" will match "Team Alpha."
 </div>
 
+Click [here](#table-of-contents) to go back to contents.
+
+<br>
+
 ### List teams
 #### What this command does:
 * Displays the list of all the teams in this project.
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-primary">
 
@@ -504,6 +548,11 @@ When you are at the main window, type `listt` to show the team list
 and type `listt` again when you want to go back to the main window.
 </div>
 
+Click [here](#table-of-contents) to go back to contents.
+
+<div style="page-break-after: always;"></div>
+
+<br>
 
 ### Display tree
 #### What this command does:
@@ -547,11 +596,11 @@ When you are at the main window, type `tree` to show the tree graph
 and type `tree` again when you want to hide the tree and go back to the main window.
 </div>
 
-
---------------------------------------------------------------------------------------------------------------------
+Click [here](#table-of-contents) to go back to contents.
 
 <br>
 
+--------------------------------------------------------------------------------------------------------------------
 
 ### Help Command
 #### What this command does:
@@ -574,6 +623,8 @@ and type `tree` again when you want to hide the tree and go back to the main win
   ![HelpWindow](images/UG_images/HelpWindow.png)
   ![HelpCommandResult](images/UG_images/HelpCommandResult.png)
 
+Click [here](#table-of-contents) to go back to contents.
+
 <br>
 
 ### Reset the project
@@ -593,6 +644,9 @@ This command can be used when you want to restart the project.
 **:exclamation: Warning:**<br>
 * Using the clear command might result in unintended loss of data! Use it only when you intend to remove all of your data!
 </div>
+
+Click [here](#table-of-contents) to go back to contents.
+
 <br>
 
 ### Exit the application
@@ -614,7 +668,7 @@ Click [here](#table-of-contents) to go back to contents.
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
-#### Q: How can I launch Linktree if clicking on the JAR file does not work?
+##### Q: How can I launch Linktree if clicking on the JAR file does not work?
 **A:** Below is the CLI way to launch Linktree when encountering issues with the JAR file.
 1. Open the Command Prompt.
 2. Navigate to the directory where the JAR file is located using the following command:
@@ -622,17 +676,17 @@ Click [here](#table-of-contents) to go back to contents.
 4. Linktree should now launch.
 - If this doesn’t work, check our GitHub to make sure you have the latest version of Tran$act downloaded.
 
-#### Q: How can I transfer my Linktree data to another computer?
+##### Q: How can I transfer my Linktree data to another computer?
 **A:** To transfer your Linktree data, install the jar file on the new computer and replace the empty data files(addressbook.json & teambook.json) with the two from your previous Linktree home directory (tp/data).
 
-#### Q: What are the steps to install Java 11?
+##### Q: What are the steps to install Java 11?
 **A:**  To install Java 11, please refer to the [detailed download instructions available here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
-#### Q: Is Linktree compatible with Mac and Linux operating systems?
+##### Q: Is Linktree compatible with Mac and Linux operating systems?
 **A:**  Linktree is compatible with a wide range of operating systems,
 including Windows, Mac and Linux, and it runs on systems that support Java 11, so you can use it on your favorite platform.
 
-#### Q: What should I do if a command isn't working?
+##### Q: What should I do if a command isn't working?
 **A:** Below are the 5 potential ways to solve your issue:
 1. **Review the Command Syntax**:
   - Start by carefully reviewing the command you're trying to use. Ensure that you've entered it correctly, including all required components like command names, options, and arguments.
@@ -651,28 +705,28 @@ including Windows, Mac and Linux, and it runs on systems that support Java 11, s
 Reach out to your us in email or Github for assistance.
 Describe the problem in detail, including the command you're using, the error messages received, and any relevant context.
 
-#### Q: Why does Linktree not show all developers/teams in the database?
+##### Q: Why does Linktree not show all developers/teams in the database?
 **A:** If not all customers or properties are appearing, it's likely due to certain commands like find, or findteam. 
 1. *If you wish to view the developer list, you should use the list command.*
 2. *To display the complete list of teams, use the listt command.*
 3. *If you need to list both at the same time, you can use the list command twice or the listt command twice to revert to the default state.*
 
-#### Q: Is there a way to share my Linktree phonebook with others by exporting it to a different format such as a csv file?
+##### Q: Is there a way to share my Linktree phonebook with others by exporting it to a different format such as a csv file?
 **A:** Linktree does not currently support sharing your phonebook with others or exporting it to an external format.
 Its main function is personal communication management for supervisors.
 
-#### Q: I'm confused about some terms in the guide. Where can I find explanations?
+##### Q: I'm confused about some terms in the guide. Where can I find explanations?
 **A:** You can check out the explanation of some of the complicated terms in our glossary
 
-#### Q: I deleted my data file by mistake. Can I recover my lost data?
+##### Q: I deleted my data file by mistake. Can I recover my lost data?
 **A:** If you've accidentally deleted your data file, check your computer's trash or recycle bin.
 Unfortunately, if it's not there, recovering lost data is not possible.
 
-#### Q: How do I uninstall Linktree?
+##### Q: How do I uninstall Linktree?
 **A:** To uninstall Linktree, simply delete the folder that contains `linktree.jar` 
 - no installation on the hard drive means no complex uninstallation process.
 
-#### Q: Do I need to be online to use Linktree?
+##### Q: Do I need to be online to use Linktree?
 **A:** Linktree doesn't require an internet connection for regular use, but you will need to be online to download the application initially.
 
 
@@ -684,28 +738,33 @@ Click [here](#table-of-contents) to go back to contents.
 ## Support
 If you encounter any issues or have questions about LinkTree, we're here to help. Please find the relevant support resources below:
 
-### Contact Information
+##### Contact Information
 For personalized assistance, you can reach out to our support team via email at [linktreeltd@gmail.com](mailto:linktreeltd@gmail.com). We aim to respond within [3 business days].
 
-### Frequently Asked Questions (FAQs)
+##### Frequently Asked Questions (FAQs)
 Check our [FAQs section](#faq) for answers to common questions and solutions to known problems.
 
-### Software Updates
+##### Software Updates
 
 Stay informed about the latest releases, bug fixes, and new features by checking our [Releases](https://github.com/AY2324S1-CS2103T-W11-4/tp/releases) regularly.
 
 
-### Feedback and Suggestions
+##### Feedback and Suggestions
 
 We value your feedback and suggestions. Share your ideas for improvement or new features through our feedback portal given below. Also, if you come across a bug or unexpected behavior, help us improve by reporting it in the feedback portal as well.
 [Feedback Portal](https://docs.google.com/forms/d/e/1FAIpQLSc4rIrGgKWQBDKxmMKP7S0pmuI42OEoxZ00Qaxo0K2rvlVLag/viewform?usp=sf_link)
 
-**Note:** Before reaching out for support, please ensure that you have checked our documentation for relevant information.
+
+<div markdown="block" class="alert alert-warning">
+
+**:bulb: Tips:**<br><br>
+To resolve any issues even faster, try checking out our documentation and FAQs!
+</div>
 
 We appreciate your continued support and strive to provide the best user experience possible.
 
 
-Click_ [here](#table-of-contents) to go back to contents.
+Click [here](#table-of-contents) to go back to contents.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -719,26 +778,26 @@ Click [here](#table-of-contents) to go back to contents.
 
 ## Command summary
 
-| Command            | Format and Example                                                                                                                                                         |
-|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Hi`               | Format: `Hi`<br/>Example: `Hi`                                                                                                                                             |
-| `add`              | Format: `add n/[Developer Name] p/[Phone] e/[Email] a/[Address] (OPTIONAL r/[Remark] t/[Tags])`<br/>Example: `add n/John p/89789678 e/John@gmail.com a/Singapore t/friend` |
-| `delete`           | Format: `delete [index number]`<br/> Example: `delete 7`                                                                                                                   |
-| `edit`             | Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]...`<br/>Example: `edit 1 n/John Wick e/new.email@example.com`                              |
-| `find`             | Format: `find [KEYWORD]`<br/>Example: `find John`                                                                                                                          |
-| `list`             | Format: `list`<br/>Example: `list`                                                                                                                                         |
-| `newteam`          | Format: `newteam tn/[TeamName] tl/[TeamLeader]`<br/> Example: `newteam tn/Team Delta tl/David Li`                                                                          |
-| `dev2team`         | Format: `dev2team tn/[TeamName] n/[Developer Name]`<br/>Example: `dev2team tn/Team Delta n/Irfan Ibrahim`                                                                  |
-| `deleteteam`       | Format: `deleteteam tn/[TeamName]`<br/>Example: `deleteteam tn/Team Alpha`                                                                                                 |
-| `deletedev`        | Format: `deletedev tn/[TeamName] n/[Developer Name]`<br/>Example: `deletedev tn/Team Alpha n/Roy Balakrishnan`                                                             |
-| `editTeamName`     | Format: `editTeamName tn/[Original Team Name] tn/[New Team Name]`<br/>Example: `editTeamName tn/Alpha Team tn/Beta Team`                                                   |
-| `editTeamLeader`   | Format: `editTeamLeader tn/[TeamName] tl/[TeamLeader]`<br/>Example: `editTeamLeader tn/Alpha Team tl/Bob`                                                                  |
-| `findteam`         | Format: `findteam [KEYWORD]`<br/> Example: `findteam Alpha`                                                                                                                |
-| `listt`            | Format: `listt`<br/>Example: `listt`                                                                                                                                       |
-| `tree`             | Format: `tree`<br/>Example: `tree`                                                                                                                                         |
-| `help` or Press F1 | Format: `help`<br/>Example: `help`                                                                                                                                         |
-| `clear`            | Format: `clear`<br/>Example: `clear`                                                                                                                                       |
-| `exit`             | Format: `exit`<br/>Example: `exit`                                                                                                                                         |
+| Command            | Format and Example                                                                                                                                                          |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Hi`               | Format: `Hi`<br/>Example: `Hi`                                                                                                                                              |
+| `add`              | Format: `add n/[Developer Name] p/[Phone] e/[Email] a/[Address] (OPTIONAL r/[Remark] t/[Tags])`<br/>Example: `add n/John p/89789678 e/John@gmail.com a/Singapore t/friend`  |
+| `delete`           | Format: `delete [index number]`<br/> Example: `delete 7`                                                                                                                    |
+| `edit`             | Format: `edit [Index number] (OPTIONAL n/[Developer Name] p/[Phone] e/[Email] a/[Address] r/[Remark] t/[Tag]...)`<br/>Example: `edit 1 n/John Wick e/new.email@example.com` |
+| `find`             | Format: `find [KEYWORD...]`<br/>Example: `find John`                                                                                                                        |
+| `list`             | Format: `list`<br/>Example: `list`                                                                                                                                          |
+| `newteam`          | Format: `newteam tn/[TeamName] tl/[TeamLeader]`<br/> Example: `newteam tn/Team Delta tl/David Li`                                                                           |
+| `dev2team`         | Format: `dev2team tn/[TeamName] n/[Developer Name]`<br/>Example: `dev2team tn/Team Delta n/Irfan Ibrahim`                                                                   |
+| `deleteteam`       | Format: `deleteteam tn/[TeamName]`<br/>Example: `deleteteam tn/Team Alpha`                                                                                                  |
+| `deletedev`        | Format: `deletedev tn/[TeamName] n/[Developer Name]`<br/>Example: `deletedev tn/Team Alpha n/Roy Balakrishnan`                                                              |
+| `editTeamName`     | Format: `editTeamName tn/[Original Team Name] tn/[New Team Name]`<br/>Example: `editTeamName tn/Alpha Team tn/Beta Team`                                                    |
+| `editTeamLeader`   | Format: `editTeamLeader tn/[TeamName] tl/[TeamLeader]`<br/>Example: `editTeamLeader tn/Alpha Team tl/Bob`                                                                   |
+| `findteam`         | Format: `findteam [KEYWORD]`<br/> Example: `findteam Alpha`                                                                                                                 |
+| `listt`            | Format: `listt`<br/>Example: `listt`                                                                                                                                        |
+| `tree`             | Format: `tree`<br/>Example: `tree`                                                                                                                                          |
+| `help` or Press F1 | Format: `help`<br/>Example: `help`                                                                                                                                          |
+| `clear`            | Format: `clear`<br/>Example: `clear`                                                                                                                                        |
+| `exit`             | Format: `exit`<br/>Example: `exit`                                                                                                                                          |
 
 Click [here](#table-of-contents) to go back to contents.
 
@@ -752,7 +811,7 @@ Click [here](#table-of-contents) to go back to contents.
 2. Currently, when the tree is displayed, if there are not enough teams to display to fill the windows, a white background fills up the empty space by default. This will be patched in a future release so that the empty space will carry the same default colour as the UI.
 3. Currently, when the tree is actively being displayed, it does not get refreshed when commands are run. For example, when a new developer is added to the addressbook, it does not reflect on the tree even though there is a feedback in the UI stating success. The tree gets refreshed only upon closing and reopening the tree. The auto-refresh feature will be implemented in a future release.
 4. When `delete 0` command is run, the command error stating `invalid command format` is too general. Even though it specifies that the index has to be a positive integer, we can change it in the future to give better information to specify that the index number has to be positive. So when typing this command, the new error would be like `Index provided is incorrect. It has to be a positive integer. Please try again.`
-
+5. Currently, the `help` command displays some of the most commonly used commands and their formats. Some commands like `findteam` and `hi` are not mentioned here. A future version of LinkTree will have a more comprehensive command summary page that will include all the valid commands and their formats.
 
 <br>
 
@@ -769,7 +828,7 @@ Click [here](#table-of-contents) to go back to contents.
 | .jar        | Java Archive - A file format used to package Java class files, associated metadata, and resources into a single archive file. It is a common format for distributing Java applications or libraries. |
 | Addressbook | A file that stores the list of developers in the application.                                                                                                                                        |
 | Teambook    | A file that stores the list of teams in the application.                                                                                                                                             |
-| Prefix      | A keyword used before certain elements in a command to specify its type or category.                                                                                                                 |                                     
+| Prefix      | A keyword used before certain elements in a command to specify its type or category.                                                                                                                 |                               
 | Tag         | A label or keyword assigned to developers for categorization and easy identification.                                                                                                                |
 | Tree        | A visual representation of the top-down project's structure, displaying teams and developers.                                                                                                        |
 | Index       | A numerical identifier assigned to developers or teams for reference.                                                                                                                                |             
