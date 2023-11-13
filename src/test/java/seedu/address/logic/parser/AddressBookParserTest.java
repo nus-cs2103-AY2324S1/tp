@@ -126,8 +126,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_schedule() throws Exception {
         ScheduleCommand command = (ScheduleCommand) parser.parseCommand(
-                ScheduleCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() +
-                        APPOINTMENT_NAME_DESC + APPOINTMENT_DATE_DESC);
+                ScheduleCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                        + APPOINTMENT_NAME_DESC + APPOINTMENT_DATE_DESC);
         assertEquals(new ScheduleCommand(INDEX_FIRST_PERSON, new Appointment(VALID_APPOINTMENT_NAME,
                 LocalDateTime.of(2023, 1, 1, 20, 0))), command);
     }
