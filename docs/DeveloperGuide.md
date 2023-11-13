@@ -1285,7 +1285,7 @@ testers are expected to do more *exploratory* testing.
 
 <div style="page-break-after: always;"></div>
 
-### Viewing Statistics of Fosterers
+### Viewing statistics of fosterers
 1. Viewing statistics of available fosterers
    1. Prerequisites: List all fosterers using the list or find command. At least 1 fosterer in the list.
    1. Test case: `stats avail`<br>
@@ -1300,5 +1300,36 @@ testers are expected to do more *exploratory* testing.
       Expected: Only availability statistics shown. `stats` commands will only display the first valid statistic field detected (ie. either `avail`, `current` or `housing`).
 2. Viewing statistics of current fosterers and housing types work similarly, replacing `avail` with `current` and `housing` respectively.
 
+### Editing details of a fosterer
+
+1. Editing through the main window
+   1. Prerequisites: At least one fosterer in the list, and the first fosterer has at least 2 tags.
+   1. Test case: `edit 1 p/99887776`<br>
+      Expected: Fosterer 1's phone number successfully edited.
+   1. Test case: `edit 1 t/new`<br>
+      Expected: Fosterer 1's existing tags are overwritten. The only tag is the `new` tag.
+   1. Test case: `edit 1 n/Ben Yeo  e/benyeo123@gmail.com`
+      Expected: Fosterer 1's name and email successfully edited.
+   1. Invalid edit commands to try: `edit n/Ben Yeo`, `edit x n/Ben Yeo` (where x is larger than the list size)
    
-        
+2. Opening the profile view for editing
+   1. Prerequisites: At least one fosterer in the list, and the first fosterer has at least 2 tags.
+   1. Test case: `edit 1` or `view 1` <br>
+      Expected: Profile view of fosterer 1 opens for editing.
+   1. Test case: `edit 1 list` or `edit` or `view` <br>
+      Expected: Profile view does not open, error message shown.
+
+3. Field jumping in profile view
+   1. Prerequisites: The profile view of a fosterer is currently open. 
+   1. Test case: `ph`<br>
+      Expected: Cursor jumps to the Phone field for editing.
+   1. Test case: `type`<br>
+      Expected: Cursor jumps to the Animal Type field for editing.
+
+4. Editing details in profile view
+   1. Availability = `NotAvailable`, Animal Name = `nil` Animal Type = `nil` <br>
+      Expected on Enter: Valid fosterer
+   1. Availability = `Available`, Animal Name = `nil` Animal Type = `nil`<br>
+      Expected on Enter: Valid fosterer.
+   1. Availability = `NotAvailable`, Animal Name = `mew` Animal Type = `able.Cat`<br>
+      Expected on Enter: Invalid fosterer, and error message shown.
