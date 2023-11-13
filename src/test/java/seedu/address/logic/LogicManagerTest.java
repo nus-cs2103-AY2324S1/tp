@@ -30,7 +30,12 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SaveCommand;
+import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.ViewExitCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -284,23 +289,13 @@ public class LogicManagerTest {
     }
 
     /**
-     * Executes the command in the profile page,
-     * confirms that the exception is thrown and that the result message is correct.
-     * @see #assertViewModeCommandFailure(String, Person, Index, Class, String, Model)
-     */
-    private void assertViewModeCommandFailure(String inputCommand, Person p, Index index, Class<? extends Throwable> expectedException,
-                                              String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        assertViewModeCommandFailure(inputCommand, p, index, expectedException, expectedMessage, expectedModel);
-    }
-
-    /**
      * Executes the command in profile page and confirms that
      * - the {@code expectedException} is thrown <br>
      * - the resulting error message is equal to {@code expectedMessage} <br>
      * - the internal model manager state is the same as that in {@code expectedModel} <br>
      */
-    private void assertViewModeCommandFailure(String inputCommand, Person p, Index index, Class<? extends Throwable> expectedException,
+    private void assertViewModeCommandFailure(String inputCommand, Person p, Index index,
+                                              Class<? extends Throwable> expectedException,
                                               String expectedMessage, Model expectedModel) {
         assertThrows(expectedException, expectedMessage, () -> logic.executeInView(inputCommand, p, index));
         assertEquals(expectedModel, model);
@@ -372,6 +367,7 @@ public class LogicManagerTest {
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(expectedModel.getFilteredPersonList().get(0), expectedPerson);
-        assertViewModeCommandFailure(saveCommand, expectedPerson, Index.fromZeroBased(0), CommandException.class, expectedMessage, expectedModel);
+        assertViewModeCommandFailure(saveCommand, expectedPerson,
+                Index.fromZeroBased(0), CommandException.class, expectedMessage, expectedModel);
     }
 }
