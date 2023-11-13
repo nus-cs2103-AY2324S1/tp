@@ -13,7 +13,11 @@
 
 ## **Acknowledgements**
 
-* https://github.com/rrice/java-string-similarity. Reused the sourcecode of this library to measure string similarity for the `help` command.
+This project is based on the [AddressBook Level-3](https://se-education.org/addressbook-level3/) project.
+
+Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+
+https://github.com/rrice/java-string-similarity. Reused the sourcecode of this library to measure string similarity for the `help` command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -829,16 +833,20 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file 
+   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   2. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   1. Re-launch the app by double-clicking the jar file.
+    Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Exiting
+
+    1.  Use the `exit` command to close the app.
+    Expected: app closes without error.
 
 ### Deleting a person
 
@@ -862,3 +870,36 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `delete 1`<br>
         Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. All events related to the first contact should be deleted from the event list as well
 
+### Adding tag
+
+1. Adding tag while all contacts is shown.
+    1. Prequisites: List all contacts using the list command. At least one contact shown in the list.<br>
+    1. Test case: `add tag -id 1 -t Frontend -t Java`
+    Expected: The new tags appear below the name of the first contact in the list. The list of tags added is shown in the status message.<br>
+    1. Test case: `add tag -id 0 -t Frontend`
+    Expected: No tag add is added. Error details shown in the status message.<br>
+    1. Test case: `add tag -id 1 -t HR representative`
+    Expected: No tag is added as tag name should not contain spaces. Error details shown in the status message.<br>
+
+1. Adding duplicate tag to a contact
+    1. Prequisites: List all contacts using the list command. At least one contact shown in the list has at least one tag.<br>
+    1. Test case: `add tag -id 1 -t x`, where x is an already existing tag in the first contact.
+    Expected: The new tag appear below the name of the first contact in the list. The list of tags added is shown in the status message.<br>
+    1. Test case: `add tad -id -t Frontend -t Frontend`
+    Expected: Only one `Frontend` tag is added below the name of the first contact. Only one `Frontend` tag is shown in the list of tags added in the status message.<br>
+
+### Deleting tag
+
+1. Deleting tag while all contacts is shown and tag exists.
+    1. Prequisites: List all contacts using the list command. At least one contact shown in the list has at least one tag.<br>
+    1. Test case: `delete tag -id 1 -t x`, where x is an existing tag in the first contact.
+    Expected: The tag x is no longer below the name of the first contact in the list. The list of tags deleted is shown in the status message.<br>
+    1. Test case: `delete tag -id 0 -t Frontend`
+    Expected: No tag add is deleted. Error details shown in the status message.<br>
+    1. Test case: `delete tag -id 1 -t HR representative`
+    Expected: No tag deleted as tag name should not contain spaces. Error details shown in the status message.<br>
+
+1. Deleting tag while all contacts is shown but tag does not exist.
+    1. Prequisites: List all contacts using the list command. At least one contact is shown in the list.<br>
+    1. Test case: `add tag -id 1 -t x`, where x is a non-existing tag in the first contact.
+    Expected: No tags is deleted. The list of tags deleted shown in the status message is empty while the list of tags not found contains x.<br>
