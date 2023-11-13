@@ -15,9 +15,9 @@ import seedu.address.model.person.predicates.AvailableTimePredicate;
 import seedu.address.testutil.PersonBuilder;
 
 public class AvailableTimePredicateTest {
-    LocalTime time1 = LocalTime.parse("10:00");
-    LocalTime time2 = LocalTime.parse("12:00");
-    LocalTime time3 = LocalTime.parse("14:00");
+    private final LocalTime time1 = LocalTime.parse("10:00");
+    private final LocalTime time2 = LocalTime.parse("12:00");
+    private final LocalTime time3 = LocalTime.parse("14:00");
 
     @Test
     public void equals() {

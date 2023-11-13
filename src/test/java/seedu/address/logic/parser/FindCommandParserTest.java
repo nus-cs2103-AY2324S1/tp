@@ -76,6 +76,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_invalidInterval_throwsNumberFormatException() {
-        assertParseFailure(parser, " d/aa from/10:00 to/12:00", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " d/aa from/10:00 to/12:00",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 }
