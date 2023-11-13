@@ -691,7 +691,7 @@ testers are expected to do more *exploratory* testing.
 
     2. Use the `java -jar tutormate.jar` command to run the application.
 
-    3. Expected: ___SCHEDULE list___ of lessons similar to the list panel in the picture shown above. The data in the application should be the same as the data in the application before it was shut down previously.
+    3. Expected: The list panel will show a list of lessons similar to the picture above (in ___SCHEDULE list___). The data in the application should be the same as the data in the application before it was shut down previously.
 
 * Saving Window Preferences
 
@@ -863,7 +863,7 @@ testers are expected to do more *exploratory* testing.
 
 ##### Deleting a lesson in ___SCHEDULE list___
 
-1. Prerequisites: List all lessons using the `list` command. There are more than 5 and less than 80 students in the displayed list of lessons.<br>
+1. Prerequisites: List all lessons using the `list` command. There are more than 2 and less than 80 students in the displayed list of lessons.<br>
 
 2. Test case: `deleteLesson 1`<br>
    Expected: First lesson is deleted from the list. Details of the deleted lesson is shown in the response box.
@@ -941,12 +941,15 @@ testers are expected to do more *exploratory* testing.
     * There are currently four students with names "Alex Wong", "Alex Yeoh", "Willy Wonka" and "Wong Max". <br><br>
    
 2. Test case: `find Alex` <br>
-   Expected: Only students with the name "Alex Wong" and "Alex Yeoh" are shown. A message indicating the number of students listed is shown in the response box.
+   Expected: Only students with the name "Alex Wong" and "Alex Yeoh" are shown in the list panel. A message indicating the number of students listed is shown in the response box.
 
-3. Test case: `find won` <br>
-   Expected: Only students with the name "Alex Wong", "Willy Wonka"  and "Wong Max" are shown. A message indicating the number of students listed is shown in the response box.
+3.  Test case: `find alex` <br>
+    Expected: Only students with the name "Alex Wong" and "Alex Yeoh" are shown in the list panel. A message indicating the number of students listed is shown in the response box.
 
-4. Test case: `find xyz` <br>
+4. Test case: `find won` <br>
+   Expected: Only students with the name "Alex Wong", "Willy Wonka"  and "Wong Max" are shown in the list panel. A message indicating the number of students listed is shown in the response box.
+
+5. Test case: `find xyz` <br>
    Expected: No students are shown. A message indicating 0 persons listed is shown in the response box.
 
 ##### Finding a lesson by name in ___SCHEDULE list___
@@ -956,18 +959,19 @@ testers are expected to do more *exploratory* testing.
     * There are currently three lessons with names "Chemistry Lesson at bedok", "lesson chem at kovan" and "bedok eng". <br><br>
 
 2. Test case: `find chem` <br>
-   Expected: Only lessons with the name "Chemistry Lesson at bedok" and "lesson chem at kovan" are shown. A message indicating the number of lessons listed is shown in the response box.
+   Expected: Only lessons with the name "Chemistry Lesson at bedok" and "lesson chem at kovan" are shown in the list panel. A message indicating the number of lessons listed is shown in the response box.
 
 3. Test case: `find bedok` <br>
-   Expected: Only students with the name "Chemistry Lesson at bedok" and "bedok eng" are shown. A message indicating the number of lessons listed is shown in the response box.
+   Expected: Only students with the name "Chemistry Lesson at bedok" and "bedok eng" are shown in the list panel. A message indicating the number of lessons listed is shown in the response box.
 
-4. Test case: `find x` <br>
-   Expected: No lessons are shown. A message indicating 0 lessons listed is shown in the response box.
+4. Test case: `find` <br>
+   Expected: List panel remains the same. Error indicating invalid command format is shown in the response box.
 
 
 ### Filter Feature
 
 ##### Filtering a student in ___STUDENTS list___
+
 1. Prerequisites:
     * List all students using the `list students` command.
     * There are currently four students with "ENGLISH" as subjects. 
@@ -984,7 +988,7 @@ testers are expected to do more *exploratory* testing.
    Expected: Two students are shown in the list panel. A message indicating filtered student list successfully is shown in the response box.
 
 5. Test case: `filter -subject bio` <br>
-   Expected: List panel remains the same. A message indicating invalid filter format and subject constraints is shown in the response box.
+   Expected: List panel remains the same. Error indicating invalid filter format and subject constraints is shown in the response box.
 
 
 ##### Filtering a lesson in ___SCHEDULE list___
@@ -1006,6 +1010,111 @@ testers are expected to do more *exploratory* testing.
 
 5. Test case: `filter -before 2023/10/10` <br>
    Expected: No lessons are shown in the list panel. A message indicating filtered schedule list successfully is shown in the response box.
+
+### Link Feature
+
+##### Linking a lesson to a student in ___STUDENTS list___
+
+1. Prerequisites:
+    * List all students using the `list students` command.
+    * There are currently two lessons with names "Chemistry Lesson at Bedok", "Biology Lesson at Bedok" and "English Lesson".
+    * There is a student with the name "Alex Yeoh" with no lessons linked to him.
+    * A student is shown with the `show` command with only one lesson named "Bedok Lesson".<br><br>
+
+2. Test case: `linkTo Chemistry Lesson at Bedok` <br>
+   Expected: Lesson with the name "Chemistry Lesson at Bedok" is linked to the currently shown student in the details panel. A message indicating student linked to lesson is shown in the response box.
+
+3. Test case: `link -student alex yeoh -lesson biology lesson at bedok` <br>
+   Expected: Student "Alex Yeoh" is linked to the lesson with the name "Biology Lesson at Bedok". A message indicating student linked to lesson is shown in the response box.
+
+4. Test case: `linkTo english` <br>
+   Expected: No lesson is added to the currently shown student in the details panel. Error indicating no such lesson is shown in the response box.
+
+5. Test case: `linkTo` <br>
+   Expected: No lesson is added to any student. Error indicating name should be alphanumeric and `linkTo` command usage is shown in the response box.
+
+
+##### Linking a student to a lesson in ___SCHEDULE list___
+
+1. Prerequisites:
+    * List all students using the `list` command.
+    * There are currently three students with names "Alex Wong", "Alex Yeoh", "Willy Wonka" and "Willy Max".
+    * There is a lesson with name "Bedok Lesson" with no students linked to it.
+    * A lesson is shown with the `show` command with only one student named "Alex Wong".<br><br>
+
+2. Test case: `linkTo Alex Yeoh` <br>
+   Expected: Student "Alex Yeoh" is linked to the currently shown lesson in the details panel. A message indicating student linked to lesson is shown in the response box.
+
+3. Test case: `link -student willy max -lesson bedok lesson` <br>
+   Expected: Student "Willy Max" is linked to the lesson with the name "Bedok Lesson". A message indicating student linked to lesson is shown in the response box.
+
+4. Test case: `linkTo willy` <br>
+   Expected: No student is added to the currently shown lesson in the details panel. Error indicating no student with name "willy" found is shown in the response box.
+
+5. Test case: `linkTo alex wong` <br>
+   Expected: No student is added to the currently shown lesson in the details panel. A message indicating student is already linked to lesson is shown in the response box.
+
+### Navigate Feature
+
+##### Navigating to lessons linked to a student in ___STUDENTS list___
+
+1. Prerequisites:
+    * List all students using the `list students` command.
+    * The first lesson in the list is named "Lesson at Bedok" with two students linked to it.
+    * The second lesson in the list is named "Lesson at Punggol" with no lessons linked to him.<br><br>
+   
+2. Test case: `show 1` followed by `nav` <br>
+   Expected: Two students are shown in the list panel. A message indicating navigated to lesson's students is shown in the response box.
+
+3. Test case: `show 2` followed by `nav` <br>
+   Expected: List panel remains the same. Error indicating the lesson has no linked students is shown in the response box.
+
+##### Navigating to students linked to a lesson in ___SCHEDULE list___
+
+1. Prerequisites:
+    * List all lessons using the `list` command.
+    * The first student in the list is named "Alex Yeoh" with three lessons linked to him.
+    * The second student in the list is named "Willy Wonka" with no lessons linked to him.<br><br>
+
+2. Test case: `show 1` followed by `nav` <br>
+   Expected: Three lessons are shown in the list panel. A message indicating navigated to student's lesson is shown in the response box.
+
+3. Test case: `show 2` followed by `nav` <br>
+   Expected: List panel remains the same. Error indicating no lessons linked to student is shown in the response box.
+
+### Command History Feature
+
+1. Prerequisites:
+    * Re-launch the application.
+    * `list students`, `list schedule`, `list tasks` were entered in this order into the command box.<br><br>
+
+2. Test case: (Steps 1 to 5 below are performed sequentially.)
+    * Step 1. Press the arrow up button on keyboard. <br>
+      Expected: `list tasks` is shown in the command box.
+    * Step 2. Press the arrow up button on keyboard again.<br>
+      Expected: `list schedule` is shown in the command box.
+    * Step 3. Press the arrow up button on keyboard again.<br>
+      Expected: `list students` is shown in the command box.
+    * Step 4. Press the arrow up button on keyboard again.<br>
+      Expected: `list students` remains in the command box.
+    * Step 5. Press the arrow down button on keyboard.<br>
+      Expected: `list schedule` is shown in the command box.
+
+### Clear Feature
+
+1. Prerequisites:
+    * There are more than 1 student, 1 lesson and 1 task in the application.<br><br>
+   
+2. Test case: `clear` <br>
+   Expected: The list panel becomes empty. A message indicating student, schedule and task list is cleared is shown in the response box.
+
+### Exit Feature   
+
+1. Prerequisites:
+    * Run the application.<br><br>
+
+2. Test case: `exit` <br>
+   Expected: The application exits.
 
 
 ### Saving data
