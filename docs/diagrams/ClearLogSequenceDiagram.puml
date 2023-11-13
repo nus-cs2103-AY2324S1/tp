@@ -7,25 +7,16 @@ participant ":Model" as Model
 participant ":LogBook" as LogBook
 
 -> ClearLogCommand: execute()
-activate ClearLogCommand
 
 alt Logger Tab not empty
   ClearLogCommand -> Model: addToHistory(this)
-  activate Model
   Model --> ClearLogCommand: Command added to history
-  deactivate Model
   ClearLogCommand -> Model: setLogBook(new LogBook())
-  activate Model
   Create LogBook
   Model -> LogBook
-  activate LogBook
-  deactivate LogBook
   LogBook --> Model : LogBook created
-  deactivate LogBook
   Model --> ClearLogCommand: Updated logBook with an empty LogBook
-  deactivate Model
   <-- ClearLogCommand: Return CommandResult (Success)
-  deactivate ClearLogCommand
 else Logger Tab is empty
   <-- ClearLogCommand : Throw CommandException
 end
