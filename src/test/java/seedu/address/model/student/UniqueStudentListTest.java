@@ -23,22 +23,27 @@ public class UniqueStudentListTest {
 
     private final UniqueStudentList uniqueStudentList = new UniqueStudentList();
 
+    // Tests for contains method
+    // null object
     @Test
     public void contains_nullStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueStudentList.contains(null));
     }
 
+    // student not in list
     @Test
     public void contains_studentNotInList_returnsFalse() {
         assertFalse(uniqueStudentList.contains(ALICE));
     }
 
+    // exact student in list
     @Test
     public void contains_studentInList_returnsTrue() {
         uniqueStudentList.add(ALICE);
         assertTrue(uniqueStudentList.contains(ALICE));
     }
 
+    // student with same name in list
     @Test
     public void contains_studentWithSameIdentityFieldsInList_returnsTrue() {
         uniqueStudentList.add(ALICE);
@@ -47,17 +52,31 @@ public class UniqueStudentListTest {
         assertTrue(uniqueStudentList.contains(editedAlice));
     }
 
+
+    // Tests for add method
+    // null object
     @Test
     public void add_nullStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueStudentList.add(null));
     }
 
+    // duplicate student, throws error
     @Test
     public void add_duplicateStudent_throwsDuplicateStudentException() {
         uniqueStudentList.add(ALICE);
         assertThrows(DuplicateStudentException.class, () -> uniqueStudentList.add(ALICE));
     }
 
+    // different student name
+    @Test
+    public void add_uniqueStudent_success() {
+        uniqueStudentList.add(ALICE);
+        Student newStudent = new StudentBuilder(ALICE).withName("Bobby Low").build();
+        uniqueStudentList.add(newStudent);
+    }
+
+    // Tests for setStudent method
+    // null objects
     @Test
     public void setStudent_nullTargetStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueStudentList.setStudent(null, ALICE));
@@ -68,11 +87,13 @@ public class UniqueStudentListTest {
         assertThrows(NullPointerException.class, () -> uniqueStudentList.setStudent(ALICE, null));
     }
 
+    // student does not exist (list is currently empty)
     @Test
     public void setStudent_targetStudentNotInList_throwsStudentNotFoundException() {
         assertThrows(StudentNotFoundException.class, () -> uniqueStudentList.setStudent(ALICE, ALICE));
     }
 
+    // student can be found in list -> success
     @Test
     public void setStudent_editedStudentIsSameStudent_success() {
         uniqueStudentList.add(ALICE);
@@ -81,6 +102,7 @@ public class UniqueStudentListTest {
         expectedUniqueStudentList.add(ALICE);
         assertEquals(expectedUniqueStudentList, uniqueStudentList);
     }
+
 
     @Test
     public void setStudent_editedStudentHasSameIdentity_success() {
@@ -102,6 +124,7 @@ public class UniqueStudentListTest {
         assertEquals(expectedUniqueStudentList, uniqueStudentList);
     }
 
+    // Edit student to have same name will not work
     @Test
     public void setStudent_editedStudentHasNonUniqueIdentity_throwsDuplicateStudentException() {
         uniqueStudentList.add(ALICE);
@@ -109,16 +132,21 @@ public class UniqueStudentListTest {
         assertThrows(DuplicateStudentException.class, () -> uniqueStudentList.setStudent(ALICE, BOB));
     }
 
+
+    // Tests for remove method
+    // null object
     @Test
     public void remove_nullStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueStudentList.remove(null));
     }
 
+    // Student does not exist
     @Test
     public void remove_studentDoesNotExist_throwsStudentNotFoundException() {
         assertThrows(StudentNotFoundException.class, () -> uniqueStudentList.remove(ALICE));
     }
 
+    // Success case
     @Test
     public void remove_existingStudent_removesStudent() {
         uniqueStudentList.add(ALICE);
@@ -127,11 +155,20 @@ public class UniqueStudentListTest {
         assertEquals(expectedUniqueStudentList, uniqueStudentList);
     }
 
+
+    // Tests for setStudents method, different from setStudent method
+    // null objects
     @Test
     public void setStudents_nullUniqueStudentList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueStudentList.setStudents((UniqueStudentList) null));
     }
 
+    @Test
+    public void setStudents_nullList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueStudentList.setStudents((List<Student>) null));
+    }
+
+    // Success cases
     @Test
     public void setStudents_uniqueStudentList_replacesOwnListWithProvidedUniqueStudentList() {
         uniqueStudentList.add(ALICE);
@@ -141,10 +178,6 @@ public class UniqueStudentListTest {
         assertEquals(expectedUniqueStudentList, uniqueStudentList);
     }
 
-    @Test
-    public void setStudents_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueStudentList.setStudents((List<Student>) null));
-    }
 
     @Test
     public void setStudents_list_replacesOwnListWithProvidedList() {
@@ -156,12 +189,14 @@ public class UniqueStudentListTest {
         assertEquals(expectedUniqueStudentList, uniqueStudentList);
     }
 
+    // Duplicate list -> throws error
     @Test
     public void setStudents_listWithDuplicateStudents_throwsDuplicateStudentException() {
         List<Student> listWithDuplicateStudents = Arrays.asList(ALICE, ALICE);
         assertThrows(DuplicateStudentException.class, () -> uniqueStudentList.setStudents(listWithDuplicateStudents));
     }
 
+    // UnmodifiableObservableList cannot be modified
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
