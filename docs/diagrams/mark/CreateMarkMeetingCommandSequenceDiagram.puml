@@ -1,0 +1,41 @@
+@startuml CreateMarkMeetingCommand
+!include ../style.puml
+
+title Create MarkMeetingCommand
+
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":MarkMeetingCommandParser" as MarkMeetingCommandParser LOGIC_COLOR
+participant "command:MarkMeetingCommand" as MarkMeetingCommand LOGIC_COLOR
+
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("mark 1")
+activate AddressBookParser
+
+create MarkMeetingCommandParser
+AddressBookParser -> MarkMeetingCommandParser
+activate MarkMeetingCommandParser
+
+MarkMeetingCommandParser --> AddressBookParser
+deactivate MarkMeetingCommandParser
+
+AddressBookParser -> MarkMeetingCommandParser : parse("1")
+activate MarkMeetingCommandParser
+
+create MarkMeetingCommand
+MarkMeetingCommandParser -> MarkMeetingCommand
+activate MarkMeetingCommand
+
+MarkMeetingCommand --> MarkMeetingCommandParser : command
+deactivate MarkMeetingCommand
+
+MarkMeetingCommandParser --> AddressBookParser : command
+deactivate MarkMeetingCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+MarkMeetingCommandParser -[hidden]-> AddressBookParser
+destroy MarkMeetingCommandParser
+
+AddressBookParser --> LogicManager : command
+deactivate AddressBookParser
