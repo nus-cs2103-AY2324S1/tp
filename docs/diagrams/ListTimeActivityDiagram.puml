@@ -2,23 +2,23 @@
 'https://plantuml.com/activity-diagram-beta
 
 start
-:User wants to delete a group or contact;
-:User runs the "delete" command;
+:User wants to list the times of a group or contact;
+:User runs the "listtime" command;
 if () then ([Invalid command format])
 :ProjectPRO throws an error;
-else (["delete g/GROUPNAME" or "delete n/NAME"])
-:ProjectPRO checks if User is deleting a group or contact;
-if () then (["delete g/GROUPNAME"])
+else (["listtime g/GROUPNAME" or "listtime n/NAME"])
+:ProjectPRO checks if User is listing time of a group or contact;
+if () then (["listtime g/GROUPNAME"])
 :ProjectPRO checks if group exists;
     if () then ([Group exists])
-    : ProjectPRO deletes specified group;
+    : ProjectPRO lists times of specified group;
     else([Else])
     : ProjectPRO throws an error;
     endif
-else(["delete n/NAME"])
+else(["listtime n/NAME"])
 : ProjectPRO checks if contact exists;
     if () then ([Contact exists])
-    : ProjectPRO deletes specified contact;
+    : ProjectPRO lists times of specified contact;
     else([Else])
     : ProjectPRO throws an error;
     endif
