@@ -112,7 +112,7 @@ Given below is a sequence diagram that explains how `LogicManager` class chooses
 
 ![isInViewModeSequenceDiagram](images/IsInViewModeSequenceDiagram.png)
 
-As the diagram suggests, the `executeInView()` method is used when personListPanelPlaceHolder UI element - the placeholder that contains the normal fosterer list - is invisible, which means the user sees the profile page. This triggers the `ViewModeParser` instance in `LogicManager` class to be used to parse the command. If the placeholder is visible, it means the user is seeing the main window, in which case the `execute()` method is used and the commands user enter are parsed by `AddressBookParser`. 
+As the diagram suggests, the `executeInView()` method is used when personListPanelPlaceHolder UI element - the placeholder that contains the normal fosterer list - is invisible, which means the user sees the profile page. This triggers the `ViewModeParser` instance in `LogicManager` class to be used to parse the command. If the placeholder is visible, it means the user is seeing the main window, in which case the `execute()` method is used and the commands the user enters are parsed by `AddressBookParser`. 
 
 The reason for creating two separate parser classes is to provide mutual exclusion between the commands available in main window and in a profile page. For example, `SaveCommand` should only be executed in the context of editing a fosterer's detail in profile page, not in main window. 
 
@@ -151,7 +151,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T13-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png"/>
 
 The `Model` component,
 
@@ -160,9 +160,13 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
+
+<div></div>
 
 Multiplicities and other navigabilities are omitted from diagram for simplicity.
 
