@@ -208,6 +208,15 @@ of schedule command is then returned. The partial class diagram is shown below.
 
 <img src="images/ScheduleClassDiagram.png" width="400"/>
 
+
+In the event the `Person` already has an existing appointment, a different instance of `CommandResult` is instantiated. This
+instance invokes the instructor that contains the `Person` as well as the new proposed `Appointment`. The returned 
+`CommandResult` instead results in the UI being notified that while the `ScheduleCommand` has been executed, the user
+should be prompted to confirm this change on the `OverrideWindow` of the UI. Only after confirmation of this is the 
+overriding of the appointment completed using the appointment and person stored in the `CommandResult`. In the event of
+cancelling the override, the program resumes its functionality, effectively discarding the execution of the rest of the 
+`Schedule Command`
+
 The following activity diagram summarises what happens the user executes a schedule command.
 
 <img src="images/ScheduleActivityDiagram.png" width="400"/>
@@ -243,6 +252,27 @@ Alternative 2: Create a hashset of Appointments for each Person.
   * Harder to implement operations such as editing of an appointment for a client. An additional step of finding the
   specified appointment within the hashset is required, which may potentially introduce more bugs.
   * Harder to implement default behaviours for when person has no appointment.
+
+
+**Aspect: How to implement override prompt**
+
+Alternative 1: Create a separate constructor in CommandResult
+- Pros:
+  * Quick solution to the problem
+  * This "freezes" functionality of the program to force user to acknowledge or cancel the execution of the command
+- Cons:
+  * This creates multiple different constructors within the CommandResult 
+
+Alternative 2: Abstract CommandResult to get a successfulExecutionResult and a PausedExecutionResult
+- Pros:
+  * Improves code readability and reduces coupling in code
+- Cons:
+  * Time consuming to refactor code
+  * Improper implementation could result in breaking of coding principles
+- Note:
+  * With additional time, alternative 2 can be implemented by refactoring the code to create multiple subclasses. Be wary of the
+    liskov substitution principle when doing so. The earlier alternative 2 is implemented, the better to reduce amount of code
+    that needs to be refactored.
 
 ### Complete Feature
 
@@ -395,34 +425,16 @@ setting the comparator on the list of clients wrapped in a SortedList wrapper.
 
 A `CommandResult` class is created and returned
 
-**Aspect: Usage Scenario:**
-
-**Scenario 1:**
-User enters a sort command `sort appointment`. The `SortByAppointmentComparator` will be initialized and used to
-instantiate a SortCommand that when executed causes the list to be sorted by appointment, showing the earlier appointment first.
-
-**Scenario 2:**
-User enters a sort command `sort name`. The `SortByNameComparator` will be initialized and used to instantiate a
-SortCommand that when executed causes the list to be sorted by lexicographical ordering of name.
-
-The following sequence diagram shows how the gather operation works:
-
-<img src="images/SortClassSequenceDiagram.png" width="700"/>
 
 #### Design Considerations
 
 **Aspect: How Sort Executes**
 
-**Aspect 1 :** User can sort by name and appointment at any time. As such, calling find on the sorted list will result
+**Alternative 1(current choice):** User can sort by name and appointment at any time. As such, calling find on the sorted list will result
 in the ordering of find to also be sorted.
-- **Pros:** Improved usability of maintaining order of list throughout without the list having to be reordered after
+- Pros: Improved usability of maintaining order of list throughout without the list having to be reordered after
 each command
-- **Cons:** Limited sorting options as of now
-
-**Aspect 2:** After sorting the first time, it will not be possible to return the list to its original ordering
-- **Pros:** Easier implementation of the sorting function.
-- **Cons:** Unlikely, but if for some reason the user wants the list sorted back to its original order, the only way
-is to restart the app at the current moment.
+- Cons: Limited sorting options as of now
 
 
 ### Appointment List Feature
