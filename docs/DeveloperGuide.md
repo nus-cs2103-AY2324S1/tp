@@ -300,10 +300,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | counsellor | block out busy times                         | prevent clashes in scheduling                                                        |
 | `*`      | counsellor | prevent double booking                       | prevent clashes in scheduling                                                        |
 | `*`      | counsellor | link students to the respective appointments | have easy access to the student profile that can help me prepare for the appointment |
-| `*`      | counsellor | add todos items                              | keep track of todos for each student                                                 |
-| `*`      | counsellor | view todos items                             | view todos for students at a glance                                                  |
-| `*`      | counsellor | link todos items to students                 | have easy access to the contact information for the students                         |
-| `*`      | counsellor | sort todos items by dateline                 | organise my appointments and plan my schedule accordingly                            |
 
 ### 6.3 Use cases
 
