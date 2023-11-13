@@ -1,4 +1,4 @@
-[---
+---
 layout: page
 title: Alan Lim's Project Portfolio Page
 ---
@@ -36,15 +36,13 @@ Given below are my contributions to the project.
   * Justification: Significantly improves searchability within the app, allowing for quick access to grouped data based on user-defined tags.
   * Highlights: Implemented efficient search algorithms to minimize retrieval time for tagged items.
 
-<div style="page-break-after: always;"></div>
-
 * **Code contributed**:  [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=freshcabbage123&breakdown=true)
 
 * **Project management**:
   * Opened issues for each milestone (Issue [#50](https://github.com/AY2324S1-CS2103T-T10-2/tp/issues/50), [#104](https://github.com/AY2324S1-CS2103T-T10-2/tp/issues/104), [#116](https://github.com/AY2324S1-CS2103T-T10-2/tp/issues/116))
   * Closed milestones
   * Contributed to maintenance of issue tracker
-  * Updated user guide with screenshots for teammates' features
+  * Updated UG with screenshots for teammates' features
 
 * **Enhancement to existing features**:
   * Refined error messages to ensure clarity and utility, employing event planning-specific language that resonates with the professional context of our users.  (PR [#108](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/108)) <br><br>
@@ -60,5 +58,3 @@ Given below are my contributions to the project.
 * **Community**:
   * PRs reviewed (with non-trivial review comments): PR [#118](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/118), [#115](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/115), [#85](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/85) 
   * Reported 9 bugs and suggestions during PE Dry Run. ([Repo](https://github.com/freshcabbage123/ped/issues))<br><br>
-
-* **Tools**:
