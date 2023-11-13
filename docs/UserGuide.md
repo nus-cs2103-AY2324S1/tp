@@ -1133,7 +1133,7 @@ atagt
 
 [Back to Table of Contents](#table-of-contents)
 
-You can view the tags in your contact list and task list and their frequencies, so that you can keep track of the tags you have used.
+You can view the tags in your contact list and task list, along with their frequencies, so that you can keep track of the tags you have used.
 
 <h4>Format:</h4>
 
