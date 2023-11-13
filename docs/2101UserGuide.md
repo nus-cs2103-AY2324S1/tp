@@ -129,7 +129,8 @@ Here are the important components of CCACommander that you will use and interact
 **Storage Location**: Locate where your CCACommander data is stored in your computer.
 
 ## Command History
-You can quickly recall previously entered commands for convenience as CCACommander stores almost all (see the info card below to see what commands are stored) commands entered by the user. <br/>
+You can quickly recall previously entered commands for convenience as CCACommander stores almost all (see the info card below to see what commands are stored) commands entered by the user. 
+
 Upon selecting the command box, you can use the <kbd>↑</kbd> to <kbd>↓</kbd> key to navigate through the commands entered.
 
 Example:
