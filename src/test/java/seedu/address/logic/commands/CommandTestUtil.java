@@ -182,4 +182,21 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredPersonList().size());
     }
 
+    /**
+     * Simulates an add command
+     */
+    public static void simulateAddCommand(Model model, Person person) {
+        model.purgeAddressBook();
+        model.addPerson(person);
+        model.commitAddressBook();
+    }
+
+    /**
+     * Simulates a delete command
+     */
+    public static void simulateDeleteCommand(Model model, Person person) {
+        model.purgeAddressBook();
+        model.deletePerson(person);
+        model.commitAddressBook();
+    }
 }

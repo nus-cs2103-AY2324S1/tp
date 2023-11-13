@@ -27,6 +27,17 @@ public class VersionedAddressBookTest {
     private final VersionedAddressBook oneVersionVersionedAddressBook = new VersionedAddressBook();
     private final VersionedAddressBook twoVersionVersionedAddressBook = new VersionedAddressBook();
 
+    public void simulateAddCommand(Person person, VersionedAddressBook addressBook) {
+        // purge addressbook
+        addressBook.purge();
+
+        // add person
+        addressBook.addPerson(person);
+
+        // commit addressbook
+        addressBook.commit();
+    }
+
     @Test
     public void constructor() {
         assertEquals(Collections.emptyList(), oneVersionVersionedAddressBook.getPersonList());
@@ -62,49 +73,29 @@ public class VersionedAddressBookTest {
     public void commit_newVersionedAddressBook_updatesPointer() {
         assertFalse(twoVersionVersionedAddressBook.hasPerson(ALICE));
 
-        // Simulate add command
-        twoVersionVersionedAddressBook.addPerson(ALICE);
-
-        // commit new version of address book into version history
-        twoVersionVersionedAddressBook.commit();
+        simulateAddCommand(ALICE, twoVersionVersionedAddressBook);
 
         assertTrue(twoVersionVersionedAddressBook.hasPerson(ALICE));
     }
 
     @Test
-    public void canRedo_detects_validRedo() {
-        assertFalse(twoVersionVersionedAddressBook.hasPerson(ALICE));
+    public void canRedo_detects_validUndo() {
+        simulateAddCommand(ALICE, twoVersionVersionedAddressBook);
 
-        // Simulate add command
-        twoVersionVersionedAddressBook.addPerson(ALICE);
-
-        // commit new version of address book into version history
-        twoVersionVersionedAddressBook.commit();
-
-        assertTrue(twoVersionVersionedAddressBook.hasPerson(ALICE));
-
-        // undo to empty addressbook
+        // Can undo non-empty history and pointer at the end -> true
         assertTrue(twoVersionVersionedAddressBook.canUndo());
     }
 
     @Test
-    public void canUndo_detects_validUndo() {
-        assertFalse(twoVersionVersionedAddressBook.hasPerson(ALICE));
-
-        // Simulate add command
-        twoVersionVersionedAddressBook.addPerson(ALICE);
-
-        // commit new version of address book into version history
-        twoVersionVersionedAddressBook.commit();
-
+    public void canUndo_detects_validRedo() {
+        simulateAddCommand(ALICE, twoVersionVersionedAddressBook);
         assertTrue(twoVersionVersionedAddressBook.hasPerson(ALICE));
 
         // Undo add command
         twoVersionVersionedAddressBook.undo();
-
         assertFalse(twoVersionVersionedAddressBook.hasPerson(ALICE));
 
-        // Undo to empty addressbook
+        // Can redo after undo command -> true
         assertTrue(twoVersionVersionedAddressBook.canRedo());
     }
 
@@ -116,21 +107,14 @@ public class VersionedAddressBookTest {
 
         assertEquals(twoVersionVersionedAddressBook, new AddressBook());
     }
+
     @Test
     public void purge_redundantDataPresent_removesRedundantData() {
-        assertFalse(twoVersionVersionedAddressBook.hasPerson(ALICE));
+        assertFalse(twoVersionVersionedAddressBook.hasPerson(BOB));
 
-        // Simulate add command
-        twoVersionVersionedAddressBook.addPerson(ALICE);
-        twoVersionVersionedAddressBook.commit();
-
-        // Undo add command
+        simulateAddCommand(BOB, twoVersionVersionedAddressBook);
         twoVersionVersionedAddressBook.undo();
-
-        // Simulate add command and purge redundant data
-        twoVersionVersionedAddressBook.purge();
-        twoVersionVersionedAddressBook.addPerson(BOB);
-        twoVersionVersionedAddressBook.commit();
+        simulateAddCommand(BOB, twoVersionVersionedAddressBook);
 
         assertFalse(twoVersionVersionedAddressBook.canRedo());
     }
@@ -171,26 +155,12 @@ public class VersionedAddressBookTest {
     @Test
     public void hasPerson_personInCurrentAddressBook_returnsTrue() {
         oneVersionVersionedAddressBook.addPerson(ALICE);
-
-        // commit Add Command to memory
-        oneVersionVersionedAddressBook.commit();
-
         assertTrue(oneVersionVersionedAddressBook.hasPerson(ALICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInCurrentAddressBook_returnsTrue() {
-        oneVersionVersionedAddressBook.addPerson(ALICE);
-
-        // commit Add Command to memory
-        oneVersionVersionedAddressBook.commit();
-
-        oneVersionVersionedAddressBook.undo();
-
-        oneVersionVersionedAddressBook.addPerson(ALICE);
-
-        // commit Add Command to memory
-        oneVersionVersionedAddressBook.commit();
+        simulateAddCommand(ALICE, oneVersionVersionedAddressBook);
 
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertTrue(oneVersionVersionedAddressBook.hasPerson(editedAlice));
@@ -198,21 +168,9 @@ public class VersionedAddressBookTest {
 
     @Test
     public void removePerson_removesPersonInAddressBook() {
-        oneVersionVersionedAddressBook.addPerson(ALICE);
-
-        // commit Add Command to memory
-        oneVersionVersionedAddressBook.commit();
-
+        simulateAddCommand(ALICE, oneVersionVersionedAddressBook);
         oneVersionVersionedAddressBook.removePerson(ALICE);
-
-        // commit delete Command to memory
-        oneVersionVersionedAddressBook.commit();
-
         assertFalse(oneVersionVersionedAddressBook.hasPerson(ALICE));
-
-        oneVersionVersionedAddressBook.undo();
-
-        assertTrue(oneVersionVersionedAddressBook.hasPerson(ALICE));
     }
 
     @Test
