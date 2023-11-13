@@ -567,7 +567,7 @@ Take note that UI tests have to be run on the `JavaFX` thread, so UI tests have 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Planned Enhancements / Known Issues
+## **Appendix: Planned Enhancements / Known Issues**
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **When executing `add`/`edit` command**, if you try to add/edit a new/existing contact with the same [properties](#properties-of-contact) of another saved contact **(Note: 2 names are considered the same if both of them have the same casing and whitespaces)** in your contact list, CampusConnect allows you to do so. We plan to enhance the `add`/`edit` command such that it **takes into account what makes a contact unique in your contact list.**
@@ -578,6 +578,7 @@ Take note that UI tests have to be run on the `JavaFX` thread, so UI tests have 
 7. **When executing the `find` command**, if you input a `FIND_EXPRESSION` that is not accepted by the command format, the error message shows fairly general error messages. We will be working on this in the future to **improve the specificity of error messages.**
 8. **When executing the `find` command**, it is impossible to search for keywords that include the double-quote character (`"`) under any circumstance. We will be working on this in the future to **support searching for the double-quote character**, which could appear in fields such as notes.
 9. **When executing the `find` command**, the behavior of the `bal` field is not intuitive, especially for users who do not read the User Guide in-depth. We will be working on this in the future to **improve the ergonomics of `bal` field**, by implementing `>` and `<` operators so users can search for balance amounts below or above the keywords.
+10. **When starting the app**, if data that is previously stored in `addressbook.json` is unable to be parsed by the application as a valid `AddressBook` (e.g. data is corrupt), the app may overwrite it on the next exit, causing data loss. We will rewrite our data storage code to be more robust when dealing with this issue by backing up data files even when they are corrupt, allowing users to retrieve them in the future.
 
 ## **Appendix: Requirements**
 
