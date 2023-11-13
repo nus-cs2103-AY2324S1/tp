@@ -249,6 +249,10 @@ However, users may find the current risk level color contrast hard to see, hence
 The current parameter constraints for name is name must only contain alphabetical characters and space, be unique up to 100 characters long, and cannot be blank.
 However, we do acknowledge the need for special characters in names such as `Arjun S/O Kapoor`, hence we plan to include special characters to cater for diverse student names.
 
+### 4.3 Command to view notes
+The current method of viewing notes requires double-clicking on the `StudentCard` which reflects a GUI approach. To cater to users who prefer the CLI approach,
+we plan to introduce a command that achieves the above equivalent function.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## 5. Documentation, logging, testing, configuration, dev-ops
