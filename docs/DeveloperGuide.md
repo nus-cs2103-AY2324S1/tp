@@ -26,8 +26,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 ## **Design**
 
 ### Architecture
-
+<p style="text-align: center;">
 <puml src="diagrams/ArchitectureDiagram.puml" width="280" />
+</p>
 
 The ***Architecture Diagram*** given above illustrates the high-level design of the App. 
 
@@ -73,7 +74,9 @@ You can see that the bulk of the app's works are done by the UI, Logic, Model an
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
+<p style="text-align: center;">
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
+</p>
 
 #### Other notes
 
@@ -83,8 +86,12 @@ The *Sequence Diagram* below shows how the components interact with each other f
    
    For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class.
 2. The team has decided to force all components to interact via interfaces rather than the concrete classes as illustrated in the (partial) class diagram below (reason: to prevent outside component's being coupled to the implementation of a component).
-   <puml src="diagrams/ComponentManagers.puml" width="300" />
-   If you are to contribute to this project, please align with this group decision.
+<p style="text-align: center;">
+<puml src="diagrams/ComponentManagers.puml" width="300" />
+</p>
+
+If you are to contribute to this project, please align with this group decision.
+
 3. There are other components that are not shown in the diagram above. These components are: 
     * `Commons` component: contains classes that are used by multiple other components.
     * `Entry Point` classes: `Main` and `MainApp` classes that are in charge of the app launch and shut down.
@@ -98,7 +105,9 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
+<p style="text-align: center;">
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
+</p>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -125,7 +134,9 @@ It also calls APIs (addPerson, deleteLesson for example) from the `Model` compon
 from the `Storage` component to save the data to local storage each time the data is modified.
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+<p style="text-align: center;">
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+</p>
 
 Inside the `Logic` component, there are 4 main components: `LogicManager`, `AddressBookParser`, `Parser` classes and `Command` classes.
 
@@ -138,7 +149,9 @@ AddressBookParser is responsible for parsing the user input for finding the corr
 LogicManager will perform the actual execution of the command, and update the ui and storage.
 
 Here's a (partial) class diagram of the `Logic` component:
+<p style="text-align: center;">
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
+</p>
 
 <box type="info" seamless>
 
@@ -153,8 +166,9 @@ How the `Logic` component works:
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
-
+<p style="text-align: center;">
 <puml src="diagrams/ParserClasses.puml" width="600"/>
+</p>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
@@ -163,8 +177,9 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
+<p style="text-align: center;">
 <puml src="diagrams/ModelClassDiagram.puml" width="600" />
-
+</p>
 
 The `Model` component,
 
@@ -181,7 +196,9 @@ The `Model` component,
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
+<p style="text-align: center;">
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+</p>
 
 </box>
 
@@ -190,7 +207,9 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
+<p style="text-align: center;">
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
+</p>
 
 The `Storage` component,
 * can save both address book data, user preference data, and schedule data in JSON format, and read them back into corresponding objects.
@@ -272,7 +291,9 @@ Step 6. `AddPersonCommand` will then call the `ModelManager#showPerson()` method
 
 The following sequence diagram shows how the flow of the example execution:
 
+<p style="text-align: center;">
 <puml src="diagrams/AddSequenceDiagram.puml" alt="AddSequenceDiagram" />
+</p>
 
 <box type="info" seamless>
 
@@ -473,7 +494,9 @@ Step 4. The user executes show 1 command to show the details of the 1st person i
 
 The following sequence diagram shows how the show operation works for showing a person from the `STUDENT` list:
 
+<p style="text-align: center;">
 <puml src="diagrams/ShowSequenceDiagram.puml" alt="ShowSequenceDiagram" />
+</p>
 
 <box type="info" seamless>
 
@@ -512,101 +535,6 @@ The `FullTaskList` class is implemented as a list to view all the collective tas
 * **Alternative 2:** Create a central Task List and filter the tasks for each lesson.
     * Pros: May be easier to increase navigability.
     * Cons: May increase code complexity due to filtering the respective tasks.
-
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how the undo operation works:
-
-<puml src="diagrams/UndoSequenceDiagram.puml" alt="UndoSequenceDiagram" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1347,3 +1275,29 @@ testers are expected to do more *exploratory* testing.
 
 
 1. Test cases
+
+
+## **Appendix: Planned Enhancements**
+### Deleting of tags
+- **Relevant feature:** editing of students `editPerson`
+- **Current issues:** Once a tag is added to a student, the `editPerson` command prevents you from deleting the tag. This is because by specifying the flag `-tag`, the parameter provided as the tag must be a non-empty string.
+- **Proposed new behaviour:** The `-tag` flag can be made to accept an empty string. 
+  - Input: `editPerson 1 -tag`
+  - Expected output: The person at index 1 should have no more tags set.
+
+### Unlinking of students from lessons and vice versa
+- **Relevant feature:** linking `linkTo`, `link`
+- **Current issues:** Once a student has been linked to a lesson, there is no way to unlink them.
+- **Proposed new behaviour:** A new `unlinkFrom` and `unlink` command that mirrors `linkTo` and `link`, which will unlink the specified lesson and student if it detects that they have already been linked.
+  - Input: `linkTo Bernice Yu`
+  - Expected output: Bernice Yu is linked to the current lesson
+  - Input: `unlinkFrom Bernice Yu`
+  - Expected output: Bernice Yu is unlinked from the current lesson.
+
+### Navigating from tasks to lesson
+- **Relevant feature:** Task Lists `list tasks`
+- **Current issues:** There's no way to see what lesson a task is under.
+- **Proposed new behaviour:** The `nav` command should also work when viewing a task.
+  - Input: `nav`
+  - Expected output: The screen changes to the lesson that the task is assigned to.
+
