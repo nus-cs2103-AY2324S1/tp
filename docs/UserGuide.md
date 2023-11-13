@@ -96,6 +96,7 @@ If you are using Mac, click on the Launchpad icon in the Dock, type Terminal in 
 </box>
 
 <box type="tip" seamless>
+
 **Mac users unable to launch `.jar` file.** <br>
 For Mac users, if you encounter pop-out message `"tutorium.jar" cannot be opened because it is from an unidentified developer.` when launching `Tutorium.jar`:
 
@@ -136,7 +137,7 @@ Upon launching Tutorium, you will be greeted by the following Graphical User Int
 We can break the GUI into several parts:
 
 1. **Menu Bar**: This is where you find auxiliary features
-2. **Command Box**: This is where you input commands to interact with QuickContacts
+2. **Command Box**: This is where you input commands to interact with Tutorium
 2. **Result Display Box**: This is where you get feedback from the command executed
 3. **Student List**: This is where you view all your students
 
