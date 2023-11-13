@@ -448,17 +448,18 @@ WellNUS data is saved in the hard disk automatically after any command that chan
 #### 2.4.5 Editing the data file
 
 WellNUS data is saved automatically as a JSON file `[JAR file location]/data/wellnus.json`. Advanced users are welcome to update data directly by editing that data file
+
 <div markdown="span" class="alert alert-warning">
 :exclamation: **Caution:**
 If your changes to the data file makes its format invalid, WellNUS will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 
 The following scenarios will render the data file invalid:<br>
 
-* File contains invalid or missing parameters, see `Parameter Constraints` under the [Command Format](#13-about-the-command-format) section
+* File contains invalid or missing parameters, see `Parameter Constraints` under the [Command Format](#13-about-the-command-format) section<br>
 
-* File contains duplicate `Students` and `Appointments`
+* File contains duplicate `Students` and `Appointments`<br>
 
-* File contains overlapping `Appointments`, or `Appointments` without a corresponding `Student`
+* File contains overlapping `Appointments`, or `Appointments` without a corresponding `Student`<br>
 
 * File is not in proper JSON format, you may refer to [this guide](https://json.org/example.html)
 
