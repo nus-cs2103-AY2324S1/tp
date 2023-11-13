@@ -1576,7 +1576,11 @@ more on their tasks at hand, they can drag the divider between the contact list 
 
 ### 5. Extensive Testing
 
-TODO
+Our team placed a strong emphasis on testing to ensure that the application is robust and reliable.
+
+We conducted extensive unit testing for new features, recommending at least a **75%** coverage for new code. This was done to ensure that the new code is thoroughly tested and that the new features are working as intended. Only UI changes were left untested, as we felt that it was too time-consuming and difficult to automate UI tests.
+
+We managed to maintain **~83%** code coverage in CoordiMate, up from the original **75%** of AB3. In total, we have increased the **267** test cases in AB3 to **547** test cases in CoordiMate.
 
 ### 6. Software Engineering Practices
 
