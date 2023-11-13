@@ -25,15 +25,15 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
       - [Clearing all employees](#clearing-all-entries--clear): `clear`
       - [Exiting the program](#exiting-the-program--exit): `exit`
   - [Employee Commands](#employee-commands)
-      - [Adding an employee](#adding-an-employee-add): `add`
+      - [Adding an employee](#adding-an-employee--add): `add`
       - [Deleting an employee](#deleting-an-employee--delete): `delete`
       - [Editing an employee](#editing-an-employee--edit): `edit`
       - [Listing all employees](#listing-all-employees--list): `list`
       - [Finding employees](#finding-employees--find): `find`
       - [Sorting employees](#sorting-all-employees--sort): `sort`
   - [Employee Metrics Commands](#employee-metrics-commands)
-      - [Adding a leave period](#adding-a-leave-period-of-an-employee-addleave): `addleave`
-      - [Deleting a leave period](#deleting-a-leave-period-of-an-employee-deleteleave): `deleteleave`
+      - [Adding a leave period](#adding-a-leave-period-of-an-employee--addleave): `addleave`
+      - [Deleting a leave period](#deleting-a-leave-period-of-an-employee--deleteleave): `deleteleave`
       - [Editing a leave date](#editing-a-leave-date-of-an-employee--editleave): `editleave`
       - [Listing employees on leave](#listing-the-employees-on-leave-on-a-specified-date--listleave): `listleave`
       - [Adding remarks](#adding-a-remark-for-an-employee--addremark): `addremark`
@@ -763,7 +763,7 @@ If you would like to reset the number of leaves or overtime hours for **a specif
 
 ## Parameter information
 
-The table below provides information on the usage of the allowed parameters in HouR. Do note that the examples given are not exhaustive
+The table below provides information on the usage of the allowed parameters in HouR. Do note that the examples given are not exhaustive.
 
 | Parameter, Description                                        | Case sensitive | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Valid Examples                                                                             | Invalid Examples                                         |
 |---------------------------------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|----------------------------------------------------------|
