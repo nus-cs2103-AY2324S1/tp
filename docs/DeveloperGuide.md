@@ -590,18 +590,18 @@ Use case resumes from step 3.
 
 ### Non-Functional Requirements
 
-1.  **Environment** - Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  **Environment** - Should be able to store 1000 words with less than 10MB storage.
+1.  **Environment** - Should work on any _mainstream OS_ as long as it has Java `11` installed.
+2.  **Environment** - Should be able to store 100 words with less than 30MB storage.
 3.  **Performance** - A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  **Performance** - Should be able to handle any user input within 2 seconds.
-5.  **Quality** - Should be able to update learned words according to schedule and maintain the left ones when a learning session accidentally closes.
-6.  **Quality** - Should be able to provide the learner with a reasonable and personalized time schedule for language learning.
+4.  **Performance** - Should be able to handle most of the user input within 2 seconds.
+5.  **Quality** - Should be able to update already memorized words accordingly and maintain the left ones when a learning session accidentally closes.
+6.  **Quality** - Should be able to provide the learner with a reasonable time schedule for language learning.
 7.  **Quality** - Should be able to handle any user input correctly without crashing.
-8.  **Capacity** - Should be able to hold up to 100 flash cards without a noticeable sluggishness(longer than 2 seconds) in performance for typical usage.
+8.  **Capacity** - Should be able to hold up to 100 flash cards without a noticeable sluggishness(longer than 5 seconds) in performance for typical usage.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Mainstream OS**: Windows, Linux, Unix, macOS
 * **Proficiency level**: A number that indicates how well a user knows a word. The higher the number, the better the user knows the word.
 * **Flashcard**: A virtual card with a word on one side and its translation on the other side
 * **Word**: A word in the language you want to learn
@@ -616,15 +616,19 @@ Use case resumes from step 3.
 **Feature Flaw**
 
 * Users are not able to see the words clearly as the current font size is too small.
+* It is tedious for users to scroll down or right to view the whole error message or tip as the current output font size is too big.
 * Users now are not able to check the translation language unless they enter the `reveal` command. This is not user-friendly as users may want to know the translation language before revealing the translation.
 
 **Proposed Enhancement**
 * Increasing the font size of the words and translations in the flash cards.
+* Decreasing the font size of the output messages.
 * Adding language tag under the `level` tag on each flash card. This will allow users to distinguish different languages of the translations before calling the `reveal` command.
 
-**Sample UI**  
+**Sample UI**
 
-![img.png](images/LanguageTag.png)
+| Flash Card         | ![img.png](images/LanguageTag.png)           |
+|--------------------|----------------------------------------------| 
+| **Output Display** | ![img.png](images/OutputWithSmallerFont.png) |
 
 ### Enhancement 2: Improving the content of output messages
 
@@ -643,6 +647,20 @@ Some of our current output messages are not formatted properly. For example, the
 | ![img.png](images/RevealMessage.png) | Translation: word         |
 | ![img.png](images/ReviewMessage.png) | ...1 flashcard(s) listed! |
 
+### Enhancement 3: Providing more error messages when failing to load the data file
+
+**Feature Flaw**
+
+For advanced users who manually edit the data, they may accidentally introduce invalid data into the file. However, they are not able to know the reason why the data file is valid and that all the data will be discarded when the app starts to process any commands.
+
+**Proposed Enhancement**
+* Changing the behavior of `MainApp#initModelManager`, when `DataLoadingException` is thrown, call the `ui` to display the error message and prohibit `model` from executing any commands.
+* Providing more error messages when failing to load the data file.
+
+**Sample Output**
+
+* `Duplicated flash card ... found in flashlingo.json`: Duplicate combination of word and translation is found in the data file.
+* `Invalid flash card ... with invalid ... found in flashlingo.json`: Flash card with invalid word/translation, level or review date found.
 
 --------------------------------------------------------------------------------------------------------------------
 

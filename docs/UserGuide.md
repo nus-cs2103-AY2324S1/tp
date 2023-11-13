@@ -342,14 +342,12 @@ Output:
 * The success rate is calculated solely on the basis of the current session.  
 
 
-<div id="load">
-
 ### Loading list of words: `load`
 Loads an Excel file of words into the app. The words will be added to the current list of flash cards and included in the
 review session automatically.
-</div>
 
 [Command Format](#commands): `load <FILE_NAME>`
+<div id="load">
 
 <div markdown="block" class="alert alert-info">
 
@@ -362,6 +360,7 @@ review session automatically.
     2. Column B - The translation of the words
   * The sheet cannot contain empty rows in between all rows with words.
 * **Resources:** A sample file can be found [here](SampleData.xlsx).
+</div>
 </div>
 
 Output:
