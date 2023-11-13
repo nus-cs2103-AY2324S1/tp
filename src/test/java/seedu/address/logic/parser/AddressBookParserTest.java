@@ -34,7 +34,6 @@ import seedu.address.testutil.DoctorUtil;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PatientBuilder;
 import seedu.address.testutil.PatientUtil;
-import seedu.address.testutil.PersonUtil;
 
 public class AddressBookParserTest {
 
@@ -83,11 +82,24 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_edit() throws Exception {
+    public void parseCommand_editPatient() throws Exception {
         Patient person = new PatientBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person.getIc(), person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + person.getIc() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+                + person.getIc() + " " + PatientUtil.getEditPatientDescriptorDetails(descriptor));
+        System.out.println(descriptor);
+        System.out.println(command);
+        assertEquals(new EditCommand(person.getIc(), descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_editDoctor() throws Exception {
+        Doctor person = new DoctorBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person.getIc(), person).build();
+        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+                + person.getIc() + " " + DoctorUtil.getEditDoctorDescriptorDetails(descriptor));
+        System.out.println(descriptor);
+        System.out.println(command);
         assertEquals(new EditCommand(person.getIc(), descriptor), command);
     }
 
