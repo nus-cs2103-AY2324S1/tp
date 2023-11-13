@@ -9,44 +9,49 @@ InterviewHub is a desktop application that helps engineering hiring managers to 
 
 Given below are my contributions to the project.
 
-* **New Feature**: `find-i` command (PR: [#51](https://github.com/AY2324S1-CS2103T-T11-2/tp/pull/51))
-  * What it does: Allows the user to search for the target interviews based on the input job description with the command `find-i`.
-  * Justification: This feature improves the product significantly because a user can conveniently search for all the interviews based on the attached job role. This would assist the users to reduce the time taken to search interviews manually.
-  * Highlights: This feature requires in-depth understanding of how the list is being handled in the program such as ObservableList and FilteredList. The feature emphasises on filtering through the list without modifying the main interview list stored in the program. Therefore, preventing accidental modification or removal.
+* **New Feature**: `mark` command (PR: [#56](https://github.com/AY2324S1-CS2103T-T11-2/tp/pull/56))
+  * What it does: Allows the user to mark an interview as done.
+  * Justification: Users need a way to keep track of which interviews are done.
 
-* **New Feature**: `rate` command (PR: [#86](https://github.com/AY2324S1-CS2103T-T11-2/tp/pull/86))
-  * What it does: Allows the user to rate an interview after it has been completed to record the applicant's performance.
-  * Justification: This feature is a core feature to support post interview process to keep a record of each applicant rating in InterviewHub.
-  * Highlights: The rating is a standalone class which allows easy extension in the future. Moreover, the rate command itself is self editing, which removes the need for delete/edit rating.
+* **New Feature**: `list-i-done` command (PR: [#109](https://github.com/AY2324S1-CS2103T-T11-2/tp/pull/109))
+  * What it does: Allows users to list all interviews that are done.
+  * Justification: This is useful in the post-interview reviewing process.
 
-* **New Feature**: `sort-rate` command (PR: [#108](https://github.com/AY2324S1-CS2103T-T11-2/tp/pull/108))
-  * What it does: Allows the user to sort the interview list in descending order based on the rating of the interview.
-  * Justification: This feature completes the post interview process to view the top candidates in the entire interview list.
-  * Highlights: The sorting requires in-depth understanding of the comparator and comparable interface. To maintain the integrity of the data, the sorting is being implemented in the UniqueInterviewList. The feature also maintains its extendability by keeping the sorting function general, allowing new comparator class to being pass in to sort the list.
+* **New Feature**: `list-i-not-done` command (PR: [#109](https://github.com/AY2324S1-CS2103T-T11-2/tp/pull/109))
+  * What it does: Allows users to list all interviews that are not done.
+  * Justification: This is useful for users to see upcoming interviews or reschedule interviews that are not yet done.
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=jonyxzx&breakdown=true)
+* **Enhancement**: `find-a` command (PR: [#90](https://github.com/AY2324S1-CS2103T-T11-2/tp/pull/90))
+  * What it does: Allows users to search by any applicant field (name, phone, email, address, tag).
+  * Justification: A more powerful find feature helps users filter applicants more accurately.
+
+* **Enhancement**: Interview clash checks (PR: [#126](https://github.com/AY2324S1-CS2103T-T11-2/tp/pull/126))
+  * What it does: Checks if an interview clashes with existing interviews when adding or editing an interview.
+  * Justification: Prevents the user from accidentally adding overlapping interviews which greatly improves the interview scheduling process.
+
+* Renamed and changed product icon (PR: [#137](https://github.com/AY2324S1-CS2103T-T11-2/tp/pull/137))
+
+
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=jingjie88&breakdown=true)
 
 * **Project management**:
-  * Managed the release for v1.2 jar file.
-  * Managed the release for v1.3(trial) jar file.
-  * Managed the release for v1.3.1 jar file.
-  * Documented v1.3 demo into the project google documents.
+  * Documented v1.2 features demo in project notes
+  * Released v1.3.2 jar file 
+  * Created some issues
 
 * **Documentation**:
   * User Guide:
-    * Added the full table of contents.
-    * Added the glossary section.
-    * Added the how to use the user guide section.
-    * Rearrange and added the entire command summary section.
-    * Handled the formatting of the User Guide.
-    * Modified the image for help feature.
-    * Added documentation for the features `find-i`, `sort-rate` and `rate`
+    * Added documentation for `add-a`, `edit-a`, `delete-a`, `find-a`, `list-a`, `list-i-today` commands.
+    * Contributed to GUI summary section.
+    * Proofread and fixed typos across all sections
   * Developer Guide:
-    * Added the user stories.
-    * Added documentation for the features sort, rate, and find interview.
-    * Formatted the structure of the Developer Guide.
+    * Added documentation for `find-a` and `list-i-today` commands.
+    * Added sequence diagram and activity diagram for `find-a` command.
+    * Added sequence diagram for `list-i-today` command.
+    * Added test cases for `add-a`, `edit-a`, `delete-a`, `find-a`, `list-a`, `list-i-today` commands.
+    * Added glossary
 
 * **Community**:
-  * 41 team pull requests reviewed.
-  * Reported [10](https://github.com/Jonyxzx/ped/issues) bugs for other team during PE-D.
-  * Helped in finding bugs in teammates' features.
+  * 35 team pull requests reviewed.
+  * Helped manually test all features for bugs and fixed bugs.
+  * Reported [16](https://github.com/jingjie88/ped/issues) bugs for other team during PE-D.

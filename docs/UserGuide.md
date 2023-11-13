@@ -13,7 +13,7 @@ As an engineering hiring manager, you understand the importance of time. That's 
 
 This guide is your roadmap to mastering **InterviewHub**. We'll guide you through each feature, helping you to leverage our interface to its full potential—so you can focus on what you do best: securing top talent.
 
-Let's dive into **InterviewHub** and transform the way yoaddressbooku recruit!
+Let's dive into **InterviewHub** and transform the way you recruit!
 
 --------------------------------------------------------------------------------------------------------------------
 
