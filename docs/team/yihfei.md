@@ -10,9 +10,9 @@ to be added soon
 Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to calculate total monthly revenue.
-    * What it does: allows the user to a monthly revenue figure.
+    * What it does: allows the user to see a monthly revenue figure.
     * Justification: This feature allows private tutors to financially plan better.
-    * Highlights: This feature accounts for different number of days in a month for caluclation of revenue. (e.g. There are 5 Wednesdays in Nov 2023 but only 4 in Oct 2023 which will result in different number of lessons and total revenue)
+    * Highlights: This feature accounts for different number of days in a month for calculation of revenue.
   
 * **New Feature**: Added a `ScheduleListPanel` to see a summarised view of upcoming lessons.
    *  What it does: allows the user to quickly see a list of lesson cards that is sorted sequentially from the current day.

@@ -23,7 +23,7 @@ public class RevenueCommandTest {
         addressbook.withPerson(FIONA);
 
         // expected values
-        double expectedRevenue = HOON.getMonthlyRevenue() + FIONA.getMonthlyRevenue();
+        double expectedRevenue = HOON.getMonthlyFee() + FIONA.getMonthlyFee();
         String formattedTotalRevenue = String.format("%.2f", expectedRevenue);
         String expectedMessage = RevenueCommand.MESSAGE_SUCCESS + formattedTotalRevenue;
 
