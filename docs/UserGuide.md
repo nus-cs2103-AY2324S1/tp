@@ -209,7 +209,7 @@ command for both assignments and internships.
 3. Let's try **adding an assignment** to CampusCompanion. Enter the command
 `add-a n/CC tutorial 1 e/2023-11-29` 
 
-<img src="images/NewUserTutAdd1.png" width="550" /> 
+<img src="images/NewUserTutAdd1.png" width="550" /> <br/>
 
 <div style="page-break-after: always;"></div>
 
@@ -223,7 +223,7 @@ command for both assignments and internships.
 5. Let us try editing the description of `CC tutorial 1` to say `nice descriptive description!`.
 In the example above, `CC tutorial 1` is in index 2, so we do `edit-a i/2 d/nice descriptive description!`
 
-<img src="images/NewUserTutEdit.png" width="550" /> 
+<img src="images/NewUserTutEdit.png" width="550" /> <br/>
 
 <div style="page-break-after: always;"></div>
 
@@ -235,7 +235,7 @@ contain `tutorial`
 
 7. Then, we use the index shown in the list (in this case, `CC tutorial 1` is at index 1) and do `mark-a 1` to mark the assignment as completed
 
-<img src="images/NewUserTutMark.png" width="550" /> 
+<img src="images/NewUserTutMark.png" width="550" /> <br/>
 
 <div style="page-break-after: always;"></div>
 
@@ -246,7 +246,7 @@ contain `tutorial`
 9. Lastly for our assignments, let's delete our `CC tutorial 1` as we no longer want to track it.
 With reference the picture above, we will do `delete-a 2`
 
-<img src="images/NewUserTutDelete.png" width="550" /> 
+<img src="images/NewUserTutDelete.png" width="550" /> <br/>
 
 <div style="page-break-after: always;"></div>
 
@@ -258,7 +258,7 @@ With reference the picture above, we will do `delete-a 2`
  - `add-i-role n/Google r/SWE c/Summer 2024`
  - `add-i-role n/FaceBook r/DevOps c/Winter 2024 d/Impress Mr Mark p/9500 o/follow-up l/Florida`
 
-<img src="images/NewUserTutAddIRoles.png" width="550" /> 
+<img src="images/NewUserTutAddIRoles.png" width="550" /> <br/>
 
 <div style="page-break-after: always;"></div>
 
@@ -274,7 +274,7 @@ With reference the picture above, we will do `delete-a 2`
  - `edit-i-task i/1 o/awaiting`
  - `edit-i-role i/1 c/Winter 2024 d/Prepare for google questions p/12500 l/Labrador Park`
 
-<img src="images/NewUserTutMarkEditI.png" width="550" /> 
+<img src="images/NewUserTutMarkEditI.png" width="550" /> <br/>
 
 <div style="page-break-after: always;"></div>
 
