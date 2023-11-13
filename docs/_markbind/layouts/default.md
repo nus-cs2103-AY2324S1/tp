@@ -30,14 +30,14 @@
   * [Quick Start]({{ baseUrl }}/UserGuide.html#quick-start)
   * [Features]({{ baseUrl }}/UserGuide.html#features)
 * [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:
-  * [Acknowledgements]({{ baseUrl }}/DeveloperGuide.html#1.3.-Acknowledgement)
-  * [Setting Up]({{ baseUrl }}/DeveloperGuide.html#1.2.-Setting up, getting started)
-  * [Design]({{ baseUrl }}/DeveloperGuide.html#2.-Design)
-  * [Implementation]({{ baseUrl }}/DeveloperGuide.html#Implementation)
-  * [Documentation, logging, testing, configuration, dev-ops]({{ baseUrl }}/DeveloperGuide.html#5.-Documentation, logging, testing, configuration, dev-ops)
-  * [Appendix: Requirements]({{ baseUrl }}/DeveloperGuide.html#6.-Appendix: Requirements)
-  * [Appendix: Instructions for manual testing]({{ baseUrl }}/DeveloperGuide.html#7.-Appendix: Instructions for manual testing)
-* [About Us]({{ baseUrl }}/AboutUs.html)
+  * [Introduction]({{ baseUrl }}/DeveloperGuide.html#1-Introduction)
+  * [Design]({{ baseUrl }}/DeveloperGuide.html#2-Design)
+  * [Implementation]({{ baseUrl }}/DeveloperGuide.html#3-Implementation)
+  * [Planned Enhancements]({{ baseUrl }}/DeveloperGuide.html#5-Documentation_logging_testing_configuration_dev-ops)
+  * [Requirements]({{ baseUrl }}/DeveloperGuide.html#6-Appendix-Requirements)
+  * [Manual Testing]({{ baseUrl }}/DeveloperGuide.html#7-Appendix-Instructions-for-manual-testing)
+  * [Effort]({{ baseUrl }}/DeveloperGuide.html#8-Appendix-Effort)
+* [About us] ({{ baseUrl }}/AboutUs.html)
       </site-nav>
     </div>
   </nav>

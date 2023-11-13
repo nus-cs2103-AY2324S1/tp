@@ -18,7 +18,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/Kailash201)]
 [[portfolio](team/kailash201.md)]
 
-* Roel: Developer
+* Role: Developer
 * Role: Team Lead
 
 ### Huang Yixin
