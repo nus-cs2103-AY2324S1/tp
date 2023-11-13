@@ -574,13 +574,6 @@ Once your laptop is recharged, you can regain access to all your stored informat
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known Issues
-
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **Edit** commands go back to the main view no matter what view you were in.
-
---------------------------------------------------------------------------------------------------------------------
-
 ## Glossary
 This glossary provides definitions for the special terms used in this user guide.
 
