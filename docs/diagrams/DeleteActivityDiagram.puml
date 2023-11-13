@@ -1,11 +1,19 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+'https://plantuml.com/activity-diagram-beta
+|User|
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:Start JABPro;
+:User enters command;
 
-autonumber
-
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
-
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+if () then ([Command successfully executed])
+    |JABPro|
+    :Display list without
+    the deleted applicant(s);
+else ([Command fails to execute])
+    :Show error message;
+endif
+stop
 @enduml
