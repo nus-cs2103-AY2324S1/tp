@@ -160,14 +160,17 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Find patient by illness feature
 
+[FindIllnessCommandParser.java]: https://github.com/billieboy7/tp/blob/master/src/main/java/seedu/address/logic/parser/personparser/FindIllnessCommandParser.java
+[FindIllnessCommand.java]: https://github.com/billieboy7/tp/blob/master/src/main/java/seedu/address/logic/commands/personcommands/FindIllnessCommand.java
+
 #### Implementation
 
 For _Find Illness_ command, the noteworthy classes are:
 
 - `LogicManager.java` - Calls the address book parser. 
-- `AddressBookParser.java` - For passing the arguments to `FindIllnessCommand`.
-- `FindIllnessCommandParser.java` - For passing the arguments to `FindIllnessCommand`.
-- `FindIllnessCommand.java` - For execution of the find illness command.
+- `AddressBookParser.java` - For passing the arguments to `FindIllnessCommandParser`.
+- [`FindIllnessCommandParser.java`][FindIllnessCommandParser.java] - For passing the arguments to `FindIllnessCommand`.
+- [`FindIllnessCommand.java`][FindIllnessCommand.java] - For execution of the find illness command.
 
 Let's take a valid user input, `find-i flu`, as an example. 
 
