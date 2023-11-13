@@ -3,6 +3,7 @@ package seedu.address.model.financialplan;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FINANCIAL_PLAN_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FINANCIAL_PLAN_2;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -37,5 +38,16 @@ public class FinancialPlanTest {
     public void isValidFinancialName() {
         // null tag name
         assertThrows(NullPointerException.class, () -> FinancialPlan.isValidFinancialPlanName(null));
+    }
+
+    @Test
+    public void equals() {
+        FinancialPlan fp1 = new FinancialPlan(VALID_FINANCIAL_PLAN_1);
+        FinancialPlan fp2 = new FinancialPlan(VALID_FINANCIAL_PLAN_1);
+        FinancialPlan fp3 = new FinancialPlan(VALID_FINANCIAL_PLAN_2);
+
+        assertTrue(fp1.equals(fp1));
+        assertTrue(fp1.equals(fp2));
+        assertFalse(fp1.equals(fp3));
     }
 }

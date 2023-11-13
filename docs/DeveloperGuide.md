@@ -255,7 +255,8 @@ The following sequence diagram illustrates how the complete operation is execute
 
 <img src="images/CompleteSequenceDiagram.png" width="800"/>
 
-> :warn: The lifeline of the diagram should end at the destroyer mark (X) but reaches end of diagram due to limitation of plantUML
+<div markdown="span" class="alert alert-primary">:information_source: The lifeline of the diagram should end at the destroyer mark (X) but reaches end of diagram due to limitation of plantUML
+</div>
 
 The following activity diagram illustrates how the complete operation is executed.
 
