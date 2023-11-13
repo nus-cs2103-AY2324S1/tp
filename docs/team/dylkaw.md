@@ -47,6 +47,7 @@ Given below is a summary of my contributions to the project. All of my code cont
     * UC05 - View members of event
     * UC06 - View events of member
   * Added non-functional requirements.
+  * Added Appendix B: Instructions for manual testing.
 
 ### Community:
 * This is the full [list](https://github.com/AY2324S1-CS2103T-F11-1/tp/pulls?q=is%3Apr+reviewed-by%3Adylkaw) of pull requests which I have reviewed.
