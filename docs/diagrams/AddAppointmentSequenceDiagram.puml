@@ -1,0 +1,115 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddAppointmentCommandParser" as AddAppointmentCommandParser LOGIC_COLOR
+participant "a:AddAppointmentCommand" as AddAppointmentCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant ":Appointment" as Appointment USER_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "p:Patient" as PatientP USER_COLOR
+participant "d:Doctor" as DoctorD USER_COLOR
+end box
+
+
+[-> LogicManager : execute("add-appt args")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("add-appt args")
+activate AddressBookParser
+
+create AddAppointmentCommandParser
+AddressBookParser -> AddAppointmentCommandParser
+activate AddAppointmentCommandParser
+
+AddAppointmentCommandParser --> AddressBookParser
+deactivate AddAppointmentCommandParser
+
+AddressBookParser -> AddAppointmentCommandParser : parse("args")
+
+activate AddAppointmentCommandParser
+
+create Appointment
+AddAppointmentCommandParser -> Appointment : new
+activate Appointment
+
+Appointment --> AddAppointmentCommandParser : appointment
+deactivate Appointment
+
+create AddAppointmentCommand
+AddAppointmentCommandParser -> AddAppointmentCommand : AddAppointmentCommand(appointment)
+activate AddAppointmentCommand
+
+AddAppointmentCommand --> AddAppointmentCommandParser : a
+deactivate AddAppointmentCommand
+
+AddAppointmentCommandParser --> AddressBookParser : a
+deactivate AddAppointmentCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddAppointmentCommandParser -[hidden]-> AddressBookParser
+destroy AddAppointmentCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AddAppointmentCommand : execute()
+activate AddAppointmentCommand
+
+AddAppointmentCommand -> Model : getFilteredPatientList()
+activate Model
+
+Model --> AddAppointmentCommand : Patients
+deactivate Model
+
+AddAppointmentCommand -> Model : getFilteredDoctorList()
+activate Model
+
+Model --> AddAppointmentCommand : Doctors
+deactivate Model
+
+
+AddAppointmentCommand --> AddAppointmentCommand : findDoctorAndPatient()
+activate AddAppointmentCommand
+AddAppointmentCommand --> AddAppointmentCommand
+deactivate AddAppointmentCommand
+
+AddAppointmentCommand --> AddAppointmentCommand : ValidateAppointment()
+activate AddAppointmentCommand
+AddAppointmentCommand --> AddAppointmentCommand
+deactivate AddAppointmentCommand
+
+AddAppointmentCommand --> PatientP : addAppointment(appointment)
+activate PatientP
+PatientP --> AddAppointmentCommand
+deactivate PatientP
+
+AddAppointmentCommand --> DoctorD : addAppointment(appointment)
+activate DoctorD
+
+DoctorD --> AddAppointmentCommand
+deactivate DoctorD
+
+AddAppointmentCommand -> Model : addAppointment(appointment)
+activate Model
+
+Model --> AddAppointmentCommand
+deactivate Model
+
+create CommandResult
+AddAppointmentCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddAppointmentCommand : result
+deactivate CommandResult
+
+AddAppointmentCommand --> LogicManager : result
+deactivate AddAppointmentCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

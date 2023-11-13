@@ -6,7 +6,7 @@ title: Developer Guide
 ## Table Of Contents
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -96,8 +96,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API
-** of this component is specified
+The **API** of this component is specified
 in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
@@ -122,8 +121,7 @@ The `UI` component,
 
 ### Logic component
 
-**API
-** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -153,16 +151,15 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a
-  placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse
-  the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as
+  placeholder for the specific command name e.g., `AddPatientCommandParser`) which uses the other classes shown above to parse
+  the user command and create a `XYZCommand` object (e.g., `AddPatientCommand`) which the `AddressBookParser` returns back as
   a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
+* All `XYZCommandParser` classes (e.g., `AddPatientCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 
-**API
-** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -178,18 +175,12 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
   should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
 
 ### Storage component
 
-**API
-** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" width="700" />
 
 The `Storage` component,
 
@@ -213,7 +204,7 @@ This section describes some noteworthy details on how certain features are imple
 ### Add Patient/Doctor Feature
 
 This feature allows users to add patients or doctors to the address book. No duplicated person should be added. There
-are many fields for each patient/doctor which can be found in the user guide.
+are many fields for each patient/doctor which can be found in the user guide. The implementation for adding patient and doctors are similar, we just need to change the relevant command name from patient to doctor. For the below details, we will just patient when mentioning the commands.
 
 #### Implementation
 
@@ -225,8 +216,7 @@ Given below is an example usage scenario and how the add patient/doctor mechanis
 Step 1. The user launches the application for the first time. The AddressBook will be initialized with the initial
 address book state.
 
-Step 2. The user types `add-patient` (or `add-Doctor`) as command, with the appropriate arguments for the person, for
-example, `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 d/T0123456H c/pneumothorax b/O+`.
+Step 2. The user types `add-patient` (or `add-doctor`) as command, with the appropriate arguments for the person, for example, `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 d/T0123456H c/pneumothorax b/O+`.
 
 Step 3. The `AddressBookParser` parses the arguments and determine the required command parser based on the first word
 of the arguments.
@@ -234,14 +224,18 @@ of the arguments.
 Step 4. Then `addPatientCommandParser` parses the remaining arguments and creates an `AddPatientCommand` with the
 details of the patient given.
 
+<div markdown="block" class="alert alert-info">
 :information_source: **Note:** If the details of the person added does not match the correct format for any fields,
 there will be an error telling user that the attributes are in the wrong format.
+</div>
 
 Step 5. The `AddPatientCommand` then gets executed and calls the Model#addPatient() and the patient will be added to
 the `uniquePatientList` of the addressbook in the model.
 
+<div markdown="block" class="alert alert-info">
 :information_source: **Note:** If the Person to be added is already in the respective list in the addressbook, it will
 return an error saying that this is a duplicate person. This will be checked during the execution of the Add command.
+</div>
 
 Step 6. The UI should display using the updated list of patients and the newly added patient should be in the patient
 section of the GUI.
@@ -285,10 +279,12 @@ of the arguments.
 Step 4. Then `editCommandParser` parses the remaining arguments and creates an `EditCommand` with the
 details of the patient given.
 
+<div markdown="block" class="alert alert-info">
 :information_source: **Note:** If the details of the person added does not match the correct format for any fields,
 there will be an error telling user that the attributes are in the wrong format. Also, if there are no edited fields,
 i.e. no attributes provided or the edited attributes are the same as the original attributes, there will be an error.
 Lastly, if the nric cannot be found within the list of doctors and patients, there will be an error.
+</div>
 
 Step 5. The `EditCommand` then gets executed and calls the Model#setPerson() with the original person and the new
 edited person. The original person will be replaced by the edited person.
@@ -342,70 +338,58 @@ can be found in the user guide.
 
 #### Implementation
 
-Implementation of creating an appointment is comprised of fairly new code. The adding mechanism is facilitated by the
-AddressBook in the model.
+Implementation of creating an appointment is comprised of fairly new code. The adding mechanism is facilitated by the AddressBook in the model.
 
 Given below is an example usage scenario and how the new appointment mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The AddressBook will be initialized with the initial
-address book state.
+Step 1. The user launches the application for the first time. The AddressBook will be initialized with the initial address book state.
 
-Step 2. The user populates the AddressBook with patients and doctors using the appropriate commands, if not already
-done.
+Step 2. The user populates the AddressBook with patients and doctors using the appropriate commands, if not already done.
 
 Step 3. The user types `new-appointment`as command, with the appropriate arguments for the appointment, for example,
 `new-appt pic/T0123456H dic/S9851586G time/2022-02-14 13:00:00`.
 
-Step 4. The `Doctor` and `Patient` Class methods are used to add the details to the respective objects. This works in
-a similar way to how the `NRIC` Class works for the `Doctor` and `Patient` Classes. `Appointment` is done externally for
+Step 4. The `Doctor` and `Patient` Class methods are used to add the details to the respective objects. This works in a similar way to how the `NRIC` Class works for the `Doctor` and `Patient` Classes. `Appointment` is done externally for
 OOP reasons.
 
-Step 5. The `addPatientCommandParser`/ `addDoctorCommandParser` parses the Appointment and creates an `AddPatientCommand`/
-`addDoctorCommand` with the details of the `Appointment` given.
+Step 5. The `addPatientCommandParser`/ `addDoctorCommandParser` parses the Appointment and creates an `AddPatientCommand`/ `addDoctorCommand` with the details of the `Appointment` given.
 
+<div markdown="block" class="alert alert-info">
 :information_source: **Note:** If the details of the person added does not match the correct format for any fields,
 there will be an error telling user that the attributes are in the wrong format.
+</div>
 
-Step 6. The `PatientCard` / `DoctorCard` then processes the appointment details and The UI should display the appointment
-details for each Person in the AddressBook.
+Step 6. The `PatientCard` / `DoctorCard` then processes the appointment details and The UI should display the appointment details for each Person in the AddressBook.
 
-The following sequence diagram shows how the New Appointment works:
+The following sequence diagram and activity diagram shows how the New Appointment works:
 
-![AddPatientSequenceDiagram](images/AddPatientSequenceDiagram.png) //change this
+![AddAppointmentSequenceDiagram](images/AddAppointmentSequenceDiagram.png)
+![AddAppointmentActivityDiagram](images/AddAppointmentActivityDiagram.png)
 
 
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo
-history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the
-following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
 * `VersionedAddressBook#commit()`— Saves the current address book state in its history.
 * `VersionedAddressBook#undo()`— Restores the previous address book state from its history.
 * `VersionedAddressBook#redo()`— Restores a previously undone address book state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()`
-and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()`and `Model#redoAddressBook()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the
-initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command
-calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes
-to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book
-state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also
-calls `Model#commitAddressBook()`, causing another modified address book state to be saved into
-the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -413,9 +397,7 @@ the `addressBookStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing
-the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer`
-once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -432,23 +414,17 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once
-to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such
-as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`.
-Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not
-pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be
-purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern
-desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -471,9 +447,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -524,7 +497,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | Hospital Staff                    | undo previous command               | prevent mistakes                                                       |
 | `*`      | Hospital staff                    | redo previously undid command       | prevent mistakes                                                       |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -657,8 +629,10 @@ otherwise)
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
    able to accomplish most of the tasks faster using commands than using the mouse.
+4. The size of the application’s jar file should not exceed 100MB.
+5. The app should respond fast enough for any user command. (less than 3 seconds)
+6. The app should not take too long to start. (less than 15 seconds)
 
-*{More to be added}*
 
 ### Glossary
 

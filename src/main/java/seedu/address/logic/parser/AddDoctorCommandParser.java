@@ -34,6 +34,7 @@ import seedu.address.model.tag.Tag;
  */
 public class AddDoctorCommandParser implements Parser<AddDoctorCommand> {
     private static final Logger logger = LogsCenter.getLogger(AddDoctorCommandParser.class);
+
     /**
      * Parses {@code userInput} into a command and returns it.
      *
@@ -42,13 +43,11 @@ public class AddDoctorCommandParser implements Parser<AddDoctorCommand> {
      */
     @Override
     public AddDoctorCommand parse(String userInput) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_GENDER, PREFIX_NRIC, PREFIX_TAG, PREFIX_REMARK);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_ADDRESS, PREFIX_GENDER, PREFIX_NRIC, PREFIX_TAG, PREFIX_REMARK);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GENDER,
-                PREFIX_NRIC)
-                || !argMultimap.getPreamble().isEmpty()) {
+                PREFIX_NRIC) || !argMultimap.getPreamble().isEmpty()) {
             logger.warning("Invalid command format for AddPatientCommand: " + userInput);
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddDoctorCommand.MESSAGE_USAGE));
         }
@@ -65,7 +64,6 @@ public class AddDoctorCommandParser implements Parser<AddDoctorCommand> {
         Set<Tag> tagList = ParserUtil.parseDoctorTags(argMultimap.getAllValues(PREFIX_TAG));
         // appointments need to be added separately, so we initialise doctors with empty appointments
         Set<Appointment> appointmentList = new HashSet<>();
-
 
         Doctor doctor = new Doctor(name, phone, email, address, remark, gender, ic, appointmentList, tagList);
         logger.info("Successfully parsed AddDoctorCommand with doctor: " + doctor);
