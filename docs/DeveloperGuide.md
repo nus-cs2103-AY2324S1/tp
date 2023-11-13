@@ -630,7 +630,7 @@ Format: `delete STUDENT_INDEX`
    1. Expectation: Confirmation message is shown, Appointments and Notes are deleted as well
 3. Test Case 2: `delete 0`
    1. Expectation: Invalid command format message (Index must be positive)
-2. Try other invalid commands like `delete a` or using an index greater than the number of students that exists. Displays Error message
+4. Try other invalid commands like `delete a` or using an index greater than the number of students that exists. Displays Error message
 
 #### 6.2.3 Adding/Deleting notes for a Student
 This command either adds a note to an existing student (overwriting any existing note) or deletes a note
@@ -693,7 +693,84 @@ Format `edit STUDENT_INDEX [c/CONTACT_NUMBER] [a/HOME_ADDRESS]`
    1. Expectation: Same as above, both fields updated
 6. Test Case 4: `edit 3`
    1. Expectation: Error Message `At least one field to edit must be provided.` shown
-   
+
+### 6.3 Appointment Commands
+
+#### 6.3.1 Scheduling an Appointment
+Schedules a new appointment for a student.
+
+Format: `schedule n/STUDENT_NAME date/DATE from/START_TIME to/END_TIME d/DESCRIPTION`
+
+1. Student must exist before an appointment is scheduled
+2. Student name must be in full and match exactly
+3. Must have a valid date and time
+4. Test Case 1: `schedule n/Ethan Tan date/2023-12-30 from/16:30 to/17:30 d/monthly check-up`
+    1. Expectation: Confirmation message for appointment is shown, appointment added to the column according to date and time.
+5. Test Case 2: `schedule n/Ethan date/2023-12-28 from/16:30 to/17:30 d/monthly check-up`
+    1. Expectation: `No such student exists for this appointment` Message
+6. Test Case 3: `schedule n/Ethan Tan date/2023-12-30 from/16:30 to/17:30 d/monthly check-up` again
+    1. Expectation: `This appointment already exists` Message
+7. Test Case 4: `schedule n/David Li date/2023-12-30 from/16:30 to/17:30 d/monthly check-up`
+    1. Expectation: `This appointment overlaps with an existing appointment` Message
+8. Test Case 5: `schedule n/David Li date/2025-12-30 from/16:30 to/17:30 d/monthly check-up`
+    1. Expectation: `Appointment can only be scheduled within a year` Message
+9. Other invalid test cases includes other forms of invalid date, students that do not exist or clashes. All should show respective error messages.
+
+#### 6.3.2 Cancelling an Appointment
+Cancels an existing appointment.
+
+Format: `cancel APPOINTMENT_INDEX`
+
+1. Appointment must exist
+2. Test Case 1: `cancel 1`
+    1. Expectation: Confirmation message is shown
+3. Test Case 2: `cancel 0`
+    1. Expectation: Invalid command format message (Index must be positive)
+4. Try other invalid commands like `cancel a` or using an index greater than the number of appointments that exists. Displays Error message accordingly.
+
+#### 6.3.3 Filtering Appointments by Date: `filter`
+
+Filters appointments based on given date.
+
+Format: `filter DATE`
+
+1. Date must be in the yyyy-MM-dd format
+2. Test Case 1: `filter 2023-12-14`
+   1. Expectation: Shows appointments on that day
+3. Test Case 2: `filter 2023-11-24`
+   1. Expectation: `0 appointments listed`
+4. All invalid date format: Message shows required date format
+
+### 6.4 Others
+
+#### 6.4.1 Viewing all Students and/or Appointments
+
+Shows a list of all available Students and/or Appointments, depending on specified input.
+
+Format: `view g/CATEGORY`
+
+1. Category must be `students`, `appointments` or `all`
+2. Test Case 1: `view g/all`
+    1. Expectation: Shows all students and appointments
+3. Test Case 2: `view g/appointments`
+    1. Expectation: Shows all appointments in the list
+4. Test Case 3: `view g/students`
+    1. Expectation: Shows all students in the list
+5. Any other command is considered invalid
+    1. Expectation: Error message to direct user to one of the above
+
+#### 6.4.2 Exiting the program: `exit`
+
+Exits the program.
+
+Format: `exit`
+
+#### 6.4.3 Clearing storage: `clear`
+
+Resets the storage, deleting **all** Appointments and Students.
+
+Format: `clear`
+
 ### 7. Saving data
 
 1. Dealing with missing/corrupted data files
