@@ -282,7 +282,8 @@ Format: `remark INDEX r/REMARK`
 An example of the `remark` command being successfully executed:
 1. Enter the command `remark 1 r/Great attitude, hardworking`
 2. This is the result of the successful `remark` command (Take note that command entered will not be shown in the result):
-   ![Remark-Success](images/remark-command-success.png)
+   
+3. ![Remark-Success](images/remark-command-success.png)
 <br>
 
 An example of the `remark` command being successfully executed with the **REMARK** keyword:
@@ -301,7 +302,6 @@ An example of the `remark` command failing to execute due to wrong index:
 
 Additional Examples:
 *  `remark 1` Empties the remark of the 1st applicant. It is equivalent to `remark 1 r/`.
-
 [Jump back to Table of Contents](#table-of-contents)
 
 ### Adding LinkedIn/GitHub username for a user: `addL` or `addG`
@@ -552,7 +552,6 @@ Example:
 
 ### 2. Tag Colouring and Categorisation
 
-
 ### Creating tags: `create`
 
 Creates a tag and categorises it to the specified category.
@@ -756,14 +755,13 @@ Failed to execute the `filter` command? Here are some possible reasons why:
 5. Multiple prefixes of the same category used i.e. `filter t/interview t/techlead met/percentile val/80`
 6. Using commas as delimiters of different parameters instead of spaces i.e. `filter t/interview, t/techlead met/percentile val/80`
 
-
 **Significance of using `filter` with the metrics `score`, `percentile`, `mean` and `median`:**
 In essence, this allows you to find job applicants whose performance rating is above a certain percentile, score or mean/median score for that tag.  
 Ideally, this feature can then be used to find the best applicant easily and quickly without having to manually look through the list of applicant.
 
 [Jump back to Table of Contents](#table-of-contents)
 
-### Listing all applicant : `list`
+### Listing all applicants : `list`
 
 Shows a list of all applicant in JABPro
 
@@ -895,7 +893,7 @@ Format: `export`
 
 ### Clearing all entries : `clear`
 
-Clears all entries from JABPro - including applicant and events.
+Clears all entries from JABPro - including applicants and events.
 
 Format: `clear`
 
