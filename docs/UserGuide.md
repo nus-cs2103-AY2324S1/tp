@@ -741,35 +741,35 @@ The domain name must:
 
 ### Commands for Persons
 
-| Action            | Format, Examples                                                                                                                                                                                                    |
-|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Person**    | `add_person n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [r/REMARK] [g/GROUP]…​` <br> e.g., `add_person n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/friend g/colleague` |
-| **Edit Person**   | `edit_person PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/REMARK] [g/GROUP]…​`<br> e.g.,`edit_person 2 n/James Lee e/jameslee@example.com`                                                       |
-| **Delete Person** | `delete_person PERSON_INDEX`<br> e.g., `delete_person 3`                                                                                                                                                            |
-| **Find Person**   | `find_person KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_person James Jake`                                                                                                                                            |
-| **List Persons**  | `list_persons`                                                                                                                                                                                                      |
+| Action            | Format                                                                                            | Examples                                                                                                  |
+|-------------------|---------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| **Add Person**    | `add_person n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [r/REMARK] [g/GROUP]…​`    | `add_person n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/friend g/colleague` |
+| **Edit Person**   | `edit_person PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/REMARK] [g/GROUP]…​` | `edit_person 2 n/James Lee e/jameslee@example.com`                                                        |
+| **Delete Person** | `delete_person PERSON_INDEX`                                                                      | `delete_person 3`                                                                                         |
+| **Find Person**   | `find_person KEYWORD [MORE_KEYWORDS]`                                                             | `find_person James Jake`                                                                                  |
+| **List Persons**  | `list_persons`                                                                                    |                                                                                                           |
 
 
 ### Commands for Events
 
-| Action           | Format, Examples                                                                                                                                                                                                                           |
-|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Event**    | `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]…​ [g/GROUP]…​`<br> e.g., `add_event m/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`                                                    |
-| **Edit Event**   | `edit_event EVENT_INDEX [m/EVENT_NAME] [d/DATE] [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]…​ [u/PERSON_NAME]…​ [g/GROUP]…​ [ug/GROUP]…​`<br> e.g., `edit_event 1 m/tP week 3 meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101` |
-| **Delete Event** | `delete_event EVENT_INDEX`<br> e.g., `delete_event 1`                                                                                                                                                                                      |
-| **Find Event**   | `find_event KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_event meeting`                                                                                                                                                                        |
-| **List Events**  | `list_events`                                                                                                                                                                                                                              |
+| Action           | Format                                                                                                                                    | Examples                                                                               |
+|------------------|-------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| **Add Event**    | `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]…​ [g/GROUP]…​`                                                 | `add_event m/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`    |
+| **Edit Event**   | `edit_event EVENT_INDEX [m/EVENT_NAME] [d/DATE] [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]…​ [u/PERSON_NAME]…​ [g/GROUP]…​ [ug/GROUP]…​` | `edit_event 1 m/tP week 3 meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101` |
+| **Delete Event** | `delete_event EVENT_INDEX`                                                                                                                | `delete_event 1`                                                                       |
+| **Find Event**   | `find_event KEYWORD [MORE_KEYWORDS]`                                                                                                      | `find_event meeting`                                                                   |
+| **List Events**  | `list_events`                                                                                                                             |                                                                                        |
 
 
 ### General commands
 
-| Action       | Format, Examples                                             |
-|--------------|--------------------------------------------------------------|
-| **Remind**   | `remind [NUM_OF_DAYS]` <br> e.g.,`remind` or `remind 4`      |
-| **List All** | `list_all`                                                   |
-| **Find All** | `find_all KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_all John` |
-| **Clear**    | `clear`                                                      |
-| **Exit**     | `exit`                                                       |
-| **Help**     | `help`                                                       |
+| Action       | Format                             | Examples               |
+|--------------|------------------------------------|------------------------|
+| **Remind**   | `remind [NUM_OF_DAYS]`             | `remind` or `remind 4` |
+| **List All** | `list_all`                         |                        |
+| **Find All** | `find_all KEYWORD [MORE_KEYWORDS]` | `find_all John`        |
+| **Clear**    | `clear`                            |                        |
+| **Exit**     | `exit`                             |                        |
+| **Help**     | `help`                             |                        |
 
 [Scroll back to Table of Contents](#table-of-contents)
