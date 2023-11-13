@@ -13,9 +13,6 @@ and **enjoyable** tool to enhance their dating experiences. Featuring **user pre
 **customizable filtering options** and **best match algorithms**, LoveBook enhances the **efficiency** and **effectiveness** of your
 online dating journey.
 
-[//]: # "<!-- * Table of Contents -->"
-[//]: # "<page-nav-print />"
-
 ## **Acknowledgements**
 
 - Code reused from here to disable click feature of `ListView`:
@@ -37,7 +34,7 @@ online dating journey.
   - [Storage component](#storage-component)
   - [Common classes](#common-classes)
 - [**Implementation**](#implementation)
-  - [Add Dates Feature](#add-dates-feature)
+  - [Add Dates](#add-dates)
   - [List Dates](#list-dates)
   - [Filter dates](#filter-dates)
   - [Sort dates](#sort-dates)
@@ -270,7 +267,7 @@ Moving on to the implementation details, the following sections describe how and
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
-### Add Dates Feature
+### Add Dates
 
 #### Implementation
 

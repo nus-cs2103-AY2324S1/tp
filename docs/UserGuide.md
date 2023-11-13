@@ -22,7 +22,6 @@ organization**,
     * [Navigating the GUI](#navigating-the-gui)
     * [LoveBook Tutorial: Getting started](#lovebook-tutorial-getting-started)
 * [Features](#features)
-    * [Prefix Table](#prefix-table)
     * [Managing Dates](#managing-dates)
         * [Adding a new date: `add`](#adding-a-new-date-add)
         * [Editing a date: `edit`](#editing-a-date-edit)
@@ -48,17 +47,17 @@ organization**,
 
 ## **Glossary**
 
-| Term                                 | Definition                                                                                                                             |
-|--------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
-| Date                                 | A person that the user is interested in and is currently seeing.                                                                       |
-| Metric                               | A certain characteristic of a date. (e.g. Gender, Height)                                                                              |
-| Command                              | Text that the user types into the application to perform an action.                                                                    |
-| Parameter                            | A value that the user provides to the application when executing a command. (e.g. in`gender/M` M is a parameter)                       |
-| GUI                                  | Graphical User Interface                                                                                                               |
-| CLI                                  | Command Line Interface                                                                                                                 |
-| Mainstream OS                        | Windows, Linux, Unix, OS-X                                                                                                             |
-| <box type="tip">Tips:</box>          | To provide you with relevant suggestions on how to use the commands as well as address potential confusions when using these commands. |
-| <box type="important">Caution:</box> | To inform you of some unintended or unexpected consequences that may occur when you use the commands.                                  |
+| Term                         | Definition                                                                                                                             |
+|------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| Date                         | A person that the user is interested in and is currently seeing.                                                                       |
+| Metric                       | A certain characteristic of a date. (e.g. Gender, Height)                                                                              |
+| Command                      | Text that the user types into the application to perform an action.                                                                    |
+| Parameter                    | A value that the user provides to the application when executing a command. (e.g. in`gender/M` M is a parameter)                       |
+| GUI                          | Graphical User Interface                                                                                                               |
+| CLI                          | Command Line Interface                                                                                                                 |
+| Mainstream OS                | Windows, Linux, Unix, OS-X                                                                                                             |
+| <box type="tip"></box>       | To provide you with relevant suggestions on how to use the commands as well as address potential confusions when using these commands. |
+| <box type="important"></box> | To inform you of some unintended or unexpected consequences that may occur when you use the commands.                                  |
 
 [Scroll back to *Table of Contents*](#table-of-contents)
 
@@ -148,13 +147,13 @@ Here you can add John to LoveBook using the add command:
 
 In the command box, enter `add name/John Doe age/21 gender/M height/123 income/3000 horoscope/Libra` and press
 the `enter` key.
-This will add John to LoveBook.
+This will add John to LoveBook. <br> <br>
 
-![addCommandExample](images/user-commands/addCommandExample.png)
+![addCommandExample](images/user-commands/addCommandExample.png) <br>
 
-Let's imagine you've added a couple of dates to the LoveBook already. It should look something like this now:
+Let's imagine you've added a couple of dates to the LoveBook already. It should look something like this now: <br> <br>
 
-![addCommandExample2](images/user-commands/addCommandExample2.png)
+![addCommandExample2](images/user-commands/addCommandExample2.png) <br>
 
 #### 2. Starring a date
 
@@ -162,9 +161,9 @@ With so many dates you might want to start keeping tabs on dates that are perhap
 as you go along
 in your journey. Here you can star John for instance, using the star command:
 Enter `star 2`.
-This will star John.
+This will star John. <br> <br>
 
-![starCommandExample](images/user-commands/starCommandExample.png)
+![starCommandExample](images/user-commands/starCommandExample.png) <br>
 
 #### 3. Filtering dates
 
@@ -172,9 +171,9 @@ With so many dates, you might want to start filtering down to the metrics that m
 simply filter for
 a specific age. Here you can filter for an age of 21 for instance, using the filter command:
 Enter `filter age/21`.
-This will filter for John.
+This will filter for John. <br> <br>
 
-![filterCommandExample](images/user-commands/filterCommandExample.png)
+![filterCommandExample](images/user-commands/filterCommandExample.png) <br>
 
 #### 4. Set Preferences
 
@@ -182,18 +181,18 @@ Well, maybe you are indecisive as a serial dater, and you want a third party opi
 in your preferences using the
 setPreferences command:
 Enter `setP age/22 height/130 income/3200 horoscope/Libra`
-This will set your preferences like so:
+This will set your preferences like so: <br> <br>
 
-![setPreferencesCommandExample](images/user-commands/setPreferencesCommandExample.png)
+![setPreferencesCommandExample](images/user-commands/setPreferencesCommandExample.png) <br>
 
 #### 5. Best Match
 
 And here it is, to get the match of your dreams, simply use the bestMatch command:
-Enter `bestMatch`
+Enter `bestMatch` <br> <br>
 
-![bestMatchCommandExample](images/user-commands/bestMatchCommandExample.png)
+![bestMatchCommandExample](images/user-commands/bestMatchCommandExample.png) <br>
 
-### Congrats! You have completed the tutorial!
+### Congrats! You have completed the tutorial! <br>
 
 The tutorial shows you what a typical workflow might look like on LoveBook. Do continue to peruse the commands section
 which contains
@@ -209,7 +208,7 @@ Here's to you embarking on your LoveBook journey!
 
 ## **Features**
 
-<box type="important">
+<box type="tip">
 
 **Notes about the command format:**
 
@@ -229,7 +228,9 @@ Here's to you embarking on your LoveBook journey!
 
 </box>
 
-### Prefix Table
+<box type="tip">
+    
+The following table shows the list of metrics and their respective constraints.
 
 | Metric    | Prefix       | Constraints                                                                             |
 |-----------|--------------|-----------------------------------------------------------------------------------------|
@@ -239,6 +240,9 @@ Here's to you embarking on your LoveBook journey!
 | Height    | `height/`    | Height should be a positive integer in cm between 100cm and 250cm (inclusive).          |
 | Income    | `income/`    | Income (per month) should be a positive integer in SGD less than or equal to a million. |
 | Horoscope | `horoscope/` | Horoscope should be a valid zodiac sign. It is case insensitive.                        |
+
+</box>
+
 
 ---
 
@@ -250,15 +254,11 @@ Adds a date to the LoveBook.
 
 <box type="tip">
 
-**Tips:**
-
 All parameters are compulsory.
 
 </box>
 
 <box type="important">
-
-**Caution:**
 
 The date added must have a unique name that is not already in the LoveBook.
 
@@ -283,24 +283,23 @@ Format: `edit INDEX [name/NAME] [age/AGE] [gender/GENDER] [height/HEIGHT] [incom
 
 <box type="tip">
 
-**Tips:**
-
 * Metric is limited to `gender, age, horoscope, name, height, income` only.
 * New argument replaces the existing argument for that metric.
 * User can edit up to n number of metrics in one command line, where n refers to the number of metrics available.
 * The index must be a positive integer, and be within the range of the recorded dates.
 * For example, if there are 3 Dates in LoveBook, the indices are 1, 2 and 3.
+
 </box>
-
-
 
 Examples:
 
 - `edit 1 name/John` (editing 1 metric)
 - `edit 1 name/John horoscope/Cancer` (editing 2 metrics)
-- `edit 1 horoscope/Cancer name/John` (sequence doesn't matter)
+- `edit 1 horoscope/Cancer name/John` (sequence doesn't matter) 
 
-![editCommandExample](images/user-commands/editCommandExample.png)
+<br> <br>
+
+![editCommandExample](images/user-commands/editCommandExample.png) <br>
 
 Expected Output: `Edited Date: John; Age: 21; Gender: M; Height: 123; Income: 3000; Horoscope: LIBRA`
 
@@ -315,16 +314,14 @@ Format: `delete INDEX`
 
 <box type="tip">
 
-**Tips:**
-
 * The index must be a positive integer, and be within the range of the recorded dates.
 * For example, if there are 3 Dates in LoveBook, the indices are 1, 2 and 3.
 
 </box>
 
-Example: `delete 1`
+Example: `delete 1` <br> <br>
 
-![deleteCommandExample](images/user-commands/deleteCommandExample.png)
+![deleteCommandExample](images/user-commands/deleteCommandExample.png) <br>
 
 Expected output: `Deleted Date: Ben Brown; Age: 21; Gender: F; Height: 194; Income: 6000; Horoscope: GEMINI`
 
@@ -336,9 +333,9 @@ Expected output: `Deleted Date: Ben Brown; Age: 21; Gender: F; Height: 194; Inco
 
 Shows a list of all dates in the LoveBook.
 
-Format: `list`
+Format: `list` <br> <br>
 
-![listCommandExample](images/user-commands/listCommandExample.png)
+![listCommandExample](images/user-commands/listCommandExample.png) <br>
 
 Expected output: `Listed all Dates`
 
@@ -351,8 +348,6 @@ Expected output: `Listed all Dates`
 Clears all dates in the LoveBook.
 
 <box type="important">
-
-**Caution:**
 
 * This command is irreversible.
 * All data will be lost. Please use this command with caution.
@@ -378,8 +373,6 @@ Format: `star INDEX`
 
 <box type="tip">
 
-**Tips:**
-
 * The index must be a positive integer, and be within the range of the recorded dates.
 * For example, if there are 3 Dates in LoveBook, the indices are 1, 2 and 3.
 
@@ -402,16 +395,14 @@ Format: `unstar INDEX`
 
 <box type="tip">
 
-**Tips:**
-
 * The index must be a positive integer, and be within the range of the recorded dates.
 * For example, if there are 3 Dates in LoveBook, the indices are 1, 2 and 3.
 
 </box>
 
-Example: `unstar 1`
+Example: `unstar 1` <br> <br>
 
-![unstarCommandExample](images/user-commands/unstarCommandExample.png)
+![unstarCommandExample](images/user-commands/unstarCommandExample.png) <br>
 
 Expected output: `Unstarred Date: John Doe; Age: 21; Gender: M; Height: 123; Income: 3000; Horoscope: LIBRA`
 
@@ -428,9 +419,7 @@ Format: `find NAME [MORE_NAMES]`
 
 <box type="tip">
 
-**Tips:**
-
-* Name should be a non-empty string.
+* Name should be a non-empty and should contain only letters/numbers/spaces.
 * More names can be added to the command line, and the search will be conducted for all names provided.
 
 </box>
@@ -452,8 +441,6 @@ Filters the dates in the LoveBook by a specific metric.
 Format: `filter METRIC/ARG`
 
 <box type="tip">
-
-**Tips:**
 
 * Filter must be from list of metrics
 * Metric is limited to `gender, age, name, height` only
@@ -481,28 +468,20 @@ Format: `sort METRIC/ORDER`
 
 <box type="tip">
 
-**Tips:**
-
 The relevant metrics are
-
-* `name/ORDER`
-* `age/ORDER`
-* `height/ORDER`
-* `income/ORDER`
-* `horoscope/ORDER`
-
+    * `name/ORDER`
+    * `age/ORDER`
+    * `height/ORDER`
+    * `income/ORDER`
+    * `horoscope/ORDER`
 Order is limited to `increasing` or `decreasing` only
 
 </box>
 
 <box type="important">
-
-**Caution:**
-
-* When sorting dates by a field where both have an equal value, say Kevin and Wayne are sorted by income and both have
-  an income of 2000, applying commands such as edit or star, can affect the stability of the sort. However, the overall
-  sorting order by value is preserved.
-
+When sorting dates by a field where both have an equal value, say Kevin and Wayne are sorted by income and both have
+an income of 2000, applying commands such as edit or star, can affect the stability of the sort. However, the overall
+sorting order by value is preserved.
 </box>
 
 Example:
@@ -519,8 +498,6 @@ Expected Output: `Lists the dates in the order specified`
 ### **Managing Preferences and Getting Matches**
 
 <box type="tip">
-
-**Tips:**
 
 * By default, Date Preference is set to:
     * AGE: 21
@@ -550,8 +527,6 @@ Sets the user's preferences for the matching algorithm.
 
 <box type="tip">
 
-**Tips:**
-
 * At least one field to edit must be provided.
 * The user's preferences will be used in the [`bestMatch`](#getting-a-recommended-date-bestmatch) command.
 * Gender is not taken into account here
@@ -565,9 +540,9 @@ Sets the user's preferences for the matching algorithm.
 
 Format: `setP [age/AGE] [height/HEIGHT] [income/INCOME] [horoscope/HOROSCOPE]`
 
-Example: `setP age/22 height/180 income/2000 horoscope/TAURUS`
+Example: `setP age/22 height/180 income/2000 horoscope/TAURUS` <br> <br>
 
-![setPCommandExample](images/user-commands/setPCommandExample.png)
+![setPCommandExample](images/user-commands/setPCommandExample.png) <br>
 
 Expected output: `Updated Preferences: Age: 22; Height: 180; Income: 2000; Horoscope: TAURUS`
 
@@ -580,11 +555,11 @@ Expected output: `Updated Preferences: Age: 22; Height: 180; Income: 2000; Horos
 
 Filters out the most compatible date based on the set preferences.
 
-Format: `bestMatch`
+Format: `bestMatch` <br> <br>
 
-![bestMatchCommandExample-1](images/user-commands/bestMatchCommandExample1.png)
+![bestMatchCommandExample-1](images/user-commands/bestMatchCommandExample1.png) <br>
 
-![bestMatchCommandExample-2](images/user-commands/bestMatchCommandExample2.png)
+![bestMatchCommandExample-2](images/user-commands/bestMatchCommandExample2.png) <br>
 
 Expected Output: `Here's your best match!`
 
@@ -595,11 +570,11 @@ Expected Output: `Here's your best match!`
 
 Outputs a random date from the LoveBook.
 
-Format: `blindDate`
+Format: `blindDate` <br> <br>
 
-![blindDateCommandExample-1](images/user-commands/blindDateCommandExample1.png)
+![blindDateCommandExample-1](images/user-commands/blindDateCommandExample1.png) <br>
 
-![blindDateCommandExample-2](images/user-commands/blindDateCommandExample2.png)
+![blindDateCommandExample-2](images/user-commands/blindDateCommandExample2.png) <br>
 
 Expected Output: `Here's a blind date for you!`
 
@@ -625,9 +600,9 @@ Expected output: `Exiting LoveBook...`
 
 Shows a window to bring user to the LoveBook User Guide.
 
-Format: `help`
+Format: `help` <br> <br>
 
-![helpCommandExample](images/user-commands/helpCommandExample.png)
+![helpCommandExample](images/user-commands/helpCommandExample.png) <br>
 
 Expected output: `Opened help window.`
 
@@ -670,7 +645,7 @@ to choose their own avatars.
 
 <box type="tip">
 
-* Commands are sorted by alphabetical order.
+Commands are sorted by alphabetical order.
 
 </box>
 
