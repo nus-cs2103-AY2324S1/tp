@@ -45,7 +45,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/hollag.png" width="200px">
 
 [[github](http://github.com/HollaG)]
-[[portfolio](team/marcus.md)]
+[[portfolio](team/hollag.md)]
 
 * Role: Developer
 * Responsibilities: Data
