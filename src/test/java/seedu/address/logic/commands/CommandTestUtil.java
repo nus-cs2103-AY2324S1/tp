@@ -12,6 +12,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -20,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Person;
 import seedu.address.model.predicate.NameContainsKeywordsPredicate;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.week.Week;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
@@ -53,8 +55,14 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ID_DESC = " " + PREFIX_ID + "A&000000X"; // '&' not allowed in id
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "CS2103T*"; // '*' not allowed in tags
-    public static final Attendance VALID_W0_PRESENT = new Attendance(new Week(0), true, null);
-    public static final Attendance VALID_W0_ABSENT = new Attendance(new Week(0), false, "R");
+    public static final Attendance ATTENDANCE_W0_PRESENT = new Attendance(new Week(0), true, null);
+    public static final Attendance ATTENDANCE_W0_ABSENT = new Attendance(new Week(0), false, "R");
+    public static final Attendance ATTENDANCE_W1_PRESENT = new Attendance(new Week(1), true, null);
+    public static final Attendance ATTENDANCE_W1_ABSENT = new Attendance(new Week(1), false, "Late");
+    public static final Tag TAG_G01 = Tag.create("G01");
+    public static final Tag TAG_T09 = Tag.create("T09");
+    public static final Optional<Tag> OPTIONAL_TAG_G01 = Optional.of(TAG_G01);
+    public static final Optional<Tag> OPTIONAL_TAG_T09 = Optional.of(TAG_T09);
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 

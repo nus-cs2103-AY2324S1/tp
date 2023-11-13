@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.OPTIONAL_TAG_G01;
+import static seedu.address.logic.commands.CommandTestUtil.OPTIONAL_TAG_T09;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.ListAttendanceCommand.MESSAGE_ATTENDANCE_SUMMARY_NO_TAG;
 import static seedu.address.logic.commands.ListAttendanceCommand.MESSAGE_ATTENDANCE_SUMMARY_WITH_TAG;
@@ -41,8 +43,8 @@ public class ListAttendanceCommandTest {
 
     @Test
     public void equals() {
-        Optional<Tag> firstTag = Optional.of(new Tag("G10"));
-        Optional<Tag> secondTag = Optional.of(new Tag("G01"));
+        Optional<Tag> firstTag = OPTIONAL_TAG_T09;
+        Optional<Tag> secondTag = OPTIONAL_TAG_G01;
         Week firstWeek = new Week(1);
         Week secondWeek = new Week(2);
 
@@ -71,9 +73,10 @@ public class ListAttendanceCommandTest {
         // different values -> returns false
         assertFalse(listAttendanceFirstCommand.equals(listAttendanceSecondCommand));
     }
+
     @Test
     public void execute_listAttendanceWithTag_success() {
-        Optional<Tag> tag = Optional.of(new Tag("G02"));
+        Optional<Tag> tag = OPTIONAL_TAG_T09;
         Week week = new Week(0);
         ListAttendanceCommand command = new ListAttendanceCommand(tag, week,
                 new ContainsTagPredicate(tag), new AbsentFromTutorialPredicate(week, tag));

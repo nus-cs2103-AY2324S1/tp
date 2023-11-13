@@ -59,6 +59,7 @@ public class DeleteCommand extends Command {
      * @param tagPredicate Predicate used to filter for students in the course and tutorial group
      */
     public DeleteCommand(Optional<Tag> tag, ContainsTagPredicate tagPredicate) {
+        assert tag != null;
         this.targetIndex = null;
         this.tag = tag;
         this.tagPredicate = tagPredicate;
@@ -131,7 +132,6 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-
         if (tag == null && otherDeleteCommand.tag == null) {
             return targetIndex.equals(otherDeleteCommand.targetIndex);
         }
