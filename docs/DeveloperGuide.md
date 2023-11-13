@@ -251,8 +251,48 @@ user which command was deleted.
 
 **Design considerations**
 
-* The design of the `deleteEvent` command is dependent on the structure of the `Calendar` object. Should the structure
-  of how the event objects are stored change, a new implementation will be required for the command.
+**Aspect: Appropriate input:**
+
+* **Alternative 1: Use Event start time as input:**
+  * Pros: Allows the user to more specifically select which event is deleted.
+  * Cons: The exact start time of the event has to be used to delete the event.
+* **Alternative 2 (Current Choice): Use any time within the event as input:**
+  * Pros: Allows for more flexibility in the time given for the event to be deleted.
+  * Cons: User may be confused on which event is being deleted.
+
+### Clearing all events within a time frame
+
+All events within a time frame can be cleared using the `ClearEvents` command.
+The command requires the start and end time of the time frame to be cleared as inputs. 
+All events that fall within or intersect with the time frame (start time inclusive, end time exclusive) are selected to be deleted.
+This command also has an optional confirmation as input. If the confirmation is not present in the input, the deletion will not be executed and instead, the events
+that would have been executed are displayed in the result. The command can then be reentered with the confirmation to confirm the deletion.
+
+#### Implementation
+
+Given below is an example usage scenario of the command.
+
+Step 1. The user launches the application and creates multiple events.
+
+Step 2. The user executes `clearEvents ts/2023-02-03 12:00 te/2023-02-03 14:00` to view all events within the time range.
+
+Step 3. The `ClearEventsCommandParser` creates an `EventPeriod` representing the indicated time frame and creates a new `ClearEventsCommand` with this `EventPeriod`.
+
+**Note**: At this step, if no events are found within the `EventPeriod` given, a `CommandException` is thrown and an error message is displayed.
+
+Step 4. The `ClearEventsCommand` calls the `Model#eventsInRange(EventPeriod)` method to find all events in the specified time range.
+
+Step 5. All events within the time range are returned and displayed in the command result.
+
+Step 6. The user views all events that would be deleted.
+
+Step 7. The user executes `clearEvents ts/2023-02-03 12:00 te/2023-02-03 14:00 c/CONFIRMED` to confirm the deletion.
+
+Step 8. The `ClearEventsCommand` calls the `Model#eventsInRange(EventPeriod)` method to find all events in the specified time range.
+
+Step 9. For each event in range, the command calls the `Model#deleteEventsInRange(EventPeriod)` which deletes all events within the range.
+
+Step 10. All deleted events are displayed in the command result.
 
 ### Contact Filtering
 
@@ -310,46 +350,127 @@ Given below is an example of how the sort function works at each step. We will s
   of how the AddressBook objects are stored change, a new implementation will be required for the command.
 
 //@@author junhonglow
-### TaskList Feature (Work in Progress)
+### TaskList Feature
+
+The task list feature is facilitated by 'TaskManager'. It extends a ReadOnlyTaskManager that will be used for 
+saving users' tasks. The data of the TaskManager is contained in a `TaskList` object. Additionally, it implements the following operations:
+
+*`TaskManager#addTask(Task)` -- Adds a task to the current task list and saves it to memory.
+*`TaskManager#deleteTask(int)` -- Delete an existing task from the current task list as indicated by its index and saves the change to memory.
+*`TaskManager#sortTasksBy(String)` -- Sets the comparator by which the internal TaskList is sorted to one of two preset options. 
+This method only accepts the strings `"Description"` or `"Deadline"` as input and throws an error otherwise.
+*`TaskManager#getTaskList()` -- Returns and exposes the internal `TaskList` as an unmodifiable `ObservableList<Task>` that can be 'observed'.
+
+These operations are exposed in the `Model` interface as `Model#addTask(Task)`, `Model#deleteTask(int)`, `Model#sortTasksBy` and `Model#getTaskList` respectively.
+
+A `Task` object consists of a `TaskDescription` and can have up to 1 `Deadline`.
+
+#### Adding Tasks
+
+The adding of tasks is facilitated by the `TaskManager#addTask(Task)` method.
+The method adds a `Task` to the `TaskList` object which itself is an attribute of the `TaskManager` object by
+calling a similar method `TaskList#addTask(Task)`.
 
 #### Implementation
 
-The proposed tasklist feature is facilitated by 'TaskList'. It extends a ReadOnlyTaskList that will be used for the
-saving of the users' tasks. Additionally, it implements the following operations:
-
-*`TaskList#addTask()` -- Adds a task to the current tasklist and saves it to memory.
-*`TaskList#deleteTask()` -- Delete an existing task from the current tasklist and saves it to memory.
-*`TaskList#editTask()` -- Edits an existing task from the current tasklist and saves it to memory.
-
-These operations are exposed in the `Model` interface as `Model#addTask()`, `Model#deleteTask()` and `Model#editTask()`
-respectively.
-
-##### Adding Task
-
-The adding of tasks is facilitated by the `model#addTask()` method.
-The method adds a task to the `TaskList` object which itself is an attribute of the `ModelManager` object by
-calling a similar method `Model::addTask()`.
-
-These methods take in a `Description` and `Optional(Deadline)` object and finds the method within the `TaskList` object,
-then adds the `Task` object to the TaskList.
+These methods take in a `Task` object and adds the `Task` object to the `TaskList`.
 Given below is an example usage scenario of the command.
 
-Step 1. The user launches the application and creates a task.
+Step 1. The user launches the application.
 
 Step 2. The user executes `addTask d/CS2105 Assignment te/2023-12-12 12:00 ` command to add the task.
-The `addTask` method in the model is called, adding the task to the tasklist, and saving the tasklist to memory.
 
-**Note**: There is no limit to the number of tasks of the same description or deadline that can be created.
+**Note**: While `Tasks` can have the same `TaskDescription` or `Deadline`, they cannot have both the same `TaskDescription` and `Deadline`.
+
+Step 3. The `addTask` method in the model is called, which calls the `addTask` method in the TaskManager, adding the task to the `TaskList`.
+
+Step 4. The `TaskList` is saved to the memory.
 
 **Design considerations**
 
-* The design of the `addTask` command is such that a deadline is made optional.
-* This current implementation allows for more freedom to the user but might be more difficult to manage with the addition of Optionals.
+* The design of the `addTask` command is such that a deadline is made optional since some tasks are recurring or do not have a specific deadline.
 
-##### Delete Task (To be added)
+### Viewing Tasks
 
-##### Edit Task (To be added)
-//@@author
+Tasks can only be viewed in the bottom panel of the GUI which, by default, shows the events list instead.
+The viewing of tasks is facilitated by the `SwitchListCommand` which interacts with the UI to swap the bottom list between the event list and the task list.
+
+#### Implementation
+
+Given below is an example usage scenario of the command.
+
+Step 1: The user launches the application.
+
+Step 2: The user executes `switchList` command to view the task list.
+
+**Note**: If the task list is already displayed, the command switches the list back to the event list instead.
+
+Step 3: The `MainWindow` class of the UI switches the bottom list to the task list. The task list will now display the task list, allowing the user to view all tasks.
+
+**Design considerations**
+
+**Aspect: Mode of display:**
+
+* **Alternative 1 (Current Choice): Display the task list in the same area as another UI component:**
+  * Pros: The UI will be less cluttered and can have smaller minimum space.
+  * Cons: Both the event list and the task list cannot be viewed at the same time.
+* **Alternative 2: Display the task list in a separate area of the UI:**
+  * Pros: Both the event list and the task list can be viewed at the same time.
+  * Cons: The UI may be more cluttered.
+
+#### Deleting Tasks
+
+The deletion of tasks is facilitated by the `TaskManager#deleteTask(int)` method.
+The method deletes a `Task` from the `TaskList` object which is an attribute of the `TaskManager` object by calling a similar method `TaskList#deleteTask(int)`.
+This in turn deletes the task in `TaskList` that is indicated by its index within the `TaskList`.
+
+#### Implementation
+
+Given below is an example usage scenario of the command.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes `switchList` command to view the task list on the GUI.
+
+Step 3. The user executes `deleteTask 1` command to delete the first task shown in the task list as displayed in the GUI.
+
+Step 4. The `deleteTask` method in the model is called, which calls the `deleteTask` method in the TaskManager, deleting the task from the `TaskList`.
+
+Step 5. The `TaskList` is saved to the memory.
+
+**Design considerations**
+
+**Aspect: Appropriate Input:**
+
+* **Alternative 1: Use Task description and deadline as input:**
+  * Pros: User does not need to refer to the GUI to confirm which task is being deleted.
+  * Cons: The exact description and deadlines have to be provided since tasks can have the same description or deadline.
+* **Alternative 2 (Current Choice): Use displayed index as input:**
+  * Pros: Much less input is required from the user.
+  * Cons: The user has to view the task list displayed in the GUI to confirm which task is being deleted.
+
+### Sorting Tasks
+
+#### Implementation
+
+Tasks in the TaskList can be sorted either alphabetically by description or by deadlines. The accepted inputs for these are `sortTasks Description` and `sortTasks Deadline` respectively.
+The sorting of tasks is facilitated by the `sortTasks` command.
+Given below is an example usage scenario of the command.
+
+Step 1. The user launches the application.
+
+Step 2. The user switches to the task list with the `switchList` command.
+
+Step 3. The user executes the `sortTasks Description` command to sort tasks by description alphabetically.
+
+Step 4. A `SortTasksCommand` is created after the command is parsed by the `SortTasksCommandParser`.
+
+Step 5. Upon execution, the `SortTasksCommand` calls `Model#sortTasks(String)` and passes the sorting method of `Description` represented by a String to it.
+
+Step 6. The `TaskManager#sortTasks(String)` method is called and the `sortingOrder` attribute of type `Comparator<Task>` of the `TaskManager` is set to the appropriate type.
+
+Step 7. The internal `TaskList` is sorted by the `sortingOrder`.
+
 
 ### \[Proposed\] Undo/redo feature
 

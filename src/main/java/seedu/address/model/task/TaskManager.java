@@ -83,7 +83,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     /**
      * Sets the sorting order setting to sort by deadline.
      */
-    public void setSortDeadline() {
+    private void setSortDeadline() {
         sortingOrder = new Task.TaskDeadlineComparator();
         sort();
     }
@@ -91,7 +91,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     /**
      * Sets the sorting order setting to sort by description.
      */
-    public void setSortDescription() {
+    private void setSortDescription() {
         sortingOrder = new Task.TaskDescriptorComparator();
         sort();
     }
