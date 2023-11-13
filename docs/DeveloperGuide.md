@@ -28,7 +28,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+<img src="images/ArchitectureDiagram.png" width="280" style="margin-left:230px"/>
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -53,7 +53,7 @@ The bulk of the app's work is done by the following four components:
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `deleteMember 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<img src="images/ArchitectureSequenceDiagram.png" width="800px" style="margin-left:-30px; max-width:1000px"/>
 
 Each of the four main components (also shown in the diagram above),
 
@@ -62,7 +62,7 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+<img src="images/ComponentManagers.png" width="300px" style="margin-left:220px"/>
 
 The sections below give more details of each component.
 
@@ -70,7 +70,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-F11-1/tp/blob/master/src/main/java/seedu/ccacommander/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+<img src="images/UiClassDiagram.png" width="1200px" style="margin-left:-130px; max-width:1000px" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `MemberListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -89,11 +89,11 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<img src="images/LogicClassDiagram.png" width="550px" style="margin-left:95px"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("deleteMember 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `deleteMember 1` Command](images/DeleteSequenceDiagram.png)
+<img src="images/DeleteSequenceDiagram.png" style="max-width:1200px; margin-left:-230px" width="1200px">
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteMemberCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -107,7 +107,7 @@ How the `Logic` component works:
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+<img src="images/ParserClasses.png" width="600px" style="margin-left:70px"/>
 
 How the parsing works:
 * When called upon to parse a user command, the `CcaCommanderParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `CreateMemberCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `CreateMemberCommand`) which the `CcaCommanderParser` returns back as a `Command` object.
@@ -119,7 +119,7 @@ How the parsing works:
 *Details of the `Member`, `Event`, and `Enrolment` packages have be omitted for brevity.
 Please refer to the [Member](#member-class-diagram), [Event](#event-class-diagram) and [Enrolment](#enrolment-model) diagrams for more information.*
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="740px" />
 
 
 The `Model` component,
@@ -135,7 +135,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-F11-1/tp/blob/master/src/main/java/seedu/ccacommander/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" width="740px"/>
 
 The `Storage` component,
 * can save both CCACommander data and user preference data in JSON format, and read them back into corresponding objects.
@@ -159,7 +159,7 @@ implementing this model.
 #### Implementation
 The `Enrolment` and `UniqueEnrolmentList` classes are implemented as shown in the diagram below:
 
-![EnrolmentClassDiagram](images/EnrolmentClassDiagram.png)
+<img src="images/EnrolmentClassDiagram.png" style="margin-left:258px">
 
 `Enrolment` encapsulates the enrolment of a member into an event. It composes of the `Name` of the member and
 the `Name` of the event enrolled in, number of `Hours` they contributed, and a `Remark` to note for that
@@ -201,7 +201,7 @@ all the supplied parameters are valid.
 The sequence diagram below shows how the `Model` and `LogicManager` components interact when a `EnrolCommand` is executed with user input
 `enrol m/1 e/1 h/1 r/Role: Photographer` represented by `...`
 
-![EnrolSequenceDiagram](images/EnrolSequenceDiagram.png)
+<img src="images/EnrolSequenceDiagram.png" width="1000px" style="max-width: 1000px; margin-left:-130px"/>
 
 1. `LogicManager` uses the `CcaCommanderParser` class to parse the user command, creating a new instance of `EnrolCommandParser` object.
 2. The `EnrolCommandParser` creates a new instance of a `EnrolCommand` object and returns it to `CcaCommanderParser`
@@ -216,7 +216,7 @@ The sequence diagram below shows how the `Model` and `LogicManager` components i
 
 The following activity diagram shows how the `EnrolCommand` works.
 
-![EnrolActivityDiagram](images/EnrolActivityDiagram.png)
+<img src="images/EnrolActivityDiagram.png" width="860px" style="max-width: 860px; margin-left:-120px"/>
 
 #### Design Considerations
 
@@ -261,15 +261,15 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 
 Step 1. The user launches the application for the first time. The `VersionedCcaCommander` will be initialized with the initial CCACommander version, and the `versionPointer` pointing to that single CCACommander version. This initial CCACommander version will be saved into the `ccaCommanderVersionList`
 
-![UndoRedoVersion0](images/UndoRedoVersion0.png)
+<img src="images/UndoRedoVersion0.png" style="margin-left:98px"/>
 
 Step 2. The user executes `deleteMember 5` command to delete the 5th member in CCACommander. The `deleteMember` command calls `Model#commit(String commitMessage)`, causing the modified version of the CCACommander after the `deleteMember 5` command executes to be saved in the `ccaCommanderVersionList`, and the `versionPointer` is shifted to the newly inserted CCACommander version.
 
-![UndoRedoVersion1](images/UndoRedoVersion1.png)
+<img src="images/UndoRedoVersion1.png" style="margin-left:98px"/>
 
 Step 3. The user executes `createMember n/David …​` to add a new member. The `createMember` command also calls `Model#commit(String commitMessage)`, causing another modified CCACommander version to be saved into the `ccaCommanderVersionList`.
 
-![UndoRedoVersion2](images/UndoRedoVersion2.png)
+<img src="images/UndoRedoVersion2.png" style="margin-left:98px"/>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commit(String commitMessage)`, so the CCACommander version will not be saved into the `ccaCommanderVersionList`.
 
@@ -277,7 +277,7 @@ Step 3. The user executes `createMember n/David …​` to add a new member. The
 
 Step 4. The user now decides that adding the member was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undo()`, which will shift the `versionPointer` once to the left, pointing it to the previous CCACommander version, and restores the CCACommander to that version.
 
-![UndoRedoVersion3](images/UndoRedoVersion3.png)
+<img src="images/UndoRedoVersion3.png" style="margin-left:98px"/>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `versionPointer` is at index 0, pointing to the initial CcaCommander version, then there are no previous CcaCommander versions to restore. The `undo` command uses `Model#canUndo()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
@@ -286,7 +286,7 @@ than attempting to perform the undo.
 
 The following sequence diagram shows how the undo operation works:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+<img src="images/UndoSequenceDiagram.png" width="1000px" style="max-width:1000px; margin-left:-130px"/>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -300,15 +300,15 @@ The `redo` command does the opposite — it calls `Model#redo()`, which shif
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the CCACommander, such as `list`, will usually not call `Model#commit(String commitMessage)`, `Model#undo()` or `Model#redo()`. Thus, the `ccaCommanderVersionList` remains unchanged.
 
-![UndoRedoVersion4](images/UndoRedoVersion4.png)
+<img src="images/UndoRedoVersion4.png" style="margin-left:98px"/>
 
 Step 6. The user executes `clear`, which calls `Model#commit(String commitMessage)`. Since the `versionPointer` is not pointing at the end of the `ccaCommanderVersionList`, all CCACommander versions after the `versionPointer` will be purged. Reason: It no longer makes sense to redo the `createMember n/David …​` command. This is the behavior that most modern desktop applications follow.
 
-![UndoRedoVersion5](images/UndoRedoVersion5.png)
+<img src="images/UndoRedoVersion5.png" style="margin-left:98px"/>
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-![CommitActivityDiagram](images/CommitActivityDiagram.png)
+<img src="images/CommitActivityDiagram.png" style="margin-left:241px"/>
 
 #### Design considerations:
 
@@ -343,24 +343,24 @@ Given below is an example usage scenario and how the commandHistory behaves at e
 Step 1. The user launches the application for the first time and enters their first command.
 The `CommandHistory` will save the command and the `currentCommandPointer` won't be pointing to any command.
 
-![CommandHistoryState0](images/CommandHistoryState0.png)
+<img src="images/CommandHistoryState0.png" style="margin-left:133px"/>
 
-Step 2. The user presses '↑' while the commandBox is selected. `CommandHistory#getPreviousCommand()` is called and the previous command is displayed in the commandBox.
+Step 2. The user presses <kbd>↑</kbd> while the commandBox is selected. `CommandHistory#getPreviousCommand()` is called and the previous command is displayed in the commandBox.
 When the previous command is entered into the commandBox, the new version of command will not be stored in `CommandHistory` after calling `CommandHistory#isLastCommandEqualCommand()`
 and it returns true.
 
 
-![CommandHistoryState1](images/CommandHistoryState1.png)
+<img src="images/CommandHistoryState1.png" width="960px" style="max-width:960px; margin-left:-110px"/>
 
-Step 3. The user presses '↑' while the commandBox is selected. `CommandHistory#getPreviousCommand()` is called
+Step 3. The user presses <kbd>↑</kbd> while the commandBox is selected. `CommandHistory#getPreviousCommand()` is called
 and the previous command is displayed in the commandBox. When the previous command is edited and is entered into the commandBox, the newly edited version of command will be stored in `CommandHistory` after calling `CommandHistory#addCommand()`.
 
-![CommandHistoryState3](images/CommandHistoryState2.png)
+<img src="images/CommandHistoryState2.png" width="960px" style="max-width:960px; margin-left:-110px"/>
 
-Step 4. The user has pressed '↑' while selecting the commandBox until the first Command and `CommandHistory#getPreviousCommand()`
-is called multiple times. The user then presses '↓' and `CommandHistory#getNextCommand()` is called and the command1 (the next command) will then be displayed in the commandBox.
+Step 4. The user has pressed <kbd>↑</kbd> while selecting the commandBox until the first Command and `CommandHistory#getPreviousCommand()`
+is called multiple times. The user then presses <kbd>↓</kbd> and `CommandHistory#getNextCommand()` is called and the command1 (the next command) will then be displayed in the commandBox.
 
-![CommandHistoryState3](images/CommandHistoryState3.png)
+<img src="images/CommandHistoryState3.png" width="960px" style="max-width:960px; margin-left:-110px"/>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentCommandPointer` is at
 index 0, pointing to the initial first command, then there are no previous commands to restore. The program uses
@@ -371,7 +371,7 @@ index 0, pointing to the initial first command, then there are no previous comma
 
 The opposite occurs too when calling the next command  —  the program calls `CommandHistory#hasNextCommand()`, which shifts the `currentCommandPointer` once to the right, pointing to the previously entered command and displaying that command instead.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `commandHistoryPointer` is at index `commandHistoryList.size()`, pointing to nothing, and there are no undone CcaCommander states to restore.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `commandHistoryPointer` is at index `commandHistoryList.size()`, pointing to nothing, and there are no commands to restore.
 The program uses `CommandHistory#hasNextCommand()` to check if this is the case. If so, it will not call `CommandHistory#getNextCommand()`
 but will instead use `CommandHistory#isLastCommand()` to check if the `commandHistoryPointer` is at the last command and set the commandBox to be blank.
 
@@ -380,7 +380,7 @@ but will instead use `CommandHistory#isLastCommand()` to check if the `commandHi
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommandHistoryActivityDiagram.png" width="400" style="padding-left:170px" />
+<img src="images/CommandHistoryActivityDiagram.png"/>
 
 #### Design considerations:
 
@@ -393,10 +393,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative 2:** CommandHistory only stores previous command.
     * Pros: Will use less memory and reduces user error.
     * Cons: Quite limited as a feature.
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -813,16 +809,12 @@ Future User Stories to be implemented:
 
       Use case ends.
 
-*{More to be added}*
-
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 members without a noticeable sluggishness in performance for typical usage.
 3.  Should be able to hold up to 1000 events without a noticeable sluggishness in performance for typical usage.
 4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
 
 ### Glossary
 
