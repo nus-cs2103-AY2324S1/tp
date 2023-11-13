@@ -6,7 +6,7 @@ title: UNOFAS User Guide
 ## Welcome to UNOFAS!
 
 ## What is UNOFAS?
-UNOFAS (UNO: One FAS: Financial Advisors app) is a **desktop app for Financial Advisors to manage client's contacts,
+UNOFAS (UNO: One FAS: Financial Advisors app) is a **desktop app for Financial Advisors to manage clients contacts and schedule appointments,
 optimized for use via a Command Line Interface** (CLI) while still having the benefits of a
 Graphical User Interface (GUI). For fast typists, UNOFAS can help you manage and retrieve client's information
 better than traditional GUI apps.
@@ -19,7 +19,13 @@ use as financial advisors.
 To help you make the most of this resource, we would recommend that you take some time to read through the entire guide.
 You can then utilize the Table of Contents provided below and click on the relevant links to easily navigate through 
 the guide and access the information you might need or want to take another look at. We hope that this guide serves you well
-to help make managing your clients a more pleasant experience.
+to help make managing your clients a more pleasant experience.i
+
+## Legend
+:information-source: Important information to take note of. <br>
+:bulb: Useful tips for improving usability of the application. <br>
+:caution: Mistakes to be wary of.
+
 
 ## Table of Contents
 * [Quick Start](#quick-start)
@@ -29,9 +35,9 @@ to help make managing your clients a more pleasant experience.
   * [Appointment Card](#appointment-card)
 * [Features](#features)
   * [Help](#viewing-help--help)
-  * [Add](#adding-a-client--add)
-  * [List](#listing-all-clients--list)
-  * [Edit](#editing-a-client--edit)
+  * [Add](#adding-a-client-contact--add)
+  * [List](#listing-all-client-contacts--list)
+  * [Edit](#editing-a-client-contact--edit)
   * [Find](#locating-clients-by-name-financial-plan-andor-tag--find)
   * [Gather](#gathering-emails-of-matching-clients--gather)
   * [Schedule](#scheduling-an-appointment--schedule)
@@ -154,21 +160,21 @@ Below is a table summarising common arguments used in `add`, `edit`, `find`, `sc
 to view the arguments' prefix, and their acceptable values. Unless specified, having only space characters i.e. an empty
 value, is not an acceptable value and will result in a warning.
 
-| Prefix | Argument              | Acceptable Values                                                                                                  |
-|--------|-----------------------|--------------------------------------------------------------------------------------------------------------------|
-| -      | INDEX                 | Number (1 to current size of the contact book)                                                                     |
-| `n/`   | NAME                  | Alphabets, numbers, and space characters only                                                                      |
-| `p/`   | PHONE_NUMBER          | Numbers only and at least 3 digits long                                                                            |
-| `e/`   | EMAIL                 | Alphabets, numbers, and symbols only in a valid email format                                                       |
-| `a/`   | ADDRESS               | Any value is possible.                                                                                             |
-| `nk/`  | NEXT_KIN              | Alphabets, numbers, and space characters only                                                                      |
-| `nkp/` | NEXT_KIN_PHONE        | Numbers only and at least 3 digits long                                                                            |
-| `fp/`  | FINANCIAL_PLAN        | Alphabets, numbers, and space characters only. Empty value is accepted when using [Edit](#editing-a-client--edit). |
-| `t/`   | TAG                   | Alphabets and numbers only. Empty value is accepted when using [Edit](#editing-a-client--edit).                    |
-| `ap/`  | APPOINTMENT_NAME      | Alphabets, numbers, and space characters only                                                                      |
-| `d/`   | APPOINTMENT_DATE      | Format: dd-MM-yyyy (e.g., 31-12-2023)                                                                              |
-| `d/`   | APPOINTMENT_DATE_TIME | Format: dd-MM-yyyy HH:mm (e.g., 31-12-2023 14:30)                                                                  |
-| -      | KEYWORD               | `name` or `appointment`                                                                                            |
+| Prefix | Argument              | Acceptable Values                                                                                                          |
+|--------|-----------------------|----------------------------------------------------------------------------------------------------------------------------|
+| -      | INDEX                 | Number (1 to current size of the contact book)                                                                             |
+| `n/`   | NAME                  | Alphabets, numbers, and space characters only                                                                              |
+| `p/`   | PHONE_NUMBER          | Numbers only and at least 3 digits long                                                                                    |
+| `e/`   | EMAIL                 | Alphabets, numbers, and symbols only in a valid email format                                                               |
+| `a/`   | ADDRESS               | Any value is possible.                                                                                                     |
+| `nk/`  | NEXT_KIN              | Alphabets, numbers, and space characters only                                                                              |
+| `nkp/` | NEXT_KIN_PHONE        | Numbers only and at least 3 digits long                                                                                    |
+| `fp/`  | FINANCIAL_PLAN        | Alphabets, numbers, and space characters only. Empty value is accepted when using [Edit](#editing-a-client-contact--edit). |
+| `t/`   | TAG                   | Alphabets and numbers only. Empty value is accepted when using [Edit](#editing-a-client-contact--edit).                    |
+| `ap/`  | APPOINTMENT_NAME      | Alphabets, numbers, and space characters only                                                                              |
+| `d/`   | APPOINTMENT_DATE      | Format: dd-MM-yyyy (e.g., 31-12-2023)                                                                                      |
+| `d/`   | APPOINTMENT_DATE_TIME | Format: dd-MM-yyyy HH:mm (e.g., 31-12-2023 14:30)                                                                          |
+| -      | KEYWORD               | `name` or `appointment`                                                                                                    |
 
 <div markdown="span" class="alert alert-primary">:information_source:
 **Do note** If the ADDRESS includes any recognized prefixes (leading space + prefix), users should be careful. 
@@ -470,7 +476,7 @@ Format: `exit`
 ------------
 ### Saving the data
 
-UNOFAS data are saved in a `.json` file in the same application folder as the program automatically after any command that changes the data. 
+UNOFAS data are saved in a `.json` file in the data folder found in the same folder the application is in. Data is written each time a command that alters the data in the list is executed.
 There is no need to save manually.
 
 ------------
