@@ -1192,7 +1192,7 @@ Testers are expected to do more *exploratory* testing.
       <br><br>
 5. Attempt to tag a student not in Class Manager.
 
-   1. Test case: `tag` command with a student number that is not in the Class Manager.
+   1. Test case: `tag` command with a student number that is not in the Class Manager.<br>
       Expected: Error message is shown in the display result.
       <br><br>
 
