@@ -5,7 +5,9 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.ccacommander.commons.core.LogsCenter;
 import seedu.ccacommander.commons.core.index.Index;
 import seedu.ccacommander.commons.util.StringUtil;
 import seedu.ccacommander.logic.parser.exceptions.ParseException;
@@ -27,6 +29,7 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
+    private static final Logger logger = LogsCenter.getLogger(ParserUtil.class);
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -35,6 +38,7 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            logger.info("An error occurred while parsing the index: " + oneBasedIndex);
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
@@ -50,6 +54,7 @@ public class ParserUtil {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
+            logger.info("An error occurred while parsing the name: " + name);
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
@@ -65,6 +70,7 @@ public class ParserUtil {
         requireNonNull(gender);
         String trimmedGender = gender.trim();
         if (!Gender.isValidGender(trimmedGender)) {
+            logger.info("An error occurred while parsing the gender: " + gender);
             throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
         }
         return new Gender(trimmedGender);
@@ -80,21 +86,23 @@ public class ParserUtil {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
         if (!Phone.isValidPhone(trimmedPhone)) {
+            logger.info("An error occurred while parsing the phone number: " + phone);
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
     }
 
     /**
-     * Parses a {@code String ccacommander} into an {@code Address}.
+     * Parses a {@code String address} into an {@code Address}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code ccacommander} is invalid.
+     * @throws ParseException if the given {@code address} is invalid.
      */
     public static Address parseAddress(String address) throws ParseException {
         requireNonNull(address);
         String trimmedAddress = address.trim();
         if (!Address.isValidAddress(trimmedAddress)) {
+            logger.info("An error occurred while parsing the address: " + address);
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
         return new Address(trimmedAddress);
@@ -110,6 +118,7 @@ public class ParserUtil {
         requireNonNull(email);
         String trimmedEmail = email.trim();
         if (!Email.isValidEmail(trimmedEmail)) {
+            logger.info("An error occurred while parsing the email: " + email);
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
@@ -125,6 +134,7 @@ public class ParserUtil {
         requireNonNull(location);
         String trimmedLocation = location.trim();
         if (!Location.isValidLocation(trimmedLocation)) {
+            logger.info("An error occurred while parsing the location: " + location);
             throw new ParseException(Location.MESSAGE_CONSTRAINTS);
         }
         return new Location(trimmedLocation);
@@ -140,6 +150,7 @@ public class ParserUtil {
         requireNonNull(eventDate);
         String trimmedEventDate = eventDate.trim();
         if (!EventDate.isValidDate(trimmedEventDate)) {
+            logger.info("An error occurred while parsing the event date: " + eventDate);
             throw new ParseException(EventDate.MESSAGE_CONSTRAINTS);
         }
         return new EventDate(trimmedEventDate);
@@ -155,6 +166,7 @@ public class ParserUtil {
         requireNonNull(hours);
         String trimmedHours = hours.trim();
         if (!Hours.isValidHours(trimmedHours)) {
+            logger.info("An error occurred while parsing the hours: " + hours);
             throw new ParseException(Hours.MESSAGE_CONSTRAINTS);
         }
         return new Hours(trimmedHours);
@@ -170,6 +182,7 @@ public class ParserUtil {
         requireNonNull(remark);
         String trimmedRemark = remark.trim();
         if (!Remark.isValidRemark(trimmedRemark)) {
+            logger.info("An error occurred while parsing the remark: " + remark);
             throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
         }
         return new Remark(trimmedRemark);
@@ -185,6 +198,7 @@ public class ParserUtil {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
         if (!Tag.isValidTagName(trimmedTag)) {
+            logger.info("An error occurred while parsing the tag: " + tag);
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
