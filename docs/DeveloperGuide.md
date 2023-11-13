@@ -339,22 +339,9 @@ Step 3. `EditFieldCommand` is executed, and with the `CommandType.EDIT_FIELD` ca
 
 ![EditFieldSequenceDiagram.png](images/EditFieldSequenceDiagram.png)
 
-#### Design considerations:
-
-**Aspect: How delete executes:**
-
-* **Alternative 1 (current choice):** Delete multiple fosterers at once.
-    * Pros: Do not have to parse user input multiple times in order for the user to perform mass deletion.
-    * Cons: Slightly harder to implement.
-
-* **Alternative 2:** Delete only one fosterer at a time.
-    * Pros: Easy to implement. 
-    * Cons: Overhead associated with a chain of delete commands should the user choose to perform multiple deletions.
-
-
 <br>
 
-### Saving the Changes in Profile Page Feature 
+#### Saving the Changes in Profile Page Feature 
 
 The mechanism allows the user to save the edited details of a fosterer in their profile page. This feature is facilitated by `ViewModeParser`, and `SaveCommand` classes, to handle user input in the profile page and save the updated fosterer. This feature is implemented using the following components and operations:
 
@@ -380,6 +367,67 @@ Step 3. `EditFieldCommand` is executed, and `setPerson()` method from `Model` cl
 Step 4. From `MainWindow`, `handleSave()` handler method is called which calls `resetValues()` in `PersonProfile` class that updates the field values to the currently saved fosterer's details and change the text color from red, if exists, back to black.
 
 ![HandleSaveSequenceDiagram.png](images/HandleSaveSequenceDiagram.png)
+
+#### Ensuring the user saved the changes before exiting profile
+
+The mechanism ensures the user to save the edited details of a fosterer in their profile page by displaying warning message. This feature is facilitated by `ViewModeParser`, and `ViewExitCommand` classes, to handle user input in the profile page and save the updated fosterer. This feature is implemented using the following components and operations:
+
+* `ViewModeParser` - Represents the parser that parses commands that are executed in a fosterer's profile.
+* `SaveCommand` - The core component responsible for saving the changes made by the user.
+* `MainWindow` - The UI component that handles navigating through fields.
+* `CommandBox` - The UI component that detects either Enter or Esc input to continue exiting or cancel exiting.
+* `ResultDisplay` - The UI component that displays the warning message when the user attempts to exit without saving. 
+* `CommandType` - The Enum class that represents the type of command which MainWindow checks to handle the UI change.
+
+Given below is an example usage scenario and how this mechanism behaves at each step, given that the user already opened person profile page and did not save the edit:
+
+Step 1. The user enters `exit` command in the profile page. Since the normal person list is invisible, the command text "exit" is passed to `executeInView()` method in `MainWindow` class (refer to the explanation in the section of [**Logic Component:AddressBookParser and ViewModeParser Classes**](#addressbookparser-and-viewmodeparser-classes)). 
+
+![ViewExitSequenceDiagram1.png](images/ViewExitSequenceDiagram1.png)
+
+Step 2. With `executeInView()`, `ViewModeParser` is used to parse the command text which returns `ViewExitCommand`.
+
+![ViewExitSequenceDiagram2.png](images/ViewExitSequenceDiagram2.png)
+
+Step 3. `ViewExitCommand` is executed, and `getFilteredPersonList()` method in `Model` is used to compare the edited fosterer and the original fosterer to see if the details are saved. The `CommandResult` is returned to the `MainWindow`. 
+
+![ViewExitSequenceDiagram3.png](images/ViewExitSequenceDiagram3.png)
+
+Step 4. From `MainWindow`, `handleViewExit()` handler method is called. The `getInConfirmationDialog()` method in `CommandBox` UI class is used to check if the user is seeing the confirmation message. If the user already saved the fosterer or is already in confirmation dialog, `exitProfilePage()` is called and user exits the profile. Otherwise, the user is shown the confirmation message telling that they did not save the details. 
+![HandleViewExitSequenceDiagram.png](images/HandleViewExitSequenceDiagram.png)
+
+Step 5. If the user presses Enter in the `CommandBox`, `handleViewExit()` method is called again. This time, the screen is already showing the confirmation message, so isShowingConfirmationMessage is true. Thus, the user is exited out of the profile page. If the user presses Esc instead, `handleCancelViewExit()` method is called lets the user stays in the profile page. 
+
+![ViewExitSequenceDiagram.png](images/ViewExitSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect 1: Different `SaveCommand` behaviors for adding and editing a fosterer in profile page:**
+
+Here are the justifications of why `SaveCommand` exits the profile page when adding a new fosterer but does not when editing a fosterer's details. 
+
+* **Alternative 1 (current choice):** Executing `SaveCommand` exits directly when adding a new fosterer, but does not exit when editing a fosterer on their profile page. 
+    * Pros: Less error prone. Duplicate fosterers are checked with the names. If the user edits the person's name and enters save again, it would create another fosterer. 
+    * Cons: May be cumbersome for users who want to edit the user's details on the same page. 
+
+* **Alternative 2:** Users are able to continue adding details when adding or editing a fosterer. 
+    * Pros: Gives better user experience since user can continue working without exiting the profile page. 
+    * Cons: Harder to implement without making it error prone. 
+
+* **Alternative 3:** `SaveCommand` exits the profile page for both adding and editing a fosterer. 
+    * Pros: Least error prone and less confusing because of its consistent behavior. 
+    * Cons: Users have to exit and re-enter profile page several times. 
+
+**Aspect 2: How displaying confirmation message is implemented:**
+
+* **Alternative 1 (current choice):** Accepts inputs (Enter or Esc) from `CommandBox` and call `MainWindow` handlers from it. 
+    * Pros: Does not have to create separate command for confirming or cancelling exit. Since the user may type other commands instead of such confirming command, this prevents potential errors that may arise from attempting to execute commands while the message is shown.  
+    * Cons: Increases coupling between `MainWindow` and `CommandBox`. 
+
+* **Alternative 2:** Create another command for confirming or cancelling exit. 
+    * Pros: Easy to implement. Utilizes the current architecture and does not add additional coupling between `MainWindow` and `CommandBox`. 
+    * Cons: May potential cause errors since users may type in different commands.
+
 
 ### Delete feature
 
