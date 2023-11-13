@@ -3,9 +3,23 @@ layout: page
 title: User Guide
 ---
 
-MediLink Contacts (MLC) is a **desktop app for managing patients and doctors details, optimized for use via a Command
-Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MLC
-can get your patients management tasks done faster than traditional GUI apps.
+### Welcome to MediLink Contacts!
+
+MediLink Contacts (MLC) is a **desktop application** for **medical administrative assistants** to managing patients and
+doctors details within clinics.
+
+Hereʼs an overview of how Docedex can help you streamline your hospital management
+processes:
+
+* Store and edit information about your patients and doctors
+* Create Appointments between Patients and Doctors upon triaging
+
+On top of these functionalities, we believe that **efficiency** in patient management is of utmost importance.
+Hence, MediLink Contacts is **optimized** for use via a **Command Line Interface (CLI)** while still having
+the benefits of a **Graphical User Interface (GUI)**. If you type fast, MediLink Contacts can get your
+hospital management tasks done faster than current GUI apps in the industry.
+
+**New here?** Visit our [quick start](#quick-start) guide to onboard onto MediLink Contacts smoothly!
 
 ### Table of Contents
 
@@ -128,7 +142,7 @@ Examples:
 * `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Pediatrician`
 * `add-doctor n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon`
 
-<div markdown="block" class="alert alert-info">
+<div mgarkdown="block" class="alert alert-info">
 
 **:information_source: Common Errors:**<br>
 1. Invalid Command Format <br>
