@@ -232,6 +232,10 @@ Creates a new addressbook.
 
 Delete an addressbook.
 
+<div markdown="block" class="alert alert-info">**:information_source: Info:**
+Deleting the currently active addressbook will automatically switch to another existing addressbook!
+</div>
+
 **Format:** `course delete course/COURSE_CODE`
 
 <div markdown="block" class="alert alert-info">
@@ -638,7 +642,7 @@ TAvigator data are saved in the hard disk automatically after any command that c
 TAvigator data are saved automatically as a JSON file `[JAR file location]/data/tavigator.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
-If your changes to the data file makes its format invalid, TAvigator will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, TAvigator will discard all data and start with an empty data file at the next run, containing an addressbook called "TEMP". Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
 #### 4.5.3 Archiving data files `[coming in v2.0]`
@@ -678,7 +682,7 @@ _Details coming soon ..._
 | tg/     | Tutorial group | - Should only contain alphanumeric characters. <br>- Should not contain spaces.<br>- Used in `list attendance` and `delete all` commands. |
 | a/      | Attendance     | - Should only be 0 or 1.<br>- 0 representing absence and 1 representing present. |
 | w/      | Week number    | - Should be an integer from 0 to 13. |
-| r/      | Reason         | - Can be any string, except empty string `""`. |
+| r/      | Reason         | - Can be any string, excluding empty string `""`. |
 
 
 ### 7.2 Command summary
