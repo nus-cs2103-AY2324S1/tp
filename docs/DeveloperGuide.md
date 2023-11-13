@@ -1923,6 +1923,22 @@ Solution:
   `This leave period exceeds the number of leaves remaining for this employee`<br>
   `Number of leaves remaining: 1`
 
+### Unable to view the number of overtime hours remaining when updating overtime hours that exceeds the range of allowed number of overtime hours
+
+Problem:
+* In our current implementation, if a user tries to update the number of overtime hours for an employee and exceeds the
+  maximum number of allowed overtime hours or make it fall below zero, the app only displays an error message
+  telling the user it exceeds the range of allowed number of overtime hours.
+* However, the app does not show the remaining number of overtime hours, so the fastest method is to use report command to display the current amount of
+  overtime hours taken by the employee and perform manual subtraction to obtain remaining number of overtime hours.
+
+Solution:
+* We plan to revamp the error messages pertaining to this issue to display as much information as possible to the user,
+  in this case the remaining number of overtime hours.
+* In this case, it is to change the error message into this:<br>
+  `Number of overtime hours should not be above 72 or below 0`<br>
+  `Number of overtime hours remaining: 2`
+
 ### Unclear error message for invalid email address
 
 Problem:
