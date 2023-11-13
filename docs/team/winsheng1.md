@@ -1,3 +1,8 @@
+---
+layout: page
+title: Win Sheng's Project Portfolio Page
+---
+
 ### Project: ClubMembersContacts
 
 Below is a summary of my contributions to the project.
@@ -30,6 +35,7 @@ Below is a summary of my contributions to the project.
     * Edited target user profile, user stories and use cases for the first draft.
     * Wrote section for edit member/applicant.
     * Drew Activity Diagrams and Sequence Diagrams for this section.
+    * Wrote manual user testing sections for edit member/applicant commands.
 * **Review/mentoring contributions**:
   * Helped team members with some of the problems they encountered with their code.
     * i.e. Helped a peer with `Add Task` function.
@@ -42,3 +48,4 @@ Below is a summary of my contributions to the project.
   * [Pull Request #130](https://github.com/AY2324S1-CS2103T-W15-3/tp/pull/130)
   * [Pull Request #136](https://github.com/AY2324S1-CS2103T-W15-3/tp/pull/136)
   * [Pull Request #142](https://github.com/AY2324S1-CS2103T-W15-3/tp/pull/142)
+  * [Pull Request #287](https://github.com/AY2324S1-CS2103T-W15-3/tp/pull/287)
