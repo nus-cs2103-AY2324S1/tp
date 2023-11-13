@@ -27,9 +27,6 @@ Given below are my contributions to the project.
   * Enhance `delete` and `edit` feature to affect original list after `find` command.
     * What it Does: Allows users to edit or delete a patient without having to go back to the original list if they are currently in a filtered list after a find command.
     * Justification: This feature improves the efficiency of users as they will not have to return to the original list everytime. This enhancement works well with the logger tab since the logger tab can save records of find command, hence aidding the deletion of patients through already filtered list of patients.
-  * Enhance `Appointment` to be case insensitive.
-  * Enhance `Email` to have tighter restrictions on format.
-  * Enhance `Id` to be capitalised regardless of input case.
 
 
 * **Documentation**:
@@ -42,6 +39,8 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Updated Glossary. [\#58](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/58)
     * Added implementation details of the `delete` feature. [\#102](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/102)
+    * Update UML diagrams to match project architecture and workflow. [\#245](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/245)
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#62](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/62), [\#105](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/105), [\#109](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/109), [\#117](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/117), [\#198](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/198), [\#209](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/209), [\#211](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/211), [\#217](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/217)
+  * Reported bugs and suggestions for other teams in the course (Issues examples: [#1](https://github.com/nubnubyas/ped/issues/1), [#2](https://github.com/nubnubyas/ped/issues/2), [#3](https://github.com/nubnubyas/ped/issues/3), [#4](https://github.com/nubnubyas/ped/issues/4), [#5](https://github.com/nubnubyas/ped/issues/5), [#6](https://github.com/nubnubyas/ped/issues/6), [#7](https://github.com/nubnubyas/ped/issues/7), [#8](https://github.com/nubnubyas/ped/issues/8), [#9](https://github.com/nubnubyas/ped/issues/9), [#10](https://github.com/nubnubyas/ped/issues/10), [#11](https://github.com/nubnubyas/ped/issues/11))

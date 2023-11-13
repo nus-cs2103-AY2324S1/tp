@@ -50,7 +50,8 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where
+the user issues the command `delete n/Alex` to delete `Alex` from HealthSync.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -117,23 +118,16 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="650" />
 
 
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the log book data i.e., all `Person` objects (filtered as `foundPersonsList` by `ModelManager`). 
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
 
 
 ### Storage component
@@ -161,7 +155,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Description
 
-The Undo feature allows users to revert an undo-able command. The `UndoCommand` serves as the entry point for users to 
+The Undo feature allows users to revert an undo-able command. The `UndoCommand` serves as the entry point for users to
 initiate the undo process.
 
 #### Implentation details
@@ -170,21 +164,21 @@ The `UndoCommand` is implemented as follows:
 - **Command Word**: `undo` or `u`
 - **Usage**: `undo [number]`
 - **Command Format**
-  - `undo`: Undoes the last undo-able command
-  - `undo [number]`: Undoes the specified number of undo-able commands
+    - `undo`: Undoes the last undo-able command
+    - `undo [number]`: Undoes the specified number of undo-able commands
 - **Validation**: The `UndoCommandParser` parses user input, ensuring it adheres to the expected format.
-If the input is invalid or incomplete, appropriate error messages are generated.
+  If the input is invalid or incomplete, appropriate error messages are generated.
 - **Execution**: Upon successful validation, the `UndoCommandParser` returns a `UndoCommand` object. The object
-then interacts with the model to identify and undo the desired number of previous commands
+  then interacts with the model to identify and undo the desired number of previous commands
 
 <puml src=diagrams/UndoSequenceDiagram.puml width="250"/>
 
 #### Rationale:
 
-In the current implementation, the `UndoCommand` relies on undoable commands storing the previous details of the patient as fields. 
+In the current implementation, the `UndoCommand` relies on undoable commands storing the previous details of the patient as fields.
 For example, the undo of an "add" command stores the details of the added patient and undoing it will simply delete the added patient,
 representing a reversal of the addition. This approach prioritizes simplicity and efficiency, ensuring a quick and reliable undo operation.
-By leveraging the existing structures and operations in the application, this method avoids the need for extensive additional data storage and processing.
+By leveraging the existing structures and operations in the application, this method avoids the need for additional data storage and processing.
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
@@ -195,23 +189,126 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Alternative 1:**: Explore more sophisticated undo strategies, such as storing the state of the address book after each command.
 * Pros: Accuracy: This approach ensures a more precise representation of the application's history, capturing nuanced changes in the address book. It is particularly beneficial in scenarios where specific details matter.
-* Cons: 
-   1. Increased Complexity: Implementing a system to capture and manage snapshots of the address book after every command introduces additional complexity to the codebase.
-   2. Resource Overhead:  Storing snapshots after each command may increase the application's resource usage,
-        
+* Cons:
+    1. Increased Complexity: Implementing a system to capture and manage snapshots of the address book after every command introduces additional complexity to the codebase.
+    2. Resource Overhead:  Storing snapshots after each command may increase the application's resource usage,
 
-  
-### Implementation of Single, optional Appointment Field
+
+### Implementation of Singular, Optional Fields
 
 #### Proposed Implementation
 
-_{Explain how `Appointment` as an optional field is implemented}_
+A way to add a property to `Person` that could be nullable was needed, to reflect optionality within our
+field implementation. While optional fields like `MedicalHistory` exist in HealthSync, these fields are
+Collections, and can natively handle the empty state. Singular optional properties can be added this way,
+but is hard to distinguish between properties that allow for multiple entries and fields that don't.
 
-_{Explain how `Appointment` is stored inside each `Person`}_
+<puml src="diagrams/AppointmentClassDiagram0.puml"/>
+
+The optional fields could be implemented directly to `Person` as shown in the partial class diagram above.
+However, several other packages depend upon `Person` as well, including `UI` and `Storage`.
+These packages already make assumptions on the `non-null` property on the variables of `Person`.
+
+<puml src="diagrams/AppointmentSequence0.puml" />
+
+The diagram above illustrates a possible path that may arise if the optional property of the field is
+not explicitly defined. There is a need to explicitly denote that our optional field is possibly an
+empty value without having its implementers perform the check themselves, so that the compiler is
+able to assist in our coding.
+
+<puml src="diagrams/AppointmentClassDiagram1.puml" />
+
+Therefore, the implementation of optional fields now return its value wrapped in the Java
+`Optional` wrapper. In this example, when `getAppointment` is called now, the implementer will be
+informed of the type mismatch with the `Appointment` type, explicitly informing the implementer that
+this value is potentially `null`. By doing it in this way, we also guarantee to the implementer that
+the fields that do not generate an `Optional` wrapper cannot be empty.
 
 #### Design Considerations:
 
-**Aspect: Parsing of `Appointment` Field**
+**Aspect: Handling of Optional Fields**
+
+* **Alternative 1 (current choice):** Allow `null` values
+  * Pros: Simple to implement, and easy to understand what it means.
+  * Cons: Checks for null value required for every implementation of the optional field.
+    * This is partially circumvented using the `Optional` wrapper, which caused the team to favor
+      this implementation.
+* **Alternative 2:** Use abstracted "empty-value" objects that extend the given field
+  * Pros: No check of the empty state required by implementers, allows for simple code outside its
+          implementation.
+  * Cons: Non-negligible abstraction required to create an empty object and have it work in all cases
+          where the empty case is needed.
+
+### Implementation of Appointment Field
+
+`Appointment` is a special field belonging to the `Person` model class, as it implicitly stores a temporal
+relationship within itself.
+
+#### Proposed Implementation
+`Appointment` is distinctly different from other fields in `Person` in that it cannot store its values as
+a String directly - otherwise, this would complicate the process of defining temporal relationships within itself.
+
+<puml src="diagrams/AppointmentClassDiagram2.puml" />
+
+Above is a partial class diagram of `Appointment`. Note that several static members were excluded as they are not
+relevant to its data-structure properties in `HealthSync`.
+
+The default Java packages provides its implementation of temporal objects in the `java.time` package. In particular,
+`LocalDateTime` and its variants were the most relevant to us, as it allows the user to record time without needing
+to account for timezone differences. This is powerful, as our target audience is not expected to change locations in
+a significant way that causes them to change time regions entirely.
+
+With the use of the `java.time` package, the project could not use only `regex` for `Appointment`.
+This is due to the level of checks required to parse a temporal object, with the amount of dependencies that exist
+between the day, month and year fields. The provided `DateTimeFormatter` and `DateTimeFormatterBuilder` classes helps
+create the parser objects used for `Appointment`. However, the classes do not account for the combined time format that
+HealthSync requests of its users.
+
+Therefore, `Appointment` uses a combination of `regex` and `DateTimeFormatter` to resolve its user input.
+
+<puml src="diagrams/AppointmentActivity0.puml" />
+
+A partial activity diagram illustrating the relevant segment of the parse process.
+
+As seen above, `ParserUtil` verifies if the Appointment user input is trivially valid using
+`regex`, before passing the input into the `of` constructor. `DateTimeFormatter` cannot fully verify input strings
+against its format without creating a `LocalDate`/`LocalTime` object as a side effect,
+so `of` handles a portion of the parse.
+
+#### Design Considerations:
+
+**Aspect: Value to store `Appointment` as**
+
+* **Alternative 1:** Use of raw `String` format for Appointment
+    * Pros: Far easier to parse and store as an object.
+    * Cons: Hard to extend upon in future use-cases, such as reminders, etc.
+
+
+* **Alternative 2 (current choice):** Use of Java Temporal-related objects for Appointment
+    * Pros: More direct paths of feature extension, such as searching by time period.
+    * Cons: Translation to and from Java Temporal objects can be non-trivial.
+
+**Aspect: Constructor for `Appointment` to manage valid user input**
+
+* **Alternative 1:** Directly use constructors for `Appointment`, and using `isValidAppointment` to verify input
+    * Pros: Consistency with construction of other fields
+    * Cons:
+      * Construction called before user input is verified so exception thrown may not be intuitively understood
+      * Concerns over failed appointment creation not getting collected by Java Garbage Collection due to accessing
+       `now()` resource
+      * User input validation for temporal objects create the relevant object as a side effect, wasting resources to
+        construct the temporal object twice.
+
+* **Alternative 2 (current choice):** Use of `of` factory method for `Appointment`, and verifying input inside `of`
+    * Pros:
+      * Explicit demarcation of `Appointment` as a class that can throw an `Exception` during construction
+      * Factory method can double as an explicit user verification method
+      * Construction of `Appointment` only performed once user input is verified
+    * Cons:
+      * "Uniqueness" of private constructor for this field only may cause confusion when extending the app
+      * Appointment handles part of `parse` for `ParserUtil`
+
+**Aspect: Parsing of `Appointment` Field as multiple fields or single field**
 
 * **Alternative 1 (current choice):** Use of the single `ap/` flag.
   * Pros: Easy to input on the user-end.
@@ -220,19 +317,6 @@ _{Explain how `Appointment` is stored inside each `Person`}_
 * **Alternative 2:** Use of 2 flags to denote start and end time for appointment.
   * Pros: Immediate clarity on what fields to implement, and how to parse input string.
   * Cons: Strong dependence between 2 flags requires more fail-state management.
-
-**Aspect: Value to store `Appointment` as**
-
-* **Alternative 1 (current choice):** Use of raw `String` format for Appointment
-  * Pros: Far easier to parse and store as an object.
-  * Cons: Hard to extend upon in future use-cases, such as reminders, etc.
-
-* **Alternative 2:** Use of `DateTime`-related objects for Appointment
-  * Pros: More direct paths of feature extension in the long run.
-  * Cons: Translation to and from `DateTime` objects can be non-trivial.
-
-We are currently in the process of switching to Alternative 2, as Alternative 1 was chosen primarily for its
-fast implementation for the MVP.
 
 ### Delete Feature
 
@@ -245,8 +329,11 @@ The `DeleteCommand` allows users to delete a patient's profile or a specified fi
 The `DeleteCommand` is implemented as follows:
 - **Command Word**: The command word for this feature is `delete`
 - **Usage**: Users invoke the `DeleteCommand` by specifying the command word, followed by the name or IC of the person they wish to delete and any fields they wish to delete.
-- **Command Format**: `delete n/Name or id/IC_Number[Fields] ...`
-- **DeletePersonDescriptor**: The `DeleteCommand` relies on an `DeletePersonDescriptor` to capture which fields the user wishes to delete from the patient's profile. The descriptor will be passed to the `DeleteCommand` to execute the deletion.
+- **Command Format**: 
+  - `delete n/Name [Fields] ...`
+  - `delete id/IC_Number [Fields] ...`
+  - `delete n/Name id/IC_Number [Fields] ...`
+- **DeletePersonDescriptor**: The `DeleteCommand` relies on an `DeletePersonDescriptor` to capture which fields the user wishes to delete from the patient's profile. The descriptor will be passed to the `DeleteCommand` to execute the deletion. Currently, only `Appointment` and `MedicalHistory` can be deleted as they are optional.
 - **Validation**: The `DeleteCommand` performs validation to ensure that the IC or Name provided is valid.
 - **Execution**: When executed, the `DeleteCommand` identifies the patient to be deleted based on the provided name or IC. When the patient is found, if no there are no specified fields to delete, the entire patient profile will be deleted from the database. Otherwise, the specified fields will be deleted from the patient's profile.
 
@@ -263,13 +350,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 #### Alternative Implementation
 
 - **Alternative 1**: The `DeleteCommand` could be implemented as a `DeleteFieldCommand` and a `DeletePersonCommand`. The `DeleteFieldCommand` will delete the specified fields from the patient's profile, while the `DeletePersonCommand` will delete the entire patient profile from the database. This approach will require the user to invoke two commands to delete a patient's profile and the specified fields from the patient's profile. This approach is not chosen as it is less intuitive and requires more effort from the user.
-
-
-### Addition of Interface for Find-type commands
-
-#### Proposed Implementation
-
-_{Explain how there is overlap in function for `find`, `delete`, `edit`}_
 
 ### \[Proposed\] Data archiving
 
@@ -294,13 +374,13 @@ The primary layout structure for the HealthSync GUI is based on HBox and VBox co
 StackPane
 The StackPane is used to organize specific UI elements within the VBox containers. It allows for the layering of elements and effective management of screen real estate.
 
-1. StackPane (Person List)
+1. StackPane (PersonListPanel)
 
-   Location: Inside the first VBox (fx:id="personList").
-2. StackPane (Logger Panel)
+   Location: Inside the first VBox (`fx:id="personListPanelPlaceholder"`).
+2. StackPane (LoggedPersonlListPanel)
 
-    Location: Also inside the first VBox (fx:id="personList").
-3. StackPane (Result Display, Command Box, and Status Bar)
+    Location: Also inside the first VBox (`fx:id="loggerPanelPlaceholder"`).
+3. StackPane (ResultDisplay, CommandBox, and StatusBarFooter)
 
     Location: These StackPanes are located inside the second VBox
 
@@ -308,8 +388,8 @@ The StackPane is used to organize specific UI elements within the VBox container
 
 The HealthSync GUI utilizes specific color choices to create a visually pleasing and organized interface, while still maintaining the original Dark Theme.
 
-1. Primary Colour: #43314E
-2. Secondary Colour: #231335
+1. Primary Colour: `#43314E`
+2. Secondary Colour: `#231335`
 
 
 ### Edit Feature
@@ -323,7 +403,10 @@ The `EditCommand` allows users to modify the details of an existing person withi
 The `EditCommand` is implemented as follows:
 - **Command Word**: The command word for this feature is `edit`.
 - **Usage**: Users invoke the `EditCommand` by specifying the command word, followed by the name or IC of the person they wish to edit and the fields they wish to modify.
-    - The command format is: `edit n/NAME or id/IC_NUMBER [Fields] ...`.
+- **Command Format**: 
+  - `edit n/Name [Fields] ...`
+  - `edit id/IC_Number [Fields] ...`
+  - `edit n/Name id/IC_Number [Fields] ...`
 - **EditPersonDescriptor**: The `EditCommand` relies on an `EditPersonDescriptor` to capture the details to edit the person with. This descriptor allows for updating various attributes of the person, such as phone, email, address, appointment, and medical histories.
 - **Validation**: The `EditCommand` performs validation to ensure at least one field to edit is provided. It also checks for consistency when both a name and IC are provided.
 - **Execution**: When executed, the `EditCommand` identifies the person to edit based on the provided name and/or IC. If the person is found, it creates an `editedPerson` with the desired changes. The person is then updated with the new details.
@@ -349,56 +432,113 @@ The following activity diagram summarizes what happens when a user executes a ne
          - **Potential Errors**: If the list of persons changes (e.g., due to deletions or additions), the numbering index could become outdated, leading to errors.
          - **Limited Identifiability**: Index numbers do not provide any context about the person, which may be confusing when there are multiple people with the same name or similar information.
 
-### Find Feature
+### Find Feature and its related Predicate classes
 
-#### Description
-
-The `FindCommand` allows users to find existing person(s) within the patient list, using their name or NRIC, and view their field data.
+The `FindCommand` allows users to find existing person(s) within the patient list,
+using their Name, NRIC and/or Appointment, and view their field data. This is done with aid by the concreted `Predicate`
+classes, that directly implement the `Predicate` functional interface given by the Java package.
 
 #### Implementation Details
 
 The `FindCommand` is implemented as follows:
 - **Command Word**: The command word for this feature is `find`.
-- **Usage**: Users invoke the `FindCommand` by specifying the command word, followed by the name or NRIC of the person(s) they wish to find.
-    - The command format is: `find n/NAME` or `find id/IC_NUMBER`.
-- **`execute` method**: The `FindCommand` executes the search by using the specified predicates (`NameContainsKeywordsPredicate` or `IdContainsKeywordsPredicate`) to filter and list all persons matching the search criteria.
-- **Validation**: The `FindCommand` performs validation to ensure at least one keyword is provided. It searches based on either name or NRIC, to speed up the search and prevent possible conflicts if name and NRIC do not match each other.
-- **Execution**: When executed, the `FindCommand` identifies the person(s) being searched for based on the provided name or NRIC. If a name is provided as keyword, a `FindCommand(NameContainsKeywordsPredicate)` is created, and if an NRIC is provided as keyword, a `FindCommand(IdContainsKeywordsPredicate)` is created. `updateFilteredPersonList` will then update the filter of the filtered person list to filter by the given name or NRIC predicate (keyword).
+- **Usage**: Users invoke the `FindCommand` by specifying the command word,
+  followed by the Name, NRIC and/or Appointment period of the person(s) they wish to find.
+- **Command Format**:
+    - `find n/Name [Fields] ...`
+    - `find id/IC_Number [Fields] ...`
+    - `find n/Name id/IC_Number [Fields] ...`
+- **`execute` method**: The `FindCommand` executes the search by using the specified predicates generated from
+  the fields (`NameContainsKeywordsPredicate`/`IdContainsKeywordsPredicate`/`AppointmentOverlapsPredicate`).
+  These predicates are composited into `CompositePredicate` to filter and list all persons matching the search criteria.
+    - `CompositePredicate` is a collection of `Predicate<Person>` objects that itself implements the `Predicate<Person>`
+  interface. The collection is stored in a Set, and `test()` calls will perform a logical AND on all values in its
+  collection. By default, `CompositePredicate` will have an instance of `IdentityPredicate` which always returns `true`.
+        - <puml src="diagrams/PredicateClassDiagram.puml"/>
+    - The following object diagram illustrates how `FindCommand` instances handles its `Predicate` values internally.
 
-The following sequence diagram shows how the find operation works:
+<puml src="diagrams/FindWithPredicateObjectDiagram.puml" width="950" />
 
-<puml src="diagrams/FindSequenceDiagram.puml" width="400" />
+As observed in the diagram above, each field provided will generate the appropriate `Predicate` value and add it to the
+`CompositePredicate` collection, and each field not provided adds an instance of an `IdentityPredicate` instead.
+As the Set implementation enforces no duplicate Predicates, this means that collections with fewer fields provided
+will also store less values in the collection overall.
+
+- **Validation**: The `FindCommand` performs validation to ensure at least one field is provided. For Appointment,
+  it asks for a valid Appointment format to be given.
+
+The following sequence diagram shows how the find operation works in the successful case:
+
+<puml src="diagrams/FindSequenceDiagram.puml"/>
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `FindCommandParser` and `FindCommand` should end at the destroy marker (X) but due to a
+limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<puml src="diagrams/FindActivityDiagram.puml" width="500" />
+<puml src="diagrams/FindActivityDiagram.puml"/>
 
 #### Rationale
 
-- **Flexibility**: The `FindCommand` provides flexibility to users by allowing them to choose whether to find a person by name or NRIC, whichever is faster or available.
+- **Flexibility**: The `FindCommand` provides flexibility to users by allowing them to choose whether to find a person
+  by name, NRIC or Appointment timeslot, whichever is faster or available.
 - **User Experience**: The keyword matching is case-insensitive, making the search faster and more user-friendly.
-- **Data Integrity**: The feature is designed to maintain the integrity of the patient list by not changing any of the patient data.
+- **Data Integrity**: The feature is designed to maintain the integrity of the patient list
+  by not changing any of the patient data.
 
 #### Alternatives Considered
 
-- **Alternative 1**: Using only name to find patients.
+What Fields to use as part of query
+- **Alternative 1**: Using existing implementation of only name to find patients
     - **Pros**:
-        - **Standardisation**: The command format is fixed and will always only be `find n/NAME`, which may be easier to remember.
-        - **User Convenience**: Searching primarily by name is a common way to look up a patient in a healthcare system and users may be more familiar with this method.
-
+        - The command format is fixed and will always only be `find n/NAME` which is easier to remember.
+        - Searching primarily by name is a common way to look up a patient in a healthcare system
+          and users may be more familiar with this method.
     - **Cons**:
-        - **Potential Errors**: If patients' names change over time, there may be failed searches and other identifiers, like NRIC, may be needed.
-        - **Limited Identifiability**: If multiple patients share the same name, they will be indistinguishable name-wise and other identifiers, like NRIC, may be needed.
+        - If multiple patients share the same name for a future extension, they will be indistinguishable name-wise and
+          other identifiers, like ID, may be needed.
+        - Lack of flexibility in search term may become a pain point for a service that provides for a lot of people.
 
+- **Alternative 2**: Search through all fields
+    - **Pros**:
+        - Extreme flexibility in searching for patients
+        - Ease of use by users, as there will not be a specific format to adhere to if all fields are allowed
+    - **Cons**:
+        - Have to account for multiple field queries
+        - Searching through some fields are irrelevant - it is rare to search for a patient via address for example - so
+          it might not be worthwhile to implement
 
-- **Alternative 2**: Requiring both name and NRIC keywords to find patients within a single find command.
+- **Alternative 3 (current choice)**: Searching through ID, Name and Appointment
   - **Pros**:
-    - **Enhanced Precision**: Combining both name and NRIC is a more unique identification method, making it easier to find a patient sharing a name with other patients.
-    - **Patient Verification**: Searching by both criteria adds a layer of verification, ensuring the correct patient is selected.
+    - More precise searching for a particular person
+    - Added flexibility to searching without using some less relevant fields
 
   - **Cons**:
-    - **Additional User Effort**: Users need to provide both name and NRIC, which may take longer or require extra effort, especially if they only have one piece of information readily available.
-    - **Increased Ambiguity**: If the name keyword does not match the NRIC keyword, this may lead to potential confusion in which patient is being searched for.
+    - Have to account for multiple field queries
+
+Handling multiple field queries
+- **Alternative 1 (current choice)**: Logical AND
+    - **Pros**:
+        - Allows user to narrow down a search in a large `find` result
+        - In line with most filter functions in searches
+        - Scales up better when queries are done on less unique fields
+    - **Cons**:
+        - May be confusing when comparing with internal implementations of ID and Name `find`
+        - Low value when 2 of the queries are unique (this is mitigated by the
+          [extension proposed in a later update](#appendix-planned-enhancements))
+
+- **Alternative 2**: Logical OR
+  - **Pros**:
+    - Allows a user to cast out a wider net
+    - Potentially lets a user find multiple fields at once
+    - Consistent with individual keyword matches for internal implementation of ID and Name `find`.
+  - **Cons**:
+    - For larger databases, Logical OR adds little value to a filter function
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -428,36 +568,37 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Value proposition**:
 
-HealthSync caters to counter staff, enabling them to register and access patient information within 2-3 minutes. It offers a user-friendly platform, optimizing contact management, patient tracking, department coordination, and health record access, ensuring efficient patient management, appointment scheduling, and comprehensive health record retrieval, enhancing care delivery and saving time.
+HealthSync caters to clinic assistants in small private clinic, enabling them to register and access patient information within 2-3 minutes. It offers a user-friendly platform, optimizing contact management, patient tracking, and health record access, ensuring efficient patient management, appointment scheduling, and comprehensive health record retrieval, enhancing care delivery and saving time.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                         | I want to …​                                        | So that I can…​                                                           |
+| Priority | As a...                                        | I can...                                           | So that I can...                                                         |
 |----------|------------------------------------------------|----------------------------------------------------|--------------------------------------------------------------------------|
 | `* * *`  | beginner of the app for an important operation | auto-save all my data                              | not lose my data when something goes wrong                               |
-| `* * *`  | busy frontdesk worker                          | retrieve patient information                       | answer their queries                                                     |
+| `* * *`  | frontdesk worker                               | retrieve patient information                       | make use of the patient data when I need them                            |
 | `* * *`  | frontdesk worker                               | create patient entries                             | add entries when new patients visit                                      |
-| `* * *`  | frontdesk worker                               | find a patient by name                             | locate details of persons without having to go through the entire list   |
+| `* * *`  | frontdesk worker                               | find a patient by some field they possess          | locate details of persons without having to go through the entire list   |
 | `* * *`  | frontdesk worker                               | delete a patient entry                             | clean and update the database when patient no longer exist               |
 | `* * *`  | frontdesk worker                               | edit patient entries                               | update their details, especially for upcoming appointment dates          |
-| `* * `   | a new user of the app                          | view hints on commonly used commands               | be familiar with the app as soon as possible                             |
+| `* * *`  | frontdesk worker                               | store patient appointment information              | track when they next come to the clinic                                  |
 | `* * `   | a new user of the app                          | view preloaded sample data                         | know how the basic UI look like when it is populated                     |
+| `* * `   | a new user of the app                          | purge all sample data from the app                 | add my own data easily when I want to use the app                        |
+| `* * `   | a new user of the app                          | have easy access to a help sheet                   | check what commands I can and cannot use in a situation                  |
+| `* * `   | frontdesk worker                               | add medical histories to patients                  | view and filter patients accordingly                                     |
+| `* * `   | frontdesk worker                               | document patient encounters                        | maintain up-to-date records of patient information                       |
 | `* * `   | frontdesk worker                               | use app with shortcuts                             | get my task done very quickly                                            |
-| `* * `   | frontdesk worker                               | have calendar-like UI to create appointments       | show calendar to patients and allow smoother appointment booking process |
 | `* * `   | frontdesk worker                               | see conflicts in appointment schedules             | seamlessly schedule appointments for patients                            |
-| `* * `   | frontdesk worker                               | reminder when patient's appointment is coming soon | call and remind patients accordingly                                     |
-| `* * `   | healthcare provider                            | document patient encounters(ie. exam notes)        | maintain up-to-date records of patient information                       |
-| `* `     | a new user of the app                          | have physical UI Buttons                           | use to execute tasks before I'm familiar with shortcuts                  |
-| `* `     | frontdesk worker                               | have a very optimised app                          | do my task and have data reading almost instantly (O(1))                 |
-| `* `     | frontdesk worker                               | add tags to patients                               | view and filter patients accordingly                                     |
-| `* `     | frontdesk worker                               | leverage on database statistics                    | analyse data (ie. how many appointments booked/ month for doctors)        |
+| `* * `   | frontdesk worker                               | reminder when patient's appointment is coming soon | call-up and remind patients, and prepare for the day accordingly         |
+| `* `     | a new user of the app                          | have physical UI Buttons                           | use them to execute tasks before I'm familiar with shortcuts             |
+| `* `     | a new user of the app                          | access an in-app help sheet                        | easily see what to do when I need help without opening another program   |
+| `* `     | a new user of the app                          | get in-app hints as I use the app                  | quickly acclimatise to using the app as I use it                         |
+| `* `     | frontdesk worker                               | have a very optimised app                          | do my task and have data reading almost instantly                        |
+| `* `     | frontdesk worker                               | leverage on statistics in my patient list          | analyse data (ie. how many appointments booked/ month for doctors)       |
 | `* `     | frontdesk worker                               | save back-up or archive patient details somewhere  | maintain a fast application while still having data securely stored      |
-
-
-*{More to be added}*
+| `* `     | frontdesk worker                               | have calendar-like UI to create appointments       | show calendar to patients and allow smoother appointment booking process |
 
 ### Use cases
 
@@ -476,17 +617,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The user does not specify one or more of the compulsory fields.
-
-  * 1a1. HealthSync shows an error message.
-
-    Use case ends.
-
-  * 1b. The user specifies an IC that is already exists in the current list.
-
-    * 1b1. HealthSync shows an error message.
-
-      Use case ends.
+  * 1a. HealthSync detects an error in the input.
+  
+    * 1a1. HealthSync shows an error message.
+    * 1a2. User corrects the input.
+    
+      Steps 1a1-1a2 repeat until the user inputs all the fields correctly.
+      
+      Use case continues from step 2.
 
 **Use case: UC2 - Delete a patient**
 
@@ -501,18 +639,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The user does not exist in the list.
+* 1a. HealthSync detects an error in the identifier input.
+
+    * 1a1. HealthSync shows an error message.
+    * 1a2. User corrects the input.
+
+    Steps 1a1-1a2 repeat until the user inputs all the fields correctly.
+  
+    Use case continues from step 2.
+
+* 1b. User also inputs non-identifier fields as well.
+
+    * 1b1. HealthSync <u>deletes the patient fields from the patient instead (UC3).</u>
+
+      Use case ends.
+
+* 2a. The patient does not exist in the list.
 
     * 2a1. HealthSync shows an error message.
 
       Use case ends.
-
-* 2b. HealthSync finds more than 1 patient for the list.
-
-    * 2b1. HealthSync shows a list of patients matching the identifier in the list.
-    * 2b2. User indicates the patient to delete in the list.
-
-      Use case continues from step 3.
 
 **Use case: UC3 - Delete fields from a patient**
 
@@ -528,15 +674,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The user does not specify any fields they want to delete.
+* 1a. HealthSync detects an error in the identifier input.
 
-    * 1a1. HealthSync <u>deletes the patient from the list instead (UC2).</u>
+    * 1a1. HealthSync shows an error message.
+    * 1a2. User corrects the input.
 
-      Use case ends.
+      Steps 1a1-1a2 repeat until the user inputs all the fields correctly.
+    
+      Use case continues from step 2.
 
-* 1b. The user attempts to delete a name/IC field.
+* 1b. The user does not specify any fields they want to delete.
 
-    * 1b1. HealthSync shows an error message.
+    * 1b1. HealthSync <u>deletes the patient from the list instead (UC2).</u>
 
       Use case ends.
 
@@ -546,19 +695,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 2b. HealthSync finds more than 1 patient for the list.
-
-    * 2b1. HealthSync shows a list of patients matching the identifier in the list.
-    * 2b2. User indicates the patient to delete from in the list.
-
-      Use case continues from step 3.
-
 **Use case: UC4 - Edit a patient**
 
 **MSS**
 
-1.  User requests to change a specific user's fields
-based on an identifier
+1.  User requests to change a specific user's fields based on an identifier
     with a new value in the list.
 2.  HealthSync searches for the patient in the list.
 3.  HealthSync edits the specified patient's fields in the list.
@@ -568,30 +709,14 @@ based on an identifier
 
 **Extensions**
 
-* 1a. The user does not specify any fields they want to edit.
+* 1a. HealthSync detects an error in the input.
 
     * 1a1. HealthSync shows an error message.
+    * 1a2. User corrects the input.
 
-      Use case ends.
+      Steps 1a1-1a2 repeat until the user inputs all the fields correctly.
 
-* 1b. The user specifies duplicate fields they want to edit.
-
-    * 1b1. HealthSync shows an error message.
-
-      Use case ends.
-
-* 1c. The user specifies no value in a name/IC field that they wish to edit.
-
-    * 1c1. HealthSync shows an error message.
-
-      Use case ends.
-
-* 1d. The user attempts to change the IC of the patient to one that already
-      exists in the list.
-
-    * 1d1. HealthSync shows an error message.
-
-      Use case ends.
+      Use case continues from step 2.
 
 * 2a. The user does not exist in the list.
 
@@ -599,29 +724,31 @@ based on an identifier
 
       Use case ends.
 
-* 2b. HealthSync finds more than 1 patient for the list.
-
-    * 2b1. HealthSync shows a list of patients matching the identifier in the list.
-    * 2b2. User indicates the patient to edit in the list.
-
-      Use case continues from step 3.
-
 **Use case: UC5 - Find a patient**
 
 **MSS**
 
-1.  User requests for matches to the given query.
+1.  User requests for matches to the given query for a particular field.
 2.  HealthSync displays the list of patients matching the query.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. No matches exist in the list.
+* 1a. HealthSync detects an error in the input.
 
-    * 1a1. HealthSync displays a "no matches found" message.
+    * 1a1. HealthSync shows an error message.
+    * 1a2. User corrects the input.
 
-      Use case ends.
+      Steps 1a1-1a2 repeat until the user inputs all the fields correctly.
+
+      Use case continues from step 2.
+
+* 1b. User specifies multiple fields to query.
+
+    * 1b1. HealthSync combines the fields into a query that matches all the conditions given.
+  
+      Use case continues from step 2.
 
 **Use case: UC0A - Auto-save**
 
@@ -647,13 +774,19 @@ based on an identifier
 
 ### Non-Functional Requirements
 
-1. The application should be compatible with the designated operating systems and hardware configurations, as specified in the system requirements.
-2. The application should respond promptly to user inputs, with minimal latency and loading times for data retrieval and processing.
-3. The user interface should be user-friendly and intuitive, designed to optimize the workflow of frontdesk staff who need to complete tasks within 2-3 minutes.
-4. The application should be designed to handle an increasing volume of patient records efficiently without noticeable performance degradation.
-5. Ensure that the application complies with PDPA and healthcare regulations.
-
-*{More to be added}*
+1. The application should be compatible with the designated operating systems and hardware configurations, as specified 
+   in the system requirements ie Mac, Windows and Linux systems running Java 11.
+2. The application should respond promptly to user inputs, with minimal latency and loading times for data retrieval
+   and processing.
+3. The user interface should be user-friendly and intuitive for fast typists, designed to optimize the workflow of
+   front-desk staff who need to complete tasks within 2-3 minutes.
+4. The application should be stable for a clientele of roughly 300 to 500 patients (estimated from ~20 patients per day
+   for a GP, for a month with 50% returning patients).
+5. The application should be designed to handle an increasing volume of patient records efficiently
+   without noticeable performance degradation.
+6. The application should comply with healthcare regulations.
+7. The application is not required to handle communications on a local database/internet.
+8. The application is designed to be used by exactly 1 front-desk staff.
 
 ### Glossary
 
@@ -1075,9 +1208,44 @@ Here is the mapping between original command keywords and shortcuts:
    
 ## **Appendix: Planned Enhancements**
 
-1. Our current app is unable to handle scenarios where patients share the same name. We plan to make it possible for
-   users to add patients with the same name into HealthSync.
-2. Our current app does not handle text wrapping on the UI well, and certain text labels may be obscured when user input
-   is too long. We plan to explicitly denote the labels on the individual UI cards and allow inputs to stretch its
-   container should it be a long input, so users would be able to discern easily what elements they are looking at on
-   the UI.
+1. **Handling Patients with Same Name:**
+Currently, HealthSync cannot manage scenarios where patients share the same name. 
+We plan to enhance this by allowing users to add patients with identical names, 
+providing a more robust and flexible patient management system.
+
+2. **Improved UI Text Wrapping:**
+HealthSync currently struggles with text wrapping on the UI, leading to obscured 
+labels for long user inputs. Our plan is to explicitly denote labels on individual UI 
+cards and enable inputs to stretch their containers, ensuring better visibility for 
+users, even with lengthy inputs.
+
+3. **Enhanced Edit Feature Feedback:**
+The current edit feature does not explicitly handle cases where no fields are 
+edited after a change. For instance, if a patient's phone number remains the same 
+after an edit operation, HealthSync doesn't provide a special message indicating that no 
+fields were edited. We plan to improve this feedback for a more informative user experience.
+
+4. **Standardized Empty Optional Fields:**
+HealthSync currently displays empty optional fields inconsistently in particular, for Appointment and Medical History.
+We intend to standardize the display of empty optional fields to be 'N/A' uniformly, 
+enhancing clarity and consistency in the user interface.
+
+5. **Improved Email Validation:** HealthSync's current email validation is not 
+stringent enough, accepting invalid email formats. We plan to implement more thorough 
+email validation to ensure only valid email addresses are accepted.
+
+6. **Consistent Capitalization of Patient IDs:**
+While IDs are case-insensitive, HealthSync does not enforce consistent capitalization 
+of patient IDs in the patient list. This is a cosmetic enhancement to maintain 
+uniformity in the application.
+
+7. **Case-Insensitive Find Feature for Appointments:** 
+The current Find feature for appointments is case-sensitive, potentially causing 
+inconvenience for users. We plan to enhance this feature to be case-insensitive, 
+ensuring a smoother and more user-friendly experience.
+
+8. **Improved Messaging for Empty Find Results:**
+When a Find command results in an empty set, the output message currently 
+reads '0 patients found.' We propose an enhancement to provide a clearer message 
+such as 'No patients found,' offering better clarity and user understanding.
+

@@ -7,23 +7,23 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":UndoCommandParser" as UndoCommandParser LOGIC_COLOR
 participant "u:UndoCommand" as UndoCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant ":UndoableCommand" as UndoableCommand LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("undo 2")
+-> LogicManager : execute("undo 2")
 activate LogicManager
 
 LogicManager -> AddressBookParser : parseCommand("undo 2")
 activate AddressBookParser
 
-AddressBookParser -> UndoCommandParser : parse("2")
+AddressBookParser -> UndoCommandParser : parse("undo 2")
 activate UndoCommandParser
 
-Create UndoCommand
+create UndoCommand
 UndoCommandParser -> UndoCommand
 activate UndoCommand
 
@@ -39,35 +39,31 @@ deactivate AddressBookParser
 LogicManager -> UndoCommand : execute()
 activate UndoCommand
 
-UndoCommand -> Model : getCommandHistorySize()
-activate Model
-
-Model --> UndoCommand : int
-deactivate Model
-
-alt (int > 0) Command History Exists
-    loop 2
+loop until no more commands to undo
         UndoCommand -> Model : popCommandFromHistory()
         activate Model
 
-        Model -> UndoableCommand : undo(Model)
+        Model --> UndoCommand : command
+        deactivate Model
+
+        UndoCommand -> UndoableCommand : undo()
         activate UndoableCommand
 
-        UndoableCommand --> Model : CommandResult
+
+        UndoableCommand --> UndoCommand : CommandResult
         deactivate UndoableCommand
-    end
-else (int = 0) No Command History
-    UndoCommand -> Model : No Undoable Commands Message
-    activate Model
+
+
 end
 
-Model --> UndoCommand : CommandResult
-deactivate Model
+ UndoCommand --> LogicManager : CommandResult
+ deactivate UndoCommand
+ <-- LogicManager:
+ deactivate LogicManager
 
-UndoCommand --> LogicManager : CommandResult
+
+
 deactivate UndoCommand
 
-<-- LogicManager
-deactivate LogicManager
-@enduml
 
+@enduml

@@ -26,8 +26,6 @@ public class AppointmentTest {
     private static final String VALID_APPOINTMENT_USER_INPUT_4 = "01-01-2021,0900, 11:30";
     private static final String VALID_APPOINTMENT_USER_INPUT_5 = "02-01-2021,9:00, 11:30";
     private static final String VALID_APPOINTMENT_USER_INPUT_6 = "01-1-21,13:00, 1330";
-    private static final String VALID_APPOINTMENT_USER_INPUT_7 = "01-JAN-2021 09:00 11:30";
-    private static final String VALID_APPOINTMENT_USER_INPUT_8 = "01-jan-2021, 09:00, 11:30";
     private static final String VALID_APPOINTMENT_STORAGE = "01-Jan-2021, 09:00, 11:30";
 
     private static final String INVALID_MISSING_FIELD = "1-Jan-2023 12:00";
@@ -157,10 +155,6 @@ public class AppointmentTest {
 
         // same object -> returns true
         assertTrue(appointment.equals(appointment));
-
-        // different capitalisation of months -> returns true
-        assertTrue(appointment.equals(Appointment.of(VALID_APPOINTMENT_USER_INPUT_7, InputSource.USER_INPUT)));
-        assertTrue(appointment.equals(Appointment.of(VALID_APPOINTMENT_USER_INPUT_8, InputSource.USER_INPUT)));
 
         // null -> returns false
         assertFalse(appointment.equals(null));

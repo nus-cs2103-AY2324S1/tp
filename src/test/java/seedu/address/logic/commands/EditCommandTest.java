@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.EditCommand.MESSAGE_NO_CHANGE;
 import static seedu.address.logic.commands.EditCommand.createEditedPerson;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -153,16 +152,6 @@ public class EditCommandTest {
         assertEquals(editedPerson.getPhone(), personToEdit.getPhone());
         assertEquals(editedPerson.getAddress(), personToEdit.getAddress());
         assertEquals(editedPerson.getMedicalHistories(), personToEdit.getMedicalHistories());
-    }
-
-    @Test
-    public void execute_noChangeInEditFields_throwsCommandException() {
-        Person person = model.getFilteredPersonList().get(0);
-
-        EditPersonDescriptor descriptor = new EditPersonDescriptor();
-        EditCommand editCommand = new EditCommand(person.getName(), null, descriptor);
-
-        assertThrows(CommandException.class, () -> editCommand.execute(model), MESSAGE_NO_CHANGE);
     }
 
     @Test
