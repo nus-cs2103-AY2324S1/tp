@@ -38,13 +38,15 @@ public class ScheduleCommandTest {
 
         Name testName1 = new Name("Test Name1");
         Name testName2 = new Name("Test Name2");
+        Name testName1MixedCase = new Name("TeSt NaMe");
 
         Appointment appointment1 = new AppointmentBuilder().withAppointmentTime(VALID_START_ONE, VALID_END_ONE).build();
         Appointment appointment2 = new AppointmentBuilder().withAppointmentTime(VALID_START_TWO, VALID_END_TWO).build();
         ScheduleCommand scheduleCommand1 = new ScheduleCommand(appointment1, testName1);
         ScheduleCommand scheduleCommand2 = new ScheduleCommand(appointment2, testName2);
 
-        ScheduleCommand scheduleCommandSameTimeDifferentName1 = new ScheduleCommand(appointment1, testName1);
+        ScheduleCommand copyOfScheduleCommand1 = new ScheduleCommand(appointment1, testName1);
+        ScheduleCommand scheduleCommand1MixedCase = new ScheduleCommand(appointment1, testName1MixedCase);
         ScheduleCommand scheduleCommandSameTimeDifferentName2 = new ScheduleCommand(appointment1, testName2);
 
         // compare with different type - false
@@ -54,7 +56,7 @@ public class ScheduleCommandTest {
         assertFalse(scheduleCommand1.equals(null));
 
         // compares same appointment timing but different names (Patients) - false
-        assertFalse(scheduleCommandSameTimeDifferentName1.equals(scheduleCommandSameTimeDifferentName2));
+        assertFalse(copyOfScheduleCommand1.equals(scheduleCommandSameTimeDifferentName2));
 
         // compares AddCommand1 with itself - true
         assertTrue(scheduleCommand1.equals(scheduleCommand1));
@@ -65,9 +67,10 @@ public class ScheduleCommandTest {
         assertFalse(scheduleCommand1.equals(scheduleCommand2));
 
         // compares 2 different objects with same details - true
-        ScheduleCommand copyOfScheduleCommand1 = new ScheduleCommand(appointment1, testName1);
         assertTrue(scheduleCommand1.equals(copyOfScheduleCommand1));
 
+        // same schedule commands with same time and same name, but name has different case types - false
+        assertFalse(scheduleCommand1.equals(scheduleCommand1MixedCase));
     }
 
     /**

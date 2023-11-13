@@ -72,4 +72,11 @@ public class AppointmentCommandTestUtil {
     public static final String PRIORITY_TAG_DESC_MEDIUM = " " + PREFIX_APPOINTMENT_PRIORITY + VALID_PRIORITY_TAG_MEDIUM;
     public static final String VALID_PRIORITY_TAG_LOW = "low";
     public static final String PRIORITY_TAG_DESC_LOW = " " + PREFIX_APPOINTMENT_PRIORITY + VALID_PRIORITY_TAG_LOW;
+
+    // INVALID DESC VALUES
+
+    public static final String INVALID_PATIENT_DESC = " " + PREFIX_APPOINTMENT_PATIENT;
+    public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_APPOINTMENT_DESCRIPTION;
+
+    public static final String INVALID_PRIORITY_TAG_DESC = " " + PREFIX_APPOINTMENT_PRIORITY;
 }
