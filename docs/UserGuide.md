@@ -215,6 +215,13 @@ The commands are split into 4 main sections:
 
   <li>
     <p>
+      Whitespaces at the start and end of fields are trimmed.<br>
+      e.g. The input <code>n/   John Doe   </code> will be interpreted as <code>n/John Doe</code>.
+    </p>
+  </li>
+
+  <li>
+    <p>
       Extraneous fields for commands that do not take in fields (such as <code>help</code>, <code>listPerson</code>, <code>deleteAllPerson</code>, <code>listTask</code>, <code>deleteAllTask</code> and <code>exit</code>) will be ignored.<br>
       e.g. if the command specifies <code>help 123</code>, it will be interpreted as <code>help</code>.
     </p>
