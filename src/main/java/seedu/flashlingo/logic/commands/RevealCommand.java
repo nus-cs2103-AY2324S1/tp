@@ -18,7 +18,7 @@ import seedu.flashlingo.model.flashcard.words.TranslatedWord;
 public class RevealCommand extends Command {
     public static final String COMMAND_WORD = "reveal";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Reveals the flashcard identified by the index number "
-        + "used\nParameters: INDEX (must be a positive integer)\n"
+        + "used\nParameters: [<INDEX>] \n"
         + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SUCCESS = "The translation is: ";
