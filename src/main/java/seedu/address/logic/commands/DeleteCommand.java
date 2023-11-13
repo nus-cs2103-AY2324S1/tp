@@ -107,7 +107,6 @@ public class DeleteCommand extends Command {
                 : new CommandResult(String.format(MESSAGE_DELETE_NO_TAG_SUCCESS, courseCode, nameList));
     }
 
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

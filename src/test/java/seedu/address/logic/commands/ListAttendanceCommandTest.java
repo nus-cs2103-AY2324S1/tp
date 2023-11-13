@@ -53,7 +53,10 @@ public class ListAttendanceCommandTest {
                 new AbsentFromTutorialPredicate(firstWeek, firstTag));
         ListAttendanceCommand listAttendanceSecondCommand = new ListAttendanceCommand(secondTag, secondWeek,
                 new ContainsTagPredicate(secondTag),
-                new AbsentFromTutorialPredicate(secondWeek, firstTag));
+                new AbsentFromTutorialPredicate(secondWeek, secondTag));
+        ListAttendanceCommand listAttendanceThirdCommand = new ListAttendanceCommand(secondTag, firstWeek,
+                new ContainsTagPredicate(secondTag),
+                new AbsentFromTutorialPredicate(firstWeek, secondTag));
 
         // same object -> returns true
         assertTrue(listAttendanceFirstCommand.equals(listAttendanceFirstCommand));
@@ -72,6 +75,12 @@ public class ListAttendanceCommandTest {
 
         // different values -> returns false
         assertFalse(listAttendanceFirstCommand.equals(listAttendanceSecondCommand));
+
+        // same tag different week -> returns false
+        assertFalse(listAttendanceSecondCommand.equals(listAttendanceThirdCommand));
+
+        // same week different tag -> returns false
+        assertFalse(listAttendanceFirstCommand.equals(listAttendanceThirdCommand));
     }
 
     @Test

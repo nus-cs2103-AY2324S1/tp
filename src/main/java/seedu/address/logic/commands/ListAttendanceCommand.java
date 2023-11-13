@@ -85,6 +85,7 @@ public class ListAttendanceCommand extends ListCommand {
         ArrayList<Person> unmarkedPersons = new ArrayList<>();
         for (Person p : personList) {
             if (!p.getAttendanceRecords().stream().anyMatch(atd -> atd.getWeek().equals(week))) {
+                assert !unmarkedPersons.contains(p);
                 unmarkedPersons.add(p);
             }
         }

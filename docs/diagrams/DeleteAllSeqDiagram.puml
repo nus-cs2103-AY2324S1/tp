@@ -51,6 +51,7 @@ activate DeleteCommand
 
 DeleteCommand -> Model : clearFilters()
 activate Model
+
 Model --> DeleteCommand
 deactivate Model
 
@@ -59,37 +60,44 @@ activate DeleteCommand
 
 DeleteCommand -> Model : getAddressBook()
 activate Model
+
 Model --> DeleteCommand
 deactivate Model
 
 DeleteCommand -> Model : addFilter(tutorialPredicate(G1))
 activate Model
+
 Model --> DeleteCommand
 deactivate Model
 
 DeleteCommand -> Model : getFilteredPersonList()
 activate Model
+
 Model --> DeleteCommand : list of persons in G1
 deactivate Model
 
 loop until all p in list of persons in G1 are deleted
     DeleteCommand -> Model : deletePerson(p)
     activate Model
+
     Model --> DeleteCommand
     deactivate Model
 end
 
 DeleteCommand -> Model : clearFilters()
 activate Model
+
 Model --> DeleteCommand
 deactivate Model
 
 create CommandResult
 DeleteCommand -> CommandResult
 activate CommandResult
-CommandResult --> DeleteCommand : result
+
+CommandResult --> DeleteCommand
 deactivate CommandResult
 
+DeleteCommand --> DeleteCommand : result
 deactivate DeleteCommand
 
 DeleteCommand --> LogicManager : result
