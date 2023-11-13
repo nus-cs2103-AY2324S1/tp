@@ -1535,4 +1535,8 @@ testers are expected to do more <i>exploratory testing</i>.
 
 [Back to Table of Contents](#table-of-contents)
 
-TODO
+### 1. Feature-rich selection of commands
+Tailored for the SoC Computing Club event planners, CoordiMate has expanded from the initial 8 commands in AB3 to a robust suite of 27. Each command was crafted to optimise the event planning workflow, addressing the need for quick and efficient management of contacts and tasks. Our enhancements were directed towards providing practical solutions within the event planning sphere.
+
+With the addition of a new `Task` class and an improved support for managing tags for both tasks and contacts, CoordiMate delivers a selection of commands that each serve a strategic function in the planning of SoC events. Every enhancement has been thoughtfully integrated to support the SoC event planners in creating and managing events that are as organised as they are impactful.
+
