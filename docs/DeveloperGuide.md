@@ -470,7 +470,7 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Allows user to iterate through all commands listed.
     * Cons: May have performance issues in terms of memory usage after prolonged usage.
 
-* **Alternative 2:** CommandHistory only stores previous command.
+* **Alternative 2:** Command History only stores previous command.
     * Pros: Will use less memory and reduces user error.
     * Cons: Quite limited as a feature.
 
