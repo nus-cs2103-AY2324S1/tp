@@ -12,7 +12,7 @@ title: Developer Guide
 * The Undo/Redo feature was inspired by [Address Book Level 4](https://github.com/se-edu/addressbook-level4).
 * The Command History feature was inspired by [Tutor's Pet](https://github.com/AY2021S1-CS2103T-T10-4/tp/).
 * The Theme-switching feature was adapted by [Tutor's Pet](https://github.com/AY2021S1-CS2103T-T10-4/tp/).
-* The table of content styling was adapted from [Stackoverflow](https://stackoverflow.com/questions/19999696/are-numbered-headings-in-markdown-rdiscount-possible*/)
+* The table of content styling was adapted from [Stackoverflow](https://stackoverflow.com/questions/19999696/are-numbered-headings-in-markdown-rdiscount-possible*/).
 * The kbd styling was reused from [Wikipedia](https://en.wikipedia.org/wiki/Enter_key).
 
 --------------------------------------------------------------------------------------------------------------------
@@ -130,6 +130,7 @@ The `Model` component,
 
 * stores the CCACommander data i.e., all `Member` objects (which are contained in a `UniqueMemberList` object).
 * stores the currently 'selected' `Member` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Member>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores `Event` and `Enrolment` objects in a similar way to the `Member` objects.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -852,7 +853,7 @@ Future User Stories to be implemented:
 Given below are instructions to test the app manually.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+testers are expected to do more *exploratory* testing. For positive
 
 </div>
 
@@ -862,7 +863,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample members and events. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -871,24 +872,232 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Creating a member
+
+1. Successfully creating a member
+   1. Test case: `createMember n/Andy Tan g/Male p/91234567 e/andytan@gmail.com a/10 Kent Ridge Crescent, Singapore 119278 t/logs`<br>
+      Expected: The new member is added to the last entry of the member list. Member details shown in the result display without gender. Command box is cleared. 
+   2. For other positive test cases, try `createMember` with a unique name, and any combination of optional fields with valid inputs.<br>
+      Expected: Similar to previous.
+
+1. Unsuccessfully creating a member
+    1. Prerequisite: `createMember n/Andy Tan g/Male p/91234567 e/andytan@gmail.com a/10 Kent Ridge Crescent, Singapore 119278 t/logs` has been entered once before.
+    1. Test case: `createMember n/Andy Tan g/Male p/91234567 e/andytan@gmail.com a/10 Kent Ridge Crescent, Singapore 119278 t/logs`<br>
+       Expected: No member is added. Error details shown in the result display. Command box remains the same.
+   2. For other negative test cases, try to input invalid values into each field. For unacceptable values of each field, refer to the User Guide.<br>
+      Expected: Similar to previous.
+
+### Editing a member
+
+1. Successfully editing a member
+   1. Prerequisites: List all members using the `list` command. Multiple members in the list.
+   2. Test case: `editMember 1 p/90019001 e/newmail@gmail.com`<br>
+     Expected: Phone number and email of first member is edited. Details of member edited without gender shown in the result display. Command box is cleared.
+   3. For other positive test cases, try `editMember` with a valid index and at least one field to edit with a valid input.<br>
+     Expected: Similar to previous.
+
+1. Unsuccessfully editing a member
+    1. Prerequisites: 
+       1. List all members using the `list` command. Multiple members in the list.
+       2. `createMember n/Andy Tan g/Male p/91234567 e/andytan@gmail.com a/10 Kent Ridge Crescent, Singapore 119278 t/logs` has been entered once before.
+    2. Test case: `editMember 1 n/Andy Tan`<br>
+       Expected: No member is edited. Error details shown in the result display. Command box remains the same.
+    3. Other incorrect editMember commands to try: `editMember 1`, `editMember` with valid index, but invalid values in fields to be edited (For invalid values of fields, refer to User Guide).<br>
+       Expected: Similar to previous.
 
 ### Deleting a member
 
-1. Deleting a member while all members are being shown
+1. Successfully deleting a member
 
    1. Prerequisites: List all members using the `list` command. Multiple members in the list.
 
    1. Test case: `deleteMember 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First member is deleted from the member list. Details of the deleted member without gender is shown in the result display. Command box is cleared.
 
+1. Unsuccessfully deleting a member
+
+   1. Prerequisites: List all members using the `list` command. Multiple members in the list.
    1. Test case: `deleteMember 0`<br>
-      Expected: No member is deleted. Error details shown in the status message. Status bar remains the same.
+     Expected: No member is deleted. Error details shown in the result display. Command box remains the same.
 
-   1. Other incorrect deleteMember commands to try: `deleteMember`, `deleteMember x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   1. Other incorrect deleteMember commands to try: `deleteMember`, `deleteMember x` (where x is larger than the list size)<br>
+     Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Creating an event
+
+1. Successfully creating an event
+    1. Test case: `createEvent n/Run l/NUS Track d/2023-09-20 t/Training`<br>
+       Expected: The new event is added to the last entry of the event list. Event details shown in the result display. Command box is cleared.
+    2. For other positive test cases, try `createEvent` with a unique name, and any combination of optional fields.<br>
+       Expected: Similar to previous.
+
+1. Unsuccessfully creating an event
+    1. Prerequisite: `createEvent n/Run l/NUS Track d/2023-09-20 t/Training` has been entered once before.
+    1. Test case: `createEvent n/Run l/NUS Track d/2023-09-20 t/Training`<br>
+       Expected: No event is added. Error details shown in the result display. Command box remains the same.
+    2. For other negative test cases, try to input invalid values into each field. For unacceptable values of each field, refer to the User Guide.<br>
+       Expected: Similar to previous.
+
+### Editing an event
+
+1. Successfully editing an event
+    1. Prerequisites: List all events using the `list` command. Multiple events in the list.
+    2. Test case: `editEvent 1 l/Pioneer House d/2023-10-25`<br>
+       Expected: Location and date of first event is edited. Details of event edited shown in the result display. Command box is cleared.
+    3. For other positive test cases, try `editMember` with a valid index and at least one field to edit with a valid input.<br>
+       Expected: Similar to previous.
+
+1. Unsuccessfully editing an event
+    1. Prerequisites:
+        1. List all events using the `list` command. Multiple events in the list.
+        2. `createEvent n/Run l/NUS Track d/2023-09-20 t/Training` has been entered once before.
+    2. Test case: `editEvent 1 n/Run`<br>
+       Expected: No event is edited. Error details shown in the result display. Command box remains the same.
+    3. Other incorrect editEvent commands to try: `editMember 1`, `editMember` with valid index, but invalid values in fields to be edited (For invalid values of fields, refer to User Guide).<br>
+       Expected: Similar to previous.
+
+### Deleting an event
+
+1. Successfully deleting an event
+
+    1. Prerequisites: List all events using the `list` command. Multiple events in the list.
+
+    1. Test case: `deleteEvent 1`<br>
+       Expected: First event is deleted from the event list. Details of the deleted event is shown in the result display. Command box is cleared.
+
+1. Unsuccessfully deleting an event
+
+    1. Prerequisites: List all events using the `list` command. Multiple events in the list.
+    1. Test case: `deleteEvent 0`<br>
+       Expected: No event is deleted. Error details shown in the result display. Command box remains the same.
+
+    1. Other incorrect deleteEvent commands to try: `deleteEvent`, `deleteEvent x` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Enrolling a member to an event
+
+1. Successfully enrolling a member to an event
+     1. Prerequisites: List all members and events using the `list` command. Multiple members and events in the list.
+     1. Test case: `enrol m/1 e/1 h/3 r/Role: Social Media Manager`<br>
+       Expected: First member is enrolled to first event. Enrolment details shown in the result display. Command box is cleared.
+    2. For other positive test cases, try `enrol` with a valid member and event indexes, and any combination of optional fields.<br>
+       Expected: Similar to previous.
+
+1. Unsuccessfully enrolling a member to an event
+    1. Prerequisites: List all members and events using the `list` command. Multiple members and events in the list.
+    1. Prerequisite: `enrol m/1 e/1 h/3 r/Role: Social Media Manager` has been entered once before.
+    1. Test case: `enrol m/1 e/1 h/3 r/Role: Social Media Manager`<br>
+       Expected: No new enrolment created. Error details shown in the result display. Command box remains the same.
+    2. For other negative test cases, try to input invalid values into each field. For unacceptable values of each field, refer to the User Guide.<br>
+       Expected: Similar to previous.
+
+### Editing an enrolment
+
+1. Successfully editing an enrolment
+    1. Prerequisites: List all members and events using the `list` command. Multiple members and events in the list.
+   1. Prerequisite: `enrol m/1 e/1 h/3 r/Role: Social Media Manager` has been entered once before.
+
+    2. Test case: `editEnrolment m/1 e/1 h/5 r/Role: Project Director`<br>
+       Expected: Number of hours and remark of the enrolment of first member to first event is edited. Details of enrolment edited shown in the result display. Command box is cleared.
+    3. For other positive test cases, try `editEnrolment` with a valid index and at least one field to edit with a valid input.<br>
+       Expected: Similar to previous.
+
+1. Unsuccessfully editing an enrolment
+    1. Prerequisites: List all members and events using the `list` command. Multiple members and events in the list.
+    2. Test case: `editEnrolment m/1 e/0`<br>
+       Expected: No enrolment is edited. Error details shown in the result display. Command box remains the same.
+    3. For other negative test cases, try to input invalid values into each field. For unacceptable values of each field, refer to the User Guide.<br>
+       Expected: Similar to previous.
+
+### Unenrolling a member from an event
+
+1. Successfully unenrolling a member from an event
+
+    1. Prerequisites: 
+       1.List all events using the `list` command. Multiple events in the list.
+       1. `enrol m/1 e/1 h/3 r/Role: Social Media Manager` has been entered once before.
+
+    1. Test case: `unenrol m/1 e/1`<br>
+       Expected: First member is unenrolled from the first event. Details of the deleted enrolment is shown in the result display. Command box is cleared.
+
+1. Unsuccessfully unenrolling a member from an event
+
+    1. Prerequisites: List all events using the `list` command. Multiple events in the list.
+    1. Test case: `unenrol m/0 e/0`<br>
+       Expected: No enrolment is deleted. Error details shown in the result display. Command box remains the same.
+
+    1. For other negative test cases, provide invalid indexes for member index or event index.<br>
+       Expected: Similar to previous.
+
+### Viewing a member
+
+1. Successfully viewing a member
+   1. Prerequisites: List all members using the `list` command. Multiple members in the list.
+    1. Test case: `viewMember 1`<br>
+       Expected: Event list updated with events of first event. Details of viewed member is shown in the result display. Command box is cleared.
+1. Unsuccessfully viewing a member
+
+    1. Prerequisites: List all members using the `list` command. Multiple members in the list.
+    1. Test case: `deleteEvent 0`<br>
+       Expected: No member is viewed. Error details shown in the result display. Command box remains the same.
+
+    1. Other incorrect viewMember commands to try: `viewMember`, `viewMember x` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Viewing an event
+
+1. Successfully viewing an event
+    1. Prerequisites: List all events using the `list` command. Multiple events in the list.
+    1. Test case: `viewEvent 1`<br>
+       Expected: Member list updated with members of first event. Details of viewed event is shown in the result display. Command box is cleared.
+1. Unsuccessfully viewing an event
+
+    1. Prerequisites: List all events using the `list` command. Multiple events in the list.
+    1. Test case: `deleteEvent 0`<br>
+       Expected: No event is viewed. Error details shown in the result display. Command box remains the same.
+
+    1. Other incorrect viewEvent commands to try: `viewEvent`, `viewEvent x` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Find a member
+
+1. Successfully finding a member
+    1. Test case: `findMember Andy`<br>
+       Expected: Member list updated with all members with name matching the word "Andy". Number of members with name "Andy" shown in the result display. Command box is cleared.
+2. Unsuccessfully finding a member
+    1. Test case: `findMember`<br>
+       Expected: Member list is not updated. Error details shown in the result display. Command box remains the same.
+
+### Find an event
+
+1. Successfully finding an event
+    1. Test case: `findEvent Training`<br>
+       Expected: Event list updated with all events with name matching the word "Training". Number of events with name "Training" shown in the result display. Command box is cleared.
+2. Unsuccessfully finding a member
+    1. Test case: `findMember`<br>
+       Expected: Event list is not updated. Error details shown in the result display. Command box remains the same.
+
+### Undo
+
+1. Successfully undo a command
+    1. Prerequisite: The last command to be successfully executed is a command that can be undone (View User Guide for list of commands that can be undone).
+   2. Test case: `undo`<br>
+      Expected: Previous state before the last command executed will be restored. Command that was undone shown in the result display. Command box is cleared.
+3. Unsuccesfully undo a command
+   1. Prerequisite: No command that can be undone has been previously executed.
+   2. Test case: `undo`<br>
+      Expected: No command is undone. Error details shown in the result display. Command box remains the same.
+
+### Redo
+
+1. Successfully redo a command
+    1. Prerequisite: The last command to be successfully executed is `undo`.
+    2. Test case: `redo`<br>
+       Expected: Previous state before the `undo` will be restored. Command that was redone shown in the result display. Command box is cleared.
+3. Unsuccesfully undo a command
+    1. Prerequisite: The last command to be successfully executed is a command that can be undone (View User Guide for list of commands that can be undone).
+    2. Test case: `redo`<br>
+       Expected: No command is redone. Error details shown in the result display. Command box remains the same.
 
 ### Saving data
 
