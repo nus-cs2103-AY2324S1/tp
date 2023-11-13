@@ -5,7 +5,10 @@ title: User Guide
 <link rel="stylesheet" href="./assets/css/guide.css">
 ## CCACommander Ultra Promax Xtra 9000PLUS - User Guide
 
-![Logo](images/logo_removebg.png)
+<figure>
+    <img src="images/logo_removebg.png"
+         alt="CCACommander Logo">
+</figure>
 
 ## Introduction
 As a Co-curricular Activity (CCA) head, do you find yourself struggling to manage your CCA members’ attendance and record the array of events that your CCA has?
@@ -451,9 +454,9 @@ Forgot how to edit a specific enrolment or how to unenrol members? The `help` co
 Here’s how you can use it: `help`
 
 <figure>
-<img src="images/helpWindow.png"
-alt="Help Window">
-<figcaption>A help pop-up window will appear upon entering the `help` command</figcaption>
+    <img src="images/helpWindow.png"
+         alt="Help Window">
+    <figcaption>A help pop-up window will appear upon entering the <code>help</code> command</figcaption>
 </figure>
 
 <hr class="command-separator">
