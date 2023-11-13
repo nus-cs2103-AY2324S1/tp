@@ -20,6 +20,11 @@ It is written in Java.
 - `edit` command for editing transactions (PR [#69](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/69))
 - Added methods to show aggregate data for Overview page (
   PR [#93](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/93))
+- Added test cases for all classes related to `transaction` logic and some `command` classes (PR [#216](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/216))
+
+### **Contribution to Team Tasks**
+
+- Created Introduction for Product Demo
 
 ### **Project Management**
 
@@ -37,4 +42,5 @@ It is written in Java.
 - Update User Stories (PR[#49](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/49))
 
 ### **Review Contributions**
-- PR[#217](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/217)
+- Approved PRs:
+  - PR[#217](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/217)
