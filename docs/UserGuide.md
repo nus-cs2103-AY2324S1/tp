@@ -9,11 +9,11 @@
 
 To all CS2103/T Teaching Assistants (TAs), 
 
-We understand your struggles in managing your students' information. We know it is difficult to keep track of your students' contact information, attendance, class participation and assignment grades. This is even more challenging when you teach multiple classes while juggling your schoolwork and other commitments.
+We understand your struggles in managing your students' information. We know it is difficult to keep track of your students' contact information, attendance, class participation, and assignment grades. This is even more challenging when you teach multiple classes while juggling your schoolwork and other commitments.
 
-This is why we are excited to introduce **Class Manager 2023**, an all-in-one application designed to streamline your class management duties. **Class Manager 2023** will help you to save time, streamline your TA duties and allow you to focus on what matters most - your students.
+This is why we are excited to introduce **Class Manager 2023**, an all-in-one application designed to streamline your class management duties. **Class Manager 2023** will help you to save time, streamline your TA duties, and allow you to focus on what matters most - your students.
 
-This user guide is your key to mastering **Class Manager 2023**, with step-by-step instructions on installing and using our application. **Class Manager 2023** is designed to be intuitive and easy to use, so you can get started immediately!
+This user guide is your key to mastering **Class Manager 2023**, with step-by-step instructions on installing and using our application. It aims to provide a quick start to the new users as well as a reference to the advanced users. **Class Manager 2023** is designed to be intuitive and easy to use, so you can get started immediately!
 
 --------------------------------------------------------------------------------------------------------------------
 <!-- * Table of Contents to be removed after PDF conversion -->
