@@ -41,7 +41,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### BHARDWAJ TAANISH
 
-<img src="images/d_limiter.png" width="200px">
+<img src="images/d-limiter.png" width="200px">
 
 [[github](http://github.com/D-Limiter)]
 [[portfolio](team/d_limiter.md)]
