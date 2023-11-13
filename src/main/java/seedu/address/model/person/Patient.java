@@ -48,7 +48,7 @@ public class Patient extends Person {
     }
 
     /**
-     * Returns true if person is a doctor.
+     * Returns true if person is a {@code Doctor}.
      */
     @Override
     public boolean isDoctor() {
@@ -56,7 +56,7 @@ public class Patient extends Person {
     }
 
     /**
-     * Returns true if person is a patient.
+     * Returns true if person is a {@code Patient}.
      */
     @Override
     public boolean isPatient() {

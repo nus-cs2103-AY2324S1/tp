@@ -86,7 +86,7 @@ public abstract class Person {
     }
 
     /**
-     * Returns true if both persons have the same IC.
+     * Returns true if both persons have the same {@code Ic}.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -99,7 +99,7 @@ public abstract class Person {
     }
 
     /**
-     * Returns true if this person has the given {@code ic}.
+     * Returns true if this person has the given {@code Ic}.
      */
     public boolean hasIc(Ic ic) {
         return this.ic.equals(ic);
@@ -123,7 +123,7 @@ public abstract class Person {
     }
 
     /**
-     * Adds the given {@Code appointment} to this person's set of appointments.
+     * Adds the given {@code Appointment} to this {@code Person}'s set of appointments.
      *
      * @param appointment the appointment to be added.
      */
@@ -132,32 +132,32 @@ public abstract class Person {
     }
 
     /**
-     * Removes the given {@Code appointment} to this person's set of appointments.
+     * Removes the given {@code Appointment} from this {@code Person}'s set of appointments.
      *
-     * @param appointment the appointment to be added.
+     * @param appointment the appointment to be removed.
      */
     public void deleteAppointment(Appointment appointment) {
         this.appointments.remove(appointment);
     }
 
     /**
-     * Retrieves the list of patients stored in this medical facility.
+     * Retrieves the list of appointments stored in this medical facility.
      *
-     * @return An ArrayList containing the patients currently registered in the facility.
+     * @return An ArrayList containing the appointments currently registered in the facility.
      */
     public Set<Appointment> getAppointments() {
         return appointments;
     }
 
     /**
-     * Returns true if person is a patient.
+     * Returns true if person is a {@code Patient}.
      */
     public boolean isPatient() {
         return false;
     }
 
     /**
-     * Returns true if person is a doctor.
+     * Returns true if person is a {@code Doctor}.
      */
     public boolean isDoctor() {
         return false;

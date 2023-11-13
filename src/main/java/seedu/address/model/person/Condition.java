@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's condition in the condition book.
+ * Represents a {@code Patient}'s condition in the condition book.
  * Guarantees: immutable; is valid as declared in {@link #isValidCondition(String)}
  */
 public class Condition {

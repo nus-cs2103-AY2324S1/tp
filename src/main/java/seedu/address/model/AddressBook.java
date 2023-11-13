@@ -84,7 +84,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         setAppointments(newData.getAppointmentList());
     }
 
-    //// person-level operations
+    // person-level operations
 
     /**
      * Returns true if a patient with the same identity as {@code patient} exists in the address book.
@@ -113,8 +113,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
      * Adds a patient to the address book.
      * The patient must not already exist in the address book.
      */
@@ -130,26 +128,30 @@ public class AddressBook implements ReadOnlyAddressBook {
         doctors.add(d);
     }
 
+    /**
+     * Adds an appointment to the address book.
+     * The appointment must not already exist in the address book.
+     */
     public void addAppointment(Appointment a) {
         appointments.add(a);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * Replaces the given patients {@code target} in the list with {@code editedPerson}.
+     * Replaces the given patient {@code target} in the list with {@code editedPatient}.
+     * Replaces the given patients {@code target} in the list with {@code editedPatient}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The person identity of {@code editedPatient} must not be the same as another existing patient in the address book.
      */
-    public void setPatient(Patient target, Patient editedPerson) {
-        requireNonNull(editedPerson);
+    public void setPatient(Patient target, Patient editedPatient) {
+        requireNonNull(editedPatient);
 
-        patients.setObject(target, editedPerson);
+        patients.setObject(target, editedPatient);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * Replaces the given doctor {@code target} in the list with {@code editedDoctor}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The person identity of {@code editedDoctor} must not be the same as another existing doctor in the address book.
      */
     public void setDoctor(Doctor target, Doctor editedDoctor) {
         requireNonNull(editedDoctor);
@@ -158,7 +160,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes patient {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
     public void removePatient(Patient key) {
@@ -168,7 +170,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes doctor {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
     public void removeDoctor(Doctor key) {
@@ -178,7 +180,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes appointment {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
     public void removeAppointment(Appointment key) {
@@ -190,7 +192,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// util methods
 
     @Override
-    public String toString() { //not sure how to modify this
+    public String toString() {
         return new ToStringBuilder(this)
                 .add("patients", patients)
                 .add("doctors", doctors)

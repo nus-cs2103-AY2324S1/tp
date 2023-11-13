@@ -11,7 +11,9 @@ public class BloodTypePredicate implements Predicate<Person> {
     private final String keywords;
 
     /**
-     * Constructs a predicate that tests that a {@code Person}'s {@code Gender} matches either male or female.
+     * Constructs a predicate that tests whether a {@code BloodType} matches the specified keywords.
+     *
+     * @param keywords A string representing the keywords to match against.
      */
     public BloodTypePredicate(String keywords) {
         this.keywords = keywords;
