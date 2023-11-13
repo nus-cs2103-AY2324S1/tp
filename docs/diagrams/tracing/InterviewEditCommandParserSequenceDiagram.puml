@@ -5,9 +5,8 @@ skinparam ArrowFontStyle plain
 Participant ":InterviewEditCommandParser" as iecp LOGIC_COLOR
 Participant "<<class>>\nArgumentTokenizer" as at LOGIC_COLOR
 Participant "<<class>>\nParserUtil" as pu LOGIC_COLOR
-Participant ":ArgumentMultimap" as am LOGIC_COLOR
-Participant ":editInterviewDescriptor" as eid LOGIC_COLOR
-Participant ":InterviewEditCommand" as iec LOGIC_COLOR
+Participant "eid:editInterviewDescriptor" as eid LOGIC_COLOR
+Participant "command:InterviewEditCommand" as iec LOGIC_COLOR
 
 [-> iecp ++: parse(args)
 iecp -> at ++: tokenize()
@@ -19,15 +18,19 @@ pu --> iecp --: interviewIndex
 iecp -> pu ++: parseIndex()
 pu --> iecp --: jobIndex
 
-iecp -> am ++: verifyNoDuplicatePrefixesFor()
-deactivate am
-
 create eid
 iecp -> eid ++: EditInterviewDescriptor()
-eid --> iecp --: editInterviewDescriptor
+eid --> iecp --
+
+loop for each prefix
+    iecp -> pu ++: parse prefix value
+    pu --> iecp --: parsed value
+    iecp -> eid ++: set corresponding field
+    deactivate eid
+end loop
 
 create iec
-iecp -> iec ++: InterviewEditCommand(jobIndex, interviewIndex, editInterviewDescriptor)
-iec --> iecp --: result
-iecp -->[ --: result
+iecp -> iec ++: InterviewEditCommand(jobIndex, interviewIndex, eid)
+iec --> iecp --
+iecp -->[ --: command
 @enduml
