@@ -9,7 +9,7 @@ import seedu.address.logic.commands.DeleteAppointmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new DeleteCommand object
+ * Parses input arguments and creates a new DeleteAppointmentCommand object
  */
 public class DeleteAppointmentCommandParser implements Parser<DeleteAppointmentCommand> {
     private static final Logger logger = LogsCenter.getLogger(DeleteCommandParser.class);

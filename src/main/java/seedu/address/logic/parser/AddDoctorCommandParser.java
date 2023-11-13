@@ -76,6 +76,10 @@ public class AddDoctorCommandParser implements Parser<AddDoctorCommand> {
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
+     *
+     * @param argumentMultimap The parsed argument multimap.
+     * @param prefixes The prefixes to check.
+     * @return True if all prefixes are present and have non-empty values, false otherwise.
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
