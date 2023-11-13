@@ -193,12 +193,12 @@ This section describes some noteworthy details on how certain features are imple
 
 ### List features
 Two types of list commands, `list students` and `list attendance`, have been implemented.
-`list students` allows users to return to the full list of students who are in the active address book.
-`list attendance` allows users to view a summary of the attendances for each week.
+`list students` allows users to return to the full list of students who are in the currently selected course.
+`list attendance` allows users to view a summary of the attendance records and the list of absentees for each week for the students in the currently selected course or if specified, the tutorial group.
 
 #### Implementation
 Both list commands are parsed with `ListCommandParser`. If parsed successfully, it returns either
-a `ListStudentsCommand` or `ListAttendanceCommand`.
+a `ListStudentsCommand` or `ListAttendanceCommand` object.
 
 The following is a class diagram depicting `ListCommand`, `ListStudentsCommand` and `ListAttendanceCommand`:
 
@@ -217,21 +217,21 @@ The following sequence diagram shows how `ListAttendanceCommand` works:
 
 ![ListAttendanceSeqDiagram](images/ListAttendanceSeqDiagram.png)
 
-In this example, the user enters `list attendance w/1 tg/G2`, where there are valid students in Tutorial Group G2.
+In this example, the user enters `list attendance w/1 tg/G2`, where there are valid students in Tutorial Group G2 and all attendances are marked for the students in Tutorial Group G2.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ListCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 The following activity diagram summarizes what happens when the user executes a `ListAttendanceCommand`.
 ![ListAttendanceSeqDiagram](images/ListAttendanceActivityDiagram.png)
-
+This shows the possible outcomes of `ListAttendanceCommand` and how to reach each of them.
 
 #### Design considerations:
 The current implementation of `ListAttendanceCommand` aims to provide a view of the attendance records for the week in a concise manner, 
 by only showing a statistical summary of the attendances and the list of absentees. 
 The tutorial group ID is also implemented as an optional field to give users greater flexibility.
 Specific messages are also shown when attendances are not fully marked and when there are no students in a specified tutorial group
-instead of a generic error message, which was implemented so that users can more easily rectify these mistakes.
+instead of a generic error message. This was implemented so that users can more easily rectify these mistakes.
 
 #### Alternative implementations considered but not adopted:
 
@@ -266,7 +266,7 @@ instead of a generic error message, which was implemented so that users can more
     
     **Evaluation:**
 
-    The current implementation is preferred as it gives the user a clear and concise summary of the week's attendances, which is in line with the intention and design of the feature. If the user wants to know the reason of absence, they can use the `ViewCommand`.
+    The current implementation is preferred as it gives the user a clear and concise summary of the week's attendances, which is in line with the intention and design of the feature. If the user wants to know the reason of absence, they could use the `ViewCommand`.
 
 ### Mark attendance feature
 
@@ -475,7 +475,7 @@ Two types of delete commands, `delete INDEX` and `delete all`, have been impleme
 `delete all` allows users to delete multiple students at once.
 
 #### Implementation
-Both delete commands are parsed with `DeleteCommandParser`. If parsed successfully, it returns a `DeleteCommand`.
+Both delete commands are parsed with `DeleteCommandParser`. If parsed successfully, it returns a `DeleteCommand` object.
 
 The following sequence diagram shows how `DeleteCommand` works:
 
@@ -495,7 +495,7 @@ The ability to delete multiple students was chosen as it provides greater effici
 - Different format for information shown by `DeleteCommand`
 
   > Instead of the UI message showing a success message followed by listing (all) the student(s) deleted,
-  > we could have it showing a success message only.
+  > we could have it show a success message only.
 
   **Pros:**
     - Reduces clutter in the UI message.
@@ -733,7 +733,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. The address book that the user is trying to switch to does not exist.
   * 1a1. TAvigator prompts the user to switch to a valid address book.
 
-  Use case ends.
+    Use case ends.
 
 #### **Use case: UC03 - Creating a new contact and editing relevant information**
 
@@ -743,16 +743,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User creates a new contact.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 1a. User edits the contact details.
-      Use case ends. 
+  
+  Use case ends. 
 
 * 1b. User finds a duplicated contact.
   * 1b1. User merges the duplicated contacts.
-      Use case ends. 
+
+    Use case ends. 
 
 #### **Use case: UC04 - View Summary of Attendance Records**
 
@@ -770,22 +772,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. User leaves the tutorial group ID blank.
     * 1a1. TAvigator shows a summary of attendance records of all students in the course for the week specified.
 
-    Use case ends.
+      Use case ends.
 
 * 1b. User leaves the week blank.
     * 1b1. TAvigator shows an error message.
 
-    Use case ends.
+      Use case ends.
 
 * 1c. User enters an invalid tutorial group ID.
     * 1c1. TAvigator shows an error message.
 
-    Use case ends.
+      Use case ends.
 
 * 1d. User enters a tutorial group with no students in it.
     * 1d1. TAvigator shows a reminder that no students are in the tutorial group and shows no students.
 
-    Use case ends.
+      Use case ends.
 
 #### **Use case: UC05 - View List of Students**
 
@@ -883,10 +885,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case ends.
 
-* 3b. User enters an invalid index.
+* 3b. User enters an invalid index. 
     * 3b1. TAvigator shows an error message.
 
-    Use case resumes at step 2.
+      Use case resumes at step 2.
 
 #### **Use case: UC09 - Delete Multiple Students**
 
