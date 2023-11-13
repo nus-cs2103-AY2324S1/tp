@@ -1002,6 +1002,7 @@ No student is currently displayed
 This student has no linked lessons
 ```
 
+### For Schedule:
 <box type="info" seamless>
 
 You must be in the **_SCHEDULE list_** and are viewing a lesson to run this command. Type `list schedule` to go to the **_SCHEDULE list_**, then type `show INDEX` to select a lesson.</box>
@@ -1049,7 +1050,7 @@ This student has no linked lessons
 ```
 
 
-#### For task list:
+#### For Task:
 This feature is not used for tasks!
 
 
