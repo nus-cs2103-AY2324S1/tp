@@ -859,9 +859,44 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Planned Enhancements**
 
-1. Our current app is unable to handle scenarios where patients share the same name. We plan to make it possible for
-   users to add patients with the same name into HealthSync.
-2. Our current app does not handle text wrapping on the UI well, and certain text labels may be obscured when user input
-   is too long. We plan to explicitly denote the labels on the individual UI cards and allow inputs to stretch its
-   container should it be a long input, so users would be able to discern easily what elements they are looking at on
-   the UI.
+1. **Handling Patients with Same Name:**
+Currently, HealthSync cannot manage scenarios where patients share the same name. 
+We plan to enhance this by allowing users to add patients with identical names, 
+providing a more robust and flexible patient management system.
+
+2. **Improved UI Text Wrapping:**
+HealthSync currently struggles with text wrapping on the UI, leading to obscured 
+labels for long user inputs. Our plan is to explicitly denote labels on individual UI 
+cards and enable inputs to stretch their containers, ensuring better visibility for 
+users, even with lengthy inputs.
+
+3. **Enhanced Edit Feature Feedback:**
+The current edit feature does not explicitly handle cases where no fields are 
+edited after a change. For instance, if a patient's phone number remains the same 
+after an edit operation, HealthSync doesn't provide a special message indicating that no 
+fields were edited. We plan to improve this feedback for a more informative user experience.
+
+4. **Standardized Empty Optional Fields:**
+HealthSync currently displays empty optional fields inconsistently in particular, for Appointment and Medical History.
+We intend to standardize the display of empty optional fields to be 'N/A' uniformly, 
+enhancing clarity and consistency in the user interface.
+
+5. **Improved Email Validation:** HealthSync's current email validation is not 
+stringent enough, accepting invalid email formats. We plan to implement more thorough 
+email validation to ensure only valid email addresses are accepted.
+
+6. **Consistent Capitalization of Patient IDs:**
+While IDs are case-insensitive, HealthSync does not enforce consistent capitalization 
+of patient IDs in the patient list. This is a cosmetic enhancement to maintain 
+uniformity in the application.
+
+7. **Case-Insensitive Find Feature for Appointments:** 
+The current Find feature for appointments is case-sensitive, potentially causing 
+inconvenience for users. We plan to enhance this feature to be case-insensitive, 
+ensuring a smoother and more user-friendly experience.
+
+8. **Improved Messaging for Empty Find Results:**
+When a Find command results in an empty set, the output message currently 
+reads '0 patients found.' We propose an enhancement to provide a clearer message 
+such as 'No patients found,' offering better clarity and user understanding.
+
