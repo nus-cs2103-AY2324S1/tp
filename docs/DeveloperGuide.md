@@ -514,6 +514,210 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 --------------------------------------------------------------------------------------------------------------------
 
+### Delete Time Feature
+
+#### Implementation
+
+The proposed delete time feature is facilitated by the `timeIntervalList` and `Person` class. It accesses the `timeIntervalList` from the `Person` class and deletes a time interval with `Person#deleteFreeTime()`. The operation is exposed in the `Model` interface as `Model#deleteTimeFromPerson`.
+
+Step 1. The user launches the application. The `AddressBook` will be initialized with the free time of its contacts.
+
+Step 2. The user executes the command `deleteTime n/Alex Yeoh t/mon 1200 - mon 1400 t/tue 1000 - wed 1600`. The `deleteTimeCommandParser` will be called to parse the inputs and call the `deletePersonTimeCommand`. The `deletePersonTime` command calls `Model#deleteTimeFromPerson()`, which will call `Person#deleteFreeTime()`.
+
+**Note:** Since multiple inputs are allowed, an array list of time intervals are passed around, each of which is to be deleted.
+
+Step 3. The function will be called in the person's `timeInterval` list. The application will loop through each time interval that is to be deleted and in the person's `timeInterval` list. Each time interval will be compared to see whether the `timeIntervalList` contains the time interval to be deleted. Afterwards, the new `timeInterval` list will be saved.
+
+**Note:** If a time interval is not in the person's list, that interval will be collated and printed to specifically notify the user which time intervals are not in the list. The other time intervals that are in the list will still be deleted.
+
+Similarly, the group command does the same, except for the `Group` class.
+
+The following sequence diagram summarizes what happens when a user executes a new command:
+
+<puml src="diagrams/DeletePersonTimeDiagram.puml" alt="DeletePersonTimeDiagram"/>
+
+Below is an activity diagram that illustrates the control flow for Delete Person Time feature.
+
+<puml src="diagrams/DeletePersonTimeActivityDiagram.puml" alt="DeletePersonTimeActivityDiagram"/>
+
+#### Design Considerations
+
+**Aspect: Error Messages**
+
+* Alternative 1 (current choice): Print specific error messages.
+  Pros: Allow users to understand which inputs went wrong.
+  Cons: May have performance issues in terms of runtime as more functions will be used to craft the error message. Currently, we utilized a `StringBuilder` to craft the message and did extra checks to see whether there had been any errors appended to the error message.
+
+* Alternative 2: Generalized error message.
+  Pros: Will be faster to implement.
+  Cons: User might be unsure why the function went wrong.
+
+**Aspect: How to Handle Multiple Time Inputs**
+
+* Alternative 1 (current choice): Parse each time input one by one and execute the commands.
+  Pros: More user-friendly and efficient as users can delete more time intervals at once.
+  Cons: More expensive as more functions will be called to parse the inputs.
+
+* Alternative 2: Allow only single input.
+  Pros: Faster as fewer functions are called.
+  Cons: Not as user-friendly since users will have to delete time intervals one by one.
+
+**Aspect: How to Handle Errors in Time Intervals**
+
+* Alternative 1 (current choice): Delete the time intervals that are correct and return the intervals that are wrong.
+  Pros: Better user experience as users need not rewrite intervals that were right.
+  Cons: Increased memory usage to store the errors.
+
+* Alternative 2: Do not carry out the delete at all.
+  Pros: More time and memory efficient.
+  Cons: Not as user-friendly since users will have to delete time intervals that were originally correct, wasting their time.
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Grouping and Ungrouping a Person
+
+#### Implementation
+
+The group mechanism is facilitated by `Group`. It is stored internally as a `Group`. This operation is exposed in the `Model` interface as `Model#groupPerson(personName, groupName)`.
+
+Given below is an example usage scenario and how the group mechanism behaves at each step.
+
+**Step 1:** User launches the application.
+
+**Step 2:** The user executes `group n/personName g/groupName` to group a person `personName` into group `groupName`. `
+
+**Step 3.** GroupPersonCommandParser` parses the personName and groupName ensuring the input is valid and creates a `GroupPersonCommand`
+
+**Step 4.** GroupPersonCommand calls `Model#groupPerson(personName, groupName)`. The model retrieves the existing person and group from the addressBook.
+
+**Step 5.** Model calls `Model#assignGroup(Person person, Group group)` which adds a group to a person's groupList and person to the personList in group.
+
+**Note:** Should a person or group not exist, an error is thrown, displaying the missing entity to the User. 
+<br>
+Ungroup works in the same way as group except the use of Command word ungroup
+
+The following activity diagram summarizes what happens when a user executes a new command:
+<puml src="diagrams/GroupPersonActivityDiagram.puml" alt="Group Command Activity Diagram" />
+
+
+#### Design Considerations:
+
+**Aspect: Whether to store references in both person and group**
+
+* **Alternative 1 (current choice):** Store references in both person and group
+    * Pros: Easy to implement. More efficient when searching.
+    * Cons: More bug-prone. May have object referencing and loading from storage issues as both the person reference to group, and group reference to person has to be loaded properly.
+
+* **Alternative 2:** Store reference to the other entity, e.g. store a list of groups in person.
+    * Pros: Easier to load from storage. One centralized place to store data. Less coupling.
+    * Cons: Searching might become more costly.
+
+**Aspect: Error Messages**
+
+* **Alternative 1 (current choice):** Print specific error messages. 
+  * Pros: More intuitive for User to figure out what part of the inputs went wrong.  
+  * Cons: A larger choice of what we want to categorise as specific error messages will be more time-consuming to implement. 
+
+* **Alternative 2: Print general error messages**  
+  * Pros: Easier to implement and low maintenance when use case expands 
+  * Cons: User might not know what went wrong 
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+### FindFreeTime 
+
+#### Implementation
+
+The FindFreeTime mechanism is facilitated by the `Model`, `Group` and  `Person` class.
+It retrieves `Group` from `Model` to find a free time between group members in `listOfGroupMates` in `Group` 
+with a duration specified, `Duration`.
+The operation is exposed to `Model` interface as `Model#findGroup`.
+
+
+Given below is an example usage scenario and how the list mechanism behaves at each step.
+
+**Step 1:** User launches the application. 
+
+**Step 2:** User executes `findfreetime g/CS2103 d/60` command to find a common meeting time with duration 60 minutes 
+for group CS2103.
+
+**Step 3:** FindFreeTimeCommandParser parses the group name CS2103 and duration 60, ensuring that duration 
+is a valid integer in terms of minutes, and returns a FindFreeTimeCommand.
+
+**Step 4:** FindFreeTimeCommand calls `Model#findGroup(groupName)` to retrieve the group with matching name.
+If group does not exist, then an error is thrown.
+
+**Step 4:** FindFreeTimeCommand calls `Group#findFreeTime(duration)`, to retrieve the all common timeslots between 
+`listOfGroupMates` in `Group` and return them in a list should they accommodate the duration stated.
+
+**Note:**
+If group is empty, having no group mates in `listOfGroupMates` an error is thrown. 
+<br>
+If any group mate has not key in their free time slots using `addtime`, an error is thrown. 
+
+
+The following activity diagram summarizes what happens when a user executes a FindFreeTime command:
+
+<puml src="diagrams/FindFreeTimeActivityDiagram.puml" alt="Find free time command activity diagram" />
+--------------------------------------------------------------------------------------------------------------------
+
+### List
+
+#### Implementation
+
+The List mechanism is facilitated by the `Model` class.
+
+The operation it utilises is exposed in the `Model` interface as `Model#updateFilteredPersonList(Predicate<Person> predicate)`.
+
+Given below is an example usage scenario and how the list mechanism behaves at each step.
+
+**Step 1:** User executes `list` command to view all contacts. After parsing, a new `ListCommand` object will be returned.
+
+**Step 2:** `ListCommand` is executed, in which `Model#updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)` is called with the Predicate<Person> which will be true for all contacts. This updates the address book view, showing all the contacts in the address book to the user.
+
+The following activity diagram summarizes what happens when a user executes a list command:
+
+<puml src="diagrams/ListCommandSequenceDiagram.puml" alt="ListCommandSequence" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `ListCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Listgroup
+
+#### Implementation
+
+The Listgroup mechanism is facilitated by the `Model` class.
+
+The operation it utilises is exposed in the `Model` interface as `Model#getFilteredGroupList()`.
+
+Given below is an example usage scenario and how the listgroup mechanism behaves at each step.
+
+**Step 1:** User executes `listgroup` command to view all groups in their contact list. After parsing, a new `ListGroupCommand` object will be returned.
+
+**Step 2:** `ListGroupCommand` is executed, in which `Model#getFilteredGroupList()` is called, returning all the groups the user has in the contact list.
+
+**Step 3:** The group names of all the groups in the contact list are appended to a `String` which will be displayed to the user as a message in the output box.
+
+The following activity diagram summarizes what happens when a user executes a listgroup command:
+
+<puml src="diagrams/ListGroupSequenceDiagram.puml" alt="ListGroupSequence" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `ListGroupCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Adding Time to a Person or Group
+=======
 ### 3.8. Adding Time to a Person or Group
 
 #### Implementation
