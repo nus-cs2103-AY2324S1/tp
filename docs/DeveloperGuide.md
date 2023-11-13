@@ -681,9 +681,11 @@ testers are expected to do more *exploratory* testing.
        * Windows & Linux: Cross button at the top right side of the window.
        <br>
        <br>
-    2. Expected: The application window disappears. 
+     Expected: The application window disappears. 
   <br>
-  <br>
+    2. Enter `exit` into the command box of the application. <br>
+     Expected: The application window disappears.
+     <br>
 
 * Subsequent Launches
 
@@ -1017,41 +1019,41 @@ testers are expected to do more *exploratory* testing.
 
 1. Prerequisites:
     * List all students using the `list students` command.
-    * There are currently two lessons with names "Chemistry Lesson at Bedok", "Biology Lesson at Bedok" and "English Lesson".
-    * There is a student with the name "Alex Yeoh" with no lessons linked to him.
-    * A student is shown with the `show` command with only one lesson named "Bedok Lesson".<br><br>
+    * The first student in the list has the name "Alex Yeoh" with one lesson named "Bedok Lesson" linked to him.
+    * There are currently three lessons with names "Chemistry Lesson at Bedok", "Biology Lesson at Bedok" and "Bedok Lesson".
+<br><br>
 
-2. Test case: `linkTo Chemistry Lesson at Bedok` <br>
-   Expected: Lesson with the name "Chemistry Lesson at Bedok" is linked to the currently shown student in the details panel. A message indicating student linked to lesson is shown in the response box.
+2. Test case: `show 1` followed by `linkTo Chemistry Lesson at Bedok` <br>
+   Expected: Lesson with the name "Chemistry Lesson at Bedok" is linked to the currently shown student ("Alex Yeoh") in the details panel. A message indicating student linked to lesson is shown in the response box.
 
 3. Test case: `link -student alex yeoh -lesson biology lesson at bedok` <br>
    Expected: Student "Alex Yeoh" is linked to the lesson with the name "Biology Lesson at Bedok". A message indicating student linked to lesson is shown in the response box.
 
-4. Test case: `linkTo english` <br>
+4. Test case: `show 1` followed by `linkTo bedok` <br>
    Expected: No lesson is added to the currently shown student in the details panel. Error indicating no such lesson is shown in the response box.
 
-5. Test case: `linkTo` <br>
+5. Test case: `show 1` followed by `linkTo` <br>
    Expected: No lesson is added to any student. Error indicating name should be alphanumeric and `linkTo` command usage is shown in the response box.
 
 
 ##### Linking a student to a lesson in ___SCHEDULE list___
 
 1. Prerequisites:
-    * List all students using the `list` command.
-    * There are currently three students with names "Alex Wong", "Alex Yeoh", "Willy Wonka" and "Willy Max".
-    * There is a lesson with name "Bedok Lesson" with no students linked to it.
-    * A lesson is shown with the `show` command with only one student named "Alex Wong".<br><br>
+    * List all lessons using the `list` command.
+    * The first lesson in the list has the name "Bedok Lesson" with one student named "Alex Wong" linked to it.
+    * There are currently four students with names "Alex Wong", "Alex Yeoh", "Willy Wonka" and "Willy Max".
+    * Only "Alex Wong" has a lesson linked to him. All other students have no lessons linked to them. <br><br>
 
-2. Test case: `linkTo Alex Yeoh` <br>
+2. Test case: `show 1` followed by `linkTo Alex Yeoh` <br>
    Expected: Student "Alex Yeoh" is linked to the currently shown lesson in the details panel. A message indicating student linked to lesson is shown in the response box.
 
 3. Test case: `link -student willy max -lesson bedok lesson` <br>
    Expected: Student "Willy Max" is linked to the lesson with the name "Bedok Lesson". A message indicating student linked to lesson is shown in the response box.
 
-4. Test case: `linkTo willy` <br>
+4. Test case: `show 1` followed by `linkTo willy` <br>
    Expected: No student is added to the currently shown lesson in the details panel. Error indicating no student with name "willy" found is shown in the response box.
 
-5. Test case: `linkTo alex wong` <br>
+5. Test case: `show 1` followed by `linkTo alex wong` <br>
    Expected: No student is added to the currently shown lesson in the details panel. A message indicating student is already linked to lesson is shown in the response box.
 
 ### Navigate Feature
@@ -1060,19 +1062,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Prerequisites:
     * List all students using the `list students` command.
-    * The first lesson in the list is named "Lesson at Bedok" with two students linked to it.
-    * The second lesson in the list is named "Lesson at Punggol" with no lessons linked to him.<br><br>
-   
-2. Test case: `show 1` followed by `nav` <br>
-   Expected: Two students are shown in the list panel. A message indicating navigated to lesson's students is shown in the response box.
-
-3. Test case: `show 2` followed by `nav` <br>
-   Expected: List panel remains the same. Error indicating the lesson has no linked students is shown in the response box.
-
-##### Navigating to students linked to a lesson in ___SCHEDULE list___
-
-1. Prerequisites:
-    * List all lessons using the `list` command.
     * The first student in the list is named "Alex Yeoh" with three lessons linked to him.
     * The second student in the list is named "Willy Wonka" with no lessons linked to him.<br><br>
 
@@ -1081,6 +1070,21 @@ testers are expected to do more *exploratory* testing.
 
 3. Test case: `show 2` followed by `nav` <br>
    Expected: List panel remains the same. Error indicating no lessons linked to student is shown in the response box.
+
+
+##### Navigating to students linked to a lesson in ___SCHEDULE list___
+
+1. Prerequisites:
+    * List all lessons using the `list` command.
+    * The first lesson in the list is named "Lesson at Bedok" with two students linked to it.
+    * The second lesson in the list is named "Lesson at Punggol" with no student linked to it.<br><br>
+
+2. Test case: `show 1` followed by `nav` <br>
+   Expected: Two students are shown in the list panel. A message indicating navigated to lesson's students is shown in the response box.
+
+3. Test case: `show 2` followed by `nav` <br>
+   Expected: List panel remains the same. Error indicating the lesson has no linked students is shown in the response box.
+
 
 ### Command History Feature
 
