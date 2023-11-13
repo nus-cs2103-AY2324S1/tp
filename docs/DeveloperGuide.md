@@ -118,7 +118,7 @@ Key responsibilities include:
 - **API**: [`Storage.java`](https://github.com/AY2324S1-CS2103T-T12-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 - The Storage component manages data persistence.
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" alt="Storage Component Class Diagram"/>
+<puml src="diagrams/StorageClassDiagram.puml" width="600" alt="Storage Component Class Diagram"/>
 
 Key functionalities include:
 
@@ -506,7 +506,7 @@ An `Appointment` object encapsulates various attributes:
 
 Uniqueness is enforced through a `UniqueAppointmentList`.
 
-#### Adding an Appointment
+### Adding an Appointment
 
 #### Overview
 
@@ -521,7 +521,7 @@ The `addappointment` command integrates a new `Appointment` object with the appo
 - `Model#resetAppointmentList()`
 - `AppointmentWindow`, `AppointmentCalendarPanel`, `AppointmentListPanel`, `AppointmentCard`
 
-### Implementation Steps
+#### Implementation Steps
 
 1. **Parse User Input**: `AddAppointmentCommandParser` checks for necessary parameters and their validity.
 2. **Create Appointment Object**: An `Appointment` object is instantiated during `AddAppointmentCommandParser#parse(String)` and passed over to the `AddAppointmentCommand`.
@@ -529,13 +529,13 @@ The `addappointment` command integrates a new `Appointment` object with the appo
 
 <puml src="diagrams/AddAppointmentSequenceDiagram.puml"/>
 
-#### Deleting an Appointment
+### Deleting an Appointment
 
-##### Overview
+#### Overview
 
 The `deleteappointment` command deletes an existing `Appointment` from MedBook.
 
-##### Related Classes and Methods
+#### Related Classes and Methods
 
 - `DeleteAppointmentCommandParser#parse(String)`
 - `DeleteAppointmentCommand#execute(Model)`
@@ -544,7 +544,7 @@ The `deleteappointment` command deletes an existing `Appointment` from MedBook.
 - `Model#resetAppointmentList()`
 - `AppointmentWindow`, `AppointmentCalendarPanel`, `AppointmentListPanel`, `AppointmentCard`
 
-##### Implementation Steps
+#### Implementation Steps
 
 1. **Parse User Input**: `DeleteAppointmentCommandParser` checks for the validity of the appointment index.
 2. **Create Index Object**: An `Index` object is instantiated during `DeleteAppointmentCommandParser#parse(String)` and passed over to the `DeleteAppointmentCommand`.
@@ -552,19 +552,19 @@ The `deleteappointment` command deletes an existing `Appointment` from MedBook.
 
 <puml src="diagrams/DeleteAppointmentSequenceDiagram.puml"/>
 
-#### Viewing the Appointment Window
+### Viewing the Appointment Window
 
-##### Overview
+#### Overview
 
 The `viewappointment` command opens/focuses the `AppointmentsWindow`.
 
-##### Related Classes and Methods
+#### Related Classes and Methods
 
 - `ViewAppointmentCommand#execute(Model)`
 - `MainWindow#handleAppointments()`, `AppointmentsWindow#show()`, `AppointmentsWindow#fillInnerParts()`
 - `AppointmentWindow`, `AppointmentCalendarPanel`, `AppointmentListPanel`, `AppointmentCard`
 
-##### Implementation Steps
+#### Implementation Steps
 
 1. **Execute Command**: `ViewAppointmentCommand#execute(Model)` returns a new `CommandResult` with `showAppointments` set to `true`.
 2. **Show Appointments Window**: `MainWindow#handleAppointments()` calls the `AppointmentsWindow#show()` method which opens/focuses the `AppointmentsWindow`.
@@ -581,7 +581,7 @@ The `viewappointment` command opens/focuses the `AppointmentsWindow`.
   - _Pros_: This approach simplifies the data model by avoiding the need for a centralised appointment list.
   - _Cons_: Operations that require knowledge of all appointments, like finding available slots or generating reports, become more complex, as they need to aggregate data from each Person.
 
-### User Stories
+## User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 

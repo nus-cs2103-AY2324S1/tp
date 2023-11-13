@@ -66,7 +66,8 @@ We're here to make your experience as user-friendly as possible. Let's get start
 3. **Set Up Your Workspace**:
 
    - Choose a folder where you'd like to manage your patient data.
-     <box type="tip" seamless>
+
+<box type="tip" seamless>
 
 **Tip**: Create a new folder named `MedBook` for easy organization.
 
@@ -166,7 +167,7 @@ Here is a brief summary of the GUI components in MedBook.
 
     <box type="info" seamless>
 
-   **Info**: Upon starting, MedBook will display some sample data to help you get familiar.
+   **Note**: Upon starting, MedBook will display some sample data to help you get familiar.
 
     </box>
 
@@ -377,11 +378,11 @@ Examples:
 
 - `view 2` displays the medical records of the patient with the `PATIENTID` of **2**. The medical records will be displayed in the **Medical Record List** and patient information will be in the **Patient Being Viewed** section.
 
-    <box type="info" seamless>
+<box type="info" seamless>
 
-  **Info**: The PATIENTID in the Patient Being Viewed section will display **1**. If you wish to perform commands on the patient, use the PATIENTID displayed in the Patient List.
+**Note**: The `PATIENTID` in the **Patient Being Viewed** section will display **1**. If you wish to perform commands on the patient, use the `PATIENTID` displayed in the **Patient List**.
 
-    </box>
+</box>
 
 Screenshots:
 
@@ -713,8 +714,8 @@ MedBook data is saved automatically as a JSON file located in `[jar file locatio
 | **Delete Patient**         | `delete PATIENTID`<br> e.g., `delete 3`                                                                                                                                                             |
 | **Delete Medical Record**  | `deleterecord PATIENTID/RECORDID`<br> e.g., `deleterecord 2/1`                                                                                                                                      |
 | **Delete Appointment**     | `deleteappointment APPOINTMENTID`<br> e.g., `deleteappointment 1`                                                                                                                                   |
-| **Pin**                    | `pin PATIENTID`<br> e.g., `pin 2`                                                                                                                                                                   |
-| **Unpin**                  | `unpin PINNEDID`<br> e.g. `unpin 2`                                                                                                                                                                 |
+| **Pin Patient**            | `pin PATIENTID`<br> e.g., `pin 2`                                                                                                                                                                   |
+| **Unpin Patient**          | `unpin PINNEDID`<br> e.g. `unpin 2`                                                                                                                                                                 |
 | **Exit**                   | `exit`                                                                                                                                                                                              |
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
