@@ -38,13 +38,13 @@ public class ClearLogCommand extends UndoableCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // Store a copy of the current logBook before updating it
-        logBookBeforeClear = new LogBook(model.getLogBook());
-        model.addToHistory(this);
-
         if (model.getLogBook().getPersonList().isEmpty()) {
             throw new CommandException(MESSAGE_FAILURE);
         }
+
+        // Store a copy of the current logBook before updating it
+        logBookBeforeClear = new LogBook(model.getLogBook());
+        model.addToHistory(this);
 
         model.setLogBook(new LogBook());
         return new CommandResult(MESSAGE_SUCCESS);
