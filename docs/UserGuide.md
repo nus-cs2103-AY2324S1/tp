@@ -29,15 +29,11 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 
 --------------------------------------------------------------------------------------------------------------------
 <!-- * Table of Contents to be removed after PDF conversion -->
-<div style="page-break-after: always;"></div>
-
 ## Table of Contents
 
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
 
 ## Quick Start
 
@@ -69,7 +65,10 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 7. Refer to the [Command Summary](#command-summary) below for the summary of all commands.
 8. Refer to the [Glossary](#glossary) below for definitions of glossary terms.
 
+[Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
+
 ## Important Notes
 
 ### Basic Usage
@@ -87,8 +86,6 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 
 [Back to Table of Contents](#table-of-contents)
 
-<div style="page-break-after: always;"></div>
-
 ### Terminologies / Symbols
 * Flag: A flag is a word starting with a dash "-" that is used to identify the type of information that is being provided e.g. -name.
 
@@ -101,8 +98,6 @@ This box denotes command outputs.
 ```
 
 [Back to Table of Contents](#table-of-contents)
-
-<div style="page-break-after: always;"></div>
 
 ### Notes on Command Format
 <box type="info" seamless>
@@ -128,8 +123,6 @@ This box denotes command outputs.
 
 [Back to Table of Contents](#table-of-contents)
 
-<div style="page-break-after: always;"></div>
-
 ### Other Notes
 <box type="warning" seamless>
 
@@ -144,8 +137,6 @@ This box denotes command outputs.
 </box>
 
 [Back to Table of Contents](#table-of-contents)
-
-<div style="page-break-after: always;"></div>
 
 ### Parameter Summary
 
@@ -170,8 +161,6 @@ This box denotes command outputs.
 [Back to Table of Contents](#table-of-contents)
  
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -248,9 +237,6 @@ Failure outputs:
     * Error: Should spell `subjects` instead of `subject`.
 * Input: `list students subjects,phone`
     * Error: Use space separation `subjects phone` for keywords instead of comma separation.
-
-<div style="page-break-after: always;"></div>
-
 ```Invalid command format!
   list: Displays the specified list, which can be a STUDENTS list, SCHEDULE list or TASKS list. Default command without specified list displays the schedule list. When specifying STUDENTS list, optional parameters can be used to specify what student details to display.
   Parameters: [LIST] [KEYWORDS]...
@@ -261,7 +247,6 @@ Failure outputs:
 
 [Back to Table of Contents](#table-of-contents)
 <br>
-<div style="page-break-after: always;"></div>
 
 ### Show Feature
 
@@ -440,7 +425,7 @@ Usage: addLesson -name NAME (any number of unique [-subject|day|start|end VALUE]
  If you are currently displaying schedule list, you could use 'add' inplace of 'addLesson'. 
  Note you must provide a 'name' not already in the schedule and 'start' must be before 'end'.
 ```
-<div style="page-break-after: always;"></div>
+
 
 #### For Task:
 
@@ -477,7 +462,6 @@ Example1: addtask 1 do homework
 
 [Back to Table of Contents](#table-of-contents)
 <br>
-<div style="page-break-after: always;"></div>
 
 ### Delete Feature
 
@@ -521,7 +505,6 @@ deleteperson: Deletes the entry identified by the index number used in the displ
 Parameters: INDEX (must be a positive integer)
 Example: delete 1
  ```
-<div style="page-break-after: always;"></div>
 
 #### For Schedule:
 
@@ -610,7 +593,6 @@ Please use show lessonIndex before deleting task!
 
 [Back to Table of Contents](#table-of-contents)
 <br>
-<div style="page-break-after: always;"></div>
 
 ### Edit Feature
 
@@ -675,7 +657,7 @@ Format: `editLesson [INDEX] [-name NAME] [-start TIME] [-end TIME] [-day DATE] [
 * The name of the lesson after editing cannot be the same (case-insensitive) as other existing lessons in the schedule list.
 * The start time of the lesson after editing cannot be after the end time of the lesson, if the end time is specified, and vice versa.
 * The lesson cannot clash (same day, start and end all specified and are overlapping) in time with other lessons  in the schedule list.
-* Please note that unlike the `addLesson` command, the `editLesson` command's "-subject" flag only accepts one subject, not multiple subjects (parameter is `SUBJECT`, not `SUBJECTS`).
+* Please note that unlike the `addLesson` command, the `editLesson` command's "-subject" flag only accepts one subject, not multiple subjects (parameter is SUBJECT, not SUBJECTS).
 * Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
@@ -726,7 +708,6 @@ Name clash detected.
 Edited: Lesson lesson2 from 12:30 PM to 2:30 PM on 20-11-2023 for MATHEMATICS
 Clashes with: Lesson lesson2 from 1:30 PM to 3:30 PM on 21-11-2023 for PHYSICS.
 ```
-<div style="page-break-after: always;"></div>
 
 #### For Task:
 
@@ -734,7 +715,6 @@ Editing of 💼 ___TASKS list___ is not supported at this time!
 
 [Back to Table of Contents](#table-of-contents)
 <br>
-<div style="page-break-after: always;"></div>
 
 ### Find Feature
 
@@ -808,7 +788,6 @@ Unknown command
 
 [Back to Table of Contents](#table-of-contents)
 <br>
-<div style="page-break-after: always;"></div>
 
 ### Filter Feature
 
@@ -884,7 +863,10 @@ Failure outputs:
 * Input: `filter -before 2022/10/10 -after 2022/01/01`
     * Error: Both the `-before` and `-after` flags are specified. Use only one of `-before`, `-after`, and `-on` in the same command.
 ```
-TODO
+Invalid filter format: You can only use one of -before, -on, -after at a time. 
+Usage: filter -(at least one of unique [-name|subject|before|on|after|remark VALUE]). 
+For example, filter -before 2023/10/10 -subject physics
+Note you should only use one of -before, -on, -after at a time.
 ```
 
 * Input: `filter -on 2/2/2`
@@ -896,10 +878,9 @@ Usage: filter -(at least one of unique [-name|subject|before|on|after VALUE]).
 For example, filter -before 2023/10/10 -subject physics
 Note you should only use one of -before, -on, -after at a time.
 ```
-<div style="page-break-after: always;"></div>
 
 #### For Task:
-Filtering is not supported in the Task List at this time!
+Filtering is not supported in the 💼 ___TASKS list___ at this time!
 
 #### General Examples
 
@@ -915,7 +896,6 @@ Note you should only use one of -before, -on, -after at a time.
 
 [Back to Table of Contents](#table-of-contents)
 <br>
-<div style="page-break-after: always;"></div>
 
 ### Link Feature
 
@@ -956,8 +936,6 @@ No such student with name alexf found
 
 **Tips:** `LESSON_NAME` is case-insensitive. This means that "CS2103T Lab" and "cs2103T lab" are treated as the same lesson.
 </box>     
-
-<div style="page-break-after: always;"></div>
 
 #### For Student:
 <box type="info" seamless>
@@ -1010,7 +988,6 @@ Note: This command is only available when a student is shown
 ```
 No such lesson
 ```
-<div style="page-break-after: always;"></div>
 
 #### For Schedule:
 <box type="info" seamless>
@@ -1061,14 +1038,12 @@ Note: This command is only available when a lesson is shown
 ```
 No such student with name Bernice Yong found
 ```
-<div style="page-break-after: always;"></div>
 
 #### For Task:
 This feature is not used for tasks!
 
 [Back to Table of Contents](#table-of-contents)
 <br>
-<div style="page-break-after: always;"></div>
 
 ### Navigate Feature
 
@@ -1112,7 +1087,6 @@ No student is currently displayed
 ```
 This student has no linked lessons
 ```
-<div style="page-break-after: always;"></div>
 
 #### For Schedule:
 <box type="info" seamless>
@@ -1168,7 +1142,6 @@ This feature is not used for tasks!
 
 [Back to Table of Contents](#table-of-contents)
 <br>
-<div style="page-break-after: always;"></div>
 
 ### Command History Feature
 
@@ -1203,7 +1176,6 @@ Example usages:
 
 [Back to Table of Contents](#table-of-contents)
 <br>
-<div style="page-break-after: always;"></div>
 
 ### Clearing Data
 
@@ -1278,8 +1250,6 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
 ## Command Summary
 
 | Action       | List                                    | Format                                                                                                                                    | Examples                                                                                                       | Remarks                                                                    |
@@ -1304,8 +1274,6 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 [Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
 
 ## Glossary
 
