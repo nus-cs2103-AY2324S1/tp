@@ -1204,5 +1204,14 @@ testers are expected to do more *exploratory* testing.
 1. Test cases
 
 
-## **Appendix: Planned Enhancements**   
+## **Appendix: Planned Enhancements**
+### Allowing for deleting of tags
+- **Relevant feature:** editing of students `editPerson`
+- **Current issues:** Once a tag is added to a student, the `editPerson` command prevents you from deleting the tag. This is because by specifying the flag `-tag`, the parameter provided as the tag must be a non-empty string.
+- **Proposed new behaviour:** The `-tag` flag can be made to accept an empty string. 
+  - Input: `editPerson 1 -tag`
+  - Expected output: The person at index 1 should have no more tags set.
+
+### Allowing for unlinking of students from lessons and vice versa
+- **Relevant feature:** linking `linkTo`, `link`
 
