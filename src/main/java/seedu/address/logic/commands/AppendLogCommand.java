@@ -7,6 +7,8 @@ import seedu.address.model.LogBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
+import java.util.Optional;
+
 /**
  * Appends the results of a FindCommand to the logbook.
  */
@@ -56,9 +58,16 @@ public class AppendLogCommand extends UndoableCommand {
         String duplicateClause = "";
         for (Person person : model.getFoundPersonsList()) {
             if (model.getLogBook().hasPerson(person)) {
-                hasDupes = true;
-                duplicateClause += "\n  " + person.getName() + ", ID: " + person.getId();
-                continue;
+                Optional<Person> personOptional =
+                        CommandUtil.findPersonByIdentifier(person.getName(), person.getId(), model.getLoggedFilteredPersonList());
+                if (personOptional.isPresent() && personOptional.get().equals(person)) {
+                    hasDupes = true;
+                    duplicateClause += "\n  " + person.getName() + ", ID: " + person.getId();
+                    continue;
+                } else {
+                    Person existingPerson = personOptional.orElse(person);
+                    model.getLogBook().setPerson(existingPerson, person);
+                }
             }
             model.getLogBook().addPerson(person);
         }
@@ -66,7 +75,6 @@ public class AppendLogCommand extends UndoableCommand {
         return hasDupes
                 ? new CommandResult(String.format(MESSAGE_DUPLICATES, duplicateClause))
                 : new CommandResult(MESSAGE_SUCCESS);
-
     }
 
     /**
