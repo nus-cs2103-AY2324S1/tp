@@ -620,8 +620,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | in-campus resident               | add campus specific information to my contacts, in particular, a tag called RA (Residential Assistant) and SOS (Security Officer)   | quickly reach out to them when required.                        |
 | `* * *`  | on-campus student                | quickly list the emergency contacts I have previously registered                                                                    | contact them in an emergency.                                   |
 
-*{More to be added}*
-
 ### Use cases
 
 (For all use cases below, the **System** is `CampusConnect` and the **Actor** is a `NUS student who stays in campus`, unless specified otherwise)
@@ -1005,3 +1003,35 @@ testers are expected to do more *exploratory* testing.
     4. **Test case:** `find a/"John street, block 123, #01-01"`<br>
        **Expected:** CampusConnect will display a list of `Person` with address `John street, block 123, #01-01`.
 
+## **Appendix: Effort**
+
+### Difficulty Level
+CampusConnect is an advanced extension of the foundational AB3, enriched with sophisticated new features and a more advanced UI. These enhancements are complex and significantly expand the application's functionality beyond the original AB3.
+
+### Challenges faced
+Our project encountered numerous challenges:
+
+#### Extending Base AB3 Functionality
+- **Understanding AB3's Structure**: Implementing features like **addalt** necessitated a deep dive into the AB3 codebase to modify classes such as `Person.java`. AB3's extensive codebase posed a significant learning curve.
+- **Mastering JavaFX**: Enhancements like adding tags to denote fields required us to learn JavaFX and CSS, technologies that were new to us.
+
+#### Adding New Functionality to AB3
+- **Notification System**: We developed a comprehensive notification system for event reminders, integrating it with the existing AB3 architecture.
+- **Profile Photo Feature**: Introducing profile photos meant having to figure out what was the best way to deal with user data that was not text-based and unable to be stored within the already existing `addressbook.json`.
+- **Notes Feature**: Implementing the notes feature involved creating new UI interface elements such as `NotesWindow.java`, as well as figuring out how to modify already-existing UI elements like `PersonCard.java`.
+- **Payments Feature**: The development of the payments system required us to modify large portions of pre-existing code. Additionally, the various risk-control checks to ensure the system was robust and secure were challenging to implement.
+- **Search Functionality Expansion**: The `find` function was enhanced to support complex, fully expressive queries. This involved developing a custom tokenizer, parser and expression evaluator, which was a significant undertaking.
+- **Testing Coverage Expansion with TestFX**: Expanding testing coverage to include UI testing required the use of TestFX, which was a new framework that we had to pick up and learn.
+
+### Achievements
+- **UI Enhancements**: The UI of CampusConnect has been improved beyond the AB3 baseline, improving user experience. For instance, fields are now demarcated with a tag, and the application now supports profile photos.
+- **New Systems**: The application now features a range of new systems, including a generalized notification system and a payment tracking system. This added a lot of functionality which the base AB3 lacked, and which was useful for users of CampusConnect.
+- **Functionality Expansion**: Numerous features of the base AB3 have been extended, resulting in a richer contact book application which is able to store more information about contacts such as their Telegram, secondary email and LinkedIn profiles.
+- **Search Capabilities Enhancement**: The search functionality has been augmented to accommodate complex, fully expressive searches. This greatly improves the user experience as it allows users to quickly find the contacts they are looking for.
+- **Test Coverage**: We maintained rigorous test coverage throughout our development process, only allowing PRs to be merged if they demonstrated sufficient test coverage. Additionally, we expanded our testing methodology to include UI testing, which was not present in the base AB3.
+
+### Efficiency through Reuse
+- **Extending AB3 Classes**: We extended the `Person` class to incorporate additional data fields crucial for the `addalt` feature.
+- **DateTime Libraries**: We utilized existing DateTime libraries for efficient and correct parsing of time-related data, which improved our development speed as it meant we did not have to write our own date-time parsing code.
+
+Overall, significant effort was spent in firstly evaluating our user requirements, and then coming up with ways in which we could extend AB3 to better suit their needs. The implementation of these features often required us to extend AB3 well beyond its original capabilities, and in some cases write entirely new systems in order to support them. Development work was carried out without sacrificing code quality, and we maintained a high standard of testing throughout the process, only merging PRs if they demonstrated sufficient test coverage.
