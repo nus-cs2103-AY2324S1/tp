@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BOOKING_PERIOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -29,12 +30,6 @@ public class EditCommandParser implements Parser<EditCommand> {
                         PREFIX_EMAIL, PREFIX_BOOKING_PERIOD, PREFIX_REMARK);
 
         Index index;
-
-        try {
-            index = ParserUtil.parseEditIndex(argMultimap.getPreamble());
-        } catch (EditCommandParseException ee) {
-            throw new EditCommandParseException();
-        }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ROOM, PREFIX_NAME, PREFIX_PHONE,
                 PREFIX_EMAIL, PREFIX_BOOKING_PERIOD, PREFIX_REMARK);
@@ -68,7 +63,13 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         if (!editRoomDescriptor.isAnyFieldEdited()) {
-            throw new EditCommandParseException(EditCommand.MESSAGE_NOT_EDITED);
+        throw new EditCommandParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        }
+
+        try {
+            index = ParserUtil.parseEditIndex(argMultimap.getPreamble());
+        } catch (EditCommandParseException ee) {
+            throw new EditCommandParseException();
         }
 
         return new EditCommand(index, editRoomDescriptor);

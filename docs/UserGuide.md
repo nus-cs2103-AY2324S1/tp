@@ -55,15 +55,21 @@ CheckMate is a **desktop app for streamlining the process of room bookings by ho
 7. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
+    * `help` : Access the help page.
+   
     * `list` : Lists all bookings.
 
     * `add r/1 d/2023-11-03 08:00 to 2023-11-04 11:00 n/Aikenot Dueet p/98765432 e/aikenotdueet@gmail.com` : Adds a booking for the room number `1` to the Bookings Book.
 
+    * `edit 1 p/91234567 e/johndoe@gmail.com`: Edits the first booking to specified details.
+   
+    * `find 1 Aikenot`: Finds bookings which contain room number 1 and the name Aikenot.
+   
     * `delete 3` : Deletes the 3rd booking shown in the current list.
 
     * `clear` : Deletes all booking.
 
-    * `undo` : Undoes the most recent deletion
+    * `undo` : Undoes the most recent deletion.
 
     * `exit` : Exits CheckMate and closes the application.
 
@@ -158,7 +164,7 @@ Format: `list`
 
 Edits an existing booking in the bookings book.
 
-Format: `edit INDEX [r/ROOM] [d/BOOKING_PERIOD] [n/NAME] [p/PHONE] [e/EMAIL]`
+Format: `edit INDEX [r/ROOM] [d/BOOKING_PERIOD] [n/NAME] [p/PHONE] [e/EMAIL] [rk/REMARK]`
 
 ![EditBooking.png](images%2FEditBooking.png)
 
@@ -268,7 +274,7 @@ Prefix completions only works with `add` and `edit` command and does not validat
 </div>
 </details>
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 <details open>
 <summary><strong>FAQ</strong></summary>
