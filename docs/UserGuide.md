@@ -116,16 +116,6 @@ Throughout this guide, you will see different text styles that are used to highl
 
   4. **Hassle-Free Data Management**:
       - CoordiMate automatically saves your data on every change, so you never have to worry about losing your data.
-      - When CoordiMate starts, your existing data is automatically loaded in, allowing you to pick up where you left off.
-      - For advanced users, CoordiMate offers you complete data control by saving your data in a human-readable format. <br>Locate the data file at `[JAR file location]/data/addressbook.json` to edit CoordiMate's data directly!
-
-{% include admonition.html type="warning" title="Warning" body="
-
-If your changes to the data file makes its format invalid, CoordiMate will not be able to load the data file, resulting in the contact and task lists being empty. <br>
-
-Always make a backup before you edit!
-
-" %}
 
 ---
 
@@ -1445,6 +1435,28 @@ e
 <h4>Example:</h4>
 
 - `exit`
+
+<br><br>
+
+---
+
+<div style="page-break-after: always;"></div>
+
+## Editing CoordiMate's Data
+
+CoordiMate's data is stored on your computer as a file located at `[JAR file location]/data/addressbook.json`.
+
+Advanced users can edit this file directly to make changes to the data stored by CoordiMate.
+
+After editing the data file, you can restart CoordiMate to see the changes reflected in the application.
+
+{% include admonition.html type="warning" title="Warning" body="
+
+If your changes to the data file makes its format invalid, CoordiMate will not be able to load the data file, resulting in the contact and task lists being empty. <br>
+
+Always make a backup before you edit!
+
+" %}
 
 <br><br>
 
