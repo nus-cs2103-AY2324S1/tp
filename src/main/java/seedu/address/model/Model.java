@@ -5,14 +5,17 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.card.Card;
+import seedu.address.model.exceptions.RandomIndexNotInitialisedException;
+import seedu.address.model.goal.Goal;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Card> PREDICATE_SHOW_ALL_CARDS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -35,53 +38,80 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' deck file path.
      */
-    Path getAddressBookFilePath();
+    Path getDeckFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' deck file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setDeckFilePath(Path cardFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Returns the Deck
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
-
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyDeck getDeck();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns the Deck size
      */
-    boolean hasPerson(Person person);
+    int getDeckSize();
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Returns true if a Card with the same identity as {@code person} exists in the Deck.
      */
-    void deletePerson(Person target);
+    boolean hasCard(Card card);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Replaces the given Card {@code target} with {@code editedCard}.
+     * {@code target} must exist in the Deck.
+     * The card identity of {@code editedCard} must not be the same as another existing card in the Deck.
      */
-    void addPerson(Person person);
+    void setCard(Card target, Card editedCard);
+
+    /** Returns an unmodifiable view of the filtered Card list */
+    ObservableList<Card> getFilteredCardList();
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
-     */
-    void setPerson(Person target, Person editedPerson);
-
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
-
-    /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered Card list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredCardList(Predicate<Card> predicate);
+    /**
+     * Adds the given Card.
+     * {@code card} must not already exist in the Deck.
+     */
+    void addCard(Card card);
+    /**
+     * Deletes the given Card.
+     * {@code card} must exist in the Deck.
+     */
+    void deleteCard(Card card);
+
+    /**
+     * Replaces Deck data with the data in {@code deck}.
+     */
+    public void setDeck(ReadOnlyDeck deck);
+
+    /**
+     * Saves a random index based on the current filtered deck list.
+     */
+    void setRandomIndex(Index randomIndex);
+
+    /**
+     * Retrieves the saved random index based on the current filtered deck list.
+     */
+    Index getRandomIndex() throws RandomIndexNotInitialisedException;
+
+    /**
+     * Reset the random index so that the random index is not preserved over things like filtering, searching, etc.
+     */
+    void resetRandomIndex();
+
+    /**
+     * Sets new target for goal.
+     */
+    public void setGoal(int target);
+
+    Goal getGoal();
 }

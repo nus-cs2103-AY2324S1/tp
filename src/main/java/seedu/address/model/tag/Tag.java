@@ -4,13 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Tag in the address book.
+ * Represents a Tag in the Deck.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric and can include spaces";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum} ]+";
 
     public final String tagName;
 
@@ -43,6 +43,7 @@ public class Tag {
             return false;
         }
 
+        // compare String equality
         Tag otherTag = (Tag) other;
         return tagName.equals(otherTag.tagName);
     }
@@ -58,5 +59,4 @@ public class Tag {
     public String toString() {
         return '[' + tagName + ']';
     }
-
 }

@@ -1,0 +1,64 @@
+@font-face {
+    font-family: "Poppins Medium";
+    src: url('@resources/fonts/Poppins/Poppins-Medium.ttf');
+}
+
+@font-face {
+    font-family: "Poppins Regular";
+    src: url('@resources/fonts/Poppins/Poppins-Regular.ttf');
+}
+
+@font-face {
+    font-family: "Poppins SemiBold";
+    src: url('@resources/fonts/Poppins/Poppins-SemiBold.ttf');
+}
+
+.container {
+    -fx-background-color: "#34403A";
+}
+
+.logo-text {
+    -fx-font-size: 20px;
+    -fx-font-family: "Poppins SemiBold";
+    -fx-text-fill: "#FCFFFC";
+}
+
+.heading-text {
+    -fx-font-size: 14px;
+    -fx-font-family: "Poppins Medium";
+    -fx-text-fill: "#FCFFFC";
+}
+
+.deck {
+    -fx-background-color: "#FCFFFC";
+    -fx-background-radius: 5;
+}
+
+.deck-text {
+    -fx-font-size: 12px;
+    -fx-font-family: "Poppins Regular";
+    -fx-text-fill: "#34403A";
+}
+
+.button-primary {
+    -fx-font-size: 12px;
+    -fx-font-family: "Poppins SemiBold";
+    -fx-background-color: "#6B9AC4";
+    -fx-text-fill: "#FCFFFC";
+}
+
+.flashcard {
+    -fx-background-color: "#D3EFBD";
+    -fx-background-radius: 5;
+}
+
+.flashcard-text {
+    -fx-font-size: 20px;
+    -fx-font-family: "Poppins Regular";
+    -fx-text-fill: "#34403A";
+}
+
+.command-text {
+    -fx-font-size: 12px;
+    -fx-font-family: "Poppins Regular";
+}

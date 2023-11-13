@@ -140,4 +140,11 @@ public class StringUtilTest {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
     }
 
+    @Test
+    public void isR() {
+        assertTrue(StringUtil.isR("r"));
+        assertFalse(StringUtil.isR("rubbish"));
+        assertFalse(StringUtil.isR("   r       "));
+    }
+
 }

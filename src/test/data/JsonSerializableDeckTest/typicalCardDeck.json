@@ -1,0 +1,50 @@
+{
+  "_comment": "Deck save file which contains the same Card values as in TypicalCards#getTypicalDeck()",
+  "cards": [
+    {
+      "question": "Low Priority?",
+      "answer": "True",
+      "difficulty": "easy",
+      "tags": [],
+      "solveCount" : "1",
+      "next-practice-date": "+999999999-12-31T23:59:59.999999999",
+      "hint": "hint"
+    },
+    {
+      "question": "R-Format instruction opcode",
+      "answer": "0",
+      "difficulty": "easy",
+      "tags": [],
+      "next-practice-date": "2018-11-03T12:45:30",
+      "solveCount" : "1",
+      "hint": "hint"
+    },
+    {
+      "question": "What is the language used for this mod?",
+      "answer": "Source",
+      "difficulty": "easy",
+      "tags": [],
+      "solveCount" : "1",
+      "next-practice-date": "2018-11-03T12:45:30",
+      "hint": "hint"
+    },
+    {
+      "question": "Name the 3 relations",
+      "answer": "Reflexive, Symmetric, Transitive",
+      "difficulty": "easy",
+      "tags": [],
+      "solveCount" : "1",
+      "next-practice-date": "2018-11-03T12:45:30",
+      "hint": "hint"
+    },
+    {
+      "question": "High Priority?",
+      "answer": "True",
+      "difficulty": "easy",
+      "tags": [],
+      "solveCount" : "1",
+      "next-practice-date": "-999999999-01-01T00:00:00",
+      "hint": "hint"
+    }
+  ]
+}

@@ -11,33 +11,40 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.card.Card;
+import seedu.address.model.exceptions.RandomIndexNotInitialisedException;
+import seedu.address.model.goal.Goal;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the Deck data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final Deck deck;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Card> filteredCards;
+    private final Goal goal;
+
+    private Index randomIndex;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given Deck and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyDeck deck, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(deck, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with Deck: " + deck + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.deck = new Deck(deck);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredCards = new FilteredList<>(this.deck.getCardList());
+        this.goal = new Goal(this.deck);
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new Deck(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -52,7 +59,6 @@ public class ModelManager implements Model {
     public ReadOnlyUserPrefs getUserPrefs() {
         return userPrefs;
     }
-
     @Override
     public GuiSettings getGuiSettings() {
         return userPrefs.getGuiSettings();
@@ -65,67 +71,71 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getDeckFilePath() {
+        return userPrefs.getDeckFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
+    public void setDeckFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+        userPrefs.setDeckFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== Deck ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
-
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public void setDeck(ReadOnlyDeck deck) {
+        this.deck.resetData(deck);
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public ReadOnlyDeck getDeck() {
+        return deck;
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public int getDeckSize() {
+        return deck.getNumberOfCards();
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public boolean hasCard(Card card) {
+        requireNonNull(card);
+        return deck.hasCard(card);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
+    public void deleteCard(Card target) {
+        deck.removeCard(target);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public void addCard(Card card) {
+        deck.addCard(card);
+    }
+
+    @Override
+    public void setCard(Card target, Card editedCard) {
+        requireAllNonNull(target, editedCard);
+
+        deck.setCard(target, editedCard);
+    }
+
+    //=========== Filtered Card List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Card} backed by the internal list of
+     * {@code versionedDeck}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Card> getFilteredCardList() {
+        return filteredCards;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredCardList(Predicate<Card> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredCards.setPredicate(predicate);
     }
 
     @Override
@@ -139,10 +149,41 @@ public class ModelManager implements Model {
             return false;
         }
 
+        // compare Deck, UserPrefs and FilteredList equality
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return deck.equals(otherModelManager.deck)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredCards.equals(otherModelManager.filteredCards);
+    }
+
+    //=========== Random Index =============================================================
+    @Override
+    public void setRandomIndex(Index randomIndex) {
+        this.randomIndex = randomIndex;
+    }
+
+    @Override
+    public Index getRandomIndex() throws RandomIndexNotInitialisedException {
+        if (this.randomIndex == null) {
+            throw new RandomIndexNotInitialisedException();
+        }
+        return this.randomIndex;
+    }
+
+    @Override
+    public void resetRandomIndex() {
+        this.randomIndex = null;
+    }
+    //=========== Goal ==================================================================================
+
+    @Override
+    public void setGoal(int target) {
+        this.goal.setTarget(target);
+    }
+
+    @Override
+    public Goal getGoal() {
+        return goal;
     }
 
 }

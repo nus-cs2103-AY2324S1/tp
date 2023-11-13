@@ -1,0 +1,59 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":DeckParser" as DeckParser LOGIC_COLOR
+participant "r:RandomCommand" as RandomCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("random")
+activate LogicManager
+
+LogicManager -> DeckParser : parseCommand("random")
+activate DeckParser
+
+create RandomCommand
+DeckParser -> RandomCommand
+activate RandomCommand
+RandomCommand --> DeckParser : r
+deactivate RandomCommand
+
+DeckParser --> LogicManager : r
+deactivate DeckParser
+
+LogicManager -> RandomCommand : execute()
+activate RandomCommand
+
+RandomCommand -> Model : getFilteredCardList()
+activate Model
+Model --> RandomCommand
+deactivate Model
+
+RandomCommand -> RandomCommand : generateRandomIndex()
+
+RandomCommand -> Model : setRandomIndex()
+activate Model
+
+Model --> RandomCommand
+deactivate Model
+
+create CommandResult
+RandomCommand -> CommandResult
+activate CommandResult
+CommandResult --> RandomCommand
+deactivate CommandResult
+
+RandomCommand --> LogicManager : result
+deactivate RandomCommand
+RandomCommand -[hidden]-> LogicManager : result
+destroy RandomCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

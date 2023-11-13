@@ -36,6 +36,7 @@ public class Prefix {
             return false;
         }
 
+        // compare String equality
         Prefix otherPrefix = (Prefix) other;
         return prefix.equals(otherPrefix.prefix);
     }
