@@ -155,14 +155,14 @@ If it passes these checks, the person is added into the system.
 
 `AddCommand` takes in the following fields:
 * **Name (Compulsory field)**: String composed of character between A-Z and a-z.
-* **Phone number (Compulsory field)**: Any number.
+* **Phone number (Compulsory field)**: Any number at least 3 digits long.
+* **Email (Compulsory field)** String with restrictions in characters (XXXXXXXX@emaildomain)
 * **Address (Compulsory field)**: String without restriction in characters.
-* **Email (Compulsory field)** String with restrictions in characters (XXXXXXXX@emaildomain.com)
 * **Subject (Compulsory field)**: String without restriction in characters.
-* **Day (Compulsory field)**: String with restrictions in characters, non-case sensitive (Mon/Tue/Wed/Thu/Fri/Sat/Sun).
+* **Day (Compulsory field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).
 * **Begin (Compulsory field)**: String with restrictions (HHMM).
 * **End (Compulsory field)**: String with restrictions (HHMM).
-* **PayRate (Compulsory field)**: String with restrictions in characters, only numbers allowed (no negative numbers).
+* **PayRate (Compulsory field)**: String with restrictions in characters, only numbers allowed (no negative numbers)
 
 The following sequence diagram shows how the add command works.
 
@@ -424,17 +424,19 @@ The following sequence diagram shows how unpaidAll command works:
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​                                     | So that I can…​                                                        |
-| ------ |---------|--------------------------------------------------|------------------------------------------------------------------------|
-| `* * *` | tutor   | view a list of all tutees                        |                                                                        |
-| `* *`  | tutor   | view a list tutees on a specified day            | so that I can be reminded if I have any classes on that particular day |
-| `* * *` | tutor   | view the specific details of a single tutee      |                                                                        |
-| `* * *` | tutor   | add a new tutee                                  |                                                                        |
-| `* * *` | tutor   | edit their details                               | account for changes in their information e.g. change in address        |
-| `* *`  | tutor   | remove tutees from the list                      | keep track of tutees that I have stopped teaching                      |
-| `* *`  | tutor   | mark students that have already paid             | keep track of students' payment statuses                               |
-| `* *`  | tutor   | check all students who haven't paid              | easily remind students who haven't paid                                |
-| `* *`  | tutor   | undo and redo commands I made in the application | easily revert any mistakes                                             |
+
+| Priority | As a …​                                        | I want to …​                                    | So that I can…​                                                        |
+| ------ |------------------------------------------------|-------------------------------------------------|------------------------------------------------------------------------|
+| `* * *` | tutor                                          | view a list of all tutees                       |                                                                        |
+| `* *`  | tutor                                          | view a list tutees on a specified day           | so that I can be reminded if I have any classes on that particular day |
+| `* * *` | tutor                                          | view the specific details of a single tutee     |                                                                        |
+| `* * *` | tutor                                          | add a new tutee                                 |                                                                        |
+| `* * *` | tutor                                          | edit their details                              | account for changes in their information e.g. change in address        |
+| `* *`  | tutor                                          | remove tutees from the list                     | keep track of tutees that I have stopped teaching                      |
+| `* *`  | tutor                                          | mark students that have already paid            | keep track of students' payment statuses                               |
+| `* *`  | tutor                                          | check all students who haven't paid             | easily remind students who haven't paid                                |
+| `* *`  | tutor                                          | undo and redo commands I made in the application | easily revert any mistakes                                             |
+| `* *`  | tutor                                          | calculate my total monthly revnue               | better financially plan for my tutoring business                       |
 
 *{More to be added}*
 
@@ -562,6 +564,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+
 **Use case: UC07 - Finding free time**
 
 **MSS**
@@ -571,6 +574,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 - 2a. The user does not have any free slots available.
   - 2a1. System informs that the user has no available timeslots.
+
+**Use case: UC08 - Get monthly revenue**
+
+**MSS**
+
+1. User requests for monthly revenue.
+2. User receives monthly revenue figure.
+
+   Use case ends.
+
 
 ### Non-Functional Requirements
 
@@ -665,3 +678,9 @@ Idea: Modify the paid command parser to accept a list of person identifiers (e.g
 Reason: Introduce a scheduling feature within the unpaid command to set future unpaid statuses for individuals. This would be beneficial for scenarios where payments should automatically lapse after a set period.
 
 Idea: Add a scheduling mechanism within the command execution to mark individuals as unpaid after a specified future date or duration.
+
+### Maximum PayRate
+
+Reason: PayRate that are extremely high may not be displayed properly by GUI and are unlikely to be realistic PayRates per hour anyway.
+
+Idea: Modify the VALIDATION_REGEX of PayRate such that it only accepts values up to 9999.99.

@@ -174,7 +174,8 @@ Shows a message that helps redirects you to the user guide.
 * **Address (Compulsory field)**: String without restriction in characters.
 * **Email (Compulsory field)** String with restrictions in characters (XXXXXXXX@emaildomain).
 * **Subject (Compulsory field)**: String without restriction in characters.
-* **Day (Compulsory field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).* **Begin (Compulsory field)**: String with restrictions (HHMM).
+* **Day (Compulsory field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).
+* **Begin (Compulsory field)**: String with restrictions (HHMM).
 * **End (Compulsory field)**: String with restrictions (HHMM).
 * **PayRate (Compulsory field)**: String with restrictions in characters, only numbers allowed (no negative numbers).
 
@@ -189,7 +190,7 @@ Shows a message that helps redirects you to the user guide.
 * **Invalid Email**: Emails should be of the format local-part@domain and adhere to the following constraints:  
   1\. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.  
   2\. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
-* **Empty Address**: Addresses can take any values, and it should not be blank
+* **Invalid Address**: Addresses can take any values, and it should not be blank
 * **Invalid Day**: Days should be written using their full names or their first three letters, and it should not be blank
 * **Invalid Begin**: Begin has a format of HHMM
 * **Invalid End**: That is not a valid time format. End has a format of HHMM
@@ -277,10 +278,11 @@ and it should not be blank
 * **Index (Compulsory Field)**: Numbers between 1 to the number of people inside the list.
 * **Name (Optional field)**: String composed of character between A-Z and a-z.
 * **Phone number (Optional field)**: 8 digit number.
-* **Address (Optional field)**: String without restriction in characters.
 * **Email (Optional field)** String with restrictions in characters (XXXXXXXX@emaildomain)
+* **Address (Optional field)**: String without restriction in characters.
 * **Subject (Optional field)**: String without restriction in characters.
-* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).* **Begin (Optional field)**: String with restrictions (HHMM).
+* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).
+* **Begin (Optional field)**: String with restrictions (HHMM).
 * **End (Optional field)**: String with restrictions (HHMM).
 * **PayRate (Optional field)** String with restrictions in characters, only numbers allowed (no negative numbers).
 
@@ -294,7 +296,7 @@ and it should not be blank
 * **Invalid Email**: Emails should be of the format local-part@domain and adhere to the following constraints:  
   1\. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.  
   2\. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
-* **Empty Address**: Addresses can take any values, and it should not be blank
+* **Invalid Address**: Addresses can take any values, and it should not be blank
 * **Invalid Day**: Days should be written using their full names or their first three letters, and it should not be blank
 * **Invalid Begin**: Begin has a format of HHMM
 * **Invalid End**: That is not a valid time format. End has a format of HHMM
@@ -429,11 +431,14 @@ Format: `unpaidAll`
 
 ### Calculating Monthly Revenue: `rev`
 
-**Description**: Displays the total revenue monthly calculated from all tutees.
+**Description**: Displays the total monthly revenue calculated from all tutees.
 
 **Format**: `rev`
 
-**Expected Output**: Successfully calculated!! Total monthly revenue: *$monthlyrevenue*
+**Expected Output**: Successfully calculated <br>
+&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+Total monthly revenue: *$monthlyrevenue*
 
 ### Exiting the program : `exit`
 
