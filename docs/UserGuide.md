@@ -61,7 +61,7 @@ or refer to [Common Mistakes](#6-common-mistakes) for common errors our users ma
 2. Download the latest ClubMembersContact.jar from [here](https://github.com/AY2324S1-CS2103T-W15-3/tp/releases).
 
 3. Locate your jar file in your computer and double-click on it to run the application. Alternatively, you can run the
-   jar file from the command line using the java -jar ClubMembersContact.jar command.
+   jar file from the command line using the `java -jar` ClubMembersContact.jar command.
 
 4. A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
@@ -686,19 +686,25 @@ There will be no prompt to confirm this action.
 
 ## 5 Field Constraints Summary
 
-### 5.1 `NAME` format
+### 5.1 `INDEX` format
+
+- Index:
+  - Only positive integers are allowed.
+  - Integer should be within the range of the list shown.
+
+### 5.2 `NAME` format
 
 - Name:
   - Only alphabetical characters, spaces, @, (), / are allowed.
   - First character of the name should not be a space.
 
-### 5.2 `PHONE_NUMBER` format
+### 5.3 `PHONE_NUMBER` format
 
 - Phone number:
   - Only numbers are allowed.
   - At least 3 digits are required.
 
-### 5.3 `EMAIL` format
+### 5.4 `EMAIL` format
 
 `EMAIL` field should be of the format **local-part@domain**.
 
@@ -711,12 +717,24 @@ There will be no prompt to confirm this action.
     - Each domain label must start and end with an alphanumerical character.
     - The last domain label must contain at least 2 characters.
 
-### 5.4 `TELEGRAM_HANDLE` format
+### 5.5 `TELEGRAM_HANDLE` format
 
 - Handle:
     - Must start with the "@" symbol.
     - Only alphanumerical characters and underscore "_" are allowed.
     - Must be between 5 and 32 characters long (inclusive).
+
+### 5.6 `TAG` format
+
+- Tag:
+  - Only alphanumeric characters are allowed. 
+  - Minimum of 1 and maximum of 15 characters are allowed. 
+  - Spaces are not allowed.
+
+### 5.7 `INTERVIEW_TIME` format
+- Interview Time:
+  - Only dates in the format of “DD/MM/YYYY HHmm” are allowed. 
+  - To remove an interview time from an applicant, ‘cancel’ is also allowed.
 
 ## 5.5 Examples of fields
 
