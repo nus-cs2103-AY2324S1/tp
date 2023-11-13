@@ -51,9 +51,8 @@ Given below are my contributions to the project.
   * Updated the GUI [Color Scheme, Orientation, Icons, Naming] to make it match the purpose of our application. 
       - Took inspiration from [here](https://github.com/AY1920S2-CS2103T-F09-3/main) for showing the logo beside the command result display.
       - Disabled the on click feature on dates due to a flickering bug using the code from [here](https://stackoverflow.com/questions/20621752/javafx-make-listview-not-selectable-via-mouse)
-      - Improved the presets bar to make it more user friendly.
+      - Improved the presets bar to make it more user-friendly.
   * Conducted Intensive Testing on the application to ensure that the application is robust and bug free.
-      - Added more UI tests to ensure UI is bug free.
       - Added tests to ensure user's preferences are being stored correctly.
       - Added tests to ensure user's gender and age are accepting only valid input.
       - Applied the equivalence partitioning and boundary value analysis techniques to ensure that the application is robust.
@@ -61,16 +60,16 @@ Given below are my contributions to the project.
 
 * **Documentation**
 
-* **User Guide**
-  - Updated documentation for add, edit, delete dates.
-  - Added introduction section, command summary table for the documentation.
-  - Updated the Quick start, FAQ, Glossary sections.
-  - Added the Common Symbols, Navigating the GUI section.
+  * **User Guide**
+    - Updated documentation for add, edit, delete dates.
+    - Added introduction section, command summary table for the documentation.
+    - Updated the Quick start, FAQ, Glossary sections.
+    - Added the Common Symbols, Navigating the GUI section.
 
-* **Developer Guide**
-  - Updated all the existing UML models (e.g. `Storage`, `Ui`) to reflect the current state of the application.
-  - Added UML diagrams for add, list commands and documented the implementation and design considerations.
-  - Added the target user profile section, updated use cases, manual testing and user stories.
+  * **Developer Guide**
+    - Updated all the existing UML models (e.g. `Storage`, `Ui`) to reflect the current state of the application.
+    - Added UML diagrams for add, list commands and documented the implementation and design considerations.
+    - Added the target user profile section and Updated use cases, manual testing and user stories.
 
 * **Community**
   * Reviewed PRs and gave constructive feedback to my teammates:

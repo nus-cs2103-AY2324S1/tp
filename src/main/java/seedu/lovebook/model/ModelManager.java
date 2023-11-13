@@ -136,7 +136,7 @@ public class ModelManager implements Model {
     /**
      * Returns a random date from the date list.
      */
-    public void getRandomDate() throws CommandException {
+    public void getBlindDate() throws CommandException {
         if (loveBook.getPersonList().size() == 0) {
             throw new CommandException("Initialise list with dates before calling blindDates");
         }

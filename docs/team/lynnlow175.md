@@ -14,49 +14,36 @@ online dating journey.
 
 Given below are my contributions to the project.
 
-* **New Feature**: Filter Dates by Date Profile Attributes
-    * What it does: Allows users to filter dates by their date profile attributes
-    * Justification: This feature is useful because it allows user to find the specific dates with the attributes that the 
-    user is looking for.
-    * Highlights: This enhancement requires the understanding of the model and the creation of new utility class to wrap
-    an array of predicates into one predicate so that the code conforms to the SLAP principle. The new utility class 
-    implements the Predicate interface and is used in the model to update filtered dates.
-    * Credits: N/A
+* **New Feature**: Filter Dates by `Date` Profile Attributes
+    * What it does: Allows users to filter `Date` objects by their attributes such as `Age`, `Height`, `Gender` and `Name`.
+    * Justification: This feature is useful because it allows user to find the specific dates with the attributes that the user is looking for. This helps to save time and effort for the user.
+    * Highlights: This enhancement requires the understanding of the `Model` and the creation of `PredicatesUtil` to wrap an array of predicates into one `Predicate` so that the code conforms to the SLAP principle. `PredicatesUtil` implements the `Predicate` interface and is used in the `Model` to update list of `Date` objects visible to user.
 
-* **New Feature**: Sort Dates by Date Profile Attributes
-    * What it does: Allows users to sort dates by their date profile attributes
-    * Justification: This feature is useful because it allows user to view the dates in a specific order based on a 
-    specific attribute.
-    * Highlights: This enhancement requires the understanding of the interface Comparator in order to allow each valid
-    attribute to be sorted in a specific order.
-    * Credits: N/A
+* **New Feature**: Sort Dates by `Date` Profile Attributes
+    * What it does: Allows users to sort `Date` objects by their attributes such as `Age`, `Height`, `Gender`, `Horoscope`, `Income` and `Name`.
+    * Justification: This feature is useful because it allows user to view the list of `Date` objects in a specified (increasing/decreasing) order based on a specified attribute.
+    * Highlights: This enhancement requires the understanding of the `Comparator` interface in order to allow each valid attribute to be sorted in a specific order.
 
 * **New Feature**: Random Date command
-    * What it does: Allows users to randomly select a date from the list of dates
-    * Justification: This feature is useful because helps to solve the issue of indecisiveness when choosing a date.
-    * Highlights: This enhancement requires the understanding of how to obtain the complete list of dates and generating
-    a random number to select a date from the list.
-    * Credits: N/A
+    * What it does: Allows users to randomly select a `Date` from the list of `Date` objects.
+    * Justification: This feature is useful because helps to solve the issue of indecisiveness when choosing a `Date` to go out with. It saves time and effort for the user and instills a sense of excitement.
+    * Highlights: This enhancement requires the understanding of how to obtain the complete list of `Dates` objects and generating a random number to select a `Date` from the list.
 
 * **New Feature**: Welcome message
-* What it does: Allows users to see a welcome message when they start the application
-* Justification: This feature is useful because it makes users feel welcomed when they start the application and conveys
-  the app's purpose.
-* Highlights: This enhancement requires the understanding of how the javafx works in order to display the message to the 
-  user. It also requires the knowledge of where the initial stage is set in order to display the message when the
-  application starts.
-* Credits: N/A
+  * What it does: Allows users to see a welcome message when they start the application.
+  * Justification: This feature is useful because it makes users feel welcomed when they start the application and conveys the app's purpose.
+  * Highlights: This enhancement requires the understanding of how Javafx works in order to display the message to the user. It also requires the knowledge of where the initial stage is set in order to display the message when the application starts.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=lynnlow175&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos)
 
-* **Project management**:
-
-* **Enhancements to existing features**:
-
 * **Documentation**:
-    * User Guide: Creation of Date Profile, Edit of Date's information
-    * Developer Guide: Value Proposition
+    * User Guide: 
+      * Added documentation for own features like `filter`, `sort` and `blindDate`.
+    * Developer Guide: 
+      * Added implementation details of commands like `filter`, `sort` and `blindDate`.
+      * Contributed to Planned Enhancement section (Improve Filter and error message).
 
 * **Community**:
-
-* **Tools**:
+  * PRs reviewed: #89, #13
+  * Submitted PE-D on behalf of the group
+  * Took down notes for team meetings

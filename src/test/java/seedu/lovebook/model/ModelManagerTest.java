@@ -104,13 +104,13 @@ public class ModelManagerTest {
     @Test
     public void executeRandomPerson() throws CommandException {
         modelManager.addDate(ALICE);
-        modelManager.getRandomDate();
+        modelManager.getBlindDate();
         assertTrue(modelManager.getFilteredPersonList().equals(Arrays.asList(ALICE)));
     }
 
     @Test
     public void executeRandomPerson_noPerson() throws CommandException {
-        assertThrows(CommandException.class, () -> modelManager.getRandomDate());
+        assertThrows(CommandException.class, () -> modelManager.getBlindDate());
     }
 
     @Test
