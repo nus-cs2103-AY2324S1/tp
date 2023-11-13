@@ -28,17 +28,17 @@ Managing clients and a busy schedule has never been easier. With OutBook, all yo
     - [Deleting a contact: `deletec`](#deleting-a-contact-deletec)
     - [Editing a contact: `editc`](#editing-a-contact--editc)
     - [Viewing detailed contact information: `viewc`](#viewing-detailed-contact-information--viewc)
-    - [Finding contacts: `findc`](#finding-contacts--findc)
+    - [Finding contacts: `findc`](#finding-contacts-findc)
   - [Meeting Commands](#meeting-commands)
     - [Meeting Parameters](#meeting-parameters)
-    - [Adding a meeting: `addm`](#adding-a-meeting--addm)
+    - [Adding a meeting: `addm`](#adding-a-meeting-addm)
     - [Listing all meetings: `listm`](#listing-all-meetings--listm)
     - [Deleting a meeting: `deletem`](#deleting-a-meeting--deletem)
     - [Editing a meeting: `editm`](#editing-a-meeting--editm)
     - [Viewing detailed meeting information: `viewm`](#viewing-detailed-meeting-information--viewm)
-    - [Finding meetings: `findm`](#finding-meetings--findm)
-    - [Adding contact to meeting: `addmc`](#adding-contact-to-meeting--addmc)
-    - [Removing contact from meeting: `rmmc`](#removing-contact-from-meeting--rmmc)
+    - [Finding meetings: `findm`](#finding-meetings-findm)
+    - [Adding contact to meeting: `addmc`](#adding-contact-to-meeting-addmc)
+    - [Removing contact from meeting: `rmmc`](#removing-contact-from-meeting-rmmc)
     - [Marking a meeting as complete : `mark`](#marking-a-meeting-as-complete--mark)
   - [Miscellaneous Commands](#miscellaneous-commands)
     - [Viewing help: `help`](#viewing-help--help)
@@ -190,7 +190,7 @@ Format: `deletec CONTACT_INDEX`
 
 Examples:
 - `listc` followed by `delete 2` deletes the 2nd person in the unfiltered contacts list returned by [`listc`](#listing-all-contacts--listc).
-- `findc Betsy` followed by `delete 1` deletes the 1st person in the filtered contacts list returned by [`findc`](#finding-contacts--findc).
+- `findc Betsy` followed by `delete 1` deletes the 1st person in the filtered contacts list returned by [`findc`](#finding-contacts-findc).
 
 <div style="page-break-after: always;"></div>
 
@@ -269,15 +269,15 @@ Examples:
 
 ### Meeting Parameters
 
-| Parameter        | Description                                                                                                                                                                                                                                      | Examples                                            |
-|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------|
-| `TITLE`          | The title of the meeting. <br/> <br/> It can take any values, but should not be blank.                                                                                                                                                           | •  `1st Meeting with Alex` <br> • `Quick-chat`      |
-| `LOCATION`       | The location of the meeting. <br/> <br/> It can take any values, but should not be blank.                                                                                                                                                        | • `Zoom` <br> • `21 Lower Kent Ridge Rd, S(119077)` |
-| `START` / `END`  | The start/end times of the meeting. <br/> <br/> They must contain both date and time and adhere to the `DD.MM.YYYY HHMM` format. `START` must be equal or before `END`.                                                                          | • `29.10.2023 1000` <br> • `05.01.2023 2200`        |
-| `TAG`            | The tag you want to associate with the meeting, if any. A meeting can have more than 1 tag. <br/> <br/> It must be alphanumeric, i.e. special and non-alphanumeric characters (including spaces) are not allowed.                                | • `Casual` <br> • `Remote`                          |
-| `ATTENDEE_NAME`  | The name of the contact added to the meeting as an attendee via the [`addmc`](#adding-contact-to-meeting--addmc) command.                                                                                                                        | -                                                   |
+| Parameter        | Description                                                                                                                                                                                                                                     | Examples                                            |
+|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------|
+| `TITLE`          | The title of the meeting. <br/> <br/> It can take any values, but should not be blank.                                                                                                                                                          | •  `1st Meeting with Alex` <br> • `Quick-chat`      |
+| `LOCATION`       | The location of the meeting. <br/> <br/> It can take any values, but should not be blank.                                                                                                                                                       | • `Zoom` <br> • `21 Lower Kent Ridge Rd, S(119077)` |
+| `START` / `END`  | The start/end times of the meeting. <br/> <br/> They must contain both date and time and adhere to the `DD.MM.YYYY HHMM` format. `START` must be equal or before `END`.                                                                         | • `29.10.2023 1000` <br> • `05.01.2023 2200`        |
+| `TAG`            | The tag you want to associate with the meeting, if any. A meeting can have more than 1 tag. <br/> <br/> It must be alphanumeric, i.e. special and non-alphanumeric characters (including spaces) are not allowed.                               | • `Casual` <br> • `Remote`                          |
+| `ATTENDEE_NAME`  | The name of the contact added to the meeting as an attendee via the [`addmc`](#adding-contact-to-meeting-addmc) command.                                                                                                                        | -                                                   |
 | `ATTENDEE_INDEX` | The number shown beside each attendee's name in the detailed view of the meeting (as described [here](#viewing-detailed-meeting-information--viewm)). <br/> <br/> It must be a positive integer and not more than the total number of attendees. | • `2`                                               |
-| `MEETING_INDEX`  | The number shown beside each meeting's title in the displayed meetings list. <br/> <br/> It must be a positive integer and not more than the total number of meetings.                                                                           | • `1`                                               |
+| `MEETING_INDEX`  | The number shown beside each meeting's title in the displayed meetings list. <br/> <br/> It must be a positive integer and not more than the total number of meetings.                                                                          | • `1`                                               |
 
 
 ### Adding a meeting: `addm`
@@ -314,7 +314,7 @@ Format: `deletem MEETING_INDEX`
 
 Examples:
 - `listm` followed by `deletem 2` deletes the 2nd meeting in the unfiltered meetings list returned by [`listm`](#listing-all-meetings--listm).
-- `findm m/Project` followed by `deletem 1` deletes the 1st meeting in the filtered meetings list returned by [`findm`](#finding-meetings--findm).
+- `findm m/Project` followed by `deletem 1` deletes the 1st meeting in the filtered meetings list returned by [`findm`](#finding-meetings-findm).
 
 ### Editing a meeting : `editm`
 
