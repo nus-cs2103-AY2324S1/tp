@@ -478,7 +478,7 @@ Install the app in the other computer and overwrite the empty data file it creat
 
 2. **How can I view my appointments scheduled today ?**<br/>
 You can use the filter command with today's date. 
-Here's an example: `filter 2023-12-07`. Replace `2023-12-07` with today's date in `yyyy-mm-dd` format.
+Here's an example: `filter 2023-12-07`. Replace `2023-12-07` with today's date in `yyyy-MM-dd` format.
 
 3. **How do I clear all data in WellNUS ?**<br/>
 To clear all data, use the `clear` command. This resets the storage, deleting all appointments and students. 
