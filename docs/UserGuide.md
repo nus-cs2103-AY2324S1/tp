@@ -78,20 +78,14 @@ Here are some annotations used in this guide:
 
 <p></p>
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
-  <h4 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h4>
-  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">User Input</code> 
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;"> :heavycheckmark: Acceptable values</h5>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;"> User Input</code>
     Description of what you are allowed to type.</p>
 </div>
 <p></p>
 <div style="border-left: 4px solid #d9534f; background-color: #FFD4D4; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
-  <h4 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Warning!</h4>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">inline code</code> 
-    Pay attention to these points as they could lead to unexpected issues.</p>
-</div>
-<p></p>
-<div style="border-left: 4px solid #d9534f; background-color: #FFD4D4; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
-  <h4 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Warning!</h4>
-  <p style="font-size:8px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">inline code</code> 
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">:exclaimation: Warning!</h5>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;"> inline code</code>
     Pay attention to these points as they could lead to unexpected issues.</p>
 </div>
 
@@ -122,9 +116,8 @@ Welcome back to ProjectPRO. Simply head over to our Features section to gain ins
 
 3. Move the JAR file to a folder where you want to store your project details. For example, create a folder named ProjectPRO and place it on your desktop.
    - For Mac Users:
-     - ![MACGUIDE](images/UG/QUICKSTART3.png)
+     ![MACGUIDE](images/UG/QUICKSTART3.png)
    - For Windows Users:
-     - 
 
 4. Launch ProjectPRO.
    - For Mac users:
@@ -198,14 +191,14 @@ You can create a contact in your contact list.
 
 <p></p>
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
-  <h4 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h4>
-  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">NAME</code> 
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h5>
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">NAME</code>
     must be alphanumeric, cannot be blank and must not exist in the contact list.</p>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">PHONE</code> 
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">PHONE</code>
     must be a positive integer with at least 3 digits and must not exist in the contact list.</p>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">EMAIL</code> 
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">EMAIL</code>
     must be alphanumeric with a @ domain, end with a domain label at least 2 characters long and must not exist in the contact list.</p>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code> 
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
     must be alphanumeric. This is an optional parameter.</p>
 </div>
 
@@ -534,7 +527,7 @@ You list all available time slots of your contacts.
 <p></p>
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
   <h3 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h3>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">NAME</code> 
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">NAME</code>
     must be alphanumeric and cannot be blank.</p>
 </div>
 <p></p>
@@ -565,17 +558,17 @@ You can add a meeting time slot for your group.
 <p></p>
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
   <h3 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h3>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code> 
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
     must be alphanumeric and cannot be blank.</p>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">MEETING_TIME</code> 
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">MEETING_TIME</code>
     must be a time slot within a weekly schedule.</p>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">MEETING_TIME</code> 
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">MEETING_TIME</code>
     must not be a time slot already added to the group.</p>
 </div>
 <p></p>
 <div style="border-left: 4px solid #d9534f; background-color: #FFD4D4; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
   <h3 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Warning!</h3>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">MEETING_TIME</code> 
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">MEETING_TIME</code>
     can be added even if members are not available. Do coordinate with your group members on the most suitable time slots.</p>
 </div>
 
@@ -606,11 +599,11 @@ You can remove meeting times from your groups.
 <p></p>
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
   <h3 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h3>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code> 
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
     must be alphanumeric and cannot be blank.</p>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">MEETING_TIME</code> 
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">MEETING_TIME</code>
     must be a time slot within a weekly schedule.</p>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">MEETING_TIME</code> 
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">MEETING_TIME</code>
     must be a time slot already added to the group.</p>
 </div>
 <p></p>
@@ -641,7 +634,7 @@ You list meeting time for your groups.
 <p></p>
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
   <h3 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h3>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code> 
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
     must be alphanumeric and cannot be blank.</p>
 </div>
 <p></p>
@@ -672,15 +665,15 @@ You can find a meeting time slot for your group where everyone is available.
 <p></p>
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
   <h3 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h3>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code> 
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
     must be alphanumeric and cannot be blank.</p>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">DURATION</code> 
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">DURATION</code>
     must be a whole number representing the meeting duration in minutes.</p>
 </div>
 <p></p>
 <div style="border-left: 4px solid #d9534f; background-color: #FFD4D4; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
   <h3 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Warning!</h3>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">GROUP_NAME</code> 
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
     must contain contacts with their free time slots. </p>
 </div>
 
@@ -715,7 +708,7 @@ You can view the link to our UserGuide.
 <p></p>
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
   <h3 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h3>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">User Input</code> 
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">User Input</code>
     No additional input required</p>
 </div>
 <p></p>
@@ -744,7 +737,7 @@ Clears all entries from the contact list.
 <p></p>
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
   <h3 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h3>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">User Input</code> 
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">User Input</code>
     No additional input required</p>
 </div>
 <p></p>
@@ -775,7 +768,7 @@ You can exit ProjectPRO.
 <p></p>
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
   <h3 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h3>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">User Input</code> 
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">User Input</code>
     No additional input required</p>
 </div>
 <p></p>
