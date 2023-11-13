@@ -756,13 +756,13 @@ The domain name must:
 
 ### Commands for Events
 
-| Action           | Format, Examples                                                                                                                                                                                                                                |
-|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Event**    | `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]…​ [g/GROUP]…​`<br> e.g., `add_event m/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`                                                         |
-| **Edit Event**   | `edit_event EVENT_INDEX [m/MEETING_DETAILS] [d/DATE] [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]…​ [u/PERSON_NAME]…​ [g/GROUP]…​ [ug/GROUP]…​`<br> e.g., `edit_event 1 m/tP week 3 meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101` |
-| **Delete Event** | `delete_event EVENT_INDEX`<br> e.g., `delete_event 1`                                                                                                                                                                                           |
-| **Find Event**   | `find_event KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_event meeting`                                                                                                                                                                             |
-| **List Events**  | `list_events`                                                                                                                                                                                                                                   |
+| Action           | Format, Examples                                                                                                                                                                                                                           |
+|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Event**    | `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]…​ [g/GROUP]…​`<br> e.g., `add_event m/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`                                                    |
+| **Edit Event**   | `edit_event EVENT_INDEX [m/EVENT_NAME] [d/DATE] [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]…​ [u/PERSON_NAME]…​ [g/GROUP]…​ [ug/GROUP]…​`<br> e.g., `edit_event 1 m/tP week 3 meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101` |
+| **Delete Event** | `delete_event EVENT_INDEX`<br> e.g., `delete_event 1`                                                                                                                                                                                      |
+| **Find Event**   | `find_event KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_event meeting`                                                                                                                                                                        |
+| **List Events**  | `list_events`                                                                                                                                                                                                                              |
 
 
 ### General commands
