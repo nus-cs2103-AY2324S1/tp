@@ -31,8 +31,8 @@
         * [Feature usage](#usage-4)
         * [Function implementation](#function-implementation-4)
     * [List command](#list-developers)
-        * [Feature usage](#list-developers)
-        * [Feature implementation](#list-developers)
+        * [Feature usage](#usage-5)
+        * [Feature implementation](#function-implementation-5)
     * [Create team command](#create-a-new-team)
         * [Feature usage](#usage-5)
         * [Function implementation](#function-implementation-5)
@@ -57,8 +57,8 @@
         * [Feature usage](#)
         * [Function implementation](#)
     * [List team command](#list-teams)
-        * [Feature usage](#list-teams)
-        * [Feature implementation](#list-teams)
+        * [Feature usage](#usage-10)
+        * [Feature implementation](#function-implementation-10)
     * [Display tree command](#)
         * [Feature usage](#)
         * [Function implementation](#)
@@ -70,8 +70,6 @@
     * [Non-Functional Requirements](#non-functional-requirements)
     * [Glossary](#glossary)
 * [Appendix B: Instructions for manual testing](#appendix-b-instructions-for-manual-testing)
-    * [Launch and shutdown](#launch-and-shutdown)
-    * [Deleting a developer](#deleting-a-person)
 * [Appendix C: Effort](#appendix-c-effort)
 * [Appendix D: Future enhancements](#appendix-d-future-enhancements)
 
@@ -388,7 +386,8 @@ be visible; MainWindow toggles the HBox containing the list of teams to be invis
 and teams;
 - else if the Ui is listing not only teams: MainWindow toggles the HBox containing the list of teams to be visible; 
 MainWindow toggles the HBox containing any other lists to be invisible; Display only the list of all existing teams;
-<puml src="diagrams/ListCommandDiagiam.puml" width="1100"/>
+
+<puml src="diagrams/ListCommandDiagram.puml" width="1100"/>
 
 <br>
 
@@ -567,7 +566,7 @@ otherwise, the `listt` command will toggle the app to display both lists of deve
 - else if the Ui is listing not only teams: MainWindow toggles the HBox containing the list of teams to be visible;
   MainWindow toggles the HBox containing any other lists to be invisible; Display only the list of all existing teams;
 
-<puml src="diagrams/ListTeamCommandDiagiam.puml" width="1100"/>
+<puml src="diagrams/ListTeamCommandDiagram.puml" width="1100"/>
 <br>
 
 ### Find Team by Keywords
@@ -885,7 +884,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## **Appendix B: Instructions for manual testing**
 
-Given below are instructions to test the app manually.
+This appendix provides guidance for testers to explore the 
+features of LinkTree efficiently. It highlights key test
+inputs and outlines the process for testing various
+functionalities. This information is supplementary to the
+User Guide (UG) and avoids repetition of instructions
+already covered there.
 
 <box type="info" seamless>
 
@@ -896,37 +900,268 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+#### Initial launch
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+### Feature: Welcome to LinkTree
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+#### Greeting
 
-1. _{ more test cases …​ }_
+- **Command**: Hi
 
-### Deleting a person
+- **Testing**: Enter Hi to verify the greeting message and current
+   date and time display correctly. Note that the command is
+   case-sensitive.
 
-1. Deleting a person while all persons are being shown
+### Feature: Managing Developers
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+#### Add Developer
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+- **Command**: add n/[Developer Name] p/[Phone Number] e/[Email]
+  a/[Address] (OPTIONAL r/[Remark] t/Tags)
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+- **Sample**: add n/Developer A p/12345678 e/developera@gmail.com
+  a/nus com3 r/competitive programmer t/developer
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+- **Testing**: Use the command with various combinations of
+  required and optional fields to test adding developers.
 
-1. _{ more test cases … }_
+<box type="info" seamless>
+
+**Note:** 
+* Phone numbers should only contain numbers, and it should
+be at least 3 digits long
+* Emails should be of the format local-part@domain and
+  adhere to the following constraints:
+1. The local-part should only contain alphanumeric
+   characters and these special characters, excluding the
+   parentheses, (+_.-). The local-part may not start or end
+   with any special characters.
+2. This is followed by a '@' and then a domain name. The
+   domain name is made up of domain labels separated by periods.
+   The domain name must:
+   - end with a domain label at least 2 characters long
+   - have each domain label start and end with alphanumeric
+     characters
+   - have each domain label consist of alphanumeric
+     characters, separated only by hyphens, if any.
+* Tags names should be alphanumeric.
+* You should add more developers for further testing of
+  other features.
+
+</box>
+
+#### Remove Developer
+
+- **Command**: delete [index]
+
+- **Sample**: delete 1
+
+- **Testing**: Delete a developer by their index number. Confirm
+  removal from the list.
+
+#### Edit Developer
+
+- **Command**:  edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]
+  [r/REMARK] [t/TAG]
+
+- **Sample**: edit 1 n/Developer B p/87654321
+  e/DeveloperB@gmail.com a/nus com4 r/nice t/frontend
+
+- **Testing**: Edit details of a developer and verify changes.
+
+#### Find Developer
+
+- **Command**: find [KEYWORD]
+
+- **Sample**:  find developer
+  * The search is case-insensitive. e.g hans will match Hans
+  * The order of the keywords does not matter. e.g. Hans Bo
+    will match Bo Hans
+  * Only the name is searched.
+  * Only full words will be matched e.g. Han will not match
+    Hans
+  * Persons matching at least one keyword will be returned
+    (i.e. OR search). e.g. Hans Bo will return Hans Gruber, Bo
+    Yang
+
+- **Testing**: Search for developers using various keywords.
+
+<box type="info" seamless>
+
+**Note:**
+* The find command is designed to show only a list of
+  developers. If you wish to view the team list again, you
+  should use the listt command. To display the complete list
+  of developers, use the list command. If you need to list
+  both at the same time, you can use the list command twice
+  or the listt command twice to revert to the default state.
+
+</box>
+
+#### List Developers
+
+- **Command**: list
+
+- **Testing**: List all developers and verify the display.
+
+### Feature: Managing Developers
+
+#### Create Teams
+
+- **Command**: newteam tn/[TEAMNAME] tl/[TeamLeader]
+
+- **Sample**: newteam tn/ABC123 tl/Developer A
+
+- **Testing**: Create teams with different names and leaders.
+
+#### Add Developer to Team
+
+- **Command**: dev2team tn/[TEAMNAME] n/[Developer Name]
+
+- **Sample**: dev2team tn/ABC123 n/Developer B
+
+- **Testing**: Add existing developers to existing teams and
+  verify their inclusion.
+
+<box type="info" seamless>
+
+**Note:**
+* The sample assumes you have an existing developer named
+  Developer B, please change the name accordingly if needed.
+
+</box>
+
+#### Edit Team Name
+
+- **Command**: editTeamName [tn/TEAMNAME] [tn/NEW TEAMNAME]
+
+- **Sample**: editTeamName tn/ABC123 tn/NEWTEAMNAME
+
+- **Testing**: Change team names, verifying updates.
+
+#### Edit Team Leader
+
+- **Command**: editTeamLeader [tn/TEAMNAME] [tl/TEAMLEADER]
+
+- **Sample**: editTeamLeader tn/NEWTEAMNAME tl/Developer C
+
+- **Testing**: Change team leader, verifying updates.
+
+<box type="info" seamless>
+
+**Note:**
+* The sample assumes you have an existing developer named
+  Developer C, please change the name accordingly if needed.
+
+</box>
+
+#### Find Team
+
+- **Command**: findteam [KEYWORD]
+
+- **Sample**: findteam NEWTEAMNAME
+    * The search is case-insensitive. e.g ‘team’ will match
+      ‘team A’
+    * The order of the keywords does not matter. e.g. ‘A Team’
+      will match ‘Team A Alpha’
+    * Only the team name is searched.
+    * Only full words will be matched e.g. ‘Alp’ will not match
+      ‘Alpha’
+    * Teams matching at least one keyword will be returned (i.e.
+      OR search). e.g. ‘Alpha Beta’ will return ‘Team Alpha’,
+      ‘Team Beta’
+  
+- **Testing**: Use the command to search for teams by name.
+
+<box type="info" seamless>
+
+**Note:**
+* The findteam command is designed to show only a list of
+  teams. If you wish to view the developer list again, you
+  should use the list command. To display the complete list
+  of teams, use the listt command. If you need to list both
+  at the same time, you can use the list command twice or the
+  listt command twice to revert to the default state.
+
+</box>
+
+#### Delete Developer from Team
+
+- **Command**: deletedev [tn/TEAMNAME] [n/Developer Name]
+
+- **Sample**: deletedev tn/NEWTEAMNAME n/Developer B
+
+- **Testing**: Delete a developer from a team. Confirm removal
+  from the team.
+
+#### Delete Team
+
+- **Command**: deleteteam [tn/TEAMNAME]
+
+- **Sample**: deleteteam NEWTEAMNAME
+
+- **Testing**: Remove teams and confirm their removal.
+
+#### List Teams
+
+- **Command**: listt
+
+- **Testing**: Display all teams and verify the list.
+
+### Feature: Display Tree
+
+#### Display Tree
+
+- **Command**: tree
+
+- **Testing**: Use the command to view the tree visualisation of
+  teams and members. Make changes to the data, hide and show
+  the tree again to verify updates.
+  Expected Result: Tree should accurately reflect the current
+  state of teams and members.
+
+### Feature: Help
+
+#### Show Command Summary:
+
+- **Command**: help or press F1
+
+- **Testing**:  Access the help window and verify that it provides
+  a summary of commands and a link to the UG.
+
+<box type="info" seamless>
+
+**Note:**
+* The command summary shown in the app will not display all commands, but only those that are more commonly used. 
+Please refer to our User Guide for a complete summary of commands.
+
+</box>
+
+<box type="info" seamless>
+
+**Important Note:**
+* Ensure each command formats are correctly followed.
+* Observe the application's response for correctness and any
+  unexpected behavior.
+* When testing, it is important to try variations in input
+  to cover different scenarios, including edge cases.
+
+</box>
+
+<box type="info" seamless>
+
+**Note to Testers:**
+* Your creative input in devising test scenarios, especially
+  those that challenge the system beyond typical usage
+  patterns, is invaluable. This appendix aims to set a
+  foundation for your testing strategy.
+
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
