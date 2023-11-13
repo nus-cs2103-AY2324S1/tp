@@ -162,12 +162,12 @@ The class diagram below shows the current implementation of `Member` model.
 ![MemberClassDiagram](images/MemberClassDiagram.png)
 Every `Member` contains a `Name`,`Gender`, `Optional<Phone>`, `Optional<Email>`, `Optional<Address>`, `Optional<Hours>`, `Optional<Remark>` and a set of `Tags`
 
-#### Design Considerations
+**Design Considerations**
 
 This section elaborates further on why we chose to adopt a `Name` over other potential
 solutions.
 
-##### Aspect 1: How to uniquely identify Members across models.
+**Aspect: How to uniquely identify Members across models.**
 
 * **Alternative 1 (current choice):** Ensure that each `Member` must have a unique `Name`
     * Pros:
@@ -204,8 +204,8 @@ Every `Event` contains a `Name`, `Location`, `EventDate`, `Optional<Hours>`, `Op
 
 This section elaborates further on why we chose to adopt a `Name` over other potential
 solutions.
-
-##### Aspect 1: How to uniquely identify Events across models.
+ 
+**Aspect: How to uniquely identify Events across models.**
 
 * **Alternative 1 (current choice):** Ensure that each `Event` must have a unique `Name`
     * Pros:
@@ -295,7 +295,7 @@ The following activity diagram shows how the `EnrolCommand` works.
 
 #### Design Considerations
 
-##### Aspect 1: `EnrolCommand` parameters
+**Aspect: `EnrolCommand` parameters**
 
 * **Alternative 1 (current choice):** `EnrolCommand` has parameters `Name memberName`, `Name eventName`, `Hours hours` and `Remark remark`.
     * Pros:
