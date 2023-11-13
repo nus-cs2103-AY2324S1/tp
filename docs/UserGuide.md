@@ -430,7 +430,7 @@ If you have tasks that you wish to add with the same description `CS2103T Meetin
 
 **Deletion**
 
-Another way you can tackle this problem is to [delete](#delete-tasks) a task that was already completed, instead of leaving it in TaskWise marked as `[Complete]`. That way, you can add the task of that same description, with perhaps a different deadline and `[Incomplete]` status.
+Another way you can tackle this problem is to [delete](#delete-tasks) a task that was already completed, instead of leaving it in TaskWise marked as `[Completed]`. That way, you can add the task of that same description, with perhaps a different deadline and `[Incomplete]` status.
 
 There we go! With these workarounds, you can defy the limitations of TaskWise! Do refer to our [planned enhancements](#planned-enhancements) if you are interested to know more about how we plan to enhance this feature to allow for adding tasks of the same description with different parameters.
 
@@ -999,7 +999,7 @@ As of now, TaskWise allows you to add tasks with the `Description` being the uni
 
 However, we propose that in the near future, tasks with the same description but at least one different deadline, priority, status or members can be added into TaskWise. This would allow for more convenience for you, as you can create tasks with the same description, as long as its other parameters are different!
 
-For example, if you have marked the task`CS2103T Meeting` with no deadline, priority or member, its status will change from `[Incomplete]` to `[Complete]`. Then, you can add another task with the description `CS2103T Meeting` with the same exact parameters again, since its status is different -- `[Incomplete]`.
+For example, if you have marked the task`CS2103T Meeting` with no deadline, priority or member, its status will change from `[Incomplete]` to `[Completed]`. Then, you can add another task with the description `CS2103T Meeting` with the same exact parameters again, since its status is different -- `[Incomplete]`.
 
 ## Inform User When Date Input Has Passed
 
