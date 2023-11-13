@@ -219,7 +219,7 @@ Format: `list`
 Format: `list [DAY]`
 
 **Expected Input**:
-* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Tue/Wed/Thu/Fri/Sat/Sun).
+* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).
 
 
 ### Finding a tutee : `find`
@@ -270,7 +270,7 @@ and it should not be blank
 
 ### Editing a tutee : `edit`
 
-**Description** : Edit a tutee in the current list.
+**Description**: Edit a tutee in the current list.
 
 **Format**: `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SUBJECTS d/DAY b/BEGIN end/END pr/PAYRATE`
 
@@ -410,7 +410,7 @@ Format: `unpaidAll`
 
 ### Undo previous command : `undo`
 
-**Description**: Undo the previous command that modifies the data of tutees.
+**Description**: Undo the previous command that can modify the data of tutees.
 
 **Format**: `undo`
 

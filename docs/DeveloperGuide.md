@@ -459,6 +459,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 2a1. System informs the user that the list is empty.
 	
     Use case ends.
+    <br>
+    <br>
 
 **Use case: UC02 - Add a tutee**
 
@@ -490,6 +492,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 1d1. System informs that begin time must be smaller than the end time.
 
     Use case resumes at 1.
+
+    <br>
+    <br>
   
 **Use case: UC03 - Delete a tutee**
 
@@ -505,6 +510,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. The tutee that the user is trying to delete does not exist in the list.
     - 2a1. System informs that user does not exist.
+
+      <br>
+      <br>
 
 **Use case: UC04 - Editing a tutee**
 
@@ -538,6 +546,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 2d1. System informs that begin time must be smaller than the end time.
     
     Use case resumes at 2.
+    <br>
+    <br>
 
 **Use case: UC05 - Mark a tutee as paid**
 
@@ -554,6 +564,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 2a. The tutee that the user is trying to mark as paid does not exist in the list.
     - 2a1. System informs that user does not exist.
 
+  <br>
+  <br>
+
 **Use case: UC06 - Reset all tutees in the list to not paid**
 
 **MSS**
@@ -563,6 +576,44 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  System marks all the tutee in the list as not paid.
 
     Use case ends.
+    <br>
+    <br>
+
+**Use case: UC07 - Undo a command**
+
+**MSS**
+1. User requests to undo.
+2. System updates the tutee data to the previous state.
+3. System informs user that the command is undone.
+
+   Use case ends.
+
+**Extensions**
+* 1a. No command to be undone.
+    * 1a1. System informs user that there is nothing to undo.
+
+  Use case ends.
+  <br>
+  <br>
+
+**Use case: UC07 - Redo a command**
+
+**MSS**
+1. User requests to redo.
+2. System updates the tutee data to the next state.
+3. System informs user that the command is redone.
+
+   Use case ends.
+
+**Extensions**
+* 1a. No command to be redone.
+    * 1a1. System informs user that there is nothing to redo.
+
+  Use case ends.
+  <br>
+  <br>
+
+*{More to be added}*
 
 
 **Use case: UC07 - Finding free time**
