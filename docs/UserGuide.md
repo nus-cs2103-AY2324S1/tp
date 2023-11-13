@@ -151,8 +151,8 @@ add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [h/HOUR] [t/TAG]... [c/COURSE_CODE]...
 |---------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
 | `NAME`        | String and case-sensitive                                                              | Full name of the teaching assistant                                                                        |
 | `PHONE`       | Integer of 3-10 digits                                                                 | Phone number of the teaching assistant                                                                     |
-| `EMAIL`       | Contains "@"                                                                           | Email address of the teaching assistant                                                                    |
-| `TELEGRAM`    | String of 5-32 characters and starts with "@"                                          | Telegram handle of the teaching assistant                                                                  |
+| `EMAIL`       | A valid email address of the format local-part@domain                                  | Email address of the teaching assistant                                                                    |
+| `TELEGRAM`    | String of 5-32 characters that starts with "@"                                         | Telegram handle of the teaching assistant                                                                  |
 | `HOUR`        | Integer between 0 and 9999                                                             | Total working hours of the teaching assistant - defaults to 0 if not provided                              |
 | `TAG`         | Alphanumeric string without spaces                                                     | Tag(s) of the teaching assistant                                                                           |
 | `COURSE_CODE` | Starts with 2-3 alphabets, followed by 4 numbers, and optionally ends with an alphabet | Course code of the course the teaching assistant is teaching and it should be one of the available courses |
@@ -202,21 +202,23 @@ You can change the details of an existing teaching assistant in TAManager, so th
 edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [tele/TELEGRAM] [h/HOUR] [t/TAG]... [c/COURSE_CODE]...
 ```
 
-| Fields        | Format                                                                                 | Remarks                                                                                                    |
-|---------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
-| `NAME`        | String and case-sensitive                                                              | Full name of the teaching assistant                                                                        |
-| `PHONE`       | Integer of 3-10 digits                                                                 | Phone number of the teaching assistant                                                                     |
-| `EMAIL`       | Contains "@"                                                                           | Email address of the teaching assistant                                                                    |
-| `TELEGRAM`    | String of 5-32 characters and starts with "@"                                          | Telegram handle of the teaching assistant                                                                  |
-| `HOUR`        | Integer between 0 and 9999                                                             | Total working hours of the teaching assistant                                                              |
-| `TAG`         | Alphanumeric string without spaces                                                     | Tag(s) of the teaching assistant                                                                           |
-| `COURSE_CODE` | Starts with 2-3 alphabets, followed by 4 numbers, and optionally ends with an alphabet | Course code of the course the teaching assistant is teaching and it should be one of the available courses |
+| Fields        | Format                                                                                 | Remarks                                                                                                                |
+|---------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
+| `INDEX`       | Positive integer (1, 2, 3, ...)                                                        | Index of the teaching assistant in the TA List to be edited. This index is with reference to the **displayed** TA list |
+| `NAME`        | String and case-sensitive                                                              | Full name of the teaching assistant                                                                                    |
+| `PHONE`       | Integer of 3-10 digits                                                                 | Phone number of the teaching assistant                                                                                 |
+| `EMAIL`       | A valid email address of the format local-part@domain                                  | Email address of the teaching assistant                                                                                |
+| `TELEGRAM`    | String of 5-32 characters that starts with "@"                                         | Telegram handle of the teaching assistant                                                                              |
+| `HOUR`        | Integer between 0 and 9999                                                             | Total working hours of the teaching assistant                                                                          |
+| `TAG`         | Alphanumeric string without spaces                                                     | Tag(s) of the teaching assistant                                                                                       |
+| `COURSE_CODE` | Starts with 2-3 alphabets, followed by 4 numbers, and optionally ends with an alphabet | Course code of the course the teaching assistant is teaching and it should be one of the available courses             |
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes:**<br>
 - At least one field to edit must be provided.
-- After running the `edit` command on a filtered list, the TA list will be updated to the full list of TAs.
+- After running the `edit` command on a filtered list, the teaching assistant list will be updated to the full list of teaching assistants.
+- Editing tags or courses will **overwrite** the existing tags or courses of the teaching assistant.
 </div>
 
 ##### Example: 
@@ -364,8 +366,8 @@ delete INDEX
 | `INDEX` | Positive integer (1, 2, 3, ...) | Index of the teaching assistant in the TA List to be deleted. This index is with reference to the **displayed** TA list. |
 
 ##### Examples:
-- [`list`](#13-viewing-teaching-assistants--list) followed by `delete 2` deletes the 2nd teaching assistant in the address book.
-- `find n/Betsy` followed by `delete 1` deletes the 1st teaching assistant in the results of the [`find`](#14-finding-a-teaching-assistant--find) command.
+- [`list`](#13-viewing-teaching-assistants--list) followed by `delete 2` deletes the second teaching assistant in the address book.
+- `find n/Betsy` followed by `delete 1` deletes the first teaching assistant in the results of the [`find`](#14-finding-a-teaching-assistant--find) command.
 
 ![remove TA](images/deleteTA.png)
 *<center>TAManager deletes the teaching assistant at the index <code>7</code>.</center>*
@@ -768,6 +770,12 @@ Example: When a user types `list` and presses Enter, the application will list a
 **Solution:** Delete the <code>preferences.json</code> file in the <code>data</code> folder and restart TAManager.
 </div>
 
+<div markdown="span" class="alert alert-warning">
+**Issue:** When the window size is small, longer fields such as names and emails may get cut off.
+<br>
+<br>
+**Solution:** Resize the window to view the full field where possible, or consider shorting the field by using initials or abbreviations.
+</div>
 --------------------------------------------------------------------------------------------------------------------
 ## Command Summary
 Commands are arranged in alphabetical order for your easy reference.
@@ -784,7 +792,7 @@ Commands are arranged in alphabetical order for your easy reference.
 | **[Exit](#33-exiting-the-program--exit)**                                   | `exit`                                                                                                                                                                                                     |
 | **[Find](#14-finding-a-teaching-assistant--find)**                          | `find PREFIX KEYWORD [MORE_KEYWORDS]`<br> e.g. `find n/Alex`, `find c/cs1231s`, `find from/10:00 to/12:00`, `find n/Alex c/cs1231s`, `find c/cs2103t from/10:00 to/12:00`                                  |
 | **[Help](#31-viewing-help--help)**                                          | `help`                                                                                                                                                                                                     |
-| **[Hour](#16-updating-hours-for-teaching-assistants--hour)**                | `hour INTEGER`<br> e.g., `hour 2`                                                                                                                                                                          |
+| **[Hour](#16-updating-hours-for-teaching-assistants--hour)**                | `hour INTEGER`<br> e.g. `hour 2`                                                                                                                                                                           |
 | **[List](#13-viewing-teaching-assistants--list)**                           | `list`                                                                                                                                                                                                     |
 | **[Teach](#22-adding-a-default-course--teach)**                             | `teach c/[COURSE_CODE]`<br> e.g. `teach c/CS2103T`                                                                                                                                                         |
 
