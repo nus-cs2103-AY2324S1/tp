@@ -45,7 +45,7 @@ And here's the best part – while it's perfect for members of SoC Computing Clu
 
 2. **Speedy Navigation**: If you're a fast typist, CoordiMate will help you manage your contacts and tasks faster than traditional GUI apps, maximising your productivity.
 
-Don't let the stress of contact and task management hinder your event planning creativity.
+Don't let the stress of contact and task management hinder your creativity.
 
 Let **CoordiMate** take care of the details, while you craft extraordinary events with confidence.
 
