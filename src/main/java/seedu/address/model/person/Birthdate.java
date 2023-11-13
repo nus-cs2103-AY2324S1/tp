@@ -16,9 +16,10 @@ import java.time.temporal.ChronoField;
  * Guarantees: immutable; is valid as declared in {@link #isValidBirthdate(String)}
  */
 public class Birthdate implements Comparable<Birthdate> {
-    public static final String MESSAGE_CONSTRAINTS = "Birthdates should be of the form YYYY/MM/DD.\n"
+    public static final String MESSAGE_CONSTRAINTS =
+            "Birthdates should be of the form YYYY/MM/DD, and must be a valid date.\n"
             + "* Note: Date indicated must be YYYY/MM/DD"
-            + "(i.e. 2th Jan 2020 must be input as 2021/01/02 instead of 2020-01-01).\n"
+            + " (i.e. 2th Jan 2020 must be input as 2021/01/02 instead of 2020-01-02).\n"
             + "E.g. birthdate=2023/10/20";
 
     private static final DateTimeFormatter FORMAT = new DateTimeFormatterBuilder()
