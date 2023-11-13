@@ -42,6 +42,9 @@ Welcome to the user guide for <span style="color: green;">lesSON</span>, your ul
 Computer Science curriculum at the National University of Singapore (NUS). This guide is designed to provide you with a
 comprehensive understanding of the app and how to leverage its powerful features for your academic success.
 
+<div style="page-break-after: always;"></div>
+<br>
+
 #### What is <span style="color: green;">lesSON</span>?
 
 <span style="color: green;">lesSON</span> is not just another study app; it's a game-changer in the world of education.
@@ -87,6 +90,9 @@ for new users. <br>
 <br>
 If you are already comfortable using <span style="color: green;">lesSON</span>, do try out all of our other [features](#feature-list). <br>
 
+<div style="page-break-after: always;"></div>
+<br>
+
 ### Legend
 Throughout this user guide, you will encounter some of these colored blocks highlighting some important information.
 
@@ -120,6 +126,8 @@ The red block contains crucial warnings for ensuring the proper functionality of
 |          Keystrokes          | Act of pressing a key on a computer keyboard                                                                                                                                                   |
 |      Spaced repetition       | An evidence-based learning technique where newly created and more difficult flashcards are shown more frequently than older and less difficult flashcards                                      |
 
+<div style="page-break-after: always;"></div>
+<br>
 
 ### Parameter Information
 
@@ -162,6 +170,9 @@ multiple lines as whitespace characters before line-breaks may be omitted when c
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+<br>
+
 ## Quick Start
 
 Get ready to embark on your productive study session with <span style="color: green;">lesSON</span>!
@@ -184,6 +195,9 @@ Get ready to embark on your productive study session with <span style="color: gr
        - [Not sure how to use cd?](https://www.ibm.com/docs/en/aix/7.2?topic=directories-changing-another-directory-cd-command)
      - Type `java -jar lesSON.jar` and press <kbd>Enter</kbd>.
 5. You should be able to see the [GUI](#glossary) pop up on your screen.
+
+<div style="page-break-after: always;"></div>
+<br>
 
 ### Navigating the app
 
@@ -222,7 +236,10 @@ feel free to explore the other features in the [command summary](#command-summar
 2. First, let's try to add your very first flashcard. Type the following command and hit <kbd>Enter</kbd>: <br>
 `add q/what does + mean in boolean algebra? a/it means OR.`
 
-![adding a card](./images/UserGuide/1.4_tutorial_add.png)
+    ![adding a card](./images/UserGuide/1.4_tutorial_add.png)
+
+    <div style="page-break-after: always;"></div>
+    <br>
 
 3. Congratulations, you have created your first flashcard! Now, let's try to edit the card created from the
 previous input by capitalising it! Note that the flashcard just created is at index `1`. Type the following command
@@ -270,6 +287,8 @@ testing your memory with the most difficult flashcard.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+<br>
 
 # Feature list
 ## Command Summary
@@ -300,6 +319,9 @@ Adds a flashcard to the deck for the user.
 #### Format:
 >```add q/QUESTION a/ANSWER [t/TAG...] [h/HINT]```
 
+<div style="page-break-after: always;"></div>
+<br>
+
 #### Examples:
 
 _A flashcard with only a question and answer field._
@@ -326,6 +348,9 @@ _A flashcard with a question, answer, tag and hint field._
 </div>
 
 [Go to Command Summary](#command-summary)
+
+<div style="page-break-after: always;"></div>
+<br>
 
 ### Deleting a Flashcard : `delete`
 Deletes a flashcard in the deck
@@ -354,6 +379,9 @@ _Deleting the card in the deck with an index of 2._
 
 [Go to Command Summary](#command-summary)
 
+<div style="page-break-after: always;"></div>
+<br>
+
 ### View All Flashcards : `list`
 Shows a list of all flashcards in the deck. A keyword may be specified to filter out the list.
 
@@ -377,6 +405,9 @@ _List all flashcards with the CS2100 Tag._
 2. Listing questions with markdown syntax should include their relevant markdown notation, i.e. `list q/**What**` for questions starting with **What**.<br>
 3. Newly added cards may not appear if they do not match the current filter.
 </div>
+
+<div style="page-break-after: always;"></div>
+<br>
 
 <div markdown="span" class="alert alert-success">
 
@@ -405,6 +436,8 @@ Edits an existing Flashcard in the deck.
 #### Examples:
 _Change the question at index 1 to "What is the colour of the sun?"._
 >```edit 1 q/What is the colour of the sun?```
+
+<div style="page-break-after: always;"></div>
 
 _Change the answer at index 1 to "Red"._
 >```edit 1 a/Red```
@@ -440,6 +473,8 @@ _Change the hint at index 1 to "Apple"._
 
 [Go to Command Summary](#command-summary)
 
+<br>
+
 ### Practise Flashcards : `practise`
 Practise a single Flashcard in the deck
 
@@ -473,6 +508,9 @@ _Practising the card in the deck with an index of 2._
 
 [Go to Command Summary](#command-summary)
 
+<div style="page-break-after: always;"></div>
+<br>
+
 ### Hints for Flashcards : `hint`
 See the hint for a question at the given index
 
@@ -505,6 +543,9 @@ _Hint the card in the deck with an index of 3._
 </div>
 
 [Go to Command Summary](#command-summary)
+
+<div style="page-break-after: always;"></div>
+<br>
 
 ### Solving Flashcards : `solve`
 Solves the question at the given index
@@ -540,6 +581,9 @@ _Solve the card in the deck with an index of 2._
 
 [Go to Command Summary](#command-summary)
 
+<div style="page-break-after: always;"></div>
+<br>
+
 ### Setting Difficulty of Flashcards : `set`
 Setting the difficulty of a flashcard, based on the user.
 
@@ -573,6 +617,8 @@ _Set the first card as easy_
 </div>
 
 [Go to Command Summary](#command-summary)
+
+<div style="page-break-after: always;"></div>
 
 ### Randomly Practise Flashcards : `random`
 Practise a single random Flashcard in the deck.
@@ -609,6 +655,8 @@ _Practise a random card._
 
 [Go to Command Summary](#command-summary)
 
+<br>
+
 ### Clear All Flashcards : `clear`
 Clears all flashcards found in the Deck. Deck is reset back to empty.
 
@@ -642,6 +690,9 @@ _Delete all flashcards from the deck._
 
 [Go to Command Summary](#command-summary)
 
+<div style="page-break-after: always;"></div>
+<br>
+
 ### Setting Goals : `goal`
 Set a goal for the current studying session.
 
@@ -674,7 +725,10 @@ _Set a goal of 5 for this session._
 </div>
 
 [Go to Command Summary](#command-summary)
-      
+
+<div style="page-break-after: always;"></div>
+<br>
+
 ### Getting Help : `help`
 Seek more details from a link provided leading to the User Guide.
 Users can also access this function by clicking on the **File** button located at the top
@@ -703,6 +757,9 @@ _Open help window._
 </div>
 
 [Go to Command Summary](#command-summary)
+
+<div style="page-break-after: always;"></div>
+<br>
 
 ### Exiting <span style="color: green;">lesSON</span> : `exit`
 Exits and closes the <span style="color: green;">lesSON</span> application.
@@ -740,9 +797,11 @@ For user who wish to incorporate styling in <span style="color: green;">lesSON</
 2. Italic
 3. Underline
 
+<div style="page-break-after: always;"></div>
+<br>
+
 #### Bold
 To bold a line of text, wrap text as follows `**text**`
-
 
 #### Example:
 _Bolding a phrase in the question_
@@ -762,6 +821,9 @@ _Bolding a phrase in the question_
    iii. `Stage` will appear bolded in both instances.<br>
 ![usage of bold syntax](./images/UserGuide/1.4_bold.png)
 </div>
+
+<div style="page-break-after: always;"></div>
+<br>
 
 #### Italic
 To italicise a line of text, wrap text as follows `*text*`
@@ -783,6 +845,9 @@ _Italicising a phrase in the question_
    iii. `Stage` will appear italicised in both instances.<br>
       ![usage of italics syntax](./images/UserGuide/1.4_italics.png)
 </div>
+
+<div style="page-break-after: always;"></div>
+<br>
 
 #### Underline
 To underline a line of text, insert `<u>` at the beginning of the text,
@@ -815,6 +880,9 @@ _Underlining a phrase in the question_
 3. Do ensure that there is no empty input between an open and close syntax.<br>
 4. In the case when unexpected Markdown format is observed, edit the flashcard again with the without the Markdown syntax/with appropriate syntax.
 </div>
+
+<div style="page-break-after: always;"></div>
+<br>
 
 ## Importing and Exporting Decks
 
@@ -855,6 +923,8 @@ to see their new decks.
 [Go to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Frequently Asked Questions (FAQ)
 
