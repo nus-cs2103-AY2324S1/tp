@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.awt.Desktop;
+import java.net.URL;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -34,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private String currentTheme;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -59,6 +62,7 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.currentTheme = "DarkTheme.css";
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -136,15 +140,31 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the help window or focuses on it if it's already opened.
+     * Opens the help window.
      */
     @FXML
     public void handleHelp() {
-        if (!helpWindow.isShowing()) {
+        if (!Desktop.isDesktopSupported() || !Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
             helpWindow.show();
-        } else {
-            helpWindow.focus();
+            return;
         }
+        try {
+            Desktop.getDesktop().browse(new URL(HelpWindow.USERGUIDE_URL).toURI());
+        } catch (Exception e) {
+            helpWindow.show();
+        }
+    }
+
+    /**
+     * Sets the Window to the specified theme.
+     */
+    @FXML
+    public void setTheme(String newTheme) {
+        String themeToRemove = getClass().getResource("/view/" + currentTheme).toExternalForm();
+        String themeToAdd = getClass().getResource("/view/" + newTheme).toExternalForm();
+        this.getRoot().getScene().getStylesheets().remove(themeToRemove);
+        this.getRoot().getScene().getStylesheets().add(themeToAdd);
+        currentTheme = newTheme;
     }
 
     void show() {
@@ -184,6 +204,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isChangeTheme()) {
+                setTheme(commandResult.getThemeStylesheet());
             }
 
             return commandResult;

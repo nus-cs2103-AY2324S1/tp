@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -20,6 +21,7 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final AddressBookList addressBookList = new AddressBookList();
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
@@ -32,8 +34,9 @@ public class ModelManager implements Model {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
+        this.addressBookList.add(new AddressBook(addressBook));
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
@@ -80,6 +83,7 @@ public class ModelManager implements Model {
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
+        this.addressBookList.add(new AddressBook(addressBook));
     }
 
     @Override
@@ -95,20 +99,45 @@ public class ModelManager implements Model {
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+        this.addressBook.removePerson(target);
+        this.addressBookList.add(new AddressBook(addressBook));
     }
 
     @Override
     public void addPerson(Person person) {
-        addressBook.addPerson(person);
+        this.addressBook.addPerson(person);
+        this.addressBookList.add(new AddressBook(addressBook));
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
+        this.addressBook.setPerson(target, editedPerson);
+        this.addressBookList.add(new AddressBook(addressBook));
+    }
 
-        addressBook.setPerson(target, editedPerson);
+    @Override
+    public String undo() {
+        this.addressBook.resetData(this.addressBookList.undo());
+        return this.addressBookList.undoPastCommand();
+    }
+
+    @Override
+    public String redo() {
+        this.addressBook.resetData(this.addressBookList.redo());
+        return this.addressBookList.redoPastCommand();
+    }
+
+    @Override
+    public void addCommandText(String commandText) {
+        this.addressBookList.addCommandText(commandText);
+    }
+
+    @Override
+    public void sort(Comparator<Person> comparator) {
+        this.addressBook.sort(comparator);
+        this.addressBookList.add(new AddressBook(addressBook));
     }
 
     //=========== Filtered Person List Accessors =============================================================

@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -27,10 +28,15 @@ public class NameTest {
         // invalid name
         assertFalse(Name.isValidName("")); // empty string
         assertFalse(Name.isValidName(" ")); // spaces only
-        assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
 
         // valid name
+        assertTrue(Name.isValidName("^"));
+        assertTrue(Name.isValidName("peter*"));
+        assertTrue(Name.isValidName("Muhammad S/O Ali"));
+        assertTrue(Name.isValidName("X AE A-12"));
+        assertTrue(Name.isValidName("Exa Dark Sideræl"));
+        assertTrue(Name.isValidName("$helly"));
+        assertTrue(Name.isValidName("Llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch"));
         assertTrue(Name.isValidName("peter jack")); // alphabets only
         assertTrue(Name.isValidName("12345")); // numbers only
         assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
@@ -56,5 +62,12 @@ public class NameTest {
 
         // different values -> returns false
         assertFalse(name.equals(new Name("Other Valid Name")));
+    }
+
+    @Test
+    public void compareTo() {
+        assertEquals(new Name("asdf").compareTo(new Name("bcda")), -1);
+        assertEquals(new Name("asdf").compareTo(new Name("asdf")), 0);
+        assertEquals(new Name("c").compareTo(new Name("bcda")), 1);
     }
 }

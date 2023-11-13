@@ -54,12 +54,16 @@ public class Address {
         }
 
         Address otherAddress = (Address) other;
-        return value.equals(otherAddress.value);
+        return value.equalsIgnoreCase(otherAddress.value);
     }
 
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    public int compareTo(Address other) {
+        return this.value.compareTo(other.value);
     }
 
 }

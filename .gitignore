@@ -2,6 +2,9 @@
 /.gradle/
 /build/
 src/main/resources/docs/
+/bin
+/.settings
+/Exported_CSVs
 
 # IDEA files
 /.idea/
