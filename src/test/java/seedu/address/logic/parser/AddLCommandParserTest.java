@@ -59,5 +59,8 @@ public class AddLCommandParserTest {
 
         // no index
         assertParseFailure(parser, AddLCommand.COMMAND_WORD + " " + nonEmptyUsername, expectedMessage);
+
+        //no username
+        assertParseFailure(parser, AddLCommand.COMMAND_WORD + " 1", expectedMessage);
     }
 }
