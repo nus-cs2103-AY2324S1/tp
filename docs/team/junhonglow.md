@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default.md
 title: Low Jun Hong's Project Portfolio Page
 ---
 

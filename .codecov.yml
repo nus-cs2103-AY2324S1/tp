@@ -1,5 +1,5 @@
 ignore:
   - "src/main/java/seedu/address/ui"
-  - "tp/src/main/java/seedu/address/model/util"
-  - "tp/src/main/java/seedu/address/Main.java"
-  - "tp/src/main/java/seedu/address/MainApp.java"
+  - "src/main/java/seedu/address/model/util"
+  - "src/main/java/seedu/address/Main.java"
+  - "src/main/java/seedu/address/MainApp.java"

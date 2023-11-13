@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default.md
 title: Andre Sim's Project Portfolio Page
 ---
 
