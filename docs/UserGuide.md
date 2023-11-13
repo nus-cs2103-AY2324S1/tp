@@ -121,8 +121,8 @@ Now that we got the basics out of the way, let's jump right into the guide!
   <li>You might also need to install JavaFX 11. You can find the installation guide <a href="https://openjfx.io/openjfx-docs/#install-javafx">here</a>.</li>
 </ol>
 
-<div>
-  <p><strong class="alert-info">:information_source:</strong> In this installation guide, you'll see the term "JDK" being used. Don't worry! JDK stands for "Java Development Kit", and you can treat it as the same as Java!</p>
+<div markdown="span" class="alert alert-info">
+:information_source: In this installation guide, you'll see the term "JDK" being used. Don't worry! JDK stands for "Java Development Kit", and you can treat it as the same as Java!
 </div>
 
 <ol start="3">
