@@ -1318,67 +1318,218 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+1. Initial launch.
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Run the jar file with the command in the terminal `java -jar networkbook.jar`.
+    
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
-1. Saving window preferences
+1. Saving window preferences.
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   1. Re-launch the app by double-clicking the jar file.
+      
+      Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a person or details
+
+1. Create a new contact
+
+    1. Prerequisite: your contact list has no contact with name `Test`. If there is, either edit/delete the contact, or conduct the following test cases with another name not already present in your contact list.
+
+    1. Test case: `create /name Test`
+
+        Expected: A new contact with name `Test` is created, with no other field specified. If the command is run the second time, no new person is added, and NetworkBook shows an error message.
+    
+    1. Test case: `create /name Test /phone 12345678`
+
+        Expected: A new contact with name `Test` and phone `12345678` is created, with no other field specified.
+    
+    1. Test case: `create /name Test /phone 12345678 /phone 87654321`
+
+        Expected: A new contact with name `Test` and phones `12345678` and `87654321` is created, with no other field is specified.
+
+1. Add details to a contact
+
+    1. Prerequisite: your contact list has at least 1 contact, and your first contact does not have a phone number of `1234`. If there is, either edit/delete the phone number of the contact, or conduct the following test case with another phone that the first contact does not have.
+
+    1. Test case: `add 1 /phone 1234`
+
+        Expected: A new phone number of `1234` is added to the first contact. If the command is run the second time, no new details are added, and NetworkBook shows an error message.
+    
+    1. Test case: `add 0 /phone 1234`
+
+        Expected: No new details are added. NetworkBook shows an error message.
 
 ### Editing a person
 
-1. Editing a person's name while all persons are being shown
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+1. Editing a person's single-value field.
    
-   2. Test case: `update /name Test 1`
+    1. Test case: `edit 1 /name Test`
       
-      Expected: Name of the first contact should change to `Test`. NetworkBook should show details of the old and new name of the contact.
+        Expected: Name of the first contact should change to `Test`. NetworkBook shows the updated details.
    
-   3. Test case: `update /name Test 0`
+    1. Test case: `edit 0 /name Test`
 
-      Expected: No person is updated. Error details shown in the status message.
-2. Editing other attributes of a person
-   1. Prerequisites: List all persons using the 'list' command. Multiple persons in the list.
+        Expected: No person is updated. NetworkBook shows an error message.
+    
+    1. _{ Likewise for `graduation`, `priority` }_
 
-   2. Test case: `update /phone 12345678 1`
+1. Editing a person's multi-value field.
 
-      Expected: Phone number of first contact should change to `12345678`. NetworkBook should show details of old and new phone number.
+    1. Prerequisite: Your contact at index 1 has at least 1 phone number.
 
-   3. Test case: `update /email test@email.com 1`
+    1. Test case: `edit 1 /phone 12345678 /index 1`
 
-      Expected: Email of first contact should change to `test@email.com`. NetworkBook should show details of the old and new email of the contact.
+        Expected: First phone number of first contact should change to `12345678`. NetworkBook shows the updated details.
 
-   4. _{ Likewise for `course`, `specialisation`, `link`, `grad`, `priority`, `tag` }_
+    1. Test case: `edit 1 /phone 12345678 /index 0`
+
+        Expected: No person is updated. NetworkBook shows an error message.
+
+    1. _{ Likewise for `email`, `course`, `specialisation`, `link`, `tag` }_
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a person.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisite: Your contact list has at least 1 contact.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`
+      
+        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`
+      
+        Expected: No person is deleted. NetworkBook shows an error message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+1. Deleting a field from a person
 
-1. _{ more test cases …​ }_
+    1. Prerequisite: Your first contact in the list has at least 1 phone number and a graduation semester.
+
+    1. Test case: `delete 1 /phone /index 1`
+
+        Expected: The first phone number of the first contact is deleted.
+      
+    1. Test case: `delete 1 /name`
+
+        Expected: No detail is deleted. NetworkBook shows an error message.
+    
+    1. Test case: `delete 1 /grad`
+
+        Expected: Graduation year of the first contact is deleted.
+
+### Filtering contact list
+
+1. Filter contact by name
+
+    1. Test case: `find`
+
+        Expected: No filtering is done. NetworkBook shows an error message.
+    
+    1. Test case: `find test`
+
+        Expected: All contacts with `test` as substring (case-insensitive) are filtered in.
+
+1. Filter contact by `course`, `tag`, `spec`, `grad`
+
+    1. Test case: `filter /by course /with CS2103T`
+
+        Expected: All contacts with courses with `CS2103T` being a substring are filtered in.
+    
+    1. _{Likewise for `specialisation`, `tag` }_
+    
+    1. Test case: `filter /by grad /with 2021`
+
+        Expected: All contacts with graduation either AY2021-S2 or AY2122-S1 are filtered in.
+    
+    1. Test case: `filter /by course`
+
+        Expected: No filtering is done. NetworkBook shows an error message.
+
+### Sorting contact list
+
+1. Sort contact list
+
+    1. Test case: `sort /by name`, or `sort /by name /order asc`
+
+        Expected: Contacts are sorted by name in ascending ASCII order.
+    
+    1. Test case: `sort /by name /order desc`
+
+        Expected: Contacts are sorted by name in descending ASCII order.
+    
+    1. _{Likewise for `grad`, `priority`}_
+
+### Undo/redo
+
+1. Undo and redo for data-changing command
+
+    1. Key in a successful command, e.g. `find test`, assuming that your contact list has at least another contact with name with no substring `test`.
+
+        Expected: NetworkBook filters in only contacts with `test` as substring (case-insensitive).
+    
+    1. Test case: `undo`
+
+        Expected: NetworkBook reverts to the previous state before `find test` command was executed.
+    
+    1. Test case: `redo`
+
+        Expected: NetworkBook reapplies the changes done by `find test`, which means only contacts with `test` as substring (case-insensitive) is filtered in.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data file
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Delete the data file. If you have not modified `preferences.json`, your data file should be located in `/data/networkbook.json`.
 
-1. _{ more test cases …​ }_
+    1. Launch the app.
+
+        Expected: The app populated with default sample data.
+
+1. Dealing with corrupted data file
+
+    1. Open the data file.
+
+    1. Change an email to `"test@gmail"` or `null`.
+
+    1. Launch the app.
+
+        Expected: The app starts with an empty list of contacts.
+
+1. Dealing with data file without write permission
+
+    1. Make the data file read-only.
+
+    1. Launch the app.
+
+    1. Test case: `find test`
+
+        Expected: All contacts with name containing `test` as substring (case-insensitive) are filtered in.
+    
+    1. _{Likewise for non-data-changing commands: `filter`, `sort`, `list`, `help`, `exit`}_
+
+    1. Test case: `create /name test` (prerequisite: your contact list does not include any contact with name `test`)
+
+        Expected: NetworkBook shows an error message.
+    
+    1. _{Likewise for data-changing commands: `add`, `edit`, `delete`, `undo`, `redo`}_
+
+1. Save command
+
+    1. Make the data file read-only.
+
+    1. Launch the app.
+
+    1. Key in a successful data-changing command, e.g. `create /name Test` if your contact list does not a contact with name `Test`.
+
+        Expected: NetworkBook shows an error message, but a new contact card is still created in the GUI. However, data is not saved to the data file.
+    
+    1. Go to your OS' file system and add write permission to the data file.
+
+    1. Key in command: `save`
+
+        Expected: Nothing is changed in the GUI, but a new person object is created in the data file.
