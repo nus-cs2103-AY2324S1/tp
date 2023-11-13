@@ -659,7 +659,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: provide a convenient one-stop platform for tutors to keep track of the contact details and attendanc records of each student
+**Value proposition**: provide a convenient one-stop platform for tutors to keep track of the contact details and attendance records of each student
 
 
 ### User stories
