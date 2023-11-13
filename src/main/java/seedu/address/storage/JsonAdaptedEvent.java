@@ -74,8 +74,8 @@ class JsonAdaptedEvent {
         try {
             final EventPeriod modelEventPeriod = ParserUtil.parseEventPeriod(start, end);
             return new Event(modelDescription, modelEventPeriod);
-        } catch (ParseException e) {
-            throw new IllegalValueException(EventPeriod.MESSAGE_CONSTRAINTS);
+        } catch (ParseException pe) {
+            throw new IllegalValueException(pe.getMessage());
         }
     }
 }
