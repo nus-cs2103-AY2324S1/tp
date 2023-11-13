@@ -374,22 +374,21 @@ The sequence diagram notation of the above steps is shown below. <br>
 
 ### Filter dates
 
-The filter feature is implemented using the `FilterCommand` class. The `FilterCommand` class takes in a `Predicate`
-object as a parameter. The `Predicate` object is used to filter the `Date` objects in the `Model` component.
-The `FilterCommand` class then returns a `CommandResult` object that contains the filtered `Date` objects.
+1. The filter dates feature begins by passing the user input obtained from the `CommandBox` class in the `Ui` component to
+   the `LogicManager` class in the `Logic` component by invoking the `execute` function.
+2. The `LogicManager` class then passes the user input to the `LoveBookParser` class for parsing and validation.
+3. The `LoveBookParser` class then performs polymorphism and creates a `FilterCommandParser` object for filter command parsing.
+4. The `FilterCommandParser` carries out it's validation checks and creates a `FilterCommand` object containing a 
+   list of `MetricContainsKeywordPredicate` objects if the checks pass. 
+5. The `FilterCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function which
+   filters the list of dates in the `Model` component and returns the filtered list to the `Ui` component.
 
-1. The user specifies a metric (eg. name/) and a valid value (eg. Emily) to filter by.
-2. If the metric is invalid or the value is not valid, the user will be prompted to enter the command correctly via an error message.
-3. The value will then be cross-referenced with the current list of dates in the `Model` component.
-4. The model then filters the date list for dates that contain the value in the specified metric.
-5. If step 1 - 4 are successfully completed, the displayed date list in the GUI will be updated to only display dates that match the filter criteria.
-
-The _Activity_ diagram summarises what happens after the user enters a filter command.
+The _Activity_ diagram summarises what happens after the user enters a filter command. <br>
 
 <puml src="diagrams/FilterActivity.puml" width="600" />
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
-the command `filter name/John`
+the command `filter name/John`. <br>
 
 <puml src="diagrams/FilterSequence.puml" width="600" />
 
@@ -397,17 +396,23 @@ the command `filter name/John`
 
 ### Sort dates
 
-1. The user specifies a metric (eg. name/) and a sorting order (increasing/ decreasing) to sort by.
-2. If the metric is invalid or the sorting order is invalid, the user will be prompted to enter the command correctly via an error message.
-3. The model date will then sort the dates by the specified metric and order, via the use of `Comparator`.
-4. If the step 1 - 3 are successfully completed, the displayed list of dates will be sorted by the specified metric and order.
+1. The sort dates feature begins by passing the user input obtained from the `CommandBox` class in the `Ui` component to
+   the `LogicManager` class in the `Logic` component by invoking the `execute` function.
+2. The `LogicManager` class then passes the user input to the `LoveBookParser` class for parsing and validation.
+3. The `LoveBookParser` class then performs polymorphism and creates a `SortCommandParser` object for sort command parsing.
+4. The `SortCommandParser` object carries out its validation checks and creates a `SortCommand` object containing a 
+   String prefix (eg. name/) and String sequence (increasing/decreasing) if all checks pass. One thing to note here is 
+   that the sequence and prefix are case-sensitive.
+5. The `SortCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function which
+   sorts the list of dates based on a specified metric in the specified order in the `Model` component and returns the sorted 
+   list to the `Ui` component.
 
-The _Activity_ diagram summarises what happens after the user enters a sort command.
+The _Activity_ diagram summarises what happens after the user enters a sort command. <br>
 
 <puml src="diagrams/SortActivity.puml" width="550" />
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
-the command `sort name/increasing`.
+the command `sort name/increasing`. <br>
 
 <puml src="diagrams/SortSequence.puml" width="600" />
 
@@ -415,16 +420,22 @@ the command `sort name/increasing`.
 
 ### Get Blind Date
 
-1. The user will first key in blindDate which is the command word for this feature.
-2. If the list of dates is empty, the user will be prompted to add a date via an error message.
-3. The model class will then generate a random number, via a random number generator, which will be the index of the date to be returned.
-4. A predicate will be created to filter the current list of dates in the model class and returns true only if the date equals to the date at the index generated in step 2.
-5. If step 1 - 3 are successfully completed, The list of dates will be updated to display the randomly selected date.
+1. The blind date feature begins by passing the user input obtained from the `CommandBox` class in the `Ui` component to
+   the `LogicManager` class in the `Logic` component by invoking the `execute` function.
+2. The `LogicManager` class then passes the user input to the `LoveBookParser` class for parsing and validation.
+3. The `LoveBookParser` class then performs polymorphism and creates a `BlindDateCommand` object.
+   One thing to note here is that inputs like `blindDate 12` and `blindDate x` are accepted since they still contain `list`.
+4. The `BlindDateCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function
+   which sorts the list of dates in the `Model` component and returns the sorted list to the `Ui` component.
 
-The _Activity_ diagram summarises what happens after the user enters a sort command.
+The _Activity_ diagram summarises what happens after the user enters a blindDate command. <br>
+
+<puml src="diagrams/BlindDateActivity.puml" width="550" />
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
-the command `blindDate`.
+the command `blindDate`. <br>
+
+<puml src="diagrams/BlindDateSequence.puml" width="600" />
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
