@@ -75,15 +75,15 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getWellNusFilePath());
 
-        Optional<ReadOnlyWellNus> addressBookOptional;
+        Optional<ReadOnlyWellNus> wellNusOptional;
         ReadOnlyWellNus initialData;
         try {
-            addressBookOptional = storage.readWellNus();
-            if (!addressBookOptional.isPresent()) {
+            wellNusOptional = storage.readWellNus();
+            if (!wellNusOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getWellNusFilePath()
                         + " populated with a sample AddressBook.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleWellNus);
+            initialData = wellNusOptional.orElseGet(SampleDataUtil::getSampleWellNus);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getWellNusFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");

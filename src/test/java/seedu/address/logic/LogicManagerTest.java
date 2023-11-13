@@ -43,10 +43,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonWellNusStorage addressBookStorage =
+        JsonWellNusStorage wellNusStorage =
                 new JsonWellNusStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(wellNusStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -142,7 +142,7 @@ public class LogicManagerTest {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
         // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
-        JsonWellNusStorage addressBookStorage = new JsonWellNusStorage(prefPath) {
+        JsonWellNusStorage wellNusStorage = new JsonWellNusStorage(prefPath) {
             @Override
             public void saveWellNus(ReadOnlyWellNus wellNus, Path filePath)
                     throws IOException {
@@ -152,7 +152,7 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(wellNusStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 
