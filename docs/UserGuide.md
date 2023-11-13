@@ -4,7 +4,7 @@ title: Tran$act User Guide
 ---
 
 Welcome to **Tran$act**, your solution for effortless transaction recording and management.
-Tran$act is a desktop application designed to cater to the needs of startup or small scale
+Tran$act is a desktop application designed to cater to the needs of startups or small scale
 retailers looking for a cheap and efficient way to record daily transactions.
 
 Here's an overview of our main features:
@@ -65,7 +65,7 @@ to help you streamline your accounting.
 
 8. Congratulations, you have successfully added a staff member and a transaction!
 
-9. Once you have familarized yourself with Tran$act and want to begin inputting your own data, feel free to
+9. Once you have familiarized yourself with Tran$act and want to begin inputting your own data, feel free to
    type `clearstaff` and press Enter followed by `cleartransaction` and press Enter to clear the transaction book and
    staff list.
 
@@ -157,7 +157,7 @@ Tran$act allows users to edit existing staff in the staff list in case any of th
 
 **9. Deleting Staff**
 
-Anybody leave the business? Tran$act supports functionality to remove staff who may have left the company or are no
+Someone left the business? Tran$act supports functionality to remove staff who may have left the company or are no
 longer associated with it, reducing bloat.
 
 **10. Dashboard Display**
@@ -282,7 +282,7 @@ Format: `filter [ty/<TYPE>] [has/<KEYWORDS...>] [after/<DATE>] [before/<DATE>] [
     - `R` will match revenue
     - `E` will match expense
 - `has` will match descriptions containing the keyword(s)
-    - The search is case-insensitive. e.g `hans` will match `Hans`
+    - The search is case-insensitive. e.g. `hans` will match `Hans`
     - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
     - Only the description is searched.
     - Only full words will be matched e.g. `Han` will not match `Hans`
@@ -368,7 +368,7 @@ Finds staff whose names contain any of the given keywords.
 
 Format: `find KEYWORD [KEYWORDS...]`
 
-- The search is case-insensitive. e.g `hans` will match `Hans`
+- The search is case-insensitive. e.g. `hans` will match `Hans`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 - Only the name is searched.
 - Only full words will be matched e.g. `Han` will not match `Hans`
@@ -439,8 +439,8 @@ Tran$act's data is saved in the hard disk automatically after any command that c
       Enter to run the application.
     - If this doesn't work, check our GitHub to make sure you have the latest version of Tran$act downloaded.
 4. Can I import my own data into Tran$act?
-    - Tran$act currently does not support file importing. However, if have data in Tran$act on another computer, you can
-      manually copy the `\data` folder to to this computer and place it in the same folder as Tran$act and your data
+    - Tran$act currently does not support file importing. However, if you have data in Tran$act on another computer, you can
+      manually copy the `\data` folder to this computer and place it in the same folder as Tran$act and your data
       will be transferred over.
 5. The Tran$act window is too small. Can I change its size?
     - Yes, you can change Tran$act's window size by hovering your cursor over the border's of Tran$act's window. You'll
