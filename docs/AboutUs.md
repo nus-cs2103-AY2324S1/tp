@@ -16,7 +16,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/quzhetao01)]
 [[portfolio](team/quzhetao01.md)]
 
-* Role: Deliverables and deadlines
+* Role: Developer
 * Responsibilities: Data
 
 ### Darren Tan Fanyi
@@ -26,7 +26,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/darrentfy)]
 [[portfolio](team/darrentfy.md)]
 
-* Role: Deliverables and deadlines
+* Role: Developer
+* Responsibilities:
 
 ### Eric Sim
 
@@ -35,6 +36,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/simwperic)]
 [[portfolio](team/simwperic.md)]
 
+* Role: Developer
+* Responsibilities:
+
 ### Stephen
 
 <img src="images/sheeepen.png" width="200px">
@@ -42,7 +46,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/sheeepen)]
 [[portfolio](team/sheeepen.md)]
 
-* Role: Deliverables and deadlines
+* Role: Developer
+* Responsibilities:
 
 ### Hannah Caroline Solomonraj
 
@@ -51,5 +56,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/hcs1203)]
 [[portfolio](team/hcs1203.md)]
 
-* Role: Deliverables and deadlines
+* Role: Developer
+* Responsibilities: Model
   
