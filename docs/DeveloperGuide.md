@@ -201,7 +201,7 @@ The command is only stored in history if the execution of the command (by `Comma
 ## Acknowledgements
 
 - Libraries: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
-- App icon from <http://www.mcdodesign.com/> by Susumu Yoshida
+- App icon from [McDo Design](https://www.flickr.com/photos/mcdodesign/) by Susumu Yoshida
 - Some code adapted from <http://code.makery.ch/library/javafx-8-tutorial/> by Marco Jakob
 
 ---
