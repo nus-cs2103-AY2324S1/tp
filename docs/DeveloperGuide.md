@@ -821,4 +821,9 @@ e.g. `remind 30` will show clients with policy expiry dates within the next 30 d
 3. Hence, if there are multiple successful commands, the user will have no ability to keep track on what commands he used so far
 4. We plan to allow the recovery of previously succeeded commands using the _up arrow key_ (Just like in UNIX OS)
 
-
+### Saved file also get sorted
+1. The current implementation of `sort` not only sorts the client list that is displayed to the user, but also sorts the storage file
+that stores the client details i.e. `[JAR file location]/data/insureiq.json`.
+2. Hence, if the user restarts the application again, the client list displayed to the user will be the already sorted client list
+3. We plan to update the implementation of the `sort` command such that it will only display the sorted client list to the user,
+but does not sort the client list in the storage file.
