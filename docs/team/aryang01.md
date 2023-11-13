@@ -16,7 +16,8 @@ Given below are my contributions to the project.
   * Justification: This feature offers users a safety net, allowing them to rectify unintentional or erroneous deletions, thereby improving the overall user experience by ensuring data integrity and minimizing mistakes.
   * Highlights: The integration of the 'Undo' functionality deeply impacts the system's command structure, influencing both the current and forthcoming deletions. Extensive consideration of various design alternatives was undertaken to ensure seamless integration. Implementation was intricate, necessitating alterations in the existing command architecture.
 
-* **Code contributed**: [Reposense Link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=Aryan&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
+* **Code contributed**: 
+  * [Reposense Link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=Aryan&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
 
 * **Project management**:
   * Added on to the UI Mockup to help guide the team on how to proceed ahead. I modified the UI to make it look more striking and appealing while not straining the eyes of the viewers. Added and a pop up window to display user-related details instead of displaying them in the main window to make the Ui look more seamless. (Pull request [#186](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/186/files)).
@@ -41,8 +42,6 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
     * Made the initial skeleton with team member's particulars.
-  * Developer Guide:
-    * To be Added
 
 * **Community**:
   * Contributed to forum discussions ([#326](https://github.com/nus-cs2103-AY2324S1/forum/issues/326))
