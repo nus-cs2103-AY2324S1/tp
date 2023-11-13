@@ -1606,6 +1606,7 @@ testers are expected to do more *exploratory* testing.
 ### Generating a PDF payslip for a specific employee
 
 1. Generating a PDF payslip for a specific employee
+
     i. Prerequisites:
       * List all employees using the `list` command. Multiple employees in the list.
       * The employee should exist in the list.
@@ -1627,5 +1628,50 @@ testers are expected to do more *exploratory* testing.
 
 ### Marking attendance for an employee
 
+1. Marking the attendance of an employee
+
+   i. Prerequisites:
+     * List all employees using the `list` command. Multiple employees in the list.
+     * The employee should exist in the list.
+   
+   ii. Test case: `mark 1 /at late`<br>
+     * Expected: The first employee is marked as late. A success message is shown in the result box.
+   
+   iii. Test case: `mark /n John /at late` <br>
+     * Expected: The employee named "John" is marked as late. A success message is shown in the result box.
+   
+   iv. Test case: `mark 1 /at idk`<br>
+     * Expected: Invalid attendance type provided. Error details are shown in the result box.
+   
+   v. Test case: `mark 1`<br>
+     * Expected: The attendance type is not provided. Error details are shown in the result box.
+   
+   vi. Test case: `mark 1 /at `<br>
+     * Expected: The attendance type is not provided. Error details are as shown in the result box.
+   
+   vii. Test case: `mark /at present` <br>
+     * Expected: The index and name is not provided. Error details are as shown in the result box.
+   
+   viii. Test case: `mark /n /at late` <br>
+     * Expected: No name provided. Error details are as shown in the result box.
+
 ### Generating attendance report for a specific employee
+
+1. Reporting the attendance of an employee.
+
+   i. Prerequisites:
+     * List all employees using the `list` command. Multiple employees in the list.
+     * The employee should exist in the list.
+   
+   ii. Test case: `attendance 1`<br>
+     * Expected: The first employee's attendance report is shown in the result box.
+   
+   iii. Test case: `attendance /n John` <br>
+     * Expected: The employee named "John"'s attendance report is shown in the result box.
+   
+   iv. Test case: `attendance` <br>
+     * Expected: The index and name is not provided. Error details are shown in the result box.
+   
+   v. Test case: `attendance /n` <br>
+     * Expected: The name is not provided. Error details are shown in the result box.
 
