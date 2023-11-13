@@ -53,7 +53,7 @@ Relevant tests were added for features implemented and feature enhancements.
     * Added screenshots for the following commands (subsequently replaced): `list`, `viewMember`, `viewEvent`. [#256](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/256)
     * Created table to organise list of acceptable values for each command. [#254](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/254)
     * Enhanced formatting of the user guide to ensure consistency and well-structured presentation. [#301](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/301)
-      * Credits: Styling for table of contents was adapted from [StackOverflow]()
+      * Credits: Styling for table of contents was adapted from [StackOverflow](https://stackoverflow.com/questions/19999696/are-numbered-headings-in-markdown-rdiscount-possible)
 
 * **Developer Guide**
   * Added target user profile and value proposition [#90](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/90)
