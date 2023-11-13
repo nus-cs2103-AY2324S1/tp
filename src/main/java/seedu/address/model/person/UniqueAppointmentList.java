@@ -57,7 +57,7 @@ public class UniqueAppointmentList extends UniqueObjectList<Appointment> {
     /**
      * Replaces the appointment {@code target} in the list with {@code editedAppointment}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedAppointment} must not be the same as another existing appointment in the list.
+     * The identity of {@code editedAppointment} must not be the same as another existing appointment in the list.
      */
     @Override
     public void setObject(Appointment target, Appointment editedAppointment) {
