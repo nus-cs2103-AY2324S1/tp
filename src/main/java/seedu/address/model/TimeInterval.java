@@ -157,10 +157,6 @@ public class TimeInterval {
         return this.start.compareTo(otherTime.start);
     }
 
-    public int compareEnd(TimeInterval otherTime) {
-        return this.end.compareTo(otherTime.end);
-    }
-
     public DayOfWeek getStartTimeDay() {
         return this.start.getDay();
     }

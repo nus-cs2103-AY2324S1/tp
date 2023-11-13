@@ -19,7 +19,6 @@ public class UngroupPersonCommandParser implements Parser<UngroupPersonCommand> 
      * and returns an UngroupPersonCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-
     public UngroupPersonCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {

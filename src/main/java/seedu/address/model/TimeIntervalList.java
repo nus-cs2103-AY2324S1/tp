@@ -43,7 +43,6 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
                 passMessage.append(interval.toString() + "\n");
             }
         }
-
         if (isFail && isPass) {
             return errorMessage.append(passMessage).toString();
         } else if (isFail) {
@@ -94,7 +93,6 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
                 passMessage.append(interval.toString() + "\n");
             }
         }
-
         if (isFail && isPass) {
             return errorMessage.append(passMessage).toString();
         } else if (isFail) {
@@ -114,14 +112,6 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
         return internalList.contains(timeInterval);
     }
 
-    /**
-     * Removes free time from list
-     *
-     * @param timeInterval The time interval to remove
-     */
-    public void removeTime(TimeInterval timeInterval) {
-        internalList.remove(timeInterval);
-    }
 
     /**
      * Checks if time interval overlaps with internal list
@@ -138,7 +128,6 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
         return false;
     }
 
-    /////////////////////
 
     /**
      * Check whether no time is stored

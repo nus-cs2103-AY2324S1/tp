@@ -38,6 +38,10 @@ public class DayCard extends UiPart<Region> {
         eachDayTaskList.setCellFactory(listview -> new EachDayTaskListCell());
     }
 
+    /**
+     * Custom {@code ListCell} that displays the graphics of a {@code GroupTimeContainer} using a
+     * {@code EachDayTaskLine}.
+     */
     class EachDayTaskListCell extends ListCell<GroupTimeContainer> {
         @Override
         protected void updateItem(GroupTimeContainer task, boolean empty) {
