@@ -56,9 +56,9 @@ Are you tired of managing applicant applications through cumbersome spreadsheets
 
 Upgrade your hiring process with **JABPro (JobApplicationsBook Pro)**, a CLI based desktop app that allows you to:
 
-* easily manage applicant applications
-* schedule interviews
-* gain valuable insights on their interview performance
+* easily manage applicant applications,
+* schedule interviews,
+* and gain valuable insights on their interview performance! <br>
 
 From interns to full-time roles, software to marketing, JABPro’s versatile interface allows you to keep track of all kinds of job applicants in various industries. 
 
@@ -91,26 +91,26 @@ You are an **advanced** user if ...
 While **JABPro** offers a whole range of features, we believe that the following features are likely to be the most useful to you:
 
 **Viewing details of applicants:**
-1. Viewing applicant's information: `view`
+* Viewing applicant's information: `view`
 
 **Tag colouring and categorisation:**
-1. Creating a tag with a specified category: `create`
-2. Listing all tags: `listT`
-3. Adding and editing an applicant's tags and tag scores: `edit`
+* Creating a tag with a specified category: `create`
+* Listing all tags: `listT`
+* Adding and editing an applicant's tags and tag scores: `edit`
 
 **Event management and Scheduling:** 
-1. Adding an event: `event`
-2. Viewing events: `schedule`
+* Adding an event: `event`
+* Viewing events: `schedule`
 
 **Comparing and filtering applicants:**
-1. Filtering applicants by statistics: `filter`
+* Filtering applicants by statistics: `filter`
 
 These features address the complications that Hiring Managers face when managing applicants: 
-1. Visual Noise and Clutter from using other applicant management software like Excel  
+1. **Visual Noise and Clutter** from using other applicant management software like Excel
 
 `Viewing details of applicants` and `Tag colouring and categorisation` address this by creating an organized and intuitive way to view applicants and their details. This is done through colour coding and minimalistic design.
 
-2. Toggling between different software to manage applicants and schedule events   
+2. **Toggling between different software** to manage applicants and schedule events
 
 `Event Management and Scheduling` address this by allowing you to schedule events and view them in the same software. This means that you do not have to toggle between different software to manage applicants and schedule events.
 
@@ -576,11 +576,21 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAGNAME]…​ [
   specifying any tags after it.
 * There is no current way to keep the existing tags and add new tags to the applicant. You will have to re-tag the applicant with the existing tags and the new tags.
 
+<box type="warning" seamless>
+
+**Caution:**
+If you tag a person with a tag that has not been categorised yet, and then you categorised it as the `assessment` category, you need to re-tag the person with the same tag name again.
+This is because the tag is not considered an `assessment` tag  until you re-tag the person with the same tag name again.
+
+</box>
+
+
 **Notes on editing the score of the specified applicant for `sc/TAGNAME SCORE`**:
 * The `TAG` in `sc/TAG SCORE` must be a tag of the category `assessment`. You cannot use the `sc/TAG SCORE` field for tags that are not of the `assessment` category.
 * The `sc/TAG SCORE` field can only be used after the `t/TAG` field is used if the tag has not been created  or the `TAG` already exist on the applicant.
 * The `SCORE` in `sc/TAG SCORE` is non-negative, that is `SCORE` must be more than or equal to 0.
 * To clear a tag's score, just re-tag it with the same tag name, but without using the `sc/TAG SCORE` field.
+
 
 
 Notes on rules for `edit` command involving tags with categories for `t/[CATEGORY] TAGNAME`:
@@ -629,19 +639,22 @@ An example of the `edit` command being successfully executed to clear a tags and
 
 **Error Handling Table for `edit` command:**
 
-| Reason for Error                              | Error Message                                                                | Remedy / Suggested course of action                                                                                                                                 |
-|-----------------------------------------------|------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Missing edit keyword: `edit`                  | Unknown command                                                              | Follow the command format of `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAGNAME]…​ [sc/TAGNAME SCORE]` closely                                         |
-| Missing Index                                 | Invalid command format!                                                      | Ensure that the index is filled up.                                                                                                                                 |
-| Invalid Index                                 | The person index provided is invalid                                         | Ensure that the index is valid. That is it is a number that is on the displayed applicant list.                                                                     |
-| Missing at least one of the field | At least one field to edit must be provided.                                 | Ensure that at least one of the field is filled up and to be changed.                                                                                               |
-| Duplicate name                                | This person already exists in the address book                               | Ensure that the name of the applicant is unique. That is you cannot add the same name twice. Use some form of extra identification like a number                    |
-| Invalid phone number                          | Phone numbers should only contain numbers, and it should be at least 3 digits long | Ensure that the phone number only contains number and should be at least 3 digits long                                                                              |
-| Invalid email                                 | Emails should be of the format local-part@domain and adhere to the following constraints: | Ensure that the prefix and domain of the email is correct following the constraints stated by the error                                                             |                                                                                                                                                
-| Invalid tag name                              | Tag names should only contain alphanumeric characters and should not be blank | Ensure that the tag name only contains alphanumeric characters and should not be blank                                                                              |
-| Multiple prefixes of the same type being used | Multiple values specified for the following single-valued field(s): `prefix/` | Remove the duplicate prefix. The command should only have 1 of every prefix except for `t/`                                                                          |
-| Missing score for tag                         | Invalid score, score must be non-negative integer.                                                        | Ensure that the score is filled up and has a space from the `TAGNAME`.                                                                                              | 
-| Invalid tag to attach score | Invalid score tag, tag must a tag of the category assessment and must exist on the applicant | Ensure that the tag is of the category assessment and exist on the applicant. If its the wrong category, use `create`, if it is not tagged to the person use `edit` |
+| Reason for Error                              | Error Message                                                                | Remedy / Suggested course of action                                                                                                                                                                                                                        |
+|-----------------------------------------------|------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Missing edit keyword: `edit`                  | Unknown command                                                              | Follow the command format of `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAGNAME]…​ [sc/TAGNAME SCORE]` closely                                                                                                                                |
+| Missing Index                                 | Invalid command format!                                                      | Ensure that the index is filled up.                                                                                                                                                                                                                        |
+| Invalid Index                                 | The person index provided is invalid                                         | Ensure that the index is valid. That is it is a number that is on the displayed applicant list.                                                                                                                                                            |
+| Missing at least one of the field             | At least one field to edit must be provided.                                 | Ensure that at least one of the field is filled up and to be changed.                                                                                                                                                                                      |
+| Duplicate name                                | This person already exists in the address book                               | Ensure that the name of the applicant is unique. That is you cannot add the same name twice. Use some form of extra identification like a number                                                                                                           |
+| Invalid phone number                          | Phone numbers should only contain numbers, and it should be at least 3 digits long | Ensure that the phone number only contains number and should be at least 3 digits long                                                                                                                                                                     |
+| Invalid email                                 | Emails should be of the format local-part@domain and adhere to the following constraints: | Ensure that the prefix and domain of the email is correct following the constraints stated by the error                                                                                                                                                    |                                                                                                                                                
+| Invalid tag name                              | Tag names should only contain alphanumeric characters and should not be blank | Ensure that the tag name only contains alphanumeric characters and should not be blank                                                                                                                                                                     |
+| Multiple prefixes of the same type being used | Multiple values specified for the following single-valued field(s): `prefix/` | Remove the duplicate prefix. The command should only have 1 of every prefix except for `t/`                                                                                                                                                                |
+| Missing score for tag                         | Invalid score, score must be non-negative integer.                                                        | Ensure that the score is filled up and has a space from the `TAGNAME`.                                                                                                                                                                                     | 
+| Invalid tag to attach score                   | Invalid score tag, tag must a tag of the category assessment and must exist on the applicant | Ensure that the tag is of the category assessment and exist on the applicant. If its the wrong category, use `create`, if it is not tagged to the person use `edit`                                                                                        |
+| Missing valid score-tag on applicant          | The tag does not exist, cannot attach a score to it | Ensure that the applicant has the tag and it is of  category `assessment`, this is what is considered a valid score-tag. This is done by creating an `assessment` category for the tag name using `create` and update tag using `edit INDEX t/TAGNAME ...` | 
+| Tag ambiguity                                 | Multiple tags exists with the same name! Specify the category of the tag when adding it to a person e.g. edit 1 t/experience 3 | Ensure that if there is a tag name with multiple categories, you specify the category when in the prefix using `t/CATEGORY TAGNAME`                                                                                                                        |
+
 
 <box type="tip" seamless>
 
@@ -698,30 +711,41 @@ Format: `create t/CATEGORY TAGNAME…​`
 **Note:**
 * JABPro offers 3 predefined tag categories namely `employment`, `role`, and `dept`. However, you can define up to 3 more tag categories of your own!
 * The tags created using this command can be used to tag applicants using the `add` or `edit` command. Tagging
-  applicant without previously categorising the tags using `create` would still work but the tags would be *uncategorized*.
-* `create` only allows tags to be categorised at creation meaning tags that have already been created, cannot be categorised further.
+  applicant without previously creating the tags using `create` would still work but the tags would be *uncategorised*.
+* `create` only allows tags to be categorised at creation meaning tags that have already been created, cannot be categorised further i.e. cannot edit tag categories of tags. 
+* The field `t/CATEGORY TAGNAME` must strictly contain only two words hence it is advisable for you to keep the `TAGNAME` alphanumerical (contains no spaces). Any other word
+  that comes after `t/CATEGORY TAGNAME` that is not preceded by a `t/` prefix would be ignored and the tag for the first valid tag is created.
+  <br> 
+  Example: `create t/role software developer` would create the tag **software** and ignore the word developer.
 
-  **Tip:**
+<box type="tip" seamless>
+
+**Tip:**
 * You can create multiple tags at once i.e. `create t/dept marketing t/role developer ...`
 * Use this command for frequently used tags for better efficiency in tagging applicants.
 * You can view all of your tags by keying in the `listT` command.
-  </box>
+</box>
 
-  Failed to create tags? Here's some possible reasons why:
-1. Missing mandatory field i.e. `create`
-2. Did not specify category i.e. `create t/developer`
-3. Invalid tag name (contained spaces) i.e. `create t/role software developer`
-4. Tag already exists
-
-   An example of the `create` command being successfully executed:
+An example of the `create` command being successfully executed:
 1. Enter the command `create t/dept marketing t/role developer`
 2. This is what you should see upon successful execution of command.
-   
-    ![create-success](images/create-success.png)
+
+   ![create-success](images/create-success.png)
 
 3. View your newly created tags using the `listT` command.
 
    ![listT-create](images/listT-create.png)
+
+Failed to create tags? Here are some possible reasons why
+
+| Reason for Error                                                                                                        | Error Message                                | Remedy / Suggested course of action                                                                                        |
+|-------------------------------------------------------------------------------------------------------------------------|----------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| Missing create keyword: `create`                                                                                        | Unknown command                              | Follow the command format of `create t/CATEGORY TAGNAME…​` closely                                                         |
+| Missing mandatory field e.g. `create`                                                                                   | Invalid command format!                      | Ensure that you specify at least one tag category and tag name of the tag you would like to create.                        |
+| Incomplete field e.g. `create t/test`                                                                                   | Invalid command format!                      | Ensure that both parts of the field are included i.e. specify both tag category and tag name.                              |
+| Invalid tag name e.g. `create t/developer@`                                                                             | Tags names should be alphanumeric.           | Ensure that the tag name does not contain any non-alphanumeric characters i.e. no symbols and whitespaces.                 |
+| Tag already exists                                                                                                      | This tag already exists in the address book! | Since the tag already exists, there is no need for you to create a new one. You can reuse this same tag to tag applicants! |
+| Using commas as delimiters of different prefixes instead of whitespaces e.g. `create t/dept software, t/role marketing` | Invalid command format!                      | Remove the comma(s) e.g. `create t/dept software, t/role marketing`                                                        |                                                                                                  |
 
 [Jump back to Table of Contents](#table-of-contents)
 
@@ -766,24 +790,24 @@ Format: `search (n/NAME [MORE NAME] / st/STATUS [MORE STATUS] / t/TAG [MORE TAGS
 
 **Tip**:
 
-* You can combine multiple search categories in a single `search` command.
-* Search parameters are case-insensitive.
+* You can combine multiple search categories in a single `search` command e.g. `search n/alex st/interviewed t/intern`
+* Search parameters are case-insensitive i.e. doing `search n/aLeX` is the same as `search n/alex`
   
 </box>
 
-Examples of successful command execution:
+Here's what you would see upon successful command execution:
 1. `search n/alex bernice`
    
    ![search-success-1](images/search-success-1.png)
   
    The above `search` command displayed all applicants whose name match ANY of the given keywords. This is because
-   `search` does an `OR` search within a specific category. <br>
+   `search` does an `OR` search **within a specific category**. <br>
 2. `search n/alex bernice st/interviewed t/intern`
    
    ![search-success](images/search-success.png)
   
    Notice how the above `search` command did not display "Alex" despite his profile matching
-   the `name` and `tag` categories. This is because `search` does an `AND` search across multiple categories.<br>
+   the `name` and `tag` categories. This is because `search` does an `AND` search **across multiple categories**.<br>
 
 <box type="tip" seamless>
 
@@ -799,11 +823,18 @@ It's best to explain this by breaking down an example `search` command!
 
 </box>
 
-Failed to execute the `search` command? Here are some possible reasons why:
-1. Missing search category i.e. `search`
-2. Invalid name/status/tag parameters i.e. `search n/@alex st/accepted t/intern#`
-3. Multiple prefixes of the same category used i.e. `search n/alex n/bernice`
-4. Using commas as delimiters of different parameters instead of spaces i.e. `search n/alex, bernice`
+Failed to execute the `search` command? Here are some possible reasons why
+
+| Reason for Error                                                                                    | Error Message                                                                                                                                                                                                                                                   | Remedy / Suggested course of action                                                                                                                    |
+|-----------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Missing search keyword                                                                              | Unknown command!                                                                                                                                                                                                                                                | Follow the command format `search (n/NAME [MORE NAME] / st/STATUS [MORE STATUS] / t/TAG [MORE TAGS)`                                                   |
+| Missing search categories e.g. `search`                                                             | Invalid command format!                                                                                                                                                                                                                                         | Make sure you include **at least one** of the search categories i.e. `/n`, `/st`, `/t`.                                                                |
+| Invalid name e.g. `search n/alex@`, `search n/`                                                     | Names should only contain alphanumeric characters and spaces, and it should not be blank.                                                                                                                                                                       | Ensure that `name` does not contain any non-alphanumeric characters such as &, $, @, -, %, *, _, etc.                                                  |
+| Invalid status e.g. `search st/in`, `search st/`                                                    | Status should be either one of the following: 'Preliminary','Interviewed', 'Offered', 'Rejected' and it should not be blank.                                                                                                                                    | Check that the `status` is one of the following: `preliminary`, `interviewed`, `rejected`, `offered`. Enter the command again with any of the 4 metric |
+| Invalid tag e.g. `search t/intern@`, `search t/`                                                    | Tags names should be alphanumeric.                                                                                                                                                                                                                              | Ensure that `tag` does not contain any non alphanumeric characters such as &, $, @, -, %, *, _, empty space, etc.                                      |
+| Multiple prefixes of the same category being used e.g. `search n/alex n/bernice`                    | Multiple values specified for the following single-valued field(s): `prefix/`.                                                                                                                                                                                  | Remove the duplicate prefix. The command should only have at most **one** of every prefix.                                                             |
+| Using commas as delimiters of different parameters instead of spaces e.g. `search n/alex, bernice`  | Names should only contain alphanumeric characters and spaces, and it should not be blank<br/>Status should be either one of the following: 'Preliminary','Interviewed', 'Offered', 'Rejected' and it should not be blank<br/>Tags names should be alphanumeric. | Remove the comma(s) e.g. `search n/alex yeoh`                                                                                                          |
+| Using commas as delimiters of different parameters instead of spaces e.g. `search n/alex, t/intern` | Should display the error message for either invalid `name`, `status`, or `tag` depending on the first prefix because it will consider the comma and anything that comes after it as part of the first prefix.                                                   | Remove the comma(s) e.g. `search n/alex t/intern`                                                                                                      |
 
 [Jump back to Table of Contents](#table-of-contents)
 
@@ -875,16 +906,16 @@ An example of the `filter` command being successfully executed with `median`:
 
 **Error handling for `filter` command:**
 
-| Reason for Error                                        | Error Message                                                                              | Remedy / Suggested course of action                                                                                                                                     |
-|---------------------------------------------------------|--------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Missing filter keyword: `filter`                        | Unknown command!                                                                           | Follow the command format strictly of `filter t/TAGNAME met/METRIC val/VALUE` for score and percentile or `filter t/TAGNAME met/METRIC` for mean or median.             |
-| Missing parameters                                      | Incomplete parameter inputs. t/TAG and met/SCORE are compulsory fields. | Enter the command again with the correct parameters.                                                                                                                    |
-| Invalid tag as tag has wrong category or does not exist | Tag does not exist!                                                                        | Check that the tag is of the category `assessment` and that the tag exists using `listT`. Use the `create` command if it does not.                                      |
-| Invalid metric                                          | Invalid metric provided. Needs to be one of: score, mean, median, percentile               | Check that the metric is one of the following: `score`, `mean`, `median`, `percentile` and that it is spelt correctly. Enter the command again with any of the 4 metric |
- | Invalid value                                           | Invalid value provided. Needs to be a non negative integer that is more than or equal to 0 | Check that the value is a non-negative integer that is more than or equal to 0. Enter the command again with the correct value.                                         |
- | Missing value                                           | val/VALUE is missing, it is compulsory.                                                    | Enter a value for `val/VALUE` since the metric requires it.                                                                                                             |
-| Multiple prefixes of the same type being used           | Multiple values specified for the following single-valued field(s): `prefix/`              | Remove the duplicate prefix. The command should only have 1 of every prefix                                                                                             |
-
+| Reason for Error                              | Error Message                                                                              | Remedy / Suggested course of action                                                                                                                                     |
+|-----------------------------------------------|--------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Missing filter keyword: `filter`              | Unknown command!                                                                           | Follow the command format strictly of `filter t/TAGNAME met/METRIC val/VALUE` for score and percentile or `filter t/TAGNAME met/METRIC` for mean or median.             |
+| Missing parameters                            | Incomplete parameter inputs. t/TAG and met/SCORE are compulsory fields. | Enter the command again with the correct parameters.                                                                                                                    |
+| Tag does not exist on any applicant           | Tag does not exist!                                                                        | Check that the tag is used on at least one applicant. Add the tag to the applicants using `edit`                                                                        |
+| Invalid metric                                | Invalid metric provided. Needs to be one of: score, mean, median, percentile               | Check that the metric is one of the following: `score`, `mean`, `median`, `percentile` and that it is spelt correctly. Enter the command again with any of the 4 metric |
+ | Invalid value                                 | Invalid value provided. Needs to be a non negative integer that is more than or equal to 0 | Check that the value is a non-negative integer that is more than or equal to 0. Enter the command again with the correct value.                                         |
+ | Missing value                                 | val/VALUE is missing, it is compulsory.                                                    | Enter a value for `val/VALUE` since the metric requires it.                                                                                                             |
+| Multiple prefixes of the same type being used | Multiple values specified for the following single-valued field(s): `prefix/`              | Remove the duplicate prefix. The command should only have 1 of every prefix                                                                                             |
+| Tag name does not have an `assessment` category      | Tag category does not exist! | Check that the tag name has an `assessment` category using `listT`. Use `create` to create an `assessment` category for the tag if it does not.                         |                                                                                                              
 
 <box type="tip" seamless>
 
@@ -919,6 +950,7 @@ Format:
 * The sorting algorithm is case-sensitive, which means it will treat uppercase and
   lowercase letters as distinct. This may result in names being sorted as A B C a b c, rather than A a B b C c.
 
+[Jump back to Table of Contents](#table-of-contents)
 
 ### 4. Event Management and Scheduling
 
@@ -1051,11 +1083,10 @@ Exports the entries into a .csv file located in the current directory as (/data/
 * JABPro must have write permissions, this means that if the .csv file is open,
     exporting again will not be possible.
 
-Exports to the following location
-* /data/export.csv
-
 Examples:
 * `export` exports the data to /data/export.csv
+
+[Jump back to Table of Contents](#table-of-contents)
 
 ### Clearing all entries: `clear`
 <a name="clearing-all-entries-clear"></a>
