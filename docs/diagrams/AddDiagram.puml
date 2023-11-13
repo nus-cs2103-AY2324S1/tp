@@ -1,0 +1,81 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+Participant ":Logic" as logic LOGIC_COLOR
+Participant ":NetworkBookParser" as networkBookParser LOGIC_COLOR
+
+Participant ":AddCommandParser" as addCommandParser LOGIC_COLOR
+Participant ":AddPersonDescriptor" as addPersonDescriptor LOGIC_COLOR
+Participant ":AddCommand" as addCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+Participant ":Person" as person MODEL_COLOR
+Participant ":Model" as model MODEL_COLOR
+end box
+
+-> logic : execute("add" + details)
+activate logic
+
+logic -> networkBookParser : "add" + details
+activate networkBookParser
+
+create addCommandParser
+networkBookParser -> addCommandParser
+activate addCommandParser
+
+addCommandParser --> networkBookParser
+deactivate addCommandParser
+
+networkBookParser -> addCommandParser : parse(details)
+activate addCommandParser
+
+create addPersonDescriptor
+addCommandParser -> addPersonDescriptor : generate with details
+activate addPersonDescriptor
+
+addPersonDescriptor --> addCommandParser : descriptor
+deactivate addPersonDescriptor
+
+create addCommand
+addCommandParser -> addCommand : new AddCommand(index, descriptor)
+activate addCommand
+
+addCommand --> addCommandParser
+deactivate addCommand
+
+addCommandParser --> networkBookParser
+deactivate addCommandParser
+
+networkBookParser --> logic
+deactivate networkBookParser
+
+logic -> addCommand : execute(model)
+activate addCommand
+
+addCommand -> model : get p at index
+activate model
+
+model --> addCommand : p at index
+deactivate model
+
+create person
+addCommand -> person : add descriptor to p
+activate person
+
+person --> addCommand : new p
+deactivate person
+
+addCommand -> model : setItem(p, new p)
+
+addCommand -> model : update list
+
+addCommand --> logic : command success
+deactivate addCommand
+
+<-- logic : command success
+deactivate logic
+
+@enduml
