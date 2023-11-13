@@ -263,7 +263,7 @@ To learn more about **editing a fosterer through the profile page**, refer to th
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `reset`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit`, `undo`, `sort` and `reset`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines, as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -575,8 +575,8 @@ Examples:
 
 <div></div>
 
-*  `find` or `list` followed by `edit 1 p/12345678 animal/Bob` 
-   * edits the phone number and the pet name of the 1st fosterer in your address book to 12345678 and Bob respectively.
+*  `find` or `list` followed by `edit 1 p/12345678 animal/Bobby` 
+   * edits the phone number and the pet name of the 1st fosterer in your address book to 12345678 and Bobby respectively.
    ![edit 1 example](images/screenshots/EditExample2.png) <br>
 
 <div></div>
@@ -753,7 +753,8 @@ In the example above, Alex, Bernice and Charlotte are the fosterers deleted.
 
 ### Sorting fosterers: `sort`
 
-Sorts your list of fosterers alphabetically, by name.
+Sorts your list of fosterers alphabetically by name, where uppercase letters come before lowercase letters 
+(i.e. `annie tan` will be sorted behind `Jerry Tan`).
 
 Format: `sort`
 
