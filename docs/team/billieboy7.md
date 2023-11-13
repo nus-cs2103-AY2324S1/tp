@@ -18,7 +18,7 @@ Given below are my contributions to the project.
 
 * **Project management**:
 * Created issues to delegate tasks and helped with the maintenance of the issue tracker
-* Helped merge PRs
+* Helped review and merge PRs
 
 * **Enhancements to existing features**: 
 * Implemented the Priority Tag Feature for Appointments to indicate severity of appointment
@@ -35,7 +35,7 @@ Given below are my contributions to the project.
     * Added the UML diagrams, implementation explanations and design considerations for `schedule` command
     * Added the UML diagrams and implementation explanations for `find illness` command 
     * Added the UML diagrams and implementation explanations for `find patient appointment` command
-    * Added the Efforts section to the end 
+    * Added the "Appendix: Efforts" section 
 
 * **Community**:
 
