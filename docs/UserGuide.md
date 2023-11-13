@@ -558,7 +558,9 @@ Shows a list of all students in **Class Manager 2023**.
 
 Format: `list`
 
-Displayed result is `list` is successful: A list of all students in **Class Manager 2023**.
+The following image shows a successful execution of the `list` command.
+
+<img alt="list-student-success" src="images/list-success.png" width="700" >
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -590,10 +592,10 @@ Examples:
 
 * `lookup n/alex david` returns `Alex Yeoh`, `David Li`<br>
 
-<img alt="result for 'lookup n/alex david'" src="images/lookupNameResult.png" width="700"> </br></br>
+<img alt="result for 'lookup n/alex david'" src="images/lookupNameResult.png" width="700"> </br>
 * `lookup c/T11` returns all students in class number T11<br>
 
-<img alt="result for 'lookup c/T11'" src="images/lookupClassResult.png" width="700"> </br></br>
+<img alt="result for 'lookup c/T11'" src="images/lookupClassResult.png" width="700"> </br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -625,9 +627,9 @@ Examples:
 * `tag s/A1234567N /delete t/shy` removes the `shy` tag from the specified student.
 * `tag s/A1234567N t/` clears all tags from the specified student.
 
-The following image shows a successful execution of the `tag` command that replaces all the students tags.
+The following image shows a successful execution of the `tag` command that replaces all the student's tags.
 
-<img src="images/tag-success.png" alt="result for `tag s/A0231017A t/smart" width="700" />
+<img src="images/tag-success.png" alt="result for 'tag s/A0247243A t/smart'" width="700" />
 
 <box type="info" seamless>
 
@@ -747,7 +749,9 @@ Format: `class-part s/STUDENT_NUMBER tut/TUTORIAL_SESSION part/PARTICIPATION`
     * The proposed levels include: `None`, `Minimal`, `Sufficient`, `Active` and `Very Active`.
 
 Examples:
-* `class-part s/A0249112A tut/1 part/true`
+* `class-part s/A0245234A tut/1 part/true`
+
+<img alt="class-part-success" src="images/class-part-success.png" width="700" /><br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -764,7 +768,7 @@ Format: `grade s/STUDENT_NUMBER a/ASSIGNMENT_INDEX g/GRADE`
 * The `GRADE` must be a valid integer between 0 and 100.
 
 Examples:
-* `grade s/A0249112A a/1 g/100`
+* `grade s/A0245234A a/1 g/100`
 
 [Back to Table of Contents](#table-of-contents)
 

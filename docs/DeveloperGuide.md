@@ -453,15 +453,21 @@ The `lookup` command is facilitated by `LookupCommand` and `LookupCommandParser`
 
 * **Alternative 2:** The combination can be specified by the user.
 
-    For example (Proposed), `lookup n/alex \AND david \OR c/T11 \OR T12` will have the criteria:
+    For example, `lookup n/alex \AND david \OR c/T11 \OR T12` will have the criteria:
     ```
     (name contains alex AND david) OR (class number is T11 OR T12)
     ```
 
     * Pros: The user can specify any combination of criteria.
-    * Cons: The command will be more complex to implement. As it involves changing the `LookupCommandParser` and the `StudentContainsKeywordsPredicate` class. In addition, the syntax can be confusing for the user.
-
-
+    * Cons: The command will be more complicated to implement, as the order of the keywords and the logic operators will be used to determine the `StudentContainsKeywordsPredicate`. In addition, the syntax can be confusing for the user. <br>
+      One such example is the command `lookup n/alex \AND david \OR li` which can have two different interpretations:
+      ```
+      (name contains alex AND david) OR (name contains li)
+      ```
+      ```
+      (name contains alex) AND (name contains david OR li)
+      ```
+      
 ### Theme feature
 
 The `theme` command allows TAs to toggle/switch between _light_ and _dark_ themes.
@@ -960,8 +966,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
-3.  A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  The application needs to have proper documentation and user guide so that users can understand how to use the application.
+3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The Application needs to have proper documentation and user guide so that users can understand how to use the application.
+5.  The Application should allow users to customize the color scheme to enhance the user experience.
 
 ### Glossary
 
@@ -1094,32 +1101,25 @@ Testers are expected to do more *exploratory* testing.
    1. Test case: `delete s/STUDENT_NUMBER`<br>
       Expected: STUDENT_NUMBER is a valid Student Number that exists in the Class Manager. The student with STUDENT_NUMBER is deleted from the list. Details of the deleted student are shown in the result display box.
       <br><br>
-2. Delete a student that is not in Class Manager.
+2. Delete a student with an invalid student number.
 
    1. Test case: `delete s/vnqvq1924`<br>
       Expected: No student is deleted. Student Number error and its details are shown in the result display box.
       <br><br>
-3. Delete a student with an invalid student number.
-
-   1. Other incorrect delete commands to try: `delete`, `delete s/x`, `...` (where x is an invalid student number)<br>
-      Expected: No student is deleted. Command format error and its details are shown in the result display box.
-   2. Test case: `delete`<br>
-      Expected: No student is deleted. Command format error and its details are shown in the result display box.
-      <br><br>
    
 ### Edit a student
 
-1. Edit a student's details in the current Student list.
+1. Edit a student's details in Class Manager.
 
    1. Test case: `edit STUDENT_NUMBER n/NAME`<br>
       Expected: The student with STUDENT_NUMBER is edited to have the new NAME.
    2. Test case: `edit STUDENT_NUMBER s/NEW_STUDENT_NUMBER`<br>
       Expected: The student with STUDENT_NUMBER is edited to have the NEW_STUDENT_NUMBER.
       <br><br>
-2. Edit a student's details where the student is not in the list (Invalid Student Number).
+2. Edit a student's details who do not exist in Class Manager.
 
-   1. Test case: Edit command with Student Number that is not present in the list <br>
-      Expected: No student is edited. Error details are shown in the result display box.
+   1. Test case: Edit command with Student number that does not belong to any student in Class Manager.<br>
+      Expected: No student is edited. Error details shown in the result display box.
       <br><br>
 
 ### List students
@@ -1370,3 +1370,4 @@ Testers are expected to do more *exploratory* testing.
 4. Class Participation is currently limited to being true or false for each tutorial session. We plan to allow Class Participation to be an enum level instead, such as `NONE`, `MINIMAL`, `SUFFICIENT`, `ACTIVE`, `VERY_ACTIVE` etc., to allow for better representation of student's efforts in class.
 5. Users currently can only search for basic student information. We plan to allow users to search based on class information in the future. For example, users can search for students with average grades or attendance percentage less than a certain value.
 6. The lookup command currently does not check for invalid fields. We plan to add field validation to the lookup command in the future.
+7. The comment command doesn't support handling long strings (exact length depends on the size of the user's screen) as it might get cut off. We plan to allow users to add comments of any length that will not get cut off in the future.
