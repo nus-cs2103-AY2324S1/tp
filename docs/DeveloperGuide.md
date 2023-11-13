@@ -210,11 +210,11 @@ of schedule command is then returned. The partial class diagram is shown below.
 
 
 In the event the `Person` already has an existing appointment, a different instance of `CommandResult` is instantiated. This
-instance invokes the constructor that contains the `Person` as well as the new proposed `Appointment`. The returned 
+instance invokes the constructor that contains the `Person` as well as the new proposed `Appointment`. The returned
 `CommandResult` instead results in the UI being notified that while the `ScheduleCommand` has been executed, the user
-should be prompted to confirm this change on the `OverrideWindow` of the UI. Only after confirmation of this is the 
+should be prompted to confirm this change on the `OverrideWindow` of the UI. Only after confirmation of this is the
 overriding of the appointment completed using the appointment and person stored in the `CommandResult`. In the event of
-cancelling the override, the program resumes its functionality, effectively discarding the execution of the rest of the 
+cancelling the override, the program resumes its functionality, effectively discarding the execution of the rest of the
 `scheduleCommand`
 
 The following activity diagram summarises what happens the user executes a schedule command.
@@ -261,7 +261,7 @@ Alternative 1(current solution): Create a separate constructor in CommandResult 
   * Quick solution to the problem
   * This "freezes" functionality of the program to force user to acknowledge or cancel the execution of the command
 - Cons:
-  * This creates multiple different constructors within the CommandResult 
+  * This creates multiple different constructors within the CommandResult
 
 Alternative 2: Abstract CommandResult to get a successfulExecutionResult and a PausedExecutionResult
 - Pros:
@@ -302,10 +302,10 @@ The **Gather Emails** feature in our software system is designed to efficiently 
 #### Implementation Overview
 
 The `GatherCommand` is initiated by the `GatherCommandParser`. The `GatherCommandParser` parses the arguments and creates either a `GatherEmailByFinancialPlan` or `GatherEmailByTag` object respectively.
-Both `GatherEmailByFinancialPlan` or `GatherEmailByTag` implements the `GatherEmailPrompt` interface. 
+Both `GatherEmailByFinancialPlan` or `GatherEmailByTag` implements the `GatherEmailPrompt` interface.
 
-The `GatherCommand` takes in the `GatherEmailPrompt` object and passes it into the current `Model`, subsequently interacting with the `AddressBook` class. 
-The `GatherCommand#execute()` executes the gather operation by calling `Model#gatherEmails(GatherEmailPrompt prompt)`. 
+The `GatherCommand` takes in the `GatherEmailPrompt` object and passes it into the current `Model`, subsequently interacting with the `AddressBook` class.
+The `GatherCommand#execute()` executes the gather operation by calling `Model#gatherEmails(GatherEmailPrompt prompt)`.
 
 The following sequence diagram below shows how the gather operation works as described above:
 
@@ -315,15 +315,15 @@ The `ModelManager#gatherEmails(GatherEmailPrompt prompt)` calls the `AddressBook
 
 The `UniquePersonsList` class maintains a list of unique persons. The `UniquePersonsList` class implements the following operation:
 
-- `UniquePersonsList#gatherEmails(GatherEmailPrompt prompt)` —  Iterates through the persons list and calls `GatherEmailPrompt#gatherEmails(Person person)`, passing in each person. 
+- `UniquePersonsList#gatherEmails(GatherEmailPrompt prompt)` —  Iterates through the persons list and calls `GatherEmailPrompt#gatherEmails(Person person)`, passing in each person.
 
-Depending on the type of `GatherEmailPrompt`, the method above triggers either: 
+Depending on the type of `GatherEmailPrompt`, the method above triggers either:
 
-- `Person#gatherEmailsContainsTag(String prompt)` —  Checks if the given prompt is a substring of any `Tag` names in the `Set<Tag>` of the current person. 
+- `Person#gatherEmailsContainsTag(String prompt)` —  Checks if the given prompt is a substring of any `Tag` names in the `Set<Tag>` of the current person.
 - `Person#gatherEmailsContainsFinancialPlan(String prompt)` —  Checks if the given prompt is a substring of any `FinancialPlan` names in the `Set<FinancialPlan>` of the current person.
 
 These methods internally utilize `Tag#containsSubstring(String substring)` and `FinancialPlan#containsSubstring(String substring)`, respectively. These substring comparisons are performed in a case-insensitive manner by converting both the prompt and the `FinancialPlan` or `Tag` names to lowercase before the check.
-By allowing partial input, users can efficiently find email addresses associated with lengthy `Tag` or `FinancialPlan` names. The case-insensitive approach enhances user-friendliness, ensuring consistent and reliable results, regardless of input case.  
+By allowing partial input, users can efficiently find email addresses associated with lengthy `Tag` or `FinancialPlan` names. The case-insensitive approach enhances user-friendliness, ensuring consistent and reliable results, regardless of input case.
 
 Currently, we only allow gathering emails by `FinancialPlan` and `Tag` fields as these are the more likely to be searched to gather emails by. However, additional classes implementing the `GatherEmailPrompt` interface can be added to enable the gathering of emails based on a broader range of fields.
 
@@ -450,7 +450,7 @@ each command
 ### Appointment List Feature
 
 The appointment list is facilitated by `ModelManager`. It extends `Model` and stores an additional `SortedList<Appointment>` object that represents all existing appointments.
-The `setAppointmentList()` method checks against `filteredPersons` to look for updates regarding existing `Appointment` objects. The `setAppointmentList()` method is called whenever there is a command that can potentially change the data stored, to ensure that the state of the appointment list is as updated as possible. 
+The `setAppointmentList()` method checks against `filteredPersons` to look for updates regarding existing `Appointment` objects. The `setAppointmentList()` method is called whenever there is a command that can potentially change the data stored, to ensure that the state of the appointment list is as updated as possible.
 
 The `getAppointmentList()` method is called once during the startup of the program by `getAppointmentList()` in `LogicManager`, which is in turn called by `MainWindow`. It returns the `sortedList<Appointment>` object within `modelManager`.
 
@@ -552,7 +552,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Guarantees**: A client contact is added into UNOFAS only if the data entered is correct.
 
 **MSS**
-1. User request to add a client to the list via the `add` command. 
+1. User request to add a client to the list via the `add` command.
 2. UNOFAS checks the correctness of the request.
 3. UNOFAS adds the client and displays updated client list.
 
@@ -572,7 +572,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to <u>list clients (UC01)</u>.
 2. User request to edit client’s contacts from the list via the `edit` command.
-3. UNOFAS checks the correctness of the request. 
+3. UNOFAS checks the correctness of the request.
 4. UNOFAS changes the client’s contacts.
 
     Use case ends.
@@ -584,10 +584,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. UNOFAS shows an error message.
 
       Use case resumes at step 2.
-* 3b. There is a contact with the exact same name. 
+* 3b. There is a contact with the exact same name.
   * 3b1. UNOFAS notifies user that contact exist.
-    
-    Use case resumes at step 2. 
+
+    Use case resumes at step 2.
 
 **Use Case: UC04 - Delete a client** \
 **Precondition:** NIL\
@@ -638,7 +638,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to <u>list clients (UC01)</u>.
 2.  UNOFAS shows a list of clients.
-3.  User request to <u>add financial plan to client’s contacts (UC03)</u>. 
+3.  User request to <u>add financial plan to client’s contacts (UC03)</u>.
 4. UNOFAS checks for the correctness of the request.
 5. UNOFAS changes the client’s contacts.
 
@@ -907,10 +907,10 @@ point for testers to work on; testers are expected to do more *exploratory* test
 
    3. Test case: `schedule 1 ap/Appointment Name d/11-30-2025 09:00`<br>
       Expected: Error details shown in the status message. List, status bar and appointment list remains the same.
-    
+
    4. Test case: `schedule 1 ap/Appointment Name d/12-11-2025 09:00` on a person who already has an appointment<br>
       Expected: A prompt will appear that causes program functionality to temporarily stop. The prompt alerts the user
-      that the client already has an appointment arranged and the appointment will be overriden if the user wishes to 
+      that the client already has an appointment arranged and the appointment will be overriden if the user wishes to
       proceed. After proceeding, the old appointment is overridden and the app continues its notmal functionality.
 
 ### Completing an appointment
@@ -940,7 +940,7 @@ point for testers to work on; testers are expected to do more *exploratory* test
       1. Test case: `clear`<br>
       Expected: A prompt will appear that causes program functionality to temporarily stop. The prompt alerts the user
       that he intends to clear the address book and asks for confirmation of the clear. After proceeding, the entire address book will be cleared.
-    
+
 ### Saving data
 
 1. Dealing with missing data files
@@ -963,24 +963,24 @@ point for testers to work on; testers are expected to do more *exploratory* test
 
 ## **Appendix: Effort**
 This project required a substantial effort to design and implement various features aimed at enhancing
-the functionality of the software system. It was quite hard at the beginning because we were not well-versed with the 
-codebase. After understanding some pertinent classes to implement our enhancements, we also had to refactor and 
+the functionality of the software system. It was quite hard at the beginning because we were not well-versed with the
+codebase. After understanding some pertinent classes to implement our enhancements, we also had to refactor and
 add test cases to ensure the functionalities of our enhancements.
 
-In v1.2, we implemented the Sort command to allow users to sort his clients' contacts in alphabetical order with 
+In v1.2, we implemented the Sort command to allow users to sort his clients' contacts in alphabetical order with
 respect to their names, or with respect to their appointment time in chronological order. This posed a significant
 challenge as there was no clear documentation that provided aid as to how we should implement both the filtering function (via
-the find command) and the sort command at the same time. We had to spend time understanding the inner workings of 
+the find command) and the sort command at the same time. We had to spend time understanding the inner workings of
 JavaFX's `filteredList` and `sortedList` classes to finally come up with a solution to return a sorted and filtered
 list of clients.
 
-In v1.3, we updated the GUI to include an appointment list to show upcoming appointments that clients have with the 
+In v1.3, we updated the GUI to include an appointment list to show upcoming appointments that clients have with the
 financial advisor. We found out that the appointment list is not properly updated when there are changes made to the
 data, and they are only updated upon restarting the application. We had to spend time understanding how the Observer
-Pattern works so that changes to the appointment list are being reflected instantaneously. 
+Pattern works so that changes to the appointment list are being reflected instantaneously.
 
 Moreover, we decided to implement safety features like the clear and override prompts that prevent accidental command executions
-by the user. This required having to trace the entire code logic to understand how commands were executed and also how to 
+by the user. This required having to trace the entire code logic to understand how commands were executed and also how to
 pause and split execution of commands to make sure that no bugs were introduced into the code.
 
 The project's difficulty level was notably high due to the complexity of implementing features such as scheduling
