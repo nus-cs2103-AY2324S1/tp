@@ -15,7 +15,7 @@ import seedu.address.model.person.Ic;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a person identified using their displayed NRIC from the address book.
  */
 public class DeleteCommand extends Command {
 
@@ -28,7 +28,6 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
     private static final Logger logger = LogsCenter.getLogger(DeleteCommand.class);
-
     private final Ic targetIc;
 
     public DeleteCommand(Ic targetIc) {
