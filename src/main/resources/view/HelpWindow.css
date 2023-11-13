@@ -1,20 +1,57 @@
-#copyButton, #helpMessage {
+#copyButton, #backButton, #nextButton {
     -fx-text-fill: white; /* White text for better contrast */
-    -fx-font-size: 14; /* Smaller font size for better readability */
-}
-
-#copyButton {
+    -fx-font-size: 14; /* Consistent font size for readability */
     -fx-background-color: #4CAF50; /* A pleasant green color */
+    -fx-padding: 5 10; /* Padding for a better button shape */
+    -fx-border-radius: 5; /* Rounded corners */
+    -fx-background-radius: 5; /* Background rounded corners */
 }
 
-#copyButton:hover {
+/* Hover state for buttons */
+#copyButton:hover, #backButton:hover, #nextButton:hover {
     -fx-background-color: #43A047; /* Slightly darker green on hover */
 }
 
-#copyButton:armed {
+/* Pressed state for buttons */
+#copyButton:armed, #backButton:armed, #nextButton:armed {
     -fx-background-color: #388E3C; /* Darker green when button is pressed */
 }
 
+/* Styles for the help message container */
 #helpMessageContainer {
     -fx-background-color: #2E3192; /* Dark blue-purple for the message container */
+    -fx-padding: 10; /* Padding inside the container */
+    -fx-spacing: 10; /* Spacing between elements within the container */
+}
+
+/* Styles for Scroll Bars in WebView */
+.web-view .scroll-bar {
+    -fx-background-color: #e2e2e2; /* Background color of the scroll bar */
+    -fx-background-insets: 0, 0, 1, 2; /* Insets for different layers of the scroll bar background */
+}
+
+.web-view .scroll-bar:vertical .thumb {
+    -fx-background-color: #9e9e9e; /* Color of the vertical scroll thumb */
+    -fx-background-insets: 0 2 0 2; /* Insets for vertical thumb */
+}
+
+.web-view .scroll-bar:horizontal .thumb {
+    -fx-background-color: #9e9e9e; /* Color of the horizontal scroll thumb */
+    -fx-background-insets: 2 0 2 0; /* Insets for horizontal thumb */
+}
+
+/* Adjusting Spacing and Layout */
+#helpMessageContainer {
+    -fx-background-color: #2E3192;
+    -fx-padding: 10 20; /* Adjusted padding for more space inside the container */
+    -fx-spacing: 15; /* Increased spacing between elements */
+}
+
+/* Adjustments for WebView Spacing */
+.web-view {
+    -fx-background-color: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 10);
+    -fx-padding: 10; /* Padding around the WebView */
+    -fx-border-color: #cccccc; /* Optional: Border for WebView */
+    -fx-border-width: 1; /* Border width */
 }

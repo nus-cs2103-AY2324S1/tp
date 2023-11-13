@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.concurrent.Worker;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.Clipboard;
@@ -24,6 +25,12 @@ public class HelpWindow extends UiPart<Stage> {
     private Button copyButton;
 
     @FXML
+    private Button backButton;
+
+    @FXML
+    private Button nextButton;
+
+    @FXML
     private WebView webView;
 
     /**
@@ -33,7 +40,17 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
+
+        // Load the web page in the WebView
         webView.getEngine().load(USERGUIDE_URL);
+
+        // Add a listener to the LoadWorker of the WebEngine
+        webView.getEngine().getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == Worker.State.SUCCEEDED) {
+                // Execute JavaScript code for smooth scrolling
+                webView.getEngine().executeScript("document.documentElement.style.scrollBehavior = 'smooth'");
+            }
+        });
     }
 
     /**
@@ -98,4 +115,20 @@ public class HelpWindow extends UiPart<Stage> {
         url.putString(USERGUIDE_URL);
         clipboard.setContent(url);
     }
+
+    @FXML
+    private void goBack() {
+        if (webView.getEngine().getHistory().getCurrentIndex() > 0) {
+            webView.getEngine().getHistory().go(-1);
+        }
+    }
+
+    @FXML
+    private void goForward() {
+        if (webView.getEngine().getHistory().getCurrentIndex() < webView.getEngine().getHistory()
+                .getEntries().size() - 1) {
+            webView.getEngine().getHistory().go(1);
+        }
+    }
+
 }
