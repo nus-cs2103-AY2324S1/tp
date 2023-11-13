@@ -477,8 +477,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor:** User\
 **MSS:**
 
-1.	User requests help by keying in command or clicking the Help Button on the UI
-2.	Flashlingo opens browser with UserGuide
+1.	User requests help by either entering the help command in the command box or clicking the Help Button on the Flashlingo interface.
+2.	Flashlingo opens the default web browser and navigates to the User Guide page.
 
 Use case ends.
 
@@ -508,7 +508,7 @@ Use case ends.
 **Use case:** UC4 – Display list of flashcards\
 **Actor:** User\
 **MSS:**
-1.	User chooses to display list of flashcard.
+1.	User chooses to display the list of flashcards.
 2.	Flashlingo displays list of cards with words and corresponding translations.\
       Use case ends.
 
