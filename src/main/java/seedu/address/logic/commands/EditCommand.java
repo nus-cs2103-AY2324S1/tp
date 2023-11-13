@@ -88,9 +88,9 @@ public class EditCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Person editedPersonWithoutFilteredScoreList = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        containsIllegalTagScore(editedPerson);
+        Person editedPerson = filterScoreList(editedPersonWithoutFilteredScoreList, personToEdit);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -131,6 +131,7 @@ public class EditCommand extends Command {
             if (!newTags.contains(tag)) {
                 newScoreList.removeScore(tag);
             }
+
         }
         editedPerson.setScoreList(newScoreList);
     }
@@ -142,11 +143,40 @@ public class EditCommand extends Command {
         }
         List<Tag> tagsWithScore = person.getScoreList().getTagsWithScore();
         for (Tag tag : tagsWithScore) {
-            if (!currentTags.contains(tag)) {
+            if (!currentTags.contains(tag)) { // This means that the current scorelist contains a tag that is not in the persons tag
+                // Then let us wipe the scorelist clean
                 throw new CommandException(Messages.MESSAGE_ILLEGAL_TAG_SCORE);
             }
         }
         return false;
+    }
+
+    /**
+     * Filters the score list of the person to edit, such that only the tags that are in the person's tag list
+     * @param editedPerson
+     * @param originalPerson
+     * @return
+     */
+    private Person filterScoreList(Person editedPerson, Person originalPerson) throws CommandException {
+        Set<Tag> currentTags = editedPerson.getTags();
+        Set<Tag> previousTags = originalPerson.getTags();
+        if (currentTags.isEmpty()) {
+            return editedPerson;
+        }
+
+        Set<Tag> difference = new HashSet<>(currentTags);
+        difference.removeAll(previousTags);
+
+        List<Tag> tagsWithScore = editedPerson.getScoreList().getTagsWithScore();
+        for (Tag tag : tagsWithScore) {
+            if (!currentTags.contains(tag) && !previousTags.contains(tag)) {
+                throw new CommandException(Messages.MESSAGE_ILLEGAL_TAG_SCORE);
+            }
+            if (!currentTags.contains(tag) && previousTags.contains(tag)) {
+                editedPerson.getScoreList().removeScore(tag);
+            }
+        }
+        return editedPerson;
     }
 
     /**
