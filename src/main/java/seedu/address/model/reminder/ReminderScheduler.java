@@ -15,7 +15,7 @@ import seedu.address.model.Model;
  * Represents a thread that manages the reminders.
  */
 public class ReminderScheduler extends Thread {
-    private static final long FREQUENCY = TimeUnit.DAYS.toMinutes(1); // Frequency of a Day in minutes
+    private static final long FREQUENCY = TimeUnit.DAYS.toSeconds(1); // Frequency of a Day in minutes
 
     private final Model model;
     private final Object mutex;
@@ -49,19 +49,22 @@ public class ReminderScheduler extends Thread {
         // Calculate the initial delay until 00:00
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime nextMidnight = LocalDateTime.of(LocalDate.now().plusDays(1), LocalTime.MIDNIGHT);
-        long initialDelay = ChronoUnit.MILLIS.between(now, nextMidnight);
+        // +1 to ensure that the scheduler will run just after midnight
+        long initialDelay = ChronoUnit.SECONDS.between(now, nextMidnight) + 1;
+        // long initialDelay = 5000;
+        logger.info("ReminderScheduler thread started with initial delay of " + initialDelay + " seconds");
 
         // Start the scheduler to wake up the ReminderScheduler occasionally
         scheduler.scheduleAtFixedRate(() -> {
             synchronized (mutex) {
                 mutex.notifyAll();
             }
-        }, initialDelay, FREQUENCY, TimeUnit.MINUTES); // Wakes up Day
+        }, initialDelay, FREQUENCY, TimeUnit.SECONDS); // Wakes up Day
     }
 
     @Override
     public void run() {
-        while (true) {
+        while (!Thread.interrupted()) {
             synchronized (mutex) {
                 try {
                     mutex.wait();
@@ -69,7 +72,7 @@ public class ReminderScheduler extends Thread {
                     model.updateReminderList();
                 } catch (InterruptedException e) {
                     logger.info("ReminderScheduler thread interrupted");
-                    break;
+                    return;
                 }
             }
         }

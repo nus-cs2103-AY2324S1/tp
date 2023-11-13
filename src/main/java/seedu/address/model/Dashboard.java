@@ -211,11 +211,29 @@ public class Dashboard {
         this.isDashboardDirty = true;
     }
 
+    /**
+     * Updates the dashboard if it is dirty.
+     * This will update the dashboard and set it to be clean.
+     * To be called when the dashboard is opened.
+     */
     private void updateDashboardIfDirty() {
         if (!isDashboardDirty) {
             return;
         }
 
+        updateStatistics();
+        updateReminders();
+
+        /*
+         Set dashboard to be clean below. Not written yet as there is no overarching mechanism to integrate
+         the dashboard logic with the rest of the code.
+        */
+    }
+
+    /**
+     * Updates the statistics.
+     */
+    private void updateStatistics() {
         numClients = model.getAddressBook().getPersonList().size();
         totalInteraction = countPersonListInteraction();
         totalClosedInteractions = countPersonListWithSpecifiedOutcome(Interaction.Outcome.CLOSED);
@@ -229,16 +247,17 @@ public class Dashboard {
         totalHotLeads = filteredPersonCount(Person::isHotLead);
         totalWarmLeads = filteredPersonCount(Person::isWarmLead);
         totalColdLeads = filteredPersonCount(Person::isColdLead);
+    }
 
+    /**
+     * Updates the reminder list.
+     * Public because it is called by {@code ReminderScheduler}.
+     */
+    private void updateReminders() {
         model.updateReminderList();
-        model.updateFilteredReminderList(Reminder::isAfterNow);
+        model.updateFilteredReminderList(Reminder::isAfterYesterday);
         reminderList = model.getFilteredReminderList();
         updateDateToReminderMap();
-
-        /*
-         Set dashboard to be clean below. Not written yet as there is no overarching mechanism to integrate
-         the dashboard logic with the rest of the code.
-        */
     }
 
     private int countPersonListWithSpecifiedOutcome(Interaction.Outcome outcome) {
