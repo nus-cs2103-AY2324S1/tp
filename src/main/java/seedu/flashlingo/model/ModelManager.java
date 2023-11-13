@@ -13,11 +13,11 @@ import javafx.collections.transformation.FilteredList;
 import seedu.flashlingo.commons.core.GuiSettings;
 import seedu.flashlingo.commons.core.LogsCenter;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
+import seedu.flashlingo.logic.session.SessionManager;
 import seedu.flashlingo.model.flashcard.FlashCard;
 import seedu.flashlingo.model.flashcard.NextReviewWordPredicate;
 import seedu.flashlingo.model.flashcard.WordOverduePredicate;
 import seedu.flashlingo.model.flashcard.words.TranslatedWord;
-import seedu.flashlingo.session.SessionManager;
 
 /**
  * Represents the in-memory model of the flashlingo data.
