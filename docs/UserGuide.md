@@ -55,6 +55,7 @@ If you can type fast, WellNUS can get your contact management and scheduling tas
    1. Navigate to the folder `wellnus.jar` has been installed in. By default, it will be downloaded in the *Downloads* folder.
    2. Create a new folder on your Desktop (or any folder you want to put your application in) and move the `wellnus.jar` file into the folder.
 
+   <div style="page-break-after: always;"></div>   
 
 4. Start up the WellNUS application.
    1. Open the *Command Prompt* (for Windows users) or *Terminal* (for Mac users). `cd` into the folder you put the jar file in, and use the `java -jar wellnus.jar` command to run the application.
@@ -62,8 +63,7 @@ If you can type fast, WellNUS can get your contact management and scheduling tas
       ```
       cd Desktop/{your_folder_name}
       java -jar wellnus.jar
-      ```
-   <div style="page-break-after: always;"></div>      
+      ``` 
 
    <div markdown="block" class="alert alert-info">
    :information_source: Note:
@@ -113,7 +113,6 @@ To see a list of all command words, refer to the [Command Summary](#5-command-su
 | --        | APPOINTMENT_INDEX | Index of appointment in the list | --                                 | APPOINTMENT_INDEX **must** be a **positive integer** (i.e. 1, 2, 3, ...) up to the size of the appointment list.                                                                                                                                                      |
 | **g/**    | CATEGORY          | Category of search               | g/appointments                     | CATEGORY **must** be one of the following three values: **students**, **appointments**, **all**.                                                                                                                                                                      |
 
-<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-info">
 
@@ -169,6 +168,7 @@ Format: `add n/STUDENT_NAME c/CONTACT_NUMBER a/HOME_ADDRESS [r/RISK_LEVEL]`
    - Maximum of 200 characters, cannot be blank
 4. Risk Level
    - Must be `high`, `medium`, or `low`
+<div style="page-break-after: always;"></div>
 
 Valid examples:
 * `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07`
@@ -372,6 +372,8 @@ Format: `schedule n/STUDENT_NAME date/DATE from/START_TIME to/END_TIME d/DESCRIP
 4. Description
    - Maximum of 100 characters, cannot be blank
 
+<div style="page-break-after: always;"></div>
+
 Valid examples:
 * `schedule n/Jon date/2023-12-30 from/16:30 to/17:30 d/monthly check-up`
 * `schedule n/Yin Kiat date/2023-12-09 from/07:00 to/10:45 d/first counselling session`
@@ -450,13 +452,13 @@ Valid examples:
 * `view g/appointments`
 * `view g/students`
 
+<div style="page-break-after: always;"></div>
+
 #### 2.4.2 Exiting the program: `exit`
 
 Exits the program.
 
 Format: `exit`
-
-<div style="page-break-after: always;"></div>
 
 #### 2.4.3 Clearing storage: `clear`
 
@@ -487,6 +489,8 @@ The following scenarios will render the data file invalid:<br>
 * File is not in proper JSON format, you may refer to [this guide](https://json.org/example.html)
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### 2.5 Tracking TODOS `[Coming soon]`
 
