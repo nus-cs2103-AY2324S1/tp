@@ -904,7 +904,7 @@ Use Case ends.
 
 **Extensions**
 * 2a. There are no events recorded.
-  2a1. Unimate displays a message indicating that there are no events.
+  2a1. UniMate displays a message indicating that there are no events.
 
   Use case ends.
 
