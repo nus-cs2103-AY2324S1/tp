@@ -256,7 +256,7 @@ Alternative 2: Create a hashset of Appointments for each Person.
 
 **Aspect: How to implement override prompt**
 
-Alternative 1: Create a separate constructor in CommandResult to handle overriding
+Alternative 1(current solution): Create a separate constructor in CommandResult to handle overriding
 - Pros:
   * Quick solution to the problem
   * This "freezes" functionality of the program to force user to acknowledge or cancel the execution of the command
