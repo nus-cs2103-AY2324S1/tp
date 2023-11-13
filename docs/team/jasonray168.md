@@ -5,7 +5,7 @@ title: Jason Ray's Project Portfolio Page
 
 ### Project: HouR
 
-HouR is a desktop HR management application used for managing and organising personnel data. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 9 kLoC.
+HouR is a desktop HR management application used for managing and organising personnel data. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 12 kLoC.
 
 Given below are my contributions to the project.
 
@@ -40,10 +40,11 @@ Given below are my contributions to the project.
     * User Guide: Added guides for sort, add leave, and delete leave features.
     * Developer Guide:
         * Added implementation details for sort and delete leave features.
+        * Added sequence and activity diagrams for sort and delete leave features.
         * Added instructions for manual testing for sort and delete leave features.
         * Added details for planned enhancements.
         * Added details for use cases.
 
 * **Community**:
 
-* **Tools**: Java, JavaFX, IntelliJ, GitHub CLI, GitHub, PlantUML
+* **Tools**: IntelliJ, GitHub CLI, GitHub
