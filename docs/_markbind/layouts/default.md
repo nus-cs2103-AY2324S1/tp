@@ -40,8 +40,8 @@
   * [Documentation, Logging, Testing, Configuration, DevOps]({{ baseUrl }}/DeveloperGuide.html#documentation-logging-testing-configuration-devops)
   * [Appendix: Requirements]({{ baseUrl }}/DeveloperGuide.html#appendix-requirements)
   * [Appendix: Instructions for Manual Testing]({{ baseUrl }}/DeveloperGuide.html#appendix-instructions-for-manual-testing)
-  * [Appendix: Planned Enhancements]({{ baseUrl }}/DeveloperGuide.html#planned-enhancements)
-  * [Appendix: Effort]({{ baseUrl }}/DeveloperGuide.html#effort)
+  * [Appendix: Planned Enhancements]({{ baseUrl }}/DeveloperGuide.html#appendix-planned-enhancements)
+  * [Appendix: Effort]({{ baseUrl }}/DeveloperGuide.html#appendix-effort)
 * [About Us]({{ baseUrl }}/AboutUs.html)
       </site-nav>
     </div>

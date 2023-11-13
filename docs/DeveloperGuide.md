@@ -338,6 +338,10 @@ In order to enable comparison of each valid field, these fields will implement t
 
 1. Name
 2. Phone
+3. Score
+4. Email
+5. Position
+6. Status
 
 #### Steps to trigger
 
@@ -366,12 +370,12 @@ The following diagram summarises what happens when a user executes a Sort comman
 - Alternative 1 (current choice): `sort d/ [valid field]`
     - Pros: Simple and minimal text fields, with a single prefix required to enable sorting.
     - Cons: Only able to sort in ascending order.
-- Alternative 2: `sort d/ [valid field] o/ [a/d]`
+- Alternative 2: `sort d/ [valid field] [asc/]/[dsc/]`
     - Pros: Able to sort in either ascending or descending order.
     - Cons: Requires additional input from the user, slowing down the use of the command.
-- Alternative 3: `sort d/ [valid field] o/ [a/d]` where `o/` is optional
-    - Pros: Retains the ability to sort in either order, but also the conciseness of Alternative 1.
-    - Cons: Users who are not aware of the `o/` feature may not use it.
+- Alternative 3: `sort d/ [valid field] [dsc/]` where `dsc/` is optional
+    - Pros: Retains the ability to sort in either order, but also the conciseness of Alternative 1. Also does not require user to type in any flag to sort in ascending order.
+    - Cons: Users who are not aware of the `dsc/` feature may not use it.
 
 <br>
 
@@ -509,7 +513,7 @@ The GUI then updates to show this information to the user.
   - Pros: Unambiguous that the term to be searched for is the name.
   - Cons: As the current find function only supports searching by name, adding the additional `n/` is unnecessary.
 
-- Alternative 2 (current chocie): `find KEYWORDS [MORE_KEYWORDS]`
+- Alternative 2 (current choice): `find KEYWORDS [MORE_KEYWORDS]`
   - Pros: Allows for faster typing as users do not need to input the unnecessary `n/` tag.
   - Cons: Not immediately clear that the `find` command finds applications by name. 
   This will have to be explained in the user guide.
@@ -893,7 +897,7 @@ Guarantees: The specified interview will be deleted from the applicant.
 
 **Use case: UC09 - Find an applicant by name**
 
-Guarantees: The applicants with name matching the search will be listed.
+Guarantees: The applicants whose name matches the search term will be listed.
 
 **MSS**
 
@@ -955,7 +959,7 @@ Guarantees: The list of applicants will be sorted by the descriptor.
 
 **Use case: UC11 - Filter applicants**
 
-Guarantees: Only applicants that satisfies the specified criterion will be listed.
+Guarantees: Only applicants that satisfy the specified criterion will be listed.
 
 **MSS**
 
@@ -984,7 +988,7 @@ Guarantees: Only applicants that satisfies the specified criterion will be liste
 
       Use case ends.
 
-**Use case: UC12 - import CSV file**
+**Use case: UC12 - Import CSV file**
 
 Guarantees: The applicant list will be populated with data from the imported CSV file.
 
@@ -1015,19 +1019,19 @@ Guarantees: The applicant list will be populated with data from the imported CSV
   
     Use case ends.
 
-* 1d. User uses an file with duplicate applicants.
+* 1d. User uses a file with duplicate applicants.
 
     * 1d1. Staff-Snap shows an error message.
 
       Use case ends.
 
-* 1e. User uses an file with applicants that are already in Staff-Snap.
+* 1e. User uses a file with applicants that are already in Staff-Snap.
 
     * 1e1. Staff-Snap shows an error message.
 
       Use case ends.
 
-* 1f. User uses an file with invalid fields.
+* 1f. User uses a file with invalid fields.
 
     * 1f1. Staff-Snap shows an error message.
 
@@ -1326,6 +1330,8 @@ testers are expected to do more *exploratory* testing.
 
 1. Allow users to add applicants whose names include non-alphanumeric characters such as hyphens `-` and slashes `/`.
 2. Provide an error message to the user if the selected CSV file for the `import` command does not contain the correct headers as specified.
+3. Allow for filtering by email without providing a proper domain. This will be done by removing the type checking when entering an email into the `filter` command.
+4. Provide an error message if `s/` in `filter` receives an invalid input, such as `p` or `2`.
 
 --------------------------------------------------------------------------------------------------------------------
 
