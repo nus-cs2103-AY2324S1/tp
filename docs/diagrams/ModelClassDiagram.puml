@@ -1,4 +1,4 @@
-@startuml
+    @startuml
 !include style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
@@ -47,7 +47,7 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> ID
-Person *--> "*" Attendance
+Person *--> "     0..13" Attendance
 Person *--> "*" Tag
 
 Person -[hidden]up--> I

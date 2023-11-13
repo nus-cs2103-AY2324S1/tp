@@ -662,7 +662,7 @@ TAvigator data are saved in the hard disk automatically after any command that c
 TAvigator data are saved automatically as a JSON file `[JAR file location]/data/tavigator.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, TAvigator will discard all data and start with an empty data file at the next run, containing an address book called "TEMP". Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, TAvigator will discard all data and start with an empty data file at the next run, containing an address book called "TEMP". If any address book's data is invalid, it would not be shown and TAvigator will only show valid address books. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
 #### 4.5.3 Archiving data files `[coming in v2.0]`
