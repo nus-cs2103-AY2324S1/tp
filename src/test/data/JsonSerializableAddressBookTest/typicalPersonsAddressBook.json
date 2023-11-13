@@ -82,7 +82,28 @@
         null,
         null
       ],
-      "courses": [],
+      "courses": [
+        {
+          "name" : "Discrete Structures",
+          "courseCode" : "CS1231S",
+          "lessons" : [ {
+            "name" : "Laboratory",
+            "courseCode" : "CS1231S",
+            "dayOfWeek" : "WEDNESDAY",
+            "timeInterval" : "10:00-12:00"
+          }, {
+            "name" : "Tutorial",
+            "courseCode" : "CS1231S",
+            "dayOfWeek" : "TUESDAY",
+            "timeInterval" : "10:00-12:00"
+          }, {
+            "name" : "Lecture",
+            "courseCode" : "CS1231S",
+            "dayOfWeek" : "MONDAY",
+            "timeInterval" : "10:00-12:00"
+          } ]
+        }
+      ],
       "hour": "24"
     },
     {
@@ -100,7 +121,28 @@
         "10:45-11:30",
         "10:45-11:30"
       ],
-      "courses": [],
+      "courses": [
+        {
+          "name" : "Discrete Structures",
+          "courseCode" : "CS1231S",
+          "lessons" : [ {
+            "name" : "Laboratory",
+            "courseCode" : "CS1231S",
+            "dayOfWeek" : "WEDNESDAY",
+            "timeInterval" : "10:00-12:00"
+          }, {
+            "name" : "Tutorial",
+            "courseCode" : "CS1231S",
+            "dayOfWeek" : "TUESDAY",
+            "timeInterval" : "10:00-12:00"
+          }, {
+            "name" : "Lecture",
+            "courseCode" : "CS1231S",
+            "dayOfWeek" : "MONDAY",
+            "timeInterval" : "10:00-12:00"
+          } ]
+        }
+      ],
       "hour": "38"
     },
     {
@@ -116,7 +158,28 @@
         null,
         null
       ],
-      "courses": [],
+      "courses": [
+        {
+          "name" : "Computer Organisation",
+          "courseCode" : "CS2100",
+          "lessons" : [ {
+            "name" : "Laboratory",
+            "courseCode" : "CS2100",
+            "dayOfWeek" : "WEDNESDAY",
+            "timeInterval" : "10:00-12:00"
+          }, {
+            "name" : "Lecture",
+            "courseCode" : "CS2100",
+            "dayOfWeek" : "MONDAY",
+            "timeInterval" : "10:00-12:00"
+          }, {
+            "name" : "Tutorial",
+            "courseCode" : "CS2100",
+            "dayOfWeek" : "TUESDAY",
+            "timeInterval" : "10:00-12:00"
+          } ]
+        }
+      ],
       "hour": "63"
     },
     {
@@ -132,7 +195,28 @@
         "21:10-23:15",
         "21:10-23:15"
       ],
-      "courses": [],
+      "courses": [
+        {
+          "name" : "Computer Organisation",
+          "courseCode" : "CS2100",
+          "lessons" : [ {
+            "name" : "Laboratory",
+            "courseCode" : "CS2100",
+            "dayOfWeek" : "WEDNESDAY",
+            "timeInterval" : "10:00-12:00"
+          }, {
+            "name" : "Lecture",
+            "courseCode" : "CS2100",
+            "dayOfWeek" : "MONDAY",
+            "timeInterval" : "10:00-12:00"
+          }, {
+            "name" : "Tutorial",
+            "courseCode" : "CS2100",
+            "dayOfWeek" : "TUESDAY",
+            "timeInterval" : "10:00-12:00"
+          } ]
+        }
+      ],
       "hour": "39"
     },
     {
@@ -148,7 +232,28 @@
         "07:00-09:00",
         "07:00-09:00"
       ],
-      "courses": [],
+      "courses": [
+        {
+          "name" : "Computer Organisation",
+          "courseCode" : "CS2100",
+          "lessons" : [ {
+            "name" : "Laboratory",
+            "courseCode" : "CS2100",
+            "dayOfWeek" : "WEDNESDAY",
+            "timeInterval" : "10:00-12:00"
+          }, {
+            "name" : "Lecture",
+            "courseCode" : "CS2100",
+            "dayOfWeek" : "MONDAY",
+            "timeInterval" : "10:00-12:00"
+          }, {
+            "name" : "Tutorial",
+            "courseCode" : "CS2100",
+            "dayOfWeek" : "TUESDAY",
+            "timeInterval" : "10:00-12:00"
+          } ]
+        }
+      ],
       "hour": "46"
     }
   ]

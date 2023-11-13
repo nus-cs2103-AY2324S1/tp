@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import seedu.address.logic.commands.EditFreeTimeCommand;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.availability.TimeInterval;
@@ -67,7 +67,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             try {
                 int dayOfWeek = Integer.parseInt(argMultimap.getValue(PREFIX_DAY).get());
                 if (dayOfWeek < 1 || dayOfWeek > 5) {
-                    throw new ParseException(EditFreeTimeCommand.MESSAGE_INVALID_DAY);
+                    throw new ParseException(Messages.MESSAGE_INVALID_DAY);
                 }
                 TimeInterval interval = ParserUtil.parseTimeInterval(argMultimap.getValue(PREFIX_FROM).orElse(null),
                         argMultimap.getValue((PREFIX_TO)).orElse(null));

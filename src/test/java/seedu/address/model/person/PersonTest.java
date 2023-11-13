@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_CS1231S;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FROM_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUR_FIVE;
@@ -103,7 +104,7 @@ public class PersonTest {
         assertNotEquals(ALICE, editedAlice);
 
         // different mods -> returns false
-        editedAlice = new PersonBuilder(ALICE).withCourses(VALID_COURSE_CS1231S).build();
+        editedAlice = new PersonBuilder(ALICE).withCourses(VALID_COURSE_CS2103T).build();
         assertNotEquals(ALICE, editedAlice);
 
         // different hour -> returns false
