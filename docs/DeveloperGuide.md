@@ -235,6 +235,37 @@ We have considered the following alternative implementations:
 * Implement `CreateCommandParser` to parse the arguments using regular expressions.
   This is not optimal for our use case as having a regex expression to parse the field values would be more complicated to scale and debug.
 
+### Add details
+
+The implementation of the add command follows the convention of a normal command, where `AddCommandParser` is responsible for parsing the user input string into an executable command.
+
+<img src="images/add-remark/AddDiagram.png" width="1200">
+
+`AddCommandParser` first obtains the values corresponding to the prefixes
+`/name`, `/phone`, `/email`, `/link`, `/grad`, `/course`, `/spec`, `/priority` and `/tag`.
+
+It ensures that each of `/name`, `/grad` and `/priority` prefixes appears at most once. If not, it throws a `ParseException`.
+
+Otherwise, it attempts to generate an `AddPersonDescriptor` with the details provided. It checks the following:
+
+* `/name` is not provided, since all contacts already have a name, and `edit` command should be used to update a contact's name
+* Apart from `/name`, at least one field to add information has been specified
+
+If the details do not fulfil these requirements, it throws a `ParseException`. Otherwise, it produces an `AddCommand` with the index of contact and the descriptor.
+
+Upon execution, the `AddCommand` will first obtain the `Person` at the specified index in the displayed contact list, and then attempts to add the information in the descriptor to the `Person`. In the process, it checks that:
+
+* There is a corresponding person at the specified index
+* If the descriptor contains `/grad` or `/priority`, the original person should not contain the corresponding field, as `edit` command should have been used
+
+These incorrect usages will throw a `CommandException`. Otherwise, the `AddCommand` will proceed to replace the original person with the new person after adding information.
+
+We have considered the following alternative implementation:
+
+* Let `AddCommandParser` generate `EditPersonDescriptor`, and when executing `AddCommand`, treat the information in the edit descriptor as information to add.
+
+  This implementation was not chosen because it creates unnecessary coupling between add and edit commands. Our final implementation of `EditPersonDescriptor` contains optional indices to specify the entry of a multi-valued field to edit, which is much different from `AddPersonDescriptor` and thus they are implemented separately.
+
 ### Edit details
 
 The implementation of the edit command follows the convention of a normal command,
