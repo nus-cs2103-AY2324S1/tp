@@ -10,6 +10,8 @@ InsureIQ is a **contact management system for car insurance agents to keep track
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
@@ -36,6 +38,9 @@ InsureIQ is a **contact management system for car insurance agents to keep track
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 
 ## Features
 
@@ -72,15 +77,19 @@ Format: `help`
 
 ### Adding a client : `add`
 
-Adds a client to the database.
+Adds a client to the data file.
 
 Format: `add n/NAME i/NRIC p/CONTACT NUMBER e/EMAIL a/ADDRESS [t/TAG]... l/LICENCE PLATE [c/COMPANY
  pn/POLICY NUMBER pi/POLICY ISSUE DATE pe/POLICY EXPIRY DATE]`
 
-* Add a client's details in the database.
+* Add a client's details in the data file.
 * **All** client details **except tag** must be present when using this command.
-* Tag is optional and this command allows multiple tags
-* If adding a client’s policy, **all** policy details must be present when using this command.
+* Tag is optional and this command allows multiple tags.
+* If adding a client’s policy, **all** policy details must be present when using this command as follows:
+  * `c/COMPANY`
+  * `pn/POLICY NUMBER`
+  * `pi/POLICY ISSUE DATE`
+  * `pe/POLICY EXPIRY DATE`
 
 Examples:
 * `add n/Irfan Ibrahim i/752X p/92492021 e/irfan@example.com a/Blk 47 Tampines Street 20,#17-35 t/classmates l/SBP8888T` adds a client Irfan without a policy.
@@ -92,9 +101,9 @@ Acceptable values for each parameter:
 * `p/CONTACT NUMBER`: Numeric, _exactly_ 8 characters.
 * `e/EMAIL`: Alphanumeric and/or special characters, no white spaces allowed, standard email format.
 * `a/ADDRESS`: Alphabets and/or special characters, white spaces allowed.
-* `t/TAG`: Alphabets, no white spaces allowed.
+* `t/TAG`: Alphanumeric, no white spaces allowed.
 * `l/LICENCE PLATE`: Alphanumeric, _up to_ 8 characters.
-* `c/COMPANY`: Alphabets and/or special characters, white spaces allowed.
+* `c/COMPANY`: Alphanumeric and/or special characters, white spaces allowed.
 * `pn/POLICY NUMBER`: Alphanumeric, _up to_ 8 characters.
 * `pi/POLICY ISSUE DATE` and `pe/POLICY EXPIRY DATE`: Date in the format dd-mm-yyyy.
 
@@ -124,21 +133,21 @@ Error: This person already exists in the address book
 ```
 
 <div markdown="block" class="alert alert-info">
-**:information_source: Adding clients with duplicate fields:** The above error will only be raised when ALL fields are the same. This is to support clients with multiple insurance policies.
-
+**:information_source: Adding clients with duplicate fields:** The above error will only be raised when **ALL** fields in the client's details (excluding the Tag and the 4 policy fields) 
+are the same.
 </div>
 
 
 ### Listing all clients : `list`
 
-Shows a list of all clients in the database.
+Shows a list of all clients in the data file.
 
 Format: `list`
 
 
 ### Editing a client : `edit`
 
-Modify and/or updates existing policy information in the database.
+Modify and/or updates existing policy information in the data file.
 
 Format: `edit INDEX [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]... [c/COMPANY] [l/LICENCE PLATE]
  [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`
@@ -150,7 +159,7 @@ Format: `edit INDEX [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [e/EMAIL] [a/ADDRESS] [
 <div markdown="block" class="alert alert-info">
 **:information_source: Important Notes about usage:**
 
-* If you are adding a new policy number, you **must** also add the company, policy issue date and policy expiry date.
+* If you are adding a new policy number to a client with no attached policy, you **must** also add the company, policy issue date and policy expiry date.
 * In case of already existing policy, individual updates to the policy number, company, policy issue date and policy expiry date are allowed.
 * To delete an existing policy from a user, you may use any one of the following (using more than one of the below, or using while updating another policy field will still result in the deletion of the policy)
   * `c/!@#NO_COMPANY!@#` or 
@@ -174,9 +183,9 @@ Acceptable values for each parameter:
 * `p/CONTACT NUMBER`: Numeric, _exactly_ 8 characters.
 * `e/EMAIL`: Alphanumeric and/or special characters, no white spaces allowed, standard email format.
 * `a/ADDRESS`: Alphabets and/or special characters, white spaces allowed.
-* `t/TAG`: Alphabets, no white spaces allowed.
+* `t/TAG`: Alphanumeric, no white spaces allowed.
 * `l/LICENCE PLATE`: Alphanumeric, _up to_ 8 characters.
-* `c/COMPANY`: Alphabets and/or special characters, white spaces allowed.
+* `c/COMPANY`: Alphanumeric and/or special characters, white spaces allowed.
 * `pn/POLICY NUMBER`: Alphanumeric, _up to_ 8 characters.
 * `pi/POLICY ISSUE DATE` and `pe/POLICY EXPIRY DATE`: Date in the format dd-mm-yyyy.
 
@@ -184,17 +193,24 @@ Expected output upon success: <br>
 ![EditSuccess](images/EditSuccess.png)
 
 Expected output upon failure:
-* Invalid command format:<br>
+* Invalid command format or no specified `INDEX` or negative `INDEX`:<br>
 ```
 Invalid command format! 
 edit: Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values.
 Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]... [i/NRIC] [l/LICENCE_PLATE] [c/COMPANY] [pn/POLICY_NUMBER] [pi/POLICY_ISSUE_DATE] [pe/POLICY_EXPIRY_DATE] Example: edit 1 p/91234567 e/johndoe@example.com
 ```
-* No specified `INDEX` or negative `INDEX` or no field provided:<br>
+* No field provided:<br>
 ```
 At least one field to edit must be provided. 
 ```
-
+* Editing a client that will result in **ALL** fields matching with another client`:
+```
+Error: This person already exists in the client list.
+```
+<div markdown="block" class="alert alert-info">
+**:information_source: Editing clients that will result in duplicate fields with another client:** 
+The above error will only be raised when the edited client's details will have **ALL** fields (excluding the Tag and the 4 policy fields) the same as another.
+</div>
 
 ### Locating clients by fields : `find`
 
@@ -204,7 +220,6 @@ Format: `find [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL] [
 [c/COMPANY] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`
 
 * The search is case-insensitive e.g. `hans` will match `Hans`.
-* The order of the fields does not matter. e.g. `find n/Hans i/123B` is the same as `find i/123B n/Hans`
 * **At least one** of the fields must be present.
 * Value given with white spaces for each field is treated as 1 value e.g. `find n/Hans Bo` will return clients with 
 names `Hans Bo` in it.
@@ -238,7 +253,7 @@ Error: No value detected for the following field(s): n/ c/
 
 ### Deleting a client : `delete`
 
-Deletes the specified client from the database.
+Deletes the specified client from the data file.
 
 Format: `delete INDEX`
 
@@ -246,7 +261,7 @@ Format: `delete INDEX`
 * The index refers to the index number shown in the displayed list of clients and is a compulsory field.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd client in the database.
+* `list` followed by `delete 2` deletes the 2nd client in the data file.
 * `find n/Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
 Acceptable values for each parameter:
@@ -272,11 +287,12 @@ Error: The parameter is not of the type positive integer
 
 ### Sorting clients by policy expiry date : `sort`
 
+Sorts the data file.
+
 Format: `sort`
 
-* Sorts the list from earliest to latest policy expiry date.
+* Sorts the data file from earliest to latest policy expiry date.
 * People in the list with no policy data will be at the end of the sorted list.
-* The parameter, if any, inputted after `sort` is ignored.
 
 Examples:
 * `sort` rearranges the displayed list to show which policies are expiring soonest.
@@ -321,9 +337,9 @@ Example: remind 30
 ```
 
 
-### Add or remove remark to a client : `remark`
+### Adding or removing remark to a client : `remark`
 
-Adds or remove a remark to a client.
+Adds or removes a remark to a client.
 
 Format: `remark INDEX r/[REMARK]`
 
@@ -358,7 +374,7 @@ Batch delete clients with the specific condition.
 
 Format: `batchdelete [c/COMPANY] [dm/DELETE MONTH]`
 
-* Batch delete specific clients in the database.
+* Batch delete specific clients in the data file.
 * **Only one** of the optional fields must be provided.
 * Clients that partially matches with the field given will be deleted e.g. `batchdelete c/NTUC` will delete all clients 
   who buy policy from companies `NTUC Company` and `NTUC Insurance`. 
@@ -368,8 +384,8 @@ Examples:
 * `batchdelete c/DEF Insurance` batch delete clients who buy policy from the company DEF Insurance.
 
 Acceptable values for each parameter:
-* `c/COMPANY`: Alphabets and/or special characters, white spaces allowed.
-* `dm/DELETE MONTH`: Month in the format mm-yyyy.
+* `c/COMPANY`: Alphanumeric and/or special characters, white spaces allowed.
+* `dm/DELETE MONTH`: Month and year in the format mm-yyyy.
 
 Expected output upon success: <br>
 ![BatchDeleteSuccess](images/BatchDeleteSuccess.png)
@@ -405,7 +421,7 @@ Delete month should be in the format MM-yyyy
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the database.
+Clears all entries from the data file.
 
 Format: `clear`
 
@@ -444,6 +460,8 @@ If your changes to the data file makes its format invalid, InsureIQ will discard
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
