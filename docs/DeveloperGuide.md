@@ -423,6 +423,30 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Find contacts by name
+
+The implementation of the command to find contacts by their names follows the convention of a normal command, where `FindCommandParser` class is responsible for parsing the user input string into an executable command. 
+
+![find diagram](images/find/FindDiagram.png)
+
+`FindCommandParser` first obtains the values input by the user after the keyword `find`.
+`FindCommandParser` ensures that there is at least one key term value after trimming the user input for space characters.
+If the above constraint is violated, `FindCommandParser` throws a `ParseException`.
+Otherwise, it creates a new instance of `FindCommand` that corresponds to the user input.
+
+`FindCommand` stores an instance of `NameContainsKeyTermsPredicate`, which represents a predicate that checks if a person's name contains at least one of the space-separated key terms the user has input. (Note: contains is defined here as a case-insensitive, antisymmetric relation; that is, A may contain B even if B does not contain A).
+
+Examples: 
+* "Ben" is contained in "Ben Leong".
+* "al" is contained in both "Alex Yeoh" and "Jiale".
+* "BenL" is not contained in "Ben Leong" because the 'space' character between the words in the name invalidates the contains relationship.
+
+Upon execution, `FindCommand` passes the instance of `NameContainsKeyTermsPredicate` to the model through the method `model::updateDisplayedPersonList`. The model then uses the predicate internally to update the displayed list of contacts. 
+
+We have considered the following alternative implementations:
+* Do not implement a separate command to find contact by name i.e. use the `filter` command where the `name` field is passed to the `/by` flag instead as the way to find contacts by their name.
+  * This is not optimal for our use case as the `find` command is a command we expect users to use often to search for contacts via their name. Hence simplifying the command call usage would make the experience more efficient for users. 
+
 ### Sorting feature
 
 #### Implementation
@@ -455,7 +479,6 @@ Step 3. The user executes `sort /by name /order desc​` to sort the filtered li
 <!-- todo insert diagram -->
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `find` command is called again, the sorting will persist.
-
 </div>
 
 The following sequence diagram shows how the sort operation works:
