@@ -8,7 +8,7 @@ title: Kai Jie's Project Portfolio Page
 MediLink Contacts aims to help medical staff including nurses/doctors/pharmacists navigate through patient details in
 their high workload and time-pressured working environment. When medical emergencies arise, it becomes crucial to
 provide rapid access to emergency contacts for patients and access other details of the patients to make decisions more
-quickly. It is optimised for CLI so that users can quickly access the information. There is also a GUI created with 
+quickly. It is optimised for CLI so that users can quickly access the information. There is also a GUI created with
 JavaFX.
 
 Given below are my contributions to the project.

@@ -263,7 +263,7 @@ The following sequence diagram shows how the add patient works:
 ### Edit Patient/Doctor Feature
 
 This feature allows users to edit patients or doctors to the address book. The person must already
-exist in the address book. There are many fields for each patient/doctor to be 
+exist in the address book. There are many fields for each patient/doctor to be
 edited which can be found in the user guide.
 
 #### Implementation
@@ -286,7 +286,7 @@ Step 4. Then `editCommandParser` parses the remaining arguments and creates an `
 details of the patient given.
 
 :information_source: **Note:**  If the details of the person added does not match the correct format for any fields,
-there will be an error telling user that the attributes are in the wrong format. Also, if there are no attributes passed there will be an error. 
+there will be an error telling user that the attributes are in the wrong format. Also, if there are no attributes passed there will be an error.
 It's ok if the attributes are the same as the original attributes. 
 Lastly, an NRIC must be provided and if the nric cannot be found within the list of doctors and patients, there will be an error.
 
@@ -303,19 +303,19 @@ The following sequence diagram shows how the add patient works:
 ### Design Considerations
 
 1. Option 1 (Current Choice): Use a single EditCommand for both doctors and patients
-    - Pros: Easier for the user. Can use a single command to edit both. 
+    - Pros: Easier for the user. Can use a single command to edit both.
     - Cons: The program has to check whether the person is a doctor or patient. This mandates that a person cannot
     be both a patient as a doctor, as patients have additional attributes. The program also might be slightly slower 
    since it has to check through both the doctors and patients list to locate the person.
 2. Option 2: Use 2 commands edit-patient and edit-doctor
     - Pros: The program might be faster. If you call edit-doctor you only need to search through a few doctors
       rather than all the patients as well.
-    - Cons: Harder to implement, and there's a need to create new classes and add repeated code. 
+    - Cons: Harder to implement, and there's a need to create new classes and add repeated code.
       More commands for the user to remember as well.
 
 ### Delete Patient/Doctor Feature
 
-This feature allows users to delete the desired patient or doctor based on the 
+This feature allows users to delete the desired patient or doctor based on the
 nric provided.
 
 #### Implementation
@@ -325,18 +325,18 @@ of Index.
 
 Given below is an example usage scenario and how the delete mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The AddressBook will be initialized with the initial 
+Step 1. The user launches the application for the first time. The AddressBook will be initialized with the initial
 address book state.
 
-Step 2. The user populates the AddressBook with patients and doctors using the appropriate commands, if not already 
+Step 2. The user populates the AddressBook with patients and doctors using the appropriate commands, if not already
 done.
 
-Step 3. The user types `delete` as the command, with the appropriate nric of the patient/doctor to be deleted, for 
+Step 3. The user types `delete` as the command, with the appropriate nric of the patient/doctor to be deleted, for
 example `delete S9567312G`.
 
 Step 4. The `deleteCommandParser` parses the delete command and creates a `deleteCommand` with the target Ic.
 
-Step 5. The PatientCard / DoctorCard then processes the deletion and The UI should display the updated list without the 
+Step 5. The PatientCard / DoctorCard then processes the deletion and The UI should display the updated list without the
 deleted Doctor/Patient.
 
 ### Create New Appointment Feature
@@ -522,7 +522,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Hospital Staff                    | delete a patient/doctor             | remove entries that I no longer need                                   |
 | `* * *`  | Hospital Staff                    | add an appointment                  | tell which patient/doctor is coming at what time                       |
 | `* * *`  | Hospital Staff                    | update patient's details            | information remains accurate                                           |
-| `* * *`  | Hospital Staff                    | update doctor's details             | information remains accurate                                           |   
+| `* * *`  | Hospital Staff                    | update doctor's details             | information remains accurate                                           |
 | `* * *`  | Hospital Staff                    | find a patient/doctor by NRIC       | locate details of persons without having to go through the entire list |
 | `* * *`  | Hospital Staff                    | reassign patients to doctors/nurses | account for changes in the people treating the patients                |
 | `* *`    | Hospital Staff                    | hide private contact details        | minimize chance of someone else seeing them by accident                |
@@ -591,7 +591,7 @@ otherwise)
 **Extensions**
 
 * 1a. No person with matching attribute found.
-    * 1a1. Medilink Contacts lists 0 persons. 
+    * 1a1. Medilink Contacts lists 0 persons.
 
       Use case ends.
 
@@ -617,14 +617,14 @@ otherwise)
     * 3a1. Medilink Contacts shows an error message.
 
       Use case resumes at step 2.
-  
+
 * 4a. There are no edited fields, i.e. either no fields provided or new fields are the same as the previous ones
-  
+
     * 4a1. Medilink Contacts shows an error message.
 
       Use case resumes at step 2.
 
-* 4b. The edited fields include invalid inputs. 
+* 4b. The edited fields include invalid inputs.
 
     * 4b1. Medilink Contacts shows an error message.
 

@@ -23,7 +23,7 @@ Given below are my contributions to the project.
 
 * **New Feature**: Implemented the Edit Command
   * What it does: allows to update fields of a doctor or patient.
-  * Justification: This feature improves the product significantly because a user can make mistakes and may need to change details of a person. Alternatively, it's possible a 
+  * Justification: This feature improves the product significantly because a user can make mistakes and may need to change details of a person. Alternatively, it's possible a
   person's details change over time, such as their condition or remarks, and there needs to be a quick way to update the information.
 
 * **Project management**:

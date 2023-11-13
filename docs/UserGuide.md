@@ -97,7 +97,7 @@ The list below contains the parameters that are used in various commands as well
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-  * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, 
+  * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`,
   `clear`, `undo` and `redo`) will be
     ignored.<br>
     e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -154,21 +154,21 @@ Error Message: `Invalid command format!` <br>
    `add-doctor: Adds a person to MediLink Contacts. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS g/GENDER ic/NRIC [t/TAG]...`
 2. Invalid/Empty Field <br>
    Fields have specific formats to be followed. Failure to adhere to this format will lead to an error message
-that specifies the format to be used for that field. Usage of flags without any message will lead to the same 
+that specifies the format to be used for that field. Usage of flags without any message will lead to the same
 corresponding error message since no field supports empty inputs.
    ```
    add-doctor n/ ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon
    Names should only contain alphanumeric characters and spaces, and it should not be blank
-   
+
    add-doctor n/Betsy Crowe ic/999 g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon
    Ic should start with S or T, followed by 7 numbers, and ends with a letter. Letters inputs are case-insensitive. Empty strings are not allowed
-   
+
    add-doctor n/Betsy Crowe ic/S9851586G g/B p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon
-   Gender should only be M for Male or F for Female
-   
+   Gender should only be M for Male or F for Female 
+
    add-doctor n/Betsy Crowe ic/S9851586G g/F p/phoneNumber e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon
    Phone numbers should only contain numbers, and it should be at least 3 digits long
-   
+ 
    add-doctor n/Betsy Crowe ic/S9851586G g/F p/98765433 e/ a/#104-C, Wakanda St 42 t/Surgeon
    Emails should be of the format local-part@domain and adhere to the following constraints:
    1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
@@ -177,10 +177,10 @@ corresponding error message since no field supports empty inputs.
        - end with a domain label at least 2 characters long
        - have each domain label start and end with alphanumeric characters
        - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
-   
+
    add-doctor n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/ t/Surgeon
    Addresses can take any values, and it should not be blank
-   
+
    add-doctor n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/BestDoctor
    Doctor tag should be a valid specialisation.
       ```
@@ -308,7 +308,7 @@ Format: `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * If the provided fields are the same as the original, the command will still work.
 * You cannot change a person's IC number. If the provided ic number is the same as the original it will work.
 However, if it is different, there will be an error.
-* Must edit appropriate fields based on whether the person is a patient or doctor (e.g. can't update condition, blood type or 
+* Must edit appropriate fields based on whether the person is a patient or doctor (e.g. can't update condition, blood type or
 emergency contact of a doctor).
 * Existing values will be updated to the input values.g
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -377,7 +377,7 @@ Examples:
 
 Finds all Patients with query blood type.
 
-Format: `find Blood Type QUERY` 
+Format: `find Blood Type QUERY`
 
 * It is recommended to use `list` to restore the view of all data after a `find` command.
 
@@ -436,7 +436,7 @@ Format: `undo`
 
 </div>
 
-Restores the effects of actions that were previously undone using the undo command. 
+Restores the effects of actions that were previously undone using the undo command.
 
 Format: `redo`
 
