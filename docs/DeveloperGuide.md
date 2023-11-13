@@ -109,7 +109,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+1. When `Logic` is called upon to execute a command, it is passed to an `UniMateParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -119,7 +119,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `UniMateParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `UniMateParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -331,7 +331,7 @@ Step 6. Eventually, we call `Stream#reduce()` with the user's `UniMateCalendar` 
 Step 7. The resultant `UniMateCalendar` then has the `Event` stored in it converted into grey event cards with `CalendarEventSpace#addSolidEventCards()`, which
 reflects in the resultant pop-up comparison calendar window.
 
-<puml src="diagrams/CompareCalendarsSequenceDiagram.puml" width="450" />
+<puml src="diagrams/CompareCalendarsSequenceDiagram.puml" alt="CompareCalendarsSequenceDiagram"/>
 
 **Design Consideration**
 
@@ -1225,7 +1225,7 @@ Prerequisite: 1 person in AddressBook, person currently has no events.
 5. Test case: `addContactEvent 1 d/Cry about deadlines ts/2023-01-02 00:01 te/2023-12-31 23:59` <br>
    Then enter: `editContactEvent 1 1 t3/2023-01-01 00:20` <br>
    Expected: Error message is displayed that indicates that the start date should be before the end date.
-6. Test case: `addContactEven` <br>
+6. Test case: `addContactEvent` <br>
    Expected: Error message displayed indicating that the command format is invalid.
 
 ### Viewing events of another person
@@ -1359,7 +1359,7 @@ Rename the files to their respective data files and replace the original files (
 
 ## **Appendix: Effort**
 ### Main Difficulty: Building User Calendar
-This part was especially difficult because we wanted to maintain the OOP style of the base `AB3` code, knowing it is a brownfield project. 
+This part was especially difficult because we wanted to conform to the structure of the base `AB3` code, knowing it is a brownfield project. 
 Thus, we wanted to ensure the abstraction granularity of the classes matched that of `AB3` (e.g. Separate classes for every single attribute of `Person`), 
 which explains why the `UniMateCalendar` class is so granular, as seen in the [model class diagram](#model-component).
 
@@ -1367,7 +1367,8 @@ Furthermore, we knew from the beginning that we wanted to allow users to compare
 Therefore, from the start, we had to write code that would make this feature possible.
 
 The UI for the calendar was also challenging because nobody in the group had experience in desktop application UI development and JavaFx.
-Therefore, this section took many hours of trial and error.
+Understanding JavaFx, before even implementing it in the creation of new GUI elements, required a few hours and much trial and error.
+It was also challenging to implement GUI components while ensuring that all elements that were already previously implemented worked as well.
 
 Lastly, the feature where the calendar would "grow" and "shrink" according to the events that the user have in real time
 took a lot of careful problem-solving to avoid breaking abstraction barrier and introducing cyclic dependencies, since
@@ -1382,11 +1383,54 @@ in a new window rather than in the main application GUI.
 
 ### Other Difficulty: Task Manager/Event List
 For the Task Manager, the main difficulty lies in following the structure of the `AB3` code.
+While the implementation of the TaskManager was not complicated, we wanted to properly abstract the different classes from each other similarly to the
+structure of AB3. Thus, the implementation required a large number of lines of code and methods, all of which required even more JUnit tests, multiplying
+the number of hours spent on implementing the TaskManager. However, the implementation of the GUI for the TaskManager did not take as long as that
+of the Calendar as the TaskManager used the same area of the GUI as the event list. That being said, given that no one in our team had experience working
+on a GUI, especially with JavaFx, a few hours had to be spent in researching what would be the best way to carry out the switching of the lists from one to the other.
 
-Additionally, for both `Task List` and `Event List`, making the list update in real time when new `Task`/`Event` are added was also difficult.
+Additionally, for both `Task List` and `Event List`, making the list update in real time when new `Task`/`Event` are added was also difficult. When implementing
+the GUI, we had wanted to ensure that commands executed in the main window would reflect appropriately in both the user's own task and event lists but also
+for the pop-up event list of individual persons in the AddressBook. This proved to be another challenge as we would encounter several bugs while implementing
+this feature. However, we managed to work together as a group to fix most of them.
 
 ### Achievements:
 - Calendar UI that will update in real time when user adds/deletes event
 - Working calendar comparison feature
 - We were able to integrate 2 separate and very different components, `Task manager` and `Calendar`, successfully into the base `AB3` code
 - Live updates for the `Task List` and `Event List`
+
+
+## **Appendix: Planned Enhancements**
+
+### Better Confirmation for ClearEventsCommand
+Currently, for the ClearEventsCommand, the user has to re-enter the command entirely with the confirmation text in order
+to confirm the deletion of the events. This implementation has an advantage of being able to bypass the confirmation 
+check if the user wishes to delete the events more quickly but is otherwise clumsier to use. One way we tried to 
+circumvent this is by displaying the message with the confirmation in the result shown but this would not be as convenient
+for users who do not wish to use their mouse. A better implementation would be to have the confirmation only require the
+user to key in Y or N to confirm or deny the deletion, allowing the events to still be deleted quickly for users who wish
+to do so but also allowing for less text to be keyed in to confirm.
+
+### More Ways to Sort Tasks
+Currently, there are only two ways to sort tasks. This can cause some tasks to be buried under others if they are not 
+prioritized in either sorting method. Being able to sort tasks by proximity to the current date or being able to reverse
+the order of sorting of the tasks may help in making all tasks visible to the user so as to ensure that all tasks are 
+completed on time.
+
+### Allow user to view beyond the current week restriction for the calendar
+Currently, the calendar for the user and contacts is restricted to viewing the current week's events. Therefore, the
+user has no means of navigating looking at their events for other weeks other than the current one. This might impede
+the user experience as the user might want to check their timetable for some timeframe in the near future (e.g. proceeding week).
+Therefore, allowing the user to view their events for any week beyond just the current one might improve user experience,
+reducing the dependency the user has on the `Event List` to view events beyond this chronological restriction.
+
+### Allow users to compare calendars with contacts beyond the current week
+Currently, the user can only compare calendars with their contacts for the current week. Therefore, if the user wants to
+schedule a meeting in a week beyond the current one, they might have difficulty as they might not be able to compare
+their calendars with their contacts for that specific week. Therefore, allowing the user to navigate beyond the current
+week restriction for the compare calendar feature will be hugely beneficial to the user.
+
+### Allow users to import .ics format files
+Currently, UniMate has no support for importing of external files. Allowing users to import .ics files, which is a common export
+format of other calendar platforms, will allow UniMate to integrate more seamlessly with other calendar applications.
