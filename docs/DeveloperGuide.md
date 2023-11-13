@@ -620,11 +620,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. EmployeeManager updates the displayed list with the found employees.<br>
    Use case ends.
 
-
 **Extensions**
 
-* 1a. The user input is invalid.
-  * 1a1. EmployeeManager shows an error message.<br>
+* 1a. The user did not the valid predefined prefix to search for the employee by department.
+  * 1a1. EmployeeManager shows an error message.
     Use case ends.
 
 **Use case: UC6 - Bulk increment salaries**

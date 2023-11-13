@@ -32,7 +32,6 @@ Given below are my contributions to the project.
       * Added the `history` command section.
       * Updated the `clear` command section.
       * Updated the `help` command section.
-      * Updated the `list` command section.
     * Developer Guide:
       * Updated the links to our repo GitHub page. 
       * Added the Acknowledgements section.
