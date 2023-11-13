@@ -160,14 +160,29 @@ public class TimeIntervalTest {
         assertFalse(TimeInterval.isValidTimeIntervalLogic(start, end));
     }
 
+    @Test
+    public void execute_sameDay_returnTrue() {
+        TimeInterval timeInterval = TypicalTimeIntervals.TIME_INTERVAL_ONE_OVERLAP_A; // MON 1000 - MON 1100
+        Duration durationWithin = new Duration(59);
+        Duration durationEqual = new Duration(60);
+        Duration durationExceed = new Duration(61);
+        assertTrue(timeInterval.allows(durationWithin));
+        assertTrue(timeInterval.allows(durationEqual));
+        assertFalse(timeInterval.allows(durationExceed));
+    }
 
 
+    @Test
+    public void execute_differentDay_returnTrue() {
+        TimeInterval timeInterval = TypicalTimeIntervals.TIME_INTERVAL_MONTUE_ONE; // MON 1100 - TUE 1400 is 27 Hours
+        Duration durationWithin = new Duration(1619);
+        Duration durationEqual = new Duration(1620);
+        Duration durationExceed = new Duration(1621);
+        assertTrue(timeInterval.allows(durationWithin));
+        assertTrue(timeInterval.allows(durationEqual));
+        assertFalse(timeInterval.allows(durationExceed));
 
-
-
-
-
-
+    }
 
 
 

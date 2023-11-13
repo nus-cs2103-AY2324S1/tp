@@ -231,6 +231,7 @@ public class Group {
                 freeTime = freeTime.findOverlap(second, duration);
             }
         }
+
         return freeTime;
     }
 
@@ -293,7 +294,4 @@ public class Group {
             .toString();
     }
 
-    public int size() {
-        return listOfGroupMates.size();
-    }
 }
