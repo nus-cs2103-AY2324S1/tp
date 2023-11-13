@@ -36,12 +36,12 @@ retailers looking for a cheap and efficient way to record daily transactions.
 
 - Added glossary terms [\#85](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/85)
 - User guide fixes after PE-D [\#182](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/182)
+- Improved table of contents and print formating [\#212](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/212)
 
 ### **Developer Guide**
 
-`to be added soon`
-
-<!-- - Added implementation details of the `delete` feature. -->
+- Fix table of contents [\#191](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/191)
+- Additions to UI component [\#202](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/202)
 
 ### **Review Contributions**
 
