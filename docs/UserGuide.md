@@ -507,6 +507,10 @@ Format: `delete s/STUDENT_NUMBER`
 Example:
 * `delete s/A0249112A`
 
+The following image shows a successful execution of the `delete s/A0249112A` command.
+
+<img src="images/delete-success.png" alt="result for `delete s/A0249112A" width="700" />
+
 [Back to Table of Contents](#table-of-contents)
 
 ---
@@ -547,6 +551,10 @@ The student number entered __without__ the `s/` prefix is the **current** studen
 Examples:
 *  `edit A0245234A p/91234567 e/johndoe@example.com` Edits the phone number and email address of the student with `STUDENT_NUMBER` A0245234A to be `91234567` and `johndoe@example.com` respectively.
 *  `edit A0223344A n/Betsy Crower` Edits the name of the student with `STUDENT_NUMBER` A0223344A to be `Betsy Crower`.
+
+The following image shows a successful execution of the `edit A0249112A n/Bob` command.
+
+<img src="images/edit-success.png" alt="result for `edit A0249112A" width="700" />
 
 [Back to Table of Contents](#table-of-contents)
 
