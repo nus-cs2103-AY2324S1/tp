@@ -102,7 +102,7 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void execute_noEmployeesFound() {
+    public void filter_invalidParameter_noEmployeesFound() {
         // invalid d/DEPARTMENT
         String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 0);
         ContainsAllPredicate predicate = createContainsAllPredicateHelper("department", INVALID_DEPARTMENT);
@@ -127,7 +127,7 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void filterNameTest() {
+    public void filter_nameTest_filteredName() {
         // filter n/Alice Pauline from typical employees
         String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 1);
         ContainsAllPredicate predicate = createContainsAllPredicateHelper("name", ALICE.getName().toString());
@@ -145,7 +145,7 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void filterPhoneTest() {
+    public void filter_phoneTest_filteredPhone() {
         // filter ALICE's number from typical employees
         String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 1);
         ContainsAllPredicate predicate = createContainsAllPredicateHelper("phone", ALICE.getPhone().toString());
@@ -163,7 +163,7 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void filterEmailTest() {
+    public void filter_emailTest_filteredEmail() {
         // filter ALICE's email from typical employees
         String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 1);
         ContainsAllPredicate predicate = createContainsAllPredicateHelper("email", ALICE.getEmail().toString());
@@ -181,7 +181,7 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void filterAddressTest() {
+    public void filter_addressTest_filteredAddress() {
         // filter ALICE's address from typical employees
         String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 1);
         ContainsAllPredicate predicate = createContainsAllPredicateHelper("address", ALICE.getAddress().toString());
@@ -199,7 +199,7 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void filterSalaryTest() {
+    public void filter_salaryTest_filteredSalaries() {
         // filter s/2000 (salary <= 2000) from typical employees
         String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 3);
         ContainsAllPredicate predicate = createContainsAllPredicateHelper("salary", VALID_SALARY_2000);
@@ -226,7 +226,7 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void filterLeaveTest() {
+    public void filter_leaveTest_filteredLeave() {
         // filter l/14 (leave == 14) from typical employees
         String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 2);
         ContainsAllPredicate predicate = createContainsAllPredicateHelper("leave", ALICE.getLeave().toString());
@@ -253,7 +253,7 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void filterRoleTest() {
+    public void filter_roleTest_filteredRoles() {
         // filter r/subordinate from typical employees
         String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 3);
         ContainsAllPredicate predicate = createContainsAllPredicateHelper("role", VALID_ROLE_BOB);
@@ -272,7 +272,7 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void filterSupervisorTest() {
+    public void filter_supervisorTest_filteredSupervisor() {
         // filter m/Benson Meier from typical employees
         String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 2);
         ContainsAllPredicate predicate = createContainsAllPredicateHelper("supervisor",
@@ -284,7 +284,7 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void departmentFilterTest() {
+    public void filter_departmentTest_filteredDepartments() {
         // filter d/investment from typical employees
         String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 3);
         ContainsAllPredicate predicate = createContainsAllPredicateHelper("department", VALID_DEPARTMENT_INVESTMENT);
@@ -303,7 +303,7 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void multiplePrefixFilterTest() { // combination tests
+    public void filter_multiplePrefixFilterTest_valid() { // combination tests
         // filter r/manager and d/investment from typical employees
         String expectedMessage = String.format(MESSAGE_EMPLOYEES_LISTED_OVERVIEW, 3);
         ContainsAllPredicate predicate = createContainsAllPredicateHelper("role_department",
