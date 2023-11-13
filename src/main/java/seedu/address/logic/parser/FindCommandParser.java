@@ -45,15 +45,24 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         logger.log(Level.INFO, "Successfully parsed FindCommand.");
+      
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             assert ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()) != null
                     : "Parsed name cannot be null";
+            String nameKeywords = argMultimap.getValue(PREFIX_NAME).get();
+            if (nameKeywords.split("\\s+").length > 1) {
+                throw new ParseException("Name can only take one word.");
+            }
             ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         }
 
         if (argMultimap.getValue(PREFIX_SUBJECT).isPresent()) {
             assert ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get()) != null
                     : "Parsed subject cannot be null";
+            String subjectKeywords = argMultimap.getValue(PREFIX_SUBJECT).get();
+            if (subjectKeywords.split("\\s+").length > 1) {
+                throw new ParseException("Subject can only take one word.");
+            }
             ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
         }
 
