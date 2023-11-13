@@ -3,12 +3,13 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_PATIENTS_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_UNABLE_TO_FIND_PATIENT_WITH_FIELD;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.ELLE;
-import static seedu.address.testutil.TypicalPersons.FIONA;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPatients.CARL;
+import static seedu.address.testutil.TypicalPatients.ELLE;
+import static seedu.address.testutil.TypicalPatients.FIONA;
+import static seedu.address.testutil.TypicalPatients.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,7 +19,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.patient.NameContainsKeywordsPredicate;
+import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -29,10 +31,10 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        NameContainsKeywordsPredicate firstPredicate = new NameContainsKeywordsPredicate(
+            Collections.singletonList("first"));
+        NameContainsKeywordsPredicate secondPredicate = new NameContainsKeywordsPredicate(
+            Collections.singletonList("second"));
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -50,29 +52,38 @@ public class FindCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different patient -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
+    public void execute_zeroKeywords_exceptionThrown() {
+        String expectedMessage = MESSAGE_UNABLE_TO_FIND_PATIENT_WITH_FIELD + "the given keywords.";
+        NameContainsKeywordsPredicate predicate = preparePredicate("john");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        expectedModel.updateFilteredPatientList(predicate);
+
+        boolean isExceptionThrown = false;
+        try {
+            command.execute(model, command.toString());
+        } catch (PatientWithFieldNotFoundException e) {
+            isExceptionThrown = true;
+            assertEquals(e.getMessage(), expectedMessage);
+        }
+        assertTrue(isExceptionThrown);
+        assertEquals(Collections.emptyList(), model.getFilteredPatientList());
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+    public void execute_multipleKeywords_multiplePatientsFound() {
+        String expectedMessage = String.format(MESSAGE_PATIENTS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredPatientList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPatientList());
     }
+
 
     @Test
     public void toStringMethod() {

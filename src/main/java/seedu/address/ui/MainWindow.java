@@ -3,12 +3,16 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -16,6 +20,8 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
+
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -31,9 +37,10 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private PatientListPanel patientListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private RecordPanel recordPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,7 +49,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane patientListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -50,11 +57,27 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
+    @FXML
+    private StackPane recordPanelPlaceholder;
+
+    @FXML
+    private Button minimizeButton;
+
+    @FXML
+    private Button maximizeButton;
+
+    @FXML
+    private Button closeButton;
+
+    private double xOffset = 0;
+    private double yOffset = 0;
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
+        // primaryStage.initStyle(StageStyle.UNDECORATED);
 
         // Set dependencies
         this.primaryStage = primaryStage;
@@ -66,6 +89,30 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        setUpWindowDragging();
+    }
+
+    /**
+     * Sets up the ability for the window to be dragged around.
+     */
+    private void setUpWindowDragging() {
+        VBox rootLayout = (VBox) getRoot().getScene().getRoot();
+        rootLayout.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+            }
+        });
+
+        rootLayout.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                primaryStage.setX(event.getScreenX() - xOffset);
+                primaryStage.setY(event.getScreenY() - yOffset);
+            }
+        });
+
     }
 
     public Stage getPrimaryStage() {
@@ -110,8 +157,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        patientListPanel = new PatientListPanel(logic.getFilteredPatientList());
+        patientListPanelPlaceholder.getChildren().add(patientListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -121,6 +168,9 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        recordPanel = new RecordPanel(patientListPanel);
+        recordPanelPlaceholder.getChildren().add(recordPanel.getRoot());
     }
 
     /**
@@ -163,8 +213,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public PatientListPanel getPatientListPanel() {
+        return patientListPanel;
     }
 
     /**
@@ -172,7 +222,8 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @see seedu.address.logic.Logic#execute(String)
      */
-    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+    private CommandResult executeCommand(String commandText)
+            throws CommandException, ParseException, PatientWithFieldNotFoundException {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
@@ -187,10 +238,29 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             return commandResult;
+        } catch (PatientWithFieldNotFoundException e) {
+            logger.info("User-specified field not found in any patients");
+            resultDisplay.setFeedbackToUser(e.getMessage());;
+            throw e;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
     }
+
+    @FXML
+    private void minimizeWindow() {
+        primaryStage.setIconified(true);
+    }
+
+    @FXML
+    private void maximizeWindow() {
+        if (primaryStage.isMaximized()) {
+            primaryStage.setMaximized(false);
+        } else {
+            primaryStage.setMaximized(true);
+        }
+    }
+
 }

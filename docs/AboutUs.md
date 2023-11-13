@@ -1,7 +1,9 @@
 ---
-layout: page
-title: About Us
+layout: default.md
+title: "About Us"
 ---
+
+# About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
@@ -9,51 +11,52 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Long Nguyen Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/longnguyentan.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/longnguyentan)]
+[[portfolio](team/longnguyentan.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Testing, Integration
 
-### Jean Doe
+### Aaron Joel Tan Tze Ern
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/aaronjt1.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/aaronjt1)]
+[[portfolio](team/aaronjt1.md)]
+
+* Role: Developer, Team Lead
+* Responsibilities: Scheduling and tracking, Git Expert
+
+### Lee Thien My
+
+<img src="images/thienmy0.png" width="200px">
+
+[[github](http://github.com/thienmy0)]
+[[portfolio](team/thienmy0.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Deliverables and Deadline
 
-### James Doe
+### Mehta Riya Mehulbhai
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/riyamehta2211.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/RiyaMehta2211)]
+[[portfolio](team/riyamehta2211.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Code Quality
+
+### Wu Jingya
+
+<img src="images/wujy28.png" width="200px">
+
+[[github](http://github.com/wujy28)]
+[[portfolio](team/wujy28.md)]
+
+* Role: Developer
+* Responsibilities: Documentation

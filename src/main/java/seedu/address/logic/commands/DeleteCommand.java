@@ -3,46 +3,48 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.logging.Logger;
 
-import seedu.address.commons.core.index.Index;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.patient.IcNumber;
+import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a patient identified using it's ic number from the patient record system.
  */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the patient identified by the ic number used in the displayed patient list.\n"
+            + "Parameters: i/IC_NUMBER\n" + "Example: " + COMMAND_WORD + " i/T0000000A";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PATIENT_SUCCESS = "Deleted Patient: %1$s";
+    private final IcNumber icNumber;
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private final Index targetIndex;
-
-    public DeleteCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    public DeleteCommand(IcNumber icNumber) {
+        this.icNumber = icNumber;
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model, String command) throws PatientWithFieldNotFoundException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Patient> currentPatientList = model.getCurrentPatientList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        Patient patientToDelete = model.getPatient(icNumber, currentPatientList);
+
+        if (patientToDelete == null) { // no patient with that IC
+            throw new PatientWithFieldNotFoundException("Ic Number : " + icNumber.value);
         }
-
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        logger.info("DeleteCommand : " + this + "\nsuccessfully executed");
+        model.deletePatient(patientToDelete, command);
+        return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS, Messages.format(patientToDelete)));
     }
 
     @Override
@@ -57,13 +59,13 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        return icNumber.equals(otherDeleteCommand.icNumber);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
+                .add("icNumber", icNumber)
                 .toString();
     }
 }

@@ -6,13 +6,16 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.patient.Address;
+import seedu.address.model.patient.AssignedDepartment;
+import seedu.address.model.patient.Birthday;
+import seedu.address.model.patient.Email;
+import seedu.address.model.patient.Gender;
+import seedu.address.model.patient.IcNumber;
+import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Phone;
+import seedu.address.model.patient.Priority;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -20,20 +23,9 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_CONSTRAINTS =
+        "Department name is invalid. " + "Please enter a valid department name.";
 
-    /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
-     */
-    public static Index parseIndex(String oneBasedIndex) throws ParseException {
-        String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
-        }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
-    }
 
     /**
      * Parses a {@code String name} into a {@code Name}.
@@ -111,6 +103,84 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String gender} into a {@code Gender}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code gender} is invalid.
+     */
+    public static Gender parseGender(String gender) throws ParseException {
+        requireNonNull(gender);
+        gender = gender.toUpperCase();
+        String trimmedGender = gender.trim();
+        if (!Gender.isValidGender(trimmedGender)) {
+            throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
+        }
+        return new Gender(trimmedGender);
+    }
+
+    /**
+     * Parses a {@code String birthday} into a {@code Birthday}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code birthday} is invalid.
+     */
+    public static Birthday parseBirthday(String birthday) throws ParseException {
+        requireNonNull(birthday);
+        String trimmedBirthday = birthday.trim();
+        if (!Birthday.isValidBirthdate(trimmedBirthday)) {
+            throw new ParseException(Birthday.MESSAGE_CONSTRAINTS);
+        }
+        return new Birthday(trimmedBirthday);
+    }
+
+    /**
+     * Parses a {@code String icNumber} into a {@code IcNumber}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code icNumber} is invalid.
+     */
+    public static IcNumber parseIcNumber(String icNumber) throws ParseException {
+        requireNonNull(icNumber);
+        icNumber = icNumber.toUpperCase();
+        String trimmedIcNumber = icNumber.trim();
+        if (!IcNumber.isValidIC(trimmedIcNumber)) {
+            throw new ParseException(IcNumber.MESSAGE_CONSTRAINTS);
+        }
+        return new IcNumber(trimmedIcNumber);
+    }
+
+    /**
+     * Parses a {@code String priority} into a {@code Priority}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code priority} is invalid.
+     */
+    public static Priority parsePriority(String priority) throws ParseException {
+        requireNonNull(priority);
+        priority = priority.toUpperCase();
+        String trimmedPriority = priority.trim();
+        if (!Priority.isValidPriority(trimmedPriority)) {
+            throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
+        }
+        return new Priority(trimmedPriority);
+    }
+
+    /**
+     * Parses a {@code String department} into a {@code Department}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code department} is invalid.
+     */
+    public static AssignedDepartment parseAssignedDepartment(String department) throws ParseException {
+        requireNonNull(department);
+        String trimmedDepartment = department.trim();
+        if (!AssignedDepartment.isValidDepartment(trimmedDepartment)) {
+            throw new ParseException(AssignedDepartment.MESSAGE_CONSTRAINTS);
+        }
+        return new AssignedDepartment(trimmedDepartment);
+    }
+
+    /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
@@ -120,5 +190,35 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String initialObservations}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String parseInitialObservations(String initialObservations) {
+        requireNonNull(initialObservations);
+        String trimmedInitialObservations = initialObservations.trim();
+        return trimmedInitialObservations;
+    }
+
+    /**
+     * Parses a {@code String diagnosis}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String parseDiagnosis(String diagnosis) {
+        requireNonNull(diagnosis);
+        String trimmedDiagnosis = diagnosis.trim();
+        return trimmedDiagnosis;
+    }
+
+    /**
+     * Parses a {@code String treatmentPlan}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String parseTreatmentPlan(String treatmentPlan) {
+        requireNonNull(treatmentPlan);
+        String trimmedTreatmentPlan = treatmentPlan.trim();
+        return trimmedTreatmentPlan;
     }
 }

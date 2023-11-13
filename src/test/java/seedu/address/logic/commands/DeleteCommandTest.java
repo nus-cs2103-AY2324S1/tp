@@ -3,92 +3,99 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.Messages.MESSAGE_UNABLE_TO_FIND_PATIENT_WITH_FIELD;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.logic.commands.CommandTestUtil.showPatientAtIC;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPatients.ALICE;
+import static seedu.address.testutil.TypicalPatients.BENSON;
+import static seedu.address.testutil.TypicalPatients.getTypicalAddressBook;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.patient.IcNumber;
+import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.exceptions.PatientWithFieldNotFoundException;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
  * {@code DeleteCommand}.
  */
 public class DeleteCommandTest {
-
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validIndexUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+    public void execute_validIcUnfilteredList_success() {
+        List<Patient> currentPatientList = model.getCurrentPatientList();
+        Patient patientToDelete = model.getPatient(ALICE.getIcNumber(), currentPatientList);
+        DeleteCommand deleteCommand = new DeleteCommand(ALICE.getIcNumber());
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDelete));
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PATIENT_SUCCESS,
+                Messages.format(patientToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
+        expectedModel.deletePatient(patientToDelete, "");
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
-
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        public void execute_invalidIcList_throwsIllegalArgumentException() throws PatientWithFieldNotFoundException {
+        showPatientAtIC(model, ALICE.getIcNumber());
+        String invalidIC = "";
+        assertThrows(IllegalArgumentException.class, () -> new IcNumber(invalidIC));
+        //Hence DeleteCommand cannot be executed because of illegal argument exception in IC
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+    public void execute_validIcFilteredList_success() throws PatientWithFieldNotFoundException {
+        showPatientAtIC(model, new IcNumber("T0032415E"));
+        List<Patient> lastShownList = model.getFilteredPatientList();
+        Patient patientToDelete = model.getPatient(ALICE.getIcNumber(), lastShownList);
+        DeleteCommand deleteCommand = new DeleteCommand(ALICE.getIcNumber());
 
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDelete));
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PATIENT_SUCCESS,
+                Messages.format(patientToDelete));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
-        showNoPerson(expectedModel);
+        expectedModel.deletePatient(patientToDelete, "");
+        showNoPatient(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+    public void execute_icNumberOfNonExistingPatient_exceptionThrown() throws PatientWithFieldNotFoundException {
+        IcNumber testIcNumber1 = new IcNumber("T1234567j");
+        DeleteCommand command = new DeleteCommand(testIcNumber1);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
-
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
-
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        boolean isExceptionThrown = false;
+        try {
+            command.execute(model, command.toString());
+        } catch (PatientWithFieldNotFoundException e) {
+            isExceptionThrown = true;
+            assertEquals(e.getMessage(),
+                MESSAGE_UNABLE_TO_FIND_PATIENT_WITH_FIELD + "Ic Number : " + testIcNumber1.value);
+        }
+        assertTrue(isExceptionThrown);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(ALICE.getIcNumber());
+        DeleteCommand deleteSecondCommand = new DeleteCommand(BENSON.getIcNumber());
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(new IcNumber("T0032415E"));
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -97,24 +104,24 @@ public class DeleteCommandTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different patient -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 
     @Test
     public void toStringMethod() {
-        Index targetIndex = Index.fromOneBased(1);
-        DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        IcNumber targetIc = new IcNumber("T0032415E");
+        DeleteCommand deleteCommand = new DeleteCommand(targetIc);
+        String expected = DeleteCommand.class.getCanonicalName() + "{icNumber=" + targetIc + "}";
         assertEquals(expected, deleteCommand.toString());
     }
 
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
+    private void showNoPatient(Model model) {
+        model.updateFilteredPatientList(p -> false);
 
-        assertTrue(model.getFilteredPersonList().isEmpty());
+        assertTrue(model.getFilteredPatientList().isEmpty());
     }
 }

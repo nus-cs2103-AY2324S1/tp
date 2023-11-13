@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,17 +13,19 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.patient.IcNumber;
+import seedu.address.model.patient.Patient;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the patient record system data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Patient> filteredPatients;
+    private final VersionedAddressBook versionedAddressBook;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -33,7 +37,8 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPatients = new FilteredList<>(this.addressBook.getPatientList());
+        this.versionedAddressBook = new VersionedAddressBook(this.addressBook.copy());
     }
 
     public ModelManager() {
@@ -78,8 +83,9 @@ public class ModelManager implements Model {
     //=========== AddressBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
+    public void setAddressBook(ReadOnlyAddressBook addressBook, String command) {
         this.addressBook.resetData(addressBook);
+        commitAddressBook(command);
     }
 
     @Override
@@ -88,44 +94,133 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasPatient(Patient patient) {
+        requireNonNull(patient);
+        return addressBook.hasPatient(patient);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public void deletePatient(Patient target, String command) {
+        addressBook.removePatient(target);
+        commitAddressBook(command);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public Patient getPatient(IcNumber icNumber, List<Patient> patientList) {
+        for (Patient patient : patientList) {
+            if (patient.getIcNumber().equals(icNumber)) {
+                return patient;
+            }
+        }
+        return null;
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
+    public void addPatient(Patient patient, String command) {
+        addressBook.addPatient(patient);
+        updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
+        commitAddressBook(command);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public void setPatient(Patient target, Patient editedPatient, String command) {
+        requireAllNonNull(target, editedPatient);
+        addressBook.setPatient(target, editedPatient);
+        commitAddressBook(command);
+    }
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns true if a {@Code Patient} with that {@Code IcNumber} is present
+     *
+     * @param icNumber IcNumber to be checked
+     * @return true Patient with that IcNumber is present
+     */
+    @Override
+    public boolean isPatientWithIcNumberPresent(IcNumber icNumber) {
+        List<Patient> currentPatientList = getCurrentPatientList();
+        for (Patient patient : currentPatientList) {
+            if (patient.getIcNumber().equals(icNumber)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void commitAddressBook(String command) {
+        versionedAddressBook.commit(addressBook.copy(), command);
+    }
+
+    @Override
+    public String redoAddressBook() {
+        String nextCommand = versionedAddressBook.getNextCommand();
+        AddressBook newData = versionedAddressBook.redo();
+        addressBook.resetData(newData);
+        return nextCommand;
+    }
+
+    /**
+     * Converts to the previous state of the patient data
+     * Returns most recent command
+     */
+    @Override
+    public String undoAddressBook() {
+        AddressBook newData = versionedAddressBook.undo();
+        addressBook.resetData(newData);
+        return versionedAddressBook.getNextCommand();
+    }
+
+    /**
+     * Check if there is a previous state/command to undo to.
+     * Returns true if there is a state, and false otherwise.
+     */
+    public boolean canUndoAddressBook() {
+        return versionedAddressBook.canUndo();
+    }
+
+    /**
+     * Check if there is a newer state/command to redo to.
+     * Returns true if there is a state, and false otherwise.
+     */
+    public boolean canRedoAddressBook() {
+        return versionedAddressBook.canRedo();
+    }
+
+    /**
+     * Returns the current list of {@code Patient} in the address book
+     *
+     * @return Current list of {@code Patient} in the address book
+     */
+    public ObservableList<Patient> getCurrentPatientList() {
+        return addressBook.getCurrentPatientList();
+    }
+
+    /**
+     * Sorts the address book with the given {@code comparator}
+     *
+     * @param comparator used to order the entries in the address book
+     */
+    public void sortPatientList(Comparator<? super Patient> comparator) {
+        requireNonNull(comparator);
+        addressBook.sortPatientList(comparator);
+    }
+
+
+    //=========== Filtered Patient List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Patient} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Patient> getFilteredPatientList() {
+        return filteredPatients;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredPatientList(Predicate<Patient> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredPatients.setPredicate(predicate);
     }
 
     @Override
@@ -140,9 +235,8 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+        return addressBook.equals(otherModelManager.addressBook) && userPrefs.equals(otherModelManager.userPrefs)
+            && filteredPatients.equals(otherModelManager.filteredPatients);
     }
 
 }

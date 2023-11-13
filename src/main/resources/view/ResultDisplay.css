@@ -1,0 +1,86 @@
+@font-face {
+    -fx-font-family: 'Inter Medium';
+    src: url('../fonts/Inter/static/Inter-Medium.ttf');
+}
+.fieldLabel {
+    -fx-font-family: "Inter Medium";
+    -fx-font-size: 13px;
+    -fx-text-fill: #808CFF;
+    -fx-opacity: 1;
+}
+
+.text-area {
+    -fx-background-insets: 0;
+    text-area-background: #3C4EEF;
+    -fx-font-family: "Inter Medium";
+    -fx-font-size: 15px;
+    -fx-text-fill: #ffffff;
+    -fx-opacity: 1;
+}
+
+.text-area .content {
+    -fx-background-color: #3C4EEF;
+}
+
+.text-area:focused .content {
+    -fx-background-color: #3C4EEF;
+}
+
+.text-area:focused {
+    -fx-highlight-fill: #7ecfff;
+}
+
+.text-area .content {
+    -fx-padding: 10px;
+    -fx-text-fill: white;
+    -fx-highlight-fill: #7ecfff;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color:white;
+    -fx-border-color:transparent;
+}
+
+
+.scroll-bar:horizontal .increment-button ,
+.scroll-bar:horizontal .decrement-button {
+    -fx-background-color:transparent;
+    -fx-background-radius: 0.0em;
+    -fx-padding:0.0 0.0 10.0 0.0;
+
+}
+
+.scroll-bar:vertical .increment-button ,
+.scroll-bar:vertical .decrement-button {
+    -fx-background-color:transparent;
+    -fx-background-radius: 0.0em;
+    -fx-padding:0.0 10.0 0.0 0.0;
+
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow{
+    -fx-shape: " ";
+    -fx-padding:0.15em 0.0;
+}
+
+.scroll-bar:vertical .increment-arrow,
+.scroll-bar:vertical .decrement-arrow{
+    -fx-shape: " ";
+    -fx-padding:0.0 0.15em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #7ecfff;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
+
+.scroll-bar:horizontal .thumb:hover,
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color : #7ecfff;
+    -fx-background-insets : 0;
+    -fx-background-radius : 0;
+}
