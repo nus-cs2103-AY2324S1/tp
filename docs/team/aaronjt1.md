@@ -95,7 +95,7 @@ can be assured that the displayed user is the one they desired.
     * Some non-trivial PRs I have
       reviewed [#77](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/77)
       [#89](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/89) [#96](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/96) [#107](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/107) [#120](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/120) [#145](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/145) [#155](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/155) [#167](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/167)
-    * Reviewed, approved and merged a total of 33 PRs out of ..
+    * Reviewed, approved and merged a total of 39 out of 124 pull requests
 * Provided guidelines to aid group members in implementation
     * Example : Aided group member in testing of Edit
       command [#145](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/145)
