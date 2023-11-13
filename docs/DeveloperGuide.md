@@ -212,9 +212,9 @@ The `Storage` component,
 
 This section describes some noteworthy details on how certain features are implemented.
 
-## List feature
+### List feature
 
-### Purpose
+#### Purpose
 
 The list feature is the core feature that handles the current state of the app. Depending on what the user specifies to list out, the user interface will change accordingly to show the appropriate list panels.
 It also handles displaying the relevant student details specified by the user when the student list is shown, in order to not overcrowd the interface.
