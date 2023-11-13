@@ -8,6 +8,7 @@ mainframe: **sd** Create Task Predicate
 participant ":FindTaskCommandParser" as FindTaskCommandParser LOGIC_COLOR
 participant "pred:TaskContainsKeywordsPredicate" as TaskContainsKeywordsPredicate LOGIC_COLOR
 
+activate FindTaskCommandParser
 create FindTaskCommandParser
 create TaskContainsKeywordsPredicate
 FindTaskCommandParser -> TaskContainsKeywordsPredicate : TaskContainsKeywordsPredicate(["agenda"])
