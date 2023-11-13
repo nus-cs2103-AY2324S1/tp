@@ -164,7 +164,7 @@ implementing this model.
 The class diagram below shows the current implementation of `Member` model.
 
 ![MemberClassDiagram](images/MemberClassDiagram.png)
-Every `Member` contains a `Name`,`Gender`, `Optional<Phone>`, `Optional<Email>`, `Optional<Address>`, `Optional<Hours>`, `Optional<Remark>` and a set of `Tags`
+Every `Member` contains a `Name`, `Gender`, `Optional<Phone>`, `Optional<Email>`, `Optional<Address>`, `Optional<Hours>`, `Optional<Remark>` and a set of `Tags`
 
 #### Design Considerations
 
