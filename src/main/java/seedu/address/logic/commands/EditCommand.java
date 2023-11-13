@@ -71,7 +71,11 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_DOESNT_EXIST = "This person hasn't been saved";
+    public static final String MESSAGE_INVALID_DOCTOR_TAGS = "Please enter valid Doctor tags.";
+    public static final String MESSAGE_INVALID_PATIENT_TAGS = "Please enter valid Patient tags.";
     public static final String MESSAGE_IC_CHANGED = "You can't change a person's IC";
+    public static final String MESSAGE_EDIT_WRONG_FIELDS =
+            "Doctors cannot have Condition, BloodType or Emergency Contact fields.";
     private static final Logger logger = LogsCenter.getLogger(EditCommand.class.getName());
     private final Ic nric;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -125,30 +129,39 @@ public class EditCommand extends Command {
     private Person getEditedPerson(Model model, Person personToEdit) throws CommandException {
         Person editedPerson;
         if (personToEdit instanceof Patient) {
-            if (editPersonDescriptor.getTags().isPresent()
-                    && !editPersonDescriptor.isValidPatientTagList(editPersonDescriptor.getTags().get())) {
-                logger.warning("Invalid tag for patient");
-                throw new CommandException("Please enter a valid patient tag.");
-            }
-            editedPerson = createEditedPatient((Patient) personToEdit, editPersonDescriptor);
+            Patient patientToEdit = (Patient) personToEdit;
+            validatePatient();
+            editedPerson = createEditedPatient(patientToEdit, editPersonDescriptor);
         } else {
             assert personToEdit.isDoctor();
-            if (editPersonDescriptor.getCondition().isPresent() || editPersonDescriptor.getBloodType().isPresent()) {
-                logger.warning("Error thrown - tried to edit condition / bloodtype of doctor");
-                throw new CommandException("Doctors cannot have Condition or BloodType fields.");
-            }
-            if (editPersonDescriptor.getTags().isPresent()
-                    && !editPersonDescriptor.isValidDoctorTagList(editPersonDescriptor.getTags().get())) {
-                logger.warning(editPersonDescriptor.getTags().toString());
-                throw new CommandException("Please enter valid Doctor tags.");
-            }
-            editedPerson = createEditedDoctor((Doctor) personToEdit, editPersonDescriptor);
+            Doctor doctorToEdit = (Doctor) personToEdit;
+            validateDoctor();
+            editedPerson = createEditedDoctor(doctorToEdit, editPersonDescriptor);
         }
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            logger.warning("Edited Person and orignal person are the same");
+            logger.warning("Edited Person and original person are the same");
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         return editedPerson;
+    }
+    private void validatePatient() throws CommandException {
+        if (editPersonDescriptor.getTags().isPresent()
+                && !editPersonDescriptor.isValidPatientTagList(editPersonDescriptor.getTags().get())) {
+            logger.warning("Invalid tag for patient");
+            throw new CommandException(MESSAGE_INVALID_PATIENT_TAGS);
+        }
+    }
+    private void validateDoctor() throws CommandException {
+        if (editPersonDescriptor.getCondition().isPresent() || editPersonDescriptor.getBloodType().isPresent()
+                || editPersonDescriptor.getEmergencyContact().isPresent()) {
+            logger.warning("Error thrown - tried to edit condition/blood type/emergency contact of doctor");
+            throw new CommandException(MESSAGE_EDIT_WRONG_FIELDS);
+        }
+        if (editPersonDescriptor.getTags().isPresent()
+                && !editPersonDescriptor.isValidDoctorTagList(editPersonDescriptor.getTags().get())) {
+            logger.warning(editPersonDescriptor.getTags().toString());
+            throw new CommandException(MESSAGE_INVALID_DOCTOR_TAGS);
+        }
     }
 
     /**
@@ -157,7 +170,7 @@ public class EditCommand extends Command {
      */
     private static Doctor createEditedDoctor(Doctor personToEdit, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(personToEdit);
-        requireNonNull(personToEdit);
+        requireNonNull(editPersonDescriptor);
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
@@ -178,7 +191,7 @@ public class EditCommand extends Command {
 
     private static Patient createEditedPatient(Patient personToEdit, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(personToEdit);
-        requireNonNull(personToEdit);
+        requireNonNull(editPersonDescriptor);
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());

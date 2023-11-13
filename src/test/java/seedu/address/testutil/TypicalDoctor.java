@@ -13,7 +13,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_DEREK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CHERYL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DEREK;
 import static seedu.address.testutil.TypicalAppointment.APPOINTMENT_1;
-import static seedu.address.testutil.TypicalAppointment.APPOINTMENT_2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +29,7 @@ public class TypicalDoctor {
     public static final Doctor ALICE = new DoctorBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withRemark("She wants to become a Surgeon.").withGender("F").withIc("S9631267K")
-            .withTags("NEUROLOGIST").withAppointments(APPOINTMENT_1, APPOINTMENT_2).build();
+            .withTags("NEUROLOGIST").build();
     public static final Doctor BOYD = new DoctorBuilder().withName("Boyd Anders")
             .withAddress("311, Clementi Ave 2, #02-25").withRemark("His weakness is being a Perfectionist")
             .withEmail("boyda@example.com").withPhone("98765432").withGender("M").withIc("S9331268K")
@@ -60,6 +59,10 @@ public class TypicalDoctor {
     public static final Doctor DEREK = new DoctorBuilder().withName(VALID_NAME_DEREK).withPhone(VALID_PHONE_DEREK)
             .withEmail(VALID_EMAIL_DEREK)
             .withAddress(VALID_ADDRESS_DEREK).withIc(VALID_NRIC_DEREK).withGender(VALID_GENDER_MALE)
+            .build();
+
+    public static final Doctor KENNY = new DoctorBuilder().withName("Kenny Pickett").withPhone("98884444")
+            .withEmail("kenny@gmail.com").withAddress("Woodlands Dr 55").withIc("S4445555Q").withGender("M")
             .build();
 
     public static final String KEYWORD_MATCHING_DAVID = "Beckham"; // A keyword that matches MEIER

@@ -3,11 +3,23 @@ layout: page
 title: User Guide
 ---
 
-### Your Guide to MediLink Contacts
+### Welcome to MediLink Contacts!
 
-MediLink Contacts (MLC) is a **desktop app for managing patients and doctors details, optimized for use via a Command
-Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MLC
-can get your patients management tasks done faster than traditional GUI apps.
+MediLink Contacts (MLC) is a **desktop application** for **medical administrative assistants** to manage patients and
+doctors details within clinics.
+
+Hereʼs an overview of how MediLink Contacts can help you streamline your hospital management
+processes:
+
+* Store and edit information about your patients and doctors.
+* Create appointments between patients and doctors upon triaging.
+
+On top of these functionalities, we believe that **efficiency** in patient management is of utmost importance.
+Hence, MediLink Contacts is **optimized** for use via a **Command Line Interface (CLI)** while still having
+the benefits of a **Graphical User Interface (GUI)**. If you type fast, MediLink Contacts can get your
+hospital management tasks done faster than current GUI apps in the industry.
+
+**New here?** Visit our [quick start](#quick-start) guide to onboard onto MediLink Contacts smoothly!
 
 ### Table of Contents
 
@@ -19,7 +31,7 @@ can get your patients management tasks done faster than traditional GUI apps.
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer. If you don't, install it for your relevant operating
-    system at this link https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html.
+    system at this [link](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
 2. Download the latest `MediLink.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-3/tp/releases).
 
@@ -28,7 +40,7 @@ can get your patients management tasks done faster than traditional GUI apps.
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar MediLink.jar` command
    to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![quickview](images/quickorientation.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
    open the help window.<br>
@@ -37,7 +49,7 @@ can get your patients management tasks done faster than traditional GUI apps.
     * `list` : Lists all contacts.
 
     * `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a
-      doctor named `John Doe` to the Address Book.
+      doctor named `John Doe` to MediLink Contacts.
 
     * `delete S9851386G` : Deletes the person with ic S9851386G.
 
@@ -51,6 +63,8 @@ can get your patients management tasks done faster than traditional GUI apps.
 ## Parameters
 
 The list below contains the parameters that are used in various commands as well as their various constraints. Failing to input valid parameters will lead to errors when entering commands. Users should follow these constraints for all commands, unless otherwise stated.
+
+**Note**: Certain commands may have special requirements for parameter inputs (eg. `find`) so do please follow them when necessary!
 
 | Parameter           | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Valid Examples                                                                                                  | Invalid Examples                   |
 |:--------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------|:-----------------------------------|
@@ -85,9 +99,10 @@ The list below contains the parameters that are used in various commands as well
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
-  ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`,
+  `clear`, `undo` and `redo`) will be
+    ignored.<br>
+    e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * Extraneous parameters behind any valid parameters will be deemed as the input for that parameter. <br>
   e.g. if the command specifies `add-doctor a/ADRESS c/some condition ....`, `c/some condition` will be interpreted as part of the address.
@@ -107,7 +122,7 @@ Format: `help`
 
 ### Adding a Doctor: `add-doctor`
 
-Adds a Doctor to the clinic database.
+Adds a Doctor to MediLink Contacts.
 
 Format: `add-doctor n/NAME ic/NRIC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -119,14 +134,12 @@ A doctor can have any number of tags (including 0). Duplicate tags, however, are
 
 **:information_source: Take Note:**<br>
 
-- A doctor cannot have the same NRIC as another person.
-- A person can either be a doctor or a patient, but not both. Hence, if the doctor's NRIC is already in the app
+- A doctor **MUST** have all fields non-empty except TAG.
+  Failure to include these details may result in an error.
+- The order is not important (i.e, IC can come before NAME). What matters is that all the mandatory fields are declared,
+and the format for each field is adhered to.
+- A person can either be a doctor or a patient, but not both. Hence if the doctor's IC is already in the app
 as a patient, it may result in an error.
-- Adding additional prefixes (eg. `b/O+`) not specified by the command format above will be considered as a **parameter input**. For example:</br>
-  `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/O+` will result
-  in Address inputted as `a/John street, block 123, #01-01 b/O+`. </br>
-  Do avoid adding  your own prefixes as it may lead to unwanted errors!
-- However, inputting `r/REMARKS` will be ignored and automatically removed by the system. To add remarks, use the Edit Command mentioned later below.
 
 </div>
 
@@ -135,9 +148,19 @@ Examples:
 * `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Pediatrician`
 * `add-doctor n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon`
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Common Errors:**<br>
+
+Refer to the [Common Pitfalls](#common-pitfalls) to ensure you do not make any of those errors, which may cause errant
+behaviour of MediLink Contacts. The exceptions to this section, as well as additional pitfalls are detailed below. <br> 
+* Names with special characters may not adhere to the current format for names, and may be recognised as an invalid input. 
+  * Example:`add-doctor n/David s/o Beckham ic/S9851486G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/surgeon`
+</div>
+
 ### Adding a Patient: `add-patient`
 
-Adds a Patient to the clinic database.
+Adds a Patient to MediLink Contacts.
 
 Format: `add-patient n/NAME ic/NRIC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e/EMAIL a/ADDRESS c/CONDITION b/BLOODTYPE  [t/TAG] ​`
 
@@ -150,9 +173,6 @@ Format: `add-patient n/NAME ic/NRIC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT
     as a doctor, it may result in an error.
 - EMERGENCY_CONTACT must contain valid emergency contact number, which needs to be a valid phone number. This number can be the same as the person's contact number.
 - A patient can only have up to one tag at any time.
-- Adding additional prefixes (eg. `k/Always Injured`) not specified by the command format above will be considered as a **parameter input**. For example: `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 c/pneumothorax k/Always Injured b/O+` will result in Condition inputted as `pneumothorax k/Always Injured`. 
-  Do avoid adding  your own prefixes as it may lead to unwanted errors!
-- However, inputting `r/REMARKS` will be ignored and automatically removed by the system. To add remarks, use the Edit Command mentioned later below.
 
 </div>
 
@@ -171,8 +191,8 @@ Format: `new-appt pic/NRIC dic/NRIC time/yyyy-MM-dd HH:mm`
 **:information_source: Take Note:**<br>
 
 - All fields are Required.
-- NRIC for pic/ must contain the valid NRIC of a Patient in the Database.
-- NRIC for dic/ must contain the valid NRIC of a Doctor in the Database.
+- NRIC for pic/ must contain the valid NRIC of a Patient in MediLink Contacts.
+- NRIC for dic/ must contain the valid NRIC of a Doctor in MediLink Contacts.
 - There must not be conflicting Appointments. (eg. the doctor already has an appointment with another patient at the same time) However, the duration of each appointment is flexible and up to the users. As long as appointments are not at the exact same time, users can add it in.
 
 </div>
@@ -199,7 +219,7 @@ Examples:
 
 * `delete-appt 1`
 
-### Finding a Appointment : `find-appt`
+### Finding an Appointment : `find-appt`
 
 Finds all appointments that involve a specific patient/doctor.
 
@@ -209,7 +229,7 @@ Format: `find-appt NRIC`
 **:information_source: Take Note:**<br>
 
 - All fields are Required.
-- NRIC must contain the valid NRIC of a Patient or Doctor in the Database.
+- NRIC must contain the valid NRIC of a Patient or Doctor in MediLink Contacts and **must** be in caps.
 - Either Doctor NRIC or Patient NRIC can be used in the search
 - It is recommended to use `list` to restore the view of all data after a `find` command.
 
@@ -231,16 +251,24 @@ Edits an existing person in the MediLink Contacts.
 
 Format: `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person with the specified `NRIC`. The NRIC **must be a valid NRIC number**
+<div markdown="block" class="alert alert-info">
+**:information_source: Take Note:**<br>
+
+* Edits the person with the specified `NRIC`. The NRIC provided **must be a valid NRIC number** and is not case-sensitive.
 * At least one of the optional fields must be provided.
 * If the provided fields are the same as the original, the command will still work.
-* Must edit appropriate fields based on whether the person is a patient or doctor (e.g. can't update condition of a
-  doctor).
-* Existing values will be updated to the input values.
+* You cannot change a person's IC number. If the provided ic number is the same as the original it will work.
+However, if it is different, there will be an error.
+* Must edit appropriate fields based on whether the person is a patient or doctor (e.g. can't update condition, blood type or
+emergency contact of a doctor).
+* Existing values will be updated to the input values.g
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
+* If extraneous parameters are provided, it may lead to an error.
 * Note: In our app, the Remark Section will be left blank by default. The edit Command can be used to add any miscellaneous info not captured by other fields such as possible allergies, medical history, etc.
+
+</div>
 
 Examples:
 
@@ -255,13 +283,18 @@ Finds persons that match the query.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
+<div markdown="block" class="alert alert-info">
+**:information_source: Take Note:**<br>
+
 * When searching names, the search is case-insensitive. e.g `hans` will match `Hans`.
 * When searching names, the order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * When searching names, only full words will be matched e.g. `Han` will not match `Hans`.
 * When searching names, Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
-* Note that if the name coincides with other find commands, it will be interpreted as the other find command first and extraneous paremeters will be ignored. e.g. `find F Kennedy John` will search for all female persons. 
+* Note that if the name coincides with other find commands, it will be interpreted as the other find command first and extraneous paremeters will be ignored. e.g. `find F Kennedy John` will search for all female persons.
 * It is recommended to use `list` to restore the view of all data after a `find` command.
+
+</div>
 
 Examples:
 
@@ -276,12 +309,18 @@ Finds person that matches the NRIC query.
 
 Format: `find NRIC`
 
+<div markdown="block" class="alert alert-info">
+**:information_source: Take Note:**<br>
+
 * NRIC input must be capitalised!
 * It is recommended to use `list` to restore the view of all data after a `find` command.
+
+</div>
 
 Examples:
 
 * `find T1125726G` returns the person with the matching NRIC.
+  ![result for 'find T1125726G'](images/findByNricResult.png)
 
 ### Locating people by gender : `find M`, `find F` ###
 
@@ -289,28 +328,30 @@ Finds all persons with matching gender.
 
 Format: `find M` or `find F`
 
+<div markdown="block" class="alert alert-info">
+**:information_source: Take Note:**<br>
+
 * M and F must be capitalised.
 * It is recommended to use `list` to restore the view of all data after a `find` command.
+
+</div>
 
 Examples:
 
 * `find M` returns all male persons.
+  ![result for 'find M'](images/findByGenderResult.png)
 
-### Locating people by blood types : `find Blood Type` ###
+<div markdown="block" class="alert alert-info">
+**:information_source: Take Note:**<br>
 
-Finds all Patients with query blood type.
+- The default `find` command would be by name, if the input does not match any of the other types of `find` commands.
+- Example: `find f` performs a find by name command with the keyword `f` instead of a find by gender command since `f` is not capitalised.
 
-Format: `find Blood Type QUERY` 
-
-* It is recommended to use `list` to restore the view of all data after a `find` command.
-
-Examples:
-
-* `find Blood Type A+` returns all Patients with blood type A+.
+</div>
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from MediLink Contacts.
 
 Format: `delete NRIC`
 
@@ -331,6 +372,7 @@ Format: `clear`
 <div markdown="block" class="alert alert-info">
 **:information_source: Take Note:**<br>
 
+- `undo` does not apply to `find` and `list` commands, as they do not make any direct changes to the MediLink Contacts.
 - Upon restarting the app, you will no longer be able to undo actions previously performed before exiting the app.
 
 </div>
@@ -350,7 +392,7 @@ Format: `undo`
 
 </div>
 
-Restores the effects of actions that were previously undone using the undo command. 
+Restores the effects of actions that were previously undone using the undo command.
 
 Format: `redo`
 
@@ -381,7 +423,40 @@ If your changes to the data file makes its format invalid, MediLink Contacts may
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
+## Common PitFalls
 
+### Invalid Command Format
+All fields are mandatory except the tag field. Omission of the fields will throw an error stating
+that an invalid command has been given, and specify the correct format for the command. <br>
+Example: `add-doctor ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon`<br>
+Error Message: `Invalid command format!` <br>
+`add-doctor: Adds a person to MediLink Contacts. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS g/GENDER ic/NRIC [t/TAG]...` <br>
+Reason: mandatory field NAME is not specified. Note that different Invalid Commands will have slightly different Error Messages.
+
+### Invalid Field
+Fields have specific formats to be followed. Failure to adhere to this format will lead to an error message
+that specifies the format to be used for that field. Common cases of Invalid Fields:
+1. Empty flags<br>
+   Example: `new-appt pic/ dic/S9851586G time/2023-10-30 13:00` <br>
+   Reason: PATIENT IC field is empty.
+2. Prefixes not associated with the command<br>
+   Adding custom prefixes will mostly cause the preceding flag to become invalid. Note that custom prefixes refer to prefixes
+   not recognised by the specific command. Although `b/` refers to BLOODTYPE and is a valid flag, it is only a valid flag in
+   the context of Patients. It will be recognised as invalid in other commands such as `add-doctor`<br>
+   Exceptions:
+    * Adding 'custom' flags after the address or condition field will, however, be accepted as
+      addresses or conditions may involve the usage of the `/` character. Hence, take note to use these fields carefully.
+    * However, adding the remark prefix `r/` and everything attached to it will be ignored by the system.
+    * Adding the 'custom' flag before any other field will recognise the input to be of Invalid Command Format.<br>
+      Examples:
+    * `add-patient n/John Doe custom/ ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 c/pneumothorax b/O+ t/Low`
+      <br>Reason: custom flag `custom/` causes NAME field to become invalid.
+    * `add-doctor ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104/C, Wakanda St 42 t/Surgeon`
+      <br>Reason: custom flag `/C` taken as part of a valid address, and does not show any Error.
+    * `new-appt b/ dic/S9851586G time/2023-10-30 13:00`
+      <br>Reason: custom flag `b/` causes input to be of invalid command format.
+
+--------------------------------------------------------------------------------------------------------------------
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -392,7 +467,6 @@ the data of your previous MediLink Contacts home folder.
 **A**: Open a Command Prompt, type java -version and press enter. It will then show the java version installed on your machine. If you see `Java not recognised as an internal or external command`, it means you likely do not have java installed. In this case you may download java11 [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
 --------------------------------------------------------------------------------------------------------------------
-
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only

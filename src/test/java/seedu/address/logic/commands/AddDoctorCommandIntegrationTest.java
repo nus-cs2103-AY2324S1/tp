@@ -11,13 +11,13 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Patient;
-import seedu.address.testutil.PatientBuilder;
+import seedu.address.model.person.Doctor;
+import seedu.address.testutil.DoctorBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddPatientCommand}.
  */
-public class AddPatientCommandIntegrationTest {
+public class AddDoctorCommandIntegrationTest {
 
     private Model model;
 
@@ -27,22 +27,22 @@ public class AddPatientCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPatient_success() {
-        Patient validPatient = new PatientBuilder().withName("Barry Allen").build();
+    public void execute_newDoctor_success() {
+        Doctor validDoctor = new DoctorBuilder().withName("Barry Allen").build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validPatient);
+        expectedModel.addPerson(validDoctor);
 
-        assertCommandSuccess(new AddPatientCommand(validPatient), model,
-                String.format(AddPatientCommand.MESSAGE_SUCCESS, Messages.format(validPatient)),
+        assertCommandSuccess(new AddDoctorCommand(validDoctor), model,
+                String.format(AddDoctorCommand.MESSAGE_SUCCESS, Messages.format(validDoctor)),
                 expectedModel);
     }
 
     @Test
-    public void execute_duplicatePatient_throwsCommandException() {
-        Patient patientInList = model.getAddressBook().getPatientList().get(0);
-        assertCommandFailure(new AddPatientCommand(patientInList), model,
-                AddPatientCommand.MESSAGE_DUPLICATE_PERSON);
+    public void execute_duplicateDoctor_throwsCommandException() {
+        Doctor doctorInList = model.getAddressBook().getDoctorList().get(0);
+        assertCommandFailure(new AddDoctorCommand(doctorInList), model,
+                AddDoctorCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
 }

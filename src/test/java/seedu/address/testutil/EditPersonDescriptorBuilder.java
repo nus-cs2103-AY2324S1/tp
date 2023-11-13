@@ -8,7 +8,6 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.BloodType;
 import seedu.address.model.person.Condition;
-import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Ic;
@@ -52,9 +51,6 @@ public class EditPersonDescriptorBuilder {
             descriptor.setBloodType(patient.getBloodType());
             descriptor.setCondition(patient.getCondition());
             descriptor.setEmergencyContact(patient.getEmergencyContact());
-        } else if (person.isDoctor()) {
-            Doctor doctor = (Doctor) person;
-            descriptor.setAppointments(doctor.getAppointments());
         }
     }
 
