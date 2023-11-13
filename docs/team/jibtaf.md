@@ -6,7 +6,7 @@ title: He Yifan's Project Portfolio Page
 ### Project: ManaGease
 
 ManaGease - Contact management app to simplify and centralize information for full-time employees.
-It offers easy access to essential details such as name, email, phone number, address, bank accounts, salary, joining date, and annual leaves. With all the information, the app can help to track employees’ annual leave and also generate their payroll automatically. This helps to reduce errors and enhance overall operational efficiency. This results in time and cost savings, improved organization, and a smoother workflow for your business.
+It offers easy access to identity information, attendance status, and payroll status of employees. With all the information, the app can help with leave tracking and auto-generation of payrolls and payslips for employees. This helps to reduce errors and enhance overall operational efficiency, leading to time and cost savings, employee engagement and regulatory compliance, and a smoother workflow for your business.
 
 Given below are my contributions to the project.
 
