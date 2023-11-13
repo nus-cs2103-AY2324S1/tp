@@ -1542,9 +1542,9 @@ testers are expected to do more <i>exploratory testing</i>.
 
 ## **Appendix: Effort**
 
-### 1. Feature-rich selection of commands
+### 1. Feature-rich Selection of Commands
 
-The process of building CoordiMate's command suite began with a structured approach, where we drafted user stories to encapsulate the frequent challenges faced by SoC event planners. This groundwork helped us identify and develop the commands that were critical to the application, particularly the (Create, Read, Update, Delete) CRUD operations for persons and tasks. Our aim was to ensure these core commands were not only functional but also intuitive for users.
+The process of building CoordiMate's command suite began with a structured approach, where we drafted user stories to encapsulate the frequent challenges faced by SoC event planners. This groundwork helped us identify and develop the commands that were critical to the application, particularly the Create, Read, Update, Delete (CRUD) operations for persons and tasks. Our aim was to ensure these core commands were not only functional but also intuitive for users.
 
 Following the first iteration, we presented CoordiMate in a live demo to collect firsthand feedback from our peers. This step was crucial; it enabled us to understand how the app was being received by potential users and which additional features would enhance its value. We used this feedback to inform our development priorities, focusing on the user stories that had the most significant impact on the user experience for subsequent updates.
 
