@@ -57,16 +57,15 @@ This guide uses the following features to make it easier for you to navigate aro
 
 3. Put the downloaded file into a folder of your choice (preferably a new empty folder).
 
-4. Open a command terminal in the folder you put the CCACommander file in, and use the `java -jar ccacommander.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+4. Open a command terminal in the folder you put the CCACommander file in, and use the `java -jar ccacommander.jar` command to run the application. A GUI resembling the one shown below should appear in a few seconds. Note how the app contains some sample data.<br>
+![Ui](images/Ui.png)
 
-5. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br> e.g. typing `help` and pressing <kbd> Enter </kbd> will open the help window. <br>
+5. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br> E.g. typing `help` and pressing <kbd>Enter</kbd> will open the help window. <br>
    Some example commands you can try:
 
     * `list` : Lists all members and events.
 
-    * `createMember n/Lim Jun Jie g/Male p/98765432 e/limjunjie@gmail.com a/19 Kent Ridge Crescent, Singapore 119278`: Creates a member named Lim Jun Jie in CCACommander.
+    * `createMember n/Lim Jun Jie g/Male p/98765432 e/limjunjie@gmail.com a/19 Kent Ridge Crescent, Singapore 119278`: Creates a member named "Lim Jun Jie" in CCACommander.
 
     * `deleteMember 3` : Deletes the 3rd member shown in the current list.
 
@@ -88,9 +87,9 @@ Here are the important components of CCACommander that you will use and interact
 1. File: Exit the program
 2. Theme: Toggle between light and dark themes
 
-Light | Dark
---------|--------
-![LightTheme](images/light_theme.png) | ![DarkTheme](images/dark_theme.png)
+    Light | Dark
+    --------|--------
+    ![LightTheme](images/light_theme.png) | ![DarkTheme](images/dark_theme.png)
 
 3. Help: Access our user guide
 
