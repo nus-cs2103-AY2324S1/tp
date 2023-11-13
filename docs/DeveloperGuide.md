@@ -134,7 +134,7 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both Tuition Connect data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -196,29 +196,6 @@ The `ListCommand` extends the `Command` class. Both the `ListByDayCommand` and t
 The `ListCommandParser` is responsible for returning the appropriate `ListCommand`  based on the command format.
 
 
-The `ListByDayCommand`  is initialised with a `DayPredicate` and updates
-
-### Find feature
-The `findCommand` extends the `Command` class. It allows the user to find for tutees by specifying their names and/or 
-subject using their prefixes.
-
-The following sequence diagram shows how the edit command works.
-![FindSequenceDiagram](images/FindSequenceDiagram.png)
-
-### Edit feature
-The `editCommand` extends the `Command` class. It allows the user to edit fields of the tutee by specifying the index
-of the tutee.
-
-The following sequence diagram shows how the edit command works.
-![EditSequenceDiagram](images/EditSequenceDiagram.png)
-
-The following activity diagram summarizes what happens when a user executes an edit command:
-![EditActivityDiagram](images/EditActivityDiagram.png)
-
-### List by day feature
-The `ListByDayCommand` extends the `ListCommand` class. It is initialised with a `DayPredicate` and updates
-
-the `FilteredPersonList` to only display Persons whose `Day` field matches the specified input.
 
 The `ListByDayCommand`  is initialised with a `DayPredicate` and updates the `FilteredPersonList` to only display Persons whose `Day` field matches the specified input.
 
@@ -228,6 +205,78 @@ The following sequence diagram shows how the list by day command works.
 
 The `ListUnPaidCommand`  follows a similar implementation to `ListByDayCommand`. It is initialised with a `PaidPredicate` instead and updates
 the `FilteredPersonList` to only display Persons whose `isPaid` field is false.
+
+#### Design considerations:
+
+**Aspect: How to implement `ListByDayCommand` and `ListUnPaidCommand`:**
+
+* **Alternative 1 (current choice):** Extend the `ListCommand` class.
+  * Pros: Greater use of OOP.
+  * Cons: Harder to implement.
+
+* **Alternative 2:** Individual command class without extending `ListCommand`.
+  * Pros: Easier to implement.
+  * Cons: Less abstraction.
+
+### Find feature
+The `FindCommand` extends the `Command` class. It allows the user to find for tutees by specifying their names and/or 
+subject using their prefixes. Both parameters are optional, but at least one of them must be specified for the `find`
+command to work properly.
+
+`FindCommand` takes in the following fields:
+* **Name (Optional field)**: String composed of character between A-Z and a-z.
+* **Subject (Optional field)**: String without restriction in characters.
+
+The following sequence diagram shows how the edit command works.
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How find executes:**
+
+* **Alternative 1 (current choice):** Find tutees based on inputs for prefixes n/ and sb/.
+    * Pros: More sophisticated as it can search for subjects rather than only for name.
+    * Cons: Less user-friendly for beginners as it requires an extra step of inputting prefixes.
+* **Alternative 2:** Find tutees based on their name.
+    * Pros: More user-friendly as the command format would only be `find [name]`.
+    * Cons: Users cannot search for tutees by subject.
+
+### Edit feature
+The `EditCommand` extends the `Command` class. It allows the user to edit fields of the tutee by specifying the index
+of the tutee. The command contains checks to prevent any duplicate `Person` object (i.e. same name and phone number) 
+as well as clashes in schedules. If it passes these checks, the person is edited successfully.
+
+`EditCommand` takes in the following fields:
+* **Index (Compulsory Field)**: Numbers between 1 to the number of people inside the list.
+* **Name (Optional field)**: String composed of character between A-Z and a-z.
+* **Phone number (Optional field)**: Any number at least 3 digits long.
+* **Email (Optional field)** String with restrictions in characters (XXXXXXXX@emaildomain)
+* **Address (Optional field)**: String without restriction in characters.
+* **Subject (Optional field)**: String without restriction in characters.
+* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).
+* **Begin (Optional field)**: String with restrictions (HHMM).
+* **End (Optional field)**: String with restrictions (HHMM).
+* **PayRate (Optional field)**: String with restrictions in characters, only numbers allowed (no negative numbers)
+
+The following sequence diagram shows how the edit command works.
+![EditSequenceDiagram](images/EditSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes an edit command:
+![EditActivityDiagram](images/EditActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How edit executes:**
+
+* **Alternative 1 (current choice):** User specify which fields to edit by their prefixes.
+    * Pros: User can edit the fields that require changes by specifying their prefix.
+    * Cons: Command input may be too long and less user-friendly.
+* **Alternative 2:** Users cannot edit tutees that are already added, and can only do delete and re-adding 
+of tutees whenever changes are necessary.
+    * Pros: Less prone to bugs, and is simpler for developers to implement.
+    * Cons: Not user-friendly and takes multiple steps for the user.
+
+#### Design considerations:
 
 **Aspect: How to implement `ListByDayCommand` and `ListUnPaidCommand`:**
 
@@ -303,31 +352,31 @@ The following sequence diagram shows how the total revenue command works:
 
 The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedAddressBook#commit()` — Saves the current tutee list state in its history.
+* `VersionedAddressBook#undo()` — Restores the previous tutee list state from its history.
+* `VersionedAddressBook#redo()` — Restores a previously undone tutee list state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial tutee list state, and the `currentStatePointer` pointing to that single tutee list state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the tutee list. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the tutee list after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted tutee list state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified tutee list state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the tutee list state will not be saved into the `addressBookStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous tutee list state, and restores the tutee list to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -344,17 +393,17 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the tutee list to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest tutee list state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the tutee list, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all tutee list states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -364,9 +413,9 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: How undo & redo executes**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire tutee list.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
@@ -451,21 +500,20 @@ x
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 
-| Priority | As a …​   | I want to …​                                    | So that I can…​                                                 |
-| ------ |-----------|-------------------------------------------------|-----------------------------------------------------------------|
-| `* * *` | tutor     | view a list of all tutees                       | see whoever are my tutees that I teach                          |
-| `* *`  | tutor     | view a list tutees on a specified day           | be reminded if I have any classes on that particular day        |
-| `* * *` | tutor     | view the specific details of a single tutee     | see the different informations tailored to the tutee            |
-| `* * *` | tutor     | add a new tutee                                 | keep track of my tutees that I teach                            |
-| `* * *` | tutor     | find a tutee                                     | search for a specific tutee that I teach                        
-| `* * *` | tutor     | edit their details                              | account for changes in their information e.g. change in address |
-| `* *`  | tutor     | remove tutees from the list                     | keep track of tutees that I have stopped teaching               |
-| `* *`  | tutor     | mark students that have already paid            | keep track of students' payment statuses                        |
-| `* *`  | tutor     | check all students who haven't paid             | easily remind students who haven't paid                         |
-| `* *`  | tutor     | undo and redo commands I made in the application | easily revert any mistakes                                      |
-| `* *`  | tutor     | calculate my total monthly revnue               | better financially plan for my tutoring business                |
+| Priority | As a …​ | I want to …​                                            | So that I can…​                                               |
+|----------|---------|---------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | tutor   | view a list of all tutees                               | see whoever are my tutees that I teach                                 |
+| `* * *`  | tutor   | view the specific details of a single tutee             | see the different informations tailored to the tutee                   |
+| `* * *`  | tutor   | add a new tutee                                         | keep track of my tutees that I teach                                   |
+| `* * *`  | tutor   | find a tutee                                            | search for a specific tutee that I teach                               |
+| `* * *`  | tutor   | edit their details                                      | account for changes in their information e.g. change in address        |
+| `* *`    | tutor   | remove tutees from the list                             | keep track of tutees that I have stopped teaching                      |
+| `* *`    | tutor   | mark students that have already paid                    | keep track of students' payment statuses                               |
+| `* *`    | tutor   | check all students who haven't paid                     | easily remind students who haven't paid                                |
+| `* *`    | tutor   | undo and redo commands I made in the application        | easily revert any mistakes                                             |
+| `* *`    | tutor   | calculate my total monthly revenue                      | better financially plan for my tutoring business                       |
+| `* *`    | tutor   | view a list tutees whose lessons fall on a specific day | be reminded if I have any classes on that particular day               |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -477,6 +525,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list all tutees.
 2.  System shows all tutees.
+3.  System displays the success message.
 	
     Use case ends.
 
@@ -489,12 +538,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     <br>
     <br>
 
-**Use case: UC02 - Add a tutee**
+**Use case: UC02 - List tutees whose lessons are on a specified day**
+
+**MSS**
+
+1.  User requests to list all tutees whose lessons are on Monday.
+2.  System shows all tutees whose lessons are on Monday.
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. The list of tutees is empty.
+    - 2a1. System informs the user that the list is empty.
+
+  Use case ends.
+  <br>
+  <br>
+
+**Use case: UC03 - Add a tutee**
 
 **MSS**
 
 1. User requests to add a tutee.
 2. System adds a tutee.
+3. System displays the success message.
 
    Use case ends.
 
@@ -505,8 +573,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at 1.
 
-- 1b. User inputs a name that already exists in the address book.
-    - 1b1. System informs user about that name being taken already.
+- 1b. User inputs name and phone number that already exists in the tutee list.
+    - 1b1. System informs user of duplicate tutees.
 
       Use case resumes at 1.
   
@@ -523,13 +591,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     <br>
     <br>
   
-**Use case: UC03 - Delete a tutee**
+**Use case: UC04 - Delete a tutee**
 
 **MSS**
 
 1.  User views the list of tutees.
 2.  User requests to delete a tutee.
 3.  System deletes the tutee.
+4.  System displays the success message.
 
     Use case ends.
 
@@ -540,13 +609,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       <br>
       <br>
   
-**Use case: UC04 - Edit a tutee**
+**Use case: UC05 - Edit a tutee**
 
 **MSS**
 
 1.  User views the list of tutees.
 2.  User requests to edit a tutee.
 3.  System edits the tutee.
+4.  System displays the success message.
 
     Use case ends.
 
@@ -574,12 +644,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     <br>
     <br>
 
-**Use case: UC05 - Find a tutee**
+**Use case: UC06 - Find a tutee**
 
 **MSS**
 
 1. User requests to find a tutee.
 2. System finds the tutee.
+3. System displays the success message.
 
 **Extensions**
 
@@ -610,13 +681,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     <br>
     <br>
   
-**Use case: UC06 - Mark a tutee as paid**
+**Use case: UC07 - Mark a tutee as paid**
 
 **MSS**
 
 1.  User views the list of tutees.
 2.  User requests mark the specific tutee as paid.
 3.  System marks the tutee as paid.
+4.  System displays the success message.
 
     Use case ends.
 
@@ -627,19 +699,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       <br>
       <br>
 
-**Use case: UC07 - Reset all tutees in the list to not paid**
+**Use case: UC08 - Reset all tutees in the list to not paid**
 
 **MSS**
 
 1.  User views the list of tutees.
 2.  User requests mark all the tutees in the current list as not paid.
 3.  System marks all the tutee in the list as not paid.
+4.  System displays the success message.
 
     Use case ends.
     <br>
     <br>
 
-**Use case: UC08 - Undo a command**
+**Use case: UC09 - Undo a command**
 
 **MSS**
 1. User requests to undo.
@@ -656,7 +729,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   <br>
   <br>
 
-**Use case: UC09 - Redo a command**
+**Use case: UC10 - Redo a command**
 
 **MSS**
 1. User requests to redo.
@@ -670,13 +743,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. System informs user that there is nothing to redo.
 
   Use case ends.
-
-*{More to be added}*
 <br>
 <br>
 
-
-**Use case: UC10 - Finding free time**
+**Use case: UC11 - Finding free time**
 
 **MSS**
 1. User requests to find free time
@@ -684,18 +754,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 - 2a. The user does not have any free slots available.
-  - 2a1. System informs that the user has no available timeslots.
+  - 2a1. System informs user that there is no available timeslots.
     <br>
     <br>
   
-**Use case: UC11 - Get monthly revenue**
+**Use case: UC12 - Get monthly revenue**
 
 **MSS**
 
 1. User requests for monthly revenue.
-2. User receives monthly revenue figure.
+2. System displays the monthly revenue figure.
 
    Use case ends.
+
+*{More to be added}*
    <br>
    <br>
 
@@ -703,7 +775,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  The software should be platform independent (i.e. work on the Windows, Linux, and OS-X platforms).
-3. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. Should be able to hold up to 1000 tutees without a noticeable sluggishness in performance for typical usage.
 4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 5. The product is a single user product (i.e. The data file created by one user cannot be accessed by another user during regular operations)
 6. The data should be stored locally and should be in a human editable text file.
@@ -713,12 +785,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 10. The GUI should work well (i.e., should not cause any resolution-related inconveniences to the user) for, standard screen resolutions 1920x1080 and higher, and, for screen scales 100% and 125%.
 11. the GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for, resolutions 1280x720 and higher, and, for screen scales 150%.
 12. The product should be packaged into a single JAR file.
-13. The DG and UG should be PDF-friendly. Expandable panels, embedded videos, animated GIFs should not be used.
-14. The file sizes of the deliverables should be reasonable and not exceed the limits given below:
-
-    - Product (i.e., the JAR/ZIP file): 100MB
-
-    - Documents (i.e., PDF files): 15MB/file
 
 ### Glossary
 
@@ -728,7 +794,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * Command: An instruction for the application to execute
 * Timeslot: An interval of time from HH:MM to HH:MM
 * Prefix: An abbreviation for the name of the parameter. Prefix should be entered before the actual parameter in a command and always ends with a slash (/).
-* MSS: Main success scenario 
+* MSS: Main success scenario
+<br>
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -754,6 +821,21 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+
+### List tutee(s)
+
+1. Listing tutee(s)
+
+    1. Prerequisites: At least one tutee in the tutee list.
+
+    2. Test case: `list`<br>
+       Expected: Shows the full list of tutees in the tutee list.
+
+    3. Test case: `list mon`<br>
+       Expected: Shows tutees whose lessons fall on Monday in the tutee list.
+
+    4. Test case: `list unpaid`<br>
+       Expected: Shows tutees who have yet to pay for their lessons in the tutee list.
 
 ### Adding a tutee
 
@@ -790,13 +872,8 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all tutees using the `list` command. Multiple tutees in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First tutee is deleted from the list. Details of the deleted tutee shown in the status message.
+      Expected: First tutee is deleted from the list. Details of the deleted tutee shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
 
 ### Editing a tutee
 
@@ -850,6 +927,76 @@ testers are expected to do more *exploratory* testing.
          _Free from 21:00 - 21:30_ <br>
          should be displayed in the status message.
 
+### Marking a tutee as paid
+
+1. Marking a tutee as paid while all tutees are being shown
+
+    1. Prerequisites: List all tutees using the `list` command. Multiple tutees in the list.
+
+    1. Test case: `paid 2`<br>
+       Expected: Second tutee is from the list is marked as paid. The message of marking person paid success will be shown. Timestamp in the status bar is updated.
+
+    1. Test case: `delete 0`<br>
+       Expected: No tutee is marked as paid. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect paid commands to try: `paid`, `paid x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Marking a tutee as not paid
+
+1. Marking a tutee as not paid while all tutees are being shown
+
+    1. Prerequisites: List all tutees using the `list` command. Multiple tutees in the list.
+
+    1. Test case: `unpaid 3`<br>
+       Expected: Second tutee is from the list is marked as not paid. The message of marking person not paid success will be shown. Timestamp in the status bar is updated.
+
+    1. Test case: `unpaid 0`<br>
+       Expected: No tutee is marked as not paid. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect unpaid commands to try: `unpaid`, `unpaid x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Listing all unpaid tutees
+
+1. All tutees who haven't paid will be shown
+
+    1. There are tutees in the list.
+
+    1. Test case: `list unpaid`<br>
+       Expected: All tutees who haven't paid will be shown. The message of how many tutees are unpaid will be shown. Timestamp in the status bar is updated.
+
+### Undo command
+
+1. Undo previous commands that can modify the data of tutees.
+
+    1. Prerequisites: At least one tutee is present in the tutee list. Execute any command that modify tutee data. In this instruction, `clear` is used.
+
+    2. Test case: `undo`<br>
+       Expected: Restore all tutees that were cleared. A message informing the user that the command is successfully undone is displayed.
+
+2. Undo when there are no previous commands that modify the data of tutees.
+
+    1. Prerequisites: Launch the application. Ensure no commands that modify the tutee data is executed.
+
+    2. Test case: `undo`<br>
+       Expected: No command is undone. Error details shown in the status message.
+
+### Redo command
+
+1. Redo a command when there is a undo command executed previously.
+
+    1. At least one tutee is present in the tutee list. Execute any command that modify tutee data. In this instruction, `clear` is used followed by `undo`.
+
+    2. Test case: `redo`<br>
+       Expected: Clear the tutee list again. 
+
+2. Redo a command when there is no undo command executed previously to redo.
+
+    1. Prerequisites: Ensure no `undo` command is executed after launching the application.
+
+    2. Test case: `redo`<br>
+       Expected: No command is redone. Error details shown in the status message.
 
 ### Saving data
 
@@ -889,3 +1036,12 @@ Reason: PayRate that are extremely high may not be displayed properly by GUI and
 
 Idea: Modify the VALIDATION_REGEX of PayRate such that it only accepts values up to 9999.99.
 
+### Prevent Commands meant to Modify Tutee Data from Not Changing the Data
+
+Reason: `clear`,`edit`, `paid`, `delete`,`unpaidAll` are commands that deal with modifying tutee data. If the tutee's `isPaid` status is true,
+the system permits the user to execute the `paid` command even though this will not change the `isPaid` status of the tutee. If these commands
+do not change the tutee data in any way but still allowed to be executed, when the user executes `undo`, there will be no changes since there are now duplicate states of the `VersionedAddressBook`
+is saved. The system should inform the user that this command will not modify any data and prevent the command from executing. 
+
+Idea: Create a `Model#isSameData()` to compare whether the state of the tutee data before and after the command execution will be the same. If
+`Model#isSameData()` returns true, a `CommandException` should be thrown and the system should inform the user that this command will not modify any data.

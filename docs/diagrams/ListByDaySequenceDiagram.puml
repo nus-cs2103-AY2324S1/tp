@@ -49,7 +49,7 @@ deactivate AddressBookParser
 LogicManager -> ListByDayCommand : execute()
 activate ListByDayCommand
 
-ListByDayCommand -> Model : updateFilteredItemList(DAY_PREDICATE)
+ListByDayCommand -> Model : updateFilteredPersonList(DAY_PREDICATE)
 
 note right
 DAY_PREDICATE:
@@ -72,10 +72,6 @@ deactivate CommandResult
 
 ListByDayCommand --> LogicManager : result
 deactivate ListByDayCommand
-
-'Hidden arrow to position the destroy marker below the end of the activation bar.
-ListByDayCommand -[hidden]-> ListCommandParser
-destroy ListByDayCommand
 
 [<--LogicManager
 deactivate LogicManager

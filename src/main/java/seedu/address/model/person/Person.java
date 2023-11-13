@@ -39,7 +39,7 @@ public class Person {
 
     public Person(Name name, Phone phone, Email email, Address address, Subject subject, Day day,
                   Begin begin, End end, boolean paid, PayRate payRate) {
-        requireAllNonNull(name, phone, email, address, subject, day, begin, end);
+        requireAllNonNull(name, phone, email, address, subject, day, begin, end, paid, payRate);
         this.name = name;
         this.phone = phone;
         this.email = email;

@@ -81,9 +81,4 @@ public class Day {
                 || (other instanceof Day // instanceof handles nulls
                 && value.equals(((Day) other).value)); // state check
     }
-
-    @Override
-    public int hashCode() {
-        return value.hashCode();
-    }
 }
