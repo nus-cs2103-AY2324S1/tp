@@ -521,9 +521,8 @@ The student number entered __without__ the `s/` prefix is the **current** studen
 
 </box>
 
-* [`STUDENT_NUMBER`](#student-number) must be valid and exist.
+* [`STUDENT_NUMBER`](#student-number) must be valid and exist in **Class Manager 2023**.
 * [`STUDENT_NUMBER`](#student-number) must be entered before the details to be modified.
-* Replace the student's existing student number with `NEW_STUDENT_NUMBER`.
 * `PHONE` must be a positive integer with 3 or more digits.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
