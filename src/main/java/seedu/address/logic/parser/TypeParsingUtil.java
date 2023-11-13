@@ -79,25 +79,26 @@ public class TypeParsingUtil {
      * Parses the index from the input string
      */
     public static Integer parseIndex(String input, boolean isOptional) throws ParseException {
-        Pattern p1 = Pattern.compile(STARTING_WITH_ONE_TO_FIVE_DIGITS);
-        Pattern p2 = Pattern.compile(RegularExpressionUtil.STARTING_WITH_MORE_THAN_FIVE_DIGITS);
-        Pattern p3 = Pattern.compile(RegularExpressionUtil.STARTING_WITH_NEGATIVE_NUMBER);
-        Pattern p4 = Pattern.compile(RegularExpressionUtil.ABUSING_INDEX_WITH_DECIMAL_OR_DIVISION);
-        Matcher m = p1.matcher(input);
-        if (p4.matcher(input).find()) {
+        Pattern validIndexPattern = Pattern.compile(STARTING_WITH_ONE_TO_FIVE_DIGITS);
+        Pattern tooManyNumberPattern = Pattern.compile(RegularExpressionUtil.STARTING_WITH_MORE_THAN_FIVE_DIGITS);
+        Pattern negativeNumberPattern = Pattern.compile(RegularExpressionUtil.STARTING_WITH_NEGATIVE_NUMBER);
+        Pattern decimalOrDivisionPattern = Pattern
+                .compile(RegularExpressionUtil.ABUSING_INDEX_WITH_DECIMAL_OR_DIVISION);
+        Matcher indexMatcher = validIndexPattern.matcher(input);
+        if (decimalOrDivisionPattern.matcher(input).find()) {
             throw new InvalidInputException("Index input cannot be a decimal or fraction, allowed range: 1-99999.");
-        } else if (p2.matcher(input).find()) {
+        } else if (tooManyNumberPattern.matcher(input).find()) {
             throw new InvalidInputException("Index input is too large(allowed range: 1-99999) "
                     + "or exceeds five digits(starting zeros included)");
-        } else if (m.find()) {
-            String found = m.group(1);
+        } else if (indexMatcher.find()) {
+            String found = indexMatcher.group(1);
             int ans = parseNum(found);
             if (ans == 0) {
                 throw new InvalidInputException("Index input can not be zero, allowed range: 1-99999");
             } else {
                 return ans;
             }
-        } else if (p3.matcher(input).find()) {
+        } else if (negativeNumberPattern.matcher(input).find()) {
             throw new InvalidInputException("Index cannot be negative, allowed range: 1-99999");
         } else {
             if (isOptional) {

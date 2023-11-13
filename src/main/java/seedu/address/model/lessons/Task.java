@@ -105,7 +105,7 @@ public class Task extends ListEntryField {
      * @return Task
      * @throws ParseException if the string doesn't contain a + or - at the start.
      */
-    public static Task ofDepreciated(String task) throws ParseException {
+    public static Task deserialize(String task) throws ParseException {
         // parse the task
         checkArgument(isValidEncodedTask(task));
         String description = task.substring(1);
