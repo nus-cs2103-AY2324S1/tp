@@ -45,7 +45,7 @@ public interface Logic {
     /** Return the Name of a particular student denoted by its index */
     Name getStudentName(int studentIndex);
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' wellnus storage file path.
      */
     Path getWellNusFilePath();
 

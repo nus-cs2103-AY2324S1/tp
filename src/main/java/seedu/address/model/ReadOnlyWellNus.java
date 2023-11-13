@@ -5,7 +5,7 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.student.Student;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of an wellnus storage
  */
 public interface ReadOnlyWellNus {
 

@@ -19,7 +19,7 @@ import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code WellNus} with sample data.
  */
 public class SampleDataUtil {
 

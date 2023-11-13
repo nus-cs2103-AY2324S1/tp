@@ -13,13 +13,13 @@ import seedu.address.model.Model;
 import seedu.address.model.student.Student;
 
 /**
- * Adds a student to the address book.
+ * Adds a student to the wellnus storage.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the wellnus storage. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -33,7 +33,7 @@ public class AddCommand extends Command {
             + PREFIX_RISK_LEVEL + "high";
 
     public static final String MESSAGE_SUCCESS = "New student profile added: %1$s";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the wellnus storage";
 
     private final Student toAdd;
 

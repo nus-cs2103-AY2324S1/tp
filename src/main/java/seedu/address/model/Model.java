@@ -38,45 +38,45 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' wellnus storage file path.
      */
     Path getWellNusFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' wellnus storage file path.
      */
-    void setWellNusFilePath(Path addressBookFilePath);
+    void setWellNusFilePath(Path wellNusFilePath);
 
     /**
      * Replaces WellNus data with the data in {@code wellNus}.
      */
     void setWellNusData(ReadOnlyWellNus wellNus);
 
-    /** Returns the AddressBook */
+    /** Returns the WellNus */
     ReadOnlyWellNus getWellNusData();
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     * Returns true if a student with the same identity as {@code student} exists in the wellnus storage.
      */
     boolean hasStudent(Student student);
 
     /**
      * Deletes the given student.
-     * The student must exist in the address book.
+     * The student must exist in the wellnus storage.
      */
     void deleteStudent(Student target);
 
     /**
      * Adds the given student.
-     * {@code student} must not already exist in the address book.
+     * {@code student} must not already exist in the wellnus storage.
      */
     void addStudent(Student student);
 
     /**
      * Replaces the given student {@code target} with {@code editedStudent}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the wellnus storage.
      * The student identity of {@code editedStudent} must not be the same as another existing student in the
-     * address book.
+     * wellnus storage.
      */
     void setStudent(Student target, Student editedStudent);
 
@@ -90,7 +90,7 @@ public interface Model {
 
     /**
      * Deletes the given appointment.
-     * The appointment must exist in the address book.
+     * The appointment must exist in the wellnus storage.
      */
     void deleteAppointment(Appointment target);
 

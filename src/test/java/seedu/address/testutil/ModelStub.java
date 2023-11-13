@@ -41,7 +41,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void setWellNusFilePath(Path addressBookFilePath) {
+    public void setWellNusFilePath(Path wellNusFilePath) {
         throw new AssertionError("This method should not be called.");
     }
 
