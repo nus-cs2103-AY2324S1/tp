@@ -48,11 +48,16 @@ public class EditContactEventCommandParser implements Parser<EditContactEventCom
             editEventDescriptor.setEventDescription(ParserUtil.parseEventDescription(argMultimap
                     .getValue(PREFIX_EVENT_DESCRIPTION).get()));
         }
-        if (argMultimap.getValue(PREFIX_EVENT_START_DATE_TIME).isPresent()
-                && argMultimap.getValue(PREFIX_EVENT_END_DATE_TIME).isPresent()) {
+        boolean eventStartDateTimePresent = argMultimap.getValue(PREFIX_EVENT_START_DATE_TIME).isPresent();
+        boolean eventEndDateTimePresent = argMultimap.getValue(PREFIX_EVENT_END_DATE_TIME).isPresent();
+        if (eventStartDateTimePresent && eventEndDateTimePresent) {
             editEventDescriptor.setEventPeriod(
                     ParserUtil.parseEventPeriod(argMultimap.getValue(PREFIX_EVENT_START_DATE_TIME).get(),
                             argMultimap.getValue(PREFIX_EVENT_END_DATE_TIME).get()));
+        }
+        if ((eventStartDateTimePresent && !eventEndDateTimePresent)
+                || (!eventStartDateTimePresent && eventEndDateTimePresent)) {
+            throw new ParseException(EditContactEventCommand.MESSAGE_WRONG_TIME);
         }
         if (!editEventDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditContactEventCommand.MESSAGE_NOT_EDITED);

@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_START_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_EARLIER;
 import static seedu.address.logic.commands.EditContactEventCommand.MESSAGE_NOT_EDITED;
+import static seedu.address.logic.commands.EditContactEventCommand.MESSAGE_WRONG_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_START_DATE_TIME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -67,7 +68,17 @@ public class EditContactEventCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1 1 " + PREFIX_EVENT_START_DATE_TIME
-                + INVALID_START_DATE, MESSAGE_NOT_EDITED);
+                + INVALID_START_DATE, MESSAGE_WRONG_TIME);
+    }
+
+    @Test
+    public void parse_invalidTimeEnd_failure2() {
+        assertParseFailure(parser, "1 1 " + PREFIX_EVENT_START_DATE_TIME, MESSAGE_WRONG_TIME);
+    }
+
+    @Test
+    public void parse_invalidTimeEnd_failure3() {
+        assertParseFailure(parser, "1 1", MESSAGE_NOT_EDITED);
     }
 
     @Test
