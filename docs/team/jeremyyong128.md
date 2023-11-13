@@ -32,8 +32,8 @@ effortlessly.
       searching
       for jobs, the current fields were irrelevant.
     * **Highlights**: This was a tedious process as it required many adjustments throughout the whole code. The field,
-     command and parser classes had to be changed to interact differently. Sample data and test cases had to be changed
-    * as well.
+      command and parser classes had to be changed to interact differently. Sample data and test cases had to be changed
+      as well.
       <br><br>
 2. Improved the `find` command
     * **What it does**: The `find` command now allows for searching by specific fields. Users can also choose to search
