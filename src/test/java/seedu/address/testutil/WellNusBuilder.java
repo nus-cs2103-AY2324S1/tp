@@ -21,7 +21,7 @@ public class WellNusBuilder {
     }
 
     /**
-     * Adds a new {@code Student} to the {@code AddressBook} that we are building.
+     * Adds a new {@code Student} to the {@code WellNus} that we are building.
      */
     public WellNusBuilder withStudent(Student student) {
         wellNus.addStudent(student);

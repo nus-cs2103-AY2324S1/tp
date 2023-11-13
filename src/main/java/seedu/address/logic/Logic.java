@@ -27,7 +27,7 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the WellNus.
      *
      * @see seedu.address.model.Model#getWellNusData()
      */

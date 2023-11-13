@@ -44,7 +44,7 @@ public class LogicManagerTest {
     @BeforeEach
     public void setUp() {
         JsonWellNusStorage wellNusStorage =
-                new JsonWellNusStorage(temporaryFolder.resolve("addressBook.json"));
+                new JsonWellNusStorage(temporaryFolder.resolve("wellNus.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(wellNusStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -141,7 +141,7 @@ public class LogicManagerTest {
     private void assertCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
-        // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
+        // Inject LogicManager with an WellNusStorage that throws the IOException e when saving
         JsonWellNusStorage wellNusStorage = new JsonWellNusStorage(prefPath) {
             @Override
             public void saveWellNus(ReadOnlyWellNus wellNus, Path filePath)
@@ -156,7 +156,7 @@ public class LogicManagerTest {
 
         logic = new LogicManager(model, storage);
 
-        // Triggers the saveAddressBook method by executing an add command
+        // Triggers the saveWellNus method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
                 + ADDRESS_DESC_AMY;
         Student expectedStudent = new StudentBuilder(AMY).withTags().build();
