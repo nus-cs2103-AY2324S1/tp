@@ -223,11 +223,11 @@ command for both assignments and internships.
 `add-a n/CC tutorial 1 e/2023-11-29` <br> 
 <img src="images/NewUserTutAdd1.png" width="500" /> <br>
 
-**Step 4:** Add a few more assignments. Try out filling optional parameters as well, etc
+**Step 4:** Add a few more assignments. Try out filling optional parameters as well, eg:
 - `add-a n/CS2100 Assignment 1 e/2023-11-30 13:00 t/Coding`
 - `add-a n/CC optional 1 e/2023-11-29 16:00 d/try this out! s/complete p/2023-11-27 t/Optional`
-- Note: On adding assignments, they will automatically be sorted by their deadlines. The assignment due earliest will be first in the assignments list, which can be viewed using `list-a` <br> 
-<img src="images/NewUserTutAddMoreAssgn.png" width="500" /> <br> 
+- Note: On adding assignments, they will automatically be sorted by their deadlines. <br> 
+<img src="images/NewUserTutAddMoreAssgn.png" width="470" /> <br> 
 <div style="page-break-after: always;"></div>
 
 **Step 5:** Let us try editing the description of `CC tutorial 1` to say `nice descriptive description!`.
@@ -259,6 +259,7 @@ With reference the picture above, we will do `delete-a 2` <br>
 - `add-i-role n/Google r/SWE c/Summer 2024`
 - `add-i-role n/FaceBook r/DevOps c/Winter 2024 d/Impress Mr Mark p/9500 o/follow-up l/Florida` <br> 
 <img src="images/NewUserTutAddIRoles.png" width="500" /> <br>
+<div style="page-break-after: always;"></div>
 
 **Step 12:** Now, let's add in some tasks relating to our roles, with `add-i-task`
     
