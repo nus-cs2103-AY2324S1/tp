@@ -211,10 +211,10 @@ Not to worry, here are some steps you can take to fix this:
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * When using parentheses ( ) with items separated by the slash symbol /, at least one item must be included. <br>
-  e.g in the command `search (n/KEYWORD [MORE KEYWORDS] / st/KEYWORD [MORE KEYWORDS] / t/KEYWORD [MORE KEYWORDS])`, it is necessary to specify at least one search category.
+  e.g. in the command `search (n/KEYWORD [MORE KEYWORDS] / st/KEYWORD [MORE KEYWORDS] / t/KEYWORD [MORE KEYWORDS])`, it is necessary to specify at least one search category.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
    e.g. `t/TAGNAME…​` can be used as ` ` (i.e. 0 times), `t/swe t/intern` for `add` commands or `t/swe intern` for `search` and `delete` commands.
@@ -271,8 +271,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/[CATEGORY] TAGNAME]…�
 **Notes on adding tags:**
 * If you would like to tag a user with a tag that has not been categorised yet using the `create` command,
   you can specify the category that you would like it to be categorised to in the `add` command. e.g. `...t/role swe`
-* If you are using a tag that has not been categorised yet and you did not specify its category in the `add` command,
-  the tag would still be saved but it would be "uncategorised" by default.
+* If you are using a tag that has not been categorised yet, and you did not specify its category in the `add` command,
+  the tag would still be saved, but it would be "uncategorized" by default.
 * If you have multiple tags in different categories with the same name, you must specify the category when you want to
   add one of these tags to the applicant you are adding.
 
@@ -370,18 +370,20 @@ Additional Examples:
 
 Adds the username for their social profile [LinkedIn/GitHub] to the existing contact details of applicants.
 
-Format: `addL INDEX u/USERNAME` or `addG INDEX u/USERNAME`
+Format: `addL USERID u/USERNAME` or `addG USERID u/USERNAME`
 
-| Type       | Parameter    | Constraints                                                                                                           |
-|------------|--------------|-----------------------------------------------------------------------------------------------------------------------|
-| Mandatory  | `INDEX`      | `INDEX` must be a non-zero unsigned integer and it must not be greater than the total number of applicants in JABPro. |
-| Mandatory* | `u/USERNAME` | `USERNAME` must be a string value. Only the prefix (i.e. `u/`) is mandatory.                                          |
+| Type      | Parameter    | Constraints                                                                                                            |
+|-----------|--------------|------------------------------------------------------------------------------------------------------------------------|
+| Mandatory | `USERID`     | `USERID` must be a non-zero unsigned integer and it must not be greater than the total number of applicants in JABPro. |
+| Mandatory | `u/USERNAME` | `USERNAME` must be a string value. Only the prefix (i.e. `u/`) is mandatory.                                           |
 
 **Notes regarding `addL` and `addG` command:**
 
+* Any set of characters entered after the prefix `u/` is taken to be the username, except if the prefix `u/` occurs multiple times.
+* User may provide the username multiple times with the prefix `u/`, however, JABPro only considers the set of characters entered after the last occurring instance of `u/` as the username.
 * User is expected to ensure that `USERNAME` is a valid username for the respective social profile. If it is not a valid username, user will be redirected to the error page of the corresponding social profile when `linkedin` or `github` command is invoked. JABPro does not perform checks for the validity of the username for the corresponding social profile.
 * Invoking the `addL` or `addG` command for an applicant for whom a username has already been added, will simply overwrite the existing username with the new one.
-* User may run the command `addL INDEX u/` or `addG INDEX u/`, i.e providing no username, or simply providing blanks for the username. Such inputs are accepted by JABPro. However, it will prove to be erroneous when `linkedin` or `github` command is invoked.
+* User may run the command `addL USERID u/` or `addG USERID u/`, i.e. providing no username, or simply providing blanks for the username. Such inputs are accepted by JABPro. However, it will prove to be erroneous when `linkedin` or `github` command is invoked.
 
 **Example of successful execution of the `addL` command:**
 
@@ -392,12 +394,16 @@ Format: `addL INDEX u/USERNAME` or `addG INDEX u/USERNAME`
 
 `addG` command is invoked in the same way.
 
-**Example of failed execution of the `addG` command due to missing parameter:**
+**Error Handling Table for `addL` and `addG` command:**
 
-1. Enter the command `addG 1`
-2. This is the result of the failed `addG` command:
+| Reason for Error                          | Error Message                         | Remedy / Suggested course of action                                                                       |
+ |-------------------------------------------|---------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| Missing `addL` or `addG` keyword          | Unknown command                       | Follow the command format of `addL USERID u/USERNAME` or `addG USERID u/USERNAME` closely                 |
+| Missing Index                             | Invalid command format!               | Ensure that the index is filled up.                                                                       |
+| Invalid Index                             | The person index provided is invalid  | Ensure that the index is valid. That is it is a number that is on the displayed applicant list.           |
+| Negative or 0 Index                       | Invalid command format! | Ensure that the index is a positive integer and is also a number that is on the displayed applicant list. |
+| Missing username                          | Invalid command format! | Ensure that the username is filled up                                                                     |
 
-![AddGFailure](images/addLfail.png)
 
 [Jump back to Table of Contents](#table-of-contents)
 
@@ -406,15 +412,15 @@ Format: `addL INDEX u/USERNAME` or `addG INDEX u/USERNAME`
 
 Redirects user to applicant's LinkedIn or GitHub account.
 
-Format: `linkedin INDEX` or `github INDEX`
+Format: `linkedin USERID` or `github USERID`
 
-| Type      | Parameter | Constraints                                                                                                           |
-|-----------|-----------|-----------------------------------------------------------------------------------------------------------------------|
-| Mandatory | `INDEX`   | `INDEX` must be a non-zero unsigned integer and it must not be greater than the total number of applicants in JABPro. |
+| Type      | Parameter | Constraints                                                                                                            |
+|-----------|-----------|------------------------------------------------------------------------------------------------------------------------|
+| Mandatory | `USERID`  | `USERID` must be a non-zero unsigned integer and it must not be greater than the total number of applicants in JABPro. |
 
 **Notes regarding `LinkedIn` and `GitHub` commands:**
 
-* User is expected to enter `INDEX` for an applicant for whom username [that is not blank, or does not comprise of only spaces] has been added previously.
+* User is expected to enter `USERID` for an applicant for whom username [that is not blank, or does not comprise of only spaces] has been added previously.
 * User is redirected to the page of the social profile regardless of the validity of the username for that particular social profile.
 
 **Example of successful execution of `github` command:**
@@ -430,14 +436,16 @@ The GitHub window opens as follows, displaying the profile with the specified us
 
 `linkedin` command is invoked in the same manner.
 
-**Example of failed execution of `linkedin` command due to use of `INDEX` that does not have LinkedIn account associated with it:**
+**Error Handling Table for `linkedin` and `github` commands:**
 
-1. Enter the command `linkedin 2`
-2. This is the result of the failed `linkedin` command [It is assumed there are more than one applicants in JABPro, with no username linked to the second applicant]:
+| Reason for Error                       | Error Message                                              | Remedy / Suggested course of action                                                                       |
+ |----------------------------------------|------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| Missing `linkedin` or `github` keyword | Unknown command                                            | Follow the command format of `linkedin USERID` or `github USERID` closely                                 |
+| Missing Index                          | Invalid command format!                                    | Ensure that the index is filled up.                                                                       |
+| Invalid Index                          | The person index provided is invalid                       | Ensure that the index is valid. That is it is a number that is on the displayed applicant list.           |
+| Negative or 0 Index                    | Invalid command format!                                    | Ensure that the index is a positive integer and is also a number that is on the displayed applicant list. |
+| Missing account for provided Index     | No LinkedIn account has been added for this candidate. or No Github account has been added for this candidate. | Ensure that username has been previously added to the specified candidate                                 |
 
-![LinkedInFailure](images/linkedinfail.png)
-
-`github` commands reacts in the same way in case of missing account.
 
 [Jump back to Table of Contents](#table-of-contents)
 
@@ -467,6 +475,7 @@ Examples:
 * `list` followed by `set 2 Interviewed` sets the 2nd applicant in the address book to "Interviewed".
 
 [Jump back to Table of Contents](#table-of-contents)
+
 
 ### Viewing a applicant's details: `view`
 <a name="viewing-a-applicants-details-view"></a>
@@ -526,6 +535,7 @@ An example of the `view` command being successfully executed for applicant with 
 
 [Jump back to Table of Contents](#table-of-contents)
 
+
 ### Editing a applicant: `edit`
 <a name="editing-a-applicant-edit"></a>
 
@@ -549,7 +559,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAGNAME]…​ [
 * There is a way to edit tags and their categories at the same time. Look at the notes for editing tags with categories `t/[CATEGORY] TAGNAME` for more details.
 
 **Notes on editing the tags of the specified applicant for `t/TAGNAME`**:
-* When editing tags, the existing tags of the applicant will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the applicant will be removed i.e. adding of tags is not cumulative.
 * You can remove all the applicant’s tags by typing `t/` without
   specifying any tags after it.
 * There is no current way to keep the existing tags and add new tags to the applicant. You will have to re-tag the applicant with the existing tags and the new tags.
@@ -565,8 +575,8 @@ Notes on rules for `edit` command involving tags with categories for `t/[CATEGOR
 * Consequently, similar rules for `add` apply to the `edit` command involving tags:
     * If you would like to tag a user with a tag that has not been categorised yet using the `create` command,
       you can specify the category that you would like it to be categorised to in the `edit` command. e.g. `edit 1 t/role swe`
-    * If you are using a tag that has not been categorised yet and you did not specify its category in the `add` command,
-      the tag would still be saved but it would be "uncategorised" by default.
+    * If you are using a tag that has not been categorised yet, and you did not specify its category in the `add` command,
+      the tag would still be saved, but it would be "uncategorized" by default.
     * If you have multiple tags in different categories with the same name, you must specify the category when you want to
       tag the specified applicant with one of these tags.
 
@@ -670,7 +680,7 @@ Format: `create t/CATEGORY TAGNAME…​`
 **Note:**
 * JABPro offers 3 predefined tag categories namely `employment`, `role`, and `dept`. However, you can define up to 3 more tag categories of your own!
 * The tags created using this command can be used to tag applicants using the `add` or `edit` command. Tagging
-  applicant without previously categorising the tags using `create` would still work but the tags would be *uncategorised*.
+  applicant without previously categorising the tags using `create` would still work but the tags would be *uncategorized*.
 * `create` only allows tags to be categorised at creation meaning tags that have already been created, cannot be categorised further.
 
   **Tip:**
@@ -893,14 +903,14 @@ Format:
 
 Adds an event, associated with an applicant, to JABPro.
 
-Format: `event INDEX d/DESCRIPTION bt/BEGIN_TIME et/END_TIME`
+Format: `event USERID d/DESCRIPTION bt/BEGIN_TIME et/END_TIME`
 
-| Type        | Parameter       | Constraints                                                                                                         |
-|-------------|-----------------|---------------------------------------------------------------------------------------------------------------------|
-| Mandatory   | `INDEX`         | `INDEX` must be a non-zero unsigned integer and it must not be greater than the total number of applicant in JABPro |
-| Mandatory*  | `d/DESCRIPTION` | `DESCRIPTION` must be a string value. Only the prefix (i.e. `d/`) is mandatory.                                     |
-| Mandatory   | `bt/BEGIN_TIME` | `BEGIN_TIME` must be a valid date-time, in the format `yyyy-MM-dd HH:mm`                                            |
-| Mandatory   | `et/END_TIME`   | `END_TIME` must be a valid date-time, in the format `yyyy-MM-dd HH:mm`                                              |
+| Type       | Parameter       | Constraints                                                                                                          |
+|------------|-----------------|----------------------------------------------------------------------------------------------------------------------|
+| Mandatory  | `USERID`        | `USERID` must be a non-zero unsigned integer and it must not be greater than the total number of applicant in JABPro |
+| Mandatory  | `d/DESCRIPTION` | `DESCRIPTION` must be a string value. Only the prefix (i.e. `d/`) is mandatory.                                      |
+| Mandatory  | `bt/BEGIN_TIME` | `BEGIN_TIME` must be a valid date-time, in the format `yyyy-MM-dd HH:mm`                                             |
+| Mandatory  | `et/END_TIME`   | `END_TIME` must be a valid date-time, in the format `yyyy-MM-dd HH:mm`, and after the `BEGIN_TIME`                   |
 
 **Notes regarding the `event` command:**
 
@@ -917,12 +927,20 @@ Format: `event INDEX d/DESCRIPTION bt/BEGIN_TIME et/END_TIME`
 
 The changes in UI take place in the `Events Window`. Please find more details in [Viewing Events](UserGuide.md#viewing-events-schedule).
 
-**Example of failed execution of `event` command due to missing parameter:**
+**Error Handling Table for `event` command:**
 
-1. Enter the command `event 1 d/Interview bt/2023-11-12 10:00`
-2. This is the result of the failed `event` command [It is assumed an applicant exists in JABPro]:
-
-![EventFailure](images/eventfail.png)
+| Reason for Error               | Error Message                         | Remedy / Suggested course of action                                                                       |
+ |--------------------------------|---------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| Missing event keyword: `event` | Unknown command                       | Follow the command format of `event INDEX d/DESCRIPTION bt/START_TIME et/END_TIME` closely                |
+| Missing Index                  | Invalid command format!               | Ensure that the index is filled up.                                                                       |
+| Invalid Index                  | The person index provided is invalid  | Ensure that the index is valid. That is it is a number that is on the displayed applicant list.           |
+| Negative or 0 Index            | Invalid command format! | Ensure that the index is a positive integer and is also a number that is on the displayed applicant list. |
+| Missing description | Invalid command format! | Ensure that the description is filled up                                                                  |
+| Missing start time | Invalid command format! | Ensure that the start time is filled up |
+| Missing end time | Invalid command format! | Ensure that the end time is filled up |
+| Start time/End time not in correct format | Date is not in correct format! | Ensure that the start time/end time is in yyyy-MM-dd format |
+| Start time/End time not a valid date-time | Date entered is invalid! | Ensure that the start time/end time is a semantically valid date |
+| End time before or same as start time | End time must be after start time! | Ensure that the end time is after the start time |
 
 [Jump back to Table of Contents](#table-of-contents)
 
@@ -933,13 +951,14 @@ Displays all events that have been added to JABPro.
 
 Format: `schedule`
 
-**Note regarding `schedule` command:**
+**Notes regarding `schedule` command:**
 
 * `schedule` command will open the `Events` window regardless of whether there are events in JABPro or not.
+* Any set of characters added after the `schedule` keyword will be ignored. E.g.: `schedule a1b2c3`
 
 <box type="tip" seamless>
 
-**Tip:** The `Events` window can also be accessed by clicking `Events > Event` in the menu bar, located at the top of the window.
+**Tip:** The `Events` window can also be accessed by clicking `Events > Events` in the menu bar, located at the top of the window.
         <img src="images/eventstab.png">
 </box>
 
@@ -976,6 +995,11 @@ Format: `help`
 Additionally, pressing the `F1` key also opens the `Help Window`.
 
 </box>
+
+**Note regarding `help` command:**
+
+* Any set of characters added after the `help` keyword will be ignored. E.g.: `help a1b2c3`
+
 
 **Example of successful execution of the `help` command:**
 
