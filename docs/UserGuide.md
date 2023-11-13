@@ -106,10 +106,13 @@ Here are some annotations used in this guide:
 --------------------------------------------------------------------------------------------------------------------
 
 
-We are happy to have you on board as a first-time user of ProjectPRO! To get started, visit our [Quick Start](#quick-start) to set up ProjectPRO. Once it's done, you can dive into the Features section to explore the full range of commands and learn more about what ProjectPRO has to offer. Refer to **Image 1** to get acquainted with our user interface.
+We are happy to have you on board as a first-time user of ProjectPRO! To get started, visit our [Quick Start](#quick-start) to set up ProjectPRO. Once it's done, you can dive into the Features section to explore the full range of commands and learn more about what ProjectPRO has to offer. Refer to the image below to get acquainted with our user interface.
 
 
 ![Image 1: ProjectPRO's user interface](images/UG/Overview_of_GUI.png)
+<div align="center">
+  <p style="font-size: 11px; font-style: italic;">ProjectPRO user interface</p>
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -136,10 +139,10 @@ Welcome back to ProjectPRO. Simply head over to our Features section to gain ins
 3. Move the JAR file to a folder where you want to store your project details. For example, create a folder named ProjectPRO and place it on your desktop.
    - For Mac Users:
 
-     ![MACGUIDE](images/UG/QUICKSTART3.png)
+     - ![MACGUIDE](images/UG/QUICKSTART3.png)
    - For Windows Users:
    
-     ![WINDOWSGUIDE](images/UG/QUICKSTART4.png)
+     - ![WINDOWSGUIDE](images/UG/QUICKSTART4.png)
 
 4. Launch ProjectPRO.
    1. Open a command terminal
