@@ -41,6 +41,12 @@
         * [Implementing `DeleteNoteCommandParser`](#implementing-deletenotecommandparser)
         * [Implementing `AddNoteCommand`](#implementing-addnotecommand)
         * [Implementing `DeleteNoteCommand`](#implementing-deletenotecommand)
+    * [Events feature](#events-feature)
+      * [Overview: Event](#overview--event-)
+      * [Implementing `AddEventCommandParser`](#implementing-addeventcommandparser)
+      * [Implementing `DeleteEventCommandParser`](#implementing-deleteeventcommandparser)
+      * [Implementing `AddEventCommand`](#implementing-addeventcommand)
+      * [Implementing `DeleteEventCommand`](#implementing-deleteeventcommand)
     * [Enhanced help feature](#enhanced-help-feature)
     * [[Proposed] Undo/redo feature](#proposed-undo-redo-feature)
         * [Proposed Implementation](#proposed-implementation)
@@ -59,6 +65,8 @@
     * [Deleting tag](#deleting-tag)
     * [Adding note](#adding-note)
     * [Deleting note](#deleting-note)
+    * [Adding event](#adding-event)
+    * [Deleting event](#deleting-event)
 * [Appendix C: Planned enhancements](#appendix-c-planned-enhancements)
     * [User Interface](#user-interface)
 
@@ -392,7 +400,7 @@ The following activity diagram summarizes what happens when the `DeleteNoteComma
 
 This feature allows users to add and remove `Event` to any `Person` in the contact list. It provides an easy way for users to keep track of events with the contacts.
 
-#### Overview:
+#### Overview: Event:
 The adding and removing of `Event` begins with the parsing of the `AddEventCommand` and `DeleteEventCommand` using the `AddEventCommandParser` and `DeleteEventCommandParser` respectively.
 The `AddEventCommand` and `DeleteEventCommand` will then be constructed and executed by the `Model`.
 
@@ -980,79 +988,6 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `delete contact 1`<br>
         Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. All events related to the first contact should be deleted from the event list as well
 
-### Adding event
-
-1. Adding event while all contacts are shown.
-    1. Prequisites: List all contacts using the `list contact` command. At least one contact shown in the list and there will be an events column for each contact.
-       Use the `list events` command to open a new window with a list of all events without the respective contacts.<br>
-
-    1. Test case: `add event -id 1 -en Meeting with professor -st 2024-11-17 12:00:00 -et 2024-11-17 13:00:00 -loc COM 1 Basement -info Discuss the project`<br>
-       Expected: The new event will appear in the first contact's event column. It will also be added in the event list window. The title of the event added is shown in the status message.
-
-   1. Test case: `add event -id 1 -en Meeting with professor -st 12:00:00 -et 13:00:00 -loc COM 1 Basement -info Discuss the project`<br>
-      Expected: Similar to previous test, but date will automatically be current date.<br>
-   
-   1. Test case: `add event -id 1 -en Meeting with professor -st 2024-11-17 -et 2024-11-18 -loc COM 1 Basement -info Discuss the project`<br>
-      Expected: Similar to previous test, but time will automatically be `00:00:00`.<br>
-   
-   1. Test case: `add event -id 0 -en Chat with recruiter -st 2024-11-24 17:00:00 -et 2024-11-24 18:00:00 -loc Star Vista -info Discuss job opportunities`<br>
-      Expected: No event is added. Error details shown in the status message.
-
-   1. Test case: `add event -id 1 -en Chat with recruiter -st 2024/11/24 17:00:00 -et 2024/11/24 18:00:00 -loc Star Vista -info Discuss job opportunities`<br>
-      Expected: No event is added as date and time is not in the correct format. Error details shown in the status message.<br>
-
-1. Adding duplicate or clashing events
-    1. Prequisites: Use the `list events` command to open a new window with a list of all events without the respective contacts.
-
-    1. Test case: `add event -id 1 ...`, where `...` is an already existing event in the event list.<br>
-       Expected: No event is added. Error details shown in the status message.
-
-    1. Test case: `add event -id 1 ... -st x` where `x` is in between the start and end time of an event currently on the list.<br>
-       Expected: No event is added. Error details shown in the status message.
-
-1. Adding event while contact list is being filtered
-    1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`.
-       Use the `list events` command to open a new window with a list of all events without the respective contacts.
-
-    1. Test case: `add event -id 1 ...`, when no contact is shown<br>
-       Expected: No event is added. Error details shown in the status message.
-
-    1. Test case: `add event -id 1 ...`, when at least 1 contact is shown<br>
-       Expected: The new event will appear in the first contact's (in the filtered list) event column. It will also be added in the event list window. The title of the event added is shown in the status message.
-
-### Deleting event
-
-1. Deleting an event while all events are being shown
-
-    1. Prerequisites: List all contacts and events using the `list contact` command. This will show every contact and its respective events.
-    Use the `list events` command to open a new events window showing all events (without the contacts).
-
-    1. Test case: `delete event -id 2 -eid 1`<br> 
-       Expected: First event of the second contact is deleted. Title of the deleted event shown in the status message.
-       Event deleted from the list in the events window.
-
-    1. Test case: `delete event -id 0 -eid 1`<br>
-       Expected: No event is deleted. Error details (contact not found) shown in the status message.
-   
-    1. Test case: `delete event -id 1 -eid 0`<br>
-       Expected: No event is deleted. Error details (event not found) shown in the status message.
-
-    1. Other incorrect delete commands to try: `delete event`, `delete event -id x -eid 1`, `delete event -id 1 -eid x`, `...` (where x is larger than the size of contacts/events)<br>
-       Expected: Similar to previous test cases.
-
-1. Deleting event while contact list is being filtered
-    1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`.
-       Use the `list events` command to open a new events window showing all events (without the contacts).
-   
-    1. Test case: `delete event -id 1 -eid 1`, when no contact is shown<br>
-       Expected: No event is deleted. Error details shown in the status message.
-
-    1. Test case: `delete event -id 1 -eid 1`, when at least 1 contact is shown and there is at least 1 event in the first contact. <br>
-       Expected: The event will no longer be shown in the first contact of the filtered list. It will also be removed from the events list window. List will go back to showing all contacts.
-
-    1. Test case: `delete event -id 1 -eid 1`, when at least 1 contact is shown and there are no events in the first contact. <br>
-       Expected: No event is deleted. Error details shown in the status message.
-
 ### Adding tag
 
 1. Adding tag while all contacts is shown.
@@ -1175,6 +1110,79 @@ testers are expected to do more *exploratory* testing.
 
     4. Test case: `delete note -id 1 -nid 1`, when at least 1 contact is shown has at least 1 note.<br>
        Expected: The note deleted is no longer shown in the first contact in the list. The note deleted is shown in the status message.
+
+### Adding event
+
+1. Adding event while all contacts are shown.
+    1. Prequisites: List all contacts using the `list contact` command. At least one contact shown in the list and there will be an events column for each contact.
+       Use the `list events` command to open a new window with a list of all events without the respective contacts.<br>
+
+    1. Test case: `add event -id 1 -en Meeting with professor -st 2024-11-17 12:00:00 -et 2024-11-17 13:00:00 -loc COM 1 Basement -info Discuss the project`<br>
+       Expected: The new event will appear in the first contact's event column. It will also be added in the event list window. The title of the event added is shown in the status message.
+
+    1. Test case: `add event -id 1 -en Meeting with professor -st 12:00:00 -et 13:00:00 -loc COM 1 Basement -info Discuss the project`<br>
+       Expected: Similar to previous test, but date will automatically be current date.<br>
+
+    1. Test case: `add event -id 1 -en Meeting with professor -st 2024-11-17 -et 2024-11-18 -loc COM 1 Basement -info Discuss the project`<br>
+       Expected: Similar to previous test, but time will automatically be `00:00:00`.<br>
+
+    1. Test case: `add event -id 0 -en Chat with recruiter -st 2024-11-24 17:00:00 -et 2024-11-24 18:00:00 -loc Star Vista -info Discuss job opportunities`<br>
+       Expected: No event is added. Error details shown in the status message.
+
+    1. Test case: `add event -id 1 -en Chat with recruiter -st 2024/11/24 17:00:00 -et 2024/11/24 18:00:00 -loc Star Vista -info Discuss job opportunities`<br>
+       Expected: No event is added as date and time is not in the correct format. Error details shown in the status message.<br>
+
+1. Adding duplicate or clashing events
+    1. Prequisites: Use the `list events` command to open a new window with a list of all events without the respective contacts.
+
+    1. Test case: `add event -id 1 ...`, where `...` is an already existing event in the event list.<br>
+       Expected: No event is added. Error details shown in the status message.
+
+    1. Test case: `add event -id 1 ... -st x` where `x` is in between the start and end time of an event currently on the list.<br>
+       Expected: No event is added. Error details shown in the status message.
+
+1. Adding event while contact list is being filtered
+    1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`.
+       Use the `list events` command to open a new window with a list of all events without the respective contacts.
+
+    1. Test case: `add event -id 1 ...`, when no contact is shown<br>
+       Expected: No event is added. Error details shown in the status message.
+
+    1. Test case: `add event -id 1 ...`, when at least 1 contact is shown<br>
+       Expected: The new event will appear in the first contact's (in the filtered list) event column. It will also be added in the event list window. The title of the event added is shown in the status message.
+
+### Deleting event
+
+1. Deleting an event while all events are being shown
+
+    1. Prerequisites: List all contacts and events using the `list contact` command. This will show every contact and its respective events.
+       Use the `list events` command to open a new events window showing all events (without the contacts).
+
+    1. Test case: `delete event -id 2 -eid 1`<br>
+       Expected: First event of the second contact is deleted. Title of the deleted event shown in the status message.
+       Event deleted from the list in the events window.
+
+    1. Test case: `delete event -id 0 -eid 1`<br>
+       Expected: No event is deleted. Error details (contact not found) shown in the status message.
+
+    1. Test case: `delete event -id 1 -eid 0`<br>
+       Expected: No event is deleted. Error details (event not found) shown in the status message.
+
+    1. Other incorrect delete commands to try: `delete event`, `delete event -id x -eid 1`, `delete event -id 1 -eid x`, `...` (where x is larger than the size of contacts/events)<br>
+       Expected: Similar to previous test cases.
+
+1. Deleting event while contact list is being filtered
+    1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`.
+       Use the `list events` command to open a new events window showing all events (without the contacts).
+
+    1. Test case: `delete event -id 1 -eid 1`, when no contact is shown<br>
+       Expected: No event is deleted. Error details shown in the status message.
+
+    1. Test case: `delete event -id 1 -eid 1`, when at least 1 contact is shown and there is at least 1 event in the first contact. <br>
+       Expected: The event will no longer be shown in the first contact of the filtered list. It will also be removed from the events list window. List will go back to showing all contacts.
+
+    1. Test case: `delete event -id 1 -eid 1`, when at least 1 contact is shown and there are no events in the first contact. <br>
+       Expected: No event is deleted. Error details shown in the status message.
 
 --------------------------------------------------------------------------------------------------------------------
 
