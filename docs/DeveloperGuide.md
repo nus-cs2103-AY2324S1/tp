@@ -158,7 +158,7 @@ This section describes some noteworthy details on how certain features are imple
 The Undo feature allows users to revert an undo-able command. The `UndoCommand` serves as the entry point for users to
 initiate the undo process.
 
-#### Implentation details
+#### Implementation details
 
 The `UndoCommand` is implemented as follows:
 - **Command Word**: `undo` or `u`
