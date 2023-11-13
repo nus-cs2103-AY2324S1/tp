@@ -274,6 +274,15 @@ public class EnrolCommandTest {
         }
 
         @Override
+        public Predicate<Member> getUnenrolMemberPredicate(Name eventName) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public Predicate<Event> getUnenrolEventPredicate(Name memberName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Collection<Name> updateMemberHoursAndRemark(Name eventName) {
             throw new AssertionError("This method should not be called.");
         }

@@ -19,6 +19,8 @@ Class "<<interface>>\nCcaCommanderStorage" as CcaCommanderStorage
 Class JsonCcaCommanderStorage
 Class JsonSerializableCcaCommander
 Class JsonAdaptedPerson
+Class JsonAdaptedEvent
+Class JsonAdaptedEnrolment
 Class JsonAdaptedTag
 }
 
@@ -38,6 +40,9 @@ JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonCcaCommanderStorage .up.|> CcaCommanderStorage
 JsonCcaCommanderStorage ..> JsonSerializableCcaCommander
 JsonSerializableCcaCommander --> "*" JsonAdaptedPerson
+JsonSerializableCcaCommander --> "*" JsonAdaptedEvent
+JsonSerializableCcaCommander --> "*" JsonAdaptedEnrolment
 JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonAdaptedEvent --> "*" JsonAdaptedTag
 
 @enduml

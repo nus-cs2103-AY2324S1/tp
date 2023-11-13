@@ -18,6 +18,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -27,11 +28,16 @@ import seedu.ccacommander.commons.core.GuiSettings;
 import seedu.ccacommander.model.enrolment.Enrolment;
 import seedu.ccacommander.model.enrolment.exceptions.EnrolmentNotFoundException;
 import seedu.ccacommander.model.event.Event;
+import seedu.ccacommander.model.event.EventInNameCollectionPredicate;
 import seedu.ccacommander.model.event.EventNameContainsKeywordsPredicate;
+import seedu.ccacommander.model.event.SameEventPredicate;
 import seedu.ccacommander.model.exceptions.RedoStateException;
 import seedu.ccacommander.model.exceptions.UndoStateException;
 import seedu.ccacommander.model.member.Member;
+import seedu.ccacommander.model.member.MemberInNameCollectionPredicate;
 import seedu.ccacommander.model.member.MemberNameContainsKeywordsPredicate;
+import seedu.ccacommander.model.member.SameMemberPredicate;
+import seedu.ccacommander.model.shared.Name;
 import seedu.ccacommander.testutil.CcaCommanderBuilder;
 import seedu.ccacommander.testutil.EnrolmentBuilder;
 import seedu.ccacommander.testutil.TypicalEnrolments;
@@ -215,6 +221,42 @@ public class ModelManagerTest {
     public void getLastFilteredEventPredicate_noOperation_returnsDefaultList() {
         Predicate<Event> lastEventPredicate = modelManager.getLastFilteredEventPredicate();
         assertEquals(lastEventPredicate, PREDICATE_SHOW_ALL_EVENTS);
+    }
+
+    @Test
+    public void getUnenrolEventPredicate_returnsLastEventPredicate() {
+        Predicate<Event> lastEventPredicate = modelManager.getLastFilteredEventPredicate();
+        Predicate<Event> unenrolPredicate = modelManager.getUnenrolEventPredicate(ALICE.getName());
+        assertEquals(lastEventPredicate, unenrolPredicate);
+    }
+
+    @Test
+    public void getUnenrolEventPredicate_returnsNewEventPredicate() {
+        Predicate<Member> lastMemberPredicate = new SameMemberPredicate(ALICE);
+        modelManager.updateFilteredMemberList(lastMemberPredicate);
+        Predicate<Event> unenrolPredicate = modelManager.getUnenrolEventPredicate(ALICE.getName());
+        Collection<Name> eventNamesCollection = modelManager.updateEventHoursAndRemark(ALICE.getName());
+        Predicate<Event> pred = new EventInNameCollectionPredicate(eventNamesCollection);
+
+        assertEquals(pred, unenrolPredicate);
+    }
+
+    @Test
+    public void getUnenrolMemberPredicate_returnsLastMemberPredicate() {
+        Predicate<Member> lastMemberPredicate = modelManager.getLastFilteredMemberPredicate();
+        Predicate<Member> unenrolPredicate = modelManager.getUnenrolMemberPredicate(AURORA_BOREALIS.getName());
+        assertEquals(lastMemberPredicate, unenrolPredicate);
+    }
+
+    @Test
+    public void getUnenrolMemberPredicate_returnsNewMemberPredicate() {
+        Predicate<Event> lastEventPredicate = new SameEventPredicate(AURORA_BOREALIS);
+        modelManager.updateFilteredEventList(lastEventPredicate);
+        Predicate<Member> unenrolPredicate = modelManager.getUnenrolMemberPredicate(AURORA_BOREALIS.getName());
+        Collection<Name> memberNamesCollection = modelManager.updateMemberHoursAndRemark(AURORA_BOREALIS.getName());
+        Predicate<Member> pred = new MemberInNameCollectionPredicate(memberNamesCollection);
+
+        assertEquals(pred, unenrolPredicate);
     }
 
     @Test

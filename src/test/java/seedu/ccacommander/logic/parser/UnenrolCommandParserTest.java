@@ -32,6 +32,14 @@ public class UnenrolCommandParserTest {
         UnenrolCommand expectedUnenrolEventCommand =
                 new UnenrolCommand(VALID_INDEX_ONE, VALID_INDEX_TWO);
 
+        // Member index followed by event index
+        assertParseSuccess(parser, MEMBER_INDEX_DESC_ONE + EVENT_INDEX_DESC_TWO,
+                expectedUnenrolEventCommand);
+
+        // Event index followed by Member Index
+        assertParseSuccess(parser, EVENT_INDEX_DESC_TWO + MEMBER_INDEX_DESC_ONE,
+                expectedUnenrolEventCommand);
+
         // whitespace only preamble
         assertParseSuccess(parser,
                 PREAMBLE_WHITESPACE + MEMBER_INDEX_DESC_ONE
@@ -41,7 +49,6 @@ public class UnenrolCommandParserTest {
     @Test
     public void parse_repeatedValue_failure() {
         String validExpectedEnrolmentString = MEMBER_INDEX_DESC_ONE + EVENT_INDEX_DESC_TWO;
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnenrolCommand.MESSAGE_USAGE);
 
         // multiple member indexes
         assertParseFailure(parser, MEMBER_INDEX_DESC_ONE + validExpectedEnrolmentString,
@@ -56,26 +63,6 @@ public class UnenrolCommandParserTest {
                 validExpectedEnrolmentString + MEMBER_INDEX_DESC_ONE
                         + EVENT_INDEX_DESC_TWO + validExpectedEnrolmentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MEMBER, PREFIX_EVENT));
-
-        // invalid value followed by valid value
-
-        // invalid member index
-        assertParseFailure(parser, INVALID_MEMBER_INDEX_DESC + EVENT_INDEX_DESC_TWO,
-                expectedMessage);
-
-        // invalid event index
-        assertParseFailure(parser, INVALID_EVENT_INDEX_DESC + MEMBER_INDEX_DESC_ONE,
-                expectedMessage);
-
-        // valid value followed by invalid value
-
-        // invalid member index
-        assertParseFailure(parser, EVENT_INDEX_DESC_TWO + INVALID_MEMBER_INDEX_DESC,
-                expectedMessage);
-
-        // invalid event index
-        assertParseFailure(parser, MEMBER_INDEX_DESC_ONE + INVALID_EVENT_INDEX_DESC,
-                expectedMessage);
     }
 
     @Test
@@ -119,25 +106,33 @@ public class UnenrolCommandParserTest {
             HandledParseException hpe = (HandledParseException) pe;
             assertEquals(expectedMessage, hpe.getMessage());
         }
+
+        // non-empty preamble
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + MEMBER_INDEX_DESC_ONE
+                + EVENT_INDEX_DESC_TWO, expectedMessage);
     }
 
     @Test
     public void parse_invalidValue_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnenrolCommand.MESSAGE_USAGE);
-        // invalid member index
+        // invalid member index followed by valid event index
         assertParseFailure(parser, INVALID_MEMBER_INDEX_DESC + EVENT_INDEX_DESC_TWO,
                 expectedMessage);
 
-        // invalid event index
+        // invalid event index followed by valid member index
+        assertParseFailure(parser, INVALID_EVENT_INDEX_DESC + MEMBER_INDEX_DESC_ONE,
+                expectedMessage);
+
+        // valid event index followed by invalid member index
+        assertParseFailure(parser, EVENT_INDEX_DESC_TWO + INVALID_MEMBER_INDEX_DESC,
+                expectedMessage);
+
+        // valid member index followed by invalid event index
         assertParseFailure(parser, MEMBER_INDEX_DESC_ONE + INVALID_EVENT_INDEX_DESC,
                 expectedMessage);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_MEMBER_INDEX_DESC + INVALID_EVENT_INDEX_DESC,
                 expectedMessage);
-
-        // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + MEMBER_INDEX_DESC_ONE
-                        + EVENT_INDEX_DESC_TWO, expectedMessage);
     }
 }

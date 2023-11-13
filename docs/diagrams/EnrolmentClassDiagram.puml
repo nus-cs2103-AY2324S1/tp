@@ -11,17 +11,21 @@ Package Enrolment as EnrolmentPackage <<Rectangle>>{
 
 Class UniqueEnrolmentList
 Class Enrolment
-Class Hours
-Class Name
-Class Remark
+    class Hours
+
+    class Remark
+}
+
+Package Shared {
+    class Name
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> UniqueEnrolmentList
 
-UniqueEnrolmentList ..> "*" Enrolment
-Enrolment *---> "Member 1" Name
-Enrolment *---> "1 Event" Name
+UniqueEnrolmentList .down.> "*" Enrolment
+Enrolment *-right--> "Member 1" Name
+Enrolment *-right--> "Event 1" Name
 Enrolment *--> "1" Hours
 Enrolment *--> "1" Remark
 

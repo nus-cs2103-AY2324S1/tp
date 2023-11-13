@@ -4,8 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import seedu.ccacommander.commons.core.LogsCenter;
 import seedu.ccacommander.model.exceptions.RedoStateException;
 import seedu.ccacommander.model.exceptions.UndoStateException;
 
@@ -19,6 +21,7 @@ public class VersionedCcaCommander extends CcaCommander {
 
     private List<CcaCommanderVersion> ccaCommanderVersionList;
     private int versionPointer;
+    private final Logger logger = LogsCenter.getLogger(VersionedCcaCommander.class);
 
     /**
      * Creates a {@code VersionedCcaCommander} using the Members in the {@code toCopy}.
@@ -70,6 +73,7 @@ public class VersionedCcaCommander extends CcaCommander {
         CcaCommanderVersion targetVersion = this.ccaCommanderVersionList.get(this.versionPointer - 1);
         resetData(targetVersion.getVersionCapture());
         this.versionPointer--;
+        logger.info("----------------[UNDO COMMAND][" + currentVersion.getCommitMessage() + "]");
         return currentVersion.getCommitMessage();
     }
 
@@ -87,6 +91,7 @@ public class VersionedCcaCommander extends CcaCommander {
         CcaCommanderVersion targetVersion = ccaCommanderVersionList.get(versionPointer + 1);
         resetData(targetVersion.getVersionCapture());
         this.versionPointer++;
+        logger.info("----------------[REDO COMMAND][" + targetVersion.getCommitMessage() + "]");
         return targetVersion.getCommitMessage();
     }
 

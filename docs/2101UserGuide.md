@@ -37,8 +37,8 @@ layout: page
 As a Co-curricular Activity (CCA) head, do you find yourself struggling to manage your CCA members’ attendances and record the array of events that your CCA has?
 Are the heaps of spreadsheets you are using to manage them making you feel overwhelmed? Well, fear not, **CCACommander Ultra Promax Xtra 9000PLUS** is here to save the day!
 
-CCACommander is a desktop application that helps CCA leaders record details of their members and events, whilst tracking every member’s attendance.
-It helps to organise members and events into easy-to-view compartments under a singular [Graphical User Interface (GUI)](https://blog.hubspot.com/website/what-is-gui) while providing granular control to you via its in-built [Command Line Interface (CLI)](https://www.techtarget.com/searchwindowsserver/definition/command-line-interface-CLI).
+CCACommander is a desktop application that helps CCA leaders record details of their members and events, whilst tracking every member’s attendance. 
+It helps to organise members and events into easy-to-view compartments under a singular [Graphical User Interface (GUI)](https://blog.hubspot.com/website/what-is-gui) while providing granular control to you via its in-built [Command Line Interface (CLI)](https://www.techtarget.com/searchwindowsserver/definition/command-line-interface-CLI). 
 If you can type quickly, CCACommander can help you complete your administrative tasks much more efficiently than traditional GUI applications.
 
 ## About
@@ -133,7 +133,7 @@ Here are the important components of CCACommander that you will use and interact
 **Storage Location**: Locate where your CCACommander data is stored in your computer.
 
 ## Command History
-You can quickly recall previously entered commands for convenience as CCACommander stores almost all (see the info card below to see what commands are stored) commands entered by the user.
+You can quickly recall previously entered commands for convenience as CCACommander stores almost all (see the info card below to see what commands are stored) commands entered by the user. 
 
 Upon selecting the command box, you can use the <kbd>↑</kbd> to <kbd>↓</kbd> key to navigate through the commands entered.
 
@@ -191,12 +191,14 @@ Upon entering the <kbd>⌫ Backspace</kbd> or the <kbd>↵ Enter</kbd> key, user
 The vitality of a CCA lies in its members. CCACommander allows you to manage your members with the commands below:
 
 #### Create a Member: `createMember`
-Creates a new member with accompanying personal details (name, gender, phone number, email address, home address, tag).
+When you first start CCACommander and want to populate CCACommander with your members, you can do it with just one simple command - `createMember`!
 
-Format: `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Here's how you can use it:<br>
+`createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
-Examples:
-* `createMember n/Lim Jun Jie g/Male p/83498018 e/limjunjie@gmail.com a/19 Kent Ridge Crescent, Singapore 119278 t/publicity` creates a member **named** "Lim Jun Jie" with **gender** "Male", **phone number** of "83498018", **email** of "limjunjie@gmail.com", home **address** of "19 Kent Ridge Crescent, Singapore 119278" and a "publicity" **tag**:
+Here is an example command where we create a member **named** "Lim Jun Jie" with **gender** "Male", **phone number** of "83498018", **email** of "limjunjie@gmail.com", home **address** of "19 Kent Ridge Crescent, Singapore 119278" and a "publicity" **tag**:
+
+`createMember n/Lim Jun Jie g/Male p/83498018 e/limjunjie@gmail.com a/19 Kent Ridge Crescent, Singapore 119278 t/publicity`
 
 <figure>
     <img src="images/createMemberPostCommand.png"
@@ -204,38 +206,44 @@ Examples:
     <figcaption>Fig 4: After executing the <code>createMember</code> command</figcaption>
 </figure>
 
-<div markdown="block" class="alert alert-info">:information_source: CCACommander will automatically capitalise the members' names for you, meaning an input of "john doe" will become "John Doe" automatically! 
-</div>
-
 <hr class="command-separator">
 
 <div style="page-break-after: always;"></div>
 
 #### Edit a Member: `editMember`
-Edits the member at the specified index with the specified fields.
+If you accidentally make a typo while creating your member, do not worry! You can quickly fix it with the `editMember` command.
 
-Format: `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Here's how you can use it:<br>
+`editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
-* `MEMBER_INDEX` refers to the index number shown in the **currently displayed** member list.
-* At least one field to edit must be provided.
+<div markdown="block" class="alert alert-info">
+:information_source: Remember to provide at least one field to be edited!
+</div>
 
-Examples:
-* `editMember 1 p/91234567 e/johndoe@example.com` edits the member at **index** 1, changing their **phone number** to "91234567" and **email** to "johndoe@example.com".
+Here is an example command where we edit the member at **index** 1, changing their **phone number** to "91234567" and **email** to "johndoe@example.com":
+
+`editMember 1 p/91234567 e/johndoe@example.com`
 
 <hr class="command-separator">
 
 #### Delete a Member: `deleteMember`
 
-Deletes the member at the specified index.
+If a member leaves your CCA, get over the disappointment by swiftly removing them from CCACommander using the `deleteMember` command!
 
-Format: `deleteMember MEMBER_INDEX`
+Here's how you can use it:<br>
+ `deleteMember MEMBER_INDEX`
 
-* Deletes the member at the specified `MEMBER_INDEX`.
-* `MEMBER_INDEX` refers to the index number shown in the **currently displayed** member list.
+Here is an example command where we delete the member at **index** 1:
 
-Examples:
-* `deleteMember 1` deletes the member at **index** 1 in the member list.
-* `deleteMember 10` deletes the member at **index** 10 in the member list.
+`deleteMember 1`
+
+<div markdown="block" class="alert alert-info">
+:information_source: The `MEMBER_INDEX` parameter refers to the index number shown in the **currently displayed** member list.
+</div>
+
+<hr class="feature-class-separator">
+
+> [Back to top](#top)
 
 <div style="page-break-after: always;"></div>
 
@@ -245,13 +253,15 @@ As a CCA head, keeping track of event details is a major responsibility. CCAComm
 
 #### Create an Event: `createEvent`
 
-Creates a new event with accompanying details (name, location, date, tag).
+Creating a new event is no longer a hassle as it can be done with just one simple command - `createEvent`!
 
-Format: `createEvent n/EVENT_NAME l/LOCATION d/DATE [t/TAG]...`
+Here's how you can use it:<br>
+`createEvent n/EVENT_NAME l/LOCATION d/DATE [t/TAG]...`
 
-Examples:
-* `createEvent n/Exco Planning l/Planning Room d/2023-12-10 t/Sem1` creates an event **named** "Exco Planning" held at the **location** "Planning Room" on the
-  **date** 2023-12-10, with **tag** "Sem1".
+Here is an example command where we create an event **named** "Party" held at the **location** "Raffles Hall" on the
+**date** 2023-09-16, with **tag** "Dinner" and **tag** "Sem1":
+
+`createEvent n/Party l/Raffles Hall d/2023-09-16 t/Dinner t/Sem1`
 
 <figure>
     <img src="images/CreateEventPostCommand.png"
@@ -262,33 +272,35 @@ Examples:
 <hr class="command-separator">
 
 <div style="page-break-after: always;"></div>
+
 #### Edit an Event: `editEvent`
 
-Edits the event at the specified index with the specified attributes.
+If you forget to note any important details, or realise that you made a mistake in any field of the event created,
+the `editEvent` command is here to help!
 
-Format: `editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]...`
+Here's how you can use it:<br>
+`editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]...`
 
-* `EVENT_INDEX` refers to the index number shown in the **currently displayed** event list.
-* At least one field to edit must be provided.
+<div markdown="block" class="alert alert-info">
+:information_source: Remember to provide at least one field to be edited!
+</div>
 
-Examples:
-* `editEvent 1 l/MBS d/2023-10-20` edits the event at **index** 1, changing the **location** to "MBS" and the **date** to "2023-10-20"
-* `editEvent 3 l/UCC Theater` edits the event at **index** 3, changing the **location** to "UCC Theater".
+Here is an example command where we edit an event at **index** 1, changing the **location** to be "MBS" and the **date** to be "2023-10-20":
+
+`editEvent 1 l/MBS d/2023-10-20`
 
 <hr class="command-separator">
 
 #### Delete an Event: `deleteEvent`
 
-Deletes the event at the specified index.
+Are your events piling up? To clear the clutter, you can delete any unwanted event from CCACommander with `deleteEvent`!
 
-Format: `deleteEvent EVENT_INDEX`
+Here's how you can use it:<br>
+`deleteEvent EVENT_INDEX`
 
-* Deletes the event at the specified `EVENT_INDEX`.
-* `EVENT_INDEX` refers to the index number shown in the **currently displayed** event list.
+Here is an example command where we delete the event at **index** 1:
 
-Examples:
-* `deleteEvent 1` deletes the event at **index** 1 in the event list.
-* `deleteEvent 10` deletes the event at **index** 10 in the event list.
+`deleteEvent 1`
 
 <div markdown="block" class="alert alert-info">:information_source: The `EVENT_INDEX` parameter refers to the index number shown in the **currently displayed** event list.
 </div>
@@ -305,43 +317,46 @@ Enrolments are a way for you to manage your members’ involvements in your even
 
 #### Enrol a Member to an Event: `enrol`
 
-Enrols a member to an event.
+Now that you have added all your members and all your events, keeping track of your members’ attendance to any event is as simple as using the `enrol` command!
 
-Format: `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
+Here’s how you can use it:<br>
+`enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
 
-* Enrols the member at the specified `MEMBER_INDEX` to the event at the specified `EVENT_INDEX` with `NUMBER_OF_HOURS` specifying the number of hours that the member contributed and `REMARK` stating extra remarks about the member and event.
+Here is an example command where we enrol the member at **member index** 1 to the event at **event index** 1, where our member
+has contributed 2 **hours**, and we want to leave a "Role: Photographer" **remark** to reflect their role as a photographer:
 
-Examples:
-* `enrol m/1 e/1 h/2 r/Role: Photographer` enrols member at **member index** 1 in the member list to the event at **event index** 1 in the event list, where the member had 2 **hours** of contributions to that event and has a **remark** of "Role: Photographer".
-* `enrol m/5 e/1` enrols the member at **member index** 5 in the member list to the event at **event index** 1 in the event list.
+`enrol m/1 e/1 h/2 r/Role: Photographer`
 
 <hr class="command-separator">
 
 #### Edit an Enrolment: `editEnrolment`
-* Edits the specified `MEMBER_INDEX`'s enrolment of the event at the specified `EVENT_INDEX` with `NUMBER_OF_HOURS` specifying the number of hours that the member contributed and `REMARK` stating extra remarks about the member and event.
+Accidentally mixed up two members and gave them the wrong number of hours or wrong remarks for the event they are involved in?
+You can fix this with ease by using the `editEnrolment` command!
+
+Here’s how you can use it:<br>
+`editEnrolment m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
 
 <div markdown="block" class="alert alert-info">
 :information_source: Remember to provide at least one field to be edited!
 </div>
 
-Examples:
-* `editEnroment m/1 e/2 h/5 r/Role: Exco` edits the enrolment of the member at **member index** 1 to the event at **event index** 2, changing the number of **hours** to 5 and the **remark** to "Role: Exco".
+Here is an example command where we edit the enrolment of the member at **member index** 1 to the event at **event index** 2,
+changing the number of **hours** to 5 and the **remark** to "Role: Exco" to reflect the member’s role as an exco member:
+
+`editEnrolment m/1 e/2 h/5 r/Role: Exco`
 
 <hr class="command-separator">
 
 <div style="page-break-after: always;"></div>
-
 #### Unenrol a Member from an Event: `unenrol`
-Unenrol a member from an event.
+If your member is no longer involved in a particular event, you can easily remove them from the event by using the `unenrol` command!
 
-Format: `unenrol m/MEMBER_INDEX e/EVENT_INDEX`
+Here’s how you can use it:<br>
+`unenrol m/MEMBER_INDEX e/EVENT_INDEX`
 
-* Unenrol the member at the specified `MEMBER_INDEX` from the event at the specified `EVENT_INDEX`.
-* The member at `MEMBER_INDEX` must be enrolled to the event at `EVENT_INDEX`.
+Here is an example command where we unenrol the member at **member index** 1 from the event at **event index** 1:
 
-Examples:
-* `unenrol m/1 e/5` unenrols the member at **member index** 1 in the member list from the event at **event index** 5 in the event list.
-* `unenrol m/5 e/1` unenrols the member at **member index** 5 in the member list from the event at **event index** 1 in the event list.
+`unenrol m/1 e/1`
 
 <div markdown="block" class="alert alert-info">:information_source: The `MEMBER_INDEX`/`EVENT_INDEX` parameter refers to the index number shown in the **currently displayed** member/event list.
 </div>
@@ -353,20 +368,19 @@ Examples:
 <div style="page-break-after: always;"></div>
 
 ### View Commands
-In CCACommander, you can quickly change the view to fit your current use case, be it to check for the enrolment of an event,
+In CCACommander, you can quickly change the view to fit your current use case, be it to check for the enrolment of an event, 
 searching for a member and more!
 
 #### View Events of Member: `viewMember`
 
-Lists all the events of a specified member index.
+If you want to view the events in which a particular member is enrolled to, you can do so via the `viewMember` command.
 
-Format: `viewMember MEMBER_INDEX`
+Here’s how you can use it:<br>
+`viewMember MEMBER_INDEX`
 
-* Views the events of the member at the specified `MEMBER_INDEX`.
-* `MEMBER_INDEX` refers to the index number shown in the **currently displayed** member list.
+Here is an example command where we want to view the events in which the **member** at index 3 in our member list is enrolled to:
 
-Examples:
-* `viewMember 3` displays events of the 3rd member in the member list.
+`viewMember 3`
 
 <figure>
     <img src="images/viewMemberPreCommand.png"
@@ -384,14 +398,14 @@ Examples:
 
 #### View Members of Event: `viewEvent`
 
-Lists all the members of a specified event index.
+If you want to view the members which a particular event has, you can do so via the `viewEvent` command.
 
-Format: `viewEvent EVENT_INDEX`
-* Views the members of the event at the specified `EVENT_INDEX`.
-* `EVENT_INDEX` refers to the index number shown in the **currently displayed** event list.
+Here’s how you can use it:<br>
+`viewEvent EVENT_INDEX`
 
-Examples:
-* `viewEvent 1` displays members of the 1st event in the event list.
+Here is an example command where we want to view the members that the **event** at index 1 of our event list has:
+
+`viewEvent 1`
 
 <figure>
     <img src="images/viewEventPreCommand.png"
@@ -409,61 +423,68 @@ Examples:
 
 #### Find Member in member list: `findMember`
 
-Finds and lists member(s) whose name(s) contain the provided `MEMBER_NAME`.
+If your CCA contains many members and you don’t want to scroll past tens or hundreds of members, you can use the 
+`findMember` command to instantly filter a list of members with a matching name.
 
-Format: `findMember MEMBER_NAME [MORE_NAMES]...`
-* Finds and lists member(s) whose name(s) contain the specified `MEMBER_NAME`.
-* More than 1 `MEMBER_NAME` can be provided to find more members.
+Do you want to find multiple members? Fear not as you can simply add more names one after another.
 
-Examples:
-* `findMember alice` displays the member(s) whose name(s) contain 'alice'
-* `findMember alice bob charlie` displays the member(s) whose name(s) contain 'alice', 'bob' and/or 'charlie'.
+Here’s how you can use it:<br>
+`findMember MEMBER_NAME [MORE_NAMES]...`
 
-<div markdown="block" class="alert alert-info">:information_source:
-The <code>findMember</code> command requires the names to be typed in full, meaning "Nich" will not suffice for finding "Nicholas". 
-To make it convenient for you, the names do not have to be capitalised! 
-</div>
+Here is an example command where we find all members with the names of "Anthony" and "Nicholas":
+
+`findMember anthony nicholas`
 
 <hr class="command-separator">
 
 #### Find Event in event list: `findEvent`
 
-Finds and lists event(s) which name(s) contain the provided `EVENT_NAME`.
+Similar to `findMember`, `findEvent` allows you to instantly find your event among your multiple events.
 
-Format: `findEvent EVENT_NAME [MORE_NAMES]...`
-* Finds and lists event(s) which name(s) contain the specified `EVENT_NAME`.
-* More than 1 `EVENT_NAME` can be provided to find more events.
+Here’s how you can use it:<br>
+`findEvent EVENT_NAME [MORE_NAMES]...`
 
-Examples:
-* `findEvent party` displays the event(s) which name(s) contain 'party'
-* `findEvent party marathon gaming` displays the event(s) which name(s) contain "party", "marathon" and/or "gaming".
+Here is an example command where we find all events with the event name of "Party":
+
+`findEvent party`
 
 <div markdown="block" class="alert alert-info">:information_source:
-The <code>findEvent</code> command requires the names to be typed in full, meaning "Par" will not suffice for finding "Party". 
-To make it convenient for you, the names do not have to be capitalised! 
+The find commands require the names to be typed in full, meaning "Nich" will not suffice for finding "Nicholas". 
+The names do not have to be capitalised too! 
+</div>
+
+<div markdown="block" class="alert alert-primary">:bulb:
+The find commands are powerful tools to help you work faster. Want to view the attendance of Nicholas, but you don’t 
+want to scroll the member list? Use the `findMember` then follow it with the `viewMember` command to achieve that. 
+This is applicable for both members and events!
 </div>
 
 <hr class="command-separator">
 
 #### List all Members and all Events: `list`
-List all members and all events in the CCA in two separate columns.
+If you’re in the event/member view, you can always use the `list` command to return to the default view with all members and events.
 
-Format: `list`
+Here’s how you use it: `list`
 
 <hr class="feature-class-separator">
+
+> [Back to top](#top)
 
 <div style="page-break-after: always;"></div>
 
 ### Utility Commands
-CCACommander provides you with powerful utility commands to make your admin tasks even more of a breeze than it was before.
+CCACommander provides you with powerful utility commands to make your admin tasks even more of a breeze than it was.
 
 #### Undoing a command: `undo`
 
-Undoes the previous command that the user has entered, which has changed the data within CCACommander.
+The `undo` command is the ultimate safety net for CCACommander. You no longer have to fear accidentally deleting 
+the wrong event or enrolling the wrong member. Simply enter the `undo` command to undo your previous command, 
+and it will return to the previous state.
 
-Format: `undo`
+Here’s how you can use it:<br>
+`undo`
 
-List of commands that can be undone:
+Here's a list of commands you can undo:
 * `clear`
 * `createMember`
 * `deleteMember`
@@ -479,16 +500,19 @@ List of commands that can be undone:
 
 #### Redoing a command: `redo`
 
-Redoes a command that the user has undone previously.
+Accidentally used `undo`? Don’t worry, you can redo your undone commands too!
 
-Format: `redo`
+Here’s how you can use it:<br>
+`redo`
 
 <hr class="command-separator">
 
 #### Clear all Members and Events: `clear`
-Clears all Member and Event entries from CCACommander.
+Is it time for a new academic year when you need to remove all your previous members and events for new members and 
+events? You can use the `clear` command to instantly remove all your members and events without needing to delete them one by one.
 
-Format: `clear`
+Here’s how you can use it:<br>
+`clear`
 
 <div markdown="block" class="alert alert-primary">:bulb: Accidentally cleared your list? 
 Fret not as you can use the `undo` command to recover your data! 
@@ -499,9 +523,10 @@ Fret not as you can use the `undo` command to recover your data!
 
 #### Help: `help`
 
-Displays a pop-out window that shows a link to this User Guide.
+Forgot how to edit a specific enrolment or how to unenrol members? The `help` command will allow you to clarify and recall any features of CCACommander by providing you with a link to our friendly and informative user guide.
 
-Format: `help`
+Here’s how you can use it:<br>
+`help`
 
 <figure>
     <img src="images/helpWindow.png"
@@ -513,10 +538,10 @@ Format: `help`
 
 #### Exit: `exit`
 
-Closes CCACommander and its display window.
+If it’s time to call it a day for your CCA tasks, you can use the `exit` command to quit the app.
 
-Format: `exit`
-
+Here’s how you can use it:<br>
+`exit`
 
 <div markdown="block" class="alert alert-info">:information_source: The <code>exit</code> command exists for your convenience. 
 It performs the same task as the cross in the top bar and the Exit button in the File sub-menu item.
@@ -526,17 +551,12 @@ It performs the same task as the cross in the top bar and the Exit button in the
 
 #### Saving the data
 
-CCACommander data are saved automatically as a JSON file `[JAR file location]/data/ccacommander.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, CCACommander will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
-</div>
+CCACommander data are saved automatically after any command that changes the data. There is no need to save manually.
 
 <hr class="feature-class-separator">
 
 > [Back to top](#top)
 
-<div style="page-break-after: always;"></div>
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
@@ -549,15 +569,8 @@ If your changes to the data file makes its format invalid, CCACommander will dis
 **A**: CCACommander is so lightweight that you only need 30 MB on your computer.
 
 **Q**: What happens if my laptop battery dies suddenly?<br>
-**A**: Rest assured, your data remains securely stored on your laptop.
+**A**: Rest assured, your data remains securely stored on your laptop. 
 Once your laptop is recharged, you can regain access to all your stored information.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Known Issues
-
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **Edit** commands go back to the main view no matter what view you were in.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -572,7 +585,9 @@ This glossary provides definitions for the special terms used in this user guide
 
 **Tag**: A word or phrase that labels a member or an event.
 
--------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Command Summary
 
@@ -590,7 +605,7 @@ Action | Format, Examples
 [**View Events of Member**](#view-events-of-member-viewmember) | `viewMember MEMBER_INDEX` <br> e.g.`viewMember 3`
 [**View Members of Event**](#view-members-of-event-viewevent) | `viewEvent EVENT_INDEX` <br> e.g.`viewEvent 1`
 [**Find Member in member list**](#find-member-in-member-list-findmember) | `findMember MEMBER_NAME [MORE_NAMES]...` <br> e.g.`findMember anthony nicholas`
-[**Find Event in event list**](#find-event-in-event-list-findevent) | `findEvent EVENT_NAME [MORE_NAMES]...` <br> e.g.`findEvent party`
+[**Find Event in event list**](#find-event-in-event-list-findevent) | `findEvent EVENT_NAME [MORE_NAMES]...` <br> e.g.`findEvent party marathon`
 [**List all Members and all Events**](#list-all-members-and-all-events-list) | `list`
 [**Undo**](#undoing-a-command-undo) | `undo`
 [**Redo**](#redoing-a-command-redo) | `redo`
@@ -620,7 +635,7 @@ Action | Format, Examples
   </tr>
   <tr>
     <td class="tg-0pky">GENDER</td>
-    <td class="tg-0pky"><code>Male</code>, <code>Female</code>, <code>Others</code> in any case</td>
+    <td class="tg-0pky"><code>Male</code>, <code>Female</code>, <code>Others</code></td>
   </tr>
   <tr>
     <td class="tg-0pky">PHONE_NUMBER</td>
