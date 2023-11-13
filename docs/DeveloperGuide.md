@@ -153,7 +153,7 @@ A `Person` object encapsulates various attributes:
 - `Age`: Patient's age
 - `BloodType`: Patient's blood type
 - `Set<Allergy>`: Patient's allergies
-- `UniqueRecordList`: Patient's records of past visits to the clinic.
+- `UniqueRecordList`: Patient's records from past visits to the clinic.
 - `UniqueAppointmentList`: Patient's scheduled appointments.
 - `isPinned`: Patient's pin status.
 
@@ -262,7 +262,7 @@ The `search` command filters the list of patients using one or more keywords.
 
 1. **Parse User Input**: `FindCommandParser` checks for existence of the keyword(s) and creates an array of keywords.
 2. **Create Predicate Object**: A `NameContainsKeywordsPredicate` object is instantiated during `FindCommandParser#parse(String)` and passed over to the `FindCommand`.
-3. **Execute Command**: `Findommand#execute(Model)` finds patients containing keywords using `NameContainsKeywordsPredicate#test(Record)` and updates `FilteredPersonList`.
+3. **Execute Command**: `FindCommand#execute(Model)` finds patients containing keywords using `NameContainsKeywordsPredicate#test(Record)` and updates `FilteredPersonList`.
 
 <puml src="diagrams/SearchSequenceDiagram.puml"/>
 
