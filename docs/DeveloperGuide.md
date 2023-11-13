@@ -1552,7 +1552,7 @@ With the addition of a new `Task` class and an improved support for managing tag
 
 In order for CoordiMate to track tasks, we had to create new classes that encapsulated the various elements of a task, such as the title, note and status. This was done to ensure that tasks can also be modelled in an object-oriented manner, just like the existing `Person` class.
 
-Furthermore, these classes needed to be integrated into the existing codebase, so that CoordiMate can keep track of the various tasks in the user's task list, as well as which tasks to show in the GUI.
+Furthermore, these classes needed to be integrated into the existing codebase. For example, we implemented the relevant `Predicate<Task>` classes to support the new `findTask`, `findTag` and `findAllTag` commands. We also created a `UniqueTaskList` class to store the list of tasks and to handle various operations, such as adding, deleting and modifying tasks in the list. This class was essential for the GUI to display information about the tasks in the task list.
 
 Lastly, to ensure that the tasks are saved and loaded correctly, the Storage class had to be modified to support the new `Task` class. This required the team to design how these tasks were to be stored in the data file, and the creation of the necessary helper classes to parse the tasks into JSON strings and vice versa.
 
