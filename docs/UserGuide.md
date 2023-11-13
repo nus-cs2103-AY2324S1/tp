@@ -1135,15 +1135,15 @@ This feature is not used for tasks!
 
 The command history feature allows you to retrieve previously typed commands into the command text box.
 
-* To start navigating the command history, press the up or down arrow, which will point and return the most recent command text (for invalid commands, it will retrieve it again since it is also saved, hence it will not change the command text yet).
-* Cycle through the command history using the up arrow to go back to previous commands, and down arrow to go to next commands, going beyond the command history will retrieve the oldest or newest command text for respectively.
+* To start navigating the command history, press the up (<kbd style="font-size: 20px;">⇧</kbd>) or down (<kbd style="font-size: 20px;">⇩</kbd>) arrow on your keyboard, which will point and return the most recent command text (for invalid commands, it will retrieve it again since it is also saved, hence it will not change the command text yet).
+* Cycle through the command history using the up (<kbd style="font-size: 20px;">⇧</kbd>) arrow to go back to previous commands, and down (<kbd style="font-size: 20px;">⇩</kbd>) arrow to go to next commands, going beyond the command history will retrieve the oldest or newest command text for respectively.
 
 <box type="tip" seamless>
 
 **Tips:**
 - Command history is only valid per session, it does not save into storage.
 - Invalid commands are also saved into command history.
-- During each successful command execution, the _pointer_<sup>[8](#glossary)</sup> resets again, hence pressing the up or down arrow will point and return the most recent command text.
+- During each successful command execution, the _pointer_<sup>[8](#glossary)</sup> resets again, hence pressing the up (<kbd style="font-size: 20px;">⇧</kbd>) or down (<kbd style="font-size: 20px;">⇩</kbd>) will point and return the most recent command text.
 - Retrieved commands will replace the existing text in command box.
 
 </box>
