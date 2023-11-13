@@ -210,8 +210,6 @@ Here's to you embarking on your LoveBook journey!
 
 <box type="tip">
 
-**Caution:**
-
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `edit INDEX METRIC/NEW_ARG`, `INDEX`, `NEW_ARG` and `METRIC` are parameters which can be used as
   `edit 2 income/3000`.
