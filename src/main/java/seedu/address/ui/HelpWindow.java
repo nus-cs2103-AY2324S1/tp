@@ -2,12 +2,11 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import javafx.concurrent.Worker;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
-import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -17,6 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2324s1-cs2103t-f10-1.github.io/tp/UserGuide.html";
+    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -25,13 +25,7 @@ public class HelpWindow extends UiPart<Stage> {
     private Button copyButton;
 
     @FXML
-    private Button backButton;
-
-    @FXML
-    private Button nextButton;
-
-    @FXML
-    private WebView webView;
+    private Label helpMessage;
 
     /**
      * Creates a new HelpWindow.
@@ -40,17 +34,7 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-
-        // Load the web page in the WebView
-        webView.getEngine().load(USERGUIDE_URL);
-
-        // Add a listener to the LoadWorker of the WebEngine
-        webView.getEngine().getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue == Worker.State.SUCCEEDED) {
-                // Execute JavaScript code for smooth scrolling
-                webView.getEngine().executeScript("document.documentElement.style.scrollBehavior = 'smooth'");
-            }
-        });
+        helpMessage.setText(HELP_MESSAGE);
     }
 
     /**
@@ -115,20 +99,4 @@ public class HelpWindow extends UiPart<Stage> {
         url.putString(USERGUIDE_URL);
         clipboard.setContent(url);
     }
-
-    @FXML
-    private void goBack() {
-        if (webView.getEngine().getHistory().getCurrentIndex() > 0) {
-            webView.getEngine().getHistory().go(-1);
-        }
-    }
-
-    @FXML
-    private void goForward() {
-        if (webView.getEngine().getHistory().getCurrentIndex() < webView.getEngine().getHistory()
-                .getEntries().size() - 1) {
-            webView.getEngine().getHistory().go(1);
-        }
-    }
-
 }
