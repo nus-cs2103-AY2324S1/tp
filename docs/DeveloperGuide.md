@@ -521,7 +521,7 @@ The updating of `Priority` of existing Tasks is accomplished using the `EditComm
 
 ### Updating Members of Existing Tasks
 
-Assigning group members to an existing task can be done using the `EditCommand` class.
+Assigning group members to an existing task can be done using the `EditCommand` class. When the `EditCommand` is executed, the existing members in the specified task will be completely replaced with the member(s) in the command's arguments. If a single `m/` is used with no given member name, the entire member list of the task will be erased.
 
 ### Updating Note of Existing Tasks
 

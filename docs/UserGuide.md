@@ -629,6 +629,11 @@ You can assign 1 or more member to a task. ANY character is allowed, except for 
 Do note that editing members using this command will overwrite any existing members, if any, previously associated with the task.
 
 <div markdown="span" class="alert alert-warning">
+:warning: Simply specifying a single member prefix with no member name will result in the members assigned to the task to be completely removed.
+</div>
+
+
+<div markdown="span" class="alert alert-warning">
 :warning: By default, the edited list of members is also sorted using the same algorithm that is used to sort the tasks by Task Description! You are advised to be consistent in your use of capitalisation in the name of the members you add to your task!
 <br/><br/>
 Refer to <a href="https://ay2324s1-cs2103t-t17-1.github.io/tp/UserGuide.html#case-insensitive-ordering-of-members">this</a> section for more information on this issue! Rest assured that we are working hard on fixing this issue to make your TaskWise experience a more enjoyable and productive one!
