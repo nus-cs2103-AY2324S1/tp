@@ -214,7 +214,7 @@ The following activity diagram summarises what happens the user executes a sched
 
 **Design Considerations**
 
-**Aspect: How to implement Appointments for Person**
+**Aspect: How to implement appointment for Person**
 
 Alternative 1 (Current Choice): Create an abstract class ScheduleItem and make it a compulsory field for Person.
 
@@ -274,7 +274,9 @@ The `GatherCommand` is initiated by the `GatherCommandParser`. The `GatherComman
 Both `GatherEmailByFinancialPlan` or `GatherEmailByTag` implements the `GatherEmailPrompt` interface.
 
 The `GatherCommand` takes in the `GatherEmailPrompt` object and passes it into the current `Model`, subsequently interacting with the `AddressBook` class. 
-The `GatherCommand#execute()` executes the gather operation by calling `Model#gatherEmails(GatherEmailPrompt prompt)`. Below shows how the gather operation logic works as described above:
+The `GatherCommand#execute()` executes the gather operation by calling `Model#gatherEmails(GatherEmailPrompt prompt)`. 
+
+The following sequence diagram below shows how the gather operation works as described above:
 
 ![GatherSequenceDiagram1](images/GatherSequenceDiagram1.png)
 
@@ -284,13 +286,15 @@ The `UniquePersonsList` class maintains a list of unique persons. The `UniquePer
 
 - `UniquePersonsList#gatherEmails(GatherEmailPrompt prompt)` —  Iterates through the persons list and calls `GatherEmailPrompt#gatherEmails(Person person)`, passing in each person. 
 
-Depending on the type of `GatherEmailPrompt`, it triggers either: 
+Depending on the type of `GatherEmailPrompt`, the method above triggers either: 
 
 - `Person#gatherEmailsContainsTag(String prompt)` —  Checks if the given prompt is a substring of any Tag names in the `Set<Tag>` of the current person. 
 - `Person#gatherEmailsContainsFinancialPlan(String prompt)` —  Checks if the given prompt is a substring of any Financial Plan names in the `Set<FinancialPlan>` of the current person.
 
 These methods internally utilize `Tag#containsSubstring(String substring)` and `FinancialPlan#containsSubstring(String substring)`, respectively. These substring comparisons are performed in a case-insensitive manner by converting both the prompt and the financial plan/tag names to lowercase before the check.
-This is to make gathering of emails more convenient and flexible. Currently, we only allow gathering emails by `FinancialPlan` and `Tag` as these are the more likely to be searched to gather emails by. However, additional classes implementing the `GatherEmailPrompt` interface can be added to enable the gathering of emails based on a broader range of fields.
+This is to make gathering of emails more convenient and flexible. 
+
+Currently, we only allow gathering emails by `FinancialPlan` and `Tag` as these are the more likely to be searched to gather emails by. However, additional classes implementing the `GatherEmailPrompt` interface can be added to enable the gathering of emails based on a broader range of fields.
 
 The following sequence diagram shows how the gather emails by financial plan operation works:
 
@@ -299,14 +303,13 @@ The following sequence diagram shows how the gather emails by financial plan ope
 #### Design Considerations
 
 **Aspect: How many inputs to accept**
+* **Alternative 1 (Current Choice):** User can only search by one Financial Plan or Tag.
+  * **Pros:** Easy to implement. Limits the potential for bugs.
+  * **Cons:** Limited filtering options.
 
-**Alternative 1 (Current Choice):** User can only search by one Financial Plan or Tag.
-- **Pros:** Easy to implement. Limits the potential for bugs.
-- **Cons:** Limited filtering options.
-
-**Alternative 2:** User can search by multiple Financial Plans or Tags.
-- **Pros:** More flexible (e.g. gathering by a combination of financial plans and tags).
-- **Cons:** Introduces more complexity and requires additional error handling.
+* **Alternative 2:** User can search by multiple Financial Plans or Tags.
+  * **Pros:** More flexible (e.g. gathering by a combination of financial plans and tags).
+  * **Cons:** Introduces more complexity and requires additional error handling.
 
 
 ### Expanded Find feature
