@@ -72,9 +72,6 @@ activate CommandResult
 CommandResult --> GroupPersonCommand
 deactivate CommandResult
 
-CommandResult -[hidden]-> AddressBookParser
-destroy CommandResult
-
 GroupPersonCommand --> LogicManager
 
 deactivate GroupPersonCommand

@@ -64,6 +64,10 @@ deactivate CommandResult
 
 AddGroupMeetingTimeCommand --> LogicManager : result
 deactivate AddGroupMeetingTimeCommand
+
+AddGroupMeetingTimeCommand-[hidden]-> AddressBookParser
+destroy AddGroupMeetingTimeCommand
+
 [<--LogicManager
 deactivate LogicManager
 
