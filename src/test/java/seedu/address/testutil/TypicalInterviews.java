@@ -26,7 +26,7 @@ public class TypicalInterviews {
             new Rating("0.0"),
             new Time(LocalDateTime.of(2025, 12, 21, 14, 0)),
             new Time(LocalDateTime.of(2025, 12, 21, 16, 0)),
-                            false);
+                            true);
     public static final Interview STANDARD_INTERVIEW_3 = new Interview(TypicalApplicants.CARL,
                     "StandardJobRole3",
              new Rating("0.0"),
