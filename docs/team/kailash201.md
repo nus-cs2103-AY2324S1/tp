@@ -33,14 +33,13 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `list`, `new`, `delete`, `find`. [\#145](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/146)
+    * Made some updates to the documentation for the final release. [\#290](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/290), [\#277](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/277), [\#271](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/271/files#diff-b50feaf9240709b6b02fb9584696b012c2a69feeba89e409952cc2f401f373fb) 
   * Developer Guide:
-    * Added implementation details of the `add time` feature.
-    * Added planned enhancements section.
+    * Added implementation details of the `add` and `addtime`feature. [\#271] (https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/271/files)
+    * Made diagrams for `add` and `addtime` feature.
+    * Updated old architecture models to projectPROs implementation for `model` and `UI` [\#263](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/263/files)
+    * Added and updated the planned enhancements section. [\#248](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/248/files)
 
 * **Community**:
+  * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/AY2324S1-CS2103T-T10-4/tp/issues/232), [2](https://github.com/AY2324S1-CS2103T-T10-4/tp/issues/231), [3](https://github.com/AY2324S1-CS2103T-T10-4/tp/issues/234))
 
-
-* **Tools**:
-
-
-* _{you can add/remove categories in the list above}_
