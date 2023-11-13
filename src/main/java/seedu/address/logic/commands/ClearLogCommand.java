@@ -22,7 +22,7 @@ public class ClearLogCommand extends UndoableCommand {
 
     public static final String MESSAGE_SUCCESS = "Logger tab has been cleared!";
 
-    public static final String MESSAGE_FAILURE = "Logger tab is already empty!";
+    public static final String MESSAGE_FAILURE = "Cannot clear an empty log.";
 
     public static final String MESSAGE_UNDO_CLOG_SUCCESS = "Undoing clearing of the logging.";
 
