@@ -1160,16 +1160,16 @@ testers are expected to do more *exploratory* testing.
 1. Adding LinkedIn/Github username to a person while all persons are being shown
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
    
-    2. Test case (Positive test case): `addL 1 u/alexyeoh`
+    2. Test case (Positive test case): <br>`addL 1 u/alexyeoh` <br>
        **Expected:** LinkedIn username added to the person's profile. Displayed in person card.
    
-    3. Test case (Negative test case): `addG -1 u/madlad`
+    3. Test case (Negative test case): <br>`addG -1 u/madlad` <br>
        **Expected:** No Github username is added to any person. Error details shown in the status message. Person information panel remains the same.
    
-    4. Test case (Negative test case): `addL u/maxcodes`
+    4. Test case (Negative test case): <br>`addL u/maxcodes` <br>
        **Expected:** No LinkedIn username is added to any person. Error details shown in the status message. Person information panel remains the same.
    
-    5. Test case (Negative test case): `addG 1`
+    5. Test case (Negative test case): <br>`addG 1` <br>
        **Expected:** No Github username is added to any person. Error details shown in the status message. Person information panel remains the same.
 
 ### Viewing person's social profile ###
@@ -1177,17 +1177,17 @@ testers are expected to do more *exploratory* testing.
 1. Viewing a person's social profile
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list, with their usernames previously added.
    
-    2. Test case (Positive test case): `linkedin 1`
+    2. Test case (Positive test case): <br> `linkedin 1` <br>
        **Expected:** Redirected to LinkedIn profile of the person, in the browser. Success message displayed on JABPro.
    
-    3. Test case (Negative test case): `github 0`
+    3. Test case (Negative test case): <br> `github 0` <br>
        **Expected:** No Github profile shown. Error details shown in the status message.
    
-    4. Test case (Negative test case): `linkedin 2`
-       [Assumption: LinkedIn username has not been previously added for candidate 2]
+    4. Test case (Negative test case):  <br>`linkedin 2`
+       [Assumption: LinkedIn username has not been previously added for candidate 2] <br>
        **Expected:** No LInkedin profile shown. Error details shown in the status message.
    
-    5. Test case (Negative test case): `github`
+    5. Test case (Negative test case):  <br>`github` <br>
        **Expected:** No Github profile shown. Error details shown in the status message.
 
 ### Adding Event relating to a candidate ###
@@ -1195,22 +1195,22 @@ testers are expected to do more *exploratory* testing.
 1. Adding event relating to a candidate
     1. Prerequisites: List all persons using the `list` command. Multiple person in the list.
    
-    2. Test case (Positive test case): `event 1 d/Interview bt/2023-11-12 10:00 et/2023-11-12 12:00`
+    2. Test case (Positive test case): <br>`event 1 d/Interview bt/2023-11-12 10:00 et/2023-11-12 12:00` <br>
        **Expected:** Event added to EventBook. Success message displayed. Event visible in Events window.
    
-    3. Test case (Negative test case): `event 0 d/Interview bt/2023-11-12 10:00 et/2023-11-12 12:00`
+    3. Test case (Negative test case): <br>`event 0 d/Interview bt/2023-11-12 10:00 et/2023-11-12 12:00` <br>
        **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
    
-    4. Test case (Negative test case): `event 1 bt/2023-11-12 10:00 et/2023-11-12 12:00`
+    4. Test case (Negative test case): <br>`event 1 bt/2023-11-12 10:00 et/2023-11-12 12:00` <br>
        **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
    
-    5. Test case (Negative test case): `event 1 d/Interview bt/12-11-2023 10:00 et/12-11-2023 12:00`
+    5. Test case (Negative test case): <br>`event 1 d/Interview bt/12-11-2023 10:00 et/12-11-2023 12:00` <br>
        **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
    
-    6. Test case (Negative test case): `event 1 d/Interview bt/2023-11-12 12:00 et/2023-11-12 10:00`
+    6. Test case (Negative test case): <br>`event 1 d/Interview bt/2023-11-12 12:00 et/2023-11-12 10:00` <br>
        **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
    
-    7. Test case (Negative test case): `event 1 d/Interview bt/2023-11-31 10:00 et/2023-12-01 10:00`
+    7. Test case (Negative test case): <br>`event 1 d/Interview bt/2023-11-31 10:00 et/2023-12-01 10:00` <br>
        **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
 
 ### Saving data
