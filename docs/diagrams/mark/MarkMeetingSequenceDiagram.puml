@@ -1,0 +1,34 @@
+@startuml MarkMeeting
+!include ../style.puml
+
+title Mark Meeting
+
+box Logic LOGIC_COLOR_T1
+participant "command:MarkMeetingCommand" as MarkMeetingCommand LOGIC_COLOR
+endbox
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant "markedMeeting:Meeting" as Meeting MODEL_COLOR
+end box
+
+activate MarkMeetingCommand
+
+MarkMeetingCommand -> MarkMeetingCommand : markMeeting(meeting)
+activate MarkMeetingCommand
+
+create Meeting
+MarkMeetingCommand -> Meeting
+activate Meeting
+
+Meeting --> MarkMeetingCommand : markedMeeting
+deactivate Meeting
+
+MarkMeetingCommand --> MarkMeetingCommand : markedMeeting
+deactivate MarkMeetingCommand
+
+MarkMeetingCommand -> Model : setMeeting(meeting, markedMeeting)
+activate Model
+
+Model --> MarkMeetingCommand
+deactivate Model

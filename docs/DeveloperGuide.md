@@ -389,10 +389,27 @@ Step 8. `LogicManager` then executes the `AddCommand` on the application model.
 
 Step 9. Further execution is carried out, which like before adds the `Person` object to the list of `Person`s in the `Model`, and updates the `Storage` with this new `Person`.
 
-#### Design Consideration: Updating last meeting with contact
+### Mark meeting as complete feature
 
-Solution:
-This is facilitated by the addition of the `MarkDoneCommand`. When a meeting is marked as done, the attendees of the meeting will be updated with their LastContactedTime field updated to the end time of the meeting.
+A meeting can be marked as complete using the `mark` command. The command also updates the last contacted time of its attendees to the ending time of the meeting, if the meeting end time is after the attendees current last contacted time.
+
+This is the overall sequence diagram of marking a meeting as complete.
+
+<img src="images/mark/Execute MarkMeetingCommand.png" width=1000/>
+
+When a mark command is entered, it is first parsed by the respective `Parser`s to create a `MarkMeetingCommand` object.
+
+<img src="images/mark/CreateMarkMeetingCommand.png" width=1000 />
+
+When the command is executed, the meeting is marked as complete by creating a new `Meeting` with the same fields except for status, and this meeting is updated to the `Model`.
+
+<img src="images/mark/MarkMeeting.png" width=1000 />
+
+Following this, the last contacted time of all the attendees of the meeting are updated to the end time of the meeting.
+
+<img src="images/mark/Update Attendee LastContactedTime.png" width=1000 /> 
+
+Finally, a `CommandResult` is produced and returned to the `LogicManager`.
 
 <div style="page-break-after: always;"></div>
 

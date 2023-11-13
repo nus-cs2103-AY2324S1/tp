@@ -1,0 +1,40 @@
+@startuml Execute MarkMeetingCommand
+!include ../style.puml
+
+title Execute MarkMeetingCommand
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "command:MarkMeetingCommand" as MarkMeetingCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+endbox
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("mark 1")
+activate LogicManager
+
+ref over LogicManager, MarkMeetingCommand : Create MarkMeetingCommand
+
+LogicManager -> MarkMeetingCommand : execute(model)
+activate MarkMeetingCommand
+
+ref over MarkMeetingCommand, Model : Mark Meeting
+
+ref over MarkMeetingCommand, Model : Update Attendee LastContactedTime
+
+create CommandResult
+MarkMeetingCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> MarkMeetingCommand
+deactivate CommandResult
+
+MarkMeetingCommand --> LogicManager : result
+deactivate MarkMeetingCommand
+
+[<--LogicManager : result
+deactivate LogicManager
+@enduml
