@@ -276,8 +276,7 @@ With reference the picture above, we will do `delete-a 2` <br>
 <img src="images/NewUserTutMarkEditI.png" width="500" /> <br>
 
 **Step 14:** Lastly, let's find Google with `find-i-role google` and delete the completed Google OA task with `delete-i-task 1` <br> 
-<img src="images/NewUserTutFindDeleteI.png" width="500" /> <br> 
-<div style="page-break-after: always;"></div>
+<img src="images/NewUserTutFindDeleteI.png" width="500" /> <br>
 
 **Step 15:** We can view our internships list again with `list-i` <br> 
 <img src="images/NewUserTutLastListI.png" width="500" />
@@ -901,6 +900,8 @@ will match with this internship task.
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ## Data Related Features
 
 ### Saving the data
@@ -960,6 +961,8 @@ or [feature](#features) section, for detailed information about each feature.
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Internship Commands
 
 #### Common Internship Commands
@@ -980,6 +983,8 @@ or [feature](#features) section, for detailed information about each feature.
 | find-i-role   | Lists the internship role with company name matching the given keyword, and all the associated tasks |
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 #### Internship Task Commands
 
@@ -1091,6 +1096,8 @@ Method 2: For users that wish to create a script to launch CampusCompanion (**Re
 6. CampusCompanion should launch
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Checking Java version
 **Q**: How can I check my Java version?<br>
