@@ -144,7 +144,7 @@ Let's first discuss the top half of the interface.
    - Number of uncontacted / contacted / closed clients
    - Average interactions among all clients
    - Breakdown of the different interaction outcomes
-   - Number of hot / warm / cold [leads](#common-use-case:-marking-a-client's-lead)
+   - Number of hot / warm / cold [leads](#common-use-case-marking-a-clients-lead)
 
 5. **Upcoming Follow-ups:** upcoming meetings for each client. Follow-up dates are determined automatically by the latest interaction date and the lead of the client. See [how Connectify calculates follow-up dates.](#follow-up-calculation)
 
@@ -181,7 +181,7 @@ Let's first discuss the top half of the interface.
    - **Income:** the client's income.
    - **Past Interactions:** the list of past interactions or meetings with the clients, along with its date, interaction outcome (interested), and meeting notes.
 
-<a id="status-bar"></a>
+   <a id="status-bar"></a>
    <br>
    <figure>
        <img src="images/UiStatusBar.png" alt="Status Bar">
@@ -492,7 +492,7 @@ See [what each section of the dashboard means.](#dashboard-information)
 
 ### Editing a client profile: ***edit***
 
-Over time, you may need to update the details of a client profile to reflect current information. Use the command ***edit*** to edit the specified client profile in your client list.
+Over time, you may need to update the details of a client profile to reflect the most current information. Use the command ***edit*** to edit the specified client profile in your client list.
 
 **Format**
 ```text
@@ -538,11 +538,11 @@ Example
 
 #### Clearing all tags of a client
 
-You can use the ***edit*** command to clear all tags of a client by supplying an empty tag parameter! For example, if you wish to clear the tags of a client at index 4, you can use `edit 4 t/`.
+You can use the ***edit*** command to clear all tags of a client by supplying an empty tag parameter! For example, if you wish to clear the tags of a client at index 4, use `edit 4 t/`.
 
 #### Editing a single field
 
-We understand the edit command can be a little tedious to use if you only want to edit a single field of a client profile. Hence, we have provided a shortcut for you to edit a single field of a client profile. This command is special because its command word is the same as the field you want to edit. 
+We understand the ***edit*** command can be a little tedious to use if you only want to edit a single field of a client profile. Hence, we have provided a shortcut for you to edit a single field of a client profile. This command is special because its command word is the same as the field you want to edit. 
 
 **Format**
 ```text
@@ -567,17 +567,11 @@ FIELD INDEX NEW_VALUE
 
 </div>
 
-#### Common use case: Marking a client's lead
+#### Common use case: marking a client as a hot, warm, or cold lead
 
 As salespeople, we need to gauge the potential of each client, which represents how likely they are to become a buying customer. We use hot leads to represent a customer with high potential, and cold leads to represent customers with low potential.
 
-You can use the ***lead*** command to mark a client as a **hot**, **warm** or **cold** lead. 
-`lead <index> <lead type>`. 
-For example, if you wish to mark a client at index **4** as a **cold** lead, enter `lead 4 cold`. 
-
-Also be aware that this will [affect the follow-up date of the client.](#follow-up-calculation)
-
-[↑ Back to Table of Contents](#table-of-contents)
+You can use the ***lead*** command to mark a client as a **hot**, **warm** or **cold** lead. For example, if you wish to mark the client at index 4 as a cold lead, enter `lead 4 cold`. This changes [the follow-up period of the client.](#follow-up-calculation)
 
 [↑ Back to Table of Contents](#table-of-contents)
 
@@ -637,27 +631,26 @@ For example, if your last interaction with John is on `1 Jan 2021` and he is a `
 
 ## Parameter constraints
 
-Some parameters have constraints on the inputs they accept. Though our app will notify you of such issues when the arise, this section will list some common constraints worth noting for each parameter.
+Some parameters have constraints on the inputs they accept. Although our app notifies you of such issues when they arise, this section lists some common constraints worth noting.
 
-#### Phone numbers
+### Phone numbers
 Phone numbers can only 3-15 contain digits. An optional `+` sign is allowed in front.
 
-#### Tags
+### Tags
 
 The tag parameter `t/TAG` only allows alphanumeric inputs with no spaces. For example, `t/familyfriend` is allowed, but `t/family friend` or `t/family-friend` is not allowed.
 
-#### Incomes
+### Incomes
 
 Incomes consist only of numerical inputs. Connectify does not yet support:
 * Decimal values `600.50`
 * Currencies `10000 USD`
 * Other non-numeric input e.g. `10,000`
 
-
 ## Command history
-You can use the up arrow key <kbd>&uarr;</kbd> to view your past commands and press <kbd>Enter</kbd> to execute them again.
+You can use the **up arrow key <kbd>&uarr;</kbd>** to view your past commands and press <kbd>Enter</kbd> to execute them again.
 
-This is especially useful if you find yourself having to re-enter a command that is not accepted due to the constrains above. 
+This is especially useful if you find yourself having to re-enter a command that was not accepted due to an error. For example, your parameters may not have conformed to the constraints above. 
 
 [↑ Back to Table of Contents](#table-of-contents)
 
@@ -677,8 +670,11 @@ This is especially useful if you find yourself having to re-enter a command that
 1. Find your data folder - it should be in the same directory as your `connectify.jar` file.
 
     If your Connectify jar file is at `C:\Users\John\Desktop\Connectify\connectify.jar`, the data folder will be at `C:\Users\John\Desktop\Connectify\data`.
+
     <div markdown="block" class="alert alert-warning">
-    **:bulb: If you're having trouble finding the data folder, you can refer to the [status bar](#status-bar)!**<br>
+   
+    **:bulb: If you're having trouble finding the data folder, you can refer to the [status bar](#status-bar).**
+   
     </div>
 
 
@@ -693,18 +689,18 @@ This is especially useful if you find yourself having to re-enter a command that
 
 # Command summary
 
-| Action              | Format                                                                                                            | Example                                                                                                                                                              |
-|---------------------|-------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Help                | `help`                                                                                                            | `help`                                                                                                                                                               |
-| Add Client          | `create n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG] [tg/TELEGRAM] [pf/PROFESSION] [i/INCOME] [d/DETAILS]`            | `create n/Bernice Yu p/99272758 e/berniceyu@example.com a/Blk 30 Lorong 3 Serangoon Gardens, #07-18 t/colleagues t/friends tg/@yuyubern pf/Graphic Designer i/60000` |
-| Add Interaction     | `interaction INDEX o/OUTCOME [DETAILS]`                                                                           | `interaction 1 o/INTERESTED d/Client is interested in our products`                                                                                                  |
-| View Dashboard      | `dashboard`                                                                                                       | `dashboard`                                                                                                                                                          |                                                                                                                                                        |
-| View Client List    | `list`                                                                                                            | `list`                                                                                                                                                               |
-| Find Client         | `find NAME`                                                                                                       | `find Chemmy`                                                                                                                                                        |
-| View Client Details | `view INDEX`                                                                                                      | `view 1`                                                                                                                                                             |
-| Edit Client         | `edit INDEX [n/NAME] [e/EMAIL] [a/ADDRESS] [t/TAG] [l/LEAD] [tg/TELEGRAM] [pf/PROFESSION] [i/INCOME] [d/DETAILS]` | `edit 2 e/berniceyu@gmail.com p/123456789`                                                                                                                           |
-| Edit Single Field   | `FIELD INDEX NEW_FIELD_VALUE`                                                                                           | `name 1 John Doe`                                                                                                                                                    |
-| Delete Client       | `delete INDEX`                                                                                                    | `delete 1`                                                                                                                                                           |
-| Exit                | `exit`                                                                                                            | `exit`                                                                                                                                                               |
+| Action                       | Format                                                                                                            | Example                                                                                                                                                              |
+|------------------------------|-------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Help                         | `help`                                                                                                            | `help`                                                                                                                                                               |
+| Add Client                   | `create n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG] [tg/TELEGRAM] [pf/PROFESSION] [i/INCOME] [d/DETAILS]`            | `create n/Bernice Yu p/99272758 e/berniceyu@example.com a/Blk 30 Lorong 3 Serangoon Gardens, #07-18 t/colleagues t/friends tg/@yuyubern pf/Graphic Designer i/60000` |
+| Add Interaction              | `interaction INDEX o/OUTCOME [DETAILS]`                                                                           | `interaction 1 o/INTERESTED d/Client is interested in our products`                                                                                                  |
+| View Dashboard               | `dashboard`                                                                                                       | `dashboard`                                                                                                                                                          |                                                                                                                                                        |
+| View Client List             | `list`                                                                                                            | `list`                                                                                                                                                               |
+| Find Client                  | `find NAME`                                                                                                       | `find Chemmy`                                                                                                                                                        |
+| View Client Details          | `view INDEX`                                                                                                      | `view 1`                                                                                                                                                             |
+| Edit Client                  | `edit INDEX [n/NAME] [e/EMAIL] [a/ADDRESS] [t/TAG] [l/LEAD] [tg/TELEGRAM] [pf/PROFESSION] [i/INCOME] [d/DETAILS]` | `edit 2 e/berniceyu@gmail.com p/123456789`                                                                                                                           |
+| Edit Single Field (Shortcut) | `FIELD INDEX NEW_VALUE`                                                                                           | `name 1 John Doe`                                                                                                                                                    |
+| Delete Client                | `delete INDEX`                                                                                                    | `delete 1`                                                                                                                                                           |
+| Exit                         | `exit`                                                                                                            | `exit`                                                                                                                                                               |
 
 [↑ Back to Table of Contents](#table-of-contents)
