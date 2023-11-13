@@ -1377,7 +1377,7 @@ testers are expected to do more *exploratory* testing.
    1. Availability = `NotAvailable`, Animal Name = `mew` Animal Type = `able.Cat`<br>
       Expected on Enter: Invalid fosterer, and error message shown.<br>
 
-### Resetting the Address Book
+### Resetting the address book
 1. Resetting the Address Book
    1. Prerequisites: `reset` command must be entered first, before entering `reset confirm`.<br>
    2. Test case: `reset` <br>
