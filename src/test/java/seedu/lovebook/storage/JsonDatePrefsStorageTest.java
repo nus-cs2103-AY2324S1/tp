@@ -83,7 +83,7 @@ public class JsonDatePrefsStorageTest {
     }
 
     /**
-     * Saves {@code DatePrefs} at the specified {@code filePath}.
+     * Saves {@code LoveBook} at the specified {@code filePath}.
      */
     private void saveDatePrefs(ReadOnlyDatePrefs datePrefs, String filePath) {
         try {
