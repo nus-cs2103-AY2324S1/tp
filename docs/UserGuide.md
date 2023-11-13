@@ -499,8 +499,13 @@ You have created a few bands and added several musicians to each band. Now, you 
 
     This command finds the band named "theory X" and displays all the members in it.
 
-**Things to Note:**
-* While band name is case-insensitive, please do not insert any whitespaces within the band name.
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Note:**
+
+Please ensure that the band name does not contain extra whitespaces
+
+</div>
 
 **Upon success:**
 
