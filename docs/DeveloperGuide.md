@@ -971,15 +971,20 @@ Use case ends.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 200 events without a noticeable sluggishness in performance for typical usage.
-3.  Calendar should have a combined 1 academic year look forward and look back period (In AY22/23, can look through calendar for this academic year)
-4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-5. Calendar should be able to check if there are any event timing conflicts within 1 second
-6. System should be easily picked up by a freshman at NUS with just the application's website
+Project Constraints:
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed. 
+2. The product is offered as an offline application.
+3. System should be beginner-friendly and easily picked up by a freshman at NUS with just the application's website.
+4. Should be able to hold up to 200 events without a noticeable sluggishness in performance for typical usage. 
+5. Calendar should have the current week's event schedule displayed.
+6. Calendar should be able to check if there are any event timing conflicts within 1 second.
+7. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse, except viewing contact events as a pop-up.
+8. System should be beginner-friendly and easily picked up by a freshman at NUS with just the application's website.
 
 
-*{More to be added}*
+Process Requirements:
+1. The product is expected to adhere to the set Milestones.
+2. User can only execute actions using at most 1 command at a time.
 
 ### Glossary
 
