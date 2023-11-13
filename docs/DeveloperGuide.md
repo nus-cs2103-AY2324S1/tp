@@ -105,7 +105,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>DeleteCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 How the `Logic` component works:
@@ -169,23 +169,23 @@ This section describes some noteworthy details on how certain features are imple
 
 The implementation involves the ReadCommand and some associated classes:
 
-* `ReadCommand` — This class is responsible for executing the "Read" command. It parses the user input, retrieves information from the model, and passes the results to the UI for display.
+* `ReadCommand` — This class is responsible for executing the `read` command. It parses the user input, retrieves information from the model, and passes the results to the UI for display.
 
 * `ReadCommandParser` — Responsible for parsing user input and creating a ReadCommand object. It extracts the index of the employee in the last shown list and the requested field.
 
 * `PersonCardWithSpecificField` - Since we have to display only one specific field, we created another person card with just one field. This class is responsible for displaying the name of the person and a specific field requested by the user in the UI. It receives the necessary information from the command result and formats it for display.
 
-Displaying a specific field with the new PersonCardWithSpecificField class.
+Displaying a specific field with the new `PersonCardWithSpecificField` class.
 
-1. Before we execute a command, the MainWindow will display a list of person with all their fields as shown below.
+1. Before we execute a command, the `MainWindow` will display a list of person with all their fields as shown below.
 
 ![ReadCommandBeforeExecute](images/ReadCommandBeforeExecute.png)
 
-2. After we execute the command, and it is a ReadCommand, the ReadCommand will set CommandResult::isRead to true. The MainWindow of UI will then remove all the existing PersonCard with a PersonCardWithSpecificField as shown below.
+2. After we execute the command, and it is a `ReadCommand`, the `ReadCommand` will set `CommandResult::isRead` to true. The `MainWindow` of UI will then remove all the existing `PersonCard` with a `PersonCardWithSpecificField` as shown below.
 
 ![ReadCommandAfterExecute](images/ReadCommandAfterExecute.png)
 
-The following class diagram shows how the different classes interact with one another in the read Feature:
+The following class diagram shows how the different classes interact with one another in the `read` Feature:
 
 ![ReadCommandClassDiagram](images/ReadClassDiagram.png)
 
@@ -197,9 +197,10 @@ This is the sequence diagram to show how the read operation works.
 
 ![ReadSequenceDiagram3](images/ReadSequenceDiagram.png)
 
-:information_source: **Note:** The lifeline for `ReadCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>ReadCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
-The user enters the command "read 1 /a" and executes it. The command is then parsed by AddressBookParser. The AddressBookParser parsed the input and created ReadCommandParser and ReadCommandParser parsed the remaining input(exclude the command word). If it parses successfully, it will eventually create a ReadCommand. The ReadCommand is then executed. If the index is not out of bounds, it will call Model#setSpecificPersonToDisplay() to filter the list to only the specific person. Then it will also call the respective getter to get the specific field from the Person. After getting the specific field, it will then create a CommandResult for the UI to display.
+The user enters the command `read 1 /a` and executes it. The command is then parsed by `AddressBookParser`. The `AddressBookParser` parses the input and creates `ReadCommandParser` and `ReadCommandParser` parses the remaining input(exclude the command word). If it parses successfully, it will eventually create a `ReadCommand`. The `ReadCommand` is then executed. If the index is not out of bounds, it will call `Model#setSpecificPersonToDisplay()` to filter the list to only the specific person. Then it will also call the respective getter to get the specific field from the `Person`. After getting the specific field, it will then create a `CommandResult` for the UI to display.
 
 #### Design considerations:
 
@@ -261,6 +262,9 @@ The following sequence diagram shows how the `DeductCommandParser` class parses 
 
 ![ParseDeductionCommandSequenceDiagram](images/ParseDeductCommandSequenceDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>DeductCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
 When parsing the input, all relevant parameters are extracted according to their respective prefixes, and put into an `ArgumentMultimap`. 
 The `value` and `reason` are parsed by `ParserUtil` class first, and a `Deduction` object is created with the parsed `value` and `reason`.
 If the parameters are not in the correct format, a `ParseException` will be thrown.
@@ -287,6 +291,9 @@ The following sequence diagram shows how the `DeductCommandParser` class parses 
 The following sequence diagram shows how the `deduct` operation works when the user enters the command `deduct 1 /v 150.00 /r absence`, which means adding a deduction of $150.00 for the employee with index 1, with the reason of `absence`:
 
 ![AddDeductionSequenceDiagram](images/AddDeductionSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>DeductCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 After `DeductCommandParser` class parses the user input, the `DeductCommand` class will be called to execute the command. The `DeductCommand` class will then call the `Model` component to obtain the list of employees, and then obtain the `Person` object to add deduction for.
 
@@ -330,6 +337,9 @@ The following sequence diagram shows how the `BenefitCommandParser` class parses
 
 ![ParseBenefitCommandSequenceDiagram](images/ParseBenefitCommandSequenceDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>BenefitCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
 When parsing the input, all relevant parameters are extracted according to their respective prefixes, and put into an `ArgumentMultimap`.
 The `value` and `reason` are parsed by `ParserUtil` class first, and a `Benefit` object is created with the parsed `value` and `reason`.
 If the parameters are not in the correct format, a `ParseException` will be thrown.
@@ -357,6 +367,9 @@ The following sequence diagram shows how the `BenefitCommandParser` class parses
 The following sequence diagram shows how the `benefit` operation works when the user enters the command `benefit 1 /v 150.00 /r bonus`, which means adding a benefit of $150.00 for the employee with index 1, with the reason of `bonus`:
 
 ![AddBenefitSequenceDiagram2](images/AddBenefitSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>BenefitCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 After `BenefitCommandParser` class parses the user input, the `BenefitCommand` class will be called to execute the command. The `BenefitCommand` class will then call the `Model` component to obtain the list of employees, and then obtain the `Person` object to add benefit for.
 
@@ -444,6 +457,9 @@ the command `payroll 1`, which means calculating the payroll for the employee wi
 
 ![PayrollCalculationSequenceDiagram](images/PayrollCalculationSequenceDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>PayrollCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
 After `PayrollCommandParser` class parses the user input, the PayrollCommand class will be called to execute the command. 
 The PayrollCommand class will then call the Model component to obtain the list of employees, and then obtain the Person object to calculate payroll for.
 
@@ -484,6 +500,9 @@ The following sequence diagram shows how the `PayslipCommandParser` class parses
 
 ![ParsePayslipCommandSequenceDiagram](images/ParsePayslipCommandSequenceDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>PayslipCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
 When parsing the input, all relevant parameters are extracted according to their respective prefixes, and put into an `ArgumentMultimap`.
 If the user provides a date in the form of `dd/mm/yyyy`, the date is parsed by `ParserUtil` class first, and a `LocalDate` object is created with the parsed date.
 If the date is not in the correct format, a `ParseException` will be thrown.
@@ -509,6 +528,9 @@ The following sequence diagram shows how the `PayslipCommandParser` class parses
 The following sequence diagram shows how the `payslip` operation works when the user enters the command `payslip 1 /t 09/10/2023`, which means generating a payslip for the employee with index 1, for the month of October 2020:
 
 ![PayslipSequenceDiagram](images/PayslipSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>PayslipCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 The following sequence diagram shows the referenced process of generating a payslip for an employee:
 
@@ -554,6 +576,9 @@ The following sequence diagram shows how the `addleave` operation works:
 
 ![AddLeaveSequenceDiagram](images/AddLeaveSequenceDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>AddLeaveCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
 After `AddLeaveCommandParser` class parses the user input, the `AddLeaveCommand` class will be called to execute the command. The `AddLeaveCommand` class will then call the `Model` component to obtain the list of employees, and then obtain the Person object to add leave for this employee, and store the leave as an arraylist in `AnnualLeave`.
 
 The following activity diagram summarises the process of adding leave for an employee:
@@ -591,6 +616,9 @@ The following sequence diagram shows how the `deleteleave` operation works:
 
 ![DeleteLeaveSequenceDiagram](images/DeleteLeaveSequenceDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>DeleteLeaveCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
 After `DeleteLeaveCommandParser` class parses the user input, the `DeleteLeaveCommand` class will be called to execute the command. The `DeleteLeaveCommand` class will then call the `Model` component to to obtain the list of employees, and then obtain the Person object to delete the leave from this employee, and update the arraylist of leave in `AnnualLeave`.
 
 The following activity diagram summarises the process of adding leave for an employee:
@@ -623,6 +651,9 @@ The following class diagram shows how the different classes interact with one an
 The following sequence diagram shows how the `viewleave` operation works:
 
 ![ViewLeaveSequenceDiagram](images/ViewLeaveSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>ViewLeaveCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 After parsing user input, the `ViewLeaveCommandParser` creates a `ViewLeaveCommand` and executes it. This command then interacts with the `Model` to fetch the list of employees. Subsequently, it generates a hashmap where each local date corresponds to a list of employees on leave. By querying this hashmap for the specified date, the command identifies employees on leave. Finally, it creates a `CommandResult` containing the names of employees on leave for the given date.
 
@@ -683,6 +714,9 @@ Sequence diagram is as shown below:
 
 ![Mark Sequence Diagram](images/MarkSequenceDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>MarkCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
 #### 2. Attendance Report feature
 
 The attendance reporting mechanism is dependent on the AttendanceStorage class. The AttendanceStorage is a collection of the Attendances of a Person. It implements the following operations:
@@ -699,6 +733,9 @@ Step 2. The `attendance` command calls `AttendanceCommand#reportByIndex()` of th
 
 Sequence diagram is as shown below:
 ![Mark Sequence Diagram](images/AttendanceSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for <code>AttendanceCommandParser</code> should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 
 #### Design considerations:
