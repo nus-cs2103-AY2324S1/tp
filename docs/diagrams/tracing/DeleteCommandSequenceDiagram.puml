@@ -4,7 +4,7 @@ skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
 Participant ":DeleteCommand" as dc LOGIC_COLOR
-Participant ":CommandResult" as cr LOGIC_COLOR
+Participant "result:CommandResult" as cr LOGIC_COLOR
 end box
 box Model MODEL_COLOR_T1
 Participant "model:Model" as m MODEL_COLOR
@@ -16,7 +16,7 @@ m --> dc --: lastShownList
 dc -> m ++: deleteJob(jobToDelete)
 deactivate m
 create cr
-dc -> cr ++: CommandResult()
-cr --> dc --: result
+dc -> cr ++
+cr --> dc --:
 dc -->[ --: result
 @enduml
