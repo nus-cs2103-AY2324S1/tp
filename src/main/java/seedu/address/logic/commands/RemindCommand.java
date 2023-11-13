@@ -20,8 +20,8 @@ public class RemindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Reminds the user of the upcoming birthdays and events in the next n number of days. "
-            + "If no index is given, the default number of days is 7.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "If no NUM_OF_DAYS is given, the default number of days is 7.\n"
+            + "Parameters: NUM_OF_DAYS (must be a positive integer and maximum of 999999999)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
 

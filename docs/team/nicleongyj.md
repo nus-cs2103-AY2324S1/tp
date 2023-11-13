@@ -3,40 +3,52 @@ layout: page
 title: Leong Yu Jun Nicholas's Project Portfolio Page
 ---
 
-### Project: Forget-Me-Not: Fumblelog
+### Project: Fumblelog
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+FumbleLog is a desktop productivity application used for managing contacts and events. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
-**Given below are my contributions to the project:**
+## Contributions to the project
 
-* **New Feature**: 
+### Code contribution
+* [Link to RepoSense](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=nicleongyj&breakdown=true)
 
-    * To be added soon
+### Enhancements Implemented
+* Added `Birthday` field to `Person` class.
+* Updated `add` and `edit` command to accept birthday argument.
+* Added new `remind` command to display all events and birthdays in upcoming week.
+* Updated `remind` to accept optional arguments to specify number of days to look ahead.
+* Added predicate classes to filter events and birthdays by date.
+* Added test cases for birthday, remind, predicates, and parser.
 
-* **Code contributed**: [nicleongyj](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=nicleongyj&breakdown=true)
+### Contributions to the Developer Guide (DG)
+* Added implementation details for remind command.
+* Added sequence diagram for remind command.
+* Updated project target user profile and value proposition.
+* Updated project user stories.
 
-* **Project management**:
-  * *{To be added}*
+### Contributions to the User Guide (UG)
+* Added documentation for
+  * `remind` command, where users can be reminded of upcoming events and birthdays.
+* Added table to navigate users of different experiences to relevant parts of the user guide.
+* Updated Quick Start section to include detailed information targeted at newer users.
+* Added a orientation guide to the GUI of FumbleLog.
+* Added a step-by-step tutorial to orientate new users through FumbleLog commands.
+* Updated each FumbleLog command to include parameter tables.
+* Provided cosmetic enhancements to the user guide.
+* Added images for the user guide.
 
-* **Enhancements to existing features**:
-  * *{To be added}*
 
-* **Documentation**:
-  * User Guide:
-    * Added documentation for the features:
-      * `remind`
-    * Did cosmetic tweaks to existing documentation of features:
-      * `quick start`
-    * Added UI screenshots throughout the user guide
-  * Developer Guide:
-    * Added documentation for the features:
-      * `remind`
+### Contributions to team-based tasks
+* Conducted code reviews for PRs.
+* Provided feedback for PRs.
+* Helped increase code coverage by adding test cases.
+* Created issues to track bugs and enhancements.
+* Helped with the documentation process.
+* Coordinated sprints and code review.
+* Fixed bugs and issues.
 
-* **Community**:
-  * PRs reviewed (with non-trivial review comments): *{To be added}*
-  * Contributed to forum discussions: *{To be added}*
-  * Reported bugs and suggestions for other teams in the class: *{To be added}*
-  * Some parts of the history feature I added was adopted by several other class mates: *{To be added}*
+### Contributions beyond the project team
+* Good moral support.
 
-* **Tools**:
-  * *{To be added}*
+
+
