@@ -23,7 +23,7 @@ Given below are my contributions to the project.
   * What it does: Caution a user if he intends to schedule a new appointment when there is already one that is not yet complete.
   * Justification: Most people only arrange one appointment at a time. So the design prevents multiple appointments and also serves as a reminder of a previously set appointment.
   * Highlights: This feature causes the logic flow of the method to change if there is currently an appointment and results in breaking the execution into 2, getting a response from the user before deciding whether to continue the execution of the program.
-  * Credits: The feature was implemented by referencing the help function from AB3. However, the main logic of getting the original appointment and displaying it for the user as well as splitting the execution of the function was done by myself.
+  * Credits: The feature was implemented by referencing the help function from AB3. However, the main logic of the function was done by myself.
  
 * **Code Contributed**: [RepoSense](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=jylow&breakdown=true)
 
