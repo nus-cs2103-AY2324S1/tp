@@ -33,7 +33,7 @@ Given below are my contributions to the project.
 * **Team tasks contributions**:
   * Set up the product website and did site-wide settings [\#51](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/51)
   * Reviewed PRs of team members and gave constructive feedback
-  * Structured the UG and DG to ensure consistency across the team members [\#200](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/200), [\#219](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/219), [\#222](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/222)
+  * Structured and formatted the UG and DG to ensure consistency across the team members [\#200](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/200), [\#222](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/222), [\#224](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/224)
   * Fixed bugs of other features [\#144](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/144), [\#194](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/194)
   * Product-wide modifications, like GUI [\#140](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/140)
   * Conducted post-PE-D bugs triage, classify bugs and close duplicate and irrelevant issues
@@ -41,15 +41,31 @@ Given below are my contributions to the project.
 
 
 * **Documentation**:
-  * User Guide [\#154](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/154), [\#200](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/200):
+  * User Guide [\#154](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/154), [\#200](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/200), [\#219](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/219), [\#222](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/222)
     * Product introduction and overview
     * How to use the guide
     * Features: `edit`, `tags`, `find`, `addm` 
     * Command Summary
     * Glossary
     * Overall structure and formatting
-  * Developer Guide [\#203](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/203), [\#208](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/208):
+  * Developer Guide [\#203](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/203), [\#208](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/208), [\#224](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/224), [\#227](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/227), :
     * Features: `tags`, `find`, `addm`
     * Added two activity diagrams (`find` and `addm`), one sequence diagram (`find`), and one class diagram (`tags`)
     * Use cases
     * User stories
+    * Planned enhancements
+
+<div style="page-break-after: always;"></div>
+
+* **Contributions to the User Guide (Extracts):**
+
+![UG3.png](tanyyyming-contributions%2FUG3.png)
+
+<div style="page-break-after: always;"></div>
+
+* **Contributions to the Developer Guide (Extracts):**
+
+<img src="tanyyyming-contributions%2FDG1.png" alt="DG1.png" width="700">
+
+![FindMusicianActivityDiagram.png](..%2Fimages%2FFindMusicianActivityDiagram.png)
+![FindMusicianSequenceDiagram.png](..%2Fimages%2FFindMusicianSequenceDiagram.png)

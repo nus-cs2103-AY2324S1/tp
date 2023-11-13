@@ -761,3 +761,5 @@ Given below are the planned enhancements for our project.
 4. The current sample data upon initial launch of the app is not representative of the use cases of our app as (no band data, musicians have no instruments and genres). We plan to change the sample data to be more representative and less confusing to the user.
 
 5. The current `findb` command is a bit confusing because its main use case is to list all members in a specific band. It has little relevance to finding bands containing a specific keyword. We plan to rename this command to `showmembers` to make it more intuitive to the user.
+
+6. The application currently allows unlimited input length for the name and tag of musicians and bands, e.g. name, email. As a result, the GUI truncates the unusually long input. We plan to limit the length of fields to 100 characters to prevent the UI from breaking. 
