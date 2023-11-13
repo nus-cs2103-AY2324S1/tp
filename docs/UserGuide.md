@@ -71,10 +71,9 @@ We're here to make your experience as user-friendly as possible. Let's get start
 **Tip**: Create a new folder named `MedBook` for easy organization.
 
 </box>
-
-- Move `medbook.jar` into the folder as shown below.
-  - **Windows Users**:![Ui](images/WinUserDir.png)
-  - **Mac Users**:![Ui](images/MacUserDir.png)
+   - Move `medbook.jar` into the folder as shown below.
+     - **Windows Users**:![Ui](images/WinUserDir.png)
+     - **Mac Users**:![Ui](images/MacUserDir.png)
 
 4. **Accessing Terminal**:
 
@@ -362,6 +361,7 @@ Screenshots:
 
 ![AddAppointment Screenshots](images/screenshots/addAppointment.png)
 ![AddAppointment Screenshots](images/screenshots/addAppointment%20-%20after.png)
+![AddAppointment Screenshots](images/screenshots/viewAppointment.png)
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
@@ -388,6 +388,7 @@ Examples:
 Screenshots:
 
 ![View Screenshots](images/screenshots/view.png)
+![View Screenshots](images/screenshots/view%20-%20after.png)
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
@@ -488,7 +489,7 @@ Format: `search KEYWORD [MOREKEYWORDS]...`
 
 **Tip**: Maximize the efficiency of the `search` command to quickly locate patients. It's perfect for filtering patient lists - for instance, identifying patients with specific allergies.
 
- </box>
+</box>
 
 Examples:
 
@@ -561,8 +562,8 @@ Example:
 
 Screenshots:
 
-![Delete Screenshots](images/screenshots/delete.png)
-![Delete Screenshots](images/screenshots/delete%20-%20after.png)
+![Delete Screenshots](images/screenshots/delete.jpg)
+![Delete Screenshots](images/screenshots/delete%20-%20after.jpg)
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
