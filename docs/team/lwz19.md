@@ -39,12 +39,12 @@ Given below are my contributions to the project.
     * Handled image formatting of the User Guide.
     * Added some FAQ.
   * Developer Guide:
-      *  Added implementation details of the `lookup` and `theme` command.
+    * Added implementation details of the `lookup` and `theme` command.
     * Edited the implementation details in `Class Details`.
     * Added some use cases.
     * Added some manual testing.
     * Added some NFRs.
-    *  Added  some planned enhancements.
+    * Added some planned enhancements.
     * Edited AB-3 UML diagrams to fit with our implementation.
 
 * **Team-based tasks**:
