@@ -576,11 +576,21 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAGNAME]…​ [
   specifying any tags after it.
 * There is no current way to keep the existing tags and add new tags to the applicant. You will have to re-tag the applicant with the existing tags and the new tags.
 
+<box type="warning" seamless>
+
+**Caution:**
+If you tag a person with a tag that has not been categorised yet, and then you categorised it as the  `assessment` category, you need to re-tag the person with the same tag name again.
+This is because the tag is not considered an `assessment` tag  until you re-tag the person with the same tag name again.
+
+</box>
+
+
 **Notes on editing the score of the specified applicant for `sc/TAGNAME SCORE`**:
 * The `TAG` in `sc/TAG SCORE` must be a tag of the category `assessment`. You cannot use the `sc/TAG SCORE` field for tags that are not of the `assessment` category.
 * The `sc/TAG SCORE` field can only be used after the `t/TAG` field is used if the tag has not been created  or the `TAG` already exist on the applicant.
 * The `SCORE` in `sc/TAG SCORE` is non-negative, that is `SCORE` must be more than or equal to 0.
 * To clear a tag's score, just re-tag it with the same tag name, but without using the `sc/TAG SCORE` field.
+
 
 
 Notes on rules for `edit` command involving tags with categories for `t/[CATEGORY] TAGNAME`:
@@ -629,19 +639,22 @@ An example of the `edit` command being successfully executed to clear a tags and
 
 **Error Handling Table for `edit` command:**
 
-| Reason for Error                              | Error Message                                                                | Remedy / Suggested course of action                                                                                                                                 |
-|-----------------------------------------------|------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Missing edit keyword: `edit`                  | Unknown command                                                              | Follow the command format of `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAGNAME]…​ [sc/TAGNAME SCORE]` closely                                         |
-| Missing Index                                 | Invalid command format!                                                      | Ensure that the index is filled up.                                                                                                                                 |
-| Invalid Index                                 | The person index provided is invalid                                         | Ensure that the index is valid. That is it is a number that is on the displayed applicant list.                                                                     |
-| Missing at least one of the field | At least one field to edit must be provided.                                 | Ensure that at least one of the field is filled up and to be changed.                                                                                               |
-| Duplicate name                                | This person already exists in the address book                               | Ensure that the name of the applicant is unique. That is you cannot add the same name twice. Use some form of extra identification like a number                    |
-| Invalid phone number                          | Phone numbers should only contain numbers, and it should be at least 3 digits long | Ensure that the phone number only contains number and should be at least 3 digits long                                                                              |
-| Invalid email                                 | Emails should be of the format local-part@domain and adhere to the following constraints: | Ensure that the prefix and domain of the email is correct following the constraints stated by the error                                                             |                                                                                                                                                
-| Invalid tag name                              | Tag names should only contain alphanumeric characters and should not be blank | Ensure that the tag name only contains alphanumeric characters and should not be blank                                                                              |
-| Multiple prefixes of the same type being used | Multiple values specified for the following single-valued field(s): `prefix/` | Remove the duplicate prefix. The command should only have 1 of every prefix except for `t/`                                                                          |
-| Missing score for tag                         | Invalid score, score must be non-negative integer.                                                        | Ensure that the score is filled up and has a space from the `TAGNAME`.                                                                                              | 
-| Invalid tag to attach score | Invalid score tag, tag must a tag of the category assessment and must exist on the applicant | Ensure that the tag is of the category assessment and exist on the applicant. If its the wrong category, use `create`, if it is not tagged to the person use `edit` |
+| Reason for Error                                   | Error Message                                                                | Remedy / Suggested course of action                                                                                                                 |
+|----------------------------------------------------|------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| Missing edit keyword: `edit`                       | Unknown command                                                              | Follow the command format of `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAGNAME]…​ [sc/TAGNAME SCORE]` closely                         |
+| Missing Index                                      | Invalid command format!                                                      | Ensure that the index is filled up.                                                                                                                 |
+| Invalid Index                                      | The person index provided is invalid                                         | Ensure that the index is valid. That is it is a number that is on the displayed applicant list.                                                     |
+| Missing at least one of the field                  | At least one field to edit must be provided.                                 | Ensure that at least one of the field is filled up and to be changed.                                                                               |
+| Duplicate name                                     | This person already exists in the address book                               | Ensure that the name of the applicant is unique. That is you cannot add the same name twice. Use some form of extra identification like a number    |
+| Invalid phone number                               | Phone numbers should only contain numbers, and it should be at least 3 digits long | Ensure that the phone number only contains number and should be at least 3 digits long                                                              |
+| Invalid email                                      | Emails should be of the format local-part@domain and adhere to the following constraints: | Ensure that the prefix and domain of the email is correct following the constraints stated by the error                                             |                                                                                                                                                
+| Invalid tag name                                   | Tag names should only contain alphanumeric characters and should not be blank | Ensure that the tag name only contains alphanumeric characters and should not be blank                                                              |
+| Multiple prefixes of the same type being used      | Multiple values specified for the following single-valued field(s): `prefix/` | Remove the duplicate prefix. The command should only have 1 of every prefix except for `t/`                                                         |
+| Missing score for tag                              | Invalid score, score must be non-negative integer.                                                        | Ensure that the score is filled up and has a space from the `TAGNAME`.                                                                              | 
+| Invalid tag to attach score                        | Invalid score tag, tag must a tag of the category assessment and must exist on the applicant | Ensure that the tag is of the category assessment and exist on the applicant. If its the wrong category, use `create`, if it is not tagged to the person use `edit` |
+| Tag not yet updated  | The tag does not exist, cannot attach a score to it | Ensure that the tag is updated first by doing `edit INDEX t/TAGNAME` before attaching a score to it.                                                | 
+| Tag ambiguity                                      | Multiple tags exists with the same name! Specify the category of the tag when adding it to a person e.g. edit 1 t/experience 3 | Ensure that if there is a tag name with multiple categories, you specify the category when in the prefix using `t/CATEGORY TAGNAME`                 |
+
 
 <box type="tip" seamless>
 
