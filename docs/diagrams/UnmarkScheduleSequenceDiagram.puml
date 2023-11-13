@@ -57,9 +57,7 @@ return e
 UnmarkScheduleCommand -> Model ++ : setSchedule(scheduleToEdit, e)
 return
 UnmarkScheduleCommand -> Model ++ : updateFilteredScheduleList()
-deactivate Model
-
-deactivate Model
+return
 
 create CommandResult
 UnmarkScheduleCommand -> CommandResult

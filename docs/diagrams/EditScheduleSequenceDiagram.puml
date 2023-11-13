@@ -80,9 +80,7 @@ end
 EditScheduleCommand -> Model ++ : setSchedule(scheduleToEdit, e)
 return
 EditScheduleCommand -> Model ++ : updateFilteredScheduleList()
-deactivate Model
-
-deactivate Model
+return
 
 create CommandResult
 EditScheduleCommand -> CommandResult
