@@ -411,6 +411,18 @@ The list of valid statuses is stored as an `Enumeration` object for the followin
 
 `Status` is implemented and utilized in a similar manner to [`LastContactedTime`](#keeping-track-of-last-meeting-with-contact).
 
+### Saving data
+
+- The address book is saved in a JSON file after every command execution. The default path for this file is `/data/outbook.json`, found in the same directly as the application JAR file.
+
+- The JSON file should not be directly edited. Incorrectly editing the file will result in OutBook not being able to load the address book and data will be lost. If directly editing the file is deemed necessary, create a backup before doing so.
+
+- Under normal operation through the application, the JSON file will not become corrupted. If for any reason the file does become corrupted, OutBook will not be able to load the data and will display a blank address book. 
+
+   - If data recovery is to be attempted, do not execute any commands. Exit the application. Try to edit the JSON file such that it adheres to the parameters for each field. If data recovery is successful, OutBook will load the address book on boot.
+
+   - If not, the data will be lost. The address book has can only be restored by executing commands through the application. 
+
 <div style="page-break-after: always;"></div>
 
 ## **Planned Enhancements**
@@ -871,18 +883,3 @@ Repeat the contact test cases with meeting commands
     1. Use `mark 1` to mark the first meeting as completed <br>
        Expected: Meeting will be shown as completed and the attendees that are in the meeting will have their last contacted updated to the end time of the meeting.
 
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. If you have added, edited or deleted anything, there should be a new folder that appears in the folder that you placed OutBook.jar in.
-   2. Open file and open the `outbook.json` file. In the persons section, delete any line that has name, phone, email, etc...
-   3. Run the program again with `java -jar OutBook.jar` <br>
-   Expected: You will open up to a blank OutBook. At this point if you were to add, edit or delete anything, the data you had previously will be deleted and saved over with the new data you just added, losing all you data.
-
-2. Recovering from missing/corrupted data files
-
-   1. After completed the test above, add back the field that was deleted in step 2. If you do not know what was deleted, place a placeholder for that specific field.
-      1. All persons will have a name, phone, email, lastContactedTime, status, remark and tags.
-      2. Meetings have a similar structure with title, location, start, end, attendees, tags, status.
-   2. Run the program again, and you will see the rest of the data with the placeholder that you put.
