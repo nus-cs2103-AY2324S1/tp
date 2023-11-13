@@ -969,9 +969,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The Application needs to have proper documentation and user guide so that users can understand how to use the application.
-5.  The Application should allow users to create and customize their profiles, including preferences for shortcuts, views, and layouts, to enhance the user experience.
-6.  The Application should be able to handle multiple windows at the same time.
-7.  The Application should comply with the specific policies and regulations of the university regarding data storage, security, and access control.
+5.  The Application should allow users to customize the color scheme to enhance the user experience.
 
 ### Glossary
 
@@ -1345,3 +1343,4 @@ Testers are expected to do more *exploratory* testing.
 4. Class Participation is currently limited to being true or false for each tutorial session. We plan to allow Class Participation to be an enum level instead, such as `NONE`, `MINIMAL`, `SUFFICIENT`, `ACTIVE`, `VERY_ACTIVE` etc. to allow for better representation of student's efforts in class.
 5. Users currently can only search for basic student information. We plan to allow users to search based on class information in the future. For example, users can search for students with a certain grade or attendance percentage.
 6. The lookup command currently does not check for invalid fields. We plan to add field validation to the lookup command in the future.
+7. The comment command doesn't support handling long strings (exact length depends on the size of the user's screen) as it might get cut off. We plan to allow users to add comments of any length that will not get cut off in the future.
