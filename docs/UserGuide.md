@@ -18,7 +18,7 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 - [Using this guide](#using-this-guide)
 - [Useful Notations and Glossary](#useful-notations-and-glossary)
 - [Quick Start](#quick-start)
-- [Navigating the GUI](#navigating-the-graphical-user-interface--gui-)
+- [Navigating the GUI](#navigating-the-gui)
 - [Features](#features)
   - [General Commands](#general-commands)
       - [Viewing Help](#viewing-help--help): `help`
@@ -144,9 +144,9 @@ Performing these instructions may result in non-deterministic behaviour of data 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Navigating the Graphical User Interface (GUI)
+## Navigating the GUI
 
-HouR comes with a GUI to allow for nice visual feedback for our users. Here is a quick run-through of the different sections of our GUI, as well as some notes regarding the use of the GUI.
+HouR comes with a Graphical User Interface (GUI) to allow for nice visual feedback for our users. Here is a quick run-through of the different sections of our GUI, as well as some notes regarding the use of the GUI.
 
 ### Quick Orientation
 
@@ -323,7 +323,7 @@ Format: `list`
 
 ![list success](images/ug-pics/list.png)
 
-### Finding employees: `find`
+### Finding employees : `find`
 
 Finds employees whose name, position, department, phone number, email, or ID contain any of the given keywords.
 
