@@ -33,10 +33,11 @@ Given below are my contributions to the project.
 * **Team tasks contributions**:
   * Set up the product website and did site-wide settings [\#51](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/51)
   * Reviewed PRs of team members and gave constructive feedback
-  * Structured the UG and DG to ensure consistency across the team members [\#200](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/200)
-  * Fix bugs of other features [\#144](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/144), [\#194](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/194)
+  * Structured the UG and DG to ensure consistency across the team members [\#200](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/200), [\#219](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/219), [\#222](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/222)
+  * Fixed bugs of other features [\#144](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/144), [\#194](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/194)
   * Product-wide modifications, like GUI [\#140](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/140)
   * Conducted post-PE-D bugs triage, classify bugs and close duplicate and irrelevant issues
+  * Managed the aggregation and distribution of tasks among team members
 
 
 * **Documentation**:
@@ -46,8 +47,9 @@ Given below are my contributions to the project.
     * Features: `edit`, `tags`, `find`, `addm` 
     * Command Summary
     * Glossary
+    * Overall structure and formatting
   * Developer Guide [\#203](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/203), [\#208](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/208):
     * Features: `tags`, `find`, `addm`
-    * Add two activity diagrams (`find` and `addm`), one sequence diagram (`find`), and one class diagram (`tags`)
+    * Added two activity diagrams (`find` and `addm`), one sequence diagram (`find`), and one class diagram (`tags`)
     * Use cases
     * User stories

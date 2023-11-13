@@ -423,9 +423,10 @@ It is important to maintain the unique constraint of name of bands at all times.
 
 * has a need to manage a significant number of musician contacts
 * has a need to categorise musicians by genre or instrument
+* has a need to group musicians into bands to perform his/her music
 * prefer desktop apps over other types
-* can type fast
 * prefers typing to mouse interactions
+* can type fast
 * is reasonably comfortable using CLI apps
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app, tracking relevant information
@@ -436,29 +437,25 @@ about musicians to potentially work with
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                          | I want to …​                                     | So that I can…​                                                          |
-|--------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------------------------------|
-| `* * *` | producer                                         | see usage instructions                           | refer to instructions when I forget how to use the App                   |
-| `* * *` | producer                                         | add a new musician                               | contact them to form a band                                              |
-| `* * *` | producer                                         | delete a record for one musician                 | remove entries that I no longer need                                     |
-| `* * *` | producer                                         | find a musician by name                          | locate details of musicians without having to go through the entire list |
-| `* *`  | producer                                         | tag a musician with an instrument they play      | understand their potential role in a band                                |
-| `* *`  | producer                                         | create a band                                    |                                                                          |
-| `* *`  | producer                                         | add a musician to a band                         | group musicians together                                                 |
-| `* *`  | producer                                         | view the members of a specific band              | keep track of the band members in each band                              |
-| `* *`  | producer                                         | delete a band                                    |                                                                          |
-| `* *`  | producer                                         | tag a musician with the genre they specialise in | find musicians suiting the song I am making                              |
-| `* *`  | producer                                         | edit a record for a musician                     | modify or update the information for a musician                          |
-| `* *`  | producer                                         | view all records of musicians I have stored      | easily see all the information I have                                    |
-| `* *`  | producer                                         | hide private contact details                     | minimize chance of someone else seeing them by accident                  |
-| `*`    | producer                                         | tag a band with the genre it specialises in      | find the band suited to performing the song I wish                       |
-| `*`    | producer who has worked with a musician before   | give a musician a rating                         | keep track of my past experience with them                               |
-| `*`    | producer who has worked with a musician before   | give a musician a rating                         | keep track of my past experience with them                               |
-| `*`    | producer who is actively producing music         | check the availability of a musician             | avoid musicians with clashing schedules                                  |
-| `*`    | producer with many musicians in the address book | sort musicians by name                           | locate a musician easily                                                 |
-
-
-*{More to be added}*
+| Priority | As a …​                                          | I want to …​                                    | So that I can…​                                                          |
+|--------|--------------------------------------------------|-------------------------------------------------|--------------------------------------------------------------------------|
+| `* * *` | producer                                         | see usage instructions                          | refer to instructions when I forget how to use the App                   |
+| `* * *` | producer                                         | add a new musician                              | contact them to form a band                                              |
+| `* * *` | producer                                         | delete a record for one musician                | remove entries that I no longer need                                     |
+| `* * *` | producer                                         | tag a musician with the instrument they play    | understand their potential role in a band                                |
+| `* * *` | producer                                         | tag a musician with the genre they specialise in | find musicians suiting the song I am making                              |
+| `* * *` | producer                                         | find a musician by name, instrument, and genre  | locate details of musicians without having to go through the entire list |
+| `* * *` | producer                                         | create a band                                   | form hypothetical bands that could potentially perform my music          |
+| `* * *` | producer                                         | add musicians to a band                         | experiment with different makeups of the band                            |
+| `* * *` | producer                                         | view the members of a specific band             | keep track of the band members in each band                              |
+| `* *`  | producer                                         | delete a band                                   |                                                                          |
+| `* *`  | producer                                         | edit a record for a musician                    | modify or update the information for a musician                          |
+| `* *`  | producer                                         | view all records of musicians I have stored     | easily see all the information I have                                    |
+| `*`    | producer                                         | hide private contact details                    | minimize chance of someone else seeing them by accident                  |
+| `*`    | producer                                         | tag a band with the genre it specialises in     | find the band suited to performing the song I wish                       |
+| `*`    | producer who has worked with a musician before   | give a musician a rating                        | keep track of my past experience with them                               |
+| `*`    | producer with many musicians in the address book | sort musicians by rating                        | find the musicians I enjoy working with easily                           |
+| `*`    | producer who is actively producing music         | check the availability of a musician            | avoid musicians with clashing schedules                                  |
 
 ### Use cases
 
@@ -468,29 +465,64 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User enters the musician details
-2. User requests to create a new contact for this musician
-3. System creates and stores the new contact
-
-   Use case ends.
+1. User enters the musician details.
+2. User requests to create a new contact for this musician.
+3. System creates and stores the new contact.
+   
+    Use case ends.
 
 **Extensions**
 
-* 2a. This musician is already stored in the system
-* 2a1. System shows a message showing that the contact is already stored.
+* 2a. This musician is already stored in the system.
 
-  Use case ends.
+  * 2a1. System shows a message showing that the contact is already stored.
+    
+    Use case ends.
+  
+* 2b. User enters invalid value for some fields, e.g. email, phone number.
 
+  * 2b1. System shows a message showing the correct input format.
+    
+    Use case ends.
 
+**Use case: UC02 - Edit a musician**
+
+**MSS**
+
+1. User requests to list musicians.
+2. BandConnect++ shows a list of musicians.
+3. User requests to edit a specific musician in the list.
+4. BandConnect++ edits the musician.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    Use case ends.
+
+* 3a. The given index is invalid.
+
+  * 3a1. BandConnect++ shows an error message.
+        
+    Use case ends.
+
+* 3b. User enters invalid value for some fields, e.g. email, phone number.
+
+  * 3b1. System shows a message showing the correct input format.
+        
+    Use case ends.
+  
 
 **Use case: UC03 - Delete a musician**
 
 **MSS**
 
-1.  User requests to list musicians
-2.  BandConnect++ shows a list of musicians
-3.  User requests to delete a specific musician in the list
-4.  BandConnect++ deletes the musician
+1.  User requests to list musicians.
+2.  BandConnect++ shows a list of musicians.
+3.  User requests to delete a specific musician in the list.
+4.  BandConnect++ deletes the musician.
 
     Use case ends.
 
@@ -498,115 +530,82 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The list is empty.
 
-  Use case ends.
+    Use case ends.
 
 * 3a. The given index is invalid.
 
     * 3a1. BandConnect++ shows an error message.
 
-      Use case resumes at step 2.
+      Use case ends.
 
-**Use case: UC04 - Tag a musician with the instrument they play**
+
+**Use case: UC04 - Find a musician based on their name, tag, instrument, and genre**
 
 **MSS**
 
-1.  User requests to list musicians
-2.  BandConnect++ shows a list of musicians
-3.  User tags a specific musician with the instrument they play
-4.  BandConnect++ tags the musician appropriately
+1.  User requests to find a musician with keywords.
+2.  BandConnect++ shows a list of musicians that matches the keyword.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. User enters invalid value for some fields, e.g. name, instrument, genre.
+    
+    * 1a1. System shows a message showing the correct input format.
+    
+      Use case ends.
 
-  Use case ends.
-
-* 3a. BandConnect++ detects an error in the entered data.
-
-    * 3a1. BandConnect++ shows an error message.
-
-      Use case resumes at step 2.
-
-
-**Use case: UC05 - Tag a musician with the genre(s) he/she specialises in**
-
-**MSS**
-
-1.  User requests to list musicians
-2.  BandConnect++ shows a list of musicians
-3.  User tags a specific musician with one or more genres
-4.  BandConnect++ tags the musician appropriately
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. BandConnect++ detects an empty genre tag or no genre tag.
-
-    * 3a1. BandConnect++ shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: UC06 - Find a musician based on their name**
-
-**MSS**
-
-1.  User requests to find a musician with a keyword
-2.  BandConnect++ shows a list of musicians that matches the keyword
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
 
 **Use case: UC07 - Create a band**
 
 **MSS**
 
-1. User enters the band details
-2. User requests to create a new band with the specified name
-3. System creates and stores the new band
+1. User enters the band details.
+2. User requests to create a new band with the specified name.
+3. System creates and stores the new band.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. This band is already stored in the system
-* 2a1. System shows a message showing that the contact is already stored.
+* 2a. This band is already stored in the system.
 
-* 2b. User enters input wrongly
-* 2b1. System shows a message showing the proper input format.
+  * 2a1. System shows a message showing that the contact is already stored.
+        
+    Use case ends.
 
-  Use case ends.
+* 2b. User enters invalid value for some fields, e.g. name, genre.
+
+    * 2b1. System shows a message showing the correct input format.
   
-**Use case: UC08 - Add a musician to a band**
+      Use case ends.
+  
+
+**Use case: UC08 - Add musicians to a band**
 
 **MSS**
 
-1. User enters the band details and musician details
-2. User requests to add the specified musician to the band
-3. BandConnect++ adds the musician to the band
+1. User enters the band details and musician details.
+2. User requests to add the specified musicians to the band.
+3. BandConnect++ adds the musician to the band.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The musician specified is already part of the band specified
-* 2a1. System shows a message showing that the musician is already part of the band.
+* 2a. The musician specified is already part of the band specified.
 
-* 2b. User enters input wrongly
-* 2b1. System shows a message showing the proper input format.
+  * 2a1. System shows a message showing that the musician is already part of the band.
 
-  Use case ends.
+    Use case ends.
+
+* 2b. User enters more than one band to add the musician to.
+
+    * 2b1. System shows a message showing that the musicians can only be added to one band at a time.
+    
+    Use case ends.
+
 
 **Use case: UC09 - Delete band**
 
@@ -621,9 +620,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. User enters input wrongly
-* 2a1. System shows a message showing the proper input format.
 
-  Use case ends.
+  * 2a1. System shows a message showing the proper input format.
+
+    Use case ends.
+
 
 **Use case: UC10 - View all musicians inside a band**
 
@@ -638,9 +639,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. User enters input wrongly
-* 2a1. System shows a message showing the proper input format.
 
-  Use case ends.
+  * 2a1. System shows a message showing the proper input format.
+
+    Use case ends.
+
 
 **Use case: UC11 - Remove a musician from a band**
 
@@ -655,20 +658,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. User enters input wrongly
-* 2a1. System shows a message showing the proper input format.
 
-  Use case ends.
+  * 2a1. System shows a message showing the proper input format.
 
-*{More to be added}*
+    Use case ends.
 
 
 ### Non-Functional Requirements
 
 1.  Should be able to hold up to 1000 musician contacts without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. The GUI should be intuitive enough for musicians who are not IT-savvy.
-5. The response to any use action should become visible within 5 seconds.
-6. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+1.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks fast using text commands.
+1. The GUI should be intuitive enough for musicians who are not IT-savvy.
+1. The response to any use action should become visible within 1 second.
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 
 ### Glossary
 
