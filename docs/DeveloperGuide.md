@@ -1331,16 +1331,22 @@ testers are expected to do more *exploratory* testing.
 ### Viewing statistics of fosterers
 1. Viewing statistics of available fosterers
    1. Prerequisites: List all fosterers using the list or find command. At least 1 fosterer in the list.
+   
    1. Test case: `stats avail`<br>
       Expected: Availability statistics shown.
+   
    1. Test case: `stats <multiple whitespaces> avail`<br>
       Expected: Similar to previous.
+
    1. Test case: `stats availl avail`<br>
       Expected: Invalid command, error details shown in status message.
+
    1. Test case: `stats avail list`<br>
       Expected:  Availability statistics shown. `stats` commands ignore extraneous parameters after the valid command is detected.
+
    1. Test case: `stats avail current`<br>
       Expected: Only availability statistics shown. `stats` commands will only display the first valid statistic field detected (ie. either `avail`, `current` or `housing`).
+
 2. Viewing statistics of current fosterers and housing types work similarly, replacing `avail` with `current` and `housing` respectively.
 
 
@@ -1350,43 +1356,56 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: At least one fosterer in the list, and the first fosterer has at least 2 tags.<br>
    1. Test case: `edit 1 p/99887776`<br>
       Expected: Fosterer 1's phone number successfully edited.<br>
+
    1. Test case: `edit 1 t/new`<br>
       Expected: Fosterer 1's existing tags are overwritten. The only tag is the `new` tag.<br>
+
    1. Test case: `edit 1 n/Ben Yeo  e/benyeo123@gmail.com`<br>
       Expected: Fosterer 1's name and email successfully edited.<br>
+
    1. Invalid edit commands to try: `edit n/Ben Yeo`, `edit x n/Ben Yeo` (where x is larger than the list size).<br>
    
 2. Opening the profile view for editing
    1. Prerequisites: At least one fosterer in the list, and the first fosterer has at least 2 tags.<br>
+
    1. Test case: `edit 1` or `view 1` <br>
       Expected: Profile view of fosterer 1 opens for editing.<br>
+
    1. Test case: `edit 1 list` or `edit` or `view` <br>
       Expected: Profile view does not open, error message shown.<br>
 
 3. Field jumping in profile view
    1. Prerequisites: The profile view of a fosterer is currently open. <br>
+
    1. Test case: `ph`<br>
       Expected: Cursor jumps to the Phone field for editing.<br>
+
    1. Test case: `type`<br>
       Expected: Cursor jumps to the Animal Type field for editing.<br>
 
 4. Editing details in profile view
    1. Availability = `NotAvailable`, Animal Name = `nil` Animal Type = `nil` <br>
       Expected on Enter: Valid fosterer.<br>
+
    1. Availability = `Available`, Animal Name = `nil` Animal Type = `nil`<br>
       Expected on Enter: Valid fosterer.<br>
+
    1. Availability = `NotAvailable`, Animal Name = `mew` Animal Type = `able.Cat`<br>
       Expected on Enter: Invalid fosterer, and error message shown.<br>
 
 ### Resetting the address book
 1. Resetting the Address Book
    1. Prerequisites: `reset` command must be entered first, before entering `reset confirm`.<br>
-   2. Test case: `reset` <br>
+
+   1. Test case: `reset` <br>
       Expected: Warning displayed of the function of the `reset` command and a prompt of entering `reset confirm` is displayed to continue executing the command.<br>
-   3. Test case: `reset confirm`<br>
+
+   1. Test case: `reset confirm`<br>
       Expected: A prompt to enter `reset` first followed by `reset confirm` to execute the command.<br>
-   4. Test case: `reset randomArg`<br>
+
+   1. Test case: `reset randomArg`<br>
       Expected: Warning displayed of the function of the `reset` command and a prompt of entering `reset confirm` is displayed to continue executing the command.<br>
-   5. Test case: `reset` followed by `reset confirm`<br>
+
+   1. Test case: `reset` followed by `reset confirm`<br>
       Expected: The Address Book is erased and a command success massage is displayed.<br>
         
