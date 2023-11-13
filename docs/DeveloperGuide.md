@@ -760,20 +760,25 @@ testers are expected to do more *exploratory* testing.
 1. Adding a tutee into the list.
 
    1. Prerequisites: None
+   
    2. Test case: `add n/Betsy Crowe p/92939402 e/betsycrowe@example.com a/Newgate Prison sb/Secondary 3 Physics d/mon b/1900 end/1930 pr/35.00`<br>
       Expected: The tutee is added into the bottom of the list. Details of the added tutee is shown in the status message.
 
 
+
 2. Adding a duplicate tutee into the list
 
+   1. Prerequisites: Completing the first test case for [Adding a tutee](#adding-a-tutee)
+   
+   2. Test case: `add n/Betsy Crowe p/92939402 e/betsycrowe@example.com a/Newgate Prison sb/Secondary 3 Physics d/mon b/1900 end/1930 pr/35.00`<br>
+      Expected: The error message _This tutee already exists_ should be displayed in the status message.
 
-    1. Prerequisites: Completing the first test case for [Adding a tutee](#adding-a-tutee) 
-    2. Test case: `add n/Betsy Crowe p/92939402 e/betsycrowe@example.com a/Newgate Prison sb/Secondary 3 Physics d/mon b/1900 end/1930 pr/35.00`<br>
-       Expected: The error message _This tutee already exists_ should be displayed in the status message.
 
 
 3. Adding a tutee that has clashing schedules.
+
    1. Prerequisites: Completing the first test case for [Adding a tutee](#adding-a-tutee)
+   
    2. Test case: `add n/Jason Antonius p/12345678 e/test@gmail.com a/PGPR Residences sb/CS1101S d/mon b/1900 end/1930 pr/20` <br>
       Expected: The error message _This date and time clashes with an existing schedule_ should be displayed in the status message.
  
@@ -798,18 +803,25 @@ testers are expected to do more *exploratory* testing.
 1. Editing a tutee while all tutees are being shown
 
    1. Prerequisites: Have the default tutee data and list all tutees using the `list` command.
+   
    2. Test case: `edit 2 n/Betsy Crower a/Betsy street, block 110, #03-02` <br>
       Expected: Tutee is successfully edited, and the details of the edited tutee is shown in the status message.
 
 
+
 2. Editing a tutee that causes duplicate tutees
+
    1. Prerequisites: Have the default tutee data and list all tutees using the `list` command.
+   
    2. Test case: `edit 2 n/Alex Yeoh p/87438807` <br>
       Expected: The error message _This tutee already exists_ should be displayed in the status message.
 
 
+
 3. Editing a tutee that causes clashing schedules.
+
    1. Prerequisites: Have the default tutee data and list all tutees using the `list` command.
+   
    2. Test case: `edit 2 d/Mon b/2000 end/2200` <br>
       Expected: The error message _This date clashes with an existing schedule_ should be displayed in the status message.
 
@@ -818,6 +830,7 @@ testers are expected to do more *exploratory* testing.
 1. Finding free time that results in no available timeslots
 
     1. Prerequisites: Have the default tutee data.
+   
     2. Test case: `freeTime d/Mon dur/30 b/2000 end/2100` <br>
        Expected: The result <br>
    _Here is your list of free time:_ <br>
@@ -825,9 +838,11 @@ testers are expected to do more *exploratory* testing.
    should be displayed in the status message.
 
 
+
 2. Finding free time that results in available timeslots
 
     1. Prerequisites: Have the default tutee data.
+   
     2. Test case: `freeTime d/Mon dur/30 b/1930 end/2130` <br>
        Expected: The result <br>
          _Here is your list of free time:_ <br>

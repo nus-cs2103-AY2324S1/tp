@@ -108,7 +108,6 @@ deactivate CommandResult
 EditCommand --> LogicManager : result
 deactivate EditCommand
 EditCommand -[hidden]-> LogicManager : result
-destroy EditCommand
 
 [<--LogicManager
 deactivate LogicManager

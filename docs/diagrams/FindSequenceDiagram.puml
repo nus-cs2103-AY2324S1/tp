@@ -86,6 +86,6 @@ deactivate CommandResult
 FindCommand --> LogicManager: result
 
 [<--LogicManager
-destroy FindCommand
+
 deactivate LogicManager
 @enduml
