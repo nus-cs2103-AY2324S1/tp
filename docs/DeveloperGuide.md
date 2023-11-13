@@ -105,11 +105,7 @@ e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All
 inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the
 visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
-are in the `src/main/resources/view` folder. For example, the layout of
-the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
-is specified
-in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -126,8 +122,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete NRIC")` API
-call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete NRIC")` API call as an example.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
@@ -136,10 +131,8 @@ call as an example.
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates
-   a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which
-   is executed by the `LogicManager`.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -149,12 +142,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a
-  placeholder for the specific command name e.g., `AddPatientCommandParser`) which uses the other classes shown above to parse
-  the user command and create a `XYZCommand` object (e.g., `AddPatientCommand`) which the `AddressBookParser` returns back as
-  a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddPatientCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
-  interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddPatientCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddPatientCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddPatientCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 
@@ -171,10 +160,8 @@ The `Model` component,
 * stores the currently 'selected' `Patient`, `Doctor` or `Appointment` objects (e.g., results of a search query) as a separate _filtered_ list which
   is exposed to outsiders as an unmodifiable `ObservableList<T>` (where T is a `Patient`, `Doctor` or `Appointment`) that can be 'observed' e.g. the UI can be bound to
   this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
-  a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
-  should make sense on their own without depending on other components)
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 
 ### Storage component
@@ -185,12 +172,9 @@ The `Model` component,
 
 The `Storage` component,
 
-* can save both address book data and user preference data in JSON format, and read them back into corresponding
-  objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
-  the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
-  that belong to the `Model`)
+* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
@@ -204,30 +188,25 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Add Patient/Doctor Feature
 
-This feature allows users to add patients or doctors to the address book. No duplicated person should be added. There
-are many fields for each patient/doctor which can be found in the user guide. The implementation for adding patient and doctors are similar, we just need to change the relevant command name from patient to doctor. For the below details, we will just patient when mentioning the commands.
+This feature allows users to add patients or doctors to the address book. No duplicated person should be added. There are many fields for each patient/doctor which can be found in the user guide. The implementation for adding patient and doctors are similar, we just need to change the relevant command name from patient to doctor. For the below details, we will just patient when mentioning the commands.
 
 #### Implementation
 
-Implementation of adding patients is similar to the original addCommand. The adding mechanism is facilitated by the
-AddressBook in the model.
+Implementation of adding patients is similar to the original addCommand. The adding mechanism is facilitated by the AddressBook in the model.
 
 Given below is an example usage scenario and how the add patient/doctor mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The AddressBook will be initialized with the initial
-address book state.
+Step 1. The user launches the application for the first time. The AddressBook will be initialized with the initial address book state.
 
 Step 2. The user types `add-patient` (or `add-doctor`) as command, with the appropriate arguments for the person, for example, `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 d/T0123456H c/pneumothorax b/O+`.
 
-Step 3. The `AddressBookParser` parses the arguments and determine the required command parser based on the first word
-of the arguments.
+Step 3. The `AddressBookParser` parses the arguments and determine the required command parser based on the first word of the arguments.
 
 Step 4. Then `addPatientCommandParser` parses the remaining arguments and creates an `AddPatientCommand` with the
 details of the patient given.
 
 <div markdown="block" class="alert alert-info">
-:information_source: **Note:** If the details of the person added does not match the correct format for any fields,
-there will be an error telling user that the attributes are in the wrong format.
+:information_source: **Note:** If the details of the person added does not match the correct format for any fields, there will be an error telling user that the attributes are in the wrong format.
 </div>
 
 Step 5. The `AddPatientCommand` then gets executed and calls the Model#addPatient() and the patient will be added to
@@ -295,7 +274,7 @@ in the GUI.
 
 The following sequence diagram shows how the add patient works:
 
-![EditPatientSequenceDiagram](images/EditPatientSequenceDiagram.png)
+![EditSequenceDiagram](images/EditSequenceDiagram.png)
 
 ### Design Considerations
 
@@ -469,7 +448,6 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
 
 
 
@@ -515,7 +493,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Hospital Staff                    | update patient's details            | information remains accurate                                           |
 | `* * *`  | Hospital Staff                    | update doctor's details             | information remains accurate                                           |
 | `* * *`  | Hospital Staff                    | find a patient/doctor by NRIC       | locate details of persons without having to go through the entire list |
-| `* * *`  | Hospital Staff                    | reassign patients to doctors/nurses | account for changes in the people treating the patients                |
 | `* *`    | Hospital Staff                    | hide private contact details        | minimize chance of someone else seeing them by accident                |
 | `*`      | Hospital Staff with many contacts | sort persons by name                | locate a person easily                                                 |
 | `*`      | Hospital Staff                    | undo previous command               | prevent mistakes                                                       |
@@ -524,21 +501,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified
-otherwise)
+(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+
 **Use case: UC1 - See Usage Instructions**
 
 **MSS**
 
 1. User requests for help.
 2. Medilink Contacts displays usage instructions.
-   Use case ends.
+
+    Use case ends.
 
 **Extensions**
 
 * 1a. Medilink Contacts detects error in command.
     * 1a1. Medilink Contacts prompts user to correct the format of the command.
-      Use case ends.
+      
+    Use case ends.
 
 **Use case: UC2 - Add Patient**
 
@@ -553,11 +532,13 @@ otherwise)
 
 * 1a. Medilink Contacts detects error in command.
     * 1a1. Medilink Contacts prompts user to correct the format of the command.
-      Use case ends.
+      
+  Use case ends.
 
 
 * 1b. Medilink Contacts detects duplicate patient entry by checking the NRIC.
     * 1b1. Medilink Contacts prompts user patient already exists.
+      
       Use case ends.
 
 **Use case: UC3 - Add Doctor**
@@ -573,11 +554,13 @@ otherwise)
 
 * 1a. Medilink Contacts detects error in command.
     * 1a1. Medilink Contacts prompts user to correct the format of the command.
+      
       Use case ends.
 
 
 * 1b. Medilink Contacts detects duplicate doctor entry by checking the NRIC.
     * 1b1. Medilink Contacts prompts user doctor already exists.
+      
       Use case ends.
 
 **Use case: UC4 - Delete a person**
@@ -609,22 +592,27 @@ otherwise)
 
 1. User requests to create a new appointment between a patient and doctor by specifying details of the appointment.
 2. Medilink Contacts creates a new appointment and adds it to the database.
-   Use case ends.
+   
+    Use case ends.
 
 **Extensions**
 
 * 1a. No patient matching the details specified is found.
     * 1a1. Medilink Contacts informs the user that the patient does not exist.
+      
       Use case ends.
 * 1b. No doctor matching the details specified is found.
     * 1b1. Medilink Contacts informs the user that the doctor does not exist.
+
       Use case ends.
 * 1c. The patient specified already has another appointment at the time.
   * 1c1. Medilink Contacts informs the user that the patient has a conflicting appointment.
+    
     Use case ends.
 * 1d. The doctor specified already has another appointment at the time.
   * 1d1. Medilink Contacts informs the user that the doctor has a conflicting appointment.
-        Use case ends.
+        
+    Use case ends.
 
 **Use case: UC6 - Edit a person**
 
@@ -667,7 +655,8 @@ otherwise)
 
 1. User inputs a query for a patient or doctor with an attribute.
 2. Medilink Contacts lists all patients or doctors with matching attribute.
-   Use case ends.
+   
+    Use case ends.
 
 **Extensions**
 
@@ -694,14 +683,14 @@ otherwise)
     * 4a1. User requests to redo last command.
     * 4a2. MediLink Contacts reverts to state where patient was deleted.
 
-  Use case ends.
+        Use case ends.
 
 * 4b. User wants to perform another undo when there are no further actions to be undone.
 
     * 4b1. User requests to undo again.
     * 4b2. Medilink Contacts shows an error message.
 
-  Use case ends.
+      Use case ends.
 
 ### Non-Functional Requirements
 
@@ -718,8 +707,55 @@ otherwise)
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **API**: Apllication programming interface
+* **CLI**: Command line interface, the place where users type their commands.
+* **GUI**: Graphical User interface, A visualisation tool for users to navigate the app.
 
 --------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancement**
+
+### Better Command error messages
+
+Currently, some error messages can be better phrased to help users identify the problems in their commands. For example, when deleting a patient with an invalid IC like S111, the error message is invalid format. However, showing that the IC is invalid may be more helpful
+
+### Allow Name to take more types of inputs
+
+Currently, when adding or editing a new patient or doctor, the input for name only accepts Alphanumeric characters. However it may be an issue for people with legal names that include "s/o someone", "Ah-Ming". Hence, we plan to loosen the checks for name input and allow the system to take in more special characters like "/,-".
+
+### Make Find Command not case-sensitive
+
+Currently, our find-appt command used to find appointment only accepts capitalised letters for the NRIC input. However, given that we have allowed for non-capitalised letters for other command types that uses NRIC, we plan to improve find command to case-insensitive for NRIC. 
+
+### Handle manual changes in JSON file
+
+Currently, changing the data file directly for the appointments are not checked. It is possible that users edit the data file directly such that an appointment not belonging to the person is stored under him. This will cause issues later on when users attempt to add appointments at the same timing. We plan to add in more checks in when converting json properties such as JsonAdaptedPatient and JsonAdaptedDoctor to their respective model type. These validation ensures that the data in the json file adheres to the checks that are done when adding new appointments to doctors and patients.
+
+## **Appendix: Effort**
+
+There are 4 main areas where we adapted substantially from the original AB3.
+1. UI now displays patients, doctors and appointment details.
+2. System now contain Patient and Doctor class that inherits from the Person class.
+3. System now contain a completely new class Appointment that stores patient and doctor ic, and the appointment.
+4. Undo and Redo commands added.
+
+### UI changes
+Compared to the original UI, our app now shows three columns, Patient, Doctor, Appointment. We had to figure out how to fit 3 different columns in JavaFX which we were not familiar with. Additionally, linking the changes in model with the the actual UI component was also difficult since there many different files involved. We had to really trace through the code to understand how the different components work together to show the required UI that we wanted.
+
+### Person to Patients and Doctors
+MediLink Contacts adapted from the AB3 to use the Patient and Doctor classes to represent the information that our target users will need. The original code base was deeply linked to the Person class and there was a significant amount of changes that had to be made to refactor the code to accommodate the two classes.  The biggest challenge was that we had to understand the entire code base well at the beginning to be able to make these refactorings.
+
+Some changes were also made to such that the two classes have their own attributes on top of the original Person attributes and inherit from the common class Person. There are now 2 instead of just 1 entity that has to be handled. This translates to more Parsers, attribute classes and input validations to support these two classes.
+
+Additionally, we moved away from using Index for most of our operations. Instead, we perform all operations using the NRIC. This also means more changes to the existing command such as Edit/Find/Delete commands.
+
+### Appointment class
+This is a newly created class that represents a relationship between the Doctor and Patient class. Am AppointmentTime class was also created to represent the time used in the Appointment class. One challenge that we faced was to come up with the required checks for adding new appointment. We decided to go with whether the inputted IC exist in MediLink Contacts and whether the new appointment causes a clash with the doctor and patient. However, actually implementing these checks were difficult as we had to find a way to get the same Patient and Doctor stored in the model. 
+
+Storing the appointment was a challenge too. We store each appointment in the involved doctor and patient such that we can search for their appointments more easily as well as a separate list in the model, that has all the appointments. We had to create new JsonAdaptedAppointment class for this purpose.
+
+### Undo and Redo
+As we wanted to allow our users to revert back some mistakes, we implemented the undo and redo functions, which are fairly new compared to the existing functions that are mainly CRUD related. These changes had to be tied to each individual commands as we had to store the different states of the system before and after each operation is performed. Hence, the code changes were across many files and had to be linked well for it to work.
 
 ## **Appendix: Instructions for manual testing**
 

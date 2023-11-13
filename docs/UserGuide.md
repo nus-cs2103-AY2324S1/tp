@@ -99,10 +99,8 @@ The list below contains the parameters that are used in various commands as well
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-  * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`,
-  `clear`, `undo` and `redo`) will be
-    ignored.<br>
-    e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `clear`, `undo` and `redo`) will be ignored.<br>
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * Extraneous parameters behind any valid parameters will be deemed as the input for that parameter. <br>
   e.g. if the command specifies `add-doctor a/ADRESS c/some condition ....`, `c/some condition` will be interpreted as part of the address.
@@ -351,7 +349,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from MediLink Contacts.
+Deletes the specified person from MediLink Contacts. Note that appointments related to the person to be deleted will still remain in MediLink Contacts even after the person is deleted.
 
 Format: `delete NRIC`
 

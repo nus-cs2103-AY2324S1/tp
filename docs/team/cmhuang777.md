@@ -27,11 +27,8 @@ Given below are my contributions to the project.
 * **New Feature**: Updated part of the sample data to include the new features
 
 * **Project management**:
-    * Managed releases `v1.3 trial` and `v1.3` on GitHub
+    * Managed releases `v1.3 trial`,`v1.3` and `v1.4` on GitHub
     * Managed milestones and issues
-
-* **Enhancements to existing features**:
-    * (to be added soon)
 
 * **Documentation**:
     * User Guide:
@@ -40,10 +37,13 @@ Given below are my contributions to the project.
     * Developer Guide:
       * Included the section for add patient/doctor feature and added a new sequence diagram for that feature
       * Added use case for adding new patient
+      * Added Effort and Planned Enhancement section
+      * Added Sequence and activity diagram for AddAppointmentCommand
 
 * **Team-based tasks**:
     * Forked the team repo from the source code
     * Set up the team website
     * Updated readme
+    * Reviewed many PRs
 
 
