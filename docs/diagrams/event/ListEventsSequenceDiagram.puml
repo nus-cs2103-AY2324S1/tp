@@ -112,4 +112,5 @@ MainWindow <-- EventListWindow
 deactivate EventListWindow
 deactivate MainWindow
 destroy CommandResult
+[<--MainWindow
 @enduml

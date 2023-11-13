@@ -40,6 +40,7 @@
      - UML diagrams that I made: [#206](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/206)
      <puml src="diagrams/event/ListEventsSequenceDiagram.puml"/>
      <puml src="diagrams/event/ListEventsActivityDiagram.puml"/>
+     <puml src="diagrams/event/DeleteEventSequenceDiagram.puml"/>
 
 
   - #### Review/mentoring contributions

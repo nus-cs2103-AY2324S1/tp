@@ -412,6 +412,10 @@ The activity diagram below shows the action sequence of listing events by execut
 
 <puml src="diagrams/event/ListEventsSequenceDiagram.puml"/>
 
+The activity diagram below shows the action sequence of deleting an event by contact ID and event ID.
+
+<puml src="diagrams/event/DeleteEventSequenceDiagram.puml"/>
+
 <box type="info" seamless>
 
 **Note:**
