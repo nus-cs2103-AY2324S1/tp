@@ -28,7 +28,7 @@ title: OutBook Developer Guide
 - [Appendix: Requirements](#appendix-requirements)
   - [Product scope](#product-scope)
   - [User stories](#user-stories)
-  - [Use case](#use-case)
+  - [Use cases](#use-cases)
   - [Non-Functional Requirements](#non-functional-requirements)
   - [Glossary](#glossary)
 - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
@@ -615,7 +615,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <div style="page-break-after: always;"></div>
 
-### Use case
+### Use cases
 
 **Use case: Add a contact to a meeting**
 

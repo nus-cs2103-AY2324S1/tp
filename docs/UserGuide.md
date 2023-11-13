@@ -23,22 +23,22 @@ Managing clients and a busy schedule has never been easier. With OutBook, all yo
 - [Features](#features)
   - [Contact Commands](#contact-commands)
     - [Contact Parameters](#contact-parameters)
-    - [Adding a contact: `addc`](#adding-a-contact--addc)
-    - [Listing all contacts: `listc`](#listing-all-contacts--listc)
-    - [Deleting a contact: `deletec`](#deleting-a-contact--deletec)
+    - [Adding a contact: `addc`](#adding-a-contact-addc)
+    - [Listing all contacts: `listc`](#listing-all-contacts-listc)
+    - [Deleting a contact: `deletec`](#deleting-a-contact-deletec)
     - [Editing a contact: `editc`](#editing-a-contact--editc)
     - [Viewing detailed contact information: `viewc`](#viewing-detailed-contact-information--viewc)
-    - [Finding contacts: `findc`](#finding-contacts--findc)
+    - [Finding contacts: `findc`](#finding-contacts-findc)
   - [Meeting Commands](#meeting-commands)
     - [Meeting Parameters](#meeting-parameters)
-    - [Adding a meeting: `addm`](#adding-a-meeting--addm)
+    - [Adding a meeting: `addm`](#adding-a-meeting-addm)
     - [Listing all meetings: `listm`](#listing-all-meetings--listm)
     - [Deleting a meeting: `deletem`](#deleting-a-meeting--deletem)
     - [Editing a meeting: `editm`](#editing-a-meeting--editm)
     - [Viewing detailed meeting information: `viewm`](#viewing-detailed-meeting-information--viewm)
-    - [Finding meetings: `findm`](#finding-meetings--findm)
-    - [Adding contact to meeting: `addmc`](#adding-contact-to-meeting--addmc)
-    - [Removing contact from meeting: `rmmc`](#removing-contact-from-meeting--rmmc)
+    - [Finding meetings: `findm`](#finding-meetings-findm)
+    - [Adding contact to meeting: `addmc`](#adding-contact-to-meeting-addmc)
+    - [Removing contact from meeting: `rmmc`](#removing-contact-from-meeting-rmmc)
     - [Marking a meeting as complete : `mark`](#marking-a-meeting-as-complete--mark)
   - [Miscellaneous Commands](#miscellaneous-commands)
     - [Viewing help: `help`](#viewing-help--help)
@@ -63,9 +63,8 @@ Managing clients and a busy schedule has never been easier. With OutBook, all yo
 3. Copy the file to the folder you want to use as the _home folder_ for OutBook.
 
 4. Open a command terminal, navigate to the _home folder_ using `cd`, and use the `java -jar OutBook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app comes pre-loaded with some sample data.<br>
-
-![Ui](images/Ui.png)
+   A GUI similar to the below should appear in a few seconds. Note how the app comes pre-loaded with some sample data.
+<br>![Ui](images/Ui.png)
 <br><br><br><br><br><br>
 5. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -85,6 +84,7 @@ Managing clients and a busy schedule has never been easier. With OutBook, all yo
 6. You can refer to the [Features](#features) section below for details of each command. 
 
 [Click here to return to the Table of Contents](#table-of-contents)
+
 ___
 
 <div style="page-break-after: always;"></div>
@@ -104,7 +104,7 @@ ___
 
 ---
 
-<div style="page-break-after: always;"></div>
+<br>
 
 # Features
 
@@ -164,11 +164,12 @@ Format: `addc n/NAME p/PHONE e/EMAIL [lc/LAST_CONTACTED_TIME] [s/STATUS] [r/REMA
 You can put any number of tags (including 0) on a contact.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 - `addc n/John Doe p/98765432 e/johnd@example.com`
 - `addc n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 lc/01.01.2023 0100 t/Professor`
 
-<br/><br/>
 
 ### Listing all contacts: `listc`
 
@@ -190,7 +191,7 @@ Format: `deletec CONTACT_INDEX`
 
 Examples:
 - `listc` followed by `delete 2` deletes the 2nd person in the unfiltered contacts list returned by [`listc`](#listing-all-contacts--listc).
-- `findc Betsy` followed by `delete 1` deletes the 1st person in the filtered contacts list returned by [`findc`](#finding-contacts--findc).
+- `findc Betsy` followed by `delete 1` deletes the 1st person in the filtered contacts list returned by [`findc`](#finding-contacts-findc).
 
 <div style="page-break-after: always;"></div>
 
@@ -221,6 +222,8 @@ Format: `viewc CONTACT_INDEX`
 - Displays the `NAME`, `PHONE`, `EMAIL`, `LAST_CONTACTED_TIME`, `STATUS`, `REMARK` and `TAG` of the contact at the specified `CONTACT_INDEX`.
 - As this command displays the contact at the specified `CONTACT_INDEX` in the contacts list, the contact displayed in the details list may change due to a modification in list order through the use of `addc`, `editc` or `listc` commands. This is intentional.
 - The displayed contact is cleared from the details list when the `deletec` and `findc` commands are used.
+
+<div style="page-break-after: always;"></div>
 
 Examples:
 - `viewc 3` displays detailed information related to the 3rd contact on the contacts list.
@@ -269,15 +272,15 @@ Examples:
 
 ### Meeting Parameters
 
-| Parameter        | Description                                                                                                                                                                                                                                      | Examples                                            |
-|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------|
-| `TITLE`          | The title of the meeting. <br/> <br/> It can take any values, but should not be blank.                                                                                                                                                           | •  `1st Meeting with Alex` <br> • `Quick-chat`      |
-| `LOCATION`       | The location of the meeting. <br/> <br/> It can take any values, but should not be blank.                                                                                                                                                        | • `Zoom` <br> • `21 Lower Kent Ridge Rd, S(119077)` |
-| `START` / `END`  | The start/end times of the meeting. <br/> <br/> They must contain both date and time and adhere to the `DD.MM.YYYY HHMM` format. `START` must be equal or before `END`.                                                                          | • `29.10.2023 1000` <br> • `05.01.2023 2200`        |
-| `TAG`            | The tag you want to associate with the meeting, if any. A meeting can have more than 1 tag. <br/> <br/> It must be alphanumeric, i.e. special and non-alphanumeric characters (including spaces) are not allowed.                                | • `Casual` <br> • `Remote`                          |
-| `ATTENDEE_NAME`  | The name of the contact added to the meeting as an attendee via the [`addmc`](#adding-contact-to-meeting--addmc) command.                                                                                                                        | -                                                   |
-| `ATTENDEE_INDEX` | The number shown beside each attendee's name in the detailed view of the meeting (as described [here](#viewing-detailed-meeting-information--viewm)). <br/> <br/> It must be a positive integer and not more than the total number of attendees. | • `2`                                               |
-| `MEETING_INDEX`  | The number shown beside each meeting's title in the displayed meetings list. <br/> <br/> It must be a positive integer and not more than the total number of meetings.                                                                           | • `1`                                               |
+| Parameter        | Description                                                                                                                                                                                                                                       | Examples                                            |
+|------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------|
+| `TITLE`          | The title of the meeting. <br/> <br/> It can take any values, but should not be blank.                                                                                                                                                            | •  `1st Meeting with Alex` <br> • `Quick-chat`      |
+| `LOCATION`       | The location of the meeting. <br/> <br/> It can take any values, but should not be blank.                                                                                                                                                         | • `Zoom` <br> • `21 Lower Kent Ridge Rd, S(119077)` |
+| `START` / `END`  | The start/end times of the meeting. <br/> <br/> They must contain both date and time and adhere to the `DD.MM.YYYY HHMM` format. `START` must be equal or before `END`.                                                                           | • `29.10.2023 1000` <br> • `05.01.2023 2200`        |
+| `TAG`            | The tag you want to associate with the meeting, if any. A meeting can have more than 1 tag. <br/> <br/> It must be alphanumeric, i.e. special and non-alphanumeric characters (including spaces) are not allowed.                                 | • `Casual` <br> • `Remote`                          |
+| `ATTENDEE_NAME`  | The name of the contact added to the meeting as an attendee via the [`addmc`](#adding-contact-to-meeting-addmc) command.                                                                                                                          | -                                                   |
+| `ATTENDEE_INDEX` | The number shown beside each attendee's name in the detailed view of the meeting (as described [here](#viewing-detailed-meeting-information--viewm)). <br/> <br/> It must be a positive integer and not more than the total number of attendees.  | • `2`                                               |
+| `MEETING_INDEX`  | The number shown beside each meeting's title in the displayed meetings list. <br/> <br/> It must be a positive integer and not more than the total number of meetings.                                                                            | • `1`                                               |
 
 
 ### Adding a meeting: `addm`
@@ -293,6 +296,8 @@ Examples:
 - `addm m/Lunch a/Cafeteria s/20.09.2023 1200 e/20.09.2023 1300`
 - `addm m/CS2103T meeting a/Zoom call url s/20.09.2023 1000 e/20.09.2023 1200`
 
+<div style="page-break-after: always;"></div>
+
 ### Listing all meetings : `listm`
 
 Shows an unfiltered list of all meetings in OutBook in the meetings list. Meetings are sorted by their `START` time.
@@ -300,8 +305,6 @@ Shows an unfiltered list of all meetings in OutBook in the meetings list. Meetin
 Format: `listm`
 
 * This command may change the meeting that is currently displayed in the details list via the `viewm` command, as detailed [here](#viewing-detailed-meeting-information--viewm).
-
-<div style="page-break-after: always;"></div>
 
 ### Deleting a meeting : `deletem`
 
@@ -314,7 +317,9 @@ Format: `deletem MEETING_INDEX`
 
 Examples:
 - `listm` followed by `deletem 2` deletes the 2nd meeting in the unfiltered meetings list returned by [`listm`](#listing-all-meetings--listm).
-- `findm m/Project` followed by `deletem 1` deletes the 1st meeting in the filtered meetings list returned by [`findm`](#finding-meetings--findm).
+- `findm m/Project` followed by `deletem 1` deletes the 1st meeting in the filtered meetings list returned by [`findm`](#finding-meetings-findm).
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a meeting : `editm`
 
@@ -350,7 +355,6 @@ Examples:
 ![result for 'viewMeeting'](images/ViewMeetingResult.png)
 
 <div style="page-break-after: always;"></div>
-
 
 ### Finding meetings: `findm`
 
@@ -433,6 +437,8 @@ Format: `help`
 Clears all entries from the contacts, meetings and details list in OutBook, effectively wiping all data from OutBook.
 
 Format: `clear`
+
+<div style="page-break-after: always;"></div>
 
 ### Exiting the program : `exit`
 
