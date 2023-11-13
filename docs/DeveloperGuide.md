@@ -293,7 +293,7 @@ The following activity diagram illustrates how the complete operation is execute
 
 <img src="images/CompleteActivityDiagram.png" width="800"/>
 
-**Design Considerations**
+#### **Design Considerations**
 
 Alternative 1 (Previous Design): Use a `CompleteCommandDescriptor` that has a `Date` and `Index` field wrapped by Java `Optional`.
 
@@ -305,13 +305,13 @@ Alternative 1 (Previous Design): Use a `CompleteCommandDescriptor` that has a `D
 
 Alternative 2 (Current Choice): Make `CompleteCommand` an abstract class with the subclass `CompleteByIndex` and `CompletebyDate`.
 
-Pros: 
-* `LogicManager` can just execute `CompleteCommand` without needing to know if it is `CompleteByIndex` or `CompleteByDate`.
-* Also eliminates the need to check for null fields, since each `CompleteCommand` subclass only has their required fields. 
-* This also increases the extensibility of the command, as a new subclass can just be added.
+* Pros: 
+  * `LogicManager` can just execute `CompleteCommand` without needing to know if it is `CompleteByIndex` or `CompleteByDate`.
+  * Also eliminates the need to check for null fields, since each `CompleteCommand` subclass only has their required fields. 
+  * This also increases the extensibility of the command, as a new subclass can just be added.
 
-Cons: 
-* Increases the amount of code written and testing required.
+* Cons: 
+  * Increases the amount of code written and testing required.
 
 ### Gather Emails Feature
 
