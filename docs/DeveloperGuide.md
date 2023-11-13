@@ -348,7 +348,7 @@ Below is an activity diagram that illustrates the control flow for Delete Person
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Group Person
+### Grouping and Ungrouping a Person
 
 #### Implementation
 
@@ -358,9 +358,20 @@ Given below is an example usage scenario and how the group mechanism behaves at 
 
 **Step 1:** User launches the application.
 
-**Step 2:** The user executes `group n/personName g/groupName` to group a person `personName` into group `groupName`. `GroupPersonCommandParser` parses the personName and groupName ensuring the input is valid and creates a `GroupPersonCommand`, which calls `Model#groupPerson(personName, groupName)`. The model retrieves the existing person and group from the addressBook. Should a person or group not exist, it throws an error. Model calls `Model#assignGroup(Person person, Group group)` which adds a group to a person's groupList and person to the personList in group.
+**Step 2:** The user executes `group n/personName g/groupName` to group a person `personName` into group `groupName`. `
+
+**Step 3.** GroupPersonCommandParser` parses the personName and groupName ensuring the input is valid and creates a `GroupPersonCommand`
+
+**Step 4.** GroupPersonCommand calls `Model#groupPerson(personName, groupName)`. The model retrieves the existing person and group from the addressBook.
+
+**Step 5.** Model calls `Model#assignGroup(Person person, Group group)` which adds a group to a person's groupList and person to the personList in group.
+
+**Note:** Should a person or group not exist, an error is thrown, displaying the missing entity to the User. 
+<br>
+Ungroup works in the same way as group except the use of Command word ungroup
 
 The following activity diagram summarizes what happens when a user executes a new command:
+
 
 #### Design Considerations:
 
@@ -374,6 +385,58 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Easier to load from storage. One centralized place to store data. Less coupling.
     * Cons: Searching might become more costly.
 
+**Aspect: Error Messages**
+
+* **Alternative 1 (current choice):** Print specific error messages. 
+  * Pros: More intuitive for User to figure out what part of the inputs went wrong.  
+  * Cons: A larger choice of what we want to categorise as specific error messages will be more time-consuming to implement. 
+
+* **Alternative 2: Print general error messages**  
+  * Pros: Easier to implement and low maintenance when use case expands 
+  * Cons: User might not know what went wrong 
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+### FindFreeTime 
+
+#### Implementation
+
+The FindFreeTime mechanism is facilitated by the `Model`, `Group` and  `Person` class.
+It retrieves `Group` from `Model` to find a free time between group members in `listOfGroupMates` in `Group` 
+with a duration specified, `Duration`.
+The operation is exposed to `Model` interface as `Model#findGroup`.
+
+
+Given below is an example usage scenario and how the list mechanism behaves at each step.
+
+**Step 1:** User launches the application. 
+
+**Step 2:** User executes `findfreetime g/CS2103 d/60` command to find a common meeting time with duration 60 minutes 
+for group CS2103.
+
+**Step 3:** FindFreeTimeCommandParser parses the group name CS2103 and duration 60, ensuring that duration 
+is a valid integer in terms of minutes, and returns a FindFreeTimeCommand.
+
+**Step 4:** FindFreeTimeCommand calls `Model#findGroup(groupName)` to retrieve the group with matching name.
+If group does not exist, then an error is thrown.
+
+**Step 4:** FindFreeTimeCommand calls `Group#findFreeTime(duration)`, to retrieve the all common timeslots between 
+`listOfGroupMates` in `Group` and return them in a list should they accommodate the duration stated.
+
+**Note:**
+If group is empty, having no group mates in `listOfGroupMates` an error is thrown. 
+<br>
+If any group mate has not key in their free time slots using `addtime`, an error is thrown. 
+
+
+The following activity diagram summarizes what happens when a user executes a FindFreeTime command:
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------
 
 ### List
