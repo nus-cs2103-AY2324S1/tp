@@ -1074,9 +1074,15 @@ effort to produce an eventual satisfactory and working UI that we were proud to 
      list is empty. For instance, when the user sorts an empty list, the message displayed is "Sorted!" which is not very helpful. Hence, we are planning to tell the user that the list is empty and that the operation cannot be performed.
 
 7. Improve the presets bar feature to be more comprehensive and clear
-   - Currently, the presets bar feature only accomodates for the commands: `add`, `edit`, `delete`, `setP` and `showP`.
+   - Currently, the presets bar feature only accommodates for the commands: `add`, `edit`, `delete`, `setP` and `showP`.
    - In the future, we plan to add more presets buttons for all 16 commands in the application.
    - Furthermore, even though there's `clear` command, the button "clear" removes all text in the command box, making
      it ambiguous. We plan to change this in a future iteration like a trash can icon.
+
+8. Improve the filter and sort command formats
+
+   - Currently, the filter and sort commands do not have a strict format. For example, if the user enters a filter command
+     with at least one valid metric and valid metric value, the filter command will still be executed successfully. We plan
+     to come up with a stricter filter and sort format in the future to make it more user-friendly. 
 
 [Scroll back to _Table of Contents_](#table-of-contents)

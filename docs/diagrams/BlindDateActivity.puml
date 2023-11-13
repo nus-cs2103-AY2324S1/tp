@@ -1,0 +1,24 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User launches LoveBook;
+
+: User enters a command to get a blind date in the GUI;
+
+: Input is passed over to the logic component;
+
+if () then ([command is valid])
+    if () then ([list is empty])
+        :Display empty list error message;
+        stop
+    else ([else])
+        :Display a date;
+        stop
+    endif
+else ([else])
+    :Display unknown command error message;
+    stop
+endif
+@enduml

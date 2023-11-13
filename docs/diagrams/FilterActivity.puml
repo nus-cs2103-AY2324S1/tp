@@ -9,14 +9,15 @@ start
 
 : Input is passed over to the logic component;
 
-if () then ([command format is valid])
-        if () then ([all fields contain valid values])
-            if () then ([date with same name does not exist])
-                :Save date to LoveBook;
-                :Display success message;
+if () then ([at least one valid field])
+        if () then ([all valid fields contain valid values])
+            if () then ([keywords match any date in LoveBook])
+                :Display filtered dates;
+                :Display number of dates found message;
                 stop
             else ([else])
-                :Display date already exists error message;
+                : Display 0 dates;
+                :Display 0 dates found message;
                 stop
             endif
         else ([else])
