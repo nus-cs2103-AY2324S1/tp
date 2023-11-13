@@ -874,32 +874,63 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding tag while all contacts is shown.
     1. Prequisites: List all contacts using the list command. At least one contact shown in the list.<br>
-    1. Test case: `add tag -id 1 -t Frontend -t Java`
-    Expected: The new tags appear below the name of the first contact in the list. The list of tags added is shown in the status message.<br>
-    1. Test case: `add tag -id 0 -t Frontend`
-    Expected: No tag add is added. Error details shown in the status message.<br>
-    1. Test case: `add tag -id 1 -t HR representative`
+
+    1. Test case: `add tag -id 1 -t Frontend -t Java`<br>
+    Expected: The new tags appear below the name of the first contact in the list. The list of tags added is shown in the status message.
+    
+    1. Test case: `add tag -id 0 -t Frontend`<br>
+    Expected: No tag add is added. Error details shown in the status message.
+
+    1. Test case: `add tag -id 1 -t HR representative`<br>
     Expected: No tag is added as tag name should not contain spaces. Error details shown in the status message.<br>
 
 1. Adding duplicate tag to a contact
-    1. Prequisites: List all contacts using the list command. At least one contact shown in the list has at least one tag.<br>
-    1. Test case: `add tag -id 1 -t x`, where x is an already existing tag in the first contact.
-    Expected: The new tag appear below the name of the first contact in the list. The list of tags added is shown in the status message.<br>
-    1. Test case: `add tad -id -t Frontend -t Frontend`
-    Expected: Only one `Frontend` tag is added below the name of the first contact. Only one `Frontend` tag is shown in the list of tags added in the status message.<br>
+    1. Prequisites: List all contacts using the list command. At least one contact shown in the list has at least one tag.
+
+    1. Test case: `add tag -id 1 -t x`, where x is an already existing tag in the first contact.<br>
+    Expected: The new tag appear below the name of the first contact in the list. The list of tags added is shown in the status message.
+
+    1. Test case: `add tag -id -t Frontend -t Frontend`<br>
+    Expected: Only one `Frontend` tag is added below the name of the first contact. Only one `Frontend` tag is shown in the list of tags added in the status message.
+
+ 1. Adding tag while contact list is being filtered
+    1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`. 
+
+    1. Test case: `add tag -id 1 -t Frontend`, when no contact is shown<br>
+    Expected: No tag add is added. Error details shown in the status message.
+
+    1. Test case: `add tag -id 1 -t Frontend`, when at least 1 contact is shown<br>
+    Expected: The new tags appear below the name of the first contact in the filtered list. The list of tags added is shown in the status message. List will go back to showing all contacts.
+      
 
 ### Deleting tag
 
 1. Deleting tag while all contacts is shown and tag exists.
-    1. Prequisites: List all contacts using the list command. At least one contact shown in the list has at least one tag.<br>
-    1. Test case: `delete tag -id 1 -t x`, where x is an existing tag in the first contact.
-    Expected: The tag x is no longer below the name of the first contact in the list. The list of tags deleted is shown in the status message.<br>
-    1. Test case: `delete tag -id 0 -t Frontend`
-    Expected: No tag add is deleted. Error details shown in the status message.<br>
-    1. Test case: `delete tag -id 1 -t HR representative`
+    1. Prequisites: List all contacts using the list command. At least one contact shown in the list has at least one tag.
+
+    1. Test case: `delete tag -id 1 -t x`, where x is an existing tag in the first contact.<br>
+    Expected: The tag x is no longer below the name of the first contact in the list. The list of tags deleted is shown in the status message.
+
+    1. Test case: `delete tag -id 0 -t Frontend`<br>
+    Expected: No tag add is deleted. Error details shown in the status message.
+
+    1. Test case: `delete tag -id 1 -t HR representative`<br>
     Expected: No tag deleted as tag name should not contain spaces. Error details shown in the status message.<br>
 
 1. Deleting tag while all contacts is shown but tag does not exist.
     1. Prequisites: List all contacts using the list command. At least one contact is shown in the list.<br>
-    1. Test case: `add tag -id 1 -t x`, where x is a non-existing tag in the first contact.
-    Expected: No tags is deleted. The list of tags deleted shown in the status message is empty while the list of tags not found contains x.<br>
+
+    1. Test case: `delete tag -id 1 -t x`, where `x` is a non-existing tag in the first contact.<br>
+    Expected: No tags is deleted. The list of tags deleted shown in the status message is empty while the list of tags not found contains `x`.
+
+1. Deleting tag while contact list is being filtered
+    1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`. 
+
+    1. Test case: `delete tag -id 1 -t Frontend`, when no contact is shown<br>
+    Expected: No tag add is deleted. Error details shown in the status message.
+
+    1. Test case: `add tag -id 1 -t x`, when at least 1 contact is shown and `x` is an existing tag in the first contact. <br>
+    Expected: The tag `x` is no longer below the name of the first contact in the list. The list of tags deleted shown in the status message is empty while the list of tags not found contains `x`. List will go back to showing all contacts.
+
+    1. Test case: `add tag -id 1 -t x`, when at least 1 contact is shown and `x` is a non-existing tag in the first contact. <br>
+    Expected: The tag `x` is no longer below the name of the first contact in the list. The list of tags deleted is shown in the status message. List will go back to showing all contacts.
