@@ -504,9 +504,9 @@ The ability to delete multiple students was chosen as it provides greater effici
 
   The current implementation is preferred as it is more user-friendly, and provides the user with valuable information. Listing the information of students deleted allows the user to be able to check if they deleted the correct students. If a student was deleted by mistake, the user can easily reference the UI message containing the student's information to add them back, ensuring a more reliable and user-friendly experience.
 
-### \[Proposed\] Multiple Address Books for each Course
+### Separate Address Book for each Course
 
-#### Proposed Implementation
+#### Implementation
 
 In the `ModelManager` class, instead of storing an `AddressBook`, we instead store a `AddressBookManager`.
 
@@ -515,9 +515,18 @@ The `AddressBookManager` has a few responsibilities:
 - Setting the active `AddressBook`
 - Getting the active `AddressBook`
 
-The `getAddressBook` method in `ModelManager` is now a wrapper for the `getActiveAddressBook` method in
-`AddressBookManager`. This ensures that any existing commands will still "see" the model as having one `AddressBook`,
-and not break any existing functionality.
+Existing methods such as `saveAddressBook` in `AddressBookStorage` have been modified to store an `AddressBookManager` instead. The serialization and deserialization of `AddressBookManager` is also now handled by the nested `AddressBookManagerSerializer` class as well as `AddressBookManagerDeserializer` class within `AddressBookManager`. A `CourseCommand` is also added to facilitate the user switching address book, creating, deleting and editing them.
+
+Course commands are parsed with `CourseCommandParser`. If parsed successfully, it returns a `CourseCommand`.
+
+The following sequence diagram shows how `CourseCommand` works:
+
+![CourseCommandSeqDiagram](images/CourseCommandSeqDiagram.png)
+
+In this example, the user enters `course switch course/CS2103T`, to switch to another valid address book with course code "CS2103T".
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 #### Design considerations:
 
@@ -534,7 +543,7 @@ and not break any existing functionality.
 
   **Pros:**
     - Easier to understand: Developers who are new to the codebase do not need to learn and understand the
-    `AddressBookManager` class and its interactions, which could potentially increase the learning curve.
+    `AddressBookManager` class and its interactions, which could potentially increase the learning curve for the codebase.
 
   **Cons:**
     - Harder to maintain: In the future, should any changes be needed for address book management, there may need to refactor a significant portion of the codebase, as the logic is distributed. This can be error-prone and time-consuming.
@@ -787,6 +796,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC06 - Mark Student Attendance Separately**
 
+**Precondition**: User is on a course address book.
+
 **MSS**
 
 1.  User requests to mark attendance for a student and enters student name or ID, followed by the attendance status and week and reason if any.
@@ -816,59 +827,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC07 - Adding a filter**
+**Use case: UC07 - Search For Contacts via Student Name or ID**
 
-**MSS**
-
-1.  User requests to add a filter and enters a tutorial group ID or course code.
-2.  TAvigator shows a list of students matching the filters applied.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The given tutorial group ID is invalid.
-    * 1a1. TAvigator shows an error message.
-
-      Use case ends.
-
-* 1b. The given course code is invalid.
-    * 1b1. TAvigator shows an error message.
-
-      Use case ends.
-
-* 1c. User does not specify a tutorial group ID or course code.
-    * 1c1. TAvigator shows an error message.
-
-      Use case ends.
-
-**Use case: UC08 - Removing a filter**
-
-**MSS**
-
-1.  User requests to remove a filter and enters a tutorial group ID or course code.
-2.  TAvigator shows a list of students with the updated filters.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The given tutorial group ID is invalid.
-    * 1a1. TAvigator shows an error message.
-
-      Use case ends.
-
-* 1b. The given course code is invalid.
-    * 1b1. TAvigator shows an error message.
-
-      Use case ends.
-
-* 1c. User does not specify a tutorial group ID or course code.
-    * 1c1. TAvigator removes all applied filters.
-
-      Use case ends.
-
-**Use case: UC09 - Search For Contacts via Student Name or ID**
+**Precondition**: User is on a course address book.
 
 **MSS**
 
@@ -898,7 +859,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC10 - Delete a Student**
+**Use case: UC08 - Delete a Student**
+
+**Precondition**: User is on a course address book.
 
 **MSS**
 
@@ -921,7 +884,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
-**Use case: UC11 - Delete Multiple Students**
+**Use case: UC09 - Delete Multiple Students**
 
 **Precondition**: User is on a course address book.
 
@@ -1096,6 +1059,7 @@ Given below are some of the possible enhancements that could be added in future 
    > The messages for `course` commands could be more specific. We plan to replace mentions of `address book` with `courses` to better fit the context of TAvigator and reduce confusion for users.
 4. Stricter validation checks for course codes.
    > Validation checks could be added for course names to ensure valid course names when adding or editing courses. A valid format would include two to three initial alphabetical letters, followed by four numbers and one optional alphabetical letter at the end. A valid example would be `CS2103T`.
+   > An alternative could be getting a list of course codes from the NUSMods API but that may require constant updating.
 5. Importing records.
    > We plan to implement importing student records from a csv file in the future, which may create duplicated records. This would be where our merge command comes into play, merging duplicated records so that no information is lost.
 6. More functionality for `mark` command.
@@ -1103,9 +1067,16 @@ Given below are some of the possible enhancements that could be added in future 
    >   - Marking of students with the same student name.
    >   - Marking of students with both student name field and student ID field.
    >   - Marking of students with case-insensitive student name.
+   >   - Marking of students using the index in list.
 7. Marking attendance based on tutorial group instead of student.
    > Currently, TAvigator supports a student having multiple tutorial groups, but attendance is marked based on the student only. As such, we plan to modify the `mark` command so that it takes in a `tg/` input, and attendance can be marked separately for each tutorial group the student belongs to.
 8. Better parsing of arguments.
    > Currently, adding invalid and redundant prefixes after commands will cause TAvigator to take the invalid prefix and its value as part of the value of the closest valid prefix. <br>
    > For example, `add n/Fu Yiqiao p/98765432 e/fyq@example.com id/ A1234567M t/G2 r/` returns an error message that: Tutorial Group IDs should be alphanumeric.
    > The correct error message that should be shown is: Invalid prefix r/ detected.
+9. Improved UI for attendance records
+   > Currently, it displays the attendance records in multiple lines and require scrolling, which makes it hard to view all information at a glance.
+   > We plan to improve the UI by either showing the attendance records using boxes instead, with colours differentiating the different status for their attendance, such as using green for present, red for absent and grey for unmarked.
+10. Standarise prefix for tutorial group
+   > Currently, `add` and `edit` command uses `t/` prefix while `list attendance` and `delete all` uses the `tg/` prefix.
+   > We plan to standardise the prefix to use the `tg/` prefix to avoid confusion.
