@@ -51,7 +51,6 @@ My contributions to the project are listed below.
 <div style="page-break-after: always;"></div>
 
 ## Contributions to the Developer Guide (Extracts):
-
 - Added documentation for implementation of `LastContactedTime` object:
 
 ### Keeping track of last meeting with contact
@@ -91,7 +90,8 @@ This is facilitated by the addition of the `MarkDoneCommand`. When a meeting is 
 
 <div style="page-break-after: always;"></div>
 
-___
+---
+
 - Added documentation for Non-Functional Requirements:
 
 ### Non-Functional Requirements
@@ -118,7 +118,9 @@ ___
 **Compatibility**
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-___
+
+---
+
 - Added documentation for Glossary:
 
 ### Glossary
@@ -133,7 +135,6 @@ ___
 <div style="page-break-after: always;"></div>
 
 ## Contributions to the User Guide (Extracts):
-
 - Added documentation for `deletem`:
 
 ### Deleting a meeting : `deletem`
@@ -150,7 +151,9 @@ Format: `deletem INDEX`
 Examples:
 - `listm` followed by `deletem 2` deletes the 2nd meeting in the results of the `listm` command.
 - `findm m/Project` followed by `deletem 1` deletes the 1st meeting in the results of the `findm` command.
-___
+
+---
+
 - Rewrote notes about command format for greater readability:
 
 <div markdown="block" class="alert alert-info">
