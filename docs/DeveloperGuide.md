@@ -838,7 +838,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to select a specific number of students randomly.
+1.  User requests to randomly select a specific number of students.
 2.  Class Manager randomly selects the students from all students displayed.
 3.  Class Manager shows a list of students that are randomly selected.
 
@@ -1228,7 +1228,7 @@ Testers are expected to do more *exploratory* testing.
 1. Randomly select a specified number of students from the list of displayed students.
 
    1. Test case: `random 2`<br>
-      Expected: Two students from the list of displayed students are selected randomly. Ensure at least two students are displayed.
+      Expected: Two students from the list of displayed students are randomly selected. Ensure at least two students are displayed.
       <br><br>
 
 ### View a student
