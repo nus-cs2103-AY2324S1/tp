@@ -10,7 +10,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.flashlingo.commons.core.LogsCenter;
 import seedu.flashlingo.model.flashcard.FlashCard;
-import seedu.flashlingo.session.SessionManager;
+import seedu.flashlingo.logic.session.SessionManager;
 
 /**
  * Panel containing the list of flash cards.

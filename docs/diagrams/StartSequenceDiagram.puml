@@ -7,7 +7,7 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":FlashlingoParser" as FlashlingoParser LOGIC_COLOR
 participant ":SessionManager" as SessionManager LOGIC_COLOR
 participant "s:StartCommand" as StartCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -23,17 +23,30 @@ activate FlashlingoParser
 FlashlingoParser -> SessionManager : getInstance()
 activate SessionManager
 
-SessionManager --> FlashlingoParser : Instance
+SessionManager -> SessionManager : SessionManager()
+activate SessionManager
+
+
+
+
+SessionManager --> FlashlingoParser : instance
 deactivate SessionManager
+
+FlashlingoParser -> SessionManager : isReviewSession()
+
+
+SessionManager --> FlashlingoParser : isReviewSession
+deactivate SessionManager
+
 
 create StartCommand
 FlashlingoParser -> StartCommand
 activate StartCommand
 
-StartCommand --> FlashlingoParser : s
+StartCommand --> FlashlingoParser :
 deactivate StartCommand
 
-FlashlingoParser --> LogicManager : d
+FlashlingoParser --> LogicManager : s
 deactivate FlashlingoParser
 
 LogicManager -> StartCommand : execute()
@@ -42,9 +55,9 @@ activate StartCommand
 StartCommand -> SessionManager : setSession(true)
 activate SessionManager
 
-SessionManager -> StartCommand :
+SessionManager --> StartCommand :
 deactivate SessionManager
-StartCommand -> Model : nextReviewWord()
+StartCommand -> Model : startSession()
 activate Model
 
 Model --> StartCommand
@@ -57,7 +70,7 @@ activate CommandResult
 CommandResult --> StartCommand
 deactivate CommandResult
 
-StartCommand --> LogicManager : result
+StartCommand --> LogicManager : r
 deactivate StartCommand
 
 [<--LogicManager

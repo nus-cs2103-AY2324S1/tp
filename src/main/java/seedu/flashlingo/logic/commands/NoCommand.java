@@ -7,7 +7,7 @@ import seedu.flashlingo.commons.util.ToStringBuilder;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.flashcard.FlashCard;
-import seedu.flashlingo.session.SessionManager;
+import seedu.flashlingo.logic.session.SessionManager;
 
 /**
  * Indicates user has not yet memorized the word.

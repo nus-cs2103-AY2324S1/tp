@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.ModelManager;
 import seedu.flashlingo.model.UserPrefs;
-import seedu.flashlingo.session.SessionManager;
+import seedu.flashlingo.logic.session.SessionManager;
 
 public class StartCommandTest {
 

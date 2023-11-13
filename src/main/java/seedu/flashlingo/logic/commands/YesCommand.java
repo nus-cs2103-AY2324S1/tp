@@ -5,9 +5,10 @@ import static seedu.flashlingo.model.Model.PREDICATE_SHOW_ALL_FLASHCARDS;
 
 import seedu.flashlingo.commons.util.ToStringBuilder;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
+import seedu.flashlingo.logic.session.SessionManager;
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.flashcard.FlashCard;
-import seedu.flashlingo.session.SessionManager;
+
 
 /**
  * Indicates user has memorized the word.

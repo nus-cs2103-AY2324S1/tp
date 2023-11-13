@@ -9,7 +9,7 @@ import javafx.scene.layout.Region;
 import seedu.flashlingo.logic.commands.exceptions.CommandException;
 import seedu.flashlingo.logic.parser.exceptions.ParseException;
 import seedu.flashlingo.model.flashcard.FlashCard;
-import seedu.flashlingo.session.SessionManager;
+import seedu.flashlingo.logic.session.SessionManager;
 
 /**
  * An UI component that displays information of a {@code FlashCard}.

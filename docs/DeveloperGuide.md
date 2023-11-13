@@ -217,13 +217,16 @@ The implementation of the "Start and End Review Session" feature involves the in
 
 In addition to that, `start` and `end` commands and their corresponding parsers are also implemented.
 
-Given below is an example usage scenario and how the start/end mechanism behaves at each step.
+Given below is an example usage scenario and how the `start/end` mechanism behaves at each step.
 
 **Step 1:** The user launches the application for the first time. The `SessionManager` is not yet initialized.
 
-**Step 2:** The user executes the "start" command by interacting with the command line. This will make `FlashlingoParser` class to create its `SessionManager` instance.
+**Step 2:** The user executes the `start` command by interacting with the command line. This will make `FlashlingoParser` class to create its `SessionManager` instance.
 
-![SessionManagerClass](images/SessionManagerClass.png)
+<div align="center">
+  <img src="images/SessionManagerClass.png" width="350" height="300" alt="Session Manager Class">
+</div>
+
 <br>
 **Note**: The `SessionManager` class adheres to the **Singleton pattern**, guaranteeing that only one instance of the class
 can exist. This architectural choice provides a single point of access for managing review sessions and
@@ -235,6 +238,8 @@ management within the application.
 
 **Step 4:** The user chooses to end the review session by using `end` command. This action will alternate the boolean value
 inside SessionManager class indicating current session is review session or not.
+
+Below is the sequence diagram for the above scenario:
 
 ![StartSequenceModel](images/StartSequenceDiagram.png)
 <br>
@@ -714,6 +719,15 @@ For advanced users who manually edit the data, they may accidentally introduce i
 
 * `Duplicated flash card ... found in flashlingo.json`: Duplicate combination of word and translation is found in the data file.
 * `Invalid flash card ... with invalid ... found in flashlingo.json`: Flash card with invalid word/translation, level or review date found.
+
+### Enhancement 4: Renaming `reveal` command to reduce ambiguity
+
+**Feature Flaw**
+Currently, the `reveal` command is used to reveal or hide the translation of the flash card. However, it may be ambiguous to users as they may think that the command is used to reveal the word itself.
+
+**Proposed Enhancement**
+Renaming the `reveal` command to `flip` to reduce ambiguity.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
