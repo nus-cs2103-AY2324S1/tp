@@ -702,7 +702,7 @@ The `DeleteLeaveCommand` object then communicates with the `Model` API by callin
 
 The method `DeleteLeaveCommand#execute()` returns a `CommandResult` object, which stores information about the completion of the command.
 
-The following sequence diagram below shows how the operation of deleting a leave appointment works:
+The following sequence diagram below shows how the operation of deleting a leave date works:
 
 ![Delete Leave Sequence Diagram](images/DeleteLeaveSequenceDiagram.png)
 
@@ -713,8 +713,8 @@ Given below is an example usage scenario for the command:
 **Step 2**: The user executes the `deleteleave id/EMPLOYEE_ID from/START_DATE to/END_DATE` command in the CLI.
 * `START_DATE` and `END_DATE` are inputs of format `yyyy-MM-dd`.
 
-**Step 3**: Leave appointments that fall between the start and end dates will be deleted from the employee specified with the employee ID input.
-* If no leave appointments exist between the start and end dates, an error will be produced and shown to the user.
+**Step 3**: Leave dates that fall between the start and end dates will be deleted from the employee specified with the employee ID input.
+* If no leave dates exist between the start and end dates, an error will be produced and shown to the user.
 
 The following activity diagram summarizes what happens when a user executes the delete leave command:
 
@@ -1072,7 +1072,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to add a leave period for an employee with a given id from given start date
     to given end date.
 2.  HouR adds the individual dates between the given start and end dates inclusive
-    as leave appointments for the employee with given id.
+    as leave dates for the employee with given id.
 
     Use case ends.
 
