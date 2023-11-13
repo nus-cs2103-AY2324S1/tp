@@ -34,6 +34,16 @@ public class Patient {
 
     /**
      * Patient constructor which omits assignedDepartment and Record parameters
+     *
+     * @param name     the name
+     * @param phone    the phone
+     * @param email    the email
+     * @param gender   the gender
+     * @param icNumber the ic number
+     * @param birthday the birthday
+     * @param address  the address
+     * @param priority the priority
+     * @param tags     the tags
      */
     public Patient(Name name, Phone phone, Email email, Gender gender, IcNumber icNumber, Birthday birthday,
                    Address address, Priority priority, Set<Tag> tags) {
@@ -54,6 +64,17 @@ public class Patient {
 
     /**
      * Patient constructor which omits Record parameter
+     *
+     * @param name               the name
+     * @param phone              the phone
+     * @param email              the email
+     * @param gender             the gender
+     * @param icNumber           the ic number
+     * @param birthday           the birthday
+     * @param address            the address
+     * @param priority           the priority
+     * @param tags               the tags
+     * @param assignedDepartment the assigned department
      */
     public Patient(Name name, Phone phone, Email email, Gender gender, IcNumber icNumber, Birthday birthday,
                    Address address, Priority priority, Set<Tag> tags, AssignedDepartment assignedDepartment) {
@@ -74,6 +95,18 @@ public class Patient {
 
     /**
      * Patient constructor with all fields as parameters
+     *
+     * @param name               the name
+     * @param phone              the phone
+     * @param email              the email
+     * @param gender             the gender
+     * @param icNumber           the ic number
+     * @param birthday           the birthday
+     * @param address            the address
+     * @param priority           the priority
+     * @param tags               the tags
+     * @param assignedDepartment the assigned department
+     * @param record             the record
      */
     public Patient(Name name, Phone phone, Email email, Gender gender, IcNumber icNumber, Birthday birthday,
                    Address address, Priority priority, Set<Tag> tags, AssignedDepartment assignedDepartment,
@@ -94,46 +127,101 @@ public class Patient {
         this.record.copyRecordInfo(record);
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public Name getName() {
         return name;
     }
 
+    /**
+     * Gets phone.
+     *
+     * @return the phone
+     */
     public Phone getPhone() {
         return phone;
     }
 
+    /**
+     * Gets email.
+     *
+     * @return the email
+     */
     public Email getEmail() {
         return email;
     }
 
+    /**
+     * Gets address.
+     *
+     * @return the address
+     */
     public Address getAddress() {
         return address;
     }
 
+    /**
+     * Gets gender.
+     *
+     * @return the gender
+     */
     public Gender getGender() {
         return gender;
     }
 
+    /**
+     * Gets ic number.
+     *
+     * @return the ic number
+     */
     public IcNumber getIcNumber() {
         return icNumber;
     }
 
+    /**
+     * Gets birthday.
+     *
+     * @return the birthday
+     */
     public Birthday getBirthday() {
         return birthday;
     }
 
+    /**
+     * Gets age.
+     *
+     * @return the age
+     */
     public Age getAge() {
         return age;
     }
 
+    /**
+     * Gets priority.
+     *
+     * @return the priority
+     */
     public Priority getPriority() {
         return priority;
     }
 
+    /**
+     * Gets assigned department.
+     *
+     * @return the assigned department
+     */
     public AssignedDepartment getAssignedDepartment() {
         return assignedDepartment;
     }
 
+    /**
+     * Gets record.
+     *
+     * @return the record
+     */
     public Record getRecord() {
         return record;
     }
@@ -141,6 +229,8 @@ public class Patient {
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
+     *
+     * @return the tags
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
@@ -149,6 +239,9 @@ public class Patient {
     /**
      * Returns true if both patients have the same name.
      * This defines a weaker notion of equality between two patients.
+     *
+     * @param otherPatient the other patient
+     * @return the boolean
      */
     public boolean isSamePatient(Patient otherPatient) {
         if (otherPatient == this) {
