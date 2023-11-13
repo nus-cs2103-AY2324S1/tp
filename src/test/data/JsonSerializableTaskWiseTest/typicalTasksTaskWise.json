@@ -1,0 +1,75 @@
+{
+  "_comment": "TaskWise save file which contains the same Task values as in TypicalTasks#getTypicalTaskWise()",
+  "tasks": [
+    {
+      "description": "Fix bug",
+      "status": false,
+      "note": "Note",
+      "deadline" : {
+        "details" : "+999999999-12-31T23:59:59.999999999",
+        "isNull" : true
+      },
+      "priority": "NONE"
+    },
+    {
+      "description": "Do OP2 report",
+      "status": true,
+      "note": "",
+      "deadline" : {
+        "details" : "+999999999-12-31T23:59:59.999999999",
+        "isNull" : true
+      },
+      "priority": "NONE"
+    },
+    {
+      "description": "Do OP2 presentation",
+      "status": false,
+      "note": "",
+      "deadline" : {
+        "details" : "+999999999-12-31T23:59:59.999999999",
+        "isNull" : false
+      },
+      "priority": "LOW"
+    },
+    {
+      "description": "Do user guide",
+      "status": false,
+      "note": "",
+      "deadline" : {
+        "details" : "2024-12-31T23:59:59.999999999",
+        "isNull" : false
+      },
+      "priority": "MEDIUM"
+    },
+    {
+      "description": "Do developer guide",
+      "status": false,
+      "note": "Note",
+      "deadline" : {
+        "details" : "1990-12-31T23:59:59.999999999",
+        "isNull" : false
+      },
+      "priority": "HIGH"
+    },
+    {
+      "description": "Meeting to discuss OP2",
+      "status": false,
+      "note": "",
+      "deadline" : {
+        "details" : "+999999999-12-31T23:59:59.999999999",
+        "isNull" : true
+      },
+      "priority": "NONE"
+    },
+    {
+      "description": "Rehearse OP2 presentation",
+      "status": false,
+      "note": "",
+      "deadline" : {
+        "details" : "+999999999-12-31T23:59:59.999999999",
+        "isNull" : true
+      },
+      "priority": "NONE"
+    }
+  ]
+}

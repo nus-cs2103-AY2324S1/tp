@@ -1,0 +1,103 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TaskWiseParser" as TaskWiseParser LOGIC_COLOR
+participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
+participant "e:EditCommand" as EditCommand LOGIC_COLOR
+participant "editTaskDescriptor:EditTaskDescriptor" as EditTaskDescriptor LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":TaskWise" as TaskWise MODEL_COLOR
+end box
+
+[-> LogicManager : execute("edit 1 m/John")
+activate LogicManager
+
+LogicManager -> TaskWiseParser : parseCommand("edit 1 m/John")
+activate TaskWiseParser
+
+create EditCommandParser
+TaskWiseParser -> EditCommandParser
+activate EditCommandParser
+
+EditCommandParser --> TaskWiseParser
+deactivate EditCommandParser
+
+TaskWiseParser -> EditCommandParser : parse("1 m/John")
+activate EditCommandParser
+
+create EditTaskDescriptor
+EditCommandParser -> EditTaskDescriptor
+activate EditTaskDescriptor
+
+EditTaskDescriptor -> EditCommandParser
+deactivate EditTaskDescriptor
+
+create EditCommand
+EditCommandParser -> EditCommand
+activate EditCommand
+
+EditCommand --> EditCommandParser : e
+deactivate EditCommand
+
+EditCommandParser --> TaskWiseParser : e
+deactivate EditCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditCommandParser -[hidden]-> TaskWiseParser
+destroy EditCommandParser
+
+TaskWiseParser --> LogicManager : e
+deactivate TaskWiseParser
+
+LogicManager -> EditCommand : execute()
+activate EditCommand
+
+EditCommand -> Model : getTask(index)
+activate Model
+
+Model --> EditCommand
+deactivate Model
+
+EditCommand -> EditCommand :createEditedTask(taskToEdit, editTaskDescriptor)
+activate EditCommand
+
+EditCommand --> EditCommand  : editedTask
+deactivate EditCommand
+
+EditCommand -> Model : setTask(target, editedTask)
+activate Model
+
+Model -> TaskWise : setTask(target, editedTask)
+activate TaskWise
+
+TaskWise --> Model
+deactivate TaskWise
+
+Model --> EditCommand
+deactivate Model
+
+EditCommand -> Model : updateFilteredTaskList()
+activate Model
+
+Model --> EditCommand
+deactivate Model
+
+create CommandResult
+EditCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditCommand
+deactivate CommandResult
+
+EditCommand --> LogicManager : result
+deactivate EditCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

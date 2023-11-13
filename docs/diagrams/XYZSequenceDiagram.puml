@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TaskWiseParser" as TaskWiseParser LOGIC_COLOR
+participant ":XYZCommandParser" as XYZCommandParser LOGIC_COLOR
+participant "xyz:XYZCommand" as XYZCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute(userInput)
+activate LogicManager
+
+LogicManager -> TaskWiseParser : parseCommand(userInput)
+activate TaskWiseParser
+
+create XYZCommandParser
+TaskWiseParser -> XYZCommandParser
+activate XYZCommandParser
+
+XYZCommandParser --> TaskWiseParser
+deactivate XYZCommandParser
+
+TaskWiseParser -> XYZCommandParser : parse(parsedUserInput)
+activate XYZCommandParser
+
+create XYZCommand
+XYZCommandParser -> XYZCommand
+activate XYZCommand
+
+XYZCommand --> XYZCommandParser : xyz
+deactivate XYZCommand
+
+XYZCommandParser --> TaskWiseParser : xyz
+deactivate XYZCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+XYZCommandParser -[hidden]-> TaskWiseParser
+destroy XYZCommandParser
+
+TaskWiseParser --> LogicManager : xyz
+deactivate TaskWiseParser
+
+LogicManager -> XYZCommand : execute()
+activate XYZCommand
+
+XYZCommand -> Model
+activate Model
+
+Model --> XYZCommand
+deactivate Model
+
+create CommandResult
+XYZCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> XYZCommand
+deactivate CommandResult
+
+XYZCommand --> LogicManager : result
+deactivate XYZCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

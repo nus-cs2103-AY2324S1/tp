@@ -31,7 +31,13 @@ task coverage(type: JacocoReport) {
     executionData.from files(jacocoTestReport.executionData)
     afterEvaluate {
         classDirectories.from files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: ['**/*.jar'])
+            fileTree(
+                    dir: it,
+                    exclude: [
+                            '**/*.jar',
+                            'src/test/java/seedu/address/commons/core/functional/ExFunctionTest\$EmptyExOptional*',
+                            'src/test/java/seedu/address/commons/core/functional/ExFunctionTest\$PresentExOptional*',
+                    ])
         })
     }
     reports {
@@ -66,7 +72,11 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveFileName = 'taskwise.jar'
+}
+
+run {
+    enableAssertions = true
 }
 
 defaultTasks 'clean', 'test'

@@ -12,6 +12,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import javafx.fxml.FXML;
 import seedu.address.MainApp;
+import seedu.address.ui.exception.FxmlLoadException;
 
 public class UiPartTest {
 
@@ -33,15 +34,15 @@ public class UiPartTest {
     @Test
     public void constructor_missingFileUrl_throwsAssertionError() throws Exception {
         URL missingFileUrl = new URL(testFolder.toUri().toURL(), MISSING_FILE_PATH);
-        assertThrows(AssertionError.class, () -> new TestUiPart<Object>(missingFileUrl));
-        assertThrows(AssertionError.class, () -> new TestUiPart<Object>(missingFileUrl, new Object()));
+        assertThrows(FxmlLoadException.class, () -> new TestUiPart<Object>(missingFileUrl));
+        assertThrows(FxmlLoadException.class, () -> new TestUiPart<Object>(missingFileUrl, new Object()));
     }
 
     @Test
     public void constructor_invalidFileUrl_throwsAssertionError() {
         URL invalidFileUrl = getTestFileUrl(INVALID_FILE_PATH);
-        assertThrows(AssertionError.class, () -> new TestUiPart<Object>(invalidFileUrl));
-        assertThrows(AssertionError.class, () -> new TestUiPart<Object>(invalidFileUrl, new Object()));
+        assertThrows(FxmlLoadException.class, () -> new TestUiPart<Object>(invalidFileUrl));
+        assertThrows(FxmlLoadException.class, () -> new TestUiPart<Object>(invalidFileUrl, new Object()));
     }
 
     @Test
@@ -71,8 +72,8 @@ public class UiPartTest {
 
     @Test
     public void constructor_invalidFileName_throwsAssertionError() {
-        assertThrows(AssertionError.class, () -> new TestUiPart<Object>(INVALID_FILE_PATH));
-        assertThrows(AssertionError.class, () -> new TestUiPart<Object>(INVALID_FILE_PATH, new Object()));
+        assertThrows(FxmlLoadException.class, () -> new TestUiPart<Object>(INVALID_FILE_PATH));
+        assertThrows(FxmlLoadException.class, () -> new TestUiPart<Object>(INVALID_FILE_PATH, new Object()));
     }
 
     private URL getTestFileUrl(String testFilePath) {

@@ -7,6 +7,7 @@ import java.net.URL;
 
 import javafx.fxml.FXMLLoader;
 import seedu.address.MainApp;
+import seedu.address.ui.exception.FxmlLoadException;
 
 /**
  * Represents a distinct part of the UI. e.g. Windows, dialogs, panels, status bars, etc.
@@ -71,7 +72,7 @@ public abstract class UiPart<T> {
         try {
             fxmlLoader.load();
         } catch (IOException e) {
-            throw new AssertionError(e);
+            throw new FxmlLoadException(e);
         }
     }
 

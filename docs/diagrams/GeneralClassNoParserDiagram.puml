@@ -1,0 +1,30 @@
+@startuml
+!include style.puml
+skinparam genericDisplay old
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+package "XYZ Command" {
+    Class "<<interface>>\nCommand" as Command
+    Class XYZCommand
+}
+
+package Model {
+    class None #FFFFFF
+}
+
+package Logic {
+    class None #FFFFFF
+}
+
+Logic -[hidden]down-> Model
+
+XYZCommand .up.|> Command
+
+
+
+XYZCommand --left-> Logic : executed by >
+XYZCommand --left-> Model : modifies >
+
+@enduml

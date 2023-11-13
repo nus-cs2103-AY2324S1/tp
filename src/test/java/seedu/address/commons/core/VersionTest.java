@@ -1,12 +1,24 @@
 package seedu.address.commons.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
 public class VersionTest {
+    @Test
+    public void equals_versionEquivalentToSelf_success() {
+        Version version = new Version(19, 10, 20, true);
+        assertTrue(version.equals(version));
+    }
+
+    @Test
+    public void equals_versionNotEquivalentToOther_success() {
+        Version version = new Version(19, 10, 20, true);
+        assertFalse(version.equals("SHOULD NOT BE EQUAL AT ALL"));
+    }
 
     @Test
     public void versionParsing_acceptableVersionString_parsedVersionCorrectly() {
@@ -103,6 +115,11 @@ public class VersionTest {
         one = new Version(2, 15, 0, false);
         another = new Version(2, 15, 5, true);
         assertTrue(one.compareTo(another) < 0);
+
+        // Tests non-early access version with another same version that is early access
+        one = new Version(2, 15, 0, false);
+        another = new Version(2, 15, 0, true);
+        assertEquals(1, one.compareTo(another));
     }
 
     @Test

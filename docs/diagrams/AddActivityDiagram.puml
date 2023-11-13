@@ -1,0 +1,37 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User enters add command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+:Parse user input;
+
+if () then ([command recognised])
+    :Initialise AddCommandParser object;
+    :AddCommandParser instance parses arguments;
+    if () then ([parse successful])
+        :Initialise AddCommand instance;
+        :LogicManager executes AddCommand;
+        if () then ([task description does not already exist])
+            :Add new Task into Task List;
+            :UI updates with new Task;
+            :Initialise CommandResult instance;
+            :Return initialised CommandResult instance;
+            :LogicManager parses CommandResult instance;
+            :Display result to user;
+        else ([else])
+            :Display error message;
+        endif
+    else ([else])
+        :Display error message;
+    endif
+else ([else])
+:Display error message;
+endif
+stop
+
+@enduml

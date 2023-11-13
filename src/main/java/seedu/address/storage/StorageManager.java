@@ -6,25 +6,25 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTaskWise;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.storage.exceptions.storage.FileStorageLoadException;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of TaskWise data in local storage.
  */
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
+    private TaskWiseStorage taskWiseStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given {@code TaskWiseStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
-        this.addressBookStorage = addressBookStorage;
+    public StorageManager(TaskWiseStorage taskWiseStorage, UserPrefsStorage userPrefsStorage) {
+        this.taskWiseStorage = taskWiseStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -36,7 +36,7 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public Optional<UserPrefs> readUserPrefs() throws DataLoadingException {
+    public Optional<UserPrefs> readUserPrefs() throws FileStorageLoadException {
         return userPrefsStorage.readUserPrefs();
     }
 
@@ -46,33 +46,33 @@ public class StorageManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ TaskWise methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+    public Path getTaskWiseFilePath() {
+        return taskWiseStorage.getTaskWiseFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException {
-        return readAddressBook(addressBookStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyTaskWise> readTaskWise() throws FileStorageLoadException {
+        return readTaskWise(taskWiseStorage.getTaskWiseFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException {
+    public Optional<ReadOnlyTaskWise> readTaskWise(Path filePath) throws FileStorageLoadException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
+        return taskWiseStorage.readTaskWise(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+    public void saveTaskWise(ReadOnlyTaskWise taskWise) throws IOException {
+        saveTaskWise(taskWise, taskWiseStorage.getTaskWiseFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void saveTaskWise(ReadOnlyTaskWise taskWise, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
+        taskWiseStorage.saveTaskWise(taskWise, filePath);
     }
 
 }

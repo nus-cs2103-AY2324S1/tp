@@ -1,6 +1,7 @@
 package seedu.address.commons.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -23,5 +24,8 @@ public class ConfigTest {
         assertTrue(defaultConfig.equals(defaultConfig));
     }
 
-
+    @Test
+    public void equals_notEqualToOther() {
+        assertFalse(new Config().equals("SHOULD NOT BE EQUAL AT ALL"));
+    }
 }

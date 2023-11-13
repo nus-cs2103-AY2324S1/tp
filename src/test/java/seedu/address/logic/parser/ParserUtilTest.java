@@ -1,11 +1,14 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.parser.ParserUtil.parseDeadline;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -13,28 +16,48 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.parser.exceptions.IllegalArgumentException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.member.Member;
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Description;
+import seedu.address.model.task.Note;
+import seedu.address.model.task.Priority;
 
 public class ParserUtilTest {
-    private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_ADDRESS = " ";
-    private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_DESCRIPTION = "Do Use/r Guide.";
+    private static final String INVALID_MEMBER = "";
 
-    private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_PHONE = "123456";
-    private static final String VALID_ADDRESS = "123 Main Street #0505";
-    private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_TAG_1 = "friend";
-    private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_DESCRIPTION = "Do User Guide";
+    private static final String VALID_NOTE = "This is a valid note";
+    private static final String INVALID_NOTE = "Do TaskWise v1/2"; // contains "/"
+    private static final String VALID_MEMBER_1 = "George";
+    private static final String VALID_MEMBER_2 = "Harry";
 
     private static final String WHITESPACE = " \t\r\n";
+    private static final String VALID_DEADLINE_WITH_TIME_COLON = "25-10-2023 16:00";
+    private static final String VALID_DEADLINE_WITH_TIME_DASH = "25-10-2023 16-00";
+    private static final String VALID_DEADLINE_WITH_TIME_NO_COLON_DASH = "25-10-2023 1600";
+    private static final String VALID_DEADLINE_SLASH_WITH_TIME = "25/10/2023 16:00";
+    private static final String VALID_DEADLINE_MIX_WITH_TIME = "25/10-2023 16:00";
+    private static final String VALID_DEADLINE_WITHOUT_TIME = "25-10-2023";
+    private static final String VALID_DEADLINE_LEAP_DAY_WITHOUT_TIME = "29-02-2024";
+    private static final String DEADLINE_INVALID_INPUT = "9-10-202316:00";
+    private static final String DEADLINE_INVALID_DAY_INPUT = "9-10-2023 16:00";
+    private static final String DEADLINE_INVALID_MONTH_INPUT = "19-9-2023 16:00";
+    private static final String DEADLINE_INVALID_DAY_DEADLINE = "32-10-2023 16:00";
+    private static final String DEADLINE_INVALID_LEAP_DAY_DEADLINE = "29-02-2023 16:00";
+    private static final String DEADLINE_INVALID_MONTH_DEADLINE = "25-13-2023 16:00";
+    private static final String DEADLINE_INVALID_YEAR_DEADLINE = "32-10-10000 16:00";
+
+    private static final String DEADLINE_INVALID_DAY_INPUT_NO_TIME = "9-10-2023";
+    private static final String DEADLINE_INVALID_MONTH_INPUT_NO_TIME = "19-9-2023";
+    private static final String DEADLINE_INVALID_DAY_DEADLINE_NO_TIME = "32-10-2023";
+    private static final String DEADLINE_INVALID_LEAP_DAY_DEADLINE_NO_TIME = "29-02-2023";
+    private static final String DEADLINE_INVALID_MONTH_DEADLINE_NO_TIME = "25-13-2023";
+    private static final String DEADLINE_INVALID_YEAR_DEADLINE_NO_TIME = "32-10-10000";
+    private static final String VALID_PRIORITY = "high";
+    private static final String INVALID_PRIORITY = "hiiii";
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
@@ -48,149 +71,268 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseIndex_outOfRangeNegativeInput_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
+                -> ParserUtil.parseIndex(Long.toString(Integer.MIN_VALUE)));
+    }
+
+    @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
+        assertEquals(INDEX_FIRST_TASK, ParserUtil.parseIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST_TASK, ParserUtil.parseIndex("  1  "));
     }
 
     @Test
     public void parseName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDescription((String) null));
     }
 
     @Test
     public void parseName_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseName(INVALID_NAME));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDescription(INVALID_DESCRIPTION));
+    }
+
+    @Test
+    public void parseName_normalValid_throwsParseException() throws Exception {
+        Description expectedName = new Description("this is valid");
+        assertEquals(ParserUtil.parseDescription("this is valid"), expectedName);
     }
 
     @Test
     public void parseName_validValueWithoutWhitespace_returnsName() throws Exception {
-        Name expectedName = new Name(VALID_NAME);
-        assertEquals(expectedName, ParserUtil.parseName(VALID_NAME));
+        Description expectedName = new Description(VALID_DESCRIPTION);
+        assertEquals(expectedName, ParserUtil.parseDescription(VALID_DESCRIPTION));
     }
 
     @Test
     public void parseName_validValueWithWhitespace_returnsTrimmedName() throws Exception {
-        String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
-        Name expectedName = new Name(VALID_NAME);
-        assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
+        String nameWithWhitespace = WHITESPACE + VALID_DESCRIPTION + WHITESPACE;
+        Description expectedName = new Description(VALID_DESCRIPTION);
+        assertEquals(expectedName, ParserUtil.parseDescription(nameWithWhitespace));
     }
 
     @Test
-    public void parsePhone_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
+    public void parseNote_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseNote(null));
     }
 
     @Test
-    public void parsePhone_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parsePhone(INVALID_PHONE));
+    public void parseNote_invalidValue_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> ParserUtil.parseNote(INVALID_NOTE));
     }
 
     @Test
-    public void parsePhone_validValueWithoutWhitespace_returnsPhone() throws Exception {
-        Phone expectedPhone = new Phone(VALID_PHONE);
-        assertEquals(expectedPhone, ParserUtil.parsePhone(VALID_PHONE));
+    public void parseNote_validValueWithoutWhitespace_returnsNote() throws Exception {
+        Note expectedNote = new Note(VALID_NOTE);
+        assertEquals(expectedNote, ParserUtil.parseNote(VALID_NOTE));
     }
 
     @Test
-    public void parsePhone_validValueWithWhitespace_returnsTrimmedPhone() throws Exception {
-        String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
-        Phone expectedPhone = new Phone(VALID_PHONE);
-        assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
+    public void parseNote_validValueWithWhitespace_returnsTrimmedNote() throws Exception {
+        String noteWithWhitespace = WHITESPACE + VALID_NOTE + WHITESPACE;
+        Note expectedNote = new Note(VALID_NOTE);
+        assertEquals(expectedNote, ParserUtil.parseNote(noteWithWhitespace));
     }
 
     @Test
-    public void parseAddress_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
+    public void parseMember_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseMember(null));
     }
 
     @Test
-    public void parseAddress_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
+    public void parseMember_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseMember(INVALID_MEMBER));
     }
 
     @Test
-    public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
-        Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(VALID_ADDRESS));
+    public void parseMember_validValueWithoutWhitespace_returnsMember() throws Exception {
+        Member expectedMember = new Member(VALID_MEMBER_1);
+        assertEquals(expectedMember, ParserUtil.parseMember(VALID_MEMBER_1));
     }
 
     @Test
-    public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
-        String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
-        Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
+    public void parseMember_validValueWithWhitespace_returnsTrimmedMember() throws Exception {
+        String memberWithWhitespace = WHITESPACE + VALID_MEMBER_1 + WHITESPACE;
+        Member expectedMember = new Member(VALID_MEMBER_1);
+        assertEquals(expectedMember, ParserUtil.parseMember(memberWithWhitespace));
     }
 
     @Test
-    public void parseEmail_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
+    public void parseMembers_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseMembers(null));
     }
 
     @Test
-    public void parseEmail_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseEmail(INVALID_EMAIL));
+    public void parseMembers_collectionWithInvalidMembers_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil
+                .parseMembers(Arrays.asList(VALID_MEMBER_1, INVALID_MEMBER)));
     }
 
     @Test
-    public void parseEmail_validValueWithoutWhitespace_returnsEmail() throws Exception {
-        Email expectedEmail = new Email(VALID_EMAIL);
-        assertEquals(expectedEmail, ParserUtil.parseEmail(VALID_EMAIL));
+    public void parseMembers_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseMembers(Collections.emptyList()).isEmpty());
     }
 
     @Test
-    public void parseEmail_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
-        String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
-        Email expectedEmail = new Email(VALID_EMAIL);
-        assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    public void parseMembers_collectionWithValidMembers_returnsMemberSet() throws Exception {
+        Set<Member> actualMemberSet = ParserUtil.parseMembers(Arrays.asList(VALID_MEMBER_1, VALID_MEMBER_2));
+        Set<Member> expectedMemberSet = new HashSet<Member>(
+                Arrays.asList(new Member(VALID_MEMBER_1), new Member(VALID_MEMBER_2)));
+
+        assertEquals(expectedMemberSet, actualMemberSet);
     }
 
     @Test
-    public void parseTag_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
+    public void parseMembers_collectionWithInvalidMembers_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> ParserUtil.parseMembers(
+                Arrays.asList(INVALID_MEMBER, VALID_MEMBER_1)));
     }
 
     @Test
-    public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG));
+    public void parseMembers_collectionWithMembersDuplicates_returnsMemberSet() {
+        assertDoesNotThrow(() -> ParserUtil.parseMembers(
+                Arrays.asList(VALID_MEMBER_1, VALID_MEMBER_1, VALID_MEMBER_1)));
     }
 
     @Test
-    public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1));
+    public void parseSortOrder_validSortOrder_valid() {
+        assertDoesNotThrow(() -> ParserUtil.parseSortOrder("a"));
     }
 
     @Test
-    public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
+    public void parseSortOrder_invalidSortOrder_valid() {
+        assertThrows(IllegalArgumentException.class, () -> ParserUtil.parseSortOrder("this is an error"));
     }
 
     @Test
-    public void parseTags_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(null));
+    public void parseSortType_validSortOrder_valid() {
+        assertDoesNotThrow(() -> ParserUtil.parseSortType("dl"));
     }
 
     @Test
-    public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
+    public void parseSortOrder_validSortOrders_valid() {
+        assertThrows(IllegalArgumentException.class, () -> ParserUtil.parseSortType("this is an error"));
     }
 
     @Test
-    public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
-        assertTrue(ParserUtil.parseTags(Collections.emptyList()).isEmpty());
+    public void parseDeadline_validValueWithTimeColon_returnsDeadline() throws IllegalArgumentException {
+        Deadline expectedDeadline = Deadline.of(LocalDateTime.of(2023, 10, 25, 16, 0));
+        assertEquals(expectedDeadline, ParserUtil.parseDeadline(VALID_DEADLINE_WITH_TIME_COLON));
     }
 
     @Test
-    public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+    public void parseDeadline_validValueWithTimeDash_returnsDeadline() throws IllegalArgumentException {
+        Deadline expectedDeadline = Deadline.of(LocalDateTime.of(2023, 10, 25, 16, 0));
+        assertEquals(expectedDeadline, ParserUtil.parseDeadline(VALID_DEADLINE_WITH_TIME_DASH));
+    }
 
-        assertEquals(expectedTagSet, actualTagSet);
+    @Test
+    public void parseDeadline_validValueWithTimeNoColonDash_returnsDeadline() throws IllegalArgumentException {
+        Deadline expectedDeadline = Deadline.of(LocalDateTime.of(2023, 10, 25, 16, 0));
+        assertEquals(expectedDeadline, ParserUtil.parseDeadline(VALID_DEADLINE_WITH_TIME_NO_COLON_DASH));
+    }
+
+    @Test
+    public void parseDeadline_dateDashValidValueWithTime_returnsDeadline() throws IllegalArgumentException {
+        Deadline expectedDeadline = Deadline.of(LocalDateTime.of(2023, 10, 25, 16, 0));
+        assertEquals(expectedDeadline, ParserUtil.parseDeadline(VALID_DEADLINE_SLASH_WITH_TIME));
+    }
+
+    @Test
+    public void parseDeadline_dateMixValidValueWithTimeColon_returnsDeadline() throws IllegalArgumentException {
+        Deadline expectedDeadline = Deadline.of(LocalDateTime.of(2023, 10, 25, 16, 0));
+        assertEquals(expectedDeadline, ParserUtil.parseDeadline(VALID_DEADLINE_MIX_WITH_TIME));
+    }
+
+    @Test
+    public void parseDeadline_validValueWithoutTime_returnsDeadline() throws IllegalArgumentException {
+        Deadline expectedDeadline = Deadline.of(LocalDateTime.of(2023, 10, 25, 0, 0));
+        assertEquals(expectedDeadline, ParserUtil.parseDeadline(VALID_DEADLINE_WITHOUT_TIME));
+    }
+
+    @Test
+    public void parseDeadline_validLeapDayWithoutTime_returnsDeadline() throws IllegalArgumentException {
+        Deadline expectedDeadline = Deadline.of(LocalDateTime.of(2024, 02, 29, 0, 0));
+        assertEquals(expectedDeadline, ParserUtil.parseDeadline(VALID_DEADLINE_LEAP_DAY_WITHOUT_TIME));
+    }
+
+    @Test
+    public void parseDeadline_invalidDay_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> parseDeadline(DEADLINE_INVALID_DAY_DEADLINE));
+    }
+
+    @Test
+    public void parseDeadline_invalidLeapDay_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> parseDeadline(DEADLINE_INVALID_LEAP_DAY_DEADLINE));
+    }
+
+    @Test
+    public void parseDeadline_invalidMonth_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> parseDeadline(DEADLINE_INVALID_MONTH_DEADLINE));
+    }
+
+    @Test
+    public void parseDeadline_invalidYear_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> parseDeadline(DEADLINE_INVALID_YEAR_DEADLINE));
+    }
+
+    @Test
+    public void parseDeadline_invalidInputWhitespaceOnly_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> parseDeadline(WHITESPACE));
+    }
+
+    @Test
+    public void parseDeadline_invalidInputNoWhitespace_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> parseDeadline(DEADLINE_INVALID_INPUT));
+    }
+
+    @Test
+    public void parseDeadline_invalidDayInput_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> parseDeadline(DEADLINE_INVALID_DAY_INPUT));
+    }
+
+    @Test
+    public void parseDeadline_invalidMonthInput_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> parseDeadline(DEADLINE_INVALID_MONTH_INPUT));
+    }
+
+    @Test
+    public void parseDeadline_invalidDayNoTime_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> parseDeadline(DEADLINE_INVALID_DAY_DEADLINE_NO_TIME));
+    }
+
+    @Test
+    public void parseDeadline_invalidLeapDayNoTime_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> parseDeadline(DEADLINE_INVALID_LEAP_DAY_DEADLINE_NO_TIME));
+    }
+
+    @Test
+    public void parseDeadline_invalidMonthNoTime_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> parseDeadline(DEADLINE_INVALID_MONTH_DEADLINE_NO_TIME));
+    }
+
+    @Test
+    public void parseDeadline_invalidYearNoTime_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> parseDeadline(DEADLINE_INVALID_YEAR_DEADLINE_NO_TIME));
+    }
+
+    @Test
+    public void parseDeadline_invalidDayInputNoTime_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> parseDeadline(DEADLINE_INVALID_DAY_INPUT_NO_TIME));
+    }
+    @Test
+    public void parseDeadline_invalidMonthInputNoTime_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> parseDeadline(DEADLINE_INVALID_MONTH_INPUT_NO_TIME));
+    }
+    @Test
+    public void parsePriority_validValue_success() throws Exception {
+        assertEquals(Priority.HIGH, ParserUtil.parsePriority(VALID_PRIORITY));
+    }
+    @Test
+    public void parsePriority_invalidValue_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> ParserUtil.parsePriority(INVALID_PRIORITY));
     }
 }

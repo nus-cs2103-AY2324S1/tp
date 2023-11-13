@@ -1,0 +1,21 @@
+@startuml
+!include ../style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+package commands.exceptions as CommandExceptions;{
+    class CommandException
+    class DuplicatedTaskException
+    class IllegalCommandException
+    class IllegalTaskIndexException
+    class IllegalTaskStatusModificationException
+
+    DuplicatedTaskException -up-|> CommandException
+    IllegalCommandException -up-|> CommandException
+    IllegalTaskIndexException -up-|> IllegalCommandException
+    IllegalTaskStatusModificationException -up-|>IllegalCommandException
+
+    hide members
+}
+@enduml

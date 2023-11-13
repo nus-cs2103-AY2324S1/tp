@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.exceptions.DuplicatedPrefixException;
 
 /**
  * Stores mapping of prefixes to their respective arguments.
@@ -39,8 +39,7 @@ public class ArgumentMultimap {
      * Returns the last value of {@code prefix}.
      */
     public Optional<String> getValue(Prefix prefix) {
-        List<String> values = getAllValues(prefix);
-        return values.isEmpty() ? Optional.empty() : Optional.of(values.get(values.size() - 1));
+        return Optional.of(getAllValues(prefix)).filter(x -> !x.isEmpty()).map(x -> x.get(x.size() - 1));
     }
 
     /**
@@ -63,16 +62,16 @@ public class ArgumentMultimap {
     }
 
     /**
-     * Throws a {@code ParseException} if any of the prefixes given in {@code prefixes} appeared more than
+     * Throws a {@code DuplicatedPrefixException} if any of the prefixes given in {@code prefixes} appeared more than
      * once among the arguments.
      */
-    public void verifyNoDuplicatePrefixesFor(Prefix... prefixes) throws ParseException {
+    public void verifyNoDuplicatePrefixesFor(Prefix... prefixes) throws DuplicatedPrefixException {
         Prefix[] duplicatedPrefixes = Stream.of(prefixes).distinct()
                 .filter(prefix -> argMultimap.containsKey(prefix) && argMultimap.get(prefix).size() > 1)
                 .toArray(Prefix[]::new);
 
         if (duplicatedPrefixes.length > 0) {
-            throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
+            throw new DuplicatedPrefixException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
 }

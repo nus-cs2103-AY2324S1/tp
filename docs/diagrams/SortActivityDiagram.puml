@@ -1,0 +1,29 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+:User enter in sort command;
+:LogicManager attempt to parse the command;
+
+if () then ([command recognised])
+    :SortCommandParser instance created;
+    :SortCommandParser instance parses arguments;
+
+    if () then ([parse successful])
+        :SortCommand instance created and executed
+                            by LogicManager;
+        :Sort Task List according to parsed parameters;
+        :UI updated with new Task List ordering;
+        :CommandResult instance created and returned;
+        :LogicManager parses the CommandResult instance;
+        :Display result in UI;
+    else ([else])
+        :Display error message;
+    endif
+else ([else])
+    :Display error message;
+endif
+stop
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+!include style.puml
+skinparam genericDisplay old
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+package "Command Execution" as CE; {
+    class None #FFFFFF
+}
+
+None .down....> SortOrderEnum : sorts in order of >
+None .down....> SortTypeEnum : sorts by >
+
+
+@enduml

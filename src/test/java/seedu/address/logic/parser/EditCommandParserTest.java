@@ -1,129 +1,108 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.commands.CommandTestUtil.DEADLINE_DESC_DG;
+import static seedu.address.logic.commands.CommandTestUtil.DEADLINE_DESC_UG;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DEADLINE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NOTE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PRIORITY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.MEMBER_DESC_DG;
+import static seedu.address.logic.commands.CommandTestUtil.MEMBER_DESC_UG;
+import static seedu.address.logic.commands.CommandTestUtil.NOTE_DESC_DG;
+import static seedu.address.logic.commands.CommandTestUtil.PRIORITY_DESC_DG;
+import static seedu.address.logic.commands.CommandTestUtil.PRIORITY_DESC_UG;
+import static seedu.address.logic.commands.CommandTestUtil.TASK_DESC_DG;
+import static seedu.address.logic.commands.CommandTestUtil.TASK_DESC_UG;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_UG_DEADLINE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESC_DG;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEMBER_DG;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEMBER_UG;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_DG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TASK;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_TASK;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.logic.commands.EditCommand.EditTaskDescriptor;
+import seedu.address.model.member.Member;
+import seedu.address.model.task.Description;
+import seedu.address.model.task.Priority;
+import seedu.address.testutil.EditTaskDescriptorBuilder;
 
 public class EditCommandParserTest {
+    private static final String MEMBER_EMPTY = " " + PREFIX_MEMBER;
+    private static final String NOTE_EMPTY = " " + PREFIX_NOTE;
 
-    private static final String TAG_EMPTY = " " + PREFIX_TAG;
-
-    private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
-
-    private EditCommandParser parser = new EditCommandParser();
+    private final EditCommandParser parser = new EditCommandParser();
+    private final String errString = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.COMMAND_WORD)
+            + "\nUsage: "
+            + EditCommand.MESSAGE_USAGE;
 
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_DESC_DG, errString);
 
         // no field specified
         assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
 
         // no index and no field specified
-        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "", errString);
     }
 
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5" + TASK_DESC_DG, errString);
 
         // zero index
-        assertParseFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + TASK_DESC_DG, errString);
 
         // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 some random string", errString);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 i/ string", errString);
     }
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
-        assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
-        assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
-        assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
+        assertParseFailure(parser, "1" + INVALID_TASK_DESC, Description.MESSAGE_CONSTRAINTS); // invalid name
 
-        // invalid phone followed by valid email
-        assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
-
-        // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
-        // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
+        // while parsing {@code PREFIX_MEMBER} alone will reset the members of the {@code Task} being edited,
+        // parsing it together with a valid member results in error
+        assertParseFailure(parser, "1" + MEMBER_DESC_UG + MEMBER_DESC_DG + MEMBER_EMPTY,
+                Member.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + MEMBER_DESC_UG + MEMBER_EMPTY + MEMBER_DESC_DG,
+                Member.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + MEMBER_EMPTY + MEMBER_DESC_UG + MEMBER_DESC_DG,
+                Member.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
-                Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_TASK_DESC,
+                Description.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
+        Index targetIndex = INDEX_SECOND_TASK;
+        String userInput = targetIndex.getOneBased() + MEMBER_DESC_DG
+                + TASK_DESC_DG + MEMBER_DESC_UG;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-
-        assertParseSuccess(parser, userInput, expectedCommand);
-    }
-
-    @Test
-    public void parse_someFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY;
-
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_AMY).build();
+        EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withDescription(VALID_DESC_DG)
+                .withMembers(VALID_MEMBER_DG, VALID_MEMBER_UG).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -132,75 +111,147 @@ public class EditCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
-        Index targetIndex = INDEX_THIRD_PERSON;
-        String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build();
+        Index targetIndex = INDEX_THIRD_TASK;
+        int targetIndexUserInput = targetIndex.getOneBased();
+        String userInput = targetIndexUserInput + TASK_DESC_DG;
+        EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withDescription(VALID_DESC_DG).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // phone
-        userInput = targetIndex.getOneBased() + PHONE_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
+        // members
+        userInput = targetIndexUserInput + MEMBER_DESC_UG;
+        descriptor = new EditTaskDescriptorBuilder().withMembers(VALID_MEMBER_UG).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // email
-        userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
+        // deadline
+        userInput = targetIndexUserInput + DEADLINE_DESC_UG;
+        descriptor = new EditTaskDescriptorBuilder().withDeadline(VALID_DEADLINE_UG_DEADLINE).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // address
-        userInput = targetIndex.getOneBased() + ADDRESS_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
+        //priority
+        userInput = targetIndexUserInput + PRIORITY_DESC_UG;
+        descriptor = new EditTaskDescriptorBuilder().withPriority(Priority.MEDIUM).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // tags
-        userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
-        descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
+        //Note
+        userInput = targetIndexUserInput + NOTE_DESC_DG;
+        descriptor = new EditTaskDescriptorBuilder().withNote(VALID_NOTE_DG).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
-    public void parse_multipleRepeatedFields_failure() {
-        // More extensive testing of duplicate parameter detections is done in
-        // AddCommandParserTest#parse_repeatedNonTagValue_failure()
+    public void parse_someFieldsSpecified_success() {
+        Index targetIndex = INDEX_FIRST_TASK;
+        String userInput = targetIndex.getOneBased() + TASK_DESC_DG + MEMBER_DESC_DG;
 
+        EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder()
+                .withDescription(VALID_DESC_DG).withMembers(VALID_MEMBER_DG).build();
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_multipleRepeatedDescriptionField_failure() {
         // valid followed by invalid
-        Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_BOB;
+        Index targetIndex = INDEX_FIRST_TASK;
+        String userInput = targetIndex.getOneBased() + TASK_DESC_DG + INVALID_TASK_DESC;
 
-        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DESCRIPTION));
 
         // invalid followed by valid
-        userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + INVALID_PHONE_DESC;
+        userInput = targetIndex.getOneBased() + INVALID_TASK_DESC + TASK_DESC_UG;
 
-        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DESCRIPTION));
 
-        // mulltiple valid fields repeated
-        userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
-                + TAG_DESC_FRIEND + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND
-                + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HUSBAND;
+        // multiple valid fields repeated
+        userInput = targetIndex.getOneBased() + TASK_DESC_DG + TASK_DESC_UG + TASK_DESC_DG;
 
         assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
-
-        // multiple invalid values
-        userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC
-                + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC;
-
-        assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DESCRIPTION));
     }
 
     @Test
-    public void parse_resetTags_success() {
-        Index targetIndex = INDEX_THIRD_PERSON;
-        String userInput = targetIndex.getOneBased() + TAG_EMPTY;
+    public void parse_multipleRepeatedPriorityField_failure() {
+        // valid followed by invalid
+        Index targetIndex = INDEX_FIRST_TASK;
+        String userInput = targetIndex.getOneBased() + PRIORITY_DESC_UG + INVALID_PRIORITY_DESC;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PRIORITY));
+
+        // invalid followed by valid
+        userInput = targetIndex.getOneBased() + INVALID_PRIORITY_DESC + PRIORITY_DESC_UG;
+
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PRIORITY));
+
+        // multiple valid fields repeated
+        userInput = targetIndex.getOneBased() + PRIORITY_DESC_UG + PRIORITY_DESC_DG;
+
+        assertParseFailure(parser, userInput,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PRIORITY));
+    }
+
+    @Test
+    public void parse_multipleRepeatedDeadlineField_failure() {
+        // valid followed by invalid
+        Index targetIndex = INDEX_FIRST_TASK;
+        String userInput = targetIndex.getOneBased() + DEADLINE_DESC_UG + INVALID_DEADLINE_DESC;
+
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DEADLINE));
+
+        // invalid followed by valid
+        userInput = targetIndex.getOneBased() + INVALID_DEADLINE_DESC + DEADLINE_DESC_UG;
+
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DEADLINE));
+
+        // multiple valid fields repeated
+        userInput = targetIndex.getOneBased() + DEADLINE_DESC_UG + DEADLINE_DESC_DG;
+
+        assertParseFailure(parser, userInput,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DEADLINE));
+    }
+
+    @Test
+    public void parse_multipleRepeatedNoteField_failure() {
+        // valid followed by invalid
+        Index targetIndex = INDEX_FIRST_TASK;
+        String userInput = targetIndex.getOneBased() + NOTE_DESC_DG + INVALID_NOTE_DESC;
+
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NOTE));
+
+        // invalid followed by valid
+        userInput = targetIndex.getOneBased() + INVALID_NOTE_DESC + NOTE_DESC_DG;
+
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NOTE));
+
+        // multiple valid fields repeated
+        userInput = targetIndex.getOneBased() + NOTE_DESC_DG + NOTE_DESC_DG;
+
+        assertParseFailure(parser, userInput,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NOTE));
+    }
+
+    @Test
+    public void parse_resetMembers_success() {
+        Index targetIndex = INDEX_THIRD_TASK;
+        String userInput = targetIndex.getOneBased() + MEMBER_EMPTY;
+
+        EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withMembers().build();
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_resetNote_success() {
+        Index targetIndex = INDEX_THIRD_TASK;
+        String userInput = targetIndex.getOneBased() + NOTE_EMPTY;
+
+        EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withNote("").build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

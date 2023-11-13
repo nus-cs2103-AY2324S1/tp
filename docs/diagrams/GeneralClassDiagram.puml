@@ -1,0 +1,40 @@
+@startuml
+!include style.puml
+skinparam genericDisplay old
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+package "Command Execution" {
+    package "XYZ Command" {
+        Class "<<interface>>\nCommand" as Command
+        Class XYZCommandParser
+        Class XYZCommand
+        Class "<<interface>>\nParser<T>" as ParserGeneric
+        Class "<<interface>>\nParser<XYZCommand>" as Parser
+        Class ParserUtil
+    }
+
+    package Model {
+        class None #FFFFFF
+    }
+
+    package Logic {
+        class None #FFFFFF
+    }
+
+    Logic -[hidden]down-> Model
+
+    Parser .up.|> ParserGeneric
+
+    XYZCommand .up.|> Command
+    XYZCommandParser .right.> XYZCommand : creates >
+    XYZCommandParser .up.|> Parser
+
+
+    XYZCommandParser .down.> ParserUtil : parse using >
+
+    XYZCommand --right-> Logic : executed by >
+    XYZCommand --right-> Model : modifies >
+}
+@enduml

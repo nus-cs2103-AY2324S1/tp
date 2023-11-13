@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.storage.exceptions.storage.FileStorageLoadException;
 
 /**
  * Converts a Java object instance to JSON and vice versa
@@ -54,10 +54,10 @@ public class JsonUtil {
      *
      * @param filePath cannot be null.
      * @param classOfObjectToDeserialize JSON file has to correspond to the structure in the class given here.
-     * @throws DataLoadingException if loading of the JSON file failed.
+     * @throws FileStorageLoadException if loading of the JSON file failed.
      */
     public static <T> Optional<T> readJsonFile(
-            Path filePath, Class<T> classOfObjectToDeserialize) throws DataLoadingException {
+            Path filePath, Class<T> classOfObjectToDeserialize) throws FileStorageLoadException {
         requireNonNull(filePath);
 
         if (!Files.exists(filePath)) {
@@ -65,16 +65,12 @@ public class JsonUtil {
         }
         logger.info("JSON file " + filePath + " found.");
 
-        T jsonFile;
-
         try {
-            jsonFile = deserializeObjectFromJsonFile(filePath, classOfObjectToDeserialize);
+            return Optional.of(deserializeObjectFromJsonFile(filePath, classOfObjectToDeserialize));
         } catch (IOException e) {
             logger.warning("Error reading from jsonFile file " + filePath + ": " + e);
-            throw new DataLoadingException(e);
+            throw new FileStorageLoadException(e);
         }
-
-        return Optional.of(jsonFile);
     }
 
     /**
