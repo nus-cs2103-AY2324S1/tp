@@ -511,6 +511,7 @@ or address is invalid (> 200 characters long)
 **Extensions**
 
 * 4a. User does not see any students and appointments as no students match the given name
+
   Use case ends.
 
 #### 6.3.11 #UC11: Filter an appointment by day
@@ -524,6 +525,7 @@ or address is invalid (> 200 characters long)
 **Extensions**
 
 * 3a. User does not see any appointments as there are no appointments scheduled on that day
+
   Use case ends.
 
 ### 6.4 Non-Functional Requirements
