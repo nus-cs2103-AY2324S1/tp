@@ -2,6 +2,7 @@ package seedu.address.storage.event;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INCORRECT_DATE_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE;
 import static seedu.address.storage.event.JsonAdaptedEvent.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalEvents.EVENT_1;
@@ -20,6 +21,7 @@ public class JsonAdaptedEventTest {
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String INVALID_START_TIME = "22-09-2023 18:00";
     private static final String INVALID_END_TIME = "22-09-2023 19:00";
+    private static final String INVALID_DATE = "2023-02-31 10:00";
 
     @Test
     public void toModelType_validEventDetails_returnsEvent() throws Exception {
@@ -68,6 +70,14 @@ public class JsonAdaptedEventTest {
         JsonAdaptedEvent event =
                 new JsonAdaptedEvent(ALICE.getName().toString(), VALID_DESCRIPTION, VALID_START_TIME, INVALID_END_TIME);
         String expectedMessage = MESSAGE_INCORRECT_DATE_FORMAT;
+        assertThrows(IllegalValueException.class, expectedMessage, event::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidDate_throwsIllegalValueException() {
+        JsonAdaptedEvent event =
+                new JsonAdaptedEvent(ALICE.getName().toString(), VALID_DESCRIPTION, INVALID_DATE, VALID_END_TIME);
+        String expectedMessage = MESSAGE_INVALID_DATE;
         assertThrows(IllegalValueException.class, expectedMessage, event::toModelType);
     }
 
