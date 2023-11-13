@@ -12,31 +12,6 @@ solution to manage your student details including attendance records.
 
 ### Table of Contents
 
-<<<<<<< HEAD
-- [1. About this User Guide](#1-about-this-user-guide)
-- [2. Quick start](#2-quick-start)
-- [3. Features](#3-features)
-  - [3.1 Basic Course Management](#31-basic-course-management)
-    - [Creating an addressbook: `course create`](#311-creating-an-addressbook-course-create)
-    - [Deleting an addressbook: `course delete`](#312-deleting-an-addressbook-course-delete)
-    - [Switching an addressbook: `course switch`](#313-switching-an-addressbook-course-switch)
-    - [Editing an addressbook: `course edit`](#314-editing-an-addressbook-course-edit)
-  - [3.2 Basic Student Management](#32-basic-student-management)
-    - [Adding a new contact: `add`](#321-adding-a-new-contact-add)
-    - [Editing a contact : `edit`](#322-editing-a-contact--edit)
-    - [Marking attendance of student: `mark`](#323-marking-attendance-of-student-mark)
-    - [Viewing summary of attendance : `list attendance`](#324-viewing-summary-of-attendance--list-attendance)
-    - [Searching for student's contact via keyword : `find`](#325-searching-for-students-contact-via-keyword--find)
-    - [Listing students : `list students`](#326-listing-students--list-students)
-    - [Deleting a student : `delete`](#327-deleting-a-student--delete)
-    - [Deleting multiple students : `delete all`](#328-deleting-multiple-students--delete-all)
-    - [Merging two students : `merge`](#329-merging-two-students--merge)
-    - [Viewing detailed attendance records : `view`](#3210-viewing-detailed-attendance-records--view)
-<<<<<<< HEAD
-- [4. FAQ](#4-faq)
-- [5. Known issues](#5-known-issues)
-- [6. Command summary](#6-command-summary)
-=======
 - [1. Introduction](#1-introduction)
 - [2. About this User Guide](#2-about-this-user-guide)
   - [2.1 Navigating the User Guide](#21-navigating-the-user-guide)
