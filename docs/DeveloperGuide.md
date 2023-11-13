@@ -184,20 +184,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: More user-friendly, command will not be too lengthy.
   * Cons: Harder to implement. 
 
-### List feature
-
-There are three commands that deal with listing tutees:
-
-1. `ListCommand` - Shows the current list of all tutees in the list
-2. `ListByDayCommand` - Shows the current list of tutees who have lessons on a specified day
-3. `ListUnPaidCommand` - Shows the current list of tutees who have not paid
-
-The `ListCommand` extends the `Command` class. Both the `ListByDayCommand` and the `ListUnPaidCommand` extend the `ListCommand` class. All three commands override `Command#execute`.
-The `ListCommandParser` is responsible for returning the appropriate `ListCommand`  based on the command format.
-
-
-The `ListByDayCommand`  is initialised with a `DayPredicate` and updates
-
 ### Find feature
 The `FindCommand` extends the `Command` class. It allows the user to find for tutees by specifying their names and/or 
 subject using their prefixes. Both parameters are optional, but at least one of them must be specified for the `find`
@@ -255,6 +241,21 @@ The following activity diagram summarizes what happens when a user executes an e
 of tutees whenever changes are necessary.
     * Pros: Less prone to bugs, and is simpler for developers to implement.
     * Cons: Not user-friendly and takes multiple steps for the user.
+
+### List feature
+
+There are three commands that deal with listing tutees:
+
+1. `ListCommand` - Shows the current list of all tutees in the list
+2. `ListByDayCommand` - Shows the current list of tutees who have lessons on a specified day
+3. `ListUnPaidCommand` - Shows the current list of tutees who have not paid
+
+The `ListCommand` extends the `Command` class. Both the `ListByDayCommand` and the `ListUnPaidCommand` extend the `ListCommand` class. All three commands override `Command#execute`.
+The `ListCommandParser` is responsible for returning the appropriate `ListCommand`  based on the command format.
+
+
+The `ListByDayCommand`  is initialised with a `DayPredicate` and updates
+
 
 ### List by day feature
 The `ListByDayCommand` extends the `ListCommand` class. It is initialised with a `DayPredicate` and updates
