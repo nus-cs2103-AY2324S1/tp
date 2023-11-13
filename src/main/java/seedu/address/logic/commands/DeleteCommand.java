@@ -66,6 +66,8 @@ public class DeleteCommand extends Command {
 
             Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
             model.deletePerson(personToDelete);
+
+            // Delete event(s) with deleted person(s)
             List<Event> eventsToDelete = lastShownEventList.stream()
                     .filter(event -> event.getPerson().isSamePerson(personToDelete))
                     .collect(Collectors.toList());

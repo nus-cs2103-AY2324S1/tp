@@ -56,9 +56,9 @@ Are you tired of managing applicant applications through cumbersome spreadsheets
 
 Upgrade your hiring process with **JABPro (JobApplicationsBook Pro)**, a CLI based desktop app that allows you to:
 
-* easily manage applicant applications
-* schedule interviews
-* gain valuable insights on their interview performance
+* easily manage applicant applications,
+* schedule interviews,
+* and gain valuable insights on their interview performance! <br>
 
 From interns to full-time roles, software to marketing, JABPro’s versatile interface allows you to keep track of all kinds of job applicants in various industries. 
 
@@ -91,26 +91,26 @@ You are an **advanced** user if ...
 While **JABPro** offers a whole range of features, we believe that the following features are likely to be the most useful to you:
 
 **Viewing details of applicants:**
-1. Viewing applicant's information: `view`
+* Viewing applicant's information: `view`
 
 **Tag colouring and categorisation:**
-1. Creating a tag with a specified category: `create`
-2. Listing all tags: `listT`
-3. Adding and editing an applicant's tags and tag scores: `edit`
+* Creating a tag with a specified category: `create`
+* Listing all tags: `listT`
+* Adding and editing an applicant's tags and tag scores: `edit`
 
 **Event management and Scheduling:** 
-1. Adding an event: `event`
-2. Viewing events: `schedule`
+* Adding an event: `event`
+* Viewing events: `schedule`
 
 **Comparing and filtering applicants:**
-1. Filtering applicants by statistics: `filter`
+* Filtering applicants by statistics: `filter`
 
 These features address the complications that Hiring Managers face when managing applicants: 
-1. Visual Noise and Clutter from using other applicant management software like Excel  
+1. **Visual Noise and Clutter** from using other applicant management software like Excel
 
 `Viewing details of applicants` and `Tag colouring and categorisation` address this by creating an organized and intuitive way to view applicants and their details. This is done through colour coding and minimalistic design.
 
-2. Toggling between different software to manage applicants and schedule events   
+2. **Toggling between different software** to manage applicants and schedule events
 
 `Event Management and Scheduling` address this by allowing you to schedule events and view them in the same software. This means that you do not have to toggle between different software to manage applicants and schedule events.
 
@@ -937,6 +937,7 @@ Format:
 * The sorting algorithm is case-sensitive, which means it will treat uppercase and
   lowercase letters as distinct. This may result in names being sorted as A B C a b c, rather than A a B b C c.
 
+[Jump back to Table of Contents](#table-of-contents)
 
 ### 4. Event Management and Scheduling
 
@@ -1069,11 +1070,10 @@ Exports the entries into a .csv file located in the current directory as (/data/
 * JABPro must have write permissions, this means that if the .csv file is open,
     exporting again will not be possible.
 
-Exports to the following location
-* /data/export.csv
-
 Examples:
 * `export` exports the data to /data/export.csv
+
+[Jump back to Table of Contents](#table-of-contents)
 
 ### Clearing all entries: `clear`
 <a name="clearing-all-entries-clear"></a>
