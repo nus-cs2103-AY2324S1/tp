@@ -349,7 +349,8 @@ Format: `schedule INDEX ap/APPOINTMENT_NAME d/APPOINTMENT_DATE_TIME`
 
 - Schedules appointment with the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 - **Both appointment name and date-time** must be provided.
-- Upon successful execution of the command, the scheduled appointment details will be updated in the **Contacts list**. The appointment details will also be updated in the **Appointments list**.
+- Upon successful execution of the command, the scheduled appointment details will be updated in the **Contacts list**. The appointment details will also be updated in the **Appointments list**. 
+The list displayed will be reset to display all clients in the addressbook
 
 <div markdown="span" class="alert alert-primary">:information_source:
 If there is an existing appointment with the person when the command is executed, you can replace it with a new appointment by **clicking confirm** or **pressing the enter key** when the prompt is given.
@@ -387,6 +388,7 @@ Format: `complete [INDEX] [d/APPOINTMENT_DATE]`
 - If user inputs an `APPOINTMENT_DATE`, the command will complete all appointments in address book that have a date
 matching the one input by user, **and is regardless of the currently displayed contact list**. This allows the user to clear all his/her appointments finished throughout the
 entire day quickly.
+- After performing the complete, the list displayed will be reset to display all clients.
 
 <div markdown="span" class="alert alert-primary">:information_source:
 Note that an appointment's date is considered to be a match with user's input `APPOINTMENT_DATE` if the **year, month and day are the same**. Time of the appointment does not matter in this command.
