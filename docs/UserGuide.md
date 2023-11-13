@@ -212,7 +212,7 @@ Output:
 
 ### Finding a flash card : `find`
 
-Filters the flash card list by the given keywords. All the flash cards whose word or translation contains the keywords will be displayed.
+Filters the flash card list by the given keywords. All the flash cards whose word or translation contains at least one of the keywords will be displayed.
 * The search is case-insensitive. e.g `food` will match `Food`
 
 [Command Format](#commands): `find <KEYWORDS...>`
@@ -220,7 +220,7 @@ Filters the flash card list by the given keywords. All the flash cards whose wor
 Examples:
 * `find food` returns the flash card list and its translation that contains the keyword `food`
 * `find oo` returns the flash card list and its translation that contains the substring `oo`
-* `find food, bye` returns the flash card list and its translation that contains the keyword `food` and `bye`
+* `find food, bye` returns the flash card list and its translation that contains the keyword `food` or `bye`
 
 Output:
 
