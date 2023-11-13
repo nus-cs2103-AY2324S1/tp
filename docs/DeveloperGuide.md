@@ -842,13 +842,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. Class Manager shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. The number of students to be selected is less than 1.
 
     * 1b1. Class Manager shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 ---
 
