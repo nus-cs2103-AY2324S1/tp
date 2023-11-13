@@ -11,7 +11,7 @@ import java.time.format.DateTimeParseException;
 public class BookingPeriod {
 
     public static final String MESSAGE_CONSTRAINTS = "Booking periods must be in the format 'YYYY-MM-DD HH:MM to "
-            + "YYYY-MM-DD HH:MM', and the end datetime must be after to the start datetime.";
+            + "YYYY-MM-DD HH:MM', and the end datetime must come after the start datetime.";
 
     public static final String VALIDATION_REGEX = "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2} to"
             + " \\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}$";
