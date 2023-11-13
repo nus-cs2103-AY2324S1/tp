@@ -1,0 +1,22 @@
+@startuml
+
+start
+:Execute AppendLogCommand;
+if () then (no FindCommand result)
+  :Notify user of failure;
+else (has FindCommand result)
+  :Save a copy of the current LogBook;
+  :Add LogCommand to the command history;
+  if () then (person is duplicate)
+    :Person is added to duplicate clause;
+  else (person is non-duplicate)
+    :Person is added to the LogBook;
+endif
+if () then (FindCommand contains at least one duplicate)
+  :Notify user of duplicate person(s);
+else (FindCommand contains no duplicates)
+  :Notify user of success;
+endif
+endif
+stop
+@enduml

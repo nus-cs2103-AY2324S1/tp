@@ -368,7 +368,7 @@ The `EditCommand` allows users to modify the details of an existing person withi
 The `EditCommand` is implemented as follows:
 - **Command Word**: The command word for this feature is `edit`.
 - **Usage**: Users invoke the `EditCommand` by specifying the command word, followed by the name or IC of the person they wish to edit and the fields they wish to modify.
-    - The command format is: `edit n/NAME or id/IC_NUMBER [Fields] ...`.
+    - The command format is: `edit n/NAME or id/ID_NUMBER [Fields] ...`.
 - **EditPersonDescriptor**: The `EditCommand` relies on an `EditPersonDescriptor` to capture the details to edit the person with. This descriptor allows for updating various attributes of the person, such as phone, email, address, appointment, and medical histories.
 - **Validation**: The `EditCommand` performs validation to ensure at least one field to edit is provided. It also checks for consistency when both a name and IC are provided.
 - **Execution**: When executed, the `EditCommand` identifies the person to edit based on the provided name and/or IC. If the person is found, it creates an `editedPerson` with the desired changes. The person is then updated with the new details.
@@ -398,29 +398,29 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Description
 
-The `FindCommand` allows users to find existing person(s) within the patient list, using their name or NRIC, and view their field data.
+The `FindCommand` allows users to find existing person(s) within the patient list, using their name or ID, and view their field data.
 
 #### Implementation Details
 
 The `FindCommand` is implemented as follows:
 - **Command Word**: The command word for this feature is `find`.
-- **Usage**: Users invoke the `FindCommand` by specifying the command word, followed by the name or NRIC of the person(s) they wish to find.
-    - The command format is: `find n/NAME` or `find id/IC_NUMBER`.
-- **`execute` method**: The `FindCommand` executes the search by using the specified predicates (`NameContainsKeywordsPredicate` or `IdContainsKeywordsPredicate`) to filter and list all persons matching the search criteria.
-- **Validation**: The `FindCommand` performs validation to ensure at least one keyword is provided. It searches based on either name or NRIC, to speed up the search and prevent possible conflicts if name and NRIC do not match each other.
-- **Execution**: When executed, the `FindCommand` identifies the person(s) being searched for based on the provided name or NRIC. If a name is provided as keyword, a `FindCommand(NameContainsKeywordsPredicate)` is created, and if an NRIC is provided as keyword, a `FindCommand(IdContainsKeywordsPredicate)` is created. `updateFilteredPersonList` will then update the filter of the filtered person list to filter by the given name or NRIC predicate (keyword).
+- **Usage**: Users invoke the `FindCommand` by specifying the command word, followed by the name and/or ID of the person(s) they wish to find.
+    - The command format is: `find n/NAME` or `find id/ID_NUMBER` or `find n/Name id/ID_NUMBER`.
+- **`execute` method**: The `FindCommand` executes the search by using the specified predicates (`NameContainsKeywordsPredicate` or `IdContainsKeywordsPredicate`) to filter and list all persons matching the search criteria. // to be edited based on newer imp
+- **Validation**: The `FindCommand` performs validation to ensure at least one keyword is provided. It searches based on either name or ID, or both. The entered name and ID have to match to the same patient.
+- **Execution**: When executed, the `FindCommand` identifies the person(s) being searched for based on the provided name or ID. If a name is provided as keyword, a `FindCommand(NameContainsKeywordsPredicate)` is created, and if an ID is provided as keyword, a `FindCommand(IdContainsKeywordsPredicate)` is created. `updateFilteredPersonList` will then update the filter of the filtered person list to filter by the given name or ID predicate (keyword). // to be edited based on newer imp
 
 The following sequence diagram shows how the find operation works:
 
-<puml src="diagrams/FindSequenceDiagram.puml" width="400" />
+<puml src="diagrams/FindSequenceDiagram.puml"/>
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<puml src="diagrams/FindActivityDiagram.puml" width="500" />
+<puml src="diagrams/FindActivityDiagram.puml"/>
 
 #### Rationale
 
-- **Flexibility**: The `FindCommand` provides flexibility to users by allowing them to choose whether to find a person by name or NRIC, whichever is faster or available.
+- **Flexibility**: The `FindCommand` provides flexibility to users by allowing them to choose whether to find a person by name or ID, or both, whichever is faster or available.
 - **User Experience**: The keyword matching is case-insensitive, making the search faster and more user-friendly.
 - **Data Integrity**: The feature is designed to maintain the integrity of the patient list by not changing any of the patient data.
 
@@ -432,18 +432,152 @@ The following activity diagram summarizes what happens when a user executes a ne
         - **User Convenience**: Searching primarily by name is a common way to look up a patient in a healthcare system and users may be more familiar with this method.
 
     - **Cons**:
-        - **Potential Errors**: If patients' names change over time, there may be failed searches and other identifiers, like NRIC, may be needed.
-        - **Limited Identifiability**: If multiple patients share the same name, they will be indistinguishable name-wise and other identifiers, like NRIC, may be needed.
+        - **Potential Errors**: If patients' names change over time, there may be failed searches and other identifiers, like ID, may be needed.
+        - **Limited Identifiability**: If multiple patients share the same name, they will be indistinguishable name-wise and other identifiers, like ID, may be needed.
 
 
-- **Alternative 2**: Requiring both name and NRIC keywords to find patients within a single find command.
+- **Alternative 2**: Requiring both name and ID keywords to find patients within a single find command, for every command.
   - **Pros**:
-    - **Enhanced Precision**: Combining both name and NRIC is a more unique identification method, making it easier to find a patient sharing a name with other patients.
+    - **Enhanced Precision**: Combining both name and ID is a more unique identification method, making it easier to find a patient sharing a name with other patients.
     - **Patient Verification**: Searching by both criteria adds a layer of verification, ensuring the correct patient is selected.
 
   - **Cons**:
-    - **Additional User Effort**: Users need to provide both name and NRIC, which may take longer or require extra effort, especially if they only have one piece of information readily available.
-    - **Increased Ambiguity**: If the name keyword does not match the NRIC keyword, this may lead to potential confusion in which patient is being searched for.
+    - **Additional User Effort**: Users need to provide both name and ID, which may take longer or require extra effort, especially if they only have one piece of information readily available.
+
+    
+### Log Feature
+
+#### Description
+
+The `LogCommand` allows users to log patient profiles which are the results of `FindCommand` to the Logger Tab.
+
+#### Implementation Details
+
+The `LogCommand` is implemented as follows:
+- **Command Word**: The command word for this feature is `log`, or `lo` for short.
+- **Usage**: Users invoke the `LogCommand` by entering the command word.
+    - The command format is simply `log`, or `lo`.
+- **`execute` method**: The `LogCommand` sets persons in the logbook to be the `foundPersonsList` of the model.
+- **Validation**: The `LogCommand` performs validation to ensure the `foundPersonsList` is not empty, to ensure there are patient profiles to be added to the Logger Tab.
+- **Execution**: When executed, the `LogCommand` retrieves the logbook, then sets `loggedPersons` to the current filtered list, `foundPersonsList`, of the model. `foundPersonsList` is a filtered list that is updated using the predicate only when `FindCommand` is invoked.
+
+The following sequence diagram shows how the log operation works:
+
+<puml src="diagrams/LogSequenceDiagram.puml"/>
+
+The following activity diagram summarizes what happens when a user executes a new log command:
+
+<puml src="diagrams/LogActivityDiagram.puml"/>
+
+#### Rationale
+
+- **Multifunctional**: When the user opens HealthSync, no `FindCommand` has been invoked, so to maximise usage of the Logger Tab, `foundPersonsList` is filtered with predicate `PREDICATE_TODAY`, which loads the Logger Tab with patients that have an appointment on that day. This list remains until `FindCommand` (with a non-empty result) then `LogCommand` are invoked.
+- **User Experience**: The `LogCommand` provides convenience to users by simply overwriting what is currently in the Logger Tab with a new result, instead of having to clear the Logger Tab first, then logging the new result.
+- **Data Integrity**: The feature is designed to maintain the integrity of the patient list by not changing any of the patient data, only logging it into the Logger Tab. Furthermore, when `EditCommand` or `DeleteCommand` have been invoked for any patient in the Logger Tab, they remain unchanged in the Logger Tab. This preserves the patient profiles in the state at which they were logged.
+
+#### Alternatives Considered
+
+- **Alternative 1**: Using the filtered list, `filteredPersons` to set `loggedPersons` in the logbook
+    - **Pros**:
+        - **Standardisation**: `filteredPersons` is used by other commands that alter the patient list, such as `FindCommand`, `EditCommand` and `DeleteCommand`.
+
+    - **Cons**:
+        - **Side Effects**: If the user enters another command, like `EditCommand` or `DeleteCommand` in between `FindCommand` and `LogCommand`, the whole list will be logged.
+        - **Limited Functionality**: The Logger Tab cannot show the list of patient profiles with appointments on the day itself as `filteredPersons` contains the entire patient list.
+
+
+- **Alternative 2**: Directly interfacing with the logbook without the use of an intermediate filtered list
+    - **Pros**:
+        - **Reduced Dependency**: There is no need to maintain and update `foundPersonsList`, but rather logging will be performed directly based on the results of `FindCommand`.
+        - **Simplified Logic**: There will no longer be a need for an additional list like `foundPersonsList` and the need to retrieve it in order to set persons in logbook.
+
+    - **Cons**:
+        - **Limited Flexibility**: If future changes require more complex logging mechanisms, this direct approach may be less adaptable and scalable.
+        - **Reduced Reusability**: Logging logic becomes less reusable without a separate list, reducing modularity and maintainability.
+
+
+### Append Log Feature
+
+#### Description
+
+The `AppendLogCommand` allows users to append patient profiles which are the results of `FindCommand` to the existing profiles in the Logger Tab.
+
+#### Implementation Details
+
+The `AppendLogCommand` is implemented as follows:
+- **Command Word**: The command word for this feature is `alog`, or `al` for short.
+- **Usage**: Users invoke the `AppendLogCommand` by entering the command word.
+    - The command format is simply `alog`, or `al`.
+- **`execute` method**: The `AppendLogCommand` iterates through the `foundPersonsList` and records all the duplicates within `duplicateClause`, and adds the non-duplicates to the logbook. 
+- **Validation**: The `AppendLogCommand` performs validation to ensure the `foundPersonsList` is not empty, to ensure there are patient profiles to be appended to the Logger Tab. A `hasDuplicates` boolean also keeps track of the possible duplicates within the `foundPersonsList`.
+- **Execution**: When executed, the `AppendLogCommand` retrieves the logbook, then iterates through the `foundPersonsList` of model to add each non-duplicate person to the logbook individually (`addPerson(person)`).
+
+The following activity diagram summarizes what happens when a user executes a new append log command:
+
+<puml src="diagrams/AppendLogActivityDiagram.puml"/>
+
+#### Rationale
+
+- **Flexibility**: The user can choose to add on new `FindCommand` results to the Logger Tab, instead of completely replacing results of `FindCommand` with the new results. It's no longer all-or-nothing.
+- **User Experience**: The `AppendLogCommand` is able to save non-duplicate persons to the Logger Tab even if there exists duplicates within the `foundPersonsList` through the for-loop, instead of terminating the command altogether due to the presence of duplicate person(s).
+- **Data Integrity**: The feature is designed to maintain the integrity of the patient list by not changing any of the patient data, only appending it to the Logger Tab. Furthermore, when `EditCommand` or `DeleteCommand` have been invoked for any patient in the Logger Tab, they remain unchanged in the Logger Tab. This preserves the patient profiles in the state at which they were append-logged.
+
+#### Alternatives Considered
+
+- **Alternative 1**: Terminate the operation as soon as there is a duplicate person found
+    - **Pros**:
+        - **Efficiency**: Reduces iterations and processing, which may save computational resources, especially if `foundPersonsList` is large 
+
+    - **Cons**:
+        - **Limited Functionality**: Once `foundPersonsList` is known to have at least one duplicate, all the patient profiles in the list will not be added to the Logger Tab, limiting usability of the Logger Tab.
+        - **User Experience**: The non-duplicate patient profiles will not be added to the Logger Tab, so the user must take steps to ensure that the list of patient profiles they want to append on is exclusive with every profile currently in the Logger Tab.
+
+
+- **Alternative 2**: Directly interfacing with the logbook without the use of an intermediate filtered list
+    - **Pros**:
+        - **Reduced Dependency**: There is no need to maintain and update `foundPersonsList`, but rather append-logging will be performed directly based on the results of `FindCommand`.
+        - **Simplified Logic**: There will no longer be a need for an additional list like `foundPersonsList` and the need to retrieve it in order to add persons to logbook.
+
+    - **Cons**:
+        - **Limited Flexibility**: If future changes require more complex append-logging mechanisms, this direct approach may be less adaptable and scalable.
+        - **Reduced Reusability**: Append-logging logic becomes less reusable without a separate list, reducing modularity and maintainability.
+
+
+### Clear Log Feature
+
+#### Description
+
+The `ClearLogCommand` allows users to delete all the patient profiles in the Logger Tab.
+
+#### Implementation Details
+
+The `ClearLogCommand` is implemented as follows:
+- **Command Word**: The command word for this feature is `clog`, or `cl` for short.
+- **Usage**: Users invoke the `ClearLogCommand` by entering the command word.
+    - The command format is simply `clog`, or `cl`.
+- **`execute` method**: The `ClearLogCommand` sets the logbook to be a new logbook.
+- **Validation**: The `ClearLogCommand` performs validation to ensure model is non-null. 
+- **Execution**: When executed, the `ClearLogCommand` sets the logbook of the model to be a new logbook (`new LogBook()`), effectively resetting the contents of the Logger Tab.
+
+The following sequence diagram shows how the clog operation works:
+
+<puml src="diagrams/ClearLogSequenceDiagram.puml"/>
+
+#### Rationale
+
+- **Reusability**: The logbook can be reset at any time, so the user can enter a new set of patient profiles when required.
+- **Data Integrity**: The feature is designed to maintain the integrity of the patient list by not changing any of the patient data in the main patient list, only clearing profiles from the Logger Tab.
+
+#### Alternatives Considered
+
+- **Alternative**: Have a delete command for log, to delete patient profiles individually
+    - **Pros**:
+        - **Flexibility**: The user can select which patient profiles they want to remove, and which they want to keep.
+
+    - **Cons**:
+        - **User Experience**: If the user wants to clear the Logger Tab, they need to delete each patient profile individually, which may be very inconvenient especially with a large list in Logger Tab.
+        - **Altered Functionality**: The Logger Tab is meant to be a temporary snapshot of patient profiles at the time at which they were logged, not a subset version of the existing patient list.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
