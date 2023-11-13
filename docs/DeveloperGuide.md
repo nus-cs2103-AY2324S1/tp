@@ -724,17 +724,38 @@ testers are expected to do more *exploratory* testing.
    
 4. Adding a musician with invalid instrument
    1. Test case: `add n/Alexis Tan p/98766789 e/AlexisT@music.com i/violn`  
-        **Expected:** Error message saying instrument should be a valid instrument name and to use `tags` function for the list of valid instruments. The input is highlighted in red.
+        **Expected:** Error message saying instrument should be a valid instrument name and to use `tags` function for the list of valid instruments.
 
 5. Adding a musician with invalid genre
    1. Test case: `add n/Alexis Tan p/98766789 e/AlexisT@music.com g/gazz`  
-      **Expected:** Error message saying instrument should be a valid genre name and to use `tags` function for the list of valid genres. The input is highlighted in red.
+      **Expected:** Error message saying instrument should be a valid genre name and to use `tags` function for the list of valid genres.
 
-5. Adding a duplicate musician
-   1. Ensure that you have completed the first test (Adding a musician with only compulsory fields).
+5. Adding a duplicate musician  
+   **Prerequisite:** Ensure that you have completed the first test (Adding a musician with only compulsory fields).
    1. Test case: `add n/Hans Leonhart p/98765432 e/hansl@music.com`  
-      **Expected:** Error message saying that the musician already exists in your contact list
+      **Expected:** Error message saying that the musician already exists in the address book.
 
+### Edit a musician
+
+**Prerequisite:** Musician List should have at least 1 Musician
+
+1. Editing a musician with valid index
+   1. Test case: `edit 1 p/98765430 g/pop`  
+   **Expected:** The phone number and genre of the first musician is updated to the input.
+2. Editing a musician with invalid index
+    1. Test case: `edit 0 p/98362430 g/jazz`  
+       **Expected:** Error saying the musician index is invalid.
+3. Editing a musician with invalid tag
+    1. Test case: `edit 1 i/piana`  
+       **Expected:** Error message saying instrument should be a valid genre name and to use `tags` function for the list of valid genres.
+4. Editing a musician to an existing musician  
+    **Prerequisite:** Add an additional musician using `add n/Rolando Loom p/91919191 e/RolandoLoom@music.com`. you should have at least 2 musicians now.
+    1. Test case: `edit 1 n/Rolando Loom`  
+       **Expected:** Error saying the musician already exists in the address book.
+    2. Test case: `edit 1 p/91919191`  
+      **Expected:** Error saying the phone number or email already exists in the contact list.
+    3. Test case: `edit 1 e/RolandoLoom@music.com`  
+      **Expected:** Error saying the phone number or email already exists in the contact list.
 
 ### Deleting a musician
 
