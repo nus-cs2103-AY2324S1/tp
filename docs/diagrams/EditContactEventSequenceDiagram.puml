@@ -33,7 +33,7 @@ activate EditContactEventParser
 EditContactEventParser --> AddressBookParser
 deactivate EditContactEventParser
 
-AddressBookParser -> EditContactEventParser : parse("1 1 d/Nap")
+AddressBookParser -> EditContactEventParser : parse("1 1 d/CS2103 meeting ts/2023-11-11 10:00 te/2023-11-11 12:00")
 activate EditContactEventParser
 
 create EditContactEvent
