@@ -44,7 +44,7 @@ If you can type fast, WellNUS can get your contact management and scheduling tas
    1. To check the current version of Java installed on your system, refer to [this guide](https://www.java.com/en/download/help/version_manual.html).
    2. If Java is not installed or you have an outdated version, you may download it [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
-2. Download the latest `wellnus.jar` from [here](https://github.com/AY2324S1-CS2103T-W13-4/tp/releases/tag/v1.3).
+2. Download the latest `wellnus.jar` from [here](https://github.com/AY2324S1-CS2103T-W13-4/tp/releases/tag/v1.4).
    1. Click on the link above to be redirected to our *github repository*.
    2. Under *Assets*, click on the `wellnus.jar` file (underlined in red) to begin the download.
 
