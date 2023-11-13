@@ -682,14 +682,14 @@ Use case resumes from step 3.
 Some of our current output messages are not formatted properly. For example, the message entering the `reveal` command is "Flashcard has been revealed!" followed directly by the translation. Users may be confused to distinguish the message and the translation.
 
 **Proposed Enhancement**
-* Formatting the messages to be more clear and user-friendly.
+* Formatting the messages to be more clear and consistent with User Guide.
 * Specifying output messages to be more detailed and grammatically correct.
 
 **Sample Output**
 
 | Current Output Message               | After Enhancement         |
 |--------------------------------------|---------------------------|
-| ![img.png](images/RevealMessage.png) | Translation: word         |
+| ![img.png](images/FindMessage.png)   | Parameters: <KEYWORDS...>              |
 | ![img.png](images/ReviewMessage.png) | ...1 flashcard(s) listed! |
 
 ### Enhancement 3: Adding frequency of usage tags
@@ -752,7 +752,7 @@ The Tag commands can be used in the following ways:
 - `editTag 2 ot/Rare rt/Uncommon` - Changes the 'Rare' tag to 'Uncommon' on the flashcard at index 2.
 - `delTag 3 tg/Essentials` - Deletes the 'Essentials' tag from the flashcard at index 3.
 
-### Design Considerations
+#### Design Considerations
 
 **Aspect: What is the most effective method of tagging Flashcards:**
 In enhancing the functionality of our flashcard system, we considered how users could tag flashcards to optimize their learning experience.
@@ -823,7 +823,7 @@ For advanced users who manually edit the data, they may accidentally introduce i
 * `Duplicated flash card ... found in flashlingo.json`: Duplicate combination of word and translation is found in the data file.
 * `Invalid flash card ... with invalid ... found in flashlingo.json`: Flash card with invalid word/translation, level or review date found.
 
-### Enhancement 4: Renaming `reveal` command to reduce ambiguity
+### Enhancement 6: Renaming `reveal` command to reduce ambiguity
 
 **Feature Flaw**
 Currently, the `reveal` command is used to reveal or hide the translation of the flash card. However, it may be ambiguous to users as they may think that the command is used to reveal the word itself.

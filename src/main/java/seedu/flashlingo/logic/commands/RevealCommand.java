@@ -21,7 +21,7 @@ public class RevealCommand extends Command {
         + "used\nParameters: INDEX (must be a positive integer)\n"
         + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_SUCCESS = "Flashcard has been revealed!";
+    public static final String MESSAGE_SUCCESS = "The translation is: ";
     private final Index targetIndex;
     /**
      * Creates an RevealCommand.
