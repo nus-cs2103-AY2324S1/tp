@@ -131,7 +131,7 @@ Used to highlight issues to look out for
 3. Download Advanced&Efficient [here](https://github.com/AY2324S1-CS2103T-T14-2/tp/releases/tag/v1.4)<br>
    i. After clicking on the link, click on `AdvancedAndEfficient.jar` as seen in the picture below.
 
-    <img src='images/ug/jar.png' width='600'> 
+    <img src='images/ug/jar.png' width='600'>
 <br>
 
 4. After downloading the application, move it into the “AAndE” folder created in step 2.
