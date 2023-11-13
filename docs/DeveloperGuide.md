@@ -523,7 +523,6 @@ Pros: It prevents redundant data from being stored and accidental addition of mu
 Cons: It restricts users from entering data that might be understandable or convenient for them. [For example: If the user creates two Events with the description "Interview" for the same person, they might have a distinct idea of what each of those Events mean, but the system prevents them for making this addition].
 
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -574,16 +573,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Hiring Manager | delete job applicants information                                                                                | I can remove redundant/unecessary data bloat and also to abide to privacy laws                                                             |
 | `* * *`  | Hiring Manager | view a specific job applicant's resume or portfolio                                                              | I can check whether they meet the requirements requested by other department heads                                                         |
 | `* * *`  | Hiring Manager | search for all job applicants matching a given profile                                                           | I can find suitable candidates for a project                                                                                               |
-| `* * *`  | Hiring Manager | List all candidate's information                                                                                 | I can easily view each candidates information                                                                                              |
+| `* * *`  | Hiring Manager | list all applicants information                                                                                  | I can easily get an overview of all of the applicants                                                                                      |
 | `* * *`  | Hiring Manager | update the application status for a candidate (e.g. "Interviewed", "Rejected", "Offered")                        | I can keep track of each candidate's progress in the hiring process                                                                        |
 | `* * *`  | Hiring Manager | record the score of the different activities such as interviewsor assessments that an applicant might go through | I can use them for effective comparison and filter the candidates easily                                                                   |
 | `* * *`  | Hiring Manager | create tags and categorise them                                                                                  | I can colour code them based on categories and use them to tag applicants to easily distinguish them                                       |
+| `* * *`  | Hiring Manager | list all tags I have created                                                                                     | I can easily get an overview of all of the tags that I have made                                                                           |
 | `* * *`  | Hiring Manager | compare candidates using their performance in their assessments or interviews                                    | I can choose the best candidates to move to the next stage of the hiring process and get the best performing candidates objectively        |
 | `* * *`  | Hiring Manager | add social profile (LinkedIn/Github)  candidate's information and view with ease                                 | I can get a more holistic view of the candidate's abilities                                                                                |
 | `* *`    | Hiring Manager | view a schedule/summary of events relating to the candidates                                                     | I can make preparations and arrangements for the events beforehand, and also get an idea of where each candidate is in the hiring process. |
-| `* *`    | Hiring Manager   | export candidate information and application data to a spreadsheet        <br/>                                  | I can perform further analysis using alternate tools on candidate data                                                                     |
-| `*`      | Hiring Manager   | get data on which positions are lacking job applicants                                                           | I can update the external recruitment team to focus on head hunting applicants for these roles                                             |
-| `*`      | Hiring Manager   | get data on which positions already have too many applicants                                                     | I can forward this to the department heads to see if they still want to keep the job posting or close it                                   |
+| `* *`    | Hiring Manager | export candidate information and application data to a spreadsheet        <br/>                                  | I can perform further analysis using alternate tools on candidate data                                                                     |
+| `*`      | Hiring Manager | get data on which positions are lacking job applicants                                                           | I can update the external recruitment team to focus on head hunting applicants for these roles                                             |
+| `*`      | Hiring Manager | get data on which positions already have too many applicants                                                     | I can forward this to the department heads to see if they still want to keep the job posting or close it                                   |
 
 
 
@@ -665,7 +665,6 @@ Use case ends.
 * 5a. No person match the given profile.
   * 5a1. JABPro shows a message indicating that there are no persons to display.
     Use case ends.
-
 
 **Use case: Delete a person**
 
@@ -980,7 +979,7 @@ testers are expected to do more *exploratory* testing.
 
    2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
@@ -1004,18 +1003,21 @@ testers are expected to do more *exploratory* testing.
       **Expected**: No person is added. Error details shown in the status message. List of persons remains the same.
 
 ### Deleting a person
-
 1. Deleting a person while all persons are being shown
+    1. Prerequisites:
+       1. List all persons using the `list` command. Multiple persons in the list.
+       2. Set one of the applicants' status in the sample data to `interviewed` by doing `set 1 interviewed`
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-    2. Test case: `delete 1`<br>
+    2. Test case: `delete st/interviewed`
        **Expected**: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    3. Test case: `delete 0`<br>
+    3. Test case: `delete 1`<br>
+       **Expected**: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+
+    4. Test case: `delete 0`<br>
        **Expected**: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    5. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        **Expected**: Similar to previous.
 
 ### Viewing a person's details while all persons are being shown
@@ -1142,7 +1144,7 @@ testers are expected to do more *exploratory* testing.
       **Note**: The score value should be a positive integer and must contain a space between the tag and the score value.<br> 
       **Expected**: Neither score nor tag is updated for person. Error details shown in the status message.
    
-### Setting a person's status (Preliminary, Interviewed, Accepted/Rejected.)
+### Setting a person's status (Preliminary, Interviewed, Accepted/Rejected)
 1. Setting a person's status in the list
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
@@ -1201,9 +1203,9 @@ testers are expected to do more *exploratory* testing.
    `filter t/Interview met/percentile`   
    **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
 
-### Adding LinkedIn/Github username to a person while all persons are being shown ###
+### Adding LinkedIn/GitHub username to a person while all persons are being shown ###
 
-1. Adding LinkedIn/Github username to a person while all persons are being shown
+1. Adding LinkedIn/GitHub username to a person while all persons are being shown
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
    
     2. Test case (Positive test case): `addL 1 u/alexyeoh`
