@@ -72,7 +72,7 @@ Given below are my contributions to the project.
   * New fields implemented by me are adopted by the team ([#63](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/63))
 
 * **Tools**:
-  * Utitlised JavaFx Scene Builder for building the frontend of the project ([\#107](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/107))
+  * Utilised JavaFx Scene Builder for building the frontend of the project ([\#107](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/107))
   * Utilised Markbind CLI to preview PUML diagrams and web changes locally [\#252](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/252)
 
 
