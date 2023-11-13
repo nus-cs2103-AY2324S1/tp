@@ -288,7 +288,7 @@ Step 4. The number of people displayed is returned as a `CommandResult`.
 #### Implementation
 The sort function executed by `SortCommand`.
 
-The sort function allows users to sort all persons in `UniMate` based on a given criteria. The following criterion for sort are shown below
+The sort function allows users to sort all persons in UniMate based on a given criteria. The following criterion for sort are shown below
 - Sort by name (optional: in the reverse order)
 - Sort by address (optional: in the reverse order)
 - Sort by email (optional: in the reverse order)
@@ -306,7 +306,7 @@ Given below is an example of how the sort function works at each step. We will s
 
 Here's a sequence diagram to summarise the steps above:
 
-<puml src="diagrams/SortSequenceDiagram.puml" width="550"/>
+<puml src="diagrams/SortSequenceDiagram.puml" alt="SortSequenceDiagram"/>
 
 **Design considerations**
 
@@ -349,6 +349,29 @@ The `addTask` method in the model is called, adding the task to the tasklist, an
 
 * The design of the `addTask` command is such that a deadline is made optional.
 * This current implementation allows for more freedom to the user but might be more difficult to manage with the addition of Optionals.
+
+//@@author nicrandomlee
+### Edit Contact Event
+
+#### Implementation
+The Edit Contact Event function executed by `editContactEvent` allows users to edit all person's calendar events in UniMate.
+
+The syntax used to call this command is as follows: `editContactEvent PERSON_INDEX EVENT_INDEX [d/DESCRIPTION] [ts/NEW_START_DATE_TIME][te/NEW_END_DATE_TIME]`.
+
+Given below is an example of how the editContactEvent function works at each step. We will simulate a user using the editContactEvent function to sort UniMate contacts by name in descending order.
+1. The user executes `editContactEvent 1 1 d/CS2103 meeting ts/2023-11-11 10:00 te/2023-11-11 12:00` to reschedule the meeting with his CS2103 module group mate. The input is passed into `UniMateParser` which then parses it with the `EditContactEventCommandParser`.
+2. The `EditContactEventCommandParser` parses the input and first checks for arguments provided. If the arguments are empty, invalid or in the wrong format, a helper message will appear to allow the user to reference the sample run case. The arguments are then matched by delimiters `d/`, `ts/` amd `te/` to determine the fields to be edited. If certain fields are empty (for example, the user just wants to change the time start and time end of the meeting), the event description from the edited event will be retained when `EditContactEventCommand#execute` is executed in step 4.
+3. `EditContactEventCommandParser` creates a temporary event `EditEventDescriptor` as well as an array consisting of two elements, that is the PERSON_INDEX and EVENT_INDEX to be parsed. The `EditContactEventCommandParser` finally returns a newly created `EditContactEventCommand` consisting of the array and the temporary event.
+4. `EditContactEventCommand#execute` is called. In this method, a new person object is created with the same attributes except an updated calendar with the updated event instead. `model#setPerson` is called to replace the target person with the new person. The observable list is then refreshed to show the new calendar event.
+5. The success message is returned as a `CommandResult` and displayed on the GUI result display panel.
+
+Here's a sequence diagram to summarise the steps above:
+
+<puml src="diagrams/EditContactEventSequenceDiagram.puml" alt="EditContactEventSequenceDiagram""/>
+
+**Design considerations**
+
+* The design of the `EditContactEvent` command is dependent on the structure of the `CalendarStorage` object. Should the structure of how the Calendar objects are stored change, a new implementation will be required for the command.
 
 ##### Delete Task (To be added)
 
