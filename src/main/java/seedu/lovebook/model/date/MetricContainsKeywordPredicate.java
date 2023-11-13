@@ -30,7 +30,7 @@ public class MetricContainsKeywordPredicate implements Predicate<Date> {
     public boolean test(Date date) {
         requireNonNull(date);
         if (metric.equals(PREFIX_NAME)) {
-            return StringUtil.containsWordIgnoreCase(date.getName().fullName, keyword);
+            return StringUtil.containsMultiWordIgnoreCase(date.getName().fullName, keyword);
         }
         if (metric.equals(PREFIX_AGE)) {
             return StringUtil.containsWordIgnoreCase(date.getAge().value, keyword);

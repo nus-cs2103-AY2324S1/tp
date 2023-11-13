@@ -39,6 +39,26 @@ public class StringUtil {
     }
 
     /**
+     * Returns true if the {@code sentence} contains the {@code multiWord}.
+     * @param sentence cannot be null
+     * @param multiWord cannot be null, cannot be empty
+     * @return
+     */
+
+    public static boolean containsMultiWordIgnoreCase(String sentence, String multiWord) {
+        requireNonNull(sentence);
+        requireNonNull(multiWord);
+
+        String preppedMultiWord = multiWord.trim();
+        checkArgument(!preppedMultiWord.isEmpty(), "Multi-word parameter cannot be empty");
+
+        String preppedSentence = sentence.toLowerCase();
+        String preppedMultiWordLowerCase = preppedMultiWord.toLowerCase();
+
+        return preppedSentence.contains(preppedMultiWordLowerCase);
+    }
+
+    /**
      * Returns a detailed message of the t, including the stack trace.
      */
     public static String getDetails(Throwable t) {
