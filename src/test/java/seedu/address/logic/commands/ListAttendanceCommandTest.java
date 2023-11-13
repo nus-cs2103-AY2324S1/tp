@@ -2,7 +2,11 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.OPTIONAL_TAG_G01;
+import static seedu.address.logic.commands.CommandTestUtil.OPTIONAL_TAG_T09;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.ListAttendanceCommand.MESSAGE_ATTENDANCE_SUMMARY_NO_TAG;
+import static seedu.address.logic.commands.ListAttendanceCommand.MESSAGE_ATTENDANCE_SUMMARY_WITH_TAG;
 import static seedu.address.logic.commands.ListAttendanceCommand.MESSAGE_NO_STUDENTS;
 import static seedu.address.logic.commands.ListAttendanceCommand.MESSAGE_SUCCESS;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -13,7 +17,6 @@ import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -40,8 +43,8 @@ public class ListAttendanceCommandTest {
 
     @Test
     public void equals() {
-        Optional<Tag> firstTag = Optional.of(new Tag("G10"));
-        Optional<Tag> secondTag = Optional.of(new Tag("G01"));
+        Optional<Tag> firstTag = OPTIONAL_TAG_T09;
+        Optional<Tag> secondTag = OPTIONAL_TAG_G01;
         Week firstWeek = new Week(1);
         Week secondWeek = new Week(2);
 
@@ -50,7 +53,10 @@ public class ListAttendanceCommandTest {
                 new AbsentFromTutorialPredicate(firstWeek, firstTag));
         ListAttendanceCommand listAttendanceSecondCommand = new ListAttendanceCommand(secondTag, secondWeek,
                 new ContainsTagPredicate(secondTag),
-                new AbsentFromTutorialPredicate(secondWeek, firstTag));
+                new AbsentFromTutorialPredicate(secondWeek, secondTag));
+        ListAttendanceCommand listAttendanceThirdCommand = new ListAttendanceCommand(secondTag, firstWeek,
+                new ContainsTagPredicate(secondTag),
+                new AbsentFromTutorialPredicate(firstWeek, secondTag));
 
         // same object -> returns true
         assertTrue(listAttendanceFirstCommand.equals(listAttendanceFirstCommand));
@@ -69,15 +75,22 @@ public class ListAttendanceCommandTest {
 
         // different values -> returns false
         assertFalse(listAttendanceFirstCommand.equals(listAttendanceSecondCommand));
+
+        // same tag different week -> returns false
+        assertFalse(listAttendanceSecondCommand.equals(listAttendanceThirdCommand));
+
+        // same week different tag -> returns false
+        assertFalse(listAttendanceFirstCommand.equals(listAttendanceThirdCommand));
     }
+
     @Test
     public void execute_listAttendanceWithTag_success() {
-        Optional<Tag> tag = Optional.of(new Tag("G02"));
+        Optional<Tag> tag = OPTIONAL_TAG_T09;
         Week week = new Week(0);
         ListAttendanceCommand command = new ListAttendanceCommand(tag, week,
                 new ContainsTagPredicate(tag), new AbsentFromTutorialPredicate(week, tag));
 
-        String expectedSummary = String.format(Messages.MESSAGE_ATTENDANCE_SUMMARY_WITH_TAG, 0, 1, week.getWeekNumber(),
+        String expectedSummary = String.format(MESSAGE_ATTENDANCE_SUMMARY_WITH_TAG, 0, 1, week.getWeekNumber(),
                 expectedModel.getAddressBook().getCourseCode(), tag.get().getTagName());
 
         expectedModel.addFilter(new ContainsTagPredicate(tag));
@@ -129,7 +142,7 @@ public class ListAttendanceCommandTest {
                 new ContainsTagPredicate(tag), new AbsentFromTutorialPredicate(week, tag));
 
         int total = expectedModel.getFilteredPersonList().size();
-        String expectedSummary = String.format(Messages.MESSAGE_ATTENDANCE_SUMMARY_NO_TAG, total - 1, total, 0,
+        String expectedSummary = String.format(MESSAGE_ATTENDANCE_SUMMARY_NO_TAG, total - 1, total, 0,
                 expectedModel.getAddressBook().getCourseCode());
 
         expectedModel.addFilter(new AbsentFromTutorialPredicate(week, tag));

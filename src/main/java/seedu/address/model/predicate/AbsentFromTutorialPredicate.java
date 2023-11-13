@@ -22,8 +22,8 @@ public class AbsentFromTutorialPredicate extends SerializablePredicate {
     /**
      * Constructor a {@code AbsentFromTutorialPredicate} with index and tutorial group.
      *
-     * @param week Week number to get the attendance list for.
-     * @param tag  Tutorial group to get the attendance list for.
+     * @param week Week number to get the attendance summary for.
+     * @param tag  Tutorial group to get the attendance summary for.
      */
     public AbsentFromTutorialPredicate(Week week, Optional<Tag> tag) {
         super(person -> {
@@ -72,6 +72,6 @@ public class AbsentFromTutorialPredicate extends SerializablePredicate {
 
     @Override
     public String toString() {
-        return "Attendance Filter: " + week + " " + tag.get().getTagName();
+        return "Attendance Filter: " + week + " " + (tag.isEmpty() ? "null" : tag.get().getTagName());
     }
 }

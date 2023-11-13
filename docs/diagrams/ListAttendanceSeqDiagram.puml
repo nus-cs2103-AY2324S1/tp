@@ -52,16 +52,48 @@ activate ListAttendanceCommand
 ListAttendanceCommand -> Model : clearFilters()
 activate Model
 
-ListAttendanceCommand -> Model : addFilter(tutorialPredicate(G2))
+Model --> ListAttendanceCommand
+deactivate Model
 
-ListAttendanceCommand -> ListAttendanceCommand : getUnmarkedPersons()
-
-ListAttendanceCommand -> Model : addFilter(absencePredicate(1))
-
-ListAttendanceCommand -> ListAttendanceCommand : getAttendanceSummary()
+ListAttendanceCommand -> Model : getFilteredPersonList()
+activate Model
 
 Model --> ListAttendanceCommand
 deactivate Model
+
+ListAttendanceCommand -> Model : getAddressBook()
+activate Model
+
+Model --> ListAttendanceCommand
+deactivate Model
+
+ListAttendanceCommand -> Model : addFilter(tutorialPredicate(G2))
+activate Model
+
+Model --> ListAttendanceCommand
+deactivate Model
+
+ListAttendanceCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> ListAttendanceCommand
+deactivate Model
+
+ListAttendanceCommand -> ListAttendanceCommand : unmarkedPersonsListBuilder()
+
+ListAttendanceCommand -> Model : addFilter(absencePredicate(1))
+activate Model
+
+Model --> ListAttendanceCommand
+deactivate Model
+
+ListAttendanceCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> ListAttendanceCommand
+deactivate Model
+
+ListAttendanceCommand -> ListAttendanceCommand : summaryBuilder()
 
 create CommandResult
 ListAttendanceCommand -> CommandResult

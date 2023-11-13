@@ -659,7 +659,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: provide a convenient one-stop platform for tutors to keep track of the work submission and attendance of each student
+**Value proposition**: provide a convenient one-stop platform for tutors to keep track of the contact details and attendance records of each student
 
 
 ### User stories
@@ -671,7 +671,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | meticulous user | mark attendance for each student separately                        | make sure each students' attendance record is accurate                                     |
 | `* * *`  | user            | see a summary of attendance records                                | verify the attendance records                                                              |
 | `* * *`  | user            | easily create new or edit contacts                                 | easily add or remove contacts                                                              |
-| `* * *`  | user            | search for a student by name or student ID                         | quickly access their attendance and assignment records                                     |
+| `* * *`  | user            | search for a student by name or student ID                         | quickly access their attendance and contact details                                        |
 | `* * *`  | user            | view a list of all my students                                     | quickly scan who's in my tutorial groups                                                   |
 | `* * *`  | user            | filter for specific tutorial groups                                | efficiently engage in tutorial-group-based tasks such as marking attendance after a lesson |
 | `* *`    | frequent user   | organise my students' contacts by modules                          | better manage my students                                                                  |
