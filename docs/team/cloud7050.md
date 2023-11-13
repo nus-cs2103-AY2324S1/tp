@@ -42,9 +42,9 @@ While it has a Graphical User Interface, most of its user interactions happen vi
 <!-- use cases -->
 <!-- appendix: instructions for manual testing -->
 <!-- appendix: effort -->
-<!-- appendix: planned enhancements -->
 
 - Wrote sections: Sorting, acknowledgements, product scope, NFRs.
+- Added to sections: Enhancements.
 - Helped update to match our product.
 - Scrapped separate out-of-scope pages.
 

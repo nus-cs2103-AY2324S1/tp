@@ -2,12 +2,13 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
+
+- Table of Contents
 {:toc}
 
 ---
 
-## **Design**
+## Design
 
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document are in the `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
@@ -129,7 +130,7 @@ Classes used by multiple components are in the `swe.context.commons` package.
 
 ---
 
-## **Implementation**
+## Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
 
@@ -179,25 +180,25 @@ The following activity diagram summarises what happens when a user executes an e
 
 ### Navigating to previous commands
 
-The feature of navigating between command history using the up/down arrow keys, is facilitated by `CommandBoxHistory`. `CommandBox` keeps a reference to a `CommandBoxHistory` object which stores the history of entered commands. 
+The feature of navigating between command history using the up/down arrow keys, is facilitated by `CommandBoxHistory`. `CommandBox` keeps a reference to a `CommandBoxHistory` object which stores the history of entered commands.
 
-`CommandBoxHistory` stores a list of commands, which behaves externally as if its last element is always the empty string. This is so that the user can enter a new command when at the last position in the command history.  
+`CommandBoxHistory` stores a list of commands, which behaves externally as if its last element is always the empty string. This is so that the user can enter a new command when at the last position in the command history.
 
-The following sequence diagram summarises what happens when the user presses the up arrow key to navigate to the previous command in history. 
+The following sequence diagram summarises what happens when the user presses the up arrow key to navigate to the previous command in history.
 
 ![CommandBoxHistorySequenceDiagram](images/CommandBoxHistorySequenceDiagram.png)
 
 The behaviour is very similar when the user presses the down arrow key to navigate to the next command in history, so we omit the corresponding sequence diagram.
 
-The following sequence diagram summarises what happens when the user successfully executes a new command, and this new command is stored in the command history. 
+The following sequence diagram summarises what happens when the user successfully executes a new command, and this new command is stored in the command history.
 
 ![CommandBoxHistoryNewSequenceDiagram](images/CommandBoxHistoryNewSequenceDiagram.png)
 
-The command is only stored in history if the execution of the command (by `CommandExecutor`) is successful. The position in history is also reset to the last position (empty string) using `CommandBoxHistory#resetPointer`. 
+The command is only stored in history if the execution of the command (by `CommandExecutor`) is successful. The position in history is also reset to the last position (empty string) using `CommandBoxHistory#resetPointer`.
 
 ---
 
-## **Acknowledgements**
+## Acknowledgements
 
 - Libraries: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 - App icon from <http://www.mcdodesign.com/> by Susumu Yoshida
@@ -205,7 +206,7 @@ The command is only stored in history if the execution of the command (by `Comma
 
 ---
 
-## **Appendix: Requirements**
+## Appendix: Requirements
 
 ### Product scope
 
@@ -282,7 +283,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. An invalid contact to edit is specified.
 
   * 2a1. ConText shows an error message.
-  
+
     Use case resumes at step 2.
 
 **Use case: UC03 - List all contacts**
@@ -313,13 +314,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. An invalid contact to edit is specified.
 
   * 2a1. ConText shows an error message.
-    
+
     Use case resumes at step 2.
 
 * 2b. The given data is incorrect.
 
   * 2b1. ConText shows an error message.
-    
+
     Use case resumes at step 2.
 
 **Use case: UC05 - Clear all contacts**
@@ -356,8 +357,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The filtered list is empty.
 
   Use case ends
-
-*{More to be added}*
 
 ### Non-functional Requirements
 
@@ -446,7 +445,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-## **Appendix: Instructions for manual testing**
+## Appendix: Instructions for manual testing
 
 //TODO
 
@@ -505,16 +504,52 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-## **Appendix: Effort**
+## Appendix: Effort
 
 //TODO
 
-## **Appendix: Planned enhancements**
-1. Currently, the `delete` command allows for duplicate indices to be entered. This may lead to unintended behaviour for some users. We plan to tweak this by displaying an additional warning message if duplicate indices are entered, to remind the user about the duplication. The user can then confirm whether they would like the command to go through, or whether they would like to make changes to their input command. This can be achieved by adding a boolean field to the `DeleteCommand` class to indicate whether the user has entered duplicate indices in the command.
-1. Currently, error messages displayed in ConText are generic. For example, if a user enters a negative index, the error message `Invalid command format` is displayed, even if the command format is technically correct. We plan to add more specific error messages for invalid indices (e.g. non-positive, too large, or does not exist in the list), to let the user know that the index itself is invalid, and why.
-1. Currently, special characters such as `-` and `/` are not allowed in names, even though they could conceivably be part of a contact's legal name. We plan to allow for special characters to be included in a contact's name. 
-1. Currently, the `find` command only allows for matching of full words. For example, the input keyword `John` will not match the name `Johnny` stored in the list. This may lead to unintended behaviour for some users. We plan to allow partial matches of contact names for `find`.  
-1. Currently, duplicate contacts are only detected by contacts having completely identical names, and not by other fields such as email address. Although this is meant to remove ambiguity in duplicate detection, it may be counter-intuitive for some users. We plan to include additional warning messages for the detection of duplicate contacts. We will warn users if they are adding contacts with duplicate information, such as duplicate email address, or names which differ only by whitespace (in the middle). The user can then confirm whether they would like the duplicate contact to go through, or whether they would like to make changes to the duplicate contact.
-1. Currently, entering an empty note for a contact (via `o/`) is allowed. This was meant for the convenience of the user, but may be confusing for some users as it differs in behaviour from the other optional fields of `t/` and `a/`. We plan to display a warning message if an empty note is added via `o/` in the `add` command, to minimize such confusion. 
-1. Currently, special characters such as `/` are allowed (beyond the first three digits) in a contact's phone number. We plan to warn users if they are adding phone number with special characters. The user can then confirm whether they would like the phone number to go through, or whether they would like to make changes to the phone number.
-1. Currently, special characters such as `@` are not allowed in AlternateContact, even though they could conceivably be part of a contact's alternate email. We plan to allow for special characters to be included in AlternateContact.
+## Appendix: Planned enhancements
+
+1. Currently, error messages displayed in ConText are generic.
+For example, if a user enters a negative index, the error message `Invalid command format` is displayed, even if the command format is technically correct.
+We plan to add more specific error messages for invalid indices (e.g. non-positive, too large, or does not exist in the list), to let the user know that the index itself is invalid, and why.
+
+1. Currently, special characters such as `-` and `/` are not allowed in names, even though they could conceivably be part of a contact's legal name.
+We plan to allow for special characters to be included in a contact's name.
+
+1. Currently, the `find` command only allows for matching of full words.
+For example, the input keyword `John` will not match the name `Johnny` stored in the list.
+This may lead to unintended behaviour for some users. We plan to allow partial matches of contact names for `find`.
+
+1. Currently, duplicate contacts are only detected by contacts having completely identical names, and not by other fields such as email address.
+Although this is meant to remove ambiguity in duplicate detection, it may be counter-intuitive for some users.
+We plan to include additional warning messages for the detection of duplicate contacts.
+We will warn users if they are adding contacts with duplicate information, such as duplicate email address, or names which differ only by whitespace (in the middle).
+The user can then confirm whether they would like the duplicate contact to go through, or whether they would like to make changes to the duplicate contact.
+
+1. Currently, duplicate values for deletion indices, as well as parameters like `t/` and `a/`, get silently merged.
+This is not outright rejected for the convenience of users.
+However, users may have accidentally entered such duplicate values, which may result in the app's behaviour differing from users' expectations.
+In such cases, we plan to display additional warning messages for commands like `add`, `edit`, and `delete`, so that users may check if their specifying of duplicate values is intentional.
+Users may then press enter again to confirm the command's execution, or edit the command.
+
+1. Currently, if no note (i.e. no `o/` parameter) is specified when adding a contact, the note's value defaults to being empty (`""`).
+The UI accounts for empty notes by not taking up an extra line to display the empty note.
+When users do specify a note, they may explicitly specify an empty note (i.e. `o/` with no value).
+This is not outright rejected for the convenience of users, since empty notes are allowed.
+However, users may have forgotten to specify a value for the note, which may result in the app's behaviour differing from users' expectations.
+In such cases, we plan to display an additional warning message for commands like `add`, so that users may check if their specifying of empty notes is intentional.
+
+1. Currently, users are allowed to enter very flexible phone number values.
+The only validation requirement is that the phone number begins with 3 digits.
+This allows users to use the feature as they wish.
+For example, although the standard intended usage is for users to enter just the digits of a phone number (e.g. `98765432`), they are also allowed to enter a value such as `65432109 (office); 98765432 (mobile)`.
+However, this flexibility may result in users accidentally entering invalid phone numbers, such as `9876p/5432`.
+Therefore, if users enter a phone number that does not contain only 3-15 digits, we plan to display an additional warning message for commands like `add` and `edit`, so that users may check if their specifying of such a value is intentional.
+Users may then press enter again to confirm the command's execution, or edit the command.
+The added need to confirm non-standard phone numbers nudges users towards using the alternate contacts feature for additional phone numbers instead.
+
+1. Currently, alternate contacts do not allow spaces in the "type" portion, and do not allow special characters such as `@` in the "username" portion.
+We plan to allow spaces in the "type" portion for added flexibility.
+We also plan to allow special characters in the "username" portion, by allowing username values which match existing phone number/email validation.
+Similarly, we would also allow all phone numbers to optionally start with the special character `+` before the required digits.
