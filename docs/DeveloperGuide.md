@@ -771,6 +771,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 * 1b. There are no keywords given
     * 1b1. ModuLight shows all students, scores and graded components.
+
       Use case ends.
 
 **Use case: Sort student(s)**
