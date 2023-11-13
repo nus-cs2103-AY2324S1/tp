@@ -348,37 +348,43 @@ The following sequence diagram shows how the upcoming command works:
 
 ![UpcomingCommandSequenceDiagram](images/UpcomingCommandSequenceDiagram.png)
 
-### Sort patients feature
+### Sort patients/appointment features
 
 [SortPatientCommandParser.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/parser/personparser/SortPatientCommandParser.java
 [SortPatientCommand.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/commands/personcommands/SortPatientCommand.java
+[SortCommandParser.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/parser/appointmentparser/SortCommandParser.java
+[SortCommand.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/commands/appointmentcommands/SortCommand.java
 
 #### Implementation
 
-For _sort-p_ command, the noteworthy classes involved are:
+For _sort-p_ and _sort-a_ commands, the noteworthy classes involved are:
 
 - [`SortPatientCommandParser.java`][SortPatientCommandParser.java] - This parses the user input and creates a new `SortPatientCommand` object.  
 - [`SortPatientCommand.java`][SortPatientCommand.java] - This command object executes to sort the patient list by ascending or descending order and by the given attribute to sort by.
+- [`SortCommandParser.java`][SortCommandParser.java] - This parses the user input and creates a new `SortCommand` object.
+- [`SortCommand.java`][SortCommand.java] - This command object executes to sort the appointment list by ascending or descending order and by the given attribute to sort by.
 
 The following exceptions may be thrown during this process, namely:
 - ParseException for missing arguments
 - ParseException for invalid arguments
 
-The feature is implemented by sorting the unfiltered patient list stored in the model with using a custom comparator depending on each attribute.
+The feature is implemented by sorting the unfiltered patient/appointment list stored in the model with using a custom comparator depending on each attribute.
+
+Given below is an example usage scenario and how the sort-p/sort-a mechanism behaves at each step.
 
 -- user input --  
-Step 1. User executes sort command with correct and valid arguments.
+Step 1. User executes sort-p/sort-a command with correct and valid arguments.
 
 -- `AddressBookParser` --  
-Step 2. Returns new `SortPatientCommandParser`.
+Step 2. Returns new `SortPatientCommandParser`/`SortCommandParser`.
 
--- `SortPatientCommandParser` --  
+-- `SortPatientCommandParser`/`SortCommandParser` --  
 Step 3. Verify that all argument prefixes are present.  
 Step 4. Verify that provided arguments are valid.  
-Step 5. Returns new `SortPatientCommand`.
+Step 5. Returns new `SortPatientCommand`/`SortCommand`.
 
--- `SortPatientCommand` --  
-Step 6. Patient list is sorted.
+-- `SortPatientCommand`/`SortCommand` --  
+Step 6. Patient/Appointment list is sorted.
 
 The following sequence diagram shows how the sort patient command works:
 
