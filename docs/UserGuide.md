@@ -27,7 +27,7 @@ This user guide will teach you how to install **TuitionConnect** from scratch, a
     * [Command Format](#command-format)
   * [Features](#features)
     * [Viewing help : `help`](#viewing-help--help)
-    * [Adding a person : `add`](#adding-a-person--add)
+    * [Adding a tutee : `add`](#adding-a-tutee--add)
     * [View the list : `list`](#view-the-list--list)
     * [View the list of tutees specified by day : `list [DAY]`](#view-the-list-of-tutees-specified-by-day--list-day)
     * [Finding a tutee : `find`](#finding-a-tutee--find)
@@ -172,47 +172,29 @@ Shows a message that helps redirects you to the user guide.
 
 **Format**: `help`
 
-### Adding a person : `add`
+### Adding a tutee : `add`
 
 **Description**: Adds a tutee into the list.
 
 **Format**: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS sb/SUBJECT d/DAY b/BEGIN e/END pr/PAYRATE`
 
-**Expected Input**:
-* **Name (Compulsory field)**: String composed of character between A-Z and a-z.
-* **Phone number (Compulsory field)**: Any number at least 3 digits long.
-* **Address (Compulsory field)**: String without restriction in characters.
-* **Email (Compulsory field)** String with restrictions in characters (XXXXXXXX@emaildomain).
-* **Subject (Compulsory field)**: String without restriction in characters.
-* **Day (Compulsory field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).
-* **Begin (Compulsory field)**: String with restrictions (HHMM).
-* **End (Compulsory field)**: String with restrictions (HHMM).
-* **PayRate (Compulsory field)**: String with restrictions in characters, only numbers allowed (no negative numbers).
-
 **Expected Output when the command succeeds**: Successfully added tutee XXX(Name)
 
-**Expected Output when the command fails**:
-
-
-* **Invalid Name**: Names should only contain alphanumeric characters and spaces, and it should not be blank
-* **Duplicate tutee**: This tutee already exists
-* **Invalid Phone number**: Phone numbers should only contain numbers, and it should be at least 3 digits long
-* **Invalid Email**: Emails should be of the format local-part@domain and adhere to the following constraints:  
-  1\. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.  
-  2\. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
-* **Invalid Address**: Addresses can take any values, and it should not be blank
-* **Invalid Day**: Days should be written using their full names or their first three letters, and it should not be blank
-* **Invalid Begin**: Begin has a format of HHMM
-* **Invalid End**: That is not a valid time format. End has a format of HHMM
-* **Invalid PayRate**: PayRate can be either integers or decimals of up to 2 decimal places. It cannot be negative
-* **Duplicate tutee**: This tutee already exists
-* **Clashing Schedules**: This date and time clashes with an existing schedule. 
-  * This error occurs if the tutee that is
-  trying to be added has DAY/BEGIN/END fields that overlaps with an exisiting tutee.
+:exclamation: Things that can cause the `add` command to fail:
+1. Putting invalid inputs into the add command.
+   - :bulb: Check the [Parameter Requirements](#parameters-requirement) for valid parameter inputs.
+2. Adding a tutee that will result in duplicate tutees.
+   - :information_source: Two tutees are considered duplicates if they have the same name and phone number
+3. Adding a tutee that will result in clashing schedules.
+   - :bulb: Use the [`freeTime` command](#finding-free-time--freetime) to list down timings when you are available and prevent schedule clashses.
 
 **Examples**:
 * `add n/John Doe p/98765432 e/johnny@example.com a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 end/1600 pr/20.00`
 * `add n/Betsy Crowe p/92939402 e/betsycrowe@example.com a/Newgate Prison sb/Secondary 3 Physics d/mon b/1900 end/1930 pr/35.00`
+
+**Sample Execution**: `add n/Betsy Crowe p/92939402 e/betsycrowe@example.com a/Newgate Prison sb/Secondary 3 Physics d/mon b/1900 end/1930 pr/35.00`
+
+![Add before and after](images/Add%20before%20and%20after.png)
 
 ### Listing tutees : `list`
 
