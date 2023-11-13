@@ -433,6 +433,7 @@ This is illustrated as follows:
   ![Person appearing multiple times](images/DuplicatePersonInDifferentGroups.png)
 
 </div>
+<div style="page-break-after: always;"></div>
 
 **This should be the expected output when the command succeeds:**
 Input: `add_event m/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`
@@ -730,8 +731,6 @@ Format: `clear`
 :exclamation: **Warning: This command is irreversible and data cannot be recovered once cleared! Be very sure you would like to erase all of your data before executing this command!**.<br>
 
 </div>
-
-<div style="page-break-after: always;"></div>
 
 ### Exiting the program : `exit`
 
