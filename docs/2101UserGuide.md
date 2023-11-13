@@ -195,110 +195,106 @@ Here is an example command where we delete the member at **index** 1 in the disp
 
 <hr class="feature-class-separator">
 
-### Event commands
+### Event Commands
+
+As a CCA head, keeping track of event details is a major responsibility. CCACommander allows you to do so with the event-related commands below:
 
 #### Create an Event : `createEvent`
 
-Creates a new event with accompanying details (name, location, date, tag).
+Creating a new event is no longer a hassle as it can be done with just one simple command - `createEvent`!
 
-Format: `createEvent n/EVENT_NAME l/LOCATION d/DATE [t/TAG]...`
+Here is how you can use it:<br>
+`createEvent n/EVENT_NAME l/LOCATION d/DATE [t/TAG]...`
 
-* Acceptable values for `DATE`: Dates in the format of `YYYY-MM-DD`.
+Here is an example command where we create an event **named** "Party" held at the **location** "Raffles Hall" on the
+**date** 2023-09-16, with **tag** "Dinner" and **tag** "Sem1":<br>
+`createEvent n/Party l/Raffles Hall d/2023-09-16 t/Dinner t/Sem1`
 
-Examples:
-* `createEvent n/Party l/Raffles Hall d/2023-09-16` creates an event `Party` in CCACommander.
-
-<hr class="command-separator">
-
-#### Delete an Event: `deleteEvent`
-
-Deletes the event at the specified index.
-
-Format: `deleteEvent EVENT_INDEX`
-
-* Deletes the event at the specified `EVENT_INDEX`.
-* The index refers to the index number shown in the **currently displayed** event list.
-* The index **must be a positive integer** that is within the range of the length of the event list.
-
-Examples:
-* `deleteEvent 1` deletes the 1st event in the event list.
-* `deleteEvent 10` deletes the 10th event in the event list.
+<figure>
+    <img src="images/CreateEventPostCommand.png"
+         alt="createEvent Post Command">
+    <figcaption>After executing the `createEvent` command</figcaption>
+</figure>
 
 <hr class="command-separator">
 
 #### Edit an Event : `editEvent`
 
-Edits the event at the specified index with the specified attributes.
+If you forgot to note any important details, or realise that you made a mistake in any field of the event created,
+the `editEvent` command is here to help.
 
-Format: `editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]...`
+Here is how you can use it:<br>
+`editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]...`
 
-* The index refers to the index number shown in the **currently displayed** event list.
-* The index **must be a positive integer** that is within the range of the length of the member list.
-* At least one field to edit must be provided.
-* `EVENT_NAME` **must only contain** Alphanumeric Characters and spaces, and it should not be blank
-* `LOCATION` **must not** be blank and can take in any values.
-* `DATE` **must be a valid date** in the format of **YYYY-MM-DD**.
-* `TAG` **must only contain** Alphanumeric Characters with no space in between.
+<div markdown="block" class="alert alert-info">
+:information_source: At least one field must be provided.
+</div>
 
-Examples:
-* `editEvent 5 n/Halloween Surprise Party l/UTR d/2023-10-31 t/sem1` edits the 5th event in the event list to change the name to `Halloween
-  Surprise Party`, the location to `UTR`, the date to `2023-10-31` and the tag to `sem1`.
-* `editEvent 3 l/UCC Theater` edits the 3rd event in the event list to change the location to `UCC Theater`.
-
-<hr class="feature-class-separator">
-
-### Enrolment commands
-
-#### Enrol a Member to an Event: `enrol`
-
-Enrols a member to an event.
-
-Format: `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
-
-* Enrols the member at the specified `MEMBER_INDEX` to the event at the specified `EVENT_INDEX` with `NUMBER_OF_HOURS` specifying the number of hours that the member contributed and `REMARK` stating extra remarks about the member and event.
-* The `MEMBER_INDEX`/`EVENT_INDEX` refers to the index number shown in the **currently displayed** member/event list.
-* The `MEMBER_INDEX`/`EVENT_INDEX` **must be a positive integer** that is within the range of the length of the member/event list.
-* The `NUMBER_OF_HOURS` **must be a positive integer** and **must be less than or equal to 2147483647**.
-
-Examples:
-* `enrol m/1 e/5 h/3 r/did planning` enrols the 1st member in the member list to the 5th event in the event list, where the member had 3 hours of contributions to that event and has a remark stating that the member "did planning".
-* `enrol m/5 e/1` enrols the 5th member in the member list to the 1st event in the event list.
+Here is an example command where we edit an event at **index** 1, changing the **location** to be "MBS" and the **date** to be "2023-10-20".<br>
+`editEvent 1 l/MBS d/2023-10-20`
 
 <hr class="command-separator">
 
-#### Unenrol a Member from an Event: `unenrol`
+#### Delete an Event: `deleteEvent`
 
-Unenrol a member from an event.
+Are the number of events piling up? To clear the clutter, you can delete any unwanted event from CCACommander with `deleteEvent`!
 
-Format: `unenrol m/MEMBER_INDEX e/EVENT_INDEX`
+Here is how you can use it:<br>
+`deleteEvent EVENT_INDEX`
 
-* Unenrol the member at the specified `MEMBER_INDEX` from the event at the specified `EVENT_INDEX`.
-* The member at `MEMBER_INDEX` must be a part of the event at `EVENT_INDEX`.
-* The `MEMBER_INDEX`/`EVENT_INDEX` refers to the index number shown in the **currently displayed** member/event list.
-* The `MEMBER_INDEX`/`EVENT_INDEX` **must be a positive integer** that is within the range of the length of the member/event list.
+Here is an example command where we delete the event at **index** 1:<br>
+`deleteEvent 1`
 
+<div markdown="block" class="alert alert-info">:information_source: The `EVENT_INDEX` parameter refers to the index number shown in the **currently displayed** event list.
+</div>
 
-Examples:
-* `unenrol m/1 e/5` unenrols the 1st member in the member list from the 5th event in the event list.
-* `unenrol m/5 e/1` unenrols the 5th member in the member list from the 1st event in the event list.
+<hr class="feature-class-separator">
+
+### Enrolment Commands
+
+Enrolments are a way for you to manage your members’ involvement in your events. The enrolment commands below are the bread-and-butter for your participation tracking needs:
+
+#### Enrol a Member to an Event: `enrol`
+
+Now that you have added all your members and all your events, keeping track of your members’ attendance to any event is as simple as using the `enrol` command!
+
+Here’s how you can use it:<br>
+`enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
+
+Here is an example command where we enrol the member at **member index** 1 to the event at **event index** 1, where our member
+has contributed 2 **hours**, and we want to leave a "Role: Photographer" **remark** to reflect their role as a photographer:<br>
+`enrol m/1 e/1 h/2 r/Role: Photographer`
 
 <hr class="command-separator">
 
 #### Edit an enrolment: `editEnrolment`
-Edits the enrolment details of a specified member at a specified event with the specified attributes.
+Accidentally mixed up two members, and gave them the wrong number of hours or wrong remarks for the event they are involved in?
+You can fix this with ease by using the `editEnrolment` command!
 
-Format: `editEnrolment m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
+Here’s how you can use it:<br>
+`editEnrolment m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
 
-* Edits the specified `MEMBER_INDEX`'s enrolment of the event at the specified `EVENT_INDEX` with `NUMBER_OF_HOURS` specifying the number of hours that the member contributed and `REMARK` stating extra remarks about the member and event.
-* The `MEMBER_INDEX`/`EVENT_INDEX` refers to the index number shown in the **currently displayed** member/event list.
-* The `MEMBER_INDEX`/`EVENT_INDEX` **must be a positive integer** that is within the range of the length of the member/event list.
-* At least one field to edit must be provided.
-* The `NUMBER_OF_HOURS` **must be a positive integer** and **must be less than or equal to 2147483647**.
-* `REMARK` can take any value, but should not be blank.
+<div markdown="block" class="alert alert-info">
+:information_source: At least one field must be provided.
+</div>
 
-Examples:
-* `editEnrolment m/1 e/1 h/0 r/Absent due to Covid` edits the enrolment of the 1st member in the member list for the 1st event of the event list to be `0` hours and have a remark `Absent due to Covid`.
+Here is an example command where we edit the enrolment of the member at **member index** 1 to the event at **event index** 2,
+changing the number of **hours** to 5 and the **remark** to "Role: Exco" to reflect the member’s role as an exco member:<br>
+`editEnroment m/1 e/2 h/5 r/Role: Exco`
 
+<hr class="command-separator">
+
+#### Unenrol a Member from an Event: `unenrol`
+If your member is no longer involved in a particular event, you can easily remove them from the event by using the `unenrol` command!
+
+Here’s how you can use it:<br>
+`unenrol m/MEMBER_INDEX e/EVENT_INDEX`
+
+Here is an example command where we unenrol the member at **member index** 1 from the event at **event index** 1:<br>
+`unenrol m/1 e/1`
+
+<div markdown="block" class="alert alert-info">:information_source: The `MEMBER_INDEX`/`EVENT_INDEX` parameter refers to the index number shown in the **currently displayed** member/event list.
+</div>
 <hr class="feature-class-separator">
 
 ### View commands
