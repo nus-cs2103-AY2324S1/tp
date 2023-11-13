@@ -67,14 +67,11 @@ We're here to make your experience as user-friendly as possible. Let's get start
 
    - Choose a folder where you'd like to manage your patient data.
      <box type="tip" seamless>
-
-**Tip**: Create a new folder named `MedBook` for easy organization.
-
-</box>
-
-- Move `medbook.jar` into the folder as shown below.
-  - **Windows Users**:![Ui](images/WinUserDir.png)
-  - **Mac Users**:![Ui](images/MacUserDir.png)
+     **Tip**: Create a new folder named `MedBook` for easy organization.
+     </box>
+   - Move `medbook.jar` into the folder as shown below.
+     - **Windows Users**:![Ui](images/WinUserDir.png)
+     - **Mac Users**:![Ui](images/MacUserDir.png)
 
 4. **Accessing Terminal**:
 
@@ -360,6 +357,7 @@ Screenshots:
 
 ![AddAppointment Screenshots](images/screenshots/addAppointment.png)
 ![AddAppointment Screenshots](images/screenshots/addAppointment%20-%20after.png)
+![AddAppointment Screenshots](images/screenshots/viewAppointment.png)
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
@@ -386,6 +384,7 @@ Examples:
 Screenshots:
 
 ![View Screenshots](images/screenshots/view.png)
+![View Screenshots](images/screenshots/view%20-%20after.png)
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
@@ -476,19 +475,19 @@ Format: `search KEYWORD [MOREKEYWORDS]...`
 
 - Patients with detail that are not exactly the same as the `KEYWORD` searched will not appear. e.g. **Han** will not return **Hans**. <br>
 
-<box type="info" seamless>
+    <box type="info" seamless>
 
-**Note**: The details of the patient's medical records will not be searched.
+  **Note**: The details of the patient's medical records will not be searched.
 
-</box>
+    </box>
 
-<box type="tip" seamless>
+    <box type="tip" seamless>
 
-**Tip**: Maximize the efficiency of the `search` command to quickly locate patients. It's perfect for filtering patient lists - for instance, identifying patients with specific allergies.
+      **Tip**: Maximize the efficiency of the `search` command to quickly locate patients. It's perfect for filtering patient lists - for instance, identifying patients with specific allergies.
 
- </box>
+  </box>
 
-Examples:
+  Examples:
 
 - `search Alex` Will display patients with **Alex** in their details. <br>
 
@@ -537,11 +536,11 @@ Format: `list`
 
 - **All** patients will be shown in the **Patient List**.
 
-<box type="tip" seamless>
+    <box type="tip" seamless>
 
-**Tip**: The `list` command allows you to easily view all the patients in the **Patient List**. For instance, after you've used the `search` command to find specific patients, you can use the `list` command to gather all the patients conveniently!
+       **Tip**: The `list` command allows you to easily view all the patients in the **Patient List**. For instance, after you've used the `search` command to find specific patients, you can use the `list` command to gather all the patients conveniently!
 
-</box>
+    </box>
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
@@ -559,8 +558,8 @@ Example:
 
 Screenshots:
 
-![Delete Screenshots](images/screenshots/delete.png)
-![Delete Screenshots](images/screenshots/delete%20-%20after.png)
+![Delete Screenshots](images/screenshots/delete.jpg)
+![Delete Screenshots](images/screenshots/delete%20-%20after.jpg)
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
@@ -631,8 +630,7 @@ Attach local files to a patient's medical record by clicking on the **Attach** b
 
 <box type="warning" seamless>
 
-**Caution**:
-
+**Caution**: 
 - Refrain from deleting/relocating the local file. If necessary, re-attach the new file after relocation/deletion.
 - Ensure that you have selected a default launcher for the selected file type.
 
