@@ -13,26 +13,26 @@ While it has a Graphical User Interface, most of its user interactions happen vi
 [TP RepoSense Code Dashboard](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=mamayuan&breakdown=true)
 
 ### Enhancements implemented
-- Allow multiple indices as input for delete command.
-- Create a `Messages.java` class to prevent incorrect display of messages to the user.
-- Update test cases to various test files.
+- Enabled processing of multiple indices in the delete command.
+- Developed a Messages.java class to ensure accurate message displays to users.
+- Enhanced test files with updated test cases.
 
 ### Contributions to the UG
-- Initial set-up of UG
-- Fix consistency issues in terms of style and wording found throughout UG
-- Edit section for delete command
+- Initiated the User Guide setup.
+- Addressed and corrected style and wording inconsistencies throughout the User Guide.
+- Revised the section detailing the delete command.
 
 ### Contributions to the DG
-- Wrote `Glossary` and `Manual Testing` section
-- Refine `User Stories` section
-- Specify implementation of `delete` command
-- Edit UML diagram of `DeleteSequenceDiagram` based on updated implementation
-- Fix potential bugs for other sequence diagrams
+- Authored the Glossary and Manual Testing sections.
+- Refinec `User Stories` section
+- Specified implementation of `delete` command
+- Updated the DeleteSequenceDiagram UML diagram to reflect new implementations and addressed potential bugs in other sequence diagrams.
+- Fixed potential bugs for other sequence diagrams
 - Edit `Appendix: Planned enhancements`
-- Fix naming issues that inherit from AB3
+- Resolved naming inconsistencies inherited from AB3.
 
 ### Contributions to team-based tasks
-- Created a `Messages.java` class which groups and handles all the messages to be displayed to user which were previously scattered across different files
+- Established a Messages.java class consolidating all user messages, previously dispersed across various files.
 - Removed traces of AB3 in documentations and code
 - Provided feedback for peer PRs
 - Reminded team of deadlines
