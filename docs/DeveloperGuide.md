@@ -523,6 +523,13 @@ The following sequence diagram shows how the find operation works in the success
 
 <puml src="diagrams/FindSequenceDiagram.puml"/>
 
+<box type="info" seamless>
+
+**Note:** The lifeline for `FindCommandParser` and `FindCommand` should end at the destroy marker (X) but due to a
+limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <puml src="diagrams/FindActivityDiagram.puml"/>

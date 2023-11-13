@@ -7,36 +7,36 @@ skinparam ArrowFontSize 12
 start
 :Enter Find Command;
 
-if () then (parameter has only ID, name and appointment)
+if () then ([parameter has only ID, name and appointment])
   :create new CompositePredicate;
-  if () then (has ID in params)
+  if () then ([has ID in params])
     :ID is parsed as
     IdContainsKeywordPredicate
     and added to CompositePredicate;
-  else (no ID in params)
+  else ([no ID in params])
   endif
-  if () then (has name in params)
+  if () then ([has name in params])
     :name is parsed as
     NameContainsKeywordPredicate
     and added to CompositePredicate;
-    else (no name in params)
+    else ([no name in params])
   endif
-  if () then (has appointment in params)
+  if () then ([has appointment in params])
     :name is parsed as
     AppointmentOverlapsPredicate
     and added to CompositePredicate;
-    else (no appointment in params)
+    else ([no appointment in params])
   endif
 
-  if () then (patients has data matching composite query)
+  if () then ([patients has data matching composite query])
   :display patient details
   for all matched patient;
-  else (no patient match the composite query)
+  else ([no patient match the composite query])
   :notify the user that
   no patient was found;
   endif
 
-else (parameter does not have any of the fields, or has other fields)
+else ([parameter does not have any of the fields, or has other fields])
   :throw new ParseException;
   stop
 endif
