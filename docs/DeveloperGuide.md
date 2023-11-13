@@ -292,7 +292,7 @@ Step 2. `DeletePersonCommand` is executed, in which `Model#deletePerson("Alex Ye
 
 </box>
 
-Step 3. `Model#deletePerson()` will also call `AddressBook#removePerson(Alex Yeoh)` which will remove the target contact from the contact list while removing it from all the groups it was part of.
+Step 3. `Model#deletePerson()` will also call `AddressBook#removePerson(Alex Yeoh)` which will remove the target contact from the contact list while removing it from all the groups it was part of by calling `Group#removePerson(Alex Yeoh)`.
 
 The following sequence diagram shows how the Delete Person operation works:
 
@@ -308,7 +308,7 @@ The following sequence diagram shows how the Delete Person operation works:
 
 The Delete Group command mechanism behaves the same as the Delete Person command above, except it deletes the target `Group` object instead of the `Person` object.
 
-Additionally, `AddressBook#removeGroup(Group g)` will remove the target group 'g' from the group lists of all the members that were a part of it.
+Additionally, `AddressBook#removeGroup(Group g)` will remove the target group 'g' from the group lists of all the members that were a part of it by calling `Person#removeGroup(Group g)`.
 
 #### Design Considerations
 
