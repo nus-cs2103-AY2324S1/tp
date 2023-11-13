@@ -64,6 +64,9 @@ CommandResult --> ListTimePersonCommand
 deactivate CommandResult
 
 ListTimePersonCommand --> LogicManager: result
+deactivate ListTimePersonCommand
+
 [<-- LogicManager
+deactivate LogicManager
 
 @enduml
