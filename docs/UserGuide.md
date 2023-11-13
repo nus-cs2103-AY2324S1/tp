@@ -720,7 +720,7 @@ E.g., If you edit the basic salary of an employee in January 2024, the basic sal
 * ManaGease should display a success message saying that the payslip has been generated successfully, if the input is valid.
   <br>![result for generating payslip](images/payslipSuccess.png)
 * A payslip report in PDF format will be generated in the `payslips` folder in the ManaGease home directory.
-  <br>![location of payslip](images/payslipLocation.png)
+  <br><center><img src="images/payslipLocation.png" width="221"></center>
   <br>![payslip content](images/payslipContent.png)
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Please close any payslip PDF file before generating another payslip. Otherwise, the payslip PDF file will not be generated successfully.
