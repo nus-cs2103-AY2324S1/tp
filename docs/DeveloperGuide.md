@@ -460,7 +460,7 @@ The following sequence diagram shows how the `Event` operation works:
 User should see the UI as shown below after executing the aforementioned command [It is assumed that the first candidate in the list is Alex Yeoh].
 
 
-![EventWindow](images/eventwindow.png)
+![EventWindow](images/eventwin.png)
 
 The following activity diagram shows how the `event` and `schedule` command can be used together to schedule events:
 
@@ -510,7 +510,6 @@ Cons: It restricts users from entering data that might be understandable or conv
 * wants an organized way to keep track of candidates information
 * wants to view and manage candidates information in a single place
 * wants to filter and sort candidates based on their details
-* wants to compare candidates using their information
 * wants to view a schedule/summary of events relating to the candidates
 * wants to attach a score to candidate performance over interview and assessments
 * wants to be able to use scores in order to quantitatively compare candidates
@@ -869,9 +868,39 @@ This makes it more intuitive and logical for the user to use since the user woul
 **Improve the search and filter feature**
 Currently, the UI does not update and will remain unchanged from the previous command. This may be confusing or inaccurate and thus it should remain blank
 
+### Improve on `remark` feature
+**Improve the remark feature**
+Currently, if you use multiple prefix , it is allowed and only the last prefix will be used. We would like to improve on this by only allowing 1 prefix to be used. Thus we verify for duplicate `r/` prefix since it does not make sense to have multiple remarks for the same person.
+
 ## **Appendix: Effort**
 
-### Based on over-arching features
+### ScoreList, Score, Summary Statistic, Filter
+In terms of integration of features, this was by far the biggest and most complex. This is due to how `Summary Statistic` relied on `Score`, `ScoreList` and `Tag` to function and Filter requiring all of them to function properly.
+The thought process came when we first tried to implement 1 score for each applicant. This was the naive approach. However, we realise that with only 1 score, would mean that it can only represent 1 thing.
+This means that the Hiring Manager would have to keep track of what each score means individually and any point in arranging these scores would lead to massive confusion. Hence, we decided to attach a score to a tag.
+However, this meant that with optional and possibly multiple tagging, we will need a flexible way of attaching scores to tags. This led to the HashMap implementation of `ScoreList`.
+Additionally, we had to decide on the constraint of scores. While a common approach was to let it be between 0 and 100, we wanted to maintain great flexibility and thus constraint it as a positive integer >= 0.
+
+For storage wise, we had to learn how to store `ScoreList` in a key-value format and also decode it. So that was one big challenge in terms of storing it in a json format that can be decoded.
+
+One of the biggest problem with using the `Parser` and `Command` model is that the `Parser` has no access to the model. So at the parsing stage, you are unable to determine if the tag exists or is valid since we only want to enable it for `assessment` tags.
+This meant that it had to be carried out at the `Command` stage of execution. Additionally, it might have been a misstep trying to implement the editing of scores in the `edit` command.
+This is due to the complexity of how the `edit` command was implemented. Since you could add a tag in edit while simultaneously trying to add a score to the tag, it led to a lot of need to check.
+Additionally since tags can be easily edited, it meant that we needed to check if the ScoreList was updated and if the tag was edited. 
+This also led to many errors, since you could remove all tags, and the ScoreList would still remain. Especially since EditPersonDescriptor did not have access to the tags that the person currently have.
+Additionally, since tag was not cumulative, you would want to keep track of the scores of the current tag if they are being kept. This meant that you would need to keep track of the current tag and the current score while also allowing for changes.
+
+After that, there was the choice of implementing Summary Statistic. A lot of thought went into how we can make the scores useful. What would be a great visualisation. We chose the couple of simple statistic that we thought would be useful.
+However, the calculation of the statistic was not simple since we decided to use streams for implementation. This meant that misconception of how streams work would lead to a lot of errors. The most common 1 being that the stream is closed due to a close operation.
+Additionally, percentile was originally implemented incorrectly. This was because we did not account for the edge case of people scoring the same. This meant that the percentile would vary for same score. This was fixed by then subtracting the number of people with the same score from the total number of people.
+
+
+Following that we had filter which relied on all of the above. This was simpler to implement once all the logic was down.
+Overall, the implementation of the feature was complex due to nature of Streams and UI updates for JavaFX. 
+
+### View 
+UI generation was rather tedious in terms of using CSS and trying to get things to align properly. Additionally, the design implementation using `Commands` meant that commands did not have access to other commands during runtime.  
+This meant that we had to add an extra parameter to the CommandResult in order to get commands to auto execute view after executing the command. The implementation was simple but the design was not.
 
 ###  Flexibility for further analysis
 We acknowledge that there will be some who would prefer to analyse data outside JABPro - and that is completely fine.
@@ -888,7 +917,13 @@ further analysis outside JABPro if they wish to.
 In relation to saving of data to storage, we largely followed the same format as AB3. The only strict deviation from the AB3 method of saving was using a different data structure.
 In the case of `ScoreList` and `UniqueTagList`, we used a hashmap to save the details of the score and tags for `ScoreList` or tag category and tag name for `Tags`. This was more complicated to implement as the conversion from hashmap to json and vice versa was more complicated than the conversion of a list to json and vice versa.
 
+### Redirection Implementation
 
+Adhering closely to our viewpoint of hiring managers, we realised that JABPro can only add value to their workflows if it goes above and beyond what existing low-level applications such as spreadsheets can provide. This helped us identify a key aspect of reviewing applications - the existence of a social profile linked with candidates.
+At the same time, we were bound by the limitations of what could and could not be implemented. For instance, the use of APIs or external libraries was prohibited. 
+Hence, we stumbled upon the idea of implementing a feature that simply redirects the user to the social profile, without the need for any external libraries.
+
+We believe this highlights the scope of adaptation that AB3 provided, and we could recognise. There still existed the notion of allowing users to provide the link, which could subsequently be copied to view the social profile. However, in lieu of making JABPro user-friendly, we focused on building redirection.
 
 ## **Appendix: Instructions for manual testing**
 
@@ -951,11 +986,11 @@ testers are expected to do more *exploratory* testing.
 1. Viewing a person's details while all persons are being shown
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    2. Test case 1:   
+    2. Test case 1 (Positive Test Case):     
        `view 1`  
        **Expected**: Person information panel is updated to reflect the details of the person.
 
-    3. Test case 2:  
+    3. Test case 2 (Negative Test Case):    
        `view 0`  
        **Expected**: No person is viewed. Error details shown in the status message. Person information panel remains the same.
 
@@ -964,16 +999,16 @@ testers are expected to do more *exploratory* testing.
 1. Adding a remark to a person while all persons are being shown
     1. Prerequisites: List all persons using the `list` command.
 
-    2. Test case 1:   
+    2. Test case 1 (Positive Test Case):     
        `remark 1 r/John is a good candidate`  
        **Expected**: New remark is added to the person. Details of remark displayed on the person information panel.
 
-    3. Test case 2:  
+    3. Test case 2 (Positive Test Case):    
        `remark 1 r/**REMARK** Furthermore, hes capable of working in a team`    
        **Expected**: Remark is added on from the previous existing remark. Person information panel is updated to reflect the addition of the remark.  
        Specifically `John is a good candidate` is followed by `Furthermore, hes capable of working in a team` on the person information panel.
 
-    4. Test case 3:   
+    4. Test case 3 (Negative Test Case):     
        `remark 1 r/`  
        **Expected**: Previous remark is deleted. Person information panel is updated to reflect the deletion of the remark and is blank.
 
@@ -1056,17 +1091,17 @@ testers are expected to do more *exploratory* testing.
       2. Create an `assessment` type tag named `Interview` using the `create` command. This is done by entering `create t/assessment Interview` in the command box.
       
    2. Test case 1 (Positive Test Case):   
-      `edit 1 t/Interview sc/Interview 70`  
+      `edit 1 t/Interview sc/Interview 70`   
       **Note**: The score value should be a positive integer and must contain a space between the tag and the score value.<br>
       **Expected**: Score for the assessment type tag `Interview` is updated to 70.   
       Both Person List and Person Information Panel is updated to reflect the new `Interview` Tag. The new score is reflected on the Summary Statistics Screen(Third panel from the left).
 
-   3. Test case 2:  
-      `edit 1 t/swe sc/swe 70`  
+   3. Test case 2 (Negative Test Case):    
+      `edit 1 t/swe sc/swe 70`    
       **Note**: Tag `swe` is not categorised as an assessment type tag. Thus, you cannot edit the score for this tag.<br> 
       **Expected**: Neither score nor tag is updated for person. Error details shown in the status message.
 
-   4. Test case 3:  
+   4. Test case 3 (Negative Test Case):   
       `edit 1 t/Interview sc/Interview -10`  
       **Note**: The score value should be a positive integer and must contain a space between the tag and the score value.<br> 
       **Expected**: Neither score nor tag is updated for person. Error details shown in the status message.
@@ -1102,32 +1137,32 @@ testers are expected to do more *exploratory* testing.
       2. Create an `assessment` type tag named `Interview` using the `create` command. This is done by entering `create t/assessment Interview` in the command box.
       3. Edit the score for the `Interview` tag for at least two people using the `edit` command. This is done by entering `edit 1 t/Interview sc/Interview 70` and `edit 2 t/Interview sc/Interview 50` in the command box.
     
-   2. Test case 1:   
+   2. Test case 1 (Positive Test Case):   
    `filter t/Interview met/score val/60`  
    **Expected**: Person list is updated to reflect the persons with scores greater than 60 for the `Interview` tag. In this case its only the person with index 1. 
    
-   3. Test case 2:  
+   3. Test case 2 (Positive Test Case):  
    `filter t/Interview met/median`    
    **Expected**: Person list is updated to reflect the persons with scores greater than the median score for the `Interview` tag. In this case its only the person with index 1.
 
-   4. Test case 3:    
-   `filter t/Interview met/percentile val/0`  
+   4. Test case 3 (Positive Test Case):    
+   `filter t/Interview met/percentile val/0`     
    **Expected**: Person list is updated to reflect the persons with scores greater than the 0th percentile score for the `Interview` tag. In this case it will be all the persons with the `Interview` tag.
    
-   5. Test case 4:
-   `filter t/swe met/score val/60`
+   5. Test case 4 (Negative Test Case):      
+   `filter t/swe met/score val/60`  
     **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
    
-   6. Test case 5:
-   `filter t/Interview met/score val/-10`
+   6. Test case 5 (Negative Test Case):    
+   `filter t/Interview met/score val/-10`  
    **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
    
-   7. Test case 6:
-   `filter t/Interview met/variance val/100` 
+   7. Test case 6 (Negative Test Case):    
+   `filter t/Interview met/variance val/100`    
    **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
    
-   8. Test case 7:
-   `filter t/Interview met/percentile` 
+   8. Test case 7 (Negative Test Case):  
+   `filter t/Interview met/percentile`   
    **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
 
 ### Adding LinkedIn/Github username to a person while all persons are being shown ###
