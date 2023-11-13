@@ -17,30 +17,31 @@
 * [Features Overview](#overview-of-main-features)
 * [Quick Start Guide](#quick-start)
 * [Features](#features)
+  * [Command Failures](#command-failure) 
   * Managing Applicants
-    * [Adding an applicant](#adding-an-applicant--add)
-    * [Adding a remark to an applicant](#adding-a-remark-to-an-applicant--remark)
-    * [Adding applicant's LinkedIn/GitHub](#adding-linkedingithub-username-for-a-user--addl-or-addg)
-    * [Opening applicant's LinkedIn/GitHub](#opening-user-linkedin-or-github-account--linkedin-or-github)
-    * [Setting an applicant's status](#setting-an-applicants-status--set)
-    * [Viewing an applicant's details](#viewing-a-applicants-details--view)
-    * [Editing an applicant's detail](#editing-a-applicant--edit)
-    * [Deleting an applicant](#deleting-job-applicants--delete)
+    * [Adding an applicant](#adding-an-applicant-add)
+    * [Adding a remark to an applicant](#adding-a-remark-to-an-applicant-remark)
+    * [Adding applicant's LinkedIn/GitHub](#adding-linkedingithub-username-for-a-user-addl-or-addg)
+    * [Opening applicant's LinkedIn/GitHub](#opening-user-linkedin-or-github-account-linkedin-or-github)
+    * [Setting an applicant's status](#setting-an-applicants-status-set)
+    * [Viewing an applicant's details](#viewing-a-applicants-details-view)
+    * [Editing an applicant's detail](#editing-a-applicant-edit)
+    * [Deleting an applicant](#deleting-job-applicants-delete)
   * Tag Colouring and Categorisation
-    * [Creating tags](#creating-tags--create)
-    * [Listing all tags](#listing-all-tags--listt)
+    * [Creating tags](#creating-tags-create)
+    * [Listing all tags](#listing-all-tags-listt)
   * Searching through and Arranging Applicants
-    * [Searching for applicants](#searching-job-applicants-by-category--search)
-    * [Filtering applicants](#filter-job-applicants-by-statistics--filter)
-    * [Listing all applicants](#listing-all-applicant--list)
+    * [Searching for applicants](#searching-job-applicants-by-category-search)
+    * [Filtering applicants](#filter-job-applicants-by-statistics-filter)
+    * [Listing all applicants](#listing-all-applicant-list)
   * Event Management and Scheduling
-    * [Adding an event](#adding-an-event--event)
-    * [Viewing all events](#viewing-events--schedule)
+    * [Adding an event](#adding-an-event-event)
+    * [Viewing all events](#viewing-events-schedule)
   * Others
-    * [Viewing help](#viewing-help--help)
-    * [Exporting all entries](#exporting-all-entries--export)
-    * [Clear all entries](#clearing-all-entries--clear)
-    * [Exiting the program](#exiting-the-program--exit)
+    * [Viewing help](#viewing-help-help)
+    * [Exporting all entries](#exporting-the-existing-data-to-csv-export)
+    * [Clear all entries](#clearing-all-entries-clear)
+    * [Exiting the program](#exiting-the-program-exit)
 * [Summary Statistics](#summary-statistics)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
@@ -186,9 +187,9 @@ Not to worry, here are some steps you can take to fix this:
 
     * `search n/John`: Searches for applicants whose names contain the keyword `John`
 
-    * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete 3`: Deletes the 3rd contact shown in the current list.
 
-    * `set` : sets the applicant status to either of: (`Preliminary`, `Interviewed`, `Rejected`, `Offered`).
+    * `set`: sets the applicant status to either of: (`Preliminary`, `Interviewed`, `Rejected`, `Offered`).
    
     * `export` : exports name, phone, email, address, tags, linkedin, github, remark, status to /data/export.csv
 
@@ -229,9 +230,26 @@ Not to worry, here are some steps you can take to fix this:
 
 [Jump back to Table of Contents](#table-of-contents)
 
+### Command Failure
+<box type="warning" seamless>
+
+**How to know if your command has failed?** 
+1. You will see the command that you have entered being highlighted in red. 
+2. The command will not be cleared from the command box. 
+3. The error message will be shown in the result display panel. 
+4. The UI below will not be updated if your command has failed.
+</box>
+
+** The example below shows a command failure for `view`:**
+![CommandFailure](images/view-command-failure.png)
+<br>
+
+[Jump back to Table of Contents](#table-of-contents)
+
 ### 1. Managing Applicants
 
 ### Adding an applicant: `add`
+<a name="adding-an-applicant-add"></a>
 
 Adds an applicant to JABPro.
 
@@ -271,33 +289,45 @@ An example of the `add` command being successfully executed:
     ![Add-Success](images/add-command-success.png)
 <br>
 
-An example of the `add` command failing to execute due to missing mandatory fields:
-1. Enter the command `add n/Betsy Crowe t/friend` (**Missing mandatory fields**)
-2. This is the result of the failed `add` command:
-   
-    ![Add-Fail](images/add-command-failure.png)
-<br>
+**Error Handling Table for `add` command:**
 
-An example of trying to add an applicant with the same name as an existing applicant:
-1. Enter the command `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/dept finance` (**Same name as existing applicant**)
-2. This is the result of the failed `add` command:
-   
-    ![Add-Fail](images/add-command-duplicate-person.png)
+| Reason for Error                              | Error Message                                                                     | Remedy / Suggested course of action                                                                                                              |
+|-----------------------------------------------|-----------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| Missing add keyword: `add`                    | Unknown command | Follow the command format of `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAGNAME]…​` closely                                                 |
+| Missing mandatory fields                      | Invalid command format!                                                           | Ensure that all mandatory fields are filled up.                                                                                                  | 
+| Duplicate name                                | This person already exists in the address book                                                      | Ensure that the name of the applicant is unique. That is you cannot add the same name twice. Use some form of extra identification like a number |
+| Invalid phone number                          | Phone numbers should only contain numbers, and it should be at least 3 digits long | Ensure that the phone number only contains number and should be at least 3 digits long                                                           |
+| Invalid email                                 | Emails should be of the format local-part@domain and adhere to the following constraints:| Ensure that the prefix and domain of the email is correct following the constraints stated by the error                                          |                                                                                                                                                
+| Invalid tag name                              | Tag names should only contain alphanumeric characters and should not be blank | Ensure that the tag name only contains alphanumeric characters and should not be blank                                                           |
+| Multiple prefixes of the same type being used | Multiple values specified for the following single-valued field(s): `prefix/`      | Remove the duplicate prefix. The command should only have 1 of every prefix except for `t/`                                                       |
+
+<box type="tip" seamless>
+
+**Tip:** To know if it is an error, the command entered will light up in red. It remains in the command box.
+1. The error message will be displayed in the result display box.
+2. Follow the error handling table for the command  or use the suggested course of action in the result display to rectify the error.
+
+</box>
+
+[Jump back to Table of Contents](#table-of-contents)
 
 ### Adding a remark to an applicant: `remark`
+<a name="adding-a-remark-to-an-applicant-remark"></a>
 
 Edits a remark of an existing applicant in JABPro.
 Format: `remark INDEX r/REMARK`
 
-| Type      | Prefix      | Constraints                                                                                                                                 |
-|-----------|-------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| Mandatory | `INDEX`     | `INDEX` must be an existing index in the displayed applicant list and it must not be greater than the total number of applicants in JABPro. |
-| Optional  | `r/ REMARK` | `REMARK` can be any value, including special characters such as `#`, `,` ...                                                                |
+| Type      | Prefix        | Constraints                                                                                                                                 |
+|-----------|---------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| Mandatory | `INDEX`       | `INDEX` must be an existing index in the displayed applicant list and it must not be greater than the total number of applicants in JABPro. |
+| Optional  | `r/ [REMARK]` | `REMARK` can be any value, including special characters such as `#`, `,` ...                                                                |
 
 **Notes regarding `remark` command:**
 * The previous remark is not saved, and instead is replaced by the inputted remark. The command does not add to the existing remark.
 * You can empty out a remark by inputting `r/` without any text after it or by omitting the `r/` prefix.
 * You can get the remark previously inputted by using the **REMARK** keyword. It will be replaced with the previous remark. The keyword **REMARK** is case-sensitive. This means that `remark 1 r/**remark**` will just replace the remark with the word `**remark**`.
+* You can use multiple prefix for `remark` but only the last prefix will be used. This means that `remark 1 r/remark r/remark2` will just replace the remark with `remark2`.
+
 
 An example of the `remark` command being successfully executed:
 1. Enter the command `remark 1 r/Great attitude, hardworking`
@@ -313,18 +343,30 @@ An example of the `remark` command being successfully executed with the **REMARK
     ![Remark-Success](images/remark-command-enhanced-success.png)
 <br>
 
-An example of the `remark` command failing to execute due to wrong index:
-1. Enter the command `remark 10 r/Great attitude, hardworking` (**Index does not exist on applicant list panel**)
-2. This is the result of the failed `remark` command:
-   
-    ![Remark-Fail](images/remark-command-clear-remark.png)
-<br>
+**Error Handling Table for `remark` command:**
+
+| Reason for Error                              | Error Message                         | Remedy / Suggested course of action                                                             |
+|-----------------------------------------------|---------------------------------------|-------------------------------------------------------------------------------------------------|
+| Missing remark keyword: `remark`              | Unknown command                       | Follow the command format of `remark INDEX r/[REMARK]` closely                                  |
+| Missing Index                                 | Invalid command format!               | Ensure that the index is filled up.                                                             |
+| Invalid Index                                 | The person index provided is invalid  | Ensure that the index is valid. That is it is a number that is on the displayed applicant list. |
+ | Negative or 0 Index | Invalid command format! | Ensure that the index is a positive integer and is also a number that is on the displayed applicant list. |
+
+<box type="tip" seamless>
+
+**Tip:** To know if it is an error, the command entered will light up in red. It remains in the command box.
+1. The error message will be displayed in the result display box.
+2. Follow the error handling table for the command or use the suggested course of action in the result display to rectify the error.
+
+</box>
 
 Additional Examples:
 *  `remark 1` Empties the remark of the 1st applicant. It is equivalent to `remark 1 r/`.
+  
 [Jump back to Table of Contents](#table-of-contents)
 
 ### Adding LinkedIn/GitHub username for a user: `addL` or `addG`
+<a name="adding-linkedingithub-username-for-a-user-addl-or-addg"></a>
 
 Adds the username for their social profile [LinkedIn/GitHub] to the existing contact details of applicants.
 
@@ -366,6 +408,7 @@ Format: `addL USERID u/USERNAME` or `addG USERID u/USERNAME`
 [Jump back to Table of Contents](#table-of-contents)
 
 ### Opening user LinkedIn or GitHub account: `linkedin` or `github`
+<a name="opening-user-linkedin-or-github-account-linkedin-or-github"></a>
 
 Redirects user to applicant's LinkedIn or GitHub account.
 
@@ -406,7 +449,8 @@ The GitHub window opens as follows, displaying the profile with the specified us
 
 [Jump back to Table of Contents](#table-of-contents)
 
-### Setting an applicant's status : `set`
+### Setting an applicant's status: `set`
+<a name="setting-an-applicants-status-set"></a>
 
 Format: `set INDEX STATUS`
 
@@ -432,7 +476,9 @@ Examples:
 
 [Jump back to Table of Contents](#table-of-contents)
 
-### Viewing an applicant's details: `view`
+
+### Viewing a applicant's details: `view`
+<a name="viewing-a-applicants-details-view"></a>
 
 Creates a complete view for details of an applicant in the second main panel and summary statistics (if applicable) of an applicant in the third main panel.
 
@@ -469,16 +515,29 @@ An example of the `view` command being successfully executed for applicant with 
     ![View-Success](images/view-command-with-stats-success.png)
 <br>
 
-An example of the `view` command failing to execute due to wrong index:
-1. Enter the command `view 0` (**Index does not exist on applicant list panel**)
-2. This is the result of the failed `view` command:
-   
-   ![View-Fail](images/view-command-failure.png)
-<br>
+
+**Error Handling Table for `view` command:**
+
+| Reason for Error                              | Error Message                                                                       | Remedy / Suggested course of action                                                             |
+|-----------------------------------------------|-------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
+| Missing view keyword: `view`                  | Unknown command | Follow the command format of `view INDEX` closely                                                |
+| Missing Index                                 | Invalid command format!                                                             | Ensure that the index is filled up.                                                              |
+| Invalid Index                                 | The person index provided is invalid| Ensure that the index is valid. That is it is a number that is on the displayed applicant list.  |
+
+<box type="tip" seamless>
+
+**Tip:** To know if it is an error, the command entered will light up in red. It remains in the command box.
+1. The error message will be displayed in the result display box.
+2. Follow the error handling table for the command or use the suggested course of action in the result display to rectify the error.
+
+</box>
+
 
 [Jump back to Table of Contents](#table-of-contents)
 
-### Editing an applicant : `edit`
+
+### Editing a applicant: `edit`
+<a name="editing-a-applicant-edit"></a>
 
 Edits an existing applicant's detail in JABPro
 
@@ -525,7 +584,8 @@ Notes on rules for `edit` command involving tags with categories for `t/[CATEGOR
 
 1. Editing an applicant's details will trigger a refresh of the view. This means that the view will be updated to reflect the latest changes to the data for that particular applicant.
 2. We strongly recommend that you categorise tags using `create` before using `edit` to tag applicants. This is to reduce the confusion of having two ways to tag applicants.
-   </box>
+
+</box>
 
 An example of the `edit` command being successfully executed:
 1. Enter the command `edit 1 n/Alex Ho p/91234567` (**Edit name and phone number**)
@@ -549,16 +609,34 @@ An example of the `edit` command being successfully executed to clear a tags and
    ![Edit-Success](images/edit-command-clear-tags-success.png)
 <br>
 
-An example of the `edit` command being wrongly executed due to trying to attach a score to a tag that is not of the `assessment` category:
-1. Enter the command `edit 1 t/TechLead sc/TechLead 80` (**Tag `TechLead` is not of the assessment category**)
-2. This is the result of the failed `edit` command:
-   
-   ![Edit-Fail](images/edit-command-failure.png)
-<br>
+**Error Handling Table for `edit` command:**
 
-[Jump back to Table of Contents](#table-of-contents)
+| Reason for Error                              | Error Message                                                                | Remedy / Suggested course of action                                                                                                                                 |
+|-----------------------------------------------|------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Missing edit keyword: `edit`                  | Unknown command                                                              | Follow the command format of `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAGNAME]…​ [sc/TAGNAME SCORE]` closely                                         |
+| Missing Index                                 | Invalid command format!                                                      | Ensure that the index is filled up.                                                                                                                                 |
+| Invalid Index                                 | The person index provided is invalid                                         | Ensure that the index is valid. That is it is a number that is on the displayed applicant list.                                                                     |
+| Missing at least one of the field | At least one field to edit must be provided.                                 | Ensure that at least one of the field is filled up and to be changed.                                                                                               |
+| Duplicate name                                | This person already exists in the address book                               | Ensure that the name of the applicant is unique. That is you cannot add the same name twice. Use some form of extra identification like a number                    |
+| Invalid phone number                          | Phone numbers should only contain numbers, and it should be at least 3 digits long | Ensure that the phone number only contains number and should be at least 3 digits long                                                                              |
+| Invalid email                                 | Emails should be of the format local-part@domain and adhere to the following constraints: | Ensure that the prefix and domain of the email is correct following the constraints stated by the error                                                             |                                                                                                                                                
+| Invalid tag name                              | Tag names should only contain alphanumeric characters and should not be blank | Ensure that the tag name only contains alphanumeric characters and should not be blank                                                                              |
+| Multiple prefixes of the same type being used | Multiple values specified for the following single-valued field(s): `prefix/` | Remove the duplicate prefix. The command should only have 1 of every prefix except for `t/`                                                                          |
+| Missing score for tag                         | Invalid score, score must be non-negative integer.                                                        | Ensure that the score is filled up and has a space from the `TAGNAME`.                                                                                              | 
+| Invalid tag to attach score | Invalid score tag, tag must a tag of the category assessment and must exist on the applicant | Ensure that the tag is of the category assessment and exist on the applicant. If its the wrong category, use `create`, if it is not tagged to the person use `edit` |
 
-### Deleting job applicants : `delete`
+<box type="tip" seamless>
+
+**Tip:** To know if it is an error, the command entered will light up in red. It remains in the command box.
+1. The error message will be displayed in the result display box.
+2. Follow the error handling table for the command or use the suggested course of action in the result display to rectify the error.
+
+</box>
+
+[Jump back to Table of Contents](#table-of-contents)  
+
+### Deleting job applicants: `delete`
+<a name="deleting-job-applicants-delete"></a>
 
 Deletes the specified job applicants from the address book.
 
@@ -589,6 +667,7 @@ Example:
 ### 2. Tag Colouring and Categorisation
 
 ### Creating tags: `create`
+<a name="creating-tags-create"></a>
 
 Creates a tag and categorises it to the specified category.
 
@@ -629,6 +708,7 @@ Format: `create t/CATEGORY TAGNAME…​`
 [Jump back to Table of Contents](#table-of-contents)
 
 ### Listing all tags: `listT`
+<a name="listing-all-tags-listt"></a>
 
 Shows a list of all tags in JABPro
 
@@ -647,6 +727,7 @@ Format: `listT`
 ### 3. Searching and Arranging Applicants
 
 ### Searching job applicants by category: `search`
+<a name="searching-job-applicants-by-category-search"></a>
 
 Finds job applicants whose profiles match the specified categories' keywords. The search categories are: name, status, tag.
 
@@ -709,6 +790,7 @@ Failed to execute the `search` command? Here are some possible reasons why:
 [Jump back to Table of Contents](#table-of-contents)
 
 ### Filter job applicants by statistics: `filter`
+<a name="filter-job-applicants-by-statistics-filter"></a>
 
 Filters and display applicants in the current displayed applicant list using statistical metrics and values.
 
@@ -767,37 +849,37 @@ An example of the `filter` command being successfully executed with `median`:
    ![Filter-Success](images/filter-command-median-success.png)
 <br>
 
-An example of the `filter` command being incorrectly executed due to non-existent tag:
-1. Enter the command `list`
-2. Enter the command `filter t/techlead met/percentile val/80` (**Tag `techlead` does not exist**)
-3. This is the result of the failed `filter` command:
-   
-    ![Filter-Fail](images/filter-command-failure.png)
-<br>
+**Error handling for `filter` command:**
 
-An example of the `filter` command being incorrectly executed due to an invalid value for `val/VALUE`:
-1. Enter the command `list`
-2. Enter the command `filter t/interview met/percentile val/-1` (**Negative value for percentile**)
-3. This is the result of the failed `filter` command:
-   
-    ![Filter-Fail](images/filter-command-failure-2.png)
-<br>
+| Reason for Error                                        | Error Message                                                                              | Remedy / Suggested course of action                                                                                                                                     |
+|---------------------------------------------------------|--------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Missing filter keyword: `filter`                        | Unknown command!                                                                           | Follow the command format strictly of `filter t/TAGNAME met/METRIC val/VALUE` for score and percentile or `filter t/TAGNAME met/METRIC` for mean or median.             |
+| Missing parameters                                      | Incomplete parameter inputs. t/TAG and met/SCORE are compulsory fields. | Enter the command again with the correct parameters.                                                                                                                    |
+| Invalid tag as tag has wrong category or does not exist | Tag does not exist!                                                                        | Check that the tag is of the category `assessment` and that the tag exists using `listT`. Use the `create` command if it does not.                                      |
+| Invalid metric                                          | Invalid metric provided. Needs to be one of: score, mean, median, percentile               | Check that the metric is one of the following: `score`, `mean`, `median`, `percentile` and that it is spelt correctly. Enter the command again with any of the 4 metric |
+ | Invalid value                                           | Invalid value provided. Needs to be a non negative integer that is more than or equal to 0 | Check that the value is a non-negative integer that is more than or equal to 0. Enter the command again with the correct value.                                         |
+ | Missing value                                           | val/VALUE is missing, it is compulsory.                                                    | Enter a value for `val/VALUE` since the metric requires it.                                                                                                             |
+| Multiple prefixes of the same type being used           | Multiple values specified for the following single-valued field(s): `prefix/`              | Remove the duplicate prefix. The command should only have 1 of every prefix                                                                                             |
 
-Failed to execute the `filter` command? Here are some possible reasons why:
-1. Missing filter keyword i.e. `filter`
-2. Invalid tag as tag has wrong category or does not exist i.e. `filter t/techlead met/percentile val/80`
-3. Invalid metric i.e. `filter t/interview met/average val/80`
-4. Invalid value i.e. `filter t/interview met/percentile val/-1`
-5. Multiple prefixes of the same category used i.e. `filter t/interview t/techlead met/percentile val/80`
-6. Using commas as delimiters of different parameters instead of spaces i.e. `filter t/interview, t/techlead met/percentile val/80`
+
+<box type="tip" seamless>
+
+**Tip:** To know if it is an error, the command entered will light up in red. It remains in the command box.   
+1. The error message will be displayed in the result display box.   
+2. Follow the error handling table for the command  or use the suggested course of action in the result display to rectify the error.
+
+</box>
+
 
 **Significance of using `filter` with the metrics `score`, `percentile`, `mean` and `median`:**
 In essence, this allows you to find job applicants whose performance rating is above a certain percentile, score or mean/median score for that tag.  
-Ideally, this feature can then be used to find the best applicants easily and quickly without having to manually look through the list of applicants.
+Ideally, this feature can then be used to find the best applicants easily and quickly without having to manually look through the list of applicants.  
 
-[Jump back to Table of Contents](#table-of-contents)
+[Jump back to Table of Contents](#table-of-contents)  
 
-### Listing all applicants : `list`
+
+### Listing all applicant: `list`
+<a name="listing-all-applicant-list"></a>
 
 Shows a list of all applicants in JABPro
 
@@ -813,11 +895,11 @@ Format:
 * The sorting algorithm is case-sensitive, which means it will treat uppercase and
   lowercase letters as distinct. This may result in names being sorted as A B C a b c, rather than A a B b C c.
 
-[Jump back to Table of Contents](#table-of-contents)
 
 ### 4. Event Management and Scheduling
 
 ### Adding an Event: `event`
+<a name="adding-an-event-event"></a>
 
 Adds an event, associated with an applicant, to JABPro.
 
@@ -863,6 +945,7 @@ The changes in UI take place in the `Events Window`. Please find more details in
 [Jump back to Table of Contents](#table-of-contents)
 
 ### Viewing events: `schedule`
+<a name="viewing-events-schedule"></a>
 
 Displays all events that have been added to JABPro.
 
@@ -896,7 +979,8 @@ There is no possibility of a "failed" execution of the `schedule` command.
 
 ### 5. Others
 
-### Viewing help : `help`
+### Viewing help: `help`
+<a name="viewing-help-help"></a>
 
 Opens the `Help window` that leads you to the User Guide for assistance on working with JABPro.
 
@@ -928,9 +1012,10 @@ The `Help Window` opens up as follows:
 
 ![HelpWindow](images/hw.png)
 
-[Jump back to Table of Contents](#table-of-contents)
+[Jump back to Table of Contents](#table-of-contents)  
 
-### Exporting the existing data to csv : `export`
+### Exporting the existing data to csv: `export`
+<a name="exporting-all-entries-export"></a>
 
 Format: `export`
 
@@ -948,7 +1033,8 @@ Exports to the following location
 Examples:
 * `export` exports the data to /data/export.csv
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
+<a name="clearing-all-entries-clear"></a>
 
 Clears all entries from JABPro - including applicants and events.
 
@@ -965,7 +1051,8 @@ Format: `clear`
 
 [Jump back to Table of Contents](#table-of-contents)
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
+<a name="exiting-the-program-exit"></a>
 
 Exits the program.
 
