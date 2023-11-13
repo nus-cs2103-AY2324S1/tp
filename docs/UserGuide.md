@@ -439,10 +439,13 @@ Format: `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]â€¦â€
 * **ALL** the fields must be provided.
 * The `NAME` field is case-sensitive.
 * `PHONE` must be a 3 to 20 digit positive integer.
-
 * [`STUDENT_NUMBER`](#student-number) needs to be unique, and must not be blank.
 * When a student is added, their grades, attendance and class participation details will be initialised to `0`, `absent` and `false` respectively, for all tutorials.
 * Comment for a student can only be added after the student is added to the Student List.
+
+The following image shows a successful execution of the `add` command.
+
+<img alt="add-student-success" src="images/add-student-success.png" width="700" >
 
 <box type="tip" seamless>
 
@@ -479,6 +482,15 @@ Examples:
 * `comment s/A0249112A cm/This student is very hardworking and smart.`
 * `comment s/A0249112A cm/` (_This deletes the comment_)
 
+Displayed result if `comment` is successful: `Comment added successfully.` 
+
+Possible errors and their corresponding error messages:
+* If [`STUDENT_NUMBER`](#student-number) input is invalid.
+    * Error message: `Student Number can take any value starting with capital 'A', followed by numbers, and ending with a single alphabet.`
+* If [`STUDENT_NUMBER`](#student-number) does not belong to any student in **Class Manager 2023**.
+    * Error message: `There is no student with the given student number.`
+
+
 [Back to Table of Contents](#table-of-contents)
 
 ---
@@ -503,6 +515,9 @@ Example:
 Deletes all existing students from **Class Manager 2023**. This command will not delete the data file. Use the `undo` command to undo this command.
 
 Format: `clear`
+
+Displayed result if `clear` is successful: `Class Manager has been cleared!`
+
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -541,6 +556,8 @@ Examples:
 Shows a list of all students in **Class Manager 2023**.
 
 Format: `list`
+
+Displayed result is `list` is successful: A list of all students in **Class Manager 2023**.
 
 [Back to Table of Contents](#table-of-contents)
 
