@@ -98,17 +98,17 @@ public class PersonTest {
     }
 
     @Test
-    public void getMonthlyRevenueMethod() {
+    public void getMonthlyFeeMethod() {
         Person alice = new PersonBuilder(ALICE).withDay("Mon").withBegin("1000").withEnd("1004")
                 .withPayRate("1.52").build();
         Person bob = new PersonBuilder(BOB).withDay("Mon").withBegin("1000").withEnd("1004")
                 .withPayRate("1.52").build();
 
         // persons with same lesson and payrate should return same monthly revenue
-        assertEquals(alice.getMonthlyRevenue(), bob.getMonthlyRevenue());
+        assertEquals(alice.getMonthlyFee(), bob.getMonthlyFee());
 
         Person modifiedAlice = new PersonBuilder(alice).withPayRate("1.53").build();
-        assertNotEquals(modifiedAlice.getMonthlyRevenue(), alice.getMonthlyRevenue());
+        assertNotEquals(modifiedAlice.getMonthlyFee(), alice.getMonthlyFee());
 
     }
 

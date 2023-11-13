@@ -249,9 +249,9 @@ public class Person {
                 .toString();
     }
 
-    public double getMonthlyRevenue() {
-        double monthlyRevenue = lesson.getMonthlyHours() * payRate.getValue();
-        assert monthlyRevenue >= 0 : "monthly revenue should not be negative";
-        return monthlyRevenue;
+    public double getMonthlyFee() {
+        double monthlyFee = lesson.getMonthlyHours() * payRate.getValue();
+        assert monthlyFee >= 0 : "monthly revenue should not be negative";
+        return monthlyFee;
     }
 }
