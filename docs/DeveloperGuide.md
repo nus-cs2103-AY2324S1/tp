@@ -1018,6 +1018,24 @@ Use case ends.
     - UniMate displays a message to show a helper message outlining the correct syntax and available sort options
 //@author
 
+**Use case: UC14 Compare calendars**
+
+**MSS**
+1. User requests to compare calendars
+2. User inputs and confirms the indices of the contacts they want to compare their calendars with
+3. UniMate displays the calendar showing the time periods where both the contacts and the user are free 
+
+  Use case ends.
+
+**Extensions**
+
+- 2a. User inputs and confirms the tags of the contacts to identify who they want to compare their calendars with.
+  
+  Use case resumes from step 3  
+
+- 2b. User inputs the invalid arguments for the command.
+  - UniMate displays the user's calendar only, ignoring all the invalid arguments
+
 ### Non-Functional Requirements
 
 Project Constraints:
