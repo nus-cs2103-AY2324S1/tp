@@ -20,10 +20,14 @@ title: OutBook Developer Guide
   - [Find meeting feature](#find-meeting-feature)
   - [Add attendee feature](#add-attendee-feature)
   - [Remove attendee feature](#remove-attendee-feature)
-  - [Keeping track of last meeting with contact](#keeping-track-of-last-meeting-with-contact)
+  - [Last Contacted Time feature](#last-contacted-time-feature)
+  - [Mark meeting as complete feature](#mark-meeting-as-complete-feature)
+  - [Contact Status feature](#contact-status-feature)
+  - [Saving data](#saving-data)
 - [Planned Enhancements](#planned-enhancements)
-  - [\[Proposed\] Undo/redo feature](#proposed-undo-and-redo-feature)
+  - [\[Proposed\] Undo and redo feature](#proposed-undo-and-redo-feature)
   - [\[Feature Flaw\] View Commands](#feature-flaw-view-commands)
+- [Effort](#effort)
 - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 - [Appendix: Requirements](#appendix-requirements)
   - [Product scope](#product-scope)
@@ -40,7 +44,7 @@ title: OutBook Developer Guide
   - [Meeting Tests](#meeting-tests)
   - [Meeting Attendees](#meeting-attendees)
   - [Mark Meetings](#mark-meetings)
-  - [Saving data](#saving-data)
+  - [Data Storage](#data-storage)
 
 <div style="page-break-after: always;"></div>
 
@@ -168,11 +172,10 @@ How the parsing works:
 ### Model component
 
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
-
 <img src="images/ModelClassDiagram.png" width="80%" />
-<br>
 <img src="images/Person&MeetingClassDiagram.png" width="80%" />
-<br>
+
+<div style="page-break-after: always;"></div>
 
 The `Model` component,
 
@@ -267,6 +270,7 @@ Once the instance of `ViewContactCommand` is created, it is executed by the `Log
 Once the indexes of the `Person` and `Meeting` objects to view (if any) are stored in `ModelManager`, their corresponding `Person` and `Meeting` objects (in this case the 2nd `Person` as displayed on the list) are obtained by the `MainWindow` as a `Pair` through the `getViewedItems` method of the `LogicManager` class. As such, both objects can then be forwarded to the `InfoDisplayPanel` using `setViewedModel`, which then displays detailed information of both objects. This process is denoted in the final Sequence Diagram below.
 
 ![ForwardViewedPersonMeetingtoUiDiagram](images/view/UiViewItemsSequenceDiagram-ForwardViewedPerson&MeetingToUi.png)
+<br>
 
 <div style="page-break-after: always;"></div>
 
@@ -395,6 +399,8 @@ Step 8. `LogicManager` then executes the `AddCommand` on the application model.
 
 Step 9. Further execution is carried out, which like before adds the `Person` object to the list of `Person`s in the `Model`, and updates the `Storage` with this new `Person`.
 
+<div style="page-break-after: always;"></div>
+
 ### Mark meeting as complete feature
 
 A meeting can be marked as complete using the `mark` command. The command also updates the last contacted time of its attendees to the ending time of the meeting, if the meeting end time is after the attendees current last contacted time.
@@ -419,7 +425,7 @@ Finally, a `CommandResult` is produced and returned to the `LogicManager`.
 
 <div style="page-break-after: always;"></div>
 
-### Keeping track of the status of a contact
+### Contact Status feature
 
 Each instance of `Person` contains an immutable `Status` object that allows the user to specify which stage of the insurance sales process a contact is at, if applicable.
 At the current iteration of OutBook, a status must be one of `NIL`, `Prospective`, `Active`, `Inactive`, `Renewal`, `Claimant` (case-insensitive).
@@ -436,7 +442,9 @@ The list of valid statuses is stored as an `Enumeration` object for the followin
 - Readability: e.g. `StatusList.NIL` is self-explanatory and easier to understand than something like `StatusList[0]` if an index data structure were to be used.
 - Maintainability: If the list of valid statuses changes or expands in the future, it's much easier to update an enumeration. This centralizes the changes in one place, making the code more maintainable compared to scattered string constants.
 
-`Status` is implemented and utilized in a similar manner to [`LastContactedTime`](#keeping-track-of-last-meeting-with-contact).
+`Status` is implemented and utilized in a similar manner to `LastContactedTime`, as described [here](#last-contacted-time-feature).
+
+<div style="page-break-after: always;"></div>
 
 ### Saving data
 
@@ -520,6 +528,9 @@ Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Sinc
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <img src="images/CommitActivityDiagram.png" width="250" />
+<br>
+
+<div style="page-break-after: always;"></div>
 
 #### Design considerations:
 
@@ -568,6 +579,8 @@ OutBook needed to make managing contacts and meetings an efficient process, this
 ### Effort in managing interactions between entities
 
 OutBook required one meeting to interact with many other contacts and for one contact to interact with many other meetings. Because of the interactions between both classes, a change in 1 object must be reflected in everything that references the object while still being immutable. This required thorough testing and analysis to keep track of the interactions and account for them while we were adding more features.
+
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -668,6 +681,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: Remove contact from a meeting**
 
 **MSS**
@@ -710,6 +725,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 5b1. OutBook shows an error message.
 
     Use case resumes at step 3.
+
+<div style="page-break-after: always;"></div>
 
 **Use case: Mark meeting as complete**
 
@@ -810,6 +827,8 @@ Exiting
 1. Input command `exit`. <br>
    Expected: OutBook closes and shutdown.
 
+<br>
+
 <div style="page-break-after: always;"></div>
 
 ### Adding a person
@@ -843,6 +862,8 @@ Adding a person while not all persons are being shown.
 
 3.  Adding a contact automatically shows all contacts.
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a person
 
 1. Test case: `editc 1 n/John Doe p/12345678 e/JohnDoe@gmail.com`<br>
@@ -851,6 +872,8 @@ Adding a person while not all persons are being shown.
 2. If you were to edit a contact so that it has the same name or phone number or email to any other contact, you will encounter a duplicate error
 
 3. Other incorrect delete commands to try: `editc` and `editc 1`, you will receive a required index error and a required field error.
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a person
 
@@ -895,6 +918,8 @@ View contact while contact is being edited
 2. Edit the first contact to have a later last contacted date than the second contact. <br>
    Expected: The second contact will be sorted to the top of the list, and the details of this contact will be displayed instead.
 
+<div style="page-break-after: always;"></div>
+
 ### Meeting Tests
 
 Repeat the contact test cases with meeting commands
@@ -928,13 +953,11 @@ Remove Meeting Attendee
 2. The attendees will be listed with an index in the meeting. Use `rmmc 1 1`. <br>
    Expected: The meeting will have its first attendee removed.
 
+<div style="page-break-after: always;"></div>
+
 ### Mark Meetings
 
 Mark a Meeting as completed
-
-<div style="page-break-after: always;"></div>
-
-### Saving data
 
 1. Use `mark 1` to mark the first meeting as completed <br>
    Expected: Meeting will be shown as completed and the attendees that are in the meeting will have their last contacted updated to the end time of the meeting.
