@@ -204,6 +204,9 @@ Examples:
     <figcaption>Fig 4: After executing the <code>createMember</code> command</figcaption>
 </figure>
 
+<div markdown="block" class="alert alert-info">:information_source: CCACommander will automatically capitalise the members' names for you, meaning an input of "john doe" will become "John Doe" automatically! 
+</div>
+
 <hr class="command-separator">
 
 <div style="page-break-after: always;"></div>
@@ -247,8 +250,8 @@ Creates a new event with accompanying details (name, location, date, tag).
 Format: `createEvent n/EVENT_NAME l/LOCATION d/DATE [t/TAG]...`
 
 Examples:
-* `createEvent n/Party l/Raffles Hall d/2023-09-16 t/Dinner t/Sem1` creates an event **named** "Party" held at the **location** "Raffles Hall" on the
-  **date** 2023-09-16, with **tag** "Dinner" and **tag** "Sem1".
+* `createEvent n/Exco Planning l/Planning Room d/2023-12-10 t/Sem1` creates an event **named** "Exco Planning" held at the **location** "Planning Room" on the
+  **date** 2023-12-10, with **tag** "Sem1".
 
 <figure>
     <img src="images/CreateEventPostCommand.png"
@@ -309,7 +312,7 @@ Format: `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
 * Enrols the member at the specified `MEMBER_INDEX` to the event at the specified `EVENT_INDEX` with `NUMBER_OF_HOURS` specifying the number of hours that the member contributed and `REMARK` stating extra remarks about the member and event.
 
 Examples:
-* `enrol m/1 e/1 h/2 r/Role: Photographer` enrols member at **member index** 1 in the member list to the event at **event index** 5 in the event list, where the member had 3 **hours** of contributions to that event and has a **remark** stating that the member "did planning".
+* `enrol m/1 e/1 h/2 r/Role: Photographer` enrols member at **member index** 1 in the member list to the event at **event index** 1 in the event list, where the member had 2 **hours** of contributions to that event and has a **remark** of "Role: Photographer".
 * `enrol m/5 e/1` enrols the member at **member index** 5 in the member list to the event at **event index** 1 in the event list.
 
 <hr class="command-separator">
@@ -447,14 +450,12 @@ List all members and all events in the CCA in two separate columns.
 
 Format: `list`
 
-A GUI similar to the one below will be shown after entering the command.
-
 <hr class="feature-class-separator">
 
 <div style="page-break-after: always;"></div>
 
 ### Utility Commands
-CCACommander provides you with powerful utility commands to make your admin tasks even more of a breeze than it was.
+CCACommander provides you with powerful utility commands to make your admin tasks even more of a breeze than it was before.
 
 #### Undoing a command: `undo`
 
@@ -535,6 +536,7 @@ If your changes to the data file makes its format invalid, CCACommander will dis
 
 > [Back to top](#top)
 
+<div style="page-break-after: always;"></div>
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
@@ -570,9 +572,7 @@ This glossary provides definitions for the special terms used in this user guide
 
 **Tag**: A word or phrase that labels a member or an event.
 
---------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
+-------------------------------------------------------------------------------------------------------------------
 
 ## Command Summary
 
@@ -620,7 +620,7 @@ Action | Format, Examples
   </tr>
   <tr>
     <td class="tg-0pky">GENDER</td>
-    <td class="tg-0pky"><code>Male</code>, <code>Female</code>, <code>Others</code></td>
+    <td class="tg-0pky"><code>Male</code>, <code>Female</code>, <code>Others</code> in any case</td>
   </tr>
   <tr>
     <td class="tg-0pky">PHONE_NUMBER</td>
