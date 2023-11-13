@@ -89,6 +89,7 @@ this guide. Here's what they mean:
 **:information_source: Notes:**<br>
 * Dive deeper into the functionalities of JobFindr with these informative notes.
 * They provide expanded insights and additional context, empowering you to leverage JobFindr to its fullest potential.
+</div>
 
 Additionally, you'll encounter different text styles within this guide:
 
