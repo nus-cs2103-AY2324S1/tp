@@ -13,7 +13,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_DEREK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CHERYL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DEREK;
 import static seedu.address.testutil.TypicalAppointment.APPOINTMENT_1;
-import static seedu.address.testutil.TypicalAppointment.APPOINTMENT_2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
