@@ -267,7 +267,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. An invalid contact to edit is specified
+* 2a. An invalid contact to edit is specified.
 
   * 2a1. ConText shows an error message.
   
@@ -298,7 +298,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. An invalid contact to edit is specified
+* 2a. An invalid contact to edit is specified.
 
   * 2a1. ConText shows an error message.
     
