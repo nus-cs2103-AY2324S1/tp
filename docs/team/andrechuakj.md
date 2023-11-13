@@ -15,9 +15,9 @@ Given below is a summary of my contributions to the project. All of my code cont
 ### Features Implemented
 * `createMember` [#113](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/113)
   * **Feature details:** Allows a user to create a member in CCACommander.
-  * **Justifications:** Gives the user the power to create any members.
+  * **Justifications:** Provides users with the capability to add new members.
 * Create `Enrolment`, `Hours`, `Remark`, `UniqueEnrolmentList` classes [#144](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/144) (previously `Attendance`)
-    * **Feature details:** The fundamental classes to encapsulate an enrolment object.
+    * **Feature details:** Introduces the fundamental classes to encapsulate an enrolment object.
     * **Justifications:** Establishes the core structure for tracking enrolment, hours, and remarks for CCA members, enhancing data organization and management.
 
 ### Enhancements to existing features
@@ -53,15 +53,13 @@ Relevant tests were added for features implemented and feature enhancements.
     * Added screenshots for the following commands (subsequently replaced): `list`, `viewMember`, `viewEvent`. [#256](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/256)
     * Created table to organise list of acceptable values for each command. [#254](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/254)
     * Enhanced formatting of the user guide to ensure consistency and well-structured presentation. [#301](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/301)
-      * Credits: Styling for table of contents was adapted from [StackOverflow](https://stackoverflow.com/questions/19999696/are-numbered-headings-in-markdown-rdiscount-possible)
+      * Credits: Styling for table of contents was adapted from [StackOverflow](https://stackoverflow.com/questions/19999696/are-numbered-headings-in-markdown-rdiscount-possible).
 
 * **Developer Guide**
   * Added target user profile and value proposition [#90](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/90)
   * Added 1 use case:
     * UC01 - Create a member [#90](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/90)
-  * Added a section to explain the `Enrolment` model (including diagram) [#173](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/173)
-
-
+  * Added a dedicated section to explain the `Enrolment` model, supplemented with a diagram [#173](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/173)
 
 ### Community
 * This is the full [list](https://github.com/AY2324S1-CS2103T-F11-1/tp/pulls?q=is%3Apr+reviewed-by%3Aandrechuakj) of pull requests which I have reviewed.
