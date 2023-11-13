@@ -33,5 +33,5 @@ balance sheet. It is built java, developed for small business accountant looking
 ### **Developer Guide**
 
 ### **Review Contributions**
-1. In charge of UG, 
-   - Revied and merged follwing PRS: [PR 193](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/193), [PR 185](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/185), [PR 107](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/107), [PR 89](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/89), [PR 87](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/87)
+1. In charge of UG: 
+   - Reviewed and merged following PRS: [PR 193](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/193), [PR 185](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/185), [PR 107](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/107), [PR 89](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/89), [PR 87](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/87)
