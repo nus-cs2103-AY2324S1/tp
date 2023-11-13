@@ -36,6 +36,13 @@ public class RandomCommand extends Command {
         this.numOfStudents = numOfStudents;
     }
 
+    /**
+     * Selects a specific number of students randomly from the list of displayed students.
+     * @param model {@code Model} which the command should operate on.
+     * @param commandHistory The command history to record this command.
+     * @return A {@code CommandResult} with the feedback message of the operation result.
+     * @throws CommandException If an error occurs during command execution.
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);

@@ -18,10 +18,22 @@ import seedu.classmanager.model.tag.Tag;
  */
 public class AddTagCommand extends TagCommand {
 
+    /**
+     * Creates an AddTagCommand to add the specified {@code tags} to a student.
+     * @param studentNumber of the student in the filtered student list to edit their tags.
+     * @param tags of the student to be updated to.
+     */
     public AddTagCommand(StudentNumber studentNumber, Set<Tag> tags) {
         super(studentNumber, tags);
     }
 
+    /**
+     * Adds certain tags to an existing student in Class Manager.
+     * @param model {@code Model} which the command should operate on.
+     * @param commandHistory The command history to record this command.
+     * @return A {@code CommandResult} with the feedback message of the operation result.
+     * @throws CommandException If an error occurs during command execution.
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         List<Student> lastShownList = model.getFilteredStudentList();

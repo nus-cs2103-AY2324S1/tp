@@ -16,7 +16,7 @@ This is why we are excited to introduce **Class Manager 2023**, an all-in-one ap
 This user guide is your key to mastering **Class Manager 2023**, with step-by-step instructions on installing and using our application. **Class Manager 2023** is designed to be intuitive and easy to use, so you can get started immediately!
 
 --------------------------------------------------------------------------------------------------------------------
-<!-- * Table of Contents -->
+<!-- * Table of Contents to be removed after PDF conversion -->
 # Table of Contents
 
 <page-nav-print />
@@ -81,7 +81,7 @@ Before reading our User Guide, here are some quick tips:
 
      </box>
 
-2. Words that are <span style="color:#0d6efd">in blue</span> are hyperlinks. They will redirect you to a different part of the User Guide or an external link when you click on them. For example, [this hyperlink](#welcome-to-class-manager-2023) will redirect you to the first page of the User Guide.
+2. Words that are <span style="color:#0d6efd">in blue</span> are hyperlinks. They will redirect you to a different part of the User Guide or an external link when you click on them. For example, [this hyperlink](#welcome-to-class-manager-2023) will redirect you to the top of the User Guide.
 
    <box type="tip" seamless>
 
