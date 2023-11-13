@@ -524,7 +524,7 @@ dp
 
 | Fields  | Prefix | Required | Remarks |
 |---------|--------|:--------:|---------|
-| `INDEX` | No prefix | <img width=30px src='assets/svg/ug/required.svg'> | The person at this index in the displayed person list is deleted. The index must be a positive integer (i.e. 1, 2, 3, … , 2147483647). |
+| `INDEX` | No prefix | <img width=30px src='assets/svg/ug/required.svg'> | The person at this index in the displayed contact list is deleted. The index must be a positive integer (i.e. 1, 2, 3, … , 2147483647). |
 {: .field-table}
 
 {% include admonition.html type="warning" title="Warning" body="
@@ -1079,7 +1079,7 @@ atagp
 
 | Fields  | Prefix | Required | Remarks |
 |---------|--------|:--------:|---------|
-| `INDEX` | No prefix | <img width=30px src='assets/svg/ug/required.svg'> | The person at this index in the displayed person list is edited. The index must be a positive integer 1, 2, 3, … , 2147483647. |
+| `INDEX` | No prefix | <img width=30px src='assets/svg/ug/required.svg'> | The person at this index in the displayed contact list is edited. The index must be a positive integer 1, 2, 3, … , 2147483647. |
 | `TAG` | `t/` | <img width=30px src='assets/svg/ug/required.svg'> | The tag to be added to the person. Tags should only contain alphanumeric characters. |
 | `MORE_TAGS` | `t/` | <img width=33px src='assets/svg/ug/not_required.svg'> | Additional tag(s) to be added to the person. Tags should only contain alphanumeric characters. |
 {: .field-table}
