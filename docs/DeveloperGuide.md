@@ -57,6 +57,8 @@
     * [Deleting a person](#deleting-a-person)
     * [Adding tag](#adding-tag)
     * [Deleting tag](#deleting-tag)
+    * [Adding-note](#adding-note)
+    * [Deleting note](#deleting-note)
 * [Appendix C: Planned enhancements](#appendix-c-planned-enhancements)
     * [User Interface](#user-interface)
 
