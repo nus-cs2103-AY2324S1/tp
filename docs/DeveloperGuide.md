@@ -622,7 +622,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The user did not the valid predefined prefix to search for the employee by department.
+* 1a. The user did not input the valid predefined prefix to search for the employee by department.
   * 1a1. EmployeeManager shows an error message.
     Use case ends.
 
