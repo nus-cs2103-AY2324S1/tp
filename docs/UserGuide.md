@@ -444,7 +444,7 @@ You can add remarks to a group in your contact list.
 </div>
 
 
-**Example:**
+**Example(s):**
 - `remark g/CS2103T r/quiz tomorrow`  
   This adds the remark "quiz tomorrow" to the existing "CS2103T" group in your contact list.
 
