@@ -292,13 +292,11 @@ Given below is an example usage scenario and how `converttoclient` and `convertt
 
 <div align="center">
     <img src="diagrams/ConvertLeadToClientSequence.png" width = "900"/>
-    <p>After converttoclient command</p>
 </div>
 
 The following activity diagram shows what happens when a user executes `converttoclient`:
 <div align="center">
     <img src="diagrams/ConvertClientToLeadActivity.png" height="300"/>
-    <p>After converttoclient command</p>
 </div>
 
 ### Sort Meeting Time feature
