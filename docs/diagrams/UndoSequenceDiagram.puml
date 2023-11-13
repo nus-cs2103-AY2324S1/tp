@@ -28,13 +28,11 @@ deactivate UndoCommand
 AddressBookParser --> LogicManager : u
 deactivate AddressBookParser
 
-LogicManager -> Model : execute()
+LogicManager -> Model : setAddressBook(backupModel.getAddressBook())
 
 
 activate Model
 
-Model -> Model : setAddressBook(backupModel.getAddressBook())
-activate Model
 
 Model --> LogicManager
 deactivate Model

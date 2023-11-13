@@ -664,7 +664,7 @@ The undo feature allows users to revert the last executed command in the address
 * `AddressBookParser` — Handles the parsing of the user's undo command.
 * `LogicManager` — Represents the application's data and business logic, including the functionality to undo the last command.
 
-Given below is an example usage scenario and how the undo mechanism behaves at each step. The sequence diagram illustrates the interactions inside the Logic component for the undo command.
+Given below is an example usage scenario and how the undo mechanism behaves at each step. The sequence diagram illustrates the interactions inside the Logic component for the undo command. The diagrams illustrate the flow of the execution of a successful undo command. In the diagrams below, the instance of `backupModel` is a separate instance from the current model and only serves as a container to save the data from the current model.
 
 ![Interactions Inside the Logic Component for the UndoCommand](images/UndoSequenceDiagram.png)
 
@@ -715,7 +715,7 @@ The reset feature allows users to erase the contents of the address book. This f
 * `AddressBookParser` — Handles the parsing of the user's reset command.
 * `LogicManager` — Represents the application's data and business logic, including the functionality to check if the user has properly gone through the appropriate steps to execute a successful address book reset.
 
-Given below is an example usage scenario and how the reset mechanism behaves at each step. The sequence diagram illustrates the interactions inside the Logic component for the first execution of the reset command.
+Given below is an example usage scenario and how the reset mechanism behaves at each step. The sequence diagram illustrates the interactions inside the Logic component for the first execution of the `reset` command. The diagrams illustrate the flow of the execution of a successful `reset` command.
 
 Step 1. The user enters the `reset` command. And is given a warning of the functionality of the `reset` command and is prompted to enter `reset confirm` to continue executing the command.
 
