@@ -914,7 +914,7 @@ You can view the link to our User Guide.
 ![](images/features/Generalcommand_help.png)
 
 <div align="center">
-  <p style="font-size: 13px; font-style: italic;">You are now able to click on the User Guide link for further guidance.</p>
+  <p style="font-size: 13px; font-style: italic;">You are now able to copy the URL of the User Guide.</p>
 </div>
 
 
