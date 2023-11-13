@@ -49,46 +49,12 @@ activate am
 am --> fcp : field
 deactivate am
 
-fcp -> am : argMultimap.getValue(args)
-activate am
+skinparam sequenceReferenceBackgroundColor white
 
-am --> fcp : args
-deactivate am
-
-fcp -> fcp : field.equals(...)
-
-alt "course"
-    fcp -> fcp : parseCourse(args)
-    activate fcp
-    fcp -> am : argMultimap.getValue(taken)
-    activate am
-    am --> fcp : taken
-    deactivate am
-    alt taken exists
-        fcp -> fcp : new FilterCourseCommand(args, taken) as filterCommand
-        note right : "taken" can be true or false
-    else taken does not exist
-        fcp -> fcp : new FilterCourseCommand(args, false) as filterCommand
-    end
-    fcp --> fcp : filterCommand
-    deactivate fcp
-else "tag"
-    fcp -> fcp : parseTag(args)
-    activate fcp
-    fcp --> fcp : new FilterTagCommand(args) as filterCommand
-    deactivate fcp
-else "spec"
-    fcp -> fcp : parseSpec(args)
-    activate fcp
-    fcp --> fcp : new FilterSpecCommand(args) as filterCommand
-    deactivate fcp
-else "grad"
-    fcp -> fcp : parseGrad(args)
-    activate fcp
-    fcp --> fcp : new FilterGradCommand(args) as filterCommand
-    deactivate fcp
-end
-
+ref over fcp, am
+    Infer the type of filterCommand to return
+    based the "field" value.
+end ref
 fcp --> fcp : filterCommand
 deactivate fcp
 
@@ -108,16 +74,10 @@ m -> m : updateDisplayedPersonList(filterCommand.predicates)
 activate m
 
 loop for each person in personList
-    note left of p : personList also includes persons who\nare not in displayedPersonList
-    m -> p : filterCommand.predicates.test(person)
-        activate p
-    alt test == true
-        p --> m : displayedPersonList.add(person)
-        note left of p : Only add if\nperson is not\nalready in the list
-    else test == false
-        p --> m : displayedPersonList.remove(person)
-        deactivate p
-    end
+    ref over m, p
+        Remove person from displayedPersonList
+        if predicates.test(person) is false
+    end ref
     note right of m : Details of how the predicates\ntest each person is omitted for simplicity
 end
 
