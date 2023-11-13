@@ -222,7 +222,7 @@ public class ModelManager implements Model {
     public void updateFilteredBandMusicianList(Predicate<Band> bandPredicate) {
         filteredBands.setPredicate(bandPredicate);
 
-        if (filteredBands.size() == 0) {
+        if (filteredBands.isEmpty()) {
             updateFilteredMusicianList(PREDICATE_SHOW_ALL_MUSICIANS);
             updateFilteredBandList(PREDICATE_SHOW_ALL_BANDS);
             return;
