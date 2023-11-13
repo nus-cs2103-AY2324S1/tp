@@ -147,7 +147,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateSortedPersonList(Comparator<Date> comparator) {
+    public void updateSortedDateList(Comparator<Date> comparator) {
         requireNonNull(comparator);
         sortedList.setComparator(comparator);
     }

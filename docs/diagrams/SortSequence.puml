@@ -49,7 +49,7 @@ deactivate LoveBookParser
 LogicManager -> SortCommand : execute()
 activate SortCommand
 
-SortCommand -> Model : updateSortedPersonList()
+SortCommand -> Model : updateSortedDateList()
 activate Model
 
 Model --> SortCommand

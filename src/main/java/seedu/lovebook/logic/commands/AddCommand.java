@@ -61,7 +61,7 @@ public class AddCommand extends Command {
         }
 
         model.addDate(toAdd);
-        model.updateSortedPersonList(Comparator.<Date>naturalOrder());
+        model.updateSortedDateList(Comparator.<Date>naturalOrder());
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

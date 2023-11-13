@@ -1,9 +1,17 @@
 ---
 layout: default.md
 title: "Developer Guide"
+pageNav: 3
 ---
 
 # LoveBook Developer Guide
+
+## **Overview**
+
+LoveBook, is a **dating-focused** application, revolving around providing **serial daters** with a **convenient**
+and **enjoyable** tool to enhance their dating experiences. Featuring **user preferences management**, **date organization**,
+**customizable filtering options** and **best match algorithms**, LoveBook enhances the **efficiency** and **effectiveness** of your
+online dating journey.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -55,6 +63,11 @@ The bulk of the app's work is done by the following four components:
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
 **How the architecture components interact with each other**
+
+This application attempts to separate the `UI`, `Logic`, `Model` and `Storage` components to reduce coupling between the components.
+This is done by using interfaces to define the API of each component and using classes to implement the functionality of each component.
+This allows the components to be easily added and replaced with other implementations without affecting the other components.
+For example, new features can be added to the `Storage` component without affecting the other components.
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues
 the command `delete 1`.
@@ -148,7 +161,7 @@ How the parsing works:
 **API
 ** : [`Model.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="550" />
 
 
 The `Model` component,
@@ -173,10 +186,10 @@ The `Model` component,
 
 The `Storage` component,
 
-* can save both LoveBook data, Date preferences data and user preference data in JSON format, and read them back into
+* saves LoveBook data, date preferences data and user preference data in JSON format, and reads them back into
   corresponding objects.
-* inherits from both `LoveBookStorage`, `UserPrefsStorage` and `DatePrefsStorage`, which means it can be treated as
-  either one (if only the functionality of only one is needed).
+* inherits from `LoveBookStorage`, `UserPrefsStorage` and `DatePrefsStorage`, which means it can be treated as
+  either one of three (if the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
 
@@ -188,41 +201,93 @@ Classes used by multiple components are in the `seedu.LoveBook.commons` package.
 
 ## **Implementation**
 
-This section aims to describe the implementation details of the features in LoveBook.
+Before diving into the implementation details, here's an overview of what changed from the AB-3 codebase.
+    - Address, Phone Number, Email, Tags fields have been replaced with Gender, Age, Horoscope, Height and Income fields.
+    - The `Person' class has been renamed to `Date' class, and most of the classes named `Personxxx` have been renamed accordingly.
+    - The GUI has been updated to make the application more visually appealing and user-friendly.
+    - Several other commands like `filter`, `star`, `bestMatch` (not exhaustive) have been added to the application.
 
-There are 12 main features in that you came up with for LoveBook.
+The following class diagram shows the new `Date` class after the changes mentioned above.
 
-1. Add Dates
-2. Delete Dates
-3. Edit Dates
-4. List Dates
-5. Set preferences
-6. Get most compatible match
-7. Get random date
-8. Filter dates
-9. Sort dates
-10. Get best match
-11. Star dates
-12. Unstar dates
+<puml src="diagrams/DateClassDiagram.puml" width="600" />
 
-### Add Dates
-The add dates feature is implemented using the `AddCommand` class. The `AddCommand` class takes in a `Date` object as a parameter. The `Date` object is used to add the `Date` object to the `Model` component. The `AddCommand` class then returns a `CommandResult` object that contains the added `Date` object.
-The Activity Diagram below summarises what happens after the user enters an add command.
+Moving on to the implementation details, the following sections describe how and why the main features of the app work.
 
-<puml src="diagrams/AddActivityDiagram.puml" width="450" />
+### Add Dates Feature
 
-### Delete Dates
-The delete dates feature is implemented using the `DeleteCommand` class. The `DeleteCommand` class takes in a an 'Index' object as a parameter. The 'Index' object is used to identify the `Date` object in the `Model` component to be deleted. The `DeleteCommand` class then returns a `CommandResult` object that contains the deleted `Date` object
- 
+#### Implementation
 
-### Edit Dates
-The edit dates feature is implemented using the `EditCommand` class. The `EditCommand` class takes in a an 'Index' object as a parameter. The 'Index' object is used to identify the `Date` object in the `Model` component to be edited. The `EditCommand` class then returns a `CommandResult` object that contains the edited `Date` object
-The Sequence Diagram below shows how the components interact with each other for the scenario where the user issues the command `edit 1 name/Cleon`
+1. The add dates feature begins by passing the user input obtained from the `CommandBox` class in the `Ui` component to the `LogicManager` class in the `Logic` component by invoking the `execute` function.
+2. The `LogicManager` class then passes the user input to the `LoveBookParser` class for parsing and validation.
+3. The `LoveBookParser` class then performs polymorphism and creates an `AddCommandParser` object for add command specific parsing.
+4. The `LoveBookParser` class also separates the command word from the user input and passes the arguments from the user input to the `AddCommandParser` object created above for parsing.
+5. The `AddCommandParser` carries out it's validation checks and creates new `Date`, `AddCommand` objects if the validation checks pass.
+6. The `AddCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function which adds the new `Date` object created into the existing `Model` component.
 
-<puml src="diagrams/EditSequenceDiagram.puml" width="450" />
+The `delete` and `edit` features are also implemented in a similar manner.
+
+The sequence diagram notation of the above steps is shown below. <br> 
+
+<puml src="diagrams/AddSequenceDiagram.puml" width="600" />
+
+The activity diagram notation of the above steps is shown below. <br>
+
+<puml src="diagrams/AddActivityDiagram.puml" width="600" />
+
+<box type="info" seamless>
+    The UI and Storage components are not shown in the sequence and activity diagrams above for simplicity.
+</box>
+
+#### Design Considerations
+
+**Aspect: Adding dates with same name**
+* **Alternative 1 (current choice):** Don't allow dates with the same name to be added.
+  * Pros: Easy to implement (since all you have to do is find the name in the existing list of dates)
+  * Cons: Not very user-friendly (since the user may be dating multiple people with the same name)
+
+* **Alternative 2:** Allow dates with the same name to be added.
+  * Pros: More user-friendly (since user has more flexibility in adding dates)
+  * Cons: Slightly harder to implement (equality check will now take into account other details like age, gender, etc.)
+
+**Aspect: Allowing users to add dates without specifying all fields**
+* **Alternative 1 (current choice):** Require users to specify all fields.
+  * Pros: Easy to implement (since all you have to do is check if all fields are present)
+  * Cons: Not very user-friendly (since the user may not know all the details of the date)
+
+* **Alternative 2:** Allow users to specify only some fields, and adding placeholder inputs to the remaining fields.
+  * Pros: More user-friendly (since user has more flexibility in adding dates)
+  * Cons: Slightly harder to implement (since you have to check which fields are present). Will also affect the matching algorithm since these placeholder inputs have to be omitted.
+
+**Aspect: Adding dates to existing date list**
+* **Alternative 1 (current choice):** Sorts the list on every addition, maintaining a lexically sorted list.
+  * Pros: Easier to implement (since all you have to do is sort the list by name on every addition) and more visually appealing (since the user can easily see the list sorted by name)
+  * Cons: Not very user-friendly (since the user may want to see the date being added to the end of the list)
+
+* **Alternative 2:** Adds the date to the end of the list.
+  * Pros: More user-friendly (since user can easily see the date being added to the end of the list)
+  * Cons: Not very visually appealing (since the list appears to be unsorted and non uniform)
 
 ### List Dates
-The list dates feature is implemented using the `ListCommand` class. The `ListCommand` class takes in a `Predicate` object as a parameter. The `Predicate` object is used to filter the `Date` objects in the `Model` component. The `ListCommand` class then returns a `CommandResult` object that contains the filtered `Date` objects.
+
+1. The list dates feature begins by passing the user input obtained from the `CommandBox` class in the `Ui` component to the `LogicManager` class in the `Logic` component by invoking the `execute` function.
+2. The `LogicManager` class then passes the user input to the `LoveBookParser` class for parsing and validation.
+3. The `LoveBookParser` class then performs polymorphism and creates a `ListCommand` object for list specific commands. One thing to note here is that inputs like `list 12` and `list x` are accepted since they still contain `list`.
+4. The `ListCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function which sorts the list of dates in the `Model` component and returns the sorted list to the `Ui` component.
+
+The sequence diagram notation of the above steps is shown below. <br>
+
+<puml src="diagrams/ListSequenceDiagram.puml" width="600" />
+
+#### Design Considerations
+
+**Aspect: Ordering of dates**
+* **Alternative 1 (current choice):** Sorts the list of dates by name.
+  * Pros: Easier to implement (since all you have to do is sort the list by name on every addition) and more visually appealing (since the user can easily see the list sorted by name)
+  * Cons: Not very user-friendly (since the user may want to see the date being added to the end of the list) and less efficient (since you have to sort the list on every command).
+
+* **Alternative 2:** List the dates in the order they were added.
+  * Pros: More user-friendly (since user can easily see the date being added to the end of the list). More efficient (since you don't have to sort the list on every list command)
+  * Cons: Not very visually appealing (since the list appears to be unsorted and non uniform)
 
 ### Filter dates
 The filter feature is implemented using the `FilterCommand` class. The `FilterCommand` class takes in a `Predicate`
@@ -231,12 +296,12 @@ The `FilterCommand` class then returns a `CommandResult` object that contains th
 
 The _Activity_ diagram summarises what happens after the user enters a filter command.
 
-<puml src="diagrams/FilterActivity.puml" width="450" />
+<puml src="diagrams/FilterActivity.puml" width="550" />
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `filter name/ John`
 
-<puml src="diagrams/FilterSequence.puml" width="450" />
+<puml src="diagrams/FilterSequence.puml" width="550" />
 
 ### Sort dates
 
@@ -246,13 +311,13 @@ The `SortCommand` class then returns a `CommandResult` object that contains the 
 
 The _Activity_ diagram summarises what happens after the user enters a sort command.
 
-<puml src="diagrams/SortActivity.puml" width="450" />
+<puml src="diagrams/SortActivity.puml" width="550" />
 
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `sort name/ increasing`
 
-<puml src="diagrams/SortSequence.puml" width="450" />
+<puml src="diagrams/SortSequence.puml" width="550" />
 
 ### Get Blind Date
 
@@ -268,7 +333,7 @@ through the list of Dates, and calls `GetScore` to get the score of the date bas
 income. Each metric will be scored upon 10, and when it deviates from the user's preferences, the score is reduced.
 The maximum score is 40.
 
-<puml src="diagrams/BestMatchSequence.puml" width="450" />
+<puml src="diagrams/BestMatchSequence.puml" width="550" />
 
 ### Set preferences
 
@@ -277,9 +342,11 @@ The set preferences feature is implemented using the `SetPrefCommand` class. The
 The `SetPrefCommand` class then returns a `CommandResult` object that contains the `DatePref` object.
 
 The _Activity_ diagram summarises what happens after the user enters a set preferences command.
+
 <puml src="diagrams/SetPrefActivity.puml" width="550" />
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
+
 <puml src="diagrams/SetPrefSequence.puml" width="550" />
 
 ### Star dates
@@ -290,12 +357,12 @@ starred. The `StarCommand` class then returns a `CommandResult` object that cont
 
 The _Activity_ diagram summarises what happens after the user enters a star command.
 
-<puml src="diagrams/StarActivity.puml" width="450" />
+<puml src="diagrams/StarActivity.puml" width="550" />
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `star 1`
 
-<puml src="diagrams/StarSequence.puml" width="450" />
+<puml src="diagrams/StarSequence.puml" width="550" />
 
 ### Unstar dates
 
@@ -305,12 +372,12 @@ unstarred. The `UnstarCommand` class then returns a `CommandResult` object that 
 
 The _Activity_ diagram summarises what happens after the user enters a star command.
 
-<puml src="diagrams/UnstarActivity.puml" width="450" />
+<puml src="diagrams/UnstarActivity.puml" width="550" />
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `unstar 1`
 
-<puml src="diagrams/UnstarSequence.puml" width="450" />
+<puml src="diagrams/UnstarSequence.puml" width="550" />
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -340,8 +407,7 @@ the command `unstar 1`
 
 **Value proposition**:
 LoveBook simplifies the process of storing information of dates and assessing compatibility between user and his/her
-dates by taking into account the user’s preferences and profile, thereby enhancing the efficiency and effectiveness of
-finding the perfect match.
+dates by taking into account the user’s preferences, thereby enhancing the efficiency and effectiveness of finding the perfect match.
 
 ### User stories
 
@@ -589,8 +655,6 @@ Use case ends. <br>
 4. Portability: The CLI application should be compatible with multiple operating systems, including Windows, macOS, and
    Linux.
 
-*{More to be added}*
-
 ### Glossary
 
 | Term                       | Definition                                                                                                        |
@@ -640,7 +704,8 @@ testers are expected to do more *exploratory* testing.
 
 ### Best Match Dates
 
-1. Getting the best match using your Date Preferences [Ensure that you have added at least 1 Date]
+1. Getting the best match using your Date Preferences
+    * Prerequisites: Have >1 dates in the LoveBook.
     * Type the following best match command into the text field.<br>
       `bestMatch`
     * Press enter.
@@ -700,7 +765,8 @@ testers are expected to do more *exploratory* testing.
 
 ### Finding a Blind Date
 
-1. Finding a Blind Date [Ensure that you have added at least 1 Date]
+1. Finding a Blind Date
+    * Prerequisites: Have >1 dates in the LoveBook.
     * Type the following command into the text field.<br>
       `blindDate`
     * Press enter.

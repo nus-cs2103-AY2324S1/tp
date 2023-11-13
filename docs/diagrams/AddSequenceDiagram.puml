@@ -1,0 +1,85 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":LoveBookParser" as LoveBookParser LOGIC_COLOR
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant "a:AddCommand" as AddCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "d:Date" as Date MODEL_COLOR
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("add name/Cleon .... income/2000")
+activate LogicManager
+
+note left of LogicManager: Full Command: add name/Cleon age/21 \nhoroscope/CANCER height/175 income/2000 \n It is not written in full-form due to spacing issues.
+
+LogicManager -> LoveBookParser : parseCommand("add name/Cleon .... income/2000")
+activate LoveBookParser
+
+create AddCommandParser
+LoveBookParser -> AddCommandParser
+activate AddCommandParser
+
+AddCommandParser --> LoveBookParser
+deactivate AddCommandParser
+
+LoveBookParser -> AddCommandParser : parse("name/Cleon .... income/2000")
+activate AddCommandParser
+
+create Date
+AddCommandParser -> Date : Date("name/Cleon .... income/2000")
+activate Date
+
+Date --> AddCommandParser : d
+deactivate Date
+
+create AddCommand
+AddCommandParser -> AddCommand : AddCommand(d)
+activate AddCommand
+
+AddCommand --> AddCommandParser : a
+deactivate AddCommand
+
+AddCommandParser --> LoveBookParser : a
+deactivate AddCommandParser
+AddCommandParser -[hidden]-> LoveBookParser
+destroy AddCommandParser
+
+LoveBookParser --> LogicManager : a
+deactivate LoveBookParser
+
+LogicManager -> AddCommand : execute()
+activate AddCommand
+
+AddCommand -> Model : addDate(d)
+activate Model
+
+Model --> AddCommand
+deactivate Model
+
+AddCommand -> Model : updateSortedDateList()
+activate Model
+
+Model --> AddCommand
+deactivate Model
+
+create CommandResult
+AddCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddCommand
+deactivate CommandResult
+
+AddCommand --> LogicManager : result
+deactivate AddCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
