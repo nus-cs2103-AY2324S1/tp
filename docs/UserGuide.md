@@ -8,22 +8,36 @@
 
 Welcome to Tutorium! Tutorium is a **desktop application for tuition centre administrative staff** to conduct data analysis for the planning of marketing strategies. Users can interact with it using a Command Line Interface (CLI).
 
+<box type="info" seamless>
+
+**What is CLI?**<br>
+Command line interface (CLI) is an interface we use to interact with the computer using only the keyboard and text.
+
+In contrast, a graphical user interface (GUI) is how you interact with the computer using a mouse, finding and clicking menus, buttons and icons.
+
+**Why CLI?**<br>
+
+CLI enables you to execute commands quickly and become a more efficient person!
+
+</box>
+
 Tutorium supports administrative work relating to students from Secondary 1 to Secondary 4, under the O-Level and IP systems in Singapore.
 
 In this user guide, you will find instructions on how to install Tutorium and use its many features to manage and make use of the students' data.
+From having Tutorium installed to making the best use out of Tutorium, this user guide has everything you need. Head over to the [Quick Start](#quick-start) section to get onboard!
 
-Choose a topic from the table of contents below to find out how to use Tutorium!
+Choose a topic from the [table of contents](#table-of-contents) below to find out how to use Tutorium!
 
 --------------------------------------------------------------------------------------------------------------------
 
 # How to Use This User Guide
 
-1. This user guide consists of four main sections, namely Quick Start, Features, FAQ, Known Issues and Command Summary.
+1. This user guide consists of four main sections, namely Quick Start, Features, Command Summary, FAQ and Known Issues.
    1. Quick Start: Guide you to set up Tutorium.
    2. Features: Guide for using Tutorium features.
-   3. FAQ: List of frequently asked questions.
-   4. Known Issues: Issues that currently exist which the developer will fix.
-   5. Command Summary: A summary of all available commands.
+   3. Command Summary: A summary of all available commands. 
+   4. FAQ: List of frequently asked questions. 
+   5. Known Issues: Issues that currently exist which the developer will fix.
 
 1. By clicking the link in Table of Contents, you will be directed to the details of the section you're interested in.
 
@@ -46,16 +60,24 @@ Choose a topic from the table of contents below to find out how to use Tutorium!
 
 1. Copy the file to the folder you want to use as the _home folder_ for the Tutorium app.
 
+1. Double click the file to launch it.
+
+<box type="info" seamless>
+Alternately, you can use the CLI to launch Tutorium.
+
 1. Open a command terminal. If you are using Windows, press the Windows key + R on your keyboard, type `cmd` and press Enter.
 If you are using Mac, click on the Launchpad icon in the Dock, type Terminal in the search field, and then click Terminal.
 
 1. "Go into" the folder you put the `tutorium.jar` file in using cd command. For example, if you put it in a folder named `Downloa`, then type this command into the terminal: `cd Tutorium`
 
 1. Key the `java -jar tutorium.jar` command in the terminal to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br>
+
+</box>
+
+1. A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command box and press Enter to execute it. i.e. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
     * `list` : Lists all students.
@@ -95,7 +117,7 @@ If you are using Mac, click on the Launchpad icon in the Dock, type Terminal in 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* For commands that take in index(e.g. delete, edit), the index can only be an integer from 1 to 2,147,483,647, otherwise an invalid command message will be displayed.
+* For commands that take in index (e.g. delete, edit), the index can only be an integer from 1 to 2,147,483,647, otherwise an invalid command message will be displayed.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -184,7 +206,7 @@ Examples:
 
 ### Search for data : `search`
 
-Search for people whose names contain the given keyword.
+Searches for people whose names contain the given keyword.
 
 Format: `search KEYWORD`
 
@@ -262,11 +284,11 @@ Examples:
 
 ### Sort data : `sort`
 
-Sort the list of students data by name.
+Sorts the list of students data permanently by name in ascending or descending.
 
-Format: `sort in/DESCRIPTION`
+Format: `sort in/SEQUENCE`
 
-* `DESCRIPTION` should be `ASC` or `DESC`, non-case-sensitive.
+* `SEQUENCE` should be `ASC` or `DESC`, non-case-sensitive.
 
 Examples:
 * `sort in/ASC` <br>
@@ -282,8 +304,8 @@ Format: `clear`
 
 [↑ Back to table of contents](#table-of-contents)
 
-### Show statistical table
-Showing a table either categorized by gender, sec level or subject.
+### Show statistical table: `table`
+Shows a table either categorized by gender, sec level or subject.
 
 Format: `table PREFIX`
 
@@ -300,8 +322,8 @@ Examples:
 
 [↑ Back to table of contents](#table-of-contents)
 
-### Show bar chart
-Showing a bar chart either categorized by gender, sec level or subject.
+### Show bar chart: `bar`
+Shows a bar chart either categorized by gender, sec level or subject.
 
 Format: `bar PREFIX`
 
@@ -323,12 +345,12 @@ Below is the chart generated after entering `bar l/`.
 
 [↑ Back to table of contents](#table-of-contents)
 
-### Show line chart
-Showing a line chart describing number of students enrolled in each month in a specific year.
+### Show line chart: `trend`
+Shows a line chart describing number of students enrolled in each month in a specific year.
 
 Format: `trend y/YEAR`
 
-* Students will be categorised according to their earliest enrol date. e.g. if John Doe enrolled in Physics in May 2020
+* Students will be categorised according to their earliest enrol date. i.e. if John Doe enrolled in Physics in May 2020
 and Chemistry in July 2021, his data will be found in the line chart shown when `trend y/2020` is used, but not in the line chart shown
 when `trend y/2021` is used.
 
@@ -343,7 +365,7 @@ Below is the chart generated after typing `trend y/2023`
 
 ### Export visual representation : `export`
 
-Export the statistical table or bar chart into PNG format.
+Exports the statistical table or bar chart into PNG format.
 
 Format: `export v/VISUAL`
 
@@ -366,6 +388,16 @@ Format: `exit`
 
 [↑ Back to table of contents](#table-of-contents)
 
+### Archive data files `[coming in v2.0]`
+
+_Details coming soon ..._
+
+[↑ Back to table of contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Additional Info
+
 ### Save data
 
 Tutorium data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -381,12 +413,6 @@ Tutorium data are saved automatically as a JSON file `[JAR file location]/data/a
 **Caution:**
 If your changes to the data file makes its format invalid, Tutorium will discard all data and start with an empty data file at the next run.  Hence, it is recommended to make a backup of the file before editing it.
 </box>
-
-[↑ Back to table of contents](#table-of-contents)
-
-### Archive data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 [↑ Back to table of contents](#table-of-contents)
 
@@ -420,6 +446,9 @@ Action     | Format, Examples
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer. Next, overwrite the data file created on launching the app with the file containing your Tutorium data.
+
+**Q**: How do I save my progress?
+**A**: Your progress is automatically saved after each command.
 
 [↑ Back to table of contents](#table-of-contents)
 
