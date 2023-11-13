@@ -58,14 +58,15 @@ public class FlashCard {
         this.originalWord = originalWord;
         this.isRemembered = isRemembered;
     }
+    //@@author D-Limiter
     public OriginalWord getOriginalWord() {
         return originalWord;
     }
-
+    //@@author D-Limiter
     public TranslatedWord getTranslatedWord() {
         return translatedWord;
     }
-
+    //@@author
     public Date getWhenToReview() {
         return whenToReview;
     }
@@ -124,20 +125,21 @@ public class FlashCard {
         return this.originalWord.hasSubpart(inputWord) || this.translatedWord.hasSubpart(inputWord);
     }
 
+    //@@author D-Limiter
     /**
      * Sets this FlashCard as remembered
      */
     public void recallFlashCard() {
         this.isRemembered = true;
     }
-
+    //@@author D-Limiter
     /**
      * Sets this FlashCard as forgotten
      */
     public void forgetFlashCard() {
         this.isRemembered = false;
     }
-
+    //@@author D-Limiter
     /**
      * Evaluates and returns if this FlashCard is remembered
      */

@@ -217,13 +217,16 @@ The implementation of the "Start and End Review Session" feature involves the in
 
 In addition to that, `start` and `end` commands and their corresponding parsers are also implemented.
 
-Given below is an example usage scenario and how the start/end mechanism behaves at each step.
+Given below is an example usage scenario and how the `start/end` mechanism behaves at each step.
 
 **Step 1:** The user launches the application for the first time. The `SessionManager` is not yet initialized.
 
-**Step 2:** The user executes the "start" command by interacting with the command line. This will make `FlashlingoParser` class to create its `SessionManager` instance.
+**Step 2:** The user executes the `start` command by interacting with the command line. This will make `FlashlingoParser` class to create its `SessionManager` instance.
 
-![SessionManagerClass](images/SessionManagerClass.png)
+<div align="center">
+  <img src="images/SessionManagerClass.png" width="460" height="300" alt="Session Manager Class">
+</div>
+
 <br>
 **Note**: The `SessionManager` class adheres to the **Singleton pattern**, guaranteeing that only one instance of the class
 can exist. This architectural choice provides a single point of access for managing review sessions and
@@ -236,22 +239,13 @@ management within the application.
 **Step 4:** The user chooses to end the review session by using `end` command. This action will alternate the boolean value
 inside SessionManager class indicating current session is review session or not.
 
+Below is the sequence diagram for the above scenario:
+
 ![StartSequenceModel](images/StartSequenceDiagram.png)
 <br>
-**Recording Vocabulary Review:**
-- The `SessionManager` logs the vocabulary words and phrases reviewed and practiced during the language learning session.
-- This feature provides users with the ability to track their progress and revisit the words they've worked on.
 
 **User Control:**
 - Users can initiate a new language learning session at any time and conclude their session when they have completed their vocabulary review.
-- The option to start and end language learning sessions is typically available in the language learning module or settings.
-
-**Data Retention:**
-- Session data, including start and end times and vocabulary review records, is stored locally on the user's device.
-- Users may have the option to export or clear session data as needed.
-
-**Session Summary:**
-- Users can view a summary of their language learning session, including the start and end times and a list of vocabulary words and phrases reviewed.
 
 **Privacy and Security:**
 - The application should ensure the privacy and security of session data, particularly if it contains sensitive language learning content.
@@ -264,13 +258,9 @@ inside SessionManager class indicating current session is review session or not.
 
 3. **Ending the Language Learning Session:** When the user is satisfied with their vocabulary review, they conclude the language learning session from the language learning module or settings.
 
-4. **Session Summary:** Users can access a summary of the language learning session, which includes the start and end times and a list of vocabulary words and phrases reviewed.
-
-5. **Reviewing Session History:** Users have the option to revisit their session history, allowing them to track their language learning progress over time.
-
 #### **Design Considerations**
 
-**Aspect: How start & end executes**
+**Aspect: How `start/end` executes**
 * Alternative 1 (current choice): Creating another separate class to manage the logic.
     * Pros: It better adheres to OOP principle and easier to maintain.
     * Cons: It may potentially increase the complexity of codes.
@@ -280,12 +270,12 @@ inside SessionManager class indicating current session is review session or not.
     * Cons: It doesn't conform to the principle of **Single Responsibility Principle**.
 
 
-**Aspect: Preventing Commands Within a Review Session**
+**Aspect: Preventing Using A Set of Commands Within a Review Session**
 
 * Alternative 1 (Current Choice): Restricting Users with a Subset of Commands
 
     * Pros:
-    - Increased safety: A limited set of commands reduces the risk of unintended actions, making the review session safer for users.
+        - Increased safety: A limited set of commands reduces the risk of unintended actions, making the review session safer for users.
 
     * Cons:
         - Limited flexibility: Users may feel constrained if they need to perform specific actions that are not allowed within the review session.
@@ -491,9 +481,10 @@ There are two situations that need to be considered: duplicate flash cards **wit
 
 **Target user profile**:
 
-* language learners, e.g. Duolingo preparers
-* have a need to manage a significant number of vocabularies
-* need to review learned vocab by scheduled plans
+* language learners, focus on beginner language learners
+* need to manage a significant number of vocabularies
+* need to learn and remember words by flash cards
+* need to review learned vocabularies by scheduled plans
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -502,7 +493,7 @@ There are two situations that need to be considered: duplicate flash cards **wit
 
 **Value proposition**:
 
-Our product empowers users to efficiently manage their vocabulary through vivid flashcards and seamlessly review their acquired language skills according to scientific learning curves. With Flashlingo, language learners can master new words while staying in control of their customized language learning journey.
+Our product empowers users to efficiently manage their vocabulary through flash cards and seamlessly review the words in review sessions. With Flashlingo, language learners can master new words scientifically while staying in control of their customized language learning journey.
 
 
 ### User stories
@@ -530,8 +521,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor:** User\
 **MSS:**
 
-1.	User requests help by keying in command or clicking the Help Button on the UI
-2.	Flashlingo opens browser with UserGuide
+1.	User requests help by either entering the help command in the command box or clicking the Help Button on the Flashlingo interface.
+2.	Flashlingo opens the default web browser and navigates to the User Guide page.
 
 Use case ends.
 
@@ -561,7 +552,7 @@ Use case ends.
 **Use case:** UC4 – Display list of flashcards\
 **Actor:** User\
 **MSS:**
-1.	User chooses to display list of flashcard.
+1.	User chooses to display the list of flashcards.
 2.	Flashlingo displays list of cards with words and corresponding translations.\
       Use case ends.
 
@@ -650,7 +641,7 @@ Use case resumes from step 3.
 5.  **Quality** - Should be able to update already memorized words accordingly and maintain the left ones when a learning session accidentally closes.
 6.  **Quality** - Should be able to provide the learner with a reasonable time schedule for language learning.
 7.  **Quality** - Should be able to handle any user input correctly without crashing.
-8.  **Capacity** - Should be able to hold up to 100 flash cards without a noticeable sluggishness(longer than 2 seconds) in performance for typical usage.
+8.  **Capacity** - Should be able to hold up to 100 flash cards without a noticeable sluggishness (longer than 2 seconds) in performance for typical usage.
 
 ### Glossary
 
@@ -659,6 +650,7 @@ Use case resumes from step 3.
 * **Flashcard**: A virtual card with a word on one side and its translation on the other side
 * **Word**: A word in the language you want to learn
 * **Translation**: The word in your native language that corresponds to the word you want to learn
+* **Review Session**: A review session is a designated phase within the system where words requiring review are presented individually. Users can confirm their understanding or signal a need for further review.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -700,7 +692,123 @@ Some of our current output messages are not formatted properly. For example, the
 | ![img.png](images/RevealMessage.png) | Translation: word         |
 | ![img.png](images/ReviewMessage.png) | ...1 flashcard(s) listed! |
 
-### Enhancement 3: Providing more error messages when failing to load the data file
+### Enhancement 3: Adding frequency of usage tags
+
+**Feature Flaw**
+
+Currently, our application does not include functionality for categorizing flashcards with tags, such as 'Essentials', 'Uncommon', 'Rare', and 'Slang'. This omission can lead to a less structured learning experience, as users are unable to sort or prioritize flashcards based on the frequency and context of word usage. Without this feature, users might find it challenging to focus their study on the most pertinent words, potentially impacting the efficiency and effectiveness of language learning.
+
+**Proposed Enhancement**
+* Introduce a flexible tagging system allowing users to add tags to flashcards.
+* These tags could include categories like 'Essentials', 'Uncommon', 'Rare', and 'Slang'.
+
+*Usage*
+
+Tags can be added or modified using the following commands:
+
+* To add a tag: `addt`
+* To edit a tag: `editTag`
+* To delete a tag: `delTag`
+
+**Implementation:**
+
+The `AddTagCommand`, `EditTagCommand`, and `DeleteTagCommand` will operate under a similar framework, ensuring a consistent user experience across different tag-related functionalities. While each command serves a distinct purpose—adding, modifying, or removing tags—their underlying mechanisms share a common structure.
+
+The `AddTag` command will invoke the `setTags()` of `FlashCard`
+* **setTags:** Adds the passed tags to the current FlashCard's set of Tags
+
+The `EditTag` command will invoke the `replaceTags()` method of `FlashCard`
+* **replaceTag:** Replaces a specified Tag from this FlashCard's Set of Tags with a new Tag
+
+The `DeleteTag` command will invoke the `deletetTags()` method of `FlashCard`
+* **deleteTag:** Deletes the specified Tag from this FlashCard's Set of Tags
+
+All the Tag Commands will also invoke the `updateFilteredFlashCardList()` of `Model`
+* **updateFilteredFlashCardList:** Updates the list of FlashCards currently being displayed to the user
+
+The process of adding tags to a flashcard through the AddTagCommand would be as follows:
+
+**Step 1**: The user identifies the flashcard to be tagged by its index in the list.
+
+**Step 2**: The user specifies the tag(s) to be added to this flashcard. This is done by using the command `addt` followed by the `INDEX` and the `TAG` parameter.
+
+**Step 3**: Upon executing the command, the application retrieves the flashcard from the list based on the provided index.
+
+**Step 4**: The specified tags are added to the flashcard. If any tag already exists, it will not be duplicated.
+
+**Step 5**: The application updates its internal model to reflect these changes. This includes updating the list of flashcards to ensure the newly tagged flashcard is accurately represented in the user interface.
+
+**Step 6**: The user receives a confirmation message indicating the successful addition of tags to the flashcard.
+
+The following sequence diagram summarizes the workflow when a user executes a `AddTag` command:
+
+![img.png](images/AddTagsSequenceDiagram.png)
+
+A similar structure is followed for the `EditTagCommand` and `DeleteTagCommand`, but with the respective methods (`replaceTags` and `deleteTags`)
+
+**Usage Examples**
+The Tag commands can be used in the following ways:
+- `addt 2 tg/Essentials` - Adds the 'Essentials' tag to the flashcard at index 2.
+- `editTag 2 ot/Rare rt/Uncommon` - Changes the 'Rare' tag to 'Uncommon' on the flashcard at index 2.
+- `delTag 3 tg/Essentials` - Deletes the 'Essentials' tag from the flashcard at index 3.
+
+### Design Considerations
+
+**Aspect: What is the most effective method of tagging Flashcards:**
+In enhancing the functionality of our flashcard system, we considered how users could tag flashcards to optimize their learning experience.
+
+* Alternative 1 (current choice): Choosing from a predefined set of tags.
+
+   * Pros:
+      * Ensures consistency and standardization across the tagging system.
+      * Simplifies the user interface and user experience, as users can quickly select from a limited set of options.
+      * Facilitates easier implementation and maintenance from a programming perspective.
+   * Cons:
+      * Limits user flexibility and creativity, as they can only use the tags provided.
+      * May not cover all possible categories or nuances that users might need for their individual learning paths.
+* Alternative 2: Allowing users to create custom tags.
+
+   * Pros:
+      * Provides users with complete flexibility to create tags that precisely fit their learning needs and styles.
+      * Encourages users to engage more deeply with the material by thinking critically about how to categorize it.
+  * Cons:
+      * Can lead to a lack of standardization, making it harder to implement features that rely on consistent tagging.
+      * Potentially complicates the user interface and increases the learning curve for new users.
+        
+**Aspect: How should the tagging system handle multiple tags per flashcard:**
+
+* Alternative 1 (current choice): Allow Multiple Tags per Flashcard
+
+   * Pros:
+      * Enables more comprehensive categorization of flashcards.
+      * Offers greater flexibility for users to organize their study materials according to diverse criteria.
+   * Cons:
+      * Increases the complexity of the user interface and the backend logic.
+      * May lead to clutter or confusion if not managed effectively by the user.
+* Alternative 2: Limit Each Flashcard to a Single Tag
+
+   * Pros:
+      * Simplifies the interface and makes the system straightforward to use.
+      * Easier to implement and manage from a programming perspective.
+   * Cons:
+      * Reduces the depth of categorization, potentially leading to an overly simplifyied representation of complex language ideas.
+      * Limits the ability to cross-reference flashcards under multiple relevant categories.
+
+### Enhancement 4: Visualization Upgrade for 'Stats' Command
+ **Feature Flaw:**
+   * Currently, the success rate in the 'stats' command is presented as a mere percentage, which might not be the most engaging or insightful way for users to visualize their learning progress.
+   * Users lack a graphical representation of their learning statistics, which can provide a more immediate and comprehensive understanding of their performance.
+
+**Proposed Enhancement:**
+   * Enhance the 'stats' command by including a pie chart along with the percentage. This pie chart will visually represent the proportion of words remembered versus words not remembered.
+   * The pie chart will offer a clearer, more immediate visual representation of the user's success rate, making it easier to grasp their learning progress at a glance.
+
+**Sample Output:**
+|Before the update | ![img.png](images/Stats.png) |
+|:-----------------|-------------------:|
+|**After the update**| ![img.png](images/StatsChart.png) |
+
+### Enhancement 5: Providing more error messages when failing to load the data file
 
 **Feature Flaw**
 
@@ -714,6 +822,15 @@ For advanced users who manually edit the data, they may accidentally introduce i
 
 * `Duplicated flash card ... found in flashlingo.json`: Duplicate combination of word and translation is found in the data file.
 * `Invalid flash card ... with invalid ... found in flashlingo.json`: Flash card with invalid word/translation, level or review date found.
+
+### Enhancement 4: Renaming `reveal` command to reduce ambiguity
+
+**Feature Flaw**
+Currently, the `reveal` command is used to reveal or hide the translation of the flash card. However, it may be ambiguous to users as they may think that the command is used to reveal the word itself.
+
+**Proposed Enhancement**
+Renaming the `reveal` command to `flip` to reduce ambiguity.
+
 
 --------------------------------------------------------------------------------------------------------------------
 

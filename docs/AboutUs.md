@@ -17,7 +17,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/wangcheng0116.md)]
 
 * Role: Developer
-* Responsibilities: Data and backend
+* Responsibilities: Commands Implementation and bug fixing
 
 ### Yu Jiali
 
