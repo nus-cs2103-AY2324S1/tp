@@ -1205,14 +1205,14 @@ testers are expected to do more *exploratory* testing.
 
 
 ## **Appendix: Planned Enhancements**
-### Allowing for deleting of tags
+### Deleting of tags
 - **Relevant feature:** editing of students `editPerson`
 - **Current issues:** Once a tag is added to a student, the `editPerson` command prevents you from deleting the tag. This is because by specifying the flag `-tag`, the parameter provided as the tag must be a non-empty string.
 - **Proposed new behaviour:** The `-tag` flag can be made to accept an empty string. 
   - Input: `editPerson 1 -tag`
   - Expected output: The person at index 1 should have no more tags set.
 
-### Allowing for unlinking of students from lessons and vice versa
+### Unlinking of students from lessons and vice versa
 - **Relevant feature:** linking `linkTo`, `link`
 - **Current issues:** Once a student has been linked to a lesson, there is no way to unlink them.
 - **Proposed new behaviour:** The `linkTo` and `link` command will unlink the specified lesson and student if it detects that they have already been linked.
@@ -1220,4 +1220,11 @@ testers are expected to do more *exploratory* testing.
   - Expected output: Bernice Yu is linked to the current lesson
   - Input: `linkTo Bernice Yu`
   - Expected output: Bernice Yu is unlinked from the current lesson.
+
+### Navigating from tasks to lesson
+- **Relevant feature:** Task Lists `list tasks`
+- **Current issues:** There's no way to see what lesson a task is under.
+- **Proposed new behaviour:** The `nav` command should also work when viewing a task.
+  - Input: `nav`
+  - Expected output: The screen changes to the lesson that the task is assigned to.
 
