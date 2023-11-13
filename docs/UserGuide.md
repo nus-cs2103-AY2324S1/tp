@@ -288,7 +288,7 @@ Expected outputs:
 | Outcome | Output                            |
 | --- |-----------------------------------|
 | **Success** | X employees listed!    |
-| **Fail** | Invalid command format!| 
+| **Fail** | Invalid command format!|
 
 ![filterCommandExample](images/filterCommandExample.png)
 
@@ -309,8 +309,8 @@ Examples:
 | Outcome                          | Output                                                    |
 |----------------------------------|-----------------------------------------------------------|
 | **Success**                      | Deleted Employee: \<Employee name>; \<Additional Details> |
-| **Failure, incomplete command**  | Invalid command format!                                   | 
-| **Failure, invalid index**       | The employee index provided is invalid.                   | 
+| **Failure, incomplete command**  | Invalid command format!                                   |
+| **Failure, invalid index**       | The employee index provided is invalid.                   |
 
 
 Constraints:

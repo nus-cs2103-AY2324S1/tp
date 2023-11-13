@@ -21,7 +21,7 @@ amongst many becomes difficult.
 details before choosing to editing their details.
   * **Highlights**:
     * This feature's implementation was slightly challenging as it required using prefixes as the filter parameters
-instead of a single keyword. 
+instead of a single keyword.
     * Implementing a new feature/command also proved more challenging compared to an enhancement.
     * Many tests also had to be done to ensure every prefix can be filtered by correctly.
   * **Credit**: Slightly referenced AB3's `find` and `edit` feature's design.
@@ -46,13 +46,13 @@ would mean having non-descriptive package/class/method/variable names.
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `add`, `help` and `filter` [\#19](https://github.com/AY2324S1-CS2103-T16-1/tp/pull/19), 
+    * Added documentation for the features `add`, `help` and `filter` [\#19](https://github.com/AY2324S1-CS2103-T16-1/tp/pull/19),
 [\#75](https://github.com/AY2324S1-CS2103-T16-1/tp/pull/75)
     * Added additional resources such as table of contents and description [\#19](https://github.com/AY2324S1-CS2103-T16-1/tp/pull/19)
   * Developer Guide:
     * Added implementation details of the `filter` feature [\#58](https://github.com/AY2324S1-CS2103-T16-1/tp/pull/58)
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#63](https://github.com/AY2324S1-CS2103-T16-1/tp/pull/63), 
-[\#77](https://github.com/AY2324S1-CS2103-T16-1/tp/pull/77), 
+  * PRs reviewed (with non-trivial review comments): [\#63](https://github.com/AY2324S1-CS2103-T16-1/tp/pull/63),
+[\#77](https://github.com/AY2324S1-CS2103-T16-1/tp/pull/77),
 [\#128](https://github.com/AY2324S1-CS2103-T16-1/tp/pull/128)
