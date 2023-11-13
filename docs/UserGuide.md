@@ -202,7 +202,7 @@ The commands are split into 4 main sections:
   <li>
     <p>
       Fields in square brackets with <code>…</code> after them can be used multiple times, including zero times.<br>
-      e.g. <code>[t/TAG]…​</code> can be used as <code> </code> (i.e. 0 times), <code>t/friend</code>, <code>t/friend t/family</code> etc.
+      e.g. <code>[t/TAG]…​</code> can be used as <code> </code> (i.e. zero times), <code>t/friend</code>, <code>t/friend t/family</code> etc.
     </p>
   </li>
 
