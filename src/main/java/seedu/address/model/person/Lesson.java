@@ -126,7 +126,7 @@ public class Lesson {
             assert hours > 0.0 : "hours should be positive";
             return hours;
         } catch (ArithmeticException e) {
-            logger.warning("[Lesson.calculateLessonDuration()]: Duration capacity exceeded");
+            logger.info("[Lesson.calculateLessonDuration()]: Duration capacity exceeded");
             return 1.0;
         }
     }

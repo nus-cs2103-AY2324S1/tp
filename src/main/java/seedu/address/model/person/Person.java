@@ -53,7 +53,8 @@ public class Person {
             this.beginTime = convertTime(begin.toString());
             this.endTime = convertTime(end.toString());
         } catch (ParseException e) {
-            logger.info("Error parsing begin and end.");
+            logger.info("[Person constructor]: Error parsing begin and end.");
+            throw new RuntimeException("Error parsing begin and end.");
         }
 
     }
