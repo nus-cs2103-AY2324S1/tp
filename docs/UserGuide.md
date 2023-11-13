@@ -444,7 +444,7 @@ Format: `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]â€¦â€
 * When a student is added, their grades, attendance and class participation details will be initialised to `0`, `absent` and `false` respectively, for all tutorials.
 * Comment for a student can only be added after the student is added to the Student List.
 
-The following image shows a successful execution of the `add` command.<br>
+The following image shows a successful execution of the `add` command.
 
 <img alt="add-student-success" src="images/add-student-success.png" width="700" >
 
