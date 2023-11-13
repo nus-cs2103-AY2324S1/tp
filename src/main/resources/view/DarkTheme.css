@@ -153,6 +153,17 @@
     -fx-text-fill: white;
 }
 
+.select-view {
+    -fx-background-color: transparent;
+    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 13pt;
+    -fx-text-fill: white;
+}
+
+.button-bar {
+    -fx-background-color: transparent;
+}
+
 .result-display .label {
     -fx-text-fill: black !important;
 }
@@ -333,6 +344,16 @@
 }
 
 #resultDisplay .content {
+    -fx-background-color: transparent, #383838, transparent, #383838;
+    -fx-background-radius: 0;
+}
+
+#selectView .content {
+    -fx-background-color: transparent, #383838, transparent, #383838;
+    -fx-border-width: 0;
+}
+
+#buttonBar .content {
     -fx-background-color: transparent, #383838, transparent, #383838;
     -fx-background-radius: 0;
 }

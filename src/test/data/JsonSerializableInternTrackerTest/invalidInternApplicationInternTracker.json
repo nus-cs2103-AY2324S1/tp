@@ -1,0 +1,10 @@
+{
+  "applications": [ {
+    "company" : "Jane Street",
+    "role" : "Economist",
+    "cycle" : "Summer! 2022",
+    "status" : "Interview",
+    "deadline" : "24 Oct 2023",
+    "notes" : [ "Review economic models.", "Prepare for behavioral questions." ]
+  } ]
+}

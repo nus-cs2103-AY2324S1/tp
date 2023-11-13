@@ -1,0 +1,17 @@
+{
+  "applications": [ {
+    "company" : "Valid Internship Application",
+    "role" : "Cloud Consultant",
+    "cycle" : "Winter 2024",
+    "status" : "Interview",
+    "deadline" : "01 Apr 2024",
+    "notes" : [ "Understand the nuances of hybrid cloud.", "Prepare for group discussion." ]
+  }, {
+    "company" : "Invalid Internship Application (invalid role)",
+    "role" : " ",
+    "cycle" : "Summer 2023",
+    "status" : "Pending",
+    "deadline" : "10 Apr 2024",
+    "notes" : [ "Revise propulsion systems.", "Look into company's recent missions." ]
+  } ]
+}

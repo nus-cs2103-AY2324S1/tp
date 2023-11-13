@@ -1,0 +1,72 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":InternTrackerParser" as InternTrackerParser LOGIC_COLOR
+participant ":NoteCommandParser" as NoteCommandParser LOGIC_COLOR
+participant ":NoteDeleteCommand" as NoteDeleteCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("note 1 o/2")
+activate LogicManager
+
+LogicManager -> InternTrackerParser : parseCommand("note 1 o/2")
+activate InternTrackerParser
+
+create NoteCommandParser
+InternTrackerParser -> NoteCommandParser : new NoteCommandParser()
+activate NoteCommandParser
+
+NoteCommandParser --> InternTrackerParser
+deactivate NoteCommandParser
+
+InternTrackerParser -> NoteCommandParser : parse("1 o/2")
+activate NoteCommandParser
+
+create NoteDeleteCommand
+NoteCommandParser -> NoteDeleteCommand
+activate NoteDeleteCommand
+
+NoteDeleteCommand --> NoteCommandParser :
+deactivate NoteDeleteCommand
+
+NoteCommandParser --> InternTrackerParser :
+deactivate NoteCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+NoteCommandParser -[hidden]-> InternTrackerParser
+destroy NoteCommandParser
+
+InternTrackerParser --> LogicManager : NoteDeleteCommand
+deactivate InternTrackerParser
+
+LogicManager -> NoteDeleteCommand : execute()
+activate NoteDeleteCommand
+
+NoteDeleteCommand -> Model : setInternApplication(internApp, internAppToEdit)
+activate Model
+
+Model --> NoteDeleteCommand
+deactivate Model
+
+create CommandResult
+NoteDeleteCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> NoteDeleteCommand
+deactivate CommandResult
+
+NoteDeleteCommand --> LogicManager : CommandResult
+deactivate NoteDeleteCommand
+NoteDeleteCommand -[hidden]-> LogicManager
+destroy NoteDeleteCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

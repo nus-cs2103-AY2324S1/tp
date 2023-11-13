@@ -1,0 +1,74 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":InternTrackerParser" as InternTrackerParser LOGIC_COLOR
+participant ":NoteCommandParser" as NoteCommandParser LOGIC_COLOR
+participant ":NoteInsertCommand" as NoteInsertCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("note 1 i/...")
+activate LogicManager
+
+LogicManager -> InternTrackerParser : parseCommand("note 1 i/...")
+activate InternTrackerParser
+
+create NoteCommandParser
+InternTrackerParser -> NoteCommandParser : new NoteCommandParser()
+activate NoteCommandParser
+
+NoteCommandParser --> InternTrackerParser
+deactivate NoteCommandParser
+
+InternTrackerParser -> NoteCommandParser : parse("1 i/...")
+activate NoteCommandParser
+
+create NoteInsertCommand
+NoteCommandParser -> NoteInsertCommand
+activate NoteInsertCommand
+
+NoteInsertCommand --> NoteCommandParser :
+deactivate NoteInsertCommand
+
+NoteCommandParser --> InternTrackerParser :
+deactivate NoteCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+NoteCommandParser -[hidden]-> InternTrackerParser
+destroy NoteCommandParser
+
+InternTrackerParser --> LogicManager : NoteInsertCommand
+deactivate InternTrackerParser
+
+LogicManager -> NoteInsertCommand : execute()
+activate NoteInsertCommand
+
+NoteInsertCommand -> Model : setInternApplication(internApp, internAppToEdit)
+activate Model
+
+
+
+Model --> NoteInsertCommand
+deactivate Model
+
+create CommandResult
+NoteInsertCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> NoteInsertCommand
+deactivate CommandResult
+
+NoteInsertCommand --> LogicManager : result
+deactivate NoteInsertCommand
+NoteInsertCommand -[hidden]-> LogicManager
+destroy NoteInsertCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -4,7 +4,12 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 
-<GridPane styleClass="status-bar" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.geometry.Insets?>
+<GridPane styleClass="pane-with-border" xmlns="http://javafx.com/javafx/17"
+          xmlns:fx="http://javafx.com/fxml/1">
+  <padding>
+    <Insets top="5" right="10" bottom="5" left="10" />
+  </padding>
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10" />
   </columnConstraints>
