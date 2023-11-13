@@ -566,7 +566,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to <u>list clients (UC01)</u>.
 2. User requests to delete a specific client in the list via the `delete` command.
 3. UNOFAS checks the correctness of the request.
-3. UNOFAS deletes the client.
+4. UNOFAS deletes the client.
 
     Use case ends.
 
@@ -927,3 +927,25 @@ point for testers to work on; testers are expected to do more *exploratory* test
       3. Restart the application.
    3. A new file will be created with no contacts and appointments.
 
+--------------------------------------------------------------------------------------------------------------------
+
+### Appendix: Effort
+This project required a substantial effort to design and implement various features aimed at enhancing
+the functionality of the software system. It was quite hard at the beginning because we were not well-versed with the 
+codebase. After understanding some pertinent classes to implement our enhancements, we also had to refactor and 
+add test cases to ensure the functionalities of our enhancements.
+
+In v1.2, we implemented the Sort command to allow users to sort his clients' contacts in alphabetical order with 
+respect to their names, or with respect to their appointment time in chronological order. This posed a significant
+challenge as there was no documentation that provided aid as to how we should implement both the filtering function (via
+the find command) and the sort command at the same time. We had to spend time understanding the inner workings of 
+JavaFX's `filteredList` and `sortedList` classes to finally come up with a solution to return a sorted and filtered
+list of clients.
+
+In v1.3, we updated the GUI to include an appointment sidebar to show upcoming appointments that clients have with the 
+financial advisor. We found out that the appointment sidebar is not properly updated when there are changes made to the
+data, and they are only updated upon restarting the application. We had to spend time understanding how the Observer
+Pattern works so that changes to the appointment sidebar are being reflected instantaneously. 
+
+The project's difficulty level was notably high due to the complexity of implementing features such as scheduling
+appointments, gathering emails, expanded find functionality, sorting, and the introduction of an appointment sidebar.
