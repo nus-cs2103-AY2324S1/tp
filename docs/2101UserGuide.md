@@ -466,7 +466,7 @@ Here’s how you can use it: `help`
     <img src="images/helpWindow.png"
          alt="Help Window"
          style="centralise-img">
-    <figcaption>A help pop-up window will appear upon entering the `help` command</figcaption>
+    <figcaption>A help pop-up window will appear upon entering the <code>help</code> command</figcaption>
 </figure>
 
 <hr class="command-separator">
