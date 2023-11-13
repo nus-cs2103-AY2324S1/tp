@@ -8,7 +8,7 @@ participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":RateCommandParser" as RateCommandParser LOGIC_COLOR
 participant ":ParseUtil" as ParseUtil LOGIC_COLOR
 participant "r:RateCommand" as RateCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -72,7 +72,7 @@ deactivate Model
 create Interview
 RateCommand -> Interview
 activate Interview
-return
+return ratedInterview
 
 RateCommand -> Model : setInterview(interviewToRate, ratedInterview)
 activate Model
@@ -84,7 +84,7 @@ create CommandResult
 RateCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> RateCommand
+CommandResult --> RateCommand : result
 deactivate CommandResult
 
 RateCommand --> LogicManager : result
