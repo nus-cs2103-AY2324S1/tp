@@ -32,7 +32,8 @@ Given below are my contributions to the project.
     * User Guide:
         * Added documentation for the features `add`, `delete`, `edit`, `find`, `language` and `switch`: [#202](https://github.com/AY2324S1-CS2103T-T11-4/tp/pull/202) [#339](https://github.com/AY2324S1-CS2103T-T11-4/tp/pull/339)
     * Developer Guide:
-        * Added implementation details of the features `yes` and `no` commands: [#176](https://github.com/AY2324S1-CS2103T-T11-4/tp/pull/176)
+        * Update the design of architecture to adopt our current program
+        * Added implementation details of the features `yes` and `no` commands and added YesCommandActivityDiagram and YesSequenceDiagram: [#176](https://github.com/AY2324S1-CS2103T-T11-4/tp/pull/176) [#335](https://github.com/AY2324S1-CS2103T-T11-4/tp/pull/335)
 
 * **Contributions to team-based tasks**:
     * Ensuring coding standard is followed
