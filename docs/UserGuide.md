@@ -510,14 +510,14 @@ Action     | Format, Examples
 **Import** | `import FILENAME.csv`<br> e.g., `import student_data_test.csv`
 **Edit**   | `edit INDEX prefix1/[field1] prefix2/[field2]`  <br> or `edit NAME prefix/[field] prefix/[field] prefix/[field]` <br> e.g., `edit John Doe n/Joe e/johndoe@example.com t/English`
 **Search** | `search [KEYWORD]`<br> e.g., `search Lee`
-**Delete** | `delete INDEX`<br> or `delete NAME` <br> e.g., `delete Joe`
-**Update** | `uplevel`<br> or `undolevel` <br>
+**Delete** | `delete INDEX` or `delete NAME` <br> e.g., `delete Joe`
+**Update** | `uplevel` or `undolevel`
 **Filter** | `filter prefix/FIELD_VALUE [MORE FIELDS]` <br> e.g., `filter g/F s/English s/Physics`
 **Sort**   | `sort in/[DESCRIPTION]` <br> e.g., `sort in/ASC`
 **Clear**  | `clear`
-**Show Table** | `table prefix/`<br> or `table d/YEAR` <br>
-**Show Bar Chart** | `bar prefix/`<br> or `bar d/YEAR` <br>
-**Show Line Chart** | `trend y/{year}`
+**Show Table** | `table prefix/` or `table d/YEAR` <br> e.g., `table d/2023`
+**Show Bar Chart** | `bar prefix/` or `bar d/YEAR` <br> e.g., `bar d/2023`
+**Show Line Chart** | `trend y/YEAR` <br> e.g., `trend y/2023`
 **Export**   | `export v/VISUAL` <br> e.g., `export v/table`
 **Exit**   | `exit`
 
