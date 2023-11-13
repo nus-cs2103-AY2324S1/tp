@@ -116,71 +116,74 @@ public class CommandBoxHistoryTest {
     }
 
     /**
-     * Asserts that {@code commandBoxHistory#hasNext()} returns true
+     * Asserts that {@code commandBoxHistory#next()} succeeds without throwing NoSuchElementException,
      * and the return value of {@code commandBoxHistory#next()} equals {@code command}.
      */
     private void assertNextSuccess(String command) {
-        assertTrue(commandBoxHistory.hasNext());
-        assertEquals(command, commandBoxHistory.next());
+        try {
+            assertEquals(command, commandBoxHistory.next());
+        } catch (NoSuchElementException e) {
+            throw new AssertionError("NoSuchElementException was thrown.");
+        }
     }
 
     /**
-     * Asserts that {@code commandBoxHistory#hasPrevious()} returns true
+     * Asserts that {@code commandBoxHistory#previous()} succeeds without throwing NoSuchElementException,
      * and the return value of {@code commandBoxHistory#previous()} equals {@code command}.
      */
     private void assertPreviousSuccess(String command) {
-        assertTrue(commandBoxHistory.hasPrevious());
-        assertEquals(command, commandBoxHistory.previous());
+        try {
+            assertEquals(command, commandBoxHistory.previous());
+        } catch (NoSuchElementException e) {
+            throw new AssertionError("NoSuchElementException was thrown.");
+        }
     }
 
     /**
-     * Asserts that {@code commandBoxHistory#hasCurrent()} returns true
+     * Asserts that {@code commandBoxHistory#current()} succeeds without throwing NoSuchElementException,
      * and the return value of {@code commandBoxHistory#current()} equals {@code command}.
      */
     private void assertCurrentSuccess(String command) {
-        assertTrue(commandBoxHistory.hasCurrent());
-        assertEquals(command, commandBoxHistory.current());
+        try {
+            assertEquals(command, commandBoxHistory.current());
+        } catch (NoSuchElementException e) {
+            throw new AssertionError("NoSuchElementException was thrown.");
+        }
     }
 
     /**
-     * Asserts that {@code commandBoxHistory#hasNext()} returns false and the
-     * {@code commandBoxHistory#next()} call throws {@code NoSuchElementException}.
+     * Asserts that {@code commandBoxHistory#next()} fails, throwing {@code NoSuchElementException}.
      */
     private void assertNextFailure() {
-        assertFalse(commandBoxHistory.hasNext());
         try {
             commandBoxHistory.next();
             throw new AssertionError("The expected NoSuchElementException was not thrown.");
         } catch (NoSuchElementException e) {
-            // expected exception thrown
+            // expected NoSuchElementException thrown
         }
     }
 
     /**
-     * Asserts that {@code commandBoxHistory#hasPrevious()} returns false and the
-     * {@code commandBoxHistory#previous()} call throws {@code NoSuchElementException}.
+     * Asserts that {@code commandBoxHistory#previous()} fails, throwing {@code NoSuchElementException}.
      */
     private void assertPreviousFailure() {
-        assertFalse(commandBoxHistory.hasPrevious());
         try {
             commandBoxHistory.previous();
             throw new AssertionError("The expected NoSuchElementException was not thrown.");
         } catch (NoSuchElementException e) {
-            // expected exception thrown
+            // expected NoSuchElementException thrown
         }
     }
 
     /**
-     * Asserts that {@code commandBoxHistory#hasCurrent()} returns false and the
-     * {@code commandBoxHistory#current()} call throws {@code NoSuchElementException}.
+     * Asserts that {@code commandBoxHistory#current()} fails, throwing {@code NoSuchElementException}.
      */
     private void assertCurrentFailure() {
-        assertFalse(commandBoxHistory.hasCurrent());
         try {
             commandBoxHistory.current();
             throw new AssertionError("The expected NoSuchElementException was not thrown.");
         } catch (NoSuchElementException e) {
-            // expected exception thrown
+            // expected NoSuchElementException thrown
         }
     }
 }

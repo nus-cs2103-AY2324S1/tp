@@ -45,38 +45,18 @@ public class CommandBoxHistory {
     }
 
     /**
-     * Returns true if calling {@code #next()} does not throw an {@code NoSuchElementException}.
+     * Checks if a given index is a valid index in the list.
      */
-    public boolean hasNext() {
-        int nextIndex = commandIndex + 1;
-        return isWithinBounds(nextIndex);
-    }
-
-    /**
-     * Returns true if calling {@code #previous()} does not throw an {@code NoSuchElementException}.
-     */
-    public boolean hasPrevious() {
-        int previousIndex = commandIndex - 1;
-        return isWithinBounds(previousIndex);
-    }
-
-    /**
-     * Returns true if calling {@code #current()} does not throw an {@code NoSuchElementException}.
-     */
-    public boolean hasCurrent() {
-        return isWithinBounds(commandIndex);
-    }
-
-    private boolean isWithinBounds(int index) {
+    private boolean isValidIndex(int index) {
         return index >= 0 && index <= commandList.size();
     }
 
     /**
-     * Returns the next command in the commandList and advances the pointer position.
-     * @throws NoSuchElementException if there is no more next command in the commandList.
+     * Returns the next command in the commandList and increments the pointer position.
+     * @throws NoSuchElementException if there is no next command in the commandList.
      */
     public String next() {
-        if (!hasNext()) {
+        if (!isValidIndex(commandIndex + 1)) {
             throw new NoSuchElementException();
         }
         commandIndex++;
@@ -89,10 +69,10 @@ public class CommandBoxHistory {
 
     /**
      * Returns the previous command in the commandList and decrements the pointer position.
-     * @throws NoSuchElementException if there is no more previous command in the commandList.
+     * @throws NoSuchElementException if there is no previous command in the commandList.
      */
     public String previous() {
-        if (!hasPrevious()) {
+        if (!isValidIndex(commandIndex - 1)) {
             throw new NoSuchElementException();
         }
         commandIndex--;
@@ -105,10 +85,10 @@ public class CommandBoxHistory {
 
     /**
      * Returns the current command in the commandList.
-     * @throws NoSuchElementException if the commandList is empty.
+     * @throws NoSuchElementException if there is no current command (the commandList is empty).
      */
     public String current() {
-        if (!hasCurrent()) {
+        if (!isValidIndex(commandIndex)) {
             throw new NoSuchElementException();
         }
         if (commandIndex == commandList.size()) {
