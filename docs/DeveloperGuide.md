@@ -195,6 +195,31 @@ There are three commands that deal with listing tutees:
 The `ListCommand` extends the `Command` class. Both the `ListByDayCommand` and the `ListUnPaidCommand` extend the `ListCommand` class. All three commands override `Command#execute`.
 The `ListCommandParser` is responsible for returning the appropriate `ListCommand`  based on the command format.
 
+
+The `ListByDayCommand`  is initialised with a `DayPredicate` and updates
+
+### Find feature
+The `findCommand` extends the `Command` class. It allows the user to find for tutees by specifying their names and/or 
+subject using their prefixes.
+
+The following sequence diagram shows how the edit command works.
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
+
+### Edit feature
+The `editCommand` extends the `Command` class. It allows the user to edit fields of the tutee by specifying the index
+of the tutee.
+
+The following sequence diagram shows how the edit command works.
+![EditSequenceDiagram](images/EditSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes an edit command:
+![EditActivityDiagram](images/EditActivityDiagram.png)
+
+### List by day feature
+The `ListByDayCommand` extends the `ListCommand` class. It is initialised with a `DayPredicate` and updates
+
+the `FilteredPersonList` to only display Persons whose `Day` field matches the specified input.
+
 The `ListByDayCommand`  is initialised with a `DayPredicate` and updates the `FilteredPersonList` to only display Persons whose `Day` field matches the specified input.
 
 The following sequence diagram shows how the list by day command works.
@@ -213,23 +238,6 @@ the `FilteredPersonList` to only display Persons whose `isPaid` field is false.
 * **Alternative 2:** Individual command class without extending `ListCommand`.
     * Pros: Easier to implement.
     * Cons: Less abstraction.
-
-### Find feature
-The `findCommand` extends the `Command` class. It allows the user to find for tutees by specifying their names and/or 
-subject using their prefixes.
-
-The following sequence diagram shows how the find command works.
-![FindSequenceDiagram](images/FindSequenceDiagram.png)
-
-### Edit feature
-The `editCommand` extends the `Command` class. It allows the user to edit fields of the tutee by specifying the index
-of the tutee.
-
-The following sequence diagram shows how the edit command works.
-![EditSequenceDiagram](images/EditSequenceDiagram.png)
-
-The following activity diagram summarizes what happens when a user executes an edit command:
-![EditActivityDiagram](images/EditActivityDiagram.png)
 
 ### Find Free Time feature
 
@@ -429,25 +437,26 @@ The following sequence diagram shows how unpaidAll command works:
 
 **Value proposition**: It is tedious for tutors to keep track of multiple students and this is done conventionally through calendar applications. Simplify tutoring business with TuitionConnect. Effortlessly manage students, schedules and progress tracking while ensuring financial organization in an all in one product at a faster rate than non CLI applications.
 
-
+x
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 
-| Priority | As a …​                                        | I want to …​                                    | So that I can…​                                                        |
-| ------ |------------------------------------------------|-------------------------------------------------|------------------------------------------------------------------------|
-| `* * *` | tutor                                          | view a list of all tutees                       |                                                                        |
-| `* *`  | tutor                                          | view a list tutees on a specified day           | so that I can be reminded if I have any classes on that particular day |
-| `* * *` | tutor                                          | view the specific details of a single tutee     |                                                                        |
-| `* * *` | tutor                                          | add a new tutee                                 |                                                                        |
-| `* * *` | tutor                                          | edit their details                              | account for changes in their information e.g. change in address        |
-| `* *`  | tutor                                          | remove tutees from the list                     | keep track of tutees that I have stopped teaching                      |
-| `* *`  | tutor                                          | mark students that have already paid            | keep track of students' payment statuses                               |
-| `* *`  | tutor                                          | check all students who haven't paid             | easily remind students who haven't paid                                |
-| `* *`  | tutor                                          | undo and redo commands I made in the application | easily revert any mistakes                                             |
-| `* *`  | tutor                                          | calculate my total monthly revnue               | better financially plan for my tutoring business                       |
+| Priority | As a …​   | I want to …​                                    | So that I can…​                                                 |
+| ------ |-----------|-------------------------------------------------|-----------------------------------------------------------------|
+| `* * *` | tutor     | view a list of all tutees                       | see whoever are my tutees that I teach                          |
+| `* *`  | tutor     | view a list tutees on a specified day           | be reminded if I have any classes on that particular day        |
+| `* * *` | tutor     | view the specific details of a single tutee     | see the different informations tailored to the tutee            |
+| `* * *` | tutor     | add a new tutee                                 | keep track of my tutees that I teach                            |
+| `* * *` | tutor     | find a tutee                                     | search for a specific tutee that I teach                        
+| `* * *` | tutor     | edit their details                              | account for changes in their information e.g. change in address |
+| `* *`  | tutor     | remove tutees from the list                     | keep track of tutees that I have stopped teaching               |
+| `* *`  | tutor     | mark students that have already paid            | keep track of students' payment statuses                        |
+| `* *`  | tutor     | check all students who haven't paid             | easily remind students who haven't paid                         |
+| `* *`  | tutor     | undo and redo commands I made in the application | easily revert any mistakes                                      |
+| `* *`  | tutor     | calculate my total monthly revnue               | better financially plan for my tutoring business                |
 
 *{More to be added}*
 
@@ -455,11 +464,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `TuitionConnect` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - View all tutees**
+**Use case: UC01 - List all tutees**
 
 **MSS**
 
-1.  User requests to view all tutees.
+1.  User requests to list all tutees.
 2.  System shows all tutees.
 	
     Use case ends.
@@ -521,22 +530,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. The tutee that the user is trying to delete does not exist in the list.
     - 2a1. System informs that user does not exist.
-
       <br>
       <br>
-
-**Use case: UC04 - Editing a tutee**
+  
+**Use case: UC04 - Edit a tutee**
 
 **MSS**
 
 1.  User views the list of tutees.
 2.  User requests to edit a tutee.
-3.  System edit the tutee
+3.  System edits the tutee.
 
     Use case ends.
 
 **Extensions**
-
   
 - 2a. The schedule of the edited tutee clashes with an existing schedule.
   - 2a1. System informs that there is a clash in schedules.
@@ -560,7 +567,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     <br>
     <br>
 
-**Use case: UC05 - Mark a tutee as paid**
+**Use case: UC05 - Find a tutee**
+
+**MSS**
+
+1. User requests to find a tutee.
+2. System finds the tutee.
+
+**Extensions**
+
+- 2a. The user inputs more than one word for name field.
+  - 2a1. System informs that name can only take one word.
+
+    Use case resumes at 2.
+  
+- 2b. The user inputs more than one word for subject field.
+  - 2b1. System informs that subject can only take one word.
+
+    Use case resumes at 2.
+  
+- 2c. The user inputs more than one word for name field and one word for subject fields.
+  - 2c1. System informs that name can only take one word.
+
+    Use case resumes at 2.
+  
+- 2d. The user inputs one word for name field and more than one word for subject field.
+  - 2d1. System informs that subject can only take one word.
+
+    Use case resumes at 2.
+  
+- 2e. The user inputs more than one word for both name and subject fields.
+  - 2e1. System informs that name can only take one word.
+
+    Use case resumes at 2.
+    <br>
+    <br>
+  
+**Use case: UC06 - Mark a tutee as paid**
 
 **MSS**
 
@@ -574,11 +617,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. The tutee that the user is trying to mark as paid does not exist in the list.
     - 2a1. System informs that user does not exist.
+      <br>
+      <br>
 
-  <br>
-  <br>
-
-**Use case: UC06 - Reset all tutees in the list to not paid**
+**Use case: UC07 - Reset all tutees in the list to not paid**
 
 **MSS**
 
@@ -590,7 +632,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     <br>
     <br>
 
-**Use case: UC07 - Undo a command**
+**Use case: UC08 - Undo a command**
 
 **MSS**
 1. User requests to undo.
@@ -607,7 +649,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   <br>
   <br>
 
-**Use case: UC07 - Redo a command**
+**Use case: UC09 - Redo a command**
 
 **MSS**
 1. User requests to redo.
@@ -621,13 +663,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. System informs user that there is nothing to redo.
 
   Use case ends.
-  <br>
-  <br>
 
 *{More to be added}*
+<br>
+<br>
 
 
-**Use case: UC07 - Finding free time**
+**Use case: UC10 - Finding free time**
 
 **MSS**
 1. User requests to find free time
@@ -636,8 +678,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 - 2a. The user does not have any free slots available.
   - 2a1. System informs that the user has no available timeslots.
-
-**Use case: UC08 - Get monthly revenue**
+    <br>
+    <br>
+  
+**Use case: UC11 - Get monthly revenue**
 
 **MSS**
 
@@ -645,7 +689,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. User receives monthly revenue figure.
 
    Use case ends.
-
+   <br>
+   <br>
 
 ### Non-Functional Requirements
 
@@ -729,7 +774,7 @@ testers are expected to do more *exploratory* testing.
 
 ## **Planned Enhancements**
 
-### Batch Processing for Paid Command:
+### Batch Processing for Paid Command
 
 Reason: This enhancement allows users to mark multiple persons as paid in a single command, improving efficiency.
 
@@ -741,8 +786,15 @@ Reason: Introduce a scheduling feature within the unpaid command to set future u
 
 Idea: Add a scheduling mechanism within the command execution to mark individuals as unpaid after a specified future date or duration.
 
+### Find using multiple keywords
+
+Reason: To create a more sophisticated find feature for the best results. This enhancement allows users to get more specific results tailored to their criteria.
+
+Idea: Modify the NameContainsKeywordPredicate and SubjectContainsKeywordPredicate to accept multiple word inputs (e.g. "find n/Alex Yeoh sb/Maths Chemistry). 
+
 ### Maximum PayRate
 
 Reason: PayRate that are extremely high may not be displayed properly by GUI and are unlikely to be realistic PayRates per hour anyway.
 
 Idea: Modify the VALIDATION_REGEX of PayRate such that it only accepts values up to 9999.99.
+
