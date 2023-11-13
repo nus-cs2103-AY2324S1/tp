@@ -384,6 +384,7 @@ Examples:
 * `table s/` will show a table categorized by student subject.
 * `table d/2023` will show a table categorized by months in year 2023.
 
+Below is the table generated after entering `table l/`.
     ![result for 'table l/'](images/ug_images/tableResult.png)
 
 [↑ Back to table of contents](#table-of-contents)
