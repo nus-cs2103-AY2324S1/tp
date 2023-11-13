@@ -5,25 +5,33 @@ skinparam ArrowFontStyle plain
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":UndoCommandParser" as UndoCommandParser LOGIC_COLOR
 participant "u:UndoCommand" as UndoCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant ":VersionedAddressBook" as VersionedAddressBook MODEL_COLOR
 end box
-[-> LogicManager : execute(undo)
+
+[-> LogicManager : execute("undo 2")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(undo)
+LogicManager -> AddressBookParser : parseCommand("undo 2")
 activate AddressBookParser
 
-create UndoCommand
-AddressBookParser -> UndoCommand
+AddressBookParser -> UndoCommandParser : parse("2")
+activate UndoCommandParser
+
+Create UndoCommand
+UndoCommandParser -> UndoCommand
 activate UndoCommand
 
-UndoCommand --> AddressBookParser
+UndoCommand --> UndoCommandParser : u
 deactivate UndoCommand
+
+UndoCommandParser --> AddressBookParser : u
+deactivate UndoCommandParser
 
 AddressBookParser --> LogicManager : u
 deactivate AddressBookParser
@@ -31,24 +39,35 @@ deactivate AddressBookParser
 LogicManager -> UndoCommand : execute()
 activate UndoCommand
 
-UndoCommand -> Model : undoAddressBook()
+UndoCommand -> Model : getCommandHistorySize()
 activate Model
 
-Model -> VersionedAddressBook : undo()
-activate VersionedAddressBook
-
-VersionedAddressBook -> VersionedAddressBook :resetData(ReadOnlyAddressBook)
-VersionedAddressBook --> Model :
-deactivate VersionedAddressBook
-
-Model --> UndoCommand
+Model --> UndoCommand : int
 deactivate Model
 
-UndoCommand --> LogicManager : result
-deactivate UndoCommand
-UndoCommand -[hidden]-> LogicManager : result
-destroy UndoCommand
+alt (int > 0) Command History Exists
+    loop 2
+        UndoCommand -> Model : popCommandFromHistory()
+        activate Model
 
-[<--LogicManager
+        Model -> UndoableCommand : undo(Model)
+        activate UndoableCommand
+
+        UndoableCommand --> Model : CommandResult
+        deactivate UndoableCommand
+    end
+else (int = 0) No Command History
+    UndoCommand -> Model : No Undoable Commands Message
+    activate Model
+end
+
+Model --> UndoCommand : CommandResult
+deactivate Model
+
+UndoCommand --> LogicManager : CommandResult
+deactivate UndoCommand
+
+<-- LogicManager
 deactivate LogicManager
 @enduml
+
