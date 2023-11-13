@@ -1,0 +1,54 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+Participant "SearchPredicate" as sp LOGIC_COLOR
+Participant "Person" as person MODEL_COLOR
+Participant "and:AndSearchMatcher" as and LOGIC_COLOR_T2
+Participant "john:SingleTextSearchMatcher" as john LOGIC_COLOR_T3
+Participant "or:OrSearchMatcher" as or LOGIC_COLOR_T3
+Participant "doe:SingleTextSearchMatcher" as doe LOGIC_COLOR_T4
+Participant "mae:SingleTextSearchMatcher" as mae LOGIC_COLOR_T4
+
+create sp
+[-[USER_COLOR]> sp : new(SearchMatcher)
+
+[-[USER_COLOR]> sp : test(Person)
+activate sp LOGIC_COLOR
+
+sp -[LOGIC_COLOR]> person : getFieldsAndAttributes()
+activate person MODEL_COLOR
+
+person --[MODEL_COLOR]-> sp : Map<String, String>
+deactivate person MODEL_COLOR
+
+sp -[LOGIC_COLOR]> and : test(Map)
+activate and LOGIC_COLOR_T2
+
+and -[LOGIC_COLOR_T2]> john : test(Map)
+activate john LOGIC_COLOR_T3
+john --[LOGIC_COLOR_T3]-> and : FieldRanges
+deactivate john LOGIC_COLOR_T3
+
+and -[LOGIC_COLOR_T2]> or : test(Map)
+activate or LOGIC_COLOR_T3
+
+or -[LOGIC_COLOR_T3]> doe : test(Map)
+activate doe LOGIC_COLOR_T4
+doe --[LOGIC_COLOR_T4]-> or : FieldRanges
+deactivate doe LOGIC_COLOR_T4
+
+or -[LOGIC_COLOR_T3]> mae : test(Map)
+activate mae LOGIC_COLOR_T4
+mae --[LOGIC_COLOR_T4]-> or : FieldRanges
+deactivate mae LOGIC_COLOR_T4
+
+or --[LOGIC_COLOR_T3]-> and : FieldRanges
+deactivate or LOGIC_COLOR_T3
+
+and --[LOGIC_COLOR_T2]-> sp : FieldRanges
+deactivate and LOGIC_COLOR_T2
+
+[<-[USER_COLOR]- sp : boolean
+
+@enduml

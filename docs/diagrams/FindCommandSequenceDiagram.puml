@@ -14,16 +14,16 @@ Participant ":Model" as model STORAGE_COLOR
 user -[USER_COLOR]> mw : "list Tom/Sam"
 activate mw UI_COLOR
 
-mw -[UI_COLOR]> lm : execute()
+mw -[UI_COLOR]> lm : execute
 activate lm LOGIC_COLOR
 
-lm -[LOGIC_COLOR]> abp : parseCommand()
+lm -[LOGIC_COLOR]> abp : parseCommand("list Tom/Sam")
 activate abp LOGIC_COLOR_T2
 
 create fcp
 abp -[LOGIC_COLOR_T2]> fcp
 
-abp -[LOGIC_COLOR_T2]> fcp : parse()
+abp -[LOGIC_COLOR_T2]> fcp : parse("Tom/Sam")
 activate fcp LOGIC_COLOR_T3
 
 create argp
