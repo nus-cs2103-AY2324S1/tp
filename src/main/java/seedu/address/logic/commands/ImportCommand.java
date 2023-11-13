@@ -26,6 +26,7 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_SUBJECT = "Subject";
     public static final String MESSAGE_ENROL_DATE = "Enrol Date";
 
+
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Import a csv file with students details to the address book.\n"
                     + "Parameters: File Path\n"
@@ -34,7 +35,7 @@ public class ImportCommand extends Command {
                     + "\"" + MESSAGE_NAME + "\" , \"" + MESSAGE_PHONE + "\" , \"" + MESSAGE_EMAIL
                     + "\" , \"" + MESSAGE_ADDRESS + "\" , \"" + MESSAGE_GENDER + "\" , \""
                     + MESSAGE_SEC_LEVEL + "\" , \"" + MESSAGE_MRT_STATION + "\" , \"" + MESSAGE_SUBJECT + "\" , \""
-                    + MESSAGE_ENROL_DATE + "\".";
+                    + MESSAGE_ENROL_DATE + "\".\n";
 
     public static final String MESSAGE_SUCCESS = " students data imported";
     public static final String MESSAGE_DUPLICATE_PERSON = "has duplicates\n"

@@ -14,7 +14,11 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ImportCommand;
+import seedu.address.model.person.Gender;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
+import seedu.address.model.tag.EnrolDate;
+import seedu.address.model.tag.Subject;
 
 class ImportCommandParserTest {
 
@@ -40,7 +44,7 @@ class ImportCommandParserTest {
     }
 
     @Test
-    void parseCsvFail() {
+    void parseCsvFail_header() {
         // Create a relative path to the ImportDataTest directory
         Path relativePath = Paths.get("src", "test", "data", "ImportDataTest");
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -57,6 +61,28 @@ class ImportCommandParserTest {
 
         String fileName4 = relativePath + "/" + "student_data_test_fail_wrong_extra_attributes.csv";
         assertParseFailure(parser, fileName4, expectedMessage);
+    }
+
+    @Test
+    void parseCsvFail_student_data() {
+        Path relativePath = Paths.get("src", "test", "data", "ImportDataTest");
+
+        String fileName1 = relativePath + "/" + "student_data_test_fail_invalid_date.csv";
+        assertParseFailure(parser, fileName1,
+            "For student at index 1: " + EnrolDate.MESSAGE_INVALID_DATE_FORMAT);
+
+        String fileName2 = relativePath + "/" + "student_data_test_fail_invalid_phone_number.csv";
+        assertParseFailure(parser, fileName2,
+                "For student at index 1: " + Phone.MESSAGE_CONSTRAINTS);
+
+        String fileName3 = relativePath + "/" + "student_data_test_fail_invalid_subject.csv";
+        assertParseFailure(parser, fileName3,
+                "For student at index 1: " + Subject.MESSAGE_CONSTRAINTS);
+
+        String fileName4 = relativePath + "/" + "student_data_test_fail_invalid_gender.csv";
+        assertParseFailure(parser, fileName4,
+                "For student at index 1: " + Gender.MESSAGE_CONSTRAINTS);
+
     }
 
 }

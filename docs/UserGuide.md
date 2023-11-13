@@ -173,7 +173,7 @@ Format: `import FILENAME.csv`
 **Note:**
 - The columns should be "Name", "Phone", "Email", "Address", "Gender", "Sec level", "Nearest Mrt Station", "Subject", "Enrol Date"
 - Enrol Date can be left blank
-- There must be a Enrol Date header after Subject header
+- There must be a Enrol Date header after every Subject header
 - Example:
 ![.csv file for 'import student_data.csv'](images/ug_images/fileExample.png)
 </box>
