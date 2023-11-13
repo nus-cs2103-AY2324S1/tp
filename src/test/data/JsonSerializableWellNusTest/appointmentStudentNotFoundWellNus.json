@@ -3,13 +3,13 @@
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "high" ],
+    "risklevel" : [ "high" ],
     "note": " "
   }, {
     "name" : "Benny Dover",
     "phone" : "98765432",
     "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "medium" ],
+    "risklevel" : [ "medium" ],
     "note": " "
   } ],
   "appointments" : [ {

@@ -346,7 +346,7 @@ or address is invalid (> 200 characters long)
 * 2a. The list is empty
   * Use case ends.
 
-### 6.3.3 #UC03: Edit an existing student
+#### 6.3.3 #UC03: Edit an existing student
 
 **MSS**
 
@@ -413,7 +413,7 @@ or address is invalid (> 200 characters long)
   * 4b1. WellNUS shows an error message.
     * Use case ends.
 
-### 6.3.6 #UC06: Add student notes for a specific student
+#### 6.3.6 #UC06: Add student notes for a specific student
 
 **MSS**
 
@@ -495,7 +495,7 @@ or address is invalid (> 200 characters long)
 
     Use case resumes from step 1.
 
-### 6.3.10 #UC10: Find students by name together with their appointments
+#### 6.3.10 #UC10: Find students by name together with their appointments
 
 1. User requests to find students using their name
 2. WellNUS shows the list of students that match the given name
@@ -509,7 +509,7 @@ or address is invalid (> 200 characters long)
 * 4a. User does not see any students and appointments as no students match the given name
   Use case ends.
 
-### 6.3.11 #UC11: Filter an appointment by day
+#### 6.3.11 #UC11: Filter an appointment by day
 
 1. User requests to list appointments for a given day
 2. WellNUS shows the list of appointments for the day
