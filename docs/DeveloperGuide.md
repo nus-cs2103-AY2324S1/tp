@@ -531,7 +531,7 @@ The following sequence diagram shows how the show operation works for showing a 
 
 The task list functionality is facilitated by multiple related classes. The `TaskList` can contain any number of `Task` objects. The `TaskList` is implemented as a component of each Lesson so that each lesson will have its own individual Task List.
 
-The `FullTaskList` class is implemented as a list to view all the collective tasks of all the lessons. It uses a similar structure to ScheduleList to display the list.
+The `FullTaskList` class is implemented as a list to view all the collective tasks of all the lessons. It uses a similar structure to `ScheduleList` to display the list.
 
 #### Design considerations:
 
@@ -616,7 +616,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. User enters the required details to create a student.
 3. TutorMate creates the student.
 
-Use Case ends
+Use Case ends.
 
 **Extensions**
 * 2a. Student's name is not specified and / or details specified are incorrect.
