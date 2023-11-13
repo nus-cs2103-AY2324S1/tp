@@ -69,7 +69,21 @@ public class SampleDataUtil {
             Optional.of(new Address("Blk 45 Aljunied Street 85, #11-31")),
             Optional.of(new Birthday("2001-12-25")),
             Optional.of(new Remark("")),
-            getGroupSet("colleagues"))
+            getGroupSet("colleagues")),
+            new Person(new Name("Ken"),
+            Optional.of(new Phone("92624417")),
+            Optional.of(new Email("ken@example.com")),
+            Optional.of(new Address("Blk 124 Bukit Merah Rd, #08-31")),
+            Optional.of(new Birthday("2001-03-23")),
+            Optional.of(new Remark("")),
+            getGroupSet("Team2")),
+            new Person(new Name("Yuheng"),
+            Optional.of(new Phone("92624417")),
+            Optional.of(new Email("yuheng@example.com")),
+            Optional.of(new Address("Blk 17 Lor 7 Toa Payoh, #08-31")),
+            Optional.of(new Birthday("2001-08-23")),
+            Optional.of(new Remark("")),
+            getGroupSet("Team2"))
         };
     }
 
