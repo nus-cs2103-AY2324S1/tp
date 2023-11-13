@@ -626,7 +626,7 @@ specific exceptions related to such issues.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **Appendix A: Requirements**
 
 ### Product scope
 
@@ -915,7 +915,7 @@ Future User Stories to be implemented:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix B: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -1165,3 +1165,32 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisite: The last command to be successfully executed is a command that can be undone (View User Guide for list of commands that can be undone).
     2. Test case: `redo`<br>
        Expected: No command is redone. Error details shown in the result display. Command box remains the same.
+
+## **Appendix C: Effort**
+
+### Challenges
+* Hard-to-fix bug where UI did not update upon data change 
+* Implementation of `viewMember` / `viewEvent`
+* Design of `Enrolment` class
+
+### Effort Required and Difficulty:
+* 3 entity types compared to AB3’s 1 entity type
+* 5 new data type (Date, Gender, Location, Remark, Hours)
+* 11 new commands (AB3 only had 8 commands of which 4 we updated - not included in the 11)
+* Updated most data types to be optional
+* Added a class (Enrolment) to relate 2 classes (Member & Event) - new feature not in AB3
+* Updated UI to accommodate to members and events - 2 list panels compared to 1 in AB3
+* Added new command history feature which allows users to recall commands similar to a terminal
+* Added new theme-switching feature 
+
+### Achievements:
+* Added user-friendly features:
+    * Command History
+    * Undo/Redo
+* Added personalisation feature:
+    * Theme switching
+* Related 2 classes together using the `Enrolment` class
+* Updated UI to display all required information
+
+
+
