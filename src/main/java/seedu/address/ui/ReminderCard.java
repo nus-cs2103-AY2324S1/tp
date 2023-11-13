@@ -30,11 +30,7 @@ public class ReminderCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label phone;
-    @FXML
     private Label followUpDate;
-    @FXML
-    private FlowPane tags;
     @FXML
     private FlowPane lead;
 
