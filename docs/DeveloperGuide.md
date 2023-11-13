@@ -449,13 +449,21 @@ The `lookup` command is facilitated by `LookupCommand` and `LookupCommandParser`
 
 * **Alternative 2:** The combination can be specified by the user.
 
-    For example (Proposed), `lookup n/alex \AND david \OR c/T11 \OR T12` will have the criteria:
+    For example, `lookup n/alex \AND david \OR c/T11 \OR T12` will have the criteria:
     ```
     (name contains alex AND david) OR (class number is T11 OR T12)
     ```
 
     * Pros: The user can specify any combination of criteria.
-    * Cons: The command will be more complicated to implement. As it involves changing the `LookupCommandParser` and the `StudentContainsKeywordsPredicate` class. In addition, the syntax can be confusing for the user.
+    * Cons: The command will be more complicated to implement, as the order of the keywords and the logic operators will be used to determine the `StudentContainsKeywordsPredicate`. In addition, the syntax can be confusing for the user. <br>
+      One such example is the command `lookup n/alex \AND david \OR li` which can have two different interpretations:
+      ```
+      (name contains alex AND david) OR (name contains li)
+      ```
+      ```
+      (name contains alex) AND (name contains david OR li)
+      ```
+
 
 
 ### Theme feature
