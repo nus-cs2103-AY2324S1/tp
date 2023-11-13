@@ -11,12 +11,11 @@ title: User Guide
 ## Introduction
 Flashlingo is a versatile desktop application centered around learning words through flash cards. It is optimized for use via a **Command Line Interface** (CLI),
 while also providing the advantages of a **Graphical User Interface** (GUI). Tailored with a focus on **beginner language
-learners** with [to be discussed] proficiency in command line, Flashlingo specializes in expanding vocabulary. If you are not familiar with the command line interface (CLI), you can refer to the [**Glossary**](#glossary) section below,
+learners** with beginner level of  proficiency in command line, Flashlingo specializes in expanding vocabulary. If you are not familiar with the command line interface (CLI), you can refer to the [**Glossary**](#glossary) section below,
 and the [**Command Summary**](#command-summary) section for a quick overview of the commands.
 
 
-The application leverages the scientifically-proven principle of the [**Forgetting Curve**](https://en.wikipedia.org/wiki/Forgetting_curve).
-By incorporating the forgetting curve concept, Flashlingo schedules review sessions, ensuring words are revisited at
+By incorporating [**Leitner system**](https://en.wikipedia.org/wiki/Leitner_system#), Flashlingo schedules review sessions, ensuring words are revisited at
 optimal intervals to enhance long-term memory retention. This method assists users in effectively retaining and expanding their vocabulary over time.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -27,13 +26,13 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
   - Users are given the ability to add, delete and edit flash cards. And each flash card is assigned with a `level`, which
   indicates the proficiency of the user with the word. The level of the flash card will be updated after each review session.
 * **Reviewing flash cards**
-   - In each review session, words that require reviewing will be presented to users one by one. For each word, users can indicate whether
-     - they have memorized the word
+   - In each review session, words that require reviewing will be presented to users one by one. For each word, users can indicate whether they have
+     - memorized the word
      <br>
      This will advance the word into the next `level`, meaning less frequent review for the word in the near future.
-     - they have forgotten the word
+     - forgotten the word
      <br>
-        This will decrease the `level` by 1, meaning more frequent review for the word in the near future.
+      This will decrease the `level` by 1, meaning more frequent review for the word in the near future.
 
 <div markdown="block" class="alert alert-info">
 
@@ -44,6 +43,10 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
 * Words which are indicated as `word mastered` will not appear in review session.
 
 </div>
+
+**With each review frequency scientifically determined by Flashlingo, it will make your vocabulary learning an absolute breeze,**
+**meaning you can spend less time and memorize things more enduringly**
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -60,11 +63,11 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
     1. Open up the terminal.
     * For mac users, press `Command + Space` to open Spotlight search, type `Terminal`, and press `Enter`.
       ![img.png](images/Terminal.png)
-    * For windows users, press `Windows + R` keys simultaneously, type `cmd` and press `Enter`.
+    * For windows users, press `Windows + R`, type `cmd` and press `Enter`.
     2. Navigate to the folder containing the jar file. In this example, it is in the Downloads folder. So the command is:
-       <br>
-       ```cd Downloads```
-       <br>
+        ```
+        cd Downloads
+        ```
        >Click [here](https://en.wikipedia.org/wiki/Cd_(command)) for more information on how to navigate to a folder in the terminal.
     3. Simply type in `java -jar flashlingo.jar` to get started!
 
@@ -224,9 +227,9 @@ Examples:
 
 Output:
 
-|  Before find   | ![img.png](images/BeforeFind.png) |
-|:--------------:|:---------------------------------:|
-| **After find** | ![img.png](images/AfterFind.png)  |
+| **Before find** | ![img.png](images/BeforeFind.png) |
+|:---------------:|:---------------------------------:|
+| **After find**  | ![img.png](images/AfterFind.png)  |
 
 ### Filtering list with specified language : `language`
 
@@ -285,21 +288,29 @@ Output: `Review Session has ended.`
 
 ### Revealing the other side of the flash card: `reveal`
 
-To show the translation of the flash card in
+Shows the translation of the flash card given by index if it is hidden. Otherwise, hides the translation of the flash card if it is revealed.
 
 [Command Format](#commands): `reveal [<INDEX>]`
 
-Output : `Flashcard has been revealed!...`  
+Output :
 
-![img.png](images/Reveal.png)
+|  **If translation is hidden**  | ![img.png](images/BeforeReveal.png) |
+|:------------------------------:|:-----------------------------------:|
+| **If translation is revealed** | ![img.png](images/AfterReveal.png)  |
 
-**Note**
-* When <INDEX> is omitted, the default value is 1.
+
+<div markdown="block" class="alert alert-info">
+:information_source: Notes:
+
+* When `<INDEX>` is omitted, the default value is 1.
 * Pressing `reveal` or `hide` button will have the same effect.
+* In future enhancement, this command will be renamed to `flip` to better reflect its function.
+
+</div>
 
 ### Indicating user has memorized the word : `yes`
 
-Marks the word as memorized and advances the word into the next level. If there are still remaining words to review,
+Marks the word as memorized and advances the word into the next `level`. If there are still remaining words to review,
 they will be automatically shown in the section below. Otherwise, review session will be closed by default.
 
 [Command Format](#commands): `yes ...`
@@ -310,10 +321,11 @@ Output:
 
 **Note**
 * Pressing `yes` button will have the same effect.
+* In the case where there are no more words to review, `The next word is:` will be replaced by `You have no more words to review!`.
 
 ###  Indicating user has forgotten the word : `no`
 
-Marks the word as not grasped and leaves it in its current retention stage. If there are still remaining words to review,
+Marks the word as not grasped and decreases its `level` by 1. If there are still remaining words to review,
 they will be automatically shown in the section below. Otherwise, review session will be closed by default.
 
 [Command Format](#commands): `no ...`
@@ -324,6 +336,7 @@ Output:
 
 **Note**
 * Pressing `no` button will have the same effect.
+* In the case where there are no more words to review, `The next word is:` will be replaced by `You have no more words to review!`.
 
 ### Show learning statistics : `stats`
 
@@ -480,11 +493,12 @@ Refer to [Commands](#commands) if unsure of how to interpret the format.
 
 ## Glossary
 
-| Term                                  | Definition                                                                                                                                                                                                                                                                                                                      | 
-| ------------------------------------- |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **CLI**                               | A command line interface (CLI) is a text-based interface where you can input commands that interact with a computer's operating system. You can check the tutorial [**here**](https://tutorials.codebar.io/command-line/introduction/tutorial.html)                                                                             |
-| **GUI**                               | A graphical user interface (GUI) is a digital interface in which a user interacts with graphical components such as icons, buttons, and menus.                                                                                                                                                                                  |
-| **JSON** | JSON (JavaScript Object Notation) is a lightweight data format commonly used for representing structured data.                                                                                                                                                                                                                  |
-| **Level**                             | The level represents the proficiency with a specific flash card. The higher the `Level` is, the higher the proficiency of the user with the word is.                                                                                                                                                                            |
-| **Review Session**                    | A review session is a designated phase within the system where words requiring review are presented individually. Users can confirm their understanding or signal a need for further review.                                                                                                                                    |
-| **Forgetting Curve**                  | The forgetting curve illustrates the decline in memory retention over time if information is not periodically reviewed or reinforced. It demonstrates a rapid loss of information shortly after learning, with the most significant decline in the initial hours or days. The rate of forgetting gradually decreases over time. |
+| Term               | Definition                                                                                                                                                                                                                                                                      | 
+|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **CLI**            | A command line interface (CLI) is a text-based interface where you can input commands that interact with a computer's operating system. You can check the tutorial [**here**](https://tutorials.codebar.io/command-line/introduction/tutorial.html).                            |
+| **GUI**            | A graphical user interface (GUI) is a digital interface in which a user interacts with graphical components such as icons, buttons, and menus.                                                                                                                                  |
+| **JSON**           | JSON (JavaScript Object Notation) is a lightweight data format commonly used for representing structured data.                                                                                                                                                                  |
+| **Leitner System** | The Leitner system is a widely used method of efficiently using flashcards that was proposed by the German science journalist Sebastian Leitner in 1972. It is a simple implementation of the principle of spaced repetition, where cards are reviewed at increasing intervals. |
+| **Level**          | The level represents the proficiency with a specific flash card. The higher the `Level` is, the higher the proficiency of the user with the word is.                                                                                                                            |
+| **Review Session** | A review session is a designated phase within the system where words requiring review are presented individually, based on Leitner System. Users can confirm their understanding or signal a need for further review.                                                           |
+
