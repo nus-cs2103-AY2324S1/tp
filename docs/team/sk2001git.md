@@ -6,41 +6,29 @@ title: "Sean Koh's Project Portfolio Page"
 # Project: JABPRO
 
 ## Overview
-JABPro aims to solve the problem of HR managers having to manage and sort through tons of job applications.
-
+JABPro aims to solve the problem of HR managers having to manage and sort through tons of job applications.  
 The problem that we have identified included:
 1. Visual Noise and Clutter (Through the use of Excel or other programmes where rows of data are displayed)
-2. Lack of a way to easily compare candidates (Having to manually compare rows of data or need to search up statistical formulas)
-
-These are the two problems I have seeked to tackle in this TP project.  
+2. Lack of a way to easily compare candidates (Having to manually compare rows of data or need to search up statistical formulas)  
 The features that I have implemented to tackle these problems are:
 1. `view` command to view a candidate's details in a separate panel (to reduce visual noise and clutter) whereby the candidate's details are displayed in full in a very organised and formatted manner.  
-This creates a very clean and organised view for the user to easily read and process the information stored for the viewed person.
-
+This creates a very clean and organised view for the user to easily read and process the information stored for the viewed person.   
 2. `filter` command to filter candidates based on statistical metrics and values. Whereby the user can filter and display candidates whose value is greater than or equal to the specified value for the specified statistic metric.
 This allows the user to easily compare candidates based on their performance for a particular tag. We use tag as a way to tag assessments that the candidate has taken. This allows the user to easily compare candidates based on their performance for a particular assessment.
-
-In order to implement filter, there was a need to implement summary statistics. This is because the filter command relies on the summary statistics to filter candidates based on their performance for a particular assessment.
-Additionally, we needed to implement additional parameters to `edit` command to allow the user to edit the score of a candidate for a particular assessment. This is because the summary statistics relies on the score of the candidate for a particular assessment to calculate the summary statistics.
-
-Thereby additional enhancement that I have implemented to support filter are:
+  
+Thereby additional enhancement that I have implemented to support filter to support `Score` and `ScoreList` are:
 1. Overloading the current `edit` command to edit the score of a candidate for a particular assessment.
 2. Summary Statistic
-
 
 ## Summary of Contributions
 **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=sk2001git&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=sk2001git&tabRepo=AY2324S1-CS2103T-W09-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
 **Enhancement implemented**:
-* Remark command
-* Edit command (For scores)
-* Filter command
-* View command
-* Person (ScoreList, Remark)
-* Score
-* Summary Statistic
+* `remark`, `edit`(for scores portion) , `filter`, `view` command and features
+* `Score`, `ScoreList`, `Remark` and its relevant storing and parsing of data
+* Summary Statistic implementation
 * UI for View Panel and Summary statistic panel
-* Storage saving for Score, ScoreList, Remark
+
 
 
 **Contribution to the UG**:
@@ -52,18 +40,12 @@ Thereby additional enhancement that I have implemented to support filter are:
 * Contributed to DG for writing User Stories 
   * 5 of the `* * *` Must-have features for user stories which links to the commands I have implemented
 * Contributed to DG for target user profile
-  * wants an organized way to keep track of candidates information
-  * wants to view and manage candidates information in a single place
-  * wants to attach a score to candidate performance over interview and assessments
-  * wants to be able to use scores in order to quantitatively compare candidates
+  * 4 target user profiles characteristic
 * Contributed to DG for non-functional requirements
-  * Product Visuals should be `unambiguous` and clear to the user
-  * Commands should be `easy to remember` and `intuitive` to use
-  * Product should be `consistent` in its visuals and commands formatting
+  * 3 NFRs
 * Contributed to DG for use cases regarding `add`, `remark`, `view`, `Using scores to compare and filter people`
 * Contributed to DG for architecture diagram for UI, Storage, Model
 * Contributed to DG for feature implementation details for `view`.
-* Contributed to DG for Activity and Sequence diagram for `view`.
 * Contributed to DG for manual testing for `add`, `edit`, `view`, `filter`, `remark` features.
 
 
@@ -80,7 +62,7 @@ Thereby additional enhancement that I have implemented to support filter are:
 **Contributions beyond the project team**:
 * Participated in the PE Dry Run and gave feedback to the other team (About 9 bugs reported, out of which there was 1 major over-arching bug that was reported)
 
-** Test Case Contributions**:
+**Test Case Contributions**:
 * Covered all the test cases for the commands that I have implemented. Contributed to the team's test case as well as AB3's test case.
 
 
@@ -162,7 +144,7 @@ An example could be trying to create identical commands that does not toggle the
 | `* * *`  | Hiring Manager | record the score of the different activities such as interviewsor assessments that an applicant might go through | I can use them for effective comparison and filter the candidates easily                                                                   |
 | `* * *`  | Hiring Manager | compare candidates using their performance in their assessments or interviews                                    | I can choose the best candidates to move to the next stage of the hiring process and get the best performing candidates objectively        |
 
-### The remaining are the use cases for my features related and test cases for manual testing.
+**The remaining not mentioned are the use cases for my features related and test cases for manual testing.**
 
 
 ### Contributions to User Guide(Extracts)
@@ -209,7 +191,7 @@ An example of the `add` command being successfully executed:
 1. Enter the command `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/dept finance`
 2. This is the result of the successful `add` command (Take note that command entered will not be shown in the result):
 
-   ![Add-Success](images/add-command-success.png)
+   ![Add-Success](../images/add-command-success.png)
    <br>
 
 **Error Handling Table for `add` command:**
@@ -255,14 +237,14 @@ An example of the `remark` command being successfully executed:
 1. Enter the command `remark 1 r/Great attitude, hardworking`
 2. This is the result of the successful `remark` command (Take note that command entered will not be shown in the result):
 
-3. ![Remark-Success](images/remark-command-success.png)
+3. ![Remark-Success](../images/remark-command-success.png)
    <br>
 
 An example of the `remark` command being successfully executed with the **REMARK** keyword:
 1. Enter the command `remark 1 r/**REMARK** furthermore he is great at teamwork`
 2. This is the result of the successful `remark` command (Take note that command entered will not be shown in the result):
 
-   ![Remark-Success](images/remark-command-enhanced-success.png)
+   ![Remark-Success](../images/remark-command-enhanced-success.png)
    <br>
 
 **Error Handling Table for `remark` command:**
@@ -314,14 +296,14 @@ An example of the `view` command being successfully executed:
 1. Enter the command `view 3`
 2. This is the result of the successful `view` command (Take note that command entered will not be shown in the result):
 
-   ![View-Success](images/view-command-success.png)
+   ![View-Success](../images/view-command-success.png)
    <br>
 
 An example of the `view` command being successfully executed for applicant with tags and score:
 1. Enter the command `view 2` (**Applicant with tags and score**)
 2. This is the result of the successful `view` command (Take note that command entered will not be shown in the result):
 
-   ![View-Success](images/view-command-with-stats-success.png)
+   ![View-Success](../images/view-command-with-stats-success.png)
    <br>
 
 
@@ -398,7 +380,7 @@ An example of the `edit` command being successfully executed:
 1. Enter the command `edit 1 n/Alex Ho p/91234567` (**Edit name and phone number**)
 2. This is the result of the successful `edit` command (Take note that command entered will not be shown in the result):
 
-   ![Edit-Success](images/edit-command-success.png)
+   ![Edit-Success](../images/edit-command-success.png)
    <br>
 
 An example of the `edit` command being successfully executed with tags and score:
@@ -406,14 +388,14 @@ An example of the `edit` command being successfully executed with tags and score
 2. Enter the command `edit 1 t/Interview sc/Interview 80` (**Edit tag and score**)
 3. This is the result of the successful `edit` command (Take note that command entered will not be shown in the result):
 
-   ![Edit-Success](images/edit-command-with-stats-success.png)
+   ![Edit-Success](../images/edit-command-with-stats-success.png)
    <br>
 
 An example of the `edit` command being successfully executed to clear a tags and score:
 1. Enter the command `edit 1 t/` (**Clear all tags**)
 2. This is the result of the successful `edit` command (Take note that command entered will not be shown in the result):
 
-   ![Edit-Success](images/edit-command-clear-tags-success.png)
+   ![Edit-Success](../images/edit-command-clear-tags-success.png)
    <br>
 
 **Error Handling Table for `edit` command:**
@@ -482,7 +464,7 @@ Set up for examples when you first start JABPro with default data:
 5. `edit 3 t/interview sc/interview 70`
 6. The result of the above commands should look like this:
 
-   ![Filter-Setup](images/filter-setup.png)
+   ![Filter-Setup](../images/filter-setup.png)
    <br>
 
 An example of the `filter` command being successfully executed:
@@ -490,7 +472,7 @@ An example of the `filter` command being successfully executed:
 2. Enter the command `filter t/interview met/percentile val/80` (**Filter by percentile**)
 3. This is the result of the successful `filter` command (Take note that command entered will not be shown in the result):
 
-   ![Filter-Success](images/filter-command-success.png)
+   ![Filter-Success](../images/filter-command-success.png)
    <br>
 
 An example of the `filter` command being successfully executed with `median`:
@@ -498,7 +480,7 @@ An example of the `filter` command being successfully executed with `median`:
 2. Enter the command `filter t/interview met/median` (**Filter by median**)
 3. This is the result of the successful `filter` command (Take note that command entered will not be shown in the result):
 
-   ![Filter-Success](images/filter-command-median-success.png)
+   ![Filter-Success](../images/filter-command-median-success.png)
    <br>
 
 **Error handling for `filter` command:**
@@ -570,10 +552,10 @@ You should ensure that you have **sufficient candidates of more than 20** with a
    * Additionally, when the spread of scores is small, the percentile will not be able to differentiate between applicants with similar scores.
 
 
-**Formula used to calculate the summary statistics:**
-**mean** is calculated by using the formula `sum of all scores with that tag / number of applicants with that tag`
-**median** is calculated by using the formula `middle score of all scores with that tag`
-**minimum** is calculated by using the formula `lowest score of all scores with that tag`
-**maximum** is calculated by using the formula `highest score of all scores with that tag`
-**percentile** is calculated by using the formula `number of applicants with a score strictly lower than the applicant / total number of applicants with that tag`
+**Formula used to calculate the summary statistics:**  
+**mean** is calculated by using the formula `sum of all scores with that tag / number of applicants with that tag`  
+**median** is calculated by using the formula `middle score of all scores with that tag`  
+**minimum** is calculated by using the formula `lowest score of all scores with that tag`  
+**maximum** is calculated by using the formula `highest score of all scores with that tag`  
+**percentile** is calculated by using the formula `number of applicants with a score strictly lower than the applicant / total number of applicants with that tag`  
 

@@ -702,7 +702,7 @@ Format: `create t/CATEGORY TAGNAME…​`
 
 3. View your newly created tags using the `listT` command.
 
-   ![listT-create](Images/listT-create.png)
+   ![listT-create](images/listT-create.png)
 
 [Jump back to Table of Contents](#table-of-contents)
 
