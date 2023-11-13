@@ -37,10 +37,11 @@
 
      - Wrote the User Stories part in the DG [#10](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/10)
      - Add details about secondary command parser in DG [#47](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/47/files#diff-1a95edf069a4136e9cb71bee758b0dc86996f6051f0d438ec2c424557de7160b)
+     - Add details about implementation on `ListEventCommandParser` and `ListEventCommand` [#206](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/206) [#208](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/208)
      - UML diagrams that I made: [#206](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/206)
-     <puml src="diagrams/event/ListEventsSequenceDiagram.puml"/>
-     <puml src="diagrams/event/ListEventsActivityDiagram.puml"/>
-     <puml src="diagrams/event/DeleteEventSequenceDiagram.puml"/>
+       - <puml src="../diagrams/event/ListEventsSequenceDiagram.puml"/>
+       - <puml src="../diagrams/event/ListEventsActivityDiagram.puml"/>
+       - <puml src="../diagrams/event/DeleteEventSequenceDiagram.puml"/>
 
 
   - #### Review/mentoring contributions
@@ -50,3 +51,6 @@
        - [#69](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/69)
        - [#163](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/163)
        - [#168](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/168)
+  
+  - #### Contributions beyond the project team
+    - Reported 6 bugs to other team's product during PE-D
