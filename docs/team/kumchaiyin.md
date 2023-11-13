@@ -28,7 +28,7 @@ Given below are my contributions to the project.
   * Did the UI mockup of our intended final product
   * Took the initiative to modify sequence diagram in DG
     * Used ref frame to break complicated sequence diagram into two parts
-  * Prepared pdf files of UG, DG, PPP and ensure their quality.
+  * Prepared pdf files of UG and DG, and ensured their quality.
 
 * **Enhancements to existing features**:
   * Extended the current `add` command to deal with the updated `Person` fields as listed below.
