@@ -43,7 +43,7 @@ And here's the best part – while it's perfect for members of SoC Computing Clu
 
 1. **User-Friendly [Command Line Interface (CLI)](#command-line-interface)**: CoordiMate is optimized for use via a CLI, combining all the benefits of a [Graphical User Interface (GUI)](#graphical-user-interface) with the efficiency of a CLI.
 
-2. **Speedy Navigation**: If you're a fast typist, CoordiMate will help you complete your contact and tasks management faster than traditional GUI apps, maximising your productivity.
+2. **Speedy Navigation**: If you're a fast typist, CoordiMate will help you manage your contacts and tasks faster than traditional GUI apps, maximising your productivity.
 
 Don't let the stress of contact and task management hinder your event planning creativity.
 
@@ -105,7 +105,7 @@ Throughout this guide, you will see different text styles that are used to highl
 
 ## Features
 
-  1. **Easy Management of People**:
+  1. **Easy Contact Management**:
       - Seamlessly create, update, and delete your contacts, ensuring your contact list is always up-to-date.<br><br>
 
   2. **Effortless Task Management**:
@@ -529,13 +529,13 @@ This person will be removed from your contact list immediately. This action is i
 - `listPerson` followed by `deletePerson 2`.<br><br>
   ![deletePerson_success_with_listPerson](images/output/deletePerson_success.png)
 
-  *<center>CoordiMate deletes the person at the index <code>2</code>.</center>*
+  *<center>CoordiMate deletes the 2nd person who was previously `Bernice Yu`.</center>*
 
 <h4>Potential Errors:</h4>
 
  Error message | How to resolve
 ---------------|---------------
-`Invalid command format!…` | Ensure that the index is correctly specified as an integer.
+`Invalid command format! …` | Ensure that the index is correctly specified as an integer.
 `The person index provided is invalid` | Ensure that the index provided is within the valid range.
 
 <div style="page-break-after: always;"></div>
@@ -799,13 +799,13 @@ The task will be removed from your task list immediately. This action is irrever
 - `listTask` followed by `deleteTask 2`<br><br>
   ![deleteTask_success](images/output/deleteTask_success.png)
 
-  *<center>CoordiMate deletes the task at the index <code>2</code>.</center>*
+  *<center>CoordiMate deletes the 2nd task which was previously `Create budget`.</center>*
 
 <h4>Potential Errors:</h4>
 
  Error message | How to resolve
 ---------------|---------------
-`Invalid command format!…` | Ensure that the index is correctly specified as an integer.
+`Invalid command format! …` | Ensure that the index is correctly specified as an integer.
 `The task index provided is invalid` | Ensure that the index provided is within the valid range.
 
 <div style="page-break-after: always;"></div>
@@ -1050,7 +1050,7 @@ All completed tasks will be removed from your task list immediately. This action
 
 #### 3.1. Adding tag(s) to a person: `addTagPerson`
 
-You can add tag(s) to a person, so that you can simply add to the existing list of tags of the indexed person.
+You can add tag(s) to a person, so that you can better organise your persons.
 
 <h4>Format:</h4>
 
@@ -1069,8 +1069,8 @@ atagp
 | Fields  | Prefix | Required | Remarks |
 |---------|--------|:--------:|---------|
 | `INDEX` | No prefix | <img width=30px src='assets/svg/ug/required.svg'> | The person at this index in the displayed person list is edited. The index must be a positive integer 1, 2, 3, … , 2147483647. |
-| `TAG` | `t/` | <img width=30px src='assets/svg/ug/required.svg'> | The tag to be added to the person. |
-| `MORE_TAGS` | `t/` | <img width=33px src='assets/svg/ug/not_required.svg'> | Additional tag(s) to be added to the person. |
+| `TAG` | `t/` | <img width=30px src='assets/svg/ug/required.svg'> | The tag to be added to the person. Tags should only contain alphanumeric characters. |
+| `MORE_TAGS` | `t/` | <img width=33px src='assets/svg/ug/not_required.svg'> | Additional tag(s) to be added to the person. Tags should only contain alphanumeric characters. |
 {: .field-table}
 
 - A tag is uniquely identified by the `TAG`. This field is case sensitive.
@@ -1080,13 +1080,13 @@ atagp
 - `addTagPerson 1 t/friends t/expensive`.<br><br>
   ![addTagPerson success](images/output/addTagPerson_success.png)
 
-  *<center>CoordiMate adds tag <code>expensive</code> to the person at the index <code>1</code>, while <code>friends</code> is not added because it already exists in the list of tags.</center>*
+  *<center>CoordiMate adds tag <code>expensive</code> to the 1st person, while <code>friends</code> is not added because it already exists in the list of tags.</center>*
 
 <h4>Potential Errors:</h4>
 
  Error message | How to resolve
 ---------------|---------------
-`Invalid command format!…` | Ensure that the index and tag are both specified. The index should be correctly specfiied as an integer.
+`Invalid command format! …` | Ensure that the index and tag are both specified. The index should be correctly specfiied as an integer.
 `Tags names should be alphanumeric` | Ensure that the tag is specified and is alphanumeric.
 `The person index provided is invalid` | Ensure that the index provided is within the valid range.
 
@@ -1096,7 +1096,7 @@ atagp
 
 #### 3.2. Adding tag(s) to a task: `addTagTask`
 
-You can add tag(s) to a task, so that you can simply add to the existing list of tags of the indexed task.
+You can add tag(s) to a task, so that you can better organise your tasks.
 
 <h4>Format:</h4>
 
@@ -1115,8 +1115,8 @@ atagt
 | Fields  | Prefix | Required | Remarks |
 |---------|--------|:--------:|---------|
 | `INDEX` | No prefix | <img width=30px src='assets/svg/ug/required.svg'> | The task at this index in the displayed task list is edited. The index must be a positive integer 1, 2, 3, … , 2147483647. |
-| `TAG` | `t/` | <img width=30px src='assets/svg/ug/required.svg'> | The tag to be added to the task. |
-| `MORE_TAGS` | `t/` | <img width=33px src='assets/svg/ug/not_required.svg'> | Additional tag(s) to be added to the task. |
+| `TAG` | `t/` | <img width=30px src='assets/svg/ug/required.svg'> | The tag to be added to the task. Tags should only contain alphanumeric characters. |
+| `MORE_TAGS` | `t/` | <img width=33px src='assets/svg/ug/not_required.svg'> | Additional tag(s) to be added to the task. Tags should only contain alphanumeric characters. |
 {: .field-table}
 
 - A tag is uniquely identified by the `TAG`. This field is case sensitive.
@@ -1126,13 +1126,13 @@ atagt
 - `addTagTask 1 t/day1 t/day2`.<br><br>
   ![addTagTask success](images/output/addTagTask_success.png)
 
-  *<center>CoordiMate adds tag <code>day2</code> to the task at the index <code>1</code>, while <code>day1</code> is not added because it already exists in the list of tags.</center>*
+  *<center>CoordiMate adds tag <code>day2</code> to the 1st task, while <code>day1</code> is not added because it already exists in the list of tags.</center>*
 
 <h4>Potential Errors:</h4>
 
  Error message | How to resolve
 ---------------|---------------
-`Invalid command format!…` | Ensure that the index and tag are both specified. The index should be correctly specified as an integer.
+`Invalid command format! …` | Ensure that the index and tag are both specified. The index should be correctly specified as an integer.
 `Tags names should be alphanumeric` | Ensure that the tag is specified and is alphanumeric.
 `The task index provided is invalid` | Ensure that the index provided is within the valid range.
 
