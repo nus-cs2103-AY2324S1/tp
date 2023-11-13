@@ -371,6 +371,7 @@ Given below is an example usage scenario and how the group mechanism behaves at 
 Ungroup works in the same way as group except the use of Command word ungroup
 
 The following activity diagram summarizes what happens when a user executes a new command:
+<puml src="diagrams/GroupPersonActivityDiagram.puml" alt="Group Command Activity Diagram" />
 
 
 #### Design Considerations:
@@ -432,11 +433,7 @@ If any group mate has not key in their free time slots using `addtime`, an error
 
 The following activity diagram summarizes what happens when a user executes a FindFreeTime command:
 
-
-
-
-
---------------------------------------------------------------------------------------------------------------------
+<puml src="diagrams/FindFreeTimeActivityDiagram.puml" alt="Find free time command activity diagram" />
 --------------------------------------------------------------------------------------------------------------------
 
 ### List
