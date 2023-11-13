@@ -296,7 +296,7 @@ The implementation of the filter command follows the convention of a normal comm
 
 ![filter diagram](images/filter/FilterDiagram.png)
 
-`EditCommandParser` first obtains the values corresponding to the flags `/by` and `/with`, and ensure that each flag is indicated once and only once.
+`FilterCommandParser` first obtains the values corresponding to the flags `/by` and `/with`, and ensures that each flag is indicated once and only once.
 If the value corresponding to `/by` is `course`, the value of the tag `/taken` is obtained from the value of the tag `/with`.
 
 A new filter command is then created with the `Predicate<Person>` that corresponds to the values of `/by` and `/with`, and `/taken` if any.
