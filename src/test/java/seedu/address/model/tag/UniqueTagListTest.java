@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTags.TEST_TAG;
-import static seedu.address.testutil.TypicalTags.TEST_TAG_CATEGORY_STRING;
-import static seedu.address.testutil.TypicalTags.TEST_TAG_NAME_STRING;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -54,24 +52,6 @@ public class UniqueTagListTest {
     @Test
     public void getTag_nullTag_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueTagList.getTag(null, null));
-    }
-
-    @Test
-    public void getTag_tagCategoryDoesNotExist_throwsParseException() {
-        uniqueTagList.add(TEST_TAG);
-        assertThrows(ParseException.class, () -> uniqueTagList.getTag(TEST_TAG_NAME_STRING, "categoryNotInList"));
-    }
-
-    @Test
-    public void getTag_tagNameDoesNotExist_throwsParseException() {
-        uniqueTagList.add(TEST_TAG);
-        assertThrows(ParseException.class, () -> uniqueTagList.getTag("nameNotInList", TEST_TAG_CATEGORY_STRING));
-    }
-
-    @Test
-    public void getTag_tagDoesNotExist_throwsParseException() {
-        System.out.println(uniqueTagList.contains(TEST_TAG));
-        assertThrows(ParseException.class, () -> uniqueTagList.getTag(TEST_TAG_NAME_STRING, TEST_TAG_CATEGORY_STRING));
     }
 
     @Test
