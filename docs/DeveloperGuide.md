@@ -338,7 +338,7 @@ Step 3. LinkTree provides a feedback based on whether the operation was successf
 
 <br>
 
-### "Find by Keywords"
+### **Find a developer**
 
 #### Introduction
 The `FindCommand` class, enables keyword-based searches for individuals. This intuitive command extends `Command` and utilizes `NameContainsKeywordsPredicate`.
@@ -370,15 +370,7 @@ The `FindCommand` class, enables keyword-based searches for individuals. This in
 #### Conclusion
 The `FindCommand`'s user-centric design ensures an efficient and friendly search experience, demonstrating careful consideration of user needs and practical functionality.
 
-<box type="info" seamless>
 
-</box>
-
-#### Function Implementation
-
-(Add basic implementation here)
-
-<br>
 
 ###  **List a developer** (Optional to show implementation?)
 
