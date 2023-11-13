@@ -192,7 +192,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String date} into a {@code LocalDateTime}.
+     * Parses a {@code String appointmentDate} into a {@code LocalDateTime}.
      *
      * @throws ParseException if the given {@code date} is invalid.
      */

@@ -263,64 +263,42 @@ The following activity diagram illustrates how the complete operation is execute
 
 ### Gather Emails Feature
 
-The **Gather Emails** feature in our software system is a critical functionality designed to efficiently collect
-email addresses. This feature is facilitated through the `GatherCommand` class, which plays a central role in the process.
-
-#### Implementation Overview
-
-The `GatherCommand` class is instantiated by the `GatherCommandParser`, which parses user input commands. The
-`GatherCommandParser` class implements the following operations:
-
-* `GatherCommandParser#parse(String args)` — Checks the prefixes (fp/ and t/) and instantiates `GatherCommand`
-accordingly. It passes either a `GatherEmailByFinancialPlan` or a `GatherEmailByTag` object, both implementations of
-the `GatherEmailPrompt` interface.
-
-The `GatherCommand` takes in a `GatherEmailPrompt` object and passes it into the current `Model` model, subsequently
-interacting with the `AddressBook` and `UniquePersonsList` classes. The `GatherCommand` class implements the following
-operations:
-
-* `GatherCommand#GatherCommand(GatherEmailPrompt prompt)` — Constructor that initializes the command with the
-provided `GatherEmailPrompt` object.
-* `GatherCommand#execute()` —  Executes the gathering operation by calling
-`Model#gatherEmails(GatherEmailPrompt prompt)`.
-
-The `Model` interface is implemented by the `ModelManager`, representing the in-memory model of the address book data.
-It contains the following method:
-
-* `ModelManager#gatherEmails(GatherEmailPrompt prompt)` —  Carries out the gathering operation by calling
-`AddressBook#gatherEmails(GatherEmailPrompt prompt)`.
-
-This operation is exposed in the `AddressBook` class as `AddressBook#gatherEmails(GatherEmailsPrompt prompt)`, and
-in the `UniquePersonsList` class as `UniquePersonsList#gatherEmails(GatherEmailsPrompt prompt)`.
-
-The `UniquePersonsList` class maintains a list of unique persons. Additionally, it implements the following operation:
-* `UniquePersonsList#gatherEmails(GatherEmailPrompt prompt)` —  This method iterates through the persons list
-and calls `GatherEmailPrompt#gatherEmails(Person person)`, passing in each person.
-
-Depending on the scenario, it triggers either `Person#gatherEmailsContainsTag(String prompt)` or
-`Person#gatherEmailsContainsFinancialPlan(String prompt)`:
-* `Person#gatherEmailsContainsTag(String prompt)` —  Checks if the given prompt is a substring of the name of
-any Tag in the `Set<Tag>` of the current person.
-* `Person#gatherEmailsContainsFinancialPlan(String prompt)` —  Checks if the given prompt is a substring of the
-name of any Financial Plan in the `Set<Tag>` of the current person.
-
-This is the class diagram for the gather command:
+The **Gather Emails** feature in our software system is designed to efficiently collect email addresses.
+The **Gather Emails** feature is facilitated by the `GatherCommand`, which plays a central role in the process. Below is the class diagram of the gather emails feature.
 
 ![GatherClassDiagram](images/GatherClassDiagram.png)
 
-**Usage Scenario:**
+#### Implementation Overview
 
-**Scenario 1:**
-User enters a gather `fp/financial plan a`. The `GatherEmailByFinancialPlan` will be initialized. Each person in the
-`UniquePersonList` will be passed into the `GatherEmailByFinancialPlan#gatherEmails(Person person)`.
+The `GatherCommand` is initiated by the `GatherCommandParser`. The `GatherCommandParser` checks for the prefix `fp/` or `t/` in the user's input and creates either a `GatherEmailByFinancialPlan` or `GatherEmailByTag` object accordingly.
+Both `GatherEmailByFinancialPlan` or `GatherEmailByTag` implements the `GatherEmailPrompt` interface. This interface helps with future scalability of this feature to gather emails by more fields. 
 
-**Scenario 2:**
-User enters a gather `t/Elderly`. The `GatherEmailByTag` will be initialized. Each person in the `UniquePersonList`
-will be passed into the `GatherEmailByTag#gatherEmails(Person person)`.
+The `GatherCommand` takes in the `GatherEmailPrompt` object and passes it into the current `Model` model, subsequently
+interacting with the `AddressBook` and `UniquePersonsList` classes. The `GatherCommand#execute()` executes the gathering operation by calling
+`Model#gatherEmails(GatherEmailPrompt prompt)`.
 
-The following sequence diagram shows how the gather operation works:
+The following sequence diagram shows how the gather operation works as described above:
 
-![GatherSequenceDiagram](images/GatherSequenceDiagram.png)
+![GatherSequenceDiagram1](images/GatherSequenceDiagram1.png)
+
+The `Model` interface is implemented by the `ModelManager`, representing the in-memory model of the address book data.
+The `ModelManager#gatherEmails(GatherEmailPrompt prompt)` calls `AddressBook#gatherEmails(GatherEmailPrompt prompt)`. 
+This operation is exposed in the `AddressBook` class as `AddressBook#gatherEmails(GatherEmailsPrompt prompt)`, and
+in the `UniquePersonsList` class as `UniquePersonsList#gatherEmails(GatherEmailsPrompt prompt)`.
+
+The `UniquePersonsList` class maintains a list of unique persons and `UniquePersonsList#gatherEmails(GatherEmailPrompt prompt)` iterates through the persons list
+and calls `GatherEmailPrompt#gatherEmails(Person person)`, passing in each person. Depending on the type of `GatherEmailPrompt`, it triggers either: 
+
+* `Person#gatherEmailsContainsTag(String prompt)` —  This method calls the `Tag#containsSubstring(String substring)` to checks if the given prompt is a substring of any Tag names in the `Set<Tag>` of the current person.
+* `Person#gatherEmailsContainsFinancialPlan(String prompt)` —  This method calls the `FinancialPlan#containsSubstring(String substring)` to checks if the given prompt is a substring of any Financial Plan names in the `Set<FinancialPlan>` of the current person.
+
+To allow gather email feature to be case-insensitive, the prompt and financial plan/tag names converted to lowercase when compared.
+The following sequence diagram shows how the gathering of emails by financial plan operation works:
+
+![GatherSequenceDiagram2](images/GatherSequenceDiagram2.png)
+
+Currently, we only allow gathering emails by `FinancialPlan` and `Tag` as these are the more likely to be searched to gather emails by. However, we can add more classes implementing the `GatherEmailPromt`
+to facilitate the gathering of emails by more fields.
 
 #### Design Considerations
 
@@ -328,19 +306,19 @@ The following sequence diagram shows how the gather operation works:
 
 **Alternative 1 (Current Choice):** User can only search by one Financial Plan or Tag.
 - **Pros:** Easy to implement. Limits the potential for bugs.
-- **Cons:** Limited filtering options. Hard to scale to gather by other fields.
+- **Cons:** Limited filtering options.
 
 **Alternative 2:** User can search by multiple Financial Plans or Tags.
 - **Pros:** More filtering options. Easy to scale to gather by other fields.
 - **Cons:** Introduces more complexity and requires additional error handling.
 
-_{more aspects and alternatives to be added}_
 
 ### Expanded Find feature
 
 The enhanced find mechanism is facilitated by the `CombinedPredicate` and utilises the existing `FindCommand` structure.
 It extends the `find` command with the ability to search for multiple terms at once, implemented using an array
 of `PersonContainsKeywordsPredicate`. Here's a partial class diagram of the `CombinedPredicate`.
+
 ![CombinedPredicateClassDiagram](images/CombinedPredicateClassDiagram.png)
 
 In the `FindCommandParser`, `CombinedPredicate` is initialised with a `NameContainsKeywordsPredicate`,
@@ -467,114 +445,6 @@ The `setAppointmentList()` method checks against `filteredPersons` to look for u
     * Cons: `filteredPersons` and `sortedAppointments` might not correspond since `sortedAppointments` is no longer
     dependent on `filteredPersons`.
 
-### \[Proposed\] Undo/redo feature
-
-### \[Proposed\] Undo/redo feature
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo
-history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the
-following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and
-`Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the
-initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls
-`Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be
-saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls
-`Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it
-will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the
-`undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once
-to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index
-0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo`
-command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user
-rather than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end
-at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer`
-once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index
-`addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook
-states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will
-return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as
-`list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`.
-Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not
-pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be
-purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern
-desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="400" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -609,49 +479,23 @@ modifying of clients’ data.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                                                   | I want to …​                                                                                                          | So that I can…​                                                                                                                      |
-|----------|---------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-|`* * *`| financial advisor who often works with numerous clients | have a central repository for my clients’ contacts details | effectively manage the intricate details of each of my clients. |
-| `* * *`  | financial advisor | add clients' contacts to the contact book | accumulate contacts for future purposes. |
-| `* * *`  | financial advisor | remove clients contacts from the contact book | keep my contact book compact and relevant. |
-| `* * *`  | financial advisor | edit clients’ contacts in the contact book | keep my information updated. |
-| `* *`  | financial advisor | record appointments with my clients | keep track of when my next meeting with the client is. |
-| `* *`  | financial advisor | tag my clients by the plans they purchase | gather groups of clients based on the financial plan(s) they purchased. |
-| `* *`  | financial advisor | search for clients with specific financial plans | update those people about their plans more efficiently. |
-| `* *`  | financial advisor | sort my clients in certain orders including alphabetical order or appointment time in both ascending and descending order | view my clients in a more systematic manner. |
-| `* *`  | financial advisor | view my upcoming appointments I have with clients in chronological order | better plan my time. |
-| `* *`  | financial advisor | complete appointments | clean up the address book of completed appointments. |
-| `* *`  | financial advisor | gather emails of clients by their tags such as age group | collate and notify people with the same tags on any updates. |
-| `* *`  | financial advisor | search for clients with the same financial plan | efficiently provide targeted updates to individuals with the same plan. |
-| `*`      | busy financial advisor                                                    | streamline administrative tasks like tracking my clients contacts                                                     | focus most of my time on giving personalised financial advice and services to my clients.                                            |
-| `*`      | financial advisor managing a substantial client portfolio                 | follow a standardised format to collect my clients’ information                                                       | manage data consistency among my clients.                                                                                            |
-| `*`      | financial advisor                                                         | search for specific client details                                                                                    | quickly contact my clients.                                                                                                          |
-| `*`      | user who values both my clients' time and the quality of our interactions | set reminders for follow-up sessions with clients                                                                     | ensure I never miss an important meeting.                                                                                            |
-| `*`      | financial advisor                                                         | efficiently track referral sources for my clients                                                                     | manage their relationships.                                                                                                          |
-| `*`      | financial advisor                                                         | sort my clients in certain orders including alphabetical order portfolio value in both ascending and descending order | view my clients in a more systematic manner.                                                                                         |
-| `*`      | financial advisor                                                         | filter my clients based on certain metrics like financial products purchased and minimum portfolio value              | choose clients.                                                                                                                      |
-| `*`      | financial advisor                                                         | record appointments with clients with the application                                                                 | keep track of when my last meeting with each client is.                                                                              |
-| `*`      | financial advisor                                                         | export my contact data and client data in a readable format                                                           | use it for backup purposes or to run data processing with other software tools.                                                      |
-| `*`      | financial advisor                                                         | have a dashboard 	                                                                                                    | obtain insights into my clientele base including metrics like client acquisition, retention rates and revenue I generate each month. |
-| `*`      | financial advisor	                                                        | categorise contacts based on their financial status (high net worth regular) 	                                        | prioritise my client interactions.                                                                                                   |
-| `*`      | financial advisor                                                         | update my profile information (name, contact, details, company)                                                       | ensure my personal information is always accurate.                                                                                   |
-| `*`      | an experienced user                                                       | edit the data file directly  	                                                                                        | be more efficient.                                                                                                                   |
-| `*`      | user                                                                      | undo actions                                                                                                          | recover from my mistakes.                                                                                                            |
-| `*`      | busy financial advisor                                                    | quickly add incomplete details of a client and be reminded about it                                                   | fill the rest in later.                                                                                                              |
-| `*`      | financial advisor                                                         | check the appointments scheduled today                                                                                | 	 not forget to meet a client                                                                                                        |
-| `*`      | financial advisor                                                         | view contacts of all my clients I am meeting for the day                                                              | 	efficiently search for their contacts.                                                                                              |
-| `*`      | financial advisor                                                         | view all the insurance plans my client has purchased easily                                                           | make planning during an appointment easier.                                                                                          |
-| `*`      | financial advisor                                                         | filter the plans of my client                                                                                         | to make it focus on certain plans during my appointment                                                                              |
-| `*`      | financial advisor                                                         | make updates to their plans on the app easily	                                                                        | keep track of changes to the clients plans                                                                                           |
-| `*`      | financial advisor                                                         | check which client has been under me the longest                                                                      | 	plan welfare to retain them as long term customers.                                                                                 |
-| `*`      | financial advisor                                                         | add notes on clients                                                                                                  | 	excess them when needed                                                                                                             |
-| `*`      | financial advisor                                                         | display data from the address book into a excel file                                                                  | 	more easily present to clients                                                                                                      |
-| `*`      | financial advisor                                                         | add tags to customers                                                                                                 | 	collate and notify people with the same plan should there be a new change                                                           |
-| `*`      | manager                                                                   | retrieve data on the types of plans purchased                                                                         | 	better understand the products my team member is selling                                                                            |
-| `*`      | manager                                                                   | monitor expiring insurance plans                                                                                      | 	advice trainees on time management                                                                                                  |
-| `*`      | financial advisor	                                                        | import a file                                                                                                         | 	easily transfer client information when client leaves                                                                               |
-
-*{More to be added}*
+| Priority | As a …​                                                                   | I want to …​                                                                                                              | So that I can…​                                                                                                                      |
+|----------|---------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | financial advisor who often works with numerous clients                   | have a central repository for my clients’ contacts details                                                                | effectively manage the intricate details of each of my clients.                                                                      |
+| `* * *`  | financial advisor                                                         | add clients' contacts to the contact book                                                                                 | accumulate contacts for future purposes.                                                                                             |
+| `* * *`  | financial advisor                                                         | remove clients contacts from the contact book                                                                             | keep my contact book compact and relevant.                                                                                           |
+| `* * *`  | financial advisor                                                         | edit clients’ contacts in the contact book                                                                                | keep my information updated.                                                                                                         |
+| `* *`    | financial advisor                                                         | record appointments with my clients                                                                                       | keep track of when my next meeting with the client is.                                                                               |
+| `* *`    | financial advisor                                                         | tag my clients by the plans they purchase                                                                                 | gather groups of clients based on the financial plan(s) they purchased.                                                              |
+| `* *`    | financial advisor                                                         | search for clients with specific financial plans                                                                          | update those people about their plans more efficiently.                                                                              |
+| `* *`    | financial advisor                                                         | sort my clients in certain orders including alphabetical order or appointment time in both ascending and descending order | view my clients in a more systematic manner.                                                                                         |
+| `* *`    | financial advisor                                                         | view my upcoming appointments I have with clients in chronological order                                                  | better plan my time.                                                                                                                 |
+| `* *`    | financial advisor                                                         | complete appointments                                                                                                     | clean up the address book of completed appointments.                                                                                 |
+| `* *`    | financial advisor                                                         | gather emails of clients by their tags such as age group                                                                  | collate and notify people with the same tags on any updates.                                                                         |
+| `* *`    | financial advisor                                                         | search for clients with the same financial plan                                                                           | efficiently provide targeted updates to individuals with the same plan.                                                              |
+| `*`      | busy financial advisor                                                    | streamline administrative tasks like tracking my clients contacts                                                         | focus most of my time on giving personalised financial advice and services to my clients.                                            |
+| `*`      | financial advisor managing a substantial client portfolio                 | follow a standardised format to collect my clients’ information                                                           | manage data consistency among my clients.                                                                                            |
+| `*`      | financial advisor                                                         | search for specific client details                                                                                        | quickly contact my clients.                                                                                                          |
 
 ### Use cases
 
@@ -879,16 +723,12 @@ validity checker for both fields.
 at once. To allow the gathering of all the persons emails using `gather all` command, we plan create another
 `GatherEmailPrompt` class, with a method that will call the Person `getEmail()` method. To allow gathering emails by multiple fields, for example using the `fp/` and `t/` prefixes at once, we plan to use a similar approach
 to `find` but return the person's email instead.
-6. The `complete`, `add`, `edit` and `schedule` commands currently display the whole list (i.e. undoes the result of
-any `find` command) after being executed, which might cause users to become disoriented. We plan to disable this
-interaction between these commands and `find`.
-7. The `clear` command confirmation window can be manipulated using the arrow and 'Enter' keys. The window is
+6. The `clear` command confirmation window can be manipulated using the arrow and 'Enter' keys. The window is
 initialised with the focus on the `confirm` button. This makes it possible for a user to accidentally press 'Enter'
 twice and wipe the contact book anyway, bypassing the defence mechanism entirely. We plan to make the command more
 resistant to mistakes by having the user key in a specific phrase, or to initialise the window with the focus on the
 `cancel` button instead.
 
-*{More to be added}*
 
 ### Glossary
 
@@ -911,8 +751,7 @@ resistant to mistakes by having the user key in a specific phrase, or to initial
 Given below are instructions to test the app manually.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting
-point for testers to work on;
-testers are expected to do more *exploratory* testing.
+point for testers to work on; testers are expected to do more *exploratory* testing.
 
 </div>
 
@@ -931,11 +770,34 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
+### Adding a person
+
+1. Adding a person.
+
+   1. Prerequisites: List all persons using the `list` command.
+
+   2. Test case: `add n/name p/987 a/address e/email@email nk/nokname nkp/654`<br>
+      Expected: New contact with the above details is added to the bottom of the list.
+
+   3. Test case: `add n/invalidName! p/987 a/address e/email@email nk/nokname nkp/654`<br>
+      Expected: No person is added. Error details shown in the status message. Status bar remains the same.
+
+### Editing a person
+
+1. Editing an existing person.
+
+   1. Prerequisites: List all persons using the `list` command. At least 1 person in the list.
+
+   2. Test case: `edit 1 n/New Name`<br>
+      Expected: The first contact in the list has their name changed to `New Name`.
+
+   3. Test case: `edit 1 n/Invalid Name!`<br>
+      Expected: The name of the first contact is unchanged. Error details shown in the status message.
+      Status bar remains the same.
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a person while all persons are being shown.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
@@ -946,11 +808,107 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
+2. Deleting a person while not all persons are being shown
 
+   1. Prerequisites: List all persons using the `list` command, then filter the list using the `find` command. At least
+      1 person in the remaining list and at least 1 person filtered out.
+   2. Test case: `delete 1`<br>
+      Expected: Same as with the full list.
+   3. Test case: Delete a number that is equal to the number of people in the full contact book. <br>
+      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+
+### Finding a person
+
+1. Finding a person by name.
+
+   1. Prerequisites: List all persons using the `list` command. At least 1 person in the contact book with the name
+      `Test Name`.
+
+   2. Test case: `find n/Name`<br>
+      Expected: The person with the name `Test Name` appears in the filtered contact book.
+
+   3. Test case: `find n/Invalid Name!`<br>
+      Expected: List remains unchanged. Error details shown in the status message. Status bar remains the same.
+
+2. Finding a person by tag or financial plan can be tested in a similar manner as above.
+
+### Gathering emails
+
+1. Gathering emails by tag.
+
+   1. Prerequisites: At least 1 person in the contact book with the tag `TestTag`.
+
+   2. Test case: `gather t/Tag`<br>
+      Expected: The email of the person with the tag `TestTag` appears in the status message.
+
+   3. Test case: `gather t/WrongTag!`<br>
+      Expected: Error details shown in the status message. Status bar remains the same.
+
+2. Gathering emails by financial plan can be tested in a similar manner as above.
+
+### Sorting the contact book
+
+1. Sorting by names.
+
+   1. Prerequisites: List all persons using the `list` command. At least 2 people in the contact book.
+
+   2. Test case: `sort name`<br>
+      Expected: The contact book is sorted by names in alphabetical order.
+
+   3. Test case: `sort names`<br>
+      Expected: List remains unchanged. Error details shown in the status message. Status bar remains the same.
+
+2. Sorting by appointments can be tested in a similar manner as above.
+
+### Scheduling an appointment
+
+1. Scheduling an appointment.
+
+   1. Prerequisites: List all persons using the `list` command. At least 1 person in the contact book.
+
+   2. Test case: `schedule 1 ap/Appointment Name d/11-11-2025 09:00`<br>
+      Expected: The first person in the list is updated to contain the appointment details. The appointment sidebar is
+      updated as well.
+
+   3. Test case: `schedule 1 ap/Appointment Name d/11-30-2025 09:00`<br>
+      Expected: Error details shown in the status message. List, status bar and appointment sidebar remains the same.
+    
+   4. Test case: `schedule 1 ap/Appointment Name d/12-11-2025 09:00` on a person who already has an appointment<br>
+      Expected: A prompt will appear that causes program functionality to temporarily stop. The prompt alerts the user
+      that the client already has an appointment arranged and the appointment will be overriden if the user wishes to 
+      proceed. After proceeding, the old appointment is overridden and the app continues its notmal functionality.
+
+### Completing an appointment
+
+1. Completing by index.
+
+   1. Prerequisites: List all persons using the `list` command. At least 1 person in the contact book with a scheduled
+      appointment.
+
+   2. Test case: `complete 1`<br>
+      Expected: Appointment details removed from the first person in the list. The appointment sidebar is updated as well.
+
+   3. Test case: `complete 0`<br>
+      Expected: Error details shown in the status message. List, status bar and appointment sidebar remains the same.
+
+2. Completing by appointment date.
+
+   1. Prerequisites: List all persons using the `list` command. Exactly 2 people in the contact book with a scheduled
+      appointment on `11-11-2025`.
+
+   2. Test case: `complete d/11-11-2025`<br>
+      Expected: Appointment details removed from the 2 people in the list. The appointment sidebar is updated as well.
+
+### Clearing data
+
+1. User wishes to clear the addressbook.
+      1. Test case: `clear`<br>
+      Expected: A prompt will appear that causes program functionality to temporarily stop. The prompt alerts the user
+      that he intends to clear the address book and asks for confirmation of the clear. After proceeding, the entire address book will be cleared.
+    
 ### Saving data
 
 1. Dealing with missing data files

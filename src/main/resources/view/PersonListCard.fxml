@@ -26,16 +26,15 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" styleClass="cell_big_label" text="\$first" wrapText="true" maxWidth="500"/>
+        <Label fx:id="name" styleClass="cell_big_label" text="\$first" wrapText="true"/>
       </HBox>
-      <FlowPane fx:id="financialPlans" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" wrapText="true" maxWidth="500"/>
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" wrapText="true" maxWidth="500"/>
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" wrapText="true" maxWidth="500"/>
-      <Label fx:id="nextOfKinName" styleClass="cell_small_label" text="\$nextOfKinName" wrapText="true" maxWidth="500"/>
-      <Label fx:id="nextOfKinPhone" styleClass="cell_small_label" text="\$nextOfKinPhone" wrapText="true"
-             maxWidth="500"/>
-      <Label fx:id="appointment" styleClass="cell_small_label" text="\$appointment" wrapText="true" maxWidth="500"/>
+      <FlowPane fx:id="financialPlans"/>
+      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" wrapText="true"/>
+      <Label fx:id="address" styleClass="cell_small_label" text="\$address" wrapText="true"/>
+      <Label fx:id="email" styleClass="cell_small_label" text="\$email" wrapText="true"/>
+      <Label fx:id="nextOfKinName" styleClass="cell_small_label" text="\$nextOfKinName" wrapText="true"/>
+      <Label fx:id="nextOfKinPhone" styleClass="cell_small_label" text="\$nextOfKinPhone" wrapText="true"/>
+      <Label fx:id="appointment" styleClass="cell_small_label" text="\$appointment" wrapText="true"/>
       <FlowPane fx:id="tags" />
     </VBox>
       <rowConstraints>

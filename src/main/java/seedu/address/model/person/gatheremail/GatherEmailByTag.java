@@ -18,13 +18,13 @@ public class GatherEmailByTag implements GatherEmailPrompt {
     }
 
     /**
-     * Gathers the email of {@code person} if {@code person}'s tag names matches a specific prompt.
+     * Gathers the email of {@code person} if prompt is a substring of any {@code person}'s tag names
      */
-
     @Override
     public String gatherEmails(Person person) {
         return person.gatherEmailsContainsTag(promptTag);
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

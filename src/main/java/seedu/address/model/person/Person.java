@@ -106,7 +106,7 @@ public class Person {
     }
 
     /**
-     * Checks if the given {@code prompt} is a substring of {@code financialPlan} name in {@code financialPlans}
+     * Checks if the given {@code prompt} is a substring of {@code financialPlan} names in {@code financialPlans}
      * and returns the email if true.
      */
     public String gatherEmailsContainsFinancialPlan(String prompt) {
@@ -123,7 +123,7 @@ public class Person {
     }
 
     /**
-     * Checks if the given {@code prompt} is a substring of {@code tag} name in {@code Tags}
+     * Checks if the given {@code prompt} is a substring of {@code tag} names in {@code Tags}
      * and returns the email if true.
      */
     public String gatherEmailsContainsTag(String prompt) {
@@ -154,6 +154,9 @@ public class Person {
                 tags, NullAppointment.getNullAppointment());
     }
 
+    /**
+     * Checks if {@code Person} appoint is a NullAppointment object.
+     */
     public boolean hasNullAppointment() {
         return appointment.equals(NullAppointment.getNullAppointment());
     }
