@@ -28,7 +28,7 @@ Below is a summary of my contributions to the project.
     * User will be able to find an applicant or member based on any specific keyword(s).
     * The UI will show a list of all applicant(s)/member(s) that have the specified keyword.
     * Wrote tests and fixed bugs for all things related to Delete Applicant.
-    
+  
 * Contributions to the UG:
   * Reformatted the entire UG.
   * Added an application interface section.
@@ -36,18 +36,26 @@ Below is a summary of my contributions to the project.
   * Gave team members a format to follow.
   * Wrote the section for `findApplicant`, `findMember`, `deleteApplicant`, `exit`, `help`, `clear`.
   * Wrote the introduction section.
-  * Wrote the command summary section.
+  * Wrote the command summary section.  
+  * Regularly checked UG for formatting errors, and updated when necessary.
+  
 * Contributions to the DG:
   * Wrote sections for delete member/applicant.
   * Wrote sections for find member/applicant.
   * Drew Activity Diagrams and Sequence Diagrams for both sections.
-  * Wrote use cases (MSS and extensions) for delete and find commands.
+  * Wrote use cases (MSS and extensions) for delete and find commands.  
+  * Wrote manual user testing sections for delete and find commands.
+  * Provided ideas for planned enhancements section.
+  
 * Contributions to team-based tasks:
   * Regularly created new issues and assigned them to respective members.
   * Maintained issue tracker by closing finished issues.
-  * Sorting bugs received from PE-D by labelling and distributing.
+  * Sorting bugs received from PE-D by labelling and distributing.  
+  * Sent reminders to complete assigned tasks on time.
+
 * Review/mentoring contributions:
   * Reviewed members PRs and gave comments about their code when needed.
+  * Helped with bug fixing for `editApplicant` and `editMember`.
   * Here are the PRs that I have reviewed :
     * [Pull Request #58](https://github.com/AY2324S1-CS2103T-W15-3/tp/pull/58)
     * [Pull Request #90](https://github.com/AY2324S1-CS2103T-W15-3/tp/pull/90)
@@ -59,7 +67,9 @@ Below is a summary of my contributions to the project.
     * [Pull Request #146](https://github.com/AY2324S1-CS2103T-W15-3/tp/pull/146)
     * [Pull Request #148](https://github.com/AY2324S1-CS2103T-W15-3/tp/pull/148)
     * [Pull Request #157](https://github.com/AY2324S1-CS2103T-W15-3/tp/pull/157)
-    * and more.
+    * [Pull Request #287](https://github.com/AY2324S1-CS2103T-W15-3/tp/pull/287)
+    * and more.  
+    
 * Contributions beyond the project team:
   * Gave reminders for team members in regards to some deadlines. (i.e PE-D)
 
