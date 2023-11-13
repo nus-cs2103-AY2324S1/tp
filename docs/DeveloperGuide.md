@@ -603,22 +603,181 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
           Expected: The most recent window size and location is retained.
 
-### 7.2 Deleting a student
+### 6.2 Student Features
+#### 6.2.1 Add Student
+Adds a student with their relevant details.
 
-1. Deleting a student while all students are being shown
+Format: `add n/STUDENT_NAME c/CONTACT_NUMBER a/HOME_ADDRESS [r/RISK_LEVEL]`
 
-   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+1. Use the find feature (9.2.#) to ensure student with that name does not exist.
+2. Test Case 1: `add n/Ethan Tan c/98765432 a/252 ANG MO KIO AVENUE 4 01-225`
+    1. Expectation: Confirmation message that includes student information.
+3. Test Case 2: `add n/Rachel Teo c/87654321 a/Block 30 Kallang Place #01-23/24 r/HIGH`
+    1. Expectation: Same as above
+4. Test Case 3: `add n/Ethan Tan c/98765432 a/252 ANG MO KIO AVENUE 4 01-225` again
+    1. Expectation: Warning `This student already exists in the address book`
+5. False commands:
+    1. Try missing fields: Get a message stating the format of the input
+    2. Incorrect Phone Number: Get a message stating that phone numbers must be 8 digits long
 
-   2. Test case: `delete 1`<br>
-         Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+#### 6.2.2 Delete Student
+Deletes a student and all related data
 
-   3. Test case: `delete 0`<br>
-         Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+Format: `delete STUDENT_INDEX`
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-         Expected: Similar to previous.
+1. List all students using the view command.
+2. Test Case 1: `delete 1` 
+   1. Expectation: Confirmation message is shown, Appointments and Notes are deleted as well
+3. Test Case 2: `delete 0`
+   1. Expectation: Invalid command format message (Index must be positive)
+4. Try other invalid commands like `delete a` or using an index greater than the number of students that exists. Displays Error message
 
-    { more test cases …​ }_
+#### 6.2.3 Adding/Deleting notes for a Student
+This command either adds a note to an existing student (overwriting any existing note) or deletes a note
+depending on the command format given, as further shown in examples below
+
+Format: `note STUDENT_INDEX note/NOTE`
+
+1. Test Case 1: `note 1 note/Exam stress in building`
+   1. Expectation: Confirmation message is shown. Message shown when double-clicking the student
+2. Test Case 2: `note 1 note/` or `note 1`
+   1. Expectation: All notes get deleted
+3. Other invalid tests would include invalid student index, handled similar to the case in `delete`
+
+Double-clicking on the Student card displays the Student notes under the Notes section!
+The “Notes” column will inform you if there are no student notes for a particular Student.
+
+#### 6.2.4 Finding Students by Name
+Find students and their related appointments based on their name. Can choose to find student based on their first name, last name or full name.
+
+Format: `find STUDENT_NAME`
+
+1. Student name must match exactly to the first name, last name or full name
+2. Use existing student information or add students before conducting the following tests.
+3. Test Case 1: `find David`
+   1. Expectation: All students with the name David is shown
+4. Test Case 2: `find Li`
+   1. Expectation: All students with 'Li' as first name or last name is shown
+5. Test Case 3: `find David Li`
+   1. Expectation: The student 'David Li' is shown
+6. Test Case 4: `find Abigail`
+   1. Expectation: Message stating `No student found`
+7. Other invalid commands should show respective error messages.
+
+#### 6.2.5 Assigning risk level to Student
+This command either adds a tag to an existing student (overwriting any existing tag), or deletes a tag
+depending on the command format given, as further shown in examples below
+
+Format: `tag STUDENT_INDEX r/RISK_LEVEL`
+
+1. Student must be found in the list
+2. Risk level can only be `low`/`medium`/`high`
+3. Test Case 1: `tag 2 r/HIGH`
+   1. Expectation: Show student information with stated risk level
+4. Test Case 2: `tag 2 r/moderate`
+   1. Expectation: Message stating `Risk level should be one of the following three: high/medium/low`
+5. Other invalid test cases would include invalid student index (Handled similar to above cases) and invalid tags (like Test Case 2)
+
+#### 6.2.6 Editing Student details
+Edit a student's contact number or address.
+
+Format `edit STUDENT_INDEX [c/CONTACT_NUMBER] [a/HOME_ADDRESS]`
+
+1. This feature cannot be used to edit student risk level. Use `tag` instead
+2. At least 1 feature should be included
+3. Test Case 1: `edit 3 c/97865423`
+   1. Expectation: Confirmation message shown with the updated contact
+4. Test Case 2: `edit 3 a/10 Tampines Central 1 #11-14 Tampines 1`
+   1. Expectation: Same as above, with updated address
+5. Test Case 3: `edit 3 c/98762345 a/3791 Jalan Bukit Merah 09-27 E-Centre Redhill`
+   1. Expectation: Same as above, both fields updated
+6. Test Case 4: `edit 3`
+   1. Expectation: Error Message `At least one field to edit must be provided.` shown
+
+### 6.3 Appointment Commands
+
+#### 6.3.1 Scheduling an Appointment
+Schedules a new appointment for a student.
+
+Format: `schedule n/STUDENT_NAME date/DATE from/START_TIME to/END_TIME d/DESCRIPTION`
+
+1. Student must exist before an appointment is scheduled
+2. Student name must be in full and match exactly
+3. Must have a valid date and time
+4. Test Case 1: `schedule n/Ethan Tan date/2023-12-30 from/16:30 to/17:30 d/monthly check-up`
+    1. Expectation: Confirmation message for appointment is shown, appointment added to the column according to date and time.
+5. Test Case 2: `schedule n/Ethan date/2023-12-28 from/16:30 to/17:30 d/monthly check-up`
+    1. Expectation: `No such student exists for this appointment` Message
+6. Test Case 3: `schedule n/Ethan Tan date/2023-12-30 from/16:30 to/17:30 d/monthly check-up` again
+    1. Expectation: `This appointment already exists` Message
+7. Test Case 4: `schedule n/David Li date/2023-12-30 from/16:30 to/17:30 d/monthly check-up`
+    1. Expectation: `This appointment overlaps with an existing appointment` Message
+8. Test Case 5: `schedule n/David Li date/2025-12-30 from/16:30 to/17:30 d/monthly check-up`
+    1. Expectation: `Appointment can only be scheduled within a year` Message
+9. Other invalid test cases includes other forms of invalid date, students that do not exist or clashes. All should show respective error messages.
+
+#### 6.3.2 Cancelling an Appointment
+Cancels an existing appointment.
+
+Format: `cancel APPOINTMENT_INDEX`
+
+1. Appointment must exist
+2. Test Case 1: `cancel 1`
+    1. Expectation: Confirmation message is shown
+3. Test Case 2: `cancel 0`
+    1. Expectation: Invalid command format message (Index must be positive)
+4. Try other invalid commands like `cancel a` or using an index greater than the number of appointments that exists. Displays Error message accordingly.
+
+#### 6.3.3 Filtering Appointments by Date: `filter`
+
+Filters appointments based on given date.
+
+Format: `filter DATE`
+
+1. Date must be in the yyyy-MM-dd format
+2. Test Case 1: `filter 2023-12-14`
+   1. Expectation: Shows appointments on that day
+3. Test Case 2: `filter 2023-11-24`
+   1. Expectation: `0 appointments listed`
+4. All invalid date format: Message shows required date format
+
+### 6.4 Others
+
+#### 6.4.1 Viewing all Students and/or Appointments
+
+Shows a list of all available Students and/or Appointments, depending on specified input.
+
+Format: `view g/CATEGORY`
+
+1. Category must be `students`, `appointments` or `all`
+2. Test Case 1: `view g/all`
+    1. Expectation: Shows all students and appointments
+3. Test Case 2: `view g/appointments`
+    1. Expectation: Shows all appointments in the list
+4. Test Case 3: `view g/students`
+    1. Expectation: Shows all students in the list
+5. Any other command is considered invalid
+    1. Expectation: Error message to direct user to one of the above
+
+#### 6.4.2 Exiting the program: `exit`
+
+Exits the program.
+
+Format: `exit`
+
+#### 6.4.3 Clearing storage: `clear`
+
+Resets the storage, deleting **all** Appointments and Students.
+
+Format: `clear`
+
+### 7. Saving data
+
+1. Dealing with missing/corrupted data files
+
+   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+
+2. _{ more test cases …​ }_
 
 ## 8. Appendix: Effort
 
@@ -658,3 +817,4 @@ and also whether the `Student` provided in the `Appointment` exists in the given
 tedious and proved to be a challenge. Removing redundant fields like `Email` and `Tags` and adding fields like `RiskLevel`
 and `Note` meant that a large portion of the AB3 had to be refactored, since the majority of the code in AB3 involved
 the `Person` entity, including tests, sample data and UI.
+
