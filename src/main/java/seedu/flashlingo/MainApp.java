@@ -32,6 +32,7 @@ import seedu.flashlingo.storage.UserPrefsStorage;
 import seedu.flashlingo.ui.Ui;
 import seedu.flashlingo.ui.UiManager;
 
+//@@author
 /**
  * Runs the application.
  */
