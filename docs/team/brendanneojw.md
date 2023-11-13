@@ -40,16 +40,10 @@ Given below are my contributions to the project.
 * **Enhancements to existing features**:
   * Updated the implementation of `find` feature where it previously only find clients by their names
     * `find` now requires the prefix to be given to find for different fields
-      * `n/` for Name field
-      * `i/` for NRIC field
-      * `p/` for Contact Number field
-      * `l/` for Licence Plate field
-      * `e/` for Email field
-      * `t/` for Tag field
-      * `c/` for Company field
-      * `pn/` for Policy Number field
-      * `pi/` for Policy Issue Date field
-      * `pe/` for Policy Expiry Date field
+      * Basic details: `n/` for Name field, `i/` for NRIC field, `p/` for Contact Number field, `l/` for Licence 
+      Plate field, `e/` for Email field and `t/` for Tag field
+      * Policy details: `c/` for Company field, `pn/` for Policy Number field, `pi/` for Policy Issue Date field,
+      `pe/` for Policy Expiry Date field
     * Added 9 more predicates, total of 10 predicates to support this feature
   * Updated `find` command such that the values given for each prefix is treated as 1 value rather than separate values
     * For example, `find n/Hans Bo` no longer returns clients with names `Hans` or `Bo`, but only clients with names 
