@@ -34,7 +34,7 @@ Our guide is catered to CampusConnect users of all experiences! Here's a quick o
 
 Our guide uses **visual components** to highlight key information for your convenience. Here's a quick overview of what each component means:
 
-<div style="display: grid; grid-template-columns: 25% 75%; grid-template-rows: repeat(5, auto);">
+<div class="visual-components" style="display: grid; grid-template-columns: 25% 75%; grid-template-rows: repeat(5, auto);">
     <div style="font-size: 1.5em; display: flex; align-items: center;">
        <ol start="1">
         <li>Examples</li>
@@ -90,26 +90,12 @@ This **darker blue box** with the **lightbulb icon** provides you **extra useful
     </div>
 </div>
 
-
-
-
-<br>
-
-
-
-<br>
-
-
-
-<br>
-
-
-
 ---
 
 # Table of Contents
 1. [Quick Start](#quick-start)
-2. [Features](#features)
+2. [Interface Overview](#interface-overview)
+3. [Features](#features)
    - [Contact Management](#contact-management)
      - [Properties of contact](#properties-of-contact)
      - [Add contact: `add`](#add-contact-add)
@@ -131,8 +117,7 @@ This **darker blue box** with the **lightbulb icon** provides you **extra useful
    - [Contact Search](#contact-search)
      - [Basic Filtering](#basic-filtering)
      - [Advanced Filtering](#advanced-filtering)
-3. [FAQ](#faq)
-4. [Planned Enhancements / Known Issues](#planned-enhancements--known-issues)
+4. [FAQ](#faq)
 5. [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -167,9 +152,28 @@ This **darker blue box** with the **lightbulb icon** provides you **extra useful
 
 --------------------------------------------------------------------------------------------------------------------
 
+# Interface Overview
+
+CampusConnect's **Graphical User Interface (GUI)** allows users to access contacts through an intuitive display with seamless interaction.
+Here is an overview of the main elements of the interface you should be familiar with to make the most out of CampusConnect.
+
+![GUI Overview](images/GUI.png)
+
+* **(a) Command input box**
+  * The *Command input box* is where you enter *commands*.
+  * Type a command according to the formats described in [features](#features) and press `Enter` to execute the command.
+* **(b) Command output log**
+  * The *Command output log* will display helpful information when commands execute successfully, or display *errors* when commands are unsuccessful.
+* **(c) Contact directory**
+  * The *Contact directory* visually lists contacts in CampusConnect.
+  * Make use of the scroll bar on the right, or your mouse scroll, to navigate the list of contacts.
+  * Use commands such as [`list`](#list-all-contacts-list) and [`find`](#contact-search) to dynamically adjust the actively displayed contacts in the *contact directory*.
+
+--------------------------------------------------------------------------------------------------------------------
+
 # Features
 
-<box type="info" seamless>
+<box style="margin-top: 0.5rem;" type="info" seamless>
 
 **Notes about the command format:**<br>
 
@@ -382,8 +386,6 @@ The notes feature allows you to add and remove notes for a person, and provides 
 
 The parameters for these commands are `PERSON_INDEX`, `NOTE_INDEX` and `NOTE_CONTENT`. These parameters are explained in detail in the section below.
 
-<br>
-
 <panel header=":fa-solid-book: **Notes Command Parameters**" type="secondary" expanded no-close>
 
 The fields you enter should follow the following format:
@@ -392,7 +394,6 @@ The fields you enter should follow the following format:
 - `NOTE_CONTENT`: The content of the note you want to add. It has to be non-empty, and can contain any printable [ASCII character](http://facweb.cs.depaul.edu/sjost/it212/documents/ascii-pr.htm).
 </panel>
 
-<br>
 <box type="warning">
 Always make sure the indices provided are valid and within the bounds of the list. Invalid indices will result in an error.
 </box>
@@ -624,8 +625,6 @@ Across both basic and advanced filtering, the following fields are supported:<br
 
 </panel>
 
-<br>
-
 <box type="info">
 
 Note that in all cases, the search is case-insensitive for alphabetic characters. For example, `n/Joe` will match contacts who have the name `Joe`, `joE`, `Ajoeia`, `BobJOe Lee`, etc., and `t/friend` will match `friend`, `FriENd`, `FRIEND`, etc.
@@ -705,13 +704,9 @@ The following logical operators are supported, and are listed in order of preced
 
 </panel>
 
-<br>
-
 Note that the smallest possible **find expressions** is simply a **find condition**.
 
 **Find expressions** can be nested arbitrarily deeply, and that parentheses can be used to group  **find expressions** together to specify the order of evaluation.
-
-<br>
 
 <box theme="info" icon=":fa-solid-magnifying-glass:">
 
@@ -747,23 +742,6 @@ Note that the last example is **not equivalent** to `n/do && t/friend || t/colle
 
 --------------------------------------------------------------------------------------------------------------------
 
-# Planned Enhancements / Known Issues
-
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **When executing `add`/`edit` command**, if you try to add/edit a new/existing contact with the same [properties](#properties-of-contact) of another saved contact **(Note: 2 names are considered the same if both of them have the same casing and whitespaces)** in your contact list, CampusConnect allows you to do so. We plan to enhance the `add`/`edit` command such that it **takes into account what makes a contact unique in your contact list.**
-3. **When executing `addalt` command**, if you input other prefixes that are not accepted by the command format, the error message shown does not prompt you to remove those prefixes and adhere strictly to the command format. We will be working on this in the future to **improve the specificity of error messages.**
-4. **When executing commands with `PERSON_INDEX`**, if you did not input an appropriate index, the error message shown is generic; CampusConnect informs you the format of the command you should adhere to instead of prompting you to input a positive index. We will be working on this in the future to **improve the specificity of error messages.**
-5. **When executing `updatephoto` command**, if the `PERSON_INDEX` contains characters besides `0-9`, CampusConnect will be unresponsive as we assume that you will input a valid integer for `PERSON_INDEX`. Moreover, successful execution of the same `updatephoto` command with the same image will still result in `Photo updated` even though the photo is not updated. In addition, you can input multiple valid paths and the command will update your contact profile with the last image. We will be working on **handling more errors and improving the specificity of messages in the future.**
-6. **When executing all commands**, CampusConnect only accepts printable ASCII characters. Additionally, certain commands may only accept alphanumeric input (such as name field in `add` not accepting slashes). We plan to improve our internationalization support in the future, allowing for Unicode characters to be used throughout the app since users could have contacts with names including diacritics or non-alphabetic characters (e.g. Tamil, Arabic or Chinese names).
-7. **When executing the `find` command**, if you input a `FIND_EXPRESSION` that is not accepted by the command format, the error message shows fairly general error messages. We will be working on this in the future to **improve the specificity of error messages.**
-8. **When executing the `find` command**, it is impossible to search for keywords that include the double-quote character (`"`) under any circumstance. We will be working on this in the future to **support searching for the double-quote character**, which could appear in fields such as notes.
-9. **When executing the `find` command**, the behavior of the `bal` field is not intuitive, especially for users who do not read the User Guide in-depth. We will be working on this in the future to **improve the ergonomics of `bal` field**, by implementing `>` and `<` operators so users can search for balance amounts below or above the keywords.
-
-
-
-
---------------------------------------------------------------------------------------------------------------------
-
 # Command summary
 
 Action        | Format, Examples
@@ -794,5 +772,26 @@ Action        | Format, Examples
 #content-wrapper h3 {
   margin-top: 2.5rem;
 }
+
+#content-wrapper hr {
+  margin-top: 2.5rem;
+  margin-bottom: 5rem;
+}
+
+div.box-container {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+div.card-container {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+div.visual-components div.box-container {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 
 </style>
