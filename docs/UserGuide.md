@@ -630,7 +630,7 @@ It is <strong>not case-sensitive</strong>.</p>
   </div>
   <p style="font-size:13px; color: #000; margin: 8px 0;">
 <code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">FREE_TIME</code>
-  must not clash with the other inputted/existing time slots of the contact. E.g. If time slot <code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">Mon 1200 - Mon 1300</code> has been added, then<code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">Mon 1300 - Mon 1400</code> can not be added. 
+  must not clash with the other inputted/existing time slots of the contact. E.g. If time slot <code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">Mon 1200 - Mon 1300</code> has been added, then <code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">Mon 1300 - Mon 1400</code> can not be added. 
 </div>
 
 **Example(s):**
