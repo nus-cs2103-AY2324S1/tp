@@ -366,7 +366,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-### Non-functional Requirements
+### Non-functional requirements
 
 1. "Brownfield" - Changes to the codebase must be done in small increments.
 1. "Typing preferred" - The product must target users who can type fast and prefer CLI as their means of input.
