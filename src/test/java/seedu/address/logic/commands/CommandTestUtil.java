@@ -138,6 +138,9 @@ public class CommandTestUtil {
         Interview interview = model.getFilteredInterviewList().get(targetIndex.getZeroBased());
         final Applicant applicant = interview.getInterviewApplicant();
         assertTrue(new ApplicantContainsInterviewPredicate(model.getFilteredInterviewList()).test(applicant));
+
+        model.updateFilteredInterviewList(otherInterview -> otherInterview.isSameInterview(interview));
+        assertEquals(1, model.getFilteredInterviewList().size());
     }
 
 }

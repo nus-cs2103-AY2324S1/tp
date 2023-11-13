@@ -203,7 +203,7 @@ For each **interview**, we see the following details:
   e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list-i`, `list-a`, `list-i-done`, `list-i-not-done`,
-  `list-today`, `sort-rate`, `sort-time`, `exit`, and `clear`) will be ignored.<br>
+  `list-i-today`, `sort-rate`, `sort-time`, `exit`, and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * List of accepted date formats:
@@ -281,7 +281,6 @@ Format: `add-a n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...`
 | `EMAIL`   | The email address of the applicant            | Must be in the format: `local-part@domain`                    |
 | `ADDRESS` | The residential address of the applicant      | No constraints as long as it is not blank                     |
 | `TAG`     | Custom keyword for categorizing the applicant | Must be a single word containing only alphanumeric characters |
-
 
 Examples:
 * `add-a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Engineer t/Frontend`.
@@ -625,15 +624,15 @@ Format: `mark INTERVIEW_INDEX`
 |-------------------|------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
 | `INTERVIEW_INDEX` | The index of the target interview as shown in the interview list | Must be a positive unsigned integer and must not exceed the size of the current displayed interview list |
 
-Examples:
-* `mark 1` marks the first interview shown on the list as done.
-* `mark 3` marks the third interview shown on the list as done.
-* 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note about the command usage.**<br>
 * You can only mark interviews with a red border (i.e. interviews that are not done).
 * Marking an interview that is already done will result in an error message.
 </div>
+
+Examples:
+* `mark 1` marks the first interview shown on the list as done.
+* `mark 3` marks the third interview shown on the list as done.
 
 [Return to the Table of Contents](#table-of-contents)
 
@@ -641,7 +640,7 @@ Examples:
 
 Rate the specified `INTERVIEW_INDEX` in the **InterviewHub** with the indicated `RATING`.
 
-Format: `rate INTERIVEW_INDEX RATING`
+Format: `rate INTERVIEW_INDEX RATING`
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note about the command usage.**<br>
@@ -794,13 +793,13 @@ The correct version of Java required to run **InterviewHub** is **Java 11**. If 
 
 ## Applicant Management Commands
 
-| Action               | Format, Examples                                                                                                                                          |
-|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action               | Format, Examples                                                                                                                                                 |
+|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add applicant**    | `add-a n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]` <br> e.g., `add-a n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Delete applicant** | `delete-a APPLICANT_INDEX`<br> e.g., `delete-a 3`                                                                                                         |
-| **Edit applicant**   | `edit-a APPLICANT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`<br> e.g.,`edit-a 2 n/John Doe`                                               |
-| **Find applicant**   | `find-a [n/KEYWORD(S)] [p/NUMBER] [e/KEYWORD(S)] [a/KEYWORD(S)] [t/KEYWORD(S)]` <br> e.g., `find-a n/John Bob p/98765432 e/john@example.com`              |
-| **List applicants**  | `list-a`                                                                                                                                                  |
+| **Delete applicant** | `delete-a APPLICANT_INDEX`<br> e.g., `delete-a 3`                                                                                                                |
+| **Edit applicant**   | `edit-a APPLICANT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`<br> e.g.,`edit-a 2 n/John Doe`                                                      |
+| **Find applicant**   | `find-a [n/KEYWORD(S)] [p/NUMBER] [e/KEYWORD(S)] [a/KEYWORD(S)] [t/KEYWORD(S)]` <br> e.g., `find-a n/John Bob p/98765432 e/john@example.com`                     |
+| **List applicants**  | `list-a`                                                                                                                                                         |
 
 [Return to the Table of Contents](#table-of-contents)
 

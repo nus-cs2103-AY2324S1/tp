@@ -455,7 +455,7 @@ The `list-freetime DATE` command is facilitated by the `ListFreeTimeCommand`, `L
 9. The `ListFreeTimeCommand` construct `CommandResult` containing the free times on the given day, and returns it to `LogicManager`.
 10. The GUI will be updated automatically by when the list changes.
 
-#### Design consideration
+#### Design considerations
 Aspect: How the command finds free times:
 * **Alternative 1 (current choice):** implement a method in the `ModelManager` class
     * Pros:
@@ -493,7 +493,7 @@ and returns it `LogicManager`.
 The following sequence shows how the `list-i-today` command works:
 ![ListInterviewsTodaySequenceDiagram](images/ListInterviewsTodaySequenceDiagram.png)
 
-#### Design consideration
+#### Design considerations
 Aspect: Command format
 * **Alternative 1 (current choice):** `list-i-today`
   * Pros:
@@ -541,7 +541,7 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 6. `Model#updateFilteredInterviewList` will be called with the given predicate, thus updating the internal `FilteredList` of interviews to show only those that are done, or those that are not done. The `CommandResult` containing the success message will be returned to `LogicManager`.
 7. The GUI will be updated automatically by when the list changes.
 
-#### Design consideration
+#### Design considerations
 Aspect: How the command is implemented
 * **Alternative 1 (current choice):** Use the existing open-closed principle of AB3 to add these new commands
     * Pros:
@@ -579,7 +579,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![RateInterviewActivity](images/RateInterviewActivityDiagram.png)
 
-#### Design consideration
+#### Design considerations
 * **Alternative 1 (current choice):** Stricter rating value with specific format
     * Pros: 
       * Offer simplicity in terms of usage as the users does not have to come out with a rating system.
@@ -612,7 +612,7 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 7. `Model#sortInterviewList(Comparator<Interview> comparator)` will call the `UniqueInterviewList#sort(Comparator<Interview> comparator)`, which will call the built-in `FXCollections#sort(Comparator<T> comparator)` method, which will then sort the internal list of interviews by either rating or timing. Note that `FXCollections#sort(Comparator<T> comparator)` is used since the list of interviews is implemented as an `ObservableList`
 8. The GUI will be updated automatically by when the list changes.
 
-#### Design consideration
+#### Design considerations
 Aspect: How the sort command works
 * **Alternative 1 (current choice):** Implement the sort method in the `ModelManager`, `AddressBook`, and the `UniqueInterviewList` class
     * Pros:
@@ -760,6 +760,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. InterviewHub shows an error message.
 
       Use case resumes at step 1.
+
 ---
 
 **Use case: UC07 Add a new interview**
@@ -786,6 +787,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1c1. InterviewHub shows an error message.
 
       Use case resumes at step 1.
+
 ---
 
 **Use case: UC08 Delete an applicant**
@@ -1046,18 +1048,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  The app should be reasonably responsive to the entire set of user requests(i.e. within 1 second at maximum load).
 4.  The system should have an interface that is very easy to pick up for our target audience(i.e. Engineering Hiring Managers
 that have many years of programming experience).
+5. This app is designed only to add interviewees and schedule interviews. Other parts of the interview process such as contacting applicants are not supported.
+6. The app should be ready for use within 5 seconds of the user launching the app
+7. It should support various screen resolutions and aspect ratios for optimal user experience on different devices.
+8. The application should be optimized to consume minimal system resources, such as CPU and memory, to ensure it runs smoothly on a wide range of desktop configurations.
+9. Users should receive clear and informative error messages in case of any issues, guiding them on how to resolve or report problems.
+10. The project is expected to adhere to a strict schedule that rolls out bug fixes and new features based on the needs of the clients.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X/MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Applicant**: The applicant applying to a particular job role.
-* **Hiring manager**: The manager interviewing the applicant.
-This manager is familiar with the technical aspects of the role. Also called engineering hiring manager.
+* **Engineering Hiring manager**: The manager interviewing the applicant.
+This manager is familiar with the technical aspects of the role.
 * **MSS**: Main Success Scenario. It describes the most straightforward
 interaction in a use case where nothing goes wrong.
 * **Extensions**: In a use case, an extension describes an alternative flow of events
 that are different from the MSS.
+* **CLI**: Command Line Interface. It is text-based interface where users can input commands that interacts with the
+computer program.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1089,9 +1099,15 @@ On the other hand, the duplication of phone number and email will be handled in 
 company in general. We plan to allow find-i to search for "" (empty string) and " " (whitespaces) so that interviews with applicants that are applying to the
 company in general can be found with the command.
 
-7. Currently there is no way to unmark an interview after marking the interview since an interview's status cannot change once it is done. 
+7. Currently, there is no way to unmark an interview after marking the interview since an interview's status cannot change once it is done. 
 However, some users may accidentally mark an unfinished interview as done. In the future, an unmark feature will
 be implemented to allow users to change the status of interviews from done to not done.
+
+8. Currently, if any field belonging to an applicant or interview is too long (e.g. a very long name), the UI will
+truncate the text. In normal use, this is unlikely to occur as the text has to be unreasonably long
+to cause the truncation. However, this will be fixed in a future implementation which
+will allow horizontal scrolling on the applicant or interview card so that the user can 
+see the full text.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1122,7 +1138,7 @@ Please refer to the [User Guide](https://ay2324s1-cs2103t-t11-2.github.io/tp/Use
 ### Viewing help
 Command: `help`
 
-1. Test case: `help`<br>Expected: Help window with the User Guide URL is displayed. Status message remained unchanged.
+1. Test case: `help`<br>Expected: Help window with the User Guide URL is displayed.
 
 ### Clearing all the data
 Command: `clear`
@@ -1141,6 +1157,8 @@ Command: `add-a`
    1. Test case: `add-a n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/engineer t/frontend` <br>
        Expected: An applicant `John Doe` is added with the phone number `98765432`, email `johnd@example.com`, 
        address `311, Clementi Ave 2, #02-25` and the tags `engineer` and `frontend`.
+2. Adding an applicant that has duplicate name
+   1. Prerequisites: The applicant named `John Doe` added in the previous test is not deleted or changed name.
    2. Test case: `add-a n/John Doe` <br>
        Expected: No applicant is added. Error details shown in the status message.
 
@@ -1223,7 +1241,7 @@ Command: `edit-i`
 
 1. Editing an interview while all interviews are being shown
     1. Prerequisites: List all interviews using the `list-i` command. Multiple interviews in the list.
-       Ensure that the selected interview index chosen for step `ii` belongs to an interview that is not marked as done (border around interview is red). 
+       Ensure that the selected interview index chosen for step `2` belongs to an interview that is not marked as done (border around interview is red). 
     2. Test case: `edit-i 2 jr/PE Tester` <br>
        Expected: The second interview's job role is edited to `PE Tester`. Details of the edited interview shown in the status message.
     3. Test case: `edit-i 0` <br>
@@ -1265,11 +1283,19 @@ Command: `list-freetime`<br>
 
 ### Listing all interviews for today
 Command: `list-i-today`
+
 1. Listing all interviews today
-    1. Test case: `list-a`<br>Expected: Shows all interviews scheduled for today (i.e. the date when the command was executed) in the interview list. Success message is displayed.
+    1. Test case: `list-i-today`<br>Expected: Shows all interviews scheduled for today (i.e. the date when the command was executed) in the interview list. Success message is displayed.
 
 ### Marking an interview as done
 Command: `mark`
+
+1. Marking an interview as done
+   1. Prerequisites: the interview must not be marked as done(red border displayed).
+   2. Test case: `mark 1`<br>Expected: Mark the first interview as done(green border). Success message is displayed.
+2. Marking an interview that has already been marked as done
+    1. Prerequisites: the interview must already been marked as done(green border displayed).
+    2. Test case: `mark 1`<br>Expected: Error message is displayed.
 
 ### Rating an interview
 Command: `rate`
