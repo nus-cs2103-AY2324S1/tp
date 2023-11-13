@@ -40,7 +40,7 @@ public class AddMusicianToBandCommand extends Command {
     private final List<Index> musiciansToAdd;
 
     /**
-     * Creates an AddMusicianToBandCommand to add the specified {@code Musician} to the {@code Band}.
+     * Creates an {@code AddMusicianToBandCommand} to add the specified {@code Musician} to the {@code Band}.
      */
     public AddMusicianToBandCommand(Index bandToAddInto, List<Index> musiciansToAdd) {
         requireNonNull(bandToAddInto);
