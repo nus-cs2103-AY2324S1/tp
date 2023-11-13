@@ -802,6 +802,72 @@ based on an identifier
 
       Use case ends.
 
+**Use case: UC6 - Log patient(s)**
+
+**MSS**
+
+1.  User requests to log patient profiles into the Logger Tab.
+2.  HealthSync adds the patient profiles to the Logger Tab
+    and displays the profiles inside the updated Logger Tab.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user did not find patient profiles beforehand
+
+    * 1a1. HealthSync shows an error message.
+
+      Use case ends.
+
+* 1b. The user tried to find profiles that did not exist in the list
+
+    * 1b1. HealthSync shows an error message.
+
+      Use case ends.
+
+**Use case: UC7 - Append-logging patient(s)**
+
+**MSS**
+
+1.  User requests to append patient profiles to the Logger Tab.
+2.  HealthSync adds the patient profiles to the Logger Tab
+    and displays the profiles inside the updated Logger Tab, under the current Logger Tab.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user did not find patient profiles beforehand
+
+    * 1a1. HealthSync shows an error message.
+
+      Use case ends.
+
+* 1b. The user tried to find profiles that did not exist in the list
+
+    * 1b1. HealthSync shows an error message.
+
+      Use case ends.
+
+**Use case: UC8 - Clearing the log**
+
+**MSS**
+
+1.  User requests to clear all data in the Logger Tab.
+2.  HealthSync removes the patient profiles inside the Logger Tab
+    and displays an empty Logger Tab.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The Logger Tab is already cleared
+
+    * 1a1. HealthSync shows an error message.
+
+      Use case ends.
+
 **Use case: UC0A - Auto-save**
 
 **Actors:** Operating System (OS)
@@ -821,8 +887,6 @@ based on an identifier
     * 1a1. HealthSync shows an error message.
 
     Use case ends.
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 
