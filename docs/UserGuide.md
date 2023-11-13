@@ -5,10 +5,10 @@ title: User Guide
 
 ### Welcome to MediLink Contacts!
 
-MediLink Contacts (MLC) is a **desktop application** for **medical administrative assistants** to managing patients and
+MediLink Contacts (MLC) is a **desktop application** for **medical administrative assistants** to manage patients and
 doctors details within clinics.
 
-Hereʼs an overview of how Docedex can help you streamline your hospital management
+Hereʼs an overview of how MediLink Contacts can help you streamline your hospital management
 processes:
 
 * Store and edit information about your patients and doctors
