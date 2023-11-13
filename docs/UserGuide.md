@@ -134,11 +134,7 @@ Here are some descriptions of the words we use throughout the User Guide:
 
 ### Quick Orientation
 
-<div markdown="block" class="alert alert-info">
-
 CampusCompanion's GUI has 2 main views, `Assignments` and `Internships`.
-
-</div>
 
 #### Assignments View
 ![img.png](images/LabelledGUI.png)
@@ -172,6 +168,8 @@ Here is a quick summary of the different GUI components within CampusCompanion's
 | Internship Task List | Shows all information of individual ``internship task`` for an ``internship role`` that you're applying for. |
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Notes about the GUI
 
