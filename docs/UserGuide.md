@@ -5,6 +5,8 @@ sidebar: toc
 ---
 # CheckMate User Guide
 
+---
+
 <details open>
 <summary><strong>Product Description</strong></summary>
 <div markdown="1">
@@ -148,7 +150,7 @@ Format: `add r/ROOM d/BOOKING_PERIOD n/NAME p/PHONE_NUMBER e/EMAIL rk/REMARK`
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 The room number is used to assign the room type.
 
-The **add** command makes use of the **[Prefix Completion feature]**(#prefix-completion).
+The **add** command makes use of the [Prefix Completion feature](#prefix-completion).
 </div>
 
 * Image above shows result of command `add r/11 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@gmail.com`
@@ -178,7 +180,7 @@ Format: `edit INDEX [r/ROOM] [d/BOOKING_PERIOD] [n/NAME] [p/PHONE] [e/EMAIL] [rk
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 The Room number is used to map to the Room type; there is no way to directly edit the room type without changing the Room number.
 
-The **edit** command makes use of the **[Prefix Completion feature]**(#prefix-completion).
+The **edit** command makes use of the [Prefix Completion feature](#prefix-completion).
 </div>
 
 * Example image above shows result of command `edit 1 p/91234567 e/johndoe@gmail.com`
