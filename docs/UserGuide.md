@@ -26,7 +26,7 @@ Gone are the days of having to manually managed your TAs. TAManager is here to h
 
 <br/>
 
-Don't let the stress of administrative work affect your teaching quality. 
+Don't let the stress of administrative work affect your teaching quality.
 
 Let TAManager handles all your TA management needs, while you power up your lectures and tutorials with your teaching prowess!
 
@@ -34,11 +34,12 @@ Let TAManager handles all your TA management needs, while you power up your lect
 
 ## Using this Guide
 
-This section will guide you on the various features of TAManager and how to use them.
+Whether you're a new user or an experienced one, this guide is designed to help you make the most of our TAManager.
+Follow the instructions below based on your familiarity with TAManager.
 
-If you are a new user, we recommend that you read this guide starting from the [Quick Start](#quick-start) section.
+- **New Users:** If you're just getting started, we recommend to begin with the [Quick Start](#quick-start) section. This will provide you with a step-by-step introduction to TAManager's essential features.
 
-If you are an experienced user, you can use the [Table of Contents](#table-of-contents) below to quickly locate the relevant section. Alternatively, you can jump to the [Command Summary](#command-summary) section for an overview of the command syntax.
+- **Experienced Users:** If you are an experienced user of TAManager, you can use the [Table of Contents](#table-of-contents) to quickly navigate to specific sections of interest. If you're looking for a quick reference, the [Command Summary](#command-summary) provides an overview of the command syntax.
 
 Throughout our user guide, you will see the following annotations:
 
