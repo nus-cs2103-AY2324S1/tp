@@ -7,7 +7,7 @@ title: Saumya Shah's Project Portfolio Page
 
 HouR is a desktop HR management application used for managing and organising personnel data.
 The user interacts with it using a CLI, and it has a GUI created with JavaFX.
-It is written in Java, and has about 8 kLoC.
+It is written in Java, and has about 12 kLoC.
 
 Given below are my contributions to the project.
 
@@ -53,6 +53,8 @@ Given below are my contributions to the project.
         * Added testing instructions for launch and shutdown.
         * Added testing instructions for the `find` and `report` commands.
         * Added the challenges faced and the difficulty level of the project.
+        * Reformatted and restructured it for consistency and readability.
+        * Added implementation subheadings and hyperlinks to the table of contents.
 
 * **Community**:
 
