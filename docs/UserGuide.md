@@ -1123,18 +1123,6 @@ No lesson is currently displayed
 ```
 This lesson has no linked students
 ```
-* Current state: In the 👨‍🎓 ___STUDENTS list___ and a student is not selected
-* Input: `nav`
-    * Error: `nav` only works when a student is selected. Select a student with the `show INDEX` command and try again.
-```
-No student is currently displayed
-```
-* Current state: In the 👨‍🎓 ___STUDENTS list___ and a student without any lessons students is selected
-* Input: `nav`
-    * Error: `nav` only works when a student has linked lessons. Link a lesson with the `linkTo` command.
-```
-This student has no linked lessons
-```
 
 
 #### For Task:
