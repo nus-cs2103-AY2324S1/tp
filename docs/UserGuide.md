@@ -133,11 +133,11 @@ Throughout this guide, you will see different text styles that are used to highl
 
 4. Open a command terminal.
 
-5. Change the directory to the folder where you have placed `CoordiMate.jar`. If it is in your `Downloads` folder, type the command below and press `Enter`:
+5. Change the directory to the folder where you have placed `CoordiMate.jar`. If it is in your `Downloads` folder, type the command below and press `Enter`: <br><br>
     ```
     cd Downloads
     ```
-6. To launch CoordiMate, type the following command and press `Enter`:
+6. To launch CoordiMate, type the following command and press `Enter`: <br><br>
     ```
     java -jar CoordiMate.jar
     ```
