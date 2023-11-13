@@ -5,7 +5,6 @@ import static seedu.address.logic.commands.CommandTestUtil.COURSE_DESC_CS1231S;
 import static seedu.address.logic.commands.CommandTestUtil.COURSE_DESC_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.FROM_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.HOUR_DESC_FIVE;
 import static seedu.address.logic.commands.CommandTestUtil.HOUR_DESC_SIXTY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_COURSE_DESC;
@@ -25,7 +24,6 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.TELEGRAM_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TELEGRAM_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TO_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.UNADDED_COURSE_DESC_GEA1000;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_CS1231S;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COURSE_CS2103T;
@@ -73,7 +71,7 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + TELEGRAM_DESC_BOB + FROM_DESC_BOB + TO_DESC_BOB + TAG_DESC_FRIEND
+                + TELEGRAM_DESC_BOB + TAG_DESC_FRIEND
                 + COURSE_DESC_CS1231S + HOUR_DESC_FIVE, new AddCommand(expectedPerson));
 
 
@@ -83,7 +81,7 @@ public class AddCommandParserTest {
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + TELEGRAM_DESC_BOB + FROM_DESC_BOB + TO_DESC_BOB
+                        + TELEGRAM_DESC_BOB
                         + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + COURSE_DESC_CS1231S
                         + COURSE_DESC_CS2103T + HOUR_DESC_SIXTY,
                 new AddCommand(expectedPersonMultipleTags));
