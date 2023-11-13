@@ -120,6 +120,13 @@ public class Person {
     }
 
     /**
+     * Checks if an event can be added to the calendar of this Person.
+     */
+    public boolean canAddEvent(Event toAdd) {
+        return calendar.canAddEvent(toAdd);
+    }
+
+    /**
      * Deletes an event at the specified time from the calendar of this person.
      */
     public void deleteEvent(LocalDateTime targetTime) {

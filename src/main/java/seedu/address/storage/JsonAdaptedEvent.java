@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventDescription;
 import seedu.address.model.event.EventPeriod;
@@ -33,8 +35,8 @@ class JsonAdaptedEvent {
      * Converts a given {@code Event} into this class for Jackson use.
      */
     public JsonAdaptedEvent(Event source) {
-        description = source.getDescription().getDescription();
-        eventPeriod = source.getEventPeriod().getFormattedPeriod();
+        description = source.getDescriptionString();
+        eventPeriod = source.getEventPeriodString();
     }
 
     /**
@@ -69,11 +71,11 @@ class JsonAdaptedEvent {
             throw new IllegalValueException(String.format(INVALID_FIELD_MESSAGE_FORMAT,
                     EventPeriod.class.getSimpleName()));
         }
-        if (!EventPeriod.isValidPeriod(start, end)) {
-            throw new IllegalValueException(EventPeriod.MESSAGE_CONSTRAINTS);
+        try {
+            final EventPeriod modelEventPeriod = ParserUtil.parseEventPeriod(start, end);
+            return new Event(modelDescription, modelEventPeriod);
+        } catch (ParseException pe) {
+            throw new IllegalValueException(pe.getMessage());
         }
-        final EventPeriod modelEventPeriod = new EventPeriod(start, end);
-
-        return new Event(modelDescription, modelEventPeriod);
     }
 }

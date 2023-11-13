@@ -685,6 +685,7 @@ _Details coming soon ..._
 # Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+2. If the zoom setting of the operating system is not set to 100%, it might cause inconsistencies in the UI which may cause the event cards displayed in the [**Calendar GUI**](#features-overview) to be lined up incorrectly. 
 
 --------------------------------------------------------------------------------------------------------------------
 

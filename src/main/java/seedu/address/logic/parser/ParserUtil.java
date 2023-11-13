@@ -30,8 +30,9 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
-
+    public static final String INVALID_INTEGER = "0";
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INDEX_TOO_LARGE = "Index given is more than maximum integer of 2147483647.";
     public static final String NUMBER_INDEX_INVALID_INDEX = "Number of arguments provided is invalid.";
     public static final DateTimeFormatter DATE_TIME_STRING_FORMATTER = DateTimeFormatter.ofPattern(
             "yyyy-MM-dd HH:mm");
@@ -43,8 +44,11 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
+        String allNumbersRegex = "\\d+";
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+            throw trimmedIndex.matches(allNumbersRegex) && !trimmedIndex.equals(INVALID_INTEGER)
+                    ? new ParseException(MESSAGE_INDEX_TOO_LARGE)
+                    : new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }

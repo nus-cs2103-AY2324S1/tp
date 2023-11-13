@@ -170,12 +170,6 @@ public class ModelManager implements Model {
     public ReadOnlyCalendar getCalendar() {
         return calendar;
     }
-
-    @Override
-    public UniMateCalendar getUnderlyingCalendar() {
-        return calendar;
-    }
-
     @Override
     public ObservableList<Event> getEventList() {
         return calendar.getEventList();
