@@ -318,7 +318,7 @@ Creates a new contact in the course with the specified name and details.
 
 <div markdown="block" class="alert alert-info">
 
-* `STUDENT_NAME` should be a string made up of alphabetical characters, with no numbers or special characters.
+* `STUDENT_NAME` should be a string made up of alphanumerical characters, with no special characters.
 * `PHONE_NUMBER` should be a string made up of numbers.
 * `STUDENT_ID` should be unique for all students.
 * `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space. It should begin with the letter 'A', followed by 7 numbers, and end with a letter.
