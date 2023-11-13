@@ -58,7 +58,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -91,21 +91,12 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete s/A0249112A")` API call as an example.
-
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete s/A0249112A` Command" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</box>
-
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `ClassManagerParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a student).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a student).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -169,7 +160,7 @@ Tagging a student with `Tag` is facilitated by `TagCommand`, `AddTagCommand`, `D
 
 </box>
 
-Here is a step by step example of how the tag command might be executed.
+Here is a step-by-step example of how the tag command might be executed.
 
 Step 1. User inputs the `tag` command.
 
@@ -474,7 +465,7 @@ The `theme` command allows TAs to toggle/switch between _light_ and _dark_ theme
 #### Implementation
 The `theme` feature is facilitated by the `ThemeCommand`, and inside the `Model` component, the `UserPrefs` class stores the current color theme settings. 
 
-Here is a step by step example of how the theme command might be executed.
+Here is a step-by-step example of how the theme command might be executed.
 
 1. The user inputs the `theme` command.
 2. The `Logic` component will receive the input and create a new `ThemeCommand` object.
@@ -608,6 +599,7 @@ The feature should be implemented upon the current design of Student and ClassDe
 #### About this feature
 
 The view feature allows users to view the class information of their students.
+
 <box type="info" seamless>
 
 **Note:** The `view` command is the only way to change the student being viewed in the `GUI`.
@@ -618,14 +610,11 @@ The view feature allows users to view the class information of their students.
 
 The `view` command is facilitated by the `ViewCommandParser` and the `ViewCommand`. It uses `Model#setSelectedStudent()` to select the student that is to be viewed in the `GUI`.
 
-Here is a step by step example of how a `view` command is executed:
+Here is a step-by-step example of how a `view` command is executed:
 
-Step 1. Users inputs a `view` command.
-
+Step 1. User inputs a `view` command.
 Step 2. `Logic` will receive the input and pass it to a `ClassManagerParser` object which in turn creates a `ViewCommandParser` object to parse the command.
-
 Step 3. `ViewCommandParser` will check if the input is valid. If input is valid, it will create a `ViewCommand` object to execute the command. Else `ParseException` is thrown.
-
 Step 4. `ViewCommand` will use `Model#setSelectedStudent()` to set the requested student to be viewed in the `GUI`.
 
 The following sequence diagram will show what happens when a user executes a `view` command:
@@ -840,7 +829,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to randomly select a specific number of students.
-2.  Class Manager randomly selects the students from the list.
+2.  Class Manager randomly selects the students from all students displayed.
 3.  Class Manager shows a list of students that are randomly selected.
 
     Use case ends.
@@ -851,13 +840,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. Class Manager shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. The number of students to be selected is less than 1.
 
     * 1b1. Class Manager shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 ---
 
@@ -877,13 +866,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. Class Manager shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. The modifying request is invalid.
 
     * 1b1. Class Manager shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 ---
 
@@ -1004,7 +993,7 @@ Testers are expected to do more *exploratory* testing.
    2. Double-click the jar file<br>
       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
-2. Saving window preferences
+2. Save window preferences
 
    1. Resize the window to an optimal size. Move the window to a different location. Close the window.
 
@@ -1012,79 +1001,18 @@ Testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
       <br><br>
 
-### Deleting a student
-
-1. Deleting a student from Class Manager.
-
-   1. Test case: `delete s/STUDENT_NUMBER`<br>
-      Expected: STUDENT_NUMBER is a valid Student Number that exists in the Class Manager. The student with STUDENT_NUMBER is deleted from the list. Details of the deleted student shown in the result display box.
-      <br><br>
-2. Deleting a student that is not in Class Manager.
-
-   1. Test case: `delete s/vnqvq1924`<br>
-      Expected: No student is deleted. Student Number error details shown in the result display box.
-      <br><br>
-3. Deleting a student with an invalid student number.
-
-   1. Other incorrect delete commands to try: `delete`, `delete s/x`, `...` (where x is an invalid student number)<br>
-      Expected: No student is deleted. Command format error details shown in the result display box.
-   2. Test case: `delete`<br>
-      Expected: No student is deleted. Command format error details shown in the result display box.
-      <br><br>
-
-### Loading data files
-###### Setup
-- Move the JAR file to a fresh directory.
-- Run and close the app before starting this test. (This is to ensure a fresh `classmanager.json` and `preferences.json`)<br>
-- Copy the sample data file `classmanager.json`. And paste 2 copies of it in the same directory as the `classmanager.json`. Rename the copies to `t1.json` and `t2.json`.
-- Do not delete the data file `classmanager.json` as it will be used as the starting default file.
-
-###### Test cases
-1. Loading a valid data file
-   - Enter: `load f/t1`<br>
-        Expected: The data in `t1.json` is loaded into the app. The status bar on the bottom left changed to the new file path.
-        The list of students shown in the GUI is the same as the one in `classmanager.json`.
-   <br><br>
-2. Loading a corrupted data file
-   - Open and edit `t2.json` with a text editor. Add some random text to the file or delete some text from the file.
-   - Enter: `load f/t2`<br>
-        Expected: The data in `t2.json` is not loaded into the app. The status bar on the bottom left is unchanged.
-        File error details shown in the result display box.
-    <br><br>
-3. Loading a missing data file
-   - Enter: `load f/t3`<br>
-       Expected: The status bar on the bottom left is unchanged. File error details shown in the result display box.
-     <br><br>
-   
-### Undo/redo commands
-###### Test cases
-1. Undoing a command
-    1. Test case: `clear` -> `undo`<br>
-        Expected: The `clear` command is undone. The list of students shown in the GUI is the same as the one before the `clear` command.
-
-    2. Test case: `add` -> `undo`<br>
-        Expected: The `add` command is undone. The newly added student is removed from the list of students.
-
-2. Redoing a command
-    1. Test case: `clear` -> `undo` -> `redo`<br>
-        Expected: The `clear` command is redone. The list of students shown in the GUI is empty.
-
-    2.  Test case: `add` -> `add` -> `undo` -> `undo` -> `redo` (Add 2 students, and then 2 undo with 1 redo)<br>
-        Expected: The first `add` command is redone. The first student is added back to the list of students.
-        <br><br>
-   
-### Configuring Class Manager
+### Configure Class Manager
 
 ###### Setup
 - Move the JAR file to a fresh directory.
 - Run and close the app before starting this test. (This is to ensure a fresh `classmanager.json` and `preferences.json`)<br>
 
 ###### Test cases
-1. Configuring Class Manager with valid tutorial and assignment counts
+1. Configure Class Manager with valid tutorial and assignment counts
     - Enter: `config #t/3 #a/3`<br>
         Expected: The list of students shown in the GUI is the same as the one in `classmanager.json`.
     - Enter: `add n/John Doe p/999 e/john@gmail.com s/A0981234X c/T11`<br>
-        Expected: The student John Doe is added to the botton of the Student List. Details of John Doe are shown in the result display box.
+        Expected: The student John Doe is added to the bottom of the Student List. Details of John Doe are shown in the result display box.
     - Enter: `view s/A0981234X`<br>
         Expected: The student John Doe is shown in the view panel. The student's class information is shown in the view panel with the tutorial and assignment count both updated to 3.
     - Enter: `present-all tut/1`<br>
@@ -1095,11 +1023,11 @@ Testers are expected to do more *exploratory* testing.
         Expected: The student John Doe is shown in the view panel. The student's class information is shown in the view panel with the tutorial and assignment count both updated to 4. The student's attendance for tutorial 1 is now absent.
     <br><br>
 
-2. Configuring Class Manager with tutorial count less than 1
+2. Configure Class Manager with tutorial count less than 1
     - Enter: `config #t/0 #a/3`<br>
       Expected: Error message `Invalid count values! The count value of tutorials cannot be less than 1.`
       <br><br>
-3. Configuring Class Manager with valid tutorial count but missing assignment count
+3. Configure Class Manager with valid tutorial count but missing assignment count
     - Enter: `config #t/10`<br>
       Expected: Error message: `Invalid command format!
                                 config: Configures Class Manager with the module information.
@@ -1108,171 +1036,95 @@ Testers are expected to do more *exploratory* testing.
                                 Parameters: #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT
                                 Example: config #t/10 #a/4`
       <br><br>
+
+### Display help
+
+1. Display help.
+
+   1. Test case: `help`<br>
+      Expected: The help window with list of commands is shown.
+      <br><br>
    
-### History
+### Add a student
 
-###### Setup
-- Close the app and run it again before starting this test. Do not type any commands (This is to reset command history)<br>
-
-###### Test cases
-1. Viewing command history
-    - Enter: `history`<br>
-      Expected: The command history is shown in the result display box. The command history is empty.
-    - Enter: `list`<br>
-      Expected: The list of students is shown in the student list. The command history is updated to show the command `list`.
-    - Enter: `help`<br>
-      Expected: The help window is shown. The command history is updated to show the command `help`.
-    - Enter: `history`<br>
-      Expected: The command history is shown in the result display box. The command history shows `help` as the most recent command at the top of the list, followed by `list` below it.
-    <br><br>
-      
-### Launch with erroneous data files
-###### Setup
-- Move the JAR file to a fresh directory.
-- Run and close the app before starting this test. (This is to ensure a fresh `classmanager.json` and `preferences.json`)<br>
-- Copy the sample data file `classmanager.json`. And paste 2 copies of it in the same directory as the `classmanager.json`. Rename the copies to `corrupt.json` and `wrong.json`.
-
-###### Test cases
-1. Dealing with missing data files
-    - Edit the `preferences.json` to have the entry:
-    ```
-    "classManagerFilePath" : "data\\missing.json"
-    ```
-   (Ensure that there is **no** file named `missing.json`)
-   - Launch the app<br>
-      Expected: The app will be populated with sample students. The app will create a new data file when it is next closed.
-      <br><br>
-2. Dealing with corrupted data files
-    - Edit the data file `corrupt.json`, by randomly add or delete lines of data. <br>
-    - Edit the `preferences.json` to have the entry:
-    ```
-    "classManagerFilePath" : "data\\corrupt.json"
-    ```
-    - Launch the app<br>
-      Expected: The app will launch with an empty student list. The app will create a new data file when it is next closed.
-      <br><br>
-3. Dealing with valid data file but with the wrong configuration
-    - Edit the data file `wrong.json`. (Do not change anything) <br>
-    - Edit the `preferences.json` to have the entries:
-    ```
-    "classManagerFilePath" : "data\\wrong.json",
-    "tutorialCount" : 1,
-    "assignmentCount" : 1,
-    ```
-   (Ensure that the `tutorialCount` and `assignmentCount` are **changed**)
-    - Launch the app<br>
-      Expected: The app will launch with an empty student list. The app will create a new data file when it is next closed.
-      <br><br>
-
-### Adding a student
-
-1. Adding a new student to Class Manager.
+1. Add a new student to Class Manager.
 
    1. Test case: `add n/NAME s/STUDENT_NUMBER e/EMAIL`<br>
       Expected: The student with NAME, STUDENT_NUMBER and EMAIL is added to the list. Details of the added student shown in the result display box.
       <br><br>
    
-2. Adding an already existing student to Class Manager.
+2. Add an already existing student to Class Manager.
 
    1. Test case: Student Number that is already present in the list <br>
       Expected: No student is added. Error details shown in the result display box.
       <br><br>
    
-3. Adding a student without some required fields <br>
+3. Add a student without some required fields <br>
    1. Test Case: `add n/NAME s/STUDENT_NUMBER e/EMAIL`, `add n/NAME s/PHONE e/EMAIL`<br>
       Expected: No student is added. Error details shown in the result display box.
       <br><br>
    
-### Editing a student
+### Add a comment to a student
 
-1. Editing a student's details in the current students list.
+1. Add a comment to a student in Class Manager.
+
+   1. Test case: `comment s/STUDENT_NUMBER cm/COMMENT`<br>
+      Expected: The student with STUDENT_NUMBER is edited to have the new COMMENT.
+      <br><br>
+   
+2. Add a comment to a student where the student is not in Class Manager (Invalid Student Number). 
+
+   1. Test case: Comment command with Student Number that is not present in the list <br>
+      Expected: No student is edited. Error details shown in the result display box.
+      <br><br>
+   
+3. Add a comment to a student where the new comment is empty.
+
+   1. Test case: `comment s/STUDENT_NUMBER cm/`<br>
+      Expected: Student is edited to have an empty comment.
+      <br><br>
+
+### Delete a student
+
+1. Delete a student from Class Manager.
+
+   1. Test case: `delete s/STUDENT_NUMBER`<br>
+      Expected: STUDENT_NUMBER is a valid Student Number that exists in the Class Manager. The student with STUDENT_NUMBER is deleted from the list. Details of the deleted student shown in the result display box.
+      <br><br>
+2. Delete a student that is not in Class Manager.
+
+   1. Test case: `delete s/vnqvq1924`<br>
+      Expected: No student is deleted. Student Number error details shown in the result display box.
+      <br><br>
+3. Delete a student with an invalid student number.
+
+   1. Other incorrect delete commands to try: `delete`, `delete s/x`, `...` (where x is an invalid student number)<br>
+      Expected: No student is deleted. Command format error details shown in the result display box.
+   2. Test case: `delete`<br>
+      Expected: No student is deleted. Command format error details shown in the result display box.
+      <br><br>
+   
+### Edit a student
+
+1. Edit a student's details in the current students list.
 
    1. Test case: `edit STUDENT_NUMBER n/NAME`<br>
       Expected: The student with STUDENT_NUMBER is edited to have the new NAME.
    2. Test case: `edit STUDENT_NUMBER s/NEW_STUDENT_NUMBER`<br>
       Expected: The student with STUDENT_NUMBER is edited to have the NEW_STUDENT_NUMBER.
       <br><br>
-2. Editing a student's details where the student is not in the list (Invalid Student Number).
+2. Edit a student's details where the student is not in the list (Invalid Student Number).
 
    1. Test case: Edit command with Student Number that is not present in the list <br>
       Expected: No student is edited. Error details shown in the result display box.
       <br><br>
-   
-### Adding a comment to a student
 
-1. Adding a comment to a student in Class Manager.
+### List students
 
-   1. Test case: `comment s/STUDENT_NUMBER cm/COMMENT`<br>
-      Expected: The student with STUDENT_NUMBER is edited to have the new COMMENT.
-      <br><br>
-   
-2. Adding a comment to a student where the student is not in Class Manager (Invalid Student Number). 
+1. List all students in Class Manager.
 
-   1. Test case: Comment command with Student Number that is not present in the list <br>
-      Expected: No student is edited. Error details shown in the result display box.
-      <br><br>
-   
-3. Adding a comment to a student where the new comment is empty.
-
-   1. Test case: `comment s/STUDENT_NUMBER cm/`<br>
-      Expected: Student is edited to have an empty comment.
-      <br><br>
-   
-### Tagging a student
-
-1. Tagging an existing student in the current students list.
-
-   1. Test case: `tag s/STUDENT_NUMBER t/TAG`<br>
-      Expected: All tags of student with STUDENT_NUMBER will be replaced with TAG.
-      <br><br>
-2. Adding a tags to student.
-
-   1. Test case: `tag s/STUDENT_NUMBER /add t/TAG`<br>
-      Expected: The student with STUDENT_NUMBER will have TAG added to existing tags.
-
-   <box type="info" seamless>
-
-   **Note:** Even if the student has TAG tagged, the command ensures that the student will have TAG as one of the tags.
-
-    </box>
-
-3. Deleting tags from student.
-
-   1. Test case: `tag s/STUDENT_NUMBER /delete t/TAG`<br>
-      Expected: The student with STUDENT_NUMBER will have the `Tag` TAG removed from existing tags.
-
-    <box type="info" seamless>
-
-    **Note:** Even if the student does not have TAG tagged, the command ensures that the student will not have TAG as one of the tags.
-
-    </box>
-4. Deleting all tags from student.
-
-   1. Test case: `tag s/STUDENT_NUMBER t/`<br>
-      Expected: The student with STUDENT_NUMBER will have all tags removed.
-      <br><br>
-5. Attempt to tag a student not in the currently student list.
-
-   1. Test case: `tag` command with a student number that is not in the list.
-      Expected: Error message is shown in the display result.
-      <br><br>
-   
-### Viewing a student
-
-1. Viewing a student in Class Manager
-
-   1. Test case: `view s/STUDENT_NUMBER`<br>
-      Expected: The class information of the student with STUDENT_NUMBER will be displayed in the class information panel on the right.
-      <br><br>
-2. Viewing a student not in Class Manager
-
-   1. Test case: `view` command with a student number not in Class Manager<br>
-      Expected: Error message shown in the display result.
-      <br><br>
-3. Invalid Student number
-
-   1. Test case: `view s/x` (where x is an invalid student number)<br>
-      Expected: Error message shown in the display result.
+   1. Test case: `list`<br>
+      Expected: The list of students is shown in the student list.
       <br><br>
 
 ### Lookup students
@@ -1300,8 +1152,197 @@ Testers are expected to do more *exploratory* testing.
    2. Test case: `lookup c/`<br>
       Expected: Error message shown in the display result.
       <br><br>
+   
+### Tag a student
 
-### Toggling color theme
+1. Tag an existing student in the Class Manager.
+
+   1. Test case: `tag s/STUDENT_NUMBER t/TAG`<br>
+      Expected: All tags of student with STUDENT_NUMBER will be replaced with TAG.
+      <br><br>
+2. Add a tags to student.
+
+   1. Test case: `tag s/STUDENT_NUMBER /add t/TAG`<br>
+      Expected: The student with STUDENT_NUMBER will have TAG added to existing tags.
+
+   <box type="info" seamless>
+
+   **Note:** Even if the student has TAG tagged, the command ensures that the student will have TAG as one of the tags.
+
+    </box>
+
+3. Delete tags from student.
+
+   1. Test case: `tag s/STUDENT_NUMBER /delete t/TAG`<br>
+      Expected: The student with STUDENT_NUMBER will have the `Tag` TAG removed from existing tags.
+
+    <box type="info" seamless>
+
+    **Note:** Even if the student does not have TAG tagged, the command ensures that the student will not have TAG as one of the tags.
+
+    </box>
+4. Delete all tags from student.
+
+   1. Test case: `tag s/STUDENT_NUMBER t/`<br>
+      Expected: The student with STUDENT_NUMBER will have all tags removed.
+      <br><br>
+5. Attempt to tag a student not in Class Manager.
+
+   1. Test case: `tag` command with a student number that is not in the Class Manager.<br>
+      Expected: Error message is shown in the display result.
+      <br><br>
+
+### Mark a student as present
+
+<box type="info" seamless>
+
+**Note:** A similar way can be adopted to test `absent`.
+
+</box>
+
+1. Mark a student as present in Class Manager.
+
+   1. Test case: `present s/STUDENT_NUMBER tut/1`<br>
+      Expected: The student with STUDENT_NUMBER is marked as present for the first tutorial.
+      <br><br>
+
+### Mark all displayed students as present
+
+<box type="info" seamless>
+
+**Note:** A similar way can be adopted to test `absent-all`.
+
+</box>
+
+1. Mark all displayed students as present in Class Manager.
+
+   1. Test case: `present-all tut/1`<br>
+      Expected: All displayed students are marked as present for the first tutorial.
+      <br><br>
+
+### Randomly select students
+
+1. Randomly select a specified number of students from the list of displayed students.
+
+   1. Test case: `random 2`<br>
+      Expected: Two students from the list of displayed students are selected randomly. Ensure at least two students are displayed.
+      <br><br>
+
+### View a student
+
+1. View a student in Class Manager
+
+   1. Test case: `view s/STUDENT_NUMBER`<br>
+      Expected: The class information of the student with STUDENT_NUMBER will be displayed in the class information panel on the right.
+      <br><br>
+2. View a student not in Class Manager
+
+   1. Test case: `view` command with a student number not in Class Manager<br>
+      Expected: Error message shown in the display result.
+      <br><br>
+3. Invalid Student number
+
+   1. Test case: `view s/x` (where x is an invalid student number)<br>
+      Expected: Error message shown in the display result.
+      <br><br>
+
+### Load data files
+###### Setup
+- Move the JAR file to a fresh directory.
+- Run and close the app before starting this test. (This is to ensure a fresh `classmanager.json` and `preferences.json`)<br>
+- Copy the sample data file `classmanager.json`. And paste 2 copies of it in the same directory as the `classmanager.json`. Rename the copies to `t1.json` and `t2.json`.
+- Do not delete the data file `classmanager.json` as it will be used as the starting default file.
+
+###### Test cases
+1. Load a valid data file
+   - Enter: `load f/t1`<br>
+        Expected: The data in `t1.json` is loaded into the app. The status bar on the bottom left changed to the new file path.
+        The list of students shown in the GUI is the same as the one in `classmanager.json`.
+   <br><br>
+2. Load a corrupted data file
+   - Open and edit `t2.json` with a text editor. Add some random text to the file or delete some text from the file.
+   - Enter: `load f/t2`<br>
+        Expected: The data in `t2.json` is not loaded into the app. The status bar on the bottom left is unchanged.
+        File error details shown in the result display box.
+    <br><br>
+3. Load a missing data file
+   - Enter: `load f/t3`<br>
+       Expected: The status bar on the bottom left is unchanged. File error details shown in the result display box.
+     <br><br>
+   
+### Undo/redo commands
+###### Test cases
+1. Undo a command
+    1. Test case: `clear` -> `undo`<br>
+        Expected: The `clear` command is undone. The list of students shown in the GUI is the same as the one before the `clear` command.
+
+    2. Test case: `add` -> `undo`<br>
+        Expected: The `add` command is undone. The newly added student is removed from the list of students.
+
+2. Redo a command
+    1. Test case: `clear` -> `undo` -> `redo`<br>
+        Expected: The `clear` command is redone. The list of students shown in the GUI is empty.
+
+    2.  Test case: `add` -> `add` -> `undo` -> `undo` -> `redo` (Add 2 students, and then 2 undo with 1 redo)<br>
+        Expected: The first `add` command is redone. The first student is added back to the list of students.
+        <br><br>
+   
+### History
+
+###### Setup
+- Close the app and run it again before starting this test. Do not type any commands (This is to reset command history)<br>
+
+###### Test cases
+1. View command history
+    - Enter: `history`<br>
+      Expected: The command history is shown in the result display box. The command history is empty.
+    - Enter: `list`<br>
+      Expected: The list of students is shown in the student list. The command history is updated to show the command `list`.
+    - Enter: `help`<br>
+      Expected: The help window is shown. The command history is updated to show the command `help`.
+    - Enter: `history`<br>
+      Expected: The command history is shown in the result display box. The command history shows `help` as the most recent command at the top of the list, followed by `list` below it.
+    <br><br>
+      
+### Launch with erroneous data files
+###### Setup
+- Move the JAR file to a fresh directory.
+- Run and close the app before starting this test. (This is to ensure a fresh `classmanager.json` and `preferences.json`)<br>
+- Copy the sample data file `classmanager.json`. And paste 2 copies of it in the same directory as the `classmanager.json`. Rename the copies to `corrupt.json` and `wrong.json`.
+
+###### Test cases
+1. Deal with missing data files
+    - Edit the `preferences.json` to have the entry:
+    ```
+    "classManagerFilePath" : "data\\missing.json"
+    ```
+   (Ensure that there is **no** file named `missing.json`)
+   - Launch the app<br>
+      Expected: The app will be populated with sample students. The app will create a new data file when it is next closed.
+      <br><br>
+2. Deal with corrupted data files
+    - Edit the data file `corrupt.json`, by randomly add or delete lines of data. <br>
+    - Edit the `preferences.json` to have the entry:
+    ```
+    "classManagerFilePath" : "data\\corrupt.json"
+    ```
+    - Launch the app<br>
+      Expected: The app will launch with an empty student list. The app will create a new data file when it is next closed.
+      <br><br>
+3. Deal with valid data file but with the wrong configuration
+    - Edit the data file `wrong.json`. (Do not change anything) <br>
+    - Edit the `preferences.json` to have the entries:
+    ```
+    "classManagerFilePath" : "data\\wrong.json",
+    "tutorialCount" : 1,
+    "assignmentCount" : 1,
+    ```
+   (Ensure that the `tutorialCount` and `assignmentCount` are **changed**)
+    - Launch the app<br>
+      Expected: The app will launch with an empty student list. The app will create a new data file when it is next closed.
+      <br><br>
+
+### Toggle color theme
 
 1. Toggle color theme
 
@@ -1309,25 +1350,9 @@ Testers are expected to do more *exploratory* testing.
       Expected: The color theme of the app will be switched. If the current theme is dark, it will be switched to light and vice versa.
       <br><br>
 
-### Listing students
+### Exit the app
 
-1. Listing all students in Class Manager.
-
-   1. Test case: `list`<br>
-      Expected: The list of students is shown in the student list.
-      <br><br>
-
-### Display help
-
-1. Displaying help.
-
-   1. Test case: `help`<br>
-      Expected: The help window with list of commands is shown.
-      <br><br>
-
-### Exiting the app
-
-1. Exiting the app.
+1. Exit the app.
 
    1. Test case: `exit`<br>
       Expected: The app closes and all data is saved.
