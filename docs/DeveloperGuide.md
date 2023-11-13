@@ -20,6 +20,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
@@ -67,6 +69,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -85,6 +89,8 @@ The `UI` component,
 * depends on some classes in the `Model` component, as it displays `Person` and `Event` object residing in the `Model`.
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -118,6 +124,8 @@ How the parsing works:
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -144,6 +152,8 @@ The `Model` component,
 
 <img src="images/StorageClassDiagram.png" width="600" />
 
+<div style="page-break-after: always;"></div>
+
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
@@ -158,6 +168,9 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 [Scroll back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## **Flow of Program Execution**
 
 The way the user interacts with the program is illustrated as follows.
@@ -192,6 +205,9 @@ Note that even though EventList stores a list of Events, currently only Meetings
 [Scroll back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -525,6 +541,8 @@ The flow for the `remind` command is described by the following sequence diagram
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ## **Proposed Features**
 
 ### \[Proposed\] Undo/redo feature
@@ -619,6 +637,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Requirements**
 
 ### Product scope
@@ -665,6 +685,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | university student | be reminded on events and birthdays                            | so that i can remember upcoming social activities                              |
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -997,7 +1019,9 @@ assigned to the event individually.
 * 2a. The list is empty
 
   Use case ends.
-  
+
+<div style="page-break-after: always;"></div>
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -1029,6 +1053,8 @@ Contacts or groups can be assigned to a single meeting, allowing for efficient m
 [Scroll back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
