@@ -1558,7 +1558,11 @@ Lastly, to ensure that the tasks are saved and loaded correctly, the Storage cla
 
 ### 3. User Centric
 
-TODO
+In designing CoordiMate, our focus was on ensuring a seamless and user-friendly experience for SoC event planners. We recognized the value of our users' time and effort during event planning. To streamline interactions, we implemented command aliases, offering shorthand alternatives that reduce the need for extensive typing (i.e. from `listPerson` to `lp`). This enhancement simplifies command input, making the application more efficient and user-friendly.
+
+CoordiMate is all about putting users in control with a clear and efficient way to manage their event details. We have made it easy for users to update contacts and tasks directly from what they see on the screen. All changes requested by commands are done using the index of persons and tasks in the displayed list, making it straightforward for users to interact with the graphical interface. To make life simpler, we have also added a variety of `find` commands so users can filter their lists by keywords, tags, or task status. This means even if there's a lot of info in the app, users can quickly focus on what they need to view or update. With these deliberate design considerations, users can easily view the index of specific persons or tasks and make updates precisely, without getting lost in a sea of information.
+
+To guide users effectively, we crafted error messages that are not only informative but also pinpoint the specific areas where errors occurred in command inputs. This user-centric approach facilitates quick identification and resolution of issues, ensuring a smoother interaction with the application. Example of valid commands are also given to aid users in better understanding our error messages and assists users in rectifying errors efficiently. If more help is needed, we also went beyond from the given `help` command of AB3 by improving the help window that redirects the user to directly open our user guide on their preferred browser with ease. By prioritizing user-centric design principles, CoordiMate aims to elevate the event planning experience, making it both intuitive and efficient for SoC Computing Club event planners.
 
 ### 4. Improved UI
 
