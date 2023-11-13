@@ -104,8 +104,6 @@ ___
 
 ---
 
-<div style="page-break-after: always;"></div>
-
 # Features
 
 <div markdown="block" class="alert alert-info">
@@ -164,11 +162,12 @@ Format: `addc n/NAME p/PHONE e/EMAIL [lc/LAST_CONTACTED_TIME] [s/STATUS] [r/REMA
 You can put any number of tags (including 0) on a contact.
 </div>
 
+<br/><br/>
+
 Examples:
 - `addc n/John Doe p/98765432 e/johnd@example.com`
 - `addc n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 lc/01.01.2023 0100 t/Professor`
 
-<br/><br/>
 
 ### Listing all contacts: `listc`
 
@@ -221,6 +220,8 @@ Format: `viewc CONTACT_INDEX`
 - Displays the `NAME`, `PHONE`, `EMAIL`, `LAST_CONTACTED_TIME`, `STATUS`, `REMARK` and `TAG` of the contact at the specified `CONTACT_INDEX`.
 - As this command displays the contact at the specified `CONTACT_INDEX` in the contacts list, the contact displayed in the details list may change due to a modification in list order through the use of `addc`, `editc` or `listc` commands. This is intentional.
 - The displayed contact is cleared from the details list when the `deletec` and `findc` commands are used.
+
+<br/><br/>
 
 Examples:
 - `viewc 3` displays detailed information related to the 3rd contact on the contacts list.
@@ -293,6 +294,8 @@ Examples:
 - `addm m/Lunch a/Cafeteria s/20.09.2023 1200 e/20.09.2023 1300`
 - `addm m/CS2103T meeting a/Zoom call url s/20.09.2023 1000 e/20.09.2023 1200`
 
+<div style="page-break-after: always;"></div>
+
 ### Listing all meetings : `listm`
 
 Shows an unfiltered list of all meetings in OutBook in the meetings list. Meetings are sorted by their `START` time.
@@ -300,8 +303,6 @@ Shows an unfiltered list of all meetings in OutBook in the meetings list. Meetin
 Format: `listm`
 
 * This command may change the meeting that is currently displayed in the details list via the `viewm` command, as detailed [here](#viewing-detailed-meeting-information--viewm).
-
-<div style="page-break-after: always;"></div>
 
 ### Deleting a meeting : `deletem`
 
@@ -315,6 +316,8 @@ Format: `deletem MEETING_INDEX`
 Examples:
 - `listm` followed by `deletem 2` deletes the 2nd meeting in the unfiltered meetings list returned by [`listm`](#listing-all-meetings--listm).
 - `findm m/Project` followed by `deletem 1` deletes the 1st meeting in the filtered meetings list returned by [`findm`](#finding-meetings-findm).
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a meeting : `editm`
 
@@ -350,7 +353,6 @@ Examples:
 ![result for 'viewMeeting'](images/ViewMeetingResult.png)
 
 <div style="page-break-after: always;"></div>
-
 
 ### Finding meetings: `findm`
 
@@ -433,6 +435,8 @@ Format: `help`
 Clears all entries from the contacts, meetings and details list in OutBook, effectively wiping all data from OutBook.
 
 Format: `clear`
+
+<div style="page-break-after: always;"></div>
 
 ### Exiting the program : `exit`
 
