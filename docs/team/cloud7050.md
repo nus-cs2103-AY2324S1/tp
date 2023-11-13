@@ -23,7 +23,12 @@ While it has a Graphical User Interface, most of its user interactions happen vi
 
 ### Enhancements implemented
 
-//TODO
+- Notes feature with flexible validation, integrated with `add`, `edit`, UI, tests.
+- Automatic sorting, integrated with `find`, `filter`.
+- Designed & helped implement `TestData`, `Messages`.
+- Helped with planning & doing wide-sweeping refactoring, including simplifications, code quality, test case improvements. Scrapped various overkill parts of AB3, e.g. `Version`. Helped clean dead/irrelevant files from AB3 (e.g. images, tutorials).
+- Helped update many test cases to match our product. Improved existing tests (e.g. `@TempDir` instead of sandbox). Wrote new tests.
+- Updated/enhanced/fixed various Javadocs.
 
 ### Contributions to the UG
 
@@ -47,10 +52,10 @@ While it has a Graphical User Interface, most of its user interactions happen vi
 
 - Set up: GitHub org, repo with labels/branch protections/user stories board, Jekyll, Codecov.
 - Repo-wide refactor to match our product.
-- Managed gradle configs, updated wrapper (e.g. dependencies, fix deprecation, simplification, `clean`).
+- Managed gradle configs, updated wrapper (e.g. dependencies, fix deprecation, simplification, `clean`). Relaxed checkstyle over time. Kept misc files like gitignore up to date.
 - Defined most tasks in [issue tracker](https://github.com/AY2324S1-CS2103-W14-3/tp/issues?q=is%3Aissue+author%3ACloud7050), kept it updated & tidy. Managed milestones, labelled/tracked/edited/assigned tasks. Very active in [issue comments](https://nus-cs2103-ay2324s1.github.io/dashboards/contents/tp-comments.html#16-joel-leow-cloud7050-60-comments) (e.g. adding details/meeting notes).
 - Helped perform milestone wrapups, releases. Performed week-specific tasks (e.g. triaging PE-D bugs, collating progress into MS Teams message).
-- Tracked meeting agendas, tasks pending assignment/discussion. Made forum posts for clarifications. Tracked deliverables, ensured done before deadlines.
+- Tracked meeting agendas, tasks pending assignment/discussion. Made forum posts for clarifications. Tracked deliverables, ensured done before deadlines. Helped keep meetings moving, e.g. screenshare with annotations to facilitate discussions.
 - Worked on docs sections not specific to anybody's features (e.g. [UG](#contributions-to-the-ug), [DG](#contributions-to-the-dg), README, `Ui.png`, `index.md`).
 - Made PR template. Added reviewer assignment GitHub bot.
 
