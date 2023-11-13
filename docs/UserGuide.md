@@ -930,7 +930,7 @@ The student is already linked to this lesson
 ```
 * Input: `link -student alexxxx -lesson lesson1` (_No student with alexxxx in application_)
 ```
-No such student with name alexf found
+No such student with name alexxxx found
 ```
 <box type="tip" seamless>  
 
