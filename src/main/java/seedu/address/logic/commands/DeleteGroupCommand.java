@@ -2,12 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
-import seedu.address.model.person.Person;
 
 /**
  * Removes group from the addressbook and person.
@@ -24,16 +22,6 @@ public class DeleteGroupCommand extends DeleteCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Group groupToDelete = model.deleteGroup(this.groupName);
-
-        //Delete group from all People
-        ObservableList<Person> groupMates = groupToDelete.getListOfGroupMates();
-        groupMates.stream().forEach(p -> {
-            try {
-                p.removeGroup(groupToDelete);
-            } catch (CommandException e) {
-                throw new RuntimeException();
-            }
-        });
 
         return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, groupToDelete.getGroupName()));
     }

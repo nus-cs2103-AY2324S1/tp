@@ -49,7 +49,7 @@ deactivate AddressBookParser
 LogicManager -> DeleteGroupCommand : execute()
 activate DeleteGroupCommand
 
-DeleteGroupCommand -> Model : deletePerson("Alex Yeoh")
+DeleteGroupCommand -> Model : deleteGroup("CS2100")
 activate Model
 
 Model --> DeleteGroupCommand

@@ -244,7 +244,7 @@ public class GroupPersonCommandTest {
 
         ModelStubWithGroup() {
             this.personsAdded = TypicalPersons.getTypicalPersons();
-            this.groupsAdded = TypicalGroups.getTypicalPGroup();
+            this.groupsAdded = TypicalGroups.getTypicalGroupList();
         }
 
         @Override
