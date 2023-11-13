@@ -263,7 +263,7 @@ public class EditContactEventCommand extends Command {
             return new ToStringBuilder("")
                     .add("eventDescription", eventDescription)
                     .add("start", parseDateTimeToString(eventPeriod.getStart()))
-                    .add("end", parseDateTimeToString(eventPeriod.getStart()))
+                    .add("end", parseDateTimeToString(eventPeriod.getEnd()))
                     .toString();
         }
     }
