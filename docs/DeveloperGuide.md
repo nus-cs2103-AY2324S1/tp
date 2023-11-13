@@ -433,11 +433,11 @@ If no timestamp is keyed in, the current system time will be used. For other fie
 
 The activity diagram is as follows:
 
-![editTransaction Activity Diagram](images/EditTransactionActivityDiagram.png)
+![duplicateTransaction Activity Diagram](images/DuplicateTransactionActivityDiagram.png)
 
 The sequence diagram is as follows:
 
-![editTransaction Sequence Diagram](images/EditTransactionSequenceDiagram.png)
+![duplicateTransaction Sequence Diagram](images/DuplicateTransactionSequenceDiagram.png)
 
 #### Filtering Transactions
 
