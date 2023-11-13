@@ -17,9 +17,9 @@ show Person fields
 
 Person -up-> "*" Tag
 
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Person *--> "1" Phone
+Person *--> "1" Email
+Person *--> "1" Address
 
 Person *--> "0..1" Telegram
 Person *--> "0..1" Lead

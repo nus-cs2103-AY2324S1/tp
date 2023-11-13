@@ -6,7 +6,7 @@ skinparam classBackgroundColor MODEL_COLOR
 skinparam classAttributeIconSize 0
 Package Interaction as ModelPackage <<Rectangle>>{
 class Interaction {
-<color: #FFFFFF>- Date: date
+<color: #FFFFFF>- LocalDate: date
 <color: #FFFFFF>- String: interactionNote
 }
 class "<<enum>>\nOutcome" as Outcome {
