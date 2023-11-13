@@ -44,13 +44,13 @@ CheckMate is a **desktop app for streamlining the process of room bookings by ho
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar checkmate.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![LandingGUI](images/Ui.png)
+   ![FinalLandingPage.png](images%2FFinalLandingPage.png)
 
 5. Double-clicking on a booking will allow you to see its details.
    ![ClickBooking.png](images%2FClickBooking.png)
 
 6. Here is a quick summary of the Graphical User Interface (GUI), or what you can see on your screen right now.
-   ![GUILayout.png](images/GUILayout.png)
+   ![FinalGUILayout.png](images%2FFinalGUILayout.png)
 
 7. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -129,7 +129,7 @@ CheckMate is a **desktop app for streamlining the process of room bookings by ho
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+![FinalHelp.png](images%2FFinalHelp.png)
 
 Format: `help`
 
@@ -156,7 +156,7 @@ Shows a list of all bookings in the bookings book.
 
 Format: `list`
 
-![ListCommand.png](images%2FListCommand.png)
+![FinalList.png](images%2FFinalList.png)
 
 * Example image above shows result of command `list`
 
@@ -183,7 +183,7 @@ Finds bookings whose bookings contain the room, name, or both.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-![FindCommand.png](images%2FFindCommand.png)
+![FinalFind.png](images%2FFinalFind.png)
 
 * Example image above shows result of command `find 1`
 * The search is case-insensitive. e.g `hans` will match `Hans`
@@ -235,7 +235,7 @@ Clears all entries from the bookingPeriod book.
 
 Format: `clear`
 
-![ClearCommand.png](images%2FClearCommand.png)
+![FinalClear.png](images%2FFinalClear.png)
 
 * Example image above shows the result of command `clear`
 
