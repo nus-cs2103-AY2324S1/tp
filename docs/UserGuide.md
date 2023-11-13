@@ -320,7 +320,7 @@ Example:
 
 Before `load f/sample` is executed:
 
-<img alt="load before" src="images/theme-light.png" width="700"> <br><br>
+<img alt="load before" src="images/load-before.png" width="700"> <br><br>
 
 After `load f/sample` is executed successfully:
 
@@ -572,9 +572,11 @@ Format: `lookup [c/CLASS_NUMBER] [p/PHONE] [n/NAME] [e/EMAIL] [s/STUDENT_NUMBER]
 Examples:
 
 * `lookup n/alex david` returns `Alex Yeoh`, `David Li`<br>
-  <img alt="result for 'lookup n/alex david'" src="images/lookupNameResult.png" width="680"> </br></br>
+
+<img alt="result for 'lookup n/alex david'" src="images/lookupNameResult.png" width="700"> </br></br>
 * `lookup c/T11` returns all students in class number T11<br>
-  <img alt="result for 'lookup c/T11'" src="images/lookupClassResult.png" width="680"> </br></br>
+
+<img alt="result for 'lookup c/T11'" src="images/lookupClassResult.png" width="700"> </br></br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -751,9 +753,9 @@ Format: `view s/STUDENT_NUMBER`
 
 Example:
 
-* `view s/A0245234A`
+* `view s/A0241243A`
 
-<img alt="result for 'view s/A0245234A'" src="images/ViewCommand.png" width="700" >
+<img alt="result for 'view s/A0241243A'" src="images/ViewCommand.png" width="700" >
 
 Possible error and their corresponding message:
 * If [`STUDENT_NUMBER`](#student-number) does not belong to any student in **Class Manager 2023**.
