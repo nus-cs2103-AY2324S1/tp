@@ -137,7 +137,7 @@ Example:
 2. You can then use <kbd>↑</kbd> to get `editEnrolment m/1 e/1 r/Present`
 3. You can edit the member index to get `editEnrolment m/2 e/1 r/Present` to mark the second member as present.
 
-<div markdown="block" class="alert alert-info">:information_source: CCACommander will not store 2 of the same commands if they were entered twice in a row. Likewise, "commands" containing exclusively of blank spaces will not be stored as well.
+<div markdown="block" class="alert alert-info">:information_source: CCACommander will not store 2 of the same commands if they were entered twice in a row. Likewise, commands containing exclusively of blank spaces will not be stored as well.
 
 Upon entering the <kbd>⌫ Backspace</kbd> or the <kbd>↵ Enter</kbd> key, users will have to re-navigate from the most recent command as it will be treated as an edit or entry of command.
 </div>
