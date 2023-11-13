@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -39,6 +40,8 @@ public class CreateTagCommand extends Command {
      * @param tagParams An array of tag parameters, where each element represents a tag's category and name.
      */
     public CreateTagCommand(String[] tagParams) {
+        requireNonNull(tagParams);
+        System.out.println(Arrays.toString(tagParams));
         this.tagParams = tagParams;
     }
 
@@ -54,7 +57,7 @@ public class CreateTagCommand extends Command {
         requireNonNull(model);
         UniqueTagList uniqueTagList = new UniqueTagList();
         for (String tagParam : tagParams) {
-            String[] categoryTag = tagParam.split("\\s+");
+            String[] categoryTag = tagParam.trim().split("\\s+");
             try {
                 String tagCategory = categoryTag[0];
                 String tagName = categoryTag[1];
@@ -62,7 +65,8 @@ public class CreateTagCommand extends Command {
                 if (model.hasTag(newTag)) {
                     throw new CommandException(MESSAGE_DUPLICATE_TAG);
                 }
-                if (countDistinctCategories(uniqueTagList.asUnmodifiableObservableList()) > 5) {
+                if (!uniqueTagList.containsTagCategory(tagCategory)
+                        && countDistinctCategories(uniqueTagList.asUnmodifiableObservableList()) > 5) {
                     throw new CommandException(MESSAGE_FAILURE);
                 }
                 model.addTag(newTag);
@@ -74,6 +78,7 @@ public class CreateTagCommand extends Command {
     }
 
     private int countDistinctCategories(List<Tag> tags) {
+        requireNonNull(tags);
         Set<String> distinctCategories = new HashSet<>();
 
         for (Tag tag : tags) {
@@ -83,6 +88,35 @@ public class CreateTagCommand extends Command {
 
         return distinctCategories.size();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof CreateTagCommand)) {
+            return false;
+        }
+
+        CreateTagCommand otherCreateTagCommand = (CreateTagCommand) other;
+        boolean result = false;
+        String[] otherTagParams = otherCreateTagCommand.tagParams;
+
+        if (tagParams.length != otherTagParams.length) {
+            return false;
+        }
+
+        System.out.println(Arrays.toString(tagParams));
+        System.out.println(Arrays.toString(otherTagParams));
+
+        for (int i = 0; i < tagParams.length; i++) {
+            result = tagParams[i].equals(otherTagParams[i]);
+        }
+        return result;
+    }
+
 
 
 }

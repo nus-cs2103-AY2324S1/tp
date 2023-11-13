@@ -73,8 +73,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
-
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `PersonInformationPanel`, `SummaryStatisticScreen` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
@@ -125,7 +124,9 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the event book data i.e., all `Event` objects (which are contained in a `UniqueEventList`)
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Event` objects as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Event>`
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -145,8 +146,8 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save address book data, event book data and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from `AddressBookStorage`, `EventBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -181,13 +182,13 @@ When executed, `LinkedInCommand` and `GithubCommand` append the username of the 
 
 Given below is an example usage scenario and how the linkedin and github feature behaves at each step.
 
-Step 1. The user launches the application. `JABPro` will be initialized with the current saved state
+**Step 1.** The user launches the application. `JABPro` will be initialized with the current saved state
 
 User should see the UI as shown below.
 
 ![Ui](images/Ui.png)
 
-Step 2. The user wants to add the LinkedIn username to the first person in the list. The user enters the command `addL 1 u/alexyeoh` to add the username to the candidate's existing details.
+**Step 2.** The user wants to add the LinkedIn username to the first person in the list. The user enters the command `addL 1 u/alexyeoh` to add the username to the candidate's existing details.
 
 The following sequence diagram shows how the AddL and AddG operations work:
 
@@ -198,14 +199,17 @@ User should see the UI as shown below after entering `addL 1 u/alexyeoh`
 
 ![AddL](images/addLState.png)
 
-Step 3. The user can then view the linkedin profile for the candidate at index 1. The user enters the command `linkedin 1`.
+**Step 3.** The user can then view the linkedin profile for the candidate at index 1. The user enters the command `linkedin 1`.
 
 User should see the UI asa shown below after entering `linkedin 1`
 
 ![LinkedIn](images/linkedinState.png)
 
+The following activity diagram shows how the `addL/addG` commands and `linkedin/github` commands are used together to bring together the `Linked/Github` feature:
 
-Alternatives considered
+<puml src="diagrams/linkedinactivitydiagram.puml" alt="LinkedInActivityDiagram" />
+
+#### Alternatives considered ####
 
 Alternative 1 (Chosen): 
 
@@ -245,9 +249,6 @@ When executed, `ViewCommand` saves the index of the person to be viewed as `Last
 By having a `isView` property in `CommandResult`, the `MainWindow` component is able to toggle the `UI` to the view the person of the `LastViewedPersonIndex` after the command has been executed.
 
 
-
-
-
 Given below is an example usage scenario and how the view feature behaves at each step.
 
 Step 1. The user launches the application. The `AddressBook` will be initialized with the current saved address book state
@@ -262,7 +263,7 @@ The following sequence diagram shows how the view operation works:
 
 <puml src="diagrams/ViewSequenceDiagram.puml" alt="ViewSequenceDiagram" />
 
-**Note:** The lifeline for `RemarkCommand` and `RemarkCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** The lifeline for `ViewCommand` and `ViewCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 User should see the UI as shown below after entering `View 1`  
 
@@ -334,98 +335,82 @@ Step 3. The user should see the UI below upon entering `search n/john st/intervi
 **Note:** The current implementation of search allows users to search by any of the categories individually or by different combinations of the categories.
 It also allows users to specify more than one search parameter for each category e.g. `search n/alex bernice`
 
-### \[Proposed\] Undo/redo feature
+## Events feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The Events feature extends the original ideas of the `AddressBook` to store two types of entities - Candidates and Events associated with candidates.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+It consists of two parts - adding the events to JABPro, and viewing the events.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+THe addition is performed by the `EventCommand` class. It extends `Command` and overrides the `execute()` method to add the event to JABPro.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+It involves the `EventCommand` class and its corresponding parser, `EventCommandParser`, that takes in the user input and returns an `EventCommand` object.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+When executed, `EventCommand` finds the person the event is associated with, and adds the name of the person, and other details such as description and start and end time, as input by the user. The existing `EventBook` is then updated to reflect this addition, and a `CommandResult` object is returned.
 
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
+The viewing is performed by the `ScheduleCommand`. It extends `Command` and overrides the `execute()` method to open the `Events Window` and display the events.
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+**Note:** There is another way of viewing events, that is through the `Events` tab. Refer to the [UserGuide](UserGuide.md#viewing-events-schedule) for more information.
+
 
 </box>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Given below is an example usage scenario highlighting how the `Events` feature behaves at each step.
 
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
+**Step 1.** The user launches the application. The `EventBook` will be initialized with the current saved event book state.
 
+User should see the UI as shown below.
+
+![Ui](images/Ui.png)
+
+**Step 2.** The user wishes to add an "Interview" event for the first candidate in the list. The user enters the following command:
+
+`event 1 d/Interview bt/2023-11-12 10:00 et/2023-11-12 12:00`
+
+This command adds a new event to the `EventBook` that is associated with the first person in the list, with the description as "Interview" and the start and end time as specified.
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+**Note:** The start and end times are required to follow a specific format. Refer to the [UserGuide](UserGuide.md#adding-an-event-event) for more information.
 
 </box>
 
-The following sequence diagram shows how the undo operation works:
+The following sequence diagram shows how the `Event` operation works:
 
-<puml src="diagrams/UndoSequenceDiagram.puml" alt="UndoSequenceDiagram" />
+<puml src="diagrams/EventSequenceDiagram.puml" altText="EventSequenceDiagram"></puml>
 
-<box type="info" seamless>
+User should see the UI as shown below after executing the aforementioned command [It is assumed that the first candidate in the list is Alex Yeoh].
 
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
-</box>
+![EventWindow](images/eventwindow.png)
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The following activity diagram shows how the `event` and `schedule` command can be used together to schedule events:
 
-<box type="info" seamless>
+<puml src="diagrams/eventactivitydiagram.puml" alt="Event Activity Diagram"></puml>
 
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+#### Alternatives considered ####
 
-</box>
+***Duplicate Events***
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Alternative 1 (chosen):
 
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
+`Events` associated with the same `Person`, having the same description are allowed. It is upto the user to input more detailed descriptions to differentiate between them, and to promote readability.
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Pros: It makes the `EventBook` a complete product of the user's choice as no restrictions are imposed, and the user can enter data as per their preferences and their convenience.
 
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
+Cons: It might lead to confusion if multiple events of the same person, having the same description are added. Hence, it is recommended that the user enters detailed descriptions to distinguish events from one another.
 
-The following activity diagram summarizes what happens when a user executes a new command:
+Alternative 2:
 
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+`Events` associated with the same `Person`, having the same description are considered duplicate `Events` and hence, are rejected by the system.
 
-#### Design considerations:
+Pros: It prevents redundant data from being stored and accidental addition of multiple events of the same type for the same person
 
-**Aspect: How undo & redo executes:**
+Cons: It restricts users from entering data that might be understandable or convenient for them. [For example: If the user creates two Events with the description "Interview" for the same person, they might have a distinct idea of what each of those Events mean, but the system prevents them for making this addition].
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -447,9 +432,13 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 * has a need to manage a significant number of candidates contacts
+* wants an organized way to keep track of candidates information
 * wants to view and manage candidates information in a single place
-* wants to filter and sort candidates based on their skills, experience, or application date
+* wants to filter and sort candidates based on their details
 * wants to compare candidates using their information
+* wants to view a schedule/summary of events relating to the candidates
+* wants to attach a score to candidate performance over interview and assessments
+* wants to be able to use scores in order to quantitatively compare candidates
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -470,33 +459,31 @@ It serves as a one-stop addressbook for managing job applications.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​          | I want to …​                                                                                                                  | So that I can…​                                                                                          |
-|---------|------------------|-------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| `* * *` | Hiring Manager   | add a candidate's contact information, including name, email, phone number                                                    | I can easily access and reach out to candidates when needed                                              |
-| `* * *` | Hiring Manager   | add notes and comments to candidate profiles to document interview feedback and impressions                                   | I can maintain a record of interactions and feedback                                                     |
-| `* * *` | Hiring Manager   | delete job applicants information                                                                                             | I can remove redundant/unecessary data bloat and also to abide to privacy laws                           |
-| `* * *` | Hiring Manager   | view a specific job applicant's resume or portfolio                                                                           | I can check whether they meet the requirements requested by other department heads                       |
-| `* * *` | Hiring Manager   | search for all job applicants that have a particular skill mentioned in their application                                     | I can find suitable candidates for a project                                                             |
-| `* * *` | Hiring Manager   | List all candidate's information                                                                                              | I can easily view each candidates information                                                            |
-| `* * `  | Hiring Manager   | update the application status for a candidate (e.g. "Interviewed", "Rejected", "Offered")                                     | I can keep track of each candidate's progress in the hiring process                                      |
-| `* * `  | Hiring Manager   | filter candidates based on their skills, experience, or application date                                                      | I can efficiently evaluate compare candidates                                                            |
-| `* * `  | Hiring Manager   | compare candidates that I am handling using the information i have stored such as that comparing CAP, Years of experience etc | so that I can choose the best candidates to the next stage of the hiring process                         |
-| `* * `  | Hiring Manager   | collate job applicants who were rejected but have potential for other positions in the company                                | I can forward this data to other departments who might need it                                           |
-| `* * `  | Hiring Manager   | collate job applicants who were offered the job and accepted it as well as deleting their details from JABPro                 | I can send this data to the HR department that manages existing employees                                |
-| `* * `  | Hiring Manager   | collate job applicants who were offered the job but rejected it                                                               | I can contact them to ask why they rejected the offer and get feedback                                   |
-| `* * `  | Hiring Manager   | add candidates key features into a multi-formatted form                                                                       | I can have a visual way to objectively view a candidates skills and information                          |
-| `*` | Hiring Manager   | easily get summary statistics such as total offers given out, rejections, cost associated with total offers                   | I can have a summary overview without going into each candidate data specifically                        |
-| `*` | Hiring Manager   | get data on which positions are lacking job applicants                                                                        | I can update the external recruitment team to focus on head hunting applicants for these roles           |
-| `*` | Hiring Manager   | get data on which positions already have too many applicants                                                                  | I can forward this to the department heads to see if they still want to keep the job posting or close it |
-| `*` | Hiring Manager   | get a visual alert or a section to display urgent task                                                                        | I can stay organized and ensure that remain up to date and on task with the hiring process               |
-| `*` | Hiring Manager   | export candidate information and application data to a spreadsheet        <br/>                                               | I can perform further analysis using alternate tools on candidate data                                   |
-*{More to be added}*
+| Priority | As a …​          | I want to …​                                                                                                     | So that…​                                                                                                                                  |
+|----------|------------------|------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | Hiring Manager   | add a candidate's contact information, including name, email, phone number                                       | I can easily access and reach out to candidates when needed                                                                                |
+| `* * *`  | Hiring Manager   | add notes and comments to candidate profiles to document interview feedback and impressions                      | I can maintain a record of interactions and feedback                                                                                       |
+| `* * *`  | Hiring Manager   | delete job applicants information                                                                                | I can remove redundant/unecessary data bloat and also to abide to privacy laws                                                             |
+| `* * *`  | Hiring Manager   | view a specific job applicant's resume or portfolio                                                              | I can check whether they meet the requirements requested by other department heads                                                         |
+| `* * *`  | Hiring Manager   | search for all job applicants that have a particular skill mentioned in their application                        | I can find suitable candidates for a project                                                                                               |
+| `* * *`  | Hiring Manager   | List all candidate's information                                                                                 | I can easily view each candidates information                                                                                              |
+| `* * *`  | Hiring Manager   | update the application status for a candidate (e.g. "Interviewed", "Rejected", "Offered")                        | I can keep track of each candidate's progress in the hiring process                                                                        |
+| `* * *`  | Hiring Manager   | record the score of the different activities such as interviewsor assessments that an applicant might go through | I can use them for effective comparison and filter the candidates easily                                                                   |
+| `* * *`  | Hiring Manager   | compare candidates using their performance in their assessments or interviews                                    | I can choose the best candidates to move to the next stage of the hiring process and get the best performing candidates objectively        |
+| `* * *` | Hiring Manager | add social profile [LinkedIn/Github]  candidate's information and view with ease                                 | I can get a more holistic view of the candidate's abilities |
+| `* *`    | Hiring Manager | view a schedule/summary of events relating to the candidates                                                     | I can make preparations and arrangements for the events beforehand, and also get an idea of where each candidate is in the hiring process. |
+| `**`     | Hiring Manager   | export candidate information and application data to a spreadsheet        <br/>                                  | I can perform further analysis using alternate tools on candidate data                                                                     |
+| `*`      | Hiring Manager   | get data on which positions are lacking job applicants                                                           | I can update the external recruitment team to focus on head hunting applicants for these roles                                             |
+| `*`      | Hiring Manager   | get data on which positions already have too many applicants                                                     | I can forward this to the department heads to see if they still want to keep the job posting or close it                                   |
 
 ### Use cases
 
 (For all use cases below, the **System** is the `JABPro` and the **Actor** is the `hiring manager`, unless specified otherwise)
 
 **Use case: Add a person**
+
+**Guarantees**: The person is added to the list of persons. The person is also saved in the database.
+
 
 **MSS**
 1. User requests to add a person.
@@ -506,14 +493,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 Use case ends.
 
 **Extensions**
-* 2a. User does not provide the correct information for a person to be added.
-    * 2a1. JABPro shows an error message and provides course of action for remedy.  
+* 1a. User does not provide the correct information for a person to be added.
+    * 1a1. JABPro shows an error message and provides course of action for remedy.  
     Use case resumes at step 1.
-* 2b. User has already been added to the list of persons.
-    * 2b1. JABPro shows an error message and provides course of action for remedy.   
+* 1b. User has already been added to the list of persons.
+    * 1b1. JABPro shows an error message and provides course of action for remedy.   
     Use case resumes at step 1.
 
 **Use case: Add a remark to a person**
+
+**Guarantees**: The remark is added to the person. The remark is also saved in the database.
 
 **MSS**
 1. User requests to add a remark to a person.
@@ -522,11 +511,11 @@ Use case ends.
 Use case ends.
 
 **Extensions**
-* 2a. User provides invalid index.
-    * 2a1. JABPro shows an error message and provides course of action for remedy.  
+* 1a. User provides invalid index.
+    * 1a1. JABPro shows an error message and provides course of action for remedy.  
     Use case resumes at step 1.
-* 2b. User does not provide a remark.
-    * 2b1. JABPro adds an empty remark to the person, remark no longer seen.  
+* 1b. User does not provide a remark.
+    * 1b1. JABPro adds an empty remark to the person, remark no longer seen.  
     Use case ends.
 
 **Use case: List all persons**
@@ -547,20 +536,24 @@ Use case ends.
   * 2b1. JABPro shows a message indicating that there are no persons to display.   
   Use case ends.
 
-**Use case: Search persons by the specified categories(name, status and/ tag)**
+**Use case: Search persons matching the given profile**
 
 **MSS**
-1.  Hiring manager types in search parameters to search users by the specified categories.
-2.  JABPro shows a list of persons whose profile matches the given parameters.
+1. User requests to search users matching the given profile as specified by the search parameters.
+2. JABPro requests details of the profile to be searched.
+3. User enters the profile details.
+4. JABPro retrieves the list of all persons from the database whose profiles match the given search parameters.
+5. JABPro displays the filtered list of persons to the user.
 Use case ends.
 
 **Extensions**
 
-* 1a. The given name/status/tag parameter is invalid.
-    * 1a1. JABPro shows an error message.
-      Use case resumes at step 1.
-* 2a. The list is empty. <br/>
-  Use case ends.
+* 3a. The given name/status/tag parameter is invalid.
+  * 3a1. JABPro shows an error message and provides course of action for remedy.
+    Use case resumes at step 3.
+* 5a. No person match the given profile.
+  * 5a1. JABPro shows a message indicating that there are no persons to display.
+    Use case ends.
 
 
 **Use case: Delete a person**
@@ -606,13 +599,15 @@ Use case ends.
     * 3b1. AddressBook shows an error message indicating that the specified status is invalid.  
       Use case resumes at step 3.
 
-**Use case: View a person's details**
+**Use case: View a person's details**  
+
+**Guarantees**: Person's details are displayed in full in a new window.
 
 **MSS**
 1.  User requests to list persons.
-2.  AddressBook shows a list of persons.
+2.  JABPro shows a list of persons.
 3.  User requests to view a specific person in the current displayed AddressBook.
-4.  The UI shows the details of that person.  
+4.  JABPro shows the details of that person.  
     Use case ends.
 
 **Extensions**
@@ -626,6 +621,27 @@ Use case ends.
 * 3b. User decides to search for a person based on a criteria such as name.
     * 3b1. Displayed AddressBook changes to match that of search result.  
       Use case resumes at step 3.
+
+**Use case: Using scores to compare and filter people**
+
+**Guarantees**: Persons are displayed has a score that exceed the specified threshold based on the metric and value provided for a tag.
+
+
+**MSS**
+1. User requests to list persons.
+2. JABPro shows a list of persons.
+3. User edits the scores of persons tying it to a tag
+4. User requests to filter persons by their scores for a particular tag based on a particular metric.
+5. JABPro shows a list of persons with scores.
+
+**Extensions**
+* 3a. The tag or score is invalid.
+    * 3a1. JABPro shows an error message indicating that the specified tag or score is invalid.  
+      Use case resumes at step 3.
+* 4a. The parameters provided are invalid.
+    * 4a1. JABPro shows an error message indicating that the specified method is invalid.  
+      Use case resumes at step 4.
+  
 
 **Use case: Export the current data to excel**
 
@@ -670,13 +686,13 @@ Use case ends.
 * 1b. Social profile requested other than LinkedIn or Github.
     * 1b1. JABPro displays error message.  
     Use case ends.
-* 3a. User does not exist on the social platform.  
+* 3a. Person does not exist on the social platform.  
   Use case ends.
 
 **Use case: Add events relating to candidates**
 
 **MSS**
-1. User requests to add an event relating to a candidate
+1. User requests to add an event relating to a candidate.
 2. JABPro shows that command has been executed successfully.
 3. JABPro adds the event to the list of events.
    Use case ends.
@@ -687,8 +703,26 @@ Use case ends.
 * 2b. Event has already been added to the list of events.
   * 2b1. JABPro shows an error message and provides course of action for remedy. Use case resumes at step 1.
 
+**Use case: Tag a candidate with a newly created tag**
 
-*{More to be added}*
+**MSS**
+1. User requests to create a tag of a specific category.
+2. JABPro adds the tag to the list of tags.
+3. JABPro shows a message indicating that the tag has been added successfully.
+4. User requests to view all persons.
+5. User requests to add the newly created tag to add tag to a person.
+6. JABPro adds tag to the person.
+   Use case ends.
+
+**Extension**
+* 1a. The given tag name is invalid
+  * 1a1. JABPro displays an error message
+* 1b. User did not provide the complete command (missing category or name). Use case resumes at step 1.
+  * 1b1. JABPro displays an error message and provides a course of action for remedy. Use case resumes at step 1
+* 2a. Tag already exists in JABPro
+  * 2b1. JABPro displays an error message saying tag already exists. Use case resumes at step 1.
+* 5a. Multiple tags exist with the same name in different categories
+  * 5a1. JABPro displays an error message and provides a course of action for remedy. Use case resumes at step 5.
 
 ### Non-Functional Requirements
 
@@ -704,17 +738,88 @@ Use case ends.
 10. Commands should be `easy to remember` and `intuitive` to use
 11. Product should be `consistent` in its visuals and commands formatting
 
-*{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Hiring Manager**: Inter-changable with users in this context
-* **Candidate**: Inter-changable with persons/job applicants in this context
+* **Candidate**: Inter-changable with persons/applicants
 * **AddressBook**: Inter-changable with JABPro in this context since this is an evolve project built on-top of AB3 functionality
 * **Keyword**: Search parameter
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Appendix: Planned Enhancements
+
+### Deleting tags : `delete tag`
+
+While certainly useful, JABPro currently does not have feature to delete existing tags. However, this feature will be implemented
+in future iterations.
+
+<box type="tip" seamless>
+
+**Tip:**
+* If you are an advanced user, you are welcome to delete your tags manually by editing the json file!
+  </box>
+
+### Editing tags : `edit tag`
+
+JABPro currently does not support editing tags i.e. editing tag name or category. This feature will be implemented in future iterations.
+
+**Tip:**
+* If you are an advanced user, you are welcome to edit your tags manually by editing the json file!
+  </box>
+
+### Exporting events : `export`
+
+JABPro currently does not support exporting Events. This feature will be implemented in future iterations.
+
+### Add and general uniqueness constraint: `add`
+**Improve what identifies as a unique person**:  
+Currently, a person is uniquely identified by their name. This is not ideal as there may be multiple persons with the same name. We would like to improve this by using a unique identifier such as internal ID or NRIC number.
+This would allow us to have a more robust system that can handle multiple persons with the same name.
+  
+### Improve on Edit feature: `edit`
+**Improve the edit feature**:
+   Currently, it falls short of the user's expectations as it does not allow the user to add on to existing tags. We would like to improve this by creating a feature that allows the user to add on to existing tags.  
+   Thereby users can add on to existing tags without having to retype all the previous tags.  
+  
+### Improve on Summary Statistics
+**Improve the summary statistic implementation**:  
+Currently, if the applicants do not have a good spread of scores, the summary statistics will not be very useful. We would like to improve on this by implementing a more robust summary statistics that can handle small sample sizes and outliers.   
+Additionally, you can only use the summary statistic table for comparison after you have inputted most of the scores. At that point, it might be more relevant to use the filter feature instead. Thereby we hope to add more visualisations like graphs to the summary statistics table to make it more useful for comparison.
+
+### Improve on Filter feature: `filter`
+**Improve the filter feature**  
+Currently, the filter feature might be too flexible for the user. That is it works on the displayed list and not across the board. We would like to improve on this by implementing a filter feature that works across the database.  
+This makes it more intuitive and logical for the user to use since the user would expect the filter feature to work across the database and not just the displayed list.
+
+
+
+## **Appendix: Effort**
+
+### Based on over-arching features
+
+###  Flexibility for further analysis
+We acknowledge that there will be some who would prefer to analyse data outside JABPro - and that is completely fine.
+With the ability to export to a .csv file using JABPro, users are empowered with the ability to conduct analysis in 
+other applications that they are more familiar with. 
+
+The introduction of the export command showcases our commitment towards user flexibility, and focus towards 
+making JABPro a tool that adds towards hiring manager's ecosystem, as opposed to a trade-off that requires them
+to only rely on JABPro. We strongly believe that users should have the flexibility and ability to conduct
+further analysis outside JABPro if they wish to.
+
+
+### Storage Complications and Effort
+In relation to saving of data to storage, we largely followed the same format as AB3. The only strict deviation from the AB3 method of saving was using a different data structure.
+In the case of `ScoreList` and `UniqueTagList`, we used a hashmap to save the details of the score and tags for `ScoreList` or tag category and tag name for `Tags`. This was more complicated to implement as the conversion from hashmap to json and vice versa was more complicated than the conversion of a list to json and vice versa.
+
+
+
+
+
+
 
 ## **Appendix: Instructions for manual testing**
 
@@ -774,15 +879,170 @@ testers are expected to do more *exploratory* testing.
 1. Adding a person while all persons are being shown  
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
     
-   1. Test case:   
+   1. Test case 1 (Positive Test Case):   
       `add n/John Poh p/98765432 e/johnpoe@gmail.com a/ 311, Clementi Ave 2, #02-25 r/ 2 years of experience in software development`  
    
       **Note**:  The current AddressBook cannot contain anyone named `John Poh`  
       Expected: New person is added to the list. Details of the new person shown in the status message. 
-   2. Test case:   
+   2. Test case (Negative Test Case):   
       `add n/John Poh p/98765432 e/johnpoe@gmail.com a/ 311, Clementi Ave 2, #02-25 r/ 2 years of experience in software development`  
       **Note**:  The current AddressBook should contain a person named `John Poh`
       Expected: No person is added. Error details shown in the status message. List of persons remains the same.
 
+### Editing a person's score for an assessment type tag while all persons are being shown
+
+1. Editing a person's score for an assessment type tag while all persons are being shown  
+   1. Prerequisites:  
+      1. List all persons using the `list` command. The list should have at least one person.
+      2. Create an `assessment` type tag named `Interview` using the `create` command. This is done by entering `create t/assessment Interview` in the command box.
+      
+    
+2. Test case 1 (Positive Test Case):   
+`edit 1 t/Interview sc/Interview 70`  
+**Note**: The score value should be a positive integer and must contain a space between the tag and the score value.  
+**Expected**: Score for the assessment type tag `Interview` is updated to 70.   
+Both Person List and Person Information Panel is updated to reflect the new `Interview` Tag. The new score is reflected on the Summary Statistics Screen(Third panel from the left).    
+
+
+3. Test case 2:  
+`edit 1 t/swe sc/swe 70`  
+**Note**: Tag `swe` is not categorised as an assessment type tag. Thus, you cannot edit the score for this tag.  
+**Expected**: Neither score nor tag is updated for person. Error details shown in the status message.  
+   
+3. Test case 3:  
+`edit 1 t/Interview sc/Interview -10`  
+**Note**: The score value should be a positive integer and must contain a space between the tag and the score value.  
+**Expected**: Neither score nor tag is updated for person. Error details shown in the status message.
+
+### Adding a remark to a person while all persons are being shown
+
+1. Adding a remark to a person while all persons are being shown  
+   1. Prerequisites: List all persons using the `list` command. 
+    
+   2. Test case 1:   
+   `remark 1 r/John is a good candidate`  
+   **Expected**: New remark is added to the person. Details of remark displayed on the person information panel.
+   
+   3. Test case 2:  
+   `remark 1 r/**REMARK** Furthermore, hes capable of working in a team`    
+   **Expected**: Remark is added on from the previous existing remark. Person information panel is updated to reflect the addition of the remark.  
+   Specifically `John is a good candidate` is followed by `Furthermore, hes capable of working in a team` on the person information panel.  
+   4. Test case 3:   
+   `remark 1 r/`  
+   **Expected**: Previous remark is deleted. Person information panel is updated to reflect the deletion of the remark and is blank.  
+   5. Test case 4:  
+   `remark 0 r/John is a good candidate`   
+    **Expected**: No remark is added. Error details shown in the status message. Person information panel remains the same.
+
+### Viewing a person's details while all persons are being shown
+1. Viewing a person's details while all persons are being shown  
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    
+   2. Test case 1:   
+   `view 1`  
+   **Expected**: Person information panel is updated to reflect the details of the person.  
+   3. Test case 2:  
+   `view 0`  
+   **Expected**: No person is viewed. Error details shown in the status message. Person information panel remains the same.
+
+### Setting a person's status (Preliminary, Interviewed, Accepted/Rejected.)
+1. Setting a person's status in the list
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    2. Test case 1:   
+       `set 1 Interviewed`  
+       **Expected**: On the next 'view' command, the personnel's details shows as Interviewed.
+    3. Test case 2:  
+       `Set 0 Interviewed`  
+       **Expected**: No person is set to 'Interviewed'. Error details shown in the status message. Person information panel remains the same.
    
 
+### Exporting the information into a csv file 
+1. Exporting all current user data to csv
+    1. Prerequisites: Necessary write permissions to the /data/export.csv location
+
+    2. Test case 1:   
+       `export`  
+       **Expected**: File is successfully exported to the location /data/export.csv
+    3. Test case 2:  
+       `export` (without write permissions)  
+       **Expected**: /data/export.csv file is not updated. Error details shown in the status message.
+
+
+### Filtering persons by their scores for a particular tag based on a particular metric while all persons are being shown
+1. Filtering persons by their scores for a particular tag based on a particular metric while all persons are being shown  
+   1. Prerequisites:  
+      1. List all persons using the `list` command. The list should have at least one person.
+      2. Create an `assessment` type tag named `Interview` using the `create` command. This is done by entering `create t/assessment Interview` in the command box.
+      3. Edit the score for the `Interview` tag for at least two people using the `edit` command. This is done by entering `edit 1 t/Interview sc/Interview 70` and `edit 2 t/Interview sc/Interview 50` in the command box.
+    
+   2. Test case 1:   
+   `filter t/Interview met/score val/60`  
+   **Expected**: Person list is updated to reflect the persons with scores greater than 60 for the `Interview` tag. In this case its only the person with index 1. 
+   
+   3. Test case 2:  
+   `filter t/Interview met/median`    
+   **Expected**: Person list is updated to reflect the persons with scores greater than the median score for the `Interview` tag. In this case its only the person with index 1.
+
+   4. Test case 3:    
+   `filter t/Interview met/percentile val/0`  
+   **Expected**: Person list is updated to reflect the persons with scores greater than the 0th percentile score for the `Interview` tag. In this case it will be all the persons with the `Interview` tag.
+   
+   5. Test case 4:
+   `filter t/swe met/score val/60`
+    **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
+   
+    6. Test case 5:
+    `filter t/Interview met/score val/-10`
+    **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
+   
+    7. Test case 6:
+    `filter t/Interview met/variance val/100` 
+       **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
+    8. Test case 7:
+    `filter t/Interview met/percentile` 
+    **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
+
+### Adding LinkedIn/Github username to a person while all persons are being shown ###
+
+1. Adding LinkedIn/Github username to a person while all persons are being shown
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    2. Test case (Positive test case): `addL 1 u/alexyeoh`
+       **Expected:** LinkedIn username added to the person's profile. Displayed in person card.
+    3. Test case (Negative test case): `addG -1 u/madlad`
+       **Expected:** No Github username is added to any person. Error details shown in the status message. Person information panel remains the same.
+    4. Test case (Negative test case): `addL u/maxcodes`
+       **Expected:** No LinkedIn username is added to any person. Error details shown in the status message. Person information panel remains the same.
+    5. Test case (Negative test case): `addG 1`
+       **Expected:** No Github username is added to any person. Error details shown in the status message. Person information panel remains the same.
+
+### Viewing person's social profile ###
+
+1. Viewing a person's social profile
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list, with their usernames previously added.
+    2. Test case (Positive test case): `linkedin 1`
+       **Expected:** Redirected to LinkedIn profile of the person, in the browser. Success message displayed on JABPro.
+    3. Test case (Negative test case): `github 0`
+       **Expected:** No Github profile shown. Error details shown in the status message.
+    4. Test case (Negative test case): `linkedin 2`
+       [Assumption: LinkedIn username has not been previously added for candidate 2]
+       **Expected:** No LInkedin profile shown. Error details shown in the status message.
+    5. Test case (Negative test case): `github`
+       **Expected:** No Github profile shown. Error details shown in the status message.
+
+### Adding Event relating to a candidate ###
+
+1. Adding event relating to a candidate
+    1. Prerequisites: List all persons using the `list` command. Multiple person in the list.
+    2. Test case (Positive test case): `event 1 d/Interview bt/2023-11-12 10:00 et/2023-11-12 12:00`
+       **Expected:** Event added to EventBook. Success message displayed. Event visible in Events window.
+    3. Test case (Negative test case): `event 0 d/Interview bt/2023-11-12 10:00 et/2023-11-12 12:00`
+       **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
+    4. Test case (Negative test case): `event 1 bt/2023-11-12 10:00 et/2023-11-12 12:00`
+       **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
+    5. Test case (Negative test case): `event 1 d/Interview bt/12-11-2023 10:00 et/12-11-2023 12:00`
+       **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
+    6. Test case (Negative test case): `event 1 d/Interview bt/2023-11-12 12:00 et/2023-11-12 10:00`
+       **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
+    7. Test case (Negative test case): `event 1 d/Interview bt/2023-11-31 10:00 et/2023-12-01 10:00`
+       **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.

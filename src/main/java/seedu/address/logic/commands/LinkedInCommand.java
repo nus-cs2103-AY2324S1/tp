@@ -20,6 +20,7 @@ public class LinkedInCommand extends Command {
     public static final String COMMAND_WORD = "linkedin";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Redirects to user's LinkedIn account. "
             + "Parameters: " + "[" + COMMAND_WORD + " <USERID>]...\n"
+            + "where USERID must be a non-zero unsigned integer, and within bounds of list size\n"
             + "Example: " + COMMAND_WORD + " 2";
     public static final String MESSAGE_SUCCESS = "Redirecting to LinkedIn ...";
 
@@ -50,5 +51,20 @@ public class LinkedInCommand extends Command {
         }
 
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof LinkedInCommand)) {
+            return false;
+        }
+
+        LinkedInCommand otherLinkedInCommand = (LinkedInCommand) other;
+        return this.index.equals(otherLinkedInCommand.index);
     }
 }
