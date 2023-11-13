@@ -262,6 +262,26 @@ The following activity diagram illustrates how the complete operation is execute
 
 <img src="images/CompleteActivityDiagram.png" width="800"/>
 
+**Design Considerations**
+
+Alternative 1 (Previous Design): Use a `CompleteCommandDescriptor` that has a `Date` and `Index` field wrapped by Java `Optional`.
+
+* Pros: 
+  * Allows for clean, readable code without having to check for null values regardless of whether user inputs a date or index.
+  
+* Cons:
+  * Have to check for both fields for at every step of the command which is inefficient.
+
+Alternative 2 (Current Choice): Make `CompleteCommand` an abstract class with the subclass `CompleteByIndex` and `CompletebyDate`.
+
+Pros: 
+* `LogicManager` can just execute `CompleteCommand` without needing to know if it is `CompleteByIndex` or `CompleteByDate`.
+* Also eliminates the need to check for null fields, since each `CompleteCommand` subclass only has their required fields. 
+* This also increases the extensibility of the command, as a new subclass can just be added.
+
+Cons: 
+* Increases the amount of code written and testing required.
+
 ### Gather Emails Feature
 
 The **Gather Emails** feature in our software system is designed to efficiently collect email addresses. This feature is facilitated by the `GatherCommand` and `GatherCommandParser`. Below is the class diagram of the gather emails feature.
@@ -775,10 +795,10 @@ point for testers to work on; testers are expected to do more *exploratory* test
 
    1. Prerequisites: List all persons using the `list` command.
 
-   2. Test case: `add n/name p/987 a/address e/email@email nk/nokname nkp/654`<br>
+   2. Test case: `add n/name p/987 a/address e/email@email.com nk/nokname nkp/654`<br>
       Expected: New contact with the above details is added to the bottom of the list.
 
-   3. Test case: `add n/invalidName! p/987 a/address e/email@email nk/nokname nkp/654`<br>
+   3. Test case: `add n/invalidName! p/987 a/address e/email@email.com nk/nokname nkp/654`<br>
       Expected: No person is added. Error details shown in the status message. Status bar remains the same.
 
 ### Editing a person
