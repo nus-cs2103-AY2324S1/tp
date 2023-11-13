@@ -21,6 +21,7 @@ balance sheet. It is built java, developed for small business accountant looking
    - Created export button in menu bar, allowing user to export transactions(csv format) or staff list(json format) to chosen location.
 4. Wrote additional test cases 
    - AddTransactionCommandTest: [PR 217](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/217)
+   - Additional command tests: [PR 228](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/228)
 5. Bug fixes from Mock PE: [PR 190](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/190)
    - Handle duplicate persons in Address Book [Issue 151](https://github.com/AY2324S1-CS2103T-W13-3/tp/issues/151)
 
@@ -31,6 +32,8 @@ balance sheet. It is built java, developed for small business accountant looking
 
 
 ### **Developer Guide**
+1. Edited features under appendix
+2. Added Manual test steps for exporting 
 
 ### **Review Contributions**
 1. In charge of UG: 
