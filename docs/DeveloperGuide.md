@@ -33,7 +33,7 @@ title: Developer Guide
     6. [Find Command](#find-command)
         1. [Implementation](#implementation)
         2. [Design Considerations](#design-considerations)
-   7. [Interview and Interview Commands](#interview-and-interview-commands)
+    7. [Interview and Interview Commands](#interview-and-interview-commands)
         1. [Implementation](#implementation)
         2. [Design Considerations](#design-considerations)
 5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
@@ -46,7 +46,7 @@ title: Developer Guide
 7. [Appendix B: Instructions for Manual Testing](#appendix-b-instructions-for-manual-testing)
 8. [Appendix C: Effort](#appendix-c-effort)
 9. [Appendix D: Planned Enhancements](#appendix-d-planned-enhancements)
-   1. 
+    1.
 
 ---
 
@@ -66,7 +66,9 @@ Refer to the guide [Setting up and getting started](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-Tip: The `.puml` files used to create diagrams in this document can be found in the [diagrams](diagrams) folder. Refer to the [PlantUML Tutorial at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+Tip: The `.puml` files used to create diagrams in this document can be found in the [diagrams](diagrams) folder. Refer
+to the [PlantUML Tutorial at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to
+create and edit diagrams.
 </div>
 
 ### Architecture
@@ -87,6 +89,7 @@ A quick overview of the main components and how they interact with each other is
 `Commons` represents the common classes used by all components.
 
 The other four component of the App are as follows:
+
 * `UI`: Handles the user interface of the application.
 * `Logic`: Handles command execution and data manipulation.
 * `Model`: Stores the data of the application.
@@ -103,11 +106,15 @@ Each of the four main components:
 * Defines its API in an `interface` named after the component.
 * Implements its functionality using a `{Component Name}Manager` class, following the corresponding API interface.
 
-For example, the `Logic` component's API is defined in `Logic.java`, and its functionality is implemented in `LogicManager.java`. 
+For example, the `Logic` component's API is defined in `Logic.java`, and its functionality is implemented
+in `LogicManager.java`.
 
-Other components interact with a given component (e.g. `Logic`) by calling methods defined in the corresponding API interface (e.g. `Logic.java`) instead of calling methods directly on the implementation class (e.g. `LogicManager.java`). This is to ensure that the caller does not depend on the implementation details of the component. This is illustrated in the class diagram below.
+Other components interact with a given component (e.g. `Logic`) by calling methods defined in the corresponding API
+interface (e.g. `Logic.java`) instead of calling methods directly on the implementation class (
+e.g. `LogicManager.java`). This is to ensure that the caller does not depend on the implementation details of the
+component. This is illustrated in the class diagram below.
 
-<img src="images/developer-guide/ComponentManagers.png" width="900" />
+<img src="images/developer-guide/ComponentManagers.png" width="400" />
 
 ### UI Component
 
@@ -128,6 +135,7 @@ in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-W12-3/tp/blob/master/
 **Functionality:**
 
 The UI component,
+
 * Executes user commands using the `Logic` component.
 * Listens for changes to `Model` data so that the UI can be updated with the modified data.
 * Keeps a reference to the `Logic` component, because the UI relies on the Logic to execute commands.
@@ -160,7 +168,7 @@ The following is a partial class diagram of the `Logic` component:
 The following depicts the sequence of interactions within the `Logic` component taking `execute("delete 1")` API call as
 an example:
 
-<img src="images/developer-guide/LogicSequenceDiagram.png" />
+<img src="images/developer-guide/LogicSequenceDiagram.png"/>
 
 The Logic component,
 
@@ -184,9 +192,8 @@ For more details about command-specific parsing and execution, refer to "[Implem
 **API:**
 [`Model.java`](https://github.com/migfoo02/tp/blob/master/src/main/java/seedu/application/model/Model.java)
 
-
-
 ### Storage Component
+
 **API:**
 [`Storage.java`](https://github.com/AY2324S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/application/storage/Storage.java)
 
@@ -195,6 +202,7 @@ The `Storage` component is responsible for storing the job applications data in 
 
 **Functionality:**
 The `Storage` component,
+
 * can save `Userpref` objects in json format and read it back.
 * can save the job application data in json format and read it back.
 
@@ -214,21 +222,25 @@ This section describes some noteworthy details on how certain features are imple
 ### Add Command
 
 #### Overview
+
 The `add` command allows the user to add job applications with various attributes. Attributes can be categorized into
+
 * Compulsory attributes such as `Company` and `Role`.
 * Optional attributes such as `Status`, `Industry`, `Deadline` and `JobType`
 
 #### Related Classes and Methods
 
-* `AddCommandParser#parse(String)`: Parses command input 
-* `AddCommand#execute(Model)`: Executes add command 
+* `AddCommandParser#parse(String)`: Parses command input
+* `AddCommand#execute(Model)`: Executes add command
 * `Model#addJob(Job)`, `ApplicationBook#addJob(Job)`, `UniqueJobList#add(Job)`: Adds a job application.
 
 #### Implementation
 
 1. **Parse User Input:** `AddCommandParser` checks for necessary parameters and their validity.
-2. **Create Job Object:** A `Job` object is instantiated during `AddCommandParser#parse(String)` and handed over to the `AddCommand`.
-3. **Execute Command**: `AddCommand#execute(Model)` adds the new job application to the `UniqueJobList` in the `ApplicationBook`.
+2. **Create Job Object:** A `Job` object is instantiated during `AddCommandParser#parse(String)` and handed over to
+   the `AddCommand`.
+3. **Execute Command**: `AddCommand#execute(Model)` adds the new job application to the `UniqueJobList` in
+   the `ApplicationBook`.
 
 The following sequence/activity diagram illustrates the process of invocation for the `AddCommand`:
 
@@ -236,17 +248,18 @@ The following sequence/activity diagram illustrates the process of invocation fo
 
 #### Design Considerations
 
-1. **Handling of optional parameters**: 
-   1. With default parameters: The `AddCommandParser` checks for the presence of optional parameters. If the
-      parameters are not present, default parameters are used to instantiate the `Job` object.
-       * *Pros*: This is a simple implementation which does not require any changes to the `AddCommand` class.
-       * *Cons*: This implementation is not flexible as the default parameters are fixed. If the user wants to add a job
-         application with a different set of default parameters, the code has to be changed.
-   2. Without default parameters: If the
-      parameters are not present, a different constructor is used to instantiate the `Job` object.
-       * *Pros*: This implementation is more flexible as the user can specify the parameters they want to add.
-       * *Cons*: This implementation is more complicated as the `AddCommand` class has to be modified to handle the
-         different constructors.
+1. **Handling of optional parameters**:
+    1. With default parameters: The `AddCommandParser` checks for the presence of optional parameters. If the
+       parameters are not present, default parameters are used to instantiate the `Job` object.
+        * *Pros*: This is a simple implementation which does not require any changes to the `AddCommand` class.
+        * *Cons*: This implementation is not flexible as the default parameters are fixed. If the user wants to add a
+          job
+          application with a different set of default parameters, the code has to be changed.
+    2. Without default parameters: If the
+       parameters are not present, a different constructor is used to instantiate the `Job` object.
+        * *Pros*: This implementation is more flexible as the user can specify the parameters they want to add.
+        * *Cons*: This implementation is more complicated as the `AddCommand` class has to be modified to handle the
+          different constructors.
 
 ---
 
@@ -421,14 +434,17 @@ The `CombinedPredicate` simply represents the logical AND of multiple `Predicate
 ### Interview and Interview Commands
 
 #### Implementation
-The feature to allow users to add interviews is mainly implemented through adding `Interview` to the `Model` component
-and implementing `InterviewCommands` in the `Logic` component. 
 
-Each job application created has a list of interviews that can be added, edited and deleted accordingly with the 
+The feature to allow users to add interviews is mainly implemented through adding `Interview` to the `Model` component
+and implementing `InterviewCommands` in the `Logic` component.
+
+Each job application created has a list of interviews that can be added, edited and deleted accordingly with the
 Interview Sub Commands.
 
 #### Interview
+
 An `Interview` will consist of a:
+
 * `InterviewType` - There are 9 types of interview types specified by using enumerations
 * `InterviewDateTime`- Makes use of `LocalDateTime` and `DateTimeFormatter` to store the date and time of interview
 * `InterviewAddress`
@@ -438,39 +454,42 @@ The following class diagram illustrates the structure of an `Interview` Object:
 <img src="images/developer-guide/InterviewClassDiagram.png" />
 
 #### Interview Commands
+
 The Interview commands are implemented with `InterviewCommand` and `InterviewCommandParser`.
 
 During parsing of user input in `ApplicationBookParser`, if the input starts with `interview` the remaining input
-is passed as an argument to the `InterviewCommandParser` which parses it and invokes the respective 
+is passed as an argument to the `InterviewCommandParser` which parses it and invokes the respective
 sub command parsers.
 
 The abstract `InterviewCommand` class extends the `Command` class to hide the internal logic
 and execution of the Interview Sub Commands.
 
-It implements the `getJob()` method which retrieves the job of an interview so that the execution of the sub commands 
+It implements the `getJob()` method which retrieves the job of an interview so that the execution of the sub commands
 can be carried out on the `Job` that contains the `Interview` to be modified.
 
 There are 3 sub-commands to access and modify an `Interview`:
+
 * `interview add` - To add an interview to a `Job`.
 * `interview delete` - To delete an interview from a `Job`.
 * `interview edit`- To edit an interview from a `Job`.
 
-The following class diagram illustrates the structure of an `InterviewCommand` Object and the sub commands 
+The following class diagram illustrates the structure of an `InterviewCommand` Object and the sub commands
 it is associated with:
 <img src="images/developer-guide/InterviewCommandClassDiagram.png" />
 
 #### Interview Add Command
+
 Adding of an interview to a specified `Job` is implemented with `InterviewAddCommand` and `InterviewAddCommandParser`.
 
-When the `InterviewAddCommandParser` is invoked from the `InterviewCommandParser`, the `ArgumentTokenizer` class 
-parses the arguments to determine the index of the `Job`, `interviewType`, `interviewDateTime` and `interviewAddress`. 
+When the `InterviewAddCommandParser` is invoked from the `InterviewCommandParser`, the `ArgumentTokenizer` class
+parses the arguments to determine the index of the `Job`, `interviewType`, `interviewDateTime` and `interviewAddress`.
 
-* If the user input does not conform to the expected prefixes, a `ParseException` is thrown. 
+* If the user input does not conform to the expected prefixes, a `ParseException` is thrown.
 
-* If the user input is valid, a new `Interview` is created with the `interviewType`,`interviewDateTime` and 
-`interviewAddress` parsed. An `InterviewAddCommand` is then generated with the job `index` and the created `Interview`
+* If the user input is valid, a new `Interview` is created with the `interviewType`,`interviewDateTime` and
+  `interviewAddress` parsed. An `InterviewAddCommand` is then generated with the job `index` and the created `Interview`
 
-During execution of `InterviewAddCommand`, the new `Interview` is passed to the `Job` to handle the adding of the 
+During execution of `InterviewAddCommand`, the new `Interview` is passed to the `Job` to handle the adding of the
 `Interview` to it's list of interviews.
 
 The following sequence diagram illustrates the process of parsing and invocation for the command:
@@ -478,18 +497,19 @@ The following sequence diagram illustrates the process of parsing and invocation
 <img src="images/developer-guide/InterviewAddCommandSequenceDiagram.png" />
 
 #### Interview Delete Command
-Deleting of an interview from a specified `Job` is implemented with `InterviewDeleteCommand` and 
+
+Deleting of an interview from a specified `Job` is implemented with `InterviewDeleteCommand` and
 `InterviewDeleteCommandParser`.
 
 When the `InterviewDeleteCommandParser` is invoked from the `InterviewCommandParser`, the `ArgumentTokenizer` class
-parses the arguments to determine the index of the `Interview` to be deleted and the index of the `Job` it 
+parses the arguments to determine the index of the `Interview` to be deleted and the index of the `Job` it
 is to be deleted from.
 
 * If the user input does not conform to the expected prefixes, a `ParseException` is thrown.
 
 * If the user input is valid, an `InterviewDeleteCommand` is generated with the `jobIndex` and `interviewindex`
 
-During execution of `InterviewDeleteCommand`, the `Job` and `Interview` is passed to the `model` to handle the deletion 
+During execution of `InterviewDeleteCommand`, the `Job` and `Interview` is passed to the `model` to handle the deletion
 of the `Interview` from the `Job`.
 
 The following sequence diagram illustrates the process of parsing and invocation for the command:
@@ -497,7 +517,8 @@ The following sequence diagram illustrates the process of parsing and invocation
 <img src="images/developer-guide/InterviewDeleteCommandSequenceDiagram.png" />
 
 #### Interview Edit Command
-Editing of an interview from a specified `Job` is implemented with `InterviewEditCommand` and 
+
+Editing of an interview from a specified `Job` is implemented with `InterviewEditCommand` and
 `InterviewEditCommandParser`.
 
 When the `InterviewEditommandParser` is invoked from the `InterviewCommandParser`, the `ArgumentTokenizer` class
@@ -517,20 +538,22 @@ The following sequence diagram illustrates the process of parsing and invocation
 <img src="images/developer-guide/InterviewEditCommandSequenceDiagram.png" />
 
 #### Design considerations
+
 1. **How to implement multiple interviews in for a Job Application**
-    * *Chosen implementation*: Each `Job` stores a list of interviews as `List<Interviews>` 
-      * Pros: Easy to implement
-      * Cons: Limited Abstraction
+    * *Chosen implementation*: Each `Job` stores a list of interviews as `List<Interviews>`
+        * Pros: Easy to implement
+        * Cons: Limited Abstraction
     * This method was chosen as the interview features was only implemented in v1.3 where there was
-   limited time to abstract the interviews.
-    * *Alternative*: Create a `InterviewList` class to store the list of interviews and 
-   handle the changes to the interviews. Each `Job` would have a `InterviewList` instead
-      * Pros: Provides a higher level of abstraction and encapsulation
-      * Cons: Complexity overhead. Currently, there are minimal commands to manage the interviews and adding an extra 
-      layer may add unnecessary complication to the codebase.
+      limited time to abstract the interviews.
+    * *Alternative*: Create a `InterviewList` class to store the list of interviews and
+      handle the changes to the interviews. Each `Job` would have a `InterviewList` instead
+        * Pros: Provides a higher level of abstraction and encapsulation
+        * Cons: Complexity overhead. Currently, there are minimal commands to manage the interviews and adding an extra
+          layer may add unnecessary complication to the codebase.
     * This method can be implemented in the future as the more Interview Sub Commands are implemented.
 
 ---
+
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -538,6 +561,7 @@ The following sequence diagram illustrates the process of parsing and invocation
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
+
 ---
 
 ## **Appendix A: Requirements**
@@ -1116,41 +1140,57 @@ Explain the difficulty level, challenges faced, effort required, and achievement
 
 ## **Appendix D: Planned Enhancements**
 
-The current implementation of JobFindr allows users to manage their job applications relatively efficiently through a CLI. However, we have identified several areas for improvement in terms of flexibility, efficiency and organization. As such, our proposed enhancements are targeted at improving these areas.
+The current implementation of JobFindr allows users to manage their job applications relatively efficiently through a
+CLI. However, we have identified several areas for improvement in terms of flexibility, efficiency and organization. As
+such, our proposed enhancements are targeted at improving these areas.
 
 ### Warning for Clear Command
-   
+
 #### Current State
-The `clear` command executes without any prior warning, risking accidental deletion of all job applications without warning.
+
+The `clear` command executes without any prior warning, risking accidental deletion of all job applications without
+warning.
 
 #### Planned Enhancement
+
 We plan to introduce a confirmation step before the execution of the `clear` command.
 
 #### Implementation Details
-* **Confirmation Prompt:** Introduce an interactive prompt requiring explicit user confirmation before executing the `clear` command.
-* **Command-Line Argument:** Optionally, provide a command-line argument to bypass the confirmation for automated scripts.
+
+* **Confirmation Prompt:** Introduce an interactive prompt requiring explicit user confirmation before executing
+  the `clear` command.
+* **Command-Line Argument:** Optionally, provide a command-line argument to bypass the confirmation for automated
+  scripts.
 
 ### Enhanced Sort Feature
 
 #### Current State
 
-The `sort` command places all the empty optional fields at the end of the job application field after sorting based on an optional field. For example, if the user sorts the job application list by `status`, all the job applications with no status (i.e. `TO_ADD_STATUS`) will be placed at the end of the list. This is not ideal as the user may want to view all the job applications with no status at the top of the list.
+The `sort` command places all the empty optional fields at the end of the job application field after sorting based on
+an optional field. For example, if the user sorts the job application list by `status`, all the job applications with no
+status (i.e. `TO_ADD_STATUS`) will be placed at the end of the list. This is not ideal as the user may want to view all
+the job applications with no status at the top of the list.
 
 #### Planned Enhancement
 
-We plan to make `sort` show all the job applications with empty optional fields at the top of the list after sorting based on an optional field.
+We plan to make `sort` show all the job applications with empty optional fields at the top of the list after sorting
+based on an optional field.
 
 #### Implementation Details
 
-* **Sorting Algorithm:** Modify the sorting algorithm to place all the job applications with empty optional fields at the top of the list after sorting based on an optional field.
-* **Updated User Interface:** Update the user interface to show all the job applications with empty optional fields at the top of the list after sorting based on an optional field.
-* **Performance Considerations:** The sorting algorithm should be efficient enough to handle a large number of job applications.
+* **Sorting Algorithm:** Modify the sorting algorithm to place all the job applications with empty optional fields at
+  the top of the list after sorting based on an optional field.
+* **Updated User Interface:** Update the user interface to show all the job applications with empty optional fields at
+  the top of the list after sorting based on an optional field.
+* **Performance Considerations:** The sorting algorithm should be efficient enough to handle a large number of job
+  applications.
 
 ### Arrange Interviews in Chronological Order
 
 #### Current State
 
-The `interview` command arranges interviews based on the order they are added. This may lead to confusion as the user is unable to view the interviews in chronological order.
+The `interview` command arranges interviews based on the order they are added. This may lead to confusion as the user is
+unable to view the interviews in chronological order.
 
 #### Planned Enhancement
 
@@ -1158,30 +1198,38 @@ We plan to arrange interviews in chronological order for each job application.
 
 #### Implementation Details
 
-* **Add Field Comparator:** Add a field comparator to sort the interviews in chronological order, much like how `deadline` is sorted.
+* **Add Field Comparator:** Add a field comparator to sort the interviews in chronological order, much like
+  how `deadline` is sorted.
 
 ### Allow Interviews to have Multiple Types
 
 #### Current State
 
-The `interview` command only allows users to add one type of interview to each job application. For example, an interview can be labelled as `Technical` or `Online`, but not both. This is not flexible enough as it is common for interviews to have multiple types associated with them.
+The `interview` command only allows users to add one type of interview to each job application. For example, an
+interview can be labelled as `Technical` or `Online`, but not both. This is not flexible enough as it is common for
+interviews to have multiple types associated with them.
 
 #### Planned Enhancement
 
-We plan to allow users to add multiple types to each interview. An interview can have as many types as the user wants as long as they are valid.
+We plan to allow users to add multiple types to each interview. An interview can have as many types as the user wants as
+long as they are valid.
 
 #### Implementation Details
 
-* **Modify Interview Type Field:** Modify the interview type field to be a `Set` instead of a `String`. This allows users to add multiple types to each interview.
+* **Modify Interview Type Field:** Modify the interview type field to be a `Set` instead of a `String`. This allows
+  users to add multiple types to each interview.
 * **Update User Interface:** Update the user interface to support displaying the multiple interview types as a `String`.
 
 1. User Customisation
+
 * Allow users to add their own fields to the job application
 * Allows users to choose which fields are shown.
 
 2. Keyboard Shortcuts
+
 * Allow users to use keyboard shortcuts to execute commands for faster execution.
 
 3. Integrated Dashboard
+
 * Allow users to view their job applications on a dashboard, enabling them to view their progress at a glance.
 

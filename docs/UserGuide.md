@@ -824,8 +824,7 @@ Let's type `interview edit 2 from/ 1 d/Jan 20 2024 1200` and press **Enter**.
 ![IntEditCommandEg2](images/user-guide/IntEditCommandEg2.png)
 
 **Step 3:** Look at the Interview Card for the `Case Interview` from `Shopee`, the `date` will be edited.
-
-![IntEditCommandEg3](images/user-guide/IntEditCommandEg3.png)
+<img src="images/user-guide/IntEditCommandEg3.png" style="display: block; margin: auto;" width="500">
 
 **Common Errors:**
 
