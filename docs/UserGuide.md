@@ -614,7 +614,7 @@ You can add time slots when your contacts are available.
      must be alphanumeric, cannot be blank and must be an existing contact in your contact list.
   </p>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">FREE_TIME</code>
-  must be a time slot within the current weekly schedule. Eg. <code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">Sat 1000 - Mon 1000</code> is not allowed as the monday here refers to next week, violating the current weekly schedule pattern.</p>
+  must be a time slot within the current weekly schedule. Eg. <code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">Sat 1000 - Mon 1000</code> is not allowed as the monday here refers to next week, violating the current weekly schedule pattern. It is <strong>not case-sensitive</strong>.</p>
 </div>
 
 <p></p>
@@ -661,7 +661,7 @@ You can remove available time slots of your contacts.
      must be alphanumeric and cannot be blank.
   </p>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">FREE_TIME</code>
-  must match to the contact's existing time.</p>
+  must match the contact's existing time. It is <strong>not case-sensitive</strong>.</p>
 </div>
 
 <p></p>
@@ -741,7 +741,7 @@ You can add a meeting time slot for your group.
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
     must be alphanumeric and cannot be blank.</p>
 <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">MEETING_TIME</code>
-    must be a time slot within the weekly schedule and must not clash with the group's existing meeting times.</p>
+    must be a time slot within the weekly schedule and must not clash with the group's existing meeting times.  It is <strong>not case-sensitive</strong>.</p>
 </div>
 <p></p>
 
@@ -784,7 +784,7 @@ You can remove meeting times from your groups.
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
     must be alphanumeric and cannot be blank.</p>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">MEETING_TIME</code>
-    must be a time slot within a weekly schedule and must be an existing meeting slot of the group.</p>
+    must be a time slot within a weekly schedule and must be an existing meeting slot of the group. It is <strong>not case-sensitive</strong>.</p>
 </div>
 <p></p>
 
