@@ -221,9 +221,9 @@ The following activity diagram summarises what happens the user executes a sched
 
 <img src="images/ScheduleActivityDiagram.png" width="400"/>
 
-**Design Considerations**
+#### **Design Considerations**
 
-**Aspect: How to implement Appointments for Person**
+**Aspect: How to implement appointment for Person**
 
 Alternative 1 (Current Choice): Create an abstract class ScheduleItem and make it a compulsory field for Person.
 
@@ -295,17 +295,19 @@ The following activity diagram illustrates how the complete operation is execute
 
 ### Gather Emails Feature
 
-The **Gather Emails** feature in our software system is designed to efficiently collect email addresses. This feature is facilitated by the `GatherCommand` and `GatherCommandParser`. Below is the class diagram of the gather emails feature.
+The **Gather Emails** feature in our software system is designed to efficiently collect email addresses. This feature is facilitated by the `GatherCommand` and `GatherCommandParser`. Below is the class diagram of the `gather emails` feature.
 
 ![GatherClassDiagram](images/GatherClassDiagram.png)
 
 #### Implementation Overview
 
-The `GatherCommand` is initiated by the `GatherCommandParser`. The `GatherCommandParser` checks for the prefixes `fp/` or `t/` in the user's input and creates either a `GatherEmailByFinancialPlan` or `GatherEmailByTag` object respectively.
-Both `GatherEmailByFinancialPlan` or `GatherEmailByTag` implements the `GatherEmailPrompt` interface.
+The `GatherCommand` is initiated by the `GatherCommandParser`. The `GatherCommandParser` parses the arguments and creates either a `GatherEmailByFinancialPlan` or `GatherEmailByTag` object respectively.
+Both `GatherEmailByFinancialPlan` or `GatherEmailByTag` implements the `GatherEmailPrompt` interface. 
 
 The `GatherCommand` takes in the `GatherEmailPrompt` object and passes it into the current `Model`, subsequently interacting with the `AddressBook` class. 
-The `GatherCommand#execute()` executes the gather operation by calling `Model#gatherEmails(GatherEmailPrompt prompt)`. Below shows how the gather operation logic works as described above:
+The `GatherCommand#execute()` executes the gather operation by calling `Model#gatherEmails(GatherEmailPrompt prompt)`. 
+
+The following sequence diagram below shows how the gather operation works as described above:
 
 ![GatherSequenceDiagram1](images/GatherSequenceDiagram1.png)
 
@@ -315,35 +317,43 @@ The `UniquePersonsList` class maintains a list of unique persons. The `UniquePer
 
 - `UniquePersonsList#gatherEmails(GatherEmailPrompt prompt)` —  Iterates through the persons list and calls `GatherEmailPrompt#gatherEmails(Person person)`, passing in each person. 
 
-Depending on the type of `GatherEmailPrompt`, it triggers either: 
+Depending on the type of `GatherEmailPrompt`, the method above triggers either: 
 
-- `Person#gatherEmailsContainsTag(String prompt)` —  Checks if the given prompt is a substring of any Tag names in the `Set<Tag>` of the current person. 
-- `Person#gatherEmailsContainsFinancialPlan(String prompt)` —  Checks if the given prompt is a substring of any Financial Plan names in the `Set<FinancialPlan>` of the current person.
+- `Person#gatherEmailsContainsTag(String prompt)` —  Checks if the given prompt is a substring of any `Tag` names in the `Set<Tag>` of the current person. 
+- `Person#gatherEmailsContainsFinancialPlan(String prompt)` —  Checks if the given prompt is a substring of any `FinancialPlan` names in the `Set<FinancialPlan>` of the current person.
 
-These methods internally utilize `Tag#containsSubstring(String substring)` and `FinancialPlan#containsSubstring(String substring)`, respectively. These substring comparisons are performed in a case-insensitive manner by converting both the prompt and the financial plan/tag names to lowercase before the check.
-This is to make gathering of emails more convenient and flexible. Currently, we only allow gathering emails by `FinancialPlan` and `Tag` as these are the more likely to be searched to gather emails by. However, additional classes implementing the `GatherEmailPrompt` interface can be added to enable the gathering of emails based on a broader range of fields.
+These methods internally utilize `Tag#containsSubstring(String substring)` and `FinancialPlan#containsSubstring(String substring)`, respectively. These substring comparisons are performed in a case-insensitive manner by converting both the prompt and the `FinancialPlan` or `Tag` names to lowercase before the check.
+By allowing partial input, users can efficiently find email addresses associated with lengthy `Tag` or `FinancialPlan` names. The case-insensitive approach enhances user-friendliness, ensuring consistent and reliable results, regardless of input case.  
 
-The following sequence diagram shows how the gather emails by financial plan operation works:
+Currently, we only allow gathering emails by `FinancialPlan` and `Tag` fields as these are the more likely to be searched to gather emails by. However, additional classes implementing the `GatherEmailPrompt` interface can be added to enable the gathering of emails based on a broader range of fields.
+
+The following sequence diagram shows how the gather emails by `FinancialPlan` field operation works:
 
 ![GatherSequenceDiagram2](images/GatherSequenceDiagram2.png)
 
 #### Design Considerations
 
 **Aspect: How many inputs to accept**
+* **Alternative 1 (Current Choice):** User can only search by one `FinancialPlan` or `Tag`.
+  * **Pros:** Easy to implement. Limits the potential for bugs.
+  * **Cons:** Limited filtering options.
 
-**Alternative 1 (Current Choice):** User can only search by one Financial Plan or Tag.
-- **Pros:** Easy to implement. Limits the potential for bugs.
-- **Cons:** Limited filtering options.
-
-**Alternative 2:** User can search by multiple Financial Plans or Tags.
-- **Pros:** More flexible (e.g. gathering by a combination of financial plans and tags).
-- **Cons:** Introduces more complexity and requires additional error handling.
+* **Alternative 2:** User can search by multiple `FinancialPlan` and `Tag` fields.
+  * **Pros:** More flexible (e.g. gathering by a combination of `FinancialPlan` and `Tag`).
+  * **Cons:** Introduces more complexity and requires additional error handling.
 
 
 ### Expanded Find feature
 
 The enhanced find mechanism is facilitated by the `CombinedPredicate` and utilises the existing `FindCommand` structure.
-It extends the `find` command with the ability to search for multiple terms at once, implemented using an array
+
+#### Implementation Overview
+
+Here's a sequence diagram that demonstrates how `FindCommand` works.
+
+![FindCommandSequenceDiagram](images/FindCommandSequenceDiagram.png)
+
+The `CombinedPredicate` class gives the `find` command the ability to search for multiple terms at once, implemented using an array
 of `PersonContainsKeywordsPredicate`. Here's a partial class diagram of the `CombinedPredicate`.
 
 ![CombinedPredicateClassDiagram](images/CombinedPredicateClassDiagram.png)
@@ -351,9 +361,6 @@ of `PersonContainsKeywordsPredicate`. Here's a partial class diagram of the `Com
 All `XYZContainsKeywordsPredicate` classes (e.g., `NameContainsKeywordsPredicate`,
 `FinancialPlanContainsKeywordsPredicate`, ...) inherit from the `PersonContainsKeywordsPredicate` interface so that
 they can be treated similarly in the `CombinedPredicate` class.
-
-In the `FindCommandParser`, `CombinedPredicate` is initialised with a `NameContainsKeywordsPredicate`,
-`FinancialPlanContainsKeywordsPredicate` and `TagContainsKeywordsPredicate`. These predicates check a `Person` if the respective field contains any of the keywords supplied to the predicate.
 
 Note that only `NameContainsKeywordsPredicate` checks for whole words, because it is rare to search for people by
 substrings e.g. `Marc` and `Marcus` should not show up in the same search. On the other hand,
@@ -366,10 +373,10 @@ searching for keywords in multiple fields at the same time. We also allow the us
 can search for multiple terms belonging to the same field.
 
 For now, we only allow for searching for `Name`, `FinancialPlan` and `Tag` fields because they are the most commonly
-searched fields, but extending the feature to search in other fields is possible by creating the `Predicate` class and
-modifying the `FindCommandParser`.
+searched fields, but extending the feature to search in other fields is possible by creating the appropriate
+`Predicate` class and modifying the `FindCommandParser`.
 
-#### Design Considerations:
+#### Design Considerations
 
 **Aspect: How to implement find for multiple fields**
 * **Alternative 1 (current choice):** Use one unified command and format.
@@ -381,7 +388,7 @@ modifying the `FindCommandParser`.
     * Cons: Less flexible, slightly more difficult to implement.
 
 **Aspect: How to implement `CombinedPredicate`**
-* **Alternative 1 (current choice):** Use varargs and a common interface.
+* **Alternative 1 (current choice):** Use `varargs` and a common interface.
     * Pros: More flexible in usage while still testable.
     * Cons: More difficult to modify and the check for equality can be defeated with enough effort.
 
@@ -946,7 +953,7 @@ point for testers to work on; testers are expected to do more *exploratory* test
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Appendix: Effort
+## **Appendix: Effort**
 This project required a substantial effort to design and implement various features aimed at enhancing
 the functionality of the software system. It was quite hard at the beginning because we were not well-versed with the 
 codebase. After understanding some pertinent classes to implement our enhancements, we also had to refactor and 
