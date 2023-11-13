@@ -781,7 +781,7 @@ Format: `stats avail`
 
 **:information_source: Notes about the command:**<br>
 
-**All** statistic commands are **calculated based on the list currently displayed in your address book**.<br>
+* All statistic commands are **calculated based on the list currently displayed in your address book**.<br>
 In the example below, `find available` was first entered, resulting in a list of 2 available fosterers. <br>
 `stats avail` was then entered, and we see the resulting statistic reporting all listed fosterers as available. <br>
 
@@ -807,6 +807,22 @@ Examples:
 
 * `find cat` followed by `stats avail` 
   * calculates statistics of available fosterers, based on fosterers who are either currently fostering a cat or are able to foster a cat.
+
+<div></div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command:**<br>
+
+For all statistic commands,<br>
+
+* Extra white spaces are ignored.<br>
+  * `stats (multiple spaces) avail` is a valid `stats avail` command, while `statsavail` is not valid.<br>
+
+* Extra parameters after the valid statistic command will be ignored.<br>
+  * `stats avail current` and `stats avail 123` are valid `stats avail` commands, while `stats 123 avail` is not valid.<br>
+
+</div>
 
 <div style="page-break-after: always;"></div>
 
