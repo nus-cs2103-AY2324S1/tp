@@ -38,7 +38,7 @@
     "company" : "InsureMe",
     "policyNumber" : "5734534X",
     "policyIssueDate" : "31-12-2019",
-    "policyExpiryDate" : "01-01-2020"
+    "policyExpiryDate" : "01-02-2020"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
@@ -61,7 +61,7 @@
     "nric" : "573H",
     "licencePlate" : "SHL463C",
     "remark": "",
-    "company" : "NTUC",
+    "company" : "NOCOMPANY",
     "policyNumber" : "NOPOLICY",
     "policyIssueDate" : "01-01-1000",
     "policyExpiryDate" : "01-01-1000"
@@ -74,7 +74,7 @@
     "nric" : "743G",
     "licencePlate" : "SBA1Z",
     "remark": "",
-    "company" : "InsureMe",
+    "company" : "NOCOMPANY",
     "policyNumber" : "NOPOLICY",
     "policyIssueDate" : "01-01-1000",
     "policyExpiryDate" : "01-01-1000"
@@ -87,7 +87,7 @@
     "nric" : "674G",
     "licencePlate" : "SNM9735R",
     "remark": "",
-    "company" : "InsureMe",
+    "company" : "NOCOMPANY",
     "policyNumber" : "NOPOLICY",
     "policyIssueDate" : "01-01-1000",
     "policyExpiryDate" : "01-01-1000"

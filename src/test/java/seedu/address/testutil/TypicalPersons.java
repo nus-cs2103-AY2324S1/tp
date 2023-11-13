@@ -46,20 +46,20 @@ public class TypicalPersons {
             .withPolicy("InsureMe", "AIA2", "12-12-2010", "12-12-2020").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withNric("123C").withLicencePlate("SLR8E")
-            .withPolicy("InsureMe", "5734534X", "31-12-2019", "01-01-2020").build();
+            .withPolicy("InsureMe", "5734534X", "31-12-2019", "01-02-2020").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends")
             .withNric("464J").withLicencePlate("STG46P")
             .withPolicy("NTUC", "4532", "29-02-2004", "29-02-2008").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("94822244")
             .withEmail("werner@example.com").withAddress("michegan ave").withNric("573H").withLicencePlate("SHL463C")
-            .withPolicy("NTUC", "NOPOLICY", "01-01-1000", "01-01-1000").build();
+            .withPolicy("NOCOMPANY", "NOPOLICY", "01-01-1000", "01-01-1000").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("94824277")
             .withEmail("lydia@example.com").withAddress("little tokyo").withNric("743G").withLicencePlate("SBA1Z")
-            .withPolicy("InsureMe", "NOPOLICY", "01-01-1000", "01-01-1000").build();
+            .withPolicy("NOCOMPANY", "NOPOLICY", "01-01-1000", "01-01-1000").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("94824422")
             .withEmail("anna@example.com").withAddress("4th street").withNric("674G").withLicencePlate("SNM9735R")
-            .withPolicy("InsureMe", "NOPOLICY", "01-01-1000", "01-01-1000").build();
+            .withPolicy("NOCOMPANY", "NOPOLICY", "01-01-1000", "01-01-1000").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("84824244")

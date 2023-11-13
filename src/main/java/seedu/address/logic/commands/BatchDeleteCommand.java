@@ -41,24 +41,19 @@ public class BatchDeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PEOPLE_SUCCESS = "Batch delete people whose policy %1$s";
 
+    public static final String MESSAGE_MONTH_DESCRIPTION = "expiry date is in ";
+
+    public static final String MESSAGE_COMPANY_DESCRIPTION = "company contains keyword: ";
+
     private DeleteMonth month = null;
     private Company company = null;
 
     /**
      * Creates an BatchDeleteCommand to batch delete the specified {@code Person}
-     * based on policy expiry date
+     * based on policy expiry date or company
      */
-    public BatchDeleteCommand(DeleteMonth deleteMonth) {
-        requireNonNull(deleteMonth);
+    public BatchDeleteCommand(DeleteMonth deleteMonth, Company company) {
         this.month = deleteMonth;
-    }
-
-    /**
-     * Creates an BatchDeleteCommand to batch delete the specified {@code Person}
-     * based on policy company
-     */
-    public BatchDeleteCommand(Company company) {
-        requireNonNull(company);
         this.company = company;
     }
 
@@ -68,15 +63,18 @@ public class BatchDeleteCommand extends Command {
         Predicate<Person> p;
         String resultInfo;
 
-        if (month != null) {
-            p = new PolicyExpiryInDeleteMonthPredicate(month);
-            resultInfo = "expiry date is in" + month.toString();
-        } else if (company != null) {
-            p = new CompanyContainsKeywordsPredicate(company.toString());
-            resultInfo = "company contains keyword: " + company.toString();
-        } else {
+        if ((month == null && company == null) || (month != null && company != null)) {
             throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     BatchDeleteCommand.MESSAGE_USAGE));
+        }
+
+        if (month != null) {
+            p = new PolicyExpiryInDeleteMonthPredicate(month);
+            resultInfo = MESSAGE_MONTH_DESCRIPTION + month.toString();
+        } else {
+            // company != null
+            p = new CompanyContainsKeywordsPredicate(company.toString());
+            resultInfo = MESSAGE_COMPANY_DESCRIPTION + company.toString();
         }
 
         model.batchDeleteWithPredicate(addHasPolicyPredicate(p));
@@ -113,13 +111,23 @@ public class BatchDeleteCommand extends Command {
         }
 
         BatchDeleteCommand otherBatchDeleteCommand = (BatchDeleteCommand) other;
-        return month.equals(otherBatchDeleteCommand.month);
+        if (month != null) {
+            return month.equals(otherBatchDeleteCommand.month);
+        }
+        assert company != null : "Company should not be null if month is null";
+
+        return company.equals(otherBatchDeleteCommand.company);
     }
 
+    // update this
     @Override
     public String toString() {
+        String month = this.month == null ? "[not applicable]" : this.month.toString();
+        String company = this.company == null ? "[not applicable]" : this.company.toString();
+
         return new ToStringBuilder(this)
-                .add("toDelete", month)
+                .add("toBatchDeleteMonth", month)
+                .add("toBatchDeleteCompany", company)
                 .toString();
     }
 }
