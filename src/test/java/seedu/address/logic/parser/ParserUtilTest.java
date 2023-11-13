@@ -25,8 +25,6 @@ import seedu.address.model.person.enums.InputSource;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
-
-    // TODO: Modify ID Constraints to be more tightly bound
     private static final String INVALID_ID = " ";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
