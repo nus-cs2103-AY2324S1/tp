@@ -905,6 +905,46 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `delete contact 1`<br>
         Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. All events related to the first contact should be deleted from the event list as well
 
+### Adding event
+
+1. Adding event while all contacts are shown.
+    1. Prequisites: List all contacts using the `list contact` command. At least one contact shown in the list and there will be an events column for each contact.
+       Use the `list events` command to open a new window with a list of all events without the respective contacts.<br>
+
+    1. Test case: `add event -id 1 -en Meeting with professor -st 2024-11-17 12:00:00 -et 2024-11-17 13:00:00 -loc COM 1 Basement -info Discuss the project`<br>
+       Expected: The new event will appear in the first contact's event column. It will also be added in the event list window. The title of the event added is shown in the status message.
+
+   1. Test case: `add event -id 1 -en Meeting with professor -st 12:00:00 -et 13:00:00 -loc COM 1 Basement -info Discuss the project`<br>
+      Expected: Similar to previous test, but date will automatically be current date.<br>
+   
+   1. Test case: `add event -id 1 -en Meeting with professor -st 2024-11-17 -et 2024-11-18 -loc COM 1 Basement -info Discuss the project`<br>
+      Expected: Similar to previous test, but time will automatically be `00:00:00`.<br>
+   
+   1. Test case: `add event -id 0 -en Chat with recruiter -st 2024-11-24 17:00:00 -et 2024-11-24 18:00:00 -loc Star Vista -info Discuss job opportunities`<br>
+      Expected: No event is added. Error details shown in the status message.
+
+   1. Test case: `add event -id 1 -en Chat with recruiter -st 2024/11/24 17:00:00 -et 2024/11/24 18:00:00 -loc Star Vista -info Discuss job opportunities`<br>
+      Expected: No event is added as date and time is not in the correct format. Error details shown in the status message.<br>
+
+1. Adding duplicate or clashing events
+    1. Prequisites: Use the `list events` command to open a new window with a list of all events without the respective contacts.
+
+    1. Test case: `add event -id 1 ...`, where `...` is an already existing event in the event list.<br>
+       Expected: No event is added. Error details shown in the status message.
+
+    1. Test case: `add event -id 1 ... -st x` where `x` is in between the start and end time of an event currently on the list.<br>
+       Expected: No event is added. Error details shown in the status message.
+
+1. Adding event while contact list is being filtered
+    1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`.
+       Use the `list events` command to open a new window with a list of all events without the respective contacts.
+
+    1. Test case: `add event -id 1 ...`, when no contact is shown<br>
+       Expected: No event is added. Error details shown in the status message.
+
+    1. Test case: `add event -id 1 ...`, when at least 1 contact is shown<br>
+       Expected: The new event will appear in the first contact's (in the filtered list) event column. It will also be added in the event list window. The title of the event added is shown in the status message.
+
 ### Deleting event
 
 1. Deleting an event while all events are being shown
@@ -925,22 +965,35 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `delete event`, `delete event -id x -eid 1`, `delete event -id 1 -eid x`, `...` (where x is larger than the size of contacts/events)<br>
        Expected: Similar to previous test cases.
 
+1. Deleting event while contact list is being filtered
+    1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`.
+       Use the `list events` command to open a new events window showing all events (without the contacts).
+   
+    1. Test case: `delete event -id 1 -eid 1`, when no contact is shown<br>
+       Expected: No event is deleted. Error details shown in the status message.
+
+    1. Test case: `delete event -id 1 -eid 1`, when at least 1 contact is shown and there is at least 1 event in the first contact. <br>
+       Expected: The event will no longer be shown in the first contact of the filtered list. It will also be removed from the events list window. List will go back to showing all contacts.
+
+    1. Test case: `delete event -id 1 -eid 1`, when at least 1 contact is shown and there are no events in the first contact. <br>
+       Expected: No event is deleted. Error details shown in the status message.
+
 ### Adding tag
 
 1. Adding tag while all contacts is shown.
-    1. Prequisites: List all contacts using the list command. At least one contact shown in the list.<br>
+    1. Prequisites: List all contacts using the `list contact` command. At least one contact shown in the list.<br>
 
     1. Test case: `add tag -id 1 -t Frontend -t Java`<br>
     Expected: The new tags appear below the name of the first contact in the list. The list of tags added is shown in the status message.
     
     1. Test case: `add tag -id 0 -t Frontend`<br>
-    Expected: No tag add is added. Error details shown in the status message.
+    Expected: No tag is added. Error details shown in the status message.
 
     1. Test case: `add tag -id 1 -t HR representative`<br>
     Expected: No tag is added as tag name should not contain spaces. Error details shown in the status message.<br>
 
 1. Adding duplicate tag to a contact
-    1. Prequisites: List all contacts using the list command. At least one contact shown in the list has at least one tag.
+    1. Prequisites: List all contacts using the `list contact` command. At least one contact shown in the list has at least one tag.
 
     1. Test case: `add tag -id 1 -t x`, where x is an already existing tag in the first contact.<br>
     Expected: The new tag appear below the name of the first contact in the list. The list of tags added is shown in the status message.
@@ -952,7 +1005,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`. 
 
     1. Test case: `add tag -id 1 -t Frontend`, when no contact is shown<br>
-    Expected: No tag add is added. Error details shown in the status message.
+    Expected: No tag is added. Error details shown in the status message.
 
     1. Test case: `add tag -id 1 -t Frontend`, when at least 1 contact is shown<br>
     Expected: The new tags appear below the name of the first contact in the filtered list. The list of tags added is shown in the status message. List will go back to showing all contacts.
@@ -961,19 +1014,19 @@ testers are expected to do more *exploratory* testing.
 ### Deleting tag
 
 1. Deleting tag while all contacts is shown and tag exists.
-    1. Prequisites: List all contacts using the list command. At least one contact shown in the list has at least one tag.
+    1. Prequisites: List all contacts using the `list contact` command. At least one contact shown in the list has at least one tag.
 
     1. Test case: `delete tag -id 1 -t x`, where x is an existing tag in the first contact.<br>
     Expected: The tag x is no longer below the name of the first contact in the list. The list of tags deleted is shown in the status message.
 
     1. Test case: `delete tag -id 0 -t Frontend`<br>
-    Expected: No tag add is deleted. Error details shown in the status message.
+    Expected: No tag is deleted. Error details shown in the status message.
 
     1. Test case: `delete tag -id 1 -t HR representative`<br>
     Expected: No tag deleted as tag name should not contain spaces. Error details shown in the status message.<br>
 
 1. Deleting tag while all contacts is shown but tag does not exist.
-    1. Prequisites: List all contacts using the list command. At least one contact is shown in the list.<br>
+    1. Prequisites: List all contacts using the `list contact` command. At least one contact is shown in the list.<br>
 
     1. Test case: `delete tag -id 1 -t x`, where `x` is a non-existing tag in the first contact.<br>
     Expected: No tags is deleted. The list of tags deleted shown in the status message is empty while the list of tags not found contains `x`.
@@ -982,18 +1035,18 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`. 
 
     1. Test case: `delete tag -id 1 -t Frontend`, when no contact is shown<br>
-    Expected: No tag add is deleted. Error details shown in the status message.
+    Expected: No tag is deleted. Error details shown in the status message.
 
-    1. Test case: `add tag -id 1 -t x`, when at least 1 contact is shown and `x` is an existing tag in the first contact. <br>
+    1. Test case: `delete tag -id 1 -t x`, when at least 1 contact is shown and `x` is an existing tag in the first contact. <br>
     Expected: The tag `x` is no longer below the name of the first contact in the list. The list of tags deleted shown in the status message is empty while the list of tags not found contains `x`. List will go back to showing all contacts.
 
-    1. Test case: `add tag -id 1 -t x`, when at least 1 contact is shown and `x` is a non-existing tag in the first contact. <br>
+    1. Test case: `delete tag -id 1 -t x`, when at least 1 contact is shown and `x` is a non-existing tag in the first contact. <br>
     Expected: The tag `x` is no longer below the name of the first contact in the list. The list of tags deleted is shown in the status message. List will go back to showing all contacts.
 
 ### Adding note
 
 1. Adding note while all contacts is shown.
-    1. Prerequisites: List all contacts using the list command. At least one contact shown in the list.<br>
+    1. Prerequisites: List all contacts using the `list contact` command. At least one contact shown in the list.<br>
 
     2. Test case: `add note -id 1 -tit Meeting Topics -con The topic is about the framework design of the project`<br>
        Expected: The new note appears in the Notes column of the contact. The note added is shown in the status message.
@@ -1005,7 +1058,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No note is added as a note should have a note content. Error details shown in the status message.<br>
 
 2. Adding another note to a contact
-    1. Prerequisites: List all contacts using the list command. At least one contact shown in the list has at least one note.
+    1. Prerequisites: List all contacts using the `list contact` command. At least one contact shown in the list has at least one note.
 
     2. Test case: `add note -id 1 -tit Open Position -con Applications for SWE full-time positions will open soon`, where x is an already existing tag in the first contact.<br>
        Expected: The new note appears in the Notes column of the contact. The note added is shown in the status message.
@@ -1022,7 +1075,7 @@ testers are expected to do more *exploratory* testing.
 ### Deleting note
 
 1. Deleting note while all contacts is shown and note exists.
-    1. Prerequisites: List all contacts using the list command. At least one contact shown in the list has at least one note.
+    1. Prerequisites: List all contacts using the `list contact` command. At least one contact shown in the list has at least one note.
 
     2. Test case: `delete note -id 1 -nid 0`<br>
        Expected: No note is deleted as note id is invalid. Error details shown in the status message.
@@ -1031,7 +1084,7 @@ testers are expected to do more *exploratory* testing.
        Expected: The note deleted is no longer shown in the first contact in the list. The note deleted is shown in the status message.
 
 2. Deleting note while all contacts is shown but note does not exist.
-    1. Prerequisites: List all contacts using the list command. At least one contact is shown in the list.<br>
+    1. Prerequisites: List all contacts using the `list contact` command. At least one contact is shown in the list.<br>
 
     2. Test case: `delete note -id 1 -nid 100`, where the number of notes in the first contact is less than 100.<br>
        Expected: No note is deleted. Error details shown in the status message.
