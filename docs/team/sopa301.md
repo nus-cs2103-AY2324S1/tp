@@ -58,5 +58,5 @@ Given below are my contributions to the project.
 
 * **Contributions to team-based tasks**:
   * Maintained issue tracker.
-  * Released product for `v1.1` and `v1.3.trial`.
+  * Released product for `v1.2` and `v1.3.trial`.
   * Refactored `AddCommandParser` and `EditCommandParser` for better SLAP.
