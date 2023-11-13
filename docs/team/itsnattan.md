@@ -29,7 +29,7 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
     * Created the UGDraft.md file, and added the documentation for the help, exit, save, load functions.
-    * Create the Table of Content, and designed the notation for command to ensure that users will have clarity when deciphering the unfamiliar formats. 
+    * Create the Table of Content, and designed the notation for command to ensure that users will have clarity when deciphering the unfamiliar formats.
     * Ensured that all command formats followed the proper standardised notation for ease of use.
     * Update Quick Start section to accommodate less technologically savvy users as well as a section on how to use the application.
     * Ensured all hyperlinks work as intended.

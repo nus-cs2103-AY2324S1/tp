@@ -643,7 +643,7 @@ Some of our current output messages are not formatted properly. For example, the
 **Sample Output**
 
 | Current Output Message               | After Enhancement         |
-|--------------------------------------|---------------------------| 
+|--------------------------------------|---------------------------|
 | ![img.png](images/RevealMessage.png) | Translation: word         |
 | ![img.png](images/ReviewMessage.png) | ...1 flashcard(s) listed! |
 
