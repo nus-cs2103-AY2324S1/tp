@@ -305,16 +305,6 @@ the command `filter name/John`
 
 <puml src="diagrams/FilterSequence.puml" width="550" />
 
-#### Design Considerations
-
-**Aspect: Error handling**
-* **Alternative 1 (current choice):** Returns specific error messages for each type of error.
-  * Pros: More user-friendly (since user can easily identify the error.
-  * Cons: Some users might want to see a more comprehensive error message which includes an example of a valid input.
-* **Alternative 2:** Returns a generic error message for all types of errors.
-  * Pros: Easier to implement (since all you have to do is return a generic error message for any argument error encountered). User gets to see a more comprehensive error message.
-  * Cons: Less user-friendly (since user cannot easily identify the error).
-
 ### Sort dates
 
 1. The user specifies a metric (eg. name/) and a sorting order (increasing/ decreasing) to sort by.
@@ -327,17 +317,22 @@ The _Activity_ diagram summarises what happens after the user enters a sort comm
 <puml src="diagrams/SortActivity.puml" width="550" />
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
-the command `sort name/increasing`
+the command `sort name/increasing`.
 
 <puml src="diagrams/SortSequence.puml" width="550" />
 
 ### Get Blind Date
 
-The blind date feature is implemented using the `BlindDateCommand` class. The `BlindDateCommand` class calls a
-getBlindDate() method from the `ModelManager` class. Within the getRandomPerson method, a 'Predicate' object is created and
-used to filter the `Date` objects in the `Model` component. The `BlindDateCommand` class then returns a `CommandResult`
-object that contains the randomly selected `Date` object.
+1. The user will first key in blindDate which is the command word for this feature.
+2. If the list of dates is empty, the user will be prompted to add a date via an error message.
+3. The model class will then generate a random number, via a random number generator, which will be the index of the date to be returned.
+4. A predicate will be created to filter the current list of dates in the model class and returns true only if the date equals to the date at the index generated in step 2.
+5. If step 1 - 3 are successfully completed, The list of dates will be updated to display the randomly selected date.
 
+The _Activity_ diagram summarises what happens after the user enters a sort command.
+
+The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
+the command `blindDate`.
 
 ### Get best match
 
@@ -805,6 +800,15 @@ testers are expected to do more *exploratory* testing.
     * Close the app.
     * Expected: A `data` folder is created under the current repository where the jar file is located.
 
+## **Appendix: Effort**
+Implementing LoveBook was not straightforward and often required us to brainstorm as a team to solve the challenges faced. Given below is a summary of the effort our team has put into developing LoveBook.
+
+### Effort Summary
+
+Our group undertook a significant refactoring effort in the initial codebase, introducing several new classes and enhancing existing ones to fit into our idea of LoveBook. Noteworthy additions include the creation of the "income" and "horoscope" fields within the Date class, representing crucial attributes for building comprehensive user profiles and calculation of compatibility. Regarding compatibility, our group has spent a tremendous amount of time and effort to brainstorm about the implementation of a compatibility algorithm. The compatibility algorithm is designed to calculate a compatibility score based on user preferences and date attributes. This has proven to be challenging as we had to ensure accuracy in providing the user with the best match by taking into account all the differences between preferences and dates attributes.
+
+Our dedication to enhancing the aesthetics of LoveBook is underscored by our meticulous attention to visual representation. We've transcended conventional textual displays, incorporating visually engaging elements such as gender icons, horoscope symbols, and star command visual cues, all implemented using JavaFX. These features not only contribute to the overall visual appeal of the application but also serve a functional purpose in providing users with quick and intuitive insights into important date attributes. Furthermore, our commitment to a visually pleasing user interface extends to the inclusion of unique avatars for each date, corresponding to their respective genders. This holistic approach to aesthetics reflects our aspiration to create an immersive and enjoyable user experience within the LoveBook application.
+
 ## **Appendix: Planned Enhancements**
 
 1. Improve the command parser to be more robust. Some examples include:
@@ -836,3 +840,7 @@ to improve upon our star and edit commands such that they do not disrupt the sta
 5. Improve the error message to be more comprehensive
    - Currently, the error message for user that key in multiple invalid keywords only spots the first invalid keyword. We
      are planning to allow the user to know all the invalid keywords that he/she has keyed in.
+
+6. Improve the message displayed when the user tries to perform an operation on an empty list
+   - Currently, for some commands like edit and sort, the message displayed is simply based on the validity check of the parameters and it does not tell the user that the
+     list is empty. For instance, when the user sorts an empty list, the message displayed is "Sorted!" which is not very helpful. Hence, we are planning to tell the user that the list is empty and that the operation cannot be performed.
