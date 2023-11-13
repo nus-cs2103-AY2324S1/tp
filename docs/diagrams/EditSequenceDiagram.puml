@@ -51,6 +51,14 @@ create EditCommand
 EditCommandParser -> EditCommand : EditCommand(index, editPersonDescriptor);
 activate EditCommand
 
+note left
+index:
+the index of person to be edited
+
+editPersonDescriptor:
+a person object where its field are the edited values
+end note
+
 EditCommand --> EditCommandParser : command
 deactivate EditCommand
 
@@ -71,8 +79,16 @@ activate Model
 Model --> EditCommand : lastShownList
 deactivate Model
 
-EditCommand -> EditCommand: createEditedPerson(personToEdit, descriptor)
+EditCommand -> EditCommand: createEditedPerson(personToEdit, editPersonDescriptor)
 activate EditCommand
+
+note right
+personToEdit:
+the person to be edited
+
+editPersonDescriptor
+a person object where its field are the edited values
+end note
 
 EditCommand --> EditCommand: editedPerson
 deactivate EditCommand
@@ -81,22 +97,33 @@ EditCommand -> Model : purgeAddressBook()
 activate Model
 deactivate Model
 
-EditCommand -> Model : setPerson(personToEdit, editedPerson)
+EditCommand -> Model : setPerson(personToEdit, editedPerson, isEditingSchedule)
 activate Model
 deactivate Model
+
+note right
+personToEdit:
+the person to be edited
+
+editedPerson:
+the editedPerson
+
+isEditingSchedule:
+boolean to check if day,begin, and end fields are being edited
+end note
 
 EditCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
 activate Model
 deactivate Model
 
+note right
+PREDICATE_SHOW_ALL_PERSONS:
+Predicate to show all persons
+end note
+
 EditCommand -> Model : commitAddressBook();
 activate Model
 deactivate Model
-
-'note right
-'PREDICATE_SHOW_ALL_ORDERS:
-'Predicate to show all orders
-'end note
 
 create CommandResult
 EditCommand -> CommandResult
@@ -108,7 +135,6 @@ deactivate CommandResult
 EditCommand --> LogicManager : result
 deactivate EditCommand
 EditCommand -[hidden]-> LogicManager : result
-destroy EditCommand
 
 [<--LogicManager
 deactivate LogicManager
