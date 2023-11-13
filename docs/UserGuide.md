@@ -144,6 +144,12 @@ add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​  [i/INSTRUMENT]…​  [g/GENRE]
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, or `tags`) will be ignored.
 
 </div>
+
+<div markdown="block" class="alert alert-info">
+:information_source: **Information** 
+
+When you use any features with `INDEX` as a parameter, kindly refer to the index in the **current displaying panels**.
+</div>
  
 [Back To ToC](#table-of-contents)
 
@@ -266,7 +272,7 @@ Edited Musician: Hans Leonhart; Phone: 98765430;
 Email: hansl@music.com; Tags: [german]; 
 Instruments: [violin]; Genres: [pop]
 ```
-* Before: From `list` state, Hans Leonhart's genre is classical and his phone number is 98765432
+* Before: From `list` state, Hans Leonhart's genre is classical and his phone number is 98009432
   ![edit_before.png](images%2Fmusician-features%2Fedit_before.png)
 
 
@@ -318,9 +324,8 @@ You are about to form a band and are looking for musicians who play certain inst
 The `My Musicians` panel will update to show all matching musicians, while the `My Bands` panel will list all bands.
 
 For example, when the input command is `find g/rock i/guitar i/piano`
-* Before: From `list` state
-![find_before.png](images%2Fmusician-features%2Flist_all.png)
-* After: On the left, `My Musicians` panel will display all musicians whose genres contain "rock" AND instruments contain "guitar" or "piano"
+
+`My Musicians` panel will display all 3 musicians whose genres contain "rock" AND instruments contain "guitar" or "piano"
 ![find_after.png](images%2Fmusician-features%2Ffind_after.png)
 
 **Upon failure:**
@@ -421,12 +426,12 @@ You may want to use the `list` command to view all musicians and bands in the ap
 
 You will see a message indicating successful addition of the musician into the band. The `My Bands` panel will update to show **only** the band which the new musicians are added in. The `My Musicians` panel will update to show all **the members of that band.**
 
-For example, when the input command is `addm b/1 m/1 m/2`:
-
-* Before: From `list` state
-![addm_before.png](images%2Fband-features%2Flist_all.png)
-* After: On the right, `My Bands` panel will display the band "ACDC". On the left, `My Musicians` panel will display all musicians in that band.
-![addm_after.png](images%2Fband-features%2Faddm_after.png)
+For example, when we want to add musicians to a blues/jazz band called "Neo Pixel" (3rd in band panel):
+1. Let's first [find](#find-musicians-find) all musicians who are proficient in blues or jazz with `find g/blues g/jazz`
+   ![addm_filter.png](images%2Fband-features%2Faddm_filter.png)
+* Let's add all 4 musicians to band "Neo Pixel" with `addm b/3 m/1 m/2 m/3 m/4`.
+ On the right, `My Bands` panel will display the band "Neo Pixel". On the left, `My Musicians` panel will display all musicians in that band.
+![addm_after.png](images%2Fband-features%2Faddm_afteradding.png)
 
 **Upon failure:**
 
@@ -454,7 +459,7 @@ when there is 1 band), you will see an error message below:
 
 **Scenario:**
 
-You have created a few bands and added several musicians to each band. Now, you would like to find a particular band amd view all the members in it. 
+You have created a few bands and added several musicians to each band. Now, you would like to find a particular band and view all the members in it. 
 
 **Format:** 
 
@@ -465,11 +470,15 @@ You have created a few bands and added several musicians to each band. Now, you 
 
     This command finds the band named "theory X" and displays all the members in it.
 
+**Things to Note:**
+* While band name is case-insensitive, please do not insert any whitespaces within the band name.
+
 **Upon success:**
+Assume we want to list all members in band "TheoryX", let's use the command `findb TheoryX`
 * Before: From `list` state
-  ![findb_before.png](images%2Fband-features%2Ffindb_before.png)
+  ![findb_before.png](images%2Fband-features%2Flistall.png)
 * After: On the left, `My Musicians` panel will display all musicians in the band. On the right, `My Bands` panel will display the band of interest.
-  ![findb_after.png](images%2Fband-features%2Ffindb_after.png)
+  ![findb_after.png](images%2Fband-features%2Ffindb.png)
 
 **Upon failure:**
 If you input an invalid band name, an error message `Band does not exist!` will be displayed. Please input a valid band name and enter the command again.
@@ -504,10 +513,12 @@ You may want to use the [`findb`](#find-band-findb) command to view all the memb
 </div>
 
 **Upon success:**
-* Before: From `list` state
-  ![removem_before.png](images/band-features/removem_before.png)
-* After: You will see a message indicating successful removal of the musician from the band like below:
-  ![removem_after.png](images/band-features/removem_after.png)
+
+Assume we want to remove musician John Doe from band TheoryX.
+* Before: check the band members in TheoryX with `findb TheoryX`
+  ![findb_after.png](images%2Fband-features%2Ffindb.png)
+* After: Remove John Doe at position 1 with `removem m/1 b/1`. You will see a message indicating successful removal of the musician from the band like below:
+  ![removem_after.png](images%2Fband-features%2Fremovem_after.png)
 
 **Upon failure:**
 
