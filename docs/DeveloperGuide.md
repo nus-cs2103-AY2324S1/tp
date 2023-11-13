@@ -477,8 +477,8 @@ The following sequence diagram shows how the sort operation works:
 The existing implementation has a status bar displaying the save file path.
 To display the current sort and filter status, another label was added to the status bar.
 
-When a command that changes sorting is run, it returns a `SortCommandResult` which is used to update the status bar.
-Likewise, when a command that changes filtering is run, it returns a `FilterCommandResult` which is used to update the status bar.
+When a command that changes sorting (e.g. `sort`) is run, it returns a `SortCommandResult` which is used to update the status bar.
+Likewise, when a command that changes filtering (e.g. `filter`, `find`, `list`) is run, it returns a `FilterCommandResult` which is used to update the status bar.
 
 The following activity diagram summarizes what happens when a command is executed:
 
