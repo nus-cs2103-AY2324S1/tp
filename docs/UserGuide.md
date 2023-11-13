@@ -79,11 +79,14 @@ Refer to the table below for details on each GUI component
 | Event list        | Displays the list of events in FumbleLog. You can scroll through the list of events using the scroll bar on the right of the list.                       |
 | Index             | Displays the index of the person or event in their respective lists. This index is used in certain commands. i.e. editing persons or events.             |
 
-![Expired Event](images/ExpiredEvent.png)
-
 <div markdown="block" class="alert alert-warning">
+
 <i class="fa fa-warning-circle"></i> **Note about red coloured events:**<br>
 An expired event will appear red in the event list. This is to highlight to you that the event has passed.
+
+This is illustrated as follows:
+![Expired Event](images/ExpiredEvent.png)
+
 </div>
 
 [Scroll back to Table of Contents](#table-of-contents)
