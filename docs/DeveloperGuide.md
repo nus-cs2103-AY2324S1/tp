@@ -1249,3 +1249,10 @@ When a Find command results in an empty set, the output message currently
 reads '0 patients found.' We propose an enhancement to provide a clearer message 
 such as 'No patients found,' offering better clarity and user understanding.
 
+9. **Improved Patient Clearing Process:**
+Currently, HealthSync allows users to use the shortcut `c` to clear all patients in the
+HealthSync application. While this provides a quick method for clearing patient data, it lacks
+a safeguard against accidental data loss. We propose an enhancement to the patient clearing
+process by introducing a warning popup. When a user triggers the patient clearing shortcut 'c',
+a confirmation popup will appear, prompting the user to double-check their intention before
+proceeding with the clearance.
