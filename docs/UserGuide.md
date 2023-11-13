@@ -621,7 +621,7 @@ at
 
  Error message | How to resolve
 ---------------|---------------
-`Invalid command format!…` | Ensure that the title and note are specified.
+`Invalid command format! …` | Ensure that the title and note are specified.
 `Titles/Notes can take any value, as long as it is not blank and does not start with a whitespace` | Ensure that the title and note specified are not blank. Whitespaces at the start and end are trimmed.
 `Multiple values specified for the following single-valued field(s): …` | Ensure that there are no duplicate fields for title and note.
 
@@ -701,7 +701,7 @@ et
 
  Error message | How to resolve
 ---------------|---------------
-`Invalid command format!…` | Ensure that the index is correctly specified as an integer.
+`Invalid command format! …` | Ensure that the index is correctly specified as an integer.
 `At least one field to edit must be provided.` | Ensure that at least one of title, note, or tag is specified.
 `Titles/Notes can take any value, as long as it is not blank and does not start with a whitespace` | Ensure that the title and/or note specified are not blank. Whitespaces at the start and end are trimmed.
 `This task already exists in the address book.` | Ensure that the new title and note specified do not match an existing task.
@@ -1315,7 +1315,7 @@ dtagp
 
  Error message | How to resolve
 ---------------|---------------
-`Invalid command format!…` | Ensure that the index is correctly specified as an integer. At least one tag must be specified.
+`Invalid command format! …` | Ensure that the index is correctly specified as an integer. At least one tag must be specified.
 `The person index provided is invalid` | Ensure that the index specified is in the range of the displayed number of persons.
 `Tags names should be alphanumeric` | Ensure that the tags specified are alphanumeric and not empty. Whitespaces are trimmed, but spaces between characters are not allowed.
 
@@ -1361,7 +1361,7 @@ dtagt
 
  Error message | How to resolve
 ---------------|---------------
-`Invalid command format!…` | Ensure that the index is correctly specified as an integer. At least one tag must be specified.
+`Invalid command format! …` | Ensure that the index is correctly specified as an integer. At least one tag must be specified.
 `The task index provided is invalid` | Ensure that the index specified is in the range of the displayed number of tasks.
 `Tags names should be alphanumeric` | Ensure that the tags specified are alphanumeric and not empty. Whitespaces are trimmed, but spaces between characters are not allowed.
 
