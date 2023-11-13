@@ -1214,4 +1214,10 @@ testers are expected to do more *exploratory* testing.
 
 ### Allowing for unlinking of students from lessons and vice versa
 - **Relevant feature:** linking `linkTo`, `link`
+- **Current issues:** Once a student has been linked to a lesson, there is no way to unlink them.
+- **Proposed new behaviour:** The `linkTo` and `link` command will unlink the specified lesson and student if it detects that they have already been linked.
+  - Input: `linkTo Bernice Yu`
+  - Expected output: Bernice Yu is linked to the current lesson
+  - Input: `linkTo Bernice Yu`
+  - Expected output: Bernice Yu is unlinked from the current lesson.
 
