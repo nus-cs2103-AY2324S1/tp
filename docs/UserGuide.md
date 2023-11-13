@@ -429,7 +429,7 @@ ep
 
  Error message | How to resolve
 ---------------|---------------
-`Invalid command format!…` | Ensure that the index is correctly specified as an integer.
+`Invalid command format! …` | Ensure that the index is correctly specified as an integer.
 `At least one field to edit must be provided.` | Ensure that at least one of name, phone, email, address or tag is specified.
 `The person index provided is invalid` | Ensure that the index provided is within the valid range.
 `Names should only contain alphanumeric characters and spaces, and it should not be blank` | Ensure that the name specified is not blank and contain only alphanumeric characters. Whitespaces at the start and end are trimmed.
@@ -883,7 +883,7 @@ mt
 
  Error message | How to resolve
 ---------------|---------------
-`Invalid command format!…` | Ensure that the index is correctly specified as an integer.
+`Invalid command format! …` | Ensure that the index is correctly specified as an integer.
 `The task index provided is invalid` | Ensure that the index provided is within the valid range.
 `This task is already marked as done in the task list.` | Ensure that the task specified for marking is not already done in the task list.
 
@@ -927,7 +927,7 @@ ut
 
  Error message | How to resolve
 ---------------|---------------
-`Invalid command format!…` | Ensure that the index is correctly specified as an integer.
+`Invalid command format! …` | Ensure that the index is correctly specified as an integer.
 `The task index provided is invalid` | Ensure that the index provided is within the valid range.
 `This task is already marked as not done in the task list.` | Ensure that the specified task is not already marked as not done in the task list.
 
