@@ -93,7 +93,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteByIndexSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
 <box type="info" seamless>
 
@@ -528,14 +528,14 @@ Use case ends.
 Use case ends.
 
 **Extensions**
-* 2a. User provides an incorrect attribute for sorting (e.g., "list s/phone").
-  * 2a1. JABPro shows an error message and provides course of action for remedy.  
+* 1a. User provides an incorrect attribute for sorting (e.g., "list s/phone").
+  * 1a1. JABPro shows an error message and provides course of action for remedy.  
   Use case resumes at step 1.
-* 2b. User attempts to list persons when there are no entries in the address book.
-  * 2b1. JABPro shows a message indicating that there are no persons to display.   
+* 1b. User attempts to list persons when there are no entries in the address book.
+  * 1b1. JABPro shows a message indicating that there are no persons to display.   
   Use case ends.
 
-**Use case: Search persons by the specified categories(name, status and/ tag)**
+**Use case: Search persons by the specified categories(name, status, and/or tag)**
 
 **MSS**
 1.  Hiring manager types in search parameters to search users by the specified categories.
