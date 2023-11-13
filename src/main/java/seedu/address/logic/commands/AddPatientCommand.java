@@ -19,7 +19,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Patient;
 
 /**
- * Adds a person to the address book.
+ * Adds a Patient to the MediLink Contacts address book.
  */
 public class AddPatientCommand extends Command {
 

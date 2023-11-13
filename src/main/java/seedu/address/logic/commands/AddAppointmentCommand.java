@@ -16,7 +16,7 @@ import seedu.address.model.person.Ic;
 import seedu.address.model.person.Patient;
 
 /**
- * Adds an Appointment to the address book.
+ * Adds an Appointment to the MediLink Contacts address book.
  */
 public class AddAppointmentCommand extends Command {
 
@@ -45,7 +45,7 @@ public class AddAppointmentCommand extends Command {
     private final Appointment toAdd;
 
     /**
-     * Creates an AddPatientCommand to add the specified {@code Patient}
+     * Creates an AddAppointmentCommand to add the specified {@code Appointment}
      */
     public AddAppointmentCommand(Appointment appointment) {
         requireNonNull(appointment);
@@ -70,6 +70,15 @@ public class AddAppointmentCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
+    /**
+     * Checks if the appointment is valid by ensuring that the patient and doctor do not have
+     * conflicting appointments at the same time.
+     *
+     * @param chosenPatient The chosen patient for the appointment.
+     * @param chosenDoctor The chosen doctor for the appointment.
+     * @param toAdd The appointment to be added.
+     * @throws CommandException If there is a conflict in appointments.
+     */
     private void checkValidAppointment(Patient chosenPatient, Doctor chosenDoctor, Appointment toAdd)
             throws CommandException {
         if (chosenPatient.hasAppointmentAt(toAdd.getAppointmentTime())) {
@@ -80,6 +89,13 @@ public class AddAppointmentCommand extends Command {
         }
     }
 
+    /**
+     * Checks if the chosen patient and doctor are valid, i.e., they exist in the model.
+     *
+     * @param chosenPatient The chosen patient for the appointment.
+     * @param chosenDoctor The chosen doctor for the appointment.
+     * @throws CommandException If the chosen patient or doctor is invalid.
+     */
     private void checkPatientAndDoctor(Patient chosenPatient, Doctor chosenDoctor) throws CommandException {
         if (chosenPatient == null) {
             throw new CommandException(MESSAGE_INVALID_PATIENT);
@@ -89,6 +105,12 @@ public class AddAppointmentCommand extends Command {
         }
     }
 
+    /**
+     * Finds a patient in the model based on the patient's IC.
+     *
+     * @param model The model containing the data.
+     * @return The found patient or null if not found.
+     */
     private Patient findPatient(Model model) {
         Ic patientIc = toAdd.getPatient();
         List<Patient> patients = model.getFilteredPatientList();
@@ -100,6 +122,12 @@ public class AddAppointmentCommand extends Command {
         return null;
     }
 
+    /**
+     * Finds a doctor in the model based on the doctor's IC.
+     *
+     * @param model The model containing the data.
+     * @return The found doctor or null if not found.
+     */
     private Doctor findDoctor(Model model) {
         Ic doctorIc = toAdd.getDoctor();
         List<Doctor> doctors = model.getFilteredDoctorList();

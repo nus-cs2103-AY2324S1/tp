@@ -17,7 +17,7 @@ import seedu.address.model.person.Ic;
 import seedu.address.model.person.Patient;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes an Appointment identified using it's displayed index from the address book.
  */
 public class DeleteAppointmentCommand extends Command {
 
@@ -30,7 +30,6 @@ public class DeleteAppointmentCommand extends Command {
 
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted Appointment: %1$s";
     private static final Logger logger = LogsCenter.getLogger(DeleteAppointmentCommand.class);
-
     private final int targetIndex;
     private Appointment toDelete;
 
