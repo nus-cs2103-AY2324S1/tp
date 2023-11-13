@@ -207,7 +207,7 @@ The `Event` and `UniqueEventList` classes are implemented as shown in the diagra
 
 <img src="images/EventClassDiagram.png" width="500px" style="margin-left:120px">
 
-Every `Event` contains a `Name`, `Location`, `EventDate`, `Optional<Hours>`, `Optional<Remark>` and a set of `Tags`
+Every `Event` contains a `Name`, `Location`, `EventDate`, `Optional<Hours>`, `Optional<Remark>` and a set of `Tags`.
 `UniqueEventList` stores all unique instances of `Event`.
 
 Note that similar to `Member` class , the `Hours` and a `Remark` fields will only be meaningfully intialised
