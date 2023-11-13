@@ -11,7 +11,7 @@ GUI created with JavaFX. It is written in Java.
 
 Given below are my contributions to the project.
 
-* **New Feature**: Deck and Cards Operations [#66](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/66)**:
+* **New Feature**: Deck and Cards Operations [#66](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/66):
   * What it does: Allow the user to perform the basic operations based on the Card class by taking in the
   parameters required,
   * Highlights: Users can now input add and edit based on the parameters specified by each
@@ -89,7 +89,7 @@ Given below are my contributions to the project.
     when invalid parameters or incorrect command format is entered by the users. [#131](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/131)
     * Added Planed Enhancement to support Markdown Syntax stacking [#225](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/225)
   *  README:
-    * Removed trace of ab3 and revamped README file for lesSON [#50](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/50)
+    * Removed trace of ab3 and revamped README file for lesSON. [#50](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/50)
 
 
 * **Community**:
