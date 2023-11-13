@@ -941,7 +941,7 @@ Our dedication to enhancing the aesthetics of LoveBook is underscored by our met
    - Currently, for some commands like edit and sort, the message displayed is simply based on the validity check of the parameters and it does not tell the user that the
      list is empty. For instance, when the user sorts an empty list, the message displayed is "Sorted!" which is not very helpful. Hence, we are planning to tell the user that the list is empty and that the operation cannot be performed.
 
-6. Improve the presets bar feature to be more comprehensive and clear
+7. Improve the presets bar feature to be more comprehensive and clear
     - Currently, the presets bar feature only accomodates for the commands: `add`, `edit`, `delete`, `setP` and `showP`.
     - In the future, we plan to add more presets buttons for all 16 commands in the application.
     - Furthermore, even though there's `clear` command, the button "clear" removes all text in the command box, making
