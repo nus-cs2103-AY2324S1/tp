@@ -358,7 +358,7 @@ The following sequence diagram shows how the remove attendee operation works:
 
 <div style="page-break-after: always;"></div>
 
-### Keeping track of last meeting with contact
+### Last Contacted Time feature
 
 Keeping track of the user's last meeting with their contact is facilitated by the addition of a `LastContactedTime` object to `Person`.
 Thus, each instance of `Person` will contain an immutable `LastContactedTime` object that stores the user's last meeting with that contact.
@@ -370,16 +370,22 @@ The following diagram summarizes steps 2 to 6:
 <img src="images/LastContactedTime1.png" width="1000" />
 
 Step 2. Entering a correct command with the `Enter` key then calls `execute` on `LogicManager`.
+
 Step 3. `LogicManager` then calls `AddressBookParser#parseCommand(commandText)` on the `commandText` String, which recognizes that it is an `addc` command.
+
 Step 4. `AddressBookParser` then calls `AddCommandParser#parse()` on the command arguments.
+
 Step 5. `AddCommandParser` then calls `ParserUtil#parseContactTime()` which parses the last contacted time and returns a `LocalDateTime` object called `lastContactedTime`.
+
 Step 6. The `lastContactedTime` object is then passed to the `Person` constructor, which creates a new `Person` that calls the `LastContactedTime` constructor with it.
 
 The following diagram summarizes steps 7 and 8:
 <img src="images/LastContactedTime2.png" width="1000" />
 
 Step 7. The completed `Person` is passed to an `AddCommand` constructor which return a new `AddCommand` that can be executed.
+
 Step 8. `LogicManager` then executes the `AddCommand` on the application model.
+
 Step 9. Further execution is carried out, which like before adds the `Person` object to the list of `Person`s in the `Model`, and updates the `Storage` with this new `Person`.
 
 #### Design Consideration: Updating last meeting with contact
