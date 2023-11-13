@@ -702,22 +702,61 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a tutee
 
-1. Deleting a person while all persons are being shown
+1. Deleting a tutee while all tutees are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all tutees using the `list` command. Multiple tutees in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First tutee is deleted from the list. Details of the deleted tutee shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No tutee is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
+   
 1. _{ more test cases …​ }_
+
+### Marking a tutee as paid
+
+1. Marking a tutee as paid while all tutees are being shown
+
+    1. Prerequisites: List all tutees using the `list` command. Multiple tutees in the list.
+
+    1. Test case: `paid 2`<br>
+       Expected: Second tutee is from the list is marked as paid. The message of marking person paid success will be shown. Timestamp in the status bar is updated.
+
+    1. Test case: `delete 0`<br>
+       Expected: No tutee is marked as paid. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect paid commands to try: `paid`, `paid x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Marking a tutee as not paid
+
+1. Marking a tutee as not paid while all tutees are being shown
+
+    1. Prerequisites: List all tutees using the `list` command. Multiple tutees in the list.
+
+    1. Test case: `unpaid 3`<br>
+       Expected: Second tutee is from the list is marked as not paid. The message of marking person not paid success will be shown. Timestamp in the status bar is updated.
+
+    1. Test case: `unpaid 0`<br>
+       Expected: No tutee is marked as not paid. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect unpaid commands to try: `unpaid`, `unpaid x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Listing all unpaid tutees
+
+1. All tutees who haven't paid will be shown
+
+    1. There are tutees in the list.
+
+    1. Test case: `list unpaid`<br>
+       Expected: All tutees who haven't paid will be shown. The message of how many tutees are unpaid will be shown. Timestamp in the status bar is updated.
 
 ### Saving data
 
