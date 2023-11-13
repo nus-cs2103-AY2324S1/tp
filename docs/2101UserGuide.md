@@ -273,7 +273,7 @@ Here is an example command where we edit an event at **index** 1, changing the *
 
 #### Delete an Event: `deleteEvent`
 
-Are the number of events piling up? To clear the clutter, you can delete any unwanted event from CCACommander with `deleteEvent`!
+Are your events piling up? To clear the clutter, you can delete any unwanted event from CCACommander with `deleteEvent`!
 
 Here's how you can use it:<br>
 `deleteEvent EVENT_INDEX`
