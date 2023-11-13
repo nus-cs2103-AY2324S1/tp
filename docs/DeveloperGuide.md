@@ -458,16 +458,18 @@ characteristics:
 
 **Preconditions:** The accountant is logged into the Tran$act application.
 
-**Description:**
+**MSS:**
 
-1. The accountant specifies the transaction details, including the amount, type (revenue or expense), date, and
-   optionally, the associated person.
+1. The accountant specifies the transaction details, including the amount, type (revenue or expense), date, and optionally, the associated person.
 2. The system validates the input data.
 3. The system records the transaction in the database.
+<br>Use case ends
 
 **Extensions:**
 
-- If the input data is invalid, the system displays an error message.
+2a. Input data is invalid
+  - 2a1. The system displays an error message.
+    <br>Use case ends
 
 ### Use Case 2: Removing a Transaction
 
@@ -475,11 +477,11 @@ characteristics:
 
 **Preconditions:** The accountant is logged into the Tran$act application.
 
-**Description:**
+**MSS:**
 
 1. The accountant selects a transaction to remove from the records.
-2. The system confirms the removal with the accountant.
-3. The system removes the transaction from the database.
+2. The system removes the transaction from the database.
+   <br>Use case ends
 
 ### Use Case 3: Viewing All Transactions
 
@@ -487,10 +489,11 @@ characteristics:
 
 **Preconditions:** The accountant is logged into the Tran$act application.
 
-**Description:**
+**MSS:**
 
 1. The accountant selects the option to view all transactions.
 2. The system retrieves and displays a list of all recorded transactions.
+   <br>Use case ends
 
 ### Use Case 4: Editing a Transaction
 
@@ -498,15 +501,18 @@ characteristics:
 
 **Preconditions:** The accountant is logged into the Tran$act application.
 
-**Description:**
+**MSS:**
 
-1. The accountant selects a transaction to edit.
-2. The system allows the accountant to modify the transaction details.
+1. The accountant enters command with the details of the transaction to edit.
+2. The system validates the input data.
 3. The system saves the updated transaction in the database.
+   <br>Use case ends
 
 **Extensions:**
 
-- If the input data is invalid, the system displays an error message.
+- 2a. Input data is invalid
+    - 2a1. The system displays an error message.
+      <br>Use case ends
 
 ### Use Case 5: Restoring Deleted Transactions
 
@@ -517,12 +523,13 @@ expenses associated with staff and visualize them.
 
 **Preconditions:** The accountant is logged into the Tran$act application.
 
-**Description:**
+**MSS:**
 
 1. The accountant selects the option to restore deleted transactions.
 2. The system presents a list of previously deleted transactions.
 3. The accountant selects a transaction to restore.
 4. The system restores the selected transaction to the active records.
+   <br>Use case ends
 
 ### Use Case 6: Dashboard Display
 
@@ -530,10 +537,12 @@ expenses associated with staff and visualize them.
 
 **Preconditions:** The accountant is logged into the Tran$act application.
 
-**Description:**
+**MSS:**
 
-1. Upon opening the app, the system displays a dashboard.
-2. The dashboard shows total revenue, total expenses, net profit for the selected period (usually monthly), and a breakdown of expenses by sector.
+1. The accountant selects option to display dashboard.
+2. The dashboard shows total revenue, total expenses, net profit for the selected period (usually monthly), and a
+   breakdown of expenses by sector.
+   <br>Use case ends
 
 ### Use Case 7: Access to Financial Reports
 
@@ -541,10 +550,11 @@ expenses associated with staff and visualize them.
 
 **Preconditions:** The accountant is logged into the Tran$act application.
 
-**Description:**
+**MSS:**
 
 1. The accountant selects the option to access financial reports.
 2. The system generates and displays financial reports, including income statements, balance sheets, and cash flow statements.
+   <br>Use case ends
 
 ### Use Case 8: Customizable Reports
 
@@ -552,11 +562,12 @@ expenses associated with staff and visualize them.
 
 **Preconditions:** The accountant is logged into the Tran$act application.
 
-**Description:**
+**MSS:**
 
 1. The accountant selects the option to generate customizable reports.
-2. The system provides tools for the accountant to customize the report parameters.
+2. The system displays options for the accountant to customize the report parameters.
 3. The system generates and displays the customized report in common formats (PDF, CSV, Excel).
+   <br>Use case ends
 
 ### Use Case 9: Deleting All Transactions
 
@@ -564,10 +575,11 @@ expenses associated with staff and visualize them.
 
 **Preconditions:** The accountant is logged into the Tran$act application.
 
-**Description:**
+**MSS:**
 
 1. The accountant selects the option to delete all transactions.
 2. The system permanently deletes all recorded transactions from the database.
+   <br>Use case ends
 
 ### Use Case 10: Adding a Staff Member to Address Book
 
@@ -575,16 +587,18 @@ expenses associated with staff and visualize them.
 
 **Preconditions:** The accountant is logged into the Tran$act application.
 
-**Description:**
+**MSS:**
 
 1. The accountant enters command to add a new staff member to the address book with relevent details.
 2. The system validates the input data.
 3. The system adds the new staff member to the address book.
+   <br>Use case ends
 
 **Extensions:**
 
-- If the input data is invalid or incomplete, the system displays an error message.
-- The system may provide an option to associate the new staff member with transactions during this process.
+- 2a. Input data is invalid
+    - 2a1. The system displays an error message.
+      <br>Use case ends
 
 ### Use Case 11: Removing a Staff Member from Address Book
 
@@ -592,16 +606,17 @@ expenses associated with staff and visualize them.
 
 **Preconditions:** The accountant is logged into the Tran$act application.
 
-**Description:**
+**MSS:**
 
 1. The accountant enters the command to remove a staff member from the address book.
-2. The system confirms the removal with the accountant.
-3. The accountant confirms the action.
-4. The system removes the selected staff member from the address book.
+2. The system removes the selected staff member from the address book.
+   <br>Use case ends
 
 **Extensions:**
 
-- If the accountant cancels the operation at the confirmation step, no staff members are removed.
+- 2a. Staff to remove does not exist
+    - 2a1. The system displays an error message.
+      <br>Use case ends
 
 ### Use Case 12: Editing Staff Member Information in Address Book
 
@@ -609,26 +624,30 @@ expenses associated with staff and visualize them.
 
 **Preconditions:** The accountant is logged into the Tran$act application.
 
-**Description:**
+**MSS:**
 
 1. The accountant enters command to edit a staff member with the relevent details.
 2. The system validates the updated information.
 3. The system saves the updated staff member information in the address book.
+   <br>Use case ends
 
 **Extensions:**
 
-- If the input data is invalid or incomplete, the system displays an error message.
+- 2a. Input data is invalid
+    - 2a1. The system displays an error message.
+      <br>Use case ends
 
-### Use Case 13: Deleting All Address Book Contacts
+### Use Case 13: Deleting All Address Book Staff Members
 
 **Actor:** Accountant
 
 **Preconditions:** The accountant is logged into the Tran$act application.
 
-**Description:**
+**MSS:**
 
-1. The accountant selects the option in the menu bar to delete all address book contacts.
-2. The system permanently deletes all contacts from the address book.
+1. The accountant selects the option to delete all address book staff members.
+2. The system permanently deletes all staff members from the address book.
+   <br>Use case ends
 
 ### Use Case 14: Filtering Transactions
 
@@ -636,10 +655,11 @@ expenses associated with staff and visualize them.
 
 **Preconditions:** The accountant is logged into the Tran$act application.
 
-**Description:**
+**MSS:**
 
 1. The accountant specifies the parameters for which they want to filter for transactions by.
 2. System displays only transactions that fit the parameters specified.
+   <br>Use case ends
 
 ### Use Case 15: Sorting Transactions
 
@@ -647,10 +667,11 @@ expenses associated with staff and visualize them.
 
 **Preconditions:** The accountant is logged into the Tran$act application.
 
-**Description:**
+**MSS:**
 
 1. The accountant specifies the parameters for which they want to sort transactions by.
-2. System sorts the transactions based on the parameters the agent specified.
+2. System sorts the transactions based on the parameters specified.
+   <br>Use case ends
 
 ## Non-functional Requirements (NFR)
 
