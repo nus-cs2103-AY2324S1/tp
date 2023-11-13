@@ -40,11 +40,13 @@ Person --> AddCommandParser
 deactivate Person
 
 create Group
+
 AddCommandParser -> Group
 activate Group
 
 Group --> AddCommandParser
 deactivate Group
+
 
 Create AddCommand
 AddCommandParser -> AddCommand
