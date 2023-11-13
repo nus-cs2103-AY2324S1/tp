@@ -167,6 +167,7 @@ blockquote {
  */
 pre,
 code {
+  -webkit-print-color-adjust: exact;
   font-family: $code-font-family;
   font-size: 0.9375em;
   border: 1px solid $brand-color-light;

@@ -1,4 +1,4 @@
-// Placeholder to allow defining custom styles that override everything else.
+]// Placeholder to allow defining custom styles that override everything else.
 // (Use `_sass/minima/custom-variables.scss` to override variable defaults)
 h2, h3, h4, h5, h6 {
   color: #e46c0a;
@@ -6,6 +6,7 @@ h2, h3, h4, h5, h6 {
 
 // Bootstrap style alerts
 .alert {
+  -webkit-print-color-adjust: exact;
   position: relative;
   padding: $alert-padding-y $alert-padding-x;
   margin-bottom: $alert-margin-bottom;
