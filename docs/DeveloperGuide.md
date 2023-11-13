@@ -1062,3 +1062,4 @@ We plan to allow users to add multiple types to each interview. An interview can
 
 3. Integrated Dashboard
 * Allow users to view their job applications on a dashboard, enabling them to view their progress at a glance.
+
