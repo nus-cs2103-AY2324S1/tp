@@ -9,7 +9,7 @@ FlashLingo is a desktop application to facilitate the learning of new languages 
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added a `stats` that allows users to learn more about their learning stt=atisitics
+* **New Feature**: Added `stats` command for comprehensive learning analysis
     * What it does: This command provides users with detailed learning statistics. It showcases the total count of flashcards, the number of flashcards successfully remembered, and the user's overall success rate.
     * Justification: This feature is specifically designed to motivate novice language learners, our target user group, by visually representing their learning progress. The success rate metric serves as a continuous source of inspiration, encouraging users to improve                          their language skills.
     * Highlights: The development of this feature required an in-depth understanding of Flashlingo's model and its flashcard list management. Key challenges involved accessing and processing the entire flashcard list to accurately calculate the success rate. This                            necessitated intricate integration with the existing system architecture, ensuring that the calculations are accurate and reflect real-time learning progress. The implementation not only provided users with valuable insights but also demonstrated a                         sophisticated application of data analysis within the Flashlingo environment.
