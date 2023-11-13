@@ -30,13 +30,13 @@
         * [Implementing `ListPersonCommandParser`](#implementing-listpersoncommandparser)
         * [Implementing `ListPersonCommand`](#implementing-listpersoncommand)
     * [Tag feature](#tag-feature)
-        * [Overview](#overview)
+        * [Overview: Tag](#overview-tag)
         * [Implementing `AddTagCommandParser` and `DeleteTagCommandParser`](#implementing-addtagcommandparser-and-deletetagcommandparser)
         * [Implementing `AddTagCommand`](#implementing-addtagcommand)
         * [Implementing `DeleteTagCommand`](#implementing-deletetagcommand)
         * [Design Considerations](#design-considerations)
     * [Notes feature](#notes-feature)
-        * [Overview](#overview-1)
+        * [Overview: Note](#overview-note)
         * [Implementing `AddNoteCommandParser`](#implementing-addnotecommandparser)
         * [Implementing `DeleteNoteCommandParser`](#implementing-deletenotecommandparser)
         * [Implementing `AddNoteCommand`](#implementing-addnotecommand)
@@ -261,7 +261,7 @@ The following activity diagram shows how the `list contact` command works:
 ### Tag feature
 This feature allows users to add and remove `Tag` to any `Person` in the contact list. It provides an easy way for users to catrgorize their contacts.
 
-#### Overview:
+#### Overview: Tag
 The adding and removing of `Tag` begins with the parsing of the `AddTagCommand` and `DeleteTagCommand` using the `AddTagCommandParser` and `DeleteTagCommandparser` respectively. The `AddTagCommand` and `DeleteTagCommand` will then be executed by the `Model`.
 
 The activity diagram below shows the action sequence of adding one or more `Tag` to a contact.
@@ -332,7 +332,7 @@ The following activity diagram summarizes what happens when the `DeleteTagComman
 ### Notes feature
 This feature allows users to add and remove `Note` to any `Person` in the contact list. It provides an easy way for users to record additional information about the contacts.
 
-#### Overview:
+#### Overview: Note
 The adding and removing of `Note` begins with the parsing of the `AddNoteCommand` and `DeleteNoteCommand` using the `AddNoteCommandParser` and `DeleteNoteCommandParser` respectively. The `AddNoteCommand` and `DeleteNoteCommand` will then be executed by the `Model`.
 
 The activity diagram below shows the action sequence of adding a `Note` to a contact.
