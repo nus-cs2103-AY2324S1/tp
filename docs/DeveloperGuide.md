@@ -212,34 +212,7 @@ The following sequence diagram describes the process of `add` command:
     * Cons: User input can get potentially very long, increasing the chance of invalid input, relatively harder to implement parser.
 
 --------------------------------------------------------------------------------------------------------------------
-### Adding Time a Person
 
-#### Implementation
-
-The `addtime` feature is facilitated by a number of classes such as `Person`, `Model` and `TimeInterval`
-
-Step 1. User launches the application.
-
-Step 2. The user executes `“addtime n/Alex Yeoh t/mon 1200 - mon 1400 t/tue 1000 - wed 1600”` command to add time slots to the person, Alex Yeoh. `LogicManager#execute` is called which then calls `AddressBookParser#parseCommand` to decide on the type of command. `AddressBookParser` then calls `AddTimeCommandParser`,
-
-Step 3, The `AddTimeCommandParser` is called to read the user input. `AddTimeCommandParser` calls `ArgumentTokenizer#tokenize` to check the prefixes of the user input. `AddTimeCommandParser` then calls `ArgumentMultimap#getValue()` to get inputs after each unique single prefix and `ArgumentMultimap#getAllValues()` to get inputs from prefix that are used more than once.
-The result of it is then passed to `ParserUtil#parse()` methods to parse each attributes such as `Name`. `AddTimeCommandParser` then calls `AddTimeCommand`.
-
-Step.4 `AddTimeCommand` then calls `Model#addTimeToPerson()` which then calls `AddressBook#addTimeToPerson()`. The latter method will add time to the person.
-
-The following sequence diagram describes the process of `addtime` command:
-<puml src="diagrams/AddTimeCommandSequenceDiagram.puml" alt="AddCommandSeqDiagram" />
-
-#### Design consideration:
-
-**Aspect: Handling group attribute in user input**
-
-* **Alternative 1 (Current Choice):** Allows user to add more than one time intervals in each `addtime` command.
-  * Pros: Conveniently adds a multiple time intervals into person.
-  * Cons: User input may get relatively longer, relatively harder to implement parser.
-* **Alternative 2:** Allow user to only add single time interval in each `addtime` Command
-  * Pros: Conveniently adds a person into group while creating a new contact at the same time, relatively easier to implement parser.
-  * Cons: User input can get potentially very long, increasing the chance of invalid input.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -374,9 +347,9 @@ Below is an activity diagram that illustrates the control flow for Delete Person
 
 #### Implementation
 
-The group remark mechanism is facilitated by `Group`. It is stored internally as a `Group Remark`. This operation is exposed in the `Model` interface as `Model#groupPerson(personName, groupName)`.
+The group mechanism is facilitated by `Group`. It is stored internally as a `Group`. This operation is exposed in the `Model` interface as `Model#groupPerson(personName, groupName)`.
 
-Given below is an example usage scenario and how the group remark mechanism behaves at each step.
+Given below is an example usage scenario and how the group mechanism behaves at each step.
 
 **Step 1:** User launches the application.
 
@@ -540,7 +513,7 @@ The following activity diagram summarizes what happens when a user executes a de
 
 Given below is an example usage scenario and how the Delete Person mechanism behaves at each step.
 
-Step 1. The user executes `delete n/Alex Yeoh` command to delete a person named 'Alex Yeoh' in the address book. After parsing, a new `DeletePersonCommand` object will be returned.
+Step 1. The user executes `delete n/Alex Yeoh` command to delete a person named 'Alex Yeoh' in the contact list. After parsing, a new `DeletePersonCommand` object will be returned.
 
 Step 2. `DeletePersonCommand` is executed, in which `Model#deletePerson("Alex Yeoh")` is called.
 
