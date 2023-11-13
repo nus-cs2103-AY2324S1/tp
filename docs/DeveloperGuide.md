@@ -188,15 +188,13 @@ The `add` feature is facilitated by a number of classes such as `Person` and `Mo
 
 Step 1. The user launches the application for the first time.
 
-Step 2. The user executes `“add n/John Doe p/98765432 e/johnd@example.com g/CS2103T”` command to add a new person. `LogicManager#execute` is called which then calls `AddressBookParser#parseCommand` to decide on the type of command. `AddressBookParse`r` then calls `AddCommandParser`,
+Step 2. The user executes `“add n/John Doe p/98765432 e/johnd@example.com g/CS2103T”` command to add a new person. 
 
-Step 3, The `AddCommandParser` is called to read the user input. `AddCommandParser` calls `ArgumentTokenizer#tokenize` to check the prefixes of the user input. `AddCommandParser` then calls `ArgumentMultimap#getValue()` to get inputs after each prefix.
-The result of it is then passed to `ParserUtil#parse` methods to parse each attributes such as `Name`. `AddCommandParser` then makes new person object. `AddCommandParser` then calls `AddCommand` and passes `Person` inside.
+Step 3, The `AddCommandParser` is called to read the user input. `AddCommandParser` parses the input and calls `AddCommand`.
 
-Step.4 `AddCommand` then calls `Model#addPerson()` which then calls `AddressBook#addPerson()`. The latter method will add person inside the `uniquePersonList` in `addressBook`. `AddCommand` also calls `Model#addGroup` which then calls `AddressBook#addGroup` to add the group inside `grouplist` if the group does not exist.
-Lastly, `AddCommand` adds the person inside the group
+Step.4 `AddCommand` then calls `Model#addPerson()` which then calls `AddressBook#addPerson()`. The latter method will add person inside the `uniquePersonList` in `addressBook`. `AddCommand` also calls `Model#addGroup` which then calls `AddressBook#addGroup` to add the group inside `grouplist` if the group does not exist. Lastly, `AddCommand` adds the person inside the group
 
-**Note** No duplication is allowed in addressbook for most of Person’s attribute (name, email and phone number.)
+**Note** No duplication is allowed in `addressbook` for most of Person’s attribute (name, email and phone number.)
 
 The following sequence diagram describes the process of `add` command:
 <puml src="diagrams/AddCommandSequenceDiagram.puml" alt="AddCommandSeqDiagram" />
@@ -210,10 +208,7 @@ The following sequence diagram describes the process of `add` command:
     * Cons: User input may get relatively longer.
 * **Alternative 2:** Allow user to add as many groups as required for each `add` Command
     * Pros: Conveniently adds a person into multiple group while creating a new contact at the same time.
-    * Cons: User input can get potentially very long, increasing the chance of invalid input, relatively harder to implement parser.
-
---------------------------------------------------------------------------------------------------------------------
-
+    * Cons: User input can get potentially very long, increasing the chance of invalid input, relatively harder to implement parser. The implementation of it will get more complex.
 
 --------------------------------------------------------------------------------------------------------------------
 
