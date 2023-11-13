@@ -98,22 +98,22 @@ In NetworkBook, details of a contact are categorised into different **fields**. 
 
 Some fields are **single-valued fields**, meaning that each contact has **only 1 value** for each of these fields.
 
-| Single-valued fields | Prefix    | Format                                                       |
-| -------------------- | --------- | ------------------------------------------------------------ |
-| name                 | /name     | Any non-empty value                                          |
-| priority level       | /priority | Either `high`, `medium` or `low`, or the initial alphabet    |
-| graduation semester  | /grad     | `AYxxxx-Sy`<br>`xxxx` is the 4-digit representation of the 2 calendar years, in the academic year e.g. `2223` for Academic Year 20`22`/20`23` <br>Academic year must be between AY1970/1971 to AY2069/2070 (inclusive) <br>`y` is either `1` for Semester 1, or `2` for Semester 2 |
+| Single-valued fields | Prefix    | Format                                                       | Remarks                                                      |
+| -------------------- | --------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| name                 | /name     | Any non-empty value                                          | -                                                            |
+| priority level       | /priority | Either `high`, `medium` or `low`, or the initial alphabet    | Not case-sensitive                                           |
+| graduation semester  | /grad     | `AYxxxx-Sy`<br/><br/>e.g., `AY2223-S1` for Academic Year 20`22`/20`23` Semester `1` | `xxxx` is the 4-digit representation of 2 **consecutive** calendar years.<br/>Academic year must be between AY1970/1971 to AY2069/2070 (inclusive). <br/>`y` is either `1` for Semester 1, or `2` for Semester 2. |
 
 Other fields are **multi-valued fields**. Each contact has a **list** of different values for each of these fields.
 
-| Multi-valued fields | Prefix  | Format                                                       |
-| ------------------- | ------- | ------------------------------------------------------------ |
-| phone numbers       | /phone  | Valid phone number containing numbers and optional country code (1-3 numbers with `+` in front) if applicable<br>At least 3 digits long (excluding country code) |
-| email addresses     | /email  | Valid email with `@` (at sign) and `.` (period) present after `@` |
-| social links        | /link   | Valid URL link                                               |
-| courses             | /course | `course name [/start date] [/end date]` <br>`/start` and `/end` indicate when the contact started and finished taking the course respectively <br>A course can have no dates, a start date, or a start and end date |
-| specialisations     | /spec   | Any non-empty value                                          |
-| tags                | /tag    | Any non-empty value                                          |
+| Multi-valued fields | Prefix  | Format                                                       | Remarks                                                         |
+| ------------------- | ------- | ------------------------------------------------------------ | --------------------------------------------------------------- |
+| phone numbers       | /phone  | Valid phone number containing numbers and optional country code (1-3 numbers with `+` in front) if applicable | Phone number body (excluding country code) must be at least 3 digits long.<br/>Phone numbers with and without whitespace character are treated as different (e.g. `+6512345678` is different from `+65 12345678`). |
+| email addresses     | /email  | Valid email with `@` (at sign) and `.` (period) present after `@` |-|
+| links        | /link   | Valid URL link                                               | Link must be URL-encoded. That is, it must be the same as the URL that appears on the browser's URL bar after you visit the page. |
+| courses             | /course | `course_name [/start date] [/end date]` <br/><br/>e.g., `CS2103T /start 01-09-2023 /end 01-12-2023` |`/start` and `/end` indicate when the contact started and finished taking the course respectively. <br/>A course can have no dates, a start date, or a start and end date.|
+| specialisations     | /spec   | Any non-empty value                                          |-|
+| tags                | /tag    | Any non-empty value                                          |-|
 
 In NetworkBook, you can manage contact information by changing the fields assigned to them. Following are the commands you can use to manage fields of a contact:
 
@@ -180,6 +180,13 @@ Parameters:
 <div markdown="block" class="alert alert-info">
 
 :information_source: To view a comprehensive list of fields and their prefixes, go to the start of the [Features section](#features).
+
+</div>
+
+<div markdown="span" class="alert alert-warning">
+
+:bulb: This command ignores any input field values that are already present in your target contact.
+For example, if your contact at index `1` already has the phone number `12345678`, the command `add 1 /phone 12345678` does nothing.
 
 </div>
 
