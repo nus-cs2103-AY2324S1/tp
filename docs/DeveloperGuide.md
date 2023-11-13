@@ -9,6 +9,7 @@ pageNav: 3
 <!-- * Table of Contents -->
 <page-nav-print />
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -86,7 +87,7 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
+<puml src="diagrams/LogicClassDiagram.puml" width="450"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
@@ -144,7 +145,6 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 <div style="page-break-after: always;"></div>
---------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
 
@@ -209,7 +209,7 @@ The following activity diagram summarizes what happen when a user executes a `Up
 
 <puml src="diagrams/UpdateSecLevelActivityDiagram.puml" alt="UpdateSecLevelActivityDiagram" width="750" />
 
-#### Design consideration:
+#### Design considerations:
 
 **Aspect: How other commands executed after `uplevel` and before `undolevel` should be addressed.**
 
@@ -288,6 +288,8 @@ The following activity diagram summarizes what happens when a user executes a `i
 
 <puml src="diagrams/ImportActivityDiagram.puml" alt="ImportActivityDiagram" width="300" />
 
+<div style="page-break-after: always;"></div>
+
 #### Design considerations:
 
 **Aspect: How to separate the attributes correctly from the imported data**
@@ -328,7 +330,6 @@ The following activity diagram summarizes what happens when a user executes a `t
 <puml src="diagrams/TableActivityDiagram.puml" alt="TableActivityDiagram" width="300" />
 
 #### Design considerations:
-![img.png](img.png)
 **Aspect: How to parse the argument for table internally:**
 
 * **Alternative 1 (current choice):** parse inside `TableCommand` and return the corresponding `XXXTableCommandResult`.
@@ -475,7 +476,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 _{more aspects and alternatives to be added}_
 
 <div style="page-break-after: always;"></div>
---------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -826,7 +826,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Student data**: Name, phone number, email, address, gender, sec level, nearest MRT and subject(s) for each student
+* **Student data**: Name, phone number, email, address, gender, sec level, nearest MRT station and subject(s) for each student
 
 <div style="page-break-after: always;"></div>
 
