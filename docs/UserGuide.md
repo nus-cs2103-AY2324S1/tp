@@ -194,7 +194,7 @@ Examples:
 
 ---
 
-<details open>
+<details>
 <summary style="padding-left: 20px;"><strong>add: Potential Errors</strong></summary>
 <div markdown="1">
 
@@ -288,7 +288,7 @@ Examples:
 
 ---
 
-<details open>
+<details>
 <summary style="padding-left: 20px;"><strong>edit: Potential Errors</strong></summary>
 <div markdown="1">
 
@@ -370,7 +370,7 @@ Examples:
 
 ---
 
-<details open>
+<details>
 <summary style="padding-left: 20px;"><strong>delete: Potential Errors</strong></summary>
 <div markdown="1">
 
@@ -410,7 +410,7 @@ already exists in CheckMate which compares two bookings using their room number 
 
 ---
 
-<details open>
+<details>
 <summary style="padding-left: 20px;"><strong>undo: Potential Errors</strong></summary>
 <div markdown="1">
 
