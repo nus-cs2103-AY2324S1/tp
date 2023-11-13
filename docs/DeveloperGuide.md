@@ -182,22 +182,24 @@ This section describes some noteworthy details on how certain features are imple
 
 ### `batchdelete`
 
-The `batchdelete` command allows users to batch delete people whose policy expiry is in the specified month and year.
-
+The `batchdelete` command allows users to either batch delete people whose policy expiry date is in a specific month or 
+batch delete people whose policy was purchased from a specific company.
 
 #### Implementation
-The batch delete mechanism is facilitated by `DeleteMonth`
+In this section, we will use the case batch delete people whose policy expiry date is in a specific month to explain its implementation.
+
+The batch delete mechanism is facilitated by `DeleteMonth`.
 
 It is also facilitated by the operation:
 * `ModelManager#batchDeleteWithPredicate(Predicate<Person> predicate)` - batch delete all people in the client list who fulfil the given predicate.
 
-This operation is exposed in the `Model` interface as `Model# batchDeleteWithPredicate(Predicate<Person> predicate)`
+This operation is exposed in the `Model` interface as `Model# batchDeleteWithPredicate(Predicate<Person> predicate)`.
 
 The following sequence diagram shows how the batch delete operation works:
 
 ![BatchDeleteSequenceDiagram1](images/BatchDeleteSequenceDiagram1.png)
 
-* instance of DeleteMonth is constructed to construct a BatchDeleteCommand
+* instance of `DeleteMonth` is constructed to construct a `BatchDeleteCommand`.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `BatchDeleteCommand` and `BatchDeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -205,14 +207,19 @@ The following sequence diagram shows how the batch delete operation works:
 
 ![BatchDeleteSequenceDiagram2](images/BatchDeleteSequenceDiagram2.png)
 
-* Calling method updateFilteredPersonList to get all people in the client list
-* Using predicate p to get list of people to delete
-* Delete all people in the list and return all people left in client list
+* Calling method `updateFilteredPersonList` to get all people in the client list.
+* Using predicate p to get list of people to delete.
+* Delete all people in the list and return all people left in client list.
+
+Differences in the case batch delete people whose policy was purchased from a specific company:
+* When constructing an instance of `BatchDeleteCommand`, an instance of `Company` is passed as argument instead of `DeleteMonth`.
+* Construct an instance of  `CompanyContainsKeywordsPredicate` instead of `PolicyExpiryInDeleteMonthPredicate`.
+* Predicate above is used when calling the method `batchDeleteWithPredicate`.
 
 #### Design considerations
 * Users may use batch delete to delete all people whose policy expiry is in the specified month and year. For example, delete people did not contact the user to renew their policies for one year. 
-* Besides, if users leave an insurance company, they may like to delete people purchase policy from that company. 
-* Therefore, `Model#batchDeleteWithPredicate(Predicate<Person> predicate)` is introduced to allow batch delete by month or company.
+* Besides, if users no longer work for an insurance company, they may like to delete people purchase policy from that company. 
+* Therefore, `Model#batchDeleteWithPredicate(Predicate<Person> predicate)` is introduced to allow batch delete by month or company by passing different predicates.
 
 <br>
 
@@ -318,7 +325,7 @@ The following sequence diagram shows how the `sort` command works:
 #### Design considerations
 
 **Aspect: Whether `sort` command should take in a value.**
-* Alternative 1 (current choice): ‘sort’ command does not take in a value but does not throw an exception if an input is produced.
+* Alternative 1 (current choice): `sort` command does not take in a value but does not throw an exception if an input is produced.
   * Pros: Prevents the need for un necessary exceptions that might affect the running of the program
   * Cons: The arguments might be nonsensical, for instance `sort 2` could instead be used to provide the 2 most closely expiring profiles.
 * Alternative 2 : `sort` command does not take in a value and produces exception if an input is produced
@@ -705,6 +712,10 @@ Should work on any _mainstream OS_ as long as it has Java `11` or above installe
 * **Address book**: Same as client list. Kept in code and some explanation as it is the underlying functionality of InsureIQ
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Standard formats**: JSON
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The terms person and client can be used interchangeably.
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
