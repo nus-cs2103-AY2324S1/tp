@@ -892,6 +892,26 @@ Command: `help`
 ### Adding a member
 
 ### Editing a member
+This uses the `editm` command. You can refer to the command [here](#https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#414-editing-a-member-editmember-or-editm).
+
+1. General command usage.
+   1. Prerequisites: The member to be edited must **NOT** have the `phone` field edited to be the same as another member's phone number.
+   2. Test case 1: `editm 1 /name Susan Tan /phone 98765444 /email susantan@xyzmail.com /telegram @susantan /tag friend`<br>
+      Expected Outcome: The first member in the member list will be edited with the given name, 
+      phone number, email, telegram handle and tag (that replaces all previously inputted tags). 
+      This member's card will be updated to reflect the changes.
+   3. Test case 2: `editm /name Sally`<br>
+      Expected Outcome: An invalid command message will be shown as the member index is missing from the command. 
+      No changes will be made to the member.
+   4. Test case 3: `editm 1`<br>
+      Expected Outcome: An error message indicating that no fields are entered will be shown.
+      No changes will be made to the member.
+
+2. Duplicate phone numbers.
+   1. Prerequisites: At least 2 members in the member list. The/ A member that is **NOT** being edited must have the phone number set to `98765432`.
+   2. Test case 1: `editm 1 /phone 98765432`<br>
+   Expected Outcome: An error message indicating that another member has the same phone number will be shown.
+   No changes will be made to the member.
 
 ### Finding a member
 This uses the `findm` command. You can refer to the command [here](#https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#412-finding-members-findmember-or-findm).
@@ -921,7 +941,7 @@ This uses the `findm` command. You can refer to the command [here](#https://ay23
 ### Deleting a member
 Command: `delm` or `deletemember`. You can refer to the command [here](#https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#415-deleting-a-member-deletemember-or-delm).
 
-1. Prerequisites : At least one member must be in the member list. You can add a member via the `adda` command. You can here to this command [here.](#https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#411-adding-a-member-addmember-or-addm)
+1. Prerequisites : At least one member must be in the member list. You can add a member via the `adda` command. You can refer to this command [here.](#https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#411-adding-a-member-addmember-or-addm)
 
 2. Test case 1 : `delm 1`.
    Expected Outcome: The first member is deleted from the shown member list. The name of the deleted member is shown in the status message.
@@ -955,6 +975,35 @@ Command: `adda` or `addapplicant`. You can refer to the command [here](#https://
       Expected: Similar to each respective test cases. The applicant list will remain filtered.
 
 ### Editing an applicant
+
+This uses the `edita` command. You can refer to the command [here](#https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#424-editing-an-applicant-editapplicant-or-edita).
+
+1. General command usage.
+    1. Prerequisites: The applicant to be edited must **NOT** have the `phone` field edited to be the same as another member's phone number.
+    2. Test case 1: `edita 1 /name Susan Tan /phone 98765444 /interview 1/1/2024 1200`<br>
+       Expected Outcome: The first applicant in the applicant list will be edited with the given name,
+       phone number, and an interview is set with the given date and time.
+       This applicant's card will be updated to reflect the changes.
+    3. Test case 2: `edita /name Sally`<br>
+       Expected Outcome: An invalid command message will be shown as the applicant index is missing from the command.
+       No changes will be made to the applicant.
+    4. Test case 3: `edita 1`<br>
+       Expected Outcome: An error message indicating that no fields are entered will be shown.
+       No changes will be made to the applicant.
+
+2. Editing interview date and time.
+    1. Test case 1: `edita 1 /interview 1-1-2024 1200`<br>
+       Expected Outcome: An error message indicating that the date and time format is incorrect will be shown. 
+       No changes will be made to the applicant.
+    2. Test case 2: `edita 1 /interview cancel`<br>
+       Expected Outcome: Previously set interview date and time will be removed from the first applicant's details in the applicant list. 
+       This applicant's card will be updated to reflect the changes.
+
+3. Duplicate phone numbers.
+    1. Prerequisites: At least 2 applicants in the applicant list. The/ An applicant that is **NOT** being edited must have the phone number set to `98765432`.
+    2. Test case 1: `editm 1 /phone 98765432`<br>
+       Expected Outcome: An error message indicating that another applicant has the same phone number will be shown.
+       No changes will be made to the applicant.
 
 ### Finding an applicant
 This uses the `finda` command. You can refer to the command [here](#https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#422-finding-applicants-findapplicant-or-finda).
