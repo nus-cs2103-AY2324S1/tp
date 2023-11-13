@@ -890,7 +890,7 @@ Use case ends.
    Use case ends.
 
 
-//@@author junhonglow
+//@@author junhonglow<br>
 **Use case: UC8 View events**
 
 
@@ -906,9 +906,9 @@ Use Case ends.
 
 **Extensions**
 * 2a. There are no events recorded.
-  2a1. Unimate displays a message indicating that there are no events.
+  * 2a1. UniMate displays a message indicating that there are no events.
 
-  Use case ends.
+    Use case ends.
 
 
 **Use case: UC9 Add an event**
@@ -925,11 +925,10 @@ Use case ends.
 
 
 **Extensions**
-*  2a. UniMate detects a conflict with an existing event.
-   2a1. UniMate shows conflicted timings and requests to modify one of the timings.
-   2a2. User modifies the timing and submits the new timings.
-   Steps 2a1 and 2a2 are repeated until there are no conflicts in timings.
-
+* 2a. UniMate detects a conflict with an existing event.
+  *  2a1. UniMate shows conflicted timings and requests to modify one of the timings.
+  *  2a2. User modifies the timing and submits the new timings.
+  *  Steps 2a1 and 2a2 are repeated until there are no conflicts in timings.
 
     Use case ends.
 
@@ -950,7 +949,7 @@ Use case ends.
 
 **Extensions**
 * 2a. Event does not exist.
-  2a1. UniMate shows an error message.
+  * 2a1. UniMate shows an error message.
 
 
     Use case ends.
@@ -969,16 +968,16 @@ Use case ends.
 
 **Extensions**
 * 2a. Event does not exist.
-  2a1. UniMate shows an error message.
+  * 2a1. UniMate shows an error message.
 
 
     Use case ends.
 
 
-*  3a. UniMate detects a conflict with an existing event.
-   3a1. UniMate shows conflicted timings and requests to modify one of the timings.
-   3a2. User modifies the timing and submits the new timings.
-   Steps 3a1 and 3a2 are repeated until there are no conflicts in timings.
+* 3a. UniMate detects a conflict with an existing event.
+  *  3a1. UniMate shows conflicted timings and requests to modify one of the timings.
+  *  3a2. User modifies the timing and submits the new timings.
+  *  Steps 3a1 and 3a2 are repeated until there are no conflicts in timings.
 
 
     Use case ends.
