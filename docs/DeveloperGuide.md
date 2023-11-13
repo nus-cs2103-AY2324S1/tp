@@ -434,11 +434,14 @@ The best match feature is implemented using the `BestMatchCommand` class. The `B
 through the list of Dates, and calls `GetScore` to get the score of the date based on height, age, horoscope and
 income.
 
-<puml src="diagrams/BestMatchSequence.puml" width="600" />
+1. The best match feature begins by passing the user input obtained from the `CommandBox` class in the `Ui`
+   component to the `LogicManager` class in the `Logic` component by invoking the `execute` function.
+2. The `LogicManager` class then passes the user input to the `LoveBookParser` class for parsing and validation.
+3. The `LoveBookParser` class then performs polymorphism and creates a `BestMatchCommand` object.
+4. The `BestMatchCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function
+   which then picks the `Date` with the highest score in the `Model` component by calling the `getScore` function for all `Date` objects in the `dateList`.
 
-#### Design Considerations
-
-**Aspect: Scoring Dates**
+**Scoring Dates**
 * Dates are scored upon 40, where each factor (age, height, income, horoscope) contributing 10 points each.
 * The date's attributes are compared to the user's set preferences.
 * Score for age = 10 - 2 * (age difference)
@@ -446,7 +449,7 @@ income.
 * Score for income = 10 - (income difference) / 250
 * Score for horoscope = 10 if horoscope is the same, 0 if horoscope is different
 
-**Aspect: Ranking of Scores**
+**Ranking of Scores**
 * When the user requests for a Best Match, the Date with the highest score is taken.
 * A Date with 0 points can be chosen.
 * In cases where Dates are tied in score, the Date that was first input into LoveBook is chosen.
@@ -454,7 +457,7 @@ income.
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `bestMatch`
 
-<puml src="diagrams/BestMatchSequence.puml" width="550" />
+<puml src="diagrams/BestMatchSequence.puml" width="600" />
 
 [Scroll back to *Table of Contents*](#table-of-contents)
 
@@ -501,6 +504,27 @@ The _Sequence_ Diagram notation of the above steps is shown below.
 
 [Scroll back to *Table of Contents*](#table-of-contents)
 
+### Show preferences
+
+#### Implementation
+
+1. The show preferences feature begins by passing the user input obtained from the `CommandBox` class in the `Ui`
+   component to the `LogicManager` class in the `Logic` component by invoking the `execute` function.
+2. The `LogicManager` class then passes the user input to the `LoveBookParser` class for parsing and validation.
+3. The `LoveBookParser` class then performs polymorphism and creates a `ShowPrefCommand` object.
+4. The `SetPrefCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function
+   which then returns the preferences to the `Ui` component.
+
+The _Activity_ Diagram notation of the above steps is shown below.
+
+<puml src="diagrams/SetPrefActivity.puml" width="600" />
+
+The _Sequence_ Diagram notation of the above steps is shown below.
+
+<puml src="diagrams/SetPrefSequence.puml" width="600" />
+
+[Scroll back to *Table of Contents*](#table-of-contents)
+
 ### Star dates
 
 #### Implementation
@@ -514,14 +538,10 @@ The _Sequence_ Diagram notation of the above steps is shown below.
 5. The `StarCommandParser` carries out it's validation checks and creates a new `StarCommand` object if the validation checks pass.
 6. The `StarCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function which then updates the isStarred field for the date object with the respective index.
 
-The _Activity_ diagram summarises what happens after the user enters a star command.
-
-<puml src="diagrams/StarActivity.puml" width="600" />
-
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
-the command `star 1`
+the command `showP`
 
-<puml src="diagrams/StarSequence.puml" width="600" />
+<puml src="diagrams/ShowPrefSequenceDiagram.puml" width="600" />
 
 [Scroll back to *Table of Contents*](#table-of-contents)
 
@@ -657,12 +677,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to list all dates.
 2. LoveBook shows a list of dates.
+   
+    Use case ends. <br>
 
 **Extensions:**
 
 2a. The list is empty.
 
-- Use case ends.
+    2a1. Use case ends.
 
 #### Use Case: Add a Date
 
@@ -679,9 +701,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 2a. The command is invalid (Fields do not exist, invalid format).
 
-- LoveBook shows an error message.
-- User is prompted to re-enter the details. A positive example is given.
-- Use case ends.
+    2a1. LoveBook displays an error message.
+    2a2. Use case ends.
 
 #### Use Case: Finding a Date
 
@@ -696,8 +717,8 @@ Use case ends. <br>
 
 2a. No dates match the search query.
 
-- LoveBook displays a message indicating that no matching dates were found.
-- Use case ends.
+    2a1. LoveBook displays an error message.
+    2a2. Use case ends.
 
 #### Use Case: Edit a Date's Details
 
@@ -714,24 +735,23 @@ Use case ends. <br>
 
 2a. The command is invalid (Fields do not exist, invalid format).
 
-- LoveBook shows an error message.
-- User is prompted to re-enter the command. A positive example is given.
-- Use case ends.
+    2a1. LoveBook shows an error message.
+    2a2. Use case ends.
 
 2b. No fields to edit are given.
 
-- LoveBook displays a message indicating that at least 1 field must be provided to edit.
-- Use case ends.
+    2b1. LoveBook displays an error message. 
+    2b2. Use case ends.
 
 2c. Edited field(s) are invalid.
 
-- LoveBook displays a message indicating that the field is invalid. It displays the first invalid field detected.
-- Use case ends.
+    2c1. LoveBook displays an error message.
+    2c2 Use case ends.
 
 2d. Index provided is invalid.
 
-- LoveBook displays a message indicating that the index is invalid.
-- Use case ends.
+    2d1. LoveBook displays an error message.
+    2d2. Use case ends.
 
 #### Use Case: Delete a Date
 
@@ -747,8 +767,8 @@ Use case ends. <br>
 
 2a. Index provided is invalid.
 
-- LoveBook displays a message indicating that the index is invalid.
-- Use case ends.
+    2a1. LoveBook displays an error message.
+    2a2. Use case ends.
 
 #### Use Case: Set Preferences
 
@@ -765,19 +785,18 @@ Use case ends. <br>
 
 2a. The command is invalid (Preference does not exist, invalid format).
 
-- LoveBook shows an error message.
-- User is prompted to re-enter the command. A positive example is given.
-- Use case ends.
+    2a1. LoveBook displays an error message.
+    2a2. Use case ends.
 
 2b. No Preferences to set are given.
 
-- LoveBook displays a message indicating that at least 1 field must be provided to set. A positive example is given.
-- Use case ends.
+    2b1. LoveBook displays an error message.
+    2b2. Use case ends.
 
 2c. Field(s) are invalid.
 
-- LoveBook displays a message indicating that the field is invalid. It displays the first invalid field detected.
-- Use case ends.
+    2c1. LoveBook displays an error message.
+    2c2. Use case ends.
 
 #### Use Case: Show Preferences
 
@@ -792,8 +811,8 @@ Use case ends. <br>
 
 1a. No Preferences were previously set.
 
-- LoveBook displays the default preferences.
-- Use case ends.
+    1a1. LoveBook displays the default preferences.
+    1a2. Use case ends.
 
 #### Use Case: Get Blind Date
 
@@ -809,8 +828,8 @@ Use case ends. <br>
 
 1a. The list is empty.
 
-- LoveBook displays a message indicating that there are no dates.
-- Use case ends.
+    1a1. LoveBook displays an error message.
+    1a2. Use case ends.
 
 #### Use Case: Filter Dates
 
@@ -826,23 +845,22 @@ Use case ends. <br>
 
 2a. The list is empty.
 
-- Use case ends.
+    2a1. Use case ends.
 
 2b. The command is invalid (Metrics do not exist, invalid format).
 
-- LoveBook shows an error message.
-- User is prompted to re-enter the command. A positive example is given.
-- Use case ends.
+    2b1.LoveBook displays an error message.
+    2b2. Use case ends.
 
 2c. No metric to filter by are given.
 
-- LoveBook displays a message indicating that at least 1 metric must be provided to filter. A positive example is given.
-- Use case ends.
+    2c1. LoveBook displays an error message.
+    2c2. Use case ends.
 
 2d. Field(s) are invalid.
 
-- LoveBook displays a message indicating that the field is invalid. It displays the first invalid field detected.
-- Use case ends.
+    2d1. LoveBook displays an error message.
+    2d2. Use case ends.
 
 #### Use Case: Sort Dates
 
@@ -858,23 +876,22 @@ Use case ends. <br>
 
 2a. The list is empty.
 
-- Use case ends.
+    2a1. Use case ends.
 
 2b. The command is invalid (Comparator does not exist, invalid format).
 
-- LoveBook shows an error message.
-- User is prompted to re-enter the command. A positive example is given.
-- Use case ends.
+    2b1. LoveBook displays an error message.
+    2b2. Use case ends.
 
 2c. No comparator to sort is given.
 
-- LoveBook displays a message indicating that at least 1 comparator must be provided to set. A positive example is given.
-- Use case ends.
+    2c1. LoveBook displays an error message.
+    2c2. Use case ends.
 
 2d. Comparator is invalid.
 
-- LoveBook displays a message indicating that the comparator is invalid. A positive example is given.
-- Use case ends.
+    2d1. LoveBook displays an error message.
+    2d2. Use case ends.
 
 #### Use Case: Get Best Match
 
@@ -889,8 +906,8 @@ Use case ends. <br>
 
 1a. The list is empty.
 
-- LoveBook displays a message indicating that there are no dates.
-- Use case ends.
+    1a1. LoveBook displays an error message.
+    1a2. Use case ends.
 
 [Scroll back to *Table of Contents*](#table-of-contents)
 
