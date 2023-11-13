@@ -23,11 +23,12 @@ Given below are my contributions to the project.
   * Highlights: This enhancement required coordination with my teammate @lilozz2 who was working on reminders in parallel. I became accustomed to a different workflow of pulling from a teammates branch into a local fork and have gotten very accustomed to handling merge conflicts and resolving them. I also learnt how to use schedulers and threads to implement the reminder scheduler.
   * Credits: The implementation of the reminder was first done by @lilozz2 however there were some bugs with the implementation. I fixed the bugs and refactored the code to make it more readable and maintainable. (Pull requests [\#107](), [\#108](), [\#112]())
 
-* **New Feature**: Single field Edit command
+* **New Feature**: Single field Edit macro
   * What it does: QoL change that allows the user to edit a single field of a client. By entering it as a command word.
   * Justification: This feature is a QoL change that allows the user to edit a single field of a client without having to re-enter all the other fields and remember prefixes. This is especially useful when the user only wants to change a single field of a client.
   * Highlights: This change was accomplished with very little lines of code, rather than having to create a new command class for each field, I was able to reuse the existing edit command class and efficiently parse new command words. (Pull requests [\#126]())
 
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=&sort=totalCommits&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2023-09-22&tabOpen=true&tabType=authorship&tabAuthor=MagnificentCreature&tabRepo=AY2324S1-CS2103T-F11-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false%23%2F)
 
 
 Miscellaneous:
