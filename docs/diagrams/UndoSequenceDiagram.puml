@@ -8,6 +8,7 @@ participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":UndoCommandParser" as UndoCommandParser LOGIC_COLOR
 participant "u:UndoCommand" as UndoCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant ":UndoableCommand" as UndoableCommand LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -20,7 +21,7 @@ activate LogicManager
 LogicManager -> AddressBookParser : parseCommand("undo 2")
 activate AddressBookParser
 
-AddressBookParser -> UndoCommandParser : parse("2")
+AddressBookParser -> UndoCommandParser : parse("undo 2")
 activate UndoCommandParser
 
 create UndoCommand
@@ -39,14 +40,7 @@ deactivate AddressBookParser
 LogicManager -> UndoCommand : execute()
 activate UndoCommand
 
-UndoCommand -> Model : getCommandHistorySize()
-activate Model
-
-Model --> UndoCommand : int
-deactivate Model
-
-alt (int >= 2) Command History size is greater than or equal to the number of undo steps
-    loop 2
+loop until no more commands to undo
         UndoCommand -> Model : popCommandFromHistory()
         activate Model
 
@@ -55,9 +49,7 @@ alt (int >= 2) Command History size is greater than or equal to the number of un
 
         UndoableCommand --> Model : CommandResult
         deactivate UndoableCommand
-    end
-else (int < 2) Command History size is less than the number of undo steps
-    activate Model
+
 end
 
 Model --> UndoCommand : CommandResult
@@ -66,6 +58,5 @@ deactivate Model
 UndoCommand --> LogicManager : CommandResult
 deactivate UndoCommand
 
-<-- LogicManager
 deactivate LogicManager
 @enduml

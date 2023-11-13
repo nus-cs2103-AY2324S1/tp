@@ -3,18 +3,37 @@ skin rose
 skinparam ActivityFontSize 15
 skinparam ArrowFontSize 12
 
-start
-:User executes command;
 
-if () then ([command commits AddressBook])
-    :Retrieve command history from model;
-    if () then ([valid number of undo steps?])
-        :Execute Undo;
-    else ([else])
-    endif
-else ([else]))
+start
+:Execute "undo" command;
+if () then ([Command valid])
+  :Retrieve command history from model;
+  if () then ([Valid number of steps])
+    :Execute Undo;
+  else ([else])
+    :Return error message;
+    stop
+  endif
+else ([else])
+  :Return error message;
+  stop
 endif
-stop
+
+repeat :Pop command from history;
+:Undo the command;
+:Update model state;
+
+repeat while () is ([More steps to undo])
+-> [Else];
+
+:Return CommandResult;
+  stop
+
+
+
 
 @enduml
+
+
+
 
