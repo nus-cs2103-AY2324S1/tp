@@ -248,6 +248,9 @@ When executed, `ViewCommand` saves the index of the person to be viewed as `Last
 
 By having a `isView` property in `CommandResult`, the `MainWindow` component is able to toggle the `UI` to the view the person of the `LastViewedPersonIndex` after the command has been executed.
 
+Additionally by allowing `isView` as a property in `CommandResult`, we are able to view the person's profile after executing other commands such as `add`, `edit`, `set`, `remark`, `addL`, `addG` without having to enter the `view` command again.
+
+We only need to set the `isView` property to true in the `CommandResult` object if the command being executed targets a person. This is because the `ViewCommand` itself originally require an index to be specified to view the person's profile. Thus, if the command does not target a person, the view command will not be triggered and the Person Information Panel and Summary Statistic Screen will not be updated.
 
 Given below is an example usage scenario and how the view feature behaves at each step.
 
@@ -292,6 +295,12 @@ Pros: Arguably a more OOP approach since all commands that trigger view IS-A `Vi
 
 Cons: You cannot implement any command that does not involve viewing but inherits from any command that is a children of `ViewCommand`.  
 An example could be trying to create identical commands that does not toggle the UI after execution. This would require duplication of the exact same command code but inheriting from `Command` instead of `ViewCommand`.
+
+
+
+The following activity diagram shows how command such as `add`, `edit`, `set`, `remark`, `addL`, `addG` (Commands that trigger view) lead to the update of the Person Information Panel in the UI.
+This is done by setting the `isView` property to true in the `CommandResult` object.
+<puml src="diagrams/ViewActivityDiagram.puml" alt="Event Activity Diagram"></puml>
 
 
 ### Search feature
@@ -470,6 +479,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Hiring Manager   | update the application status for a candidate (e.g. "Interviewed", "Rejected", "Offered")                        | I can keep track of each candidate's progress in the hiring process                                                                        |
 | `* * *`  | Hiring Manager   | record the score of the different activities such as interviewsor assessments that an applicant might go through | I can use them for effective comparison and filter the candidates easily                                                                   |
 | `* * *`  | Hiring Manager   | compare candidates using their performance in their assessments or interviews                                    | I can choose the best candidates to move to the next stage of the hiring process and get the best performing candidates objectively        |
+| `* * *` | Hiring Manager | add social profile [LinkedIn/Github]  candidate's information and view with ease                                 | I can get a more holistic view of the candidate's abilities |
 | `* *`    | Hiring Manager | view a schedule/summary of events relating to the candidates                                                     | I can make preparations and arrangements for the events beforehand, and also get an idea of where each candidate is in the hiring process. |
 | `**`     | Hiring Manager   | export candidate information and application data to a spreadsheet        <br/>                                  | I can perform further analysis using alternate tools on candidate data                                                                     |
 | `*`      | Hiring Manager   | get data on which positions are lacking job applicants                                                           | I can update the external recruitment team to focus on head hunting applicants for these roles                                             |
@@ -535,20 +545,24 @@ Use case ends.
   * 1b1. JABPro shows a message indicating that there are no persons to display.   
   Use case ends.
 
-**Use case: Search persons by the specified categories(name, status, and/or tag)**
+**Use case: Search persons matching the given profile**
 
 **MSS**
-1.  Hiring manager types in search parameters to search users by the specified categories.
-2.  JABPro shows a list of persons whose profile matches the given parameters.
+1. User requests to search users matching the given profile as specified by the search parameters.
+2. JABPro requests details of the profile to be searched.
+3. User enters the profile details.
+4. JABPro retrieves the list of all persons from the database whose profiles match the given search parameters.
+5. JABPro displays the filtered list of persons to the user.
 Use case ends.
 
 **Extensions**
 
-* 1a. The given name/status/tag parameter is invalid.
-    * 1a1. JABPro shows an error message.
-      Use case resumes at step 1.
-* 2a. The list is empty. <br/>
-  Use case ends.
+* 3a. The given name/status/tag parameter is invalid.
+  * 3a1. JABPro shows an error message and provides course of action for remedy.
+    Use case resumes at step 3.
+* 5a. No person match the given profile.
+  * 5a1. JABPro shows a message indicating that there are no persons to display.
+    Use case ends.
 
 
 **Use case: Delete a person**
@@ -681,13 +695,13 @@ Use case ends.
 * 1b. Social profile requested other than LinkedIn or Github.
     * 1b1. JABPro displays error message.  
     Use case ends.
-* 3a. User does not exist on the social platform.  
+* 3a. Person does not exist on the social platform.  
   Use case ends.
 
 **Use case: Add events relating to candidates**
 
 **MSS**
-1. User requests to add an event relating to a candidate
+1. User requests to add an event relating to a candidate.
 2. JABPro shows that command has been executed successfully.
 3. JABPro adds the event to the list of events.
    Use case ends.
@@ -698,9 +712,26 @@ Use case ends.
 * 2b. Event has already been added to the list of events.
   * 2b1. JABPro shows an error message and provides course of action for remedy. Use case resumes at step 1.
 
+**Use case: Tag a candidate with a newly created tag**
 
+**MSS**
+1. User requests to create a tag of a specific category.
+2. JABPro adds the tag to the list of tags.
+3. JABPro shows a message indicating that the tag has been added successfully.
+4. User requests to view all persons.
+5. User requests to add the newly created tag to add tag to a person.
+6. JABPro adds tag to the person.
+   Use case ends.
 
-
+**Extension**
+* 1a. The given tag name is invalid
+  * 1a1. JABPro displays an error message
+* 1b. User did not provide the complete command (missing category or name). Use case resumes at step 1.
+  * 1b1. JABPro displays an error message and provides a course of action for remedy. Use case resumes at step 1
+* 2a. Tag already exists in JABPro
+  * 2b1. JABPro displays an error message saying tag already exists. Use case resumes at step 1.
+* 5a. Multiple tags exist with the same name in different categories
+  * 5a1. JABPro displays an error message and provides a course of action for remedy. Use case resumes at step 5.
 
 ### Non-Functional Requirements
 
@@ -777,6 +808,16 @@ This makes it more intuitive and logical for the user to use since the user woul
 ## **Appendix: Effort**
 
 ### Based on over-arching features
+
+###  Flexibility for further analysis
+We acknowledge that there will be some who would prefer to analyse data outside JABPro - and that is completely fine.
+With the ability to export to a .csv file using JABPro, users are empowered with the ability to conduct analysis in 
+other applications that they are more familiar with. 
+
+The introduction of the export command showcases our commitment towards user flexibility, and focus towards 
+making JABPro a tool that adds towards hiring manager's ecosystem, as opposed to a trade-off that requires them
+to only rely on JABPro. We strongly believe that users should have the flexibility and ability to conduct
+further analysis outside JABPro if they wish to.
 
 
 ### Storage Complications and Effort
@@ -912,7 +953,31 @@ Both Person List and Person Information Panel is updated to reflect the new `Int
    3. Test case 2:  
    `view 0`  
    **Expected**: No person is viewed. Error details shown in the status message. Person information panel remains the same.
- 
+
+### Setting a person's status (Preliminary, Interviewed, Accepted/Rejected.)
+1. Setting a person's status in the list
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    2. Test case 1:   
+       `set 1 Interviewed`  
+       **Expected**: On the next 'view' command, the personnel's details shows as Interviewed.
+    3. Test case 2:  
+       `Set 0 Interviewed`  
+       **Expected**: No person is set to 'Interviewed'. Error details shown in the status message. Person information panel remains the same.
+   
+
+### Exporting the information into a csv file 
+1. Exporting all current user data to csv
+    1. Prerequisites: Necessary write permissions to the /data/export.csv location
+
+    2. Test case 1:   
+       `export`  
+       **Expected**: File is successfully exported to the location /data/export.csv
+    3. Test case 2:  
+       `export` (without write permissions)  
+       **Expected**: /data/export.csv file is not updated. Error details shown in the status message.
+
+
 ### Filtering persons by their scores for a particular tag based on a particular metric while all persons are being shown
 1. Filtering persons by their scores for a particular tag based on a particular metric while all persons are being shown  
    1. Prerequisites:  
@@ -947,3 +1012,46 @@ Both Person List and Person Information Panel is updated to reflect the new `Int
     `filter t/Interview met/percentile` 
     **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
 
+### Adding LinkedIn/Github username to a person while all persons are being shown ###
+
+1. Adding LinkedIn/Github username to a person while all persons are being shown
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    2. Test case (Positive test case): `addL 1 u/alexyeoh`
+       **Expected:** LinkedIn username added to the person's profile. Displayed in person card.
+    3. Test case (Negative test case): `addG -1 u/madlad`
+       **Expected:** No Github username is added to any person. Error details shown in the status message. Person information panel remains the same.
+    4. Test case (Negative test case): `addL u/maxcodes`
+       **Expected:** No LinkedIn username is added to any person. Error details shown in the status message. Person information panel remains the same.
+    5. Test case (Negative test case): `addG 1`
+       **Expected:** No Github username is added to any person. Error details shown in the status message. Person information panel remains the same.
+
+### Viewing person's social profile ###
+
+1. Viewing a person's social profile
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list, with their usernames previously added.
+    2. Test case (Positive test case): `linkedin 1`
+       **Expected:** Redirected to LinkedIn profile of the person, in the browser. Success message displayed on JABPro.
+    3. Test case (Negative test case): `github 0`
+       **Expected:** No Github profile shown. Error details shown in the status message.
+    4. Test case (Negative test case): `linkedin 2`
+       [Assumption: LinkedIn username has not been previously added for candidate 2]
+       **Expected:** No LInkedin profile shown. Error details shown in the status message.
+    5. Test case (Negative test case): `github`
+       **Expected:** No Github profile shown. Error details shown in the status message.
+
+### Adding Event relating to a candidate ###
+
+1. Adding event relating to a candidate
+    1. Prerequisites: List all persons using the `list` command. Multiple person in the list.
+    2. Test case (Positive test case): `event 1 d/Interview bt/2023-11-12 10:00 et/2023-11-12 12:00`
+       **Expected:** Event added to EventBook. Success message displayed. Event visible in Events window.
+    3. Test case (Negative test case): `event 0 d/Interview bt/2023-11-12 10:00 et/2023-11-12 12:00`
+       **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
+    4. Test case (Negative test case): `event 1 bt/2023-11-12 10:00 et/2023-11-12 12:00`
+       **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
+    5. Test case (Negative test case): `event 1 d/Interview bt/12-11-2023 10:00 et/12-11-2023 12:00`
+       **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
+    6. Test case (Negative test case): `event 1 d/Interview bt/2023-11-12 12:00 et/2023-11-12 10:00`
+       **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
+    7. Test case (Negative test case): `event 1 d/Interview bt/2023-11-31 10:00 et/2023-12-01 10:00`
+       **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
