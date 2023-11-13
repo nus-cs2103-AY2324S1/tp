@@ -1080,8 +1080,55 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a person
 
+1. Adding a person when all persons are being shown
+
+    1. Test case: `add_person n/James p/93748274 e/james@gmail.com a/computing drive b/2001-10-20`<br>
+        Expected: A contact is added to the list with the given parameters. Details of the added person will show in the response box.
+
+2. Adding a person when the contacts list is filtered
+    2. Prerequisite: Filter the list using the `find_person` command or the `remind` command
+
+    3. Test case: `add_person n/John`<br>
+        Expected: The contact list shows all persons again. The contact is added to the contact list at the back. The added person's details is shown in the response box.
+
+3. Adding a person with a group that has been assigned to an event. 
+
+    1. Prerequisite: The event list has an event with the group `CS2103T` assigned to it. The contact and event list is not filtered.
+
+    2. Test case: `add_person n/John g/CS2103T`<br>
+        Expected: The person is added to the contact list. The added person's details are shown in the response box. The person is added to the event, under the group that it has been assigned to.
+
+### Editing a person
+
+1. Editing a person when all persons are being shown
+
+    1. Prerequisite: List all persons using the `list_all` command. There should be multiple persons in the contact list.
+
+    1. Test case: `edit_person 1 n/John Donuts`<br>
+        Expected: The person's name should be updated. The person's details should be displayed in the response box.
+2. Editing a person when the contacts list is filtered
+
+    1. Prerequisite: Filter the list using the `find_person` command or the `remind` command. Ensure that there is at least 1 person in the contact list.
+
+    1. Test case: `edit_person 1 n/Johnny`<br>
+        Expected: The contact is stays filtered. If the person's name was the search term in `find_person`, the person should disappear. Used `list_all` to view the edited person. The details of the edited person should be displayed in the response box.
+
+3. Editing a person with a group that has already been assigned to an event
+
+    1. Prerequisite: The event list has an event with the group `CS2103T` assigned to it. The contact and event list is not filtered.
+
+    1. Test case: `edit_person 1 n/Johnny g/CS2103T`<br>
+        Expected: The person is edited in the contact list. The person's details are shown in the response box. The person is added to the event, under the group that it has been assigned to.
+
+4. Editing a person to remove a group, which group has already been assigned to an event
+
+    1. Prerequisite: The event list has an event with the group `CS2103T` assigned to it. The contact and event list is not filtered.
+
+    1. Test case: `edit_person 1 ug/CS2103T`<br>
+        Expected: The person is edited in the contact list. The person's details are shown in the response box. The person is removed from the event, under the group that it has been assigned to. If the person is the last member of the group, the group is removed from the event.
+       
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -1094,17 +1141,111 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `delete_person 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete_person`, `delete_person x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+2. Deleting a person with a group that has been assigned to an event
 
-1. _{ more test cases …​ }_
+    1. Prerequisite: The event list has an event with the group `CS2103T` assigned to it. The contact and event list is not filtered.
+    
+    1. Test case: `delete_person 1`<br>
+        Expected: The person is deleted from the contact list. The person is removed from the event, under the group that it has been assigned to. If the person is the last member of the group, the group is removed from the event.
+
+### Finding a person
+
+1. Find a person while all persons are being shown
+
+    1. Prerequisite: There is a person with the name `Alex` in the contacts list
+
+    1. Test case: `find_person Alex`<br>
+       Expected: All persons with the name `Alex` or the group `Alex` (not case sensitive) should be displayed in the newly filtered contacts list. The number of persons listed should be displayed in the response box.
+
+### Adding an event
+
+1. Adding an event while all events are being shown
+
+    1. Prerequisites: List all events using the `list_all` command. Multiple events should be shown.
+    
+    1. Test case: `add_event m/FumbleLog presentation d/2023-11-30`<br>
+       Expected: An event is added to the list with the given parameters. Details of the added event will show in the response box.
+2. Adding an event while the events list is filtered
+
+    1. Prerequisite: Filter the list using the `find_event` command or the `remind` command
+
+    1. Test case: `add_event m/CS2103T lecture d/2030-11-30`<br>
+       Expected: The event list shows all events again. The event is added to the event list at the back. The added event's details is shown in the response box.
+
+### Editing an event
+
+1. Editing an event while all events are being shown
+
+    1. Prerequisite: List all events using the `list_all` command. There should be multiple events in the event list.
+
+    1. Test case: `edit_event 1 m/CS2103T tutorial`<br>
+       Expected: The entire event list will be shown again. The event's name should be updated to the given parameter. The event's details should be displayed in the response box.
+
+2. Editing an event while the events list is filtered
+
+    1. Prerequisite: Filter the list using the `find_event` command or the `remind` command. Ensure that there is at least 1 event in the event list.
+
+    1. Test case: `edit_event 1 m/CS2103T tutorial`<br>
+       Expected: The event stays filtered. If the event's name was the search term in `find_event`, the event should disappear. Used `list_all` to view the edited event. The details of the edited event should be displayed in the response box.
+
+3. Editing an event with a new group
+
+    1. Prerequisite: The event list has an event with the group `CS2103T` assigned to it. The contact and event list is not filtered.
+
+    1. Test case: `edit_event 1 m/CS2103T tutorial g/CS2103T`<br>
+       Expected: The event is edited in the event list. The event's details are shown in the response box. The group is added to the event, under which all persons part of the group is displayed.
+
+### Deleting an event
+
+1. Deleting an event while all events are being shown
+
+   1. Prerequisites: List all events using the `list_all` or `list_events` command. Multiple events in the list.
+
+   1. Test case: `delete_event 1`<br>
+      Expected: First event is deleted from the list. Details of the deleted event shown in the status message. Timestamp in the status bar is updated.
+
+   1. Test case: `delete_event 0`<br>
+      Expected: No event is deleted. Error details shown in the status message. Status bar remains the same.
+
+### Finding an event
+
+1. Find an event while all events are being shown
+
+    1. Prerequisite: There is an event with the name `CS2103T` in the events list
+
+    1. Test case: `find_event CS2103T`<br>
+       Expected: All events with the name `CS2103T` or the group `CS2103T ` or assigned persons with name `CS2103T` (not case sensitive) should be displayed in the newly filtered events list. The number of events listed should be displayed in the response box.
+
+### Finding a person or event
+
+1. Find a person or event while all persons and events are being shown
+
+    1. Prerequisite: There is a person with the name `Alex` and an event with a person assigned named `Alex` in the contacts list and events list respectively
+
+    1. Test case: `find_all Alex`<br>
+       Expected: All persons and events with the name `Alex` or the group `Alex` or for events, with assigned persons with name `Alex` (not case sensitive) should be displayed in the newly filtered contacts list and events list respectively. The number of persons and events listed should be displayed in the response box.
+
+### Remind
+
+1. Remind with default number of days, with all persons and events being shown
+
+    1. Prerequisite: All persons and events are being shown, using the `list_all` command. There should be multiple persons and events in the contact list and event list respectively.
+
+    1. Test case: `remind`<br>
+       Expected: All events with dates that are 7 days away and persons with birthdays that are 7 days away will be displayed in the newly filtered contacts list and events list respectively. The number of days used to filter the lists will be displayed in the response box. If there are no persons with birthdays or events with dates that match the search term, then the persons and event list will be empty respectively.
+
+2. Remind with a set number of days
+
+    1. Prerequisite: All persons and events are being shown, using the `list_all` command. There should be multiple persons and events in the contact list and event list respectively.
+
+    1. Test case: `remind 10`<br>
+       Expected: All events with dates that are 10 days away and persons with birthdays that are 10 days away will be displayed in the newly filtered contacts list and events list respectively. The number of days used to filter the lists will be displayed in the response box. If there are no persons with birthdays or events with dates that match the search term, then the persons and event list will be empty respectively.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. FumbleLog will load with empty contacts list and events list in this event.
 
-1. _{ more test cases …​ }_
 
 [Scroll back to Table of Contents](#table-of-contents)
