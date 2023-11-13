@@ -167,11 +167,11 @@ Welcome back to ProjectPRO. Simply head over to our Features section to gain ins
 Written below are the definitions of the terminology used throughout the User Guide:
 
 
-| Term      | Definition                                                                                 |
-|-----------|--------------------------------------------------------------------------------------------|
-| Parameter | Parameter indicates the type of information required for a particular command.             |
-| Command   | A special word used together with parameters to execute a particular action. E.g., `find`. |
-| GUI       | Graphical User Interface, the visual display of ProjectPRO.                                |
+| Term      | Definition                                                                                |
+|-----------|-------------------------------------------------------------------------------------------|
+| Parameter | Parameter indicates the type of information required for a particular command.            |
+| Command   | A special word used together with parameters to execute a particular action. E.g. `find`. |
+| GUI       | Graphical User Interface, the visual display of ProjectPRO.                               |
 
 
 **Parameter Information**
@@ -614,9 +614,9 @@ You can add time slots when your contacts are available.
      must be alphanumeric, cannot be blank and must be an existing contact in your contact list.
   </p>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">FREE_TIME</code>
-  must be a time slot within the current weekly schedule. Eg. <code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">Sat 1000 - Mon 1000</code> is not allowed as the monday here refers to next week, violating the current weekly schedule pattern.</p>
+  must be a time slot within the current weekly schedule. E.g. <code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">Sat 1000 - Mon 1000</code> is not allowed as the monday here refers to next week, violating the current weekly schedule pattern.</p>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">FREE_TIME</code>
-  must be a time slot with some duration. Eg. <code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">Mon 1200 - Mon 1200</code> is not valid as there is no duration.<code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">Mon 1300- Mon 1400</code> is valid.
+  must be a time slot with some duration. E.g. <code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">Mon 1200 - Mon 1200</code> is not valid as there is no duration.<code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">Mon 1300- Mon 1400</code> is valid.
 It is <strong>not case-sensitive</strong>.</p>
 </div>
 
@@ -628,7 +628,7 @@ It is <strong>not case-sensitive</strong>.</p>
   </div>
   <p style="font-size:13px; color: #000; margin: 8px 0;">
 <code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">FREE_TIME</code>
-  must not clash with the other inputted/existing time slots of the contact. Eg. If time slot <code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">Mon 1200 - Mon 1300</code> has been added, then<code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">Mon 1300 - Mon 1400</code> can not be added. 
+  must not clash with the other inputted/existing time slots of the contact. E.g. If time slot <code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">Mon 1200 - Mon 1300</code> has been added, then<code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">Mon 1300 - Mon 1400</code> can not be added. 
 </div>
 
 **Example(s):**
