@@ -34,8 +34,6 @@
     * [Searching for applicants](#searching-job-applicants-by-category-search)
     * [Filtering applicants](#filter-job-applicants-by-statistics-filter)
     * [Listing all applicants](#listing-all-applicant-list)
-    * [Delete by tags](#deleting-job-applicants-by-tag)
-    * [Delete by status](#deleting-job-applicants-by-status)
   * Event Management and Scheduling
     * [Adding an event](#adding-an-event-event)
     * [Viewing all events](#viewing-events-schedule)
@@ -886,40 +884,6 @@ Format:
 * The result will be sorted in **ascending** order.
 * The sorting algorithm is case-sensitive, which means it will treat uppercase and
   lowercase letters as distinct. This may result in names being sorted as A B C a b c, rather than A a B b C c.
-
-#### Deleting job applicants by tag
-<a name="deleting-job-applicants-by-tag"></a>
-
-Deletes job applicants whose tag(s) match any of the given tag keywords
-
-* Keywords are case-insensitive: `delete t/hardworking` and `delete t/HARDWORKING` return the same result.
-
-Example:
-* `delete t/hardworking`
-
-#### Deleting job applicants by status
-<a name="deleting-job-applicants-by-status"></a>
-
-Deletes job applicants whose status match any of the given keywords.
-
-Format: `delete st/STATUS...`
-
-* Keywords can only be from the following list: `Preliminary`, `Interviewed`, `Rejected`, `Offered`
-  E.g. `delete st/interviewing` will give an error.
-* Keywords are case-insensitive: `delete st/interviewed` and `delete st/INTERVIEWED` return the same result.
-
-Example:
-* `delete st/interviewed`
-
-#### Notes for advanced users:
-* You can combine the status and tags prefixes (e.g. `delete st/offered t/hardworking`) in a single delete command.
-* Each delete category can be used at most once in a single search command.<br>
-  E.g. `delete st/interviewed st/rejected` is not allowed.
-
-Example:
-* `delete st/interviewed rejected t/intern manager` will delete applicants whose:
-    * status is either **interviewed** or **rejected**
-    * AND has a tag `intern` or `manager`
 
 
 ### 4. Event Management and Scheduling
