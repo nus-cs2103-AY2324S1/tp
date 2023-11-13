@@ -695,16 +695,46 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file 
+   
+       **Expected:** Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   
 
 1. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+    1. Re-launch the app by double-clicking the jar file.
+ 
+        **Expected:** The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Add a musician
+
+1. Adding a musician with only compulsory fields
+   1. Test case: `add n/Hans Leonhart p/98765432 e/hansl@music.com`
+        **Expected:** New Musician is added to the Musician List with the details
+
+2. Adding a musician with optional fields
+   1. Test case: `add n/Leonard Hand p/99887766 e/LHand@piano.com t/buddy i/piano g/pop`  
+       **Expected:** New Musician is added to the Musician List with the additional details
+
+3. Adding a musician with missing fields
+    1. Test case: `add n/Heon Land e/Heonland@music.com`  
+        **Expected:** An Invalid command format error should be shown with the correct command format. The input is highlighted in red.
+   
+4. Adding a musician with invalid instrument
+   1. Test case: `add n/Alexis Tan p/98766789 e/AlexisT@music.com i/violn`  
+        **Expected:** Error message saying instrument should be a valid instrument name and to use `tags` function for the list of valid instruments. The input is highlighted in red.
+
+5. Adding a musician with invalid genre
+   1. Test case: `add n/Alexis Tan p/98766789 e/AlexisT@music.com g/gazz`  
+      **Expected:** Error message saying instrument should be a valid genre name and to use `tags` function for the list of valid genres. The input is highlighted in red.
+
+5. Adding a duplicate musician
+   1. Ensure that you have completed the first test (Adding a musician with only compulsory fields).
+   1. Test case: `add n/Hans Leonhart p/98765432 e/hansl@music.com`  
+      **Expected:** Error message saying that the musician already exists in your contact list
+
 
 ### Deleting a musician
 
