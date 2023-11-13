@@ -87,31 +87,29 @@ You are an **advanced** user if ...
 While **JABPro** offers a whole range of features, we believe that the following features are likely to be the most useful to you:
 
 **Viewing details of applicants:**
-1. Viewing applicant's information: `view`
+* Viewing applicant's information: `view`
 
 **Tag colouring and categorisation:**
-1. Creating a tag with a specified category: `create`
-2. Listing all tags: `listT`
-3. Adding and editing an applicant's tags and tag scores: `edit`
+* Creating a tag with a specified category: `create`
+* Listing all tags: `listT`
+* Adding and editing an applicant's tags and tag scores: `edit`
 
 **Event management and Scheduling:** 
-1. Adding an event: `event`
-2. Viewing events: `schedule`
+* Adding an event: `event`
+* Viewing events: `schedule`
 
 **Comparing and filtering applicants:**
-1. Filtering applicants by statistics: `filter`
+* Filtering applicants by statistics: `filter`
 
 These features address the complications that Hiring Managers face when managing applicants: 
-1. Visual Noise and Clutter from using other applicant management software like Excel  
+1. **Visual Noise and Clutter** from using other applicant management software like Excel
+   * `Viewing details of applicants` and `Tag colouring and categorisation` address this by creating an organized and intuitive way to view applicants and their details. This is done through colour coding and minimalistic design.
 
-`Viewing details of applicants` and `Tag colouring and categorisation` address this by creating an organized and intuitive way to view applicants and their details. This is done through colour coding and minimalistic design.
+2. **Toggling between different software** to manage applicants and schedule events
+   * `Event Management and Scheduling` address this by allowing you to schedule events and view them in the same software. This means that you do not have to toggle between different software to manage applicants and schedule events.
 
-2. Toggling between different software to manage applicants and schedule events   
-
-`Event Management and Scheduling` address this by allowing you to schedule events and view them in the same software. This means that you do not have to toggle between different software to manage applicants and schedule events.
-
-3. Having to manually calculate summary statistics and compare applicants
-`Comparing and filtering applicants` address this by allowing you to filter applicants by statistics and compare them. This means that you do not have to manually calculate summary statistics and compare applicants.
+3. Having to **manually calculate summary statistics and compare applicants**
+   * `Comparing and filtering applicants` address this by allowing you to filter applicants by statistics and compare them. This means that you do not have to manually calculate summary statistics and compare applicants.
 
 --------------------------------------------------------------------------------------------------------------------
 Go to the [Table of Contents](#table-of-contents) to navigate to the feature that you are interested in 
@@ -264,6 +262,8 @@ An example of trying to add a applicant with the same name as an existing applic
    
     ![Add-Fail](images/add-command-duplicate-person.png)
 
+[Jump back to Table of Contents](#table-of-contents)
+
 ### Adding a remark to an applicant: `remark`
 
 Edits a remark of an existing applicant in JABPro.
@@ -302,6 +302,7 @@ An example of the `remark` command failing to execute due to wrong index:
 
 Additional Examples:
 *  `remark 1` Empties the remark of the 1st applicant. It is equivalent to `remark 1 r/`.
+
 [Jump back to Table of Contents](#table-of-contents)
 
 ### Adding LinkedIn/GitHub username for a user: `addL` or `addG`
