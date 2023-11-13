@@ -8,7 +8,6 @@ participant "addressBookParser:AddressBookParser" as Parser LOGIC_COLOR
 participant ":FindCommandParser" as FindParser LOGIC_COLOR
 participant ":FindCommand" as Command LOGIC_COLOR
 participant ":Model" as Model MODEL_COLOR
-participant ":UI" as UI UI_COLOR
 
 [-> Parser: parseCommand("find n/Alex")
 Create FindParser
@@ -28,7 +27,6 @@ Command -> Parser
 |||
 [-> Command: execute(model)
 Command -> Model: updateFilteredPersonList(pred)
-Model -> UI: update personListPanel
 Command -> Model: updateFoundPersonList(pred)
 <- Command : Successful command execution
 <[hidden]- Command : Successful command execution
