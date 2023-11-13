@@ -407,29 +407,61 @@ The maximum score is 40.
 
 ### Set preferences
 
-The set preferences feature is implemented using the `SetPrefCommand` class. The `SetPrefCommand` class takes in a
-`DatePref` object as a parameter. The `DatePref` object is used to set the `DatePref` object in the `Model` component.
-The `SetPrefCommand` class then returns a `CommandResult` object that contains the `DatePref` object.
+#### Implementation
 
-The _Activity_ diagram summarises what happens after the user enters a set preferences command.
+1. The set preferences feature begins by passing the user input obtained from the `CommandBox` class in the `Ui`
+   component to the `LogicManager` class in the `Logic` component by invoking the `execute` function.
+2. The `LogicManager` class then passes the user input to the `LoveBookParser` class for parsing and validation.
+3. The `LoveBookParser` class then performs polymorphism and creates a `SetPrefCommandParser` object for SetPrefCommand
+   specific parsing.
+4. The `LoveBookParser` class also separates the command word from the user input and passes the arguments from the user
+   input to the `SetPrefCommandParser` object created above for parsing.
+5. The `SetPrefCommandParser` carries out it's validation checks and creates a new `SetPrefCommand` object if the
+   validation checks pass.
+6. The `SetPrefCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function
+   which then updates the date preferences in the `Model` component.
+
+The `edit` feature is also implemented in a similar manner.
+
+The _Activity_ Diagram notation of the above steps is shown below.
 
 <puml src="diagrams/SetPrefActivity.puml" width="600" />
 
-The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
+The _Sequence_ Diagram notation of the above steps is shown below.
 
 <puml src="diagrams/SetPrefSequence.puml" width="600" />
+
+#### Design Considerations
+
+**Aspect: Allowing users to set their date preferences on launch**
+
+* **Alternative 1 (current choice):** Have default date preference (
+  see [this](UserGuide.md#managing-preferences-and-getting-matches))
+    * Pros: Easy to implement (since all you have to do is set the default date preference). `bestMatch` works
+      immediately from the start.
+    * Cons: Not very user-friendly (since the user may not know all the details of the date)
+* **Alternative 2:** Allow users to set their date preferences on launch
+    * Pros: More user-friendly (since user has more flexibility in setting their date preferences)
+    * Cons: Slightly harder to implement (since you have to check which fields are present). Will also affect the
+      bestMatch
+      algorithm since users may not know how to set their date preferences first.
 
 ### Star dates
 
 #### Implementation
 
-1. The star dates feature begins by passing the user input obtained from the `CommandBox` class in the `Ui` component to the `LogicManager` class in the `Logic` component by invoking the `execute` function.
+1. The star dates feature begins by passing the user input obtained from the `CommandBox` class in the `Ui` component to
+   the `LogicManager` class in the `Logic` component by invoking the `execute` function.
 2. The `LogicManager` class then passes the user input to the `LoveBookParser` class for parsing and validation.
-3. The `LoveBookParser` class then performs polymorphism and creates a `StarCommandParser` object for StarCommand specific parsing.
-4. The `LoveBookParser` class also separates the command word from the user input and passes the arguments from the user input to the `StarCommandParser` object created above for parsing.
-5. The `StarCommandParser` carries out it's validation checks and creates a new `StarCommand` object if the validation checks pass.
-6. The `StarCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function which then updates the isStarred field for the date object with the respective index.
-The _Activity_ diagram summarises what happens after the user enters a star command.
+3. The `LoveBookParser` class then performs polymorphism and creates a `StarCommandParser` object for StarCommand
+   specific parsing.
+4. The `LoveBookParser` class also separates the command word from the user input and passes the arguments from the user
+   input to the `StarCommandParser` object created above for parsing.
+5. The `StarCommandParser` carries out it's validation checks and creates a new `StarCommand` object if the validation
+   checks pass.
+6. The `StarCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function
+   which then updates the isStarred field for the date object with the respective index.
+   The _Activity_ diagram summarises what happens after the user enters a star command.
 
 <puml src="diagrams/StarActivity.puml" width="600" />
 
@@ -442,12 +474,17 @@ the command `star 1`
 
 #### Implementation
 
-1. The star dates feature begins by passing the user input obtained from the `CommandBox` class in the `Ui` component to the `LogicManager` class in the `Logic` component by invoking the `execute` function.
+1. The star dates feature begins by passing the user input obtained from the `CommandBox` class in the `Ui` component to
+   the `LogicManager` class in the `Logic` component by invoking the `execute` function.
 2. The `LogicManager` class then passes the user input to the `LoveBookParser` class for parsing and validation.
-3. The `LoveBookParser` class then performs polymorphism and creates a `UnstarCommandParser` object for UnstarCommand specific parsing.
-4. The `LoveBookParser` class also separates the command word from the user input and passes the arguments from the user input to the `UnstarCommandParser` object created above for parsing.
-5. The `UnstarCommandParser` carries out it's validation checks and creates a new `UnstarCommand` object if the validation checks pass.
-6. The `UnstarCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function which then updates the isStarred field for the date object with the respective index.
+3. The `LoveBookParser` class then performs polymorphism and creates a `UnstarCommandParser` object for UnstarCommand
+   specific parsing.
+4. The `LoveBookParser` class also separates the command word from the user input and passes the arguments from the user
+   input to the `UnstarCommandParser` object created above for parsing.
+5. The `UnstarCommandParser` carries out it's validation checks and creates a new `UnstarCommand` object if the
+   validation checks pass.
+6. The `UnstarCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function
+   which then updates the isStarred field for the date object with the respective index.
 
 The _Activity_ diagram summarises what happens after the user enters a star command.
 
@@ -910,7 +947,8 @@ testers are expected to do more *exploratory* testing.
       We are planning to allow the user to know all the invalid keywords that he/she has keyed in.
 
 6. Improve the presets bar feature to be more comprehensive and clear
-    - Currently, the presets bar feature only accomodates for the commands: `add`, `edit`, `delete`, `setP` and `showP`.
+    - Currently, the presets bar feature only accommodates for the commands: `add`, `edit`, `delete`, `setP`
+      and `showP`.
     - In the future, we plan to add more presets buttons for all 16 commands in the application.
     - Furthermore, even though there's `clear` command, the button "clear" removes all text in the command box, making
       it ambiguous. We plan to change this in a future iteration like a trash can icon.
