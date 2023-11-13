@@ -10,7 +10,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -97,7 +96,7 @@ public class AddressBookParserTest {
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + PREFIX_NAME
                         + keywords.stream().collect(Collectors.joining(" ")));
-        Predicate<Applicant> applicantPredicate =
+        ApplicantPredicate applicantPredicate =
                 new ApplicantPredicate(Arrays.asList(new NameContainsKeywordsPredicate(keywords)));
         assertEquals(new FindCommand(applicantPredicate), command);
     }

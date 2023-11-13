@@ -35,14 +35,8 @@ public class RateCommandParser implements Parser<RateCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, RateCommand.MESSAGE_USAGE));
         }
 
-        try {
-            index = ParserUtil.parseIndex(keywords[0]);
-            rating = ParserUtil.parseRating(keywords[1]);
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, RateCommand.MESSAGE_USAGE));
-        }
-
+        index = ParserUtil.parseIndex(keywords[0]);
+        rating = ParserUtil.parseRating(keywords[1]);
         return new RateCommand(index, rating);
     }
 }

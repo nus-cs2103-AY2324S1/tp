@@ -37,11 +37,11 @@ public class RateCommandParserTest {
 
     @Test
     public void parse_invalidRating_throwsParseException() {
-        assertParseFailure(parser, "1 a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, RateCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "1 a", String.format(Rating.MESSAGE_CONSTRAINTS));
     }
 
     @Test
     public void parse_invalidIndex_throwsParseException() {
-        assertParseFailure(parser, "a 1.0", String.format(MESSAGE_INVALID_COMMAND_FORMAT, RateCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a 1.0", String.format(ParserUtil.MESSAGE_INVALID_INDEX));
     }
 }
