@@ -8,11 +8,9 @@ pageNav: 3
 
 ## **Overview**
 
-LoveBook, is a **dating-focused** application, revolving around providing **serial daters** with a **convenient**
-and **enjoyable** tool to enhance their dating experiences. Featuring **user preferences management**, **date
-organization**,
-**customizable filtering options** and **best match algorithms**, LoveBook enhances the **efficiency** and \*
-\*effectiveness\*\* of your
+LoveBook, is a **dating-focused** application, revolving around providing **online daters** with a **convenient**
+and **enjoyable** tool to enhance their dating experiences. Featuring **user preferences management**, **date organization**,
+**customizable filtering options** and **best match algorithms**, LoveBook enhances the **efficiency** and **effectiveness** of your
 online dating journey.
 
 [//]: # "<!-- * Table of Contents -->"
@@ -258,7 +256,7 @@ Before diving into the implementation details, here's an overview of what change
 
 The following class diagram shows the new `Date` class after the changes mentioned above.
 
-<puml src="diagrams/DateClassDiagram.puml" width="600" />
+<puml src="diagrams/DateClassDiagram.puml"/>
 
 Moving on to the implementation details, the following sections describe how and why the main features of the app work.
 
@@ -282,11 +280,11 @@ The `delete` and `edit` features are also implemented in a similar manner.
 
 The sequence diagram notation of the above steps is shown below. <br>
 
-<puml src="diagrams/AddSequenceDiagram.puml" width="600" />
+<puml src="diagrams/AddSequenceDiagram.puml" />
 
 The activity diagram notation of the above steps is shown below. <br>
 
-<puml src="diagrams/AddActivityDiagram.puml" width="600" />
+<puml src="diagrams/AddActivityDiagram.puml" />
 
 <box type="info" seamless>
     The UI and Storage components are not shown in the sequence and activity diagrams above for simplicity.
