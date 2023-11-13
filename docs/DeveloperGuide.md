@@ -203,8 +203,9 @@ The `Model` component,
 
 An alternative (arguably, a more OOP) model is given below. It has a <code>Tag</code> list in the <code>AddressBook</code>, which <code>Person</code> references. This allows <code>AddressBook</code> to only require one <code>Tag</code> object per unique tag, instead of each <code>Person</code> needing their own <code>Tag</code> objects. <br><br>
 
-<img src='assets/svg/dg/BetterModelClassDiagram.svg' width='450' />
+<img src='assets/svg/dg/BetterModelClassDiagram.svg' width='450' /> <br><br>
 
+Without loss of generality, this model can be extended to <code>Task</code> entities. In that context, the <code>UniquePersonList</code> would be replaced by a <code>UniqueTaskList</code>, and each <code>Person</code> entity would become a <code>Task</code> entity. Each <code>Task</code> will reference: <code>Title</code>, <code>Note</code>, and <code>Tag</code> objects.
 " %}
 
 <div style="page-break-after: always;"></div>
