@@ -1,14 +1,16 @@
 ---
 layout: page
-title: User Guide
+title: CCACommander Ultra Promax Xtra 9000PLUS - User Guide
 ---
 <link rel="stylesheet" href="./assets/css/guide.css">
-## CCACommander Ultra Promax Xtra 9000PLUS - User Guide
 
 <figure>
     <img src="images/logo_removebg.png"
          alt="CCACommander Logo">
 </figure>
+
+1. Table of content
+{:toc}
 
 ## Introduction
 As a Co-curricular Activity (CCA) head, do you find yourself struggling to manage your CCA members’ attendance and record the array of events that your CCA has?
@@ -38,9 +40,6 @@ This guide uses the following features to make it easier for you to navigate aro
 <div markdown="block" class="alert alert-primary">
 :bulb: Boxes with the :bulb: icon contain additional tips and tricks to help you get the most out of CCACommander.
 </div>
-
-
-{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
