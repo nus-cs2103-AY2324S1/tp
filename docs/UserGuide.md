@@ -263,7 +263,7 @@ Example:
 * `edit INDEX` followed by `space` and `tab` 
   * gives the unused prefix with the actual information for the booking at the index.
 
-Prefix completions works with `add` and `edit` command and does not validate your input format.
+Prefix completions only works with `add` and `edit` command and does not validate your input format.
 
 </div>
 </details>
