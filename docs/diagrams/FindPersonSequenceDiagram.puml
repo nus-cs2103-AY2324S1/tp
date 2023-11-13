@@ -65,6 +65,9 @@ deactivate CommandResult
 FindPersonCommand --> LogicManager : result
 deactivate FindPersonCommand
 
+FindPersonCommand -[hidden]-> AddressBookParser
+destroy FindPersonCommand
+
 [<--LogicManager
 deactivate LogicManager
 @enduml

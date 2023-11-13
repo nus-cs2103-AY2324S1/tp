@@ -66,8 +66,6 @@ activate CommandResult
 CommandResult --> UngroupPersonCommand
 deactivate CommandResult
 UngroupPersonCommand --> LogicManager
-CommandResult -[Hidden]-> UngroupPersonCommand
-destroy CommandResult
 
 deactivate UngroupPersonCommand
 
