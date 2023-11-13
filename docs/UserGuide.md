@@ -42,17 +42,20 @@ CheckMate is a **desktop app for streamlining the process of room bookings by ho
 
 3. Copy the file to the folder you want to use as the _home folder_ for your CheckMate.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar checkmate.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar checkmate.jar` command to run the application. 
+   Kindly follow the example below, but do note that the `checkmate.jar` file in the example is in the `Downloads` folder. <br>
+   ![terminal.png](images/terminal.png)
+
+5. A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![LandingGUI](images/Ui.png)
 
-5. Double-clicking on a booking will allow you to see its details.
+6. Double-clicking on a booking will allow you to see its details.
    ![ClickBooking.png](images%2FClickBooking.png)
 
-6. Here is a quick summary of the Graphical User Interface (GUI), or what you can see on your screen right now.
+7. Here is a quick summary of the Graphical User Interface (GUI), or what you can see on your screen right now.
    ![GUILayout.png](images/GUILayout.png)
 
-7. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+8. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
     * `help` : Access the help page.
@@ -73,7 +76,7 @@ CheckMate is a **desktop app for streamlining the process of room bookings by ho
 
     * `exit` : Exits CheckMate and closes the application.
 
-8. Refer to the [Commands](#commands) below for details of each command.
+9. Refer to the [Commands](#commands) below for details of each command.
 
 </div>
 </details>
