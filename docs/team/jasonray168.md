@@ -42,7 +42,8 @@ Given below are my contributions to the project.
         * Added implementation details for sort and delete leave features.
         * Added instructions for manual testing for sort and delete leave features.
         * Added details for planned enhancements.
+        * Added details for use cases.
 
 * **Community**:
 
-* **Tools**: Java, JavaFX, IntelliJ, GitHub CLI, GitHub
+* **Tools**: Java, JavaFX, IntelliJ, GitHub CLI, GitHub, PlantUML
