@@ -347,6 +347,10 @@ Example usage:
     ![search](images/find/find.png)
 * `find Kai Jie`
 
+<div markdown="span" class="alert alert-secondary">:information_source: **Note:**
+Using the find command will update the filter status to `Filter by: name`. The find command will also override a filter command if you used it, and vice versa.
+</div>
+
 [Table of Contents](#table-of-contents)
 
 <!-- @@author -->
