@@ -9,17 +9,28 @@ show method
 show attribute
 
 Class "Attendance" as Attendance
+Class "<<enumeration>>\nAttendanceType" as AttendanceType
+
 Class AttendanceStorage {
+    -storage
     +markXYZ(): void
     +getAttendanceReport(): int[]
 }
 
 
 Class Attendance {
-    - date
-    - attendanceType
-
+    - LocalDate date
+    - AttendanceType attendanceType
 }
+
+Class AttendanceType {
+    PRESENT
+    ABSENT
+    LATE
+    ON_LEAVE
+}
+
+
 
 Attendance "*" --left-- "1" AttendanceStorage
 AttendanceType "1" -down- "1" Attendance
