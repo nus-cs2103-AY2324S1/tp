@@ -265,12 +265,23 @@ The [**`java.util.Optional<T>`**](https://docs.oracle.com/javase/8/docs/api/java
 To add a person, the user must specify the name of the person using the `n/` prefix. The user can then specify the optional attributes of the person using the following prefixes:
 
 <box type="info">
+
 Except for the `Name`, all the fields given to the `add_person` command are optional.
+
 </box>
 
 The flow for the `add_person` command is described by the following sequence diagram:
 
 <img src="images/AddPersonSequenceDiagram2.png" alt="AddPersonSequenceDiagram2" width=600 />
+
+Step 1:
+The `LogicManager` invokes `AddPersonCommand::execute`, which in turn calls `Model::addPerson`.
+
+Step 2:
+The `Model` will invoke `addPerson` in `AddressBook`, which in turn calls `add` in `UniquePersonList` to add the person to the list.
+
+Step 3:
+The `AddPersonCommand` then continues its execution as defined by [this](#parser-commands) sequence diagram.
 
 #### Feature details
 1. The application will validate the arguments supplied by the user; whether the `Name` is unique and supplied, and whether the optional fields follow the correct format. 
