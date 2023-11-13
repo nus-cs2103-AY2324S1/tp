@@ -35,7 +35,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/yiwen101.png" width="200px">
 
 [[github](http://github.com/yiwen101)]
-[[portfolio](team/yiwen.md)]
+[[portfolio](team/yiwen101.md)]
 
 * Role: Developer
 * Responsibilities: User Usability
