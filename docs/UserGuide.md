@@ -354,7 +354,7 @@ ap
 `Names should only contain alphanumeric characters and spaces, and it should not be blank` | Ensure that the name specified is not blank and contain only alphanumeric characters.
 `Phone numbers should only contain numbers, and it should be at least 3 digits long` | Ensure that the phone number specified is not blank, contain only numbers and at least 3 digits long. 
 `Addresses can take any values, and it should not be blank` | Ensure that the address specified is not blank.
-`Emails should be of the format local-part@domain and adhere to the following constraints: …` | Ensure that the email specified is not blank and adheres to the constraints specified. Whitespaces at the start and end are trimmed.
+`Emails should be of the format local-part@domain and adhere to the following constraints: …` | Ensure that the email specified is not blank and adheres to the constraints specified.
 `This person already exists in the address book.` | Ensure that the new name specified does not match an existing person.
 `Multiple values specified for the following single-valued field(s): …` | Ensure that there are no duplicate fields for name, email, address and phone number.
 
