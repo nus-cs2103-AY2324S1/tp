@@ -635,8 +635,8 @@ An email address to contact your patients with. Each patient should be assigned 
 doesn't need to be unique.
 
 Emails should be in the format `local-part@domainname`.
- * `local-part` is alphanumeric, and may also contain these symbols: `+``_``.``-`
- * `domainname` should be the site that the email leads to, such as `gmail.com`.
+ * `local-part` is alphanumeric, and may also contain these symbols: `+` `_` `.` `-`
+ * `domainname` should be the site that the email leads to, such as `gmail.com`, `mail`.
  * These must be separated by an `@` symbol.
 
 #### Address

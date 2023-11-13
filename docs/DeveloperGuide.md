@@ -283,6 +283,7 @@ so `of` handles a portion of the parse.
     * Pros: Far easier to parse and store as an object.
     * Cons: Hard to extend upon in future use-cases, such as reminders, etc.
 
+
 * **Alternative 2 (current choice):** Use of Java Temporal-related objects for Appointment
     * Pros: More direct paths of feature extension, such as searching by time period.
     * Cons: Translation to and from Java Temporal objects can be non-trivial.
@@ -1020,53 +1021,398 @@ Given below are instructions to test the app manually.
 
 <box type="info" seamless>
 
-**Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+**Note:** These instructions only provide a starting point for testers to work on.
+Testers are expected to do more *exploratory* testing.
 
 </box>
 
-### Launch and shutdown
+### Correctness of Fields
+
+**Note:** The instructions below assume that the fields provided to the commands are all valid. 
+Here is how the correctness of the fields is defined.
+
+Fields that are compulsory are **bolded**. Fields that are optional are *italicized*.
+
+1. **Name**
+   - The patient's Name must be a standard unique alphanumeric identifier.
+   - Each patient should have a unique Name assigned to them.
+   - Invalid names include: X Æ A-12, エレン・イェーガー, Nagaratnam s/o Suppiah.
+
+2. **ID**
+   - The patient's ID is a unique alphanumeric identifier for the patient.
+   - Each patient should have a unique ID assigned to them.
+   - No verification system is in place for ID, allowing custom identifiers.
+
+3. **Phone number**
+   - The patient's Phone Number must be numeric and at least 3 digits long
+   - It does not need to be unique
+
+4. **Email address**
+   - The patient's Email Address should be of the form `local-part@domainname`.
+      - `local-part` is alphanumeric, and may also contain these symbols: `+` `_` `.` `-`
+      - `domainname`  should be the site that the email leads to, such as `gmail.com`, `mail`.
+      - These must be separated by an `@` symbol.
+   - It does not need to be unique
+
+5. **Address**
+   - The patient's Address does not have any format to adhere to.
+   - It does not need to be unique
+
+6. *Medical History*
+   - The patient's Medical History does not have any format to adhere to.
+   - It does not need to be unique
+   - A patient can have more than one medical history
+
+7. *Appointment*
+   - Appointments should be given in this sequence: `Date, Start Time, End Time`. For example,
+   `1-Aug-2023, 11:00 13:00` is a valid appointment denoting an appointment on 1st August 2023, from 11am
+   to 1pm.
+   * The month and day of the appointment should always be included.
+   * Day can be given as a 1 to 2-digit number. It will only be accepted if the day can exist in that month or year.
+   * Month can be given as a 1 to 2-digit number or a 3-letter word. Example: `Jun` and `6` both represent June.
+   * The year is optional. If not included, HealthSync assumes it to be this year.
+   * The date should be hyphenated.
+   * The time should be given in 24-hour clock format, with 00:00 as 12am.
+   * Colons are optional when time is given with hours and minutes. If no colons are given, you need to pad the hour with
+     a zero when necessary. Example: `1200` for 12 noon, `0900` for 9am.
+   * You may exclude minutes if you wish. Example: `15` will be interpreted as 3pm.
+   * Date and the 2 Times needs to be separated by a comma or a space.
+   * Appointment with the start and end time being the same is valid (ie. 0-minute appointment). HealthSync will register the start time as it is, and register end time as unconfirmed. This is useful for when you are unsure of the end time of an appointment.
+
+**Note:**: If any field is invalid, a `MESSAGE_CONSTRAINT` conforming to the format of the fields will be generated as output and the command will not be executed. Invalid fields will not be considered in the test cases below.
+
+### Shortcuts
+
+**Note:** HealthSync provides shortcuts for commands to allow faster typing for users. In the test cases provided below, you have the flexibility to use either the original command or its shortcut interchangeably.
+
+Here is the mapping between original command keywords and shortcuts:
+
+| Original Command | Shortcut |
+|-------------------|---------|
+| help              | h       |
+| list              | ls      |
+| add               | a       |
+| edit              | e       |
+| delete            | d       |
+| clear             | c       |
+| find              | f       |
+| log               | l       |
+| alog              | al      |
+| clog              | cl      |
+| undo              | u       |
+| exit              | ex      |
+
+
+### Launch and Shutdown
 
 1. Initial launch
-
    1. Download the jar file and copy into an empty folder
+   2. Double-click the jar file <br>
+   Expected: Shows the GUI with a set of sample patients. The window size may not be optimum.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-
-1. Saving window preferences
-
+2. Saving window preferences
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   2. Re-launch the app by double-clicking the jar file<br>
+   Expected: The most recent window size and location is retained
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Viewing Help: help or h
 
-### Deleting a person
+1. Successful Help command Execution
+   1. Prerequisites: No specific preconditions.
+   2. Test case: `help` <br>
+      Expected: The help page is opened.
 
-1. Deleting a person while all persons are being shown
+2. Help URL Generation
+   1. Prerequisites: The help command is successfully executed with the help page opened
+   2. Test case: Click the `Copy URL` button or copy the shown URL <br>
+      Expected: The URL should lead to the User Guide after the users have pasted it in their preferred browser
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+### Listing all Patients: list or ls
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+1. Successful Listing
+   1. Prerequisites: No specific preconditions
+   2. Test case: `list` <br>
+      Expected: A list of all existing patients in HealthSync is displayed.
+   3. Test case: Perform a valid `find` command before executing the `list` command <br>
+      Expected: A list of all existing patients in healthSync is displayed again.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+### Adding a Patient: add or a
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+1. Successful Patient Addition
+   1. Prerequisites: No existing patient with the provided Name or ID in the test case exists
+   2. Test case: `add n/John Doe id/S1234567A p/91234567 e/johndoe@gmail.com a/123 Main st` <br>
+      Expected: Patient is added with output message: `New patient added: ...`
+   3. Test case: `add n/Alex Bee id/T9876543A p/97438807 e/alexb@gmail.com a/123 Minor st ap/13-Nov 09:00 11:00 m/Diabetes` <br>
+      Expected: Patient is added with output message: `New patient added: ...`
+   4. Test case: `add n/Alice May id/A135791B p/98765432 e/alicem@gmail.com a/456 Main st ap/09-09-2023 17:00 19:00` <br>
+      Expected: Patient is added with output message: `New patient added: ...`
 
-1. _{ more test cases …​ }_
+2. Duplicate Patient Addition
+   1. Prerequisites: An existing patient with the Name `John Doe` and ID `S7654321B` exists
+   2. Test case: `add n/John Doe id/S7654321B p/98876543 e/johndoe2@email.com a/123 Oak St` <br>
+      Expected: Error message: `Patient already exists in HealthSync.`
+   3. Test case: `add n/John Doe id/T9876543A p/94224432 e/johndoe3@gmail.com a/456 Oak St` <br>
+      Expected: Error message: `Patient already exists in HealthSync.`
+   4. Test case: `add n/Bob Lee id/S7654321B p/92224432 e/bobl@gmail.com a/789 Oak St` <br>
+      Expected: Error message: `Patient already exists in HealthSync.`
 
-### Saving data
+3. Undo Adding of Patient
+    1. Prerequisites: No existing patient with the provided Name or ID in the test case exists
+    2. Test case: Perform a valid `add` command before doing an `undo` command. <br>
+    Expected: The newly added patient is deleted.
 
-1. Dealing with missing/corrupted data files
+4. Invalid Command Format / Usage
+   1. Prerequisites: No specific preconditions
+   2. Test case: Execute an incomplete or improperly formatted command, i.e. missing **compulsory** fields 
+      Expected: Error message: `Invalid command format! ...`
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+### Editing a patient: edit or e
 
-1. _{ more test cases …​ }_
+**Note:** For editing using both n/NAME and id/ID, both the Name and ID must match to the same patient, otherwise an error message will be outputted.
 
+1. Successful Editing of one field
+   1. Prerequisites: An existing patient with the Name `John Doe` and ID `S7654321B` exists
+   2. Test case: `edit n/John Doe p/99998888` <br>
+      Expected: The phone number of the patient `John Doe` is updated to `99998888`
+   3. Test case: `edit id/S765321B e/johndoee@gmail.com` <br>
+      Expected: The email address of the patient `John Doe` is updated to `johndoee@gmail.com`
+   4. Test case: `edit n/John Doe id/S765321B a/123 Oak Street` <br>
+      Expected: The address of the patient `John Doe` is updated to `123 Oak Street`
+   5. Other valid commands to try: editing `m/` and `ap/`
+      Expected: The corresponding field is updated
+
+2. Successful Editing of multiple fields
+   1. Prerequisites: An existing patient with the Name `John Doe` and ID `S7654321B` exists
+   2. Test case: `edit n/John Doe p/98765432 ap/17-Nov-2023 09:00 11:00`
+      Expected: The phone number of John Doe is updated to `98765432` and appointment is updated to `17-Nov-2023, 09:00 to 11:00`
+   3. Test case: `edit id/S7654321B m/cancer m/diabetes`
+      Expected: The medical histories of John Doe is updated to `cancer` and `diabetes`
+   4. Other valid commands to try:  Edit command with any combination of editable fields, as long as at most one prefix of the fields to be edited is 
+   provided. Note that for the medical history (m/) prefix, multiple prefixes can be provided.
+      Expected: The corresponding fields are updated
+
+3. Undo Editing of Patient
+    1. Prerequisites: An existing patient with the provided Name or ID in the test case exists
+    2. Test case: Perform a valid `edit` command before doing an `undo` command.
+       Expected: The edit on the patient is reverted.
+
+4. Invalid Command Format / Usage
+   1. Prerequisites: An existing patient with the Name `John Doe` and ID `S7654321B` exists
+   2. Test case: No fields provided for editing i.e. `edit n/John Doe id/S7654321B`
+      Expected: Error message: `At least one field to edit must be provided.`
+   3. Test case: Editing a non-existant patient `edit n/NONEXISTANT p/98765432`
+      Expected: Error message: `INVALID name and/or ID!`
+
+### Deleting a Patient: delete or d
+
+**Note:** For deletion using both n/NAME and id/ID, both the Name and ID must match to the same patient, otherwise an error message will be outputted.
+
+1. Successful Patient Deletion
+   1. Prerequisites: An existing patient with the provided Name or ID in the test case exists.
+   2. Test case: `delete n/John Doe` <br>
+      Expected: Patient is deleted with output message: `Deleted Patient: ...`
+   3. Test case: `delete id/S9876678A` <br>
+      Expected: Patient is deleted with output message: `Deleted Patient: ...`
+   4. Test case: `delete n/Alice Tan id/S7654321B` <br>
+      Expected: Patient is deleted with output message: `Deleted Patient: ...`
+
+
+2. Successful Field Deletion
+   1. An existing patient with the provided Name or ID in the test case exists, along with the specified field (Appointment or Medical History).
+   2. Test case: `delete n/John Doe ap/` <br>
+      Expected: Patient's appointment field is deleted with output message: `Deleted Patient's field: ...`
+   3. Test case: `delete id/S1234567A m/`
+      Expected: Patient's medical history field (all of it) is deleted with output message: `Deleted Patient's field: ...`
+   4. Test case: `delete n/Alice Tan id/S7654321B ap/`
+      Expected: Patient's appointment field is deleted with output message: `Deleted Patient's field: ...`
+
+3. Invalid Patient Deletion
+   1. Prerequisites: No existing patient with the provided Name or ID in the test case exists.
+   2. Test case: `delete n/Nonexistent Patient` <br>
+   Expected: Error message: `The given combination of Name and ID does not match any patient in the Patients list.`
+   3. Test case: `delete id/IDNotFound` <br>
+   Expected: Error message: `The given combination of Name and ID does not match any patient in the Patients list.`
+
+4. Invalid Field Deletion
+   1. Prerequisites: An existing patient with the provided Name or ID in the test case exists, but the specified field (Appointment or Medical History) does not.
+   2. Test case: `delete n/John Doe ap/` <br>
+   Expected: Error message: `The patient does not have an appointment to delete.`
+   3. Test case: `delete id/S1234567A m/` <br>
+   Expected: Error message: `The patient does not have a medical history to delete.`
+   4. Test case: `delete n/Alice Tan id/S7654321B m/Asthma` <br>
+   Expected: Error message: `The patient does not have a medical history of Asthma to delete.`
+
+5. Undo Deletion of Patient and Patient fields
+    1. Prerequisites: An existing patient with the provided Name or ID in the test case exists
+    2. Test case: Perform a valid `delete` command on a patient before doing an `undo` command. <br>
+       Expected: The newly deleted patient is added back
+    3. Test case: Perform a valid `delete` command on a deletable field of a patient before doing an `undo` command. <br>
+       Expected: The newly deleted field of the patient is added back.
+
+6. Invalid Command Format
+   1. Prerequisites: No specific preconditions.
+   2. Test case: Execute an incomplete or improperly formatted command, e.g. `delete` <br>
+   Expected: Error message: `Invalid command format! ...`
+
+### Deleting all Patients: clear or c
+
+1. Successful Deletion of All Patients
+   1. Prerequisites: No specific preconditions.
+   2. Test case: `clear` <br>
+   Expected: All patients deleted from HealthSync.
+   3. Test case: `clear someRandomStringThatWillBeIgnored` <br>
+   Expected: All patients deleted from HealthSync.
+
+2. Undo clearing of HealthSync
+   1. Prerequisites: No specific preconditions.
+   2. Test case: `clear` and then execute `undo` <br>
+   Expected: The clearing of HealthSync is reverted.
+
+### Locating Patients by Name, ID or Appointment: Find
+
+1. Successful Patient Search by Name
+   1. Prerequisites: At least one patient with the specified Name in the test case.
+   2. Test case: `find n/Alex` <br>
+   Expected: List of patients matching the Name Alex (Alex A, A Alex and Alex B are also returned) and their related information.
+   
+2. Successful Patient Search by ID
+   1. Prerequisites: At least one patient with the specified ID in the test case.
+   2. Test case: `find id/T0123436F` <br>
+   Expected: List of patients matching the ID T0123436F and their related information.
+
+3. Successful Patient Search by Appointment
+   1. Prerequisites: At least one patient with the specified Appointment in the test case.
+   2. Test case: `find ap/12-Dec 0000 2359` <br>
+   Expected: List of patients with appointments on 12th December, covering the entire day, and their related information.
+
+4. Successful Patient Search by Name, ID and Appointment
+   1. Prerequisites: At least one patient with the specified Name and ID in the test case. 
+   2. Test case: `find n/Alex Yeoh id/T0123436F ap/10-Dec 0000 2359` <br>
+   Expected: List of patients matching both the Name Alex Yeoh, ID T0123436F and having an appointment on 10th December, covering the entire day, and their related information.
+   
+5. No Matching Patients Found
+   1. Prerequisites: Ensure the Patient with the specificed Name, ID or overlap in Appointment does not exist.
+   2. Test case: `find id/T0123456F` <br>
+   Expected: Error message: `No such patient found`
+   3. Test case: `find n/DoesNotExit` <br>
+   Expected: Error message: `No such patient found`
+   4. Test case: `find ap/10-dec-1989 00:00 23:59` <br>
+   Expected: Error message: `No such patient found`
+
+### Preserving a Find Command Result in the Log: log or l
+
+1. Successful Log After Find Command
+   1. Prerequisites: At least one patient in the result of the previous find command.
+   2. Test case: `log` <br>
+   Expected: The last filtered values have overridden the logger tab.
+   3. Test case: Perform another find command and then execute log. <br>
+   Expected: The new result completely clears the current saved result from the logger tab and replaces it.
+   
+2. Failed Log Due to Empty List
+   1. Prerequisites: There is no previous find command result
+   2. Test case: `log`. <br>
+   Expected: Error message: `Cannot log an empty list.`
+
+3. Undo logging of Patient(s)
+    1. Prerequisites: At least one patient in the result of the previous find command.
+    2. Test case: Perform a valid `log` command before doing an `undo` command. <br>
+       Expected: The recent `log` command is reverted.
+   
+4. Log After Closing HealthSync
+    1. Prerequisites: At least one patient in the log
+    2. Test case: Close HealthSync and then restart. <br>
+       Expected: The log tab is empty
+
+### Adding a New find Command Result to the current Log: alog or al
+
+1. Successful Append to Log
+   1. Prerequisites: At least one patient in the result of the previous find command.
+   2. Test case: `alog` after performing a find command. <br>
+   Expected: The last filtered values have been added onto the logger tab.
+   3. Test case: Perform multiple valid find commands and execute `alog` after each. <br>
+   Expected: Each time, the new and non-duplicated result is added below the previously-saved log.
+
+2. Append Duplicate Patients
+    1. Prerequisites: At least one patient in the result of the previous find command and in the log.
+    2. Test case: Perform the same find command again and then execute `alog`. <br>
+    Expected: Duplicate patients are not appended to the log.
+
+3. Undo alog of Patient(s)
+    1. Prerequisites: At least one patient in the result of the previous find command.
+    2. Test case: Perform a valid `alog` command before doing an `undo` command. <br>
+       Expected: The recent `alog` command is reverted.
+   
+4. Failed Append Due to Empty List
+   1. Prerequisites: There is no previous find command result
+   2. Test case: `alog` <br>
+    Expected: Error message: `Cannot log an empty list.`
+
+### Clearing Data from the Log: clog
+
+1. Successful Log Clear
+   1. Prerequisites: No specific preconditions
+   2. Test case: `clog` <br>
+   Expected: Logger tab has been cleared.
+
+2. Undo clog 
+    1. Prerequisites: No specific preconditionis
+    2. Test case: Perform a valid `clog` command before doing an `undo` command. <br>
+       Expected: The recent `clog` command is reverted.
+
+### Undoing a Command: Undo
+
+1. Successful Undo of Undo-able Command(s)
+   1. Prerequisites: At least ten undo-able command has been executed.
+   2. Test case: `undo` <br>
+   Expected: The last command is undone with output message: `Undoing the last command: ...`
+   3. Test case: `undo 3` <br>
+   Expected: The last 3 commands are undone with output message: `Undoing 3 command(s): ...`
+
+2. Failed Undo Due to Invalid Number
+   1. Prerequisites: Only one undo-able command has been executed.
+   2. Test case: `undo -2` <br>
+   Expected: Error message: `Undo step count cannot be a negative number or zero.`
+   3. Test case: `undo 0` <br>
+   Expected: Error message: `Undo step count cannot be a negative number or zero.`
+   4. Test case: `undo 999` <br>
+   Expected: Error message: `Please provide a valid number of commands to undo, not exceeding the available command history size (Currently max is: 1) ...`
+ 
+3. Undo After Closing HealthSync
+   1. Prerequisites: At least one undo-able command has been executed.
+   2. Test case: Close HealthSync and then restart. Execute `undo`. <br>
+   Expected: Error message: `There is no history of undo-able commands to be undone.`
+
+### Exiting HealthSync: exit
+
+1. Exiting HealthSync
+   1. Prerequisites: No specific preconditions.
+   2. Test case: `exit` <br>
+   Expected: HealthSync is closed.
+
+### Editing the Data File
+
+1. Editing Patient Details Directly
+    1. Prerequisites: The healthsync.json file must exist
+    2. Test case: Locate the healthsync.json data file, open it with a text editor, and manually edit patient details. Save the file. <br>
+    Expected: Changes are reflected in HealthSync upon reopening.
+   
+2. Automatic Save Caution
+   1. Prerequisites: Edit healthsync.json and intentionally make its format invalid.
+   2. Test case: Edit healthsync.json to have an invalid format. This can be done by removing a parenthesis or editing a field to be invalid. Close and reopen HealthSync. <br>
+   Expected: HealthSync discards all data and starts with an empty data file.
+
+3. Making a Backup
+   1. Prerequisites: At least one existing patient in HealthSync.
+   2. Test case: Follow the provided instructions in the UG to make a backup of healthsync.json. <br>
+   Expected: A backup copy of healthsync.json is created in the chosen location.
+   
+4. Restoring Data from Backup
+   1. Prerequisites: Backup copy of healthsync.json is available.
+   2. Test case: Replace the original or missing .json file in data/ with the backup copy. <br>
+   Expected: Original data is restored upon reopening HealthSync.
+
+   
 ## **Appendix: Planned Enhancements**
 
 1. **Handling Patients with Same Name:**
@@ -1110,3 +1456,10 @@ When a Find command results in an empty set, the output message currently
 reads '0 patients found.' We propose an enhancement to provide a clearer message 
 such as 'No patients found,' offering better clarity and user understanding.
 
+9. **Improved Patient Clearing Process:**
+Currently, HealthSync allows users to use the shortcut `c` to clear all patients in the
+HealthSync application. While this provides a quick method for clearing patient data, it lacks
+a safeguard against accidental data loss. We propose an enhancement to the patient clearing
+process by introducing a warning popup. When a user triggers the patient clearing shortcut 'c',
+a confirmation popup will appear, prompting the user to double-check their intention before
+proceeding with the clearance.
