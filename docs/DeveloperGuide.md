@@ -987,17 +987,17 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file
+   2. Double-click the jar file
    Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.
+   2. Re-launch the app by double-clicking the jar file.
     Expected: The most recent window size and location is retained.
 
-1. Exiting
+3. Exiting
 
     1.  Use the `exit` command to close the app.
     Expected: app closes without error.
@@ -1008,13 +1008,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all contacts using the `list contact` command. Multiple contacts will be shown in the list.
 
-   1. Test case: `delete contact 1`<br>
+   2. Test case: `delete contact 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete contact 0`<br>
+   3. Test case: `delete contact 0`<br>
       Expected: No contact is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete contact commands to try: `delete contact`, `delete contact x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete contact commands to try: `delete contact`, `delete contact x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 2. Deleting a contact while event list is showing
@@ -1027,65 +1027,65 @@ testers are expected to do more *exploratory* testing.
 ### Adding tag
 
 1. Adding tag while all contacts is shown.
-    1. Prequisites: List all contacts using the `list contact` command. At least one contact shown in the list.<br>
+    1. Prerequisites: List all contacts using the `list contact` command. At least one contact shown in the list.<br>
 
-    1. Test case: `add tag -id 1 -t Frontend -t Java`<br>
+    2. Test case: `add tag -id 1 -t Frontend -t Java`<br>
     Expected: The new tags appear below the name of the first contact in the list. The list of tags added is shown in the status message.
 
-    1. Test case: `add tag -id 0 -t Frontend`<br>
+    3. Test case: `add tag -id 0 -t Frontend`<br>
     Expected: No tag is added. Error details shown in the status message.
 
-    1. Test case: `add tag -id 1 -t HR representative`<br>
+    4. Test case: `add tag -id 1 -t HR representative`<br>
     Expected: No tag is added as tag name should not contain spaces. Error details shown in the status message.<br>
 
-1. Adding duplicate tag to a contact
-    1. Prequisites: List all contacts using the `list contact` command. At least one contact shown in the list has at least one tag.
+2. Adding duplicate tag to a contact
+    1. Prerequisites: List all contacts using the `list contact` command. At least one contact shown in the list has at least one tag.
 
-    1. Test case: `add tag -id 1 -t x`, where x is an already existing tag in the first contact.<br>
+    2. Test case: `add tag -id 1 -t x`, where x is an already existing tag in the first contact.<br>
     Expected: The new tag appear below the name of the first contact in the list. The list of tags added is shown in the status message.
 
-    1. Test case: `add tag -id -t Frontend -t Frontend`<br>
+    3. Test case: `add tag -id -t Frontend -t Frontend`<br>
     Expected: Only one `Frontend` tag is added below the name of the first contact. Only one `Frontend` tag is shown in the list of tags added in the status message.
 
- 1. Adding tag while contact list is being filtered
+ 3. Adding tag while contact list is being filtered
     1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`.
 
-    1. Test case: `add tag -id 1 -t Frontend`, when no contact is shown<br>
+    2. Test case: `add tag -id 1 -t Frontend`, when no contact is shown<br>
     Expected: No tag is added. Error details shown in the status message.
 
-    1. Test case: `add tag -id 1 -t Frontend`, when at least 1 contact is shown<br>
+    3. Test case: `add tag -id 1 -t Frontend`, when at least 1 contact is shown<br>
     Expected: The new tags appear below the name of the first contact in the filtered list. The list of tags added is shown in the status message. List will go back to showing all contacts.
 
 ### Deleting tag
 
 1. Deleting tag while all contacts is shown and tag exists.
-    1. Prequisites: List all contacts using the `list contact` command. At least one contact shown in the list has at least one tag.
+    1. Prerequisites: List all contacts using the `list contact` command. At least one contact shown in the list has at least one tag.
 
-    1. Test case: `delete tag -id 1 -t x`, where x is an existing tag in the first contact.<br>
+    2. Test case: `delete tag -id 1 -t x`, where x is an existing tag in the first contact.<br>
     Expected: The tag x is no longer below the name of the first contact in the list. The list of tags deleted is shown in the status message.
 
-    1. Test case: `delete tag -id 0 -t Frontend`<br>
+    3. Test case: `delete tag -id 0 -t Frontend`<br>
     Expected: No tag is deleted. Error details shown in the status message.
 
-    1. Test case: `delete tag -id 1 -t HR representative`<br>
+    4. Test case: `delete tag -id 1 -t HR representative`<br>
     Expected: No tag deleted as tag name should not contain spaces. Error details shown in the status message.<br>
 
-1. Deleting tag while all contacts is shown but tag does not exist.
-    1. Prequisites: List all contacts using the `list contact` command. At least one contact is shown in the list.<br>
+2. Deleting tag while all contacts is shown but tag does not exist.
+    1. Prerequisites: List all contacts using the `list contact` command. At least one contact is shown in the list.<br>
 
-    1. Test case: `delete tag -id 1 -t x`, where `x` is a non-existing tag in the first contact.<br>
+    2. Test case: `delete tag -id 1 -t x`, where `x` is a non-existing tag in the first contact.<br>
     Expected: No tags is deleted. The list of tags deleted shown in the status message is empty while the list of tags not found contains `x`.
 
-1. Deleting tag while contact list is being filtered
+3. Deleting tag while contact list is being filtered
     1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`.
 
-    1. Test case: `delete tag -id 1 -t Frontend`, when no contact is shown<br>
+    2. Test case: `delete tag -id 1 -t Frontend`, when no contact is shown<br>
     Expected: No tag is deleted. Error details shown in the status message.
 
-    1. Test case: `delete tag -id 1 -t x`, when at least 1 contact is shown and `x` is an existing tag in the first contact. <br>
+    3. Test case: `delete tag -id 1 -t x`, when at least 1 contact is shown and `x` is an existing tag in the first contact. <br>
     Expected: The tag `x` is no longer below the name of the first contact in the list. The list of tags deleted shown in the status message is empty while the list of tags not found contains `x`. List will go back to showing all contacts.
 
-    1. Test case: `delete tag -id 1 -t x`, when at least 1 contact is shown and `x` is a non-existing tag in the first contact. <br>
+    4. Test case: `delete tag -id 1 -t x`, when at least 1 contact is shown and `x` is a non-existing tag in the first contact. <br>
     Expected: The tag `x` is no longer below the name of the first contact in the list. The list of tags deleted is shown in the status message. List will go back to showing all contacts.
 
 ### Adding note
@@ -1149,42 +1149,71 @@ testers are expected to do more *exploratory* testing.
 ### Adding event
 
 1. Adding event while all contacts are shown.
-    1. Prequisites: List all contacts using the `list contact` command. At least one contact shown in the list and there will be an events column for each contact.
+    1. Prerequisites: List all contacts using the `list contact` command. At least one contact shown in the list and there will be an events column for each contact.
        Use the `list events` command to open a new window with a list of all events without the respective contacts.<br>
 
-    1. Test case: `add event -id 1 -en Meeting with professor -st 2024-11-17 12:00:00 -et 2024-11-17 13:00:00 -loc COM 1 Basement -info Discuss the project`<br>
+    2. Test case: `add event -id 1 -en Meeting with professor -st 2024-11-17 12:00:00 -et 2024-11-17 13:00:00 -loc COM 1 Basement -info Discuss the project`<br>
        Expected: The new event will appear in the first contact's event column. It will also be added in the event list window. The title of the event added is shown in the status message.
 
-    1. Test case: `add event -id 1 -en Meeting with professor -st 12:00:00 -et 13:00:00 -loc COM 1 Basement -info Discuss the project`<br>
+    3. Test case: `add event -id 1 -en Meeting with professor -st 12:00:00 -et 13:00:00 -loc COM 1 Basement -info Discuss the project`<br>
        Expected: Similar to previous test, but date will automatically be current date.<br>
 
-    1. Test case: `add event -id 1 -en Meeting with professor -st 2024-11-17 -et 2024-11-18 -loc COM 1 Basement -info Discuss the project`<br>
+    4. Test case: `add event -id 1 -en Meeting with professor -st 2024-11-17 -et 2024-11-18 -loc COM 1 Basement -info Discuss the project`<br>
        Expected: Similar to previous test, but time will automatically be `00:00:00`.<br>
 
-    1. Test case: `add event -id 0 -en Chat with recruiter -st 2024-11-24 17:00:00 -et 2024-11-24 18:00:00 -loc Star Vista -info Discuss job opportunities`<br>
+    5. Test case: `add event -id 0 -en Chat with recruiter -st 2024-11-24 17:00:00 -et 2024-11-24 18:00:00 -loc Star Vista -info Discuss job opportunities`<br>
        Expected: No event is added. Error details shown in the status message.
 
-    1. Test case: `add event -id 1 -en Chat with recruiter -st 2024/11/24 17:00:00 -et 2024/11/24 18:00:00 -loc Star Vista -info Discuss job opportunities`<br>
+    6. Test case: `add event -id 1 -en Chat with recruiter -st 2024/11/24 17:00:00 -et 2024/11/24 18:00:00 -loc Star Vista -info Discuss job opportunities`<br>
        Expected: No event is added as date and time is not in the correct format. Error details shown in the status message.<br>
 
-1. Adding duplicate or clashing events
-    1. Prequisites: Use the `list events` command to open a new window with a list of all events without the respective contacts.
+2. Adding duplicate or clashing events
+    1. Prerequisites: Use the `list events` command to open a new window with a list of all events without the respective contacts.
 
-    1. Test case: `add event -id 1 ...`, where `...` is an already existing event in the event list.<br>
+    2. Test case: `add event -id 1 ...`, where `...` is an already existing event in the event list.<br>
        Expected: No event is added. Error details shown in the status message.
 
-    1. Test case: `add event -id 1 ... -st x` where `x` is in between the start and end time of an event currently on the list.<br>
+    3. Test case: `add event -id 1 ... -st x` where `x` is in between the start and end time of an event currently on the list.<br>
        Expected: No event is added. Error details shown in the status message.
 
-1. Adding event while contact list is being filtered
+3. Adding event while contact list is being filtered
     1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`.
        Use the `list events` command to open a new window with a list of all events without the respective contacts.
 
-    1. Test case: `add event -id 1 ...`, when no contact is shown<br>
+    2. Test case: `add event -id 1 ...`, when no contact is shown<br>
        Expected: No event is added. Error details shown in the status message.
 
-    1. Test case: `add event -id 1 ...`, when at least 1 contact is shown<br>
+    3. Test case: `add event -id 1 ...`, when at least 1 contact is shown<br>
        Expected: The new event will appear in the first contact's (in the filtered list) event column. It will also be added in the event list window. The title of the event added is shown in the status message.
+
+### Listing events
+
+1. Listing events without using filters
+    1. Prerequisites: There are at least 2 events in the address book
+
+    2. Test case: `list events`<br>
+       Expected: All events in the address book are shown in the status message and a new "Event List" window, sorted by start time in **ascending** order.
+
+    3. Test case: `list events -descending`<br>
+       Expected: All events in the address book are shown in the status message and a new "Event List" window, sorted by start time in **descending** order.
+
+    4. Test case: `list events -descending xxx`<br>
+       Expected: Error message about the wrong command format is shown in the status message.
+
+2. Listing events with filters:
+    1. Prerequisites: There are at least 2 events in the address book
+
+    2. Test case: `list events -st 2023-11-14 00:00 -et 2023-11-20 00:00`<br>
+       Expected: Only the events that the start time is within `2023-11-14 00:00:00` and `2023-11-20 00:00:00` are shown in the status message and a new "Event List" window, sorted by start time in **ascending** order.
+
+    3. Test case: `list events -st 2023-11-14 00:00 -et 2023-11-20 00:00 -descending`<br>
+       Expected: Only the events that the start time is within `2023-11-14 00:00:00` and `2023-11-20 00:00:00` are shown in the status message and a new "Event List" window, sorted by start time in **descending** order.
+
+    4. Test case: `list events -st 2023-11-14 00:00`<br>
+       Expected: Error message about the wrong command format is shown in the status message.
+
+    5. Test case: `list events -et 2023-11-14 00:00`<br>
+       Expected: Error message about the wrong command format is shown in the status message.
 
 ### Deleting event
 
@@ -1193,30 +1222,30 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all contacts and events using the `list contact` command. This will show every contact and its respective events.
        Use the `list events` command to open a new events window showing all events (without the contacts).
 
-    1. Test case: `delete event -id 2 -eid 1`<br>
+    2. Test case: `delete event -id 2 -eid 1`<br>
        Expected: First event of the second contact is deleted. Title of the deleted event shown in the status message.
        Event deleted from the list in the events window.
 
-    1. Test case: `delete event -id 0 -eid 1`<br>
+    3. Test case: `delete event -id 0 -eid 1`<br>
        Expected: No event is deleted. Error details (contact not found) shown in the status message.
 
-    1. Test case: `delete event -id 1 -eid 0`<br>
+    4. Test case: `delete event -id 1 -eid 0`<br>
        Expected: No event is deleted. Error details (event not found) shown in the status message.
 
-    1. Other incorrect delete commands to try: `delete event`, `delete event -id x -eid 1`, `delete event -id 1 -eid x`, `...` (where x is larger than the size of contacts/events)<br>
+    5. Other incorrect delete commands to try: `delete event`, `delete event -id x -eid 1`, `delete event -id 1 -eid x`, `...` (where x is larger than the size of contacts/events)<br>
        Expected: Similar to previous test cases.
 
-1. Deleting event while contact list is being filtered
+2. Deleting event while contact list is being filtered
     1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`.
        Use the `list events` command to open a new events window showing all events (without the contacts).
 
-    1. Test case: `delete event -id 1 -eid 1`, when no contact is shown<br>
+    2. Test case: `delete event -id 1 -eid 1`, when no contact is shown<br>
        Expected: No event is deleted. Error details shown in the status message.
 
-    1. Test case: `delete event -id 1 -eid 1`, when at least 1 contact is shown and there is at least 1 event in the first contact. <br>
+    3. Test case: `delete event -id 1 -eid 1`, when at least 1 contact is shown and there is at least 1 event in the first contact. <br>
        Expected: The event will no longer be shown in the first contact of the filtered list. It will also be removed from the events list window. List will go back to showing all contacts.
 
-    1. Test case: `delete event -id 1 -eid 1`, when at least 1 contact is shown and there are no events in the first contact. <br>
+    4. Test case: `delete event -id 1 -eid 1`, when at least 1 contact is shown and there are no events in the first contact. <br>
        Expected: No event is deleted. Error details shown in the status message.
 
 --------------------------------------------------------------------------------------------------------------------
