@@ -212,11 +212,11 @@ When the `AddressBookParser` parses the argument, it creates either `UpdateSecLe
 
 The following activity diagram summarizes what happen when a user executes a `UpdateSecLevelCommand`.
 
-<puml src="diagrams/UpdateSecLevelActivityDiagram.puml" alt="UpdateSecLevelActivityDiagram" width="500" />
+<puml src="diagrams/UpdateSecLevelActivityDiagram.puml" alt="UpdateSecLevelActivityDiagram" width="750" />
 
 #### Design consideration:
 
-**Aspect: How other commands executed after `uplevel` and before `undolevel` should be addressed.
+**Aspect: How other commands executed after `uplevel` and before `undolevel` should be addressed.**
 
 * **Alternative 1 (current choice):** The other commands executed after `uplevel` and before `undolevel` will be invalid.
   * Pros:
@@ -858,7 +858,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Importing student data.
   1. Prerequisites: A [sample CSV file](https://github.com/AY2324S1-CS2103T-W13-2/tp/blob/master/student_data_test.csv) has been downloaded into the same folder as Tutorium.
-  2. Test case: `import student_data_test.csv`
+  2. Test case: `import student_data_test.csv`<br>
      Expected: All students in the CSV file are added to the list.
 
 ### Deleting a student
@@ -999,6 +999,10 @@ Listed below are the enhancements we managed to add into Tutorium.
     incorrectly-entered data in the case of user error. In the future, we will introduce validity checks
     to reduce the likelihood of such mistakes.
 * Disallow the use of invalid character inputs in the search command.
-  *  Although only alphanumeric names are allowed, the search command allows the user to search for names
+  * Although only alphanumeric names are allowed, the search command allows the user to search for names
      containing non-alphanumeric characters. Our team plans to improve the design of this feature by
      disallowing such inputs in a future version of the product.
+* Add a validation check to the phone number field to accept only phone numbers with 8 digits.
+  * Valid phone numbers in Singapore are 8 digits long, but Tutorium accepts any number that is longer than 3 digits, even
+    if it would be considered an invalid phone number. We will add a validation check to restrict inputs to 8-digit phone numbers
+    in future versions of the app.
