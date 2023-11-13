@@ -534,15 +534,15 @@ Use case ends.
     
     4a. The given index is invalid.
       
-      4a1. D.A.V.E. shows an error message.
+        4a1. D.A.V.E. shows an error message.
      
-      4a2. D.A.V.E. requests for valid index.
+        4a2. D.A.V.E. requests for valid index.
 
-      4a3. User enters new data for the meeting details.
+        4a3. User enters new data for the meeting details.
 
-      Steps 4a1-4a3 are repeated until the index entered is correct.
+        Steps 4a1-4a3 are repeated until the index entered is correct.
 
-      Use case resumes at step 5.
+        Use case resumes at step 5.
 
     6a. The user enters invalid meeting details.
 

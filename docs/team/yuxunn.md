@@ -45,5 +45,7 @@ Given below are my contributions to the project.
 - **Community**:
     - PRs reviewed: [#194](https://github.com/AY2324S1-CS2103T-F08-2/tp/pull/194), [#178](https://github.com/AY2324S1-CS2103T-F08-2/tp/pull/178), [#125](https://github.com/AY2324S1-CS2103T-F08-2/tp/pull/125), [#103](https://github.com/AY2324S1-CS2103T-F08-2/tp/pull/103), [#101](https://github.com/AY2324S1-CS2103T-F08-2/tp/pull/101), [#98](https://github.com/AY2324S1-CS2103T-F08-2/tp/pull/98), [#81](https://github.com/AY2324S1-CS2103T-F08-2/tp/pull/81), [#73](https://github.com/AY2324S1-CS2103T-F08-2/tp/pull/73), [#65](https://github.com/AY2324S1-CS2103T-F08-2/tp/pull/65)
 
+<p></p>
+
 - **Tools**:
   - Created UML diagrams using PlantUML.
