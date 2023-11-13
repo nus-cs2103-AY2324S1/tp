@@ -118,6 +118,15 @@ You are missing the following: - Policy Expiry Date(pe/)
 ```
 Error: The policy number is already in use
 ```
+* Adding a client that already exists:<br>
+```
+Error: This person already exists in the address book
+```
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Adding clients with duplicate fields:** The above error will only be raised when ALL fields are the same. This is to support clients with multiple insurance policies.
+
+</div>
 
 
 ### Listing all clients : `list`
