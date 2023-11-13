@@ -18,7 +18,8 @@ You can reach us at the email `e0968907@u.nus.edu`
 [[github](https://github.com/cikguseven)]
 [[portfolio](team/cikguseven.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Features, Code Quality, Documentation, Testing
 
 ### Liang Wenzhong
 
@@ -27,8 +28,8 @@ You can reach us at the email `e0968907@u.nus.edu`
 [[github](http://github.com/lwz19)]
 [[portfolio](team/lwz19.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Features, UI, Testing, Documentation
 
 ### Lim Ngee Yong
 
@@ -38,7 +39,7 @@ You can reach us at the email `e0968907@u.nus.edu`
 [[portfolio](team/ngeeyonglim.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Features, UI, Testing, Documentation
 
 ### Qian Changru
 
@@ -48,7 +49,7 @@ You can reach us at the email `e0968907@u.nus.edu`
 [[portfolio](team/changruhenryqian.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Features, Code Quality, Documentation, Testing
 
 ### Yeo Boh Shin
 
@@ -58,4 +59,4 @@ You can reach us at the email `e0968907@u.nus.edu`
 [[portfolio](team/yeobohshin.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Features, UI, Testing, Documentation

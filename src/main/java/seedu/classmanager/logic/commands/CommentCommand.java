@@ -30,10 +30,8 @@ public class CommentCommand extends Command {
 
     public static final String MESSAGE_COMMENT_SUCCESS = "Comment added successfully.";
 
-
     private final StudentNumber studentNumber;
     private final Comment comment;
-
 
     /**
      * Creates an CommentCommand to add the specified {@code Comment} to a student.
@@ -45,6 +43,13 @@ public class CommentCommand extends Command {
         this.comment = comment;
     }
 
+    /**
+     * Executes the command to add the specified {@code Comment} to a student.
+     * @param model {@code Model} which the command should operate on.
+     * @param commandHistory The command history to record this command.
+     * @return A {@code CommandResult} with the feedback message of the operation result.
+     * @throws CommandException If an error occurs during command execution.
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
@@ -62,7 +67,7 @@ public class CommentCommand extends Command {
         model.setStudent(student, editedStudent);
         model.commitClassManager();
 
-        return new CommandResult(String.format(MESSAGE_COMMENT_SUCCESS, Messages.format(student)));
+        return new CommandResult(MESSAGE_COMMENT_SUCCESS);
     }
 
     @Override

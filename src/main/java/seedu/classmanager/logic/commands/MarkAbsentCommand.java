@@ -42,6 +42,13 @@ public class MarkAbsentCommand extends Command {
         this.targetStudentNumber = targetStudentNumber;
     }
 
+    /**
+     * Marks a specified student's attendance as absent.
+     * @param model {@code Model} which the command should operate on.
+     * @param commandHistory The command history to record this command.
+     * @return A {@code CommandResult} with the feedback message of the operation result.
+     * @throws CommandException If an error occurs during command execution.
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory)
             throws CommandException {

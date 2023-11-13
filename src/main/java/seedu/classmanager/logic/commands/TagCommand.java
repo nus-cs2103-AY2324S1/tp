@@ -49,6 +49,13 @@ public class TagCommand extends Command {
         this.tags = tags;
     }
 
+    /**
+     * Override the existing tags of a specified student with the current set of tags.
+     * @param model {@code Model} which the command should operate on.
+     * @param commandHistory The command history to record this command.
+     * @return A {@code CommandResult} with the feedback message of the operation result.
+     * @throws CommandException If an error occurs during command execution.
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         List<Student> lastShownList = model.getFilteredStudentList();
