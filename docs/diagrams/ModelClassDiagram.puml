@@ -41,7 +41,7 @@ UniqueContactList --> "~* all" Contact
 Contact *--> "1" Name
 Contact *--> "1" Phone
 Contact *--> "1" Email
-Contact *--> "0..1" Note
+Contact *--> "1" Note
 Contact *--> "*" Tag
 Contact *--> "*" AlternateContact
 
