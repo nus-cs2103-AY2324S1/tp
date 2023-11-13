@@ -1,40 +1,158 @@
 ---
 layout: page
-title: User Guide
 ---
-## CCACommander Ultra Promax Xtra 9000PLUS - User Guide
-CCACommander Ultra Promax Xtra 9000PLUS is the one-stop app for CCA Heads to manage CCA members and events, optimised for CCA Heads who prefer to use command line interface.
+<link rel="stylesheet" href="./assets/css/guide.css">
+<a id="top"></a>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div style="display: flex;">
+    <div style="flex: 1; padding: 20px">
+        <h1>User Guide</h1>
+        <p>Everything you need to know about CCACommander Ultra Promax Xtra 9000PLUS</p>
+    </div>
+    <div style="flex: 1; padding: 20px">
+        <img src="images/logo_removebg.png"
+             alt="CCACommander Logo"
+             >
+    </div>
+</div>
 
-* Table of Contents
+<br>
+<br>
+
+<div style="page-break-after: always;"></div>
+
+## Table of Contents
+{: .no_toc }
+1. Table of Contents
 {:toc}
 
+<div style="page-break-after: always;"></div>
+
+## Introduction
+As a Co-curricular Activity (CCA) head, do you find yourself struggling to manage your CCA members’ attendances and record the array of events that your CCA has?
+Are the heaps of spreadsheets you are using to manage them making you feel overwhelmed? Well, fear not, **CCACommander Ultra Promax Xtra 9000PLUS** is here to save the day!
+
+CCACommander is a desktop application that helps CCA leaders record details of their members and events, whilst tracking every member’s attendance.
+It helps to organise members and events into easy-to-view compartments under a singular [Graphical User Interface (GUI)](https://blog.hubspot.com/website/what-is-gui) while providing granular control to you via its in-built [Command Line Interface (CLI)](https://www.techtarget.com/searchwindowsserver/definition/command-line-interface-CLI).
+If you can type quickly, CCACommander can help you complete your administrative tasks much more efficiently than traditional GUI applications.
+
+## About
+This user guide provides documentation on how you can install and use **CCACommander Ultra Promax Xtra 9000PLUS**. Descriptions of CCACommander’s features and how to use them have been carefully organised into key sections for your convenience.
+To get started, take a look at our [quick start](#quick-start) guide!
+
+This guide uses the following features to make it easier for you to navigate around:
+* Words that look like [this](#about) can be clicked to jump to the related section.
+* Words that look like `this` refer to commands which you can type into the command box of CCACommander.
+* Words that look like <kbd>this</kbd> refer to keyboard keys that you can press.
+
+<div markdown="block" class="alert alert-warning">
+:warning: Boxes with the :warning: icon contain important information that you should read.
+</div>
+
+<div markdown="block" class="alert alert-info">
+:information_source: Boxes with the :information_source: icon contain additional useful information.
+</div>
+
+<div markdown="block" class="alert alert-primary">
+:bulb: Boxes with the :bulb: icon contain additional tips and tricks to help you get the most out of CCACommander.
+</div>
+
 --------------------------------------------------------------------------------------------------------------------
+## Quick Start
+<div markdown="block" class="alert alert-warning">
 
-## Quick start
+:warning: We assume that you have some basic knowledge of terminal commands. You can learn how to use the terminal with [this guide](https://www.freecodecamp.org/news/command-line-for-beginners/).
 
-1. Ensure you have Java `11` or above installed in your Computer.
+</div>
 
-1. Download the latest `ccacommander.jar` from [here](https://github.com/AY2324S1-CS2103T-F11-1/tp/releases).
+1. Ensure you have Java `11` installed in your computer by following [this guide](https://phoenixnap.com/kb/check-java-version-on-mac-windows).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your CCACommander application.
+2. Download the latest `ccacommander.jar` from [here](https://github.com/AY2324S1-CS2103T-F11-1/tp/releases).
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ccacommander.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+3. Put the downloaded file into a folder of your choice (preferably a new empty folder).
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+4. Open a command terminal in the folder you put the CCACommander file in, and use the `java -jar ccacommander.jar` command to run the application. A GUI resembling the one shown below should appear in a few seconds. Note how the app contains some sample data.<br>
+    <figure style="margin-bottom:200px">
+        <img src="images/Ui.png"
+             alt="Ui"
+             style="margin-top:10px; max-width: 90%">
+        <figcaption>Fig 1: Initial application display</figcaption>
+    </figure>
+
+5. Type the command in the command box and press <kbd>↵ Enter</kbd> to execute it. <br> E.g. typing `help` and pressing <kbd>↵ Enter</kbd> will open the help window. <br>
    Some example commands you can try:
 
-   * `list` : Lists all members and events.
+    * `list` : Lists all members and events.
 
-   * `createMember n/CHU WEI RONG g/Male p/98765432 e/chuweirongrocks@gmail.com a/19 Kent Ridge Crescent, Singapore 119278` : Creates a member named `CHU WEI RONG` in CCACommander.
+    * `createMember n/Lim Jun Jie g/Male p/98765432 e/limjunjie@gmail.com a/19 Kent Ridge Crescent, Singapore 119278`: Creates a member named "Lim Jun Jie" in CCACommander.
 
-   * `deleteMember 3` : Deletes the 3rd member shown in the current list.
+    * `deleteMember 3` : Deletes the 3rd member shown in the current list.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. You can refer to the [Features](#features) section below for the details of each command.
+
+<div markdown="block" class="alert alert-primary">
+
+:bulb: You can use the `clear` command to remove the sample data.
+</div>
 
 
 --------------------------------------------------------------------------------------------------------------------
+
+> [Back to top](#top)
+
+<div style="page-break-after: always;"></div>
+
+## Navigating User Interface
+<figure>
+    <img src="images/ui_breakdown.png"
+         alt="UI_breakdown">
+    <figcaption>Fig 2: Components of CCACommander</figcaption>
+</figure>
+Here are the important components of CCACommander that you will use and interact with.
+
+**Menu**: The CCACommander menu is located at the top-left corner of your screen. Click the sub-menu items to execute the following:
+1. File: Exit the program
+2. Theme: Toggle between light and dark themes
+    <figure>
+        <img src="images/light_dark_theme.png"
+             alt="Light and dark themes"
+             style="margin-top:10px; max-width: 90%">
+        <figcaption>Fig 3: Light and dark theme</figcaption>
+   </figure>
+3. Help: Access our user guide
+
+**Command Box**: Type in your text commands. <br>
+**Result Display**: View messages from CCACommander regarding your commands. <br>
+**Member List**: View the members stored in CCACommander. <br>
+**Event List**: View the events stored in CCACommander. <br>
+**Storage Location**: Locate where your CCACommander data is stored in your computer.
+
+## Command History
+You can quickly recall previously entered commands for convenience as CCACommander stores almost all (see the info card below to see what commands are stored) commands entered by the user.
+
+Upon selecting the command box, you can use the <kbd>↑</kbd> to <kbd>↓</kbd> key to navigate through the commands entered.
+
+Example:
+1. You have just marked attendance for the first member in the member list using the `editEnrolment m/1 e/1 r/Present` command.
+2. You can then use <kbd>↑</kbd> to get `editEnrolment m/1 e/1 r/Present`
+3. You can edit the member index to get `editEnrolment m/2 e/1 r/Present` to mark the second member as present.
+
+<div markdown="block" class="alert alert-info">:information_source: CCACommander will not store 2 of the same commands if they were entered twice in a row. Likewise, commands containing exclusively of blank spaces will not be stored as well.
+
+Upon entering the <kbd>⌫ Backspace</kbd> or the <kbd>↵ Enter</kbd> key, users will have to re-navigate from the most recent command as it will be treated as an edit or entry of command.
+</div>
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+> [Back to top](#top)
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -43,102 +161,149 @@ CCACommander Ultra Promax Xtra 9000PLUS is the one-stop app for CCA Heads to man
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `createMember n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-
-* Refer to the [List of acceptable values](#list-of-acceptable-values) below for details of each parameter.
+  E.g. in `createMember n/NAME`, `NAME` is a parameter which can be used as `createMember n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  E.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  E.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any given order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  E.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+
+* Some parameters of certain commands have constraints on the acceptable inputs. <br>
+  You can refer to the [List of Acceptable Values](#list-of-acceptable-values) section below for more details.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  E.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Clear all Members and Events: `clear`
-Clears all Member and Event entries from CCACommander.
+<hr class="feature-class-separator">
 
-Format: `clear`
+> [Back to top](#top)
 
-### Create a Member: `createMember`
+<div style="page-break-after: always;"></div>
+
+### Member Commands
+The vitality of a CCA lies in its members. CCACommander allows you to manage your members with the commands below:
+
+#### Create a Member: `createMember`
 Creates a new member with accompanying personal details (name, gender, phone number, email address, home address, tag).
 
 Format: `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 Examples:
-* `createMember n/CHU WEI RONG g/Male p/98765432 e/chuweirongrocks@gmail.com a/19 Kent Ridge Crescent, Singapore 119278 t/Leader` creates a member `CHU WEI RONG` in CCACommander.
+* `createMember n/Lim Jun Jie g/Male p/83498018 e/limjunjie@gmail.com a/19 Kent Ridge Crescent, Singapore 119278 t/publicity` creates a member **named** "Lim Jun Jie" with **gender** "Male", **phone number** of "83498018", **email** of "limjunjie@gmail.com", home **address** of "19 Kent Ridge Crescent, Singapore 119278" and a "publicity" **tag**:
+
+<figure>
+    <img src="images/createMemberPostCommand.png"
+         alt="createMember Post Command">
+    <figcaption>Fig 4: After executing the <code>createMember</code> command</figcaption>
+</figure>
 
 <div markdown="block" class="alert alert-info">:information_source: CCACommander will automatically capitalise the members' names for you, meaning an input of "john doe" will become "John Doe" automatically! 
 </div>
 
-### Delete a Member : `deleteMember`
+<hr class="command-separator">
+
+<div style="page-break-after: always;"></div>
+
+#### Edit a Member: `editMember`
+Edits the member at the specified index with the specified fields.
+
+Format: `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+
+* `MEMBER_INDEX` refers to the index number shown in the **currently displayed** member list.
+* At least one field to edit must be provided.
+
+Examples:
+* `editMember 1 p/91234567 e/johndoe@example.com` edits the member at **index** 1, changing their **phone number** to "91234567" and **email** to "johndoe@example.com".
+
+<hr class="command-separator">
+
+#### Delete a Member: `deleteMember`
 
 Deletes the member at the specified index.
 
 Format: `deleteMember MEMBER_INDEX`
 
 * Deletes the member at the specified `MEMBER_INDEX`.
-* The index refers to the index number shown in the **currently displayed** member list.
+* `MEMBER_INDEX` refers to the index number shown in the **currently displayed** member list.
 
 Examples:
-* `deleteMember 1` deletes the 1st member in the member list.
-* `deleteMember 10` deletes the 10th member in the member list.
+* `deleteMember 1` deletes the member at **index** 1 in the member list.
+* `deleteMember 10` deletes the member at **index** 10 in the member list.
 
-### Edit a Member: `editMember`
-Edits the member at the specified index with the specified fields.
+<div style="page-break-after: always;"></div>
 
-Format: `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+### Event Commands
 
-* The index refers to the index number shown in the **currently displayed** member list.
-* At least one field to edit must be provided.
+As a CCA head, keeping track of event details is a major responsibility. CCACommander allows you to do so with the event-related commands below:
 
-Examples:
-* `editMember 1 a/RH t/Musician` edits the address and the tag fields of the 1st member in the member list.
-
-### Create an Event : `createEvent`
+#### Create an Event: `createEvent`
 
 Creates a new event with accompanying details (name, location, date, tag).
 
 Format: `createEvent n/EVENT_NAME l/LOCATION d/DATE [t/TAG]...`
 
 Examples:
-* `createEvent n/Party l/Raffles Hall d/2023-09-16` creates an event `Party` in CCACommander.
+* `createEvent n/Exco Planning l/Planning Room d/2023-12-10 t/Sem1` creates an event **named** "Party" held at the **location** "Raffles Hall" on the
+  **date** 2023-09-16, with **tag** "Sem1".
 
-### Delete an Event: `deleteEvent`
+<figure>
+    <img src="images/CreateEventPostCommand.png"
+         alt="createEvent Post Command">
+    <figcaption>Fig 5: After executing the <code>createEvent</code> command</figcaption>
+</figure>
+
+<hr class="command-separator">
+
+<div style="page-break-after: always;"></div>
+#### Edit an Event: `editEvent`
+
+Edits the event at the specified index with the specified attributes.
+
+Format: `editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]...`
+
+* `EVENT_INDEX` refers to the index number shown in the **currently displayed** event list.
+* At least one field to edit must be provided.
+
+Examples:
+* `editEvent 1 l/MBS d/2023-10-20` edits the event at **index** 1, changing the **location** to "MBS" and the **date** to "2023-10-20"
+* `editEvent 3 l/UCC Theater` edits the event at **index** 3, changing the **location** to "UCC Theater".
+
+<hr class="command-separator">
+
+#### Delete an Event: `deleteEvent`
 
 Deletes the event at the specified index.
 
 Format: `deleteEvent EVENT_INDEX`
 
 * Deletes the event at the specified `EVENT_INDEX`.
-* The index refers to the index number shown in the **currently displayed** event list.
+* `EVENT_INDEX` refers to the index number shown in the **currently displayed** event list.
 
 Examples:
-* `deleteEvent 1` deletes the 1st event in the event list.
-* `deleteEvent 10` deletes the 10th event in the event list.
+* `deleteEvent 1` deletes the event at **index** 1 in the event list.
+* `deleteEvent 10` deletes the event at **index** 10 in the event list.
 
-### Edits an Event : `editEvent`
+<div markdown="block" class="alert alert-info">:information_source: The `EVENT_INDEX` parameter refers to the index number shown in the **currently displayed** event list.
+</div>
 
-Edits the event at the specified index with the specified attributes.
+<hr class="feature-class-separator">
 
-Format: `editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]...`
+> [Back to top](#top)
 
-* The index refers to the index number shown in the **currently displayed** event list.
-* At least one field to edit must be provided.
+<div style="page-break-after: always;"></div>
 
-Examples:
-* `editEvent 5 n/Halloween Surprise Party l/UTR d/2023-10-31 t/sem1` edits the 5th event in the event list to change the name to `Halloween
-Surprise Party`, the location to `UTR`, the date to `2023-10-31` and the tag to `sem1`.
-* `editEvent 3 l/UCC Theater` edits the 3rd event in the event list to change the location to `UCC Theater`.
+### Enrolment Commands
 
-### Enrol a Member to an Event: `enrol`
+Enrolments are a way for you to manage your members’ involvements in your events. The enrolment commands below are the bread-and-butter for your participation tracking needs:
+
+#### Enrol a Member to an Event: `enrol`
 
 Enrols a member to an event.
 
@@ -147,99 +312,154 @@ Format: `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
 * Enrols the member at the specified `MEMBER_INDEX` to the event at the specified `EVENT_INDEX` with `NUMBER_OF_HOURS` specifying the number of hours that the member contributed and `REMARK` stating extra remarks about the member and event.
 
 Examples:
-* `enrol m/1 e/5 h/3 r/did planning` enrols the 1st member in the member list to the 5th event in the event list, where the member had 3 hours of contributions to that event and has a remark stating that the member "did planning".
-* `enrol m/5 e/1` enrols the 5th member in the member list to the 1st event in the event list.
+* `enrol m/1 e/1 h/2 r/Role: Photographer` enrols member at **member index** 1 in the member list to the event at **event index** 5 in the event list, where the member had 3 **hours** of contributions to that event and has a **remark** stating that the member "did planning".
+* `enrol m/5 e/1` enrols the member at **member index** 5 in the member list to the event at **event index** 1 in the event list.
 
-### Unenrol a Member from an Event: `unenrol`
+<hr class="command-separator">
 
+#### Edit an Enrolment: `editEnrolment`
+* Edits the specified `MEMBER_INDEX`'s enrolment of the event at the specified `EVENT_INDEX` with `NUMBER_OF_HOURS` specifying the number of hours that the member contributed and `REMARK` stating extra remarks about the member and event.
+
+<div markdown="block" class="alert alert-info">
+:information_source: Remember to provide at least one field to be edited!
+</div>
+
+Examples:
+* `editEnroment m/1 e/2 h/5 r/Role: Exco` edits the enrolment of the member at **member index** 1 to the event at **event index** 2, changing the number of **hours** to 5 and the **remark** to "Role: Exco".
+
+<hr class="command-separator">
+
+<div style="page-break-after: always;"></div>
+
+#### Unenrol a Member from an Event: `unenrol`
 Unenrol a member from an event.
 
 Format: `unenrol m/MEMBER_INDEX e/EVENT_INDEX`
 
 * Unenrol the member at the specified `MEMBER_INDEX` from the event at the specified `EVENT_INDEX`.
-* The member at `MEMBER_INDEX` must be a part of the event at `EVENT_INDEX`.
+* The member at `MEMBER_INDEX` must be enrolled to the event at `EVENT_INDEX`.
 
 Examples:
-* `unenrol m/1 e/5` unenrols the 1st member in the member list from the 5th event in the event list.
-* `unenrol m/5 e/1` unenrols the 5th member in the member list from the 1st event in the event list.
+* `unenrol m/1 e/5` unenrols the member at **member index** 1 in the member list from the event at **event index** 5 in the event list.
+* `unenrol m/5 e/1` unenrols the member at **member index** 5 in the member list from the event at **event index** 1 in the event list.
 
-### Edit an enrolment: `editEnrolment`
-Edits the enrolment details of a specified member at a specified event with the specified attributes.
+<div markdown="block" class="alert alert-info">:information_source: The `MEMBER_INDEX`/`EVENT_INDEX` parameter refers to the index number shown in the **currently displayed** member/event list.
+</div>
 
-Format: `editEnrolment m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
+<hr class="feature-class-separator">
 
-* Edits the specified `MEMBER_INDEX`'s enrolment of the event at the specified `EVENT_INDEX` with `NUMBER_OF_HOURS` specifying the number of hours that the member contributed and `REMARK` stating extra remarks about the member and event.
+> [Back to top](#top)
 
-Examples:
-* `editEnrolment m/1 e/1 h/0 r/Absent due to Covid` edits the enrolment of the 1st member in the member list for the 1st event of the event list to be `0` hours and have a remark `Absent due to Covid`.
+<div style="page-break-after: always;"></div>
 
-### List all Members and all Events : `list`
+### View Commands
+In CCACommander, you can quickly change the view to fit your current use case, be it to check for the enrolment of an event,
+searching for a member and more!
 
-List all members and all events in the CCA in two separate columns.
-
-Format: `list`
-
-A GUI similar to the one below will be shown after entering the command.
-![list](images/list.png)
-
-### View Events of Member : `viewMember`
+#### View Events of Member: `viewMember`
 
 Lists all the events of a specified member index.
 
 Format: `viewMember MEMBER_INDEX`
 
 * Views the events of the member at the specified `MEMBER_INDEX`.
-* The index refers to the index number shown in the **currently displayed** member list.
+* `MEMBER_INDEX` refers to the index number shown in the **currently displayed** member list.
 
 Examples:
-* `viewMember 1` displays events of the 1st member in the member list.
-* `viewMember 10` displays events of the 10th member in the member list.
+* `viewMember 3` displays events of the 3rd member in the member list.
 
-A GUI similar to the one below will be shown after entering the command if the member is enrolled in events.
-The hours and remarks for each event is reflected here.
-![viewMember](images/viewMember.png)
+<figure>
+    <img src="images/viewMemberPreCommand.png"
+         alt="viewMember Pre Command">
+    <figcaption>Fig 6: Before executing the <code>viewMember</code> command</figcaption>
+</figure>
+<br>
+<figure>
+    <img src="images/viewMemberPostCommand.png"
+         alt="viewMember Post Command">
+    <figcaption>Fig 7: After executing the <code>viewMember</code> command</figcaption>
+</figure>
 
-### View Members of Event : `viewEvent`
+<hr class="command-separator">
+
+#### View Members of Event: `viewEvent`
 
 Lists all the members of a specified event index.
 
 Format: `viewEvent EVENT_INDEX`
 * Views the members of the event at the specified `EVENT_INDEX`.
-* The index refers to the index number shown in the **currently displayed** event list.
+* `EVENT_INDEX` refers to the index number shown in the **currently displayed** event list.
 
 Examples:
 * `viewEvent 1` displays members of the 1st event in the event list.
-* `viewEvent 10` displays members of the 10th event in the event list.
 
-A GUI similar to the one below will be shown after entering the command if the event has members enrolled in it.
-The hours and remarks for each member is reflected here.
-![viewEvent](images/viewEvent.png)
+<figure>
+    <img src="images/viewEventPreCommand.png"
+         alt="viewEvent Pre Command">
+    <figcaption>Fig 8: Before executing the <code>viewEvent</code> command</figcaption>
+</figure>
+<br>
+<figure>
+    <img src="images/viewEventPostCommand.png"
+         alt="viewEvent Post Command">
+    <figcaption>Fig 9: After executing the <code>viewEvent</code> command</figcaption>
+</figure>
 
-### Find Member in member list : `findMember`
+<hr class="command-separator">
 
-Finds and lists member(s) whose name(s) contain the provided `KEYWORD`.
+#### Find Member in member list: `findMember`
 
-Format: `findMember KEYWORD [MORE_KEYWORDS]`
-* Finds and lists member(s) whose name(s) contain the specified `KEYWORD`.
-* More than 1 `KEYWORD` can be provided to find more members.
+Finds and lists member(s) whose name(s) contain the provided `MEMBER_NAME`.
+
+Format: `findMember MEMBER_NAME [MORE_NAMES]...`
+* Finds and lists member(s) whose name(s) contain the specified `MEMBER_NAME`.
+* More than 1 `MEMBER_NAME` can be provided to find more members.
 
 Examples:
 * `findMember alice` displays the member(s) whose name(s) contain 'alice'
 * `findMember alice bob charlie` displays the member(s) whose name(s) contain 'alice', 'bob' and/or 'charlie'.
 
-### Find Event in event list : `findEvent`
+<div markdown="block" class="alert alert-info">:information_source:
+The <code>findMember</code> command requires the names to be typed in full, meaning "Nich" will not suffice for finding "Nicholas". 
+To make it convenient for you, the names do not have to be capitalised! 
+</div>
 
-Finds and lists event(s) which name(s) contain the provided `KEYWORD`.
+<hr class="command-separator">
 
-Format: `findEvent KEYWORD [MORE_KEYWORDS]`
-* Finds and lists event(s) which name(s) contain the specified `KEYWORD`.
-* More than 1 `KEYWORD` can be provided to find more events.
+#### Find Event in event list: `findEvent`
+
+Finds and lists event(s) which name(s) contain the provided `EVENT_NAME`.
+
+Format: `findEvent EVENT_NAME [MORE_NAMES]...`
+* Finds and lists event(s) which name(s) contain the specified `EVENT_NAME`.
+* More than 1 `EVENT_NAME` can be provided to find more events.
 
 Examples:
 * `findEvent party` displays the event(s) which name(s) contain 'party'
-* `findEvent party marathon gaming` displays the event(s) which name(s) contain 'party', 'marathon' and/or 'gaming'.
+* `findEvent party marathon gaming` displays the event(s) which name(s) contain "party", "marathon" and/or "gaming".
 
-### Undoing a command: `undo`
+<div markdown="block" class="alert alert-info">:information_source:
+The <code>findEvent</code> command requires the names to be typed in full, meaning "Par" will not suffice for finding "Party". 
+To make it convenient for you, the names do not have to be capitalised! 
+</div>
+
+<hr class="command-separator">
+
+#### List all Members and all Events: `list`
+List all members and all events in the CCA in two separate columns.
+
+Format: `list`
+
+A GUI similar to the one below will be shown after entering the command.
+
+<hr class="feature-class-separator">
+
+<div style="page-break-after: always;"></div>
+
+### Utility Commands
+CCACommander provides you with powerful utility commands to make your admin tasks even more of a breeze than it was.
+
+#### Undoing a command: `undo`
 
 Undoes the previous command that the user has entered, which has changed the data within CCACommander.
 
@@ -257,45 +477,56 @@ List of commands that can be undone:
 * `unenrol`
 * `editEnrolment`
 
-### Redoing a command: `redo`
+<hr class="command-separator">
+
+#### Redoing a command: `redo`
 
 Redoes a command that the user has undone previously.
 
 Format: `redo`
 
-### Help: `help`
+<hr class="command-separator">
+
+#### Clear all Members and Events: `clear`
+Clears all Member and Event entries from CCACommander.
+
+Format: `clear`
+
+<div markdown="block" class="alert alert-primary">:bulb: Accidentally cleared your list? 
+Fret not as you can use the `undo` command to recover your data! 
+
+</div>
+
+<hr class="command-separator">
+
+#### Help: `help`
 
 Displays a pop-out window that shows a link to this User Guide.
 
 Format: `help`
 
-### Exit: `exit`
+<figure>
+    <img src="images/helpWindow.png"
+         alt="Help Window">
+    <figcaption>Fig 10: A help pop-up window will appear upon entering the <code>help</code> command</figcaption>
+</figure>
+
+<hr class="command-separator">
+
+#### Exit: `exit`
 
 Closes CCACommander and its display window.
 
 Format: `exit`
 
-### Recall previous commands
 
-CCA Leaders can quickly recall previously entered commands for convenience. Example use cases include marking attendance for a group of members, editing slightly wrong details and more.
-
-CCACommander stores almost all (see the info card below to see what commands are stored) commands entered by the user. Users can use the <kbd>↑</kbd> to <kbd>↓</kbd> key to navigate through the commands entered upon selecting the command box.
-
-Example:
-1. A CCA Leader has just marked attendance for the first member in the member list using the `editEnrolment m/1 e/1 r/Present` command.
-2. The CCA Leader can then use <kbd>↑</kbd> to get `editEnrolment m/1 e/1 r/Present` 
-3. The CCA Leader can edit the member index to get `editEnrolment m/2 e/1 r/Present` to mark the second member as present.
-
-<div markdown="block" class="alert alert-info">:information_source: CCACommander will not store 2 of the same commands if they were entered twice in a row. Likewise, "commands" containing exclusively of blank spaces will not be stored as well. 
-
-Upon entering the <kbd>⌫ Backspace</kbd> or the <kbd>↵ Enter</kbd> key, users will have to re-navigate from the most recent command as it was treated as an edit or entry of command.
+<div markdown="block" class="alert alert-info">:information_source: The <code>exit</code> command exists for your convenience. 
+It performs the same task as the cross in the top bar and the Exit button in the File sub-menu item.
 </div>
 
-### Saving the data
+<hr class="command-separator">
 
-CCACommander data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
+#### Saving the data
 
 CCACommander data are saved automatically as a JSON file `[JAR file location]/data/ccacommander.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -303,46 +534,78 @@ CCACommander data are saved automatically as a JSON file `[JAR file location]/da
 If your changes to the data file makes its format invalid, CCACommander will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
---------------------------------------------------------------------------------------------------------------------
+<hr class="feature-class-separator">
+
+> [Back to top](#top)
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CCACommander home folder.
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CCACommander folder.
+
+**Q**: Do I need Wi-Fi connection to use CCACommander?<br>
+**A**: No, you can use CCACommander offline.
+
+**Q**: How much storage space do I need for CCACommander?<br>
+**A**: CCACommander is so lightweight that you only need 30 MB on your computer.
+
+**Q**: What happens if my laptop battery dies suddenly?<br>
+**A**: Rest assured, your data remains securely stored on your laptop.
+Once your laptop is recharged, you can regain access to all your stored information.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+2. **Edit** commands go back to the main view no matter what view you were in.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Glossary
+This glossary provides definitions for the special terms used in this user guide.
+
+**CCA**: Co-curricular activity.
+
+**Command**: The text typed in by the user as a CCA Head for CCACommander.
+
+**Index**: The number beside the corresponding entry in a list.
+
+**Tag**: A word or phrase that labels a member or an event.
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+## Command Summary
 
 Action | Format, Examples
 --------|------------------
-**Clear all members and events** | `clear`
-**Create a member** | `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` <br> e.g. `createMember n/CHU WEI RONG g/Male p/98765432 e/chuweirongrocks@gmail.com a/19 Kent Ridge Crescent, Singapore 119278 t/Leader`
-**Delete a member** | `deleteMember MEMBER_INDEX` <br> e.g.`deleteMember 1`
-**Edit a member** | `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` <br> e.g.`editMember 1 a/One North`
-**Create an event** | `createEvent n/EVENT_NAME [l/LOCATION] [d/DATE] [t/TAG]...` <br> e.g.`createEvent n/Party l/Raffles Hall d/2023-09-16 t/Fun`
-**Delete an event** | `deleteEvent EVENT_INDEX` <br> e.g.`deleteEvent 1`
-**Edit an event** | `editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]...` <br> e.g. `editEvent 5 n/Halloween Surprise Party l/UTR d/2023-10-31 t/sem1`
-**Add member to an event** | `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g.`enrol m/1 e/5 h/3 r/did planning`
-**Delete member from an event** | `unenrol m/MEMBER_INDEX e/EVENT_INDEX` <br> e.g.`unenrol m/1 e/5`
-**Edit an enrolment** | `editEnrolment m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g. `editEnrolment m/1 e/1 h/0 r/Absent due to Covid`
-**List all members and all events** | `list`
-**View members of event** | `viewEvent EVENT_INDEX` <br> e.g.`viewEvent 1`
-**View events of member** | `viewMember MEMBER_INDEX` <br> e.g.`viewMember 1`
-**Find member in list** | `findMember KEYWORD [MORE_KEYWORDS]` <br> e.g.`findMember alice`
-**Find event in list** | `findEvent KEYWORD [MORE_KEYWORDS]` <br> e.g.`findEvent party`
-**Redo** | `redo`
-**Undo** | `undo`
-**Help** | `help`
-**Exit** | `exit`
+[**Create a Member**](#create-a-member-createmember) | `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` <br> e.g. `createMember n/Lim Jun Jie g/Male p/83498018 e/limjunjie@gmail.com a/19 Kent Ridge Crescent, Singapore 119278 t/publicity`
+[**Edit a Member**](#edit-a-member-editmember) | `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` <br> e.g.`editMember 1 p/91234567 e/johndoe@example.com`
+[**Delete a Member**](#delete-a-member-deletemember) | `deleteMember MEMBER_INDEX` <br> e.g.`deleteMember 1`
+[**Create an Event**](#create-an-event-createevent) | `createEvent n/EVENT_NAME [l/LOCATION] [d/DATE] [t/TAG]...` <br> e.g.`createEvent n/Party l/Raffles Hall d/2023-09-16 t/Dinner t/Sem1`
+[**Edit an Event**](#edit-an-event-editevent) | `editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]...` <br> e.g. `editEvent 1 l/MBS d/2023-10-20`
+[**Delete an Event**](#delete-an-event-deleteevent) | `deleteEvent EVENT_INDEX` <br> e.g.`deleteEvent 1`
+[**Enrol a Member to an Event**](#enrol-a-member-to-an-event-enrol) | `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g.`enrol m/1 e/1 h/2 r/Role: Photographer`
+[**Edit an Enrolment**](#edit-an-enrolment-editenrolment) | `editEnrolment m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g. `editEnrolment m/1 e/2 h/5 r/Role: Exco`
+[**Unenrol Member from an Event**](#unenrol-a-member-from-an-event-unenrol) | `unenrol m/MEMBER_INDEX e/EVENT_INDEX` <br> e.g.`unenrol m/1 e/1`
+[**View Events of Member**](#view-events-of-member-viewmember) | `viewMember MEMBER_INDEX` <br> e.g.`viewMember 3`
+[**View Members of Event**](#view-members-of-event-viewevent) | `viewEvent EVENT_INDEX` <br> e.g.`viewEvent 1`
+[**Find Member in member list**](#find-member-in-member-list-findmember) | `findMember MEMBER_NAME [MORE_NAMES]...` <br> e.g.`findMember anthony nicholas`
+[**Find Event in event list**](#find-event-in-event-list-findevent) | `findEvent EVENT_NAME [MORE_NAMES]...` <br> e.g.`findEvent party`
+[**List all Members and all Events**](#list-all-members-and-all-events-list) | `list`
+[**Undo**](#undoing-a-command-undo) | `undo`
+[**Redo**](#redoing-a-command-redo) | `redo`
+[**Clear all Members and Events**](#clear-all-members-and-events-clear) | `clear`
+[**Help**](#help-help) | `help`
+[**Exit**](#exit-exit) | `exit`
 
-## List of acceptable values
+> [Back to top](#top)
+
+<div style="page-break-after: always;"></div>
+
+## List of Acceptable Values
 
 <table class="tg">
 <thead>
@@ -420,8 +683,10 @@ Action | Format, Examples
   </tr>
   <tr>
     <td class="tg-0pky command"><code>findMember</code> / <code>findEvent</code></td>
-    <td class="tg-0pky">KEYWORD</td>
+    <td class="tg-0pky">MEMBER_NAME / EVENT_NAME / MORE_NAMES</td>
     <td class="tg-0pky">Any non-blank values</td>
   </tr>
 </tbody>
 </table>
+
+> [Back to top](#top)

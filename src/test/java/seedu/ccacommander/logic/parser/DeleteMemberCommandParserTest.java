@@ -18,8 +18,39 @@ public class DeleteMemberCommandParserTest {
     }
 
     @Test
+    public void parse_emptyInput_throwsParseException() {
+        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteMemberCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_whitespaceInput_throwsParseException() {
+        assertParseFailure(parser, "   ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteMemberCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeleteMemberCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_zeroInput_throwsParseException() {
+        assertParseFailure(parser, "0", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteMemberCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_negativeInput_throwsParseException() {
+        assertParseFailure(parser, "-1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteMemberCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_multipleValidInputs_throwsParseException() {
+        assertParseFailure(parser, "1 2 3", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteMemberCommand.MESSAGE_USAGE));
+    }
+
 }
