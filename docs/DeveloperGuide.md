@@ -14,7 +14,7 @@ pageNav: 3
 ## **1. Introduction**
 
 ### **1.1. Product Overview**
-ProjectPro is a contact organisation application designed for university students.
+ProjectPro is a contacts organisation application designed for university students.
 
 University students often spend a lot of time coordinating project meetup sessions and finding project information, resulting in large amounts of time wasted.
 
@@ -120,10 +120,10 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
-4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. When `Logic` is called upon to execute a command, it calls the `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`), being executed by the `LogicManager`.
+3. The command calls upon `Model` to execute the action (e.g. to delete a person).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back to `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -196,7 +196,7 @@ The result of it is then passed to `ParserUtil#parse` methods to parse each attr
 Step.4 `AddCommand` then calls `Model#addPerson()` which then calls `AddressBook#addPerson()`. The latter method will add person inside the `uniquePersonList` in `addressBook`. `AddCommand` also calls `Model#addGroup` which then calls `AddressBook#addGroup` to add the group inside `grouplist` if the group does not exist.
 Lastly, `AddCommand` adds the person inside the group
 
-**Note** No duplication is allowed in addressbook for most of Person’s attribute (name, email and phone number.)
+**Note** No duplication is allowed in addressbook for name, email and phone number field.
 
 The following sequence diagram describes the process of `add` command:
 <puml src="diagrams/AddCommandSequenceDiagram.puml" alt="AddCommandSeqDiagram" />
@@ -206,14 +206,15 @@ The following sequence diagram describes the process of `add` command:
 **Aspect: Handling group attribute in user input**
 
 * **Alternative 1 (Current Choice):** Only allow user to add one group for each `add` Command
-    * Pros: Conveniently adds a person into a single group while creating a new contact at the same time, relatively easier to implement parser.
-    * Cons: User input may get relatively longer.
+    * Pros: User input length is reduced, lowering the chance of invalid input on the user's side.
+    * Cons: User will have to type more inputs to add more groups.
+  
 * **Alternative 2:** Allow user to add as many groups as required for each `add` Command
-    * Pros: Conveniently adds a person into multiple group while creating a new contact at the same time.
-    * Cons: User input can get potentially very long, increasing the chance of invalid input, relatively harder to implement parser.
+    * Pros: Reduces number of inputs needed to add multiple groups to a contact.
+    * Cons: User input can get potentially very long, increasing the chance of invalid input.
 
 --------------------------------------------------------------------------------------------------------------------
-### Adding Time a Person
+### Adding Free Time to a Person
 
 #### Implementation
 
@@ -221,7 +222,7 @@ The `addtime` feature is facilitated by a number of classes such as `Person`, `M
 
 Step 1. User launches the application.
 
-Step 2. The user executes `“addtime n/Alex Yeoh t/mon 1200 - mon 1400 t/tue 1000 - wed 1600”` command to add time slots to the person, Alex Yeoh. `LogicManager#execute` is called which then calls `AddressBookParser#parseCommand` to decide on the type of command. `AddressBookParser` then calls `AddTimeCommandParser`,
+Step 2. The user executes `“addtime n/Alex Yeoh t/mon 1200 - mon 1400 t/tue 1000 - wed 1600”` command to add time slots to the person, Alex Yeoh. 
 
 Step 3, The `AddTimeCommandParser` is called to read the user input. `AddTimeCommandParser` calls `ArgumentTokenizer#tokenize` to check the prefixes of the user input. `AddTimeCommandParser` then calls `ArgumentMultimap#getValue()` to get inputs after each unique single prefix and `ArgumentMultimap#getAllValues()` to get inputs from prefix that are used more than once.
 The result of it is then passed to `ParserUtil#parse()` methods to parse each attributes such as `Name`. `AddTimeCommandParser` then calls `AddTimeCommand`.
@@ -409,7 +410,7 @@ The List mechanism is facilitated by the `Model` class.
 
 The operation it utilises is exposed in the `Model` interface as `Model#updateFilteredPersonList(Predicate<Person> predicate)`.
 
-Given below is an example usage scenario and how the list mechanism behaves at each step.
+Given below is an example usage scenario and how the laist mechanism behaves at each step.
 
 **Step 1:** User executes `list` command to view all contacts. After parsing, a new `ListCommand` object will be returned.
 
