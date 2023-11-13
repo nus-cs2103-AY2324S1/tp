@@ -197,6 +197,8 @@ Format: `add_person n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [
 | `REMARK`       | Use any characters including whitespaces.                                                             | `Owes me $2.`                    |
 | `GROUP`        | Use `a-z`, `A-Z`, `0-9` only and **must not** contain any whitespaces.                                | `CS2103T`                        |
 
+<div style="page-break-after: always;"></div>
+
 **Below are some examples on how to use the `add_person` command:**
 
 - `add_person n/Jonathan`: Adds a person with name `Jonathan`.
@@ -243,6 +245,7 @@ Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BI
 | `REMARK`      | Use any characters including whitespaces.                                                                        | `Owes me $2.`                    |
 | `GROUP`       | Use `a-z`, `A-Z`, `0-9` only and must not contain any whitespaces.                                               | `CS2103T`                        |
 
+<div style="page-break-after: always;"></div>
 
 **Below are some examples on how to use the `edit_person` command:**
 
@@ -262,6 +265,8 @@ Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BI
 * There will not be an error shown in the case that you edit a person's values to be the same as it currently is. i.e. if the first person's name on the person list is Alex, `edit_person 1 n/Alex` is a valid command and will not show an error message.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-warning">
 
@@ -347,6 +352,8 @@ Format: `find_person KEYWORD [MORE_KEYWORDS]`
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="block" class="alert alert-warning">
 
 **:exclamation: Disclaimer when using the `find_person` command:**<br>
@@ -403,15 +410,13 @@ Format: `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAM
 | `PERSON_NAME`               | Multiple persons can be assigned to an event but only existing persons name can be added. | `John Doe`        |
 | `GROUP`                     | Multiple groups can be assigned to an event but only existing groups can be added.        | `CS2103T`         |
 
-
+<div style="page-break-after: always;"></div>
 
 **Below are some examples on how to use `add_event` command:**
 
 * `add_event m/FumbleLog presentation d/2023-10-30`: Adds an event with name `FumbleLog presentation` and with date `2023-10-30`.
 * `add_event m/FumbleLog meeting d/2023-10-30 g/Team2`: Adds an event with name `FumbleLog meeting`, with date `2023-10-30`, and assigns contact in group `Team2` to the event.
 * `add_event m/CS2101 OP2 d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`: Adds an event with name `CS2101 OP2`, with date `2023-10-05`, with start time `1500`, with end time `1700`, assigns contact with name `Ken` and groups `CS2103T`, `CS2101` to the event.
-
-
 
 <div markdown="block" class="alert alert-info">
 
@@ -457,7 +462,7 @@ Format: `edit_event EVENT_INDEX [m/EVENT_NAME] [d/DATE] [s/START_TIME] [e/END_TI
 | `PERSON_NAME`               | Multiple persons can be assigned to an event but only existing persons name can be added. | `John Doe`        |
 | `GROUP`                     | Multiple groups can be assigned to an event but only existing groups can be added.        | `CS2103T`         |
 
-
+<div style="page-break-after: always;"></div>
 
 **Below are some examples on how to use `edit_event` command:**
 
@@ -480,6 +485,8 @@ Format: `edit_event EVENT_INDEX [m/EVENT_NAME] [d/DATE] [s/START_TIME] [e/END_TI
 This is illustrated as follows:
 ![Person appearing multiple times](images/DuplicatePersonInDifferentGroups.png)
 </div>
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-warning">
 
@@ -565,6 +572,8 @@ Format: `find_event KEYWORD [MORE_KEYWORDS]`
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 **This should be the expected output when the command succeeds:**<br>
 Input: `find_event meeting family`
 
@@ -625,6 +634,7 @@ Format: `remind [NUM_OF_DAYS]`
 
 </div>
 
+<div style="page-break-after: always;"></div>
 
 **Expected output when the command succeeds:**<br>
 Input: `remind`
@@ -664,6 +674,7 @@ Format: `find_all KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 </div>
+<div style="page-break-after: always;"></div>
 
 **Expected output when the command succeeds:**<br>
 Input: `find_all friends`
@@ -804,6 +815,7 @@ The domain name must:
 | **Find Person**   | `find_person KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_person James Jake`                                                                                                                                            |
 | **List Persons**  | `list_persons`                                                                                                                                                                                                      |
 
+<div style="page-break-after: always;"></div>
 
 ### Commands for Events
 
