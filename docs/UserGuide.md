@@ -35,7 +35,7 @@ Are you a School of Computing (SoC) Computing Club event planner juggling numero
 
 Managing everything efficiently just got easier with CoordiMate!
 
-CoordiMate is your go-to **desktop app** designed specifically for **SoC Computing Club event planners** to help you **manage your contacts and tasks** for your events, so that you can focus on the event itself.
+CoordiMate is your go-to **desktop app** designed specifically for **SoC Computing Club event planners**. It helps you **manage your contacts and tasks** for your events, so that you can focus on the event itself.
 
 And here's the best part – while it's perfect for members of SoC Computing Club, **event planners of all kinds** can benefit from CoordiMate's powerful features too!
 
@@ -131,12 +131,20 @@ Throughout this guide, you will see different text styles that are used to highl
 
 3. Copy `CoordiMate.jar` to the folder you want to use as the home folder for CoordiMate. This folder will be used by CoordiMate to store its data.
 
-4. Open a command terminal, `cd` into the folder you put `CoordiMate.jar` in, and use the `java -jar CoordiMate.jar` command to start CoordiMate.<br>
+4. Open a command terminal. 
 
-   A GUI similar to the below screenshot should appear in a few seconds. Note how the app contains some sample data.<br><br>
-   ![Ui](images/Ui.png)
+5. Change the directory to the folder where you have placed `CoordiMate.jar`. If it is in your `Downloads` folder, type the command below and press `Enter`:
+    ```
+    cd Downloads
+    ```
+6. To launch CoordiMate, type the following command and press `Enter`:
+    ```
+    java -jar CoordiMate.jar
+    ```
+    After a few seconds, a GUI should appear, showing some sample data, as in the screenshot below. <br><br>
+    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br><br>
+7. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br><br>
 
    Some example commands you can try:
 
@@ -156,7 +164,7 @@ Throughout this guide, you will see different text styles that are used to highl
 
    - `exit` : Exits the app.
 
-6. Refer to the [Usage](#usage) section below for details of each command.
+8. Refer to the [Usage](#usage) section below for details of each command.
 
 ---
 
@@ -314,27 +322,28 @@ ap
 
 | Fields | Prefix | Required | Remarks |
 |--------|--------|:--------:|---------|
-| `NAME` | `n/` | <img width=30px src='assets/svg/ug/required.svg'> | Full name of the individual.|
-| `PHONE_NUMBER` | `p/` | <img width=30px src='assets/svg/ug/required.svg'> | Phone number of the individual.|
-| `EMAIL` | `e/` | <img width=30px src='assets/svg/ug/required.svg'> | Email address of the individual.|
-| `ADDRESS` | `a/` | <img width=30px src='assets/svg/ug/required.svg'> | Physical address of the individual.|
-| `TAG` | `t/` | <img width=33px src='assets/svg/ug/not_required.svg'> | Tag(s) for the individual.|
+| `NAME` | `n/` | <img width=30px src='assets/svg/ug/required.svg'> | Full name of the person. The name should only contain alphanumeric characters and spaces.|
+| `PHONE_NUMBER` | `p/` | <img width=30px src='assets/svg/ug/required.svg'> | Phone number of the person. The number should only contain numbers, and it should be at least 3 digits long.|
+| `EMAIL` | `e/` | <img width=30px src='assets/svg/ug/required.svg'> | Email of the person. The email should match this format: `<local>@<domain>.<label>`. <br>The `<local>` part should only contain alphanumberic characters and these special characters: `+_.-`. <br>The `<domain>` and `<label>` parts should contain only alphanumberic characters.|
+| `ADDRESS` | `a/` | <img width=30px src='assets/svg/ug/required.svg'> | Physical address of the person.|
+| `TAG` | `t/` | <img width=33px src='assets/svg/ug/not_required.svg'> | Tag(s) for the person. Tags should only contain alphanumeric characters.|
 {: .field-table}
 
 - A person is uniquely identified by their `NAME`. This field is case sensitive.
+- You may add multiple tags to a person by specifying the `t/` prefix multiple times.
 
 <h4>Example:</h4>
 
-- `addPerson n/Charlotte Oliveiro p/93210283 e/charlotteo@example.com a/Blk 11 Ang Mo Kio Street 74, #11-04 t/flowers`<br><br>
+- `addPerson n/Xavier p/98712309 e/xavierd@example.com a/311, Dover Ave 2, #03-25 t/Microsoft t/guestSpeaker`<br><br>
   ![addPerson success](images/output/addPerson_success.png)
 
-  *<center>CoordiMate adds a new contact with the corresponding details.</center>*
+  *<center>CoordiMate adds a new person with the corresponding details.</center>*
 
 <h4>Potential Errors:</h4>
 
  Error message | How to resolve
 ---------------|---------------
-`Invalid command format!…` | Ensure that the name, phone number, email address and address are specified.
+`Invalid command format! …` | Ensure that the name, phone number, email address and address are specified.
 `Names should only contain alphanumeric characters and spaces, and it should not be blank` | Ensure that the name specified is not blank and contain only alphanumeric characters. Whitespaces at the start and end are trimmed.
 `Phone numbers should only contain numbers, and it should be at least 3 digits long` | Ensure that the phone number specified is not blank, contain only numbers and at least 3 digits long. Whitespaces at the start and end are trimmed.
 `Addresses can take any values, and it should not be blank` | Ensure that the address specified is not blank. Whitespaces at the start and end are trimmed.
@@ -1199,10 +1208,10 @@ To reset the persons and tasks view, simply run the <code>listAll</code> command
 
 <h4>Example:</h4>
 
-- `findTag catering orientation`<br><br>
+- `findTag Catering Orientation`<br><br>
   ![findTag_success](images/output/findTag_success.png)
 
-  *<center>CoordiMate finds all persons and tasks matching any of <code>catering</code> or <code>orientation</code> tags.</center>*
+  *<center>CoordiMate finds all persons and tasks matching any of <code>Catering</code> or <code>Orientation</code> tags.</center>*
 
 <h4>Potential Error:</h4>
 
@@ -1251,10 +1260,10 @@ To reset the persons and tasks view, simply run the <code>listAll</code> command
 
 <h4>Example:</h4>
 
-- `findAllTag catering orientation`<br><br>
+- `findAllTag Catering Orientation`<br><br>
   ![findAllTag_success](images/output/findAllTag_success.png)
 
-  *<center>CoordiMate finds persons and tasks matching all of <code>catering</code> and <code>orientation</code> in their tag(s).</center>*
+  *<center>CoordiMate finds persons and tasks matching all of <code>Catering</code> and <code>Orientation</code> in their tag(s).</center>*
 
 <h4>Potential Error:</h4>
 
