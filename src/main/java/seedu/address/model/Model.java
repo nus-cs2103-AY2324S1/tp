@@ -5,14 +5,17 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.student.Student;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
+
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Appointment> PREDICATE_SHOW_ALL_APPOINTMENTS = unused -> true;
+    Predicate<Student> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -35,53 +38,77 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' wellnus storage file path.
      */
-    Path getAddressBookFilePath();
+    Path getWellNusFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' wellnus storage file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setWellNusFilePath(Path wellNusFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces WellNus data with the data in {@code wellNus}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setWellNusData(ReadOnlyWellNus wellNus);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the WellNus */
+    ReadOnlyWellNus getWellNusData();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a student with the same identity as {@code student} exists in the wellnus storage.
      */
-    boolean hasPerson(Person person);
+    boolean hasStudent(Student student);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given student.
+     * The student must exist in the wellnus storage.
      */
-    void deletePerson(Person target);
+    void deleteStudent(Student target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given student.
+     * {@code student} must not already exist in the wellnus storage.
      */
-    void addPerson(Person person);
+    void addStudent(Student student);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given student {@code target} with {@code editedStudent}.
+     * {@code target} must exist in the wellnus storage.
+     * The student identity of {@code editedStudent} must not be the same as another existing student in the
+     * wellnus storage.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setStudent(Student target, Student editedStudent);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    boolean hasAppointment(Appointment appointment);
+
+    boolean hasOverlapsWithAppointments(Appointment appointment);
+
+    boolean hasNoStudentForAppointment(Appointment appointment);
+
+    void addAppointment(Appointment appointment);
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Deletes the given appointment.
+     * The appointment must exist in the wellnus storage.
+     */
+    void deleteAppointment(Appointment target);
+
+    /** Returns an unmodifiable view of the filtered student list */
+    ObservableList<Student> getFilteredStudentList();
+
+    /** Returns an unmodifiable view of the filtered appointment list */
+    ObservableList<Appointment> getFilteredAppointmentList();
+
+    /**
+     * Updates the filter of the filtered student list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredStudentList(Predicate<Student> predicate);
+
+    /**
+     * Updates the filter of the filtered appointment list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredAppointmentList(Predicate<Appointment> predicate);
 }

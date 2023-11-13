@@ -7,8 +7,11 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.ReadOnlyWellNus;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Note;
+import seedu.address.model.student.Student;
 
 /**
  * API of the Logic component
@@ -24,19 +27,27 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the WellNus.
      *
-     * @see seedu.address.model.Model#getAddressBook()
+     * @see seedu.address.model.Model#getWellNusData()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyWellNus getWellNus();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered list of students */
+    ObservableList<Student> getFilteredStudentList();
 
+    /** Returns an unmodifiable view of the filtered list of appointments */
+    ObservableList<Appointment> getFilteredAppointmentList();
+
+    /** Return the Note of a particular student denoted by its index */
+    Note getStudentNote(int studentIndex);
+
+    /** Return the Name of a particular student denoted by its index */
+    Name getStudentName(int studentIndex);
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' wellnus storage file path.
      */
-    Path getAddressBookFilePath();
+    Path getWellNusFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

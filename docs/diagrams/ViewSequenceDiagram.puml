@@ -1,0 +1,77 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":WellNusParser" as WellNusParser LOGIC_COLOR
+participant ":ViewCommandParser" as ViewCommandParser LOGIC_COLOR
+participant "v:ViewCommand" as ViewCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box ModelManager MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant "filteredStudents:FilteredList<Student>" as FilteredStudents MODEL_COLOR
+end box
+
+[-> LogicManager : execute("view g/students")
+activate LogicManager
+
+LogicManager -> WellNusParser : parseCommand("view g/students")
+activate WellNusParser
+
+create ViewCommandParser
+WellNusParser -> ViewCommandParser
+activate ViewCommandParser
+
+ViewCommandParser --> WellNusParser
+deactivate ViewCommandParser
+
+WellNusParser -> ViewCommandParser : parse("g/students")
+activate ViewCommandParser
+
+create ViewCommand
+ViewCommandParser -> ViewCommand
+activate ViewCommand
+
+ViewCommand --> ViewCommandParser : v
+deactivate ViewCommand
+
+ViewCommandParser --> WellNusParser : v
+deactivate ViewCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ViewCommandParser -[hidden]-> WellNusParser
+destroy ViewCommandParser
+
+WellNusParser --> LogicManager : v
+deactivate WellNusParser
+
+LogicManager -> ViewCommand : execute()
+activate ViewCommand
+
+ViewCommand -> ModelManager : updateFilteredStudentList(unused -> true)
+activate ModelManager
+
+ModelManager -> FilteredStudents : setPredicate(unused -> true)
+activate FilteredStudents
+
+FilteredStudents --> ModelManager
+deactivate FilteredStudents
+
+ModelManager --> ViewCommand
+deactivate ModelManager
+
+create CommandResult
+ViewCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ViewCommand
+deactivate CommandResult
+
+ViewCommand --> LogicManager : result
+deactivate ViewCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

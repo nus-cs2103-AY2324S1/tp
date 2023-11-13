@@ -1,0 +1,24 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes schedule command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([is not unique])
+    :WellNus informs user
+    appointment is not unique;
+    :Appointment not added;
+
+elseif () then ([has clashes]))
+    :WellNus informs user appointment
+    clashes with other appointments;
+    :Appointment not added;
+else ([else])
+    :Appointment successfully added;
+endif
+stop
+@enduml

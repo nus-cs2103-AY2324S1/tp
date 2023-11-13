@@ -1,0 +1,57 @@
+{
+  "students": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "risklevel": [ "high" ],
+    "note" : " "
+  }, {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "address": "4th street",
+    "note" : " "
+  }, {
+      "name" : "Daniel Meier",
+      "phone" : "87652533",
+      "address" : "10th street",
+      "risklevel" : [ "low" ],
+      "note" : " "
+    }],
+  "appointments" : [ {
+    "name" : "Daniel Meier",
+    "date" : "2023-10-15",
+    "startTime" : "10:00",
+    "endTime" : "11:00",
+    "description" : "Third Session"
+  }, {
+    "name" : "Daniel Meier",
+    "date" : "2023-10-16",
+    "startTime" : "14:45",
+    "endTime" : "15:45",
+    "description" : "Check-up"
+  }, {
+    "name" : "Daniel Meier",
+    "date" : "2023-10-17",
+    "startTime" : "11:20",
+    "endTime" : "12:20",
+    "description" : "Follow-up"
+  }, {
+    "name" : "Daniel Meier",
+    "date" : "2023-10-18",
+    "startTime" : "09:30",
+    "endTime" : "10:30",
+    "description" : "Check-up"
+  }, {
+    "name" : "Daniel Meier",
+    "date" : "2023-10-19",
+    "startTime" : "16:15",
+    "endTime" : "17:15",
+    "description" : "Second Session"
+  }, {
+    "name" : "Daniel Meier",
+    "date" : "2023-10-20",
+    "startTime" : "13:00",
+    "endTime" : "14:00",
+    "description" : "Check-up"
+  } ]
+}

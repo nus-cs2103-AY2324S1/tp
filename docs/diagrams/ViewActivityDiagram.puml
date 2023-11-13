@@ -1,0 +1,28 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes a View Command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([correct format to view all])
+    :View all students and appointments;
+    :Display Success Message in viewing
+            students and appointments;
+elseif () then ([correct format to view students])
+    :View all students;
+    :Display Success Message
+            in viewing students;
+elseif () then ([correct format to view appointments])
+    :View all appointments;
+    :Display Success Message
+      in viewing appointments;
+else ([else])
+    :Display message
+        format error;
+endif
+stop
+@enduml

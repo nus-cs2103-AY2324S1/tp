@@ -1,0 +1,23 @@
+{
+  "students": [ {
+    "name": "John Loh",
+    "phone": "9482424",
+    "address": "4th street",
+    "note" : " "
+  } ],
+  "appointments" : [
+    {
+      "name" : "John Loh",
+      "date" : "2023-10-14",
+      "startTime" : "17:30",
+      "endTime" : "18:30",
+      "description" : "Second Session"
+    },
+    {
+      "name": "John Loh",
+      "date": "202311-30",
+      "startTime": "16:30",
+      "endTime": "17:30",
+      "description": "First Session"
+    } ]
+}
