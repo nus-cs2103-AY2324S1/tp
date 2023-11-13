@@ -31,7 +31,7 @@ Given below are my contributions to the project.
 
 * **Test Coverage**: Wrote test cases to increase overall cumulative coverage by 3.15% (PRs: [#74](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/74), [#80](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/80), [#97](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/97))
 
-* **Code contributed**: [Zjinnnn's tP Dashboard](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=Zjinnnn&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
+* **Code contributed**: [Zjinnnn's tP Dashboard](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=zjinnnn&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos)
 
 * **Contribution to team-based tasks**:
   * Managed issues on issue tracker 
@@ -39,11 +39,12 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-        * Re-organized sections in User Guide for better flow and readability (PR: [#153](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/153))
-          * Added `About this User Guide` section
+        * Re-organized sections in User Guide for better flow and readability (PR: [#153](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/153), [#166](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/166))
+          * Added `About this User Guide` , `Prefix Summary` section
           * Categorized features for better navigation
           * Added links to relevant sections for better navigation
         * Added details for `markAttendanceCommand` 
+        * Standardised User Guide format
     * Developer Guide:
         * Added implementation details for `markAttendanceCommand`
         * Added use cases

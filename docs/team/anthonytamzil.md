@@ -37,9 +37,11 @@ Given below are my contributions to the project.
   * User Guide: 
     * Standardized UG overall formatting for the individual commands and for the command table. (Pull request [#54](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/54), [#57](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/57), [#85](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/85))
     * Added pictures of each individual command to enhance user-friendliness of the user guide. (Pull request [#85](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/85))
-  * Developer Guide: to be added soon
+  * Developer Guide: 
+    * Added implementation details for `view` and `find` command including the appropriate UML diagrams.
+    * Contributed use cases and future enhancements for future development.
 * **Contributions to team-based tasks**
-  * Set up the Gradle, Codecov, Github team organization and repository.
+  * Set up the Gradle, Codecov, GitHub team organization and repository.
   * General code enhancements in terms of refactoring and product morphing.
   * Maintained issue tracker by labelling tasks appropriately and ensuring that it is up to date.
   * Did release management for `v1.1` to `v1.3`.

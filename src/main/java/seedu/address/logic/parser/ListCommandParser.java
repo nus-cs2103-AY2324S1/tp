@@ -2,13 +2,15 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALGROUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.ListAttendanceCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListStudentsCommand;
@@ -22,12 +24,12 @@ import seedu.address.model.week.Week;
  * Parses input arguments and creates a new ListCommand object
  */
 public class ListCommandParser implements Parser<ListCommand> {
-
     private static final Pattern LIST_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private final Logger logger = LogsCenter.getLogger(ListCommandParser.class);
 
     /**
      * Parses the given {@code String} of arguments in the context of the ListCommand
-     * and returns a ListCommand object for execution.
+     * and returns a ListAttendanceCommand or ListStudentsCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public ListCommand parse(String args) throws ParseException {
@@ -41,16 +43,17 @@ public class ListCommandParser implements Parser<ListCommand> {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(arguments, PREFIX_TUTORIALGROUP, PREFIX_WEEK);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(arguments, PREFIX_TUTORIAL_GROUP, PREFIX_WEEK);
         Optional<Tag> tag = Optional.empty();
 
-        if (argMultimap.getValue(PREFIX_TUTORIALGROUP).isPresent()) {
-            tag = Optional.of(ParserUtil.parseTag(argMultimap.getValue(PREFIX_TUTORIALGROUP).get()));
+        if (argMultimap.getValue(PREFIX_TUTORIAL_GROUP).isPresent()) {
+            tag = Optional.of(ParserUtil.parseTag(argMultimap.getValue(PREFIX_TUTORIAL_GROUP).get()));
         }
 
         switch (commandWord.trim()) {
         case ListAttendanceCommand.COMMAND_WORD:
-            if (!argMultimap.getValue(PREFIX_WEEK).isPresent() || !argMultimap.getPreamble().isEmpty()) {
+            logger.fine("Parsing list attendance");
+            if (argMultimap.getValue(PREFIX_WEEK).isEmpty() || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         ListAttendanceCommand.MESSAGE_USAGE));
             }
@@ -59,10 +62,12 @@ public class ListCommandParser implements Parser<ListCommand> {
             return new ListAttendanceCommand(tag, week, new ContainsTagPredicate(tag),
                     new AbsentFromTutorialPredicate(week, tag));
         case ListStudentsCommand.COMMAND_WORD:
-            if (arguments.isEmpty()) {
-                return new ListStudentsCommand();
+            logger.fine("Parsing list students");
+            if (!arguments.isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ListStudentsCommand.MESSAGE_USAGE));
             }
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListStudentsCommand.MESSAGE_USAGE));
+            return new ListStudentsCommand();
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }

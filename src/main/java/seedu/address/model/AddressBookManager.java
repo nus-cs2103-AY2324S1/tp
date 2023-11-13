@@ -69,7 +69,13 @@ public class AddressBookManager implements ReadOnlyAddressBookManager {
     public AddressBookManager(HashMap<String, ReadOnlyAddressBook> addressBooks, String currentCourseCode) {
         this.addressBooks = addressBooks;
         this.internalCourseList.setAll(addressBooks.keySet());
-        activeCourseCode.set(currentCourseCode.toUpperCase());
+
+        if (currentCourseCode == null) {
+            activeCourseCode.set(null);
+        } else {
+            activeCourseCode.set(currentCourseCode.toUpperCase());
+        }
+
         this.currentAddressBook = getActiveAddressBook();
     }
 
@@ -228,9 +234,17 @@ public class AddressBookManager implements ReadOnlyAddressBookManager {
         public AddressBookManager deserialize(JsonParser jsonParser,
                 DeserializationContext deserializationContext) throws IOException {
             JsonNode node = jsonParser.getCodec().readTree(jsonParser);
-            String currentCourseCode = node.get("currentCourseCode").asText();
+            JsonNode currentCourseCodeNode = node.get("currentCourseCode");
             JsonNode addressBooksNode = node.get("addressBooks");
+
+            String currentCourseCode;
             HashMap<String, ReadOnlyAddressBook> addressBooks = new HashMap<>();
+
+            if (currentCourseCodeNode.isNull()) {
+                currentCourseCode = null;
+            } else {
+                currentCourseCode = currentCourseCodeNode.asText();
+            }
 
             if (addressBooksNode.isObject()) {
                 addressBooksNode.fields().forEachRemaining(entry -> {

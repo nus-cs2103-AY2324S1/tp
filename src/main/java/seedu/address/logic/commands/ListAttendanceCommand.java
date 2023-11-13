@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALGROUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
 import java.util.ArrayList;
@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.predicate.AbsentFromTutorialPredicate;
@@ -27,12 +26,18 @@ public class ListAttendanceCommand extends ListCommand {
             + ": Lists summary of attendance and absent students.\n"
             + "Parameters: "
             + PREFIX_WEEK + "WEEK_NUMBER "
-            + "[" + PREFIX_TUTORIALGROUP + "TUTORIAL_GROUP_ID]\n"
+            + "[" + PREFIX_TUTORIAL_GROUP + "TUTORIAL_GROUP_ID]\n"
             + "Example: list " + COMMAND_WORD + " w/3 " + "tg/G02";
+
     public static final String MESSAGE_SUCCESS = "Listed all absent students:";
     public static final String MESSAGE_INCOMPLETE_ATTENDANCE = "Unable to show summary: "
             + "Attendance records are incomplete for week %d.";
     public static final String MESSAGE_NO_STUDENTS = "There are no students in %s Tutorial Group %s!";
+    public static final String MESSAGE_ATTENDANCE_SUMMARY_WITH_TAG =
+            "%1$d of %2$d students present for Week %3$d from %4$s %5$s!\n";
+    public static final String MESSAGE_ATTENDANCE_SUMMARY_NO_TAG =
+            "%1$d of %2$d students present for Week %3$d from %4$s!\n";
+
 
     private final Week week;
     private final AbsentFromTutorialPredicate absencePredicate;
@@ -62,18 +67,26 @@ public class ListAttendanceCommand extends ListCommand {
      * @param numOfPresentees Number of students who were present
      * @param numOfStudents Number of students in total or in tutorial group
      */
-    public String getAttendanceSummary(boolean isWithTag, int numOfPresentees, int numOfStudents, String courseCode) {
+    public String summaryBuilder(boolean isWithTag, int numOfPresentees, int numOfStudents, String courseCode) {
+        assert numOfPresentees <= numOfStudents;
         return isWithTag
-                ? String.format(Messages.MESSAGE_ATTENDANCE_SUMMARY_WITH_TAG, numOfPresentees, numOfStudents,
+                ? String.format(MESSAGE_ATTENDANCE_SUMMARY_WITH_TAG, numOfPresentees, numOfStudents,
                         week.getWeekNumber(), courseCode, tag.get().getTagName())
-                : String.format(Messages.MESSAGE_ATTENDANCE_SUMMARY_NO_TAG, numOfPresentees, numOfStudents,
+                : String.format(MESSAGE_ATTENDANCE_SUMMARY_NO_TAG, numOfPresentees, numOfStudents,
                         week.getWeekNumber(), courseCode);
     }
 
-    public ArrayList<Person> getUnmarkedPersons(List<Person> personList) {
+    /**
+     * Returns an ArrayList containing persons with unmarked attendance.
+     *
+     * @param personList List of persons to check if attendance was marked for
+     */
+    public ArrayList<Person> unmarkedPersonsListBuilder(List<Person> personList) {
         ArrayList<Person> unmarkedPersons = new ArrayList<>();
         for (Person p : personList) {
             if (!p.getAttendanceRecords().stream().anyMatch(atd -> atd.getWeek().equals(week))) {
+                // Since all persons in personList are unique, p should never be in unmarkedPersons already
+                assert !unmarkedPersons.contains(p);
                 unmarkedPersons.add(p);
             }
         }
@@ -99,14 +112,15 @@ public class ListAttendanceCommand extends ListCommand {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-
         model.clearFilters();
+
         boolean isWithTag = false;
         int numberOfStudents = model.getFilteredPersonList().size();
         String courseCode = model.getAddressBook().getCourseCode();
 
         if (tag.isPresent()) {
             model.addFilter(tutorialPredicate);
+
             isWithTag = true;
             numberOfStudents = model.getFilteredPersonList().size();
 
@@ -115,7 +129,7 @@ public class ListAttendanceCommand extends ListCommand {
             }
         }
 
-        ArrayList<Person> unmarkedPersons = getUnmarkedPersons(model.getFilteredPersonList());
+        ArrayList<Person> unmarkedPersons = unmarkedPersonsListBuilder(model.getFilteredPersonList());
         if (!unmarkedPersons.isEmpty()) {
             String nameList = unmarkedPersons.stream().map(person -> person.getName().toString())
                     .collect(Collectors.joining(", "));
@@ -127,7 +141,7 @@ public class ListAttendanceCommand extends ListCommand {
 
         int numberOfAbsentees = model.getFilteredPersonList().size();
         int numberOfPresentees = numberOfStudents - numberOfAbsentees;
-        String attendanceSummary = getAttendanceSummary(isWithTag, numberOfPresentees, numberOfStudents, courseCode);
+        String attendanceSummary = summaryBuilder(isWithTag, numberOfPresentees, numberOfStudents, courseCode);
 
         return new CommandResult(attendanceSummary + MESSAGE_SUCCESS);
     }

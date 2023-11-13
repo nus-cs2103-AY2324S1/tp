@@ -49,17 +49,51 @@ deactivate AddressBookParser
 LogicManager -> ListAttendanceCommand : execute()
 activate ListAttendanceCommand
 
-ListAttendanceCommand -> Model : addFilter(tutorialPredicate(G2))
+ListAttendanceCommand -> Model : clearFilters()
 activate Model
-
-ListAttendanceCommand -> ListAttendanceCommand : getUnmarkedPersons()
-
-ListAttendanceCommand -> Model : addFilter(absencePredicate(1))
-
-ListAttendanceCommand -> ListAttendanceCommand : getAttendanceSummary()
 
 Model --> ListAttendanceCommand
 deactivate Model
+
+ListAttendanceCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> ListAttendanceCommand
+deactivate Model
+
+ListAttendanceCommand -> Model : getAddressBook()
+activate Model
+
+Model --> ListAttendanceCommand
+deactivate Model
+
+ListAttendanceCommand -> Model : addFilter(tutorialPredicate(G2))
+activate Model
+
+Model --> ListAttendanceCommand
+deactivate Model
+
+ListAttendanceCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> ListAttendanceCommand
+deactivate Model
+
+ListAttendanceCommand -> ListAttendanceCommand : unmarkedPersonsListBuilder()
+
+ListAttendanceCommand -> Model : addFilter(absencePredicate(1))
+activate Model
+
+Model --> ListAttendanceCommand
+deactivate Model
+
+ListAttendanceCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> ListAttendanceCommand
+deactivate Model
+
+ListAttendanceCommand -> ListAttendanceCommand : summaryBuilder()
 
 create CommandResult
 ListAttendanceCommand -> CommandResult

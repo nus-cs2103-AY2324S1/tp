@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.commands.CommandTestUtil.ATTENDANCE_W1_ABSENT;
+import static seedu.address.logic.commands.CommandTestUtil.ATTENDANCE_W1_PRESENT;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.MarkAttendanceCommand.MESSAGE_ABSENT;
@@ -51,7 +53,7 @@ public class MarkAttendanceCommandTest {
                 amy.getName(), amy.getName());
 
         Person expectedAmy = new PersonBuilder(amy).build();
-        expectedAmy.addAttendance(new Attendance(new Week(1), true, null));
+        expectedAmy.addAttendance(ATTENDANCE_W1_PRESENT);
         expectedModel.addPerson(expectedAmy);
 
         assertCommandSuccess(markAttendanceCommand, model, expectedMessage, expectedModel);
@@ -71,7 +73,7 @@ public class MarkAttendanceCommandTest {
                 amy.getName(), amy.getName(), "Late");
 
         Person expectedAmy = new PersonBuilder(amy).build();
-        expectedAmy.addAttendance(new Attendance(new Week(1), false, "Late"));
+        expectedAmy.addAttendance(ATTENDANCE_W1_ABSENT);
         expectedModel.addPerson(expectedAmy);
 
         assertCommandSuccess(markAttendanceCommand, model, expectedMessage, expectedModel);
@@ -90,7 +92,7 @@ public class MarkAttendanceCommandTest {
                 amy.getName(), amy.getName());
 
         Person expectedAmy = new PersonBuilder(amy).build();
-        expectedAmy.addAttendance(new Attendance(new Week(1), true, null));
+        expectedAmy.addAttendance(ATTENDANCE_W1_PRESENT);
         expectedModel.addPerson(expectedAmy);
 
         assertCommandSuccess(markAttendanceCommand, model, expectedMessage, expectedModel);
@@ -109,7 +111,7 @@ public class MarkAttendanceCommandTest {
                 amy.getName(), amy.getName(), "Late");
 
         Person expectedAmy = new PersonBuilder(amy).build();
-        expectedAmy.addAttendance(new Attendance(new Week(1), false, "Late"));
+        expectedAmy.addAttendance(ATTENDANCE_W1_ABSENT);
         expectedModel.addPerson(expectedAmy);
 
         assertCommandSuccess(markAttendanceCommand, model, expectedMessage, expectedModel);
@@ -161,9 +163,9 @@ public class MarkAttendanceCommandTest {
                 bob.getName(), bob.getName()));
 
         Person expectedAmy = new PersonBuilder(amy).build();
-        expectedAmy.addAttendance(new Attendance(new Week(1), true, null));
+        expectedAmy.addAttendance(ATTENDANCE_W1_PRESENT);
         Person expectedBob = new PersonBuilder(bob).build();
-        expectedBob.addAttendance(new Attendance(new Week(1), true, null));
+        expectedBob.addAttendance(ATTENDANCE_W1_PRESENT);
 
         expectedModel.addPerson(expectedAmy);
         expectedModel.addPerson(expectedBob);
@@ -193,9 +195,9 @@ public class MarkAttendanceCommandTest {
                 bob.getName(), bob.getName(), "Late"));
 
         Person expectedAmy = new PersonBuilder(amy).build();
-        expectedAmy.addAttendance(new Attendance(new Week(1), false, "Late"));
+        expectedAmy.addAttendance(ATTENDANCE_W1_ABSENT);
         Person expectedBob = new PersonBuilder(bob).build();
-        expectedBob.addAttendance(new Attendance(new Week(1), false, "Late"));
+        expectedBob.addAttendance(ATTENDANCE_W1_ABSENT);
 
         expectedModel.addPerson(expectedAmy);
         expectedModel.addPerson(expectedBob);
@@ -225,9 +227,9 @@ public class MarkAttendanceCommandTest {
                 bob.getName(), bob.getName()));
 
         Person expectedAmy = new PersonBuilder(amy).build();
-        expectedAmy.addAttendance(new Attendance(new Week(1), true, null));
+        expectedAmy.addAttendance(ATTENDANCE_W1_PRESENT);
         Person expectedBob = new PersonBuilder(bob).build();
-        expectedBob.addAttendance(new Attendance(new Week(1), true, null));
+        expectedBob.addAttendance(ATTENDANCE_W1_PRESENT);
 
         expectedModel.addPerson(expectedAmy);
         expectedModel.addPerson(expectedBob);
@@ -257,9 +259,9 @@ public class MarkAttendanceCommandTest {
                 bob.getName(), bob.getName(), "Late"));
 
         Person expectedAmy = new PersonBuilder(amy).build();
-        expectedAmy.addAttendance(new Attendance(new Week(1), false, "Late"));
+        expectedAmy.addAttendance(ATTENDANCE_W1_ABSENT);
         Person expectedBob = new PersonBuilder(bob).build();
-        expectedBob.addAttendance(new Attendance(new Week(1), false, "Late"));
+        expectedBob.addAttendance(ATTENDANCE_W1_ABSENT);
 
         expectedModel.addPerson(expectedAmy);
         expectedModel.addPerson(expectedBob);
@@ -288,7 +290,7 @@ public class MarkAttendanceCommandTest {
         expectedMessage.append(String.format(MESSAGE_PERSON_NOT_FOUND_MULTIPLE + "%s\n", "Zac"));
 
         Person expectedAmy = new PersonBuilder(amy).build();
-        expectedAmy.addAttendance(new Attendance(new Week(1), true, null));
+        expectedAmy.addAttendance(ATTENDANCE_W1_PRESENT);
         Person expectedBob = new PersonBuilder(bob).build();
 
         expectedModel.addPerson(expectedAmy);
@@ -318,7 +320,7 @@ public class MarkAttendanceCommandTest {
         expectedMessage.append(String.format(MESSAGE_PERSON_NOT_FOUND_MULTIPLE + "%s\n", "A0000000Z"));
 
         Person expectedAmy = new PersonBuilder(amy).build();
-        expectedAmy.addAttendance(new Attendance(new Week(1), true, null));
+        expectedAmy.addAttendance(ATTENDANCE_W1_PRESENT);
         Person expectedBob = new PersonBuilder(bob).build();
 
         expectedModel.addPerson(expectedAmy);
@@ -332,7 +334,7 @@ public class MarkAttendanceCommandTest {
      * record for the current week already exists, updating attendance to present.
      */
     @Test
-    public void execute_personWithExistingAttendanceMarkedAsPresent_updatesAttendanceAsPresent() {
+    public void execute_personWithExistingAttendanceMarkedAsAbsent_updatesAttendanceAsPresent() {
         Person amy = new PersonBuilder().build();
         Week testWeek = new Week(1);
         model.addPerson(amy);
@@ -343,7 +345,7 @@ public class MarkAttendanceCommandTest {
         String expectedMessage = String.format(MESSAGE_UPDATED_SUCCESS + "%s\n%s" + MESSAGE_PRESENT + "%d\n",
                 amy.getName(), amy.getName(), 1);
 
-        Person expectedAmy = new PersonBuilder(amy).withAttendance(new Attendance(testWeek, true, null)).build();
+        Person expectedAmy = new PersonBuilder(amy).withAttendance(ATTENDANCE_W1_PRESENT).build();
         expectedModel.addPerson(expectedAmy);
         assertCommandSuccess(markAttendanceCommand, model, expectedMessage, expectedModel);
     }
@@ -353,7 +355,7 @@ public class MarkAttendanceCommandTest {
      * record for the current week already exists, updating attendance to absent.
      */
     @Test
-    public void execute_personWithExistingAttendanceMarkedAsAbsent_updatesAttendanceAsAbsent() {
+    public void execute_personWithExistingAttendanceMarkedAsPresent_updatesAttendanceAsAbsent() {
         Person amy = new PersonBuilder().build();
         Week testWeek = new Week(1);
         model.addPerson(amy);
@@ -365,7 +367,7 @@ public class MarkAttendanceCommandTest {
                         + "1\nReason: %s\n",
                 amy.getName(), amy.getName(), "Late");
 
-        Person expectedAmy = new PersonBuilder(amy).withAttendance(new Attendance(testWeek, true, null)).build();
+        Person expectedAmy = new PersonBuilder(amy).withAttendance(ATTENDANCE_W1_PRESENT).build();
         expectedModel.addPerson(expectedAmy);
         assertCommandSuccess(markAttendanceCommand, model, expectedMessage, expectedModel);
     }
@@ -385,7 +387,7 @@ public class MarkAttendanceCommandTest {
                 amy.getName(), amy.getName());
 
         Person expectedAmy = new PersonBuilder(amy).build();
-        expectedAmy.addAttendance(new Attendance(testWeek, true, null));
+        expectedAmy.addAttendance(ATTENDANCE_W1_PRESENT);
         expectedModel.addPerson(expectedAmy);
         assertCommandSuccess(markAttendanceCommand, model, expectedMessage, expectedModel);
     }

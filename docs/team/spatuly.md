@@ -5,7 +5,8 @@ title: Liyan's Project Portfolio Page
 
 ### Project: TAvigator
 
-TAvigator is a desktop address book application used by tutors to keep track of students' contact details and attendance. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about (TBA) kLoC.
+Teaching Assistants (TAs) sometimes have many tutorial groups to manage, it could be chaotic to manage all of them. TAvigator is a desktop address book application used by TAs to keep track of students' contact details and attendances. 
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java.
 
 Given below are my contributions to the project.
 
@@ -17,7 +18,7 @@ Given below are my contributions to the project.
 * **New Feature**: Added the delete all command
     * What it does: Allows the user to delete all students from the chosen tutorial group in a course at once. If the tutorial group is not specified, it deletes all students in the course.
     * Justification: The feature allows the user to easily delete a group of students, reducing the hassle of having to do so one by one.
-    * Highlights: The implementation of this feature was tricky as it was implemented as part of an existing DeleteCommand. As such, more problems were encountered when implementing the parser, and also a large variety of errors to be handled properly.
+    * Highlights: The implementation of this feature was tricky as it was implemented as part of an existing DeleteCommand. As such, more problems were encountered when implementing the parser. Also, a large variety of errors had to be handled properly.
 
 * **New Enhancement**: Implemented attendance saving
     * What it does: Allows the marked attendance to be saved into the tavigator.json file.
@@ -48,7 +49,7 @@ Given below are my contributions to the project.
         * Added planned enhancements. (PR: [#158](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/158))
 
 * **Review / mentoring contributions**:
-  * PRs reviewed (with non-trivial comments): [#85](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/85), [#155](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/155)
+  * PRs reviewed with non-trivial comments: [#85](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/85), [#155](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/155)
 
 * **Contributions beyond the project team**:
-  * Reported 17 bugs and suggestions for other teams during PE-D.
+  * Reported 17 bugs and suggestions for other teams during PE-D. [(Bugs Reported)](https://github.com/spatuly/ped/issues)
