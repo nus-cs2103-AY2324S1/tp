@@ -44,7 +44,9 @@ _Find Your Success with JobFindr_
 7. [Glossary](#glossary)
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
+<div style="page-break-after: always;">
+
+</div>
 
 ## **Introduction**
 
@@ -87,7 +89,6 @@ this guide. Here's what they mean:
 **:information_source: Notes:**<br>
 * Dive deeper into the functionalities of JobFindr with these informative notes.
 * They provide expanded insights and additional context, empowering you to leverage JobFindr to its fullest potential.
-</div>
 
 Additionally, you'll encounter different text styles within this guide:
 
@@ -124,6 +125,9 @@ _Good to have you back! We're thrilled to have you with us again. How can we hel
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;">
+
+</div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Quick Start**
