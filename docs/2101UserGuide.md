@@ -72,7 +72,7 @@ This guide uses the following features to make it easier for you to navigate aro
 
 </div>
 
-1. Ensure you have Java `11` or above installed in your computer by following [this guide](https://phoenixnap.com/kb/check-java-version-on-mac-windows).
+1. Ensure you have Java `11` installed in your computer by following [this guide](https://phoenixnap.com/kb/check-java-version-on-mac-windows).
 
 2. Download the latest `ccacommander.jar` from [here](https://github.com/AY2324S1-CS2103T-F11-1/tp/releases).
 
