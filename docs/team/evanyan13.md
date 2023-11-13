@@ -82,9 +82,9 @@ here: [Reposense Report](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?sea
     * Developer Guide (DG): Added sections for `edit` command and `Ui` component.
 * **Bug Fixes**:
     * Fixed bugs reported during PE dry run.
-        * PR [#81](https://github.com/AY2324S1-CS2103T-W12-3/tp/issues/81)
-        * PR [#93](https://github.com/AY2324S1-CS2103T-W12-3/tp/issues/93)
-        * PR [#146](https://github.com/AY2324S1-CS2103T-W12-3/tp/issues/146)
+        * PR [#126](https://github.com/AY2324S1-CS2103T-W12-3/tp/pull/126)
+        * PR [#112](https://github.com/AY2324S1-CS2103T-W12-3/tp/pull/112)
+        * PR [#172](https://github.com/AY2324S1-CS2103T-W12-3/tp/pull/172)
 * **Community**:
     * PRs reviewed (with non-trivial review comments):
         * PR [#65](https://github.com/AY2324S1-CS2103T-W12-3/tp/pull/65)
