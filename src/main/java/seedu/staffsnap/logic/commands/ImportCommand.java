@@ -38,6 +38,9 @@ public class ImportCommand extends Command {
 
     private final String fileName;
 
+    /**
+     * Creates an ImportCommand to import the applicants from a specified file name.
+     */
     public ImportCommand(String fileName) {
         this.fileName = fileName;
     }

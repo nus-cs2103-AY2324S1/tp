@@ -21,6 +21,7 @@ public class CsvApplicantParser {
      * Parses the given {@code String} of arguments in the context of the ImportCommand
      * and returns an ImportCommand object for execution.
      * @throws ParseException if the user input does not conform to the expected format
+     * @throws IOException if the file is not found
      */
     public static List<Applicant> parse(String fileName) throws ParseException, IOException {
         List<CsvApplicant> csvApplicants;
