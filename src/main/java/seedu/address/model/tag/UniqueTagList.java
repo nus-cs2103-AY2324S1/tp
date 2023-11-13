@@ -87,7 +87,6 @@ public class UniqueTagList {
      * @throws ParseException If the tag is not found in the list.
      */
     public Tag getTag(String tagName, String tagCategory) throws ParseException {
-        System.out.println("tagName: " + tagName + " tagCategory: " + tagCategory);
         Optional<Tag> foundTag = internalList.stream()
                 .filter(tag -> tag.tagName.equals(tagName) && tag.tagCategory.contains(tagCategory))
                 .findFirst();
