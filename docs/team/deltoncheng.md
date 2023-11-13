@@ -33,6 +33,7 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Update use case to include `find` feature [\(#53)](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/53)
     * Add implementation of Add Musician To Band [\(#125)](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/125)
+    * Add Manual Testing for all commands [\(#237)](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/237)
 
 * **Community**:
   * Add tests for multiple classes [\(#99)](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/99) [\(#100)](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/100) [\(#118)](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/118) [(/#128)](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/128) [\(#136)](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/136) [\(#141)](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/141) 
