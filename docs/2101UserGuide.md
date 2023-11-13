@@ -157,7 +157,7 @@ The vitality of a CCA lies in its members. CCACommander allows you to manage you
 #### Create a Member: `createMember`
 When you first start CCACommander and want to populate CCACommander with your members, you can do it with just one simple command - `createMember`!
 
-Here is how you can use it:<br>
+Here's how you can use it:<br>
 `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 Here is an example command where we create a member **named** "Lim Jun Jie" with **gender** "Male", **phone number** of "83498018", **email** of "limjunjie@gmail.com", home **address** of "19 Kent Ridge Crescent, Singapore 119278" and a "publicity" **tag**:
@@ -175,7 +175,7 @@ Here is an example command where we create a member **named** "Lim Jun Jie" with
 #### Edit a Member: `editMember`
 If you accidentally make a typo while creating your member, do not worry! You can quickly fix it with the `editMember` command.
 
-Here is how you can use it:<br>
+Here's how you can use it:<br>
 `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 <div markdown="block" class="alert alert-info">
@@ -191,7 +191,7 @@ Here is an example command where we edit the member at **index** 1, changing the
 
 If a member leaves your CCA, get over the disappointment by swiftly removing them from CCACommander using the `deleteMember` command!
 
-Here is how you can use it:<br>
+Here's how you can use it:<br>
  `deleteMember MEMBER_INDEX`
 
 Here is an example command where we delete the member at **index** 1:
@@ -212,11 +212,12 @@ As a CCA head, keeping track of event details is a major responsibility. CCAComm
 
 Creating a new event is no longer a hassle as it can be done with just one simple command - `createEvent`!
 
-Here is how you can use it:<br>
+Here's how you can use it:<br>
 `createEvent n/EVENT_NAME l/LOCATION d/DATE [t/TAG]...`
 
 Here is an example command where we create an event **named** "Party" held at the **location** "Raffles Hall" on the
-**date** 2023-09-16, with **tag** "Dinner" and **tag** "Sem1":<br>
+**date** 2023-09-16, with **tag** "Dinner" and **tag** "Sem1":
+
 `createEvent n/Party l/Raffles Hall d/2023-09-16 t/Dinner t/Sem1`
 
 <figure>
@@ -232,14 +233,15 @@ Here is an example command where we create an event **named** "Party" held at th
 If you forgot to note any important details, or realise that you made a mistake in any field of the event created,
 the `editEvent` command is here to help.
 
-Here is how you can use it:<br>
+Here's how you can use it:<br>
 `editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]...`
 
 <div markdown="block" class="alert alert-info">
 :information_source: Remember to provide at least one field to be edited!
 </div>
 
-Here is an example command where we edit an event at **index** 1, changing the **location** to be "MBS" and the **date** to be "2023-10-20":<br>
+Here is an example command where we edit an event at **index** 1, changing the **location** to be "MBS" and the **date** to be "2023-10-20":
+
 `editEvent 1 l/MBS d/2023-10-20`
 
 <hr class="command-separator">
@@ -248,10 +250,11 @@ Here is an example command where we edit an event at **index** 1, changing the *
 
 Are the number of events piling up? To clear the clutter, you can delete any unwanted event from CCACommander with `deleteEvent`!
 
-Here is how you can use it:<br>
+Here's how you can use it:<br>
 `deleteEvent EVENT_INDEX`
 
-Here is an example command where we delete the event at **index** 1:<br>
+Here is an example command where we delete the event at **index** 1:
+
 `deleteEvent 1`
 
 <div markdown="block" class="alert alert-info">:information_source: The `EVENT_INDEX` parameter refers to the index number shown in the **currently displayed** event list.
@@ -271,7 +274,8 @@ Here’s how you can use it:<br>
 `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
 
 Here is an example command where we enrol the member at **member index** 1 to the event at **event index** 1, where our member
-has contributed 2 **hours**, and we want to leave a "Role: Photographer" **remark** to reflect their role as a photographer:<br>
+has contributed 2 **hours**, and we want to leave a "Role: Photographer" **remark** to reflect their role as a photographer:
+
 `enrol m/1 e/1 h/2 r/Role: Photographer`
 
 <hr class="command-separator">
@@ -288,7 +292,8 @@ Here’s how you can use it:<br>
 </div>
 
 Here is an example command where we edit the enrolment of the member at **member index** 1 to the event at **event index** 2,
-changing the number of **hours** to 5 and the **remark** to "Role: Exco" to reflect the member’s role as an exco member:<br>
+changing the number of **hours** to 5 and the **remark** to "Role: Exco" to reflect the member’s role as an exco member:
+
 `editEnroment m/1 e/2 h/5 r/Role: Exco`
 
 <hr class="command-separator">
@@ -299,7 +304,8 @@ If your member is no longer involved in a particular event, you can easily remov
 Here’s how you can use it:<br>
 `unenrol m/MEMBER_INDEX e/EVENT_INDEX`
 
-Here is an example command where we unenrol the member at **member index** 1 from the event at **event index** 1:<br>
+Here is an example command where we unenrol the member at **member index** 1 from the event at **event index** 1:
+
 `unenrol m/1 e/1`
 
 <div markdown="block" class="alert alert-info">:information_source: The `MEMBER_INDEX`/`EVENT_INDEX` parameter refers to the index number shown in the **currently displayed** member/event list.
@@ -314,7 +320,7 @@ searching for a member and more!
 
 If you want to view the events in which a particular member is enrolled, you can do so via the `viewMember` command.
 
-Here’s how you can use it:
+Here’s how you can use it:<br>
 `viewMember MEMBER_INDEX`
 
 Here is an example command where we want to view the events in which the **member** at index 3 in our member list is enrolled:
@@ -339,7 +345,7 @@ Here is an example command where we want to view the events in which the **membe
 
 If you want to view the members which a particular event has, you can do so via the `viewEvent` command.
 
-Here’s how you can use it:
+Here’s how you can use it:<br>
 `viewEvent EVENT_INDEX`
 
 Here is an example command where we want to view the members that the **event** at index 1 of our event list has:
@@ -367,7 +373,7 @@ If your CCA contains many members and you don’t want to scroll past tens or hu
 
 Do you want to find multiple members? Worry not as you can simply add more names one after another.
 
-Here’s how you can use it:
+Here’s how you can use it:<br>
 `findMember MEMBER_NAME [MORE_NAMES]...`
 
 Here is an example command where we find all members with the names of "Anthony" and "Nicholas":
@@ -380,7 +386,7 @@ Here is an example command where we find all members with the names of "Anthony"
 
 Similar to `findMember`, `findEvent` allows you to instantly find your event among your multiple events.
 
-Here’s how you can use it:
+Here’s how you can use it:<br>
 `findEvent EVENT_NAME [MORE_NAMES]...`
 
 Here is an example command where we find all events with the event name of "Party":
@@ -416,7 +422,8 @@ The `undo` command is the ultimate safety net for CCACommander. You no longer ha
 the wrong event or enrolling the wrong member. Simply enter the `undo` command to undo your previous command, 
 and it will return to the previous state.
 
-Here’s how you can use it: `undo`
+Here’s how you can use it:<br>
+`undo`
 
 Here's a list of commands you can undo:
 * `clear`
@@ -436,7 +443,8 @@ Here's a list of commands you can undo:
 
 Accidentally used `undo`? Don’t worry, you can redo your undone commands too!
 
-Here’s how you can use it: `redo`
+Here’s how you can use it:<br>
+`redo`
 
 <hr class="command-separator">
 
@@ -444,7 +452,8 @@ Here’s how you can use it: `redo`
 Is it time for a new academic year when you need to remove all your previous members and events for new members and 
 events? You can use the `clear` command to instantly remove all your members and events without needing to delete them one by one.
 
-Here’s how you can use it: `clear`
+Here’s how you can use it:<br>
+`clear`
 
 <div markdown="block" class="alert alert-primary">:bulb: Accidentally cleared your list? 
 Worry not as you can use the `undo` command to recover your data! 
@@ -457,7 +466,8 @@ Worry not as you can use the `undo` command to recover your data!
 
 Forgot how to edit a specific enrolment or how to unenrol members? The `help` command will allow you to clarify and recall any features of the app by providing you a link to our friendly and informative user guide.
 
-Here’s how you can use it: `help`
+Here’s how you can use it:<br>
+`help`
 
 <figure>
     <img src="images/helpWindow.png"
@@ -471,7 +481,8 @@ Here’s how you can use it: `help`
 
 If it’s time to call it a day for your CCA tasks, you can use the `exit` command to quit the app.
 
-Here’s how you can use it: `exit`
+Here’s how you can use it:<br>
+`exit`
 
 <div markdown="block" class="alert alert-info">:information_source: The exit command exists for your convenience. 
 It performs the same task as the cross in the top bar and the Exit button in the File sub-menu item
