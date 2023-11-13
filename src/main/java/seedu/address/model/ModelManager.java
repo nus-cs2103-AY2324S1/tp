@@ -164,13 +164,19 @@ public class ModelManager implements Model {
         filteredPersons.forEach(person -> addToAppointmentListIfPresent(person));
     }
 
+
+    /**
+     * Adds ScheduleItem object from person to the appointment list if ScheduleItem object
+     * is an instance of Appointment and not an instance of NullAppointment.
+     * @param person Person object that is being examined.
+     */
     public void addToAppointmentListIfPresent(Person person) {
         ScheduleItem scheduleItem = person.getAppointment();
-            if (scheduleItem instanceof Appointment) {
-                Appointment appointment = (Appointment) scheduleItem;
-                appointment.setPerson(person);
-                observableAppointments.add(appointment);
-            }
+        if (scheduleItem instanceof Appointment) {
+            Appointment appointment = (Appointment) scheduleItem;
+            appointment.setPerson(person);
+            observableAppointments.add(appointment);
+        }
     }
 
     @Override
