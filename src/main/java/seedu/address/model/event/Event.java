@@ -266,6 +266,15 @@ public class Event {
     }
 
     /**
+     * Gets the time period during which the event occurs in a String format.
+     *
+     * @return String of the time period of the event.
+     */
+    public String getEventPeriodString() {
+        return eventPeriod.getFormattedPeriod();
+    }
+
+    /**
      * Get the DayOfWeek of the Event. Event has to have a EventPeriod that spans a single day.
      *
      * @return DayOfWeek of the Event.
