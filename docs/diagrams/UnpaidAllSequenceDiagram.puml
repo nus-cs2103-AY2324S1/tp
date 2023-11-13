@@ -55,7 +55,7 @@ activate Model
 Model --> UnPaidAllCommand
 deactivate Model
 
-loop number of students in the adressbook
+loop number of tutees
     UnPaidAllCommand -> Model : markPersonUnPaid(index)
     activate Model
     Model --> UnPaidAllCommand
