@@ -22,7 +22,7 @@ class JsonAdaptedInterview {
     private final String interviewAddress;
 
     /**
-     * Constructs a {@code JsonAdaptedJob} with the given job details.
+     * Constructs a {@code JsonAdaptedInterview} with the given job details.
      */
     @JsonCreator
     public JsonAdaptedInterview(@JsonProperty("interviewType") String interviewType,
@@ -34,7 +34,7 @@ class JsonAdaptedInterview {
     }
 
     /**
-     * Converts a given {@code Job} into this class for Jackson use.
+     * Converts a given {@code Interview} into this class for Jackson use.
      */
     public JsonAdaptedInterview(Interview source) {
         interviewType = source.getInterviewType().interviewType;
@@ -43,9 +43,9 @@ class JsonAdaptedInterview {
     }
 
     /**
-     * Converts this Jackson-friendly adapted job object into the model's {@code Job} object.
+     * Converts this Jackson-friendly adapted job object into the model's {@code Interview} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted job.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted Interview.
      */
     public Interview toModelType() throws IllegalValueException {
         if (interviewType == null) {

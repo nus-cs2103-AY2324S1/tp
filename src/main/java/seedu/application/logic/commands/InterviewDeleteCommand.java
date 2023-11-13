@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.application.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.application.logic.parser.CliSyntax.PREFIX_JOB_SOURCE;
 
-import java.util.List;
-
 import seedu.application.commons.core.index.Index;
 import seedu.application.commons.util.ToStringBuilder;
 import seedu.application.logic.Messages;
@@ -54,13 +52,11 @@ public class InterviewDeleteCommand extends InterviewCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Job> lastShownList = model.getFilteredJobList();
 
-        if (jobIndex.getZeroBased() >= lastShownList.size()) {
+        if (jobIndex.getZeroBased() >= model.getFilteredJobList().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_JOB_DISPLAYED_INDEX);
         }
-
-        Job jobToDeleteInterview = lastShownList.get(jobIndex.getZeroBased());
+        Job jobToDeleteInterview = getJob(model, jobIndex);
         if (interviewIndex.getZeroBased() >= jobToDeleteInterview.interviewLength()) {
             throw new CommandException(Messages.MESSAGE_INVALID_INTERVIEW);
         }

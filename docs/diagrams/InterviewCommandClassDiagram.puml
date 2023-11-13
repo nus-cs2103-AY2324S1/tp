@@ -1,0 +1,40 @@
+@startuml
+!include style.puml
+skinparam classAttributeIconSize 0
+skinparam arrowThickness 1.1
+skinparam arrowColor DeepSkyBlue
+skinparam classBackgroundColor DeepSkyBlue
+skinparam classFontColor black
+
+class "{abstract}\nCommand" as c {
++ execute(): CommandResult
+}
+
+class "{abstract}\nInterviewCommand" as ic {
+}
+
+class "InterviewAddCommand" as iac {
+-jobIndex: Index
+-toAdd: Interview
++ execute(): CommandResult
+}
+
+class "InterviewDeleteCommand" as idc {
+-jobIndex: Index
+-interviewIndex: Index
++ execute(): CommandResult
+}
+
+class "InterviewEditCommand" as iec {
+-jobIndex: Index
+-interviewIndex: Index
+-editInterviewDescriptor: EditInterviewDescriptor
++ execute(): CommandResult
+-{static}createEditedInterview(): Interview
+}
+
+ic -up-|> c
+iac -up-|> ic
+iec -up-|> ic
+idc -up-|> ic
+@enduml

@@ -30,13 +30,11 @@ public class InterviewAddCommandParser implements Parser<InterviewAddCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_INTERVIEW_TYPE,
                         PREFIX_INTERVIEW_DATETIME, PREFIX_INTERVIEW_ADDRESS);
 
-        Index index;
-
         if (!arePrefixesPresent(argMultimap, PREFIX_INTERVIEW_TYPE,
                 PREFIX_INTERVIEW_DATETIME, PREFIX_INTERVIEW_ADDRESS)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, InterviewAddCommand.MESSAGE_USAGE));
         }
-
+        Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
