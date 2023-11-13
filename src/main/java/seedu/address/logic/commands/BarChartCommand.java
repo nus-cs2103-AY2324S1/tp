@@ -27,7 +27,7 @@ public class BarChartCommand extends Command {
             + "[" + PREFIX_GENDER + "] "
             + "[" + PREFIX_SEC_LEVEL + "] "
             + "[" + PREFIX_SUBJECT + "]...\n"
-            + "Example: " + COMMAND_WORD + PREFIX_GENDER;
+            + "Example: " + COMMAND_WORD + " " + PREFIX_GENDER;
 
     public static final String MESSAGE_INCORRECT_COMMAND = "To view a bar chart, please do one of the following:\n"
             + COMMAND_WORD + " " + PREFIX_GENDER + " or\n"
