@@ -366,16 +366,16 @@ or address is invalid (> 200 characters long)
 
 * 4a. The student index is invalid.
     * 4a1. WellNUS shows an error message.
-        * Use case ends.
+        * Use case resumes from step 3.
 
 * 4b. No fields to edit were specified
     * 4b1. WellNUS shows an error message.
-        * Use case ends.
+        * Use case resumes from step 3.
 
 * 4c. The contact number is invalid (non-numerical input or not 8 digits long)
   or address is invalid (> 200 characters long)
     * 4c1. WellNUS shows an error message.
-        * Use case ends.
+        * Use case resumes from step 3.
 
 #### 6.3.4 #UC04: Delete an existing student
 
@@ -393,7 +393,7 @@ or address is invalid (> 200 characters long)
 
 * 4a. The student index is invalid.
   * 4a1. WellNUS shows an error message.
-    * Use case ends.
+    * Use case resumes from step 3.
 
 #### 6.3.5 #UC05: Tag student to risk level
 
@@ -411,11 +411,11 @@ or address is invalid (> 200 characters long)
 
 * 4a. The student index is invalid.
   * 4a1. WellNUS shows an error message.
-    * Use case ends.
+    * Use case resumes from step 3.
 
 * 4b. The risk level is invalid (not high/medium/low)
   * 4b1. WellNUS shows an error message.
-    * Use case ends.
+    * Use case resumes from step 3.
 
 ### 6.3.6 #UC06: Add student notes for a specific student
 
@@ -433,11 +433,11 @@ or address is invalid (> 200 characters long)
 
 * 4a. The student index is invalid.
     * 4a1. WellNUS shows an error message.
-        * Use case ends.
+        * Use case resumes from step 3.
 
 * 4b. The note is invalid (> 500 characters long)
     * 4b1. WellNUS shows an error message.
-        * Use case ends.
+        * Use case resumes from step 3.
 
 
 #### 6.3.7 #UC07: Schedule an appointment
@@ -456,15 +456,15 @@ or address is invalid (> 200 characters long)
 
 * 3a. The student index is invalid.
   * 3a1. WellNUS shows an error message.
-    * Use case ends.
+    * Use case resumes from step 3.
 
 * 3b. The given time is invalid (wrong time format).
   * 3b1. WellNUS shows an error message.
-    * Use case ends.
+    * Use case resumes from step 3.
 
 * 3c. The given time overlaps with an existing appointment.
   * 3c1. WellNUS shows an error message.
-    * Use case ends.
+    * Use case resumes from step 3.
 
 #### 6.3.8 #UC08: View existing appointments
 
@@ -497,7 +497,7 @@ or address is invalid (> 200 characters long)
 
 * 3a. WellNUS detects an error in the entered index
 
-    Use case resumes from step 1.
+    Use case resumes from step 3.
 
 ### 6.3.10 #UC10: Find students by name together with their appointments
 
@@ -513,11 +513,11 @@ or address is invalid (> 200 characters long)
 * 4a. User does not see any students and appointments as no students match the given name
   Use case ends.
 
-### 6.3.11 #UC11: Filter an appointment by day
+### 6.3.11 #UC11: Filter an appointment by date
 
-1. User requests to list appointments for a given day
-2. WellNUS shows the list of appointments for the day
-3. User can view appointment information for the appointments in the given day
+1. User requests to list appointments for a given date
+2. WellNUS shows the list of appointments for the date
+3. User can view appointment information for the appointments in the given date
 
     Use case ends.
 
@@ -525,6 +525,10 @@ or address is invalid (> 200 characters long)
 
 * 3a. User does not see any appointments as there are no appointments scheduled on that day
   Use case ends.
+
+* 3b. The given date is invalid (wrong date format).
+    * 3b1. WellNUS shows an error message.
+        * Use case resumes from step 1.
 
 ### 6.4 Non-Functional Requirements
 1.  Cross-Platform Compatibility:
