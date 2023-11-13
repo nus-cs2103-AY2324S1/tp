@@ -19,7 +19,7 @@ import seedu.classmanager.model.UserPrefs;
  */
 public class StorageManager implements Storage {
 
-    private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
+    private static Logger logger = LogsCenter.getLogger(StorageManager.class);
     private final ClassManagerStorage classManagerStorage;
     private final UserPrefsStorage userPrefsStorage;
 
