@@ -11,6 +11,9 @@ Class "<<interface>>\nModel" as Model
 Class AddressBook
 Class ModelManager
 Class UserPrefs
+Class UniqueReminderList
+Class Dashboard
+Class ReminderScheduler
 
 Class UniquePersonList
 Class Person
@@ -42,6 +45,9 @@ Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
+ModelManager -down-> "1" UniqueReminderList
+ModelManager -down-> "1" Dashboard
+ModelManager -down-> "1" ReminderScheduler
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
@@ -50,6 +56,10 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> "0..1" Telegram
+Person *--> "0..1" Lead
+Person *--> "0..1" Income
+Person *--> "0..1" Profession
 Person *--> "*" Tag
 Person *--> "0..1" Lead
 Person *--> "0..1" Telegram
