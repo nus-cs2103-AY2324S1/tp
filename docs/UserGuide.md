@@ -666,6 +666,7 @@ The above `search` command displayed all candidates whose name match ANY of the 
 Notice how the above `search` command did not display "Alex" despite his profile matching
 the `name` and `tag` categories. This is because `search` does an `AND` search across multiple categories.
 
+
 <box type="tip" seamless>
 
 What does it mean to do an `OR` search within a single category and an `AND` search across multiple categories?

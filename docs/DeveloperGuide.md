@@ -534,20 +534,24 @@ Use case ends.
   * 2b1. JABPro shows a message indicating that there are no persons to display.   
   Use case ends.
 
-**Use case: Search persons by the specified categories(name, status and/ tag)**
+**Use case: Search persons matching the given profile**
 
 **MSS**
-1.  Hiring manager types in search parameters to search users by the specified categories.
-2.  JABPro shows a list of persons whose profile matches the given parameters.
+1. User requests to search users matching the given profile as specified by the search parameters.
+2. JABPro requests details of the profile to be searched.
+3. User enters the profile details.
+4. JABPro retrieves the list of all persons from the database whose profiles match the given search parameters.
+5. JABPro displays the filtered list of persons to the user.
 Use case ends.
 
 **Extensions**
 
-* 1a. The given name/status/tag parameter is invalid.
-    * 1a1. JABPro shows an error message.
-      Use case resumes at step 1.
-* 2a. The list is empty. <br/>
-  Use case ends.
+* 3a. The given name/status/tag parameter is invalid.
+  * 3a1. JABPro shows an error message and provides course of action for remedy.
+    Use case resumes at step 3.
+* 5a. No person match the given profile.
+  * 5a1. JABPro shows a message indicating that there are no persons to display.
+    Use case ends.
 
 
 **Use case: Delete a person**
@@ -657,13 +661,13 @@ Use case ends.
 * 1b. Social profile requested other than LinkedIn or Github.
     * 1b1. JABPro displays error message.  
     Use case ends.
-* 3a. User does not exist on the social platform.  
+* 3a. Person does not exist on the social platform.  
   Use case ends.
 
 **Use case: Add events relating to candidates**
 
 **MSS**
-1. User requests to add an event relating to a candidate
+1. User requests to add an event relating to a candidate.
 2. JABPro shows that command has been executed successfully.
 3. JABPro adds the event to the list of events.
    Use case ends.
@@ -674,8 +678,26 @@ Use case ends.
 * 2b. Event has already been added to the list of events.
   * 2b1. JABPro shows an error message and provides course of action for remedy. Use case resumes at step 1.
 
+**Use case: Tag a candidate with a newly created tag**
 
-*{More to be added}*
+**MSS**
+1. User requests to create a tag of a specific category.
+2. JABPro adds the tag to the list of tags.
+3. JABPro shows a message indicating that the tag has been added successfully.
+4. User requests to view all persons.
+5. User requests to add the newly created tag to add tag to a person.
+6. JABPro adds tag to the person.
+   Use case ends.
+
+**Extension**
+* 1a. The given tag name is invalid
+  * 1a1. JABPro displays an error message
+* 1b. User did not provide the complete command (missing category or name). Use case resumes at step 1.
+  * 1b1. JABPro displays an error message and provides a course of action for remedy. Use case resumes at step 1
+* 2a. Tag already exists in JABPro
+  * 2b1. JABPro displays an error message saying tag already exists. Use case resumes at step 1.
+* 5a. Multiple tags exist with the same name in different categories
+  * 5a1. JABPro displays an error message and provides a course of action for remedy. Use case resumes at step 5.
 
 ### Non-Functional Requirements
 
