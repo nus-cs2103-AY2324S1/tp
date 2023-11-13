@@ -5,8 +5,8 @@ skinparam ArrowFontStyle plain
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant ":InteractionCommandParser" as InteractionCommandParser LOGIC_COLOR
+participant "d:InteractionCommand" as InteractionCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -14,57 +14,108 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("Interaction 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
+LogicManager -> AddressBookParser : parseCommand("Interaction 1")
 activate AddressBookParser
 
-create DeleteCommandParser
-AddressBookParser -> DeleteCommandParser
-activate DeleteCommandParser
+create InteractionCommandParser
+AddressBookParser -> InteractionCommandParser
+activate InteractionCommandParser
 
-DeleteCommandParser --> AddressBookParser
-deactivate DeleteCommandParser
+InteractionCommandParser --> AddressBookParser
+deactivate InteractionCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
-activate DeleteCommandParser
+AddressBookParser -> InteractionCommandParser : parse("1")
+activate InteractionCommandParser
 
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
+create InteractionCommand
+InteractionCommandParser -> InteractionCommand
+activate InteractionCommand
 
-DeleteCommand --> DeleteCommandParser : d
-deactivate DeleteCommand
+InteractionCommand --> InteractionCommandParser : d
+deactivate InteractionCommand
 
-DeleteCommandParser --> AddressBookParser : d
-deactivate DeleteCommandParser
+InteractionCommandParser --> AddressBookParser : d
+deactivate InteractionCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> AddressBookParser
-destroy DeleteCommandParser
+InteractionCommandParser -[hidden]-> AddressBookParser
+destroy InteractionCommandParser
 
 AddressBookParser --> LogicManager : d
 deactivate AddressBookParser
 
-LogicManager -> DeleteCommand : execute()
-activate DeleteCommand
+LogicManager -> InteractionCommand : execute()
+activate InteractionCommand
 
-DeleteCommand -> Model : deletePerson(1)
+InteractionCommand -> Model : InteractionPerson(1)
 activate Model
 
-Model --> DeleteCommand
+Model --> InteractionCommand
 deactivate Model
 
 create CommandResult
-DeleteCommand -> CommandResult
+InteractionCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> InteractionCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : result
-deactivate DeleteCommand
+InteractionCommand --> LogicManager : result
+deactivate InteractionCommand
 
 [<--LogicManager
 deactivate LogicManager
 @enduml
+' @startuml
+' participant ":InteractionCommand" as InteractionCommand
+' participant ":Model" as Model
+' participant ":Person" as Person
+' participant ":PersonBuilder" as PersonBuilder
+
+' User -> InteractionCommand: execute(model)
+' activate InteractionCommand
+' InteractionCommand -> Model: getFilteredPersonList()
+' activate Model
+' Model --> InteractionCommand: lastShownList
+' deactivate Model
+' InteractionCommand -> InteractionCommand: getZeroBased()
+' activate InteractionCommand
+' InteractionCommand --> InteractionCommand: zeroBasedIndex
+' deactivate InteractionCommand
+' InteractionCommand -> ":lastShownList": get(zeroBasedIndex)
+' activate ":lastShownList"
+' ":lastShownList" --> InteractionCommand: personToEdit
+' deactivate ":lastShownList"
+' InteractionCommand -> Person: getInteractions()
+' activate Person
+' Person --> InteractionCommand: editInteractions
+' deactivate Person
+' InteractionCommand -> ":editInteractions": add(interaction)
+' activate ":editInteractions"
+' ":editInteractions" --> InteractionCommand
+' deactivate ":editInteractions"
+' InteractionCommand -> PersonBuilder: withInteractions(editInteractions)
+' activate PersonBuilder
+' PersonBuilder --> InteractionCommand: PersonBuilder
+' deactivate PersonBuilder
+' InteractionCommand -> PersonBuilder: build()
+' activate PersonBuilder
+' PersonBuilder --> InteractionCommand: editedPerson
+' deactivate PersonBuilder
+' InteractionCommand -> Model: setPerson(personToEdit, editedPerson)
+' activate Model
+' Model --> InteractionCommand
+' deactivate Model
+' InteractionCommand -> Model: updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+' activate Model
+' Model --> InteractionCommand
+' deactivate Model
+' InteractionCommand -> InteractionCommand: new CommandResult(String.format(MESSAGE_INTERACTION_SUCCESS, editedPerson))
+' activate InteractionCommand
+' InteractionCommand --> InteractionCommand: CommandResult
+' deactivate InteractionCommand
+' InteractionCommand --> User: CommandResult
+' deactivate InteractionCommand
+' @enduml
