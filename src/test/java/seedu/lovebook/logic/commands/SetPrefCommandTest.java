@@ -180,7 +180,7 @@ public class SetPrefCommandTest {
         }
 
         @Override
-        public void updateSortedPersonList(Comparator<Date> comparator) {
+        public void updateSortedDateList(Comparator<Date> comparator) {
             throw new AssertionError("This method should not be called.");
         }
 

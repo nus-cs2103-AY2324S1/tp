@@ -1,0 +1,31 @@
+@startuml
+
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Class "<<enumeration>>\nHoroscopeEnum" as HoroscopeEnum
+
+Class Date
+Class Name
+Class Age
+Class Gender
+Class Horoscope
+Class Income
+Class Height
+Class Avatar
+Class Star
+
+Date *-- "1" Name
+Date *-- "1" Age
+Date *-- "1" Gender
+Date *-- "1" Star
+Date *-- "1" Income
+Date *-- "1" Height
+Date *-- "1" Avatar
+Date *-- "1" Horoscope
+
+Horoscope ..> HoroscopeEnum
+
+@enduml

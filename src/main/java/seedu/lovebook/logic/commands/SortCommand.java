@@ -75,7 +75,7 @@ public class SortCommand extends Command {
         } else {
             throw new CommandException(MESSAGE_INVALID_SEQUENCE);
         }
-        model.updateSortedPersonList(c);
+        model.updateSortedDateList(c);
         return new CommandResult(MESSAGE_SORTED);
     }
 

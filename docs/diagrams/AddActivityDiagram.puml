@@ -5,13 +5,31 @@ skinparam ArrowFontSize 12
 start
 :User enters LoveBook;
 
-: User enters a command to add dates;
+: User enters a command to add dates in the GUI;
 
-if () then ([all fields are valid])
-    :Save date entry to LoveBook;
-    :Display success message;
+: Input is passed over to the logic component;
+
+if () then ([all fields are present and command is valid])
+    if () then ([no duplicate field entries])
+        if () then ([all fields contain valid values])
+            if () then ([date with same name does not exist])
+                :Save date to LoveBook;
+                :Display success message;
+                stop
+            else ([else])
+                :Display date already exists error message;
+                stop
+            endif
+        else ([else])
+            :Display invalid field value error message;
+            stop
+        endif
+    else ([else])
+        :Display duplicate field entry error message;
+        stop
+    endif
 else ([else])
-    :Display error message;
+    :Display invalid command format error message;
+    stop
 endif
-stop
 @enduml
