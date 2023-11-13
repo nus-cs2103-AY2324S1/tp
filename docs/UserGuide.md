@@ -403,7 +403,7 @@ This is the last optional field of the `add` command. You can assign 1 or more m
 Refer to <a href="https://ay2324s1-cs2103t-t17-1.github.io/tp/UserGuide.html#case-insensitive-ordering-of-members">this</a> section for more information on this issue! Rest assured that we are working hard on fixing this issue to make your TaskWise experience a more enjoyable and productive one!
 </div>
 
-**Examples of correct usage**
+**Examples**
 
 * `add t/Fix User Interface`
 * `add t/Developer Guide p/medium`
@@ -455,7 +455,7 @@ The `mark` command only consists of 1 parameter, the `TASK_NUMBER`, which is the
 
 Acceptable values to use with the `mark` command will therefore be integers within a range from 1 to the total number of tasks you currently have in TaskWise!
 
-**Examples of correct usage**
+**Examples**
 
 - `mark 1`
 
@@ -490,7 +490,7 @@ The `unmark` command only consists of 1 parameter, the `TASK_NUMBER`, which is t
 
 Acceptable values to use with the `unmark` command will therefore be integers within a range from 1 to the total number of tasks you currently have in TaskWise!
 
-**Examples of correct usage**
+**Examples**
 
 - `unmark 1`
 
@@ -533,10 +533,10 @@ Acceptable values for `TASK_NUMBER` would be integers within a range of 1 to the
 
 You should also make sure the `NOTE` does not contain the `/` symbol, as it might be confused with the prefix command. TaskWise believes in keeping things simple after all!
 
-**Example**
+**Examples**
 
-- note 1 n/check the rubrics
-- note 4 n/make sure that all the deliverables are included in the team directory before the final submission
+- `note 1 n/check the rubrics`
+- `note 4 n/make sure that all the deliverables are included in the team directory before the final submission`
 
 **Common Mistakes**
 
@@ -638,7 +638,7 @@ Refer to <a href="https://ay2324s1-cs2103t-t17-1.github.io/tp/UserGuide.html#cas
 
 This is the last field of the `edit` command that you can modify. ANY character is allowed, except for `/`.
 
-**Examples of correct usage**
+**Examples**
 
 * `edit 1 t/New Task Description`
 * `edit 1 m/John m/Jane m/Mary`
@@ -718,7 +718,7 @@ The only parameter you will have here is the keywords that you are trying to fin
 | <img src="images/user_guide/FindCommandParam.png" width=400/> |
 |                       `find [KEYWORD]`                        |
 
-**Example**
+**Examples**
 
 * `find OP2`
 * `find meeting`
@@ -756,10 +756,6 @@ This feature has no parameters involved! Simply type the `list` command. It is c
 <div markdown="span" class="alert alert-info">
 :information_source: If you accidentally, or intentionally, enter any number of parameters with the `list` command, they will be ignored and the command will work as usual!
 </div>
-
-**Example**
-
-* `list`
 
 **Expected Output**
 
@@ -826,7 +822,7 @@ The recognised `SORT_TYPE` parameters are as follows:
 
 By using these two parameters, you are able to sort the task list in ascending or descending order, by the task description, priority, deadline or status!
 
-**Examples of correct usage**
+**Examples**
 
 Now that you have learnt what parameters are accepted by the `sort` command, here are some more examples of how sort can be properly used to help you achieve the order which you are going for!
 
@@ -920,9 +916,10 @@ The `delete` command only consists of 1 parameter, the `TASK_NUMBER`, which is t
 
 Acceptable values to use with the `delete` command will therefore be integers within a range from 1 to the total number of tasks you currently have in TaskWise!
 
-**Example**
+**Examples**
 
 - `delete 1`
+- `delete 2`
 
 **Expected Output**
 
@@ -966,10 +963,6 @@ This feature has no parameters involved! Simply type the `clear` command. It is 
 <div markdown="span" class="alert alert-info">
 :information_source: If you accidentally, or intentionally, enter any number of parameters with the `clear` command, they will be ignored and the command will work as usual!
 </div>
-
-**Example**
-
-* `clear`
 
 **Expected Output**
 
