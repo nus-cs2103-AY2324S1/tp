@@ -5,13 +5,12 @@ pageNav: 3
 ---
 
 
-
-
 # Welcome to ProjectPRO's User Guide
+
+--------------------------------------------------------------------------------------------------------------------
 
 
 ## Introductions
-
 
 Achieve simplicity while optimizing efficiency.
 
@@ -26,11 +25,17 @@ ProjectPRO is a desktop application designed to help university students organiz
 
 ProjectPRO is optimized for use via a Command Line Interface (CLI) while preserving the advantages of maintaining an attractive user interface. ProjectPRO utilizes simple and easy-to-remember commands to execute different tasks, enhancing our user's experience. For instance, adding a contact is executed with a simple `add` command, as listed in our Features Section. Unlock more time in your day, store your information the smart way.
 
+--------------------------------------------------------------------------------------------------------------------
+
 
 **New here?** View our instructions for first-time users [here](#first-time-user).
 
 
 **Used ProjectPRO before?** Click [here](#experienced-user) to recall what features we have!
+
+
+--------------------------------------------------------------------------------------------------------------------
+
 
 ## Table of Contents
 - [1. Introductions](#introductions)
@@ -66,9 +71,12 @@ ProjectPRO is optimized for use via a Command Line Interface (CLI) while preserv
   - [10.3 Exit ProjectPRO `exit`](#exit-projectpro--exit)
 
 
+--------------------------------------------------------------------------------------------------------------------
 
 
 ## Using Our Guide
+
+--------------------------------------------------------------------------------------------------------------------
 
 
 This guide explains how you can use ProjectPRO to add contacts and manage your groups of contacts effectively by using our commands.
@@ -97,23 +105,35 @@ Here are some annotations used in this guide:
     Pay attention to these points as they could lead to unexpected issues.</p>
 </div>
 
+--------------------------------------------------------------------------------------------------------------------
+
 #### First Time User
 
-We are happy to have you on board as a first-time user of ProjectPRO! To get started, visit our [Quick Start](#quick-start) to set up ProjectPRO. Once it's done, you can dive into the Features section to explore the full range of commands and learn more about what ProjectPRO has to offer. Refer to **Image 1** to get acquainted with our user interface.
+--------------------------------------------------------------------------------------------------------------------
 
+
+We are happy to have you on board as a first-time user of ProjectPRO! To get started, visit our [Quick Start](#quick-start) to set up ProjectPRO. Once it's done, you can dive into the Features section to explore the full range of commands and learn more about what ProjectPRO has to offer. Refer to the image below to get acquainted with our user interface.
 
 ![Image 1: ProjectPRO's user interface](images/UG/Overview_of_GUI.png)
+<div align="center">
+  <p style="font-size: 11px; font-style: italic;">ProjectPRO user interface</p>
+</div>
+
+--------------------------------------------------------------------------------------------------------------------
 
 
 #### Experienced User
 
+--------------------------------------------------------------------------------------------------------------------
+
 
 Welcome back to ProjectPRO. Simply head over to our Features section to gain insights into our commands. If you are looking for a quick reference, click [here](#table-of-contents) for our table of contents.
 
-
+--------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
 
+--------------------------------------------------------------------------------------------------------------------
 
 1. Ensure you have Java 11 or above installed on your computer.
    - Simply go to your terminal and type `java -version`. ![here](images/UG/QuickStart1.png)
@@ -123,8 +143,11 @@ Welcome back to ProjectPRO. Simply head over to our Features section to gain ins
 
 3. Move the JAR file to a folder where you want to store your project details. For example, create a folder named ProjectPRO and place it on your desktop.
    - For Mac Users:
-     ![MACGUIDE](images/UG/QUICKSTART3.png)
+
+     - ![MACGUIDE](images/UG/QUICKSTART3.png)
    - For Windows Users:
+   
+     - ![WINDOWSGUIDE](images/UG/QUICKSTART4.png)
 
 4. Launch ProjectPRO.
    1. Open a command terminal
@@ -133,8 +156,12 @@ Welcome back to ProjectPRO. Simply head over to our Features section to gain ins
 
 5. Start using ProjectPRO!
 
+--------------------------------------------------------------------------------------------------------------------
+
 
 ## Glossary
+
+--------------------------------------------------------------------------------------------------------------------
 
 
 **Definitions**
@@ -185,9 +212,16 @@ Written below are some extra information regarding our command formats:
   <li> Command prefixes can be in any order.</li>
 </div>
 
+--------------------------------------------------------------------------------------------------------------------
+
+
 ## Features
 
+--------------------------------------------------------------------------------------------------------------------
+
 ## Commands to Manage Contacts
+
+--------------------------------------------------------------------------------------------------------------------
 
 
 ### Adding a contact `add`
@@ -229,6 +263,7 @@ You can create a contact in your contact list.
 - Incorrect format (e.g., no prefix, duplicate prefixes).
 - The contact you are trying to add already exists in your contact list: `This person already exists in your contact list`.
 
+--------------------------------------------------------------------------------------------------------------------
 
 ### Deleting a contact `delete`
 You can delete a contact from your contact list.
@@ -263,6 +298,7 @@ You can delete a contact from your contact list.
 - Invalid format (e.g., no prefix, duplicate prefixes).
 - The contact you are trying to delete does not exist in your contact list: `No person with such name found. Please provide the person's full name as in the existing contact list`.
 
+--------------------------------------------------------------------------------------------------------------------
 
 ### Finding a contact `find`
 You can find all the contacts from your contact list with the matching keywords.
@@ -295,7 +331,7 @@ You can find all the contacts from your contact list with the matching keywords.
 **Potential error(s):**
 - Invalid format (e.g., no prefix, duplicate prefixes).
 
-
+--------------------------------------------------------------------------------------------------------------------
 
 
 ### Listing contacts `list`
@@ -327,8 +363,12 @@ You can list all the contacts in your contact list.
 **Potential error(s):**
 - Extra inputs detected.
 
+--------------------------------------------------------------------------------------------------------------------
+
 
 ## Commands to Manage Groups
+
+--------------------------------------------------------------------------------------------------------------------
 
 
 ### Adding a group `new`
@@ -359,6 +399,8 @@ You can create a new group in your contact list.
 **Potential error(s):**
 - Invalid command format (e.g., no prefix, duplicate prefixes).
 - The group you are trying to add already exists in your contact list: `This group already exists in the contact list`.
+
+--------------------------------------------------------------------------------------------------------------------
 
 
 ### Deleting a group `delete`
@@ -391,6 +433,8 @@ You can delete a group in your contact list.
 **Potential error(s):**
 - Incorrect format (e.g., no prefix, duplicate prefixes).
 - The group you are trying to delete does not exist in your contact list: `No group with such name found. Please provide the group's full name as in the existing contact list`.
+
+--------------------------------------------------------------------------------------------------------------------
 
 
 ### Adding remarks to a group `remark`
@@ -425,6 +469,8 @@ You can add remarks to a group in your contact list.
 **Potential errors(s):**
 - Incorrect format (e.g. no prefix, duplicate prefixes).
 - The group you entered does not exist in your contact list: `No group with such name found. Please provide the group's full name as in the existing contact list.`
+
+--------------------------------------------------------------------------------------------------------------------
 
 
 ### Finding a group `find`
@@ -490,6 +536,8 @@ You can list all the groups in your contact list.
 **Potential error(s):**
 - Extra inputs detected.
 
+--------------------------------------------------------------------------------------------------------------------
+
 
 ### Grouping a Contact `group`
 You can add an existing contact to an existing group.
@@ -524,6 +572,7 @@ You can add an existing contact to an existing group.
 - Incorrect format (e.g., no prefix, duplicate prefixes).
 - The contact you are trying to add is already a member of the group: `Alex Yeoh is already in this group: CS2103T`.
 
+--------------------------------------------------------------------------------------------------------------------
 
 ### Ungrouping a Contact `ungroup`
 
@@ -560,9 +609,11 @@ You can remove a contact from a group.
 - Incorrect format (e.g., no prefix, duplicate prefixes).
 - The contact you are trying to remove is not a member of the group: `Charlotte Oliveiro is not in this group: CS2103T`.
 
+--------------------------------------------------------------------------------------------------------------------
 
 ## Commands to Manage Time
 
+--------------------------------------------------------------------------------------------------------------------
 
 ### Adding Time to a Contact `addtime`
 You can add time slots when your contacts are available.
@@ -658,6 +709,7 @@ You can remove available time slots of your contacts.
 - Time slot does not exist for the contact.
 - Invalid time slot format.
 
+--------------------------------------------------------------------------------------------------------------------
 
 ### Listing Time from a Contact `listtime`
 You list all available time slots of your contacts.
@@ -671,7 +723,7 @@ You list all available time slots of your contacts.
     <img src="icons/checked.png" width="20" height="20" style="margin-right: 5px;">
     <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable values</h5>
   </div>
-  <p style="font-size:9px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">NAME</code> 
+  <p style="font-size:9px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">NAME</code>
     must be alphanumeric and cannot be blank.</p>
 </div>
 
@@ -685,12 +737,13 @@ You list all available time slots of your contacts.
 ![](images/features/Managetime_listtimecontact.png)
 
 <div align="center">
-  <p style="font-size: 11px; font-style: italic;">We see that Alex Yeoh is free on Mondays from 1400 - 1600</p>
+  <p style="font-size: 13px; font-style: italic;">We see that Alex Yeoh is free on Mondays from 1400 - 1600</p>
 </div>
 
 **Potential error(s):**
 - Contact does not exist in the contact list.
 
+--------------------------------------------------------------------------------------------------------------------
 
 ### Add Meeting to a Group `addmeeting`
 You can add a meeting time slot for your group.
@@ -731,13 +784,14 @@ You can add a meeting time slot for your group.
 ![](images/features/Managetime_addmeeting.png)
 
 <div align="center">
-  <p style="font-size: 11px; font-style: italic;">You have added a CS2103T meeting on Mondays from 1400 - 1600</p>
+  <p style="font-size: 13px; font-style: italic;">You have added a CS2103T meeting on Mondays from 1400 - 1600</p>
 </div>
 
 **Potential error(s):**
 - Group does not exist in the contact list.
 - Invalid time slot format.
 
+--------------------------------------------------------------------------------------------------------------------
 
 ### Remove Meeting Time from a Group `deletetime`
 You can remove meeting times from your groups.
@@ -756,9 +810,9 @@ You can remove meeting times from your groups.
   </div>
   <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
     must be alphanumeric and cannot be blank.</p>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">MEETING_TIME</code>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">MEETING_TIME</code>
     must be a time slot within a weekly schedule.</p>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">MEETING_TIME</code>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">MEETING_TIME</code>
     must be a time slot already added to the group.</p>
 </div>
 <p></p>
@@ -770,7 +824,7 @@ You can remove meeting times from your groups.
 ![](images/features/Managetime_deletetimegroup.png)
 
 <div align="center">
-  <p style="font-size: 11px; font-style: italic;">You have deleted the CS2103T meeting on Mondays from 1400 - 1600</p>
+  <p style="font-size: 13px; font-style: italic;">You have deleted the CS2103T meeting on Mondays from 1400 - 1600</p>
 </div>
 
 **Potential error(s):**
@@ -778,6 +832,7 @@ You can remove meeting times from your groups.
 - Group does not contain meeting time.
 - Invalid time slot format.
 
+--------------------------------------------------------------------------------------------------------------------
 
 ### Listing Meeting Time from a Group `listtime`
 You list meeting time for your groups.
@@ -811,6 +866,7 @@ You list meeting time for your groups.
 **Potential error(s):**
 - Group does not exist in the contact list.
 
+--------------------------------------------------------------------------------------------------------------------
 
 ### Finding Free Time of a Group `findfreetime`
 You can find a meeting time slot for your group where everyone is available.
@@ -828,7 +884,7 @@ You can find a meeting time slot for your group where everyone is available.
   </div>
   <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
     must be alphanumeric and cannot be blank.</p>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">DURATION</code>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">DURATION</code>
     must be a whole number representing the meeting duration in minutes.</p>
 </div>
 <p></p>
@@ -850,7 +906,7 @@ You can find a meeting time slot for your group where everyone is available.
 ![](images/features/Managetime_findfreetime.png)
 
 <div align="center">
-  <p style="font-size: 11px; font-style: italic;">You can coordinate meetings easily</p>
+  <p style="font-size: 13px; font-style: italic;">You can coordinate meetings easily</p>
 </div>
 
 
@@ -858,9 +914,11 @@ You can find a meeting time slot for your group where everyone is available.
 - Group does not exist in the contact list.
 - Contacts in the group did not add their available time slots.
 
+--------------------------------------------------------------------------------------------------------------------
 
 ## General Commands
 
+--------------------------------------------------------------------------------------------------------------------
 
 ### Viewing Help: `help`
 You can view the link to our UserGuide.
@@ -886,12 +944,14 @@ You can view the link to our UserGuide.
 ![](images/features/Generalcommand_help.png)
 
 <div align="center">
-  <p style="font-size: 11px; font-style: italic;">You can follow the link to get help!</p>
+  <p style="font-size: 13px; font-style: italic;">You can follow the link to get help!</p>
 </div>
 
 
 **Potential error(s):**
 - Extra inputs detected.
+
+--------------------------------------------------------------------------------------------------------------------
 
 
 ### Clearing All Data: `clear`
@@ -949,3 +1009,17 @@ You can exit ProjectPRO.
 
 **Potential error(s):**
 - Extra inputs detected.
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Saving the data
+ProjectPRO saves automatically after any command changes the data. There is no need to save manually.
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Editing the data file
+ProjectPRO's data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+<div style="border-left: 4px solid #d9534f; background-color: #FFD4D4; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">:exclamation: Warning!</h5>
+    If your changes to the data file makes its format invalid, ProjectPRO will discard all data and start with a sample data file. Hence, it is recommended to take a backup of the file before editing it.
+</div>

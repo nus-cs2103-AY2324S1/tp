@@ -55,19 +55,13 @@ public class TimeInterval {
     }
 
     /**
-     * Check whether an interval overlaps another interval in any way
-     * Interval overlapping at start and end points not considered as overlap does not form interval
+     * Check whether an interval overlaps another interval in any way.
+     * Interval overlapping at start and end points not considered as overlap does not form interval.
      *
-     * @param t
-     * @return
+     * @param t time interval of interest.
+     * @return boolean on whether this time interval overlaps with the time interval of interest t.
      */
     public boolean isTimeIntervalOverlapWithTimeInterval(TimeInterval t) {
-        // interval1.start < interval2.end (if interval1.start = interval2.end, is not overlapping)
-        // and interval1.end > interval2.start
-        // ||
-        // interval1.end > interval2.start (interval1.start = interval2.end means not overlapping)
-        // and interval1.start < interval2.end
-
         boolean firstCase = this.start.compareTo(t.end) < 0 && this.end.compareTo(t.start) > 0;
         boolean secondCase = this.start.compareTo(t.end) > 0 && this.start.compareTo(t.end) < 0;
         boolean overLap = firstCase || secondCase;
@@ -76,10 +70,10 @@ public class TimeInterval {
 
 
     /**
-     * Check if Intervals are equal in terms of time representation and not exact object comparison
+     * Check if Intervals are equal in terms of time representation and not exact object comparison.
      *
-     * @param otherInterval that we are comparing to
-     * @return boolean whether otherInterval is equal in terms of time representation
+     * @param otherInterval that we are comparing to.
+     * @return boolean whether otherInterval is equal in terms of time representation.
      */
     public boolean equalStartAndEnd(TimeInterval otherInterval) {
         return this.start.compareTo(otherInterval.start) == 0 && this.end.compareTo(otherInterval.end) == 0;
@@ -96,25 +90,25 @@ public class TimeInterval {
     }
 
     /**
-     * Create new time interval with MaxStart and MinEnd
+     * Create new time interval with Maximum Start and Minimum End.
      *
-     * @param otherInterval
-     * @return
+     * @param otherInterval of interest that we want the overlap with.
+     * @return TimeInterval representing the overlap between this TimeInterval and otherInterval.
      */
     public TimeInterval getIntersect(TimeInterval otherInterval) {
         return new TimeInterval(this.getStart(), otherInterval.getEnd());
     }
 
     /**
-     * Check if time interval can accomodate for a given duration
-     * Whether duration can fit in interval
+     * Check if time interval can accommodate for a given duration.
+     * Whether duration can fit in interval.
+     * Assume start < end always hold, property of timeInterval
      *
-     * @param duration of meeting in consideration
-     * @return boolean whether meeting is permissible
+     * @param duration of meeting in consideration.
+     * @return boolean whether meeting is permissible.
      */
     public boolean allows(Duration duration) {
         int durationInMin = duration.getDurationInMin();
-        // assume start < end always hold, property of timeInterval
         int durationStart = this.start.getDurationInMin();
         int durationEnd = this.end.getDurationInMin();
         boolean allows = durationEnd - durationStart >= durationInMin;
@@ -143,7 +137,10 @@ public class TimeInterval {
     }
 
     /**
-     * Checks if timeInterval clashes with otherTime
+     * Returns if TimeInterval clashes with otherTime TimeInterval.
+     *
+     * @param otherTime is the TimeInterval of interest
+     * @return boolean whether there is a clash between this and otherTime TimeInterval
      */
     public boolean isClash(TimeInterval otherTime) {
         boolean isBefore = this.start.compareTo(otherTime.start) < 0 && this.end.compareTo(otherTime.end) < 0
@@ -153,10 +150,21 @@ public class TimeInterval {
         return !(isBefore || isAfter);
     }
 
+    /**
+     * Check whether start if before, equal or after otherTime.
+     * @param otherTime is the TimeInterval that we want to compare to.
+     *
+     * @return int representing whether this TimeInterval start is before, equal to, or after otherTime TimeInterval.
+     */
     public int compareStart(TimeInterval otherTime) {
         return this.start.compareTo(otherTime.start);
     }
 
+    /**
+     * Return the DayOfWeek for start of TimeInterval
+     *
+     * @return DayOfWeek for the start
+     */
     public DayOfWeek getStartTimeDay() {
         return this.start.getDay();
     }
