@@ -358,7 +358,7 @@ The activity diagram notation of the above steps is shown below. <br>
 
 The sequence diagram notation of the above steps is shown below. <br>
 
-<puml src="diagrams/ListSequenceDiagram.puml" width="600" />
+<puml src="diagrams/ListSequenceDiagram.puml" />
 
 #### Design Considerations
 
@@ -394,12 +394,12 @@ The `FilterCommand` class then returns a `CommandResult` object that contains th
 
 The _Activity_ diagram summarises what happens after the user enters a filter command.
 
-<puml src="diagrams/FilterActivity.puml" width="600" />
+<puml src="diagrams/FilterActivity.puml" />
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `filter name/John`
 
-<puml src="diagrams/FilterSequence.puml" width="600" />
+<puml src="diagrams/FilterSequence.puml" />
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
@@ -414,12 +414,12 @@ the command `filter name/John`
 
 The _Activity_ diagram summarises what happens after the user enters a sort command.
 
-<puml src="diagrams/SortActivity.puml" width="550" />
+<puml src="diagrams/SortActivity.puml" />
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `sort name/increasing`.
 
-<puml src="diagrams/SortSequence.puml" width="600" />
+<puml src="diagrams/SortSequence.puml" />
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
@@ -469,7 +469,7 @@ income.
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `bestMatch`
 
-<puml src="diagrams/BestMatchSequence.puml" width="600" />
+<puml src="diagrams/BestMatchSequence.puml" />
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
@@ -494,11 +494,11 @@ The `edit` feature is also implemented in a similar manner.
 
 The _Activity_ Diagram notation of the above steps is shown below.
 
-<puml src="diagrams/SetPrefActivity.puml" width="600" />
+<puml src="diagrams/SetPrefActivity.puml" />
 
 The _Sequence_ Diagram notation of the above steps is shown below.
 
-<puml src="diagrams/SetPrefSequence.puml" width="600" />
+<puml src="diagrams/SetPrefSequence.puml" />
 
 #### Design Considerations
 
@@ -593,12 +593,12 @@ the command `star 1`
 
 The _Activity_ diagram summarises what happens after the user enters a star command.
 
-<puml src="diagrams/UnstarActivity.puml" width="600" />
+<puml src="diagrams/UnstarActivity.puml" />
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `unstar 1`
 
-<puml src="diagrams/UnstarSequence.puml" width="600" />
+<puml src="diagrams/UnstarSequence.puml" />
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
