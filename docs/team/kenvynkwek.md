@@ -47,10 +47,11 @@ would mean having non-descriptive package/class/method/variable names.
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `add`, `help` and `filter` [\#19](https://github.com/AY2324S1-CS2103-T16-1/tp/pull/19),
-[\#75](https://github.com/AY2324S1-CS2103-T16-1/tp/pull/75)
+[\#75](https://github.com/AY2324S1-CS2103-T16-1/tp/pull/75), [\#144](https://github.com/AY2324S1-CS2103-T16-1/tp/pull/144)
     * Added additional resources such as table of contents and description [\#19](https://github.com/AY2324S1-CS2103-T16-1/tp/pull/19)
   * Developer Guide:
-    * Added implementation details of the `filter` feature [\#58](https://github.com/AY2324S1-CS2103-T16-1/tp/pull/58)
+    * Added implementation details of the `filter` feature [\#58](https://github.com/AY2324S1-CS2103-T16-1/tp/pull/58),
+[\#144](https://github.com/AY2324S1-CS2103-T16-1/tp/pull/144)
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#63](https://github.com/AY2324S1-CS2103-T16-1/tp/pull/63),
