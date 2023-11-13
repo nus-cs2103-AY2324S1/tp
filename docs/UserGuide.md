@@ -264,7 +264,7 @@ Output:
 * The message `0 flashcards listed!` occurs when:
     * There are no flash cards scheduled for review at the time when the command is executed.
 
-###  Starts review session : `start`
+###  Starting a new review session : `start`
 
 Starts a new review session.
 
