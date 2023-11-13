@@ -66,6 +66,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
@@ -109,6 +111,8 @@ The `UI` component is responsible for the following key features:
 * Whenever a user performs an add, or delete operation, update the names of the tasks in the calendar accordingly
 * Switching between different calendar months using buttons
 
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
@@ -143,6 +147,8 @@ shown above to parse the user command and create a `XYZCommand` object (e.g., `A
 * All `XYZParser` classes (e.g., `AddAssignmentParser`, `DeleteAssignmentParser`, ...) inherit 
 from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
@@ -164,6 +170,7 @@ unmodifiable `ObservableList` that can be 'observed' e.g. the UI can be bound to
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as these components represent data entities of the domain, they should make sense on their own without depending on other components)
 
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -477,6 +484,7 @@ The following sequence diagram illustrates how the list assignment operation wor
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix A: Product Scope**
 
