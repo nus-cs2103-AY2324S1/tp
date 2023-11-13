@@ -1177,7 +1177,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Ensure an appointment exists for a patient at a given time.
     2. Execute the command: `schedule patient=Alex Yeoh start=2023/10/20 12:00 end=2023/10/20 13:00 description=Follow up on Chest X-Ray priority=high`  
 
-      **Expected**: No new appointment is scheduled. Error details are shown in the status box indicating the time conflict.  
+       **Expected**: No new appointment is scheduled. Error details are shown in the status box indicating the time conflict.  
 
 
 ### Rescheduling an appointment
@@ -1195,7 +1195,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Ensure at least one appointment is displayed in the appointments list.
     2. Execute the command: `reschedule 1 start=2023/10/20 13:00 end=2023/10/20 12:00`  
    
-      **Expected**: The appointment is not rescheduled. Error details are shown in the status box indicating that the start time is after the end time.  
+       **Expected**: The appointment is not rescheduled. Error details are shown in the status box indicating that the start time is after the end time.  
 
 ### Triaging an appointment
 
@@ -1211,7 +1211,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Ensure the appointments list is empty or the index provided does not exist.
     2. Execute the command: `triage 2 priority=high` where index 2 does not exist  
 
-      **Expected**: Priority is not changed. Error details are shown in the status box indicating an invalid index.  
+       **Expected**: Priority is not changed. Error details are shown in the status box indicating an invalid index.  
 
 ### Cancelling an appointment
 
@@ -1227,7 +1227,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Ensure the appointments list is empty or the index provided does not exist.
     2. Execute the command: `cancel 3` where index 3 does not exist  
 
-      **Expected**: No appointment is cancelled. Error details are shown in the status box indicating an invalid index.
+       **Expected**: No appointment is cancelled. Error details are shown in the status box indicating an invalid index.
 
 ### Displaying all appointments
 
@@ -1283,7 +1283,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Perform a command that does not change data, such as `find`, `today`, `upcoming`, `find-i`, `find-p`, `patients`, `exit`, `help`, or `list`.
     2. Execute the command: `undo`  
 
-      **Expected**: No changes occur. An appropriate message indicating that the command cannot be undone is displayed.
+       **Expected**: No changes occur. An appropriate message indicating that the command cannot be undone is displayed.
 
 ### Redoing a command
 
@@ -1292,14 +1292,14 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Perform an `undo` operation.
     2. Execute the command: `redo`  
 
-      **Expected**: The previously undone command is redone. The application's state updates to reflect the redone command.
+       **Expected**: The previously undone command is redone. The application's state updates to reflect the redone command.
 
 2. Redoing a command without an `undo`
 
     1. Prerequisites: Without having used `undo`, attempt to `redo`.
     2. Execute the command: `redo`  
 
-      **Expected**: No changes occur. An appropriate message indicating that there is no command to redo is displayed.
+       **Expected**: No changes occur. An appropriate message indicating that there is no command to redo is displayed.
 
 ### Listing all records
 
