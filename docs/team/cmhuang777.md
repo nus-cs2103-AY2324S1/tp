@@ -22,7 +22,7 @@ Given below are my contributions to the project.
 
 * **New Feature**: Modified current add person command to add new Patient class
 * **New Feature**: Added new command and parser to add new appointment for patients and doctors
-  * Also updated the storage for the appointments 
+  * Also updated the storage for the appointments
 * **New Feature**: Created a new Class AppointmentTime to represent the time object used in Appointment
 * **New Feature**: Updated part of the sample data to include the new features
 
@@ -34,10 +34,10 @@ Given below are my contributions to the project.
     * (to be added soon)
 
 * **Documentation**:
-    * User Guide: 
+    * User Guide:
       * Updated existing content to our project
       * Added the section on adding new patients
-    * Developer Guide: 
+    * Developer Guide:
       * Included the section for add patient/doctor feature and added a new sequence diagram for that feature
       * Added use case for adding new patient
 

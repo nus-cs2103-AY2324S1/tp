@@ -16,7 +16,7 @@ Given below are my contributions to the project.
 * **New Feature**: Enhanced the Find feature to function with NRIC, blood type, gender as well as name.
     * What it does: Allows users to search for Patients/Doctors by their NRIC, blood type, gender or simply name
     * Justification: Users can search by a specific attribute, increasing convenience
- 
+
 * **New Feature**: Added a Find Appointment function to locate a specific appointment by NRIC of people involved
 * **New Feature** Added a Delete Appointment function to delete a specific appointment by NRIC of people involved
 
@@ -26,7 +26,7 @@ Given below are my contributions to the project.
     * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
 
 * **Enhancements to existing features**:
-    * Wrote an abstract UniqueObjectList that can be inherited to form UniqueLists of Patients, Doctors and Appointments 
+    * Wrote an abstract UniqueObjectList that can be inherited to form UniqueLists of Patients, Doctors and Appointments
     * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
     * Wrote additional tests for existing features (Pull requests [\#36](), [\#38]())
 
