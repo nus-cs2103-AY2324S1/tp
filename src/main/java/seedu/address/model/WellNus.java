@@ -115,7 +115,7 @@ public class WellNus implements ReadOnlyWellNus {
      */
     public boolean hasAppointment(Appointment appointment) {
         requireNonNull(appointment);
-        return appointments.contains(appointment);
+        return appointments.hasAppointment(appointment);
     }
 
     /**
@@ -126,7 +126,7 @@ public class WellNus implements ReadOnlyWellNus {
      */
     public boolean hasOverlapsWithAppointments(Appointment appointment) {
         requireNonNull(appointment);
-        return appointments.overlaps(appointment);
+        return appointments.hasOverlapWith(appointment);
     }
 
     public boolean hasNoStudentForAppointment(Appointment appointment) {

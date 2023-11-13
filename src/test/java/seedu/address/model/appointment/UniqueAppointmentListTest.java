@@ -28,29 +28,29 @@ public class UniqueAppointmentListTest {
 
     // null object
     @Test
-    public void contains_nullAppointment_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueAppointmentList.contains(null));
+    public void hasAppointment_nullAppointment_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueAppointmentList.hasAppointment(null));
     }
 
     // appointment not in list
     @Test
-    public void contains_appointmentNotInList_returnsFalse() {
-        assertFalse(uniqueAppointmentList.contains(ALICE_APPOINTMENT));
+    public void hasAppointment_appointmentNotInList_returnsFalse() {
+        assertFalse(uniqueAppointmentList.hasAppointment(ALICE_APPOINTMENT));
     }
 
     @Test
-    public void contains_appointmentInList_returnsTrue() {
+    public void hasAppointment_appointmentInList_returnsTrue() {
         uniqueAppointmentList.add(ALICE_APPOINTMENT);
-        assertTrue(uniqueAppointmentList.contains(ALICE_APPOINTMENT));
+        assertTrue(uniqueAppointmentList.hasAppointment(ALICE_APPOINTMENT));
     }
 
     @Test
-    public void contains_appointmentWithSameFieldsInList_returnsTrue() {
+    public void hasAppointment_appointmentWithSameFieldsInList_returnsTrue() {
         uniqueAppointmentList.add(ALICE_APPOINTMENT);
         Appointment editedAlex = new AppointmentBuilder().withName("Alice Pauline")
                 .withDate("2023-10-31").withStartTime("12:00").withEndTime("13:00")
                 .withDescription("First Session").build();
-        assertTrue(uniqueAppointmentList.contains(editedAlex));
+        assertTrue(uniqueAppointmentList.hasAppointment(editedAlex));
     }
 
     // Tests for add method
@@ -164,6 +164,6 @@ public class UniqueAppointmentListTest {
         assertEquals(APPOINTMENT_5, iterator.next());
 
         // Ensure that the removed appointment is no longer in the list
-        assertFalse(uniqueAppointmentList.contains(APPOINTMENT_3));
+        assertFalse(uniqueAppointmentList.hasAppointment(APPOINTMENT_3));
     }
 }

@@ -207,11 +207,9 @@ to a `Student`.
     * Cons: User will have to type much longer commands, since `Note` can be up to 200 characters long,
   leads to very lengthy commands
       
-### 3.4 \[Proposed\] Check clashing appointments feature
+### 3.4 Check overlapping appointments feature
 
-#### Proposed Implementation
-
-The proposed check clashing appointments mechanism is facilitated by `UniqueAppointmentList`. It implements the `Iterable`
+The *check overlapping appointments* mechanism is facilitated by `UniqueAppointmentList`. It implements the `Iterable`
 interface that stores an `ObservableList` of type `Appointment`.
 
 The following methods are implemented to facilitate the check clashing appointments process:
