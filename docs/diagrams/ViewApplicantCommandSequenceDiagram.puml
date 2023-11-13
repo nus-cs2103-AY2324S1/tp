@@ -5,7 +5,6 @@ skinparam ArrowFontStyle plain
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":ViewApplicantCommandParser" as ViewApplicantCommandParser LOGIC_COLOR
 participant "v:ViewApplicantCommand" as ViewApplicantCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
@@ -14,35 +13,18 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("viewa 1")
+[-> LogicManager : execute("viewa")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("viewa 1)
+LogicManager -> AddressBookParser : parseCommand("viewa")
 activate AddressBookParser
 
-create ViewApplicantCommandParser
-AddressBookParser -> ViewApplicantCommandParser
-activate ViewApplicantCommandParser
-
-ViewApplicantCommandParser --> AddressBookParser
-deactivate ViewApplicantCommandParser
-
-AddressBookParser -> ViewApplicantCommandParser : parse("1")
-activate ViewApplicantCommandParser
-
 create ViewApplicantCommand
-ViewApplicantCommandParser -> ViewApplicantCommand
+AddressBookParser -> ViewApplicantCommand
 activate ViewApplicantCommand
 
-ViewApplicantCommand --> ViewApplicantCommandParser : v
+ViewApplicantCommand --> AddressBookParser : v
 deactivate ViewApplicantCommand
-
-ViewApplicantCommandParser --> AddressBookParser : v
-deactivate ViewApplicantCommandParser
-
-'Hidden arrow to position the destroy marker below the end of the activation bar.
-ViewApplicantCommandParser -[hidden]-> AddressBookParser
-destroy ViewApplicantCommandParser
 
 AddressBookParser --> LogicManager : v
 deactivate AddressBookParser
@@ -50,7 +32,7 @@ deactivate AddressBookParser
 LogicManager -> ViewApplicantCommand : execute()
 activate ViewApplicantCommand
 
-ViewApplicantCommand -> Model : updateFilteredMemberList()
+ViewApplicantCommand -> Model : updateFilteredApplicantList()
 activate Model
 
 Model --> ViewApplicantCommand

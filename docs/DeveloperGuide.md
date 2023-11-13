@@ -23,7 +23,8 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
---------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -61,6 +62,8 @@ The bulk of the app's work is done by the following four components:
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
+<div style="page-break-after: always;"></div>
+
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues
@@ -82,6 +85,8 @@ implementation of a component), as illustrated in the (partial) class diagram be
 <img src="images/ComponentManagers.png" width="300" />
 
 The sections below give more details of each component.
+
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
@@ -108,6 +113,8 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Member`, `Applicant` and `Tag` objects residing in the `Model`.
 
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API**: [`Logic.java`](https://github.com/AY2324S1-CS2103T-W15-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
@@ -123,6 +130,8 @@ call as an example.
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:** The lifeline for `DeleteMemberCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 How the `Logic` component works:
 
@@ -145,6 +154,8 @@ How the parsing works:
   a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddMemberCommandParser`, `DeleteMemberCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
+
+<div style="page-break-after: always;"></div>
 
 ### Model component
 
@@ -170,6 +181,8 @@ The `Model` component,
 The `Member` and `Applicant` classes both extend from the abstract `Person` class, and each of these classes have the
 associated fields specific to them.
 
+<div style="page-break-after: always;"></div>
+
 ### Storage component
 
 **API**: [`Storage.java`](https://github.com/AY2324S1-CS2103T-W15-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
@@ -189,7 +202,7 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -216,6 +229,8 @@ The sequence diagram below also shows the interaction between the various compon
 
 <img src="images/AddApplicantSequenceDiagram.png">
 
+<div style="page-break-after: always;"></div>
+
 ### View all `Member`/`Applicant` feature
 
 Lists all members/applicants in the address book to the user. For example, if the previous list was filtered (say by `FindMemberCommand` or `FindApplicantCommand`),
@@ -225,7 +240,7 @@ then set it to unfiltered again.
 2. This updates the model via its `updateFilteredMemberList()` or `updateFilteredApplicantList()` method which is called with its predicate as always returning true. 
 3. All members/applicants in the address book are shown to the user in the members/applicants list.
 
-The diagram below describes the behaviour of viewing an applicant in the `AddressBook`, the execution of viewing a member
+The diagram below describes the behaviour of viewing an applicant in the `AddressBook`; the behaviour of viewing a member in
 the `AddressBook` is almost identical.
 
 <img src="images/ViewApplicantActivityDiagram.png">
@@ -235,6 +250,8 @@ The sequence diagram below also shows the interaction between the various compon
 `Member` class instead of the `Applicant` class.
 
 <img src="images/ViewApplicantCommandSequenceDiagram.png">
+
+<div style="page-break-after: always;"></div>
 
 ### Delete a `Member`/`Applicant`
 
@@ -255,6 +272,7 @@ The sequence diagram below also shows the interaction between the various compon
 
 <img src="images/DeleteApplicantSequenceDiagram.png">
 
+<div style="page-break-after: always;"></div>
 
 ### Find a `Member`/`Applicant`
 
@@ -272,6 +290,8 @@ The diagram below describes this behaviour concisely. It shows how a user’s co
 The sequence diagram below also shows the interaction between the various components during the execution of the FindMemberCommand. The execution of the FindApplicantCommand is almost identical, except that it uses the Applicant class instead of the Member class.
 
 <img src="images/FindMemberSequenceDiagram.png">
+
+<div style="page-break-after: always;"></div>
 
 ### Edit a `Member`/`Applicant`
 
@@ -293,6 +313,8 @@ The sequence diagram below also shows the interaction between the various compon
 
 <img src="images/EditApplicantSequenceDiagram.png">
 
+<div style="page-break-after: always;"></div>
+
 ### Copy a `Member`/`Applicant`
 
 Copies the details of an existing `Member`/`Applicant` identified by their index number in the displayed member/applicant list into the
@@ -304,12 +326,15 @@ clipboard. The commands are implemented in the `CopyMemberCommand` and `CopyAppl
 4. The `CopyMemberCommand`/`CopyApplicantCommand` calls the copies the details given by the `Member#detailsToCopy`/`Applicant#detailsToCopy` method into the clipboard.
 
 The diagram below describes this behaviour concisely. It shows how a user's command is processed and what message is ultimately shown if they decide, for example, to copy a member's details.
+The behaviour is almost identical for `CopyApplicantCommand`.
 
 <img src="images/CopyMemberActivityDiagram.png">
 
 The sequence diagram below also shows the interaction between the various components during the execution of the `CopyMemberCommand`. The execution of the `CopyApplicantCommand` is almost identical, except that it uses the `Applicant` class instead of the `Member` class.
 
 <img src="images/CopyMemberSequenceDiagram.png">
+
+<div style="page-break-after: always;"></div>
 
 ### View all existing tags
 
@@ -324,6 +349,8 @@ Suppose the DeleteMemberCommand is executed as shown in the diagram below, the f
 4. UI detects change in `ObservableList<Tags>` and updates the `TagListPanel` UI component.
 
 <img src="images/ViewTagsSequenceDiagram.png" width="543" alt="ViewTagsSequenceDiagram"/>
+
+<div style="page-break-after: always;"></div>
 
 ### Allocating tasks to Members
 
@@ -348,6 +375,8 @@ The sequence diagram below also shows the interaction between the various compon
 
 <img src="images/AddMemberTaskSequenceDiagram.png">
 
+<div style="page-break-after: always;"></div>
+
 ### View Member task feature
 
 Lists all tasks assigned to a member in the address book to the user under the `Tasks` column.
@@ -365,6 +394,8 @@ The sequence diagram below also shows the interaction between the various compon
 `viewMemberTask`.
 
 <img src="images/ViewMemberTaskSequenceDiagram.png">
+
+<div style="page-break-after: always;"></div>
 
 ### \[Proposed\] Better Task Management
 
@@ -400,6 +431,8 @@ Step 4: When the user uses the `addEvent` command, an `Event` object containing 
 will
 be stored and under the user identified by their telegram handle, which is passed as a parameter. It namely stores the
 `Tasks.taskName`, `Event.startDate`, `Deadline.startTime`, `Event.endDate` and `Deadline.endTime`.
+
+<div style="page-break-after: always;"></div>
 
 ### \[Proposed\] Undo/redo feature
 
@@ -440,6 +473,8 @@ the `addressBookStateList`.
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing
 the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer`
 once to the left, pointing it to the previous address book state, and restores the address book to that state.
@@ -465,6 +500,8 @@ to the right, pointing to the previously undone state, and restores the address 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such
 as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`.
@@ -496,7 +533,7 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `delm`, just save the member being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -532,6 +569,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 * Members are able to manage their tasks on the app
 * Applicants are able to schedule interviews
 
+<div style="page-break-after: always;"></div>
+
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
@@ -553,6 +592,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | ` * `    | EXCO    | export a selected group of contacts to a CSV file           | use the data in other applications or for backup purposes           |
 | ` * `    | EXCO    | import a CSV file of contacts into the application          | add a large number of contacts into the application at once         |
 | ` * `    | EXCO    | merge duplicate contact entries                             | maintain a clean and organised database                             |
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -730,6 +771,7 @@ Use case ends.
     * 2a1. ClubMembersContact shows a blank task box.
       <br/>
       Use case resumes at step 1.
+
 ---
 
 **Use case: UC09 - Deleting a task allocated to a member**
@@ -893,14 +935,14 @@ Command: `help`
 
 Command: `addm` or `addmember`. You can refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#411-adding-a-member-addmember-or-addm).
 1. Adding a new member
-    1. Prerequisites: Existing list of applicants do not contain member with the same phone number
+    1. Prerequisites: Existing list of members do not contain member with the same phone number
     2. Test case: `addm /name John Doe /phone 91234567 /email johnd@example.com /tele @johndoe`<br>
        Expected: A new member is added with the given name, phone number, email, and Telegram handle with no tags.
        The member is added to the last index of the member list. The member card will appear at the bottom
        of the list.
     3. Test case: `addm /name John Doe /phone 91234567 /email johnd@example.com /tele @johndoe /tag Classmate`<br>
        Expected: A new member is added with the given name, phone number, email, and Telegram handle with the Classmate tag.
-       The member added to the last index of the applicant list. The applicant card will appear at the bottom of the list.
+       The member added to the last index of the member list. The member card will appear at the bottom of the list.
 
 2. Adding a member applicant
     1. Prerequisites: Existing list of member contain member with the same phone number
