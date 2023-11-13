@@ -112,7 +112,7 @@ Given below is a sequence diagram that explains how `LogicManager` class chooses
 
 ![isInViewModeSequenceDiagram](images/IsInViewModeSequenceDiagram.png)
 
-As the diagram suggests, the `executeInView()` method is used when personListPanelPlaceHolder UI element - the placeholder that contains the normal fosterer list - is invisible, which means the user sees the profile page. This triggers the `ViewModeParser` instance in `LogicManager` class to be used to parse the command. If the placeholder is visible, it means the user is seeing the main window, in which case the `execute()` method is used and the commands user enter are parsed by `AddressBookParser`. 
+As the diagram suggests, the `executeInView()` method is used when personListPanelPlaceHolder UI element - the placeholder that contains the normal fosterer list - is invisible, which means the user sees the profile page. This triggers the `ViewModeParser` instance in `LogicManager` class to be used to parse the command. If the placeholder is visible, it means the user is seeing the main window, in which case the `execute()` method is used and the commands the user enters are parsed by `AddressBookParser`. 
 
 The reason for creating two separate parser classes is to provide mutual exclusion between the commands available in main window and in a profile page. For example, `SaveCommand` should only be executed in the context of editing a fosterer's detail in profile page, not in main window. 
 
@@ -151,7 +151,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T13-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png"/>
 
 The `Model` component,
 
@@ -160,9 +160,13 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
+
+<div></div>
 
 Multiplicities and other navigabilities are omitted from diagram for simplicity.
 
@@ -629,7 +633,7 @@ Step 3. The `StatsAvailCommand` will then call relevant methods to obtain the ne
 
 Step 4. A success message with the statistics will then be displayed to the user.
 
-The other commands `stats current` and `stats housing` have a similar execution path, replacing `StatsAvailCommand` with `StatsCurrCommand` and `StatsHousingCommand` respectively.
+The other commands `stats current` and `stats housing` have a similar execution path, replacing `StatsAvailCommand` with `StatsCurrentCommand` and `StatsHousingCommand` respectively, and obtaining their own relevant statistics.
 
 #### Design considerations:
 
@@ -1323,7 +1327,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `undo 12345`<br>
      Expected: Previous command will be undone. Command success message is shown.
 
-### Viewing Statistics of Fosterers
+### Viewing statistics of fosterers
 1. Viewing statistics of available fosterers
    1. Prerequisites: List all fosterers using the list or find command. At least 1 fosterer in the list.
    1. Test case: `stats avail`<br>
@@ -1338,15 +1342,50 @@ testers are expected to do more *exploratory* testing.
       Expected: Only availability statistics shown. `stats` commands will only display the first valid statistic field detected (ie. either `avail`, `current` or `housing`).
 2. Viewing statistics of current fosterers and housing types work similarly, replacing `avail` with `current` and `housing` respectively.
 
-### Resetting the Address Book
+
+### Editing details of a fosterer
+
+1. Editing through the main window
+   1. Prerequisites: At least one fosterer in the list, and the first fosterer has at least 2 tags.<br>
+   1. Test case: `edit 1 p/99887776`<br>
+      Expected: Fosterer 1's phone number successfully edited.<br>
+   1. Test case: `edit 1 t/new`<br>
+      Expected: Fosterer 1's existing tags are overwritten. The only tag is the `new` tag.<br>
+   1. Test case: `edit 1 n/Ben Yeo  e/benyeo123@gmail.com`<br>
+      Expected: Fosterer 1's name and email successfully edited.<br>
+   1. Invalid edit commands to try: `edit n/Ben Yeo`, `edit x n/Ben Yeo` (where x is larger than the list size).<br>
+   
+2. Opening the profile view for editing
+   1. Prerequisites: At least one fosterer in the list, and the first fosterer has at least 2 tags.<br>
+   1. Test case: `edit 1` or `view 1` <br>
+      Expected: Profile view of fosterer 1 opens for editing.<br>
+   1. Test case: `edit 1 list` or `edit` or `view` <br>
+      Expected: Profile view does not open, error message shown.<br>
+
+3. Field jumping in profile view
+   1. Prerequisites: The profile view of a fosterer is currently open. <br>
+   1. Test case: `ph`<br>
+      Expected: Cursor jumps to the Phone field for editing.<br>
+   1. Test case: `type`<br>
+      Expected: Cursor jumps to the Animal Type field for editing.<br>
+
+4. Editing details in profile view
+   1. Availability = `NotAvailable`, Animal Name = `nil` Animal Type = `nil` <br>
+      Expected on Enter: Valid fosterer.<br>
+   1. Availability = `Available`, Animal Name = `nil` Animal Type = `nil`<br>
+      Expected on Enter: Valid fosterer.<br>
+   1. Availability = `NotAvailable`, Animal Name = `mew` Animal Type = `able.Cat`<br>
+      Expected on Enter: Invalid fosterer, and error message shown.<br>
+
+### Resetting the address book
 1. Resetting the Address Book
-   1. Prerequisites: `reset` command must be entered first, before entering `reset confirm`.
+   1. Prerequisites: `reset` command must be entered first, before entering `reset confirm`.<br>
    2. Test case: `reset` <br>
-      Expected: Warning displayed of the function of the `reset` command and a prompt of entering `reset confirm` is displayed to continue executing the command.
-   3. Test case: `reset confirm`
-      Expected: A prompt to enter `reset` first followed by `reset confirm` to execute the command.
-   4. Test case: `reset randomArg`
-      Expected: Warning displayed of the function of the `reset` command and a prompt of entering `reset confirm` is displayed to continue executing the command.
-   5. Test case: `reset` followed by `reset confirm`
-      Expected: The Address Book is erased and a command success massage is displayed.
+      Expected: Warning displayed of the function of the `reset` command and a prompt of entering `reset confirm` is displayed to continue executing the command.<br>
+   3. Test case: `reset confirm`<br>
+      Expected: A prompt to enter `reset` first followed by `reset confirm` to execute the command.<br>
+   4. Test case: `reset randomArg`<br>
+      Expected: Warning displayed of the function of the `reset` command and a prompt of entering `reset confirm` is displayed to continue executing the command.<br>
+   5. Test case: `reset` followed by `reset confirm`<br>
+      Expected: The Address Book is erased and a command success massage is displayed.<br>
         
