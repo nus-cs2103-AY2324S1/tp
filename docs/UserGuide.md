@@ -67,7 +67,7 @@ Welcome to the **Staff-Snap** User Guide!
 
 The purpose of this guide is to get you familiar with the features of **Staff-Snap**. These features range from the simple task of adding an applicant to being able to sort your applicants by their overall score. Every single feature is explained in this guide.
 
-To begin using this guide, ensure you meet the [Minimum System Requirements](#minimum-system-requirements) to run **Staff-Stap**. Once this is done, go to the [Quick Start](#quick-start) section to get the application up and running. Once you have done so, feel free to go through the [Features](#features) section to find out about the features **Staff-Snap** offers. We recommend going through it in the order of this guide but any order works as well! You may check out our [Table of Contents](#table-of-contents) to jump to any section of your choice.
+To begin using this guide, ensure you meet the [Minimum System Requirements](#minimum-system-requirements) to run **Staff-Snap**. Once this is done, go to the [Quick Start](#quick-start) section to get the application up and running. Once you have done so, feel free to go through the [Features](#features) section to find out about the features **Staff-Snap** offers. We recommend going through it in the order of this guide but any order works as well! You may check out our [Table of Contents](#table-of-contents) to jump to any section of your choice.
 
 <br>
 
@@ -385,8 +385,10 @@ number in the user input until it hits a unique input, or add 1 if there is no n
 large, or there are too many duplicates, the system might throw a message asking you to handle it manually without 
 handling it for you.
 
-Note: The name change is permanant so removing previous interviews will not change back the name. That is if both
-`technical1` and `technical2` exist, deleting `technical1` will not change `technical2` back to `technical1`.
+<box type="info" header="**Note**">
+The name change is permanent so removing previous interviews will not change back the name. That is if both
+<code>technical1</code> and <code>technical2</code> exist, deleting <code>technical1</code> will not change <code>technical2</code> back to <code>technical1</code>.
+</box>
 
 Duplicate handling: 
 * Entering `technical12`, then `technical12` again will result in the 2nd entry being converted to 
@@ -760,7 +762,7 @@ apply for multiple positions in future iterations.
 **A**: No, Staff-Snap is completely free to use.
 
 **Q**: Can I contact somebody for support? <br>
-**A**: Yes, if you require support from our team while using Staff-Snap, feel free to drop us an email at [support@staffsnap.com](support@staffsnap.com).
+**A**: Yes, if you require support from our team while using Staff-Snap, feel free to drop us an email at [support@staffsnap.com](mailto:support@staffsnap.com).
 
 <br>
 
