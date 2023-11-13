@@ -4,7 +4,7 @@ skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":WellNusParser" as WellNusParser LOGIC_COLOR
 participant ":CancelCommandParser" as CancelCommandParser LOGIC_COLOR
 participant "d:CancelCommand" as CancelCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
@@ -17,17 +17,17 @@ end box
 [-> LogicManager : execute("cancel 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("cancel 1")
-activate AddressBookParser
+LogicManager -> WellNusParser : parseCommand("cancel 1")
+activate WellNusParser
 
 create CancelCommandParser
-AddressBookParser -> CancelCommandParser
+WellNusParser -> CancelCommandParser
 activate CancelCommandParser
 
-CancelCommandParser --> AddressBookParser
+CancelCommandParser --> WellNusParser
 deactivate CancelCommandParser
 
-AddressBookParser -> CancelCommandParser : parse("1")
+WellNusParser -> CancelCommandParser : parse("1")
 activate CancelCommandParser
 
 create CancelCommand
@@ -37,14 +37,14 @@ activate CancelCommand
 CancelCommand --> CancelCommandParser : d
 deactivate CancelCommand
 
-CancelCommandParser --> AddressBookParser : d
+CancelCommandParser --> WellNusParser : d
 deactivate CancelCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-CancelCommandParser -[hidden]-> AddressBookParser
+CancelCommandParser -[hidden]-> WellNusParser
 destroy CancelCommandParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+WellNusParser --> LogicManager : d
+deactivate WellNusParser
 
 LogicManager -> CancelCommand : execute()
 activate CancelCommand
