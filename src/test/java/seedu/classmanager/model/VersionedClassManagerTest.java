@@ -316,8 +316,10 @@ public class VersionedClassManagerTest {
         assertFalse(versionedClassManager.equals(null));
 
         newVersionedClassManager.addStudent(AMY);
-        newVersionedClassManager.setSelectedStudent(AMY);
+        // different value -> returns false;
+        assertFalse(versionedClassManager.equals(newVersionedClassManager));
 
+        newVersionedClassManager.setSelectedStudent(AMY);
         // different value -> returns false;
         assertFalse(versionedClassManager.equals(newVersionedClassManager));
     }
