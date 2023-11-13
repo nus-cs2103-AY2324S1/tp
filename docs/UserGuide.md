@@ -147,9 +147,10 @@ Welcome back to ProjectPRO. Simply head over to our Features section to gain ins
    - For Windows Users:
      - ![WINDOWSGUIDE](images/UG/QUICKSTART4.png)
 4. Launch ProjectPRO.
-   1. Open a command terminal
-   2. type `cd Desktop` , followed by `cd ProjectPro`
-   3. type `java -jar ProjectPRO.jar` to run the application.
+   1. Open a command terminal.
+   2. Type `cd Desktop` , followed by `cd ProjectPro`.
+   3. Type `java -jar ProjectPRO.jar` to run the application.
+
 
 5. Start using ProjectPRO!
 
@@ -313,6 +314,7 @@ You can find all the contacts from your contact list with the matching keywords.
 
 **Example(s):**
 - `find n/alex bernice`
+
   This displays all the contacts with names containing Alex or Bernice.
 
 ![Manage Contacts: Find](images/features/Managecontacts_find.png)
@@ -887,7 +889,7 @@ You can find a meeting time slot for your group where everyone is available.
 --------------------------------------------------------------------------------------------------------------------
 
 ### Viewing Help: `help`
-You can view the link to our UserGuide.
+You can view the link to our User Guide.
 
 
 **Format:** `help`
@@ -906,6 +908,8 @@ You can view the link to our UserGuide.
 
 **Example(s):**
 - `help`
+
+  This displays the link to the User Guide.
 
 ![](images/features/Generalcommand_help.png)
 
@@ -941,6 +945,8 @@ Clears all entries from the contact list.
 
 **Example(s):**
 - `clear`
+
+  This clears all the data in your contact list.
 
 ![](images/features/Generalcommand_clear.png)
 
