@@ -62,4 +62,4 @@ Given below are my contributions to the project.
   * Reported 5 bugs and suggestions during PE Dry Run. ([Repo](https://github.com/m1oojv/ped/issues))<br><br>
 
 * **Tools**:
-  * Created mockup templates for teammates to use when adding mockups to the UG ([link](https://docs.google.com/presentation/d/1fXBqhAU6SSoSZdYVog3G9v5H6gXFMCzPAQ2BjzzWzM4/edit#slide=id.p))<br><br>
+  * Created mockup templates for teammates to use when adding mockups to the UG ([link](https://docs.google.com/presentation/d/1fXBqhAU6SSoSZdYVog3G9v5H6gXFMCzPAQ2BjzzWzM4/edit#slide=id.p))
