@@ -29,6 +29,7 @@ If you can type fast, WellNUS can get your contact management and scheduling tas
 <div style="page-break-after: always;"></div>
 
 ## Table of Contents
+
 * Table of Contents
 {:toc}
 
@@ -489,8 +490,6 @@ The following scenarios will render the data file invalid:<br>
 * File is not in proper JSON format, you may refer to [this guide](https://json.org/example.html)
 
 </div>
-
-<div style="page-break-after: always;"></div>
 
 ### 2.5 Tracking TODOS `[Coming soon]`
 
