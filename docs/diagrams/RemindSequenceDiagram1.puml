@@ -30,8 +30,6 @@ activate RemindCommandParser
 
 box Model MODEL_COLOR_T1
 participant "p:RemindPredicate" as RemindPredicate MODEL_COLOR
-participant ":Model" as Model MODEL_COLOR
-participant ":FilteredList" as FilteredList MODEL_COLOR
 
 create RemindPredicate
 RemindCommandParser -> RemindPredicate : RemindPredicate(30)
@@ -56,7 +54,7 @@ deactivate AddressBookParser
 destroy RemindCommandParser
 
 RemindPredicate -[hidden]-> LogicManager : empty row
-ref over LogicManager, FilteredList: execute RemindCommand
+ref over LogicManager, RemindPredicate: execute RemindCommand
 LogicManager -[hidden]-> MainWindow : empty row
 LogicManager --> MainWindow
 deactivate LogicManager

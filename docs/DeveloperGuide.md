@@ -145,18 +145,18 @@ The `Person` component,
 
 #### Design considerations
 **Aspect: Whether `Policy` should be a class of its own**
-* **Alternative 1**: Add policy fields directly as attributes of `Person`
+* Alternative 1: Add policy fields directly as attributes of `Person`
   * Pros: Less nested classes, easier implementation as AB3 already supports this style
   * Cons: Hard to extend when more policy fields have to be added in the future (e.g. `PolicyType`)
-* **Alternative 2**: (current choice) Abstract out `Policy` as its own class
+* Alternative 2: (current choice) Abstract out `Policy` as its own class
   * Pros: A more OOP implementation and allows for easier extension
 
 **Aspect: How to handle clients with no policy**
-* **Alternative 1**: Make `Policy = null` for `Person` with no policy. 
+* Alternative 1: Make `Policy = null` for `Person` with no policy. 
   * This was unsafe as when `Person` is displayed in the UI, methods like `toString()` would throw errors, violating type safety.
-* **Alternative 2**: Make policy fields `Company`, `PolicyNumber` and `PolicyDate` be `null`. 
+* Alternative 2: Make policy fields `Company`, `PolicyNumber` and `PolicyDate` be `null`. 
   * This was unsafe as the RegEx check (e.g. `isValidPolicyNumber()`) done in the constructors would have to be removed, leading to improper input validation.
-* **Alternative 3**: (current choice) Have default policy parameters for policy fields.
+* Alternative 3: (current choice) Have default policy parameters for policy fields.
   * Though more checks have to be added when displaying the policies (which is a minor bug), it guarantees type safety and has input validation due to the more defensive programming approach taken
 
 ### Storage component
@@ -234,7 +234,8 @@ Given below is the sequence diagram for the `edit` command:
 
 ![EditFeatureSequenceDiagram](images/EditFeatureSequenceDiagram1.png)
 
-:information_source: **Note:** The lifeline for `EditCommandParser` and `EditCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser` and `EditCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 ![EditFeatureSequenceDiagram](images/EditFeatureSequenceDiagram2.png)
 * Calling method setPerson to edit the person in client list.
@@ -293,15 +294,18 @@ The `sort` command allows the user to view the profiles arranged in order of ear
 
 #### Implementation
 The sorted list will be displayed in the UI. The remind mechanism is facilitated by `Model` through the following operations:
-* `Model#SortData()` - The Unique Person List of the client list is sorted using a PolicyExpiryDateComparator that implements Comparator<Person>
+* `Model#SortData()` - The Unique Person List of the client list is sorted using a `PolicyExpirationDateComparator` that implements `Comparator<Person>`
 
 Given below is an example usage scenario and how the sort mechanism behaves at each step:
 
 Step 1. The user wishes to see whose policy expires soon.
 
-Step 2. The user executes ‘sort’ command to determine the persons whose insurance is going to finish the soonest. The ‘Main Window’ will call ‘LogicManager#execute(String s)’. The ‘LogicManager’ in turn calls ‘AddressBookParser#parseCommand(String s)’. Here the input is matched to ‘SortCommandParser’ and ‘ParseCommand#execute()’ is called.
+Step 2. The user executes `sort` command to determine the persons whose insurance is going to finish the soonest. The `Main Window` will call `LogicManager#execute(String s)`. The `LogicManager` in turn calls `AddressBookParser#parseCommand(String s)`. Here the input is matched to `SortCommandParser` and `ParseCommand#execute()` is called.
 
-Step 3. ‘SortCommandParser’ creates an instance of ‘SortCommand’ that is returned to ‘LogicManager#execute(String) s’. The method ‘CommandResult#execute()’ is then called where `Model#SortData()`is called **Note** If an additional argument is added following ‘sort’ command, for instance ‘sort 2’, no error will be thrown and the sorted list will be shown as normal. This is because the implementation ignores the arguments.
+Step 3. `SortCommandParser` creates an instance of `SortCommand` that is returned to `LogicManager#execute(String) s`. The method `CommandResult#execute()` is then called where `Model#SortData()` is called.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note** If an additional argument is added following `sort` command, for instance `sort 2`, no error will be thrown and the sorted list will be shown as normal. This is because the implementation ignores the arguments.
+</div>
 
 Step 4. Finally, a `CommandResult` instance will be created and returned to display sorted list of Persons to the user.
 
@@ -313,10 +317,10 @@ The following sequence diagram shows how the `sort` command works:
 
 #### Design considerations
 
-**Aspect: Whether ‘sort’ command should take in a value.**
-* Alternative 1: (current choice) ‘sort’ command does not take in a value but does not an exception if an input is produced.
-* Pros: Prevents the need for un necessary exceptions that might affect the running of the program
-* Cons: The arguments might be nonsensical, for instance ‘sort 2’ could instead be used to provide the 2 most closely expiring profiles.
+**Aspect: Whether `sort` command should take in a value.**
+* Alternative 1 (current choice): ‘sort’ command does not take in a value but does not throw an exception if an input is produced.
+  * Pros: Prevents the need for un necessary exceptions that might affect the running of the program
+  * Cons: The arguments might be nonsensical, for instance `sort 2` could instead be used to provide the 2 most closely expiring profiles.
 * Alternative 2 : `sort` command does not take in a value and produces exception if an input is produced
     * Pros: Prevents nonsensical inputs
     * Cons: Lack of functionality as specified for alternative 1. There is also a lack of flexibility.
@@ -336,7 +340,7 @@ To add this feature, the following were done:
 #### Design considerations
 
 **Aspect: Whether the prefix `r/` is necessary.**
-* Alternative: (not taken) To remove the need for the prefix such that the command format is `remark INDEX REMARK`
+* Alternative (not taken):  To remove the need for the prefix such that the command format is `remark INDEX REMARK`
   * Pros: For a fast typer, this would save time to not need to type special characters like `/`
   * Cons: May lead to invalid behaviour not being flagged out appropriately, such as if user type `remark 1 2 Likes hiking!`, thinking it would add remarks to clients 1 and 2.
   * Cons: Does not leverage on existing `ArgumentMultimap` as a separate parsing of input is necessary, which gives way to more potential errors.
@@ -478,7 +482,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `InsureIQ` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `InsureIQ` and the **Actor** is the `User`, unless specified otherwise)
 
 **Use case: UC1 - List all clients**
 
@@ -677,24 +681,19 @@ Should work on any _mainstream OS_ as long as it has Java `11` or above installe
     - The system should be scalable to accommodate a growing number of car insurance policies and client records.
     - It should support at least 100 client profiles initially and be able to scale to 1,000 over time.
 
-3. **Availability and Reliability:**
-    - The system should be available 24/7, with planned maintenance windows communicated in advance.
-    - It should have a reliability rate of at least 99.9%, minimizing downtime and data loss.
-
-4. **Usability:**
+3. **Usability:**
     - A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
     - The CLI and GUI interfaces should be intuitive and user-friendly, allowing agents to perform tasks efficiently.
     - The system should provide clear error messages and support for keyboard shortcuts for CLI users.
 
-5. **Maintainability:**
+4. **Maintainability:**
     - The codebase should follow industry best practices and be well-documented to facilitate maintenance and future updates.
-    - Updates and bug fixes should be deployable without significant disruption to the system.
 
-6. **Interoperability:**
+5. **Interoperability:**
     - The system should be compatible with various operating systems commonly used by insurance agents.
     - It should support importing/exporting data in _standard formats_ for interoperability with other systems.
 
-7. **Documentation:**
+6. **Documentation:**
    - Comprehensive documentation, including user manuals and technical guides, should be available to assist users and administrators.
    - The documentation should be regularly updated to reflect changes and improvements to the system.
 
@@ -705,7 +704,7 @@ Should work on any _mainstream OS_ as long as it has Java `11` or above installe
 * **Client list**: List of clients and their personal and policy details in the InsureIQ app
 * **Address book**: Same as client list. Kept in code and some explanation as it is the underlying functionality of InsureIQ
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Standard formats**: CSV, JSON
+* **Standard formats**: JSON
 
 --------------------------------------------------------------------------------------------------------------------
 
