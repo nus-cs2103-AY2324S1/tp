@@ -629,6 +629,11 @@ You can assign 1 or more member to a task. ANY character is allowed, except for 
 Do note that editing members using this command will overwrite any existing members, if any, previously associated with the task.
 
 <div markdown="span" class="alert alert-warning">
+:warning: Simply specifying a single member prefix with no member name will result in the members assigned to the task to be completely removed.
+</div>
+
+
+<div markdown="span" class="alert alert-warning">
 :warning: By default, the edited list of members is also sorted using the same algorithm that is used to sort the tasks by Task Description! You are advised to be consistent in your use of capitalisation in the name of the members you add to your task!
 <br/><br/>
 Refer to <a href="https://ay2324s1-cs2103t-t17-1.github.io/tp/UserGuide.html#case-insensitive-ordering-of-members">this</a> section for more information on this issue! Rest assured that we are working hard on fixing this issue to make your TaskWise experience a more enjoyable and productive one!
@@ -868,20 +873,23 @@ If the sort is done in an ascending manner, and if your tasks are not consistent
 For example, if your list looks like this:
 
 * `post on the forum for help`
+* `Presentation`
 * `complete OP2`
 * `Complete OP3`
 
 after sorting your list in ascending order by the Task Description, it will now look like this:
 
+* `Complete OP3`
+* `Presentation`
 * `complete OP2`
 * `post on the forum for help`
-* `Complete OP3`
 
 rather than:
 
 * `complete OP2`
 * `Complete OP3`
 * `post on the forum for help`
+* `Presentation`
 
 which is probably what you expect the command to do!
 
@@ -1045,12 +1053,14 @@ Currently, the `sort` feature is not really user-friendly, as it sorts your task
 * `b Task`
 * `a Task`
 * `A Task`
+* `B Task`
 
 after sorting your task list in ascending order by the task description, your task list will look like this:
 
+* `A Task`
+* `B Task`
 * `a Task`
 * `b Task`
-* `A Task`
 
 which is not the expected behaviour you might have for the `sort` feature!
 
@@ -1059,6 +1069,7 @@ In a future iteration of TaskWise, we will amend this feature to allow sorting t
 * `a Task`
 * `A Task`
 * `b Task`
+* `B Task`
 
 which is the intended behaviour of the `sort` feature!
 
