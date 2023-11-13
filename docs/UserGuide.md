@@ -610,7 +610,7 @@ at
 |--------|--------|:--------:|---------|
 | `TITLE` | `T/` | <img width=30px src='assets/svg/ug/required.svg'> | Title describing the task. |
 | `NOTE` | `n/` | <img width=30px src='assets/svg/ug/required.svg'> | Note providing details about the task. |
-| `TAG` | `t/` | <img width=33px src='assets/svg/ug/not_required.svg'> | Tag(s) for the task.|
+| `TAG` | `t/` | <img width=33px src='assets/svg/ug/not_required.svg'> | Tag(s) for the task. Tags should only contain alphanumeric characters. |
 {: .field-table}
 
 - A task is uniquely identified by the combination of its `TITLE` and `NOTE`. These fields are case sensitive.
@@ -687,7 +687,7 @@ et
 | `INDEX` | No prefix | <img width=30px src='assets/svg/ug/required.svg'> | The task at this index in the displayed task list is edited. The index must be a positive integer (i.e. 1, 2, 3, … , 2147483647). |
 | `TITLE` | `T/` | <img width=30px src='assets/svg/ug/not_required.svg'> | Title describing the task. |
 | `NOTE` | `n/` | <img width=30px src='assets/svg/ug/not_required.svg'> | Note providing details about the task. |
-| `TAG` | `t/` | <img width=33px src='assets/svg/ug/not_required.svg'> | Tag(s) for the task.|
+| `TAG` | `t/` | <img width=33px src='assets/svg/ug/not_required.svg'> | Tag(s) for the task. Tags should only contain alphanumeric characters. |
 {: .field-table}
 
 - At least one of the optional fields must be provided for the command to be valid.
@@ -1306,8 +1306,8 @@ dtagp
 
 | Fields | Prefix | Required | Remarks |
 |--------|--------|:--------:|---------|
-| `INDEX` | No prefix | <img width=30px src='assets/svg/ug/required.svg'> | The person at this index in the displayed person list is edited. The index must be a positive integer (i.e. 1, 2, 3, … , 2147483647). |
-| `TAG` | `t/` | <img width=33px src='assets/svg/ug/required.svg'> | Tag(s) to be deleted for the person.|
+| `INDEX` | No prefix | <img width=30px src='assets/svg/ug/required.svg'> | The person at this index in the displayed contact list is edited. The index must be a positive integer (i.e. 1, 2, 3, … , 2147483647). |
+| `TAG` | `t/` | <img width=33px src='assets/svg/ug/required.svg'> | Tag(s) for the person. Tags should only contain alphanumeric characters. |
 {: .field-table}
 
 - You may delete multiple tags from a person by specifying the `t/` prefix multiple times.
@@ -1353,7 +1353,7 @@ dtagt
 | Fields | Prefix | Required | Remarks |
 |--------|--------|:--------:|---------|
 | `INDEX` | No prefix | <img width=30px src='assets/svg/ug/required.svg'> | The task at this index in the displayed task list is edited. The index must be a positive integer (i.e. 1, 2, 3, … , 2147483647). |
-| `TAG` | `t/` | <img width=33px src='assets/svg/ug/required.svg'> | Tag(s) to be deleted for the task.|
+| `TAG` | `t/` | <img width=33px src='assets/svg/ug/required.svg'> | Tag(s) for the task. Tags should only contain alphanumeric characters. |
 {: .field-table}
 
 - You may delete multiple tags from a task by specifying the `t/` prefix multiple times.
