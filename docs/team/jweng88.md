@@ -47,7 +47,6 @@ Given below are my contributions to the project.
     * User Guide
         * Added details of list tutor feature [#47](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/47),
         [#105](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/105), 
-        [#161](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/161), 
         [#233](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/233).
         * Added details of delete tutor feature [#48](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/48), 
         [#53](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/53), 
