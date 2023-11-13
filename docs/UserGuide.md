@@ -353,15 +353,13 @@ Format: `find_person KEYWORD [MORE_KEYWORDS]`
 
 </div>
 
+<div style="page-break-after: always;"></div>
 
 **Expected output when the command succeeds:**
 
 Input: `find_person Alexa` displays all contacts with the name `Alexa` in the contact list.
 
 ![result for 'find_person alex david'](images/findFriendsResult.png)
-
-
-<div style="page-break-after: always;"></div>
 
 
 <div markdown="block" class="alert alert-warning">
@@ -371,7 +369,6 @@ Input: `find_person Alexa` displays all contacts with the name `Alexa` in the co
 * FumbleLog will return an **empty person list** when there are no keyword matches. **Your data will not be deleted.**
 
 </div>
-
 
 [Scroll back to Table of Contents](#table-of-contents)
 
@@ -438,7 +435,6 @@ This is illustrated as follows:
   ![Person appearing multiple times](images/DuplicatePersonInDifferentGroups.png)
 
 </div>
-<div style="page-break-after: always;"></div>
 
 
 **This should be the expected output when the command succeeds:**
