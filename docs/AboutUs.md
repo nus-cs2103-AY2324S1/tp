@@ -31,8 +31,8 @@ We are a team based in the [School of Computing, National University of Singapor
 
 <img src="images/josepholim.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/josepholim)]
+[[portfolio](team/josepholim.md)]
 
 * Role: Developer
 
