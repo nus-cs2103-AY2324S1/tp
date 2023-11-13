@@ -43,7 +43,7 @@ Choose a topic from the [table of contents](#table-of-contents) below to find ou
 
 1. By clicking the [↑ Back to table of contents] at the bottom of each section, you will be directed back to the table of contents.
 
-1. ### Icon Coloured Boxes
+### Icon Coloured Boxes
 
 Throughout this user guide, you may observe coloured boxes that provide useful information with an icon on its top-left
 indicating the type of information present.
@@ -52,7 +52,6 @@ indicating the type of information present.
 Tips empower you to make full use of Tutorium.
 </box>
 
-<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 # Table of Contents
