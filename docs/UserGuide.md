@@ -38,7 +38,7 @@
     * [Finding an applicant by name: `find`](#find)
     * [Sorting applicants by descriptors: `sort`](#sort)
     * [Filtering applicants by fields: `filter`](#filter)
-    * [Importing from csv: `import`](#import)
+    * [Importing from CSV: `import`](#import)
   * [Miscellaneous Features](#miscellaneous-features)
     * [Viewing help: `help`](#help)
     * [Clearing all applicant entries: `clear`](#clear)
@@ -772,19 +772,20 @@ apply for multiple positions in future iterations.
 <a name="glossary"></a>
 ## Glossary
 
-| Term                               | Definition                                                                                                                                     |
-|------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| Alphanumeric	                      | Text that is consisting of or using both letters and numerals.                                                                                 |
-| Command	                           | A Command is an instruction given by the user to perform a certain action.                                                                     |
-| Command Line Interface (CLI)	      | The CLI is a text-based interface that allows users to type in commands to interact with the application.                                      |
-| Component	                         | A component is a part of the user interface.                                                                                                   |
-| Comma-Separated Values (CSV)	      | A CSV file is a text file format that uses commas to separate values. This allows data to be saved in a tabular format.                        |
-| Graphical User Interface (GUI)	    | The GUI is the visual display of the application which users can interact with.                                                                |
-| Home folder	                       | The main folder where you want to store all Staff-Snap related files.                                                                          |
-| Index	                             | The position of a certain applicant in a list. The first applicant on a list in Staff-Snap will always have the index 1.                       |
-| Java Archive File (JAR)	           | The file format of Staff-Snap.                                                                                                                 |
-| Java	                              | Java is a general-purpose, class-based, object-oriented programming language designed for having lesser implementation dependencies.           |
-| JavaScript Object Notation (JSON)	 | A data interchange file format used by Staff-Snap to store its applicant data.                                                                 |
-| Parameter	                         | Parameters are the details needed to perform a specific command. (e.g. When adding an applicant, a parameter can be the name of the applicant) |
-| Small Medium Enterprise (SME)	     | A SME is roughly defined as a small business that has more than 30 employees but less than 250 employees.                                      |
-| User Interface (UI)	               | A User Interface is the visual display of the application where users can interact with the application.                                       |
+| Term                               | Definition                                                                                                                                                                                  |
+|------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Alphanumeric	                      | Text that is consisting of or using both letters and numerals.                                                                                                                              |
+| Command	                           | A Command is an instruction given by the user to perform a certain action.                                                                                                                  |
+| Command Line Interface (CLI)	      | The CLI is a text-based interface that allows users to type in commands to interact with the application.                                                                                   |
+| Command Terminal	                  | A text-based interface or console where users can interact with a computer system by entering commands. For example, you can use Bash for Linux, Zsh for macOS, or PowerShell for Windows.  |
+| Component	                         | A component is a part of the user interface.                                                                                                                                                |
+| Comma-Separated Values (CSV)	      | A CSV file is a text file format that uses commas to separate values. This allows data to be saved in a tabular format.                                                                     |
+| Graphical User Interface (GUI)	    | The GUI is the visual display of the application which users can interact with.                                                                                                             |
+| Home Folder	                       | The main folder where you want to store all Staff-Snap related files.                                                                                                                       |
+| Index	                             | The position of a certain applicant in a list. The first applicant on a list in Staff-Snap will always have the index 1.                                                                    |
+| Java Archive File (JAR)	           | The file format of Staff-Snap.                                                                                                                                                              |
+| Java	                              | Java is a general-purpose, class-based, object-oriented programming language designed for having lesser implementation dependencies.                                                        |
+| JavaScript Object Notation (JSON)	 | A data interchange file format used by Staff-Snap to store its applicant data.                                                                                                              |
+| Parameter	                         | Parameters are the details needed to perform a specific command. (e.g. When adding an applicant, a parameter can be the name of the applicant)                                              |
+| Small Medium Enterprise (SME)	     | A SME is roughly defined as a small business that has more than 30 employees but less than 250 employees.                                                                                   |
+| User Interface (UI)	               | A User Interface is the visual display of the application where users can interact with the application.                                                                                    |
