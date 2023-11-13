@@ -76,7 +76,7 @@ or refer to [Common Mistakes](#6-common-mistakes) for common errors our users ma
       for more.
     - `adda /name Chan Rui Jia /phone 97777117 /interview 10/12/2023 1400`: Adds an applicant named `Chan Rui Jia` to
       the list. See how to [add applicant](#421-adding-an-applicant-addapplicant-or-adda) for more.
-    - `deltm 1`: Deletes the first member in the list of members.
+    - `delm 1`: Deletes the first member in the list of members.
     - `finda Win Sheng`: Searches for all applicants with `Win Sheng` in their contact details. See how
       to [find an applicant](#422-finding-applicants-findapplicant-or-finda) for more.
     - `editm 1 /tag Design`: Edits the tag of the first member in the list of members. See how
