@@ -16,4 +16,18 @@ public class PaidPredicate implements Predicate<Person> {
         return !person.getPaid();
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof PaidPredicate)) {
+            return false;
+        }
+
+        PaidPredicate otherPaidPredicate = (PaidPredicate) other;
+        return this.paid == otherPaidPredicate.paid;
+    }
 }
