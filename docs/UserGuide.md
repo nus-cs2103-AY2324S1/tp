@@ -25,11 +25,16 @@ WellNUS is optimised for use via a **Command Line Interface** (CLI) while still 
 If you can type fast, WellNUS can get your contact management and scheduling tasks done faster than traditional GUI apps.
 </div>
 
+
+<div style="page-break-after: always;"></div>
+
 ## Table of Contents
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## 1. Getting started
 
@@ -58,7 +63,8 @@ If you can type fast, WellNUS can get your contact management and scheduling tas
       cd Desktop/{your_folder_name}
       java -jar wellnus.jar
       ```
-      
+   <div style="page-break-after: always;"></div>      
+
    <div markdown="block" class="alert alert-info">
    :information_source: Note:
    You may also use any applications (e.g. Windows Powershell, Visual Studio Code) that support command line inputs.
@@ -75,6 +81,8 @@ If you can type fast, WellNUS can get your contact management and scheduling tas
    * `exit` : Exits the app.
 
 6. Refer to the [Features](#2-features) below for details of each command.
+
+<div style="page-break-after: always;"></div>
 
 ### 1.2 Icons used in this User Guide
 
@@ -105,6 +113,7 @@ To see a list of all command words, refer to the [Command Summary](#5-command-su
 | --        | APPOINTMENT_INDEX | Index of appointment in the list | --                                 | APPOINTMENT_INDEX **must** be a **positive integer** (i.e. 1, 2, 3, ...) up to the size of the appointment list.                                                                                                                                                      |
 | **g/**    | CATEGORY          | Category of search               | g/appointments                     | CATEGORY **must** be one of the following three values: **students**, **appointments**, **all**.                                                                                                                                                                      |
 
+<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-info">
 
@@ -136,8 +145,9 @@ When you perform any commands, the notes column will be cleared (You will have t
 If you have any feedback on our features pertaining to student notes, feel free to send your feedback to the 
 developer team!
 
-
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## 2. Features
 ### 2.1 Utility Commands
@@ -208,6 +218,8 @@ Invalid examples:
 If you know the name of the student you want to delete, use the `find` command to filter the student list first.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 #### 2.2.3 Adding/Deleting notes for a Student: `note`
 
 <div markdown="block" class="alert alert-info">
@@ -243,6 +255,8 @@ Invalid examples:
 To delete an existing note, simply use `note STUDENT_INDEX` or `note STUDENT_INDEX note/`
 </div>
 
+<div style="page-break-after: always;"></div>
+
 #### 2.2.4 Finding Students by Name: `find`
 
 Find students and their related appointments based on their name. Can choose to find student based on their first name, last name or full name.
@@ -276,6 +290,8 @@ Given a Student named `Roy Lee` is in the WellNUS student list:
 <p align="center">
 <em>Find student Alex Yeoh</em>
 </p>
+
+<div style="page-break-after: always;"></div>
 
 #### 2.2.5 Assigning risk level to Student: `tag`
 
@@ -317,6 +333,7 @@ Format `edit STUDENT_INDEX [c/CONTACT_NUMBER] [a/HOME_ADDRESS]`
 3. Home Address 
    - Maximum of 200 characters, cannot be blank
 
+<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-info">
 :information_source: **Note:**
@@ -378,6 +395,8 @@ overlap between the new appointment to be scheduled and existing appointments, t
 and will inform the user to reschedule the appointment.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 #### 2.3.2 Cancelling an Appointment: `cancel`
 
 Cancels an existing appointment.
@@ -413,6 +432,8 @@ Invalid examples:
 * `filter 16-10-2023` (date is in wrong format)
 * `filter 16 October 2023` (date is in wrong format)
 
+<div style="page-break-after: always;"></div>
+
 ![Filter feature](images/filterFeature.png)
 <p align="center">
 <em>Filter appointments on 15 December 2023</em>
@@ -440,6 +461,8 @@ Valid examples:
 Exits the program.
 
 Format: `exit`
+
+<div style="page-break-after: always;"></div>
 
 #### 2.4.3 Clearing storage: `clear`
 
@@ -477,6 +500,7 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
 ## 3. Frequently Asked Questions (FAQ)
 
 1. **How do I transfer my data to another Computer ?**<br/>
@@ -507,6 +531,7 @@ You can always update the risk level later using the tag command when more infor
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
 ## 5. Command summary
 
 | Action                                                                                     | Format, Valid examples                                                                                                                                          |
