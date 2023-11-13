@@ -215,12 +215,16 @@ Showing list TASK
 #### General Examples
 
 Failure outputs:
-* Input: `list student`, `list task`, `list students EMAIL`, `list students subject`, `list students subjects,phone`
-    * Error: First command should spell `students` instead of `student`.
-    * Error: Second command should spell `tasks` instead of `task`.
-    * Error: Third command should spell `email` in lower case, not `EMAIL`.
-    * Error: Fourth command should spell `subjects` instead of `subject`.
-    * Error: Fifth command should use space separation `subjects phone` for keywords instead of comma separation.
+* Input: `list student`
+    * Error: Should spell `students` instead of `student`.
+* Input: `list task`
+    * Error: Should spell `tasks` instead of `task`.
+* Input: `list students EMAIL`
+    * Error: Should spell `email` in lower case, not `EMAIL`.
+* Input:  `list students subject`
+    * Error: Should spell `subjects` instead of `subject`.
+* Input: `list students subjects,phone`
+    * Error: Use space separation `subjects phone` for keywords instead of comma separation.
 ```Invalid command format!
   list: Displays the specified list, which can be a STUDENTS list, SCHEDULE list or TASKS list. Default command without specified list displays the schedule list. When specifying STUDENTS list, optional parameters can be used to specify what student details to display.
   Parameters: [LIST] [KEYWORDS]...
