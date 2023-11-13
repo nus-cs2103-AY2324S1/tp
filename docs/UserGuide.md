@@ -64,7 +64,7 @@ and specifies whether the command is to act on the patients (`-pa`) or on the sp
   e.g. `[m/MEDICAL_HISTORY]…​` can be used as ` ` (i.e. 0 times), `m/Osteoporosis`, `m/Osteoporosis m/Asthma` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable. The order of the `-PERSON_TYPE` flag
+  e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable. The order of the `-PERSON_TYPE` flag
 however is not flexible in this way.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
@@ -138,7 +138,7 @@ Format (for specialists): `find -sp [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...​ [
 * The order of the keywords does not matter. 
   * e.g. `Hans Bo` will match `Bo Hans`
 * There are different behaviours regarding the searching of different parameters:
-  * For `NAME`, `MEDICAL_HISTORY`, `SPECIALISATION`, `EMAIL`, `LOCATION` and `PHONE_NUMBER`, even substrings will be matched. 
+  * For `NAME`, `MEDICAL_HISTORY`, `SPECIALISATION`, `EMAIL`, `LOCATION` and `PHONE`, even substrings will be matched. 
     * e.g. `ha` will match `Hans`
   * For `AGE` and `TAGS` only full words will be matched. 
     * e.g. `1` will not match `18`
@@ -341,19 +341,22 @@ If your changes to the data file makes its format invalid, DoConnek Pro will dis
 
 ## Command summary
 
-| Action               | Format, Examples                                                                                                                                                                               |
-|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Help**             | `help`                                                                                                                                                                                         |
-| **Add (patient)**    | `add -pa n/NAME e/EMAIL p/PHONE_NUMBER a/AGE [m/MEDICAL_HISTORY]...​ [t/TAG]...​` <br> e.g., `add -pa n/John e/johnmctavish@example.com p/12345678 a/21 m/Osteoporosis m/Rheumatoid arthritis` |
-| **Add (specialist)** | `add -sp n/NAME e/EMAIL p/PHONE_NUMBER s/SPECIALISATION l/LOCATION [t/TAG]...​` <br> e.g., `add -sp n/Jane e/janepeter@example.com p/73331515 s/Dermatologist l/Ang Mo Kio`                    |
-| **Delete**           | `delete INDEX...​`<br> e.g., `delete 3`                                                                                                                                                        |
-| **Find**             | `find -PERSON_TYPE PREFIX/KEYWORD...` <br> e.g., `find -pa n/James Jake p/73281193`                                                                                                            |
-| **Edit**             | `edit PREFIX/KEYWORD...` <br> e.g. `edit n/Jonathan Wick p/09883100`                                                                                                                           |
-| **List**             | `list -PERSON_TYPE` <br> e.g. `list -pa`                                                                                                                                                       |
-| **Undo**             | `undo`                                                                                                                                                                                         |
-| **Redo**             | `redo`                                                                                                                                                                                         |
-| **Add shortcut**     | `addsc sc/SHORTCUT kw/KEYWORD` <br> e.g., `addsc sc/del kw/delete`                                                                                                                             |
-| **Delete shortcut**  | `delsc sc/SHORTCUT...` <br> e.g., `delsc sc/del sc/li`                                                                                                                                         |
-| **Change Theme**     | `theme THEMETYPE` <br> e.g., `theme dark`                                                                                                                                                      |
-| **Clear**            | `clear`                                                                                                                                                                                        |
-| **Exit**             | `exit`                                                                                                                                                                                         |
+| Action                | Format, Examples                                                                                                                                                                        |
+|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**              | `help`                                                                                                                                                                                  |
+| **Add (patient)**     | `add -pa n/NAME e/EMAIL p/PHONE a/AGE [m/MEDICAL_HISTORY]...​ [t/TAG]...​` <br> e.g., `add -pa n/John e/johnmctavish@example.com p/12345678 a/21 m/Osteoporosis m/Rheumatoid arthritis` |
+| **Add (specialist)**  | `add -sp n/NAME e/EMAIL p/PHONE s/SPECIALISATION l/LOCATION [t/TAG]...​` <br> e.g., `add -sp n/Jane e/janepeter@example.com p/73331515 s/Dermatologist l/Ang Mo Kio`                    |
+| **View**              | `view INDEX` <br> e.g. `view 1`                                                                                                                                                         |
+| **Delete**            | `delete INDEX...​`<br> e.g., `delete 1 2 3`                                                                                                                                             |
+| **Find (patient)**    | `find -pa [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...​ [a/AGE] [m/MEDICAL HISTORY]...​` <br> e.g., `find -pa n/Jordan Wong p/73281193`                                                      |
+| **Find (specialist)** | `find -sp [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...​ [l/LOCATION] [s/SPECIALTY]` <br> e.g. `find -sp n/Venessa Chiam s/Veterinary`                                                        |
+| **Edit (patient)**    | `edit [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...​ [a/AGE] [m/MEDICAL HISTORY]...​` <br> e.g. `edit n/Jonathan Wick p/09883100`                                                             |
+| **Edit (specialist)** | `edit [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...​ [l/LOCATION] [s/SPECIALTY]` <br> e.g. `edit n/Michael Ratana l/Clementi`                                                                 |
+| **List**              | `list -PERSON_TYPE` <br> e.g. `list -pa`                                                                                                                                                |
+| **Undo**              | `undo`                                                                                                                                                                                  |
+| **Redo**              | `redo`                                                                                                                                                                                  |
+| **Add shortcut**      | `addsc sc/SHORTCUT kw/KEYWORD` <br> e.g., `addsc sc/del kw/delete`                                                                                                                      |
+| **Delete shortcut**   | `delsc sc/SHORTCUT...` <br> e.g., `delsc sc/del sc/li`                                                                                                                                  |
+| **Change Theme**      | `theme THEMETYPE` <br> e.g., `theme dark`                                                                                                                                               |
+| **Clear**             | `clear`                                                                                                                                                                                 |
+| **Exit**              | `exit`                                                                                                                                                                                  |
