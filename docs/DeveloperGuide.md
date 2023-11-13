@@ -1207,6 +1207,12 @@ Testers are expected to do more *exploratory* testing.
 
 ### Mark a student as present
 
+<box type="info" seamless>
+
+**Note:** A similar way can be adopted to test `absent`.
+
+</box>
+
 1. Mark a student as present in Class Manager
 
    1. Test case: `present s/STUDENT_NUMBER tut/1`
@@ -1215,9 +1221,15 @@ Testers are expected to do more *exploratory* testing.
 
 ### Mark all displayed students as present
 
+<box type="info" seamless>
+
+**Note:** A similar way can be adopted to test `absent-all`.
+
+</box>
+
 1. Mark all displayed students as present in Class Manager
 
-   1. Test case: `present tut/1`
+   1. Test case: `present-all tut/1`
       Expected:All displayed students are marked as present for the first tutorial.
       <br><br>
 
