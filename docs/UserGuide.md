@@ -788,7 +788,7 @@ There will be no prompt to confirm this action.
 
 <div style="page-break-after: always;"></div>
 
-## 5.8 Examples of fields
+### 5.8 Examples of fields
 
 | Field               | Valid                                                      | Invalid                                                                                                   |
 |---------------------|------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|

@@ -65,9 +65,9 @@ main {
  */
 img {
   /* max-width of .wrapper - padding-left - padding-right */
-  max-width: calc(#{$content-width} - #{$spacing-unit} * 10);
-  padding-right: $spacing-unit * 4;
-  padding-left: $spacing-unit * 4;
+  max-width: calc(#{$content-width} - #{$spacing-unit} * 6);
+  padding-right: $spacing-unit * 2;
+  padding-left: $spacing-unit * 2;
   vertical-align: middle;
 }
 
