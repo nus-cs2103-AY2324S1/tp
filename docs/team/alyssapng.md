@@ -13,7 +13,7 @@ such as sorting, scheduling and other commands to query information quickly requ
 
 Given below are my contributions to the project.
 
-* **New feature**: Added the ability to gather emails of client by Financial plan and Tag.
+* **New feature**: Added the ability to gather emails of clients by Financial plan or Tag.
 
     * What it does: It takes a prompt as input and retrieves emails of clients where the prompt matches a substring of their Financial Plan or Tag names.
     * Justification: This feature significantly improves the product's efficiency by allowing financial advisors to consolidate emails effectively. It simplifies communication, enabling advisors to update multiple clients about changes in their financial plans or schedule crucial meetings promptly.
