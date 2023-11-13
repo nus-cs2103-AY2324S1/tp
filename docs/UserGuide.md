@@ -117,7 +117,7 @@ There are two ways you can use to navigate to the profile page.
 Let's say you want to open the profile page of a fosterer name Alex Yeoh who is currently at index 1. 
 
 <div style="text-align: center">
-<img src="images/screenshots/ViewCommandExample.png" height="440" class="center"/>
+<img src="images/screenshots/ViewCommandExample.png" height="380" class="center"/>
 </div>
 
 <br>
@@ -125,7 +125,7 @@ Let's say you want to open the profile page of a fosterer name Alex Yeoh who is 
 To do so, enter <code>view 1</code> as shown in the image above, which opens the profile page of the fosterer at index 1, Alex Yeoh. 
 
 <div style="text-align: center">
-<img src="images/screenshots/EditExample.png" height="480" class="center"/>
+<img src="images/screenshots/EditExample.png" height="420" class="center"/>
 </div>
 
 <br>
@@ -266,8 +266,6 @@ To learn more about **editing a fosterer through the profile page**, refer to th
 
 <br> 
 
-<div style="page-break-after: always;"></div>
-
 ### Viewing help for Commands : `help`
 
 Opens a pop-up window, providing you with the link to our User Guide for help.
@@ -277,6 +275,8 @@ Format: `help`
 ![Help](images/screenshots/HelpWindow.png)
 
 <br> 
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a fosterer through the main window: `add`
 
@@ -352,6 +352,8 @@ In the case where duplicates field descriptions are given, the last one will be 
   * adds a fosterer named Jerry Tan, who lives in a Condo and is fostering a cat named Happy.
     ![Add](images/screenshots/AddDuplicate.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a fosterer through the profile page: `add`
 
 Redirects you to an empty profile page with all the fields set to `nil`. In the profile page, you can key in the fosterer's details and save the 
@@ -365,8 +367,6 @@ Format: `add`
 
 *  The restrictions imposed on what makes a valid fosterer, as explained in the section [Adding a fosterer through the main window: add](#adding-a-fosterer-through-the-main-window-add), still applies in this alternative way of adding a fosterer.
 </div>
-
-<div style="page-break-after: always;"></div>
 
 Here is the profile page you will see after entering <code>add</code>: 
 
@@ -463,6 +463,8 @@ To learn more about profile page, please refer to the section [User Interface: T
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Saving changes in a fosterer's details: `save`
 
 Saves changes to details of the fosterer which you have made in the profile page.
@@ -478,8 +480,6 @@ Saves changes to details of the fosterer which you have made in the profile page
 
 Format: `save`
 
-<div style="page-break-after: always;"></div>
-
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command:**<br>
@@ -487,6 +487,8 @@ Format: `save`
 *  Entering <code>save</code> in [the profile of a new fosterer](#adding-a-fosterer-through-the-profile-page-add) saves the new fosterer and exits the profile page.
 *  Entering <code>save</code> in [the profile of an already existing fosterer](#editing-a-fosterers-detail-through-the-profile-page--edit) saves the changes but does not exit the profile page, in case you want to edit more details. 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 Here is the result of entering <code>save</code> after adding a new fosterer name John: 
 
@@ -506,13 +508,13 @@ As you can see, entering <code>save</code> for an already existing fosterer does
 
 <br> 
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a fosterer's details through the main window: `edit`
 
 Edits the details of the index-th fosterer in the list currently displayed in your address book, done through the main window.
 
 Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [housing/HOUSING_TYPE] [availability/AVAILABILITY] [animal/ANIMAL_NAME] [animalType/TYPE_OF_ANIMAL] [t/TAG…]`
-
-<div style="page-break-after: always;"></div>
 
 Parameters:
 
@@ -791,8 +793,6 @@ Suppose you have 3 available fosterers: 1 can foster a dog, 1 can foster a cat a
 </div>
 
 <br> 
-
-<div style="page-break-after: always;"></div>
 
 ### Viewing statistics of current fosterers : `stats current`
 Helps you calculate statistics about fosterers who are currently fostering, and the type of animals they are fostering. Percentages are calculated to 2 decimal places.
