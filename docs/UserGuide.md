@@ -6,18 +6,18 @@ title: User Guide
 Teaching Assistant Manager (TAManager) is a desktop application for managing teaching assistants (TAs), optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TAM can help you manage your teaching assistant tasks more efficiently than traditional GUI apps.
 
 
-### 🌟 Welcome to TAManager - Your Teaching Assistant's Best Friend! 🌟
+#### 🌟 Welcome to TAManager - Your Teaching Assistant's Best Friend! 🌟
 
 Are you ready to turbocharge your teaching assistant management experience? Meet TAManager - the desktop application designed to make your life easier, whether you're a seasoned pro or just starting out.
 
-### 🚀 Why TAManager?
+#### 🚀 Why TAManager?
 TAManager isn't your average app. It's like having a teaching assistant for your teaching assistants! Imagine a tool that's as fast as typing and as intuitive as a friendly chat. That's TAManager for you.
 
-### 💡 Who is it for?
+#### 💡 Who is it for?
 TAManager is crafted with both experienced educators and newbies in mind. If you're someone who types faster than you can click, this is the tool for you! Whether you're managing one assistant or a whole team, TAManager is your go-to solution.
 
 
-### 🎉 What can TAManager do for you?
+#### 🎉 What can TAManager do for you?
 - Effortlessly manage teaching assistant tasks
 - Navigate tasks with the speed of a command line interface
 - Enjoy the perks of a sleek graphical user interface
@@ -27,11 +27,12 @@ Ready to revolutionize your teaching assistant game? Let's dive into the world o
 
 ## Using this Guide
 
-This section will guide you on the various features of TAManager and how to use them.
+Whether you're a new user or an experienced one, this guide is designed to help you make the most of our TAManager. 
+Please follow the instructions below based on your familiarity with TAManager.
 
-If you are a new user, we recommend that you read this guide starting from the [Quick Start](#quick-start) section.
+- **New Users:** If you're just getting started, we recommend beginning with the [Quick Start](#quick-start) section. This will provide you with a step-by-step introduction to TAManager's essential features.
 
-If you are an experienced user, you can use the [Table of Contents](#table-of-contents) below to quickly locate the relevant section. Alternatively, you can jump to the [Command Summary](#command-summary) section for an overview of the command syntax.
+- **Experienced Users:** If you are already an experienced user of TAManager, you can use the [Table of Contents](#table-of-contents) to quickly navigate to specific sections of interest. If you're looking for a quick reference, the [Command Summary](#command-summary) provides an overview of command syntax.
 
 Throughout our user guide, you will see the following annotations:
 
