@@ -7,7 +7,7 @@ Hello School of Computing (SoC) Professors! Have you ever felt that managing you
 
 If so, **TAManager** is the tool for you! 
 
-TAManager, or Teaching Assistant Manager, is your reliable **desktop application** that helps you manage your TAs, so you can focus on what matters most - **teaching**!
+TAManager, or Teaching Assistant Manager, is your reliable desktop application that helps you manage your TAs, so you can focus on what matters most - **teaching**!
 
 While TAManager mainly focuses on targeting SoC Professors, all educators are welcomed to use TAManager too! With our **user-centric** design, TAManager is crafted with both experienced educators and newbies in mind.
 
@@ -213,7 +213,8 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [tele/TELEGRAM] [h/HOUR] [t/TAG]... [c/C
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes:**<br>
--  At least one field to edit must be provided.
+- At least one field to edit must be provided.
+- After running the `edit` command on a filtered list, the TA list will be updated to the full list of TAs.
 </div>
 
 ##### Example: 
@@ -471,6 +472,7 @@ editft INDEX d/DAY from/FROM to/TO
 
 **:information_source: Notes:**<br>
 - `FROM` time should be before `TO` time.
+- After running the `editft` command on a filtered list, the TA list will be updated to the full list of TAs.
 </div>
 
 ##### Example:
