@@ -585,6 +585,8 @@ Format: `search (n/NAME [MORE NAME] / st/STATUS [MORE STATUS] / t/TAG [MORE TAGS
 
 * You can combine multiple search categories in a single `search` command.
 * Search parameters are case-insensitive.
+  
+</box>
 
 Examples of successful command execution:
 1. `search n/alex bernice`
@@ -616,6 +618,8 @@ It's best to explain this by breaking down an example `search` command!
 * names contain either Alex `OR` Bernice
 * `AND` status is either interviewed
 * `AND` has a tag `intern`
+
+</box>
 
 Failed to execute the `search` command? Here are some possible reasons why:
 1. Missing search category i.e. `search`
