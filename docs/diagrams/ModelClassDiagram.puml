@@ -47,7 +47,7 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> ID
-Person *--> "     0...13" Attendance
+Person *--> "     0..13" Attendance
 Person *--> "*" Tag
 
 Person -[hidden]up--> I
