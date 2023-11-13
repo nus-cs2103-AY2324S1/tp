@@ -114,15 +114,18 @@ There are two ways you can use to navigate to the profile page.
 <div style="page-break-after: always;"></div>
 
 Let's say you want to open the profile page of a fosterer name Alex Yeoh who is currently at index 1. 
-![Benson](images/screenshots/ViewCommandExample.png)
+
+<div style="text-align: center">
+<img src="images/screenshots/ViewCommandExample.png" height="490" class="center"/>
+</div>
 
 <br>
 
-<div style="page-break-after: always;"></div>
-
 To do so, enter <code>view 1</code> as shown in the image above, which opens the profile page of the fosterer at index 1, Alex Yeoh. 
 
-![Example profile](images/screenshots/EditExample.png)
+<div style="text-align: center">
+<img src="images/screenshots/EditExample.png" height="570" class="center"/>
+</div>
 
 <br>
 
@@ -131,7 +134,9 @@ To do so, enter <code>view 1</code> as shown in the image above, which opens the
 #### Navigating through the fields
 Typing in the name of the field you want to edit, or substrings of the field, directs your cursor to the textbox, allowing you to make changes.
 
-![Before typing name](images/screenshots/BeforeEnteringName.png)
+<div style="text-align: center">
+<img src="images/screenshots/BeforeEnteringName.png"  height="360" class="center"/>
+</div>
 
 <br>
 
@@ -139,7 +144,9 @@ In the example above, entering <code>name</code>, or a substring of name like <c
 
 <br>
 
-![Profile navigate field](images/screenshots/NavigatingFields.png)
+<div style="text-align: center">
+<img src="images/screenshots/NavigatingFields.png" height="310" class="center"/>
+</div>
 
 <div style="page-break-after: always;"></div>
 
@@ -148,7 +155,9 @@ If you wish to revert back to the original value of the field while editing in t
 
 <br>
 
-![Cursor back to commandbox](images/screenshots/CursorBackToCommandbox.png)
+<div style="text-align: center">
+<img src="images/screenshots/CursorBackToCommandbox.png" height="310" class="center"/>
+</div>
 
 In the example above, after changing name from 'Yeoh' to 'Yeo' the Enter key was pressed. 
 
@@ -156,15 +165,15 @@ The same process can be applied to other fields.
 
 <br>
 
-<div style="page-break-after: always;"></div>
-
 #### Saving changes
 
 Entering <code>save</code> saves the changes you made into the storage.
 
 Let's say after changing the name, you want to save your changes.
 
-![Cursor back to commandbox](images/screenshots/SaveCommandBefore.png)
+<div style="text-align: center">
+<img src="images/screenshots/SaveCommandBefore.png" height="310" class="center"/>
+</div>
 
 <br>
 
@@ -172,14 +181,16 @@ Key in <code>save</code> and press Enter to save the changes.
 
 <br>
 
-![Save command after](images/screenshots/SaveCommandAfter.png)
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center">
+<img src="images/screenshots/SaveCommandAfter.png" height="310" class="center"/>
+</div>
 
 <br/>
 This saves the changes you have made and updates the details of a fosterer, or adds a new fosterer with the details inputted (depending on the command used to open the profile page). 
 
 <br>
-
-<div style="page-break-after: always;"></div>
 
 #### Exiting the profile page
 
@@ -192,7 +203,9 @@ Attempting to exit without saving your changes will give you a warning message, 
 
 Let's say you have already saved your changes.
 
-![Exit command saved before](images/screenshots/ExitCommandSavedBefore.png)
+<div style="text-align: center">
+<img src="images/screenshots/ExitCommandSavedBefore.png" height="310" class="center"/>
+</div>
 
 <br>
 
@@ -204,8 +217,6 @@ Key in <code>exit</code> and press Enter to close the profile page.
 
 <br>
 
-<div style="page-break-after: always;"></div>
-
 **2. Changes are not saved**
 
 Let's say you did not save your changes and entered <code>exit</code>. 
@@ -213,6 +224,8 @@ Let's say you did not save your changes and entered <code>exit</code>.
 ![Exit command not saved warning](images/screenshots/ExitCommandNotSavedWarning.png)
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 If you press Enter again, your changes are discarded and you are redirected back to the main window.
 If you press the Esc key, the exit is cancelled and you can continue working on your changes in the profile page.
@@ -222,8 +235,6 @@ If you press the Esc key, the exit is cancelled and you can continue working on 
 ![Exit command not saved cancel](images/screenshots/ExitCommandNotSavedCancel.png)
 
 The example above is the result of pressing the Esc key after you are warned.
-
-<div style="page-break-after: always;"></div>
 
 To learn more about **adding a new fosterer through the profile page**, refer to the section [Adding a fosterer through the profile page: add](#adding-a-fosterer-through-the-profile-page-add). <br>
 To learn more about **editing a fosterer through the profile page**, refer to the section [Editing a fosterer's detail through the profile page: edit](#editing-a-fosterers-detail-through-the-profile-page-edit).
@@ -278,8 +289,6 @@ Adds a fosterer to your address book, done through the main window.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS housing/HOUSING_TYPE availability/AVAILABILITY animal/ANIMAL_NAME animalType/TYPE_OF_ANIMAL [t/TAG]…`
 
-<div style="page-break-after: always;"></div>
-
 Parameters:
 
 | Parameter        | About                                                                                                                                                                                                                                                                       | Example                                                     |
@@ -294,8 +303,6 @@ Parameters:
 | `TYPE_OF_ANIMAL` | - Type of animal which the fosterer is currently fostering, or prefer to foster<br/> - Case-sensitive<br/> - If `availability/NotAvailable`: current.Dog / current.Cat / nil<br/> - If `availability/Available`: able.Dog / able.Cat / nil<br/> - If `availability/nil`: nil | `current.Dog`, `current.Cat`, `able.Dog`, `able.Cat`, `nil` |
 | `TAG`            | Tag to be associated with the fosterer                                                                                                                                                                                                                                      | `experienced`, `urgent`                                     |
 
-<div style="page-break-after: always;"></div>
-
 <div markdown="block" class="alert alert-primary">
 
 **:bulb: Tip:**<br>
@@ -304,6 +311,8 @@ Parameters:
 * `nil` can be indicated for `HOUSING_TYPE`, `AVAILABILITY`, `ANIMAL_NAME` and `TYPE_OF_ANIMAL` if that specific information is not currently available.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 Valid cases:
 
@@ -320,6 +329,8 @@ Valid cases:
 * For invalid cases, error messages will be shown when you enter the invalid commands. For example:
   ![Add](images/screenshots/AddErrorMessage.png)
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="block" class="alert alert-danger">
 
 **:exclamation: Important:**<br>
@@ -327,8 +338,7 @@ Valid cases:
 You cannot add duplicate fosterers. This is detected using the fosterer's name.<br>
 e.g. <code>"Anne Tay"</code> is the same person as <code>"anne tay"</code> and <code>"anne  (multiple spaces)  tay"</code>.
 
-</div> 
-
+</div>
 
 Examples:
 * `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/NotAvailable animal/Dexter animalType/current.Cat t/Urgent`
@@ -337,19 +347,17 @@ Examples:
     ![Add](images/screenshots/AddJerry.png)
     <br/><br/>
 
-<div style="page-break-after: always;"></div>
-
 * `add n/Pete Tay p/98765411 e/pete@example.com a/Happy street, block 5, #27-01 housing/Condo availability/Available animal/nil animalType/able.Cat`
   * adds a fosterer named Pete Tay with the following details:
     <br/><br/>
     ![Add](images/screenshots/AddPete.png)
+  
+<div style="page-break-after: always;"></div>
 
 In the case where duplicates field descriptions are given, the last one will be chosen:
 * `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB housing/Condo availability/Available availability/NotAvailable animal/Dexter animal/Happy animalType/able.Dog animalType/current.Cat t/Urgent`
   * adds a fosterer named Jerry Tan, who lives in a Condo and is fostering a cat named Happy.
     ![Add](images/screenshots/AddDuplicate.png)
-
-<div style="page-break-after: always;"></div>
 
 ### Adding a fosterer through the profile page: `add`
 
@@ -364,6 +372,8 @@ Format: `add`
 
 *  The restrictions imposed on what makes a valid fosterer, as explained in the section [Adding a fosterer through the main window: add](#adding-a-fosterer-through-the-main-window-add), still applies in this alternative way of adding a fosterer.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 Here is the profile page you will see after entering <code>add</code>: 
 
@@ -460,8 +470,6 @@ To learn more about profile page, please refer to the section [User Interface: T
 
 <br>
 
-<div style="page-break-after: always;"></div>
-
 ### Saving changes in a fosterer's details: `save`
 
 Saves changes to details of the fosterer which you have made in the profile page.
@@ -474,6 +482,8 @@ Saves changes to details of the fosterer which you have made in the profile page
 * This command only works in the profile page, which you can navigate to by executing the `view` command.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 Format: `save`
 
@@ -502,8 +512,6 @@ Here is the result of entering <code>save</code> after changing the name from Jo
 As you can see, entering <code>save</code> for an already existing fosterer does not exit the profile page. 
 
 <br> 
-
-<div style="page-break-after: always;"></div>
 
 ### Editing a fosterer's details through the main window: `edit`
 
@@ -570,8 +578,6 @@ Before you type the save command, make sure there is no accidental overwrite wit
 
 <br>
 
-<div style="page-break-after: always;"></div>
-
 ### Editing a fosterer's details through the profile page: `edit`
 
 Edits the details of the index-th fosterer in the list currently displayed in your address book, done through the profile page.
@@ -618,38 +624,41 @@ Before you type the save command, make sure there is no accidental overwrite wit
 
 Here is a summary of how to edit a fosterer Alex Yeoh who is currently at index 1:
 
-1. Enter the profile page with `view INDEX` or `edit INDEX`. e.g. `view 1` or `edit 1`.
+Step 1. Enter the profile page with `view INDEX` or `edit INDEX`. e.g. `view 1` or `edit 1`.
 
-![view 1](images/screenshots/View1.png)
+<div style="text-align: center">
+<img src="images/screenshots/View1.png" height="480" class="center"/>
+</div>
 
-<br>
+Step 2. Type in the name of the field you want to edit onto the command box. This will make the textbox visible next to the field and automatically set the text cursor to the textbox. e.g. Enter 'name'.
 
-<div style="page-break-after: always;"></div>
-
-2. Type in the name of the field you want to edit onto the command box. This will make the textbox visible next to the field and automatically set the text cursor to the textbox. e.g. Enter 'name'.
-
-![enter name](images/screenshots/EnterName.png)
-
-<br>
-
-<div style="page-break-after: always;"></div>
-
-
-3. Edit the original value to a new value. e.g. From Alex Yeoh to 'Bob Yeoh'.
-
-![change name](images/screenshots/ChangeNameToBobYeoh.png)
+<div style="text-align: center">
+<img src="images/screenshots/EnterName.png" height="480" class="center"/>
+</div>
 
 <br>
 
-<div style="page-break-after: always;"></div>
+Step 3. Edit the original value to a new value. e.g. From Alex Yeoh to 'Bob Yeoh'.
 
-4. Press Enter to return the text cursor back to the command box. This makes the textbox disappear.
-
-![press enter](images/screenshots/BobYeoh.png)
+<div style="text-align: center">
+<img src="images/screenshots/ChangeNameToBobYeoh.png" height="480" class="center"/>
+</div>
 
 <br>
 
-![save bob](images/screenshots/SaveBobYeoh.png)
+Step 4. Press Enter to return the text cursor back to the command box. This makes the textbox disappear.
+
+<div style="text-align: center">
+<img src="images/screenshots/BobYeoh.png" height="480" class="center"/>
+</div>
+
+<br>
+
+Step 5. Enter `save` to save your changes.
+
+<div style="text-align: center">
+<img src="images/screenshots/SaveBobYeoh.png" height="480" class="center"/>
+</div>
 
 <br> 
 
@@ -709,8 +718,6 @@ In this example, Alex, Bernice and Charlotte are the fosterers deleted.
 
 <br> 
 
-<div style="page-break-after: always;"></div>
-
 ### Sorting fosterers: `sort`
 
 Sorts your list of fosterers alphabetically, by name.
@@ -767,10 +774,7 @@ Here, you have 6 fosterers in your address book, and 3 of them are available to 
 * `find cat` followed by `stats avail` 
   * calculates statistics of available fosterers, based on fosterers who are either currently fostering a cat or are able to foster a cat.
 
-
 <div markdown="block" class="alert alert-warning">
-
-<div style="page-break-after: always;"></div>
 
 **:warning: Caution:**<br>
 
@@ -784,8 +788,6 @@ Suppose you have 3 available fosterers: 1 can foster a dog, 1 can foster a cat a
 </div>
 
 <br> 
-
-<div style="page-break-after: always;"></div>
 
 ### Viewing statistics of current fosterers : `stats current`
 Helps you calculate statistics about fosterers who are currently fostering, and the type of animals they are fostering. Percentages are calculated to 2 decimal places.
@@ -835,6 +837,7 @@ Here, out of the 6 fosterers in your address book, 3 live in HDBs, 1 live in a C
 
 Undoes your previous command, given that the previous command successfully executed is either `add`, `delete`, `edit`, or `sort`.
 
+
 Format: `undo`
 
 ![Undo](images/screenshots/Undo.png)
@@ -874,6 +877,8 @@ Format: `reset`, followed by `reset confirm`
 
 <br> 
 
+<div style="page-break-after: always;"></div>
+
 ### Exiting Foster Family : `exit`
 
 Exits the app.
@@ -897,8 +902,6 @@ On the profile page,<br>
 
 In the main window, your Foster Family data is saved in the hard disk automatically after any command that changes the data, so no manual saving is needed. However, edits made in the profile page have to be saved via the `save` command. Else, changes will be discarded once you exit out of that fosterer's profile page.
 
-<br> 
-
 ### Editing data file
 
 Your Foster Family data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. We strongly
@@ -915,6 +918,8 @@ If your changes to the data file makes its format invalid, Foster Family will di
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **FAQ**
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -922,6 +927,7 @@ If your changes to the data file makes its format invalid, Foster Family will di
 
 **Q**: How do I know which version of Java I am using / have installed on my Computer?<br>
 **A**: Open a command terminal, type `java -version` and press Enter. The Java version in use will be displayed as a response message.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Known issues**
