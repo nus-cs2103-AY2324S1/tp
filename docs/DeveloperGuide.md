@@ -196,7 +196,7 @@ The result of it is then passed to `ParserUtil#parse` methods to parse each attr
 Step.4 `AddCommand` then calls `Model#addPerson()` which then calls `AddressBook#addPerson()`. The latter method will add person inside the `uniquePersonList` in `addressBook`. `AddCommand` also calls `Model#addGroup` which then calls `AddressBook#addGroup` to add the group inside `grouplist` if the group does not exist.
 Lastly, `AddCommand` adds the person inside the group
 
-Note: No duplication is allowed in addressbook for most of Person’s attribute (name, email and phone number.)
+**Note** No duplication is allowed in addressbook for most of Person’s attribute (name, email and phone number.)
 
 The following sequence diagram describes the process of `add` command:
 <puml src="diagrams/AddCommandSequenceDiagram.puml" alt="AddCommandSeqDiagram" />
@@ -248,13 +248,15 @@ The following sequence diagram describes the process of `addtime` command:
 
 #### Proposed Implementation
 
-The Add Group mechanism is facilitated by `Group`. It is stored internally as a `Group`. This operation is exposed in the `Model` interface as `Model#addGroup()`.
+The Add Group mechanism is facilitated by `Group` class. This operation is exposed in the `Model` interface as `Model#addGroup()`.
 
 Given below is an example usage scenario and how the group creation mechanism behaves at each step.
 
 **Step 1:** User launches the application.
 
 **Step 2:** The user executes `new g/GROUPNAME` to create a new group with the name GROUPNAME. `CreateGroupCommandParser` parses the GROUPNAME, ensuring the input is valid, and creates a `CreateGroupCommand`, which calls `Model#addGroup()`. The model retrieves the existing groupList from the addressBook and adds this new group to the groupList.
+
+**Note:** ProjectPRO does not allow 2 groups of the same name to be added. The group name must also be alphanumerical and non empty.
 
 The following activity diagram summarizes what happens when a user executes a new command:
 <puml src="diagrams/CreateGroupActivityDiagram.puml" alt="CreateGroupActivityDiagram"/>
@@ -319,7 +321,7 @@ The proposed delete time feature is facilitated by the `timeIntervalList` and `P
 
 Step 1. The user launches the application. The `AddressBook` will be initialized with the free time of its contacts.
 
-Step 2. The user executes the command `deleteTime n/Alex Yeoh t/mon 1200 - mon 1400 ;tue 1000 - wed 1600`. The `deleteTimeCommandParser` will be called to parse the inputs and call the `deletePersonTimeCommand`. The `deletePersonTime` command calls `Model#deleteTimeFromPerson()`, which will call `Person#deleteFreeTime()`.
+Step 2. The user executes the command `deleteTime n/Alex Yeoh t/mon 1200 - mon 1400 t/tue 1000 - wed 1600`. The `deleteTimeCommandParser` will be called to parse the inputs and call the `deletePersonTimeCommand`. The `deletePersonTime` command calls `Model#deleteTimeFromPerson()`, which will call `Person#deleteFreeTime()`.
 
 **Note:** Since multiple inputs are allowed, an array list of time intervals are passed around, each of which is to be deleted.
 
