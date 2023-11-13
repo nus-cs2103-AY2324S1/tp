@@ -15,6 +15,7 @@ participant ":Model" as Model MODEL_COLOR
 end box
 
 
+
 [-> LogicManager : execute("list")
 activate LogicManager
 
@@ -50,8 +51,10 @@ deactivate AddressBookParser
 LogicManager -> ListCommand : execute()
 activate ListCommand
 
-ListCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+
+ListCommand -> Model : updateFilteredPersonList(PREDICATE ...)
 activate Model
+
 
 Model --> ListCommand
 deactivate Model
@@ -65,6 +68,10 @@ deactivate CommandResult
 
 ListCommand --> LogicManager : result
 deactivate ListCommand
+
+ListCommand -[hidden]-> AddressBookParser
+destroy ListCommand
+
 
 [<--LogicManager
 deactivate LogicManager

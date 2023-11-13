@@ -81,8 +81,6 @@ activate CommandResult
 
 CommandResult --> FindFreeTimeCommand
 deactivate CommandResult
-CommandResult-[hidden]-> AddressBookParser
-destroy CommandResult
 
 FindFreeTimeCommand --> LogicManager
 deactivate FindFreeTimeCommand

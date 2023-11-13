@@ -64,6 +64,10 @@ deactivate CommandResult
 
 AddTimeCommand --> LogicManager : result
 deactivate AddTimeCommand
+
+AddTimeCommand -[hidden]-> AddressBookParser
+destroy AddTimeCommand
+
 [<--LogicManager
 deactivate LogicManager
 
