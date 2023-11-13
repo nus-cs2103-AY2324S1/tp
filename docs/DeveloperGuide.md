@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -181,11 +181,45 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Cons: Command input may be too long and less user-friendly.
 
 * **Alternative 2**: Allow for optional parameters with default values, with the tutee's name and phone being the compulsory ones.
-  * Pros: More user-friendly, command will not be too lengthy.
-  * Cons: Harder to implement. 
+    * Pros: More user-friendly, command will not be too lengthy.
+    * Cons: Harder to implement.
+
+### List feature
+
+There are three commands that deal with listing tutees:
+
+1. `ListCommand` - Shows the current list of all tutees in the list
+2. `ListByDayCommand` - Shows the current list of tutees who have lessons on a specified day
+3. `ListUnPaidCommand` - Shows the current list of tutees who have not paid
+
+The `ListCommand` extends the `Command` class. Both the `ListByDayCommand` and the `ListUnPaidCommand` extend the `ListCommand` class. All three commands override `Command#execute`.
+The `ListCommandParser` is responsible for returning the appropriate `ListCommand`  based on the command format.
+
+
+
+The `ListByDayCommand`  is initialised with a `DayPredicate` and updates the `FilteredPersonList` to only display Persons whose `Day` field matches the specified input.
+
+The following sequence diagram shows how the list by day command works.
+
+![ListByDaySequenceDiagram](images/ListByDaySequenceDiagram.png)
+
+The `ListUnPaidCommand`  follows a similar implementation to `ListByDayCommand`. It is initialised with a `PaidPredicate` instead and updates
+the `FilteredPersonList` to only display Persons whose `isPaid` field is false.
+
+#### Design considerations:
+
+**Aspect: How to implement `ListByDayCommand` and `ListUnPaidCommand`:**
+
+* **Alternative 1 (current choice):** Extend the `ListCommand` class.
+    * Pros: Greater use of OOP.
+    * Cons: Harder to implement.
+
+* **Alternative 2:** Individual command class without extending `ListCommand`.
+    * Pros: Easier to implement.
+    * Cons: Less abstraction.
 
 ### Find feature
-The `FindCommand` extends the `Command` class. It allows the user to find for tutees by specifying their names and/or 
+The `FindCommand` extends the `Command` class. It allows the user to find for tutees by specifying their names and/or
 subject using their prefixes. Both parameters are optional, but at least one of them must be specified for the `find`
 command to work properly.
 
@@ -209,7 +243,7 @@ The following sequence diagram shows how the edit command works.
 
 ### Edit feature
 The `EditCommand` extends the `Command` class. It allows the user to edit fields of the tutee by specifying the index
-of the tutee. The command contains checks to prevent any duplicate `Person` object (i.e. same name and phone number) 
+of the tutee. The command contains checks to prevent any duplicate `Person` object (i.e. same name and phone number)
 as well as clashes in schedules. If it passes these checks, the person is edited successfully.
 
 `EditCommand` takes in the following fields:
@@ -237,51 +271,10 @@ The following activity diagram summarizes what happens when a user executes an e
 * **Alternative 1 (current choice):** User specify which fields to edit by their prefixes.
     * Pros: User can edit the fields that require changes by specifying their prefix.
     * Cons: Command input may be too long and less user-friendly.
-* **Alternative 2:** Users cannot edit tutees that are already added, and can only do delete and re-adding 
-of tutees whenever changes are necessary.
+* **Alternative 2:** Users cannot edit tutees that are already added, and can only do delete and re-adding
+  of tutees whenever changes are necessary.
     * Pros: Less prone to bugs, and is simpler for developers to implement.
     * Cons: Not user-friendly and takes multiple steps for the user.
-
-### List feature
-
-There are three commands that deal with listing tutees:
-
-1. `ListCommand` - Shows the current list of all tutees in the list
-2. `ListByDayCommand` - Shows the current list of tutees who have lessons on a specified day
-3. `ListUnPaidCommand` - Shows the current list of tutees who have not paid
-
-The `ListCommand` extends the `Command` class. Both the `ListByDayCommand` and the `ListUnPaidCommand` extend the `ListCommand` class. All three commands override `Command#execute`.
-The `ListCommandParser` is responsible for returning the appropriate `ListCommand`  based on the command format.
-
-
-The `ListByDayCommand`  is initialised with a `DayPredicate` and updates
-
-
-### List by day feature
-The `ListByDayCommand` extends the `ListCommand` class. It is initialised with a `DayPredicate` and updates
-
-the `FilteredPersonList` to only display Persons whose `Day` field matches the specified input.
-
-The `ListByDayCommand`  is initialised with a `DayPredicate` and updates the `FilteredPersonList` to only display Persons whose `Day` field matches the specified input.
-
-The following sequence diagram shows how the list by day command works.
-
-![ListByDaySequenceDiagram](images/ListByDaySequenceDiagram.png)
-
-The `ListUnPaidCommand`  follows a similar implementation to `ListByDayCommand`. It is initialised with a `PaidPredicate` instead and updates
-the `FilteredPersonList` to only display Persons whose `isPaid` field is false.
-
-#### Design considerations:
-
-**Aspect: How to implement `ListByDayCommand` and `ListUnPaidCommand`:**
-
-* **Alternative 1 (current choice):** Extend the `ListCommand` class.
-    * Pros: Greater use of OOP.
-    * Cons: Harder to implement.
-
-* **Alternative 2:** Individual command class without extending `ListCommand`.
-    * Pros: Easier to implement.
-    * Cons: Less abstraction.
 
 ### Find Free Time feature
 
@@ -314,9 +307,9 @@ The following activity diagram summarizes what happens when a user executes a `f
 * **Alternative 1 (current choice):** The command first finds timeslots when the user is busy on that _Day_ by looking at the tutees' schedules inside the
   `UniquePersonList`. The TimeSlot Class finds free time based on the list of
   timeslots when the user is busy, and then returns a list of timeslots where the user is free. (Each timeslot is between _Begin_ and _End_,
-and is at least _Duration_ long)
-  * Pros: Command is short and simple to use.
-  * Cons: During the first round of user-testing, some new users were confused on how to use the command.
+  and is at least _Duration_ long)
+    * Pros: Command is short and simple to use.
+    * Cons: During the first round of user-testing, some new users were confused on how to use the command.
 
 
 ### Calculate total revenue for the month
@@ -325,7 +318,7 @@ and is at least _Duration_ long)
 The `RevenueCommand` extends the `command class`. The command first gets a list containing all tutees.
 The total revenue monthly can be calculated now by iterating through the list and calling `Person#getMonthlyFee`. <br>
 
-The total monthly revenue is calculated as such: <br> 
+The total monthly revenue is calculated as such: <br>
 *Total Monthly Revenue* = Sum of every tutee's `monthlyFee`
 
 The following sequence diagram shows how the total revenue command works:
@@ -411,13 +404,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes**
 
 * **Alternative 1 (current choice):** Saves the entire tutee list.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 ### Mark paid/unpaid features
 The proposed mark paid/check paid mechanism can check whether the person has paid or not by implementing a new boolean field 'paid' in the person object, it implements the following operations:
@@ -480,7 +473,7 @@ The following sequence diagram shows how unpaidAll command works:
 **Target user profile**: Private tutors not affiliated to any tuition organisations
 
 * has a need to manage multiple tutees
-* has a need for managing personal tutoring schedule 
+* has a need for managing personal tutoring schedule
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -521,17 +514,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to list all tutees.
 2.  System shows all tutees.
 3.  System displays the success message.
-	
+
     Use case ends.
 
 **Extensions**
 
 - 2a. The list of tutees is empty.
     - 2a1. System informs the user that the list is empty.
-	
-    Use case ends.
-    <br>
-    <br>
+
+  Use case ends.
+  <br>
+  <br>
 
 **Use case: UC02 - List tutees whose lessons are on a specified day**
 
@@ -572,20 +565,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 1b1. System informs user of duplicate tutees.
 
       Use case resumes at 1.
-  
+
 - 1c. User inputs a clash in schedule.
     - 1c1. System informs user of the clash in schedules.
 
       Use case resumes at 1.
-  
+
 - 1d. User inputs begin time which is greater than the end time.
-  - 1d1. System informs that begin time must be smaller than the end time.
+    - 1d1. System informs that begin time must be smaller than the end time.
 
-    Use case resumes at 1.
+      Use case resumes at 1.
 
-    <br>
-    <br>
-  
+      <br>
+      <br>
+
 **Use case: UC04 - Delete a tutee**
 
 **MSS**
@@ -603,7 +596,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 2a1. System informs that user does not exist.
       <br>
       <br>
-  
+
 **Use case: UC05 - Edit a tutee**
 
 **MSS**
@@ -616,28 +609,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 **Extensions**
-  
+
 - 2a. The schedule of the edited tutee clashes with an existing schedule.
-  - 2a1. System informs that there is a clash in schedules.
+    - 2a1. System informs that there is a clash in schedules.
 
-    Use case resumes at 2.
-  
+      Use case resumes at 2.
+
 - 2b. The edited begin time is after than the original end time.
-  - 2b1. System informs that begin time must be smaller than the end time.
+    - 2b1. System informs that begin time must be smaller than the end time.
 
-    Use case resumes at 2.
-  
+      Use case resumes at 2.
+
 - 2c. The edited end time is before the original begin time.
-  - System informs that begin time must be smaller than the end time.
+    - System informs that begin time must be smaller than the end time.
 
-    Use case resumes at 2.
-  
+      Use case resumes at 2.
+
 - 2d. The edited begin time is after the edited begin time.
-  - 2d1. System informs that begin time must be smaller than the end time.
-    
-    Use case resumes at 2.
-    <br>
-    <br>
+    - 2d1. System informs that begin time must be smaller than the end time.
+
+      Use case resumes at 2.
+      <br>
+      <br>
 
 **Use case: UC06 - Find a tutee**
 
@@ -650,17 +643,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 - 2a. The user inputs more than one word for name field.
-  - 2a1. System informs that name can only take one word.
+    - 2a1. System informs that name can only take one word.
 
-    Use case resumes at 2.
-  
+      Use case resumes at 2.
+
 - 2b. The user inputs more than one word for subject field.
-  - 2b1. System informs that subject can only take one word.
+    - 2b1. System informs that subject can only take one word.
 
-    Use case resumes at 2.
-    <br>
-    <br>
-  
+      Use case resumes at 2.
+      <br>
+      <br>
+
 **Use case: UC07 - Mark a tutee as paid**
 
 **MSS**
@@ -723,8 +716,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. System informs user that there is nothing to redo.
 
   Use case ends.
-<br>
-<br>
+  <br>
+  <br>
 
 **Use case: UC11 - Finding free time**
 
@@ -734,10 +727,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 - 2a. The user does not have any free slots available.
-  - 2a1. System informs user that there is no available timeslots.
-    <br>
-    <br>
-  
+    - 2a1. System informs user that there is no available timeslots.
+      <br>
+      <br>
+
 **Use case: UC12 - Get monthly revenue**
 
 **MSS**
@@ -748,8 +741,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use case ends.
 
 *{More to be added}*
-   <br>
-   <br>
+<br>
+<br>
 
 ### Non-Functional Requirements
 
@@ -775,7 +768,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * Timeslot: An interval of time from HH:MM to HH:MM
 * Prefix: An abbreviation for the name of the parameter. Prefix should be entered before the actual parameter in a command and always ends with a slash (/).
 * MSS: Main success scenario
-<br>
+  <br>
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -791,15 +784,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 ### List tutee(s)
@@ -820,99 +813,110 @@ testers are expected to do more *exploratory* testing.
 ### Adding a tutee
 
 1. Adding a tutee into the list.
-   1. Prerequisites: None
-   2. Test case: `add n/Betsy Crowe p/92939402 e/betsycrowe@example.com a/Newgate Prison sb/Secondary 3 Physics d/mon b/1900 end/1930 pr/35.00`<br>
-      Expected: The tutee is added into the bottom of the list. Details of the added tutee is shown in the status message.
+    1. Prerequisites: None
+    2. Test case: `add n/Betsy Crowe p/92939402 e/betsycrowe@example.com a/Newgate Prison sb/Secondary 3 Physics d/mon b/1900 end/1930 pr/35.00`<br>
+       Expected: The tutee is added into the bottom of the list. Details of the added tutee is shown in the status message.
 
-
+       
 2. Adding a duplicate tutee into the list
-    1. Prerequisites: Completing the first test case for [Adding a tutee](#adding-a-tutee) 
+    1. Prerequisites: Completing the first test case for [Adding a tutee](#adding-a-tutee)
     2. Test case: `add n/Betsy Crowe p/92939402 e/betsycrowe@example.com a/Newgate Prison sb/Secondary 3 Physics d/mon b/1900 end/1930 pr/35.00`<br>
        Expected: The error message _This tutee already exists_ should be displayed in the status message.
+
+
+3. Adding a tutee that has clashing schedules.
+    1. Prerequisites: Completing the first test case for [Adding a tutee](#adding-a-tutee)
+    2. Test case: `add n/Jason Antonius p/12345678 e/test@gmail.com a/PGPR Residences sb/CS1101S d/mon b/1900 end/1930 pr/20` <br>
+       Expected: The error message _This date and time clashes with an existing schedule_ should be displayed in the status message.
 
 ### Deleting a tutee
 
 1. Deleting a tutee while all tutees are being shown
-   1. Prerequisites: List all tutees using the `list` command. Multiple tutees in the list.
-   2. Test case: `delete 1`<br>
-   Expected: First tutee is deleted from the list. Details of the deleted tutee shown in the status message. Timestamp in the status bar is updated.
-   
+    1. Prerequisites: List all tutees using the `list` command. Multiple tutees in the list.
+    2. Test case: `delete 1`<br>
+       Expected: First tutee is deleted from the list. Details of the deleted tutee shown in the status message. Timestamp in the status bar is updated.
 
-2. Adding a tutee that has clashing schedules.
-   1. Prerequisites: Completing the first test case for [Adding a tutee](#adding-a-tutee)
-   2. Test case: `add n/Jason Antonius p/12345678 e/test@gmail.com a/PGPR Residences sb/CS1101S d/mon b/1900 end/1930 pr/20` <br>
-      Expected: The error message _This date and time clashes with an existing schedule_ should be displayed in the status message.
 
 ### Finding a tutee
 
 1. Finding a tutee by their name
-   1. Prerequisites: Have the default tutee data list.
-   2. Test case: `find n/Betsy` <br>
-      Expected: Tutees that contain the name predicate listed.
+    1. Prerequisites: Have the default tutee data list.
+    2. Test case: `find n/Betsy` <br>
+       Expected: Tutees that contain the name predicate listed.
 
 
 2. Finding a tutee by their subject
-   1. Prerequisites: Have the default tutee data list.
-   2. Test case: `find sb/Maths` <br>
-      Expected: Tutees that contain the subject predicate listed.
+    1. Prerequisites: Have the default tutee data list.
+    2. Test case: `find sb/Maths` <br>
+       Expected: Tutees that contain the subject predicate listed.
 
 
 3. Finding a tutee by their name and subject
-   1. Prerequisites: Have the default tutee data list.
-   2. Test case: `find n/Betsy sb/Maths` <br>
-      Expected: Tutees that contain both the name predicate and subject predicate listed.
+    1. Prerequisites: Have the default tutee data list.
+    2. Test case: `find n/Betsy sb/Maths` <br>
+       Expected: Tutees that contain both the name predicate and subject predicate listed.
 
 
 4. Finding a tutee by their multiple word names
-   1. Prerequisites: Have the default tutee data list.
-   2. Test case: `find n/Betsy Crower` <br>
-      Expected: The error message _Name can only take one word._
+    1. Prerequisites: Have the default tutee data list.
+    2. Test case: `find n/Betsy Crower` <br>
+       Expected: The error message _Name can only take one word._
 
 
 5. Finding a tutee by their multiple word subject
-   1. Prerequisites: Have the default tutee data list.
-   2. Test case: `find sb/English Language` <br>
-      Expected: The error message _Subject can only take one word._
+    1. Prerequisites: Have the default tutee data list.
+    2. Test case: `find sb/English Language` <br>
+       Expected: The error message _Subject can only take one word._
 
 
 ### Editing a tutee
 
 1. Editing a tutee while all tutees are being shown
-   1. Prerequisites: Have the default tutee data and list all tutees using the `list` command.
-   2. Test case: `edit 2 n/Betsy Crower a/Betsy street, block 110, #03-02` <br>
-      Expected: Tutee is successfully edited, and the details of the edited tutee is shown in the status message.
+    1. Prerequisites: Have the default tutee data and list all tutees using the `list` command.
+
+    2. Test case: `edit 2 n/Betsy Crower a/Betsy street, block 110, #03-02` <br>
+       Expected: Tutee is successfully edited, and the details of the edited tutee is shown in the status message.
+
 
 
 2. Editing a tutee that causes duplicate tutees
-   1. Prerequisites: Have the default tutee data and list all tutees using the `list` command.
-   2. Test case: `edit 2 n/Alex Yeoh p/87438807` <br>
-      Expected: The error message _This tutee already exists_ should be displayed in the status message.
+
+    1. Prerequisites: Have the default tutee data and list all tutees using the `list` command.
+
+    2. Test case: `edit 2 n/Alex Yeoh p/87438807` <br>
+       Expected: The error message _This tutee already exists_ should be displayed in the status message.
+
 
 
 3. Editing a tutee that causes clashing schedules.
-   1. Prerequisites: Have the default tutee data and list all tutees using the `list` command.
-   2. Test case: `edit 2 d/Mon b/2000 end/2200` <br>
-      Expected: The error message _This date clashes with an existing schedule_ should be displayed in the status message.
+
+    1. Prerequisites: Have the default tutee data and list all tutees using the `list` command.
+
+    2. Test case: `edit 2 d/Mon b/2000 end/2200` <br>
+       Expected: The error message _This date clashes with an existing schedule_ should be displayed in the status message.
 
 ### Find free time
 
 1. Finding free time that results in no available timeslots
     1. Prerequisites: Have the default tutee data.
+
     2. Test case: `freeTime d/Mon dur/30 b/2000 end/2100` <br>
        Expected: The result <br>
-   _Here is your list of free time:_ <br>
-   _There are no available timeslots._ <br>
-   should be displayed in the status message.
+       _Here is your list of free time:_ <br>
+       _There are no available timeslots._ <br>
+       should be displayed in the status message.
+
 
 
 2. Finding free time that results in available timeslots
     1. Prerequisites: Have the default tutee data.
+
     2. Test case: `freeTime d/Mon dur/30 b/1930 end/2130` <br>
        Expected: The result <br>
-         _Here is your list of free time:_ <br>
-         _Free from 19:30 - 20:00_ <br>
-         _Free from 21:00 - 21:30_ <br>
-         should be displayed in the status message.
+       _Here is your list of free time:_ <br>
+       _Free from 19:30 - 20:00_ <br>
+       _Free from 21:00 - 21:30_ <br>
+       should be displayed in the status message.
 
 ### Marking a tutee as paid
 
@@ -934,23 +938,23 @@ testers are expected to do more *exploratory* testing.
 1. Marking a tutee as not paid while all tutees are being shown
 
     1. Prerequisites: List all tutees using the `list` command. Multiple tutees in the list.
-   
+
     2. Test case: `unpaid 3`<br>
-        Expected: Second tutee is from the list is marked as not paid. The message of marking person not paid success will be shown. Timestamp in the status bar is updated.
-   
+       Expected: Second tutee is from the list is marked as not paid. The message of marking person not paid success will be shown. Timestamp in the status bar is updated.
+
     3. Test case: `unpaid 0`<br>
-        Expected: No tutee is marked as not paid. Error details shown in the status message. Status bar remains the same.
-   
+       Expected: No tutee is marked as not paid. Error details shown in the status message. Status bar remains the same.
+
     4. Other incorrect unpaid commands to try: `unpaid`, `unpaid x`, `...` (where x is larger than the list size)<br>
-        Expected: Similar to previous.
+       Expected: Similar to previous.
 
 ### Listing all unpaid tutees
 
 1. All tutees who haven't paid will be shown
     1. There are tutees in the list.
-   
+
     2. Test case: `list unpaid`<br>
-        Expected: All tutees who haven't paid will be shown. The message of how many tutees are unpaid will be shown. Timestamp in the status bar is updated.
+       Expected: All tutees who haven't paid will be shown. The message of how many tutees are unpaid will be shown. Timestamp in the status bar is updated.
 
 ### Undo command
 
@@ -970,7 +974,7 @@ testers are expected to do more *exploratory* testing.
 1. Redo a command when there is a undo command executed previously.
     1. At least one tutee is present in the tutee list. Execute any command that modify tutee data. In this instruction, `clear` is used followed by `undo`.
     2. Test case: `redo`<br>
-       Expected: Clear the tutee list again. 
+       Expected: Clear the tutee list again.
 
 
 2. Redo a command when there is no undo command executed previously to redo.
@@ -982,11 +986,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
 
 ## **Planned Enhancements**
+
+1. To be able to group/tag tutees into "Tutor Groups". These tutees will be able to have the same timeslot if they belong to the same "Tutor Group"
+2. Allow tutees to have multiple lessons. Our current implementation does not allow the same tutee to have multiple lesson as a tutee is uniquely identified by their name and phone number. For example, if the user is teaching John Maths on Monday, he can't teach John Physics on a different day because the system will identify John as a duplicate tutee.
+3. Enhance the edit feature. Currently, our edit feature might result in a bug if the NAME and (DAY/BEGIN/END) fields are edited at the same time. For example, if tutee index 1 has the name John and has a lesson on Monday 20:00 - 21:00, trying to do `edit 1 n/Doe end/2030` will result in an error (throwing the message that this date clashes with an existing scheduke).
 
 ### Batch Processing for Paid Command
 
@@ -1004,7 +1012,7 @@ Idea: Add a scheduling mechanism within the command execution to mark individual
 
 Reason: To create a more sophisticated find feature for the best results. This enhancement allows users to get more specific results tailored to their criteria.
 
-Idea: Modify the NameContainsKeywordPredicate and SubjectContainsKeywordPredicate to accept multiple word inputs (e.g. "find n/Alex Yeoh sb/Maths Chemistry). 
+Idea: Modify the NameContainsKeywordPredicate and SubjectContainsKeywordPredicate to accept multiple word inputs (e.g. "find n/Alex Yeoh sb/Maths Chemistry).
 
 ### Maximum PayRate
 
@@ -1017,7 +1025,7 @@ Idea: Modify the VALIDATION_REGEX of PayRate such that it only accepts values up
 Reason: `clear`,`edit`, `paid`, `delete`,`unpaidAll` are commands that deal with modifying tutee data. If the tutee's `isPaid` status is true,
 the system permits the user to execute the `paid` command even though this will not change the `isPaid` status of the tutee. If these commands
 do not change the tutee data in any way but still allowed to be executed, when the user executes `undo`, there will be no changes since there are now duplicate states of the `VersionedAddressBook`
-is saved. The system should inform the user that this command will not modify any data and prevent the command from executing. 
+is saved. The system should inform the user that this command will not modify any data and prevent the command from executing.
 
 Idea: Create a `Model#isSameData()` to compare whether the state of the tutee data before and after the command execution will be the same. If
 `Model#isSameData()` returns true, a `CommandException` should be thrown and the system should inform the user that this command will not modify any data.

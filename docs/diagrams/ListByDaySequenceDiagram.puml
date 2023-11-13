@@ -49,7 +49,7 @@ deactivate AddressBookParser
 LogicManager -> ListByDayCommand : execute()
 activate ListByDayCommand
 
-ListByDayCommand -> Model : updateFilteredItemList(DAY_PREDICATE)
+ListByDayCommand -> Model : updateFilteredPersonList(DAY_PREDICATE)
 
 note right
 DAY_PREDICATE:

@@ -54,4 +54,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/winstonleonard.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Refactoring code, Feature Development, Testing
