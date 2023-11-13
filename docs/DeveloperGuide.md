@@ -758,6 +758,21 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### List internship(s)
+
+1. Listing tutee(s)
+
+    1. Prerequisites: At least one tutee in the tutee list.
+
+    2. Test case: `list`<br>
+       Expected: Shows the full list of tutees in the tutee list.
+
+    3. Test case: `list mon`<br>
+       Expected: Shows tutees whose lessons fall on Monday in the tutee list.
+
+    4. Test case: `list unpaid`<br>
+       Expected: Shows tutees who have yet to pay for their lessons in the tutee list.
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -774,6 +789,38 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Undo command
+
+1. Undo previous commands that can modify the data of tutees.
+
+    1. Prerequisites: At least one tutee is present in the tutee list. Execute any command that modify tutee data. In this instruction, `clear` is used.
+
+    2. Test case: `undo`<br>
+       Expected: Restore all tutees that were cleared. A message informing the user that the command is successfully undone is displayed.
+
+2. Undo when there are no previous commands that modify the data of tutees.
+
+    1. Prerequisites: Launch the application. Ensure no commands that modify the tutee data is executed.
+
+    2. Test case: `undo`<br>
+       Expected: No command is undone. Error details shown in the status message.
+
+### Redo command
+
+1. Redo a command when there is a undo command executed previously.
+
+    1. At least one tutee is present in the tutee list. Execute any command that modify tutee data. In this instruction, `clear` is used followed by `undo`.
+
+    2. Test case: `redo`<br>
+       Expected: Clear the tutee list again. 
+
+2. Redo a command when there is no undo command executed previously to redo.
+
+    1. Prerequisites: Ensure no `undo` command is executed after launching the application.
+
+    2. Test case: `redo`<br>
+       Expected: No command is redone. Error details shown in the status message.
 
 ### Saving data
 
