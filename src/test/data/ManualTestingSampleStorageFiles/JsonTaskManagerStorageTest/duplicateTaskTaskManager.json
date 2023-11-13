@@ -3,7 +3,7 @@
     "description" : "Drink Water",
     "deadline" : "-"
   }, {
-    "description" : "Task with invalid deadline",
-    "deadline" : "Invalid Deadline"
+    "description" : "Drink Water",
+    "deadline" : "-"
   } ]
 }
