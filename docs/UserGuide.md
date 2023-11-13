@@ -174,7 +174,7 @@ Displays the list of your chosen tab.
   e.g `n/NAME [t/TUTORIAL_GROUP_ID]` can be used as `n/John Doe t/G01` or as `n/John Doe`.
 
 * Items with `|` indicate that the command accepts either parameters.<br>
-  e.g `mark n/STUDENTNAME | id/STUDENTID` takes in `STUDENTNAME` or `STUDENTID` as its first argument.
+  e.g `mark n/STUDENT_NAME | id/STUDENT_ID` takes in `STUDENT_NAME` or `STUDENT_ID` as its first argument.
 
 * Items with `…​` after them can be used multiple times including zero times.<br>
   e.g. `[t/TUTORIAL_GROUP_ID]…​` can be used as many times as desired (i.e. 0 times), `t/T01`, `t/T01 t/B14` etc.
@@ -196,10 +196,14 @@ Shows a message explaining how to access the help page.
 
 **Format:** `help`
 
+<div markdown="block" class="alert alert-warning">**:exclamation: Warning:**
+`help` command will not work when there are no addressbooks present. Please create an addressbook using `course create course/COURSE_CODE` to work around this issue. You can view the next section for more details on how to use the command.
+</div>
+
 ### 4.2 Basic Course Management
 
 <div markdown="block" class="alert alert-warning">**:exclamation: Warning:**
-The parameter `COURSE_CODE` is used for all course management commands, it can be any string, including an empty one. In addition, if `COURSE_CODE` specified is too long, the end of the string will be truncated!
+The parameter `COURSE_CODE` is used for all course management commands, it can be any string, including an empty one. In addition, if `COURSE_CODE` specified is too long, the end of the string will be truncated and other tabs may appear empty!
 </div>
 
 #### 4.2.1 Creating an addressbook: `course create`
@@ -213,7 +217,7 @@ Creates a new addressbook.
 <div markdown="block" class="alert alert-info">
 
 * Creates a new addressbook with course code `COURSE_CODE`
-* `COURSE_CODE` address book must not exist.
+* `COURSE_CODE` addressbook must not exist.
 
 </div>
 
@@ -232,12 +236,16 @@ Creates a new addressbook.
 
 Delete an addressbook.
 
+<div markdown="block" class="alert alert-info">**:information_source: Info:**
+Deleting the currently active addressbook will automatically switch to another existing addressbook!
+</div>
+
 **Format:** `course delete course/COURSE_CODE`
 
 <div markdown="block" class="alert alert-info">
 
 * Deletes the addressbook with course code `COURSE_CODE`
-* `COURSE_CODE` address book must exist.
+* `COURSE_CODE` addressbook must exist.
 
 </div>
 
@@ -261,7 +269,7 @@ Switches the active addressbook.
 <div markdown="block" class="alert alert-info">
 
 * Switches to the addressbook with course code `COURSE_CODE`
-* `COURSE_CODE` address book must exist.
+* `COURSE_CODE` addressbook must exist.
 
 </div>
 
@@ -285,7 +293,7 @@ Edits the active addressbook course code.
 <div markdown="block" class="alert alert-info">
 
 * Changes the course code of active addressbook to `COURSE_CODE`
-* `COURSE_CODE` address book must not exist.
+* `COURSE_CODE` addressbook must not exist.
 
 </div>
 
@@ -310,10 +318,10 @@ Creates a new contact in the course with the specified name and details.
 
 <div markdown="block" class="alert alert-info">
 
-* `STUDENT_NAME` should be a string made up of alphabetical characters, with no numbers or special characters.
+* `STUDENT_NAME` should be a string made up of alphanumerical characters, with no special characters.
 * `PHONE_NUMBER` should be a string made up of numbers.
 * `STUDENT_ID` should be unique for all students.
-* `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space. It should begin with the letter 'A', followed by 7 numbers, and end with a letter.
+* `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space. It should begin with the capital letter 'A', followed by 7 numbers, and end with a letter.
 * `TUTORIAL_GROUP_ID` should be a string made up of alphanumeric characters, with no special characters.
 
 </div>
@@ -392,8 +400,8 @@ Marks the attendance of one or more student.
 * To mark attendance for multiple students, provide a comma-separated list of `STUDENT_NAME` or `STUDENT_ID`.
 * If a student is present, `REASON_OF_ABSENCE` is not required.
 * If a student is absent, `REASON_OF_ABSENCE` is mandatory.
-* `STUDENT_NAME` should be a string made up of alphabetical characters, with no numbers or special characters.
-* `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space. It should begin with the letter 'A', followed by 7 numbers, and end with a letter.
+* `STUDENT_NAME` should be a string made up of alphanumerical characters, with no special characters.
+* `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space. It should begin with the capital letter 'A', followed by 7 numbers, and end with a letter.
 * `ATTENDANCE` should only be 0 or 1, where 0 indicates student is absent and 1 indicates student is present.
 * `WEEK_NUMBER` should be an integer from 0 to 13.
 
@@ -473,8 +481,8 @@ Finds a student's or multiple students' contact either via their name or student
 
 <div markdown="block" class="alert alert-info">
 
-* `STUDENT_NAME` should be a string made up of alphabetical characters, with no numbers or special characters.
-* `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space. It should begin with the letter 'A', followed by 7 numbers, and end with a letter.
+* `STUDENT_NAME` should be a string made up of alphanumerical characters, with no special characters.
+* `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space. It should begin with the capital letter 'A', followed by 7 numbers, and end with a letter.
 
 </div>
 
@@ -574,7 +582,7 @@ Deletes all students from the course or all students from the specified tutorial
 
 ![merge](images/mergeCommand.png)
 
-Merges two students in the current address book.
+Merges two students in the current addressbook.
 
 **Format:** `merge PRIMARY_INDEX SECONDARY_INDEX`
 
@@ -638,7 +646,7 @@ TAvigator data are saved in the hard disk automatically after any command that c
 TAvigator data are saved automatically as a JSON file `[JAR file location]/data/tavigator.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
-If your changes to the data file makes its format invalid, TAvigator will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, TAvigator will discard all data and start with an empty data file at the next run, containing an addressbook called "TEMP". Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
 #### 4.5.3 Archiving data files `[coming in v2.0]`
@@ -660,6 +668,8 @@ _Details coming soon ..._
 
 2. **Adding invalid and redundant prefixes** after commands will case TAvigator to intake the invalid prefix and its value as part of the command, causing the command to fail. The remedy is to remove the invalid and redundant prefixes.
 
+3. **Trying to use help command with no courses** will result in `Please create an addressbook using the create command first` message. You can create an addressbook using `course create course/COURSE_CODE` to work around this issue.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -671,14 +681,14 @@ _Details coming soon ..._
 |----------------|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | course/ | Course code    | - Can be any string, including empty string `""`. |
 | n/      | Name           | - Should only contain alphanumeric characters and spaces, no special characters.|
-| id/     | Student ID     | - Should be in the format `AxxxxxxxL`, <br>where `x` represents digit and `L` represents capital letters. Student ID is unique for all students. |
+| id/     | Student ID     | - Should be in the format `AxxxxxxxL`, <br>where `x` represents digit and it starts with a capital letter 'A' as well as ending with a letter. Student ID is unique for all students. |
 | p/      | Phone          | - Should only contain digits. |
 | e/      | Email          | - Should only be of the form `local@domain` and only accept alphanumeric characters <br>- `local` allows for special characters `+`, `_`, `.` and `-` as well. <br>- `domain` must be at least 2 letters long<br> |
 | t/      | Tutorial group | - Should only contain alphanumeric characters. <br>- Should not contain spaces.<br>- Used in `add` and `edit` commands.|
 | tg/     | Tutorial group | - Should only contain alphanumeric characters. <br>- Should not contain spaces.<br>- Used in `list attendance` and `delete all` commands. |
 | a/      | Attendance     | - Should only be 0 or 1.<br>- 0 representing absence and 1 representing present. |
 | w/      | Week number    | - Should be an integer from 0 to 13. |
-| r/      | Reason         | - Can be any string, except empty string `""`. |
+| r/      | Reason         | - Can be any string, excluding empty string `""`. |
 
 
 ### 7.2 Command summary
