@@ -101,7 +101,7 @@ public class ModelManager implements Model {
         userPrefs.setBookingBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== Bookings Book ================================================================================
 
     @Override
     public void setBookingsBook(ReadOnlyBookingsBook bookingsBook) {
