@@ -17,7 +17,7 @@ This user guide will teach you how to install **TuitionConnect** from scratch, a
 ## Table of Contents
 
 <!-- TOC -->
-* [TuitionConnect User Guide](#tuitionconnect-user-guide)
+* [Welcome to TuitionConnect's User Guide!](#welcome-to-tuitionconnects-user-guide)
   * [Table of Contents](#table-of-contents)
   * [Introduction](#introduction)
   * [Using this guide](#using-this-guide)
@@ -26,28 +26,36 @@ This user guide will teach you how to install **TuitionConnect** from scratch, a
   * [Quick start](#quick-start)
   * [Input Formats](#input-formats)
     * [Command Format](#command-format)
+  * [Parameters Requirement](#parameters-requirement)
   * [Features](#features)
     * [Viewing help : `help`](#viewing-help--help)
     * [Adding a tutee : `add`](#adding-a-tutee--add)
-    * [View the list : `list`](#view-the-list--list)
-    * [View the list of tutees specified by day : `list [DAY]`](#view-the-list-of-tutees-specified-by-day--list-day)
+    * [Listing tutees : `list`](#listing-tutees--list)
     * [Finding a tutee : `find`](#finding-a-tutee--find)
     * [Editing a tutee : `edit`](#editing-a-tutee--edit)
-    * [Deleting a person: `delete`](#deleting-a-person-delete)
+    * [Deleting a tutee: `delete`](#deleting-a-tutee-delete)
     * [Clearing all entries : `clear`](#clearing-all-entries--clear)
-    * [Marking a person as paid : `paid`](#marking-a-person-as-paid--paid)
-    * [Marking a person as unpaid : `unpaid`](#marking-a-person-as-unpaid--unpaid)
-    * [Show all the unpaid persons : `list unpaid`](#show-all-the-unpaid-persons--list-unpaid)
-    * [Mark all persons as unpaid: `unpaidAll`](#mark-all-persons-as-unpaid-unpaidall)
+    * [Marking a tutee as paid : `paid`](#marking-a-tutee-as-paid--paid)
+    * [Marking a tutee as unpaid : `unpaid`](#marking-a-tutee-as-unpaid--unpaid)
+    * [Show all the unpaid tutees : `list unpaid`](#show-all-the-unpaid-tutees--list-unpaid)
+    * [Mark all tutee as unpaid: `unpaidAll`](#mark-all-tutee-as-unpaid-unpaidall)
     * [Finding Free Time : `freeTime`](#finding-free-time--freetime)
     * [Undo previous command : `undo`](#undo-previous-command--undo)
-    * [Redo previous command : `redo`](#redo-previous-command--redo)
+    * [Redo previous undone command : `redo`](#redo-previous-undone-command--redo)
     * [Calculating Monthly Revenue: `rev`](#calculating-monthly-revenue-rev)
     * [Exiting the program : `exit`](#exiting-the-program--exit)
   * [FAQ](#faq)
   * [Known issues](#known-issues)
   * [Command summary](#command-summary)
   * [Glossary](#glossary)
+    * [CLI](#cli)
+    * [Command](#command)
+    * [GUI](#gui)
+    * [Index](#index)
+    * [JAR file](#jar-file)
+    * [Java](#java)
+    * [JSON file](#json-file)
+    * [Parameter](#parameter)
 <!-- TOC -->
 
 --------------------------------------------------------------------------------------------------------------------
@@ -165,6 +173,9 @@ Here are the [parameter](#glossary) requirements of commonly used parameters by 
 | **`PAYRATE`**  | dollars per hour you make teaching this tutee               | Numbers only <br> Numbers must be **non-negative**                                                                                                                                                                                                   |
 | **`INDEX`**    | The index number of the tutee shown in the tutee list panel | Used in [`delete`](#deleting-a-tutee-delete) [`edit`](#editing-a-tutee--edit) [`unpaid`](#marking-a-tutee-as-unpaid--unpaid) and [`paid`](#marking-a-tutee-as-paid--paid) commands <br> Must be a **positive number** <br> Example: (1,2,3,...) <br> |
 | **`DURATION`** | The duration of a time slot in **minutes**                  | Used in [`freeTime`](#finding-free-time--freetime) Must be a **positive integer** <br> Example: (60,120,...) <br>                                                                                                                                    |
+
+<br>
+
 ## Features
 
 ### Viewing help : `help`
@@ -331,7 +342,7 @@ Examples:
 
 ![ClearCommand.png](images/ClearCommand.png)
 
-* Example image above shows the result of command `clear
+* Example image above shows the result of command `clear`
 
 
 ### Marking a tutee as paid : `paid`
