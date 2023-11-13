@@ -527,17 +527,13 @@ We plan to include additional warning messages for the detection of duplicate co
 We will warn users if they are adding contacts with duplicate information, such as duplicate email address, or names which differ only by whitespace (in the middle).
 The user can then confirm whether they would like the duplicate contact to go through, or whether they would like to make changes to the duplicate contact.
 
-1. Currently, special characters such as `/` are allowed (beyond the first three digits) in a contact's phone number.
-We plan to warn users if they are adding phone number with special characters.
-The user can then confirm whether they would like the phone number to go through, or whether they would like to make changes to the phone number.
-
 1. Currently, special characters such as `@` are not allowed in AlternateContact, even though they could conceivably be part of a contact's alternate email.
 We plan to allow for special characters to be included in AlternateContact.
 
 1. Currently, duplicate values for deletion indices, as well as parameters like `t/` and `a/`, get silently merged.
 This is not outright rejected for the convenience of users.
 However, users may have accidentally entered such duplicate values, which may result in the app's behaviour differing from users' expectations.
-We plan to display additional warning messages for commands like `add`, `edit`, and `delete`, so that users may check if their specifying of duplicate values is intentional.
+In such cases, we plan to display additional warning messages for commands like `add`, `edit`, and `delete`, so that users may check if their specifying of duplicate values is intentional.
 Users may then press enter again to confirm the command's execution, or edit the command.
 
 1. Currently, if no note (i.e. no `o/` parameter) is specified when adding a contact, the note's value defaults to being empty (`""`).
@@ -545,4 +541,14 @@ The UI accounts for empty notes by not taking up an extra line to display the em
 When users do specify a note, they may explicitly specify an empty note (i.e. `o/` with no value).
 This is not outright rejected for the convenience of users, since empty notes are allowed.
 However, users may have forgotten to specify a value for the note, which may result in the app's behaviour differing from users' expectations.
-We plan to display an additional warning message for commands like `add`, so that users may check if their specifying of empty notes is intentional.
+In such cases, we plan to display an additional warning message for commands like `add`, so that users may check if their specifying of empty notes is intentional.
+
+1. Currently, users are allowed to enter very flexible phone number values.
+The only validation requirement is that the phone number begins with 3 digits.
+This allows users to use the feature as they wish.
+For example, although the standard intended usage is for users to enter just the digits of a phone number (e.g. `98765432`), they are also allowed to enter a value such as `65432109 (office); 98765432 (mobile)`.
+However, this flexibility may result in users accidentally entering invalid phone numbers, such as `9876p/5432`.
+Therefore, if users enter a phone number that does not contain only digits, we plan to display an additional warning message for commands like `add` and `edit`, so that users may check if their specifying of such a value is intentional.
+Users may then press enter again to confirm the command's execution, or edit the command.
+The added need to confirm non-standard phone numbers nudges users towards using the alternate contacts feature for additional phone numbers instead.
+We also plan to allow even more flexibility, by allowing phone number values to optionally start with a `+` before the required digits.
