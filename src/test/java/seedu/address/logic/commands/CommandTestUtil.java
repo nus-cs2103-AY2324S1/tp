@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -65,7 +66,10 @@ public class CommandTestUtil {
     public static final String MANAGER_DESC_AMY = " " + PREFIX_MANAGER + VALID_MANAGER_AMY;
     public static final String DEPARTMENT_DESC_INVESTMENT = " " + PREFIX_DEPARTMENT + VALID_DEPARTMENT_INVESTMENT;
     public static final String DEPARTMENT_DESC_LOGISTIC = " " + PREFIX_DEPARTMENT + VALID_DEPARTMENT_LOGISTIC;
-
+    public static final String DEPARTMENT_COMMAND_TYPE_ADD = " " + PREFIX_TYPE + "add";
+    public static final String DEPARTMENT_COMMAND_TYPE_DELETE = " " + PREFIX_TYPE + "delete";
+    public static final String DEPARTMENT_NAME_INVESTMENT = " " + PREFIX_NAME + VALID_DEPARTMENT_INVESTMENT;
+    public static final String DEPARTMENT_NAME_LOGISTIC = " " + PREFIX_NAME + VALID_DEPARTMENT_LOGISTIC;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
@@ -73,6 +77,9 @@ public class CommandTestUtil {
     public static final String INVALID_SALARY_DESC = " " + PREFIX_SALARY + "10thou"; // alphabets not allowed for salary
     public static final String INVALID_LEAVE_DESC = " " + PREFIX_LEAVE + "100 days"; // spaces not allowed for leave
     public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + "worker"; // 'worker' not a valid role
+    public static final String INVALID_DEPARTMENT_COMMAND_TYPE = " " + PREFIX_TYPE + "idk";
+    public static final String INVALID_DEPARTMENT_NAME_DESC = " " + PREFIX_NAME + "日本人";
+    public static final String INVALID_DEPARTMENT_NAME_DESC_EMPTY = " " + PREFIX_NAME;
     public static final String INVALID_MANAGER_DESC = " " + PREFIX_MANAGER + "James"; // 'James' is not a manager
     public static final String INVALID_DEPARTMENT_DESC = " "
             + PREFIX_DEPARTMENT + "hubby111*"; // '111' not allowed in departments

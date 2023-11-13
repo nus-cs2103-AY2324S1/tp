@@ -19,7 +19,7 @@ import seedu.address.model.name.EmployeeName;
 
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new DepartmentCommand object
  */
 public class DepartmentCommandParser implements Parser<DepartmentCommand> {
 
