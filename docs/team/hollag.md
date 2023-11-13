@@ -5,7 +5,7 @@ title: "Marcus' Project Portfolio Page"
 
 ### Project: TutorMate
 
-TutorMate helps private tuition teachers manage their students more easily. It allows faster access and storage of students’ contacts and data, providing better time management and productivity. The app will help to manage students for a single tuition teacher only. The app will only provide simple student analytics (without detailed student progress analysis).
+TutorMate helps private tuition teachers manage their students more easily. It allows faster access and storage of students’ contacts and data, providing better time management and productivity. The app will help to manage students for a single tuition teacher only.
 
 Given below are my contributions to the project.
 
@@ -27,13 +27,19 @@ Given below are my contributions to the project.
     * General code cleanup [#115](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/115)
     * Improve output of commands to enhance understanding [#159](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/159)
     * Added tests to ensure correctness [#244](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/244), [#242](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/242)
+    * Added tests for PersonLessonMap [#313](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/313)
+    * General bug-testing and bug-fixing
 
 * **Contributions to User Guide**:
     * List command & Edit commmand [#184](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/184)
     * Nav, LinkTo and Filter [#261](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/261)
+    * Added the Parameter Summary table [#276](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/276)
 
 * **Contributions to Developer Guide**:
     * Storage [#118](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/118)
+    * User Stories [#45](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/45)
+    * Add Planned Enhancements [#338](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/338)
+    * Basic image formatting [#338](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/338)
 
 * **Contributions to team-based tasks**:
     * tP Team Organization Setup

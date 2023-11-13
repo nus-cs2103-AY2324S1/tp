@@ -79,6 +79,12 @@ public class ModelManager implements Model {
         this(new AddressBook(), new UserPrefs(), new ScheduleList());
     }
 
+    //=========== PersonToLessonMap ==================================================================================
+    @Override
+    public void setPersonToLessonMap(BiDirectionalMap<Person, Lesson> map) {
+        this.personToLessonMap = map;
+    }
+
     //=========== UserPrefs ==================================================================================
 
     @Override

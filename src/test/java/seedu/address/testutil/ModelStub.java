@@ -12,6 +12,7 @@ import javafx.beans.InvalidationListener;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.BiDirectionalMap;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlySchedule;
@@ -28,6 +29,10 @@ import seedu.address.ui.Ui;
  */
 
 public class ModelStub implements Model {
+    @Override
+    public void setPersonToLessonMap(BiDirectionalMap<Person, Lesson> map) {
+        throw new AssertionError("This method should not be called.");
+    }
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         throw new AssertionError("This method should not be called.");
