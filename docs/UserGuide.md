@@ -1486,7 +1486,7 @@ Always make a backup before you edit!
 
 [Back to Table of Contents](#table-of-contents)
 
-## FAQ
+## Frequently Asked Questions (FAQ)
 
 {% include admonition.html type="question" title="Question" body="
 
