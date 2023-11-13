@@ -28,6 +28,8 @@ My contributions to the project are listed below.
     - Review and merge pull requests
   - Reviewing documentation
 
+<div style="page-break-after: always;"></div>
+
 - **Enhancements to existing features**:
 
   - Added utility method `TitleContainsKeywordsPredicate`. (Pull Request [#58](https://github.com/AY2324S1-CS2103T-F12-4/tp/pull/58))

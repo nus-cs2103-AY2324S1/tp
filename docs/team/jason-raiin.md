@@ -31,6 +31,8 @@ My contributions to the project are listed below.
   - Contributed issues and bugs
   - Reviewed PRs
 
+<div style="page-break-after: always;"></div>
+
 - **Enhancements to existing features**:
   - Used `LinkedHashSet` for attendees instead of `HashSet` (Pull Request [#51](https://github.com/AY2324S1-CS2103T-F12-4/tp/pull/51))
     - Justification: Some commands require indexing of the Attendee set, so a `LinkedHashSet` is more appropriate to ensure that the indexing is consistent
