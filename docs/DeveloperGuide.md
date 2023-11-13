@@ -212,11 +212,11 @@ When the `AddressBookParser` parses the argument, it creates either `UpdateSecLe
 
 The following activity diagram summarizes what happen when a user executes a `UpdateSecLevelCommand`.
 
-<puml src="diagrams/UpdateSecLevelActivityDiagram.puml" alt="UpdateSecLevelActivityDiagram" width="500" />
+<puml src="diagrams/UpdateSecLevelActivityDiagram.puml" alt="UpdateSecLevelActivityDiagram" width="750" />
 
 #### Design consideration:
 
-**Aspect: How other commands executed after `uplevel` and before `undolevel` should be addressed.
+**Aspect: How other commands executed after `uplevel` and before `undolevel` should be addressed.**
 
 * **Alternative 1 (current choice):** The other commands executed after `uplevel` and before `undolevel` will be invalid.
   * Pros:

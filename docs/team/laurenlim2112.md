@@ -32,6 +32,9 @@ Given below are my contributions to the project.
     * Developer Guide:
         * Added activity diagrams and sequence diagrams for the filter feature.
         * Provided details on alternative implementations of the filter feature.
+        * Updated user stories and use cases in Appendix: Requirements.
+        * Added manual testing instructions to Appendix: Instructions for Manual Testing.
+        * Conducted final check for Developer Guide.
 
 * **Team-based tasks**:
     * Set up milestones v1.2, v1.2b and v1.3 in GitHub.
