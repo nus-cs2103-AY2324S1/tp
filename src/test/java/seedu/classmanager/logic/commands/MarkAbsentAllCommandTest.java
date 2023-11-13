@@ -45,7 +45,7 @@ public class MarkAbsentAllCommandTest {
         expectedModel.commitClassManager();
 
         assertCommandSuccess(markAbsentAllCommand, model, expectedMessage, expectedModel, commandHistory);
-        assertEquals(selectedStudent, model.getSelectedStudent().get(0));
+        assertEquals(selectedStudent, model.getSelectedStudent());
     }
 
     @Test

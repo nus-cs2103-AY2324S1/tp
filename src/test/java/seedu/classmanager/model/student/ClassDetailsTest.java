@@ -21,7 +21,7 @@ public class ClassDetailsTest {
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new ClassDetails(null));
         assertThrows(NullPointerException.class, () -> new ClassDetails(null, null, null, null));
-        assertThrows(NullPointerException.class, () -> new ClassDetails("T123",
+        assertThrows(NullPointerException.class, () -> new ClassDetails("T11",
                 new AttendanceTracker(1), null, null));
         assertThrows(NullPointerException.class, () -> new ClassDetails("T11",
                 new AttendanceTracker(1),
@@ -74,14 +74,14 @@ public class ClassDetailsTest {
 
         // invalid class number
         assertFalse(ClassDetails.isValidClassDetails("")); // empty string
-        assertFalse(ClassDetails.isValidClassDetails("11")); // doesn't start with alphabet
-        assertFalse(ClassDetails.isValidClassDetails("11ABC")); // doesn't start with alphabet
-        assertFalse(ClassDetails.isValidClassDetails("A123456C")); // Too many digits
+        assertFalse(ClassDetails.isValidClassDetails("11")); // doesn't start with T
+        assertFalse(ClassDetails.isValidClassDetails("11ABC")); // doesn't start with T
+        assertFalse(ClassDetails.isValidClassDetails("A123456C")); // doesn't start with T
 
         // valid class numbers
-        assertTrue(ClassDetails.isValidClassDetails("A1234A"));
-        assertTrue(ClassDetails.isValidClassDetails("A1234"));
-        assertTrue(ClassDetails.isValidClassDetails("T1"));
+        assertTrue(ClassDetails.isValidClassDetails("T11"));
+        assertTrue(ClassDetails.isValidClassDetails("T2222"));
+        assertTrue(ClassDetails.isValidClassDetails("TG10"));
     }
 
     @Test

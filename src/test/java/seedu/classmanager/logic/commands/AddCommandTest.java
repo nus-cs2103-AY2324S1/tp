@@ -186,7 +186,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Student> getSelectedStudent() {
+        public ObservableList<Student> getObservableSelectedStudent() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -245,6 +245,11 @@ public class AddCommandTest {
 
         @Override
         public Student getStudent(StudentNumber studentNumber) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Student getSelectedStudent() {
             throw new AssertionError("This method should not be called.");
         }
     }

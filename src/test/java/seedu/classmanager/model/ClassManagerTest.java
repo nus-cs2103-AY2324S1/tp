@@ -88,7 +88,7 @@ public class ClassManagerTest {
     @Test
     public void setSelectedStudent_setStudent_success() {
         classManager.setSelectedStudent(ALICE);
-        assertEquals(ALICE, classManager.getSelectedStudent().get(0));
+        assertEquals(ALICE, classManager.getSelectedStudent());
     }
 
     @Test
@@ -154,8 +154,13 @@ public class ClassManagerTest {
         }
 
         @Override
-        public ObservableList<Student> getSelectedStudent() {
+        public ObservableList<Student> getObservableSelectedStudent() {
             return selectedStudent;
+        }
+
+        @Override
+        public Student getSelectedStudent() {
+            return selectedStudent.isEmpty() ? null : selectedStudent.get(0);
         }
 
         @Override

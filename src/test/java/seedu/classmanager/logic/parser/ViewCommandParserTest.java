@@ -27,8 +27,7 @@ public class ViewCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -39,8 +38,9 @@ public class ViewCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
+        // invalid student number
         assertParseFailure(parser, INVALID_STUDENT_NUMBER_DESC,
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+            StudentNumber.MESSAGE_CONSTRAINTS);
     }
 
     @Test
