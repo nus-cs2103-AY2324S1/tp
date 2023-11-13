@@ -11,7 +11,7 @@ UNOFAS is a desktop app for **Financial Advisors (FA)** to manage client’s con
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the `ScheduleItem` class as a new field to Person
+* **New Feature**: Added the `ScheduleItem` class as a new field to Person.
   * Justification: This feature provides users the ability to associate appointments with their clients.
   * Pull Request [#70](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/70)
   
