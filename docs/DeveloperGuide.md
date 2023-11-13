@@ -8,9 +8,7 @@ pageNav: 3
 
 <!-- * Table of Contents -->
 
-## Table of Contents
-
-<page-nav/>
+<page-nav-print/>
 
 ## Acknowledgements
 

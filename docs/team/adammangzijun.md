@@ -7,8 +7,7 @@ title: "Adam's Project Portfolio Page"
 
 ## Overview:
 
-MedBook - Medbook streamlines patient management for healthcare professionals.
-It simplifies the process of accessing patients' contact information and medical records, making it easier for healthcare providers to efficiently coordinate care.
+MedBook is a desktop application crafted specifically for doctors and medical administrative assistants of private clinics. It offers an intuitive and efficient interface for seamless management of patient details and medical records, enabling healthcare professionals to easily monitor and access patient information.
 
 ## Summary of Contributions
 
