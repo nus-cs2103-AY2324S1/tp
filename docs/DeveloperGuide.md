@@ -241,7 +241,7 @@ The following activity diagram summarizes what happens when a user executes the 
 The department feature allows users to manage department using a single command
 - `department t/TYPE n/NAME`
     - TYPE corresponds to the type of action to be taken
-    - example 1: `department t/add n/R&D` 
+    - example 1: `department t/add n/R&D`
     - expected 1: add a department with the name R&D
     - example 2: `department t/delete n/R&D`
     - expected 2: delete the department with the name R&D
