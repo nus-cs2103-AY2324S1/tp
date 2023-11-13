@@ -814,9 +814,9 @@ e.g. `remind 30` will show clients with policy expiry dates within the next 30 d
 
 1. The current implementations of all commands is as such:
    1. If the command fails, the command will be highlighted in red and presents the error message in the result box
-   ![CommandFail](images/CommandFail.png)
+   ![CommandFail](images/CommandFail.png) <br>
    2. If the command succeed, the result of the command will be shown in the result box and the changes to the client list
-   ![CommandSuccess](images/CommandSuccess.png)
+   ![CommandSuccess](images/CommandSuccess.png) <br>
 2. With each successful command, the command box will be cleared and the result box will show the latest successful command
 3. Hence, if there are multiple successful commands, the user will have no ability to keep track on what commands he used so far
 4. We plan to allow the recovery of previously succeeded commands using the _up arrow key_ (Just like in UNIX OS)
