@@ -24,7 +24,7 @@ Given below are my contributions to the project.
     * What it does: Allows the user to see what course is selected and the status on number of students.
     * Justification: This feature improves the product intuitiveness as it provides users with a clearer and more user-friendly interface. By displaying the selected course and the real-time status of the number of students, users can quickly and easily access important information at a glance.
 
-* **Code contributed**: [Reposense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=ElginTZM&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
+* **Code contributed**: [Reposense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=ElginTZM&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=authorship&tabAuthor=ElginTZM&tabRepo=AY2324S1-CS2103T-T09-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
 * **Contribution to team-based tasks**:
   * Managed issues on issue tracker
