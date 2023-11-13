@@ -537,7 +537,139 @@ Handling multiple field queries
     - Consistent with individual keyword matches for internal implementation of ID and Name `find`.
   - **Cons**:
     - For larger databases, Logical OR adds little value to a filter function
+  
+### Log Feature
 
+#### Description
+
+The `LogCommand` allows users to log patient profiles which are the results of `FindCommand` to the Logger Tab.
+
+#### Implementation Details
+
+The `LogCommand` is implemented as follows:
+- **Command Word**: The command word for this feature is `log`, or `lo` for short.
+- **Usage**: Users invoke the `LogCommand` by entering the command word.
+    - The command format is simply `log`, or `lo`.
+- **`execute` method**: The `LogCommand` sets persons in the logbook to be the `foundPersonsList` of the model.
+- **Validation**: The `LogCommand` performs validation to ensure the `foundPersonsList` is not empty, to ensure there are patient profiles to be added to the Logger Tab.
+- **Execution**: When executed, the `LogCommand` retrieves the logbook, then sets `loggedPersons` to the current filtered list, `foundPersonsList`, of the model. `foundPersonsList` is a filtered list that is updated using the predicate only when `FindCommand` is invoked.
+
+The following sequence diagram shows how the log operation works:
+
+<puml src="diagrams/LogSequenceDiagram.puml"/>
+
+The following activity diagram summarizes what happens when a user executes a new log command:
+
+<puml src="diagrams/LogActivityDiagram.puml"/>
+
+#### Rationale
+
+- **Multifunctional**: When the user opens HealthSync, no `FindCommand` has been invoked, so to maximise usage of the Logger Tab, `foundPersonsList` is filtered with predicate `PREDICATE_TODAY`, which loads the Logger Tab with patients that have an appointment on that day. This list remains until `FindCommand` (with a non-empty result) then `LogCommand` are invoked.
+- **User Experience**: The `LogCommand` provides convenience to users by simply overwriting what is currently in the Logger Tab with a new result, instead of having to clear the Logger Tab first, then logging the new result.
+- **Data Integrity**: The feature is designed to maintain the integrity of the patient list by not changing any of the patient data, only logging it into the Logger Tab. Furthermore, when `EditCommand` or `DeleteCommand` have been invoked for any patient in the Logger Tab, they remain unchanged in the Logger Tab. This preserves the patient profiles in the state at which they were logged.
+
+#### Alternatives Considered
+
+- **Alternative 1**: Using the filtered list, `filteredPersons` to set `loggedPersons` in the logbook
+    - **Pros**:
+        - **Standardisation**: `filteredPersons` is used by other commands that alter the patient list, such as `FindCommand`, `EditCommand` and `DeleteCommand`.
+
+    - **Cons**:
+        - **Side Effects**: If the user enters another command, like `EditCommand` or `DeleteCommand` in between `FindCommand` and `LogCommand`, the whole list will be logged.
+        - **Limited Functionality**: The Logger Tab cannot show the list of patient profiles with appointments on the day itself as `filteredPersons` contains the entire patient list.
+
+
+- **Alternative 2**: Directly interfacing with the logbook without the use of an intermediate filtered list
+    - **Pros**:
+        - **Reduced Dependency**: There is no need to maintain and update `foundPersonsList`, but rather logging will be performed directly based on the results of `FindCommand`.
+        - **Simplified Logic**: There will no longer be a need for an additional list like `foundPersonsList` and the need to retrieve it in order to set persons in logbook.
+
+    - **Cons**:
+        - **Limited Flexibility**: If future changes require more complex logging mechanisms, this direct approach may be less adaptable and scalable.
+        - **Reduced Reusability**: Logging logic becomes less reusable without a separate list, reducing modularity and maintainability.
+
+
+### Append Log Feature
+
+#### Description
+
+The `AppendLogCommand` allows users to append patient profiles which are the results of `FindCommand` to the existing profiles in the Logger Tab.
+
+#### Implementation Details
+
+The `AppendLogCommand` is implemented as follows:
+- **Command Word**: The command word for this feature is `alog`, or `al` for short.
+- **Usage**: Users invoke the `AppendLogCommand` by entering the command word.
+    - The command format is simply `alog`, or `al`.
+- **`execute` method**: The `AppendLogCommand` iterates through the `foundPersonsList` and records all the duplicates within `duplicateClause`, and adds the non-duplicates to the logbook. 
+- **Validation**: The `AppendLogCommand` performs validation to ensure the `foundPersonsList` is not empty, to ensure there are patient profiles to be appended to the Logger Tab. A `hasDuplicates` boolean also keeps track of the possible duplicates within the `foundPersonsList`.
+- **Execution**: When executed, the `AppendLogCommand` retrieves the logbook, then iterates through the `foundPersonsList` of model to add each non-duplicate person to the logbook individually (`addPerson(person)`).
+
+The following activity diagram summarizes what happens when a user executes a new append log command:
+
+<puml src="diagrams/AppendLogActivityDiagram.puml"/>
+
+#### Rationale
+
+- **Flexibility**: The user can choose to add on new `FindCommand` results to the Logger Tab, instead of completely replacing results of `FindCommand` with the new results. It's no longer all-or-nothing.
+- **User Experience**: The `AppendLogCommand` is able to save non-duplicate persons to the Logger Tab even if there exists duplicates within the `foundPersonsList` through the for-loop, instead of terminating the command altogether due to the presence of duplicate person(s).
+- **Data Integrity**: The feature is designed to maintain the integrity of the patient list by not changing any of the patient data, only appending it to the Logger Tab. Furthermore, when `EditCommand` or `DeleteCommand` have been invoked for any patient in the Logger Tab, they remain unchanged in the Logger Tab. This preserves the patient profiles in the state at which they were append-logged.
+
+#### Alternatives Considered
+
+- **Alternative 1**: Terminate the operation as soon as there is a duplicate person found
+    - **Pros**:
+        - **Efficiency**: Reduces iterations and processing, which may save computational resources, especially if `foundPersonsList` is large 
+
+    - **Cons**:
+        - **Limited Functionality**: Once `foundPersonsList` is known to have at least one duplicate, all the patient profiles in the list will not be added to the Logger Tab, limiting usability of the Logger Tab.
+        - **User Experience**: The non-duplicate patient profiles will not be added to the Logger Tab, so the user must take steps to ensure that the list of patient profiles they want to append on is exclusive with every profile currently in the Logger Tab.
+
+
+- **Alternative 2**: Directly interfacing with the logbook without the use of an intermediate filtered list
+    - **Pros**:
+        - **Reduced Dependency**: There is no need to maintain and update `foundPersonsList`, but rather append-logging will be performed directly based on the results of `FindCommand`.
+        - **Simplified Logic**: There will no longer be a need for an additional list like `foundPersonsList` and the need to retrieve it in order to add persons to logbook.
+
+    - **Cons**:
+        - **Limited Flexibility**: If future changes require more complex append-logging mechanisms, this direct approach may be less adaptable and scalable.
+        - **Reduced Reusability**: Append-logging logic becomes less reusable without a separate list, reducing modularity and maintainability.
+
+
+### Clear Log Feature
+
+#### Description
+
+The `ClearLogCommand` allows users to delete all the patient profiles in the Logger Tab.
+
+#### Implementation Details
+
+The `ClearLogCommand` is implemented as follows:
+- **Command Word**: The command word for this feature is `clog`, or `cl` for short.
+- **Usage**: Users invoke the `ClearLogCommand` by entering the command word.
+    - The command format is simply `clog`, or `cl`.
+- **`execute` method**: The `ClearLogCommand` sets the logbook to be a new logbook.
+- **Validation**: The `ClearLogCommand` performs validation to ensure model is non-null. 
+- **Execution**: When executed, the `ClearLogCommand` sets the logbook of the model to be a new logbook (`new LogBook()`), effectively resetting the contents of the Logger Tab.
+
+The following sequence diagram shows how the clog operation works:
+
+<puml src="diagrams/ClearLogSequenceDiagram.puml"/>
+
+#### Rationale
+
+- **Reusability**: The logbook can be reset at any time, so the user can enter a new set of patient profiles when required.
+- **Data Integrity**: The feature is designed to maintain the integrity of the patient list by not changing any of the patient data in the main patient list, only clearing profiles from the Logger Tab.
+
+#### Alternatives Considered
+
+- **Alternative**: Have a delete command for log, to delete patient profiles individually
+    - **Pros**:
+        - **Flexibility**: The user can select which patient profiles they want to remove, and which they want to keep.
+
+    - **Cons**:
+        - **User Experience**: If the user wants to clear the Logger Tab, they need to delete each patient profile individually, which may be very inconvenient especially with a large list in Logger Tab.
+        - **Altered Functionality**: The Logger Tab is meant to be a temporary snapshot of patient profiles at the time at which they were logged, not a subset version of the existing patient list.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -749,6 +881,84 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
       Use case continues from step 2.
 
+**Use case: UC6 - Log patient(s)**
+
+**MSS**
+
+1.  User requests to log patient profiles into the Logger Tab.
+2.  HealthSync adds the patient profiles to the Logger Tab
+    and displays the profiles inside the updated Logger Tab.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user did not find patient profiles beforehand
+
+    * 1a1. HealthSync shows an error message.
+
+      Use case ends.
+
+* 1b. The user tried to find profiles that did not exist in the list
+
+    * 1b1. HealthSync shows an error message.
+
+      Use case ends.
+
+**Use case: UC7 - Append-logging patient(s)**
+
+**MSS**
+
+1.  User requests to append patient profiles to the Logger Tab.
+2.  HealthSync adds the patient profiles to the Logger Tab
+    and displays the profiles inside the updated Logger Tab, under the current Logger Tab.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user did not find patient profiles beforehand
+
+    * 1a1. HealthSync shows an error message.
+
+      Use case ends.
+
+* 1b. The user tried to find profiles that did not exist in the list
+
+    * 1b1. HealthSync shows an error message.
+
+      Use case ends.
+
+* 2a. The patient profiles to be added contain duplicates to the logged profiles
+
+    * 2a1. The non-duplicate patient profiles are added to and displayed in the Logger Tab.
+
+      Use case ends.
+
+* 2b. Patient profiles to be added have been edited
+
+    * 2b1. HealthSync updates patient profile data in the Logger Tab.
+
+      Use case ends.
+
+**Use case: UC8 - Clearing the log**
+
+**MSS**
+
+1.  User requests to clear all data in the Logger Tab.
+2.  HealthSync removes the patient profiles inside the Logger Tab
+    and displays an empty Logger Tab.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The Logger Tab is already cleared
+
+    * 1a1. HealthSync shows an error message.
+
+      Use case ends.
+
 **Use case: UC0A - Auto-save**
 
 **Actors:** Operating System (OS)
@@ -768,8 +978,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. HealthSync shows an error message.
 
     Use case ends.
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -803,7 +1011,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Database**: A structured collection of data organized and stored in computer system
 * **Latency**: The time delay between user's action or request and the system's response
 * **PDPA**: Stands for Personal Data Protection Act, it is the legislation related to the protection of personal data and privacy
-
 
 --------------------------------------------------------------------------------------------------------------------
 
