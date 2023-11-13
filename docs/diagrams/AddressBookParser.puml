@@ -11,16 +11,10 @@ start
 'diamond we place it as the true branch instead.
 
 switch (Input starts with)
-case ( "add")
-    :Parse remaining input
-    with AddCommandParser;
-case ( "create", "filter", "sort", "edit")
-    :Parse remaining input
-    with relevant Parser;
-case ( "help")
-    :Return a HelpCommand object,
-    while ignoring remaining input;
-case ( "redo", "undo", "save", "clear", "list", "exit")
+case ( "add", "delete", "create", "filter", "sort", "edit")
+    :Parse remaining input with relevant
+    Parser and return Command object;
+case ( "help", "redo", "undo", "save", "clear", "list", "exit")
     :Return the relevant Command object,
     while ignoring the remaining input;
 case ( [prefix not recognized])
