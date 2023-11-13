@@ -41,9 +41,11 @@ Given below are my contributions to the project.
         * Also made major changes to UG at the following parts: Tree Command, Help Command, Clear Command.
 
     * Developer Guide:
-        * Made some changes and added UI UML diagrams;
-        * In charge of adding Instructions for Manual Testing
-
+        * In charge of adding Instructions for Manual Testing;
+        * In charge of explaining list command, including its usage and its implementation;
+        * In charge of explaining list team command, including its usage and its implementation;
+        * Added UML diagrams for `list` command and `listt` command;
+        * Added UML diagram for Ui component;
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments) -- reviewed various PRs by team members.
