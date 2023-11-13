@@ -610,7 +610,8 @@ Examples of successful command execution:
 
 <box type="tip" seamless>
 
-What does it mean to do an `OR` search within a single category and an `AND` search across multiple categories?
+**What does it mean to do an `OR` search within a single category and an `AND` search across multiple categories?**
+<br>
 <br>
 It's best to explain this by breaking down an example `search` command!
 <br>
