@@ -199,13 +199,4 @@ public class PolicyTest {
                 new PolicyDate(VALID_POLICY_ISSUE_DATE_AMY), new PolicyDate(VALID_POLICY_EXPIRY_DATE_AMY));
         assertTrue(amyPolicy.compareDates() > 0);
     }
-
-
-
-
-
-
-
-
-
 }
