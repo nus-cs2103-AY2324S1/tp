@@ -388,15 +388,15 @@ Step 6. The `list` command stops here, and execution is returned to the `LogicMa
 
 ![FindCommandSequenceDiagram.png](images/FindCommandSequenceDiagram.png)
 
+
 Let's dive into greater detail for `SearchPredicate`. We look at how the `SearchPredicate` handles a `Person` object:
 
 ![FindSearchPredicateSequenceDiagram.png](images/FindSearchPredicateSequenceDiagram.png)
 
-
-To understand how `SearchMatcher` works, we consider the object diagram for the command `list John & Doe / Mae`.
+To illustrate how `SearchMatcher` works, we consider the object diagram for the command `list John & Doe / Mae`.
 These objects are created by `FindCommandArgumentParser` through `parse("John & Doe / Mae)`:
 
-OBJECT DIAGRAM GOES HERE
+![FindPredicateExampleObjectDiagram.png](images/FindPredicateExampleObjectDiagram.png)
 
 When the Search Predicate is applied to a specific Person, the resulting flow of calls is as depicted by the following sequence diagram:
 
