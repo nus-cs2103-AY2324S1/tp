@@ -263,15 +263,26 @@ The following activity diagram summarizes what happens when a user executes a ne
 ### Calculate total revenue for the month
 
 
-The 'RevenueCommand' extends the 'command class'. The command first gets a list containing all tutees.
-The total revenue monthly can be calculated now by iterating through the list and calling 'getMonthlyRevenue()' on each
-tutee.
+The `RevenueCommand` extends the `command class`. The command first gets a list containing all tutees.
+The total revenue monthly can be calculated now by iterating through the list and calling `Person#getMonthlyFee`. <br>
 
-*Total Revenue* = number of tutees x tutee.getMonthlyRevenue()
-
+The total monthly revenue is calculated as such: <br> 
+*Total Monthly Revenue* = Sum of every tutee's `monthlyFee`
 
 The following sequence diagram shows how the total revenue command works:
 ![RevenueSequenceDiagram.png](images/RevenueSequenceDiagram.png)
+
+#### Design Considerations
+**Aspect: How `monthlyFee` is calculated:**
+
+* **Alternative 1 (current choice):** Calculate `monthlyFee` only when executing `RevenueCommand`.
+    * Pros: Up-to-date revenue figure as `PayRate` value and number of lessons monthly may change over time.
+    * Cons: Potentially more method calls to generate same value.
+
+* **Alternative 2:** Calculate `monthlyFee` when instantiating `Person` and include it as a field in `Person`.
+    * Pros: Readily accessible `monthlyFee` value.
+    * Cons: Have to implement logic to update `monthlyFee` when `PayRate` value and number of lessons monthly changes.
+
 
 ### Undo/redo feature
 
