@@ -340,8 +340,8 @@ This results in `Logic#getPassedCommandString` being called which returns `delet
 ![Recall Step 6](images/RecallStep6.png)
 
 Step 7. The user now executes `delete 1`. As before, `Logic#addCommandString("delete 1")` is called,
-adding this command string to the `CommandStringStash`. Since `delete 1` already exists in the `CommandStringStash`,
-the older version of this command string is purged from the stash.
+adding this command string to the `CommandStringStash`. Since this command string already exists in the `CommandStringStash`,
+the older version of it is purged from the stash.
 
 ![Recall Step 7](images/RecallStep7.png)
 
