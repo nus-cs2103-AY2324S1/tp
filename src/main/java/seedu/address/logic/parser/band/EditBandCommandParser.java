@@ -23,12 +23,14 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new EditBandCommand object
  */
 public class EditBandCommandParser implements Parser<EditBandCommand> {
+
     /**
      * Parses the given {@code String} of arguments in the context of the EditBandCommand
      * and returns an EditBandCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
+    @Override
     public EditBandCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =

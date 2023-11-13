@@ -19,6 +19,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new RemoveMusicianFromBandCommand object.
  */
 public class RemoveMusicianFromBandCommandParser implements Parser<RemoveMusicianFromBandCommand> {
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the RemoveMusicianFromBandCommand
+     * and returns a RemoveMusicianFromBandCommand object for execution.
+     *
+     * @throws ParseException if the user input does not conform the expected format
+     */
     @Override
     public RemoveMusicianFromBandCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
