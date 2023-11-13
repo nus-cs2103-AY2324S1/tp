@@ -183,6 +183,11 @@ You have just met a talented musician and see him/her as a potential fit for you
 **Things to Note**
 * To add the instruments and genres the musician specialises in using the `i/` and `g/` prefixes, you can only add the ones included in a [pre-defined list](#list-of-valid-instrumentsgenres) of instruments and genres. 
 
+<div markdown="block" class="alert alert-danger">
+:exclamation: **Warnings** <br>
+
+Please ensure you input meaningful names and avoid ambiguous names like "123", unless you are confident that it will not cause future confusion:)
+</div>
 
 **Upon success:**
 
@@ -495,7 +500,7 @@ You have created a few bands and added several musicians to each band. Now, you 
 `findb BANDNAME`
 
 **Examples:**
-* `findb theory X` 
+* `findb TheoryX` 
 
     This command finds the band named "theory X" and displays all the members in it.
 
