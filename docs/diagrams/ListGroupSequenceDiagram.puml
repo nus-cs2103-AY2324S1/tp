@@ -66,6 +66,9 @@ deactivate CommandResult
 ListGroupCommand --> LogicManager : result
 deactivate ListGroupCommand
 
+ListGroupCommand -[hidden]->AddressBookParser
+destroy ListGroupCommand
+
 [<--LogicManager
 deactivate LogicManager
 

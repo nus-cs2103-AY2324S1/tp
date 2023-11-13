@@ -66,6 +66,9 @@ deactivate CommandResult
 ListTimePersonCommand --> LogicManager: result
 deactivate ListTimePersonCommand
 
+ListTimePersonCommand -[hidden]->AddressBookParser
+destroy ListTimePersonCommand
+
 [<-- LogicManager
 deactivate LogicManager
 

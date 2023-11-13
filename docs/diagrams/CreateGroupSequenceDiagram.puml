@@ -65,6 +65,9 @@ deactivate CommandResult
 CreateGroupCommand --> LogicManager : result
 deactivate CreateGroupCommand
 
+CreateGroupCommand -[hidden]-> AddressBookParser
+destroy CreateGroupCommand
+
 [<--LogicManager
 deactivate LogicManager
 @enduml

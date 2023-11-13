@@ -68,7 +68,17 @@ create CommandResult
 GroupPersonCommand -> CommandResult
 activate CommandResult
 
+
 CommandResult --> GroupPersonCommand
 deactivate CommandResult
 
+GroupPersonCommand --> LogicManager
+
+deactivate GroupPersonCommand
+
+GroupPersonCommand -[hidden]-> AddressBookParser
+destroy GroupPersonCommand
+
+[<--LogicManager
+deactivate LogicManager
 @enduml

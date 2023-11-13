@@ -99,8 +99,13 @@ activate CommandResult
 CommandResult --> AddCommand
 deactivate CommandResult
 
+
 AddCommand --> LogicManager : result
 deactivate AddCommand
+
+AddCommand -[hidden]-> AddressBookParser
+destroy AddCommand
+
 [<--LogicManager
 deactivate LogicManager
 

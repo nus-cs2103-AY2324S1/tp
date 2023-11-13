@@ -43,6 +43,12 @@ deactivate FindFreeTimeCommand
 FindFreeTimeParser --> AddressBookParser : f
 deactivate FindFreeTimeParser
 
+FindFreeTimeParser-[hidden]-> AddressBookParser
+destroy FindFreeTimeParser
+
+AddressBookParser -> LogicManager : f
+deactivate AddressBookParser
+
 
 LogicManager -> FindFreeTimeCommand : execute()
 activate FindFreeTimeCommand
@@ -75,5 +81,14 @@ activate CommandResult
 
 CommandResult --> FindFreeTimeCommand
 deactivate CommandResult
+
+FindFreeTimeCommand --> LogicManager
+deactivate FindFreeTimeCommand
+
+FindFreeTimeCommand-[hidden]-> AddressBookParser
+destroy FindFreeTimeCommand
+
+[<--LogicManager
+deactivate LogicManager
 
 @enduml
