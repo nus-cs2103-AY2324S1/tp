@@ -34,6 +34,8 @@ LogicManager -> Model : execute()
 activate Model
 
 Model -> Model : setAddressBook(backupModel.getAddressBook())
+activate Model
+
 Model --> LogicManager
 deactivate Model
 
