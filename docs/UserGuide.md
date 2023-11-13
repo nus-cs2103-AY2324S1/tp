@@ -8,11 +8,16 @@ It is designed to be an easy-to-use, one-stop platform for all your scheduling n
 
 In this user guide, you will learn the basics of our application and how you can use it to manage your tasks and interpersonal relationships.
 
+<div style="page-break-after: always;"></div>
+
 # Table of Contents
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 # Who is this guide for?
 Our guide is made for FumbleLog users of all experiences! Refer to the table below to find out which section of the guide is most relevant to you.
 
@@ -21,6 +26,7 @@ Our guide is made for FumbleLog users of all experiences! Refer to the table bel
 |  New to FumbleLog   |            Read the [Quick Start](#quick-start) section to get started. After setting up, you can go through a step-by-step [Tutorial](#fumblelog-tutorial) of our application.            |
 | An experienced user | Skip to the [Commands Summary](#command-summary) section for a quick overview of all the commands, or have a look at our [Features](#features) for a detailed look at each of our features |
 
+<div style="page-break-after: always;"></div>
 
 # Quick start
 
@@ -65,6 +71,9 @@ Our guide is made for FumbleLog users of all experiences! Refer to the table bel
 [Scroll back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 # Orientation to the Graphical User-Interface (GUI)
 ![User Interface](images/userInterfaceTutorial.png)
 
@@ -94,6 +103,7 @@ This is illustrated as follows:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
 
 # FumbleLog Tutorial
 This tutorial is designed for new users looking to get started using FumbleLog. In this tutorial, you will find step-by-step instructions on how to use commands in FumbleLog to help you manage
@@ -117,7 +127,7 @@ your contacts and events.
 
 
 --------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always;"></div>
 
 # Features
 
