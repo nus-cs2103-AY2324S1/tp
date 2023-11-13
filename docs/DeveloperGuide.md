@@ -295,6 +295,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to list contacts.
 2. ConText shows a list of contacts.
 
+   Use case ends.
+
 **Extensions**
 
 * 2a. The list is empty.
