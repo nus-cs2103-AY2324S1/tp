@@ -100,13 +100,13 @@ public class TaskTest {
         Task doneTask = new Task("Sample", true);
         String doneTaskString = "+Sample";
 
-        Task parsedDoneTask = Task.ofDepreciated(doneTaskString);
+        Task parsedDoneTask = Task.deserialize(doneTaskString);
         assertEquals(doneTask, parsedDoneTask);
     }
 
     @Test
     public void of_task_throwsParseError() {
         String failedTaskString = "Sample";
-        assertThrows(IllegalArgumentException.class, () -> Task.ofDepreciated(failedTaskString));
+        assertThrows(IllegalArgumentException.class, () -> Task.deserialize(failedTaskString));
     }
 }
