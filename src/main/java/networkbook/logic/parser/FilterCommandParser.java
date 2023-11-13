@@ -26,6 +26,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     public static final String MISSING_FIELD = "Filter command must have a /by and /with field, and both fields cannot"
             + " be empty!";
     public static final String UNKNOWN_FIELD = "Can only filter by spec, course, tag, or grad year!";
+    public static final String TAKEN_BEFORE_WITH = "/taken must not be placed before /with!";
 
     private static final String CMD_STRING_FORMAT = FilterCommand.COMMAND_WORD + " "
                 + CliSyntax.PREFIX_FILTER_FIELD + " %s " + CliSyntax.PREFIX_FILTER_ARGS + " %s";
@@ -57,6 +58,14 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(
                 CliSyntax.PREFIX_FILTER_FIELD,
                 CliSyntax.PREFIX_FILTER_ARGS);
+
+        // Ensure that "/taken" is not placed before "/with"
+        if (args.contains(CliSyntax.PREFIX_FILTER_FIN.getPrefix())) {
+            if (args.indexOf(CliSyntax.PREFIX_FILTER_FIN.getPrefix())
+                    < args.indexOf(CliSyntax.PREFIX_FILTER_ARGS.getPrefix())) {
+                throw new ParseException(TAKEN_BEFORE_WITH);
+            }
+        }
 
         String field = argMultimap.getValue(CliSyntax.PREFIX_FILTER_FIELD).orElse("").trim();
         String compArgs = argMultimap.getValue(CliSyntax.PREFIX_FILTER_ARGS).orElse("");

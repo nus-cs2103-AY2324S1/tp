@@ -106,6 +106,12 @@ public class FilterCommandParserTest {
     }
 
     @Test
+    public void parseCourse_takenBeforeWith_throwsParseException() {
+        assertParseFailure(parser, "filter /by course /taken true /with a b c",
+                FilterCommandParser.TAKEN_BEFORE_WITH);
+    }
+
+    @Test
     public void parseCourse_validTakenField_success() {
         FilterCommand expectedCommand = new FilterCourseCommand(
                 new CourseContainsKeyTermsPredicate(List.of("Alice", "Bob")),
