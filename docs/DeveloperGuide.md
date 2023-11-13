@@ -462,13 +462,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Open a command terminal, `cd` into the folder you put the JAR file in, and use the `java -jar context.jar` command to run the app.
 
-1. Saving window preferences
-
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   1. You may enter `exit` to the text box at the top of the window to close the app, `cd` to the same folder before in terminal and use the `java -jar context.jar` command to re-launch the app.<br>
-       Expected: The most recent window size and location is retained.
-
 ### Adding a new contact
 
 1. Adding a contact with all fields
