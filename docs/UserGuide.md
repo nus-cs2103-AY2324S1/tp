@@ -887,31 +887,6 @@ Format:
 * The sorting algorithm is case-sensitive, which means it will treat uppercase and
   lowercase letters as distinct. This may result in names being sorted as A B C a b c, rather than A a B b C c.
 
-
-### Deleting job applicants: `delete`
-<a name="deleting-job-applicants-delete"></a>
-
-Deletes the specified job applicants from the address book.
-
-Format: `delete INDEX` or `delete (t/TAGNAME... st/STATUS...)`
-
-Note:
-* User **cannot** delete by index and delete by tags & status in a single command.<br>
-  E.g. `delete 1 t/hardworking` is not allowed. 
-
-#### Deleting job applicants by index
-
-Deletes job applicants at the specified index.
-
-Format `delete INDEX`
-
-* The index refers to the index number shown in the displayed applicant list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Example: 
-* `list` followed by `delete 2` deletes the 2nd applicant in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st applicant in the results of the `find` command.
-
 #### Deleting job applicants by tag
 <a name="deleting-job-applicants-by-tag"></a>
 
