@@ -1,12 +1,30 @@
 ---
 layout: page
-title: CCACommander Ultra Promax Xtra 9000PLUS - User Guide
 ---
 <link rel="stylesheet" href="./assets/css/guide.css">
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div style="display: flex;">
+    <div style="flex: 1; padding: 20px">
+        <h1>User Guide</h1>
+        <p>Everything you need to know about CCACommander Ultra Promax Xtra 9000PLUS</p>
+    </div>
+    <div style="flex: 1; padding: 20px">
+        <img src="images/logo_removebg.png"
+             alt="CCACommander Logo"
+             >
+    </div>
+</div>
+
+<br>
+<br>
 <figure>
-    <img src="images/logo_removebg.png"
-         alt="CCACommander Logo">
+
 </figure>
 
 <div style="page-break-after: always;"></div>
@@ -26,7 +44,7 @@ It helps to organise members and events into easy-to-view compartments under a s
 If you can type quickly, CCACommander can help you complete your administrative tasks much more efficiently than traditional GUI applications.
 
 ## About
-This user guide provides documentation on how you can install and use **CCACommander Ultra ProMax Xtra 9000PLUS**. Descriptions of CCACommander’s features and how to use them have been carefully organised into key sections for your convenience.
+This user guide provides documentation on how you can install and use **CCACommander Ultra Promax Xtra 9000PLUS**. Descriptions of CCACommander’s features and how to use them have been carefully organised into key sections for your convenience.
 To get started, take a look at our [quick start](#quick-start) guide!
 
 This guide uses the following features to make it easier for you to navigate around:
@@ -145,7 +163,7 @@ Upon entering the <kbd>⌫ Backspace</kbd> or the <kbd>↵ Enter</kbd> key, user
   E.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Some parameters of certain commands have constraints on the acceptable inputs. <br>
-  You can refer to the [List of acceptable values](#list-of-acceptable-values) section below for more details.
+  You can refer to the [List of Acceptable Values](#list-of-acceptable-values) section below for more details.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   E.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -525,7 +543,7 @@ Once your laptop is recharged, you can regain access to all your stored informat
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **Edit** commands go back to the main view no matter what view you were in.
@@ -571,7 +589,7 @@ Action | Format, Examples
 **Exit** | `exit`
 
 <div style="page-break-after: always;"></div>
-## List of acceptable values
+## List of Acceptable Values
 
 <table class="tg">
 <thead>
