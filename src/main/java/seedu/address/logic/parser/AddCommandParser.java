@@ -55,33 +55,134 @@ public class AddCommandParser implements Parser<AddCommand> {
         if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_PREAMBLE_DETECTED));
         }
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_NRIC,
-                PREFIX_LICENCE_PLATE, PREFIX_ADDRESS)) {
-            String errorMessage = MESSAGE_MISSING_FIELDS_FOR_ADD_COMMAND;
-            if (argMultimap.getValue(PREFIX_NAME).isEmpty()) {
-                errorMessage += "- Name(" + PREFIX_NAME + ") ";
-            }
-            if (argMultimap.getValue(PREFIX_PHONE).isEmpty()) {
-                errorMessage += "- Phone(" + PREFIX_PHONE + ") ";
-            }
-            if (argMultimap.getValue(PREFIX_EMAIL).isEmpty()) {
-                errorMessage += "- Email(" + PREFIX_EMAIL + ") ";
-            }
-            if (argMultimap.getValue(PREFIX_NRIC).isEmpty()) {
-                errorMessage += "- NRIC(" + PREFIX_NRIC + ") ";
-            }
-            if (argMultimap.getValue(PREFIX_LICENCE_PLATE).isEmpty()) {
-                errorMessage += "- Licence Plate(" + PREFIX_LICENCE_PLATE + ") ";
-            }
-            if (argMultimap.getValue(PREFIX_ADDRESS).isEmpty()) {
-                errorMessage += "- Address(" + PREFIX_ADDRESS + ") ";
-            }
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage));
+        if (!hasAllCompulsoryPrefixes(argMultimap)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    generateMissingCompulsoryFieldsErrorMessages(argMultimap)));
         }
-
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_NRIC,
                 PREFIX_LICENCE_PLATE, PREFIX_ADDRESS);
+
+        Policy policy;
+        if (hasCompletePolicyInputsAndNoDuplicate(argMultimap)) {
+            policy = createPolicy(argMultimap);
+        } else {
+            policy = Policy.createNewDefaultPolicy();
+        }
+
+        Person person = createPerson(argMultimap, policy);
+
+        return new AddCommand(person);
+    }
+
+    /**
+     * Returns true if all compulsory prefixes exist in the given {@code ArgumentMultimap}.
+     */
+    private boolean hasAllCompulsoryPrefixes(ArgumentMultimap argMultimap) {
+        if (arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_NRIC,
+                PREFIX_LICENCE_PLATE, PREFIX_ADDRESS)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Returns error message indicates which compulsory fields are missing in the given
+     * {@code ArgumentMultimap}.
+     */
+    private String generateMissingCompulsoryFieldsErrorMessages(ArgumentMultimap argMultimap) {
+        String errorMessage = MESSAGE_MISSING_FIELDS_FOR_ADD_COMMAND;
+
+        if (argMultimap.getValue(PREFIX_NAME).isEmpty()) {
+            errorMessage += "- Name(" + PREFIX_NAME + ") ";
+        }
+        if (argMultimap.getValue(PREFIX_PHONE).isEmpty()) {
+            errorMessage += "- Phone(" + PREFIX_PHONE + ") ";
+        }
+        if (argMultimap.getValue(PREFIX_EMAIL).isEmpty()) {
+            errorMessage += "- Email(" + PREFIX_EMAIL + ") ";
+        }
+        if (argMultimap.getValue(PREFIX_NRIC).isEmpty()) {
+            errorMessage += "- NRIC(" + PREFIX_NRIC + ") ";
+        }
+        if (argMultimap.getValue(PREFIX_LICENCE_PLATE).isEmpty()) {
+            errorMessage += "- Licence Plate(" + PREFIX_LICENCE_PLATE + ") ";
+        }
+        if (argMultimap.getValue(PREFIX_ADDRESS).isEmpty()) {
+            errorMessage += "- Address(" + PREFIX_ADDRESS + ") ";
+        }
+
+        return errorMessage;
+    }
+
+    /**
+     * Returns true if all prefixes about policy exist and contain values in the given {@code ArgumentMultimap}.
+     * @throws ParseException if it contains incomplete information about policy
+     */
+    private boolean hasCompletePolicyInputsAndNoDuplicate(ArgumentMultimap argMultimap) throws ParseException {
+        if (arePrefixesAbsent(argMultimap, PREFIX_COMPANY, PREFIX_POLICY_NUMBER, PREFIX_POLICY_ISSUE_DATE,
+                PREFIX_POLICY_EXPIRY_DATE)) {
+            return false;
+        }
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_COMPANY, PREFIX_POLICY_NUMBER, PREFIX_POLICY_ISSUE_DATE,
+                PREFIX_POLICY_EXPIRY_DATE)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    generateMissingPolicyFieldsErrorMessages(argMultimap)));
+        } else {
+            // all prefixes related to policy present
+            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_COMPANY, PREFIX_POLICY_NUMBER,
+                    PREFIX_POLICY_ISSUE_DATE, PREFIX_POLICY_EXPIRY_DATE);
+            return true;
+        }
+    }
+
+    /**
+     * Returns error message indicates which policy fields are missing in the given
+     * {@code ArgumentMultimap}.
+     */
+    private String generateMissingPolicyFieldsErrorMessages(ArgumentMultimap argMultimap) {
+        String errorMessage = MESSAGE_MISSING_FIELDS_POLICY_FOR_ADD_COMMAND;
+        if (argMultimap.getValue(PREFIX_COMPANY).isEmpty()) {
+            errorMessage += "- Company(" + PREFIX_COMPANY + ") ";
+        }
+        if (argMultimap.getValue(PREFIX_POLICY_NUMBER).isEmpty()) {
+            errorMessage += "- Policy Number(" + PREFIX_POLICY_NUMBER + ") ";
+        }
+        if (argMultimap.getValue(PREFIX_POLICY_ISSUE_DATE).isEmpty()) {
+            errorMessage += "- Policy Issue Date(" + PREFIX_POLICY_ISSUE_DATE + ") ";
+        }
+        if (argMultimap.getValue(PREFIX_POLICY_EXPIRY_DATE).isEmpty()) {
+            errorMessage += "- Policy Expiry Date(" + PREFIX_POLICY_EXPIRY_DATE + ") ";
+        }
+
+        return errorMessage;
+    }
+
+    /**
+     * Returns a policy based on the given {@code ArgumentMultimap}.
+     * @throws ParseException if the value does not conform the expected format
+     */
+    private Policy createPolicy(ArgumentMultimap argMultimap) throws ParseException {
+        Company company = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get());
+        PolicyNumber policyNumber = ParserUtil.parsePolicyNumber(argMultimap.getValue(PREFIX_POLICY_NUMBER).get());
+        PolicyDate policyIssueDate = ParserUtil.parsePolicyIssueDate(argMultimap
+                .getValue(PREFIX_POLICY_ISSUE_DATE).get());
+        PolicyDate policyExpiryDate = ParserUtil.parsePolicyExpiryDate(argMultimap
+                .getValue(PREFIX_POLICY_EXPIRY_DATE).get());
+
+        if (policyIssueDate.compareTo(policyExpiryDate) > 0) {
+            throw new ParseException(MESSAGE_DATES_NOT_COMPATIBLE);
+        }
+
+        return new Policy(company, policyNumber, policyIssueDate, policyExpiryDate);
+    }
+
+    /**
+     * Returns a person based on the given {@code ArgumentMultimap} and {@code Policy}.
+     * @throws ParseException if the value does not conform the expected format
+     */
+    private Person createPerson(ArgumentMultimap argMultimap, Policy policy) throws ParseException {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
@@ -91,52 +192,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Remark remark = new Remark("");
 
-        if (!arePrefixesAbsent(argMultimap, PREFIX_COMPANY, PREFIX_POLICY_NUMBER, PREFIX_POLICY_ISSUE_DATE,
-                PREFIX_POLICY_EXPIRY_DATE)) {
-            if (!arePrefixesPresent(argMultimap, PREFIX_COMPANY, PREFIX_POLICY_NUMBER, PREFIX_POLICY_ISSUE_DATE,
-                    PREFIX_POLICY_EXPIRY_DATE)) {
-                String errorMessage = MESSAGE_MISSING_FIELDS_POLICY_FOR_ADD_COMMAND;
-                if (argMultimap.getValue(PREFIX_COMPANY).isEmpty()) {
-                    errorMessage += "- Company(" + PREFIX_COMPANY + ") ";
-                }
-                if (argMultimap.getValue(PREFIX_POLICY_NUMBER).isEmpty()) {
-                    errorMessage += "- Policy Number(" + PREFIX_POLICY_NUMBER + ") ";
-                }
-                if (argMultimap.getValue(PREFIX_POLICY_ISSUE_DATE).isEmpty()) {
-                    errorMessage += "- Policy Issue Date(" + PREFIX_POLICY_ISSUE_DATE + ") ";
-                }
-                if (argMultimap.getValue(PREFIX_POLICY_EXPIRY_DATE).isEmpty()) {
-                    errorMessage += "- Policy Expiry Date(" + PREFIX_POLICY_EXPIRY_DATE + ") ";
-                }
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage));
-            }
-        }
-
-        // temporary variables for when no policy paramers were inputed
-        Company company = new Company(Company.DEFAULT_VALUE);
-        PolicyNumber policyNumber = new PolicyNumber(PolicyNumber.DEFAULT_VALUE);
-        PolicyDate policyIssueDate = new PolicyDate(PolicyDate.DEFAULT_VALUE);
-        PolicyDate policyExpiryDate = new PolicyDate(PolicyDate.DEFAULT_VALUE);
-
-        // if all details about policy exists
-        if (arePrefixesPresent(argMultimap, PREFIX_COMPANY, PREFIX_POLICY_NUMBER, PREFIX_POLICY_ISSUE_DATE,
-                PREFIX_POLICY_EXPIRY_DATE)
-                || !argMultimap.getPreamble().isEmpty()) {
-            company = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get());
-            policyNumber = ParserUtil.parsePolicyNumber(argMultimap.getValue(PREFIX_POLICY_NUMBER).get());
-            policyIssueDate = ParserUtil.parsePolicyIssueDate(argMultimap.getValue(PREFIX_POLICY_ISSUE_DATE).get());
-            policyExpiryDate = ParserUtil.parsePolicyExpiryDate(argMultimap.getValue(PREFIX_POLICY_EXPIRY_DATE).get());
-        }
-
-        if (policyIssueDate.compareTo(policyExpiryDate) > 0) {
-            throw new ParseException(MESSAGE_DATES_NOT_COMPATIBLE);
-        }
-
-        Policy policy = new Policy(company, policyNumber, policyIssueDate, policyExpiryDate);
-
-        Person person = new Person(name, phone, email, address, tagList, nric, licencePlate, remark, policy);
-
-        return new AddCommand(person);
+        return new Person(name, phone, email, address, tagList, nric, licencePlate, remark, policy);
     }
 
     /**
