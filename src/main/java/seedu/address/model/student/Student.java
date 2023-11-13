@@ -11,7 +11,7 @@ import seedu.address.model.risklevel.RiskLevel;
 import seedu.address.model.util.LimitedHashSet;
 
 /**
- * Represents a Student in the address book.
+ * Represents a Student in the wellnus storage.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Student {
