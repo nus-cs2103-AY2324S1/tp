@@ -2,7 +2,7 @@
 layout: page
 ---
 <link rel="stylesheet" href="./assets/css/guide.css">
-
+<a id="top"></a>
 <br>
 <br>
 <br>
@@ -103,7 +103,7 @@ This guide uses the following features to make it easier for you to navigate aro
 
 --------------------------------------------------------------------------------------------------------------------
 
-> [Back to top](#)
+> [Back to top](#top)
 
 <div style="page-break-after: always;"></div>
 
@@ -150,7 +150,7 @@ Upon entering the <kbd>⌫ Backspace</kbd> or the <kbd>↵ Enter</kbd> key, user
 
 --------------------------------------------------------------------------------------------------------------------
 
-> [Back to top](#)
+> [Back to top](#top)
 
 <div style="page-break-after: always;"></div>
 
@@ -183,7 +183,7 @@ Upon entering the <kbd>⌫ Backspace</kbd> or the <kbd>↵ Enter</kbd> key, user
 
 <hr class="feature-class-separator">
 
-> [Back to top](#)
+> [Back to top](#top)
 
 <div style="page-break-after: always;"></div>
 
@@ -243,7 +243,7 @@ Here is an example command where we delete the member at **index** 1:
 
 <hr class="feature-class-separator">
 
-> [Back to top](#)
+> [Back to top](#top)
 
 <div style="page-break-after: always;"></div>
 
@@ -307,7 +307,7 @@ Here is an example command where we delete the event at **index** 1:
 
 <hr class="feature-class-separator">
 
-> [Back to top](#)
+> [Back to top](#top)
 
 <div style="page-break-after: always;"></div>
 
@@ -363,7 +363,7 @@ Here is an example command where we unenrol the member at **member index** 1 fro
 
 <hr class="feature-class-separator">
 
-> [Back to top](#)
+> [Back to top](#top)
 
 <div style="page-break-after: always;"></div>
 
@@ -468,7 +468,7 @@ Here’s how you use it: `list`
 
 <hr class="feature-class-separator">
 
-> [Back to top](#)
+> [Back to top](#top)
 
 <div style="page-break-after: always;"></div>
 
@@ -555,7 +555,7 @@ CCACommander data are saved automatically after any command that changes the dat
 
 <hr class="feature-class-separator">
 
-> [Back to top](#)
+> [Back to top](#top)
 
 ## FAQ
 
@@ -620,7 +620,7 @@ Action | Format, Examples
 [**Help**](#help-help) | `help`
 [**Exit**](#exit-exit) | `exit`
 
-> [Back to top](#)
+> [Back to top](#top)
 
 <div style="page-break-after: always;"></div>
 
@@ -708,4 +708,4 @@ Action | Format, Examples
 </tbody>
 </table>
 
-> [Back to top](#)
+> [Back to top](#top)
