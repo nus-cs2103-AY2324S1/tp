@@ -570,9 +570,9 @@ Example: deletelesson 1
 Deletes the specified task from the shown lesson in the application. User must be in the 📅 ___SCHEDULE list___ and showing a lesson.
 
 Format: `deleteTask INDEX`
-* Deletes the task at the specified `INDEX` of the 💼 ___TASKS list___ in the shown lesson.
-* The `INDEX` refers to the index number shown in the displayed 💼 ___TASKS list___ of the lesson.
-* The `INDEX` has to be within the range of the displayed 💼 ___TASKS list___.
+* Deletes the task at the specified `INDEX` of the task list in the shown lesson.
+* The `INDEX` refers to the index number shown in the displayed task list of the lesson.
+* The `INDEX` has to be within the range of the displayed task list.
 * The command is case-insensitive: e.g. `deletetask`, `deleteTask` and `DELETETASK` are all valid.
 * Refer to the parameter constraints [here](#parameter-summary).
 
