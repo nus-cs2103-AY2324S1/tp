@@ -1,28 +1,23 @@
 @startuml
-actor User
-participant LogCommand
-participant Model
-participant LogBook
+!include style.puml
+ skinparam ArrowFontStyle plain
 
-User -> LogCommand: execute()
-activate LogCommand
+participant ":LogCommand" as LogCommand
+participant ":Model" as Model
+participant ":LogBook" as LogBook
+
+-> LogCommand: execute()
 
 alt Results from FindCommand not empty
     LogCommand -> Model: getFoundPersonsList()
-    activate Model
     Model --> LogCommand: List of found persons
     LogCommand -> LogBook: setPersons(foundPersonsList)
-    activate LogBook
     LogBook --> LogCommand: Updated logbook
-    deactivate LogBook
     LogCommand -> Model: addToHistory(LogCommand)
     Model --> LogCommand: Command added to history
-    LogCommand -> User: Return CommandResult (Success)
+    <-- LogCommand : Return CommandResult (Success)
 else Results from FindCommand are empty
-    LogCommand -> User: Throw CommandException
-    User --> LogCommand: Handle CommandException
+    <-- LogCommand : Throw CommandException
 end
 
-deactivate Model
-deactivate LogCommand
 @enduml

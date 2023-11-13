@@ -1,10 +1,14 @@
 @startuml
+!include style.puml
+ skin rose
+ skinparam ActivityFontSize 15
+ skinparam ArrowFontSize 12
 
 start
 :Execute LogCommand;
-if () then (no FindCommand result)
+if () then ([no FindCommand result])
   :Notify user of failure;
-else (has FindCommand result)
+else ([has FindCommand result])
   :Save a copy of the current LogBook;
   :Add LogCommand to command history;
   :Update LogBook with found persons;

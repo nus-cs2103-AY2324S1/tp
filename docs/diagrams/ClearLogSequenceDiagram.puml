@@ -1,28 +1,33 @@
 @startuml
+!include style.puml
+ skinparam ArrowFontStyle plain
 
-actor User
-participant ClearLogCommand
-participant Model
-participant LogBook
+participant ":ClearLogCommand" as ClearLogCommand
+participant ":Model" as Model
+participant ":LogBook" as LogBook
 
-User -> ClearLogCommand: execute()
+-> ClearLogCommand: execute()
 activate ClearLogCommand
 
-ClearLogCommand -> Model: addToHistory(this)
-activate Model
-Model --> ClearLogCommand: Command added to history
-deactivate Model
-
-ClearLogCommand -> Model: setLogBook(new LogBook())
-activate Model
-Model -> LogBook: create LogBook
-activate LogBook
-LogBook -> Model : LogBook created
-deactivate LogBook
-Model --> ClearLogCommand: Updated logBook with an empty LogBook
-deactivate Model
-
-ClearLogCommand -> User: Return CommandResult (Success)
-deactivate ClearLogCommand
+alt Logger Tab not empty
+  ClearLogCommand -> Model: addToHistory(this)
+  activate Model
+  Model --> ClearLogCommand: Command added to history
+  deactivate Model
+  ClearLogCommand -> Model: setLogBook(new LogBook())
+  activate Model
+  Create LogBook
+  Model -> LogBook
+  activate LogBook
+  deactivate LogBook
+  LogBook --> Model : LogBook created
+  deactivate LogBook
+  Model --> ClearLogCommand: Updated logBook with an empty LogBook
+  deactivate Model
+  <-- ClearLogCommand: Return CommandResult (Success)
+  deactivate ClearLogCommand
+else Logger Tab is empty
+  <-- ClearLogCommand : Throw CommandException
+end
 
 @enduml
