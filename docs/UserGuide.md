@@ -158,13 +158,13 @@ The following is an annotated breakdown of InterviewHub’s Graphical User Inter
 
 For each **applicant**, we see the following details:
 
-| Information | Description                                 |
-|-------------|---------------------------------------------|
-| **Name**    | The full name of the applicant              |
-| **Tags**    | Tags for the applicant (if any)             |
-| **Phone**   | The mobile phone number of the applicant    |
-| **Address** | The residential address of the applicant    |
-| **Email**   | The email address of the applicant          |
+| Information | Description                                             |
+|-------------|---------------------------------------------------------|
+| **Name**    | The full name of the applicant                          |
+| **Tags**    | Custom keywords for categorizing the applicant (if any) |
+| **Phone**   | The mobile phone number of the applicant                |
+| **Address** | The residential address of the applicant                |
+| **Email**   | The email address of the applicant                      |
 
 For each **interview**, we see the following details:
 
@@ -274,13 +274,13 @@ Adds an applicant to **InterviewHub**.
 
 Format: `add-a n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...`
 
-| Parameter | Representation                    | Constraints                                                   |
-|---------|-----------------------------------|---------------------------------------------------------------|
-| `NAME`  | The name of the applicant         | Must contain only alphanumeric characters and cannot be blank |
-| `PHONE` | The phone number of the applicant | Must contain only numbers and be at least 3 digits long       |
-| `EMAIL` | The email of the applicant        | Must be in the format: `local-part@domain`                    |
-| `ADDRESS` | The address of the applicant      | No constraints as long as it is not blank                     |
-| `TAG`   | A tag belonging to the applicant  | Must be a single word containing only alphanumeric characters |
+| Parameter | Representation                                | Constraints                                                   |
+|-----------|-----------------------------------------------|---------------------------------------------------------------|
+| `NAME`    | The full name of the applicant                | Must contain only alphanumeric characters and cannot be blank |
+| `PHONE`   | The mobile phone number of the applicant      | Must contain only numbers and be at least 3 digits long       |
+| `EMAIL`   | The email address of the applicant            | Must be in the format: `local-part@domain`                    |
+| `ADDRESS` | The residential address of the applicant      | No constraints as long as it is not blank                     |
+| `TAG`     | Custom keyword for categorizing the applicant | Must be a single word containing only alphanumeric characters |
 
 
 Examples:
@@ -321,11 +321,11 @@ Format: `edit-a APPLICANT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]
 | Parameter         | Representation                                                   | Constraints                                                                                              |
 |-------------------|------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
 | `APPLICANT_INDEX` | The index of the target applicant as shown in the applicant list | Must be a positive unsigned integer and must not exceed the size of the current displayed applicant list |
-| `NAME`            | The name of the applicant                                        | Must contain only alphanumeric characters and cannot be blank                                            |
-| `PHONE`           | The phone number of the applicant                                | Must contain only numbers and be at least 3 digits long                                                  |
-| `EMAIL`           | The email of the applicant                                       | Must be in the format: `local-part@domain`                                                               |
-| `ADDRESS`         | The address of the applicant                                     | No constraints as long as it is not blank                                                                |
-| `TAG`             | A tag belonging to the applicant                                 | Must be a single word containing only alphanumeric characters                                            |
+| `NAME`            | The full name of the applicant                                   | Must contain only alphanumeric characters and cannot be blank                                            |
+| `PHONE`           | The mobile phone number of the applicant                         | Must contain only numbers and be at least 3 digits long                                                  |
+| `EMAIL`           | The email address of the applicant                               | Must be in the format: `local-part@domain`                                                               |
+| `ADDRESS`         | The residential address of the applicant                         | No constraints as long as it is not blank                                                                |
+| `TAG`             | Custom keyword for categorizing the applicant                    | Must be a single word containing only alphanumeric characters                                            |
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note about the command usage.**<br>
@@ -400,12 +400,12 @@ Adds an interview to **InterviewHub**.
 
 Format: `add-i app/APPLICANT_INDEX jr/JOB_ROLE start/START_DATE_AND_TIME end/END_DATE_AND_TIME`
 
-| Parameter             | Representation                                            | Constraints                                                                                                     |
-|-----------------------|-----------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
-| `APPLICANT_INDEX`     | The index of the applicant as shown in the applicant list | Must be a positive unsigned integer and must not exceed the size of the current displayed applicant list        |
-| `JOB_ROLE`            | The job role which the applicant is applying for          | No constraint                                                                                                   |
-| `START_DATE_AND_TIME` | Starting time of the interview                            | Must be in one of the [accepted formats](#features), before the end time and on the same day as the end time    |
-| `END_DATE_AND_TIME`   | Ending time of the interview                              | Must be in one of the [accepted formats](#features), after the start time and on the same day as the start time |
+| Parameter             | Representation                                                   | Constraints                                                                                                     |
+|-----------------------|------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
+| `APPLICANT_INDEX`     | The index of the target applicant as shown in the applicant list | Must be a positive unsigned integer and must not exceed the size of the current displayed applicant list        |
+| `JOB_ROLE`            | The job role which the applicant is applying for                 | No constraint                                                                                                   |
+| `START_DATE_AND_TIME` | Starting time of the interview                                   | Must be in one of the [accepted formats](#features), before the end time and on the same day as the end time    |
+| `END_DATE_AND_TIME`   | Ending time of the interview                                     | Must be in one of the [accepted formats](#features), after the start time and on the same day as the start time |
 
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:** `JOB_ROLE` allows empty strings to be entered to handle situations where the applicant is applying
@@ -471,12 +471,12 @@ Edits an existing interview at the specified `INTERVIEW_INDEX`.
 
 Format: `edit-i INTERVIEW_INDEX [jr/JOB_ROLE] [start/START_DATE_AND_TIME] [end/END_DATE_AND_TIME]`
 
-| Parameter             | Representation                                            | Constraints                                                                                                  |
-|-----------------------|-----------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
-| `INTERVIEW_INDEX`     | The index of the interview as shown in the interview list | Must be a positive unsigned integer and must not exceed the size of the current displayed interview list     |
-| `JOB_ROLE`            | The role the applicant is interviewing for                | No constraints                                                                                               |
-| `START_DATE_AND_TIME` | Starting time of the interview                            | Must be one of the [accepted formats](#features), before the end time and on the same day as the end time    |
-| `END_DATE_AND_TIME`   | Ending time of the interview                              | Must be one of the [accepted formats](#features), after the start time and on the same day as the start time |
+| Parameter             | Representation                                                   | Constraints                                                                                                  |
+|-----------------------|------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
+| `INTERVIEW_INDEX`     | The index of the target interview as shown in the interview list | Must be a positive unsigned integer and must not exceed the size of the current displayed interview list     |
+| `JOB_ROLE`            | The role the applicant is interviewing for                       | No constraints                                                                                               |
+| `START_DATE_AND_TIME` | Starting time of the interview                                   | Must be one of the [accepted formats](#features), before the end time and on the same day as the end time    |
+| `END_DATE_AND_TIME`   | Ending time of the interview                                     | Must be one of the [accepted formats](#features), after the start time and on the same day as the start time |
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Note about the command usage.**<br>
