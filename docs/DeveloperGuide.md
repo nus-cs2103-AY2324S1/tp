@@ -470,17 +470,33 @@ The following sequence diagram shows how the sort operation works:
 
 </div>
 
-The following activity diagram summarizes what happens when a user executes a sort command:
+### Sort and filter status bar display
 
-![SortingActivityDiagram](images/SortingActivityDiagram.png)
+#### Implementation
+
+The existing implementation has a status bar displaying the save file path.
+To display the current sort and filter status, another label was added to the status bar.
+
+When a command that changes sorting is run, it returns a `SortCommandResult` which is used to update the status bar.
+Likewise, when a command that changes filtering is run, it returns a `FilterCommandResult` which is used to update the status bar.
+
+The following activity diagram summarizes what happens when a command is executed:
+
+![StatusBarActivityDiagram](images/StatusBarActivityDiagram.png)
 
 #### Design considerations:
 
-**Aspect: How sort executes:**
+**Aspect: How to update when sort or filter status changes:**
 
-* **Alternative 1 (current choice):** _{to be added}_
+* **Alternative 1 (current choice):** Return subclass of `CommandResult` upon execution.
+    * This makes use of polymorphism.
+    * After command execution, the command result is returned to `MainWindow`, which has access to the status bar element.
+    * By adding information to the command result, `MainWindow` can update the status bar accordingly.
 
-* **Alternative 2:** _{to be added}_
+* **Alternative 2:** Directly read status of model.
+    * The sorting and filtering is controlled by a `NetworkBook` instance.
+    * The status bar could read the sorting and filtering predicate/comparator directly.
+    * However, this increases coupling between model and UI which is undesirable. Hence, this alternative was not chosen.
 
 
 --------------------------------------------------------------------------------------------------------------------
