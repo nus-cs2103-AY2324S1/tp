@@ -49,9 +49,6 @@ online dating journey.
   - [Star dates](#star-dates)
   - [Unstar dates](#unstar-dates)
 - [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
-- [**Effort**](#effort)
-  - [Evolving of AB3 into LoveBook](#evolving-of-ab3-into-lovebook)
-  - [Revamping of UI](#revamping-of-ui)
 - [**Appendix: Requirements**](#appendix-requirements)
   - [Product scope](#product-scope)
   - [User stories](#user-stories)
@@ -68,6 +65,9 @@ online dating journey.
   - [Finding a Blind Date](#finding-a-blind-date)
   - [Exiting the Application](#exiting-the-application)
   - [Saving (If you haven't already exited)](#saving-if-you-havent-already-exited)
+- [**Effort**](#effort)
+  - [Evolving of AB3 into LoveBook](#evolving-of-ab3-into-lovebook)
+  - [Revamping of UI](#revamping-of-ui)
 - [**Appendix: Planned Enhancements**](#appendix-planned-enhancements)
 
 ---
@@ -482,37 +482,6 @@ the command `unstar 1`
 - [Configuration guide](Configuration.md)
 - [DevOps guide](DevOps.md)
 
----
-
-## **Effort**
-
-## **Appendix: Effort**
-Implementing LoveBook was not straightforward and often required us to brainstorm as a team to solve the challenges faced.
-Given below is a summary of the effort our team has put into developing LoveBook.
-
-### Evolving of AB3 into LoveBook
-
-Our group undertook a significant amount of effort in refactoring the initial codebase, introducing several new classes 
-and enhancing existing ones to fit into our idea of LoveBook. This included creating the Date class and its associated inner field classes.
-We also had to update how the application will store Dates and DatePrefs separately. In addition, many previous commands
-of AB3 had to be refactored or changed, and we added several new commands to LoveBook as well. Eventually, we were able
-to successfully implement both the Date and DatePref classes and all their associated commands.
-
-One challenge we faced was implementing the bestMatch feature. Given the tight timeline of the team project, we decided
-to do a simple implementation of this feature since we would not be able to deliver the full functionality (along with
-updating every other command we have implemented thus far) in time. If given more time, we would like to develop this
-further incorporating the use of artificial intelligence, as it is a relevant feature that will be used in the real
-world and brings value to our target users.
-
-### Revamping of UI
-
-Our efforts to enhancing LoveBook's UI are evident in our use of visually engaging elements like gender icons, 
-horoscope symbols, and JavaFX-implemented star command cues. These features not only boost visual appeal but also offer 
-functional insights into key date attributes. As our team was unfamiliar with JavaFX initially, it took us a great 
-amount of time and effort to produce an eventual satisfactory and working UI that we were proud to adopt and incorporate into our application.
-
----
-
 ## **Appendix: Requirements**
 
 ### Product scope
@@ -891,6 +860,37 @@ testers are expected to do more _exploratory_ testing.
    - Execute an add command to add a `Date` in the database.
    - Close the app.
    - Expected: A `data` folder is created under the current repository where the jar file is located.
+
+---
+
+## **Effort**
+
+## **Appendix: Effort**
+Implementing LoveBook was not straightforward and often required us to brainstorm as a team to solve the challenges faced.
+Given below is a summary of the effort our team has put into developing LoveBook.
+
+### Evolving of AB3 into LoveBook
+
+Our group undertook a significant amount of effort in refactoring the initial codebase, introducing several new classes
+and enhancing existing ones to fit into our idea of LoveBook. This included creating the Date class and its associated inner field classes.
+We also had to update how the application will store Dates and DatePrefs separately. In addition, many previous commands
+of AB3 had to be refactored or changed, and we added several new commands to LoveBook as well. Eventually, we were able
+to successfully implement both the Date and DatePref classes and all their associated commands.
+
+One challenge we faced was implementing the bestMatch feature. Given the tight timeline of the team project, we decided
+to do a simple implementation of this feature since we would not be able to deliver the full functionality (along with
+updating every other command we have implemented thus far) in time. If given more time, we would like to develop this
+further incorporating the use of artificial intelligence, as it is a relevant feature that will be used in the real
+world and brings value to our target users.
+
+### Revamping of UI
+
+Our efforts to enhancing LoveBook's UI are evident in our use of visually engaging elements like gender icons,
+horoscope symbols, and JavaFX-implemented star command cues. These features not only boost visual appeal but also offer
+functional insights into key date attributes. As our team was unfamiliar with JavaFX initially, it took us a great
+amount of time and effort to produce an eventual satisfactory and working UI that we were proud to adopt and incorporate into our application.
+
+---
 
 ## **Appendix: Planned Enhancements**
 
