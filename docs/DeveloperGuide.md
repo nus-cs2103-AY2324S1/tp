@@ -321,6 +321,19 @@ Moreover, the `Person` class being immutable also accommodates for the `undo` an
 in which the `VersionedNetworkBook` only creates a shallow copy of the current list of `Person` objects
 and hence any mutation of the `Person` object might introduce bugs.
 
+### Filter contact list
+
+The implementation of the filter command follows the convention of a normal command, where `FilterCommandParser` is responsible for parsing the user input string into an executable `FilterCommand`.
+
+![filter diagram](images/filter/FilterDiagram.png)
+
+`FilterCommandParser` first obtains the values corresponding to the flags `/by` and `/with`, and ensures that each flag is indicated once and only once.
+If the value corresponding to `/by` is `course`, the value of the tag `/taken` is obtained from the value of the tag `/with`.
+
+A new filter command is then created with the `Predicate<Person>` that corresponds to the values of `/by` and `/with`, and `/taken` if any.
+
+Upon execution, `FilterCommand` passes the instance of `Predicate<Person>` to the model through the method `model::updateDisplayedPersonList`. The model then uses the predicate internally to update the displayed list of contacts.
+
 ### Delete contact
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The implementation of the delete command varies a little from other commands, where `DeleteCommandParser` parses user input string into either a `DeletePersonCommand`, or a `DeleteFieldCommand`.

@@ -2,40 +2,45 @@
 !include style.puml
 skinparam ArrowFontStyle plain
 
+box Logic LOGIC_COLOR_T1
 Participant ":Logic" as logic LOGIC_COLOR
 Participant ":NetworkBookParser" as networkBookParser LOGIC_COLOR
-Participant ":EditCommandParser" as editCommandParser LOGIC_COLOR_T1
-Participant ":EditAction" as editAction LOGIC_COLOR_T1
-Participant ":EditCommand" as editCommand LOGIC_COLOR_T1
-Participant ":EditPersonDescriptor" as editPersonDescriptor LOGIC_COLOR_T1
+Participant ":EditCommandParser" as editCommandParser LOGIC_COLOR
+Participant ":EditAction" as editAction LOGIC_COLOR
+Participant ":EditCommand" as editCommand LOGIC_COLOR
+Participant ":EditPersonDescriptor" as editPersonDescriptor LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
 Participant ":Model" as model MODEL_COLOR
+end box
 
 -> logic : execute("edit" + details)
-activate logic LOGIC_COLOR
+activate logic
 
 logic -> networkBookParser : "edit" + details
-activate networkBookParser LOGIC_COLOR
+activate networkBookParser
 
 create editCommandParser
 networkBookParser -> editCommandParser
-activate editCommandParser LOGIC_COLOR_T1
+activate editCommandParser
 
 editCommandParser --> networkBookParser
 deactivate editCommandParser
 
 networkBookParser -> editCommandParser : parse(details)
-activate editCommandParser LOGIC_COLOR_T1
+activate editCommandParser
 
 create editAction
 editCommandParser -> editAction : generateAction
-activate editAction LOGIC_COLOR_T1
+activate editAction
 
 editAction --> editCommandParser : action
 deactivate editAction
 
 create editCommand
 editCommandParser -> editCommand : new EditCommand(index, action)
-activate editCommand LOGIC_COLOR_T1
+activate editCommand
 
 editCommand --> editCommandParser : editCommand
 deactivate editCommand
@@ -47,23 +52,23 @@ networkBookParser --> logic : editCommand
 deactivate networkBookParser
 
 logic -> editCommand: execute(model)
-activate editCommand LOGIC_COLOR_T1
+activate editCommand
 
 editCommand -> model : get p at index
-activate model MODEL_COLOR
+activate model
 
 model --> editCommand : p at index
 deactivate model
 
 create editPersonDescriptor
 editCommand -> editPersonDescriptor: person
-activate editPersonDescriptor LOGIC_COLOR_T1
+activate editPersonDescriptor
 
 editPersonDescriptor --> editCommand : editPersonDescriptor
 deactivate editPersonDescriptor
 
 editCommand -> editAction : edit(editPersonDescriptor)
-activate editAction LOGIC_COLOR_T1
+activate editAction
 
 editAction -> editPersonDescriptor : modify field
 
@@ -71,7 +76,7 @@ editAction --> editCommand
 deactivate editAction
 
 editCommand -> editPersonDescriptor : toPerson()
-activate editPersonDescriptor LOGIC_COLOR_T1
+activate editPersonDescriptor
 
 editPersonDescriptor --> editCommand : new person
 deactivate editPersonDescriptor
@@ -83,5 +88,6 @@ editCommand --> logic : command success
 deactivate editCommand
 
 <-- logic : command success
+deactivate logic
 
 @enduml
