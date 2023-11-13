@@ -566,14 +566,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`   | user                    | open the relevant website by clicking on my contact's social link                          | conveniently access their social links when needed |
 | `* *`   | user                    | an easily accessible and static online page containing a download link to the mobile app   | quickly download the app on my device when needed                       |
 | `* *`   | new user                | have a quick-start guide                                                                   | start using the basic functionality of the app as soon as possible |
+| `* *`   | user                    | undo and redo my commands                                                                  | revert my changes when I make a mistake |
 | `* *`   | user                    | visit an online page containing the complete user manual                                   | refer to the full set of instructions when needed            |
 | `*`     | user                    | navigate to the relevant section of the online manual directly from the catalogue | quickly find instructions on the feature I want to use       |
 | `*`     | user                    | export my contacts in the form of readable text                                            | easily share my contacts with others                                    |
 | `*`     | user with many devices  | import data from my exported contacts                                                      | sync my contact details across different devices |
 
 ### Use cases
-
-(For all use cases below, the **System** is the `NetworkBook` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Create a new contact**
 
@@ -587,280 +586,227 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-- 1a. User does not include the contact's name in the request.
+* 1a. User does not include the contact's name in the request.
 
-  - 1a1. NetworkBook shows an error message.
+  * 1a1. NetworkBook shows an error message.
 
     Use case ends.
 
-- 1b. User includes more details about the contact in the request.
+* 1b. User includes more details about the contact in the request.
 
-  - 1ba. All the details provided are in the correct format.
+  * 1ba. All the details provided are in the correct format.
 
-    - 1ba1. NetworkBook creates a contact with all included details.
-
-      Use case ends.
-
-  - 1bb. Some of the details provided are not correctly formatted.
-
-    - 1bb1. NetworkBook shows an error message.
+    * 1ba1. NetworkBook creates a contact with all included details.
 
       Use case ends.
 
-- 1c. The name is not unique.
+  * 1bb. Some of the details provided are not correctly formatted.
 
-  - 1c1. NetworkBook requests user to select from one of three options: create a new contact, delete the old contact and add the new one, or abort the current create operation.
+    * 1bb1. NetworkBook shows an error message.
 
-    - 1c1a. User selects option to create a new contact.
+      Use case ends.
+  
+  * 1bc. Some of the details are provided twice.
 
-      Use case resumes at step 2.
-
-    - 1c1b. User selects option to delete the old contact and add the new one.
-
-      - 1c1b1. NetworkBook deletes the old contact.
-
-      - 1c1b2. NetworkBook adds the new contact with all included details.
-
-        Use case ends.
-
-    - 1c1c. User selects option to abort the current add operation.
+    * 1bc1. NetworkBook shows an error message.
 
       Use case ends.
 
-**Use case: Add phone number to contact**
+* 1c. The name is not unique.
 
-(This use case is also applicable to adding **email, specialisation, tag** to a contact. For each contact, each of these fields is recorded by a list, and new entries added to a field will be appended to the field's list.)
+  * 1c1. NetworkBook shows an error message.
+
+    Use case ends.
+
+**Use case: Add phone numbers to contact**
+
+This use case is also applicable to adding **email, link, course, specialisation, tag** to a contact. For each contact, each of these fields is recorded by a list, and new entries added to a field will be appended to the field's list.
 
 **MSS**
 
-1. User requests to list contacts.
+1. User requests to add phone numbers to a specific contact in the displayed list.
 
-2. NetworkBook shows a list of contacts.
+2. NetworkBook adds the new phone numbers to the contact's list of phone numbers.
 
-3. User requests to add a phone number to a specific contact in the list.
-
-4. NetworkBook adds the new phone number to the contact's list of phone numbers.
-
-5. NetworkBook informs user of the contact's new list of phone numbers.
+3. NetworkBook updates the displayed contact card with the new phone numbers.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given index is invalid.
 
-  Use case ends.
+  * 1a1. NetworkBook shows an error message.
 
-* 3a. The given index is invalid.
+    Use case ends.
 
-  * 3a1. NetworkBook shows an error message.
+* 1b. User does not input any field.
 
-    Use case resumes at step 2.
+  * 1b1. NetworkBook shows an error message.
 
-* 3b. User does not give a phone number.
+    Use case ends.
 
-  * 3b1. NetworkBook shows an error message.
+* 1c. One of the given phone numbers is in an invalid format.
 
-    Use case resumes at step 2.
+  * 1c1. NetworkBook shows an error message.
 
-* 3c. The given phone number is in an invalid format.
+    Use case ends.
 
-  * 3c1. NetworkBook shows an error message.
+* 1d. One of the given phone numbers is already present in the contact's list of phone numbers.
 
-    Use case resumes at step 2.
+  * 1d1. NetworkBook ignores the present phone number, and adds the other phone numbers to the contact's list of phone numbers.
 
-* 3c. The given phone number is already present in the contact's list of phone numbers.
+  * 1d2. NetworkBook updates the displayed contact card with the new phone numbers.
 
-  * Use case resumes at step 5.
+    Use case ends.
+
+* 1e. User provides the same phone number more than once.
+
+  * 1e1. NetworkBook shows an error message.
+
+    Use case ends.
 
 **Use case: Add graduation year to a contact**
 
-(This use case is also applicable to adding **priority** to a contact. For each contact, each of these fields is a single value instead of a list. They cannot be added if the value is already present.)
+This use case is also applicable to adding **priority** to a contact. For each contact, each of these fields is a single value instead of a list. They cannot be added if the value is already present.
 
 **MSS**
 
-1. User requests to list contacts.
+1. User requests to add graduation year to a specific contact in the list.
 
-2. NetworkBook shows a list of contacts.
+2. NetworkBook adds the graduation year to the contact.
 
-3. User requests to add graduation year to a specific contact in the list.
-
-4. NetworkBook adds the graduation year to the contact.
-
-5. NetworkBook informs user of the contact's new graduation year.
+3. NetworkBook informs user of the contact's new graduation year.
 
    Use case ends.
 
 **Extensions**
 
-- 2a. The list is empty.
+* 1a. The given index is invalid.
 
-  Use case ends.
+  * 1a1. NetworkBook shows an error message.
 
-- 3a. The given index is invalid.
+    Use case ends.
 
-  - 3a1. NetworkBook shows an error message.
+* 1b. User does not input any field.
 
-    Use case resumes at step 2.
+  * 1b1. NetworkBook shows an error message.
 
-- 3b. User does not give a graduation year.
+    Use case ends.
 
-  - 3b1. NetworkBook shows an error message.
+* 1c. The given graduation year is in an invalid format.
 
-    Use case resumes at step 2.
+  * 1c1. NetworkBook shows an error message.
 
-- 3c. The given graduation year is in an invalid format.
+    Use case ends.
 
-  - 3c1. NetworkBook shows an error message.
+* 1d. The contact already has a graduation year.
 
-    Use case resumes at step 2.
+  * 1d1. NetworkBook shows an error message.
 
-- 3d. The contact already has a graduation year.
+    Use case ends.
 
-  - 3d1. NetworkBook shows an error message.
+**Use case: Edit the name of a contact**
 
-    Use case resumes at step 2.
-
-**Use case: Add course to a contact**
+This use case is also applicable to editing **graduation, priority** of a contact.
 
 **MSS**
 
-1. User requests to list contacts.
+1. User requests to edit the name of a specific contact in the list.
 
-2. NetworkBook shows a list of contacts.
+2. NetworkBook updates the contact.
 
-3. User requests to add course to a specific contact in the list.
-
-4. NetworkBook adds the course to the contact's list of courses.
-
-5. NetworkBook informs user of the contact's new list of courses.
-
-   Use case ends.
-
-**Extensions**
-
-- 2a. The list is empty.
-
-  Use case ends.
-
-- 3a. The given index is invalid.
-
-  - 3a1. NetworkBook shows an error message.
-
-    Use case resumes at step 2.
-
-- 3b. User does not give a course code.
-
-  - 3b1. NetworkBook shows an error message.
-
-    Use case resumes at step 2.
-
-- 3c. The given course code is in an invalid format.
-
-  - 3c1. NetworkBook shows an error message.
-
-    Use case resumes at step 2.
-
-- 3d. User does not give a start date.
-
-  - 3d1. NetworkBook shows an error message.
-
-    Use case resumes at step 2.
-
-- 3e. The given start/end date is in an invalid format.
-
-  - 3e1. NetworkBook shows an error message.
-
-    Use case resumes at step 2.
-
-- 3f. User gives an end date in the correct format.
-
-  - 3f1. NetworkBook includes end date in the new course's details.
-
-  - 3f2. NetworkBook adds the new course to the contact's list of courses.
-
-    Use case resumes at step 5.
-
-- 3g. The given course code is already present in the contact's list of courses.
-
-  - 3g1. NetworkBook updates the given course with the new course details provided.
-
-    Use case resumes at step 5.
-
-**Use case: Add social link to a contact**
-
-**MSS**
-
-1. User requests to list contacts.
-
-2. NetworkBook shows a list of contacts.
-
-3. User requests to add social link a specific contact in the list.
-
-4. NetworkBook adds the social link to the contact's list of links.
-
-5. NetworkBook informs user of the contact's new list of links.
-
-   Use case ends.
-
-**Extensions**
-
-- 2a. The list is empty.
-
-  Use case ends.
-
-- 3a. The given index is invalid.
-
-  - 3a1. NetworkBook shows an error message.
-
-    Use case resumes at step 2.
-
-- 3b. User does not give a social link.
-
-  - 3b1. NetworkBook shows an error message.
-
-    Use case resumes at step 2.
-
-- 3c. The given social link is in an invalid format.
-
-  - 3c1. NetworkBook shows an error message.
-
-    Use case resumes at step 2.
-
-- 3d. User provides additional note after the social link.
-
-  - 3d1. NetworkBook includes the note in the link's details.
-
-  - 3d2. NetworkBook adds the new social link to the contact's list of links.
-
-    Use case resumes at step 5.
-
-**Use case: Edit a contact**
-
-**MSS**
-
-1.  User requests to list contacts.
-2.  NetworkBook shows a list of contacts.
-3.  User requests to edit some field of a specific contact in the list.
-4.  NetworkBook updates the contact.
+3. NetworkBook updates the displayed contact card of the person.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given index is invalid.
+
+  * 1a1. NetworkBook shows an error message.
+
+    Use case ends.
+
+* 1b. The name provided is not correctly formatted.
+
+  * 1b1. NetworkBook shows an error message.
+
+    Use case ends.
+
+* 1c. The user does not provide any field to edit.
+
+  * 1c1. NetworkBook shows an error message.
+
+    Use case ends.
   
-  Use case ends.
+* 1d. The user provides two name fields.
 
-* 3a. The given index is invalid.
+  * 1d1. NetworkBook shows an error message.
 
-    * 3a1. NetworkBook shows an error message.
+    Use case ends.
 
-      Use case resumes at step 2.
+**Use case: Edit a phone number of a contact**
 
-* 3b. Some of the fields provided are not correctly formatted.
+This use case is also applicable to editing **email, link, course, specialisation, tag** of a contact.
 
-    * 3b1. NetworkBook shows an error message.
+**MSS**
+
+1. User requests to edit a phone of a specific contact in the list at the specific index in the contact's phone number list.
+
+2. NetworkBook updates the contact.
+
+3. NetworkBook updates the displayed contact card of the person.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given contact index is invalid.
+
+  * 1a1. NetworkBook shows an error message.
+
+    Use case ends.
+
+* 1b. The phone number provided is not correctly formatted.
+
+  * 1b1. NetworkBook shows an error message.
+
+    Use case ends.
+
+* 1c. The user does not provide any field to edit.
+
+  * 1c1. NetworkBook shows an error message.
+
+    Use case ends.
+  
+* 1d. The user provides two phone fields.
+
+  * 1d1. NetworkBook shows an error message.
+
+    Use case ends.
+
+* 1e. The user provides an invalid phone number index.
+
+  * 1e1. NetworkBook shows an error message.
+
+    Use case ends.
+
+* 1f. The user provides the phone number index twice.
+
+  * 1f1. NetworkBook shows an error message.
+
+    Use case ends.
+
+* 1g. The user does not provide the phone number index.
+
+  * 1g1. The phone number index takes the default value of 1.
+
+    * 1g1a. The phone number index of 1 is invalid.
+
+      Use case resumes at step 1e1.
+    
+    * 1g1b. The phone number index of 1 is valid.
 
       Use case resumes at step 2.
 
@@ -868,125 +814,144 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list contacts.
-2.  NetworkBook shows a list of contacts.
-3.  User requests to delete a specific contact in the list.
-4.  NetworkBook deletes the contact.
+1. User requests to delete a specific contact in the list.
+
+2. NetworkBook deletes the contact.
+
+3. NetworkBook updates the displayed list of contact.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given index is invalid.
 
-  Use case ends.
+    * 1a1. NetworkBook shows an error message that the index is invalid.
 
-* 3a. The given index is invalid.
-
-    * 3a1. NetworkBook shows an error message.
-
-      Use case resumes at step 2.
+      Use case ends.
 
 **Use case: Delete a single-valued field of a contact**
 
+This use case is applicable to deleting **graduation, priority** of a contact.
+
 **MSS**
 
-1. User requests to list contacts.
+1. User specifies index of contact and a single-valued field to delete.
 
-2. NetworkBook shows a list of contacts.
+2. NetworkBook updates the contact by deleting the field.
 
-3. User specifies index of contact and a single-valued field to delete.
-
-4. NetworkBook updates the contact by deleting the field.
+3. NetworkBook updates the displayed contact card of the person.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given index of contact is invalid.
 
-  Use case ends.
+  * 1a1. NetworkBook shows an error message.
 
-* 3a. The given index of contact is invalid.
-
-  * 3a1. NetworkBook shows an error message.
-
-    Use case resumes at step 2.
+    Use case ends.
 
 
 * 3b. User provides multiple fields to delete.
 
   * 3b1. NetworkBook shows an error message.
 
-    Use case resumes at step 2.
+    Use case ends.
 
 * 3c. User provides an index field after the single-valued field to delete.
 
   * 3c1. NetworkBook shows an error message.
 
-    Use case resumes at step 2.
+    Use case ends.
 
 * 3d. The single-valued field of the contact is empty.
 
-  * 3d1. NetworkBook does not change the contact.
+  * 3d1. NetworkBook shows an error message.
 
     Use case ends.
 
 **Use case: Delete a multi-valued field of a contact**
 
+This use case is applicable to deleting a **phone, email, link, course, specialisation, tag** of a contact.
+
 **MSS**
 
-1. User requests to list contacts.
+1. User specifies index of contact, a multi-valued field, and the index of entry to delete.
 
-2. NetworkBook shows a list of contacts.
-
-3. User specifies index of contact, a multi-valued field, and the index of entry to delete.
-
-4. NetworkBook updates the contact by deleting the entry from the field's list.
+2. NetworkBook updates the contact by deleting the entry from the field's list.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given index of contact is invalid.
 
-  Use case ends.
+  * 1a1. NetworkBook shows an error message.
 
-* 3a. The given index of contact is invalid.
+    Use case ends.
 
-  * 3a1. NetworkBook shows an error message.
+* 1b. User provides multiple fields to delete.
 
-    Use case resumes at step 2.
+  * 1b1. NetworkBook shows an error message.
 
-* 3b. User provides multiple fields to delete.
+    Use case ends.
 
-  * 3b1. NetworkBook shows an error message.
+* 1c. The given index of entry is invalid.
 
-    Use case resumes at step 2.
+  * 1c1. NetworkBook shows an error message.
 
-* 3c. The given index of entry is invalid.
+    Use case ends.
 
-  * 3c1. NetworkBook shows an error message.
+* 1d. User provides multiple indexes of entry to delete.
 
-    Use case resumes at step 2.
+  * 1d1. NetworkBook shows an error message.
 
-* 3d. User provides multiple indexes of entry to delete.
+    Use case ends.
 
-  * 3d1. NetworkBook shows an error message.
+* 1e. User does not provide an index of entry.
 
-    Use case resumes at step 2.
+  * 1e1. The index of entry is default to 1.
 
-* 3e. User does not provide an index of entry.
+    * 1e1a. The contact's field does not have an entry at index 1.
 
-  * 3e1. The index of entry is default to 1.
-
-    * 3e1a. The contact's field does not have an entry at index 1.
-
-      Use case resumes at step 3c1.
+      Use case resumes at step 1c1.
 
     * 3e1b. The contact's field has an entry at index 1.
 
-      Use case resumes at step 4.
+      Use case resumes at step 2.
+
+**Use case: Filter contacts**
+
+This user story applies to filtering contacts by **course, specialisation, graduation year, tag**.
+
+**MSS**
+
+1. User requests to filter by a field with a specified value.
+
+2. NetworkBook displays the contacts with the field that matches the specified value.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Field is not specified or value is not specified.
+
+  * 1a1. NetworkBook shows an error message.
+
+    Use case ends.
+  
+* 1b. Field specified is invalid.
+
+  * 1b1. NetworkBook shows an error message.
+
+    Use case ends.
+
+* 1c. Value specified is invalid.
+
+  * 1c1. NetworkBook shows an error message.
+
+    Use case ends.
 
 **Use case: Sort contacts**
 
@@ -995,6 +960,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User chooses to sort based on a field (e.g. name, graduation year, priority) and an order (ascending or descending).
 
 2.  NetworkBook shows list of user’s contacts, sorted by the specified field and in the specified order.
+
+    Use case ends.
 
 **Extensions**
 
@@ -1042,23 +1009,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 2.  NetworkBook shows list of user’s contacts with names containing the searched text.
 
+    Use case ends.
+
 **Extensions**
 
-* 1a. The user has no contacts to search.
+* 1a. The search text is not specified.
 
-    * 1a1. NetworkBook shows an empty contact list.
-
-      Use case ends.
-
-* 1b. The search text is not specified.
-
-    * 1b1. NetworkBook shows an error message.
-
-      Use case ends.
-
- * 1c. There are no contacts with names containing the searched text.
-
-    * 1c1. NetworkBook shows a message saying that there are no matches.
+    * 1a1. NetworkBook shows an error message.
 
       Use case ends.
 
@@ -1067,90 +1024,129 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list contacts.
+1. User requests to email a specific contact in the list to the specific email address of the contact.
 
-2. NetworkBook shows a list of contacts.
+2.  NetworkBook loads the default email app of the user.
 
-3. User requests to email a specific contact in the list.
-
-4.  NetworkBook loads the default email app of the user.
-
-5.  NetworkBook pre-fills the contact's email in the recipient field.
+3.  NetworkBook pre-fills the contact's email in the recipient field.
 
     Use case ends.
 
 **Extensions**
-
-* 1a. User has no contact to list.
-
-    * 1a1. NetworkBook shows an empty list
-
-  Use case ends.
-
-* 4a. The user has not logged in to his default email app.
-
-    * 4a1. User will be taken to the sign-in page of his default email app.
-
-      Use case ends.
     
-* 3b. The command is invalid.
+* 1a. The contact index is invalid.
     
-    * 3b1. NetworkBook notifies the user that the command is invalid.
+  * 1a1. NetworkBook shows an error message.
 
-      Use case ends.
+    Use case ends.
 
-**Use case: Open social link from NetworkBook**
+* 1b. The email index is invalid.
+
+  * 1b1. NetworkBook shows an error message.
+
+    Use case ends.
+
+* 1c. The email index is not provided.
+
+  * 1c1. NetworkBook takes the default value of email index of 1.
+
+    * 1c1a. The email index of 1 is invalid.
+
+      Use case resumes at step 1b1.
+    
+    * 1c1b. The email index of 1 is valid.
+
+      Use case resumes at step 2.
+
+* 2a. The user has not logged in to his default email app.
+
+  * 2a1. User will be taken to the sign-in page of his default email app.
+
+    Use case ends.
+
+**Use case: Open link from NetworkBook**
 
 **MSS**
 
-1. User requests to list contacts.
+1. User requests to open a link of a specific contact.
 
-2. NetworkBook shows a list of contacts.
-
-3. User requests to open a social link of a contact stored in the app.
-
-4.  NetworkBook loads the default browser app of the user.
-
-5.  NetworkBook visits the requested social link in the browser.
+2. NetworkBook loads the default browser app of the user with the link opened.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty.
+* 1a. The contact index is invalid.
+    
+  * 1a1. NetworkBook shows an error message.
 
-  Use case ends.
+    Use case ends.
 
-* 3a. The social link is invalid.
+* 1b. The link index is invalid.
 
-    * 3a1. The user will see the error page displayed by the browser used to load the page link.
+  * 1b1. NetworkBook shows an error message.
+
+    Use case ends.
+
+* 1c. The link index is not provided.
+
+  * 1c1. NetworkBook takes the default value of link index of 1.
+
+    * 1c1a. The link index of 1 is invalid.
+
+      Use case resumes at step 1b1.
+    
+    * 1c1b. The link index of 1 is valid.
+
+      Use case resumes at step 2.
+
+* 2a. The domain of the link is not a registered domain.
+
+    * 2a1. The user will see the error page displayed by the browser used to load the page link.
 
       Use case ends.
 
-* 4b. The page is valid but fails to load.
+* 2b. The link is valid but the page fails to load.
 
-    * 4b1. The user will see the error page displayed by the browser used to load the page link.
+    * 2b1. The user will see the error page displayed by the browser used to load the page link.
 
       Use case ends.
 
-**Use case: Download mobile app from online page**
+**Use case: Undo**
 
 **MSS**
 
-1. User requests to visit the online page. 
-2. The online page renders.
-3. User selects link to download the mobile app.
-4. Mobile app starts downloading on the user's device.
+1. User requests to undo the previous command.
+
+2. NetworkBook reverts back to the previous state.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The online page fails to load.
+* 1a. User has not keyed in any command previously.
 
-    * 1a1. The user will see the error page displayed by the browser used to load the page link.
+  * 1a1. NetworkBook shows an error message.
 
-      Use case ends.
+    Use case ends.
+
+**Use case: Redo**
+
+**MSSS**
+
+1. User requests to redo the latest undo command.
+
+2. NetworkBook reapplies the changes recalled by the undo command.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. There are no more changes to redo.
+
+  * 1a1. NetworkBook shows an error message.
+
+    Use case ends.
 
 **Use case: Access user manual on online page**
 
@@ -1171,9 +1167,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
   
-* 3a. The user manual page fails to load.
+* 4a. The user manual page fails to load.
 
-    * 3a1. The user will see the error page displayed by the browser used to load the page link.
+    * 4a1. The user will see the error page displayed by the browser used to load the page link.
 
       Use case ends.
 
@@ -1192,16 +1188,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list contacts.
-2.  NetworkBook shows a list of contacts.
-3.  User requests to export a specific contact in the list.
-4.  NetworkBook exports a text file storing user details in a readable format.
+1.  User requests to export a specific contact in the list.
+
+2.  NetworkBook exports a text file storing user details in a readable format.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The contact index is invalid.
+
+  * 1a1. NetworkBook shows an error message.
 
   Use case ends.
 
@@ -1216,6 +1213,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. User selects a file containing exported contacts.
 
 4. NetworkBook creates new contacts with details specified in the export file.
+
+5. NetworkBook saves the path to the data file.
 
    Use case ends.
 
@@ -1239,11 +1238,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-- 3c. The file contains contacts with same names as some existing contacts.
+* 3c. The file contains contacts with same names as some existing contacts.
 
-  - 3c1. NetworkBook skips these contacts and only creates new contacts whose names are not present yet.
+  * 3c1. NetworkBook skips these contacts and only creates new contacts whose names are not present yet.
 
-  - 3c2. NetworkBook shows the skipped contacts.
+  * 3c2. NetworkBook shows the skipped contacts.
 
     Use case ends.
 
@@ -1378,67 +1377,218 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+1. Initial launch.
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Run the jar file with the command in the terminal `java -jar networkbook.jar`.
+    
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
-1. Saving window preferences
+1. Saving window preferences.
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   1. Re-launch the app by double-clicking the jar file.
+      
+      Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a person or details
+
+1. Create a new contact
+
+    1. Prerequisite: your contact list has no contact with name `Test`. If there is, either edit/delete the contact, or conduct the following test cases with another name not already present in your contact list.
+
+    1. Test case: `create /name Test`
+
+        Expected: A new contact with name `Test` is created, with no other field specified. If the command is run the second time, no new person is added, and NetworkBook shows an error message.
+    
+    1. Test case: `create /name Test /phone 12345678`
+
+        Expected: A new contact with name `Test` and phone `12345678` is created, with no other field specified.
+    
+    1. Test case: `create /name Test /phone 12345678 /phone 87654321`
+
+        Expected: A new contact with name `Test` and phones `12345678` and `87654321` is created, with no other field is specified.
+
+1. Add details to a contact
+
+    1. Prerequisite: your contact list has at least 1 contact, and your first contact does not have a phone number of `1234`. If there is, either edit/delete the phone number of the contact, or conduct the following test case with another phone that the first contact does not have.
+
+    1. Test case: `add 1 /phone 1234`
+
+        Expected: A new phone number of `1234` is added to the first contact. If the command is run the second time, no new details are added, and NetworkBook shows an error message.
+    
+    1. Test case: `add 0 /phone 1234`
+
+        Expected: No new details are added. NetworkBook shows an error message.
 
 ### Editing a person
 
-1. Editing a person's name while all persons are being shown
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+1. Editing a person's single-value field.
    
-   2. Test case: `update /name Test 1`
+    1. Test case: `edit 1 /name Test`
       
-      Expected: Name of the first contact should change to `Test`. NetworkBook should show details of the old and new name of the contact.
+        Expected: Name of the first contact should change to `Test`. NetworkBook shows the updated details.
    
-   3. Test case: `update /name Test 0`
+    1. Test case: `edit 0 /name Test`
 
-      Expected: No person is updated. Error details shown in the status message.
-2. Editing other attributes of a person
-   1. Prerequisites: List all persons using the 'list' command. Multiple persons in the list.
+        Expected: No person is updated. NetworkBook shows an error message.
+    
+    1. _{ Likewise for `graduation`, `priority` }_
 
-   2. Test case: `update /phone 12345678 1`
+1. Editing a person's multi-value field.
 
-      Expected: Phone number of first contact should change to `12345678`. NetworkBook should show details of old and new phone number.
+    1. Prerequisite: Your contact at index 1 has at least 1 phone number.
 
-   3. Test case: `update /email test@email.com 1`
+    1. Test case: `edit 1 /phone 12345678 /index 1`
 
-      Expected: Email of first contact should change to `test@email.com`. NetworkBook should show details of the old and new email of the contact.
+        Expected: First phone number of first contact should change to `12345678`. NetworkBook shows the updated details.
 
-   4. _{ Likewise for `course`, `specialisation`, `link`, `grad`, `priority`, `tag` }_
+    1. Test case: `edit 1 /phone 12345678 /index 0`
+
+        Expected: No person is updated. NetworkBook shows an error message.
+
+    1. _{ Likewise for `email`, `course`, `specialisation`, `link`, `tag` }_
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a person.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisite: Your contact list has at least 1 contact.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`
+      
+        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`
+      
+        Expected: No person is deleted. NetworkBook shows an error message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+1. Deleting a field from a person
 
-1. _{ more test cases …​ }_
+    1. Prerequisite: Your first contact in the list has at least 1 phone number and a graduation semester.
+
+    1. Test case: `delete 1 /phone /index 1`
+
+        Expected: The first phone number of the first contact is deleted.
+      
+    1. Test case: `delete 1 /name`
+
+        Expected: No detail is deleted. NetworkBook shows an error message.
+    
+    1. Test case: `delete 1 /grad`
+
+        Expected: Graduation year of the first contact is deleted.
+
+### Filtering contact list
+
+1. Filter contact by name
+
+    1. Test case: `find`
+
+        Expected: No filtering is done. NetworkBook shows an error message.
+    
+    1. Test case: `find test`
+
+        Expected: All contacts with `test` as substring (case-insensitive) are filtered in.
+
+1. Filter contact by `course`, `tag`, `spec`, `grad`
+
+    1. Test case: `filter /by course /with CS2103T`
+
+        Expected: All contacts with courses with `CS2103T` being a substring are filtered in.
+    
+    1. _{Likewise for `specialisation`, `tag` }_
+    
+    1. Test case: `filter /by grad /with 2021`
+
+        Expected: All contacts with graduation either AY2021-S2 or AY2122-S1 are filtered in.
+    
+    1. Test case: `filter /by course`
+
+        Expected: No filtering is done. NetworkBook shows an error message.
+
+### Sorting contact list
+
+1. Sort contact list
+
+    1. Test case: `sort /by name`, or `sort /by name /order asc`
+
+        Expected: Contacts are sorted by name in ascending ASCII order.
+    
+    1. Test case: `sort /by name /order desc`
+
+        Expected: Contacts are sorted by name in descending ASCII order.
+    
+    1. _{Likewise for `grad`, `priority`}_
+
+### Undo/redo
+
+1. Undo and redo for data-changing command
+
+    1. Key in a successful command, e.g. `find test`, assuming that your contact list has at least another contact with name with no substring `test`.
+
+        Expected: NetworkBook filters in only contacts with `test` as substring (case-insensitive).
+    
+    1. Test case: `undo`
+
+        Expected: NetworkBook reverts to the previous state before `find test` command was executed.
+    
+    1. Test case: `redo`
+
+        Expected: NetworkBook reapplies the changes done by `find test`, which means only contacts with `test` as substring (case-insensitive) is filtered in.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data file
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Delete the data file. If you have not modified `preferences.json`, your data file should be located in `/data/networkbook.json`.
 
-1. _{ more test cases …​ }_
+    1. Launch the app.
+
+        Expected: The app populated with default sample data.
+
+1. Dealing with corrupted data file
+
+    1. Open the data file.
+
+    1. Change an email to `"test@gmail"` or `null`.
+
+    1. Launch the app.
+
+        Expected: The app starts with an empty list of contacts.
+
+1. Dealing with data file without write permission
+
+    1. Make the data file read-only.
+
+    1. Launch the app.
+
+    1. Test case: `find test`
+
+        Expected: All contacts with name containing `test` as substring (case-insensitive) are filtered in.
+    
+    1. _{Likewise for non-data-changing commands: `filter`, `sort`, `list`, `help`, `exit`}_
+
+    1. Test case: `create /name test` (prerequisite: your contact list does not include any contact with name `test`)
+
+        Expected: NetworkBook shows an error message.
+    
+    1. _{Likewise for data-changing commands: `add`, `edit`, `delete`, `undo`, `redo`}_
+
+1. Save command
+
+    1. Make the data file read-only.
+
+    1. Launch the app.
+
+    1. Key in a successful data-changing command, e.g. `create /name Test` if your contact list does not a contact with name `Test`.
+
+        Expected: NetworkBook shows an error message, but a new contact card is still created in the GUI. However, data is not saved to the data file.
+    
+    1. Go to your OS' file system and add write permission to the data file.
+
+    1. Key in command: `save`
+
+        Expected: Nothing is changed in the GUI, but a new person object is created in the data file.
