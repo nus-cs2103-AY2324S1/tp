@@ -238,7 +238,20 @@ but due to a limitation of PlantUML, the 3 branches leads to the "end" individua
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 4. Documentation, logging, testing, configuration, dev-ops
+## 4. Planned Enhancements
+
+### 4.1 Customisable color for risk levels
+The current colors for risk levels of low, medium and high are green, blue and red respectively.
+Risk levels are color coded for easy identification by counsellors.
+However, users may find the current risk level color contrast hard to see, hence we plan to make the colors customisable to cater for different preferences.
+
+### 4.2 Allow name to include special characters
+The current parameter constraints for name is name must only contain alphabetical characters and space, be unique up to 100 characters long, and cannot be blank.
+However, we do acknowledge the need for special characters in names such as `Arjun S/O Kapoor`, hence we plan to include special characters to cater for diverse student names.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 5. Documentation, logging, testing, configuration, dev-ops
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -248,9 +261,9 @@ but due to a limitation of PlantUML, the 3 branches leads to the "end" individua
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 5. Appendix: Requirements
+## 6. Appendix: Requirements
 
-### 5.1 Product scope
+### 6.1 Product scope
 
 **Target user profile**:
 
@@ -265,7 +278,7 @@ but due to a limitation of PlantUML, the 3 branches leads to the "end" individua
 **Value proposition**: This product is meant to help the counsellors better schedule their appointments with students faster than a typical mouse/GUI driven app. Users will be able to store details like personal information, appointment dates, number of visits, emergency contacts etc.
 
 
-### 5.2 User stories
+### 6.2 User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -292,11 +305,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | counsellor | link todos items to students                 | have easy access to the contact information for the students                         |
 | `*`      | counsellor | sort todos items by dateline                 | organise my appointments and plan my schedule accordingly                            |
 
-### 5.3 Use cases
+### 6.3 Use cases
 
 (For all use cases below, the **System** is `WellNUS` and the **Actor** is the `counsellor`, unless specified otherwise)
 
-#### 5.3.1 #UC01: Add a student
+#### 6.3.1 #UC01: Add a student
 
 **MSS**
 
@@ -317,7 +330,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 3b1. WellNUS shows an error message.
     * Use case ends.
 
-#### 5.3.2 #UC02: View existing students
+#### 6.3.2 #UC02: View existing students
 
 **MSS**
 
@@ -332,7 +345,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty
   * Use case ends.
 
-#### 5.3.3 #UC03: Delete an existing student
+#### 6.3.3 #UC03: Delete an existing student
 
 **MSS**
 
@@ -350,7 +363,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 3a1. WellNUS shows an error message.
     * Use case ends.
 
-#### 5.3.4 #UC04: Tag student to risk level
+#### 6.3.4 #UC04: Tag student to risk level
 
 **MSS**
 
@@ -372,7 +385,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 4b1. WellNUS shows an error message.
     * Use case ends.
 
-#### 5.3.5 #UC05: Schedule an appointment
+#### 6.3.5 #UC05: Schedule an appointment
 
 **MSS**
 
@@ -398,7 +411,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 3c1. WellNUS shows an error message.
     * Use case ends.
 
-#### 5.3.6 #UC06: View existing appointments
+#### 6.3.6 #UC06: View existing appointments
 
 **MSS**
 
@@ -414,7 +427,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-#### 5.3.7 #UC07: Cancel an existing appointment
+#### 6.3.7 #UC07: Cancel an existing appointment
 
 **MSS**
 
@@ -431,7 +444,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes from step 1.
 
-#### 5.3.8 #UC08: Tag student to appointment
+#### 6.3.8 #UC08: Tag student to appointment
 
 **MSS**
 
@@ -449,7 +462,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
   Use case resumes from step 1.
 
-#### 5.3.9 #UC09: Add a ToDo
+#### 6.3.9 #UC09: Add a ToDo
 
 **MSS**
 
@@ -474,7 +487,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-#### 5.3.10 #UC10: View existing ToDos
+#### 6.3.10 #UC10: View existing ToDos
 
 **MSS**
 
@@ -490,7 +503,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-#### 5.3.11 #UC11: Delete an existing ToDo
+#### 6.3.11 #UC11: Delete an existing ToDo
 
 **MSS**
 
@@ -510,7 +523,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-#### 5.3.12 #UC12: Tag student to ToDo
+#### 6.3.12 #UC12: Tag student to ToDo
 
 **MSS**
 
@@ -540,7 +553,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### 5.4 Non-Functional Requirements
+### 6.4 Non-Functional Requirements
 1.  Cross-Platform Compatibility:
     - Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Scalability and Performance:
@@ -556,7 +569,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### 5.5 Glossary
+### 6.5 Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
@@ -566,7 +579,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 6. Appendix: Instructions for manual testing
+## 7. Appendix: Instructions for manual testing
 
 Given below are instructions to test the app manually.
 
@@ -575,7 +588,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### 6.1 Launch and shutdown
+### 7.1 Launch and shutdown
 
 1. Initial launch
 
@@ -688,4 +701,23 @@ Format `edit STUDENT_INDEX [c/CONTACT_NUMBER] [a/HOME_ADDRESS]`
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 2. _{ more test cases …​ }_
+
+## 8. Appendix: Effort
+
+### 8.1 Design Challenges
+
+* WellNUS, in contrast to AB3 which exclusively manages one entity type: `Person`,
+has the intricate challenge of handling two distinct entity types: `Student` and `Appointment`.
+* One challenge encountered was the need to manage dependencies between the two entity types.
+Specifically, the system had to be designed to prevent the scheduling of appointments unless a corresponding student entity existed. 
+Additionally, to maintain data integrity, the deletion of a student entity necessitated the simultaneous cancellation of all associated appointments.
+* In tackling these challenges, we leveraged existing components to streamline development efforts. 
+Recognising the `Person` entity in AB3, we opted to adapt the `Person` entity and repurpose to `Student` entity within WellNUS.
+* Another challenge we faced was designing a new `Appointment` entity from scratch. The process was challenging and required tedious class refactoring mid implementation.
+Initially, we designed `Appointment` to have an attribute `DateTime` to store the date and time of the appointment. 
+To facilitate the comparison of appointments and prevent overlaps and clashes, we soon realised there was a need for a start and end time.
+However, having `DateTime start` and `DateTime end` results in a duplication of date, as the appointment was bound to be on the same date. 
+Hence, we refactored `DateTime` into `Date` and `Time` to allow for 3 attributes: `Date appointmentDate`, `Time startTime`, `Time endTime`
+
+### 8.2 Technical Challenges
 
