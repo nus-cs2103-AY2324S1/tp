@@ -235,7 +235,7 @@ Pros: This accounts for candidates that do not have those social profiles, and a
 
 Cons: With defensive programming in mind, not the best approach having to deal with null values.
 
-=======
+
 ### View feature
 
 #### Implementation
@@ -272,7 +272,6 @@ User should see the UI as shown below after entering `View 1`
 Step 3. The user can then read or process the information stored for the viewed person.
 
 
-
 **Note:** The view command can be most effectively used with `search` and `list`. Since the view index is dependent on the Index on the filtered list shown, the user can view the profile after filtering for specific properties in a person using `search` and sorting them using `list`.
 
 Alternatives considered
@@ -292,16 +291,6 @@ Pros: Arguably a more OOP approach since all commands that trigger view IS-A `Vi
 
 Cons: You cannot implement any command that does not involve viewing but inherits from any command that is a children of `ViewCommand`.  
 An example could be trying to create identical commands that does not toggle the UI after execution. This would require duplication of the exact same command code but inheriting from `Command` instead of `ViewCommand`.
-
-### Create Tags feature
-
-#### Implementation
-
-The `create` tags feature is implemented using the `CreateTagCommand` class. It extends the `Command` and overrides the `execute()` method
-to create tags.
-
-The `create` parameters from the user input are parsed using the parse method the `CreateTagCommandParser` class. `CreateTagCommandParser::Parse`
-takes in the tag parameters from the user input and combines them into a list of tags
 
 ### Search feature
 
@@ -335,11 +324,15 @@ The following sequence diagram shows how the search operation works:
 
 **Note:** The lifeline for `FindCommand` and `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
-<puml src="diagrams/SearchSequenceDiagram.puml" alt="SearchSequenceDiagram" />
+<puml src="diagrams/SearchSequenceDiagram.puml" width="550" />
 
 Step 3. The user should see the UI below upon entering `search n/john st/interviewed t/friends`.
 
 ![View](images/search.png)
+
+The following activity diagram shows summarizes what happens when a user attempts to execute the `search` command.
+
+<puml src="diagrams/SearchActivityDiagram.puml" width="550" />
 
 **Note:** The current implementation of search allows users to search by any of the categories individually or by different combinations of the categories.
 It also allows users to specify more than one search parameter for each category e.g. `search n/alex bernice`
@@ -961,10 +954,14 @@ testers are expected to do more *exploratory* testing.
    
    5. Test case 4:
       `create t/role software developer`
-      **Note**: Tag names must **not** contain any spaces. Instead, we encourage users to use either `camelCase` or `PascalCase`. This was 
-      done so that the tags would appear neater in the UI. Similarly, any other word keyed in after the tag name and without a proper prefix would prompt an 
-      error for incorrect command format.
-      **Expected**: JABPro displays an error message.
+      **Note**: 
+        * Tag names must **not** contain any spaces. Instead, we encourage users to use either `camelCase` or `PascalCase`. This was 
+        done so that the tags would appear neater in the UI. 
+        * Similarly, any other word keyed in after the tag name and without a proper prefix would prompt a similar behaviour.
+        * JABPro's default behaviour will create the first valid tag it sees.
+      **Expected**: JABPro displays a message indicating the successful creation of tags. Upon executing `listT` it will be evident that 
+        the tag `software` would be created under the category `role`. Any word that comes after this and not enclosed in a `/t` prefix 
+        is ignored.
 
    Some other incorrect commands to try: `create t/`, `create t/role @analyst`
    **Expected**: JABPro displays an error message along with a corrective action you can take to amend the command.
