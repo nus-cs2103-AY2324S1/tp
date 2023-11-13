@@ -36,7 +36,6 @@ ProjectPRO is optimized for use via a Command Line Interface (CLI) while preserv
 
 --------------------------------------------------------------------------------------------------------------------
 
-
 ## Table of Contents
 - [1. Introductions](#introductions)
 - [2. Table of Contents](#table-of-contents)
@@ -353,6 +352,8 @@ You can list all the contacts in your contact list.
 **Potential error(s):**
 - Extra inputs detected.
 
+[Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 
@@ -589,6 +590,8 @@ You can remove a contact from a group.
 **Potential error(s):**
 - Incorrect format (e.g., no prefix, duplicate prefixes).
 - The contact you are trying to remove is not a member of the group: `Alex Yeoh is not in this group: CS2103T`.
+
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -879,6 +882,8 @@ You can find a meeting time slot for your group where everyone is available.
 - Group does not exist in the contact list.
 - Contacts in the group did not add their available time slots.
 
+[Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## General Commands
@@ -991,3 +996,5 @@ ProjectPRO's data are saved automatically as a JSON file `[JAR file location]/da
     If your changes to the data file makes its format invalid, ProjectPRO will discard all data and start with a sample data file. Hence, it is recommended to take a backup of the file before editing it.
 </p>
 </div>
+
+[Back to Table of Contents](#table-of-contents)
