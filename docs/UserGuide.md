@@ -657,19 +657,6 @@ This is especially useful if you find yourself having to re-enter a command that
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
-# Glossary
-* **Lead**: Refers to the potential of a client to become a buying customer
-* **Client**: Refers to a person whom the user is conducting his/her business with
-* **Interaction**: A business meeting with the **Client** to discuss sales
-* **Follow-Ups**: Synonymous to Future **Interactions**
-* **UTC**: [Coordinated Universal Time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time)
-* **Mainstream OS**: Windows, Linux, Unix, macOS
-
-[↑ Back to Table of Contents](#table-of-contents)
-
---------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
-
 # FAQ
 
 **Q**: How do I save my progress?
@@ -694,6 +681,35 @@ This is especially useful if you find yourself having to re-enter a command that
 2. [Download Connectify](#quick-start) on the other computer.
 
 3. Paste the data folder in the same directory as your `connectify.jar` file in your other computer.
+
+**Q**: How do I know if Java 11 is already installed on my computer?
+<br>
+**A**: Open up your favourite command line application and run the command `java --version`. The output should contain `java 11` if Java 11 is installed.
+<br>
+
+**Q**: How do I install Java 11 on my computer?
+<br>
+**A**: Head to the official download page [here](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html), then download and run the installer for your operating system.
+<br>
+
+**Q**: Can I run this application on any operating system?
+<br>
+**A**: This application can be run on Linux, Windows, and macOS, as long as you have Java 11 installed.
+<br>
+
+**Q**: How do I contact the development team?
+<br>
+**A**: Please head to our [About Us](AboutUs.md) page for our contact details. For bug reports or feature requests, please head to our [GitHub repository](https://github.com/AY2324S1-CS2103T-F11-4/tp/issues) to file an issue.
+<br>
+
+**Q**: Do I need to be connected to the internet to run this application?
+<br>
+**A**: No, an internet connection is not required to use any of our application's features.<br>
+
+**Q**: Can I contact my clients through the application?
+<br>
+**A**: No, this is currently not possible.
+<br>
 
 [↑ Back to Table of Contents](#table-of-contents)
 
