@@ -544,9 +544,8 @@ Parameters:
 **:exclamation: Important:**<br>
 
 * If the parameters are not provided, <b><code>edit INDEX</code> operates the same way as <code>view INDEX</code></b>, leading you to the profile page of the person at index <code>INDEX</code> in the address book. 
-* If you run the same `edit` command multiple times consecutively (resulting in no visible change after the first run), the `undo` command will not be able to revert the data back to the original state, 
-since it can only undo the last _valid_ command ran.
-
+* If you run the same edit command multiple times consecutively (resulting in no visible change after the first run), the undo command will not be able to revert the data back to the original state. <br>
+  This is because undo can only undo the last command, even if the command made no visible changes.
 </div>
 
 <div style="page-break-after: always;"></div>
@@ -747,8 +746,8 @@ Format: `sort`
 
 **:exclamation: Important:**<br>
 
-If you run the `sort` command multiple times consecutively (resulting in no visible change after the first run), the `undo` command would not be able to revert the data back to the original state
-since it can only undo the last _valid_ command ran.
+Repeated sort commands will not result in additional changes to the address book, and undo will not be able to revert the data back to its original state. <br>
+This is because undo can only revert the last command, even if the command made no changes to the address book.
 
 </div> 
 
