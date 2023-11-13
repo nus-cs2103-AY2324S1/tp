@@ -137,7 +137,7 @@ Before we begin, the table below describes some symbols and syntax you may see t
      * the applicant's email address is `jamesho@example.com`, and 
      * the applicant's residential address is at `123, Clementi Rd, 1234665`.
 
-   * **`delete 1`** : Deletes the first job applicant displayed in **InterviewHub**.
+   * **`delete-a 1`** : Deletes the first job applicant displayed in **InterviewHub**.
 
    * **`exit`** : Exits **InterviewHub**.
 
@@ -188,7 +188,7 @@ For each **interview**, we see the following details:
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add-a n/NAME`, `NAME` is a parameter which can be used as `add-a n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -298,6 +298,11 @@ Format: `delete-a APPLICANT_INDEX`
 | Parameter         | Representation                                                   | Constraints                                                                                              |
 |-------------------|------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
 | `APPLICANT_INDEX` | The index of the target applicant as shown in the applicant list | Must be a positive unsigned integer and must not exceed the size of the current displayed applicant list |
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Note about the command usage.**<br>
+* Deleting an applicant will also cause any interview the applicant has to be deleted.
+</div>
 
 <div markdown="block" class="alert alert-warning">
 **:warning: Warning:** <br>
