@@ -174,7 +174,7 @@ Displays the list of your chosen tab.
   e.g `n/NAME [t/TUTORIAL_GROUP_ID]` can be used as `n/John Doe t/G01` or as `n/John Doe`.
 
 * Items with `|` indicate that the command accepts either parameters.<br>
-  e.g `mark n/STUDENTNAME | id/STUDENTID` takes in `STUDENTNAME` or `STUDENTID` as its first argument.
+  e.g `mark n/STUDENT_NAME | id/STUDENT_ID` takes in `STUDENT_NAME` or `STUDENT_ID` as its first argument.
 
 * Items with `…​` after them can be used multiple times including zero times.<br>
   e.g. `[t/TUTORIAL_GROUP_ID]…​` can be used as many times as desired (i.e. 0 times), `t/T01`, `t/T01 t/B14` etc.
@@ -196,10 +196,14 @@ Shows a message explaining how to access the help page.
 
 **Format:** `help`
 
+<div markdown="block" class="alert alert-warning">**:exclamation: Warning:**
+`help` command will not work when there are no addressbooks present. Please create an addressbook using `course create course/COURSE_CODE` to work around this issue. You can view the next section for more details on how to use the command.
+</div>
+
 ### 4.2 Basic Course Management
 
 <div markdown="block" class="alert alert-warning">**:exclamation: Warning:**
-The parameter `COURSE_CODE` is used for all course management commands, it can be any string, including an empty one. In addition, if `COURSE_CODE` specified is too long, the end of the string will be truncated!
+The parameter `COURSE_CODE` is used for all course management commands, it can be any string, including an empty one. In addition, if `COURSE_CODE` specified is too long, the end of the string will be truncated and other tabs may appear empty!
 </div>
 
 #### 4.2.1 Creating an addressbook: `course create`
@@ -213,7 +217,7 @@ Creates a new addressbook.
 <div markdown="block" class="alert alert-info">
 
 * Creates a new addressbook with course code `COURSE_CODE`
-* `COURSE_CODE` address book must not exist.
+* `COURSE_CODE` addressbook must not exist.
 
 </div>
 
@@ -241,7 +245,7 @@ Deleting the currently active addressbook will automatically switch to another e
 <div markdown="block" class="alert alert-info">
 
 * Deletes the addressbook with course code `COURSE_CODE`
-* `COURSE_CODE` address book must exist.
+* `COURSE_CODE` addressbook must exist.
 
 </div>
 
@@ -265,7 +269,7 @@ Switches the active addressbook.
 <div markdown="block" class="alert alert-info">
 
 * Switches to the addressbook with course code `COURSE_CODE`
-* `COURSE_CODE` address book must exist.
+* `COURSE_CODE` addressbook must exist.
 
 </div>
 
@@ -289,7 +293,7 @@ Edits the active addressbook course code.
 <div markdown="block" class="alert alert-info">
 
 * Changes the course code of active addressbook to `COURSE_CODE`
-* `COURSE_CODE` address book must not exist.
+* `COURSE_CODE` addressbook must not exist.
 
 </div>
 
@@ -578,7 +582,7 @@ Deletes all students from the course or all students from the specified tutorial
 
 ![merge](images/mergeCommand.png)
 
-Merges two students in the current address book.
+Merges two students in the current addressbook.
 
 **Format:** `merge PRIMARY_INDEX SECONDARY_INDEX`
 
@@ -663,6 +667,8 @@ _Details coming soon ..._
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 2. **Adding invalid and redundant prefixes** after commands will case TAvigator to intake the invalid prefix and its value as part of the command, causing the command to fail. The remedy is to remove the invalid and redundant prefixes.
+
+3. **Trying to use help command with no courses** will result in `Please create an addressbook using the create command first` message. You can create an addressbook using `course create course/COURSE_CODE` to work around this issue.
 
 
 --------------------------------------------------------------------------------------------------------------------
