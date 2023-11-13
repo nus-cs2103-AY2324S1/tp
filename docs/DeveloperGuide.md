@@ -861,6 +861,10 @@ testers are expected to do more *exploratory* testing.
 
 ## **Planned Enhancements**
 
+1. To be able to group/tag tutees into "Tutor Groups". These tutees will be able to have the same timeslot if they belong to the same "Tutor Group"
+2. Allow tutees to have multiple lessons. Our current implementation does not allow the same tutee to have multiple lesson as a tutee is uniquely identified by their name and phone number. For example, if the user is teaching John Maths on Monday, he can't teach John Physics on a different day because the system will identify John as a duplicate tutee.
+3. Enhance the edit feature. Currently, our edit feature might result in a bug if the NAME and (DAY/BEGIN/END) fields are edited at the same time. For example, if tutee index 1 has the name John and has a lesson on Monday 20:00 - 21:00, trying to do `edit 1 n/Doe end/2030` will result in an error (throwing the message that this date clashes with an existing scheduke). 
+
 ### Batch Processing for Paid Command
 
 Reason: This enhancement allows users to mark multiple persons as paid in a single command, improving efficiency.
