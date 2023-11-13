@@ -125,7 +125,7 @@ Throughout this guide, you will see different text styles that are used to highl
 
 ## Quick Start
 
-1. Ensure you have Java `11` or above installed in your computer.
+1. Ensure you have Java `11` or above installed on your computer.
 
 2. Download the latest `CoordiMate.jar` from [here](https://github.com/AY2324S1-CS2103T-T10-2/tp/releases).
 
@@ -410,12 +410,14 @@ ep
 | `TAG` | `t/` | <img width=33px src='assets/svg/ug/not_required.svg'> | Tag(s) for the individual.|
 {: .field-table}
 
-- Existing values will be updated to the input values.
+<!-- editPerson -->
 - At least one of the optional fields must be provided for the command to be valid.
+- Fields that are not specified will preserve their existing values.
 - A person is uniquely identified by their `NAME`. This field is case sensitive.
-- You may add multiple tags to a person by specifying the `t/` prefix multiple times.
-  - Note that this will replace all existing tags of the task. If you wish to add to the existing tags of the task, use the [`addTagPerson` command](#31-adding-tags-to-a-person-addtagperson) instead.
-  - Specifying `t/` without any tags will clear all existing tags of the task.
+- You may edit the person to have multiple tags by specifying the `t/` prefix multiple times.
+- If you specify at least one tag with this command, all old tags will be replaced.
+  - If you wish to add to the existing tags of the person, use the [`addTagPerson` command](#31-adding-tags-to-a-person-addtagperson) instead.
+  - Specifying `t/` without any tags will clear all existing tags of the person.
 
 <h4>Example:</h4>
 
@@ -683,6 +685,7 @@ et
 
 - At least one of the optional fields must be provided for the command to be valid.
 - Fields that are not specified will preserve their existing values.
+- A task is uniquely identified by the combination of its `TITLE` and `NOTE`. These fields are case sensitive.
 - You may edit the task to have multiple tags by specifying the `t/` prefix multiple times.
 - If you specify at least one tag with this command, all old tags will be replaced.
   - If you wish to add to the existing tags of the task, use the [`addTagTask` command](#32-adding-tags-to-a-task-addtagtask) instead.
@@ -847,7 +850,7 @@ All tasks will be removed from your task list immediately. This action is irreve
 
 #### 2.7. Marking a task as done: `markTask`
 
-You can indicate that a specific task as completed, so that you can keep track of task progress and identify tasks that are done.
+You can indicate a specific task as completed, so that you can keep track of task progress and identify tasks that are done.
 
 <h4>Format:</h4>
 
@@ -891,7 +894,7 @@ mt
 
 #### 2.8. Marking a task as not done: `unmarkTask`
 
-You can indicate that a specific task as not completed, so that you can keep track of task progress and identify tasks that are pending further action or completion.
+You can indicate a specific task as not completed, so that you can keep track of task progress and identify tasks that are pending further action or completion.
 
 <h4>Format:</h4>
 
@@ -935,7 +938,7 @@ ut
 
 #### 2.9. Finding all tasks that are done: `findDone`
 
-You can filter the task list to locate all completed tasks, so that you can keep track of task progress and the number of completed tasks with ease.
+You can filter the task list to locate all completed tasks, so that you can keep track of the number of completed tasks with ease.
 
 <h4>Format:</h4>
 
@@ -970,7 +973,7 @@ To reset the tasks view, simply run the <code>listTask</code> command to list al
 
 #### 2.10. Finding all tasks that are not done: `findNotDone`
 
-You can filter the task list to locate all not completed tasks, so that you can keep track of task progress and the number of not completed tasks with ease.
+You can filter the task list to locate all not completed tasks, so that you can keep track of the number of not completed tasks with ease.
 
 <h4>Format:</h4>
 
@@ -1086,7 +1089,7 @@ atagp
 
  Error message | How to resolve
 ---------------|---------------
-`Invalid command format! …` | Ensure that the index and tag are both specified. The index should be correctly specfiied as an integer.
+`Invalid command format! …` | Ensure that the index and tag are both specified. The index should be correctly specified as an integer.
 `Tags names should be alphanumeric` | Ensure that the tag is specified and is alphanumeric.
 `The person index provided is invalid` | Ensure that the index provided is within the valid range.
 
