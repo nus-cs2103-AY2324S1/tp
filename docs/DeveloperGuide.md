@@ -447,8 +447,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## Appendix: Instructions for manual testing
 
-//TODO
-
 Given below are instructions to test the app manually.
 
 <div markdown="span" class="alert alert-info">
