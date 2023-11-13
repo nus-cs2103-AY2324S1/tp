@@ -1023,6 +1023,30 @@ Use case ends.
 - 1a. User uses the wrong delimiter or makes a spelling mistake, or provides incorrect number of arguments
     - UniMate displays a message to show a helper message outlining the correct syntax and available sort options
 
+//@author
+
+//@author lihongguang00
+**Use case: UC14 Compare calendars**
+
+**MSS**
+1. User requests to compare calendars
+2. User inputs and confirms the indices of the contacts they want to compare their calendars with
+3. UniMate displays the calendar showing the time periods where both the contacts and the user are free
+
+Use case ends.
+
+**Extensions**
+
+- 2a. User inputs and confirms the tags of the contacts to identify who they want to compare their calendars with.
+
+  Use case resumes from step 3
+
+- 2b. User inputs the invalid arguments for the command.
+  - UniMate displays the user's calendar only, ignoring all the invalid arguments
+  - Use case ends.
+  - 
+//@author
+
 //@author Fallman2
 
 **Use case: UC15 Adding a Task.**
@@ -1116,25 +1140,6 @@ Use case ends.
   Use case ends.
 
 //@author
-
-**Use case: UC14 Compare calendars**
-
-**MSS**
-1. User requests to compare calendars
-2. User inputs and confirms the indices of the contacts they want to compare their calendars with
-3. UniMate displays the calendar showing the time periods where both the contacts and the user are free 
-
-  Use case ends.
-
-**Extensions**
-
-- 2a. User inputs and confirms the tags of the contacts to identify who they want to compare their calendars with.
-  
-  Use case resumes from step 3  
-
-- 2b. User inputs the invalid arguments for the command.
-  - UniMate displays the user's calendar only, ignoring all the invalid arguments
-  - Use case ends.
 
 ### Non-Functional Requirements
 
@@ -1516,7 +1521,6 @@ this feature. However, we managed to work together as a group to fix most of the
 - Working calendar comparison feature
 - We were able to integrate 2 separate and very different components, `Task manager` and `Calendar`, successfully into the base `AB3` code
 - Live updates for the `Task List` and `Event List`
-
 
 ## **Appendix: Planned Enhancements**
 
