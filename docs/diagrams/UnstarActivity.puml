@@ -1,4 +1,3 @@
-
 @startuml
 skin rose
 skinparam ActivityFontSize 15
@@ -7,14 +6,23 @@ skinparam ArrowFontSize 12
 start
 :User enters unstar command;
 
-if () then ([Valid Index])
-    if () then ([Date is starred])
-        :Apply unstar on date;
+:Input is passed over to the logic component;
+if () then ([index is present and command is valid])
+    if () then ([Valid Index])
+        if () then ([Date is starred])
+            :Clone the respective date object, and set it's isStarred field to False;
+
+            :Replace date with cloned date;
+
+            :Reset predicate to show all dates in the model;
+        else ([Else])
+            :Throw date is already unstarred error message;
+        endif
     else ([Else])
-        :Command exception is thrown;
+        :Throw invalid index error message;
     endif
 else ([Else])
-    :Command exception is thrown;
+    :Display invalid command format error message;
 endif
 
 stop

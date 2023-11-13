@@ -296,12 +296,12 @@ The `FilterCommand` class then returns a `CommandResult` object that contains th
 
 The _Activity_ diagram summarises what happens after the user enters a filter command.
 
-<puml src="diagrams/FilterActivity.puml" width="550" />
+<puml src="diagrams/FilterActivity.puml" width="600" />
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `filter name/ John`
 
-<puml src="diagrams/FilterSequence.puml" width="550" />
+<puml src="diagrams/FilterSequence.puml" width="600" />
 
 ### Sort dates
 
@@ -311,13 +311,13 @@ The `SortCommand` class then returns a `CommandResult` object that contains the 
 
 The _Activity_ diagram summarises what happens after the user enters a sort command.
 
-<puml src="diagrams/SortActivity.puml" width="550" />
+<puml src="diagrams/SortActivity.puml" width="600" />
 
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `sort name/ increasing`
 
-<puml src="diagrams/SortSequence.puml" width="550" />
+<puml src="diagrams/SortSequence.puml" width="600" />
 
 ### Get Blind Date
 
@@ -333,7 +333,7 @@ through the list of Dates, and calls `GetScore` to get the score of the date bas
 income. Each metric will be scored upon 10, and when it deviates from the user's preferences, the score is reduced.
 The maximum score is 40.
 
-<puml src="diagrams/BestMatchSequence.puml" width="550" />
+<puml src="diagrams/BestMatchSequence.puml" width="600" />
 
 ### Set preferences
 
@@ -343,41 +343,50 @@ The `SetPrefCommand` class then returns a `CommandResult` object that contains t
 
 The _Activity_ diagram summarises what happens after the user enters a set preferences command.
 
-<puml src="diagrams/SetPrefActivity.puml" width="550" />
+<puml src="diagrams/SetPrefActivity.puml" width="600" />
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 
-<puml src="diagrams/SetPrefSequence.puml" width="550" />
+<puml src="diagrams/SetPrefSequence.puml" width="600" />
 
 ### Star dates
 
-The star feature is implemented using the `StarCommand` class. The `StarCommand` class takes in a an 'Index'
-object as a parameter. The 'Index' object is used to identify the `Date` object in the `Model` component to be
-starred. The `StarCommand` class then returns a `CommandResult` object that contains the starred `Date` object
+#### Implementation
 
+1. The star dates feature begins by passing the user input obtained from the `CommandBox` class in the `Ui` component to the `LogicManager` class in the `Logic` component by invoking the `execute` function.
+2. The `LogicManager` class then passes the user input to the `LoveBookParser` class for parsing and validation.
+3. The `LoveBookParser` class then performs polymorphism and creates a `StarCommandParser` object for StarCommand specific parsing.
+4. The `LoveBookParser` class also separates the command word from the user input and passes the arguments from the user input to the `StarCommandParser` object created above for parsing.
+5. The `StarCommandParser` carries out it's validation checks and creates a new `StarCommand` object if the validation checks pass.
+6. The `StarCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function which then updates the isStarred field for the date object with the respective index.
 The _Activity_ diagram summarises what happens after the user enters a star command.
 
-<puml src="diagrams/StarActivity.puml" width="550" />
+<puml src="diagrams/StarActivity.puml" width="600" />
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `star 1`
 
-<puml src="diagrams/StarSequence.puml" width="550" />
+<puml src="diagrams/StarSequence.puml" width="600" />
 
 ### Unstar dates
 
-The unstar feature is implemented using the `UnstarCommand` class. The `UnstarCommand` class takes in a an 'Index'
-object as a parameter. The 'Index' object is used to identify the `Date` object in the `Model` component to be
-unstarred. The `UnstarCommand` class then returns a `CommandResult` object that contains the unstarred `Date` object
+#### Implementation
+
+1. The star dates feature begins by passing the user input obtained from the `CommandBox` class in the `Ui` component to the `LogicManager` class in the `Logic` component by invoking the `execute` function.
+2. The `LogicManager` class then passes the user input to the `LoveBookParser` class for parsing and validation.
+3. The `LoveBookParser` class then performs polymorphism and creates a `UnstarCommandParser` object for UnstarCommand specific parsing.
+4. The `LoveBookParser` class also separates the command word from the user input and passes the arguments from the user input to the `UnstarCommandParser` object created above for parsing.
+5. The `UnstarCommandParser` carries out it's validation checks and creates a new `UnstarCommand` object if the validation checks pass.
+6. The `UnstarCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function which then updates the isStarred field for the date object with the respective index.
 
 The _Activity_ diagram summarises what happens after the user enters a star command.
 
-<puml src="diagrams/UnstarActivity.puml" width="550" />
+<puml src="diagrams/UnstarActivity.puml" width="600" />
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `unstar 1`
 
-<puml src="diagrams/UnstarSequence.puml" width="550" />
+<puml src="diagrams/UnstarSequence.puml" width="600" />
 
 
 --------------------------------------------------------------------------------------------------------------------
