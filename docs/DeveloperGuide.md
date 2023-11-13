@@ -338,7 +338,7 @@ The following sequence diagram shows how the gather emails by `FinancialPlan` fi
   * **Pros:** Easy to implement. Limits the potential for bugs.
   * **Cons:** Limited filtering options.
 
-* **Alternative 2:** User can search by multiple `FinancialPlan` or `Tag` fields.
+* **Alternative 2:** User can search by multiple `FinancialPlan` and `Tag` fields.
   * **Pros:** More flexible (e.g. gathering by a combination of `FinancialPlan` and `Tag`).
   * **Cons:** Introduces more complexity and requires additional error handling.
 
