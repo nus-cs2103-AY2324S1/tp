@@ -14,13 +14,16 @@ Given below are my contributions to the project.
   * What it does: Allows the user to add comments / remarks to a client to remember special notes related to them
   * Justification: This feature is useful to car insurance agents who have a large client base as they can better personalise their client engagement based on certain characteristics clients have (e.g. "prefers policies with longer coverage")
 
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=cyaoxuan&breakdown=true)
+
+* **Project management**:
+  * Assigned issues to the team and manage milestones in `v1.1` and `v1.4`
+
 * **Enhancements to existing features**:
   * Extended the current `Model` to include more information to model the car insurance context
     * New attributes in `Person` class: NRIC, licence plate, remark, policy
     * New `Policy` class: company, policy number, policy date (encapsulates issue and expiry date)
   * Handled exceptions for `find` command that came from functionality changes to search by other fields
-
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=cyaoxuan&breakdown=true)
 
 * **Documentation**:
   * User Guide:
@@ -33,9 +36,6 @@ Given below are my contributions to the project.
     * Extend glossary
     * Add Appendix: Effort section
     * Checked through format and content
-
-* **Project management**:
-  * Assigned issues to the team and manage milestones in `v1.1` and `v1.4`
 
 * **Community**:
   * PRs reviewed (with non-trivial comments): [\#74](https://github.com/AY2324S1-CS2103T-W16-3/tp/pull/74), [\#77](https://github.com/AY2324S1-CS2103T-W16-3/tp/pull/77)
