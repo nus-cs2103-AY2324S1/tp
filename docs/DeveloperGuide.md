@@ -57,7 +57,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -226,7 +226,7 @@ The following activity diagram summarizes what happen when a user executes a `Up
     * User will need to perform those "in-between" commands again.
 * Alternative 2: Keep track of what the user have done after any `uplevel` command.
   * Pros:
-    * User will not need to perform those "in-between" commands again after doing `undolevel` to undone the sec level update.
+    * User will not need to perform those "in-between" commands again after doing `undolevel` to undo the sec level update.
   * Cons:
     * Less in line with users' expectations of reverting student records state to be before an `uplevel` command.
     * May have conflict between those "in-between" commands and `undolevel` command. E.g., edit a student's sec level and then perform `undolevel`.
@@ -277,7 +277,7 @@ The following activity diagram summarizes what happens when a user executes a `s
 
 The `import` command allows the user to import .csv files containing their students' data in one go so that they do not need to add them one-by-one.
 
-When the user enters a import command, the `AddressBookParser` parses the user's input using `ImportCommandParser` and returns a `ImportCommand`.
+When the user enters an import command, the `AddressBookParser` parses the user's input using `ImportCommandParser` and returns a `ImportCommand`.
 
 The following sequence diagram shows how the `import` command works. In this example, the user is executing the following command: `import student_data.csv`.
 
@@ -300,7 +300,7 @@ The following activity diagram summarizes what happens when a user executes a `i
     * Users would experience less flexibility when using the command (for instance, users need to ensure their column in their .csv files matches the sequence).
 * Alternative 2: Flexible column sequence for data in the imported .csv files.
   * Pros:
-    * Greater flexibility for users when importing students'data.
+    * Greater flexibility for users when importing students' data.
   * Cons:
     * Higher chance in wrong a splitting of students' data.
 * We made the choice of Alternative 1 over Alternative 2 as we found that a fixed format would be easier for users to remember and use in the .csv files.
@@ -315,7 +315,7 @@ When the user enters a table command, the `AddressBookParser` parses the user's 
 
 Note that there is no specifically a TableCommandParser for `TableCommand` just like `ListCommand`, `ExitCommand` and `HelpCommand`. The `AddressBookParser` can parse and return a `TableCommand`directly.
 
-The parameters entered by user expected for a table command are either `g/`, `s/` and `l/`. When the `TableCommand` instance created by `AddressBookParser` executes, it will return the corresponding CommamdResult. E.g. `GenderTableCommandResult` created for the case `table g/` is entered by user. This `XXXTableCommandResult` carries the counts for each category that will be used for generating the table.
+The parameters entered by user expected for a table command are either `g/`, `s/` and `l/`. When the `TableCommand` instance created by `AddressBookParser` executes, it will return the corresponding CommandResult. E.g. `GenderTableCommandResult` created for the case `table g/` is entered by user. This `XXXTableCommandResult` carries the counts for each category that will be used for generating the table.
 
 The following sequence diagram shows how the `table` command works. In this example, the user is executing the following command: `table s/`
 
@@ -336,8 +336,8 @@ The following activity diagram summarizes what happens when a user executes a `t
   * Cons: May not be suitable when we want to create a complex statistical table, e.g. a two-dimensional table.
 
 * **Alternative 2:** Create a CommandParser specifically for TableCommand.
-  * Pros: Provides a good abstraction when we are dealing with two dimensional table.
-  * Cons: May be reduntant when we only want to create one dimensional table and the number of possible category is less.
+  * Pros: Provides a good abstraction when we are dealing with two-dimensional table.
+  * Cons: May be redundant when we only want to create one dimensional table and the number of possible category is less.
 
 * We made the choice of Alternative 1 over Alternative 2 as we found that the table we intend to create so far is one dimensional table and there are only three possible categories, that are , `g/` for gender, `s/` for subject and `l/` for sec-level.
   _{more aspects and alternatives to be added}_
@@ -865,7 +865,7 @@ testers are expected to do more *exploratory* testing.
 ### Importing student data
 
 1. Importing student data.
-  1. Prerequisites: A [sample CSV file]([student_data_test.csv](https://github.com/AY2324S1-CS2103T-W13-2/tp/files/13331810/student_data_test.csv)) has been downloaded into the same folder as Tutorium.
+  1. Prerequisites: A [sample CSV file](https://github.com/AY2324S1-CS2103T-W13-2/tp/files/13331810/student_data_test.csv) has been downloaded into the same folder as Tutorium.
   2. Test case: `import student_data_test.csv`<br>
      Expected: All students in the CSV file are added to the list.
 
