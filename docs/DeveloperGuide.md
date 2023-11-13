@@ -288,13 +288,14 @@ Step 4. The number of people displayed is returned as a `CommandResult`.
 #### Implementation
 The sort function executed by `SortCommand`.
 
-The sort function allows users to sort all persons in UniMate based on a given criteria. The following criterion for sort are shown below
-- Sort by name (optional: in the reverse order)
-- Sort by address (optional: in the reverse order)
-- Sort by email (optional: in the reverse order)
-- Sort by phone (optional: in the reverse order)
+The sort function allows users to sort all persons in UniMate based on a given criteria, and has the following attributes:
 
-The syntax used to call this command is as follows, without the [ ] braces: `sort [/byname][/byaddress][/byemail][byphone] [/reverse]`. Do note that sorting by reverse is optional.
+* `COMPARATOR`  —  AddressBook sorting criteria
+* `reverse`  —  Determines if sorting is by descending order
+
+The syntax used to call this command is as follows: `sort /COMPARATOR [/reverse]`,
+with the `COMPARATOR` being one of `/byname`, `/byemail`, `/byphone`, `/byaddress` to sort by name, email, phone and address respectively. If any of the fields are missing or if the formatting is incorrect, an error message will be thrown along with usage instructions on the correct formatting. The `/reverse` parameter is optional to sort in descending order instead.
+
 
 Given below is an example of how the sort function works at each step. We will simulate a user using the sort function to sort UniMate contacts by name in descending order.
 1. The user executes `sort /byname /reverse` to find his friend's contact. The input is passed into `UniMateParser` which then parses it with the `SortCommandParser`.
@@ -354,9 +355,15 @@ The `addTask` method in the model is called, adding the task to the tasklist, an
 ### Edit Contact Event
 
 #### Implementation
-The Edit Contact Event function executed by `editContactEvent` allows users to edit all person's calendar events in UniMate.
+The Edit Contact Event function executed by `editContactEvent` allows users to edit all person's calendar events in UniMate, and has the following attributes:
 
-The syntax used to call this command is as follows: `editContactEvent PERSON_INDEX EVENT_INDEX [d/DESCRIPTION] [ts/NEW_START_DATE_TIME][te/NEW_END_DATE_TIME]`.
+* `PERSON_INDEX`  —  Index of the target person
+* `EVENT_INDEX`  —  Index of the target person's calendar event
+* `DESCRIPTION`  —  Brief description of the edited `Event`
+* `NEW_START_DATE_TIME`  —  Starting date and time of the edited `Event`
+* `NEW_END_DATE_TIME`  —  End date and time of the edited `Event`
+
+The syntax used to call this command is as follows: `editContactEvent PERSON_INDEX EVENT_INDEX [d/DESCRIPTION] [ts/NEW_START_DATE_TIME][te/NEW_END_DATE_TIME]`, with the `START_DATE_TIME` and `END_DATE_TIME` in the `yyyy-MM-dd HH:mm` format. If any of the fields are missing or if the formatting is incorrect, an error message will be thrown along with usage instructions on the correct formatting.
 
 Given below is an example of how the editContactEvent function works at each step. We will simulate a user using the editContactEvent function to sort UniMate contacts by name in descending order.
 1. The user executes `editContactEvent 1 1 d/CS2103 meeting ts/2023-11-11 10:00 te/2023-11-11 12:00` to reschedule the meeting with his CS2103 module group mate. The input is passed into `UniMateParser` which then parses it with the `EditContactEventCommandParser`.
