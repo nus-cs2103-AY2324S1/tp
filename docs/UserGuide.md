@@ -8,9 +8,6 @@
 
 --------------------------------------------------------------------------------------------------------------------
 
-<!-- * Table of Contents -->
-<page-nav-print />
-
 ## Table of Contents
 * [Product Overview](#product-overview)
 * [Key Definitions](#key-definitions)
