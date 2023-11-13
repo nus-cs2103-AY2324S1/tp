@@ -8,11 +8,16 @@ It is designed to be an easy-to-use, one-stop platform for all your scheduling n
 
 In this user guide, you will learn the basics of our application and how you can use it to manage your tasks and interpersonal relationships.
 
+<div style="page-break-after: always;"></div>
+
 # Table of Contents
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 # Who is this guide for?
 Our guide is made for FumbleLog users of all experiences! Refer to the table below to find out which section of the guide is most relevant to you.
 
@@ -21,6 +26,7 @@ Our guide is made for FumbleLog users of all experiences! Refer to the table bel
 |  New to FumbleLog   |            Read the [Quick Start](#quick-start) section to get started. After setting up, you can go through a step-by-step [Tutorial](#fumblelog-tutorial) of our application.            |
 | An experienced user | Skip to the [Commands Summary](#command-summary) section for a quick overview of all the commands, or have a look at our [Features](#features) for a detailed look at each of our features |
 
+<div style="page-break-after: always;"></div>
 
 # Quick start
 
@@ -39,6 +45,8 @@ Our guide is made for FumbleLog users of all experiences! Refer to the table bel
 - Choose a folder on your computer where you want to store you FumbleLog application, or create a new folder.
 - Copy the `fumblelog.jar` file into the folder you have chosen or created.
 
+<div style="page-break-after: always;"></div>
+
 **4. Launch the application.**
 - In your command terminal, use the `cd` command to navigate to the folder where you have placed the `fumblelog.jar` file.
 - Run the application using the command: `java -jar fumblelog.jar`. You should now be able to see the FumbleLog user interface!
@@ -56,6 +64,8 @@ Our guide is made for FumbleLog users of all experiences! Refer to the table bel
    * `delete_person 3` : Deletes the 3rd person shown in the current persons list.
    * `exit` : Exits FumbleLog application.
 
+<div style="page-break-after: always;"></div>
+
 **6. Learn more about FumbleLog**
 - Refer to [Orientation to the Graphical User Interface](#orientation-to-the-graphical-user-interface-gui) below for an orientation on FumbleLog.
 - Refer to [FumbleLog Tutorial](#fumblelog-tutorial) for a more extensive guide on how to use FumbleLog.
@@ -65,6 +75,9 @@ Our guide is made for FumbleLog users of all experiences! Refer to the table bel
 [Scroll back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 # Orientation to the Graphical User-Interface (GUI)
 ![User Interface](images/userInterfaceTutorial.png)
 
@@ -94,13 +107,14 @@ This is illustrated as follows:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
 
 # FumbleLog Tutorial
 This tutorial is designed for new users looking to get started using FumbleLog. In this tutorial, you will find step-by-step instructions on how to use commands in FumbleLog to help you manage
 your contacts and events.
 
 1. First launch FumbleLog. You may refer to the [Quick Start](#quick-start) guide if you have forgotten how to.
-2. Lets first try **adding a person**, `Mary Lee`, to your contact list. Enter the command: `add_person n/Mary Lee p/91234567 e/mary@gmail.com a/Mary Street #01-01 b/2001-12-12 g/Family`. You should see FumbleLog successfully adding the contact to the contact list:
+2. Let's first try **adding a person**, `Mary Lee`, to your contact list. Enter the command: `add_person n/Mary Lee p/91234567 e/mary@gmail.com a/Mary Street #01-01 b/2001-12-12 g/Family`. You should see FumbleLog successfully adding the contact to the contact list:
 ![Tutorial Add](images/tutorialAdd.png)
 3. Now, lets try **editing the name and email** of your contact. Let's use the index of `Mary Lee` shown in the list (in this case 1), and edit her information: `edit_person 1 n/John Doe e/John@gmail.com`. FumbleLog should reflect the changes to your contact immediately:
 ![Tutorial Edit](images/tutorialEdit.png)
@@ -117,7 +131,7 @@ your contacts and events.
 
 
 --------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always;"></div>
 
 # Features
 
@@ -148,6 +162,8 @@ your contacts and events.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing help : `help`
 
 Shows a pop-up window with a link to the user guide for help.
@@ -158,6 +174,8 @@ Format: `help`
 ![Helptab](images/Helptab.png)
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ## Commands for Persons
 
@@ -178,6 +196,8 @@ Format: `add_person n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [
 | `BIRTHDAY`     | Should be in format `yyyy-MM-dd` and should not be later than current date.                           | `2001-12-30 `                    |
 | `REMARK`       | Use any characters including whitespaces.                                                             | `Owes me $2.`                    |
 | `GROUP`        | Use `a-z`, `A-Z`, `0-9` only and **must not** contain any whitespaces.                                | `CS2103T`                        |
+
+<div style="page-break-after: always;"></div>
 
 **Below are some examples on how to use the `add_person` command:**
 
@@ -203,6 +223,7 @@ Format: `add_person n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ### Editing a person : `edit_person`
 
@@ -223,6 +244,7 @@ Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BI
 | `REMARK`      | Use any characters including whitespaces.                                                                        | `Owes me $2.`                    |
 | `GROUP`       | Use `a-z`, `A-Z`, `0-9` only and must not contain any whitespaces.                                               | `CS2103T`                        |
 
+<div style="page-break-after: always;"></div>
 
 **Below are some examples on how to use the `edit_person` command:**
 
@@ -242,9 +264,13 @@ Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BI
 
 </div>
 
+
 **Expected output when the command succeeds:**
 * Input: `edit_person 1 n/Alexa Yeoh` changes the name of the 1st person to be `Alexa Yeoh`, leaving the rest of the fields unchanged.
   ![Editperson](images/Editperson.png)
+
+<div style="page-break-after: always;"></div>
+
 
 <div markdown="block" class="alert alert-warning">
 
@@ -261,6 +287,8 @@ Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BI
 
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a person : `delete_person`
 
@@ -295,6 +323,7 @@ Input: `delete_person 1` deletes the first person on the list.
 ![DeletePerson](images/DeletePerson.png)
 
 [Scroll back to Table of Contents](#table-of-contents)
+<div style="page-break-after: always;"></div>
 
 ### Locating persons by name or group: `find_person`
 
@@ -332,6 +361,9 @@ Input: `find_person Alexa` displays all contacts with the name `Alexa` in the co
 ![result for 'find_person alex david'](images/findFriendsResult.png)
 
 
+<div style="page-break-after: always;"></div>
+
+
 <div markdown="block" class="alert alert-warning">
 
 **:exclamation: Disclaimer when using the `find_person` command:**<br>
@@ -342,6 +374,8 @@ Input: `find_person Alexa` displays all contacts with the name `Alexa` in the co
 
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Listing all persons : `list_persons`
 
@@ -360,6 +394,8 @@ Format: `list_persons`
 </div>
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ## Commands for Events
 
@@ -380,7 +416,7 @@ Format: `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAM
 | `PERSON_NAME`               | Multiple persons can be assigned to an event but only existing persons name can be added. | `John Doe`        |
 | `GROUP`                     | Multiple groups can be assigned to an event but only existing groups can be added.        | `CS2103T`         |
 
-
+<div style="page-break-after: always;"></div>
 
 **Below are some examples on how to use `add_event` command:**
 
@@ -402,6 +438,7 @@ This is illustrated as follows:
   ![Person appearing multiple times](images/DuplicatePersonInDifferentGroups.png)
 
 </div>
+<div style="page-break-after: always;"></div>
 
 
 **This should be the expected output when the command succeeds:**
@@ -411,6 +448,8 @@ Input: `add_event m/CS2103T meeting d/2023-10-27 s/1400 e/1600`
 
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Editing an event : `edit_event`
 
@@ -430,7 +469,7 @@ Format: `edit_event EVENT_INDEX [m/EVENT_NAME] [d/DATE] [s/START_TIME] [e/END_TI
 | `PERSON_NAME`               | Multiple persons can be assigned to an event but only existing persons name can be added. | `John Doe`        |
 | `GROUP`                     | Multiple groups can be assigned to an event but only existing groups can be added.        | `CS2103T`         |
 
-
+<div style="page-break-after: always;"></div>
 
 **Below are some examples on how to use `edit_event` command:**
 
@@ -458,6 +497,9 @@ Input: `edit_event 1 m/tP week 3 meeting d/2023-10-30`
 ![Eventedit](images/Eventedit.png)
 
 
+<div style="page-break-after: always;"></div>
+
+
 <div markdown="block" class="alert alert-warning">
 
 **:exclamation: Disclaimer: Editing a person with a filtered contacts list might cause the person to disappear. Do not worry, your data is not deleted.**<br>
@@ -471,6 +513,8 @@ Input: `edit_event 1 m/tP week 3 meeting d/2023-10-30`
 </div>
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting an event : `delete_event`
 
@@ -501,6 +545,8 @@ Format: `delete_event EVENT_INDEX`
 ![EventDelete](images/Eventdelete.png)
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Locating events by name, group or person: `find_event`
 
@@ -533,12 +579,16 @@ Format: `find_event KEYWORD [MORE_KEYWORDS]`
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 **This should be the expected output when the command succeeds:**<br>
 Input: `find_event meeting family`
 
 ![EventFind](images/Eventfind.png)
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Listing all events: `list_events`
 
@@ -560,6 +610,7 @@ Format: `list_events`
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ## General commands
 
@@ -590,6 +641,7 @@ Format: `remind [NUM_OF_DAYS]`
 
 </div>
 
+<div style="page-break-after: always;"></div>
 
 **Expected output when the command succeeds:**<br>
 Input: `remind`
@@ -597,6 +649,8 @@ Input: `remind`
 ![Remind](images/Remind.png)
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Finding persons and events: `find_all`
 
@@ -627,6 +681,7 @@ Format: `find_all KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 </div>
+<div style="page-break-after: always;"></div>
 
 **Expected output when the command succeeds:**<br>
 Input: `find_all friends`
@@ -634,6 +689,8 @@ Input: `find_all friends`
 ![Findall](images/Findall.png)
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Listing all persons and events: `list_all`
 
@@ -655,6 +712,8 @@ Format: `list_all`
 
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Clearing all entries : `clear`
 
@@ -689,6 +748,8 @@ Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 # How we manage your data
 
 ### Saving the data
@@ -707,14 +768,16 @@ If your changes to the data file makes its format invalid, FumbleLog will discar
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 # FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FumbleLog home folder.
-
-**Q**: How do I access the data file?<br>
-**A**: The data file is located at `[JAR file location]/data/addressbook.json`. You can edit it using any text editor.
-
+**A**: 
+  Step 1: Install the app in the other computer
+  Step 2: Go to your previous computer and obtain your old data file. You can find it at `[JAR file location]/data/addressbook.json`. 
+  Step 3: Copy the file from step 2 and move it to the data folder in your new computer, by replacing the new empty data file.
+  Your data is now all restored!
 **Q**: What are the constraints for email addresses?<br>
 **A**: Emails should be of the format `local-part@domain` and adhere to the following constraints:
   1. The local-part should only contain alphanumeric characters and these special characters (like '+' and '_'). 
@@ -729,6 +792,8 @@ The domain name must:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 # Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
@@ -736,6 +801,8 @@ The domain name must:
 [Scroll back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 # Command summary
 
@@ -749,6 +816,7 @@ The domain name must:
 | **Find Person**   | `find_person KEYWORD [MORE_KEYWORDS]`                                                             | `find_person James Jake`                                                                                  |
 | **List Persons**  | `list_persons`                                                                                    |                                                                                                           |
 
+<div style="page-break-after: always;"></div>
 
 ### Commands for Events
 
@@ -760,6 +828,7 @@ The domain name must:
 | **Find Event**   | `find_event KEYWORD [MORE_KEYWORDS]`                                                                                                      | `find_event meeting`                                                                   |
 | **List Events**  | `list_events`                                                                                                                             |                                                                                        |
 
+<div style="page-break-after: always;"></div>
 
 ### General commands
 
