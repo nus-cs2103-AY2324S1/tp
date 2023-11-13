@@ -171,7 +171,7 @@ Please refer to the [above](#editing-a-contact-edit).
 - You can delete multiple contacts at once by specifying multiple indices separated by spaces.
 
 - Duplicate indices are only counted once.\
-e.g. `delete 1 1` will only delete the contact at index #`1`.
+e.g. `delete 1 1` will only delete the contact at index #1.
 - Invalid indices will cause abortion of the delete command.
 
 
@@ -280,7 +280,7 @@ Your contacts get automatically saved to the file system after each successful c
 ConText data are saved automatically as a JSON file `[JAR file location]/data/contacts.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, ConText will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file make its format invalid, ConText will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
 ---
