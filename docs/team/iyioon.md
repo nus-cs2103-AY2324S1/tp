@@ -7,9 +7,9 @@ title: Moon Ji Hoon Project Portfolio Page
 ### Project: CheckMate
 
 
-CheckMate is designed to streamline the process of room bookings for hotel employees. With a Graphical User Interface (GUI) that provides the necessary information needed at a glance, and the application
+CheckMate is designed to streamline the process of room bookings by hotel employees. With a Graphical User Interface (GUI) that provides the necessary information needed at a glance, and the application
 being optimised for use via a Command Line Interface (CLI), we have combined elegance and efficiency when it comes to
-the process of room booking for hotel receptionists.
+the process of room booking by hotel receptionists.
 
 Given below are my contributions to the project.
 
@@ -23,6 +23,8 @@ Given below are my contributions to the project.
 
 * **Project management**:
   * Managed release `v1.2`
+  * Created and assigned some issues to teammates.
+  * Created tasks for each iteration.
 
 * **Enhancements to existing features**:
   * Provided initial skeleton consisting of booking and room model (Pull request [#99](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/99))

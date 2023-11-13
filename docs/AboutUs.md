@@ -13,7 +13,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/aryang01.png" width="200px">
 
-[[homepage](https://ay2324s1-cs2103t-f10-1.github.io/tp)]
 [[github](https://github.com/AryanG01)]
 [[portfolio](team/aryang01.md)]
 

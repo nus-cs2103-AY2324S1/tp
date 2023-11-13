@@ -175,7 +175,7 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both booking book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `BookingBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -578,8 +578,8 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Have an empty `Current Bookings` list.
    2. Test case: `add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432` <br>
       Expected: No booking is added. Error message shown is `Invalid command format!
-      add: Adds a person to the address book. Parameters: r/ROOM d/BOOKING PERIOD n/NAME p/PHONE e/EMAIL rm/REMARK
-      Example: add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@gmail.com rm/Requested extra Queen's size bed`
+      add: Adds a person to the booking book. Parameters: r/ROOM d/BOOKING PERIOD n/NAME p/PHONE e/EMAIL rk/REMARK
+      Example: add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@gmail.com rk/Requested extra Queen's size bed`
 
 3. Adding a booking where there are invalid fields.
    1. Prerequisites: Have an empty `Current Bookings` list.
@@ -663,10 +663,6 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Effort**
 
-<div markdown="span" class="alert alert-info">
-
-</div>
-
 ### Difficulty Level
 * Medium
 * Reason: Compared to AB3 which has one homogenous entity of Persons, CheckMate deals with 2 heterogenous entities of 
@@ -704,10 +700,6 @@ continue to expand upon to allow maximum creativity of the skeletons provided.
 <div markdown="1">
 
 ## **Appendix: Planned Enhancements**
-
-<div markdown="span" class="alert alert-info">
-
-</div>
 
 ### Universal Undo
 * This is an enhancement to the current undo function, which currently only undoes the most recent delete command.

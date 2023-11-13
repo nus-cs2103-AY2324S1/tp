@@ -5,10 +5,10 @@
 **CheckMate is a desktop application for streamlining the process of booking rooms for hotel employees.**
 With a Graphical User Interface (GUI) that provides the necessary information needed at a glance, and the application
 being optimised for use via a Command Line Interface (CLI), we have combined elegance and efficiency when it comes to
-the process of room booking for hotel receptionists.
+the process of room booking by hotel receptionists.
 
-* If you are interested in using CheckMate, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about making extensions to CheckMate, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+* If you are interested in using CheckMate, head over to the [_Quick Start_ section of the **User Guide**](https://ay2324s1-cs2103t-f10-1.github.io/tp/UserGuide.html#quick-start).
+* If you are interested about making extensions to CheckMate, the [**Developer Guide**](https://ay2324s1-cs2103t-f10-1.github.io/tp/DeveloperGuide.html) is a good place to start.
 
 
 **Acknowledgements**

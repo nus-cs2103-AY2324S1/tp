@@ -5,9 +5,9 @@ title: Mark Garcera's Project Portfolio Page
 
 ### Project: CheckMate
 
-CheckMate is designed to streamline the process of room bookings for hotel employees. With a Graphical User Interface (GUI) that provides the necessary information needed at a glance, and the application
+CheckMate is designed to streamline the process of room bookings by hotel employees. With a Graphical User Interface (GUI) that provides the necessary information needed at a glance, and the application
 being optimised for use via a Command Line Interface (CLI), we have combined elegance and efficiency when it comes to
-the process of room booking for hotel receptionists.
+the process of room booking by hotel receptionists.
 
 Given below are my contributions to the project.
 
@@ -27,12 +27,10 @@ Given below are my contributions to the project.
 * **Code contributed**: 
   * [Reposense Link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=markgcera&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
 
-
 * **Project management**: 
   * Created the UI Mockup at the start of the project to give the team direction in what we want our first iteration to look like (Pull request [#78](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/78/files)).
   * Provided tasks done and possible next tasks to be done via the team's group chat as well as in PRs eg: (Pull request [#100](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/100))
   * Created and assigned some issues to teammates.
-
 
 * **Enhancements to existing features**:
   * Created the initial skeleton for CheckMate which included: (Pull request [#100](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/100))
@@ -42,7 +40,6 @@ Given below are my contributions to the project.
   * Created the BookingPeriod class based on the initial skeleton provided by Ji Hoon (Pull request [#123](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/123))
   * Created the User Interface (UI) Overhaul which is the foundation of our application's current UI (Pull request [#166](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/166)).
   * Abstracted out the Command Parse Exceptions into their own package for OOP purposes (Pull request [#250](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/250))
-
 
 * **Documentation**:
   * User Guide:
