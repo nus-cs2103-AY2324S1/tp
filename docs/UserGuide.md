@@ -811,7 +811,7 @@ Please do not use negative integers, non-integers and extremely large integers(i
 **Possible Error Output:**
 
 * If the index is not within the numbers in the list, the app should display `The employee index provided is invalid.`
-* If the command is incorrect, the app should display `Invalid command format!`
+* If the command is incorrect, the app should display the following message.
   <br>![result for incorrect command](images/incorrectAttendanceCommand.png)
 
 * Go back to [Table of Contents](#table-of-contents)
@@ -921,13 +921,13 @@ If your changes to the data file makes its format invalid, ManaGease will not ru
 
 ## Glossary
 
-| Term                                                                | Description                                                                                        |
-|------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Benefit**                                     | Benefit are additional financial rewards provided to employees.  |
-| **Deduction**                                   | Deductions refer to the removal of a specified amount from an employee's salary. |
-| **Payslip**                                     | An itemised payslip generated based on payroll in pdf format. The template payslip is retrieved from Ministry of Manpower (MOM) website|
-| **Payroll**                                     | A report that show the net salary, basic pay, total deductions and total benefits in the result box.   |
-| **Attendace report**                            | A report that show the number of days on leave, absent and late for an employee in the result box.   |
+| Term                  | Description                                                                                        |
+|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Benefit**           | Benefit are additional financial rewards provided to employees.  |
+| **Deduction**         | Deductions refer to the removal of a specified amount from an employee's salary. |
+| **Payslip**           | An itemised payslip generated based on payroll in pdf format. The template payslip is retrieved from Ministry of Manpower (MOM) website|
+| **Payroll**           | A report that show the net salary, basic pay, total deductions and total benefits in the result box.   |
+| **Attendance report** | A report that show the number of days on leave, absent and late for an employee in the result box.   |
 
 <div style="page-break-after: always;"></div>
 
