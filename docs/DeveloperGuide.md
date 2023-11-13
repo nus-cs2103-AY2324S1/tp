@@ -534,10 +534,10 @@ The user can then confirm whether they would like the phone number to go through
 1. Currently, special characters such as `@` are not allowed in AlternateContact, even though they could conceivably be part of a contact's alternate email.
 We plan to allow for special characters to be included in AlternateContact.
 
-1. Currently, duplicate values for deletion indices as well as parameters like `t/` get silently merged.
+1. Currently, duplicate values for deletion indices, as well as parameters like `t/` and `a/`, get silently merged.
 This is not outright rejected for the convenience of users.
 However, users may have accidentally entered such duplicate values, which may result in the app's behaviour differing from users' expectations.
-We plan to display additional warning messages for commands like `add`, `edit`, and `delete`, to warn users of any such duplicate values that were entered.
+We plan to display additional warning messages for commands like `add`, `edit`, and `delete`, so that users may check if their specifying of duplicate values is intentional.
 Users may then press enter again to confirm the command's execution, or edit the command.
 
 1. Currently, if no note (i.e. no `o/` parameter) is specified when adding a contact, the note's value defaults to being empty (`""`).
@@ -545,4 +545,4 @@ The UI accounts for empty notes by not taking up an extra line to display the em
 When users do specify a note, they may explicitly specify an empty note (i.e. `o/` with no value).
 This is not outright rejected for the convenience of users, since empty notes are allowed.
 However, users may have forgotten to specify a value for the note, which may result in the app's behaviour differing from users' expectations.
-We plan to display an additional warning message for commands like `add`, so that users may check if their specifying of an empty note is intentional.
+We plan to display an additional warning message for commands like `add`, so that users may check if their specifying of empty notes is intentional.
