@@ -212,7 +212,7 @@ Here is an example command where we edit the member at **index** 1, changing the
 
 <hr class="command-separator">
 
-#### Delete a Member : `deleteMember`
+#### Delete a Member: `deleteMember`
 
 If a member leaves your CCA, get over the disappointment by swiftly removing them from CCACommander using the `deleteMember` command!
 
@@ -235,7 +235,7 @@ Here is an example command where we delete the member at **index** 1:
 
 As a CCA head, keeping track of event details is a major responsibility. CCACommander allows you to do so with the event-related commands below:
 
-#### Create an Event : `createEvent`
+#### Create an Event: `createEvent`
 
 Creating a new event is no longer a hassle as it can be done with just one simple command - `createEvent`!
 
@@ -257,7 +257,7 @@ Here is an example command where we create an event **named** "Party" held at th
 
 <div style="page-break-after: always;"></div>
 
-#### Edit an Event : `editEvent`
+#### Edit an Event: `editEvent`
 
 If you forget to note any important details, or realise that you made a mistake in any field of the event created,
 the `editEvent` command is here to help!
@@ -350,7 +350,7 @@ Here is an example command where we unenrol the member at **member index** 1 fro
 In CCACommander, you can quickly change the view to fit your current use case, be it to check for the enrolment of an event, 
 searching for a member and more!
 
-#### View Events of Member : `viewMember`
+#### View Events of Member: `viewMember`
 
 If you want to view the events in which a particular member is enrolled to, you can do so via the `viewMember` command.
 
@@ -375,7 +375,7 @@ Here is an example command where we want to view the events in which the **membe
 
 <hr class="command-separator">
 
-#### View Members of Event : `viewEvent`
+#### View Members of Event: `viewEvent`
 
 If you want to view the members which a particular event has, you can do so via the `viewEvent` command.
 
@@ -400,7 +400,7 @@ Here is an example command where we want to view the members that the **event** 
 
 <hr class="command-separator">
 
-#### Find Member in member list : `findMember`
+#### Find Member in member list: `findMember`
 
 If your CCA contains many members and you don’t want to scroll past tens or hundreds of members, you can use the 
 `findMember` command to instantly filter a list of members with a matching name.
@@ -416,7 +416,7 @@ Here is an example command where we find all members with the names of "Anthony"
 
 <hr class="command-separator">
 
-#### Find Event in event list : `findEvent`
+#### Find Event in event list: `findEvent`
 
 Similar to `findMember`, `findEvent` allows you to instantly find your event among your multiple events.
 
@@ -440,7 +440,7 @@ This is applicable for both members and events!
 
 <hr class="command-separator">
 
-#### List all Members and all Events : `list`
+#### List all Members and all Events: `list`
 If you’re in the event / member view, you can always use the `list` command to return to the default view with all members and events.
 
 Here’s how you use it: `list`
@@ -574,25 +574,25 @@ This glossary provides definitions for the special terms used in this user guide
 
 Action | Format, Examples
 --------|------------------
-[**Create a Member**](#create-a-member) | `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` <br> e.g. `createMember n/Lim Jun Jie g/Male p/83498018 e/limjunjie@gmail.com a/19 Kent Ridge Crescent, Singapore 119278 t/publicity`
-**Edit a Member** | `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` <br> e.g.`editMember 1 p/91234567 e/johndoe@example.com`
-**Delete a Member** | `deleteMember MEMBER_INDEX` <br> e.g.`deleteMember 1`
-**Create an Event** | `createEvent n/EVENT_NAME [l/LOCATION] [d/DATE] [t/TAG]...` <br> e.g.`createEvent n/Party l/Raffles Hall d/2023-09-16 t/Dinner t/Sem1`
-**Edit an Event** | `editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]...` <br> e.g. `editEvent 1 l/MBS d/2023-10-20`
-**Delete an Event** | `deleteEvent EVENT_INDEX` <br> e.g.`deleteEvent 1`
-**Enrol a Member to an Event** | `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g.`enrol m/1 e/1 h/2 r/Role: Photographer`
-**Edit an Enrolment** | `editEnrolment m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g. `editEnroment m/1 e/2 h/5 r/Role: Exco`
-**Unenrol Member from an Event** | `unenrol m/MEMBER_INDEX e/EVENT_INDEX` <br> e.g.`unenrol m/1 e/1`
-**View Events of Member** | `viewMember MEMBER_INDEX` <br> e.g.`viewMember 3`
-**View Members of Event** | `viewEvent EVENT_INDEX` <br> e.g.`viewEvent 1`
-**Find Member in member list** | `findMember MEMBER_NAME [MORE_NAMES]...` <br> e.g.`findMember anthony nicholas`
-**Find Event in event list** | `findEvent EVENT_NAME [MORE_NAMES]...` <br> e.g.`findEvent party`
-**List all Members and all Events** | `list`
-**Undo** | `undo`
-**Redo** | `redo`
-**Clear all Members and Events** | `clear`
-**Help** | `help`
-**Exit** | `exit`
+[**Create a Member**](#create-a-member-createmember) | `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` <br> e.g. `createMember n/Lim Jun Jie g/Male p/83498018 e/limjunjie@gmail.com a/19 Kent Ridge Crescent, Singapore 119278 t/publicity`
+[**Edit a Member**](#edit-a-member-editmember) | `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` <br> e.g.`editMember 1 p/91234567 e/johndoe@example.com`
+[**Delete a Member**](#delete-a-member-deletemember) | `deleteMember MEMBER_INDEX` <br> e.g.`deleteMember 1`
+[**Create an Event**](#create-an-event-createevent) | `createEvent n/EVENT_NAME [l/LOCATION] [d/DATE] [t/TAG]...` <br> e.g.`createEvent n/Party l/Raffles Hall d/2023-09-16 t/Dinner t/Sem1`
+[**Edit an Event**](#edit-an-event-editevent) | `editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]...` <br> e.g. `editEvent 1 l/MBS d/2023-10-20`
+[**Delete an Event**](#delete-an-event-deleteevent) | `deleteEvent EVENT_INDEX` <br> e.g.`deleteEvent 1`
+[**Enrol a Member to an Event**](#enrol-a-member-to-an-event-enrol) | `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g.`enrol m/1 e/1 h/2 r/Role: Photographer`
+[**Edit an Enrolment**](#edit-an-enrolment-editenrolment) | `editEnrolment m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g. `editEnroment m/1 e/2 h/5 r/Role: Exco`
+[**Unenrol Member from an Event**](#unenrol-a-member-from-an-event-unenrol) | `unenrol m/MEMBER_INDEX e/EVENT_INDEX` <br> e.g.`unenrol m/1 e/1`
+[**View Events of Member**](#view-events-of-member-viewmember) | `viewMember MEMBER_INDEX` <br> e.g.`viewMember 3`
+[**View Members of Event**](#view-members-of-event-viewevent) | `viewEvent EVENT_INDEX` <br> e.g.`viewEvent 1`
+[**Find Member in member list**](#find-member-in-member-list-findmember) | `findMember MEMBER_NAME [MORE_NAMES]...` <br> e.g.`findMember anthony nicholas`
+[**Find Event in event list**](#find-event-in-event-list-findevent) | `findEvent EVENT_NAME [MORE_NAMES]...` <br> e.g.`findEvent party`
+[**List all Members and all Events**](#list-all-members-and-all-events-list) | `list`
+[**Undo**](#undoing-a-command-undo) | `undo`
+[**Redo**](#redoing-a-command-redo) | `redo`
+[**Clear all Members and Events**](#clear-all-members-and-events-clear) | `clear`
+[**Help**](#help-help) | `help`
+[**Exit**](#exit-exit) | `exit`
 
 <div style="page-break-after: always;"></div>
 ## List of Acceptable Values
