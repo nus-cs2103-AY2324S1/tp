@@ -142,7 +142,7 @@ Examples:
 * `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Pediatrician`
 * `add-doctor n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon`
 
-<div mgarkdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 
 **:information_source: Common Errors:**<br>
 1. Invalid Command Format <br>
