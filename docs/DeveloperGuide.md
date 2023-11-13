@@ -650,9 +650,100 @@ The other commands `stats current` and `stats housing` have a similar execution 
     * Pros: The resulting statistic corresponds to the whole address book, which may cause less confusion for the user.
     * Cons: Less flexibility for the user.
 
---------------------------------------------------------------------------------------------------------------------
+
+### Undo feature
+
+#### Implementation
+
+The undo feature allows users to revert the last executed command in the address book. This feature is facilitated by the `UndoCommand`, `AddressBookParser`, and `LogicManager` classes. The undo feature is implemented using the following components and operations:
+
+* `UndoCommand` — The core component responsible for executing the undo operation in the address book.
+* `AddressBookParser` — Handles the parsing of the user's undo command.
+* `LogicManager` — Represents the application's data and business logic, including the functionality to undo the last command.
+
+Given below is an example usage scenario and how the undo mechanism behaves at each step. The sequence diagram illustrates the interactions inside the Logic component for the undo command.
+
+![Interactions Inside the Logic Component for the UndoCommand](images/UndoSequenceDiagram.png)
+
+Step 1. The user launches the application for the first time. The `backupModel` will be initialized with the initial address book state.
+
+Step 2. The user executes a command. The `LogicManager` checks if the command is an instance of the `undo` command.
+
+Step 3. If the command is an instance of the `add`, `delete`, `edit`, `sort` or a successful execution of the `reset` command, the `backupmodel` data will be replaced with a copy of the current model data before the execution of the entered command.
+
+Step 4. If the command is an instance of the `undo` command and the current model data is not the same as the data from the `backupModel`, the current model data will be replaced with the data from the `backupModel`. Else an error message will be displayed.
+
+Step 5. A success message is displayed to the user to confirm that the last command has been undone.
+
+The following activity diagram summarizes what happens when a user executes an undo command:
+
+![Undo Command Activity Diagram](images/UndoActivityDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, no backup of the model will be mode, so the address book state will not be saved into the `addressBookStateList`.
+
+</div>
+
+
+
+#### Design considerations:
+
+**Aspect: How undo executes:**
+
+* **Alternative 1 (current choice):** Saves a backup of the entire address book.
+  * Pros: Easy to implement and not too memory intensive.
+  * Cons: Can only save one previous instance of the address book.
+
+* **Alternative 2:** Individual commands knows how to undo by itself.
+  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Cons: We must ensure that the implementation of each individual command are correct.
+
+* **Alternative 3:** Saves multiple backups of the entire address book.
+  * Pros: Easy to implement.
+  * Cons: Memory intensive and may have performance issues in terms of memory usage.
+
+### Reset feature
+
+#### Implementation
+
+The reset feature allows users to erase the contents of the address book. This feature is facilitated by the `ClearCommand`, `ClearCommandParser`, `AddressBookParser`, and `LogicManager` classes. The undo feature is implemented using the following components and operations:
+
+* `ClearCommand` — The core component responsible for erasing the entire address book.
+* `ClearCommandParser` — Handles the parsing of the arguments for the reset command.
+* `AddressBookParser` — Handles the parsing of the user's reset command.
+* `LogicManager` — Represents the application's data and business logic, including the functionality to check if the user has properly gone through the appropriate steps to execute a successful address book reset.
+
+Given below is an example usage scenario and how the reset mechanism behaves at each step. The sequence diagram illustrates the interactions inside the Logic component for the first execution of the reset command.
+
+Step 1. The user enters the `reset` command. And is given a warning of the functionality of the `reset` command and is prompted to enter `reset confirm` to continue executing the command.
+
+![Interactions Inside the Logic Component for the ClearCommand](images/ResetSequenceDiagram.png)
+
+Step 2. The user enters the `reset confirm` command.
+
+![Interactions Inside the Logic Component for the ClearConfirmCommand](images/ResetConfirmSequenceDiagram.png)
+
+Step 3. A success message is displayed to the user to confirm that the entire address book has been erased.
+
+
+The following activity diagram summarizes what happens when a user executes a reset command:
+
+![Reset Command Activity Diagram](images/ResetActivityDiagram.png)
+
+
+#### Design considerations:
+
+**Aspect: How reset prompts confirmation:**
+
+* **Alternative 1 (current choice):** Require a `reset` command followed by `reset confirm`.
+  * Pros: Intuitive and prevents accidental resets.
+  * Cons: Troublesome to execute.
+
+* **Alternative 2:** Make `reset` throw an error and have `reset confirm` be the actual command.
+  * Pros: Easy to implement.
+  * Cons: Accidental resets can still happen.
 
 <div style="page-break-after: always;"></div>
+
 
 ## **Planned Enhancements**
 

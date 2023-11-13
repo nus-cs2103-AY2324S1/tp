@@ -110,7 +110,7 @@ This is the profile view that you can use to add a fosterer or edit the details 
 #### Opening the profile page
 There are two ways you can use to navigate to the profile page. 
 1. Enter <code>add</code> to view an _empty_ profile page to [add](#adding-a-fosterer-through-the-profile-page-add) a fosterer.
-2. Enter either <code>edit INDEX</code> or <code>view INDEX</code> to [edit](#editing-a-fosterers-details-through-the-profile-page--edit) or [view](#viewing-a-fosterers-detail-view) the fosterer at index <code>INDEX</code> in Foster Family.
+2. Enter either <code>edit INDEX</code> or <code>view INDEX</code> to [edit](#editing-a-fosterers-details-through-the-profile-page-edit) or [view](#viewing-a-fosterers-detail-view) the fosterer at index <code>INDEX</code> in Foster Family.
 
 <div style="page-break-after: always;"></div>
 
@@ -237,7 +237,7 @@ If you press the Esc key, the exit is cancelled and you can continue working on 
 The example above is the result of pressing the Esc key after you are warned.
 
 To learn more about **adding a new fosterer through the profile page**, refer to the section [Adding a fosterer through the profile page: add](#adding-a-fosterer-through-the-profile-page-add). <br>
-To learn more about **editing a fosterer through the profile page**, refer to the section [Editing a fosterer's detail through the profile page: edit](#editing-a-fosterers-details-through-the-profile-page--edit).
+To learn more about **editing a fosterer through the profile page**, refer to the section [Editing a fosterer's detail through the profile page: edit](#editing-a-fosterers-details-through-the-profile-page-edit).
 
 <br>
 
@@ -429,8 +429,6 @@ e.g. `a & b / c d` is the same as `a & (b / (c & d))`.
 
 </div>
 
-<div style="page-break-after: always;"></div>
-
 Examples:
 * `list`
     * lists all fosterers in the address book.
@@ -505,7 +503,7 @@ Format: `save`
 **:information_source: Notes about the command:**<br>
 
 *  Entering <code>save</code> in [the profile of a new fosterer](#adding-a-fosterer-through-the-profile-page-add) saves the new fosterer and exits the profile page.
-*  Entering <code>save</code> in [the profile of an already existing fosterer](#editing-a-fosterers-details-through-the-profile-page--edit) saves the changes but does not exit the profile page, in case you want to edit more details. 
+*  Entering <code>save</code> in [the profile of an already existing fosterer](#editing-a-fosterers-details-through-the-profile-page-edit) saves the changes but does not exit the profile page, in case you want to edit more details. 
 </div>
 
 <div style="page-break-after: always;"></div>
@@ -897,7 +895,7 @@ Examples:
 
 ### Undoing the previous command : `undo`
 
-Undoes your previous command, given that the previous command successfully executed is either `add`, `delete`, `edit`, or `sort`.
+Undoes your previous command, given that the previous command successfully executed is either `add`, `delete`, `edit`, `sort` or a successful execution of the `reset` command.
 
 
 Format: `undo`
@@ -933,7 +931,14 @@ Format: `reset`, followed by `reset confirm`
 
    * User is prompted to enter `reset confirm` to confirm and execute the deletion of all data entries.
 ![Reset](images/screenshots/ResetConfirm.png)
+
+
+<div style="page-break-after: always;"></div>
+
+   * In the case where the user attempts to reset the address book by entering `reset confirm` without first entering the `reset` command, the user will be prompted to enter the `reset` command first.
+     ![Reset](images/screenshots/ResetPrompt.png)
    * In the case where the user wishes to **cancel the reset**, he/she just has to proceed and type any other **valid command** in the command box.
+
 
 </div>
 
@@ -978,8 +983,6 @@ If your changes to the data file makes its **format invalid**, Foster Family wil
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
 
 ## **FAQ**
 
