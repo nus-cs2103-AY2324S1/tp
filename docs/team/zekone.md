@@ -21,7 +21,7 @@ KeepInTouch is a desktop app for managing contacts for job-seekers. It can also 
   * Managed `1.3.trial` release.
   * Created 12 labels for better tracking of issues.
   * Created milestones `v1.2` and `v1.3`.
- 
+
 * **Fixed bugs reported in PE-D**:
   * Added tag related help message to help command ([\#147](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/147))
   * Fixed help and error messages ([\#148](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/148), [\#155](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/155))

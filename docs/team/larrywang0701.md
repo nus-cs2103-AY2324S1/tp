@@ -18,7 +18,7 @@
           - Filter and sort events [#71](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/71)
           - Relevant test cases for event feature [#33](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/33) [#71](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/71) [#169](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/169)
           - Bug fixes for event feature [#47](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/47) [#85](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/85)
-  
+
   - #### Enhancements implemented
     - Enhanced the logic of command parser to support secondary command word [#33](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/33)
 

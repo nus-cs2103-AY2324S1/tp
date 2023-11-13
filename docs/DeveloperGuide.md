@@ -291,7 +291,7 @@ Both implements the `Parser` interface, parsing two main arguments:
    * The set of tags is parsed using the `parseTags` method in the `ParseUtil` utility class, which puts the collection of tag names given by the user into a `HashSet`.
 
 `contactId` and `taglist` is then use to create the `AddTagCommand`/`DeleteTagCommand` object.
-   
+
 For the details of how parsing works, see the section on [Logic Component](#logic-component).
 
 ##### Implementing `AddTagCommand`
@@ -337,7 +337,7 @@ The following activity diagram summarizes what happens when the `DeleteTagComman
 
 * **Alternative 3 (current choice):** Proceed but inform user that some tags are non-existing.
   * Pros: Users will be made aware of their mistake. Does not waste time on correcting the command if the command was intentional.
-  * Cons: Harder to implement. 
+  * Cons: Harder to implement.
 
 ### Notes feature
 This feature allows users to add and remove `Note` to any `Person` in the contact list. It provides an easy way for users to record additional information about the contacts.
@@ -410,8 +410,8 @@ The activity diagram below shows the action sequence of adding an `Event` to a c
 
 <box type="info" seamless>
 
-**Note:** 
-The sequence diagram for deleting `Event` is similar to adding `Event`. 
+**Note:**
+The sequence diagram for deleting `Event` is similar to adding `Event`.
 Simply replace `AddCommandParser` with `DeleteCommandParser`, `AddEventCommandParser` with `DeleteEventCommandParser`, and `AddEventCommand` with `DeleteEventCommand`.
 
 </box>
@@ -480,7 +480,7 @@ The following activity diagram summarizes what happens when the `DeleteEventComm
 
   Therefore, we want to make this better by simplifying the flow. We do this by adding:
   * Making the help command return things in the application console
-  * Letting users enter an extra argument to specify what command they need guiding 
+  * Letting users enter an extra argument to specify what command they need guiding
   * Give suggestions to users in case of a mistake in the extra argument, i.e. typo
 
 **Implementation details**
@@ -654,7 +654,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. Extra argument is a command word.
 
         * KeepInTouch returns documentation on that command word.
-          
+
           Use case ends.
 
     * 1b2. Extra argument is not a command word, but is quite similar to a command.
@@ -701,7 +701,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. User inputs a contact that does not exist.
 
     * 1a1. KeepInTouch shows a message indicating that the contact cannot be found.
-      
+
       Use case resumes at step 1.
 
 **Use case: UC04 - View all contacts**
@@ -916,15 +916,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed. 
-2.  Should be able to hold up to 10000 contacts without a noticeable sluggishness in performance for typical usage. 
-3.  All commands should be executed within two seconds. 
-4.  Should be offered as a free application. 
-5.  Should work without requiring any installer. 
-6.  Should work without requiring any internet connection. 
-7.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
-8.  The GUI should work well for standard screen resolutions 1920x1080 and higher, and, for screen scales 100% and 125%. 
-9.  The GUI should be intuitive and user-friendly. 
+1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2.  Should be able to hold up to 10000 contacts without a noticeable sluggishness in performance for typical usage.
+3.  All commands should be executed within two seconds.
+4.  Should be offered as a free application.
+5.  Should work without requiring any installer.
+6.  Should work without requiring any internet connection.
+7.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+8.  The GUI should work well for standard screen resolutions 1920x1080 and higher, and, for screen scales 100% and 125%.
+9.  The GUI should be intuitive and user-friendly.
 10. Should not require user to have prior technical knowledge.
 
 
@@ -951,7 +951,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file 
+   1. Double-click the jar file
    Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
@@ -980,7 +980,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete contact commands to try: `delete contact`, `delete contact x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-      
+
 2. Deleting a contact while event list is showing
 
     1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list. Add events to the first contact in the index and remove all event from the second contact in the index.
@@ -995,7 +995,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `add tag -id 1 -t Frontend -t Java`<br>
     Expected: The new tags appear below the name of the first contact in the list. The list of tags added is shown in the status message.
-    
+
     1. Test case: `add tag -id 0 -t Frontend`<br>
     Expected: No tag is added. Error details shown in the status message.
 
@@ -1012,14 +1012,13 @@ testers are expected to do more *exploratory* testing.
     Expected: Only one `Frontend` tag is added below the name of the first contact. Only one `Frontend` tag is shown in the list of tags added in the status message.
 
  1. Adding tag while contact list is being filtered
-    1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`. 
+    1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`.
 
     1. Test case: `add tag -id 1 -t Frontend`, when no contact is shown<br>
     Expected: No tag is added. Error details shown in the status message.
 
     1. Test case: `add tag -id 1 -t Frontend`, when at least 1 contact is shown<br>
     Expected: The new tags appear below the name of the first contact in the filtered list. The list of tags added is shown in the status message. List will go back to showing all contacts.
-      
 
 ### Deleting tag
 
@@ -1042,7 +1041,7 @@ testers are expected to do more *exploratory* testing.
     Expected: No tags is deleted. The list of tags deleted shown in the status message is empty while the list of tags not found contains `x`.
 
 1. Deleting tag while contact list is being filtered
-    1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`. 
+    1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`.
 
     1. Test case: `delete tag -id 1 -t Frontend`, when no contact is shown<br>
     Expected: No tag is deleted. Error details shown in the status message.

@@ -13,10 +13,10 @@ Given below are my contributions to the team:
 
 * **New Feature**: to be added soon
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=nixx162&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22) 
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=nixx162&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
 
 * **Project management**:
-    * Went through all the issues in GitHub to create a summary of what bugs there are (eliminating duplicate reports), whether they can be fixed, and recommended ideas of fixing it.  
+    * Went through all the issues in GitHub to create a summary of what bugs there are (eliminating duplicate reports), whether they can be fixed, and recommended ideas of fixing it.
 
 * **Enhancements to existing features**:
     * Improved help feature to better accomodate users. The old help command only opens a window containing a link to the user guide. The improvements I implemented are:
