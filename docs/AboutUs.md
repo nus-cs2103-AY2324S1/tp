@@ -18,8 +18,9 @@ This project was done by a team of 4 members.
 [[github](https://github.com/lihongguang00)]
 [[portfolio](team/lihongguang00.md)]
 
-- Role: Team Member
-- Responsibilities: TBD
+- Role: Developer
+- Responsibilities: 
+  - Calendar System Developer
 
 ### Andre Sim
 
@@ -28,8 +29,9 @@ This project was done by a team of 4 members.
 [[github](http://github.com/fallman2)]
 [[portfolio](team/fallman2.md)]
 
-- Role: Team Member
-- Responsibilities: TBD
+- Role: Developer
+- Responsibilities: 
+  - Task List Developer
 
 ### Low Jun Hong
 
@@ -39,7 +41,9 @@ This project was done by a team of 4 members.
 [[portfolio](team/junhonglow.md)]
 
 - Role: Developer
-- Responsibilities: TBD
+- Responsibilities: 
+  - Event List Developer
+  - Storage Developer
 
 ### Nicholas Lee
 
@@ -49,4 +53,6 @@ This project was done by a team of 4 members.
 [[portfolio](team/nicrandomlee.md)]
 
 - Role: Developer
-- Responsibilities: Product Feature Enhancements
+- Responsibilities: 
+  - Product Feature Enhancements
+  - Product Tester
