@@ -351,6 +351,8 @@ Example:
 
 * `random 2`
 
+<img alt="result for 'random 2'" src="images/random-success.png" width="700"> </br>
+
 [Back to Table of Contents](#table-of-contents)
 
 ---
@@ -505,7 +507,9 @@ Format: `delete s/STUDENT_NUMBER`
 * The [`STUDENT_NUMBER`](#student-number) must be valid and exist in **Class Manager 2023**.
 
 Example:
-* `delete s/A0249112A`
+* `delete s/A0247243A`
+
+<img alt="delete-success" src="images/delete-success.png" width="700" ><br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -543,6 +547,10 @@ The student number entered __without__ the `s/` prefix is the **current** studen
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * The `NEW_STUDENT_NUMBER` must be valid and unique (does not exist in **Class Manager 2023**).
+
+The following image shows a successful execution of the `edit` command.
+
+<img alt="edit-success" src="images/edit-success.png" width="700" ><br>
 
 Examples:
 *  `edit A0245234A p/91234567 e/johndoe@example.com` Edits the phone number and email address of the student with `STUDENT_NUMBER` A0245234A to be `91234567` and `johndoe@example.com` respectively.
