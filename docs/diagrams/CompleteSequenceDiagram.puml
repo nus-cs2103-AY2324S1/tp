@@ -66,7 +66,6 @@ CompleteByDate --> LogicManager : result
 deactivate CompleteByDate
 
 CompleteByDate -[hidden]-> CompleteCommandParser
-destroy CompleteByDate
 
 [<--LogicManager
 deactivate LogicManager
