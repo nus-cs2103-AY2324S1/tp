@@ -762,7 +762,7 @@ apply for multiple positions in future iterations.
 **A**: No, Staff-Snap is completely free to use.
 
 **Q**: Can I contact somebody for support? <br>
-**A**: Yes, if you require support from our team while using Staff-Snap, feel free to drop us an email at [support@staffsnap.com](support@staffsnap.com).
+**A**: Yes, if you require support from our team while using Staff-Snap, feel free to drop us an email at [support@staffsnap.com](mailto:support@staffsnap.com).
 
 <br>
 
