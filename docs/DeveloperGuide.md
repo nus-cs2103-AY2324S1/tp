@@ -22,6 +22,7 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -122,6 +123,8 @@ The `UI` component,
 * consists of 2 sides: the left side being the lists section and the right side being the details section.
 * depends on the `State` of the app currently to show the appropriate list panels.
 
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -167,12 +170,14 @@ How the `Logic` component works:
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 <p style="text-align: center;">
-<puml src="diagrams/ParserClasses.puml" width="600"/>
+<puml src="diagrams/ParserClasses.puml" width="400"/>
 </p>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+<div style="page-break-after: always;"></div>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -226,6 +231,8 @@ The `Storage` component,
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components. They are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -316,6 +323,8 @@ The following sequence diagram shows how the flow of the example execution:
     * Cons: 
       * Many commands for user to remember, although they have similar ideas (e.g. `addPerson`, `addLesson` both involving adding a new object, which the user could have used a generic `add` method.)
       * Commands have to manually call the Ui to specify which Ui panels to show.
+
+<div style="page-break-after: always;"></div>
 
 ### EditPersonCommand and Parser
 
@@ -537,6 +546,8 @@ The `FullTaskList` class is implemented as a list to view all the collective tas
     * Cons: May increase code complexity due to filtering the respective tasks.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -796,6 +807,8 @@ Use Case ends.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -856,6 +869,8 @@ testers are expected to do more *exploratory* testing.
     3. ___TASKS list___
        ![list TASKS](images/list/list_tasks_positive.png)
 
+
+
 * Each state has its associated features, while certain features work with all states but has differing functionalities.
 * The ___STUDENTS list___ handles student details management, ___SCHEDULE list___ handles lessons, scheduling and the tasks for each lesson while the full ___TASKS list___ is a view to display all tasks.
 * The _GUI_ <sup>[1](#glossary)</sup> has several main components (see _GUI_ <sup>[2](#glossary)</sup> image below):
@@ -884,6 +899,8 @@ testers are expected to do more *exploratory* testing.
 * In ___TASKS list___:
     * Test case: `list tasks` <br>
       Expected: The full task list with task description is displayed in the list panel. Showing list tasks is shown in the response box.
+
+<div style="page-break-after: always;"></div>
 
 ### Show Feature
 
@@ -983,6 +1000,7 @@ testers are expected to do more *exploratory* testing.
 6. Test case: `addTask` <br>
    Expected: No task is added to any of the lessons in the list. Error indicating invalid description shown in the response box.
 
+<div style="page-break-after: always;"></div>
 
 ### Delete Feature
 
@@ -1021,6 +1039,8 @@ testers are expected to do more *exploratory* testing.
 5. Test case: `deleteLesson` <br>
    Expected: No lesson is deleted. Error indicating invalid command format is shown in the response box.
 
+<div style="page-break-after: always;"></div>
+
 ##### Deleting a task from a lesson in ___SCHEDULE list___
 
 1. Prerequisites:
@@ -1058,6 +1078,7 @@ testers are expected to do more *exploratory* testing.
 4. Test case: `editPerson 1 -name Riley` <br>
    Expected: No student is edited. Error indicating a clash detected is shown in the response box.
 
+<div style="page-break-after: always;"></div>
 
 ##### Editing a lesson in ___SCHEDULE list___
 
@@ -1197,6 +1218,8 @@ testers are expected to do more *exploratory* testing.
 
 5. Test case: `show 1` followed by `linkTo alex wong` <br>
    Expected: No student is added to the currently shown lesson in the details panel. A message indicating student is already linked to lesson is shown in the response box.
+
+<div style="page-break-after: always;"></div>
 
 ### Navigate Feature
 
