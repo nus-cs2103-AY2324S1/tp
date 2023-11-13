@@ -267,7 +267,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The given index is invalid.
+* 2a. An invalid contact to edit is specified
 
   * 2a1. ConText shows an error message.
   
@@ -298,7 +298,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The given index is invalid.
+* 2a. An invalid contact to edit is specified
 
   * 2a1. ConText shows an error message.
     
@@ -336,7 +336,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC07 - Filter tags**
 
-1. User requests to filter the list contacts.
+1. User requests to filter the list of contacts by a given tag.
 2. ConText displays a filtered list of contacts based on the given tag.
 
 **Extensions**
