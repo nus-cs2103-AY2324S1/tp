@@ -20,11 +20,11 @@ Given below are my contributions to the project.
     * Highlights: This enhancement requires the understanding of the `Model` and the creation of `PredicatesUtil` to wrap an array of predicates into one `Predicate` so that the code conforms to the SLAP principle. `PredicatesUtil` implements the `Predicate` interface and is used in the `Model` to update list of `Date` objects visible to user.
 
 * **New Feature**: Sort Dates by `Date` Profile Attributes
-    * What it does: Allows users to sort `Date` objects by their attributes such as `Age`, `Height`, `Gender`, `Horoscope`, `Income` and `Name`.
+    * What it does: Allows users to sort `Date` objects by their attributes such as `Age`, `Height`, `Horoscope`, `Income` and `Name`.
     * Justification: This feature is useful because it allows user to view the list of `Date` objects in a specified (increasing/decreasing) order based on a specified attribute.
     * Highlights: This enhancement requires the understanding of the `Comparator` interface in order to allow each valid attribute to be sorted in a specific order.
 
-* **New Feature**: Random Date command
+* **New Feature**: Blind Date command
     * What it does: Allows users to randomly select a `Date` from the list of `Date` objects.
     * Justification: This feature is useful because helps to solve the issue of indecisiveness when choosing a `Date` to go out with. It saves time and effort for the user and instills a sense of excitement.
     * Highlights: This enhancement requires the understanding of how to obtain the complete list of `Dates` objects and generating a random number to select a `Date` from the list.
@@ -44,5 +44,8 @@ Given below are my contributions to the project.
       * Contributed to Planned Enhancement and Effort Spent sections.
 
 * **Community**:
-  * PRs reviewed: #13, #89, #281, $284
+  * PRs reviewed: [#13](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/13), 
+  [#89](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/89), [#281](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/281), 
+  [#284](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/284), [#287](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/287), 
+  [#288](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/288)
   * Submitted PE-D on behalf of the group
