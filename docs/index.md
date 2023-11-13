@@ -5,10 +5,10 @@
 
 # JABPro
 
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
+[![CI Status](https://github.com/ay2324s1-cs2103t-w09-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/ay2324s1-cs2103t-w09-4/tp/actions)
+[![codecov](https://codecov.io/gh/AY2324S1-CS2103T-W09-4/tp/branch/master/graph/badge.svg)](https://codecov.io/gh/AY2324S1-CS2103T-W09-4/tp)
 
-![Ui](images/Ui.png)
+![Ui](images/main.png)
 
 **JABPro is a desktop application used for managing job applications received by you.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 

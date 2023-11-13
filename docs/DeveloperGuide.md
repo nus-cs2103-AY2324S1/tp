@@ -544,20 +544,24 @@ Use case ends.
   * 2b1. JABPro shows a message indicating that there are no persons to display.   
   Use case ends.
 
-**Use case: Search persons by the specified categories(name, status and/ tag)**
+**Use case: Search persons matching the given profile**
 
 **MSS**
-1.  Hiring manager types in search parameters to search users by the specified categories.
-2.  JABPro shows a list of persons whose profile matches the given parameters.
+1. User requests to search users matching the given profile as specified by the search parameters.
+2. JABPro requests details of the profile to be searched.
+3. User enters the profile details.
+4. JABPro retrieves the list of all persons from the database whose profiles match the given search parameters.
+5. JABPro displays the filtered list of persons to the user.
 Use case ends.
 
 **Extensions**
 
-* 1a. The given name/status/tag parameter is invalid.
-    * 1a1. JABPro shows an error message.
-      Use case resumes at step 1.
-* 2a. The list is empty. <br/>
-  Use case ends.
+* 3a. The given name/status/tag parameter is invalid.
+  * 3a1. JABPro shows an error message and provides course of action for remedy.
+    Use case resumes at step 3.
+* 5a. No person match the given profile.
+  * 5a1. JABPro shows a message indicating that there are no persons to display.
+    Use case ends.
 
 
 **Use case: Delete a person**
@@ -690,13 +694,13 @@ Use case ends.
 * 1b. Social profile requested other than LinkedIn or Github.
     * 1b1. JABPro displays error message.  
     Use case ends.
-* 3a. User does not exist on the social platform.  
+* 3a. Person does not exist on the social platform.  
   Use case ends.
 
 **Use case: Add events relating to candidates**
 
 **MSS**
-1. User requests to add an event relating to a candidate
+1. User requests to add an event relating to a candidate.
 2. JABPro shows that command has been executed successfully.
 3. JABPro adds the event to the list of events.
    Use case ends.
@@ -707,9 +711,26 @@ Use case ends.
 * 2b. Event has already been added to the list of events.
   * 2b1. JABPro shows an error message and provides course of action for remedy. Use case resumes at step 1.
 
+**Use case: Tag a candidate with a newly created tag**
 
+**MSS**
+1. User requests to create a tag of a specific category.
+2. JABPro adds the tag to the list of tags.
+3. JABPro shows a message indicating that the tag has been added successfully.
+4. User requests to view all persons.
+5. User requests to add the newly created tag to add tag to a person.
+6. JABPro adds tag to the person.
+   Use case ends.
 
-
+**Extension**
+* 1a. The given tag name is invalid
+  * 1a1. JABPro displays an error message
+* 1b. User did not provide the complete command (missing category or name). Use case resumes at step 1.
+  * 1b1. JABPro displays an error message and provides a course of action for remedy. Use case resumes at step 1
+* 2a. Tag already exists in JABPro
+  * 2b1. JABPro displays an error message saying tag already exists. Use case resumes at step 1.
+* 5a. Multiple tags exist with the same name in different categories
+  * 5a1. JABPro displays an error message and provides a course of action for remedy. Use case resumes at step 5.
 
 ### Non-Functional Requirements
 
@@ -786,6 +807,16 @@ This makes it more intuitive and logical for the user to use since the user woul
 ## **Appendix: Effort**
 
 ### Based on over-arching features
+
+###  Flexibility for further analysis
+We acknowledge that there will be some who would prefer to analyse data outside JABPro - and that is completely fine.
+With the ability to export to a .csv file using JABPro, users are empowered with the ability to conduct analysis in 
+other applications that they are more familiar with. 
+
+The introduction of the export command showcases our commitment towards user flexibility, and focus towards 
+making JABPro a tool that adds towards hiring manager's ecosystem, as opposed to a trade-off that requires them
+to only rely on JABPro. We strongly believe that users should have the flexibility and ability to conduct
+further analysis outside JABPro if they wish to.
 
 
 ### Storage Complications and Effort
@@ -921,7 +952,31 @@ Both Person List and Person Information Panel is updated to reflect the new `Int
    3. Test case 2:  
    `view 0`  
    **Expected**: No person is viewed. Error details shown in the status message. Person information panel remains the same.
- 
+
+### Setting a person's status (Preliminary, Interviewed, Accepted/Rejected.)
+1. Setting a person's status in the list
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    2. Test case 1:   
+       `set 1 Interviewed`  
+       **Expected**: On the next 'view' command, the personnel's details shows as Interviewed.
+    3. Test case 2:  
+       `Set 0 Interviewed`  
+       **Expected**: No person is set to 'Interviewed'. Error details shown in the status message. Person information panel remains the same.
+   
+
+### Exporting the information into a csv file 
+1. Exporting all current user data to csv
+    1. Prerequisites: Necessary write permissions to the /data/export.csv location
+
+    2. Test case 1:   
+       `export`  
+       **Expected**: File is successfully exported to the location /data/export.csv
+    3. Test case 2:  
+       `export` (without write permissions)  
+       **Expected**: /data/export.csv file is not updated. Error details shown in the status message.
+
+
 ### Filtering persons by their scores for a particular tag based on a particular metric while all persons are being shown
 1. Filtering persons by their scores for a particular tag based on a particular metric while all persons are being shown  
    1. Prerequisites:  
