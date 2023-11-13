@@ -1207,7 +1207,7 @@ addresses, resulting in invalid emails to be considered as valid by our applicat
 For example, `a@12.34` has an invalid domain that does not comply with IETF standards
 but will be considered valid in our application. Additionally, while our validation
 supports the format of many major email service providers such as Google, Outlook,
-Hotmail and Yahoo, IETF's format is more general and may allow formats.
+Hotmail and Yahoo, IETF's format is more general and may allow other formats.
 
 - **Enhancement**: We plan on ensuring that `Email` uses stronger validation to comply
 with IETF standards and the following (non-exhaustive) list of RFCs:
