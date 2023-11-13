@@ -18,7 +18,7 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&chartGroupIndex=36&chartIndex=2%23%2F%23%2F)
 
 * **Project management**:
-  * Managed releases `v1.3` - `v1.4.0` (4 releases) on GitHub
+  * Managed releases `v1.3.0` - `v1.4.1` (6 releases) on GitHub
 
 * **Enhancements to existing features**:
   **Improving `Add` feature**: Added the ability to allow the user to add an optional Group name along with other attributes.
