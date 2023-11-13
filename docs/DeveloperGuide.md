@@ -375,7 +375,7 @@ characteristics:
   user's needs.
 
 - **Value Proposition**:
-  Quickly add company revenue and expenses via the CLI. Easily keep track of company profits and visualize them
+  Quickly add company revenue and expenses via the CLI. Easily keep track of company profits and visualize them. Cheap solution for small businesses with limited capital.
 
 ## User Stories
 
@@ -442,6 +442,10 @@ characteristics:
     - As an accountant, I want to be able to filter my transactions.
     - This will enable to me see the transactions I want to see.
 
+9. **Exporting Transactions**
+   - As an accountant, I want to be able to export my transactions into csv format.
+   - This will allow me to share transaction data with stakeholders, or use the data to do further analysis in Excel.
+
 ### Dashboard Overview
 
 1. **Dashboard Display**
@@ -478,10 +482,10 @@ characteristics:
 
 ### Address Book
 
-1. **Importing Staff List**
+1. **Exporting Staff List**
 
-    - As a user who needs efficiency, I want to import a staff list into the address book.
-    - This will help me quickly access contact information for employees and associates.
+    - As a user who manages staff, I want to export the staff list into json format.
+    - This will help me share contact information with associates in a file format that can be sent.
 
 2. **Adding and Editing People**
 
@@ -763,4 +767,5 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-2. _{ more test cases …​ }_
+2. Test Case: Click on `export transactions` in menu bar
+    1. Expected: File chooser pops up, allowing you to choose location where transactions will be saved. `transaction.csv` file will be created at chosen location.
