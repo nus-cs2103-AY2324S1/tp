@@ -65,6 +65,8 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 7. Refer to the [Command Summary](#command-summary) below for the summary of all commands.
 8. Refer to the [Glossary](#glossary) below for definitions of glossary terms.
 
+[Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Important Notes
@@ -82,6 +84,8 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
     * The right side has the details panel, which shows details of any specific item in the list.
       ![Ui](images/Ui.png)
 
+[Back to Table of Contents](#table-of-contents)
+
 ### Terminologies / Symbols
 * Flag: A flag is a word starting with a dash "-" that is used to identify the type of information that is being provided e.g. -name.
 
@@ -92,6 +96,8 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 ```
 This box denotes command outputs.
 ```
+
+[Back to Table of Contents](#table-of-contents)
 
 ### Notes on Command Format
 <box type="info" seamless>
@@ -115,6 +121,8 @@ This box denotes command outputs.
 
 </box>
 
+[Back to Table of Contents](#table-of-contents)
+
 ### Other Notes
 <box type="warning" seamless>
 
@@ -127,6 +135,8 @@ This box denotes command outputs.
 * If you are using a PDF version of this document, please note that the scroll panels for the code outputs in the examples will not work. They are just a reference for the outputs that you will see on the application. The errors and solutions will be elaborated in the examples.
   
 </box>
+
+[Back to Table of Contents](#table-of-contents)
 
 ### Parameter Summary
 
@@ -147,6 +157,8 @@ This box denotes command outputs.
 | `TIME`                                | `addLesson` `editLesson`<br/>`filter`                                                  | Must follow either HH:MM or H:MM (only for 0:00 to 9:59)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | "13:30", "9:17"                                                                                                 | "9:1", "13:70"              |
 | `SEARCH_STRING`                       | `find`                                                                                 | Must not be empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "Alex", "alex yeoh", "+asdf-"                                                                                   | ""                          |
 | `DESCRIPTION`                         | `addTask`                                                                              | Must not be empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "Mark Alkanes Extra Practice", "Make Forces Notes"                                                              | ""                          |
+
+[Back to Table of Contents](#table-of-contents)
  
 --------------------------------------------------------------------------------------------------------------------
 
@@ -955,6 +967,7 @@ Success outputs:
 Linked Alex Wong to CS2103T Lab
 ```
 ![Success for linking to lesson](images/linkTo/linkTo_lesson_positive.png)
+
 Failure outputs:
 * Current state: In the 👨‍🎓 ___STUDENTS list___ and no student is selected
 * Input: `linkTo CS2103T Lab`
@@ -1004,6 +1017,7 @@ Success outputs:
 Linked Bernice Yu to CS2103T Lab
 ```
 ![Success for linking to lesson](images/linkTo/linkTo_lesson_positive.png)
+
 Failure outputs:
 * Current state: In the 📅 ___SCHEDULE list___ and no lesson is selected
 * Input: `linkTo Bernice Yu`
@@ -1056,6 +1070,7 @@ Success outputs:
 Navigated to student's lessons
 ```
 ![Success for navigating to lessons](images/nav/nav_fromStudent_positive.png)
+
 Failure outputs:
 * Current state: In the 👨‍🎓 ___STUDENTS list___ and a student is not selected
 * Input: `nav`
@@ -1090,6 +1105,7 @@ Success outputs:
 Navigated to lesson's students
 ```
 ![Success for navigating to students](images/nav/nav_fromLesson_positive.png)
+
 Failure outputs:
 * Current state: In the 📅 ___SCHEDULE list___ and a lesson is not selected
 * Input: `nav`
@@ -1200,6 +1216,8 @@ If you insist on modifying the data file directly, be very careful, especially w
 **Caution:**
 If your changes to the data file makes its format invalid, TutorMate will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
 </box>
+
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
