@@ -60,6 +60,8 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
+(Remark: The overlapping triangles into `UiPart` are all class inheritance triangles (limitation of PlantUML).)
+
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ContactListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103-W14-3/tp/tree/master/src/main/java/swe/context/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103-W14-3/tp/tree/master/src/main/resources/view/MainWindow.fxml)
@@ -81,9 +83,9 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1 3 5")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete 1 3 5` Command](images/DeleteSequenceDiagram.png)
 
 How the `Logic` component works:
 
@@ -201,7 +203,7 @@ The command is only stored in history if the execution of the command (by `Comma
 ## Acknowledgements
 
 - Libraries: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
-- App icon from <http://www.mcdodesign.com/> by Susumu Yoshida
+- App icon from [McDo Design](https://www.flickr.com/photos/mcdodesign/) by Susumu Yoshida
 - Some code adapted from <http://code.makery.ch/library/javafx-8-tutorial/> by Marco Jakob
 
 ---
@@ -293,6 +295,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to list contacts.
 2. ConText shows a list of contacts.
 
+   Use case ends.
+
 **Extensions**
 
 * 2a. The list is empty.
@@ -345,20 +349,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The filtered list is empty.
 
-  Use case ends
+  Use case ends.
 
 **Use case: UC07 - Filter tags**
 
+**MSS**
+
 1. User requests to filter the list of contacts by a given tag.
 2. ConText displays a filtered list of contacts based on the given tag.
+
+   Use case ends.
 
 **Extensions**
 
 * 2a. The filtered list is empty.
 
-  Use case ends
+  Use case ends.
 
-### Non-functional Requirements
+### Non-functional requirements
 
 1. "Brownfield" - Changes to the codebase must be done in small increments.
 1. "Typing preferred" - The product must target users who can type fast and prefer CLI as their means of input.
@@ -447,8 +455,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## Appendix: Instructions for manual testing
 
-//TODO
-
 Given below are instructions to test the app manually.
 
 <div markdown="span" class="alert alert-info">
@@ -463,13 +469,6 @@ testers are expected to do more *exploratory* testing.
    1. Download the jar file and place it into an empty folder
 
    1. Open a command terminal, `cd` into the folder you put the JAR file in, and use the `java -jar context.jar` command to run the app.
-
-1. Saving window preferences
-
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   1. You may enter `exit` to the text box at the top of the window to close the app, `cd` to the same folder before in terminal and use the `java -jar context.jar` command to re-launch the app.<br>
-       Expected: The most recent window size and location is retained.
 
 ### Adding a new contact
 
@@ -537,13 +536,11 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Test case: Navigate to the folder with the JAR file, and remove all files and subfolders except the JAR file. Relaunch the app.
+      Expected: The app will launch normally, with sample contact data.
 
-1. _{ more test cases …​ }_
-
-## Appendix: Effort
-
-//TODO
+   1. Test case: Navigate to the folder with the JAR file, and make arbitrary changes to the `\data\contacts.json` file, so as to render it invalid. Relaunch the app.
+      Expected: The app will launch normally, with an empty contact list. 
 
 ## Appendix: Planned enhancements
 

@@ -178,10 +178,10 @@ e.g. `delete 1 1` will only delete the contact at index #`1`.
 **Examples:**
 
 - `delete 1`
-(Deletes the contact at index #1.)
+(Deletes the contact at index #`1`.)
 
 - `delete 1 3 5`
-(Deletes the contacts at indices #1, #3, and #5.)
+(Deletes the contacts at indices #`1`, #`3`, and #`5`.)
 
 ### Clearing all contacts: `clear`
 
@@ -280,7 +280,7 @@ Your contacts get automatically saved to the file system after each successful c
 ConText data are saved automatically as a JSON file `[JAR file location]/data/contacts.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, ConText will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file make its format invalid, ConText will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
 ---
