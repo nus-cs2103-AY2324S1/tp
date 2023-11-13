@@ -322,14 +322,14 @@ Finally, the `EditPersonCommand` class is responsible for executing the command 
 
 The following section will discuss the implementation of the later three groups of classes in more detail.
 
-#### 1. ListEntry and ListEntryField class
+##### 1. ListEntry and ListEntryField class
 In TutorMates, Lesson and Person extends `ListEntry` class as they are displayed as items of the ___STUDENTS list___, ___SCHEDULE list___ respectively.
 
 Each `ListEntry` object contains a list of `ListEntryField` objects, which are the fields of the `ListEntry` object. For example, a `Person` object contains a list of `ListEntryField` objects, which are the fields of the `Person` object, such as name, phone number, email address, etc.
 
 These two classes are used in multiple generic class and methods to achieve the flexibility and robustness of the parsing process.
 
-#### 2. Parsing of Flags and Parameters
+##### 2. Parsing of Flags and Parameters
 The `TypeParsingUtil` class parse all kinds of flags (which are all `ListEntryField` ) via a single powerful generic method, `parseField`. The method signature is as follows:
 ```
  public static <T extends ListEntryField> T parseField(String flagName,
@@ -358,7 +358,7 @@ Name name = TypeParsingUtil.parseField("name", args, Name::of, false);
 // Parse the phone flag, which is optional
 Phone phone = TypeParsingUtil.parseField("phone", args, Phone::of);
 ```
-#### 3. Parsing of the EditPersonCommand
+##### 3. Parsing of the EditPersonCommand
 The `EditPersonCommandParser` class will parse the user input into an `EditPersonCommand` object. 
 
 This is achieved by combining the results of parsing flags in the previous stage and construct a `Person` object that contains the updated fields.
@@ -380,7 +380,7 @@ Person person = Person.getDefaultPerson();
             person.setTagsIfNotDefault(parseField("tag", args, Tags::of));
             person.setRemarkIfNotDefault(parseField("remark", args, Remark::of));
 ```
-#### 4. EditPersonCommand Implementation
+##### 4. EditPersonCommand Implementation
 The `EditPersonCommand` class will execute the command and update the model accordingly.
 
 Realising the commonality between all kinds of edit commands, we have created an abstract generic class, `EditCommand`, to serve as template class containing the logic of editing a `ListEntry` object.
