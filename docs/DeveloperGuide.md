@@ -934,6 +934,18 @@ based on an identifier
 
       Use case ends.
 
+* 2a. The patient profiles to be added contain duplicates to the logged profiles
+
+    * 2a1. The non-duplicate patient profiles are added to and displayed in the Logger Tab.
+
+      Use case ends.
+
+* 2b. Patient profiles to be added have been edited
+
+    * 2b1. HealthSync updates patient profile data in the Logger Tab.
+
+      Use case ends.
+
 **Use case: UC8 - Clearing the log**
 
 **MSS**
