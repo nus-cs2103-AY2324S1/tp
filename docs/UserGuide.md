@@ -14,40 +14,8 @@ Say goodbye to all this mess with the help of **TuitionConnect**: the ultimate d
 This user guide will teach you how to install **TuitionConnect** from scratch, as well as providing information about the interesting features of **TuitionConnect**. 
 
 ## Table of Contents
-
-<!-- TOC -->
-* [TuitionConnect User Guide](#tuitionconnect-user-guide)
-  * [Table of Contents](#table-of-contents)
-  * [Introduction](#introduction)
-  * [Using this guide](#using-this-guide)
-  * [Symbols and Syntax](#symbols-and-syntax)
-  * [Quick start](#quick-start)
-  * [Input Formats](#input-formats)
-    * [Command Format](#command-format)
-  * [Features](#features)
-    * [Viewing help : `help`](#viewing-help--help)
-    * [Adding a person : `add`](#adding-a-person--add)
-    * [View the list : `list`](#view-the-list--list)
-    * [View the list of tutees specified by day : `list [DAY]`](#view-the-list-of-tutees-specified-by-day--list-day)
-    * [Finding a tutee : `find`](#finding-a-tutee--find)
-    * [Editing a tutee : `edit`](#editing-a-tutee--edit)
-    * [Deleting a person: `delete`](#deleting-a-person-delete)
-    * [Clearing all entries : `clear`](#clearing-all-entries--clear)
-    * [Marking a person as paid : `paid`](#marking-a-person-as-paid--paid)
-    * [Marking a person as unpaid : `unpaid`](#marking-a-person-as-unpaid--unpaid)
-    * [Show all the unpaid persons : `list unpaid`](#show-all-the-unpaid-persons--list-unpaid)
-    * [Mark all persons as unpaid: `unpaidAll`](#mark-all-persons-as-unpaid-unpaidall)
-    * [Finding Free Time : `freeTime`](#finding-free-time--freetime)
-    * [Undo previous command : `undo`](#undo-previous-command--undo)
-    * [Redo previous command : `redo`](#redo-previous-command--redo)
-    * [Calculating Monthly Revenue: `rev`](#calculating-monthly-revenue-rev)
-    * [Exiting the program : `exit`](#exiting-the-program--exit)
-  * [FAQ](#faq)
-  * [Known issues](#known-issues)
-  * [Command summary](#command-summary)
-  * [Glossary](#glossary)
-<!-- TOC -->
-
+* Table of Contents
+  {:toc}
 --------------------------------------------------------------------------------------------------------------------
 ## Introduction
 TuitionConnect is a **desktop app** built for tutors and tutoring businesses or simplifying the process of 
@@ -92,12 +60,12 @@ to better understand all the technical jargons!
 
 Throughout this User Guide, there might 
 
-| Symbol/Syntax                                  | Meaning                                                                                                                                         |
-|------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
-| :information_source: **Notes**                 | Information that you need to pay attention to.                                                                                                  |
-| :bulb: **Tip**                                 | Information that you may find helpful.                                                                                                          |
-| :exclamation: **Caution**                      | Information that you need to know before executing a [command](#command)                                                                        |
-| `Highlighted text block`                       | [Commands](#command) or [parameters](#parameter) that you can enter into our application, or text that is directly displayed in our application |
+| Symbol/Syntax                                   | Meaning                                                                                                                                         |
+|-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| :information_source: **Notes**                  | Information that you need to pay attention to.                                                                                                  |
+| :bulb: **Tip**                                  | Information that you may find helpful.                                                                                                          |
+| :exclamation: **Caution**                       | Information that you need to know before executing a [command](#command)                                                                        |
+| `Highlighted text block`                        | [Commands](#command) or [parameters](#parameter) that you can enter into our application, or text that is directly displayed in our application |
 | [Hyperlinked text in blue](#symbols-and-syntax) | When it is pressed, it should lead you to another section in the document or to an external link.                                               |
 
 ## Quick start
@@ -123,14 +91,7 @@ Throughout this User Guide, there might
 
 6. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
-<details open>
-<summary><strong>Formats</strong></summary>
-<div markdown="1">
-
 ## Input Formats
-
-<div markdown="block" class="alert alert-info">
 
 ### Command Format
 
@@ -145,14 +106,23 @@ Throughout this User Guide, there might
 
 * Extraneous parameters added after commands that do not take in parameters (such as `help`, `list`, `exit`, `undo`, `redo` and `clear`) will be ignored.<br>
   e.g. if the command typed is `undo 123`, it will be interpreted as `undo`.
-</div>
 
-</div>
-</details>
---------------------------------------------------------------------------------------------------------------------
-<details open>
-<summary><strong>Features</strong></summary>
-<div markdown="1">
+## Parameters Requirement
+Here are the [parameter](#glossary) requirements of commonly used parameters by [commands](#glossary) in the [**Features**](#features) section below.
+
+| Parameter     | Description                                                 | Requirement / Remarks                                                                                                                                                                                                                                |
+|---------------|-------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **`NAME`**    | Name of tutee                                               | [Alphanumeric](#glossary) and may contain spaces                                                                                                                                                                                                     |
+| **`DATE`**    | Date of the upcoming application task                       | In **dd-mm-yyyy** format                                                                                                                                                                                                                             |
+| **`PHONE`**   | Contact number of tutee                                     | Any number at least 3 digits long                                                                                                                                                                                                                    |
+| **`EMAIL`**   | Email address of tutee                                      | In **XXXXXXXX@emaildomain** format <br> Example: `johndoee@gmail.com`                                                                                                                                                                                |
+| **`ADDRESS`** | Address of the tutee                                        | [Alphanumeric](#glossary) and may contain spaces                                                                                                                                                                                                     |
+| **`SUBJECT`** | Subject of the tutee                                        | [Alphanumeric](#glossary) and may contain spaces                                                                                                                                                                                                     |
+| **`DAY`**     | Day of weekly recurring lesson of the tutee                 | Full name of day or first three letters of the full name <br> **Non-case sensitive** <br> Example: `Mon`/`Monday`/`monday`                                                                                                                           |
+| **`BEGIN`**   | Begin time of a tutee's weekly recurring lesson             | In **HHMM** format                                                                                                                                                                                                                                   |
+| **`END`**     | End time of a tutee's weekly recurring lesson               | In **HHMM** format                                                                                                                                                                                                                                   |
+| **`PAYRATE`** | dollars per hour you make teaching this tutee               | Numbers only <br> Numbers must be **non-negative**                                                                                                                                                                                                   |
+| **`INDEX`**   | The index number of the tutee shown in the tutee list panel | Used in [`delete`](#deleting-a-tutee-delete) [`edit`](#editing-a-tutee--edit) [`unpaid`](#marking-a-tutee-as-unpaid--unpaid) and [`paid`](#marking-a-tutee-as-paid--paid) commands <br> Must be a **positive number** <br> Example: (1,2,3,...) <br> |
 
 ## Features
 
@@ -204,23 +174,25 @@ Shows a message that helps redirects you to the user guide.
 * `add n/John Doe p/98765432 e/johnny@example.com a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 end/1600 pr/20.00`
 * `add n/Betsy Crowe p/92939402 e/betsycrowe@example.com a/Newgate Prison sb/Secondary 3 Physics d/mon b/1900 end/1930 pr/35.00`
 
+### Listing tutees : `list`
 
-### View the list : `list`
-
-**Description** : Shows the current list of tutees in your list.
-
-Format: `list`
-
-
-### View the list of tutees specified by day : `list [DAY]`
-
-**Description** : Shows the current list of tutees filtered by the specified day.
+View the tutees that you are currently teaching.
 
 Format: `list [DAY]`
 
-**Expected Input**:
-* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).
+* The `DAY` parameter is optional.
+  * Without stating a specified `DAY`, `list` will display all of your tutees
+  * When `DAY` is specified, only tutees whose lessons matches the specified `DAY` will be displayed
 
+Examples:
+* `list`
+* `list monday`
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Info:** If the `DAY` parameter does not adhere to the specified format, the system will treat this as an invalid command
+</div>
+
+_Executing command:  `list monday`_
 
 ### Finding a tutee : `find`
 
@@ -311,7 +283,7 @@ To edit name and address of your second tutee in list:
 *  `edit 2 n/Betsy Crower a/Betsy street, block 110, #03-02`
 
 
-### Deleting a person: `delete`
+### Deleting a tutee: `delete`
 
 **Description**: Deletes the specific tutee from the list.
 
@@ -339,7 +311,7 @@ Examples:
 * Example image above shows the result of command `clear
 
 
-### Marking a person as paid : `paid`
+### Marking a tutee as paid : `paid`
 
 **Description**: Mark the specific tutee as paid in the list.
 
@@ -356,7 +328,7 @@ Examples:
 Examples:
 * `list` followed by `paid 1` marks the first person as paid in the list.
 
-### Marking a person as unpaid : `unpaid`
+### Marking a tutee as unpaid : `unpaid`
 
 **Description**: Mark the specific tutee as not paid in the list.
 
@@ -374,13 +346,13 @@ Examples:
 * `list` followed by `unpaid 2` marks the 2nd person as not paid in the list.
 
 
-### Show all the unpaid persons : `list unpaid`
+### Show all the unpaid tutees : `list unpaid`
 
 **Description**: Shows all the unpaid tutees in your list.
 
 Format: `list unpaid`
 
-### Mark all persons as unpaid: `unpaidAll`
+### Mark all tutee as unpaid: `unpaidAll`
 
 **Description** : Mark all tutees in the current displayed list as not paid.
 
@@ -407,26 +379,24 @@ Format: `unpaidAll`
 * **Invalid Begin**: Begin has a format of HHMM
 * **Invalid End**: That is not a valid time format. End has a format of HHMM
 
-
 ### Undo previous command : `undo`
 
-**Description**: Undo the previous command that can modify the data of tutees.
+Typed something wrong? Undo the most recent command that can modify the tutee data.
 
-**Format**: `undo`
+Format: `undo`
 
-**Expected Output when the command succeeds**: Successfully undo previous command
+<div markdown="block" class="alert alert-info">
+**:information_source: Info:** <br>
+You can only undo `add`,`clear`,`delete`,`edit`,`redo`,`paid',`unpaid` and `unpaidAll` commands
+</div>
 
-**Expected Output when the command fails**: Nothing to undo!
+_Executing command:  `undo`_
 
-### Redo previous command : `redo`
+### Redo previous undone command : `redo`
 
-**Description**: Reverses previously undone commands, restoring the data to a state before an undo operation.
+Changed your mind again? Redo the most recent command that was undone.
 
-**Format**: `redo`
-
-**Expected Output when the command succeeds**: Successfully redo previous command
-
-**Expected Output when the command fails**: Nothing to redo!
+Format: `redo`
 
 
 ### Calculating Monthly Revenue: `rev`
@@ -449,8 +419,7 @@ Format: `exit`
 * The application window closes automatically after you type the command `exit`
 
 
-</div>
-</details>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
