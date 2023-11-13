@@ -2,6 +2,7 @@ package seedu.ccacommander.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.ccacommander.logic.commands.DeleteEventCommand.MESSAGE_COMMIT;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.ccacommander.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -252,5 +253,24 @@ public class CommandTestUtil {
         model.updateFilteredEnrolmentList(new EnrolmentExistsPredicate(enrolment));
 
         assertEquals(1, model.getFilteredEnrolmentList().size());
+    }
+
+    /**
+     * Deletes the first event in {@code model}'s filtered event list from {@code model}'s CCACommander.
+     */
+    public static void deleteFirstEvent(Model model) {
+        Event firstEvent = model.getFilteredEventList().get(0);
+        model.deleteEvent(firstEvent);
+        model.commit(String.format(MESSAGE_COMMIT, firstEvent.getName()));
+    }
+
+    /**
+     * Deletes the last event in {@code model}'s filtered event list from {@code model}'s CCACommander.
+     */
+    public static void deleteLastEvent(Model model) {
+        int sizeofEventList = model.getFilteredEventList().size();
+        Event lastEvent = model.getFilteredEventList().get(sizeofEventList - 1);
+        model.deleteEvent(lastEvent);
+        model.commit(String.format(MESSAGE_COMMIT, lastEvent.getName()));
     }
 }
