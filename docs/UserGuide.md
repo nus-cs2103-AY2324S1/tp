@@ -150,20 +150,20 @@ The image below describes TuitionConnect's layout with some description for each
 ## Parameters Requirement
 Here are the [parameter](#glossary) requirements of commonly used parameters by [commands](#glossary) in the [**Features**](#features) section below.
 
-| Parameter     | Description                                                 | Requirement / Remarks                                                                                                                                                                                                                                |
-|---------------|-------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **`NAME`**    | Name of tutee                                               | [Alphanumeric](#glossary) and may contain spaces                                                                                                                                                                                                     |
-| **`DATE`**    | Date of the upcoming application task                       | In **dd-mm-yyyy** format                                                                                                                                                                                                                             |
-| **`PHONE`**   | Contact number of tutee                                     | Any number at least 3 digits long                                                                                                                                                                                                                    |
-| **`EMAIL`**   | Email address of tutee                                      | In **XXXXXXXX@emaildomain** format <br> Example: `johndoee@gmail.com`                                                                                                                                                                                |
-| **`ADDRESS`** | Address of the tutee                                        | [Alphanumeric](#glossary) and may contain spaces                                                                                                                                                                                                     |
-| **`SUBJECT`** | Subject of the tutee                                        | [Alphanumeric](#glossary) and may contain spaces                                                                                                                                                                                                     |
-| **`DAY`**     | Day of weekly recurring lesson of the tutee                 | Full name of day or first three letters of the full name <br> **Non-case sensitive** <br> Example: `Mon`/`Monday`/`monday`                                                                                                                           |
-| **`BEGIN`**   | Begin time of a tutee's weekly recurring lesson             | In **HHMM** format                                                                                                                                                                                                                                   |
-| **`END`**     | End time of a tutee's weekly recurring lesson               | In **HHMM** format                                                                                                                                                                                                                                   |
-| **`PAYRATE`** | dollars per hour you make teaching this tutee               | Numbers only <br> Numbers must be **non-negative**                                                                                                                                                                                                   |
-| **`INDEX`**   | The index number of the tutee shown in the tutee list panel | Used in [`delete`](#deleting-a-tutee-delete) [`edit`](#editing-a-tutee--edit) [`unpaid`](#marking-a-tutee-as-unpaid--unpaid) and [`paid`](#marking-a-tutee-as-paid--paid) commands <br> Must be a **positive number** <br> Example: (1,2,3,...) <br> |
-
+| Parameter      | Description                                                 | Requirement / Remarks                                                                                                                                                                                                                                |
+|----------------|-------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **`NAME`**     | Name of tutee                                               | [Alphanumeric](#glossary) and may contain spaces                                                                                                                                                                                                     |
+| **`DATE`**     | Date of the upcoming application task                       | In **dd-mm-yyyy** format                                                                                                                                                                                                                             |
+| **`PHONE`**    | Contact number of tutee                                     | Any number at least 3 digits long                                                                                                                                                                                                                    |
+| **`EMAIL`**    | Email address of tutee                                      | In **XXXXXXXX@emaildomain** format <br> Example: `johndoee@gmail.com`                                                                                                                                                                                |
+| **`ADDRESS`**  | Address of the tutee                                        | [Alphanumeric](#glossary) and may contain spaces                                                                                                                                                                                                     |
+| **`SUBJECT`**  | Subject of the tutee                                        | [Alphanumeric](#glossary) and may contain spaces                                                                                                                                                                                                     |
+| **`DAY`**      | Day of weekly recurring lesson of the tutee                 | Full name of day or first three letters of the full name <br> **Non-case sensitive** <br> Example: `Mon`/`Monday`/`monday`                                                                                                                           |
+| **`BEGIN`**    | Begin time of a tutee's weekly recurring lesson             | In **HHMM** format                                                                                                                                                                                                                                   |
+| **`END`**      | End time of a tutee's weekly recurring lesson               | In **HHMM** format                                                                                                                                                                                                                                   |
+| **`PAYRATE`**  | dollars per hour you make teaching this tutee               | Numbers only <br> Numbers must be **non-negative**                                                                                                                                                                                                   |
+| **`INDEX`**    | The index number of the tutee shown in the tutee list panel | Used in [`delete`](#deleting-a-tutee-delete) [`edit`](#editing-a-tutee--edit) [`unpaid`](#marking-a-tutee-as-unpaid--unpaid) and [`paid`](#marking-a-tutee-as-paid--paid) commands <br> Must be a **positive number** <br> Example: (1,2,3,...) <br> |
+| **`DURATION`** | The duration of a time slot in **minutes**                  | Used in [`freeTime`](#finding-free-time--freetime) Must be a **positive integer** <br> Example: (60,120,...) <br>                                                                                                                                    |
 ## Features
 
 ### Viewing help : `help`
@@ -382,24 +382,20 @@ Format: `unpaidAll`
 
 ### Finding Free Time : `freeTime`
 
-**Description**: Finds a set of free time in your schedule.
+**Description**: Finds timeslots when you are free in your schedule.
 
 **Format**: `freeTime d/DAY dur/DURATION b/BEGIN end/END`
 
-**Expected Input**:
-* **Day (Compulsory field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).
-* **Duration (Compulsory field)**: Positive Integer to represent duration in minutes.
-* **Begin (Compulsory field)**: String with restrictions (HHMM).
-* **End (Compulsory field)**: String with restrictions (HHMM).
+:bulb: Tip on how to use this command: I want to know when I'm free on `DAY` between `BEGIN` and `END` for at least `DURATION` minutes long.
 
-**Expected Output when the command succeeds**: Free From: ...
+**Example:**
+  - `freeTime d/Sat dur/120 b/0800 end/2200`
+    - :information_source: the command above will find timeslots when the user is free on `Sat` between `0800` and `2200`, where each timeslot is at least `120` minutes long.
 
-**Expected Output when the command fails**:
+**Sample Execution**: `freeTime d/Sat dur/120 b/0800 end/2200`
 
-* **Invalid Day**: Days should be written using their full names or their first three letters, and it should not be blank.
-* **Duration**: The duration must be a positive integer
-* **Invalid Begin**: Begin has a format of HHMM
-* **Invalid End**: That is not a valid time format. End has a format of HHMM
+![freeTime before and after](images/freeTime%20before%20and%20after.png)
+
 
 ### Undo previous command : `undo`
 
