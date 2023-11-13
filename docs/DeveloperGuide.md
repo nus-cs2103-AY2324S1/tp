@@ -356,21 +356,43 @@ The following sequence diagram shows how the upcoming command works:
 
 ![UpcomingCommandSequenceDiagram](images/UpcomingCommandSequenceDiagram.png)
 
-### Sort patients feature
+### Sort patients/appointment features
 
 [SortPatientCommandParser.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/parser/personparser/SortPatientCommandParser.java
 [SortPatientCommand.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/commands/personcommands/SortPatientCommand.java
+[SortCommandParser.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/parser/appointmentparser/SortCommandParser.java
+[SortCommand.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/commands/appointmentcommands/SortCommand.java
 
 #### Implementation
 
-For _sort-p_ command, the noteworthy classes involved are:
+For _sort-p_ and _sort-a_ commands, the noteworthy classes involved are:
 
-- [`SortPatientCommandParser.java`][SortPatientCommandParser.java] - This parses the user input and creates a new `SortPatientCommand` object.
-
+- [`SortPatientCommandParser.java`][SortPatientCommandParser.java] - This parses the user input and creates a new `SortPatientCommand` object.  
 - [`SortPatientCommand.java`][SortPatientCommand.java] - This command object executes to sort the patient list by ascending or descending order and by the given attribute to sort by.
+- [`SortCommandParser.java`][SortCommandParser.java] - This parses the user input and creates a new `SortCommand` object.
+- [`SortCommand.java`][SortCommand.java] - This command object executes to sort the appointment list by ascending or descending order and by the given attribute to sort by.
 
-The feature is implemented by sorting the unfiltered patient list stored in the model with using a custom comparator depending on each attribute.
+The following exceptions may be thrown during this process, namely:
+- ParseException for missing arguments
+- ParseException for invalid arguments
 
+The feature is implemented by sorting the unfiltered patient/appointment list stored in the model with using a custom comparator depending on each attribute.
+
+Given below is an example usage scenario and how the sort-p/sort-a mechanism behaves at each step.
+
+-- user input --  
+Step 1. User executes sort-p/sort-a command with correct and valid arguments.
+
+-- `AddressBookParser` --  
+Step 2. Returns new `SortPatientCommandParser`/`SortCommandParser`.
+
+-- `SortPatientCommandParser`/`SortCommandParser` --  
+Step 3. Verify that all argument prefixes are present.  
+Step 4. Verify that provided arguments are valid.  
+Step 5. Returns new `SortPatientCommand`/`SortCommand`.
+
+-- `SortPatientCommand`/`SortCommand` --  
+Step 6. Patient/Appointment list is sorted.
 
 The following sequence diagram shows how the sort patient command works:
 
@@ -383,6 +405,68 @@ The following sequence diagram shows how the sort patient command works:
 #### Additional Info:
 1. The sort command under appointments is implemented similarly but sorts the appointment list either by priority or time.
 
+### Diagnose/Undiagnose Feature
+
+[DiagnoseCommandParser.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/parser/personparser/DiagnoseCommandParser.java
+[DiagnoseCommand.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/commands/personcommands/DiagnoseCommand.java
+[UndiagnoseCommandParser.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/parser/personparser/UndiagnoseCommandParser.java
+[UndiagnoseCommand.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/commands/personcommands/UndiagnoseCommand.java
+
+#### Implementation
+
+For _Diagnose/Undiagnose_ command, the noteworthy classes are:
+- [`DiagnoseCommandParser.java`][DiagnoseCommandParser.java] - For parsing the arguments to `DiagnoseCommand`.
+- [`UndiagnoseCommandParser.java`][UndiagnoseCommandParser.java]- For parsing the arguments to `UndiagnoseCommand`.
+- [`DiagnoseCommand.java`][DiagnoseCommand.java] - For execution.
+- [`UndiagnoseCommand.java`][UndiagnoseCommand.java] - For execution.
+
+The following exceptions may be thrown during this process, namely:
+- ParseException for missing arguments
+- ParseException for invalid arguments
+- CommandException for invalid index
+
+Given below is an example usage scenario and how the diagnose mechanism behaves at each step.
+
+-- user input --  
+Step 1. User executes diagnose command with correct and valid arguments.
+
+-- `AddressBookParser` --  
+Step 2. Returns new `DiagnoseCommandParser`.
+
+-- `DiagnoseCommandParser` --  
+Step 3. Verify that all argument prefixes are present.  
+Step 4. Verify that provided arguments are valid.  
+Step 5. Calls ParserUtil#parseIllnesses() to create the set of illnesses.  
+Step 6. Returns new `DiagnoseCommand`.
+
+-- `DiagnoseCommand` --  
+Step 7. Calls DiagnoseCommand#createDiagnosedPerson() to add the set of illnesses to the patients existing set of illnesses.  
+Step 8. Check which illnesses were already inside to feedback to user.  
+Step 9. Patient is diagnosed.
+
+Given below is an example usage scenario and how the undiagnose mechanism behaves at each step.
+
+-- user input --  
+Step 1. User executes undiagnose command with correct and valid arguments.
+
+-- `AddressBookParser` --  
+Step 2. Returns new `UndiagnoseCommandParser`.
+
+-- `UndiagnoseCommandParser` --  
+Step 3. Verify that all argument prefixes are present.  
+Step 4. Verify that provided arguments are valid.  
+Step 5. Calls ParserUtil#parseIllnesses() to create the set of illnesses.  
+Step 6. Returns new `UndiagnoseCommand`.
+
+-- `UndiagnoseCommand` --  
+Step 7. Calls UndiagnoseCommand#createUndiagnosedPerson() to remove the set of illnesses to the patients existing set of illnesses.  
+Step 8. Check which illnesses were never inside to feedback to user.  
+Step 9. Patient is undiagnosed.
+
+The following sequence diagram shows how the diagnose patient command works:
+
+![DiagnoseCommandSequenceDiagram](images/DiagnoseCommandSequenceDiagram.png)
+
 ### Undo/Redo Feature
 
 [UndoCommandParser.java]: https://github.com/AY2324S1-CS2103T-T08-4/tp/blob/master/src/main/java/seedu/address/logic/parser/UndoCommandParser.java
@@ -394,12 +478,12 @@ The following sequence diagram shows how the sort patient command works:
 
 For _Undo/Redo_ command, the noteworthy classes are:
 - [`UndoCommandParser.java`][UndoCommandParser.java] - For parsing the arguments to `UndoCommand`.
-- [`RedoCommandParser.java`][UndoCommandParser.java] - For parsing the arguments to `RedoCommand`.
+- [`RedoCommandParser.java`][RedoCommandParser.java] - For parsing the arguments to `RedoCommand`.
 - [`UndoCommand.java`][UndoCommand.java] - For execution.
-- [`RedoCommand.java`][UndoCommand.java] - For execution.
+- [`RedoCommand.java`][RedoCommand.java] - For execution.
 
 
-The following sequence diagram shows how the undo patient command works:
+The following sequence diagram shows how the undo command works:
 
 ![UndoCommandSequenceDiagram](images/UndoCommandSequenceDiagram.png)
 

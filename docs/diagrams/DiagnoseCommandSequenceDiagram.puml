@@ -1,0 +1,76 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DiagnoseCommandParser" as DiagnoseCommandParser LOGIC_COLOR
+participant "d:DiagnoseCommand" as DiagnoseCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("diagnose 1 illnesses=flu, fever")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("diagnose 1 illnesses=flu, fever")
+activate AddressBookParser
+
+create DiagnoseCommandParser
+AddressBookParser -> DiagnoseCommandParser
+activate DiagnoseCommandParser
+
+DiagnoseCommandParser --> AddressBookParser
+deactivate DiagnoseCommandParser
+
+AddressBookParser -> DiagnoseCommandParser : parse("1 illnesses=flu, fever")
+activate DiagnoseCommandParser
+
+create DiagnoseCommand
+DiagnoseCommandParser -> DiagnoseCommand
+activate DiagnoseCommand
+
+DiagnoseCommand --> DiagnoseCommandParser : d
+deactivate DiagnoseCommand
+
+DiagnoseCommandParser --> AddressBookParser : d
+deactivate DiagnoseCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DiagnoseCommandParser -[hidden]-> AddressBookParser
+destroy DiagnoseCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> DiagnoseCommand : execute(model)
+activate DiagnoseCommand
+
+DiagnoseCommand -[LOGIC_COLOR]> DiagnoseCommand: createDiagnosedPerson
+activate DiagnoseCommand #D3D3EC
+            DiagnoseCommand --[LOGIC_COLOR]> DiagnoseCommand : diagnosedPerson
+            deactivate DiagnoseCommand
+
+
+DiagnoseCommand -> Model : setPerson(target, diagnosedPerson)
+activate Model
+
+Model --> DiagnoseCommand
+deactivate Model
+
+create CommandResult
+DiagnoseCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DiagnoseCommand
+deactivate CommandResult
+
+DiagnoseCommand --> LogicManager : result
+deactivate DiagnoseCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
