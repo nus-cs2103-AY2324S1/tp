@@ -9,10 +9,6 @@ KeepInTouch is a desktop app for managing contacts for people in the working ind
 
 Given below are my contributions to the team:
 
-* **New Feature**: to be added soon
-
-* **New Feature**: to be added soon
-
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=nixx162&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
 
 * **Project management**:
@@ -33,12 +29,8 @@ Given below are my contributions to the team:
 
 * **Documentation**:
     * User Guide:
-        * to be added soon
+        * Proofread the UG and fixed some typos, grammatical errors, and misrepresentations.
     * Developer Guide:
-        * to be added soon
-
-* **Community**:
-    * to be added soon
-
-* **Tools**:
-    * to be added soon
+        * Modified the existing UML to fit the current state of our project
+        * Formatted and added some test cases to the manual testing section
+        * Discussed implementation details of the improved help feature in the DG\
