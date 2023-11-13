@@ -49,10 +49,12 @@ Given below are my contributions to the project.
   * User Guide:
     * Add documentation for the `editPerson`, `deleteAllTask`, `markTask`, `unmarkTask`, `findDone`, `findNotDone` and `deleteAllDone` commands.
     * Add list of features of CoordiMate (PR [#108](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/108))
+    * Add Glossary (PR [#160](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/160))
     * Add self drawn mockups of GUI for User Guide (Commit [#0a25954](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/20/commits/0a25954d0d7a5b4d0a5b5da7ddf313bd0861c78b))
   * Developer Guide:
     * Add user stories and use cases for `editPerson`, `deleteAllTask`, `markTask`, `unmarkTask`, `findDone`, `findNotDone` and `deleteAllDone` commands.
-    * Added implementation details and design considerations of `markTask` feature (PR [#100](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/100))<br><br>
+    * Add implementation details and design considerations of `markTask` feature with sequence diagram and activity diagram (PR [#100](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/100))
+    * Add Planned enhancements (PR [#163](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/163)) <br><br>
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): PR [#56](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/56), [#91](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/91), [#89](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/89), [#88](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/88), [#84](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/84)
