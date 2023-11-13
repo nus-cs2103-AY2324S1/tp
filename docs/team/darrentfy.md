@@ -44,7 +44,8 @@ Summary of Contributions:
     * Managed v1.2.1 and v1.3 releases
 
 * **Review/mentoring contributions**
-    * PRs reviewed: [#80](https://github.com/AY2324S1-CS2103T-W13-4/tp/pull/92),
+    * PRs reviewed: [#80](https://github.com/AY2324S1-CS2103T-W13-4/tp/pull/80),
+        [#83](https://github.com/AY2324S1-CS2103T-W13-4/tp/pull/83),
         [#92](https://github.com/AY2324S1-CS2103T-W13-4/tp/pull/92),
         [#137](https://github.com/AY2324S1-CS2103T-W13-4/tp/pull/137),
         [#149](https://github.com/AY2324S1-CS2103T-W13-4/tp/pull/149)
