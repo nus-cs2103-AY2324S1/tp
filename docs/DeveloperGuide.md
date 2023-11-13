@@ -284,7 +284,7 @@ Step 2. `DeletePersonCommand` is executed, in which `Model#deletePerson("Alex Ye
 
 </box>
 
-Step 3. `Model#deletePerson()` will also call `AddressBook#removePerson(Alex Yeoh)` which will remove the target contact from the contact list while removing it from all the groups it was part of.
+Step 3. `Model#deletePerson()` will also call `AddressBook#removePerson(Alex Yeoh)` which will remove the target contact from the contact list while removing it from all the groups it was part of by calling `Group#removePerson(Alex Yeoh)`.
 
 The following sequence diagram shows how the Delete Person operation works:
 
@@ -300,7 +300,7 @@ The following sequence diagram shows how the Delete Person operation works:
 
 The Delete Group command mechanism behaves the same as the Delete Person command above, except it deletes the target `Group` object instead of the `Person` object.
 
-Additionally, `AddressBook#removeGroup(Group g)` will remove the target group 'g' from the group lists of all the members that were a part of it.
+Additionally, `AddressBook#removeGroup(Group g)` will remove the target group 'g' from the group lists of all the members that were a part of it by calling `Person#removeGroup(Group g)`.
 
 #### Design Considerations
 
@@ -740,39 +740,23 @@ The List Time from Group command mechanism behaves the same as the List Time fro
 --------------------------------------------------------------------------------------------------------------------
 
 ### 3.11. Find Free Time
-
 #### Implementation
 
-The FindFreeTime mechanism is facilitated by the `Model`, `Group` and  `Person` class.
-It retrieves `Group` from `Model` to find a free time between group members in `listOfGroupMates` in `Group` 
-with a duration specified, `Duration`.
-The operation is exposed to `Model` interface as `Model#findGroup`.
+The FindFreeTime mechanism is facilitated by the `Model`, `Group` and  `Person` class. It retrieves `Group` from `Model` to find a free time between group members in `listOfGroupMates` in `Group` with a duration specified, `Duration`. The operation is exposed to `Model` interface as `Model#findGroup`.
 
 
 Given below is an example usage scenario and how the list mechanism behaves at each step.
 
-**Step 1:** User launches the application. 
-
-**Step 2:** User executes `findfreetime g/CS2103 d/60` command to find a common meeting time with duration 60 minutes 
-for group CS2103.
-
-**Step 3:** FindFreeTimeCommandParser parses the group name CS2103 and duration 60, ensuring that duration 
-is a valid integer in terms of minutes, and returns a FindFreeTimeCommand.
-
-**Step 4:** FindFreeTimeCommand calls `Model#findGroup(groupName)` to retrieve the group with matching name.
-If group does not exist, then an error is thrown.
-
-**Step 4:** FindFreeTimeCommand calls `Group#findFreeTime(duration)`, to retrieve the all common timeslots between 
-`listOfGroupMates` in `Group` and return them in a list should they accommodate the duration stated.
-
+**Step 1:** User launches the application.
+**Step 2:** User executes `findfreetime g/CS2103 d/60` command to find a common meeting time with duration 60 minutes for group CS2103.
+**Step 3:** FindFreeTimeCommandParser parses the group name CS2103 and duration 60, ensuring that duration is a valid integer in terms of minutes, and returns a FindFreeTimeCommand.
+**Step 4:** FindFreeTimeCommand calls `Model#findGroup(groupName)` to retrieve the group with matching name. If group does not exist, then an error is thrown.
+**Step 4:** FindFreeTimeCommand calls `Group#findFreeTime(duration)`, to retrieve the all common timeslots between `listOfGroupMates` in `Group` and return them in a list should they accommodate the duration stated.
 **Note:**
-If group is empty, having no group mates in `listOfGroupMates` an error is thrown. 
-<br>
-If any group mate has not key in their free time slots using `addtime`, an error is thrown. 
-
+If group is empty, having no group mates in `listOfGroupMates` an error is thrown. If any group mate has not key in their free time slots using `addtime`, an error is thrown. 
 
 The following activity diagram summarizes what happens when a user executes a FindFreeTime command:
-
+<puml src="diagrams/FindFreeTimeActivityDiagram.puml" alt="FindFreeTimeActivityDiagram" />
 --------------------------------------------------------------------------------------------------------------------
 
 ## 4. Planned Enhancements
