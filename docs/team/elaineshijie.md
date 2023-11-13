@@ -26,11 +26,11 @@ Given below are my contributions to the project.
 
 * **Enhancements implemented**:
     * Added tests to ensure correctness (Pull Request [#234](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/234), [#245](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/245)).
-    * Added classes to support lesson and schedule in app (Collaboration) [#74](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/74)
+    * Added classes to support lesson and schedule in app (Collaboration) (Pull Request [#74](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/74)).
 
 * **Contributions to User Guide**:
     * Added documentation for the `addTask`, `deleteTask` features. (Pull Request [#153](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/153))
-    * Updated the command summary table and editing data file section. (Pull Request [#222](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/222))
+    * Updated the FAQ and editing data file section. (Pull Request [#222](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/222))
 
 * **Contributions to Developer Guide**:
     * Added non-functional requirements (Pull Request [#41](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/41))
