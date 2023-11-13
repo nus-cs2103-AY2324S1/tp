@@ -28,12 +28,15 @@ public class JsonAdaptedAppointmentTest {
     private static final String VALID_END_TIME = ALICE_APPOINTMENT.getEndTime().toString();
     private static final String VALID_DESCRIPTION = ALICE_APPOINTMENT.getDescription().toString();
 
+    // EP: Valid Appointment Details
     @Test
     public void toModelType_validAppointmentDetails_returnsAppointment() throws Exception {
         JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(ALICE_APPOINTMENT);
         assertEquals(ALICE_APPOINTMENT, appointment.toModelType());
     }
 
+    // Heuristic: No more than one invalid input in a test case
+    // EP: Invalid name
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(INVALID_NAME, VALID_DATE,
@@ -42,6 +45,7 @@ public class JsonAdaptedAppointmentTest {
         assertThrows(IllegalValueException.class, expectedMessage, appointment::toModelType);
     }
 
+    // EP: Null name
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(null, VALID_DATE,
@@ -50,6 +54,7 @@ public class JsonAdaptedAppointmentTest {
         assertThrows(IllegalValueException.class, expectedMessage, appointment::toModelType);
     }
 
+    // EP: Invalid Date
     @Test
     public void toModelType_invalidDate_throwsIllegalValueException() {
         JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(VALID_NAME, INVALID_DATE,
@@ -58,6 +63,7 @@ public class JsonAdaptedAppointmentTest {
         assertThrows(IllegalValueException.class, expectedMessage, appointment::toModelType);
     }
 
+    // EP: Null date
     @Test
     public void toModelType_nullDate_throwsIllegalValueException() {
         JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(VALID_NAME, null,
@@ -66,6 +72,7 @@ public class JsonAdaptedAppointmentTest {
         assertThrows(IllegalValueException.class, expectedMessage, appointment::toModelType);
     }
 
+    // EP: Invalid start time
     @Test
     public void toModelType_invalidStartTime_throwsIllegalValueException() {
         JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(VALID_NAME, VALID_DATE,
@@ -74,6 +81,7 @@ public class JsonAdaptedAppointmentTest {
         assertThrows(IllegalValueException.class, expectedMessage, appointment::toModelType);
     }
 
+    // EP: Null start time
     @Test
     public void toModelType_nullStartTime_throwsIllegalValueException() {
         JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(VALID_NAME, VALID_DATE,
@@ -82,6 +90,7 @@ public class JsonAdaptedAppointmentTest {
         assertThrows(IllegalValueException.class, expectedMessage, appointment::toModelType);
     }
 
+    // EP: Invalid End Time
     @Test
     public void toModelType_invalidEndTime_throwsIllegalValueException() {
         JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(VALID_NAME, VALID_DATE,
@@ -90,6 +99,7 @@ public class JsonAdaptedAppointmentTest {
         assertThrows(IllegalValueException.class, expectedMessage, appointment::toModelType);
     }
 
+    // EP: Null end time
     @Test
     public void toModelType_nullEndTime_throwsIllegalValueException() {
         JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(VALID_NAME, VALID_DATE,
@@ -98,6 +108,7 @@ public class JsonAdaptedAppointmentTest {
         assertThrows(IllegalValueException.class, expectedMessage, appointment::toModelType);
     }
 
+    // EP: Invalid description
     @Test
     public void toModelType_invalidDescription_throwsIllegalValueException() {
         JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(VALID_NAME, VALID_DATE,
@@ -106,6 +117,7 @@ public class JsonAdaptedAppointmentTest {
         assertThrows(IllegalValueException.class, expectedMessage, appointment::toModelType);
     }
 
+    // EP: Null description
     @Test
     public void toModelType_nullDescription_throwsIllegalValueException() {
         JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(VALID_NAME, VALID_DATE,

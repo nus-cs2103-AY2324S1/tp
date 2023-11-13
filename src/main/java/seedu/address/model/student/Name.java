@@ -13,7 +13,7 @@ public class Name {
             + " have a maximum of 100 characters, and should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "^[A-Za-z][A-Za-z ]{0,99}$";

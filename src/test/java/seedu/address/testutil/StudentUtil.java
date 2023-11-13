@@ -29,7 +29,7 @@ public class StudentUtil {
         sb.append(PREFIX_NAME + student.getName().value + " ");
         sb.append(PREFIX_PHONE + student.getPhone().value + " ");
         sb.append(PREFIX_ADDRESS + student.getAddress().value + " ");
-        student.getTags().stream().forEach(
+        student.getRiskLevel().stream().forEach(
             s -> sb.append(PREFIX_RISK_LEVEL + s.riskLevel + " ")
         );
         return sb.toString();

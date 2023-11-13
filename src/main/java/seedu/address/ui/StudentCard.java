@@ -54,7 +54,7 @@ public class StudentCard extends UiPart<Region> {
         phone.setText(student.getPhone().value);
         address.setText(student.getAddress().value);
 
-        student.getTags().forEach(tag -> {
+        student.getRiskLevel().forEach(tag -> {
             Label tagLabel = new Label(tag.riskLevel);
             tagLabel.getStyleClass().add(getTagStyleClass(tag.riskLevel));
             tags.getChildren().add(tagLabel);

@@ -54,6 +54,7 @@ public class FilterCommandTest {
         assertFalse(filterFirstCommand.equals(filterSecondCommand));
     }
 
+    // Find single appointment
     @Test
     public void execute_validDate_singleAppointmentFound() {
         String expectedMessage = String.format(MESSAGE_APPOINTMENTS_LISTED_OVERVIEW, 1);
@@ -65,6 +66,7 @@ public class FilterCommandTest {
         assertEquals(expectedModel.getFilteredAppointmentList(), Collections.singletonList(ALICE_APPOINTMENT));
     }
 
+    // Find multiple appointments
     @Test
     public void execute_validDate_multipleAppointmentsFound() {
         String expectedMessage = String.format(MESSAGE_APPOINTMENTS_LISTED_OVERVIEW, 2);
@@ -77,6 +79,7 @@ public class FilterCommandTest {
                 BENNY_APPOINTMENT));
     }
 
+    // Find no appointment
     @Test
     public void execute_noAppointmentsFound() {
         String expectedMessage = String.format(MESSAGE_APPOINTMENTS_LISTED_OVERVIEW, 0);

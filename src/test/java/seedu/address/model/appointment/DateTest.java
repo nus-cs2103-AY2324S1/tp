@@ -22,19 +22,44 @@ public class DateTest {
     @Test
     public void isValidDate() {
         // valid Date
+        // EP: follows yyyy-MM-dd format
         assertTrue(Date.isValidDate("2023-10-14"));
         assertTrue(Date.isValidDate("2023-11-14"));
         assertTrue(Date.isValidDate("2023-10-31"));
 
-        // invalid Date
+        // invalid Date: does not follow yyyy-MM-dd format
+        // EP: extra characters
         assertFalse(Date.isValidDate("2023-10-14 15:30")); // includes time
-        assertFalse(Date.isValidDate("15:30")); // only time, no date
         assertFalse(Date.isValidDate("2023-10-14 15:")); // incomplete
         assertFalse(Date.isValidDate("2023-10-14 15:301")); // extra digit
+
+        // EP: too little characters
+        assertFalse(Date.isValidDate("15:30")); // only time, no date
+
+        // EP: non-numerical characters
         assertFalse(Date.isValidDate("2023-10-14 15:AM")); // contains non-digit
+
+        // EP: not using dashes
+        assertFalse(Date.isValidDate("2023:10:14")); // contains ":"
+        assertFalse(Date.isValidDate("2023/10/14")); // contains "/"
+
+        // invalid Date: out of bounds date and month
+
+        // EP: out of bounds for date and month
         assertFalse(Date.isValidDate("2023-13-14")); // month 13
         assertFalse(Date.isValidDate("2023-10-32")); // day 32
-        assertFalse(Date.isValidDate("1999-10-14")); // year 1999
+        assertFalse(Date.isValidDate("1999-10-14")); // year 1999, in the past
+        assertFalse(Date.isValidDate("8000-10-14")); // year 8000, too far in the future, must be within a year
+
+
+        // February special cases
+
+        // EP: february max 28 days on non-leap year
+        assertFalse(Date.isValidDate("2023-02-29")); // non-leap year
+        assertTrue(Date.isValidDate("2023-02-28"));
+
+        // EP: february 29th day on leap year
+        assertTrue(Date.isValidDate("2024-02-29"));
     }
 
     @Test

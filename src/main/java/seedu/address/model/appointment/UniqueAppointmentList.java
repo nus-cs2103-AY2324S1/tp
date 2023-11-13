@@ -145,6 +145,9 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
         return true;
     }
 
+    /**
+     * Returns true if {@code appointments} do not overlap with each other.
+     */
     private boolean appointmentsDoNotOverlap(List<Appointment> appointments) {
         for (int i = 0; i < appointments.size() - 1; i++) {
             for (int j = i + 1; j < appointments.size(); j++) {

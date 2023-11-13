@@ -33,17 +33,26 @@ public class NoteTest {
                 + "bcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrs"
                 + "tuvwxyzabcdefghijklmnopqrstuvwxyzabcdef";
 
-        // null note
+        // EP: null note
         assertThrows(NullPointerException.class, () -> Note.isValidNote(null));
 
         // invalid notes
-        assertFalse(Note.isValidNote(fiveHundredCharNote + "a")); // more than 500 characters
+        // EP: more than 500 characters
+        assertFalse(Note.isValidNote(fiveHundredCharNote + "a")); //501 characters
 
-        // valid note numbers
+        // valid notes
+        // EP: 0 characters or empty strings
         assertTrue(Note.isValidNote("")); // empty string
-        assertTrue(Note.isValidNote("Likes dogs."));
+        assertTrue(Note.isValidNote("  ")); // blank space
+
+        // EP: Exactly 1 character
         assertTrue(Note.isValidNote("a")); // 1 character
+
+        // EP: Exactly 500 characters
         assertTrue(Note.isValidNote(fiveHundredCharNote)); // exactly 500 characters
+
+        // EP: With special characters
+        assertTrue(Note.isValidNote("The 3rd session was very ****fire****"));
     }
 
     @Test

@@ -26,7 +26,7 @@ public class JsonAdaptedStudentTest {
     private static final String VALID_NAME = BENNY.getName().toString();
     private static final String VALID_PHONE = BENNY.getPhone().toString();
     private static final String VALID_ADDRESS = BENNY.getAddress().toString();
-    private static final List<JsonAdaptedRiskLevel> VALID_TAGS = BENNY.getTags().stream()
+    private static final List<JsonAdaptedRiskLevel> VALID_TAGS = BENNY.getRiskLevel().stream()
             .map(JsonAdaptedRiskLevel::new)
             .collect(Collectors.toList());
     private static final String VALID_NOTE = BENNY.getNote().toString();
@@ -37,12 +37,15 @@ public class JsonAdaptedStudentTest {
             + "bcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrs"
             + "tuvwxyzabcdefghijklmnopqrstuvwxyzabcdefa";
 
+    // EP: Valid student details
     @Test
     public void toModelType_validStudentDetails_returnsStudent() throws Exception {
         JsonAdaptedStudent student = new JsonAdaptedStudent(BENNY);
         assertEquals(BENNY, student.toModelType());
     }
 
+    // Heuristic: No more than one invalid input in a test case
+    // EP: Invalid name
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedStudent student =
@@ -51,6 +54,7 @@ public class JsonAdaptedStudentTest {
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 
+    // EP: Null name
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedStudent student = new JsonAdaptedStudent(null, VALID_PHONE, VALID_ADDRESS,
@@ -59,6 +63,7 @@ public class JsonAdaptedStudentTest {
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 
+    // EP: Invalid phone
     @Test
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonAdaptedStudent student =
@@ -67,6 +72,7 @@ public class JsonAdaptedStudentTest {
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 
+    // EP: Null phone
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
         JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, null, VALID_ADDRESS,
@@ -75,6 +81,7 @@ public class JsonAdaptedStudentTest {
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 
+    // EP: Invalid Address
     @Test
     public void toModelType_invalidAddress_throwsIllegalValueException() {
         JsonAdaptedStudent student =
@@ -83,6 +90,7 @@ public class JsonAdaptedStudentTest {
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 
+    // EP: Null address
     @Test
     public void toModelType_nullAddress_throwsIllegalValueException() {
         JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, null,
@@ -91,6 +99,7 @@ public class JsonAdaptedStudentTest {
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 
+    // EP: Invalid tags
     @Test
     public void toModelType_invalidTags_throwsIllegalValueException() {
         List<JsonAdaptedRiskLevel> invalidTags = new ArrayList<>(VALID_TAGS);
@@ -100,6 +109,7 @@ public class JsonAdaptedStudentTest {
         assertThrows(IllegalValueException.class, student::toModelType);
     }
 
+    // EP: Null note
     @Test
     public void toModelType_nullNote_throwsIllegalValueException() {
         JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_ADDRESS,
@@ -108,6 +118,7 @@ public class JsonAdaptedStudentTest {
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 
+    // EP: Invalid note
     @Test
     public void toModelType_invalidNote_throwsIllegalValueException() {
         JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_ADDRESS,
