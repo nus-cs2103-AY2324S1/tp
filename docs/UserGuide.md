@@ -125,7 +125,7 @@ Let's say you want to open the profile page of a fosterer name Alex Yeoh who is 
 To do so, enter <code>view 1</code> as shown in the image above, which opens the profile page of the fosterer at index 1, Alex Yeoh. 
 
 <div style="text-align: center">
-<img src="images/screenshots/EditExample.png" height="520" class="center"/>
+<img src="images/screenshots/EditExample.png" height="480" class="center"/>
 </div>
 
 <br>
@@ -143,8 +143,6 @@ Typing in the name of the field you want to edit, or substrings of the field, di
 
 In the example above, entering <code>name</code>, or a substring of name like <code>nam</code>, brings the focus to the name field.
 
-<br>
-
 <div style="text-align: center">
 <img src="images/screenshots/NavigatingFields.png" class="center"/>
 </div>
@@ -152,9 +150,7 @@ In the example above, entering <code>name</code>, or a substring of name like <c
 <div style="page-break-after: always;"></div>
 
 After you are done editing, pressing the Enter key on your keyboard brings your cursor back to the command box with your new changes intact. <br>
-If you wish to revert back to the original value of the field while editing in the textbox, press the Esc key to undo the changes and direct your cursor back to the command box. 
-
-<br>
+If you wish to revert back to the original value of the field while editing in the textbox, press the Esc key to undo the changes and direct your cursor back to the command box.
 
 <div style="text-align: center">
 <img src="images/screenshots/CursorBackToCommandbox.png" class="center"/>
