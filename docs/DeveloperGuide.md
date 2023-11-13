@@ -396,13 +396,17 @@ _{Explain here how the data archiving feature will be implemented}_
 
 #### Implementation
 
-The sorting feature builds on the existing filter feature present in `Model`. `Model` has a getter method `Model#getFilteredPersonList()` which returns an `ObservableList<Person>`. `Model#getFilteredPersonList()` is called by `LogicManager#getFilteredPersonList()`, which is then called in `MainWindow` to render a filtered list of contacts. The implementation of the filter feature in `ModelManager` uses JavaFX's `FilteredList`, an implementation of the `SortedList` interface.
+The `NetworkBook` class wraps around the data displayed to the user.
+The sorting feature builds on the filter feature present in `NetworkBook`, which uses JavaFX's `FilteredList`, an implementation of the `ObservableList` interface.
 
-The new sort feature makes use of JavaFX's `SortedList`, another implementation of the `ObservableList` interface. `SortedList` takes a predicate which it then uses to sort the list.
+The sort feature makes use of JavaFX's `SortedList`, another implementation of the `ObservableList` interface.
+`SortedList` takes a predicate which it then uses to sort the list.
 
-To implement the sort feature, the method `Model#updateSortedPersonList()` was exposed via the `Model` interface. A `SortedList` was then added to the implementation in `ModelManager` as a wrapper of the existing `FilteredList`. `ModelManager`'s implementation of `updateSortedPersonList()` method updates the predicate of the `SortedList`. Finally, the implementation of `getFilteredPersonList()` was updated to return the sorted list.
+To implement the sort feature, a new `SortedList` was added to `NetworkBook`, wrapping around the existing `FilteredList`.
+This sorted list is the list that is displayed to the user.
 
-The sort command updates the predicate of the model's `SortedList` to a `PersonSortComparator`. `PersonSortComparator` extends `Comparator<Person>`, adding in a few extra methods specific to sorting persons:
+The sort command updates the predicate of the `SortedList` to a `PersonSortComparator`.
+`PersonSortComparator` extends `Comparator<Person>`, adding in a few extra methods specific to sorting persons:
 
 * `parseSortField()` parses a given string into a value of the `SortField` enumeration. This value is then used later to determine the predicate implementation.
 * `parseSortOrder()` parses a given string into a value of the `SortOrder` enumeration. This value is then used later to determine the predicate implementation.
@@ -413,33 +417,40 @@ Given below is an example usage scenario and how the sorting mechanism behaves a
 
 Step 1. The user launches the app. The rendered list is unsorted and unfiltered.
 
-<!-- todo insert diagram -->
+Step 2. The user executes `find al` command to filter contacts by name. This updates the predicate of the `FilteredList` to only show contacts with names matching "al".
+The `SortedList` predicate remains unchanged.
 
-Step 2. The user executes `find al` command to filter contacts by name. This updates the predicate of the `FilteredList` to only show contacts with names matching "al". The `SortedList` predicate remains unchanged (i.e. `null`).
+Step 3. The user executes `sort /by name /order desc` to sort the filtered list by name in descending order.
+The `sort` command parser calls `PersonSortComparator#generateComparator()` to generate the appropriate comparator.
 
-<!-- todo insert diagram -->
+![SortingParsingSequenceDiagram](images/SortingParsingSequenceDiagram.png)
 
-Step 3. The user executes `sort /by name /order desc​` to sort the filtered list by name in descending order. The `sort` command parser calls `PersonSortComparator#generateComparator()` to generate the appropriate comparator. The sort command then calls `Model#updateSortedPersonList()`, updating the predicate of the `SortedList`. This newly sorted list is then rendered in the main UI.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SortCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
-<!-- todo insert diagram -->
+</div>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `find` command is called again, the sorting will persist.
+Step 4. The sort command then calls `Model#updateDisplayedPersonList()`, updating the predicate of the `SortedList`.
+This newly sorted list is then rendered in the main UI.
+
+Step 5. A `SortCommandResult` is also returned by the command, which is then passed to `MainWindow`.
+The main window then updates the sorting status displayed in the status bar.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If another `find` or `filter` command is executed, the sorting will persist.
 
 </div>
 
 The following sequence diagram shows how the sort operation works:
 
-_{insert diagram here}_
+![SortingSequenceDiagram](images/SortingSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SortCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
-<!-- todo insert diagram-->
+The following activity diagram summarizes what happens when a user executes a sort command:
 
-The following activity diagram summarizes what happens when a user executes a new command:
-
-_{insert diagram here}_
+![SortingActivityDiagram](images/SortingActivityDiagram.png)
 
 #### Design considerations:
 
@@ -448,7 +459,6 @@ _{insert diagram here}_
 * **Alternative 1 (current choice):** _{to be added}_
 
 * **Alternative 2:** _{to be added}_
-
 
 
 --------------------------------------------------------------------------------------------------------------------
