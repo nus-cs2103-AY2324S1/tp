@@ -19,9 +19,9 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
   * [Adding a contact: `add contact`](#adding-a-contact-add-contact)
   * [Deleting a contact: `delete contact`](#deleting-a-contact-delete-contact)
   * [Finding a contact: `find`](#finding-a-contact-find)
-  * [Adding tags: `add tag`](#adding-tags-add-tag)
+  * [Adding a tag: `add tag`](#adding-a-tag-add-tag)
   * [Deleting tags: `delete tag`](#deleting-tags-delete-tag)
-  * [Adding notes to a contact: `add note`](#adding-notes-to-a-contact-add-note)
+  * [Adding a note to a contact: `add note`](#adding-a-note-to-a-contact-add-note)
   * [Deleting a note: `delete note`](#deleting-a-note-delete-note)
   * [Listing events: `list events`](#listing-events-list-events)
   * [Adding an event: `add event`](#adding-an-event-add-event)
@@ -97,7 +97,7 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
 
 * `TAGNAME` should be alphanumeric, with no spaces.
 
-* `TAGNAME` is case-sensitive. For example, a [contact](#contact) can have [tags](#tag) `HR REPRESENTATIVE` and `HR representative` at the same time.
+* `TAGNAME` is case-sensitive. For example, a [contact](#contact) can have [tags](#tag) `Frontend` and `frontend` at the same time.
 
 * `START_TIME` and `END_TIME` can be in one of the following formats:
   * Both date and time: `yyyy-MM-dd HH:mm[:ss]`

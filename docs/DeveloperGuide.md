@@ -6,18 +6,75 @@
 
 # KeepInTouch Developer Guide
 
+**_KeepInTouch_** is a desktop app for **managing contacts** for **job-seekers**. It can also help job-seekers to manage **events for career purposes.**
+
 <!-- * Table of Contents -->
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+## Table of Contents
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+* [Table of Contents](#table-of-contents)
+* [Acknowledgements](#acknowledgements)
+* [Setting up and getting started](#setting-up-and-getting-started)
+* [Design](#design)
+    * [Architecture](#architecture)
+    * [UI Component](#ui-component)
+    * [Logic Component](#logic-component)
+    * [Model Component](#model-component)
+    * [Storage Component](#storage-component)
+    * [Common Classes](#common-classes)
+* [Implementation](#implementation)
+    * [List Contact with Tags feature](#list-contact-with-tags-feature)
+        * [Implementing `ListPersonCommandParser`](#implementing-listpersoncommandparser)
+        * [Implementing `ListPersonCommand`](#implementing-listpersoncommand)
+    * [Tag feature](#tag-feature)
+        * [Overview: Tag](#overview-tag)
+        * [Implementing `AddTagCommandParser` and `DeleteTagCommandParser`](#implementing-addtagcommandparser-and-deletetagcommandparser)
+        * [Implementing `AddTagCommand`](#implementing-addtagcommand)
+        * [Implementing `DeleteTagCommand`](#implementing-deletetagcommand)
+        * [Design Considerations: Tag](#design-considerations-tag)
+    * [Notes feature](#notes-feature)
+        * [Overview: Note](#overview-note)
+        * [Implementing `AddNoteCommandParser`](#implementing-addnotecommandparser)
+        * [Implementing `DeleteNoteCommandParser`](#implementing-deletenotecommandparser)
+        * [Implementing `AddNoteCommand`](#implementing-addnotecommand)
+        * [Implementing `DeleteNoteCommand`](#implementing-deletenotecommand)
+    * [Enhanced help feature](#enhanced-help-feature)
+    * [[Proposed] Undo/redo feature](#proposed-undoredo-feature)
+        * [Proposed Implementation](#proposed-implementation)
+        * [Design Considerations: Undo/redo](#design-considerations-undoredo)
+* [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+* [Appendix A: Requirements](#appendix-a-requirements)
+    * [Product Scope](#product-scope)
+    * [User Stories](#user-stories)
+    * [Use Cases](#use-cases)
+    * [Non-Functional Requirements](#non-functional-requirements)
+    * [Glossary](#glossary)
+* [Appendix B: Instructions for manual testing](#appendix-b-instructions-for-manual-testing)
+    * [Launch and shutdown](#launch-and-shutdown)
+    * [Deleting a person](#deleting-a-person)
+    * [Adding tag](#adding-tag)
+    * [Deleting tag](#deleting-tag)
+    * [Adding note](#adding-note)
+    * [Deleting note](#deleting-note)
+* [Appendix C: Planned enhancements](#appendix-c-planned-enhancements)
+    * [User Interface](#user-interface)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Acknowledgements**
+
+This project is based on the [AddressBook Level-3](https://se-education.org/addressbook-level3/) project.
+
+Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+
+https://github.com/rrice/java-string-similarity. Reused the sourcecode of this library to measure string similarity for the `help` command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Setting up and getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -65,7 +122,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### UI Component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-W16-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -82,7 +139,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
-### Logic component
+### Logic Component
 
 **API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-W16-1/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -119,7 +176,7 @@ How the parsing works:
 *   - The parsing method for each types of arguments are mainly in `ParserUtil.java`
 * If the command is correct in format, the parser will then return a Command Object for the execution of the command.
 
-### Model component
+### Model Component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-W16-1/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="600" />
@@ -132,7 +189,7 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-### Storage component
+### Storage Component
 
 **API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-W16-1/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -143,7 +200,7 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component such as `Person`, `Note`, and `Event` because the `Storage` component's job is to save/retrieve objects that belong to the `Model`.
 
-### Common classes
+### Common Classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
@@ -206,7 +263,7 @@ The following activity diagram shows how the `list contact` command works:
 ### Tag feature
 This feature allows users to add and remove `Tag` to any `Person` in the contact list. It provides an easy way for users to catrgorize their contacts.
 
-#### Overview:
+#### Overview: Tag
 The adding and removing of `Tag` begins with the parsing of the `AddTagCommand` and `DeleteTagCommand` using the `AddTagCommandParser` and `DeleteTagCommandparser` respectively. The `AddTagCommand` and `DeleteTagCommand` will then be executed by the `Model`.
 
 The activity diagram below shows the action sequence of adding one or more `Tag` to a contact.
@@ -258,7 +315,7 @@ The following activity diagram summarizes what happens when the `DeleteTagComman
 
 <puml src="diagrams/tag/DeleteTagActivityDiagram.puml"/>
 
-#### Design Considerations:
+#### Design Considerations: Tag
 
 **Aspect: Deletion of non-existing tag:**
 
@@ -277,18 +334,12 @@ The following activity diagram summarizes what happens when the `DeleteTagComman
 ### Notes feature
 This feature allows users to add and remove `Note` to any `Person` in the contact list. It provides an easy way for users to record additional information about the contacts.
 
-#### Overview:
+#### Overview: Note
 The adding and removing of `Note` begins with the parsing of the `AddNoteCommand` and `DeleteNoteCommand` using the `AddNoteCommandParser` and `DeleteNoteCommandParser` respectively. The `AddNoteCommand` and `DeleteNoteCommand` will then be executed by the `Model`.
 
 The activity diagram below shows the action sequence of adding a `Note` to a contact.
 
 <puml src="diagrams/note/NoteSequenceDiagram.puml"/>
-
-<box type="info" seamless>
-
-**Note:** The sequence diagram for removing `Note` is similar to adding `Note`. Simply replace `AddCommandParser` with `DeleteCommandParser`, `AddNoteCommandParser` with `DeleteNoteCommandParser`, and `AddNoteCommand` with `DeleteNoteCommand`.
-
-</box>
 
 ##### Implementing `AddNoteCommandParser`
 Implements the `Parser` interface, parsing three main arguments:
@@ -338,17 +389,24 @@ The following activity diagram summarizes what happens when the `DeleteNoteComma
 
 ### Enhanced help feature
 
-#### Design considerations:
-
 **Rationale**
 
-  * Previous help feature simply opens a page with a link to the website, this is bad because:
-    * The flow is lengthy
-    * User may not be able to access website when operating without the internet
+  Previous help feature simply opens a page with a link to the website, this is bad because:
+  * The flow is lengthy
+  * User may not be able to access website when operating without the internet
 
-    Therefore, we want to make this better by simplifying the flow. We do this by adding:
-    * Making the help command return things in the application console
-    * Letting users enter an extra argument to specify what command they need guiding on
+  Therefore, we want to make this better by simplifying the flow. We do this by adding:
+  * Making the help command return things in the application console
+  * Letting users enter an extra argument to specify what command they need guiding 
+  * Give suggestions to users in case of a mistake in the extra argument, i.e. typo
+
+**Implementation details**
+
+  Since the previous help feature needs to let the UI know that it wants to open the help window, this requires the `CommandResult` to have a special boolean attribute for capturing this event. We don't need this anymore, and thus we can perform a refactor to get rid of this attribute.
+
+  Since we want to directly display the help message to the user, we can use the `DisplayResult` UI component to show the message. It is convenient that every `Command` subclasses already has the `MESSAGE_USAGE` string attribute to indicate how the command should be used. Therefore, we can just directly fetch this from the `Command` subclasses if the extra argument the user inputs is valid.
+
+  Finally, we want to give suggestions if the user makes a typo. To do this, we must first be able to recognize if a user-made input is similar to a valid command word. To do this, we can utilise one of the many coefficients out there that can measure the degree of similarity between two strings, For this particular implementation, we will go with the [Sorensen-Dice coefficient](https://en.wikipedia.org/wiki/S%c3%b8rensen%e2%80%93Dice_coefficient). The idea is to check if the maximum degree of similarity between the input and each one of the command words exceeds a certain threshold and, if so, suggest to the user what inputs they need to make. Otherwise, the `ResultDisplay` will just give out an error that the input is unrecognizable.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -424,7 +482,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
-#### Design considerations:
+#### Design considerations: Undo/redo
 
 **Aspect: How undo & redo executes:**
 
@@ -439,18 +497,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Planned Enhancements**
-
-This section describes some enhancement that can be made to the existing app.
-
-### User Interface
-
-* In the current version, long names (usually longer than 40 characters) are truncated in the interface. Wrapping of names can be implemented so that long names are displayed in a more readable and user-friendly manner.
-* The highlight of the contact entries is gray in color and the color of the text is white. The low contrast of the two colors decreases the readability of the texts. The color of the highlight can be changed to a darker color.
-* The viewing the list of events using the `list events` command, the details of the contact which the event belongs to, is not present. This is incovenient for users as they will have to look through the contact list manually to find the contact. Future updates can append the contact details together with the event details when listing events.
-
---------------------------------------------------------------------------------------------------------------------
-
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -461,9 +507,9 @@ This section describes some enhancement that can be made to the existing app.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **Appendix A: Requirements**
 
-### Product scope
+### Product Scope
 
 **Target user profile**:
 
@@ -477,7 +523,7 @@ This section describes some enhancement that can be made to the existing app.
 **Value proposition**: manage information regarding many job offers in a organised and uncluttered manner for users who is comfortable with CLI apps.
 
 
-### User stories
+### User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -499,7 +545,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                               | clear all data                | remove all unused data and start managing a new contact list                                                                |
 | `* * *`  | user who finishes using the application | exit the program              | exit the program normally while ensuring all my data is currectly saved                                                     |
 
-### Use cases
+### Use Cases
 
 (For all use cases below, the **System** is the `KeepInTouch` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -525,16 +571,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. Extra argument is a command word.
 
         * KeepInTouch returns documentation on that command word.
+          
+          Use case ends.
 
     * 1b2. Extra argument is not a command word, but is quite similar to a command.
 
         * KeepInTouch suggests the command word with the highest degree of similarity to the command input.
 
+          Use case resumes at step 1.
+
     * 1b3. Extra argument is not a command word, and isn't recognizably close to a command word.
 
         * KeepInTouch lets the user know that the command is unrecognizable.
 
-      Use case ends.
+          Use case resumes at step 1.
 
 **Use case: UC02 - Add a new contact**
 
@@ -568,7 +618,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. User inputs a contact that does not exist.
 
     * 1a1. KeepInTouch shows a message indicating that the contact cannot be found.
-      Use case ends.
+      
+      Use case resumes at step 1.
 
 **Use case: UC04 - View all contacts**
 
@@ -626,19 +677,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. KeepInTouch shows a message indicating incomplete data.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. User inputs a contact that does not exist.
 
     * 1b1. KeepInTouch shows a message indicating that the contact cannot be found.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1c. User inputs a note that does not exist.
 
     * 1c1. KeepInTouch shows a message indicating that the note cannot be found.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 **Use case: UC08 - Add an event**
 
@@ -672,13 +723,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. KeepInTouch shows a message indicating incomplete data.
 
-      Use case ends.
+      Use case reusmes at step 1.
 
 * 1b. User inputs an event that does not exist.
 
     * 1b1. KeepInTouch shows a message indicating that the event cannot be found.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 **Use case: UC10 - Filter events**
 
@@ -695,9 +746,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. KeepInTouch shows a message indicating incomplete or invalid data.
 
-      Use case ends.
+      Use case resumes at step 1.
 
-**Use case: UC11 - Add tags to a contact**
+**Use case: UC10 - Adding tags to a contact**
 
 **MSS**
 
@@ -712,18 +763,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. KeepInTouch shows a message indicating incomplete data.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. User inputs a non-alphanumeric tag.
     * 1b1. KeepInTouch shows a message indicating that tags should be alphanumeric.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1c. User inputs a contact that does not exist.
 
     * 1c1. KeepInTouch shows a message indicating that the contact cannot be found.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 **Use case: UC12 - Delete tags from a contact**
 
@@ -740,18 +791,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. KeepInTouch shows a message indicating incomplete data.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. User inputs a non-alphanumeric tag.
     * 1b1. KeepInTouch shows a message indicating that tags should be alphanumeric.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1c. User inputs a contact that does not exist.
 
     * 1c1. KeepInTouch shows a message indicating that the contact cannot be found.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 **Use case: UC13 - Filter contacts based on tags**
 
@@ -800,7 +851,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix B: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -817,16 +868,20 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file 
+   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   1. Re-launch the app by double-clicking the jar file.
+    Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Exiting
+
+    1.  Use the `exit` command to close the app.
+    Expected: app closes without error.
 
 ### Deleting a person
 
@@ -842,8 +897,15 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete contact commands to try: `delete contact`, `delete contact x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+      
+2. Deleting a contact while event list is showing
 
-### Deleting an event
+    1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list. Add events to the first contact in the index and remove all event from the second contact in the index.
+
+    2. Test case: `delete contact 1`<br>
+        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. All events related to the first contact should be deleted from the event list as well
+
+### Deleting event
 
 1. Deleting an event while all events are being shown
 
@@ -863,10 +925,137 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `delete event`, `delete event -id x -eid 1`, `delete event -id 1 -eid x`, `...` (where x is larger than the size of contacts/events)<br>
        Expected: Similar to previous test cases.
 
-### Saving data
+### Adding tag
 
-1. Dealing with missing/corrupted data files
+1. Adding tag while all contacts is shown.
+    1. Prequisites: List all contacts using the list command. At least one contact shown in the list.<br>
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Test case: `add tag -id 1 -t Frontend -t Java`<br>
+    Expected: The new tags appear below the name of the first contact in the list. The list of tags added is shown in the status message.
+    
+    1. Test case: `add tag -id 0 -t Frontend`<br>
+    Expected: No tag add is added. Error details shown in the status message.
 
-1. _{ more test cases …​ }_
+    1. Test case: `add tag -id 1 -t HR representative`<br>
+    Expected: No tag is added as tag name should not contain spaces. Error details shown in the status message.<br>
+
+1. Adding duplicate tag to a contact
+    1. Prequisites: List all contacts using the list command. At least one contact shown in the list has at least one tag.
+
+    1. Test case: `add tag -id 1 -t x`, where x is an already existing tag in the first contact.<br>
+    Expected: The new tag appear below the name of the first contact in the list. The list of tags added is shown in the status message.
+
+    1. Test case: `add tag -id -t Frontend -t Frontend`<br>
+    Expected: Only one `Frontend` tag is added below the name of the first contact. Only one `Frontend` tag is shown in the list of tags added in the status message.
+
+ 1. Adding tag while contact list is being filtered
+    1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`. 
+
+    1. Test case: `add tag -id 1 -t Frontend`, when no contact is shown<br>
+    Expected: No tag add is added. Error details shown in the status message.
+
+    1. Test case: `add tag -id 1 -t Frontend`, when at least 1 contact is shown<br>
+    Expected: The new tags appear below the name of the first contact in the filtered list. The list of tags added is shown in the status message. List will go back to showing all contacts.
+      
+
+### Deleting tag
+
+1. Deleting tag while all contacts is shown and tag exists.
+    1. Prequisites: List all contacts using the list command. At least one contact shown in the list has at least one tag.
+
+    1. Test case: `delete tag -id 1 -t x`, where x is an existing tag in the first contact.<br>
+    Expected: The tag x is no longer below the name of the first contact in the list. The list of tags deleted is shown in the status message.
+
+    1. Test case: `delete tag -id 0 -t Frontend`<br>
+    Expected: No tag add is deleted. Error details shown in the status message.
+
+    1. Test case: `delete tag -id 1 -t HR representative`<br>
+    Expected: No tag deleted as tag name should not contain spaces. Error details shown in the status message.<br>
+
+1. Deleting tag while all contacts is shown but tag does not exist.
+    1. Prequisites: List all contacts using the list command. At least one contact is shown in the list.<br>
+
+    1. Test case: `delete tag -id 1 -t x`, where `x` is a non-existing tag in the first contact.<br>
+    Expected: No tags is deleted. The list of tags deleted shown in the status message is empty while the list of tags not found contains `x`.
+
+1. Deleting tag while contact list is being filtered
+    1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`. 
+
+    1. Test case: `delete tag -id 1 -t Frontend`, when no contact is shown<br>
+    Expected: No tag add is deleted. Error details shown in the status message.
+
+    1. Test case: `add tag -id 1 -t x`, when at least 1 contact is shown and `x` is an existing tag in the first contact. <br>
+    Expected: The tag `x` is no longer below the name of the first contact in the list. The list of tags deleted shown in the status message is empty while the list of tags not found contains `x`. List will go back to showing all contacts.
+
+    1. Test case: `add tag -id 1 -t x`, when at least 1 contact is shown and `x` is a non-existing tag in the first contact. <br>
+    Expected: The tag `x` is no longer below the name of the first contact in the list. The list of tags deleted is shown in the status message. List will go back to showing all contacts.
+
+### Adding note
+
+1. Adding note while all contacts is shown.
+    1. Prerequisites: List all contacts using the list command. At least one contact shown in the list.<br>
+
+    2. Test case: `add note -id 1 -tit Meeting Topics -con The topic is about the framework design of the project`<br>
+       Expected: The new note appears in the Notes column of the contact. The note added is shown in the status message.
+
+    3. Test case: `add note -id 0 -tit Meeting Topics -con The topic is about the framework design of the project`<br>
+       Expected: No note is added. Error details shown in the status message.
+
+    4. Test case: `add note -id 1 -tit Meeting Topics`<br>
+       Expected: No note is added as a note should have a note content. Error details shown in the status message.<br>
+
+2. Adding another note to a contact
+    1. Prerequisites: List all contacts using the list command. At least one contact shown in the list has at least one note.
+
+    2. Test case: `add note -id 1 -tit Open Position -con Applications for SWE full-time positions will open soon`, where x is an already existing tag in the first contact.<br>
+       Expected: The new note appears in the Notes column of the contact. The note added is shown in the status message.
+
+3. Adding note while contact list is being filtered
+    1. Prerequisites: Filter the list of contacts by calling `find KEYWORD [OTHER_KEYWORDS...]`.
+
+    2. Test case: `add note -id 1 -tit Meeting Topics -con The topic is about the framework design of the project`, when no contact is shown<br>
+       Expected: No note is added. Error details shown in the status message.
+
+    3. Test case: `add note -id 1 -tit Meeting Topics -con The topic is about the framework design of the project`, when at least 1 contact is shown<br>
+       Expected: The new note appears in the Notes column of the contact. The note added is shown in the status message.
+
+### Deleting note
+
+1. Deleting note while all contacts is shown and note exists.
+    1. Prerequisites: List all contacts using the list command. At least one contact shown in the list has at least one note.
+
+    2. Test case: `delete note -id 1 -nid 0`<br>
+       Expected: No note is deleted as note id is invalid. Error details shown in the status message.
+
+    3. Test case: `delete note -id 1 -nid 1`<br>
+       Expected: The note deleted is no longer shown in the first contact in the list. The note deleted is shown in the status message.
+
+2. Deleting note while all contacts is shown but note does not exist.
+    1. Prerequisites: List all contacts using the list command. At least one contact is shown in the list.<br>
+
+    2. Test case: `delete note -id 1 -nid 100`, where the number of notes in the first contact is less than 100.<br>
+       Expected: No note is deleted. Error details shown in the status message.
+
+3. Deleting note while contact list is being filtered
+    1. Prerequisites: Filter the list of contacts by calling `find KEYWORD [OTHER_KEYWORDS...]`.
+
+    2. Test case: `delete note -id 1 -nid 1`, when no contact is shown.<br>
+       Expected: No note is deleted. Error details shown in the status message.
+
+    3. Test case: `delete note -id 1 -nid 1`, when at least 1 contact is shown but has no notes.<br>
+       Expected: No note is deleted. Error details shown in the status message.
+
+    4. Test case: `delete note -id 1 -nid 1`, when at least 1 contact is shown has at least 1 note.<br>
+       Expected: The note deleted is no longer shown in the first contact in the list. The note deleted is shown in the status message.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix C: Planned Enhancements**
+
+This section describes some enhancement that can be made to the existing app.
+
+### User Interface
+
+* In the current version, long names (usually longer than 40 characters) are truncated in the interface. Wrapping of names can be implemented so that long names are displayed in a more readable and user-friendly manner.
+* The highlight of the contact entries is gray in color and the color of the text is white. The low contrast of the two colors decreases the readability of the texts. The color of the highlight can be changed to a darker color.
+* The viewing the list of events using the `list events` command, the details of the contact which the event belongs to, is not present. This is incovenient for users as they will have to look through the contact list manually to find the contact. Future updates can append the contact details together with the event details when listing events.
