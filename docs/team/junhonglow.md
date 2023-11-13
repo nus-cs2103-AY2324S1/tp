@@ -36,7 +36,9 @@ Given below are my contributions to the project.
   * User Guide:
     * Added UG documentation for the features `addContactEvent`, `deleteContactEvent` and all `Storage` functionality.
   * Developer Guide:
-    * `to be added soon`
+    * Added use cases 8 - 11.
+    * Updated PUML diagram for the storage class.
+    * Added necessary test instructions and test cases needed for storage testing.
       
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#36](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/36),
