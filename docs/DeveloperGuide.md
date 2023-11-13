@@ -451,7 +451,7 @@ index 0, pointing to the initial first command, then there are no previous comma
 
 The opposite occurs too when calling the next command  —  the program calls `CommandHistory#hasNextCommand()`, which shifts the `currentCommandPointer` once to the right, pointing to the previously entered command and displaying that command instead.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `commandHistoryPointer` is at index `commandHistoryList.size()`, pointing to nothing, and there are no commands to restore.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `commandHistoryPointer` is at index `commandHistoryList.size() - 1`, pointing to nothing, then there are no commands to restore.
 The program uses `CommandHistory#hasNextCommand()` to check if this is the case. If so, it will not call `CommandHistory#getNextCommand()`
 but will instead use `CommandHistory#isLastCommand()` to check if the `commandHistoryPointer` is at the last command and set the commandBox to be blank.
 
@@ -470,7 +470,7 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Allows user to iterate through all commands listed.
     * Cons: May have performance issues in terms of memory usage after prolonged usage.
 
-* **Alternative 2:** CommandHistory only stores previous command.
+* **Alternative 2:** Command History only stores previous command.
     * Pros: Will use less memory and reduces user error.
     * Cons: Quite limited as a feature.
 
