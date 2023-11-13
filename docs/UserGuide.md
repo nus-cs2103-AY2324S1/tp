@@ -27,6 +27,8 @@ to start keeping track of all your members and applicants!
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 <h2>Table of Contents</h2>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -36,6 +38,8 @@ to start keeping track of all your members and applicants!
 
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## 1. How to Use CMC's User Guide
 
@@ -48,11 +52,13 @@ If you are a first time user of CMC, make sure you have already downloaded the a
 If you would like to have a brief introduction of the application's interface,
 head over to our [Interface Walkthrough](#3-interface-walkthrough) to better learn about CMC.
 
-If you are already a seasoned user of CMC, you can refer to [Command Summary](#7-command-summary) for a
+If you are already a seasoned user of CMC, you can refer to [Command Summary](#8-command-summary) for a
 quick reference to all the commands available in CMC.
 
-If you are facing any problems with the commands or are unsure of anything, you may refer to the [FAQ](#5-frequently-asked-questions-faqs) for common questions,
-or refer to [Common Mistakes](#6-common-mistakes) for common errors our users may face while using the application.
+If you are facing any problems with the commands or are unsure of anything, you may refer to the [FAQ](#6-frequently-asked-questions-faqs) for common questions,
+or refer to [Common Mistakes](#7-common-mistakes) for common errors our users may face while using the application.
+
+<div style="page-break-after: always;"></div>
 
 ## 2. Quick start
 
@@ -94,6 +100,8 @@ If you are using a PDF version of this User Guide, be careful when copy-pasting 
 </div>
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## 3. Interface Walkthrough
 
 This is the expected interface of the GUI when you launch CMC. Please note that this application has been populated
@@ -117,6 +125,8 @@ The "Help" window will look like as follows:
 ![Help_Window](images/helpMessage.png)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## 4. Features
 
@@ -148,7 +158,7 @@ This section of the User Guide will explain about each feature in detail.
 * For commands that do not take input parameters (e.g. `help`, `exit`), any input parameters provided will be ignored.
   For example, `help /name Taylor Swift` is equivalent to `help` and will still open the help window.
 
-* See [examples of fields](#443-examples-of-fields) for more examples of valid and invalid fields.
+* See [examples of fields](#58-examples-of-fields) for more examples of valid and invalid fields.
 
 </div>
 
@@ -163,6 +173,8 @@ The aliases are documented below alongside the full command. For a more efficien
 the full command word!
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### 4.1 Member Features
 
@@ -185,7 +197,7 @@ The alias for this command is `addm`.
   <br/>
 * `PHONE_NUMBER`: Only numbers are allowed. At least 3 digits are required.
   <br/>
-* `EMAIL`: The email has to follow localpart@domain format. See [email format](#53-email-format) for more details.
+* `EMAIL`: The email has to follow localpart@domain format. See [email format](#54-email-format) for more details.
   <br/>
 * `TELEGRAM_HANDLE`: Starting character of @ is required. Only alphanumeric characters and underscore are allowed.
   Minimum of 5 and maximum of 32 characters are allowed.
@@ -216,6 +228,8 @@ handle `@tswift` and tag `Admin` to the list of members.
 
 ![Add_Member](images/addMember.png)
 
+<div style="page-break-after: always;"></div>
+
 #### 4.1.2 Finding members: `findmember` or `findm`
 
 Find and generate a list of all existing member(s) whose information contain any of the specified keyword(s).
@@ -244,6 +258,8 @@ You may check out the command [here](#413-viewing-members-viewmembers-or-viewm).
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 #### 4.1.3 Viewing members: `viewmembers` or `viewm`
 
 Generates a list of all existing member(s). An example of where you might want to use this command is if
@@ -261,6 +277,8 @@ The alias for this command is `viewm`.
 Generates a list of all existing member(s).
 
 ![View_Member](images/viewMember.png)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.1.4 Editing a member: `editmember` or `editm`
 
@@ -281,7 +299,7 @@ Even though all the fields are optional, **at least one field** has to be specif
   <br/>
 * `PHONE_NUMBER`: Only numbers are allowed. At least 3 digits are required.
   <br/>
-* `EMAIL`: The email has to follow localpart@domain format. See [email format](#53-email-format) for more details.
+* `EMAIL`: The email has to follow localpart@domain format. See [email format](#54-email-format) for more details.
   <br/>
 * `TELEGRAM_HANDLE`: Starting character of @ is required. Only alphanumeric characters and underscore are allowed.
   Minimum of 5 and maximum of 32 characters are allowed.
@@ -311,6 +329,8 @@ This edits the particulars of the member at `MEMBER_INDEX` 1 in the member list.
 to `taylorswift@era.tour`, and telegram handle to `@tswift`.
 
 ![Edit_Member](images/editMember.png)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.1.5 Deleting a member: `deletemember` or `delm`
 
@@ -342,6 +362,8 @@ will be based on the current **shown** list. If `MEMBER_INDEX` is negative or 0,
 This deletes the member at `MEMBER_INDEX` 4 in the member list.
 
 ![delete_Member](images/deleteMember.png)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.1.6 Copying a member's details: `copymember` or `cpm`
 
@@ -378,6 +400,8 @@ Tags: [Singer]
 Tasks:
 ```
 
+<div style="page-break-after: always;"></div>
+
 #### 4.1.7 Allocating a task to a member: `addtask` or `addt`
 Adds a task to the top of the task list of the specified member.
 
@@ -404,6 +428,8 @@ This adds a task with the description `Implement solve feature` to the top of ta
 
 ![add_task](images/addTask.png)
 
+<div style="page-break-after: always;"></div>
+
 #### 4.1.8 Viewing all tasks allocated to a member: `viewtask` or `viewt`
 Shows the task list of a member at the specified index in the Tasks window.
 
@@ -425,6 +451,8 @@ will be based on the current **shown** list. If `MEMBER_INDEX` is negative or 0,
 This shows the list of tasks assigned to the member at `MEMBER_INDEX` 2.
 
 ![add_task](images/viewTask.png)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.1.9 Deleting a task allocated to a member: `deletetask` or `delt`
 
@@ -452,6 +480,9 @@ The alias for this command is `delt`.
 This deletes the task at `TASK_INDEX` 2, for the member at `MEMBER_INDEX` 2.
 
 ![delete_task](images/deleteTask.png)
+
+<div style="page-break-after: always;"></div>
+
 ### 4.2 Applicant Features
 
 These are all the features in regard to an **applicant** in CMC.
@@ -500,6 +531,8 @@ You may check out the command [here](#424-editing-an-applicant-editapplicant-or-
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 #### 4.2.2 Finding applicants: `findapplicant` or `finda`
 
 Find and generate a list of all existing applicants(s) whose information contain any of the specified keyword(s).
@@ -528,6 +561,8 @@ You may check out the command [here](#423-viewing-applicants-viewapplicants-or-v
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 #### 4.2.3 Viewing applicants: `viewapplicants` or `viewa`
 
 Generates a list of all existing applicant(s). An example of where you might want to use this command is if
@@ -545,6 +580,8 @@ The alias for this command is `viewa`.
 Generates a list of all existing applicant(s).
 
 ![View_Applicant](images/viewApplicants.png)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.2.4 Editing an applicant: `editapplicant` or `edita`
 
@@ -593,6 +630,8 @@ and the interview time has been set to `7 January 2023 3:00pm`.
     This edits the particulars of the applicant at `APPLICANT_INDEX` 1 in the applicant list. The applicant's name is changed to `Alfred`,
 and the interview has been cancelled and removed.
 
+<div style="page-break-after: always;"></div>
+
 #### 4.2.5 Deleting an applicant: `deleteapplicant` or `dela`
 
 The applicant at the specified index will be deleted from the list of applicants.
@@ -623,6 +662,8 @@ will be based on the current **shown** list. If `APPLICANT_INDEX` is negative or
 This deletes the applicant at `APPLICANT_INDEX` 1 in the list of applicants.
 
 ![Delete_Applicant](images/deleteApplicant.png)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.2.6 Copying an applicant's details: `copyapplicant` or `cpa`
 
@@ -655,6 +696,8 @@ Phone: 99129969
 Interview Time: Interview time has not been set
 ```
 
+<div style="page-break-after: always;"></div>
+
 ### 4.3 General Features
 
 #### 4.3.1 Accessing the user guide: `help`
@@ -683,6 +726,8 @@ Exits the application.
 <div markdown="span" class="alert alert-warning">:exclamation: **CAUTION:**
 There will be no prompt to confirm this action.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ## 5 Field Constraints Summary
 
@@ -736,7 +781,9 @@ There will be no prompt to confirm this action.
   - Only dates in the format of “DD/MM/YYYY HHmm” are allowed. 
   - To remove an interview time from an applicant, ‘cancel’ is also allowed.
 
-## 5.5 Examples of fields
+<div style="page-break-after: always;"></div>
+
+## 5.8 Examples of fields
 
 | Field               | Valid                                                      | Invalid                                                                                                   |
 |---------------------|------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
@@ -752,9 +799,10 @@ There will be no prompt to confirm this action.
 
 :information_source: Click [here](#4-features) to see all the features of CMC.
 </div>
---------------------------------------------------------------------------------------------------------------------
 
-## 5. Frequently Asked Questions (FAQs)
+<div style="page-break-after: always;"></div>
+
+## 6. Frequently Asked Questions (FAQs)
 
 Q: How do I see tasks of a different member?<br/>
 A: You have to use the `viewt` or `viewtask` method to view the tasks allocated to another member.  
@@ -774,7 +822,8 @@ that the addressbook.json file used is **correct and accurate.**
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
-## 6. Common Mistakes
+
+## 7. Common Mistakes
 These are some common mistakes that you might make while using our application.
 
 1. Problem: I am trying to delete a certain member off the member list. However, it seems to be deleting the wrong member. Why?
@@ -787,11 +836,11 @@ These are some common mistakes that you might make while using our application.
 
 If you are facing a problem that has not been mentioned, please email us at [helpdesk@cmc.com](mailto:helpdesk@cmc.com). 
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
-## 7. Command summary
+## 8. Command summary
 This is a quick summary of all the commands available in CMC.
-### 7.1 Member Command Summary
+### 8.1 Member Command Summary
 
 | Action                               | Format                                                                                                                                                                                                                             | Example(s)                                                                                                                                                                       |
 |--------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -805,7 +854,9 @@ This is a quick summary of all the commands available in CMC.
 | **Delete Task from Member**          | `deleteTask MEMBER_INDEX /task TASK_INDEX` <br/> <br/> `delt MEMBER_INDEX /task TASK_INDEX`                                                                                                                                        | `deleteTask 2 /task 4` <br/> <br/> `delt 1 /task 10`                                                                                                                             |
 | **Copy Member Details to Clipboard** | `copymember MEMBER_INDEX` <br/> <br/> `cpm MEMBER_INDEX`                                                                                                                                                                           | `copymember 5` <br/> <br/> `cpm 5`                                                                                                                                               |
 
-### 7.2 Applicant Command Summary
+<div style="page-break-after: always;"></div>
+
+### 8.2 Applicant Command Summary
 
 | Action                               | Format                                                                                                                                                                                           | Example(s)                                                                                                                                                  |
 |--------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -816,7 +867,7 @@ This is a quick summary of all the commands available in CMC.
 | **View Applicant(s)**                | `viewApplicants` <br/><br/> `viewa`                                                                                                                                                              |                                                                                                                                                             |
 | **Copy Member Details to Clipboard** | `copyapplicant APPLICANT_INDEX` <br/> <br/> `cpa APPLICANT_INDEX`                                                                                                                                | `copyapplicant 2` <br/> <br/> `cpa 7`                                                                                                                       |
 
-### 7.3 General Command Summary
+### 8.3 General Command Summary
 
 | Action                    | Format  |
 |---------------------------|---------|
