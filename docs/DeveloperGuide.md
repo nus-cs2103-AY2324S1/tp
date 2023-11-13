@@ -473,21 +473,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `InsureIQ` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC1 - List all persons**
+**Use case: UC1 - List all clients**
 
 **MSS**
 
-1.  User requests to list all persons.
-2.  InsureIQ shows a list of all persons.
+1.  User requests to list all clients.
+2.  InsureIQ shows a list of all clients.
 
     Use case ends.
 
-**Use case: UC2 - Find persons**
+**Use case: UC2 - Find clients**
 
 **MSS**
 
-1.  User requests to list persons based on a specific condition.
-2.  InsureIQ shows a list of persons that satisfy the condition.
+1.  User requests to list clients based on a specific condition.
+2.  InsureIQ shows a list of clients that satisfy the condition.
 
     Use case ends.
 
@@ -499,31 +499,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC3 - Add a person**
+**Use case: UC3 - Add a client**
 
 **MSS**
 
-1.  User requests to add a person.
-2.  InsureIQ shows a confirmation message that the person was added.
+1.  User requests to add a client.
+2.  InsureIQ shows a confirmation message that the client was added.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The adding of the person fails.
+* 2a. The adding of the client fails.
 
     * 2a1. InsureIQ shows an error message.
 
       Use case ends.
 
-**Use case: UC4 - Delete a person**
+**Use case: UC4 - Delete a client**
 
 **MSS**
 
-1.  User requests to <u>list all persons (UC1)</u> or <u>find persons (UC2)</u>.
-2.  InsureIQ shows a list of persons.
-3.  User requests to delete a specific person in the list.
-4.  InsureIQ shows a confirmation message that the person was deleted.
+1.  User requests to <u>list all clients (UC1)</u> or <u>find clients (UC2)</u>.
+2.  InsureIQ shows a list of clients.
+3.  User requests to delete a specific client in the list.
+4.  InsureIQ shows a confirmation message that the client was deleted.
 
     Use case ends.
 
@@ -539,14 +539,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC5 - Edit a person**
+**Use case: UC5 - Edit a client**
 
 **MSS**
 
-1.  User requests to <u>list all persons (UC1)</u> or <u>find persons (UC2)</u>.
-2.  InsureIQ shows a list of persons.
-3.  User requests to edit a specific person in the list.
-4.  InsureIQ shows a confirmation message that the person was edited.
+1.  User requests to <u>list all clients (UC1)</u> or <u>find clients (UC2)</u>.
+2.  InsureIQ shows a list of clients.
+3.  User requests to edit a specific client in the list.
+4.  InsureIQ shows a confirmation message that the client was edited.
 
     Use case ends.
 
@@ -567,6 +567,97 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. InsureIQ shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: UC6 – Modify remark of a client**
+
+**MSS**
+
+1.  User requests to <u>list all clients (UC1)</u> or <u>find clients (UC2)</u>.
+2.  InsureIQ shows a list of clients.
+3.  User requests to add or remove remark for a specific client in the list.
+4.  InsureIQ shows a confirmation message that the remark was modified.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. InsureIQ shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC7 – Get a reminder for clients with approaching policy expiration dates**
+
+**MSS**
+
+1.  User requests to get a reminder for clients with approaching policy expiration dates within a certain number of days.
+2.  InsureIQ filters the list based on the days given.
+3.  InsureIQ shows a confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given number of days is invalid.
+
+    * 1a1. InsureIQ shows an error message.
+
+      Use case ends.
+
+**Use case: UC8 – Sort list of clients**
+
+**MSS**
+
+1.  User requests to sort clients by policy expiration date.
+2.  InsureIQ sorts the list of clients in the data file from earliest to latest policy expiry date.
+3.  InsureIQ shows a confirmation message that the list was sorted.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. There are no clients in the data file.
+
+  Use case ends.
+
+**Use case: UC9 – Batch delete clients**
+
+**MSS**
+
+1.  User requests to batch delete clients, either by the policy company or by the month of the policy expiry date.
+2.  InsureIQ delete all the clients who fulfil the specific condition in the data file.
+3.  InsureIQ shows a confirmation message that the specific clients were deleted.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The conditions specified are of invalid format.
+
+    * 1a1. InsureIQ shows an error message.
+
+      Use case ends.
+
+**Use case: UC10 - Clear all clients**
+
+**MSS**
+
+1.  User requests to clear all clients.
+2.  InsureIQ clears all clients in the data file.
+3.  InsureIQ shows a confirmation message that all clients were cleared.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. There are no clients in the data file.
+
+  Use case ends.
 
 ### Non-Functional Requirements
 

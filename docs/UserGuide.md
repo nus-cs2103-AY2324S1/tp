@@ -333,8 +333,8 @@ Format: `batchdelete [c/COMPANY] [dm/DELETE MONTH]`
 
 * Batch delete specific clients in the database.
 * **Only one** of the optional fields must be provided.
-* * Clients that partially matches with the field given will be deleted e.g. `batchdelete c/NTUC` will return all clients whose
-    licence plates contains `NTUC`
+* Clients that partially matches with the field given will be deleted e.g. `batchdelete c/NTUC` will delete all clients 
+  who buy policy from companies `NTUC Company` and `NTUC Insurance`. 
 
 Examples:
 * `batchdelete dm/07-2020` batch delete clients whose policy expiry date is in July 2020.
@@ -346,6 +346,12 @@ Acceptable values for each parameter:
 
 Expected output upon success: <br>
 ![BatchDeleteSuccess](images/BatchDeleteSuccess.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+Even if no clients are deleted, 
+InsureIQ will still show a confirmation message to let you know that the `batch delete` command has been successfully processed.
+
+</div>
 
 Expected output upon failure:
 * No field provided:<br>
