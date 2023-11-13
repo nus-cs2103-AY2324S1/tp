@@ -179,18 +179,21 @@ Finds client(s) whose fields matches any of the given fields.
 Format: `find [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [l/LICENCE PLATE] [e/EMAIL] [t/TAG]
 [c/COMPANY] [pn/POLICY NUMBER] [pi/POLICY ISSUE DATE] [pe/POLICY EXPIRY DATE]`
 
-* The search is case-insensitive e.g. `hans` will match `Hans`
+* The search is case-insensitive e.g. `hans` will match `Hans`.
 * The order of the fields does not matter. e.g. `find n/Hans i/123B` is the same as `find i/123B n/Hans`
-* **At least one** of the fields must be present
+* **At least one** of the fields must be present.
 * Value given with white spaces for each field is treated as 1 value e.g. `find n/Hans Bo` will return clients with 
-names `Hans Bo` in it
+names `Hans Bo` in it.
 * Clients that partially matches with the field given will be returned e.g. `find l/SLA` will return all clients whose
-licence plates contains `SLA`
+licence plates contains `SLA`.
 
 Examples:
-* `find n/mary` returns all clients that has the name `Mary` such as `Mary Lim`, `Mary Koh`, `Mary White`
-* `find n/Hans Bo` returns all clients that has the name `Hans Bo` but not those with only `Hans` or `Bo` in it
-* `find n/john pn/AB12345J` returns all clients whose name contains `John` with policy number `AB12345J`
+* `find n/mary` returns all clients that has the name `Mary` such as `Mary Lim`, `Mary Koh`, `Mary White`.
+* `find n/Hans Bo` returns all clients that has the name `Hans Bo` but not those with only `Hans` or `Bo` in it.
+* `find n/john pn/AB12345J` returns all clients whose name contains `John` with policy number `AB12345J`.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The `find` command does not check for values of invalid format 
+given in the different prefixes. Since any non-matching results will not be displayed, values of invalid format will also not display anything. </div>
 
 Expected output upon success:<br>
 ![FindSuccess](images/FindSuccess.png)
