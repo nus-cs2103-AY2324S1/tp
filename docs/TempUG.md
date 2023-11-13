@@ -33,7 +33,7 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 
 1. Ensure you have _Java_ <sup>[3](#glossary)</sup>  11 or above installed in your Computer. You can check by opening a _command terminal_ <sup>[4](#glossary)</sup> and typing `java -version`.
 
-2. Download the latest `tutormate.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-3/tp/releases).
+2. Download the latest `tutormate.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-3/tp/releases/latest).
 
 3. Copy the file to the folder you want to use as the _home folder_ <sup>[5](#glossary)</sup> for your TutorMate.
 
@@ -77,8 +77,8 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 ![Ui](images/Ui.png)
 
 ### Terminologies / Symbols
-* Flag: A flag is a tab started with dash "-" that is used to identify the type of information that is being provided e.g. -name.
-<!-- todo, validate that all boxes thing works, as IDE does not show it -->
+* Flag: A flag is a word starting with a dash "-" that is used to identify the type of information that is being provided e.g. -name.
+
 * Text formatted as code snippets are either commands e.g. `list schedule`, command formats e.g. `list [LIST][KEYWORDS]` or parameters e.g. `NAME`.
 * <box type="info" seamless>This box denotes additional information.</box>
 * <box type="tip" seamless>This box denotes tips to improve usability.</box>
@@ -99,18 +99,21 @@ This box denotes command outputs.
   e.g. both `link -student student name -lesson lesson name` and `link -lesson lesson name -student student name` are acceptable.
 * Parameters without a flag need to strictly follow the order specified.<br>
   e.g. For delete command which specifies `delete INDEX`, the "index" parameter must immediately follow the command name "delete".<br>
-* All command name are case-insensitive. <br>
+* All command names are case-insensitive. <br>
   e.g. `linkTo` is the same as `linkto` or `LiNkTo`.
 * When applicable, extraneous parameters and flags for commands will be ignored .<br>
   e.g. if the command entered is `add info -name new name -notValid flagBody -subject physics`, it will be interpreted as `add -name new name -subject physics`. "info " and "-notValid flagBody" will be ignored. <br>
+  e.g. if the command entered is `delete 3 extra`, it will be interpreted as `delete 3`<br>
   e.g. However, `delete extra 3` will not be accepted as delete command specifies that the index parameter must immediately follow the command name.
+
+
 </box>
 
 ### Other Notes
 <box type="warning" seamless>
 
 * Please avoid using " -" in the value of a parameter as TutorMate treats " -" as a reserved word that signifies the start of a new flag.
-* Please do not abuse the parser of TutorMate. For example, do not game it with special characters or __code injections__<sup>[6](#glossary)</sup>_<sup>[4](#glossary)</sup>. TutorMate does not guarantee the behaviour of the application on deliberate and malicious abuse beyond supported normal usage.
+* Please do not abuse the parser of TutorMate. For example, do not game it with special characters, patterns or __code injections__<sup>[6](#glossary)</sup>. TutorMate does not guarantee the behaviour of the application on deliberate and malicious abuse beyond supported normal usage.
 * TutorMate supports a maximum of 99999 students, 99999 lessons and 99999 tasks. Further data beyond this limit might be lost and not accessible in the application.
 * Please avoid manually modifying the data files in the _home folder_<sup>[5](#glossary)</sup>. Doing so may result in unexpected behaviour and data loss.
 * Please avoid running multiple instances of TutorMate at the same time. Doing so may result in unexpected behaviour and data loss.
@@ -118,7 +121,6 @@ This box denotes command outputs.
 </box>
 
 ### Parameter Summary
-
 
 | Parameter                             | Used in                                                                                | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Valid examples                                                                                                  | Invalid examples            |
 |---------------------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|-----------------------------|
@@ -148,7 +150,7 @@ It will display the specified list and its corresponding details panel.
 
 Format: `list [LIST] [KEYWORDS]`
 * Shows the list and associated detail panel for the specified `[LIST]`.
-* The `[KEYWORDS]` is for which specifying student details to display, and is only valid for ___STUDENTS list___. When used for ___SCHEDULE list___ and ___TASKS list___, they will be ignored.
+* The `[KEYWORDS]` parameter is for specifying which student details to display, and is only valid for ___STUDENTS list___. When used for ___SCHEDULE list___ and ___TASKS list___, they will be ignored.
 * Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
@@ -162,7 +164,7 @@ Format: `list [LIST] [KEYWORDS]`
 
 Example usages:
 * `list students` displays all the students with their names (including previously specified fields).
-* `list students subjects email` displays all the students with their names, a list of subjects for each student and their email.
+* `list students subjects email` displays all the students with their names, the list of subjects for each student and their email.
 
 Success outputs:
 * Input: `list students` (with no additional student details):
@@ -300,13 +302,14 @@ The lesson index provided is invalid
 
 ### Add Feature
 
-Adds a student/lesson/task to the students/schedule list of the application or the task list of a lesson in the application.
+Adds a student/lesson/task to the ___STUDENTS list___, ___SCHEDULE list___ or the task list of a lesson in the application.
 
 #### For Student:
 
 Format: `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS]
 [-subject SUBJECTS] [-tag TAG] [-remark REMARK]`
-* A new student cannot have the same name as existing students in the ___STUDENTS list___.
+
+* A new student cannot have the same name (case-insensitive) as existing students in the ___STUDENTS list___.
 * A student can have any number of unique tags (including 0)
 * Duplicate phone numbers are allowed, since it is possible for 2 children to use their parent's number.
 * Refer to the parameter constraints [here](#parameter-summary).
@@ -343,7 +346,6 @@ For example, addPerson -name John -phone 91234567
 If you are currently displaying student list, you could use 'add' inplace of 'addPerson'. 
 Note you must provide a 'name' not already in the address book.
  ```
-![Failure for addPerson](images/add-person/add_person_failure.png)
 
 
 #### For Schedule:
@@ -459,7 +461,8 @@ Format: `deletePerson INDEX`
 
 Example usages:
 * `deletePerson 1`
-* In ___STUDENTS list___ : `delete 1`
+* In ___STUDENTS list___ : 
+  * `delete 1`
 
 Success outputs:
 * Input: `deletePerson 1`
@@ -566,93 +569,115 @@ Please use show lessonIndex before deleting task!
 
 ### Edit Feature
 
-About the feature (generally that is similar across states)
-
-Format: `command COMPULSORY [optional]` (if same command format across states)
-* Format info 1
-* Format info 2
-
-<box type="tip" seamless> 
-
-**Tips:**
-- Tip 1
-- Tip 2
-
-</box>
-
+Edits the specified item in the  ___STUDENT list___ or ___SCHEDULE list___ of the application.
 
 #### For Student:
-<!-- use -subject SUBJECT for student -->
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
+Format: `editPerson [INDEX] [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS]
+[-subject SUBJECTS] [-tag TAG] [-remark REMARK]`
+* Edits the student at the specified `INDEX` if it is provided, otherwise edits the currently/lastly shown student.
+* The name of the student after editing cannot be the same (case-insensitive) as other existing students in the contact list.
+* You must specify at least one field to edit.
+* Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
 
 **Tips:**
-- Tip 1
-- Tip 2
-
+- If you are currently in ___STUDENTS list___, the command can be shortened to `edit`.
 </box>
 
 Example usages:
-* `some code here`
-* `another code here`
+* `editPerson 1 -name John`
+* To edit the currently shown student in ___STUDENTS list___:
+   * `edit -phone 91234567 -tag jc,express` 
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `editPerson 1 -name new name -phone 91234567 -tag jc,express`
 ```
-This block of code is for success outputs
+Edit success.
+ from: Bernice Yu; Phone: 99272758; Email: berniceyu@example.com; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Subjects: MATHEMATICSENGLISH; Tags: [colleagues][friends]; Remark: sn
+ to: new name; Phone: 91234567; Email: berniceyu@example.com; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Subjects: MATHEMATICSENGLISH; Tags: [jc][express]; Remark: sn
 ```
 Failure outputs:
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Input: `editPerson 1`
+  * Error: No field to edit given. Need to enter at least one field to edit.
 ```
-Invalid command with the error message here
+No edit detected. Please edit at least one field: name, phone, email, address, subjects, remark, tags to different value.
 ```
 
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Input: `editPerson 1 -name David Li` (assuming there is already another student named David Li)
+  * Error: The name of the student after editing cannot be the same as other existing students in the contact list.
 ```
-Invalid command with the error message here
+Clash detected.
+Edited: David Li; Phone: 91234567; Email: berniceyu@example.com; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Subjects: MATHEMATICSENGLISH; Tags: [jc][express]; Remark: sn
+Clashes with: David Li; Phone: 91031282; Email: lidavid@example.com; Address: Blk 436 Serangoon Gardens Street 26, #16-43; Subjects: BIOLOGY; Tags: [family]; Remark: .
+```
+* Input: `editPerson -phone 91234567 -tag jc,express` (assuming no student is currently shown)
+  * Error: Duplicate tags detected. Please remove duplicate tags.
+```
+Using edit command without specifying index when no entry is shown. 
+Usage: edit [INDEX] (at least one of unique [-name|phone|email|address|subject|tag|remark VALUE]). 
+For example, edit 1 -name John -phone 91234567
+If you want to edit the currently shown person, you could omit the index. 
+Note your edited 'name' must not already in the address book.
 ```
 
 #### For Schedule:
 <!-- use "-subject SUBJECTS" for lesson -->
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
-
+Format: `editLesson [INDEX] [-name NAME] [-start TIME] [-end TIME] [-day DATE] [-subject SUBJECT]` (for list specific format)
+* Edits the lesson at the specified `INDEX` if it is provided, otherwise edits the currently/lastly shown lesson.
+* You must specify at least one field to edit.
+* The name of the lesson after editing cannot be the same (case-insensitive) as other existing lessons in the schedule list.
+* The start time of the lesson after editing cannot be after the end time of the lesson, if the end time is specified, and vice versa.
+* The lesson cannot clash (same day, start and end all specified and are overlapping) in time with other lessons  in the schedule list.
+* Please note that unlike the `addLesson` command, the `editLesson` command's "-subject" flag only accepts one subject, not multiple subjects (parameter is SUBJECT, not SUBJECTS).
+* Refer to the parameter constraints [here](#parameter-summary).
 <box type="tip" seamless>
 
 **Tips:**
-- Tip 1
-- Tip 2
+- If you are currently in ___SCHEDULE list___, the command can be shortened to `edit`.
 
 </box>
 
 Example usages:
-* `some code here`
-* `another code here`
+* `editLesson 1 -start 12:35 -end 14:35 -day 2023/11/21 -subject English`
+* To edit the currently shown lesson in ___SCHEDULE list___:
+   * `edit -start 12:30 -end 14:30 -day 2023/11/20 -subject English`
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `editLesson 1 -start 12:35 -end 14:35 -subject English`
 ```
-This block of code is for success outputs
+Edit success.
+from: Lesson lesson1 from 12:30 PM to 2:30 PM on 20-11-2023 for MATHEMATICS
+to: Lesson lesson1 from 12:35 PM to 2:35 PM on 20-11-2023 for ENGLISH
 ```
 Failure outputs:
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Input: `editLesson 1`
+  * Error: No field to edit given. Need to enter at least one field to edit.
 ```
-Invalid command with the error message here
+No edit detected. Please edit at least one field: name, start, end, subject, day to different value.
 ```
-
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Input: `editLesson -name a new name` (assuming no lesson is currently shown)
+  * Error: No lesson shown. Show a lesson with the `show` command.
 ```
-Invalid command with the error message here
+Using edit command without specifying index when no entry is shown. 
+Usage: edit [INDEX] (at least one of unique [-name|subject|day|start|end VALUE]). 
+For example, edit 1 -name lesson2 -subject English -day 23/12 -start 14:30 -end 16:30
+If you want to edit the currently shown lesson, you could omit the index. 
+Note your edited 'name' must not already in the schedule and 'start' must be before 'end'.
+```
+* Input: `editLesson 1 -start 12:35 -end 14:35 -day 2023/11/21` (assuming there is already another lesson with clashing time)
+  * Error: The lesson cannot clash (same day, start and end all specified and are overlapping) in time with other lessons  in the schedule list.
+```
+Time clash detected.
+Edited: Lesson lesson1 from 12:35 PM to 2:35 PM on 21-11-2023 for ENGLISH
+Clashes with: Lesson lesson2 from 1:30 PM to 3:30 PM on 21-11-2023 for PHYSICS.
+```
+* Input: `editLesson 1 -name lesson2` (assuming there is already another lesson named lesson2)
+  * Error: The name of the lesson after editing cannot be the same as other existing lessons in the schedule list.
+```
+Name clash detected.
+Edited: Lesson lesson2 from 12:30 PM to 2:30 PM on 20-11-2023 for MATHEMATICS
+Clashes with: Lesson lesson2 from 1:30 PM to 3:30 PM on 21-11-2023 for PHYSICS.
 ```
 
 #### For Task:
@@ -1125,6 +1150,7 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 | Action       | List               | Format                                                                                                                         | Examples                                                                                                       | Remarks                                                               |
 |--------------|--------------------|--------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
 | **List**     | Any                | `list [LIST] [KEYWORDS]`                                                                                                       | `list students email`, `list schedule`, `list tasks`                                                           | `list` without optional parameters displays the ___SCHEDULE list___   |
+| **Show**     | Any                | `show INDEX`                                                                                                                   | `show 1`, `show 3`                                                                                        | `show` will show the specified item at the given index of the current list |
 | **Add**      | Students           | `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]` | `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS` | NA                                                                    |
 | **Add**      | Schedule           | `addLesson -name NAME [-day DATE] [-start TIME] [-end TIME] [-subject SUBJECT]`                                                | `addLesson -name Lesson at Tai Seng -start 09:00 -end 11:00 -day 03/21 -subject physics`                       | NA                                                                    |
 | **Add**      | Schedule           | `addTask [INDEX] DESCRIPTION`                                                                                                  | `addTask 1 Make Forces Notes`                                                                                  | NA                                                                    |
@@ -1133,6 +1159,7 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 | **Delete**   | Schedule           | `deleteTask INDEX`                                                                                                             | `deleteTask 1`                                                                                                 | `show INDEX` to show the lesson has to be used prior to `deleteTask`  |
 | **Find**     | Students, Schedule | `find SEARCH_STRING`                                                                                                           | `find bernice`, `find lesson`                                                                                  | Disabled in ___TASKS list___                                          |
 | **Feature**  | Any                | `command format`                                                                                                               | `sample valid command`                                                                                         | Any additional remarks here                                           |
+
 
 --------------------------------------------------------------------------------------------------------------------
 
