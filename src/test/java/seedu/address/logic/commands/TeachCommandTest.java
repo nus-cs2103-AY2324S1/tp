@@ -20,7 +20,7 @@ import seedu.address.model.person.predicates.TeachingCoursePredicate;
  * {@code TeachCommand}.
  */
 public class TeachCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     private final Course course = UniqueCourseList.getList().get(0);
 
@@ -39,5 +39,27 @@ public class TeachCommandTest {
         expectedModel.updateFilteredPersonList(predicate);
 
         assertCommandSuccess(teachCommand, model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        TeachCommand teachCommand = new TeachCommand(course);
+        TeachCommand otherTeachCommand = new TeachCommand(UniqueCourseList.getList().get(1));
+
+        // same object -> returns true
+        assert (teachCommand.equals(teachCommand));
+
+        // same values -> returns true
+        TeachCommand teachCommandCopy = new TeachCommand(course);
+        assert (teachCommand.equals(teachCommandCopy));
+
+        // different types -> returns false
+        assert (!teachCommand.equals(1));
+
+        // null -> returns false
+        assert (!teachCommand.equals(null));
+
+        // different person -> returns false
+        assert (!teachCommand.equals(otherTeachCommand));
     }
 }
