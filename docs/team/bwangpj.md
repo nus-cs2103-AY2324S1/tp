@@ -19,8 +19,8 @@ While it has a Graphical User Interface, most of its user interactions happen vi
 
 ### Enhancements implemented
 
-1. Filter command to allow users to filter contacts by Tag
-2. Store command history and allow navigating between previous commands using up/down arrow keys, similar to an actual CLI 
+1. Filter command to allow users to filter contacts by Tag, and associated tests
+2. Store command history and allow navigating between previous commands using up/down arrow keys, similar to an actual CLI, and associated tests 
 
 ### Contributions to the UG
 
@@ -28,12 +28,18 @@ While it has a Graphical User Interface, most of its user interactions happen vi
 - Include labelled UI diagram of the various information that is stored and displayed in the UI 
 - Explain and emphasise that indexing is 1-based and not 0-based
 - Explain and emphasise how duplicate contacts are handled - only by name, and only with an exact match of name
+- Clarify how input commands with empty fields are handled
 - Documentation for `filter` command
 
 ### Contributions to the DG
 
 - Include initial list of all user stories brainstormed
-- Describe implementation of `edit` and `filter` commands, and associated UML diagrams
+- Describe implementation of:
+  - `edit` command
+  - `filter` command
+  - navigation between command history using up/down arrow keys, which includes the UI component as well as description of how the feature is implemented
+  
+  and their associated UML diagrams.
 - Add Planned Enhancements appendix to the DG
 
 ### Contributions to team-based tasks
