@@ -205,6 +205,17 @@ subject using their prefixes.
 The following sequence diagram shows how the edit command works.
 ![FindSequenceDiagram](images/FindSequenceDiagram.png)
 
+#### Design considerations:
+
+**Aspect: How find executes:**
+
+* **Alternative 1 (current choice):** Find tutees based on inputs for prefixes n/ and sb/.
+    * Pros: More sophisticated as it can search for subjects rather than only by name.
+    * Cons: Less user-friendly for beginners as it requires an extra step of inputting prefixes.
+* **Alternative 2:** Find tutees based on their name.
+    * Pros: More user-friendly as the command format would only be `find [input]`.
+    * Cons: Users can not search for tutees by subject.
+
 ### Edit feature
 The `editCommand` extends the `Command` class. It allows the user to edit fields of the tutee by specifying the index
 of the tutee.
@@ -214,6 +225,18 @@ The following sequence diagram shows how the edit command works.
 
 The following activity diagram summarizes what happens when a user executes an edit command:
 ![EditActivityDiagram](images/EditActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How edit executes:**
+
+* **Alternative 1 (current choice):** User specify which fields to edit by their prefixes.
+    * Pros: Easy to implement.
+    * Cons: Command input may be too long and less user-friendly.
+* **Alternative 2:** Users cannot edit tutees that are already added, and can only do delete and re-adding 
+of tutees if changes are necessary.
+    * Pros: Less prone to bugs, and is simpler for developers to implement
+    * Cons: Not user-friendly and takes multiple steps for the user.
 
 ### List by day feature
 The `ListByDayCommand` extends the `ListCommand` class. It is initialised with a `DayPredicate` and updates
@@ -668,7 +691,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 <br>
 <br>
 
-
 **Use case: UC10 - Finding free time**
 
 **MSS**
@@ -677,7 +699,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 - 2a. The user does not have any free slots available.
-  - 2a1. System informs that the user has no available timeslots.
+  - 2a1. System informs user that there is no available timeslots.
     <br>
     <br>
   
