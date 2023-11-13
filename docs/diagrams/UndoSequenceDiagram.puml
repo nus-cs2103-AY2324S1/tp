@@ -14,7 +14,7 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("undo 2")
+-> LogicManager : execute("undo 2")
 activate LogicManager
 
 LogicManager -> AddressBookParser : parseCommand("undo 2")
@@ -57,6 +57,7 @@ loop until no more commands to undo
 end
 
  UndoCommand --> LogicManager : CommandResult
+ deactivate UndoCommand
  <-- LogicManager:
  deactivate LogicManager
 
