@@ -535,6 +535,8 @@ If your changes to the data file makes its format invalid, CCACommander will dis
 
 > [Back to top](#top)
 
+<div style="page-break-after: always;"></div>
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>

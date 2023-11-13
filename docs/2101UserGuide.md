@@ -557,7 +557,6 @@ CCACommander data are saved automatically after any command that changes the dat
 
 > [Back to top](#top)
 
-<div style="page-break-after: always;"></div>
 
 ## FAQ
 
