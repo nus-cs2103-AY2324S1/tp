@@ -28,7 +28,7 @@
     * [Editing an applicant's detail](#editing-a-applicant-edit)
     * [Deleting an applicant](#deleting-job-applicants-delete)
   * Tag Colouring and Categorisation
-    * [Creating tags](#creating-tags--create)
+    * [Creating tags](#creating-tags-create)
     * [Listing all tags](#listing-all-tags-listt)
   * Searching through and Arranging Applicants
     * [Searching for applicants](#searching-job-applicants-by-category-search)
@@ -291,18 +291,25 @@ An example of the `add` command being successfully executed:
     ![Add-Success](images/add-command-success.png)
 <br>
 
-An example of the `add` command failing to execute due to missing mandatory fields:
-1. Enter the command `add n/Betsy Crowe t/friend` (**Missing mandatory fields**)
-2. This is the result of the failed `add` command:
-   
-    ![Add-Fail](images/add-command-failure.png)
-<br>
+**Error Handling Table for `add` command:**
 
-An example of trying to add a applicant with the same name as an existing applicant:
-1. Enter the command `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/dept finance` (**Same name as existing applicant**)
-2. This is the result of the failed `add` command:
-   
-    ![Add-Fail](images/add-command-duplicate-person.png)
+| Reason for Error                              | Error Message                                                                     | Remedy / Suggested course of action                                                                                                              |
+|-----------------------------------------------|-----------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| Missing add keyword: `add`                    | Unknown command | Follow the command format of `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAGNAME]…​` closely                                                 |
+| Missing mandatory fields                      | Invalid command format!                                                           | Ensure that all mandatory fields are filled up.                                                                                                  | 
+| Duplicate name                                | This person already exists in the address book                                                      | Ensure that the name of the applicant is unique. That is you cannot add the same name twice. Use some form of extra identification like a number |
+| Invalid phone number                          | Phone numbers should only contain numbers, and it should be at least 3 digits long | Ensure that the phone number only contains number and should be at least 3 digits long                                                           |
+| Invalid email                                 | Emails should be of the format local-part@domain and adhere to the following constraints:| Ensure that the prefix and domain of the email is correct following the constraints stated by the error                                          |                                                                                                                                                
+| Invalid tag name                              | Tag names should only contain alphanumeric characters and should not be blank | Ensure that the tag name only contains alphanumeric characters and should not be blank                                                           |
+| Multiple prefixes of the same type being used | Multiple values specified for the following single-valued field(s): `prefix/`      | Remove the duplicate prefix. The command should only have 1 of every prefix except for `t/`                                                       |
+
+<box type="tip" seamless>
+
+**Tip:** To know if it is an error, the command entered will light up in red. It remains in the command box.
+1. The error message will be displayed in the result display box.
+2. Follow the error handling table for the command  or use the suggested course of action in the result display to rectify the error.
+
+</box>
 
 [Jump back to Table of Contents](#table-of-contents)
 
@@ -312,15 +319,17 @@ An example of trying to add a applicant with the same name as an existing applic
 Edits a remark of an existing applicant in JABPro.
 Format: `remark INDEX r/REMARK`
 
-| Type      | Prefix      | Constraints                                                                                                                                 |
-|-----------|-------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| Mandatory | `INDEX`     | `INDEX` must be an existing index in the displayed applicant list and it must not be greater than the total number of applicants in JABPro. |
-| Optional  | `r/ REMARK` | `REMARK` can be any value, including special characters such as `#`, `,` ...                                                                |
+| Type      | Prefix        | Constraints                                                                                                                                 |
+|-----------|---------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| Mandatory | `INDEX`       | `INDEX` must be an existing index in the displayed applicant list and it must not be greater than the total number of applicants in JABPro. |
+| Optional  | `r/ [REMARK]` | `REMARK` can be any value, including special characters such as `#`, `,` ...                                                                |
 
 **Notes regarding `remark` command:**
 * The previous remark is not saved, and instead is replaced by the inputted remark. The command does not add to the existing remark.
 * You can empty out a remark by inputting `r/` without any text after it or by omitting the `r/` prefix.
 * You can get the remark previously inputted by using the **REMARK** keyword. It will be replaced with the previous remark. The keyword **REMARK** is case-sensitive. This means that `remark 1 r/**remark**` will just replace the remark with the word `**remark**`.
+* You can use multiple prefix for `remark` but only the last prefix will be used. This means that `remark 1 r/remark r/remark2` will just replace the remark with `remark2`.
+
 
 An example of the `remark` command being successfully executed:
 1. Enter the command `remark 1 r/Great attitude, hardworking`
@@ -336,12 +345,21 @@ An example of the `remark` command being successfully executed with the **REMARK
     ![Remark-Success](images/remark-command-enhanced-success.png)
 <br>
 
-An example of the `remark` command failing to execute due to wrong index:
-1. Enter the command `remark 10 r/Great attitude, hardworking` (**Index does not exist on applicant list panel**)
-2. This is the result of the failed `remark` command:
-   
-    ![Remark-Fail](images/remark-command-clear-remark.png)
-<br>
+**Error Handling Table for `remark` command:**
+
+| Reason for Error                              | Error Message                         | Remedy / Suggested course of action                                                             |
+|-----------------------------------------------|---------------------------------------|-------------------------------------------------------------------------------------------------|
+| Missing remark keyword: `remark`              | Unknown command                       | Follow the command format of `remark INDEX r/[REMARK]` closely                                  |
+| Missing Index                                 | Invalid command format!               | Ensure that the index is filled up.                                                             |
+| Invalid Index                                 | The person index provided is invalid  | Ensure that the index is valid. That is it is a number that is on the displayed applicant list. |
+
+<box type="tip" seamless>
+
+**Tip:** To know if it is an error, the command entered will light up in red. It remains in the command box.
+1. The error message will be displayed in the result display box.
+2. Follow the error handling table for the command or use the suggested course of action in the result display to rectify the error.
+
+</box>
 
 Additional Examples:
 *  `remark 1` Empties the remark of the 1st applicant. It is equivalent to `remark 1 r/`.
@@ -489,12 +507,23 @@ An example of the `view` command being successfully executed for applicant with 
     ![View-Success](images/view-command-with-stats-success.png)
 <br>
 
-An example of the `view` command failing to execute due to wrong index:
-1. Enter the command `view 0` (**Index does not exist on applicant list panel**)
-2. This is the result of the failed `view` command:
-   
-   ![View-Fail](images/view-command-failure.png)
-<br>
+
+**Error Handling Table for `view` command:**
+
+| Reason for Error                              | Error Message                                                                       | Remedy / Suggested course of action                                                             |
+|-----------------------------------------------|-------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
+| Missing view keyword: `view`                  | Unknown command | Follow the command format of `view INDEX` closely                                                |
+| Missing Index                                 | Invalid command format!                                                             | Ensure that the index is filled up.                                                              |
+| Invalid Index                                 | The person index provided is invalid| Ensure that the index is valid. That is it is a number that is on the displayed applicant list.  |
+
+<box type="tip" seamless>
+
+**Tip:** To know if it is an error, the command entered will light up in red. It remains in the command box.
+1. The error message will be displayed in the result display box.
+2. Follow the error handling table for the command or use the suggested course of action in the result display to rectify the error.
+
+</box>
+
 
 [Jump back to Table of Contents](#table-of-contents)
 
@@ -546,7 +575,8 @@ Notes on rules for `edit` command involving tags with categories for `t/[CATEGOR
 
 1. Editing an applicant's details will trigger a refresh of the view. This means that the view will be updated to reflect the latest changes to the data for that particular applicant.
 2. We strongly recommend that you categorise tags using `create` before using `edit` to tag applicants. This is to reduce the confusion of having two ways to tag applicants.
-   </box>
+
+</box>
 
 An example of the `edit` command being successfully executed:
 1. Enter the command `edit 1 n/Alex Ho p/91234567` (**Edit name and phone number**)
@@ -570,12 +600,29 @@ An example of the `edit` command being successfully executed to clear a tags and
    ![Edit-Success](images/edit-command-clear-tags-success.png)
 <br>
 
-An example of the `edit` command being wrongly executed due to trying to attach a score to a tag that is not of the `assessment` category:
-1. Enter the command `edit 1 t/TechLead sc/TechLead 80` (**Tag `TechLead` is not of the assessment category**)
-2. This is the result of the failed `edit` command:
-   
-   ![Edit-Fail](images/edit-command-failure.png)
-<br>
+**Error Handling Table for `edit` command:**
+
+| Reason for Error                              | Error Message                                                                | Remedy / Suggested course of action                                                                                                                                 |
+|-----------------------------------------------|------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Missing edit keyword: `edit`                  | Unknown command                                                              | Follow the command format of `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAGNAME]…​ [sc/TAGNAME SCORE]` closely                                         |
+| Missing Index                                 | Invalid command format!                                                      | Ensure that the index is filled up.                                                                                                                                 |
+| Invalid Index                                 | The person index provided is invalid                                         | Ensure that the index is valid. That is it is a number that is on the displayed applicant list.                                                                     |
+| Missing at least one of the field | At least one field to edit must be provided.                                 | Ensure that at least one of the field is filled up and to be changed.                                                                                               |
+| Duplicate name                                | This person already exists in the address book                               | Ensure that the name of the applicant is unique. That is you cannot add the same name twice. Use some form of extra identification like a number                    |
+| Invalid phone number                          | Phone numbers should only contain numbers, and it should be at least 3 digits long | Ensure that the phone number only contains number and should be at least 3 digits long                                                                              |
+| Invalid email                                 | Emails should be of the format local-part@domain and adhere to the following constraints: | Ensure that the prefix and domain of the email is correct following the constraints stated by the error                                                             |                                                                                                                                                
+| Invalid tag name                              | Tag names should only contain alphanumeric characters and should not be blank | Ensure that the tag name only contains alphanumeric characters and should not be blank                                                                              |
+| Multiple prefixes of the same type being used | Multiple values specified for the following single-valued field(s): `prefix/` | Remove the duplicate prefix. The command should only have 1 of every prefix except for `t/`                                                                          |
+| Missing score for tag                         | Invalid score, score must be non-negative integer.                                                        | Ensure that the score is filled up and has a space from the `TAGNAME`.                                                                                              | 
+| Invalid tag to attach score | Invalid score tag, tag must a tag of the category assessment and must exist on the applicant | Ensure that the tag is of the category assessment and exist on the applicant. If its the wrong category, use `create`, if it is not tagged to the person use `edit` |
+
+<box type="tip" seamless>
+
+**Tip:** To know if it is an error, the command entered will light up in red. It remains in the command box.
+1. The error message will be displayed in the result display box.
+2. Follow the error handling table for the command or use the suggested course of action in the result display to rectify the error.
+
+</box>
 
 [Jump back to Table of Contents](#table-of-contents)  
 
@@ -793,32 +840,26 @@ An example of the `filter` command being successfully executed with `median`:
    ![Filter-Success](images/filter-command-median-success.png)
 <br>
 
-Failed to execute the `filter` command? Here are some possible reasons why and how to remedy them:
-1. Missing filter keyword i.e. `filter`. Follow the command format strictly of `filter t/TAGNAME met/METRIC val/VALUE` for score and percentile or `filter t/TAGNAME met/METRIC` for mean or median.
-2. Invalid tag as tag has wrong category or does not exist i.e. `filter t/techlead met/percentile val/80`
-3. Invalid metric i.e. `filter t/interview met/average val/80`
-4. Invalid value i.e. `filter t/interview met/percentile val/-1`
-5. Multiple prefixes of the same category used i.e. `filter t/interview t/techlead met/percentile val/80`
-6. Using commas as delimiters of different parameters instead of spaces i.e. `filter t/interview, t/techlead met/percentile val/80`
+**Error handling for `filter` command:**
 
-An example of the `filter` command being incorrectly executed due to non-existent tag:
-1. Enter the command `list`
-2. Enter the command `filter t/techlead met/percentile val/80` (**Tag `techlead` does not exist**)
-3. The result of the failed `filter` command: 
-   * The Command entered will light up in red. It remains in the command box.
-   * The error message: `Tag does not exist!` will be displayed in the result display box.
-   * The UI will not change.
-<br>
+| Reason for Error                                        | Error Message                                                                              | Remedy / Suggested course of action                                                                                                                                     |
+|---------------------------------------------------------|--------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Missing filter keyword: `filter`                        | Unknown command!                                                                           | Follow the command format strictly of `filter t/TAGNAME met/METRIC val/VALUE` for score and percentile or `filter t/TAGNAME met/METRIC` for mean or median.             |
+| Missing parameters                                      | Incomplete parameter inputs. t/TAG and met/SCORE are compulsory fields. | Enter the command again with the correct parameters.                                                                                                                    |
+| Invalid tag as tag has wrong category or does not exist | Tag does not exist!                                                                        | Check that the tag is of the category `assessment` and that the tag exists using `listT`. Use the `create` command if it does not.                                      |
+| Invalid metric                                          | Invalid metric provided. Needs to be one of: score, mean, median, percentile               | Check that the metric is one of the following: `score`, `mean`, `median`, `percentile` and that it is spelt correctly. Enter the command again with any of the 4 metric |
+ | Invalid value                                           | Invalid value provided. Needs to be a non negative integer that is more than or equal to 0 | Check that the value is a non-negative integer that is more than or equal to 0. Enter the command again with the correct value.                                         |
+ | Missing value                                           | val/VALUE is missing, it is compulsory.                                                    | Enter a value for `val/VALUE` since the metric requires it.                                                                                                             |
+| Multiple prefixes of the same type being used           | Multiple values specified for the following single-valued field(s): `prefix/`              | Remove the duplicate prefix. The command should only have 1 of every prefix                                                                                             |
 
-An example of the `filter` command being incorrectly executed due to an invalid value for `val/VALUE`:
-1. Enter the command `list`
-2. Enter the command `filter t/interview met/percentile val/-1` (**Negative value for percentile**)
-3. This is the result of the failed `filter` command:
-    * The Command entered will light up in red. It remains in the command box.
-    * The error message: `Invalid value provided. Needs to be a non negative integer that is more than or equal to 0` will be displayed in the result display box.
-    * The UI will not change.   
-<br>
 
+<box type="tip" seamless>
+
+**Tip:** To know if it is an error, the command entered will light up in red. It remains in the command box.   
+1. The error message will be displayed in the result display box.   
+2. Follow the error handling table for the command  or use the suggested course of action in the result display to rectify the error.
+
+</box>
 
 
 **Significance of using `filter` with the metrics `score`, `percentile`, `mean` and `median`:**
