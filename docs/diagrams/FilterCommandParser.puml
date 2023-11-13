@@ -11,7 +11,6 @@ end box
 
 box Model MODEL_COLOR_T1
     Participant ":Model" as m MODEL_COLOR
-    Participant ":Person" as p MODEL_COLOR
 end box
 
 -> nbp : "filter" + arguments
@@ -53,16 +52,10 @@ skinparam sequenceReferenceBackgroundColor white
 
 ref over fcp, am
     Infer the type of filterCommand to return
-    based the "field" value.
+    based on the "field" value.
 end ref
 fcp --> fcp : filterCommand
 deactivate fcp
-
-break ParserException thrown
-    fcp --> nbp : ParserException
-    <-- nbp : Send error message\nto UI
-end
-note left : Execution stops here in this case
 
 fcp --> nbp : filterCommand
 deactivate fcp
@@ -70,17 +63,10 @@ deactivate fcp
 nbp -> m : execute(filterCommand)
 activate m
 
-m -> m : updateDisplayedPersonList(filterCommand.predicates)
+m -> m : updateDisplayedPersonList()
 activate m
 
-loop for each person in personList
-    ref over m, p
-        Remove person from displayedPersonList
-        if predicates.test(person) is false
-    end ref
-    note right of m : Details of how the predicates\ntest each person is omitted for simplicity
-end
-
+note right of m : Details of how the command tests\neach person is omitted for simplicity
 
 m --> m : displayedPersonList
 deactivate m
