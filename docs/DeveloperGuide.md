@@ -73,7 +73,9 @@ You can see that the bulk of the app's works are done by the UI, Logic, Model an
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
+<p align="center">
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
+</p>
 
 #### Other notes
 
@@ -84,7 +86,9 @@ The *Sequence Diagram* below shows how the components interact with each other f
    For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class.
 2. The team has decided to force all components to interact via interfaces rather than the concrete classes as illustrated in the (partial) class diagram below (reason: to prevent outside component's being coupled to the implementation of a component).
    <puml src="diagrams/ComponentManagers.puml" width="300" />
-   If you are to contribute to this project, please align with this group decision.
+   
+If you are to contribute to this project, please align with this group decision.
+
 3. There are other components that are not shown in the diagram above. These components are: 
     * `Commons` component: contains classes that are used by multiple other components.
     * `Entry Point` classes: `Main` and `MainApp` classes that are in charge of the app launch and shut down.
