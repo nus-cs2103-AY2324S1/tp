@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.ThrowingSupplier;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -89,7 +90,29 @@ public class AddNoteCommandTest {
         // null -> returns false
         assertFalse(addNoteACommand.equals(null));
 
-        // different person -> returns false
+        // different person, different note -> returns false
         assertFalse(addNoteACommand.equals(addNoteBCommand));
+
+        // same person, different note -> returns false
+        AddNoteCommand differentNoteAddNoteCommand = new AddNoteCommand(
+                ContactID.fromString(VALID_NOTE_A_PERSON_ID), noteB);
+        assertFalse(addNoteACommand.equals(differentNoteAddNoteCommand));
+
+        // different person, same note -> returns false
+        AddNoteCommand differentPersonAddNoteCommand = new AddNoteCommand(
+                ContactID.fromString(VALID_NOTE_B_PERSON_ID), noteA);
+        assertFalse(addNoteACommand.equals(differentPersonAddNoteCommand));
+    }
+
+    @Test
+    public void toStringMethod() {
+        Note noteA = NOTE_A;
+        AddNoteCommand addNoteACommand = new AddNoteCommand(ContactID.fromString(VALID_NOTE_A_PERSON_ID), noteA);
+        String expected = new ToStringBuilder(addNoteACommand)
+                .add("toAdd", NOTE_A)
+                .add("contactId", VALID_NOTE_A_PERSON_ID)
+                .toString();
+
+        assertEquals(expected, addNoteACommand.toString());
     }
 }

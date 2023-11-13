@@ -20,7 +20,7 @@ import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.TagBuilder;
 
-public class DeleteTagParserTest {
+public class DeleteTagCommandParserTest {
     private DeleteTagCommandParser parser = new DeleteTagCommandParser();
 
     @Test

@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.ThrowingSupplier;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -74,7 +75,7 @@ public class AddTagCommandTest {
         final Set<Tag> tagSetB = new TagBuilder().withTag(VALID_TAG_FRIEND).inSet();
 
         AddTagCommand commandA = new AddTagCommand(1, tagSetA);
-        AddTagCommand commandB = new AddTagCommand(1, tagSetB);
+        AddTagCommand commandB = new AddTagCommand(2, tagSetB);
 
         // same object -> returns true
         assertTrue(commandA.equals(commandA));
@@ -89,7 +90,27 @@ public class AddTagCommandTest {
         // null -> returns false
         assertFalse(commandA.equals(null));
 
-        // different person -> returns false
+        // different person, different tag -> returns false
         assertFalse(commandA.equals(commandB));
+
+        // same person, different note -> returns false
+        AddTagCommand differentNoteCommand = new AddTagCommand(1, tagSetB);
+        assertFalse(commandA.equals(differentNoteCommand));
+
+        // different person, same note -> returns false
+        AddTagCommand differentPersonCommand = new AddTagCommand(2, tagSetA);
+        assertFalse(commandA.equals(differentPersonCommand));
+    }
+
+    @Test
+    public void toStringMethod() {
+        final Set<Tag> tagSetA = new TagBuilder().withTag(VALID_TAG_HUSBAND).inSet();
+        AddTagCommand addTagACommand = new AddTagCommand(1, tagSetA);
+        String expected = new ToStringBuilder(addTagACommand)
+                .add("toAdd", tagSetA)
+                .add("contactId", 1)
+                .toString();
+
+        assertEquals(expected, addTagACommand.toString());
     }
 }

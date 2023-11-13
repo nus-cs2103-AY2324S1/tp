@@ -112,6 +112,10 @@ public class PersonTest {
         // different tags -> returns true
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.equals(editedAlice));
+
+        // different name and tags -> returns true
+        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
@@ -125,6 +129,16 @@ public class PersonTest {
         ALICE.addTags(new TagBuilder().inSet());
         ALICE.removeTags(new TagBuilder().inSet());
         assertFalse(ALICE.getTags().contains(new TagBuilder().build()));
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        // same values
+        Person aliceCopy = new PersonBuilder(ALICE).build();
+        assertTrue(ALICE.hashCode() == aliceCopy.hashCode());
+
+        // different values
+        assertFalse(ALICE.hashCode() == BOB.hashCode());
     }
 
     @Test

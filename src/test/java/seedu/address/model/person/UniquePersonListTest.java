@@ -147,7 +147,40 @@ public class UniquePersonListTest {
     }
 
     @Test
+    public void equals() {
+
+        // same values -> returns true
+        assertTrue(uniquePersonList.equals(new UniquePersonList()));
+
+        // same object -> returns true
+        assertTrue(uniquePersonList.equals(uniquePersonList));
+
+        // null -> returns false
+        assertFalse(uniquePersonList.equals(null));
+
+        // different types -> returns false
+        assertFalse(uniquePersonList.equals(5.0f));
+
+        UniquePersonList uniquePersonListAlice = new UniquePersonList();
+        uniquePersonListAlice.add(ALICE);
+
+        // different values -> returns false
+        assertFalse(uniquePersonList.equals(uniquePersonListAlice));
+
+        UniquePersonList uniquePersonListBob = new UniquePersonList();
+        uniquePersonListBob.add(BOB);
+
+        // different values -> returns false
+        assertFalse(uniquePersonListAlice.equals(uniquePersonListBob));
+    }
+
+    @Test
     public void toStringMethod() {
         assertEquals(uniquePersonList.asUnmodifiableObservableList().toString(), uniquePersonList.toString());
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        assertEquals(uniquePersonList.asUnmodifiableObservableList().hashCode(), uniquePersonList.hashCode());
     }
 }
