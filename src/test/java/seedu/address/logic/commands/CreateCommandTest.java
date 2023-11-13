@@ -158,6 +158,16 @@ public class CreateCommandTest {
         }
 
         @Override
+        public void openDashboard() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void closeDashboard() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateReminderList() {
             throw new AssertionError("This method should not be called.");
         }
