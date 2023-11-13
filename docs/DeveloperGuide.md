@@ -248,6 +248,9 @@ When executed, `ViewCommand` saves the index of the person to be viewed as `Last
 
 By having a `isView` property in `CommandResult`, the `MainWindow` component is able to toggle the `UI` to the view the person of the `LastViewedPersonIndex` after the command has been executed.
 
+Additionally by allowing `isView` as a property in `CommandResult`, we are able to view the person's profile after executing other commands such as `add`, `edit`, `set`, `remark`, `addL`, `addG` without having to enter the `view` command again.
+
+We only need to set the `isView` property to true in the `CommandResult` object if the command being executed targets a person. This is because the `ViewCommand` itself originally require an index to be specified to view the person's profile. Thus, if the command does not target a person, the view command will not be triggered and the Person Information Panel and Summary Statistic Screen will not be updated.
 
 Given below is an example usage scenario and how the view feature behaves at each step.
 
@@ -291,6 +294,12 @@ Pros: Arguably a more OOP approach since all commands that trigger view IS-A `Vi
 
 Cons: You cannot implement any command that does not involve viewing but inherits from any command that is a children of `ViewCommand`.  
 An example could be trying to create identical commands that does not toggle the UI after execution. This would require duplication of the exact same command code but inheriting from `Command` instead of `ViewCommand`.
+
+The following activity diagram shows how command such as `add`, `edit`, `set`, `remark`, `addL`, `addG` (Commands that trigger view) lead to the update of the Person Information Panel in the UI.
+This is done by setting the `isView` property to true in the `CommandResult` object.
+
+<puml src="diagrams/ViewActivityDiagram.puml" alt="Event Activity Diagram"></puml>
+
 
 ### Search feature
 
@@ -336,6 +345,60 @@ The following activity diagram shows summarizes what happens when a user attempt
 
 **Note:** The current implementation of search allows users to search by any of the categories individually or by different combinations of the categories.
 It also allows users to specify more than one search parameter for each category e.g. `search n/alex bernice`
+
+### Set feature
+
+#### Implementation
+
+The search feature is implemented using the `SetCommand` class. It extends `Command` and overrides the `execute()` method to
+edit the status of the user.
+
+The search parameters from the user input are parsed using the parse method in the `SetCommandParser` class. `SetCommandParser::Parse`
+takes in the search parameters from the user input and combines them into a list of predicates. This list of predicates is then
+passed as an argument to the `SetCommand` constructor and the method returns a `SetCommand` instance with the associated list of predicates.
+
+Currently, the parameters are <USERID> <STATUS>, <STATUS> is limited to "Preliminary", "Interviewed", "Rejected", "Accepted".
+
+Finally, the execute method in `SetCommand` class returns a new updated `Person` which will
+be used to update the status of the Person displayed.
+
+Given below is an example usage scenario and how the search mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes `set 1 Interviewed` command to set the first user to "Interviewed".
+
+Step 3. The user should see the update upon calling the `view` command on the Person again.
+
+The following activity diagram shows how the search operation works:
+
+<puml src="diagrams/SetActivityDiagram.puml" alt="SetActivityDiagram" />
+
+### Export feature
+
+#### Implementation
+
+The search feature is implemented using the `ExportCommand` class. It extends `Command` and overrides the `execute()` method to
+export to a csv file.
+
+The search parameters from the user input are parsed using the parse method in the `ExportCommandParser` class. `ExportCommandParser::Parse`
+takes in the search parameters from the user input and combines them into a list of predicates. 
+However, export need to be used with any parameters.
+
+Finally, the execute method in `ExportCommand` class exports to the /data/export.csv file.
+
+Given below is an example usage scenario and how the search mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes `export` command.
+
+Step 3. The user should see the exported .csv file in the directory /data/export.csv.
+
+The following activity diagram shows how the export operation works:
+
+<puml src="diagrams/ExportActivityDiagram.puml" alt="ExportActivityDiagram" />
+
 
 ## Events feature
 
@@ -459,22 +522,21 @@ has a built-in event management app that allows them to efficiently note down in
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​          | I want to …​                                                                                                     | So that…​                                                                                                                                  |
-|----------|------------------|------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| `* * *`  | Hiring Manager   | add a candidate's contact information, including name, email, phone number                                       | I can easily access and reach out to candidates when needed                                                                                |
-| `* * *`  | Hiring Manager   | add notes and comments to candidate profiles to document interview feedback and impressions                      | I can maintain a record of interactions and feedback                                                                                       |
-| `* * *`  | Hiring Manager   | delete job applicants information                                                                                | I can remove redundant/unecessary data bloat and also to abide to privacy laws                                                             |
-| `* * *`  | Hiring Manager   | view a specific job applicant's resume or portfolio                                                              | I can check whether they meet the requirements requested by other department heads                                                         |
-| `* * *`  | Hiring Manager   | search for all job applicants matching a given profile                                                           | I can find suitable candidates for a project                                                                                               |
-| `* * *`  | Hiring Manager   | List all candidate's information                                                                                 | I can easily view each candidates information                                                                                              |
-| `* * *`  | Hiring Manager   | update the application status for a candidate (e.g. "Interviewed", "Rejected", "Offered")                        | I can keep track of each candidate's progress in the hiring process                                                                        |
-| `* * *`  | Hiring Manager   | record the score of the different activities such as interviewsor assessments that an applicant might go through | I can use them for effective comparison and filter the candidates easily                                                                   |
-| `* * *`  | Hiring Manager   | create tags and categorise them                                                                                  | I can colour code them based on categories and use them to tag applicants to easily distinguish them                                       |
-| `* * *`  | Hiring Manager   | compare candidates using their performance in their assessments or interviews                                    | I can choose the best candidates to move to the next stage of the hiring process and get the best performing candidates objectively        |
-| `* *`    | Hiring Manager   | view a schedule/summary of events relating to the candidates                                                     | I can make preparations and arrangements for the events beforehand, and also get an idea of where each candidate is in the hiring process. |
-| `**`     | Hiring Manager   | export candidate information and application data to a spreadsheet                                               | I can perform further analysis using alternate tools on candidate data                                                                     |
-| `*`      | Hiring Manager   | get data on which positions are lacking job applicants                                                           | I can update the external recruitment team to focus on head hunting applicants for these roles                                             |
-| `*`      | Hiring Manager   | get data on which positions already have too many applicants                                                     | I can forward this to the department heads to see if they still want to keep the job posting or close it                                   |
+| Priority | As a …​        | I want to …​                                                                                                     | So that…​                                                                                                                                  |
+|----------|----------------|------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | Hiring Manager | add a candidate's contact information, including name, email, phone number                                       | I can easily access and reach out to candidates when needed                                                                                |
+| `* * *`  | Hiring Manager | add notes and comments to candidate profiles to document interview feedback and impressions                      | I can maintain a record of interactions and feedback                                                                                       |
+| `* * *`  | Hiring Manager | delete job applicants information                                                                                | I can remove redundant/unecessary data bloat and also to abide to privacy laws                                                             |
+| `* * *`  | Hiring Manager | view a specific job applicant's resume or portfolio                                                              | I can check whether they meet the requirements requested by other department heads                                                         |
+| `* * *`  | Hiring Manager | search for all job applicants matching a given profile                                                           | I can find suitable candidates for a project                                                                                               |
+| `* * *`  | Hiring Manager | List all candidate's information                                                                                 | I can easily view each candidates information                                                                                              |
+| `* * *`  | Hiring Manager | update the application status for a candidate (e.g. "Interviewed", "Rejected", "Offered")                        | I can keep track of each candidate's progress in the hiring process                                                                        |
+| `* * *`  | Hiring Manager | record the score of the different activities such as interviewsor assessments that an applicant might go through | I can use them for effective comparison and filter the candidates easily                                                                   |
+| `* * *`  | Hiring Manager | create tags and categorise them                                                                                  | I can colour code them based on categories and use them to tag applicants to easily distinguish them                                       |
+| `* * *`  | Hiring Manager | compare candidates using their performance in their assessments or interviews                                    | I can choose the best candidates to move to the next stage of the hiring process and get the best performing candidates objectively        |
+| `* * *`  | Hiring Manager | add social profile [LinkedIn/Github]  candidate's information and view with ease                                 | I can get a more holistic view of the candidate's abilities                                                                                |
+| `* *`    | Hiring Manager | view a schedule/summary of events relating to the candidates                                                     | I can make preparations and arrangements for the events beforehand, and also get an idea of where each candidate is in the hiring process. |
+| `**`     | Hiring Manager | export candidate information and application data to a spreadsheet        <br/>                                  | I can perform further analysis using alternate tools on candidate data                                                                     |
 
 
 ### Use cases
@@ -795,6 +857,16 @@ This makes it more intuitive and logical for the user to use since the user woul
 
 ### Based on over-arching features
 
+###  Flexibility for further analysis
+We acknowledge that there will be some who would prefer to analyse data outside JABPro - and that is completely fine.
+With the ability to export to a .csv file using JABPro, users are empowered with the ability to conduct analysis in 
+other applications that they are more familiar with. 
+
+The introduction of the export command showcases our commitment towards user flexibility, and focus towards 
+making JABPro a tool that adds towards hiring manager's ecosystem, as opposed to a trade-off that requires them
+to only rely on JABPro. We strongly believe that users should have the flexibility and ability to conduct
+further analysis outside JABPro if they wish to.
+
 
 ### Storage Complications and Effort
 In relation to saving of data to storage, we largely followed the same format as AB3. The only strict deviation from the AB3 method of saving was using a different data structure.
@@ -977,13 +1049,36 @@ testers are expected to do more *exploratory* testing.
       `edit 1 t/swe sc/swe 70`  
       **Note**: Tag `swe` is not categorised as an assessment type tag. Thus, you cannot edit the score for this tag.<br> 
       **Expected**: Neither score nor tag is updated for person. Error details shown in the status message.
-    
+
    4. Test case 3:  
       `edit 1 t/Interview sc/Interview -10`  
       **Note**: The score value should be a positive integer and must contain a space between the tag and the score value.<br> 
       **Expected**: Neither score nor tag is updated for person. Error details shown in the status message.
+   
+### Setting a person's status (Preliminary, Interviewed, Accepted/Rejected.)
+1. Setting a person's status in the list
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
- 
+    2. Test case 1:   
+       `set 1 Interviewed`  
+       **Expected**: On the next 'view' command, the personnel's details shows as Interviewed.
+   
+    3. Test case 2:  
+       `Set 0 Interviewed`  
+       **Expected**: No person is set to 'Interviewed'. Error details shown in the status message. Person information panel remains the same.
+
+### Exporting the information into a csv file 
+1. Exporting all current user data to csv
+    1. Prerequisites: Necessary write permissions to the /data/export.csv location
+
+    2. Test case 1:   
+       `export`  
+       **Expected**: File is successfully exported to the location /data/export.csv
+   
+    3. Test case 2:  
+       `export` (without write permissions)  
+       **Expected**: /data/export.csv file is not updated. Error details shown in the status message.
+
 ### Filtering persons by their scores for a particular tag based on a particular metric while all persons are being shown
 1. Filtering persons by their scores for a particular tag based on a particular metric while all persons are being shown  
    1. Prerequisites:  
@@ -1019,14 +1114,70 @@ testers are expected to do more *exploratory* testing.
    `filter t/Interview met/percentile` 
    **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
 
+### Adding LinkedIn/Github username to a person while all persons are being shown ###
+
+1. Adding LinkedIn/Github username to a person while all persons are being shown
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   
+    2. Test case (Positive test case): `addL 1 u/alexyeoh`
+       **Expected:** LinkedIn username added to the person's profile. Displayed in person card.
+   
+    3. Test case (Negative test case): `addG -1 u/madlad`
+       **Expected:** No Github username is added to any person. Error details shown in the status message. Person information panel remains the same.
+   
+    4. Test case (Negative test case): `addL u/maxcodes`
+       **Expected:** No LinkedIn username is added to any person. Error details shown in the status message. Person information panel remains the same.
+   
+    5. Test case (Negative test case): `addG 1`
+       **Expected:** No Github username is added to any person. Error details shown in the status message. Person information panel remains the same.
+
+### Viewing person's social profile ###
+
+1. Viewing a person's social profile
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list, with their usernames previously added.
+   
+    2. Test case (Positive test case): `linkedin 1`
+       **Expected:** Redirected to LinkedIn profile of the person, in the browser. Success message displayed on JABPro.
+   
+    3. Test case (Negative test case): `github 0`
+       **Expected:** No Github profile shown. Error details shown in the status message.
+   
+    4. Test case (Negative test case): `linkedin 2`
+       [Assumption: LinkedIn username has not been previously added for candidate 2]
+       **Expected:** No LInkedin profile shown. Error details shown in the status message.
+   
+    5. Test case (Negative test case): `github`
+       **Expected:** No Github profile shown. Error details shown in the status message.
+
+### Adding Event relating to a candidate ###
+
+1. Adding event relating to a candidate
+    1. Prerequisites: List all persons using the `list` command. Multiple person in the list.
+   
+    2. Test case (Positive test case): `event 1 d/Interview bt/2023-11-12 10:00 et/2023-11-12 12:00`
+       **Expected:** Event added to EventBook. Success message displayed. Event visible in Events window.
+   
+    3. Test case (Negative test case): `event 0 d/Interview bt/2023-11-12 10:00 et/2023-11-12 12:00`
+       **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
+   
+    4. Test case (Negative test case): `event 1 bt/2023-11-12 10:00 et/2023-11-12 12:00`
+       **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
+   
+    5. Test case (Negative test case): `event 1 d/Interview bt/12-11-2023 10:00 et/12-11-2023 12:00`
+       **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
+   
+    6. Test case (Negative test case): `event 1 d/Interview bt/2023-11-12 12:00 et/2023-11-12 10:00`
+       **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
+   
+    7. Test case (Negative test case): `event 1 d/Interview bt/2023-11-31 10:00 et/2023-12-01 10:00`
+       **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. On your command terminal, `cd` into the folder where your jar file is in.
-   2. Run `cd Data` to enter the directory where all of JABPro's data is stored.
-   3. Run `ls` to view all files stored in this directory.
-   4. If you see any of the following json files: `addressbook.json` or `eventbook.json`, delete them using
-      the `rm` command e.g. `rm addressbook.json` to start fresh and remove any corrupted data files.
-
+    1. On your command terminal, `cd` into the folder where your jar file is in.
+    2. Run `cd Data` to enter the directory where all of JABPro's data is stored.
+    3. Run `ls` to view all files stored in this directory.
+    4. If you see any of the following json files: `addressbook.json` or `eventbook.json`, delete them using
+       the `rm` command e.g. `rm addressbook.json` to start fresh and remove any corrupted data files.
