@@ -28,8 +28,8 @@ public class LoadCommand extends Command {
     public static final String COMMAND_WORD = "load";
     public static final String MESSAGE_SUCCESS = "You have successfully loaded file: ";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Loads the xlsx file from specified path.\n"
-            + "Example: " + COMMAND_WORD + " words.xslx";
-    public static final String MESSAGE_DUPLICATE_FLASHCARD = " flashcard already exists!";
+            + "Example: " + COMMAND_WORD + " words.xlsx";
+    public static final String MESSAGE_DUPLICATE_FLASHCARD = " flash card already exists!";
     public static final String MESSAGE_EMPTY_WORDS = "Word/translation cannot be empty!";
     public final String fileName;
 
