@@ -491,9 +491,10 @@ There are two situations that need to be considered: duplicate flash cards **wit
 
 **Target user profile**:
 
-* language learners, e.g. Duolingo preparers
-* have a need to manage a significant number of vocabularies
-* need to review learned vocab by scheduled plans
+* language learners, focus on beginner language learners
+* need to manage a significant number of vocabularies
+* need to learn and remember words by flash cards
+* need to review learned vocabularies by scheduled plans
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -502,7 +503,7 @@ There are two situations that need to be considered: duplicate flash cards **wit
 
 **Value proposition**:
 
-Our product empowers users to efficiently manage their vocabulary through vivid flashcards and seamlessly review their acquired language skills according to scientific learning curves. With Flashlingo, language learners can master new words while staying in control of their customized language learning journey.
+Our product empowers users to efficiently manage their vocabulary through flash cards and seamlessly review the words in review sessions. With Flashlingo, language learners can master new words scientifically while staying in control of their customized language learning journey.
 
 
 ### User stories
@@ -650,7 +651,7 @@ Use case resumes from step 3.
 5.  **Quality** - Should be able to update already memorized words accordingly and maintain the left ones when a learning session accidentally closes.
 6.  **Quality** - Should be able to provide the learner with a reasonable time schedule for language learning.
 7.  **Quality** - Should be able to handle any user input correctly without crashing.
-8.  **Capacity** - Should be able to hold up to 100 flash cards without a noticeable sluggishness(longer than 2 seconds) in performance for typical usage.
+8.  **Capacity** - Should be able to hold up to 100 flash cards without a noticeable sluggishness (longer than 2 seconds) in performance for typical usage.
 
 ### Glossary
 
@@ -659,6 +660,7 @@ Use case resumes from step 3.
 * **Flashcard**: A virtual card with a word on one side and its translation on the other side
 * **Word**: A word in the language you want to learn
 * **Translation**: The word in your native language that corresponds to the word you want to learn
+* **Review Session**: A review session is a designated phase within the system where words requiring review are presented individually. Users can confirm their understanding or signal a need for further review.
 
 --------------------------------------------------------------------------------------------------------------------
 
