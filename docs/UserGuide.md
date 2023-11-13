@@ -78,7 +78,7 @@ Here are some symbols used throughout this user guide:
 
 1. Module List: This is where all modules that you have added to the program will appear.
 2. Tutorial List: This is where all tutorials that you have added to the program will appear.
-3. Command Box: This is where you type in your commands. After typing the command, press `enter` to execute them. 
+3. Command Box: This is where you type in your commands. After typing the command, press `enter` to execute them.
 4. Output Box: This is where the program will provide feedback to your commands. When launching the program, the
 output box will be empty, but after executing a command, successful or otherwise, the feedback of the program, such as
 telling you that it doesn't recognise your command via an "Invalid command" message, will appear.
@@ -198,7 +198,7 @@ Lists out all persons with the given condition.
 Format: `search CONDITION1, CONDITION2, …`
 
 * Condition is given in the format keyword: value.
-* Accepted condition keywords are module, tutorial name and person name.
+* Accepted condition keywords are module, tutorial name, person name and tags.
 * Keywords are case-sensitive, only NAME is case-insensitive.
 * Unrecognised keywords cause this method to fail.
 * Searching with no conditions will return no users.
@@ -208,8 +208,9 @@ Format: `search CONDITION1, CONDITION2, …`
 
 Examples:
 * `search m/CS2103T` returns all persons in the module CS2103T
-* `search tn/T03` returns all persons in the class T03
+* `search m/CS2103T tn/T03` returns all persons in the tutorial T03 in the module CS2103T
 * `search n/John Doe` returns all persons with the name John Doe
+* `search t/student` returns all persons with the tag student
 
 ### Clearing all entries : `clear`
 
@@ -232,7 +233,7 @@ TAssistant data are saved in the hard disk automatically after any command that 
 TAssistant data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`.
 Advanced users are welcome to update data directly by editing that data file.
 
-:exclamation: If your changes to the data file makes its format invalid, TAssistant will discard all data and start with an empty data file at the next run. 
+:exclamation: If your changes to the data file makes its format invalid, TAssistant will discard all data and start with an empty data file at the next run.
 Hence, it is recommended to take a backup of the file before editing it.
 
 ### Adding a module to TAssistant: `addModule`
@@ -256,7 +257,7 @@ Example: `addModule m/CS2100`
 Deletes the module from TAssistant and the GUI will change to reflect this.
 The index refers to the position of the module displayed on the GUI.
 
-:exclamation: Any related tutorials on the GUI as well as modules/tutorials on persons 
+:exclamation: Any related tutorials on the GUI as well as modules/tutorials on persons
 will also be deleted. As such, please use this command with discretion.
 
 Will give an error message if the module does not exist in TAssistant,
@@ -291,11 +292,12 @@ CS1000, if the module CS1000 exists and the person at the top in the current lis
 
 ### Adding a tutorial to a given module: `addTutorial`
 
-Adds a tutorial with a specific tutorial name and time to a given module. 
+Adds a tutorial with a specific tutorial name and time to a given module.
 Note that:
-- Different modules can have different tutorials with the same name. 
+- Different modules can have different tutorials with the same name.
 - Tutorial time
-  - should follow `E ha` format stated in [java api](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/format/DateTimeFormatter.html)
+  - should follow `DAY_OF_THE_WEEK 12_HOUR_CLOCK_TIME` format.
+  - space between DAY_OF_THE_WEEK and 12_HOUR_CLOCK_TIME is **compulsory**.
   - is **not** case-sensitive.
   - e.g. `Mon 6PM`, `Mon 6pm`, `mon 6PM`, `Monday 6PM` are all valid, but `Mon 0PM` is not valid.
 - Will give an error message if:
@@ -323,8 +325,8 @@ Example: `deleteTutorial 2` removes the second-leftmost tutorial from the tutori
 
 ### Adding a person to a given tutorial: `addToTutorial`
 
-Adds a given user to the stated tutorial. 
-The index refers to the position of the given person as displayed in the GUI and **must be a positive integer** 1, 2, 3... 
+Adds a given user to the stated tutorial.
+The index refers to the position of the given person as displayed in the GUI and **must be a positive integer** 1, 2, 3...
 Fails if the index is not valid.
 
 Format: `addToTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME`
@@ -333,7 +335,7 @@ Example: `addToTutorial 1 m/CS2103T tn/T11`
 
 ### Removing a person from a given tutorial: `removeFromTutorial`
 
-Removes a given person from the stated tutorial. 
+Removes a given person from the stated tutorial.
 The index refers to the position of the given person as displayed in the GUI and **must be a positive integer** 1, 2, 3...
 Fails if the index is not valid.
 
@@ -388,7 +390,8 @@ Example: `addAssignment assgn/Assignment 1`
 
 <div style="page-break-after: always;"></div>
 
-## Command summary
+
+## **Command summary**
 
 | Action                 | Format, Examples                                                                                                                                                      |
 |------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -410,14 +413,14 @@ Example: `addAssignment assgn/Assignment 1`
 | **removeFromTutorial** | `removeFromTutorial INDEX m/MODULE_NAME tn/TUTORIAL_NAME` <br> e.g., `removeFromTutorial 1 m/CS2103T tn/T11`                                                          |
 | **attn**               | `attn INDEX ln/LESSON_NUMBER` <br> e.g., `attn 1 ln/S1`                                                                                                               |
 | **deleteAttn**         | `deleteAttn INDEX ln/LESSON_NUMBER` <br> e.g., `deleteAttn 1 ln/S1`                                                                                                   |
-| **addAssignment**      | `addAssignment assgn/ASSIGNMENT_TITLE` <br> e.g., `addAssignment assgn/Project`                                                                                       |   
+| **addAssignment**      | `addAssignment assgn/ASSIGNMENT_TITLE` <br> e.g., `addAssignment assgn/Project`                                                                                       |
 
 
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
-## Known issues
+## **Known issues**
 
 1. **When using multiple screens**, if you move the application to a secondary screen,
    and later switch to using only the primary screen, the GUI will open off-screen.
@@ -425,12 +428,12 @@ Example: `addAssignment assgn/Assignment 1`
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Glossary
+## **Glossary**
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Teaching Assistant (TA)**: A non-professor tutor which helps the professors of a module by teaching one or more classes.
+* **Teaching Assistant (TA)**: A non-professor tutor which helps the professors of a module by teaching one or more tutorials.
 * **Module**: A unit of study in a specific field set by NUS, such as CS2103T focusing on Software Engineering.
-* **Tutorial**: Lessons that are part of a module. Includes not only tutorials, 
+* **Tutorial**: Lessons that are part of a module. Includes not only tutorials,
 but also laboratories, recitations and any form of lesson that includes a TA.
 
 --------------------------------------------------------------------------------------------------------------------

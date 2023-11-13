@@ -153,18 +153,18 @@ Person, such as "Name", "Email" and "Phone" that have similar attributes.
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person`, `Module`, `Tutorial`, `Assignment` objects 
+* stores the address book data i.e., all `Person`, `Module`, `Tutorial`, `Assignment` objects
 (which are contained in a `UniquePersonList`, `UniqueModuleList`, `UniqueTutorialList`, `UniqueAssignmentList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) 
-as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` 
+* stores the currently 'selected' `Person` objects (e.g., results of a search query)
+as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>`
 that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * `Module`, `Tutorial` and `Assignment` objects are stored in a similar way, as a separate list that the UI
 automatically updates as the data in the list changes. However, since the UI always shows all modules, tutorials and
 assignments the user has (i.e. there is no filtering for Modules, Tutorials and Assignments), the list exposed to
 outsiders is always guaranteed to be the full list of Modules, Tutorials or Assignments.
-* stores a `UserPref` object that represents the user’s preferences. 
+* stores a `UserPref` object that represents the user’s preferences.
 This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components 
+* does not depend on any of the other three components
 (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 ### Storage component
@@ -394,7 +394,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  Should be able to hold up to 10 modules without a noticeable sluggishness in performance for typical usage.
 4.  Should be able to hold up to 10 tutorials without a noticeable sluggishness in performance for typical usage.
-5.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) 
+5.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
 should be able to accomplish most of the tasks faster using commands than using the mouse.
 6.  The product is meant for a single Teaching Assistant that makes all changes to the AddressBook themselves.
 7.  Data will be stored in a .json file to allow for advanced users to manipulate the data directly.
@@ -453,13 +453,39 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+
+### Searching for specific users
+
+1. Searching for a person given a name
+    1. At least one person with the given name must exist.
+
+    2. Test case: `search n/NAME`<br>
+
+    3. Expected: Returns all people with the given name.
+
+2. Searching for a person given a module
+   1. At least one person with the given module must exist.
+
+   2. Test case: `search m/CS2100`<br>
+
+   3. Expected: Returns all people who are taking `MODULE`
+
+3. Searching for a person given a tutorial group.
+   1. The given module has a tutorial group with the given name.
+
+   2. There is at least one person with the given tutorial group.
+
+   3. Test case: `search m/MODULE t/TUTORIAL`<br>
+
+   4. Expected: Returns all people who are taking tutorial `TUTORIAL` in module `MODULE`.
+
 ### Adding Modules
 
 1. Adding a module
    1. Prerequisites: None.
 
    1. Test case: `addModule m/CS21OO`<br>
-      Expected: The module is added to the module list and it should show up on the GUI. 
+      Expected: The module is added to the module list and it should show up on the GUI.
       The displayed name on the GUI will always be capitalised.
 
    1. Test case: `addModule m/DTX3`<br>
@@ -467,7 +493,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `addModule m/`, `addModule m/HSA` <br>
       Expected: Similar to previous.
-   
+
 ### Adding Tutorials
 
 1. Adding a tutorial
@@ -492,12 +518,12 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: At least one person must exist in the displayed list.
 
     1. Test case: `attn 1 ln/S1`<br>
-       Expected: A tag with the description "S1" should appear on the first person on the list. 
+       Expected: A tag with the description "S1" should appear on the first person on the list.
        A message should be displayed indicating that the attendance was successfully taken.
 
     1. Test case: `attn 1 ln/$$TEXT`<br>
        Expected: An error message should be displayed indicating that the tag name must be alphanumeric.
-   
+
     1. Test case: `attn -2 ln/S1`<br>
        Expected: An error message should be displayed indicating that the INDEX must be an unsigned integer.
 
@@ -508,9 +534,9 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding an assignment which has a title
 
-   1. Test case: `addAssignment assgn/Assignment 1`  
+   1. Test case: `addAssignment assgn/Assignment 1`
       Expected: A new assignment with the title `Assignment 1` appears in the assignment list panel on the right side of the GUI.
-    
+
    1. Test case: `addAssignment assgn/`  
       Expected: No assignment is added to the assignment list. An error message is shown in the status message.
 
@@ -534,7 +560,10 @@ As such, we intend to change this such that any input exceeding a reasonable len
 3. The addTutorial command accepts an empty string as tutorial name. We believe this is an invalid input that does not
 provide much value to users, so we intend to change this so trying to make a tutorial with an empty tutorial name
 now returns `Tutorial name cannot be empty!`
-4. Only addition of assignments is available as of now. We intend to implement it so that editing, removal and searching for assignments 
+4. Only addition of assignments is available as of now. We intend to implement it so that editing, removal and searching for assignments
 will be possible in the future. Also, integration with the respective tutorials and modules should also be able to be done.
-5. The addToTutorial and removeFromTutorial commands currently simply show the person they edit after success, with
+5. Splitting each person in the contact book into various roles (e.g. Professor, Student) is also planned for a later date.
+6. The addToTutorial and removeFromTutorial commands currently simply show the person they edit after success, with
 `Edited Person: (person details)`. We intend to change this so that they show `Tutorial added` or `Tutorial deleted` respectively.
+7. Currently, the attn command does not restrict the length on the lesson number provided. We intend to implement 
+some form of length requirements and produce an error message `The lesson number provided is too short/long!` when the restrictions are violated.

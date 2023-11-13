@@ -59,8 +59,26 @@ public class SearchCommand extends Command {
         return (person -> personNameToSearch.stream()
                 .allMatch(name -> person.getName().equals(name))
                 && person.getModules().containsAll(modulesToSearch)
-                && person.getTutorials().containsAll(tutorialsToSearch)
+                && hasAllTutorials(person)
                 && person.getTags().containsAll(tagsToSearch));
+    }
+
+    private boolean hasAllTutorials(Person person) {
+        for (Tutorial t : tutorialsToSearch) {
+            if (!hasTutorial(t, person)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean hasTutorial(Tutorial t, Person p) {
+        for (Tutorial tut : p.getTutorials()) {
+            if (t.equals(tut)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
