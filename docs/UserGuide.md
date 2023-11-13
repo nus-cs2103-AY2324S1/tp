@@ -54,7 +54,7 @@ Choose a topic from the table of contents to find out how to manage your clients
    </figure>
    <br>
 
-8. Type the command in the command box and press `Enter` to execute it.
+8. Type the [command](#if-youre-new-what-are-commands) in the command box and press `Enter` to execute it.
 
    Some examples you can try:
 
@@ -67,6 +67,27 @@ Choose a topic from the table of contents to find out how to manage your clients
    - `exit`: Exits the app.
 
 9. Refer to [Features](#features) below for more commands and details for each command.
+
+[↑ Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
+# **If you're new**: what are commands?
+
+Commands are the string of text you type into the command box. They usually start with a command word.
+
+- e.g. `create n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` is a command. ***create*** is the command word.
+
+Sometimes these commands require additional information. When creating our client, we need to specify the name, phone number, etc. These fields are called **parameters**.
+
+**Parameters** are additional information to be supplied by the user.
+
+- e.g. In `n/NAME`, `NAME` is a parameter which can be used as `n/John Doe`.
+
+For most commands, **parameters** are prefixed by **flags**. They are indicators to differentiate various parts of the command. They consist of a letter, followed by a `/`.
+
+- e.g. In `n/NAME`, `n/` is the flag for the `NAME` parameter.
 
 [↑ Back to Table of Contents](#table-of-contents)
 
@@ -123,7 +144,7 @@ Let's first discuss the top half of the interface.
    - Number of uncontacted / contacted / closed clients
    - Average interactions among all clients
    - Breakdown of the different interaction outcomes
-   - Number of hot / warm / cold [leads](#marking-a-client-as-a-hot-warm-or-cold-lead)
+   - Number of hot / warm / cold [leads](#common-use-case:-marking-a-client's-lead)
 
 5. **Upcoming Follow-ups:** upcoming meetings for each client. Follow-up dates are determined automatically by the latest interaction date and the lead of the client. See [how Connectify calculates follow-up dates.](#follow-up-calculation)
 
@@ -160,6 +181,7 @@ Let's first discuss the top half of the interface.
    - **Income:** the client's income.
    - **Past Interactions:** the list of past interactions or meetings with the clients, along with its date, interaction outcome (interested), and meeting notes.
 
+<a id="status-bar"></a>
    <br>
    <figure>
        <img src="images/UiStatusBar.png" alt="Status Bar">
@@ -169,27 +191,6 @@ Let's first discuss the top half of the interface.
     </figure>
 
 8. **Status Bar:** the location of where Connectify is storing your data in your computer.
-
-[↑ Back to Table of Contents](#table-of-contents)
-
---------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
-
-# **If you're new**: what are commands?
-
-Commands are the string of text you type into the command box. They usually start with a command word.
-
-- e.g. `create n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` is a command. ***create*** is the command word.
-
-Sometimes these commands require additional information. When creating our client, we need to specify the name, phone number, etc. These fields are called **parameters**.
-
-**Parameters** are additional information to be supplied by the user.
-
-- e.g. In `n/NAME`, `NAME` is a parameter which can be used as `n/John Doe`.
-
-For most commands, **parameters** are prefixed by **flags**. They are indicators to differentiate various parts of the command. They consist of a letter, followed by a `/`.
-
-- e.g. In `n/NAME`, `n/` is the flag for the `NAME` parameter.
 
 [↑ Back to Table of Contents](#table-of-contents)
 
@@ -491,7 +492,7 @@ See [what each section of the dashboard means.](#dashboard-information)
 
 ### Editing a client profile: ***edit***
 
-As time passes, you might need to update the details of a client profile. Use the command ***edit*** to edit the specified client profile in your client list.
+Over time, you may need to update the details of a client profile to reflect current information. Use the command ***edit*** to edit the specified client profile in your client list.
 
 **Format**
 ```text
@@ -539,12 +540,6 @@ Example
 
 You can use the ***edit*** command to clear all tags of a client by supplying an empty tag parameter! For example, if you wish to clear the tags of a client at index 4, you can use `edit 4 t/`.
 
-#### Marking a client as a hot, warm or cold lead
-
-As salespeople, we need to gauge the potential of each client, which represents how likely they are to become a buying customer. We use hot leads to represent a customer with high potential, and cold leads to represent customers with low potential.
-
-You can use the ***edit*** command to mark a client as a hot, warm or cold lead. For example, if you wish to mark a client at index 4 as a cold lead, you can use `edit 4 l/cold`.
-
 #### Editing a single field
 
 We understand the edit command can be a little tedious to use if you only want to edit a single field of a client profile. Hence, we have provided a shortcut for you to edit a single field of a client profile. This command is special because its command word is the same as the field you want to edit. 
@@ -571,6 +566,18 @@ FIELD INDEX NEW_VALUE
 - This does not work for the client's tags.
 
 </div>
+
+#### Common use case: Marking a client's lead
+
+As salespeople, we need to gauge the potential of each client, which represents how likely they are to become a buying customer. We use hot leads to represent a customer with high potential, and cold leads to represent customers with low potential.
+
+You can use the ***lead*** command to mark a client as a **hot**, **warm** or **cold** lead. 
+`lead <index> <lead type>`. 
+For example, if you wish to mark a client at index **4** as a **cold** lead, enter `lead 4 cold`. 
+
+Also be aware that this will [affect the follow-up date of the client.](#follow-up-calculation)
+
+[↑ Back to Table of Contents](#table-of-contents)
 
 [↑ Back to Table of Contents](#table-of-contents)
 
@@ -628,26 +635,29 @@ The follow-up date is calculated by the day of last interaction plus a follow-up
 
 For example, if your last interaction with John is on `1 Jan 2021` and he is a `HOT` lead, the follow-up date will be 1 week after `1 Jan 2021`, which is `8 Jan 2021`.
 
+## Parameter constraints
+
+Some parameters have constraints on the inputs they accept. Though our app will notify you of such issues when the arise, this section will list some common constraints worth noting for each parameter.
+
+#### Phone numbers
+Phone numbers can only 3-15 contain digits. An optional `+` sign is allowed in front.
+
+#### Tags
+
+The tag parameter `t/TAG` only allows alphanumeric inputs with no spaces. For example, `t/familyfriend` is allowed, but `t/family friend` or `t/family-friend` is not allowed.
+
+#### Incomes
+
+Incomes consist only of numerical inputs. Connectify does not yet support:
+* Decimal values `600.50`
+* Currencies `10000 USD`
+* Other non-numeric input e.g. `10,000`
+
 
 ## Command history
 You can use the up arrow key <kbd>&uarr;</kbd> to view your past commands and press <kbd>Enter</kbd> to execute them again.
 
-## PHONE NUMBER Parameter
-
-Phone numbers should only contain numbers and they should be 3 - 15 digits long. An optional `+` sign is allowed in front.
-
-<div style="page-break-after: always;"></div>
-
-## TAG Parameter
-
-The tag parameter `t/TAG` only allows alphanumeric inputs with no spaces. For example, `t/familyfriend` is allowed, but `t/family friend` or `t/family-friend` is not allowed.
-
-## INCOME Parameter
-
-Incomes must only consist of numerical inputs. Connectify does not yet support:
-* Decimal values `600.50`
-* Currencies `10000 USD`
-* Other non-numeric input e.g. `10,000`
+This is especially useful if you find yourself having to re-enter a command that is not accepted due to the constrains above. 
 
 [↑ Back to Table of Contents](#table-of-contents)
 
@@ -666,7 +676,11 @@ Incomes must only consist of numerical inputs. Connectify does not yet support:
 <br>
 1. Find your data folder - it should be in the same directory as your `connectify.jar` file.
 
-   If your Connectify jar file is at `C:\Users\John\Desktop\Connectify\connectify.jar`, the data folder will be at `C:\Users\John\Desktop\Connectify\data`.
+    If your Connectify jar file is at `C:\Users\John\Desktop\Connectify\connectify.jar`, the data folder will be at `C:\Users\John\Desktop\Connectify\data`.
+    <div markdown="block" class="alert alert-warning">
+    **:bulb: If you're having trouble finding the data folder, you can refer to the [status bar](#status-bar)!**<br>
+    </div>
+
 
 2. [Download Connectify](#quick-start) on the other computer.
 
@@ -689,6 +703,7 @@ Incomes must only consist of numerical inputs. Connectify does not yet support:
 | Find Client         | `find NAME`                                                                                                       | `find Chemmy`                                                                                                                                                        |
 | View Client Details | `view INDEX`                                                                                                      | `view 1`                                                                                                                                                             |
 | Edit Client         | `edit INDEX [n/NAME] [e/EMAIL] [a/ADDRESS] [t/TAG] [l/LEAD] [tg/TELEGRAM] [pf/PROFESSION] [i/INCOME] [d/DETAILS]` | `edit 2 e/berniceyu@gmail.com p/123456789`                                                                                                                           |
+| Edit Single Field   | `FIELD INDEX NEW_FIELD_VALUE`                                                                                           | `name 1 John Doe`                                                                                                                                                    |
 | Delete Client       | `delete INDEX`                                                                                                    | `delete 1`                                                                                                                                                           |
 | Exit                | `exit`                                                                                                            | `exit`                                                                                                                                                               |
 
