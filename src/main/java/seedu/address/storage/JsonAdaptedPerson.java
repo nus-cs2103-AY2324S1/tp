@@ -3,6 +3,7 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -10,12 +11,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Remark;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -28,7 +31,9 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String birthday;
+    private final String remark;
+    private final List<JsonAdaptedGroup> groups = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,13 +41,17 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("birthday") String birthday,
+            @JsonProperty("remark") String remark,
+            @JsonProperty("groups") List<JsonAdaptedGroup> groups) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        if (tags != null) {
-            this.tags.addAll(tags);
+        this.birthday = birthday;
+        this.remark = remark;
+        if (groups != null) {
+            this.groups.addAll(groups);
         }
     }
 
@@ -51,11 +60,13 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        phone = source.hasPhone() ? source.getPhone().toString() : "";
+        email = source.hasEmail() ? source.getEmail().toString() : "";
+        address = source.hasAddress() ? source.getAddress().toString() : "";
+        birthday = source.hasBirthday() ? source.getBirthday().toString() : "";
+        remark = source.hasRemark() ? source.getRemark().toString() : "";
+        groups.addAll(source.getGroups().stream()
+                .map(JsonAdaptedGroup::new)
                 .collect(Collectors.toList()));
     }
 
@@ -65,9 +76,9 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
+        final List<Group> personGroups = new ArrayList<>();
+        for (JsonAdaptedGroup group : groups) {
+            personGroups.add(group.toModelType());
         }
 
         if (name == null) {
@@ -102,8 +113,23 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
-    }
+        if (birthday == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Birthday.class.getSimpleName()));
+        }
+        if (!Birthday.isValidBirthday(birthday)) {
+            throw new IllegalValueException(Birthday.MESSAGE_CONSTRAINTS);
+        }
+        final Birthday modelBirthday = new Birthday(birthday);
 
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Remark.class.getSimpleName()));
+        }
+        final Remark modelRemark = new Remark(remark);
+
+        final Set<Group> modelGroups = new HashSet<>(personGroups);
+        return new Person(modelName, Optional.of(modelPhone), Optional.of(modelEmail), Optional.of(modelAddress),
+                Optional.of(modelBirthday), Optional.of(modelRemark), modelGroups);
+    }
 }

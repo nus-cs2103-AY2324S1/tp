@@ -5,42 +5,64 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ]
+    "birthday" : "1998-01-01",
+    "remark" : "She likes korean food",
+    "groups" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ]
+    "birthday": "1998-01-02",
+    "remark" : "He owes me money",
+    "groups" : [ "owesMoney", "friends", "teammates" ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "tags" : [ ]
+    "birthday": "1998-01-03",
+    "remark" : "He likes to swim",
+    "groups" : [ "family" ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-    "tags" : [ "friends" ]
+    "birthday": "1998-01-04",
+    "remark" : "He owes me a lot of money",
+    "groups" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "tags" : [ ]
+    "birthday": "1998-01-05",
+    "remark" : "She likes to eat cheese",
+    "groups" : [ "teammates" ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
-    "tags" : [ ]
+    "birthday" : "1998-01-06",
+    "remark" : "She likes steak",
+    "groups" : [ ]
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
-    "tags" : [ ]
+    "birthday" : "1998-01-07",
+    "remark" : "He likes to play football",
+    "groups" : [ ]
+  } ],
+  "events" : [ {
+    "eventType": "meeting",
+    "name" : "tp",
+    "date" : "2023-10-30",
+    "startTime" : "1300",
+    "endTime" : "1400",
+    "assignedPersons" : [ "Alice Pauline", "Benson Meier" ]
   } ]
 }

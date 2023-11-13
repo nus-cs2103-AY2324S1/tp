@@ -1,0 +1,37 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+#FFFFAA:User creates command request;
+#FFFFAA:Parser parses command;
+if () then (<color:green>[Command parsed without error])
+  #FFFFAA:Corresponding command is created;
+  #FFFFAA:Command is executed;
+
+    if () then (<color:green>[Command executed without error])
+        if () then (<color:red>[Is Exit Command])
+            stop
+        else (<color:green>[else])
+        endif
+
+        if () then (<color:green>[Models require updates])
+            #FFFFAA:Models are updated;
+            #FFFFAA:Storage is updated;
+
+        else (<color:green>[else])
+
+    endif
+    #FFFFAA:Ui is updated;
+    #FFFFAA:Command response is displayed;
+    else (<color:red>[Command executed with error])
+        #FFFFAA:Error message displayed;
+        stop
+
+   endif
+   stop
+else (<color:red>[Command parsed with error])
+ #FFFFAA:Error message displayed;
+ stop
+
+
+@enduml

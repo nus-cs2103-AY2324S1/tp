@@ -1,0 +1,40 @@
+@startuml
+'https://plantuml.com/object-diagram
+
+!define MySkin
+skinparam object {
+  BackgroundColor LightBlue
+}
+
+object "__model:ModelManager__" as model
+object "__addressBook:AddressBook__" as addressBook
+object "__:UniquePersonList__" as uniquePersonList
+object "__:EventList__" as eventList
+object "__newEvent:Meeting__" as newEvent
+
+object "__meeting1:Meeting__" as meeting1
+
+object "__startDate:EventDate__" as startDate
+object "__startTime:EventTime__" as startTime
+object "__name:EventName__" as name
+
+object "__meeting2:Meeting__" as meeting2
+object "__Bob:Person__" as Bob
+object "__Alice:Person__" as Alice
+
+
+
+model --> addressBook
+addressBook --> uniquePersonList
+addressBook --> eventList
+uniquePersonList --> Bob
+uniquePersonList --> Alice
+eventList --> meeting1
+eventList --> meeting2
+eventList --> newEvent
+
+meeting1 --> name
+meeting1 --> startDate
+meeting1 --> startTime
+
+@enduml

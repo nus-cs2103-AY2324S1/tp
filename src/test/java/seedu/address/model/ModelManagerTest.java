@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalEvents.MEETING_ASSIGNMENT_SUBMISSION;
+import static seedu.address.testutil.TypicalEvents.MEETING_BIRTHDAY_PARTY;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
@@ -15,7 +17,8 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.event.EventNameOrGroupContainsKeywordsPredicate;
+import seedu.address.model.person.PersonNameOrGroupContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -94,8 +97,15 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getFilteredEventList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredEventList().remove(0));
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBookWithEvent = new AddressBookBuilder().withEvent(MEETING_BIRTHDAY_PARTY)
+                .withEvent(MEETING_ASSIGNMENT_SUBMISSION).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -116,10 +126,15 @@ public class ModelManagerTest {
         // different addressBook -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
-        // different filteredList -> returns false
+        // different filteredPersonList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredPersonList(new PersonNameOrGroupContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+
+        // different filteredEventList -> returns false
+        keywords = MEETING_BIRTHDAY_PARTY.getName().toString().split("\\s+");
+        modelManager.updateFilteredEventList(new EventNameOrGroupContainsKeywordsPredicate(Arrays.asList(keywords)));
+        assertFalse(modelManager.equals(new ModelManager(addressBookWithEvent, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

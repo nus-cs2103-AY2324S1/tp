@@ -1,0 +1,28 @@
+@startuml
+!include ./style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Class Person
+Class Address
+Class Email
+Class Name
+Class Phone
+Class Group
+Class Birthday
+Class Remark
+
+Person *--> "1" Name
+Person *--> "0..1" Phone
+Person *--> "0..1" Email
+Person *--> "0..1" Address
+Person *--> "*" Group
+Person *--> "0..1" Birthday
+Person *--> "0..1" Remark
+
+Name -[hidden]right-> Phone
+Phone -[hidden]right-> Address
+Address -[hidden]right-> Email
+
+@enduml`

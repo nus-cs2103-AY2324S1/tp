@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 
 /**
@@ -15,6 +16,7 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    private static final String TEXT_STYLE = "-fx-font-family:Segoe UI; -fx-font-size: 13px;";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -33,27 +35,54 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private FlowPane groups;
     @FXML
-    private Label address;
-    @FXML
-    private Label email;
-    @FXML
-    private FlowPane tags;
+    private VBox mainBox;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PersonCard} with the given {@code Person} and index to display.
      */
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        fillInfo();
+        person.getGroups().stream()
+                .sorted(Comparator.comparing(group -> group.groupName))
+                .forEach(group -> groups.getChildren().add(new Label(group.groupName)));
+    }
+
+    /**
+     * Adds a {@code Person}'s info into {@code PersonCard}.
+     */
+    public void fillInfo() {
+        Label info;
+
+        if (!person.getPhone().toString().isEmpty()) {
+            info = new Label(person.getPhone().toString());
+            info.setStyle(TEXT_STYLE);
+            mainBox.getChildren().add(info);
+        }
+        if (!person.getAddress().toString().isEmpty()) {
+            info = new Label(person.getAddress().toString());
+            info.setStyle(TEXT_STYLE);
+            mainBox.getChildren().add(info);
+        }
+        if (!person.getEmail().toString().isEmpty()) {
+            info = new Label(person.getEmail().toString());
+            info.setStyle(TEXT_STYLE);
+            mainBox.getChildren().add(info);
+        }
+        if (!person.getBirthday().toString().isEmpty()) {
+            info = new Label(person.getBirthday().toString());
+            info.setStyle(TEXT_STYLE);
+            mainBox.getChildren().add(info);
+        }
+        if (!person.getRemark().toString().isEmpty()) {
+            info = new Label(person.getRemark().toString());
+            info.setStyle(TEXT_STYLE);
+            mainBox.getChildren().add(info);
+        }
     }
 }

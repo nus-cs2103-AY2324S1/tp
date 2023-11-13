@@ -1,0 +1,79 @@
+@startuml
+!include ./style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddPersonCommandParser" as AddPersonCommandParser LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+participant "addCommand:AddPersonCommand" as AddPersonCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+note left of LogicManager
+let {str} be "n/Lee Zheng Jing"
+end note
+
+[-> LogicManager : execute("add_person {str}")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("add_person {str}")
+activate AddressBookParser
+
+create AddPersonCommandParser
+AddressBookParser -> AddPersonCommandParser
+activate AddPersonCommandParser
+
+AddPersonCommandParser --> AddressBookParser
+deactivate AddPersonCommandParser
+
+AddressBookParser -> AddPersonCommandParser : parse("{str}")
+activate AddPersonCommandParser
+
+AddPersonCommandParser -> ParserUtil : parseName("Lee Zheng Jing")
+activate ParserUtil
+ParserUtil --> AddPersonCommandParser : name
+deactivate ParserUtil
+
+create AddPersonCommand
+AddPersonCommandParser -> AddPersonCommand : new AddPersonCommand(person)
+activate AddPersonCommand
+AddPersonCommand --> AddPersonCommandParser : addPersonCommand
+deactivate AddPersonCommand
+
+AddPersonCommandParser --> AddressBookParser : addPersonCommand
+deactivate AddPersonCommandParser
+
+AddressBookParser --> LogicManager : addPersonCommand
+deactivate AddressBookParser
+
+LogicManager -> AddPersonCommand : execute()
+activate AddPersonCommand
+
+AddPersonCommand -> Model : addPerson(person)
+activate Model
+Model --> AddPersonCommand : person
+deactivate Model
+
+'AddCommand -> AddCommand : addPerson(person)
+
+AddPersonCommand -> Model : updateGroups()
+activate Model
+Model --> AddPersonCommand
+deactivate Model
+
+create CommandResult
+AddPersonCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddPersonCommand
+deactivate CommandResult
+
+[<--LogicManager
+deactivate LogicManager
+
+@enduml

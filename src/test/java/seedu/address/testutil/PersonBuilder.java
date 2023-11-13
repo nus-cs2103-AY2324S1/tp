@@ -1,14 +1,17 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Remark;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -20,12 +23,15 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-
+    public static final String DEFAULT_BIRTHDAY = "2001-12-12";
+    public static final String DEFAULT_REMARK = "She likes korean food";
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
-    private Set<Tag> tags;
+    private Birthday birthday;
+    private Remark remark;
+    private Set<Group> groups;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -35,7 +41,9 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
+        birthday = new Birthday(DEFAULT_BIRTHDAY);
+        remark = new Remark(DEFAULT_REMARK);
+        groups = new HashSet<>();
     }
 
     /**
@@ -46,7 +54,9 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
+        birthday = personToCopy.getBirthday();
+        remark = personToCopy.getRemark();
+        groups = new HashSet<>(personToCopy.getGroups());
     }
 
     /**
@@ -58,10 +68,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code groups} into a {@code Set<Group>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withGroups(String ... groups) {
+        this.groups = SampleDataUtil.getGroupSet(groups);
         return this;
     }
 
@@ -89,8 +99,29 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Birthday} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withBirthday(String birthday) {
+        this.birthday = new Birthday(birthday);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Remark} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRemark(String remark) {
+        this.remark = new Remark(remark);
+        return this;
+    }
+
+    /**
+     * Builds a person with the given fields.
+     * @return
+     */
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, Optional.of(phone), Optional.of(email), Optional.of(address), Optional.of(birthday),
+                Optional.of(remark), groups);
     }
 
 }

@@ -1,10 +1,13 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.parser.exceptions.ParseException;
 
 public class PhoneTest {
 
@@ -13,11 +16,11 @@ public class PhoneTest {
         assertThrows(NullPointerException.class, () -> new Phone(null));
     }
 
-    @Test
-    public void constructor_invalidPhone_throwsIllegalArgumentException() {
-        String invalidPhone = "";
-        assertThrows(IllegalArgumentException.class, () -> new Phone(invalidPhone));
-    }
+    //    @Test
+    //    public void constructor_invalidPhone_throwsIllegalArgumentException() {
+    //        String invalidPhone = "";
+    //        assertThrows(IllegalArgumentException.class, () -> new Phone(invalidPhone));
+    //    }
 
     @Test
     public void isValidPhone() {
@@ -25,14 +28,14 @@ public class PhoneTest {
         assertThrows(NullPointerException.class, () -> Phone.isValidPhone(null));
 
         // invalid phone numbers
-        assertFalse(Phone.isValidPhone("")); // empty string
-        assertFalse(Phone.isValidPhone(" ")); // spaces only
         assertFalse(Phone.isValidPhone("91")); // less than 3 numbers
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
         assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
 
         // valid phone numbers
+        assertTrue(Phone.isValidPhone("")); // empty string
+        assertTrue(Phone.isValidPhone(" ")); // spaces only
         assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
         assertTrue(Phone.isValidPhone("93121534"));
         assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
@@ -56,5 +59,21 @@ public class PhoneTest {
 
         // different values -> returns false
         assertFalse(phone.equals(new Phone("995")));
+    }
+
+    @Test
+    public void hashcode() {
+        Phone phone = new Phone("999");
+        assertTrue(phone.hashCode() == new Phone("999").hashCode());
+    }
+
+    @Test
+    public void of_invalidPhone_throwsParseException() throws ParseException {
+        // invalid phone
+        assertThrows(ParseException.class, () -> Phone.of("test"));
+
+        // blank phone
+        assertEquals(Phone.of(" "), Phone.NULL_PHONE);
+
     }
 }

@@ -18,7 +18,17 @@ Class Address
 Class Email
 Class Name
 Class Phone
-Class Tag
+Class Group
+Class Birthday
+Class Remark
+
+Class EventList
+Class "{abstract}\nEvent" as Event
+Class EventDate
+Class EventName
+Class EventTime
+Class EventType
+Class Meeting
 
 Class I #FFFFFF
 }
@@ -35,13 +45,24 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
+AddressBook --> "1" UniquePersonList
+AddressBook --> "1" EventList
 UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+EventList --> "~* all" Event
+Event <|-- Meeting
+Person --> "1" Name
+Person --> "0..1" Phone
+Person --> "0..1" Email
+Person --> "0..1" Address
+Person --> "*" Group
+Person --> "0..1" Birthday
+Person --> "0..1" Remark
+Event --> "1" EventName
+Event --> "1..2" EventDate
+Event --> "1" EventType
+Event --> "0..2" EventTime
+Event --> "*" Group
+Event --> "*" Person
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -51,4 +72,5 @@ Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
+ModelManager --> "~* filtered" Event
 @enduml

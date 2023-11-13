@@ -1,0 +1,116 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as Logic LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser ADDRESS_BOOK_PARSER_COLOR
+participant ":FindAllCommandParser" as FindAllCommandParser ADDRESS_BOOK_PARSER_COLOR
+participant "pp:PersonNameOrGroupContainsKeywordsPredicate" as PersonNameOrGroupContainsKeywordsPredicate PERSON_CONTAIN_KEYWORD_COLOR
+participant "ep:EventNameOrGroupContainsKeywordsPredicate" as EventNameOrGroupContainsKeywordsPredicate EVENT_CONTAIN_KEYWORD_COLOR
+participant "fa:FindAllCommand" as FindAllCommand FIND_COMMAND_COLOR
+participant ":CommandResult" as CommandResult COMMAND_RESULT_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> Logic : execute(...)
+activate Logic
+
+Logic -[LOGIC_COLOR]> AddressBookParser : parseCommand(...)
+activate AddressBookParser
+
+create FindAllCommandParser
+AddressBookParser -[ADDRESS_BOOK_PARSER_COLOR]> FindAllCommandParser
+activate FindAllCommandParser
+
+FindAllCommandParser --> AddressBookParser
+deactivate FindAllCommandParser
+
+AddressBookParser -[ADDRESS_BOOK_PARSER_COLOR]> FindAllCommandParser : parse(...)
+activate FindAllCommandParser
+
+create PersonNameOrGroupContainsKeywordsPredicate
+FindAllCommandParser -[FIND_COMMAND_PARSER_COLOR]> PersonNameOrGroupContainsKeywordsPredicate
+activate PersonNameOrGroupContainsKeywordsPredicate
+
+PersonNameOrGroupContainsKeywordsPredicate --> FindAllCommandParser
+deactivate PersonNameOrGroupContainsKeywordsPredicate
+
+create EventNameOrGroupContainsKeywordsPredicate
+FindAllCommandParser -[FIND_COMMAND_PARSER_COLOR]> EventNameOrGroupContainsKeywordsPredicate
+activate EventNameOrGroupContainsKeywordsPredicate
+
+EventNameOrGroupContainsKeywordsPredicate --> FindAllCommandParser
+deactivate EventNameOrGroupContainsKeywordsPredicate
+
+create FindAllCommand
+FindAllCommandParser -[FIND_COMMAND_PARSER_COLOR]> FindAllCommand : new FindAllCommand(pp, ep)
+activate FindAllCommand
+
+FindAllCommand --> FindAllCommandParser : fa
+deactivate FindAllCommand
+
+FindAllCommandParser --> AddressBookParser : fa
+deactivate FindAllCommandParser
+FindAllCommandParser -[hidden]-> AddressBookParser
+destroy FindAllCommandParser
+
+AddressBookParser --> Logic : fa
+deactivate AddressBookParser
+
+Logic -> FindAllCommand : execute()
+activate FindAllCommand
+
+FindAllCommand -[FIND_COMMAND_COLOR]> Model : getFullPersonList()
+activate Model
+
+Model --> FindAllCommand : fullPersonList
+deactivate Model
+
+FindAllCommand -[FIND_COMMAND_COLOR]> EventNameOrGroupContainsKeywordsPredicate : setPersonList(fullPersonList)
+activate EventNameOrGroupContainsKeywordsPredicate
+
+EventNameOrGroupContainsKeywordsPredicate --> FindAllCommand
+deactivate EventNameOrGroupContainsKeywordsPredicate
+
+FindAllCommand -[FIND_COMMAND_COLOR]> Model : updateFilteredPersonList(p -> true)
+activate Model
+
+Model --> FindAllCommand
+deactivate Model
+
+FindAllCommand -[FIND_COMMAND_COLOR]> Model : updateFilteredEventList(e -> true)
+activate Model
+
+Model --> FindAllCommand
+deactivate Model
+
+FindAllCommand -[FIND_COMMAND_COLOR]> Model : updateFilteredEventList(ep)
+activate Model
+
+Model --> FindAllCommand
+deactivate Model
+
+FindAllCommand -[FIND_COMMAND_COLOR]> Model : updateFilteredPersonList(pp)
+activate Model
+
+Model --> FindAllCommand
+deactivate Model
+
+create CommandResult
+FindAllCommand -[FIND_COMMAND_COLOR]> CommandResult
+activate CommandResult
+
+CommandResult --> FindAllCommand : result
+deactivate CommandResult
+
+FindAllCommand --> Logic : result
+deactivate FindAllCommand
+
+[<--Logic : result
+deactivate Logic
+
+@enduml
