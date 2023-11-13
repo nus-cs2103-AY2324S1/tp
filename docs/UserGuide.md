@@ -739,13 +739,13 @@ If your changes to the data file makes its format invalid, TAManager will discar
 **A**: Install the app in your other computer and overwrite the empty data file it creates with the file that contains the data of your previous TAManager.
 
 **Q**: What is default course?<br>
-**A**: Default course is the course that you are currently managing or teaching. It is a useful setting to personalize your TAManager experience.
+**A**: The default course is the course that you are currently managing or teaching. It is a useful setting to personalize your TAManager experience.
 
 **Q**: Why can't I add a course to the course list?<br>
 **A**: At the moment, TAManager does not support adding course to the course list. However, advanced users can edit the course list directly by editing the `courses.json` file.
 
-**Q**: Why is free time only available for Monday to Friday?<br>
-**A**: At the moment, TAManager only supports free time for Monday to Friday. As TAs are usually not working on weekends, we have decided to not include weekends in the free time feature.
+**Q**: Why is free time only available from Monday to Friday?<br>
+**A**: At the moment, TAManager only supports free time from Monday to Friday. As TAs are usually not working on weekends, we have decided to not include weekends in the free time feature.
 
 **Q**: Why can't I add a teaching assistant with the same name as an existing teaching assistant?<br>
 **A**: TAManager does not allow duplicate teaching assistants. This is to prevent confusion when you are managing your teaching assistants.
