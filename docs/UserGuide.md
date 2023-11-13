@@ -250,8 +250,8 @@ Creates a new event with accompanying details (name, location, date, tag).
 Format: `createEvent n/EVENT_NAME l/LOCATION d/DATE [t/TAG]...`
 
 Examples:
-* `createEvent n/Exco Planning l/Planning Room d/2023-12-10 t/Sem1` creates an event **named** "Party" held at the **location** "Raffles Hall" on the
-  **date** 2023-09-16, with **tag** "Sem1".
+* `createEvent n/Exco Planning l/Planning Room d/2023-12-10 t/Sem1` creates an event **named** "Exco Planning" held at the **location** "Planning Room" on the
+  **date** 2023-12-10, with **tag** "Sem1".
 
 <figure>
     <img src="images/CreateEventPostCommand.png"
@@ -572,9 +572,7 @@ This glossary provides definitions for the special terms used in this user guide
 
 **Tag**: A word or phrase that labels a member or an event.
 
---------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
+-------------------------------------------------------------------------------------------------------------------
 
 ## Command Summary
 
