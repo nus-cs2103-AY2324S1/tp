@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+Actor User as user USER_COLOR
+Participant ":MainWindow" as mw UI_COLOR
+Participant ":LogicManager" as lm LOGIC_COLOR
+Participant ":AddressBookParser" as abp LOGIC_COLOR_T2
+Participant ":FindCommandParser" as fcp LOGIC_COLOR_T3
+Participant ":FindCommandArgumentParser" as argp LOGIC_COLOR_T4
+Participant ":FindCommand" as cmd MODEL_COLOR
+Participant ":Model" as model STORAGE_COLOR
+
+user -[USER_COLOR]> mw : "list Tom/Sam"
+activate mw UI_COLOR
+
+mw -[UI_COLOR]> lm : execute
+activate lm LOGIC_COLOR
+
+lm -[LOGIC_COLOR]> abp : parseCommand("list Tom/Sam")
+activate abp LOGIC_COLOR_T2
+
+create fcp
+abp -[LOGIC_COLOR_T2]> fcp
+
+abp -[LOGIC_COLOR_T2]> fcp : parse("Tom/Sam")
+activate fcp LOGIC_COLOR_T3
+
+create argp
+fcp -[LOGIC_COLOR_T3]> argp
+
+fcp -[LOGIC_COLOR_T3]> argp : parse("Tom/Sam")
+activate argp LOGIC_COLOR_T4
+
+argp --[LOGIC_COLOR_T4]-> fcp : SearchPredicate
+deactivate argp LOGIC_COLOR_T4
+argp -[hidden]-> fcp
+destroy argp
+
+create cmd
+fcp -[LOGIC_COLOR_T3]> cmd
+
+fcp --[LOGIC_COLOR_T3]-> abp : FindCommand
+deactivate fcp LOGIC_COLOR_T3
+fcp -[hidden]-> abp
+destroy fcp
+
+abp --[LOGIC_COLOR_T2]-> lm : FindCommand
+deactivate abp LOGIC_COLOR_T2
+
+lm -[LOGIC_COLOR]> cmd : execute(Model)
+activate cmd MODEL_COLOR
+
+cmd -[MODEL_COLOR]> model : updateFilteredPersonList(SearchPredicate)
+
+cmd --[MODEL_COLOR]-> lm : CommandResult
+deactivate cmd MODEL_COLOR
+
+cmd -[hidden]-> lm
+destroy cmd
+
+lm --[LOGIC_COLOR]-> mw
+deactivate lm LOGIC_COLOR
+
+mw --[UI_COLOR]-> user
+deactivate mw
+
+
+@enduml

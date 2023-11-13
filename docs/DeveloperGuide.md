@@ -219,12 +219,12 @@ The add mechanism allows users to add new fosterers to the address book. This fe
 * `ParserUtil` and `AddCommandParser` — Contains parsing methods for various input fields (e.g., name, phone, email, etc.) to ensure they are valid by meeting specific requirements and conditions.
 * `ArgumentMultimap` — Tokenizes and manages command arguments.
 
-Given below is an example usage scenario and how the add mechanism behaves at each step. To make the sequence diagram for adding a fosterer more 
+Given below is an example usage scenario and how the add mechanism behaves at each step. To make the sequence diagram for adding a fosterer more
 readable, the following replacements for the lengthy add command format are used:
 
-1. `add n/Pete Tay p/98765411 e/pete@example.com a/Happy street block 5 housing/Condo availability/Available animal/nil animalType/able.Cat` 
+1. `add n/Pete Tay p/98765411 e/pete@example.com a/Happy street block 5 housing/Condo availability/Available animal/nil animalType/able.Cat`
 is replaced with `add command`.
-2. `n/Pete Tay p/98765411 e/pete@example.com a/Happy street block 5 housing/Condo availability/Available animal/nil animalType/able.Cat` 
+2. `n/Pete Tay p/98765411 e/pete@example.com a/Happy street block 5 housing/Condo availability/Available animal/nil animalType/able.Cat`
 is replaced with `arguments`.
 3. `Pete Tay, 98765411, pete@example.com, Happy street block 5, Condo, Available, nil, able.Cat` is replaced with `attributes`.
 
@@ -236,7 +236,7 @@ is replaced with `arguments`.
 Step 1. The user enters the `add` command with relevant details for the new fosterer. The `AddCommandParser` is invoked to parse the user's input.
 
 Step 2. The `AddCommandParser` processes the user's input and verifies the presence of mandatory fields inputted in the correct format (omitted from diagram for simplicity).<br/>
-If this check fails, the system will generate a specific error message indicating which field format is invalid. 
+If this check fails, the system will generate a specific error message indicating which field format is invalid.
 For example, if the email format is incorrect, the system will report that the email input is invalid. The error message will be displayed to the user, providing clear feedback about the issue and the specific constraints that are not met.
 
 Step 3. If all mandatory fields are present with the valid format, the new person is created using the `Person` class. The person's details, including their name, phone, email, address, housing, availability, animal name, animal type, and tags, are recorded, and the Person class also ensures that there is no conflicting data (omitted from diagram for simplicity).<br/>
@@ -283,36 +283,36 @@ The following activity diagram summarizes what happens when a user executes an a
 
 ### Editing and Saving the Changes in Profile Page Feature
 
-#### Parsing Commands In Profile Page 
+#### Parsing Commands In Profile Page
 
-While the profile page is opened, `LogicManager` class utilizes a `ViewModeParser` instead of the `AddressbookParser` which is used while in the main window. 
+While the profile page is opened, `LogicManager` class utilizes a `ViewModeParser` instead of the `AddressbookParser` which is used while in the main window.
 
-Given below is a sequence diagram that explains how `LogicManager` class chooses which parser class to use: 
+Given below is a sequence diagram that explains how `LogicManager` class chooses which parser class to use:
 
 ![isInViewModeSequenceDiagram](images/IsInViewModeSequenceDiagram.png)
 
-As the diagram suggests, the `executeInView()` method is used when personListPanelPlaceHolder UI element - the placeholder that contains the normal fosterer list - is invisible, which means the user sees the profile page. This triggers the `ViewModeParser` instance in `LogicManager` class to be used to parse the command. 
+As the diagram suggests, the `executeInView()` method is used when personListPanelPlaceHolder UI element - the placeholder that contains the normal fosterer list - is invisible, which means the user sees the profile page. This triggers the `ViewModeParser` instance in `LogicManager` class to be used to parse the command.
 
 <br>
 
-#### Handling UI Changes In Profile Page 
+#### Handling UI Changes In Profile Page
 
-While the profile page is opened, `MainWindow` classes checks the `CommandType` Enum value that `CommandResult` object carries. Depending on the types of the commands, `MainWindow` assigns handler methods to handle the corresponding UI changes. 
+While the profile page is opened, `MainWindow` classes checks the `CommandType` Enum value that `CommandResult` object carries. Depending on the types of the commands, `MainWindow` assigns handler methods to handle the corresponding UI changes.
 
-The sequence diagram give below illustrates the types of handlers `MainWindow` class deals with. 
+The sequence diagram give below illustrates the types of handlers `MainWindow` class deals with.
 
 ![MainWindowCommandTypeSequenceDiagram.png](images/MainWindowCommandTypeSequenceDiagram.png)
 
-As the diagram suggests, depending on the different types of commands, `MainWindow` class executes handlers corresponding to them. 
+As the diagram suggests, depending on the different types of commands, `MainWindow` class executes handlers corresponding to them.
 
 <br>
 
-#### Editing A Fosterer In Profile Page  
+#### Editing A Fosterer In Profile Page
 
-The mechanism allows the user to edit details of a fosterer in their profile page. This feature is facilitated by `ViewModeParser`, and `EditFieldCommand` classes, to handle user input in the profile page and edit the correct detail of a fosterer. This feature is implemented using the following components and operations: 
+The mechanism allows the user to edit details of a fosterer in their profile page. This feature is facilitated by `ViewModeParser`, and `EditFieldCommand` classes, to handle user input in the profile page and edit the correct detail of a fosterer. This feature is implemented using the following components and operations:
 
-* `ViewModeParser` - Represents the parser that parses commands that are executed in a fosterer's profile. 
-* `EditFieldCommand` - The core component responsible for executing the edit of a fosterer in the address book. 
+* `ViewModeParser` - Represents the parser that parses commands that are executed in a fosterer's profile.
+* `EditFieldCommand` - The core component responsible for executing the edit of a fosterer in the address book.
 * `MainWindow` - The UI component that handles navigating through fields.
 * `CommandType` - The Enum class that represents the type of command which MainWindow checks to handle the UI change.
 
@@ -326,13 +326,13 @@ Step 2. With `executeInView()`, `ViewModeParser` is used to parse the command wh
 
 ![EditFieldSequenceDiagramStep2.png](images/EditFieldSequenceDiagramStep2.png)
 
-Step 3. `EditFieldCommand` is executed, and with the `CommandType.EDIT_FIELD` carried by `CommandResult`, `MainWindow` calls `handleEditField()` method. The interaction between `MainWindow` and `PersonProfile` is covered in detail in **[View Feature](#view-feature)**. 
+Step 3. `EditFieldCommand` is executed, and with the `CommandType.EDIT_FIELD` carried by `CommandResult`, `MainWindow` calls `handleEditField()` method. The interaction between `MainWindow` and `PersonProfile` is covered in detail in **[View Feature](#view-feature)**.
 
 ![EditFieldSequenceDiagram.png](images/EditFieldSequenceDiagram.png)
 
 <br>
 
-### Saving the Changes in Profile Page Feature 
+### Saving the Changes in Profile Page Feature
 
 The mechanism allows the user to save the edited details of a fosterer in their profile page. This feature is facilitated by `ViewModeParser`, and `SaveCommand` classes, to handle user input in the profile page and save the updated fosterer. This feature is implemented using the following components and operations:
 
@@ -343,7 +343,7 @@ The mechanism allows the user to save the edited details of a fosterer in their 
 
 Given below is an example usage scenario and how the save mechanism behaves at each step, given that the user already opened person profile page:
 
-Step 1. The user enters `save` command. Since the normal person list is invisible, the command text "save" is passed to `executeInView()` method in `MainWindow` class. 
+Step 1. The user enters `save` command. Since the normal person list is invisible, the command text "save" is passed to `executeInView()` method in `MainWindow` class.
 
 ![SaveSequenceDiagramStep1.png](images/SaveSequenceDiagramStep1.png)
 
@@ -353,11 +353,74 @@ Step 2. With `executeInView()`, `ViewModeParser` is used to parse the command te
 
 Step 3. `EditFieldCommand` is executed, and `setPerson()` method from `Model` class is called with personToEdit and targetIndex obtained from `MainWindow` class.
 
-![SaveSequenceDiagram.png](images/SaveSequenceDiagram.png) 
+![SaveSequenceDiagram.png](images/SaveSequenceDiagram.png)
 
 Step 4. From `MainWindow`, `handleSave()` handler method is called which calls `resetValues()` in `PersonProfile` class that updates the field values to the currently saved fosterer's details and change the text color from red, if exists, back to black.
 
 ![HandleSaveSequenceDiagram.png](images/HandleSaveSequenceDiagram.png)
+
+### List feature
+
+#### Implementation
+
+The list feature allows users to filter through the address book. Note that internally, `find` and `list` are considered the same command.
+For class naming purposes, `ListCommand` displays all individuals, while `FindCommand` parses a search expression.
+This naming oddity is due to historical reasons; currently, the user triggers `ListCommand` with `find` (no search expression), and triggers `FindCommand` with `list Tom`.
+
+In this section, we focus only on `FindCommand`, which is strictly the more complex of the two. Particularly important classes are as follows:
+
+* `FindCommand` — The core component responsible for applying the filter to the address book.
+* `Model` — An object representing all the fosterers in the address book. Required for `FindCommand` to pass a `Predicate` to, to begin filtering.
+* `SearchPredicate` — `Predicate` wrapper around other search objects, to be passed to the `Model`.
+* `FindCommandParser` and `FindCommandArgumentParser` — Parse user arguments after the `find` keyword. `FindCommandParser` adheres to the same method convention as other `Parsers` for other commands, while calling `FindCommandArgumentParser` to turn the user argument into a `SearchPredicate`.
+
+The following class diagram shows all classes involved:
+
+![FindCommandClassDiagram.png](images/FindCommandClassDiagram.png)
+
+To illustrate how everything works together, we trace the flow of execution as the user searches for `Tom / Sam`. Details involving `MainWindow` and `LogicManager` are ignored, especially since they are common across all commands.
+
+Step 1. The user enters `list Tom/Sam`. `MainWindow` calls `LogicManager`, which calls `AddressBookParser`, and in turn `FindCommandParser`, which handles the resulting String.
+
+Step 2. `FindCommandParser` calls `FindCommandArgumentParser`, to turn the string into a `SearchPredicate` containing a `SearchMatcher`.
+
+Step 3. `FindCommandParser` uses the `SearchPredicate` to initialize a `FindCommand`, and returns it to `AddressBookParser`, which in turn returns to `LogicManager`.
+
+Step 4. `LogicManager` calls the `execute` function of the command it received. In this case, it received `FindCommand`. It passes a `Model` to the execute function as well.
+
+Step 5. `FindCommand` calls `updateFilteredPersonList` of the `Model`, which refreshes the currently displayed list of fosterers.
+
+Step 6. The `list` command stops here, and execution is returned to the `LogicManager`, and then `MainWindow`. The `MainWindow` shows text feedback, together with the updated list of fosterers.
+
+
+The following diagram ignores details for `SearchPredicate`, which will be covered shortly:
+
+![FindCommandSequenceDiagram.png](images/FindCommandSequenceDiagram.png)
+
+
+Let's dive into greater detail for `SearchPredicate`. We look at how the `SearchPredicate` handles a `Person` object:
+
+![FindSearchPredicateSequenceDiagram.png](images/FindSearchPredicateSequenceDiagram.png)
+
+To illustrate how `SearchMatcher` works, we consider the object diagram for the command `list John & Doe / Mae`.
+These objects are created by `FindCommandArgumentParser` through `parse("John & Doe / Mae)`:
+
+![FindPredicateExampleObjectDiagram.png](images/FindPredicateExampleObjectDiagram.png)
+
+When the Search Predicate is applied to a specific Person, the resulting flow of calls is as depicted by the following sequence diagram:
+
+![FindPredicateExampleSequenceDiagram.png](images/FindPredicateExampleSequenceDiagram.png)
+
+
+#### Design Considerations
+
+* Expressiveness — The search is required to be sufficiently expressive to handle common everyday tasks with efficient, singular commands. This includes brackets.
+* Typing Flow — Where possible, search expressions should support being written from left to right, without having to use the cursor, arrow keys or backspace key to backtrack or rewrite. This is the primary reason the search has two `AND` symbols of different precedences.
+* Intuitiveness — Search expressions use symbols `&` and `/`, which are intuitive for the target user.
+* Conciseness — Search expressions are as short as possible. This is the primary reason for not including field-specific searches, as that would increase the amount of text users have to type, often for minimal benefit.
+* Flexibility — Where possible, search expressions are allowed to be flexible. This includes automatically closing brackets and allowing any number of whitespaces (including none) between expression terms.
+
+Note: The `Range` return value from `SearchMatcher` is kept for potential future work, such as matches that avoid overlaps, or matches that must adhere to a certain order. Current functionality does not take advantage of `Range`.
 
 ### Delete feature
 
@@ -366,8 +429,8 @@ Step 4. From `MainWindow`, `handleSave()` handler method is called which calls `
 The delete mechanism allows users to delete fosterers in the address book. This feature is facilitated by the `DeleteCommand`, `DeleteCommandParser` and `Indices` classes, to handle user input and delete the correct fosterers.  This feature is implemented using the following components and operations:
 
 * `DeleteCommand` — The core component responsible for executing the deletion of fosterers in the address book.
-* `Indices` — Represents the indices that the user inputs, each index corresponding to a fosterer in the last seen list of fosterers. This class encapsulates one or more `Index` objects. 
-* `ParserUtil` and `DeleteCommandParser` — Contains the parsing methods for string input of the user. They ensure that the indices are valid by meeting specific requirements. 
+* `Indices` — Represents the indices that the user inputs, each index corresponding to a fosterer in the last seen list of fosterers. This class encapsulates one or more `Index` objects.
+* `ParserUtil` and `DeleteCommandParser` — Contains the parsing methods for string input of the user. They ensure that the indices are valid by meeting specific requirements.
 
 Given below is an example usage scenario and how the delete mechanism behaves at each step. The sequence diagram for deleting multiple fosterers is similar to the example in [Logic](#logic-component).
 
@@ -402,7 +465,7 @@ Therefore, by ensuring that the user input indices are correctly parsed and vali
 ### Sort feature
 #### Implementation
 
-The Sort feature allows the user to sort the list of fosterers alphabetically by name, to make the address book more organised. 
+The Sort feature allows the user to sort the list of fosterers alphabetically by name, to make the address book more organised.
 This is facilitated by the `SortCommand`, `Model`, `AddressBook`, and `UniquePersonList` classes:
 
 * `SortCommand` — This class represents the command to sort the list of persons by name. It calls the `sortByName` method in the `Model` class.
@@ -410,7 +473,7 @@ This is facilitated by the `SortCommand`, `Model`, `AddressBook`, and `UniquePer
 * `AddressBook` — Implements the `sortNames` method which uses `sort` on the `persons` UniquePersonList.
 * `UniquePersonList` — Contains the `sort` method to perform the sorting operation by using the method on its `internalList`.
 
-Given below is an example usage scenario and how the sort feature behaves at each step. 
+Given below is an example usage scenario and how the sort feature behaves at each step.
 
 ![Interactions Inside the Logic Component for SortCommand](images/SortSequenceDiagram.png)
 
@@ -459,9 +522,9 @@ This is facilitated by the `StatsCommand`, `StatsAvailCommand`, `StatsCurrentCom
 ![StatsClassDiagram](images/StatsClassDiagram.png)
 
 * `StatsCommand` — This is an abstract class that contains utility methods used by its subclasses for percentage calculation.
-* `StatsAvailCommand` — Contains methods to calculate statistics of available fosterers and the animals they can foster. 
-* `StatsCurrentCommand` — Contains methods to calculate statistics of current fosterers and the animals they are currently fostering. 
-* `StatsHousingCommand` — Contains methods to calculate statistics of the different housing types of fosterers. 
+* `StatsAvailCommand` — Contains methods to calculate statistics of available fosterers and the animals they can foster.
+* `StatsCurrentCommand` — Contains methods to calculate statistics of current fosterers and the animals they are currently fostering.
+* `StatsHousingCommand` — Contains methods to calculate statistics of the different housing types of fosterers.
 * `StatsCommandParser` — Contains the parsing methods for string input of the user. It is in charge of parsing the type of statistics requested by the user, and creating the corresponding `StatsCommand`.<br>
 
 Given below is an example usage scenario and how the statistics feature behaves at each step. It shows the execution of a `stats avail` command, which requests for statistics about available fosterers. 
@@ -528,26 +591,26 @@ We are also planning to shorten some input parameters when adding or editing a f
 | `animalType/ `              | `type/ `      |
 
 With this, the command `add n/Jerry Tan p/98765412 e/jerry123@example.com housing/HDB avail/true` will be a valid add
-command. 
+command.
 
 ### Reduce Coupling Between Availability and Animal Type
 Currently, the `animalType` field also contains information about the availability of a fosterer.<br>
-e.g. if the `animalType` field of a fosterer is `able.Dog`, it suggests that the fosterer is available, and is 
+e.g. if the `animalType` field of a fosterer is `able.Dog`, it suggests that the fosterer is available, and is
 able to foster a dog. However, the user will still need to enter the `availability` field as `available`. <br>
 
-Building on the enhancement in [Shorter Command Formats](#shorter-command-formats), we will be revising the 
+Building on the enhancement in [Shorter Command Formats](#shorter-command-formats), we will be revising the
 `AVAILABILITY` and `ANIMAL_TYPE` parameters:
 
-| Parameter             | About                                                             | Values                 | 
+| Parameter             | About                                                             | Values                 |
 |-----------------------|-------------------------------------------------------------------|------------------------|
-| `AVAILABILITY`        | Indicates availability of fosterer                                | `false`, `true`, `nil` |     
-| `ABLE_ANIMAL_TYPE`    | Indicates the type of animals the fosterer can foster             | `dog`, `cat`, `nil`    |     
+| `AVAILABILITY`        | Indicates availability of fosterer                                | `false`, `true`, `nil` |
+| `ABLE_ANIMAL_TYPE`    | Indicates the type of animals the fosterer can foster             | `dog`, `cat`, `nil`    |
 | `CURRENT_ANIMAL_TYPE` | Indicates the type of animals the fosterer is currently fostering | `dog`, `cat`, `nil`    |
 
 
 ### Support More Animal Types
 
-Building on the enhancement in [Reduce Coupling Between Availability and Animal Type](#reduce-coupling-between-availability-and-animal-type), we can support more animal types by allowing the addition of animals other than cats and dogs under `ABLE_ANIMAL_TYPE` and `CURRENT_ANIMAL_TYPE`. Some examples include 
+Building on the enhancement in [Reduce Coupling Between Availability and Animal Type](#reduce-coupling-between-availability-and-animal-type), we can support more animal types by allowing the addition of animals other than cats and dogs under `ABLE_ANIMAL_TYPE` and `CURRENT_ANIMAL_TYPE`. Some examples include
 `hamster` and `rabbit`. This will make our product available to more animal shelters.
 
 ### Allow Fosterers To Foster More Than One Animal At A Time
@@ -559,7 +622,7 @@ Currently, we only allow the assignment of one fosterer to one animal. To improv
 Currently, the fields and parameters for housing, availability and animal type are case-sensitive. An enhancement to this would be to make these fields and their parameters case-insensitive to improve the user experience. Moreover, the aforementioned enhancements will also be case-insensitive.
 
 ### Allow Symbols in Name
-Currently, names in Foster Family must be alphanumeric. However, this excludes certain legal names that have other 
+Currently, names in Foster Family must be alphanumeric. However, this excludes certain legal names that have other
 characters such as `/`. For example, we currently do not allow  `s/o` in a person's name as the `/` is used as a command
 delimiter. Hence, one possible improvement is to enforce that the name inputted by the user must be enclosed in quotation marks for parsing, and to allow symbols such as `/`, `'`, `-` etc. using regex. Additionally, we will disallow the use of numeric values in names, to prevent the case where a number is inputted as a name.
 
@@ -568,9 +631,9 @@ e.g. `n/"Henry Tan"` and `n/"Nagaratnam s/o Suppiah"` are now valid name paramet
 
 ### Phone Number Input
 
-Currently, phone numbers in Foster Family accept more than 8 digits as a valid input. This might cause invalid phone numbers to 
+Currently, phone numbers in Foster Family accept more than 8 digits as a valid input. This might cause invalid phone numbers to
 be recorded without error messages to warn the user of such mistakes, especially in the situation where local phone numbers are used.
-Hence, one possible improvement is to enforce that the phone number inputted by the user must be restricted to a maximum of 15 
+Hence, one possible improvement is to enforce that the phone number inputted by the user must be restricted to a maximum of 15
 digits (according to the international phone numbering plan).
 
 e.g. `p/90876534567890234567` is now an invalid phone number parameter.
@@ -588,13 +651,13 @@ errors made.
 ### Notes Feature as a Separate Command
 
 Currently, the notes feature is only available in the profile page, and its content, which can only be recorded via the
-`save` command, is inputted through the text box visible next to the `Notes` field. However, it could potentially be 
-inconvenient for the user to have to use a combination of different commands (an example would be `view`, followed by `notes` and 
-`save`) in order to record additional crucial information with regard to a particular fosterer. This breeds inefficiency in some 
-scenarios, especially in the situation where an animal with existing medical conditions is fostered and its health status has to 
+`save` command, is inputted through the text box visible next to the `Notes` field. However, it could potentially be
+inconvenient for the user to have to use a combination of different commands (an example would be `view`, followed by `notes` and
+`save`) in order to record additional crucial information with regard to a particular fosterer. This breeds inefficiency in some
+scenarios, especially in the situation where an animal with existing medical conditions is fostered and its health status has to
 be frequently updated. Hence, an enhancement to this feature would be to make the notes feature a separate command, such that the
-user would be able to add important notes in the main window, without having to navigate to the profile page and using the 
-additional `save` command to add the notes. 
+user would be able to add important notes in the main window, without having to navigate to the profile page and using the
+additional `save` command to add the notes.
 
 e.g. `notes 1 n/require an urgent visit to the vet` would add the notes "require an urgent visit to the vet" under the fosterer
 listed at index 1.
@@ -653,7 +716,7 @@ required to read long error messages with details that might be irrelevant to th
 * Prefers typing to mouse interactions
 * Is reasonably comfortable using CLI apps
 
-**Value proposition**: Low budget and efficient system that manages fosterers 
+**Value proposition**: Low budget and efficient system that manages fosterers
 
 ### User stories
 
@@ -697,7 +760,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Foster Manager requests to add fosterer to the System. 
+1. Foster Manager requests to add fosterer to the System.
 2. System adds the specified fosterer.
 
    Use case ends.
@@ -709,7 +772,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a2. Foster Manager enters new command.
 
       Steps 1a1 - 1a2 are repeated until the command entered is in the correct format.
-  
+
       Use case resumes from step 2.
 
 * 1b. System detects a conflicting add that will create an invalid fosterer.
@@ -735,7 +798,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. System indicates the error and requests for data to be inputted in the correct format.
     * 1a2. Foster Manager enters new command.
 
-      Steps 1a1 - 1a2 are repeated until the command entered is in the correct format. 
+      Steps 1a1 - 1a2 are repeated until the command entered is in the correct format.
 
       Use case resumes from step 2.
 
@@ -781,9 +844,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. Foster Manager lists fosterers (UC2).
 2. Foster Manager requests to edit a fosterer referenced by their index shown in the list.
-3. System displays details of the selected fosterer. 
-4. Foster Manager enters the desired changes. 
-5. Foster Manager requests to save the changes. 
+3. System displays details of the selected fosterer.
+4. Foster Manager enters the desired changes.
+5. Foster Manager requests to save the changes.
 6. System displays the updated list of fosterers.
 
    Use case ends.
@@ -796,14 +859,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Steps 1a1 - 1a2 are repeated until the entered index is valid.
 
       Use case resumes from step 2.
-  
+
 * 4a. System detects that the Foster Manager did not fill up compulsory fields.
     * 4a1. System indicates missing field error.
     * 4a2. Foster Manager fills up the missing compulsory fields.
     * 4a3. Foster Manager requests to save the changes.
 
       Steps 4a1-4a3 are repeated until every compulsory field is filled.
-  
+
       Use case resumes from step 5.
 
 * 4b. System detects a conflicting edit that will create an invalid fosterer.
@@ -862,7 +925,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Foster Manager lists fosterers (UC2). 
+1. Foster Manager lists fosterers (UC2).
 2. Foster Manager requests to view a certain statistic of the displayed fosterers.
 3. System displays the relevant statistic.
 
@@ -872,16 +935,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The displayed list is empty.
   * 2a1. System indicates error.
-  
-    Use case ends.  
-  
-  
+
+    Use case ends.
+
+
 * 2b. Requested statistic is invalid.
-  * 2b1. System indicates error, and prompts Foster Manager to request for a valid statistic. 
+  * 2b1. System indicates error, and prompts Foster Manager to request for a valid statistic.
   * 2b2. Foster Manager enters new command.
 
     Steps 2b1 - 2b2 are repeated until a valid statistic is requested.
-  
+
     Use case resumes from step 3.
 
 **Use case: UC8 - Undo Previous Command**
@@ -941,15 +1004,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 500 fosterers without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  The system should be usable by a novice foster manager who has never tried out keeping track of fosterers through this new system. 
+4.  The system should be usable by a novice foster manager who has never tried out keeping track of fosterers through this new system.
 5.  The system should respond within two seconds. (i.e. each time a valid command is entered or there is any use action)
-6.  The user interface should be intuitive enough for users who are not IT-savvy. 
+6.  The user interface should be intuitive enough for users who are not IT-savvy.
 7.  The user guide should be easily understood by target users. (foster managers of animal shelters, assuming they have no relevant technical knowledge)
-8.  The system should be able to detect invalidity of command within 2 seconds. 
+8.  The system should be able to detect invalidity of command within 2 seconds.
 9.  The system must be able to scale up or down as needed (in the case where there is a sudden fosterers).
 10. The system should not contain the fosterer's private information in the case that the fosterer did not give consent.
-11. The system must comply with all applicable laws and regulations like the Personal Data Protection Act (PDPA). 
-12. The system should be reliable, easy to maintain, and accessible 24/7. 
+11. The system must comply with all applicable laws and regulations like the Personal Data Protection Act (PDPA).
+12. The system should be reliable, easy to maintain, and accessible 24/7.
 13. The product should be able to run on mainstream OS.
 
 ### Glossary
@@ -992,7 +1055,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a fosterer after collecting all the mandatory details to be inputted
 
-    1. Prerequisites: Foster Manager has collected fosterer details such as name, phone number, email, address, housing type, availability, name of animal fostered 
+    1. Prerequisites: Foster Manager has collected fosterer details such as name, phone number, email, address, housing type, availability, name of animal fostered
    (if currently fostering) and type of animal fostered (if currently fostering).
 
     1. Test case (valid): `add n/Anne Lim p/98765422 e/anne123@example.com a/Baker street, block 6, #27-01 housing/Landed availability/NotAvailable animal/Bucky animalType/current.Dog`<br>
@@ -1022,7 +1085,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `delete 1`<br>
       Expected: First fosterer is deleted from the list. Details of the deleted fosterer are shown in the status message.
-   
+
    1. Test case: `delete 1 2 3`<br>
       Expected: First, second and third fosterers are deleted from the list. Number of deleted fosterers, and their details are shown in the status message.
 
