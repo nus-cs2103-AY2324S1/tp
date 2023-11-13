@@ -48,11 +48,11 @@ public class SampleDataUtil {
 
     public static Applicant[] getSampleApplicants() {
         return new Applicant[] {
-            new Applicant(new Name("Alex Yeoh"), new Phone("87438807"), new InterviewTime("2023-10-10 10:00")),
+            new Applicant(new Name("Alex Yeoh"), new Phone("87438807"), new InterviewTime("10/10/2023 1200")),
             new Applicant(new Name("Bernice Yu"), new Phone("99272758")),
-            new Applicant(new Name("Charlotte Oliveiro"), new Phone("93210283"), new InterviewTime("2023-11-11 10:00")),
+            new Applicant(new Name("Charlotte Oliveiro"), new Phone("93210283"), new InterviewTime("11/11/2023 1000")),
             new Applicant(new Name("David Li"), new Phone("91031282")),
-            new Applicant(new Name("Irfan Ibrahim"), new Phone("92492021"), new InterviewTime("2023-12-12 10:00")),
+            new Applicant(new Name("Irfan Ibrahim"), new Phone("92492021"), new InterviewTime("12/12/2023 1000")),
             new Applicant(new Name("Roy Balakrishnan"), new Phone("92624417"))
         };
     }
