@@ -8,9 +8,6 @@
 
 --------------------------------------------------------------------------------------------------------------------
 
-<!-- * Table of Contents -->
-<page-nav-print />
-
 ## Table of Contents
 * [Product Overview](#product-overview)
 * [Key Definitions](#key-definitions)
@@ -133,10 +130,12 @@ Go to the [Table of Contents](#table-of-contents) to navigate to the feature tha
 
     ![Ui](images/main.png)  
    
-    <box type="warning" seamless>
+<box type="warning" seamless>
 
-    Ensure your JABPro contains some sample data. If it starts off empty then there might be some issues with the launch which might result in 
-    some commands to not run properly. See below to learn how to troubleshoot this problem!
+Ensure your JABPro contains some sample data. If it starts off empty then there might be some issues with the launch which might result in 
+some commands to not run properly. See below to learn how to troubleshoot this problem!
+
+</box> 
 
 <box type="tip" seamless>
 

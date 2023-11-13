@@ -449,7 +449,7 @@ The following sequence diagram shows how the `Event` operation works:
 User should see the UI as shown below after executing the aforementioned command [It is assumed that the first candidate in the list is Alex Yeoh].
 
 
-![EventWindow](images/eventwindow.png)
+![EventWindow](images/eventwin.png)
 
 The following activity diagram shows how the `event` and `schedule` command can be used together to schedule events:
 
@@ -975,11 +975,11 @@ testers are expected to do more *exploratory* testing.
 1. Viewing a person's details while all persons are being shown
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    2. Test case 1:   
+    2. Test case 1 (Positive Test Case):     
        `view 1`  
        **Expected**: Person information panel is updated to reflect the details of the person.
 
-    3. Test case 2:  
+    3. Test case 2 (Negative Test Case):    
        `view 0`  
        **Expected**: No person is viewed. Error details shown in the status message. Person information panel remains the same.
 
@@ -988,16 +988,16 @@ testers are expected to do more *exploratory* testing.
 1. Adding a remark to a person while all persons are being shown
     1. Prerequisites: List all persons using the `list` command.
 
-    2. Test case 1:   
+    2. Test case 1 (Positive Test Case):     
        `remark 1 r/John is a good candidate`  
        **Expected**: New remark is added to the person. Details of remark displayed on the person information panel.
 
-    3. Test case 2:  
+    3. Test case 2 (Positive Test Case):    
        `remark 1 r/**REMARK** Furthermore, hes capable of working in a team`    
        **Expected**: Remark is added on from the previous existing remark. Person information panel is updated to reflect the addition of the remark.  
        Specifically `John is a good candidate` is followed by `Furthermore, hes capable of working in a team` on the person information panel.
 
-    4. Test case 3:   
+    4. Test case 3 (Negative Test Case):     
        `remark 1 r/`  
        **Expected**: Previous remark is deleted. Person information panel is updated to reflect the deletion of the remark and is blank.
 
@@ -1080,17 +1080,17 @@ testers are expected to do more *exploratory* testing.
       2. Create an `assessment` type tag named `Interview` using the `create` command. This is done by entering `create t/assessment Interview` in the command box.
       
    2. Test case 1 (Positive Test Case):   
-      `edit 1 t/Interview sc/Interview 70`  
+      `edit 1 t/Interview sc/Interview 70`   
       **Note**: The score value should be a positive integer and must contain a space between the tag and the score value.<br>
       **Expected**: Score for the assessment type tag `Interview` is updated to 70.   
       Both Person List and Person Information Panel is updated to reflect the new `Interview` Tag. The new score is reflected on the Summary Statistics Screen(Third panel from the left).
 
-   3. Test case 2:  
-      `edit 1 t/swe sc/swe 70`  
+   3. Test case 2 (Negative Test Case):    
+      `edit 1 t/swe sc/swe 70`    
       **Note**: Tag `swe` is not categorised as an assessment type tag. Thus, you cannot edit the score for this tag.<br> 
       **Expected**: Neither score nor tag is updated for person. Error details shown in the status message.
 
-   4. Test case 3:  
+   4. Test case 3 (Negative Test Case):   
       `edit 1 t/Interview sc/Interview -10`  
       **Note**: The score value should be a positive integer and must contain a space between the tag and the score value.<br> 
       **Expected**: Neither score nor tag is updated for person. Error details shown in the status message.
@@ -1126,32 +1126,32 @@ testers are expected to do more *exploratory* testing.
       2. Create an `assessment` type tag named `Interview` using the `create` command. This is done by entering `create t/assessment Interview` in the command box.
       3. Edit the score for the `Interview` tag for at least two people using the `edit` command. This is done by entering `edit 1 t/Interview sc/Interview 70` and `edit 2 t/Interview sc/Interview 50` in the command box.
     
-   2. Test case 1:   
+   2. Test case 1 (Positive Test Case):   
    `filter t/Interview met/score val/60`  
    **Expected**: Person list is updated to reflect the persons with scores greater than 60 for the `Interview` tag. In this case its only the person with index 1. 
    
-   3. Test case 2:  
+   3. Test case 2 (Positive Test Case):  
    `filter t/Interview met/median`    
    **Expected**: Person list is updated to reflect the persons with scores greater than the median score for the `Interview` tag. In this case its only the person with index 1.
 
-   4. Test case 3:    
-   `filter t/Interview met/percentile val/0`  
+   4. Test case 3 (Positive Test Case):    
+   `filter t/Interview met/percentile val/0`     
    **Expected**: Person list is updated to reflect the persons with scores greater than the 0th percentile score for the `Interview` tag. In this case it will be all the persons with the `Interview` tag.
    
-   5. Test case 4:
-   `filter t/swe met/score val/60`
+   5. Test case 4 (Negative Test Case):      
+   `filter t/swe met/score val/60`  
     **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
    
-   6. Test case 5:
-   `filter t/Interview met/score val/-10`
+   6. Test case 5 (Negative Test Case):    
+   `filter t/Interview met/score val/-10`  
    **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
    
-   7. Test case 6:
-   `filter t/Interview met/variance val/100` 
+   7. Test case 6 (Negative Test Case):    
+   `filter t/Interview met/variance val/100`    
    **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
    
-   8. Test case 7:
-   `filter t/Interview met/percentile` 
+   8. Test case 7 (Negative Test Case):  
+   `filter t/Interview met/percentile`   
    **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
 
 ### Adding LinkedIn/Github username to a person while all persons are being shown ###
