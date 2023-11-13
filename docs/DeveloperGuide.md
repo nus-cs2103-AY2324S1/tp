@@ -943,4 +943,4 @@ testers are expected to do more *exploratory* testing.
 
 12. Switching the theme of the application
     1. Enter the `switch` command in the command box.
-       Expected: If on light mode, will switch to dark mode, otherwise switch to light mode
+    2. Expected: If on light mode, will switch to dark mode, otherwise switch to light mode
