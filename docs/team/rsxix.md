@@ -29,7 +29,6 @@ Given below are my contributions to the project.
     * User Guide:
         * Added documentation for the `sort` feature.
     * Developer Guide:
-        * Added implementation for the `delete` feature.
         * Added implementation for the `sort` feature.
         * Added manual testing guidance.
 
