@@ -429,7 +429,7 @@ Failure outputs:
     Use the `show` command or add the lesson index you want to add tasks to after `addTask`. Add description of the task at the end of the command.
 ```
 Invalid description: Tasks can take any values, and it should not be blank
-Usage: addTask/task + [lesson index] [description]. You could omit the lesson index when adding task to showing lesson.
+Usage: addTask + [lesson index] [description]. You could omit the lesson index when adding task to showing lesson.
 Example1: addtask 1 do homework
 ```
 
