@@ -324,24 +324,33 @@ public class ParserUtilTest {
         String invalidDateString2 = "31-11-2023 14:30";
         assertThrows(ParseException.class, () ->
                 ParserUtil.parseAppointment(VALID_APPOINTMENT_DESC, invalidDateString2));
+
+        // Wrong format
+        String invalidFormat = "1";
+        assertThrows(ParseException.class, () ->
+                ParserUtil.parseAppointment(VALID_APPOINTMENT_DESC, invalidFormat));
     }
     @Test
     void parseAppointmentDate_validDate_shouldParseSuccessfully() throws ParseException {
-        String validDateString = "29-02-2024 14:30";
+        String validDateTimeString = "29-02-2024 14:30";
         try {
-            ParserUtil.parseAppointmentDate(validDateString);
+            ParserUtil.parseAppointmentDate(validDateTimeString);
         } catch (ParseException e) {
             fail();
         }
     }
     @Test
     void parseAppointmentDate_invalidDate_shouldThrowParseException() {
+        // Wrong format
+        String invalidDateTime = "1";
+        assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDate(invalidDateTime));
+
         // 29th Feb for non leap year
-        String invalidDateString1 = "29-02-2022 14:30";
-        assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDate(invalidDateString1));
+        String invalidDateTime1 = "29-02-2022 14:30";
+        assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDate(invalidDateTime1));
 
         // No 31st Nov
-        String invalidDateString2 = "31-11-2023 14:30";
-        assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDate(invalidDateString2));
+        String invalidDateTime2 = "31-11-2023 14:30";
+        assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDate(invalidDateTime2));
     }
 }
