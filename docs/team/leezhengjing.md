@@ -21,8 +21,12 @@ FumbleLog is a desktop productivity application used for managing contacts and e
 * Added test cases for core components, util, commands, parsers and model.
 
 ### Contributions to the Developer Guide (DG)
-* Added implementation details for Commands, particularly the add_person command.
-* Added class diagrams and sequence diagrams.
+* Updated implementation details for 
+    * add_person command
+    * list_all command
+    * list_person command
+    * list_event command
+* Added class diagrams and sequence diagrams, for parser commands, add_person and delete_person command.
 
 ### Contributions to the User Guide (UG)
 * Added documentation for
@@ -44,6 +48,7 @@ FumbleLog is a desktop productivity application used for managing contacts and e
 * Helped with the release process.
 * Helped with the documentation process.
 * Coordinated sprints and code review.
+* Fixed bugs and issues.
 
 ### Contributions beyond the project team
 * Good moral support.
