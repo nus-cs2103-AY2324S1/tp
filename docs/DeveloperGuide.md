@@ -304,7 +304,7 @@ This is done by setting the `isView` property to true in the `CommandResult` obj
 
 ### Create feature
 
-### Implementation
+#### Implementation
 
 The `create` feature is implemented using the `CreateTagCommand` class. It extends `Command` and overrides the `execute()` method
 to create tags of specific categories.
