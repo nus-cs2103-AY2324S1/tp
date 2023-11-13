@@ -203,8 +203,9 @@ The `Model` component,
 
 An alternative (arguably, a more OOP) model is given below. It has a <code>Tag</code> list in the <code>AddressBook</code>, which <code>Person</code> references. This allows <code>AddressBook</code> to only require one <code>Tag</code> object per unique tag, instead of each <code>Person</code> needing their own <code>Tag</code> objects. <br><br>
 
-<img src='assets/svg/dg/BetterModelClassDiagram.svg' width='450' />
+<img src='assets/svg/dg/BetterModelClassDiagram.svg' width='450' /> <br><br>
 
+Without loss of generality, this model can be extended to <code>Task</code> entities. In that context, the <code>UniquePersonList</code> would be replaced by a <code>UniqueTaskList</code>, and each <code>Person</code> entity would become a <code>Task</code> entity. Each <code>Task</code> will reference: <code>Title</code>, <code>Note</code>, and <code>Tag</code> objects.
 " %}
 
 <div style="page-break-after: always;"></div>
@@ -1534,20 +1535,8 @@ testers are expected to do more <i>exploratory testing</i>.
 
 [Back to Table of Contents](#table-of-contents)
 
-### 1. Multiple Classes
-TODO
+### 1. Feature-rich selection of commands
+Tailored for the SoC Computing Club event planners, CoordiMate has expanded from the initial 8 commands in AB3 to a robust suite of 27. Each command was crafted to optimise the event planning workflow, addressing the need for quick and efficient management of contacts and tasks. Our enhancements were directed towards providing practical solutions within the event planning sphere.
 
-### 2. Rich In Features
-TODO
+With the addition of a new `Task` class and an improved support for managing tags for both tasks and contacts, CoordiMate delivers a selection of commands that each serve a strategic function in the planning of SoC events. Every enhancement has been thoughtfully integrated to support the SoC event planners in creating and managing events that are as organised as they are impactful.
 
-### 3. User Centric
-TODO
-
-### 4. Improved UI
-TODO
-
-### 5. Extensive Testing
-TODO
-
-### 6. Software Engineering Practices
-TODO
