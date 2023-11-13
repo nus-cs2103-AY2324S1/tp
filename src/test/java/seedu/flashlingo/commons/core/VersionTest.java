@@ -10,6 +10,7 @@ public class VersionTest {
 
     @Test
     public void versionParsing_acceptableVersionString_parsedVersionCorrectly() {
+        //Test for checking if the major/minor versions are parsed accurately
         verifyVersionParsedCorrectly("V0.0.0ea", 0, 0, 0, true);
         verifyVersionParsedCorrectly("V3.10.2", 3, 10, 2, false);
         verifyVersionParsedCorrectly("V100.100.100ea", 100, 100, 100, true);
@@ -17,6 +18,7 @@ public class VersionTest {
 
     @Test
     public void versionParsing_wrongVersionString_throwIllegalArgumentException() {
+        //Test for exception being thrown on passing an inaccurate versionString
         assertThrows(IllegalArgumentException.class, () -> Version.fromString("This is not a version string"));
     }
 
@@ -24,6 +26,7 @@ public class VersionTest {
     public void versionConstructor_correctParameter_valueAsExpected() {
         Version version = new Version(19, 10, 20, true);
 
+        //Testing for correct version parameter parsing
         assertEquals(19, version.getMajor());
         assertEquals(10, version.getMinor());
         assertEquals(20, version.getPatch());

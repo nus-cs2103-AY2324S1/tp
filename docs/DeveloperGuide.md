@@ -521,8 +521,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor:** User\
 **MSS:**
 
-1.	User requests help by keying in command or clicking the Help Button on the UI
-2.	Flashlingo opens browser with UserGuide
+1.	User requests help by either entering the help command in the command box or clicking the Help Button on the Flashlingo interface.
+2.	Flashlingo opens the default web browser and navigates to the User Guide page.
 
 Use case ends.
 
@@ -552,7 +552,7 @@ Use case ends.
 **Use case:** UC4 – Display list of flashcards\
 **Actor:** User\
 **MSS:**
-1.	User chooses to display list of flashcard.
+1.	User chooses to display the list of flashcards.
 2.	Flashlingo displays list of cards with words and corresponding translations.\
       Use case ends.
 
@@ -692,7 +692,123 @@ Some of our current output messages are not formatted properly. For example, the
 | ![img.png](images/RevealMessage.png) | Translation: word         |
 | ![img.png](images/ReviewMessage.png) | ...1 flashcard(s) listed! |
 
-### Enhancement 3: Providing more error messages when failing to load the data file
+### Enhancement 3: Adding frequency of usage tags
+
+**Feature Flaw**
+
+Currently, our application does not include functionality for categorizing flashcards with tags, such as 'Essentials', 'Uncommon', 'Rare', and 'Slang'. This omission can lead to a less structured learning experience, as users are unable to sort or prioritize flashcards based on the frequency and context of word usage. Without this feature, users might find it challenging to focus their study on the most pertinent words, potentially impacting the efficiency and effectiveness of language learning.
+
+**Proposed Enhancement**
+* Introduce a flexible tagging system allowing users to add tags to flashcards.
+* These tags could include categories like 'Essentials', 'Uncommon', 'Rare', and 'Slang'.
+
+*Usage*
+
+Tags can be added or modified using the following commands:
+
+* To add a tag: `addt`
+* To edit a tag: `editTag`
+* To delete a tag: `delTag`
+
+**Implementation:**
+
+The `AddTagCommand`, `EditTagCommand`, and `DeleteTagCommand` will operate under a similar framework, ensuring a consistent user experience across different tag-related functionalities. While each command serves a distinct purpose—adding, modifying, or removing tags—their underlying mechanisms share a common structure.
+
+The `AddTag` command will invoke the `setTags()` of `FlashCard`
+* **setTags:** Adds the passed tags to the current FlashCard's set of Tags
+
+The `EditTag` command will invoke the `replaceTags()` method of `FlashCard`
+* **replaceTag:** Replaces a specified Tag from this FlashCard's Set of Tags with a new Tag
+
+The `DeleteTag` command will invoke the `deletetTags()` method of `FlashCard`
+* **deleteTag:** Deletes the specified Tag from this FlashCard's Set of Tags
+
+All the Tag Commands will also invoke the `updateFilteredFlashCardList()` of `Model`
+* **updateFilteredFlashCardList:** Updates the list of FlashCards currently being displayed to the user
+
+The process of adding tags to a flashcard through the AddTagCommand would be as follows:
+
+**Step 1**: The user identifies the flashcard to be tagged by its index in the list.
+
+**Step 2**: The user specifies the tag(s) to be added to this flashcard. This is done by using the command `addt` followed by the `INDEX` and the `TAG` parameter.
+
+**Step 3**: Upon executing the command, the application retrieves the flashcard from the list based on the provided index.
+
+**Step 4**: The specified tags are added to the flashcard. If any tag already exists, it will not be duplicated.
+
+**Step 5**: The application updates its internal model to reflect these changes. This includes updating the list of flashcards to ensure the newly tagged flashcard is accurately represented in the user interface.
+
+**Step 6**: The user receives a confirmation message indicating the successful addition of tags to the flashcard.
+
+The following sequence diagram summarizes the workflow when a user executes a `AddTag` command:
+
+![img.png](images/AddTagsSequenceDiagram.png)
+
+A similar structure is followed for the `EditTagCommand` and `DeleteTagCommand`, but with the respective methods (`replaceTags` and `deleteTags`)
+
+**Usage Examples**
+The Tag commands can be used in the following ways:
+- `addt 2 tg/Essentials` - Adds the 'Essentials' tag to the flashcard at index 2.
+- `editTag 2 ot/Rare rt/Uncommon` - Changes the 'Rare' tag to 'Uncommon' on the flashcard at index 2.
+- `delTag 3 tg/Essentials` - Deletes the 'Essentials' tag from the flashcard at index 3.
+
+### Design Considerations
+
+**Aspect: What is the most effective method of tagging Flashcards:**
+In enhancing the functionality of our flashcard system, we considered how users could tag flashcards to optimize their learning experience.
+
+* Alternative 1 (current choice): Choosing from a predefined set of tags.
+
+   * Pros:
+      * Ensures consistency and standardization across the tagging system.
+      * Simplifies the user interface and user experience, as users can quickly select from a limited set of options.
+      * Facilitates easier implementation and maintenance from a programming perspective.
+   * Cons:
+      * Limits user flexibility and creativity, as they can only use the tags provided.
+      * May not cover all possible categories or nuances that users might need for their individual learning paths.
+* Alternative 2: Allowing users to create custom tags.
+
+   * Pros:
+      * Provides users with complete flexibility to create tags that precisely fit their learning needs and styles.
+      * Encourages users to engage more deeply with the material by thinking critically about how to categorize it.
+  * Cons:
+      * Can lead to a lack of standardization, making it harder to implement features that rely on consistent tagging.
+      * Potentially complicates the user interface and increases the learning curve for new users.
+        
+**Aspect: How should the tagging system handle multiple tags per flashcard:**
+
+* Alternative 1 (current choice): Allow Multiple Tags per Flashcard
+
+   * Pros:
+      * Enables more comprehensive categorization of flashcards.
+      * Offers greater flexibility for users to organize their study materials according to diverse criteria.
+   * Cons:
+      * Increases the complexity of the user interface and the backend logic.
+      * May lead to clutter or confusion if not managed effectively by the user.
+* Alternative 2: Limit Each Flashcard to a Single Tag
+
+   * Pros:
+      * Simplifies the interface and makes the system straightforward to use.
+      * Easier to implement and manage from a programming perspective.
+   * Cons:
+      * Reduces the depth of categorization, potentially leading to an overly simplifyied representation of complex language ideas.
+      * Limits the ability to cross-reference flashcards under multiple relevant categories.
+
+### Enhancement 4: Visualization Upgrade for 'Stats' Command
+ **Feature Flaw:**
+   * Currently, the success rate in the 'stats' command is presented as a mere percentage, which might not be the most engaging or insightful way for users to visualize their learning progress.
+   * Users lack a graphical representation of their learning statistics, which can provide a more immediate and comprehensive understanding of their performance.
+
+**Proposed Enhancement:**
+   * Enhance the 'stats' command by including a pie chart along with the percentage. This pie chart will visually represent the proportion of words remembered versus words not remembered.
+   * The pie chart will offer a clearer, more immediate visual representation of the user's success rate, making it easier to grasp their learning progress at a glance.
+
+**Sample Output:**
+|Before the update | ![img.png](images/Stats.png) |
+|:-----------------|-------------------:|
+|**After the update**| ![img.png](images/StatsChart.png) |
+
+### Enhancement 5: Providing more error messages when failing to load the data file
 
 **Feature Flaw**
 

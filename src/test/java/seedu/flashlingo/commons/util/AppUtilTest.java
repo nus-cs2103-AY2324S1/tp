@@ -14,6 +14,7 @@ public class AppUtilTest {
 
     @Test
     public void getImage_nullGiven_throwsNullPointerException() {
+        //Tests for NullPointerException being thrown if launching a null image
         assertThrows(NullPointerException.class, () -> AppUtil.getImage(null));
     }
 
@@ -30,7 +31,10 @@ public class AppUtilTest {
 
     @Test
     public void checkArgument_falseWithErrorMessage_throwsIllegalArgumentException() {
+        //Tests of error message is correctly thrown
         String errorMessage = "error message";
-        assertThrows(IllegalArgumentException.class, errorMessage, () -> AppUtil.checkArgument(false, errorMessage));
+        assertThrows(
+                IllegalArgumentException.class, errorMessage, () -> AppUtil.checkArgument(false, errorMessage)
+        );
     }
 }

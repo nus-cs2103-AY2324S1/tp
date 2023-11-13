@@ -8,17 +8,15 @@ import seedu.flashlingo.model.Model;
  * Indicates user wants to display the learning statistics
  */
 public class StatsCommand extends Command {
-
+    /** Command word to display usage statistics **/
     public static final String COMMAND_WORD = "stats";
 
     // For stats function
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Show user statistics\n"
             + "Example: " + COMMAND_WORD + " ";
 
-
-    public static final String MESSAGE_SUCCESS = "Great work fellow learner! \nTotal number of flashcards: %d \n"
-            + "Total number of FlashCards remembered: %d\nOverall success rate: %f%%";
-
+    public static final String MESSAGE_SUCCESS = "Great work fellow learner! \nTotal number of flash cards: %d \n"
+            + "Total number of flash cards remembered: %d\nOverall success rate: %f%%";
 
     /**
      * Executes the functioning for this command
@@ -31,9 +29,12 @@ public class StatsCommand extends Command {
         int numberOfFlashCards = model.getNumberOfFlashCards();
         double numberOfRememberedWords = model.getNumberOfRememberedWords();
         double successRate = 0;
-        if (!(numberOfRememberedWords < 0 || numberOfFlashCards <= 0)) {
+        boolean isNonNegativeNumberOfWords = numberOfRememberedWords < 0;
+        boolean isNonZeroNonNegativeNumberOfFlashCards = numberOfFlashCards <= 0;
+        if (!(isNonNegativeNumberOfWords || isNonZeroNonNegativeNumberOfFlashCards)) {
             successRate = (numberOfRememberedWords / numberOfFlashCards) * 100;
         }
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, numberOfFlashCards,
                 (int) numberOfRememberedWords, successRate));
     }
