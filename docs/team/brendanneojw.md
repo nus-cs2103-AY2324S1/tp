@@ -72,6 +72,7 @@ Given below are my contributions to the project.
     * Added implementation details of the `remind` feature
     * Added sequence diagram and activity to illustrate the flow for `remind` feature
     * Added in _User Stories_ in **Appendix: Requirements** section
+    * Added **Appendix: Planned Enhancements** section
 
 
 * **Community**:
