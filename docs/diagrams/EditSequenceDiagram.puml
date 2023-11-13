@@ -64,6 +64,8 @@ Model --> EditCommand : person
 deactivate Model
 
 EditCommand -> EditCommand : createEditedPerson(person, editPersonDescriptor)
+activate EditCommand
+deactivate EditCommand
 
 EditCommand -> Model : setPerson(person, editedPerson)
 activate Model

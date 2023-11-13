@@ -64,6 +64,8 @@ activate Model
 deactivate Model
 
 AddAltCommand -> AddAltCommand : createAddAltPerson(person, addAltPersonDescriptor)
+activate AddAltCommand
+deactivate AddAltCommand
 
 AddAltCommand -> Model : setPerson(person, addAltPerson)
 activate Model
