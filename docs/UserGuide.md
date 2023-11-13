@@ -58,6 +58,8 @@ quick reference to all the commands available in CMC.
 If you are facing any problems with the commands or are unsure of anything, you may refer to the [FAQ](#6-frequently-asked-questions-faqs) for common questions,
 or refer to [Common Mistakes](#7-common-mistakes) for common errors our users may face while using the application.
 
+<div style="page-break-after: always;"></div>
+
 ## 2. Quick start
 
 1. Ensure you have Java 11 or above installed in your Computer.
@@ -71,8 +73,8 @@ or refer to [Common Mistakes](#7-common-mistakes) for common errors our users ma
 
    ![Ui](images/Ui.png)
 
-   <div style="page-break-after: always;"></div>
-
+    <div style="page-break-after: always;"></div>
+   
 5. Type the command in the command box and press Enter to execute it.
    Here are some example commands you can try:
 
@@ -734,21 +736,21 @@ Exits the application.
 There will be no prompt to confirm this action.
 </div>
 
-## 5 Field Constraints Summary
+## 5. Field Constraints Summary
 
-### 5.1 `INDEX` format
+### 5.1. `INDEX` format
 
 - Index:
   - Only positive integers are allowed.
   - Integer should be within the range of the list shown.
 
-### 5.2 `NAME` format
+### 5.2. `NAME` format
 
 - Name:
   - Only alphabetical characters, spaces, @, (), / are allowed.
   - Leading spaces will be ignored.
 
-### 5.3 `PHONE_NUMBER` format
+### 5.3. `PHONE_NUMBER` format
 
 - Phone number:
   - Only numbers are allowed.
@@ -756,7 +758,7 @@ There will be no prompt to confirm this action.
 
 <div style="page-break-after: always;"></div>
 
-### 5.4 `EMAIL` format
+### 5.4. `EMAIL` format
 
 `EMAIL` field should be of the format **local-part@domain**.
 
@@ -769,28 +771,28 @@ There will be no prompt to confirm this action.
     - Each domain label must start and end with an alphanumerical character.
     - The last domain label must contain at least 2 characters.
 
-### 5.5 `TELEGRAM_HANDLE` format
+### 5.5. `TELEGRAM_HANDLE` format
 
 - Handle:
     - Must start with the "@" symbol.
     - Only alphanumerical characters and underscores "_" are allowed.
     - Must be between 5 and 32 characters long (inclusive).
 
-### 5.6 `TAG` format
+### 5.6. `TAG` format
 
 - Tag:
   - Only alphanumeric characters are allowed. 
   - Minimum of 1 and maximum of 15 characters are allowed. 
   - Spaces are not allowed.
 
-### 5.7 `INTERVIEW_TIME` format
+### 5.7. `INTERVIEW_TIME` format
 - Interview Time:
   - Only dates in the format of “DD/MM/YYYY HHmm” between 01/01/2000 0000 and 31/12/9999 0000 are allowed. 
   - To remove an interview time from an applicant, ‘cancel’ (case-sensitive) is also allowed.
 
 <div style="page-break-after: always;"></div>
 
-### 5.8 Examples of fields
+### 5.8. Examples of fields
 
 | Field               | Valid                                                      | Invalid                                                                                                   |
 |---------------------|------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
