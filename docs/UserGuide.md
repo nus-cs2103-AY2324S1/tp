@@ -317,6 +317,7 @@ Format: `find NRIC`
 Examples:
 
 * `find T1125726G` returns the person with the matching NRIC.
+  ![result for 'find T1125726G'](images/findByNricResult.png)
 
 ### Locating people by gender : `find M`, `find F` ###
 
@@ -335,6 +336,7 @@ Format: `find M` or `find F`
 Examples:
 
 * `find M` returns all male persons.
+  ![result for 'find M'](images/findByGenderResult.png)
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Take Note:**<br>
