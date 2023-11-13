@@ -7,19 +7,28 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
+import seedu.address.model.affiliation.Affiliation;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NextOfKin;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Role;
+import seedu.address.model.person.ShiftDays;
+import seedu.address.model.person.Specialisation;
+import seedu.address.model.person.Staff;
 
 /**
  * Jackson-friendly version of {@link Person}.
  */
+@JsonSerialize(using = CustomJsonAdaptedPersonSerializer.class)
 class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
@@ -27,23 +36,44 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
-    private final String address;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String role;
+    private final List<JsonAdaptedAffiliation> affiliations = new ArrayList<>();
+    private final List<JsonAdaptedAffiliation> affiliationHistory = new ArrayList<>();
+    @JsonIgnore
+    private final Set<Integer> shiftDays = new HashSet<>();
+    @JsonIgnore
+    private final Set<String> specialisations = new HashSet<>();
+
+    private final JsonAdaptedNextOfKin nextOfKin;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("email") String email, @JsonProperty("role") String role,
+                             @JsonProperty("affiliations") List<JsonAdaptedAffiliation> affiliations,
+                             @JsonProperty("affiliationHistory") List<JsonAdaptedAffiliation> affiliationHistory,
+                             @JsonProperty("shiftDays") List<Integer> shiftDays,
+                             @JsonProperty("specialisations") List<String> specialisations,
+                             @JsonProperty("nextOfKin") JsonAdaptedNextOfKin nextOfKin) {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
-        if (tags != null) {
-            this.tags.addAll(tags);
+        this.role = role;
+        if (affiliations != null) {
+            this.affiliations.addAll(affiliations);
         }
+        if (affiliationHistory != null) {
+            this.affiliationHistory.addAll(affiliationHistory);
+        }
+        if (shiftDays != null) {
+            this.shiftDays.addAll(shiftDays);
+        }
+        if (specialisations != null) {
+            this.specialisations.addAll(specialisations);
+        }
+        this.nextOfKin = nextOfKin;
     }
 
     /**
@@ -53,10 +83,209 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        role = source.getRole().value;
+        affiliations.addAll(source.getAffiliations().stream()
+                .map(JsonAdaptedAffiliation::new)
                 .collect(Collectors.toList()));
+        affiliationHistory.addAll(source.getAffiliationHistory().stream()
+                .map(JsonAdaptedAffiliation::new)
+                .collect(Collectors.toList()));
+        if (source instanceof Staff) {
+            shiftDays.addAll(((Staff) source).getShiftDays().shiftDays);
+        }
+        if (source instanceof Doctor) {
+            specialisations.addAll(((Doctor) source).getSpecialisations().stream()
+                    .map(specialisation -> specialisation.toString())
+                    .collect(Collectors.toList()));
+        }
+        if (source instanceof Patient) {
+            nextOfKin = new JsonAdaptedNextOfKin(((Patient) source).getNextOfKin());
+        } else {
+            nextOfKin = null;
+        }
+    }
+
+    public String getName() {
+        return name;
+    }
+    public String getPhone() {
+        return phone;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public String getRole() {
+        return role;
+    }
+    public List<JsonAdaptedAffiliation> getAffiliations() {
+        return affiliations;
+    }
+    public List<JsonAdaptedAffiliation> getAffiliationHistory() {
+        return affiliationHistory;
+    }
+    public Set<Integer> getShiftDays() {
+        return shiftDays;
+    }
+    public Set<String> getSpecialisations() {
+        return specialisations;
+    }
+
+    public JsonAdaptedNextOfKin getNextOfKin() {
+        return nextOfKin;
+    }
+
+    /**
+     * Generates a list of affiliations from the stored JSON data.
+     *
+     * @return A list of {@link Affiliation} objects based on the stored JSON data.
+     * @throws IllegalValueException If there were any data constraints violated in the affiliations.
+     */
+    private List<Affiliation> generateAffiliationList() throws IllegalValueException {
+        final List<Affiliation> personAffiliations = new ArrayList<>();
+        for (JsonAdaptedAffiliation affiliation : affiliations) {
+            personAffiliations.add(affiliation.toModelType());
+        }
+        return personAffiliations;
+    }
+
+    /**
+     * Generates a list of affiliation history from the stored JSON data.
+     *
+     * @return A list of {@link Affiliation} objects based on the stored JSON data.
+     * @throws IllegalValueException If there were any data constraints violated in the affiliation history.
+     */
+    private List<Affiliation> generateAffiliationHistoryList() throws IllegalValueException {
+        final List<Affiliation> personAffiliationHistory = new ArrayList<>();
+        for (JsonAdaptedAffiliation affiliation : affiliationHistory) {
+            personAffiliationHistory.add(affiliation.toModelType());
+        }
+        return personAffiliationHistory;
+    }
+
+    /**
+     * Generates a {@link Name} object from the stored JSON data.
+     *
+     * @param name The person's name.
+     * @return A {@link Name} object based on the stored JSON data.
+     * @throws IllegalValueException If the stored name is null or does not meet the constraints.
+     */
+    private Name generateName(String name) throws IllegalValueException {
+        if (name == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+        }
+        if (!Name.isValidName(name)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        }
+
+        return new Name(name);
+    }
+
+    /**
+     * Generates a {@link Phone} object from the stored JSON data.
+     *
+     * @param phone The person's phone number.
+     * @return A {@link Phone} object based on the stored JSON data.
+     * @throws IllegalValueException If the stored phone is null or does not meet the constraints.
+     */
+    private Phone generatePhone(String phone) throws IllegalValueException {
+        if (phone == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+        }
+        if (!Phone.isValidPhone(phone)) {
+            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        }
+        return new Phone(phone);
+    }
+
+    /**
+     * Generates an {@link Email} object from the stored JSON data.
+     *
+     * @param email The person's email address.
+     * @return An {@link Email} object based on the stored JSON data.
+     * @throws IllegalValueException If the stored email is null or does not meet the constraints.
+     */
+    private Email generateEmail(String email) throws IllegalValueException {
+        if (email == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+        }
+        if (!Email.isValidEmail(email)) {
+            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+        }
+        return new Email(email);
+    }
+
+    /**
+     * Generates a {@link Role} object from the stored JSON data.
+     *
+     * @param role The person's role (e.g., Doctor).
+     * @return A {@link Role} object based on the stored JSON data.
+     * @throws IllegalValueException If the stored role is null or does not meet the constraints.
+     */
+    private Role generateRole(String role) throws IllegalValueException {
+        if (role == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
+        }
+        if (!Role.isValidRole(role)) {
+            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
+        }
+        return new Role(role);
+    }
+
+    /**
+     * Generates a {@link ShiftDays} object from the stored JSON data (only for Staffs).
+     *
+     * @param shiftDays The person's shift days.
+     * @return A {@link ShiftDays} object based on the stored JSON data.
+     * @throws IllegalValueException If the role is "Doctor" or "Nurse
+     *     and shiftDays are null or do not meet the constraints.
+     */
+    private ShiftDays generateShiftDays(Set<Integer> shiftDays) throws IllegalValueException {
+        if ((role.equals("Doctor") || role.equals("Nurse")) && shiftDays == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ShiftDays.class.getSimpleName()));
+        }
+        if (!ShiftDays.isValidShiftDays(shiftDays)) {
+            throw new IllegalValueException(ShiftDays.MESSAGE_CONSTRAINTS);
+        }
+        return new ShiftDays(shiftDays);
+    }
+
+    /**
+     * Generates a set of {@link Specialisation} object from the stored JSON data (only for Doctors).
+     *
+     * @param specialisations The person's specialisations.
+     * @return A set of {@link Specialisation} object based on the stored JSON data.
+     * @throws IllegalValueException If the role is not "Doctor" or specialisations are null or do not meet the
+     *      constraints.
+     */
+    private Set<Specialisation> generateSpecialisations(Set<String> specialisations) throws IllegalValueException {
+        if (role.equals("Doctor") && specialisations == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    "Specialisations"));
+        }
+        Set<Specialisation> specialisationSet = new HashSet<>();
+        for (String specialisation : specialisations) {
+            if (!Specialisation.isValidSpecialisationName(specialisation)) {
+                throw new IllegalValueException(Specialisation.MESSAGE_CONSTRAINTS);
+            }
+            specialisationSet.add(new Specialisation(specialisation));
+        }
+        return specialisationSet;
+    }
+
+    /**
+     * Generates {@link NextOfKin} object from the stored JSON data (only for Patients).
+     *
+     * @return {@link NextOfKin} object based on the stored JSON data.
+     * @throws IllegalValueException If the role is not "Patient" or nextOfKin are null or do not meet the
+     *      constraints.
+     */
+    private NextOfKin generateNextOfKin(JsonAdaptedNextOfKin nextOfKin) throws IllegalValueException {
+        if (role.equals("Patient") && nextOfKin == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    "nextOfKin"));
+        }
+        return nextOfKin.toModelType();
     }
 
     /**
@@ -65,45 +294,39 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
+        final Name modelName = generateName(name);
+        final Phone modelPhone = generatePhone(phone);
+        final Email modelEmail = generateEmail(email);
+        final Role modelRole = generateRole(role);
+        final ShiftDays modelShiftDays = generateShiftDays(shiftDays);
+        final Set<Specialisation> modelSpecialisations = generateSpecialisations(specialisations);
+
+
+        final List<Affiliation> personAffiliations = generateAffiliationList();
+        final List<Affiliation> personAffiliationHistory = generateAffiliationHistoryList();
+        final Set<Affiliation> modelAffiliations = new HashSet<>(personAffiliations);
+        final Set<Affiliation> modelAffiliationHistory = new HashSet<>(personAffiliationHistory);
+
+        Person generatedPerson = modelRole.generatePerson(modelName,
+                modelPhone, modelEmail, modelAffiliations, modelAffiliationHistory);
+
+        if (generatedPerson instanceof Patient) {
+            final NextOfKin modelNextOfKin = generateNextOfKin(nextOfKin);
+            Patient patient = ((Patient) generatedPerson);
+            patient.setNextOfKin(modelNextOfKin);
+            return patient;
         }
 
-        if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+        if (generatedPerson instanceof Doctor) {
+            Doctor doctor = (Doctor) generatedPerson;
+            doctor.setSpecialisations(modelSpecialisations);
+            return doctor.setShiftDays(modelShiftDays);
         }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
-        }
-        final Name modelName = new Name(name);
 
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+        if (generatedPerson instanceof Staff) {
+            return ((Staff) generatedPerson).setShiftDays(modelShiftDays);
         }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        final Phone modelPhone = new Phone(phone);
 
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
-        }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        }
-        final Email modelEmail = new Email(email);
-
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-        final Address modelAddress = new Address(address);
-
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return generatedPerson;
     }
-
 }

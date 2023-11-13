@@ -1,11 +1,17 @@
 package seedu.address.logic;
 
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.affiliation.Affiliation;
+import seedu.address.model.person.Doctor;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Specialisation;
+import seedu.address.model.person.Staff;
 
 /**
  * Container for user visible messages.
@@ -18,6 +24,7 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_INVALID_ROLE = "Invalid role!";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -41,10 +48,60 @@ public class Messages {
                 .append(person.getPhone())
                 .append("; Email: ")
                 .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+                .append("; Role: ")
+                .append(person.getRole())
+                .append("; Affiliations: {");
+
+        ArrayList<Affiliation> affiliationsList = new ArrayList<>(person.getAffiliations());
+        for (int i = 0; i < affiliationsList.size(); i++) {
+            builder.append(affiliationsList.get(i));
+            if (i < affiliationsList.size() - 1) {
+                builder.append(", ");
+            }
+        }
+        builder.append("}");
+        builder.append("; Affiliation History: {");
+
+        ArrayList<Affiliation> affiliationHistoryList = new ArrayList<>(person.getAffiliationHistory());
+        for (int i = 0; i < affiliationHistoryList.size(); i++) {
+            builder.append(affiliationHistoryList.get(i));
+            if (i < affiliationHistoryList.size() - 1) {
+                builder.append(", ");
+            }
+        }
+        builder.append("}");
+
+        if (person instanceof Patient) {
+            builder.append("; Next-of-Kin: {");
+            if (((Patient) person).getNextOfKin().isPresent()) {
+                builder.append("Name: ");
+                builder.append(((Patient) person).getNextOfKin().getName());
+                builder.append("; Phone: ");
+                builder.append(((Patient) person).getNextOfKin().getPhone());
+                builder.append("; Relationship: ");
+                builder.append(((Patient) person).getNextOfKin().getRelationship());
+            } else {
+                builder.append(((Patient) person).getNextOfKin());
+            }
+            builder.append("}");
+        }
+
+        if (person instanceof Staff) {
+            builder.append("; Shift Days: ");
+            builder.append(((Staff) person).getShiftDays());
+        }
+
+        if (person instanceof Doctor) {
+            builder.append("; Specialisations: {");
+            ArrayList<Specialisation> specialisationsList = new ArrayList<>(((Doctor) person).getSpecialisations());
+            for (int i = 0; i < specialisationsList.size(); i++) {
+                builder.append(specialisationsList.get(i));
+                if (i < specialisationsList.size() - 1) {
+                    builder.append(", ");
+                }
+            }
+            builder.append("}");
+        }
         return builder.toString();
     }
 

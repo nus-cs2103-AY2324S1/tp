@@ -1,59 +1,51 @@
 ---
-layout: page
-title: About Us
+  layout: default.md
+  title: "About Us"
 ---
+
+# About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `shuenjin@u.nus.edu`
 
 ## Project team
 
-### John Doe
+### Lee Zhan Peng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/leezhanpeng.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/leezhanpeng)]
+[[portfolio](team/leezhanpeng.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: UI, Administrative
 
-### Jean Doe
+### Eric Xiong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ericxiong420.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/EricXiong420)]
+[[portfolio](team/ericxiong420.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Logic
+
+### Ng Shuen Jin
+
+<img src="images/shuenj.png" width="200px">
+
+[[github](http://github.com/shuenj)] [[portfolio](team/shuenj.md)]
+
+* Role: Developer
+* Responsibilities: Features
+
+### Zheng Chenglong
+
+<img src="images/seonlo99.png" width="200px">
+
+[[github](https://github.com/seonlo99)]
+[[portfolio](team/seonlo99.md)]
+
+* Role: Developer
+* Responsibilities: Features

@@ -5,12 +5,16 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Address;
+import seedu.address.model.affiliation.Affiliation;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Role;
+import seedu.address.model.person.ShiftDays;
+import seedu.address.model.person.Staff;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -35,8 +39,14 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
-        descriptor.setAddress(person.getAddress());
-        descriptor.setTags(person.getTags());
+        descriptor.setAffiliations(person.getAffiliations());
+        descriptor.setAffiliationHistory(person.getAffiliationHistory());
+        if (person instanceof Staff) {
+            descriptor.setShiftDays(((Staff) person).getShiftDays());
+        }
+        if (person instanceof Doctor) {
+            descriptor.setSpecialisations(((Doctor) person).getSpecialisations());
+        }
     }
 
     /**
@@ -64,20 +74,50 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Role} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
+    public EditPersonDescriptorBuilder withRole(String role) {
+        descriptor.setRole(new Role(role));
         return this;
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code affiliations} into a {@code Set<Affiliation>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
+     * @param affiliations The affiliations to set.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+    public EditPersonDescriptorBuilder withAffiliations(String... affiliations) {
+        Set<Affiliation> affiliationSet = Stream.of(affiliations).map(Affiliation::new).collect(Collectors.toSet());
+        descriptor.setAffiliations(affiliationSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code affiliationHistory} into a {@code Set<Affiliation>} and
+     * set it to the {@code EditPersonDescriptor}
+     * @param affiliationHistory The affiliation history to set.
+     * @return EditPersonDescriptorBuilder
+     */
+    public EditPersonDescriptorBuilder withAffiliationHistory(String... affiliationHistory) {
+        Set<Affiliation> affiliationSet = Stream.of(affiliationHistory)
+            .map(Affiliation::new).collect(Collectors.toSet());
+        descriptor.setAffiliationHistory(affiliationSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code ShiftDays} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withShiftDays(Set<Integer> shiftDays) {
+        descriptor.setShiftDays(new ShiftDays(shiftDays));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Specialisation} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withSpecialisations(Set<String> specialisations) {
+        descriptor.setSpecialisations(SampleDataUtil.getSpecialisationSet(specialisations));
         return this;
     }
 

@@ -3,8 +3,8 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AFFILIATION_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -34,6 +34,28 @@ public class UniquePersonListTest {
     }
 
     @Test
+    public void containsName_personInList_returnsTrue() {
+        uniquePersonList.add(ALICE);
+        assertTrue(uniquePersonList.containsName(ALICE.getName().fullName));
+    }
+
+    @Test
+    public void containsName_personNotInList_returnsFalse() {
+        assertFalse(uniquePersonList.containsName("May Flower"));
+    }
+
+    @Test
+    public void getPersonRoleByName_personInList_success() {
+        uniquePersonList.add(ALICE);
+        assertEquals(uniquePersonList.getPersonRoleByName(ALICE.getName().fullName), new Role("Doctor"));
+    }
+
+    @Test
+    public void getPersonRoleByName_personNotInList_throwsPersonNotFoundException() throws PersonNotFoundException {
+        assertThrows(PersonNotFoundException.class, () -> uniquePersonList.getPersonRoleByName(BOB.getName().fullName));
+    }
+
+    @Test
     public void contains_personInList_returnsTrue() {
         uniquePersonList.add(ALICE);
         assertTrue(uniquePersonList.contains(ALICE));
@@ -42,7 +64,9 @@ public class UniquePersonListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniquePersonList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withRole(VALID_ROLE_BOB)
+                .withAffiliations(VALID_AFFILIATION_AMY)
+                .withAffiliationHistory(VALID_AFFILIATION_AMY)
                 .build();
         assertTrue(uniquePersonList.contains(editedAlice));
     }
@@ -85,7 +109,9 @@ public class UniquePersonListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniquePersonList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withRole(VALID_ROLE_BOB)
+                .withAffiliations(VALID_AFFILIATION_AMY)
+                .withAffiliationHistory(VALID_AFFILIATION_AMY)
                 .build();
         uniquePersonList.setPerson(ALICE, editedAlice);
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
@@ -165,7 +191,7 @@ public class UniquePersonListTest {
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
-            -> uniquePersonList.asUnmodifiableObservableList().remove(0));
+                -> uniquePersonList.asUnmodifiableObservableList().remove(0));
     }
 
     @Test
