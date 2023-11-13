@@ -256,7 +256,7 @@ Here is an example command where we create an event **named** "Party" held at th
 #### Edit an Event : `editEvent`
 
 If you forget to note any important details, or realise that you made a mistake in any field of the event created,
-the `editEvent` command is here to help.
+the `editEvent` command is here to help!
 
 Here's how you can use it:<br>
 `editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]...`
