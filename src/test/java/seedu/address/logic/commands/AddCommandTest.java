@@ -10,11 +10,13 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -24,6 +26,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
+
 
 public class AddCommandTest {
 
@@ -85,7 +88,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that has all of the methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -157,6 +160,208 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void updateSortComparator(Comparator<Person> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+
+        @Override
+        public void storeDeletedPerson(Person deletedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person getDeletedPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ArrayList<Person> getDeletedPersons() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeDeletedPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getDeletedPersonsSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getPreviousUndoableCommandsSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeLastDeletedNumber() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ArrayList<Integer> getDeletedNumberList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Integer getLastDeletedNumber() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getNumberOfPreviousDeleteCommands() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void storeDeletedNumberList(int deletedNumber) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void storeClearedNumberList(int clearedNumber) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Integer getLastClearedNumber() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeLastClearedNumber() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoDelete() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoDelete(Person deletedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoAdd() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoEdit() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void storePreviousUndoableCommand(String s) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getPreviousUndoableCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removePreviousUndoableCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getAddressBookSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void storeEditedPersonsPair(Person editedPerson, Person originalPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Pair<Person, Person> getEditedPersonsPair() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeEditedPersonsPair() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getEditedPersonsSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void storeAddedPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person getAddedPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeAddedPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getAddedPersonsSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addToRedoableStateList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getRedoableStateListSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetRedoableStateList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void restoreRedoableState() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addToUndoableStateList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getUndoableStateListSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetUndoableStateList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void restoreUndoableState() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeRedoCommands() {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**
@@ -182,6 +387,7 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
+        final ArrayList<String> previousUndoableCommands = new ArrayList<>();
 
         @Override
         public boolean hasPerson(Person person) {
@@ -194,6 +400,21 @@ public class AddCommandTest {
             requireNonNull(person);
             personsAdded.add(person);
         }
+
+        @Override
+        public void storePreviousUndoableCommand(String command) {
+            previousUndoableCommands.add(command);
+        }
+
+        //Blank override methods since redo is not being tested.
+        @Override
+        public void resetRedoableStateList() {}
+
+        @Override
+        public void resetUndoableStateList() {}
+
+        @Override
+        public void removeRedoCommands() {}
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {

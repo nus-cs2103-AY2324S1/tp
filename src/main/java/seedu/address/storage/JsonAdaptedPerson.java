@@ -11,10 +11,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.AppointmentDate;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Occupation;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RiskProfile;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,7 +30,11 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
+    private final String occupation;
     private final String address;
+
+    private final String appointmentDate;
+    private final String riskProfile;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -35,12 +42,17 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("email") String email, @JsonProperty("occupation") String occupation,
+            @JsonProperty("address") String address, @JsonProperty("appointmentDate") String appointmentDate,
+            @JsonProperty("riskProfile") String result, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.occupation = occupation;
         this.address = address;
+        this.appointmentDate = appointmentDate;
+        this.riskProfile = result;
+
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -53,7 +65,10 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
+        occupation = source.getOccupation().fullOccupation;
         address = source.getAddress().value;
+        appointmentDate = source.getApptDate().value;
+        riskProfile = source.getRiskProfile().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -94,6 +109,15 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
+        if (occupation == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Occupation.class.getSimpleName()));
+        }
+        if (!Occupation.isValidOccupation(occupation)) {
+            throw new IllegalValueException(Occupation.MESSAGE_CONSTRAINTS);
+        }
+        final Occupation modelOccupation = new Occupation(occupation);
+
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
@@ -102,8 +126,27 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        final AppointmentDate modelAppointmentDate;
+
+        if (appointmentDate.equals("")) {
+            modelAppointmentDate = new AppointmentDate("");
+        } else if (!AppointmentDate.isValidFormat(appointmentDate)) {
+            throw new IllegalValueException(AppointmentDate.MESSAGE_CONSTRAINTS_FORMAT);
+        } else if (!AppointmentDate.isValidCurrentDate(appointmentDate)) {
+            modelAppointmentDate = new AppointmentDate("");
+        } else {
+            modelAppointmentDate = new AppointmentDate(appointmentDate);
+        }
+
+        if (riskProfile == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                RiskProfile.class.getSimpleName()));
+        }
+        final RiskProfile modelRiskProfile = new RiskProfile(riskProfile);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelOccupation, modelAddress,
+                modelAppointmentDate, modelRiskProfile, modelTags);
     }
 
 }

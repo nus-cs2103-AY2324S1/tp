@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.AppointmentDate;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -25,12 +26,17 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_APPOINTMENTDATE_FORMAT = "20/11/2000";
+    private static final String INVALID_APPOINTMENTDATE_CURRENTDATE = "2000-11-20";
+
+    private static final String INVALID_APPOINTMENTDATE_CURRENTDATE2 = "2000-11-20 23:00";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_APPOINTMENTDATE_FORMAT = "2023-11-20 23:00";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -146,6 +152,28 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+    @Test
+    public void parseAppointmentDate_validValue_returnsAppointmentDate() throws Exception {
+        AppointmentDate actualApptDate = ParserUtil.parseAppointmentDates(Arrays.asList(VALID_APPOINTMENTDATE_FORMAT));
+        AppointmentDate expectedApptDate = new AppointmentDate(VALID_APPOINTMENTDATE_FORMAT);
+
+        assertEquals(expectedApptDate, actualApptDate);
+    }
+
+    @Test
+    public void parseAppointmentDate_invalidDateFormat_throwsParseException() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDate(INVALID_APPOINTMENTDATE_FORMAT));
+    }
+
+    @Test
+    public void parseAppointmentDate_invalidCurrentDate_throwsParseException() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDate(INVALID_APPOINTMENTDATE_CURRENTDATE));
+    }
+
+    @Test
+    public void parseAppointmentDate_invalidCurrentDate2_throwsParseException() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDate(INVALID_APPOINTMENTDATE_CURRENTDATE2));
     }
 
     @Test

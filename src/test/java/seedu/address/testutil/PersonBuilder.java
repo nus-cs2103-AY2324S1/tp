@@ -4,10 +4,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.AppointmentDate;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Occupation;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RiskProfile;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -19,12 +22,19 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_OCCUPATION = "Barber";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+
+    public static final String DEFAULT_APPOINTMENTDATE = "";
+    public static final String DEFAULT_RISKPROFILE = "a,a,b,b,b,d,e,c";
 
     private Name name;
     private Phone phone;
     private Email email;
+    private Occupation occupation;
     private Address address;
+    private AppointmentDate appointmentDate;
+    private RiskProfile riskProfile;
     private Set<Tag> tags;
 
     /**
@@ -34,7 +44,10 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
+        occupation = new Occupation(DEFAULT_OCCUPATION);
         address = new Address(DEFAULT_ADDRESS);
+        appointmentDate = new AppointmentDate(DEFAULT_APPOINTMENTDATE);
+        riskProfile = new RiskProfile(DEFAULT_RISKPROFILE);
         tags = new HashSet<>();
     }
 
@@ -45,7 +58,9 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
+        occupation = personToCopy.getOccupation();
         address = personToCopy.getAddress();
+        appointmentDate = personToCopy.getApptDate();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -89,8 +104,32 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, tags);
+    /**
+     * Sets the {@code Occupation} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withOccupation(String occupation) {
+        this.occupation = new Occupation(occupation);
+        return this;
     }
 
+    /**
+     * Sets the {@code AppointmentDate} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAppointmentDate(String date) {
+        this.appointmentDate = new AppointmentDate(date);
+        return this;
+    }
+
+    /**
+     * Sets the {@code RiskProfile} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRiskProfile(String result) {
+        this.riskProfile = new RiskProfile(result);
+        return this;
+    }
+
+
+    public Person build() {
+        return new Person(name, phone, email, occupation, address, appointmentDate, riskProfile, tags);
+    }
 }
