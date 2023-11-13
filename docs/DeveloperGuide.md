@@ -1093,31 +1093,24 @@ Testers are expected to do more *exploratory* testing.
    1. Test case: `delete s/STUDENT_NUMBER`<br>
       Expected: STUDENT_NUMBER is a valid Student Number that exists in the Class Manager. The student with STUDENT_NUMBER is deleted from the list. Details of the deleted student shown in the result display box.
       <br><br>
-2. Delete a student that is not in Class Manager.
+2. Delete a student with an invalid student number.
 
    1. Test case: `delete s/vnqvq1924`<br>
       Expected: No student is deleted. Student Number error details shown in the result display box.
       <br><br>
-3. Delete a student with an invalid student number.
-
-   1. Other incorrect delete commands to try: `delete`, `delete s/x`, `...` (where x is an invalid student number)<br>
-      Expected: No student is deleted. Command format error details shown in the result display box.
-   2. Test case: `delete`<br>
-      Expected: No student is deleted. Command format error details shown in the result display box.
-      <br><br>
    
 ### Edit a student
 
-1. Edit a student's details in the current students list.
+1. Edit a student's details in Class Manager.
 
    1. Test case: `edit STUDENT_NUMBER n/NAME`<br>
       Expected: The student with STUDENT_NUMBER is edited to have the new NAME.
    2. Test case: `edit STUDENT_NUMBER s/NEW_STUDENT_NUMBER`<br>
       Expected: The student with STUDENT_NUMBER is edited to have the NEW_STUDENT_NUMBER.
       <br><br>
-2. Edit a student's details where the student is not in the list (Invalid Student Number).
+2. Edit a student's details where the original student number is not in Class Manager.
 
-   1. Test case: Edit command with Student Number that is not present in the list <br>
+   1. Test case: Edit command with original student number not in Class Manager.<br>
       Expected: No student is edited. Error details shown in the result display box.
       <br><br>
 
