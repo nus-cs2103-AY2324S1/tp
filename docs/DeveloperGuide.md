@@ -994,7 +994,7 @@ Command: `dela` or `deleteapplicant`. You can refer to the command [here](#https
 
 ## **Appendix: Effort**
 
-Overall, we felt the difficulty level for ClubMembersContacts was moderately high. When creating the project, we had to,
+Overall, we felt the difficulty level for ClubMembersContacts was moderately high. When creating the project,
 which evolved from AB-3, we meticulously considered the overall design, architecture and testing aspects to ensure the
 project was well-designed and robust. This was a challenging task as we had to consider the various components and
 classes that would be required to implement the project. We also had to consider the various use cases and user stories
@@ -1025,3 +1025,107 @@ understand what was happening. We had to spend a lot of time tracing the code an
 same level of abstraction for our own test cases to ensure they were robust and well-written.
 
 ## **Appendix: Planned Enhancements**
+
+### Support for multiple tasks in a single command
+
+#### Adding multiple tasks 
+
+Currently, the user can only add one task at a time. The command `addt 1 /task ONE /task TWO` will result in the following error message:
+
+```
+Multiple values specified for the following single-valued field(s): /task
+```
+
+We plan to allow the user to add multiple tasks in one command for greater user convenience. The command `addt 1 /task ONE /task TWO` will result in the following success message:
+
+```
+Tasks added to member Alex Yeoh
+```
+
+#### Deleting multiple tasks 
+
+Similarly, the user can currently only delete one task at a time. The command `delt 1 /task 1 /task 2` will result in the following error message:
+
+```
+Multiple values specified for the following single-valued field(s): /task
+```
+
+We plan to allow the user to delete multiple tasks in one command for greater user convenience. The command `delt 1 /task 1 /task 2` will result in the following success message:
+
+```
+Tasks [Finish Proposal] and [Submit Draft] deleted from member Alex Yeoh
+```
+
+### Duplicate member/applicant error messages
+
+#### Adding a duplicate member
+
+Currently, the error message for adding a duplicate member is as follows:
+
+```
+This member already exists in the member list
+```
+
+As per our [User Guide (see 4.1.1 Adding a member)](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#411-adding-a-member-addmember-or-addm),
+duplicate members are identified by their `PHONE_NUMBER` (i.e., `Member`s are duplicates if their `PHONE_NUMBER`s are equal).
+We hence plan to clarify the error message on attempting to add a duplicate member to the following:
+
+```
+A member with the same phone number already exists in the member list. Please use a different phone number.
+```
+
+#### Adding a duplicate applicant
+
+Similarly, the error message for adding a duplicate applicant is as follows:
+
+```
+This applicant already exists in the applicant list
+```
+
+We plan to clarify it to the following:
+
+```
+An applicant with the same phone number already exists in the applicant list. Please use a different phone number.
+```
+
+#### Editing a member that would result in a duplicate member
+
+In the same vein, attempting to edit a member that would result in a duplicate member would result in the following error message:
+
+```
+This member already exists in the address book.
+```
+
+As per our [User Guide (see 4.1.4 Editing a member)](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#414-editing-a-member-editmember-or-editm),
+users are not allowed to edit a member to have the same `PHONE_NUMBER` as another member. We hence plan to clarify the error message on attempting to edit a member that would result in a duplicate to the following:
+
+```
+A member with the same phone number already exists in the member list. Please use a different phone number.
+```
+
+#### Editing an applicant that would result in a duplicate applicant
+
+Similarly, attempting to edit an applicant that would result in a duplicate applicant would result in the following error message:
+
+```
+This applicant already exists in the address book.
+```
+
+We plan to clarify it to the following:
+
+```
+An applicant with the same phone number already exists in the applicant list. Please use a different phone number.
+```
+
+### Allow finding with substrings
+
+#### Finding members
+
+Currently, the `findm` command only allows the user to search for whole word matches of `KEYWORD` only. For example, `findm John` will not return `Johnnie` as a result.
+
+We plan to allow users to search within words as well, so that `findm John` can match a `Member` with `NAME` `Johnnie`, or `findm prop` can match a `Member` with `TASK` `Submit Proposal`, for example.
+
+#### Finding applicants
+
+Similarly, the `finda` command only allows the user to search for whole word matches of `KEYWORD` only. 
+We plan to allow users to search within words as well, so that `finda 3` can match an `Applicant` with `INTERVIEW_TIME` `03/03/2021 1200`, for example.
