@@ -17,7 +17,7 @@ Given below are my contributions to the project.
     * What it does: Allows the user to perform sorting of list by appointment time and lexicographical order of name.
     * Justification: This feature improves the product significantly because a user can more efficiently find clients by name and the proximity of their appointments to view upcoming appointments.
     * Highlights: This enhancement creates a base to implement different sorting capabilities in the future through sorting by new comparators. It required an understanding of ObservableList interface and the way the list is being tracked by JavaFX.
-    * Credits: The feature was implemented by referencing java ObservableList documentation. 
+    * Credits: The feature was implemented by referencing JavaFX ObservableList documentation. 
   
 * **New Feature**: Added confirm override window for `schedule` command if person already has a current appointment [\#123](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/123)
   * What it does: Caution a user if he intends to schedule a new appointment when there is already one that is not yet complete.
@@ -31,7 +31,7 @@ Given below are my contributions to the project.
     * Fixed bugs identified during manual testing
   
 * **Contributions to the UG**:
-    * Added documentation for the features `sort` [\#81](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/81)
+    * Added documentation for the feature `sort` [\#81](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/81)
     * Maintained known issues to be solved
     * Proofreading of UG and making changes such as standardising terms used throughout the UG.
 
