@@ -80,8 +80,12 @@ Model --> ListAttendanceCommand
 deactivate Model
 
 ListAttendanceCommand -> ListAttendanceCommand : unmarkedPersonsListBuilder()
+activate ListAttendanceCommand
 
-ListAttendanceCommand -> Model : addFilter(absencePredicate(1))
+ListAttendanceCommand --> ListAttendanceCommand : list of persons with\nunmarked attendance
+deactivate ListAttendanceCommand
+
+ListAttendanceCommand -> Model : addFilter(absencePredicate(1, G2))
 activate Model
 
 Model --> ListAttendanceCommand
@@ -94,6 +98,10 @@ Model --> ListAttendanceCommand
 deactivate Model
 
 ListAttendanceCommand -> ListAttendanceCommand : summaryBuilder()
+activate ListAttendanceCommand
+
+ListAttendanceCommand --> ListAttendanceCommand : attendance summary
+deactivate ListAttendanceCommand
 
 create CommandResult
 ListAttendanceCommand -> CommandResult

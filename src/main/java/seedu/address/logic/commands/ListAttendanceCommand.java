@@ -129,7 +129,8 @@ public class ListAttendanceCommand extends ListCommand {
             }
         }
 
-        ArrayList<Person> unmarkedPersons = unmarkedPersonsListBuilder(model.getFilteredPersonList());
+        List<Person> personList = model.getFilteredPersonList();
+        ArrayList<Person> unmarkedPersons = unmarkedPersonsListBuilder(personList);
         if (!unmarkedPersons.isEmpty()) {
             String nameList = unmarkedPersons.stream().map(person -> person.getName().toString())
                     .collect(Collectors.joining(", "));
