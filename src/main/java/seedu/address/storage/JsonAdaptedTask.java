@@ -7,6 +7,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDescription;
+import seedu.address.model.task.exceptions.InvalidDeadlineException;
 
 /**
  * Jackson-friendly version of {@link Task}.
@@ -59,9 +60,12 @@ class JsonAdaptedTask {
                             Deadline.class.getSimpleName()));
         }
         //Null argument provided if there is deadline is saved as "-" in Json file
-        Deadline modelDeadline = deadline.equals(Deadline.ABSENT_DEADLINE)
-                ? new Deadline((String) null) : new Deadline(deadline);
-
-        return new Task(modelDescription, modelDeadline);
+        try {
+            Deadline modelDeadline = deadline.equals(Deadline.ABSENT_DEADLINE)
+                    ? new Deadline((String) null) : new Deadline(deadline);
+            return new Task(modelDescription, modelDeadline);
+        } catch (InvalidDeadlineException e) {
+            throw new IllegalValueException(Deadline.MESSAGE_CONSTRAINTS);
+        }
     }
 }

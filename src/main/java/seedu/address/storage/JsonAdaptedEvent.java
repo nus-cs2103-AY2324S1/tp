@@ -71,11 +71,11 @@ class JsonAdaptedEvent {
             throw new IllegalValueException(String.format(INVALID_FIELD_MESSAGE_FORMAT,
                     EventPeriod.class.getSimpleName()));
         }
-        if (!EventPeriod.isValidPeriod(start, end)) {
+        try {
+            final EventPeriod modelEventPeriod = ParserUtil.parseEventPeriod(start, end);
+            return new Event(modelDescription, modelEventPeriod);
+        } catch (ParseException e) {
             throw new IllegalValueException(EventPeriod.MESSAGE_CONSTRAINTS);
         }
-        final EventPeriod modelEventPeriod = new EventPeriod(start, end);
-
-        return new Event(modelDescription, modelEventPeriod);
     }
 }
