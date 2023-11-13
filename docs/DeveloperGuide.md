@@ -6,11 +6,81 @@
 
 # LinkTree Developer Guide
 
-<!-- * Table of Contents -->
+## Table of Contents
+* [Acknowledgements](#acknowledgements)
+* [Setting up, getting started](#setting-up-getting-started)
+* [Design](#design)
+    * [Architecture](#architecture)
+    * [Ui component](#ui-component)
+    * [Logic component](#logic-component)
+    * [Model component](#model-component)
+    * [Storage component](#storage-component)
+    * [Common classes](#common-classes)
+* [Implementation](#implementation)
+* [Add developer command](#add-a-developer)
+    * [Feature usage](#usage)
+    * [Feature implementation](#function-implementation)
+* [Remove developer command](#remove-a-developer)
+    * [Feature usage](#usage)
+    * [Feature implementation](#function-implementation-1)
+* [Edit developer command](#)
+    * [Feature usage](#)
+    * [Feature implementation](#)
+* [Find developer command](#)
+    * [Feature usage](#)
+    * [Feature implementation](#)
+* [Create team command](#)
+    * [Feature usage](#)
+    * [Feature implementation](#)
+    * [Design considerations](#)
+* [Add dev to team command](#)
+    * [Feature usage](#)
+    * [Feature implementation](#)
+    * [Design considerations](#)
+* [Delete team command](#)
+    * [Feature usage](#)
+    * [Feature implementation](#)
+* [Remove dev from team command](#)
+    * [Feature usage](#)
+    * [Feature implementation](#)
+* [Edit team name command](#)
+    * [Feature usage](#)
+    * [Feature implementation](#)
+* [Edit team leader command](#)
+    * [Feature usage](#)
+    * [Feature implementation](#)
+* [Find team command](#)
+    * [Feature usage](#)
+    * [Feature implementation](#)
+* [List command](#)
+    * [Feature usage](#)
+    * [Feature implementation](#)
+* [Display tree command](#)
+    * [Feature usage](#)
+    * [Feature implementation](#)
+* [Help Command](#)
+    * [Feature usage](#)
+    * [Feature implementation](#)
+* [Clear command](#)
+    * [Feature usage](#)
+    * [Feature implementation](#)
+* [Documentation, logging, testing, configuration & dev-ops](#documentation-logging-testing-configuration-dev-ops)
+* [Appendix A: Requirements](#appendix-a-requirements)
+    * [Product Scope](#product-scope)
+    * [User stories](#user-stories)
+    * [Use cases](#use-cases)
+    * [Non-Functional Requirements](#non-functional-requirements)
+    * [Glossary](#glossary)
+* [Appendix B: Instructions for manual testing](#appendix-b-instructions-for-manual-testing)
+    * [Launch and shutdown](#launch-and-shutdown)
+    * [Deleting a developer](#deleting-a-person)
+    * [Saving data](#saving-data)
+* [Appendix C: Effort](#appendix-c-effort)
+* [Appendix D: Future enhancements](#appendix-d-future-enhancements)
+
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
-
 <br>
 
 ## **Acknowledgements**
@@ -156,7 +226,7 @@ The `Model` component:
 
 **API**: [`Storage.java`](https://github.com/AY2324S1-CS2103T-W11-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-![Storage UML Diagram](images/UML_images/StorageUML.jpg)  
+<puml src="diagrams/Storage.puml" width="450" /> 
 
 The `Storage` component:
 - Can save address book data, user preference data, and team book data in JSON format, and read them back into corresponding objects.
@@ -175,9 +245,181 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Feature: Create a new team
+###  **Add a developer**
 
-####  Introduction
+The add developer feature is facilitated by the AddCommand. It extends `Command` class.
+
+The operations are exposed in the `Model` interface as `Model#addTeam()`.
+
+#### Usage
+Given below is an example usage scenario and how the function behaves at each step.
+
+Step 1. The user launches the application and uses the `newteam` command and specifies a `teamname` and `teamLeader` name.
+
+
+
+Step 2. The user executes the `newteam` command `newteam tn/Team1 tl/John` to create a new team `Team1` with `John` set as team leader.
+
+
+
+Step 3. LinkTree provides a feedback based on whether the operation was successful or not.
+
+
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, it will not call `Model#addTeam()`, so the `team` will not be saved to `TeamBook`.
+
+</box>
+
+#### Function Implementation
+
+(Add basic implementation here)
+
+<br>
+
+###  **Remove a developer**
+
+The add developer feature is facilitated by the AddCommand. It extends `Command` class.
+
+The operations are exposed in the `Model` interface as `Model#addTeam()`.
+
+#### Usage
+Given below is an example usage scenario and how the function behaves at each step.
+
+Step 1. The user launches the application and uses the `newteam` command and specifies a `teamname` and `teamLeader` name.
+
+
+
+Step 2. The user executes the `newteam` command `newteam tn/Team1 tl/John` to create a new team `Team1` with `John` set as team leader.
+
+
+
+Step 3. LinkTree provides a feedback based on whether the operation was successful or not.
+
+
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, it will not call `Model#addTeam()`, so the `team` will not be saved to `TeamBook`.
+
+</box>
+
+#### Function Implementation
+
+(Add basic implementation here)
+
+<br>
+
+###  **Edit a developer**
+
+The add developer feature is facilitated by the AddCommand. It extends `Command` class.
+
+The operations are exposed in the `Model` interface as `Model#addTeam()`.
+
+#### Usage
+Given below is an example usage scenario and how the function behaves at each step.
+
+Step 1. The user launches the application and uses the `newteam` command and specifies a `teamname` and `teamLeader` name.
+
+
+
+Step 2. The user executes the `newteam` command `newteam tn/Team1 tl/John` to create a new team `Team1` with `John` set as team leader.
+
+
+
+Step 3. LinkTree provides a feedback based on whether the operation was successful or not.
+
+
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, it will not call `Model#addTeam()`, so the `team` will not be saved to `TeamBook`.
+
+</box>
+
+#### Function Implementation
+
+(Add basic implementation here)
+
+<br>
+
+### "Find by Keywords"
+
+#### Introduction
+The `FindCommand` class, enables keyword-based searches for individuals. This intuitive command extends `Command` and utilizes `NameContainsKeywordsPredicate`.
+
+#### Usage
+- **Syntax**: `find KEYWORD [MORE_KEYWORDS]...`
+- **Example**: `find Alice Bob`
+  - Searches for entries containing 'Alice', 'Bob', or both.
+
+#### Implementation Overview
+
+- **Execution**: `FindCommand.execute` filters entries using the provided keywords and returns a `CommandResult` with the count of matches.
+- **Filtering**: Uses `NameContainsKeywordsPredicate` to identify matching entries based on names or descriptions.
+
+#### Design and Functionality
+
+- **Flexibility**: Supports partial keyword matching for broader search results, accommodating memory gaps or partial information.
+- **User Experience**: Case-insensitive search enhances usability.
+- **Error Handling**: Provides clear feedback for invalid inputs or no keyword scenarios.
+
+#### Model Integration
+- Leverages `ModelManager` to update and retrieve filtered lists, crucial for the command's functionality.
+
+#### Considerations
+
+- **Search Methodology**:
+  - **Partial Keyword Matching**: Default choice for its user-friendly approach and broader match potential.
+
+#### Conclusion
+The `FindCommand`'s user-centric design ensures an efficient and friendly search experience, demonstrating careful consideration of user needs and practical functionality.
+
+<box type="info" seamless>
+
+</box>
+
+#### Function Implementation
+
+(Add basic implementation here)
+
+<br>
+
+###  **List a developer** (Optional to show implementation?)
+
+The add developer feature is facilitated by the AddCommand. It extends `Command` class.
+
+The operations are exposed in the `Model` interface as `Model#addTeam()`.
+
+#### Usage
+Given below is an example usage scenario and how the function behaves at each step.
+
+Step 1. The user launches the application and uses the `newteam` command and specifies a `teamname` and `teamLeader` name.
+
+
+
+Step 2. The user executes the `newteam` command `newteam tn/Team1 tl/John` to create a new team `Team1` with `John` set as team leader.
+
+
+
+Step 3. LinkTree provides a feedback based on whether the operation was successful or not.
+
+
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, it will not call `Model#addTeam()`, so the `team` will not be saved to `TeamBook`.
+
+</box>
+
+#### Function Implementation
+
+(Add basic implementation here)
+
+<br>
+
+###  **Create a new team**
 
 The create new team feature is facilitated by the AddTeamCommand. It extends `Command` class.
 
@@ -204,7 +446,7 @@ Step 3. LinkTree provides a feedback based on whether the operation was successf
 
 </box>
 
-#### Step-by-Step Implementation
+#### Function Implementation
 
 1. Create a newteam parser class called `AddTeamCommandParser` to parse input from user. This implements the `Parser` interface for type `AddTeamCommand`
 2. Create a `parse` method in `AddTeamCommandParser` that parses the user input and specify the user flags that are used `tn/` for teamName and `tl/` for teamLeader.
@@ -233,10 +475,9 @@ Step 3. LinkTree provides a feedback based on whether the operation was successf
   * Pros: Easier implementation.
   * Cons: Breaks principle of abstraction and OOP. Information hiding is also not done.
 
+<br>
 
-### Feature: Add developers to an existing team
-
-####  Introduction
+###  **Add developers to an existing team**
 
 The add dev to team feature is facilitated by the AddDevToTeamCommand. It extends `Command` class.
 
@@ -263,7 +504,7 @@ Step 3. LinkTree provides a feedback based on whether the operation was successf
 
 </box>
 
-#### Step-by-Step Implementation
+#### Function Implementation
 
 1. Create a dev2team parser class called `AddDevToTeamParser` to parse input from user. This implements the `Parser` interface for type `AddDevToTeamCommand`
 2. Create a `parse` method in `AddDevToTeamParser` that parses the user input and specify the user flags that are used `tn/` for teamName and `n/` for developer name.
@@ -291,9 +532,7 @@ Step 3. LinkTree provides a feedback based on whether the operation was successf
 
 <br>
 
-### Feature: Remove an existing Team
-
-#### Introduction
+### **Remove an existing Team**
 
 Removing an existing team feature is facilitated by the `DeleteTeamCommand`. It extends the `Command` class. 
 
@@ -317,7 +556,7 @@ LinkTree provides feedback based on whether the operation was successful or not.
 
 **Note:** If a command fails its execution, it will not call `Model#deleteTeam()`, so the team will not be removed from `TeamBook`.
 
-#### Step-by-Step Implementation
+#### Function Implementation
 
 1. Create a `deleteteam` parser class called `DeleteTeamCommandParser` to parse input from the user. This class implements the `Parser` interface for the type `DeleteTeamCommand`.
 
@@ -357,6 +596,71 @@ LinkTree provides feedback based on whether the operation was successful or not.
 
 The choice between these alternatives depends on your specific project requirements and architectural preferences.
 
+### Feature: Find Team by Keywords
+
+#### Introduction
+The `findteam` command, implemented in the `FindTeamCommand` class, allows users to search for teams using keywords. This command extends the `Command` class and uses `TeamContainsKeywordsPredicate` for keyword-based filtering.
+
+#### Usage Scenario
+- **Command Syntax**: `findteam KEYWORD [MORE_KEYWORDS]...`
+- **Example**: `findteam alpha beta gamma`
+    - Finds all teams whose names contain any of the specified keywords (case-insensitive).
+
+#### Implementation Steps
+
+##### Command Execution
+- `FindTeamCommand.execute` uses `model.updateFilteredTeamList(predicate)` to filter teams and produces a `CommandResult` based on the number of matching teams.
+
+##### Predicate for Filtering
+- `TeamContainsKeywordsPredicate` checks if a team's name contains the specified keywords, utilized in `FindTeamCommand` for filtering.
+
+#### Design Considerations
+
+- **Handling No Keywords**: Throws `ParseException` when no keywords are provided, guiding users on correct usage.
+- **Case Insensitivity**: Enhances user experience and search flexibility.
+- **Partial vs. Full Match**: Allows partial matching for broader search results. Full match was considered but not implemented due to its restrictive nature.
+
+#### Integration with Model
+- **Model Interface**: Utilized for team data interaction. `ModelManager` implements `updateFilteredTeamList(Predicate<Team> predicate)` and `getFilteredTeamList()`, essential for the `findteam` command.
+
+#### Error Handling
+- **Duplicate Teams**: Handles duplicates by listing all matching teams.
+- **Invalid Keywords**: Throws `ParseException` with guidance for correct format.
+
+#### Step-by-Step Implementation
+1. **Parser Class Creation**: `FindTeamCommandParser` for parsing user input.
+2. **Parse Method**: Parses input and handles the format of keywords.
+3. **Command Class Specification**: `FindTeamCommand` with command word `findteam`.
+4. **Execution Method**: Implements logic for filtering and displaying search results.
+5. **Model Interaction**: Utilizes `Model#updateFilteredTeamList` and `Model#getFilteredTeamList`.
+
+<puml src="diagrams/FindTeamCommandDiagram.puml" width="1100"/>
+
+#### Design Considerations
+
+**Aspect: Search Methodology**
+In designing the `findteam` command, two primary alternatives for matching team names with user-provided keywords were evaluated:
+
+- **Alternative 1 (Current Choice): Partial Keyword Matching**
+    - **Description**: Matches teams whose names contain the provided keywords as substrates, e.g., 'alpha' matches 'Alpha Team', 'Alphabeta', and 'Gamma Alpha'.
+    - **Pros**:
+        - **Broader Search Results**: Captures a wider range of potential matches.
+        - **User-Friendly**: Accommodates partial information or memory gaps.
+    - **Cons**:
+        - **Over-Inclusive**: May return too many irrelevant results.
+        - **Ambiguity**: Potential confusion with similar substrings in names.
+
+- **Alternative 2: Full Keyword Matching**
+    - **Description**: Requires an exact match between the keywords and the team names.
+    - **Pros**:
+        - **Precision**: Offers precise search results.
+        - **Clarity**: Reduces ambiguity in the search results.
+    - **Cons**:
+        - **Restrictive**: Limits effectiveness for users who don't recall exact names.
+        - **User Unfriendliness**: Requires exact input.
+
+##### Conclusion
+The `findteam` command offers a user-friendly way to search for teams by keywords. It demonstrates thoughtful design in handling user inputs, error scenarios, and model integration for effective data retrieval and display.
 
 _{more aspects and alternatives to be added}_
 
