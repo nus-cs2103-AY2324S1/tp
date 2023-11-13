@@ -1228,9 +1228,9 @@ Testers are expected to do more *exploratory* testing.
 
 1. Randomly select a specific number of students from all students displayed.
 
-  1. Test case: `random 2`<br>
-     Expected: Two student from all students displayed are selected randomly.(Ensure at least two students are displayed.)
-     <br><br>
+   1. Test case: `random 2`<br>
+      Expected: Two student from all students displayed are selected randomly.(Ensure at least two students are displayed.)
+      <br><br>
 
 ### View a student
 
