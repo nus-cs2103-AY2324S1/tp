@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INTEGER_OVERFLOW;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.START_DATE_DESC_EARLIER;
@@ -46,6 +47,9 @@ public class DeleteContactEventCommandParserTest {
 
         // zero index
         assertParseFailure(parser, "0" + VALID_DATE_TIME, MESSAGE_INVALID_FORMAT);
+
+        // int overflow
+        assertParseFailure(parser, "2147483648" + VALID_DATE_TIME, MESSAGE_INTEGER_OVERFLOW);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
