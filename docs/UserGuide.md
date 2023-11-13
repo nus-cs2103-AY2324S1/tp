@@ -216,7 +216,7 @@ The commands are split into 4 main sections:
   <li>
     <p>
       Whitespaces at the start and end of fields are trimmed.<br>
-      e.g. The input <code>n/   John Doe   </code> will be interpreted as <code>n/John Doe</code>.
+      e.g. The input <code>n/   John Doe   </code> &nbsp; will be interpreted as <code>n/John Doe</code>.
     </p>
   </li>
 
