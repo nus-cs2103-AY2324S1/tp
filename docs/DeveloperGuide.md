@@ -156,6 +156,47 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Implementation of patient commands
+
+### Find patient by illness feature
+
+[FindIllnessCommandParser.java]: https://github.com/billieboy7/tp/blob/master/src/main/java/seedu/address/logic/parser/personparser/FindIllnessCommandParser.java
+[FindIllnessCommand.java]: https://github.com/billieboy7/tp/blob/master/src/main/java/seedu/address/logic/commands/personcommands/FindIllnessCommand.java
+
+#### Implementation
+
+For _Find Illness_ command, the noteworthy classes are:
+
+- `LogicManager.java` - Calls the address book parser. 
+- `AddressBookParser.java` - For passing the arguments to `FindIllnessCommandParser`.
+- [`FindIllnessCommandParser.java`][FindIllnessCommandParser.java] - For passing the arguments to `FindIllnessCommand`.
+- [`FindIllnessCommand.java`][FindIllnessCommand.java] - For execution of the find illness command.
+
+Let's take a valid user input, `find-i flu`, as an example. 
+
+-- user input: `find-i flu` --  
+Step 1. Logic Manager parses the user input through the AddressBookParser. 
+
+-- `AddressBookParser` --  
+Step 2. AddressBookParser identifies the command word `find-i`.  
+Step 3. Returns FindIllnessCommandParser().parse(arguments) (in this case arguments = `flu`)
+
+-- `FindIllnessCommandParser` --  
+Step 4. FindIllnessCommandParser takes in arguments (`flu`) and uses the arguments to create the IllnessContainsKeywordsPredicate object.  
+Step 5. Returns a FindIllnessCommand object which takes in the IllnessContainsKeywordsPredicate object as a parameter.
+
+-- `FindIllnessCommand` --  
+Step 6. The IllnessContainsKeywordsPredicate object is saved in the FindIllnessCommand object. 
+
+-- `LogicManager` --  
+Step 7. The FindIllnessCommand object is returned and its execute(model) method is triggered.   
+Step 8. The filtered person list in the model is updated using the IllnessContainsKeywordPredicate.   
+Step 9. Returns a CommandResult which then leads to the updated filtered person list to be displayed.   
+
+The following sequence diagram shows how the find patient by illness operation works:
+
+![FindIllnessCommandSequenceDiagram](images/FindIllnessCommandSequenceDiagram.png)
+
 ### Implementation of appointments commands
 
 The following diagram shows the overview of a generic appointment command `AppointmentXYZCommand` and the associated classes.
