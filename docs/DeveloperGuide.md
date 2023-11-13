@@ -1202,3 +1202,7 @@ testers are expected to do more *exploratory* testing.
 
 
 1. Test cases
+
+
+## **Appendix: Planned Enhancements**   
+
