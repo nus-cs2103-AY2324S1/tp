@@ -10,7 +10,6 @@ end box
 
 box Logic LOGIC_COLOR_T1
 Participant ":Logic" as logic LOGIC_COLOR
-Participant ":NetworkBookParser" as parser LOGIC_COLOR
 Participant ":SortCommand" as command LOGIC_COLOR
 end box
 
@@ -24,13 +23,7 @@ activate mainWindow
 mainWindow -> logic : execute(commandText)
 activate logic
 
-logic -> parser : parseCommand(commandText)
-activate parser
-
-ref over parser, command : Parse sort command
-
-parser --> logic : command
-deactivate parser
+ref over logic : Parse sort command
 
 logic -> command : execute(model)
 activate command

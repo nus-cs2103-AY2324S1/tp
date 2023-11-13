@@ -6,6 +6,7 @@ skinparam ArrowFontStyle plain
 mainframe **sd** Parse sort command
 
 box Logic LOGIC_COLOR_T1
+Participant ":Logic" as logic LOGIC_COLOR
 Participant ":NetworkBookParser" as mainParser LOGIC_COLOR
 Participant ":SortCommandParser" as commandParser LOGIC_COLOR
 Participant ":PersonSortComparator" as comparator LOGIC_COLOR
@@ -13,6 +14,9 @@ Participant "<<class>>\nPersonSortComparator" as comparatorClass LOGIC_COLOR
 Participant ":SortCommand" as command LOGIC_COLOR
 end box
 
+activate logic
+
+logic -> mainParser : parseCommand(commandText)
 activate mainParser
 
 create commandParser
@@ -51,5 +55,8 @@ deactivate commandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 commandParser -[hidden]-> commandParser
 destroy commandParser
+
+mainParser --> logic : command
+deactivate mainParser
 
 @enduml
