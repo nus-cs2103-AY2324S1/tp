@@ -48,12 +48,6 @@ public class AddCommandParserTest {
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB
                 + ADDRESS_DESC_BOB + RISK_DESC_LOW, new AddCommand(expectedStudent));
-
-        //multiple tags - all accepted
-        //Student expectedStudentMultipleTags = new StudentBuilder(BOB).withTags(VALID_RISK_LEVEL_LOW).build();
-        //assertParseSuccess(parser,
-        //        NAME_DESC_BOB + PHONE_DESC_BOB + ADDRESS_DESC_BOB + RISK_DESC_LOW + RISK_DESC_HIGH,
-        //        new AddCommand(expectedStudentMultipleTags));
     }
 
     @Test
