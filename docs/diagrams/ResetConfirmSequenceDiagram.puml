@@ -49,10 +49,7 @@ deactivate AddressBookParser
 LogicManager -> ClearCommand : execute()
 activate ClearCommand
 
-ClearCommand -> Model : execute()
-activate Model
-
-Model -> Model : setAddressBook(new AddressBook())
+ClearCommand -> Model : setAddressBook(new AddressBook())
 activate Model
 
 Model --> ClearCommand

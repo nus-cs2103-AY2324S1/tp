@@ -668,7 +668,7 @@ The undo feature allows users to revert the last executed command in the address
 * `AddressBookParser` — Handles the parsing of the user's undo command.
 * `LogicManager` — Represents the application's data and business logic, including the functionality to undo the last command.
 
-Given below is an example usage scenario and how the undo mechanism behaves at each step. The sequence diagram illustrates the interactions inside the Logic component for the undo command.
+Given below is an example usage scenario and how the undo mechanism behaves at each step. The sequence diagram illustrates the interactions inside the Logic component for the undo command. The diagrams illustrate the flow of the execution of a successful undo command. In the diagrams below, the instance of `backupModel` is a separate instance from the current model and only serves as a container to save the data from the current model.
 
 ![Interactions Inside the Logic Component for the UndoCommand](images/UndoSequenceDiagram.png)
 
@@ -719,7 +719,7 @@ The reset feature allows users to erase the contents of the address book. This f
 * `AddressBookParser` — Handles the parsing of the user's reset command.
 * `LogicManager` — Represents the application's data and business logic, including the functionality to check if the user has properly gone through the appropriate steps to execute a successful address book reset.
 
-Given below is an example usage scenario and how the reset mechanism behaves at each step. The sequence diagram illustrates the interactions inside the Logic component for the first execution of the reset command.
+Given below is an example usage scenario and how the reset mechanism behaves at each step. The sequence diagram illustrates the interactions inside the Logic component for the first execution of the `reset` command. The diagrams illustrate the flow of the execution of a successful `reset` command.
 
 Step 1. The user enters the `reset` command. And is given a warning of the functionality of the `reset` command and is prompted to enter `reset confirm` to continue executing the command.
 
@@ -1276,14 +1276,56 @@ testers are expected to do more *exploratory* testing.
 
 2. Deleting fosterers while only some fosterers are shown follows similar test cases.
 
+### Listing a fosterer
+
+1. Find through an exact, quoted match with `"`.
+
+   1. Test case: `list "Pete"` <br>
+     Expected: Shown fosterers include "Pete" but not "Peter".
+
+2. Verify operator precedence and parentheses.
+
+   1. Test case: `list Doe & Sam / John` <br>
+     Expected: Equivalent to `list Doe & (Sam / John)`. Shown fosterers include "John Doe" but not "John Snow".
+
+   2. Test case: `list (Doe & Sam) / John` <br>
+     Expected: Shown fosterers include "Sam Doe" and "John Snow".
+
+### Saving changes in details of fosterer when add is done in the profile page
+
+1. Saving the new fosterer added through the profile page
+
+   1. Test case: `save`<br>
+   Expected: Exits the profile page. Fosterer will be successfully added to the address book.
+
+### Saving changes in details of fosterer when edit is done in the profile page
+
+1. Saving the edits made to a fosterer in the profile page
+
+   1. Test case: `save`<br>
+     Expected: Fosterer's details will be successfully edited and saved if they are valid. Command success message is shown.
+
 ### Sorting the list of fosterers
 
-1. Sorting the list of fosterers in the main window by name alphabetically
+1. Sorting the list of fosterers in the main window alphabetically by name, where uppercase letters come before lowercase letters
 
     1. Test case: `sort`<br>
        Expected: The whole list of fosterers will be sorted alphabetically. Command success message is shown.
 
-<div style="page-break-after: always;"></div>
+    1. Test case: `sort 12345`<br>
+       Expected: The whole list of fosterers will be sorted alphabetically. Command success message is shown.
+
+### Undoing the previous command
+
+1. Undoing the previous command successfully executed
+
+   1. Prerequisites: The previous command successfully executed is either `add`, `delete`, `edit`, `sort` or a successful execution of the `reset` command.
+
+   1. Test case: `undo`<br>
+     Expected: Previous command will be undone. Command success message is shown.
+
+   1. Test case: `undo 12345`<br>
+     Expected: Previous command will be undone. Command success message is shown.
 
 ### Viewing statistics of fosterers
 1. Viewing statistics of available fosterers
@@ -1300,36 +1342,50 @@ testers are expected to do more *exploratory* testing.
       Expected: Only availability statistics shown. `stats` commands will only display the first valid statistic field detected (ie. either `avail`, `current` or `housing`).
 2. Viewing statistics of current fosterers and housing types work similarly, replacing `avail` with `current` and `housing` respectively.
 
+
 ### Editing details of a fosterer
 
 1. Editing through the main window
-   1. Prerequisites: At least one fosterer in the list, and the first fosterer has at least 2 tags.
+   1. Prerequisites: At least one fosterer in the list, and the first fosterer has at least 2 tags.<br>
    1. Test case: `edit 1 p/99887776`<br>
-      Expected: Fosterer 1's phone number successfully edited.
+      Expected: Fosterer 1's phone number successfully edited.<br>
    1. Test case: `edit 1 t/new`<br>
-      Expected: Fosterer 1's existing tags are overwritten. The only tag is the `new` tag.
-   1. Test case: `edit 1 n/Ben Yeo  e/benyeo123@gmail.com`
-      Expected: Fosterer 1's name and email successfully edited.
-   1. Invalid edit commands to try: `edit n/Ben Yeo`, `edit x n/Ben Yeo` (where x is larger than the list size)
+      Expected: Fosterer 1's existing tags are overwritten. The only tag is the `new` tag.<br>
+   1. Test case: `edit 1 n/Ben Yeo  e/benyeo123@gmail.com`<br>
+      Expected: Fosterer 1's name and email successfully edited.<br>
+   1. Invalid edit commands to try: `edit n/Ben Yeo`, `edit x n/Ben Yeo` (where x is larger than the list size).<br>
    
 2. Opening the profile view for editing
-   1. Prerequisites: At least one fosterer in the list, and the first fosterer has at least 2 tags.
+   1. Prerequisites: At least one fosterer in the list, and the first fosterer has at least 2 tags.<br>
    1. Test case: `edit 1` or `view 1` <br>
-      Expected: Profile view of fosterer 1 opens for editing.
+      Expected: Profile view of fosterer 1 opens for editing.<br>
    1. Test case: `edit 1 list` or `edit` or `view` <br>
-      Expected: Profile view does not open, error message shown.
+      Expected: Profile view does not open, error message shown.<br>
 
 3. Field jumping in profile view
-   1. Prerequisites: The profile view of a fosterer is currently open. 
+   1. Prerequisites: The profile view of a fosterer is currently open. <br>
    1. Test case: `ph`<br>
-      Expected: Cursor jumps to the Phone field for editing.
+      Expected: Cursor jumps to the Phone field for editing.<br>
    1. Test case: `type`<br>
-      Expected: Cursor jumps to the Animal Type field for editing.
+      Expected: Cursor jumps to the Animal Type field for editing.<br>
 
 4. Editing details in profile view
    1. Availability = `NotAvailable`, Animal Name = `nil` Animal Type = `nil` <br>
-      Expected on Enter: Valid fosterer
+      Expected on Enter: Valid fosterer.<br>
    1. Availability = `Available`, Animal Name = `nil` Animal Type = `nil`<br>
-      Expected on Enter: Valid fosterer.
+      Expected on Enter: Valid fosterer.<br>
    1. Availability = `NotAvailable`, Animal Name = `mew` Animal Type = `able.Cat`<br>
-      Expected on Enter: Invalid fosterer, and error message shown.
+      Expected on Enter: Invalid fosterer, and error message shown.<br>
+
+### Resetting the Address Book
+1. Resetting the Address Book
+   1. Prerequisites: `reset` command must be entered first, before entering `reset confirm`.<br>
+   2. Test case: `reset` <br>
+      Expected: Warning displayed of the function of the `reset` command and a prompt of entering `reset confirm` is displayed to continue executing the command.<br>
+   3. Test case: `reset confirm`<br>
+      Expected: A prompt to enter `reset` first followed by `reset confirm` to execute the command.<br>
+   4. Test case: `reset randomArg`<br>
+      Expected: Warning displayed of the function of the `reset` command and a prompt of entering `reset confirm` is displayed to continue executing the command.<br>
+   5. Test case: `reset` followed by `reset confirm`<br>
+      Expected: The Address Book is erased and a command success massage is displayed.<br>
+        
