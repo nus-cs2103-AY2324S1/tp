@@ -3,6 +3,8 @@
   title: "Wang Zihan's Project Portfolio Page"
 ---
 
+# Wang Zihan's Project Portfolio Page
+
 ### Project  Overview:
 **_KeepInTouch_** is a desktop application designed for job seekers. It can help the job-seekers to manage contacts and events conveniently. Here is my work and contributions to this project:
 
