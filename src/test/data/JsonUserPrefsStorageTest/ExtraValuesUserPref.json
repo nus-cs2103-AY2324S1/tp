@@ -9,5 +9,5 @@
       "z" : 99
     }
   },
-  "wellNusFilePath" : "wellnus.json"
+  "wellNusFilePath" : "data/wellnus.json"
 }

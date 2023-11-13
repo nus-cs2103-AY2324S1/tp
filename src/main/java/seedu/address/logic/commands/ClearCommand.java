@@ -6,12 +6,12 @@ import seedu.address.model.Model;
 import seedu.address.model.WellNus;
 
 /**
- * Clears the wellnus storage.
+ * Clears the WellNus storage.
  */
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Wellnus storage has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Student and appointment list has been cleared!";
 
 
     @Override

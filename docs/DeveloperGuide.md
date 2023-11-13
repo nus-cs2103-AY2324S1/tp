@@ -584,7 +584,7 @@ Format: `add n/STUDENT_NAME c/CONTACT_NUMBER a/HOME_ADDRESS [r/RISK_LEVEL]`
 3. Test Case 2: `add n/Rachel Teo c/87654321 a/Block 30 Kallang Place #01-23/24 r/HIGH`
     1. Expectation: Same as above
 4. Test Case 3: `add n/Ethan Tan c/98765432 a/252 ANG MO KIO AVENUE 4 01-225` again
-    1. Expectation: Warning `This student already exists in the wellnus storage`
+    1. Expectation: Warning `This student already exists in the student list`
 5. False commands:
     1. Try missing fields: Get a message stating the format of the input
     2. Incorrect Phone Number: Get a message stating that phone numbers must be 8 digits long
