@@ -155,7 +155,8 @@ Shows a message that helps redirects you to the user guide.
 * **Address (Compulsory field)**: String without restriction in characters.
 * **Email (Compulsory field)** String with restrictions in characters (XXXXXXXX@emaildomain)
 * **Subject (Compulsory field)**: String without restriction in characters.
-* **Day (Compulsory field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).* **Begin (Compulsory field)**: String with restrictions (HHMM).
+* **Day (Compulsory field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).
+* **Begin (Compulsory field)**: String with restrictions (HHMM).
 * **End (Compulsory field)**: String with restrictions (HHMM).
 * **PayRate (Compulsory field)**: String with restrictions in characters, only numbers allowed (no negative numbers).
 
@@ -199,7 +200,7 @@ Format: `list`
 Format: `list [DAY]`
 
 **Expected Input**:
-* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Tue/Wed/Thu/Fri/Sat/Sun).
+* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).
 
 
 ### Finding a tutee : `find`
@@ -250,7 +251,7 @@ and it should not be blank
 
 ### Editing a tutee : `edit`
 
-**Description** : Edit a tutee in the current list.
+**Description**: Edit a tutee in the current list.
 
 **Format**: `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SUBJECTS d/DAY b/BEGIN end/END pr/PAYRATE`
 
@@ -261,7 +262,8 @@ and it should not be blank
 * **Address (Optional field)**: String without restriction in characters.
 * **Email (Optional field)** String with restrictions in characters (XXXXXXXX@emaildomain)
 * **Subject (Optional field)**: String without restriction in characters.
-* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).* **Begin (Optional field)**: String with restrictions (HHMM).
+* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).
+* **Begin (Optional field)**: String with restrictions (HHMM).
 * **End (Optional field)**: String with restrictions (HHMM).
 * **PayRate (Optional field)** String with restrictions in characters, only numbers allowed (no negative numbers).
 
@@ -389,7 +391,7 @@ Format: `unpaidAll`
 
 ### Undo previous command : `undo`
 
-**Description**: Undo the previous command that modifies the data of tutees.
+**Description**: Undo the previous command that can modify the data of tutees.
 
 **Format**: `undo`
 
