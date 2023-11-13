@@ -45,6 +45,7 @@ Given below are my contributions to the project.
       <br><br>
 * **Team-based task**
   * Ensure working hyperlinks for UG and DG
+  * Set-up and update AboutUs section
     <br><br>
 * **Review/mentoring**
   * Review PR (E.g.[#148](https://github.com/AY2324S1-CS2103T-T11-1/tp/pull/148), [#189](https://github.com/AY2324S1-CS2103T-T11-1/tp/pull/189))
