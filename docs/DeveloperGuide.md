@@ -12,7 +12,7 @@ title: Developer Guide
     4. [Model](#model-component)
     5. [Storage](#storage-component)
     6. [Common Classes](#common-classes)
-4. [Implementation](#implementation)
+1. [Implementation](#implementation)
     1. [Listing](#listx-feature)
     2. [Viewing](#viewx-feature)
     3. [Edit Person](#edit-person-feature)
