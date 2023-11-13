@@ -23,6 +23,7 @@ Additionally, for the application to be more centred around the needs of our tar
 1. ***LinkedIn and Github***
 * Implemented the ability to add LinkedIn and Github usernames to details of candidates
 * Implemented the redirection to the respective accounts on the default browser using the Java awt library
+* Amended Person to include attributes of LinkedIn and Github
 
 2. ***Events***
 * Introduced Events to JABPro, which allows for addition of events relating to candidates
@@ -46,9 +47,11 @@ Additionally, for the application to be more centred around the needs of our tar
 * Contributed to DG for architecture diagram for UI, Storage and Model
 * Contributed to DG for implementation details of LinkedIn/Github feature and Events feature
 * Contributed to DG for test cases for `addL`, `addG`, `linkedin`, `github` and `event` commands, for Instructions on Manual Testing
+* Contributed to DG for Redirection Implementation details as part of `Appendix - Effort`
+* Contributed to DG for Activity and Sequence diagrams of `addL`, `addG` and `event`.
 
 ### Contribution to team-based tasks
-* Ensuring testing meets coverage requirements
+* Ensured testing as a whole meets coverage requirements
 
 ### Review/mentoring contributions
 * Reviewed few PR contributions of team members
