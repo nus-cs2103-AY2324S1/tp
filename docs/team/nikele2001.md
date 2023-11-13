@@ -40,7 +40,7 @@ Given below are my contributions to the project.
   * Added sequence diagram for the `setPerson()` method in the `ScheduleCommand#execute()` method to illustrate how the appointment list is being updated.
   * Added activity diagram for the `gather` command.
   * Contributed to `Instructions for manual testing` in DG.
-  * Added effort section. 
+  * Added effort section.
 
 
 * **Community**:
