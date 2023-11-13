@@ -460,18 +460,47 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and place it into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Open a command terminal, `cd` into the folder you put the JAR file in, and use the `java -jar context.jar` command to run the app.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   1. You may enter `exit` to the text box at the top of the window to close the app, `cd` to the same folder before in terminal and use the `java -jar context.jar` command to re-launch the app.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a new contact
+
+1. Adding a contact with all fields
+
+   1. Test case: `add n/John Doe p/12345678 e/john@example.com o/notes t/friend a/Telegram: johndoe`
+      Expected: A new contact with the name "John Doe", phone number "12345678", email "john@example.com", a note "notes", tagged as "friend", and an alternate contact "Telegram: johndoe" is added to the list.
+
+   1. Test case: `add n/Alice p/87654321 e/alice@example.com`
+      Expected: A new contact with the name "Alice", phone number "87654321", and email "alice@example.com" is added. Optional fields are left blank.
+
+   1. Other incorrect add commands to try: `add`, `add n/John Doe`, `add e/john@example.com`, `add n/John Doe p/12`<br>
+      Expected: Error message indicating the correct format for the `add` command.
+
+### Editing an existing contact
+
+1. Editing a contact's name and email
+
+   1. Prerequisites: Have at least one contact in the list.
+
+   1. Test case: `edit 1 n/Jane Doe e/jane@example.com`
+      Expected: The first contact in the list has its name changed to "Jane Doe" and email to "jane@example.com".
+
+   1. Test case: `edit 1 t/`
+      Expected: All of the existing tags of the first contact in the list are removed while other information of the contact remains unchanged.
+
+   1. Test case: `edit 2 n/Bob`
+      Expected: Error message indicating the correct format for the `edit` command.
+
+   1. Other incorrect edit commands to try: `edit`, `edit x` (where x is larger than the number of contacts in ConText), `edit 1 n/`, `edit 1 e/`<br>
+      Expected: Error message indicating the correct or valid usage of the `edit` command.
 
 ### Deleting a contact
 
@@ -494,7 +523,15 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Filtering contacts by tag
+
+1. Filtering contacts using a specific tag
+
+   1. Test case: `filter friend`
+      Expected: List all contacts tagged as "friend".
+
+   1. Other incorrect filter commands to try: `filter`, `filter @#$%` (assuming no such tags)<br>
+      Expected: Error message indicating the correct usage of the `filter` command or no contacts found message.
 
 ### Saving data
 
