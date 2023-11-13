@@ -12,10 +12,10 @@ start
 
 switch ()
 case([prefix == "t/"])
-    :Gathers all email addresses of 
+    :Gathers all email addresses of
     clients with given tag;
 case([prefix == "fp/"])
-    :Gathers all email addresses of 
+    :Gathers all email addresses of
     clients with given financial plan;
 case([else])
     :Throws error message;
