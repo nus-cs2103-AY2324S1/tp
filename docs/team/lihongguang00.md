@@ -42,6 +42,11 @@ Given below are my contributions to the project.
   * User Guide:
     * Added documentation for the features `addEvent`, `compareCalendars` and `compareGroupCalendars` [#84](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/84)
     * Reformatted UG and added screenshots for all commands: [#148](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/148) and [#152](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/152)
+  * Developer Guide:
+    * Wrote use case (UC14)
+    * Consolidated user stories into table format
+    * Adding Events implementation section
+    * Calendar Comparison (compareCalendars) implementation section
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [#7](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/7), [#9](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/9), [#11](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/11), [#25](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/25), [#28](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/28), [#31](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/31), [#36](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/36), [#65](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/65), [#66](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/66), [#72](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/72), [#86](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/86), [#87](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/87)
