@@ -63,9 +63,8 @@ Managing clients and a busy schedule has never been easier. With OutBook, all yo
 3. Copy the file to the folder you want to use as the _home folder_ for OutBook.
 
 4. Open a command terminal, navigate to the _home folder_ using `cd`, and use the `java -jar OutBook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app comes pre-loaded with some sample data.<br>
-
-![Ui](images/Ui.png)
+   A GUI similar to the below should appear in a few seconds. Note how the app comes pre-loaded with some sample data.
+<br>![Ui](images/Ui.png)
 <br><br><br><br><br><br>
 5. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -85,6 +84,7 @@ Managing clients and a busy schedule has never been easier. With OutBook, all yo
 6. You can refer to the [Features](#features) section below for details of each command. 
 
 [Click here to return to the Table of Contents](#table-of-contents)
+
 ___
 
 <div style="page-break-after: always;"></div>
@@ -103,6 +103,8 @@ ___
 [Click here to return to the Table of Contents](#table-of-contents)
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 # Features
 
@@ -162,7 +164,7 @@ Format: `addc n/NAME p/PHONE e/EMAIL [lc/LAST_CONTACTED_TIME] [s/STATUS] [r/REMA
 You can put any number of tags (including 0) on a contact.
 </div>
 
-<br/><br/>
+<div style="page-break-after: always;"></div>
 
 Examples:
 - `addc n/John Doe p/98765432 e/johnd@example.com`
@@ -221,7 +223,7 @@ Format: `viewc CONTACT_INDEX`
 - As this command displays the contact at the specified `CONTACT_INDEX` in the contacts list, the contact displayed in the details list may change due to a modification in list order through the use of `addc`, `editc` or `listc` commands. This is intentional.
 - The displayed contact is cleared from the details list when the `deletec` and `findc` commands are used.
 
-<br/><br/>
+<div style="page-break-after: always;"></div>
 
 Examples:
 - `viewc 3` displays detailed information related to the 3rd contact on the contacts list.
