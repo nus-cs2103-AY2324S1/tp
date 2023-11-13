@@ -36,8 +36,6 @@ Given below are my contributions to the project.
   * Justification: Significantly improves searchability within the app, allowing for quick access to grouped data based on user-defined tags.
   * Highlights: Implemented efficient search algorithms to minimize retrieval time for tagged items.
 
-<div style="page-break-after: always;"></div>
-
 * **Code contributed**:  [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=freshcabbage123&breakdown=true)
 
 * **Project management**:
