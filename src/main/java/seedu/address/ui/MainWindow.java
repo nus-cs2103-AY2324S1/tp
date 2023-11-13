@@ -43,6 +43,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private Index targetIndex;
     private boolean isSaved;
+    private boolean isShowingConfirmationMessage;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -260,27 +261,35 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     void handleViewExit() {
+        isShowingConfirmationMessage = commandBox.getInConfirmationDialog();
         // if the fosterer is already saved or the confirmation message is already displayed, exit the profile page.
-        if (isSaved || commandBox.getInConfirmationDialog()) {
-            commandBox.setInConfirmationDialog(false);
-            personProfile.setIsInConfirmationDialog(false);
-            personListPanelPlaceholder.setVisible(true);
-            personProfilePlaceholder.getChildren().remove(personProfile.getRoot());
-            personProfilePlaceholder.setVisible(false);
-            sendFeedback("Exiting view as requested.");
+        if (isSaved || isShowingConfirmationMessage) {
+            exitProfilePage();
         } else {
             // if fosterer is not saved or message is not displayed before, display the confirmation message
-            commandBox.setInConfirmationDialog(true);
-            personProfile.setIsInConfirmationDialog(true);
+            displayConfirmationMessage();
         }
     }
 
     void handleCancelViewExit() {
         sendFeedback("Cancelled exit.");
-        commandBox.setInConfirmationDialog(false);
+        commandBox.setIsInConfirmationDialog(false);
         personProfile.setIsInConfirmationDialog(false);
     }
 
+    private void exitProfilePage() {
+        commandBox.setIsInConfirmationDialog(false);
+        personProfile.setIsInConfirmationDialog(false);
+        personListPanelPlaceholder.setVisible(true);
+        personProfilePlaceholder.getChildren().remove(personProfile.getRoot());
+        personProfilePlaceholder.setVisible(false);
+        sendFeedback("Exiting view as requested.");
+    }
+
+    private void displayConfirmationMessage() {
+        commandBox.setIsInConfirmationDialog(true);
+        personProfile.setIsInConfirmationDialog(true);
+    }
 
     /**
      * Opens a fosterer's profile.
