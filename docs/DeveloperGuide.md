@@ -277,6 +277,8 @@ Alternative 2: Abstract CommandResult to get a successfulExecutionResult and a P
 
 ### Complete Feature
 
+#### Implementation Overview
+
 The **Complete** feature is facilitated by the `CompleteCommand` and `CompleteCommandParser`. The
 `CompleteCommandParser` creates a `CompleteByIndex` or `CompleteByDate` object depending on the user's input. Both `CompleteByIndex` and `CompleteByDate` extends `CompleteCommand` as illustrated in the class diagram below.
 
@@ -468,6 +470,8 @@ each command
 
 
 ### Appointment List Feature
+
+#### Implementation Overview
 
 The appointment list is facilitated by `ModelManager`. It extends `Model` and stores an additional `SortedList<Appointment>` object that represents all existing appointments.
 The `setAppointmentList()` method checks against `filteredPersons` to look for updates regarding existing `Appointment` objects. The `setAppointmentList()` method is called whenever there is a command that can potentially change the data stored, to ensure that the state of the appointment list is as updated as possible.
@@ -780,6 +784,7 @@ initialised with the focus on the `confirm` button. This makes it possible for a
 twice and wipe the contact book anyway, bypassing the defence mechanism entirely. We plan to make the command more
 resistant to mistakes by having the user key in a specific phrase, or to initialise the window with the focus on the
 `cancel` button instead.
+7. The `schedule` and `complete` command current uses the same `d/` prefix but the format for the arguments is different for both. We plan to update add a new `dt/` prefix to represent date-time arguments for `schedule` command to prevent confusion for the users.
 
 
 ### Glossary
