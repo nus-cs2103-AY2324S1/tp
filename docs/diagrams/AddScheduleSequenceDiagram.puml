@@ -35,7 +35,7 @@ create AddScheduleCommand
 AddScheduleCommandParser -> AddScheduleCommand
 activate AddScheduleCommand
 
-AddScheduleCommand -> AddScheduleCommandParser
+AddScheduleCommand --> AddScheduleCommandParser :  add-s
 deactivate AddScheduleCommand
 
 
@@ -45,7 +45,7 @@ deactivate AddScheduleCommandParser
 AddScheduleCommandParser -[hidden]-> AddressBookParser
 destroy AddScheduleCommandParser
 
-AddressBookParser --> LogicManager
+AddressBookParser --> LogicManager : add-s
 deactivate AddressBookParser
 
 LogicManager -> AddScheduleCommand : execute()
