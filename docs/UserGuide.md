@@ -705,12 +705,13 @@ Format: `create t/CATEGORY TAGNAME…​`
   <br> 
   Example: `create t/role software developer` would create the tag **software** and ignore the word developer.
 
+<box type="tip" seamless>
 
 **Tip:**
 * You can create multiple tags at once i.e. `create t/dept marketing t/role developer ...`
 * Use this command for frequently used tags for better efficiency in tagging applicants.
 * You can view all of your tags by keying in the `listT` command.
-  </box>
+</box>
 
 An example of the `create` command being successfully executed:
 1. Enter the command `create t/dept marketing t/role developer`
@@ -721,6 +722,8 @@ An example of the `create` command being successfully executed:
 3. View your newly created tags using the `listT` command.
 
    ![listT-create](images/listT-create.png)
+
+Failed to create tags? Here are some possible reasons why
 
 | Reason for Error                                                                                                        | Error Message                                | Remedy / Suggested course of action                                                                                        |
 |-------------------------------------------------------------------------------------------------------------------------|----------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
@@ -806,6 +809,8 @@ It's best to explain this by breaking down an example `search` command!
 * `AND` has a tag `intern`
 
 </box>
+
+Failed to execute the `search` command? Here are some possible reasons why
 
 | Reason for Error                                                                                    | Error Message                                                                                                                                                                                                                                                   | Remedy / Suggested course of action                                                                                                                    |
 |-----------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
