@@ -210,17 +210,19 @@ to a `Student`.
 ### 3.4 Check overlapping appointments feature
 
 The *check overlapping appointments* mechanism is facilitated by `UniqueAppointmentList`. It implements the `Iterable`
-interface that stores an `ObservableList` of type `Appointment`.
+interface that stores an `ObservableList` of type `Appointment`. When an `Appointment` is scheduled, the
+`ScheduleCommand#execute(Model model)` method begins the check.
 
 The following methods are implemented to facilitate the check clashing appointments process:
 
-* `UniqueAppointmentList#hasOverlap(Appointment appt1, Appointment appt2)` —  Checks if two appointments have overlapping time.
-* `UniqueAppointmentList#hasOverlappingAppointments(Appointment newAppt)` —  Compares the new appointment to schedule with every other appointment currently in `UniqueAppointmentList`.
+* `Model#hasOverlappingAppointments(Appointment toAdd)` —  The Model responsible for adding the appointment (In this case, `WellNUS.java`).
+* `UniqueAppointmentList#hasOverlapWith(Appointment toAdd)` —  Checks if the appointment to add overlaps with any of the current appointments in the `UniqueAppointmentList`.
+* `Appointments#isOverlappingAppointments(Appointment other)` —  Checks if this `Appointment` overlaps with the given `Appointment` supplied in the parameter.
 
 
 The following sequence diagram shows how the class operates when an appointment is added:
 
-![ClashSequenceDiagram](images/ClashSequenceDiagram.png)
+![OverlapSequenceDiagram](images/OverlapSequenceDiagram.png)
 
 
 When the user schedules a new command, the `UniqueAppointmentList` runs its `hasOverlappingAppointments()` method to check if the
