@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.InteractionCommand;
-import seedu.address.model.person.interaction.Interaction;
+import seedu.address.model.person.Interaction;
 
 public class InteractionCommandParserTest {
 
@@ -69,11 +69,6 @@ public class InteractionCommandParserTest {
 
     @Test
     public void parse_uncapitalisedOutcome_success() {
-        // Interaction interaction = new Interaction("note about interaction", Interaction.Outcome.INTERESTED);
-        // InteractionCommand expectedCommand = new InteractionCommand(targetIndex, interaction);
-        // assertParseSuccess(parser, userInput, expectedCommand);
-
-
         Index targetIndex = Index.fromOneBased(1);
         String userInput = targetIndex.getOneBased()
                 + " " + CliSyntax.PREFIX_OUTCOME + "interested note about interaction in small case";

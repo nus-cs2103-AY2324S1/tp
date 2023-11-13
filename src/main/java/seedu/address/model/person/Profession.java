@@ -1,5 +1,8 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents a Person's profession in the address book.
  */
@@ -17,6 +20,8 @@ public class Profession {
     * @param profession A valid profession.
     */
     public Profession(String profession) {
+        requireNonNull(profession);
+        checkArgument(isValidProfession(profession), MESSAGE_CONSTRAINTS);
         value = profession;
     }
 
@@ -30,5 +35,12 @@ public class Profession {
     @Override
     public String toString() {
         return value;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+            || (other instanceof Profession
+            && value.equals(((Profession) other).value));
     }
 }

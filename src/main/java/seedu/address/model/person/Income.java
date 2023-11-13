@@ -1,5 +1,8 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents a Person's income in the address book.
  */
@@ -15,8 +18,10 @@ public class Income {
     *
     * @param income A valid income.
     */
-    public Income(Integer income) {
-        value = income;
+    public Income(String income) {
+        requireNonNull(income);
+        checkArgument(isValidIncome(income), MESSAGE_CONSTRAINTS);
+        value = Integer.parseInt(income);
     }
 
     /**
@@ -39,9 +44,9 @@ public class Income {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Income // instanceof handles nulls
-                && value.equals(((Income) other).value)); // state check
+        return other == this
+                || (other instanceof Income
+                && value.equals(((Income) other).value));
     }
 
     @Override
