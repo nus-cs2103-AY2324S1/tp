@@ -225,7 +225,7 @@ then set it to unfiltered again.
 2. This updates the model via its `updateFilteredMemberList()` or `updateFilteredApplicantList()` method which is called with its predicate as always returning true. 
 3. All members/applicants in the address book are shown to the user in the members/applicants list.
 
-The diagram below describes the behaviour of viewing an applicant in the `AddressBook`, the execution of viewing a member
+The diagram below describes the behaviour of viewing an applicant in the `AddressBook`; the behaviour of viewing a member in
 the `AddressBook` is almost identical.
 
 <img src="images/ViewApplicantActivityDiagram.png">
@@ -304,6 +304,7 @@ clipboard. The commands are implemented in the `CopyMemberCommand` and `CopyAppl
 4. The `CopyMemberCommand`/`CopyApplicantCommand` calls the copies the details given by the `Member#detailsToCopy`/`Applicant#detailsToCopy` method into the clipboard.
 
 The diagram below describes this behaviour concisely. It shows how a user's command is processed and what message is ultimately shown if they decide, for example, to copy a member's details.
+The behaviour is almost identical for `CopyApplicantCommand`.
 
 <img src="images/CopyMemberActivityDiagram.png">
 
@@ -893,14 +894,14 @@ Command: `help`
 
 Command: `addm` or `addmember`. You can refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#411-adding-a-member-addmember-or-addm).
 1. Adding a new member
-    1. Prerequisites: Existing list of applicants do not contain member with the same phone number
+    1. Prerequisites: Existing list of members do not contain member with the same phone number
     2. Test case: `addm /name John Doe /phone 91234567 /email johnd@example.com /tele @johndoe`<br>
        Expected: A new member is added with the given name, phone number, email, and Telegram handle with no tags.
        The member is added to the last index of the member list. The member card will appear at the bottom
        of the list.
     3. Test case: `addm /name John Doe /phone 91234567 /email johnd@example.com /tele @johndoe /tag Classmate`<br>
        Expected: A new member is added with the given name, phone number, email, and Telegram handle with the Classmate tag.
-       The member added to the last index of the applicant list. The applicant card will appear at the bottom of the list.
+       The member added to the last index of the member list. The member card will appear at the bottom of the list.
 
 2. Adding a member applicant
     1. Prerequisites: Existing list of member contain member with the same phone number
