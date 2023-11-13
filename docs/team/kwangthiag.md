@@ -20,8 +20,6 @@ Given below are my contributions to the project.
 
 * **Project management**:
   * Helped review code and merge PRs
-  
-* **Enhancements to existing features**:
 
 * **Documentation**:
   * User Guide:
@@ -30,8 +28,12 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Drew Mockups for CRUD
     * Add Use Cases for features
-    * Added activity diagram for the `reschedule` command
-
+    * Added implementation and activity diagram for the `reschedule` command
+    * Added implementation and sequence diagram for the `sort-p` command 
+    * Added implementation for the `sort-a` command
+    * Added implementation and sequence diagram for the `diagnose` command 
+    * Added implementation for the `undiagnose` command 
+    
 * **Community**:
 
 * **Tools**:
