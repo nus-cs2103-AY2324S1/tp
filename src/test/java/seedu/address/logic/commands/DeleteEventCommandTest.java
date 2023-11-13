@@ -25,7 +25,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.calendar.ReadOnlyCalendar;
-import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventPeriod;
 import seedu.address.model.event.exceptions.EventNotFoundException;
@@ -166,11 +165,6 @@ class DeleteEventCommandTest {
 
         @Override
         public ReadOnlyCalendar getCalendar() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public UniMateCalendar getUnderlyingCalendar() {
             throw new AssertionError("This method should not be called.");
         }
 

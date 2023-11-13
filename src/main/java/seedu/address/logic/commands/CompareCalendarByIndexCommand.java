@@ -9,7 +9,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.calendar.ReadOnlyCalendar;
-import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.person.Person;
 
 /**
@@ -46,8 +45,8 @@ public class CompareCalendarByIndexCommand extends Command {
         }
 
         ReadOnlyCalendar combinedCalendar = indexList.stream().map(Index::getZeroBased).map(lastShownList::get)
-                .map(Person::getCalendar)
-                .reduce(model.getUnderlyingCalendar(), UniMateCalendar::combineCalendar);
+                .map(Person::getReadOnlyCalendar)
+                .reduce(model.getCalendar(), ReadOnlyCalendar::getCombinedCalendar);
 
         model.setComparisonCalendar(combinedCalendar);
 

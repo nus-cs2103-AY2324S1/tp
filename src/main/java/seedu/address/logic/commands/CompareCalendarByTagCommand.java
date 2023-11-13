@@ -7,7 +7,6 @@ import java.util.List;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.calendar.ReadOnlyCalendar;
-import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -37,7 +36,7 @@ public class CompareCalendarByTagCommand extends Command {
 
         ReadOnlyCalendar comparisonCalendar = lastShownList.stream().filter(person -> {
             return tagList.stream().anyMatch(person::hasTag);
-        }).map(Person::getCalendar).reduce(model.getUnderlyingCalendar(), UniMateCalendar::combineCalendar);
+        }).map(Person::getReadOnlyCalendar).reduce(model.getCalendar(), ReadOnlyCalendar::getCombinedCalendar);
 
         model.setComparisonCalendar(comparisonCalendar);
 
