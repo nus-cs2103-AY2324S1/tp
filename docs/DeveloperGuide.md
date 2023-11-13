@@ -385,39 +385,92 @@ with `UserPrefsStorage` when the application is launched. Then `UI` component wi
 component and set the initial theme. After a `SwitchCommand` is executed by the `LogicManager`, `Model` component will
 update the theme in  `UserPrefs`. Finally, `UI` component will update the theme accordingly.
 
-Step 1: Theme initialization.
+**Step 1: Theme initialization**
 <br>
 Similar to GUI settings, the theme is regarded as a component of user preference stored in `UserPrefs` and in Json
-file **preferences.json**.
+file `preferences.json`.
 
 The initial theme setting works as follows: After constructing the `ModelManager` and `LogicManager` with the
 loaded `UserPrefs`, `MainWindow` will obtain theme preference from `LogicManager` and set the initial theme. If no data
-can be read from the preference file, the **Default** theme will be used by `Logic` and `Model` components, and set by
+can be read from the preference file, the _Default_ theme will be used by `Logic` and `Model` components, and set by
 `UI`.
 
-Step 2: Theme switching.
+**Step 2: Theme switching**
 <br>
 The following sequence diagram shows how the theme switching works. For the discussion purpose, parsing of the command
 and `Storage#saveFlashlingo(ReadOnlyFlashlingo)` are omitted:
 
 ![SwitchSequenceModel](images/SwitchSequenceDiagram.png)
 
-To be added: `Mainwindow#executeCommand`.
-
 #### Design Considerations
 
-**Aspect: How to update UI changes after command execution:**
-* Alternative 1 (current choice): Uses `Logic` component to update `Model` and `Storage`. Add a boolean field **switchTheme**
-  in `CommandResult`, informing `UI` to update similarly to what we did in **help** and **exit** commands.
+**Aspect: How to update UI changes after command execution**
+* **Alternative 1 (current choice): Use `Logic` component to update `Model` and `Storage`.** Add a boolean field `switchTheme`
+  in `CommandResult`, informing `UI` to update similarly to what we did in _help_ and _exit_ commands.
     * Pros: Follows the separation of concerns principle. Each component is responsible for its own work and addresses
       separate concerns, achieving higher cohesion and lower coupling.
-    * Cons: The abstraction and division for different components may be complicated and hard to understand. Additional
-      field needed in `CommandResult` class.
+    * Cons: 
+      * The abstraction and division for different components may be complicated and hard to understand. 
+      * Additional field needed in `CommandResult` class.
 
-* Alternative 2: Let `UI` component update the theme directly after receiving the command.
+* **Alternative 2: Let `UI` component update the theme directly after receiving the command.**
     * Pros: More direct implementation design.
-    * Cons: Needs to include more information returned from the execution of command. A potential gap between current storage
-      and UI theme setting would occur since `UI` wouldn't rely on `Logic` component to update the theme.
+    * Cons: 
+      * Needs to include more information returned from the execution of command. 
+      * A potential gap between current storage and UI theme setting would occur since `UI` wouldn't rely on `Logic` component to update the theme.
+
+### Load data from Excel file
+
+#### Implementation
+The general flow of the `load` command is similar to most other commands, as `model` executes the command to create and add the flash cards, and also update `storage`. Then the `CommandResult` returned will be reflected in `ui`.  
+Due to the complexity of inputs in Excel file, it's crucial to ensure the success of reading the Excel file, actively communicating with `storage` and handling different types of errors.
+
+**Highlight 1: Transferring Excel input to `FlashCard` object**
+
+* The third-party library _**Apache POI OOXML**_ is utilized to read the workbook, sheet to cells in the file. Since Excel is hierarchically composed of smaller elements such as cell, row and column to bigger ones like sheet, workbook, it's necessary to first understand this structure and foresee issues with each layer thoroughly.  
+* `DataFormatter` is used to transfer value in the cell to `String`, which avoids issues caused by numerical input read from Excel.
+* Help function `trimAndVerifyWords` ensures the correctness of every word/translation. Once it detects invalid input, it throws `CommandException` and ends the loading immediately, with no further time and resources wasted.
+
+**Highlight 2: Classifying different types of errors**
+
+The activity diagram below illustrates the flow after calling the `LoadCommand#execute(Model)`. **Four** different error messages can be output after execution.
+
+![LoadCommandActivityDiagram](images/LoadCommandActivityDiagram.png)
+
+![img](images/ReadRowsActivityDiagram.png)
+
+**Highlight 3: handling duplicate cards within the file/with the app**
+1. The method `addFlashCardsToModel` takes in the temporarily built flash cards list and the `model` to check if duplicate cards exist in the temporary list.
+2. After passing the check, `Model#addFlashCards(ArrayList<FlashCard>)` double checks every input card and ensures it is not the same with existing cards in `model` before adding, otherwise the repeated card will be ignored.
+
+#### Design Considerations
+**Aspect: Accepted file type for loading the data**
+* **Alternative 1 (current choice): Use Excel as the input file type.**
+    * Pros: 
+      * The cell-based structure of Excel fits with our word and translation structure of the flash cards, thus it's the most convenient way for users to create and edit data. 
+      * It's a common file type that is familiar to most users.
+    * Cons: Need to use external library to read and handle Excel file.
+* **Alternative 2: Use JSON as the input file type.**
+    * Pros: Similar data loading exists in current project, thus easy to implement.
+    * Cons: 
+      * Users need to follow the specific format to create and edit Json that may not be familiar to them. This process can be error-prone. 
+      * The feature is redundant since advanced users can achieve the same thing by manually adding flash cards to `flashlingo.json`.
+* **Alternative 3: Use TXT, Word or other file type.**
+    * Pros: Introduces a new way for users who prefer using text file.
+    * Cons: Need to use external library to read and handle the unformatted, more complicated input.
+
+**Aspect: How to handle duplicate flash cards**  
+
+There are two situations that need to be considered: duplicate flash cards **within the file** and **with the card existing in the app**.
+* **Alternative 1 (current choice): Check together and "ignore".** Check all loaded flash cards to ensure no duplicate with existing cards in `model`, then check their occurrence in `model` again when adding them one by one. **By ignoring the repeated ones, duplicate cards within the file can be handled.**
+    * Pros: 
+      * Consistent with the role of `Model` and `Logic`.
+      * Existing checker `Model#hasFlashCard(FlashCard)` can be reused.
+    * Cons: Complexity of flow and logic increases.
+* **Alternative 2: Check the two situations separately.**
+  * Pros: Simpler logic and implementation effort required.
+  * Cons: Heavier time and space usage.
+
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -591,13 +644,13 @@ Use case resumes from step 3.
 ### Non-Functional Requirements
 
 1.  **Environment** - Should work on any _mainstream OS_ as long as it has Java `11` installed.
-2.  **Environment** - Should be able to store 100 words with less than 30MB storage.
+2.  **Environment** - Should be able to store 300 flash cards with less than 30MB storage.
 3.  **Performance** - A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  **Performance** - Should be able to handle most of the user input within 2 seconds.
 5.  **Quality** - Should be able to update already memorized words accordingly and maintain the left ones when a learning session accidentally closes.
 6.  **Quality** - Should be able to provide the learner with a reasonable time schedule for language learning.
 7.  **Quality** - Should be able to handle any user input correctly without crashing.
-8.  **Capacity** - Should be able to hold up to 100 flash cards without a noticeable sluggishness(longer than 5 seconds) in performance for typical usage.
+8.  **Capacity** - Should be able to hold up to 100 flash cards without a noticeable sluggishness(longer than 2 seconds) in performance for typical usage.
 
 ### Glossary
 
