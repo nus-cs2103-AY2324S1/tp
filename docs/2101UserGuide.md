@@ -564,7 +564,7 @@ This glossary provides definitions for the special terms used in this user guide
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
-## Command summary
+## Command Summary
 
 Action | Format, Examples
 --------|------------------
