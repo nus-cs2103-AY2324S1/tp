@@ -205,8 +205,8 @@ public class ScheduleCommandParserTest {
                 + INVALID_PRIORITY_TAG_DESC, PriorityTag.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + PATIENT_ONE_DESC + START_DESC_ONE + END_DESC_ONE + DESCRIPTION_DESC_ONE
-                        + PRIORITY_TAG_DESC_HIGH,
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + PATIENT_ONE_DESC + START_DESC_ONE + END_DESC_ONE
+                        + DESCRIPTION_DESC_ONE + PRIORITY_TAG_DESC_HIGH,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
     }
 }
