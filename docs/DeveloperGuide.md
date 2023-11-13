@@ -169,8 +169,10 @@ How the parsing works:
 
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="100%" />
-<img src="images/Person&MeetingClassDiagram.png" width="100%" />
+<img src="images/ModelClassDiagram.png" width="80%" />
+<br>
+<img src="images/Person&MeetingClassDiagram.png" width="80%" />
+<br>
 
 The `Model` component,
 
@@ -220,6 +222,8 @@ To start off, both `editc` and `editm` take in an index as their first argument,
 
 Next, both commands take in a variable number of optional arguments based on the arguments used by the `addc` and `addm` commands. This allows the user to input only the fields they wish to edit in the chosen `Person` or `Meeting` object, as opposed to having to type in every field.
 
+<div style="page-break-after: always;"></div>
+
 Using `editm 3 m/Friend meetup a/Mall` as an example, when input by the user, an instance of an `EditMeetingCommand` (`EditCommand` in the case of `editc` with its respective `Person` fields as arguments) is created as shown in the following Sequence Diagram.
 
 ![CreateEditMeetingCommandSequenceDiagram](images/edit/CreateEditMeetingCommand-Create_EditMeetingCommand.png)
@@ -263,6 +267,8 @@ Once the instance of `ViewContactCommand` is created, it is executed by the `Log
 Once the indexes of the `Person` and `Meeting` objects to view (if any) are stored in `ModelManager`, their corresponding `Person` and `Meeting` objects (in this case the 2nd `Person` as displayed on the list) are obtained by the `MainWindow` as a `Pair` through the `getViewedItems` method of the `LogicManager` class. As such, both objects can then be forwarded to the `InfoDisplayPanel` using `setViewedModel`, which then displays detailed information of both objects. This process is denoted in the final Sequence Diagram below.
 
 ![ForwardViewedPersonMeetingtoUiDiagram](images/view/UiViewItemsSequenceDiagram-ForwardViewedPerson&MeetingToUi.png)
+
+<div style="page-break-after: always;"></div>
 
 #### Design Considerations and Rationale
 
@@ -466,6 +472,8 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
+<div style="page-break-after: always;"></div>
+
 Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
@@ -526,6 +534,8 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   - Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   - Cons: We must ensure that the implementation of each individual command are correct.
+
+<div style="page-break-after: always;"></div>
 
 ### \[Feature Flaw\] View Commands
 
@@ -800,6 +810,8 @@ Exiting
 1. Input command `exit`. <br>
    Expected: OutBook closes and shutdown.
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a person
 
 Adding a person while all persons are being shown
@@ -868,6 +880,8 @@ Deleting a person while the list of persons is filtered.
 4. Other incorrect delete commands to try: `delete`, `deletec X` (where X is larger than the list size)<br>
    Expected: Similar to 3.
 
+<div style="page-break-after: always;"></div>
+
 ### View Contact
 
 View contact
@@ -896,6 +910,8 @@ Repeat the contact test cases with meeting commands
 5. View Meeting commands <br>
    `viewm 1`
 
+<div style="page-break-after: always;"></div>
+
 ### Meeting Attendees
 
 Add Meeting Attendee
@@ -915,6 +931,10 @@ Remove Meeting Attendee
 ### Mark Meetings
 
 Mark a Meeting as completed
+
+<div style="page-break-after: always;"></div>
+
+### Saving data
 
 1. Use `mark 1` to mark the first meeting as completed <br>
    Expected: Meeting will be shown as completed and the attendees that are in the meeting will have their last contacted updated to the end time of the meeting.
