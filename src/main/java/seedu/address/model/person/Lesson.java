@@ -35,6 +35,8 @@ public class Lesson {
         requireNonNull(begin);
         requireNonNull(end);
 
+        assert(begin.getTime().isBefore(end.getTime())) : "begin time must be before end time";
+
         this.day = day.value;
         this.begin = begin.getTime();
         this.end = end.getTime();
