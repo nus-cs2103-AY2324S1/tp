@@ -371,7 +371,7 @@ Here is an example command where we want to view the members that the **event** 
 If your CCA contains many members and you don’t want to scroll past tens or hundreds of members, you can use the 
 `findMember` command to instantly filter a list of members with a matching name.
 
-Do you want to find multiple members? Worry not as you can simply add more names one after another.
+Do you want to find multiple members? Fear not as you can simply add more names one after another.
 
 Here’s how you can use it:<br>
 `findMember MEMBER_NAME [MORE_NAMES]...`
@@ -456,7 +456,7 @@ Here’s how you can use it:<br>
 `clear`
 
 <div markdown="block" class="alert alert-primary">:bulb: Accidentally cleared your list? 
-Worry not as you can use the `undo` command to recover your data! 
+Fret not as you can use the `undo` command to recover your data! 
 
 </div>
 
@@ -484,7 +484,7 @@ If it’s time to call it a day for your CCA tasks, you can use the `exit` comma
 Here’s how you can use it:<br>
 `exit`
 
-<div markdown="block" class="alert alert-info">:information_source: The exit command exists for your convenience. 
+<div markdown="block" class="alert alert-info">:information_source: The <code>exit</code> command exists for your convenience. 
 It performs the same task as the cross in the top bar and the Exit button in the File sub-menu item
 </div>
 
