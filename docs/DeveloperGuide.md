@@ -473,8 +473,6 @@ the `addressBookStateList`.
 
 </div>
 
-<div style="page-break-after: always;"></div>
-
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing
 the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer`
 once to the left, pointing it to the previous address book state, and restores the address book to that state.
@@ -648,7 +646,7 @@ Use case ends.
    <br/>
    Use case ends.
 
----
+<div style="page-break-after: always;"></div>
 
 **Use case: UC04 - Editing a member**
 
