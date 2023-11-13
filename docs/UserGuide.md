@@ -66,9 +66,9 @@ ProjectPRO is optimized for use via a Command Line Interface (CLI) while preserv
   - [9.6 Listing Meeting Time from a Group `listtime`](#listing-meeting-time-from-a-group-listtime)
   - [9.7 Finding Free Time of a Group `findfreetime`](#finding-free-time-of-a-group-findfreetime)
 - [10. General Commands](#general-commands)
-  - [10.1 Viewing Help `help`](#viewing-help--help)
-  - [10.2 Clearing All Data `clear`](#clearing-all-data--clear)
-  - [10.3 Exit ProjectPRO `exit`](#exit-projectpro--exit)
+  - [10.1 Viewing Help `help`](#viewing-help-help)
+  - [10.2 Clearing All Data `clear`](#clearing-all-data-clear)
+  - [10.3 Exit ProjectPRO `exit`](#exit-projectpro-exit)
 
 
 --------------------------------------------------------------------------------------------------------------------
