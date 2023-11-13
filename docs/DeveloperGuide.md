@@ -211,7 +211,7 @@ The `Model` component:
 
 **API**: [`Storage.java`](https://github.com/AY2324S1-CS2103T-W11-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-![Storage UML Diagram](images/UML_images/StorageUML.jpg)  
+<puml src="diagrams/Storage.puml" width="450" /> 
 
 The `Storage` component:
 - Can save address book data, user preference data, and team book data in JSON format, and read them back into corresponding objects.
@@ -410,6 +410,71 @@ LinkTree provides feedback based on whether the operation was successful or not.
 
 The choice between these alternatives depends on your specific project requirements and architectural preferences.
 
+### Feature: Find Team by Keywords
+
+#### Introduction
+The `findteam` command, implemented in the `FindTeamCommand` class, allows users to search for teams using keywords. This command extends the `Command` class and uses `TeamContainsKeywordsPredicate` for keyword-based filtering.
+
+#### Usage Scenario
+- **Command Syntax**: `findteam KEYWORD [MORE_KEYWORDS]...`
+- **Example**: `findteam alpha beta gamma`
+    - Finds all teams whose names contain any of the specified keywords (case-insensitive).
+
+#### Implementation Steps
+
+##### Command Execution
+- `FindTeamCommand.execute` uses `model.updateFilteredTeamList(predicate)` to filter teams and produces a `CommandResult` based on the number of matching teams.
+
+##### Predicate for Filtering
+- `TeamContainsKeywordsPredicate` checks if a team's name contains the specified keywords, utilized in `FindTeamCommand` for filtering.
+
+#### Design Considerations
+
+- **Handling No Keywords**: Throws `ParseException` when no keywords are provided, guiding users on correct usage.
+- **Case Insensitivity**: Enhances user experience and search flexibility.
+- **Partial vs. Full Match**: Allows partial matching for broader search results. Full match was considered but not implemented due to its restrictive nature.
+
+#### Integration with Model
+- **Model Interface**: Utilized for team data interaction. `ModelManager` implements `updateFilteredTeamList(Predicate<Team> predicate)` and `getFilteredTeamList()`, essential for the `findteam` command.
+
+#### Error Handling
+- **Duplicate Teams**: Handles duplicates by listing all matching teams.
+- **Invalid Keywords**: Throws `ParseException` with guidance for correct format.
+
+#### Step-by-Step Implementation
+1. **Parser Class Creation**: `FindTeamCommandParser` for parsing user input.
+2. **Parse Method**: Parses input and handles the format of keywords.
+3. **Command Class Specification**: `FindTeamCommand` with command word `findteam`.
+4. **Execution Method**: Implements logic for filtering and displaying search results.
+5. **Model Interaction**: Utilizes `Model#updateFilteredTeamList` and `Model#getFilteredTeamList`.
+
+<puml src="diagrams/FindTeamCommandDiagram.puml" width="1100"/>
+
+#### Design Considerations
+
+**Aspect: Search Methodology**
+In designing the `findteam` command, two primary alternatives for matching team names with user-provided keywords were evaluated:
+
+- **Alternative 1 (Current Choice): Partial Keyword Matching**
+    - **Description**: Matches teams whose names contain the provided keywords as substrates, e.g., 'alpha' matches 'Alpha Team', 'Alphabeta', and 'Gamma Alpha'.
+    - **Pros**:
+        - **Broader Search Results**: Captures a wider range of potential matches.
+        - **User-Friendly**: Accommodates partial information or memory gaps.
+    - **Cons**:
+        - **Over-Inclusive**: May return too many irrelevant results.
+        - **Ambiguity**: Potential confusion with similar substrings in names.
+
+- **Alternative 2: Full Keyword Matching**
+    - **Description**: Requires an exact match between the keywords and the team names.
+    - **Pros**:
+        - **Precision**: Offers precise search results.
+        - **Clarity**: Reduces ambiguity in the search results.
+    - **Cons**:
+        - **Restrictive**: Limits effectiveness for users who don't recall exact names.
+        - **User Unfriendliness**: Requires exact input.
+
+##### Conclusion
+The `findteam` command offers a user-friendly way to search for teams by keywords. It demonstrates thoughtful design in handling user inputs, error scenarios, and model integration for effective data retrieval and display.
 
 _{more aspects and alternatives to be added}_
 
