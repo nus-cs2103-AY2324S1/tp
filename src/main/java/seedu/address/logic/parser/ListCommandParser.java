@@ -6,9 +6,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.ListAttendanceCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListStudentsCommand;
@@ -22,7 +24,7 @@ import seedu.address.model.week.Week;
  * Parses input arguments and creates a new ListCommand object
  */
 public class ListCommandParser implements Parser<ListCommand> {
-
+    private final Logger logger = LogsCenter.getLogger(ListCommandParser.class);
     private static final Pattern LIST_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     /**
@@ -50,15 +52,16 @@ public class ListCommandParser implements Parser<ListCommand> {
 
         switch (commandWord.trim()) {
         case ListAttendanceCommand.COMMAND_WORD:
+            logger.fine("Parsing list attendance");
             if (argMultimap.getValue(PREFIX_WEEK).isEmpty() || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        ListAttendanceCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListAttendanceCommand.MESSAGE_USAGE));
             }
             String weekString = argMultimap.getValue(PREFIX_WEEK).get();
             Week week = ParserUtil.parseWeek(weekString);
             return new ListAttendanceCommand(tag, week, new ContainsTagPredicate(tag),
                     new AbsentFromTutorialPredicate(week, tag));
         case ListStudentsCommand.COMMAND_WORD:
+            logger.fine("Parsing list students");
             if (arguments.isEmpty()) {
                 return new ListStudentsCommand();
             }
