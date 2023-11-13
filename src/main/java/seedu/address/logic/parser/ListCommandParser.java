@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALGROUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
 import java.util.Optional;
@@ -27,7 +27,7 @@ public class ListCommandParser implements Parser<ListCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the ListCommand
-     * and returns a ListCommand object for execution.
+     * and returns a ListAttendanceCommand or ListStudentsCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public ListCommand parse(String args) throws ParseException {
@@ -41,16 +41,16 @@ public class ListCommandParser implements Parser<ListCommand> {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(arguments, PREFIX_TUTORIALGROUP, PREFIX_WEEK);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(arguments, PREFIX_TUTORIAL_GROUP, PREFIX_WEEK);
         Optional<Tag> tag = Optional.empty();
 
-        if (argMultimap.getValue(PREFIX_TUTORIALGROUP).isPresent()) {
-            tag = Optional.of(ParserUtil.parseTag(argMultimap.getValue(PREFIX_TUTORIALGROUP).get()));
+        if (argMultimap.getValue(PREFIX_TUTORIAL_GROUP).isPresent()) {
+            tag = Optional.of(ParserUtil.parseTag(argMultimap.getValue(PREFIX_TUTORIAL_GROUP).get()));
         }
 
         switch (commandWord.trim()) {
         case ListAttendanceCommand.COMMAND_WORD:
-            if (!argMultimap.getValue(PREFIX_WEEK).isPresent() || !argMultimap.getPreamble().isEmpty()) {
+            if (argMultimap.getValue(PREFIX_WEEK).isEmpty() || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         ListAttendanceCommand.MESSAGE_USAGE));
             }

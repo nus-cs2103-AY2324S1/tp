@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.ListAttendanceCommand.MESSAGE_ATTENDANCE_SUMMARY_NO_TAG;
+import static seedu.address.logic.commands.ListAttendanceCommand.MESSAGE_ATTENDANCE_SUMMARY_WITH_TAG;
 import static seedu.address.logic.commands.ListAttendanceCommand.MESSAGE_NO_STUDENTS;
 import static seedu.address.logic.commands.ListAttendanceCommand.MESSAGE_SUCCESS;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -13,7 +15,6 @@ import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -77,7 +78,7 @@ public class ListAttendanceCommandTest {
         ListAttendanceCommand command = new ListAttendanceCommand(tag, week,
                 new ContainsTagPredicate(tag), new AbsentFromTutorialPredicate(week, tag));
 
-        String expectedSummary = String.format(Messages.MESSAGE_ATTENDANCE_SUMMARY_WITH_TAG, 0, 1, week.getWeekNumber(),
+        String expectedSummary = String.format(MESSAGE_ATTENDANCE_SUMMARY_WITH_TAG, 0, 1, week.getWeekNumber(),
                 expectedModel.getAddressBook().getCourseCode(), tag.get().getTagName());
 
         expectedModel.addFilter(new ContainsTagPredicate(tag));
@@ -129,7 +130,7 @@ public class ListAttendanceCommandTest {
                 new ContainsTagPredicate(tag), new AbsentFromTutorialPredicate(week, tag));
 
         int total = expectedModel.getFilteredPersonList().size();
-        String expectedSummary = String.format(Messages.MESSAGE_ATTENDANCE_SUMMARY_NO_TAG, total - 1, total, 0,
+        String expectedSummary = String.format(MESSAGE_ATTENDANCE_SUMMARY_NO_TAG, total - 1, total, 0,
                 expectedModel.getAddressBook().getCourseCode());
 
         expectedModel.addFilter(new AbsentFromTutorialPredicate(week, tag));

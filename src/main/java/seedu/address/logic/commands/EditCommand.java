@@ -100,9 +100,9 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         ID updatedId = editPersonDescriptor.getId().orElse(personToEdit.getId());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        List<Attendance> unchangedAttendance = personToEdit.getAttendanceRecords();
+        List<Attendance> unchangedAttendances = personToEdit.getAttendanceRecords();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedId, updatedTags, unchangedAttendance);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedId, updatedTags, unchangedAttendances);
     }
 
     @Override

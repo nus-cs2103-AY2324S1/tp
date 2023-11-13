@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALGROUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 
 import java.util.Optional;
 
@@ -24,7 +24,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
     public DeleteCommand parse(String args) throws ParseException {
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TUTORIALGROUP);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TUTORIAL_GROUP);
         String trimmedArgs = args.trim();
 
         if (!argMultimap.getPreamble().equals("all")) {
@@ -43,11 +43,11 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             return new DeleteCommand(tag, new ContainsTagPredicate(tag));
         }
 
-        if (!argMultimap.getValue(PREFIX_TUTORIALGROUP).isPresent()) {
+        if (!argMultimap.getValue(PREFIX_TUTORIAL_GROUP).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
-        tag = Optional.of(ParserUtil.parseTag(argMultimap.getValue(PREFIX_TUTORIALGROUP).get()));
+        tag = Optional.of(ParserUtil.parseTag(argMultimap.getValue(PREFIX_TUTORIAL_GROUP).get()));
         return new DeleteCommand(tag, new ContainsTagPredicate(tag));
     }
 }

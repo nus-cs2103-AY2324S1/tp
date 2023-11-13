@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALGROUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
 import seedu.address.model.Model;
@@ -17,7 +17,7 @@ public abstract class ListCommand extends Command {
             + "LIST_TYPE (must be either 'students' or 'attendance')\n"
             + "(applicable for list attendance only): "
             + PREFIX_WEEK + "WEEK_NUMBER "
-            + "[" + PREFIX_TUTORIALGROUP + "TUTORIAL_GROUP_ID]\n"
+            + "[" + PREFIX_TUTORIAL_GROUP + "TUTORIAL_GROUP_ID]\n"
             + "Example: "
             + COMMAND_WORD + " students, "
             + COMMAND_WORD + " attendance w/1 tg/G01";

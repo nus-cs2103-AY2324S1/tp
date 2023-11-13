@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALGROUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +29,9 @@ public class DeleteCommand extends Command {
             + " all students in the course  identified by the tutorial group ID entered "
             + "or all students in the course.\n"
             + "Parameters: INDEX (must be a positive integer) || "
-            + "all [" + PREFIX_TUTORIALGROUP + "TUTORIAL_GROUP_ID]\n"
+            + "all [" + PREFIX_TUTORIAL_GROUP + "TUTORIAL_GROUP_ID]\n"
             + "Examples: " + COMMAND_WORD + " 1, " + COMMAND_WORD + " all, "
-            + COMMAND_WORD + " all " + PREFIX_TUTORIALGROUP + "G01";
+            + COMMAND_WORD + " all " + PREFIX_TUTORIAL_GROUP + "G01";
 
     public static final String MESSAGE_NO_STUDENTS = "No students to delete from %1$s!";
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted student: %1$s";

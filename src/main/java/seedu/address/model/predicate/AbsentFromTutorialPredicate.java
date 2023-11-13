@@ -22,8 +22,8 @@ public class AbsentFromTutorialPredicate extends SerializablePredicate {
     /**
      * Constructor a {@code AbsentFromTutorialPredicate} with index and tutorial group.
      *
-     * @param week Week number to get the attendance list for.
-     * @param tag  Tutorial group to get the attendance list for.
+     * @param week Week number to get the attendance summary for.
+     * @param tag  Tutorial group to get the attendance summary for.
      */
     public AbsentFromTutorialPredicate(Week week, Optional<Tag> tag) {
         super(person -> {
