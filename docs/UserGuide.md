@@ -239,7 +239,7 @@ Examples:
 * `language French` displays a list where each word or translation is from French language.
 
 **Note**
-* Unlike the `find` command, the `language` command uses exact search. So it will not display the flash cards whose word or translation contains the specified language as a substring or keyword.
+* Unlike the `find` command, the `language` command uses **exact search**. So it will not display the flash cards whose word or translation contains the specified language as a substring or keyword.
     * e.g. `language Chinese` will not display following flash cards:
         * `w/读书 t/read book wl/简体中文 tl/English`
         * `w/讀書 t/read book wl/Traditional Chinese tl/English`
