@@ -772,6 +772,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Find band
 
+**Prerequisite:** Band List should be empty
 1. Finding a band with an empty band list
     1. Test case: `findb ABC`
        **Expected:** No bands yet error shows.
@@ -820,7 +821,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `help 111`
        **Expected:** A pop-up window is shown with url to BandConnect's User Guide.
 
-### List all musicians and band
+### List all musicians and bands
 
 1. List command is used
     1. Test case: `list`
