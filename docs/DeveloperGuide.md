@@ -470,6 +470,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list all tutees.
 2.  System shows all tutees.
+3.  System displays the success message.
 	
     Use case ends.
 
@@ -488,6 +489,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to add a tutee.
 2. System adds a tutee.
+3. System displays the success message.
 
    Use case ends.
 
@@ -523,6 +525,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User views the list of tutees.
 2.  User requests to delete a tutee.
 3.  System deletes the tutee.
+4.  System displays the success message.
 
     Use case ends.
 
@@ -540,6 +543,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User views the list of tutees.
 2.  User requests to edit a tutee.
 3.  System edits the tutee.
+4.  System displays the success message.
 
     Use case ends.
 
@@ -573,6 +577,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to find a tutee.
 2. System finds the tutee.
+3. System displays the success message.
 
 **Extensions**
 
@@ -610,6 +615,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User views the list of tutees.
 2.  User requests mark the specific tutee as paid.
 3.  System marks the tutee as paid.
+4.  System displays the success message.
 
     Use case ends.
 
@@ -627,6 +633,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User views the list of tutees.
 2.  User requests mark all the tutees in the current list as not paid.
 3.  System marks all the tutee in the list as not paid.
+4.  System displays the success message.
 
     Use case ends.
     <br>
@@ -686,7 +693,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests for monthly revenue.
-2. User receives monthly revenue figure.
+2. System displays the monthly revenue figure.
 
    Use case ends.
    <br>
