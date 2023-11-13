@@ -317,7 +317,9 @@ The following activity diagram summarizes what happens when a user executes an a
 
 While the profile page is opened, `MainWindow` classes checks the `CommandType` Enum value that is carried by the `CommandResult` object which is returned from executing a `Command`. Depending on the types of the commands, `MainWindow` assigns handler methods to handle the corresponding UI changes. 
 
-The sequence diagram give below illustrates the types of handlers `MainWindow` class deals with.
+<div style="page-break-after: always;"></div>
+
+The sequence diagram given below illustrates the types of handlers `MainWindow` class deals with.
 
 ![MainWindowCommandTypeSequenceDiagram.png](images/MainWindowCommandTypeSequenceDiagram.png)
 
@@ -1077,7 +1079,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. Foster Manager lists fosterers (UC2).
 2. Foster Manager requests to sort the list of fosterers.
-3. System displays the updated list of fosterers, sorted alphabetically by name.
+3. System displays the updated list of fosterers, sorted alphabetically by name, where uppercase letters come before lowercase letters.
 
    Use case ends.
 
