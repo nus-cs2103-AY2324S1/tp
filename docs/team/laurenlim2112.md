@@ -6,7 +6,7 @@ title: "Lauren Lim Yi-Xing's Project Portfolio Page"
 ### Project: Tutorium
 
 #### Overview:
-Tutorium is a desktop application for tuition centre administrative staff to conduct data analysis for the planning of marketing strategies. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Tutorium is a desktop application for tuition centre administrative staff to conduct data analysis for the planning of marketing strategies. The user interacts with it using a CLI, and it has a GUI created with JavaFX.
 
 Given below are my contributions to the project.
 
@@ -30,6 +30,7 @@ Given below are my contributions to the project.
         * Added a new section on the filter feature.
         * Fixed typo errors and grammatical mistakes throughout the User Guide.
     * Developer Guide:
+        * Updated the Model class diagram and the Storage class diagram.
         * Added activity diagrams and sequence diagrams for the filter feature.
         * Provided details on alternative implementations of the filter feature.
         * Updated user stories and use cases in Appendix: Requirements.
@@ -42,7 +43,7 @@ Given below are my contributions to the project.
 
 * **Review/mentoring contributions**:
     * Reviewed PRs created by Kam Jia Yue and other team members, providing feedback where appropriate.
-    * PRs merged and reviewed: 82, 100, 104, 107, 108, 110, 120, 121 and 122.
+    * PRs merged and reviewed include: 82, 100, 104, 107, 108, 110, 120, 121 and 122.
 
 * **Contributions beyond the project team**:
     * Reported bugs found in other teams' JAR files and User Guide during the PE Dry Run.
