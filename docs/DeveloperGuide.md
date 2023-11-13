@@ -1065,6 +1065,8 @@ effort to produce an eventual satisfactory and working UI that we were proud to 
 
    - Currently, the error message for user that key in multiple invalid keywords only spots the first invalid keyword.
      We are planning to allow the user to know all the invalid keywords that he/she has keyed in.
+   - Currently, the error message for filter command with duplicate fields only display the invalid field value error. We are
+     planning to allow the user to know that he/she has keyed in duplicate fields.
 
 6. Improve the message displayed when the user tries to perform an operation on an empty list
 
