@@ -29,11 +29,15 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 
 --------------------------------------------------------------------------------------------------------------------
 <!-- * Table of Contents to be removed after PDF conversion -->
+<div style="page-break-after: always;"></div>
+
 ## Table of Contents
 
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Quick Start
 
@@ -86,6 +90,8 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 
 [Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Terminologies / Symbols
 * Flag: A flag is a word starting with a dash "-" that is used to identify the type of information that is being provided e.g. -name.
 
@@ -98,6 +104,8 @@ This box denotes command outputs.
 ```
 
 [Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Notes on Command Format
 <box type="info" seamless>
@@ -123,6 +131,8 @@ This box denotes command outputs.
 
 [Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Other Notes
 <box type="warning" seamless>
 
@@ -137,6 +147,8 @@ This box denotes command outputs.
 </box>
 
 [Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Parameter Summary
 
@@ -161,6 +173,8 @@ This box denotes command outputs.
 [Back to Table of Contents](#table-of-contents)
  
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -237,6 +251,9 @@ Failure outputs:
     * Error: Should spell `subjects` instead of `subject`.
 * Input: `list students subjects,phone`
     * Error: Use space separation `subjects phone` for keywords instead of comma separation.
+
+<div style="page-break-after: always;"></div>
+
 ```Invalid command format!
   list: Displays the specified list, which can be a STUDENTS list, SCHEDULE list or TASKS list. Default command without specified list displays the schedule list. When specifying STUDENTS list, optional parameters can be used to specify what student details to display.
   Parameters: [LIST] [KEYWORDS]...
@@ -247,6 +264,7 @@ Failure outputs:
 
 [Back to Table of Contents](#table-of-contents)
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Show Feature
 
@@ -326,6 +344,7 @@ The lesson index provided is invalid
 
 [Back to Table of Contents](#table-of-contents)
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Add Feature
 
@@ -426,6 +445,7 @@ Usage: addLesson -name NAME (any number of unique [-subject|day|start|end VALUE]
  Note you must provide a 'name' not already in the schedule and 'start' must be before 'end'.
 ```
 
+<div style="page-break-after: always;"></div>
 
 #### For Task:
 
@@ -462,6 +482,7 @@ Example1: addtask 1 do homework
 
 [Back to Table of Contents](#table-of-contents)
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Delete Feature
 
@@ -505,6 +526,7 @@ deleteperson: Deletes the entry identified by the index number used in the displ
 Parameters: INDEX (must be a positive integer)
 Example: delete 1
  ```
+<div style="page-break-after: always;"></div>
 
 #### For Schedule:
 
@@ -593,6 +615,7 @@ Please use show lessonIndex before deleting task!
 
 [Back to Table of Contents](#table-of-contents)
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Edit Feature
 
@@ -715,6 +738,7 @@ Editing of 💼 ___TASKS list___ is not supported at this time!
 
 [Back to Table of Contents](#table-of-contents)
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Find Feature
 
@@ -788,6 +812,7 @@ Unknown command
 
 [Back to Table of Contents](#table-of-contents)
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Filter Feature
 
@@ -828,6 +853,8 @@ Invalid filter format: Names should only contain alphanumeric characters and spa
 Usage: filter (any number of unique -[name|subject|tag|remark] [value]). 
 For example, filter -name John -subject physics,english
 ```
+
+<div style="page-break-after: always;"></div>
 
 #### For Schedule:
 <box type="info" seamless>
@@ -896,6 +923,7 @@ Note you should only use one of -before, -on, -after at a time.
 
 [Back to Table of Contents](#table-of-contents)
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Link Feature
 
@@ -936,6 +964,7 @@ No such student with name alexxxx found
 
 **Tips:** `LESSON_NAME` is case-insensitive. This means that "CS2103T Lab" and "cs2103T lab" are treated as the same lesson.
 </box>     
+<div style="page-break-after: always;"></div>
 
 #### For Student:
 <box type="info" seamless>
@@ -988,6 +1017,7 @@ Note: This command is only available when a student is shown
 ```
 No such lesson
 ```
+<div style="page-break-after: always;"></div>
 
 #### For Schedule:
 <box type="info" seamless>
@@ -1044,6 +1074,7 @@ This feature is not used for tasks!
 
 [Back to Table of Contents](#table-of-contents)
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Navigate Feature
 
@@ -1130,6 +1161,7 @@ This feature is not used for tasks!
 
 [Back to Table of Contents](#table-of-contents)
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Command History Feature
 
@@ -1164,6 +1196,7 @@ Example usages:
 
 [Back to Table of Contents](#table-of-contents)
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Clearing Data
 
@@ -1238,6 +1271,8 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Command Summary
 
 | Action       | List                                    | Format                                                                                                                                    | Examples                                                                                                       | Remarks                                                                    |
@@ -1262,6 +1297,8 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 [Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Glossary
 
