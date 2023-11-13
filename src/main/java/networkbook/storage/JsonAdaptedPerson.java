@@ -201,7 +201,7 @@ class JsonAdaptedPerson implements JsonObject {
         try {
             return ParserUtil.parseCourseWithPrefixes(jsonCourse.getName());
         } catch (ParseException e) {
-            throw new IllegalValueException(Course.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(e.getMessage());
         }
     }
 
