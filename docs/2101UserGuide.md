@@ -5,7 +5,11 @@ title: User Guide
 ---
 ## CCACommander Ultra Promax Xtra 9000PLUS - User Guide
 
-![Logo](images/logo_removebg.png)
+<figure>
+    <img src="images/logo_removebg.png"
+         alt="CCACommander Logo"
+         style="display: block; margin: 0 auto">
+</figure>
 
 ## Introduction
 As a Co-curricular Activity (CCA) head, do you find yourself struggling to manage your CCA members’ attendance and record the array of events that your CCA has?
