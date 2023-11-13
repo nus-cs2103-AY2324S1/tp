@@ -32,13 +32,13 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/#/widget/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=authorship&tabAuthor=coderhuang559&tabRepo=AY2324S1-CS2103T-T10-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false&chartGroupIndex=36&chartIndex=1)
 
 * **Project management**:
-  * Managed releases `v1.3.0` - `v1.3.3` (4 releases) on GitHub
+  * Managed releases `v1.3.0` - `v1.4.1` (4 releases) on GitHub
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `remark` for contacts, `listtime` for contacts, `addmeeting` for groups and `deletetime` for groups. [\#144](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/145)
+    * Added documentation for the features `remark` for contacts, `listtime` for contacts, `addmeeting` for groups and `deletetime` for groups. [\#144](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/144)
   * Developer Guide:
-    * Added implementation details of the `remark` [\#270](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/270/files), `listtime` [\#270](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/270/files), and `addtime` [\#270](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/270/files) features.
+    * Added implementation details of the `remark`, `listtime` for person and group, `addtime`, and `addmeeting` features [\#270](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/270/files).
     * Added activity and sequence diagrams for the above functions.
 
 * **Contributions beyond project team**
