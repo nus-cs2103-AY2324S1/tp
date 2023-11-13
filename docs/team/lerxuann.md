@@ -43,23 +43,7 @@ Given below are my contributions to the project.
     * Added documentation for the features `add contact` and `delete contact`. [\#147](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/147)
     * Resolved inconsistencies in existing documentation in multiple features, including `delete contact`, `find contact` and `list`: [\#228](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/228)
   * Developer Guide:
-    * Added implementation details of the `delete contact` and `delete group` features. [\#116](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/116)
-
-[//]: # (* **Community**:)
-
-[//]: # (  * PRs reviewed &#40;with non-trivial review comments&#41;: [\#12]&#40;&#41;, [\#32]&#40;&#41;, [\#19]&#40;&#41;, [\#42]&#40;&#41;)
-
-[//]: # (  * Contributed to forum discussions &#40;examples: [1]&#40;&#41;, [2]&#40;&#41;, [3]&#40;&#41;, [4]&#40;&#41;&#41;)
-
-[//]: # (  * Reported bugs and suggestions for other teams in the class &#40;examples: [1]&#40;&#41;, [2]&#40;&#41;, [3]&#40;&#41;&#41;)
-
-[//]: # (  * Some parts of the history feature I added was adopted by several other class mates &#40;[1]&#40;&#41;, [2]&#40;&#41;&#41;)
-
-[//]: # (* **Tools**:)
-
-[//]: # (  * Integrated a third party library &#40;Natty&#41; to the project &#40;[\#42]&#40;&#41;&#41;)
-
-[//]: # (  * Integrated a new Github plugin &#40;CircleCI&#41; to the team repo)
+    * Added implementation details of the `delete`, `find`, `list` [\#265](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/265) and `listgroup` [\#268](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/268) features.
 
 * **Contributions beyond project team**
   * Meticulously reviewed other groups' works and provided feedback on potential bugs [here](https://github.com/lerxuann/ped).
