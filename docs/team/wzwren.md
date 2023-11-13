@@ -45,7 +45,9 @@ Given below are my contributions to the project.
     * Hyperlinked relevant sections in UG to the Glossary.
 
 * **Documentation for DG**:
+    * Update some outdated sections of the Architecture sections. 
     * Added implementation details for `Appointment`, `Predicate` and `Find` features.
+    * Update NFRs and Use Cases.
 
 * **Project management**:
   * Managed milestones `v1.2` and `v1.3` to keep it close to the deadline.
@@ -63,3 +65,7 @@ Given below are my contributions to the project.
       Examples include:
       * [JavaFX Config Errors by @JasonRay168](https://github.com/nus-cs2103-AY2324S1/forum/issues/122)
       * [Relative Path Issues by @zacwong2151](https://github.com/nus-cs2103-AY2324S1/forum/issues/153)
+      * [Activity Diagram Clarification by @AlagappanRa](https://github.com/nus-cs2103-AY2324S1/forum/issues/435)
+
+* **Tools**:
+  * Utilised Markbind CLI to preview PUML diagrams and web changes locally
