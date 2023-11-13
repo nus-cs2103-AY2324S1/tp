@@ -869,21 +869,74 @@ testers are expected to do more *exploratory* testing.
     2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+### Clearing data
+
+Command: `clear`
+1. Test case: `clear`<br>
+   Expected: All data is cleared.
+
+### Exiting ClubMembersContacts
+
+Command: `exit`
+1. Test case: `exit`<br>
+   Expected: The app exits, all data is saved.
+
+### Help
+
+Command: `help`
+1. Test case: `help`<br>
+   Expected: Help window pops up.
+2. Test case: Press the `F1` key<br>
+   Expected: Help window pops up.
+
+### Adding a member
+
 ### Deleting a member
 
-Deleting a member while all members are being shown
+### Editing a member
 
-1. Prerequisites: List all members using the `viewm` command. Multiple members in the list.
+### Finding a member
 
-2. Test case: `delm 1`<br>
-   Expected: First member is deleted from the list. Details of the deleted member shown in the status message.
-   Timestamp in the status bar is updated.
+### Viewing all members
 
-3. Test case: `delm 0`<br>
-   Expected: No member is deleted. Error details shown in the status message. Status bar remains the same.
+### Copy a member
 
-4. Other incorrect delete commands to try: `delm`, `dela`, `deletemember x`, `...` (where x is larger than the list size)<br>
-   Expected: Similar to previous.
+### Add member task
+
+### Delete member task
+
+### Adding an applicant
+
+Command: `adda` or `addapplicant`
+1. Adding a new applicant
+   1. Prerequisites: Existing list of applicants do not contain applicant with the same phone number
+   2. Test case: `adda /name John Doe /phone 91234567`<br>
+      Expected: A new applicant is added with the given name and phone number and the interview time is not set. 
+      The applicant is added to the last index of the applicant list. The applicant card will appear at the bottom 
+      of the list. The details of the added applicant will be shown in the success message.
+   3. Test case: `adda /name John Doe /phone 91234567 /interview 01/01/2024 1200`<br>
+      Expected: A new applicant is added with the given name, phone number and interview time. The applicant is
+      added to the last index of the applicant list. The applicant card will appear at the bottom of the list. The
+      details of the added applicant will be shown in the success message.
+2. Adding a duplicate applicant
+   1. Prerequisites: Existing list of applicants contain applicant with the same phone number
+   2. Test case: `adda /name John Doe /phone 91234567` then `adda /name Jack Do /phone 91234567`<br>
+      Expected: No applicant added because the applicant has the same phone number as an existing applicant. An error
+      message will be shown with the details.
+3. Adding an applicant while the applicant list is being filtered
+   1. Prerequisites: Filter the applicant list by keyword using the `finda` command.
+   2. Test case: Similar to test cases above
+      Expected: Similar to each respective test cases. The applicant list will remain filtered.
+
+### Deleting an applicant
+
+### Editing an applicant
+
+### Finding an applicant
+
+### Viewing all applicants
+
+### Copy an applicant
 
 --------------------------------------------------------------------------------------------------------------------
 
