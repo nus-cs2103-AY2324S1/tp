@@ -18,10 +18,22 @@ import seedu.classmanager.model.tag.Tag;
  */
 public class DeleteTagCommand extends TagCommand {
 
+    /**
+     * Creates an DeleteTagCommand to delete the specified {@code tags} from a student.
+     * @param studentNumber of the student in the filtered student list to edit their tags.
+     * @param tags of the student to be updated to.
+     */
     public DeleteTagCommand(StudentNumber studentNumber, Set<Tag> tags) {
         super(studentNumber, tags);
     }
 
+    /**
+     * Deletes certain tags from an existing student in Class Manager.
+     * @param model {@code Model} which the command should operate on.
+     * @param commandHistory The command history to record this command.
+     * @return A {@code CommandResult} with the feedback message of the operation result.
+     * @throws CommandException If an error occurs during command execution.
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         List<Student> lastShownList = model.getFilteredStudentList();
