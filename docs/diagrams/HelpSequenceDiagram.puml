@@ -1,0 +1,64 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ManageHrParser" as ManageHrParser LOGIC_COLOR
+participant ":helpCommandParser" as helpCommandParser LOGIC_COLOR
+participant "h:helpCommand" as HelpCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("help add")
+activate LogicManager
+
+LogicManager -> ManageHrParser : parseCommand("help add")
+activate ManageHrParser
+
+create helpCommandParser
+ManageHrParser -> helpCommandParser
+activate helpCommandParser
+
+helpCommandParser --> ManageHrParser
+deactivate helpCommandParser
+
+ManageHrParser -> helpCommandParser : parse("add")
+activate helpCommandParser
+
+create HelpCommand
+helpCommandParser -> HelpCommand
+activate HelpCommand
+
+HelpCommand --> ManageHrParser : checkCommandUsage(add)
+ManageHrParser --> HelpCommand : Pair(Usage, Example)
+HelpCommand --> helpCommandParser : h
+deactivate HelpCommand
+
+helpCommandParser --> ManageHrParser : h
+deactivate helpCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+helpCommandParser -[hidden]-> ManageHrParser
+destroy helpCommandParser
+
+ManageHrParser --> LogicManager : h
+deactivate ManageHrParser
+
+LogicManager -> HelpCommand : execute()
+activate HelpCommand
+
+create CommandResult
+HelpCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> CommandResult : display help window
+
+CommandResult --> HelpCommand
+deactivate CommandResult
+
+HelpCommand --> LogicManager : result
+deactivate HelpCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
