@@ -23,14 +23,14 @@ solution to manage your student details, including attendance records and assign
 - [4. Features](#4-features)
   - [4.1 Viewing Help](#41-viewing-help)
   - [4.2 Basic Course Management](#42-basic-course-management)
-    - [4.2.1 Creating an address book: `course create`](#421-creating-an-address-book--course-create)
-    - [4.2.2 Deleting an address book: `course delete`](#422-deleting-an-address-book--course-delete)
-    - [4.2.3 Switching an address book: `course switch`](#423-switching-an-address-book--course-switch)
-    - [4.2.4 Editing an address book: `course edit`](#424-editing-an-address-book--course-edit)
+    - [4.2.1 Creating an address book: `course create`](#421-creating-an-address-book-course-create)
+    - [4.2.2 Deleting an address book: `course delete`](#422-deleting-an-address-book-course-delete)
+    - [4.2.3 Switching an address book: `course switch`](#423-switching-an-address-book-course-switch)
+    - [4.2.4 Editing an address book: `course edit`](#424-editing-an-address-book-course-edit)
   - [4.3 Basic Student Management](#43-basic-student-management)
-    - [4.3.1 Adding a new contact: `add`](#431-adding-a-new-contact--add)
+    - [4.3.1 Adding a new contact: `add`](#431-adding-a-new-contact-add)
     - [4.3.2 Editing a contact : `edit`](#432-editing-a-contact--edit)
-    - [4.3.3 Marking attendance of student: `mark`](#433-marking-attendance-of-student--mark)
+    - [4.3.3 Marking attendance of student: `mark`](#433-marking-attendance-of-student-mark)
     - [4.3.4 Viewing summary of attendance : `list attendance`](#434-viewing-summary-of-attendance--list-attendance)
     - [4.3.5 Searching for student's contact via keyword : `find`](#435-searching-for-students-contact-via-keyword--find)
     - [4.3.6 Listing students : `list students`](#436-listing-students--list-students)
@@ -676,11 +676,13 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
-2. **Adding invalid and redundant prefixes** after commands will case TAvigator to intake the invalid prefix and its value as part of the command, causing the command to fail. The remedy is to remove the invalid and redundant prefixes.
+2. **Not adhering to format specified** for the commands currently may result in unexpected outcome/command to behave in-deterministically (I.e. Command fails/ adopts last value of redundant parameter). The workaround this known issue is to strictly stick to number and format of parameters specified in this UserGuide as mentioned in features.
 
-3. **Trying to use help command with no courses** will result in `Please create an address book using the create command first` message. You can create an address book using `course create course/COURSE_CODE` to work around this issue.
+3. **Adding invalid and redundant prefixes** after commands will case TAvigator to intake the invalid prefix and its value as part of the command, causing the command to fail. The remedy is to remove the invalid and redundant prefixes.
 
-4. **Viewing attendance records** may not return the attendance records in chronological order. This will be fixed in a future version!
+4. **Trying to use help command with no courses** will result in `Please create an address book using the create command first` message. You can create an address book using `course create course/COURSE_CODE` to work around this issue.
+
+5. **Viewing attendance records** may not return the attendance records in chronological order. This will be fixed in a future version!
 
 
 --------------------------------------------------------------------------------------------------------------------
