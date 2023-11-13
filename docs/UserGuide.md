@@ -9,11 +9,11 @@
 
 To all CS2103/T Teaching Assistants (TAs), 
 
-We understand your struggles in managing your students' information. We know it is difficult to keep track of your students' contact information, attendance, class participation and assignment grades. This is even more challenging when you teach multiple classes while juggling your schoolwork and other commitments.
+We understand your struggles in managing your students' information. We know it is difficult to keep track of your students' contact information, attendance, class participation, and assignment grades. This is even more challenging when you teach multiple classes while juggling your schoolwork and other commitments.
 
-This is why we are excited to introduce **Class Manager 2023**, an all-in-one application designed to streamline your class management duties. **Class Manager 2023** will help you to save time, streamline your TA duties and allow you to focus on what matters most - your students.
+This is why we are excited to introduce **Class Manager 2023**, an all-in-one application designed to streamline your class management duties. **Class Manager 2023** will help you to save time, streamline your TA duties, and allow you to focus on what matters most - your students.
 
-This user guide is your key to mastering **Class Manager 2023**, with step-by-step instructions on installing and using our application. **Class Manager 2023** is designed to be intuitive and easy to use, so you can get started immediately!
+This user guide is your key to mastering **Class Manager 2023**, with step-by-step instructions on installing and using our application. It aims to provide a head start to the new users as well as a reference to the advanced users. **Class Manager 2023** is designed to be intuitive and easy to use, so you can get started immediately!
 
 --------------------------------------------------------------------------------------------------------------------
 <!-- * Table of Contents to be removed after PDF conversion -->
@@ -28,7 +28,7 @@ This user guide is your key to mastering **Class Manager 2023**, with step-by-st
 **Class Manager 2023** is an offline desktop application for CS2103/T: Software Engineering Teaching Assistants (TAs) in National University of Singapore (NUS) to manage their students' contacts and class information.
 
 **Class Manager 2023** allows users to:
-* store and manage student's contact information,
+* store and manage students' contact information,
 * keep track of and visualise student's class information such as attendance, class participation and assignment grades,
 * easily mark the attendance of multiple students for each tutorial session,
 * and much more!
@@ -663,7 +663,17 @@ Format: `present s/STUDENT_NUMBER tut/TUTORIAL_INDEX`
 * The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**`config`**](#configure-class-manager-2023--config) command.
 
 Examples:
-* `present s/A0245234A tut/1`
+* `present s/A0245234A tut/2`
+
+The following image shows a successful execution of the `present s/A0245234A tut/2` command.
+
+<img src="images/present-success.png" alt="result for `present s/A0245234A tut/2" width="700" />
+
+<box type="info" seamless>
+
+**Note:** `absent`, `present-all`, and `absent-all` have similar success messages.
+
+</box>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -679,7 +689,7 @@ Format: `absent s/STUDENT_NUMBER tut/TUTORIAL_INDEX`
 * The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**`config`**](#configure-class-manager-2023--config) command.
 
 Examples:
-* `absent s/A0245234A tut/1`
+* `absent s/A0245234A tut/2`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -694,7 +704,7 @@ Format: `present-all tut/TUTORIAL_INDEX`
 * The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**`config`**](#configure-class-manager-2023-config) command.
 
 Examples:
-* `present-all tut/1`
+* `present-all tut/2`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -709,7 +719,7 @@ Format: `absent-all tut/TUTORIAL_INDEX`
 * The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**`config`**](#configure-class-manager-2023-config) command.
 
 Examples:
-* `absent-all tut/1`
+* `absent-all tut/2`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -842,10 +852,10 @@ Possible error and their corresponding message:
 ## Class information commands
 | Action                                                                                               | Format, Examples                                                                                                         |
 |------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
-| [**Mark a student as present**](#mark-a-student-as-present-present)                                  | `present s/STUDENT_NUMBER tut/TUTORIAL_SESSION` <br> e.g. `present s/A0245234A tut/1`                                    |
-| [**Mark a student as absent**](#mark-a-student-as-absent-absent)                                     | `absent s/STUDENT_NUMBER tut/TUTORIAL_SESSION` <br> e.g. `absent s/A0245234A tut/1`                                      |
-| [**Mark all displayed students as present**](#mark-all-displayed-students-as-present-present-all)    | `present-all tut/TUTORIAL_SESSION` <br> e.g. `present-all tut/1`                                                         |
-| [**Mark all displayed students as absent**](#mark-all-displayed-students-as-absent-absent-all)       | `absent-all tut/TUTORIAL_SESSION` <br> e.g. `absent-all tut/1`                                                           |
+| [**Mark a student as present**](#mark-a-student-as-present-present)                                  | `present s/STUDENT_NUMBER tut/TUTORIAL_SESSION` <br> e.g. `present s/A0245234A tut/2`                                    |
+| [**Mark a student as absent**](#mark-a-student-as-absent-absent)                                     | `absent s/STUDENT_NUMBER tut/TUTORIAL_SESSION` <br> e.g. `absent s/A0245234A tut/2`                                      |
+| [**Mark all displayed students as present**](#mark-all-displayed-students-as-present-present-all)    | `present-all tut/TUTORIAL_SESSION` <br> e.g. `present-all tut/2`                                                         |
+| [**Mark all displayed students as absent**](#mark-all-displayed-students-as-absent-absent-all)       | `absent-all tut/TUTORIAL_SESSION` <br> e.g. `absent-all tut/2`                                                           |
 | [**Record class participation for a student**](#record-class-participation-for-a-student-class-part) | `class-part s/STUDENT_NUMBER tut/TUTORIAL_SESSION part/PARTICIPATION` <br> e.g. `class-part s/A0245234A tut/1 part/true` |
 | [**Set assignment grade for a student**](#set-assignment-grade-for-a-student-grade)                  | `grade s/STUDENT_NUMBER a/ASSIGNMENT_NUMBER g/GRADE` <br> e.g. `grade s/A0245234A a/1 g/100`                             |
 | [**View a student's class information**](#view-a-student-s-class-information-view)                   | `view s/STUDENT_NUMBER` <br> e.g. `view s/A0245234A`                                                                     |
