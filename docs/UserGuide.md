@@ -135,10 +135,6 @@ This section of the User Guide will explain about each feature in detail.
 
 * Commands are **case-insensitive**.
 
-* Parameters can be in any order.  
-  For example, `adda /name Taylor Swift /phone 91961969` and `adda /phone 91691969 /name Taylor Swift` will result in
-  the same applicant added.
-
 * Words in UPPER_CASE are input parameters that you need to provide for that specific field.  
   For example, in `addm /name NAME`, `NAME` would be the input parameter for the member's name.
 
@@ -146,13 +142,17 @@ This section of the User Guide will explain about each feature in detail.
   For example, `adda /name Taylor Swift /phone 91961969` and `adda /phone 91691969 /name Taylor Swift` will result in
   the same applicant added.
 
+* Leading spaces in parameters are ignored.  
+  For example, `addm /name Taylor Swift /phone 91691969` is equivalent to `addm /name &nbsp;&nbsp;Taylor Swift /phone 91691969`.
+
 * Items with … after them can be used multiple times (1 or more).  
   For example, the `findm KEYWORD` command can be used to search 1 `KEYWORD` like `findm SWE`, or 2 `KEYWORD`s like `findm SWE Product`.
 
 * Fields in square brackets `[ ]` are optional fields.
+  In conjunction with …, this means that the field can appear 0 or more times.<br/>
   For example, `[/tag TAG]...` means the /tag parameter can be omitted, or used multiple times like `/tag SWE`, `/tag UIUX /tag Product`, etc.
 
-* For commands that do not take input parameters (e.g. `help`, `exit`), any input parameters provided will be ignored.
+* For commands that do not take input parameters (e.g. `help`, `exit`), any input parameters provided will be ignored.<br>
   For example, `help /name Taylor Swift` is equivalent to `help` and will still open the help window.
 
 * See [examples of fields](#58-examples-of-fields) for more examples of valid and invalid fields.
@@ -175,7 +175,7 @@ the full command word!
 
 ### 4.1 Member Features
 
-These are all the features in regard to a **member** in CMC.
+These are all the features regarding a **member** in CMC.
 
 #### 4.1.1 Adding a member: `addmember` or `addm`
 
@@ -190,13 +190,13 @@ The alias for this command is `addm`.
 
 :information_source: **Notes about input parameter:**
 
-* `MEMBER_NAME`: Only alphabetical characters, spaces, @, (), /, are allowed. This field should not be blank.
+* `MEMBER_NAME`: Only alphabetical characters, spaces, @, (), /, are allowed.
   <br/>
 * `PHONE_NUMBER`: Only numbers are allowed. At least 3 digits are required.
   <br/>
 * `EMAIL`: The email has to follow localpart@domain format. See [email format](#54-email-format) for more details.
   <br/>
-* `TELEGRAM_HANDLE`: Starting character of @ is required. Only alphanumeric characters and underscore are allowed.
+* `TELEGRAM_HANDLE`: Starting character of @ is required. Only alphanumeric characters and underscores are allowed.
   Minimum of 5 and maximum of 32 characters are allowed.
   <br/>
 * `TAG`: Only alphanumeric characters are allowed. Minimum of 1 and maximum of 15 characters are allowed. Spaces are not allowed.
@@ -271,7 +271,7 @@ The alias for this command is `viewm`.
 
 <h5>Example of usage</h5>
 
-`viewmembers`
+`viewm`
 
 Generates a list of all existing member(s).
 
@@ -294,13 +294,15 @@ The alias for this command is `editm`.
 
 Even though all the fields are optional, **at least one field** has to be specified for the command to work.
 
-* `MEMBER_NAME`: Only alphabetical characters, spaces, @, (), /, are allowed. This field should not be blank.
+* `MEMBER_INDEX`: Only positive integers are allowed. This will be based on the current **shown** list. If `MEMBER_INDEX` is negative or 0, or the member does not exist in the list, this command will throw an error.
+  <br/>
+* `MEMBER_NAME`: Only alphabetical characters, spaces, @, (), /, are allowed.
   <br/>
 * `PHONE_NUMBER`: Only numbers are allowed. At least 3 digits are required.
   <br/>
 * `EMAIL`: The email has to follow localpart@domain format. See [email format](#54-email-format) for more details.
   <br/>
-* `TELEGRAM_HANDLE`: Starting character of @ is required. Only alphanumeric characters and underscore are allowed.
+* `TELEGRAM_HANDLE`: Starting character of @ is required. Only alphanumeric characters and underscores are allowed.
   Minimum of 5 and maximum of 32 characters are allowed.
   <br/>
 * `TAG`: Only alphanumeric characters are allowed. Minimum of 1 and maximum of 15 characters are allowed. Spaces are not allowed.
@@ -324,9 +326,9 @@ Even though all the fields are optional, **at least one field** has to be specif
 
 <h5>Example of usage</h5>
 
-`editm 1 /name Taylor Swift /email taylorswift@era.tour /tele @tswift`
+`editm 4 /name Taylor Swift /email taylorswift@era.tour /tele @tswift`
 
-This edits the particulars of the member at `MEMBER_INDEX` 1 in the member list. The member's name is changed to `Taylor Swift`, email
+This edits the particulars of the member at `MEMBER_INDEX` 4 in the member list. The member's name is changed to `Taylor Swift`, email
 to `taylorswift@era.tour`, and telegram handle to `@tswift`.
 
 ![Edit_Member](images/editMember.png)
@@ -372,7 +374,7 @@ Copies the details of the member at the specified index to the clipboard.
 
 <h5>Format</h5>
 
-`copyMember MEMBER_INDEX`<br/>
+`copymember MEMBER_INDEX`<br/>
 The alias for this command is `cpm`.
 
 <div markdown="span" class="alert alert-primary">
@@ -386,7 +388,7 @@ will be based on the current **shown** list. If `MEMBER_INDEX` is negative or 0,
 
 `cpm 4`
 
-This copies the details of the member at index 1 to the clipboard.
+This copies the details of the member at index 4 to the clipboard.
 
 ![Copy_Member](images/copyMember.jpg)
 
@@ -407,16 +409,16 @@ Tasks:
 Adds a task to the top of the task list of the specified member.
 
 <h5>Format</h5>
-`addtask MEMBER_INDEX /task TASK_NAME` <br/>
+`addtask MEMBER_INDEX /task TASK_DESCRIPTION` <br/>
 The alias for this command is `addt`.
 
 <div markdown="block" class="alert alert-primary">
 
 :information_source: **Notes about input parameter:**
 
-* `MEMBER_INDEX`: Only positive integers that are within the member list are accepted.
+* `MEMBER_INDEX`: Only positive integers that are within the member list are accepted. If `MEMBER_INDEX` is negative or 0, or the member does not exist in the list, this command will throw an error.
   <br/>
-* `TASK_NAME`: Accepts alphanumeric characters, spaces and #. Should not be blank.
+* `TASK_DESCRIPTION`: Only accepts alphanumeric characters, spaces and #.
 
 </div>
 
@@ -468,7 +470,7 @@ The alias for this command is `delt`.
 
 :information_source: **Notes about input parameter:**
 
-* `MEMBER_INDEX`: Only positive integers that are within the member list are accepted.
+* `MEMBER_INDEX`: Only positive integers that are within the member list are accepted. If `MEMBER_INDEX` is negative or 0, or the member does not exist in the list, this command will throw an error.
   <br/>
 * `TASK_INDEX`: Only positive integers that are within the task list are accepted.
 
@@ -486,7 +488,7 @@ This deletes the task at `TASK_INDEX` 2, for the member at `MEMBER_INDEX` 2.
 
 ### 4.2 Applicant Features
 
-These are all the features in regard to an **applicant** in CMC.
+These are all the features regarding an **applicant** in CMC.
 
 #### 4.2.1 Adding an applicant: `addapplicant` or `adda`
 
@@ -501,9 +503,9 @@ The alias for this command is `adda`.
 
 :information_source: **Notes about input parameter:**
 
-- `APPLICANT_NAME`: Only alphabetical characters, spaces, @, (), / are allowed. Should not be blank.<br/>
+- `APPLICANT_NAME`: Only alphabetical characters, spaces, @, (), / are allowed.<br/>
 - `PHONE_NUMBER`: Only numbers are allowed. At least 3 digits are required.
-- `INTERVIEW_TIME`: Only dates in the format of “DD/MM/YYYY HHmm” are allowed. This field is optional.
+- `INTERVIEW_TIME`: Only dates in the format of “DD/MM/YYYY HHmm” between 01/01/2000 0000 and 31/12/9999 0000 are allowed.
 
 </div>
 
@@ -569,7 +571,7 @@ You may check out the command [here](#423-viewing-applicants-viewapplicants-or-v
 #### 4.2.3 Viewing applicants: `viewapplicants` or `viewa`
 
 Generates a list of all existing applicant(s). An example of where you might want to use this command is if
-you want to go back to viewing all members after a search with [`findapplicant`](#422-finding-applicants-findapplicant-or-finda).
+you want to go back to viewing all applicants after a search with [`findapplicant`](#422-finding-applicants-findapplicant-or-finda).
 
 <h5>Format</h5>
 
@@ -601,21 +603,21 @@ The alias for this command is `edita`.
 
 Even though all the fields are optional, **at least one field** has to be specified for the command to work.
 
-* `APPLICANT_INDEX`: Only positive integers are allowed. This will be based on the current **shown** list.
+* `APPLICANT_INDEX`: Only positive integers are allowed. This will be based on the current **shown** list. If `APPLICANT_INDEX` is negative or 0, or the applicant does not exist in the list, this command will throw an error.
   <br/>
-* `APPLICANT_NAME`: Only alphabetical characters, spaces, @, (), / are allowed. Should not be blank.
+* `APPLICANT_NAME`: Only alphabetical characters, spaces, @, (), / are allowed.
   <br/>
 * `PHONE_NUMBER`: Only numbers are allowed. At least 3 digits are required.
   <br/>
-* `INTERVIEW_TIME`: Only dates in the format of “DD/MM/YYYY HHmm” are allowed. To remove an interview time from an
-  applicant, ‘cancel’ is also allowed.
+* `INTERVIEW_TIME`: Only dates in the format of “DD/MM/YYYY HHmm” between 01/01/2000 0000 and 31/12/9999 0000 are allowed. To remove an interview time from an
+  applicant, ‘cancel’ (case-sensitive) is also allowed.
 
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **CAUTION:**
 
-You will not be allowed to edit a member's `PHONE_NUMBER` to a `PHONE_NUMBER` that is registered under a different member.
-The `PHONE_NUMBER` will have to be **unique**, or it will be flagged by the system as a duplicate member.
+You will not be allowed to edit an applicant's `PHONE_NUMBER` to a `PHONE_NUMBER` that is registered under a different applicant.
+The `PHONE_NUMBER` will have to be **unique**, or it will be flagged by the system as a duplicate applicant.
 
 </div>
 
@@ -625,14 +627,14 @@ The `PHONE_NUMBER` will have to be **unique**, or it will be flagged by the syst
 
 1. `edita 2 /name Alfred /interview 7/1/2023 1500`
 
-    This edits the particulars of the applicant at `APPLICANT_INDEX` 1 in the applicant list. The applicant's name is changed to `Alfred`,
+    This edits the particulars of the applicant at `APPLICANT_INDEX` 2 in the applicant list. The applicant's name is changed to `Alfred`,
 and the interview time has been set to `7 January 2023 3:00pm`.
 
     ![edit_applicant](images/editApplicant.png)
 
 2. `edita 2 /name Alfred /interview cancel`
 
-    This edits the particulars of the applicant at `APPLICANT_INDEX` 1 in the applicant list. The applicant's name is changed to `Alfred`,
+    This edits the particulars of the applicant at `APPLICANT_INDEX` 2 in the applicant list. The applicant's name is changed to `Alfred`,
 and the interview has been cancelled and removed.
 
 <div style="page-break-after: always;"></div>
@@ -664,7 +666,7 @@ will be based on the current **shown** list. If `APPLICANT_INDEX` is negative or
 
 `dela 3`
 
-This deletes the applicant at `APPLICANT_INDEX` 1 in the list of applicants.
+This deletes the applicant at `APPLICANT_INDEX` 3 in the list of applicants.
 
 ![Delete_Applicant](images/deleteApplicant.png)
 
@@ -687,9 +689,9 @@ based off the current **shown** list. If `APPLICANT_INDEX` is negative or 0, or 
 
 <h5>Example of usage</h5>
 
-`cpa 1`
+`cpa 3`
 
-This copies the details of the applicant at `APPLICANT_INDEX` 1 to the clipboard.
+This copies the details of the applicant at `APPLICANT_INDEX` 3 to the clipboard.
 
 ![Copy_Applicant](images/copyApplicant.jpg)
 
@@ -744,7 +746,7 @@ There will be no prompt to confirm this action.
 
 - Name:
   - Only alphabetical characters, spaces, @, (), / are allowed.
-  - First character of the name should not be a space.
+  - Leading spaces will be ignored.
 
 ### 5.3 `PHONE_NUMBER` format
 
@@ -771,7 +773,7 @@ There will be no prompt to confirm this action.
 
 - Handle:
     - Must start with the "@" symbol.
-    - Only alphanumerical characters and underscore "_" are allowed.
+    - Only alphanumerical characters and underscores "_" are allowed.
     - Must be between 5 and 32 characters long (inclusive).
 
 ### 5.6 `TAG` format
@@ -783,8 +785,8 @@ There will be no prompt to confirm this action.
 
 ### 5.7 `INTERVIEW_TIME` format
 - Interview Time:
-  - Only dates in the format of “DD/MM/YYYY HHmm” are allowed. 
-  - To remove an interview time from an applicant, ‘cancel’ is also allowed.
+  - Only dates in the format of “DD/MM/YYYY HHmm” between 01/01/2000 0000 and 31/12/9999 0000 are allowed. 
+  - To remove an interview time from an applicant, ‘cancel’ (case-sensitive) is also allowed.
 
 <div style="page-break-after: always;"></div>
 
@@ -796,7 +798,7 @@ There will be no prompt to confirm this action.
 | **NAME**            | `Rui Jia (MR)` `J@mes` `James s/o John` `Jonas Jr the 3rd` | `Sally-Ong` `Dark_Knight`                                                                                 |
 | **PHONE_NUMBER**    | `123` `91223294` `88299188282839`                          | `1` `12` `9239189a` `9838@-_.`                                                                            |
 | **EMAIL**           | `a@xy` `John_Lim@gmail.com` `alicia@g-mail.com`            | `a@x` `a@x.y` `_Zann@gmail.com` `Alfred@-xy.com` `Rui_Jia@hotmail-.com` `DarkKnight!@xyz`                 |
-| **TELEGRAM_HANDLE** | `@Win_Sheng` `@Jon4s` `@1234` `@abc_`                      | `Win_Sheng` `@123` `@Jon4s!` `@Rui Jia` <br/> `@this_is_32_characters_long_abcd`                          |
+| **TELEGRAM_HANDLE** | `@Win_Sheng` `@Jon4s` `@12345`                             | `Win_Sheng` `@123` `@Jon4s!` `@Rui Jia` <br/> `@this_is_33_characters_long_abcdef`                        |
 | **TAG**             | `Experienced` `Staff`                                      | `Friend$_$` `16characterslong`                                                                            |
 | **INTERVIEW_TIME**  | `01/12/2023 1430` `15/05/2022 0915` `cancel`               | `2023-12-01 14:30` `01/12/23 1430` `01/Dec/2023 1430` `01/12/2023 3:30 PM` `15/05/2022` `Cancel` `CANCEL` |
 
@@ -849,28 +851,28 @@ This is a quick summary of all the commands available in CMC.
 
 | Action                               | Format                                                                                                                                                                                                                             | Example(s)                                                                                                                                                                       |
 |--------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Member**                       | `addMember /name NAME /phone PHONE_NUMBER /email EMAIL /tele TELEGRAM_HANDLE [/tag TAG]...`  <br/> <br/>  `addm /name NAME /phone PHONE_NUMBER /email EMAIL /tele TELEGRAM_HANDLE [/tag TAG]...`                                   | `addm /name Alicia /phone 92345678 /email alicia@gmail.com /tele @Alicia`  <br/> <br/> `addMember /name Jonas /phone 99933325 /email jonas@outlook.com /tele @jonasong /tag SWE` |
-| **Delete Member**                    | `deleteMember MEMBER_INDEX` <br/> <br/> `delm MEMBER_INDEX`                                                                                                                                                                        | `deleteMember 1` <br/> <br/> `delm 1`                                                                                                                                            |
-| **Edit Member**                      | `editMember MEMBER_INDEX [/name NAME] [/phone PHONE_NUMBER] [/email EMAIL] [/tele TELEGRAM_HANDLE] [/tag TAG]...` <br/> <br/>`editm MEMBER_INDEX [/name NAME] [/phone PHONE] [/email EMAIL] [/tele TELEGRAM_HANDLE] [/tag TAG]...` | `editm 1 /name Alicia /phone 99126291`  <br/> <br/> `editm 1 /email aliciateng@gmail.com`                                                                                        |
-| **Find Member(s)**                   | `findMember KEYWORD...` <br/> <br/> `findm KEYWORD...`                                                                                                                                                                             | `findm Alicia` <br/> <br/> `findm John 92345678` <br/> <br/> `findMember Designer`                                                                                               |
-| **View Member(s)**                   | `viewMembers` <br/> <br/> `viewm`                                                                                                                                                                                                  |                                                                                                                                                                                  |
-| **Add Task to Member**               | `addTask MEMBER_INDEX /task TASK_DESCRIPTION` <br/> <br/> `addt MEMBER_INDEX /task TASK_DESCRIPTION`                                                                                                                               | `addTask 2 /task Design Poster` <br/> <br/> `addt 3 /task Meet Product Team`                                                                                                     |
-| **View Task(s) of Member**           | `viewTask MEMBER_INDEX` <br/> <br/> `viewt MEMBER_INDEX`                                                                                                                                                                           | `viewTask 2` <br/> <br/> `viewt 5`                                                                                                                                               |
-| **Delete Task from Member**          | `deleteTask MEMBER_INDEX /task TASK_INDEX` <br/> <br/> `delt MEMBER_INDEX /task TASK_INDEX`                                                                                                                                        | `deleteTask 2 /task 4` <br/> <br/> `delt 1 /task 10`                                                                                                                             |
+| **Add Member**                       | `addmember /name NAME /phone PHONE_NUMBER /email EMAIL /tele TELEGRAM_HANDLE [/tag TAG]...`  <br/> <br/>  `addm /name NAME /phone PHONE_NUMBER /email EMAIL /tele TELEGRAM_HANDLE [/tag TAG]...`                                   | `addm /name Alicia /phone 92345678 /email alicia@gmail.com /tele @Alicia`  <br/> <br/> `addmember /name Jonas /phone 99933325 /email jonas@outlook.com /tele @jonasong /tag SWE` |
+| **Delete Member**                    | `deletemember MEMBER_INDEX` <br/> <br/> `delm MEMBER_INDEX`                                                                                                                                                                        | `deletemember 1` <br/> <br/> `delm 1`                                                                                                                                            |
+| **Edit Member**                      | `editmember MEMBER_INDEX [/name NAME] [/phone PHONE_NUMBER] [/email EMAIL] [/tele TELEGRAM_HANDLE] [/tag TAG]...` <br/> <br/>`editm MEMBER_INDEX [/name NAME] [/phone PHONE] [/email EMAIL] [/tele TELEGRAM_HANDLE] [/tag TAG]...` | `editm 1 /name Alicia /phone 99126291`  <br/> <br/> `editm 1 /email aliciateng@gmail.com`                                                                                        |
+| **Find Member(s)**                   | `findmember KEYWORD...` <br/> <br/> `findm KEYWORD...`                                                                                                                                                                             | `findm Alicia` <br/> <br/> `findm John 92345678` <br/> <br/> `findmember Designer`                                                                                               |
+| **View Member(s)**                   | `viewmembers` <br/> <br/> `viewm`                                                                                                                                                                                                  |                                                                                                                                                                                  |
+| **Add Task to Member**               | `addtask MEMBER_INDEX /task TASK_DESCRIPTION` <br/> <br/> `addt MEMBER_INDEX /task TASK_DESCRIPTION`                                                                                                                               | `addtask 2 /task Design Poster` <br/> <br/> `addt 3 /task Meet Product Team`                                                                                                     |
+| **View Task(s) of Member**           | `viewtask MEMBER_INDEX` <br/> <br/> `viewt MEMBER_INDEX`                                                                                                                                                                           | `viewtask 2` <br/> <br/> `viewt 5`                                                                                                                                               |
+| **Delete Task from Member**          | `deletetask MEMBER_INDEX /task TASK_INDEX` <br/> <br/> `delt MEMBER_INDEX /task TASK_INDEX`                                                                                                                                        | `deletetask 2 /task 4` <br/> <br/> `delt 1 /task 10`                                                                                                                             |
 | **Copy Member Details to Clipboard** | `copymember MEMBER_INDEX` <br/> <br/> `cpm MEMBER_INDEX`                                                                                                                                                                           | `copymember 5` <br/> <br/> `cpm 5`                                                                                                                                               |
 
 <div style="page-break-after: always;"></div>
 
 ### 8.2 Applicant Command Summary
 
-| Action                               | Format                                                                                                                                                                                           | Example(s)                                                                                                                                                  |
-|--------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Applicant**                    | `addApplicant /name NAME /phone PHONE_NUMBER [/interview INTERVIEW_TIME]` <br/> <br/> `adda /name NAME /phone PHONE_NUMBER [/interview INTERVIEW_TIME]`                                          | `addApplicant /name Jonas /phone 91238932 /interview 15/06/2023` <br/> <br/> `adda /name Alicia /phone 92345678`                                            |
-| **Delete Applicant**                 | `deleteApplicant APPLICANT_INDEX` <br/> <br/> `dela APPLICANT_INDEX`                                                                                                                             | `deleteApplicant 3` <br/> <br/> `dela 1`                                                                                                                    |
-| **Edit Applicant**                   | `editApplicant APPLICANT_INDEX [/name NAME] [/phone PHONE_NUMBER] [/interview INTERVIEW_TIME` <br/> <br/>  `edita APPLICANT_INDEX [/name NAME] [/phone PHONE_NUMBER] [/interview INTERVIEW_TIME` | `editApplicant 1 /name John` <br/> <br/> `edita 1 /interview 07/01/2003 1500` <br/><br/> `edita 1 /name Aliciaa /phone 12345678 /interview 10/12/2023 1150` |
-| **Find Applicant(s)**                | `findApplicant KEYWORD...` <br/><br/> `finda KEYWORD...`                                                                                                                                         | `finda Alicia` <br/><br/> `finda John 92345678`                                                                                                             |
-| **View Applicant(s)**                | `viewApplicants` <br/><br/> `viewa`                                                                                                                                                              |                                                                                                                                                             |
-| **Copy Member Details to Clipboard** | `copyapplicant APPLICANT_INDEX` <br/> <br/> `cpa APPLICANT_INDEX`                                                                                                                                | `copyapplicant 2` <br/> <br/> `cpa 7`                                                                                                                       |
+| Action                               | Format                                                                                                                                                                                            | Example(s)                                                                                                                                               |
+|--------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Applicant**                    | `addapplicant /name NAME /phone PHONE_NUMBER [/interview INTERVIEW_TIME]` <br/> <br/> `adda /name NAME /phone PHONE_NUMBER [/interview INTERVIEW_TIME]`                                           | `addapplicant /name Jonas /phone 91238932 /interview 15/06/2023` <br/> <br/> `adda /name Alicia /phone 92345678`                                         |
+| **Delete Applicant**                 | `deleteapplicant APPLICANT_INDEX` <br/> <br/> `dela APPLICANT_INDEX`                                                                                                                              | `deleteapplicant 3` <br/> <br/> `dela 1`                                                                                                                 |
+| **Edit Applicant**                   | `editapplicant APPLICANT_INDEX [/name NAME] [/phone PHONE_NUMBER] [/interview INTERVIEW_TIME]` <br/> <br/>  `edita APPLICANT_INDEX [/name NAME] [/phone PHONE_NUMBER] [/interview INTERVIEW_TIME` | `editapplicant 1 /name John` <br/> <br/> `edita 1 /interview 7/1/2003 1500` <br/><br/> `edita 1 /name Alyssa /phone 12345678 /interview 10/12/2023 1150` |
+| **Find Applicant(s)**                | `findapplicant KEYWORD...` <br/><br/> `finda KEYWORD...`                                                                                                                                          | `finda Alicia` <br/><br/> `finda John 92345678`                                                                                                          |
+| **View Applicant(s)**                | `viewapplicants` <br/><br/> `viewa`                                                                                                                                                               |                                                                                                                                                          |
+| **Copy Member Details to Clipboard** | `copyapplicant APPLICANT_INDEX` <br/> <br/> `cpa APPLICANT_INDEX`                                                                                                                                 | `copyapplicant 2` <br/> <br/> `cpa 7`                                                                                                                    |
 
 ### 8.3 General Command Summary
 

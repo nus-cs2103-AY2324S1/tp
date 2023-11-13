@@ -72,4 +72,5 @@ Below is a summary of my contributions to the project.
         * [Pull Request #270](https://github.com/AY2324S1-CS2103T-W15-3/tp/pull/270)
         * [Pull Request #271](https://github.com/AY2324S1-CS2103T-W15-3/tp/pull/271)
 * Contributions beyond the project team:
-    * to be added soon
+    * Gave timely reminders to deadlines and helped to ensure the team was on track
+    * Regularly reminded team members to update the issue tracker and to close issues that were resolved

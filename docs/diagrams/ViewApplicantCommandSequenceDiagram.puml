@@ -32,7 +32,7 @@ deactivate AddressBookParser
 LogicManager -> ViewApplicantCommand : execute()
 activate ViewApplicantCommand
 
-ViewApplicantCommand -> Model : updateFilteredApplicantList()
+ViewApplicantCommand -> Model : updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS)
 activate Model
 
 Model --> ViewApplicantCommand

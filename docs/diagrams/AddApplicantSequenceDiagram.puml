@@ -50,7 +50,7 @@ deactivate AddressBookParser
 LogicManager -> AddApplicantCommand : execute
 activate AddApplicantCommand
 
-AddApplicantCommand -> Model : addApplicant
+AddApplicantCommand -> Model : addApplicant(applicant)
 activate Model
 
 Model --> AddApplicantCommand
