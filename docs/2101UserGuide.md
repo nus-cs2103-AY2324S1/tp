@@ -23,9 +23,6 @@ layout: page
 
 <br>
 <br>
-<figure>
-
-</figure>
 
 <div style="page-break-after: always;"></div>
 
@@ -35,6 +32,7 @@ layout: page
 {:toc}
 
 <div style="page-break-after: always;"></div>
+
 ## Introduction
 As a Co-curricular Activity (CCA) head, do you find yourself struggling to manage your CCA members’ attendances and record the array of events that your CCA has?
 Are the heaps of spreadsheets you are using to manage them making you feel overwhelmed? Well, fear not, **CCACommander Ultra Promax Xtra 9000PLUS** is here to save the day!
@@ -104,6 +102,7 @@ This guide uses the following features to make it easier for you to navigate aro
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
+
 ## Navigating User Interface
 <figure>
     <img src="images/ui_breakdown.png"
@@ -115,11 +114,10 @@ Here are the important components of CCACommander that you will use and interact
 **Menu**: The CCACommander menu is located at the top-left corner of your screen. Click the sub-menu items to execute the following:
 1. File: Exit the program
 2. Theme: Toggle between light and dark themes
-
-    Light | Dark
-    --------|--------
-    ![LightTheme](images/light_theme.png) | ![DarkTheme](images/dark_theme.png)
-
+    <figure>
+        <img src="images/light_dark_theme.png">
+        <figcaption>Fig 3: Light and dark theme</figcaption>
+   </figure>
 3. Help: Access our user guide
 
 **Command Box**: Type in your text commands. <br>
@@ -145,6 +143,7 @@ Upon entering the <kbd>⌫ Backspace</kbd> or the <kbd>↵ Enter</kbd> key, user
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
+
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -175,6 +174,7 @@ Upon entering the <kbd>⌫ Backspace</kbd> or the <kbd>↵ Enter</kbd> key, user
 <hr class="feature-class-separator">
 
 <div style="page-break-after: always;"></div>
+
 ### Member Commands
 The vitality of a CCA lies in its members. CCACommander allows you to manage your members with the commands below:
 
@@ -191,7 +191,7 @@ Here is an example command where we create a member **named** "Lim Jun Jie" with
 <figure>
     <img src="images/createMemberPostCommand.png"
          alt="createMember Post Command">
-    <figcaption>Fig 3: After executing the <code>createMember</code> command</figcaption>
+    <figcaption>Fig 4: After executing the <code>createMember</code> command</figcaption>
 </figure>
 
 <hr class="command-separator">
@@ -211,6 +211,7 @@ Here is an example command where we edit the member at **index** 1, changing the
 `editMember 1 p/91234567 e/johndoe@example.com`
 
 <hr class="command-separator">
+
 #### Delete a Member : `deleteMember`
 
 If a member leaves your CCA, get over the disappointment by swiftly removing them from CCACommander using the `deleteMember` command!
@@ -229,6 +230,7 @@ Here is an example command where we delete the member at **index** 1:
 <hr class="feature-class-separator">
 
 <div style="page-break-after: always;"></div>
+
 ### Event Commands
 
 As a CCA head, keeping track of event details is a major responsibility. CCACommander allows you to do so with the event-related commands below:
@@ -248,12 +250,13 @@ Here is an example command where we create an event **named** "Party" held at th
 <figure>
     <img src="images/CreateEventPostCommand.png"
          alt="createEvent Post Command">
-    <figcaption>Fig 4: After executing the <code>createEvent</code> command</figcaption>
+    <figcaption>Fig 5: After executing the <code>createEvent</code> command</figcaption>
 </figure>
 
 <hr class="command-separator">
 
 <div style="page-break-after: always;"></div>
+
 #### Edit an Event : `editEvent`
 
 If you forget to note any important details, or realise that you made a mistake in any field of the event created,
@@ -289,6 +292,7 @@ Here is an example command where we delete the event at **index** 1:
 <hr class="feature-class-separator">
 
 <div style="page-break-after: always;"></div>
+
 ### Enrolment Commands
 
 Enrolments are a way for you to manage your members’ involvements in your events. The enrolment commands below are the bread-and-butter for your participation tracking needs:
@@ -341,6 +345,7 @@ Here is an example command where we unenrol the member at **member index** 1 fro
 <hr class="feature-class-separator">
 
 <div style="page-break-after: always;"></div>
+
 ### View Commands
 In CCACommander, you can quickly change the view to fit your current use case, be it to check for the enrolment of an event, 
 searching for a member and more!
@@ -359,13 +364,13 @@ Here is an example command where we want to view the events in which the **membe
 <figure>
     <img src="images/viewMemberPreCommand.png"
          alt="viewMember Pre Command">
-    <figcaption>Fig 5: Before executing the <code>viewMember</code> command</figcaption>
+    <figcaption>Fig 6: Before executing the <code>viewMember</code> command</figcaption>
 </figure>
 <br>
 <figure>
     <img src="images/viewMemberPostCommand.png"
          alt="viewMember Post Command">
-    <figcaption>Fig 6: After executing the <code>viewMember</code> command</figcaption>
+    <figcaption>Fig 7: After executing the <code>viewMember</code> command</figcaption>
 </figure>
 
 <hr class="command-separator">
@@ -384,13 +389,13 @@ Here is an example command where we want to view the members that the **event** 
 <figure>
     <img src="images/viewEventPreCommand.png"
          alt="viewEvent Pre Command">
-    <figcaption>Fig 7: Before executing the <code>viewEvent</code> command</figcaption>
+    <figcaption>Fig 8: Before executing the <code>viewEvent</code> command</figcaption>
 </figure>
 <br>
 <figure>
     <img src="images/viewEventPostCommand.png"
          alt="viewEvent Post Command">
-    <figcaption>Fig 8: After executing the <code>viewEvent</code> command</figcaption>
+    <figcaption>Fig 9: After executing the <code>viewEvent</code> command</figcaption>
 </figure>
 
 <hr class="command-separator">
@@ -502,7 +507,7 @@ Here’s how you can use it:<br>
 <figure>
     <img src="images/helpWindow.png"
          alt="Help Window">
-    <figcaption>Fig 9: A help pop-up window will appear upon entering the <code>help</code> command</figcaption>
+    <figcaption>Fig 10: A help pop-up window will appear upon entering the <code>help</code> command</figcaption>
 </figure>
 
 <hr class="command-separator">
@@ -569,23 +574,23 @@ This glossary provides definitions for the special terms used in this user guide
 
 Action | Format, Examples
 --------|------------------
-**Create a Member** | `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` <br> e.g. `createMember n/CHU WEI RONG g/Male p/98765432 e/chuweirongrocks@gmail.com a/19 Kent Ridge Crescent, Singapore 119278 t/Leader`
-**Edit a Member** | `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` <br> e.g.`editMember 1 a/One North`
+[**Create a Member**](#create-a-member) | `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` <br> e.g. `createMember n/Lim Jun Jie g/Male p/83498018 e/limjunjie@gmail.com a/19 Kent Ridge Crescent, Singapore 119278 t/publicity`
+**Edit a Member** | `editMember MEMBER_INDEX [n/MEMBER_NAME] [g/GENDER] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` <br> e.g.`editMember 1 p/91234567 e/johndoe@example.com`
 **Delete a Member** | `deleteMember MEMBER_INDEX` <br> e.g.`deleteMember 1`
-**Create an Event** | `createEvent n/EVENT_NAME [l/LOCATION] [d/DATE] [t/TAG]...` <br> e.g.`createEvent n/Party l/Raffles Hall d/2023-09-16 t/Fun`
-**Edit an Event** | `editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]...` <br> e.g. `editEvent 5 n/Halloween Surprise Party l/UTR d/2023-10-31 t/sem1`
+**Create an Event** | `createEvent n/EVENT_NAME [l/LOCATION] [d/DATE] [t/TAG]...` <br> e.g.`createEvent n/Party l/Raffles Hall d/2023-09-16 t/Dinner t/Sem1`
+**Edit an Event** | `editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]...` <br> e.g. `editEvent 1 l/MBS d/2023-10-20`
 **Delete an Event** | `deleteEvent EVENT_INDEX` <br> e.g.`deleteEvent 1`
-**Enrol ember to an event** | `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g.`enrol m/1 e/5 h/3 r/did planning`
-**Edit an enrolment** | `editEnrolment m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g. `editEnrolment m/1 e/1 h/0 r/Absent due to Covid`
-**Unenrol member from an event** | `unenrol m/MEMBER_INDEX e/EVENT_INDEX` <br> e.g.`unenrol m/1 e/5`
-**View members of event** | `viewEvent EVENT_INDEX` <br> e.g.`viewEvent 1`
-**View events of member** | `viewMember MEMBER_INDEX` <br> e.g.`viewMember 1`
-**Find member in list** | `findMember MEMBER_NAME [MORE_NAMES]...` <br> e.g.`findMember alice`
-**Find event in list** | `findEvent EVENT_NAME [MORE_NAMES]...` <br> e.g.`findEvent party`
-**List all members and all events** | `list`
-**Clear all members and events** | `clear`
-**Redo** | `redo`
+**Enrol a Member to an Event** | `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g.`enrol m/1 e/1 h/2 r/Role: Photographer`
+**Edit an Enrolment** | `editEnrolment m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g. `editEnroment m/1 e/2 h/5 r/Role: Exco`
+**Unenrol Member from an Event** | `unenrol m/MEMBER_INDEX e/EVENT_INDEX` <br> e.g.`unenrol m/1 e/1`
+**View Events of Member** | `viewMember MEMBER_INDEX` <br> e.g.`viewMember 3`
+**View Members of Event** | `viewEvent EVENT_INDEX` <br> e.g.`viewEvent 1`
+**Find Member in member list** | `findMember MEMBER_NAME [MORE_NAMES]...` <br> e.g.`findMember anthony nicholas`
+**Find Event in event list** | `findEvent EVENT_NAME [MORE_NAMES]...` <br> e.g.`findEvent party`
+**List all Members and all Events** | `list`
 **Undo** | `undo`
+**Redo** | `redo`
+**Clear all Members and Events** | `clear`
 **Help** | `help`
 **Exit** | `exit`
 
