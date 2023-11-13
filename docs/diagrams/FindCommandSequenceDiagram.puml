@@ -34,7 +34,7 @@ deactivate CommandResult
 FindCommand --> Logic: commandResult
 deactivate FindCommand
 
-commandResult -[hidden]-> model
+CommandResult -[hidden]-> Model
 destroy FindCommand
 
 [<--Logic : commandResult
