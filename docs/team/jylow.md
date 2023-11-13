@@ -18,6 +18,7 @@ Given below are my contributions to the project.
     * Justification: This feature improves the product significantly because a user can more efficiently find clients by name and the proximity of their appointments to view upcoming appointments.
     * Credits: The feature was implemented by referencing JavaFX ObservableList documentation. 
   
+<br>
 
 * **New Feature**: Added confirm override window for `schedule` command if person already has a current appointment. [\#123](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/123)
   * What it does: Caution a user if he intends to schedule a new appointment when there is already one that is not yet complete.

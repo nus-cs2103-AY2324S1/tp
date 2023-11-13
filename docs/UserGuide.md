@@ -195,7 +195,7 @@ Format: `help`
 ### Adding a client-contact : `add`
 
 Adds a client's contact (name, phone number, email, home address, next-of-kin name, next-of-kin phone
-number) into contact book.
+number) into contact book. Optionally you may ass financial plans or tags to the client at the same time.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [fp/FINANCIAL_PLAN]… [t/TAG]…​`
 
@@ -205,6 +205,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PH
 * To prevent accidentally adding duplicates, you can use [Find](#locating-clients-by-name-financial-plan-andor-tag--find)
     to check if you have already added the client.
 * After performing an add, the contact list will be reset to display all client contacts.
+* You MAY NOT add an empty tag or financial plan eg.(`fp/` or `t/`)
 
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
 
@@ -284,7 +285,7 @@ Tags:`
 
 <div markdown="span" class="alert alert-primary">:information_source:
 **Do note** that it is possible to edit a client's contact with multiple tags by duplicating the `t/` prefix. The same can be done with for financial plans with the `fp/` prefix.
-However, multiple empty values for tags and financial plans are not accepted. For example, `t/ t/` and `fp/ fp/` is not accepted.
+However, multiple fields of the same type with an empty tag or financial plan is not allowed. For example, `t/ t/` and `fp/ fp/plan` is not accepted.
 </div>
 
 ---------------
@@ -321,7 +322,8 @@ Format: `gather fp/FINANCIAL PLAN` or `gather t/TAG`
   This function currently known to be compatible with gmail and outlook but might not work for all email services.
 * Either **Financial Plan or Tag** can be searched at once, but **not both**.
 * The search is case-insensitive e.g. `financial` will match `FINANCIAL` or `Financial`.
-* A client's email will be gathered if the prompt matches a substring of their financial plan or tag.
+* A client's email will be gathered if the prompt matches a substring of their financial plan or tag 
+  eg. `finan` will match `financial` or `financial plan`.
 
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
 
@@ -428,7 +430,7 @@ Successful Output: `Appointment(s) Completed!`
 ### Clearing all entries : `clear`
 
 Clears all client contacts from the contact book. UNOFAS will ask for confirmation first to ensure it is not a mistake. Click
-the clear button to confirm. O
+the clear button to confirm.
 
 Format: `clear`
 
