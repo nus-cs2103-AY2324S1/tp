@@ -42,13 +42,13 @@ which may differ from that of a fresh download.<br>
 --------------------------------------------------------------------------------------------------------------------
 # Features Overview
 
-UniMate has 3 core features, [**AddressBook**](#main-feature-1-address-book), [**Calendar System**](#main-feature-2-calendar-system)
+UniMate has 3 core features, [**AddressBook**](#main-feature-1-addressbook), [**Calendar System**](#main-feature-2-calendar-system)
 and [**Task Management System**](#main-feature-3-task-management-system). This section serves to
 provide you with an overview of what each component entails and the functionalities supporting them.
 
 ![uniMateFeatureOverview](images/uniMateFeatures.png)
 
-The screenshot above shows a cropped view of UniMate's GUI. **AddressBook** belongs to the [**AddressBook** feature](#main-feature-1-address-book),
+The screenshot above shows a cropped view of UniMate's GUI. **AddressBook** belongs to the [**AddressBook** feature](#main-feature-1-addressbook),
 **CALENDAR** belongs to the [**Calendar System** feature](#main-feature-2-calendar-system) and the **EVENT LIST/TASK LIST**
 portion is shared by both the [**Calendar System** feature](#main-feature-2-calendar-system) and [**Task Management System** feature](#main-feature-3-task-management-system).
 
@@ -64,7 +64,7 @@ Some major CLI-based functionalities to support this feature include:
 - [**Finding**](#locating-persons-by-name-find) and [**filtering**](#filtering-persons-by-attribute-filter) operations to search for and isolate contacts of interest
 - [**Sorting**](#sort-persons--sort) operation to reorganise the view of the AddressBook when needed 
 
-Other functionalities can be found in the [AddressBook Management subsection found in the Features section](#address-book-management).
+Other functionalities can be found in the [AddressBook Management subsection found in the Features section](#addressbook-management).
 
 Additionally, each contact in the AddressBook has their own personal calendar, 
 which can be accessed simply by double-clicking with the left mouse button on the contact's card in the AddressBook.
@@ -445,7 +445,7 @@ Example:
 ![addContactEventCommand](images/addContactEventCommand.png)
 
 In this example, after executing `addContactEvent 1 d/Alex's Event ts/2023-11-08 14:00 te/2023-11-08 18:00` and 
-[double-clicking on the person card](#main-feature-1-address-book) of index 1 in the AddressBook, the
+[double-clicking on the person card](#main-feature-1-addressbook) of index 1 in the AddressBook, the
 contact's calendar pops up, revealing `Alex's Event`. In the case that the event happens before/after
 the current week, it will not be shown in the calendar, but will still be displayed in the 
 [contact's event list](#viewing-a-contacts-event-list-viewcontactevents).
@@ -464,7 +464,7 @@ Example:
 ![deleteContactEvent](images/deleteContactEventCommand.png)
 
 In this example, after executing `deleteContactEvent 1 ts/2023-11-08 14:00` and
-[double-clicking on the person card](#main-feature-1-address-book) of index 1 in the AddressBook,
+[double-clicking on the person card](#main-feature-1-addressbook) of index 1 in the AddressBook,
 the contact's calendar pops up, revealing an empty calendar as `Alex's Event` (added in the 
 [example in addContactEvent](#contact-calendar-adding-an-event-to-a-contact-addcontactevent)),
 occurring at the specified time, has been removed.
