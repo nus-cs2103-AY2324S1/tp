@@ -118,7 +118,9 @@ This box denotes command outputs.
 * Please avoid manually modifying the data files in the _home folder_<sup>[5](#glossary)</sup>. Doing so may result in unexpected behaviour and data loss.
 * Please avoid running multiple instances of TutorMate at the same time. Doing so may result in unexpected behaviour and data loss.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-  </box>
+* If you are using a PDF version of this document, please note that the scroll panels for the code outputs in the examples will not work. They are just a reference for the outputs that you will see on the application. The errors and solutions will be elaborated in the examples.
+  
+</box>
 
 ### Parameter Summary
 
@@ -143,7 +145,7 @@ This box denotes command outputs.
 
 ## Features
 
-### List Feature : `list`
+### List Feature
 
 The list command is the way to navigate between the 3 states in our app.
 It will display the specified list and its corresponding details panel.
@@ -222,7 +224,7 @@ Failure outputs:
 
 <br>
 
-### Show Feature : `show`
+### Show Feature
 
 The show command has different behaviours depending on the current list. It shows the details of the specified item in the current list in the application.
 
@@ -433,8 +435,6 @@ Usage: addTask + [lesson index] [description]. You could omit the lesson index w
 Example1: addtask 1 do homework
 ```
 
-
-
 <br>
 
 ### Delete Feature
@@ -583,7 +583,7 @@ Format: `editPerson [INDEX] [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-
 
 **Tips:**
 - If you are currently in ___STUDENTS list___, the command can be shortened to `edit`.
-  </box>
+</box>
 
 Example usages:
 * `editPerson 1 -name John`
@@ -631,7 +631,8 @@ Format: `editLesson [INDEX] [-name NAME] [-start TIME] [-end TIME] [-day DATE] [
 * The lesson cannot clash (same day, start and end all specified and are overlapping) in time with other lessons  in the schedule list.
 * Please note that unlike the `addLesson` command, the `editLesson` command's "-subject" flag only accepts one subject, not multiple subjects (parameter is SUBJECT, not SUBJECTS).
 * Refer to the parameter constraints [here](#parameter-summary).
-  <box type="tip" seamless>
+
+<box type="tip" seamless>
 
 **Tips:**
 - If you are currently in ___SCHEDULE list___, the command can be shortened to `edit`.
@@ -687,7 +688,7 @@ Editing of ___TASKS list___ is not supported at this time!
 
 <br>
 
-### Find Feature : `find`
+### Find Feature
 
 The find command finds students (in ___STUDENTS list___) or lessons (in ___SCHEDULE list___) whose names contain the search _string_ <sup>[7](#glossary)</sup>.
 
@@ -759,7 +760,7 @@ Unknown command
 
 <br>
 
-### Filter Feature : `filter`
+### Filter Feature
 
 #### For Student:
 <box type="info" seamless>
@@ -769,13 +770,15 @@ Format: `filter [-name NAME] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]`
 * Multiple fields can be specified at the same time.
 * Refer to the parameter constraints [here](#parameter-summary).
 * At least one optional field should be specified.
-  <box type="tip" seamless>
+
+<box type="tip" seamless>
 
 **Tips:**
 - When filtering by multiple fields, only the students which match all the fields are returned.
 - To reset the view to an unfiltered state, type `list students`.
 - If no students that match the filters are found, an empty list will be shown.
-  </box>
+  
+</box>
 
 Example usages:
 * `filter -name Alex -tag primary -subject Mathematics`
@@ -800,13 +803,16 @@ For example, filter -name John -subject physics,english
 #### For Schedule:
 <box type="info" seamless>
 
-You must be in the **_SCHEDULE list_** to run this command. Type `list schedule` to go to the **_SCHEDULE list_**.</box>
+You must be in the **_SCHEDULE list_** to run this command. Type `list schedule` to go to the **_SCHEDULE list_**
+</box>
+
 Format: `filter [-name NAME] [-subject SUBJECTS] [-before DATE] [-on DATE] [-after DATE] [-remark REMARK]`
 * Only one of `-before`, `-on`, `-after` can be used at once. For example, you cannot use both `-before` and `-after` in the same filter command.
 * The dates specified in `-before` and `-after` are exclusive. For example, specifying `-before 2023/05/01` will find lessons before but not on 2023/05/01.
 * Refer to the parameter constraints [here](#parameter-summary).
 * At least one optional field should be specified.
-  <box type="tip" seamless>
+  
+<box type="tip" seamless>
 
 **Tips:**
 - When filtering by multiple fields, only the lessons which match all the fields are returned.
@@ -859,16 +865,19 @@ Note you should only use one of -before, -on, -after at a time.
 
 <br>
 
-### Link Feature : `linkTo`
+### Link Feature
+
 You can link lessons to students, and vice versa. For example, if a lesson has a few students, you can link each of the students to the lesson, so that you can quickly see who is attending this specific lesson.
 
 #### For Student:
 <box type="info" seamless>
 
-You must be in the **_STUDENTS list_** and are viewing a student to run this command. Type `list students` to go to the **_STUDENTS list_**, then type `show INDEX` to select a student to link lessons to.</box>
+You must be in the **_STUDENTS list_** and are viewing a student to run this command. Type `list students` to go to the **_STUDENTS list_**, then type `show INDEX` to select a student to link lessons to.
+</box>
+
 Format: `linkTo LESSON_NAME`
 * `LESSON_NAME` is the name of the lesson you would like to link to.
-* * Refer to `LESSON_NAME`'s constraints [here](#parameter-summary).
+* Refer to `LESSON_NAME`'s constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
 
@@ -965,7 +974,7 @@ This feature is not used for tasks!
 
 <br>
 
-### Navigate Feature : `nav`
+### Navigate Feature
 
 After linking students to lessons or vice versa, you can "navigate" between the student and their linked lessons, or the lesson and its linked students.
 This comes in handy when you want to view the details of students in a lesson, or see what lessons a student has upcoming.
@@ -1093,7 +1102,7 @@ Example usages:
 
 <br>
 
-### Clearing Data : `clear`
+### Clearing Data
 
 Clears the program data.
 
@@ -1101,7 +1110,7 @@ Format: `clear`
 
 <br>
 
-### Exit Program : `exit`
+### Exit Program
 
 Exits the program.
 
@@ -1109,7 +1118,7 @@ Format: `exit`
 
 <br>
 
-### View Help : `help`
+### View Help
 
 Shows a message explaining how to access the help page.
 Click on the button to copy the link, enter it in a web browser to visit our user guide.
