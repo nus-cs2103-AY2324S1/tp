@@ -128,17 +128,22 @@ This section of the User Guide will explain about each feature in detail.
 
 * Commands are **case-insensitive**.
 
+* Parameters can be in any order.  
+  For example, `adda /name Taylor Swift /phone 91961969` and `adda /phone 91691969 /name Taylor Swift` will result in
+  the same applicant added.
+
 * Words in UPPER_CASE are input parameters that you need to provide for that specific field.  
   For example, in `addm /name NAME`, `NAME` would be the input parameter for the member's name.
-
-* Fields in square brackets `[ ]` are optional fields.
 
 * Parameters can be in any order.  
   For example, `adda /name Taylor Swift /phone 91961969` and `adda /phone 91691969 /name Taylor Swift` will result in
   the same applicant added.
 
-* Items with … after them can be used multiple times including zero times.  
-  For example, `[/tag TAG]…` can be used as /tag SWE, /tag UIUX /tag Product etc.
+* Items with … after them can be used multiple times (1 or more).  
+  For example, the `findm KEYWORD` command can be used to search 1 `KEYWORD` like `findm SWE`, or 2 `KEYWORD`s like `findm SWE Product`.
+
+* Fields in square brackets `[ ]` are optional fields.
+  For example, `[/tag TAG]...` means the /tag parameter can be omitted, or used multiple times like `/tag SWE`, `/tag UIUX /tag Product`, etc.
 
 * For commands that do not take input parameters (e.g. `help`, `exit`), any input parameters provided will be ignored.
   For example, `help /name Taylor Swift` is equivalent to `help` and will still open the help window.
