@@ -145,22 +145,10 @@ Examples:
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Common Errors:**<br>
-3. Adding custom prefixes <br>
-Adding custom prefixes will mostly cause the preceding flag to become invalid. <br>
-Exceptions:
-   * Adding 'custom' flags after the address or condition field will, however, be accepted as
-addresses or conditions may involve the usage of the `/` character. Hence, take note to use these fields carefully.
-   * However, adding the remark prefix `r/` and everything attached to it will be ignored by the system.
-   * Adding the 'custom' flag after any other field will recognise the input to be of Invalid Command Format.
-<br>
-Examples:
-   * `add-doctor pic/ n/Faiz ic/S9851486G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/surgeon`
-   * `add-doctor n/Faiz pic/ ic/S9851486G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/surgeon`
-   * `add-doctor n/Faiz ic/S9851486G g/F p/98765433 e/betsycrowe@example.com a/#104/C, Wakanda St 42 t/surgeon`
-4. Special Cases <br>
-Names with special characters may not adhere to the current format for names, and may be recognised as an invalid input.
-Example:
-   * `add-doctor n/David s/o Beckham ic/S9851486G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/surgeon`
+Refer to the [Common Pitfalls](#common-pitfalls) to ensure you do not make any of those errors, which may cause errant
+behaviour of MediLink Contacts. The exceptions to this section, as well as additional pitfalls are detailed below. <br> 
+* Names with special characters may not adhere to the current format for names, and may be recognised as an invalid input. 
+  * Example:`add-doctor n/David s/o Beckham ic/S9851486G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/surgeon`
 </div>
 
 ### Adding a Patient: `add-patient`
@@ -442,18 +430,24 @@ the data of your previous MediLink Contacts home folder.
    Fields have specific formats to be followed. Failure to adhere to this format will lead to an error message
    that specifies the format to be used for that field. Common cases of Invalid Fields:
 1. Empty flags<br>
-Example: `new-appt pic/ dic/S9851586G time/2023-10-30 13:00`
+Example: `new-appt pic/ dic/S9851586G time/2023-10-30 13:00` <br>
 Reason: PATIENT IC field is empty.
 2. Prefixes not associated with the command<br>
-Adding custom prefixes will mostly cause the preceding flag to become invalid. <br>
+Adding custom prefixes will mostly cause the preceding flag to become invalid. Note that custom prefixes refer to prefixes
+not recognised by the specific command. Although `b/` refers to BLOODTYPE and is a valid flag, it is only a valid flag in
+the context of Patients. It will be recognised as invalid in other commands such as `add-doctor`<br>
    Exceptions:
     * Adding 'custom' flags after the address or condition field will, however, be accepted as
       addresses or conditions may involve the usage of the `/` character. Hence, take note to use these fields carefully.
     * However, adding the remark prefix `r/` and everything attached to it will be ignored by the system.
-    * Adding the 'custom' flag after any other field will recognise the input to be of Invalid Command Format.
-      <br>
-Example: `edit ic/T0181763S p/96123469`
-Error Message:
+    * Adding the 'custom' flag before any other field will recognise the input to be of Invalid Command Format.<br>
+Examples:
+    * `add-patient n/John Doe custom/ ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 c/pneumothorax b/O+ t/Low`
+    <br>Reason: custom flag `custom/` causes NAME field to become invalid.
+    * `add-doctor ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104/C, Wakanda St 42 t/Surgeon`
+    <br>Reason: custom flag `/C` taken as part of a valid address, and does not show any Error.
+    * `new-appt b/ dic/S9851586G time/2023-10-30 13:00`
+    <br>Reason: custom flag `b/` causes input to be of invalid command format.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Known issues
