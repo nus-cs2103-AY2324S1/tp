@@ -308,13 +308,13 @@ Given this flexibility and variety of valid user input, it is a challenge to par
 The implementation of the `EditPersonCommand` and `EditPersonCommandParser` can serve as a good example to represent how we tackle this challenge at command and parser class level to achieve the desired flexibility and usability while keeping the code clean and maintainable.
 
 #### Implementation
-The parsing and execution process of the `EditPersonCommand` is achieved via the combination of Four groups of classes: `AddressBookParser`, `TypeParsingUtil`, `EditPersonCommandParser` and `EditPersonCommand`, each of which is responsible for a different stage of the parsing process. 
+The parsing and execution process of the `EditPersonCommand` is achieved via the combination of four groups of classes: `AddressBookParser`, `TypeParsingUtil`, `EditPersonCommandParser` and `EditPersonCommand`, each of which is responsible for a different stage of the parsing process. 
 
 Given a user input that is intended to be parsed into an `EditPersonCommand`, a high level description of the parsing process is as follows:
 
-The first stage is to understand that user intends to invoke the `EditPersonCommand` and delegate the parsing to the specialised parser class, `EditPersonCommmandParser`. This step is done by the `AddressBookParser` class, which behave like a "simple factory" via a giant "switch" statement. We will not discuss it in depth here as it is not very interesting.
+The first stage is to understand that user intends to invoke the `EditPersonCommand` and delegate the parsing to the specialised parser class, `EditPersonCommmandParser`. This step is done by the `AddressBookParser` class, which behaves like a "simple factory" via a giant "switch" statement. We will not discuss it in depth here as it is not very interesting.
 
-The second stage is to parse each Parameter and flags. This work is delegated to the `typeParsingUtil` class, which is a utility class that contains many static methods that are responsible for parsing different types of user input that is reused across different command parsers.
+The second stage is to parse each parameter and flags. This work is delegated to the `typeParsingUtil` class, which is a utility class that contains many static methods that are responsible for parsing different types of user input that is reused across different command parsers.
 
 Then, the `EditPersonCommandParser` class is responsible for combining the results of the previous stage and construct the `EditPersonCommand` object.
 
@@ -327,10 +327,10 @@ In TutorMates, Lesson and Person extends `ListEntry` class as they are displayed
 
 Each `ListEntry` object contains a list of `ListEntryField` objects, which are the fields of the `ListEntry` object. For example, a `Person` object contains a list of `ListEntryField` objects, which are the fields of the `Person` object, such as name, phone number, email address, etc.
 
-These two classes are used in multiple generic class and methods to achieve the flexibility and robustness of the parsing process.
+These two classes are used in multiple generic classes and methods to achieve the flexibility and robustness of the parsing process.
 
 ##### 2. Parsing of Flags and Parameters
-The `TypeParsingUtil` class parse all kinds of flags (which are all `ListEntryField` ) via a single powerful generic method, `parseField`. The method signature is as follows:
+The `TypeParsingUtil` class parses all kinds of flags (which are all `ListEntryField` ) via a single powerful generic method, `parseField`. The method signature is as follows:
 ```
  public static <T extends ListEntryField> T parseField(String flagName,
                                                           String input,
