@@ -1059,6 +1059,7 @@ Given below are some of the possible enhancements that could be added in future 
    > The messages for `course` commands could be more specific. We plan to replace mentions of `address book` with `courses` to better fit the context of TAvigator and reduce confusion for users.
 4. Stricter validation checks for course codes.
    > Validation checks could be added for course names to ensure valid course names when adding or editing courses. A valid format would include two to three initial alphabetical letters, followed by four numbers and one optional alphabetical letter at the end. A valid example would be `CS2103T`.
+   > An alternative could be getting a list of course codes from the NUSMods API but that may require constant updating.
 5. Importing records.
    > We plan to implement importing student records from a csv file in the future, which may create duplicated records. This would be where our merge command comes into play, merging duplicated records so that no information is lost.
 6. More functionality for `mark` command.
@@ -1066,9 +1067,13 @@ Given below are some of the possible enhancements that could be added in future 
    >   - Marking of students with the same student name.
    >   - Marking of students with both student name field and student ID field.
    >   - Marking of students with case-insensitive student name.
+   >   - Marking of students using the index in list.
 7. Marking attendance based on tutorial group instead of student.
    > Currently, TAvigator supports a student having multiple tutorial groups, but attendance is marked based on the student only. As such, we plan to modify the `mark` command so that it takes in a `tg/` input, and attendance can be marked separately for each tutorial group the student belongs to.
 8. Better parsing of arguments.
    > Currently, adding invalid and redundant prefixes after commands will cause TAvigator to take the invalid prefix and its value as part of the value of the closest valid prefix. <br>
    > For example, `add n/Fu Yiqiao p/98765432 e/fyq@example.com id/ A1234567M t/G2 r/` returns an error message that: Tutorial Group IDs should be alphanumeric.
    > The correct error message that should be shown is: Invalid prefix r/ detected.
+9. Improved UI for attendance records
+   > Currently, it displays the attendance records in multiple lines and require scrolling, which makes it hard to view all information at a glance.
+   > We plan to improve the UI by either showing the attendance records using boxes instead, with colours differentiating the different status for their attendance, such as using green for present, red for absent and grey for unmarked.
