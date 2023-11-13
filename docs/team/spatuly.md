@@ -5,7 +5,8 @@ title: Liyan's Project Portfolio Page
 
 ### Project: TAvigator
 
-TAvigator is a desktop address book application used by tutors to keep track of students' contact details and attendance. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about (TBA) kLoC.
+Teaching Assistants (TAs) sometimes have many tutorial groups to manage, it could be chaotic to manage all of them. TAvigator is a desktop address book application used by TAs to keep track of students' contact details and attendances. 
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java.
 
 Given below are my contributions to the project.
 
