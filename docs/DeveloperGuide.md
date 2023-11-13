@@ -1,16 +1,14 @@
 ---
 layout: default.md
 title: "Developer Guide"
-pageNav: 3
+pageNav: 2
 ---
 
 # Developer Guide
 
 <!-- * Table of Contents -->
 
-## Table of Contents
-
-<page-nav/>
+<page-nav-print/>
 
 ## Acknowledgements
 
@@ -56,7 +54,7 @@ Each of the four main components:
 - Defines its API in an interface named after the component.
 - Implements its functionality using a `{Component Name}Manager` class, following the corresponding API interface.
 
-For example, the `Logic` component's API is defined in `Logic.java`, and its functionality is implemented in `LogicManager.java`.
+For example, the `Logic` component's API is defined in `Logic.java`, and its functionality is implemented in `LogicManager.java`.S
 
 ---
 
@@ -65,14 +63,17 @@ For example, the `Logic` component's API is defined in `Logic.java`, and its fun
 #### UI Component
 
 - **API**: [`Ui.java`](https://github.com/AY2324S1-CS2103T-T12-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
-- The UI component is responsible for handling all user interface operations.
+- The `UI` component is responsible for handling all user interface operations.
 
-<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
-<puml src="diagrams/UiDetailedClassDiagram.puml"/>
+- Core `UI` Components:
+  <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI is composed of various components such as `MainWindow`, `CommandBox`, `ResultDisplay`, `PersonListPanel`, and `StatusBarFooter`, all of which inherit from the `UiPart` class.
+- Supplementary `UI` Components:
+  <puml src="diagrams/UiDetailedClassDiagram.puml" alt=""/>
 
-The UI layouts are defined in corresponding `.fxml` files located in the `src/main/resources/view` folder.
+The `UI` is composed of various components such as `MainWindow`, `CommandBox`, `ResultDisplay`, `PersonListPanel`, and `StatusBarFooter`, all of which inherit from the `UiPart` class.
+
+The `UI` layouts are defined in corresponding `.fxml` files located in the `src/main/resources/view` folder.
 
 Key responsibilities include:
 
@@ -120,7 +121,7 @@ Key responsibilities include:
 - **API**: [`Storage.java`](https://github.com/AY2324S1-CS2103T-T12-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 - The Storage component manages data persistence.
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" alt="Storage Component Class Diagram"/>
+<puml src="diagrams/StorageClassDiagram.puml" width="600" alt="Storage Component Class Diagram"/>
 
 Key functionalities include:
 
@@ -152,7 +153,7 @@ A `Person` object encapsulates various attributes:
 - `Age`: Patient's age
 - `BloodType`: Patient's blood type
 - `Set<Allergy>`: Patient's allergies
-- `UniqueRecordList`: Patient's records of past visits to the clinic.
+- `UniqueRecordList`: Patient's records from past visits to the clinic.
 - `UniqueAppointmentList`: Patient's scheduled appointments.
 - `isPinned`: Patient's pin status.
 
@@ -205,18 +206,18 @@ The `editpatient` command facilitates the modification of patient information by
 
 **Alternative 1 (Current Choice)**: Implement an Edit-by-Cloning Strategy
 
-- Pros :
+- _Pros_:
   - **Scalability:** By cloning the `Person` object before editing, the system is better equipped to handle future enhancements that may require complex transactional operations.
   - **Data Integrity:** This method ensures that the original `Person` object remains unaltered during the edit process, which reduces the risk of data corruption in the event of an operation failure.
-- Cons :
+- _Cons_:
   - Adds complexity and has potential performance issues.
 
 **Alternative 2**: Modify the `Person` object directly
 
-- Pros:
+- _Pros_:
   - **Simplicity:** This straightforward approach requires less code, making it easier to implement and understand.
   - **Efficiency:** Operating directly on the `Person` object without cloning can be more performant, especially when dealing with simple edits that do not span multiple data fields.
-- Cons:
+- _Cons_:
   - **Limited Flexibility:** Direct modification constrains the ability to extend the system with complex transactional features or undo/redo capabilities without significant refactoring.
   - **Data Risk:** Without the safeguard of working on a cloned instance, there's a higher risk of inadvertently corrupting data during edit operations.
 
@@ -261,7 +262,7 @@ The `search` command filters the list of patients using one or more keywords.
 
 1. **Parse User Input**: `FindCommandParser` checks for existence of the keyword(s) and creates an array of keywords.
 2. **Create Predicate Object**: A `NameContainsKeywordsPredicate` object is instantiated during `FindCommandParser#parse(String)` and passed over to the `FindCommand`.
-3. **Execute Command**: `Findommand#execute(Model)` finds patients containing keywords using `NameContainsKeywordsPredicate#test(Record)` and updates `FilteredPersonList`.
+3. **Execute Command**: `FindCommand#execute(Model)` finds patients containing keywords using `NameContainsKeywordsPredicate#test(Record)` and updates `FilteredPersonList`.
 
 <puml src="diagrams/SearchSequenceDiagram.puml"/>
 
@@ -508,7 +509,7 @@ An `Appointment` object encapsulates various attributes:
 
 Uniqueness is enforced through a `UniqueAppointmentList`.
 
-#### Adding an Appointment
+### Adding an Appointment
 
 #### Overview
 
@@ -523,7 +524,7 @@ The `addappointment` command integrates a new `Appointment` object with the appo
 - `Model#resetAppointmentList()`
 - `AppointmentWindow`, `AppointmentCalendarPanel`, `AppointmentListPanel`, `AppointmentCard`
 
-### Implementation Steps
+#### Implementation Steps
 
 1. **Parse User Input**: `AddAppointmentCommandParser` checks for necessary parameters and their validity.
 2. **Create Appointment Object**: An `Appointment` object is instantiated during `AddAppointmentCommandParser#parse(String)` and passed over to the `AddAppointmentCommand`.
@@ -531,13 +532,13 @@ The `addappointment` command integrates a new `Appointment` object with the appo
 
 <puml src="diagrams/AddAppointmentSequenceDiagram.puml"/>
 
-#### Deleting an Appointment
+### Deleting an Appointment
 
-##### Overview
+#### Overview
 
 The `deleteappointment` command deletes an existing `Appointment` from MedBook.
 
-##### Related Classes and Methods
+#### Related Classes and Methods
 
 - `DeleteAppointmentCommandParser#parse(String)`
 - `DeleteAppointmentCommand#execute(Model)`
@@ -546,7 +547,7 @@ The `deleteappointment` command deletes an existing `Appointment` from MedBook.
 - `Model#resetAppointmentList()`
 - `AppointmentWindow`, `AppointmentCalendarPanel`, `AppointmentListPanel`, `AppointmentCard`
 
-##### Implementation Steps
+#### Implementation Steps
 
 1. **Parse User Input**: `DeleteAppointmentCommandParser` checks for the validity of the appointment index.
 2. **Create Index Object**: An `Index` object is instantiated during `DeleteAppointmentCommandParser#parse(String)` and passed over to the `DeleteAppointmentCommand`.
@@ -554,19 +555,19 @@ The `deleteappointment` command deletes an existing `Appointment` from MedBook.
 
 <puml src="diagrams/DeleteAppointmentSequenceDiagram.puml"/>
 
-#### Viewing the Appointment Window
+### Viewing the Appointment Window
 
-##### Overview
+#### Overview
 
 The `viewappointment` command opens/focuses the `AppointmentsWindow`.
 
-##### Related Classes and Methods
+#### Related Classes and Methods
 
 - `ViewAppointmentCommand#execute(Model)`
 - `MainWindow#handleAppointments()`, `AppointmentsWindow#show()`, `AppointmentsWindow#fillInnerParts()`
 - `AppointmentWindow`, `AppointmentCalendarPanel`, `AppointmentListPanel`, `AppointmentCard`
 
-##### Implementation Steps
+#### Implementation Steps
 
 1. **Execute Command**: `ViewAppointmentCommand#execute(Model)` returns a new `CommandResult` with `showAppointments` set to `true`.
 2. **Show Appointments Window**: `MainWindow#handleAppointments()` calls the `AppointmentsWindow#show()` method which opens/focuses the `AppointmentsWindow`.
@@ -576,14 +577,33 @@ The `viewappointment` command opens/focuses the `AppointmentsWindow`.
 
 ### Design Considerations
 
-- **Alternative 1 (Current Choice)**: `Model` holds a `UniqueAppointmentList` consisting of all `Appointment` objects, each `Person` also has a `UniqueAppointmentList` consisting of all `Appointment` objects assigned to the person. Each `Appointment` object has the corresponding `Person` `NRIC` as a field.
-  - _Pros_: Operations like searching and filtering for all appointments are easier when a centralised list is available.
-  - _Cons_: Keeping the central `UniqueAppointmentList` in `Model` and individual lists in each `Person` synchronized can be challenging and might lead to data inconsistencies if not managed properly. Any change in an `Appointment` requires updates in two places, adding to the complexity and processing time.
-- **Alternative 2**: Each `Person` holds their own `UniqueAppointmentList` consisting of all `Appointment` objects assigned to the person.
-  - _Pros_: This approach simplifies the data model by avoiding the need for a centralised appointment list.
-  - _Cons_: Operations that require knowledge of all appointments, like finding available slots or generating reports, become more complex, as they need to aggregate data from each Person.
+**Alternative 1 (Current Choice)**: Each `Person` consists of a `UniqueAppointmentList` consisting of all `Appointment` objects assigned to the `Person`. Each `Appointment` object has the corresponding `Person` `NRIC` as a field.
 
-### User Stories
+- _Pros_:
+
+  - **Direct Relationship**: It directly associates appointments with the individual patient, reflecting a real-world scenario where a patient has a list of their appointments.
+  - **Ease of Access**: Retrieving all appointments for a specific person is straightforward.
+
+- _Cons_:
+  - **Duplication**: Storing `NRIC` in both `Person` and `Appointment` leads to data duplication, going against the principles of data normalization.
+  - **Data Integrity Risks**: If an `NRIC` needs to be updated, it must be changed in each Appointment object, increasing the risk of data inconsistency.
+  - **Complexity**: It complicates the retrieval of information about the `Person` associated with the `Appointment` such as trying to display the `Person` `Name` in the **Appointment Card**.
+
+**Alternative 2**: Each `Appointment` consists of a a `Person` objects. Each `Person` object has the corresponding `Appointment` id as a field.
+
+- _Pros_:
+
+  - **Data Normalization**: This approach avoids duplicating person-specific data (like `NRIC`) within the appointment, adhering to data normalization principles.
+
+- _Cons_:
+
+  - **Complexity**: It complicates the retrieval of all appointments for a single person, requiring more complex queries and potentially impacting performance.
+  - **Data Redundancy**: If an appointments holds a `Person` object, there's a risk of redundancy as the same `Person` object could be stored across multiple appointments.
+  - **Difficult Person Creation**: The dependency of `Person` creation on `Appointment` objects complicates the process, potentially leading to issues when a new patient is registered without an appointment.
+
+Considering MedBook's primary focus on patient management, **Alternative 1** has been selected. This decision prioritizes the ease and intuitiveness of accessing and managing patient-specific information, despite some level of data redundancy, which is often a trade-off in software design for enhanced usability.
+
+## User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -598,22 +618,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user          | _edit_ an existing patient’s details                                                                          | keep the patient's details accurate and up-to-date                           |
 | `* * *`  | user          | _edit_ an existing medical record's details                                                                   | keep the medical record's details accurate and up-to-date                    |
 | `* * *`  | user          | _delete_ a specific patient from the app                                                                      | remove patients that are no longer relevant or needed                        |
-| `* * *`  | user          | _delete_ a specific medical record from the app                                                               | remove outdated or erroneous medical records.                                |
-| `* * *`  | user          | _delete_ a specific appointment from the app                                                                  | remove outdated or erroneous appointments.                                   |
-| `* * *`  | new user      | see the app populated with sample data                                                                        | see how the app will look when it is in use                                  |
-| `* * *`  | new user      | access a “help” page to view the app’s basic commands                                                         | conveniently view basic commands within the app                              |
-| `* * *`  | user          | save the address book automatically                                                                           | prevent accidental loss of data                                              |
+| `* * *`  | user          | _delete_ a specific medical record from the app                                                               | remove erroneous medical records.                                            |
+| `* * *`  | user          | _delete_ a specific appointment from the app                                                                  | remove erroneous appointments.                                               |
+| `* * *`  | new user      | _see_ the app populated with sample data                                                                      | see how the app will look when it is in use                                  |
+| `* * *`  | new user      | _access_ a “help” page to view the app’s basic commands                                                       | conveniently view basic commands within the app                              |
+| `* * *`  | user          | _save_ the address book automatically                                                                         | prevent accidental loss of data                                              |
 | `* *`    | user          | _search_ for specific patients using keywords such as the patient’s name or blood type etc.                   | find and filter specific patients from a long list of patients               |
 | `* *`    | user          | _search_ for a specific medical record of a patient using keywords such as date, condition or medication      | find and filter specific medical records from a long list of medical records |
 | `* *`    | user          | _pin_ a specific patient                                                                                      | conveniently view patients details                                           |
 | `* *`    | user          | _unpin_ a specific patient                                                                                    |                                                                              |
-| `* *`    | user          | attach files such as lab reports and prescription images to a patient's medical records                       | keep documents in an organised manner                                        |
-| `*`      | user          | receive regular updates and bug fixes for the app                                                             |                                                                              |
-| `*`      | user          | view a schedule of upcoming patient appointments within the app                                               | prepare for upcoming patient appointments                                    |
-| `*`      | advanced user | directly edit the MedBook data stored in the JSON file                                                        | make specific and controlled changes to the data                             |
-| `*`      | user          | receive reminders for upcoming patient appointments                                                           | be punctual for upcoming appointments                                        |
-| `*`      | user          | export patient data                                                                                           | share or transfer data between different systems                             |
-| `*`      | user          | leave patient data encrypted                                                                                  | prevent unauthorised access to the data                                      |
+| `* *`    | user          | _attach_ files such as lab reports and prescription images to a patient's medical records                     | keep documents in an organised manner                                        |
+| `* *`    | advanced user | _directly edit_ the MedBook data stored in the JSON file                                                      | make specific and controlled changes to the data                             |
+| `* *`    | user          | _edit_ an existing appointment's details                                                                      | keep the appointment's details accurate and up-to-date                       |
+| `*`      | user          | _receive_ regular updates and bug fixes for the app                                                           |                                                                              |
+| `*`      | user          | _receive_ reminders for upcoming patient appointments                                                         | be punctual for upcoming appointments                                        |
+| `*`      | user          | _export_ patient data                                                                                         | share or transfer data between different systems                             |
+| `*`      | user          | _leave_ patient data encrypted                                                                                | prevent unauthorised access to the data                                      |
+| `*`      | user          | _sort_ existing appointments by date                                                                          | quickly view the appointments which are soon upcoming                        |
 
 ## Use Cases
 
@@ -623,7 +644,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **System**: MedBook
 - **Main Success Scenario (MSS)**:
   1. User requests for help.
-  2. MedBook displays help information.
+  2. MedBook displays help information.<br>
      Use case ends.
 
 ### UC02 - Adding a Patient
@@ -633,7 +654,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Main Success Scenario (MSS)**:
   1. User requests to add a new patient.
   2. User enters the patient's details.
-  3. MedBook adds the patient to the system.
+  3. MedBook adds the patient to the system.<br>
      Use case ends.
 - **Extensions**:
   - 2a. MedBook detects an error in the entered patient's details.
@@ -649,7 +670,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Preconditions**: There is at least one patient entry in the system.
 - **Main Success Scenario (MSS)**:
   1. User requests to list patients.
-  2. MedBook shows a list of patients.
+  2. MedBook shows a list of patients.<br>
      Use case ends.
 
 ### UC04 - Editing a Patient's Details
@@ -661,7 +682,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   1. User lists all patients (UC03).
   2. User requests to edit a patient's details.
   3. User enters the new patient details.
-  4. MedBook updates the patient details.
+  4. MedBook updates the patient details.<br>
      Use case ends.
 - **Extensions**:
   - 3a. MedBook detects an error in the entered patient's details.
@@ -679,7 +700,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   1. User lists all patients (UC03).
   2. User requests to search for a specific patient.
   3. User enters search criteria.
-  4. MedBook performs a search and displays matching patients.
+  4. MedBook performs a search and displays matching patients.<br>
      Use case ends.
 - **Extensions**:
   - 4a. No matches found.
@@ -695,7 +716,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   1. User lists all patients (UC03).
   2. User requests to delete a specific patient.
   3. User enters patient ID.
-  4. MedBook deletes the patient.
+  4. MedBook deletes the patient.<br>
      Use case ends.
 - **Extensions**:
   - 3a. MedBook detects an error in the entered patient's ID.
@@ -713,7 +734,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   1. User lists all patients (UC03).
   2. User requests to pin a specific patient.
   3. User enters patient ID.
-  4. MedBook pins the patient.
+  4. MedBook pins the patient.<br>
      Use case ends.
 - **Extensions**:
   - 3a. MedBook detects an error in the entered patient's ID.
@@ -730,7 +751,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Main Success Scenario (MSS)**:
   1. User requests to unpin a specific patient.
   2. User enters the patient's PINNEDID.
-  3. MedBook unpins the patient.
+  3. MedBook unpins the patient.<br>
      Use case ends.
 - **Extensions**:
   - 2a. MedBook detects an error in the entered PINNEDID.
@@ -748,7 +769,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   1. User lists all patients (UC03).
   2. User requests to add a new record to a patient.
   3. User enters the record's details.
-  4. MedBook adds the record to the patient.
+  4. MedBook adds the record to the patient.<br>
      Use case ends.
 - **Extensions**:
   - 3a. MedBook detects an error in the entered record's details.
@@ -761,12 +782,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **Actor**: User
 - **System**: MedBook
-- **Preconditions**: There is at least one record entry in the patient.
 - **Main Success Scenario (MSS)**:
   1. User lists all patients (UC03).
   2. User requests to view a specific patient's records.
   3. User enters the patient ID.
-  4. MedBook displays the records of the patient.
+  4. MedBook displays the records of the patient.<br>
      Use case ends.
 - **Extensions**:
   - 3a. MedBook detects an error in the entered patient's ID.
@@ -784,7 +804,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   1. User views a patient’s medical records (UC10).
   2. User requests to edit a patient’s record’s details.
   3. User enters new record details.
-  4. MedBook updates the record’s details.
+  4. MedBook updates the record’s details.<br>
      Use case ends.
 - **Extensions**:
   - 3a. MedBook detects an error in the entered record’s details.
@@ -802,7 +822,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   1. User views a patient’s medical records (UC10).
   2. User requests to delete a patient’s record.
   3. User enters the patient ID and record ID.
-  4. MedBook deletes the record.
+  4. MedBook deletes the record.<br>
      Use case ends.
 - **Extension**:
   - 3a. MedBook detects an error in the entered patient ID and/or record ID.
@@ -817,10 +837,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **System**: MedBook
 - **Preconditions**: There is at least one record entry in the patient.
 - **Main Success Scenario (MSS)**:
-  1. User views a patient (UC10)
+  1. User views a patient (UC10).
   2. User requests to search for a specific records.
   3. User enters search keywords.
-  4. MedBook performs a search and displays matching record.
+  4. MedBook performs a search and displays matching record.<br>
+     Use case ends.
 - **Extension**:
   - 4a. No matches found.
     - 4a1. MedBook informs the user that there were no matches.
@@ -834,10 +855,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Main Success Scenario (MSS)**:
   1. User requests to add a new appointment to a patient.
   2. User enters the appointment's details.
-  3. MedBook adds the appointment to the patient.
+  3. MedBook adds the appointment to the patient.<br>
      Use case ends.
 - **Extensions**:
-  - 2a. MedBook detects an error in the entered appointement's details.
+  - 2a. MedBook detects an error in the entered appointment's details.
     - 2a1. MedBook shows an error message.
     - 2a2. User enters new appointment details.
     - Steps 2a1-2a2 are repeated until the appointment details entered is correct.
@@ -849,7 +870,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **System**: MedBook
 - **Main Success Scenario (MSS)**:
   1. User requests to view appointments.
-  2. MedBook shows the user all appointments
+  2. MedBook shows the user all appointments.<br>
      Use case ends.
 
 ### UC16 - Deleting an Appointment
@@ -861,7 +882,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   1. User views all appointments (UC15).
   2. User requests to delete a new appointment.
   3. User enters the appointment's ID.
-  4. MedBook deletes the appointment.
+  4. MedBook deletes the appointment.<br>
+     Use case ends.
 - **Extensions**:
   - 3a. MedBook detects an error in the entered appointment ID.
     - 3a1. MedBook shows an error message.
@@ -877,27 +899,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Main Success Scenario (MSS)**:
 
 1.  User views a patient’s medical records (UC10).
-2.  User requests to attach a file to a record of a patient
-3.  User selects a file
-4.  MedBook saves the file to the medical record
+2.  User requests to attach a file to a record of a patient.
+3.  User selects a file.
+4.  MedBook saves the file to the medical record.<br>
+    Use case ends.
 
 - **Extension**:
-- 2a. User does not choose a file
-  - 2a1. MedBook displays an error message.
+- 3a. User does not choose a file.
+  - 3a1. MedBook displays an error message.
   - Use case ends.
 
 ### UC18 - Opening Files
 
 - **Actor**: User
 - **System**: MedBook
-- **Preconditions**: There is at least one record entry with file attached previously in the patient
+- **Preconditions**: There is at least one record entry with a file attached in the patient
 - **Main Success Scenario (MSS)**:
 
-1.  User requests to view a file attached to a record
-2.  MedBook opens the file on the user’s default launcher
+1.  User requests to view a file attached to a record.
+2.  MedBook opens the file on the user’s default launcher.<br>
+    Use case ends.
 
 - **Extension**:
-- 1a. File does not exist in user’s local storage
+- 1a. File does not exist in user’s local storage.
   - 1a1. MedBook displays an error message.
   - Use case ends.
 
@@ -909,7 +933,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    - Rationale: Ensures accessibility for users on different platforms.
    - Metric: Application functions correctly on Windows, macOS, and Linux.
 2. Supports up to 1000 patients without performance issues.
-   - Rationale: Ensures scalability for clinics and hospitals.
+   - Rationale: Ensures scalability for larger clinics.
    - Metric: Application performs smoothly with a database of 1000 patients.
 3. Faster operation with commands than mouse for proficient typists.
    - Rationale: Enhances productivity for users familiar with the command line.
@@ -919,7 +943,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    - Metric: Users can open and interact with data files from previous versions without issues.
 5. Usable by novices.
    - Rationale: Ensures the application is accessible to new users.
-   - Metric: New users can perform basic tasks without referring to the user manual.
+   - Metric: New users can perform basic tasks without having to keep referring to the user manual.
 6. Provides comprehensive error messages and guidance for recovery.
    - Rationale: Helps users understand what went wrong and how to fix it.
    - Metric: Error messages include a description of the issue and steps for resolution.
@@ -998,18 +1022,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### Deleting a Person
-
-1. Prerequisites: Use `list` to show all persons.
-2. Test Case: `delete 1`
-   - Expected: First contact deleted, details shown in status message.
-3. Test Case: `delete 0`
-   - Expected: Error message displayed, status bar unchanged.
-4. Other Test Cases: `delete`, `delete x` (where x > list size)
-   - Expected: Error message displayed, status bar unchanged.
-
----
-
 ### Adding a New Patient
 
 1. Test Case: `addpatient n/John Doe i/T0000000Z e/johndoe@gmail.com p/98765432 g/M a/30 bt/AB+ al/Dust`
@@ -1029,155 +1041,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 7. Test Case: `addpatient n/John Doe i/T0000000Z e/johndoe@gmail.com p/98765432 g/M a/30 bt/AP al/Dust`
    - Expected: Error message displayed, patient not added due to incorrect blood type.
 
-### Editing a Patient's Details
+---
 
-#### When the Patient Exists
+### Editing a Patient's Details
 
 1. Prerequisites: Ensure the patient list is displayed and contains the entry you wish to edit.
 2. Test Case: `editpatient 1 a/35`
+
    - Expected: Patient at index 1 has their age updated to 35. Details shown in the status message.
+
 3. Test Case: `editpatient x a/35` (where x > list size)
    - Expected: Error message displayed, patient's details unchanged.
 
 ---
 
-### Searching for Patients
+### Deleting a Patient
 
-#### When There Are Matching Entries
+1. Prerequisites: Ensure the patient list is displayed and contains the entry you wish to delete.
+2. Test Case: `delete 1`
 
-1. Prerequisites: Ensure the patient list contains entries that will match your search term.
-2. Test Case: `search John`
-   - Expected: List of patients with "John" in their name or details is displayed.
+   - Expected: Patient at index 1 is deleted. Details shown in status message.
 
----
-
-### View Patient's Medical Records
-
-1. Prerequisites: Ensure the patient list is displayed and contains the entry you wish to edit.
-2. Test Case: `view 1`
-   - Expected: Medical records of the first patient are displayed, details shown in the status message.
-3. Test Case: `view 0`
-   - Expected: Error message displayed, status bar unchanged.
-4. Other Test Cases: `view`, `view x` (where x > list size)
-   - Expected: Error message displayed, status bar unchanged.
-
----
-
-### Adding a Record under Patient
-
-1. Prerequisites: Ensure the patient list is displayed
-2. Test Case: `addrecord 1 d/12-11-2023 2200 c/Fever m/Ibuprofen`
-   - Expected: Adds the specified record to the first patient.
-3. Test Case: `addrecord x d/12-11-2023 2200 c/Fever m/Ibuprofen` (where x > size of patient list)
-   - Expected: Error message displayed
-4. Test Case: `addrecord 1 d/12112023 c/Fever m/Ibuprofen`
-   - Expected: Error message displayed suggesting date and time should in the form of dd-mm-yyyy hhmm
-
----
-
-### Editing a Patient's Record Details
-
-#### When the Patient Exists and Record Exists
-
-1. Prerequisites: Ensure the record list of the patient is displayed and contains the entry you wish to edit.
-2. Test Case: `editrecord 1/1 c/Fever`
-
-- Expected: The record at index 1 of the Patient at index 1 has its conditions updated to only fever. Details shown in the status message.
-
-3. Test Case: `editrecord 1/1 c/Fever m/Paracetamol`
-
-- Expected: The record at index 1 of the Patient at index 1 has its conditions updated to only fever and medications to only Paracetamol. Details shown in the status message.
-
-4. Test Case: `editrecord x/1 c/Fever` (where x > patient list size)
-
-- Expected: Error message displayed, record's details unchanged.
-
-5. Test Case: `editrecord 1/x c/Fever` (where x > record list size)
-
-- Expected: Error message displayed, record's details unchanged.
-
-6. Test Case: `editrecord 1/1 d/12112023`
-   - Expected: Error message displayed suggesting date and time should in the form of "dd-mm-yyyy hhmm".
-7. Test Case: `editrecord 1/1 d/12-11-2023 2200 d/13-11-2023 2200`
-   - Expected: Error message displayed suggesting multiple inputs of date are not allowed.
-
----
-
-### Deleting a Record under Patient
-
-1. Prerequisites: Ensure the patient list is displayed
-2. Test Case: `deleterecord 1/1`
-   - Expected: Deletes the first record of the first patient.
-3. Test Case: `deleterecord x/1` (where x > size of patient list)
-   - Expected: Error message displayed
-4. Test Case: `deleterecord 1/y` (where y > size of record list of the first patient)
-   - Expected: Error message displayed
-
----
-
-### Searching Records of the Currently Viewing Patient
-
-1. Prerequisites: The user is currently viewing a patient, and the record list of that patient is not empty.
-2. Test Case: `searchrecord Ibuprofen`
-   - Expected: List of records with "Ibuprofen" in the medications or details is displayed.
-
----
-
-### Adding a Record under Patient
-
-1. Prerequisites: Ensure the patient list is displayed
-2. Test Case: `addrecord 1 d/12-11-2023 2200 c/Fever m/Ibuprofen`
-   - Expected: Adds the specified record to the first patient.
-3. Test Case: `addrecord x d/12-11-2023 2200 c/Fever m/Ibuprofen` (where x > size of patient list)
-   - Expected: Error message displayed
-4. Test Case: `addrecord 1 d/12112023 c/Fever m/Ibuprofen`
-   - Expected: Error message displayed suggesting date and time should in the form of dd-mm-yyyy hhmm
-
----
-
-### Deleting a Record under Patient
-
-1. Prerequisites: Ensure the patient list is displayed
-2. Test Case: `deleterecord 1/1`
-   - Expected: Deletes the first record of the first patient.
-3. Test Case: `deleterecord x/1` (where x > size of patient list)
-   - Expected: Error message displayed
-4. Test Case: `deleterecord 1/y` (where y > size of record list of the first patient)
-   - Expected: Error message displayed
-
----
-
-### Searching Records of the Currently Viewing Patient
-
-1. Prerequisites: The user is currently viewing a patient, and the record list of that patient is not empty.
-2. Test Case: `searchrecord Ibuprofen`
-   - Expected: List of records with "Ibuprofen" in the medications or details is displayed.
-
----
-
-### Attaching FIle to Patient’s Record
-
-1. Prerequisites: The user is currently viewing a patient, and the record list of that patient is not empty.
-2. Test Case: Click on “Attach Files” and select file from local storage.
-
-- Expected: “File successfully attached” is displayed and file link is added to record.
-
-3. Test Case: Click on “Attach Files” and cancel the file explorer without selecting a file
-
-- Expected: Error message displayed as no file was selected
-
----
-
-### Opening FIle in Patient’s Record
-
-1. Prerequisites: The user is currently viewing a patient, the record list of that patient is not empty and the record already has a file attached.
-2. Test Case: Click on Filepath link.
-
-- Expected: File is opened using the user’s default launcher.
-
-3. Test Case: Delete or relocate file in local storage. Click on Filepath link.
-
-- Expected: Error message displayed as file path no longer exists
+3. Test Case: `delete 0`
+   - Expected: Error message displayed, **Patient List** unchanged.
+4. Other Test Cases: `delete`, `delete x` (where x > list size)
+   - Expected: Error message displayed, **Patient List** unchanged.
 
 ---
 
@@ -1185,7 +1073,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. Prerequisites: Ensure the patient list is displayed and contains the entry you wish to pin.
 2. Test Case: `pin 1`
+
    - Expected: Patient at index 1 is pinned to the **Pinned Patient List**. Details shown in the status message.
+
 3. Test Case: `pin x` (where x > list size)
    - Expected: Error message displayed, **Pinned Patient List** unchanged.
 
@@ -1195,9 +1085,130 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. Prerequisites: Ensure the **Pinned Patient List** contains the entry you wish to unpin.
 2. Test Case: `unpin 1`
+
    - Expected: Patient at index 1 of the **Pinned Patient List** is unpinned and no longer displayed in the **Pinned Patient List**. Details shown in the status message.
+
 3. Test Case: `unpin x` (where x > list size)
    - Expected: Error message displayed, **Pinned Patient List** unchanged.
+
+---
+
+### Searching for Patients
+
+1. Prerequisites: Ensure the patient list contains entries that will match your search term.
+2. Test Case: `search John`
+
+   - Expected: List of patients with details matching exactly "John" is displayed.
+
+---
+
+### Adding a Record under Patient
+
+1. Prerequisites: Ensure the patient list is displayed
+2. Test Case: `addrecord 1 d/12-11-2023 2200 c/Fever m/Ibuprofen`
+
+   - Expected: Adds the specified record to the first patient.
+
+3. Test Case: `addrecord x d/12-11-2023 2200 c/Fever m/Ibuprofen` (where x > size of patient list)
+   - Expected: Error message displayed, record not added.
+4. Test Case: `addrecord 1 d/12112023 c/Fever m/Ibuprofen`
+   - Expected: Error message displayed suggesting date and time should in the form of dd-mm-yyyy hhmm
+
+---
+
+### View Patient's Medical Records
+
+1. Prerequisites: Ensure the patient list is displayed and contains the entry you wish to view.
+2. Test Case: `view 1`
+
+   - Expected: Medical records of the first patient are displayed, details shown in the status message.
+
+3. Test Case: `view 0`
+
+   - Expected: Error message displayed, **Medical Record List** unchanged.
+
+4. Other Test Cases: `view`, `view x` (where x > list size)
+
+   - Expected: Error message displayed, **Medical Record List** unchanged.
+
+---
+
+### Editing a Record's Details
+
+1. Prerequisites: Ensure the record list of the patient is displayed and contains the entry you wish to edit.
+2. Test Case: `editrecord 1/1 c/Fever`
+
+   - Expected: The record at index 1 of the Patient at index 1 has its conditions updated to only "Fever". Details shown in the status message.
+
+3. Test Case: `editrecord 1/1 c/Fever m/Paracetamol`
+
+   - Expected: The record at index 1 of the Patient at index 1 has its conditions updated to only "Fever" and medications to only "Paracetamol". Details shown in the status message.
+
+4. Test Case: `editrecord x/1 c/Fever` (where x > patient list size)
+
+   - Expected: Error message displayed, record's details unchanged.
+
+5. Test Case: `editrecord 1/x c/Fever` (where x > record list size)
+
+   - Expected: Error message displayed, record's details unchanged.
+
+6. Test Case: `editrecord 1/1 d/12112023`
+
+   - Expected: Error message displayed suggesting date and time should in the form of "dd-mm-yyyy hhmm".
+
+7. Test Case: `editrecord 1/1 d/12-11-2023 2200 d/13-11-2023 2200`
+   - Expected: Error message displayed suggesting multiple inputs of date are not allowed.
+
+---
+
+### Deleting a Record
+
+1. Prerequisites: Ensure the record list of the patient is displayed and contains the entry you wish to edit.
+2. Test Case: `deleterecord 1/1`
+
+   - Expected: Deletes the first record of the first patient.
+
+3. Test Case: `deleterecord x/1` (where x > size of patient list)
+
+   - Expected: Error message displayed, **Medical Record List** unchanged.
+
+4. Test Case: `deleterecord 1/y` (where y > size of record list of the first patient)
+   - Expected: Error message displayed, **Medical Record List** unchanged.
+
+---
+
+### Searching Records of the Patient Being Viewed
+
+1. Prerequisites: Ensure the record list of the patient is displayed.
+2. Test Case: `searchrecord Ibuprofen`
+
+   - Expected: List of records with "Ibuprofen" in the details is displayed.
+
+---
+
+### Attaching File to Record
+
+1. Prerequisites: Ensure the record list of the patient is displayed and it is not empty.
+2. Test Case: Click on “Attach Files” and select file from local storage.
+
+   - Expected: “File successfully attached” is displayed and file link is added to record.
+
+3. Test Case: Click on “Attach Files” and cancel the file explorer without selecting a file
+
+   - Expected: Error message displayed as no file was selected.
+
+---
+
+### Opening File in Record
+
+1. Prerequisites: Ensure the record list of the patient is displayed and it is not empty. Ensure the record has a file attached.
+2. Test Case: Click on Filepath link.
+
+   - Expected: File is opened using the user’s default launcher.
+
+3. Test Case: Delete or relocate file in local storage. Click on Filepath link.
+
+   - Expected: Error message displayed as file path no longer exists
 
 ---
 
@@ -1205,25 +1216,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. Prerequisites: Ensure the patient list is displayed and contains the entry you wish to add an appointment to.
 2. Test Case: `addappointment 1 n/Eye Exam d/18-10-2023 1900`
+
    - Expected: New appointment, "Eye Exam" is added to the patient with index 1, details are shown in the status message.
+
 3. Test Case: `addappointment x n/Eye Exam d/18-10-2023 1900` (where x > list size)
-   - Expected: Error message displayed, patient not added.
+   - Expected: Error message displayed, appointment not added.
 4. Test Case: `addappointment 1 d/18-10-2023 1900`
-   - Expected: Error message displayed, patient not added.
+   - Expected: Error message displayed, appointment not added.
 5. Test Case: `addappointment 1 n/Eye Exam`
-   - Expected: Error message displayed, patient not added.
+   - Expected: Error message displayed, appointment not added.
 6. Test Case: `addappointment 1 n/Eye Exam d/18/10/2023 1900`
-   - Expected: Error message displayed, patient not added.
-
----
-
-### Deleting an Appointment
-
-1. Prerequisites: Ensure the appointment list is displayed and contains the entry you wish to delete.
-2. Test Case: `deleteappointment 1`
-   - Expected: Appointment with index 1 is deleted, details are shown in status message.
-3. Test Case: `deleteappointment x` (where x > list size)
-   - Expected: Error message displayed, appointment not deleted.
+   - Expected: Error message displayed, appointment not added.
 
 ---
 
@@ -1239,6 +1242,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Test Case: `viewappointment`
    - Expected: Appointment Window focuses.
 
+---
+
+### Deleting an Appointment
+
+1. Prerequisites: Ensure the appointment list is displayed and contains the entry you wish to delete.
+2. Test Case: `deleteappointment 1`
+   - Expected: Appointment with index 1 is deleted, details are shown in status message.
+3. Test Case: `deleteappointment x` (where x > list size)
+   - Expected: Error message displayed, **Appointment List** unchanged.
+
+---
+
 ### Verifying Patient Data Integrity
 
 #### After Operations
@@ -1253,10 +1268,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Input Mistakes
 
-1. Test Case: `addreocrd n/John Doe i/A0000000A a/30 g/M e/jd@example.com p/98776543 bt/AB+ al/Dust
-   - Expected: Error message displayed, suggesting the correct command format.
+1. Test Case: `addreocrd n/John Doe i/A0000000A a/30 g/M e/jd@example.com p/98776543 bt/AB+ al/Dust`
+
+   - Expected: Error message displayed stating unknown command.
+
 2. Test Case: `delet 1`
-   - Expected: Error message displayed, suggesting the correct command format.
+   - Expected: Error message displayed stating unknown command.
 
 ## Appendix: Planned Enhancements
 
@@ -1306,7 +1323,7 @@ To make the NRIC parameter more inclusive and reflective of real-world use cases
 
 **Optional Passport Number Support**: To accommodate foreign patients who do not have an NRIC, the system will be enhanced to accept passport numbers as an alternative identifier. This feature is particularly important for private clinics that cater to a diverse patient base, including non-residents and tourists.
 
-### Accepting / in Name parameter
+### Accepting `/` in Name parameter
 
 #### Current Implementation
 

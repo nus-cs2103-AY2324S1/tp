@@ -64,6 +64,12 @@ public class PersonCard extends UiPart<Region> {
 
         person.getAllergies().stream()
                 .sorted(Comparator.comparing(allergy -> allergy.allergy))
-                .forEach(allergy -> allergies.getChildren().add(new Label(allergy.allergy + " ")));
+                .forEach(allergy ->
+                {
+                    Label label = new Label(allergy.allergy + " ");
+                    label.setWrapText(true);
+                    label.setMaxWidth(100);
+                    allergies.getChildren().add(label);
+                });
     }
 }

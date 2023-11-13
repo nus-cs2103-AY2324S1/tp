@@ -18,7 +18,7 @@ You can reach us at the email `low.darren[at]u.nus.edu`
 [[github](https://github.com/Darren159)]
 [[portfolio](team/darren159.md)]
 
-* Role: Developer
+- Role: Developer
 
 ### Kim Hanjoo
 
@@ -26,7 +26,8 @@ You can reach us at the email `low.darren[at]u.nus.edu`
 
 [[github](https://github.com/hjoneweek)]
 [[portfolio](team/hjoneweek.md)]
-* Role: Developer
+
+- Role: Developer
 
 ### Adam Ang Zi Jun
 
@@ -34,7 +35,8 @@ You can reach us at the email `low.darren[at]u.nus.edu`
 
 [[github](https://github.com/adammangzijun)]
 [[portfolio](team/adammangzijun.md)]
-* Role: Developer
+
+- Role: Developer
 
 ### Lin Yuxiang
 
@@ -43,8 +45,7 @@ You can reach us at the email `low.darren[at]u.nus.edu`
 [[github](http://github.com/Clin-lyx)]
 [[portfolio](team/clin-lyx.md)]
 
-* Role: Developer
-* Responsibilities: UI
+- Role: Developer
 
 ### Ryan Ong Wei Xian
 
@@ -52,5 +53,5 @@ You can reach us at the email `low.darren[at]u.nus.edu`
 
 [[github](https://github.com/ryanongwx)]
 [[portfolio](team/ryanongwx.md)]
-* Role: Developer
 
+- Role: Developer
