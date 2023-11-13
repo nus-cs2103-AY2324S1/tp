@@ -6,8 +6,59 @@
 
 # KeepInTouch Developer Guide
 
+**_KeepInTouch_** is a desktop app for **managing contacts** for **job-seekers**. It can also help job-seekers to manage **events for career purposes.**
+
 <!-- * Table of Contents -->
 <page-nav-print />
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Table of Contents
+
+* [Table of Contents](#table-of-contents)
+* [Acknowledgements](#acknowledgements)
+* [Setting up and getting started](#setting-up-and-getting-started)
+* [Design](#design)
+    * [Architecture](#architecture)
+    * [UI Component](#ui-component)
+    * [Logic Component](#logic-component)
+    * [Model Component](#model-component)
+    * [Storage Component](#storage-component)
+    * [Common Classes](#common-classes)
+* [Implementation](#implementation)
+    * [List Contact with Tags feature](#list-contact-with-tags-feature)
+        * [Implementing `ListPersonCommandParser`](#implementing-listpersoncommandparser)
+        * [Implementing `ListPersonCommand`](#implementing-listpersoncommand)
+    * [Tag feature](#tag-feature)
+        * [Overview: Tag](#overview-tag)
+        * [Implementing `AddTagCommandParser` and `DeleteTagCommandParser`](#implementing-addtagcommandparser-and-deletetagcommandparser)
+        * [Implementing `AddTagCommand`](#implementing-addtagcommand)
+        * [Implementing `DeleteTagCommand`](#implementing-deletetagcommand)
+        * [Design Considerations](#design-considerations)
+    * [Notes feature](#notes-feature)
+        * [Overview: Note](#overview-note)
+        * [Implementing `AddNoteCommandParser`](#implementing-addnotecommandparser)
+        * [Implementing `DeleteNoteCommandParser`](#implementing-deletenotecommandparser)
+        * [Implementing `AddNoteCommand`](#implementing-addnotecommand)
+        * [Implementing `DeleteNoteCommand`](#implementing-deletenotecommand)
+    * [Enhanced help feature](#enhanced-help-feature)
+    * [[Proposed] Undo/redo feature](#proposed-undoredu-feature)
+        * [Proposed Implementation](#proposed-implementation)
+        * [Design Considerations](#design-considerations-1)
+* [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+* [Appendix A: Requirements](#appendix-a-requirements)
+    * [Product Scope](#product-scope)
+    * [User Stories](#user-stories)
+    * [Use Cases](#use-cases)
+    * [Non-Functional Requirements](#non-functional-requirements)
+    * [Glossary](#glossary)
+* [Appendix B: Instructions for manual testing](#appendix-b-instructions-for-manual-testing)
+    * [Launch and shutdown](#launch-and-shutdown)
+    * [Deleting a person](#deleting-a-person)
+    * [Adding tag](#adding-tag)
+    * [Deleting tag](#deleting-tag)
+* [Appendix C: Planned enhancements](#appendix-c-planned-enhancements)
+    * [User Interface](#user-interface)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -21,7 +72,7 @@ https://github.com/rrice/java-string-similarity. Reused the sourcecode of this l
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting up and getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -69,7 +120,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### UI Component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-W16-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -86,7 +137,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
-### Logic component
+### Logic Component
 
 **API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-W16-1/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -123,7 +174,7 @@ How the parsing works:
 *   - The parsing method for each types of arguments are mainly in `ParserUtil.java`
 * If the command is correct in format, the parser will then return a Command Object for the execution of the command.
 
-### Model component
+### Model Component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-W16-1/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="600" />
@@ -136,7 +187,7 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-### Storage component
+### Storage Component
 
 **API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-W16-1/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -147,7 +198,7 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component such as `Person`, `Note`, and `Event` because the `Storage` component's job is to save/retrieve objects that belong to the `Model`.
 
-### Common classes
+### Common Classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
@@ -210,7 +261,7 @@ The following activity diagram shows how the `list contact` command works:
 ### Tag feature
 This feature allows users to add and remove `Tag` to any `Person` in the contact list. It provides an easy way for users to catrgorize their contacts.
 
-#### Overview:
+#### Overview: Tag
 The adding and removing of `Tag` begins with the parsing of the `AddTagCommand` and `DeleteTagCommand` using the `AddTagCommandParser` and `DeleteTagCommandparser` respectively. The `AddTagCommand` and `DeleteTagCommand` will then be executed by the `Model`.
 
 The activity diagram below shows the action sequence of adding one or more `Tag` to a contact.
@@ -281,7 +332,7 @@ The following activity diagram summarizes what happens when the `DeleteTagComman
 ### Notes feature
 This feature allows users to add and remove `Note` to any `Person` in the contact list. It provides an easy way for users to record additional information about the contacts.
 
-#### Overview:
+#### Overview: Note
 The adding and removing of `Note` begins with the parsing of the `AddNoteCommand` and `DeleteNoteCommand` using the `AddNoteCommandParser` and `DeleteNoteCommandParser` respectively. The `AddNoteCommand` and `DeleteNoteCommand` will then be executed by the `Model`.
 
 The activity diagram below shows the action sequence of adding a `Note` to a contact.
@@ -444,18 +495,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Planned Enhancements**
-
-This section describes some enhancement that can be made to the existing app.
-
-### User Interface
-
-* In the current version, long names (usually longer than 40 characters) are truncated in the interface. Wrapping of names can be implemented so that long names are displayed in a more readable and user-friendly manner.
-* The highlight of the contact entries is gray in color and the color of the text is white. The low contrast of the two colors decreases the readability of the texts. The color of the highlight can be changed to a darker color.
-* The viewing the list of events using the `list events` command, the details of the contact which the event belongs to, is not present. This is incovenient for users as they will have to look through the contact list manually to find the contact. Future updates can append the contact details together with the event details when listing events.
-
---------------------------------------------------------------------------------------------------------------------
-
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -466,9 +505,9 @@ This section describes some enhancement that can be made to the existing app.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **Appendix A: Requirements**
 
-### Product scope
+### Product Scope
 
 **Target user profile**:
 
@@ -482,7 +521,7 @@ This section describes some enhancement that can be made to the existing app.
 **Value proposition**: manage information regarding many job offers in a organised and uncluttered manner for users who is comfortable with CLI apps.
 
 
-### User stories
+### User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -504,7 +543,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                               | clear all data                | remove all unused data and start managing a new contact list                                                                |
 | `* * *`  | user who finishes using the application | exit the program              | exit the program normally while ensuring all my data is currectly saved                                                     |
 
-### Use cases
+### Use Cases
 
 (For all use cases below, the **System** is the `KeepInTouch` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -810,7 +849,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix B: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -928,3 +967,15 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `add tag -id 1 -t x`, when at least 1 contact is shown and `x` is a non-existing tag in the first contact. <br>
     Expected: The tag `x` is no longer below the name of the first contact in the list. The list of tags deleted is shown in the status message. List will go back to showing all contacts.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix C: Planned Enhancements**
+
+This section describes some enhancement that can be made to the existing app.
+
+### User Interface
+
+* In the current version, long names (usually longer than 40 characters) are truncated in the interface. Wrapping of names can be implemented so that long names are displayed in a more readable and user-friendly manner.
+* The highlight of the contact entries is gray in color and the color of the text is white. The low contrast of the two colors decreases the readability of the texts. The color of the highlight can be changed to a darker color.
+* The viewing the list of events using the `list events` command, the details of the contact which the event belongs to, is not present. This is incovenient for users as they will have to look through the contact list manually to find the contact. Future updates can append the contact details together with the event details when listing events.
