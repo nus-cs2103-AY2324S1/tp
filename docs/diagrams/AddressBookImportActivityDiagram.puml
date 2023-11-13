@@ -5,12 +5,12 @@ skinparam ArrowFontSize 12
 start
 :User executes "importaddressbook" command;
 
-if (Valid Format?) then (Yes)
-    :Read Address Book from file;
-    :Update Address Book as addressbook.json;
-    :Provide Success Feedback;
-else (No)
-    :Provide Error Feedback;
+if () then ([File exists and has valid format])
+    :Read data from file;
+    :Update Address Book with new data;
+    :Show success message;
+else ([Else])
+    :Show error message;
 endif
 
 stop

@@ -297,7 +297,7 @@ such as CSV and JSON. The process involves several key steps:
     - Assign different types of exceptions to various format errors or inconsistencies with the required format.
     - Provide detailed feedback on any issues or conflicts encountered during the import process.
     - Consider generating a `CommandResult` that reflects the outcome of the import operation, indicating success or
-      specifying the encountered errors.
+      specifying the encountered errors.<br>
       <img src="images/TransactionBookImportActivityDiagram.png"/>
       <img src="images/AddressBookImportActivityDiagram.png"/>
 
