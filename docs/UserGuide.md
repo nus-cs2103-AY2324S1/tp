@@ -58,8 +58,6 @@ quick reference to all the commands available in CMC.
 If you are facing any problems with the commands or are unsure of anything, you may refer to the [FAQ](#6-frequently-asked-questions-faqs) for common questions,
 or refer to [Common Mistakes](#7-common-mistakes) for common errors our users may face while using the application.
 
-<div style="page-break-after: always;"></div>
-
 ## 2. Quick start
 
 1. Ensure you have Java 11 or above installed in your Computer.
@@ -72,6 +70,8 @@ or refer to [Common Mistakes](#7-common-mistakes) for common errors our users ma
 4. A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
    ![Ui](images/Ui.png)
+
+   <div style="page-break-after: always;"></div>
 
 5. Type the command in the command box and press Enter to execute it.
    Here are some example commands you can try:
@@ -98,7 +98,6 @@ or refer to [Common Mistakes](#7-common-mistakes) for common errors our users ma
 <div markdown="span" class="alert alert-warning">:exclamation: **CAUTION:**
 If you are using a PDF version of this User Guide, be careful when copy-pasting the commands that span beyond several lines. 
 </div>
---------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
@@ -123,8 +122,6 @@ The key windows are labeled as follows:
 The "Help" window will look like as follows:
 
 ![Help_Window](images/helpMessage.png)
-
---------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
