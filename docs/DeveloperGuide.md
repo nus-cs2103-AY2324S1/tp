@@ -137,7 +137,8 @@ the user's input into key-value pairs, where the keys are specified using `Argum
 
 The activity diagram below describes the workflow of `AddressBookParser`
 when determining which `Parser` to use:
-* `TO BE IMPLEMENTED IN 1.4`
+
+<img src="images/AddressBookParser.png" width="600"/>
 
 The sequence diagram below illustrates the interactions within the
 `FilterCommand` class to generate a `FilterCommand` object, using
