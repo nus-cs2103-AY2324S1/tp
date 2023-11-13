@@ -141,7 +141,7 @@ Format: `edit INDEX [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [e/EMAIL] [a/ADDRESS] [
 
 Examples:
 *  `edit 1 l/SNB9876E` updates the policy at the INDEX number 1 with the new licence plate provided.
-*  `edit 2 pn/AB12345J pe/31-12-2024` updates the policy at the INDEX number 2 with the new policy number and expiration date.
+*  `edit 2 pn/AB12345J pe/31-12-2024` updates the policy at the INDEX number 2 with the new policy number and expiry date.
 
 Acceptable values for each parameter:
 * `n/NAME`: Alphanumeric.
@@ -243,11 +243,11 @@ Error: The parameter is not of the type positive integer
 ```
 
 
-### Sorting clients by policy expiration date : `sort`
+### Sorting clients by policy expiry date : `sort`
 
 Format: `sort`
 
-* Sorts the list from earliest to latest policy expiration date.
+* Sorts the list from earliest to latest policy expiry date.
 * People in the list with no policy data will be at the end of the sorted list.
 * The parameter, if any, inputted after `sort` is ignored.
 
@@ -259,9 +259,9 @@ Expected output upon success :
 ![SortSuccess](images/SortSuccess.png)
 
 
-### Remind user of clients policy expiration date : `remind`
+### Remind user of clients policy expiry date : `remind`
 
-Reminds the user of clients that have approaching policy expiration date within a certain number of days.
+Reminds the user of clients that have approaching policy expiry date within a certain number of days.
 
 Format: `remind NUMBER_OF_DAYS`
 

@@ -77,7 +77,7 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Sorts the people in the list based off the policy expiration date
+     * Sorts the people in the list based off the policy expiry date
      * Those with no policy are at the end of the list
      */
     public void sort() {
