@@ -74,6 +74,16 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public void openDashboard() {
+        model.openDashboard();
+    }
+
+    @Override
+    public void closeDashboard() {
+        model.closeDashboard();
+    }
+
+    @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
     }

@@ -133,6 +133,16 @@ public class ModelManager implements Model {
         return dashboard;
     }
 
+    @Override
+    public void openDashboard() {
+        dashboard.openDashboard();
+    }
+
+    @Override
+    public void closeDashboard() {
+        dashboard.closeDashboard();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

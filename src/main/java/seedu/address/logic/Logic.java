@@ -39,6 +39,16 @@ public interface Logic {
      */
     Dashboard getDashboard();
 
+    /**
+     * Opens the Dashboard.
+     */
+    void openDashboard();
+
+    /**
+     * Closes the Dashboard.
+     */
+    void closeDashboard();
+
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
 
