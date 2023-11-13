@@ -2,9 +2,9 @@
 !include style.puml
  skinparam ArrowFontStyle plain
 
-participant ":LogCommand" as LogCommand
-participant ":Model" as Model
-participant ":LogBook" as LogBook
+participant ":LogCommand" as LogCommand LOGIC_COLOR
+participant ":Model" as Model MODEL_COLOR
+participant ":LogBook" as LogBook MODEL_COLOR
 
 -> LogCommand: execute()
 
