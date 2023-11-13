@@ -1,27 +1,26 @@
 @startuml
 !include style.puml
 skinparam arrowThickness 1.1
-skinparam arrowColor UI_COLOR_T4
-skinparam classBackgroundColor UI_COLOR
-
-class Person {
-    List<Interaction> interactions
-}
-
+skinparam arrowColor MODEL_COLOR_T4
+skinparam classBackgroundColor MODEL_COLOR
+skinparam classAttributeIconSize 0
+Package Interaction as ModelPackage <<Rectangle>>{
 class Interaction {
-    String interactionNote
-    Outcome outcome
-    LocalDate date
+<color: #FFFFFF>- Date: date
+<color: #FFFFFF>- String: interactionNote
+}
+class "<<enum>>\nOutcome" as Outcome {
+        CLOSED
+        INTERESTED
+        NOT_INTERESTED
+        FOLLOWUP_REQUIRED
+        UNKNOWN
 }
 
-enum Outcome {
-    CLOSED
-    INTERESTED
-    NOT_INTERESTED
-    FOLLOWUP_REQUIRED
-    UNKNOWN
-}
+show Interaction fields
+show Outcome members
 
-Person "1" -- "0..*" Interaction
-Interaction -- Outcome
+Interaction *--> "1" Outcome
+hide empty methods
+}
 @enduml
