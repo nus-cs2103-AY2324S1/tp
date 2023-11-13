@@ -8,7 +8,7 @@ title: Developer Guide
 1. [Acknowledgements](#acknowledgements)
 2. [Setting Up](#setting-up)
 3. [Design](#design)
-    1. [Overall Architecture](#overall-architecture)
+    1. [Architecture](#architecture)
     2. [UI Component](#ui-component)
     3. [Logic Component](#logic-component)
     4. [Model Component](#model-component)
@@ -33,40 +33,81 @@ title: Developer Guide
     6. [Find Command](#find-command)
         1. [Implementation](#implementation)
         2. [Design Considerations](#design-considerations)
-    7. [Clear Command](#clear-command)
+   7. [Interview and Interview Commands](#interview-and-interview-commands)
         1. [Implementation](#implementation)
         2. [Design Considerations](#design-considerations)
-    8. [Interview and Interview Commands](#interview-and-interview-commands)
-        1. [Implementation](#implementation)
-        2. [Design Considerations](#design-considerations)
-5. [Appendix A: Requirements](#appendix-a-requirements)
+5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+6. [Appendix A: Requirements](#appendix-a-requirements)
     1. [Product scope](#product-scope)
     2. [User stories](#user-stories)
     3. [Use cases](#use-cases)
     4. [Non-Functional Requirements](#non-functional-requirements)
     5. [Glossary](#glossary)
-6. [Appendix B: Instructions for Manual Testing](#appendix-b-instructions-for-manual-testing)
-7. [Appendix C: Effort](#appendix-c-effort)
-8. [Appendix D: Planned Enhancements](#appendix-d-planned-enhancements)
+7. [Appendix B: Instructions for Manual Testing](#appendix-b-instructions-for-manual-testing)
+8. [Appendix C: Effort](#appendix-c-effort)
+9. [Appendix D: Planned Enhancements](#appendix-d-planned-enhancements)
+   1. 
 
 ---
 
 ## **Acknowledgements**
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries – include links to the
-original source as well}
+All code and documentation are either written by ourselves or adopted from the original AB3 implementation.
 
 ---
 
 ## **Setting Up**
 
-Refer to the guide [Setting up and getting started].
+Refer to the guide [Setting up and getting started](SettingUp.md).
 
 ---
 
 ## **Design**
 
-### Overall Architecture
+<div markdown="span" class="alert alert-primary">
+
+Tip: The `.puml` files used to create diagrams in this document can be found in the [diagrams](diagrams) folder. Refer to the [PlantUML Tutorial at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+</div>
+
+### Architecture
+
+<img src="images/developer-guide/ArchitectureDiagram.png" width="280" />
+
+The architecture diagram above explains the high-level design of the App.
+
+A quick overview of the main components and how they interact with each other is as follows:
+
+#### Main Components
+
+`Main` has two classes: `Main` and `MainApp` which are the entry and exit points of the application.
+
+* At launch: they initialize the components in the correct sequence and connect them together.
+* At exit: they ensure the components are shut down properly and invoke cleanup operations if necessary.
+
+`Commons` represents the common classes used by all components.
+
+The other four component of the App are as follows:
+* `UI`: Handles the user interface of the application.
+* `Logic`: Handles command execution and data manipulation.
+* `Model`: Stores the data of the application.
+* `Storage`: Handles the saving and loading of data on the hard disk.
+
+#### Component Interactions
+
+The sequence diagram below shows the interactions between components for the `delete 1` command:
+
+<img src="images/developer-guide/ArchitectureSequenceDiagram.png" width="900" />
+
+Each of the four main components:
+
+* Defines its API in an `interface` named after the component.
+* Implements its functionality using a `{Component Name}Manager` class, following the corresponding API interface.
+
+For example, the `Logic` component's API is defined in `Logic.java`, and its functionality is implemented in `LogicManager.java`. 
+
+Other components interact with a given component (e.g. `Logic`) by calling methods defined in the corresponding API interface (e.g. `Logic.java`) instead of calling methods directly on the implementation class (e.g. `LogicManager.java`). This is to ensure that the caller does not depend on the implementation details of the component. This is illustrated in the class diagram below.
+
+<img src="images/developer-guide/ComponentManagers.png" width="900" />
 
 ### UI Component
 
@@ -136,6 +177,11 @@ For more details about command-specific parsing and execution, refer to "[Implem
 
 ### Model Component
 
+**API:**
+[`Model.java`](https://github.com/migfoo02/tp/blob/master/src/main/java/seedu/application/model/Model.java)
+
+
+
 ### Storage Component
 **API:**
 [`Storage.java`](https://github.com/AY2324S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/application/storage/Storage.java)
@@ -144,7 +190,7 @@ The `Storage` component is responsible for storing the job application data in J
 
 The `Storage` component,
 
-* Can save both address book data and user preference data in JSON format, and read them back into corresponding
+* Saves both address book data and user preference data in JSON format, and read them back into corresponding
   objects.
 * Inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
   the functionality of only one is needed).
@@ -167,26 +213,40 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Add Command
 
-The add command allows the user to add job applications with various attributes.
+#### Overview
+The `add` command allows the user to add job applications with various attributes. Attributes can be categorized into
+* Compulsory attributes such as `Company` and `Role`.
+* Optional attributes such as `Status`, `Industry`, `Deadline` and `JobType`
 
-Compulsory attributes are `Company` and `Role`.
+#### Related Classes and Methods
 
-Optional attributes are `Status`, `Industry`, `Deadline` and `JobType`
+* `AddCommandParser#parse(String)`: Parses command input 
+* `AddCommand#execute(Model)`: Executes add command 
+* `Model#addJob(Job)`, `ApplicationBook#addJob(Job)`, `UniqueJobList#add(Job)`: Adds a job application.
 
 #### Implementation
 
-It is implemented by `AddCommand` and `AddCommandParser`.
+1. **Parse User Input:** `AddCommandParser` checks for necessary parameters and their validity.
+2. **Create Job Object:** A `Job` object is instantiated during `AddCommandParser#parse(String)` and handed over to the `AddCommand`.
+3. **Execute Command**: `AddCommand#execute(Model)` adds the new job application to the `UniqueJobList` in the `ApplicationBook`.
 
-`AddCommandParser` parses the users' input and checks for the presence of compulsory and optional prefixes.
-The information is then used to create a new Job Application through the `AddCommand`.
+The following sequence/activity diagram illustrates the process of invocation for the `AddCommand`:
 
-(insert UML diagram here)
-
-The following sequence/activity diagram illustrates the process of invocation for the AddCommand:
-
-(insert UML diagram here)
+<img src="images/developer-guide/AddSequenceDiagram.png" width="1124" />
 
 #### Design Considerations
+
+1. **Handling of optional parameters**: 
+   1. With default parameters: The `AddCommandParser` checks for the presence of optional parameters. If the
+      parameters are not present, default parameters are used to instantiate the `Job` object.
+       * *Pros*: This is a simple implementation which does not require any changes to the `AddCommand` class.
+       * *Cons*: This implementation is not flexible as the default parameters are fixed. If the user wants to add a job
+         application with a different set of default parameters, the code has to be changed.
+   2. Without default parameters: If the
+      parameters are not present, a different constructor is used to instantiate the `Job` object.
+       * *Pros*: This implementation is more flexible as the user can specify the parameters they want to add.
+       * *Cons*: This implementation is more complicated as the `AddCommand` class has to be modified to handle the
+         different constructors.
 
 ---
 
@@ -470,6 +530,14 @@ The following sequence diagram illustrates the process of parsing and invocation
       layer may add unnecessary complication to the codebase.
     * This method can be implemented in the future as the more Interview Sub Commands are implemented.
 
+---
+## **Documentation, logging, testing, configuration, dev-ops**
+
+* [Documentation guide](Documentation.md)
+* [Testing guide](Testing.md)
+* [Logging guide](Logging.md)
+* [Configuration guide](Configuration.md)
+* [DevOps guide](DevOps.md)
 ---
 
 ## **Appendix A: Requirements**
@@ -1048,14 +1116,72 @@ Explain the difficulty level, challenges faced, effort required, and achievement
 
 ## **Appendix D: Planned Enhancements**
 
-listing fixes you propose to add in the near future, to counter known feature flaws.
-This section may contain up to team_size x 2 enhancements e.g., a 5-person team can have up to 10 enhancements.
-Each enhancement should be specific, describing the feature flaw it addresses and how exactly the feature will be
-changed, providing sample UIs/inputs/outputs if applicable. e.g.,
-The current error message for a failed contact deletion Operation failed! is too general. We plan to make the error
-message also mention which action failed and the reason for the failure: The contact Amy Lee could not be deleted as it
-is referenced by another contact Ben Chua.
-Each enhancement should be a tweak to an existing feature, and should not be a new feature altogether.
-type.FeatureFlaw bug reports matching an item in this section will not be penalized for the team, and testers will not
-earn credit for reporting them either. However, testers can report type.FeatureFlaw bugs on the enhancements listed in
-this section, if they think the planned feature tweak itself is flawed/inadequate.
+The current implementation of JobFindr allows users to manage their job applications relatively efficiently through a CLI. However, we have identified several areas for improvement in terms of flexibility, efficiency and organization. As such, our proposed enhancements are targeted at improving these areas.
+
+### Warning for Clear Command
+   
+#### Current State
+The `clear` command executes without any prior warning, risking accidental deletion of all job applications without warning.
+
+#### Planned Enhancement
+We plan to introduce a confirmation step before the execution of the `clear` command.
+
+#### Implementation Details
+* **Confirmation Prompt:** Introduce an interactive prompt requiring explicit user confirmation before executing the `clear` command.
+* **Command-Line Argument:** Optionally, provide a command-line argument to bypass the confirmation for automated scripts.
+
+### Enhanced Sort Feature
+
+#### Current State
+
+The `sort` command places all the empty optional fields at the end of the job application field after sorting based on an optional field. For example, if the user sorts the job application list by `status`, all the job applications with no status (i.e. `TO_ADD_STATUS`) will be placed at the end of the list. This is not ideal as the user may want to view all the job applications with no status at the top of the list.
+
+#### Planned Enhancement
+
+We plan to make `sort` show all the job applications with empty optional fields at the top of the list after sorting based on an optional field.
+
+#### Implementation Details
+
+* **Sorting Algorithm:** Modify the sorting algorithm to place all the job applications with empty optional fields at the top of the list after sorting based on an optional field.
+* **Updated User Interface:** Update the user interface to show all the job applications with empty optional fields at the top of the list after sorting based on an optional field.
+* **Performance Considerations:** The sorting algorithm should be efficient enough to handle a large number of job applications.
+
+### Arrange Interviews in Chronological Order
+
+#### Current State
+
+The `interview` command arranges interviews based on the order they are added. This may lead to confusion as the user is unable to view the interviews in chronological order.
+
+#### Planned Enhancement
+
+We plan to arrange interviews in chronological order for each job application.
+
+#### Implementation Details
+
+* **Add Field Comparator:** Add a field comparator to sort the interviews in chronological order, much like how `deadline` is sorted.
+
+### Allow Interviews to have Multiple Types
+
+#### Current State
+
+The `interview` command only allows users to add one type of interview to each job application. For example, an interview can be labelled as `Technical` or `Online`, but not both. This is not flexible enough as it is common for interviews to have multiple types associated with them.
+
+#### Planned Enhancement
+
+We plan to allow users to add multiple types to each interview. An interview can have as many types as the user wants as long as they are valid.
+
+#### Implementation Details
+
+* **Modify Interview Type Field:** Modify the interview type field to be a `Set` instead of a `String`. This allows users to add multiple types to each interview.
+* **Update User Interface:** Update the user interface to support displaying the multiple interview types as a `String`.
+
+1. User Customisation
+* Allow users to add their own fields to the job application
+* Allows users to choose which fields are shown.
+
+2. Keyboard Shortcuts
+* Allow users to use keyboard shortcuts to execute commands for faster execution.
+
+3. Integrated Dashboard
+* Allow users to view their job applications on a dashboard, enabling them to view their progress at a glance.
+
