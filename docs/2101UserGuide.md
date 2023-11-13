@@ -37,7 +37,7 @@ layout: page
 <div style="page-break-after: always;"></div>
 ## Introduction
 As a Co-curricular Activity (CCA) head, do you find yourself struggling to manage your CCA members’ attendances and record the array of events that your CCA has?
-Are the heaps of spreadsheets you are using to manage them making you feel overwhelmed? Well, fear not, **CCACommander Ultra ProMax Xtra 9000PLUS** is here to save the day!
+Are the heaps of spreadsheets you are using to manage them making you feel overwhelmed? Well, fear not, **CCACommander Ultra Promax Xtra 9000PLUS** is here to save the day!
 
 CCACommander is a desktop application that helps CCA leaders record details of their members and events, whilst tracking every member’s attendance. 
 It helps to organise members and events into easy-to-view compartments under a singular [Graphical User Interface (GUI)](https://blog.hubspot.com/website/what-is-gui) while providing granular control to you via its in-built [Command Line Interface (CLI)](https://www.techtarget.com/searchwindowsserver/definition/command-line-interface-CLI). 
