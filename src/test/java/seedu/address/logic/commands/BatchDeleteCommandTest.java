@@ -100,8 +100,10 @@ public class BatchDeleteCommandTest {
 
     @Test
     public void equals_sameBatchDeleteCommand_returnsTrue() {
-        assertTrue(new BatchDeleteCommand(month, null)
-                .equals(new BatchDeleteCommand(month, null)));
+        BatchDeleteCommand command = new BatchDeleteCommand(month, null);
+        assertTrue(command.equals(command));
+
+        assertTrue(command.equals(new BatchDeleteCommand(month, null)));
 
         assertTrue(new BatchDeleteCommand(null, company)
                 .equals(new BatchDeleteCommand(null, company)));
