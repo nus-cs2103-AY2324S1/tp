@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_G01;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_T09;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -126,24 +128,49 @@ public class DeleteCommandTest {
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
+        DeleteCommand deleteOneFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        DeleteCommand deleteOneSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
+        Optional<Tag> tag1 = Optional.of(Tag.create(VALID_TAG_G01));
+        Optional<Tag> tag2 = Optional.of(Tag.create(VALID_TAG_T09));
+        DeleteCommand deleteAllFirstCommand = new DeleteCommand(tag1, ContainsTagPredicate.create(tag1));
+        DeleteCommand deleteAllSecondCommand = new DeleteCommand(tag2, ContainsTagPredicate.create(tag2));
 
         // same object -> returns true
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+        assertTrue(deleteOneFirstCommand.equals(deleteOneFirstCommand));
+        assertTrue(deleteAllFirstCommand.equals(deleteAllFirstCommand));
+
+        // same values -> returns true
+        DeleteCommand deleteOneFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON);
+        assertTrue(deleteOneFirstCommand.equals(deleteOneFirstCommandCopy));
+        DeleteCommand deleteAllFirstCommandCopy = new DeleteCommand(tag1, ContainsTagPredicate.create(tag1));
+        assertTrue(deleteAllFirstCommand.equals(deleteAllFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(deleteOneFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(deleteOneFirstCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(deleteOneFirstCommand.equals(deleteOneSecondCommand));
+
+
+
+        // same object -> returns true
+        assertTrue(deleteOneFirstCommand.equals(deleteOneFirstCommand));
 
         // same values -> returns true
         DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON);
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
+        assertTrue(deleteOneFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(deleteFirstCommand.equals(1));
+        assertFalse(deleteOneFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(deleteFirstCommand.equals(null));
+        assertFalse(deleteOneFirstCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+        assertFalse(deleteOneFirstCommand.equals(deleteOneSecondCommand));
     }
 
     @Test

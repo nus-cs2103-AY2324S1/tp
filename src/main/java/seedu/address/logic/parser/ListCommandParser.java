@@ -24,8 +24,8 @@ import seedu.address.model.week.Week;
  * Parses input arguments and creates a new ListCommand object
  */
 public class ListCommandParser implements Parser<ListCommand> {
-    private final Logger logger = LogsCenter.getLogger(ListCommandParser.class);
     private static final Pattern LIST_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private final Logger logger = LogsCenter.getLogger(ListCommandParser.class);
 
     /**
      * Parses the given {@code String} of arguments in the context of the ListCommand
@@ -54,7 +54,8 @@ public class ListCommandParser implements Parser<ListCommand> {
         case ListAttendanceCommand.COMMAND_WORD:
             logger.fine("Parsing list attendance");
             if (argMultimap.getValue(PREFIX_WEEK).isEmpty() || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListAttendanceCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ListAttendanceCommand.MESSAGE_USAGE));
             }
             String weekString = argMultimap.getValue(PREFIX_WEEK).get();
             Week week = ParserUtil.parseWeek(weekString);
@@ -62,10 +63,11 @@ public class ListCommandParser implements Parser<ListCommand> {
                     new AbsentFromTutorialPredicate(week, tag));
         case ListStudentsCommand.COMMAND_WORD:
             logger.fine("Parsing list students");
-            if (arguments.isEmpty()) {
-                return new ListStudentsCommand();
+            if (!arguments.isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ListStudentsCommand.MESSAGE_USAGE));
             }
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListStudentsCommand.MESSAGE_USAGE));
+            return new ListStudentsCommand();
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }

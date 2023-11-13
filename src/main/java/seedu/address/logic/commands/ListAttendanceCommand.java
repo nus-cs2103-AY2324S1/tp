@@ -67,7 +67,7 @@ public class ListAttendanceCommand extends ListCommand {
      * @param numOfPresentees Number of students who were present
      * @param numOfStudents Number of students in total or in tutorial group
      */
-    public String getAttendanceSummary(boolean isWithTag, int numOfPresentees, int numOfStudents, String courseCode) {
+    public String summaryBuilder(boolean isWithTag, int numOfPresentees, int numOfStudents, String courseCode) {
         assert numOfPresentees <= numOfStudents;
         return isWithTag
                 ? String.format(MESSAGE_ATTENDANCE_SUMMARY_WITH_TAG, numOfPresentees, numOfStudents,
@@ -76,7 +76,12 @@ public class ListAttendanceCommand extends ListCommand {
                         week.getWeekNumber(), courseCode);
     }
 
-    public ArrayList<Person> getUnmarkedPersons(List<Person> personList) {
+    /**
+     * Returns an ArrayList containing persons with unmarked attendance.
+     *
+     * @param personList List of persons to check if attendance was marked for
+     */
+    public ArrayList<Person> unmarkedPersonsListBuilder(List<Person> personList) {
         ArrayList<Person> unmarkedPersons = new ArrayList<>();
         for (Person p : personList) {
             if (!p.getAttendanceRecords().stream().anyMatch(atd -> atd.getWeek().equals(week))) {
@@ -105,14 +110,15 @@ public class ListAttendanceCommand extends ListCommand {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-
         model.clearFilters();
+
         boolean isWithTag = false;
         int numberOfStudents = model.getFilteredPersonList().size();
         String courseCode = model.getAddressBook().getCourseCode();
 
         if (tag.isPresent()) {
             model.addFilter(tutorialPredicate);
+
             isWithTag = true;
             numberOfStudents = model.getFilteredPersonList().size();
 
@@ -121,7 +127,7 @@ public class ListAttendanceCommand extends ListCommand {
             }
         }
 
-        ArrayList<Person> unmarkedPersons = getUnmarkedPersons(model.getFilteredPersonList());
+        ArrayList<Person> unmarkedPersons = unmarkedPersonsListBuilder(model.getFilteredPersonList());
         if (!unmarkedPersons.isEmpty()) {
             String nameList = unmarkedPersons.stream().map(person -> person.getName().toString())
                     .collect(Collectors.joining(", "));
@@ -133,7 +139,7 @@ public class ListAttendanceCommand extends ListCommand {
 
         int numberOfAbsentees = model.getFilteredPersonList().size();
         int numberOfPresentees = numberOfStudents - numberOfAbsentees;
-        String attendanceSummary = getAttendanceSummary(isWithTag, numberOfPresentees, numberOfStudents, courseCode);
+        String attendanceSummary = summaryBuilder(isWithTag, numberOfPresentees, numberOfStudents, courseCode);
 
         return new CommandResult(attendanceSummary + MESSAGE_SUCCESS);
     }

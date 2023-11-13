@@ -48,6 +48,7 @@ public class DeleteCommand extends Command {
      * @param targetIndex Index number used in the displayed person list of the target
      */
     public DeleteCommand(Index targetIndex) {
+        assert targetIndex != null;
         this.targetIndex = targetIndex;
         this.tag = null;
         this.tagPredicate = null;
@@ -63,24 +64,20 @@ public class DeleteCommand extends Command {
         this.tagPredicate = tagPredicate;
     }
 
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-
+    private CommandResult executeDeleteOne(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
-        String courseCode = model.getAddressBook().getCourseCode();
 
-        if (!(targetIndex == null)) {
-            if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
-
-            Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-            model.deletePerson(personToDelete);
-            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        model.clearFilters();
+        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deletePerson(personToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+    }
+
+    private CommandResult executeDeleteAll(Model model) {
+        String courseCode = model.getAddressBook().getCourseCode();
 
         if (tag.isPresent()) {
             model.addFilter(tagPredicate);
@@ -107,6 +104,19 @@ public class DeleteCommand extends Command {
                 ? new CommandResult(String.format(MESSAGE_DELETE_TAGGED_SUCCESS,
                         courseCode, tag.get().getTagName(), nameList))
                 : new CommandResult(String.format(MESSAGE_DELETE_NO_TAG_SUCCESS, courseCode, nameList));
+    }
+
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+
+        if (!(targetIndex == null)) {
+            return executeDeleteOne(model);
+        }
+
+        model.clearFilters();
+        return executeDeleteAll(model);
     }
 
     @Override
