@@ -1104,7 +1104,7 @@ testers are expected to do more *exploratory* testing.
     * Step 5. Press the arrow down button on keyboard.<br>
       Expected: `list schedule` is shown in the command box.
 
-### Clear Feature
+### Clear
 
 1. Prerequisites:
     * There are more than 1 student, 1 lesson and 1 task in the application.<br><br>
@@ -1112,7 +1112,7 @@ testers are expected to do more *exploratory* testing.
 2. Test case: `clear` <br>
    Expected: The list panel becomes empty. A message indicating student, schedule and task list is cleared is shown in the response box.
 
-### Exit Feature   
+### Exit   
 
 1. Prerequisites:
     * Run the application.<br><br>
