@@ -117,7 +117,7 @@ There are two ways you can use to navigate to the profile page.
 Let's say you want to open the profile page of a fosterer name Alex Yeoh who is currently at index 1. 
 
 <div style="text-align: center">
-<img src="images/screenshots/ViewCommandExample.png" height="490" class="center"/>
+<img src="images/screenshots/ViewCommandExample.png" height="440" class="center"/>
 </div>
 
 <br>
@@ -125,7 +125,7 @@ Let's say you want to open the profile page of a fosterer name Alex Yeoh who is 
 To do so, enter <code>view 1</code> as shown in the image above, which opens the profile page of the fosterer at index 1, Alex Yeoh. 
 
 <div style="text-align: center">
-<img src="images/screenshots/EditExample.png" height="570" class="center"/>
+<img src="images/screenshots/EditExample.png" height="520" class="center"/>
 </div>
 
 <br>
@@ -136,7 +136,7 @@ To do so, enter <code>view 1</code> as shown in the image above, which opens the
 Typing in the name of the field you want to edit, or substrings of the field, directs your cursor to the textbox, allowing you to make changes.
 
 <div style="text-align: center">
-<img src="images/screenshots/BeforeEnteringName.png"  height="360" class="center"/>
+<img src="images/screenshots/BeforeEnteringName.png" class="center"/>
 </div>
 
 <br>
@@ -146,7 +146,7 @@ In the example above, entering <code>name</code>, or a substring of name like <c
 <br>
 
 <div style="text-align: center">
-<img src="images/screenshots/NavigatingFields.png" height="310" class="center"/>
+<img src="images/screenshots/NavigatingFields.png" class="center"/>
 </div>
 
 <div style="page-break-after: always;"></div>
@@ -157,7 +157,7 @@ If you wish to revert back to the original value of the field while editing in t
 <br>
 
 <div style="text-align: center">
-<img src="images/screenshots/CursorBackToCommandbox.png" height="310" class="center"/>
+<img src="images/screenshots/CursorBackToCommandbox.png" class="center"/>
 </div>
 
 In the example above, after changing name from 'Yeoh' to 'Yeo' the Enter key was pressed. 
@@ -173,7 +173,7 @@ Entering <code>save</code> saves the changes you made into the storage.
 Let's say after changing the name, you want to save your changes.
 
 <div style="text-align: center">
-<img src="images/screenshots/SaveCommandBefore.png" height="310" class="center"/>
+<img src="images/screenshots/SaveCommandBefore.png" class="center"/>
 </div>
 
 <br>
@@ -185,7 +185,7 @@ Key in <code>save</code> and press Enter to save the changes.
 <div style="page-break-after: always;"></div>
 
 <div style="text-align: center">
-<img src="images/screenshots/SaveCommandAfter.png" height="310" class="center"/>
+<img src="images/screenshots/SaveCommandAfter.png" class="center"/>
 </div>
 
 <br/>
@@ -204,9 +204,7 @@ Attempting to exit without saving your changes will give you a warning message, 
 
 Let's say you have already saved your changes.
 
-<div style="text-align: center">
-<img src="images/screenshots/ExitCommandSavedBefore.png" height="310" class="center"/>
-</div>
+![Exit command saved after](images/screenshots/ExitCommandSavedBefore.png)
 
 <br>
 
@@ -324,8 +322,6 @@ Valid cases:
 | 3   | Not fostering, preference indicated                         | `Available`   | `able.Dog/Cat`    | `nil`         |
 | 4   | Not fostering (e.g. overseas, currently not able to foster) | `NotAvailable`            | `nil`             | `nil`         |
 | 5   | Fostering: ALL information must be present                  | `NotAvailable`            | `current.Dog/Cat` | NOT `nil`          |
-
-<div style="page-break-after: always;"></div>
 
 * For invalid cases, error messages will be shown when you enter the invalid commands. For example:
   ![Add](images/screenshots/AddErrorMessage.png)
@@ -484,9 +480,9 @@ Saves changes to details of the fosterer which you have made in the profile page
 
 </div>
 
-<div style="page-break-after: always;"></div>
-
 Format: `save`
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-info">
 
@@ -579,6 +575,8 @@ Before you type the save command, make sure there is no accidental overwrite wit
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a fosterer's details through the profile page: `edit`
 
 Edits the details of the index-th fosterer in the list currently displayed in your address book, done through the profile page.
@@ -591,8 +589,6 @@ Parameters:
 |-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
 | `INDEX`     | - The index of a fosterer displayed in the list obtained from a `list`/`find` command <br/> - Index must be a positive integer | `1`, `2`, `3` |
 
-
-<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-info">
 
@@ -610,6 +606,8 @@ more flexibility.
  
 </div>
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="block" class="alert alert-warning">
 
 **:warning: Caution:**<br>
@@ -621,8 +619,6 @@ Before you type the save command, make sure there is no accidental overwrite wit
 
 <br/>
 
-<div style="page-break-after: always;"></div>
-
 Here is a summary of how to edit a fosterer Alex Yeoh who is currently at index 1:
 
 Step 1. Enter the profile page with `view INDEX` or `edit INDEX`. e.g. `view 1` or `edit 1`.
@@ -630,6 +626,8 @@ Step 1. Enter the profile page with `view INDEX` or `edit INDEX`. e.g. `view 1` 
 <div style="text-align: center">
 <img src="images/screenshots/View1.png" height="480" class="center"/>
 </div>
+
+<div style="page-break-after: always;"></div>
 
 Step 2. Type in the name of the field you want to edit onto the command box. This will make the textbox visible next to the field and automatically set the text cursor to the textbox. e.g. Enter 'name'.
 
@@ -639,6 +637,8 @@ Step 2. Type in the name of the field you want to edit onto the command box. Thi
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 Step 3. Edit the original value to a new value. e.g. From Alex Yeoh to 'Bob Yeoh'.
 
 <div style="text-align: center">
@@ -647,6 +647,8 @@ Step 3. Edit the original value to a new value. e.g. From Alex Yeoh to 'Bob Yeoh
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 Step 4. Press Enter to return the text cursor back to the command box. This makes the textbox disappear.
 
 <div style="text-align: center">
@@ -654,6 +656,8 @@ Step 4. Press Enter to return the text cursor back to the command box. This make
 </div>
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 Step 5. Enter `save` to save your changes.
 
@@ -718,6 +722,8 @@ In this example, Alex, Bernice and Charlotte are the fosterers deleted.
   * deletes the 3rd fosterer in your address book.
 
 <br> 
+
+<div style="page-break-after: always;"></div>
 
 ### Sorting fosterers: `sort`
 
@@ -789,6 +795,8 @@ Suppose you have 3 available fosterers: 1 can foster a dog, 1 can foster a cat a
 </div>
 
 <br> 
+
+<div style="page-break-after: always;"></div>
 
 ### Viewing statistics of current fosterers : `stats current`
 Helps you calculate statistics about fosterers who are currently fostering, and the type of animals they are fostering. Percentages are calculated to 2 decimal places.
@@ -896,8 +904,6 @@ On the profile page,<br>
 </div>
 
 <br> 
-
-<div style="page-break-after: always;"></div>
 
 ### Saving data
 
