@@ -34,4 +34,5 @@ Given below are my contributions to the team:
         * Modified the existing UML to fit the current state of our project
         * Formatted and added some test cases to the manual testing section
         * Discussed implementation details of the improved help feature in the DG
+
         
