@@ -397,6 +397,8 @@ Step 8. `LogicManager` then executes the `AddCommand` on the application model.
 
 Step 9. Further execution is carried out, which like before adds the `Person` object to the list of `Person`s in the `Model`, and updates the `Storage` with this new `Person`.
 
+<div style="page-break-after: always;"></div>
+
 ### Mark meeting as complete feature
 
 A meeting can be marked as complete using the `mark` command. The command also updates the last contacted time of its attendees to the ending time of the meeting, if the meeting end time is after the attendees current last contacted time.

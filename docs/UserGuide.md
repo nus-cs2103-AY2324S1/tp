@@ -382,8 +382,6 @@ Examples:
 - `findm s/09.09.2023 0000 e/09.10.2023 0000` returns all meetings between 09.09.2023 0000 and 09.10.2023 0000.
 - `findm m/Meeting s/18.10.2023 0000 e/18.10.2023 2359 n/John` returns `Meeting with friends`, as it starts after 18.10.2023 0000 and ends before 18.10.2023 2359, and is attended by John.
 
-<div style="page-break-after: always;"></div>
-
 ![result for 'findJohnMeeting'](images/findJohnMeetingResult.png)
 
 <div style="page-break-after: always;"></div>
