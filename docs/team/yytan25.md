@@ -47,7 +47,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * to be added soon
+    * Added tutorials for `DeleteBandCommand` and `RemoveMusicianFromBandCommand`
   * Developer Guide:
     * Added user stories
 
