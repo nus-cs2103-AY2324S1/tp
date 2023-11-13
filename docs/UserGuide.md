@@ -6,11 +6,11 @@ pageNav: 3
 
 # LinkTree User Guide
 
-LinkTree is a **desktop app optimized for developers engaged in startups** who require organized and streamlined 
-methods for contact management. With LinkTree, swiftly connect with the right stakeholder, ensuring smooth 
+LinkTree is a **desktop app optimized for developers engaged in startups** who require organized and streamlined
+methods for contact management. With LinkTree, swiftly connect with the right stakeholder, ensuring smooth
 project execution and superior collaboration.
 
-This user guide is designed to help our users to understand and make the most of out of LinkTree. This guide is to 
+This user guide is designed to help our users to understand and make the most of out of LinkTree. This guide is to
 provide clear and comprehensive instructions, to assist our users in understanding the core features and functions of
 LinkTree application. It is your **companion** for unlocking the full potential of LinkTree to effectively manage your
 teams.
@@ -82,7 +82,7 @@ used for easy navigation.
 * You may also contact us at [linktreeltd@gmail.com](mailto:linktreeltd@gmail.com) for further doubts!
 
 **Formatting and Icons**: Throughout the guide, we use bold text and colors to emphasize key points and important terms.
-Icons are used to draw your attention to noteworthy tips and additional information. 
+Icons are used to draw your attention to noteworthy tips and additional information.
 Here are some symbols you might encounter in our guide, and their respective meanings:
 
 [//]: # (Table inspired by NUSCoursemates https://ay2324s1-cs2103t-t17-4.github.io/tp/UserGuide.html)
@@ -106,7 +106,7 @@ Here are some symbols you might encounter in our guide, and their respective mea
 
 ### Installation
 
-1. Ensure you have Java `11` or above installed on your Computer. 
+1. Ensure you have Java `11` or above installed on your Computer.
 Check out our [FAQ](#faq) if you are not sure how to download Java `11`.
 2. LinkTree is compatible with all major operating systems, including Windows, macOS and Linux.
 3. Download the latest `linktree.jar` from [here](https://github.com/AY2324S1-CS2103T-W11-4/tp/releases).

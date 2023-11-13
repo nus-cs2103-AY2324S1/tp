@@ -145,8 +145,8 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, 
-`StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures 
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,
+`StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
 the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
@@ -157,7 +157,7 @@ The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands, and it also 
+* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands, and it also
 displays the statistical information of how many developers and teams are there at the moment.
 * depends on some classes in the `Model` component, as it displays `Person` and `Team` object residing in the `Model`.
 
@@ -171,7 +171,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 ![Logic Class Diagram](images/UML_images/LogicClassDiagram.png)
 
-The display in UI is depended on the `CommandResult` returned by Logic component. 
+The display in UI is depended on the `CommandResult` returned by Logic component.
 For example, UI will have a **new window** for displaying "LinkTree" if command
 `Tree` is received by the Logic component.
 
@@ -226,7 +226,7 @@ The `Model` component:
 
 **API**: [`Storage.java`](https://github.com/AY2324S1-CS2103T-W11-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-<puml src="diagrams/Storage.puml" width="450" /> 
+<puml src="diagrams/Storage.puml" width="450" />
 
 The `Storage` component:
 - Can save address book data, user preference data, and team book data in JSON format, and read them back into corresponding objects.
@@ -269,7 +269,7 @@ LinkTree provides a feedback based on whether the operation was successful or no
 
 #### Function Implementation
 
-- AddCommandParser class parses the inputs and checks if the command format is given correctly. It throws an exception if there is any format mismatch. 
+- AddCommandParser class parses the inputs and checks if the command format is given correctly. It throws an exception if there is any format mismatch.
 - The `execute` method in AddCommand class first checks if a developer with the specified name already exists in the addressbook. It throws an exception if this is true.
 - Upon successful execution of the `execute` method, a message is displayed to the user confirming that a new developer has been added to the addressbook.
 
@@ -299,7 +299,7 @@ LinkTree provides a feedback based on whether the operation was successful or no
 
 - DeleteCommandParser class parses the inputs and checks if the command format is given correctly. It throws an exception if there is any format mismatch.
 - The `execute` method in DeleteCommand class first checks if the given index is valid. It throws an exception if this is false.
-- After mapping the given index to the correct developer, checks are done to see if this developer is a teamleader of any team. If they are currently a teamleader, this developer cannot be deleted. An exception is thrown to notify the user of the same. The `Model#developerIsTeamLeader()` method carries out this check. 
+- After mapping the given index to the correct developer, checks are done to see if this developer is a teamleader of any team. If they are currently a teamleader, this developer cannot be deleted. An exception is thrown to notify the user of the same. The `Model#developerIsTeamLeader()` method carries out this check.
 - The `execute` command also checks if this developer is part of any team. If yes, they are deleted from all such teams that they are a developer in. This is carried out by the `Model#removeDeveloperFromAllTeams()` method.
 - Upon successful execution of the `execute` method, a message is displayed to the user confirming that the developer has been deleted, and also been removed from all teams(if any).
 
@@ -490,7 +490,7 @@ LinkTree provides a feedback based on whether the operation was successful or no
 
 ### **Remove an existing Team**
 
-Removing an existing team feature is facilitated by the `DeleteTeamCommand`. It extends the `Command` class. 
+Removing an existing team feature is facilitated by the `DeleteTeamCommand`. It extends the `Command` class.
 
 The operations are exposed in the `Model` interface as `Model#deleteTeam()`.
 
@@ -631,10 +631,10 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* Project managers engaged in software projects at the startup/small level companies; 
-* Collaborates frequently with multiple teams or departments; 
-* Requires quick access to contact details of other team members based on their roles and responsibilities; 
-* Prefers an organized and streamlined method for contact management; 
+* Project managers engaged in software projects at the startup/small level companies;
+* Collaborates frequently with multiple teams or departments;
+* Requires quick access to contact details of other team members based on their roles and responsibilities;
+* Prefers an organized and streamlined method for contact management;
 * Tech-savvy and open to adopting new tools for enhancing productivity.
 
 **Value proposition**: LinkTree is the top contact solution for software professionals. Using our unique tag-based system, access contacts by roles and responsibilities instantly. With LinkTree, swiftly connect with the right stakeholder, ensuring smooth project execution and superior collaboration.
@@ -775,7 +775,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Project manager wants to remove a person from project.
 2. Project manager provides name and requests the removal.
 3. LinkTree confirms the removal of the person.
-    
+
     Use case ends.
 
 **Extensions**
@@ -916,10 +916,10 @@ Our team managed to create this application LinkTree, which is designed to assis
 
 ### Challenges and Solutions:
 
-We have made the following efforts to tackle the challenges we faced in this project. With constant discussion among our team members we managed to come with solutions for each problem. 
+We have made the following efforts to tackle the challenges we faced in this project. With constant discussion among our team members we managed to come with solutions for each problem.
 1. **Modification of Storage Structure:**
     - **Challenge:** Initially, we encountered difficulties in modifying the storage structure to accommodate two JSON files - address book to manage developers and team book to manage the teams.
-    - **Solution:** We conducted thorough research and discussions to design a storage system that efficiently separated the address book and team book data. Implementation involved understanding various UML diagrams, and AB3's implementation of addressbook. 
+    - **Solution:** We conducted thorough research and discussions to design a storage system that efficiently separated the address book and team book data. Implementation involved understanding various UML diagrams, and AB3's implementation of addressbook.
 
 2. **Integration of Team Management Features:**
     - **Challenge:** Adapting the existing AB3 features, such as `add`, `delete`, `edit`, `find`, and `list`, to incorporate our team management implementation posed a significant challenge.

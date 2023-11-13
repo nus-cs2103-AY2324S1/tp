@@ -104,7 +104,8 @@ public class EditTeamLeaderCommandTest {
 
         assertCommandSuccess(editTeamLeaderCommand, model, expectedMessage, expectedModel);
 
-        
+
+
         //Change the teamLeader back to original
         EditTeamLeaderCommand reverseEditTeamLeaderCommand = new EditTeamLeaderCommand(teamName, originalTeamLeaderName);
 
