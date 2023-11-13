@@ -21,22 +21,26 @@ public class DescriptionTest {
 
     @Test
     public void isValidDescription() {
-        // null description
+        String hundredCharDescription =
+            "2jT#L8p!@o9QYdG*cZr$uAqXtW%vI3hN6fE5bJ1mKzV4nSsD7iU0lFyRwC2jT#L8p!@o9QYdG*cZr$uAqXtW%vI3hN6fE5bJ1mKz";
+
+        // EP: null description
         assertThrows(NullPointerException.class, () -> new Description(null));
 
         // invalid descriptions
+        // EP: empty string
         assertFalse(Description.isValidDescription("")); // empty string
-        assertFalse(Description.isValidDescription(
-                "2jT#L8p!@o9QYdG*cZr$uAqXtW%vI3hN6fE5bJ1mKzV4nSsD7iU0lFyRwC2jT#L8p!@o9QYdG*cZr$uAqXtW%vI3hN6fE5bJ1mKz1")
-        ); // 101 characters
+        assertFalse(Description.isValidDescription("  ")); // empty string
+
+        // EP: more than 100 characters
+        assertFalse(Description.isValidDescription(hundredCharDescription + "a")); // 101 characters
 
         // valid descriptions
+        // EP: 1 character
         assertTrue(Description.isValidDescription("a")); // exactly 1 character
-        assertTrue(Description.isValidDescription("test description"));
-        assertTrue(Description.isValidDescription("this is a very very long description")); // long descriptions
-        assertTrue(Description.isValidDescription(
-                "2jT#L8p!@o9QYdG*cZr$uAqXtW%vI3hN6fE5bJ1mKzV4nSsD7iU0lFyRwC2jT#L8p!@o9QYdG*cZr$uAqXtW%vI3hN6fE5bJ1mKz")
-        ); // exactly 100 characters
+
+        // EP: 100 characters, including special characters
+        assertTrue(Description.isValidDescription(hundredCharDescription)); // exactly 100 characters
     }
 
     @Test

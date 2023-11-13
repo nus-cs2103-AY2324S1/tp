@@ -24,6 +24,7 @@ public class UniqueStudentListTest {
     private final UniqueStudentList uniqueStudentList = new UniqueStudentList();
 
     // Tests for contains method
+
     // null object
     @Test
     public void contains_nullStudent_throwsNullPointerException() {

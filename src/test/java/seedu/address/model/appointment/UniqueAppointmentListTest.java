@@ -24,11 +24,15 @@ public class UniqueAppointmentListTest {
 
     private final UniqueAppointmentList uniqueAppointmentList = new UniqueAppointmentList();
 
+    // Test for contains method
+
+    // null object
     @Test
     public void contains_nullAppointment_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueAppointmentList.contains(null));
     }
 
+    // appointment not in list
     @Test
     public void contains_appointmentNotInList_returnsFalse() {
         assertFalse(uniqueAppointmentList.contains(ALICE_APPOINTMENT));
@@ -49,6 +53,8 @@ public class UniqueAppointmentListTest {
         assertTrue(uniqueAppointmentList.contains(editedAlex));
     }
 
+    // Tests for add method
+
     @Test
     public void add_nullAppointment_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueAppointmentList.add(null));
@@ -59,6 +65,8 @@ public class UniqueAppointmentListTest {
         uniqueAppointmentList.add(ALICE_APPOINTMENT);
         assertThrows(DuplicateAppointmentException.class, () -> uniqueAppointmentList.add(ALICE_APPOINTMENT));
     }
+
+    // Tests for remove method
 
     @Test
     public void remove_nullAppointment_throwsNullPointerException() {
@@ -78,6 +86,7 @@ public class UniqueAppointmentListTest {
         assertEquals(expectedUniqueAppointmentList, uniqueAppointmentList);
     }
 
+    // Tests for removeRelatedAppointments method
     @Test
     public void removeRelatedAppointments_existingAppointment_removesAppointment() {
         uniqueAppointmentList.add(ALICE_APPOINTMENT);
@@ -95,6 +104,7 @@ public class UniqueAppointmentListTest {
         assertEquals(expectedUniqueAppointmentList, uniqueAppointmentList);
     }
 
+    // UnmodifiableObservableList cannot be modified
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
