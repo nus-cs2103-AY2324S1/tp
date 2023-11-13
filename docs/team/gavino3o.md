@@ -43,10 +43,9 @@ Designed to cater to Command Line Interface (CLI) enthusiasts while also featuri
   - Update index.md.
 - **Review/mentoring contributions:** 
   - Pull Request reviewed (with non-trivial review comments):
-    - https://github.com/AY2324S1-CS2103T-W13-1/tp/pull/159
-    - https://github.com/AY2324S1-CS2103T-W13-1/tp/pull/111
-    - https://github.com/AY2324S1-CS2103T-W13-1/tp/pull/93
-    - https://github.com/AY2324S1-CS2103T-W13-1/tp/pull/88
-    - https://github.com/AY2324S1-CS2103T-W13-1/tp/pull/76
-    - https://github.com/AY2324S1-CS2103T-W13-1/tp/pull/62
-
+    - [PR #159](https://github.com/AY2324S1-CS2103T-W13-1/tp/pull/159)
+    - [PR #111](https://github.com/AY2324S1-CS2103T-W13-1/tp/pull/111)
+    - [PR #93](https://github.com/AY2324S1-CS2103T-W13-1/tp/pull/93)
+    - [PR #88](https://github.com/AY2324S1-CS2103T-W13-1/tp/pull/88)
+    - [PR #76](https://github.com/AY2324S1-CS2103T-W13-1/tp/pull/76)
+    - [PR #62](https://github.com/AY2324S1-CS2103T-W13-1/tp/pull/62)
