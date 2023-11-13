@@ -3,7 +3,7 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "address": "123, Jurong West Ave 6, #08-111",
-    "tags": [ "high" ],
+    "risklevel": [ "high" ],
     "note" : " "
   }, {
     "name": "Alice Pauline",
@@ -14,7 +14,7 @@
       "name" : "Daniel Meier",
       "phone" : "87652533",
       "address" : "10th street",
-      "tags" : [ "low" ],
+      "risklevel" : [ "low" ],
       "note" : " "
     }],
   "appointments" : [ {

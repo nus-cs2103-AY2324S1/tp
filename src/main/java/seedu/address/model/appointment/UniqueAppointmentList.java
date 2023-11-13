@@ -27,7 +27,7 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
     /**
      * Returns true if the list contains an equivalent appointment as the given argument.
      */
-    public boolean contains(Appointment toCheck) {
+    public boolean hasAppointment(Appointment toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::equals);
     }
@@ -35,7 +35,7 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
     /**
      * Returns true if the list contains an overlapping appointment as the given argument.
      */
-    public boolean overlaps(Appointment toCheck) {
+    public boolean hasOverlapWith(Appointment toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isOverlappingAppointment);
     }
@@ -46,7 +46,7 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
      */
     public void add(Appointment toAdd) {
         requireNonNull(toAdd);
-        if (contains(toAdd)) {
+        if (hasAppointment(toAdd)) {
             throw new DuplicateAppointmentException();
         }
         internalList.add(toAdd);

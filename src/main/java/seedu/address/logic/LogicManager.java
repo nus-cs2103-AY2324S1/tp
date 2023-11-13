@@ -65,7 +65,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyWellNus getAddressBook() {
+    public ReadOnlyWellNus getWellNus() {
         return model.getWellNusData();
     }
 
@@ -90,7 +90,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
+    public Path getWellNusFilePath() {
         return model.getWellNusFilePath();
     }
 

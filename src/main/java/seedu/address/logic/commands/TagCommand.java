@@ -16,7 +16,7 @@ import seedu.address.model.risklevel.RiskLevel;
 import seedu.address.model.student.Student;
 
 /**
- * Edits the details of an existing student in the address book.
+ * Edits the details of an existing student in the wellnus storage.
  */
 public class TagCommand extends Command {
 

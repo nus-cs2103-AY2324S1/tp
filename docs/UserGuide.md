@@ -95,7 +95,7 @@ To see a list of all command words, refer to the [Command Summary](#5-command-su
 | **n/**    | STUDENT_NAME      | Name of student                  | n/Peter Johnson                    | STUDENT_NAME **must** only contain **alphabetical characters and spaces**, be **unique** up to **100 characters** long, and **cannot be blank**. The first letter of each word **must** be in **upper case**, while every other letter **must** be in **lower case**. |
 | **c/**    | CONTACT_NUMBER    | Contact number of student        | c/94738484                         | CONTACT_NUMBER **must** only contain **numerical characters**, be **exactly 8 digits long** (without spaces) and **cannot be blank**.                                                                                                                                 |
 | **a/**    | ADDRESS           | Address of student               | a/Blk 515 Choa Chu Kang Avenue 6   | ADDRESS can take any value up to **200 characters** long, and **cannot be blank**.                                                                                                                                                                                    |
-| **r/**    | RISK_LEVEL        | Risk level assigned to student   | r/high                             | RISK_LEVEL **must** be one of the following three values: **high**, **medium**, **low**. **Case-insensitive**.                                                                                                                                                        |
+| **r/**    | RISK_LEVEL        | Risk level assigned to student   | r/high                             | RISK_LEVEL **must** be one of the following three values: **high**, **medium**, **low**. **Case-insensitive**. Each student can have at most 1 risk-level tagged to him/her.                                                                                          |
 | **note/** | NOTE              | Note associated with student     | note/Struggles with 3rd grade math | NOTE can take any value up to **500 characters** long.                                                                                                                                                                                                                |
 | --        | STUDENT_INDEX     | Index of student in the list     | --                                 | STUDENT_INDEX **must** be a **positive integer** (i.e. 1, 2, 3, ...) up to the size of the student list.                                                                                                                                                              |
 | **date/** | DATE              | Date of appointment              | date/2023-10-12                    | DATE **must** be in the following format: `yyyy-MM-dd`. Specified date must be **within a year from the current date**.                                                                                                                                               |
@@ -125,16 +125,6 @@ To see a list of all command words, refer to the [Command Summary](#5-command-su
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
-
-
-### 1.4 About student notes
-
-Student notes of a student can be viewed by double-clicking on the specific student that you want under the "Student"
-column. You can only view student notes for one student at a time. You can refer to the following diagrams below for reference.
-When you perform any commands, the notes column will be cleared (You will have to double-click once again). 
-
-If you have any feedback on our features pertaining to student notes, feel free to send your feedback to the 
-developer team!
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -213,8 +203,12 @@ If you know the name of the student you want to delete, use the `find` command t
 <div markdown="block" class="alert alert-info">
 
 :information_source: **Note:**
-Double-clicking on the Student card displays the Student notes under the Notes section!
-The “Notes” column will inform you if there are no student notes for a particular Student.
+Student notes of a student can be viewed by double-clicking on the specific student that you want under the "Student"
+column. You can only view student notes for one student at a time. When you perform any commands, the notes column will be cleared
+(You will have to double-click once again).
+
+If you have any feedback on our features pertaining to student notes, feel free to send your feedback to the
+developer team!
 </div>
 
 This command either adds a note to an existing student (overwriting any existing note) or deletes a note
@@ -453,16 +447,21 @@ WellNUS data is saved in the hard disk automatically after any command that chan
 
 #### 2.4.5 Editing the data file
 
-WellNUS data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file
+WellNUS data is saved automatically as a JSON file `[JAR file location]/data/wellnus.json`. Advanced users are welcome to update data directly by editing that data file
 <div markdown="span" class="alert alert-warning">
 :exclamation: **Caution:**
-If your changes to the data file makes its format invalid, WellNUS will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, WellNUS will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 
-The following scenarios will render the data file invalid:
+The following scenarios will render the data file invalid:<br>
+
 * File contains invalid or missing parameters, see `Parameter Constraints` under the [Command Format](#13-about-the-command-format) section
+
 * File contains duplicate `Students` and `Appointments`
+
 * File contains overlapping `Appointments`, or `Appointments` without a corresponding `Student`
+
 * File is not in proper JSON format, you may refer to [this guide](https://json.org/example.html)
+
 </div>
 
 ### 2.5 Tracking TODOS `[Coming soon]`
@@ -478,7 +477,7 @@ Install the app in the other computer and overwrite the empty data file it creat
 
 2. **How can I view my appointments scheduled today ?**<br/>
 You can use the filter command with today's date. 
-Here's an example: `filter 2023-12-07`. Replace `2023-12-07` with today's date in `yyyy-mm-dd` format.
+Here's an example: `filter 2023-12-07`. Replace `2023-12-07` with today's date in `yyyy-MM-dd` format.
 
 3. **How do I clear all data in WellNUS ?**<br/>
 To clear all data, use the `clear` command. This resets the storage, deleting all appointments and students. 
