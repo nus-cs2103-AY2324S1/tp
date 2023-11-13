@@ -299,12 +299,24 @@ This is done by setting the `isView` property to true in the `CommandResult` obj
 
 <puml src="diagrams/ViewActivityDiagram.puml" alt="Event Activity Diagram"></puml>
 
+### Create feature
+
+### Implementation
+
+The `create` feature is implemented using the `CreateTagCommand` class. It extends `Command` and overrides the `execute()` method
+to create tags of specific categories.
+
+To initiate the creation of tags, users utilize the create command with the following format: `create t/CATEGORY TAGNAME`. Each `/t` prefix denotes the start of a new tag definition. If users intend to create multiple tags, they can employ multiple `/t` prefixes in the command, such as `create t/CATEGORY1 TAGNAME t/CATEGORY2 TAGNAME`.
+
+Parsing of the create command's tag parameters is handled by the `parse` method in the `CreateTagCommandParser` class. This method receives a string containing user input and separates it into individual tags based on the /t prefix. The resulting tags are then passed as an array of tag category and name pairs to the constructor of the CreateTagsCommand class.
+
+Finally, the `execute()` method of the `CreateTagCommand` creates a `Tag` object for each element in the array of tag category and name pairs. These newly created tags are then added to the model.
 
 ### Search feature
 
 #### Implementation
 
-The search feature is implemented using the `FindCommand` class. It extends `Command` and overrides the `execute()` method to
+The `search` feature is implemented using the `FindCommand` class. It extends `Command` and overrides the `execute()` method to
 filter users by the specified parameters.
 
 The search parameters from the user input are parsed using the parse method in the `FindCommandParser` class. `FindCommandParser::Parse`
@@ -325,8 +337,7 @@ Given below is an example usage scenario and how the search mechanism behaves at
 
 Step 1. The user launches the application.
 
-Step 2. The user executes `search n/john st/offered t/swe` command to filter candidates having the name john,
-offered status and tagged as swe. 
+Step 2. The user executes `search t/intern` command to filter candidates whose status are offered. 
 
 The following sequence diagram shows how the search operation works:
 
@@ -334,15 +345,15 @@ The following sequence diagram shows how the search operation works:
 
 <puml src="diagrams/SearchSequenceDiagram.puml" width="550" />
 
-Step 3. The user should see the UI below upon entering `search n/john st/interviewed t/friends`.
+Step 3. The user should see the UI below upon entering `search t/intern`.
 
-![View](images/search.png)
+![Search](images/search-dg.png)
 
 The following activity diagram shows summarizes what happens when a user attempts to execute the `search` command.
 
 <puml src="diagrams/SearchActivityDiagram.puml" width="550" />
 
-**Note:** The current implementation of search allows users to search by any of the categories individually or by different combinations of the categories.
+**Note:** The current implementation of search allows users to search by any of the categories individually or by different combinations of the categories e.g. `search n/alex bernice st/offered t/intern`
 It also allows users to specify more than one search parameter for each category e.g. `search n/alex bernice`
 
 ### Set feature
