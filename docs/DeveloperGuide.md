@@ -192,8 +192,9 @@ User should see the UI as shown below.
 
 The following sequence diagram shows how the AddL and AddG operations work:
 
-<puml src="diagrams/AddLSequenceDiagram.puml" alt="AddLSequenceDiagram" />
-<puml src="diagram/AddGSequenceDiagram.puml" alt="AddGSequenceDiagram" />
+<puml src="diagrams/AddLSequenceDiagram.puml" alt="AddLSequenceDiagram"> </puml>
+
+<puml src="diagrams/AddGSequenceDiagram.puml" alt="AddGSequenceDiagram"> </puml>
 
 User should see the UI as shown below after entering `addL 1 u/alexyeoh`
 
