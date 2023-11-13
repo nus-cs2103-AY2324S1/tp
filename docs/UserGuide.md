@@ -204,7 +204,7 @@ Data visualisation of student's class information is automatically generated in 
 
 The size of the `attendanceTracker` and `classParticipationTracker` arrays must match the configured tutorial count. Similarly, the size of the `assignmentTracker` array must match the configured assignment count. **Class Manager 2023** is configured to have 13 tutorials and 6 assignments by default. Before loading the edited data file, you can configure **Class Manager 2023** using the `config` command. 
 
-<img alt="sample_contents" src="images/sample-contents.png" width="750"> <br><br>
+<img alt="sample_contents" src="images/sample-contents.png" width="750"> <br>
 
 <box type="warning" seamless>
 
@@ -273,7 +273,7 @@ Format: `help`
 
 After `help` is executed successfully:
 
-<img alt="help message" src="images/helpMessage.png" width="700">
+<img alt="help message" src="images/helpMessage.png" width="700"><br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -321,11 +321,11 @@ Example:
 
 Before `load f/sample` is executed:
 
-<img alt="load before" src="images/load-before.png" width="700"> <br><br>
+<img alt="load before" src="images/load-before.png" width="700"> <br>
 
 After `load f/sample` is executed successfully:
 
-<img alt="load success" src="images/load-outcome.png" width="700"> <br><br>
+<img alt="load success" src="images/load-outcome.png" width="700"> <br>
 
 The file path at the bottom left of the application is updated to `.\data\sample.json`.
 
@@ -421,11 +421,11 @@ Toggles between light and dark colour themes.
 
 Format: `theme`
 
-#### Dark theme
+##### Dark theme
 <img alt="theme_dark" src="images/theme-dark.png" width="700" > <br><br>
 
-#### Light theme
-<img alt="theme_light" src="images/theme-light.png" width="700" >
+##### Light theme
+<img alt="theme_light" src="images/theme-light.png" width="700" ><br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -568,7 +568,7 @@ Format: `list`
 
 The following image shows a successful execution of the `list` command.
 
-<img alt="list-student-success" src="images/list-success.png" width="700" >
+<img alt="list-student-success" src="images/list-success.png" width="700" ><br>
 
 [Back to Table of Contents](#table-of-contents)
 
