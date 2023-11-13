@@ -1101,16 +1101,16 @@ Testers are expected to do more *exploratory* testing.
    
 ### Edit a student
 
-1. Edit a student's details in the current students list.
+1. Edit a student's details in Class Manager.
 
    1. Test case: `edit STUDENT_NUMBER n/NAME`<br>
       Expected: The student with STUDENT_NUMBER is edited to have the new NAME.
    2. Test case: `edit STUDENT_NUMBER s/NEW_STUDENT_NUMBER`<br>
       Expected: The student with STUDENT_NUMBER is edited to have the NEW_STUDENT_NUMBER.
       <br><br>
-2. Edit a student's details where the student is not in the list (Invalid Student Number).
+2. Edit a student's details where the original student number is not in Class Manager.
 
-   1. Test case: Edit command with Student Number that is not present in the list <br>
+   1. Test case: Edit command with original student number not in Class Manager.<br>
       Expected: No student is edited. Error details shown in the result display box.
       <br><br>
 
