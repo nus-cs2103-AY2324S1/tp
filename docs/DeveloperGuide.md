@@ -752,28 +752,23 @@ Use case ends.
 
 ## Appendix: Planned Enhancements
 
-### Deleting tags : `delete tag`
+### Improve on Delete feature: `delete`
+**Improve the delete feature**:
+Currently, JABPro only supports applicant related operations such as delete applicants by index, status and tags. 
+However, it does not support deletion of specific events and tags. We would like to improve on this by expanding the `delete` feature
+functionality to also support deletion of specific events and tags. This makes it easier for users to delete events and tags, without
+having to manually edit the json file.
 
-While certainly useful, JABPro currently does not have feature to delete existing tags. However, this feature will be implemented
-in future iterations.
+### Improve on Clear feature: `clear`
+**Improve the clear feature**:
+Currently, `clear` will wipe out all applicants' data and events. However, it does not wipe out the tags created by the user
+which falls short of the user's expectations of what a `clear` command is supposed to do. Thus, we would like to enhance `clear` 
+to also include the deletion of created tags.
 
-<box type="tip" seamless>
-
-**Tip:**
-* If you are an advanced user, you are welcome to delete your tags manually by editing the json file!
-  </box>
-
-### Editing tags : `edit tag`
-
-JABPro currently does not support editing tags i.e. editing tag name or category. This feature will be implemented in future iterations.
-
-**Tip:**
-* If you are an advanced user, you are welcome to edit your tags manually by editing the json file!
-  </box>
-
-### Exporting events : `export`
-
-JABPro currently does not support exporting Events. This feature will be implemented in future iterations.
+### Improve on Export feature: `export`
+**Improve the export feature**:
+Currently, `export` is limited to only exporting applicants' data and it does not support a function to export events.
+This feature will be implemented in future iterations.
 
 ### Add and general uniqueness constraint: `add`
 **Improve what identifies as a unique person**:  
@@ -782,8 +777,8 @@ This would allow us to have a more robust system that can handle multiple person
   
 ### Improve on Edit feature: `edit`
 **Improve the edit feature**:
-   Currently, it falls short of the user's expectations as it does not allow the user to add on to existing tags. We would like to improve this by creating a feature that allows the user to add on to existing tags.  
-   Thereby users can add on to existing tags without having to retype all the previous tags.  
+Currently, it falls short of the user's expectations as it does not allow the user to add on to existing tags. We would like to improve this by creating a feature that allows the user to add on to existing tags.  
+Thereby users can add on to existing tags without having to retype all the previous tags.  
   
 ### Improve on Summary Statistics
 **Improve the summary statistic implementation**:  
@@ -794,7 +789,6 @@ Additionally, you can only use the summary statistic table for comparison after 
 **Improve the filter feature**  
 Currently, the filter feature might be too flexible for the user. That is it works on the displayed list and not across the board. We would like to improve on this by implementing a filter feature that works across the database.  
 This makes it more intuitive and logical for the user to use since the user would expect the filter feature to work across the database and not just the displayed list.
-
 
 
 ## **Appendix: Effort**
@@ -1030,5 +1024,9 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. On your command terminal, `cd` into the folder where your jar file is in.
+   2. Run `cd Data` to enter the directory where all of JABPro's data is stored.
+   3. Run `ls` to view all files stored in this directory.
+   4. If you see any of the following json files: `addressbook.json` or `eventbook.json`, delete them using
+      the `rm` command e.g. `rm addressbook.json` to start fresh and remove any corrupted data files.
 
