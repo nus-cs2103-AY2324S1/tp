@@ -38,7 +38,7 @@ public class WellNusTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
+    public void resetData_withValidReadOnlyWellNus_replacesData() {
         WellNus newData = getTypicalWellNus();
         wellNus.resetData(newData);
         assertEquals(newData, wellNus);
@@ -61,18 +61,18 @@ public class WellNusTest {
     }
 
     @Test
-    public void hasStudent_studentNotInAddressBook_returnsFalse() {
+    public void hasStudent_studentNotInWellNus_returnsFalse() {
         assertFalse(wellNus.hasStudent(ALICE));
     }
 
     @Test
-    public void hasStudent_studentInAddressBook_returnsTrue() {
+    public void hasStudent_studentInWellNus_returnsTrue() {
         wellNus.addStudent(ALICE);
         assertTrue(wellNus.hasStudent(ALICE));
     }
 
     @Test
-    public void hasStudent_studentWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasStudent_studentWithSameIdentityFieldsInWellNus_returnsTrue() {
         wellNus.addStudent(ALICE);
         Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_RISK_LEVEL_LOW)
                 .build();
@@ -91,7 +91,7 @@ public class WellNusTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose students list can violate interface constraints.
+     * A stub ReadOnlyWellNus whose students list can violate interface constraints.
      */
     private static class WellNusStub implements ReadOnlyWellNus {
         private final ObservableList<Student> students = FXCollections.observableArrayList();

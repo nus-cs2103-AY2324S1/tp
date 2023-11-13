@@ -27,11 +27,11 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the WellNus.
      *
      * @see seedu.address.model.Model#getWellNusData()
      */
-    ReadOnlyWellNus getAddressBook();
+    ReadOnlyWellNus getWellNus();
 
     /** Returns an unmodifiable view of the filtered list of students */
     ObservableList<Student> getFilteredStudentList();
@@ -45,9 +45,9 @@ public interface Logic {
     /** Return the Name of a particular student denoted by its index */
     Name getStudentName(int studentIndex);
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' wellnus storage file path.
      */
-    Path getAddressBookFilePath();
+    Path getWellNusFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

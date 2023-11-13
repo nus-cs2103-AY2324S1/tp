@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Represents a RiskLevel in the address book.
+ * Represents a RiskLevel in the wellnus storage.
  * Guarantees: immutable; name is valid as declared in {@link #isValidRiskLevel(String)}
  */
 public class RiskLevel {

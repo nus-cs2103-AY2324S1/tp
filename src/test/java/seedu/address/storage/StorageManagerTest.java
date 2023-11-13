@@ -24,9 +24,9 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonWellNusStorage addressBookStorage = new JsonWellNusStorage(getTempFilePath("ab"));
+        JsonWellNusStorage wellNusStorage = new JsonWellNusStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(wellNusStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -48,11 +48,11 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void wellNusReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * {@link JsonWellNusStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonWellNusStorageTest} class.
          */
         WellNus original = getTypicalWellNus();
         storageManager.saveWellNus(original);
@@ -61,7 +61,7 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void getAddressBookFilePath() {
+    public void getWellNusFilePath() {
         assertNotNull(storageManager.getWellNusFilePath());
     }
 

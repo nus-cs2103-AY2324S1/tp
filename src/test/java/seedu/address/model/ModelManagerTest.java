@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.WellNusBuilder;
 
 public class ModelManagerTest {
 
@@ -61,12 +61,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
+    public void setWellNusFilePath_nullPath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setWellNusFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setWellNusFilePath_validPath_setsWellNusFilePath() {
         Path path = Paths.get("address/book/file/path");
         modelManager.setWellNusFilePath(path);
         assertEquals(path, modelManager.getWellNusFilePath());
@@ -78,12 +78,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasStudent_studentNotInAddressBook_returnsFalse() {
+    public void hasStudent_studentNotInWellNus_returnsFalse() {
         assertFalse(modelManager.hasStudent(ALICE));
     }
 
     @Test
-    public void hasStudent_studentInAddressBook_returnsTrue() {
+    public void hasStudent_studentInWellNus_returnsTrue() {
         modelManager.addStudent(ALICE);
         assertTrue(modelManager.hasStudent(ALICE));
     }
@@ -95,7 +95,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        WellNus wellNus = new AddressBookBuilder().withStudent(ALICE).withStudent(BENNY).build();
+        WellNus wellNus = new WellNusBuilder().withStudent(ALICE).withStudent(BENNY).build();
         WellNus differentWellNus = new WellNus();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -113,7 +113,7 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
+        // different WellNus -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentWellNus, userPrefs)));
 
         // different filteredList -> returns false
