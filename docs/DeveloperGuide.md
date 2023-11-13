@@ -15,6 +15,8 @@ pageNav: 3
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
+[↑ Back to table of contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Design**
@@ -117,7 +119,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command e.g., `AddCommandParser`) which uses the other classes shown above to parse the command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 [↑ Back to table of contents](#table-of-contents)
@@ -1089,4 +1091,5 @@ Listed below are the enhancements we managed to add into Tutorium.
 * Standardise prefix for year in data visualisation features.
   * In the table and chart feature, the prefix used to indicate the year is `d/`, but for the line graph feature, it is `y/`. We
     plan to standardise the prefix used to `y/` to make these commands more intuitive and easier to learn.
+
 [↑ Back to table of contents](#table-of-contents)
