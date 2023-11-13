@@ -824,7 +824,10 @@ Failure outputs:
 * Input: `filter -before 2022/10/10 -after 2022/01/01`
   * Error: Both the `-before` and `-after` flags are specified. Use only one of `-before`, `-after`, and `-on` in the same command.
 ```
-TODO
+Invalid filter format: You can only use one of -before, -on, -after at a time. 
+Usage: filter -(at least one of unique [-name|subject|before|on|after|remark VALUE]). 
+For example, filter -before 2023/10/10 -subject physics
+Note you should only use one of -before, -on, -after at a time.
 ```
 
 * Input: `filter -on 2/2/2`
