@@ -2,7 +2,7 @@
 
 ![Ui](docs/images/Ui.png)
 
-**CheckMate is a desktop application for streamlining the process of booking rooms for hotel employees.**
+**CheckMate is a desktop application for streamlining the process of booking rooms by hotel employees.**
 With a Graphical User Interface (GUI) that provides the necessary information needed at a glance, and the application
 being optimised for use via a Command Line Interface (CLI), we have combined elegance and efficiency when it comes to
 the process of room booking by hotel receptionists.

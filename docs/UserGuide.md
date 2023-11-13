@@ -93,6 +93,10 @@ CheckMate is a **desktop app for streamlining the process of room bookings by ho
 
 ## Input Formats
 
+<details open>
+<summary style="padding-left: 20px;"><strong>Command Format</strong></summary>
+<div markdown="1">
+
 ### Command Format
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
@@ -108,6 +112,15 @@ CheckMate is a **desktop app for streamlining the process of room bookings by ho
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+</div>
+</details>
+
+---
+
+<details open>
+<summary style="padding-left: 20px;"><strong>Parameter Format</strong></summary>
+<div markdown="1">
 
 ### Parameter Format
 
@@ -125,12 +138,20 @@ CheckMate is a **desktop app for streamlining the process of room bookings by ho
 </div>
 </details>
 
+</div>
+</details>
+
 ---
+
 <details open>
 <summary><strong>Commands</strong></summary>
 <div markdown="1">
 
 ## Commands
+
+<details open>
+<summary style="padding-left: 20px;"><strong>help</strong></summary>
+<div markdown="1">
 
 ### Viewing help : `help`
 
@@ -139,6 +160,15 @@ Shows a message explaining how to access the help page.
 ![FinalHelp.png](images%2FFinalHelp.png)
 
 Format: `help`
+
+</div>
+</details>
+
+---
+
+<details open>
+<summary style="padding-left: 20px;"><strong>add</strong></summary>
+<div markdown="1">
 
 ### Adding a booking: `add`
 
@@ -158,6 +188,15 @@ The **add** command makes use of the [Prefix Completion feature](#prefix-complet
 Examples:
 * `add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@gmail.com`
 * `add r/256 d/2023-02-01 15:00 to 2023-02-02 23:59 n/Betsy Crowe p/99990000 e/betsycrowe@gmail.com`
+
+</div>
+</details>
+
+---
+
+<details open>
+<summary style="padding-left: 20px;"><strong>add: Potential Errors</strong></summary>
+<div markdown="1">
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your add command is missing one or more parameters except for a remark or has mutliple parameters which do not follow the parameter format, CheckMate will show the following error:
@@ -194,6 +233,15 @@ If your add command only has the email parameter that does not match the email p
 The domain name must end with a domain label that is supported: 
   - gmail, yahoo, outlook, hotmail, icloud"</div>
 
+</div>
+</details>
+
+---
+
+<details open>
+<summary style="padding-left: 20px;"><strong>list</strong></summary>
+<div markdown="1">
+
 ### Listing all bookings : `list`
 
 Shows a list of all bookings in the bookings book.
@@ -203,6 +251,15 @@ Format: `list`
 ![FinalList.png](images%2FFinalList.png)
 
 * Example image above shows result of command `list`
+
+</div>
+</details>
+
+---
+
+<details open>
+<summary style="padding-left: 20px;"><strong>edit</strong></summary>
+<div markdown="1">
 
 ### Editing a booking : `edit`
 
@@ -226,6 +283,14 @@ The **edit** command makes use of the [Prefix Completion feature](#prefix-comple
 Examples:
 *  `edit 1 p/91234567 e/johndoe@gmail.com` Edits the phone number and email of the 1st booking to be `91234567` and `johndoe@gmail.com` respectively.
 
+</div>
+</details>
+
+---
+
+<details open>
+<summary style="padding-left: 20px;"><strong>edit: Potential Errors</strong></summary>
+<div markdown="1">
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your edit command contains an index which is 0 or a negative integer, CheckMate will show the following error:
@@ -241,6 +306,15 @@ If your edit command contains an index which above the number largest index show
 If your edit command does not change any details of the target booking, CheckMate will show the following error:
 "No changes made. At least one field to edit must be provided."
 </div>
+
+</div>
+</details>
+
+---
+
+<details open>
+<summary style="padding-left: 20px;"><strong>find</strong></summary>
+<div markdown="1">
 
 ### Locating bookings by name or room: `find`
 
@@ -263,6 +337,15 @@ Examples:
 * `find 1` returns the booking which contains the room `1`.
 * `find john` returns the booking(s) where the name is `john`.
 
+</div>
+</details>
+
+---
+
+<details open>
+<summary style="padding-left: 20px;"><strong>delete</strong></summary>
+<div markdown="1">
+
 ### Deleting a booking : `delete`
 
 Deletes the specified booking(s) from the bookings book.
@@ -282,6 +365,15 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd booking in the bookingPeriod book.
 * `find Betsy` followed by `delete 1` deletes the 1st booking in the results of the `find` command.
 
+</div>
+</details>
+
+---
+
+<details open>
+<summary style="padding-left: 20px;"><strong>delete: Potential Errors</strong></summary>
+<div markdown="1">
+
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your delete command contains an index which is 0 or a negative integer, CheckMate will show the following error:
 "Index should be a non-zero unsigned integer."
@@ -291,6 +383,15 @@ If your delete command contains an index which is 0 or a negative integer, Check
 If your delete command contains an index which above the number largest index shown in the Current Booking list, CheckMate will show the following error:
 "The booking index provided is invalid."
 </div>
+
+</div>
+</details>
+
+---
+
+<details open>
+<summary style="padding-left: 20px;"><strong>undo</strong></summary>
+<div markdown="1">
 
 ### Undo a deletion : `undo`
 
@@ -304,10 +405,28 @@ Format: `undo`
 * If the deleted item was manually added back, then undo was performed, the deleted booking will not be added as it 
 already exists in CheckMate which compares two bookings using their room number and booking period.
 
+</div>
+</details>
+
+---
+
+<details open>
+<summary style="padding-left: 20px;"><strong>undo: Potential Errors</strong></summary>
+<div markdown="1">
+
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If you input an undo command without previously having deleted a booking, CheckMate will show the following error:
 "No deletions to undo."
 </div>
+
+</div>
+</details>
+
+---
+
+<details open>
+<summary style="padding-left: 20px;"><strong>clear</strong></summary>
+<div markdown="1">
 
 ### Clearing all entries : `clear`
 
@@ -319,6 +438,15 @@ Format: `clear`
 
 * Example image above shows the result of command `clear`
 
+</div>
+</details>
+
+---
+
+<details open>
+<summary style="padding-left: 20px;"><strong>exit</strong></summary>
+<div markdown="1">
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -327,9 +455,27 @@ Format: `exit`
 
 * The window will close automatically on command `exit`
 
+</div>
+</details>
+
+---
+
+<details open>
+<summary style="padding-left: 20px;"><strong>Saving the data</strong></summary>
+<div markdown="1">
+
 ### Saving the data
 
 CheckMate data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+</div>
+</details>
+
+---
+
+<details open>
+<summary style="padding-left: 20px;"><strong>Editing the data file</strong></summary>
+<div markdown="1">
 
 ### Editing the data file
 
@@ -338,6 +484,15 @@ CheckMate data are saved automatically as a JSON file `[JAR file location]/data/
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, CheckMate will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
+
+</div>
+</details>
+
+---
+
+<details open>
+<summary style="padding-left: 20px;"><strong>Prefix Completion</strong></summary>
+<div markdown="1">
 
 ### Prefix Completion
 
@@ -350,6 +505,9 @@ Example:
   * gives the unused prefix with the actual information for the booking at the index.
 
 Prefix completions only works with `add` and `edit` command and does not validate your input format.
+
+</div>
+</details>
 
 </div>
 </details>
