@@ -9,74 +9,63 @@ Spend N Split (SNS) is a **desktop app for managing expense from contacts, optim
 
 If you can type fast, SNS can get your contact expense management tasks done faster than traditional GUI apps.
 
-### Summary of Contributions
+### Code Contribution
 
-#### Code Constribution
-
-##### General
+#### General
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=nathanielcalimag&)
 
-##### Extend focus-state shortcuts
-- **What it does**: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-- **Justification**: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-- **Highlights**: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+#### Extended Storage to Support Transactions
+- **What it does**: Extended the storage to support our new model `Transaction`, allowing users to store a second core entity on top of the `Person` in the storage file. This involved creating the `JsonAdaptedExpense` (now `JsonAdaptedPortion`), and `JsonAdaptedTransaction`.
+- **Justification**: This was one of the core features that was implemented early on in order to speed up our development process. It allows the user to save the `UniqueTransactionList` into storage, which is a core functionality.
+- **Highlights**: This was a large feature, requiring many code changes and a large amount of testing (e.g. creating transaction and expense builders, and typical transactions).
 
-##### Enhanced UI from dark-theme to light-theme
-- **What it does**: What it does
-- **Justification**: Justification
-- **Highlights**: Highlights
+#### Added sample transaction data
+- **What it does**: Added sample transaction data that will be used in Spend N Split when there's no initial storage. Ensured the transaction data is sufficiently linked to the person data.
+- **Justification**: This feature ensures that the user is able to understand our application better, and how we use the `Person` and `Transaction` models. This also gives them a starting base to use our commands for the first time.
+- **Highlights**: This feature required a good understanding of our target audience in order to curate a relevant and realistic list of sample data that our users will relate to. Furthermore, this needed a good understanding of the `Transaction` and `Person` model to create meaningful data that are closely related to properly demonstrate the person-transaction relationship.
 
-##### Added sample transaction data
-- **What it does**: What it does
-- **Justification**: Justification
-- **Highlights**: Highlights
+#### Enhanced UI from dark-theme to light-theme
+- **What it does**: Utilise a sleek design and light colour theme to enhance the user interface.
+- **Justification**: This feature gives Spend N Split a unique look that our users will remember.
+- **Highlights**: This feature required much design consideration, trial and error and user feedback.
 
-##### Added Expense Model
-- **What it does**: What it does
-- **Justification**: Justification
-- **Highlights**: Highlights
+#### Added Expense Model (renamed to Portion) 
+- **What it does**: Used in the `Transaction` model to represent the portion of the cost that a person owes to the payee.
 
-##### Updated Storage to Support Transactions
-- **What it does**: What it does
-- **Justification**: Justification
-- **Highlights**: Highlights
-
-##### Settle Person Commmand
-- **What it does**: What it does
-- **Justification**: Justification
-- **Highlights**: Highlights
-
-
-#### Project Management
-
-
-#### Documentation
-
+#### `settlePerson` Command
+- **What it does**: Added a command to settle any outstanding balances with a person by creating a single transaction that cancels out the balance.
+- **Justification**: This feature allows users to leverage the automation and precision capabilities of our application to automatically calculate and settle the balance of a user's contact.
+- **Highlights**: This feature was complicated, requiring calculations in order to take potentially fractional weights and amounts to distribute each person's balance against the user. Additionally, there were many other cases that had to be considered: settling a balance with a person that does not exist, the person not having any outstanding balance to settle, the command resulting in duplicate transactions against the `UniqueTransactionList`.
 
 #### Others
+- Extend focus state shortcuts.
+- Add text wrapping to command output box.
+- General bug fixing.
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+### Documentation
 
-* **Project management**:
-    * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+#### User Guide
+- Added section on explaining Relevant Transactions.
+- Added acknowledgements.
+- Other minor content updates.
 
-* **Enhancements to existing features**:
-    * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-    * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+#### Developer Guide
+- Updated `Storage` and `Logic` components under the design section .
+- Added 10 planned enhancements.
+- Added requirements: 21 user stories, 10 use cases, 9 NFRs.
+- Added acknowledgements.
 
-* **Documentation**:
-    * User Guide:
-        * Added documentation for the features `delete` and `find` [\#72]()
-        * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
-    * Developer Guide:
-        * Added implementation details of the `delete` feature.
+#### Others
+- Update `about.us` and `index.html`.
+- General documentation bug fixes.
 
-* **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-    * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-    * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-    * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
+### Team
+- PRs contributed: [48 PRs](https://github.com/AY2324S1-CS2103T-W17-3/tp/pulls?q=is%3Apr+author%3Anathanielcalimag+)
+- PRs reviewed: [67 PRs](https://github.com/AY2324S1-CS2103T-W17-3/tp/pulls?q=is%3Apr+reviewed-by%3A%40me+)
+- Issues Raised: [34 issues](https://github.com/AY2324S1-CS2103T-W17-3/tp/issues?q=is%3Aissue+author%3Anathanielcalimag+)
+- [PR comments](https://nus-cs2103-ay2324s1.github.io/dashboards/contents/tp-comments.html#156-nath-imag-nathanielcalimag-16-comments)
+- Involved in many discussions asynchronously and across around 20 meetings in order to design, ideate, and solve problems in SnS.
 
-* **Tools**:
-    * Integrated a third party library (Natty) to the project ([\#42]())
-    * Integrated a new Github plugin (CircleCI) to the team repo
+### Community
+- PE-D issues raised: [15 issues](https://github.com/AY2324S1-CS2103T-W16-1/tp/issues?q=%5BPE-D%5D%5BTester+E%5D+)
+- Forum questions: [2 questions](https://github.com/nus-cs2103-AY2324S1/forum/issues?q=is%3Aissue+author%3Anathanielcalimag)
