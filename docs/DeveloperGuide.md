@@ -29,6 +29,9 @@
 * [Find developer command](#)
     * [Feature usage](#)
     * [Feature implementation](#)
+* [List command](#list-developers)
+    * [Feature usage](#list-developers)
+    * [Feature implementation](#list-developers)
 * [Create team command](#)
     * [Feature usage](#)
     * [Feature implementation](#)
@@ -49,10 +52,10 @@
 * [Edit team leader command](#)
     * [Feature usage](#)
     * [Feature implementation](#)
+* [List team command](#list-teams)
+    * [Feature usage](#list-teams)
+    * [Feature implementation](#list-teams)
 * [Find team command](#)
-    * [Feature usage](#)
-    * [Feature implementation](#)
-* [List command](#)
     * [Feature usage](#)
     * [Feature implementation](#)
 * [Display tree command](#)
@@ -366,36 +369,34 @@ The `FindCommand` class, enables keyword-based searches for individuals. This in
 
 
 
-###  **List a developer** (Optional to show implementation?)
+###  **List developers**
 
-The add developer feature is facilitated by the AddCommand. It extends `Command` class.
-
-The operations are exposed in the `Model` interface as `Model#addTeam()`.
+The list developers feature is facilitated by the ListCommand. It extends `Command` class.
 
 #### Usage
 Given below is an example usage scenario and how the function behaves at each step.
 
-Step 1. The user launches the application and uses the `newteam` command and specifies a `teamname` and `teamLeader` name.
+Case 1. The Ui is not displaying only the developer list, and uses the `list` command. In this case a list containing 
+only all existing developers but no teams will be displayed.
 
-
-
-Step 2. The user executes the `newteam` command `newteam tn/Team1 tl/John` to create a new team `Team1` with `John` set as team leader.
-
-
-
-Step 3. LinkTree provides a feedback based on whether the operation was successful or not.
-
-
+Case 2. The user has just used the `list` command, where the Ui is displaying the developer list already, and the user 
+uses `list` command again. The app will go back to displaying both lists of developers and teams.
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, it will not call `Model#addTeam()`, so the `team` will not be saved to `TeamBook`.
+**Note:** As long as the app is not displaying only the list of developers, the `list` command will toggle it to do so, 
+otherwise, the `list` command will toggle the app to display both lists of developers and teams.
 
 </box>
 
 #### Function Implementation
-
-(Add basic implementation here)
+- ListCommand is executed.
+- if the Ui is listing only developers already: MainWindow toggles the HBox containing both lists of developers and teams to 
+be visible; MainWindow toggles the HBox containing the list of teams to be invisible; Display both lists of developers 
+and teams;
+- else if the Ui is listing not only teams: MainWindow toggles the HBox containing the list of teams to be visible; 
+MainWindow toggles the HBox containing any other lists to be invisible; Display only the list of all existing teams;
+<puml src="diagrams/ListCommandDiagiam.puml" width="1100"/>
 
 <br>
 
@@ -551,6 +552,37 @@ LinkTree provides feedback based on whether the operation was successful or not.
     - Cons: Breaks the principle of abstraction and object-oriented programming. Information hiding is also not maintained.
 
 The choice between these alternatives depends on your specific project requirements and architectural preferences.
+
+###  **List Teams**
+
+The list teams feature is facilitated by the ListTeamCommand. It extends `Command` class.
+
+#### Usage
+Given below is an example usage scenario and how the function behaves at each step.
+
+Case 1. The Ui is not displaying only the team list, and uses the `listt` command. In this case a list containing
+only all existing teams but not list of developers will be displayed.
+
+Case 2. The user has just used the `listt` command, where the Ui is displaying the team list already, and the user
+uses `listt` command again. The app will go back to displaying both lists of developers and teams.
+
+<box type="info" seamless>
+
+**Note:** As long as the app is not displaying only the list of teams, the `listt` command will toggle it to do so,
+otherwise, the `listt` command will toggle the app to display both lists of developers and teams.
+
+</box>
+
+#### Function Implementation
+- ListTeamCommand is executed.
+- if the Ui is listing only teams already: MainWindow toggles the HBox containing both lists of developers and teams to
+  be visible; MainWindow toggles the HBox containing the list of teams to be invisible; Display both lists of developers
+  and teams;
+- else if the Ui is listing not only teams: MainWindow toggles the HBox containing the list of teams to be visible;
+  MainWindow toggles the HBox containing any other lists to be invisible; Display only the list of all existing teams;
+
+<puml src="diagrams/ListTeamCommandDiagiam.puml" width="1100"/>
+<br>
 
 ### Find Team by Keywords
 
