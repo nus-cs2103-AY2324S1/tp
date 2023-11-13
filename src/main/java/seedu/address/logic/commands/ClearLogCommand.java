@@ -48,6 +48,7 @@ public class ClearLogCommand extends UndoableCommand {
 
         model.setLogBook(new LogBook());
         return new CommandResult(MESSAGE_SUCCESS);
+
     }
 
     /**
