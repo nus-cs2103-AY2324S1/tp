@@ -435,7 +435,7 @@ Format: `find NAME [MORE_NAMES]`
 
 **Tips:**
 
-Parameter constraints:
+Parameter constraints: 
 
 * Name should be a non-empty string.
 * More names can be added to the command line, and the search will be conducted for all names provided.
@@ -689,7 +689,7 @@ to choose their own avatars.
 
 <box type="tip">
 
-* Commands are sorted by alphabetical order.
+**Tips:** Commands are sorted by alphabetical order.
 
 </box>
 
