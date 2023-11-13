@@ -8,11 +8,9 @@ pageNav: 3
 
 ## **Overview**
 
-LoveBook, is a **dating-focused** application, revolving around providing **serial daters** with a **convenient**
-and **enjoyable** tool to enhance their dating experiences. Featuring **user preferences management**, **date
-organization**,
-**customizable filtering options** and **best match algorithms**, LoveBook enhances the **efficiency** and \*
-\*effectiveness\*\* of your
+LoveBook, is a **dating-focused** application, revolving around providing **online daters** with a **convenient**
+and **enjoyable** tool to enhance their dating experiences. Featuring **user preferences management**, **date organization**,
+**customizable filtering options** and **best match algorithms**, LoveBook enhances the **efficiency** and **effectiveness** of your
 online dating journey.
 
 [//]: # "<!-- * Table of Contents -->"
@@ -137,6 +135,8 @@ implementation of a component), as illustrated in the (partial) class diagram be
 
 The sections below give more details of each component.
 
+[Scroll back to _Table of Contents_](#table-of-contents)
+
 ### UI component
 
 The **API** of this component is specified
@@ -162,10 +162,11 @@ The `UI` component,
 - keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 - depends on some classes in the `Model` component, as it displays `Date` object residing in the `Model`.
 
+[Scroll back to _Table of Contents_](#table-of-contents)
+
 ### Logic component
 
-**API
-** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -176,10 +177,11 @@ call as an example.
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
-<box type="info" seamless>
+<box type="info">
 
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of
 PlantUML, the lifeline reaches the end of diagram.
+
 </box>
 
 How the `Logic` component works:
@@ -204,10 +206,11 @@ How the parsing works:
 - All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
+[Scroll back to _Table of Contents_](#table-of-contents)
+
 ### Model component
 
-**API
-** : [`Model.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="550" />
 
@@ -224,10 +227,11 @@ The `Model` component,
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
   should make sense on their own without depending on other components)
 
+[Scroll back to _Table of Contents_](#table-of-contents)
+
 ### Storage component
 
-**API
-** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -239,6 +243,8 @@ The `Storage` component,
   either one of three (if the functionality of only one is needed).
 - depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
+
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Common classes
 
@@ -258,9 +264,11 @@ Before diving into the implementation details, here's an overview of what change
 
 The following class diagram shows the new `Date` class after the changes mentioned above.
 
-<puml src="diagrams/DateClassDiagram.puml" width="600" />
+<puml src="diagrams/DateClassDiagram.puml"/>
 
 Moving on to the implementation details, the following sections describe how and why the main features of the app work.
+
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Add Dates Feature
 
@@ -282,11 +290,11 @@ The `delete` and `edit` features are also implemented in a similar manner.
 
 The sequence diagram notation of the above steps is shown below. <br>
 
-<puml src="diagrams/AddSequenceDiagram.puml" width="600" />
+<puml src="diagrams/AddSequenceDiagram.puml" />
 
 The activity diagram notation of the above steps is shown below. <br>
 
-<puml src="diagrams/AddActivityDiagram.puml" width="600" />
+<puml src="diagrams/AddActivityDiagram.puml" />
 
 <box type="info" seamless>
     The UI and Storage components are not shown in the sequence and activity diagrams above for simplicity.
@@ -330,6 +338,8 @@ The activity diagram notation of the above steps is shown below. <br>
   - Pros: More user-friendly (since user can easily see the date being added to the end of the list)
   - Cons: Not very visually appealing (since the list appears to be unsorted and non uniform)
 
+[Scroll back to _Table of Contents_](#table-of-contents)
+
 ### List Dates
 
 1. The list dates feature begins by passing the user input obtained from the `CommandBox` class in the `Ui` component to
@@ -360,6 +370,8 @@ The sequence diagram notation of the above steps is shown below. <br>
     since you don't have to sort the list on every list command)
   - Cons: Not very visually appealing (since the list appears to be unsorted and non uniform)
 
+[Scroll back to _Table of Contents_](#table-of-contents)
+
 ### Filter dates
 
 The filter feature is implemented using the `FilterCommand` class. The `FilterCommand` class takes in a `Predicate`
@@ -381,6 +393,8 @@ the command `filter name/John`
 
 <puml src="diagrams/FilterSequence.puml" width="600" />
 
+[Scroll back to _Table of Contents_](#table-of-contents)
+
 ### Sort dates
 
 1. The user specifies a metric (eg. name/) and a sorting order (increasing/ decreasing) to sort by.
@@ -397,6 +411,8 @@ the command `sort name/increasing`.
 
 <puml src="diagrams/SortSequence.puml" width="600" />
 
+[Scroll back to _Table of Contents_](#table-of-contents)
+
 ### Get Blind Date
 
 1. The user will first key in blindDate which is the command word for this feature.
@@ -410,40 +426,97 @@ The _Activity_ diagram summarises what happens after the user enters a sort comm
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `blindDate`.
 
+[Scroll back to _Table of Contents_](#table-of-contents)
+
 ### Get best match
 
 The best match feature is implemented using the `BestMatchCommand` class. The `BestMatchCommand` class iterates
 through the list of Dates, and calls `GetScore` to get the score of the date based on height, age, horoscope and
-income. Each metric will be scored upon 10, and when it deviates from the user's preferences, the score is reduced.
-The maximum score is 40.
+income.
 
 <puml src="diagrams/BestMatchSequence.puml" width="600" />
 
+#### Design Considerations
+
+**Aspect: Scoring Dates**
+
+- Dates are scored upon 40, where each factor (age, height, income, horoscope) contributing 10 points each.
+- The date's attributes are compared to the user's set preferences.
+- Score for age = 10 - 2 \* (age difference)
+- Score for height = 10 - (height difference)
+- Score for income = 10 - (income difference) / 250
+- Score for horoscope = 10 if horoscope is the same, 0 if horoscope is different
+
+**Aspect: Ranking of Scores**
+
+- When the user requests for a Best Match, the Date with the highest score is taken.
+- A Date with 0 points can be chosen.
+- In cases where Dates are tied in score, the Date that was first input into LoveBook is chosen.
+
+The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
+the command `bestMatch`
+
+<puml src="diagrams/BestMatchSequence.puml" width="550" />
+
+[Scroll back to _Table of Contents_](#table-of-contents)
+
 ### Set preferences
 
-The set preferences feature is implemented using the `SetPrefCommand` class. The `SetPrefCommand` class takes in a
-`DatePref` object as a parameter. The `DatePref` object is used to set the `DatePref` object in the `Model` component.
-The `SetPrefCommand` class then returns a `CommandResult` object that contains the `DatePref` object.
+#### Implementation
 
-The _Activity_ diagram summarises what happens after the user enters a set preferences command.
+1. The set preferences feature begins by passing the user input obtained from the `CommandBox` class in the `Ui`
+   component to the `LogicManager` class in the `Logic` component by invoking the `execute` function.
+2. The `LogicManager` class then passes the user input to the `LoveBookParser` class for parsing and validation.
+3. The `LoveBookParser` class then performs polymorphism and creates a `SetPrefCommandParser` object for SetPrefCommand
+   specific parsing.
+4. The `LoveBookParser` class also separates the command word from the user input and passes the arguments from the user
+   input to the `SetPrefCommandParser` object created above for parsing.
+5. The `SetPrefCommandParser` carries out it's validation checks and creates a new `SetPrefCommand` object if the
+   validation checks pass.
+6. The `SetPrefCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function
+   which then updates the date preferences in the `Model` component.
+
+The `edit` feature is also implemented in a similar manner.
+
+The _Activity_ Diagram notation of the above steps is shown below.
 
 <puml src="diagrams/SetPrefActivity.puml" width="600" />
 
-The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
+The _Sequence_ Diagram notation of the above steps is shown below.
 
 <puml src="diagrams/SetPrefSequence.puml" width="600" />
+
+#### Design Considerations
+
+**Aspect: Allowing users to set their date preferences on launch**
+
+- **Alternative 1 (current choice):** Have default date preference (
+  see [this](UserGuide.md#managing-preferences-and-getting-matches))
+  - Pros: Easy to implement (since all you have to do is set the default date preference). `bestMatch` works
+    immediately from the start.
+  - Cons: Not very user-friendly (since the user may not know all the details of the date)
+- **Alternative 2:** Allow users to set their date preferences on launch
+  - Pros: More user-friendly (since user has more flexibility in setting their date preferences)
+  - Cons: Slightly harder to implement (since you have to check which fields are present). Will also affect the
+    bestMatch
+    algorithm since users may not know how to set their date preferences first.
+
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Star dates
 
 #### Implementation
 
-1. The star dates feature begins by passing the user input obtained from the `CommandBox` class in the `Ui` component to the `LogicManager` class in the `Logic` component by invoking the `execute` function.
+1. The star dates feature begins by passing the user input obtained from the `CommandBox` class in the `Ui` component to
+   the `LogicManager` class in the `Logic` component by invoking the `execute` function.
 2. The `LogicManager` class then passes the user input to the `LoveBookParser` class for parsing and validation.
+
 3. The `LoveBookParser` class then performs polymorphism and creates a `StarCommandParser` object for StarCommand specific parsing.
 4. The `LoveBookParser` class also separates the command word from the user input and passes the arguments from the user input to the `StarCommandParser` object created above for parsing.
 5. The `StarCommandParser` carries out it's validation checks and creates a new `StarCommand` object if the validation checks pass.
 6. The `StarCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function which then updates the isStarred field for the date object with the respective index.
-   The _Activity_ diagram summarises what happens after the user enters a star command.
+
+The _Activity_ diagram summarises what happens after the user enters a star command.
 
 <puml src="diagrams/StarActivity.puml" width="600" />
 
@@ -452,16 +525,23 @@ the command `star 1`
 
 <puml src="diagrams/StarSequence.puml" width="600" />
 
+[Scroll back to _Table of Contents_](#table-of-contents)
+
 ### Unstar dates
 
 #### Implementation
 
-1. The star dates feature begins by passing the user input obtained from the `CommandBox` class in the `Ui` component to the `LogicManager` class in the `Logic` component by invoking the `execute` function.
+1. The star dates feature begins by passing the user input obtained from the `CommandBox` class in the `Ui` component to
+   the `LogicManager` class in the `Logic` component by invoking the `execute` function.
 2. The `LogicManager` class then passes the user input to the `LoveBookParser` class for parsing and validation.
-3. The `LoveBookParser` class then performs polymorphism and creates a `UnstarCommandParser` object for UnstarCommand specific parsing.
-4. The `LoveBookParser` class also separates the command word from the user input and passes the arguments from the user input to the `UnstarCommandParser` object created above for parsing.
-5. The `UnstarCommandParser` carries out it's validation checks and creates a new `UnstarCommand` object if the validation checks pass.
-6. The `UnstarCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function which then updates the isStarred field for the date object with the respective index.
+3. The `LoveBookParser` class then performs polymorphism and creates a `UnstarCommandParser` object for UnstarCommand
+   specific parsing.
+4. The `LoveBookParser` class also separates the command word from the user input and passes the arguments from the user
+   input to the `UnstarCommandParser` object created above for parsing.
+5. The `UnstarCommandParser` carries out it's validation checks and creates a new `UnstarCommand` object if the
+   validation checks pass.
+6. The `UnstarCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function
+   which then updates the isStarred field for the date object with the respective index.
 
 The _Activity_ diagram summarises what happens after the user enters a star command.
 
@@ -472,6 +552,8 @@ the command `unstar 1`
 
 <puml src="diagrams/UnstarSequence.puml" width="600" />
 
+[Scroll back to _Table of Contents_](#table-of-contents)
+
 ---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -481,6 +563,41 @@ the command `unstar 1`
 - [Logging guide](Logging.md)
 - [Configuration guide](Configuration.md)
 - [DevOps guide](DevOps.md)
+
+[Scroll back to _Table of Contents_](#table-of-contents)
+
+---
+
+## **Effort**
+
+Implementing LoveBook was not a straightforward task. Given below is a summary of the effort our team has put into to
+develop LoveBook as well as some challenges faced.
+
+### Evolving of AB3 into LoveBook
+
+As we wanted to morph AB3 to fit into our idea of LoveBook, we had to refactor a large portion of the initial codebase
+and implement several new classes to get the basic minimum viable product of LoveBook.
+This included creating the Date class and its associated inner field classes. We also had to update how the application
+will store Dates and DatePrefs separately. In addition, many previous commands of AB3 had to be refactored or changed,
+and we added several new commands to LoveBook as well. Eventually, we were able to successfully implement both the Date
+and DatePref classes and all their associated commands.
+
+One challenge we faced was implementing the bestMatch feature. Given the tight timeline of the team project, we decided
+to do a simple implementation of this feature since we would not be able to deliver the full functionality (along with
+updating every other command we have implemented thus far) in time. If given more time, we would like to develop this
+further incorporating the use of artificial intelligence, as it is a relevant feature that will be used in the real
+world and brings value to our target users.
+
+### Revamping of UI
+
+We wanted a simple yet appealing graphical user interface for our application’s users. As such, we decided to change the
+original UI of AB3 into our own new LoveBook UI. As our team was unfamiliar with JavaFX initially, it took us
+a great amount of time and effort to produce an eventual satisfactory and working UI that we were proud to adopt and
+incorporate into our application.
+
+[Scroll back to _Table of Contents_](#table-of-contents)
+
+---
 
 ## **Appendix: Requirements**
 
@@ -499,6 +616,8 @@ the command `unstar 1`
 LoveBook simplifies the process of storing information of dates and assessing compatibility between user and his/her
 dates by taking into account the user’s preferences, thereby enhancing the efficiency and effectiveness of finding the
 perfect match.
+
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### User stories
 
@@ -527,6 +646,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | dater     | to be able to find dates based on their name                                                    | locate a date easily                                                    |
 | `* *`    | lazy user | to be able to clear all the dates in my list                                                    | start afresh with a new date list                                       |
 
+[Scroll back to _Table of Contents_](#table-of-contents)
+
 ### Use cases
 
 (For all use cases below, the **System** is the `LoveBook` and the **Actor** is the `user`, unless specified otherwise)
@@ -548,128 +669,146 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Main Success Scenario (MSS):**
 
-1. User requests to add a new date to the LoveBook.
-2. LoveBook prompts the user to provide the date's details, including name, age, gender, height, income and horoscope.
-3. User enters the required details.
-4. LoveBook validates the input.
-5. LoveBook adds the new date to the LoveBook.
-6. LoveBook displays a confirmation message.
+1. User inputs command for adding date to LoveBook.
+2. LoveBook validates the command.
+3. LoveBook adds the new date to the LoveBook.
+4. LoveBook displays a confirmation message.
 
    Use case ends. <br>
 
 **Extensions:**
 
-4a. The input is invalid (e.g., invalid gender, height, horoscope).
+2a. The command is invalid (Fields do not exist, invalid format).
 
 - LoveBook shows an error message.
-- User is prompted to re-enter the details.
-- Use case resumes at step 2.
+- User is prompted to re-enter the details. A positive example is given.
+- Use case ends.
 
 #### Use Case: Finding a Date
 
 **Main Success Scenario (MSS):**
 
-1. User requests to search for a date in the LoveBook.
-2. LoveBook prompts the user to enter a search query by name.
-3. User enters the necessary command.
-4. LoveBook performs a search based on the query.
-5. LoveBook displays a list of dates matching the search query.
+1. User inputs command to search for a date in LoveBook.
+2. LoveBook displays all Dates with names that match the keyword.
 
 Use case ends. <br>
 
 **Extensions:**
 
-4a. No dates match the search query.
+2a. No dates match the search query.
 
 - LoveBook displays a message indicating that no matching dates were found.
+- Use case ends.
 
 #### Use Case: Edit a Date's Details
 
 **Main Success Scenario (MSS):**
 
-1. User requests to list all the dates.
-2. LoveBook shows a list of dates.
-3. User selects the date and the relevant fields they want to edit from the list.
-4. LoveBook updates the date's details with the new information.
-5. LoveBook displays a confirmation message.
+1. User inputs command to edit a Date's details.
+2. LoveBook validates the command.
+3. LoveBook updates the Date's details with the new information.
+4. LoveBook displays a confirmation message.
 
 Use case ends. <br>
 
 **Extensions:**
 
-2a. The list is empty.
+2a. The command is invalid (Fields do not exist, invalid format).
 
+- LoveBook shows an error message.
+- User is prompted to re-enter the command. A positive example is given.
 - Use case ends.
 
-4a. The selected date does not exist (e.g., index provided is greater than number of dates).
+2b. No fields to edit are given.
 
-- 4a1. LoveBook displays an error message.
-- Use case resumes at step 2.
+- LoveBook displays a message indicating that at least 1 field must be provided to edit.
+- Use case ends.
 
-4b. The new field entry is invalid (e.g., missing name, incorrect gender).
+2c. Edited field(s) are invalid.
 
-- 4b1. LoveBook displays an error message.
-- Use case resumes at step 2.
+- LoveBook displays a message indicating that the field is invalid. It displays the first invalid field detected.
+- Use case ends.
+
+2d. Index provided is invalid.
+
+- LoveBook displays a message indicating that the index is invalid.
+- Use case ends.
 
 #### Use Case: Delete a Date
 
 **Main Success Scenario (MSS):**
 
-1. User requests to list all the dates.
-2. LoveBook shows a list of dates.
-3. User requests to delete a specific date in the list.
-4. LoveBook deletes the date from the LoveBook.
+1. User inputs command to delete Date.
+2. Date is deleted from LoveBook.
+3. LoveBook displays a confirmation message.
 
 Use case ends. <br>
 
 **Extensions:**
 
-2a. The list is empty.
+2a. Index provided is invalid.
 
+- LoveBook displays a message indicating that the index is invalid.
 - Use case ends.
-
-3a. The selected date does not exist.
-
-- 3a1. LoveBook displays an error message.
-- Use case resumes at step 2.
 
 #### Use Case: Set Preferences
 
 **Main Success Scenario (MSS):**
 
-1. User requests to set preferences.
-2. LoveBook updates the preferences with the new information.
+1. User inputs command to set Preferences.
+2. LoveBook validates the command.
+3. LoveBook updates the preferences with the new information.
+4. LoveBook displays a confirmation message.
 
 Use case ends. <br>
 
 **Extensions:**
 
-2a. The entered preferences are invalid.
+2a. The command is invalid (Preference does not exist, invalid format).
 
-- 2a1. LoveBook displays an error message.
-- Use case resumes at step 1.
+- LoveBook shows an error message.
+- User is prompted to re-enter the command. A positive example is given.
+- Use case ends.
 
-#### Use Case: View Preferences
+2b. No Preferences to set are given.
+
+- LoveBook displays a message indicating that at least 1 field must be provided to set. A positive example is given.
+- Use case ends.
+
+2c. Field(s) are invalid.
+
+- LoveBook displays a message indicating that the field is invalid. It displays the first invalid field detected.
+- Use case ends.
+
+#### Use Case: Show Preferences
 
 **Main Success Scenario (MSS):**
 
-1. User requests to view preferences.
+1. User inputs command to show preferences.
 2. LoveBook displays the preferences.
 
 Use case ends. <br>
+
+**Extensions:**
+
+1a. No Preferences were previously set.
+
+- LoveBook displays the default preferences.
+- Use case ends.
 
 #### Use Case: Get Blind Date
 
 **Main Success Scenario (MSS):**
 
-1. User requests for a blind date.
-2. LoveBook displays a blind date.
+1. User inputs command to get a blind Date.
+2. LoveBook displays a random Date.
+3. LoveBook displays a confirmation message.
 
 Use case ends. <br>
 
 **Extensions:**
 
-2a. The list is empty.
+1a. The list is empty.
 
 - LoveBook displays a message indicating that there are no dates.
 - Use case ends.
@@ -678,10 +817,9 @@ Use case ends. <br>
 
 **Main Success Scenario (MSS):**
 
-1. User requests to list all the dates.
-2. LoveBook shows a list of dates.
-3. User requests to filter the list of dates by a specific metric.
-4. LoveBook filters the list of dates by the specified metric.
+1. User inputs command to filter dates.
+2. LoveBook validates the command.
+3. LoveBook shows a list of dates which are filtered based on the metric(s) given.
 
 Use case ends. <br>
 
@@ -691,19 +829,29 @@ Use case ends. <br>
 
 - Use case ends.
 
-3a. The specified metric does not exist or entered input is invalid (e.g., invalid gender).
+2b. The command is invalid (Metrics do not exist, invalid format).
 
-- 3a1. LoveBook displays an error message.
-- Use case resumes at step 2.
+- LoveBook shows an error message.
+- User is prompted to re-enter the command. A positive example is given.
+- Use case ends.
+
+2c. No metric to filter by are given.
+
+- LoveBook displays a message indicating that at least 1 metric must be provided to filter. A positive example is given.
+- Use case ends.
+
+2d. Field(s) are invalid.
+
+- LoveBook displays a message indicating that the field is invalid. It displays the first invalid field detected.
+- Use case ends.
 
 #### Use Case: Sort Dates
 
 **Main Success Scenario (MSS):**
 
-1. User requests to list all the dates.
-2. LoveBook shows a list of dates.
-3. User requests to sort the list of dates by a specific metric.
-4. LoveBook sorts the list of dates by the specified metric.
+1. User inputs command to sort Dates
+2. LoveBook validated the command.
+3. LoveBook shows a list of dates which are sorted based on the comparator given.
 
 Use case ends. <br>
 
@@ -713,10 +861,21 @@ Use case ends. <br>
 
 - Use case ends.
 
-3a. The specified metric does not exist or entered input is invalid (e.g., invalid gender).
+2b. The command is invalid (Comparator does not exist, invalid format).
 
-- 3a1. LoveBook displays an error message.
-- Use case resumes at step 2.
+- LoveBook shows an error message.
+- User is prompted to re-enter the command. A positive example is given.
+- Use case ends.
+
+2c. No comparator to sort is given.
+
+- LoveBook displays a message indicating that at least 1 comparator must be provided to set. A positive example is given.
+- Use case ends.
+
+2d. Comparator is invalid.
+
+- LoveBook displays a message indicating that the comparator is invalid. A positive example is given.
+- Use case ends.
 
 #### Use Case: Get Best Match
 
@@ -731,8 +890,10 @@ Use case ends. <br>
 
 1a. The list is empty.
 
-- 1a1. LoveBook displays a message indicating that there are no dates.
+- LoveBook displays a message indicating that there are no dates.
 - Use case ends.
+
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Non-Functional Requirements
 
@@ -746,6 +907,8 @@ Use case ends. <br>
 4. Portability: The CLI application should be compatible with multiple operating systems, including Windows, macOS, and
    Linux.
 
+[Scroll back to _Table of Contents_](#table-of-contents)
+
 ### Glossary
 
 | Term          | Definition                                                                                                        |
@@ -757,6 +920,8 @@ Use case ends. <br>
 | GUI           | Graphical User Interface                                                                                          |
 | CLI           | Command Line Interface                                                                                            |
 | Mainstream OS | Windows, Linux, Unix, OS-X                                                                                        |
+
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ---
 
@@ -861,36 +1026,21 @@ testers are expected to do more _exploratory_ testing.
    - Close the app.
    - Expected: A `data` folder is created under the current repository where the jar file is located.
 
----
+[Scroll back to _Table of Contents_](#table-of-contents)
 
-## **Effort**
+---
 
 ## **Appendix: Effort**
-Implementing LoveBook was not straightforward and often required us to brainstorm as a team to solve the challenges faced.
-Given below is a summary of the effort our team has put into developing LoveBook.
 
-### Evolving of AB3 into LoveBook
+Implementing LoveBook was not straightforward and often required us to brainstorm as a team to solve the challenges faced. Given below is a summary of the effort our team has put into developing LoveBook.
 
-Our group undertook a significant amount of effort in refactoring the initial codebase, introducing several new classes
-and enhancing existing ones to fit into our idea of LoveBook. This included creating the Date class and its associated inner field classes.
-We also had to update how the application will store Dates and DatePrefs separately. In addition, many previous commands
-of AB3 had to be refactored or changed, and we added several new commands to LoveBook as well. Eventually, we were able
-to successfully implement both the Date and DatePref classes and all their associated commands.
+### Effort Summary
 
-One challenge we faced was implementing the bestMatch feature. Given the tight timeline of the team project, we decided
-to do a simple implementation of this feature since we would not be able to deliver the full functionality (along with
-updating every other command we have implemented thus far) in time. If given more time, we would like to develop this
-further incorporating the use of artificial intelligence, as it is a relevant feature that will be used in the real
-world and brings value to our target users.
+Our group undertook a significant refactoring effort in the initial codebase, introducing several new classes and enhancing existing ones to fit into our idea of LoveBook. Noteworthy additions include the creation of the "income" and "horoscope" fields within the Date class, representing crucial attributes for building comprehensive user profiles and calculation of compatibility. Regarding compatibility, our group has spent a tremendous amount of time and effort to brainstorm about the implementation of a compatibility algorithm. The compatibility algorithm is designed to calculate a compatibility score based on user preferences and date attributes. This has proven to be challenging as we had to ensure accuracy in providing the user with the best match by taking into account all the differences between preferences and dates attributes.
 
-### Revamping of UI
+Our dedication to enhancing the aesthetics of LoveBook is underscored by our meticulous attention to visual representation. We've transcended conventional textual displays, incorporating visually engaging elements such as gender icons, horoscope symbols, and star command visual cues, all implemented using JavaFX. These features not only contribute to the overall visual appeal of the application but also serve a functional purpose in providing users with quick and intuitive insights into important date attributes. Furthermore, our commitment to a visually pleasing user interface extends to the inclusion of unique avatars for each date, corresponding to their respective genders. This holistic approach to aesthetics reflects our aspiration to create an immersive and enjoyable user experience within the LoveBook application.
 
-Our efforts to enhancing LoveBook's UI are evident in our use of visually engaging elements like gender icons,
-horoscope symbols, and JavaFX-implemented star command cues. These features not only boost visual appeal but also offer
-functional insights into key date attributes. As our team was unfamiliar with JavaFX initially, it took us a great
-amount of time and effort to produce an eventual satisfactory and working UI that we were proud to adopt and incorporate into our application.
-
----
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ## **Appendix: Planned Enhancements**
 
@@ -925,15 +1075,19 @@ amount of time and effort to produce an eventual satisfactory and working UI tha
      planning to allow the user to filter by multiple keywords.
 
 5. Improve the error message to be more comprehensive
-    - Currently, the error message for user that key in multiple invalid keywords only spots the first invalid keyword.
-      We are planning to allow the user to know all the invalid keywords that he/she has keyed in.
+
+   - Currently, the error message for user that key in multiple invalid keywords only spots the first invalid keyword.
+     We are planning to allow the user to know all the invalid keywords that he/she has keyed in.
 
 6. Improve the message displayed when the user tries to perform an operation on an empty list
+
    - Currently, for some commands like edit and sort, the message displayed is simply based on the validity check of the parameters and it does not tell the user that the
      list is empty. For instance, when the user sorts an empty list, the message displayed is "Sorted!" which is not very helpful. Hence, we are planning to tell the user that the list is empty and that the operation cannot be performed.
 
 7. Improve the presets bar feature to be more comprehensive and clear
-    - Currently, the presets bar feature only accomodates for the commands: `add`, `edit`, `delete`, `setP` and `showP`.
-    - In the future, we plan to add more presets buttons for all 16 commands in the application.
-    - Furthermore, even though there's `clear` command, the button "clear" removes all text in the command box, making
-      it ambiguous. We plan to change this in a future iteration like a trash can icon.
+   - Currently, the presets bar feature only accomodates for the commands: `add`, `edit`, `delete`, `setP` and `showP`.
+   - In the future, we plan to add more presets buttons for all 16 commands in the application.
+   - Furthermore, even though there's `clear` command, the button "clear" removes all text in the command box, making
+     it ambiguous. We plan to change this in a future iteration like a trash can icon.
+
+[Scroll back to _Table of Contents_](#table-of-contents)
