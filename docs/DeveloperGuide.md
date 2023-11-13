@@ -58,7 +58,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+![Architecture Diagram](images/ArchitectureDiagram.png)
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -83,7 +83,7 @@ The bulk of the app's work is done by the following four components:
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+![Architecture Sequence Diagram](images/ArchitectureSequenceDiagram.png)
 
 Each of the four main components (also shown in the diagram above),
 
@@ -92,7 +92,7 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+![Component Managers](images/ComponentManagers.png)
 
 The sections below give more details of each component.
 
@@ -121,7 +121,7 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+![Logic Class Diagram](images/LogicClassDiagram.png)
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("deletePerson 1")` API call as an example.
 
@@ -137,7 +137,7 @@ How the `Logic` component works:
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+![Parser Classes](images/ParserClasses.png)
 
 How the parsing works:
 * When called upon to parse a user command, the `SpendNSplitParser` accesses the `CommandAliasMap` to match any aliases and identify the corresponding command word.
@@ -147,7 +147,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+![Model Class Diagram](images/ModelClassDiagram.png)
 
 The `Model` component,
 
@@ -169,7 +169,7 @@ on other components)
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+![Storage Class Diagram](images/StorageClassDiagram.png)
 
 The `Storage` component,
 * can save both Spend N Split data and user preference data in JSON format, and read them back into corresponding objects.
@@ -463,13 +463,13 @@ The `setShorthand` command allows users to set a shorthand, or alias for an exis
 
 The activity diagram is as follows:
 
-<img src="images/SetShorthandCommandActivityDiagram.png" width="550"/>
+![SetShorthand Command Activity Diagram](images/SetShorthandCommandActivityDiagram.png)
 
 The sequence diagram below illustrates the interactions within the `Logic` component and `Model` component:
 
-<img src="images/SetShorthandCommandSequenceDiagram.png" width="550"/>
+![SetShorthand Command Sequence Diagram](images/SetShorthandCommandSequenceDiagram.png)
 
-<img src="images/SetShorthandCommandSequenceDiagram2.png" width="550"/>
+![SetShorthand Command Sequence Diagram 2](images/SetShorthandCommandSequenceDiagram2.png)
 
 ##### Feature Details
 
@@ -503,7 +503,7 @@ Should the user ever wish to clear the data and start afresh again in the future
 
 The sequence diagram below illustrates the interactions within the `Logic` component and `Model` component:
 
-<img src="images/ClearCommandSequenceDiagram.png" width="550"/>
+![Clear Command Sequence Diagram](images/ClearCommandSequenceDiagram.png)
 
 ##### Feature Details
 
@@ -518,7 +518,7 @@ The `help` command brings up the help window, which contains a URL link to the o
 
 The sequence diagram below illustrates the interactions within the `Ui`, `Logic` and `Model` component:
 
-<img src="images/HelpCommandSequenceDiagram.png" width="550"/>
+![Help Command Sequence Diagram](images/HelpCommandSequenceDiagram.png)
 
 ##### Feature Details
 
@@ -533,7 +533,7 @@ The `exit` command exits the app. This closes the app window (including the help
 
 The sequence diagram below illustrates the interactions within the `Ui`, `Logic` and `Model` component:
 
-<img src="images/ExitCommandSequenceDiagram.png" width="550"/>
+![Exit Command Sequence Diagram](images/ExitCommandSequenceDiagram.png)
 
 ##### Feature Details
 
