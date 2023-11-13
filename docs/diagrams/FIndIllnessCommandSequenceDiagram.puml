@@ -1,0 +1,78 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindIllnessCommandParser" as FindIllnessCommandParser LOGIC_COLOR
+participant ":IllnessContainsKeywordsPredicate" as IllnessContainsKeywordsPredicate LOGIC_COLOR
+participant ":FindIllnessCommand" as FindIllnessCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("find-i flu")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("find-i flu")
+activate AddressBookParser
+
+create FindIllnessCommandParser
+AddressBookParser -> FindIllnessCommandParser
+activate FindIllnessCommandParser
+
+FindIllnessCommandParser --> AddressBookParser
+deactivate FindIllnessCommandParser
+
+AddressBookParser -> FindIllnessCommandParser : parse("flu")
+activate FindIllnessCommandParser
+
+create IllnessContainsKeywordsPredicate
+FindIllnessCommandParser -> IllnessContainsKeywordsPredicate
+activate IllnessContainsKeywordsPredicate
+
+IllnessContainsKeywordsPredicate --> FindIllnessCommandParser : IllnessContainsKeywordsPredicate
+deactivate IllnessContainsKeywordsPredicate
+
+create FindIllnessCommand
+FindIllnessCommandParser -> FindIllnessCommand
+activate FindIllnessCommand
+
+
+FindIllnessCommand --> FindIllnessCommandParser : findIllnessCommand
+deactivate FindIllnessCommand
+
+FindIllnessCommandParser --> AddressBookParser : findIllnessCommand
+deactivate FindIllnessCommandParser
+
+FindIllnessCommandParser -[hidden]-> AddressBookParser
+destroy FindIllnessCommandParser
+
+AddressBookParser --> LogicManager : findIllnessCommand
+deactivate AddressBookParser
+
+LogicManager -> FindIllnessCommand : execute(model)
+activate FindIllnessCommand
+
+FindIllnessCommand -> Model : updateFilteredAppointmentList(IllnessContainsKeywordsPredicate)
+activate Model
+
+Model --> FindIllnessCommand
+deactivate Model
+
+create CommandResult
+FindIllnessCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindIllnessCommand
+deactivate CommandResult
+
+FindIllnessCommand --> LogicManager : result
+deactivate FindIllnessCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
