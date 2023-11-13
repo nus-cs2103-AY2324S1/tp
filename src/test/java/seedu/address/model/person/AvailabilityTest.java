@@ -15,6 +15,7 @@ public class AvailabilityTest {
 
     @Test
     public void constructor_invalidAvailability_throwsIllegalArgumentException() {
+        // invalid availability, anything other than 'nil', 'Available', 'NotAvailable'
         String invalidAvailability = "invalidAvailability";
         assertThrows(IllegalArgumentException.class, () -> new Availability(invalidAvailability));
     }
@@ -24,8 +25,12 @@ public class AvailabilityTest {
         // null availability
         assertThrows(NullPointerException.class, () -> Availability.isValidAvailability(null));
 
-        // invalid availability
+        // invalid availability, anything other than 'nil', 'Available', 'NotAvailable'
         assertFalse(Availability.isValidAvailability("invalidAvailability"));
+
+        // blank availability
+        assertFalse(Availability.isValidAvailability("")); // empty string
+        assertFalse(Availability.isValidAvailability(" ")); // spaces only
 
         // valid availability
         assertTrue(Availability.isValidAvailability("Available"));

@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's availability in the address book.
+ * Represents a Person's availability to foster an animal in the address book.
  */
 public class Availability {
     public static final String MESSAGE_CONSTRAINTS = "Availability should be either 'Available', "
@@ -31,6 +31,9 @@ public class Availability {
         this.value = value;
     }
 
+    /**
+     * Returns true if a given string is a valid availability.
+     */
     public static boolean isValidAvailability(String test) {
         return test.matches(VALIDATION_REGEX);
     }
