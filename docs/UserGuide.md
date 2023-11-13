@@ -196,13 +196,13 @@ Shows a message explaining how to access the help page.
 
 **Format:** `help`
 
-<div markdown="block" class="alert alert-warning">**:exclamation: Warning:**
+<div markdown="block" class="alert alert-warning">**:exclamation: Caution:**
 `help` command will not work when there are no address books present. Please create an address book using `course create course/COURSE_CODE` to work around this issue. You can view the next section for more details on how to use the command.
 </div>
 
 ### 4.2 Basic Course Management
 
-<div markdown="block" class="alert alert-warning">**:exclamation: Warning:**
+<div markdown="block" class="alert alert-warning">**:exclamation: Caution:**
 The parameter `COURSE_CODE` is used for all course management commands, it can be any string, including an empty one. In addition, if `COURSE_CODE` specified is too long, the end of the string will be truncated and other tabs may appear empty!
 </div>
 
@@ -318,11 +318,12 @@ Creates a new contact in the course with the specified name and details.
 
 <div markdown="block" class="alert alert-info">
 
-* `STUDENT_NAME` should be a string made up of alphanumerical characters, with no special characters.
+* `STUDENT_NAME` should be a string made up of alphanumerical characters and spaces, with no special characters.
 * `PHONE_NUMBER` should be a string made up of numbers.
+* `EMAIL` should only be of the form `local@domain` and only accept alphanumeric characters <br>- `local` allows for special characters `+`, `_`, `.` and `-` as well. <br>- `local` should not start with special characters. <br>- `domain` must be at least 2 letters long<br>
 * `STUDENT_ID` should be unique for all students.
-* `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space. It should begin with the capital letter 'A', followed by 7 numbers, and end with a letter.
-* `TUTORIAL_GROUP_ID` should be a string made up of alphanumeric characters, with no special characters.
+* `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or spaces. It should begin with the capital letter 'A', followed by 7 numbers, and end with a letter.
+* `TUTORIAL_GROUP_ID` should be a string made up of alphanumeric characters and spaces, with no special characters.
 
 </div>
 
@@ -386,6 +387,19 @@ Marks the attendance of one or more student.
 **Format:** `mark n/STUDENT_NAME[, STUDENT_NAME]… | id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEK_NUMBER
 [r/REASON_OF_ABSENCE]`
 
+<div markdown="block" class="alert alert-info">
+
+* Marks the attendance of one or more student corresponding to the `STUDENT_NAME` or `STUDENT_ID`.
+* To mark attendance for multiple students, provide a comma-separated list of `STUDENT_NAME` or `STUDENT_ID`.
+* If a student is present, `REASON_OF_ABSENCE` is not required and will be ignored.
+* If a student is absent, `REASON_OF_ABSENCE` is mandatory.
+* `STUDENT_NAME` should be a string made up of alphanumerical characters and spaces, with no special characters.
+* `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or spaces. It should begin with the capital letter 'A', followed by 7 numbers, and end with a letter.
+* `ATTENDANCE` should only be 0 or 1, where 0 indicates student is absent and 1 indicates student is present.
+* `WEEK_NUMBER` should be an integer from 0 to 13.
+
+</div>
+
 <div markdown="block" class="alert alert-warning">
 **:exclamation: Caution:** Note the following!
 * `mark` command is case-sensitive!
@@ -394,18 +408,6 @@ Marks the attendance of one or more student.
     * For example, `mark n/Zong Jin, Fu Yiqiao id/A0123456E, A0123457E a/1 w/1` is invalid!
 </div>
 
-<div markdown="block" class="alert alert-info">
-
-* Marks the attendance of one or more student corresponding to the `STUDENT_NAME` or `STUDENT_ID`.
-* To mark attendance for multiple students, provide a comma-separated list of `STUDENT_NAME` or `STUDENT_ID`.
-* If a student is present, `REASON_OF_ABSENCE` is not required.
-* If a student is absent, `REASON_OF_ABSENCE` is mandatory.
-* `STUDENT_NAME` should be a string made up of alphanumerical characters, with no special characters.
-* `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space. It should begin with the capital letter 'A', followed by 7 numbers, and end with a letter.
-* `ATTENDANCE` should only be 0 or 1, where 0 indicates student is absent and 1 indicates student is present.
-* `WEEK_NUMBER` should be an integer from 0 to 13.
-
-</div>
 
 **Examples:**
 
@@ -450,10 +452,16 @@ Shows a summary of attendance records including list of absentees.
 * If tutorial group is specified, shows a list of absentees and summary of the attendance of students corresponding to the specified tutorial group in the course for the specified week number.
 * If tutorial group is not specified, shows a list of absentees and summary of the attendance of all students in the course for the specified week number.
 * `TUTORIAL_GROUP_ID` is optional.
-* `TUTORIAL_GROUP_ID` should be a string made up of alphanumeric characters, with no special characters.
+* `TUTORIAL_GROUP_ID` should be a string made up of alphanumeric characters and spaces, with no special characters.
 * `WEEK_NUMBER` should be an integer from 0 to 13.
 
 </div>
+
+<div markdown="block" class="alert alert-warning">
+**:exclamation: Caution:** Note the following!
+* Trying to run the command for weeks with incomplete attendance records will result in all students being listed.
+</div>
+
 
 **Examples:**
 
@@ -481,8 +489,8 @@ Finds a student's or multiple students' contact either via their name or student
 
 <div markdown="block" class="alert alert-info">
 
-* `STUDENT_NAME` should be a string made up of alphanumerical characters, with no special characters.
-* `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space. It should begin with the capital letter 'A', followed by 7 numbers, and end with a letter.
+* `STUDENT_NAME` should be a string made up of alphanumerical characters and spaces, with no special characters.
+* `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or spaces. It should begin with the capital letter 'A', followed by 7 numbers, and end with a letter.
 
 </div>
 
@@ -558,7 +566,7 @@ Deletes all students from the course or all students from the specified tutorial
 * If tutorial group is specified, deletes all students corresponding to the specified tutorial group in the course.
 * If tutorial group is not specified, deletes all students in the course.
 * `TUTORIAL_GROUP_ID` is optional.
-* `TUTORIAL_GROUP_ID` should be a string made up of alphanumeric characters, with no special characters.
+* `TUTORIAL_GROUP_ID` should be a string made up of alphanumeric characters and spaces, with no special characters.
 
 </div>
 
@@ -588,6 +596,8 @@ Merges two students in the current address book.
 
 <div markdown="block" class="alert alert-info">
 
+* `PRIMARY_INDEX` and `SECONDARY_INDEX` refers to the index number shown in the displayed person list.
+* `PRIMARY_INDEX` and `SECONDARY_INDEX` **must be a positive integer** 1, 2, 3, …​
 * NAME, PHONE_NUMBER, EMAIL, and STUDENT_ID of the primary student is retained.
 * The merged student contains the tutorial groups of both students.
 * The merged student contains attendance records of both students. In case of duplicated weeks, the attendance record of the primary student will be retained.
@@ -645,7 +655,7 @@ TAvigator data are saved in the hard disk automatically after any command that c
 
 TAvigator data are saved automatically as a JSON file `[JAR file location]/data/tavigator.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, TAvigator will discard all data and start with an empty data file at the next run, containing an address book called "TEMP". Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
@@ -670,6 +680,8 @@ _Details coming soon ..._
 
 3. **Trying to use help command with no courses** will result in `Please create an address book using the create command first` message. You can create an address book using `course create course/COURSE_CODE` to work around this issue.
 
+4. **Viewing attendance records** may not return the attendance records in chronological order. This will be fixed in a future version!
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -682,10 +694,10 @@ _Details coming soon ..._
 | course/ | Course code    | - Can be any string, including empty string `""`. |
 | n/      | Name           | - Should only contain alphanumeric characters and spaces, no special characters.|
 | id/     | Student ID     | - Should be in the format `AxxxxxxxL`, <br>where `x` represents digit and it starts with a capital letter 'A' as well as ending with a letter. Student ID is unique for all students. |
-| p/      | Phone          | - Should only contain digits. |
-| e/      | Email          | - Should only be of the form `local@domain` and only accept alphanumeric characters <br>- `local` allows for special characters `+`, `_`, `.` and `-` as well. <br>- `domain` must be at least 2 letters long<br> |
-| t/      | Tutorial group | - Should only contain alphanumeric characters. <br>- Should not contain spaces.<br>- Used in `add` and `edit` commands.|
-| tg/     | Tutorial group | - Should only contain alphanumeric characters. <br>- Should not contain spaces.<br>- Used in `list attendance` and `delete all` commands. |
+| p/      | Phone          | - Should only contain digits and be at least 3 digits long. |
+| e/      | Email          | - Should only be of the form `local@domain` and only accept alphanumeric characters <br>- `local` allows for special characters `+`, `_`, `.` and `-` as well. <br>- `local` should not start with special characters. <br>- `domain` must be at least 2 letters long<br> |
+| t/      | Tutorial group | - Should only contain alphanumeric characters and spaces. <br>- Used in `add` and `edit` commands.|
+| tg/     | Tutorial group | - Should only contain alphanumeric characters and spaces. <br>- Used in `list attendance` and `delete all` commands. |
 | a/      | Attendance     | - Should only be 0 or 1.<br>- 0 representing absence and 1 representing present. |
 | w/      | Week number    | - Should be an integer from 0 to 13. |
 | r/      | Reason         | - Can be any string, excluding empty string `""`. |
