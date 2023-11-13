@@ -169,10 +169,12 @@ How the parsing works:
 
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="80%" />
+<img src="images/ModelClassDiagram.png" width="90%" />
 <br>
-<img src="images/Person&MeetingClassDiagram.png" width="80%" />
+<img src="images/Person&MeetingClassDiagram.png" width="90%" />
 <br>
+
+<div style="page-break-after: always;"></div>
 
 The `Model` component,
 
@@ -395,6 +397,8 @@ Step 8. `LogicManager` then executes the `AddCommand` on the application model.
 
 Step 9. Further execution is carried out, which like before adds the `Person` object to the list of `Person`s in the `Model`, and updates the `Storage` with this new `Person`.
 
+<div style="page-break-after: always;"></div>
+
 ### Mark meeting as complete feature
 
 A meeting can be marked as complete using the `mark` command. The command also updates the last contacted time of its attendees to the ending time of the meeting, if the meeting end time is after the attendees current last contacted time.
@@ -437,6 +441,8 @@ The list of valid statuses is stored as an `Enumeration` object for the followin
 - Maintainability: If the list of valid statuses changes or expands in the future, it's much easier to update an enumeration. This centralizes the changes in one place, making the code more maintainable compared to scattered string constants.
 
 `Status` is implemented and utilized in a similar manner to [`LastContactedTime`](#keeping-track-of-last-meeting-with-contact).
+
+<div style="page-break-after: always;"></div>
 
 ### Saving data
 
@@ -668,6 +674,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: Remove contact from a meeting**
 
 **MSS**
@@ -710,6 +718,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 5b1. OutBook shows an error message.
 
     Use case resumes at step 3.
+
+<div style="page-break-after: always;"></div>
 
 **Use case: Mark meeting as complete**
 
@@ -843,6 +853,8 @@ Adding a person while not all persons are being shown.
 
 3.  Adding a contact automatically shows all contacts.
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a person
 
 1. Test case: `editc 1 n/John Doe p/12345678 e/JohnDoe@gmail.com`<br>
@@ -932,12 +944,10 @@ Remove Meeting Attendee
 
 Mark a Meeting as completed
 
-<div style="page-break-after: always;"></div>
-
-### Saving data
-
 1. Use `mark 1` to mark the first meeting as completed <br>
    Expected: Meeting will be shown as completed and the attendees that are in the meeting will have their last contacted updated to the end time of the meeting.
+
+<div style="page-break-after: always;"></div>
 
 ### Data Storage
 
