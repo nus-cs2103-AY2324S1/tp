@@ -12,7 +12,7 @@ title: Developer Guide
 * The Undo/Redo feature was inspired by [Address Book Level 4](https://github.com/se-edu/addressbook-level4).
 * The Command History feature was inspired by [Tutor's Pet](https://github.com/AY2021S1-CS2103T-T10-4/tp/).
 * The Theme-switching feature was adapted by [Tutor's Pet](https://github.com/AY2021S1-CS2103T-T10-4/tp/).
-* The table of content styling was adapted from [stackoverflow](https://stackoverflow.com/questions/19999696/are-numbered-headings-in-markdown-rdiscount-possible*/)
+* The table of content styling was adapted from [Stackoverflow](https://stackoverflow.com/questions/19999696/are-numbered-headings-in-markdown-rdiscount-possible*/)
 * The kbd styling was reused from [wikipedia](https://en.wikipedia.org/wiki/Enter_key).
 
 --------------------------------------------------------------------------------------------------------------------
