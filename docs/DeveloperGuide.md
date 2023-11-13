@@ -564,14 +564,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: UC07 - Get monthly revenue**
+
+**Use case: UC07 - Finding free time**
+
+**MSS**
+1. User requests to find free time
+2. System shows the list of available free time
+
+**Extensions**
+- 2a. The user does not have any free slots available.
+  - 2a1. System informs that the user has no available timeslots.
+
+**Use case: UC08 - Get monthly revenue**
 
 **MSS**
 
 1. User requests for monthly revenue.
 2. User receives monthly revenue figure.
 
-    Use case ends.
+   Use case ends.
+
 
 ### Non-Functional Requirements
 
