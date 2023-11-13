@@ -300,9 +300,9 @@ The primary functions of the class include:
 
 - `RoomType getRoomTypeByNumber(int roomNumber)` - Uses an internal map to associate room numbers with specific room types, thus enabling quick determination of a room's type.
 
-Given below is an example usage senario and how the prefix completion mechanism behaves at each step.
+Given below is an example usage scenario and how the prefix completion mechanism behaves at each step.
 
-1. The user enters the `add`command with the room number.
+1. The user enters the `add` command with the room number.
 2. A Room object is instantiated with a room number passed as a string to the constructor.
 3. The constructor parses the string into an integer and calls RoomType.getRoomTypeByNumber to ascertain the room's category.
 4. A RoomTypeTag object is created using the name of the determined RoomType, which then facilitates the creation of a UI label for display.
