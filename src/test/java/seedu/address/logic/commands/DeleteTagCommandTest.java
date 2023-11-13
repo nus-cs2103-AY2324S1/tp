@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.ThrowingSupplier;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -75,7 +76,7 @@ public class DeleteTagCommandTest {
         final Set<Tag> tagSetB = new TagBuilder().withTag(VALID_TAG_FRIEND).inSet();
 
         DeleteTagCommand commandA = new DeleteTagCommand(1, tagSetA);
-        DeleteTagCommand commandB = new DeleteTagCommand(1, tagSetB);
+        DeleteTagCommand commandB = new DeleteTagCommand(2, tagSetB);
 
         // same object -> returns true
         assertTrue(commandA.equals(commandA));
@@ -90,7 +91,27 @@ public class DeleteTagCommandTest {
         // null -> returns false
         assertFalse(commandA.equals(null));
 
-        // different person -> returns false
+        // different person, different tag -> returns false
         assertFalse(commandA.equals(commandB));
+
+        // same person, different note -> returns false
+        DeleteTagCommand differentNoteCommand = new DeleteTagCommand(1, tagSetB);
+        assertFalse(commandA.equals(differentNoteCommand));
+
+        // different person, same note -> returns false
+        DeleteTagCommand differentPersonCommand = new DeleteTagCommand(2, tagSetA);
+        assertFalse(commandA.equals(differentPersonCommand));
+    }
+
+    @Test
+    public void toStringMethod() {
+        final Set<Tag> tagSetA = new TagBuilder().withTag(VALID_TAG_HUSBAND).inSet();
+        DeleteTagCommand deleteTagACommand = new DeleteTagCommand(1, tagSetA);
+        String expected = new ToStringBuilder(deleteTagACommand)
+                .add("toDelete", tagSetA)
+                .add("contactId", 1)
+                .toString();
+
+        assertEquals(expected, deleteTagACommand.toString());
     }
 }

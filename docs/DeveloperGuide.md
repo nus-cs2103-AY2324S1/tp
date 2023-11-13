@@ -35,7 +35,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S1-CS2103T-W16-1/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/ay2324s1-cs2103t-w16-1/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -67,13 +67,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-W16-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-W16-1/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-W16-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -84,7 +84,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-W16-1/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -120,7 +120,7 @@ How the parsing works:
 * If the command is correct in format, the parser will then return a Command Object for the execution of the command.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-W16-1/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="600" />
 
@@ -134,7 +134,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-W16-1/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -152,6 +152,189 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### List Contact with Tags feature
+
+This feature allows users to filter the contact list by tags. It serves as an effective way to search through a long list of contacts.
+The filtered contact list will then be reflected in the UI, which is facilitated by the `Model` interface through this following operation:
+
+* `Model#updateFilteredPlanList(Predicate)` - Filters the contact list based on the predicate input.
+
+The execution of the list command starts with parsing the arguments using `ListCommandParser` and `ListPersonCommandParser`
+, which then the `ListContactCommand` result will be executed and reflected in the UI.
+
+#### Implementing `ListPersonCommandParser`
+
+Using the `Parser` interface, it first checks for tags in the command.
+These tags will then be parsed into a `Set` and passed on to create `ListPersonCommand` object.
+An empty set will be passed in the case where no tags are given.
+
+#### Implementing `ListPersonCommand`
+
+From the `Set<tag>` passed to construct the `ListPersonCommand` object, the `Set` can be empty or non-empty.
+This is how the `execute` method is implemented:
+
+* In the case where the `Set` is empty, it will simply use `Model#updateFilteredPlanList(Predicate)`
+  where the predicate will be `PREDICATE_SHOW_ALL_PERSONS` which will show the entire contact list.
+
+* In the case where the `Set` is not empty (there are tag inputs),
+  the `Predicate` used in `Model#updateFilteredPlanList(Predicate)` will be
+  checking whether one of the tags in the contact is in the `Set`.
+  This will result in showing only the contacts with at least one of the tags from the `Set`.
+
+Given below is an example usage scenario and how the `list contact` command mechanism behaves at each step.
+
+Step 1. The user launches the application, it will show the list of all contacts.
+
+Step 2. The user executes `list contact -t friends` command
+to list only the contacts containing the tag friends.
+As described by the above implementations, a `ListPersonCommand` object will be created.
+
+Step 3. The `LogicManager` will call `ListPersonCommand#execute`
+where it will then call `Model#updateFilteredPlanList(Predicate)` and return the `CommandResult`.
+
+Step 4. The filtered list and success message will be reflected in the UI.
+
+The following sequence diagram shows how the `list contact` command works:
+
+![list-contact-sequence-diagram](diagrams/ListContactSequenceDiagram.png)
+
+The following activity diagram shows how the `list contact` command works:
+
+![list-contact-activity-diagram](diagrams/ListContactActivityDiagram.png)
+
+### Tag feature
+This feature allows users to add and remove `Tag` to any `Person` in the contact list. It provides an easy way for users to catrgorize their contacts.
+
+#### Overview:
+The adding and removing of `Tag` begins with the parsing of the `AddTagCommand` and `DeleteTagCommand` using the `AddTagCommandParser` and `DeleteTagCommandparser` respectively. The `AddTagCommand` and `DeleteTagCommand` will then be executed by the `Model`.
+
+The activity diagram below shows the action sequence of adding one or more `Tag` to a contact.
+
+<puml src="diagrams/tag/TagSequenceDiagram.puml"/>
+
+<box type="info" seamless>
+
+**Note:** The sequence diagram for removing `Tag` is similar to adding `Tag`. Simply replace `AddCommandParser` with `DeleteCommandParser`, `AddTagCommandParser` with `DeleteTagCommandParser`, and `AddTagCommand` with `DeleteTagCommand`.
+
+</box>
+
+##### Implementing `AddTagCommandParser` and `DeleteTagCommandParser`
+Both implements the `Parser` interface, parsing two main arguments:
+1. `contactId`: the one-based index of the contact shown in the GUI.
+1. `taglist`: the unique set of `Tag` to add/delete.
+   * The set of tags is parsed using the `parseTags` method in the `ParseUtil` utility class, which puts the collection of tag names given by the user into a `HashSet`.
+
+`contactId` and `taglist` is then use to create the `AddTagCommand`/`DeleteTagCommand` object.
+   
+For the details of how parsing works, see the section on [Logic Component](#logic-component).
+
+##### Implementing `AddTagCommand`
+`AddTagCommand` extends from the abstract class `AddCommand`, inheriting `add` as the primary command word and having `tag` as its secondary command word. It internally stores `contactId` (the index of the contact) and `toAdd` (the set `Tag` to add) which is given by the [parser](#implementing-addtagcommandparser-and-deletetagcommandparser).
+
+When the command is execute, it carries out the following operations:
+1. Using the `contactId`, it will first check if the `person` exist in the address book by calling `Model`'s `findPersonByUserFriendlyId` method.
+    * A `CommandException` is thrown if the person does not exist.
+1. The set of tags is then added to the person's tag list by calling the `addTags` method in `Person`.
+1. The `Model`'s `setPerson` method is used to update the person.
+1. Lastly a `CommandResult` with the success message is returned.
+
+The following activity diagram summarizes what happens when `AddTagCommand` is executed:
+
+<puml src="diagrams/tag/AddTagActivityDiagram.puml"/>
+
+##### Implementing `DeleteTagCommand`
+`DeleteTagCommand` extends from the abstract class `DeleteCommand`, inheriting `delete` as the primary command word and having `tag` as its secondary command word. It internally stores `contactId` (the index of the contact) and `toDelete` (the set `Tag` to delete) which is given by the [parser](#implementing-addtagcommandparser-and-deletetagcommandparser).
+
+When the command is execute, it carries out the following operations:
+1. Using the `contactId`, it will first check if the `person` exist in the address book by calling `Model`'s `findPersonByUserFriendlyId` method.
+    * A `CommandException` is thrown if the person does not exist.
+1. Loop through every `Tag` that the person has, separating those that be found in `toDelete` and those not found.
+1. The set of tags found in `toDelete` is then deleted from the person's tag list by calling the `removeTags` method in `Person`.
+1. The `Model`'s `setPerson` method is used to update the person.
+1. Lastly a `CommandResult` with the success message is returned.
+
+The following activity diagram summarizes what happens when the `DeleteTagCommand` is executed:
+
+<puml src="diagrams/tag/DeleteTagActivityDiagram.puml"/>
+
+#### Design Considerations:
+
+**Aspect: Deletion of non-existing tag:**
+
+* **Alternative 1:** Ignore and proceed as normal.
+  * Pros: Easy to implement. Furthermore, since outcome of proceeding and not proceeding is the same, there will not be a severe consequence of proceeding.
+  * Cons: Does not reflect true behavior, and users may be confused by success message.
+
+* **Alternative 2:** Does not proceed.
+  * Pros: Users will be made aware of their mistake and prevents executing potentially wrong commands.
+  * Cons: If the command was intentional, time is wasted for user to correct their command.
+
+* **Alternative 3 (current choice):** Proceed but inform user that some tags are non-existing.
+  * Pros: Users will be made aware of their mistake. Does not waste time on correcting the command if the command was intentional.
+  * Cons: Harder to implement. 
+
+### Notes feature
+This feature allows users to add and remove `Note` to any `Person` in the contact list. It provides an easy way for users to record additional information about the contacts.
+
+#### Overview:
+The adding and removing of `Note` begins with the parsing of the `AddNoteCommand` and `DeleteNoteCommand` using the `AddNoteCommandParser` and `DeleteNoteCommandParser` respectively. The `AddNoteCommand` and `DeleteNoteCommand` will then be executed by the `Model`.
+
+The activity diagram below shows the action sequence of adding a `Note` to a contact.
+
+<puml src="diagrams/note/NoteSequenceDiagram.puml"/>
+
+<box type="info" seamless>
+
+**Note:** The sequence diagram for removing `Note` is similar to adding `Note`. Simply replace `AddCommandParser` with `DeleteCommandParser`, `AddNoteCommandParser` with `DeleteNoteCommandParser`, and `AddNoteCommand` with `DeleteNoteCommand`.
+
+</box>
+
+##### Implementing `AddNoteCommandParser`
+Implements the `Parser` interface, parsing three main arguments:
+1. `contactId`: the one-based index of the contact shown in the GUI.
+2. `noteTitle`: the title of the note to add.
+3. `noteContent`: the content of the note to add.
+
+`noteTitle` and `noteContent` are then used to create the `Note` object. After that, `contactId` and the `Note` object created are then used to create the `AddNoteCommand` object.
+
+For the details of how parsing works, see the section on [Logic Component](#logic-component).
+
+##### Implementing `DeleteNoteCommandParser`
+Implements the `Parser` interface, parsing two main arguments:
+1. `contactId`: the one-based index of the contact shown in the GUI.
+2. `noteId`: the one-based index of the note shown in the GUI.
+
+`contactId` and `noteId` are then used to create the `DeleteNoteCommand` object.
+
+For the details of how parsing works, see the section on [Logic Component](#logic-component).
+
+##### Implementing `AddNoteCommand`
+`AddNoteCommand` extends from the abstract class `AddCommand`, inheriting `add` as the primary command word and having `note` as its secondary command word. It internally stores `contactId` (the index of the contact) and `toAdd` (the `Note` to add) which is given by the [parser](#implementing-addnotecommandparser).
+
+When the command is executed, it carries out the following operations:
+1. Using the `contactId`, it will first check if the `person` exist in the address book by calling `Model`'s `findPersonByUserFriendlyId` method.
+    * A `CommandException` is thrown if the person does not exist.
+2. The note is then added to the person's note list by calling the `addNote` method in `Person`.
+3. Lastly a `CommandResult` with the success message is returned.
+
+The following activity diagram summarizes what happens when `AddNoteCommand` is executed:
+
+<puml src="diagrams/note/AddNoteActivityDiagram.puml"/>
+
+##### Implementing `DeleteNoteCommand`
+`DeleteNoteCommand` extends from the abstract class `DeleteCommand`, inheriting `delete` as the primary command word and having `note` as its secondary command word. It internally stores `contactId` (the index of the contact) and `noteIdToDelete` (the `Note` to delete) which is given by the [parser](#implementing-deletenotecommandparser).
+
+When the command is executed, it carries out the following operations:
+1. Using the `contactId`, it will first check if the `person` exist in the address book by calling `Model`'s `findPersonByUserFriendlyId` method.
+    * A `CommandException` is thrown if the person does not exist.
+2. Using the `noteIdToDelete`, it will delete the note from the person in the address book by calling `Person`'s `removeNoteByUserFriendlyId` method.
+    * A `CommandException` is thrown if the note does not exist.
+3. Lastly a `CommandResult` with the success message is returned.
+
+The following activity diagram summarizes what happens when the `DeleteNoteCommand` is executed:
+
+<puml src="diagrams/note/DeleteNoteActivityDiagram.puml"/>
 
 ### Enhanced help feature
 
@@ -305,33 +488,60 @@ This section describes some enhancement that can be made to the existing app.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                | So that I can…​                                                                                                             |
-|----------|--------------------------------------------|-----------------------------|-----------------------------------------------------------------------------------------------------------------------------|
-| `* * *`  | new user                                               | get a list of the commands  | know how to use the commands and their parameters                                                                           |
-| `* * *`  | user                                                       | add a new contact           | record one person's phone number and email address                                                                          |
-| `* * *`  | user                                                       | delete a contact            | remove a contact (by name) that I do not need                                                                               |
-| `* * *`  | user                                                       | view all contact            | easily see and know what contacts are currently stored in the application in one place                                      |
-| `* *`    | user                                                        | view all notes              | easily see and know what notes are currently stored in the application in one place                                         |
-| `* *`    | user                                                        | add notes to a contact      | record additional information about that contact as a note                                                                  |
-| `* *`    | user                                                        | delete notes to a contact   | remove additional information about that contact that are no longer relevant                                                |
-| `* *`    | user who has some event to do             | add an event                | record an event with start time and also end time, location and any additional information like what to do during the event |
-| `* *`    | user who has/had some event to do      | delete an event             | remove an event after it is obsolete, cancelled or no longer needed to be recorded                                          |
-| `* *`    | tidy user | tag a contact with a label  | keep my contacts oraganised and categorised                                                                                 |
-| `* *`    | tidy user | delete a tag from a contact | remove tags that are no longer relevant                                                                                     |
-| `* * *`  | user who finishes using the application  | exit the program            | exit the program normally while ensuring all my data is currectly saved                                                     |
+| Priority | As a …​                            | I want to …​                  | So that I can…​                                                                                                             |
+|----------|------------------------------------|-------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | new user                           | get help on commands          | know how to use the commands and their parameters                                                                           |
+| `* * *`  | user                               | add a new contact             | record one person's phone number and email address                                                                          |
+| `* * *`  | user                               | delete a contact              | remove a contact (by name) that I do not need                                                                               |
+| `* * *`  | user                               | view all contacts             | easily see and know what contacts are currently stored in the application in one place                                      |
+| `* *`    | user                               | find a contact                | easily find contacts which names match one of the specified keywords.                                                       |
+| `* *`    | user                               | add a note to a contact       | record additional information about that contact as a note                                                                  |
+| `* *`    | user                               | delete a note from a contact  | remove additional information about that contact that are no longer relevant                                                |
+| `* *`    | user who has some event to do      | add an event                  | record an event with start time and also end time, location and any additional information like what to do during the event |
+| `* *`    | user who has/had some event to do  | delete an event               | remove an event after it is obsolete, cancelled or no longer needed to be recorded                                          |
+| `* *`    | user who has some event to do      | filter events                 | easily see and know which events are within a specified time interval                                                       |
+| `* *`    | tidy user                          | tag a contact with a label    | keep my contacts oraganised and categorised                                                                                 |
+| `* *`    | tidy user                          | delete tags from a contact    | remove tags that are no longer relevant                                                                                     |
+| `* *`    | tidy user                          | filter contacts based on tags | easily see and know which contacts contain one of the specified tags                                                        |
+| `* *`    | user                               | clear all data                | remove all unused data and start managing a new contact list                                                                |
+| `* * *`  | user who finishes using the application | exit the program              | exit the program normally while ensuring all my data is currectly saved                                                     |
 
 ### Use cases
 
 (For all use cases below, the **System** is the `KeepInTouch` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - View command list**
+**Use case: UC01 - Get help on commands**
 
 **MSS**
 
-1.  User requests to view command list.
-2.  KeepInTouch shows the command list.
+1.  User requests for help.
+2.  KeepInTouch returns relevant documentation.
 
     Use case ends.
+
+**Extensions**
+
+* 1a. User inputs with no extra argument.
+
+    * 1a1. KeepInTouch shows a list of all command words.
+
+      Use case ends.
+
+* 1b. User inputs with an extra argument corresponding to a command.
+
+    * 1b1. Extra argument is a command word.
+
+        * KeepInTouch returns documentation on that command word.
+
+    * 1b2. Extra argument is not a command word, but is quite similar to a command.
+
+        * KeepInTouch suggests the command word with the highest degree of similarity to the command input.
+
+    * 1b3. Extra argument is not a command word, and isn't recognizably close to a command word.
+
+        * KeepInTouch lets the user know that the command is unrecognizable.
+
+      Use case ends.
 
 **Use case: UC02 - Add a new contact**
 
@@ -367,12 +577,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. KeepInTouch shows a message indicating that the contact cannot be found.
       Use case ends.
 
-* 2a. The contact list is empty.
-
-    * 2a1. KeepInTouch shows a message indicating the empty contact list.
-
-      Use case ends.
-
 **Use case: UC04 - View all contacts**
 
 **MSS**
@@ -382,15 +586,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Extensions**
+**Use case: UC05 - Find a contact**
 
-* 2a. The contact list is empty.
+**MSS**
 
-    * 2a1. KeepInTouch shows a message indicating the empty contact list.
+1.  User requests to find contacts which name matches one of the specified keywords.
+2.  KeepInTouch shows contacts with matching names.
 
-      Use case ends.
+    Use case ends.
 
-**Use case: UC05 - Add a note to a contact**
+**Use case: UC06 - Add a note to a contact**
 
 **MSS**
 
@@ -413,7 +618,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-**Use case: UC06 - Delete a note from a contact**
+**Use case: UC07 - Delete a note from a contact**
 
 **MSS**
 
@@ -442,7 +647,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC07 - Add an event**
+**Use case: UC08 - Add an event**
 
 **MSS**
 
@@ -459,7 +664,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-**Use case: UC08 - Delete an event**
+**Use case: UC09 - Delete an event**
 
 **MSS**
 
@@ -482,20 +687,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC09 - Get help on commands**
+**Use case: UC10 - Filter events**
 
 **MSS**
 
-1.  User requests for help.
-2.  KeepInTouch returns relevant documentation.
+1.  User requests to find events within a specified time interval.
+2.  KeepInTouch shows the events within the specified time interval.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User inputs with no extra argument.
+* 1a. User inputs incomplete or invalid data.
 
-    * 1a1. KeepInTouch shows a list of all command words.
+    * 1a1. KeepInTouch shows a message indicating incomplete or invalid data.
 
       Use case ends.
 
@@ -505,19 +710,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       * KeepInTouch returns documentation on that command word.
 
-        Use case ends.
-
     * 1b2. Extra argument is not a command word, but is quite similar to a command.
 
       * KeepInTouch suggests the command word with the highest degree of similarity to the command input.
-
-        Use case ends.
 
     * 1b3. Extra argument is not a command word, and isn't recognizably close to a command word.
 
       * KeepInTouch lets the user know that the command is unrecognizable.
 
-         Use case ends.
+      Use case ends.
 
 **Use case: UC10 - Adding tags to a contact**
 
@@ -547,7 +748,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC11 - Delete tags from a contact**
+**Use case: UC12 - Delete tags from a contact**
 
 **MSS**
 
@@ -575,7 +776,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC12 - Exit the program**
+**Use case: UC13 - Filter contacts based on tags**
+
+**MSS**
+
+1.  User requests to find contacts with one of the specified tags.
+2.  KeepInTouch shows the filtered contacts.
+
+    Use case ends.
+
+**Use case: UC14 - Clear all data**
+
+**MSS**
+
+1.  User requests to remove all unused data.
+2.  KeepInTouch clears all the data.
+
+    Use case ends.
+
+**Use case: UC15 - Exit the program**
 
 **MSS**
 
@@ -586,20 +805,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 users without a noticeable sluggishness in performance for typical usage.
-3.  Should be able to hold up to 10000 contacts without a noticeable sluggishness in performance for typical usage.
-4.  All commands should be executed within two seconds.
-5.  Should work without requiring any installer.
-6.  Should work without requiring any internet connection.
-7.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-8.  The GUI should work well for standard screen resolutions 1920x1080 and higher, and, for screen scales 100% and 125%.
+1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed. 
+2.  Should be able to hold up to 10000 contacts without a noticeable sluggishness in performance for typical usage. 
+3.  All commands should be executed within two seconds. 
+4.  Should be offered as a free application. 
+5.  Should work without requiring any installer. 
+6.  Should work without requiring any internet connection. 
+7.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse. 
+8.  The GUI should work well for standard screen resolutions 1920x1080 and higher, and, for screen scales 100% and 125%. 
+9.  The GUI should be intuitive and user-friendly. 
+10. Should not require user to have prior technical knowledge.
 
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -11,6 +11,7 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
 
 ## Table of Contents
 
+* [Table of Contents](#table-of-contents)
 * [Quick Start](#quick-start)
 * [Features](#features)
   * [Viewing help: `help`](#viewing-help-help)
@@ -44,7 +45,7 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
 
 3. Copy the file to the folder you want to use as the [home directory](#home-directory) for your KeepInTouch app.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar keepintouch.jar` command to run the application. (   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.)
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar keepintouch.jar` command to run the application. (A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.)
 ![GUI example](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will show the list of all available commands.<br>
@@ -69,7 +70,7 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
   e.g. `[-t TAGNAME...]` can be used as `-t Frontend`, `-t Frontend -t Java` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `-n NAME -t NOTE_TITLE`, `-t NOTE_TITLE -n NAME` is also acceptable.
+  e.g. if the command specifies `-tit NOTE_TITLE -con NOTE_CONTENT`, `-con NOTE_CONTENT -tit NOTE_TITLE` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `list contact` and `exit`, etc.) will be ignored.<br>
   e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.
@@ -87,11 +88,12 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
 * `PHONE_NUMBER` should be numbers at least 3 digits long.
 
 * `EMAIL` should be of the format local-part@domain:
-  *  The local-part should only contain alphanumeric characters and the special characters `+`, `_`, `.`, `-`. The local-part should not start or end with any special characters.
+  * The local-part should only contain alphanumeric characters and the special characters `+`, `_`, `.`, `-`. The local-part should not start or end with any special characters.
   * The domain name should:
-    *  end with a domain label at least 2 characters long
+    * end with a domain label at least 2 characters long
     * have each domain label start and end with alphanumeric characters
     * have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+
 
 * `TAGNAME` should be alphanumeric, with no spaces.
 
@@ -158,10 +160,10 @@ Unsuccessful output:
 * Contact already exists: `This contact already exists in the contact list`
 * Invalid format<br>
 ```
-Invalid command format! 
-add contact: Adds a contact to the contact list. 
+Invalid command format!
+add contact: Adds a contact to the contact list.
 Usage: add contact -n NAME -p PHONE -e EMAIL -a ADDRESS [-t TAGNAME...]
-Example: add contact -n John Doe -p 98765432 -e johnd@example.com -a 311, Clementi Ave 2, #02-25 -t frontend 
+Example: add contact -n John Doe -p 98765432 -e johnd@example.com -a 311, Clementi Ave 2, #02-25 -t frontend
 ```
 * Invalid email:<br>
 ```
@@ -192,7 +194,7 @@ Unsuccessful output:
 * Invalid index (out of range): `The person index provided is invalid`
 * Invalid format:<br>
 ```
-Invalid command format! 
+Invalid command format!
 delete contact: Deletes a contact by its index number used in the displayed contact list.
 Parameters: INDEX (must be a positive integer)
 Example: delete contact 1
@@ -230,7 +232,7 @@ Unsuccessful output:
 * Invalid index (out of range): `Can not find the target contact with ID: 100`
 * Invalid format:<br>
 ```
-Invalid command format! 
+Invalid command format!
 add tag: Adds tags to a contact from the contact list.
 Usage:  add tag -id CONTACT_ID -t TAGNAME...
 ```
@@ -254,7 +256,7 @@ Unsuccessful output:
 * Invalid index (out of range): `Can not find the target contact with ID: 100`
 * Invalid format:<br>
 ```
-Invalid command format! 
+Invalid command format!
 delete tag: Delete one or more tags from a contact.
 Usage:  delete tag -id CONTACT_ID -t TAGNAME...
 ```
@@ -276,7 +278,7 @@ Unsuccessful output:
 * Invalid index (out of range): `Can not find the target contact with ID: 100`
 * Invalid format:<br>
 ```
-Invalid command format! 
+Invalid command format!
 add note: Adds a note to a contact from the contact list.
 Usage:  add note -id CONTACT_ID -tit NOTE_TITLE -con NOTE_CONTENT
 ```
@@ -300,7 +302,7 @@ Unsuccessful output:
 * Invalid note index: `Note not found: ID = 5`
 * Invalid format:<br>
 ```
-Invalid command format! 
+Invalid command format!
 delete note: Deletes a note from a contact.
 Usage:  delete note -id CONTACT_ID -nid NOTE_ID
 ```
@@ -313,9 +315,9 @@ Format: `list events [-descending] [-st START_TIME] [-et END_TIME]` (start time 
 
 Arguments `-st` and `-et` must both present or both not present.
   - If both are not present, all events will be listed.
-  - If both present, events within the time interval wil listed.
+  - If both are present, events within the time interval will be listed.
 
-By default, the list of events are sorted by the start time in ascending order (i.e. from earlier to latest). If you want to use descending order, add `-descending` to the command.
+By default, the list of events are sorted by the start time in ascending order (i.e. from earliest to latest). If you want to use descending order, add `-descending` to the command.
 
 Executing this command will create a popup window, which shows a table representing the events within the specified time interval. The columns inside the table are resizeable.
 
@@ -331,7 +333,7 @@ Successful output:
 Unsuccessful ouput:
 * Invalid format:<br>
 ```
-Invalid command format! 
+Invalid command format!
 list events: Shows a list of all events or events within a specified time interval.
 Usage: list events [-descending] [-st filter_start_time] [-et filter_end_time] (-st and -et must either both present or both not present)
 ```
@@ -358,7 +360,7 @@ Unsuccessful output:
 * Invalid time format: `Invalid date-time format! Text '29/05/2024' could not be parsed at index 2`
 * Invalid command format:<br>
 ```
-Invalid command format! 
+Invalid command format!
 add event: Adds an event to a contact.
 Usage:  add event -id CONTACT_ID -en EVENT_NAME -st START_TIME [-et END_TIME] [-loc LOCATION] [-info INFORMATION]
 ```
@@ -383,7 +385,7 @@ Unsuccessful output:
 * Invalid note index: `Event not found: ID = 5`
 * Invalid format:<br>
 ```
-Invalid command format! 
+Invalid command format!
 delete event: Deletes an event from a contact.
 Usage:  delete event -id CONTACT_ID -eid EVENT_ID
 ```
@@ -415,13 +417,17 @@ _More features coming soon ..._
 
  - ##### _home directory_:
    The directory where the jar file for the application and the `data` folder presents.
+
  - ##### _contact_:
    The unit for storing the contact information for a person/entity in the address book. You can add [tags](#tag), [notes](#note) and [events](#event) to a _contact_.
+
  - ##### _tag_:
    Short tags to be added to the contact for you to reference. It can be the type of the contact, for example, `company`, `HR`, etc.
- - ##### _note_
+
+ - ##### _note_:
    A piece of additional information for a contact that you want to store and reference in the future. It can be any additional information you'd like to keep with the contact.
- - ##### _event_
+
+ - ##### _event_:
    A representative of an event that you will happen with a person/entity in a contact in the future. It can be job interviews, career fairs or HR meeting appointments.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -460,9 +466,9 @@ _No known issues at the moment_
 | **Find Contact**   | `find KEYWORD [OTHER_KEYWORDS...]`<br> e.g., `find Alex`                                                                                                                                                                                                                |
 | **Add Tag**        | `add tag -id CONTACT_ID -t TAGNAME...` <br> eg., `add tag -id 1 -t Frontend`                                                                                                                                                                                            |
 | **Delete Tag**     | `delete tag -id CONTACT_ID -t TAGNAME...` <br> eg., `delete tag -id 1 -t Frontend`                                                                                                                                                                                      |
-| **Add Note**       | `add note -id CONTACT_ID -t NOTE_TITLE -c NOTE_CONTENT` <br> e.g., `add note -id 2 -tit Open Position -con Applications for SWE full-time positions will open soon`                                                                                                     |
-| **Delete Note**    | `delete note -id CONTACT_ID -t NOTE_TITLE`<br> e.g., `delete note -id 2 -t Meeting Topics`                                                                                                                                                                              |
-| **List Events**    | `list events [-descending] [-st filter_start_time] [-et filter_end_time]`<br> e.g., `list events -descending -st 2023-11-01 -et 2023-11-02`                                                                                                                             |
+| **Add Note**       | `add note -id CONTACT_ID -tit NOTE_TITLE -con NOTE_CONTENT` <br> e.g., `add note -id 2 -tit Open Position -con Applications for SWE full-time positions will open soon`                                                                                                 |
+| **Delete Note**    | `delete note -id CONTACT_ID -nid NOTE_ID`<br> e.g., `delete note -id 1 -nid 1`                                                                                                                                                                                          |
+| **List Events**    | `list events [-descending] [-st START_TIME] [-et END_TIME]`<br> e.g., `list events -descending -st 2023-11-01 -et 2023-11-02`                                                                                                                                           |
 | **Add Event**      | `add event -id CONTACT_ID -en EVENT_NAME -st START_TIME [-et END_TIME] [-loc LOCATION] [-info INFORMATION]` <br> e.g., `add event -id 1 -en Meeting with professor -st 12:00 -et 13:00 -loc COM 1 Basement -info Discuss the project implementation with the professor` |
 | **Delete Event**   | `delete event -id CONTACT_ID -eid EVENT_ID`<br> e.g., `delete event -id 1 -eid 1`                                                                                                                                                                                       |
 | **Clear Data**     | `clear`                                                                                                                                                                                                                                                                 |

@@ -53,4 +53,17 @@ public class AddressTest {
         // different values -> returns false
         assertFalse(address.equals(new Address("Other Valid Address")));
     }
+
+    @Test
+    public void hashCodeMethod() {
+        Address address = new Address("Valid Address");
+
+        // same values
+        Address addressCopy = new Address("Valid Address");
+        assertTrue(address.hashCode() == addressCopy.hashCode());
+
+        // different values
+        Address otherAddress = new Address("Other Valid Address");
+        assertFalse(address.hashCode() == otherAddress.hashCode());
+    }
 }

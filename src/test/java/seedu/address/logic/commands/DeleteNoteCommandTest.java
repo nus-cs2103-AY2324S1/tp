@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.ThrowingSupplier;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -100,7 +101,31 @@ public class DeleteNoteCommandTest {
         // null -> returns false
         assertFalse(deleteNoteACommand.equals(null));
 
-        // different person -> returns false
+        // different person, different note -> returns false
         assertFalse(deleteNoteACommand.equals(deleteNoteBCommand));
+
+        // same person, different note -> returns false
+        DeleteNoteCommand differentNoteDeleteNoteCommand = new DeleteNoteCommand(
+                ContactID.fromString(VALID_NOTE_A_PERSON_ID),
+                NoteID.fromString(VALID_NOTE_A_NOTE_ID + 1));
+        assertFalse(deleteNoteACommand.equals(differentNoteDeleteNoteCommand));
+
+        // different person, same note -> returns false
+        DeleteNoteCommand differentPersonDeleteNoteCommand = new DeleteNoteCommand(
+                ContactID.fromString(VALID_NOTE_B_PERSON_ID),
+                NoteID.fromString(VALID_NOTE_A_NOTE_ID));
+        assertFalse(deleteNoteACommand.equals(differentPersonDeleteNoteCommand));
+    }
+
+    @Test
+    public void toStringMethod() {
+        DeleteNoteCommand deleteNoteACommand = new DeleteNoteCommand(ContactID.fromString(VALID_NOTE_A_PERSON_ID),
+                NoteID.fromString(VALID_NOTE_A_NOTE_ID));
+        String expected = new ToStringBuilder(deleteNoteACommand)
+                .add("noteIdToDelete", VALID_NOTE_A_NOTE_ID)
+                .add("contactId", VALID_NOTE_A_PERSON_ID)
+                .toString();
+
+        assertEquals(expected, deleteNoteACommand.toString());
     }
 }
