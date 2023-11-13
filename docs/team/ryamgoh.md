@@ -32,24 +32,26 @@ Given below are my contributions to the project.
   * Highlights: Only the most used commands are added as preset buttons. The rest needs to be typed out.
   * Credits: N/A
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=ryamgoh&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=false)
+* **Code contributed**: [RepoSense link (~3KLoC)](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=ryamgoh&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=false)
 
 * **Project management**:
   * Assigned milestones and issues to teammates on GitHub
+  * Triaged and Assigned PE-D issues to respective teammates on GitHub.
 
 * **Enhancements to existing features**: Presets buttons for the User
   * Updated the GUI [Color Scheme, Orientation, Icons, Naming]  to make it more user friendly.
 
 * **Documentation**:
   * User Guide:
-    - Took inspiration from [here](https://ay2223s2-cs2103t-w12-1.github.io/tp/UserGuide.html) for the introduction section.
+    - Added Table of Contents
     - Cleaned up documentation for add, edit, delete dates.
     - Updated a command summary table for the documentation.
     - Added documentation for the `setP` command.
   * Developer Guide:
+    - Added Table of Contents
     - Added Instructions for Manual Testing in the Appendix
     - Added Non-Functional Requirements
     - Added Sequence and Activity Diagrams for the `setP` command
 
 * **Community**:
-  * Reviewed PRs and gave constructive feedback to my teammates (PR(s) [#243](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/243#issuecomment-1805841619))
+  * Reviewed PRs and gave constructive feedback to my teammates (PR(s) [#12](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/12#pullrequestreview-1652753337), [#91](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/91#pullrequestreview-1681719024), [#95](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/95), [#97](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/97), [#243](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/243#issuecomment-1805841619))
