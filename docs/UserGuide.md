@@ -3,7 +3,10 @@ layout: page
 title: User Guide
 ---
 
-![HouR](images/ug-pics/HouR.png)
+<div style="text-align:center">
+<img src='images/ug-pics/HouR.png' width='500'>
+</div>
+
 ## Welcome to HouR
 
 HouR is a **desktop app for managing employee records, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HouR can get your HR management tasks done faster than traditional GUI apps.
@@ -15,24 +18,24 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 - [Using this guide](#using-this-guide)
 - [Useful Notations and Glossary](#useful-notations-and-glossary)
 - [Quick Start](#quick-start)
-- [Navigating the GUI](#navigating-the-graphical-user-interface--gui-)
+- [Navigating the GUI](#navigating-the-gui)
 - [Features](#features)
   - [General Commands](#general-commands)
       - [Viewing Help](#viewing-help--help): `help`
       - [Clearing all employees](#clearing-all-entries--clear): `clear`
       - [Exiting the program](#exiting-the-program--exit): `exit`
   - [Employee Commands](#employee-commands)
-      - [Adding an employee](#adding-an-employee-add): `add`
+      - [Adding an employee](#adding-an-employee--add): `add`
       - [Deleting an employee](#deleting-an-employee--delete): `delete`
       - [Editing an employee](#editing-an-employee--edit): `edit`
       - [Listing all employees](#listing-all-employees--list): `list`
-      - [Locating employees](#finding-employees--find): `find`
+      - [Finding employees](#finding-employees--find): `find`
       - [Sorting employees](#sorting-all-employees--sort): `sort`
   - [Employee Metrics Commands](#employee-metrics-commands)
-      - [Adding a leave period](#adding-a-leave-period-of-an-employee-addleave): `addleave`
-      - [Deleting a leave period](#deleting-a-leave-period-of-an-employee-deleteleave): `deleteleave`
+      - [Adding a leave period](#adding-a-leave-period-of-an-employee--addleave): `addleave`
+      - [Deleting a leave period](#deleting-a-leave-period-of-an-employee--deleteleave): `deleteleave`
       - [Editing a leave date](#editing-a-leave-date-of-an-employee--editleave): `editleave`
-      - [Listing employees on leave](#listing-the-employees-on-leave-on-a-specified-date--listleave) `listleave`
+      - [Listing employees on leave](#listing-the-employees-on-leave-on-a-specified-date--listleave): `listleave`
       - [Adding remarks](#adding-a-remark-for-an-employee--addremark): `addremark`
       - [Deleting remarks](#deleting-a-remark-of-an-employee--deleteremark): `deleteremark`
       - [Updating overtime hours](#updating-overtime-hours-of-an-employee--overtime): `overtime`
@@ -48,7 +51,6 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 --------------------------------------------------------------------------------------------------------------------
 
 ## Using this guide
-
 * If you are new here, visit our [quick start](#quick-start) guide to onboard onto HouR smoothly!
 * If you are unsure of how to use HouR, the [Command Summary](#command-summary) is a good place to start. 
 * If you are a developer and want to help out, do take a look at our [Developer Guide](https://ay2324s1-cs2103t-w12-1.github.io/tp/DeveloperGuide.html).
@@ -67,7 +69,7 @@ The following glossary table provides clarification on commonly-used terms as we
 |      Symbol      | Meaning                                                                                                                                                                                                                                             |
 |:----------------:|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |       GUI        | GUI stands for Graphical User Interface and it represents the visual display of HouR that users can see when the application is run.                                                                                                                |
-|  GUI component   | A subsection of the GUI. For more information on specific GUI components, refer to this [section](#navigating-the-graphical-user-interface--gui-).                                                                                                  |
+|  GUI component   | A subsection of the GUI. For more information on specific GUI components, refer to this [section](#navigating-the-gui).                                                                                                                             |
 |       CLI        | CLI stands for Command Line Interface and it represents a text-based user interface to interact with the application.                                                                                                                               |
 |     Command      | An input from the user that tells HouR to perform an action. View HouR's [command summary](#command-summary).                                                                                                                                       |
 |    Parameter     | Parameters are like fields in a form you are required to fill up. They are information needed to be passed together with the command so that it can be executed. More information regarding parameters can be found [here](#parameter-information). |
@@ -88,50 +90,49 @@ The following glossary table provides clarification on commonly-used terms as we
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar hour.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/ug-pics/Ui.png)
+   ![Ui](images/Ui.png)
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution to Mac users:**
-Performing these instructions may result in non-deterministic behaviour of data loading in HouR. This was tested on multiple MacOS Systems: 
-
-* Right-click `hour.jar` > Open With > JavaLauncher.app 
-* First-time users may be prompted with a warning that the file was downloaded from the Internet. Simply click Open in the prompt to continue.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution to macOS users:**
+Performing these instructions may result in non-deterministic behaviour of data loading in HouR. This was tested on multiple macOS Systems:
+<br/>1. Right-click `hour.jar` > Open With > JavaLauncher.app 
+<br/>2. First-time users may be prompted with a warning that the file was downloaded from the Internet. Simply click Open in the prompt to continue.
 
 </div>
 
 5. Type a command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `help`: Shows help window with link to user guide.
+   * `help` : Shows help window with link to user guide.
 
    * `add n/John Doe pos/Senior Software Enginner id/EID2023-7890 p/81239876 e/johndoe@test.com s/5000` : Adds an employee named `John Doe` to the employee list.
 
    * `list` : Lists all employees.
    
-   * `edit 1 n/Alex Yeoh`: Edits the name of the 1st employee shown in the current list to `Alex Yeoh`.
+   * `edit 1 n/Alex Yeoh` : Edits the name of the 1st employee shown in the current list to `Alex Yeoh`.
    
    * `find Alex Manager`: Lists all employees with the keywords `Alex` or `Manager`.
 
    * `delete EID2023-1234` : Deletes the employee with employee id EID2023-1234 shown in the list.
 
-   * `sort f/salary in/asc`: Sorts the employees by their salaries in ascending order.
+   * `sort f/salary in/asc` : Sorts the employees by their salaries in ascending order.
 
-   * `addleave id/EID1234-5678 from/2023-12-26 to/2023-12-28`: Adds leave dates from 26 to 28 December 2023 inclusive for employee with id EID1234-5678.
+   * `addleave id/EID1234-5678 from/2023-12-26 to/2023-12-28` : Adds leave dates from 26 to 28 December 2023 inclusive for employee with id EID1234-5678.
 
-   * `deleteleave id/EID1234-5678 from/2023-12-27 to/2023-12-27`: Deletes leave date 27 December 2023 for employee with id EID1234-5678.
+   * `deleteleave id/EID1234-5678 from/2023-12-27 to/2023-12-27` : Deletes leave date 27 December 2023 for employee with id EID1234-5678.
    
-   * `editleave id/EID1234-5678 old/2023-12-26 new/2023-12-29`: Edits the old leave date on 26 December 2023 of employee with id EID1234-5678 to new leave date on 29 December 2023.
+   * `editleave id/EID1234-5678 old/2023-12-26 new/2023-12-29` : Edits the old leave date on 26 December 2023 of employee with id EID1234-5678 to new leave date on 29 December 2023.
    
-   * `listleave on/2023-12-28`: Lists all employees on leave on 28 December 2023.
+   * `listleave on/2023-12-28` : Lists all employees on leave on 28 December 2023.
    
-   * `addremark id/EID1234-5678 r/good worker`: Adds the remark `good worker` to the employee with id EID1234-6788.
+   * `addremark id/EID1234-5678 r/good worker` : Adds the remark `good worker` to the employee with id EID1234-6788.
    
-   * `deleteremark id/EID1234-5678 r/good worker`: Deletes the remark `good worker` from the employee with id EID1234-5678.
+   * `deleteremark id/EID1234-5678 r/good worker` : Deletes the remark `good worker` from the employee with id EID1234-5678.
    
-   * `overtime id/EID1234-5678 o/inc a/10`: Increases the overtime hours of employee with id EID1234-5678 by 10 hours.
+   * `overtime id/EID1234-5678 o/inc a/10` : Increases the overtime hours of employee with id EID1234-5678 by 10 hours.
    
-   * `report EID1234-5678`: Generates a report with details of the employee with id EID1234-5678.
+   * `report EID1234-5678` : Generates a report with details of the employee with id EID1234-5678.
    
-   * `reset f/overtime`: Resets the overtime hours field of all employees to the default value 0.
+   * `reset f/overtime` : Resets the overtime hours field of all employees to the default value 0.
    
    * `clear` : Deletes all employees.
 
@@ -143,9 +144,9 @@ Performing these instructions may result in non-deterministic behaviour of data 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Navigating the Graphical User Interface (GUI)
+## Navigating the GUI
 
-HouR comes with a GUI to allow for nice visual feedback for our users. Here is a quick run-through of the different sections of our GUI, as well as some notes regarding the use of the GUI.
+HouR comes with a Graphical User Interface (GUI) to allow for nice visual feedback for our users. Here is a quick run-through of the different sections of our GUI, as well as some notes regarding the use of the GUI.
 
 ### Quick Orientation
 
@@ -182,6 +183,8 @@ Below is an overview of HouR's features.
 - Clear all employees: `clear`
 - Exit the program: `exit`
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format and commands**<br>
@@ -211,6 +214,8 @@ Below is an overview of HouR's features.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ## General Commands
 
@@ -250,7 +255,7 @@ Format: `exit`
 
 This section contains commands relating to the employee list and/or employees.
 
-### Adding an employee: `add`
+### Adding an employee : `add`
 
 Adds an employee to the employee list.
 
@@ -318,7 +323,7 @@ Format: `list`
 
 ![list success](images/ug-pics/list.png)
 
-### Finding employees: `find`
+### Finding employees : `find`
 
 Finds employees whose name, position, department, phone number, email, or ID contain any of the given keywords.
 
@@ -364,7 +369,7 @@ Examples:
 
 You can use the following commands to keep track of employee metrics and gauge employee performance.
 
-### Adding a leave period of an employee: `addleave`
+### Adding a leave period of an employee : `addleave`
 
 Adds the dates between a specified period of time to the leaves taken by the specified employee.
 
@@ -399,7 +404,7 @@ Examples:
 
 ![addleave failure 2](images/ug-pics/addLeaveFailure2.png)
 
-### Deleting a leave period of an employee: `deleteleave`
+### Deleting a leave period of an employee : `deleteleave`
 
 Deletes the specified leave dates of an employee.
 
@@ -455,7 +460,7 @@ Conversely, if **NEW_DATE** is the current date, the **leave status** of the emp
 
 Examples:
 * `editleave id/EID1234-5678 old/2023-12-26 new/2023-12-28` edits the leave on 26 December 2023 to 28 December 2023
-  for employee with id EID1234-5678. The old leave date is replaced by the new leave date in the leave list.
+  for employee with id EID1234-5678. The old leave date is **replaced** by the new leave date in the leave list.
 
 ![editleave success](images/ug-pics/editLeaveSuccess.png)
 
@@ -577,6 +582,9 @@ Format: `report EMPLOYEE_ID`
 
       ![overtime pay formula](https://latex.codecogs.com/png.latex?1.5\times%20\frac{12%20\times%20\text{Monthly%20Salary}}{52\times%2044}\times{\text{number%20of%20overtime%20hours}})
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The remarks displayed in the report are arranged in the order they were added, i.e. remarks added later will be added to the end of the remark list.
+</div>
 
 Examples:
 * `report EID1234-5678` generates and downloads a report for the employee with employee id EID1234-5678.
@@ -648,10 +656,10 @@ DO NOT modify data directly as it might result in the malfunction of the applica
 **Method 2**: For users that wish to create a script to launch HouR (Recommended)
 1. Create a new text file 
 2. Copy and paste the following into the text file: `java -jar [JAR file location]/hour.jar` 
-3. Save the text file as `hour.bat` (Windows) or `hour.sh` (MacOS/Linux)
+3. Save the text file as `hour.bat` (Windows) or `hour.sh` (macOS/Linux)
 4. Change the admin settings of the script to allow it to run as program:
    * Windows: Right-click on the script and select **Properties**. Under **General**, check the box that says `Allow this file to run as a program`. 
-   * MacOS/Linux: Open the Terminal and navigate to the directory where the script is located. Type `chmod +x [script name]` and press Enter.<br> 
+   * macOS/Linux: Open the Terminal and navigate to the directory where the script is located. Type `chmod +x [script name]` and press Enter.<br> 
      Note: (`chmod +x` changes permissions of the script to allow it to be executed)
 5. Double-click on the script to launch HouR 
 6. HouR should launch
@@ -663,7 +671,7 @@ If you have any further issues, please raise an issue on our [Github page](https
 **Q**: How can I check my Java version?<br>
 **A**: Open a Command Prompt and type `java -version`. If you do not have Java installed, you can install Java 11 using the Oracle guide [here](https://www.oracle.com/java/technologies/downloads/#java11). Alternatively, you can install the OpenJDK version.
 
-For Mac users, you may wish to follow the instructions listed [here](https://nus-cs2103-ay2324s1.github.io/website/admin/programmingLanguages.html).
+For macOS users, you may wish to follow the instructions listed [here](https://nus-cs2103-ay2324s1.github.io/website/admin/programmingLanguages.html).
 
 ### Loading Data from Another Computer
 
@@ -755,7 +763,7 @@ If you would like to reset the number of leaves or overtime hours for **a specif
 
 ## Parameter information
 
-The table below provides information on the usage of the allowed parameters in HouR. Do note that the examples given are not exhaustive
+The table below provides information on the usage of the allowed parameters in HouR. Do note that the examples given are not exhaustive.
 
 | Parameter, Description                                        | Case sensitive | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Valid Examples                                                                             | Invalid Examples                                         |
 |---------------------------------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|----------------------------------------------------------|

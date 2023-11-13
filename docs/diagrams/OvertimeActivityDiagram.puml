@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User inputs overtime command;
+
+if () then ([else])
+    :Display error message;
+else ([valid command])
+    if () then ([else])
+        :Display error message;
+    else ([valid ID])
+        if () then ([else])
+            :Display error message;
+        else ([valid operation])
+            if () then ([else])
+                :Display error message;
+                else ([valid amount])
+                    :Update employee's overtime hours;
+                    :Display overtime success message;
+                endif
+            endif
+
+@enduml
