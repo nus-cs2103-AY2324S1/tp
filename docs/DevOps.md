@@ -3,10 +3,14 @@ layout: page
 title: DevOps guide
 ---
 
-* Table of Contents
-{:toc}
+## Table of Contents
+* [Build automation](#build-automation)
+* [Continuous integration (CI)](#continuous-integration-ci)
+  * [Code coverage](#code-coverage)
+  * [Repository-wide checks](#repository-wide-checks)
+* [Making a release](#making-a-release)
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Build automation
 
@@ -32,7 +36,7 @@ Given below are how to use Gradle for some important project tasks.
   * `./gradlew test` — Runs all tests
   * `./gradlew clean test` — Cleans the project and runs tests
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Continuous integration (CI)
 
@@ -67,7 +71,7 @@ Any warnings or errors will be printed out to the console.
 
 * Check scripts must exit with a non-zero exit code if any errors occur.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Making a release
 

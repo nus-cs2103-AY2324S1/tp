@@ -61,7 +61,7 @@ needs and preferences.
 
 ### First Time at JobFindr?
 
-_Welcome onboard JobFindr! Let us be part of your job search journey!_
+_Welcome onboard! Let us be part of your job search journey!_
 
 1. To get started with JobFindr, refer to the [Quick Start](#quick-start) below.
 2. After setting up JobFindr on your computer, you can get started with a [Quick Tutorial](#quick-tutorial) to get
