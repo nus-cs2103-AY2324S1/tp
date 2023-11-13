@@ -99,7 +99,9 @@ public class UniqueTagList {
                     return tag;
                 }
             }
-            throw new ParseException("Tag category does not exist!");
+            Tag tag = new Tag(tagName, tagCategory);
+            add(tag);
+            return tag;
         } else if (foundTag.isPresent()) {
             // tag category not specified
             long occurrence = internalList.stream()
