@@ -428,8 +428,8 @@ Click [here](#table-of-contents) to go back to contents.
 <div markdown="block" class="alert alert-primary">
 
 **:information_source: Note:**<br>
-* You cannot delete a developer who is **team leader**. In order, delete that developer you need to change the
-  team leader using `editTeamLeader` command. Only then you can remove that developer from the team.
+* You cannot delete a developer who is **team leader**. To delete that developer, you'll have to change the
+  team leader of that team using `editTeamLeader` command. Only then you can remove that developer from the team.
 </div>
 
 Click [here](#table-of-contents) to go back to contents.
