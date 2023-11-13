@@ -4,57 +4,57 @@
 skinparam ArrowFontStyle plain
 
 box UI UI_COLOR_T1
-Participant ":MainWindow" as mainWindow UI_COLOR
-Participant ":StatusBarFooter" as statusBar UI_COLOR
+Participant ":MainWindow" as MainWindow UI_COLOR
+Participant ":StatusBarFooter" as StatusBar UI_COLOR
 end box
 
 box Logic LOGIC_COLOR_T1
-Participant ":Logic" as logic LOGIC_COLOR
-Participant ":SortCommand" as command LOGIC_COLOR
+Participant ":Logic" as Logic LOGIC_COLOR
+Participant ":SortCommand" as Command LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant ":Model" as model MODEL_COLOR
+participant ":Model" as Model MODEL_COLOR
 end box
 
--> mainWindow : executeCommand(commandText)
-activate mainWindow
+-> MainWindow : executeCommand(commandText)
+activate MainWindow
 
-mainWindow -> logic : execute(commandText)
-activate logic
+MainWindow -> Logic : execute(commandText)
+activate Logic
 
-ref over logic : Parse sort command
+ref over Logic : Parse sort Command
 
-logic -> command : execute(model)
-activate command
+Logic -> Command : execute(model)
+activate Command
 
-command -> model : updateDisplayedPersonList(null, comparator)
-activate model
+Command -> Model : updateDisplayedPersonList(null, comparator)
+activate Model
 
-deactivate model
+deactivate Model
 
-command --> logic : result
-deactivate command
+Command --> Logic : result
+deactivate Command
 
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-command -[hidden]-> command
-destroy command
+Command -[hidden]-> Command
+destroy Command
 
-logic --> mainWindow : result
-deactivate logic
+Logic --> MainWindow : result
+deactivate Logic
 
-mainWindow -> mainWindow : handleSort(field, order)
-activate mainWindow
+MainWindow -> MainWindow : handleSort(field, order)
+activate MainWindow
 
-mainWindow -> statusBar : updateSortStatus(field, order)
-activate statusBar
-
-'Hidden arrow for spacing purposes
-statusBar -[hidden]-> mainWindow
-deactivate statusBar
+MainWindow -> StatusBar : updateSortStatus(field, order)
+activate StatusBar
 
 'Hidden arrow for spacing purposes
-mainWindow -[hidden]-> mainWindow
-deactivate mainWindow
+StatusBar -[hidden]-> MainWindow
+deactivate StatusBar
+
+'Hidden arrow for spacing purposes
+MainWindow -[hidden]-> MainWindow
+deactivate MainWindow
 
 @enduml

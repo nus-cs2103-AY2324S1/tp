@@ -3,60 +3,60 @@
 !include style.puml
 skinparam ArrowFontStyle plain
 
-mainframe **sd** Parse sort command
+mainframe **sd** Parse sort Command
 
 box Logic LOGIC_COLOR_T1
-Participant ":Logic" as logic LOGIC_COLOR
-Participant ":NetworkBookParser" as mainParser LOGIC_COLOR
-Participant ":SortCommandParser" as commandParser LOGIC_COLOR
-Participant ":PersonSortComparator" as comparator LOGIC_COLOR
-Participant "<<class>>\nPersonSortComparator" as comparatorClass LOGIC_COLOR
-Participant ":SortCommand" as command LOGIC_COLOR
+Participant ":Logic" as Logic LOGIC_COLOR
+Participant ":NetworkBookParser" as MainParser LOGIC_COLOR
+Participant ":SortCommandParser" as CommandParser LOGIC_COLOR
+Participant ":PersonSortComparator" as Comparator LOGIC_COLOR
+Participant "<<class>>\nPersonSortComparator" as ComparatorClass LOGIC_COLOR
+Participant ":SortCommand" as Command LOGIC_COLOR
 end box
 
-activate logic
+activate Logic
 
-logic -> mainParser : parseCommand(commandText)
-activate mainParser
+Logic -> MainParser : parseCommand(commandText)
+activate MainParser
 
-create commandParser
-mainParser -> commandParser
-activate commandParser
+create CommandParser
+MainParser -> CommandParser
+activate CommandParser
 
-commandParser --> mainParser : parser
-deactivate commandParser
+CommandParser --> MainParser : parser
+deactivate CommandParser
 
-mainParser -> commandParser : parse()
-activate commandParser
+MainParser -> CommandParser : parse()
+activate CommandParser
 
-create comparator
-commandParser -> comparator
-activate comparator
+create Comparator
+CommandParser -> Comparator
+activate Comparator
 
-comparator -> comparatorClass : generateComparator(field, order)
-activate comparatorClass
+Comparator -> ComparatorClass : generateComparator(field, order)
+activate ComparatorClass
 
-comparatorClass --> comparator
-deactivate comparatorClass
+ComparatorClass --> Comparator
+deactivate ComparatorClass
 
-comparator --> commandParser : comparator
-deactivate comparator
+Comparator --> CommandParser : Comparator
+deactivate Comparator
 
-create command
-commandParser -> command : new SortCommand(comparator)
-activate command
+create Command
+CommandParser -> Command : new SortCommand(comparator)
+activate Command
 
-command --> commandParser : command
-deactivate command
+Command --> CommandParser : Command
+deactivate Command
 
-commandParser --> mainParser : command
-deactivate commandParser
+CommandParser --> MainParser : Command
+deactivate CommandParser
 
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-commandParser -[hidden]-> commandParser
-destroy commandParser
+CommandParser -[hidden]-> CommandParser
+destroy CommandParser
 
-mainParser --> logic : command
-deactivate mainParser
+MainParser --> Logic : Command
+deactivate MainParser
 
 @enduml
