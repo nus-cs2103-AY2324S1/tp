@@ -3,9 +3,9 @@
 
 ![Ui](docs/images/Ui.png)
 
-## Spend N Split (SnS)
+## Spend N Split (SNS)
 
-Spend N Split (SnS) is a desktop app for managing expense from contacts, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SnS can get your contact expense management tasks done faster than traditional GUI apps.
+Spend N Split (SNS) is a desktop app for managing expense from contacts, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SNS can get your contact expense management tasks done faster than traditional GUI apps.
 
 Main features:
 * Manage contacts and their personal information

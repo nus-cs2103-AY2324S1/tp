@@ -13,33 +13,33 @@ We would like to acknowledge the following third-party libraries, frameworks and
 
 **Development**
 
-* **[Jackson](https://github.com/FasterXML/jackson)**: The Java JSON library for parsing and creating JSON for SnS.
+* **[Jackson](https://github.com/FasterXML/jackson)**: The Java JSON library for parsing and creating JSON for SNS.
 
-* **[JUnit 5](https://junit.org/junit5/)**: The Java testing framework of SnS.
+* **[JUnit 5](https://junit.org/junit5/)**: The Java testing framework of SNS.
 
-* **[Apache Common Numbers](https://github.com/apache/commons-numbers/tree/master)**: The Java numbers library that enhance SnS' precision.
+* **[Apache Common Numbers](https://github.com/apache/commons-numbers/tree/master)**: The Java numbers library that enhance SNS' precision.
 
 **Gradle**
 
 * **[Checkstyle](https://docs.gradle.org/current/userguide/checkstyle_plugin.html)**: The Gradle plugin that ensures consistent and appropriate code style.
 
-* **[Shadow](https://github.com/johnrengelman/shadow)**: The Gradle plugin for creating fat JARs for SnS.
+* **[Shadow](https://github.com/johnrengelman/shadow)**: The Gradle plugin for creating fat JARs for SNS.
 
 * **[Jacoco](https://github.com/palantir/gradle-jacoco-coverage)**: The Gradle plugin for generating code coverage reports.
 
 **User Interface**
 
-* **[JavaFX](https://openjfx.io/)**: The GUI framework of SnS.
+* **[JavaFX](https://openjfx.io/)**: The GUI framework of SNS.
 
-* **[Poppins Font](https://fonts.google.com/specimen/Poppins)**: The primary font used in SnS.
+* **[Poppins Font](https://fonts.google.com/specimen/Poppins)**: The primary font used in SNS.
 
-* **[Tailwind CSS Colors](https://tailwindcss.com/docs/customizing-colors)**: The colour palette that inspired the SnS colour scheme.
+* **[Tailwind CSS Colors](https://tailwindcss.com/docs/customizing-colors)**: The colour palette that inspired the SNS colour scheme.
 
 **Others**
 
-* **[Address Book 3](https://se-education.org/addressbook-level3/)**: The project SnS is based on.
+* **[Address Book 3](https://se-education.org/addressbook-level3/)**: The project SNS is based on.
 
-* **[Jekyll](https://github.com/jekyll/jekyll)**: The static site generator that converts SnS markdown documentation into web pages.
+* **[Jekyll](https://github.com/jekyll/jekyll)**: The static site generator that converts SNS markdown documentation into web pages.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1110,7 +1110,7 @@ for university Hall students. This section describes some key challenges our tea
 
 ### The relationship between transactions and persons
 
-The `Transaction` entity is a core part of SnS, and its implementation was one of our
+The `Transaction` entity is a core part of SNS, and its implementation was one of our
 teams largest challenges. What's notable about `Transaction` is its relationship to
 the `Person` entity. A person can be the payee of a transaction; the person who
 footed the bill. Additionally, a person can be a payer of the transaction, owing the
@@ -1128,7 +1128,7 @@ to tackle.
 
 **Deleting a person**
 
-When a person is deleted from SnS, our application needs to check all transactions
+When a person is deleted from SNS, our application needs to check all transactions
 for the person's involvement as a payer or payee. The person would have to be removed
 from the transaction. However, we wanted to preserve as much information in the
 transactions as possible as they may involve other people as well. We didn't want
@@ -1163,7 +1163,7 @@ in the UI, and parse in input from commands and storage.
 
 ### Overall Effort
 
-SnS required a substantial amount of effort in ideation, design, implementation and
+SNS required a substantial amount of effort in ideation, design, implementation and
 testing. We challenged ourselves to introduce new functionalities while preserving the
 original features of AB3. We have not only introduced a completely new central `Transaction`
 model, but also extended the existing `Person` model, transforming AB3 into an intricate
@@ -1200,7 +1200,7 @@ Example: listPerson Alex David
 ### Stronger Email Input Validation
 - **Background**: Currently, the `Email` of our `Person` is validated with the
 format `local-part@domain`. The local-part and domain have their own
-restrictions with the aim of allowing SnS to reject invalid emails.
+restrictions with the aim of allowing SNS to reject invalid emails.
 
 - **Issue**: This validation does not strictly comply with the IETF standards for email
 addresses, resulting in invalid emails to be considered as valid by our application.
@@ -1213,7 +1213,7 @@ Hotmail and Yahoo, IETF's format is more general and may allow formats.
 with IETF standards and the following (non-exhaustive) list of RFCs:
 [RFC3696](https://datatracker.ietf.org/doc/html/rfc3696),
 [RFC5322](https://datatracker.ietf.org/doc/html/rfc5322) and
-[RFC6854](https://datatracker.ietf.org/doc/html/rfc6854). As such, SnS will be able
+[RFC6854](https://datatracker.ietf.org/doc/html/rfc6854). As such, SNS will be able
 to more accurately detect invalid email addresses and support more domains' formats.
 
 ### Stronger Telegram Handle Input Validation
@@ -1232,7 +1232,7 @@ A Telegram Handle in our application must:
     3. not end with an underscore (Additional Restriction 3).
     4. not contain consecutive underscores (Additional Restriction 4).
 
-- Here are some examples of invalid Telegram handles that SnS will wrongly as valid.
+- Here are some examples of invalid Telegram handles that SNS will wrongly as valid.
     - `@a_a__` (violates Additional Restriction 1, 3, 4)
     - `@1john` (violates Additional Restriction 2)
     - `@_john` (violates Additional Restriction 2)
@@ -1241,7 +1241,7 @@ A Telegram Handle in our application must:
 
 - **Enhancement**: We plan on ensuring that `TelegramHandle` requires the 4 additional
   restrictions above to accurately reflect to validity of Telegram handles so that
-  SnS can correctly reject invalid input such that the examples above.
+  SNS can correctly reject invalid input such that the examples above.
 
 ### Improved Space Sensitivity in Names
 - **Background**: Currently, the `Name` of our `Person` is able to trim
