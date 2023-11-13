@@ -329,7 +329,7 @@ Step 6. Eventually, we call `Stream#reduce()` with the user's `UniMateCalendar` 
 Step 7. The resultant `UniMateCalendar` then has the `Event` stored in it converted into grey event cards with `CalendarEventSpace#addSolidEventCards()`, which
 reflects in the resultant pop-up comparison calendar window.
 
-<puml src="diagrams/CompareCalendarsSequenceDiagram.puml" width="450" />
+<puml src="diagrams/CompareCalendarsSequenceDiagram.puml" alt="CompareCalendarsSequenceDiagram"/>
 
 **Design Consideration**
 
