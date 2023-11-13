@@ -4,7 +4,7 @@ skinparam ArrowFontStyle plain
 
 mainframe ref
 
-participant ":DeductCommand" as DeductCommand LOGIC_COLOR
+participant "dc:DeductCommand" as DeductCommand LOGIC_COLOR
 
 box Person PERSON_COLOR
 participant ":Person" as Person PERSON_COLOR
