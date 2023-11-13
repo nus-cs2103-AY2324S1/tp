@@ -49,7 +49,7 @@ deactivate AddressBookParser
 LogicManager -> FindPersonCommand : execute()
 activate FindPersonCommand
 
-FindPersonCommand -> Model : updateFilteredPersonList(NameContainsKeywordsPredicate)
+FindPersonCommand -> Model : updateFilteredPersonList(CORRESPONDING_PREDICATE)
 activate Model
 
 Model --> FindPersonCommand
