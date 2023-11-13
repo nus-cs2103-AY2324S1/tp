@@ -423,6 +423,7 @@ ep
 - You may edit the person to have multiple tags by specifying the `t/` prefix multiple times.
 - If you specify at least one tag with this command, all old tags will be replaced.
   - If you wish to add to the existing tags of the person, use the [`addTagPerson` command](#31-adding-tags-to-a-person-addtagperson) instead.
+  - If you wish to delete an existing tag of the person, use the [`deleteTagPerson` command](#36-deleting-tags-from-a-person-deletetagperson) instead.
   - Specifying `t/` without any tags will clear all existing tags of the person.
 
 <h4>Example:</h4>
@@ -629,7 +630,7 @@ at
  Error message | How to resolve
 ---------------|---------------
 `Invalid command format! …` | Ensure that the title and note are specified.
-`Titles/Notes can take any value, as long as it is not blank and does not start with a whitespace` | Ensure that the title and note specified are not blank. Whitespaces at the start and end are trimmed.
+`Titles/Notes can take any value, as long as it is not blank and does not start with a whitespace` | Ensure that the title and note specified are not blank.
 `Multiple values specified for the following single-valued field(s): …` | Ensure that there are no duplicate fields for title and note.
 
 <div style="page-break-after: always;"></div>
@@ -695,6 +696,7 @@ et
 - You may edit the task to have multiple tags by specifying the `t/` prefix multiple times.
 - If you specify at least one tag with this command, all old tags will be replaced.
   - If you wish to add to the existing tags of the task, use the [`addTagTask` command](#32-adding-tags-to-a-task-addtagtask) instead.
+  - If you wish to delete an existing tag of the task, use the [`deleteTagTask` command](#37-deleting-tags-from-a-task-deletetagtask) instead.
   - Specifying `t/` without any tags will clear all existing tags of the task.
 
 <h4>Example:</h4>
@@ -710,7 +712,7 @@ et
 ---------------|---------------
 `Invalid command format! …` | Ensure that the index is correctly specified as an integer.
 `At least one field to edit must be provided.` | Ensure that at least one of title, note, or tag is specified.
-`Titles/Notes can take any value, as long as it is not blank and does not start with a whitespace` | Ensure that the title and/or note specified are not blank. Whitespaces at the start and end are trimmed.
+`Titles/Notes can take any value, as long as it is not blank and does not start with a whitespace` | Ensure that the title and/or note specified are not blank.
 `This task already exists in the address book.` | Ensure that the new title and note specified do not match an existing task.
 `Multiple values specified for the following single-valued field(s): …` | Ensure that there are no duplicate fields for title and note.
 
@@ -1324,7 +1326,7 @@ dtagp
 ---------------|---------------
 `Invalid command format! …` | Ensure that the index is correctly specified as an integer. At least one tag must be specified.
 `The person index provided is invalid` | Ensure that the index specified is in the range of the displayed number of persons.
-`Tags names should be alphanumeric` | Ensure that the tags specified are alphanumeric and not empty. Whitespaces are trimmed, but spaces between characters are not allowed.
+`Tags names should be alphanumeric` | Ensure that the tags specified are alphanumeric and not empty.
 
 <div style="page-break-after: always;"></div>
 
@@ -1370,7 +1372,7 @@ dtagt
 ---------------|---------------
 `Invalid command format! …` | Ensure that the index is correctly specified as an integer. At least one tag must be specified.
 `The task index provided is invalid` | Ensure that the index specified is in the range of the displayed number of tasks.
-`Tags names should be alphanumeric` | Ensure that the tags specified are alphanumeric and not empty. Whitespaces are trimmed, but spaces between characters are not allowed.
+`Tags names should be alphanumeric` | Ensure that the tags specified are alphanumeric and not empty.
 
 ---
 
