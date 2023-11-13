@@ -13,7 +13,7 @@ Summary of Contributions:
 * **Enhancements implemented:**
 
 1. Added the functionality to cancel an appointment
-    * This feature allows counsellors to cancel an appointment, necessary to rectify errors in an existing appointment, of simply 
+    * This feature allows counsellors to cancel an appointment, necessary to rectify errors in an existing appointment, or simply 
    just to delete an invalid appointment.
    [#83](https://github.com/AY2324S1-CS2103T-W13-4/tp/pull/83),
    [#88](https://github.com/AY2324S1-CS2103T-W13-4/tp/pull/88),
@@ -22,6 +22,7 @@ Summary of Contributions:
    
 2. Added the functionality to filter appointments by date [#134](https://github.com/AY2324S1-CS2103T-W13-4/tp/pull/134)
     * This feature allows counsellors to view their appointments on a specific date.
+    * Refactor `DateTime` attribute of `Appointment` into `Date` and `Time` [#126](https://github.com/AY2324S1-CS2103T-W13-4/tp/pull/126)
 
 3. Added the functionality to automatically sort appointments by date and time [#152](https://github.com/AY2324S1-CS2103T-W13-4/tp/pull/152)
     * This feature allows an organised overview of appointments for counsellors. 
@@ -43,9 +44,11 @@ Summary of Contributions:
     * Added Frequently Asked Questions [#238](https://github.com/AY2324S1-CS2103T-W13-4/tp/pull/238)
   * Developer Guide:
     * Responsible for the indexing of documentation. [#155](https://github.com/AY2324S1-CS2103T-W13-4/tp/pull/155)
+    * Added Use Cases UC06, UC07 and UC08. [#61](https://github.com/AY2324S1-CS2103T-W13-4/tp/pull/61)
     * Added implementation details and sequence diagram for cancel appointment feature. [#139](https://github.com/AY2324S1-CS2103T-W13-4/tp/pull/139)
 
 * **Contributions to team-based tasks**
+  * Set up GitHub team organisation and repository 
   * Opened v1.2, v.1.3, v1.4 milestones
   * Enabled assertions [#128](https://github.com/AY2324S1-CS2103T-W13-4/tp/pull/128)
 
