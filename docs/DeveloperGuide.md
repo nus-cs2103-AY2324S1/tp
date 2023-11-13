@@ -317,16 +317,13 @@ The view tags mechanism lists all existing tags in the address book that a user 
 All existing tags in the address book are shown to the user in the tags list.
 When a new member is added, deleted or edited, the `updateTags` method is called to update the list of existing tags.
 
+Suppose the DeleteMemberCommand is executed as shown in the diagram below, the following sequence of events will occur:
+1. `DeleteMemberCommand#execute()` method is called.
+2. `Member` is deleted from the `ModelManager` using the `ModelManager#deleteMember()` method.
+3. The `ObservableList<Tags>` is updated in `AddressBook` using the `AddressBook#updateTags()` method.
+4. UI detects change in `ObservableList<Tags>` and updates the `TagListPanel` UI component.
+
 <img src="images/ViewTagsSequenceDiagram.png" width="543" alt="ViewTagsSequenceDiagram"/>
-
-In the above diagram, when the `DeleteMemberCommand::execute` method is called,`Member` is deleted from 
-the `ModelManager` using the `deleteMember()` method, which then updates the `tags` in `AddressBook` using 
-the `updateTags()` method.
-
-`tags` is an `ObservableList` which will update the `TagsListPanel` UI component when there is a change in the `tags`
-list.
-
-### Scheduling an interview for an `Applicant`
 
 ### Allocating tasks to Members
 
@@ -499,13 +496,6 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `delm`, just save the member being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -533,8 +523,14 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers to use a separate app that is made to manage CCA-related contacts efficiently
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: categorises contacts into 'members' and 'applicants' groups, allowing for easier management of
-contacts
+**Value proposition**: 
+* ClubMembersContact is a desktop app that helps the user manage a large number of contacts efficiently. It is
+  optimised for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface
+  (GUI).
+* It categorises contacts into 'members' and 'applicants' groups, allowing for easier management of contacts
+* It allows the user to add, delete, edit, find, view and copy members and applicants contacts
+* Members are able to manage their tasks on the app
+* Applicants are able to schedule interviews
 
 ### User stories
 
@@ -611,7 +607,32 @@ Use case ends.
    <br/>
    Use case ends.
 
+---
+
 **Use case: UC04 - Editing a member**
+
+**MSS**
+
+1. User requests to edit a member
+2. ClubMembersContact edits the member's details
+3. Member list is updated in GUI
+4. ClubMembersContact displays a success message along with the member's details
+   <br/>
+   Use case ends.
+
+**Extensions**
+* 1a. The edit member command format is invalid.
+    * 1a1. ClubMembersContact shows an error message.
+      <br/>
+      Use case resumes at step 1.
+* 1b. The member index is invalid or out of range.
+    * 1b1. ClubMembersContact shows an error message.
+      <br/>
+      Use case resumes at step 1.
+* 1c. No field to edit is entered.
+    * 1c1. ClubMembersContact shows an error message.
+      <br/>
+      Use case resumes at step 1.
 
 ---
 
