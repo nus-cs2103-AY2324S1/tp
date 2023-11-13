@@ -236,8 +236,7 @@ Then type `delete 3` to delete that entry.
 
 **:information_source: Note:**<br>
 * Index must be a positive integer.
-* You cannot delete a developer who is a **team leader** for any of the teams. To delete that developer, you will have to change the team leader using `editTeamLeader` command. And then you can remove that developer from the 
-* addressbook.
+* You cannot delete a developer who is a **team leader** for any of the teams. To delete that developer, you will have to change the team leader using `editTeamLeader` command. And then you can remove that developer from the addressbook.
  ![DeleteTeamLeader](images/UG_images/DeleteTeamLeader.png)
 </div>
 
@@ -421,7 +420,7 @@ Click [here](#table-of-contents) to go back to contents.
 #### Example usage:
 * For example: if you want to delete developer **John Lim** from **Team Bravo**.
 * You need to type `deletedev tn/Team Bravo n/John Lim`, then the developer 
-**John Lim** will be removed from **Team Alpha**.
+**John Lim** will be removed from **Team Bravo**.
   ![DeleteDevFromTeam](images/UG_images/DeleteDevFromTeam.png)
 
 <div markdown="block" class="alert alert-primary">
@@ -443,8 +442,8 @@ Click [here](#table-of-contents) to go back to contents.
 * `editTeamName tn/[Existing team name] tn/[New team name]`
 
 #### Example usage:
-  * Example: `editTeamName tn/Alpha Team tn/Beta Team`
-  - Result: Now, the team with original team name `Alpha Team` changed its team name to `Beta Team`.
+  * For example, if you want edit the team name **Team Alpha** to **Team Romeo**. Type `editTeamName tn/Team Alpha tn/Team Romeo`.
+  * You will now see that `Team Alpha` has been changed to `Team Romeo` in the list of teams.
     ![EditTeamNameCommand](images/UG_images/EditTeamNameCommand.png)
 
 <div markdown="block" class="alert alert-primary">
@@ -465,8 +464,8 @@ Click [here](#table-of-contents) to go back to contents.
 * `editTeamLeader tn/[Team name] tl/[New Team leader]`
 
 #### Example usage: 
-- `editTeamLeader tn/Alpha Team tl/Bob`
-  - Result: Now, the team with team name `Alpha Team` changed its team leader to be `Bob`.
+- For example, if want to change the team leader of `Team Romeo` to `John Lim`, you need to type `editTeamLeader tn/Team Romeo tl/John Lim`.
+- Now, you will see that the team leader for `Team Romeo` has changed to `John Lim`.
   ![EditTeamLeaderCommand](images/UG_images/EditTeamLeaderCommand.png)
   
 <div markdown="block" class="alert alert-primary">
