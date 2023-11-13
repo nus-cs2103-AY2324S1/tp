@@ -849,19 +849,98 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    2. Double-click the jar file<br>
-       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    2. Navigate to folder in terminal and input `java -jar flashlingo.jar` <br>
+       Expected: Shows the GUI with a set of sample contacts. The window size can be adjusted to your liking.
 
 2. Saving window preferences
 
-    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. After resizing and adjusting the window size and location, close the window.
 
-    2. Re-launch the app by double-clicking the jar file.<br>
+    2. Re-launch the app through the same method in step 1.<br>
        Expected: The most recent window size and location is retained.
 
 3. Adding/deleting a flash card
 
     1. Try out the `add` command in the command box.<br>
-         Expected: A new flash card is added to the flash card list.
-    2. Apply `delete 1` command in the command box.<br>
+        Example command: 
+       1. `add w/OriginalTest t/TranslationTest`
+       2. `add w/OriginalTestWithLanguage t/TranslationTestWithLanguage wl/OriginalLang tl/TranslationLang`  
+       
+        Expected: A new flash card is added to the flash card list.
+    2. Execute the `delete` command with the index of the flashcard you just added in the command box.<br>
          Expected: The flash card added in the previous step is successfully deleted.
+
+4. Editing a flash card
+   1. Use the add command to add a flash card of your choice  
+   2. Enter the `edit` command in the command box.  
+   Example command:
+      1. `edit 1 w/EditedWord t/EditedTranslation wl/EditedLanguage tl/EditedTranslationLanguage`<br>
+        Feel free to remove the parameters as you wish, as long as any one of them is still used.  
+   
+       Expected: The flashcard's details will be changed accordingly.
+
+5. Finding a flash card based on keyword
+   1. Add a few flash cards using the below command
+      1. `add w/雪 t/snow`
+      2. `add w/snow t/nieve wl/English tl/Spanish`
+      3. `add w/ciao t/hello/goodbye`
+   2. Enter the `find` command in the command box.
+      Example command:
+      1. `find snow`<br>
+       Expected: Flashcard (a) and (b)
+      1. `find nieve`<br>
+           Expected: Flashcard (b)
+      1. `find nieve, ciao`<br>
+           Expected: Flashcard (a) and (c)
+      1. `find snow, hello` <br>
+            Expected: Flashcard (a), (b) and (c)
+      
+6. Finding a flash card based on language
+    1. Add a few flash cards using the below command (unless already added in previous sections)
+        1. `add w/雪 t/snow`
+        2. `add w/snow t/nieve wl/English tl/Spanish`
+        3. `add w/ciao t/hello/goodbye`
+    2. Enter the `language` command in the command box.
+       Example command:
+        1. `language English`<br>
+           Expected: Flashcard (b)
+        1. `language Spanish`<br>
+           Expected: Flashcard (b)
+        1. `language`<br>
+           Expected: Flashcard (a) and (c)
+
+7. Listing all flash cards
+    1. Assuming that the list is filtered after section 5 and 6
+    2. Enter the `list` command in the command box.  
+           Expected: All flash cards in the list to be displayed
+
+8. See which flash cards require reviewing
+   1. Enter the `review` command in the command box
+      Expected: The displayed flash cards will be filtered to show only flash cards that require reviewing
+
+9. Start and End the review session
+    1. Assuming you are not currently in a review session and there are flash cards yet to be reviewed
+    2. Enter the `start` command in the command box.
+       Expected: Log message to be "Review session has been started" and one flash card displayed
+   3.  Enter the `end` command in the command box to terminate the review session
+        Expected: Log message to be "Review session has ended" and display goes back to main menu.
+
+10. Reviewing the words (Yes/No) and revealing the word
+    * Before starting the review session, take note of the current levels of the flash cards to verify if levels have been incremented or decremented correctly 
+    1. Enter the `start` command in the command box to begin the review session.
+    2. One flash card should show up. To check if you got the word correctly, either type in `reveal` or press the Reveal button.
+       1. If you want to hide the translation, type in `reveal` again or press the Hide button.
+    2. To confirm that you have remembered the word, type in `yes` or press the Yes button.
+       1. After exiting the review session, confirm that the level on the flash card had been increased by 1, or became "Word Mastered" if the level passes the threshold of 5
+    3. If you had failed to remember, type in `no` or press the No button
+       1. After exiting the review session, confirm that the level on the flash card had been decreased by 1, or stayed at 1 if its original level is 1.
+
+
+11. Loading words from excel file into app
+    * You can download a sample file from [here](SampleData.xlsx)
+    1. Enter the `load SampleData.xlsx` command in the command box after moving it to the folder containing the jar file.
+        Expected: The words from the excel sheet will be added to the current list of flash cards
+
+12. Switching the theme of the application
+    1. Enter the `switch` command in the command box.
+    2. Expected: If on light mode, will switch to dark mode, otherwise switch to light mode
