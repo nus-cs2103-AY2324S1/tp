@@ -35,11 +35,11 @@ Given below are my contributions to the project.
   * What it does: Allows user to set a specific difficulty level for a question of a flashcard using its index.
   * Justification: It is the main practical function of a flashcard application for users to evaluate the question
   solving process and the application and schedule their next practise based on the difficulty input.
-  * Highlights: Users set a level of difficulty (easy, medium or hard) for a question using `set` command, the deck of card will then be rearranged according to the new schedule.
+  * Highlights: Users set a level of difficulty (easy, medium or hard) for a question using `set` command, the deck of card will then be rearranged accordingly.
 
 
 * **New Feature** MarkDown Syntax [#117](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/117)
-  * What it does: For advanced user who wish to stylised their flashcard or are visual learners, having ways to differentiate
+  * What it does: For advanced user or visual learners to stylised their flashcard, having ways to differentiate
   words by having different style can greatly enhance their learning process.
   * Justification: It serves as a good supplementary function to enhance to current revision process for user.
   * Highlights: Based on the syntax entered by the user, the corresponding styling will be reflected on
@@ -59,7 +59,7 @@ Given below are my contributions to the project.
   * Deck Class is created to contain a list of Cards [#66](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/66)
   * Enhanced DisplayResult and CardDisplay to support MarkDown syntax: bold, italic and underline. [#117](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/117)
   * Fixed bug where application does not start without existing JSON file [#71](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/71)
-  * Created test cases to increase code coverage to 65% (Pull Requests [#92](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/92), [#190](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/190), [#204](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/204), [#206](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/206))
+  * Created test cases to increase codecov to 65% (Pull Requests [#92](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/92), [#190](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/190), [#204](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/204), [#206](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/206))
   * Fixed bug where JSON format is wrong for the new JSON file created [#206](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/206)
 
 
