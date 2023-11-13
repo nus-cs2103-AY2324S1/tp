@@ -754,7 +754,9 @@ Fields that are compulsory are **bolded**. Fields that are optional are *italici
 
 4. **Email address**
    - The patient's Email Address should be of the form `local-part@domainname`.
-      - local-part //TODO::
+      - `local-part` is alphanumeric, and may also contain these symbols: `+` `_` `.` `-`
+      - `domainname`  should be the site that the email leads to, such as `gmail.com`, `mail`.
+      - These must be separated by an `@` symbol.
    - It does not need to be unique
 
 5. **Address**
