@@ -857,7 +857,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Importing student data.
   1. Prerequisites: A [sample CSV file](https://github.com/AY2324S1-CS2103T-W13-2/tp/blob/master/student_data_test.csv) has been downloaded into the same folder as Tutorium.
-  2. Test case: `import student_data_test.csv`
+  2. Test case: `import student_data_test.csv`<br>
      Expected: All students in the CSV file are added to the list.
 
 ### Deleting a student
