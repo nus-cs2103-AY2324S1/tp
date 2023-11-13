@@ -11,12 +11,6 @@ pageNav: 3
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
-
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
-
---------------------------------------------------------------------------------------------------------------------
-
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
@@ -65,6 +59,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
@@ -81,6 +77,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -114,11 +112,12 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
-
+<puml src="diagrams/ModelClassDiagram.puml"/>
 
 The `Model` component,
 
@@ -127,14 +126,7 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<box type="info" seamless>
-
-[//]: # (**Note:** An alternative &#40;arguably, a more OOP&#41; model is given below. It has a `Subject` list in the `AddressBook`, which `Student` references. This allows `AddressBook` to only require one `Subject` object per unique subject, instead of each `Student` needing their own `Subject` objects.<br>)
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
-
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -151,6 +143,7 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
@@ -194,7 +187,9 @@ The following activity diagram summarizes what happens when a user executes a `f
     * Less in line with users' expectations of a `filter` command; not as intuitive.
 * We made the choice of Alternative 1 over Alternative 2 as we found that more intuitive commands would be easier for users to learn and eventually master.
 
-### uplevel, undolevel feature
+<div style="page-break-after: always;"></div>
+
+### Uplevel, Undolevel feature
 
 #### Implementation
 
@@ -232,6 +227,8 @@ The following activity diagram summarizes what happen when a user executes a `Up
     * May have conflict between those "in-between" commands and `undolevel` command. E.g., edit a student's sec level and then perform `undolevel`.
     * Decline in performance due to the need to keep track every operation after `uplevel`.
 * We made the choice of Alternative 1 over Alternative 2 as undolevel is provided in case a user accidentally perform `uplevel` that the user didn't intend to. As such, we found that Alternative 1 is more in line of users' expectations and will not mess up the logic.
+
+<div style="page-break-after: always;"></div>
 
 ### Sort feature
 
@@ -271,6 +268,8 @@ The following activity diagram summarizes what happens when a user executes a `s
     * Users have to resort the student list for every launch.
 * We made the choice of Alternative 1 over Alternative 2 as we insist on providing greater convenience.
 
+<div style="page-break-after: always;"></div>
+
 ### Import feature
 
 #### Implementation
@@ -305,17 +304,18 @@ The following activity diagram summarizes what happens when a user executes a `i
     * Higher chance in wrong a splitting of students' data.
 * We made the choice of Alternative 1 over Alternative 2 as we found that a fixed format would be easier for users to remember and use in the .csv files.
 
+<div style="page-break-after: always;"></div>
 
 ### Table feature
 
 #### Implementation
-The `table` command allows users to generate a statistical table either categorised by `gender`, `subject` or `sec-level`
+The `table` command allows users to generate a statistical table either categorised by `gender`, `subject`, `sec level` or `enrol date`.
 
 When the user enters a table command, the `AddressBookParser` parses the user's input and return a `TableCommand`.
 
 Note that there is no specifically a TableCommandParser for `TableCommand` just like `ListCommand`, `ExitCommand` and `HelpCommand`. The `AddressBookParser` can parse and return a `TableCommand`directly.
 
-The parameters entered by user expected for a table command are either `g/`, `s/` and `l/`. When the `TableCommand` instance created by `AddressBookParser` executes, it will return the corresponding CommandResult. E.g. `GenderTableCommandResult` created for the case `table g/` is entered by user. This `XXXTableCommandResult` carries the counts for each category that will be used for generating the table.
+The parameters entered by user expected for a table command are either `g/`, `s/`, `l/` or `d/`. When the `TableCommand` instance created by `AddressBookParser` executes, it will return the corresponding CommandResult. E.g. `GenderTableCommandResult` created for the case `table g/` is entered by user. This `XXXTableCommandResult` carries the counts for each category that will be used for generating the table.
 
 The following sequence diagram shows how the `table` command works. In this example, the user is executing the following command: `table s/`
 
@@ -328,7 +328,7 @@ The following activity diagram summarizes what happens when a user executes a `t
 <puml src="diagrams/TableActivityDiagram.puml" alt="TableActivityDiagram" width="300" />
 
 #### Design considerations:
-
+![img.png](img.png)
 **Aspect: How to parse the argument for table internally:**
 
 * **Alternative 1 (current choice):** parse inside `TableCommand` and return the corresponding `XXXTableCommandResult`.
@@ -337,10 +337,12 @@ The following activity diagram summarizes what happens when a user executes a `t
 
 * **Alternative 2:** Create a CommandParser specifically for TableCommand.
   * Pros: Provides a good abstraction when we are dealing with two-dimensional table.
-  * Cons: May be redundant when we only want to create one dimensional table and the number of possible category is less.
+  * Cons: May be redundant when we only want to create a one-dimensional table and the number of possible categories is smaller.
 
-* We made the choice of Alternative 1 over Alternative 2 as we found that the table we intend to create so far is one dimensional table and there are only three possible categories, that are , `g/` for gender, `s/` for subject and `l/` for sec-level.
+* We made the choice of Alternative 1 over Alternative 2 as we found that the table we intend to create so far is one-dimensional table and there are only four possible categories (`g/` for gender, `s/` for subject, `l/` for sec level and `d/` for enrol date).
   _{more aspects and alternatives to be added}_
+
+<div style="page-break-after: always;"></div>
 
 ### Export feature
 
@@ -381,6 +383,7 @@ The following activity diagram summarizes what happens when a user executes a `e
     * Getting a small typo in the path is frustrating.
 * We made the choice of Alternative 1 over Alternative 2 as we insist on providing greater convenience.
 
+<div style="page-break-after: always;"></div>
 
 ### \[Proposed\] Undo/redo feature
 
@@ -471,6 +474,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -538,6 +542,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* `     | As a tuition centre admin staff    | I can schedule my marketing campaigns and events                             | so that I know when my marketing events are.                                                     |
 
 *{More to be added}*
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -804,6 +810,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Steps 2a1-2a2 are repeated until a sec level update left to undo exists. <br>
     Use case resumes from step 3.
 
+<div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
 
@@ -820,6 +827,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Student data**: Name, phone number, email, address, gender, sec level, nearest MRT and subject(s) for each student
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -966,6 +975,8 @@ testers are expected to do more *exploratory* testing.
   1. Delete a random chunk of lines from the data file. <br>
      Expected: The app launches normally with an empty data file.
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Effort**
 If the implementation effort required to create AB3 from scratch is 10, we estimate that the effort we spent to create
 Tutorium is 11.
@@ -998,6 +1009,8 @@ Listed below are the enhancements we managed to add into Tutorium.
 * Data visualisation features (bar charts, tables and line graphs) added to enable users to conduct analysis on student data.
 * Secondary school level (sec level) updating, to optimise the process of increasing students' sec levels at the beginning of each academic year.
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Planned Enhancements**
 * Improving the phrasing of messages displayed to the user.
   * Currently, some messages displayed to the user (such as error messages or success messages) are
@@ -1014,3 +1027,6 @@ Listed below are the enhancements we managed to add into Tutorium.
   * Valid phone numbers in Singapore are 8 digits long, but Tutorium accepts any number that is longer than 3 digits, even
     if it would be considered an invalid phone number. We will add a validation check to restrict inputs to 8-digit phone numbers
     in future versions of the app.
+* Standardise prefix for year in data visualisation features.
+  * In the table and chart feature, the prefix used to indicate the year is `d/`, but for the line graph feature, it is `y\`. We
+    plan to standardise the prefix used to `y/` to make these commands more intuitive and easier to learn.
