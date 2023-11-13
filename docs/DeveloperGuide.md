@@ -892,7 +892,7 @@ Command: `help`
 ### Adding a member
 
 ### Editing a member
-This uses the `editm` command. You can refer to the command [here](#https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#414-editing-a-member-editmember-or-editm).
+This uses the `editm` command. You can refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#414-editing-a-member-editmember-or-editm).
 
 1. General command usage.
    1. Prerequisites: The member to be edited must **NOT** have the `phone` field edited to be the same as another member's phone number.
@@ -947,7 +947,7 @@ Command: `cpm` or `copymember`. You can refer to the command [here](https://ay23
 3. Test case 2: `cpm 0`.<br/>
    Expected Outcome: The `MEMBER_INDEX` is invalid. An invalid index message is shown. Nothing is copied into the clipboard.
 
-4. Other incorrect delete commands to try: `cpm`, `cpm1`, `copymember x` (where x is any non-integer or integer bigger than the member list size).
+4. Other incorrect copy commands to try: `cpm`, `cpm1`, `copymember x` (where x is any non-integer or integer bigger than the member list size).
 
 ### Add member task
 
@@ -993,7 +993,7 @@ Command: `adda` or `addapplicant`. You can refer to the command [here](https://a
 
 ### Editing an applicant
 
-This uses the `edita` command. You can refer to the command [here](#https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#424-editing-an-applicant-editapplicant-or-edita).
+This uses the `edita` command. You can refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#424-editing-an-applicant-editapplicant-or-edita).
 
 1. General command usage.
     1. Prerequisites: The applicant to be edited must **NOT** have the `phone` field edited to be the same as another member's phone number.
@@ -1056,7 +1056,7 @@ Command: `cpa` or `copyapplicant`. You can refer to the command [here](https://a
 3. Test case 2: `cpa 0`.<br/>
    Expected Outcome: The `APPLICANT_INDEX` is invalid. An invalid index message is shown. Nothing is copied into the clipboard.
 
-4. Other incorrect delete commands to try: `cpa`, `cpa1`, `copyapplicant x` (where x is any non-integer or integer bigger than the member list size).
+4. Other incorrect copy commands to try: `cpa`, `cpa1`, `copyapplicant x` (where x is any non-integer or integer bigger than the member list size).
 
 
 ### Deleting an applicant
