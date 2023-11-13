@@ -5,42 +5,64 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ]
+    "tags" : [ "friends" ],
+    "studentNumber" : "A0203220J",
+    "telegram" : "@bruh"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ]
+    "tags" : [ "owesMoney", "friends" ],
+    "modules" : [ {
+      "moduleCode" : "CS2030S"
+    } ],
+    "tutorials" : [ {
+      "moduleCode" : "CS2030S",
+      "tutName" : "TUT1",
+      "time" : "Mon 9pm"
+    } ],
+    "studentNumber" : "A0203221J",
+    "telegram" : "@bruh"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "tags" : [ ]
+    "tags" : [ ],
+    "studentNumber" : "A0203222J",
+    "telegram" : "@bruh"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-    "tags" : [ "friends" ]
+    "tags" : [ "friends" ],
+    "studentNumber" : "A0103220J",
+    "telegram" : "@bruh"
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "tags" : [ ]
+    "tags" : [ ],
+    "studentNumber" : "A0253220J",
+    "telegram" : "@bruh"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
-    "tags" : [ ]
+    "tags" : [ ],
+    "studentNumber" : "A1203220J",
+    "telegram" : "@bruh"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
-    "tags" : [ ]
+    "tags" : [ ],
+    "studentNumber" : "A0203466J",
+    "telegram" : "@bruh"
   } ]
 }

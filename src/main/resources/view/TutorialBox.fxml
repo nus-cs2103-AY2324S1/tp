@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<HBox id="tutorialPane" fx:id="tutorialPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox alignment="CENTER_LEFT">
+      <Text fx:id="tutorialsTaken" />
+    </VBox>
+</HBox>

@@ -1,15 +1,46 @@
 ---
-layout: page
-title: Developer Guide
+layout: default.md
+title: "Developer Guide"
+pageNav: 3
 ---
-* Table of Contents
-{:toc}
+
+# TAssistant Developer Guide
+
+<h2>Table of Contents</h2>
+
+- **[Acknowledgements](#acknowledgements)**
+- **[Setting up, getting started](#setting-up-getting-started)**
+- **[Design](#design)**
+- **[Architecture](#architecture)**
+    * [UI Component](#ui-component)
+    * [Logic Component](#logic-component)
+    * [Model Component](#model-component)
+    * [Storage Component](#storage-component)
+- **[Implementation](#implementation)**
+    * [Module-Tutorial Interaction](#module-tutorial-interaction)
+- **[Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)**
+- **[Appendix: Requirements](#appendix-requirements)**
+    * [Product Scope](#product-scope)
+    * [User Stories](#user-stories)
+    * [Use Cases](#use-cases)
+    * [Non-functional Requirements](#non-functional-requirements)
+    * [Glossary](#glossary)
+- **[Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)**
+    * [Launch and shutdown](#launch-and-shutdown)
+    * [Deleting a person](#deleting-a-person)
+    * [Adding modules](#adding-modules)
+    * [Adding tutorials](#adding-tutorials)
+    * [Recording attendance](#recording-attendance)
+    * [Adding assignments](#adding-an-assignment)
+- **[Appendix: Effort](#appendix-effort)**
+- **[Appendix: Planned Enhancements](#appendix-planned-enhancements)**
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5).
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -21,14 +52,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
-
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+<img src="images/ArchitectureDiagram.png" width="281" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -70,7 +96,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+<img src="images/UiClassDiagram.png" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -93,10 +119,12 @@ Here's a (partial) class diagram of the `Logic` component:
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+<img src="images/DeleteSequenceDiagram.png" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</div>
+<box type="info" seamless>
+
+**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</box>
 
 How the `Logic` component works:
 
@@ -117,27 +145,33 @@ How the parsing works:
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/AddressBookClassDiagram.png" width="450" />
 
+* Note: For the Person class, fields such as "Name", "Email" and "Phone" have been integrated into Person_Fields to
+simplify the diagram. The Person_Fields class does not exist and is meant to represent the less important fields in
+Person, such as "Name", "Email" and "Phone" that have similar attributes.
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
+* stores the address book data i.e., all `Person`, `Module`, `Tutorial`, `Assignment` objects
+(which are contained in a `UniquePersonList`, `UniqueModuleList`, `UniqueTutorialList`, `UniqueAssignmentList` object).
+* stores the currently 'selected' `Person` objects (e.g., results of a search query)
+as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>`
+that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* `Module`, `Tutorial` and `Assignment` objects are stored in a similar way, as a separate list that the UI
+automatically updates as the data in the list changes. However, since the UI always shows all modules, tutorials and
+assignments the user has (i.e. there is no filtering for Modules, Tutorials and Assignments), the list exposed to
+outsiders is always guaranteed to be the full list of Modules, Tutorials or Assignments.
+* stores a `UserPref` object that represents the user’s preferences.
+This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* does not depend on any of the other three components
+(as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/NewStorageClassDiagram.png" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -154,89 +188,20 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Module-Tutorial Interaction
 
-#### Proposed Implementation
+In NUS, modules are a unit of study, and most modules require students to participate in tutorials. Each
+module with tutorials has one or more tutorials, but each tutorial is usually only for one module. Given that Teaching
+Assistants usually only teach tutorials rather than a module as a whole, we considered only including tutorials in our
+product, but decided against it because having both modules and tutorials allows for more convenient searching for
+teaching assistants teaching multiple modules. This comes at the cost of having to maintain the multiplicity between
+module and tutorials.
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+To better enable advanced users, the app automatically performs actions to maintain the multiplicity constraint rather
+than force the user to type additional commands to maintain it. For example, the AddToTutorial command adds a
+tutorial to a person and the corresponding module should they not have it.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
+<img src="images/ModelTutorialInteractionActivityDiagram.png" width="519" />
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -257,71 +222,191 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* NUS SoC teaching assistants
+* Has to tutor multiple tutorials, potentially in multiple modules
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: manage the students, fellow tutors and professors involved in tutoring faster than a typical mouse/GUI driven app
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​ | I want to …​                                                       | So that I can…​                                                               |
+|----------|---------|--------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| `* * *`  | user    | search for all my students in a module                             | manage them more easily                                                       |
+| `* * *`  | user    | read information about students, modules and tutorials from a file | keep any students added or closed even after closing the program              |
+| `* * *`  | user    | view my students school email and telegram handle                  | contact them if needed                                                        |
+| `* * *`  | user    | sign up as a TA of module(s)                                       | manage what modules I am part of                                              |
+| `* * *`  | user    | add and delete lessons                                             | it is easier for me to organise my schedule.                                  |
+| `* * *`  | user    | filter students by tutorial and module                             | make preparations based on upcoming classes, like marking their work          |
+| `* * *`  | user    | add and remove students to tutorials                               | it is easier for me to organise my schedule.                                  |
+| `* * *` | user    | add an assignment to the database                                  | keep track of the assignments to be marked                                    |
+| `* *`    | user    | edit the information of students                                   | rectify any mistakes made for personal information and grades.                |
+| `* *`    | user    | view my professors' email in the same mod                          | easily reach out to them for updates or help.                                 |
+| `* *`    | user    | edit the classes I teach                                           | it does not conflict with any of my other classes.                            |
+| `* *`    | user    | export the attendance list as a pdf                                | submit it to the people in charge                                             |
 
-*{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TAssistant` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Searching for a student within a module**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list persons in the module.
+2.  System shows the persons in the module.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The module does not exist.
+
+  * 2a1. System shows an error message informing the user.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. The module exists, but no one is part of the module.
 
-    * 3a1. AddressBook shows an error message.
+  * 3a1. No one is displayed.
+  * 3a2. The display states that "No users are found".
 
-      Use case resumes at step 2.
+  Use case ends.
 
-*{More to be added}*
+**Use case: Deleting a module**
+
+**MSS**
+
+1. User requests to delete a module and provides its index.
+2. System deletes the module.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user gives a non-integer index, negative index, or omits it.
+
+  * 1a1. System shows an error message informing the user that they need to specify an integer index.
+
+  Use case ends.
+
+* 1b. The index given is higher than the number of modules the user has.
+
+  * 1b1. System shows an error message informing the user the module cannot be found.
+
+  Use case ends.
+
+* 2a. There are people in the address book that are part of the module.
+
+  * 2a1. System deletes the modules (and related tutorials, if any) from everyone in the address book.
+  * 2a2. System deletes the module.
+
+  Use case ends.
+
+
+**Use case: Deleting a tutorial**
+
+**MSS**
+
+1. User requests to delete a tutorial and provides its index.
+2. System deletes the tutorial.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user gives a non-integer index, negative index, or omits it.
+
+    * 1a1. System shows an error message informing the user that they need to specify an integer index.
+
+  Use case ends.
+
+* 1b. The index given is higher than the number of tutorials the user has.
+
+    * 1b1. System shows an error message informing the user the tutorial cannot be found.
+
+  Use case ends.
+
+* 2a. There are people in the address book that are part of the tutorial.
+
+    * 2a1. System deletes the tutorial from everyone in the address book.
+    * 2a2. System deletes the tutorial.
+
+  Use case ends.
+
+**Use case: Recording attendance for a person**
+
+**MSS**
+
+1. User requests to take attendance, specifying the index of the person and the lesson name.
+2. System updates the displayed tags of the person.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user gives a non-integer index, negative index, or omits it.
+
+    * 1a1. System shows an error message informing the user that they need to specify an integer index.
+
+  Use case ends.
+
+* 1b. The index given is higher than the number of persons in the list.
+
+    * 1b1. System shows an error message informing the user the person cannot be found.
+
+  Use case ends.
+
+* 2a. The given lesson name already exists.
+
+    * 2a1. System shows an error message informing the user it is a duplicate.
+
+  Use case ends.
+
+**Use case: Adding assignment to the database**
+
+**MSS**
+
+1. User requests to add an assignment to the database
+2. System updates to show the added assignment
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The assignment's title is not supplied by the user.
+
+  Use case ends.
+
+* 2a. Error message is shown informing the user of te correct usage of the command.
+
+  Use case ends.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3.  Should be able to hold up to 10 modules without a noticeable sluggishness in performance for typical usage.
+4.  Should be able to hold up to 10 tutorials without a noticeable sluggishness in performance for typical usage.
+5.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
+should be able to accomplish most of the tasks faster using commands than using the mouse.
+6.  The product is meant for a single Teaching Assistant that makes all changes to the AddressBook themselves.
+7.  Data will be stored in a .json file to allow for advanced users to manipulate the data directly.
+8.  The product does not require the Internet to operate.
 
-*{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Teaching Assistant (TA)**: A non-professor tutor which helps the professors of a module by teaching one or more classes.
+* **Module**: A unit of study in a specific field set by NUS, such as CS2103T focusing on Software Engineering.
+* **Tutorial**: Lessons that are part of a module. Includes laboratories, recitations, tutorials and any form of lesson that includes a TA.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -329,10 +414,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<box type="info" seamless>
+
+**Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
-</div>
+</box>
 
 ### Launch and shutdown
 
@@ -366,12 +453,117 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
 
-### Saving data
+### Searching for specific users
 
-1. Dealing with missing/corrupted data files
+1. Searching for a person given a name
+    1. At least one person with the given name must exist.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    2. Test case: `search n/NAME`<br>
 
-1. _{ more test cases …​ }_
+    3. Expected: Returns all people with the given name.
+
+2. Searching for a person given a module
+   1. At least one person with the given module must exist.
+
+   2. Test case: `search m/CS2100`<br>
+
+   3. Expected: Returns all people who are taking `MODULE`
+
+3. Searching for a person given a tutorial group.
+   1. The given module has a tutorial group with the given name.
+
+   2. There is at least one person with the given tutorial group.
+
+   3. Test case: `search m/MODULE t/TUTORIAL`<br>
+
+   4. Expected: Returns all people who are taking tutorial `TUTORIAL` in module `MODULE`.
+
+### Adding Modules
+
+1. Adding a module
+   1. Prerequisites: None.
+
+   1. Test case: `addModule m/CS21OO`<br>
+      Expected: The module is added to the module list and it should show up on the GUI.
+      The displayed name on the GUI will always be capitalised.
+
+   1. Test case: `addModule m/DTX3`<br>
+      Expected: No module is added. Error details shown in the status message. Module list remains the same.
+
+   1. Other incorrect delete commands to try: `addModule m/`, `addModule m/HSA` <br>
+      Expected: Similar to previous.
+
+### Adding Tutorials
+
+1. Adding a tutorial
+   1. Prerequisites: A module has been created. This guide will assume that a module with module code "CS2103" has been
+   created, but modules with different module codes may be used. The tutorials in the test cases below should not be
+   created before the tests.
+
+   1. Test case: `addTutorial m/CS2103 tn/T10 tt/Mon 6PM`<br>
+       Expected: Details of the tutorial added to the tutorial list. Details of the added tutorial shown in the status message.
+
+   1. Test case: `addTutorial m/CS2103 tn/ tt/Mon 6PM`<br>
+       Expected: No tutorial is added. Error details regarding empty tutorial name shown in the status message.
+       Tutorial list remains the same.
+
+   1. Other incorrect commands to try: `addTutorial `, `addTutorial randomString`, `addTutorial tn/T10 tt/Mon 6PM` <br>
+        Expected: No tutorial is added. Error details regarding invalid command format shown in the status message.
+      Tutorial list remains the same.
+
+### Recording attendance
+
+1. Recording attendance for a person
+    1. Prerequisites: At least one person must exist in the displayed list.
+
+    1. Test case: `attn 1 ln/S1`<br>
+       Expected: A tag with the description "S1" should appear on the first person on the list.
+       A message should be displayed indicating that the attendance was successfully taken.
+
+    1. Test case: `attn 1 ln/$$TEXT`<br>
+       Expected: An error message should be displayed indicating that the tag name must be alphanumeric.
+
+    1. Test case: `attn -2 ln/S1`<br>
+       Expected: An error message should be displayed indicating that the INDEX must be an unsigned integer.
+
+    1. Other incorrect delete commands to try: `attn 1 ln/`, `attn 2 ln/09%^&` <br>
+       Expected: Similar to previous.
+
+### Adding an assignment
+
+1. Adding an assignment which has a title
+
+   1. Test case: `addAssignment assgn/Assignment 1`
+      Expected: A new assignment with the title `Assignment 1` appears in the assignment list panel on the right side of the GUI.
+
+   1. Test case: `addAssignment assgn/`  
+      Expected: No assignment is added to the assignment list. An error message is shown in the status message.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+1. This project required the addition of two new models, one for Module and one for Tutorial, which required
+understanding and creating multiple new files in each of the four components, UI, Logic, Model & Storage.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+1. Currently, the addToModule and addToTutorial command, when used on a user that already has the given module or tutorial, does not give an
+error message. We intend to change this so that the commands when used on a user that already has the given
+module/tutorial will now give the error message `User already has the given module` or
+`User already has the given tutorial` respectively in the output box.
+2. The addModule and addTutorial commands currently do not have a hard limit on the length of a module name or tutorial name.
+As such, we intend to change this such that any input exceeding a reasonable length will give an error message `Module name is too long!` or
+`Tutorial name is too long!`.
+3. The addTutorial command accepts an empty string as tutorial name. We believe this is an invalid input that does not
+provide much value to users, so we intend to change this so trying to make a tutorial with an empty tutorial name
+now returns `Tutorial name cannot be empty!`
+4. Only addition of assignments is available as of now. We intend to implement it so that editing, removal and searching for assignments
+will be possible in the future. Also, integration with the respective tutorials and modules should also be able to be done.
+5. Splitting each person in the contact book into various roles (e.g. Professor, Student) is also planned for a later date.
+6. The addToTutorial and removeFromTutorial commands currently simply show the person they edit after success, with
+`Edited Person: (person details)`. We intend to change this so that they show `Tutorial added` or `Tutorial deleted` respectively.
+7. Currently, the attn command does not restrict the length on the lesson number provided. We intend to implement 
+some form of length requirements and produce an error message `The lesson number provided is too short/long!` when the restrictions are violated.

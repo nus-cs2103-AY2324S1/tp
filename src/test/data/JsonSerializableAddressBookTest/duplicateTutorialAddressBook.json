@@ -1,0 +1,23 @@
+{
+  "persons": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "tags": [ "friends" ],
+    "studentNumber": "A10011001",
+    "telegram": "AP"
+  } ],
+  "modules": [ {
+    "moduleCode": "CS2030S"
+  } ],
+  "tutorials": [ {
+    "moduleCode" : "CS2030S",
+    "tutName" : "T12",
+    "time" : "Mon 6pm"
+  }, {
+    "moduleCode" : "CS2030S",
+    "tutName" : "T12",
+    "time" : "Mon 6pm"
+  } ]
+}

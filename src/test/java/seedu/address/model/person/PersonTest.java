@@ -3,17 +3,22 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.module.Module;
+import seedu.address.model.tutorial.Tutorial;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -22,6 +27,16 @@ public class PersonTest {
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
         assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
+    }
+
+    @Test
+    public void getUiOfModulesAndTutorials_oneModuleAndTutorial_onlyTutorialGiven() {
+        Module testModule = new Module("CS1000");
+        Tutorial testTutorial = new Tutorial(testModule, "test tutorial name", "Mon 6pm");
+        Person testPerson = new PersonBuilder().withModules(testModule).withTutorials(testTutorial).build();
+        Set<String> expected = new LinkedHashSet<>();
+        expected.add(testTutorial.toString());
+        assertEquals(expected, testPerson.getUiOfModulesAndTutorials());
     }
 
     @Test
@@ -34,7 +49,7 @@ public class PersonTest {
 
         // same name, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -81,19 +96,21 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different address -> returns false
-        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
-
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different student numbers -> returns false
+        editedAlice = new PersonBuilder(ALICE).withStudentNumber(VALID_STUDENT_NUMBER_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+                + ", email=" + ALICE.getEmail() + ", tags=" + ALICE.getTags()
+                + ", modules=" + ALICE.getModules() + ", tutorials=" + ALICE.getTutorials()
+                + ", studentNumber=" + ALICE.getStudentNumber() + ", telegram=" + ALICE.getTelegram() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

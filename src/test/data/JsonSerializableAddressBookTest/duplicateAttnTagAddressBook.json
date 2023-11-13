@@ -1,0 +1,15 @@
+{
+  "persons": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "tags": [ "S2" ],
+    "studentNumber": "A0123456J",
+    "telegram": "@AP"
+  } ],
+  "modules": [ {
+    "moduleCode": "CS2030S"
+  } ],
+  "attendanceTags" : [ "A0123456JS2", "A0123456JS2" ]
+}

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,7 +12,11 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tutorial.Tutorial;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +27,10 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Module> modules;
+    private final FilteredList<Tutorial> tutorials;
+    private final FilteredList<Assignment> assignments;
+    private List<Tag> attendanceTags;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +43,10 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        modules = new FilteredList<>(this.addressBook.getModuleList());
+        tutorials = new FilteredList<>(this.addressBook.getTutorialList());
+        assignments = new FilteredList<>(this.addressBook.getAssignmentList());
+        attendanceTags = this.addressBook.getAttendanceTagsList();
     }
 
     public ModelManager() {
@@ -128,6 +141,109 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Module Management =========================================================================
+
+    @Override
+    public void addModule(Module module) {
+        addressBook.addModule(module);
+    }
+
+    @Override
+    public void deleteModule(Module module) {
+        addressBook.removeModule(module);
+    }
+
+    @Override
+    public boolean hasModule(Module module) {
+        requireNonNull(module);
+        return addressBook.hasModule(module);
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Module> getModuleList() {
+        return modules;
+    }
+
+    //=========== Tutorial Management =========================================================================
+
+    @Override
+    public void addTutorial(Tutorial tutorial) {
+        addressBook.addTutorial(tutorial);
+    }
+
+    @Override
+    public void deleteTutorial(Tutorial tutorial) {
+        addressBook.removeTutorial(tutorial);
+    }
+
+    @Override
+    public boolean hasTutorial(Tutorial tutorial) {
+        requireNonNull(tutorial);
+        return addressBook.hasTutorial(tutorial);
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Tutorial> getTutorialList() {
+        return tutorials;
+    }
+
+    //=========== Assignment Management =========================================================================
+
+    @Override
+    public void addAssignment(Assignment assignment) {
+        addressBook.addAssignment(assignment);
+    }
+
+    @Override
+    public void deleteAssignment(Assignment assignment) {
+        addressBook.removeAssignment(assignment);
+    }
+
+    @Override
+    public boolean hasAssignment(Assignment assignment) {
+        requireNonNull(assignment);
+        return addressBook.hasAssignment(assignment);
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Assignment> getAssignmentList() {
+        return assignments;
+    }
+
+    // others
+
+    @Override
+    public void addAttendanceTag(Tag tag) {
+        addressBook.addAttendanceTag(tag);
+    }
+
+    @Override
+    public void deleteAttendanceTag(Tag tag) {
+        addressBook.deleteAttendanceTag(tag);
+    }
+
+    @Override
+    public boolean hasAttendanceTag(Tag tag) {
+        return addressBook.hasAttendanceTag(tag);
+    }
+
+    @Override
+    public List<Tag> getAttendanceTagsList() {
+        return attendanceTags;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -140,9 +256,12 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
+
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && modules.equals(otherModelManager.modules)
+                && tutorials.equals(otherModelManager.tutorials);
     }
 
 }

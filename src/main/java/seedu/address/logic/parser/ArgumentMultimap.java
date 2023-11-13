@@ -75,4 +75,11 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
+
+    /**
+     * Returns true if the multimap has no values and false otherwise.
+     */
+    public boolean isEmpty() {
+        return argMultimap.isEmpty();
+    }
 }

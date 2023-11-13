@@ -19,6 +19,9 @@ public class JsonSerializableAddressBookTest {
     private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsAddressBook.json");
     private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonAddressBook.json");
     private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonAddressBook.json");
+    private static final Path DUPLICATE_MODULE_FILE = TEST_DATA_FOLDER.resolve("duplicateModuleAddressBook.json");
+    private static final Path DUPLICATE_TUTORIAL_FILE = TEST_DATA_FOLDER.resolve("duplicateTutorialAddressBook.json");
+    private static final Path DUPLICATE_ATTN_TAG_FILE = TEST_DATA_FOLDER.resolve("duplicateAttnTagAddressBook.json");
 
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {
@@ -41,6 +44,30 @@ public class JsonSerializableAddressBookTest {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_PERSON_FILE,
                 JsonSerializableAddressBook.class).get();
         assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_PERSON,
+                dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_duplicateModules_throwsIllegalValueException() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_MODULE_FILE,
+                JsonSerializableAddressBook.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_MODULE,
+                dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_duplicateTutorials_throwsIllegalValueException() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_TUTORIAL_FILE,
+                JsonSerializableAddressBook.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_TUTORIAL,
+                dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_duplicateAttendanceTag_throwsIllegalValueException() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_ATTN_TAG_FILE,
+                JsonSerializableAddressBook.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_ATTENDANCE_TAG,
                 dataFromFile::toModelType);
     }
 

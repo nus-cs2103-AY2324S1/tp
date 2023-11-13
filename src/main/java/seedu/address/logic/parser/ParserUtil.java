@@ -9,10 +9,13 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
+import seedu.address.model.assignment.Title;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.StudentNumber;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -66,18 +69,31 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String studentNumber} into a {@code StudentNumber}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code studentNumber} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+    public static StudentNumber parseStudentNumber(String studentNumber) throws ParseException {
+        String trimmedStudentNumber = studentNumber.trim();
+        if (!StudentNumber.isValidStudentNumber(trimmedStudentNumber)) {
+            throw new ParseException(StudentNumber.MESSAGE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return new StudentNumber(trimmedStudentNumber);
+    }
+
+    /**
+     * Parses a {@code String telegram} into a {@code Telegram}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code telegram} is invalid.
+     */
+    public static Telegram parseTelegram(String telegram) throws ParseException {
+        String trimmedTelegram = telegram.trim();
+        if (!Telegram.isValidTelegram(trimmedTelegram)) {
+            throw new ParseException(Telegram.MESSAGE_CONSTRAINTS);
+        }
+        return new Telegram(trimmedTelegram);
     }
 
     /**
@@ -121,4 +137,55 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String moduleCode} into an {@code Module}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code moduleCode} is invalid.
+     */
+    public static Module parseModule(String moduleCode) throws ParseException {
+        requireNonNull(moduleCode);
+        String trimmedModuleCode = moduleCode.trim().toUpperCase();
+        if (!Module.isValidModule(trimmedModuleCode)) {
+            throw new ParseException(Module.MESSAGE_CONSTRAINTS);
+        }
+        return new Module(trimmedModuleCode);
+    }
+
+    /**
+     * Parses a {@code String tutorialName} by trimming leading and trailing whitespaces.
+     * @return The tutorialName.
+     */
+    public static String parseTutorialName(String tutorialName) throws ParseException {
+        requireNonNull(tutorialName);
+        String trimmedName = tutorialName.trim();
+        return trimmedName;
+    }
+
+    /**
+     * Parses a {@code String tutorialTime} by trimming leading and trailing whitespaces.
+     * @return The tutorialTime.
+     */
+    public static String parseTutorialTime(String tutorialTime) {
+        requireNonNull(tutorialTime);
+        String trimmedTime = tutorialTime.trim();
+        return trimmedTime;
+    }
+
+    /**
+     * Parses a {@code String Title} into an {@code Title}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Title} is invalid.
+     */
+    public static Title parseTitle(String title) throws ParseException {
+        requireNonNull(title);
+        String trimmedTitle = title.trim();
+        if (!Title.isValidTitle(trimmedTitle)) {
+            throw new ParseException(Title.MESSAGE_CONSTRAINTS);
+        }
+        return new Title(trimmedTitle);
+    }
+
 }

@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,11 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tutorial.Tutorial;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -155,6 +160,87 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addModule(Module module) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteModule(Module module) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasModule(Module module) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Module> getModuleList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addTutorial(Tutorial tutorial) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteTutorial(Tutorial tutorial) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasTutorial(Tutorial tutorial) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Tutorial> getTutorialList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addAssignment(Assignment assignment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteAssignment(Assignment assignment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasAssignment(Assignment assignment) {
+            throw new AssertionError("This method should not be called.");
+
+        }
+
+        @Override
+        public ObservableList<Assignment> getAssignmentList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addAttendanceTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteAttendanceTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasAttendanceTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Tag> getAttendanceTagsList() {
             throw new AssertionError("This method should not be called.");
         }
     }

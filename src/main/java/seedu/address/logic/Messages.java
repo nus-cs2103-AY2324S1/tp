@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.module.Module;
 import seedu.address.model.person.Person;
 
 /**
@@ -18,6 +19,11 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_INVALID_MODULE = "Module does not exist";
+    public static final String MESSAGE_ADD_MODULE_CHECK = "New module added: ";
+    public static final String MESSAGE_INVALID_TUTORIAL = "Tutorial does not exist";
+    public static final String MESSAGE_INVALID_TUTORIAL_DISPLAYED_INDEX = "The tutorial index provided is invalid";
+    public static final String MESSAGE_INVALID_TUTORIAL_TIME_FORMAT = "Tutorial time format is invalid";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -41,11 +47,22 @@ public class Messages {
                 .append(person.getPhone())
                 .append("; Email: ")
                 .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        builder.append("; Modules: ");
+        person.getModules().forEach(builder::append);
+        builder.append("; Tutorials: ");
+        person.getTutorials().forEach(builder::append);
+        builder.append("; Student Number: ")
+               .append(person.getStudentNumber());
         return builder.toString();
+    }
+
+    /**
+     * Formats the {@code module} for display to the user.
+     */
+    public static String moduleFormat(Module module) {
+        return MESSAGE_ADD_MODULE_CHECK + module;
     }
 
 }

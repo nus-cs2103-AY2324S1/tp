@@ -24,6 +24,8 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
+    private static final String MESSAGE_MODULE_STARTER = "Tutorials and Modules: "; // To avoid magic string.
+
     public final Person person;
 
     @FXML
@@ -35,12 +37,18 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label address;
-    @FXML
     private Label email;
     @FXML
     private FlowPane tags;
 
+    @FXML
+    private Label moduleAndTutorialList;
+
+    @FXML
+    private Label studentNumber;
+
+    @FXML
+    private Label telegram;
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -50,10 +58,13 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        studentNumber.setText(person.getStudentNumber().value);
+        moduleAndTutorialList.setText(MESSAGE_MODULE_STARTER
+            + String.join(", ", person.getUiOfModulesAndTutorials()));
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        telegram.setText(person.getTelegram().value);
     }
 }
