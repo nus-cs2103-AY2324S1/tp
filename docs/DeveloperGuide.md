@@ -159,20 +159,24 @@ This section describes some noteworthy details on how certain features are imple
 
 #### The employee class
 
+![Employee Class Diagram](images/ManageHR/Employee_Class_Diagram.png)
+
 ManageHR keeps track of employees within the company with the use of `Employee` and `UniqueEmployeeList`. The `UniqueEmployeeList` serves as a container for the `Employee` objects
 within the company, while enforcing the constraints that no 2 employees can have the same name.
 
 The `Employee` class contains the following attributes.
 
-1. `Name`: The name of the employee.
+1. `EmployeeName`: The name of the employee.
 2. `Email`: The email of the employee.
 3. `Address`: The home address of the employee.
 4. `Leave`: The amount of leave remaining for the employee.
 5. `Salary`: The monthly salary accorded to the employee.
 6. `Phone`: The phone number of the employee.
-7. `Departments`: A set of departments in which the employee can belong to.
+7. `Role`: The role of the employee.
+8. `Superiors`: The employee name of the superior in charge of them.
+9. `Departments`: A set of departments in which the employee can belongs.
 
-All the attributes except Departments are compulsory fields.
+All the attributes except Departments and Superiors are compulsory fields.
 
 ### List command
 
