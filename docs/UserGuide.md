@@ -75,6 +75,9 @@ Format: `createMember n/MEMBER_NAME g/GENDER [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRE
 Examples:
 * `createMember n/CHU WEI RONG g/Male p/98765432 e/chuweirongrocks@gmail.com a/19 Kent Ridge Crescent, Singapore 119278 t/Leader` creates a member `CHU WEI RONG` in CCACommander.
 
+<div markdown="block" class="alert alert-info">:information_source: CCACommander will automatically capitalise the members' names for you, meaning an input of "john doe" will become "John Doe" automatically! 
+</div>
+
 ### Delete a Member : `deleteMember`
 
 Deletes the member at the specified index.

@@ -163,6 +163,9 @@ Here is an example command where we create a member **named** "Lim Jun Jie" with
 
 <hr class="command-separator">
 
+<div markdown="block" class="alert alert-info">:information_source: CCACommander will automatically capitalise the members' names for you, meaning an input of "john doe" will become "John Doe" automatically! 
+</div>
+
 #### Edit a Member: `editMember`
 If you accidentally make a typo while creating your member, do not worry! You can quickly fix it with the `editMember` command.
 
