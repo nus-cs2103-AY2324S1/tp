@@ -111,4 +111,5 @@ activate EventListWindow
 MainWindow <-- EventListWindow
 deactivate EventListWindow
 deactivate MainWindow
+destroy CommandResult
 @enduml
