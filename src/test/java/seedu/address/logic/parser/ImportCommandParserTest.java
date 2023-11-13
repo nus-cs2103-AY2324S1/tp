@@ -69,7 +69,7 @@ class ImportCommandParserTest {
 
         String fileName1 = relativePath + "/" + "student_data_test_fail_invalid_date.csv";
         assertParseFailure(parser, fileName1,
-            "For student at index 1: " + EnrolDate.MESSAGE_INVALID_DATE_FORMAT);
+                "For student at index 1: " + EnrolDate.MESSAGE_INVALID_DATE_FORMAT);
 
         String fileName2 = relativePath + "/" + "student_data_test_fail_invalid_phone_number.csv";
         assertParseFailure(parser, fileName2,
@@ -85,4 +85,11 @@ class ImportCommandParserTest {
 
     }
 
+    @Test
+    void parseEmptyFilePath() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                ImportCommand.MESSAGE_USAGE);
+
+        assertParseFailure(parser, "", expectedMessage);
+    }
 }
