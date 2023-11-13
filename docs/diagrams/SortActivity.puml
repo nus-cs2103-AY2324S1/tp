@@ -9,7 +9,7 @@ start
 
 : Input is passed over to the logic component;
 
-if () then ([one valid field])
+if () then ([command is in the correct format with valid parameters])
         if () then ([sequence specified is increasing])
             :Display dates sorted in increasing order;
             stop
