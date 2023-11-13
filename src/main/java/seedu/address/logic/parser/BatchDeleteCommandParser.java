@@ -36,14 +36,15 @@ public class BatchDeleteCommandParser implements Parser<BatchDeleteCommand> {
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DELETE_MONTH);
             DeleteMonth deleteMonth = ParserUtil.parseDeleteMonth(argMultimap.getValue(PREFIX_DELETE_MONTH).get());
             assert !deleteMonth.equals(null) : "wrong input for deleteMonth";
-            return new BatchDeleteCommand(deleteMonth);
+            return new BatchDeleteCommand(deleteMonth, null);
         }
 
         // else: hasCompany is true, hasDeleteMonth is false
         assert hasCompany : "should has input for company";
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_COMPANY);
+        // seems like no input will trigger line below
         Company company = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get());
 
-        return new BatchDeleteCommand(company);
+        return new BatchDeleteCommand(null, company);
     }
 }
