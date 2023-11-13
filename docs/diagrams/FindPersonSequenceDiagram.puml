@@ -8,7 +8,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as Logic LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser ADDRESS_BOOK_PARSER_COLOR
 participant ":FindPersonCommandParser" as FindPersonCommandParser ADDRESS_BOOK_PARSER_COLOR
-participant "predicate:PersonNameOrGroupContainsKeywordsPredicate" as PersonNameOrGroupContainsKeywordsPredicate PERSON_CONTAIN_KEYWORD_COLOR
+participant "p:PersonNameOrGroupContainsKeywordsPredicate" as PersonNameOrGroupContainsKeywordsPredicate PERSON_CONTAIN_KEYWORD_COLOR
 participant "fp:FindPersonCommand" as FindPersonCommand FIND_COMMAND_COLOR
 participant ":CommandResult" as CommandResult COMMAND_RESULT_COLOR
 end box
@@ -41,7 +41,7 @@ PersonNameOrGroupContainsKeywordsPredicate --> FindPersonCommandParser
 deactivate PersonNameOrGroupContainsKeywordsPredicate
 
 create FindPersonCommand
-FindPersonCommandParser -[FIND_COMMAND_PARSER_COLOR]> FindPersonCommand : new FindPersonCommand(predicate)
+FindPersonCommandParser -[FIND_COMMAND_PARSER_COLOR]> FindPersonCommand : new FindPersonCommand(p)
 activate FindPersonCommand
 
 FindPersonCommand --> FindPersonCommandParser : fp
@@ -58,7 +58,7 @@ deactivate AddressBookParser
 Logic -> FindPersonCommand : execute()
 activate FindPersonCommand
 
-FindPersonCommand -[FIND_COMMAND_COLOR]> Model : updateFilteredPersonList(predicate)
+FindPersonCommand -[FIND_COMMAND_COLOR]> Model : updateFilteredPersonList(p)
 activate Model
 
 Model --> FindPersonCommand

@@ -8,8 +8,8 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as Logic LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser ADDRESS_BOOK_PARSER_COLOR
 participant ":FindAllCommandParser" as FindAllCommandParser ADDRESS_BOOK_PARSER_COLOR
-participant "personPredicate:PersonNameOrGroupContainsKeywordsPredicate" as PersonNameOrGroupContainsKeywordsPredicate PERSON_CONTAIN_KEYWORD_COLOR
-participant "eventPredicate:EventNameOrGroupContainsKeywordsPredicate" as EventNameOrGroupContainsKeywordsPredicate EVENT_CONTAIN_KEYWORD_COLOR
+participant "pp:PersonNameOrGroupContainsKeywordsPredicate" as PersonNameOrGroupContainsKeywordsPredicate PERSON_CONTAIN_KEYWORD_COLOR
+participant "ep:EventNameOrGroupContainsKeywordsPredicate" as EventNameOrGroupContainsKeywordsPredicate EVENT_CONTAIN_KEYWORD_COLOR
 participant "fa:FindAllCommand" as FindAllCommand FIND_COMMAND_COLOR
 participant ":CommandResult" as CommandResult COMMAND_RESULT_COLOR
 end box
@@ -49,7 +49,7 @@ EventNameOrGroupContainsKeywordsPredicate --> FindAllCommandParser
 deactivate EventNameOrGroupContainsKeywordsPredicate
 
 create FindAllCommand
-FindAllCommandParser -[FIND_COMMAND_PARSER_COLOR]> FindAllCommand : new FindAllCommand(personPredicate, eventPredicate)
+FindAllCommandParser -[FIND_COMMAND_PARSER_COLOR]> FindAllCommand : new FindAllCommand(pp, ep)
 activate FindAllCommand
 
 FindAllCommand --> FindAllCommandParser : fa
@@ -78,25 +78,25 @@ activate EventNameOrGroupContainsKeywordsPredicate
 EventNameOrGroupContainsKeywordsPredicate --> FindAllCommand
 deactivate EventNameOrGroupContainsKeywordsPredicate
 
-FindAllCommand -[FIND_COMMAND_COLOR]> Model : updateFilteredPersonList(person -> true)
+FindAllCommand -[FIND_COMMAND_COLOR]> Model : updateFilteredPersonList(p -> true)
 activate Model
 
 Model --> FindAllCommand
 deactivate Model
 
-FindAllCommand -[FIND_COMMAND_COLOR]> Model : updateFilteredEventList(event -> true)
+FindAllCommand -[FIND_COMMAND_COLOR]> Model : updateFilteredEventList(e -> true)
 activate Model
 
 Model --> FindAllCommand
 deactivate Model
 
-FindAllCommand -[FIND_COMMAND_COLOR]> Model : updateFilteredEventList(eventPredicate)
+FindAllCommand -[FIND_COMMAND_COLOR]> Model : updateFilteredEventList(ep)
 activate Model
 
 Model --> FindAllCommand
 deactivate Model
 
-FindAllCommand -[FIND_COMMAND_COLOR]> Model : updateFilteredPersonList(personPredicate)
+FindAllCommand -[FIND_COMMAND_COLOR]> Model : updateFilteredPersonList(pp)
 activate Model
 
 Model --> FindAllCommand

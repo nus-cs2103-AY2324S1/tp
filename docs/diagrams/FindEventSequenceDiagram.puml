@@ -8,7 +8,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as Logic LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser ADDRESS_BOOK_PARSER_COLOR
 participant ":FindEventCommandParser" as FindEventCommandParser ADDRESS_BOOK_PARSER_COLOR
-participant "predicate:EventNameOrGroupContainsKeywordsPredicate" as EventNameOrGroupContainsKeywordsPredicate EVENT_CONTAIN_KEYWORD_COLOR
+participant "p:EventNameOrGroupContainsKeywordsPredicate" as EventNameOrGroupContainsKeywordsPredicate EVENT_CONTAIN_KEYWORD_COLOR
 participant "fe:FindEventCommand" as FindEventCommand FIND_COMMAND_COLOR
 participant ":CommandResult" as CommandResult COMMAND_RESULT_COLOR
 end box
@@ -41,7 +41,7 @@ EventNameOrGroupContainsKeywordsPredicate --> FindEventCommandParser
 deactivate EventNameOrGroupContainsKeywordsPredicate
 
 create FindEventCommand
-FindEventCommandParser -[FIND_COMMAND_PARSER_COLOR]> FindEventCommand : new FindEventCommand(predicate)
+FindEventCommandParser -[FIND_COMMAND_PARSER_COLOR]> FindEventCommand : new FindEventCommand(p)
 activate FindEventCommand
 
 FindEventCommand --> FindEventCommandParser : fe
@@ -70,7 +70,7 @@ activate EventNameOrGroupContainsKeywordsPredicate
 EventNameOrGroupContainsKeywordsPredicate --> FindEventCommand
 deactivate EventNameOrGroupContainsKeywordsPredicate
 
-FindEventCommand -[FIND_COMMAND_COLOR]> Model : updateFilteredEventList(predicate)
+FindEventCommand -[FIND_COMMAND_COLOR]> Model : updateFilteredEventList(p)
 activate Model
 
 Model --> FindEventCommand
