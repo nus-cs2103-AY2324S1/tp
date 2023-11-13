@@ -2,7 +2,7 @@
 !include style.puml
 skinparam ArrowFontStyle plain
 
-box UI UI_COLOR_T5
+box UI UI_COLOR_T1
 participant ":MainWindow" as MainWindow UI_COLOR
 end box
 
@@ -44,6 +44,8 @@ AddressBookParser --> LogicManager
 deactivate AddressBookParser
 destroy SortCommandParser
 
+LogicManager -[hidden]-> MainWindow : empty row
+ref over LogicManager, SortCommand: execute SortCommand
 LogicManager -[hidden]-> MainWindow : empty row
 LogicManager --> MainWindow
 deactivate LogicManager
