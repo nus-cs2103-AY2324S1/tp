@@ -8,7 +8,7 @@ title: User Guide
 TAvigator is a **desktop app** targeted towards Teaching Assistants **for managing contacts, optimized for use via a
 Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type
 fast, TAvigator can get your contact management tasks done faster than traditional GUI apps. We offer a one-stop
-solution to manage your student details, including attendance records and assignment details.
+solution to manage your student details including attendance records.
 
 ### Table of Contents
 
@@ -318,7 +318,7 @@ Creates a new contact in the course with the specified name and details.
 
 <div markdown="block" class="alert alert-info">
 
-* `STUDENT_NAME` should be a string made up of alphanumerical characters and spaces, with no special characters.
+* `STUDENT_NAME` should be a string made up of alphanumeric characters and spaces, with no special characters.
 * `PHONE_NUMBER` should be a string made up of numbers.
 * `EMAIL` should only be of the form `local@domain` and only accept alphanumeric characters <br>- `local` allows for special characters `+`, `_`, `.` and `-` as well. <br>- `local` should not start with special characters. <br>- `domain` must be at least 2 letters long<br>
 * `STUDENT_ID` should be unique for all students.
@@ -393,7 +393,7 @@ Marks the attendance of one or more student.
 * To mark attendance for multiple students, provide a comma-separated list of `STUDENT_NAME` or `STUDENT_ID`.
 * If a student is present, `REASON_OF_ABSENCE` is not required and will be ignored.
 * If a student is absent, `REASON_OF_ABSENCE` is mandatory.
-* `STUDENT_NAME` should be a string made up of alphanumerical characters and spaces, with no special characters.
+* `STUDENT_NAME` should be a string made up of alphanumeric characters and spaces, with no special characters.
 * `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or spaces. It should begin with the capital letter 'A', followed by 7 numbers, and end with a letter.
 * `ATTENDANCE` should only be 0 or 1, where 0 indicates student is absent and 1 indicates student is present.
 * `WEEK_NUMBER` should be an integer from 0 to 13.
@@ -459,7 +459,13 @@ Shows a summary of attendance records including list of absentees.
 
 <div markdown="block" class="alert alert-warning">
 **:exclamation: Caution:** Note the following!
-* Trying to run the command for weeks with incomplete attendance records will result in all students being listed.
+There are two special cases where `list attendance` would not provide the summary of attendance records and list of absentees.
+* When attendance records for the specified students are incomplete. In this case, for your convenience:
+  * A message containing the names of students within your specification (either in the course or in the specified tutorial group within the course) whose attendances were not marked would be generated.
+  * All students within your specification would be listed, for an easier attendance marking process.
+* When no students are part of the tutorial group specified. In this case:
+  * A message reminding you that no students are in the tutorial group is shown.
+  * No students would be listed.
 </div>
 
 
@@ -489,7 +495,7 @@ Finds a student's or multiple students' contact either via their name or student
 
 <div markdown="block" class="alert alert-info">
 
-* `STUDENT_NAME` should be a string made up of alphanumerical characters and spaces, with no special characters.
+* `STUDENT_NAME` should be a string made up of alphanumeric characters and spaces, with no special characters.
 * `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or spaces. It should begin with the capital letter 'A', followed by 7 numbers, and end with a letter.
 
 </div>
@@ -598,7 +604,7 @@ Merges two students in the current address book.
 
 * `PRIMARY_INDEX` and `SECONDARY_INDEX` refers to the index number shown in the displayed person list.
 * `PRIMARY_INDEX` and `SECONDARY_INDEX` **must be a positive integer** 1, 2, 3, …​
-* NAME, PHONE_NUMBER, EMAIL, and STUDENT_ID of the primary student is retained.
+* `NAME`, `PHONE_NUMBER`, `EMAIL`, and `STUDENT_ID` of the primary student is retained.
 * The merged student contains the tutorial groups of both students.
 * The merged student contains attendance records of both students. In case of duplicated weeks, the attendance record of the primary student will be retained.
 
@@ -691,18 +697,18 @@ _Details coming soon ..._
 
 ### 7.1 Prefix summary
 
-| Prefix      | Parameter | Rules                                                                                                                                                                                                              |
-|----------------|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| course/ | Course code    | - Can be any string, including empty string `""`. |
-| n/      | Name           | - Should only contain alphanumeric characters and spaces, no special characters.|
-| id/     | Student ID     | - Should be in the format `AxxxxxxxL`, <br>where `x` represents digit and it starts with a capital letter 'A' as well as ending with a letter. Student ID is unique for all students. |
-| p/      | Phone          | - Should only contain digits and be at least 3 digits long. |
+| Prefix      | Parameter | Rules                                                                                                                                                                                                                                                                     |
+|----------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| course/ | Course code    | - Can be any string, including empty string `""`.                                                                                                                                                                                                                         |
+| n/      | Name           | - Should only contain alphanumeric characters and spaces, no special characters.                                                                                                                                                                                          |
+| id/     | Student ID     | - Should be in the format `AxxxxxxxL`, <br>where `x` represents digit and `L` represents a letter. <br>- Should begin with a capital letter 'A'.<br>- Student ID should be unique for all students.                                                                       |
+| p/      | Phone          | - Should only contain digits and be at least 3 digits long.                                                                                                                                                                                                               |
 | e/      | Email          | - Should only be of the form `local@domain` and only accept alphanumeric characters <br>- `local` allows for special characters `+`, `_`, `.` and `-` as well. <br>- `local` should not start with special characters. <br>- `domain` must be at least 2 letters long<br> |
-| t/      | Tutorial group | - Should only contain alphanumeric characters and spaces. <br>- Used in `add` and `edit` commands.|
-| tg/     | Tutorial group | - Should only contain alphanumeric characters and spaces. <br>- Used in `list attendance` and `delete all` commands. |
-| a/      | Attendance     | - Should only be 0 or 1.<br>- 0 representing absence and 1 representing present. |
-| w/      | Week number    | - Should be an integer from 0 to 13. |
-| r/      | Reason         | - Can be any string, excluding empty string `""`. |
+| t/      | Tutorial group | - Should only contain alphanumeric characters and spaces. <br>- Used in `add` and `edit` commands.                                                                                                                                                                        |
+| tg/     | Tutorial group | - Should only contain alphanumeric characters and spaces. <br>- Used in `list attendance` and `delete all` commands.                                                                                                                                                      |
+| a/      | Attendance     | - Should only be 0 or 1.<br>- 0 representing absence and 1 representing present.                                                                                                                                                                                          |
+| w/      | Week number    | - Should be an integer from 0 to 13.                                                                                                                                                                                                                                      |
+| r/      | Reason         | - Can be any string, excluding empty string `""`.                                                                                                                                                                                                                         |
 
 
 ### 7.2 Command summary

@@ -6,7 +6,7 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "id": "A1234567Y",
-    "tags" : [ "G02" ],
+    "tags" : [ "T09" ],
     "attendances" : [ {
       "week" : {
         "weekNumber" : 0
