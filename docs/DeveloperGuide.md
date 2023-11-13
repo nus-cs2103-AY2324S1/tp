@@ -965,8 +965,6 @@ Mark a Meeting as completed
 1. Use `mark 1` to mark the first meeting as completed <br>
    Expected: Meeting will be shown as completed and the attendees that are in the meeting will have their last contacted updated to the end time of the meeting.
 
-<div style="page-break-after: always;"></div>
-
 ### Data Storage
 
 No save file
