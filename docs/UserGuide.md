@@ -3,9 +3,23 @@ layout: page
 title: User Guide
 ---
 
-MediLink Contacts (MLC) is a **desktop app for managing patients and doctors details, optimized for use via a Command
-Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MLC
-can get your patients management tasks done faster than traditional GUI apps.
+### Welcome to MediLink Contacts!
+
+MediLink Contacts (MLC) is a **desktop application** for **medical administrative assistants** to manage patients and
+doctors details within clinics.
+
+Hereʼs an overview of how MediLink Contacts can help you streamline your hospital management
+processes:
+
+* Store and edit information about your patients and doctors
+* Create Appointments between Patients and Doctors upon triaging
+
+On top of these functionalities, we believe that **efficiency** in patient management is of utmost importance.
+Hence, MediLink Contacts is **optimized** for use via a **Command Line Interface (CLI)** while still having
+the benefits of a **Graphical User Interface (GUI)**. If you type fast, MediLink Contacts can get your
+hospital management tasks done faster than current GUI apps in the industry.
+
+**New here?** Visit our [quick start](#quick-start) guide to onboard onto MediLink Contacts smoothly!
 
 ### Table of Contents
 
