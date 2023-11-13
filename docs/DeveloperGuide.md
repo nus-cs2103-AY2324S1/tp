@@ -1229,21 +1229,24 @@ The current implementation of the `sort` feature directly compares the ASCII val
 
 For example, if a task list contains:
 
+* `b Task`
 * `a Task`
 * `A Task`
-* `b Task`
+* `B Task`
 
 after sorting the list in **ascending order** by the **task description**, the list turns into:
 
+* `A Task`
+* `B Task`
 * `a Task`
 * `b Task`
-* `A Task`
 
-rather than the natural ordering expected (which is the order in which the list was originally in):
+rather than the natural ordering expected:
 
 * `a Task`
 * `A Task`
 * `b Task`
+* `B Task`
 
 This issue can be boiled down to the wrong choice of comparator method used to compare textual information of the different fields of Task. Currently, `String::compareTo` is used, rather than the case-insensitive version `String::compareToIgnoreCase`. This oversight has resulted in this unexpected behaviour of the `sort` feature.
 

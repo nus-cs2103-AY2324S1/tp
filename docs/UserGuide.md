@@ -1045,12 +1045,14 @@ Currently, the `sort` feature is not really user-friendly, as it sorts your task
 * `b Task`
 * `a Task`
 * `A Task`
+* `B Task`
 
 after sorting your task list in ascending order by the task description, your task list will look like this:
 
+* `A Task`
+* `B Task`
 * `a Task`
 * `b Task`
-* `A Task`
 
 which is not the expected behaviour you might have for the `sort` feature!
 
@@ -1059,6 +1061,7 @@ In a future iteration of TaskWise, we will amend this feature to allow sorting t
 * `a Task`
 * `A Task`
 * `b Task`
+* `B Task`
 
 which is the intended behaviour of the `sort` feature!
 
