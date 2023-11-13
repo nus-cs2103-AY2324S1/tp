@@ -346,7 +346,7 @@ searching for a member and more!
 
 #### View Events of Member : `viewMember`
 
-If you want to view the events in which a particular member is enrolled, you can do so via the `viewMember` command.
+If you want to view the events in which a particular member is enrolled to, you can do so via the `viewMember` command.
 
 Here’s how you can use it:<br>
 `viewMember MEMBER_INDEX`
