@@ -28,6 +28,9 @@ import seedu.address.model.tag.Tag;
  */
 class JsonAdaptedPatient {
 
+    /**
+     * The constant MISSING_FIELD_MESSAGE_FORMAT.
+     */
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Patient's %s field is missing!";
 
     private final String name;
@@ -46,6 +49,20 @@ class JsonAdaptedPatient {
 
     /**
      * Constructs a {@code JsonAdaptedPatient} with the given patient details.
+     *
+     * @param name                the name
+     * @param phone               the phone
+     * @param email               the email
+     * @param gender              the gender
+     * @param icNumber            the ic number
+     * @param birthday            the birthday
+     * @param address             the address
+     * @param priority            the priority
+     * @param assignedDepartment  the assigned department
+     * @param tags                the tags
+     * @param initialObservations the initial observations
+     * @param diagnosis           the diagnosis
+     * @param treatmentPlan       the treatment plan
      */
     @JsonCreator
     public JsonAdaptedPatient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
@@ -77,6 +94,8 @@ class JsonAdaptedPatient {
 
     /**
      * Converts a given {@code Patient} into this class for Jackson use.
+     *
+     * @param source the source
      */
     public JsonAdaptedPatient(Patient source) {
         name = source.getName().fullName;
@@ -97,6 +116,7 @@ class JsonAdaptedPatient {
     /**
      * Converts this Jackson-friendly adapted patient object into the model's {@code Patient} object.
      *
+     * @return the patient
      * @throws IllegalValueException if there were any data constraints violated in the adapted patient.
      */
     public Patient toModelType() throws IllegalValueException {
