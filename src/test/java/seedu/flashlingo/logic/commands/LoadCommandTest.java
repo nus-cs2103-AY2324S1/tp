@@ -18,7 +18,7 @@ public class LoadCommandTest {
     private static final String MESSAGE_OPEN_FILE_FAIL = "File not found or accessible.";
     private static final String MESSAGE_READ_FILE_FAIL = "File cannot be read due to invalid content or format.";
     private static final String MESSAGE_EMPTY_WORD = "Word/translation cannot be empty!";
-    private static final String MESSAGE_DUPLICATE_FLASH_CARD = " flashcard already exists!";
+    private static final String MESSAGE_DUPLICATE_FLASH_CARD = " flash card already exists!";
     private Model model = new ModelManager();
     private Model expectedModel = new ModelManager();
 
