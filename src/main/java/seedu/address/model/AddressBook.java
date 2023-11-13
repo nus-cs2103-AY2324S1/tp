@@ -141,6 +141,24 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.setPerson(target, editedPerson);
     }
 
+    /**
+     * Checks if email is already used by another person.
+     * @param toAdd Person to be checked.
+     * @return returns true if email already exist in the addressBook.
+     */
+    public boolean hasEmail(Person toAdd) {
+        return persons.containsEmail(toAdd);
+    }
+
+    /**
+     * Checks if phone is already used by another person.
+     * @param toAdd Person to be checked.
+     * @return returns true if phone already exist in the addressBook.
+     */
+    public boolean hasPhone(Person toAdd) {
+        return persons.containsPhoneNumber(toAdd);
+    }
+
     //// group-level operations
 
     /**
@@ -235,11 +253,5 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.hashCode();
     }
 
-    public boolean hasEmail(Person toAdd) {
-        return persons.containsEmail(toAdd);
-    }
 
-    public boolean hasPhone(Person toAdd) {
-        return persons.containsPhoneNumber(toAdd);
-    }
 }

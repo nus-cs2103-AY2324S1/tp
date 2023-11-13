@@ -22,7 +22,6 @@ public class GroupPersonCommandParser implements Parser<GroupPersonCommand> {
      *
      * @throws ParseException if the user input does not conform the expected format
      */
-
     public GroupPersonCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
