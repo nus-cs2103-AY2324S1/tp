@@ -820,15 +820,12 @@ testers are expected to do more *exploratory* testing.
 ### Adding a tutee
 
 1. Adding a tutee into the list.
-
    1. Prerequisites: None
    2. Test case: `add n/Betsy Crowe p/92939402 e/betsycrowe@example.com a/Newgate Prison sb/Secondary 3 Physics d/mon b/1900 end/1930 pr/35.00`<br>
       Expected: The tutee is added into the bottom of the list. Details of the added tutee is shown in the status message.
 
 
 2. Adding a duplicate tutee into the list
-
-
     1. Prerequisites: Completing the first test case for [Adding a tutee](#adding-a-tutee) 
     2. Test case: `add n/Betsy Crowe p/92939402 e/betsycrowe@example.com a/Newgate Prison sb/Secondary 3 Physics d/mon b/1900 end/1930 pr/35.00`<br>
        Expected: The error message _This tutee already exists_ should be displayed in the status message.
@@ -836,22 +833,51 @@ testers are expected to do more *exploratory* testing.
 ### Deleting a tutee
 
 1. Deleting a tutee while all tutees are being shown
-
    1. Prerequisites: List all tutees using the `list` command. Multiple tutees in the list.
+   2. Test case: `delete 1`<br>
+   Expected: First tutee is deleted from the list. Details of the deleted tutee shown in the status message. Timestamp in the status bar is updated.
+   
 
-   1. Test case: `delete 1`<br>
-      Expected: First tutee is deleted from the list. Details of the deleted tutee shown in the status message. Timestamp in the status bar is updated.
-=======
-
-3. Adding a tutee that has clashing schedules.
+2. Adding a tutee that has clashing schedules.
    1. Prerequisites: Completing the first test case for [Adding a tutee](#adding-a-tutee)
    2. Test case: `add n/Jason Antonius p/12345678 e/test@gmail.com a/PGPR Residences sb/CS1101S d/mon b/1900 end/1930 pr/20` <br>
       Expected: The error message _This date and time clashes with an existing schedule_ should be displayed in the status message.
 
+### Finding a tutee
+
+1. Finding a tutee by their name
+   1. Prerequisites: Have the default tutee data list.
+   2. Test case: `find n/Betsy` <br>
+      Expected: Tutees that contain the name predicate listed.
+
+
+2. Finding a tutee by their subject
+   1. Prerequisites: Have the default tutee data list.
+   2. Test case: `find sb/Maths` <br>
+      Expected: Tutees that contain the subject predicate listed.
+
+
+3. Finding a tutee by their name and subject
+   1. Prerequisites: Have the default tutee data list.
+   2. Test case: `find n/Betsy sb/Maths` <br>
+      Expected: Tutees that contain both the name predicate and subject predicate listed.
+
+
+4. Finding a tutee by their multiple word names
+   1. Prerequisites: Have the default tutee data list.
+   2. Test case: `find n/Betsy Crower` <br>
+      Expected: The error message _Name can only take one word._
+
+
+5. Finding a tutee by their multiple word subject
+   1. Prerequisites: Have the default tutee data list.
+   2. Test case: `find sb/English Language` <br>
+      Expected: The error message _Subject can only take one word._
+
+
 ### Editing a tutee
 
 1. Editing a tutee while all tutees are being shown
-
    1. Prerequisites: Have the default tutee data and list all tutees using the `list` command.
    2. Test case: `edit 2 n/Betsy Crower a/Betsy street, block 110, #03-02` <br>
       Expected: Tutee is successfully edited, and the details of the edited tutee is shown in the status message.
@@ -871,7 +897,6 @@ testers are expected to do more *exploratory* testing.
 ### Find free time
 
 1. Finding free time that results in no available timeslots
-
     1. Prerequisites: Have the default tutee data.
     2. Test case: `freeTime d/Mon dur/30 b/2000 end/2100` <br>
        Expected: The result <br>
@@ -881,7 +906,6 @@ testers are expected to do more *exploratory* testing.
 
 
 2. Finding free time that results in available timeslots
-
     1. Prerequisites: Have the default tutee data.
     2. Test case: `freeTime d/Mon dur/30 b/1930 end/2130` <br>
        Expected: The result <br>
@@ -910,54 +934,47 @@ testers are expected to do more *exploratory* testing.
 1. Marking a tutee as not paid while all tutees are being shown
 
     1. Prerequisites: List all tutees using the `list` command. Multiple tutees in the list.
-
-    1. Test case: `unpaid 3`<br>
-       Expected: Second tutee is from the list is marked as not paid. The message of marking person not paid success will be shown. Timestamp in the status bar is updated.
-
-    1. Test case: `unpaid 0`<br>
-       Expected: No tutee is marked as not paid. Error details shown in the status message. Status bar remains the same.
-
-    1. Other incorrect unpaid commands to try: `unpaid`, `unpaid x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+   
+    2. Test case: `unpaid 3`<br>
+        Expected: Second tutee is from the list is marked as not paid. The message of marking person not paid success will be shown. Timestamp in the status bar is updated.
+   
+    3. Test case: `unpaid 0`<br>
+        Expected: No tutee is marked as not paid. Error details shown in the status message. Status bar remains the same.
+   
+    4. Other incorrect unpaid commands to try: `unpaid`, `unpaid x`, `...` (where x is larger than the list size)<br>
+        Expected: Similar to previous.
 
 ### Listing all unpaid tutees
 
 1. All tutees who haven't paid will be shown
-
     1. There are tutees in the list.
-
-    1. Test case: `list unpaid`<br>
-       Expected: All tutees who haven't paid will be shown. The message of how many tutees are unpaid will be shown. Timestamp in the status bar is updated.
+   
+    2. Test case: `list unpaid`<br>
+        Expected: All tutees who haven't paid will be shown. The message of how many tutees are unpaid will be shown. Timestamp in the status bar is updated.
 
 ### Undo command
 
 1. Undo previous commands that can modify the data of tutees.
-
     1. Prerequisites: At least one tutee is present in the tutee list. Execute any command that modify tutee data. In this instruction, `clear` is used.
-
     2. Test case: `undo`<br>
        Expected: Restore all tutees that were cleared. A message informing the user that the command is successfully undone is displayed.
 
+
 2. Undo when there are no previous commands that modify the data of tutees.
-
     1. Prerequisites: Launch the application. Ensure no commands that modify the tutee data is executed.
-
     2. Test case: `undo`<br>
        Expected: No command is undone. Error details shown in the status message.
 
 ### Redo command
 
 1. Redo a command when there is a undo command executed previously.
-
     1. At least one tutee is present in the tutee list. Execute any command that modify tutee data. In this instruction, `clear` is used followed by `undo`.
-
     2. Test case: `redo`<br>
        Expected: Clear the tutee list again. 
 
+
 2. Redo a command when there is no undo command executed previously to redo.
-
     1. Prerequisites: Ensure no `undo` command is executed after launching the application.
-
     2. Test case: `redo`<br>
        Expected: No command is redone. Error details shown in the status message.
 
