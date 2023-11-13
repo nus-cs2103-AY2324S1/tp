@@ -572,8 +572,6 @@ Priorities:
 | `* *` | event planner | delete all done tasks | ensure that my task list is not cluttered with completed tasks |
 | `* *` | event planner | list all the tags I have used | avoid creating duplicate categories |
 | `* *` | event planner | find a person and tasks by tag | quickly see the persons and tasks in a category |
-| `* *` | event planner | add tag(s) to a person | add tag(s) to the existing list of tags of the indexed person |
-| `* *` | event planner | add tag(s) to a task | add tag(s) to the existing list of tags of the indexed task |
 | `* *` | event planner | delete tag(s) from a person | remove unwanted or outdated tag(s) |
 | `* *` | event planner | delete tag(s) from a task | remove unwanted or outdated tag(s) |
 {: .user-story-table}
@@ -1459,7 +1457,7 @@ testers are expected to do more <i>exploratory testing</i>.
 
 ## **Appendix: Planned Enhancements**
 
-### 1. Character limits for person fields and tasks
+### Character limits for person fields and tasks
 
 - **Enhancement**: Implement character limits for various fields associated with persons and tasks to ensure data consistency and integrity.
 - **Reason**: To maintain a structured format for data entry and prevent excessively long inputs that could affect the display and usability of the system.
@@ -1475,7 +1473,7 @@ testers are expected to do more <i>exploratory testing</i>.
   - For `Person/Task` tags:
     - **Tag**: Maximum of 30 characters to keep tags succinct and meaningful.
 
-### 2. Command-specific error messages
+### Command-specific error messages
 
 - **Enhancement**: Error messages will pinpoint the specific part of the command that has triggered the error.
 - **Reason**: Users will be able to identify and correct the exact issue with their command input without having to guess which part was incorrect.
@@ -1483,42 +1481,42 @@ testers are expected to do more <i>exploratory testing</i>.
     - For an invalid command due to an excessively long or short user input, a possible error message would be "Invalid addPerson command: person's name exceeded 100 characters."
     - For tag-related commands, specifying error messages such as changing "Tag names should be alphanumeric" to "Tag names should be ONLY alphanumeric" for better clarity.
 
-### 3. Stricter validity checks for email addresses
+### Stricter validity checks for email addresses
 
 - **Enhancement**: Revise the regex used for validating email addresses to ensure the domain name is present and correctly formatted.
 - **Reason**: To prevent the acceptance of invalid email addresses that lack a top-level domain e.g. `.com`, which are not very usable for actual communication.
 - **Example**:
   - The current regex might validate `johndoe@example`, which is incorrect as it lacks a domain name. The enhanced regex would correctly invalidate this and require a proper top-level domain, like `johndoe@example.com`.
 
-### 4. Accommodating Special Characters in Person Names
+### Accommodating Special Characters in Person Names
 
 - **Enhancement**: Update the name input validation to allow some special characters that are part of valid names in various cultures, including diacritics and other linguistic markers.
 - **Reason**: To ensure the software is inclusive and capable of accurately recording names from a diverse range of ethnic backgrounds.
 - **Example**:
   - Under the current system, a name like "Séamus O'Connor" or "Anand Sai-Krishna" might be rejected due to special characters. The enhancement would allow these names to be entered and stored correctly.
 
-### 5. Enhanced UI indicators for empty person/tasks lists
+### Enhanced UI indicators for empty person/tasks lists
 
 - **Enhancement**: Implement clear and prominent UI indicators when task or person lists are empty, particularly after performing actions such as marking tasks complete.
 - **Reason**: To provide immediate and unmistakable visual feedback to users when there are no items to display, enhancing the user experience by avoiding potential confusion or the impression that the list may not have loaded properly.
 - **Example**:
   - After a user completes the last remaining task with `markTask` and no incomplete tasks are left, instead of the minimalistic message "0 tasks listed!", the UI could display a more noticeable and friendly graphic or message such as "All tasks complete!" within the task list itself. This visual cue would be both informative and encouraging to the user.
 
-### 6. Preventing list jump on selection
+### Preventing list jump on selection
 
 - **Enhancement**: Modify the UI behavior to maintain the current scroll position when selecting an item at the bottom of a list.
 - **Reason**: To improve the usability of the application, especially when dealing with long lists, by preventing the list from jumping back to the top after selection.
 - **Example**:
   - Currently, when a user selects an item at the bottom of a long list, the list resets to the top position. This enhancement will keep the list at the current scroll position, making it easier to manage and navigate long lists.
 
-### 7. Error messages for invalid JSON file format
+### Error messages for invalid JSON file format
 
 - **Enhancement**: Error messages will be provided to pinpoint the specific part of the JSON file that does not follow the required format.
 - **Reason**: To improve the usability of the application, especially when users use the JSON file to import large amounts of data, users will be able to identify and correct the exact issue with their JSON data file without having to guess which part was incorrect.
 - **Example**:
   - Currently, when a user imports an invalid JSON data file, CoordiMate will show an empty contact list and task list. This enhancement will show an error message to inform the user exactly which part of the JSON file is invalid, so that the user can correct the JSON file and import it again.
 
-### 8. Standardise all command behaviours
+### Standardise all command behaviours
 
 - **Enhancement**: Modify the behavior of `deleteAllDone` to be similar with the other delete commands.
 - **Reason**: To reduce the confusion of the user when using the application and standardise all delete behaviours in the application.
@@ -1526,7 +1524,7 @@ testers are expected to do more <i>exploratory testing</i>.
   - Currently, when a user uses the `deleteAllDone` command, the task list resets to show all tasks after deletion. However, when a user uses the other `delete…` commands, the task list does not reset the list after deletion.
   - This enhancement will keep allow the `deleteAllDone` command to not reset the task list after deletion so that users will not get confused of the state of the task list.
 
-### 9. Enhance error messages about leading whitespaces
+### Enhance error messages about leading whitespaces
 
 - **Enhancement**: Modify the error messages for fields with leading whitespaces to be more accurate.
 - **Reason**: To reduce the confusion of the user when the error message differs from what is documented in the user guide and the behaviour of the application.
@@ -1542,7 +1540,7 @@ testers are expected to do more <i>exploratory testing</i>.
 
 ## **Appendix: Effort**
 
-### 1. Feature-rich Selection of Commands
+### Feature-rich Selection of Commands
 
 The process of building CoordiMate's command suite began with a structured approach, where we drafted user stories to encapsulate the frequent challenges faced by SoC event planners. This groundwork helped us identify and develop the commands that were critical to the application, particularly the Create, Read, Update, Delete (CRUD) operations for persons and tasks. Our aim was to ensure these core commands were not only functional but also intuitive for users.
 
@@ -1550,7 +1548,7 @@ Following the first iteration, we presented CoordiMate in a live demo to collect
 
 In the second iteration of development, we honed in on features that were highly requested during peer reviews, such as the ability to filter tasks and contacts by tags and to check the status of tasks as done. These particular commands addressed key concerns from our peers about the ease of organising and tracking progress within the app. By aligning our development efforts with these specific user needs, we expanded from the initial **8** commands in AB3 to a robust suite of **27**, ensuring that each new feature was both meaningful and in direct response to our users' needs.
 
-### 2. Creation of Multiple Classes
+### Creation of Multiple Classes
 
 In order for CoordiMate to track tasks, we had to create new classes that encapsulated the various elements of a task, such as the title, note and status. This was done to ensure that tasks can also be modelled in an object-oriented manner, just like the existing `Person` class.
 
@@ -1558,7 +1556,7 @@ Furthermore, these classes needed to be integrated into the existing codebase. F
 
 Lastly, to ensure that the tasks are saved and loaded correctly, the Storage class had to be modified to support the new `Task` class. This required the team to design how these tasks were to be stored in the data file, and the creation of the necessary helper classes to parse the tasks into JSON strings and vice versa.
 
-### 3. User Centric
+### User Centric
 
 In designing CoordiMate, our focus was on ensuring a seamless and user-friendly experience for SoC event planners. We recognized the value of our users' time and effort during event planning. To streamline interactions, we implemented command aliases, offering shorthand alternatives that reduce the need for extensive typing (i.e. from `listPerson` to `lp`). This enhancement simplifies command input, making the application more efficient and user-friendly.
 
@@ -1566,7 +1564,7 @@ CoordiMate is all about putting users in control with a clear and efficient way 
 
 To guide users effectively, we crafted error messages that are not only informative but also pinpoint the specific areas where errors occurred in command inputs. This user-centric approach facilitates quick identification and resolution of issues, ensuring a smoother interaction with the application. Example of valid commands are also given to aid users in better understanding our error messages and assists users in rectifying errors efficiently. If more help is needed, we also went beyond from the given `help` command of AB3 by improving the help window that redirects the user to directly open our user guide on their preferred browser with ease. By prioritizing user-centric design principles, CoordiMate aims to elevate the event planning experience, making it both intuitive and efficient for SoC Computing Club event planners.
 
-### 4. Improved UI
+### Improved UI
 
 The original AB3 program only displayed the list of persons which is not very useful for a contact and task management application. To make our app effective, we created additional panels for tasks, besides the original
 panel for persons. This allows the user to view all the tasks and persons at a glance. Event planners can also easily track the status of their tasks through the status symbol we use to mark tasks as completed or not completed.
@@ -1576,7 +1574,7 @@ the application or any of the documents such as User Guide or Developer Guide. N
 times, especially for commands such as `listTag`. Hence, we wanted to give the user the ability to adjust the size of the output box according to their preference and the specific command they are using. For users who want to focus
 more on their tasks at hand, they can drag the divider between the contact list and task list so that their screen can show more of the task list. This is also useful for users who have a smaller screen size and would like to view more of the application at once.
 
-### 5. Extensive Testing
+### Extensive Testing
 
 Our team placed a strong emphasis on testing to ensure that the application is robust and reliable.
 
@@ -1584,7 +1582,7 @@ We conducted extensive unit testing for new features, recommending at least a **
 
 We managed to maintain **~83%** code coverage in CoordiMate, up from the original **75%** of AB3. In total, we have increased the **267** test cases in AB3 to **547** test cases in CoordiMate.
 
-### 6. Software Engineering Practices
+### Software Engineering Practices
 
 Our team went beyond the recommended guidelines in the course and adopted various rigorous software engineering practices in our development workflow to ensure that our codebase is well-written and maintainable.
 
