@@ -27,6 +27,7 @@ public class DeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalWellNus(), new UserPrefs());
 
+    // Unfiltered list, valid index
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Student studentToDelete = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
@@ -41,6 +42,7 @@ public class DeleteCommandTest {
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
+    // Unfiltered List, invalid index
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
@@ -49,6 +51,7 @@ public class DeleteCommandTest {
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
+    // Filtered List, valid index
     @Test
     public void execute_validIndexFilteredList_success() {
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
@@ -66,6 +69,7 @@ public class DeleteCommandTest {
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
+    // Filtered list, invalid index
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);

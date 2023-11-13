@@ -24,15 +24,16 @@ import seedu.address.testutil.ModelStub;
 
 public class ScheduleCommandTest {
 
+    // Null Appointment
     @Test
-    public void constructor_nullStudent_throwsNullPointerException() {
+    public void constructor_nullAppointment_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new ScheduleCommand(null));
     }
 
+    // Valid appointment
     @Test
     public void execute_appointmentAcceptedByModel_addSuccessful() throws Exception {
-        ScheduleCommandTest.ModelStubAcceptingAppointmentAdded modelStub =
-                new ScheduleCommandTest.ModelStubAcceptingAppointmentAdded();
+        ScheduleCommandTest.ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
         Appointment validAppointment = new AppointmentBuilder().build();
 
         CommandResult commandResult = new ScheduleCommand(validAppointment).execute(modelStub);
@@ -42,12 +43,24 @@ public class ScheduleCommandTest {
         assertEquals(Arrays.asList(validAppointment), modelStub.appointmentsAdded);
     }
 
+    // Duplicate appointment
     @Test
-    public void execute_duplicateStudent_throwsCommandException() throws InvalidStartEndTimeException {
+    public void execute_duplicateAppointment_throwsCommandException() throws InvalidStartEndTimeException {
         Appointment validAppointment = new AppointmentBuilder().build();
         ScheduleCommand scheduleCommand = new ScheduleCommand(validAppointment);
-        ModelStub modelStub = new ScheduleCommandTest.ModelStubWithAppointment(validAppointment);
+        ModelStub modelStub = new ModelStubWithAppointment(validAppointment);
         assertThrows(CommandException.class, ScheduleCommand.MESSAGE_DUPLICATE_APPOINTMENT, () ->
+                scheduleCommand.execute(modelStub));
+    }
+
+    // Overlapping appointment
+    @Test
+    public void execute_overlappingAppointment_throwsCommandException() throws InvalidStartEndTimeException {
+        Appointment validAppointment = new AppointmentBuilder().build();
+        Appointment existingAppointment = new AppointmentBuilder().withStartTime("17:00").withEndTime("18:00").build();
+        ScheduleCommand scheduleCommand = new ScheduleCommand(validAppointment);
+        ModelStub modelStub = new ModelStubWithAppointment(existingAppointment);
+        assertThrows(CommandException.class, ScheduleCommand.MESSAGE_OVERLAPPING_APPOINTMENTS, () ->
                 scheduleCommand.execute(modelStub));
     }
 
@@ -99,6 +112,11 @@ public class ScheduleCommandTest {
         public boolean hasAppointment(Appointment appointment) {
             requireNonNull(appointment);
             return this.appointment.isSameAppointment(appointment);
+        }
+
+        @Override
+        public boolean hasOverlapsWithAppointments(Appointment appointment) {
+            return this.appointment.isOverlappingAppointment(appointment);
         }
     }
 

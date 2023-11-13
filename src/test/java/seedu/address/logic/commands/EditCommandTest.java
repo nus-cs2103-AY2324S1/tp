@@ -35,7 +35,7 @@ public class EditCommandTest {
 
     private Model model = new ModelManager(getTypicalWellNus(), new UserPrefs());
 
-    // EP: Unfiltered List, Change all fields
+    // Unfiltered List, Change all fields
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Student editedStudent = new StudentBuilder(ALICE).withPhone(VALID_PHONE_BOB)
@@ -52,7 +52,7 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
-    // EP: Unfiltered List, change a single field
+    // Unfiltered List, change a single field
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
         Index indexLastStudent = Index.fromOneBased(model.getFilteredStudentList().size());
@@ -94,7 +94,7 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
-    // EP: Filtered List Success
+    // Filtered List Success
 
     @Test
     public void execute_filteredList_success() {
@@ -114,7 +114,7 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
-    // EP: Invalid index
+    // Invalid index, unfiltered list
     @Test
     public void execute_invalidStudentIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
@@ -125,7 +125,7 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
-    // EP: Invalid index, filtered list
+    // Invalid index, filtered list
     /**
      * Edit filtered list where index is larger than size of filtered list,
      * but smaller than size of address book

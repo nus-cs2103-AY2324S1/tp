@@ -12,16 +12,18 @@ import seedu.address.model.WellNus;
 
 public class ClearCommandTest {
 
+    // EP: Empty WellNus
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_emptyWellNus_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
+    // EP: Non-empty WellNus
     @Test
-    public void execute_nonEmptyAddressBook_success() {
+    public void execute_nonEmptyWellNus_success() {
         Model model = new ModelManager(getTypicalWellNus(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalWellNus(), new UserPrefs());
         expectedModel.setWellNusData(new WellNus());

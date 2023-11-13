@@ -50,6 +50,7 @@ public class FindCommandTest {
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
+    // Find empty string
     @Test
     public void execute_zeroKeywords_noStudentFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 0);
@@ -61,10 +62,35 @@ public class FindCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredStudentList());
     }
 
+    // Find first name
     @Test
-    public void execute_multipleKeywords_studentFound() {
+    public void execute_firstName_studentFound() {
+        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 1);
+        String input = "Carl";
+        String[] keywords = input.split("\\s+");
+        FindCommand command = new FindCommand(keywords);
+        expectedModel.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL), model.getFilteredStudentList());
+    }
+
+    // Find last name
+    @Test
+    public void execute_lastName_studentFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 1);
         String input = "Kurz";
+        String[] keywords = input.split("\\s+");
+        FindCommand command = new FindCommand(keywords);
+        expectedModel.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL), model.getFilteredStudentList());
+    }
+
+    // Find full name
+    @Test
+    public void execute_fullName_studentFound() {
+        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 1);
+        String input = "Carl Kurz";
         String[] keywords = input.split("\\s+");
         FindCommand command = new FindCommand(keywords);
         expectedModel.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
