@@ -894,7 +894,7 @@ Failure outputs:
   * Error: A student is not yet selected. Select a student using `show INDEX` first.
 ```
 No student is shown
-LinkTo command usage: linkTo [LESSON_NAME]
+LinkTo command usage: linkTo LESSON_NAME
 Example: linkTo CS2103T lab1
 Note: This command is only available when a student is shown
 ```
@@ -943,7 +943,7 @@ Failure outputs:
   * Error: A lesson is not yet selected. Select a lesson using `show INDEX` first.
 ```
 No lesson is shown
-LinkTo command usage: linkTo [STUDENT_NAME]
+LinkTo command usage: linkTo STUDENT_NAME
 Example: linkTo Alice Pauline
 Note: This command is only available when a lesson is shown
 ```
