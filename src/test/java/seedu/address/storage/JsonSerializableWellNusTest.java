@@ -21,9 +21,13 @@ public class JsonSerializableWellNusTest {
     private static final Path DUPLICATE_STUDENT_FILE = TEST_DATA_FOLDER.resolve("duplicateStudentWellNus.json");
     private static final Path INVALID_APPOINTMENT_FILE = TEST_DATA_FOLDER.resolve("invalidAppointmentWellNus.json");
     private static final Path DUPLICATE_APPOINTMENT_FILE = TEST_DATA_FOLDER.resolve("duplicateAppointmentWellNus.json");
+    private static final Path APPOINTMENT_OVERLAP_FILE = TEST_DATA_FOLDER
+            .resolve("overlapAppointmentWellNus.json");
     private static final Path APPOINTMENT_STUDENT_NOT_FOUND_FILE = TEST_DATA_FOLDER
             .resolve("appointmentStudentNotFoundWellNus.json");
 
+
+    // EP: Valid file
     @Test
     public void toModelType_typicalWellNusFile_success() throws Exception {
         JsonSerializableWellNus dataFromFile = JsonUtil.readJsonFile(TYPICAL_WELLNUS_FILE,
@@ -33,6 +37,7 @@ public class JsonSerializableWellNusTest {
         assertEquals(wellNusFromFile, typicalStudentsWellNus);
     }
 
+    // EP: Invalid student in json file
     @Test
     public void toModelType_invalidStudentWellNusFile_throwsIllegalValueException() throws Exception {
         JsonSerializableWellNus dataFromFile = JsonUtil.readJsonFile(INVALID_STUDENT_FILE,
@@ -40,6 +45,7 @@ public class JsonSerializableWellNusTest {
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);
     }
 
+    // EP: Duplicate student in json file
     @Test
     public void toModelType_duplicateStudents_throwsIllegalValueException() throws Exception {
         JsonSerializableWellNus dataFromFile = JsonUtil.readJsonFile(DUPLICATE_STUDENT_FILE,
@@ -48,6 +54,7 @@ public class JsonSerializableWellNusTest {
                 dataFromFile::toModelType);
     }
 
+    // EP: Invalid appointments in json file
     @Test
     public void toModelType_invalidAppointments_throwsIllegalValueException() throws Exception {
         JsonSerializableWellNus dataFromFile = JsonUtil.readJsonFile(INVALID_APPOINTMENT_FILE,
@@ -55,6 +62,7 @@ public class JsonSerializableWellNusTest {
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);
     }
 
+    // EP: Duplicate appointments in json file
     @Test
     public void toModelType_duplicateAppointments_throwsIllegalValueException() throws Exception {
         JsonSerializableWellNus dataFromFile = JsonUtil.readJsonFile(DUPLICATE_APPOINTMENT_FILE,
@@ -63,6 +71,16 @@ public class JsonSerializableWellNusTest {
                 dataFromFile::toModelType);
     }
 
+    // EP: Overlapping appointments in json file
+    @Test
+    public void toModelType_overlappingAppointments_throwsIllegalValueException() throws Exception {
+        JsonSerializableWellNus dataFromFile = JsonUtil.readJsonFile(APPOINTMENT_OVERLAP_FILE,
+                JsonSerializableWellNus.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializableWellNus.MESSAGE_OVERLAPPING_APPOINTMENT,
+                dataFromFile::toModelType);
+    }
+
+    // Case where appointment in storage does not correspond to a student in the json file
     @Test
     public void toModelType_appointmentStudentNotFound_throwsIllegalValueException() throws Exception {
         JsonSerializableWellNus dataFromFile = JsonUtil.readJsonFile(APPOINTMENT_STUDENT_NOT_FOUND_FILE,
