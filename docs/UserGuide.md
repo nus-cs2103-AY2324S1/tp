@@ -203,7 +203,6 @@ Format: `add_person n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [
 
 - `add_person n/Jonathan`: Adds a person with name `Jonathan`.
 - `add_person n/Betsy Crowe e/betsycrowe@example.com a/Computing Drive p/12345678`: Adds a person with name `Betsy Crowe`, with email `betsycrowe@example.com`, with address `Computing Drive` and phone `12345678`.
-- `add_person n/John Doe p/98765432 b/2023-09-30 g/friend g/partner`: Adds a person with name `John Doe`, with phone `98765432`, with birthday `2023-09-30` and with groups `friend` and `partner`.
 
 <div markdown="block" class="alert alert-info">
 
@@ -250,7 +249,6 @@ Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BI
 **Below are some examples on how to use the `edit_person` command:**
 
 *  `edit_person 1 p/91234567 e/johndoe@example.com`: Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit_person 2 n/Betsy Crower g/CS2103T`: Edits the name of the 2nd person to be `Betsy Crower` and assigns this person to the group `CS2103T`. Any events that Betsy Crower is assigned to is also updated with this new name.
 *  `edit_person 3 n/Betsy Crower b/2023-09-29`: Edits the name of the 3rd person to be `Betsy Crower` and changes the birthday to 29th Sep 2023. Any events that Betsy Crower is assigned to is also updated with this new name.
 
 <div markdown="block" class="alert alert-info">
@@ -266,7 +264,13 @@ Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BI
 
 </div>
 
+
+**Expected output when the command succeeds:**
+* Input: `edit_person 1 n/Alexa Yeoh` changes the name of the 1st person to be `Alexa Yeoh`, leaving the rest of the fields unchanged.
+  ![Editperson](images/Editperson.png)
+
 <div style="page-break-after: always;"></div>
+
 
 <div markdown="block" class="alert alert-warning">
 
@@ -281,9 +285,6 @@ Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BI
 
 </div>
 
-**Expected output when the command succeeds:**
-* Input: `edit_person 1 n/Alexa Yeoh` changes the name of the 1st person to be `Alexa Yeoh`, leaving the rest of the fields unchanged.
-![Editperson](images/Editperson.png)
 
 [Scroll back to Table of Contents](#table-of-contents)
 
@@ -352,20 +353,25 @@ Format: `find_person KEYWORD [MORE_KEYWORDS]`
 
 </div>
 
-<div style="page-break-after: always;"></div>
-
-<div markdown="block" class="alert alert-warning">
-
-**:exclamation: Disclaimer when using the `find_person` command:**<br>
-
-* FumbleLog will return an **empty person list** when there are no keyword matches. **Your data will not be deleted.**
-</div>
 
 **Expected output when the command succeeds:**
 
 Input: `find_person Alexa` displays all contacts with the name `Alexa` in the contact list.
 
 ![result for 'find_person alex david'](images/findFriendsResult.png)
+
+
+<div style="page-break-after: always;"></div>
+
+
+<div markdown="block" class="alert alert-warning">
+
+**:exclamation: Disclaimer when using the `find_person` command:**<br>
+
+* FumbleLog will return an **empty person list** when there are no keyword matches. **Your data will not be deleted.**
+
+</div>
+
 
 [Scroll back to Table of Contents](#table-of-contents)
 
@@ -415,8 +421,8 @@ Format: `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAM
 **Below are some examples on how to use `add_event` command:**
 
 * `add_event m/FumbleLog presentation d/2023-10-30`: Adds an event with name `FumbleLog presentation` and with date `2023-10-30`.
-* `add_event m/FumbleLog meeting d/2023-10-30 g/Team2`: Adds an event with name `FumbleLog meeting`, with date `2023-10-30`, and assigns contact in group `Team2` to the event.
 * `add_event m/CS2101 OP2 d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`: Adds an event with name `CS2101 OP2`, with date `2023-10-05`, with start time `1500`, with end time `1700`, assigns contact with name `Ken` and groups `CS2103T`, `CS2101` to the event.
+
 
 <div markdown="block" class="alert alert-info">
 
@@ -427,7 +433,6 @@ Format: `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAM
 - The provided values for `DATE`, `START_TIME` and `END_TIME` must represent future date and time; past values are not allowed.
 - The given `START_TIME` must be before the given `END_TIME`.
 - If the meeting is added successfully, it will automatically be sorted by date and time with the earliest meeting at the top of the list.
-- If the given `START_TIME` and `END_TIME` are not given, the default values are `0000` and `2359` respectively.
 - Note that if a person appears under multiple groups, e.g `Alvin` is in groups `classmates` and `friends`, the name `Alvin` will appear under both groups when displayed in the events list. This is an intended behavior for you to see everyone in the groups that are assigned to the event.<br>
 This is illustrated as follows:
   ![Person appearing multiple times](images/DuplicatePersonInDifferentGroups.png)
@@ -435,8 +440,9 @@ This is illustrated as follows:
 </div>
 <div style="page-break-after: always;"></div>
 
+
 **This should be the expected output when the command succeeds:**
-Input: `add_event m/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`
+Input: `add_event m/CS2103T meeting d/2023-10-27 s/1400 e/1600`
 
 ![EventAdd](images/Eventadd.png)
 
@@ -469,10 +475,7 @@ Format: `edit_event EVENT_INDEX [m/EVENT_NAME] [d/DATE] [s/START_TIME] [e/END_TI
 
 * `edit_event 1 m/FumbleLog meeting`: Edits the name of event at index 1 to `FumbleLog meeting`.
 * `edit_event 1 s/1500 e/1700`: Edits the start and end time to `1500` and `1700` respectively. If the event initially does not have a start and end time, the respective times will be added to the event.
-* `edit_event 1 g/CS2103T ug/CS2101`: Assigns group `CS2103T` to the event and unassigns group `CS2101`.
 * `edit_event 1 u/Ken`: Unassigns the person `Ken` from the event.
-
-
 
 <div markdown="block" class="alert alert-info">
 
@@ -487,7 +490,15 @@ This is illustrated as follows:
 ![Person appearing multiple times](images/DuplicatePersonInDifferentGroups.png)
 </div>
 
+
+**This should be the expected output when the command succeeds:**
+Input: `edit_event 1 m/tP week 3 meeting d/2023-10-30`
+
+![Eventedit](images/Eventedit.png)
+
+
 <div style="page-break-after: always;"></div>
+
 
 <div markdown="block" class="alert alert-warning">
 
@@ -500,11 +511,6 @@ This is illustrated as follows:
 - To see `TP sprint` in the event list again, you can use the [list_events](#listing-all-events-listevents) command to bring back the whole list of events.
 - In contrast with the above scenario, using an [add_event](#adding-an-event--addevent) command will automatically bring back the whole list of events, to show you that your new event has been added to FumbleLog.
 </div>
-
-**This should be the expected output when the command succeeds:**
-Input: `edit_event 1 m/tP week 3 meeting d/2023-10-05 s/1500 e/1700`
-
-![Eventedit](images/Eventedit.png)
 
 [Scroll back to Table of Contents](#table-of-contents)
 
@@ -758,10 +764,6 @@ FumbleLog data are saved automatically as a JSON file `[JAR file location]/data/
 If your changes to the data file makes its format invalid, FumbleLog will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 [Scroll back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -806,37 +808,37 @@ The domain name must:
 
 ### Commands for Persons
 
-| Action            | Format, Examples                                                                                                                                                                                                    |
-|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Person**    | `add_person n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [r/REMARK] [g/GROUP]…​` <br> e.g., `add_person n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/friend g/colleague` |
-| **Edit Person**   | `edit_person PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/REMARK] [g/GROUP]…​`<br> e.g.,`edit_person 2 n/James Lee e/jameslee@example.com`                                                       |
-| **Delete Person** | `delete_person PERSON_INDEX`<br> e.g., `delete_person 3`                                                                                                                                                            |
-| **Find Person**   | `find_person KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_person James Jake`                                                                                                                                            |
-| **List Persons**  | `list_persons`                                                                                                                                                                                                      |
+| Action            | Format                                                                                            | Examples                                                                                                  |
+|-------------------|---------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| **Add Person**    | `add_person n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [r/REMARK] [g/GROUP]…​`    | `add_person n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/friend g/colleague` |
+| **Edit Person**   | `edit_person PERSON_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/REMARK] [g/GROUP]…​` | `edit_person 2 n/James Lee e/jameslee@example.com`                                                        |
+| **Delete Person** | `delete_person PERSON_INDEX`                                                                      | `delete_person 3`                                                                                         |
+| **Find Person**   | `find_person KEYWORD [MORE_KEYWORDS]`                                                             | `find_person James Jake`                                                                                  |
+| **List Persons**  | `list_persons`                                                                                    |                                                                                                           |
 
 <div style="page-break-after: always;"></div>
 
 ### Commands for Events
 
-| Action           | Format, Examples                                                                                                                                                                                                                           |
-|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Event**    | `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]…​ [g/GROUP]…​`<br> e.g., `add_event m/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`                                                    |
-| **Edit Event**   | `edit_event EVENT_INDEX [m/EVENT_NAME] [d/DATE] [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]…​ [u/PERSON_NAME]…​ [g/GROUP]…​ [ug/GROUP]…​`<br> e.g., `edit_event 1 m/tP week 3 meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101` |
-| **Delete Event** | `delete_event EVENT_INDEX`<br> e.g., `delete_event 1`                                                                                                                                                                                      |
-| **Find Event**   | `find_event KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_event meeting`                                                                                                                                                                        |
-| **List Events**  | `list_events`                                                                                                                                                                                                                              |
+| Action           | Format                                                                                                                                    | Examples                                                                               |
+|------------------|-------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| **Add Event**    | `add_event m/EVENT_NAME d/DATE [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]…​ [g/GROUP]…​`                                                 | `add_event m/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101`    |
+| **Edit Event**   | `edit_event EVENT_INDEX [m/EVENT_NAME] [d/DATE] [s/START_TIME] [e/END_TIME] [n/PERSON_NAME]…​ [u/PERSON_NAME]…​ [g/GROUP]…​ [ug/GROUP]…​` | `edit_event 1 m/tP week 3 meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T g/CS2101` |
+| **Delete Event** | `delete_event EVENT_INDEX`                                                                                                                | `delete_event 1`                                                                       |
+| **Find Event**   | `find_event KEYWORD [MORE_KEYWORDS]`                                                                                                      | `find_event meeting`                                                                   |
+| **List Events**  | `list_events`                                                                                                                             |                                                                                        |
 
 <div style="page-break-after: always;"></div>
 
 ### General commands
 
-| Action       | Format, Examples                                             |
-|--------------|--------------------------------------------------------------|
-| **Remind**   | `remind [NUM_OF_DAYS]` <br> e.g.,`remind` or `remind 4`      |
-| **List All** | `list_all`                                                   |
-| **Find All** | `find_all KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_all John` |
-| **Clear**    | `clear`                                                      |
-| **Exit**     | `exit`                                                       |
-| **Help**     | `help`                                                       |
+| Action       | Format                             | Examples               |
+|--------------|------------------------------------|------------------------|
+| **Remind**   | `remind [NUM_OF_DAYS]`             | `remind` or `remind 4` |
+| **List All** | `list_all`                         |                        |
+| **Find All** | `find_all KEYWORD [MORE_KEYWORDS]` | `find_all John`        |
+| **Clear**    | `clear`                            |                        |
+| **Exit**     | `exit`                             |                        |
+| **Help**     | `help`                             |                        |
 
 [Scroll back to Table of Contents](#table-of-contents)

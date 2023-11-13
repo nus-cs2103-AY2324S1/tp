@@ -353,8 +353,8 @@ start time, end time, persons involved and groups involved.
 
 - Events stores a list of `Name` and a list of `Group` that are involved in the event. 
 This is to facilitate the ability to track persons and groups involved in the event.
-The `Name` class is used to represent the name of the person involved in the event, as names are unique in the `UniquePersonList
-- We have also made `Event` an abstract class so as to increase extensibility of FumbleLog in the future. For now, when an event is created (i.e. using the AddEventCommand), it defaults to adding a `Meeting` into FumbleLog's `Event` List. Future support for other kinds of `Event` can be possible (i.e. Recurring event) by directly inheriting from `Event`.
+The `Name` class is used to represent the name of the person involved in the event, as names are unique in the `UniquePersonList`.
+- We have also made `Event` an abstract class so as to increase extensibility of FumbleLog in the future. For now, when an event is created (i.e. using the `AddEventCommand`), it defaults to adding a `Meeting` into FumbleLog's `Event` List. Future support for other kinds of `Event` can be possible (i.e. Recurring event) by directly inheriting from `Event`.
 - To track events, we implement an `EventList` to store all events to be displayed in FumbleLog.
 
 [Scroll back to Table of Contents](#table-of-contents)
@@ -450,6 +450,7 @@ As a result, the `ObservableList<Person>` and/or `ObservableList<Event>` are upd
 The `UI` component is notified of these new changes to the lists and updates the UI accordingly, which will show the updated lists.
 
 #### Feature details
+
 1. The `find_XYZ` commands can accept one or more parameter `keyword` for searching persons and/or events.
 2. A `PersonNameOrGroupContainsKeywordsPredicate` and/or `EventNameOrGroupContainsKeywordsPredicate` will be created and a `FindXYZ` command will be created with the predicates.
 3. The `FindXYZ` command will then be executed and the `UI` will be updated with the filtered lists of persons and/or events.
@@ -544,11 +545,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete_person 5` command to delete the 5th person in the address book. The `delete_person` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete_person 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add_person n/David …​` to add a new person. The `add_person` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -579,11 +580,11 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list_all`. Commands that do not modify the address book, such as `list_all`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add_person n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -601,16 +602,10 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete_person`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
 [Scroll back to Table of Contents](#table-of-contents)
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
