@@ -178,7 +178,7 @@ Unsuccessful output:
 
 ### Finding a [contact](#contact): `find`
 
-Finds a contact by their name by matching keywords with the contact's name. Only word-word matches will be detected, and partial words match will not be detected. For example, `Ale` will not match `Alex` but will match `Alex Wong`. Keywords are **case insensitive**.
+Finds a contact by their name by matching keywords with the contact's name. Only word-word matches will be detected, and partial words match will not be detected. For example, `Ale` will not match `Alex`, but `Alex` will match `Alex Wong`. Keywords are **case insensitive**.
 
 Format: `find KEYWORD [OTHER_KEYWORDS...]`
 
