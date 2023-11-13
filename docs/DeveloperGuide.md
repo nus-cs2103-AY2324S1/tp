@@ -1199,13 +1199,27 @@ Testers are expected to do more *exploratory* testing.
    1. Test case: `tag s/STUDENT_NUMBER t/`<br>
       Expected: The student with STUDENT_NUMBER will have all tags removed.
       <br><br>
-5. Attempt to tag a student not in the Class Manager.
+5. Attempt to tag a student not in Class Manager.
 
    1. Test case: `tag` command with a student number that is not in the Class Manager.
       Expected: Error message is shown in the display result.
       <br><br>
 
 ### Mark a student as present
+
+1. Mark a student as present in Class Manager
+
+   1. Test case: `present s/STUDENT_NUMBER tut/1`
+      Expected:The student with STUDENT_NUMBER is marked as present for the first tutorial.
+      <br><br>
+
+### Mark all displayed students as present
+
+1. Mark all displayed students as present in Class Manager
+
+   1. Test case: `present tut/1`
+      Expected:All displayed students are marked as present for the first tutorial.
+      <br><br>
 
 ### View a student
 
