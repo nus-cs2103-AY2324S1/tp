@@ -32,6 +32,7 @@ Given below are my contributions to the project.
       * Added comprehensive Testing for Undo and Redo Command Classes
       ([#224](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/224))
    
+
    4. **Highlights:** Modified execution of the different Commands to commit 
    to the AddressBook history. This way, the Undo and Redo functions
    are implemented to inherently modify the AddressBook state itself,
@@ -44,6 +45,7 @@ Given below are my contributions to the project.
    which have to be stored in the records of the patients.
    * **Highlight:** Used LocalDateTime to accept valid birthdates of patients for the logging of 
     patients into the AddressBook. Valid user inputs would be automatically formatted into valid dates.
+
 
 
 3. **New Feature**: Added AssignedDepartment into Storage
@@ -70,6 +72,7 @@ Given below are my contributions to the project.
 1. **Contributions to the UG**: ([#247](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/247))
    + Added Documentation for the features `edit`, `delete`, `undo` and `redo`
    + Proofread and formatted sections on `Saving the program`, `Editing the data file`, and `Glossary`
+
 
 2. **Contributions to the DG**: ([#250](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/250))
   + Added implementation details of `edit` and `delete`
