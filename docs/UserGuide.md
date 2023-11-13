@@ -370,7 +370,9 @@ Format: `add`
 
 Here is the profile page you will see after entering <code>add</code>: 
 
-![Profile](images/screenshots/ProfilePage.png)
+<div style="text-align: center">
+<img src="images/screenshots/ProfilePage.png" height="480" class="center"/>
+</div>
 
 To learn more about the profile page, please refer to the section [User Interface: The Profile Page](#the-profile-page).  
 
