@@ -39,6 +39,7 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Updated Glossary. [\#58](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/58)
     * Added implementation details of the `delete` feature. [\#102](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/102)
+    * Update UML diagrams to match project architecture and workflow. [\#245](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/245)
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#62](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/62), [\#105](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/105), [\#109](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/109), [\#117](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/117), [\#198](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/198), [\#209](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/209), [\#211](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/211), [\#217](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/217)
