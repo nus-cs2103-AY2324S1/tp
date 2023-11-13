@@ -12,7 +12,7 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=shuyangk&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos)
 
 
-* **New Feature**: Edit Band Information.
+* **New Feature**: Edit Band Information [\#135](https://github.com/AY2324S1-CS2103T-W11-3/tp/pull/135).
   * What it does: Allows users to edit information about a specific band, namely the name and genres of the band.
   * Justification: It is important to be able to edit information that may be outdated in order to update it when changes occur.
   * Highlights: This enhancement involved changing the structure of the Band class and the Commands associated with it to improve functionality.
