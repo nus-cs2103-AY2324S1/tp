@@ -123,11 +123,12 @@ Throughout our user guide, you will see the following annotations:
 
 ![understandGUI](images/understandGUI.png)
 
-1. Menu Bar: Quick access to File and Help features.
-2. Command Line: Type your commands here.
-3. Command Result: View command results or error messages through here.
-4. Teaching Assistant List: View and manage teaching assistants here.
-5. Data Storage: Displays the path where your data is stored.
+Here are the various components of TAManager's GUI:
+1. Menu Bar: Access the File and Help features.
+2. Command Line: Enter commands to execute.
+3. Command Result: View the results or error messages of executed commands.
+4. Teaching Assistant List: View and manage teaching assistants.
+5. Data Storage: View the path where your data is stored.
 
 <span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
 
