@@ -557,7 +557,7 @@ Format: `deleteTask INDEX`
 <box type="warning" seamless>
 
 **Caution:**
-The deleteTask command can only be used in the 📅 ___SCHEDULE list___ and while a lesson is shown.
+The `deleteTask` command can only be used in the 📅 ___SCHEDULE list___ and while a lesson is shown.
 </box>
 
 Example usages:
@@ -657,7 +657,7 @@ Format: `editLesson [INDEX] [-name NAME] [-start TIME] [-end TIME] [-day DATE] [
 * The name of the lesson after editing cannot be the same (case-insensitive) as other existing lessons in the schedule list.
 * The start time of the lesson after editing cannot be after the end time of the lesson, if the end time is specified, and vice versa.
 * The lesson cannot clash (same day, start and end all specified and are overlapping) in time with other lessons  in the schedule list.
-* Please note that unlike the `addLesson` command, the `editLesson` command's "-subject" flag only accepts one subject, not multiple subjects (parameter is SUBJECT, not SUBJECTS).
+* Please note that unlike the `addLesson` command, the `editLesson` command's "-subject" flag only accepts one subject, not multiple subjects (parameter is `SUBJECT`, not `SUBJECTS`).
 * Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
@@ -728,7 +728,7 @@ Format: `find SEARCH_STRING`
 <box type="warning" seamless>
 
 **Caution:**
-* Find tasks by name/description is disabled.
+* Finding tasks by name/description is disabled.
 * Tasks can be found based on the lesson (find lesson by name) and `show` lesson to see list of tasks of the lesson.
   </box>
 
