@@ -1,0 +1,33 @@
+@startuml
+!include ../style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+package Parser as ParserPackage {
+Class "<<interface>>\nParser" as Parser
+Class EditMeetingCommandParser
+}
+
+package Command as CommandPackage {
+Class EditMeetingCommand
+Class EditMeetingDescriptor
+Class "{abstract}\nCommand" as Command
+}
+
+Class Index
+Class AddressBookParser
+Class LogicManager
+
+AddressBookParser .down.> EditMeetingCommandParser : creates >
+EditMeetingCommandParser ..> EditMeetingCommand : creates >
+EditMeetingCommand -down->"1" EditMeetingDescriptor
+EditMeetingCommand -down->"1" Index
+EditMeetingCommand -left-|> Command
+EditMeetingCommandParser .down.|> Parser
+EditMeetingCommandParser .left.> EditMeetingDescriptor : creates >
+EditMeetingCommandParser .down.> Index : creates >
+LogicManager -right->"1" AddressBookParser
+LogicManager .down.> EditMeetingCommand : executes >
+
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+!include ../style.puml
+skinparam ArrowFontStyle plain
+
+title Create ViewContactCommand
+
+Participant ":LogicManager" as logic LOGIC_COLOR
+Participant ":AddressBookParser" as abp LOGIC_COLOR
+Participant ":ViewContactCommandParser" as vccp LOGIC_COLOR
+Participant "command:ViewContactCommand" as ec LOGIC_COLOR
+
+
+activate logic
+logic -> abp ++: parseCommand(commandText)
+create vccp
+abp -> vccp ++: parse(arguments)
+create ec
+vccp -> ec ++: ViewContactCommand(targetIndex)
+ec --> vccp --: command
+vccp --> abp --: command
+abp --> logic --: command
+
+@enduml

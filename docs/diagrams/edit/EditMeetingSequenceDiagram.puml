@@ -1,0 +1,36 @@
+@startuml
+!include ../style.puml
+skinparam ArrowFontStyle plain
+
+title Execute EditMeetingCommand
+
+box Logic LOGIC_COLOR_T1
+Participant ":LogicManager" as logic LOGIC_COLOR
+Participant "command:EditMeetingCommand" as emc LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+Participant ":ModelManager" as model MODEL_COLOR
+Participant "editedMeeting:Meeting" as meet MODEL_COLOR
+end box
+
+[->logic : execute
+activate logic
+ref over logic, emc: Create EditMeetingCommand
+logic -> emc ++: execute(model)
+emc -> model ++: getFilteredMeetingList
+model --> emc --:
+emc -> emc ++:  createEditedMeeting
+create meet
+emc -> meet ++: Meeting()
+meet --> emc --:
+emc --> emc --:
+emc -> model ++: setMeeting
+model --> emc --:
+emc -> model ++:updateFilteredMeetingList
+model --> emc --:
+emc --> logic --: CommandResult
+[<--logic
+deactivate logic
+
+@enduml

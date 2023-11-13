@@ -1,0 +1,26 @@
+@startuml
+!include ../style.puml
+skinparam ArrowFontStyle plain
+
+title Store Viewed Items to Model
+
+box Logic LOGIC_COLOR_T1
+Participant ":LogicManager" as logic LOGIC_COLOR
+Participant "command:ViewContactCommand" as vcc LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+Participant ":ModelManager" as model MODEL_COLOR
+end box
+
+[->logic : execute
+activate logic
+ref over logic, vcc: Create ViewContactCommand
+logic -> vcc ++: execute(model)
+vcc -> model ++: setViewedPersonIndex(targetIndex)
+model --> vcc --:
+vcc --> logic --: CommandResult
+[<--logic
+deactivate logic
+
+@enduml

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <GridPane VBox.vgrow="ALWAYS">
+    <rowConstraints>
+      <RowConstraints percentHeight="50" />
+      <RowConstraints percentHeight="50" />
+    </rowConstraints>
+
+    <children>
+      <ScrollPane fx:id="personScroll" hbarPolicy="NEVER" style="-fx-background: transparent; -fx-background-color: transparent; -fx-border-width: 1px; -fx-padding: 0 5 0 0;" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+        <VBox GridPane.hgrow="ALWAYS">
+          <FlowPane fx:id="personTags" />
+          <Label fx:id="personDisplay" maxHeight="-Infinity" prefWidth="${personScroll.width}" style="-fx-margin: 0 30 0 0" styleClass="result-display" wrapText="true" VBox.vgrow="ALWAYS" />
+        </VBox>
+      </ScrollPane>
+
+      <ScrollPane fx:id="meetingScroll" hbarPolicy="NEVER" style="-fx-background: transparent; -fx-background-color: transparent; -fx-border-width: 1px; -fx-padding: 0 5 0 0;" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+        <VBox GridPane.hgrow="ALWAYS">
+          <FlowPane fx:id="meetingTags" />
+          <Label fx:id="meetingDisplay" prefWidth="${meetingScroll.width}" styleClass="result-display" wrapText="true" VBox.vgrow="ALWAYS" />
+        </VBox>
+      </ScrollPane>
+    </children>
+      <columnConstraints>
+         <ColumnConstraints />
+      </columnConstraints>
+  </GridPane>
+</VBox>

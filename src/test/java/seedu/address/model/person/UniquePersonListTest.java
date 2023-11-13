@@ -3,7 +3,6 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -25,7 +24,12 @@ public class UniquePersonListTest {
 
     @Test
     public void contains_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePersonList.contains(null));
+        assertThrows(NullPointerException.class, () -> uniquePersonList.contains((Person) null));
+    }
+
+    @Test
+    public void contains_nullString_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniquePersonList.contains((String) null));
     }
 
     @Test
@@ -42,7 +46,7 @@ public class UniquePersonListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniquePersonList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniquePersonList.contains(editedAlice));
     }
@@ -56,6 +60,38 @@ public class UniquePersonListTest {
     public void add_duplicatePerson_throwsDuplicatePersonException() {
         uniquePersonList.add(ALICE);
         assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(ALICE));
+    }
+
+    @Test
+    public void add_duplicateName_throwsDuplicatePersonException() {
+        uniquePersonList.add(ALICE);
+        Person personWithSameName = new PersonBuilder(BOB).withName(ALICE.getName().fullName).build();
+        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(personWithSameName));
+    }
+
+    @Test
+    public void add_duplicateEmail_throwsDuplicatePersonException() {
+        uniquePersonList.add(ALICE);
+        Person personWithSameEmail = new PersonBuilder(BOB).withEmail(ALICE.getEmail().value).build();
+        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(personWithSameEmail));
+    }
+
+    @Test
+    public void add_duplicatePhone_throwsDuplicatePersonException() {
+        uniquePersonList.add(ALICE);
+        Person personWithSamePhone = new PersonBuilder(BOB).withPhone(ALICE.getPhone().value).build();
+        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(personWithSamePhone));
+    }
+
+    @Test
+    public void getPerson_isInList_success() {
+        uniquePersonList.add(ALICE);
+        assertEquals(ALICE, uniquePersonList.getPerson(ALICE.getName().fullName));
+    }
+
+    @Test
+    public void getPerson_notFound_throwsPersonNotFoundException() {
+        assertThrows(PersonNotFoundException.class, () -> uniquePersonList.getPerson(ALICE.getName().fullName));
     }
 
     @Test
@@ -85,7 +121,7 @@ public class UniquePersonListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniquePersonList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         uniquePersonList.setPerson(ALICE, editedAlice);
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
@@ -165,7 +201,7 @@ public class UniquePersonListTest {
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
-            -> uniquePersonList.asUnmodifiableObservableList().remove(0));
+                -> uniquePersonList.asUnmodifiableObservableList().remove(0));
     }
 
     @Test

@@ -14,4 +14,13 @@ public class ParseException extends IllegalValueException {
     public ParseException(String message, Throwable cause) {
         super(message, cause);
     }
+
+    @Override
+    public String getMessage() {
+        if (super.getCause() != null) {
+            return super.getCause().getMessage() + "\n" + super.getMessage();
+        } else {
+            return super.getMessage();
+        }
+    }
 }

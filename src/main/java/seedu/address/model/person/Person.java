@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -20,21 +21,26 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final LastContactedTime lastContactedTime;
 
     // Data fields
-    private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Remark remark;
+    private final Status status;
+    private final Set<Tag> tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, LocalDateTime time, Status status, Remark remark,
+            Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, time, status, remark, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
+        this.lastContactedTime = new LastContactedTime(time);
+        this.status = status;
+        this.remark = remark;
+        this.tags = new HashSet<>(tags);
     }
 
     public Name getName() {
@@ -49,8 +55,20 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public LocalDateTime getLastContactedTime() {
+        return lastContactedTime.getTime();
+    }
+
+    public String getLastContactedDisplay() {
+        return lastContactedTime.getDisplay();
+    }
+
+    public Remark getRemark() {
+        return remark;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 
     /**
@@ -75,6 +93,29 @@ public class Person {
     }
 
     /**
+     * Returns true if both persons have the same email, name or phone.
+     */
+    public boolean isDuplicate(Person otherPerson) {
+        if (otherPerson == null) {
+            return false;
+        }
+
+        if (otherPerson.getName().equals(getName())) {
+            return true;
+        }
+
+        if (otherPerson.getPhone().equals(getPhone())) {
+            return true;
+        }
+
+        if (otherPerson.getEmail().equals(getEmail())) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
@@ -93,14 +134,16 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
+                && lastContactedTime.equals(otherPerson.lastContactedTime)
+                && status.equals(otherPerson.status)
+                && remark.equals(otherPerson.remark)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, lastContactedTime, status, remark, tags);
     }
 
     @Override
@@ -109,9 +152,18 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
+                .add("last contacted time", lastContactedTime.getTime())
+                .add("status", status)
+                .add("remark", remark)
                 .add("tags", tags)
                 .toString();
     }
 
+    /**
+     * Returns detailed information of Person for viewc command.
+     */
+    public String toDisplayString() {
+        return String.format("Name: %s\nPhone: %s\nEmail: %s\nLast Meeting: %s\nStatus: %s\nRemark: %s",
+                name, phone, email, lastContactedTime.getDisplay(), status, remark);
+    }
 }

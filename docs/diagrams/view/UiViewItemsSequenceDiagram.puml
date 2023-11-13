@@ -1,0 +1,32 @@
+@startuml
+!include ../style.puml
+skinparam ArrowFontStyle plain
+
+title Forward Viewed Person & Meeting to Ui
+
+box UI UI_COLOR_T1
+Participant "UiPart:MainWindow" as window UI_COLOR
+Participant ":InfoDisplayPanel" as info UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+Participant ":LogicManager" as logic LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+Participant ":ModelManager" as model MODEL_COLOR
+end box
+
+[-> window : executeCommand
+activate window
+window -> logic ++: execute(commandText)
+ref over logic, model : Store viewed Items to Model
+logic --> window --:
+window -> logic ++: getViewedItems()
+logic -> model ++: getViewedItems()
+model --> logic --: Pair<Person, Meeting>
+logic --> window --: Pair<Person, Meeting>
+window -> info ++: setViewedModel(pair)
+info --> window --:
+
+@enduml

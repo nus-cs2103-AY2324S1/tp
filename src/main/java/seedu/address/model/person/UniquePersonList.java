@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -24,16 +25,32 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  */
 public class UniquePersonList implements Iterable<Person> {
 
+    private final Comparator<Person> sortByLastContactComparator = Comparator.comparing(Person::getLastContactedTime);
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Person> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
+    private final ObservableList<Person> internalUnmodifiableList;
+
+    /**
+     * Creates a UniquePersonList object that is sorted by last contact time.
+     */
+    public UniquePersonList() {
+        FXCollections.sort(internalList, sortByLastContactComparator);
+        internalUnmodifiableList = FXCollections.unmodifiableObservableList(internalList);
+    }
 
     /**
      * Returns true if the list contains an equivalent person as the given argument.
      */
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return internalList.stream().anyMatch(toCheck::isDuplicate);
+    }
+
+    /**
+     * Returns true if the list contains a person with the same name as the given argument.
+     */
+    public boolean contains(String name) {
+        requireAllNonNull(name);
+        return internalList.stream().anyMatch(person -> person.getName().equals(new Name(name)));
     }
 
     /**
@@ -46,6 +63,22 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+        FXCollections.sort(internalList, sortByLastContactComparator);
+    }
+
+    /**
+     * Returns the person with the given name
+     * or throws {@code IndexOutOfBoundsException} if it does not exist.
+     */
+    public Person getPerson(String fullName) {
+        Name name = new Name(fullName);
+        List<Person> filteredList = internalList.filtered(person -> person.getName().equals(name));
+
+        if (filteredList.size() == 0) {
+            throw new PersonNotFoundException();
+        }
+
+        return filteredList.get(0);
     }
 
     /**
@@ -61,11 +94,12 @@ public class UniquePersonList implements Iterable<Person> {
             throw new PersonNotFoundException();
         }
 
-        if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
+        if (!target.isDuplicate(editedPerson) && contains(editedPerson)) {
             throw new DuplicatePersonException();
         }
 
         internalList.set(index, editedPerson);
+        FXCollections.sort(internalList, sortByLastContactComparator);
     }
 
     /**
@@ -77,11 +111,13 @@ public class UniquePersonList implements Iterable<Person> {
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
         }
+        FXCollections.sort(internalList, sortByLastContactComparator);
     }
 
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        FXCollections.sort(internalList, sortByLastContactComparator);
     }
 
     /**
@@ -95,6 +131,7 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+        FXCollections.sort(internalList, sortByLastContactComparator);
     }
 
     /**
