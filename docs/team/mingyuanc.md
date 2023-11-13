@@ -39,7 +39,7 @@ Given below are my contributions to the project.
         * Adds another layer of safety by checking the validity and presence of the directory before performing modification.
     * Highlights:
         * Deep-understanding of what is required by `Command` class was required when designing this class.
-* **Introduced `ChildrenAndTaskListManager` Class**
+* **Introduced `ChildAndTaskListManager` Class**
   * Wrapper class that manages the operations required for both TaskList and Children.
 * **Introduced `Student`, `Group`, `Root` Class**
   * Encapsulates the required information to uniquely represent the respective objects.

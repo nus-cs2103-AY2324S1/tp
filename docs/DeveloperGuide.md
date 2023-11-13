@@ -106,6 +106,8 @@ implementation of a component), as illustrated in the (partial) class diagram be
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified
@@ -472,7 +474,7 @@ The following methods of `ModelManager` and `ChildOperation<Student>` are used:
    the validity and presence of the specified group.
 2. `ChildOperation<Student>::addAllTasks` - To add the tasks to all student within a group, it also checks if it is a
    duplicate task before adding.
-3. `ChildOperation<Student>::checkIfAllChildrenHaveTask` - To check if all children within a group already has the task.
+3. `ChildOperation<Student>::doAllStudentHaveTask` - To check if all children within a group already has the task.
 
 It is important to note that for adding a task to a singular group/student, the operation class `TaskOperation` is used
 instead, a sequence diagram illustrating this can be found in the `Model` component.
@@ -493,7 +495,7 @@ Given below is an example usage scenario on how an existing user can add Deadlin
 4. This command would first
     * check if the specified path is a valid and present group path. This is done via `AbsolutePath::isGroupDirectory` method.
     * check if all students in the group already has the task. This is done
-      via `ChildOperation<Student>::checkIfAllChildrenHaveTask` method.
+      via `ChildOperation<Student>::doAllStudentHaveTask` method.
 5. If all checks out, the command would create a new `Deadline` instance and add the deadline to all student that do not
    already have the aforementioned task. This is done
    through getting a `ChildOperation<Student>` class from the `Model::groupChildOperation` method. The tasks are then
@@ -770,19 +772,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`        | New user         | see usage instructions                                                                                        | refer to instructions when I forget how to use the App                        |
 | `* * *`        | New user         | take advantage of existing Linux skills                                                                       | be more efficient in using the application                                    |
 | `* * *`        | New user         | create deadlines for student                                                                                  | keep track of when assignments are due                                        |
-| `* * *`        | New user         | create todo task for student                                                                                  | keep track of which label they are at                                         |
+| `* * *`        | New user         | create todo task for student                                                                                  | keep track of their progress                                                  |
 | `* * *`        | New user         | create deadline for a group                                                                                   | keep track of when group specific assignments are due                         |
 | `* * *`        | New user         | create todo for a group                                                                                       | keep track of the progress of each group relative to others                   |
-| `* * *`        | New user         | add time to a task                                                                                            | i can record when a task needs to be done                                     |
+| `* * *`        | New user         | add time to a task                                                                                            | I can record when a task needs to be done                                     |
 | `* * *`        | New user         | set alerts and notification                                                                                   | I can receive the notifications of the task                                   |
-| `* * *`        | New user         | add the profile picture of students                                                                           | I can better remember them                                                    |
-| `* * *`        | New user         | add the matriculation number of students                                                                      | I can update their grade based on the matriculation number                    |
+| `* * *`        | New user         | add the matriculation number of students                                                                      | I can track their tasks based on their matriculation number                   |
 | `* * *`        | New user         | create student profile                                                                                        | manage information of a specific student                                      |
-| `* * *`        | New user         | delete a student                                                                                              | remove students that I no longer need                                         |
+| `* * *`        | New user         | delete a student                                                                                              | remove students that I no longer need to keep track of                        |
+| `* * *`        | New user         | delete a group                                                                                                | remove groups that I no longer need to keep track of                          |
+| `* * *`        | New user         | delete a task                                                                                                 | remove tasks that I no longer need to keep track of                           |
 | `* * *`        | New user         | create group                                                                                                  | manage information of a specific group                                        |
 | `* * *`        | Experienced user | mark task done for every student in a group                                                                   | I do not need to mark each task manually                                      |
 | `* * *`        | Experienced user | add tasks for every student in the book                                                                       | I do not need to add tasks manually                                           |
 | `* * *`        | Experienced user | add tasks for every student in a group                                                                        | I do not need to add tasks manually                                           |
+| `* * `         | New user         | add the profile picture of students                                                                           | I can better remember them                                                    |
 | `* * `         | New user         | create tutorial slot                                                                                          | manage information fo a specific tutorial slot                                |
 | `* * `         | New user         | create deadline for a tutorial group                                                                          | keep track of when tutorial specific assignments are due                      |
 | `* * `         | New user         | create todo tasks for a tutorial group                                                                        | keep track of the progress of each tutorial group relative to others          |
@@ -1032,7 +1036,7 @@ otherwise)
 
 **Extensions**
 
-* 1a. User inputs command while not in tasklist display.
+* 1a. User inputs command while not in task list display.
 
     * 1a1. ProfBook shows an error message.
 
@@ -1101,7 +1105,7 @@ otherwise)
 **MSS**
 
 1. User requests to create a ToDo task.
-2. ProfBook creates the Task under specified path/current path.
+2. ProfBook creates the task under specified path/current path.
 
    Use case ends.
 
@@ -1142,7 +1146,7 @@ otherwise)
 **MSS**
 
 1. User requests to create a Deadline task.
-2. ProfBook creates the Task under specified path/current path.
+2. ProfBook creates the task under specified path/current path.
 
    Use case ends.
 
@@ -1195,7 +1199,7 @@ otherwise)
 
 **Extensions**
 
-* 1a. User inputs command while not in tasklist display.
+* 1a. User inputs command while not in task list display.
     * 1a1. ProfBook shows an error message.
 
       Use case resumes at step 1.
@@ -1216,7 +1220,7 @@ otherwise)
 
 **Extensions**
 
-* 1a. User inputs command while not in tasklist display.
+* 1a. User inputs command while not in task list display.
     * 1a1. ProfBook shows an error message.
 
       Use case resumes at step 1.
