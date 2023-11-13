@@ -17,7 +17,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/quzhetao01.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Storage
 
 ### Darren Tan Fanyi
 
@@ -27,7 +27,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/darrentfy.md)]
 
 * Role: Developer
-* Responsibilities:
+* Responsibilities: UI
 
 ### Eric Sim
 
@@ -37,7 +37,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/simwperic.md)]
 
 * Role: Developer
-* Responsibilities:
+* Responsibilities: Architecture
 
 ### Stephen
 
@@ -47,7 +47,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/sheeepen.md)]
 
 * Role: Developer
-* Responsibilities:
+* Responsibilities: Model
 
 ### Hannah Caroline Solomonraj
 
