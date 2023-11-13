@@ -289,7 +289,7 @@ public class AppendLogCommandTest {
 
         Person existingPerson1 = new PersonBuilder(ALICE).build();
 
-        model.addPerson(existingPerson1);
+        model.getLogBook().addPerson(existingPerson1);
 
         AppendLogCommand appendLogCommand = new AppendLogCommand();
 
@@ -313,8 +313,8 @@ public class AppendLogCommandTest {
         Person existingPerson2 = new PersonBuilder(BENSON).build();
         Person nonDuplicatePerson = new PersonBuilder(CARL).build();
 
-        model.addPerson(existingPerson1);
-        model.addPerson(existingPerson2);
+        model.getLogBook().addPerson(existingPerson1);
+        model.getLogBook().addPerson(existingPerson2);
 
         AppendLogCommand appendLogCommand = new AppendLogCommand();
 
@@ -330,6 +330,32 @@ public class AppendLogCommandTest {
         assertEquals(existingPerson1, model.getLogBook().getPersonList().get(0));
         assertEquals(existingPerson2, model.getLogBook().getPersonList().get(1));
         assertEquals(nonDuplicatePerson, model.getLogBook().getPersonList().get(2));
+    }
+
+    @Test
+    public void execute_duplicatePersonFoundButNotEquals_replaces() throws Exception {
+
+        ModelStubAppendingPersonsFound model = new ModelStubAppendingPersonsFound();
+
+        Person existingPerson1 = new PersonBuilder(ALICE).withPhone("999999").build();
+        Person existingPerson2 = new PersonBuilder(BENSON).build();
+
+        model.getLogBook().addPerson(existingPerson1);
+        model.getLogBook().addPerson(existingPerson2);
+
+        AppendLogCommand appendLogCommand = new AppendLogCommand();
+
+        CommandResult commandResult = appendLogCommand.execute(model);
+
+        assertEquals(
+                String.format(AppendLogCommand.MESSAGE_DUPLICATES,
+                        "\n  Benson Meier, ID: S1234567B"),
+                commandResult.getFeedbackToUser());
+
+
+        assertEquals(3, model.getLogBook().getPersonList().size());
+        assertEquals(ALICE, model.getLogBook().getPersonList().get(0));
+        assertEquals(existingPerson2, model.getLogBook().getPersonList().get(1));
     }
 
     @Test

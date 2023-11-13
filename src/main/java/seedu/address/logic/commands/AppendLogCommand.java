@@ -2,12 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Optional;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.LogBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-
-import java.util.Optional;
 
 /**
  * Appends the results of a FindCommand to the logbook.
@@ -53,24 +53,27 @@ public class AppendLogCommand extends UndoableCommand {
         logBookBeforeAppend = new LogBook(model.getLogBook());
         model.addToHistory(this);
 
-
         boolean hasDupes = false;
         String duplicateClause = "";
+
         for (Person person : model.getFoundPersonsList()) {
-            if (model.getLogBook().hasPerson(person)) {
-                Optional<Person> personOptional =
-                        CommandUtil.findPersonByIdentifier(person.getName(), person.getId(), model.getLoggedFilteredPersonList());
-                if (personOptional.isPresent() && personOptional.get().equals(person)) {
-                    hasDupes = true;
-                    duplicateClause += "\n  " + person.getName() + ", ID: " + person.getId();
-                    continue;
-                } else {
-                    Person existingPerson = personOptional.orElse(person);
-                    model.getLogBook().setPerson(existingPerson, person);
-                }
+            if (!model.getLogBook().hasPerson(person)) {
+                model.getLogBook().addPerson(person);
+                continue;
             }
-            model.getLogBook().addPerson(person);
+
+            Optional<Person> personOptional = CommandUtil.findPersonByIdentifier(
+                    person.getName(), person.getId(), model.getLogBook().getPersonList());
+
+            if (personOptional.isPresent() && personOptional.get().equals(person)) {
+                hasDupes = true;
+                duplicateClause += "\n  " + person.getName() + ", ID: " + person.getId();
+            } else {
+                Person existingPerson = personOptional.orElse(person);
+                model.getLogBook().setPerson(existingPerson, person);
+            }
         }
+
 
         return hasDupes
                 ? new CommandResult(String.format(MESSAGE_DUPLICATES, duplicateClause))
