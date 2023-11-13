@@ -888,18 +888,24 @@ Given below is the evidence for challenges faced and efforts required for our pr
 
 Given below are the planned enhancements for our project.
 
-1. The current `removem` command only allows the user to remove one musician from a band at a time. We plan to enhance this command to allow the user to remove multiple musicians at once just like the `addm` command.
+1. The current sample data upon initial launch of the app is not representative of the use cases of our app as no band data exists, and musicians do not have any instruments nor genres. We plan to change the sample data to be more representative, similar to the image shown in the Quick Start section of the User Guide. 
 
-2. The current `find` command only allows the user to find musicians by their name, tag, instrument, and genre. We plan to enhance this command to allow the user to find musicians by their email and phone number as well.
+2. The current `removem` command only allows the user to remove one musician from a band at a time. We plan to enhance this command to allow the user to remove multiple musicians at once just like the `addm` command.
 
-3. The current list of valid instruments and genres are not editable by the user. We plan to allow the user to add and remove valid instruments and genres from the list to give the user more freedom.
+3. The current `find` command only allows the user to find musicians by their name, tag, instrument, and genre. We plan to enhance this command to allow the user to find musicians by their email and phone number as well.
 
-4. The current sample data upon initial launch of the app is not representative of the use cases of our app as (no band data, musicians have no instruments and genres). We plan to change the sample data to be more representative and less confusing to the user.
+4. The current `findb` command is a bit confusing because its main use case is to list all members in a specific band. It has little relevance to finding bands containing a specific keyword. We plan to rename this command to `showmembers` to make it more intuitive to the user.
 
-5. The current `findb` command is a bit confusing because its main use case is to list all members in a specific band. It has little relevance to finding bands containing a specific keyword. We plan to rename this command to `showmembers` to make it more intuitive to the user.
+5. When adding multiple musicians to a band using the `addm` command, the currently displayed message does not let users know which musician(s) already exist in the band. We plan to edit this message to indicate the name(s) of the musician(s) that are already inside the band.
 
-6. The application currently allows unlimited input length for the name and tag of musicians and bands, e.g. name, email. As a result, the GUI truncates the unusually long input. We plan to limit the length of fields to 100 characters to prevent the UI from breaking.
+6. The current `help` command only includes a link to the User Guide. However, a possible use case is that a user has forgotten a command name and/or parameters. We plan to include a hyperlink to the Command Summary so that users can quickly refer to a specific command.
 
-7. The current design of UI is not intuitive enough for the user. There are times when the two panels are not synced. For example, when the user is filtering musician panel, the band panel remains idle. We propose to improve the UI design by having a home page, a musician page and a band page. By switching between pages, redundant information will be hidden and the user will be able to view only the information of interest.
+7. The current list of valid instruments and genres are not editable by the user. We plan to allow the user to add and remove valid instruments and genres from the list to give the user more freedom.
 
-8. The current allowable musician name and band name are restrictive. Special characters is not allowed but we understand that both musician name and band name may contain special characters, like "/". We plan to support this in the future.
+8. The application currently allows unlimited input length for the name and tag of musicians and bands, e.g. name, email. As a result, the GUI truncates the unusually long input. We plan to limit the length of fields to 100 characters to prevent the UI from breaking.
+
+9. The current allowable musician name and band name are restrictive. Special characters is not allowed but we understand that both musician name and band name may contain special characters, like "/". We plan to support this in the future.
+
+10. The current design of UI is not intuitive enough for the user. There are times when the two panels are not synced. For example, when the user is filtering musician panel, the band panel remains idle. We propose to improve the UI design by having a home page, a musician page and a band page. By switching between pages, redundant information will be hidden and the user will be able to view only the information of interest.
+
+
