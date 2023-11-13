@@ -40,6 +40,9 @@ public class AddNoteCommand extends AddCommand {
         if (person == null) {
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND + this.contactId);
         }
+
+        assert this.contactId.getId() > 0 : "Invalid contact ID";
+
         person.addNote(this.toAdd);
 
         return new CommandResult(MESSAGE_SUCCESS + toAdd.getTitle());

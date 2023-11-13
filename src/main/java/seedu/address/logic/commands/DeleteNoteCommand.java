@@ -39,10 +39,14 @@ public class DeleteNoteCommand extends DeleteCommand {
         if (person == null) {
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND + this.contactId);
         }
+        assert this.contactId.getId() > 0 : "Invalid contact ID";
+
         Note deletedNote = person.removeNoteByUserFriendlyId(this.noteIdToDelete);
         if (deletedNote == null) {
             throw new CommandException(MESSAGE_NOTE_NOT_FOUND + this.noteIdToDelete);
         }
+
+        assert this.noteIdToDelete.getId() > 0 : "Invalid note ID";
 
         return new CommandResult(MESSAGE_SUCCESS + this.noteIdToDelete + ". " + deletedNote.getTitle());
     }

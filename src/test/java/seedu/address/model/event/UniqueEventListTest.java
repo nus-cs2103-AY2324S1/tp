@@ -16,6 +16,14 @@ import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.event.exceptions.EventOverlapException;
 
 public class UniqueEventListTest {
+
+    private final UniqueEventList uniqueEventList = new UniqueEventList();
+
+    @Test
+    public void contains_nullEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueEventList.contains(null));
+    }
+
     @Test
     public void test_removeEvent_pass() {
         UniqueEventList list = new UniqueEventList();
@@ -69,20 +77,41 @@ public class UniqueEventListTest {
 
     @Test
     public void test_equals_pass() {
-        UniqueEventList list1 = new UniqueEventList();
         Event event1 = new Event("n", "00:00", "00:00", "loc", "info");
         Event event2 = new Event("n2", "00:10", "00:15", "loc", "info");
         Event event3 = new Event("n3", "00:20", "00:25", "loc", "info");
+
+        UniqueEventList list1 = new UniqueEventList();
         list1.add(event1);
         list1.add(event2);
+
         UniqueEventList list2 = new UniqueEventList();
         list2.add(event1);
         list2.add(event2);
+
+        // same object --> returns true
         assertTrue(list1.equals(list1));
+
+        // same values --> returns true
         assertTrue(list1.equals(list2));
+
         list2.add(event3);
+
+        // different values --> returns false
         assertFalse(list1.equals(list2));
+
+        // empty object --> returns false
         assertFalse(list1.equals(new Object()));
+    }
+
+    @Test
+    public void toStringMethod() {
+        assertEquals(uniqueEventList.asUnmodifiableObservableList().toString(), uniqueEventList.toString());
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        assertEquals(uniqueEventList.asUnmodifiableObservableList().hashCode(), uniqueEventList.hashCode());
     }
 
 }
