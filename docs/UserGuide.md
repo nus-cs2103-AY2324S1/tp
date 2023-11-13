@@ -81,7 +81,7 @@ Info:<br>
 
 1. Copy the file to the folder you want to use as the _home folder_ for the Tutorium app.
 
-1. Double click the file to launch it.
+1. Double-click the file to launch it.
 
 <box type="info" seamless>
 Alternately, you can use the CLI to launch Tutorium.
@@ -155,7 +155,7 @@ We can break the GUI into several parts:
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [s/SUBJECT]` can be used as `n/John Doe s/English` or as `n/John Doe`.
+  e.g. `n/NAME [s/SUBJECT]` can be used as `n/John Doe s/English` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[s/SUBJECT]…​` can be used as ` ` (i.e. 0 times), `s/English`, `s/English s/Chinese` etc.
@@ -241,7 +241,7 @@ Format: `import FILENAME.csv`
 **Note:**
 - The columns should be "Name", "Phone", "Email", "Address", "Gender", "Sec level", "Nearest Mrt Station", "Subject", "Enrol Date"
 - Enrol Date can be left blank.
-- There must be a Enrol Date header after every Subject header.
+- There must be an Enrol Date header after every Subject header.
 - You can use the sample [student_data_test.csv](https://github.com/AY2324S1-CS2103T-W13-2/tp/files/13331810/student_data_test.csv) file provided to try this feature. However, as the date format may be different in different devices, ensure that Enrol Dates are in the format MMM YYYY (e.g. Jul 2023) before importing the file.
 - Example:
 ![.csv file for 'import student_data_test.csv'](images/ug_images/fileExample.png)
@@ -282,7 +282,7 @@ Searches for people whose names contain the given keyword.
 
 Format: `search KEYWORD`
 
-* The search is case-insensitive. e.g `joe` will match `Joe`
+* The search is case-insensitive. e.g. `joe` will match `Joe`
 * Only the name is searched.
 * Partial words can be matched. e.g. `Han` will match `Hans`
 * All students matching the keyword will be returned (i.e. `OR` search).
@@ -325,7 +325,7 @@ Examples:
 * Command is case-sensitive.
 * No prefix is required, only the command.
 * Note that `undolevel` feature is provided in case the user accidentally enters `uplevel` AND the user does not close the application immediately.
-* That means after doing `uplevel`, followed by any other `edit`, `add` or `delete` commands etc and then do `undolevel`, the commands in between will be invalid because the students records are reverted back to before the previous `uplevel`.
+* That means doing `uplevel`, followed by any other `edit`, `add` or `delete` commands etc. and then performing `undolevel`, the commands in between will be invalid because the students records are reverted back to before the previous `uplevel`.
 * `undolevel` can be performed only when there is / are `uplevel` performed (and has not been undone) since user open application.
 
 Examples: `uplevel`, `undolevel`
