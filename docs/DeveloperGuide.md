@@ -449,7 +449,7 @@ The following sequence diagram shows how the `Event` operation works:
 User should see the UI as shown below after executing the aforementioned command [It is assumed that the first candidate in the list is Alex Yeoh].
 
 
-![EventWindow](images/eventwindow.png)
+![EventWindow](images/eventwin.png)
 
 The following activity diagram shows how the `event` and `schedule` command can be used together to schedule events:
 
