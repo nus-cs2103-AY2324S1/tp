@@ -40,10 +40,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of
-classes [`Main`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/java/transact/Main.java)
-and [`MainApp`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/java/transact/MainApp.java)) is in
-charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/java/transact/Main.java) and [`MainApp`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/java/transact/MainApp.java)) is in charge of the app launch and shut down.
 
 - At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 - At shut down, it shuts down the other components and invokes cleanup methods where necessary.
@@ -59,21 +56,16 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues
-the command `delstaff 1`. Note that both the address book and transaction book are saved.
+The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delstaff 1`. Note that both the address book and transaction book are saved.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
 - defines its _API_ in an `interface` with the same name as the Component.
-- implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding
-  API `interface` mentioned in the previous point.
+- implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using
-the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component
-through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the
-implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <img src="images/ComponentManagers.png" width="300" />
 
@@ -81,20 +73,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified
-in [`Ui.java`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/java/transact/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/java/transact/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `CardListPanel` etc. All
-these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between
-classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `CardListPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
-are in the `src/main/resources/view` folder. For example, the layout of
-the [`MainWindow`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/java/transact/ui/MainWindow.java)
-is specified
-in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/java/transact/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -105,15 +90,13 @@ The `UI` component,
 
 ### Logic component
 
-**API
-** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/java/transact/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/java/transact/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delstaff 1")` API
-call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delstaff 1")` API call as an example.
 
 ![Interactions Inside the Logic Component for the `delstaff 1` Command](images/DeleteSequenceDiagram.png)
 
@@ -122,12 +105,10 @@ call as an example.
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates
-   a parser that matches the command (e.g., `DeleteStaffCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteStaffCommand`)
-   which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteStaffCommandParser`) and uses it to parse the command.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteStaffCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -135,17 +116,12 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 
-- When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a
-  placeholder for the specific command name e.g., `AddStaffCommandParser`) which uses the other classes shown above to
-  parse the user command and create a `XYZCommand` object (e.g., `AddStaffCommand`) which the `AddressBookParser`
-  returns back as a `Command` object.
-- All `XYZCommandParser` classes (e.g., `AddStaffCommandParser`, `DeleteStaffCommandParser`, ...) inherit from
-  the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+- When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddStaffCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddStaffCommand`) which the `AddressBookParser` returns back as a `Command` object.
+- All `XYZCommandParser` classes (e.g., `AddStaffCommandParser`, `DeleteStaffCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 
-**API
-** : [`Model.java`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/java/transact/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/java/transact/model/Model.java)
 
 <img src="images/ModelClassDiagram.png"/>
 
@@ -157,29 +133,23 @@ How the parsing works:
 - Does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 ##### **Person class diagram**
+
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 #### **TransactionBook**
 
 - Introduces a new component, the `TransactionBook`, responsible for managing financial transactions.
 - Utilizes a `UniqueEntryMap` to associate transactions with their unique `transactionId`.
-- Each transaction consists of the following:
-  - TransactionId
-  - TransactionType
-  - Description
-  - Amount
-  - Date
-  - PersonId (Optional association with a staff member)
 - Similar to the `AddressBook`, maintains an `ObservableList<Transaction>` that can be observed by external entities, facilitating automatic updates in the UI.
 - In addition to a _filtered_ list like in `AddressBook`, the `TransactionBook` also maintains a _sorted_ list of transactions, which is used to sort filtered transactions by relevant attributes.
 
 ##### **Transaction class diagram**
+
 <img src="images/TransactionClassDiagram.png" width="450" />
 
 ### Storage component
 
-**API
-** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/java/transact/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-W13-3/tp/tree/master/src/main/java/transact/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png"/>
 
@@ -228,7 +198,7 @@ Step 2. The user executes `delete 5` command to delete the 5th person in the add
 calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes
 to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book
 state.
-    
+
 ![UndoRedoState1](images/UndoRedoState1.png)
 
 Step 3. The user executes `add n/David …​` to add a new person. The `add` command also
@@ -289,12 +259,10 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 - **Alternative 1 (current choice):** Saves the entire address book.
-
     - Pros: Easy to implement.
     - Cons: May have performance issues in terms of memory usage.
 
-- **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
+- **Alternative 2:** Individual command knows how to undo/redo by itself.
     - Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
     - Cons: We must ensure that the implementation of each individual command are correct.
 
@@ -405,34 +373,29 @@ characteristics:
 ### Transaction Recording
 
 1. **Adding a Transaction**
-
     - As an accountant, I want to add a new financial transaction quickly.
     - I should be able to specify the amount, type (revenue or expense), date, and optionally, the associated person for
       the transaction.
 
 2. **Removing a Transaction**
-
     - As an accountant, I want to delete a transaction when necessary.
     - I should be able to remove a transaction from the records to correct mistakes or manage data.
 
 3. **Viewing All Transactions**
-
     - As an accountant, I want to see a list of all recorded transactions for reference.
     - This list will provide an overview of all financial activities in one place.
 
 4. **Editing a Transaction**
-
     - As an accountant, I need the ability to edit transaction details.
     - I should be able to make corrections or updates to transaction records as needed.
 
 5. **Restoring Deleted Transactions**
-
     - As an accountant, I want a safety net for accidental deletions.
     - I should be able to retrieve transactions I have mistakenly deleted from a "bin" or archive.
 
 6. **Fast Data Entry**
     - As a fast typist, I want shortcuts and efficient data entry methods.
-    - This will enable me to record transactions, including income and expenses, quickly via the CLI.
+    - This will enable me to record transactions, including revenue and expenses, quickly via the CLI.
 
 7. **Sorting Transactions**
     - As an accountant, I want to be able to sort through my transactions.
@@ -446,13 +409,12 @@ characteristics:
 
 1. **Dashboard Display**
     - As an accountant, I want to see a clear and concise dashboard upon opening the app.
-    - The dashboard should display total income, total expenses, net profit for the selected period (usually monthly),
+    - The dashboard should display total revenue, total expenses, net profit for the selected period (usually monthly),
       and a breakdown of expenses by sector to improve cost efficiency.
 
 ### Financial Reporting
 
 1. **Access to Financial Reports**
-
     - As an accountant who analyzes transactions, I need access to various financial reports.
     - I should be able to generate income statements, balance sheets, and cash flow statements.
 
@@ -463,12 +425,10 @@ characteristics:
 ### Data Security and Backup
 
 1. **Data Security**
-
     - As a user who values data privacy, I expect the app to secure financial data.
     - The app should implement security measures, potentially including encryption, to protect sensitive information.
 
 2. **Automated Backups**
-
     - As a user concerned about data loss, I want the option for automated backups.
     - The app should allow me to set up automated backups to prevent data loss due to hardware issues.
 
@@ -479,12 +439,10 @@ characteristics:
 ### Address Book
 
 1. **Importing Staff List**
-
     - As a user who needs efficiency, I want to import a staff list into the address book.
     - This will help me quickly access contact information for employees and associates.
 
 2. **Adding and Editing People**
-
     - As a user who manages relationships, I need to add, edit, and remove people from the address book.
     - This allows me to keep the address book up to date and accurate.
 
@@ -575,8 +533,7 @@ expenses associated with staff and visualize them.
 **Description:**
 
 1. Upon opening the app, the system displays a dashboard.
-2. The dashboard shows total income, total expenses, net profit for the selected period (usually monthly), and a
-   breakdown of expenses by sector.
+2. The dashboard shows total revenue, total expenses, net profit for the selected period (usually monthly), and a breakdown of expenses by sector.
 
 ### Use Case 7: Access to Financial Reports
 
@@ -587,8 +544,7 @@ expenses associated with staff and visualize them.
 **Description:**
 
 1. The accountant selects the option to access financial reports.
-2. The system generates and displays financial reports, including income statements, balance sheets, and cash flow
-   statements.
+2. The system generates and displays financial reports, including income statements, balance sheets, and cash flow statements.
 
 ### Use Case 8: Customizable Reports
 
@@ -621,11 +577,9 @@ expenses associated with staff and visualize them.
 
 **Description:**
 
-1. The accountant selects the option to add a new staff member to the address book.
-2. The system presents a form for entering staff member details, such as name, contact information, and role.
-3. The accountant enters the required information.
-4. The system validates the input data.
-5. The system adds the new staff member to the address book.
+1. The accountant enters command to add a new staff member to the address book with relevent details.
+2. The system validates the input data.
+3. The system adds the new staff member to the address book.
 
 **Extensions:**
 
@@ -640,7 +594,7 @@ expenses associated with staff and visualize them.
 
 **Description:**
 
-1. The accountant selects a staff member from the address book to remove.
+1. The accountant enters the command to remove a staff member from the address book.
 2. The system confirms the removal with the accountant.
 3. The accountant confirms the action.
 4. The system removes the selected staff member from the address book.
@@ -657,11 +611,9 @@ expenses associated with staff and visualize them.
 
 **Description:**
 
-1. The accountant selects a staff member from the address book to edit.
-2. The system presents a form populated with the staff member's existing information.
-3. The accountant modifies the staff member's details as needed.
-4. The system validates the updated information.
-5. The system saves the updated staff member information in the address book.
+1. The accountant enters command to edit a staff member with the relevent details.
+2. The system validates the updated information.
+3. The system saves the updated staff member information in the address book.
 
 **Extensions:**
 
@@ -702,12 +654,10 @@ expenses associated with staff and visualize them.
 
 ## Non-functional Requirements (NFR)
 
-- Tran$act should support the storage of at least 1000 transactions per month to accommodate the needs of small
-  businesses.
+- Tran$act should support the storage of at least 1000 transactions per month to accommodate the needs of small businesses.
 - Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 - Should be able to hold up to 1000 transactions without a noticeable sluggishness in performance for typical usage.
-- A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
-  able to accomplish most of the tasks faster using commands than using the mouse.
+- A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ## Glossary
 
@@ -744,8 +694,6 @@ testers are expected to do more *exploratory* testing.
     2. Re-launch the app by double-clicking the jar file.
        Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person
@@ -756,11 +704,3 @@ testers are expected to do more *exploratory* testing.
        Expected: No staff is deleted. Error details shown in the status message.
     4. Other incorrect delete commands to try: `delete`, `delete x` (where x is not associated with any staff id)
        Expected: Similar to previous.
-
-2. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-2. _{ more test cases …​ }_
