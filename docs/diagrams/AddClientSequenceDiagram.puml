@@ -17,7 +17,7 @@ end box
 [-> LogicManager : execute("addclient n/...")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("addclient n/...")
+LogicManager -> AddressBookParser : parseCommand()
 activate AddressBookParser
 
 create AddClientCommandParser
@@ -27,7 +27,7 @@ activate AddClientCommandParser
 AddClientCommandParser --> AddressBookParser
 deactivate AddClientCommandParser
 
-AddressBookParser -> AddClientCommandParser : parse("n/...")
+AddressBookParser -> AddClientCommandParser : parse()
 activate AddClientCommandParser
 
 create AddClientCommand
