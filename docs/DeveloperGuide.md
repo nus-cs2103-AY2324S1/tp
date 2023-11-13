@@ -504,7 +504,7 @@ The other commands `stats curr` and `stats housing` have a similar execution pat
 
 #### Implementation
 
-The undo mechanism allows users to revert the last executed command in the address book. This feature is facilitated by the `UndoCommand`, `AddressBookParser`, and `Model` classes. The undo feature is implemented using the following components and operations:
+The undo feature allows users to revert the last executed command in the address book. This feature is facilitated by the `UndoCommand`, `AddressBookParser`, and `LogicManager` classes. The undo feature is implemented using the following components and operations:
 
 * `UndoCommand` — The core component responsible for executing the undo operation in the address book.
 * `AddressBookParser` — Handles the parsing of the user's undo command.
@@ -518,7 +518,7 @@ Step 1. The user launches the application for the first time. The `backupModel` 
 
 Step 2. The user executes a command. The `LogicManager` checks if the command is an instance of the `undo` command.
 
-Step 3. If the command is an instance of the `add`, `delete`, `edit`, `sort` or a successful execution of the `reset` command, the `backupmodel` data will be replaced with the data of the current model after execution of the command.
+Step 3. If the command is an instance of the `add`, `delete`, `edit`, `sort` or a successful execution of the `reset` command, the `backupmodel` data will be replaced with a copy of the current model data before the execution of the entered command.
 
 Step 4. If the command is an instance of the `undo` command and the current model data is not the same as the data from the `backupModel`, the current model data will be replaced with the data from the `backupModel`. Else an error message will be displayed.
 
@@ -554,7 +554,7 @@ The following activity diagram summarizes what happens when a user executes an u
 
 #### Implementation
 
-The undo mechanism allows users to revert the last executed command in the address book. This feature is facilitated by the `UndoCommand`, `AddressBookParser`, and `Model` classes. The undo feature is implemented using the following components and operations:
+The undo feature allows users to erase the contents of the address book. This feature is facilitated by the `ClearCommand`, `ClearCommandParser`, `AddressBookParser`, and `LogicManager` classes. The undo feature is implemented using the following components and operations:
 
 * `ClearCommand` — The core component responsible for erasing the entire address book.
 * `ClearCommandParser` — Handles the parsing of the arguments for the reset command.

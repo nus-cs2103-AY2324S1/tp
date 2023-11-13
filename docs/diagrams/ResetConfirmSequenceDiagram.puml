@@ -53,6 +53,8 @@ ClearCommand -> Model : execute()
 activate Model
 
 Model -> Model : setAddressBook(new AddressBook())
+activate Model
+
 Model --> ClearCommand
 deactivate Model
 
@@ -69,4 +71,3 @@ deactivate ClearCommand
 [<--LogicManager
 deactivate LogicManager
 @enduml
-

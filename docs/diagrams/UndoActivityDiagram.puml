@@ -15,10 +15,10 @@ if () then ([Command is the undo command])
 
   endif
 
-else ([else])
+else ([Command is not the undo command])
   if() then ([Command is valid])
-    :Execute the command;
     :Overwrite the backup model data with the current model data;
+    :Execute the command;
   else ([else])
     :Display error message;
   endif
