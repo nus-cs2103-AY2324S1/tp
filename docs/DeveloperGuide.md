@@ -59,7 +59,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -210,7 +210,7 @@ The following sequence diagram shows how the batch delete operation works:
 * Delete all people in the list and return all people left in client list
 
 #### Design considerations
-* Users may use batch delete to delete all people whose policy expiry is in the specified month and year. For example, delete people didn’t contact the user to renew their policies for one year. 
+* Users may use batch delete to delete all people whose policy expiry is in the specified month and year. For example, delete people did not contact the user to renew their policies for one year. 
 * Besides, if users leave an insurance company, they may like to delete people purchase policy from that company. 
 * Therefore, `Model#batchDeleteWithPredicate(Predicate<Person> predicate)` is introduced to allow batch delete by month or company.
 
@@ -448,7 +448,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Provide quick and easy contact management system of large car owners database with policies bought by them and have a better overview of the premium due dates.
+**Value proposition**: Provide quick and easy contact management system for car insurance agents to keep track of multiple clients’ details and policies bought by them and have a better overview of the premium due dates.
 
 
 ### User stories
@@ -714,29 +714,29 @@ Given below are instructions to test the application manually.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on and chart a path through the features;
 testers are expected to do more *exploratory* testing.
-
 </div>
 
 ### Launch and shutdown
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file.<br>
+   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 ### Deleting a person
 
 Deleting a person when persons are being shown
 
-   1. Prerequisites: Display persons using the `list` command or other alternative commands such as `find`. Atleast one person in the list.
+   1. Prerequisites: Display persons using the `list` command or other alternative commands such as `find`. At least one person in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the displayed list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
@@ -753,30 +753,30 @@ Deleting a person when persons are being shown
 
    1. Prerequisites: All compulsory parameters must be provided.
 
-   1. Test case: `add n/Amy Johnson i/951Q p/12345678 e/amy.j@example.com a/123 Main Street t/friends l/ABC9876D`<br>
-     Expected: Robert Green is added to the database without a policy. Details of the added person are shown in the status message. Timestamp in the status bar as well as the display list is updated.
+   1. Test case: `add n/Amy Johnson i/951Q p/12345678 e/amy.j@example.com a/123 Main Street t/friends l/SBC9876D`<br>
+     Expected: Robert Green is added to the data file without a policy. Details of the added person are shown in the status message. Timestamp in the status bar as well as the display list is updated.
 
-   1. Test case: `add n/Robert Green i/234F e/robert.g@example.com a/456 Oak Avenue t/neighbors l/XYZ1234E`<br>
+   1. Test case: `add n/Robert Green i/234F e/robert.g@example.com a/456 Oak Avenue t/neighbors l/SYZ1234E`<br>
       Expected: Error details shown in the status message. Timestamp in the status bar is updated. Status bar as well as the display list remains the same.
 
-    1. Test case: `add n/Amy Johnson i/951Q p/12345678 e/amy.j a/123 Main Street t/friends l/ABC9876D` <br>
-       Expected: No person is added because one of the inputs is not in the correct format. Error details shown in the status. Timestamp in the status bar is updated. Status bar as well as the display list remains the same.
+   1. Test case: `add n/Amy Johnson i/951Q p/12345678 e/amy.j a/123 Main Street t/friends l/SBC9876D` <br>
+      Expected: No person is added because one of the inputs is not in the correct format. Error details shown in the status. Timestamp in the status bar is updated. Status bar as well as the display list remains the same.
 
 1. Adding a client with a policy
 
-    1. Prerequisites: All policy parameters must also be provided along with the compulsory non policy parameters.
+   1. Prerequisites: All policy parameters must also be provided along with the compulsory non policy parameters.
 
-    1. Test case: `add n/Jennifer White i/789M p/98765432 e/jennifer.w@example.com a/789 Pine Street t/colleagues l/DEF5678F c/InsuranceCo pn/456X pi/10-11-2023 pe/09-11-2024`<br>
-      Expected: Details of the added person with policy are shown in the status message. Timestamp in the status bar as well as the display list is updated.
+   1. Test case: `add n/Jennifer White i/789M p/98765432 e/jennifer.w@example.com a/789 Pine Street t/colleagues l/SEF5678P c/InsuranceCo pn/456X pi/10-11-2023 pe/09-11-2024`<br>
+     Expected: Details of the added person with policy are shown in the status message. Timestamp in the status bar as well as the display list is updated.
 
-    1. Test case: `add n/Emily Lim i/345H p/34567890 e/emilylim@example.com a/Blk 345 Jurong t/family c/XYZ Insurance pn/789Z`<br>
-       Expected: Error details shown in the status. Timestamp in the status bar is updated. Status bar as well as the display list remains the same.
+   1. Test case: `add n/Emily Lim i/345H p/34567890 e/emilylim@example.com a/Blk 345 Jurong t/family c/XYZ Insurance pn/789Z`<br>
+      Expected: Error details shown in the status. Timestamp in the status bar is updated. Status bar as well as the display list remains the same.
 
-   1. Test case: `add n/Jennifer White i/789M p/98765432 e/jennifer.w@example.com a/789 Pine Street t/colleagues l/DEF5678F c/InsuranceCo pn/456X pi/10-11-2023 pe/09-11-2022`<br>
-      Expected: No person is added to the database because the policy issue date falls impossibly after the expiry date. Error details shown in the status message. Timestamp in the status bar is updated. Status bar as well as the display list remains the same.
+   1. Test case: `add n/Jennifer White i/789M p/98765432 e/jennifer.w@example.com a/789 Pine Street t/colleagues l/SEF5678P c/InsuranceCo pn/456X pi/10-11-2023 pe/09-11-2022`<br>
+      Expected: No person is added to the data file because the policy issue date falls impossibly after the expiry date. Error details shown in the status message. Timestamp in the status bar is updated. Status bar as well as the display list remains the same.
 
-   1. Test case: `add n/Jennifer White i/789M p/98765432 e/jennifer.w@example.com a/789 Pine Street t/colleagues l/DEF5678F c/InsuranceCo pn/456X pi/10-11-2023 pe/09-11-2024` in a databse where the same person has already been added.<br>
-      Expected: No person is added because the same person already exists in the database. Furthermore, even if one compulsory field was different, the policy number cannot be reused.  Error details shown in the status message. Timestamp in the status bar is updated. Status bar as well as the display list remains the same.
+   1. Test case: `add n/Jennifer White i/789M p/98765432 e/jennifer.w@example.com a/789 Pine Street t/colleagues l/SEF5678P c/InsuranceCo pn/456X pi/10-11-2023 pe/09-11-2024` in a data file where the same person has already been added.<br>
+      Expected: No person is added because the same person already exists in the data file. Furthermore, even if one compulsory field was different, the policy number cannot be reused.  Error details shown in the status message. Timestamp in the status bar is updated. Status bar as well as the display list remains the same.
 
 ### Help command
 
@@ -792,7 +792,7 @@ Deleting a person when persons are being shown
 1.  Prerequisites: None
 
 1.  Test case: `list` <br>
-    Expected: Successful listing message is shown in the status message. All of the persons added to the program are displayed.
+    Expected: Successful listing message is shown in the status message. All the persons added to the program are displayed.
 1.  Other test cases that should work include `list ` or `list 2` <br>
     Expected: Similar to previous
 
@@ -801,7 +801,7 @@ Deleting a person when persons are being shown
 1.  Prerequisites: None.
 
 1.  Test case: `clear` <br>
-    Expected: Successful clear message is shown in the status message. All clients in the database are removed.
+    Expected: Successful clear message is shown in the status message. All clients in the data file are removed.
 1.  Other test cases that should work include `clear ` or `clear 2` <br>
     Expected: Similar to previous
 
@@ -809,43 +809,43 @@ Deleting a person when persons are being shown
 
 1. Editing a client without a policy
 
-    1. Prerequisites: Display persons using the `list` command or other alternative commands such as `find`. Atleast one person in the list. The person to be edited is specified using their index number in the shown list.
-   At least one parameter must be specified. If the policy is to be edited successfully, all four parameters must be specified or an error message is shown.
+   1. Prerequisites: Display persons using the `list` command or other alternative commands such as `find`. At least one person in the list. The person to be edited is specified using their index number in the shown list.
+      At least one parameter must be specified. If the policy is to be edited successfully, all four parameters must be specified or an error message is shown.
 
-    1. Test case: `edit 2`<br>
-       Expected: Error details shown in the status message. Timestamp in the status bar is updated. Status bar remains the same.
-
-    1. Test case: `edit 2 n/Alfred a/Batcave`<br>
-       Expected: Details of the edited person are shown in the status message. Timestamp in the status bar as well as the displayed list are updated.
-
-   1. Test case: `edit 2 c/Apple`<br>
+   1. Test case: `edit 2`<br>
       Expected: Error details shown in the status message. Timestamp in the status bar is updated. Status bar remains the same.
 
-   1. Test case: `edit 2 c/Apple pn/1234 pi/10-10-2003 pe/10-10-2004`<br>
+   1. Test case: `edit 2 n/Alfred a/Batcave`<br>
       Expected: Details of the edited person are shown in the status message. Timestamp in the status bar as well as the displayed list are updated.
 
-    1. Other incorrect delete commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous. Error details shown in the status message. Timestamp in the status bar is updated. Status bar remains the same.
+   1. Test case: `edit 2 c/Apple`<br>
+     Expected: Error details shown in the status message. Timestamp in the status bar is updated. Status bar remains the same.
+
+   1. Test case: `edit 2 c/Apple pn/1234 pi/10-10-2003 pe/10-10-2004`<br>
+     Expected: Details of the edited person are shown in the status message. Timestamp in the status bar as well as the displayed list are updated.
+
+   1. Other incorrect delete commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous. Error details shown in the status message. Timestamp in the status bar is updated. Status bar remains the same.
 
 1. Editing a client with a policy
 
-    1. Prerequisites: Atleast one client must be displayed. The person to be edited is specified using their index number in the shown list.
+    1. Prerequisites: At least one client must be displayed. The person to be edited is specified using their index number in the shown list.
        At least one parameter must be specified. Not all policy parameters must be specified, but if one of the edits is the same as the respective default value, then the entire policy is deleted.
 
     1. Test case: `edit 2 pn/6969`<br>
        The person at index 2 is edited with changes to `Policy Number`. Details of the edited person are shown in the status message. Timestamp in the status bar as well as the displayed list are updated.
 
     1. Test case: `edit 2 pn/NOPOLICY`<br>
-       Expected: NOPOLICY is the default Policy Number value. The person at index 2 is edited with changes to all four policy parameters to default value such that there is `NO POLICY FOUND`. 
+       Expected: NOPOLICY is the default Policy Number value. The person at index 2 is edited with changes to all four policy parameters to default value such that there is `No Policy Found`. 
    Details of the edited person are shown in the status message. Timestamp in the status bar as well as the displayed list are updated.
 
 ### Finding a person
 
-1. Prerequisites: Display persons using the `list` command or other alternative commands such as `find`. Atleast one person in the list.
+1. Prerequisites: Display persons using the `list` command or other alternative commands such as `find`. At least one person in the list.
        At least one parameter must be specified. Using find with default policy parameters will yield no results.
 
 1.  Test case: `find` <br>
-    Expected: Error details shown in the status message. Timestamp in the status bar is updated. Status bar as well the dispalyed list remains the same.
+    Expected: Error details shown in the status message. Timestamp in the status bar is updated. Status bar as well the displayed list remains the same.
    
 1.  Test case: `find pn/NOPOLICY` <br>
        Expected: NOPOLICY is the default Policy Number value. Successful find command call is shown in the status message. No clients are displayed.
@@ -855,7 +855,7 @@ Deleting a person when persons are being shown
 
 ### Sort command
 
-1.  Prerequisites: Display persons using the `list` command or other alternative commands such as `find`. Atleast one person in the list.
+1.  Prerequisites: Display persons using the `list` command or other alternative commands such as `find`. At least one person in the list.
 
 1.  Test case: `sort` <br>
     Expected: Successful sorting message is shown in the status message. Timestamp in the status bar as well as the displayed list are updated.
@@ -871,9 +871,9 @@ Deleting a person when persons are being shown
     Expected: Successful batch delete message is shown in the status message. 
     Timestamp in the status bar as well as the displayed list are updated.
 1.  Test case: `batchdelete dm/12-2016 c/Apple` <br>
-       Expected: Error details shown in the status message. Timestamp in the status bar is updated. Status bar as well the dispalyed list remains the same.
+       Expected: Error details shown in the status message. Timestamp in the status bar is updated. Status bar as well the displayed list remains the same.
 1. Test case: `batchdelete` <br>
-          Expected: Error details shown in the status message. Timestamp in the status bar is updated. Status bar as well the dispalyed list remains the same.
+          Expected: Error details shown in the status message. Timestamp in the status bar is updated. Status bar as well the displayed list remains the same.
 
 ### Remind command
 
@@ -884,28 +884,28 @@ Deleting a person when persons are being shown
     Expected: Successful remind message is shown in the status message.
     Timestamp in the status bar as well as the displayed list are updated.
 1.  Test case: `remind` <br>
-    Expected: Error details shown in the status message. Timestamp in the status bar is updated. Status bar as well the dispalyed list remains the same.
+    Expected: Error details shown in the status message. Timestamp in the status bar is updated. Status bar as well the displayed list remains the same.
 
 1. Test case: `remind -1` <br>
-   Expected: Error details shown in the status message. Timestamp in the status bar is updated. Status bar as well the dispalyed list remains the same.
+   Expected: Error details shown in the status message. Timestamp in the status bar is updated. Status bar as well the displayed list remains the same.
 
 ### Remark command
 
-1. Prerequisites: Display persons using the `list` command or other alternative commands such as `find`. Atleast one person in the list.
+1. Prerequisites: Display persons using the `list` command or other alternative commands such as `find`. At least one person in the list.
     The person to whom we are removing or adding a remark is specified using index.
 
 1.  Test case: `remark 2 r/Contact soon` <br>
     Expected: Successful remark add message is shown in the status message.
     Timestamp in the status bar as well as the displayed list are updated.
 1.  Test case: `remind 2` or `remark 2 r/` <br>
-    xpected: Successful remark add message is shown in the status message.
+    Expected: Successful remark add message is shown in the status message.
     Timestamp in the status bar as well as the displayed list are updated.
 1. Test case: `remark` <br>
-   Expected: Error details shown in the status message. Timestamp in the status bar is updated. Status bar as well the dispalyed list remains the same.
+   Expected: Error details shown in the status message. Timestamp in the status bar is updated. Status bar as well the displayed list remains the same.
 
 ### Exit command
 
-1. Prequisites: None
+1. Prerequisites: None
 
 1.  Test case: `exit` <br>
     Expected: Successful exit message is shown in the status message. The program is then closed.
@@ -918,7 +918,7 @@ Deleting a person when persons are being shown
 
 ## **Appendix: Effort**
 
-**Achievements of the project:**
+### Achievements of the project
 * `Policy` class was added with 4 attributes (company, policy number, issue date, expiry date)
 * `Person` class was extended to include new attributes (NRIC, licence plate, remark, `Policy`) to cater to car insurance agents managing clients
 * Features added: `batchdelete`, `remark`, `remind`, `sort`
@@ -927,11 +927,11 @@ Deleting a person when persons are being shown
   * `find` searches by the various fields instead of only name as implemented in AB3 to facilitate car insurance agents' work
   * Fields are case-insensitive (e.g. licence plate is stored in capital letters, but users can input small letters) to aid a fast typist
 * Enhanced testing of features, which led to code coverage increasing from 75% in AB3 to ~80% in InsureIQ
-* \>7,000 LoCs added
+* \>8,000 LoCs added
 
-**Challenges faced:**
+### Challenges faced
 The challenges mainly arose due to the major extension of the `Model` class
-  * Decision of how to handle the `Policy` details (design considerations mentioned in [`Model`](#model-component))
+  * Decision on how to handle the `Policy` details (design considerations mentioned in [`Model`](#model-component))
   * Changes in almost all files to accommodate the newly extended fields, including changes in constructors and implementations to support the nested `Policy`
   * Changes in UI to present the new fields clearly without making everything seemed to cluttered as they are all text based
   * Testing required a lot more cases to handle different cases with different fields
@@ -964,7 +964,7 @@ e.g. `remind 30` will show clients with policy expiry dates within the next 30 d
 3. Hence, the `remind` command will not be able to accurately display the list of clients as it excludes those clients whose policy expiry dates passed the current date
 4. We plan to make a separate command (potential name: `expiry`) to display the list of clients that has policy expiry dates passed the current date
 
-### Successful commands are cleared from the command box
+### Retrieving previous successful commands
 
 1. The current implementations of all commands is as such:
    1. If the command fails, the command will be highlighted in red and presents the error message in the result box
@@ -975,11 +975,16 @@ e.g. `remind 30` will show clients with policy expiry dates within the next 30 d
 3. Hence, if there are multiple successful commands, the user will have no ability to keep track on what commands he used so far
 4. We plan to allow the recovery of previously succeeded commands using the _up arrow key_ (Just like in UNIX OS)
 
-### Saved file also get sorted
+### Sort should not sort data file
 1. The current implementation of `sort` not only sorts the client list that is displayed to the user, but also sorts the storage file
-that stores the client details i.e. `[JAR file location]/data/insureiq.json`.
+that stores the client details i.e. `[JAR file location]/data/insureiq.json`
 2. Hence, if the user restarts the application again, the client list displayed to the user will be the already sorted client list
 3. We plan to update the implementation of the `sort` command such that it will only display the sorted client list to the user,
-but does not sort the client list in the storage file.
+but does not sort the client list in the storage file
 
-
+### Support for multiple policies for same client with same vehicle
+1. The current implementation of `add` and `edit` checks for duplicate client by comparing the basic details (Name, Licence Plate, Email, Phone and Address) and if 2 clients
+have these same fields, `add` and `edit` will display the error message to reflect that
+2. Essentially, `add` and `edit` only the same client with different vehicle to get a different policy
+3. Hence, if the same client with the same vehicle wants to get more than 1 policy, the `add` and `edit` commands restricts that
+4. We plan to update the implementation of the `add` and `edit` commands such that for the same client with the same vehicle, it will allow different policies attached to it
