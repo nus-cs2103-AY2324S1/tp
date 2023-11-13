@@ -8,12 +8,11 @@ participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":AddSchedule\nCommandParser" as AddScheduleCommandParser LOGIC_COLOR
 participant "add-s:AddSchedule\nCommand" as AddScheduleCommand LOGIC_COLOR
 participant "result:CommandResult" as CommandResult LOGIC_COLOR
-
+participant "s:Schedule" as Schedule MODEL_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant "s:Schedule" as Schedule MODEL_COLOR
 end box
 [-> LogicManager : execute("add-s 1\nst/2023-09-15T09:00\n  et/2023-09-15T11:00")
 activate LogicManager
@@ -36,7 +35,7 @@ create AddScheduleCommand
 AddScheduleCommandParser -> AddScheduleCommand
 activate AddScheduleCommand
 
-AddScheduleCommand -> AddScheduleCommandParser
+AddScheduleCommand --> AddScheduleCommandParser :  add-s
 deactivate AddScheduleCommand
 
 
@@ -46,7 +45,7 @@ deactivate AddScheduleCommandParser
 AddScheduleCommandParser -[hidden]-> AddressBookParser
 destroy AddScheduleCommandParser
 
-AddressBookParser --> LogicManager
+AddressBookParser --> LogicManager : add-s
 deactivate AddressBookParser
 
 LogicManager -> AddScheduleCommand : execute()

@@ -7,12 +7,12 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":EditTutorCommandParser" as EditTutorCommandParser LOGIC_COLOR
 participant "d:EditTutorCommand" as EditTutorCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+participant "e:Person" as EditedPerson MODEL_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant "e:Person" as EditedPerson MODEL_COLOR
 end box
 
 [-> LogicManager : execute("edit-t 1 n/New Name")
@@ -52,7 +52,7 @@ activate EditTutorCommand
 
 create EditedPerson
 EditTutorCommand -> EditedPerson ++
-return
+return e
 
 EditTutorCommand -> Model ++ : hasPerson(e)
 return
@@ -73,12 +73,12 @@ create CommandResult
 EditTutorCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> EditTutorCommand
+CommandResult --> EditTutorCommand : r
 deactivate CommandResult
 
-EditTutorCommand --> LogicManager : result
+EditTutorCommand --> LogicManager : r
 deactivate EditTutorCommand
 
-[<--LogicManager
+[<--LogicManager : r
 deactivate LogicManager
 @enduml
