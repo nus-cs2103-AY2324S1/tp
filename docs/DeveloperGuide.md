@@ -63,6 +63,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+[↑ Back to table of contents](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 ### UI component
@@ -81,6 +83,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
+
+[↑ Back to table of contents](#table-of-contents)
 
 <div style="page-break-after: always;"></div>
 
@@ -116,6 +120,8 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+[↑ Back to table of contents](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 ### Model component
@@ -130,6 +136,8 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+[↑ Back to table of contents](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 ### Storage component
@@ -143,11 +151,15 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+[↑ Back to table of contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
+
+[↑ Back to table of contents](#table-of-contents)
 
 <div style="page-break-after: always;"></div>
 
@@ -194,6 +206,8 @@ The following activity diagram summarizes what happens when a user executes a `f
     * Less in line with users' expectations of a `filter` command; not as intuitive.
 * We made the choice of Alternative 1 over Alternative 2 as we found that more intuitive commands would be easier for users to learn and eventually master.
 
+[↑ Back to table of contents](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 ### Uplevel, Undolevel feature
@@ -237,6 +251,8 @@ The following activity diagram summarizes what happen when a user executes a `Up
     * Decline in performance due to the need to keep track every operation after `uplevel`.
 * We made the choice of Alternative 1 over Alternative 2 as undolevel is provided in case a user accidentally perform `uplevel` that the user didn't intend to. As such, we found that Alternative 1 is more in line of users' expectations and will not mess up the logic.
 
+[↑ Back to table of contents](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 ### Sort feature
@@ -279,6 +295,8 @@ The following activity diagram summarizes what happens when a user executes a `s
     * Users have to re-sort the student list for every launch.
 * We made the choice of Alternative 1 over Alternative 2 as we insist on providing greater convenience.
 
+[↑ Back to table of contents](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 ### Import feature
@@ -316,6 +334,8 @@ The following activity diagram summarizes what happens when a user executes a `i
   * Cons:
     * Higher chance in wrong a splitting of students' data.
 * We made the choice of Alternative 1 over Alternative 2 as we found that a fixed format would be easier for users to remember and use in the .csv files.
+
+[↑ Back to table of contents](#table-of-contents)
 
 <div style="page-break-after: always;"></div>
 
@@ -355,6 +375,8 @@ The following activity diagram summarizes what happens when a user executes a `t
 
 * We made the choice of Alternative 1 over Alternative 2 as we found that the table we intend to create so far is one-dimensional table and there are only four possible categories (`g/` for gender, `s/` for subject, `l/` for sec level and `d/` for enrol date).
   _{more aspects and alternatives to be added}_
+
+[↑ Back to table of contents](#table-of-contents)
 
 <div style="page-break-after: always;"></div>
 
@@ -398,6 +420,8 @@ The following activity diagram summarizes what happens when a user executes a `e
     * Getting the exact path is troublesome and significantly drains convenience.
     * Getting a small typo in the path is frustrating.
 * We made the choice of Alternative 1 over Alternative 2 as we insist on providing greater convenience.
+
+[↑ Back to table of contents](#table-of-contents)
 
 <div style="page-break-after: always;"></div>
 
@@ -492,6 +516,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+[↑ Back to table of contents](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -501,6 +527,8 @@ _{more aspects and alternatives to be added}_
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
+
+[↑ Back to table of contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -520,7 +548,7 @@ _{more aspects and alternatives to be added}_
 Instead of showing information of independent individuals, our product aims to provide quantitative data analysis of
 students. This allows users to draw conclusions on commonalities among students and their demographics, offering insights on marketing strategies.
 
-
+[↑ Back to table of contents](#table-of-contents)
 
 ### User stories
 
@@ -559,6 +587,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* `     | As a tuition centre admin staff    | I can schedule my marketing campaigns and events                             | so that I know when my marketing events are.                                                     |
 
 *{More to be added}*
+
+[↑ Back to table of contents](#table-of-contents)
 
 <div style="page-break-after: always;"></div>
 
@@ -829,6 +859,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Steps 2a1-2a2 are repeated until a sec level update left to undo exists. <br>
     Use case resumes from step 3.
 
+[↑ Back to table of contents](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
@@ -842,10 +874,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
+[↑ Back to table of contents](#table-of-contents)
+
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Student data**: Name, phone number, email, address, gender, sec level, nearest MRT station and subject(s) for each student
+* **Student data**: Name, phone number, email, address, gender, sec level, nearest MRT station and subject(s) for each student.
+
+[↑ Back to table of contents](#table-of-contents)
 
 <div style="page-break-after: always;"></div>
 
@@ -996,6 +1032,7 @@ testers are expected to do more *exploratory* testing.
   1. Delete a random chunk of lines from the data file. <br>
      Expected: The app launches normally with an empty data file.
 
+[↑ Back to table of contents](#table-of-contents)
 <div style="page-break-after: always;"></div>
 
 ## **Appendix: Effort**
@@ -1030,6 +1067,7 @@ Listed below are the enhancements we managed to add into Tutorium.
 * Data visualisation features (bar charts, tables and line graphs) added to enable users to conduct analysis on student data.
 * Secondary school level (sec level) updating, to optimise the process of increasing students' sec levels at the beginning of each academic year.
 
+[↑ Back to table of contents](#table-of-contents)
 <div style="page-break-after: always;"></div>
 
 ## **Appendix: Planned Enhancements**
@@ -1051,3 +1089,4 @@ Listed below are the enhancements we managed to add into Tutorium.
 * Standardise prefix for year in data visualisation features.
   * In the table and chart feature, the prefix used to indicate the year is `d/`, but for the line graph feature, it is `y/`. We
     plan to standardise the prefix used to `y/` to make these commands more intuitive and easier to learn.
+[↑ Back to table of contents](#table-of-contents)

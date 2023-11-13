@@ -37,6 +37,8 @@ Given below are my contributions to the project.
         * Added manual testing instructions to Appendix: Instructions for Manual Testing.
         * Conducted final check for Developer Guide.
 
+<div style="page-break-after: always;"></div>
+
 * **Team-based tasks**:
     * Set up milestones v1.2, v1.2b and v1.3 in GitHub.
     * Wrote and improved JUnit tests for enhancements implemented.
