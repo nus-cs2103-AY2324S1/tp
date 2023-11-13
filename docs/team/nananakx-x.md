@@ -22,13 +22,12 @@ Given below are my contributions to the project.
 
 
 * **Enhancements to existing features**: Allow for new fields like `housing`, `availability`, `animalName` and `animalType` to be added with a fosterer entry.
-    * What it does: Allows the foster manager to enter more essential fields/attributes related to a fosterer when the `add` command is executed. Extra blank spaces will be 
-  ignored and in the case where duplicate fields are given, only the last one will be chosen. 
-    * Justification: In the previous implementation, the foster manager can only add name, email, phone number and address of fosterers, which is not well-suited for the 
+    * What it does: Allows the foster manager to enter more essential attributes related to a fosterer when the `add` command is executed. 
+    * Justification: In the previous implementation, the foster manager can only add name, email, phone number and address which is not well-suited for the 
   needs of the target user since crucial information like housing type should also be taken into account, given the context of managing fosterers for cat and dog shelters.
       * Highlights: This feature requires tweaks to the existing `Person` class, and also new classes to encapsulate the new attributes. Furthermore, the implementation was also 
-  challenging when coming up with methods to check if the combination of data / data inputted is valid are implemented since there were multiples cases to consider. Failing to 
-  identify some logical lapses at the initial stages of implementation, constant changes were made to improve on the checks and usefulness of error messages.
+  challenging when coming up with methods to check if the combination of data / data inputted is valid are implemented since there were multiples cases to consider. Constant 
+  changes were made to improve on the checks and usefulness of error messages.
     * Pull requests: [#63](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/63), [#73](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/73), 
   [#82](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/82) 
 
@@ -36,14 +35,14 @@ Given below are my contributions to the project.
 * **Other enhancements to existing features**:
     * Updated the UI for the person card such that the new fields are displayed according to the draft UI. (Pull requests: 
   [#63](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/63))
-    * Implemented checking methods to ensure that the fosterer entries are valid before they can be added. (Pull requests: 
+    * Implemented checks to ensure that the fosterer entries are valid before they can be added. (Pull requests: 
   [#63](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/63), [#73](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/73), 
   [#82](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/82))
-    * Implemented error messages to guide the users on how to rectify the errors (which resulted in an invalid fosterer entry) so that the selected fosterer can be added 
-  properly. (Pull requests: [#63](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/63), [#73](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/73), 
+    * Implemented error messages to guide the users on how to rectify the errors which resulted in an invalid fosterer entry. 
+  (Pull requests: [#63](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/63), [#73](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/73), 
   [#82](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/82))
-    * Improved on duplicate persons check such that it is now case-insensitive and multiple spaces between words will be ignored ("Anne Tay" is now the same person as 
-  "anne tay" and "anne  (multiple spaces)  tay"). (Pull requests: [#91](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/91))
+    * Improved on duplicate persons check such that it is now case-insensitive and multiple spaces between words will be ignored. 
+  (Pull requests: [#91](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/91))
 
 
 * **Documentation**:
@@ -64,10 +63,10 @@ Given below are my contributions to the project.
         * Added implementation details of the `sort` feature
         * Added sequence diagram for `sort` feature
         * Added user stories and use cases related to `add`, `sort` and `undo`
-        * Added non-functional requirements and instructions for manual testing of `add` and `sort` 
+        * Added non-functional requirements and manual testing of `add` and `sort` 
         * Added planned enhancements for:
             * Phone number input
-            * Preventing Foster Family from crashing due to corruption of data file
+            * Guide Users on How To Rectify / Preventing the Corruption of Data File
             * Notes feature as a separate command
             * Specificity of error messages
 
@@ -75,13 +74,15 @@ Given below are my contributions to the project.
   [#65](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/65), [#73](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/73), 
   [#82](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/82), [#91](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/91), 
   [#98](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/98), [#144](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/144),
-  [#147](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/147)
+  [#147](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/147), [#149](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/149),
+  [#161](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/161)
 
 
 * **Project management**:
     * Helped to set up the GitHub team org/repo, codecov and the project website
     * Kept track of deliverables and deadlines
     * Helped to maintain the issue tracker for milestones
+    * Helped with demo video
 
 
 * **Community**:

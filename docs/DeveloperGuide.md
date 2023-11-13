@@ -127,6 +127,8 @@ Here is a step-by-step explanation of how the `Logic` component works when it us
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic` to `UI`.
 
+<div style="page-break-after: always;"></div>
+
 Here is a step-by-step explanation of how the `Logic` component works when it uses `ViewModeParser`: 
 
 1. When `Logic` is called upon to execute a command, it is passed to an `ViewModeParser` object which in turn creates a `Command` object (e.g., `SaveCommand`). 
@@ -143,6 +145,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+<div style="page-break-after: always;"></div>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T13-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -365,6 +369,8 @@ Step 2. With `executeInView()`, `ViewModeParser` is used to parse the command te
 
 ![SaveSequenceDiagramStep2.png](images/SaveSequenceDiagramStep2.png)
 
+<div style="page-break-after: always;"></div>
+
 Step 3. `EditFieldCommand` is executed, and `setPerson()` method from `Model` class is called with personToEdit and targetIndex obtained from `MainWindow` class.
 
 ![SaveSequenceDiagram.png](images/SaveSequenceDiagram.png)
@@ -433,8 +439,6 @@ Here are the justifications of why `SaveCommand` exits the profile page when add
 * **Alternative 2:** Create another command for confirming or cancelling exit. 
     * Pros: Easy to implement. Utilizes the current architecture and does not add additional coupling between `MainWindow` and `CommandBox`. 
     * Cons: May potentially cause errors since users may type in different commands.
-
-<br>
 
 ### List feature
 
@@ -538,7 +542,6 @@ Therefore, by ensuring that the user input indices are correctly parsed and vali
     * Pros: Easy to implement. 
     * Cons: Overhead associated with the chain of delete commands should the user choose to perform multiple deletions.
 
-
 ### Sort feature
 #### Implementation
 
@@ -589,7 +592,6 @@ The sort feature offers the user a choice to ensure that the list of fosterers i
 * **Alternative 2:** Implement another `sort` command like `sort time` to revert the list back to its original state (sorted chronologically based on when the fosterer is added).
     * Pros: Offers an explicit and clear command for reverting to the original sorting of the address book list.
     * Cons: Introduces additional commands, potentially leading to increased cognitive load for the users.
-
 
 ### Statistics feature
 #### Implementation
@@ -860,6 +862,8 @@ required to read long error messages with details that might be irrelevant to th
 
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
