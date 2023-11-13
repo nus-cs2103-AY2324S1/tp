@@ -469,7 +469,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list all tutees.
-2.  System shows all tutees.
+2.  System informs user that it shows all tutees.
 	
     Use case ends.
 
@@ -487,7 +487,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to add a tutee.
-2. System adds a tutee.
+2. System informs user that it has successfully added a tutee.
 
    Use case ends.
 
@@ -498,8 +498,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at 1.
 
-- 1b. User inputs a name that already exists in the address book.
-    - 1b1. System informs user about that name being taken already.
+- 1b. User inputs name and phone number that already exists in the address book.
+    - 1b1. System informs user of duplicate tutees.
 
       Use case resumes at 1.
   
@@ -522,7 +522,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User views the list of tutees.
 2.  User requests to delete a tutee.
-3.  System deletes the tutee.
+3.  System informs user that it deleted the tutee.
 
     Use case ends.
 
@@ -539,7 +539,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User views the list of tutees.
 2.  User requests to edit a tutee.
-3.  System edits the tutee.
+3.  System informs user that it edited the tutee.
 
     Use case ends.
 
@@ -572,7 +572,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to find a tutee.
-2. System finds the tutee.
+2. System informs user that it found the tutee.
 
 **Extensions**
 
@@ -609,7 +609,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User views the list of tutees.
 2.  User requests mark the specific tutee as paid.
-3.  System marks the tutee as paid.
+3.  System informs user that it marked the tutee as paid.
 
     Use case ends.
 
@@ -626,7 +626,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User views the list of tutees.
 2.  User requests mark all the tutees in the current list as not paid.
-3.  System marks all the tutee in the list as not paid.
+3.  System informs user that it marked all the tutees in the list as not paid.
 
     Use case ends.
     <br>
@@ -673,7 +673,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User requests to find free time
-2. System shows the list of available free time
+2. System informs user that it showed the list of available free time
 
 **Extensions**
 - 2a. The user does not have any free slots available.
@@ -686,7 +686,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests for monthly revenue.
-2. User receives monthly revenue figure.
+2. System informs user that it showed monthly revenue figure.
 
    Use case ends.
    <br>
