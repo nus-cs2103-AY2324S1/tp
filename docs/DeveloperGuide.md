@@ -44,8 +44,10 @@
     * [Events feature](#events-feature)
       * [Overview: Event](#overview--event-)
       * [Implementing `AddEventCommandParser`](#implementing-addeventcommandparser)
+      * [Implementing `ListEventCommandParser`](#implementing-listeventcommandparser)
       * [Implementing `DeleteEventCommandParser`](#implementing-deleteeventcommandparser)
       * [Implementing `AddEventCommand`](#implementing-addeventcommand)
+      * [Implementing `ListEventCommand`](#implementing-listeventcommand)
       * [Implementing `DeleteEventCommand`](#implementing-deleteeventcommand)
     * [Enhanced help feature](#enhanced-help-feature)
     * [[Proposed] Undo/redo feature](#proposed-undo-redo-feature)
@@ -425,7 +427,7 @@ Simply replace `AddCommandParser` with `DeleteCommandParser`, `AddEventCommandPa
 </box>
 
 ##### Implementing `AddEventCommandParser`
-Implements the `Parser` interface, parsing these arguments:
+Implements the `Parser` interface, parsing six main arguments:
 1. `contactId`: the one-based index of the contact shown in the GUI.
 2. `eventName`: the name of the event.
 3. `eventStartTime`: the start time of the event.
@@ -435,6 +437,18 @@ Implements the `Parser` interface, parsing these arguments:
 
 `eventName`, `eventStartTime`, `eventEndTime`, `eventLocation`, and `eventInformation`are then used to create the `Event` object.
 After that, `contactId` and the `Event` object created are then used to create the `AddEventCommand` object.
+
+For the details of how parsing works, see the section on [Logic Component](#logic-component).
+
+##### Implementing `ListEventCommandParser`
+Implements the `Parser` interface, parsing three main arguments:
+1. `filterStartTime`: the start time for filtering the events
+2. `filterEndTime`: the end time for filtering the events
+3. `useAscendingOrder`: should use ascending order when sorting the events?
+
+`filterStartTime`, `filterEndTime` and `useAscendingOrder` are then used to create the `ListEventCommand` object.
+
+`filterStartTime` and `filterEndTime` can both be `null` (to disable filtering) or neither be `null`, but can NOT only one of them be `null`.
 
 For the details of how parsing works, see the section on [Logic Component](#logic-component).
 
