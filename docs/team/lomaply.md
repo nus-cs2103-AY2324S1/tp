@@ -28,6 +28,7 @@ My contributions to the project are listed below.
   
 - **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=lomaply&breakdown=true)
 
+<div style="page-break-after: always;"></div>
 
 - **Project management**:
 
