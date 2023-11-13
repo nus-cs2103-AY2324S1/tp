@@ -27,6 +27,6 @@ public interface Storage extends WellNusStorage, UserPrefsStorage {
     Optional<ReadOnlyWellNus> readWellNus() throws DataLoadingException;
 
     @Override
-    void saveWellNus(ReadOnlyWellNus addressBook) throws IOException;
+    void saveWellNus(ReadOnlyWellNus wellNus) throws IOException;
 
 }

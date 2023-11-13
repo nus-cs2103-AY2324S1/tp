@@ -11,6 +11,7 @@ end box
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 participant ":UniqueAppointmentList" as UniqueAppointmentList MODEL_COLOR
+participant ":Appointment" as Appointment MODEL_COLOR
 end box
 
 [-> LogicManager : execute(schedule n/John ...)
@@ -23,6 +24,16 @@ create ScheduleCommand
 ScheduleCommandParser -> ScheduleCommand
 activate ScheduleCommand
 
+ScheduleCommand -> Appointment
+activate Appointment
+
+Appointment -> Appointment: Appointment(Name...)
+
+
+Appointment --> ScheduleCommand
+deactivate Appointment
+
+
 ScheduleCommand --> ScheduleCommandParser
 deactivate ScheduleCommand
 
@@ -32,13 +43,13 @@ deactivate ScheduleCommandParser
 LogicManager -> ScheduleCommand : execute()
 activate ScheduleCommand
 
-ScheduleCommand -> Model : detectClashAppointments()
+ScheduleCommand -> Model : execute()
 activate Model
 
-Model -> UniqueAppointmentList : detectClash()
+Model -> UniqueAppointmentList : hasOverlappingAppointments(Appointment appt)
 activate UniqueAppointmentList
 
-UniqueAppointmentList -> UniqueAppointmentList : hasOverlappingAppointments()
+UniqueAppointmentList -> UniqueAppointmentList : hasOverlapsWith(Appointment appt)
 
 UniqueAppointmentList --> Model
 deactivate UniqueAppointmentList
