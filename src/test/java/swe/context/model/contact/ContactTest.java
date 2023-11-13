@@ -84,6 +84,13 @@ public class ContactTest {
                 .withTags(TestData.Valid.Tag.ALPHANUMERIC, TestData.Valid.Tag.ALPHANUMERIC_SPACES)
                 .build();
         assertFalse(TestData.Valid.Contact.ALICE.equals(editedAlice));
+
+        // different alternate contacts -> returns false
+        editedAlice = new ContactBuilder(TestData.Valid.Contact.ALICE)
+                .withAlternateContacts(TestData.Valid.AlternateContact.ALPHANUMERIC,
+                        TestData.Valid.AlternateContact.ALPHANUMERIC_UNDERSCORE)
+                .build();
+        assertFalse(TestData.Valid.Contact.ALICE.equals(editedAlice));
     }
 
     @Test
