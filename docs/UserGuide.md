@@ -760,7 +760,15 @@ Example: When a user types `list` and presses Enter, the application will list a
 <span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
 
 --------------------------------------------------------------------------------------------------------------------
+## Known Issues
+<div markdown="span" class="alert alert-warning">
+**Issue:** When using multiple screens, TAManager does not open on the correct screen.
+<br>
+<br>
+**Solution:** Delete the <code>preferences.json</code> file in the <code>data</code> folder and restart TAManager.
+</div>
 
+--------------------------------------------------------------------------------------------------------------------
 ## Command Summary
 Commands are arranged in alphabetical order for your easy reference.
 
