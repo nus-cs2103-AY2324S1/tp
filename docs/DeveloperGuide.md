@@ -527,10 +527,6 @@ We plan to include additional warning messages for the detection of duplicate co
 We will warn users if they are adding contacts with duplicate information, such as duplicate email address, or names which differ only by whitespace (in the middle).
 The user can then confirm whether they would like the duplicate contact to go through, or whether they would like to make changes to the duplicate contact.
 
-1. Currently, entering an empty note for a contact (via `o/`) is allowed.
-This was meant for the convenience of the user, but may be confusing for some users as it differs in behaviour from the other optional fields of `t/` and `a/`.
-We plan to display a warning message if an empty note is added via `o/` in the `add` command, to minimize such confusion.
-
 1. Currently, special characters such as `/` are allowed (beyond the first three digits) in a contact's phone number.
 We plan to warn users if they are adding phone number with special characters.
 The user can then confirm whether they would like the phone number to go through, or whether they would like to make changes to the phone number.
@@ -544,3 +540,9 @@ However, users may have accidentally entered such duplicate values, which may re
 We plan to display additional warning messages for commands like `add`, `edit`, and `delete`, to warn users of any such duplicate values that were entered.
 Users may then press enter again to confirm the command's execution, or edit the command.
 
+1. Currently, if no note (i.e. no `o/` parameter) is specified when adding a contact, the note's value defaults to being empty (`""`).
+The UI accounts for empty notes by not taking up an extra line to display the empty note.
+When users do specify a note, they may explicitly specify an empty note (i.e. `o/` with no value).
+This is not outright rejected for the convenience of users, since empty notes are allowed.
+However, users may have forgotten to specify a value for the note, which may result in the app's behaviour differing from users' expectations.
+We plan to display an additional warning message for commands like `add`, so that users may check if their specifying of an empty note is intentional.
