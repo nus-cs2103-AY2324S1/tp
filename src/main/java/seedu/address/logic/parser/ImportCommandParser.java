@@ -44,7 +44,6 @@ import seedu.address.model.tag.Subject;
 public class ImportCommandParser implements Parser<ImportCommand> {
 
     public static final String MESSAGE_ERROR_READING_FILE = "Error reading CSV file: ";
-    public static final String MESSAGE_PARSING_ADDRESS_FORMAT = "Address should be enclosed in double quotes (\" \")";
 
     /**
      * Parses the given {@code String} of arguments in the context of the ImportCommand
@@ -123,9 +122,6 @@ public class ImportCommandParser implements Parser<ImportCommand> {
         Email email = ParserUtil.parseEmail(attributes[2]);
 
         int count = 4;
-        if (!attributes[3].startsWith("\"")) { // indicates the start of address
-            throw new ParseException(MESSAGE_PARSING_ADDRESS_FORMAT);
-        }
         StringBuilder addr = new StringBuilder(attributes[3]);
         while (!(attributes[count - 1].endsWith("\""))) {
             addr.append(", ").append(attributes[count]);

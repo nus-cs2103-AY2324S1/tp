@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.ImportCommandParser.MESSAGE_PARSING_ADDRESS_FORMAT;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +35,7 @@ public class ImportCommand extends Command {
                     + "\"" + MESSAGE_NAME + "\" , \"" + MESSAGE_PHONE + "\" , \"" + MESSAGE_EMAIL
                     + "\" , \"" + MESSAGE_ADDRESS + "\" , \"" + MESSAGE_GENDER + "\" , \""
                     + MESSAGE_SEC_LEVEL + "\" , \"" + MESSAGE_MRT_STATION + "\" , \"" + MESSAGE_SUBJECT + "\" , \""
-                    + MESSAGE_ENROL_DATE + "\".\n"
-                    + MESSAGE_PARSING_ADDRESS_FORMAT;
+                    + MESSAGE_ENROL_DATE + "\".\n";
 
     public static final String MESSAGE_SUCCESS = " students data imported";
     public static final String MESSAGE_DUPLICATE_PERSON = "has duplicates\n"
