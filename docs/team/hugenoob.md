@@ -14,22 +14,22 @@ Given below are my contributions to the project.
 * **New Feature**: `deleteAllPerson` ([PR #77](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/77))
   * What it does: Deletes all persons in the contacts list.
   * Justification: Provides a quick solution for clearing persons, enhancing organization and decluttering the interface.
-  * Highlights: This was one of the first commands I worked on, which helped me to udnerstand the logic flow of the codebase. Unlike the `clear` command in AB3, I intentionally avoided the hard reset of the entire `AddressBook`. Instead, I took the approach of specifically resetting the `UniquePersonList`. This implementation is more robust as it integrates better with our future task functionalities. The original implementation would have cleared all tasks as well, which is not the desired behaviour.
+  * Highlights: This command required me to have a deep understanding of the existing codebase. I had to ensure that only `UniquePersonList` was reset, and not the entire `AddressBook`, in order to preserve the tasks list.
 
 * **New Feature**: `addTask` ([PR #84](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/84))
   * What it does: Adds a task to the task list.
   * Justification: Enables users to keep track of their tasks.
-  * Highlights: Since task is a new entity that did not exist in AB3, I had to implement the logic and model flows for task to match the existing flow for persons. This meant that I had to understand the existing codebase deeply in order to make the necessary changes.
+  * Highlights: Since task is a new entity that did not exist in AB3, I had to implement the logic and model flows for tasks to match the existing flow for persons.
 
 * **New Feature**: `editTask` ([PR #91](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/91))
   * What it does: Allows users to edit the title, note, or tags of a task.
   * Justification: Enables users to correct mistakes or update the details of their tasks.
-  * Highlights: The implementation of this command is quite different from the rest. AB3 had an `EditPersonDescriptor` class that acts as an intermediate representation of all edits to be made to a person. I had to deeply understand this existing design and adapt it to `editTask`.
+  * Highlights: I had to understand AB3's `EditPersonDescriptor` class design, which was only present in the `edit` command, and adapt it to `editTask`.
 
 * **New Feature**: `deleteTagPerson` ([PR #120](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/120))
   * What it does: Deletes tag(s) from a person.
   * Justification: Initially, we could only specify new tags using the `editPerson` command. To delete a specific tag, the user would have to specify all existing tags, except the unwanted tag. This command provides a quick way for users to remove specific tags from a person.
-  * Highlights: For this command, I had to handle the validity of the specified tags. Tags that exist on the person will be removed, while tags that do not exist will be ignored. I also gave the user feedback on the status of the deletion: specifying which tags were deleted, and which tags were not found.
+  * Highlights: For this command, I had to handle the validity of the specified tags. Tags that exist on the person will be removed, while tags that do not exist will be ignored.
 
 * **New Feature**: `deleteTagTask` ([PR #122](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/122))
   * What it does: Deletes tag(s) from a task.
