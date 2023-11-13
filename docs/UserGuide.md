@@ -994,5 +994,4 @@ ProjectPRO's data are saved automatically as a JSON file `[JAR file location]/da
 </p>
 </div>
 
-
 [Back to Table of Contents](#table-of-contents)
