@@ -416,6 +416,8 @@ The following activity diagram summarizes what happens when a user executes a `t
 
 * We made the choice of Alternative 1 over Alternative 2 as we found that the creating a TrendCommandParser specifically for TrendCommand has cleaner code, handles error better, and it is generally a better practice.
 
+[↑ Back to table of contents](#table-of-contents)
+
 <div style="page-break-after: always;"></div>
 
 ### Export feature
