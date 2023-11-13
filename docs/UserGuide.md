@@ -103,7 +103,7 @@ Format: `help`
 
 ### Adding a Doctor: `add-doctor`
 
-Adds a Doctor to the clinic database.
+Adds a Doctor to MediLink Contacts.
 
 Format: `add-doctor n/NAME ic/IC g/GENDER p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -194,7 +194,7 @@ Example:
 
 ### Adding a Patient: `add-patient`
 
-Adds a Patient to the clinic database.
+Adds a Patient to MediLink Contacts.
 
 Format: `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e/EMAIL a/ADDRESS c/CONDITION b/BLOODTYPE  [t/TAG] ​`
 
@@ -230,8 +230,8 @@ Format: `new-appt pic/IC dic/IC time/yyyy-MM-dd HH:mm`
 **:information_source: Take Note:**<br>
 
 - All fields are Required.
-- PATIENT must contain the valid IC of a Patient in the Database.
-- DOCTOR must contain the valid IC of a Doctor in the Database.
+- PATIENT must contain the valid IC of a Patient in MediLink Contacts.
+- DOCTOR must contain the valid IC of a Doctor in MediLink Contacts.
 - There must not be conflicting Appointments. (eg. the doctor already has an appointment with another patient at the same time) However, the duration of each appointment is flexible and up to the users. As long as appointments are not at the exact same time, users can add it in.
 
 </div>
@@ -268,7 +268,7 @@ Format: `find-appt NRIC`
 **:information_source: Take Note:**<br>
 
 - All fields are Required.
-- NRIC must contain the valid NRIC of a Patient or Doctor in the Database.
+- NRIC must contain the valid NRIC of a Patient or Doctor in MediLink Contacts.
 - Either Doctor NRIC or Patient NRIC can be used in the search
 - It is recommended to use `list` to restore the view of all data after a `find` command.
 
