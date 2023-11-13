@@ -4,9 +4,8 @@ skinparam ActivityFontSize 15
 skinparam ArrowFontSize 12
 start
 :User executes "importtransactionbook" command;
-:User chooses file to import;
 
-if () then ([Valid file format])
+if () then ([File exists and has valid format])
     :Read data from file;
     :Update Transaction Book with new data;
     :Show success message;
