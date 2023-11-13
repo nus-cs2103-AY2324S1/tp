@@ -76,16 +76,18 @@ This guide explains how you can use ProjectPRO to add contacts and manage your g
 Here are some annotations used in this guide:
 
 
+
+
 <p></p>
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
-  <h3 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h3>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">User Input</code> 
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;"> Acceptable values</h5>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;"> :heavycheckmark: User Input</code> 
     Description of what you are allowed to type.</p>
 </div>
 <p></p>
 <div style="border-left: 4px solid #d9534f; background-color: #FFD4D4; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
-  <h3 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Warning!</h3>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">inline code</code> 
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Warning!</h5>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;"> :exclaimation: inline code</code> 
     Pay attention to these points as they could lead to unexpected issues.</p>
 </div>
 
@@ -512,11 +514,12 @@ You list all available time slots of your contacts.
 - Provide the full name of the contact using the `n/` prefix.
 <p></p>
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
-  <h3 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h3>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">NAME</code> 
+  <h4 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h4>
+  <p style="font-size:9px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">NAME</code> 
     must be alphanumeric and cannot be blank.</p>
 </div>
 <p></p>
+
 
 **Example(s):**
 - `listtime n/Alex Yeoh`
