@@ -75,8 +75,8 @@ public class Balance {
     /**
      * Returns true if a given integer is within the transaction limit.
      */
-    public static boolean isWithinTransactionLimit(Integer balanceInCents) {
-        return Math.abs(balanceInCents) <= TRANSACTION_LIMIT;
+    public static boolean isWithinTransactionLimit(Integer amountInCents) {
+        return Math.abs(amountInCents) <= TRANSACTION_LIMIT;
     }
 
     /**
