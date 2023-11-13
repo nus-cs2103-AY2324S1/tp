@@ -212,6 +212,7 @@ Examples:
 - `editc 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
 - `editc 2 n/Betsy Crower t/` edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
 
+<div style="page-break-after: always;"></div>
 
 ### Viewing detailed contact information : `viewc`
 
@@ -373,13 +374,13 @@ Format: `findm [m/KEYWORDS] [a/KEYWORDS] [t/KEYWORDS] [n/ATTENDEE_NAME] [s/START
   - e.g. `m/Shop Meet a/Mall` will return `Meeting: Shop at mall, Location: Mall` but not `Meeting: Meet client, Location: Park`.
 - This command clears the meeting that is currently displayed in the details list via the `viewm` command.
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 - `findm m/project` returns all meetings with a title that contains `project`.
 - `findm m/zoom meeting` returns all meetings with a title that contains at least one of `zoom` or `meeting`.
 - `findm s/09.09.2023 0000 e/09.10.2023 0000` returns all meetings between 09.09.2023 0000 and 09.10.2023 0000.
 - `findm m/Meeting s/18.10.2023 0000 e/18.10.2023 2359 n/John` returns `Meeting with friends`, as it starts after 18.10.2023 0000 and ends before 18.10.2023 2359, and is attended by John.
-
-<div style="page-break-after: always;"></div>
 
 ![result for 'findJohnMeeting'](images/findJohnMeetingResult.png)
 
@@ -440,13 +441,13 @@ Clears all entries from the contacts, meetings and details list in OutBook, effe
 
 Format: `clear`
 
-<div style="page-break-after: always;"></div>
-
 ### Exiting the program : `exit`
 
 Closes and exits OutBook.
 
 Format: `exit`
+
+<div style="page-break-after: always;"></div>
 
 ## Saving the data
 

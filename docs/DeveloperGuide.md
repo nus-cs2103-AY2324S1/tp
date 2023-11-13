@@ -172,8 +172,12 @@ How the parsing works:
 ### Model component
 
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
-<img src="images/ModelClassDiagram.png" width="80%" />
-<img src="images/Person&MeetingClassDiagram.png" width="80%" />
+
+<br>
+<img src="images/ModelClassDiagram.png" width="90%" />
+<br>
+<img src="images/Person&MeetingClassDiagram.png" width="90%" />
+<br>
 
 <div style="page-break-after: always;"></div>
 
@@ -443,6 +447,8 @@ The list of valid statuses is stored as an `Enumeration` object for the followin
 - Maintainability: If the list of valid statuses changes or expands in the future, it's much easier to update an enumeration. This centralizes the changes in one place, making the code more maintainable compared to scattered string constants.
 
 `Status` is implemented and utilized in a similar manner to `LastContactedTime`, as described [here](#last-contacted-time-feature).
+
+<div style="page-break-after: always;"></div>
 
 <div style="page-break-after: always;"></div>
 
@@ -958,6 +964,8 @@ Mark a Meeting as completed
 
 1. Use `mark 1` to mark the first meeting as completed <br>
    Expected: Meeting will be shown as completed and the attendees that are in the meeting will have their last contacted updated to the end time of the meeting.
+
+<div style="page-break-after: always;"></div>
 
 ### Data Storage
 
