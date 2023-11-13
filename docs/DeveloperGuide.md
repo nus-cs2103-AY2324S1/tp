@@ -91,15 +91,6 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete s/A0249112A")` API call as an example.
-
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete s/A0249112A` Command" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</box>
-
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `ClassManagerParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
@@ -840,7 +831,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to randomly select a specific number of students.
-2.  Class Manager randomly selects the students from the list.
+2.  Class Manager randomly selects the students from all students displayed.
 3.  Class Manager shows a list of students that are randomly selected.
 
     Use case ends.
@@ -851,13 +842,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. Class Manager shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. The number of students to be selected is less than 1.
 
     * 1b1. Class Manager shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 ---
 
@@ -877,13 +868,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. Class Manager shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. The modifying request is invalid.
 
     * 1b1. Class Manager shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 ---
 
@@ -1201,24 +1192,44 @@ Testers are expected to do more *exploratory* testing.
       <br><br>
 5. Attempt to tag a student not in Class Manager.
 
-   1. Test case: `tag` command with a student number that is not in the Class Manager.
+   1. Test case: `tag` command with a student number that is not in the Class Manager.<br>
       Expected: Error message is shown in the display result.
       <br><br>
 
 ### Mark a student as present
 
-1. Mark a student as present in Class Manager
+<box type="info" seamless>
 
-   1. Test case: `present s/STUDENT_NUMBER tut/1`
-      Expected:The student with STUDENT_NUMBER is marked as present for the first tutorial.
+**Note:** A similar way can be adopted to test `absent`.
+
+</box>
+
+1. Mark a student as present in Class Manager.
+
+   1. Test case: `present s/STUDENT_NUMBER tut/1`<br>
+      Expected: The student with STUDENT_NUMBER is marked as present for the first tutorial.
       <br><br>
 
 ### Mark all displayed students as present
 
-1. Mark all displayed students as present in Class Manager
+<box type="info" seamless>
 
-   1. Test case: `present tut/1`
-      Expected:All displayed students are marked as present for the first tutorial.
+**Note:** A similar way can be adopted to test `absent-all`.
+
+</box>
+
+1. Mark all displayed students as present in Class Manager.
+
+   1. Test case: `present-all tut/1`<br>
+      Expected: All displayed students are marked as present for the first tutorial.
+      <br><br>
+
+### Randomly select students
+
+1. Randomly select a specific number of students from all students displayed.
+
+   1. Test case: `random 2`<br>
+      Expected: Two student from all students displayed are selected randomly.(Ensure at least two students are displayed.)
       <br><br>
 
 ### View a student
