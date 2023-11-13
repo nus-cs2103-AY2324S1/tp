@@ -373,11 +373,11 @@ The amount of the settled balance would be equal to the negative of the sum of a
 
 The activity diagram is as follows:
 
-![settlePerson Activity Diagram](images/settlePersonActivityDiagram.png)
+![settlePerson Activity Diagram](images/SettlePersonActivityDiagram.png)
 
 The sequence diagram is as follows:
 
-![settlePerson Sequence Diagram](images/settlePersonSequenceDiagram.png)
+![settlePerson Sequence Diagram](images/SettlePersonSequenceDiagram.png)
 
 #### Editing Transactions
 
@@ -391,11 +391,11 @@ At least one of these fields has to be edited.
 
 The activity diagram is as follows:
 
-![editTransaction Activity Diagram](images/editTransactionActivityDiagram.png)
+![editTransaction Activity Diagram](images/EditTransactionActivityDiagram.png)
 
 The sequence diagram is as follows:
 
-![editTransaction Sequence Diagram](images/editTransactionSequenceDiagram.png)
+![editTransaction Sequence Diagram](images/EditTransactionSequenceDiagram.png)
 
 ##### Updating weights and payers: `updatePortion`
 
@@ -405,11 +405,11 @@ Given that the stored weights are not displayed to users, the weight entered is 
 
 The activity diagram is as follows:
 
-![updatePortion Activity Diagram](images/updatePortionActivityDiagram.png)
+![updatePortion Activity Diagram](images/UpdatePortionActivityDiagram.png)
 
 The sequence diagram is as follows:
 
-![updatePortion Sequence Diagram](images/updatePortionSequenceDiagram.png)
+![updatePortion Sequence Diagram](images/UpdatePortionSequenceDiagram.png)
 
 #### Deleting Transactions
 
@@ -417,11 +417,11 @@ Users key in the index of the transaction they want to delete.
 
 The activity diagram is as follows:
 
-![deleteTransaction Activity Diagram](images/deleteTransactionActivityDiagram.png)
+![deleteTransaction Activity Diagram](images/DeleteTransactionActivityDiagram.png)
 
 The sequence diagram is as follows:
 
-![deleteTransaction Sequence Diagram](images/deleteTransactionSequenceDiagram.png)
+![deleteTransaction Sequence Diagram](images/DeleteTransactionSequenceDiagram.png)
 
 #### Duplicating Transactions
 
@@ -433,11 +433,11 @@ If no timestamp is keyed in, the current system time will be used. For other fie
 
 The activity diagram is as follows:
 
-![editTransaction Activity Diagram](images/editTransactionActivityDiagram.png)
+![editTransaction Activity Diagram](images/EditTransactionActivityDiagram.png)
 
 The sequence diagram is as follows:
 
-![editTransaction Sequence Diagram](images/editTransactionSequenceDiagram.png)
+![editTransaction Sequence Diagram](images/EditTransactionSequenceDiagram.png)
 
 #### Filtering Transactions
 
@@ -447,11 +447,11 @@ Users key in a list of keywords and names. If none are provided, all transaction
 
 The activity diagram is as follows:
 
-![listTransaction Activity Diagram](images/listTransactionActivityDiagram.png)
+![listTransaction Activity Diagram](images/ListTransactionActivityDiagram.png)
 
 The sequence diagram is as follows:
 
-![listTransaction Sequence Diagram](images/listTransactionSequenceDiagram.png)
+![listTransaction Sequence Diagram](images/ListTransactionSequenceDiagram.png)
 
 ### Other Features
 
