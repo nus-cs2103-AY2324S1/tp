@@ -826,7 +826,7 @@ Failure outputs:
   * Error: Both the `-before` and `-after` flags are specified. Use only one of `-before`, `-after`, and `-on` in the same command.
 ```
 Invalid filter format: You can only use one of -before, -on, -after at a time. 
-Usage: filter -(at least one of unique [-name|subject|before|on|after|remark VALUE]). 
+Usage: filter -(at least one of unique [-name|subject|before|on|after VALUE]). 
 For example, filter -before 2023/10/10 -subject physics
 Note you should only use one of -before, -on, -after at a time.
 ```
@@ -836,7 +836,7 @@ Note you should only use one of -before, -on, -after at a time.
 ```
 Invalid filter format: 2/2/2 is not a valid date, please use yyyy/mm/dd or mm/dd or dd
 for example, assume today is 2023/11/3, to add 2023/11/29, could use 29, 11/29, 2023/11/29 or 23/11/29. 
-Usage: filter -(at least one of unique [-name|subject|before|on|after|remark VALUE]). 
+Usage: filter -(at least one of unique [-name|subject|before|on|after VALUE]). 
 For example, filter -before 2023/10/10 -subject physics
 Note you should only use one of -before, -on, -after at a time.
 ```
