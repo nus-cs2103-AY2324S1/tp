@@ -149,7 +149,6 @@ public class ParserUtil {
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-
         if (uniqueTagList.contains(new Tag(trimmedTag, "assessment"))) {
             return uniqueTagList.getTag(trimmedTag, "assessment");
         }
