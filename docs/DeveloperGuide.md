@@ -796,6 +796,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC06 - Mark Student Attendance Separately**
 
+**Precondition**: User is on a course address book.
+
 **MSS**
 
 1.  User requests to mark attendance for a student and enters student name or ID, followed by the attendance status and week and reason if any.
@@ -825,59 +827,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC07 - Adding a filter**
+**Use case: UC07 - Search For Contacts via Student Name or ID**
 
-**MSS**
-
-1.  User requests to add a filter and enters a tutorial group ID or course code.
-2.  TAvigator shows a list of students matching the filters applied.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The given tutorial group ID is invalid.
-    * 1a1. TAvigator shows an error message.
-
-      Use case ends.
-
-* 1b. The given course code is invalid.
-    * 1b1. TAvigator shows an error message.
-
-      Use case ends.
-
-* 1c. User does not specify a tutorial group ID or course code.
-    * 1c1. TAvigator shows an error message.
-
-      Use case ends.
-
-**Use case: UC08 - Removing a filter**
-
-**MSS**
-
-1.  User requests to remove a filter and enters a tutorial group ID or course code.
-2.  TAvigator shows a list of students with the updated filters.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The given tutorial group ID is invalid.
-    * 1a1. TAvigator shows an error message.
-
-      Use case ends.
-
-* 1b. The given course code is invalid.
-    * 1b1. TAvigator shows an error message.
-
-      Use case ends.
-
-* 1c. User does not specify a tutorial group ID or course code.
-    * 1c1. TAvigator removes all applied filters.
-
-      Use case ends.
-
-**Use case: UC09 - Search For Contacts via Student Name or ID**
+**Precondition**: User is on a course address book.
 
 **MSS**
 
@@ -907,7 +859,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC10 - Delete a Student**
+**Use case: UC08 - Delete a Student**
+
+**Precondition**: User is on a course address book.
 
 **MSS**
 
@@ -930,7 +884,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
-**Use case: UC11 - Delete Multiple Students**
+**Use case: UC09 - Delete Multiple Students**
 
 **Precondition**: User is on a course address book.
 
