@@ -305,13 +305,13 @@ Adds a new patient to the system.
 
 Format: `addpatient n/NAME i/NRIC e/EMAIL p/PHONE g/GENDER a/AGE bt/BLOODTYPE [al/ALLERGY]...`
 
-- Adds a patient with information including: `NAME`, `NRIC`, `EMAIL`, `GENDER`, `PHONE`, `AGE`, `BLOODTYPE`, `ALLERGY`.
+- Adds a patient with information including: `NAME`, `NRIC`, `EMAIL`, `PHONE`, `GENDER`, `AGE`, `BLOODTYPE`, `ALLERGY`.
 
 Example:
 
-`addpatient n/John Doe i/T1234567A e/johndoe@gmail.com p/12345678 g/M a/26 bt/AB+ al/Penicillin`
-Adds a **Male** patient named **John Doe** whose NRIC is **T1234567A** , **26** years old, has **AB+** Blood Type, and is allergic to **Penicillin**.
-His email and phone number is **johndoe@gmail.com** and **12345678**, respectively.
+- `addpatient n/John Doe i/T1234567A e/johndoe@gmail.com p/12345678 g/M a/26 bt/AB+ al/Penicillin`
+  Adds a **Male** patient named **John Doe** whose NRIC is **T1234567A** , **26** years old, has **AB+** Blood Type, and is allergic to **Penicillin**.
+  His email and phone number is **johndoe@gmail.com** and **12345678**, respectively.
 
 Screenshots:
 
@@ -359,7 +359,6 @@ Example:
 Screenshots:
 
 ![AddAppointment Screenshots](images/screenshots/addAppointment.png)
-![AddAppointment Screenshots](images/screenshots/addAppointment%20-%20after.png)
 ![AddAppointment Screenshots](images/screenshots/viewAppointment.png)
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
@@ -417,11 +416,12 @@ Format: `editpatient PATIENTID PREFIX/NEWVALUE...`
 - Existing values in the respective fields will be updated to the `NEWVALUE`. <br>
 
 - Multiple entries of `ALLERGY` are allowed i.e `editpatient 1 al/Seafood al/Dust`. <br>
-  <box type="info" seamless>
 
-  **Note**: When editing `ALLERGY`, the existing allergies of the patient will be removed i.e adding of allergies is not cumulative.
+<box type="info" seamless>
 
-  </box>
+**Note**: When editing `ALLERGY`, the existing allergies of the patient will be removed i.e adding of allergies is not cumulative.
+
+</box>
 
 Examples:
 
@@ -453,6 +453,12 @@ Format: `editrecord PATIENTID/RECORDID PREFIX/NEWVALUE...`
 - Existing values in the respective fields will be updated to the `NEWVALUE`. <br>
 
 - Multiple entries of `CONDITION` and `MEDICATION` are allowed i.e `editrecord 1/1 c/Flu c/Fever m/Panadol m/Ibuprofen`. <br>
+
+<box type="info" seamless>
+
+**Note**: When editing `CONDITION` and `MEDICATION`, the existing conditions and medications of the record will be removed i.e adding of conditions and medications is not cumulative.
+
+</box>
 
 Examples:
 
