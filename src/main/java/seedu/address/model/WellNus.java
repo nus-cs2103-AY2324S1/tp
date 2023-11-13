@@ -36,7 +36,7 @@ public class WellNus implements ReadOnlyWellNus {
     public WellNus() {}
 
     /**
-     * Creates an AddressBook using the Students in the {@code toBeCopied}
+     * Creates an WellNus using the Students in the {@code toBeCopied}
      */
     public WellNus(ReadOnlyWellNus toBeCopied) {
         this();
@@ -62,7 +62,7 @@ public class WellNus implements ReadOnlyWellNus {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code WellNus} with {@code newData}.
      */
     public void resetData(ReadOnlyWellNus newData) {
         requireNonNull(newData);
@@ -73,7 +73,7 @@ public class WellNus implements ReadOnlyWellNus {
     //// student-level operations
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     * Returns true if a student with the same identity as {@code student} exists in the student list.
      */
     public boolean hasStudent(Student student) {
         requireNonNull(student);
@@ -81,8 +81,8 @@ public class WellNus implements ReadOnlyWellNus {
     }
 
     /**
-     * Adds a student to the address book.
-     * The student must not already exist in the address book.
+     * Adds a student to the student list.
+     * The student must not already exist in the student list.
      */
     public void addStudent(Student p) {
         students.add(p);
@@ -90,9 +90,9 @@ public class WellNus implements ReadOnlyWellNus {
 
     /**
      * Replaces the given student {@code target} in the list with {@code editedStudent}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the student list.
      * The student identity of {@code editedStudent} must not be the same as another existing student in the
-     * address book.
+     * student list.
      */
     public void setStudent(Student target, Student editedStudent) {
         requireNonNull(editedStudent);
@@ -101,8 +101,8 @@ public class WellNus implements ReadOnlyWellNus {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code WellNus}.
+     * {@code key} must exist in the student list.
      */
     public void removeStudent(Student key) {
         students.remove(key);
@@ -111,7 +111,7 @@ public class WellNus implements ReadOnlyWellNus {
     //// appointment-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in the student list.
      */
     public boolean hasAppointment(Appointment appointment) {
         requireNonNull(appointment);
@@ -134,16 +134,16 @@ public class WellNus implements ReadOnlyWellNus {
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a person to the student list.
+     * The person must not already exist in the student list.
      */
     public void addAppointment(Appointment a) {
         appointments.add(a);
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code WellNus}.
+     * {@code key} must exist in the student list.
      */
     public void removeAppointment(Appointment key) {
         appointments.remove(key);
