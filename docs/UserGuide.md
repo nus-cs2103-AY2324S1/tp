@@ -471,8 +471,8 @@ You can add an existing contact to an existing group.
 
 
 **Example(s):**
-- `group n/A g/CS2103T`
-  This adds your contact "Alex Yeoh" into the group "CS2103T".
+- `group n/Bernice Yu g/CS2103T`
+  This adds your contact "Bernice Yu" into the group "CS2103T".
 
 ![Manage Group: Group](images/features/Managegroup_group.png)
 <div align="center">
