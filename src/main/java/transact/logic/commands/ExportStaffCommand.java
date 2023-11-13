@@ -11,7 +11,7 @@ import transact.ui.MainWindow;
  */
 public class ExportStaffCommand extends Command {
     public static final String COMMAND_WORD = "exportstaff";
-    private static final String MESSAGE_EXPORT_ACKNOWLEDGEMENT = "Exporting Staff as requested ...";
+    public static final String MESSAGE_EXPORT_ACKNOWLEDGEMENT = "Exporting Staff as requested ...";
 
     private final Path exportFilePath;
 

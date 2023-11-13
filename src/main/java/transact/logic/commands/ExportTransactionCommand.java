@@ -13,7 +13,7 @@ import transact.ui.MainWindow;
 public class ExportTransactionCommand extends Command {
 
     public static final String COMMAND_WORD = "exporttransactions";
-    private static final String MESSAGE_EXPORT_ACKNOWLEDGEMENT = "Exporting Transactions as requested ...";
+    public static final String MESSAGE_EXPORT_ACKNOWLEDGEMENT = "Exporting Transactions as requested ...";
 
     private final Path exportFilePath;
 
