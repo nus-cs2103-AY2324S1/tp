@@ -3,7 +3,7 @@
 skinparam ArrowFontStyle plain
 
 Participant ":FindCommandParser" as fcp LOGIC_COLOR
-Participant ":ArgumentTokenizer" as at LOGIC_COLOR
+Participant "<<class>>\nArgumentTokenizer" as at LOGIC_COLOR
 Participant "predicateList:List<Predicate<Job>>" as pl LOGIC_COLOR
 Participant "cp:CombinedPredicate" as cp LOGIC_COLOR
 Participant "command:FindCommand" as fc LOGIC_COLOR

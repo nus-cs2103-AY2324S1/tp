@@ -3,7 +3,7 @@
 skinparam ArrowFontStyle plain
 
 Participant ":SortCommandParser" as scp LOGIC_COLOR
-Participant ":ArgumentTokenizer" as at LOGIC_COLOR
+Participant "<<class>>\nArgumentTokenizer" as at LOGIC_COLOR
 Participant "comparator:FieldComparator" as fc LOGIC_COLOR
 Participant "command:SortCommand" as sc LOGIC_COLOR
 
