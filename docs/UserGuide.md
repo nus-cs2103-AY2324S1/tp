@@ -15,7 +15,7 @@ This user guide contains **all** the commands available to you, along with **ste
 
 <div style="page-break-after: always;"></div>
 
-## Table of Contents
+## **Table of Contents**
 * Table of Contents
 {:toc}
 
@@ -24,7 +24,7 @@ This user guide contains **all** the commands available to you, along with **ste
 <div style="page-break-after: always;"></div>
 
 
-## Quick Start
+## **Quick Start**
 1. Ensure you have Java `11` or above installed in your computer. You can download it from [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
 2. Download the latest `FosterFamily.jar` from [here](https://github.com/AY2324S1-CS2103T-T13-4/tp/releases).
@@ -63,7 +63,7 @@ Please refer to the [Features](#features) section for details of each command.
 
 <div style="page-break-after: always;"></div>
 
-## Useful Notations
+## **Useful Notations**
 These are symbols we will be using to highlight certain information to you.
 
 | Symbol               | Meaning                                                                           |
@@ -73,7 +73,9 @@ These are symbols we will be using to highlight certain information to you.
 | :warning:            | Warnings about command, where action may lead to data loss or  misinterpretation  |
 | :bulb:               | Tips to optimise the use of Foster Family                                         |
 
-## Technical Terms
+--------------------------------------------------------------------------------------------------------------------
+
+## **Technical Terms**
 These are some technical terms you may come across in this user guide.
 
 | Term                  | Definition                                                                                 |
@@ -87,7 +89,7 @@ These are some technical terms you may come across in this user guide.
 
 <div style="page-break-after: always;"></div>
 
-## User Interface (UI)
+## **User Interface (UI)**
 
 These are the two different screens you will be interacting with in Foster Family. 
 
@@ -228,7 +230,11 @@ To learn more about **editing a fosterer through the profile page**, refer to th
 
 <br>
 
-## Features
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+## **Features**
 
 <div markdown="block" class="alert alert-info">
 
@@ -908,14 +914,15 @@ If your changes to the data file makes its format invalid, Foster Family will di
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
-## FAQ
+
+## **FAQ**
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer, and overwrite the empty data file it creates with the file that contains the data of your previous Foster Family home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## **Known issues**
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The solution is to delete the `preferences.json` file created by the application before running the application again.
 
@@ -923,7 +930,7 @@ If your changes to the data file makes its format invalid, Foster Family will di
 
 <div style="page-break-after: always;"></div>
 
-## Command summary
+## **Command summary**
 
 | Action                                   | Format                                                                                                                                                                    | Examples                                                                                                                                                                |
 |------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
