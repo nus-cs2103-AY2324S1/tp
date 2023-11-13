@@ -58,9 +58,8 @@ Given below are my contributions to the project.
   * Card Class is changed to include difficulty attribute [#71](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/71)
   * Deck Class is created to contain a list of Cards [#66](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/66)
   * Enhanced DisplayResult and CardDisplay to support MarkDown syntax: bold, italic and underline. [#117](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/117)
-  * Fixed bug where application does not start without existing JSON file [#71](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/71)
+  * Fixed bug where application does not start without existing JSON file (Pull Requests [#71](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/71), [#206](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/206))
   * Created test cases to increase codecov to 65% (Pull Requests [#92](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/92), [#190](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/190), [#204](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/204), [#206](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/206))
-  * Fixed bug where JSON format is wrong for the new JSON file created [#206](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/206)
 
 
 * **Documentation**:
