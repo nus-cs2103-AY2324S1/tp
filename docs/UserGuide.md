@@ -15,7 +15,7 @@ This user guide serves as a beginner-friendly (yet comprehensive!) walkthrough f
 Our guide has three main components: 
 1. Instructions on *downloading and setting up* the application
 2. List of *available features*, and
-3. Our *Frequently Asked Questions (FAQs)*. Refer to the [Table of Contents](#table-of-contents) below to navigate to your area of interest.
+3. Our *Frequently Asked Questions (FAQs)*. Refer to the Table of Contents below to navigate to your area of interest.
 
 If you are interested in more technical details, please refer to our [Developer Guide](https://ay2324s1-cs2103t-w13-4.github.io/tp/DeveloperGuide.html).
 
