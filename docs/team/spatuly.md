@@ -48,7 +48,7 @@ Given below are my contributions to the project.
         * Added planned enhancements. (PR: [#158](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/158))
 
 * **Review / mentoring contributions**:
-  * PRs reviewed (with non-trivial comments): [#85](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/85), [#155](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/155)
+  * PRs reviewed with non-trivial comments: [#85](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/85), [#155](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/155)
 
 * **Contributions beyond the project team**:
-  * Reported 17 bugs and suggestions for other teams during PE-D.
+  * Reported 17 bugs and suggestions for other teams during PE-D. [(Bugs Reported)](https://github.com/spatuly/ped/issues)
