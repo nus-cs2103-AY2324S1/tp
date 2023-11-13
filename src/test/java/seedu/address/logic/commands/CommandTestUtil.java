@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FREETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPREMARK;
@@ -94,6 +95,20 @@ public class CommandTestUtil {
     public static final String GROUP_REMARK_UNICODE_DESC = " " + PREFIX_GROUPREMARK + VALID_GROUP_REMARK_UNICODE;
     public static final String VALID_GROUP_REMARK_OTHERS = "gU4&😊!";
     public static final String GROUP_REMARK_OTHERS_DESC = " " + PREFIX_GROUPREMARK + VALID_GROUP_REMARK_OTHERS;
+
+    public static final String DURATION_THIRTY = "30";
+    public static final String VALID_DURATION_THIRTY = " " + PREFIX_DURATION + DURATION_THIRTY;
+    public static final String INVALID_DURATION_NEGATIVE = "-1";
+    public static final String INVALID_DURATION_NEGATIVE_DESC = " " + PREFIX_DURATION + INVALID_DURATION_NEGATIVE;
+    public static final String INVALID_DURATION_ZERO = "0";
+    public static final String INVALID_DURATION_ZERO_DESC = " " + PREFIX_DURATION + INVALID_DURATION_ZERO;
+    public static final String INVALID_DURATION_MAX = "10080";
+    public static final String INVALID_DURATION_MAX_DESC = " " + PREFIX_DURATION + INVALID_DURATION_MAX;
+
+    public static final String INVALID_DURATION_CHAR = "aaa";
+    public static final String INVALID_DURATION_CHAR_DESC = " " + PREFIX_DURATION + INVALID_DURATION_CHAR;
+
+
 
 
 

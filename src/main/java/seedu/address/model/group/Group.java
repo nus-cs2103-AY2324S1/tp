@@ -231,6 +231,7 @@ public class Group {
                 freeTime = freeTime.findOverlap(second, duration);
             }
         }
+
         return freeTime;
     }
 
