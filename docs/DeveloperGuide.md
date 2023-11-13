@@ -652,7 +652,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Target user profile**:
 
-* is a Teaching Assistant (TA) for National University of Singapore Computer Science modules
+* is a Teaching Assistant (TA) for National University of Singapore Computer Science courses
 * has a need to manage a significant number of student information
 * prefer desktop apps over other types
 * can type fast

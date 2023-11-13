@@ -5,7 +5,7 @@ title: Liyan's Project Portfolio Page
 
 ### Project: TAvigator
 
-TAvigator is a desktop address book application used by Teaching Assistants (TAs) to keep track of students' contact details and attendances. It aims to provide a one-stop platform curated for NUS SoC Computer Science TAs, streamlining the teaching process for them.
+TAvigator is a desktop address book application used by Teaching Assistants (TAs) to keep track of students' contact details and attendances. It aims to provide a one-stop platform curated for TAs teaching Computer Science courses in the National University of Singapore, streamlining the teaching process for them.
 
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java.
 
