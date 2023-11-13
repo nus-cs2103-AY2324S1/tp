@@ -5,9 +5,9 @@
 
 ### Project: LinkTree
 
-LinkTree is the top contact solution for software professionals. 
+LinkTree is the top contact solution for software professionals.
 Using our unique tag-based system, access contacts by roles and responsibilities instantly.
-With LinkTree, swiftly connect with the right stakeholder, 
+With LinkTree, swiftly connect with the right stakeholder,
 ensuring smooth project execution and superior collaboration.
 
 Given below are my contributions to the project.
@@ -23,7 +23,7 @@ information in a tree structure in GUI.
 by other teammates later on.
   - Helping others with their questions and bugs.
 
-* **Enhancements to existing features**: 
+* **Enhancements to existing features**:
   - Extended the "edit" feature such that users can not only edit personal information, but
 also edit team name and team leader.
 

@@ -27,6 +27,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.TeamBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.IdentityCode;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -112,6 +113,26 @@ public class EditCommandTest {
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+
+    @Test
+    public void execute_noChangeInIdentityCode_success() {
+        Person originalPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        IdentityCode originalIdentityCode = originalPerson.getIdentityCode();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor());
+        Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        IdentityCode identityCode = editedPerson.getIdentityCode();
+
+        assertEquals(originalIdentityCode.getValue(), identityCode.getValue());
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(
+                new AddressBook(model.getAddressBook()), new TeamBook(model.getTeamBook()), new UserPrefs());
+
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+
     }
 
     @Test
