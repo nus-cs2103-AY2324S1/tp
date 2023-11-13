@@ -398,8 +398,11 @@ Alias: `find`
 
 * All fields are searched (including tags).
 
-* Keywords can match as parts of words. e.g. `john` will match `Johnny`.
+* For most fields, keywords can match as parts of words. e.g. `john` will match `Johnny`.
 
+* However, for the `Housing` and `Availability` fields, as well as for tags, keywords must match the entire field. <br>
+  e.g. `available` will not match `NotAvailable`.
+  
 * Keywords can overlap. e.g. `samm my` will match `Sammy`.
 
 * Fosterers must match all keywords (i.e. `AND` search).<br>
