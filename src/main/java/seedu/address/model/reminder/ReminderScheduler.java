@@ -66,10 +66,7 @@ public class ReminderScheduler extends Thread {
                 try {
                     mutex.wait();
                     logger.info("ReminderScheduler thread woken up");
-                    //TODO: @zhyuhan Rather than changing the reminderlist which could cause thread access issues
-                    //(ie someone just nice update the reminderlist at the same time)),
-                    //Change this to just update the Dashboard/Reminder UI with reminders after for the new day
-                    model.getReminderList().updateReminders();
+                    model.updateReminderList();
                 } catch (InterruptedException e) {
                     logger.info("ReminderScheduler thread interrupted");
                     break;
