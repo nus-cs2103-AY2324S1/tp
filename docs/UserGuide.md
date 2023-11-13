@@ -69,7 +69,10 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 7. Refer to the [Command Summary](#command-summary) below for the summary of all commands.
 8. Refer to the [Glossary](#glossary) below for definitions of glossary terms.
 
+[Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
+
 ## Important Notes
 
 ### Basic Usage
@@ -341,6 +344,7 @@ The lesson index provided is invalid
 
 [Back to Table of Contents](#table-of-contents)
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Add Feature
 
@@ -440,6 +444,7 @@ Usage: addLesson -name NAME (any number of unique [-subject|day|start|end VALUE]
  If you are currently displaying schedule list, you could use 'add' inplace of 'addLesson'. 
  Note you must provide a 'name' not already in the schedule and 'start' must be before 'end'.
 ```
+
 <div style="page-break-after: always;"></div>
 
 #### For Task:
@@ -574,7 +579,7 @@ Format: `deleteTask INDEX`
 <box type="warning" seamless>
 
 **Caution:**
-The deleteTask command can only be used in the 📅 ___SCHEDULE list___ and while a lesson is shown.
+The `deleteTask` command can only be used in the 📅 ___SCHEDULE list___ and while a lesson is shown.
 </box>
 
 Example usages:
@@ -726,7 +731,6 @@ Name clash detected.
 Edited: Lesson lesson2 from 12:30 PM to 2:30 PM on 20-11-2023 for MATHEMATICS
 Clashes with: Lesson lesson2 from 1:30 PM to 3:30 PM on 21-11-2023 for PHYSICS.
 ```
-<div style="page-break-after: always;"></div>
 
 #### For Task:
 
@@ -748,7 +752,7 @@ Format: `find SEARCH_STRING`
 <box type="warning" seamless>
 
 **Caution:**
-* Find tasks by name/description is disabled.
+* Finding tasks by name/description is disabled.
 * Tasks can be found based on the lesson (find lesson by name) and `show` lesson to see list of tasks of the lesson.
   </box>
 
@@ -849,7 +853,7 @@ Invalid filter format: Names should only contain alphanumeric characters and spa
 Usage: filter (any number of unique -[name|subject|tag|remark] [value]). 
 For example, filter -name John -subject physics,english
 ```
-
+<div style="page-break-after: always;"></div>
 #### For Schedule:
 <box type="info" seamless>
 
@@ -884,7 +888,10 @@ Failure outputs:
 * Input: `filter -before 2022/10/10 -after 2022/01/01`
     * Error: Both the `-before` and `-after` flags are specified. Use only one of `-before`, `-after`, and `-on` in the same command.
 ```
-TODO
+Invalid filter format: You can only use one of -before, -on, -after at a time. 
+Usage: filter -(at least one of unique [-name|subject|before|on|after|remark VALUE]). 
+For example, filter -before 2023/10/10 -subject physics
+Note you should only use one of -before, -on, -after at a time.
 ```
 
 * Input: `filter -on 2/2/2`
@@ -899,7 +906,7 @@ Note you should only use one of -before, -on, -after at a time.
 <div style="page-break-after: always;"></div>
 
 #### For Task:
-Filtering is not supported in the Task List at this time!
+Filtering is not supported in the 💼 ___TASKS list___ at this time!
 
 #### General Examples
 
@@ -950,13 +957,12 @@ The student is already linked to this lesson
 ```
 * Input: `link -student alexxxx -lesson lesson1` (_No student with alexxxx in application_)
 ```
-No such student with name alexf found
+No such student with name alexxxx found
 ```
 <box type="tip" seamless>  
 
 **Tips:** `LESSON_NAME` is case-insensitive. This means that "CS2103T Lab" and "cs2103T lab" are treated as the same lesson.
 </box>     
-
 <div style="page-break-after: always;"></div>
 
 #### For Student:
@@ -1061,7 +1067,6 @@ Note: This command is only available when a lesson is shown
 ```
 No such student with name Bernice Yong found
 ```
-<div style="page-break-after: always;"></div>
 
 #### For Task:
 This feature is not used for tasks!
@@ -1149,18 +1154,6 @@ No lesson is currently displayed
 ```
 This lesson has no linked students
 ```
-* Current state: In the 👨‍🎓 ___STUDENTS list___ and a student is not selected
-* Input: `nav`
-    * Error: `nav` only works when a student is selected. Select a student with the `show INDEX` command and try again.
-```
-No student is currently displayed
-```
-* Current state: In the 👨‍🎓 ___STUDENTS list___ and a student without any lessons students is selected
-* Input: `nav`
-    * Error: `nav` only works when a student has linked lessons. Link a lesson with the `linkTo` command.
-```
-This student has no linked lessons
-```
 
 
 #### For Task:
@@ -1174,15 +1167,15 @@ This feature is not used for tasks!
 
 The command history feature allows you to retrieve previously typed commands into the command text box.
 
-* To start navigating the command history, press the up or down arrow, which will point and return the most recent command text (for invalid commands, it will retrieve it again since it is also saved, hence it will not change the command text yet).
-* Cycle through the command history using the up arrow to go back to previous commands, and down arrow to go to next commands, going beyond the command history will retrieve the oldest or newest command text for respectively.
+* To start navigating the command history, press the up <kbd style="font-size: 20px;">⇧</kbd> or down <kbd style="font-size: 20px;">⇩</kbd> arrow on your keyboard, which will point and return the most recent command text (for invalid commands, it will retrieve it again since it is also saved, hence it will not change the command text yet).
+* Cycle through the command history using the up <kbd style="font-size: 20px;">⇧</kbd> arrow to go back to previous commands, and down <kbd style="font-size: 20px;">⇩</kbd> arrow to go to next commands, going beyond the command history will retrieve the oldest or newest command text for respectively.
 
 <box type="tip" seamless>
 
 **Tips:**
 - Command history is only valid per session, it does not save into storage.
 - Invalid commands are also saved into command history.
-- During each successful command execution, the _pointer_<sup>[8](#glossary)</sup> resets again, hence pressing the up or down arrow will point and return the most recent command text.
+- During each successful command execution, the _pointer_<sup>[8](#glossary)</sup> resets again, hence pressing the up <kbd style="font-size: 20px;">⇧</kbd> or down <kbd style="font-size: 20px;">⇩</kbd> will point and return the most recent command text.
 - Retrieved commands will replace the existing text in command box.
 
 </box>
@@ -1191,14 +1184,14 @@ The command history feature allows you to retrieve previously typed commands int
 
 **Caution:**
 * The index in command history remains when user clears the command box while scrolling through the history.
-* e.g. For the history [`list tasks`, `list students`, `list schedule`], if user is retrieves the command history with `list students` and clears his command box, pressing up again will retrieve `list tasks`.
+* e.g. For the history [`list tasks`, `list students`, `list schedule`], if user retrieves the command history with `list students` and clears his command box, pressing up <kbd style="font-size: 20px;">⇧</kbd> again will retrieve `list tasks`.
   </box>
 
 Example usages:
 * Input: `list students`, `list schedule`, `list tasks` were entered in this order.
-1. Pressing up arrow will go back in the command history and retrieve: `list tasks`.
-2. Pressing up arrow will go further back in the command history and retrieve: `list schedule`.
-3. Pressing down arrow will go forward in the command history and retrieve: `list tasks`.
+1. Pressing up <kbd style="font-size: 20px;">⇧</kbd> arrow will go back in the command history and retrieve: `list tasks`.
+2. Pressing up <kbd style="font-size: 20px;">⇧</kbd> arrow will go further back in the command history and retrieve: `list schedule`.
+3. Pressing down <kbd style="font-size: 20px;">⇩</kbd> arrow will go forward in the command history and retrieve: `list tasks`.
 
 
 [Back to Table of Contents](#table-of-contents)
