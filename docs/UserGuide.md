@@ -139,7 +139,7 @@ Welcome back to ProjectPRO. Simply head over to our Features section to gain ins
    - Simply go to your terminal and type `java -version`. ![here](images/UG/QuickStart1.png)
 
 2. Download the latest ProjectPRO.jar from [here](https://github.com/AY2324S1-CS2103T-T10-3/tp/releases).
-   - ![here](images/UG/QUICKSTART2.png)
+   - ![here](images/UG/QUICKSTART_2.1.png)
 
 3. Move the JAR file to a folder where you want to store your project details. For example, create a folder named ProjectPRO and place it on your desktop.
    - For Mac Users:
@@ -630,7 +630,7 @@ It is <strong>not case-sensitive</strong>.</p>
   </div>
   <p style="font-size:13px; color: #000; margin: 8px 0;">
 <code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">FREE_TIME</code>
-  must not clash with the other inputted/existing time slots of the contact. E.g. If time slot <code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">Mon 1200 - Mon 1300</code> has been added, then<code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">Mon 1300 - Mon 1400</code> can not be added. 
+  must not clash with the other inputted/existing time slots of the contact. E.g. If time slot <code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">Mon 1200 - Mon 1300</code> has been added, then <code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">Mon 1300 - Mon 1400</code> can not be added. 
 </div>
 
 **Example(s):**
@@ -914,7 +914,7 @@ You can view the link to our User Guide.
 ![](images/features/Generalcommand_help.png)
 
 <div align="center">
-  <p style="font-size: 13px; font-style: italic;">You are now able to click on the User Guide link for further guidance.</p>
+  <p style="font-size: 13px; font-style: italic;">You are now able to copy the URL of the User Guide.</p>
 </div>
 
 
