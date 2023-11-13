@@ -210,12 +210,12 @@ of schedule command is then returned. The partial class diagram is shown below.
 
 
 In the event the `Person` already has an existing appointment, a different instance of `CommandResult` is instantiated. This
-instance invokes the instructor that contains the `Person` as well as the new proposed `Appointment`. The returned 
+instance invokes the constructor that contains the `Person` as well as the new proposed `Appointment`. The returned 
 `CommandResult` instead results in the UI being notified that while the `ScheduleCommand` has been executed, the user
 should be prompted to confirm this change on the `OverrideWindow` of the UI. Only after confirmation of this is the 
 overriding of the appointment completed using the appointment and person stored in the `CommandResult`. In the event of
 cancelling the override, the program resumes its functionality, effectively discarding the execution of the rest of the 
-`Schedule Command`
+`scheduleCommand`
 
 The following activity diagram summarises what happens the user executes a schedule command.
 
@@ -256,7 +256,7 @@ Alternative 2: Create a hashset of Appointments for each Person.
 
 **Aspect: How to implement override prompt**
 
-Alternative 1: Create a separate constructor in CommandResult
+Alternative 1: Create a separate constructor in CommandResult to handle overriding
 - Pros:
   * Quick solution to the problem
   * This "freezes" functionality of the program to force user to acknowledge or cancel the execution of the command
@@ -267,12 +267,13 @@ Alternative 2: Abstract CommandResult to get a successfulExecutionResult and a P
 - Pros:
   * Improves code readability and reduces coupling in code
 - Cons:
-  * Time consuming to refactor code
+  * Time-consuming to refactor code
   * Improper implementation could result in breaking of coding principles
 - Note:
   * With additional time, alternative 2 can be implemented by refactoring the code to create multiple subclasses. Be wary of the
     liskov substitution principle when doing so. The earlier alternative 2 is implemented, the better to reduce amount of code
     that needs to be refactored.
+  * The above implementation can be done in conjunction with the clear command prompt to reduce code coupling.
 
 ### Complete Feature
 
@@ -419,7 +420,9 @@ It contains the following method:
 - ModelManager#sortFilteredPersonList(Comparator<Person> comparator)` —  Carries out the sorting operation by
 setting the comparator on the list of clients wrapped in a SortedList wrapper.
 
-A `CommandResult` class is created and returned
+A `CommandResult` class is created and returned.
+
+<img src="images/SortClassSequenceDiagram.png" width = "700"/>
 
 
 #### Design Considerations
@@ -490,23 +493,26 @@ modifying of clients’ data.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                                                   | I want to …​                                                                                                              | So that I can…​                                                                                                                      |
-|----------|---------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| `* * *`  | financial advisor who often works with numerous clients                   | have a central repository for my clients’ contacts details                                                                | effectively manage the intricate details of each of my clients.                                                                      |
-| `* * *`  | financial advisor                                                         | add clients' contacts to the contact book                                                                                 | accumulate contacts for future purposes.                                                                                             |
-| `* * *`  | financial advisor                                                         | remove clients contacts from the contact book                                                                             | keep my contact book compact and relevant.                                                                                           |
-| `* * *`  | financial advisor                                                         | edit clients’ contacts in the contact book                                                                                | keep my information updated.                                                                                                         |
-| `* *`    | financial advisor                                                         | record appointments with my clients                                                                                       | keep track of when my next meeting with the client is.                                                                               |
-| `* *`    | financial advisor                                                         | tag my clients by the plans they purchase                                                                                 | gather groups of clients based on the financial plan(s) they purchased.                                                              |
-| `* *`    | financial advisor                                                         | search for clients with specific financial plans                                                                          | update those people about their plans more efficiently.                                                                              |
-| `* *`    | financial advisor                                                         | sort my clients in certain orders including alphabetical order or appointment time in both ascending and descending order | view my clients in a more systematic manner.                                                                                         |
-| `* *`    | financial advisor                                                         | view my upcoming appointments I have with clients in chronological order                                                  | better plan my time.                                                                                                                 |
-| `* *`    | financial advisor                                                         | complete appointments                                                                                                     | clean up the address book of completed appointments.                                                                                 |
-| `* *`    | financial advisor                                                         | gather emails of clients by their tags such as age group                                                                  | collate and notify people with the same tags on any updates.                                                                         |
-| `* *`    | financial advisor                                                         | search for clients with the same financial plan                                                                           | efficiently provide targeted updates to individuals with the same plan.                                                              |
-| `*`      | busy financial advisor                                                    | streamline administrative tasks like tracking my clients contacts                                                         | focus most of my time on giving personalised financial advice and services to my clients.                                            |
-| `*`      | financial advisor managing a substantial client portfolio                 | follow a standardised format to collect my clients’ information                                                           | manage data consistency among my clients.                                                                                            |
-| `*`      | financial advisor                                                         | search for specific client details                                                                                        | quickly contact my clients.                                                                                                          |
+| Priority | As a …​                                                   | I want to …​                                                                                                              | So that I can…​                                                                           |
+|----------|-----------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| `* * *`  | financial advisor who often works with numerous clients   | have a central repository for my clients’ contacts details                                                                | effectively manage the intricate details of each of my clients.                           |
+| `* * *`  | financial advisor                                         | add clients' contacts to the contact book                                                                                 | accumulate contacts for future purposes.                                                  |
+| `* * *`  | financial advisor                                         | remove clients contacts from the contact book                                                                             | keep my contact book compact and relevant.                                                |
+| `* * *`  | financial advisor                                         | edit clients’ contacts in the contact book                                                                                | keep my information updated.                                                              |
+| `* *`    | financial advisor                                         | record appointments with my clients                                                                                       | keep track of when my next meeting with the client is.                                    |
+| `* *`    | financial advisor                                         | tag my clients by the plans they purchase                                                                                 | gather groups of clients based on the financial plan(s) they purchased.                   |
+| `* *`    | financial advisor                                         | search for clients with specific financial plans                                                                          | update those people about their plans more efficiently.                                   |
+| `* *`    | financial advisor                                         | sort my clients in certain orders including alphabetical order or appointment time in both ascending and descending order | view my clients in a more systematic manner.                                              |
+| `* *`    | financial advisor                                         | view my upcoming appointments I have with clients in chronological order                                                  | better plan my time.                                                                      |
+| `* *`    | financial advisor                                         | complete appointments                                                                                                     | clean up the address book of completed appointments.                                      |
+| `* *`    | financial advisor                                         | gather emails of clients by their tags such as age group                                                                  | collate and notify people with the same tags on any updates.                              |
+| `* *`    | financial advisor                                         | search for clients with the same financial plan                                                                           | efficiently provide targeted updates to individuals with the same plan.                   |
+| `*`      | busy financial advisor                                    | streamline administrative tasks like tracking my clients contacts                                                         | focus most of my time on giving personalised financial advice and services to my clients. |
+| `*`      | financial advisor managing a substantial client portfolio | follow a standardised format to collect my clients’ information                                                           | manage data consistency among my clients.                                                 |
+| `*`      | financial advisor                                         | search for specific client details                                                                                        | quickly contact my clients.                                                               |
+| `*`      | busy financial advisor                                    | have a warning prompt to confirm clearing of contact book                                                                 | prevent accidental clearing of contact book                                               |
+| `*`      | financial advisor with many appointments                  | have a warning when scheduling multiple appointments for the same person                                                  | receive reminders of appointments before making a new one                                 |
+
 
 ### Use cases
 
