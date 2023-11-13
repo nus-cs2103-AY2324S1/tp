@@ -248,6 +248,9 @@ Failure outputs:
     * Error: Should spell `subjects` instead of `subject`.
 * Input: `list students subjects,phone`
     * Error: Use space separation `subjects phone` for keywords instead of comma separation.
+
+<div style="page-break-after: always;"></div>
+
 ```Invalid command format!
   list: Displays the specified list, which can be a STUDENTS list, SCHEDULE list or TASKS list. Default command without specified list displays the schedule list. When specifying STUDENTS list, optional parameters can be used to specify what student details to display.
   Parameters: [LIST] [KEYWORDS]...
@@ -338,7 +341,6 @@ The lesson index provided is invalid
 
 [Back to Table of Contents](#table-of-contents)
 <br>
-<div style="page-break-after: always;"></div>
 
 ### Add Feature
 
@@ -438,7 +440,7 @@ Usage: addLesson -name NAME (any number of unique [-subject|day|start|end VALUE]
  If you are currently displaying schedule list, you could use 'add' inplace of 'addLesson'. 
  Note you must provide a 'name' not already in the schedule and 'start' must be before 'end'.
 ```
-
+<div style="page-break-after: always;"></div>
 
 #### For Task:
 
@@ -519,6 +521,7 @@ deleteperson: Deletes the entry identified by the index number used in the displ
 Parameters: INDEX (must be a positive integer)
 Example: delete 1
  ```
+<div style="page-break-after: always;"></div>
 
 #### For Schedule:
 
@@ -723,6 +726,7 @@ Name clash detected.
 Edited: Lesson lesson2 from 12:30 PM to 2:30 PM on 20-11-2023 for MATHEMATICS
 Clashes with: Lesson lesson2 from 1:30 PM to 3:30 PM on 21-11-2023 for PHYSICS.
 ```
+<div style="page-break-after: always;"></div>
 
 #### For Task:
 
@@ -892,6 +896,7 @@ Usage: filter -(at least one of unique [-name|subject|before|on|after VALUE]).
 For example, filter -before 2023/10/10 -subject physics
 Note you should only use one of -before, -on, -after at a time.
 ```
+<div style="page-break-after: always;"></div>
 
 #### For Task:
 Filtering is not supported in the Task List at this time!
@@ -952,6 +957,8 @@ No such student with name alexf found
 **Tips:** `LESSON_NAME` is case-insensitive. This means that "CS2103T Lab" and "cs2103T lab" are treated as the same lesson.
 </box>     
 
+<div style="page-break-after: always;"></div>
+
 #### For Student:
 <box type="info" seamless>
 
@@ -1003,6 +1010,7 @@ Note: This command is only available when a student is shown
 ```
 No such lesson
 ```
+<div style="page-break-after: always;"></div>
 
 #### For Schedule:
 <box type="info" seamless>
@@ -1053,6 +1061,7 @@ Note: This command is only available when a lesson is shown
 ```
 No such student with name Bernice Yong found
 ```
+<div style="page-break-after: always;"></div>
 
 #### For Task:
 This feature is not used for tasks!
@@ -1267,6 +1276,8 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Command Summary
 
 | Action       | List                                    | Format                                                                                                                                    | Examples                                                                                                       | Remarks                                                                    |
@@ -1291,6 +1302,8 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 [Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Glossary
 
