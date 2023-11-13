@@ -69,7 +69,6 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 7. Refer to the [Command Summary](#command-summary) below for the summary of all commands.
 8. Refer to the [Glossary](#glossary) below for definitions of glossary terms.
 
-[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -738,6 +737,7 @@ Name clash detected.
 Edited: Lesson lesson2 from 12:30 PM to 2:30 PM on 20-11-2023 for MATHEMATICS
 Clashes with: Lesson lesson2 from 1:30 PM to 3:30 PM on 21-11-2023 for PHYSICS.
 ```
+<div style="page-break-after: always;"></div>
 
 #### For Task:
 
@@ -821,6 +821,7 @@ Unknown command
 <br>
 <div style="page-break-after: always;"></div>
 
+
 ### Filter Feature
 
 #### For Student:
@@ -861,6 +862,7 @@ Usage: filter (any number of unique -[name|subject|tag|remark] [value]).
 For example, filter -name John -subject physics,english
 ```
 <div style="page-break-after: always;"></div>
+
 #### For Schedule:
 <box type="info" seamless>
 
@@ -1074,6 +1076,7 @@ Note: This command is only available when a lesson is shown
 ```
 No such student with name Bernice Yong found
 ```
+<div style="page-break-after: always;"></div>
 
 #### For Task:
 This feature is not used for tasks!
@@ -1235,9 +1238,7 @@ Format: `help`
 ### Saving Data
 
 TutorMate data is saved in the _hard disk_<sup>[9](#glossary)</sup> automatically after any command that changes the data. There is no need to save manually.
-
 <br>
-
 ### Editing Data File
 
 TutorMate data is saved automatically as _JSON_<sup>[10](#glossary)</sup> files `[JAR file location]/data/addressbook.json`, `[JAR file location]/data/schedulelist.json` and `[JAR file location]/data/personLessonMap.json`. It is possible to update data directly by editing that data file, but we do not recommend doing so.
@@ -1297,6 +1298,7 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 | **Find**     | Students, Schedule                      | `find SEARCH_STRING`                                                                                                                      | `find bernice`, `find lesson`                                                                                  | Disabled in 💼 ___TASKS list___                                            |
 | **Filter**   | Students                                | `filter [-name NAME] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]`                                                                     | `filter -name Alex -tag primary -subject Mathematics`                                                          | NA                                                                         |
 | **Filter**   | Schedule                                | `filter [-name NAME] [-subject SUBJECTS] [-before DATE] [-on DATE] [-after DATE] [-remark REMARK]`                                        | `filter -before 2023/12/20 -subject Mathematics`                                                               | NA                                                                         |
+| **Link**     | Any                                     | `link -student STUDENT_NAME -lesson LESSON_NAME`                                                                                          | `link -student Alex Yeoh -lesson CS2103T Lab`                                                                  | There is no way to unlink lesson to student                                |
 | **Link**     | Students                                | `linkTo LESSON_NAME`                                                                                                                      | `linkTo CS2103T Lab`                                                                                           | There is no way to unlink lesson to student                                |
 | **Link**     | Schedule                                | `linkTo STUDENT_NAME`                                                                                                                     | `linkTo Bernice Yu`                                                                                            | There is no way to unlink student to lesson                                |
 | **Navigate** | Students, Schedule                      | `nav`                                                                                                                                     | `nav`                                                                                                          | Student/Lesson should have at least one linked lesson/student              |
