@@ -8,11 +8,7 @@ import javafx.collections.ObservableList;
 
 /**
  * A list of objects that enforces uniqueness between its elements and does not allow nulls.
- * An object is considered unique by comparing using {@code T#equals(Object)}. As such, adding and updating of
- * objects uses the equality check to ensure that the object being added or updated is unique in terms of identity
- * in the UniqueObjectList. However, the removal of an object uses the equality check as well to ensure that the
- * object with exactly the same fields will be removed.
- * <p>
+ * Classes that inherit from this should have their own specifications to accomplish this.
  * This class supports a minimal set of list operations.
  *
  * @param <T> The type of objects stored in the list.

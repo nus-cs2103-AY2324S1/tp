@@ -11,11 +11,11 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
- * A list of patients that enforces uniqueness between its elements and does not allow nulls.
- * A patient is considered unique by comparing using {@code Patient#isSamePerson(Patient)}. As such, adding and updating of
- * patients uses Patient#isSamePerson(Patient) for equality so as to ensure that the patient being added or updated is
- * unique in terms of identity in the UniquePatientList. However, the removal of a patient uses Patient#equals(Object) so
- * as to ensure that the patient with exactly the same fields will be removed.
+ * A list of Patients that enforces uniqueness between its elements and does not allow nulls.
+ * A Patient is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding of
+ * Patients uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
+ * unique in terms of identity in the UniquePatientList. However, the removal of a Patient uses Person#equals(Object)
+ * to ensure that the Patient with exactly the same fields will be removed.
  * <p>
  * Supports a minimal set of list operations.
  *
@@ -116,7 +116,7 @@ public class UniquePatientList extends UniqueObjectList<Patient> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique patients.
+     * Returns true if {@code Patients} contains only unique Patients.
      */
     @Override
     protected boolean objectsAreUnique(List<Patient> patients) {

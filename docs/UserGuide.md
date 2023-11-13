@@ -11,8 +11,8 @@ doctors details within clinics.
 Hereʼs an overview of how MediLink Contacts can help you streamline your hospital management
 processes:
 
-* Store and edit information about your patients and doctors
-* Create Appointments between Patients and Doctors upon triaging
+* Store and edit information about your patients and doctors.
+* Create appointments between patients and doctors upon triaging.
 
 On top of these functionalities, we believe that **efficiency** in patient management is of utmost importance.
 Hence, MediLink Contacts is **optimized** for use via a **Command Line Interface (CLI)** while still having
@@ -40,7 +40,7 @@ hospital management tasks done faster than current GUI apps in the industry.
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar MediLink.jar` command
    to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![quickview](images/quickorientation.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
    open the help window.<br>
@@ -51,7 +51,7 @@ hospital management tasks done faster than current GUI apps in the industry.
     * `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a
       doctor named `John Doe` to MediLink Contacts.
 
-    * `delete ic/S9851386G` : Deletes the person with ic S9851386G.
+    * `delete S9851386G` : Deletes the person with ic S9851386G.
 
     * `clear` : Deletes all contacts.
 
@@ -63,6 +63,8 @@ hospital management tasks done faster than current GUI apps in the industry.
 ## Parameters
 
 The list below contains the parameters that are used in various commands as well as their various constraints. Failing to input valid parameters will lead to errors when entering commands.
+
+**Note**: Certain commands may have special requirements for parameter inputs (eg. `find`) so do please follow them when necessary!
 
 | Parameter           | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Valid Examples                                                                                                  | Invalid Examples                   |
 |:--------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------|:-----------------------------------|
@@ -77,7 +79,7 @@ The list below contains the parameters that are used in various commands as well
 | Condition           | Any non-empty string.                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Knee Injury, appendicitis                                                                                       | ""                                 |
 | Patient Tag         | Accepts only strings containing valid priority levels, either low, medium or high. Not case-sensitive.                                                                                                                                                                                                                                                                                                                                                                                | low, MEDIUM, hiGh                                                                                               | extreme, med                       |
 | Doctor Tag          | Accepts only strings containing valid specialisations. Not case-sensitive. The current allowed specialisations are listed in the examples box.                                                                                                                                                                                                                                                                                                                                        | CARDIOLOGIST, ORTHOPEDIC, PEDIATRICIAN, DERMATOLOGIST, NEUROLOGIST, GENERAL_PRACTITIONER, PSYCHIATRIST, SURGEON | Nurse, Head-Doctor                 |
-| Time                | Accepts only strings that follow the specified format (ie. `yyyy-MM-dd HH:mm`), where `HH:mm` follows the 24hr format.                                                                                                                                                                                                                                                                                                                                                                | 2016-10-10 18:00, </br> 2000-01-30 23:59                                                                        | 2005-10-32 18:00, 2016-11-02 27:00 |
+| Time                | Accepts only strings that follow the specified format (ie. `yyyy-MM-dd HH:mm`), where `HH:mm` follows the 24hr format.                                                                                                                                                                                                                                                                                                                                                                | 2016-10-10 18:00, <br> 2000-01-30 23:59                                                                         | 2005-10-32 18:00, 2016-11-02 27:00 |
 
 ## Features
 
@@ -168,11 +170,6 @@ Format: `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e
     as a doctor, it may result in an error.
 - EMERGENCY_CONTACT must contain valid emergency contact number, which needs to be a valid phone number. This number can be the same the person's contact number.
 - A patient can only have up to one tag at any time.
-- Adding additional prefixes (eg. `k/Always Injured`) not specified by the command format above will be considered as a **parameter input**. For example:</br>
-  `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 c/pneumothorax k/Always Injured b/O+` will result
-  in Condition inputted as `pneumothorax k/Always Injured`. </br>
-  Do avoid adding  your own prefixes as it may lead to unwanted errors!
-- However, inputting `r/REMARKS` will be ignored and automatically removed by the system. To add remarks, use the Edit Command mentioned later below.
 
 </div>
 
@@ -283,6 +280,9 @@ Finds persons that match the query.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
+<div markdown="block" class="alert alert-info">
+**:information_source: Take Note:**<br>
+
 * When searching names, the search is case-insensitive. e.g `hans` will match `Hans`.
 * When searching names, the order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * When searching names, only full words will be matched e.g. `Han` will not match `Hans`.
@@ -290,6 +290,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 * Note that if the name coincides with other find commands, it will be interpreted as the other find command first and extraneous paremeters will be ignored. e.g. `find F Kennedy John` will search for all female persons.
 * It is recommended to use `list` to restore the view of all data after a `find` command.
+
+</div>
 
 Examples:
 
@@ -304,12 +306,18 @@ Finds person that matches the NRIC query.
 
 Format: `find NRIC`
 
+<div markdown="block" class="alert alert-info">
+**:information_source: Take Note:**<br>
+
 * NRIC input must be capitalised!
 * It is recommended to use `list` to restore the view of all data after a `find` command.
+
+</div>
 
 Examples:
 
 * `find T1125726G` returns the person with the matching NRIC.
+  ![result for 'find T1125726G'](images/findByNricResult.png)
 
 ### Locating people by gender : `find M`, `find F` ###
 
@@ -317,24 +325,18 @@ Finds all persons with matching gender.
 
 Format: `find M` or `find F`
 
+<div markdown="block" class="alert alert-info">
+**:information_source: Take Note:**<br>
+
 * M and F must be capitalised.
 * It is recommended to use `list` to restore the view of all data after a `find` command.
+
+</div>
 
 Examples:
 
 * `find M` returns all male persons.
-
-### Locating people by blood types : `find Blood Type` ###
-
-Finds all Patients with query blood type.
-
-Format: `find Blood Type QUERY`
-
-* It is recommended to use `list` to restore the view of all data after a `find` command.
-
-Examples:
-
-* `find Blood Type A+` returns all Patients with blood type A+.
+  ![result for 'find M'](images/findByGenderResult.png)
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Take Note:**<br>
@@ -418,46 +420,45 @@ If your changes to the data file makes its format invalid, MediLink Contacts may
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
-
-## FAQ
-
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous MediLink Contacts home folder.
-
---------------------------------------------------------------------------------------------------------------------
 ## Common PitFalls
 
 ### Invalid Command Format
-   All fields are mandatory except the tag field. Omission of the fields will throw an error stating
-   that an invalid command has been given, and specify the correct format for the `add-doctor command`. <br>
-   Example: `add-doctor ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon`<br>
-   Error Message: `Invalid command format!` <br>
-   `add-doctor: Adds a person to MediLink Contacts. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS g/GENDER ic/NRIC [t/TAG]...` <br>
-   Reason: mandatory field NAME is not specified. Note that different Invalid Commands will have slightly different Error Messages.
+All fields are mandatory except the tag field. Omission of the fields will throw an error stating
+that an invalid command has been given, and specify the correct format for the command. <br>
+Example: `add-doctor ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon`<br>
+Error Message: `Invalid command format!` <br>
+`add-doctor: Adds a person to MediLink Contacts. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS g/GENDER ic/NRIC [t/TAG]...` <br>
+Reason: mandatory field NAME is not specified. Note that different Invalid Commands will have slightly different Error Messages.
 
 ### Invalid Field
-   Fields have specific formats to be followed. Failure to adhere to this format will lead to an error message
-   that specifies the format to be used for that field. Common cases of Invalid Fields:
+Fields have specific formats to be followed. Failure to adhere to this format will lead to an error message
+that specifies the format to be used for that field. Common cases of Invalid Fields:
 1. Empty flags<br>
-Example: `new-appt pic/ dic/S9851586G time/2023-10-30 13:00` <br>
-Reason: PATIENT IC field is empty.
+   Example: `new-appt pic/ dic/S9851586G time/2023-10-30 13:00` <br>
+   Reason: PATIENT IC field is empty.
 2. Prefixes not associated with the command<br>
-Adding custom prefixes will mostly cause the preceding flag to become invalid. Note that custom prefixes refer to prefixes
-not recognised by the specific command. Although `b/` refers to BLOODTYPE and is a valid flag, it is only a valid flag in
-the context of Patients. It will be recognised as invalid in other commands such as `add-doctor`<br>
+   Adding custom prefixes will mostly cause the preceding flag to become invalid. Note that custom prefixes refer to prefixes
+   not recognised by the specific command. Although `b/` refers to BLOODTYPE and is a valid flag, it is only a valid flag in
+   the context of Patients. It will be recognised as invalid in other commands such as `add-doctor`<br>
    Exceptions:
     * Adding 'custom' flags after the address or condition field will, however, be accepted as
       addresses or conditions may involve the usage of the `/` character. Hence, take note to use these fields carefully.
     * However, adding the remark prefix `r/` and everything attached to it will be ignored by the system.
     * Adding the 'custom' flag before any other field will recognise the input to be of Invalid Command Format.<br>
-Examples:
+      Examples:
     * `add-patient n/John Doe custom/ ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 c/pneumothorax b/O+ t/Low`
-    <br>Reason: custom flag `custom/` causes NAME field to become invalid.
+      <br>Reason: custom flag `custom/` causes NAME field to become invalid.
     * `add-doctor ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104/C, Wakanda St 42 t/Surgeon`
-    <br>Reason: custom flag `/C` taken as part of a valid address, and does not show any Error.
+      <br>Reason: custom flag `/C` taken as part of a valid address, and does not show any Error.
     * `new-appt b/ dic/S9851586G time/2023-10-30 13:00`
-    <br>Reason: custom flag `b/` causes input to be of invalid command format.
+      <br>Reason: custom flag `b/` causes input to be of invalid command format.
+
+--------------------------------------------------------------------------------------------------------------------
+## FAQ
+
+**Q**: How do I transfer my data to another Computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
+the data of your previous MediLink Contacts home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Known issues

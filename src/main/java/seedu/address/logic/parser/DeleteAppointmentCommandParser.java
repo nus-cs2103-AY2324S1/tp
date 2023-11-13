@@ -14,8 +14,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class DeleteAppointmentCommandParser implements Parser<DeleteAppointmentCommand> {
     private static final Logger logger = LogsCenter.getLogger(DeleteCommandParser.class);
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteCommand
-     * and returns a DeleteCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DeleteAppointmentCommand
+     * and returns a DeleteAppointmentCommand object for execution.
      *
      * @param args The input arguments string to be parsed.
      * @throws ParseException if the user input does not conform the expected format

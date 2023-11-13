@@ -11,11 +11,11 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
- * A list of doctors that enforces uniqueness between its elements and does not allow nulls.
- * A doctor is considered unique by comparing using {@code Doctor#isSamePerson(Doctor)}. As such, adding and updating of
- * doctors uses Doctor#isSamePerson(Doctor) for equality so as to ensure that the doctor being added or updated is
- * unique in terms of identity in the UniqueDoctorList. However, the removal of a doctor uses Doctor#equals(Object) so
- * as to ensure that the doctor with exactly the same fields will be removed.
+ * A list of Doctors that enforces uniqueness between its elements and does not allow nulls.
+ * A x is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
+ * Doctors uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
+ * unique in terms of identity in the UniqueDoctorList. However, the removal of a Doctor uses Person#equals(Object) so
+ * as to ensure that the Doctor with exactly the same fields will be removed.
  * <p>
  * Supports a minimal set of list operations.
  *
@@ -64,9 +64,9 @@ public class UniqueDoctorList extends UniqueObjectList<Doctor> {
     }
 
     /**
-     * Replaces the doctor {@code target} in the list with {@code editedDoctor}.
+     * Replaces the Doctor {@code target} in the list with {@code editedDoctor}.
      * {@code target} must exist in the list.
-     * The doctor identity of {@code editedDoctor} must not be the same as another existing doctor in the list.
+     * The Doctor identity of {@code editedDoctor} must not be the same as another existing Doctor in the list.
      */
     @Override
     public void setObject(Doctor target, Doctor editedDoctor) {
