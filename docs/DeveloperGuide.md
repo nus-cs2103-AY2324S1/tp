@@ -909,8 +909,7 @@ testers are expected to do more *exploratory* testing.
          _Free from 19:30 - 20:00_ <br>
          _Free from 21:00 - 21:30_ <br>
          should be displayed in the status message.
-
-###
+ 
 
 ### Marking a tutee as paid
 
@@ -1026,5 +1025,14 @@ is saved. The system should inform the user that this command will not modify an
 
 Idea: Create a `Model#isSameData()` to compare whether the state of the tutee data before and after the command execution will be the same. If
 `Model#isSameData()` returns true, a `CommandException` should be thrown and the system should inform the user that this command will not modify any data.
+
+### Enable Group Lessons
+
+Reason: Current `Lesson` implementation prevents any lessons clashes, that is no two `Person` objects can have lessons that fall in same timeslots.
+However, this is based on the assumption that lessons are carried out on a one-on-one basis. Given the possibility of group lessons, having such a feature
+would allow for more flexibility in the application.
+
+Idea: Create a `GroupTag` field for `Lesson` class which contain an ID for each `Lesson` object if they are group lessons. When checking if two 
+lesson clashes, allow for lesson clash if `Lesson` objects have the same IDs which means they are the same group lesson.
 
 
