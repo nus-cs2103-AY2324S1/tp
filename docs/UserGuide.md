@@ -1081,6 +1081,7 @@ atagp
 {: .field-table}
 
 - A tag is uniquely identified by the `TAG`. This field is case sensitive.
+- You may add multiple tags to a person by specifying the `t/` prefix multiple times.
 
 <h4>Example:</h4>
 
@@ -1127,6 +1128,7 @@ atagt
 {: .field-table}
 
 - A tag is uniquely identified by the `TAG`. This field is case sensitive.
+- You may add multiple tags to a task by specifying the `t/` prefix multiple times.
 
 <h4>Example:</h4>
 
