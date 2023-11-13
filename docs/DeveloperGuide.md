@@ -554,7 +554,7 @@ The following activity diagram summarizes what happens when a user executes an u
 
 #### Implementation
 
-The undo feature allows users to erase the contents of the address book. This feature is facilitated by the `ClearCommand`, `ClearCommandParser`, `AddressBookParser`, and `LogicManager` classes. The undo feature is implemented using the following components and operations:
+The reset feature allows users to erase the contents of the address book. This feature is facilitated by the `ClearCommand`, `ClearCommandParser`, `AddressBookParser`, and `LogicManager` classes. The undo feature is implemented using the following components and operations:
 
 * `ClearCommand` — The core component responsible for erasing the entire address book.
 * `ClearCommandParser` — Handles the parsing of the arguments for the reset command.
