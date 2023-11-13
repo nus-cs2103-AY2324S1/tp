@@ -161,21 +161,21 @@ Below is a table summarising common arguments used in `add`, `edit`, `find`, `sc
 to view the arguments' prefix, and their acceptable values. Unless specified, having only space characters i.e. an empty
 value, is not an acceptable value and will result in a warning.
 
-| Prefix | Argument              | Acceptable Values                                                                                                         |
-|--------|-----------------------|---------------------------------------------------------------------------------------------------------------------------|
-| -      | INDEX                 | Number (1 to current size of the contact book)                                                                            |
-| `n/`   | NAME                  | Alphabets, numbers, and space characters only                                                                             |
-| `p/`   | PHONE_NUMBER          | Numbers only and at least 3 digits long                                                                                   |
-| `e/`   | EMAIL                 | Alphabets, numbers, and symbols only in a valid email format                                                              |
-| `a/`   | ADDRESS               | Alphabets, numbers, space characters and symbols only                                                                     |
-| `nk/`  | NEXT_KIN              | Alphabets, numbers, and space characters only                                                                             |
-| `nkp/` | NEXT_KIN_PHONE        | Numbers only and at least 3 digits long                                                                                   |
-| `fp/`  | FINANCIAL_PLAN        | Alphabets, numbers, and space characters only. Empty value is accepted when using [Edit](#editing-a-client-contact--edit) |
-| `t/`   | TAG                   | Alphabets and numbers only. Empty value is accepted when using [Edit](#editing-a-client-contact--edit)                    |
-| `ap/`  | APPOINTMENT_NAME      | Alphabets, numbers, and space characters only                                                                             |
-| `d/`   | APPOINTMENT_DATE      | Format: dd-MM-yyyy (e.g., 31-12-2023)                                                                                     |
-| `d/`   | APPOINTMENT_DATE_TIME | Format: dd-MM-yyyy HH:mm (e.g., 31-12-2023 14:30)                                                                         |
-| -      | KEYWORD               | `name` or `appointment`                                                                                                   |
+| Prefix | Argument              | Acceptable Values                                                                                                              |
+|--------|-----------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| -      | INDEX                 | Number (1 to current size of the contact book)                                                                                 |
+| `n/`   | NAME                  | Alphabets, numbers, and space characters only                                                                                  |
+| `p/`   | PHONE_NUMBER          | Numbers only and at least 3 digits long                                                                                        |
+| `e/`   | EMAIL                 | Alphabets, numbers, and symbols only in a valid email format                                                                   |
+| `a/`   | ADDRESS               | Alphabets, numbers, space characters and symbols only                                                                          |
+| `nk/`  | NEXT_KIN              | Alphabets, numbers, and space characters only                                                                                  |
+| `nkp/` | NEXT_KIN_PHONE        | Numbers only and at least 3 digits long                                                                                        |
+| `fp/`  | FINANCIAL_PLAN        | Alphabets, numbers, and space characters only. Empty value is accepted only when using [Edit](#editing-a-client-contact--edit) |
+| `t/`   | TAG                   | Alphabets and numbers only. Empty value is accepted only when using [Edit](#editing-a-client-contact--edit)                    |
+| `ap/`  | APPOINTMENT_NAME      | Alphabets, numbers, and space characters only                                                                                  |
+| `d/`   | APPOINTMENT_DATE      | Format: dd-MM-yyyy (e.g., 31-12-2023)                                                                                          |
+| `d/`   | APPOINTMENT_DATE_TIME | Format: dd-MM-yyyy HH:mm (e.g., 31-12-2023 14:30)                                                                              |
+| -      | KEYWORD               | `name` or `appointment`                                                                                                        |
 
 <div markdown="span" class="alert alert-primary">:information_source:
 **Do note** If the ADDRESS includes any recognized prefixes (leading space + prefix), users should be careful.
