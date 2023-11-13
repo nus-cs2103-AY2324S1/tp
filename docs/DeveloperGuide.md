@@ -265,7 +265,9 @@ The [**`java.util.Optional<T>`**](https://docs.oracle.com/javase/8/docs/api/java
 To add a person, the user must specify the name of the person using the `n/` prefix. The user can then specify the optional attributes of the person using the following prefixes:
 
 <box type="info">
+
 Except for the `Name`, all the fields given to the `add_person` command are optional.
+
 </box>
 
 The flow for the `add_person` command is described by the following sequence diagram:
