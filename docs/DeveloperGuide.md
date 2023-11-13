@@ -598,7 +598,7 @@ Here is the activity diagram from when a user inputs a note command:
 
 ![Note Activity Diagram](images/NoteActivityDiagram.png)
 
-# View Feature
+## View Feature
 
 The View feature is facilitated by the `ViewCommand` which extends `Command`.
 
@@ -624,7 +624,7 @@ Here is the activity diagram from when a user inputs a view command:
 
 ![View Activity Diagram](images/ViewActivityDiagram.png)
 
-# Find Feature
+## Find Feature
 
 The Find feature is facilitated by the `FindCommand` which extends `Command`.
 
@@ -645,7 +645,7 @@ The process is given as such:
 7. `LogicManager` receives the `CommandResult` object. returned from the execution of the `FindCommand` and parses it.
 8. The execution of `FindCommand` terminates.
 
-# List Feature
+## List Feature
 
 The List feature is facilitated by the `ListCommand` which extends `Command`.
 
@@ -664,7 +664,7 @@ The process is given as such:
 5. `LogicManager` receives the `CommandResult` object returned from the execution of the `ListCommand` and parses it.
 6. The execution of `ListCommand` terminates.
 
-# Delete Feature
+## Delete Feature
 
 The Delete feature is facilitated by the `DeleteCommand` which extends `Command`.
 
@@ -687,7 +687,7 @@ The process is given as such:
 7. `LogicManager` receives the `CommandResult` object returned from the execution of the `DeleteCommand` and parses it.
 8. The execution of `DeleteCommand` terminates.
 
-# Clear Feature
+## Clear Feature
 
 The Clear feature is facilitated by the `ClearCommand` which extends `Command`.
 
