@@ -24,7 +24,6 @@ public class ModelManager implements Model {
     private static ModelManager instance;
     private final AddressBook addressBook;
     private final FilteredList<Person> filteredPersons;
-    private final FilteredList<Appointment> filteredAppointments;
     private final FilteredList<Record> filteredRecords;
     private final UserPrefs userPrefs;
 
@@ -39,7 +38,6 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredAppointments = new FilteredList<>(this.addressBook.getAppointmentList());
         filteredRecords = new FilteredList<>(this.addressBook.getRecordList());
         instance = this;
     }
@@ -165,8 +163,8 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Appointment> getFilteredAppointmentList() {
-        return filteredAppointments;
+    public ObservableList<Appointment> getAppointmentList() {
+        return this.addressBook.getAppointmentList();
     }
 
     @Override
@@ -217,7 +215,6 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
-                && filteredAppointments.equals(otherModelManager.filteredAppointments)
                 && filteredRecords.equals(otherModelManager.filteredRecords);
     }
 }

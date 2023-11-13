@@ -19,9 +19,9 @@ import seedu.address.model.appointment.Appointment;
 /**
  * Panel containing the list of appointments.
  */
-public class AppointmentCalenderPanel extends UiPart<Region> {
+public class AppointmentCalendarPanel extends UiPart<Region> {
     private static final String FXML = "AppointmentCalenderPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(AppointmentCalenderPanel.class);
+    private final Logger logger = LogsCenter.getLogger(AppointmentCalendarPanel.class);
 
     @FXML
     private ObservableList<Appointment> appointmentList;
@@ -37,7 +37,7 @@ public class AppointmentCalenderPanel extends UiPart<Region> {
      * Creates a {@code AppointmentCalender
      * Panel} with the given {@code ObservableList}.
      */
-    public AppointmentCalenderPanel(ObservableList<Appointment> appointmentList) {
+    public AppointmentCalendarPanel(ObservableList<Appointment> appointmentList) {
         super(FXML);
         this.appointmentList = appointmentList;
         currentDate = LocalDate.now();

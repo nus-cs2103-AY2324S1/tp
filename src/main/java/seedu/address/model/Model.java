@@ -69,6 +69,7 @@ public interface Model {
      * Returns true if the same record exists under the patient in the Medbook
      */
     boolean hasRecord(Record record, Index index);
+
     /**
      * Deletes the given person.
      * The person must exist in the address book.
@@ -97,7 +98,7 @@ public interface Model {
      * {@code predicate}.
      *
      * @throws NullPointerException
-     *             if {@code predicate} is null.
+     *                              if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
@@ -105,7 +106,7 @@ public interface Model {
     ObservableList<Person> getPinnedPersonList();
 
     /** Returns an unmodifiable view of the filtered appointment list */
-    ObservableList<Appointment> getFilteredAppointmentList();
+    ObservableList<Appointment> getAppointmentList();
 
     void resetAppointmentList();
 
@@ -121,7 +122,7 @@ public interface Model {
      * {@code predicate}.
      *
      * @throws NullPointerException
-     *             if {@code predicate} is null.
+     *                              if {@code predicate} is null.
      */
     void updateFilteredRecordList(Predicate<Record> predicate);
 

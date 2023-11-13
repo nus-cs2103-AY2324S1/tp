@@ -7,7 +7,7 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
 participant "e:EditCommand" as EditCommand LOGIC_COLOR
-participant "result:CommandResult" as CommandResult LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -42,7 +42,7 @@ EditCommandParser --> AddressBookParser : e
 deactivate EditCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 EditCommandParser -[hidden]-> AddressBookParser
-destroy EditCommandParser
+deactivate EditCommandParser
 
 
 AddressBookParser --> LogicManager : e
@@ -52,13 +52,13 @@ LogicManager -> EditCommand : execute()
 activate EditCommand
 
 create Person
-EditCommand -> Person : createEditedPerson()
+EditCommand -> Person : createEditedPerson(person, editPersonDescriptor)
 activate Person
 
 Person --> EditCommand
 deactivate Person
 
-EditCommand -> Model : setPerson()
+EditCommand -> Model : setPerson(targetPerson, editedPerson)
 activate Model
 
 Model --> EditCommand
@@ -68,7 +68,7 @@ create CommandResult
 EditCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> EditCommand : result
+CommandResult --> EditCommand
 deactivate CommandResult
 
 EditCommand --> LogicManager : result

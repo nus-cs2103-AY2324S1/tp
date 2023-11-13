@@ -22,7 +22,7 @@ public class AppointmentsWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private AppointmentListPanel appointmentListPanel;
-    private AppointmentCalenderPanel appointmentCalenderPanel;
+    private AppointmentCalendarPanel appointmentCalenderPanel;
 
     @FXML
     private StackPane appointmentListPanelPlaceholder;
@@ -48,7 +48,7 @@ public class AppointmentsWindow extends UiPart<Stage> {
         appointmentListPanel = new AppointmentListPanel(appointmentList);
         appointmentListPanelPlaceholder.getChildren().add(appointmentListPanel.getRoot());
 
-        appointmentCalenderPanel = new AppointmentCalenderPanel(appointmentList);
+        appointmentCalenderPanel = new AppointmentCalendarPanel(appointmentList);
         appointmentCalenderPanelPlaceholder.getChildren().add(appointmentCalenderPanel.getRoot());
     }
 

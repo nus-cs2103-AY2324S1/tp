@@ -40,7 +40,7 @@ public class DeleteAppointmentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Appointment> appointmentList = model.getFilteredAppointmentList();
+        List<Appointment> appointmentList = model.getAppointmentList();
         List<Person> personList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= appointmentList.size()) {

@@ -8,8 +8,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Condition {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Condition should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Conditions should only contain alphanumeric characters, "
+            + "dashes and spaces";
 
     public static final String VALIDATION_REGEX = "[a-zA-Z0-9- ]+";
 

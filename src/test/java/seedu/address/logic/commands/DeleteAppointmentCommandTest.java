@@ -33,7 +33,7 @@ public class DeleteAppointmentCommandTest {
 
     @Test
     public void execute_validIndex_success() {
-        Appointment appointmentToDelete = model.getFilteredAppointmentList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Appointment appointmentToDelete = model.getAppointmentList().get(INDEX_FIRST_PERSON.getZeroBased());
         Nric patientNric = appointmentToDelete.getNric();
         Person personWithAppointment = model.getFilteredPersonList().stream()
                 .filter(person -> person.getNric().equals(patientNric))
@@ -59,7 +59,7 @@ public class DeleteAppointmentCommandTest {
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredAppointmentList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getAppointmentList().size() + 1);
         DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteAppointmentCommand, model, Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
@@ -67,7 +67,7 @@ public class DeleteAppointmentCommandTest {
 
     @Test
     public void execute_invalidNric_throwsCommandException() {
-        Appointment appointmentToDelete = model.getFilteredAppointmentList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Appointment appointmentToDelete = model.getAppointmentList().get(INDEX_FIRST_PERSON.getZeroBased());
         Nric patientNric = appointmentToDelete.getNric();
         Person personWithAppointment = model.getFilteredPersonList().stream()
                 .filter(person -> person.getNric().equals(patientNric))
