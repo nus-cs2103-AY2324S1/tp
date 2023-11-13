@@ -588,7 +588,8 @@ Format: `editPerson [INDEX] [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-
 
 **Tips:**
 - If you are currently in ___STUDENTS list___, the command can be shortened to `edit`.
-  </box>
+
+</box>
 
 Example usages:
 * `editPerson 1 -name John`
@@ -769,13 +770,14 @@ Format: `filter [-name NAME] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]`
 * Multiple fields can be specified at the same time.
 * Refer to the parameter constraints [here](#parameter-summary).
 * At least one optional field should be specified.
-  <box type="tip" seamless>
+  
+<box type="tip" seamless>
 
 **Tips:**
 - When filtering by multiple fields, only the students which match all the fields are returned.
 - To reset the view to an unfiltered state, type `list students`.
 - If no students that match the filters are found, an empty list will be shown.
-  </box>
+</box>
 
 Example usages:
 * `filter -name Alex -tag primary -subject Mathematics`
