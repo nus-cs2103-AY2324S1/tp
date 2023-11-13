@@ -35,7 +35,7 @@ public class AddLessonCommand extends Command {
         model.addLesson(lesson);
         model.setState(State.SCHEDULE);
         model.showLesson(lesson);
-        return new CommandResult(String.format("New lesson added: " + lesson.toString()), State.SCHEDULE);
+        return new CommandResult(String.format("New lesson added: " + lesson.toString()));
     }
     public Lesson getLesson() {
         return lesson;

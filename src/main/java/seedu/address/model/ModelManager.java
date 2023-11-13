@@ -385,7 +385,12 @@ public class ModelManager implements Model {
 
     @Override
     public void setState(State state) {
-        this.state = state;
+        if (!sameState(state)) {
+            this.state = state;
+            if (ui != null) {
+                ui.changeLayout(state);
+            }
+        }
     }
 
     @Override

@@ -58,7 +58,7 @@ public class ListCommand extends Command {
             return new CommandResult(MESSAGE_SUCCESS + " " + state.toString(), displayParams);
         } else {
             model.setState(state); // Only can pass in "STUDENTS","SCHEDULE" or "TASKS", has been filtered by parser
-            return new CommandResult(MESSAGE_SUCCESS + " " + state.toString(), state, displayParams);
+            return new CommandResult(MESSAGE_SUCCESS + " " + state.toString(), displayParams);
         }
     }
 

@@ -268,29 +268,6 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
-
-            if (!commandResult.getState().equals(State.NONE)) {
-                State state = commandResult.getState();
-                double[] dividerPositions = contentSplitPane.getDividerPositions();
-                contentSplitPane.getItems().removeAll(personList, studentDetailList,
-                        scheduleList, lessonDetailList, fullTaskList, taskDetailListPanel);
-                switch (state) {
-                case SCHEDULE:
-                    contentSplitPane.getItems().addAll(scheduleList, lessonDetailList);
-                    break;
-                case STUDENT:
-                    contentSplitPane.getItems().addAll(personList, studentDetailList);
-                    break;
-                case TASK:
-                    contentSplitPane.getItems().addAll(fullTaskList, taskDetailListPanel);
-                    break;
-                default:
-                    System.out.println("unknown panel asked for");
-                    break;
-                }
-                contentSplitPane.setDividerPositions(dividerPositions);
-            }
-
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
@@ -339,5 +316,31 @@ public class MainWindow extends UiPart<Stage> {
         }
         taskDetailListPanel.setVisible(true);
         taskDetailPanel.setTaskDetails(task);
+    }
+
+    /**
+     * Sets the appropriate panels to display, hide all other panels.
+     *
+     * @param state The new state that determines which panels to show.
+     */
+    public void changeLayout(State state) {
+        double[] dividerPositions = contentSplitPane.getDividerPositions();
+        contentSplitPane.getItems().removeAll(personList, studentDetailList,
+                scheduleList, lessonDetailList, fullTaskList, taskDetailListPanel);
+        switch (state) {
+        case SCHEDULE:
+            contentSplitPane.getItems().addAll(scheduleList, lessonDetailList);
+            break;
+        case STUDENT:
+            contentSplitPane.getItems().addAll(personList, studentDetailList);
+            break;
+        case TASK:
+            contentSplitPane.getItems().addAll(fullTaskList, taskDetailListPanel);
+            break;
+        default:
+            System.out.println("unknown panel asked for");
+            break;
+        }
+        contentSplitPane.setDividerPositions(dividerPositions);
     }
 }

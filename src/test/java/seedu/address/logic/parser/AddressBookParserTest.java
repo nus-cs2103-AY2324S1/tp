@@ -73,11 +73,11 @@ public class AddressBookParserTest {
     public void parseCommand_addTask() throws Exception {
         assertTrue(parser.parseCommand(AddTaskCommand.COMMAND_WORD
                         + " 1 description") instanceof AddTaskCommand);
-        assertTrue(parser.parseCommand("task description") instanceof AddTaskCommand);
-        AddTaskCommand addTaskCommand = (AddTaskCommand) parser.parseCommand("task 1 description");
+        assertTrue(parser.parseCommand("addtask description") instanceof AddTaskCommand);
+        AddTaskCommand addTaskCommand = (AddTaskCommand) parser.parseCommand("addtask 1 description");
         assertEquals(addTaskCommand.getTask().getDescription(), "description");
         assertEquals(addTaskCommand.getIndex(), 1);
-        addTaskCommand = (AddTaskCommand) parser.parseCommand("task description");
+        addTaskCommand = (AddTaskCommand) parser.parseCommand("addtask description");
         assertEquals(addTaskCommand.getTask().getDescription(), "description");
         assertNull(addTaskCommand.getIndex());
     }
