@@ -102,21 +102,6 @@ public class PolicyExpirationDateComparatorTest {
             amyPolicyCopy
     );
 
-    @Test
-    public void hasEarlierExpiryDate() {
-        assertTrue(comparator.compare(bobPerson, amyPerson) < 0);
-    }
-
-    @Test
-    public void hasSameExpiryDate() {
-        assertTrue(comparator.compare(amyPersonCopy, amyPerson) == 0);
-    }
-
-    @Test
-    public void hasLaterExpiryDate() {
-        assertTrue(comparator.compare(amyPerson, bobPerson) > 0);
-    }
-
     private Set<Tag> createTags(String... tagNames) {
         Set<Tag> tags = new HashSet<>();
         for (String tagName : tagNames) {
@@ -124,4 +109,20 @@ public class PolicyExpirationDateComparatorTest {
         }
         return tags;
     }
+
+    @Test
+    public void compare_firstPersonExpiryDateBeforeSecondPerson_showsFirstPersonComesFirstInSort() {
+        assertTrue(comparator.compare(bobPerson, amyPerson) < 0);
+    }
+
+    @Test
+    public void compare_firstPersonExpiryDateSameAsSecondPerson_showsOrderDoesNotMatter() {
+        assertTrue(comparator.compare(amyPersonCopy, amyPerson) == 0);
+    }
+
+    @Test
+    public void compare_firstPersonExpiryDateAfterSecondPerson_showsSecondPersonComesFirstInSort() {
+        assertTrue(comparator.compare(amyPerson, bobPerson) > 0);
+    }
+
 }
