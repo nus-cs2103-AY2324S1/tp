@@ -64,6 +64,8 @@ Our guide is made for FumbleLog users of all experiences! Refer to the table bel
    * `delete_person 3` : Deletes the 3rd person shown in the current persons list.
    * `exit` : Exits FumbleLog application.
 
+<div style="page-break-after: always;"></div>
+
 **6. Learn more about FumbleLog**
 - Refer to [Orientation to the Graphical User Interface](#orientation-to-the-graphical-user-interface-gui) below for an orientation on FumbleLog.
 - Refer to [FumbleLog Tutorial](#fumblelog-tutorial) for a more extensive guide on how to use FumbleLog.
@@ -112,18 +114,12 @@ This tutorial is designed for new users looking to get started using FumbleLog. 
 your contacts and events.
 
 1. First launch FumbleLog. You may refer to the [Quick Start](#quick-start) guide if you have forgotten how to.
-2. Lets first try **adding a person**, `Mary Lee`, to your contact list. Enter the command: `add_person n/Mary Lee p/91234567 e/mary@gmail.com a/Mary Street #01-01 b/2001-12-12 g/Family`. You should see FumbleLog successfully adding the contact to the contact list:
+2. Let's first try **adding a person**, `Mary Lee`, to your contact list. Enter the command: `add_person n/Mary Lee p/91234567 e/mary@gmail.com a/Mary Street #01-01 b/2001-12-12 g/Family`. You should see FumbleLog successfully adding the contact to the contact list:
 ![Tutorial Add](images/tutorialAdd.png)
-
-<div style="page-break-after: always;"></div>
-
 3. Now, lets try **editing the name and email** of your contact. Let's use the index of `Mary Lee` shown in the list (in this case 1), and edit her information: `edit_person 1 n/John Doe e/John@gmail.com`. FumbleLog should reflect the changes to your contact immediately:
 ![Tutorial Edit](images/tutorialEdit.png)
 4. Try adding a few more contacts and assign them to the same `Family` group using the `g/` parameter. Your contact list should look something like this:
 ![Tutorial Add More](images/tutorialAddMore.png)
-
-<div style="page-break-after: always;"></div>
-
 5. Now, lets say `John`'s birthday is in a few weeks. We can **add this event** to FumbleLog using this command: `add_event m/John birthday d/2023-12-12`.
 ![Tutorial Event Add](images/tutorialEventAdd.png)
 6. If everyone in the `Family` group is attending `John`'s birthday, you can easily assign every contact in the group to the event. In this case, simply **edit the event** by assigning the `Family` group, as such: `edit_event 1 g/Family`. Now you should see everyone in the `Family` group is assigned to `John`'s birthday.
@@ -226,6 +222,7 @@ Format: `add_person n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ### Editing a person : `edit_person`
 
@@ -285,6 +282,8 @@ Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BI
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a person : `delete_person`
 
 FumbleLog allows you to organize your contact list by deleting contacts that are no longer relevant.
@@ -318,6 +317,7 @@ Input: `delete_person 1` deletes the first person on the list.
 ![DeletePerson](images/DeletePerson.png)
 
 [Scroll back to Table of Contents](#table-of-contents)
+<div style="page-break-after: always;"></div>
 
 ### Locating persons by name or group: `find_person`
 
@@ -362,6 +362,8 @@ Input: `find_person Alexa` displays all contacts with the name `Alexa` in the co
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Listing all persons : `list_persons`
 
 FumbleLog restores any filtered contacts list using `list_persons`.
@@ -379,6 +381,8 @@ Format: `list_persons`
 </div>
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ## Commands for Events
 
@@ -432,6 +436,8 @@ Input: `add_event m/FumbleLog meeting d/2023-10-05 s/1500 e/1700 n/Ken g/CS2103T
 
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Editing an event : `edit_event`
 
@@ -494,6 +500,8 @@ Input: `edit_event 1 m/tP week 3 meeting d/2023-10-05 s/1500 e/1700`
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting an event : `delete_event`
 
 FumbleLog helps you to organise your event list better by allowing you to delete events that are in the past or no longer relevant.
@@ -523,6 +531,8 @@ Format: `delete_event EVENT_INDEX`
 ![EventDelete](images/Eventdelete.png)
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Locating events by name, group or person: `find_event`
 
@@ -562,6 +572,8 @@ Input: `find_event meeting family`
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Listing all events: `list_events`
 
 After using FumbleLog `find_event` or `find_all` command which filters the event list, you can use `list_events` to display the full event list again.
@@ -582,6 +594,7 @@ Format: `list_events`
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
 
 ## General commands
 
@@ -620,6 +633,8 @@ Input: `remind`
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Finding persons and events: `find_all`
 
 If you would like to search for your contacts and events at the same time, you can use the `find_all` command to find all
@@ -657,6 +672,8 @@ Input: `find_all friends`
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Listing all persons and events: `list_all`
 
 If you would like to list all your contacts and events, you can use the `list_all` command to display the full list of contacts and events.
@@ -677,6 +694,8 @@ Format: `list_all`
 
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Clearing all entries : `clear`
 
@@ -701,6 +720,8 @@ Format: `clear`
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -710,6 +731,8 @@ Format: `exit`
 [Scroll back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 # How we manage your data
 
@@ -733,6 +756,8 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 # FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -755,6 +780,8 @@ The domain name must:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 # Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
@@ -762,6 +789,8 @@ The domain name must:
 [Scroll back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 # Command summary
 
@@ -786,6 +815,7 @@ The domain name must:
 | **Find Event**   | `find_event KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_event meeting`                                                                                                                                                                        |
 | **List Events**  | `list_events`                                                                                                                                                                                                                              |
 
+<div style="page-break-after: always;"></div>
 
 ### General commands
 
