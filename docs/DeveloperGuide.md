@@ -1177,10 +1177,10 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567` again (Duplicate applicant)<br>
        Expected: No applicant is added. Error details shown in the response area. Applicant list in applicant area remains the same.
 
-    3. Test case: `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567` with any of the fields missing<br>
+    3. Test case: `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com`<br>
        Expected: Similar to previous.
 
-    4. Other incorrect add commands to try: `add`, `add x`, `add n/John Doe e/johndoe@gmail.com p/Software Engineer hp/x`<br>
+    4. Other incorrect add commands to try: `add`, `add -1`, `add n/John Doe e/johndoe@gmail.com p/Software Engineer hp/abc`<br>
        Expected: Similar to previous.
 
 ### Editing an applicant
@@ -1196,7 +1196,7 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `edit n/Pop Greenwood`<br>
        Expected: No applicant is edited. Error details shown in the response area. Applicant list in applicant area remains the same.
 
-    4. Other incorrect edit commands to try: `edit`, `edit x n/Jane Doe`, `edit e/email` (where x is larger than the list size)<br>
+    4. Other incorrect edit commands to try: `edit`, `edit -1 n/Jane Doe`, `edit e/email`<br>
        Expected: Similar to previous.
 
 ### Deleting an applicant
@@ -1212,7 +1212,7 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `delete 0`<br>
        Expected: No applicant is deleted. Error details shown in the response area. Applicant list in applicant area remains the same.
 
-    4. Other incorrect delete commands to try: `delete`, `delete x`, `delete a` (where x is larger than the list size)<br>
+    4. Other incorrect delete commands to try: `delete`, `delete -1`, `delete a`<br>
        Expected: Similar to previous.
 
 ### Editing an applicant's status
@@ -1222,13 +1222,13 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
     2. Test case: `status 1 s/o`<br>
-       Expected: The status of the first applicant is updated to *OFFERED*. Updated details of the applicant shown in the response area.
+       Expected: The status of the first applicant is updated to _OFFERED_. Updated details of the applicant shown in the response area.
        Applicant area shows the updated list of applicants.
 
     3. Test case: `status 1 s/l`<br>
        Expected: No applicant's status is edited. Error details shown in the response area. Applicant list in applicant area remains the same.
 
-    4. Other incorrect edit status commands to try: `status`, `status x s/o`, `status 1 s/` (where x is larger than the list size)<br>
+    4. Other incorrect edit status commands to try: `status`, `status -1 s/o`, `status 1 s/`<br>
        Expected: Similar to previous.
 
 ### Adding an interview to an applicant
@@ -1244,7 +1244,7 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `addi 0`<br>
        Expected: No interview is added to any applicant. Error details shown in the response area. Applicant list in applicant area remains the same.
 
-    4. Other incorrect add interview commands to try: `addi`, `addi x`, `addi r/6.0`, `addi 1 t/toolonginterviewtypeeeeeeeeeeeeeeee` (where x is larger than the list size)<br>
+    4. Other incorrect add interview commands to try: `addi`, `addi -1`, `addi r/6.0`, `addi 1 t/toolonginterviewtypeeeeeeeeeeeeeeee`<br>
        Expected: Similar to previous.
 
 ### Editing an interview of an applicant
@@ -1260,7 +1260,7 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `editi 0`<br>
        Expected: No interview is added to any applicant. Error details shown in the response area. Applicant list in applicant area remains the same.
 
-    4. Other incorrect edit interview commands to try: `editi`, `editi x`, `editi 1 i/x t/technical`, `editi 1 i/1 r/y` (where x is larger than the list size and y is larger than 10.0)<br>
+    4. Other incorrect edit interview commands to try: `editi`, `editi -1`, `editi 1 i/8 t/technical`, `editi 1 i/1 r/12.0`<br>
        Expected: Similar to previous.
 
 ### Deleting an interview from an applicant
@@ -1276,7 +1276,7 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `deletei 0`<br>
        Expected: No interview is deleted from any applicant. Error details shown in the response area. Applicant list in applicant area remains the same.
 
-    4. Other incorrect delete interview commands to try: `deletei`, `deletei x`, `deletei 1 i/x` (where x is larger than the list size)<br>
+    4. Other incorrect delete interview commands to try: `deletei`, `deletei 1`, `deletei 1 i/8`<br>
        Expected: Similar to previous.
 
 ### Sorting applicants
