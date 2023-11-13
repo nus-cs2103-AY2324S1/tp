@@ -33,7 +33,7 @@ With MedBook, experience a new level of convenience and control:
 
 ## Table of Contents
 
-- [Welcome to MedBook](#introduction)
+- [Welcome to MedBook](#welcome-to-medbook)
 - [Table of Contents](#table-of-contents)
 - [Navigating the User Guide](#navigating-the-user-guide)
 - [Quick Start](#quick-start)
@@ -102,7 +102,7 @@ We're here to make your experience as user-friendly as possible. Let's get start
 
 **Tip**: Create a new folder named `MedBook` for easy organization.
 
-    </box>
+</box>
 
 - Move `medbook.jar` into the folder as shown below.
   - **Windows Users**:![Ui](images/WinUserDir.png)
@@ -681,6 +681,16 @@ Examples:
 
 </box>
 
+<u>[Back to Table Of Contents](#table-of-contents)</u>
+
+### Deleting a patient: `delete`
+
+<box type="tip" seamless>
+
+**Tip**:Wants to remove irrelevant patient? `delete` is here to help you!
+
+</box>
+
 Deletes an existing patient from the system.
 
 Format: `delete PATIENTID`
@@ -862,8 +872,9 @@ MedBook data is saved automatically as a JSON file located in `[jar file locatio
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and copy the `data` folder over to the folder of the installed jar file in the other computer.
 
-**Q**: I just entered a very long allergy and the format of _Patient Card_ goes messy.
+**Q**: I just entered a very long allergy and the format of _Patient Card_ goes messy.<br>
 **A**: MedBook does not accept extreme inputs. Try resizing the window and see if that helps. We also aim to amend this issue in next iteration.<br>
+
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ---

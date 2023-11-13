@@ -54,7 +54,7 @@ Each of the four main components:
 - Defines its API in an interface named after the component.
 - Implements its functionality using a `{Component Name}Manager` class, following the corresponding API interface.
 
-For example, the `Logic` component's API is defined in `Logic.java`, and its functionality is implemented in `LogicManager.java`.
+For example, the `Logic` component's API is defined in `Logic.java`, and its functionality is implemented in `LogicManager.java`.S
 
 ---
 

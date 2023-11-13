@@ -23,6 +23,7 @@ Given below are my contributions to the project.
   - Updated the help page, containing basic information of available commands and making the helpWindow scrollable. (Pull request [\#80](https://github.com/AY2324S1-CS2103T-T12-4/tp/pull/80), [\#81](https://github.com/AY2324S1-CS2103T-T12-4/tp/pull/81), [\#92](https://github.com/AY2324S1-CS2103T-T12-4/tp/pull/92))
 
 * **Documentation**:
+
   - User Guide:
     - Refine introduction. Adding more detail to the introduction as well as sections, such as Glossary, Navigating the GUI and tutorial.(Pull Request: [\#92](https://github.com/AY2324S1-CS2103T-T12-4/tp/pull/92))
     - Update description of feature `list` and `view` (Pull Request: [\#63](https://github.com/AY2324S1-CS2103T-T12-4/tp/pull/63))
@@ -36,7 +37,7 @@ Given below are my contributions to the project.
     - Fix the issues in the use cases.
     - Reviewed the DG together as a group for final submission
 
-- **Community**:
+* **Community**:
   - PRs reviewed: [\#23](https://github.com/AY2324S1-CS2103T-T12-4/tp/pull/23), [\#31](https://github.com/AY2324S1-CS2103T-T12-4/tp/pull/31),
     [\#41](https://github.com/AY2324S1-CS2103T-T12-4/tp/pull/41), [\#54](https://github.com/AY2324S1-CS2103T-T12-4/tp/pull/54),
     [\#61](https://github.com/AY2324S1-CS2103T-T12-4/tp/pull/61), [\#66](https://github.com/AY2324S1-CS2103T-T12-4/tp/pull/66),

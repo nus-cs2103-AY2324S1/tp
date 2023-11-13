@@ -22,11 +22,12 @@ Given below are my contributions to the project.
   - This is extremely useful for attaching files such as blood test results that is vital to be kept together with patient records.
 
 - **New Feature 2**: Add Encryption/Decryption Functionality v1.3
+
   - Encrypts data from the application using AES encryption such that the data in the addressbook.json file is encrypted.
   - This is to ensure privacy and confidentiality for patient data.
   - This functionality was later scrapped due to the group prject constraints
 
-* **Bug Fixes**: Fixed all Bugs in repo for v1.2
+- **Bug Fixes**: Fixed all Bugs in repo for v1.2
 
   - [Link to Bug Fix](https://github.com/AY2324S1-CS2103T-T12-4/tp/pull/40)
   - Prior to this all Java CI checks failed due to failing of testcases and some features not implemented correctly
@@ -40,12 +41,13 @@ Given below are my contributions to the project.
   - Assessed testers' issues from PE-D
 
 - **Documentation**:
+
   - User Guide:
     - Added documentation for the all features that I had implemented
   - Developer Guide:
     - Added implementation details for the all features that I had implemented
 
-* **Community**:
+- **Community**:
   - PRs reviewed : [\#28](https://github.com/AY2324S1-CS2103T-T12-4/tp/pull/28), [\#62](https://github.com/AY2324S1-CS2103T-T12-4/tp/pull/62), [\152](https://github.com/AY2324S1-CS2103T-T12-4/tp/pull/152), [\#56](https://github.com/AY2324S1-CS2103T-T12-4/tp/pull/56)
   - Contributed to forum discussions (examples: [\#389](https://github.com/nus-cs2103-AY2324S1/forum/issues/389) and [\#355](https://github.com/nus-cs2103-AY2324S1/forum/issues/355))
   - Reported bugs and suggestions for other teams in the class (examples: [\#184](https://github.com/AY2324S1-CS2103-T16-2/tp/issues/184), [\#183](https://github.com/AY2324S1-CS2103-T16-2/tp/issues/183), [\#173](https://github.com/AY2324S1-CS2103-T16-2/tp/issues/173))
