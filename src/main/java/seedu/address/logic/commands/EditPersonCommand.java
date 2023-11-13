@@ -114,7 +114,6 @@ public class EditPersonCommand extends Command {
         } else {
             model.updateGroups();
         }
-
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 

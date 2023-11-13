@@ -38,9 +38,12 @@ public class EventNameOrGroupContainsKeywordsPredicate implements Predicate<Even
                                 StringUtil.containsWordIgnoreCase(group.groupName, keyword))
                         || event.getNames().stream().anyMatch(name -> StringUtil.containsWordIgnoreCase(
                                 name.fullName, keyword))
-                        || personList.stream().anyMatch(person -> event.getGroups().stream()
-                        .anyMatch(person.getGroups()::contains) && StringUtil.containsWordIgnoreCase(
-                        person.getName().fullName, keyword)));
+                        || personList.stream().anyMatch(
+                                person -> event
+                                        .getGroups()
+                                        .stream()
+                                        .anyMatch(person.getGroups()::contains)
+                                            && StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword)));
     }
 
     @Override
