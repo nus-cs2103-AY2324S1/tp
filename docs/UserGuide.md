@@ -377,7 +377,7 @@ Lists all patients in the system.
 
 ### Adding a patient: `add`
 
-Adds a patient into the system
+Adds a patient into the system.
 
 **Format:** `add n/NAME i/IC_NUMBER [g/GENDER] [b/BIRTHDAY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [pr/PRIORITY] [t/TAG]...`
 
@@ -428,8 +428,8 @@ Displays a specific patient’s information and medical record.
 
 **Examples:**
 
-+ To view patient with IC number "T0201234A"<br>
-  `view i/T0201234A`
++ To view patient with IC number "T0123456A"<br>
+  `view i/T0123456A`
 
 **Expected output when command succeeds:**
 
@@ -454,7 +454,7 @@ details and record card, you have to click on their patient card in the list.
 
 ### Editing a patient: `edit`
 
-Edits the information of a patient with the specified IC number
+Edits the information of a patient with the specified IC number.
 
 **Format:** `edit i/IC_NUMBER [n/NAME] [g/GENDER] [b/BIRTHDAY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [pr/PRIORITY] [t/TAG]...`
 + At least one of the optional fields indicated within square brackets must be provided.
@@ -482,7 +482,7 @@ with the new tags.
 * To edit the birthday of a patient with IC number "T0123456A" to 10 Jan 2000 <br>
   `edit i/T0123456A b/10/01/2000`
 * To edit the phone number and email of a patient with IC number "S0123456B" to "87621527" and "betsyc@hotmail.com" respectively <br>
-  `edit i/S0123456B b/10/01/2000 e/betsyc@hotmail.com`
+  `edit i/S0123456B p/87621527 e/betsyc@hotmail.com`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -521,7 +521,10 @@ Finds the patients whose names match any of the given keywords.
 * To find patients whose name matches "Mary" and "Jane" <br>
   `find Mary Jane`
 
+**Expected output when command succeeds:**<br>
+
 <img src='images/ug/findPatients.png' width='600'>
+
 <br>
 
 <br>
@@ -708,7 +711,7 @@ application.
 **A**: Please click on the patient you are interested in viewing. The details will be on the right hand side in the
 Patient Record Panel.
 
-**Q**: The Patient List Panel is cut off, I cant see some details for each patient\
+**Q**: The Patient List Panel is cut off, I can't see some details for each patient.\
 **A**: Please resize the application by dragging the border of the application window with your mouse. If the appplication is already in full screen mode, please drag the divider between the Patient List Panel and Patient
 Record Panel to the right.
 
@@ -716,13 +719,13 @@ Record Panel to the right.
 **A**: A critical error might have occurred. Please ensure your command is as specified in [Features](#features). Please contact
 the technical team in charge of your department to file a bug report on our [issues](https://github.com/AY2324S1-CS2103T-T14-2/tp/issues) page.
 
-**Q**: I have accidentally cleared the whole patient record system, can I retrieve the lost details?\
-**A**: Yes, A&E has the [Undo](#undoing-a-command-undo) feature which allows you to retrieve all the lost details.
+**Q**: I have accidentally cleared the whole patient record system, can I retrieve the lost data?\
+**A**: Yes, A&E has the [Undo](#undoing-a-command-undo) feature which allows you to retrieve all the lost data.
 
 **Q**: Will my data be saved immediately?\
-**A**: Yes, A&E saves your data after every command executed.
+**A**: Yes, A&E saves your data automatically after every command executed.
 
-**Q**: How do I transfer my data to another Computer?\
+**Q**: How do I transfer my data to another computer?\
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
 the data of your previous AAndE home folder.
 
@@ -745,13 +748,13 @@ the data of your previous AAndE home folder.
 4. The use of extra and invalid prefixes/parameters will not be detected properly, resulting in the wrong error message
    being displayed.
 
-5. Long tags cannot be displayed properly in the app and might overlap with other details of patients. As such, we
-   advise against the use of long tags.
+5. Long tags cannot be displayed properly in the app and might overlap with other details of the patient in the patient
+   card. As such, we advise against the use of long tags.
 
 6. Some invalid birthdays can be added/edited to a patient e.g. 30 February.
 
-7. For the `view` command, users will have to click on the patient themselves in order to see the patient’s details and
-   record.
+7. For the `view` command, users will have to click on the patient card themselves in order to see the patient’s details
+   and record.
 
 8. The minimize button for the help window might not work for some users.
 

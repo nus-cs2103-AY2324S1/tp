@@ -242,7 +242,7 @@ The `Storage` component,
 
 * can save both address book data and user preference data in JSON format (e.g., `aande.json`), and read them back into corresponding
   objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
+* inherits from both `AddressBookStorage` and `UserPrefsStorage`, which means it can be treated as either one (if only
   the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`).
@@ -1323,7 +1323,7 @@ Testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: Have our sample patient list loaded OR add a patient with IC number `T7654321A`.
 
-   2. Test case: `record i/T7654321A o/Broken Arm di/Hairline fracture tp/Cast for 2 days`<br>
+   2. Test case: `record i/T7654321A o/Coughing for 3 weeks di/Acute Bronchitis tp/Take Medicine`<br>
       Expected: Record of the patient with IC number `T7654321A` is edited to have `Broken Arm` as initial observation,
       `Hairline fracture` as diagnosis, and `Cast for 2 days` as treatment plan. Details of the edited record is shown
       in the status message. Patient's record is updated in UI.
