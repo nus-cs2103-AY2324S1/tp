@@ -9,24 +9,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CommandBoxHistoryTest {
     private static final String FIRST_COMMAND = "list";
     private static final String SECOND_COMMAND = "clear";
-    private List<String> commandList;
     private CommandBoxHistory commandBoxHistory;
 
-    @BeforeEach
-    public void setUp() {
-        commandList = new ArrayList<>();
-        commandList.add(FIRST_COMMAND);
-        commandList.add(SECOND_COMMAND);
-    }
-
     @Test
-    public void constructor_defensiveCopy_backingListUnmodified() {
+    public void constructor_defensiveCopy() {
         List<String> list = new ArrayList<>();
         commandBoxHistory = new CommandBoxHistory(list);
         list.add(FIRST_COMMAND);
@@ -74,6 +65,10 @@ public class CommandBoxHistoryTest {
 
     @Test
     public void multipleCommandsList() {
+        List<String> commandList = new ArrayList<>();
+        commandList.add(FIRST_COMMAND);
+        commandList.add(SECOND_COMMAND);
+
         commandBoxHistory = new CommandBoxHistory(commandList);
         String thirdElement = "add";
         // simulate adding new command
@@ -95,6 +90,10 @@ public class CommandBoxHistoryTest {
 
     @Test
     public void equals() {
+        List<String> commandList = new ArrayList<>();
+        commandList.add(FIRST_COMMAND);
+        commandList.add(SECOND_COMMAND);
+
         CommandBoxHistory firstHistory = new CommandBoxHistory(commandList);
 
         assertTrue(firstHistory.equals(firstHistory));
@@ -117,71 +116,74 @@ public class CommandBoxHistoryTest {
     }
 
     /**
-     * Asserts that {@code commandBoxHistory#hasNext()} returns true
+     * Asserts that {@code commandBoxHistory#next()} succeeds without throwing NoSuchElementException,
      * and the return value of {@code commandBoxHistory#next()} equals {@code command}.
      */
     private void assertNextSuccess(String command) {
-        assertTrue(commandBoxHistory.hasNext());
-        assertEquals(command, commandBoxHistory.next());
+        try {
+            assertEquals(command, commandBoxHistory.next());
+        } catch (NoSuchElementException e) {
+            throw new AssertionError("NoSuchElementException was thrown.");
+        }
     }
 
     /**
-     * Asserts that {@code commandBoxHistory#hasPrevious()} returns true
+     * Asserts that {@code commandBoxHistory#previous()} succeeds without throwing NoSuchElementException,
      * and the return value of {@code commandBoxHistory#previous()} equals {@code command}.
      */
     private void assertPreviousSuccess(String command) {
-        assertTrue(commandBoxHistory.hasPrevious());
-        assertEquals(command, commandBoxHistory.previous());
+        try {
+            assertEquals(command, commandBoxHistory.previous());
+        } catch (NoSuchElementException e) {
+            throw new AssertionError("NoSuchElementException was thrown.");
+        }
     }
 
     /**
-     * Asserts that {@code commandBoxHistory#hasCurrent()} returns true
+     * Asserts that {@code commandBoxHistory#current()} succeeds without throwing NoSuchElementException,
      * and the return value of {@code commandBoxHistory#current()} equals {@code command}.
      */
     private void assertCurrentSuccess(String command) {
-        assertTrue(commandBoxHistory.hasCurrent());
-        assertEquals(command, commandBoxHistory.current());
+        try {
+            assertEquals(command, commandBoxHistory.current());
+        } catch (NoSuchElementException e) {
+            throw new AssertionError("NoSuchElementException was thrown.");
+        }
     }
 
     /**
-     * Asserts that {@code commandBoxHistory#hasNext()} returns false and the
-     * {@code commandBoxHistory#next()} call throws {@code NoSuchElementException}.
+     * Asserts that {@code commandBoxHistory#next()} fails, throwing {@code NoSuchElementException}.
      */
     private void assertNextFailure() {
-        assertFalse(commandBoxHistory.hasNext());
         try {
             commandBoxHistory.next();
             throw new AssertionError("The expected NoSuchElementException was not thrown.");
         } catch (NoSuchElementException e) {
-            // expected exception thrown
+            // expected NoSuchElementException thrown
         }
     }
 
     /**
-     * Asserts that {@code commandBoxHistory#hasPrevious()} returns false and the
-     * {@code commandBoxHistory#previous()} call throws {@code NoSuchElementException}.
+     * Asserts that {@code commandBoxHistory#previous()} fails, throwing {@code NoSuchElementException}.
      */
     private void assertPreviousFailure() {
-        assertFalse(commandBoxHistory.hasPrevious());
         try {
             commandBoxHistory.previous();
             throw new AssertionError("The expected NoSuchElementException was not thrown.");
         } catch (NoSuchElementException e) {
-            // expected exception thrown
+            // expected NoSuchElementException thrown
         }
     }
 
     /**
-     * Asserts that {@code commandBoxHistory#hasCurrent()} returns false and the
-     * {@code commandBoxHistory#current()} call throws {@code NoSuchElementException}.
+     * Asserts that {@code commandBoxHistory#current()} fails, throwing {@code NoSuchElementException}.
      */
     private void assertCurrentFailure() {
-        assertFalse(commandBoxHistory.hasCurrent());
         try {
             commandBoxHistory.current();
             throw new AssertionError("The expected NoSuchElementException was not thrown.");
         } catch (NoSuchElementException e) {
-            // expected exception thrown
+            // expected NoSuchElementException thrown
         }
     }
 }
