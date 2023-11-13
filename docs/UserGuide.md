@@ -571,7 +571,12 @@ Examples:
 
 **:warning: Caution:**<br>
 
-Edit may cause **information loss**. 
+* Edit for tags in the main window overwrites existing tags.<br>
+  e.g. If the first fosterer has 2 tags : `experienced`, `reliable`,<br>
+  entering `edit 1 n/goodWithCats` will mean fosterer 1 will lose the `experienced` and `reliable` tags. <br>
+  This is not a problem when editing using the [profile view](#editing-a-fosterers-details-through-the-profile-page-edit). <br>
+
+* Edit may cause **information loss**. 
 Before you type the save command, make sure there is no accidental overwrite with faulty information. 
 
 </div>
