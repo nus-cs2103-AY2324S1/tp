@@ -33,7 +33,7 @@ With MedBook, experience a new level of convenience and control:
 
 ## Table of Contents
 
-- [Welcome to MedBook](#welcome-to-medbook-)
+- [Welcome to MedBook](#welcome-to-medbook)
 - [Table of Contents](#table-of-contents)
 - [Navigating the User Guide](#navigating-the-user-guide)
 - [Quick Start](#quick-start)
