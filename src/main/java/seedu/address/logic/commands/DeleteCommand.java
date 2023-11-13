@@ -102,7 +102,7 @@ public class DeleteCommand extends UndoableCommand {
         Person personToDelete = personOptional.get();
         originalPerson = personToDelete;
 
-        index = model.getFilteredPersonList().indexOf(personToDelete);
+        index = model.getUnfilteredPersonList().indexOf(personToDelete);
 
         if (deletePersonDescriptor.isAllFalse()) {
             model.deletePerson(personToDelete);

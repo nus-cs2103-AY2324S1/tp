@@ -8,6 +8,14 @@
 
 > "HealthSync will be your patient’s best friend, the frontdesk’s right hand, and time’s biggest foe." - Yi Chee, Developer, HealthSync
 
+<br>
+
+<!-- Hopefully this is centered in GH pages, else might need to make changes to css or remove this -->
+![Logo](images/address_book_32.jpg) 
+
+<br>
+
+
 HealthSync is a **powerful desktop application designed specifically for clinic assistants in small private clinics.** It offers a unique combination of a Command Line Interface (CLI) and a Graphical User Interface (GUI) to efficiently manage and organize patient details. If you're a fast typist, HealthSync can streamline your workflow and help you handle patient information more effectively than traditional GUI apps.
 
 ## Why HealthSync?
@@ -25,6 +33,20 @@ HealthSync is a **powerful desktop application designed specifically for clinic 
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
+## [Using this Guide](#using-this-guide)
+
+This guide encompasses everything you need to know for using HealthSync.
+
+If you're new to HealthSync, start by checking out the [Quick Start](#quick-start) for a smooth introduction.
+
+If you're already familiar with HealthSync, you can refer to the [Features](#features) section for a comprehensive list of commands and their usage.
+
+Here are the icons you will see throughout this User Guide and what they mean:
+- :bulb: Tips and tricks that will help you get the most out of HealthSync
+- :wrench: Example usages of the feature that will help you save time
+- :exclamation: Things to take note of while reading the User Guide
+- :warning: Things to take caution with, as they may affect your use of HealthSync
+
 
 ## [Quick start](#quick-start)
 
@@ -40,14 +62,7 @@ HealthSync is a **powerful desktop application designed specifically for clinic 
 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
-   ![Ui](images/quickstartGUI.png)
-
-
-Here are the icons you will see throughout this User Guide and what they mean:
-- :bulb: Tips and tricks that will help you get the most out of HealthSync
-- :wrench: Example usages of the feature that will help you save time
-- :exclamation: Things to take note of while reading the User Guide
-- :warning: Things to take caution with, as they may affect your use of HealthSync
+   ![Ui](images/v1.4-screenshots/quickstartGUI.jpg)
 
 The main application consists of the:
  1. [Menu Sidebar](#menu-sidebar) `*`
@@ -56,8 +71,7 @@ The main application consists of the:
  4. [Output Box](#output-box)
  5. [Command Box](#command-box)
 
-> :bulb: Click on the component in the list above to learn more about it
-
+> :bulb: Click on the components in the list above to learn more about them. <br>
 > :warning: **`*`**: The buttons that are in grey and not pressable in the Menu Sidebar are currently not functional and will be implemented in a future version of HealthSync
 
 
@@ -93,6 +107,8 @@ The main application consists of the:
 > :bulb: Longer outputs have to scrolled to be viewed
 
 
+<br>
+
 ### Viewing Help: `help`
 
 Shows a message explaining how to access the help page. The link will bring the user to the User Guide.
@@ -103,6 +119,8 @@ Shows a message explaining how to access the help page. The link will bring the 
 
 > :bulb: Click on `Copy URL` after entering the `help` command and paste the link in your preferred browser
 
+<br>
+
 ### Listing All Patients: `list`
 
 Shows a list of all patients in HealthSync.
@@ -111,7 +129,9 @@ Shows a list of all patients in HealthSync.
 
 > :bulb: Use `ls` as a shortcut for `list`
 
-![result for 'list'](images/listResult.jpg)
+![result for 'list'](images/v1.4-screenshots/list.jpg)
+
+<br>
 
 ### Adding a Patient: `add`
 
@@ -137,7 +157,7 @@ Example commands:
 
 * `add n/Aaron Tan Jun Jie id/S8943782H p/98114839 e/example@mail.com a/Serangoon HDB 123`
 
-![result for 'add n/Aaron Tan Jun Jie id/S8943782H p/98114839 e/example@mailhere a/Serangoon HDB 123'](images/addResult.jpg)
+![result for 'add n/Aaron Tan id/S8765432A p/98765432 e/atjj@example.com a/311, Clementi Ave 21, #12-25 ap/17-12-2023 11:00 13:00 m/Covid-19'](images/v1.4-screenshots/add.jpg)
 
 Expected outputs when the command succeeds:
 * `New Patient added: ...`
@@ -145,6 +165,8 @@ Expected outputs when the command succeeds:
 Expected outputs when the command fails:
 * `Patient already exists in HealthSync.`
 * `Invalid command format! ...`
+
+<br>
 
 ### Editing a Patient's Details: `edit`
 
@@ -170,7 +192,7 @@ Edits an existing patient's details in HealthSync.
 Example commands:
  * `edit n/Alex Yeoh p/91234567 e/alexyeoh@example.com`
 
-![result for 'edit n/Alex Yeoh p/91234567 e/alexyeoh@example.com'](images/editResult.jpg)
+![result for 'edit n/Alex Yeoh p/99991239'](images/v1.4-screenshots/edit.jpg)
 
 Expected outputs when the command succeeds:
 * `Edited patient: ...`
@@ -178,6 +200,8 @@ Expected outputs when the command succeeds:
 Expected outputs when command fails:
 * `INVALID name and/or ID! ...`
 * `Invalid command format! ...`
+
+<br>
 
 ### Deleting a Patient or Field: `delete`
 
@@ -208,7 +232,7 @@ Example commands:
 >:bulb: Specify the medical history to be deleted using `m/` if it's the only medical history that needs to be deleted
 > e.g. `delete n/John Doe m/Diabetes`
 
-![result for 'delete n/Alex Yeoh'](images/deleteResult.jpg)
+![result for 'delete n/alex yeoh'](images/v1.4-screenshots/delete.jpg)
 
 Expected outputs when the command succeeds:
 * `Deleted Patient: ...`
@@ -217,6 +241,8 @@ Expected outputs when the command succeeds:
 Expected output when the command fails:
 * `The given combination of Name and ID does not match any patient in the Patients list`.
 * `Invalid command format! ...`
+
+<br>
 
 ### Delete All Patients: `clear`
 
@@ -229,7 +255,9 @@ Deletes all patients from HealthSync.
 
 >:bulb: Use `c` as a shortcut for `clear`
 
-![result for 'clear'](images/clearResult.jpg)
+![result for 'clear'](images/v1.4-screenshots/clear.jpg)
+
+<br>
 
 ### Locating Patients by Name, ID or Appointment: `find`
 
@@ -263,9 +291,11 @@ Example commands:
 * `find ap/12-Dec 0000 2359`
 * `find n/Alex Yeoh id/T0123436F`
 
-![result for 'find id/T0123456F'](images/findidT0123456FResult.jpg)
+![result for 'find id/S0123452F'](images/v1.4-screenshots/find.jpg)
 
 > :bulb: This list command can be used to show the original patient list after a find command is executed
+
+<br>
 
 ### Preserving a `find` Command Result in the Log: `log`
 
@@ -276,7 +306,7 @@ Upon starting HealthSync, the logger tab is pre-populated with profiles of patie
 
 This is how it looks like:
 
-![pre-populated log](images/originalLog.jpg)
+![pre-populated log](images/v1.4-screenshots/logExample.jpg)
 
 > :wrench: If you want to access the patient list or look up a new patient but would still need to refer to the current
 > patient's details, simply `log` so the profile stays on your screen while you carry out your other tasks!
@@ -293,7 +323,7 @@ This is how it looks like:
 
 Example Command: `log` (after performing a `find` on the list)
 
-![result for 'log'](images/logResult.jpg)
+![result for 'log'](images/v1.4-screenshots/log.jpg)
 
 Expected outputs when the command succeeds:
 * `The last filtered values have overridden the logger tab.`
@@ -307,6 +337,8 @@ Expected output when the command fails:
 > :warning: The logger tab does not update when logged patients' profiles are edited or deleted.
 > The logger tab is intended to be a snapshot of the patients' details at the time that they were logged.
 > To reflect the edited changes in the logger tab after a change has been made, do `log` after the change.
+
+<br>
 
 ### Adding a New `find` Command Result to the current Log: `alog`
 
@@ -331,7 +363,7 @@ to the current data in the [logger tab](#logger-tab), which can be viewed at all
 
 Example Command: `alog` (after entering a FindCommand)
 
-![result for 'alog'](images/alogResult.jpg)
+![result for 'alog'](images/v1.4-screenshots/alog.jpg)
 
 Expected outputs when the command succeeds:
 * `The last filtered values have been added onto the logger tab.`
@@ -340,6 +372,8 @@ Expected output when the command fails:
 * `Cannot log an empty list.`
 
 > :bulb: `alog` does not overwrite the data and instead adds on to it, so you do not have to keep performing `log` to save more data
+
+<br>
 
 ### Clearing Data from the Log: `clog`
 
@@ -354,10 +388,12 @@ Clears all current data in the [logger tab](#logger-tab).
 
 Example Command: `clog`
 
-![result for 'clog'](images/clogResult.jpg)
+![result for 'clog'](images/v1.4-screenshots/clog.jpg)
 
 Expected output:
 * `Logger tab has been cleared!`
+
+<br>
 
 ### Undoing a Command: `undo`
 
@@ -383,7 +419,7 @@ Undoes the last undo-able action within HealthSync.
 Example commands:
 *  `undo 2`
 
-![result for 'undo'](images/undoResult.jpg)
+![result for 'undo'](images/v1.4-screenshots/undo.jpg)
 
 Expected outputs when the command succeeds:
 
@@ -393,6 +429,7 @@ Expected outputs when command fails:
 * `Please proved a valid number of steps to undo, not exceeding the available command history.`
 * `Undo step count cannot be a negative number or zero.`
 
+<br>
 
 ### Exiting HealthSync: `exit`
 
@@ -403,6 +440,8 @@ Exits HealthSync.
 
 > :bulb: Use `ex` as a shortcut for `exit`
 
+<br>
+
 ### Auto Save
 
 HealthSync data are saved in the hard disk automatically after any command that changes the data is executed.
@@ -411,6 +450,8 @@ There is no need to save manually.
 > :bulb: Only patient details inside [patient list view](#patient-list-view) are saved.
 > The [logger tab](#logger-tab) and [command history](#command-history-stack) used for `undo` are not saved
 > after the application is closed.
+
+<br>
 
 ### Editing the Data File
 
@@ -431,9 +472,12 @@ Advanced users are welcome to update data directly by editing that data file.
 >
 >If anything goes wrong during the editing process, you can restore your data by copying the backup file back to its original location.
 
+<br>
+
 ### Archiving Data Files `[coming in v5.0]`
 It allows you to efficiently store and organize patient records in HealthSync. With this feature, you can maintain a tidy and easily accessible archive of patient data, ensuring streamlined data management and quick retrieval when needed.
 
+<br>
 
 ## [FAQ](#faq)
 
@@ -468,11 +512,15 @@ The app will attempt to recover your work upon restart.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<br>
+
 ## [Known issues](#known-issues)
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only
    the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by
    the application before running the application again.
+
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -606,8 +654,6 @@ patient can have more than 1 medical history.
 Individually, medical histories do not have a strict format to adhere to. However, every medical
 history a patient has should be unique from one another.
 
-Medical Conditions are restricted to 50 alphanumeric characters, and may also contain these symbols: `+``_``.``-`.
-
 Some examples of valid Medical History formats are listed here:
 ```
 Hypertension
@@ -652,8 +698,21 @@ Graphical User Interface. Refers to computer programs with a visual window you c
 ### Menu Sidebar
 The Menu Sidebar is the area on the left of the Patient List View. It contains buttons that allow you to perform actions on HealthSync. Currently, only the `User Guide` and `Exit` buttons are functional. The buttons that are in grey and not pressable in the Menu Sidebar are currently not functional and will be implemented in a future version of HealthSync.
 
-### Patient List View
-The main part of HealthSync where the list of all your patients are displayed. This is where you can view patient profiles in list form, and perform actions on them. When actions are performed, the Patient List View will be updated to reflect the changes/results.
+### [Patient List View](#patient-list-view)
+The main part of HealthSync where the list of all your patients are displayed. This is where you can view a list of [Patient Card](#patient-card)(s), and perform actions on them. When actions are performed, the Patient List View will be updated to reflect the changes/results.
+
+### [Patient Card](#patient-card)
+A card that represents a patient in the Patient List View. 
+
+![patient card](images/v1.4-screenshots/personCard.jpg)
+<br>
+Annotation of Person Card (From top-to-bottom):
+1. Patient's name, ID
+2. Medical Histories (in the form of bubble tags)
+2. Phone Number
+3. Address
+4. Email Address 
+5. Medical Appointment.
 
 ### Logger Tab
 A 'sticky-note'-like area on the right of the Patient List View. Serves as a snapshot of the patient data at the time they were logged with the [`log` command](#preserving-a-find-command-result-in-the-log--log).

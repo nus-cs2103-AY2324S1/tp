@@ -246,17 +246,120 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### Implementation of Single, optional Appointment Field
+### Implementation of Singular, Optional Fields
 
 #### Proposed Implementation
 
-_{Explain how `Appointment` as an optional field is implemented}_
+A way to add a property to `Person` that could be nullable was needed, to reflect optionality within our
+field implementation. While optional fields like `MedicalHistory` exist in HealthSync, these fields are
+Collections, and can natively handle the empty state. Singular optional properties can be added this way,
+but is hard to distinguish between properties that allow for multiple entries and fields that don't.
 
-_{Explain how `Appointment` is stored inside each `Person`}_
+<puml src="diagrams/AppointmentClassDiagram0.puml" width="250" />
+
+The optional fields could be implemented directly to `Person` as shown in the partial class diagram above.
+However, several other packages depend upon `Person` as well, including `UI` and `Storage`.
+These packages already make assumptions on the `non-null` property on the variables of `Person`.
+
+<puml src="diagrams/AppointmentSequence0.puml" width="250" />
+
+The diagram above illustrates a possible path that may arise if the optional property of the field is
+not explicitly defined. There is a need to explicitly denote that our optional field is possibly an
+empty value without having its implementers perform the check themselves, so that the compiler is
+able to assist in our coding.
+
+<puml src="diagrams/AppointmentClassDiagram1.puml" width="250" />
+
+Therefore, the implementation of optional fields now return its value wrapped in the Java
+`Optional` wrapper. In this example, when `getAppointment` is called now, the implementer will be
+informed of the type mismatch with the `Appointment` type, explicitly informing the implementer that
+this value is potentially `null`. By doing it in this way, we also guarantee to the implementer that
+the fields that do not generate an `Optional` wrapper cannot be empty.
 
 #### Design Considerations:
 
-**Aspect: Parsing of `Appointment` Field**
+**Aspect: Handling of Optional Fields**
+
+* **Alternative 1 (current choice):** Allow `null` values
+  * Pros: Simple to implement, and easy to understand what it means.
+  * Cons: Checks for null value required for every implementation of the optional field.
+    * This is partially circumvented using the `Optional` wrapper, which caused the team to favor
+      this implementation.
+* **Alternative 2:** Use abstracted "empty-value" objects that extend the given field
+  * Pros: No check of the empty state required by implementers, allows for simple code outside its
+          implementation.
+  * Cons: Non-negligible abstraction required to create an empty object and have it work in all cases
+          where the empty case is needed.
+
+### Implementation of Appointment Field
+
+`Appointment` is a special field belonging to the `Person` model class, as it implicitly stores a temporal
+relationship within itself.
+
+#### Proposed Implementation
+`Appointment` is distinctly different from other fields in `Person` in that it cannot store its values as
+a String directly - otherwise, this would complicate the process of defining temporal relationships within itself.
+
+<puml src="diagrams/AppointmentClassDiagram2.puml" width="250" />
+
+Above is a partial class diagram of `Appointment`. Note that several static members were excluded as they are not
+relevant to its data-structure properties in `HealthSync`.
+
+The default Java packages provides its implementation of temporal objects in the `java.time` package. In particular,
+`LocalDateTime` and its variants were the most relevant to us, as it allows the user to record time without needing
+to account for timezone differences. This is powerful, as our target audience is not expected to change locations in
+a significant way that causes them to change time regions entirely.
+
+With the use of the `java.time` package, the project could not use only `regex` for `Appointment`.
+This is due to the level of checks required to parse a temporal object, with the amount of dependencies that exist
+between the day, month and year fields. The provided `DateTimeFormatter` and `DateTimeFormatterBuilder` classes helps
+create the parser objects used for `Appointment`. However, the classes do not account for the combined time format that
+HealthSync requests of its users.
+
+Therefore, `Appointment` uses a combination of `regex` and `DateTimeFormatter` to resolve its user input.
+
+<puml src="diagrams/AppointmentActivity0.puml" width="250" />
+
+A partial activity diagram illustrating the relevant segment of the parse process.
+
+As seen above, `ParserUtil` verifies if the Appointment user input is trivially valid using
+`regex`, before passing the input into the `of` constructor. `DateTimeFormatter` cannot fully verify input strings
+against its format without creating a `LocalDate`/`LocalTime` object as a side effect,
+so `of` handles a portion of the parse.
+
+#### Design Considerations:
+
+**Aspect: Value to store `Appointment` as**
+
+* **Alternative 1:** Use of raw `String` format for Appointment
+    * Pros: Far easier to parse and store as an object.
+    * Cons: Hard to extend upon in future use-cases, such as reminders, etc.
+
+* **Alternative 2 (current choice):** Use of Java Temporal-related objects for Appointment
+    * Pros: More direct paths of feature extension, such as searching by time period.
+    * Cons: Translation to and from Java Temporal objects can be non-trivial.
+
+**Aspect: Constructor for `Appointment` to manage valid user input**
+
+* **Alternative 1:** Directly use constructors for `Appointment`, and using `isValidAppointment` to verify input
+    * Pros: Consistency with construction of other fields
+    * Cons:
+      * Construction called before user input is verified so exception thrown may not be intuitively understood
+      * Concerns over failed appointment creation not getting collected by Java Garbage Collection due to accessing
+       `now()` resource
+      * User input validation for temporal objects create the relevant object as a side effect, wasting resources to
+        construct the temporal object twice.
+
+* **Alternative 2 (current choice):** Use of `of` factory method for `Appointment`, and verifying input inside `of`
+    * Pros:
+      * Explicit demarcation of `Appointment` as a class that can throw an `Exception` during construction
+      * Factory method can double as an explicit user verification method
+      * Construction of `Appointment` only performed once user input is verified
+    * Cons:
+      * "Uniqueness" of private constructor for this field only may cause confusion when extending the app
+      * Appointment handles part of `parse` for `ParserUtil`
+
+**Aspect: Parsing of `Appointment` Field as multiple fields or single field**
 
 * **Alternative 1 (current choice):** Use of the single `ap/` flag.
   * Pros: Easy to input on the user-end.
@@ -265,19 +368,6 @@ _{Explain how `Appointment` is stored inside each `Person`}_
 * **Alternative 2:** Use of 2 flags to denote start and end time for appointment.
   * Pros: Immediate clarity on what fields to implement, and how to parse input string.
   * Cons: Strong dependence between 2 flags requires more fail-state management.
-
-**Aspect: Value to store `Appointment` as**
-
-* **Alternative 1 (current choice):** Use of raw `String` format for Appointment
-  * Pros: Far easier to parse and store as an object.
-  * Cons: Hard to extend upon in future use-cases, such as reminders, etc.
-
-* **Alternative 2:** Use of `DateTime`-related objects for Appointment
-  * Pros: More direct paths of feature extension in the long run.
-  * Cons: Translation to and from `DateTime` objects can be non-trivial.
-
-We are currently in the process of switching to Alternative 2, as Alternative 1 was chosen primarily for its
-fast implementation for the MVP.
 
 ### Delete Feature
 
@@ -473,7 +563,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Value proposition**:
 
-HealthSync caters to counter staff, enabling them to register and access patient information within 2-3 minutes. It offers a user-friendly platform, optimizing contact management, patient tracking, department coordination, and health record access, ensuring efficient patient management, appointment scheduling, and comprehensive health record retrieval, enhancing care delivery and saving time.
+HealthSync caters to clinic assistants in small private clinic, enabling them to register and access patient information within 2-3 minutes. It offers a user-friendly platform, optimizing contact management, patient tracking, and health record access, ensuring efficient patient management, appointment scheduling, and comprehensive health record retrieval, enhancing care delivery and saving time.
 
 
 ### User stories

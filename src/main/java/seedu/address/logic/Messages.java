@@ -18,14 +18,12 @@ public class Messages {
     public static final String MESSAGE_INVALID_ID = "Please provide a valid ID";
     public static final String MESSAGE_INVALID_NAME = "Please provide a valid Name";
     public static final String MESSAGE_INVALID_ID_AND_NAME = "Please provide either a valid ID or Name";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The patient index provided is invalid";
-    public static final String MESSAGE_PATIENTS_LISTED_OVERVIEW = "%1$d patients listed!";
-    public static final String MESSAGE_NO_PATIENT_FOUND = "No such patient found!";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_EMPTY_FIND_RESULT =
             "There are no FindCommand results. There is nothing to be saved to the logger tab.";
-
     public static final String MESSAGE_EMPTY_LOG = "No previous log to undo.";
 
     /**
@@ -57,14 +55,10 @@ public class Messages {
                 .append(person.getAddress())
                 .append(";\n")
                 .append("Appointment: ")
-                .append(person.getAppointment().map(Appointment::toString).orElse("N/A"))
+                .append(person.getAppointment().map(Appointment::toString).orElse(null))
                 .append("; Medical Histories: ");
 
-        if (person.getMedicalHistories().isEmpty()) {
-            builder.append("N/A;");
-        } else {
-            person.getMedicalHistories().forEach(builder::append);
-        }
+        person.getMedicalHistories().forEach(builder::append);
         return builder.toString();
     }
 }

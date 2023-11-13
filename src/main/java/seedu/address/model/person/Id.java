@@ -23,7 +23,7 @@ public class Id {
     public Id(String id) {
         requireNonNull(id);
         checkArgument(isValidId(id), MESSAGE_CONSTRAINTS);
-        value = id.toUpperCase();
+        value = id;
     }
 
     /**
