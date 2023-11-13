@@ -569,7 +569,7 @@ Please use show lessonIndex before deleting task!
 
 ### Edit Feature
 
-Edits the specified item in the  ___STUDENT list___ or 📅 ___SCHEDULE list___ of the application.
+Edits the specified item in the 👨‍🎓 ___STUDENTS list___ or 📅 ___SCHEDULE list___ of the application.
 
 #### For Student:
 Format: `editPerson [INDEX] [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS]
@@ -795,7 +795,7 @@ For example, filter -name John -subject physics,english
 #### For Schedule:
 <box type="info" seamless>
 
-You must be in the **_SCHEDULE list_** to run this command. Type `list schedule` to go to the **_SCHEDULE list_**.</box>
+You must be in the 📅 ___SCHEDULE list___ to run this command. Type `list schedule` to go to the 📅 ___SCHEDULE list___.</box>
 Format: `filter [-name NAME] [-subject SUBJECTS] [-before DATE] [-on DATE] [-after DATE] [-remark REMARK]`
 * Only one of `-before`, `-on`, `-after` can be used at once. For example, you cannot use both `-before` and `-after` in the same filter command.
 * The dates specified in `-before` and `-after` are exclusive. For example, specifying `-before 2023/05/01` will find lessons before but not on 2023/05/01.
