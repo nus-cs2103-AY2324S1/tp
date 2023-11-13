@@ -672,7 +672,7 @@ You can remove available time slots of your contacts.
     <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;;">Warning</h5>
   </div>
  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">FREE_TIME</code>
-  If more than one time slot are to be deleted, they must not clash with one another.</p>
+  must not clash with other inputted time slots.</p>
 </div>
 
 **Example(s):**
