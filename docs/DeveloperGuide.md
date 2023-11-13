@@ -318,16 +318,16 @@ and is at least _Duration_ long)
   * Cons: During the first round of user-testing, some new users were confused on how to use the command.
 
 
-### Calculate total revenue for the month
+### Calculate monthly revenue
 
 
 The `RevenueCommand` extends the `command class`. The command first gets a list containing all tutees.
-The total revenue monthly can be calculated now by iterating through the list and calling `Person#getMonthlyFee`. <br>
+The total monthly revenue can be calculated now by iterating through the list and calling `Person#getMonthlyFee`. <br>
 
 The total monthly revenue is calculated as such: <br> 
 *Total Monthly Revenue* = Sum of every tutee's `monthlyFee`
 
-The following sequence diagram shows how the total revenue command works:
+The following sequence diagram shows how the `RevenueCommand` works:
 ![RevenueSequenceDiagram.png](images/RevenueSequenceDiagram.png)
 
 #### Design Considerations
@@ -752,7 +752,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     <br>
     <br>
   
-**Use case: UC12 - Get monthly revenue**
+**Use case: UC12 - Calculating monthly revenue**
 
 **MSS**
 
@@ -904,6 +904,8 @@ testers are expected to do more *exploratory* testing.
          _Free from 21:00 - 21:30_ <br>
          should be displayed in the status message.
 
+###
+
 ### Marking a tutee as paid
 
 1. Marking a tutee as paid while all tutees are being shown
@@ -1018,3 +1020,5 @@ is saved. The system should inform the user that this command will not modify an
 
 Idea: Create a `Model#isSameData()` to compare whether the state of the tutee data before and after the command execution will be the same. If
 `Model#isSameData()` returns true, a `CommandException` should be thrown and the system should inform the user that this command will not modify any data.
+
+
