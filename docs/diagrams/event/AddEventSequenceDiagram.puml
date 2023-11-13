@@ -38,7 +38,7 @@ activate AddEventCommandParser
 AddEventCommandParser -> AddCommandParser
 deactivate AddEventCommandParser
 
-AddCommandParser -> AddEventCommandParser : parse(commandText)
+AddCommandParser -> AddEventCommandParser : parse(args)
 activate AddEventCommandParser
 
 create AddEventCommand

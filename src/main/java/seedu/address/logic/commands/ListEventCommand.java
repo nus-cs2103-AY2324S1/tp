@@ -62,7 +62,7 @@ public class ListEventCommand extends ListCommand {
             result = MESSAGE_FILTERED;
         }
         result += this.sortAscending ? MESSAGE_ASCENDING : MESSAGE_DESCENDING;
-        List<Event> eventList = model.getSortedFilteredEventList((o1, o2) -> {
+        List<Event> eventList = model.generateSortedFilteredEventList((o1, o2) -> {
             LocalDateTime startTime1 = o1.getStartTime();
             LocalDateTime startTime2 = o2.getStartTime();
             return (startTime1.isBefore(startTime2)

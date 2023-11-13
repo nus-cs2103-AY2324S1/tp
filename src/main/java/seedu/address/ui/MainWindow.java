@@ -149,7 +149,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleEventList() {
         if (!eventListWindow.isShowing()) {
-            eventListWindow.show(logic.getFilteredEventList());
+            eventListWindow.show(logic.getSortedFilteredEventList());
         } else {
             eventListWindow.focus();
         }

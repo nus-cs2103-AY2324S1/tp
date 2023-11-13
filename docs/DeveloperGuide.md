@@ -401,12 +401,16 @@ The following activity diagram summarizes what happens when the `DeleteNoteComma
 This feature allows users to add and remove `Event` to any `Person` in the contact list. It provides an easy way for users to keep track of events with the contacts.
 
 #### Overview: Event:
-The adding and removing of `Event` begins with the parsing of the `AddEventCommand` and `DeleteEventCommand` using the `AddEventCommandParser` and `DeleteEventCommandParser` respectively.
-The `AddEventCommand` and `DeleteEventCommand` will then be constructed and executed by the `Model`.
+The adding, listing and removing of `Event` begins with the parsing of the `AddEventCommand`, `ListEventCommand` and `DeleteEventCommand` using the `AddEventCommandParser`, `ListEventCommandParser` and `DeleteEventCommandParser` respectively.
+The `AddEventCommand`, `ListEventCommand` and `DeleteEventCommand` will then be constructed and executed by the `Model`.
 
 The activity diagram below shows the action sequence of adding an `Event` to a contact.
 
-<puml src="diagrams/event/EventSequenceDiagram.puml"/>
+<puml src="diagrams/event/AddEventSequenceDiagram.puml"/>
+
+The activity diagram below shows the action sequence of listing events by executing `list events` command.
+
+<puml src="diagrams/event/ListEventsSequenceDiagram.puml"/>
 
 <box type="info" seamless>
 
@@ -453,6 +457,20 @@ When the command is executed, it carries out the following operations:
 The following activity diagram summarizes what happens when `AddEventCommand` is executed:
 
 <puml src="diagrams/event/AddEventActivityDiagram.puml"/>
+
+##### Implementing `ListEventCommand`
+`ListEventCommand` extends from the abstract class `ListCommand`,
+inheriting `list` as the primary command word and having `events` as its secondary command word.
+It internally stores `filterStartTime`, `filterEndTime` (both can be null if filtering is not used) and `sortAscending` which are given by the [parser](#implementing-addeventcommandparser).
+
+When the command is executed, it carries out the following operations:
+1. Using the `filterStartTime` and `filterEndTime` to filter all events in the global event list, or set the filter to always returns `true` if both `filterStartTime` and `filterEndTime` is null (in order to show the full event list to the user)
+2. Sort the filtered event list in ascending or descending order based on `sortAscending`
+3. Lastly a `CommandResult` with the filtered-sorted event list in String and with `listEvent = true` to tell `MainWindow` to show the event list window.
+
+The following activity diagram summarizes what happens when user executes `list events` from UI.
+
+<puml src="diagrams/event/ListEventsActivityDiagram.puml"/>
 
 ##### Implementing `DeleteEventCommand`
 `DeleteEventCommand` extends from the abstract class `DeleteCommand`,

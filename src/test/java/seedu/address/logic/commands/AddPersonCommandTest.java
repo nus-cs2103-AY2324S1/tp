@@ -170,15 +170,19 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public void updateFilteredEventList(Predicate<Event> predicate) {
+        public List<Event> generateSortedFilteredEventList(Comparator<? super Event> comparator) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public List<Event> getSortedFilteredEventList(Comparator<? super Event> comparator) {
+        public ObservableList<Event> getSortedFilteredEventList() {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void updateFilteredEventList(Predicate<Event> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public Person findPersonByIndex(int index) {
