@@ -178,10 +178,10 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
-* Some commands contains secondary command, like `add contact`, `add note` and `add event`.
-*   - In this case, the primary command parser (in the example it is `AddCommand`) will check the secondary command word and use the correspond secondary command parser (like `AddPersonCommandParser`, `AddEventCommandParser` and `AddNoteCommandParser`) to continue parsing the command.
+* Some commands contain secondary command, like `add contact`, `add note` and `add event`.
+    - In this case, the primary command parser (in the example it is `AddCommand`) will check the secondary command word and use the correspond secondary command parser (like `AddPersonCommandParser`, `AddEventCommandParser` and `AddNoteCommandParser`) to continue parsing the command.
 * The parser will turn the arguments in the command from raw `String` into corresponding Object. During this process, the parser also needs to check whether the arguments are valid or not.
-*   - The parsing method for each types of arguments are mainly in `ParserUtil.java`
+    - The parsing method for each types of arguments are mainly in `ParserUtil.java`
 * If the command is correct in format, the parser will then return a Command Object for the execution of the command.
 
 ### Model Component
@@ -954,12 +954,14 @@ testers are expected to do more *exploratory* testing.
    1. Double-click the jar file
    Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
+
 2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.
     Expected: The most recent window size and location is retained.
+
 
 1. Exiting
 
@@ -980,6 +982,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete contact commands to try: `delete contact`, `delete contact x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
 
 2. Deleting a contact while event list is showing
 
@@ -1002,6 +1005,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `add tag -id 1 -t HR representative`<br>
     Expected: No tag is added as tag name should not contain spaces. Error details shown in the status message.<br>
 
+
 1. Adding duplicate tag to a contact
     1. Prequisites: List all contacts using the `list contact` command. At least one contact shown in the list has at least one tag.
 
@@ -1010,6 +1014,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `add tag -id -t Frontend -t Frontend`<br>
     Expected: Only one `Frontend` tag is added below the name of the first contact. Only one `Frontend` tag is shown in the list of tags added in the status message.
+
 
  1. Adding tag while contact list is being filtered
     1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`.
@@ -1034,11 +1039,13 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `delete tag -id 1 -t HR representative`<br>
     Expected: No tag deleted as tag name should not contain spaces. Error details shown in the status message.<br>
 
+
 1. Deleting tag while all contacts is shown but tag does not exist.
     1. Prequisites: List all contacts using the `list contact` command. At least one contact is shown in the list.<br>
 
     1. Test case: `delete tag -id 1 -t x`, where `x` is a non-existing tag in the first contact.<br>
     Expected: No tags is deleted. The list of tags deleted shown in the status message is empty while the list of tags not found contains `x`.
+
 
 1. Deleting tag while contact list is being filtered
     1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`.
@@ -1066,11 +1073,13 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `add note -id 1 -tit Meeting Topics`<br>
        Expected: No note is added as a note should have a note content. Error details shown in the status message.<br>
 
+
 2. Adding another note to a contact
     1. Prerequisites: List all contacts using the `list contact` command. At least one contact shown in the list has at least one note.
 
     2. Test case: `add note -id 1 -tit Open Position -con Applications for SWE full-time positions will open soon`, where x is an already existing tag in the first contact.<br>
        Expected: The new note appears in the Notes column of the contact. The note added is shown in the status message.
+
 
 3. Adding note while contact list is being filtered
     1. Prerequisites: Filter the list of contacts by calling `find KEYWORD [OTHER_KEYWORDS...]`.
@@ -1092,11 +1101,13 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `delete note -id 1 -nid 1`<br>
        Expected: The note deleted is no longer shown in the first contact in the list. The note deleted is shown in the status message.
 
+
 2. Deleting note while all contacts is shown but note does not exist.
     1. Prerequisites: List all contacts using the `list contact` command. At least one contact is shown in the list.<br>
 
     2. Test case: `delete note -id 1 -nid 100`, where the number of notes in the first contact is less than 100.<br>
        Expected: No note is deleted. Error details shown in the status message.
+
 
 3. Deleting note while contact list is being filtered
     1. Prerequisites: Filter the list of contacts by calling `find KEYWORD [OTHER_KEYWORDS...]`.
@@ -1140,6 +1151,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `add event -id 1 ... -st x` where `x` is in between the start and end time of an event currently on the list.<br>
        Expected: No event is added. Error details shown in the status message.
 
+
 1. Adding event while contact list is being filtered
     1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`.
        Use the `list events` command to open a new window with a list of all events without the respective contacts.
@@ -1169,6 +1181,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Other incorrect delete commands to try: `delete event`, `delete event -id x -eid 1`, `delete event -id 1 -eid x`, `...` (where x is larger than the size of contacts/events)<br>
        Expected: Similar to previous test cases.
+
 
 1. Deleting event while contact list is being filtered
     1. Prerequisites: Filter the list of contacts either by calling `list contact -t [SOME_TAG]` or `find [SOME KEYWORD]`.
