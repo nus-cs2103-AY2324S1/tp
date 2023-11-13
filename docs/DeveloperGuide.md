@@ -155,14 +155,14 @@ If it passes these checks, the person is added into the system.
 
 `AddCommand` takes in the following fields:
 * **Name (Compulsory field)**: String composed of character between A-Z and a-z.
-* **Phone number (Compulsory field)**: Any number.
+* **Phone number (Compulsory field)**: Any number at least 3 digits long.
+* **Email (Compulsory field)** String with restrictions in characters (XXXXXXXX@emaildomain)
 * **Address (Compulsory field)**: String without restriction in characters.
-* **Email (Compulsory field)** String with restrictions in characters (XXXXXXXX@emaildomain.com)
 * **Subject (Compulsory field)**: String without restriction in characters.
-* **Day (Compulsory field)**: String with restrictions in characters, non-case sensitive (Mon/Tue/Wed/Thu/Fri/Sat/Sun).
+* **Day (Compulsory field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).
 * **Begin (Compulsory field)**: String with restrictions (HHMM).
 * **End (Compulsory field)**: String with restrictions (HHMM).
-* **PayRate (Compulsory field)**: String with restrictions in characters, only numbers allowed (no negative numbers).
+* **PayRate (Compulsory field)**: String with restrictions in characters, only numbers allowed (no negative numbers)
 
 The following sequence diagram shows how the add command works.
 
@@ -646,3 +646,9 @@ Idea: Modify the paid command parser to accept a list of person identifiers (e.g
 Reason: Introduce a scheduling feature within the unpaid command to set future unpaid statuses for individuals. This would be beneficial for scenarios where payments should automatically lapse after a set period.
 
 Idea: Add a scheduling mechanism within the command execution to mark individuals as unpaid after a specified future date or duration.
+
+### Maximum PayRate
+
+Reason: PayRate that are extremely high may not be displayed properly by GUI and are unlikely to be realistic PayRates per hour anyway.
+
+Idea: Modify the VALIDATION_REGEX of PayRate such that it only accepts values up to 9999.99.
