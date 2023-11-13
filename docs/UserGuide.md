@@ -65,7 +65,7 @@ Please refer to the [Features](#features) section for details of each command.
 <div style="page-break-after: always;"></div>
 
 ## **Useful Notations**
-These are symbols we will be using to highlight certain information to you.
+These are the symbols we will be using to highlight certain information to you.
 
 | Symbol               | Meaning                                                                           |
 |----------------------|-----------------------------------------------------------------------------------|
@@ -469,7 +469,7 @@ Parameters:
 **:exclamation: Important:**<br>
 
 Only specific commands are available to you in the profile page.<br> 
-The list of available commands are <code>help</code>, <code>save</code>, and <code>exit</code>. 
+The available commands are <code>save</code> and <code>exit</code>. 
 
 </div> 
 
@@ -505,24 +505,6 @@ Format: `save`
 *  Entering <code>save</code> in [the profile of a new fosterer](#adding-a-fosterer-through-the-profile-page-add) saves the new fosterer and exits the profile page.
 *  Entering <code>save</code> in [the profile of an already existing fosterer](#editing-a-fosterers-details-through-the-profile-page-edit) saves the changes but does not exit the profile page, in case you want to edit more details. 
 </div>
-
-<div style="page-break-after: always;"></div>
-
-Here is the result of entering <code>save</code> after adding a new fosterer name John: 
-
-![Save a new fosterer](images/screenshots/SaveNewFosterer.png)
-
-As you can see, entering <code>save</code> for a new fosterer exits the profile page. 
-
-<br>
-
-<div style="page-break-after: always;"></div>
-
-Here is the result of entering <code>save</code> after changing the name from John to John Kim: 
-
-![Save existing fosterer](images/screenshots/SaveExistingFosterer.png)
-
-As you can see, entering <code>save</code> for an already existing fosterer does not exit the profile page. 
 
 <br> 
 
@@ -562,9 +544,8 @@ Parameters:
 **:exclamation: Important:**<br>
 
 * If the parameters are not provided, <b><code>edit INDEX</code> operates the same way as <code>view INDEX</code></b>, leading you to the profile page of the person at index <code>INDEX</code> in the address book. 
-* If you run the same `edit` command multiple times consecutively (resulting in no visible change after the first run), the `undo` command will not be able to revert the data back to the original state, 
-since it can only undo the last _valid_ command ran.
-
+* If you run the same edit command multiple times consecutively (resulting in no visible change after the first run), the undo command will not be able to revert the data back to the original state. <br>
+  This is because undo can only undo the last command, even if the command made no visible changes.
 </div>
 
 <div style="page-break-after: always;"></div>
@@ -659,7 +640,7 @@ Step 2. Type in the name of the field you want to edit onto the command box. Thi
 
 <div style="page-break-after: always;"></div>
 
-Step 3. Edit the original value to a new value. e.g. From Alex Yeoh to 'Bob Yeoh'.
+Step 3. Edit the original value to a new value. e.g. From 'Alex Yeoh' to 'Bob Yeoh'.
 
 <div style="text-align: center">
 <img src="images/screenshots/ChangeNameToBobYeoh.png" height="480" class="center"/>
@@ -765,8 +746,8 @@ Format: `sort`
 
 **:exclamation: Important:**<br>
 
-If you run the `sort` command multiple times consecutively (resulting in no visible change after the first run), the `undo` command would not be able to revert the data back to the original state
-since it can only undo the last _valid_ command ran.
+Repeated sort commands will not result in additional changes to the address book, and undo will not be able to revert the data back to its original state. <br>
+This is because undo can only revert the last command, even if the command made no changes to the address book.
 
 </div> 
 
