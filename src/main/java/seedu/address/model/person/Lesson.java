@@ -7,7 +7,9 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.TemporalAdjusters;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 
 /**
  * Represents the day and time when the Tutee has tuition every week.
@@ -20,6 +22,7 @@ public class Lesson {
 
     public final LocalTime end;
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
     /**
      * Constructs a {@code DayTime}.
      *
@@ -31,6 +34,8 @@ public class Lesson {
         requireNonNull(day);
         requireNonNull(begin);
         requireNonNull(end);
+
+        assert(begin.getTime().isBefore(end.getTime())) : "begin time must be before end time";
 
         this.day = day.value;
         this.begin = begin.getTime();
@@ -81,15 +86,25 @@ public class Lesson {
                 && begin.equals(otherLesson.begin)
                 && end.equals(otherLesson.end);
     }
-    public int getNumOfDaysInMonth(int year, int month) {
-        // Construct the LocalDate for the first day of the specified month and year
-        LocalDate firstDayOfMonth = LocalDate.of(year, month, 1);
 
-        // Construct the LocalDate for the last day of the specified month and year
+    /**
+     * Calculates the number of occurrences of a specific day of the week
+     * within a given month and year.
+     *
+     * @param year  The year (4 digits) for which to calculate the occurrences.
+     * @param month The month (1-12) for which to calculate the occurrences.
+     * @return The number of occurrences of the specified day in the month.
+     */
+    public int getNumOfDaysInMonth(int year, int month) {
+        requireNonNull(day);
+        assert (1000 <= year) && (year <= 9999) : "Year must be exactly 4 digits";
+        assert (1 <= month) && (month <= 12) : "Month must be from January to December";
+
+        LocalDate firstDayOfMonth = LocalDate.of(year, month, 1);
         LocalDate lastDayOfMonth = firstDayOfMonth.with(TemporalAdjusters.lastDayOfMonth());
-        // Count occurrences of the specific day in the current month
-        int count = 0;
         LocalDate temp = firstDayOfMonth;
+
+        int count = 0;
         while (!temp.isAfter(lastDayOfMonth)) {
             if (temp.getDayOfWeek() == day) {
                 count++;
@@ -108,12 +123,16 @@ public class Lesson {
      * @return duration in terms of hours.
      */
     public double calculateLessonDuration() {
-        Duration duration = Duration.between(begin, end);
-        long minutes = duration.toMinutes();
-        double hours = (double) minutes / 60; // Convert minutes to a fraction of hours
-        assert hours > 0.0 : "hours should be positive";
-
-        return hours;
+        try {
+            Duration duration = Duration.between(begin, end);
+            long minutes = duration.toMinutes();
+            double hours = (double) minutes / 60; // Convert minutes to a fraction of hours
+            assert hours > 0.0 : "hours should be positive";
+            return hours;
+        } catch (ArithmeticException e) {
+            logger.info("[Lesson.calculateLessonDuration()]: Duration capacity exceeded");
+            return 1.0;
+        }
     }
 
     /**
@@ -127,7 +146,5 @@ public class Lesson {
         assert hours > 0.0 : "hours should be positive";
         return hours;
     }
-
-
 
 }

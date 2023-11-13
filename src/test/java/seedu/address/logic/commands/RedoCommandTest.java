@@ -22,10 +22,7 @@ public class RedoCommandTest {
     public void execute_endVersionAddressBook_failure() {
         Model model = new ModelManager();
 
-        // Simulate add command
-        model.purgeAddressBook();
-        model.addPerson(ALICE);
-        model.commitAddressBook();
+        CommandTestUtil.simulateAddCommand(model, ALICE);
 
         assertCommandFailure(new RedoCommand(), model, Messages.MESSAGE_CANNOT_REDO);
     }
@@ -36,10 +33,7 @@ public class RedoCommandTest {
         Model successModel = new ModelManager();
         successModel.addPerson(ALICE);
 
-        // Simulate add command
-        model.purgeAddressBook();
-        model.addPerson(ALICE);
-        model.commitAddressBook();
+        CommandTestUtil.simulateAddCommand(model, ALICE);
 
         // Simulate undo command
         model.undoAddressBook();

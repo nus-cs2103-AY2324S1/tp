@@ -1,0 +1,17 @@
+@startuml
+skinparam conditionStyle diamond
+
+start
+:User executes Edit command;
+note :Example of Valid Input Format: \n"edit n/NAME p/PHONE e/EMAIL \na/ADDRESS sb/SUBJECT d/DAY \nb/START end/END pr/PAYRATE"
+:Checks for duplicate tutees and clashing schedules;
+if () then ([Tutee index\nnot in list\nor has clashing \nschedules with \nother tutees\nor edited fields\nwill result in\nduplicate tutees]\n)
+  :Display Error Message;
+
+else ([Else]\n)
+  :Edits the tutee;
+endif
+
+stop
+
+@enduml

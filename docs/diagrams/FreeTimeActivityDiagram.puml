@@ -1,0 +1,19 @@
+@startuml
+skinparam conditionStyle diamond
+
+start
+:User executes freeTime command;
+note :Valid Input Format: \n"freeTime d/DAY dur/DURATION \nb/START end/END"
+:Finds the timeslots where the user is busy on DAY;
+:Static method from TimeSlot class returns a list of timeslots\nwhere the user is free based on the timeslots where the user is busy;
+:These list of timeslots are filtered so that each timeslot is at least\n DURATION long, and between START and END;
+if () then ([List of available timeslots is empty]\n)
+  :Displays the message:\nThere are no available timeslots;
+
+else ([Else]\n)
+  :Displays all the timeslots\ninside the list;
+endif
+
+stop
+
+@enduml

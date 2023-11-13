@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_BEGIN_AFTER_END;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
@@ -80,16 +79,13 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_beginAfterEnd_throwsCommandException() {
-        Person invalidPerson = new PersonBuilder()
-                .withBegin("2200")
-                .withEnd("2100")
-                .build();
-
-        AddCommand addCommand = new AddCommand(invalidPerson);
-        ModelStub modelStub = new ModelStubWithPerson(invalidPerson);
-
-        assertThrows(CommandException.class, MESSAGE_BEGIN_AFTER_END, () -> addCommand.execute(modelStub));
+    public void execute_beginAfterEnd_throwsAssertionException() {
+        assertThrows(AssertionError.class, () -> {
+            new PersonBuilder()
+                    .withBegin("2200")
+                    .withEnd("2100")
+                    .build();;
+        });
     }
 
     @Test

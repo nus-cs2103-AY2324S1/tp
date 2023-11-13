@@ -67,5 +67,8 @@ class ListByDayCommandTest {
 
         // null -> returns false
         assertNotEquals(null, listByDayFirstCommand);
+
+        // different type -> returns false
+        assertNotEquals(3, listByDayFirstCommand);
     }
 }

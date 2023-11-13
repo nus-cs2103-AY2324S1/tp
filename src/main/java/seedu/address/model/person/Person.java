@@ -7,7 +7,9 @@ import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Objects;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 /**
  * Represents a Person in the address book.
@@ -29,13 +31,15 @@ public class Person {
     private Date beginTime;
     private Date endTime;
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
+
     /**
      * Every field must be present and not null.
      */
 
     public Person(Name name, Phone phone, Email email, Address address, Subject subject, Day day,
                   Begin begin, End end, boolean paid, PayRate payRate) {
-        requireAllNonNull(name, phone, email, address, subject, day, begin, end);
+        requireAllNonNull(name, phone, email, address, subject, day, begin, end, paid, payRate);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -49,7 +53,8 @@ public class Person {
             this.beginTime = convertTime(begin.toString());
             this.endTime = convertTime(end.toString());
         } catch (ParseException e) {
-            //something
+            logger.info("[Person constructor]: Error parsing begin and end.");
+            throw new RuntimeException("Error parsing begin and end.");
         }
 
     }
@@ -171,7 +176,7 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons have the same name and phone number.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -245,7 +250,9 @@ public class Person {
                 .toString();
     }
 
-    public double getMonthlyRevenue() {
-        return lesson.getMonthlyHours() * payRate.getValue();
+    public double getMonthlyFee() {
+        double monthlyFee = lesson.getMonthlyHours() * payRate.getValue();
+        assert monthlyFee >= 0 : "monthly revenue should not be negative";
+        return monthlyFee;
     }
 }

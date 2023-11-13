@@ -51,7 +51,7 @@ public class IsPaidCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PaidCommand)) {
+        if (!(other instanceof IsPaidCommand)) {
             return false;
         }
 

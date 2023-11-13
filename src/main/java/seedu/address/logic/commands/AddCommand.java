@@ -74,6 +74,7 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (!Lesson.isValid(toAdd.getBegin(), toAdd.getEnd())) {
+            logger.info("[AddCommand.execute()]: Begin after End");
             throw new CommandException(String.format(MESSAGE_BEGIN_AFTER_END, AddCommand.MESSAGE_USAGE));
         }
 

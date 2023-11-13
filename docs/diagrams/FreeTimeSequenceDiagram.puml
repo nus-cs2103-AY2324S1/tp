@@ -78,7 +78,6 @@ FreeTimeCommand --> LogicManager: result
 deactivate FreeTimeCommand
 
 FreeTimeCommand -[hidden]-> LogicManager: result
-destroy FreeTimeCommand
 
 [<--LogicManager
 @enduml

@@ -55,7 +55,7 @@ activate Model
 Model --> UnPaidAllCommand
 deactivate Model
 
-loop for each person in the address book
+loop number of tutees
     UnPaidAllCommand -> Model : markPersonUnPaid(index)
     activate Model
     Model --> UnPaidAllCommand
@@ -74,11 +74,18 @@ activate Model
 Model --> UnPaidAllCommand
 deactivate Model
 
+create CommandResult
+UnPaidAllCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> UnPaidAllCommand
+deactivate CommandResult
+
 UnPaidAllCommand -[hidden]-> LogicManager
 deactivate UnPaidAllCommand
 
 UnPaidAllCommand --> LogicManager : result
-deactivate UnPaidAllCommand
+destroy UnPaidAllCommand
 [<--LogicManager
 deactivate LogicManager
 @enduml

@@ -1,6 +1,9 @@
 package seedu.address.model;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 
 /**
  * Represents an AddressBook with an undo/redo history
@@ -9,6 +12,7 @@ public class VersionedAddressBook extends AddressBook {
 
     private final ArrayList<AddressBook> addressBookStateList;
     private int currentStatePointer;
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     /**
      * Creates a Versioned AddressBook
@@ -23,6 +27,8 @@ public class VersionedAddressBook extends AddressBook {
 
         // Initialise pointer to start of list
         currentStatePointer = 0;
+
+        logger.info("Versioned Address Book is initialised");
     }
 
     /**
@@ -51,7 +57,7 @@ public class VersionedAddressBook extends AddressBook {
     // Commits a copy of current address book so that the saved state is immutable
 
     /**
-     * Commits a copy of current {@code AddressBook} to {@code addressBookStateList}
+     * Commits a defensive copy of current {@code AddressBook} to {@code addressBookStateList}
      * so that the saved state is immutable
      */
     public void commit() {
@@ -60,6 +66,8 @@ public class VersionedAddressBook extends AddressBook {
         addressBookStateList.add(copy);
 
         currentStatePointer++;
+
+        logger.info("[VersionedAddressBook.commit()]: Versioned Address Book commit to memory");
     }
 
     /**

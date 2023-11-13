@@ -12,6 +12,8 @@ end box
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 participant ":Person" as Person MODEL_COLOR
+participant ":PayRate" as PayRate MODEL_COLOR
+participant ":Lesson" as Lesson MODEL_COLOR
 end box
 
 [-> LogicManager : execute("rev")
@@ -39,9 +41,17 @@ Model --> RevenueCommand
 deactivate Model
 
 loop number of tutees
-RevenueCommand -> Person : getMonthlyRevenue()
+RevenueCommand -> Person : getMonthlyFee()
 activate Person
-Person --> RevenueCommand : lessonRevenue
+Person -> PayRate : getValue()
+activate PayRate
+PayRate --> Person
+deactivate PayRate
+Person -> Lesson : getMonthlyHours()
+activate Lesson
+Lesson --> Person
+deactivate Lesson
+Person --> RevenueCommand : monthlyFee
 deactivate Person
 end
 
