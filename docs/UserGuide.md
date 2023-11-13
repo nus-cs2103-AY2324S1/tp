@@ -400,7 +400,7 @@ Marks the attendance of one or more student.
 * To mark attendance for multiple students, provide a comma-separated list of `STUDENT_NAME` or `STUDENT_ID`.
 * If a student is present, `REASON_OF_ABSENCE` is not required.
 * If a student is absent, `REASON_OF_ABSENCE` is mandatory.
-* `STUDENT_NAME` should be a string made up of alphabetical characters, with no numbers or special characters.
+* `STUDENT_NAME` should be a string made up of alphanumerical characters, with no special characters.
 * `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space. It should begin with the capital letter 'A', followed by 7 numbers, and end with a letter.
 * `ATTENDANCE` should only be 0 or 1, where 0 indicates student is absent and 1 indicates student is present.
 * `WEEK_NUMBER` should be an integer from 0 to 13.
@@ -481,7 +481,7 @@ Finds a student's or multiple students' contact either via their name or student
 
 <div markdown="block" class="alert alert-info">
 
-* `STUDENT_NAME` should be a string made up of alphabetical characters, with no numbers or special characters.
+* `STUDENT_NAME` should be a string made up of alphanumerical characters, with no special characters.
 * `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space. It should begin with the capital letter 'A', followed by 7 numbers, and end with a letter.
 
 </div>
