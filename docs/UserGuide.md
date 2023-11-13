@@ -46,7 +46,7 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 4. Open a _command terminal_ <sup>[4](#glossary)</sup>, navigate into the _home folder_ <sup>[5](#glossary)</sup> using the change directory command `cd`, and use the `java -jar tutormate.jar` command to run the application.<br>
    A _GUI_ <sup>[2](#glossary)</sup> similar to the picture below should appear in a few seconds. Note how the app contains some sample data.<br>
 
-   ![Ui](images/about.png)
+![Ui](images/about.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -1085,6 +1085,7 @@ No student is currently displayed
 This student has no linked lessons
 ```
 
+#### For Schedule:
 <box type="info" seamless>
 
 You must be in the 📅 ___SCHEDULE list___ and are viewing a lesson to run this command. Type `list schedule` to go to the 📅 ___SCHEDULE list___, then type `show INDEX` to select a lesson.</box>
