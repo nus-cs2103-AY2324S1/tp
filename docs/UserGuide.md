@@ -873,20 +873,23 @@ If the sort is done in an ascending manner, and if your tasks are not consistent
 For example, if your list looks like this:
 
 * `post on the forum for help`
+* `Presentation`
 * `complete OP2`
 * `Complete OP3`
 
 after sorting your list in ascending order by the Task Description, it will now look like this:
 
+* `Complete OP3`
+* `Presentation`
 * `complete OP2`
 * `post on the forum for help`
-* `Complete OP3`
 
 rather than:
 
 * `complete OP2`
 * `Complete OP3`
 * `post on the forum for help`
+* `Presentation`
 
 which is probably what you expect the command to do!
 
@@ -1050,12 +1053,14 @@ Currently, the `sort` feature is not really user-friendly, as it sorts your task
 * `b Task`
 * `a Task`
 * `A Task`
+* `B Task`
 
 after sorting your task list in ascending order by the task description, your task list will look like this:
 
+* `A Task`
+* `B Task`
 * `a Task`
 * `b Task`
-* `A Task`
 
 which is not the expected behaviour you might have for the `sort` feature!
 
@@ -1064,6 +1069,7 @@ In a future iteration of TaskWise, we will amend this feature to allow sorting t
 * `a Task`
 * `A Task`
 * `b Task`
+* `B Task`
 
 which is the intended behaviour of the `sort` feature!
 
