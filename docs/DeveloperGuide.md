@@ -419,12 +419,12 @@ when a group is added, duplicate persons will be deleted from the individual per
 
 ### Ability to find persons and events
 
-The `find` commands in our application displays persons and/or events that fit the keyword(s).
+The `find_XYZ` commands in our application displays persons and/or events that fit the keyword(s).
 
 #### Implementation
 
 The original `find` command has been split into three new commands, `find_person`, `find_event`, and `find_all`, which
-are collectively called `find` commands.
+are collectively called `find_XYZ` commands.
 * `find_person` command allows the user to find persons with fitting name or groups.
 * `find_event` command allows the user to find events with fitting name, assigned persons and groups, or person under assigned groups.
 * `find_all` command allows the user to find persons and events, which includes the criteria mentioned above.
@@ -439,18 +439,23 @@ class. The predicate is then passed to `Model#updateFilteredEventList(Predicate<
 
 `find_all` command covers the mechanism of both commands mentioned above, which uses both predicates and calls both functions in `Model`.
 
-As a result, the `ObservableList<Person>` and/or `ObservableList<Event>` is updated with the filtered lists of persons and events.
+As a result, the `ObservableList<Person>` and/or `ObservableList<Event>` are updated with the filtered lists of persons and events.
 The `UI` component is notified of these new changes to the lists and updates the UI accordingly, which will show the updated lists.
 
 #### Feature details
-1. The `find` commands can accept one or more parameter `keyword` for searching persons and/or events.
-2. A `PersonNameOrGroupContainsKeywordsPredicate` and/or `EventNameOrGroupContainsKeywordsPredicate` will be created and a `Find` command will be created with the predicates.
-3. The `Find` command will then be executed and the `UI` will be updated with the filtered lists of persons and/or events.
+1. The `find_XYZ` commands can accept one or more parameter `keyword` for searching persons and/or events.
+2. A `PersonNameOrGroupContainsKeywordsPredicate` and/or `EventNameOrGroupContainsKeywordsPredicate` will be created and a `FindXYZ` command will be created with the predicates.
+3. The `FindXYZ` command will then be executed and the `UI` will be updated with the filtered lists of persons and/or events.
 
-The flow for the `find` commands are described by the following sequence diagrams:
+The flow for the `find_XYZ` commands are described by the following sequence diagrams:
 
+#### `find_person`
 ![FindPersonSequenceDiagram](images/FindPersonSequenceDiagram.png)
+
+#### `find_event`
 ![FindEventSequenceDiagram](images/FindEventSequenceDiagram.png)
+
+#### `find_all`
 ![FindAllSequenceDiagram](images/FindAllSequenceDiagram.png)
 
 #### General design considerations
