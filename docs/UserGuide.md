@@ -320,11 +320,14 @@ This feature allows users to view specific information **<ins>(except the name)<
 * The `INDEX` **must be a positive integer**, and **must be within the range of the list (Total number of employees in the current list displayed)**.
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 Please do not use negative integers, non-integers and extremely large integers(integers greater than 2147483647) for the <code>INDEX</code>.
-</div>
-
+</div><br>
 
 **Examples:**
 * `read 1 /a` reads the address of the first employee in the most recently displayed list.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Notes:**
+Read command is extremely useful for leave tracking as the employee card only displays the promised annual leave of the employee. Use `read x /l` (where x is the index of the employee for whom you intend to check) to check the leave balance/leave taken to avoid errors before adding or deleting leaves.
+</div> <br>
 
 **Output:**
 
@@ -373,6 +376,10 @@ Please do not use negative integers, non-integers and extremely large integers(i
 
 * The `DATE` must be in `DD/MM/YYYY` format, e.g. `01/01/2024`.
 * For adding in multiple days of leave, the second `DATE` must be after the first `DATE`.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tips!** <br>
+Before adding leave, you can utilize the command `read x /l` (where x is the index of the employee for whom you intend to add leave) to check the leave balance. This ensures you avoid errors due to insufficient leave balance for the specified employee.
+</div> <br>
 
 **Examples:**
 * `addleave 3 /on 01/01/2024` adds a single day of leave of `01/01/2024` to the third employee in the most recently displayed list.
@@ -423,6 +430,10 @@ Please do not use negative integers, non-integers and extremely large integers(i
 
 * The `DATE` must be in `DD/MM/YYYY` format, e.g. `01/01/2024`.
 * For deleting multiple days of leave, the second `DATE` must be after the first `DATE`.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tips!** <br>
+Before deleting leave, you can utilize the command `read x /l` (where x is the index of the employee for whom you intend to delete leave) to verify that the leave taken matches the leave you wish to delete. This ensures you avoid errors due to insufficient leave balance for the specified employee.
+</div> <br>
 
 **Examples:**
 * `deleteleave 3 /on 01/01/2024` deletes a single day of leave of `01/01/2024` from the third employee in the most recently displayed list.
