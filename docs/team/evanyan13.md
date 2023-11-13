@@ -75,8 +75,11 @@ here: [Reposense Report](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?sea
     * Lead the team in fulfilling weekly deliverables and coordinated the general direction of the project.
     * Actively assisted peers by providing technical advise and reviewing and approving PRs.
 * **Documentation**:
-    * Contributed extensively to both the User Guide (UG) and Developer Guide (DG).
-    * Focused on providing graphical design support in the documentations.
+    * User Guide (UG):
+        * Added description for `delete`, `help` and `exit` commands.
+        * Added Ui screenshots to illustrate command results.
+        * Added Introduction, Guide to User Guide and Quick Tutorial sections.
+    * Developer Guide (DG): Added sections for `edit` command and `Ui` component.
 * **Bug Fixes**:
     * Fixed bugs reported during PE dry run.
         * PR [#81](https://github.com/AY2324S1-CS2103T-W12-3/tp/issues/81)
@@ -85,14 +88,3 @@ here: [Reposense Report](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?sea
 * **Community**:
     * PRs reviewed (with non-trivial review comments):
         * PR [#65](https://github.com/AY2324S1-CS2103T-W12-3/tp/pull/65)
-* **Tools**:
-
-## Contributions to the User Guide
-
-*Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting
-end-users.*
-
-## Contributions to the Developer Guide
-
-*Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical
-documentation and the technical depth of my contributions to the project.*
