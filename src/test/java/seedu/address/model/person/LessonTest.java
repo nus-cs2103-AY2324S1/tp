@@ -54,6 +54,16 @@ public class LessonTest {
         Lesson satLesson = new Lesson(new Day("Sat"), new Begin("1300"), new End("1400"));
         int expectedSatsInOctober2023 = 4;
         assertEquals(expectedSatsInOctober2023, satLesson.getNumOfDaysInMonth(2023, 10));
+
+        // Test for Leap Year 2024
+        Lesson thuLesson = new Lesson(new Day("Thu"), new Begin("1500"), new End("1530"));
+        int expectedThusInFeb2024 = 5;
+        assertEquals(expectedThusInFeb2024, thuLesson.getNumOfDaysInMonth(2024, 2));
+
+        // non leap years days always 4 on Feb
+        int expectedThusInFeb2023 = 4;
+        assertEquals(expectedThusInFeb2023, thuLesson.getNumOfDaysInMonth(2023, 2));
+
     }
 
     @Test
@@ -69,6 +79,10 @@ public class LessonTest {
         Lesson lessonThree = new Lesson(new Day("Sun"), new Begin("1500"), new End("1501"));
         double expectedDurationThree = 1.0 / 60;
         assertEquals(expectedDurationThree, lessonThree.calculateLessonDuration());
+
+        Lesson lessonFour = new Lesson(new Day("Thu"), new Begin("0000"), new End("2359"));
+        double expectedDurationFour = 1439.0 / 60;
+        assertEquals(expectedDurationFour, lessonFour.calculateLessonDuration());
     }
 
 }
