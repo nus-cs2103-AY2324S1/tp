@@ -13,6 +13,10 @@ My contributions to the project are listed below.
 - **New Feature**: Remove contact from meeting command
   - Added command and parser
 
+- **New Feature**: Add `Tag`s to meetings
+
+- **New Features**: Add `Status` field to meetings
+
 - **New Feature**: Mark meeting command
   - Added command and parser
   - Updates last contacted time for contacts
@@ -24,9 +28,7 @@ My contributions to the project are listed below.
   - Reviewed PRs
 
 - **Enhancements to existing features**:
-  - Add tags to meetings
   - Convert `Tag` to factory class with no duplicates
-  - Added `Status` field to meetings
   - Duplicate contacts: added checks for duplicate emails and phones
   - Email format: Improved Regex for email field
   - `ParseException`: Improved throwing, handling, and display of parsing exceptions
@@ -34,20 +36,17 @@ My contributions to the project are listed below.
 - **Documentation**:
 
   - User Guide
-    - `rmmc` command
-    - `mark` command
-    - Minor edits
+    - `rmmc` command guide
+    - `mark` command guide
+    - Proofreading and copywriting 
 
   - Developer Guide
-    - `rmmc` command
-    - `mark` command
+    - `rmmc` documentation and diagrams
+    - `mark` documentation and diagrams
     - User profile
     - Value proposition
     - User stories
     - Use cases
-
-- **Community**:
-  - to be added soon
 
 - **Tools**:
   - Added util method `parseIndexes`
