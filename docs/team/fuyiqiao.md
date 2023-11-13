@@ -33,10 +33,13 @@ Given below are my contributions to the project.
       * Edit details for add and edit commands
     * Developer Guide:
       * Added implementation details for tallied attendance feature 
-      * Added implementation details for merge command 
+      * Added implementation details for merge command, including the sequence and activity diagrams
+      * Added manual test cases
       * Added use cases
       * Added future enhancements 
+      * Added effort section
 * **Review / mentoring contributions**:
-  * Reviewed 11 Pull Requests 
+  * Reviewed 14 Pull Requests 
 * **Contributions beyond the project team**:
   * Reported bugs and suggestions for other teams during PE-D.
+    * Links: [1](https://github.com/fuyiqiao/ped/issues/1), [2](https://github.com/fuyiqiao/ped/issues/2), [3](https://github.com/fuyiqiao/ped/issues/3), [4](https://github.com/fuyiqiao/ped/issues/4), [5](https://github.com/fuyiqiao/ped/issues/5), [6](https://github.com/fuyiqiao/ped/issues/6), [7](https://github.com/fuyiqiao/ped/issues/7), [8](https://github.com/fuyiqiao/ped/issues/8), [9](https://github.com/fuyiqiao/ped/issues/9), [10](https://github.com/fuyiqiao/ped/issues/10)
