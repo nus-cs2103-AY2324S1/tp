@@ -760,7 +760,7 @@ If your changes to the data file makes its format invalid, InterviewHub will not
 
 ### **Q**: How do I check if I have the correct version of Java installed?
 **A**: You can check the version of Java installed in your computer by opening the terminal and running the `java --version` command.
-The correct version of Java required to run **InterviewHub** is **Java 11**. If you do not have Java (or the correct version of it) installed, you can download it [here](https://www.oracle.com/java/technologies/downloads/#java11).
+The correct version of Java required to run **InterviewHub** is **Java 11** or above. If you do not have Java installed, or if your current version is lower than 11, you can download the correct version [here](https://www.oracle.com/java/technologies/downloads/#java11).
 
 ### **Q**: Do I need an active internet connection to use InterviewHub?<br>
 **A**: No. It is an offline app.
