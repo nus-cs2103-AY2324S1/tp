@@ -558,7 +558,9 @@ Shows a list of all students in **Class Manager 2023**.
 
 Format: `list`
 
-Displayed result is `list` is successful: A list of all students in **Class Manager 2023**.
+The following image shows a successful execution of the `list` command.
+
+<img alt="list-student-success" src="images/list-success.png" width="700" >
 
 [Back to Table of Contents](#table-of-contents)
 
