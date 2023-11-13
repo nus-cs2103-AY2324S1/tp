@@ -32,6 +32,7 @@ solution to manage your student details including attendance records.
     - [Deleting multiple students : `delete all`](#328-deleting-multiple-students--delete-all)
     - [Merging two students : `merge`](#329-merging-two-students--merge)
     - [Viewing detailed attendance records : `view`](#3210-viewing-detailed-attendance-records--view)
+<<<<<<< HEAD
 - [4. FAQ](#4-faq)
 - [5. Known issues](#5-known-issues)
 - [6. Command summary](#6-command-summary)
@@ -75,6 +76,11 @@ solution to manage your student details including attendance records.
     - [7.2.1 Basic Course Management](#721-basic-course-management-commands)
     - [7.2.2 Basic Student Management](#722-basic-student-management-commands)
 >>>>>>> 17434123fd26a18f46995b02480ae84519d1ca2a
+=======
+- [4. FAQ](#5-faq)
+- [5. Known issues](#6-known-issues)
+- [6. Command summary](#7-command-summary)
+>>>>>>> parent of 967428e7 (Fix userguide table of content)
 
 --------------------------------------------------------------------------------------------------------------------
 ## 2. About this User Guide
