@@ -14,7 +14,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.reminder.Reminder;
 
 /**
- * An UI component that displays information of a {@code Reminder}.
+ * An UI component that displays information of {@code Reminder}s on a specific date.
  */
 public class ReminderDateCard extends UiPart<Region> {
 
@@ -38,7 +38,7 @@ public class ReminderDateCard extends UiPart<Region> {
     private ListView<Reminder> reminderListView;
 
     /**
-     * Creates a {@code CompanyCard} with the given {@code Company} and index to display.
+     * Creates a {@code ReminderDateCard} with the given {@code reminderDate} and a list of reminders on that date.
      */
     public ReminderDateCard(LocalDate reminderDate, ObservableList<Reminder> dateSpecificReminders) {
         super(FXML);
