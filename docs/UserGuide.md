@@ -241,6 +241,9 @@ Expected output upon success:<br>
 ![FindSuccess](images/FindSuccess.png)
 
 Expected output upon failure:
+
+<div style="page-break-after: always;"></div>
+
 * No field or invalid arguments given:
 ```
 Invalid command format!  
@@ -304,6 +307,7 @@ Examples:
 Expected output upon success :
 ![SortSuccess](images/SortSuccess.png)
 
+<div style="page-break-after: always;"></div>
 
 ### Remind user of clients policy expiry date : `remind`
 
@@ -339,6 +343,7 @@ Parameters: Number of days
 Example: remind 30
 ```
 
+<div style="page-break-after: always;"></div>
 
 ### Adding or removing remark to a client : `remark`
 
@@ -370,6 +375,7 @@ Parameters: INDEX (must be a positive integer) r/REMARK
 Example: remark 1 r/Likes to swim.
 ```
 
+<div style="page-break-after: always;"></div>
 
 ### Batch delete clients: `batchdelete`
 
