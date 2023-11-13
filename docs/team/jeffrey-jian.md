@@ -3,10 +3,10 @@ layout: page
 title: Jeffrey Jian's Project Portfolio Page
 ---
 
-### Project: Spend n Split
+### Project: Spend N Split
 
 ### Overview
-Spend n Split (SnS) is a **desktop app for managing expense from contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+Spend N Split (SnS) is a **desktop app for managing expense from contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
 If you can type fast, SnS can get your contact expense management tasks done faster than traditional GUI apps.
 

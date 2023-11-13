@@ -3,9 +3,9 @@ layout: page
 title: Wui Hong's Project Portfolio Page
 ---
 
-### Project: Spend n Split
+### Project: Spend N Split
 
-Spend n Split (SnS) is a **desktop app for managing expense from contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+Spend N Split (SnS) is a **desktop app for managing expense from contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
 Given below are my contributions to the project.
 

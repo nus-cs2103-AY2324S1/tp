@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Spend n Split (SnS)
+title: Spend N Split (SnS)
 ---
 
 [![CI Status](https://github.com/AY2324S1-CS2103T-W17-3/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2324S1-CS2103T-W17-3/tp/actions)
@@ -11,10 +11,10 @@ title: Spend n Split (SnS)
 
 ***Taking care of your finances has never been easier!***
 
-Spend n Split (SnS) is an application for managing transactions from your contacts list. Built for university students
+Spend N Split (SnS) is an application for managing transactions from your contacts list. Built for university students
 that reside on campus, it utilises your fast typing skills to help you maintain financial accountability between
-yourself and your peers. All you need to do, is to record your transactions in Spend n Split. Filtering, sorting, as
-well as the calculations of balances owed will be automatically handled by Spend n Split.
+yourself and your peers. All you need to do, is to record your transactions in Spend N Split. Filtering, sorting, as
+well as the calculations of balances owed will be automatically handled by Spend N Split.
 
 * Main features:
   * Manage contacts and their personal information
