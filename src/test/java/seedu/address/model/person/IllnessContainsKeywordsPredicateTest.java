@@ -79,7 +79,8 @@ public class IllnessContainsKeywordsPredicateTest {
     @Test
     public void test_illnessDoesNotContainKeywords_returnsFalse() {
         // Keywords do not match any illness
-        IllnessContainsKeywordsPredicate predicate = new IllnessContainsKeywordsPredicate(Arrays.asList("fever", "headache"));
+        IllnessContainsKeywordsPredicate predicate =
+                new IllnessContainsKeywordsPredicate(Arrays.asList("fever", "headache"));
         assertFalse(predicate.test(new PersonBuilder().withTags("flu appendicitis").build()));
 
         // Typo in keyword leads to false result
