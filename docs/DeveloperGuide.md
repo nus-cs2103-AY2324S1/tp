@@ -371,7 +371,7 @@ The following activity diagram summarizes what happens when a user executes a `t
   * Pros: Easy to implement, more straightforward when the number of possible arguments is less.
   * Cons: May not be suitable when we want to create a complex statistical table, e.g. a two-dimensional table.
 
-* **Alternative 2:** Create a CommandParser specifically for TableCommand.
+* Alternative 2: Create a CommandParser specifically for TableCommand.
   * Pros: Provides a good abstraction when we are dealing with two-dimensional table.
   * Cons: May be redundant when we only want to create a one-dimensional table and the number of possible categories is smaller.
 
@@ -410,7 +410,7 @@ The following activity diagram summarizes what happens when a user executes a `t
   * Pros: Provides better abstraction.
   * Cons: May be redundant as we only need to parse a year string.
 
-* **Alternative 2: Parse inside `TrendCommand`.
+* Alternative 2: Parse inside `TrendCommand`.
   * Pros: Easier to implement, more straightforward and more intuitive.
   * Cons: Code might be messier and longer, errors are harder to be handled.
 
@@ -549,7 +549,7 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
+* Alternative 2: Individual command knows how to undo/redo by
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
