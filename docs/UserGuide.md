@@ -714,11 +714,11 @@ _Details coming soon ..._
 # FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FumbleLog home folder.
-
-**Q**: How do I access the data file?<br>
-**A**: The data file is located at `[JAR file location]/data/addressbook.json`. You can edit it using any text editor.
-
+**A**: 
+  Step 1: Install the app in the other computer
+  Step 2: Go to your previous computer and obtain your old data file. You can find it at `[JAR file location]/data/addressbook.json`. 
+  Step 3: Copy the file from step 2 and move it to the data folder in your new computer, by replacing the new empty data file.
+  Your data is now all restored!
 **Q**: What are the constraints for email addresses?<br>
 **A**: Emails should be of the format `local-part@domain` and adhere to the following constraints:
   1. The local-part should only contain alphanumeric characters and these special characters (like '+' and '_'). 
