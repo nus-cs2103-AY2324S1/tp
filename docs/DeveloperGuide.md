@@ -891,6 +891,29 @@ Command: `help`
 
 ### Adding a member
 
+Command: `addm` or `addmember`. You can refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#411-adding-a-member-addmember-or-addm).
+1. Adding a new member
+    1. Prerequisites: Existing list of applicants do not contain member with the same phone number
+    2. Test case: `addm /name John Doe /phone 91234567 /email johnd@example.com /tele @johndoe`<br>
+       Expected: A new member is added with the given name, phone number, email, and Telegram handle with no tags.
+       The member is added to the last index of the member list. The member card will appear at the bottom
+       of the list.
+    3. Test case: `addm /name John Doe /phone 91234567 /email johnd@example.com /tele @johndoe /tag Classmate`<br>
+       Expected: A new member is added with the given name, phone number, email, and Telegram handle with the Classmate tag.
+       The member added to the last index of the applicant list. The applicant card will appear at the bottom of the list.
+
+2. Adding a member applicant
+    1. Prerequisites: Existing list of member contain member with the same phone number
+    2. Test case: `addm /name John Doe /phone 91234567 /email johnd@example.com /tele @johndoe`
+       then `addm /name Jack Do /phone 91234567 /email jackd@example.com /tele @jackdo`<br>
+       Expected: No member added because the member has the same phone number as an existing member. An error
+       message will be shown with the details.
+
+3. Adding a member while the member list is being filtered
+    1. Prerequisites: Filter the member list by keyword using the `findm` command.
+    2. Test case: Similar to test cases above.  
+       Expected: Similar to each respective test cases. The member list will remain filtered.
+
 ### Editing a member
 This uses the `editm` command. You can refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#414-editing-a-member-editmember-or-editm).
 
@@ -933,13 +956,13 @@ This uses the `findm` command. You can refer to the command [here](https://ay232
 ### Viewing all members
 This uses the `viewm` command. You can refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#413-viewing-members-viewmembers-or-viewm).
 
-1. Test case 1: `viewm`.
+1. Test case 1: `viewm`.<br/>
    Expected Outcome: All members will be shown on the member list. If there are no members in the system, then nothing will be shown there.
 
 ### Copy a member
 Command: `cpm` or `copymember`. You can refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#416-copying-a-members-details-copymember-or-cpm).
 
-1. Prerequisites: At least one member must be in the member list. You can add a member via the `addm` command. You can here to this command [here.](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#411-adding-a-member-addmember-or-addm)
+1. Prerequisites: At least one member must be in the member list. You can add a member via the `addm` command. You can refer to this command [here.](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#411-adding-a-member-addmember-or-addm)
 
 2. Test case 1: `cpm 1`.<br/>
    Expected Outcome: The first member's details are copied into the clipboard. The details of the copied member is shown in the success message as well.
@@ -952,7 +975,7 @@ Command: `cpm` or `copymember`. You can refer to the command [here](https://ay23
 ### Add member task
 Command: `addt` or `addtask`. You can refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#417-allocating-a-task-to-a-member-addtask-or-addt).
 
-1. Prerequisites: At least one member must be in the member list. You can add a member via the `addm` command. You can here to this command [here.](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#411-adding-a-member-addmember-or-addm)
+1. Prerequisites: At least one member must be in the member list. You can add a member via the `addm` command. You can refer to this command [here.](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#411-adding-a-member-addmember-or-addm)
 
 2. Test case 1: `addt 1 /task finish proposal`.<br/>
    Expected Outcome: The first member will have the task `finish proposal` added to their task list. The details of the added task will be shown in the success message.
@@ -979,7 +1002,9 @@ Command: `viewt` or `viewtask`. You can refer to the command [here](https://ay23
 ### Delete member task
 Command: `delt` or `deletetask`. You can refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#419-deleting-a-task-allocated-to-a-member-deletetask-or-delt).
 
-1. Prerequisites: At least one member must be in the member list. You can add a member via the `addm` command. You refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#411-adding-a-member-addmember-or-addm) and the member has at least 1 task in his tasklist. You can refer to the command [here.](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#417-allocating-a-task-to-a-member-addtask-or-addt);
+1. Prerequisites:
+   1. At least one member must be in the member list. You can add a member via the `addm` command. You can refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#411-adding-a-member-addmember-or-addm).
+   2. The member must also have at least 1 task in his tasklist. You can add a task to a member with the `addt` command. You can refer to the command [here.](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#417-allocating-a-task-to-a-member-addtask-or-addt)
 
 2. Test case 1: `delt 1 /task 1`.<br/>
    Expected Outcome: The first member's first task is deleted from the task list. The details of the deleted task is shown in the success message.
@@ -990,12 +1015,12 @@ Command: `delt` or `deletetask`. You can refer to the command [here](https://ay2
 4. Test case 3: `delt 1 /task 0`.<br/>
       Expected Outcome: The `TASK_INDEX` is invalid. An invalid index message is shown. Tasklist list remains the same.
 
-5. Other incorrect delete commands to try: `deltt`, `delt1`, `deletetask x` (where x is any non-integer or integer bigger than the member list size).
+5. Other incorrect delete member task commands to try: `deltt`, `delt1`, `deletetask x` (where x is any non-integer or integer bigger than the member list size).
 
 ### Deleting a member
 Command: `delm` or `deletemember`. You can refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#415-deleting-a-member-deletemember-or-delm).
 
-1. Prerequisites: At least one member must be in the member list. You can add a member via the `addm` command. You can here to this command [here.](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#411-adding-a-member-addmember-or-addm)
+1. Prerequisites: At least one member must be in the member list. You can add a member via the `addm` command. You can refer to this command [here.](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#411-adding-a-member-addmember-or-addm)
 
 2. Test case 1: `delm 1`.<br/>
    Expected Outcome: The first member is deleted from the shown member list. The name of the deleted member is shown in the status message.
@@ -1081,13 +1106,13 @@ This uses the `finda` command. You can refer to the command [here](https://ay232
 ### Viewing all applicants
 This uses the `viewa` command. You can refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#423-viewing-applicants-viewapplicants-or-viewa).
 
-1. Test case 1: `viewa`.
+1. Test case 1: `viewa`.<br/>
    Expected Outcome: All applicants will be shown on the applicant list. If there are no applicants in the system, then nothing will be shown there.
 
 ### Copy an applicant
 Command: `cpa` or `copyapplicant`. You can refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#426-copying-an-applicants-details-copyapplicant-or-cpa).
 
-1. Prerequisites: At least one applicant must be in the applicant list. You can add a member via the `adda` command. You can here to this command [here.](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#421-adding-an-applicant-addapplicant-or-adda)
+1. Prerequisites: At least one applicant must be in the applicant list. You can add a member via the `adda` command. You can refer to this command [here.](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#421-adding-an-applicant-addapplicant-or-adda)
 
 2. Test case 1: `cpa 1`.<br/>
    Expected Outcome: The first applicant's details are copied into the clipboard. The details of the copied applicant is shown in the success message as well.
@@ -1101,7 +1126,7 @@ Command: `cpa` or `copyapplicant`. You can refer to the command [here](https://a
 ### Deleting an applicant
 Command: `dela` or `deleteapplicant`. You can refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#425-deleting-an-applicant-deleteapplicant-or-dela).
 
-1. Prerequisites: At least one member must be in the member list. You can add a member via the `adda` command. You can here to this command [here.](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#421-adding-an-applicant-addapplicant-or-adda)
+1. Prerequisites: At least one member must be in the member list. You can add a member via the `adda` command. You can refer to this command [here.](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#421-adding-an-applicant-addapplicant-or-adda)
 
 2. Test case 1: `dela 1`.<br/>
    Expected: The first applicant is deleted from the shown applicant list. The name of the deleted applicant is shown in the status message.
