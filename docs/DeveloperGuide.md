@@ -68,6 +68,7 @@
     * [Adding note](#adding-note)
     * [Deleting note](#deleting-note)
     * [Adding event](#adding-event)
+    * [Listing events](#listing-events)
     * [Deleting event](#deleting-event)
 * [Appendix C: Planned enhancements](#appendix-c-planned-enhancements)
     * [User Interface](#user-interface)
