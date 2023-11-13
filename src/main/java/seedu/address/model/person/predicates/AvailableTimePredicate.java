@@ -5,6 +5,7 @@ import java.time.format.TextStyle;
 import java.util.Locale;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.availability.FreeTime;
 import seedu.address.model.availability.TimeInterval;
 import seedu.address.model.person.Person;
 
@@ -18,7 +19,7 @@ public class AvailableTimePredicate implements FindCommandPredicate {
     /**
      * Constructs a new AvailableTimePredicate with the specified day and time interval.
      *
-     * @param day The day for which the predicate applies.
+     * @param day      The day for which the predicate applies.
      * @param interval The time interval during which the predicate is valid.
      */
     public AvailableTimePredicate(Integer day, TimeInterval interval) {
@@ -34,16 +35,16 @@ public class AvailableTimePredicate implements FindCommandPredicate {
     @Override
     public String toFilterString() {
         return "\nday: " + DayOfWeek.of(day).getDisplayName(TextStyle.SHORT, Locale.ENGLISH)
-            + "\nfree time: [" + interval.toString() + "]";
+                + "\nfree time: [" + interval.toString() + "]";
     }
 
     @Override
     public boolean test(Person person) {
-        if (person.getFreeTime() == null) {
+        if (person.getFreeTime() == FreeTime.EMPTY_FREE_TIME) {
             return false;
         }
 
-        TimeInterval timeInterval = person.getFreeTime().getDay(day - 1);
+        TimeInterval timeInterval = person.getFreeTime().getDay(day);
         if (timeInterval != null) {
             return timeInterval.isInBetween(interval);
         }
@@ -61,8 +62,8 @@ public class AvailableTimePredicate implements FindCommandPredicate {
             return false;
         }
 
-        AvailableTimePredicate otherNameContainsKeywordsPredicate = (AvailableTimePredicate) other;
-        return interval.equals(otherNameContainsKeywordsPredicate.interval);
+        AvailableTimePredicate otherAvailableTimePredicate = (AvailableTimePredicate) other;
+        return interval.equals(otherAvailableTimePredicate.interval) && day.equals(otherAvailableTimePredicate.day);
     }
 
     @Override

@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import java.util.NoSuchElementException;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditFreeTimeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -36,7 +37,7 @@ public class EditFreeTimeCommandParser implements Parser<EditFreeTimeCommand> {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
             dayOfWeek = Integer.parseInt(argMultimap.getValue(PREFIX_DAY).get());
             if (dayOfWeek < 1 || dayOfWeek > 5) {
-                throw new ParseException(EditFreeTimeCommand.MESSAGE_INVALID_DAY);
+                throw new ParseException(Messages.MESSAGE_INVALID_DAY);
             }
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FROM, PREFIX_TO, PREFIX_DAY);
             EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();

@@ -92,12 +92,12 @@ public class FreeTimeTest {
         assertNotEquals(freeTime, updatedFreeTime);
 
         // Check that the time interval for the first day is updated
-        assertNotEquals(freeTime.getDay(0), upDatedTimeInterval);
-        assertEquals(updatedFreeTime.getDay(0), upDatedTimeInterval);
+        assertNotEquals(freeTime.getDay(1), upDatedTimeInterval);
+        assertEquals(updatedFreeTime.getDay(1), upDatedTimeInterval);
 
         // Check other days are not modified
         for (int i = 2; i < 6; i++) {
-            assertEquals(freeTime.getDay(i - 1), updatedFreeTime.getDay(i - 1));
+            assertEquals(freeTime.getDay(i), updatedFreeTime.getDay(i));
         }
     }
 }

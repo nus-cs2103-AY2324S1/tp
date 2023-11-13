@@ -71,11 +71,11 @@ public class FreeTime {
     /**
      * Returns availability of a specific day of the week.
      *
-     * @param day day of the week, Monday - 1.
+     * @param day day of the week, Monday is represented by 1.
      * @return Availability represented by {@code TimeInterval}.
      */
     public TimeInterval getDay(int day) {
-        return this.intervals.get(day);
+        return this.intervals.get(day - 1);
     }
 
 
@@ -133,7 +133,7 @@ public class FreeTime {
     /**
      * Updates the availability for a specific day of the week with a new time interval.
      *
-     * @param dayOfWeek       The day of the week to update availability for (1 for Sunday, 2 for Monday, etc.).
+     * @param dayOfWeek       The day of the week to update availability for (1 for Monday, 2 for Tuesday, etc.).
      * @param updatedInterval The new time interval to set for the specified day.
      * @return A new FreeTime object with the updated availability for the specified day.
      */

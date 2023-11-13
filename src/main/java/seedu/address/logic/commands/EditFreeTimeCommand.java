@@ -36,7 +36,6 @@ public class EditFreeTimeCommand extends Command {
             + PREFIX_TO + "15:00";
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Teaching Assistant: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_INVALID_DAY = "Please enter a valid day between 1 and 5, inclusive";
     private final Index index;
     private final Integer day;
     private final EditCommand.EditPersonDescriptor editPersonDescriptor;
