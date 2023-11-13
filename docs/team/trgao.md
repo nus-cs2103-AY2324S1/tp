@@ -20,7 +20,7 @@ Given below are my contributions to the project.
 
 * **Project management**:
   * Set up the GitHub repo for the team
-  * Maintained the issue tracker
+  * Maintained the issue tracker and distributed the work among the team
   * Released the different versions of the product throughout the lifecycle of the product
 
 * **Contributions to user guide**:
@@ -29,7 +29,7 @@ Given below are my contributions to the project.
   * Reformatted all the commands in the user guide to a user-friendly style
 
 * **Contributions to developer's guide**:
+  * Updated the UML diagrams in the "UI", "Model" and "Storage" sections to include the Appointment class
   * Added the "Appendix: Planned Enhancements" section
   * Added the UML Class diagram for the general implementation of an appointment command
-  * Added the UML diagrams and explanations for `upcoming` commands
-  * Updated the UML diagrams in the "UI", "Model" and "Storage" sections to include the Appointment class
+  * Added the UML diagrams and explanations for the `upcoming` appointment command
