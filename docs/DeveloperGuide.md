@@ -1,7 +1,7 @@
 ---
-  layout: default.md 
-  title: "Developer Guide"
-  pageNav: 3
+  layout: default.md
+    title: "Developer Guide"
+    pageNav: 3
 ---
 
 # Staff-Snap Developer Guide
@@ -14,7 +14,9 @@
 
 ## **Acknowledgements**
 
-Staff-Snap is based on the [AddressBook-Level3](https://se-education.org/addressbook-level3/) project created by the [SE-EDU initiative](https://se-education.org), and it incorporates the following third-party libraries: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://junit.org/junit5/), [OpenCSV](https://opencsv.sourceforge.net/project-info.html), [TestFX](https://testfx.github.io/TestFX/docs/javadoc/testfx-core/javadoc/org.testfx/module-summary.html).
+Staff-Snap is based on the [AddressBook-Level3](https://se-education.org/addressbook-level3/) project created by
+the [SE-EDU initiative](https://se-education.org), and it incorporates the following third-party
+libraries: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://junit.org/junit5/), [OpenCSV](https://opencsv.sourceforge.net/project-info.html), [TestFX](https://testfx.github.io/TestFX/docs/javadoc/testfx-core/javadoc/org.testfx/module-summary.html).
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -103,7 +105,8 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API
+** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -121,7 +124,8 @@ PlantUML, the lifeline reaches the end of diagram.
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `ApplicantBookParser` object which in turn creates
+1. When `Logic` is called upon to execute a command, it is passed to an `ApplicantBookParser` object which in turn
+   creates
    a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which
    is executed by the `LogicManager`.
@@ -143,7 +147,8 @@ How the parsing works:
 
 ### Model component
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API
+** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -151,8 +156,10 @@ How the parsing works:
 The `Model` component,
 
 * stores the applicant book data i.e., all `Applicant` objects (which are contained in a `UniqueApplicantList` object).
-* stores the currently 'selected' `Applicant` objects (e.g., results of a search query) as a separate _filtered_ list which
-  is exposed to outsiders as an unmodifiable `ObservableList<Applicant>` that can be 'observed' e.g. the UI can be bound to
+* stores the currently 'selected' `Applicant` objects (e.g., results of a search query) as a separate _filtered_ list
+  which
+  is exposed to outsiders as an unmodifiable `ObservableList<Applicant>` that can be 'observed' e.g. the UI can be bound
+  to
   this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
   a `ReadOnlyUserPref` objects.
@@ -161,13 +168,15 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API
+** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
 
-* can save both applicant book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both applicant book data and user preference data in JSON format, and read them back into corresponding
+  objects.
 * inherits from both `ApplicantBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
   the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
@@ -188,9 +197,11 @@ This section describes some noteworthy details on how certain features are imple
 ### Add applicant feature
 
 #### Implementation
+
 The add applicant feature allows users to add an applicant to the applicant list.
 
 #### Steps to trigger
+
 1. The user launches the application.
 2. The user executes `add n/John Doe hp/98765432 e/jd@gmail.com p/software engineer` to add a new applicant.
 3. The `AddCommandParser#parse()` checks whether all the prefixes and the required values are provided.
@@ -216,7 +227,7 @@ The following activity diagram summarizes what happens when a user executes the 
 - Alternative 2: Same command `add` for adding applicants and interviews.
     - Pros: More convenient for user to add an applicant with interviews.
     - Cons: Still necessary to have a separate `addi` command for user to add a new interview to an existing applicant.
- 
+
 <br>
 
 ---
@@ -225,21 +236,28 @@ The following activity diagram summarizes what happens when a user executes the 
 ### Edit applicant feature
 
 #### Implementation
+
 The edit applicant feature allows users to edit the details of an applicant.
 
 #### Steps to trigger
+
 1. The user launches the application.
-2. The user executes `edit 1 hp/87654321 p/front-end engineer` to edit the phone number and position of the first applicant.
-3. The `EditCommandParser#parse()` checks whether the index of the applicant is valid and at least one prefix with the required values are provided.
-4. If the check is successful, the `EditCommand#execute()` checks if the identity of the applicant after the edit is the same as the identity of another existing applicant. 
-5. If the identity is not the same, the `Model#setApplicant()` updates the details of the applicant while the `Model#updateFilteredApplicantList()` updates applicant list to display the updated applicant list.
+2. The user executes `edit 1 hp/87654321 p/front-end engineer` to edit the phone number and position of the first
+   applicant.
+3. The `EditCommandParser#parse()` checks whether the index of the applicant is valid and at least one prefix with the
+   required values are provided.
+4. If the check is successful, the `EditCommand#execute()` checks if the identity of the applicant after the edit is the
+   same as the identity of another existing applicant.
+5. If the identity is not the same, the `Model#setApplicant()` updates the details of the applicant while
+   the `Model#updateFilteredApplicantList()` updates applicant list to display the updated applicant list.
 
 #### Design considerations
 
 ##### Aspect: Syntax for editing applicants
 
 - Alternative 1 (current choice): At least one field to edit has to be provided.
-    - Pros: More convenient for user to edit an applicant's details and shorter command. Ensures that field not meant to be edited will remain unchanged.
+    - Pros: More convenient for user to edit an applicant's details and shorter command. Ensures that field not meant to
+      be edited will remain unchanged.
     - Cons: Harder to implement due to more validation and checks needed.
 
 - Alternative 2:  All fields of the applicant has to be provided, regardless of whether it is edited.
@@ -253,19 +271,17 @@ The edit applicant feature allows users to edit the details of an applicant.
 
 ### Help feature
 
-
 #### Implementation
 
 1. When the user enters the term help. it triggers the help feature in the parser under the switch case.
 2. After it is triggered, it will display a short list of possible commands that the user can use.
 3. The user guide will also be opened in their browser
 
-
 #### Steps to trigger
 
-1. User opens the app
-2. User keys in `help`
-3. Command list is shown and opens user guide in browser
+1. User opens the app.
+2. User keys in `help`.
+3. Command list is shown and opens user guide in browser.
 
 #### Notes
 
@@ -282,20 +298,25 @@ The edit applicant feature allows users to edit the details of an applicant.
 #### Implementation
 
 1. This features requires the state of the parser to be known.
-2. The parser is modified to store the previous taken in command, in this case whether the previous command was a successful clear command.
-3. If the previous command is not a clear command, it looks for the keyword clear. Otherwise, it looks for the keyword yes.
-4. Hence, the user will first need to call clear, before calling yes to invoke the clear mechanism, ensuring safety of data.
+2. The parser is modified to store the previous taken in command, in this case whether the previous command was a
+   successful clear command.
+3. If the previous command is not a clear command, it looks for the keyword clear. Otherwise, it looks for the keyword
+   yes.
+4. Hence, the user will first need to call clear, before calling yes to invoke the clear mechanism, ensuring safety of
+   data.
 
 #### Steps to trigger
 
-1. User opens the app
-2. User enters `clear` (and subsequently sees a message asking to confirm)
-3. User enters `yes` to confirm the clear
+1. User opens the app.
+2. User enters `clear` (and subsequently sees a message asking to confirm).
+3. User enters `yes` to confirm the clear.
 
 #### Notes
 
-1. If you would like to extend the code for more features that require state, please do change the case condition for this feature.
-2. Currently, it follows the default commands if a word other than yes is given. But this will be improved in a future update.
+1. If you would like to extend the code for more features that require state, please do change the case condition for
+   this feature.
+2. Currently, it follows the default commands if a word other than yes is given. But this will be improved in a future
+   update.
 3. The state of the parser, rather than the app is used to reduce the chances of accidental clears.
 
 <br>
@@ -307,11 +328,20 @@ The edit applicant feature allows users to edit the details of an applicant.
 
 #### Purpose
 
-As a hiring management software, we need to perform CRUD operations for the interviews of applicants. This allows us to add new interviews, view existing interviews, edit current interviews, and delete interviews. As we aim so make our program intuitive and efficient, the UI design and data structure used to store these interview objects were crucial considerations in the implementation process.
+As a hiring management software, we need to perform CRUD operations for the interviews of applicants. This allows us to
+add new interviews, view existing interviews, edit current interviews, and delete interviews. As we aim so make our
+program intuitive and efficient, the UI design and data structure used to store these interview objects were crucial
+considerations in the implementation process.
 
 #### Implementation
 
-The `Interview` class is used to store the information of each interview. It contains the following attributes: `type` and `rating`. The `type` attribute represents the type of interview, while the `rating` attribute represents how well the applicant performed in an interview (out of a score of 10). The CRUD commands involving `Interview` includes the `AddInterviewCommand`, `EditInterviewCommand`, and `DeleteInterviewCommand`. These are implemented in a largely similar manner to the `Applicant` class. The main difference is in how an `EditInterviewDescriptor` class facilitates the editing of an interview and how the edit and delete commands requires 2 indices: the applicant index as well as the chosen interview index.
+The `Interview` class is used to store the information of each interview. It contains the following attributes: `type`
+and `rating`. The `type` attribute represents the type of interview, while the `rating` attribute represents how well
+the applicant performed in an interview (out of a score of 10). The CRUD commands involving `Interview` includes
+the `AddInterviewCommand`, `EditInterviewCommand`, and `DeleteInterviewCommand`. These are implemented in a largely
+similar manner to the `Applicant` class. The main difference is in how an `EditInterviewDescriptor` class facilitates
+the editing of an interview and how the edit and delete commands requires 2 indices: the applicant index as well as the
+chosen interview index.
 
 The activity diagram below gives an overview of the behavior when the `DeleteInterviewCommand` is executed:
 
@@ -319,7 +349,13 @@ The activity diagram below gives an overview of the behavior when the `DeleteInt
 
 #### Design Considerations
 
-In deciding the data structure to house our Interview objects, we were torn between using a `PriorityQueue` and a `List`. A `PriorityQueue` would have been useful in sorting the interviews by rating, but it would have been difficult to implement the `EditInterviewCommand` and `DeleteInterviewCommand` as the `PriorityQueue` does not have a `get()` method. Also, if we wanted to extend a sorting function for interviews in the future, a `PriorityQueue` would make it more difficult for us to change the comparator for `Interview` objects. For the sake of extensibility of the codebase, we decided to use a `List` instead. This is because a `List` provides us with greater abstraction and code flexibility in extending various functions for the `Interview` class. 
+In deciding the data structure to house our Interview objects, we were torn between using a `PriorityQueue` and
+a `List`. A `PriorityQueue` would have been useful in sorting the interviews by rating, but it would have been difficult
+to implement the `EditInterviewCommand` and `DeleteInterviewCommand` as the `PriorityQueue` does not have a `get()`
+method. Also, if we wanted to extend a sorting function for interviews in the future, a `PriorityQueue` would make it
+more difficult for us to change the comparator for `Interview` objects. For the sake of extensibility of the codebase,
+we decided to use a `List` instead. This is because a `List` provides us with greater abstraction and code flexibility
+in extending various functions for the `Interview` class.
 
 <br>
 
@@ -330,11 +366,16 @@ In deciding the data structure to house our Interview objects, we were torn betw
 
 #### Implementation
 
-The sort feature is facilitated by `Descriptor`, an enumeration which describes the valid fields which can be used to sort an applicant.
+The sort feature is facilitated by `Descriptor`, an enumeration which describes the valid fields which can be used to
+sort an applicant.
 
-To enable sorting, `Applicant` implements `Comparable<Applicant>`, to allow for comparison between applicants. To allow for applicants to be sorted by different descriptors, `Applicant` is augmented to contain a static `descriptor` field. This is used in `Applicant#compareTo()`, where a switch case checking the state of the `Descriptor` field will then compare the specified field of both applicants.
+To enable sorting, `Applicant` implements `Comparable<Applicant>`, to allow for comparison between applicants. To allow
+for applicants to be sorted by different descriptors, `Applicant` is augmented to contain a static `descriptor` field.
+This is used in `Applicant#compareTo()`, where a switch case checking the state of the `Descriptor` field will then
+compare the specified field of both applicants.
 
-In order to enable comparison of each valid field, these fields will implement the `Comparable` interface. Currently valid fields for sorting are
+In order to enable comparison of each valid field, these fields will implement the `Comparable` interface. Currently
+valid fields for sorting are
 
 1. Name
 2. Phone
@@ -343,14 +384,17 @@ In order to enable comparison of each valid field, these fields will implement t
 5. Position
 6. Status
 
-Additionally, a static boolean `Applicant#isDescendingOrder` has been added to keep track of the order to sort the applicants. 
+Additionally, a static boolean `Applicant#isDescendingOrder` has been added to keep track of the order to sort the
+applicants.
 
 #### Steps to trigger
 
 1. User opens the app.
 2. User enters `sort d/ [valid field] [dsc/]`, where valid field is one of the fields listed above to be sorted by.
-3. The `SortCommandParser#parse()` checks that the field input is valid and if the `dsc/` flag has been entered to sort in descending order.
-4. If the input is valid, `SortCommand#execute()` updates both the `descriptor` and `isDescendingOrder` fields of the `Applicant` class.
+3. The `SortCommandParser#parse()` checks that the field input is valid and if the `dsc/` flag has been entered to sort
+   in descending order.
+4. If the input is valid, `SortCommand#execute()` updates both the `descriptor` and `isDescendingOrder` fields of
+   the `Applicant` class.
 5. The GUI will update and refresh the applicant list to be sorted by the specified field.
 
 The following diagram summarises what happens when a user executes a Sort command:
@@ -377,7 +421,8 @@ The following diagram summarises what happens when a user executes a Sort comman
     - Pros: Able to sort in either ascending or descending order.
     - Cons: Requires additional input from the user, slowing down the use of the command.
 - Alternative 3 (current choice): `sort d/ [valid field] [dsc/]` where `dsc/` is optional
-    - Pros: Retains the ability to sort in either order, but also the conciseness of Alternative 1. Also does not require user to type in any flag to sort in ascending order.
+    - Pros: Retains the ability to sort in either order, but also the conciseness of Alternative 1. Also does not
+      require user to type in any flag to sort in ascending order.
     - Cons: Users who are not aware of the `dsc/` feature may not use it.
 
 <br>
@@ -389,9 +434,12 @@ The following diagram summarises what happens when a user executes a Sort comman
 
 #### Implementation
 
-The filter feature works by updating the `Predicate` used in the `FilteredList<Applicant>` of `ModelManager`. Using the predicate, minimal changes to the implementation of StaffSnap is required.
+The filter feature works by updating the `Predicate` used in the `FilteredList<Applicant>` of `ModelManager`. Using the
+predicate, minimal changes to the implementation of StaffSnap is required.
 
-To create a single predicate that is able to search and filter for multiple fields, a `CustomFilterPredicate` class is created. It currently contains the following fields and is able to filter for applicants which match all specified fields.
+To create a single predicate that is able to search and filter for multiple fields, a `CustomFilterPredicate` class is
+created. It currently contains the following fields and is able to filter for applicants which match all specified
+fields.
 
 1. Name
 2. Phone
@@ -401,17 +449,22 @@ To create a single predicate that is able to search and filter for multiple fiel
 6. Less than score
 7. Greater than score
 
-When `CustomFilterPredicate#test()` is called, it will check if the specified fields are a substring of the same field of
+When `CustomFilterPredicate#test()` is called, it will check if the specified fields are a substring of the same field
+of
 the applicant, returning true if all specified fields match, and false otherwise.
 
 #### Steps to trigger
 
 1. User opens the app.
-2. User enters `filter [n/, e/, p/, hp/, s/, lts/, gts/] [term]`, where one or more of the prefixes can be specified to
+2. User enters `filter [n/, e/, p/, hp/, s/, lts/, gts/] [term]`, where at least one or more of the prefixes is
+   specified to
    be filtered by.
+3. The `FilterCommandParser#parse()` checks that all entered fields are valid and creates a new `CustomFilterPredicate`
+   with all the specified fields.
+4. If fields are valid, `FilterCommand#execute()` takes in the `CustomFilterPredicate` and uses it to replace the
+   current predicate in `ModelManager` via `ModelManager#updateFilteredApplicantList()`.
+5. The GUI will update and refresh the applicant list with only applicants which match all specified fields.
 
-Once step 2 is complete, the GUI will update and refresh the applicant list with only applicants which match all
-specified fields. 
 The following diagram summarises what happens when a user executes a Filter command:
 
 <puml src="diagrams/FilterCommandActivityDiagram.puml" alt="FilterCommandActivityDiagram" />
@@ -442,8 +495,7 @@ The following diagram summarises what happens when a user executes a Filter comm
     - Pros: Quicker to key in command than alternative 1.
     - Cons: Only allows users to filter by one field at a time, limiting utility of filter command.
 - Alternative 3 (current choice): `filter [n/, e/, p/, hp/, s/, lts/, gts/] [term]`, where at least one term is required
-  and the others
-  are optional
+  and the others are optional
     - Pros: Provides flexibility in the filter command to filter by one or more fields, while still retaining the speed
       of alternative 2 when few fields are required.
     - Cons: Unfamiliar users may not know that fields can be optional anc continue to key in the full command at all
@@ -457,10 +509,12 @@ The following diagram summarises what happens when a user executes a Filter comm
 ### Find feature
 
 #### Purpose
-The find feature allows HR managers to find applicants by name, allowing for a faster and more efficient way of 
+
+The find feature allows HR managers to find applicants by name, allowing for a faster and more efficient way of
 finding and tracking specific candidates.
 
 #### Implementation
+
 After the user enters the find command in the format `find KEYWORD [MORE_KEYWORDS]`,
 the input is passed to the `ApplicantBookParser` class which calls `FindCommandParser#parse()` which parses the keywords
 in the input and creates a list of keywords.
@@ -470,7 +524,8 @@ This `NameContainsKeywordsPredicate` object is then used as the parameter to ins
 `LogicManager#execute()` then calls `FindCommand#execute()` and the current applicant book is updated by calling
 `ModelManager#updateFilteredApplicantList()` which checks which applicant's name contains any of the keywords.
 
-An instance of `CommandResult` is then created which contains the message and information that will be displayed to the user.
+An instance of `CommandResult` is then created which contains the message and information that will be displayed to the
+user.
 The GUI then updates to show this information to the user.
 
 <puml src="diagrams/FindCommandSequenceDiagram.puml" alt="FindCommandSequenceDiagram" />
@@ -480,13 +535,15 @@ The GUI then updates to show this information to the user.
 1. The search is case-insensitive, e.g. `find JOHN` will return both john and John.
 2. The order of the keywords does not matter. e.g. `find Alice Tan` will match Tan Alice.
 3. Only the applicant name is searched.
-4. Any applicant whose name contains the sequence of characters given as the keyword will be given as a result. e.g. Ed will match both Edward and Ed.
+4. Any applicant whose name contains the sequence of characters given as the keyword will be given as a result. e.g. Ed
+   will match both Edward and Ed.
    Applicants matching at least one keyword will be returned (i.e. OR search).
    e.g. `find Ben Bobby` will return Ben Yang, Bobby Chin.
 
 #### Steps to trigger
-1. User opens the app
-2. User keys in `find KEYWORD [MORE_KEYWORDS]`
+
+1. User opens the app.
+2. User keys in `find KEYWORD [MORE_KEYWORDS]`.
 3. The GUI will update to show a list of applicants with name containing any of the keywords.
 
 <puml src="diagrams/FindCommandActivityDiagram.puml" alt="FindCommandActivityDiagram" />
@@ -495,35 +552,37 @@ The GUI then updates to show this information to the user.
 
 ##### Aspect: How to find applicants
 
-- Alternative 1: Find applicants by name using exact match search 
-(e.g. `find Eddy` will only result in applicants whose name is Eddy)
-  - Pros: Users can find applicants by their exact name, 
-  allowing for a more specific search
-  - Cons: Users would have to type in the entire name exactly in order to
-  get their desired result. This can result in higher user error and takes more time to type.
-  
+- Alternative 1: Find applicants by name using exact match search
+  (e.g. `find Eddy` will only result in applicants whose name is Eddy)
+    - Pros: Users can find applicants by their exact name,
+      allowing for a more specific search
+    - Cons: Users would have to type in the entire name exactly in order to
+      get their desired result. This can result in higher user error and takes more time to type.
+
 - Alternative 2 (current choice): Find applicants by name using partial match search (or "fuzzy" search)
-  - Pros: More inclusive, can find matches that are related but not exactly the same as `KEYWORD`.
-  This is more user-friendly and allows for faster typing as users do not need to type the exact name out in order to find
-  an applicant.
+    - Pros: More inclusive, can find matches that are related but not exactly the same as `KEYWORD`.
+      This is more user-friendly and allows for faster typing as users do not need to type the exact name out in order
+      to find
+      an applicant.
 
-  - Cons: May return a larger number of results, some of which may not be relevant (false positives), 
-  potentially requiring additional filtering or sorting which can be inconvenient and time-consuming.
+    - Cons: May return a larger number of results, some of which may not be relevant (false positives),
+      potentially requiring additional filtering or sorting which can be inconvenient and time-consuming.
 
-##### Aspect: Command syntax 
+##### Aspect: Command syntax
 
 - Alternative 1: `find n/NAME` where `n/` represents the name to be searched
-  - Pros: Unambiguous that the term to be searched for is the name.
-  - Cons: As the current find function only supports searching by name, adding the additional `n/` is unnecessary.
+    - Pros: Unambiguous that the term to be searched for is the name.
+    - Cons: As the current find function only supports searching by name, adding the additional `n/` is unnecessary.
 
 - Alternative 2 (current choice): `find KEYWORDS [MORE_KEYWORDS]`
-  - Pros: Allows for faster typing as users do not need to input the unnecessary `n/` tag.
-  - Cons: Not immediately clear that the `find` command finds applications by name. 
-  This will have to be explained in the user guide.
+    - Pros: Allows for faster typing as users do not need to input the unnecessary `n/` tag.
+    - Cons: Not immediately clear that the `find` command finds applications by name.
+      This will have to be explained in the user guide.
 
 #### Future Extension:
+
 A future extension to this find command is to allow it to find applicants by other fields such as their email or their
-handphone number. 
+handphone number.
 As handphone numbers and emails are likely to be distinct for each applicant, it is possible to
 enhance the find feature so that it can also search for applicants by these fields.
 
@@ -536,11 +595,19 @@ enhance the find feature so that it can also search for applicants by these fiel
 
 #### Purpose
 
-The `import` feature allows users to import data from a CSV file into Staff-Snap. This allows users to populate Staff-Snap with data from other sources via the commonly used CSV format. By allowing users to import large amounts of data from other sources without manually typing it in, Staff-Snap becomes more versatile and useful to users.
+The `import` feature allows users to import data from a CSV file into Staff-Snap. This allows users to populate
+Staff-Snap with data from other sources via the commonly used CSV format. By allowing users to import large amounts of
+data from other sources without manually typing it in, Staff-Snap becomes more versatile and useful to users.
 
 #### Implementation
 
-The `import` feature is implemented as a command that takes in a CSV file name as an argument. The command is parsed by the `ImportCommandParser` class, which then calls the `ImportCommand` class to execute the command. The `ImportCommand` class uses the static `parse()` method under `CsvApplicantParser` to parse the applicant data into a `List<CsvApplicant>` with the help of the `CsvToBeanBuilder<T>` class under `com.opencsv.bean` package. If the `List<CsvApplicant>` has been successfully parsed, we then call the `ParserUtil::parseApplicantFromCsv()` method to convert each `CsvApplicant` into `Applicant`. Lastly, we call the `ModelManager` class to import the data from the `List<Applicant>` into Staff-Snap.
+The `import` feature is implemented as a command that takes in a CSV file name as an argument. The command is parsed by
+the `ImportCommandParser` class, which then calls the `ImportCommand` class to execute the command. The `ImportCommand`
+class uses the static `parse()` method under `CsvApplicantParser` to parse the applicant data into
+a `List<CsvApplicant>` with the help of the `CsvToBeanBuilder<T>` class under `com.opencsv.bean` package. If
+the `List<CsvApplicant>` has been successfully parsed, we then call the `ParserUtil::parseApplicantFromCsv()` method to
+convert each `CsvApplicant` into `Applicant`. Lastly, we call the `ModelManager` class to import the data from
+the `List<Applicant>` into Staff-Snap.
 
 Below is the sequence diagram for the `import` feature:
 
@@ -548,9 +615,14 @@ Below is the sequence diagram for the `import` feature:
 
 #### Design Considerations
 
-Before initiating the import process, we considered it crucial to perform a thorough validation of the CSV file. This included checks for the file's existence, format, and integrity to ensure that the data can be successfully processed.
+Before initiating the import process, we considered it crucial to perform a thorough validation of the CSV file. This
+included checks for the file's existence, format, and integrity to ensure that the data can be successfully processed.
 
-We also implemented a robust error-handling mechanism to gracefully manage scenarios where the CSV file is malformed or contains errors. For example, to address the possibility of duplicate entries, we first check if the CSV contains duplicate entries within itself, then we also check if the CSV contains entries which are duplicates with existing entries in Staff-Snap. If such duplicates exists, we inform the user of the problematic entries and allow them to rectify the entries before importing.
+We also implemented a robust error-handling mechanism to gracefully manage scenarios where the CSV file is malformed or
+contains errors. For example, to address the possibility of duplicate entries, we first check if the CSV contains
+duplicate entries within itself, then we also check if the CSV contains entries which are duplicates with existing
+entries in Staff-Snap. If such duplicates exists, we inform the user of the problematic entries and allow them to
+rectify the entries before importing.
    
 --------------------------------------------------------------------------------------------------------------------
 
@@ -571,14 +643,18 @@ We also implemented a robust error-handling mechanism to gracefully manage scena
 ### Product scope
 
 **Target user profile**:
-* Hiring Manager of a Small Medium Enterprise who has a need to manage a significant number of applicants (around 250 - 500 applicants)
+
+* Hiring Manager of a Small Medium Enterprise who has a need to manage a significant number of applicants (around 250 -
+  500 applicants)
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: 
-* Introduces organisation to applicant management, recruitment processes and streamlines hiring decisions for hiring managers
+**Value proposition**:
+
+* Introduces organisation to applicant management, recruitment processes and streamlines hiring decisions for hiring
+  managers
 
 <br>
 
@@ -606,8 +682,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                  | mark an applicant as undecided, offered or rejected        | keep track of applicants' application status                |
 | `*`      | user                                  | schedule a date for an interview                           | keep track of all interview timings                         |
 | `*`      | user                                  | view a graphical representation of each applicant's rating | get a quick idea of each applicant's ability                |
-
-
 
 ### Use cases
 
@@ -758,21 +832,21 @@ Use case ends.
 
 * 1a. User enters an invalid command.
 
-  * 1a1. Staff-Snap shows an error message.
+    * 1a1. Staff-Snap shows an error message.
 
-    Use case ends.
+      Use case ends.
 
 * 1b. User enters an invalid index for the applicant.
 
-  * 1b1. Staff-Snap shows an error message.
+    * 1b1. Staff-Snap shows an error message.
 
-    Use case ends.
+      Use case ends.
 
 * 1c. User enters an invalid status.
 
-  * 1c1. Staff-Snap shows an error message.
+    * 1c1. Staff-Snap shows an error message.
 
-    Use case ends.
+      Use case ends.
 
 **Use case: UC06 - Add an interview to an applicant**
 
@@ -811,9 +885,11 @@ Guarantees: A new interview will be added to the applicant.
 
       Use case ends.
 
-* 1e. User enters a duplicate interview type for the applicant that does not exceeds the maximum length after duplicate handling.
+* 1e. User enters a duplicate interview type for the applicant that does not exceeds the maximum length after duplicate
+  handling.
 
-    * 1e1. Staff-Snap increment the last number in the interview type until it hits a unique input, or add 1 if there is no number at the end of the interview type.
+    * 1e1. Staff-Snap increment the last number in the interview type until it hits a unique input, or add 1 if there is
+      no number at the end of the interview type.
 
       Use case continues at step 2.
 
@@ -896,7 +972,6 @@ Guarantees: The specified interview will be deleted from the applicant.
     * 1c1. Staff-Snap shows an error message.
 
       Use case ends.
-
 
 **Use case: UC09 - Find an applicant by name**
 
@@ -1000,27 +1075,27 @@ Guarantees: The applicant list will be populated with data from the imported CSV
 1. User inputs the command to import a CSV file.
 2. Staff-Snap updates the applicant list to show the applicant data from the CSV file.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
 * 1a. User enters an invalid command.
-    
+
     * 1a1. Staff-Snap shows an error message.
-  
-        Use case ends.
+
+      Use case ends.
 
 * 1b. User enters an invalid filename.
 
-  * 1b1. Staff-Snap shows an error message.
-  
-    Use case ends.
+    * 1b1. Staff-Snap shows an error message.
+
+      Use case ends.
 
 * 1c. User uses a file with incorrect headers.
 
-  * 1c1. Staff-Snap shows an error message.
-  
-    Use case ends.
+    * 1c1. Staff-Snap shows an error message.
+
+      Use case ends.
 
 * 1d. User uses a file with duplicate applicants.
 
@@ -1161,13 +1236,15 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch 
-   1. Download the jar file and copy into an empty folder.
-   2. Double-click the jar file. <br> Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+1. Initial launch
+    1. Download the jar file and copy into an empty folder.
+    2. Double-click the jar file. <br> Expected: Shows the GUI with a set of sample contacts. The window size may not be
+       optimum.
 
-2. Saving window preferences 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-   2. Re-launch the app by double-clicking the jar file.<br> Expected: The most recent window size and location is retained.
+2. Saving window preferences
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    2. Re-launch the app by double-clicking the jar file.<br> Expected: The most recent window size and location is
+       retained.
 
 ### Adding an applicant
 
@@ -1178,12 +1255,14 @@ testers are expected to do more *exploratory* testing.
        Applicant area shows the updated list of applicants.
 
     2. Test case: `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567` again (Duplicate applicant)<br>
-       Expected: No applicant is added. Error details shown in the response area. Applicant list in applicant area remains the same.
+       Expected: No applicant is added. Error details shown in the response area. Applicant list in applicant area
+       remains the same.
 
     3. Test case: `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com`<br>
        Expected: Similar to previous.
 
-    4. Other incorrect add commands to try: `add`, `add -1`, `add n/John Doe e/johndoe@gmail.com p/Software Engineer hp/abc`<br>
+    4. Other incorrect add commands to
+       try: `add`, `add -1`, `add n/John Doe e/johndoe@gmail.com p/Software Engineer hp/abc`<br>
        Expected: Similar to previous.
 
 ### Editing an applicant
@@ -1193,11 +1272,13 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
     2. Test case: `edit 1 n/Tom Greenwood`<br>
-       Expected: The name of the first applicant is updated to *Tom Greenwood*. Updated details of the applicant shown in the response area.
+       Expected: The name of the first applicant is updated to *Tom Greenwood*. Updated details of the applicant shown
+       in the response area.
        Applicant area shows the updated list of applicants.
 
     3. Test case: `edit n/Pop Greenwood`<br>
-       Expected: No applicant is edited. Error details shown in the response area. Applicant list in applicant area remains the same.
+       Expected: No applicant is edited. Error details shown in the response area. Applicant list in applicant area
+       remains the same.
 
     4. Other incorrect edit commands to try: `edit`, `edit -1 n/Jane Doe`, `edit e/email`<br>
        Expected: Similar to previous.
@@ -1213,7 +1294,8 @@ testers are expected to do more *exploratory* testing.
        Applicant area shows the updated list of applicants.
 
     3. Test case: `delete 0`<br>
-       Expected: No applicant is deleted. Error details shown in the response area. Applicant list in applicant area remains the same.
+       Expected: No applicant is deleted. Error details shown in the response area. Applicant list in applicant area
+       remains the same.
 
     4. Other incorrect delete commands to try: `delete`, `delete -1`, `delete a`<br>
        Expected: Similar to previous.
@@ -1225,11 +1307,13 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
     2. Test case: `status 1 s/o`<br>
-       Expected: The status of the first applicant is updated to _OFFERED_. Updated details of the applicant shown in the response area.
+       Expected: The status of the first applicant is updated to _OFFERED_. Updated details of the applicant shown in
+       the response area.
        Applicant area shows the updated list of applicants.
 
     3. Test case: `status 1 s/l`<br>
-       Expected: No applicant's status is edited. Error details shown in the response area. Applicant list in applicant area remains the same.
+       Expected: No applicant's status is edited. Error details shown in the response area. Applicant list in applicant
+       area remains the same.
 
     4. Other incorrect edit status commands to try: `status`, `status -1 s/o`, `status 1 s/`<br>
        Expected: Similar to previous.
@@ -1241,43 +1325,53 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
     2. Test case: `addi 1 t/technical r/8.6`<br>
-       Expected: A technical interview with rating 8.6 is added to the first applicant in the list. Updated details of the applicant shown in the response area.
+       Expected: A technical interview with rating 8.6 is added to the first applicant in the list. Updated details of
+       the applicant shown in the response area.
        Applicant area shows the updated list of applicants.
 
     3. Test case: `addi 0`<br>
-       Expected: No interview is added to any applicant. Error details shown in the response area. Applicant list in applicant area remains the same.
+       Expected: No interview is added to any applicant. Error details shown in the response area. Applicant list in
+       applicant area remains the same.
 
-    4. Other incorrect add interview commands to try: `addi`, `addi -1`, `addi r/6.0`, `addi 1 t/toolonginterviewtypeeeeeeeeeeeeeeee`<br>
+    4. Other incorrect add interview commands to
+       try: `addi`, `addi -1`, `addi r/6.0`, `addi 1 t/toolonginterviewtypeeeeeeeeeeeeeeee`<br>
        Expected: Similar to previous.
 
 ### Editing an interview of an applicant
 
 1. Editing an interview to an applicant while all applicants are being shown
 
-    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list. The first applicant has at least one interview.
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list. The first applicant
+       has at least one interview.
 
     2. Test case: `editi 1 i/1 t/technical r/8.6`<br>
-       Expected: The first interview of the first applicant in the list is updated to a technical interview with rating 8.6. Updated details of the applicant shown in the response area.
+       Expected: The first interview of the first applicant in the list is updated to a technical interview with rating
+       8.6. Updated details of the applicant shown in the response area.
        Applicant area shows the updated list of applicants.
 
     3. Test case: `editi 0`<br>
-       Expected: No interview is added to any applicant. Error details shown in the response area. Applicant list in applicant area remains the same.
+       Expected: No interview is added to any applicant. Error details shown in the response area. Applicant list in
+       applicant area remains the same.
 
-    4. Other incorrect edit interview commands to try: `editi`, `editi -1`, `editi 1 i/8 t/technical`, `editi 1 i/1 r/12.0`<br>
+    4. Other incorrect edit interview commands to
+       try: `editi`, `editi -1`, `editi 1 i/8 t/technical`, `editi 1 i/1 r/12.0`<br>
        Expected: Similar to previous.
 
 ### Deleting an interview from an applicant
 
 1. Deleting an interview from an applicant while all applicants are being shown
 
-    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list. The first applicant has at least one interview.
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list. The first applicant
+       has at least one interview.
 
     2. Test case: `deletei 1 i/1`<br>
-       Expected: First interview is deleted from the first applicant in the list. Updated details of the applicant shown in the response area.
+       Expected: First interview is deleted from the first applicant in the list. Updated details of the applicant shown
+       in the response area.
        Applicant area shows the updated list of applicants.
 
     3. Test case: `deletei 0`<br>
-       Expected: No interview is deleted from any applicant. Error details shown in the response area. Applicant list in applicant area remains the same.
+       Expected: No interview is deleted from any applicant. Error details shown in the response area. Applicant list in
+       applicant area remains the same.
 
     4. Other incorrect delete interview commands to try: `deletei`, `deletei 1`, `deletei 1 i/8`<br>
        Expected: Similar to previous.
@@ -1289,11 +1383,13 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
     2. Test case: `sort d/status`<br>
-       Expected: The applicants in the list are sorted by their status, in the order UNDECIDED, OFFERED, REJECTED. Success message shown in the response area.
+       Expected: The applicants in the list are sorted by their status, in the order UNDECIDED, OFFERED, REJECTED.
+       Success message shown in the response area.
        Applicant area shows the updated list of applicants in the sorted order.
 
     3. Test case: `sort d/i`<br>
-       Expected: The list of applicants is not sorted. Error details shown in the response area. Applicant list in applicant area remains the same.
+       Expected: The list of applicants is not sorted. Error details shown in the response area. Applicant list in
+       applicant area remains the same.
 
     4. Other incorrect sort commands to try: `sort`, `sort d/`<br>
        Expected: Similar to previous.
@@ -1305,11 +1401,13 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
     2. Test case: `filter gts/5.0`<br>
-       Expected: The applicants in the list are filtered by their score, and the updated list contains only applicants with score of at least 5.0.
+       Expected: The applicants in the list are filtered by their score, and the updated list contains only applicants
+       with score of at least 5.0.
        Success message shown in the response area. Applicant area shows the filtered list of applicants.
 
     3. Test case: `filter name`<br>
-       Expected: The list of applicants is not filtered. Error details shown in the response area. Applicant list in applicant area remains the same.
+       Expected: The list of applicants is not filtered. Error details shown in the response area. Applicant list in
+       applicant area remains the same.
 
     4. Other incorrect filter commands to try: `filter`, `filter n/`<br>
        Expected: Similar to previous.
@@ -1318,22 +1416,26 @@ testers are expected to do more *exploratory* testing.
 
 1. Importing applicants from a CSV file
 
-    1. Prerequisites: Download a sample CSV file [here](demo.csv). The correctly formatted CSV file `demo.csv` should be placed in the home folder of Staff-Snap (i.e. the same folder as the Staff-Snap JAR file).
+    1. Prerequisites: Download a sample CSV file [here](demo.csv). The correctly formatted CSV file `demo.csv` should be
+       placed in the home folder of Staff-Snap (i.e. the same folder as the Staff-Snap JAR file).
 
     2. Test case: `import f/demo.csv`<br>
        Expected: The applicants are imported into Staff-Snap.
        Success message shown in the response area. Applicant area shows the updated list of applicants.
 
     3. Test case: `import f/.csv`<br>
-       Expected: No applicants are not imported. Error details shown in the response area. Applicant list in applicant area remains the same.
+       Expected: No applicants are not imported. Error details shown in the response area. Applicant list in applicant
+       area remains the same.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Planned Enhancements**
 
 1. Allow users to add applicants whose names include non-alphanumeric characters such as hyphens `-` and slashes `/`.
-2. Provide an error message to the user if the selected CSV file for the `import` command does not contain the correct headers as specified.
-3. Allow for filtering by email without providing a proper domain. This will be done by removing the type checking when entering an email into the `filter` command.
+2. Provide an error message to the user if the selected CSV file for the `import` command does not contain the correct
+   headers as specified.
+3. Allow for filtering by email without providing a proper domain. This will be done by removing the type checking when
+   entering an email into the `filter` command.
 4. Provide an error message if `s/` in `filter` receives an invalid input, such as `p` or `2`.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -1341,12 +1443,24 @@ testers are expected to do more *exploratory* testing.
 ## **Appendix: Effort**
 
 ### Challenges Faced
-Challenges were faced in evolving the AB3 codebase to support the new features. This was especially true when implementing the Interview features. Since we evolved the Interview components out of the original Tag components, there were many changes that had to be made in order to accommodate the functionalities we intended. For example, we wanted the ability to cumulatively add interviews to an applicant, but the original AB3 Tag system would reset the entire Tag list whenever it was edited.
 
-We also faced challenges in implementing the `import` feature. This was because we had to learn how to use the OpenCSV library and decide which functionalities to include. We also had to learn how to use the `CsvToBeanBuilder<T>` class under the `com.opencsv.bean` package to parse the CSV file. While the use of OpenCSV helped to simplify the parsing process, there were still many modification we made to enable the `import` feature. For example, we also had to create a separate intermediate class `CsvApplicant` to store the data parsed from the CSV file before converting it into an `Applicant` object.
+Challenges were faced in evolving the AB3 codebase to support the new features. This was especially true when
+implementing the Interview features. Since we evolved the Interview components out of the original Tag components, there
+were many changes that had to be made in order to accommodate the functionalities we intended. For example, we wanted
+the ability to cumulatively add interviews to an applicant, but the original AB3 Tag system would reset the entire Tag
+list whenever it was edited.
+
+We also faced challenges in implementing the `import` feature. This was because we had to learn how to use the OpenCSV
+library and decide which functionalities to include. We also had to learn how to use the `CsvToBeanBuilder<T>` class
+under the `com.opencsv.bean` package to parse the CSV file. While the use of OpenCSV helped to simplify the parsing
+process, there were still many modification we made to enable the `import` feature. For example, we also had to create a
+separate intermediate class `CsvApplicant` to store the data parsed from the CSV file before converting it into
+an `Applicant` object.
 
 ### Effort Required
-The team implemented proactive strategies such as establishing coding conventions, adopting branching strategies, and breaking down
+
+The team implemented proactive strategies such as establishing coding conventions, adopting branching strategies, and
+breaking down
 tasks into manageable units. Regular meetings were held to discuss the progress of the project
 and regular communication channels were maintained for team members to update, seek assistance and share insights.
 
@@ -1354,6 +1468,8 @@ Regular testing and debugging sessions were conducted to identify and address an
 integration process. This was crucial to maintain a bug-free, reliable and stable application.
 
 ### Achievements
-Despite all the challenges faced, we managed to overcome them as a team, picking up valuable skills along the way. We are
+
+Despite all the challenges faced, we managed to overcome them as a team, picking up valuable skills along the way. We
+are
 proud of what we have achieved and are confident that Staff-Snap will be a useful tool for Hiring Managers to manage the
 hiring and tracking of their applicants.
