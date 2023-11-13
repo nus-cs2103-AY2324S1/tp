@@ -274,6 +274,15 @@ The flow for the `add_person` command is described by the following sequence dia
 
 <img src="images/AddPersonSequenceDiagram2.png" alt="AddPersonSequenceDiagram2" width=600 />
 
+Step 1:
+The `LogicManager` invokes `AddPersonCommand::execute`, which in turn calls `Model::addPerson`.
+
+Step 2:
+The `Model` will invoke `addPerson` in `AddressBook`, which in turn calls `add` in `UniquePersonList` to add the person to the list.
+
+Step 3:
+The `AddPersonCommand` then continues its execution as defined by [this](#parser-commands) sequence diagram.
+
 #### Feature details
 1. The application will validate the arguments supplied by the user; whether the `Name` is unique and supplied, and whether the optional fields follow the correct format. 
 2. If the arguments are invalid, an error message will be shown to the user and prompts the user for a corrected input.
