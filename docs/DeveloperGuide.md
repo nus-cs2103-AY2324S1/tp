@@ -184,7 +184,7 @@ The `UndoCommand` is implemented as follows:
 In the current implementation, the `UndoCommand` relies on undoable commands storing the previous details of the patient as fields.
 For example, the undo of an "add" command stores the details of the added patient and undoing it will simply delete the added patient,
 representing a reversal of the addition. This approach prioritizes simplicity and efficiency, ensuring a quick and reliable undo operation.
-By leveraging the existing structures and operations in the application, this method avoids the need for extensive additional data storage and processing.
+By leveraging the existing structures and operations in the application, this method avoids the need for additional data storage and processing.
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
