@@ -208,7 +208,7 @@ The `Model` component,
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <p style="text-align: center;">
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" />
 </p>
 
 The `Storage` component,
