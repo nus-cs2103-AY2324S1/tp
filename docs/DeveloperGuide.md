@@ -30,7 +30,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-info">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document are in the `docs/diagrams` folder. Refer to the [
 _PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create
 and edit diagrams.
 </div>
@@ -167,7 +167,7 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., objects that extend from the abstract `Person` class (which are contained in a generic `UniquePersonList` object) and an `ObservableList<Tag>`.
-* stores an updatable `ObservableList<Task>` of `Task` objects that update based on which `Member` is selected with the `viewtasks` command.
+* stores an updatable `ObservableList<Task>` of `Task` objects that update based on which `Member` is selected with the `viewtask` command.
 * stores the currently 'selected' `Member` and `Applicant` objects (e.g., results of a search query) as a separate _filtered_ list which
   is exposed to outsiders as an unmodifiable `ObservableList<? extends Person>` that can be 'observed' e.g. the UI can be bound to
   this list so that the UI automatically updates when the data in the list change.
@@ -210,7 +210,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Add `Member`/`Applicant` feature
 
-The `addMember` and `addApplicant` command is used to add a member or an applicant to the address book.
+The `addmember` and `addapplicant` command is used to add a member or an applicant to the address book.
 The commands are implemented in the `AddMemberCommand` and `AddApplicantCommand` class, which extends the `Command`
 class.
 
@@ -234,10 +234,10 @@ The sequence diagram below also shows the interaction between the various compon
 ### View all `Member`/`Applicant` feature
 
 Lists all members/applicants in the address book to the user. For example, if the previous list was filtered (say by `FindMemberCommand` or `FindApplicantCommand`),
-then set it to unfiltered again.
+this command will show the unfiltered list.
 
 1. The `ViewMembersCommand` or `ViewApplicantsCommand` object's execute() method is called. 
-2. This updates the model via its `updateFilteredMemberList()` or `updateFilteredApplicantList()` method which is called with its predicate as always returning true. 
+2. This updates the model via its `updateFilteredMemberList` or `updateFilteredApplicantList` method which is called with its predicate as always returning true. 
 3. All members/applicants in the address book are shown to the user in the members/applicants list.
 
 The diagram below describes the behaviour of viewing an applicant in the `AddressBook`; the behaviour of viewing a member in
@@ -255,11 +255,11 @@ The sequence diagram below also shows the interaction between the various compon
 
 ### Delete a `Member`/`Applicant`
 
-Deletes an existing `Member`/ `Applicant` indentified by their `MEMBER_INDEX`/`APPLICANT_INDEX` in the displayed member/applicant list.
+Deletes an existing `Member`/ `Applicant` identified by their `MEMBER_INDEX`/`APPLICANT_INDEX` in the displayed member/applicant list.
 The commands are implemented in the `DeleteMemberCommand` and `DeleteApplicantCommand` classes which extend the `Command` class.
 
 * Step 1. The `DeleteMemberCommand`/`DeleteApplicantCommand` object's `execute()` method is called.
-* Step 2. The `MEMBER_INDEX`/`APPLICANT_INDEX` is checked to be within the valid range of the displayed member/applican list. If the `MEMBER_INDEX`/`APPLICANT_INDEX` given is invalid(i.e out of range), a `CommandException` is thrown.
+* Step 2. The `MEMBER_INDEX`/`APPLICANT_INDEX` is checked to be within the valid range of the displayed member/applicant list. If the `MEMBER_INDEX`/`APPLICANT_INDEX` given is invalid (i.e., out of range), a `CommandException` is thrown.
 * Step 3. The `Member`/`Applicant` at the given `MEMBER_INDEX`/`APPLICANT_INDEX` is referenced.
 * Step 4. The model object's `deleteMember()`/`deleteApplicant()` method is called. The input parameter is the referenced `Member`/`Applicant`.
 * Step 5. The `Member`/`Applicant` is deleted from the member/applicant list.
@@ -299,7 +299,7 @@ Edits the details of an existing `Member`/ `Applicant` identified by their `MEMB
 The commands are implemented in the `EditMemberCommand` and `EditApplicantCommand` classes which extend the `Command` class.
 
 * Step 1. The `EditMemberCommand`/`EditApplicantCommand` object's `execute()` method is called.
-* Step 2. The `MEMBER_INDEX`/`APPLICANT_INDEX` is checked to be within the valid range of the displayed member/applicant list. If the `MEMBER_INDEX`/`APPLICANT_INDEX` given is invalid(i.e out of range), a `CommandException` is thrown.
+* Step 2. The `MEMBER_INDEX`/`APPLICANT_INDEX` is checked to be within the valid range of the displayed member/applicant list. If the `MEMBER_INDEX`/`APPLICANT_INDEX` given is invalid (i.e., out of range), a `CommandException` is thrown.
 * Step 3. The `Member`/`Applicant` at the given `MEMBER_INDEX`/`APPLICANT_INDEX` is referenced.
 * Step 4. The number of field(s) to be edited are checked. If there are no fields to be edited, a `CommandException` is thrown.
 * Step 4. The model object's `setMember()`/`setApplicant()` method is called. The input parameter is the referenced `Member`/`Applicant` and the new `Member`/`Applicant` with the updated details.
@@ -381,8 +381,8 @@ The sequence diagram below also shows the interaction between the various compon
 
 Lists all tasks assigned to a member in the address book to the user under the `Tasks` column.
 
-1. The `viewMemberTaskCommand` object's execute() method is called.
-2. This updates the model via its `updateFilteredMemberList()` method which is called with its predicate as always returning true.
+1. The `ViewMemberTaskCommand` object's execute() method is called.
+2. This updates the model via its `updateFilteredMemberList` method which is called with its predicate as always returning true.
 3. Then the `setTaskListForMember(memberToView)` method is called to set the task list for the chosen member.
 4. The `TaskListPanel` UI component is updated with the task list for the chosen member.
 
@@ -415,7 +415,7 @@ list of tasks assigned to each individual. Additionally, it implements the follo
 These operations are exposed in the `Task` parent class as `Task#markAsDone()` and `Task#markAsUnDone()` to execute the
 above-mentioned operations.
 
-Step 1: The user adds a new `Member` using the `addMember` command. At this point, a `TaskList` instance will be
+Step 1: The user adds a new `Member` using the `addmember` command. At this point, a `TaskList` instance will be
 assigned to that member.
 
 Step 2: When the user uses the `addToDo` command, a `ToDo` object containing the details parsed in through the code will
@@ -463,7 +463,7 @@ state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `adda /name David …​` to add a new person. The `addm` command also
+Step 3. The user executes `adda /name David …​` to add a new applicant. The `addm` command also
 calls `Model#commitAddressBook()`, causing another modified address book state to be saved into
 the `addressBookStateList`.
 
@@ -473,7 +473,7 @@ the `addressBookStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing
+Step 4. The user now decides that adding the applicant was a mistake, and decides to undo that action by executing
 the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer`
 once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
@@ -586,10 +586,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | EXCO    | edit an applicant                                           | update the applicant's details should they change                   |
 | `* *  `  | EXCO    | schedule a time and date for an interview with an applicant | mark out a time period of a specific date for an interview          |
 | `* *  `  | EXCO    | copy a applicant's details to the clipboard                 | paste their details elsewhere                                       |
-| ` * `    | EXCO    | receive notifications for upcoming interviews               | be reminded of upcoming interviews and won't forget about them      |
-| ` * `    | EXCO    | export a selected group of contacts to a CSV file           | use the data in other applications or for backup purposes           |
-| ` * `    | EXCO    | import a CSV file of contacts into the application          | add a large number of contacts into the application at once         |
-| ` * `    | EXCO    | merge duplicate contact entries                             | maintain a clean and organised database                             |
+| `*    `  | EXCO    | receive notifications for upcoming interviews               | be reminded of upcoming interviews and won't forget about them      |
+| `*    `  | EXCO    | export a selected group of contacts to a CSV file           | use the data in other applications or for backup purposes           |
+| `*    `  | EXCO    | import a CSV file of contacts into the application          | add a large number of contacts into the application at once         |
+| `*    `  | EXCO    | merge duplicate contact entries                             | maintain a clean and organised database                             |
 
 <div style="page-break-after: always;"></div>
 
@@ -841,27 +841,46 @@ Similar to UC06 - Copying a member except that it copies an applicant instead of
 
 ---
 
-**Use case: UC16 - Scheduling a date for an interview**
+**Use case: UC16 - Scheduling a date for an interview with a new applicant**
 
 **MSS**
 
-1. User requests to list applicants
-2. ClubMembersContact shows a list of applicants
-3. User requests to schedule a date and time for an interview for a specific applicant in the list
-4. ClubMembersContact marks out the time of that date
-
+1. User requests to add an applicant with an interview time.
+2. ClubMembersContact adds the applicant to the list of applicants.
    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The add applicant command format is invalid.
+    * 1a1. ClubMembersContact shows an error message.
+      <br/>
+      Use case resumes at step 1.
 
-  Use case ends.
+* 2a. The interview format is wrong.
+    * 2a1. ClubMembersContact shows an invalid date format error message.
+      <br/>
+      Use case resumes at step 2.
 
-* 3a. The requested time and date is unavailable.
+---
 
-    * 3a1. ClubMembersContact shows an error message.
+**Use case: UC17 - Scheduling a date for an interview with an existing applicant**
 
+**MSS**
+
+1. User requests to add an interview time to an applicant through the edita command.
+2. Applicant in applicant list has a new interview time.
+   Use case ends.
+
+**Extensions**
+
+* 1a. The edit applicant command format is invalid.
+    * 1a1. ClubMembersContact shows an error message.
+      <br/>
+      Use case resumes at step 1.
+
+* 2a. The interview format is wrong.
+    * 2a1. ClubMembersContact shows an invalid date format error message.
+      <br/>
       Use case resumes at step 2.
 
 ### Non-Functional Requirements
@@ -1203,12 +1222,14 @@ Similarly, for `Interview`, we had to make tweaks to integrate it into our proje
 Challenges faced in the project:
 * **Improvement to the UI** - Changing the UI to suit the new requirements of the project was a challenging task. We
 were unfamiliar with JavaFX which made it difficult to understand how the various components interacted with one another.
-Tracing the code was not enough to understand what was happening and we needed to spend time reading the documentation on
+Tracing the code was not enough to understand what was happening, and we needed to spend time reading the documentation on
 how the components worked.
 * **Writing test cases** - When we first saw the implementation of the test cases in AB3, we were very confused what
 many of the methods were doing and there were so many abstractions that required us to trace the code to really 
 understand what was happening. We had to spend a lot of time tracing the code and understanding how to make use of the
 same level of abstraction for our own test cases to ensure they were robust and well-written.
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Planned Enhancements**
 

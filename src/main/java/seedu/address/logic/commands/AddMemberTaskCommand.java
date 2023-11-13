@@ -27,7 +27,7 @@ public class AddMemberTaskCommand extends Command {
             + ": Adds a task to the specified member "
             + "by the index number used in the displayed member list. \n"
             + "Parameters: MEMBER_INDEX (must be a positive integer) "
-            + PREFIX_TASK + " TASK_NAME "
+            + PREFIX_TASK + " TASK_DESCRIPTION "
             + "\nExample: " + COMMAND_WORD + " 1 "
             + PREFIX_TASK + " Task 1 ";
 
