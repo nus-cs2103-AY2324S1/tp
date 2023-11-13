@@ -14,7 +14,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.exceptions.ConflictingEventException;
 import seedu.address.model.person.Person;
 
 /**
@@ -61,13 +60,14 @@ public class AddContactEventCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        //Obtain the calendar of the person and tries to add an event to the person's calendar
+        // Gets the person which the event should be added to
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        try {
-            personToEdit.addEvent(event);
-        } catch (ConflictingEventException e) {
+        if (!personToEdit.canAddEvent(event)) {
             throw new CommandException(MESSAGE_EVENT_CONFLICT);
         }
+
+        personToEdit.addEvent(event);
+
         return new CommandResult(String.format(MESSAGE_ADD_EVENT_TO_PERSON_SUCCESS,
                 personToEdit.getName(), Messages.format(event)));
     }
