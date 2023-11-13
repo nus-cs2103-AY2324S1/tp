@@ -894,46 +894,61 @@ Command: `help`
 ### Editing a member
 
 ### Finding a member
-This uses the `findm` command. You can refer to the command [here](#https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#412-finding-members-findmember-or-findm).
+This uses the `findm` command. You can refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#412-finding-members-findmember-or-findm).
 
 1. Prerequisites: There are 3 previously added members named `Alice Tan`, `Brendan Tan`and `Charlie Chan`. `Alice Tan` is tagged with `SWE`, `Brendan Tan` is tagged with `Product`, and `Charlie Chan` is tagged with `SWE`.
 
-2. Test case 1: `findm Tan`
+2. Test case 1: `findm Tan`<br/>
    Expected Outcome: All members whose details contain the `KEYWORD` `Tan` will be shown. `Alice Tan` and `Brendan Tan` will be shown on the members list.
 
-3. Test case 2: `findm SWE Tan`
+3. Test case 2: `findm SWE Tan`<br/>
    Expected Outcome: All members whose details contain either the `KEYWORD`s `SWE` and/or `Tan` will be shown. `Alice Tan`, `Brendan Tan` and `Charlie Chan` will be shown on the member list.
 
-4. Test case 3: `findm empty`
+4. Test case 3: `findm empty`<br/>
    Expected Outcome: None of the members have any fields that contain the `KEYWORD` `empty`. No members will be listed in the member list.
 
-5. Test case 4: `findm`
+5. Test case 4: `findm`<br/>
    Expected Outcome: The `KEYWORD` is missing from the command. An invalid command message will be shown. Member list remains the same.
 
 ### Viewing all members
+This uses the `viewm` command. You can refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#413-viewing-members-viewmembers-or-viewm).
+
+1. Test case 1: `viewm`.
+   Expected Outcome: All members will be shown on the member list. If there are no members in the system, then nothing will be shown there.
 
 ### Copy a member
+Command: `cpm` or `copymember`. You can refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#416-copying-a-members-details-copymember-or-cpm).
+
+1. Prerequisites: At least one member must be in the member list. You can add a member via the `addm` command. You can here to this command [here.](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#411-adding-a-member-addmember-or-addm)
+
+2. Test case 1: `cpm 1`.<br/>
+   Expected Outcome: The first member's details are copied into the clipboard. The details of the copied member is shown in the success message as well.
+
+3. Test case 2: `cpm 0`.<br/>
+   Expected Outcome: The `MEMBER_INDEX` is invalid. An invalid index message is shown. Nothing is copied into the clipboard.
+
+4. Other incorrect delete commands to try: `cpm`, `cpm1`, `copymember x` (where x is any non-integer or integer bigger than the member list size).
 
 ### Add member task
 
 ### Delete member task
 
 ### Deleting a member
-Command: `delm` or `deletemember`. You can refer to the command [here](#https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#415-deleting-a-member-deletemember-or-delm).
+Command: `delm` or `deletemember`. You can refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#415-deleting-a-member-deletemember-or-delm).
 
-1. Prerequisites : At least one member must be in the member list. You can add a member via the `adda` command. You can here to this command [here.](#https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#411-adding-a-member-addmember-or-addm)
+1. Prerequisites: At least one member must be in the member list. You can add a member via the `addm` command. You can here to this command [here.](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#411-adding-a-member-addmember-or-addm)
 
-2. Test case 1 : `delm 1`.
+2. Test case 1: `delm 1`.<br/>
    Expected Outcome: The first member is deleted from the shown member list. The name of the deleted member is shown in the status message.
 
-3. Test case 2: `delm 0`.
+3. Test case 2: `delm 0`.<br/>
    Expected Outcome: The `MEMBER_INDEX` is invalid. An invalid index message is shown. Member list remains the same.
 
 4. Other incorrect delete commands to try: `delm`, `delm1`, `deletemember x` (where x is any non-integer or integer bigger than the member list size).
 
 ### Adding an applicant
 
-Command: `adda` or `addapplicant`. You can refer to the command [here](#https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#421-adding-an-applicant-addapplicant-or-adda).
+Command: `adda` or `addapplicant`. You can refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#421-adding-an-applicant-addapplicant-or-adda).
 1. Adding a new applicant
    1. Prerequisites: Existing list of applicants do not contain applicant with the same phone number
    2. Test case: `adda /name John Doe /phone 91234567`<br>
@@ -944,11 +959,13 @@ Command: `adda` or `addapplicant`. You can refer to the command [here](#https://
       Expected: A new applicant is added with the given name, phone number and interview time. The applicant is
       added to the last index of the applicant list. The applicant card will appear at the bottom of the list. The
       details of the added applicant will be shown in the success message.
+
 2. Adding a duplicate applicant
    1. Prerequisites: Existing list of applicants contain applicant with the same phone number
    2. Test case: `adda /name John Doe /phone 91234567` then `adda /name Jack Do /phone 91234567`<br>
       Expected: No applicant added because the applicant has the same phone number as an existing applicant. An error
       message will be shown with the details.
+
 3. Adding an applicant while the applicant list is being filtered
    1. Prerequisites: Filter the applicant list by keyword using the `finda` command.
    2. Test case: Similar to test cases above.  
@@ -957,35 +974,51 @@ Command: `adda` or `addapplicant`. You can refer to the command [here](#https://
 ### Editing an applicant
 
 ### Finding an applicant
-This uses the `finda` command. You can refer to the command [here](#https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#422-finding-applicants-findapplicant-or-finda).
+This uses the `finda` command. You can refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#422-finding-applicants-findapplicant-or-finda).
 
 1. Prerequisites: There are 3 previously added applicants named `Ryan Tan`, `Ryan Lee`, and `Sarah Lee`. `Ryan Tan` and `Sarah Lee` both have an interview scheduled on 12 December 2023. `Ryan Lee` has not yet scheduled an interview.
 
-2. Test case 1: `finda Ryan`
+2. Test case 1: `finda Ryan`<br/>
    Expected Outcome: All applicants whose details contain the `KEYWORD` `Ryan` will be shown. `Ryan Tan` and `Ryan Lee` will be shown on the applicant list.
 
-3. Test case 2: `finda Lee December`
+3. Test case 2: `finda Lee December`<br/>
    Expected Outcome: All applicants whose details contain the `KEYWORD`s `Lee` and `December` will be shown. `Ryan Tan`, `Ryan Lee` and `Sarah Lee` will be shown on the applicant list.
 
-4. Test case 3: `finda empty`
+4. Test case 3: `finda empty`<br/>
    Expected Outcome: None of the applicants have any fields that contain the `KEYWORD` `empty`. No applicants will be listed in the applicant list.
 
-5. Test case 4: `finda`
+5. Test case 4: `finda`<br/>
    Expected Outcome: The `KEYWORD` is missing from the command. An invalid command message will be shown. Applicant list remains the same.
 
 ### Viewing all applicants
+This uses the `viewa` command. You can refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#423-viewing-applicants-viewapplicants-or-viewa).
+
+1. Test case 1: `viewa`.
+   Expected Outcome: All applicants will be shown on the applicant list. If there are no applicants in the system, then nothing will be shown there.
 
 ### Copy an applicant
+Command: `cpa` or `copyapplicant`. You can refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#426-copying-an-applicants-details-copyapplicant-or-cpa).
+
+1. Prerequisites: At least one applicant must be in the applicant list. You can add a member via the `adda` command. You can here to this command [here.](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#421-adding-an-applicant-addapplicant-or-adda)
+
+2. Test case 1: `cpa 1`.<br/>
+   Expected Outcome: The first applicant's details are copied into the clipboard. The details of the copied applicant is shown in the success message as well.
+
+3. Test case 2: `cpa 0`.<br/>
+   Expected Outcome: The `APPLICANT_INDEX` is invalid. An invalid index message is shown. Nothing is copied into the clipboard.
+
+4. Other incorrect delete commands to try: `cpa`, `cpa1`, `copyapplicant x` (where x is any non-integer or integer bigger than the member list size).
+
 
 ### Deleting an applicant
-Command: `dela` or `deleteapplicant`. You can refer to the command [here](#https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#425-deleting-an-applicant-deleteapplicant-or-dela).
+Command: `dela` or `deleteapplicant`. You can refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#425-deleting-an-applicant-deleteapplicant-or-dela).
 
-1. Prerequisites : At least one member must be in the member list. You can add a member via the `adda` command. You can here to this command [here.](#https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#411-adding-a-member-addmember-or-addm)
+1. Prerequisites: At least one member must be in the member list. You can add a member via the `adda` command. You can here to this command [here.](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#421-adding-an-applicant-addapplicant-or-adda)
 
-2. Test case 1 : `dela 1`.
+2. Test case 1: `dela 1`.<br/>
    Expected: The first applicant is deleted from the shown applicant list. The name of the deleted applicant is shown in the status message.
 
-3. Test case 2: `dela 0`.
+3. Test case 2: `dela 0`.<br/>
    Expected: The `APPLICANT_INDEX` is invalid. An invalid index message is shown. Applicant list remains the same.
 
 4. Other incorrect delete commands to try: `dela`, `dela1`, `deleteapplicant x` (where x is any non-integer or integer bigger than the applicant list size).
@@ -1117,7 +1150,7 @@ We plan to clarify it to the following:
 An applicant with the same phone number already exists in the applicant list. Please use a different phone number.
 ```
 
-### Allow finding with substrings
+### Improve finding members/applicants
 
 #### Finding members
 
@@ -1127,5 +1160,17 @@ We plan to allow users to search within words as well, so that `findm John` can 
 
 #### Finding applicants
 
-Similarly, the `finda` command only allows the user to search for whole word matches of `KEYWORD` only. 
-We plan to allow users to search within words as well, so that `finda 3` can match an `Applicant` with `INTERVIEW_TIME` `03/03/2021 1200`, for example.
+Similarly, the `finda` command only allows the user to search for whole word matches of `KEYWORD` only.  The `finda` command will also only match an `INTERVIEW_TIME` as shown in the UI. This means only `finda march`, not `finda 3`, will match an `Applicant` with `INTERVIEW_TIME` `04/03/2021 1200`.
+
+We plan to allow users to search within words as well as by numerical date, so that `finda 3` can match an `Applicant` with `INTERVIEW_TIME` `04/03/2021 1200`, for example.
+
+### Allow other characters in `PHONE_NUMBER` field
+
+Currently, the `PHONE_NUMBER` field of `Member` and `Applicant` only allows digits. This prevents users from adding phone numbers with other characters, such as `+` and `-`, or even clarifying notes such as `(HP) 91234567 (Office) 67654321`.
+
+We plan to allow these other characters in the `PHONE_NUMBER` field to increase user convenience.
+An example of a valid `PHONE_NUMBER` field would thus be `(HP) +65 9123-4567 (HOME) +65 6123-4567`.
+
+### Allow applicants to have `TAG`s
+
+Currently, only `Member` objects can have `TAG`s. We plan to allow `Applicant` objects to have `TAG`s as well, so that users can potentially tag applicants with tags such as `Potential`, `Reject`, `Product`, etc.
