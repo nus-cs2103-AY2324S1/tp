@@ -52,13 +52,10 @@ effortlessly.
     * **Highlights**: This was a rather simple feature to implement, but the use of a `FieldComparator` class made this
       function extendable should more fields be added later on.
 
-### Code Contributed
-
-My code contributions can be found
-here: [Reposense Report](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=JeremyYong128&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
-
 ### Other Contributions
 
+* **Code contributed**:
+  * My code contributions can be found here: [Reposense Report](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=JeremyYong128&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
 * **Project management**:
   * Actively assisted peers by providing technical advice and reviewing and approving PRs.
   * Conducted multiple checks on code quality and refactored messy code.
