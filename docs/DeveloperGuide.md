@@ -179,9 +179,13 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 * Some commands contain secondary command, like `add contact`, `add note` and `add event`.
+
     - In this case, the primary command parser (in the example it is `AddCommand`) will check the secondary command word and use the correspond secondary command parser (like `AddPersonCommandParser`, `AddEventCommandParser` and `AddNoteCommandParser`) to continue parsing the command.
+
 * The parser will turn the arguments in the command from raw `String` into corresponding Object. During this process, the parser also needs to check whether the arguments are valid or not.
+
     - The parsing method for each types of arguments are mainly in `ParserUtil.java`
+    
 * If the command is correct in format, the parser will then return a Command Object for the execution of the command.
 
 ### Model Component
@@ -286,8 +290,11 @@ The activity diagram below shows the action sequence of adding one or more `Tag`
 
 ##### Implementing `AddTagCommandParser` and `DeleteTagCommandParser`
 Both implements the `Parser` interface, parsing two main arguments:
+
 1. `contactId`: the one-based index of the contact shown in the GUI.
+
 1. `taglist`: the unique set of `Tag` to add/delete.
+
    * The set of tags is parsed using the `parseTags` method in the `ParseUtil` utility class, which puts the collection of tag names given by the user into a `HashSet`.
 
 `contactId` and `taglist` is then use to create the `AddTagCommand`/`DeleteTagCommand` object.
@@ -299,9 +306,13 @@ For the details of how parsing works, see the section on [Logic Component](#logi
 
 When the command is execute, it carries out the following operations:
 1. Using the `contactId`, it will first check if the `person` exist in the address book by calling `Model`'s `findPersonByUserFriendlyId` method.
+
     * A `CommandException` is thrown if the person does not exist.
+
 1. The set of tags is then added to the person's tag list by calling the `addTags` method in `Person`.
+
 1. The `Model`'s `setPerson` method is used to update the person.
+
 1. Lastly a `CommandResult` with the success message is returned.
 
 The following activity diagram summarizes what happens when `AddTagCommand` is executed:
@@ -313,10 +324,15 @@ The following activity diagram summarizes what happens when `AddTagCommand` is e
 
 When the command is execute, it carries out the following operations:
 1. Using the `contactId`, it will first check if the `person` exist in the address book by calling `Model`'s `findPersonByUserFriendlyId` method.
+
     * A `CommandException` is thrown if the person does not exist.
+
 1. Loop through every `Tag` that the person has, separating those that be found in `toDelete` and those not found.
+
 1. The set of tags found in `toDelete` is then deleted from the person's tag list by calling the `removeTags` method in `Person`.
+
 1. The `Model`'s `setPerson` method is used to update the person.
+
 1. Lastly a `CommandResult` with the success message is returned.
 
 The following activity diagram summarizes what happens when the `DeleteTagCommand` is executed:
@@ -373,8 +389,11 @@ For the details of how parsing works, see the section on [Logic Component](#logi
 
 When the command is executed, it carries out the following operations:
 1. Using the `contactId`, it will first check if the `person` exist in the address book by calling `Model`'s `findPersonByUserFriendlyId` method.
+
     * A `CommandException` is thrown if the person does not exist.
+
 2. The note is then added to the person's note list by calling the `addNote` method in `Person`.
+
 3. Lastly a `CommandResult` with the success message is returned.
 
 The following activity diagram summarizes what happens when `AddNoteCommand` is executed:
@@ -386,9 +405,13 @@ The following activity diagram summarizes what happens when `AddNoteCommand` is 
 
 When the command is executed, it carries out the following operations:
 1. Using the `contactId`, it will first check if the `person` exist in the address book by calling `Model`'s `findPersonByUserFriendlyId` method.
+
     * A `CommandException` is thrown if the person does not exist.
+
 2. Using the `noteIdToDelete`, it will delete the note from the person in the address book by calling `Person`'s `removeNoteByUserFriendlyId` method.
+
     * A `CommandException` is thrown if the note does not exist.
+
 3. Lastly a `CommandResult` with the success message is returned.
 
 The following activity diagram summarizes what happens when the `DeleteNoteCommand` is executed:
@@ -446,8 +469,11 @@ It internally stores `contactId` (the index of the contact) and `toAdd` (the `Ev
 
 When the command is executed, it carries out the following operations:
 1. Using the `contactId`, it will first check if the `Person` exist in the address book by calling `Model`'s `findPersonByUserFriendlyId` method.
+
     * A `CommandException` is thrown if the person does not exist.
+
 2. The `Event` is then added to the person's note list by calling the `addEvent` method in `Person`.
+
 3. Lastly a `CommandResult` with the success message is returned.
 
 The following activity diagram summarizes what happens when `AddEventCommand` is executed:
@@ -461,9 +487,13 @@ It internally stores `contactId` (the index of the contact) and `eventIdToDelete
 
 When the command is executed, it carries out the following operations:
 1. Using the `contactId`, it will first check if the `Person` exist in the address book by calling `Model`'s `findPersonByUserFriendlyId` method.
+
     * A `CommandException` is thrown if the person does not exist.
+
 2. Using the `eventIdToDelete`, it will delete the event from the person in the address book by calling `Person`'s `removeEventByUserFriendlyId` method.
+
     * A `CommandException` is thrown if the event does not exist.
+
 3. Lastly a `CommandResult` with the success message is returned.
 
 The following activity diagram summarizes what happens when the `DeleteEventCommand` is executed:
@@ -1180,7 +1210,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No event is deleted. Error details (event not found) shown in the status message.
 
     1. Other incorrect delete commands to try: `delete event`, `delete event -id x -eid 1`, `delete event -id 1 -eid x`, `...` (where x is larger than the size of contacts/events)<br>
-       Expected: Similar to previous test cases.
+       Expected: Similar to previous test cases. <br>
 
 
 1. Deleting event while contact list is being filtered
