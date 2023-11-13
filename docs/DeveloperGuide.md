@@ -1220,6 +1220,10 @@ testers are expected to do more *exploratory* testing.
 1. Currently, the sample data shows incorrect values for tags of persons. We plan to fix this by replacing the current sample tags with 
    tags that are appropriate in a pharmacy setting like `Elderly`, `Diabetic` or `Child` and so on.
 
+1. Currently, there are no sample data for orders. We plan to add some sample orders so that users are better equipped to play around with the application on first start.
+
+1. Currently, some error messages are not standardised. We plan to standardise all error messages across the application with the following format. All error messages will 1. Give an explanation of what went wrong, 2. Provide the appropriate formats and examples for the command that the user is trying to enter.
+
 1. Currently, Undo and Redo commands do not affect the UI. As such, commands such as `listp` and `findp` cannot be undone. Moreover, this makes it such that a recently added person, that is later deleted by `undo`, will still be visible in the Info Display, until another command (eg. `viewp`) displaces it.<br />
 Example:<br />
 Originally, PharmHub has the following display.<br />
