@@ -950,8 +950,47 @@ Command: `cpm` or `copymember`. You can refer to the command [here](https://ay23
 4. Other incorrect copy commands to try: `cpm`, `cpm1`, `copymember x` (where x is any non-integer or integer bigger than the member list size).
 
 ### Add member task
+Command: `addt` or `addtask`. You can refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#417-allocating-a-task-to-a-member-addtask-or-addt).
+
+1. Prerequisites: At least one member must be in the member list. You can add a member via the `addm` command. You can here to this command [here.](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#411-adding-a-member-addmember-or-addm)
+
+2. Test case 1: `addt 1 /task finish proposal`.<br/>
+   Expected Outcome: The first member will have the task `finish proposal` added to their task list. The details of the added task will be shown in the success message.
+
+3. Test case 2: `addt 0 /task finish proposal`.<br/>
+   Expected Outcome: The `MEMBER_INDEX` is invalid. An invalid index message is shown.
+
+4. Test case 3: `addt 1 /task`.<br/>
+   Expected Outcome: The `TASK` is missing from the command. An invalid command message is shown.
+
+5. Other incorrect add member task commands to try: `addtt`, `addt1`, `adt1`, `addtask x` (where x is any non-integer or integer bigger than the member list size).
+
+### View member task
+Command: `viewt` or `viewtask`. You can refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#418-Viewing-all-tasks-allocated-to-a-member-viewtask-or-viewt)
+
+1. Test case 1: `viewt 1`.
+   Expected Outcome: Member 1's task list will be shown on the task panel. If there are no tasks in the system, then nothing will be shown there.
+
+2. Test case 1: `viewt 0`.
+   Expected Outcome: An invalid `MEMBER_INDEX` message will be shown.
+
+3. Other incorrect view member task commands to try: `viewtt`, `viewt1`, `viet1`, `viewtask x` (where x is any non-integer or integer bigger than the member list size).
 
 ### Delete member task
+Command: `delt` or `deletetask`. You can refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#419-deleting-a-task-allocated-to-a-member-deletetask-or-delt).
+
+1. Prerequisites: At least one member must be in the member list. You can add a member via the `addm` command. You refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#411-adding-a-member-addmember-or-addm) and the member has at least 1 task in his tasklist. You can refer to the command [here.](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#417-allocating-a-task-to-a-member-addtask-or-addt);
+
+2. Test case 1: `delt 1 /task 1`.<br/>
+   Expected Outcome: The first member's first task is deleted from the task list. The details of the deleted task is shown in the success message.
+
+3. Test case 2: `delt 0 /task 1`.<br/>
+   Expected Outcome: The `MEMBER_INDEX` is invalid. An invalid index message is shown. Tasklist list remains the same.
+
+4. Test case 3: `delt 1 /task 0`.<br/>
+      Expected Outcome: The `TASK_INDEX` is invalid. An invalid index message is shown. Tasklist list remains the same.
+
+5. Other incorrect delete commands to try: `deltt`, `delt1`, `deletetask x` (where x is any non-integer or integer bigger than the member list size).
 
 ### Deleting a member
 Command: `delm` or `deletemember`. You can refer to the command [here](https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#415-deleting-a-member-deletemember-or-delm).
