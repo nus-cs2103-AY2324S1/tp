@@ -53,6 +53,9 @@ CommandBox --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
+PatientCard ..> Model
+DoctorCard ..> Model
+AppointmentCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 

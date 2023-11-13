@@ -17,7 +17,7 @@ Package Person {
     Person *--> "1" Name
     Person *--> "1" Phone
     Person *--> "1" Address
-    Person *--> "1" Appointments
+    Person *--> "*" Appointments
     Person *--> "*" Tag
 
         Package Doctor {
