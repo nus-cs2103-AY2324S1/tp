@@ -4,8 +4,6 @@
     pageNav: 3
 ---
 
-<br> 
-
 <p align="center">
   <img src="images/flagshipLogo.png" alt="Flagship Logo" width="350" height="350"/>
 </p>
@@ -17,31 +15,27 @@
 </p>
 
 ---
+
 ## Table of Contents
 
 1. [Acknowledgements](#acknowledgements)
 2. [Setting up, getting started](#setting-up-getting-started)
 3. [Design](#design)
    1. [Architecture](#architecture)
-   2. [UI-component](#ui-component)
-   3. [Logic-component](#logic-component)
+   2. [UI component](#ui-component)
+   3. [Logic component](#logic-component)
    4. [Model component](#model-component)
    5. [Storage component](#storage-component)
    6. [Common classes](#common-classes)
 4. [Implementation](#implementation)
    1. [Create Command](#create-command)
-      - [Implementation (create)](#implementation-create)
       - [Design Considerations (create)](#design-considerations-create)
    2. [Delete Command](#delete-command)
-       - [Implementation (delete)](#implementation-delete)
    3. [Sort Command](#sort-command)
-       - [Implementation (sort)](#implementation-sort)
        - [Design Considerations (sort)](#design-considerations-sort)
    4. [Filter Command](#filter-command)
-       - [Implementation (filter)](#implementation-filter)
        - [Design Considerations (filter)](#design-considerations-filter)
    5. [Modify Command](#modify-command)
-       - [Implementation (modify)](#implementation-modify)
        - [Design Considerations (modify)](#design-considerations-modify)
 5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 6. [Appendix: Requirements](#appendix-requirements)
@@ -59,7 +53,10 @@
    6. [Deleting Internship Entries](#deleting-internship-entries)
    7. [Saving Data](#saving-data)
 
+**Pro-tip**: Clicking on the small logo <a href="#table-of-contents"><img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/></a> on the top right corner of every page will bring you back to the [Table of Contents](#table-of-contents).
+
 --------------------------------------------------------------------------------------------------------------------
+<br> 
 
 ## **Acknowledgements**
 
@@ -68,12 +65,21 @@ Flagship is based on [AddressBook Level 3](https://se-education.org/addressbook-
 Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
+<br>
 
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
+
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+<br>
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
 
 ## **Design**
 
@@ -86,7 +92,6 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
-
 **`Main`** (consisting of classes [`Main`](https://github.com/se-edu/AY2324S1-CS2103T-W17-1/tp/tree/master/src/main/java/seedu/address/Main.java) and [`InternshipMainApp`](https://github.com/AY2324S1-CS2103T-W17-1/tp/tree/master/src/main/java/seedu/address/InternshipMainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
@@ -100,11 +105,19 @@ The bulk of the app's work is done by the following four components:
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
+<div style="page-break-after: always;"></div>
+<br>
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
+
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
+<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="530"/>
 
 Each of the four main components (also shown in the diagram above),
 
@@ -115,7 +128,15 @@ For example, the `Logic` component defines its API in the `InternshipLogic.java`
 
 <puml src="diagrams/ComponentManagers.puml" width="300" />
 
-The sections below give more details of each component.
+The following sections give more details of each component.
+
+<br>
+<br>
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
 
 ### UI component
 
@@ -123,7 +144,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `InternshipMainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `InternshipListPanel`, `StatusBarFooter` etc. All these, including the `InternshipMainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `InternshipMainWindow` that is made up of parts e.g.,`CommandBox`, `ResultDisplay`, `InternshipListPanel`, `StatusBarFooter` etc. All these, including the `InternshipMainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -133,6 +154,14 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Internship` objects residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
+<br>
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
 
 ### Logic component
 
@@ -151,6 +180,14 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </box>
 
+<div style="page-break-after: always;"></div>
+<br>
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
+
 How the `Logic` component works:
 
 1. When `InternshipLogic` is called upon to execute a command, it is passed to an `InternshipBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
@@ -166,6 +203,13 @@ How the parsing works:
 * When called upon to parse a user command, the `InternshipBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `CreateCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `CreateCommand`) which the `InternshipBookParser` returns back as a `InternshipCommand` object.
 * All `XYZCommandParser` classes (e.g., `CreateCommandParser`, `DeleteCommandParser`, ...) inherit from the `InternshipParser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<br>
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
+
 ### Model component
 **API** : [`InternshipModel.java`](https://github.com/AY2324S1-CS2103T-W17-1/tp/blob/master/src/main/java/seedu/address/model/InternshipModel.java)
 
@@ -179,6 +223,14 @@ The `Model` component,
 * stores a `InternshipUserPrefs` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyInternshipUserPrefs` object.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
+<div style="page-break-after: always;"></div>
+<br>
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
+
 ### Storage component
 
 **API** : [`InternshipStorage.java`](https://github.com/AY2324S1-CS2103T-W17-1/tp/blob/master/src/main/java/seedu/address/storage/InternshipStorage.java)
@@ -190,20 +242,26 @@ The `Storage` component,
 * inherits from both `InternshipBookStorage` and `InternshipUserPrefsStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`).
 
+--- 
+<br>
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+<br>
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
 
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Create Command
-
-
-#### Implementation (create)
 
 The create command is facilitated by `InternshipLogicManager`. User input is first parsed by `InternshipBookParser#parseCommand()` and checked if it is a `create` command with a valid format.
 Upon successful verification, the `create` command is executed.
@@ -215,7 +273,7 @@ Given below is an example usage scenario and how the create command behaves at e
 Step 1. The user inputs `create c/Google ro/SWE a/Yet to apply de/25/12/2022 s/20/01/2023 du/3`
 and it is parsed by `InternshipBookParser` to verify that it has the valid format of a `create` command.
 
-<puml src="diagrams/CreateCommandParse.puml" alt="CreateCommandParse" />
+<puml src="diagrams/CreateCommandParse.puml" alt="CreateCommandParse"/>
 
 <box type="info" seamless>
 
@@ -228,6 +286,12 @@ the other corresponding command.
 
 Step 2. The `create` command is executed. If there does not exist a duplicate entry in `InternshipModel`, the internship
 entry is created successfully.
+
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
 
 <puml src="diagrams/CreateCommandExecute.puml" alt="CreateCommandExecute" />
 
@@ -250,6 +314,14 @@ The following sequence diagram shows how the `create` command operation works:
 **Note:** The lifeline for `CreateCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </box>
 
+<div style="page-break-after: always;"></div>
+<br>
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
+
 #### Design Considerations (create):
 
 **Aspect: What constitutes a duplicate internship entry:**
@@ -262,9 +334,15 @@ The following sequence diagram shows how the `create` command operation works:
     * Pros: Label duplicates in the strictest possible sense.
     * Cons: Most accidental duplicate entries mistakenly entered by the user need not resemble one another completely across all attributes.
 
-### Delete feature
+<div style="page-break-after: always;"></div>
+<br>
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
 
-#### Implementation (delete)
+### Delete Command
 
 The delete command is facilitated by `InternshipLogicManager`. User input is first parsed by `InternshipBookParser#parseCommand()` and checked if it is a `delete` command with a valid format.
 Upon successful verification, the `delete` command is executed.
@@ -275,8 +353,7 @@ Given below is an example usage scenario and how the create command behaves at e
 
 Step 1. The user inputs `delete 1`
 and it is parsed by `InternshipBookParser` to verify that it has the valid format of a `delete` command.
-
-<puml src="diagrams/DeleteCommandParse.puml" alt="DeleteCommandParse" />
+<puml src="diagrams/DeleteCommandParse.puml" alt="DeleteCommandParse"  width="340"/>
 
 <box type="info" seamless>
 
@@ -290,7 +367,15 @@ the other corresponding command.
 Step 2. The `delete` command is executed. If the index is valid, when it is greater than 0 and an internship exists at the specified index,
 the specified internship is successfully deleted.
 
-<puml src="diagrams/DeleteCommandExecute.puml" alt="DeleteCommandExecute" />
+<puml src="diagrams/DeleteCommandExecute.puml" alt="DeleteCommandExecute" width="350"/>
+
+<div style="page-break-after: always;"></div>
+<br>
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
 
 <box type="info" seamless>
 
@@ -311,9 +396,15 @@ The following sequence diagram shows how the delete operation works:
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </box>
 
-### Sort command
+<div style="page-break-after: always;"></div>
+<br>
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
 
-#### Implementation (sort)
+### Sort command
 
 The sort mechanism is facilitated by InternshipBook. InternshipBook provides us with the field of currentComparator, which stores the current sorting order of the lists. Additionally, it provides the main sort operation:
 
@@ -340,7 +431,14 @@ Step 1. The user launches the application and already has a bunch of internships
 
 </box>
 
+
 Step 2. The user inputs `sort ro/ASC` (in the format of [CATEGORY]/[ASC/DESC]) and it is parsed by `InternshipBookParser` to verify that it has the valid format of a `sort` command.
+
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
 
 <puml src="diagrams/SortCommandParse.puml" alt="SortCommandParse" />
 
@@ -364,9 +462,21 @@ This diagram shows the high level diagram with the intermediate layers hidden. I
 
 </box>
 
+<div style="page-break-after: always;"></div>
+<br>
+
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
+
 The following sequence diagram shows how the sort operation works:
 
 <puml src="diagrams/SortSequenceDiagram.puml" alt="SortSequenceDiagram" />
+
+<br>
+<br>
 
 #### Design Considerations (sort):
 
@@ -380,9 +490,15 @@ The following sequence diagram shows how the sort operation works:
     * Pros: Will reduce the complexity of operations as operations do not need to sort after making changes to the internship list.
     * Cons: Will cause the updated list to be no longer sorted.
 
-### Filter command
+<div style="page-break-after: always;"></div>
+<br>
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
 
-#### Implementation (filter)
+### Filter command
 
 The filter command is facilitated by  `InternshipLogicManager`. User input is first parsed by `InternshipBookParser#parseCommand()` and checked if it is a filter command with a valid format. Once the format is validated, the predicate required to filter the internships based on user criteria is generated.
 
@@ -405,6 +521,12 @@ Step 1. The user launches the application and already has a bunch of internships
 Step 2a. The user inputs `filter [CATEGORY_TYPE1]/[KEYWORDS]` for categories accepting text inputs such as `COMPANY_NAME`, `ROLE`, `APPLICATION_STATUS`, `REQUIREMENT`, and it is parsed by `InternshipBookParser` to verify that it has the valid format of a `filter` command.
 
 Step 2b. The user inputs `filter [CATEGORY_TYPE2]]/[START_END]` for categories accepting ranges such as start date, duration, and deadline, and it is parsed by `InternshipBookParser` to verify that it has the valid format of a `filter` command.
+
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
 
 <puml src="diagrams/FilterCommandParse.puml" alt="FilterCommandParse" />
 
@@ -429,9 +551,20 @@ Step 3. The `filter` command is executed. The predicate generated based on user 
 
 </box>
 
+<div style="page-break-after: always;"></div>
+<br>
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
+
 The following sequence diagram shows how the sort operation works:
 
 <puml src="diagrams/FilterSequenceDiagram.puml" alt="FilterSequenceDiagram" />
+
+<br>
+<br>
 
 #### Design Considerations (filter):
 **Aspect: How the filter conditions are specified:**
@@ -444,9 +577,15 @@ The following sequence diagram shows how the sort operation works:
     * Pros: Simpler to implement.
     * Cons: Less flexible and might not cover all use cases or user needs.
 
-### Modify Command
+<div style="page-break-after: always;"></div>
+<br>
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
 
-#### Implementation (modify)
+### Modify Command
 
 The modify command is facilitated through the `InternshipLogicManager`. Upon user input, it first goes through parsing by the `InternshipBookParser#parseCommand()`. This is to ensure that the input is indeed a `modify` command and that it adheres to a valid format.
 
@@ -466,6 +605,14 @@ Step 1: A user provides the command `modify 1 c/Jane Street ro/Coffee maker a/Ye
 
 </box>
 
+<div style="page-break-after: always;"></div>
+<br>
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
+
 Step 2: Post validation, the `modify` command is executed. If no duplicate entry exists in `InternshipModel`, the editing of the internship entry goes through successfully.
 
 <puml src="diagrams/ModifyCommandExecute.puml" alt="ModifyCommandExecute" />
@@ -484,6 +631,14 @@ The following sequence diagram shows how the modify operation works:
 
 <puml src="diagrams/ModifySequenceDiagram.puml" alt="ModifySequenceDiagram" />
 
+<div style="page-break-after: always;"></div>
+<br>
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
+
 #### Design Considerations (modify):
 
 
@@ -500,6 +655,14 @@ The following sequence diagram shows how the modify operation works:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+<br>
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
+
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -509,6 +672,7 @@ The following sequence diagram shows how the modify operation works:
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+<br>
 
 ## **Appendix: Requirements**
 
@@ -518,6 +682,8 @@ The following sequence diagram shows how the modify operation works:
 * **Application status**: The current status of the internship entry (Yet to apply, Applied, In Progress, Accepted, Rejected)
 * **Main Success Scenario (MSS)**: The main or optimal flow of a use case, representing the successful completion of the user's goal.
 * **Use Case**: A description of a specific user goal or task and the steps required to achieve it.
+
+<br>
 
 ### Product scope
 
@@ -531,6 +697,13 @@ The following sequence diagram shows how the modify operation works:
 
 **Value proposition**: organize and manage internship applications efficiently through a command-line interface, ensuring that no opportunities are missed and applications are tracked systematically.
 
+<div style="page-break-after: always;"></div>
+<br>
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
 
 ### User stories
 
@@ -552,6 +725,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user who values data security                                 | backup my data files                                               | have a secure copy in the event of file corruption                 |
 | `*`      | new user                                                      | be given an onboarding tour of Flagship's features                 | quickly familiarise myself with Flagship's functionalities         |
 
+
+<br>
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
 
 ### Use cases
 
@@ -590,6 +770,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  Flagship deletes the internship.
 
     Use case ends.
+
+<div style="page-break-after: always;"></div>
+<br>
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
 
 **Extensions**
 * 1a. Command is of invalid format.
@@ -636,6 +824,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 3.
 
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
+
 **UC4: Filter internships by keyword**
 
 **MSS**
@@ -667,7 +861,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to sort internships using any one of the company name, role, application status, deadline, start date or duration as the category and in either ascending or descending order.
+1. User requests to sort internships by any one of the company name, role, application status, deadline, start date or duration as the category, in either ascending or descending order.
 2. Flagship displays the same list of internships in the specified sorted order.
 
    Use case ends.
@@ -683,6 +877,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. List is empty.
 
   Use case ends.
+
+
+<div style="page-break-after: always;"></div>
+<br>
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
 
 ### Non-Functional Requirements
 
@@ -713,7 +916,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * Code should follow good style, organisation and have good documentation to aid in maintenance.
 * Documentation should be clear and effective in helping developers understand the system.
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+<br>
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -754,6 +963,14 @@ Perform these checks before each test to maintain consistency.
     1. Re-launch the app with the command: `java -jar flagship.jar`.<br>
        Expected: The most recent window size and location is retained.
 
+<div style="page-break-after: always;"></div>
+<br>
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
+
 ### Creating internship entries
 
 1. Creating entries successfully
@@ -778,6 +995,13 @@ Perform these checks before each test to maintain consistency.
     1. Test case: Key in the command `create c/GovTech ro/SWE a/Thinking about it de/25/12/2022 s/20/01/2023 du/3 re/C++` <br>
        Expected: The Internship entry is not created. Error message signalling an invalid value in the application status is shown.
 
+<div style="page-break-after: always;"></div>
+<br>
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
 
 ### Modifying internship entries
 
@@ -809,7 +1033,15 @@ Perform these checks before each test to maintain consistency.
 
     1. Test case: Key in the command `modify x` (where x is larger than the displayed list size)<br>
        Expected: The internship entry is not updated. Error message indicating an invalid format for the modify command is shown.
-   
+
+<div style="page-break-after: always;"></div>
+<br>
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
+
 ### Filtering internship entries
 
 
@@ -832,6 +1064,8 @@ Perform these checks before each test to maintain consistency.
     1. Test case: Key in this command `filter c/`<br>
        Expected: Error message indicating an invalid format for the filter command is shown.
 
+<br>
+
 ### Sorting internship entries
 
 1. Sorting by specified criteria
@@ -849,6 +1083,14 @@ Perform these checks before each test to maintain consistency.
    
     1. Test case: Key in the command `sort`<br>
       Expected: Error message indicating an invalid format for the sort command is shown.
+
+<div style="page-break-after: always;"></div>
+<br>
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
 
 ### Deleting internship entries
 
@@ -878,6 +1120,14 @@ Perform these checks before each test to maintain consistency.
     
     1. Test case: Key in the command `delete x` (where x is larger than the displayed list size)<br>
       Expected: No internship is deleted. Error message indicating an invalid format for the delete command is shown.
+
+<div style="page-break-after: always;"></div>
+<br>
+<div style="float: right;">
+  <a href="#table-of-contents">
+    <img src="images/flagshipLogo.png" alt="Flagship Logo" width="30" height="30"/>
+  </a>
+</div>
 
 ### Saving data
 
