@@ -269,7 +269,7 @@ Congratulations! You are now ready to explore MedBook on your own. Experiment wi
 
 **Notes for `EMAIL` format:** <br>
 
-1. The **local-part** should only contain alphanumeric characters and these special characters: `+`, `\`, `_`, `.`, `-`. The **local-part** may not start or end with any special characters. <br>
+1. The **local-part** should only contain alphanumeric characters and these special characters: `+`, `_`, `.`, `-`. The **local-part** may not start or end with any special characters. <br>
 
 2. This is followed by an `@` and then a **domain** name. The **domain** name is made up of **domain** labels separated by periods. <br>
 
