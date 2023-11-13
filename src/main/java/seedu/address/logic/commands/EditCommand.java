@@ -110,7 +110,8 @@ public class EditCommand extends Command {
             }
         }
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)), true);
+        return new CommandResult(
+                String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)), true);
     }
 
     private void updateScoreList(Person personToEdit, Person editedPerson) {
@@ -134,21 +135,6 @@ public class EditCommand extends Command {
 
         }
         editedPerson.setScoreList(newScoreList);
-    }
-
-    private boolean containsIllegalTagScore(Person person) throws CommandException {
-        Set<Tag> currentTags = person.getTags();
-        if (currentTags.isEmpty()) {
-            return false;
-        }
-        List<Tag> tagsWithScore = person.getScoreList().getTagsWithScore();
-        for (Tag tag : tagsWithScore) {
-            if (!currentTags.contains(tag)) { // This means that the current scorelist contains a tag that is not in the persons tag
-                // Then let us wipe the scorelist clean
-                throw new CommandException(Messages.MESSAGE_ILLEGAL_TAG_SCORE);
-            }
-        }
-        return false;
     }
 
     /**
