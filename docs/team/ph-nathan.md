@@ -55,6 +55,8 @@ Relevant tests were added for these commands.
   * **Enhancement details:** The error message for enrol command is more specific in indicating optional fields.
   * **Justification:** PE-dry run testers reported that the error message could be more specific on what the optional fields for the command are.
 
+<div style="page-break-after: always;"></div>
+
 ### Documentation:
 * **User Guide**
   * Updated the following sections: Introduction, About, Quick Start, Navigate UI, Command History, Notes for command format.
