@@ -23,14 +23,14 @@ solution to manage your student details, including attendance records and assign
 - [4. Features](#4-features)
   - [4.1 Viewing Help](#41-viewing-help)
   - [4.2 Basic Course Management](#42-basic-course-management)
-    - [4.2.1 Creating an addressbook: `course create`](#421-creating-an-addressbook-course-create)
-    - [4.2.2 Deleting an addressbook: `course delete`](#422-deleting-an-addressbook-course-delete)
-    - [4.2.3 Switching an addressbook: `course switch`](#423-switching-an-addressbook-course-switch)
-    - [4.2.4 Editing an addressbook: `course edit`](#424-editing-an-addressbook-course-edit)
+    - [4.2.1 Creating an address book: `course create`](#421-creating-an-address-book--course-create)
+    - [4.2.2 Deleting an address book: `course delete`](#422-deleting-an-address-book--course-delete)
+    - [4.2.3 Switching an address book: `course switch`](#423-switching-an-address-book--course-switch)
+    - [4.2.4 Editing an address book: `course edit`](#424-editing-an-address-book--course-edit)
   - [4.3 Basic Student Management](#43-basic-student-management)
-    - [4.3.1 Adding a new contact: `add`](#431-adding-a-new-contact-add)
+    - [4.3.1 Adding a new contact: `add`](#431-adding-a-new-contact--add)
     - [4.3.2 Editing a contact : `edit`](#432-editing-a-contact--edit)
-    - [4.3.3 Marking attendance of student: `mark`](#433-marking-attendance-of-student-mark)
+    - [4.3.3 Marking attendance of student: `mark`](#433-marking-attendance-of-student--mark)
     - [4.3.4 Viewing summary of attendance : `list attendance`](#434-viewing-summary-of-attendance--list-attendance)
     - [4.3.5 Searching for student's contact via keyword : `find`](#435-searching-for-students-contact-via-keyword--find)
     - [4.3.6 Listing students : `list students`](#436-listing-students--list-students)
@@ -197,7 +197,7 @@ Shows a message explaining how to access the help page.
 **Format:** `help`
 
 <div markdown="block" class="alert alert-warning">**:exclamation: Warning:**
-`help` command will not work when there are no addressbooks present. Please create an addressbook using `course create course/COURSE_CODE` to work around this issue. You can view the next section for more details on how to use the command.
+`help` command will not work when there are no address books present. Please create an address book using `course create course/COURSE_CODE` to work around this issue. You can view the next section for more details on how to use the command.
 </div>
 
 ### 4.2 Basic Course Management
@@ -206,18 +206,18 @@ Shows a message explaining how to access the help page.
 The parameter `COURSE_CODE` is used for all course management commands, it can be any string, including an empty one. In addition, if `COURSE_CODE` specified is too long, the end of the string will be truncated and other tabs may appear empty!
 </div>
 
-#### 4.2.1 Creating an addressbook: `course create`
+#### 4.2.1 Creating an address book: `course create`
 
 ![course create](images/courseCreate.png)
 
-Creates a new addressbook.
+Creates a new address book.
 
 **Format:** `course create course/COURSE_CODE`
 
 <div markdown="block" class="alert alert-info">
 
-* Creates a new addressbook with course code `COURSE_CODE`
-* `COURSE_CODE` addressbook must not exist.
+* Creates a new address book with course code `COURSE_CODE`
+* `COURSE_CODE` address book must not exist.
 
 </div>
 
@@ -226,26 +226,26 @@ Creates a new addressbook.
 <div markdown="block" class="alert alert-secondary">
 
 * `course create course/CS2103T` 
-  * Creates a new addressbook with course code CS2103T.
+  * Creates a new address book with course code CS2103T.
 
 </div>
 
-#### 4.2.2 Deleting an addressbook: `course delete`
+#### 4.2.2 Deleting an address book: `course delete`
 
 ![course delete](images/courseDelete.png)
 
-Delete an addressbook.
+Delete an address book.
 
 <div markdown="block" class="alert alert-info">**:information_source: Info:**
-Deleting the currently active addressbook will automatically switch to another existing addressbook!
+Deleting the currently active address book will automatically switch to another existing address book!
 </div>
 
 **Format:** `course delete course/COURSE_CODE`
 
 <div markdown="block" class="alert alert-info">
 
-* Deletes the addressbook with course code `COURSE_CODE`
-* `COURSE_CODE` addressbook must exist.
+* Deletes the address book with course code `COURSE_CODE`
+* `COURSE_CODE` address book must exist.
 
 </div>
 
@@ -254,22 +254,22 @@ Deleting the currently active addressbook will automatically switch to another e
 <div markdown="block" class="alert alert-secondary">
 
 * `course delete course/CS2103T` 
-  * Deletes the addressbook with course code CS2103T.
+  * Deletes the address book with course code CS2103T.
 
 </div>
 
-#### 4.2.3 Switching an addressbook: `course switch`
+#### 4.2.3 Switching an address book: `course switch`
 
 ![course switch](images/courseSwitch.png)
 
-Switches the active addressbook.
+Switches the active address book.
 
 **Format:** `course switch course/COURSE_CODE`
 
 <div markdown="block" class="alert alert-info">
 
-* Switches to the addressbook with course code `COURSE_CODE`
-* `COURSE_CODE` addressbook must exist.
+* Switches to the address book with course code `COURSE_CODE`
+* `COURSE_CODE` address book must exist.
 
 </div>
 
@@ -278,22 +278,22 @@ Switches the active addressbook.
 <div markdown="block" class="alert alert-secondary">
 
 * `course switch course/CS2103T` 
-* Switches to the addressbook with course code CS2103T.
+* Switches to the address book with course code CS2103T.
 
 </div>
 
-#### 4.2.4 Editing an addressbook: `course edit`
+#### 4.2.4 Editing an address book: `course edit`
 
 ![course edit](images/courseEdit.png)
 
-Edits the active addressbook course code.
+Edits the active address book course code.
 
 **Format:** `course edit course/COURSE_CODE`
 
 <div markdown="block" class="alert alert-info">
 
-* Changes the course code of active addressbook to `COURSE_CODE`
-* `COURSE_CODE` addressbook must not exist.
+* Changes the course code of active address book to `COURSE_CODE`
+* `COURSE_CODE` address book must not exist.
 
 </div>
 
@@ -302,7 +302,7 @@ Edits the active addressbook course code.
 <div markdown="block" class="alert alert-secondary">
 
 * `course edit course/CS2103T` 
-  * Changes the active addressbook's course code to CS2103T.
+  * Changes the active address book's course code to CS2103T.
 
 </div>
 
@@ -582,7 +582,7 @@ Deletes all students from the course or all students from the specified tutorial
 
 ![merge](images/mergeCommand.png)
 
-Merges two students in the current addressbook.
+Merges two students in the current address book.
 
 **Format:** `merge PRIMARY_INDEX SECONDARY_INDEX`
 
@@ -646,7 +646,7 @@ TAvigator data are saved in the hard disk automatically after any command that c
 TAvigator data are saved automatically as a JSON file `[JAR file location]/data/tavigator.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
-If your changes to the data file makes its format invalid, TAvigator will discard all data and start with an empty data file at the next run, containing an addressbook called "TEMP". Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, TAvigator will discard all data and start with an empty data file at the next run, containing an address book called "TEMP". Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
 #### 4.5.3 Archiving data files `[coming in v2.0]`
@@ -668,7 +668,7 @@ _Details coming soon ..._
 
 2. **Adding invalid and redundant prefixes** after commands will case TAvigator to intake the invalid prefix and its value as part of the command, causing the command to fail. The remedy is to remove the invalid and redundant prefixes.
 
-3. **Trying to use help command with no courses** will result in `Please create an addressbook using the create command first` message. You can create an addressbook using `course create course/COURSE_CODE` to work around this issue.
+3. **Trying to use help command with no courses** will result in `Please create an address book using the create command first` message. You can create an address book using `course create course/COURSE_CODE` to work around this issue.
 
 
 --------------------------------------------------------------------------------------------------------------------

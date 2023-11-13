@@ -3,16 +3,16 @@ layout: page
 title: Developer Guide
 ---
 ## Table of Contents
-* [Acknowledgements](#acknowledgements) 
-* [Setting up, getting started](#setting-up-getting-started) 
-* [Design](#design) 
+* [**Acknowledgements**](#acknowledgements) 
+* [**Setting up, getting started**](#setting-up-getting-started) 
+* [**Design**](#design) 
   * [Architecture](#architecture) 
   * [UI component](#ui-component) 
   * [Logic component](#logic-component) 
   * [Model component](#model-component) 
   * [Storage component](#storage-component) 
   * [Common classes](#common-classes) 
-* [Implementation](#implementation)
+* [**Implementation**](#implementation)
   * [List features](#list-features)
   * [Mark attendance feature](#mark-attendance-feature)
   * [View Tallied Attendance feature](#view-tallied-attendance-feature)
@@ -20,23 +20,27 @@ title: Developer Guide
   * [Find feature](#finding-a-person-find)
   * [Merge feature](#merging-two-students-merge)
   * [Delete features](#delete-features)
-  * [[Proposed] Multiple Address Books for each Course](#proposed-multiple-address-books-for-each-course)
+  * [Separate address book for each course](#separate-address-book-for-each-course)
   * [[Proposed] Undo/redo feature](#proposed-undoredo-feature) 
-* [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops) 
-* [Appendix: Requirements](#appendix-requirements) 
+* [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops) 
+* [**Appendix: Requirements**](#appendix-requirements) 
   * [Product scope](#product-scope) 
   * [User stories](#user-stories) 
   * [Use cases](#use-cases) 
   * [Non-Functional Requirements](#non-functional-requirements) 
   * [Glossary](#glossary) 
-* [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+* [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
   * [Launch and shutdown](#launch-and-shutdown)
   * [Creating, editing and deleting a course](#creating-editing-and-deleting-a-course)
   * [Adding and editing a student](#adding-and-editing-a-student)
   * [Deleting a person](#deleting-a-person)
   * [Marking and Viewing Attendance](#marking-and-viewing-attendance)
   * [Saving Data](#saving-data)
-* [Appendix: Planned Enhancements](#appendix-planned-enhancements)
+* [**Appendix: Planned Enhancements**](#appendix-planned-enhancements)
+* [**Appendix: Effort**](#appendix-effort)
+  * [Effort Required](#effort-required)
+  * [Challenges Faced](#challenges-faced)
+  * [Achievements](#achievements)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -91,7 +95,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -134,9 +138,9 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -292,7 +296,7 @@ The following activity diagram shows how the `MarkAttendanceCommand` works:
 
 - Using a separate command for updating attendance
 
-    > Instead of having the command handle both marking and updating attendance, we could have a seperate command, say `UpdateAttendanceCommand`, to handle updates.
+    > Instead of having the command handle both marking and updating attendance, we could have a separate command, say `UpdateAttendanceCommand`, to handle updates.
 
     **Pros:**
     - Easier to understand and maintain: Developers can quickly grasp the purpose of each command.
@@ -338,7 +342,7 @@ Another possible way to implement this feature would be to abstract the attendan
 
 **Pros:**
 
-- Extendability: This method will increase the ease of implementing features relating to attendance in future.
+- Extendability: This method will increase the ease of implementing features relating to attendance in the future.
 
 **Cons:**
 
@@ -375,14 +379,14 @@ short and quick, especially when the user may have to view multiple attendance r
 
 - Integrate the attendance records to be part of the UI
 
-  > Instead of having the user to enter a command to view indiviudal attendance records, we could have the attendance records being shown constantly on the UI for every single contact
+  > Instead of having the user to enter a command to view individual attendance records, we could have the attendance records being shown constantly on the UI for every single contact
 
   **Pros:**
     - Implementation would be quite straightforward and simple without having to add a new command `ViewCommand` and its parser `ViewCommandParser`.
     - Theoretically, users would be able to view every student's attendance records almost instantly.
 
   **Cons:**
-    - The UI could end up being extremely cluttered especially considering that each student might have 13 rows of attendance to show. This could result in information overload and drastically reduce the user friendliness of the UI.
+    - The UI could end up being extremely cluttered especially considering that each student might have 13 rows of attendance to show. This could result in information overload and drastically reduce the user-friendliness of the UI.
 
   **Evaluation**:
 
@@ -392,7 +396,7 @@ short and quick, especially when the user may have to view multiple attendance r
 
 #### Implementation
 
-This `find` feature allows the user to search for students in TAvigator courses either by the student's name or ID. The user also need not enter the student's full name and can simply enter prefixes. This feature is implemented using the `FindCommand` class and parsed by the `FindCommandParser` class. If parsed successfully, it return a `FindCommand` object.
+This `find` feature allows the user to search for students in TAvigator courses either by the student's name or ID. The user also need not enter the student's full name and can simply enter prefixes. This feature is implemented using the `FindCommand` class and parsed by the `FindCommandParser` class. If parsed successfully, it returns a `FindCommand` object.
 
 The following sequence diagram shows how the FindCommand function works:
 
@@ -432,7 +436,7 @@ The feature is implemented this way so that the user is able to access a particu
 
 #### Implementation
 
-This `merge` feature allows the user to merge two students. The merged student will possess the NAME, EMAIL, PHONE NUMBER, and TUTORIAL GROUP ID of the primary student. The merged student will also have the tags of both students, as well as their merged attendance records.
+This `merge` feature allows the user to merge two students. The merged student will possess the NAME, EMAIL, PHONE NUMBER, and TUTORIAL GROUP ID of the primary student. The merged student will also have the tags of both students, and their merged attendance records.
 
 The following sequence diagram shows how the MergeCommand function works:
 
@@ -508,7 +512,7 @@ The ability to delete multiple students was chosen as it provides greater effici
 
 #### Implementation
 
-In the `ModelManager` class, instead of storing an `AddressBook`, we instead store a `AddressBookManager`.
+In the `ModelManager` class, instead of storing an `AddressBook`, we store a `AddressBookManager`.
 
 The `AddressBookManager` has a few responsibilities:
 - Adding or deleting `AddressBook`
@@ -525,7 +529,7 @@ The following sequence diagram shows how `CourseCommand` works:
 
 In this example, the user enters `course switch course/CS2103T`, to switch to another valid address book with course code "CS2103T".
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `CourseCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 #### Design considerations:
@@ -662,37 +666,37 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​         | I want to …​                                                       | So that I can…​                                                                           |
-|----------|-----------------|--------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
-| `* * *`  | meticulous user | mark attendance for each student separately                        | make sure each students' attendace record is accurate                                     |
-| `* * *`  | user            | see a summary of attendance records                                | verify the attendance records                                                             |
-| `* * *`  | user            | easily create new or edit contacts                                 | easily add or remove contacts                                                             |
-| `* * *`  | user            | search for a student by name or student ID                         | quickly access their attendance and assignment records                                    |
-| `* * *`  | user            | view a list of all my students                                     | quickly scan who's in my tutorial groups                                                  |
-| `* * *`  | user            | filter for specific tutorial groups                                | efficiently engage in tutorial-group-based tasks such as marking attendace after a lesson |
-| `* *`    | frequent user   | organise my students' contacts by modules                          | better manage my students                                                                 |
-| `* *`    | forgetful user  | add additional notes for my students                               | better remember my students                                                               |
-| `* *`    | user            | indicate reason for absence                                        | know when there is a valid excuse                                                         |
-| `* *`    | user            | be able to search for contacts using keywords (modules)            | more easily find contacts                                                                 |
-| `* *`    | user            | categorize students into different tutorial groups                 | manage and monitor each group efficiently                                                 |
-| `* *`    | user            | view the tallied attendance over the semester of each student      | submit their overall attendance mark quickly                                              |
-| `* *`    | user            | remove students from the address book                              | avoid having unnecessary contacts                                                         |
-| `* *`    | impatient user  | mass mark attendance for all my students                           | mark attendance more efficiently                                                          |
-| `* *`    | long-term user  | delete all contacts from tutorial group at once                    | avoid doing so one-by-one after the module ends                                           |
-| `* *`    | long-term user  | archive past module records                                        | have a less cluttered worksapce                                                           |
-| `* *`    | new user        | have the application feel intuitive                                | easily learn the various functions                                                        |
-| `* *`    | careless user   | undo my last action                                                | recover any important data                                                                |
-| `*`      | new user        | import my contacts from another database                           | easily get started using the app                                                          |
-| `*`      | user            | export my attendance records to another database                   | easily upload attendance records                                                          |
-| `*`      | forgetful user  | be reminded on incomplete attendance records                       | rectify any potential gaps in the records                                                 |
-| `*`      | user            | add pictures to the contacts                                       | easily identify my students                                                               |
-| `*`      | forgetful user  | merge duplicate contacts                                           | avoid having duplicate contacts jamming up the application                                |
-| `*`      | busy user       | set reminders if I have a meeting with the student                 | remember all one-on-one meetings that I have with the students                            |
-| `*`      | user            | view a count of how many sessions each student has missed          | identify frequent absentees                                                               |
-| `*`      | user            | add simple notes next to a student's name (like "late submission") | remember specific incidents                                                               |
-| `*`      | user            | add and edit status of work submissions                            | keep track of the students’ work                                                          |
-| `*`      | user            | track the submission status of each student's assignments          | be aware of who has or hasn't turned in their work                                        |
-| `*`      | user            | add and view my student’s preferred name                           | call on them with the correct name                                                        |
+| Priority | As a …​         | I want to …​                                                       | So that I can…​                                                                            |
+|----------|-----------------|--------------------------------------------------------------------|--------------------------------------------------------------------------------------------|
+| `* * *`  | meticulous user | mark attendance for each student separately                        | make sure each students' attendance record is accurate                                     |
+| `* * *`  | user            | see a summary of attendance records                                | verify the attendance records                                                              |
+| `* * *`  | user            | easily create new or edit contacts                                 | easily add or remove contacts                                                              |
+| `* * *`  | user            | search for a student by name or student ID                         | quickly access their attendance and assignment records                                     |
+| `* * *`  | user            | view a list of all my students                                     | quickly scan who's in my tutorial groups                                                   |
+| `* * *`  | user            | filter for specific tutorial groups                                | efficiently engage in tutorial-group-based tasks such as marking attendance after a lesson |
+| `* *`    | frequent user   | organise my students' contacts by modules                          | better manage my students                                                                  |
+| `* *`    | forgetful user  | add additional notes for my students                               | better remember my students                                                                |
+| `* *`    | user            | indicate reason for absence                                        | know when there is a valid excuse                                                          |
+| `* *`    | user            | be able to search for contacts using keywords (modules)            | more easily find contacts                                                                  |
+| `* *`    | user            | categorize students into different tutorial groups                 | manage and monitor each group efficiently                                                  |
+| `* *`    | user            | view the tallied attendance over the semester of each student      | submit their overall attendance mark quickly                                               |
+| `* *`    | user            | remove students from the address book                              | avoid having unnecessary contacts                                                          |
+| `* *`    | impatient user  | mass mark attendance for all my students                           | mark attendance more efficiently                                                           |
+| `* *`    | long-term user  | delete all contacts from tutorial group at once                    | avoid doing so one-by-one after the module ends                                            |
+| `* *`    | long-term user  | archive past module records                                        | have a less cluttered workspace                                                            |
+| `* *`    | new user        | have the application feel intuitive                                | easily learn the various functions                                                         |
+| `* *`    | careless user   | undo my last action                                                | recover any important data                                                                 |
+| `*`      | new user        | import my contacts from another database                           | easily get started using the app                                                           |
+| `*`      | user            | export my attendance records to another database                   | easily upload attendance records                                                           |
+| `*`      | forgetful user  | be reminded on incomplete attendance records                       | rectify any potential gaps in the records                                                  |
+| `*`      | user            | add pictures to the contacts                                       | easily identify my students                                                                |
+| `*`      | forgetful user  | merge duplicate contacts                                           | avoid having duplicate contacts jamming up the application                                 |
+| `*`      | busy user       | set reminders if I have a meeting with the student                 | remember all one-on-one meetings that I have with the students                             |
+| `*`      | user            | view a count of how many sessions each student has missed          | identify frequent absentees                                                                |
+| `*`      | user            | add simple notes next to a student's name (like "late submission") | remember specific incidents                                                                |
+| `*`      | user            | add and edit status of work submissions                            | keep track of the students’ work                                                           |
+| `*`      | user            | track the submission status of each student's assignments          | be aware of who has or hasn't turned in their work                                         |
+| `*`      | user            | add and view my student’s preferred name                           | call on them with the correct name                                                         |
 
 ### Use cases
 
@@ -1021,16 +1025,16 @@ testers are expected to do more *exploratory* testing.
    Expected: Marks student named Zong Jin as not present for the tutorial in Week 2. Tallied attendance display should update accordingly.
 
 3. Test case: `mark n/Zong Jin a/0 w/2`
-   Expected: No attendace marked. Error message displayed.
+   Expected: No attendance marked. Error message displayed.
 
 4. Test case: `mark n/Zong Jin a/1 w/2`
    Expected: Attendance of Zong Jin in week 2 should be updated to present. Tallied attendance display should update accordingly.
 
 5. Test case: `mark n/Zong Jin a/2 w/2`
-   Expected: No attendace marked. Error message displayed (Attendance should only be 0 or 1, where 0 indicates student is absent and 1 indicates student is present).
+   Expected: No attendance marked. Error message displayed (Attendance should only be 0 or 1, where 0 indicates student is absent and 1 indicates student is present).
 
 6. Test case: `mark n/Zong Jin a/2 w/15`
-   Expected: No attendace marked. Error message displayed (Week should be an integer from 0 to 13).
+   Expected: No attendance marked. Error message displayed (Week should be an integer from 0 to 13).
 
 7. Test case: `view 1`
    Expected: Displays the detailed attendance records for the first student in the currently displayed list.
@@ -1044,7 +1048,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Ensure that the data/tavigator.json file is present in the same directory where the jar file is located. Else, launch the application and exit.
    2. To simulate missing data files, delete the json file.
-      > Expected behaviour: TAvigator starts with pre-loaded courses and students.
+      > Expected behaviour: TAvigator starts with preloaded courses and students.
    3. To simulate a corrupted data file, use a text editor to edit the json file.
       > Expected behaviour: TAvigator should fail to launch.
 
@@ -1055,28 +1059,64 @@ Given below are some of the possible enhancements that could be added in future 
     > Currently, student names cannot contain any special characters like `,` or `-` that might exist in some names. We plan to allow specific special characters for student names in future developments.
 2. More detailed error messages for mark command.
    > The current error message for a failed `mark` command may be too general. We plan to add details to the error message that explains the reason of failure especially when reason of absence is not provided for students who are marked as absent: `Reason of absence (r/) is mandatory for students who are marked as absent`.
-3. Using `courses` instead of `address book` in error messages.
-   > The messages for `course` commands could be more specific. We plan to replace mentions of `address book` with `courses` to better fit the context of TAvigator and reduce confusion for users.
-4. Stricter validation checks for course codes.
+3. Stricter validation checks for course codes.
    > Validation checks could be added for course names to ensure valid course names when adding or editing courses. A valid format would include two to three initial alphabetical letters, followed by four numbers and one optional alphabetical letter at the end. A valid example would be `CS2103T`.
    > An alternative could be getting a list of course codes from the NUSMods API but that may require constant updating.
-5. Importing records.
+4. Importing records.
    > We plan to implement importing student records from a csv file in the future, which may create duplicated records. This would be where our merge command comes into play, merging duplicated records so that no information is lost.
-6. More functionality for `mark` command.
+5. More functionality for `mark` command.
    > Currently `mark` command's design does not encompass a few nice-to-haves. We plan to add support for the following:
    >   - Marking of students with the same student name.
    >   - Marking of students with both student name field and student ID field.
    >   - Marking of students with case-insensitive student name.
    >   - Marking of students using the index in list.
-7. Marking attendance based on tutorial group instead of student.
+6. Marking attendance based on tutorial group instead of student.
    > Currently, TAvigator supports a student having multiple tutorial groups, but attendance is marked based on the student only. As such, we plan to modify the `mark` command so that it takes in a `tg/` input, and attendance can be marked separately for each tutorial group the student belongs to.
-8. Better parsing of arguments.
+7. Better parsing of invalid arguments.
    > Currently, adding invalid and redundant prefixes after commands will cause TAvigator to take the invalid prefix and its value as part of the value of the closest valid prefix. <br>
    > For example, `add n/Fu Yiqiao p/98765432 e/fyq@example.com id/ A1234567M t/G2 r/` returns an error message that: Tutorial Group IDs should be alphanumeric.
    > The correct error message that should be shown is: Invalid prefix r/ detected.
+8. Improved parsing of duplicated predicates.
+   > Some commands in our app allows for duplicate inputs, such w/1 w/2 w/3, and takes the last one as the input to be parsed. In the future, we plan to disallow this type of inputs.
 9. Improved UI for attendance records
    > Currently, it displays the attendance records in multiple lines and require scrolling, which makes it hard to view all information at a glance.
    > We plan to improve the UI by either showing the attendance records using boxes instead, with colours differentiating the different status for their attendance, such as using green for present, red for absent and grey for unmarked.
-10. Standarise prefix for tutorial group
+10. Standardise prefix for tutorial group
    > Currently, `add` and `edit` command uses `t/` prefix while `list attendance` and `delete all` uses the `tg/` prefix.
    > We plan to standardise the prefix to use the `tg/` prefix to avoid confusion.
+
+## **Appendix: Effort**
+
+### Effort required
+
+#### Adding support for multiple address books
+
+One of the major changes of TAvigator was the implementation of multiple address books, instead of AB3's singular address book. 
+[Details of implementation can be found here.](#separate-address-book-for-each-course)
+This required significant code restructuring, as well as new classes such as the `AddressBookManager` added in order to support this feature
+[(PR)](https://github.com/AY2324S1-CS2103T-T09-4/tp/pull/96).
+The UI also had to be updated accordingly to allows the user to easily switch between different address books.
+
+#### More Viewing Options
+
+TAvigator has also added support for more viewing options of the list of students.
+This is implemented in the form of more serializable predicates, which are used to check for conditions such as: 
+whether a student is absent from tutorial, whether a student is present in a tutorial group, whether a name contains a keyword, 
+and whether an ID contains a keyword. These predicates allow the user to view students not only by name, but also by ID, 
+tutorial group, and attendance records. We went a step further to save the last viewing option in the preferences.json file, 
+so that the user will be able to quickly refer back to their last viewed option on startup.
+
+### Challenges faced
+
+During the initial phase, it took us considerable amount of time to familiarise ourselves with the code base, and learn 
+our ways around the layers of abstractions, as well as how the different components interacted with each other.
+As we progressed and moved on to more complex implementations, we realised that sometimes our planned features were 
+interdependent, meaning that we were left with tight and consecutive windows to implement our individual features.
+
+Most importantly, we slowly learnt to communicate better through the process. This really helped to move our project 
+forward as we were more comfortable sharing our opinions on each other thoughts, boosting our efficiency as a whole.
+
+### Achievements
+
+Despite all the challenges faced and all the time and effort it took to polish our project, we are proud to present 
+TAvigator. We hope that TAvigator will become a one stop solution that will benefit all SOC TAs. 
