@@ -350,6 +350,10 @@ Examples:
 
 * **`INDEX`**: Numbers between 1 to the number of people inside the list.
 
+**Expected Output when the command succeeds**: MARK PERSON PAID SUCCESS
+
+**Expected Output when the command fails**: Invalid command format! paidExample: paid 1
+
 Examples:
 * `list` followed by `paid 1` marks the first person as paid in the list.
 
@@ -360,6 +364,10 @@ Examples:
 **Format**: `unpaid INDEX`
 
 * **Index**: Numbers between 1 to the number of people inside the list.
+
+**Expected Output when the command succeeds**: MARK PERSON UNPAID SUCCESS
+
+**Expected Output when the command fails**: Invalid command format! unpaidExample: unpaid 1
 
 Examples:
 * `list` followed by `unpaid 2` marks the 2nd person as not paid in the list.
