@@ -13,7 +13,7 @@ such as sorting, scheduling and other commands to query information quickly requ
 
 Given below are my contributions to the project.
 
-* **New feature**: Added the ability to gather email of clients by Financial plan and Tag.
+* **New feature**: Added the ability to gather emails of clients by Financial plan or Tag.
 
     * What it does: It takes a prompt as input and retrieves emails of clients where the prompt matches a substring of their Financial Plan or Tag names.
     * Justification: This feature significantly improves the product's efficiency by allowing financial advisors to consolidate emails effectively. It simplifies communication, enabling advisors to update multiple clients about changes in their financial plans or schedule crucial meetings promptly.
@@ -27,7 +27,7 @@ Given below are my contributions to the project.
 
 
 * **Enhancements Implemented**:
-  * Gather command to be able to gather emails by tags.
+  * Gather command to be able to gather emails by Tag.
     * Pull request [#109](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/109)
   * Enhancing the UI design for UNOFAS.
     * Justification: Provide financial advisors with a more intuitive, visually appealing interface, optimizing content visibility to reduce the likelihood of overlooking crucial details.
@@ -38,14 +38,14 @@ Given below are my contributions to the project.
   * Updated Title and Introduction.
   * Added Argument Summary.
   * Added documentation for the features `gather`.
-  * Reading through UG and identifying formatting issues.
+  * Reading through UG and identifying any formatting or ambiguity concerns in the descriptions.
 
 
 * **Contributions to the DG**:
-  * Added target user profile, value proposition, user stories and user cases
-  * Added class diagram and sequence diagram for `gather` feature
-  * Added implementation details for `gather` feature
-  * Added planned enhancement for `gather` feature
+  * Added target user profile, value proposition, user stories and user cases. [#49](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/49)
+  * Added class diagram and sequence diagram for `gather` feature.
+  * Added implementation details for `gather` feature.
+  * Added planned enhancement for `gather` feature.
 
 
 * **Community**:

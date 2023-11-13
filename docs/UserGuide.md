@@ -4,7 +4,7 @@ title: UNOFAS User Guide
 ---
 
 ## Welcome to UNOFAS!
-Welcome to the User Guide for UNOFAS, your comprehensive solution for efficient and organized client contact management. Ever found yourself spending countless hours sorting and managing your clients' contacts? We understand the importance of managing your school commitments alongside maintaining strong relationships with your clients as dedicated student financial advisors. UNOFAS has been designed to streamline administrative hassles, providing you with the tools you need to manage clients' contacts efficiently.
+Welcome to the User Guide for UNOFAS, your comprehensive solution for efficient and organized client contact management. Ever found yourself spending countless hours sorting and managing your clients' contacts? We understand the importance of managing your life commitments alongside maintaining strong relationships with your clients as dedicated financial advisors. UNOFAS has been designed to streamline administrative hassles, providing you with the tools you need to manage clients' contacts efficiently.
 
 ## What is UNOFAS?
 UNOFAS (UNO: One FAS: Financial Advisors app) is a **desktop app for Financial Advisors to manage clients contacts and schedule appointments,
@@ -161,21 +161,21 @@ Below is a table summarising common arguments used in `add`, `edit`, `find`, `sc
 to view the arguments' prefix, and their acceptable values. Unless specified, having only space characters i.e. an empty
 value, is not an acceptable value and will result in a warning.
 
-| Prefix | Argument              | Acceptable Values                                                                                                          |
-|--------|-----------------------|----------------------------------------------------------------------------------------------------------------------------|
-| -      | INDEX                 | Number (1 to current size of the contact book)                                                                             |
-| `n/`   | NAME                  | Alphabets, numbers, and space characters only                                                                              |
-| `p/`   | PHONE_NUMBER          | Numbers only and at least 3 digits long                                                                                    |
-| `e/`   | EMAIL                 | Alphabets, numbers, and symbols only in a valid email format                                                               |
-| `a/`   | ADDRESS               | Any value is possible.                                                                                                     |
-| `nk/`  | NEXT_KIN              | Alphabets, numbers, and space characters only                                                                              |
-| `nkp/` | NEXT_KIN_PHONE        | Numbers only and at least 3 digits long                                                                                    |
-| `fp/`  | FINANCIAL_PLAN        | Alphabets, numbers, and space characters only. Empty value is accepted when using [Edit](#editing-a-client-contact--edit). |
-| `t/`   | TAG                   | Alphabets and numbers only. Empty value is accepted when using [Edit](#editing-a-client-contact--edit).                    |
-| `ap/`  | APPOINTMENT_NAME      | Alphabets, numbers, and space characters only                                                                              |
-| `d/`   | APPOINTMENT_DATE      | Format: dd-MM-yyyy (e.g., 31-12-2023)                                                                                      |
-| `d/`   | APPOINTMENT_DATE_TIME | Format: dd-MM-yyyy HH:mm (e.g., 31-12-2023 14:30)                                                                          |
-| -      | KEYWORD               | `name` or `appointment`                                                                                                    |
+| Prefix | Argument              | Acceptable Values                                                                                                         |
+|--------|-----------------------|---------------------------------------------------------------------------------------------------------------------------|
+| -      | INDEX                 | Number (1 to current size of the contact book)                                                                            |
+| `n/`   | NAME                  | Alphabets, numbers, and space characters only                                                                             |
+| `p/`   | PHONE_NUMBER          | Numbers only and at least 3 digits long                                                                                   |
+| `e/`   | EMAIL                 | Alphabets, numbers, and symbols only in a valid email format                                                              |
+| `a/`   | ADDRESS               | Any value is possible                                                                                                     |
+| `nk/`  | NEXT_KIN              | Alphabets, numbers, and space characters only                                                                             |
+| `nkp/` | NEXT_KIN_PHONE        | Numbers only and at least 3 digits long                                                                                   |
+| `fp/`  | FINANCIAL_PLAN        | Alphabets, numbers, and space characters only. Empty value is accepted when using [Edit](#editing-a-client-contact--edit) |
+| `t/`   | TAG                   | Alphabets and numbers only. Empty value is accepted when using [Edit](#editing-a-client-contact--edit)                    |
+| `ap/`  | APPOINTMENT_NAME      | Alphabets, numbers, and space characters only                                                                             |
+| `d/`   | APPOINTMENT_DATE      | Format: dd-MM-yyyy (e.g., 31-12-2023)                                                                                     |
+| `d/`   | APPOINTMENT_DATE_TIME | Format: dd-MM-yyyy HH:mm (e.g., 31-12-2023 14:30)                                                                         |
+| -      | KEYWORD               | `name` or `appointment`                                                                                                   |
 
 <div markdown="span" class="alert alert-primary">:information_source:
 **Do note** If the ADDRESS includes any recognized prefixes (leading space + prefix), users should be careful.
@@ -195,7 +195,7 @@ Format: `help`
 ### Adding a client-contact : `add`
 
 Adds a client's contact (name, phone number, email, home address, next-of-kin name, next-of-kin phone
-number) into contact book.
+number) into contact book. Optionally you may add financial plans or tags to the client at the same time.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PHONE [fp/FINANCIAL_PLAN]… [t/TAG]…​`
 
@@ -205,6 +205,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nk/NEXT_KIN nkp/NEXT_KIN_PH
 * To prevent accidentally adding duplicates, you can use [Find](#locating-clients-by-name-financial-plan-andor-tag--find)
     to check if you have already added the client.
 * After performing an add, the contact list will be reset to display all client contacts.
+* You MAY NOT add an empty tag or financial plan eg.(`fp/` or `t/`)
 
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
 
@@ -284,7 +285,7 @@ Tags:`
 
 <div markdown="span" class="alert alert-primary">:information_source:
 **Do note** that it is possible to edit a client's contact with multiple tags by duplicating the `t/` prefix. The same can be done with for financial plans with the `fp/` prefix.
-However, multiple empty values for tags and financial plans are not accepted. For example, `t/ t/` and `fp/ fp/` is not accepted.
+However, multiple fields of the same type with an empty tag or financial plan is not allowed. For example, `t/ t/` and `fp/ fp/plan` is not accepted.
 </div>
 
 ---------------
@@ -321,7 +322,8 @@ Format: `gather fp/FINANCIAL PLAN` or `gather t/TAG`
   This function currently known to be compatible with gmail and outlook but might not work for all email services.
 * Either **Financial Plan or Tag** can be searched at once, but **not both**.
 * The search is case-insensitive e.g. `financial` will match `FINANCIAL` or `Financial`.
-* A client's email will be gathered if the prompt matches a substring of their financial plan or tag.
+* A client's email will be gathered if the prompt matches a substring of their financial plan or tag 
+  eg. `finan` will match `financial` or `financial plan`.
 
 Acceptable Values: Refer to [Argument Summary](#argument-summary).
 
@@ -428,7 +430,7 @@ Successful Output: `Appointment(s) Completed!`
 ### Clearing all entries : `clear`
 
 Clears all client contacts from the contact book. UNOFAS will ask for confirmation first to ensure it is not a mistake. Click
-the clear button to confirm. O
+the clear button to confirm.
 
 Format: `clear`
 
@@ -505,7 +507,7 @@ Certain edits to the file may also cause unexpected behaviours. Please only edit
 2. **When sorting the list**, we have chosen to not implement returning sorted list to original ordering due to the lack of necessity. However, due to feedback, we intend to implement this in the next release to enable users to return list to original order should they wish to.
 3. **It is possible to add appointments with dates** before the current date and time.
 4. **On macOS Systems**, you have to use the cursor to manually click the confirm or cancel buttons for the overriding and clear prompts. In contrast, Windows users can choose to hit enter to confirm execution of command.
-5. **No current method to de-conflict clashing appointments**. Users should be advised to check the appointment sidebar to ensure appointments do not clash with each other. The appointment sidebar may display appointments with the same date and time in a different order after adding a new appointment and subsequently reopening the app.
+5. **No current method to de-conflict clashing appointments**. Users should be advised to check the appointment sidebar to ensure appointments do not clash with each other.
 6. **The appointment sidebar** may display appointments with the same date and time in a different order after adding a new appointment and subsequently reopening the app. This will be concurrently resolved when fixing issue 5.
 7. **Checking for duplicate clients** is done by checking their full name, case-sensitive. The future plan is to do this by checking of phone number as it is less likely 2 people share the same phone number than compared to name.
 
