@@ -30,13 +30,16 @@ public class UniqueAppointmentList extends UniqueObjectList<Appointment> {
     protected final ObservableList<Appointment> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
+    /**
+     * Replaces the current list of appointments with a new list provided in the {@code replacement} parameter.
+     */
     public void setAppointments(UniqueAppointmentList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
 
     /**
-     * Returns true if the list contains an equivalent {@code Appointment} as the given argument.
+     * Returns true if the list contains an equivalent appointment as the given argument.
      */
     @Override
     public boolean contains(Appointment toCheck) {
@@ -45,11 +48,8 @@ public class UniqueAppointmentList extends UniqueObjectList<Appointment> {
     }
 
     /**
-     * Adds the specified {@code Appointment} to the list.
-     *
-     * @param toAdd The appointment to be added.
-     * @throws NullPointerException     if {@code toAdd} is null.
-     * @throws DuplicateObjectException if the appointment already exists in the list.
+     * Adds an appointment to the list.
+     * The appointment must not already exist in the list.
      */
     @Override
     public void add(Appointment toAdd) {
@@ -63,12 +63,8 @@ public class UniqueAppointmentList extends UniqueObjectList<Appointment> {
     /**
      * Replaces the {@code target} appointment in the list with {@code editedAppointment}.
      * The {@code target} appointment must exist in the list.
-     *
-     * @param target           The appointment to be replaced.
-     * @param editedAppointment The edited appointment to replace the target.
-     * @throws NullPointerException       if {@code target} or {@code editedAppointment} is null.
-     * @throws ObjectNotFoundException    if {@code target} does not exist in the list.
-     * @throws DuplicateObjectException    if {@code editedAppointment} already exists in the list.
+     * The appointment identity of {@code editedAppointment} must not be the same as another existing appointment in
+     * the list.
      */
     @Override
     public void setObject(Appointment target, Appointment editedAppointment) {
@@ -87,12 +83,8 @@ public class UniqueAppointmentList extends UniqueObjectList<Appointment> {
     }
 
     /**
-     * Removes the equivalent {@code Appointment} from the list.
-     * The {@code Appointment} must exist in the list.
-     *
-     * @param toRemove The appointment to be removed.
-     * @throws NullPointerException     if {@code toRemove} is null.
-     * @throws ObjectNotFoundException  if {@code toRemove} does not exist in the list.
+     * Removes the equivalent appointment from the list.
+     * The appointment must exist in the list.
      */
     @Override
     public void remove(Appointment toRemove) {
@@ -104,11 +96,7 @@ public class UniqueAppointmentList extends UniqueObjectList<Appointment> {
 
     /**
      * Replaces the contents of this list with the provided list of {@code appointments}.
-     * The provided list must not contain duplicate appointments.
-     *
-     * @param appointments The list of appointments to replace the current contents of this list.
-     * @throws NullPointerException     if {@code appointments} is null.
-     * @throws DuplicateObjectException if the provided list contains duplicate appointments.
+     * {@code appointments} must not contain duplicate appointments.
      */
     @Override
     public void setObjects(List<Appointment> appointments) {

@@ -28,7 +28,7 @@ public class Ic {
     }
 
     /**
-     * Returns true if a given string is a valid nric.
+     * Returns true if a given string is a valid ic.
      */
     public static boolean isValidIc(String test) {
         return test.matches(VALIDATION_REGEX);

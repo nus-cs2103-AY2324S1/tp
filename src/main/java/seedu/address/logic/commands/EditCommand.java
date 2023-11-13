@@ -46,6 +46,7 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.
+ * Extends the abstract class {@link Command}.
  */
 public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
@@ -109,6 +110,13 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
+    /**
+     * Retrieves the person to be edited based on the given IC and the current model.
+     *
+     * @param model The model containing the address book.
+     * @return The person to be edited.
+     * @throws CommandException If the person with the specified IC cannot be found in the address book.
+     */
     private Person getPersonToEdit(Model model) throws CommandException {
         List<Person> lastShownList = new ArrayList<>();
         lastShownList.addAll(model.getFilteredDoctorList());
@@ -126,6 +134,14 @@ public class EditCommand extends Command {
         return personToEdit;
     }
 
+    /**
+     * Retrieves the edited person based on the person to be edited and the current model.
+     *
+     * @param model         The model containing the address book.
+     * @param personToEdit  The person to be edited.
+     * @return The edited person.
+     * @throws CommandException If there is an issue creating the edited person or if the edited person would be a duplicate.
+     */
     private Person getEditedPerson(Model model, Person personToEdit) throws CommandException {
         Person editedPerson;
         if (personToEdit instanceof Patient) {

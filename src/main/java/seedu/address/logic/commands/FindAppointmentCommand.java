@@ -14,6 +14,7 @@ import seedu.address.model.appointment.Appointment;
 /**
  * Finds and lists all appointments in the address book whose attributes match the specified predicate.
  * Keyword matching is case-insensitive.
+ * Extends the abstract class {@link Command}.
  */
 public class FindAppointmentCommand extends Command {
 

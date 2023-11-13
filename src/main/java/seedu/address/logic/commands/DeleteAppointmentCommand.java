@@ -18,6 +18,7 @@ import seedu.address.model.person.Patient;
 
 /**
  * Deletes an Appointment identified using its displayed index from the address book.
+ * Extends the abstract class {@link Command}.
  */
 public class DeleteAppointmentCommand extends Command {
 
@@ -61,7 +62,7 @@ public class DeleteAppointmentCommand extends Command {
     }
 
     /**
-     * Finds the patient associated with the given Appointment in the model.
+     * Finds the patient associated with the given {@code Appointment} in the model.
      *
      * @param model    The model containing the data.
      * @param toDelete The Appointment to be deleted.
@@ -79,7 +80,7 @@ public class DeleteAppointmentCommand extends Command {
     }
 
     /**
-     * Finds the doctor associated with the given Appointment in the model.
+     * Finds the doctor associated with the given {@code Appointment} in the model.
      *
      * @param model    The model containing the data.
      * @param toDelete The Appointment to be deleted.

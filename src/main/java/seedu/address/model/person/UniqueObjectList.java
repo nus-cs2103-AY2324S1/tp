@@ -7,15 +7,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
+ * A list of objects that enforces uniqueness between its elements and does not allow nulls.
+ * An object is considered unique by comparing using {@code T#equals(Object)}. As such, adding and updating of
+ * objects uses the equality check to ensure that the object being added or updated is unique in terms of identity
+ * in the UniqueObjectList. However, the removal of an object uses the equality check as well to ensure that the
+ * object with exactly the same fields will be removed.
  * <p>
- * Supports a minimal set of list operations.
+ * This class supports a minimal set of list operations.
  *
- * @see Person#isSamePerson(Person)
+ * @param <T> The type of objects stored in the list.
  */
 public abstract class UniqueObjectList<T> implements Iterable<T> {
 
@@ -24,32 +24,32 @@ public abstract class UniqueObjectList<T> implements Iterable<T> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent object as the given argument.
      */
     public abstract boolean contains(T toCheck);
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds an object to the list.
+     * The object must not already exist in the list.
      */
     public abstract void add(T toAdd);
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * Replaces the object {@code target} in the list with {@code editedObject}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The identity of {@code editedObject} must not be the same as another existing object in the list.
      */
     public abstract void setObject(T target, T editedObject);
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent object from the list.
+     * The object must exist in the list.
      */
     public abstract void remove(T toRemove);
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code objects}.
+     * {@code objects} must not contain duplicate objectss.
      */
     public abstract void setObjects(List<T> objects);
 
@@ -89,7 +89,7 @@ public abstract class UniqueObjectList<T> implements Iterable<T> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code objects} contains only unique objects.
      */
     protected abstract boolean objectsAreUnique(List<T> objects);
 }

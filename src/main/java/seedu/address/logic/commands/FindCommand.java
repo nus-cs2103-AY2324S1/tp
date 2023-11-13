@@ -14,6 +14,7 @@ import seedu.address.model.person.Person;
 /**
  * Finds and lists all persons in address book whose attributes match the predicate.
  * Keyword matching is case insensitive.
+ * Extends the abstract class {@link Command}.
  */
 public class FindCommand extends Command {
 

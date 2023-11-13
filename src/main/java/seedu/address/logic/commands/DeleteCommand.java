@@ -16,6 +16,7 @@ import seedu.address.model.person.Person;
 
 /**
  * Deletes a person identified using their displayed NRIC from the address book.
+ * Extends the abstract class {@link Command}.
  */
 public class DeleteCommand extends Command {
 

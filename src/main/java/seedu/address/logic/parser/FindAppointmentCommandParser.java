@@ -21,6 +21,7 @@ public class FindAppointmentCommandParser implements Parser<FindAppointmentComma
      * Parses the given {@code String} of arguments in the context of the FindAppointmentCommand
      * and returns a FindAppointmentCommand object for execution.
      *
+     * @param args The input arguments string to be parsed.
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindAppointmentCommand parse(String args) throws ParseException {

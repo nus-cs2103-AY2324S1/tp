@@ -20,6 +20,7 @@ import seedu.address.model.person.Doctor;
 
 /**
  * Adds a Doctor to the MediLink Contacts address book.
+ * Extends the abstract class {@link Command}.
  */
 public class AddDoctorCommand extends Command {
 

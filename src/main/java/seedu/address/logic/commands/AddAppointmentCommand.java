@@ -17,6 +17,7 @@ import seedu.address.model.person.Patient;
 
 /**
  * Adds an Appointment to the MediLink Contacts address book.
+ * Extends the abstract class {@link Command}.
  */
 public class AddAppointmentCommand extends Command {
 
