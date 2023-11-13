@@ -10,6 +10,7 @@ _Find Your Success with JobFindr_
 ## Table of Contents
 
 1. [Introduction](#introduction)
+    * [Navigating the User Guide](#navigating-the-user-guide)
     * [First Time at JobFindr](#first-time-at-jobfindr)
     * [Experience at JobFindr](#experienced-at-jobfindr)
 2. [Quick Start](#quick-start)
@@ -59,6 +60,40 @@ JobFindr combines the rapid efficiency of Command Line Interface (CLI) with the 
 [Graphical User Interface (GUI)](#user-interface), offering job application management that is suited for your specific
 needs and preferences.
 
+--------------------------------------------------------------------------------------------------------------------
+
+### Navigating the User Guide
+
+Welcome to the JobFindr User Guide! This document is your key to unlocking all the features and capabilities of
+JobFindr. To enhance your understanding and usage of this tool, we have included a variety of annotations throughout
+this guide. Here's what they mean:
+
+<div markdown="block" class="alert alert-success">
+**:bulb: Useful Tips:**<br>
+* These are practical suggestions to enhance your JobFindr experience.
+* Implement these tips for an efficient and effective job search journey.
+</div>
+
+<div markdown="block" class="alert alert-danger">
+**:exclamation: Warning:**<br>
+* Pay close attention to these sections.
+* They highlight important limitations and common pitfalls in using JobFindr, ensuring you avoid any unnecessary issues.
+</div>
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes:**<br>
+* Dive deeper into the functionalities of JobFindr with these informative notes.
+* They provide expanded insights and additional context, empowering you to leverage JobFindr to its fullest potential.
+</div>
+
+Additionally, you'll encounter different text styles within this guide:
+
+* [Hyperlinks](#navigating-the-user-guide): Easily identifiable, these links lead you to other relevant
+  sections of the guide or to external websites for more information.
+* `Code Text`: Highlighted text that can likely be keyed into the command box or to your computer.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### First Time at JobFindr?
 
 _Welcome onboard! Let us be part of your job search journey!_
@@ -89,12 +124,12 @@ _Good to see you back here! How we can help you?_
 
 ## **Quick Start**
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have **Java 11** or above installed in your computer.
     1. To check if you have installed the correct Java version
        over [here](#1-how-do-i-make-sure-i-have-installed-the-correct-java-version)
     2. Follow the instruction
        over [here](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
-       to install Java `11`
+       to install **Java 11**
 2. Download the latest `JobFindr.jar` from [here](https://github.com/AY2324S1-CS2103T-W12-3/tp/releases).
    <br>
    ![DownloadJar](images/user-guide/DownloadJar.png)
@@ -134,7 +169,7 @@ pressing **Enter**.<br>
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Notes:**<br>
-* * Learn more about the structure of a job application [here](#structure-of-a-job-application).
+* Learn more about the structure of a job application [here](#structure-of-a-job-application).
 </div>
 
 **Step 2**: You should see a new entry added to the Job List Panel just like this: <br>
@@ -824,8 +859,7 @@ Let's type `interview edit 2 from/ 1 d/Jan 20 2024 1200` and press **Enter**.
 ![IntEditCommandEg2](images/user-guide/IntEditCommandEg2.png)
 
 **Step 3:** Look at the Interview Card for the `Case Interview` from `Shopee`, the `date` will be edited.
-
-![IntEditCommandEg3](images/user-guide/IntEditCommandEg3.png)
+<img src="images/user-guide/IntEditCommandEg3.png" style="display: block; margin: auto;" width="500">
 
 **Common Errors:**
 
