@@ -583,7 +583,7 @@ The `viewappointment` command opens/focuses the `AppointmentsWindow`.
   - _Pros_: This approach simplifies the data model by avoiding the need for a centralised appointment list.
   - _Cons_: Operations that require knowledge of all appointments, like finding available slots or generating reports, become more complex, as they need to aggregate data from each Person.
 
-### User Stories
+## User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -1253,7 +1253,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Input Mistakes
 
-1. Test Case: `addreocrd n/John Doe i/A0000000A a/30 g/M e/jd@example.com p/98776543 bt/AB+ al/Dust
+1. Test Case: `addreocrd n/John Doe i/A0000000A a/30 g/M e/jd@example.com p/98776543 bt/AB+ al/Dust`
    - Expected: Error message displayed, suggesting the correct command format.
 2. Test Case: `delet 1`
    - Expected: Error message displayed, suggesting the correct command format.
@@ -1306,7 +1306,7 @@ To make the NRIC parameter more inclusive and reflective of real-world use cases
 
 **Optional Passport Number Support**: To accommodate foreign patients who do not have an NRIC, the system will be enhanced to accept passport numbers as an alternative identifier. This feature is particularly important for private clinics that cater to a diverse patient base, including non-residents and tourists.
 
-### Accepting / in Name parameter
+### Accepting `/` in Name parameter
 
 #### Current Implementation
 
