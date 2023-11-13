@@ -119,7 +119,6 @@ public class BatchDeleteCommand extends Command {
         return company.equals(otherBatchDeleteCommand.company);
     }
 
-    // update this
     @Override
     public String toString() {
         String month = this.month == null ? "[not applicable]" : this.month.toString();
