@@ -26,11 +26,12 @@ title: Developer Guide
   - [Glossary](#glossary)
 - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
 - [Appendix: Efforts](#appendix-efforts)
-  - [Difficulty Level](#difficulty-level)
-  - [Challenges Faced](#challenges-faced)
+  - [Difficulty Level & Challenges Faces](#difficulty-level-and-challenges-faced)
   - [Effort Required](#effort-required)
   - [Achievements of the Project](#achievements-of-the-project)
 - [Planned Enhancements](#planned-enhancements)
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -39,11 +40,15 @@ title: Developer Guide
 * Adapted from [AB3](https://se-education.org/addressbook-level3/)
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -176,6 +181,8 @@ The `Storage` component,
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -869,7 +876,6 @@ The following activity diagram summarizes what happens when a user executes the 
 
 ![Overtime Activity Diagram](images/OvertimeActivityDiagram.png)
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -879,6 +885,8 @@ The following activity diagram summarizes what happens when a user executes the 
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1779,15 +1787,21 @@ _{other invalid inputs are possible}_
       Expected: The app should detect the corrupted file and show an error message in the console. 
       The app should create a new **hour.json** file with an empty employee book in the **data** folder.
 
+<div style="page-break-after: always;"></div>
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Appendix: Efforts**
 
 This section documents the efforts that went into the development of this project, as well as the challenges faced.
 
-### Difficulty Level
+### Difficulty Level and Challenges Faced
 
 We would rate the difficulty level of this project as **π/5**.
 
 This is because the project codebase and architecture were initially quite challenging to understand, and we had to spend a significant amount of time tracing through the code and understanding how the different components of the project interacted with each other. However, once we understood the architecture of the project, it was relatively straightforward to add most of the new features and modify existing features.
+
+The initial use of a forking workflow was extremely tedious and time-consuming, with lots of merge conflicts, slowing down our progress. However, we decided to switch over to a branching workflow, increasing our productivity and efficiency when delivering v1.3 and v1.4.
 
 There were a few challenging features, such as the `sort` command, which required us to modify the code at multiple layers of abstraction, and the `report` command, which was one of the few commands that required its own storage class and methods. However, we were able to implement these features successfully after some effort.
 
@@ -1796,38 +1810,6 @@ Writing our own tests as well as modifying existing tests, while not particularl
 Finally, writing documentation was a novel experience to us, and necessitated both a deep understanding of the codebase and a good grasp of documentation best practices. Making UML diagrams for the documentation was a particular challenge because of our inexperience with coding in UML. However, after writing the documentation for a few methods, the rest were relatively straightforward to write.
 
 Given the challenges we faced and the novelty of some parts of the project, we would rate the difficulty level of this project as **π/5**.
-
-### Challenges Faced
-
-We faced the following challenges during the development of this project:
-
-* **Understanding the architecture of the project**
-
-Initially, we had a hard time understanding the architecture of the project. We were not sure how the different components of the project interacted with each other, and why some classes, such as `ModelManager` were even necessary. However, as we added more modifications and features to the project, we were able to understand the architecture better.
-
-* **Forking workflow**
-
-Initially, we started with the forking workflow for our project, which was extremely tedious and time-consuming, and led to a lot of merge conflicts. We had to spend a lot of time resolving merge conflicts, and this slowed down our development process. Also, it was difficult to contribute to each other's code, and even minor revisions required a long, inefficient process of syncing the fork, resolving merge conflicts, making the revision, creating a pull request, and merging it. We eventually switched to the branching workflow for v1.3, which was much more efficient and streamlined while maintaining our code quality.
-
-* **Renaming `person` to `employee`**
-
-Since our app was focussed on HR management, we decided to rename the `person` class to `employee`. However, this was not as simple as it seemed. We had to rename the class, as well as all the methods and variables that were related to the `person` class, which was a tedious process. This introduced lots of often-mysterious bugs and errors in our code, which we had to spend a lot of time debugging. It also involved making changes to the test data and documentation, which was also a time-consuming process.
-
-* **Adding and modifying fields in the `employee` class**
-
-Adding and modifying fields in the `employee` class was a challenge because we had to ensure that the new fields were compatible with the existing code. We had to ensure that the new fields were properly initialised new `employee` constructors, and that they were properly handled in the model, logic, and storage classes. We also had to ensure that the new fields were properly handled in the parser and the UI. This was a challenge because we had to ensure that the new fields were properly handled in all the different components of the project.
-
-* **Storing reports**
-
-For the `report` command, we had to store the reports in a separate folder. We had to figure out how to create a new folder and store the reports in it within the patterns and constraints of the existing storage classes. This was a challenge because we were not familiar with the storage classes, and we had to figure out how to store the reports in a way that was consistent with the existing storage classes.
-
-* **Implementing the `sort` command**
-
-For the `sort` command, after exploring and struggling with various approaches from creating separate list views to copying the list, we decided to go ahead with modifying the existing list. This involved adding methods at various layers of abstraction all the way down to the `UniqueEmployeeList` class, which implemented the actual sorting. This was a challenge as it was initially difficult to understand how the different components of the project interacted with each other at each layer of abstraction. This change also broke all of the methods that relied on index for employee selection by making their results unpredictable, and we had to go through all of the methods to change the index to the employee ID. This was a tedious process, and we had to spend a lot of time modifying methods such as `delete` to use the employee ID instead of index, and then debugging them.
-
-* **Documentation**
-
-Being new to writing user and developer guides or creating UML diagrams, we had to spend a significant amount of time looking at existing docs and learning to write our own. We also had to spend a lot of time ensuring that the documentation was consistent with the code and our implementation. This was a challenge because it required an in-depth understanding of the codebase, and so we had to defer most of the technical parts of our documentation towards the end of the project.
 
 ### Effort Required
 In the project, we invested a moderate level of effort to ensure the successful development and delivery of our product. Here are some of the different aspects of our team efforts:
@@ -1849,6 +1831,9 @@ Another feature we are proud of is our `report` feature that allows our users to
 
 Overall, we are proud of our project, and we believe that we have done our best with all the constraints and challenges we faced. We are happy with the result and believe that our product will meet the needs of our target audience.
 
+<div style="page-break-after: always;"></div>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Planned Enhancements
 
