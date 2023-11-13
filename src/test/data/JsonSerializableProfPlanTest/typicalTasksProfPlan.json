@@ -1,0 +1,46 @@
+{
+  "_comment": "AddressBook save file which contains the same Task values as in TypicalTasks#getTypicalAddressBook()",
+  "tasks" : [ {
+    "name" : "Alice Pauline",
+    "priority" : "1",
+    "tags" : [ "friends" ],
+    "dueDate" : "01-01-2000",
+    "description" : ""
+  }, {
+    "name" : "Benson Meier",
+    "priority" : "2",
+    "tags" : [ "owesMoney", "friends" ],
+    "dueDate" : "01-01-2000",
+    "description" : ""
+  }, {
+    "name" : "Carl Kurz",
+    "priority" : "3",
+    "tags" : [ ],
+    "dueDate" : "01-01-2000",
+    "description" : ""
+  }, {
+    "name" : "Daniel Meier",
+    "priority" : "4",
+    "tags" : [ "friends" ],
+    "dueDate" : "01-01-2000",
+    "description" : ""
+  }, {
+    "name" : "Elle Meyer",
+    "priority" : "5",
+    "tags" : [ ],
+    "dueDate" : "01-01-2000",
+    "description" : ""
+  }, {
+    "name" : "Fiona Kunz",
+    "priority" : "6",
+    "tags" : [ ],
+    "dueDate" : "01-01-2000",
+    "description" : ""
+  }, {
+    "name" : "George Best",
+    "priority" : "10",
+    "tags" : [ ],
+    "dueDate" : "01-01-2000",
+    "description" : ""
+  } ]
+}

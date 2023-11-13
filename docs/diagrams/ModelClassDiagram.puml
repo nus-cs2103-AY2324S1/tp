@@ -1,54 +1,63 @@
 @startuml
-!include style.puml
+!define MODEL_COLOR #0055CC
+!define BACKGROUND_COLOR #D0E4FF
+
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
-skinparam classBackgroundColor MODEL_COLOR
+skinparam classBackgroundColor BACKGROUND_COLOR
 
-Package Model as ModelPackage <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
-Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
-Class "<<interface>>\nModel" as Model
-Class AddressBook
-Class ModelManager
-Class UserPrefs
+Package Model as ModelPackage <<Rectangle>> {
+    Class "<<interface>>\nReadOnlyProfPlan" as ReadOnlyProfPlan
+    Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+    Class "<<interface>>\nReadOnlyUserConfigs" as ReadOnlyUserConfigs
+    Class "<<interface>>\nModel" as Model
+    Class ProfPlan
+    Class ModelManager
+    Class UserPrefs
+    Class UserConfigs
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+    Class UniqueTaskList
+    Class Task {
+        - Name name
+        - Priority priority
+        - RecurringType recurringType
+        - Link link
+        - Status status
+        - DueDate dueDate
+        - Description description
+    }
 
-Class I #FFFFFF
+    Class Name
+    Class Priority
+    Class RecurringType
+    Class Link
+    Class Status
+    Class DueDate
+    Class Description
+    Class Tag
 }
 
-Class HiddenOutside #FFFFFF
-HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+ReadOnlyProfPlan <|.. ProfPlan
+Model <|.. ModelManager
+ReadOnlyUserPrefs <|.. UserPrefs
+ReadOnlyUserConfigs <|.. UserConfigs
 
-ModelManager .up.|> Model
-Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+ModelManager -left-> "1" ProfPlan
 ModelManager -right-> "1" UserPrefs
-UserPrefs .up.|> ReadOnlyUserPrefs
+ModelManager -right-> "1" UserConfigs
+ModelManager --> "~* filtered" Task
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+ProfPlan *--> "1" UniqueTaskList
+UniqueTaskList --> "~* all  " Task
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
+Task *-- Name
+Task *-- Priority
+Task *-- RecurringType
+Task *-- Link
+Task *-- Status
+Task *-- DueDate
+Task *-- Description
+Task *-- "*" Tag
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
-
-ModelManager --> "~* filtered" Person
 @enduml
