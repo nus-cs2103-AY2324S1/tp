@@ -15,7 +15,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.interaction.Interaction;
 import seedu.address.model.person.lead.Lead;
 import seedu.address.model.reminder.Reminder;
 import seedu.address.model.tag.Tag;
@@ -195,7 +194,6 @@ public class Person {
             return Optional.empty();
         }
         LocalDate latestInteractionDate = interactions.get(interactions.size() - 1).getDate();
-        //TODO: Not sure if the lastest interaction is always the last one in the list
         int weeksToAdd = lead.getFollowUpPeriod();
         return Optional.of(latestInteractionDate.plusWeeks(weeksToAdd));
     }
@@ -213,15 +211,9 @@ public class Person {
         }
 
         Optional<Reminder> updatedReminder = Optional.of(new Reminder(this));
-        if (this.reminder.equals(updatedReminder)) {
-            return;
-        }
-
         this.reminder = updatedReminder;
     }
 
-    //TODO: Establish that this is not a bug.
-    //If someone tries to make a new person with the same name it should not be allowed
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.

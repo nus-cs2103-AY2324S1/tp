@@ -5,11 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.person.Interaction;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.interaction.Interaction;
 
 public class ReminderTest {
 
@@ -18,19 +19,21 @@ public class ReminderTest {
     public static final String VALID_OUTCOME = "CLOSED";
     public static final String VALID_INTERACTION_NOTE = "Valid interaction note";
 
-    public static final Interaction VALID_FUTURE_INTERACTION = new Interaction(VALID_INTERACTION_NOTE,
+    public static final List<Interaction> VALID_FUTURE_INTERACTION_LIST = List.of(
+        new Interaction(VALID_INTERACTION_NOTE,
             Interaction.Outcome.valueOf(VALID_OUTCOME),
-            LocalDate.parse(FUTURE_VALID_DATE));
+            LocalDate.parse(FUTURE_VALID_DATE)));
 
     public static final Reminder VALID_FUTURE_REMINDER = new Reminder(
-            new Person.PersonBuilder(ALICE).addInteraction(VALID_FUTURE_INTERACTION).build());
+            new Person.PersonBuilder(ALICE).withInteractions(VALID_FUTURE_INTERACTION_LIST).build());
 
-    public static final Interaction VALID_PAST_INTERACTION = new Interaction(VALID_INTERACTION_NOTE,
+    public static final List<Interaction> VALID_PAST_INTERACTION_LIST = List.of(
+        new Interaction(VALID_INTERACTION_NOTE,
             Interaction.Outcome.valueOf(VALID_OUTCOME),
-            LocalDate.parse(PAST_VALID_DATE));
+            LocalDate.parse(PAST_VALID_DATE)));
 
     public static final Reminder VALID_PAST_REMINDER = new Reminder(
-            new Person.PersonBuilder(ALICE).addInteraction(VALID_PAST_INTERACTION).build());
+            new Person.PersonBuilder(ALICE).withInteractions(VALID_PAST_INTERACTION_LIST).build());
 
     @Test
     public void getName() {

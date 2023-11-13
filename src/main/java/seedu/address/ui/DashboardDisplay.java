@@ -16,7 +16,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import javafx.util.Pair;
 import seedu.address.model.Dashboard;
-import seedu.address.model.person.lead.LeadType;
 import seedu.address.model.reminder.Reminder;
 
 /**
@@ -76,9 +75,9 @@ public class DashboardDisplay extends UiPart<Region> {
         int totalColdLeads = dashboard.getTotalColdLeads();
 
         XYChart.Series<String, Integer> series = new XYChart.Series<>();
-        series.getData().add(new XYChart.Data<>(LeadType.HOT.toString(), totalHotLeads));
-        series.getData().add(new XYChart.Data<>(LeadType.WARM.toString(), totalWarmLeads));
-        series.getData().add(new XYChart.Data<>(LeadType.COLD.toString(), totalColdLeads));
+        series.getData().add(new XYChart.Data<>("HOT", totalHotLeads));
+        series.getData().add(new XYChart.Data<>("WARM", totalWarmLeads));
+        series.getData().add(new XYChart.Data<>("COLD", totalColdLeads));
 
         barChart.getData().add(series);
 

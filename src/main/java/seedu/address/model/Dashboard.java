@@ -12,8 +12,8 @@ import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Pair;
+import seedu.address.model.person.Interaction;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.interaction.Interaction;
 import seedu.address.model.reminder.Reminder;
 
 /**

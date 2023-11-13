@@ -2,7 +2,10 @@ package seedu.address.model.person.lead;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Supplier;
 
 /**
  * Represents the potential of a client.
@@ -10,6 +13,14 @@ import java.util.Objects;
 public abstract class Lead {
 
     public static final String MESSAGE_CONSTRAINTS = "Lead should only take values hot|warm|cold|unknown";
+    private static final Map<String, Supplier<Lead>> leadMap = new HashMap<>();
+
+    static {
+        leadMap.put("HOT", HotLead::getInstance);
+        leadMap.put("WARM", WarmLead::getInstance);
+        leadMap.put("COLD", ColdLead::getInstance);
+        leadMap.put("UNKNOWN", UnknownLead::getInstance);
+    }
 
     /**
      * Returns a lead given a string. Checks if the string is a valid lead.
@@ -31,28 +42,12 @@ public abstract class Lead {
     public static Lead of(String lead) throws IllegalArgumentException {
         assert Objects.nonNull(lead) : "Lead should take non-null values";
         checkArgument(isValidLead(lead), MESSAGE_CONSTRAINTS);
-        LeadType leadType = Enum.valueOf(LeadType.class, lead.toUpperCase());
-        return Lead.of(leadType);
-    }
-
-    /**
-     * The factory method for leads given the {@code LeadType} enum. Checks if the leadType is non-null;
-     *
-     * @param leadType the type of lead
-     * @return the {@code Lead} object corresponding to the type
-     */
-    public static Lead of(LeadType leadType) throws IllegalArgumentException {
-        assert Objects.nonNull(leadType);
-        switch (leadType) {
-        case HOT:
-            return HotLead.getInstance();
-        case WARM:
-            return WarmLead.getInstance();
-        case COLD:
-            return ColdLead.getInstance();
-        default:
-            return UnknownLead.getInstance();
+        Supplier<Lead> leadSupplier = leadMap.get(lead.toUpperCase());
+        if (leadSupplier != null) {
+            return leadSupplier.get();
         }
+
+        throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
     }
 
     /**
@@ -64,12 +59,7 @@ public abstract class Lead {
      */
     public static boolean isValidLead(String lead) {
         assert Objects.nonNull(lead) : "lead should not be null";
-        for (LeadType leadType : LeadType.values()) {
-            if (lead.equalsIgnoreCase(leadType.name())) {
-                return true;
-            }
-        }
-        return false;
+        return leadMap.containsKey(lead.toUpperCase());
     }
 
     @Override
