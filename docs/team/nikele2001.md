@@ -19,7 +19,7 @@ Given below are my contributions to the project.
 
   <br>
 
-* **New Feature**: Added appointment sidebar that shows upcoming appointments of clients in chronological order and wrote tests
+* **New Feature**: Added appointment list that shows upcoming appointments of clients in chronological order and wrote tests
     * Justification: Financial advisors may want to view all upcoming appointments easily in chronological order so that it is easier for them to plan their timetables.
     * Highlights: This enhancement creates another UI element to show various other appointment-specific details in the future. It requires an understanding of ObservableList interface and the way the list is being tracked by JavaFX.
     * (Pull request [#110](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/110))
@@ -34,13 +34,15 @@ Given below are my contributions to the project.
 
 
 * **Contributions to the UG**:
+  * Added introduction to UG.
   * Added and updated all UI images.
-  * Added general UI information table
+  * Added general UI information table.
 
 
 * **Contributions to the DG**:
   * Added use cases for `schedule` command, adding financial plans via the `fp/` prefix and sorting clients' contacts.
-  * Update class diagram for `Model` and `UI`
+  * Updated user stories.
+  * Updated UML class diagrams for `Model` and `UI` components.
   * Added effort section. 
 
 
