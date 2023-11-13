@@ -4,11 +4,13 @@
 
 ![Ui](docs/images/Ui.png)
 
-CoordiMate is a **desktop app for event planners**. It helps you **manage your contacts and tasks** for your events, so that you can focus on the event itself.
+Are you a School of Computing (SoC) Computing Club event planner juggling numerous tasks and contacts for your upcoming events?
 
-CoordiMate is **optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI).
+Managing everything efficiently just got easier with CoordiMate!
 
-If you can type fast, CoordiMate can help you get your contact management tasks done **faster than traditional GUI apps**.
+CoordiMate is your go-to **desktop app** designed specifically for **SoC Computing Club event planners**. It helps you **manage your contacts and tasks** for your events, so that you can focus on the event itself.
+
+And here’s the best part – while it’s perfect for members of SoC Computing Club, **event planners of all kinds** can benefit from CoordiMate’s powerful features too!
 
 ## Documentation
 
