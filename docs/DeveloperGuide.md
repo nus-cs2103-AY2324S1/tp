@@ -1584,4 +1584,12 @@ We managed to maintain **~83%** code coverage in CoordiMate, up from the origina
 
 ### 6. Software Engineering Practices
 
-TODO
+Our team went beyond the recommended guidelines in the course and adopted various rigorous software engineering practices in our development workflow to ensure that our codebase is well-written and maintainable.
+
+For `git` commits, we went beyond the course's recommended `git` guidelines and followed the more elaborate [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) format. Although this took more time and effort, it allowed us to write more descriptive commit messages that are easier to understand and follow.
+
+For pull requests, we made the effort to enforce that each pull request is approved by at least **two** other team members before merging. We believe that this practice allows us to catch more bugs and gain more perspectives on code changes before they are merged. This ensures that merged changes are of high quality, and that more team members are aware of the changes made to the codebase.
+
+For pull requests, we also standardised a [pull request template](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/17) to be filled by the pull request author. Having such a template ensures that pull requests descriptions are more descriptive and informative, allowing reviewers to better understand the changes made. We also included a checklist to remind the pull request author to test their code and maintain code coverage above 75% for new code.
+
+We also experimented with different `git` workflows to maximise our productivity. For new features done by individual team members, we maintained the recommended forking workflow. However, for changes that required multiple team members to work on, we adopted the feature workflow to allow concurrent work on the same branch and synchronise changes more easily. Some examples are UG and DG changes, which we believed was beneficial for us to visualise each other's changes while working on the same branch ([PR #160](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/160), [PR #163](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/163), and many more).
