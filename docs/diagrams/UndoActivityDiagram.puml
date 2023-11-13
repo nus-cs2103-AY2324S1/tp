@@ -1,0 +1,27 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes a command;
+:AddressBookParser parses the command;
+
+if () then ([Command is the undo command])
+
+  if() then ([The existing model equal to the backup model])
+    :Display error message;
+  else ([else])
+      :Overwrite the current model data with the backup model data;
+
+  endif
+
+else ([Command is not the undo command])
+  if() then ([Command is valid])
+    :Overwrite the backup model data with the current model data;
+    :Execute the command;
+  else ([else])
+    :Display error message;
+  endif
+endif
+stop
+@enduml
