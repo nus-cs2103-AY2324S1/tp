@@ -426,7 +426,7 @@ The following activity diagram summarizes what happens when the `DeleteNoteComma
 
 This feature allows users to add and remove `Event` to any `Person` in the contact list. It provides an easy way for users to keep track of events with the contacts.
 
-#### Overview: Event:
+#### Overview: Event
 The adding and removing of `Event` begins with the parsing of the `AddEventCommand` and `DeleteEventCommand` using the `AddEventCommandParser` and `DeleteEventCommandParser` respectively.
 The `AddEventCommand` and `DeleteEventCommand` will then be constructed and executed by the `Model`.
 
