@@ -147,14 +147,6 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 
-<box type="info" seamless>
-
-**Note:** A more in depth model is given below. It has a `Group` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Group` object per unique tag, instead of each `Person` needing their own `Group` objects.<br>
-</box>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-
 ### 2.5. Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
