@@ -34,8 +34,8 @@ It is written in Java.
 
 - Refactored format of command summaries, Expanded Quick Start section, Updated `Upper Menu` and `Lower Menu` Sections (
   PR[#185](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/185))
-- Updated `Navigating the GUI` section (PR[#80](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/89))
-- Refactor Glossary (PR[#193](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/193/))
+- Updated `Navigating the GUI` section (PR[#89](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/89))
+- Refactored Glossary (PR[#193](https://github.com/AY2324S1-CS2103T-W13-3/tp/pull/193/))
 
 ### **Developer Guide**
 
