@@ -2,6 +2,7 @@
 layout: page
 title: User Guide
 ---
+
 # Welcome to TuitionConnect's User Guide!
 :rocket: Introducing **TuitionConnect**: Revolutionizing your Tutoring Business! :rocket:
 
@@ -518,4 +519,4 @@ as well as machines to parse and generate.
 `Parameter`s are the inputs that a user can provide for a particular part of a command. As an example, for the field 
 `n/NAME` of add command, `NAME` can be substituted with the input that you want to specify (such as n/John or n/Alice). 
 
-[Back to top &#8593;](#welcome-to-tuitionconnects-user-guide-)
+[Back to top &#8593;](#welcome-to-tuitionconnects-user-guide)

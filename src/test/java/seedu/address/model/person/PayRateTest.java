@@ -22,6 +22,9 @@ public class PayRateTest {
 
         String negativePayRate = "-2.30";
         assertThrows(IllegalArgumentException.class, () -> new PayRate(negativePayRate));
+
+        String negativeZeroPayRate = "-0";
+        assertThrows(IllegalArgumentException.class, () -> new PayRate(negativeZeroPayRate));
     }
 
     @Test
