@@ -54,11 +54,15 @@ Keep an eye out for them!
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Table of Contents
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Quick Start
 1. Ensure you have [Java 11](#glossary) or above installed in your Computer. If you have never downloaded it before, download from [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
@@ -101,6 +105,8 @@ Keep an eye out for them!
 [Back To ToC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -154,6 +160,8 @@ When you use any features with `INDEX` as a parameter, kindly refer to the index
 [Back To ToC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ### Features for managing musicians
 
@@ -276,7 +284,7 @@ Instruments: [violin]; Genres: [pop]
   ![edit_before.png](images%2Fmusician-features%2Fedit_before.png)
 
 
-* After: Hans Leonhart's genre is changed to pop and his phone number is changed to 98765430
+* After: Hans Leonhart's genre is changed to pop and his phone number is changed to 12344321
   ![edit_after.png](images%2Fmusician-features%2Fedit_after.png)
 
 
@@ -344,6 +352,8 @@ For example, when the input command is `find g/rock i/guitar i/piano`
 [Back To ToC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ### Features for managing bands
 
@@ -418,7 +428,15 @@ You have just created a band and are ready to experiment with some cool band mak
 
 **:bulb: Tips:**
 
-You may want to use the `list` command to view all musicians and bands in the application _before_ using this command. This is especially important if you have just executed a `find` command and the musician list is not showing all musicians.
+If you want to view all your musician contact that you can choose from, you may want to use the `list` command _before_ using this command `addm`. This is especially important if you have just executed an irrelevant `find` or `findb` command and are viewing a filtered list.
+
+</div>
+
+<div markdown="block" class="alert alert-success">
+
+**:bulb: Tips:**
+
+You may want to use the `find` command to filter musicians based on instruments or genre _before_ using this command. This allows you to identify musicians who are proficient in the same genre as the band requirement, and optimize your band makeup.
 
 </div>
 
@@ -427,9 +445,11 @@ You may want to use the `list` command to view all musicians and bands in the ap
 You will see a message indicating successful addition of the musician into the band. The `My Bands` panel will update to show **only** the band which the new musicians are added in. The `My Musicians` panel will update to show all **the members of that band.**
 
 For example, when we want to add musicians to a blues/jazz band called "Neo Pixel" (3rd in band panel):
-1. Let's first [find](#find-musicians-find) all musicians who are proficient in blues or jazz with `find g/blues g/jazz`
+1. Let's first find all musicians who are proficient in blues or jazz with `find g/blues g/jazz`
    ![addm_filter.png](images%2Fband-features%2Faddm_filter.png)
-* Let's add all 4 musicians to band "Neo Pixel" with `addm b/3 m/1 m/2 m/3 m/4`.
+
+
+2. Let's add all 4 musicians to band "Neo Pixel" with `addm b/3 m/1 m/2 m/3 m/4`.
  On the right, `My Bands` panel will display the band "Neo Pixel". On the left, `My Musicians` panel will display all musicians in that band.
 ![addm_after.png](images%2Fband-features%2Faddm_afteradding.png)
 
@@ -474,14 +494,24 @@ You have created a few bands and added several musicians to each band. Now, you 
 * While band name is case-insensitive, please do not insert any whitespaces within the band name.
 
 **Upon success:**
-Assume we want to list all members in band "TheoryX", let's use the command `findb TheoryX`
+
+On the left, `My Musicians` panel will display all musicians in the band. On the right, `My Bands` panel will display the band of interest.
+
+For example, if we want to view all members in band "TheoryX" with command `findb TheoryX`
 * Before: From `list` state
   ![findb_before.png](images%2Fband-features%2Flistall.png)
-* After: On the left, `My Musicians` panel will display all musicians in the band. On the right, `My Bands` panel will display the band of interest.
+
+
+* After: On the left, `My Musicians` panel will display all musicians in "TheoryX". On the right, `My Bands` panel will display only "TheoryX".
   ![findb_after.png](images%2Fband-features%2Ffindb.png)
 
 **Upon failure:**
-If you input an invalid band name, an error message `Band does not exist!` will be displayed. Please input a valid band name and enter the command again.
+
+If you input an invalid band name, you will see an error message as shown below.
+```
+Band does not exist!
+```
+Please input a valid band name and enter the command again.
 
 [Back To ToC](#table-of-contents)
 
@@ -514,9 +544,13 @@ You may want to use the [`findb`](#find-band-findb) command to view all the memb
 
 **Upon success:**
 
-Assume we want to remove musician John Doe from band TheoryX.
-* Before: check the band members in TheoryX with `findb TheoryX`
+On the left, `My Musicians` panel will correctly display all musicians in the band, without the deleted musician. On the right, `My Bands` panel will display the band of interest.
+
+For example, we want to remove John Doe from band TheoryX.
+* Before: First double-check the band members in TheoryX with `findb TheoryX`.
   ![findb_after.png](images%2Fband-features%2Ffindb.png)
+
+
 * After: Remove John Doe at position 1 with `removem m/1 b/1`. You will see a message indicating successful removal of the musician from the band like below:
   ![removem_after.png](images%2Fband-features%2Fremovem_after.png)
 
@@ -616,6 +650,8 @@ Please verify that the index is correct and try again.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ### General features
 
 #### Get help: `help`
@@ -693,6 +729,8 @@ You can always refer back to each feature above for detailed explanation and tip
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Command summary
 
 ### List of Valid Instruments/Genres
@@ -721,6 +759,8 @@ The list of valid instruments and genres accept **only lowercase letters**. For 
 
 [Back To ToC](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Band Command summary
 
 | Action                                                              | Format                                                                                   | Examples                                                 |
@@ -747,6 +787,8 @@ The list of valid instruments and genres accept **only lowercase letters**. For 
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Frequently Asked Questions
 
 **Q**: How do I install Java 11?<br>
@@ -756,7 +798,7 @@ The list of valid instruments and genres accept **only lowercase letters**. For 
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Addressbook home folder.
 
 **Q**: Why is BandConnect++ not displaying all musicians/bands?<br>
-**A**:  It's possible that the application may not be displaying all musicians/bands due to previous commands that have filtered either of the lists. If you're encountering this issue, consider using the [list command](#list-all-musicians-and-bands--list) to display all musicians and bands.
+**A**:  It's possible that the application may not be displaying all musicians/bands due to previous commands that have filtered either of the lists. If you're encountering this issue, consider using the [list command](#list-all-musicians-and-bands-list) to display all musicians and bands.
 
 **Q**: What if I accidentally close BandConnect++ without using the exit command? Do I lost all my data?<br>
 **A**: Not to worry! BandConnect++ automatically saves all data after each change you make, so no data is lost.
@@ -784,6 +826,8 @@ The list of valid instruments and genres accept **only lowercase letters**. For 
 [Back To ToC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Troubleshooting
 
