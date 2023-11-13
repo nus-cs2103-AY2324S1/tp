@@ -61,7 +61,7 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Added Product Scope which includes target user profile and value proposition.
     * Added user stories and sort them in terms of priority
-    * Updated UML Diagrams for UI Component to include LoggedPesonListPanel [\#252](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/252)
+    * Updated UML Diagrams for UI Component to include LoggedPersonListPanel [\#252](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/252)
     * Updated UML Diagrams for Model Component to include New Fields for `Person` and New Class `LogBook` [\#252](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/252)
     * Updated UML Diagrams for Storage Component to replace deprecated `JsonAdaptedTags` to `JsonAdaptedMedicalHistory` [\#252](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/252)
 
