@@ -19,7 +19,7 @@ GUI-based tools available.**
 
 Given below are my contributions to the project.
 
-* **New Feature**:
+* **New Features**:
   * Created the `SelectView` panel in the UI.
     [#58](https://github.com/AY2324S1-CS2103T-W17-2/tp/pull/58) and
     [#105](https://github.com/AY2324S1-CS2103T-W17-2/tp/pull/105)
