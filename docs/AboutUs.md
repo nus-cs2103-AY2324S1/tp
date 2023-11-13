@@ -63,7 +63,7 @@ You can reach us at the email `e0958427[at]comp.nus.edu.sg`
 <img src="images/scarletblanks.png" width="200px">
 
 [[github](http://github.com/ScarletBlanks)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/scarletblanks.md)]
 
 * Role: Developer
 * Responsibilities: Code Quality
