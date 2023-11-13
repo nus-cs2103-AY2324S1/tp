@@ -114,8 +114,8 @@ The description of each feature is divided into 6 parts:
 * **Scenario** - A scenario that illustrates when and why the feature is useful.
 * **Format** - The format of the command for the feature.
 * **Examples** - Examples of using the command and their effects.
-* **Outcomes** - The expected successful and failed outcomes.
 * **Things to Note** - Any additional information that the user should take note of when using the feature.
+* **Outcomes** - The expected successful and failed outcomes.
 
 </div>
 
@@ -182,11 +182,14 @@ Instruments: [violin]; Genres: [classical]
 
 **Upon failure:**
 
-If you input a musician which is already in your contact book (i.e. a musician with either the **same name**, the **same phone number**, or the **same email** as an existing contact). You will be shown an error message like below. Please re-enter the correct information.
-```
-This musician already exists in your contact list
-```
+1. If you input a musician which is already in your contact book (i.e. a musician with either the **same name**, the **same phone number**, or the **same email** as an existing contact). You will be shown an error message like below. Please re-enter the correct information.
+    ```
+    This musician already exists in your contact list
+    ```
+2. If you provide invalid arguments for any of the parameters (name, email, etc.) you will be shown the corresponding error message with the correct format to follow. Please re-enter the correct information.
+
 [Back To ToC](#table-of-contents)
+
 #### Delete musician: `delete`
 
 Deletes a musician from your contact list.
@@ -221,7 +224,6 @@ Should you input an index out of the range of the current `My Musicians` list, y
 ```
 The musician index provided is invalid
 ```
-
 Please verify that the index is correct and try again.
 
 [Back To ToC](#table-of-contents)
@@ -248,13 +250,13 @@ You have just found out that a musician contact has changed his/her phone number
 * When editing tags/instruments/genres, the existing tags/instruments/genres of the musician will be removed i.e adding of tags/instruments/genres is not cumulative.
 * You can remove all tags/instruments/genres of the musician by inputting an empty tag/instrument/genre field, e.g. `edit 1 t/ i/ g/`.
 
-    <div markdown="block" class="alert alert-success">
-    
-    **:bulb: Tips:**
+<div markdown="block" class="alert alert-success">
 
-     The syntax for `edit` command is identical to the `add` command except for the additional `INDEX` parameter.
-    
-    </div>
+**:bulb: Tips:**
+
+The syntax for `edit` command is identical to the `add` command except for the additional `INDEX` parameter.
+
+</div>
 
 **Upon success:**
 A success message like below will be displayed.
@@ -277,7 +279,7 @@ Instruments: [violin]; Genres: [pop]
     ```
     At least one field to edit must be provided.
     ```
-2. If you provide invalid arguments for name, phone number, and email, you will be shown the corresponding error message with the correct format to follow. Please re-enter the correct information.
+2. If you provide invalid arguments for any of the parameters (name, email, etc.) you will be shown the corresponding error message with the correct format to follow. Please re-enter the correct information.
 3. If you have provided at least one optional field to edit in the correct format yet the index provided is out of range, you will see the error message below:
     ```
     The musician index provided is invalid
@@ -339,16 +341,34 @@ For example, when the input command is `find g/rock i/guitar i/piano`
 --------------------------------------------------------------------------------------------------------------------
 
 ### Features for managing bands
-[Back to Table of Contents](#table-of-contents)
 
 #### Create band: `addb`
 
-Creates a band with the specified band name and genres.
+**Scenario:**
 
-**Format:** `addb n/BANDNAME [g/GENRE…​]`
+Now, with all the musician contacts in your list, you are ready to create your first band!
 
-Examples:
+**Format:** 
+
+`addb n/BANDNAME [g/GENRE]…​`
+
+**Examples:**
 * `addb n/My Garage Band g/rock`
+
+    This command creates a rock band named "My Garage Band".
+
+**Things to Note:**
+* The name of the band must be unique.
+* To add the genres the band specialises in using the `g/` prefix, you can only add the ones included in a [pre-defined list](#list-of-valid-instrumentsgenres) of genres.
+
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Note:**
+
+This command only creates an empty band with the specified name and genre. To add musicians to the band, please use the [addm](#add-musician-to-band-addm) command.
+
+</div>
 
 **Upon success:**
 
@@ -359,36 +379,47 @@ New band added: My Garage Band; Genres: [rock]
 
 **Upon failure:**
 
-Should you input a band which is already in your contact book (ie. have the same name as an 
-existing band), you will see an error message showing the possible error. Please input a different name for the new 
-band or change the name of the existing band.
-[insert image]
-
-Should you try to add a band with empty genre tags, i.e., addb My Garage Band g/ , you will see a message like below: [insert image]
-```
-Genre tags names should be a valid genre name.
-For a list of valid genres, please use the command 'tags'
-```
+1. Should you input a band which is already in your contact book (i.e. have the same name as an 
+existing band), you will see an error message showing the possible error. Please input a different name.
+2. Should you try to add a band with invalid genre tags, i.e., `addb n/My Garage Band g/water` , you will see a message like below: 
+    ```
+    Genre tags names should be a valid genre name.
+    For a list of valid genres, please use the command 'tags'
+    ```
 
 [Back To ToC](#table-of-contents)
 
 #### Add musician to band: `addm`
 
-Adds a musician to a specified band.
+**Scenario:**
 
-**Format:** `addm b/BAND_INDEX m/MUSICIAN_INDEX…​ `
+You have just created a band and are ready to experiment with some cool band makeups. Let's add some musicians to the band!
+
+**Format:** 
+
+`addm b/BAND_INDEX m/MUSICIAN_INDEX…​ `
+
+**Examples:**
+* `addm b/1 m/1 m/2 ` 
+
+    This command adds the first and second musicians in the `My Musicians` contact list to the first band in the `My Bands` list.
+
 
 **Things to Note:**
 * `BANDINDEX` and `MUSICIANINDEX` must be positive integers 1, 2, 3, …​
-* Before adding any musicians to any band, you should first use the [list](#list-all-musicians-and-bands-list) command to list all musicians and bands.
-* You can only add musicians to a single band. Adding musicians to multiple bands is currently not supported.
+* You can only add musicians to one band at a time. Adding musicians to multiple bands in a single command is currently not supported.
 
-Examples:
-* `addm b/1 m/1 m/2 ` adds the first and second musicians in the `My Musicians` contact list to the first band in the `My Bands` list.
+<div markdown="block" class="alert alert-success">
+
+**:bulb: Tips:**
+
+You may want to use the `list` command to view all musicians and bands in the application _before_ using this command. This is especially important if you have just executed a `find` command and the musician list is not showing all musicians.
+
+</div>
 
 **Upon success:**
 
-You will see a message indicating successful addition of the musician into the band. The `My Bands` panel will update to show ONLY the band which the new musicians are added in. The `My Musicians` panel will update to show all the members of that band.
+You will see a message indicating successful addition of the musician into the band. The `My Bands` panel will update to show **only** the band which the new musicians are added in. The `My Musicians` panel will update to show all **the members of that band.**
 
 For example, when the input command is `addm b/1 m/1 m/2`:
 
@@ -416,16 +447,61 @@ when there is 1 band), you will see an error message below:
     ```
     You can only add musicians to one band at a time
     ```
+   
+[Back To ToC](#table-of-contents)
+
+#### Find band: `findb`
+
+**Scenario:**
+
+You have created a few bands and added several musicians to each band. Now, you would like to find a particular band amd view all the members in it. 
+
+**Format:** 
+
+`findb BANDNAME`
+
+**Examples:**
+* `findb theory X` 
+
+    This command finds the band named "theory X" and displays all the members in it.
+
+**Upon success:**
+* Before: From `list` state
+  ![findb_before.png](images%2Fband-features%2Ffindb_before.png)
+* After: On the left, `My Musicians` panel will display all musicians in the band. On the right, `My Bands` panel will display the band of interest.
+  ![findb_after.png](images%2Fband-features%2Ffindb_after.png)
+
+**Upon failure:**
+If you input an invalid band name, an error message `Band does not exist!` will be displayed. Please input a valid band name and enter the command again.
+
 [Back To ToC](#table-of-contents)
 
 #### Remove musician from band: `removem`
 
-Removes a musician from a specified band. The musician must already exist in the band.
+**Scenario:**
 
-**Format:** `removem b/BANDINDEX m/MUSICIANINDEX`
+After experimenting with the band makeups, you may think that a musician is not a good fit for the band and would like to remove him/her from it.
 
-**Constraints:**
+**Format:** 
+
+`removem b/BANDINDEX m/MUSICIANINDEX`
+
+**Examples:**
+* `removem b/1 m/1` 
+
+    This command removes the first musician in the `My Musicians` contact list from the first band in the `My Bands` list.
+
+**Things to Note:**
 * `BANDINDEX` and `MUSICIANINDEX` must be positive integers 1, 2, 3, …​
+* Unlike the `addm` command, you can only remove **one** musician from a band at a time. 
+
+<div markdown="block" class="alert alert-success">
+
+**:bulb: Tips:**
+
+You may want to use the [`findb`](#find-band-findb) command to view all the members of the band first before using this command.
+
+</div>
 
 **Upon success:**
 * Before: From `list` state
@@ -435,51 +511,37 @@ Removes a musician from a specified band. The musician must already exist in the
 
 **Upon failure:**
 
-Should you input an index that is out of range (e.g. musician index 4 when there are 3 musicians, or band index 2
+1. Should you input an index that is out of range (e.g. musician index 4 when there are 3 musicians, or band index 2
 when there is 1 band), you will see an error message as shown below.
-![removem_error.png](images/band-features/removem_error.png)
-Please input a different index and try again.
-
-In addition, if the musician does not exist in the band, you will see an error message as shown below.
-![removem_notinband.png](images/band-features/removem_notinband.png)
-Please verify that the index of the musician is correct or input a different musician, and try again.
-
-[Back To ToC](#table-of-contents)
-
-#### Find band: `findb`
-Finds the band with the given input name. Lists the band members of the selected band. From `My Bands` panel, find the complete band name of the band.
-
-**Format:** `findb BANDNAME`
-
-**Examples:**
-* `findb theory X` 
-
-**Upon success:**
-* Before: From `list` state
-![findb_before.png](images%2Fband-features%2Ffindb_before.png)
-* After: On the left, `My Musicians` panel will display all musicians in the band. On the right, `My Bands` panel will display the band of interest.
-![findb_after.png](images%2Fband-features%2Ffindb_after.png)
-
-**Upon failure:**
-If you input an invalid band name, an error message `Band does not exist!` will be displayed. Please input a valid band name and enter the command again.
+    ```
+    The musician index provided is invalid
+    ```
+    Please input a valid index and try again.
+2. If the musician does not exist in the band, you will see an error message as shown below.
+    ```
+    Musician (details of the musician omitted here) is not in the band
+    ```
+Please verify that the index of the musician is correct or input a different musician and try again.
 
 [Back To ToC](#table-of-contents)
 
 #### Edit a band: `editb`
 
-Edit the name and genre of a selected band.
-From the current `My Bands` panel, find the index of the band to be edited.
+**Scenario:**
 
-**Format:** `editb INDEX n/NEWNAME g/GENRE…​ `
+You may want to change the name of the band or add/remove the genres of the band as a whole besides adding/removing musicians from the band. This is just as easy as creating the band with `addb`, which you might have already done!
+
+**Format:** 
+
+`editb INDEX n/NEWNAME g/GENRE…​ `
 
 **Examples:**
-* `editb 1 n/Ace`
+* `editb 1 n/Ace g/jazz`
+
+    This command changes the name of the first band in the `My Bands` panel to "Ace" and its genre to "jazz".
 
 **Upon success:**
-* Before: From `list` state
-  ![editb_before.png](images%2Fband-features%2Feditb_before.png)
-* After: On the left, `My Musicians` panel will display all musicians. On the right, `My Bands` panel will display the updated band list.
-  ![editb_after.png](images%2Fband-features%2Feditb_after.png)
+
 You will see a message indicating successful editing of the first band in the band panel like below:
 
 ```
@@ -488,37 +550,38 @@ Edited Band: Ace; Genres: [jazz]
 
 **Upon failure:**
 
-Should you input an index out of the range of the current `My Bands` list, you will see the error message below:
-
-```
-The band index provided is invalid
-```
-
-Should you attempt to change the name of the band to an existing band name stored by the program, you will see the error message below:
-
-```
-This band already exists in the addressbook.
-```
-
-Please verify that the index is correct and try again.
-
-Should you try to tag a band with invalid genre tags, i.e., editb 1 g/poP , you will see a message like below:
-```
-Genre tags names should be a valid genre name.
-For a list of valid genres, please use the command 'tags'
-```
+1. Should you input an index out of the range of the current `My Bands` list, you will see the error message below:
+    ```
+    The band index provided is invalid
+    ```
+2. Should you attempt to change the name of the band to an existing band name stored by the program, you will see the error message below:
+    ```
+    This band already exists in the addressbook.
+    ```
+    Please verify that the index is correct and try again.
+3. Should you try to specify an invalid genre for the band i.e. `editb 1 g/poP` , you will see a message like below:
+    ```
+    Genre tags names should be a valid genre name.
+    For a list of valid genres, please use the command 'tags'
+    ```
+    Please refer to the [list of valid genres](#list-of-valid-instrumentsgenres) and try again.
 
 [Back To ToC](#table-of-contents)
 
 #### Delete a band: `deleteb`
 
-Deletes a band from your contact list.
-From the current `My Bands` panel, find the index of the band to be deleted.
+**Scenario:**
 
-**Format:** `deleteb INDEX`
+You have finished experimenting with the band makeups and gotten your perfect band. Let's delete the rest of the bands since you no longer need them.
+
+**Format:** 
+
+`deleteb INDEX`
 
 **Examples:**
 * `deleteb 1`
+    
+    This command deletes the first band in the `My Bands` panel.
 
 **Upon success:**
 
@@ -545,7 +608,8 @@ Please verify that the index is correct and try again.
 ### General features
 
 #### Get help: `help`
-Access a link to our user guide.
+
+If you need help any time, you can access a link to our user guide.
 
 **Format:** `help`
 
@@ -553,14 +617,10 @@ You will see a window like below, click `Copy URL`, paste the link in any web br
 
 ![images/help/helpWindow.png](images/help/helpWindow.png)
 
-**Command Behavior**
-* Extraneous parameters will be ignored.
-* e.g. if the command specifies `help 1`, it will be interpreted as `help`.
-
 [Back To ToC](#table-of-contents)
 
 #### List all musicians and bands: `list`
-View all musicians and bands in their separate panels.
+You can view all musicians and bands in their separate panels. This command helps you easily identify any changes made to the contact list.
 
 **Format:** `list`
 
@@ -568,30 +628,25 @@ View all musicians and bands in their separate panels.
 
 #### Show all valid instruments and genres: `tags`
 
-View all valid instrument and genre tags for musicians and bands.
+You may want to view all valid instrument and genre tags for musicians and bands.
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Note:**
 
 The instrument and genre tags can be added/edited for a musician using the [add](#add-musician-add) and [edit](#edit-musician-edit) command with prefix `i/` and `g/` respectively.
 
 The genre tags can also be added/edited for a band using the [addb](#create-band-addb) and [editb](#edit-band-editb) command with prefix `g/`. Currently, band does not support instrument tags.
 
+</div>
+
 **Format:** `tags`
-
-**Result:**
-You will see a list of valid instrument and genre tags in the message box like below:
-```
-Listed all valid instrument tags and genre tags below:
-Instrument tags: [bass, cello, clarinet, drums, flute, guitar, piano, saxophone, trumpet, violin, voice, other]
-Genre tags: [blues, classical, country, electronic, folk, hiphop, jazz, latin, metal, pop, rock, soul, other]
-```
-The `My Musicians` and `My Bands` panels will remain unchanged.
-
-![tags.png](images%2Fmusician-features%2Ftags.png)
 
 [Back To ToC](#table-of-contents)
 
 #### Save data
 
-BandConnect++ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+BandConnect++ data are saved in the hard disk automatically after any command that changes the data. You don't have to worry about saving data manually, we take care of that for you!
 
 [Back To ToC](#table-of-contents)
 
@@ -599,11 +654,13 @@ BandConnect++ data are saved in the hard disk automatically after any command th
 
 Clears all data in the application.
 
+**Format:** `clear`
+
 <div markdown="block" class="alert alert-danger">
 
 **:exclamation: Destructive Command!**<br>
 
-This command is irreversible, and all data will be lost. Please use this command with caution.
+This command is irreversible, and all your data will be lost. Please use this command with caution.
 
 </div>
 
@@ -611,17 +668,15 @@ This command is irreversible, and all data will be lost. Please use this command
 
 #### Exit app : `exit`
 
-Exits the program.
+Exits the application.
 
 Format: `exit`
 
-<div markdown="block" class="alert alert-info">
+<br>
 
-:information_source: **Congratulations! You are now ready to use _BandConnect++_ !**
+**Congratulations! You are now ready to use _BandConnect++_ !**
 
-If you wish, please refer to the below section for a more succinct [command summary](#command-summary).
-
-</div>
+You can always refer back to each feature above for detailed explanation and tips. Or, if you need help remembering the syntax, please see below for a more succinct [command summary](#command-summary)!
 
 [Back To ToC](#table-of-contents)
 
@@ -631,10 +686,16 @@ If you wish, please refer to the below section for a more succinct [command summ
 
 ### List of Valid Instruments/Genres
 
-|    Type     |                               Acceptable Values (lowercase only)                                |
+|    Type     |                               Acceptable Values                               |
 |:-----------:|:-----------------------------------------------------------------------------------------------:|
 | Instruments |  bass, cello, clarinet, drums, flute, guitar, piano, saxophone, trumpet, violin, voice, other   |
 |   Genres    | blues, classical, country, electronic, folk, hiphop, jazz, latin, metal, pop, rock, soul, other |
+
+<div markdown="block" class="alert alert-info">
+:information_source: **Note:**
+
+The list of valid instruments and genres accept **only lowercase letters**. For example, `g/Pop` will not be accepted. Please use `g/pop` instead.
+</div>
 
 [Back To ToC](#table-of-contents)
 
@@ -714,7 +775,6 @@ If you wish, please refer to the below section for a more succinct [command summ
 --------------------------------------------------------------------------------------------------------------------
 
 ## Troubleshooting
-[Back to Table of Contents](#table-of-contents)
 
 | Issue                            | Possible Reason                                                                                       | What to do now                                                                                                           |
 |----------------------------------|-------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
