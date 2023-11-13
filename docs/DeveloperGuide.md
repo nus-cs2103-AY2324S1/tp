@@ -34,7 +34,7 @@
         * [Implementing `AddTagCommandParser` and `DeleteTagCommandParser`](#implementing-addtagcommandparser-and-deletetagcommandparser)
         * [Implementing `AddTagCommand`](#implementing-addtagcommand)
         * [Implementing `DeleteTagCommand`](#implementing-deletetagcommand)
-        * [Design Considerations](#design-considerations)
+        * [Design Considerations: Tag](#design-considerations-tag)
     * [Notes feature](#notes-feature)
         * [Overview: Note](#overview-note)
         * [Implementing `AddNoteCommandParser`](#implementing-addnotecommandparser)
@@ -42,9 +42,9 @@
         * [Implementing `AddNoteCommand`](#implementing-addnotecommand)
         * [Implementing `DeleteNoteCommand`](#implementing-deletenotecommand)
     * [Enhanced help feature](#enhanced-help-feature)
-    * [[Proposed] Undo/redo feature](#proposed-undoredu-feature)
+    * [[Proposed] Undo/redo feature](#proposed-undoredo-feature)
         * [Proposed Implementation](#proposed-implementation)
-        * [Design Considerations](#design-considerations-1)
+        * [Design Considerations: Undo/redo](#design-considerations-undoredo)
 * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 * [Appendix A: Requirements](#appendix-a-requirements)
     * [Product Scope](#product-scope)
@@ -313,7 +313,7 @@ The following activity diagram summarizes what happens when the `DeleteTagComman
 
 <puml src="diagrams/tag/DeleteTagActivityDiagram.puml"/>
 
-#### Design Considerations:
+#### Design Considerations: Tag
 
 **Aspect: Deletion of non-existing tag:**
 
@@ -480,7 +480,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
-#### Design considerations:
+#### Design considerations: Undo/redo
 
 **Aspect: How undo & redo executes:**
 
