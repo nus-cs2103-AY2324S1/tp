@@ -331,6 +331,10 @@ The following sequence diagram shows how the gather emails by `FinancialPlan` fi
 
 ![GatherSequenceDiagram2](images/GatherSequenceDiagram2.png)
 
+The following activity diagram illustrates how the complete operation is executed:
+
+![GatherClassActivityDiagram](images/GatherClassActivityDiagram.png)
+
 #### Design Considerations
 
 **Aspect: How many inputs to accept**
@@ -451,6 +455,10 @@ The `setAppointmentList()` method checks against `filteredPersons` to look for u
 The `getAppointmentList()` method is called once during the startup of the program by `getAppointmentList()` in `LogicManager`, which is in turn called by `MainWindow`. It returns the `sortedList<Appointment>` object within `modelManager`.
 
 Do note that appointments are inherently sorted by their date and time, with the earliest appointment showing up at the top.
+
+The following sequence diagram shows how the appointment list is updated. The `setPerson()` method is being called in the `ScheduleCommand#execute()` method. `ModelManager#addToAppointmentIfPresent()` method adds an `Appointment` object into the `ObservableList<Appointment>` if the `Person` object in `filteredPersons` has a `scheduleItem` object that is an instance of `Appointment`.
+
+<img src="images/AppointmentListSequenceDiagram.png" width="700"/>
 
 #### Design Considerations
 

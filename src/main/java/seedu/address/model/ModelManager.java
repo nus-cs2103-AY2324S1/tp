@@ -26,6 +26,7 @@ import seedu.address.model.person.gatheremail.GatherEmailPrompt;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private static final SortByAppointmentDateComparator appointmentComparator = new SortByAppointmentDateComparator();
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
@@ -48,7 +49,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(sortedPersons);
         observableAppointments = FXCollections.observableArrayList();
         sortedAppointments = new SortedList<>(observableAppointments,
-                                              new SortByAppointmentDateComparator());
+                                              appointmentComparator);
     }
 
     public ModelManager() {
@@ -119,7 +120,6 @@ public class ModelManager implements Model {
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        setAppointmentList();
     }
 
     @Override
@@ -142,6 +142,7 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
+        setAppointmentList();
         return filteredPersons;
     }
 
@@ -155,18 +156,21 @@ public class ModelManager implements Model {
         return sortedAppointments;
     }
 
+    /**
+     * Sets the appointment list. This method is called every time a command is being executed.
+     */
     public void setAppointmentList() {
         observableAppointments.clear();
-        // appointmentList.add(new Appointment("appointment123", LocalDateTime.now()));
-        for (int i = 0; i < filteredPersons.size(); i++) {
-            ScheduleItem appt = filteredPersons.get(i).getAppointment();
-            if (appt instanceof Appointment) {
-                Appointment tmp = (Appointment) appt;
-                tmp.setPerson(filteredPersons.get(i));
-                observableAppointments.add(tmp);
+        filteredPersons.forEach(person -> addToAppointmentListIfPresent(person));
+    }
+
+    public void addToAppointmentListIfPresent(Person person) {
+        ScheduleItem scheduleItem = person.getAppointment();
+            if (scheduleItem instanceof Appointment) {
+                Appointment appointment = (Appointment) scheduleItem;
+                appointment.setPerson(person);
+                observableAppointments.add(appointment);
             }
-        }
-        sortedAppointments.setComparator(new SortByAppointmentDateComparator());
     }
 
     @Override
@@ -185,7 +189,6 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
         setAppointmentList();
-        filteredPersons.setPredicate(predicate);
     }
 
 
