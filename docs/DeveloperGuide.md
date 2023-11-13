@@ -67,8 +67,11 @@ For example, the `Logic` component's API is defined in `Logic.java`, and its fun
 - **API**: [`Ui.java`](https://github.com/AY2324S1-CS2103T-T12-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 - The UI component is responsible for handling all user interface operations.
 
+- Class Diagram - Core UI Components:
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
-<puml src="diagrams/UiDetailedClassDiagram.puml"/>
+
+- Class Diagram - Supplementary UI Components:
+<puml src="diagrams/UiDetailedClassDiagram.puml" alt=""/>
 
 The UI is composed of various components such as `MainWindow`, `CommandBox`, `ResultDisplay`, `PersonListPanel`, and `StatusBarFooter`, all of which inherit from the `UiPart` class.
 
@@ -152,7 +155,7 @@ A `Person` object encapsulates various attributes:
 - `Age`: Patient's age
 - `BloodType`: Patient's blood type
 - `Set<Allergy>`: Patient's allergies
-- `UniqueRecordList`: Patient's records of past visits to the clinic.
+- `UniqueRecordList`: Patient's records from past visits to the clinic.
 - `UniqueAppointmentList`: Patient's scheduled appointments.
 - `isPinned`: Patient's pin status.
 
@@ -261,7 +264,7 @@ The `search` command filters the list of patients using one or more keywords.
 
 1. **Parse User Input**: `FindCommandParser` checks for existence of the keyword(s) and creates an array of keywords.
 2. **Create Predicate Object**: A `NameContainsKeywordsPredicate` object is instantiated during `FindCommandParser#parse(String)` and passed over to the `FindCommand`.
-3. **Execute Command**: `Findommand#execute(Model)` finds patients containing keywords using `NameContainsKeywordsPredicate#test(Record)` and updates `FilteredPersonList`.
+3. **Execute Command**: `FindCommand#execute(Model)` finds patients containing keywords using `NameContainsKeywordsPredicate#test(Record)` and updates `FilteredPersonList`.
 
 <puml src="diagrams/SearchSequenceDiagram.puml"/>
 
@@ -623,7 +626,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **System**: MedBook
 - **Main Success Scenario (MSS)**:
   1. User requests for help.
-  2. MedBook displays help information.
+  2. MedBook displays help information.<br>
      Use case ends.
 
 ### UC02 - Adding a Patient
@@ -633,7 +636,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Main Success Scenario (MSS)**:
   1. User requests to add a new patient.
   2. User enters the patient's details.
-  3. MedBook adds the patient to the system.
+  3. MedBook adds the patient to the system.<br>
      Use case ends.
 - **Extensions**:
   - 2a. MedBook detects an error in the entered patient's details.
@@ -649,7 +652,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Preconditions**: There is at least one patient entry in the system.
 - **Main Success Scenario (MSS)**:
   1. User requests to list patients.
-  2. MedBook shows a list of patients.
+  2. MedBook shows a list of patients.<br>
      Use case ends.
 
 ### UC04 - Editing a Patient's Details
@@ -661,7 +664,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   1. User lists all patients (UC03).
   2. User requests to edit a patient's details.
   3. User enters the new patient details.
-  4. MedBook updates the patient details.
+  4. MedBook updates the patient details.<br>
      Use case ends.
 - **Extensions**:
   - 3a. MedBook detects an error in the entered patient's details.
@@ -679,7 +682,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   1. User lists all patients (UC03).
   2. User requests to search for a specific patient.
   3. User enters search criteria.
-  4. MedBook performs a search and displays matching patients.
+  4. MedBook performs a search and displays matching patients.<br>
      Use case ends.
 - **Extensions**:
   - 4a. No matches found.
@@ -695,7 +698,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   1. User lists all patients (UC03).
   2. User requests to delete a specific patient.
   3. User enters patient ID.
-  4. MedBook deletes the patient.
+  4. MedBook deletes the patient.<br>
      Use case ends.
 - **Extensions**:
   - 3a. MedBook detects an error in the entered patient's ID.
@@ -713,7 +716,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   1. User lists all patients (UC03).
   2. User requests to pin a specific patient.
   3. User enters patient ID.
-  4. MedBook pins the patient.
+  4. MedBook pins the patient.<br>
      Use case ends.
 - **Extensions**:
   - 3a. MedBook detects an error in the entered patient's ID.
@@ -730,7 +733,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Main Success Scenario (MSS)**:
   1. User requests to unpin a specific patient.
   2. User enters the patient's PINNEDID.
-  3. MedBook unpins the patient.
+  3. MedBook unpins the patient.<br>
      Use case ends.
 - **Extensions**:
   - 2a. MedBook detects an error in the entered PINNEDID.
@@ -748,7 +751,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   1. User lists all patients (UC03).
   2. User requests to add a new record to a patient.
   3. User enters the record's details.
-  4. MedBook adds the record to the patient.
+  4. MedBook adds the record to the patient.<br>
      Use case ends.
 - **Extensions**:
   - 3a. MedBook detects an error in the entered record's details.
@@ -766,7 +769,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   1. User lists all patients (UC03).
   2. User requests to view a specific patient's records.
   3. User enters the patient ID.
-  4. MedBook displays the records of the patient.
+  4. MedBook displays the records of the patient.<br>
      Use case ends.
 - **Extensions**:
   - 3a. MedBook detects an error in the entered patient's ID.
@@ -784,7 +787,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   1. User views a patient’s medical records (UC10).
   2. User requests to edit a patient’s record’s details.
   3. User enters new record details.
-  4. MedBook updates the record’s details.
+  4. MedBook updates the record’s details.<br>
      Use case ends.
 - **Extensions**:
   - 3a. MedBook detects an error in the entered record’s details.
@@ -802,7 +805,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   1. User views a patient’s medical records (UC10).
   2. User requests to delete a patient’s record.
   3. User enters the patient ID and record ID.
-  4. MedBook deletes the record.
+  4. MedBook deletes the record.<br>
      Use case ends.
 - **Extension**:
   - 3a. MedBook detects an error in the entered patient ID and/or record ID.
@@ -817,10 +820,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **System**: MedBook
 - **Preconditions**: There is at least one record entry in the patient.
 - **Main Success Scenario (MSS)**:
-  1. User views a patient (UC10)
+  1. User views a patient (UC10).
   2. User requests to search for a specific records.
   3. User enters search keywords.
-  4. MedBook performs a search and displays matching record.
+  4. MedBook performs a search and displays matching record.<br>
+     Use case ends.
 - **Extension**:
   - 4a. No matches found.
     - 4a1. MedBook informs the user that there were no matches.
@@ -834,10 +838,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Main Success Scenario (MSS)**:
   1. User requests to add a new appointment to a patient.
   2. User enters the appointment's details.
-  3. MedBook adds the appointment to the patient.
+  3. MedBook adds the appointment to the patient.<br>
      Use case ends.
 - **Extensions**:
-  - 2a. MedBook detects an error in the entered appointement's details.
+  - 2a. MedBook detects an error in the entered appointment's details.
     - 2a1. MedBook shows an error message.
     - 2a2. User enters new appointment details.
     - Steps 2a1-2a2 are repeated until the appointment details entered is correct.
@@ -849,7 +853,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **System**: MedBook
 - **Main Success Scenario (MSS)**:
   1. User requests to view appointments.
-  2. MedBook shows the user all appointments
+  2. MedBook shows the user all appointments.<br>
      Use case ends.
 
 ### UC16 - Deleting an Appointment
@@ -861,7 +865,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   1. User views all appointments (UC15).
   2. User requests to delete a new appointment.
   3. User enters the appointment's ID.
-  4. MedBook deletes the appointment.
+  4. MedBook deletes the appointment.<br>
+     Use case ends.
 - **Extensions**:
   - 3a. MedBook detects an error in the entered appointment ID.
     - 3a1. MedBook shows an error message.
@@ -877,12 +882,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Main Success Scenario (MSS)**:
 
 1.  User views a patient’s medical records (UC10).
-2.  User requests to attach a file to a record of a patient
-3.  User selects a file
-4.  MedBook saves the file to the medical record
+2.  User requests to attach a file to a record of a patient.
+3.  User selects a file.
+4.  MedBook saves the file to the medical record.<br>
+    Use case ends.
 
 - **Extension**:
-- 2a. User does not choose a file
+- 2a. User does not choose a file.
   - 2a1. MedBook displays an error message.
   - Use case ends.
 
@@ -893,11 +899,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Preconditions**: There is at least one record entry with file attached previously in the patient
 - **Main Success Scenario (MSS)**:
 
-1.  User requests to view a file attached to a record
-2.  MedBook opens the file on the user’s default launcher
+1.  User requests to view a file attached to a record.
+2.  MedBook opens the file on the user’s default launcher.<br>
+    Use case ends.
 
 - **Extension**:
-- 1a. File does not exist in user’s local storage
+- 1a. File does not exist in user’s local storage.
   - 1a1. MedBook displays an error message.
   - Use case ends.
 
@@ -1053,7 +1060,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### View Patient's Medical Records
 
-1. Prerequisites: Ensure the patient list is displayed and contains the entry you wish to edit.
+1. Prerequisites: Ensure the patient list is displayed and contains the entry you wish to view.
 2. Test Case: `view 1`
    - Expected: Medical records of the first patient are displayed, details shown in the status message.
 3. Test Case: `view 0`

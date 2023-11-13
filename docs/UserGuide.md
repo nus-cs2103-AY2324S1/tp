@@ -270,7 +270,7 @@ Congratulations! You are now ready to explore MedBook on your own. Experiment wi
 
 **Notes for `EMAIL` format:** <br>
 
-1. The **local-part** should only contain alphanumeric characters and these special characters: `+`, `\`, `_`, `.`, `-`. The **local-part** may not start or end with any special characters. <br>
+1. The **local-part** should only contain alphanumeric characters and these special characters: `+`, `_`, `.`, `-`. The **local-part** may not start or end with any special characters. <br>
 
 2. This is followed by an `@` and then a **domain** name. The **domain** name is made up of **domain** labels separated by periods. <br>
 
@@ -292,7 +292,13 @@ The **domain** name must: <br>
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
-### Viewing help: `help`
+### Viewing help : `help`
+
+<box type="tip" seamless>
+
+  **Tip**:If you get stuck while using MedBook, use the help command to get a quick overview of all commands!
+
+</box>
 
 Opens/focuses the **Help Window** displaying all commands.
 
@@ -301,6 +307,12 @@ Format: `help`
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ### Adding a patient: `addpatient`
+
+<box type="tip" seamless>
+
+**Tip**:Wants to add a new patient?  Try out the `addpatient` command!
+
+</box>
 
 Adds a new patient to the system.
 
@@ -312,7 +324,7 @@ Example:
 
 `addpatient n/John Doe i/T1234567A e/johndoe@gmail.com p/12345678 g/M a/26 bt/AB+ al/Penicillin`
 Adds a **Male** patient named **John Doe** whose NRIC is **T1234567A** , **26** years old, has **AB+** Blood Type, and is allergic to **Penicillin**.
-His email and phone number is **johndoe@gmail.com** and **12345678**, respectively.
+His email and phone number is **johndoe@gmail.com** and **12345678** respectively.
 
 Screenshots:
 
@@ -322,6 +334,12 @@ Screenshots:
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ### Adding a medical record: `addrecord`
+
+<box type="tip" seamless>
+
+**Tip**:Don't know how to add a medical record to the patient? Check out the `addrecord` command!
+
+</box>
 
 Adds a new medical record to the system.
 
@@ -347,6 +365,12 @@ Screenshots:
 
 ### Adding an appointment: `addappointment`
 
+<box type="tip" seamless>
+
+**Tip**:Wants to add an appointment? The `addappointment` command is here to help you!
+
+</box>
+
 Adds a new appointment to the system.
 
 Format: `addappointment PATIENTID n/NAME d/DATETIME`
@@ -366,6 +390,12 @@ Screenshots:
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ### Viewing patient medical records: `view`
+
+<box type="tip" seamless>
+
+**Tip**:Don't know how to display medical records? Easily view them by `view` command!
+
+</box>
 
 Displays the medical records of a specific patient.
 
@@ -394,6 +424,12 @@ Screenshots:
 
 ### Viewing appointments: `viewappointment`
 
+<box type="tip" seamless>
+
+**Tip**:Wish to know about the upcoming appointments? Simply type in `viewappointment`! 
+
+</box>
+
 Opens/focuses the **Appointment Window**.
 
 Format: `viewappointment`
@@ -401,6 +437,12 @@ Format: `viewappointment`
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ### Editing a patient: `editpatient`
+
+<box type="tip" seamless>
+
+**Tip**:Just entered a wrong detail of the patient? Use `editpatient` to correct it!
+
+</box>
 
 Edits the details of an existing patient.
 
@@ -430,7 +472,7 @@ Examples:
 
 - `editpatient 2 p/92345678` Edits the `PHONE` of the patient with the `PATIENTID` of **2** to **92345678**. <br>
 
-- `editpatient 3 al/aspirin` Edits the `ALLERGY` of the patient with the `PATIENTID` of **3** to**aspirin**. <br>
+- `editpatient 3 al/aspirin` Edits the `ALLERGY` of the patient with the `PATIENTID` of **3** to **aspirin**. <br>
 
 - `editpatient 2 p/92345678 al/aspirin` Edits the `PHONE` and `ALLERGY` of the patient with the `PATIENTID` of **2** to **92345678** and **aspirin**, respectively. <br>
 
@@ -442,6 +484,12 @@ Screenshots:
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ### Editing a medical record: `editrecord`
+
+<box type="tip" seamless>
+
+**Tip**:Spotted an error in the medical record? Fret not, the `editrecord` is here!
+
+</box>
 
 Edits the details of an existing medical record.
 
@@ -466,6 +514,12 @@ Examples:
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ### Locating patients by keywords: `search`
+
+<box type="tip" seamless>
+
+**Tip**:Cannot find the patient you're looking for? If you remember one of his/her details, `search` will help you find him/her!
+
+</box>
 
 Searches for patients with details containing the corresponding `KEYWORD`.
 
@@ -506,6 +560,12 @@ Screenshots:
 
 ### Locating medical records by keywords: `searchrecord`
 
+<box type="tip" seamless>
+
+**Tip**:Feeling frustrated by the huge amount of records? Use `searchrecord` to locate the ones you need!
+
+</box>
+
 Searches for medical records of the Patient Being Viewed with details containing the corresponding `KEYWORD`.
 
 Format: `searchrecord KEYWORD [MOREKEYWORDS]...`
@@ -534,6 +594,12 @@ Examples:
 
 ### Listing all patients: `list`
 
+<box type="tip" seamless>
+
+**Tip**:Just used `search` command and don't know how to get back? Simply type `list` to display all patients!
+
+</box>
+
 Shows a list of all patients.
 
 Format: `list`
@@ -549,6 +615,12 @@ Format: `list`
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ### Deleting a patient: `delete`
+
+<box type="tip" seamless>
+
+**Tip**:Wants to remove irrelevant patient? `delete` is here to help you!
+
+</box>
 
 Deletes an existing patient from the system.
 
@@ -569,6 +641,12 @@ Screenshots:
 
 ### Deleting a medical record: `deleterecord`
 
+<box type="tip" seamless>
+
+**Tip**: The record is faulty and you want to remove it? Enter `deleterecord` to get rid of it!
+
+</box>
+
 Deletes an existing medical record from the system.
 
 Format: `deleterecord PATIENTID/RECORDID`
@@ -583,6 +661,12 @@ Example:
 
 ### Deleting an appointment: `deleteappointment`
 
+<box type="tip" seamless>
+
+**Tip**:A patient cannot attend an appointment? Use `deleteappointment` to cancel it!
+
+</box>
+
 Deletes an appointment from the system.
 
 Format: `deleteappointment APPOINTMENTID`
@@ -596,6 +680,12 @@ Example:
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ### Pinning a Patient: `pin`
+
+<box type="tip" seamless>
+
+**Tip**: A patient requires follow-up? `pin` can help you remember to contact them!
+
+</box>
 
 Pins an existing patient.
 
@@ -616,6 +706,12 @@ Screenshots:
 
 ### Unpinning a Patient: `unpin`
 
+<box type="tip" seamless>
+
+**Tip**:A patient no longer needs extra attention? Easily remove them from *Pinned Patient List* by `unpin` command!
+
+</box>
+
 Unpins a pinned patient.
 
 Format: `unpin PINNEDID`
@@ -629,6 +725,12 @@ Examples:
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ### Attaching files to a patient's medical record
+
+<box type="tip" seamless>
+
+**Tip**:A patient's report just comes out? The `attach file` feature can help you keep documents in an organised manner!
+
+</box>
 
 Attach local files to a patient's medical record by clicking on the **Attach** button located within each **Record Card**.
 
@@ -685,6 +787,8 @@ MedBook data is saved automatically as a JSON file located in `[jar file locatio
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and copy the `data` folder over to the folder of the installed jar file in the other computer.
 
+**Q**: I just entered a very long allergy and the format of *Patient Card* goes messy.
+**A**: MedBook does not accept extreme inputs. Try resizing the window and see if that helps. We also aim to amend this issue in next iteration.
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ---
