@@ -966,9 +966,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The Application needs to have proper documentation and user guide so that users can understand how to use the application.
-5.  The Application should allow users to create and customize their profiles, including preferences for shortcuts, views, and layouts, to enhance the user experience.
-6.  The Application should be able to handle multiple windows at the same time.
-7.  The Application should comply with the specific policies and regulations of the university regarding data storage, security, and access control.
+5.  The Application should allow users to customize the color scheme to enhance the user experience.
 
 ### Glossary
 
@@ -1101,31 +1099,24 @@ Testers are expected to do more *exploratory* testing.
    1. Test case: `delete s/STUDENT_NUMBER`<br>
       Expected: STUDENT_NUMBER is a valid Student Number that exists in the Class Manager. The student with STUDENT_NUMBER is deleted from the list. Details of the deleted student shown in the result display box.
       <br><br>
-2. Delete a student that is not in Class Manager.
+2. Delete a student with an invalid student number.
 
    1. Test case: `delete s/vnqvq1924`<br>
       Expected: No student is deleted. Student Number error details shown in the result display box.
       <br><br>
-3. Delete a student with an invalid student number.
-
-   1. Other incorrect delete commands to try: `delete`, `delete s/x`, `...` (where x is an invalid student number)<br>
-      Expected: No student is deleted. Command format error details shown in the result display box.
-   2. Test case: `delete`<br>
-      Expected: No student is deleted. Command format error details shown in the result display box.
-      <br><br>
    
 ### Edit a student
 
-1. Edit a student's details in the current students list.
+1. Edit a student's details in Class Manager.
 
    1. Test case: `edit STUDENT_NUMBER n/NAME`<br>
       Expected: The student with STUDENT_NUMBER is edited to have the new NAME.
    2. Test case: `edit STUDENT_NUMBER s/NEW_STUDENT_NUMBER`<br>
       Expected: The student with STUDENT_NUMBER is edited to have the NEW_STUDENT_NUMBER.
       <br><br>
-2. Edit a student's details where the student is not in the list (Invalid Student Number).
+2. Edit a student's details where the original student number is not in Class Manager.
 
-   1. Test case: Edit command with Student Number that is not present in the list <br>
+   1. Test case: Edit command with original student number not in Class Manager.<br>
       Expected: No student is edited. Error details shown in the result display box.
       <br><br>
 
@@ -1378,3 +1369,4 @@ Testers are expected to do more *exploratory* testing.
 4. Class Participation is currently limited to being true or false for each tutorial session. We plan to allow Class Participation to be an enum level instead, such as `NONE`, `MINIMAL`, `SUFFICIENT`, `ACTIVE`, `VERY_ACTIVE` etc. to allow for better representation of student's efforts in class.
 5. Users currently can only search for basic student information. We plan to allow users to search based on class information in the future. For example, users can search for students with a certain grade or attendance percentage.
 6. The lookup command currently does not check for invalid fields. We plan to add field validation to the lookup command in the future.
+7. The comment command doesn't support handling long strings (exact length depends on the size of the user's screen) as it might get cut off. We plan to allow users to add comments of any length that will not get cut off in the future.
