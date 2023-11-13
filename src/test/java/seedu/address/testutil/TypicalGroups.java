@@ -33,7 +33,7 @@ public class TypicalGroups {
                                         .withTimeIntervalList("mon 1200 - mon 1400", "wed 1600 - thu 1800")
                                         .build();
 
-    public static GroupList getTypicalPGroup() {
+    public static GroupList getTypicalGroupList() {
         GroupList groupList = new GroupList();
         Group[] groupArray = {CS2100, CS2102, CS2103, CS2105};
         Arrays.stream(groupArray).forEach(groupList::add);
