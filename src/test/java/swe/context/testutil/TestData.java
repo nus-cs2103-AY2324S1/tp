@@ -214,6 +214,7 @@ public final class TestData {
         public static final String PHONE_DESC = " " + PREFIX_PHONE + "99 (need 3+ digits)";
         public static final String EMAIL = "example.com";
         public static final String EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo";
+        public static final String ALTERNATE_CONTACT = "ContactNoColonSpaceAfter";
 
         /**
          * Holds {@code Tag}-related data.

@@ -46,6 +46,10 @@ Once you are familiarised, feel free to use the `clear` command to delete all th
 
 ## Features
 
+At a glance: the information that can be stored with each contact, and how it will appear in the application, is labelled below. 
+
+![ContactCard](images/ContactCard.png)
+
 <div markdown="block" class="alert alert-info">
 **:information_source: About the command format:**<br />
 
@@ -59,6 +63,7 @@ e.g. in `add n/NAME`, you should specify a `NAME` such as `add n/John Doe`.
 - Parameters in square brackets are optional.<br />
 e.g in `n/NAME [o/NOTE]`, you could specify `n/John Doe o/Good at SE.`, or just `n/John Doe`.
 
+<!-- NOTE The empty space below (in the ` `) is a non-breaking space, not a normal space. This forces Jekyll's Kramdown to preserve the space. -->
 - Parameters with `…`​ after them can be specified multiple times.<br />
 e.g. in `[t/TAG]…​`, which is optional but can also be specified multiple times, you could specify ` ` (none specified), `t/NUS`, `t/NUS t/CS2103 course` etc.
 
@@ -80,7 +85,7 @@ Hence, you will not be able to add a new contact with the same name as an existi
 
 For example, if you already have a contact with name `John Doe`, you will not be able to add another contact with the same name `John Doe`.
 For two names to be considered the same, they must be identical in every way, and that includes casing, as well as whitespace in the middle of the name, etc.
-Therefore, you may add another contact with name `John doe`, `John    Doe`, or `Alex John Doe`. 
+Therefore, you may add another contact with name `John doe`, `John    Doe`, or `Alex John Doe`.
 You may also first modify the name of the existing contact.
 
 Should you need to make changes to an existing contact, use the `edit` command as explained below.
@@ -94,16 +99,21 @@ Phone numbers must contain at least 3 digits. You can add extra information afte
 For additional phone numbers, please make use of `ALTERNATE_CONTACT`
 </div>
 
-<div markdown="span" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 :information_source: **About tags:**
-Duplicate tags are only counted once.
+
+- Duplicate tags are only counted once.
+- Specifying empty tags (`t/` with no value) is not allowed when adding contacts. If you wish to specify no tags, you may simply leave out the `t/` parameter.
 </div>
 
-<div markdown="span" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 :information_source: **About the alternate contact format:**
-The format for `ALTERNATE_CONTACT` is `TYPE: USERNAME`, roughly looking like `SocialMedia: Username`. Ensure to include a space between the colon and the Username.
-Do note at this moment whitespace is not supported for `TYPE` and `USERNAME`. `USERNAME` only supports alphanumerics and some special characters `.`, `_` and `-`.
+- The format for `ALTERNATE_CONTACT` is `TYPE: USERNAME`, roughly looking like `SocialMedia: Username`. Ensure to include a space between the colon `:` and the `Username`.
+- Do note at this moment whitespace is not supported for `TYPE` and `USERNAME`. `USERNAME` only supports alphanumerics and some special characters `.`, `_` and `-`.
+- Specifying empty alternate contacts (`a/` with no value) is not allowed when adding contacts. If you wish to specify no alternate contacts, you may simply leave out the `a/` parameter.
 </div>
+
+
 
 **Examples:**
 
@@ -136,8 +146,8 @@ Please refer to the [above](#adding-a-contact-add).
 - Each specified parameter will have its new value(s) replace all existing value(s) for that parameter.\
 e.g. `edit 1 n/The Myth` will edit the name of contact #`1` to `The Myth`, without changing any other parameter values for that contact.
     - When editing tags, the new specified tag(s) will similarly replace all existing tag(s).\
-    You can specify no tags via a _single_ `t/` without a value.
-    - Likewise, when editing alternate contacts, you can specify no alternate contacts via a _single_ `a/` without a value.
+    You can specify no tags (i.e. clear all tags) via a _single_ `t/` without a value.
+    - Likewise, when editing alternate contacts, you can specify no alternate contacts (i.e. clear all alternate contacts) via a _single_ `a/` without a value.
 
 **Examples:**
 
@@ -160,8 +170,8 @@ Please refer to the [above](#editing-a-contact-edit).
 
 - You can delete multiple contacts at once by specifying multiple indices separated by spaces.
 
-- Duplicate indices are only counted once.
-
+- Duplicate indices are only counted once.\
+e.g. `delete 1 1` will only delete the contact at index #`1`.
 - Invalid indices will cause abortion of the delete command.
 
 
@@ -229,8 +239,8 @@ Shows contacts with a tag that fully matches the specified tag (case-insensitive
   e.g. `filter Friend` will _not_ match the tag `Close Friend`.
 
 - The keyword can contain spaces.\
-  e.g. `filter Close Friend` will match the tag `Close Friend` (and this tag only).  
-  e.g. <pre>`filter Close           Friend`</pre> will _not_ match the tag `Close Friend`.
+  e.g. `filter Close Friend` will match the tag `Close Friend` (and this tag only).
+  e.g. `filter Close⠀⠀⠀⠀⠀⠀⠀⠀Friend` will _not_ match the tag `Close Friend`.
 
 - In summary, `filter` looks for tags which are an exact match, ignoring casing only.
 
@@ -264,6 +274,20 @@ The displayed contact list is always automatically sorted in ascending alphabeti
 ### Automatic saving
 
 Your contacts get automatically saved to the file system after each successful command execution. There is no need to save manually.
+
+### Editing the data file
+
+ConText data are saved automatically as a JSON file `[JAR file location]/data/contacts.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, ConText will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+</div>
+
+---
+## FAQ
+
+**Q**: How do I transfer my data to another Computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ConText home folder.
 
 ---
 

@@ -85,4 +85,18 @@ public class EditContactDescriptorTest {
         assertEquals(expected, editContactDescriptor.toString());
     }
 
+    @Test
+    public void toString_nonEmptyFields() {
+        // Test toString when fields are present
+        EditContactDescriptor descriptor = new EditContactDescriptor(TestData.Valid.EditDescriptor.AMY);
+        String expected = EditContactDescriptor.class.getCanonicalName() + "{name="
+                + descriptor.getName().orElse(null) + ", phone="
+                + descriptor.getPhone().orElse(null) + ", email="
+                + descriptor.getEmail().orElse(null) + ", note="
+                + descriptor.getNote().orElse(null) + ", tags="
+                + descriptor.getTags().orElse(null) + ", alternate contacts="
+                + descriptor.getAlternateContacts().orElse(null) + "}";
+        assertEquals(expected, descriptor.toString());
+    }
+
 }

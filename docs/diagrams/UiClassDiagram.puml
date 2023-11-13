@@ -15,6 +15,7 @@ Class ContactListPanel
 Class ContactCard
 Class StatusBarFooter
 Class CommandBox
+Class CommandBoxHistory
 }
 
 package Model <<Rectangle>> {
@@ -35,6 +36,8 @@ MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" ContactListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
+
+CommandBox --> "1" CommandBoxHistory
 
 ContactListPanel -down-> "*" ContactCard
 

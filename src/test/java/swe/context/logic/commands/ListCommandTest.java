@@ -36,4 +36,12 @@ public class ListCommandTest {
         showContactAtIndex(model, TestData.IndexContact.FIRST_CONTACT);
         assertCommandSuccess(new ListCommand(), model, Messages.COMMAND_LIST_SUCCESS, expectedModel);
     }
+
+    @Test
+    public void execute_emptyContactList_showsEmptyList() {
+        model = new ModelManager();
+        expectedModel = new ModelManager();
+        assertCommandSuccess(new ListCommand(), model, Messages.COMMAND_LIST_SUCCESS, expectedModel);
+    }
+
 }
