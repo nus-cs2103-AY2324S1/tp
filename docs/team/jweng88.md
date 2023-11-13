@@ -74,7 +74,8 @@ Given below are my contributions to the project.
     [#98](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/98),
     [#101](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/101))
     * Standardising formatting and proofreading UG and DG 
-    [#233](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/233).
+    [#233](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/233),
+    [#355](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/355).
 
 * **Review/ mentoring contributions**:
     * Reviewed PRs: [#24](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/24), 
@@ -98,5 +99,6 @@ Given below are my contributions to the project.
     [#328](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/328),
     [#333](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/333),
     [#336](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/336),
-    [#339](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/339).
+    [#339](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/339),
+    [#354](https://github.com/AY2324S1-CS2103T-T17-3/tp/pull/354).
 
