@@ -1520,10 +1520,10 @@ testers are expected to do more <i>exploratory testing</i>.
 
 ### 8. Standardise all command behaviours
 
-- **Enhancement**: Modify the behavior of deleteAllDone to be similar with the other delete commands.
+- **Enhancement**: Modify the behavior of `deleteAllDone` to be similar with the other delete commands.
 - **Reason**: To reduce the confusion of the user when using the application and standardise all delete behaviours in the application.
 - **Example**:
-  - Currently, when a user uses the `deleteAllDone` command, the task list resets to show all tasks after deletion. However, when a user uses the other `delete..` commands, the task list does not reset the list after deletion.
+  - Currently, when a user uses the `deleteAllDone` command, the task list resets to show all tasks after deletion. However, when a user uses the other `delete…` commands, the task list does not reset the list after deletion.
   - This enhancement will keep allow the `deleteAllDone` command to not reset the task list after deletion so that users will not get confused of the state of the task list.
 
 ### 9. Enhance error messages about leading whitespaces
