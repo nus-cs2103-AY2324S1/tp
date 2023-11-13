@@ -204,7 +204,7 @@ If your member is no longer involved in a particular event, you can easily remov
 Here’s how you can use it:<br>
 `unenrol m/MEMBER_INDEX e/EVENT_INDEX`
 
-Here is an example command where we unenrol the **member** at index 1 from the **event** at index 1:<br>
+Here is an example command where we unenrol the member at **member index** 1 from the event at **event index** 1:<br>
 `unenrol m/1 e/1`
 
 <div markdown="block" class="alert alert-info">:information_source: The `MEMBER_INDEX`/`EVENT_INDEX` parameter refers to the index number shown in the **currently displayed** member/event list.
