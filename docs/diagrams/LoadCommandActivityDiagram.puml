@@ -1,7 +1,7 @@
 @startuml
 skin rose
-skinparam ActivityFontSize 15
-skinparam ArrowFontSize 14
+skinparam ActivityFontSize 16
+skinparam ArrowFontSize 16
 
 start
 :Execute the LoadCommand;
