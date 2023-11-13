@@ -84,7 +84,7 @@ public class EditCommand extends Command {
         Name updatedName = studentToEdit.getName();
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
-        Set<RiskLevel> sameTags = studentToEdit.getTags(); // tags cannot be edited by edit command
+        Set<RiskLevel> sameTags = studentToEdit.getRiskLevel(); // tags cannot be edited by edit command
         Note updatedNote = studentToEdit.getNote();
 
         return new Student(updatedName, updatedPhone, updatedAddress, sameTags, updatedNote);

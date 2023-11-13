@@ -22,11 +22,13 @@ import seedu.address.testutil.StudentBuilder;
 
 public class AddCommandTest {
 
+    // EP: Null student
     @Test
     public void constructor_nullStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
+    // EP: Valid student
     @Test
     public void execute_studentAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingStudentAdded modelStub = new ModelStubAcceptingStudentAdded();
@@ -39,6 +41,7 @@ public class AddCommandTest {
         assertEquals(Arrays.asList(validStudent), modelStub.studentsAdded);
     }
 
+    // EP: Duplicate student
     @Test
     public void execute_duplicateStudent_throwsCommandException() {
         Student validStudent = new StudentBuilder().build();

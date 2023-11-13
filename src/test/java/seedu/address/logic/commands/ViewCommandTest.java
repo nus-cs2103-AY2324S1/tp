@@ -47,18 +47,21 @@ public class ViewCommandTest {
         assertFalse(standardCommand.equals(new ViewCommand(VALID_CATEGORY_STUDENT)));
     }
 
+    // View appointments only
     @Test
     public void execute_viewAppointments() {
         assertCommandSuccess(new ViewCommand("appointments"), model,
                 ViewCommand.MESSAGE_SUCCESS_APPOINTMENT, expectedModel);
     }
 
+    // View students only
     @Test
     public void execute_viewStudents() {
         assertCommandSuccess(new ViewCommand("students"), model,
                 ViewCommand.MESSAGE_SUCCESS_STUDENT, expectedModel);
     }
 
+    // View all students and appointments
     @Test
     public void execute_viewAll() {
         assertCommandSuccess(new ViewCommand("all"), model,

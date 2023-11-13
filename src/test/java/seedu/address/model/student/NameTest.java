@@ -23,23 +23,34 @@ public class NameTest {
     public void isValidName() {
         String hundredCharName = "Ali Ben Ching Dover Elephant Fishballs Ginormous Hugh Indiana Jelly Krispy "
                 + "Lambasted Mamamia Nutella";
-        // null name
+
+        // EP: null name
         assertThrows(NullPointerException.class, () -> Name.isValidName(null));
 
-        // invalid name
+        // invalid names
+        // EP: empty strings
         assertFalse(Name.isValidName("")); // empty string
         assertFalse(Name.isValidName("  ")); // spaces only
+
+        // EP : non-alphabetical characters
         assertFalse(Name.isValidName("^")); // only non-alphabetical characters
         assertFalse(Name.isValidName("peter*")); // contains non-alphabetical characters
         assertFalse(Name.isValidName("12345")); // numbers only
         assertFalse(Name.isValidName("peter the 2nd")); // contains numbers
-        assertFalse(Name.isValidName(hundredCharName + "a")); // more than 100 characters
 
-        // valid name
-        assertTrue(Name.isValidName("A")); // single alphabet only
-        assertTrue(Name.isValidName("peter jack")); // alphabets only
-        assertTrue(Name.isValidName("Capital Tan")); // with capital letters
-        assertTrue(Name.isValidName(hundredCharName)); // exactly 100 characters
+        // EP: more than 100 characters
+        assertFalse(Name.isValidName(hundredCharName + "a")); // 101 characters
+
+
+        // valid names
+        // EP: one character alphabet only
+        assertTrue(Name.isValidName("A"));
+
+        // EP: Alphabetical characters with capital letters
+        assertTrue(Name.isValidName("Capital Tan"));
+
+        // EP: 100 alphabetical characters
+        assertTrue(Name.isValidName(hundredCharName));
     }
 
     @Test

@@ -55,7 +55,7 @@ class JsonAdaptedStudent {
         name = source.getName().value;
         phone = source.getPhone().value;
         address = source.getAddress().value;
-        tags.addAll(source.getTags().stream()
+        tags.addAll(source.getRiskLevel().stream()
                 .map(JsonAdaptedRiskLevel::new)
                 .collect(Collectors.toList()));
         note = source.getNote().value;
@@ -69,7 +69,7 @@ class JsonAdaptedStudent {
     public Student toModelType() throws IllegalValueException {
         final List<RiskLevel> studentRiskLevel = new ArrayList<>();
 
-
+        System.out.println(name);
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }

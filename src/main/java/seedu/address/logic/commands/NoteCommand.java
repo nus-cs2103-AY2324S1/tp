@@ -54,7 +54,7 @@ public class NoteCommand extends Command {
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());
         Student editedStudent = new Student(studentToEdit.getName(), studentToEdit.getPhone(),
-                studentToEdit.getAddress(), studentToEdit.getTags(), note);
+                studentToEdit.getAddress(), studentToEdit.getRiskLevel(), note);
 
         model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);

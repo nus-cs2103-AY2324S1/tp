@@ -13,10 +13,10 @@ public class Name {
             + " have a maximum of 100 characters, and should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^[A-Za-z][A-Za-z ]{0,99}$";
+    public static final String VALIDATION_REGEX = "^(?=.{1,100}$)[A-Z][a-z]*([ ][A-Z][a-z]*)*\\s*$";
 
     public final String value;
 
@@ -56,7 +56,7 @@ public class Name {
         }
 
         Name otherName = (Name) other;
-        return value.toLowerCase().equals(otherName.value.toLowerCase());
+        return value.equals(otherName.value);
     }
 
     @Override

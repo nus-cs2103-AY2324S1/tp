@@ -300,10 +300,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | counsellor | block out busy times                         | prevent clashes in scheduling                                                        |
 | `*`      | counsellor | prevent double booking                       | prevent clashes in scheduling                                                        |
 | `*`      | counsellor | link students to the respective appointments | have easy access to the student profile that can help me prepare for the appointment |
-| `*`      | counsellor | add todos items                              | keep track of todos for each student                                                 |
-| `*`      | counsellor | view todos items                             | view todos for students at a glance                                                  |
-| `*`      | counsellor | link todos items to students                 | have easy access to the contact information for the students                         |
-| `*`      | counsellor | sort todos items by dateline                 | organise my appointments and plan my schedule accordingly                            |
 
 ### 6.3 Use cases
 
@@ -326,8 +322,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 3a1. WellNUS shows an error message. 
     * Use case ends.
 
-* 3b. The given name is invalid (non-alphabetical input) or contact number is invalid (non-numerical input).
+* 3b. The given name is invalid (non-alphabetical input), contact number is invalid (non-numerical input or not 8 digits long)
+or address is invalid (> 200 characters long)
   * 3b1. WellNUS shows an error message.
+    * Use case ends.
+
+* 3c. The given name, contact number or address is omitted
+  * 3c1. WellNUS shows an error message.
     * Use case ends.
 
 #### 6.3.2 #UC02: View existing students
@@ -345,7 +346,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty
   * Use case ends.
 
-#### 6.3.3 #UC03: Delete an existing student
+### 6.3.3 #UC03: Edit an existing student
+
+**MSS**
+
+1.  User requests to list students
+2.  WellNUS shows the list of students
+3.  User can find student index
+4.  Edit user by specifying the index and fields to edit
+5.  Get confirmation of successful edit
+
+    Use case ends.
+
+**Extensions**
+
+* 4a. The student index is invalid.
+    * 4a1. WellNUS shows an error message.
+        * Use case ends.
+
+* 4b. No fields to edit were specified
+    * 4b1. WellNUS shows an error message.
+        * Use case ends.
+
+* 4c. The contact number is invalid (non-numerical input or not 8 digits long)
+  or address is invalid (> 200 characters long)
+    * 4c1. WellNUS shows an error message.
+        * Use case ends.
+
+#### 6.3.4 #UC04: Delete an existing student
 
 **MSS**
 
@@ -359,11 +387,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. The student index is invalid.
-  * 3a1. WellNUS shows an error message.
+* 4a. The student index is invalid.
+  * 4a1. WellNUS shows an error message.
     * Use case ends.
 
-#### 6.3.4 #UC04: Tag student to risk level
+#### 6.3.5 #UC05: Tag student to risk level
 
 **MSS**
 
@@ -385,7 +413,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 4b1. WellNUS shows an error message.
     * Use case ends.
 
-#### 6.3.5 #UC05: Schedule an appointment
+### 6.3.6 #UC06: Add student notes for a specific student
+
+**MSS**
+
+1.  User requests to list students
+2.  WellNUS shows the list of students
+3.  User can find student index
+4.  Add student note using the student index
+5.  Information gets updated for future reference
+
+    Use case ends.
+
+**Extensions**
+
+* 4a. The student index is invalid.
+    * 4a1. WellNUS shows an error message.
+        * Use case ends.
+
+* 4b. The note is invalid (> 500 characters long)
+    * 4b1. WellNUS shows an error message.
+        * Use case ends.
+
+
+#### 6.3.7 #UC07: Schedule an appointment
 
 **MSS**
 
@@ -411,11 +462,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 3c1. WellNUS shows an error message.
     * Use case ends.
 
-#### 6.3.6 #UC06: View existing appointments
+#### 6.3.8 #UC08: View existing appointments
 
 **MSS**
 
-1.  User chooses to list appointments
+1.  User requests to list appointments
 2.  WellNUS shows the list of appointments
 3.  User can view appointment information such as student involved and time of appointment
     
@@ -427,11 +478,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-#### 6.3.7 #UC07: Cancel an existing appointment
+#### 6.3.9 #UC09: Cancel an existing appointment
 
 **MSS**
 
-1.  User chooses to list appointments
+1.  User requests to list appointments
 2.  WellNUS shows the list of appointments
 3.  User cancels an appointment at chosen index
 4.  WellNUS deletes the appointment with index specified by user and display status
@@ -444,114 +495,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes from step 1.
 
-#### 6.3.8 #UC08: Tag student to appointment
+### 6.3.10 #UC10: Find students by name together with their appointments
 
-**MSS**
-
-1.  User chooses to list appointments
-2.  WellNUS shows the list of appointments
-3.  User chooses to list students
-4.  WellNUS shows the list of students
-5.  User tags student to appointment
-6.  WellNUS tags student to appointment and display status
-    
-    Use case ends.
-
-**Extensions**
-* 5a. WellNUS detects an error in either the entered student index or appointment index
-    
-  Use case resumes from step 1.
-
-#### 6.3.9 #UC09: Add a ToDo
-
-**MSS**
-
-1.  User requests to list existing ToDos
-2.  WellNUS shows the list of ToDos, along with some basic information like dateline and student
-3.  User requests to add a new ToDo to the list
-4.  WellNUS adds the ToDo, and shows confirmation message
+1. User requests to find students using their name
+2. WellNUS shows the list of students that match the given name
+3. WellNUS shows the appointments of the filtered list of students shown
+4. User can view the information of the filtered students and his/her appointments
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The given student name does not exist.
-
-    * 3a1. WellNUS shows an error message.
-
-    Use case ends.
-
-* 3b. The given student name is invalid (non-alphabetical input) / dateline is invalid (past dateline, invalid format).
-
-    * 3b1. WellNUS shows an error message.
-
-    Use case ends.
-
-#### 6.3.10 #UC10: View existing ToDos
-
-**MSS**
-
-1.  User requests to list ToDos
-2.  WellNUS shows the list of ToDos
-3.  Users can find information like dateline, student, etc.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
+* 4a. User does not see any students and appointments as no students match the given name
   Use case ends.
 
-#### 6.3.11 #UC11: Delete an existing ToDo
+### 6.3.11 #UC11: Filter an appointment by day
 
-**MSS**
-
-1.  User requests to list ToDos
-2.  WellNUS shows the list of ToDos
-3.  User can find ToDos index
-4.  Delete ToDos by specifying the index
-5.  Get confirmation of successful delete
+1. User requests to list appointments for a given day
+2. WellNUS shows the list of appointments for the day
+3. User can view appointment information for the appointments in the given day
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The ToDo index is invalid.
-
-    * 3a1. WellNUS shows an error message.
-
-    Use case ends.
-
-#### 6.3.12 #UC12: Tag student to ToDo
-
-**MSS**
-
-1.  User requests to list students
-2.  WellNUS shows the list of students
-3.  User can find student index
-4.  Tag/change student to ToDo
-5.  Information gets updated for future reference
-
-    Use case ends.
-
-
-**Extensions**
-
-
-* 3a. The given index is invalid.
-
-    * 3a1. WellNUS shows an error message.
-
-    Use case ends.
-
-* 3b. The referenced ToDo is invalid.
-
-    * 3a1. WellNUS shows an error message.
-
-    Use case ends.
-
-*{More to be added}*
+* 3a. User does not see any appointments as there are no appointments scheduled on that day
+  Use case ends.
 
 ### 6.4 Non-Functional Requirements
 1.  Cross-Platform Compatibility:
@@ -603,22 +572,218 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
           Expected: The most recent window size and location is retained.
 
-### 7.2 Deleting a student
+### 7.2 Student Features
+#### 7.2.1 Add Student
+Adds a student with their relevant details.
 
-1. Deleting a student while all students are being shown
+Format: `add n/STUDENT_NAME c/CONTACT_NUMBER a/HOME_ADDRESS [r/RISK_LEVEL]`
 
-   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+1. Use the find feature (9.2.#) to ensure student with that name does not exist.
+2. Test Case 1: `add n/Ethan Tan c/98765432 a/252 ANG MO KIO AVENUE 4 01-225`
+    1. Expectation: Confirmation message that includes student information.
+3. Test Case 2: `add n/Rachel Teo c/87654321 a/Block 30 Kallang Place #01-23/24 r/HIGH`
+    1. Expectation: Same as above
+4. Test Case 3: `add n/Ethan Tan c/98765432 a/252 ANG MO KIO AVENUE 4 01-225` again
+    1. Expectation: Warning `This student already exists in the address book`
+5. False commands:
+    1. Try missing fields: Get a message stating the format of the input
+    2. Incorrect Phone Number: Get a message stating that phone numbers must be 8 digits long
 
-   2. Test case: `delete 1`<br>
-         Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+#### 7.2.2 Delete Student
+Deletes a student and all related data
 
-   3. Test case: `delete 0`<br>
-         Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+Format: `delete STUDENT_INDEX`
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-         Expected: Similar to previous.
+1. List all students using the view command.
+2. Test Case 1: `delete 1` 
+   1. Expectation: Confirmation message is shown, Appointments and Notes are deleted as well
+3. Test Case 2: `delete 0`
+   1. Expectation: Invalid command format message (Index must be positive)
+4. Try other invalid commands like `delete a` or using an index greater than the number of students that exists. Displays Error message
 
-    { more test cases …​ }_
+#### 7.2.3 Adding/Deleting notes for a Student
+This command either adds a note to an existing student (overwriting any existing note) or deletes a note
+depending on the command format given, as further shown in examples below
+
+Format: `note STUDENT_INDEX note/NOTE`
+
+1. Test Case 1: `note 1 note/Exam stress in building`
+   1. Expectation: Confirmation message is shown. Message shown when double-clicking the student
+2. Test Case 2: `note 1 note/` or `note 1`
+   1. Expectation: All notes get deleted
+3. Other invalid tests would include invalid student index, handled similar to the case in `delete`
+
+Double-clicking on the Student card displays the Student notes under the Notes section!
+The “Notes” column will inform you if there are no student notes for a particular Student.
+
+#### 7.2.4 Finding Students by Name
+Find students and their related appointments based on their name. Can choose to find student based on their first name, last name or full name.
+
+Format: `find STUDENT_NAME`
+
+1. Student name must match exactly to the first name, last name or full name
+2. Use existing student information or add students before conducting the following tests.
+3. Test Case 1: `find David`
+   1. Expectation: All students with the name 'David' as first name or last name is shown is shown
+4. Test Case 2: `find Li`
+   1. Expectation: All students with 'Li' as first name or last name is shown
+5. Test Case 3: `find David Li`
+   1. Expectation: The student 'David Li' is shown
+6. Test Case 4: `find Abigail`
+   1. Expectation: Message stating `No student found`
+7. Other invalid commands should show respective error messages.
+
+#### 7.2.5 Assigning risk level to Student
+This command either adds a tag to an existing student (overwriting any existing tag), or deletes a tag
+depending on the command format given, as further shown in examples below
+
+Format: `tag STUDENT_INDEX r/RISK_LEVEL`
+
+1. Student must be found in the list
+2. Risk level can only be `low`/`medium`/`high`
+3. Test Case 1: `tag 2 r/HIGH`
+   1. Expectation: Show student information with stated risk level
+4. Test Case 2: `tag 2 r/moderate`
+   1. Expectation: Message stating `Risk level should be one of the following three: high/medium/low`
+5. Other invalid test cases would include invalid student index (Handled similar to above cases) and invalid tags (like Test Case 2)
+
+#### 7.2.6 Editing Student details
+Edit a student's contact number or address.
+
+Format `edit STUDENT_INDEX [c/CONTACT_NUMBER] [a/HOME_ADDRESS]`
+
+1. This feature cannot be used to edit student risk level. Use `tag` instead
+2. At least 1 feature should be included
+3. Test Case 1: `edit 3 c/97865423`
+   1. Expectation: Confirmation message shown with the updated contact
+4. Test Case 2: `edit 3 a/10 Tampines Central 1 #11-14 Tampines 1`
+   1. Expectation: Same as above, with updated address
+5. Test Case 3: `edit 3 c/98762345 a/3791 Jalan Bukit Merah 09-27 E-Centre Redhill`
+   1. Expectation: Same as above, both fields updated
+6. Test Case 4: `edit 3`
+   1. Expectation: Error Message `At least one field to edit must be provided.` shown
+
+### 7.3 Appointment Commands
+
+#### 7.3.1 Scheduling an Appointment
+Schedules a new appointment for a student.
+
+Format: `schedule n/STUDENT_NAME date/DATE from/START_TIME to/END_TIME d/DESCRIPTION`
+
+1. Student must exist before an appointment is scheduled
+2. Student name must be in full and match exactly
+3. Must have a valid date and time
+4. Test Case 1: `schedule n/Ethan Tan date/2023-12-30 from/16:30 to/17:30 d/monthly check-up`
+    1. Expectation: Confirmation message for appointment is shown, appointment added to the column according to date and time.
+5. Test Case 2: `schedule n/Ethan date/2023-12-28 from/16:30 to/17:30 d/monthly check-up`
+    1. Expectation: `No such student exists for this appointment` Message
+6. Test Case 3: `schedule n/Ethan Tan date/2023-12-30 from/16:30 to/17:30 d/monthly check-up` again
+    1. Expectation: `This appointment already exists` Message
+7. Test Case 4: `schedule n/David Li date/2023-12-30 from/16:30 to/17:30 d/monthly check-up`
+    1. Expectation: `This appointment overlaps with an existing appointment` Message
+8. Test Case 5: `schedule n/David Li date/2025-12-30 from/16:30 to/17:30 d/monthly check-up`
+    1. Expectation: `Appointment can only be scheduled within a year` Message
+9. Other invalid test cases includes other forms of invalid date, students that do not exist or clashes. All should show respective error messages.
+
+#### 7.3.2 Cancelling an Appointment
+Cancels an existing appointment.
+
+Format: `cancel APPOINTMENT_INDEX`
+
+1. Appointment must exist
+2. Test Case 1: `cancel 1`
+    1. Expectation: Confirmation message is shown
+3. Test Case 2: `cancel 0`
+    1. Expectation: Invalid command format message (Index must be positive)
+4. Try other invalid commands like `cancel a` or using an index greater than the number of appointments that exists. Displays Error message accordingly.
+
+#### 7.3.3 Filtering Appointments by Date: `filter`
+
+Filters appointments based on given date.
+
+Format: `filter DATE`
+
+1. Date must be in the yyyy-MM-dd format
+2. Test Case 1: `filter 2023-12-14`
+   1. Expectation: Shows appointments on that day
+3. Test Case 2: `filter 2023-11-24`
+   1. Expectation: `0 appointments listed`
+4. All invalid date format: Message shows required date format
+
+### 7.4 Others
+
+#### 7.4.1 Viewing all Students and/or Appointments
+
+Shows a list of all available Students and/or Appointments, depending on specified input.
+
+Format: `view g/CATEGORY`
+
+1. Category must be `students`, `appointments` or `all`
+2. Test Case 1: `view g/all`
+    1. Expectation: Shows all students and appointments
+3. Test Case 2: `view g/appointments`
+    1. Expectation: Shows all appointments in the list
+4. Test Case 3: `view g/students`
+    1. Expectation: Shows all students in the list
+5. Any other command is considered invalid
+    1. Expectation: Error message to direct user to one of the above
+
+#### 7.4.2 Exiting the program: `exit`
+
+Exits the program.
+
+Format: `exit`
+
+#### 7.4.3 Clearing storage: `clear`
+
+Resets the storage, deleting **all** Appointments and Students.
+
+Format: `clear`
+
 
 ## 8. Appendix: Effort
 
+### 8.1 Design Challenges
+
+* WellNUS, in contrast to AB3 which exclusively manages one entity type: `Person`,
+has the intricate challenge of handling two distinct entity types: `Student` and `Appointment`.
+* One challenge encountered was the need to manage dependencies between the two entity types.
+Specifically, the system had to be designed to prevent the scheduling of appointments unless a corresponding student entity existed. 
+Additionally, to maintain data integrity, the deletion of a student entity necessitated the simultaneous cancellation of all associated appointments.
+* In tackling these challenges, we leveraged existing components to streamline development efforts. 
+Recognising the `Person` entity in AB3, we opted to adapt the `Person` entity and repurpose to `Student` entity within WellNUS.
+* Another challenge we faced was designing a new `Appointment` entity from scratch. The process was challenging and required tedious class refactoring mid-implementation.
+Initially, we designed `Appointment` to have an attribute `DateTime` to store the date and time of the appointment. 
+To facilitate the comparison of appointments and prevent overlaps and clashes, we soon realised there was a need for a start and end time.
+However, having `DateTime start` and `DateTime end` results in a duplication of date, as the appointment was bound to be on the same date. 
+Hence, we refactored `DateTime` into `Date` and `Time` to allow for 3 attributes: `Date appointmentDate`, `Time startTime`, `Time endTime`
+* For the UI of WellNUS, we also faced challenges handling `Appointment` and `Note`, specifically, how these
+entities are to be displayed to the user. For `Appointment`, we settled on having an `Appointment` list similar to the
+`Person` list in AB3, and simultaneously display 2 lists for `Student` and `Appointment`.
+* On the other hand, while we initially displayed `Note` under its corresponding `Student`, similar to `Remark` in
+AB3, we eventually decided against it. Our `Note` was designed for counsellors to make consultation notes in addition
+to remarks for students, and is usually much longer than a typical `Remark` in AB3, this led to each
+row in the `Student` list becoming much more cluttered and wordy. Eventually, we created a separate column that
+specifically displays a single `Note` of the user's choice.
+
+### 8.2 Technical Challenges
+
+* Since WellNUS manages both `Student` and `Appointment` entities, one of the challenges we faced was refactoring our
+`Storage` component to handle both entities simultaneously. While saving `Student` and `Appointment` data to the storage
+file was much easier since we could reference AB3's `Storage` component, loading data from file proved to be a much
+larger challenge especially in a brownfield project.
+* The loading in AB3 simply checks if there are any duplicate `Persons`, on the other hand, having
+an `Appointment` entity meant that, we had to perform checks for duplicate `Appointments`, overlapping `Appointments`
+and also whether the `Student` provided in the `Appointment` exists in the given WellNUS data file.
+* In addition, because we decided to refactor `Person` in AB3 into `Student`, the initial refactoring for `Person` was
+tedious and proved to be a challenge. Removing redundant fields like `Email` and `Tags` and adding fields like `RiskLevel`
+and `Note` meant that a large portion of the AB3 had to be refactored, since the majority of the code in AB3 involved
+the `Person` entity, including tests, sample data and UI.
+* We decided that adding student notes was essential to our application as it is part of a counsellor's job. While it was 
+easy to add a student note, it was difficult to find a convenient way to display the `Note` as the `Note` for the student can be very long.
+We could not simply just show the `Note` together with rest of the details in the `StudentCard` as it will not be
+visually-pleasing. We wanted to make it easy by double-clicking on a student card to display the student notes separately.
+It proved to be challenging to handle event-listeners from various components of the UI as only after
+trying different workflows, we realised that the best way is pass a FunctionalInterface from the `StudentNotePanel` over to the `StudentCard`
+to update the `StudentNotePanel` when the event is triggered. This was especially difficult as most events originally were triggered by
+command inputs.

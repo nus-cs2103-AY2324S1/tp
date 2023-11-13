@@ -34,6 +34,7 @@ public class NoteCommandTest {
 
     private Model model = new ModelManager(getTypicalWellNus(), new UserPrefs());
 
+    // Add note < 100 chars
     @Test
     public void execute_addNoteUnfilteredList_success() {
         Student firstStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
@@ -50,6 +51,7 @@ public class NoteCommandTest {
         assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
     }
 
+    // Add note of length between 100 and 500 chars
     @Test
     public void execute_addNoteMoreThanHundredChars_success() {
         Student firstStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
@@ -67,6 +69,7 @@ public class NoteCommandTest {
         assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
     }
 
+    // Delete note
     @Test
     public void execute_deleteNoteUnfilteredList_success() {
         Student firstStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
@@ -84,6 +87,7 @@ public class NoteCommandTest {
         assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
     }
 
+    // Add note on filtered list
     @Test
     public void execute_filteredList_success() {
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
@@ -103,6 +107,7 @@ public class NoteCommandTest {
         assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
     }
 
+    // Invalid index, unfiltered list
     @Test
     public void execute_invalidStudentIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
