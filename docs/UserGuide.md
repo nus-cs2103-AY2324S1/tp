@@ -114,7 +114,7 @@ There are two ways you can use to navigate to the profile page.
 <div style="page-break-after: always;"></div>
 
 Let's say you want to open the profile page of a fosterer name Alex Yeoh who is currently at index 1. 
-![Benson](images/screenshots/ViewCommandExample.png)
+![Alex](images/screenshots/ViewCommandExample.png)
 
 <br>
 
