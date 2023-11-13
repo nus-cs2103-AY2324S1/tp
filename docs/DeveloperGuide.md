@@ -744,3 +744,20 @@ Given below is the evidence for challenges faced and efforts required for our pr
 
 2. We have two UI panels to display current musicians and current bands. We need to make sure that all operations, performed standalone or in group, must maintain a synchronized state between the two panels and be intuitive to the users.
 3. Due to the addition in complexity of commands and the addition of two entities in our project, there are much more error-handling to do. We need to customize error messages as well as write many tests.
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix 4: Planned Enhancements**
+
+Given below are the planned enhancements for our project.
+
+1. The current `removem` command only allows the user to remove one musician from a band at a time. We plan to enhance this command to allow the user to remove multiple musicians at once just like the `addm` command.
+
+2. The current `find` command only allows the user to find musicians by their name, tag, instrument, and genre. We plan to enhance this command to allow the user to find musicians by their email and phone number as well.
+
+3. The current list of valid instruments and genres are not editable by the user. We plan to allow the user to add and remove valid instruments and genres from the list to give the user more freedom.
+
+4. The current sample data upon initial launch of the app is not representative of the use cases of our app as (no band data, musicians have no instruments and genres). We plan to change the sample data to be more representative and less confusing to the user.
+
+5. The current `findb` command is a bit confusing because its main use case is to list all members in a specific band. It has little relevance to finding bands containing a specific keyword. We plan to rename this command to `showmembers` to make it more intuitive to the user.
