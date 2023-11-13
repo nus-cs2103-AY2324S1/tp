@@ -333,6 +333,7 @@ Example usage:
 #### Find a contact: `find [name]`
 
 You can use the `find` command to search for contacts by their name if you wish to quickly reference a particular contact's details.
+If the list is currently sorted (using [`sort`](#sort-contacts-list-sort-by-field-name-order-ascdesc)), the returned list will be sorted.
 
 Format: `find [name]`
 
