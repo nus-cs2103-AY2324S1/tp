@@ -306,7 +306,7 @@ has contributed 2 **hours**, and we want to leave a "Role: Photographer" **remar
 
 <hr class="command-separator">
 
-#### Edit an enrolment: `editEnrolment`
+#### Edit an Enrolment: `editEnrolment`
 Accidentally mixed up two members and gave them the wrong number of hours or wrong remarks for the event they are involved in?
 You can fix this with ease by using the `editEnrolment` command!
 
