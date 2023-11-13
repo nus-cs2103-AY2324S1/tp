@@ -68,7 +68,6 @@ Access our self-curated user guide below to learn more on how you can integrate 
 
 [Jump back to Table of Contents](#table-of-contents)
 
-<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -85,7 +84,6 @@ You are an **advanced** user if ...
 
 [Jump back to Table of Contents](#table-of-contents)
 
-<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 ## Overview of Main Features
@@ -134,13 +132,11 @@ Go to the [Table of Contents](#table-of-contents) to navigate to the feature tha
 
 3. Copy the file to the folder you want to use as the _home folder_ for your JabPro.
 
-<div style="page-break-after: always;"></div>
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jabpro.jar` command to run the application. <br> 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
 
     ![Ui](images/main.png)  
-<div style="page-break-after: always;"></div>
 
 <box type="warning" seamless>
 
@@ -162,12 +158,12 @@ Not to worry, here are some steps you can take to fix this:
 
 </box>
 
-<div style="page-break-after: always;"></div>
-
 5. If your UI looks **compressed and words are being cut off such as that seen below**, you should **resize** the window to a larger size by dragging the corners of the application window. The UI should now look like the example given above.
    <br>
   
     ![Ui](images/UICompressed.png)
+
+    <div style="page-break-after: always;"></div>
 
     **Here's what each part of the GUI signifies:** <br>
 
