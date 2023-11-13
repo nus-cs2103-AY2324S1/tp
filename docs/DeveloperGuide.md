@@ -5,8 +5,7 @@ title: Developer Guide
 * Table of Contents
 {:toc}
 
---------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always;"></div>
 ## 1. Introduction
 
 ### 1.1 Acknowledgements
@@ -34,6 +33,8 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 Given below is a quick overview of main components and how they interact with each other.
 
+<div style="page-break-after: always;"></div>
+
 #### 2.1.1 Main components of the architecture
 
 **`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
@@ -55,6 +56,8 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
+<div style="page-break-after: always;"></div>
+
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
@@ -65,6 +68,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 <img src="images/ComponentManagers.png" width="300" />
 
 The sections below give more details of each component.
+<div style="page-break-after: always;"></div>
 
 ### 2.2 UI component
 
@@ -83,6 +87,8 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
 
+<div style="page-break-after: always;"></div>
+
 ### 2.3 Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -90,6 +96,8 @@ The `UI` component,
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
+
+<div style="page-break-after: always;"></div>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
@@ -105,6 +113,8 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a student).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
+<div style="page-break-after: always;"></div>
+
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <img src="images/ParserClasses.png" width="600"/>
@@ -112,6 +122,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `WellNusParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `WellNusParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+<div style="page-break-after: always;"></div>
 
 ### 2.4 Model component
 
@@ -127,6 +139,7 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+<div style="page-break-after: always;"></div>
 
 ### 2.5 Storage component
 
@@ -143,7 +156,8 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## 3. WellNus Implementation
 
 This section describes some noteworthy details on how certain features of WellNus are implemented.
@@ -168,6 +182,8 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
     * Pros: Easier to implement.
     * Cons: User will have to type longer commands since appointment details can be lengthy, which may lead to more complex commands.
 
+<div style="page-break-after: always;"></div>
+
 ### 3.2 View Feature
 
 This feature is facilitated by the use of the ViewCommand class which extends the Command interface.
@@ -182,6 +198,8 @@ View Command handles both the viewing of all students and all appointments. The 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** There should be a diamond connecting the 4 separate branches
 but due to a limitation of PlantUML, the 4 branches leads to the "end" individually .
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### 3.3 Student Notes feature
 
@@ -206,7 +224,9 @@ to a `Student`.
     * Pros: Easier to implement
     * Cons: User will have to type much longer commands, since `Note` can be up to 200 characters long,
   leads to very lengthy commands
-      
+
+<div style="page-break-after: always;"></div>
+
 ### 3.4 Check overlapping appointments feature
 
 The *check overlapping appointments* mechanism is facilitated by `UniqueAppointmentList`. It implements the `Iterable`
@@ -229,6 +249,8 @@ When the user schedules a new command, the `UniqueAppointmentList` runs its `has
 new appointment clashes with any existing appointments. It raises a `OverlappingAppointmentsException` if the method returns true,
 and prevents the user from scheduling that appointment.
 
+<div style="page-break-after: always;"></div>
+
 The following activity diagram summarises what happens when a user schedules an apppointment:
 
 ![ClashActivityDiagram](images/ClashActivityDiagram.png)
@@ -236,7 +258,7 @@ The following activity diagram summarises what happens when a user schedules an 
 but due to a limitation of PlantUML, the 3 branches leads to the "end" individually .
 </div>
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 4. Planned Enhancements
 
@@ -263,7 +285,7 @@ we plan to introduce a command that achieves the above equivalent function.
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 6. Appendix: Requirements
 
@@ -304,6 +326,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | counsellor | block out busy times                         | prevent clashes in scheduling                                                        |
 | `*`      | counsellor | prevent double booking                       | prevent clashes in scheduling                                                        |
 | `*`      | counsellor | link students to the respective appointments | have easy access to the student profile that can help me prepare for the appointment |
+
+<div style="page-break-after: always;"></div>
 
 ### 6.3 Use cases
 
