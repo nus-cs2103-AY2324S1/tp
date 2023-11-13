@@ -149,8 +149,8 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Add feature
-The `AddCommand` extends the `Command` class. While mostly similar to `delete` illustrated above, the command contains 
-checks to prevent any duplicate `Person` object (i.e. same name and phone number) as well as clashes in schedules. 
+The `AddCommand` extends the `Command` class. While mostly similar to `delete` illustrated above, the command contains
+checks to prevent any duplicate `Person` object (i.e. same name and phone number) as well as clashes in schedules.
 If it passes these checks, the person is added into the system.
 
 `AddCommand` takes in the following fields:
@@ -235,14 +235,14 @@ The following activity diagram summarizes what happens when a user executes an e
 
 The `freeTime` Command extends the `Command` class.
 
-`freeTime` takes in the following fields: 
+`freeTime` takes in the following fields:
 * **Day (Compulsory field)**: String with restrictions in characters, non-case sensitive (Mon/MondayTue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).
 * **Duration (Compulsory field)**: Positive Integer to represent duration in **minutes**.
 * **Begin (Compulsory field)**: String with restrictions (HHMM).
 * **End (Compulsory field)**: String with restrictions (HHMM).
 
 It displays a list of timeslots where the user is free on that _Day_, starting from _Begin_ to _End_. The timeslots listed down
-must also be greater than the duration provided. 
+must also be greater than the duration provided.
 
 The following sequence diagram shows how the freeTime command works.
 ![FreeTimeSequenceDiagram](images/FreeTimeSequenceDiagram.png)
@@ -255,7 +255,7 @@ The following sequence diagram shows how the freeTime command works.
   timeslots when the user is busy, and then returns a list of timeslots where the user is free. (Each timeslot is between _Begin_ and _End_,
 and is at least _Duration_ long)
   * Pros: Command is short and simple to use.
-  * Cons: During the first round of user-testing, some new users were confused on how to use the command. 
+  * Cons: During the first round of user-testing, some new users were confused on how to use the command.
 
 The following activity diagram summarizes what happens when a user executes a new command:
 ![FreeTimeActivityDiagram](images/FreeTimeActivityDiagram.png)
