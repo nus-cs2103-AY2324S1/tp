@@ -4,17 +4,28 @@ skinparam ActivityFontSize 15
 skinparam ArrowFontSize 12
 
 start
-:User enters setP command;
+:User enters LoveBook;
 
-if () then ([All fields to set are valid])
-    if() then ([Field is of valid range])
-    :Update Date Preferences;
-    else([Else])
-    :Command Exception is thrown;
+: User enters a command to set date preferences in the GUI;
+
+: Input is passed over to the logic component;
+
+if () then ([relevant fields are present and command is valid])
+    if () then ([no duplicate field entries])
+        if () then ([all fields contain valid values])
+            :Save date preferences in LoveBook;
+            :Display success message;
+            stop
+        else ([else])
+            :Display invalid field value error message;
+            stop
+        endif
+    else ([else])
+        :Display duplicate field entry error message;
+        stop
     endif
-else ([Else])
-    :Command Exception is thrown;
+else ([else])
+    :Display invalid command format error message;
+    stop
 endif
-
-stop
 @enduml
