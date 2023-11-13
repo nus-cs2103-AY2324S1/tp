@@ -17,6 +17,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/hugenoob.md)]
 
 * Role: Developer
+* Responsibilities: Responsible for overall project coordination
 
 ### Li Jiakai
 
@@ -35,6 +36,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/pra-navi)] [[portfolio](team/pra-navi.md)]
 
 * Role: Developer
+* Responsibilities: UI
 
 ### Megan Loo
 
@@ -44,7 +46,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/m1oojv.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Deliverables and deadlines
 
 ### Alan Lim
 
@@ -54,4 +56,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/freshcabbage123.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Testing
