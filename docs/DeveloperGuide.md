@@ -482,7 +482,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     <br>
     <br>
 
-**Use case: UC02 - Add a tutee**
+**Use case: UC02 - List tutees whose lessons are on a specified day**
+
+**MSS**
+
+1.  User requests to list all tutees whose lessons are on Monday.
+2.  System shows all tutees whose lessons are on Monday.
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. The list of tutees is empty.
+    - 2a1. System informs the user that the list is empty.
+
+  Use case ends.
+  <br>
+  <br>
+
+**Use case: UC03 - Add a tutee**
 
 **MSS**
 
@@ -516,7 +534,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     <br>
     <br>
   
-**Use case: UC03 - Delete a tutee**
+**Use case: UC04 - Delete a tutee**
 
 **MSS**
 
@@ -533,7 +551,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       <br>
       <br>
   
-**Use case: UC04 - Edit a tutee**
+**Use case: UC05 - Edit a tutee**
 
 **MSS**
 
@@ -567,7 +585,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     <br>
     <br>
 
-**Use case: UC05 - Find a tutee**
+**Use case: UC06 - Find a tutee**
 
 **MSS**
 
@@ -603,7 +621,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     <br>
     <br>
   
-**Use case: UC06 - Mark a tutee as paid**
+**Use case: UC07 - Mark a tutee as paid**
 
 **MSS**
 
@@ -620,7 +638,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       <br>
       <br>
 
-**Use case: UC07 - Reset all tutees in the list to not paid**
+**Use case: UC08 - Reset all tutees in the list to not paid**
 
 **MSS**
 
@@ -632,7 +650,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     <br>
     <br>
 
-**Use case: UC08 - Undo a command**
+**Use case: UC09 - Undo a command**
 
 **MSS**
 1. User requests to undo.
@@ -649,7 +667,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   <br>
   <br>
 
-**Use case: UC09 - Redo a command**
+**Use case: UC10 - Redo a command**
 
 **MSS**
 1. User requests to redo.
@@ -667,7 +685,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 <br>
 
 
-**Use case: UC10 - Finding free time**
+**Use case: UC11 - Finding free time**
 
 **MSS**
 1. User requests to find free time
@@ -679,7 +697,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     <br>
     <br>
   
-**Use case: UC11 - Get monthly revenue**
+**Use case: UC12 - Get monthly revenue**
 
 **MSS**
 
