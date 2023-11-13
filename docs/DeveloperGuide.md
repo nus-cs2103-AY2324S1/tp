@@ -188,7 +188,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### **Module-Tutorial Interaction**
+### Module-Tutorial Interaction
 
 In NUS, modules are a unit of study, and most modules require students to participate in tutorials. Each
 module with tutorials has one or more tutorials, but each tutorial is usually only for one module. Given that Teaching

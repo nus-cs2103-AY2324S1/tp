@@ -146,7 +146,6 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [s/STUDENT_NUMBER] [tele/TELEGRAM_HANDLE] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
@@ -391,17 +390,8 @@ Example: `addAssignment assgn/Assignment 1`
 
 <div style="page-break-after: always;"></div>
 
-## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen,
-   and later switch to using only the primary screen, the GUI will open off-screen.
-   To resolve this, delete the `preferences.json` file created by the application before running the application again.
-
---------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
-
-## Command summary
+## **Command summary**
 
 | Action                 | Format, Examples                                                                                                                                                      |
 |------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -430,7 +420,15 @@ Example: `addAssignment assgn/Assignment 1`
 
 <div style="page-break-after: always;"></div>
 
-## Glossary
+## **Known issues**
+
+1. **When using multiple screens**, if you move the application to a secondary screen,
+   and later switch to using only the primary screen, the GUI will open off-screen.
+   To resolve this, delete the `preferences.json` file created by the application before running the application again.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Glossary**
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Teaching Assistant (TA)**: A non-professor tutor which helps the professors of a module by teaching one or more tutorials.
