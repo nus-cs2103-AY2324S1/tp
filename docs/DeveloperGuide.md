@@ -256,20 +256,20 @@ field implementation. While optional fields like `MedicalHistory` exist in Healt
 Collections, and can natively handle the empty state. Singular optional properties can be added this way,
 but is hard to distinguish between properties that allow for multiple entries and fields that don't.
 
-<puml src="diagrams/AppointmentClassDiagram0.puml" width="250" />
+<puml src="diagrams/AppointmentClassDiagram0.puml"/>
 
 The optional fields could be implemented directly to `Person` as shown in the partial class diagram above.
 However, several other packages depend upon `Person` as well, including `UI` and `Storage`.
 These packages already make assumptions on the `non-null` property on the variables of `Person`.
 
-<puml src="diagrams/AppointmentSequence0.puml" width="250" />
+<puml src="diagrams/AppointmentSequence0.puml" />
 
 The diagram above illustrates a possible path that may arise if the optional property of the field is
 not explicitly defined. There is a need to explicitly denote that our optional field is possibly an
 empty value without having its implementers perform the check themselves, so that the compiler is
 able to assist in our coding.
 
-<puml src="diagrams/AppointmentClassDiagram1.puml" width="250" />
+<puml src="diagrams/AppointmentClassDiagram1.puml" />
 
 Therefore, the implementation of optional fields now return its value wrapped in the Java
 `Optional` wrapper. In this example, when `getAppointment` is called now, the implementer will be
@@ -301,7 +301,7 @@ relationship within itself.
 `Appointment` is distinctly different from other fields in `Person` in that it cannot store its values as
 a String directly - otherwise, this would complicate the process of defining temporal relationships within itself.
 
-<puml src="diagrams/AppointmentClassDiagram2.puml" width="250" />
+<puml src="diagrams/AppointmentClassDiagram2.puml" />
 
 Above is a partial class diagram of `Appointment`. Note that several static members were excluded as they are not
 relevant to its data-structure properties in `HealthSync`.
@@ -319,7 +319,7 @@ HealthSync requests of its users.
 
 Therefore, `Appointment` uses a combination of `regex` and `DateTimeFormatter` to resolve its user input.
 
-<puml src="diagrams/AppointmentActivity0.puml" width="250" />
+<puml src="diagrams/AppointmentActivity0.puml" />
 
 A partial activity diagram illustrating the relevant segment of the parse process.
 
