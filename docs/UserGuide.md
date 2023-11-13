@@ -31,8 +31,6 @@ With MedBook, experience a new level of convenience and control:
 
 <div style="page-break-after: always;"></div>
 
-<!-- * Table of Contents -->
-
 ## Table of Contents
 
 - [Welcome to MedBook](#welcome-to-medbook)
@@ -102,15 +100,13 @@ We're here to make your experience as user-friendly as possible. Let's get start
 
    - Choose a folder where you'd like to manage your patient data.
 
-<box type="tip">
+    <box type="tip">
 
-**Tip**: Create a new folder named `MedBook` for easy organization.
+   **Tip**: Create a new folder named `MedBook` for easy organization.
 
-</box>
+    </box>
 
-- Move `medbook.jar` into the folder as shown below.
-  - **Windows Users**:![Ui](images/WinUserDir.png)
-  - **Mac Users**:![Ui](images/MacUserDir.png)
+   - Move `medbook.jar` into the folder as shown below.
 
 4. **Accessing Terminal**:
 
@@ -125,13 +121,13 @@ We're here to make your experience as user-friendly as possible. Let's get start
 
    - Navigate to to the folder where you have stored `medbook.jar` using the `cd` command
 
-<box type="tip">
+    <box type="tip">
 
-**Tip**: Right-click the folder and select `New Terminal at Folder` (**Mac**) or `Open in Terminal` (**Windows**) to instantly navigate to the folder in your **Terminal**!
+   **Tip**: Right-click the folder and select `New Terminal at Folder` (**Mac**) or `Open in Terminal` (**Windows**) to instantly navigate to the folder in your **Terminal**!
 
-</box>
+    </box>
 
-- Type `java -jar medbook.jar` and hit Enter to start MedBook.<br>
+   - Type `java -jar medbook.jar` and hit Enter to start MedBook.<br>
 
 Once launched, MedBook will look like this:
 ![Ui](images/MedBookUi.png)
@@ -144,6 +140,8 @@ Once launched, MedBook will look like this:
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ## Glossary
 
@@ -159,6 +157,8 @@ Here are some definitions of the terms used throughout this user guide.
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ## Navigating the GUI
 
@@ -179,6 +179,8 @@ Here is a brief summary of the GUI components in MedBook.
 | Pinned Patient List   | Displays a list of Patient Cards of pinned patients                                                      |
 | Command Input Box     | A text box which allows users to input commands                                                          |
 
+<div style="page-break-after: always;"></div>
+
 **Appointment Window**
 ![Appointment Window](images/ViewAppointmentWindow.png)
 
@@ -194,6 +196,8 @@ Here is a brief summary of the GUI components in MedBook.
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ## MedBook Tutorial
 
 1. **Starting MedBook**:
@@ -208,29 +212,31 @@ Here is a brief summary of the GUI components in MedBook.
 
 2. **Opening the Help Window**:
    - Let us try opening the **Help Window**. Type `help` in the Command Input Box and press Enter.
-   - A **Help Window**, similar to the image below, will appear, listing all available commands.<br> <img src="images/HelpWindow.png" width="700"/> <br>
+   - A **Help Window**, similar to the image below, will appear, listing all available commands.<br> <img src="images/HelpWindow.png" width="500"/> <br>
      Please refer to the [Features](#features) section for a more detailed explanation of the commands.
 3. **Adding a New Patient**:
    - Now, let us try adding a new patient. Type in `addpatient n/John Doe i/A0000000B e/johndoe@gmail.com p/12345678 g/M a/26 bt/AB+ al/Penicillin` and press Enter.
-   - The Message Display Box will confirm the successful addition.<br><img src="images/AddPatientSuccess.png" width="800"/>
+   - The Message Display Box will confirm the successful addition.<br><img src="images/AddPatientSuccess.png" width="500"/>
 4. **Practice Adding Patients**:
    - Experiment by adding a few more patients to MedBook on your own!
 5. **Adding a Medical Record**:
    - Now, let us try adding a medical record to a patient. Type in `addrecord 3 d/18-09-2023 1800 c/Fever m/Paracetamol` and press Enter.
    - This will add a new medical record to the third patient shown in the **Patient List**.
-   - The Message Display Box will confirm the successful creation.<br> <img src="images/AddRecordSuccess.png" width="800">
+   - The Message Display Box will confirm the successful creation.<br> <img src="images/AddRecordSuccess.png" width="500">
 6. **Add More Medical Records**:
    - Try creating additional medical records for other patients in MedBook!
 7. **Viewing Patient Records**:
    - Let us view the medical records of the first patient. Type in `view 1` and press Enter.
    - If no medical records were added for the first patient, you will see an empty **Medical Record List** as shown.
-     <br><img src="images/View.png" height="500"/>
+     <br><img src="images/View.png" height="400"/>
 
 Congratulations! You are now ready to explore MedBook on your own. Experiment with different features in the following section and discover the potential of MedBook!
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -269,6 +275,8 @@ Congratulations! You are now ready to explore MedBook on your own. Experiment wi
   - `PINNEDID`: The unique identification for a patient shown in the displayed **Pinned Patient List**.<br>
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 ### Parameters
 
@@ -328,23 +336,9 @@ The **domain** name must: <br>
 
 ---
 
-### Viewing help : `help`
+### Patient features
 
-Opens/focuses the **Help Window** displaying all commands.
-
-Format: `help`
-
-<box type="tip">
-
-**Tip**: If you get stuck while using MedBook, use the `help` command to get a quick overview of all commands!
-
-</box>
-
-<u>[Back to Table Of Contents](#table-of-contents)</u>
-
----
-
-### Adding a patient: `addpatient`
+#### Adding a patient: `addpatient`
 
 Adds a new patient to the system.
 
@@ -373,117 +367,7 @@ Screenshots:
 
 ---
 
-### Adding a medical record: `addrecord`
-
-Adds a new medical record to the system.
-
-Format: `addrecord PATIENTID d/DATETIME c/CONDITIONS... m/MEDICATIONS...`
-
-- Adds a medical record to the patient with the corresponding `PATIENTID`. <br>
-
-- Duplicate entries for `CONDITIONS` and `MEDICATIONS` are allowed and will be considered as separate entries.
-  - `addrecord 1 d/10-11-2023 1800 c/Flu c/Flu m/Ibuprofen m/Ibuprofen` will store **[Flu, Flu]** and **[Ibuprofen, Ibuprofen]** for `CONDITIONS` and `MEDICATIONS`, respectively.
-
-Example:
-
-- `addrecord 3 d/18-09-2023 1800 c/Fever m/Paracetamol`
-  Adds a medical record to the patient with the `PATIENTID` of **3**.
-  The patient visited the clinic on **September 18th, 2023** at **6:00PM** with a **Fever** and was prescribed **Paracetamol**.
-
-Screenshots:
-
-<img src="images/screenshots/addRecord.png" height="500">
-<img src="images/screenshots/addRecord%20-%20after.png" height="500">
-
-<u>[Back to Table Of Contents](#table-of-contents)</u>
-
----
-
-### Adding an appointment: `addappointment`
-
-Adds a new appointment to the system.
-
-Format: `addappointment PATIENTID n/NAME d/DATETIME`
-
-- Adds an appointment to the patient with the corresponding `PATIENTID`.
-
-Example:
-
-- `addappointment 2 n/Eye Examination d/10-10-2023 1800` Adds an `Eye Examination` to the patient with the `PATIENTID` of **2**. The appointment is schedueld for the **10th of October 2023** at **6:00PM**.
-
-Screenshots:
-
-<img src="images/screenshots/addAppointment.png" width="500">
-<img src="images/screenshots/viewAppointment.png" width="500">
-
-<u>[Back to Table Of Contents](#table-of-contents)</u>
-
----
-
-### Listing all patients: `list`
-
-Shows a list of all patients.
-
-Format: `list`
-
-- **All** patients will be shown in the **Patient List**.
-
-<box type="tip">
-
-**Tip**: The `list` command allows you to easily view all the patients in the **Patient List**. For instance, after you've used the `search` command to find specific patients, you can use the `list` command to gather all the patients conveniently!
-
-</box>
-
-<u>[Back to Table Of Contents](#table-of-contents)</u>
-
----
-
-### Viewing patient medical records: `view`
-
-Displays the medical records of a specific patient.
-
-Format: `view PATIENTID`
-
-- The medical records of the patient with the corresponding `PATIENTID` will be displayed on screen in the **Medical Record List**. <br>
-
-- The corresponding patient's **Patient Card** will be displayed in the **Patient Being Viewed** section. <br>
-
-Examples:
-
-- `view 2` displays the medical records of the patient with the `PATIENTID` of **2**. The medical records will be displayed in the **Medical Record List** and patient information will be in the **Patient Being Viewed** section.
-
-<box type="info" seamless>
-
-**Note**: The `PATIENTID` in the **Patient Being Viewed** section will display **1**. If you wish to perform commands on the patient, use the `PATIENTID` displayed in the **Patient List**.
-
-</box>
-
-Screenshots:
-
-<img src="images/screenshots/view.png" width="500">
-<img src="images/screenshots/view%20-%20after.png" width="500">
-
-<u>[Back to Table Of Contents](#table-of-contents)</u>
-
----
-
-### Viewing appointments: `viewappointment`
-
-Opens/focuses the **Appointment Window**.
-
-Format: `viewappointment`
-
-<box type="tip">
-
-**Tip**: Want to know about upcoming appointments? Simply type in `viewappointment`!
-
-</box>
-
-<u>[Back to Table Of Contents](#table-of-contents)</u>
-
----
-
-### Editing a patient: `editpatient`
+#### Editing a patient: `editpatient`
 
 Edits the details of an existing patient.
 
@@ -527,45 +411,28 @@ Screenshots:
 
 ---
 
-### Editing a medical record: `editrecord`
+#### Deleting a patient: `delete`
 
-Edits the details of an existing medical record.
+Deletes an existing patient from the system.
 
-Format: `editrecord PATIENTID/RECORDID PREFIX/NEWVALUE...`
+Format: `delete PATIENTID`
 
-- Edits the details of the medical record with the corresponding `RECORDID` of the patient with the corresponding `PATIENTID`. <br>
+- Deletes the patient with the corresponding `PATIENTID`.
 
-- Acceptable fields : `DATETIME`, `CONDITION`, `MEDICATION`. <br>
+Example:
 
-- Existing values in the respective fields will be updated to the `NEWVALUE`. <br>
+- `delete 2` Deletes the patient with the `PATIENTID` of **2**.
 
-- Multiple entries of `CONDITION` and `MEDICATION` are allowed i.e `editrecord 1/1 c/Flu c/Fever m/Panadol m/Ibuprofen`. <br>
+Screenshots:
 
-<box type="info">
-
-**Note**: When editing `CONDITION` and `MEDICATION`, the existing conditions and medications of the record will be removed i.e adding of conditions and medications is not cumulative.
-
-</box>
-
-<box type="tip">
-
-**Tip**: Spotted an error in the medical record? Fret not, simply use `editrecord` to quickly make changes!
-
-</box>
-
-Examples:
-
-- `editrecord 1/1 d/25-10-2023 1200` Edits the `DATETIME` of the medical record with the `RECORDID` of **1** of the patient with the `PATIENTID` of **1** to **25-10-2023 1200**. <br>
-
-- `editrecord 1/1 c/Headache c/Flu` Edits the `CONDITION` of the medical record with the `RECORDID` of **1** of the patient with the `PATIENTID` of **1** to **Headache, Flu**. <br>
-
-- `editrecord 1/1 c/Headache m/Paracetamol` Edits the `CONDITION` and `MEDICATION` of the medical record with the `RECORDID` of **1** of the patient with the `PATIENTID` of **1** to **Headache** and **Paracetamol**, respectively. <br>
+<img src="images/screenshots/delete.jpg" width="500">
+<img src="images/screenshots/delete%20-%20after.jpg" width="500">
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ---
 
-### Locating patients by keywords: `search`
+#### Locating patients by keywords: `search`
 
 Searches for patients with details containing the corresponding `KEYWORD`.
 
@@ -606,7 +473,179 @@ Screenshots:
 
 ---
 
-### Locating medical records by keywords: `searchrecord`
+#### Listing all patients: `list`
+
+Shows a list of all patients.
+
+Format: `list`
+
+- **All** patients will be shown in the **Patient List**.
+
+<box type="tip">
+
+**Tip**: The `list` command allows you to easily view all the patients in the **Patient List**. For instance, after you've used the `search` command to find specific patients, you can use the `list` command to gather all the patients conveniently!
+
+</box>
+
+<u>[Back to Table Of Contents](#table-of-contents)</u>
+
+---
+
+#### Pinning a patient: `pin`
+
+Pins an existing patient.
+
+Format: `pin PATIENTID`
+
+- Pins the patient with the corresponding `PATIENTID` to the **Pinned Patient List**.
+
+<box type="tip" seamless>
+
+**Tip**: A patient requires follow-up? Use the `pin` command to help you remember to contact them!
+
+</box>
+
+Example:
+
+- `pin 2` Pins the patient with the `PATIENTID` of **2** to the **Pinned Patient List**.
+
+Screenshots:
+
+<img src="images/screenshots/pin.png" width="500">
+<img src="images/screenshots/pin%20-%20after.png" width="500">
+
+<u>[Back to Table Of Contents](#table-of-contents)</u>
+
+---
+
+#### Unpinning a patient: `unpin`
+
+Unpins a pinned patient.
+
+Format: `unpin PINNEDID`
+
+- Unpins the patient with the corresponding `PINNEDID` from the **Pinned Patient List**.
+
+Examples:
+
+- `unpin 2` Unpins the patient with the `PINNEDID` of **2** from the **Pinned Patient List**.
+
+<u>[Back to Table Of Contents](#table-of-contents)</u>
+
+---
+
+### Medical Record features
+
+#### Adding a medical record: `addrecord`
+
+Adds a new medical record to the system.
+
+Format: `addrecord PATIENTID d/DATETIME c/CONDITIONS... m/MEDICATIONS...`
+
+- Adds a medical record to the patient with the corresponding `PATIENTID`. <br>
+
+- Duplicate entries for `CONDITIONS` and `MEDICATIONS` are allowed and will be considered as separate entries.
+  - `addrecord 1 d/10-11-2023 1800 c/Flu c/Flu m/Ibuprofen m/Ibuprofen` will store **[Flu, Flu]** and **[Ibuprofen, Ibuprofen]** for `CONDITIONS` and `MEDICATIONS`, respectively.
+
+Example:
+
+- `addrecord 3 d/18-09-2023 1800 c/Fever m/Paracetamol`
+  Adds a medical record to the patient with the `PATIENTID` of **3**.
+  The patient visited the clinic on **September 18th, 2023** at **6:00PM** with a **Fever** and was prescribed **Paracetamol**.
+
+Screenshots:
+
+<img src="images/screenshots/addRecord.png" height="500">
+<img src="images/screenshots/addRecord%20-%20after.png" height="500">
+
+<u>[Back to Table Of Contents](#table-of-contents)</u>
+
+---
+
+#### Viewing patient medical records: `view`
+
+Displays the medical records of a specific patient.
+
+Format: `view PATIENTID`
+
+- The medical records of the patient with the corresponding `PATIENTID` will be displayed on screen in the **Medical Record List**. <br>
+
+- The corresponding patient's **Patient Card** will be displayed in the **Patient Being Viewed** section. <br>
+
+Examples:
+
+- `view 2` displays the medical records of the patient with the `PATIENTID` of **2**. The medical records will be displayed in the **Medical Record List** and patient information will be in the **Patient Being Viewed** section.
+
+<box type="info" seamless>
+
+**Note**: The `PATIENTID` in the **Patient Being Viewed** section will display **1**. If you wish to perform commands on the patient, use the `PATIENTID` displayed in the **Patient List**.
+
+</box>
+
+Screenshots:
+
+<img src="images/screenshots/view.png" width="500">
+<img src="images/screenshots/view%20-%20after.png" width="500">
+
+<u>[Back to Table Of Contents](#table-of-contents)</u>
+
+---
+
+#### Editing a medical record: `editrecord`
+
+Edits the details of an existing medical record.
+
+Format: `editrecord PATIENTID/RECORDID PREFIX/NEWVALUE...`
+
+- Edits the details of the medical record with the corresponding `RECORDID` of the patient with the corresponding `PATIENTID`. <br>
+
+- Acceptable fields : `DATETIME`, `CONDITION`, `MEDICATION`. <br>
+
+- Existing values in the respective fields will be updated to the `NEWVALUE`. <br>
+
+- Multiple entries of `CONDITION` and `MEDICATION` are allowed i.e `editrecord 1/1 c/Flu c/Fever m/Panadol m/Ibuprofen`. <br>
+
+<box type="info">
+
+**Note**: When editing `CONDITION` and `MEDICATION`, the existing conditions and medications of the record will be removed i.e adding of conditions and medications is not cumulative.
+
+</box>
+
+<box type="tip">
+
+**Tip**: Spotted an error in the medical record? Fret not, simply use `editrecord` to quickly make changes!
+
+</box>
+
+Examples:
+
+- `editrecord 1/1 d/25-10-2023 1200` Edits the `DATETIME` of the medical record with the `RECORDID` of **1** of the patient with the `PATIENTID` of **1** to **25-10-2023 1200**. <br>
+
+- `editrecord 1/1 c/Headache c/Flu` Edits the `CONDITION` of the medical record with the `RECORDID` of **1** of the patient with the `PATIENTID` of **1** to **Headache, Flu**. <br>
+
+- `editrecord 1/1 c/Headache m/Paracetamol` Edits the `CONDITION` and `MEDICATION` of the medical record with the `RECORDID` of **1** of the patient with the `PATIENTID` of **1** to **Headache** and **Paracetamol**, respectively. <br>
+
+<u>[Back to Table Of Contents](#table-of-contents)</u>
+
+---
+
+#### Deleting a medical record: `deleterecord`
+
+Deletes an existing medical record from the system.
+
+Format: `deleterecord PATIENTID/RECORDID`
+
+- Deletes the medical record with the corresponding `RECORDID` from the patient with the corresponding `PATIENTID`.
+
+Example:
+
+- `deleterecord 2/1` Deletes the medical record with the `RECORDID` of **2** from the patient with the `PATIENTID` of **1**.
+
+<u>[Back to Table Of Contents](#table-of-contents)</u>
+
+---
+
+#### Locating medical records by keywords: `searchrecord`
 
 Searches for medical records of the Patient Being Viewed with details containing the corresponding `KEYWORD`.
 
@@ -636,109 +675,7 @@ Examples:
 
 ---
 
-### Deleting a patient: `delete`
-
-Deletes an existing patient from the system.
-
-Format: `delete PATIENTID`
-
-- Deletes the patient with the corresponding `PATIENTID`.
-
-Example:
-
-- `delete 2` Deletes the patient with the `PATIENTID` of **2**.
-
-Screenshots:
-
-<img src="images/screenshots/delete.jpg" width="500">
-<img src="images/screenshots/delete%20-%20after.jpg" width="500">
-
-<u>[Back to Table Of Contents](#table-of-contents)</u>
-
----
-
-### Deleting a medical record: `deleterecord`
-
-Deletes an existing medical record from the system.
-
-Format: `deleterecord PATIENTID/RECORDID`
-
-- Deletes the medical record with the corresponding `RECORDID` from the patient with the corresponding `PATIENTID`.
-
-Example:
-
-- `deleterecord 2/1` Deletes the medical record with the `RECORDID` of **2** from the patient with the `PATIENTID` of **1**.
-
-<u>[Back to Table Of Contents](#table-of-contents)</u>
-
----
-
-### Deleting an appointment: `deleteappointment`
-
-Deletes an appointment from the system.
-
-Format: `deleteappointment APPOINTMENTID`
-
-- Deletes the appointment with the corresponding `APPOINTMENTID`.
-
-<box type="tip">
-
-**Tip**: A patient cannot attend an appointment? Use `deleteappointment` to remove it from your schedule!
-
-</box>
-
-Example:
-
-- `deleteappointment 1` Deletes the appointment with the `APPOINTMENTID` of **1**.
-
-<u>[Back to Table Of Contents](#table-of-contents)</u>
-
----
-
-### Pinning a patient: `pin`
-
-Pins an existing patient.
-
-Format: `pin PATIENTID`
-
-- Pins the patient with the corresponding `PATIENTID` to the **Pinned Patient List**.
-
-<box type="tip" seamless>
-
-**Tip**: A patient requires follow-up? Use the `pin` command to help you remember to contact them!
-
-</box>
-
-Example:
-
-- `pin 2` Pins the patient with the `PATIENTID` of **2** to the **Pinned Patient List**.
-
-Screenshots:
-
-<img src="images/screenshots/pin.png" width="500">
-<img src="images/screenshots/pin%20-%20after.png" width="500">
-
-<u>[Back to Table Of Contents](#table-of-contents)</u>
-
----
-
-### Unpinning a patient: `unpin`
-
-Unpins a pinned patient.
-
-Format: `unpin PINNEDID`
-
-- Unpins the patient with the corresponding `PINNEDID` from the **Pinned Patient List**.
-
-Examples:
-
-- `unpin 2` Unpins the patient with the `PINNEDID` of **2** from the **Pinned Patient List**.
-
-<u>[Back to Table Of Contents](#table-of-contents)</u>
-
----
-
-### Attaching files to a patient's medical record
+#### Attaching files to a patient's medical record
 
 Attach local files to a patient's medical record by clicking on the **Attach** button located within each **Record Card**.
 
@@ -767,7 +704,86 @@ Screenshots:
 
 ---
 
-### Exiting the program: `exit`
+### Appointment features
+
+#### Adding an appointment: `addappointment`
+
+Adds a new appointment to the system.
+
+Format: `addappointment PATIENTID n/NAME d/DATETIME`
+
+- Adds an appointment to the patient with the corresponding `PATIENTID`.
+
+Example:
+
+- `addappointment 2 n/Eye Examination d/10-10-2023 1800` Adds an `Eye Examination` to the patient with the `PATIENTID` of **2**. The appointment is schedueld for the **10th of October 2023** at **6:00PM**.
+
+Screenshots:
+
+<img src="images/screenshots/addAppointment.png" width="500">
+<img src="images/screenshots/viewAppointment.png" width="500">
+
+<u>[Back to Table Of Contents](#table-of-contents)</u>
+
+---
+
+#### Deleting an appointment: `deleteappointment`
+
+Deletes an appointment from the system.
+
+Format: `deleteappointment APPOINTMENTID`
+
+- Deletes the appointment with the corresponding `APPOINTMENTID`.
+
+<box type="tip">
+
+**Tip**: A patient cannot attend an appointment? Use `deleteappointment` to remove it from your schedule!
+
+</box>
+
+Example:
+
+- `deleteappointment 1` Deletes the appointment with the `APPOINTMENTID` of **1**.
+
+<u>[Back to Table Of Contents](#table-of-contents)</u>
+
+---
+
+#### Viewing appointments: `viewappointment`
+
+Opens/focuses the **Appointment Window**.
+
+Format: `viewappointment`
+
+<box type="tip">
+
+**Tip**: Want to know about upcoming appointments? Simply type in `viewappointment`!
+
+</box>
+
+<u>[Back to Table Of Contents](#table-of-contents)</u>
+
+---
+
+### General features
+
+#### Viewing help : `help`
+
+Opens/focuses the **Help Window** displaying all commands.
+
+Format: `help`
+
+<box type="tip">
+
+**Tip**: If you get stuck while using MedBook, use the `help` command to get a quick overview of all commands!
+
+</box>
+
+<u>[Back to Table Of Contents](#table-of-contents)</u>
+
+---
+
+#### Exiting the program: `exit`
 
 Exits the program.
 
@@ -777,7 +793,7 @@ Format: `exit`
 
 ---
 
-### Saving the data
+#### Saving the data
 
 MedBook data is saved in the `data` folder automatically after any command that changes the data. This ensures the safety of your data. When MedBook is restarted, the data is loaded back into the application automatically.
 
@@ -785,7 +801,7 @@ MedBook data is saved in the `data` folder automatically after any command that 
 
 ---
 
-### Editing the data file
+#### Editing the data file
 
 MedBook data is saved automatically as a JSON file located in `[jar file location]/data/medbook.json`. The file can be edited directly to make changes to MedBook data.
 
