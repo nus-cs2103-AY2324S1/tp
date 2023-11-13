@@ -294,7 +294,7 @@ Here are the [parameter](#glossary) requirements of commonly used parameters by 
 
 **Sample Execution**:
 
-![deleteAfter](images/DeleteAfter.png)
+![deleteAfter](images/deleteAfter.png)
 
 ### Clearing all entries : `clear`
 
