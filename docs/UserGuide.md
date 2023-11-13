@@ -28,8 +28,6 @@ If you can type fast, WellNUS can get your contact management and scheduling tas
 
 <div style="page-break-after: always;"></div>
 
-## Table of Contents
-
 * Table of Contents
 {:toc}
 
@@ -496,8 +494,6 @@ The following scenarios will render the data file invalid:<br>
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
 
 ## 3. Frequently Asked Questions (FAQ)
 
