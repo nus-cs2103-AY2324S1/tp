@@ -748,7 +748,12 @@ Stay informed about the latest releases, bug fixes, and new features by checking
 We value your feedback and suggestions. Share your ideas for improvement or new features through our feedback portal given below. Also, if you come across a bug or unexpected behavior, help us improve by reporting it in the feedback portal as well.
 [Feedback Portal](https://docs.google.com/forms/d/e/1FAIpQLSc4rIrGgKWQBDKxmMKP7S0pmuI42OEoxZ00Qaxo0K2rvlVLag/viewform?usp=sf_link)
 
-**Note:** Before reaching out for support, please ensure that you have checked our documentation for relevant information.
+
+<div markdown="block" class="alert alert-warning">
+
+**:bulb: Tips:**<br><br>
+To resolve any issues even faster, try checking out our documentation and FAQs!
+</div>
 
 We appreciate your continued support and strive to provide the best user experience possible.
 
