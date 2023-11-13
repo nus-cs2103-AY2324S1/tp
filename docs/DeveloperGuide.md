@@ -1721,3 +1721,16 @@ Solution:
 * This will establish consistency when a user inputs a wrong index regardless if it's below one or above current number
   of employees displayed.
 * It will still keep the invalid command format error message if index input is not an integer.
+
+### Inconsistent arrangement of leaves in the leave list
+
+Problem:
+* In our current implementation, the leaves in the leave list shown in the result display are sorted according to when they were added to the employee.
+* Moreover, editing a leave date replaces the previous date with the new date, rather than deleting the previous date and adding the new date to the end of the leave list.
+* Such inconsistency can be confusing for users, and the current arrangement might lead to trouble finding specific leave dates in a long list of dates.
+
+Solution:
+* We plan to standardise the arrangement of the leave dates, such that they are sorted in chronological order.
+* After any command that changes the leave list (e.g. `addleave`, `editleave`), the leave list will be re-sorted,
+  with the earliest date at the top of the list and the latest date at the end of the list.
+* This will reduce any inconsistencies, and make finding specific leave dates easier for users.
