@@ -433,21 +433,54 @@ Key methods in this implementation include:
 
 #### Implementation
 
-The Payments feature allows users to keep track of the money they owe to and are owed by their contacts. This feature is useful for users who wish to keep track of their financial transactions with their contacts.
+The Payments feature allows users to keep track of the money they owe to and are owed by their contacts.
+This feature is useful for users who want an easy way to figure out how to settle their payments in one future transaction, and ensure that all transactions are tracked and eventually settled.
 
-Money is represented with a `Balance` class, which is effectively a wrapper around an `int` value representing a monetary value in cents. Validation, including ensuring that values of balances cannot exceed the transaction limit of CampusConnect (currently set at $10,000), is handled by the `Balance` class.
+Three key classes are involved in this implementation:
+- `Balance`: Represents money amounts owed by or to a contact.
+- `PayCommand`: Handles the logic to track that you have paid / lent money to a contact.
+- `PaybackCommand`: Handles the logic to track that you have received / borrowed money from a contact.
+
+Additionally, the `ParserUtil::parseBalance` method is used to parse a human-friendly string representation of a balance into an `int` value representing a monetary value in cents.
+
+Money is represented with a `Balance` class, which is effectively a wrapper around an `int` value representing a monetary value in cents. However, users interact with the `Balance` class through a human-friendly string representation, with a dollars and cents component, that may optionally include a dollar sign.
+
+Most validation is handled by the `Balance` class, through three static methods:
+- `isValidDollarString(String test)`: Checks if a given string is a valid human-friendly string representation of a balance using a validation regex.
+- `isWithinBalanceLimit(Integer balanceInCents)`: Checks if a given integer is a valid balance value that is a field of a contact. CampusConnect restricts users to only be able to track a maximum payment owed to / from a contact of $10,000.
+- `isWithinTransactionLimit(Integer amountInCents)`: Checks if a given integer is a valid money value that is used in a single transaction. Due to the $10,000 balance limit, any individual transaction cannot transact more than $20,000, since that will always lead to the balance limit being exceeded. This check occurs whenever a `Balance` object is instantiated, since there should never be any `Balance` objects with a value greater than $20,000.
+
+The `PayCommand` and `OweCommand` classes are extremely similar. Both classes simply update the Person's balance with the amount given.
+
+The following activity diagram shows the logic of the validation checks that occur when a user uses the `pay` command:
+
+<puml src="diagrams/PayActivityDiagram.puml" alt="PayActivityDiagram" />
+
+The series of validation checks in the activity diagram also applies to the `owe` command.
 
 #### Design considerations
 
-**Aspect: Using integers to represent money value**
+**Aspect: Money representation data type**
+
+There are multiple options to represent money values in the application within the Balance class.
 
 * **Alternative 1 (current choice):** Use `int` to represent money value in cents.
-  * **Pros**: Simple and straightforward.
-  * **Cons**: Requires more complex processing when converting to human-friendly string representations.
+  * Pros: Simple and straightforward, and not vulnerable to floating-point precision errors.
+  * Cons: Requires more complex processing when converting to human-friendly string representations.
 * **Alternative 2:** Use `double` to represent money value in dollars.
-  * **Pros**: More human-friendly.
-  * **Cons**: Vulnerable to floating-point precision errors.
+  * Pros: More human-friendly.
+  * Cons: Vulnerable to floating-point precision errors.
 
+**Aspect: Specialization of commands**
+
+The payments feature could be implemented as a single command, with a negative sign to specify whether the payment is a `pay` or `owe` command.
+
+* **Alternative 1 (current choice):** Use two separate `pay` and `owe` commands to represent positive and negative transactions.
+  * Pros: More straightforward to understand by a human by thinking "I pay $X to contact Y" or "I owe $X to contact Y".
+  * Cons: Requires users to remember two separate commands, and requires more code to implement and be maintained.
+* **Alternative 2:** Use a single command that takes in values with negative signs.
+  * Pros: Only requires users to remember a single command, and less code maintenance required by maintainers.
+  * Cons: Less human-readable, and requires more complex processing to handle negative signs.
 
 ### Notes feature
 #### Implementation
