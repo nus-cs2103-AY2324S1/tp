@@ -55,17 +55,10 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         Index index;
 
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(
-                            Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                            EditCommand.MESSAGE_USAGE
-                    ),
-                    pe
-            );
-        }
+        index = ParserUtil.parseIndex(argMultimap.getPreamble(),
+                String.format(
+                        Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                        EditCommand.MESSAGE_USAGE));
 
         Prefix prefix = argMultimap.verifyExactlyOneIsPresent(
                 CliSyntax.PREFIX_NAME,
@@ -126,19 +119,22 @@ public class EditCommandParser implements Parser<EditCommand> {
 
     private static EditAction generatePhoneAction(ArgumentMultimap argMultimap) throws ParseException {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).get());
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"));
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"),
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         return new EditPhoneAction(index, phone);
     }
 
     private static EditAction generateEmailAction(ArgumentMultimap argMultimap) throws ParseException {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(CliSyntax.PREFIX_EMAIL).get());
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"));
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"),
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         return new EditEmailAction(index, email);
     }
 
     private static EditAction generateLinkAction(ArgumentMultimap argMultimap) throws ParseException {
         Link link = ParserUtil.parseLink(argMultimap.getValue(CliSyntax.PREFIX_LINK).get());
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"));
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"),
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         return new EditLinkAction(index, link);
     }
 
@@ -149,20 +145,23 @@ public class EditCommandParser implements Parser<EditCommand> {
 
     private static EditAction generateCourseAction(ArgumentMultimap argMultimap) throws ParseException {
         Course course = ParserUtil.parseCourseWithPrefixes(argMultimap.getValue(CliSyntax.PREFIX_COURSE).get());
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"));
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"),
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         return new EditCourseAction(index, course);
     }
 
     private static EditAction generateSpecialisationAction(ArgumentMultimap argMultimap) throws ParseException {
         Specialisation specialisation =
                 ParserUtil.parseSpecialisation(argMultimap.getValue(CliSyntax.PREFIX_SPECIALISATION).get());
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"));
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"),
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         return new EditSpecialisationAction(index, specialisation);
     }
 
     private static EditAction generateTagAction(ArgumentMultimap argMultimap) throws ParseException {
         Tag tag = ParserUtil.parseTag(argMultimap.getValue(CliSyntax.PREFIX_TAG).get());
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"));
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"),
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         return new EditTagAction(index, tag);
     }
 

@@ -107,6 +107,15 @@ public class CommandTestUtil {
     public static final AddPersonDescriptor DESC_AMY;
     public static final AddPersonDescriptor DESC_BOB;
     public static final String VALID_INDEX_DESC = " " + CliSyntax.PREFIX_INDEX + " " + "1";
+    public static final String INVALID_INDEX_NEGATIVE = "-1";
+    public static final String INVALID_INDEX_ZERO = "0";
+    public static final String INVALID_INDEX_OVERFLOW = Long.toString(Integer.MAX_VALUE + 1);
+    public static final String INVALID_INDEX_DESC_NEGATIVE =
+            " " + CliSyntax.PREFIX_INDEX + " " + INVALID_INDEX_NEGATIVE;
+    public static final String INVALID_INDEX_DESC_ZERO =
+            " " + CliSyntax.PREFIX_INDEX + " " + INVALID_INDEX_ZERO;
+    public static final String INVALID_INDEX_DESC_OVERFLOW =
+            " " + CliSyntax.PREFIX_INDEX + " " + INVALID_INDEX_OVERFLOW;
 
     static {
         DESC_AMY = new AddPersonDescriptorBuilder()

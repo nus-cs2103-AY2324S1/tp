@@ -79,6 +79,32 @@ public class EditCommandParserTest {
     }
 
     @Test
+    public void parse_invalidIndexOfContact_failure() {
+        assertParseFailure(PARSER,
+                CommandTestUtil.INVALID_INDEX_NEGATIVE + CommandTestUtil.VALID_PHONE_DESC,
+                USAGE_MESSAGE);
+        assertParseFailure(PARSER,
+                CommandTestUtil.INVALID_INDEX_ZERO + CommandTestUtil.VALID_PHONE_DESC,
+                USAGE_MESSAGE);
+        assertParseFailure(PARSER,
+                CommandTestUtil.INVALID_INDEX_OVERFLOW + CommandTestUtil.VALID_PHONE_DESC,
+                USAGE_MESSAGE);
+    }
+
+    @Test
+    public void parse_invalidIndexOfEntry_failure() {
+        assertParseFailure(PARSER,
+                "1" + CommandTestUtil.VALID_PHONE_DESC + CommandTestUtil.INVALID_INDEX_DESC_NEGATIVE,
+                USAGE_MESSAGE);
+        assertParseFailure(PARSER,
+                "1" + CommandTestUtil.VALID_EMAIL_DESC + CommandTestUtil.INVALID_INDEX_DESC_ZERO,
+                USAGE_MESSAGE);
+        assertParseFailure(PARSER,
+                "1" + CommandTestUtil.VALID_LINK_DESC + CommandTestUtil.INVALID_INDEX_DESC_OVERFLOW,
+                USAGE_MESSAGE);
+    }
+
+    @Test
     public void parse_listItemFieldWithoutIndexSpecified_success() {
         EditCommand expectedEditPhoneCommand = new EditCommand(TypicalIndexes.INDEX_FIRST_PERSON,
                 new EditPhoneAction(Index.fromOneBased(1), new Phone("123456")));

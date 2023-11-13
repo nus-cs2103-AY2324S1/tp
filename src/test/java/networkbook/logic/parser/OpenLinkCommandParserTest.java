@@ -14,6 +14,8 @@ import networkbook.testutil.TypicalIndexes;
 
 public class OpenLinkCommandParserTest {
     private static final OpenLinkCommandParser PARSER = new OpenLinkCommandParser();
+    private static final String MESSAGE_INVALID_FORMAT = String.format(
+            Messages.MESSAGE_INVALID_COMMAND_FORMAT, OpenLinkCommand.MESSAGE_USAGE);
 
     @Test
     public void parse_missingPreamble_failure() {
@@ -29,6 +31,38 @@ public class OpenLinkCommandParserTest {
         assertParseFailure(PARSER, "0", expectedMessage);
         assertParseFailure(PARSER, "1 what", expectedMessage);
         assertParseFailure(PARSER, "lol", expectedMessage);
+    }
+
+    @Test
+    public void parse_invalidIndexOfContact_failure() {
+        // negative index
+        assertParseFailure(PARSER, CommandTestUtil.INVALID_INDEX_DESC_NEGATIVE
+                        + CommandTestUtil.VALID_INDEX_DESC,
+                MESSAGE_INVALID_FORMAT);
+
+        // zero
+        assertParseFailure(PARSER, CommandTestUtil.INVALID_INDEX_DESC_ZERO
+                        + CommandTestUtil.VALID_INDEX_DESC,
+                MESSAGE_INVALID_FORMAT);
+
+        // integer overflow
+        assertParseFailure(PARSER, CommandTestUtil.INVALID_INDEX_OVERFLOW,
+                MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_invalidIndexOfLink_failure() {
+        // negative index
+        assertParseFailure(PARSER, "1" + CommandTestUtil.INVALID_INDEX_DESC_NEGATIVE,
+                MESSAGE_INVALID_FORMAT);
+
+        // zero
+        assertParseFailure(PARSER, "1" + CommandTestUtil.INVALID_INDEX_DESC_ZERO,
+                MESSAGE_INVALID_FORMAT);
+
+        // integer overflow
+        assertParseFailure(PARSER, "1" + CommandTestUtil.INVALID_INDEX_OVERFLOW,
+                MESSAGE_INVALID_FORMAT);
     }
 
     @Test

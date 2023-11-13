@@ -9,6 +9,9 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import networkbook.logic.Messages;
+import networkbook.logic.commands.delete.DeletePersonCommand;
+import networkbook.logic.commands.edit.EditCommand;
 import networkbook.logic.parser.exceptions.ParseException;
 import networkbook.model.person.Course;
 import networkbook.model.person.Email;
@@ -54,25 +57,34 @@ public class ParserUtilTest {
 
     private static final String WHITESPACE = " \t\r\n";
 
+    private static final String EDIT_INVALID_COMMAND_MESSAGE =
+            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+
+    private static final String DELETE_INVALID_COMMAND_MESSAGE =
+            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE);
+
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a",
+                EDIT_INVALID_COMMAND_MESSAGE));
     }
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, ParserUtil.MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+        assertThrows(ParseException.class, DELETE_INVALID_COMMAND_MESSAGE, ()
+            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1), DELETE_INVALID_COMMAND_MESSAGE));
     }
 
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(TypicalIndexes.INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
+        assertEquals(TypicalIndexes.INDEX_FIRST_PERSON, ParserUtil.parseIndex("1",
+                EDIT_INVALID_COMMAND_MESSAGE));
 
         // Leading and trailing whitespaces
-        assertEquals(TypicalIndexes.INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+        assertEquals(TypicalIndexes.INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  ",
+                DELETE_INVALID_COMMAND_MESSAGE));
     }
 
     @Test

@@ -95,6 +95,24 @@ public class AddCommandParserTest {
     }
 
     @Test
+    public void parse_invalidIndex_failure() {
+        // negative index
+        assertParseFailure(parser, CommandTestUtil.INVALID_INDEX_DESC_NEGATIVE
+                        + CommandTestUtil.VALID_COURSE_DESC + CommandTestUtil.VALID_COURSE_AMY,
+                        MESSAGE_INVALID_FORMAT);
+
+        // zero
+        assertParseFailure(parser, CommandTestUtil.INVALID_INDEX_DESC_ZERO
+                        + CommandTestUtil.VALID_TAG_DESC + CommandTestUtil.VALID_TAG_FRIEND,
+                MESSAGE_INVALID_FORMAT);
+
+        // integer overflow
+        assertParseFailure(parser, CommandTestUtil.INVALID_INDEX_DESC_OVERFLOW
+                        + CommandTestUtil.VALID_TAG_DESC + CommandTestUtil.VALID_TAG_FRIEND,
+                MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
     public void parse_nameSpecified_failure() {
         Index index = TypicalIndexes.INDEX_FIRST_PERSON;
         String userInput = index.getOneBased() + CommandTestUtil.VALID_NAME_DESC;
@@ -108,7 +126,8 @@ public class AddCommandParserTest {
                 + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.LINK_DESC_AMY
                 + CommandTestUtil.GRADUATION_DESC_AMY + CommandTestUtil.COURSE_DESC_AMY
                 + CommandTestUtil.SPECIALISATION_DESC_AMY
-                + CommandTestUtil.TAG_DESC_FRIEND;
+                + CommandTestUtil.TAG_DESC_FRIEND
+                + CommandTestUtil.PRIORITY_DESC_AMY;
 
         AddPersonDescriptor descriptor = new AddPersonDescriptorBuilder()
                 .withPhone(CommandTestUtil.VALID_PHONE_BOB)
@@ -118,6 +137,7 @@ public class AddCommandParserTest {
                 .withCourse(CommandTestUtil.VALID_COURSE_AMY)
                 .withSpecialisation(CommandTestUtil.VALID_SPECIALISATION_AMY)
                 .withTags(CommandTestUtil.VALID_TAG_HUSBAND, CommandTestUtil.VALID_TAG_FRIEND)
+                .withPriority(CommandTestUtil.VALID_PRIORITY_AMY)
                 .build();
         AddCommand expectedCommand = new AddCommand(targetIndex, descriptor);
 
