@@ -20,7 +20,7 @@ public class StudentTest {
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Student student = new StudentBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> student.getTags().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> student.getRiskLevel().remove(0));
     }
 
     @Test
@@ -88,7 +88,7 @@ public class StudentTest {
     @Test
     public void toStringMethod() {
         String expected = Student.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", address=" + ALICE.getAddress() + ", risk level=" + ALICE.getTags()
+                + ", address=" + ALICE.getAddress() + ", risk level=" + ALICE.getRiskLevel()
                 + ", note=" + ALICE.getNote() + "}";
         assertEquals(expected, ALICE.toString());
     }

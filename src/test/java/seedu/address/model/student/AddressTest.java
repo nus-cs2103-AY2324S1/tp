@@ -24,18 +24,30 @@ public class AddressTest {
         String twoHundredCharAddress = "Krung Thep Mahanakhon Amon Rattanakosin Mahinthara Ayuthaya Mahadilok Phop "
                 + "Noppharat Ratchathani Burirom Udomratchaniwet Mahasathan Amon Piman Awatan Sathit Sakkathattiya "
                 + "Witsanukam Prasit aka Bangkok";
-        // null address
+
+
+        // Invalid addresses
+
+        // EP: null address
         assertThrows(NullPointerException.class, () -> Address.isValidAddress(null));
 
-        // invalid addresses
-        assertFalse(Address.isValidAddress("")); // empty string
-        assertFalse(Address.isValidAddress(" ")); // spaces only
-        assertFalse(Address.isValidAddress(twoHundredCharAddress + "a")); // more than 200 characters
 
-        // valid addresses
-        assertTrue(Address.isValidAddress("Blk 456, Den Road, #01-355"));
-        assertTrue(Address.isValidAddress("-")); // one character
-        assertTrue(Address.isValidAddress(twoHundredCharAddress)); // exactly 200 characters
+        // EP: empty strings (0 characters or blank space)
+        assertFalse(Address.isValidAddress("")); // empty string
+        assertFalse(Address.isValidAddress(" ")); // blank space
+
+        // EP: exceed 200 characters
+        assertFalse(Address.isValidAddress(twoHundredCharAddress + "a")); // 201 characters
+
+
+        // Valid addresses
+
+        // EP: exactly one character
+        assertTrue(Address.isValidAddress("-"));
+
+        // EP: exactly 200 characters
+        assertTrue(Address.isValidAddress(twoHundredCharAddress));
+
     }
 
     @Test
