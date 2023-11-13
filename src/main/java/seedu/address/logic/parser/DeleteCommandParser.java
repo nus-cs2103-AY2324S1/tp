@@ -56,7 +56,9 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
         StatusContainsKeywordsPredicate statusPredicate = new StatusContainsKeywordsPredicate(statusKeywords);
         TagContainsKeywordsPredicate tagPredicate = new TagContainsKeywordsPredicate(tagKeywords);
-        return new DeleteCommand(getPredicatesList(statusKeywords, tagKeywords, statusPredicate, tagPredicate));
+        List<Predicate<Person>> predicateList = getPredicatesList(statusKeywords, tagKeywords, statusPredicate,
+                tagPredicate);
+        return new DeleteCommand(predicateList);
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
