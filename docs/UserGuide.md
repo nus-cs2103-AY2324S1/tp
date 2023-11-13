@@ -90,6 +90,9 @@ Format: `add n/NAME i/NRIC p/CONTACT NUMBER e/EMAIL a/ADDRESS [t/TAG]... l/LICEN
   * `pn/POLICY NUMBER`
   * `pi/POLICY ISSUE DATE`
   * `pe/POLICY EXPIRY DATE`
+<div markdown="block" class="alert alert-info">
+**:information_source: Note:** These four fields are referred to as `4 policy fields` in the following section.
+</div>
 
 Examples:
 * `add n/Irfan Ibrahim i/752X p/92492021 e/irfan@example.com a/Blk 47 Tampines Street 20,#17-35 t/classmates l/SBP8888T` adds a client Irfan without a policy.
