@@ -498,7 +498,7 @@ from _12pm_ to _1pm_ for his _follow-up appointment on his chest X-Ray_.
 
 :pencil2: **Notes:**
 
-- The patient provided for an appointment must exactly match the _full name_ of a patient that is already in the patient records. 
+- The patient provided for an appointment must exactly match the _full name_ of a patient that is already in the patient records (case-sensitive). 
 
 - An appointment start and end must be in the format `yyyy/MM/dd HH:mm`, e.g. `2023/04/28 19:00` for 28 April 2023, at 7pm.
 
