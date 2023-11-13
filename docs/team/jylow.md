@@ -13,13 +13,11 @@ such as sorting, scheduling and other commands to query information quickly requ
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to sort list by appointment time and name by lexicographical order. [\#73](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/73) [\#90](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/90)
+* **New Feature**: Added the ability to sort list by appointment time, and name by lexicographical order. [\#73](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/73) [\#90](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/90)
     * What it does: Allows the user to perform sorting of list by appointment time and lexicographical order of name.
     * Justification: This feature improves the product significantly because a user can more efficiently find clients by name and the proximity of their appointments to view upcoming appointments.
-    * Credits: The feature was implemented by referencing JavaFX ObservableList documentation. 
-  
+    * Credits: The feature was implemented by referencing JavaFX ObservableList documentation.
 <br>
-
 * **New Feature**: Added confirm override window for `schedule` command if person already has a current appointment. [\#123](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/123)
   * What it does: Caution a user if he intends to schedule a new appointment when there is already one that is not yet complete.
   * Justification: Most people only arrange one appointment at a time. So the design prevents multiple appointments and also serves as a reminder of a previously set appointment.
