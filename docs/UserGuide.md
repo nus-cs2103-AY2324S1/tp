@@ -122,6 +122,8 @@ It will open a new help window, that shows all the commands in linktree.
 
 3. Refer to the [features](#features) section for details of each command.
 
+<div style="page-break-after: always;"></div>
+
 
 ### Understanding the GUI
 
@@ -236,10 +238,11 @@ Then type `delete 3` to delete that entry.
 
 **:information_source: Note:**<br>
 * Index must be a positive integer.
-* You cannot delete a developer who is a **team leader** for any of the teams. To delete that developer, you will have to change the team leader using `editTeamLeader` command. And then you can remove that developer from the 
-* addressbook.
+* You cannot delete a developer who is a **team leader** for any of the teams. To delete that developer, you will have to change the team leader using `editTeamLeader` command. And then you can remove that developer from the addressbook.
  ![DeleteTeamLeader](images/UG_images/DeleteTeamLeader.png)
 </div>
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-danger">
 
@@ -421,7 +424,7 @@ Click [here](#table-of-contents) to go back to contents.
 #### Example usage:
 * For example: if you want to delete developer **John Lim** from **Team Bravo**.
 * You need to type `deletedev tn/Team Bravo n/John Lim`, then the developer 
-**John Lim** will be removed from **Team Alpha**.
+**John Lim** will be removed from **Team Bravo**.
   ![DeleteDevFromTeam](images/UG_images/DeleteDevFromTeam.png)
 
 <div markdown="block" class="alert alert-primary">
@@ -443,8 +446,8 @@ Click [here](#table-of-contents) to go back to contents.
 * `editTeamName tn/[Existing team name] tn/[New team name]`
 
 #### Example usage:
-  * Example: `editTeamName tn/Alpha Team tn/Beta Team`
-  - Result: Now, the team with original team name `Alpha Team` changed its team name to `Beta Team`.
+  * For example, if you want edit the team name **Team Alpha** to **Team Romeo**. Type `editTeamName tn/Team Alpha tn/Team Romeo`.
+  * You will now see that `Team Alpha` has been changed to `Team Romeo` in the list of teams.
     ![EditTeamNameCommand](images/UG_images/EditTeamNameCommand.png)
 
 <div markdown="block" class="alert alert-primary">
@@ -465,8 +468,8 @@ Click [here](#table-of-contents) to go back to contents.
 * `editTeamLeader tn/[Team name] tl/[New Team leader]`
 
 #### Example usage: 
-- `editTeamLeader tn/Alpha Team tl/Bob`
-  - Result: Now, the team with team name `Alpha Team` changed its team leader to be `Bob`.
+- For example, if want to change the team leader of `Team Romeo` to `John Lim`, you need to type `editTeamLeader tn/Team Romeo tl/John Lim`.
+- Now, you will see that the team leader for `Team Romeo` has changed to `John Lim`.
   ![EditTeamLeaderCommand](images/UG_images/EditTeamLeaderCommand.png)
   
 <div markdown="block" class="alert alert-primary">
@@ -490,8 +493,8 @@ Click [here](#table-of-contents) to go back to contents.
 - For example, type `findteam Alpha` to find all the teams with keyword **Alpha**.
 - In the following example, you can see that the matching results are **Team Alpha** and **Alpha Squad**.
   ![FindTeamCommand](images/UG_images/FindTeamCommnd.png)
-- You can also use multiple keywords, for example type `findteam Bravo Charlie` which shows the following teams 
-**Bravo Team**, **Charlie Crew** and **Delta Bravo Charlie Team**.
+- You can also use multiple keywords, for example type `findteam Bravo Charlie` which will show the all the teams 
+with keywords Bravo or Charlie.
 
 
 <div markdown="block" class="alert alert-primary">
@@ -517,6 +520,8 @@ Click [here](#table-of-contents) to go back to contents.
 ### List teams
 #### What this command does:
 * Displays the list of all the teams in this project.
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-primary">
 
@@ -544,6 +549,8 @@ and type `listt` again when you want to go back to the main window.
 </div>
 
 Click [here](#table-of-contents) to go back to contents.
+
+<div style="page-break-after: always;"></div>
 
 <br>
 
@@ -821,7 +828,7 @@ Click [here](#table-of-contents) to go back to contents.
 | .jar        | Java Archive - A file format used to package Java class files, associated metadata, and resources into a single archive file. It is a common format for distributing Java applications or libraries. |
 | Addressbook | A file that stores the list of developers in the application.                                                                                                                                        |
 | Teambook    | A file that stores the list of teams in the application.                                                                                                                                             |
-| Prefix      | A keyword used before certain elements in a command to specify its type or category.                                                                                                                 |                                     
+| Prefix      | A keyword used before certain elements in a command to specify its type or category.                                                                                                                 |                               
 | Tag         | A label or keyword assigned to developers for categorization and easy identification.                                                                                                                |
 | Tree        | A visual representation of the top-down project's structure, displaying teams and developers.                                                                                                        |
 | Index       | A numerical identifier assigned to developers or teams for reference.                                                                                                                                |             
