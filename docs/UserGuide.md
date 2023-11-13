@@ -37,16 +37,16 @@ Let TAManager handles all your TA management needs, while you power up your lect
 Whether you're a new user or an experienced one, this guide is designed to help you make the most of TAManager.
 Follow the instructions below based on your familiarity with TAManager.
 
-- **New Users:** If you're just getting started, we recommend to begin with the [Quick Start](#quick-start) section. This will provide you with step-by-step introductions to TAManager's essential features.
+- **New Users:** If you're just getting started, we recommend beginning with the [Quick Start](#quick-start) section. This will provide you with a comprehensive introduction to TAManager's essential features.
 
 - **Experienced Users:** If you are an experienced user of TAManager, you can use the [Table of Contents](#table-of-contents) to quickly navigate to specific sections of interest. If you're looking for a quick reference, the [Command Summary](#command-summary) provides an overview of the command syntax.
 
-Throughout our user guide, you will see the following annotations:
+Throughout our guide, you will see the following annotations:
 
 | Annotation                         | Meaning                                                                                    |
 |------------------------------------|--------------------------------------------------------------------------------------------|
 | [Text in blue](javascript: void)   | Clicking on the highlighted text will bring you to the relevant section of the user guide. |
-| `Text with light blue background`  | These are commands that you can type into TAManager.                                       |
+| `Text with light blue background`  | These represent inputs by you, or outputs from your machine.                               |
 
 <br/>
 
@@ -62,7 +62,7 @@ Throughout our user guide, you will see the following annotations:
 
 ## Quick Start
 
-1. Ensure you have Java `11` or above installed on your computer. To check, run the command `java -version` in the terminal.
+1. Ensure you have **Java 11** or above installed on your computer. To check, run the command `java -version` in the terminal.
 
 2. Download the latest `TAManager.jar` from [here](https://github.com/AY2324S1-CS2103T-T10-1/tp/releases).
 
@@ -72,13 +72,13 @@ Throughout our user guide, you will see the following annotations:
    A GUI similar to the one below should appear in a few seconds. Note how the app contains some sample data.
    ![UI](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. For example, typing `help` and pressing Enter will open the help window.
-   Here are some example commands you can try:
+5. Type a command in the command box and press Enter to execute it. For example, typing `help` and pressing Enter will open the help window.
+   Here are some more example commands you can try:
 
    - `list`: Lists all teaching assistants.
    - `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball t/fulltime c/CS1231S h/10`: Adds a teaching assistant named Snowball to the list.
+   - `edit 1 n/Napoleon p/23456789`: Edits the name and phone number of the 1st teaching assistant shown in the current list.
    - `delete 3`: Deletes the 3rd teaching assistant shown in the current list.
-   - `clear`: Deletes all teaching assistants.
    - `exit`: Exits the app.
 
 6. Refer to the following sections below for details on each command.
@@ -98,14 +98,14 @@ Throughout our user guide, you will see the following annotations:
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/fulltime` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/fulltime`, `t/student t/year2` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -147,15 +147,15 @@ You can add a new teaching assistant into TAManager, so that you can keep track 
 add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [h/HOUR] [t/TAG]... [c/COURSE_CODE]...
 ```
 
-| Fields        | Format                                                                                 | Remarks                                                                                                    |
-|---------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
-| `NAME`        | String and case-sensitive                                                              | Full name of the teaching assistant                                                                        |
-| `PHONE`       | Integer of 3-10 digits                                                                 | Phone number of the teaching assistant                                                                     |
-| `EMAIL`       | A valid email address of the format local-part@domain                                  | Email address of the teaching assistant                                                                    |
-| `TELEGRAM`    | String of 5-32 characters that starts with "@"                                         | Telegram handle of the teaching assistant                                                                  |
-| `HOUR`        | Integer between 0 and 9999                                                             | Total working hours of the teaching assistant - defaults to 0 if not provided                              |
-| `TAG`         | Alphanumeric string without spaces                                                     | Tag(s) of the teaching assistant                                                                           |
-| `COURSE_CODE` | Starts with 2-3 alphabets, followed by 4 numbers, and optionally ends with an alphabet | Course code of the course the teaching assistant is teaching and it should be one of the available courses |
+| Fields        | Format                                         | Remarks                                                                                                    |
+|---------------|------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `NAME`        | Alphanumeric string                            | Full name of the teaching assistant                                                                        |
+| `PHONE`       | Integer of 3-10 digits                         | Phone number of the teaching assistant                                                                     |
+| `EMAIL`       | String in "local-part@domain" format           | Email address of the teaching assistant                                                                    |
+| `TELEGRAM`    | String of 5-32 characters that starts with "@" | Telegram handle of the teaching assistant                                                                  |
+| `HOUR`        | Integer between 0 and 9999                     | Total working hours of the teaching assistant - defaults to 0 if not provided                              |
+| `TAG`         | Alphanumeric string without spaces             | Tag(s) of the teaching assistant                                                                           |
+| `COURSE_CODE` | String in valid NUS course code format         | Course code of the course the teaching assistant is teaching and it should be one of the available courses |
 
 ##### Example:
 - `add n/ Rayner Toh p/93812311 e/rayner@example.com tele/@raynertjx h/4 t/parttime c/CS2103T` adds a new teaching assistant named Rayner Toh to TAManager.
@@ -202,16 +202,16 @@ You can change the details of an existing teaching assistant in TAManager, so th
 edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [tele/TELEGRAM] [h/HOUR] [t/TAG]... [c/COURSE_CODE]...
 ```
 
-| Fields        | Format                                                                                 | Remarks                                                                                                                |
-|---------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
-| `INDEX`       | Positive integer (1, 2, 3, ...)                                                        | Index of the teaching assistant in the TA List to be edited. This index is with reference to the **displayed** TA list |
-| `NAME`        | String and case-sensitive                                                              | Full name of the teaching assistant                                                                                    |
-| `PHONE`       | Integer of 3-10 digits                                                                 | Phone number of the teaching assistant                                                                                 |
-| `EMAIL`       | A valid email address of the format local-part@domain                                  | Email address of the teaching assistant                                                                                |
-| `TELEGRAM`    | String of 5-32 characters that starts with "@"                                         | Telegram handle of the teaching assistant                                                                              |
-| `HOUR`        | Integer between 0 and 9999                                                             | Total working hours of the teaching assistant                                                                          |
-| `TAG`         | Alphanumeric string without spaces                                                     | Tag(s) of the teaching assistant                                                                                       |
-| `COURSE_CODE` | Starts with 2-3 alphabets, followed by 4 numbers, and optionally ends with an alphabet | Course code of the course the teaching assistant is teaching and it should be one of the available courses             |
+| Fields        | Format                                         | Remarks                                                                                                                |
+|---------------|------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
+| `INDEX`       | Positive integer (1, 2, 3, ...)                | Index of the teaching assistant in the TA List to be edited. This index is with reference to the **displayed** TA list |
+| `NAME`        | Alphanumeric string                            | Full name of the teaching assistant                                                                                    |
+| `PHONE`       | Integer of 3-10 digits                         | Phone number of the teaching assistant                                                                                 |
+| `EMAIL`       | String in "local-part@domain" format           | Email address of the teaching assistant                                                                                |
+| `TELEGRAM`    | String of 5-32 characters that starts with "@" | Telegram handle of the teaching assistant                                                                              |
+| `HOUR`        | Integer between 0 and 9999                     | Total working hours of the teaching assistant                                                                          |
+| `TAG`         | Alphanumeric string without spaces             | Tag(s) of the teaching assistant                                                                                       |
+| `COURSE_CODE` | String in valid NUS course code format         | Course code of the course the teaching assistant is teaching and it should be one of the available courses             |
 
 <div markdown="block" class="alert alert-info">
 
@@ -289,21 +289,21 @@ Listed all teaching assistants
 
 ### 1.4 Finding a Teaching Assistant: `find`
 
-You can find specific teaching assistants using various search parameters, so that you can quickly find the specific teaching assistant you are looking for.
+You can find specific teaching assistants using various search parameters, so that you can quickly find the specific teaching assistant(s) you are looking for.
 
 ##### Format: 
 ```
 find [n/NAME] [c/COURSE_CODE] [d/DAY from/FROM to/TO] [t/TAG]
 ```
 
-| Fields        | Format                                                                                 | Remarks                                                                                                    |
-|---------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
-| `NAME`        | String                                                                                 | Full name of the teaching assistant                                                                        |
-| `COURSE_CODE` | Starts with 2-3 alphabets, followed by 4 numbers, and optionally ends with an alphabet | Course code of the course the teaching assistant is teaching and it should be one of the available courses |
-| `DAY`         | Integer between 1 and 5                                                                | Day of the week (Monday-Friday) the teaching assistant is free                                             |
-| `FROM`        | Time in "HH:mm" format                                                                 | Start time of the free time of the teaching assistant                                                      |
-| `TO`          | Time in "HH:mm" format                                                                 | End time of the free time of the teaching assistant                                                        |
-| `TAG`         | Alphanumeric string without spaces                                                     | Tag(s) of the teaching assistant                                                                           |
+| Fields        | Format                                               | Remarks                                                                                                    |
+|---------------|------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `NAME`        | String, case insensitive                             | Full name of the teaching assistant                                                                        |
+| `COURSE_CODE` | String in valid NUS course code format               | Course code of the course the teaching assistant is teaching and it should be one of the available courses |
+| `DAY`         | Integer between 1 and 5                              | Day of the week (Monday-Friday) the teaching assistant is free                                             |
+| `FROM`        | String in "HH:mm" format                             | Start time of the free time of the teaching assistant                                                      |
+| `TO`          | String in "HH:mm" format                             | End time of the free time of the teaching assistant                                                        |
+| `TAG`         | Alphanumeric string without spaces, case *sensitive* | Tag(s) of the teaching assistant                                                                           |
 
 <div markdown="block" class="alert alert-info">
 
@@ -311,7 +311,8 @@ find [n/NAME] [c/COURSE_CODE] [d/DAY from/FROM to/TO] [t/TAG]
 - The name prefix `n/` allows for **multiple keywords** to be used, separated by spaces.
 - The course prefix `c/` and free time prefixes `d/ from/ to/` allows for **one keyword** to be used for each prefix.
 - To **search by the free time** field, **all three prefixes** `d/ from/ to/` **must be present** and all respective parameters need to be correctly given.
-- The search is **case-insensitive** (e.g. `alex` will match `Alex`, `cs1231s` will match `CS1231S`).
+- The search for names and courses are **case-insensitive** (e.g. `alex` will match `Alex`, `cs1231s` will match `CS1231S`).
+- The search for tags is **case-sensitive** (e.g. `parttime` will not match `partTime`).
 - **Only full words** will be matched (e.g. `Alex` will not match `Alexis`, `cs1231` will not match `cs1231s`).
 - You can apply **multiple search filters** to narrow down the search results by **including multiple filters in one command**.
 - The search filters are **applied to the full list of TAs**, not the displayed list of TAs.
@@ -322,6 +323,7 @@ find [n/NAME] [c/COURSE_CODE] [d/DAY from/FROM to/TO] [t/TAG]
 - `find n/Alex` returns all teaching assistants whose names contain `alex` (e.g. `Alex Yeoh`).
 - `find n/Alex Bernice` gives all TAs who have either "Alex" or "Bernice" in their names.
 - `find c/cs1231s` returns all teaching assistants that are teaching `cs1231s`.
+- `find t/parttime` returns all teaching assistants with the `parttime` tag.
 - `find n/Alex c/cs1231s` returns all teaching assistants whose names contain `alex` and are teaching `cs1231s`.
 - `find d/1 from/10:00 to/12:00` returns all teaching assistants that are free on `Monday` from `10:00` to `12:00`.
 - `find c/cs2103t d/1 from/10:00 to/12:00` returns all teaching assistants who are teaching `cs2103t` and are free on `Monday` from `10:00` to `12:00`.
@@ -334,8 +336,8 @@ find [n/NAME] [c/COURSE_CODE] [d/DAY from/FROM to/TO] [t/TAG]
 :heavy_check_mark: When the command succeeds:
 </div>
 ```
-Filters applied: [filters applied by the user]
-[number of TAs found] persons listed!
+Filters applied: name: [Alex]
+1 persons listed!
 ```
 </div>
 
@@ -370,7 +372,7 @@ delete INDEX
 - `find n/Betsy` followed by `delete 1` deletes the first teaching assistant in the results of the [`find`](#14-finding-a-teaching-assistant--find) command.
 
 ![remove TA](images/deleteTA.png)
-*<center>TAManager deletes the teaching assistant at the index <code>7</code>.</center>*
+*<center>TAManager deletes the teaching assistant at index <code>7</code>.</center>*
 
 <div markdown="block" class="command-succeed">
 <div  class="alert alert-success">
@@ -432,7 +434,7 @@ hour HOUR
 - `find c/CS1231S` then `hour 4` adds 4 hours to all `CS1231S` TAs and other TAs will not be affected.
 
 ![update Hour](images/addHours.png)
-*<center>TAManager adds the specified number of hours to all teaching assistants.</center>*
+*<center>TAManager adds 4 hours to all teaching assistants in the current list.</center>*
 
 <div markdown="block" class="command-succeed">
 <div class="alert alert-success">
@@ -458,7 +460,7 @@ Hour updated to all TAs identified!
 
 ### 1.7 Editing free time of a Teaching Assistant: `editft`
 
-You can edit the free time of a specific teaching assistant on a specified day, so that you can keep the latest information of your teaching assistants' free time.
+You can edit the free time of a specific teaching assistant on a specified day, so that you can keep track of changes in your teaching assistants' free time.
 
 ##### Format: 
 ```
@@ -469,8 +471,8 @@ editft INDEX d/DAY from/FROM to/TO
 |---------|---------------------------------|------------------------------------------------------------------------------------------------------------------------|
 | `INDEX` | Positive integer (1, 2, 3, ...) | Index of the teaching assistant in the TA List to be edited. This index is with reference to the **displayed** TA list |
 | `DAY`   | Integer between 1 and 5         | Day of the week (Monday-Friday) the teaching assistant is free                                                         |
-| `FROM`  | Time in "HH:mm" format          | Start time of the free time of the teaching assistant                                                                  |
-| `TO`    | Time in "HH:mm" format          | End time of the free time of the teaching assistant                                                                    |
+| `FROM`  | String in "HH:mm" format        | Start time of the free time of the teaching assistant                                                                  |
+| `TO`    | String in "HH:mm" format        | End time of the free time of the teaching assistant                                                                    |
 
 <div markdown="block" class="alert alert-info">
 
@@ -480,17 +482,28 @@ editft INDEX d/DAY from/FROM to/TO
 </div>
 
 ##### Example:
-- `editft 1 d/2 from/13:00 to/15:00` updates the free time of the TA at index 1 to be Tuesday from 13:00 to 15:00.
+- `editft 1 d/2 from/13:00 to/15:00` updates the free time of the TA at index <code>1</code> to be from <code>13:00</code> to <code>15:00</code> on Tuesday.
 
 ![update Hour](images/editFreeTime.png)
-*<center>TAManager edits the free time of the teaching assistant at index <code>1</code> on Tuesday to be from <code>13:00</code> to <code>15:00</code>.</center>*
+*<center>TAManager edits the free time of the teaching assistant at index <code>1</code> to be from <code>13:00</code> to <code>15:00</code> on Tuesday.</center>*
 
 <div markdown="block" class="command-succeed">
 <div class="alert alert-success">
 :heavy_check_mark: When the command succeeds:
 </div>
 ```
-Edited Teaching Assistant: [Details of TA specified]
+Edited Teaching Assistant: Alex Yeoh; Phone: 87438; Email: alexyeoh@example.com; Telegram: @12345_; 
+Free Time: 
+Mon: 11:30-12:30
+Tue: 13:00-15:00
+Wed: 11:30-12:30
+Thu: 11:30-12:30
+Fri: 11:30-12:30
+Tags: ; 
+Courses:
+Name: Software Engineering
+Lessons: [CS2103T Project 11:00-14:00, CS2103T Lecture 10:00-12:00, CS2103T Tutorial 10:00-12:00, CS2103T Laboratory 10:00-12:00]; 
+Work Hour: 8
 ```
 </div>
 
