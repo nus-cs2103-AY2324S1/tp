@@ -7,6 +7,7 @@
 # LinkTree Developer Guide
 
 ## Table of Contents
+
 * [Acknowledgements](#acknowledgements)
 * [Setting up, getting started](#setting-up-getting-started)
 * [Design](#design)
@@ -17,53 +18,47 @@
     * [Storage component](#storage-component)
     * [Common classes](#common-classes)
 * [Implementation](#implementation)
-* [Add developer command](#add-a-developer)
-    * [Feature usage](#usage)
-    * [Feature implementation](#function-implementation)
-* [Remove developer command](#remove-a-developer)
-    * [Feature usage](#usage)
-    * [Feature implementation](#function-implementation-1)
-* [Edit developer command](#)
-    * [Feature usage](#)
-    * [Feature implementation](#)
-* [Find developer command](#)
-    * [Feature usage](#)
-    * [Feature implementation](#)
-* [Create team command](#)
-    * [Feature usage](#)
-    * [Feature implementation](#)
-    * [Design considerations](#)
-* [Add dev to team command](#)
-    * [Feature usage](#)
-    * [Feature implementation](#)
-    * [Design considerations](#)
-* [Delete team command](#)
-    * [Feature usage](#)
-    * [Feature implementation](#)
-* [Remove dev from team command](#)
-    * [Feature usage](#)
-    * [Feature implementation](#)
-* [Edit team name command](#)
-    * [Feature usage](#)
-    * [Feature implementation](#)
-* [Edit team leader command](#)
-    * [Feature usage](#)
-    * [Feature implementation](#)
-* [Find team command](#)
-    * [Feature usage](#)
-    * [Feature implementation](#)
-* [List command](#)
-    * [Feature usage](#)
-    * [Feature implementation](#)
-* [Display tree command](#)
-    * [Feature usage](#)
-    * [Feature implementation](#)
-* [Help Command](#)
-    * [Feature usage](#)
-    * [Feature implementation](#)
-* [Clear command](#)
-    * [Feature usage](#)
-    * [Feature implementation](#)
+    * [Add developer command](#add-a-developer)
+        * [Feature usage](#usage)
+        * [Function implementation](#function-implementation)
+    * [Remove developer command](#remove-a-developer)
+        * [Feature usage](#usage-2)
+        * [Function implementation](#function-implementation-2)
+    * [Edit developer command](#edit-a-developer)
+        * [Feature usage](#usage-3)
+        * [Function implementation](#function-implementation-3)
+    * [Find developer command](#find-a-developer)
+        * [Feature usage](#usage-4)
+        * [Function implementation](#function-implementation-4)
+    * [Create team command](#create-a-new-team)
+        * [Feature usage](#usage-5)
+        * [Function implementation](#function-implementation-5)
+        * [Design considerations](#design-considerations)
+    * [Add dev to team command](#add-developers-to-an-existing-team)
+        * [Feature usage](#usage-6)
+        * [Function implementation](#function-implementation-6)
+        * [Design considerations](#design-considerations)
+    * [Delete team command](#remove-an-existing-team)
+        * [Feature usage](#usage-7)
+        * [Function implementation](#function-implementation-7)
+    * [Remove dev from team command](#delete-developers-from-an-existing-team)
+        * [Feature usage](#usage-8)
+        * [Function implementation](#function-implementation-8)
+    * [Edit team name command](#)
+        * [Feature usage](#)
+        * [Function implementation](#)
+    * [Edit team leader command](#)
+        * [Feature usage](#)
+        * [Function implementation](#)
+    * [Find team command](#)
+        * [Feature usage](#)
+        * [Function implementation](#)
+    * [List command](#)
+        * [Feature usage](#)
+        * [Function implementation](#)
+    * [Display tree command](#)
+        * [Feature usage](#)
+        * [Function implementation](#)
 * [Documentation, logging, testing, configuration & dev-ops](#documentation-logging-testing-configuration-dev-ops)
 * [Appendix A: Requirements](#appendix-a-requirements)
     * [Product Scope](#product-scope)
@@ -77,8 +72,6 @@
     * [Saving data](#saving-data)
 * [Appendix C: Effort](#appendix-c-effort)
 * [Appendix D: Future enhancements](#appendix-d-future-enhancements)
-
-<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 <br>
@@ -455,7 +448,7 @@ Given below is an example usage scenario and how the function behaves at each st
 
 - **Command Syntax**: `dev2team tn/[TEAMNAME] n/[Developer name]`
 - **Example**: `dev2team tn/Test Team 1 tl/Jason`
-  - Adds `Jason` to a team called `Test Team 1
+  - Adds `Jason` to a team called `Test Team 1`
 
 LinkTree provides a feedback based on whether the operation was successful or not.
 
@@ -489,68 +482,62 @@ LinkTree provides a feedback based on whether the operation was successful or no
 <br>
 
 ### **Remove an existing Team**
-
-Removing an existing team feature is facilitated by the `DeleteTeamCommand`. It extends the `Command` class. 
-
-The operations are exposed in the `Model` interface as `Model#deleteTeam()`.
+The `deleteteam` command implemented in the `DeleleteTeamCommand` class, allows users to delete an existing team from the teambook. This `DeleleteTeamCommand` class extends the abstract class `Command`. The operations are exposed in the `Model` interface as `Model#deleteTeam()`.
 
 #### Usage
+Given below is an example usage scenario and how the function behaves at each step.
 
-Given below is an example usage scenario and how the "Remove an existing team" feature behaves at each step.
+- **Command Syntax**: `deleteteam tn/[TEAMNAME]`
+- **Example**: `deleteteam tn/Test Team`
+  - Deletes an existing team called `Test Team` from the teambook.
 
-##### Step 1
+LinkTree provides a feedback based on whether the operation was successful or not.
 
-The user launches the application and uses the `deleteteam` command to specify the `teamname` they want to delete.
 
-##### Step 2
+<box type="info" seamless>
 
-The user executes the `deleteteam` command `deleteteam tn/Team1` to delete the team named `Team1`.
+**Note:** If a command fails its execution, it will not call `Model#deleteTeam()`, so the `team` will not be deleted from `TeamBook`.
 
-##### Step 3
+</box>
 
-LinkTree provides feedback based on whether the operation was successful or not.
+#### Function Implementation
+- The `deleteTeamParser` class parses inputs from the users and checks if the command is in the correct format. An exception is thrown if there is any format mismatch.
+- The `execute` method checks if the specified teamname is valid and exists in the teambook. If no, an exception is thrown to indicate this. The `Model#hasTeam()` does this check.
+- The `execute` method also checks if a developer with the given name exists. If no such developer exists, an error message is displayed to indicate this. The `Model#containsPerson` does this check.
+- If no exception is thrown, the team will be deleted from the teambook. This process is carried out by the `Model#deleteTeam`
+- A message is displayed to the user to indicate that the team has been deleted from the teambook. The change can immediately be seen on the TeamBook part of the UI.
 
-**Note:** If a command fails its execution, it will not call `Model#deleteTeam()`, so the team will not be removed from `TeamBook`.
+<puml src="diagrams/DeleteTeamCommandDiagram.puml" width="1100"/>
+
+### Delete developers from an existing team
+The `deletedev` command implemented in the DeleteDeveloperFromTeam class, allows the users to delete developers from an existing team in the teambook. This `DeleteDeveloperFromTeam` class extends the `Command` class in our implementation.
+
+#### Usage
+Given below is an example usage scenario and how the function behaves at each step.
+
+- **Command Syntax**: `deletedev tn/[TEAMNAME] n/[Developer name]`
+- **Example**: `deletedev tn/Test Team 1 tl/Jason`
+  - Deletes `Jason` from a team called `Test Team 1`
+
+LinkTree provides a feedback based on whether the operation was successful or not.
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, it will not call `Model#deleteDeveloperFromTeam()`, so the specified `developer` will not be deleted from the `team`.
+
+</box>
 
 #### Function Implementation
 
-1. Create a `deleteteam` parser class called `DeleteTeamCommandParser` to parse input from the user. This class implements the `Parser` interface for the type `DeleteTeamCommand`.
+- The `DeleteDeveloperFromTeamParser` class parses inputs from the users and checks if the command is in the correct format. An exception is thrown if there is any format mismatch.
+- The `execute` method checks if the specified teamname is valid and exists in the teambook. If no, an exception is thrown to indicate this. The `Model#hasTeam` does this check.
+- The `execute` method also checks if a developer with the given name exists in the addressbook. If no such developer exists, an error message is displayed to indicate this. The `Model#containsPerson` does this check.
+- In addition, the `execute` method also checks if the given developer exists in the given team.If no such developer exists, the `excecute` method will throw an exception to indicate that scenario. The `Model#personAlreadyInTeam` method does this check.
+- If no exception is thrown, you will get the IdentityCode of the developer using the `Model#getIdentityCodeByName()` method.
+- Then the developer is deleted from the team. This process is carried out by the `Model#deleteDeveloperFromTeam()`
+- A message is displayed to the user to indicate that the developer has been deleted from the team. The change can be seen immediately on the Team panel of the UI.
 
-2. Create a `parse` method in `DeleteTeamCommandParser` that parses the user input and specifies the user flag used for `teamName` (e.g., `tn/` for teamName).
-
-3. Add the flag for user input to the `CliSyntax` class.
-
-4. For the `DeleteTeamCommand` class, specify the Command Word, which is `deleteteam`.
-
-5. Add relevant error messages for use cases like "The team name provided is invalid".
-
-6. Implement the `execute` method in `DeleteTeamCommand`. Handle cases where a team with the specified `teamName` does not exist.
-
-7. Use the `Model#deleteTeam` method to perform these checks.
-
-8. Throw exceptions in the case where deleting the team is not possible.
-
-9. If no such exception is thrown, proceed to delete the team.
-
-10. Run the `Model#deleteTeam` method to remove the specified team from TeamBook.
-
-11. `Model#deleteTeam` calls `TeamBook#removeTeamByName`, which in turn calls `UniqueTeamList#remove`. Finally, this method calls `ObservableList#remove` to remove the team from the list.
-
-#### Design Considerations
-
-**Aspect: Where the teams are stored:**
-
-- **Alternative 1 (current choice):** Store the teams in a separate class called `UniqueTeamList`.
-
-    - Pros: Better use of object-oriented programming.
-    - Cons: Multiple layers of abstraction (through Model, TeamBook, UniqueTeamList).
-
-- **Alternative 2:** Store the teams in the same class as persons in the `AddressBook` class.
-
-    - Pros: Easier implementation.
-    - Cons: Breaks the principle of abstraction and object-oriented programming. Information hiding is also not maintained.
-
-The choice between these alternatives depends on your specific project requirements and architectural preferences.
+<puml src="diagrams/DeleteDeveloperFromTeamCommandDiagram.puml" width="1100"/>
 
 ### Find Team by Keywords
 
@@ -605,12 +592,6 @@ In designing the `findteam` command, two primary alternatives for matching team 
     - **Cons**:
         - **Restrictive**: Limits effectiveness for users who don't recall exact names.
         - **User Unfriendliness**: Requires exact input.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -674,9 +655,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `LinkTree` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `LinkTree` and the **Actor** is the `Project manager`, unless specified otherwise)
 
-**Use case: View all members of my project**
+**Use case (UC 01): View all members of my project**
 **Actor: Project Manager**
 
 **MSS**
@@ -695,12 +676,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: Search for team leaders**
-**Actor: Project Manager **
+**Use case (UC 02): Search for team**
+**Actor: Project Manager**
 
 **MSS**
 
-1. User wants to find team leader of a given team.
+1. User wants to find team composition.
 2. User inputs the desired team name into LinkTree.
 3. LinkTree displays the name of the team leader.
 
@@ -714,7 +695,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: Access names of developers**
+**Use case (UC 03): Access names of developers**
 **Actor: Project Manager**
 
 **MSS**
@@ -726,7 +707,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: Edit or update information**
+**Use case (UC 04): Edit or update information**
 **Actor: Project Manager**
 
 **MSS**
@@ -745,7 +726,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: Change the team leader**
+**Use case (UC 05): Change the team leader**
 **Actor: Project Manager**
 
 **MSS**
@@ -767,7 +748,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ---
 
 
-**Use case: Remove a person from project**
+**Use case (UC 06): Remove a person from project**
 **Actor: Project Manager**
 
 **MSS**
@@ -783,8 +764,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. No such person exists
     * 2a1. LinkTree shows a message that no such person exists.
       Use case ends.
-
+* 2b. Person is a team leader
+    * 2b1. LinkTree shows a message that team leader can be deleted.
+      Use case ends.
 ---
+
+
+**Use case (UC 07): Remove a team from project**
+**Actor: Project Manager**
+
+**MSS**
+
+1. Project manager wants to remove a team from project.
+2. Project manager provides team name and requests the removal.
+3. LinkTree confirms the removal of the person.
+
+   Use case ends.
 
 **Extensions**
 
@@ -794,9 +789,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
----
-
-**Use case: Create a new team**
+**Use case (UC 08): Create a new team**
 
 **MSS**
 
@@ -816,7 +809,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
         Use case ends.
 ---
 
-**Use case: Display the tree of organisation**
+**Use case (UC 09): Display the tree of organisation**
 
 **MSS**
 
@@ -833,6 +826,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 ---
 
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -846,11 +840,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Team Directory**: The system or platform where all the contact details of developers, team leaders, and project managers are stored.
 * **Tag-Based System**: A system in LinkTree that allows contacts to be tagged with specific roles or responsibilities, like "Database Management" or "Code Review".
 * **Public Profile**: A profile in the Team Directory visible to all users, containing non-sensitive information about a team or individual.
-* **Status Feature**: A tool enabling users to set and display their current status or availability (e.g., online, busy, away) within the Team Directory.
-* **Inventory Checking**: A feature that logs the state of an item (like an apartment) at a specific time, allowing for easy comparison at a later date.
+* **Addressbook**: A file that stores the list of developers in the application.
+* **TeamBook**: A file that stores the list of teams in the application. 
+* **Prefix**: A keyword used before certain elements in a command to specify its type or category.
+* **Tag**: A label or keyword assigned to developers for categorization and easy identification.
+* **Tree**: A visual representation of the top-down project's structure, displaying teams and developers.
+* **Index**: A numerical identifier assigned to developers or teams for reference.      
+* **FAQ**: Frequently Asked Questions which users can check out if needed.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -899,13 +897,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases … }_
 
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases … }_
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix C: Effort**
 
@@ -945,6 +937,7 @@ We have made the following efforts to tackle the challenges we faced in this pro
 
 3. **Testing Process:** We have done enough testing procedures to ensure the reliability and stability of the application. This included unit testing, integration testing, and user acceptance testing that we have learnt CS2103T.
 
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix D: Future Enhancements**
 **We have several feature enhancements and quality of life improvements in the pipeline.**
@@ -954,3 +947,5 @@ We have made the following efforts to tackle the challenges we faced in this pro
 2. Currently, when the tree is displayed, if there are not enough teams to display to fill the windows, a white background fills up the empty space by default. This will be patched in a future release so that the empty space will carry the same default colour as the UI.
 3. Currently, when the tree is actively being displayed, it does not get refreshed when commands are run. For example, when a new developer is added to the addressbook, it does not reflect on the tree even though there is a feedback in the UI stating success. The tree gets refreshed only upon closing and reopening the tree. The auto-refresh feature will be implemented in a future release.
 4. When `delete 0` command is run, the command error stating `invalid command format` is too general. Even though it specifies that the index has to be a positive integer, we can change it in the future to give better information to specify that the index number has to be positive. So when typing this command, the new error would be like `Index provided is incorrect. It has to be a positive integer. Please try again.`
+
+--------------------------------------------------------------------------------------------------------------------
