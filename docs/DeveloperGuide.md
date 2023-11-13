@@ -1206,7 +1206,7 @@ Testers are expected to do more *exploratory* testing.
 
 1. Mark a student as present in Class Manager
 
-   1. Test case: `present s/STUDENT_NUMBER tut/1`
+   1. Test case: `present s/STUDENT_NUMBER tut/1`<br>
       Expected:The student with STUDENT_NUMBER is marked as present for the first tutorial.
       <br><br>
 
@@ -1220,7 +1220,7 @@ Testers are expected to do more *exploratory* testing.
 
 1. Mark all displayed students as present in Class Manager
 
-   1. Test case: `present-all tut/1`
+   1. Test case: `present-all tut/1`<br>
       Expected:All displayed students are marked as present for the first tutorial.
       <br><br>
 
