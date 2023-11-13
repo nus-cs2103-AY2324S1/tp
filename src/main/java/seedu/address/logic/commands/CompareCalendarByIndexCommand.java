@@ -9,7 +9,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.calendar.ReadOnlyCalendar;
-import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.person.Person;
 
 /**
