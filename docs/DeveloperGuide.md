@@ -7,20 +7,6 @@ title: Developer Guide
 
 ---
 
-## **Acknowledgements**
-
-- Libraries: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
-- App icon from <http://www.mcdodesign.com/> by Susumu Yoshida
-- Some code adapted from <http://code.makery.ch/library/javafx-8-tutorial/> by Marco Jakob
-
----
-
-## **Setting up, getting started**
-
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
-
----
-
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
@@ -190,13 +176,11 @@ The following activity diagram summarises what happens when a user executes an e
 
 ---
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Acknowledgements**
 
-* [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
-* [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
+- Libraries: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+- App icon from <http://www.mcdodesign.com/> by Susumu Yoshida
+- Some code adapted from <http://code.makery.ch/library/javafx-8-tutorial/> by Marco Jakob
 
 ---
 
@@ -349,7 +333,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **UI (User Interface)**: The space where interactions between humans and the software occur. The goal of this interaction is to allow effective operation and control of the machine from the human end.
 
-* **GUI (Graphical User Interface)**: A type of user interface that allows users to interact with electronic devices through graphical elements such as images, buttons, icons, and windows instead of text-based command lines. 
+* **GUI (Graphical User Interface)**: A type of user interface that allows users to interact with electronic devices through graphical elements such as images, buttons, icons, and windows instead of text-based command lines.
 
 * **Logic**: In the context of software, it refers to the set of rules and algorithms that process and respond to user inputs.
 
@@ -389,10 +373,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Portable**: Software that doesn't require installation and can be run from any location, such as from a USB stick.
 
-
 ---
 
 ## **Appendix: Instructions for manual testing**
+
+//TODO
 
 Given below are instructions to test the app manually.
 
@@ -449,6 +434,16 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-## **Appendix: Planned enhancements**
+## **Appendix: Effort**
 
-//TODO this is for countering known feature flaws to help grading, after the feature freeze. We can only list `4 members x 2 = 8` enhancements here
+//TODO
+
+## **Appendix: Planned enhancements**
+1. Currently, the `delete` command allows for duplicate indices to be entered. This may lead to unintended behaviour for some users. We plan to tweak this by displaying an additional warning message if duplicate indices are entered, to remind the user about the duplication. The user can then confirm whether they would like the command to go through, or whether they would like to make changes to their input command. This can be achieved by adding a boolean field to the `DeleteCommand` class to indicate whether the user has entered duplicate indices in the command.
+1. Currently, error messages displayed in ConText are generic. For example, if a user enters a negative index, the error message `Invalid command format` is displayed, even if the command format is technically correct. We plan to add more specific error messages for invalid indices (e.g. non-positive, too large, or does not exist in the list), to let the user know that the index itself is invalid, and why.
+1. Currently, special characters such as `-` and `/` are not allowed in names, even though they could conceivably be part of a contact's legal name. We plan to allow for special characters to be included in a contact's name. 
+1. Currently, the `find` command only allows for matching of full words. For example, the input keyword `John` will not match the name `Johnny` stored in the list. This may lead to unintended behaviour for some users. We plan to allow partial matches of contact names for `find`.  
+1. Currently, duplicate contacts are only detected by contacts having completely identical names, and not by other fields such as email address. Although this is meant to remove ambiguity in duplicate detection, it may be counter-intuitive for some users. We plan to include additional warning messages for the detection of duplicate contacts. We will warn users if they are adding contacts with duplicate information, such as duplicate email address, or names which differ only by whitespace (in the middle). The user can then confirm whether they would like the duplicate contact to go through, or whether they would like to make changes to the duplicate contact.
+1. Currently, entering an empty note for a contact (via `o/`) is allowed. This was meant for the convenience of the user, but may be confusing for some users as it differs in behaviour from the other optional fields of `t/` and `a/`. We plan to display a warning message if an empty note is added via `o/` in the `add` command, to minimize such confusion. 
+1. Currently, special characters such as `/` are allowed (beyond the first three digits) in a contact's phone number. We plan to warn users if they are adding phone number with special characters. The user can then confirm whether they would like the phone number to go through, or whether they would like to make changes to the phone number.
+1. Currently, special characters such as `@` are not allowed in AlternateContact, even though they could conceivably be part of a contact's alternate email. We plan to allow for special characters to be included in AlternateContact.

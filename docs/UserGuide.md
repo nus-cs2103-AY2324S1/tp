@@ -46,6 +46,10 @@ Once you are familiarised, feel free to use the `clear` command to delete all th
 
 ## Features
 
+At a glance: the information that can be stored with each contact, and how it will appear in the application, is labelled below. 
+
+![ContactCard](images/ContactCard.png)
+
 <div markdown="block" class="alert alert-info">
 **:information_source: About the command format:**<br />
 
@@ -59,6 +63,7 @@ e.g. in `add n/NAME`, you should specify a `NAME` such as `add n/John Doe`.
 - Parameters in square brackets are optional.<br />
 e.g in `n/NAME [o/NOTE]`, you could specify `n/John Doe o/Good at SE.`, or just `n/John Doe`.
 
+<!-- NOTE The empty space below (in the ` `) is a non-breaking space, not a normal space. This forces Jekyll's Kramdown to preserve the space. -->
 - Parameters with `…`​ after them can be specified multiple times.<br />
 e.g. in `[t/TAG]…​`, which is optional but can also be specified multiple times, you could specify ` ` (none specified), `t/NUS`, `t/NUS t/CS2103 course` etc.
 
@@ -80,7 +85,7 @@ Hence, you will not be able to add a new contact with the same name as an existi
 
 For example, if you already have a contact with name `John Doe`, you will not be able to add another contact with the same name `John Doe`.
 For two names to be considered the same, they must be identical in every way, and that includes casing, as well as whitespace in the middle of the name, etc.
-Therefore, you may add another contact with name `John doe`, `John    Doe`, or `Alex John Doe`. 
+Therefore, you may add another contact with name `John doe`, `John    Doe`, or `Alex John Doe`.
 You may also first modify the name of the existing contact.
 
 Should you need to make changes to an existing contact, use the `edit` command as explained below.
@@ -114,6 +119,7 @@ Edits an existing contact at the specified `INDEX`.
 :information_source: **About index numbers:**
 `INDEX` refers to the index number currently shown in the displayed contact list (#1, #2, #3 etc.).
 Indices must be a positive integer to be valid (1, 2, 3 etc.), and must exist in the displayed contact list.
+Contacts are 1-indexed, that is, the first contact has index number 1. Index number 0 is not valid.
 </div>
 
 <div markdown="span" class="alert alert-info">
@@ -153,6 +159,7 @@ Please refer to the [above](#editing-a-contact-edit).
 - Duplicate indices are only counted once.
 
 - Invalid indices will cause abortion of the delete command.
+
 
 **Examples:**
 
@@ -218,7 +225,7 @@ Shows contacts with a tag that fully matches the specified tag (case-insensitive
   e.g. `filter Friend` will _not_ match the tag `Close Friend`.
 
 - The keyword can contain spaces.\
-  e.g. `filter Close Friend` will match the tag `Close Friend` (and this tag only).  
+  e.g. `filter Close Friend` will match the tag `Close Friend` (and this tag only).
   e.g. <pre>`filter Close           Friend`</pre> will _not_ match the tag `Close Friend`.
 
 - In summary, `filter` looks for tags which are an exact match, ignoring casing only.
@@ -253,6 +260,42 @@ The displayed contact list is always automatically sorted in ascending alphabeti
 ### Automatic saving
 
 Your contacts get automatically saved to the file system after each successful command execution. There is no need to save manually.
+
+### Editing the data file
+
+ConText data are saved automatically as a JSON file `[JAR file location]/data/contacts.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, ConText will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+</div>
+
+---
+## FAQ
+
+**Q**: How do I transfer my data to another Computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ConText home folder.
+
+---
+
+## Command summary
+
+| Action            | Command Format                                                          | Example Usage                                                      |
+|-------------------|-------------------------------------------------------------------------|--------------------------------------------------------------------|
+| Adding a contact  | `add n/NAME p/PHONE_NUMBER e/EMAIL [o/NOTE] [t/TAG]... [a/ALTERNATE_CONTACT]...` | `add n/John Doe p/98765432 e/john.doe@email.com`                   |
+|                   |                                                                         | `add n/John Doe p/98765432 e/john.doe@email.com o/Likes SE. t/NUS t/CS2103 course a/Telegram: JohnDoe` |
+| Editing a contact | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/NOTE] [t/TAG]... [a/ALTERNATE_CONTACT]...` | `edit 1 p/87654321 e/jane_doe@nus.edu.sg`                          |
+|                   |                                                                         | `edit 3 o/Member of NUS S/U t/`                                    |
+| Deleting contacts | `delete INDEX...`                                                       | `delete 1`                                                         |
+|                   |                                                                         | `delete 1 3 5`                                                     |
+| Clearing all contacts | `clear`                                                             | `clear`                                                            |
+| Listing all contacts  | `list`                                                              | `list`                                                             |
+| Finding by name      | `find KEYWORD...`                                                     | `find John`                                                        |
+|                     |                                                                         | `find amy Ben CHARLOTTE`                                           |
+| Filtering by tag     | `filter TAG`                                                          | `filter NUS`                                                       |
+|                      |                                                                         | `filter CS2103 course`                                             |
+| Viewing help         | `help`                                                                | `help`                                                             |
+| Exiting the app      | `exit`                                                                | `exit`                                                             |
+
 
 ---
 
