@@ -120,6 +120,7 @@ Welcome back to ProjectPRO. Simply head over to our Features section to gain ins
    - For Mac Users:
      ![MACGUIDE](images/UG/QUICKSTART3.png)
    - For Windows Users:
+     ![WINDOWSGUIDE](images/UG/QUICKSTART4.png)
 
 4. Launch ProjectPRO.
    1. Open a command terminal
@@ -614,8 +615,8 @@ You list all available time slots of your contacts.
 - Provide the full name of the contact using the `n/` prefix.
 <p></p>
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
-  <h4 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h4>
-  <p style="font-size:9px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">NAME</code> 
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h5>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">NAME</code> 
     must be alphanumeric and cannot be blank.</p>
 </div>
 
@@ -629,7 +630,7 @@ You list all available time slots of your contacts.
 ![](images/features/Managetime_listtimecontact.png)
 
 <div align="center">
-  <p style="font-size: 11px; font-style: italic;">We see that Alex Yeoh is free on Mondays from 1400 - 1600</p>
+  <p style="font-size: 13px; font-style: italic;">We see that Alex Yeoh is free on Mondays from 1400 - 1600</p>
 </div>
 
 **Potential error(s):**
@@ -647,8 +648,8 @@ You can add a meeting time slot for your group.
 
 <p></p>
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
-  <h3 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h3>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h5>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
     must be alphanumeric and cannot be blank.</p>
   <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">MEETING_TIME</code>
     must be a time slot within a weekly schedule.</p>
@@ -657,8 +658,8 @@ You can add a meeting time slot for your group.
 </div>
 <p></p>
 <div style="border-left: 4px solid #d9534f; background-color: #FFD4D4; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
-  <h3 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Warning!</h3>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">MEETING_TIME</code>
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Warning!</h5>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">MEETING_TIME</code>
     can be added even if members are not available. Do coordinate with your group members on the most suitable time slots.</p>
 </div>
 
@@ -669,7 +670,7 @@ You can add a meeting time slot for your group.
 ![](images/features/Managetime_addmeeting.png)
 
 <div align="center">
-  <p style="font-size: 11px; font-style: italic;">You have added a CS2103T meeting on Mondays from 1400 - 1600</p>
+  <p style="font-size: 13px; font-style: italic;">You have added a CS2103T meeting on Mondays from 1400 - 1600</p>
 </div>
 
 **Potential error(s):**
@@ -688,12 +689,12 @@ You can remove meeting times from your groups.
 
 <p></p>
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
-  <h3 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h3>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h5>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
     must be alphanumeric and cannot be blank.</p>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">MEETING_TIME</code>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">MEETING_TIME</code>
     must be a time slot within a weekly schedule.</p>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">MEETING_TIME</code>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">MEETING_TIME</code>
     must be a time slot already added to the group.</p>
 </div>
 <p></p>
@@ -705,7 +706,7 @@ You can remove meeting times from your groups.
 ![](images/features/Managetime_deletetimegroup.png)
 
 <div align="center">
-  <p style="font-size: 11px; font-style: italic;">You have deleted the CS2103T meeting on Mondays from 1400 - 1600</p>
+  <p style="font-size: 13px; font-style: italic;">You have deleted the CS2103T meeting on Mondays from 1400 - 1600</p>
 </div>
 
 **Potential error(s):**
@@ -723,8 +724,8 @@ You list meeting time for your groups.
 
 <p></p>
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
-  <h3 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h3>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h5>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
     must be alphanumeric and cannot be blank.</p>
 </div>
 <p></p>
@@ -754,16 +755,16 @@ You can find a meeting time slot for your group where everyone is available.
 
 <p></p>
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
-  <h3 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h3>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h5>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
     must be alphanumeric and cannot be blank.</p>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">DURATION</code>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">DURATION</code>
     must be a whole number representing the meeting duration in minutes.</p>
 </div>
 <p></p>
 <div style="border-left: 4px solid #d9534f; background-color: #FFD4D4; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
-  <h3 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Warning!</h3>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Warning!</h5>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
     must contain contacts with their free time slots. </p>
 </div>
 
@@ -776,7 +777,7 @@ You can find a meeting time slot for your group where everyone is available.
 ![](images/features/Managetime_findfreetime.png)
 
 <div align="center">
-  <p style="font-size: 11px; font-style: italic;">You can coordinate meetings easily</p>
+  <p style="font-size: 13px; font-style: italic;">You can coordinate meetings easily</p>
 </div>
 
 
@@ -797,8 +798,8 @@ You can view the link to our UserGuide.
 
 <p></p>
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
-  <h3 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h3>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">User Input</code>
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h5>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">User Input</code>
     No additional input required.</p>
 </div>
 <p></p>
@@ -809,7 +810,7 @@ You can view the link to our UserGuide.
 ![](images/features/Generalcommand_help.png)
 
 <div align="center">
-  <p style="font-size: 11px; font-style: italic;">You can follow the link to get help!</p>
+  <p style="font-size: 13px; font-style: italic;">You can follow the link to get help!</p>
 </div>
 
 
@@ -826,8 +827,8 @@ Clears all entries from the contact list.
 
 <p></p>
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
-  <h3 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h3>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">User Input</code>
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h5>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">User Input</code>
     No additional input required.</p>
 </div>
 <p></p>
@@ -857,8 +858,8 @@ You can exit ProjectPRO.
 
 <p></p>
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
-  <h3 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h3>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">User Input</code>
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h5>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">User Input</code>
     No additional input required.</p>
 </div>
 <p></p>

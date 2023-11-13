@@ -9,7 +9,7 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
- * Class representing the list of time intervals
+ * Class representing the list of time intervals.
  */
 public class TimeIntervalList implements Iterable<TimeInterval> {
 
@@ -22,10 +22,10 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
     }
 
     /**
-     * Adds time to the current TimeInterval list
+     * Adds time to the current TimeInterval list.
      *
-     * @param timeIntervals ArrayList of timeIntervals
-     * @return the status after adding the time
+     * @param timeIntervals ArrayList of timeIntervals.
+     * @return the status after adding the time.
      */
     public String addTime(ArrayList<TimeInterval> timeIntervals) {
         boolean isPass = false;
@@ -62,8 +62,9 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
     }
 
     /**
-     * Adds all the timeInterval in to current timeInterval list
-     * @param timeIntervalList TimeIntervalList to be added
+     * Adds all the timeInterval in to current timeInterval list.
+     *
+     * @param timeIntervalList TimeIntervalList to be added.
      */
     public void addAll(TimeIntervalList timeIntervalList) {
         for (TimeInterval timeInterval : timeIntervalList) {
@@ -72,11 +73,12 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
     }
 
     /**
-     * Deletes a list of time intervals from the time interval list
-     * @param timeIntervals The list of time intervals to be deleted
-     * @return The message of time that has and has not been deleted
+     * Deletes a list of time intervals from the time interval list.
+     *
+     * @param timeIntervals The list of time intervals to be deleted.
+     * @return The message of time that has and has not been deleted.
      * @throws CommandException Throws exception if time interval list does not contain the time when being removed,
-     *                          which should not happen as we check using the contains method
+     *                          which should not happen as we check using the contains method.
      */
     public String deleteTime(ArrayList<TimeInterval> timeIntervals) throws CommandException {
         boolean isPass = false;
@@ -103,21 +105,32 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
     }
 
     /**
-     * Checks whether timeInterval contains the time
+     * Checks whether timeInterval contains the time.
      *
-     * @param timeInterval The time Interval to check
-     * @return Whether time interval is in list
+     * @param timeInterval The time Interval to check.
+     * @return Whether time interval is in list.
      */
     public boolean hasTime(TimeInterval timeInterval) {
         return internalList.contains(timeInterval);
     }
 
+<<<<<<< HEAD
+    /**
+     * Removes free time from list.
+     *
+     * @param timeInterval The time interval to remove.
+     */
+    public void removeTime(TimeInterval timeInterval) {
+        internalList.remove(timeInterval);
+    }
+=======
+>>>>>>> e46d42d0ae9261a2264a2c9af1882175bae0192f
 
     /**
-     * Checks if time interval overlaps with internal list
+     * Checks if time interval overlaps with internal list.
      *
      * @param interval The time iunterval to check
-     * @return Whether time interval overlaps with internal list
+     * @return Whether time interval overlaps with internal list.
      */
     public boolean isTimeIntervalOverlap(TimeInterval interval) {
         for (TimeInterval time : internalList) {
@@ -130,9 +143,9 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
 
 
     /**
-     * Check whether no time is stored
+     * Check whether no time is stored.
      *
-     * @return boolean representing whether no time is stored
+     * @return boolean representing whether no time is stored.
      */
     public boolean isEmpty() {
         return internalList.isEmpty();
@@ -140,10 +153,10 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
 
 
     /**
-     * Generate String representing list of intervals
+     * Generate String representing list of intervals.
      *
-     * @param br     StringBuilder to store  message
-     * @param format specify Message format
+     * @param br StringBuilder to store  message.
+     * @param format specify Message format.
      */
     public void getMessage(StringBuilder br, String format) {
         int intervalCount = 1;
@@ -155,10 +168,10 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
     }
 
     /**
-     * Filter a TimeIntervalList to contain only intervals that fit the duration
+     * Filter a TimeIntervalList to contain only intervals that fit the duration.
      *
-     * @param duration represent time in minutes
-     * @return TimeIntervalList with duration greater than duration specified
+     * @param duration represent time in minutes.
+     * @return TimeIntervalList with duration greater than duration specified.
      */
     public TimeIntervalList fitDuration(Duration duration) {
         TimeIntervalList personTime = new TimeIntervalList();
@@ -171,13 +184,17 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
     }
 
     /**
-     * Finds the overlap between 2 free times and a duration
-     * @param otherTime the other free times to compare with
-     * @param duration the duration of overlap needed
-     * @return a list of times that there is an overlap in time interval
+     * Finds the overlap between 2 free times and a duration.
+     * First sort by start time.
+     * Use minimum start and minimum end pointers to retrieve overlap.
+     * Check that interval >= duration and take those intervals that satisfy this condition.
+     *
+     *
+     * @param otherTime the other free times to compare with.
+     * @param duration the duration of overlap needed.
+     * @return a list of times that there is an overlap in time interval.
      */
     public TimeIntervalList findOverlap(TimeIntervalList otherTime, Duration duration) {
-        // 4 steps, sort by start time, min start min end 2 pointers, get overlap, interval >= duration check
         this.internalList.sort(TimeInterval::compareStart);
         otherTime.internalList.sort(TimeInterval::compareStart);
         TimeIntervalList newFreeTime = new TimeIntervalList();
@@ -193,7 +210,7 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
             // given 2 intervals, return the one with smaller end to increment pointer
             TimeInterval intervalWithMaxStart = TimeInterval.getMaxStart(firstListInterval, secondListInterval);
             TimeInterval intervalWithMinEnd = TimeInterval.getMinEnd(firstListInterval, secondListInterval);
-            // store the intersect, 2 steps, get intersect, see if can fit duration
+            // store the intersect, get intersect then see if it can fit duration
             if (overLap) {
                 TimeInterval intersect = intervalWithMaxStart.getIntersect(intervalWithMinEnd);
                 if (intersect.allows(duration)) {
@@ -211,6 +228,10 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
         return newFreeTime;
     }
 
+    /**
+     * Returns size of time interval list.
+     * @return int representing size of time interval list.
+     */
     public int size() {
         return this.internalList.size();
     }
@@ -229,13 +250,19 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
         return toString;
     }
 
+    /**
+     * Returns if the list being compared to have equal time intervals.
+     *
+     * @param other other list in view.
+     * @return whether list being compared to is equal in terms of time intervals.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
 
-        // instanceof handles nulls
+        // instanceof handles null
         if (!(other instanceof TimeIntervalList)) {
             return false;
         }
