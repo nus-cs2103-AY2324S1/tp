@@ -27,9 +27,7 @@ Users are expected to have a basic level of technical knowledge and are familiar
 This project is based on the [AddressBook-Level3 project](https://se-education.org).
 
 <!-- * Table of Contents -->
-## Table of Contents
-* Table of Contents
-{:toc}
+
 <page-nav-print />         
 
 --------------------------------------------------------------------------------------------------------------------
@@ -854,7 +852,7 @@ Failure outputs:
     * Error: No fields specified to filter.
 ```
 Invalid filter format: You must specify at least one unique field to filter!. 
-Usage: filter -(at least one of unique [-name|subject|before|on|after|remark VALUE]). 
+Usage: filter -(at least one of unique [-name|subject|before|on|after VALUE]). 
 For example, filter -before 2023/10/10 -subject physics
 Note you should only use one of -before, -on, -after at a time.
 ```
