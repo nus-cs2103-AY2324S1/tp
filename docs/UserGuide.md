@@ -45,7 +45,10 @@
 * [Prefix Summary](#prefix-summary)
 * [Glossary](#glossary)
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
+
 
 ## Product Overview
 
@@ -65,6 +68,7 @@ Access our self-curated user guide below to learn more on how you can integrate 
 
 [Jump back to Table of Contents](#table-of-contents)
 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Key Definitions
@@ -79,6 +83,7 @@ You are an **advanced** user if ...
 3. you would like to challenge yourself to go beyond the JABPro user interface and manually edit files.
 
 [Jump back to Table of Contents](#table-of-contents)
+
 
 --------------------------------------------------------------------------------------------------------------------
 ## Overview of Main Features
@@ -115,6 +120,8 @@ These features address the complications that Hiring Managers face when managing
 --------------------------------------------------------------------------------------------------------------------
 Go to the [Table of Contents](#table-of-contents) to navigate to the feature that you are interested in 
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
@@ -125,11 +132,12 @@ Go to the [Table of Contents](#table-of-contents) to navigate to the feature tha
 
 3. Copy the file to the folder you want to use as the _home folder_ for your JabPro.
 
+
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jabpro.jar` command to run the application. <br> 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
 
     ![Ui](images/main.png)  
-   
+
 <box type="warning" seamless>
 
 Ensure your JABPro contains some sample data. If it starts off empty then there might be some issues with the launch which might result in 
@@ -149,11 +157,13 @@ Not to worry, here are some steps you can take to fix this:
 6. Run `java -jar jabpro.jar` to relaunch the application. You should be able to see a GUI similar to the one above.
 
 </box>
- 
+
 5. If your UI looks **compressed and words are being cut off such as that seen below**, you should **resize** the window to a larger size by dragging the corners of the application window. The UI should now look like the example given above.
    <br>
   
     ![Ui](images/UICompressed.png)
+
+    <div style="page-break-after: always;"></div>
 
     **Here's what each part of the GUI signifies:** <br>
 
@@ -198,6 +208,8 @@ Not to worry, here are some steps you can take to fix this:
     * `github Alex Yeoh`: Redirects the user to the GitHub account of the applicant (provided github has been added previously).
 
 [Jump back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -328,19 +340,20 @@ Format: `remark INDEX r/REMARK`
 * You can get the remark previously inputted by using the `**REMARK**` keyword. It will be replaced with the previous remark. The keyword `**REMARK**` is case-sensitive. This means that `remark 1 r/**remark**` will just replace the remark with the word `**remark**`.
 * You can use multiple prefix for `remark` but only the last prefix will be used. This means that `remark 1 r/remark r/remark2` will just replace the remark with `remark2`.
 
+<div style="page-break-after: always;"></div>
 
 An example of the `remark` command being successfully executed:
 1. Enter the command `remark 1 r/Great attitude, hardworking`
 2. This is the result of the successful `remark` command (Take note that command entered will not be shown in the result):
-   
-3. ![Remark-Success](images/remark-command-success.png)
-<br>
+   ![Remark-Success](images/remark-command-success.png)
+<br> 
+
+<div style="page-break-after: always;"></div>
 
 An example of the `remark` command being successfully executed with the **REMARK** keyword:
 1. Enter the command `remark 1 r/**REMARK** furthermore he is great at teamwork`
 2. This is the result of the successful `remark` command (Take note that command entered will not be shown in the result):
-   
-    ![Remark-Success](images/remark-command-enhanced-success.png)
+  ![Remark-Success](images/remark-command-enhanced-success.png)
 <br>
 
 **Error Handling Table for `remark` command:**
@@ -586,12 +599,16 @@ Notes on rules for `edit` command involving tags with categories for `t/[CATEGOR
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 An example of the `edit` command being successfully executed:
 1. Enter the command `edit 1 n/Alex Ho p/91234567` (**Edit name and phone number**)
 2. This is the result of the successful `edit` command (Take note that command entered will not be shown in the result):
    
    ![Edit-Success](images/edit-command-success.png)
 <br>
+
+<div style="page-break-after: always;"></div>
 
 An example of the `edit` command being successfully executed with tags and score:
 1. Ensure that you have created a tag `Interview` under the `assessment` category using the `create` command. That is, enter the command `create t/assessment Interview`
@@ -600,6 +617,8 @@ An example of the `edit` command being successfully executed with tags and score
    
    ![Edit-Success](images/edit-command-with-stats-success.png)
 <br>
+
+<div style="page-break-after: always;"></div>
 
 An example of the `edit` command being successfully executed to clear a tags and score:
 1. Enter the command `edit 1 t/` (**Clear all tags**)
@@ -702,7 +721,7 @@ Format: `create t/CATEGORY TAGNAME…​`
 
 3. View your newly created tags using the `listT` command.
 
-   ![listT-create](Images/listT-create.png)
+   ![listT-create](images/listT-create.png)
 
 [Jump back to Table of Contents](#table-of-contents)
 
@@ -821,6 +840,8 @@ Read more about this in the [Summary Statistics](#summary-statistics) section.
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 Set up for examples when you first start JABPro with default data:
 1. `list`
 2. `create t/assessment interview` to create a tag `interview` under the `assessment` category.
@@ -832,6 +853,8 @@ Set up for examples when you first start JABPro with default data:
    ![Filter-Setup](images/filter-setup.png)
 <br>
 
+<div style="page-break-after: always;"></div>
+
 An example of the `filter` command being successfully executed:
 1. Enter the command `list`
 2. Enter the command `filter t/interview met/percentile val/80` (**Filter by percentile**)
@@ -839,6 +862,8 @@ An example of the `filter` command being successfully executed:
 
    ![Filter-Success](images/filter-command-success.png)
 <br>
+
+<div style="page-break-after: always;"></div>
 
 An example of the `filter` command being successfully executed with `median`:
 1. Enter the command `list`
@@ -1103,7 +1128,7 @@ You should ensure that you have **sufficient candidates of more than 20** with a
   * Additionally, when the spread of scores is small, the percentile will not be able to differentiate between applicants with similar scores.
 
 
-**Formula used to calculate the summary statistics:**
+**Formula used to calculate the summary statistics:**  
 **mean** is calculated by using the formula `sum of all scores with that tag / number of applicants with that tag`  
 **median** is calculated by using the formula `middle score of all scores with that tag`  
 **minimum** is calculated by using the formula `lowest score of all scores with that tag`  
@@ -1143,6 +1168,10 @@ the [quickstart instructions](#quick-start) and launch JABPro with the sample da
 **A**: *Tip* is something useful to know and can be done beforehand, while *note* is something you have to be conscious about and take into account else it might lead to an error. 
 
 [Jump back to Table of Contents](#table-of-contents)
+
+
+<div style="page-break-after: always;"></div>
+
 
 --------------------------------------------------------------------------------------------------------------------
 
