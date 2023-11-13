@@ -705,6 +705,18 @@ expenses associated with staff and visualize them.
 
 ---
 
+## **Appendix: Planned Enhancements**
+
+In addition to proposed features in the [implementation](#implementation) section, we have listed additional planned enhancements below:
+
+- Allow export of transactions with filter and sort rules applied
+- Adding sub-categories to transactions, such as "cost of goods sold", "operating expenses", "taxes", "capital expenditures", etc.
+- Allow renaming of the file before exporting
+- Add separation between command results in results box for easier distinguishing
+- Add more graph types on dashboard for better visualisation
+
+---
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
