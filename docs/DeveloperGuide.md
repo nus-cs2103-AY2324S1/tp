@@ -562,6 +562,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+**Use case: UC07 - Finding freeTime**
+
+**MSS**
+1. User requests to find free time
+2. System shows the list of available free time
+
+**Extensions**
+- 2a. The user does not have any free slots available.
+  - 2a1. System informs that the user has no available timeslots.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
