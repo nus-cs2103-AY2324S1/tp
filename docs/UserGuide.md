@@ -164,8 +164,8 @@ We can break the GUI into several parts:
   users should not add spaces between the prefix for that field and the input value.
   e.g. Filtering students with the address `e/house` should be done with the command `filter a/e/house` rather than `filter a/ e/house`.
 
-* Parameters containing words (other than the first word) that start with any of the prefixes used by Tutorium `(n/, p/, e/, a/, g/, l/, n/, s/ and d/)`
-  are not accepted in Tutorium.
+* Parameters containing 2 or more words require only the first word to start with the prefixes used by Tutorium `(n/, p/, e/, a/, g/, l/, n/, s/, d/ and y/)`
+  e.g. n/John Doe, <span style='color: red;'>NOT</span> n/John n/Doe
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -524,7 +524,7 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Show Table** | `table prefix/`<br> or `table d/YEAR` <br>
 **Show Bar Chart** | `bar prefix/`<br> or `bar d/YEAR` <br>
-**Show Line Chart** | `trend y/{year}`
+**Show Line Chart** | `trend y/YEAR`
 **Export**   | `export v/VISUAL` <br> e.g., `export v/table`
 **Exit**   | `exit`
 
