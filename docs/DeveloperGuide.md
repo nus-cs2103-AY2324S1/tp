@@ -60,7 +60,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-[Remark: The overlapping arrows into `UiPart` are all class inheritance arrows (limitation of PlantUML).]
+(Remark: The overlapping triangles into `UiPart` are all class inheritance triangles (limitation of PlantUML).)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ContactListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
