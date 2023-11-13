@@ -55,7 +55,7 @@ public class EditCommandParserTest {
         assertThrows(EditCommandParseException.class, () -> parser.parse(VALID_NAME_AMY));
 
         // no field specified
-        assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, "1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
 
         // no index and no field specified
         assertThrows(EditCommandParseException.class, () -> parser.parse(""));

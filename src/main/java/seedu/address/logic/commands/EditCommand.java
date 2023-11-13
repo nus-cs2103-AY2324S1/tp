@@ -34,7 +34,7 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the booking identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -54,7 +54,7 @@ public class EditCommand extends Command {
             "phone", "email", "remark");
     public static final String MESSAGE_EDIT_BOOKING_SUCCESS = "Edited Booking: %1$s";
     public static final String MESSAGE_NOT_EDITED = "No changes made. At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_BOOKING = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_BOOKING = "This booking already exists in the booking book.";
     private final Index index;
     private final EditRoomDescriptor editRoomDescriptor;
 
