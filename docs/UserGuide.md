@@ -226,7 +226,7 @@ Shows contacts with a tag that fully matches the specified tag (case-insensitive
 
 - The keyword can contain spaces.\
   e.g. `filter Close Friend` will match the tag `Close Friend` (and this tag only).
-  e.g. <pre>`filter Close           Friend`</pre> will _not_ match the tag `Close Friend`.
+  e.g. `filter Close⠀⠀⠀⠀⠀⠀⠀⠀Friend` will _not_ match the tag `Close Friend`.
 
 - In summary, `filter` looks for tags which are an exact match, ignoring casing only.
 
