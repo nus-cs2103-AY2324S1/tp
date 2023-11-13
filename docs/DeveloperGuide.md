@@ -52,7 +52,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete_person 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -84,6 +84,8 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` and `Event` object residing in the `Model`.
 
+[Scroll back to Table of Contents](#table-of-contents)
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -114,11 +116,14 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddPersonCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddPersonCommandParser`, `DeletePersonCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+[Scroll back to Table of Contents](#table-of-contents)
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="600" />
 
+[Scroll back to Table of Contents](#table-of-contents)
 
 The `Model` component,
 
@@ -131,6 +136,8 @@ The `Model` component,
 
 <img src="images/BetterModelClassDiagram.png" width="600" />
 
+[Scroll back to Table of Contents](#table-of-contents)
+
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -142,6 +149,8 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+[Scroll back to Table of Contents](#table-of-contents)
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
@@ -149,7 +158,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 [Scroll back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
-### Flow of Program Execution
+## **Flow of Program Execution**
 
 The way the user interacts with the program is illustrated as follows.
 
@@ -263,7 +272,7 @@ The flow for the `add_person` command is described by the following sequence dia
 
 <img src="images/AddPersonSequenceDiagram2.png" alt="AddPersonSequenceDiagram2" width=600 />
 
-### Feature details
+#### Feature details
 1. The application will validate the arguments supplied by the user; whether the `Name` is unique and supplied, and whether the optional fields follow the correct format. 
 2. If the arguments are invalid, an error message will be shown to the user and prompts the user for a corrected input.
 3. If the arguments are valid, a `Person` object will be created with the fields supplied and stored in FumbleLog.
@@ -312,7 +321,7 @@ The `Model` will invoke `removePerson` in `AddressBook`, which in turn calls `re
 Step 3:
 The `DeletePersonCommand` then continues its execution as defined by [this](#parser-commands) sequence diagram.
 
-### Design Considerations:
+#### Design Considerations
 **Aspect: How we execute the DeletePersonCommand:**
 Similar to the `AddPersonCommand`, the main considerations for this command is related to the way that the model is stored.
 
@@ -329,7 +338,7 @@ start time, end time, persons involved and groups involved.
 
 <img src="images/EventClassDiagram.png" alt="EventClassDiagram" width=600 />
 
-#### Design considerations:
+#### Design considerations
 
 - Events stores a list of `Name` and a list of `Group` that are involved in the event. 
 This is to facilitate the ability to track persons and groups involved in the event.
@@ -341,7 +350,7 @@ The `Name` class is used to represent the name of the person involved in the eve
 
 ### Ability to assign persons to an event
 
-### Implementation
+#### Implementation
 
 - The ability to assign a `Person` to an `Event` is facilitated by `ModelManager`.
 - Each `Event` stores a list of person assigned to it. 
@@ -478,7 +487,7 @@ The flow for the `remind` command is described by the following sequence diagram
 
 [Scroll back to Table of Contents](#table-of-contents)
 
-## Proposed Features
+## **Proposed Features**
 
 ### \[Proposed\] Undo/redo feature
 

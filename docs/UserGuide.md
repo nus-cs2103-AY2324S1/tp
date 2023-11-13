@@ -241,16 +241,16 @@ Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BI
 
 </div>
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning">
 
 **:exclamation: Disclaimer: Editing a person with a filtered contacts list might cause the person to disappear. Do not worry, your data is not deleted.**<br>
 
-* Lets say you used the command `find_person Alex`, to show all the persons with `Alex` in their name.  See: [find_person](#locating-persons-by-name-or-group-findperson)
-* The person list is filtered to show all the persons with `Alex` in their name.
-* You then edit the person `Alex`'s name to `Bob`.
-* `Alex` will disappear from the person list, because your previous search term `Alex` no longer matches the new name of the person, `Bob`.
-* To see `Bob` in the person list again, you can use the [`list_persons`](#listing-all-persons--listpersons) command to bring back the whole list of persons.
-* In contrast with the above scenario, using an [`add_person`](#adding-a-person-addperson) command will automatically bring back the whole list of persons, to show you that your new person has been added to FumbleLog.
+- Lets say you used the command `find_person Alex`, to show all the persons with `Alex` in their name.  See: [find_person](#locating-persons-by-name-or-group-findperson)
+- The person list is filtered to show all the persons with `Alex` in their name.
+- You then edit the person `Alex`'s name to `Bob`.
+- `Alex` will disappear from the person list, because your previous search term `Alex` no longer matches the new name of the person, `Bob`.
+- To see `Bob` in the person list again, you can use the [`list_persons`](#listing-all-persons--listpersons) command to bring back the whole list of persons.
+- In contrast with the above scenario, using an [`add_person`](#adding-a-person-addperson) command will automatically bring back the whole list of persons, to show you that your new person has been added to FumbleLog.
 
 </div>
 
@@ -450,17 +450,16 @@ This is illustrated as follows:
 ![Person appearing multiple times](images/DuplicatePersonInDifferentGroups.png)
 </div>
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning">
 
 **:exclamation: Disclaimer: Editing a person with a filtered contacts list might cause the person to disappear. Do not worry, your data is not deleted.**<br>
 
-* Let say you have an event named `TP meeting` stored in FumbleLog and you used `find_event meeting`. See: [find_event](#locating-events-by-name-group-or-person-findevent)
-* The event list will be filtered to show all the persons with `meeting` in their name.
-* You then edit `TP meeting` event's name to `TP sprint`.
-* `TP meeting` disappears from the person list, because your previous search term `meeting` no longer matches the new event name, `TP sprint`.
-* To see `TP sprint` in the event list again, you can use the [list_events](#listing-all-events-listevents) command to bring back the whole list of events.
-* In contrast with the above scenario, using an [add_event](#adding-an-event--addevent) command will automatically bring back the whole list of events, to show you that your new event has been added to FumbleLog.
-
+- Let say you have an event named `TP meeting` stored in FumbleLog and you used `find_event meeting`. See: [find_event](#locating-events-by-name-group-or-person-findevent)
+- The event list will be filtered to show all the persons with `meeting` in their name.
+- You then edit `TP meeting` event's name to `TP sprint`.
+- `TP meeting` disappears from the person list, because your previous search term `meeting` no longer matches the new event name, `TP sprint`.
+- To see `TP sprint` in the event list again, you can use the [list_events](#listing-all-events-listevents) command to bring back the whole list of events.
+- In contrast with the above scenario, using an [add_event](#adding-an-event--addevent) command will automatically bring back the whole list of events, to show you that your new event has been added to FumbleLog.
 </div>
 
 **This should be the expected output when the command succeeds:**
