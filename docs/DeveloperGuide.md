@@ -623,7 +623,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. The user did not input the valid predefined prefix to search for the employee by department.
-  * 1a1. EmployeeManager shows an error message.
+  * 1a1. EmployeeManager shows an error message.<br>
     Use case ends.
 
 **Use case: UC6 - Bulk increment salaries**
