@@ -11,39 +11,43 @@ import seedu.address.model.person.Person;
 /** Overrides the current appointment and replaces it with the new appointment after confirmation **/
 public class ConfirmOverrideCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Appointment updated!";
-    private static Appointment appointment = null;
-    private static Person personToEdit = null;
+    private Appointment appointment;
+    private Person personToEdit;
 
     /**
      * Default constructor for a confirm override command
      * @param appointment new appointment
-     * @param personToEdit person whos old appointment will be replaced by the new appointment
+     * @param personToEdit person whose old appointment will be replaced by the new appointment
      */
     public ConfirmOverrideCommand(Appointment appointment, Person personToEdit) {
+        requireNonNull(appointment);
+        requireNonNull(personToEdit);
         this.appointment = appointment;
         this.personToEdit = personToEdit;
     }
 
-    public static Appointment getAppointment() {
-        return appointment;
+    public Appointment getAppointment() {
+        return this.appointment;
     }
 
-    public static Person getPersonToEdit() {
-        return personToEdit;
+    public Person getPersonToEdit() {
+        return this.personToEdit;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        requireNonNull(this.appointment);
+        requireNonNull(this.personToEdit);
 
-        Person personWithApt = createPersonWithAppointment(personToEdit);
+        Person personWithApt = createPersonWithAppointment(this.personToEdit);
 
         assert personWithApt.getAppointment() instanceof Appointment
                     : "Schedule Command: person should have appointment";
 
-        appointment.setPerson(personWithApt); //sets person to appointment
+        this.appointment.setPerson(personWithApt); //sets person to appointment
 
-        model.setPerson(personToEdit, personWithApt);
+        model.setPerson(this.personToEdit, personWithApt);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personWithApt)));
     }
@@ -60,7 +64,8 @@ public class ConfirmOverrideCommand extends Command {
         }
 
         ConfirmOverrideCommand otherOverrideCommand = (ConfirmOverrideCommand) other;
-        return appointment.equals(otherOverrideCommand.appointment);
+        return this.appointment.equals(otherOverrideCommand.getAppointment())
+                && this.personToEdit.equals(otherOverrideCommand.getPersonToEdit());
     }
 
     /**
@@ -72,6 +77,6 @@ public class ConfirmOverrideCommand extends Command {
     private Person createPersonWithAppointment(Person personToEdit) {
         return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getNextOfKinName(), personToEdit.getNextOfKinPhone(),
-                personToEdit.getFinancialPlans(), personToEdit.getTags(), appointment);
+                personToEdit.getFinancialPlans(), personToEdit.getTags(), this.appointment);
     }
 }

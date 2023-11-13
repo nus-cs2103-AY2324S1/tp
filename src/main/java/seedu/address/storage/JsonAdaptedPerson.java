@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import seedu.address.MainApp;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.ScheduleItem;
@@ -28,7 +31,7 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
-
+    private static final Logger logger = LogsCenter.getLogger(MainApp.class);
     private final String name;
     private final String phone;
     private final String email;
@@ -104,6 +107,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
         if (!Name.isValidName(name)) {
+            logger.warning("Invalid Name: " + name);
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         final Name modelName = new Name(name);
@@ -112,6 +116,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
         if (!Phone.isValidPhone(phone)) {
+            logger.warning("Invalid Phone: " + phone);
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
         }
         final Phone modelPhone = new Phone(phone);
@@ -120,6 +125,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
         if (!Email.isValidEmail(email)) {
+            logger.warning("Invalid Email: " + email);
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
         final Email modelEmail = new Email(email);
@@ -128,6 +134,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
         if (!Address.isValidAddress(address)) {
+            logger.warning("Invalid Address: " + address);
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final Address modelAddress = new Address(address);
@@ -137,6 +144,7 @@ class JsonAdaptedPerson {
                     NextOfKinName.class.getSimpleName()));
         }
         if (!NextOfKinName.isValidName(nextOfKinName)) {
+            logger.warning("Invalid Next of Kin Name: " + nextOfKinName);
             throw new IllegalValueException(NextOfKinName.MESSAGE_CONSTRAINTS);
         }
         final NextOfKinName modelNextOfKinName = new NextOfKinName(nextOfKinName);
@@ -146,6 +154,7 @@ class JsonAdaptedPerson {
                     NextOfKinPhone.class.getSimpleName()));
         }
         if (!NextOfKinPhone.isValidPhone(nextOfKinPhone)) {
+            logger.warning("Invalid Next of Kin Phone: " + nextOfKinPhone);
             throw new IllegalValueException(NextOfKinPhone.MESSAGE_CONSTRAINTS);
         }
         final NextOfKinPhone modelNextOfKinPhone = new NextOfKinPhone(nextOfKinPhone);

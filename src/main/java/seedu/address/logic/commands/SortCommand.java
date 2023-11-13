@@ -31,6 +31,7 @@ public class SortCommand extends Command {
      * @param comparator comparator to be used to sort the list.
      */
     public SortCommand(Comparator<Person> comparator) {
+        requireNonNull(comparator);
         this.comparator = comparator;
     }
 

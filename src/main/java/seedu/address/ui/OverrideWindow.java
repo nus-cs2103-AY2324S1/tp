@@ -21,8 +21,8 @@ import seedu.address.model.person.Person;
  */
 public class OverrideWindow extends UiPart<Stage> {
 
-    public static final String CONFIRM_OVERRIDE_MESSAGE = "There is an appointment found under this persons name"
-            + "are you sure you want to override this appointment? \n";
+    public static final String CONFIRM_OVERRIDE_MESSAGE = "There is an appointment found under this person's name. "
+            + "Are you sure you want to override this appointment? \n";
 
     private static String message;
     private static Appointment appointment = null;

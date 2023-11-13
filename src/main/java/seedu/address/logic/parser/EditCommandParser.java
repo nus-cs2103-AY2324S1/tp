@@ -35,55 +35,9 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_NEXT_OF_KIN_NAME, PREFIX_NEXT_OF_KIN_PHONE, PREFIX_FINANCIAL_PLAN, PREFIX_TAG);
-
-        Index index;
-
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
-        }
-
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_NEXT_OF_KIN_NAME, PREFIX_NEXT_OF_KIN_PHONE);
-
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-        }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
-        }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
-        }
-        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
-        }
-        if (argMultimap.getValue(PREFIX_NEXT_OF_KIN_NAME).isPresent()) {
-            editPersonDescriptor.setNextOfKinName(ParserUtil.parseNextOfKinName(argMultimap
-                    .getValue(PREFIX_NEXT_OF_KIN_NAME)
-                    .get()));
-        }
-        if (argMultimap.getValue(PREFIX_NEXT_OF_KIN_PHONE).isPresent()) {
-            editPersonDescriptor.setNextOfKinPhone(ParserUtil.parseNextOfKinPhone(argMultimap
-                    .getValue(PREFIX_NEXT_OF_KIN_PHONE)
-                    .get()));
-        }
-
-        parseFinancialPlansForEdit(argMultimap.getAllValues(PREFIX_FINANCIAL_PLAN))
-                .ifPresent(editPersonDescriptor::setFinancialPlans);
-
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
-
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
-        }
-
+        ArgumentMultimap argMultimap = processRawCommand(args);
+        Index index = getIndex(argMultimap);
+        EditPersonDescriptor editPersonDescriptor = makeEditPersonDescriptor(argMultimap);
         return new EditCommand(index, editPersonDescriptor);
     }
 
@@ -120,4 +74,77 @@ public class EditCommandParser implements Parser<EditCommand> {
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
+    /**
+     * Processes the given {@code String} into an ArgumentMultimap in the context of an EditCommand.
+     *
+     * @param args Raw command string.
+     * @return ArgumentMultimap containing argument values to edit a Person with.
+     * @throws ParseException if the string contains extra arguments for Person fields that require at most
+     *      one argument.
+     */
+    private ArgumentMultimap processRawCommand(String args) throws ParseException {
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                        PREFIX_NEXT_OF_KIN_NAME, PREFIX_NEXT_OF_KIN_PHONE, PREFIX_FINANCIAL_PLAN, PREFIX_TAG);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                PREFIX_NEXT_OF_KIN_NAME, PREFIX_NEXT_OF_KIN_PHONE);
+        return argMultimap;
+    }
+
+    /**
+     * Gets the index from an ArgumentMultimap.
+     *
+     * @param argumentMultimap Multimap to extract index from.
+     * @return Index value.
+     * @throws ParseException If the map does not contain a valid index in its preamble.
+     */
+    private Index getIndex(ArgumentMultimap argumentMultimap) throws ParseException {
+        try {
+            return ParserUtil.parseIndex(argumentMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+        }
+    }
+
+    /**
+     * Creates an EditPersonDescriptor using the values from an ArgumentMultimap. Will ignore values not relevant to the
+     * EditPersonDescriptor class.
+     *
+     * @param argumentMultimap Multimap to draw values from.
+     * @return EditPersonDescriptor to pass to EditCommand.
+     * @throws ParseException if any relevant values are invalid or if the resulting EditPersonDescriptor has no values
+     *      to edit.
+     */
+    private EditPersonDescriptor makeEditPersonDescriptor(ArgumentMultimap argumentMultimap) throws ParseException {
+        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        if (argumentMultimap.getValue(PREFIX_NAME).isPresent()) {
+            editPersonDescriptor.setName(ParserUtil.parseName(argumentMultimap.getValue(PREFIX_NAME).get()));
+        }
+        if (argumentMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argumentMultimap.getValue(PREFIX_PHONE).get()));
+        }
+        if (argumentMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argumentMultimap.getValue(PREFIX_EMAIL).get()));
+        }
+        if (argumentMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+            editPersonDescriptor.setAddress(ParserUtil.parseAddress(argumentMultimap.getValue(PREFIX_ADDRESS).get()));
+        }
+        if (argumentMultimap.getValue(PREFIX_NEXT_OF_KIN_NAME).isPresent()) {
+            editPersonDescriptor.setNextOfKinName(ParserUtil.parseNextOfKinName(argumentMultimap
+                    .getValue(PREFIX_NEXT_OF_KIN_NAME)
+                    .get()));
+        }
+        if (argumentMultimap.getValue(PREFIX_NEXT_OF_KIN_PHONE).isPresent()) {
+            editPersonDescriptor.setNextOfKinPhone(ParserUtil.parseNextOfKinPhone(argumentMultimap
+                    .getValue(PREFIX_NEXT_OF_KIN_PHONE)
+                    .get()));
+        }
+        parseFinancialPlansForEdit(argumentMultimap.getAllValues(PREFIX_FINANCIAL_PLAN))
+                .ifPresent(editPersonDescriptor::setFinancialPlans);
+        parseTagsForEdit(argumentMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+        if (!editPersonDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+        }
+        return editPersonDescriptor;
+    }
 }

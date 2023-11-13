@@ -1,47 +1,37 @@
 package seedu.address.model.person.predicates;
 
-import java.util.Objects;
+import java.util.Arrays;
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
 /**
- * Tests that at least one of a {@code Person}'s {@code FinancialPlan}, {@code Name} or {@code Tag} matches any
- * of the keywords given. Note that there is no requirement that all 3 predicates must be present in the constructor.
+ * Tests that at least one of a {@code Person}'s fields matches any of the keywords given.
  */
 public class CombinedPredicate implements Predicate<Person> {
-    public final FinancialPlanContainsKeywordsPredicate financialPlanContainsKeywordsPredicate;
-    public final NameContainsKeywordsPredicate nameContainsKeywordsPredicate;
-    public final TagContainsKeywordsPredicate tagContainsKeywordsPredicate;
+    public final PersonContainsKeywordsPredicate[] predicates;
 
     /**
-     * Creates a combined predicate containing up to one of a financial plan predicate, name predicate and tag
-     * predicate each.
+     * Creates a combined "or" predicate from the given collection of predicates. Requires that none of the elements
+     * in the given collection is null.
      *
-     * @param financialPlanContainsKeywordsPredicate Financial plan predicate.
-     * @param nameContainsKeywordsPredicate Name predicate.
-     * @param tagContainsKeywordsPredicate Tag predicate.
+     * @param predicates keyword predicates to check a person against.
      */
-    public CombinedPredicate(FinancialPlanContainsKeywordsPredicate financialPlanContainsKeywordsPredicate,
-                             NameContainsKeywordsPredicate nameContainsKeywordsPredicate,
-                             TagContainsKeywordsPredicate tagContainsKeywordsPredicate) {
-        this.financialPlanContainsKeywordsPredicate = financialPlanContainsKeywordsPredicate;
-        this.nameContainsKeywordsPredicate = nameContainsKeywordsPredicate;
-        this.tagContainsKeywordsPredicate = tagContainsKeywordsPredicate;
+    public CombinedPredicate(PersonContainsKeywordsPredicate... predicates) {
+        CollectionUtil.requireAllNonNull((Object[]) predicates);
+        this.predicates = new PersonContainsKeywordsPredicate[predicates.length];
+        for (int i = 0; i < predicates.length; i++) {
+            this.predicates[i] = predicates[i];
+        }
     }
 
     @Override
     public boolean test(Person person) {
         boolean result = false;
-        if (financialPlanContainsKeywordsPredicate != null) {
-            result = result || financialPlanContainsKeywordsPredicate.test(person);
-        }
-        if (nameContainsKeywordsPredicate != null) {
-            result = result || nameContainsKeywordsPredicate.test(person);
-        }
-        if (tagContainsKeywordsPredicate != null) {
-            result = result || tagContainsKeywordsPredicate.test(person);
+        for (PersonContainsKeywordsPredicate predicate : this.predicates) {
+            result = result || predicate.test(person);
         }
         return result;
     }
@@ -59,20 +49,16 @@ public class CombinedPredicate implements Predicate<Person> {
 
         CombinedPredicate otherNameContainsKeywordsPredicate =
                 (CombinedPredicate) other;
-        return Objects.equals(financialPlanContainsKeywordsPredicate,
-                otherNameContainsKeywordsPredicate.financialPlanContainsKeywordsPredicate)
-                && Objects.equals(nameContainsKeywordsPredicate,
-                otherNameContainsKeywordsPredicate.nameContainsKeywordsPredicate)
-                && Objects.equals(tagContainsKeywordsPredicate,
-                otherNameContainsKeywordsPredicate.tagContainsKeywordsPredicate);
+        return Arrays.equals(predicates,
+                otherNameContainsKeywordsPredicate.predicates);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("financialPlanContainsKeywordsPredicate", financialPlanContainsKeywordsPredicate)
-                .add("nameContainsKeywordsPredicate", nameContainsKeywordsPredicate)
-                .add("tagContainsKeywordsPredicate", tagContainsKeywordsPredicate)
-                .toString();
+        ToStringBuilder toStringBuilder = new ToStringBuilder(this);
+        for (PersonContainsKeywordsPredicate predicate : this.predicates) {
+            toStringBuilder.add(predicate.getClass().getCanonicalName(), predicate.toString());
+        }
+        return toStringBuilder.toString();
     }
 }

@@ -19,6 +19,8 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.financialplan.FinancialPlan;
@@ -113,17 +115,39 @@ public class PersonTest {
     }
 
     @Test
-    public void gatherEmails_noPersonFound() {
+    public void gatherEmailsByFinancialPlan_noPersonFound() {
         assertEquals(new String(), ELLE.gatherEmailsContainsFinancialPlan(VALID_FINANCIAL_PLAN_1));
     }
 
     @Test
-    public void gatherEmails_personFound() {
+    public void gatherEmailsByFinancialPlan_personFound() {
+        // prompt is full plan name
         FinancialPlan elleFinancialPlan = ELLE.getFinancialPlans().iterator().next();
         String prompt = elleFinancialPlan.toString().replaceAll("[\\[\\]\\(\\)]", "");
         String prompt2 = "Sample Financial Plan 2";
         assertEquals(ELLE.getEmail().toString(), ELLE.gatherEmailsContainsFinancialPlan(prompt));
         assertEquals(ELLE.getEmail().toString(), ELLE.gatherEmailsContainsFinancialPlan(prompt2));
+    }
+
+    @Test
+    public void gatherEmailsByFinancialPlan_substring_personFound() {
+        String substring = "Financial Plan 2";
+        assertEquals(ELLE.getEmail().toString(), ELLE.gatherEmailsContainsFinancialPlan(substring));
+    }
+
+    @Test
+    public void gatherEmailsByFinancialPlan_noDuplicateEmail() {
+        // prompt is substring for both bobs Financial Plans: "financial plan 1" and "financial plan 2"
+        String substringBob = "financial plan";
+        assertEquals(BOB.getEmail().toString(), BOB.gatherEmailsContainsFinancialPlan(substringBob));
+    }
+
+    @Test
+    public void gatherEmailsByFinancialPlan_caseInsensitive() {
+        String uppercaseBob = VALID_FINANCIAL_PLAN_1.toUpperCase();
+        String lowercaseBob = VALID_FINANCIAL_PLAN_1.toLowerCase();
+        assertEquals(BOB.getEmail().toString(), BOB.gatherEmailsContainsFinancialPlan(uppercaseBob));
+        assertEquals(BOB.getEmail().toString(), BOB.gatherEmailsContainsFinancialPlan(lowercaseBob));
     }
 
     @Test
@@ -133,7 +157,30 @@ public class PersonTest {
 
     @Test
     public void gatherByTag_personFound() {
+        // prompt full tag name
         assertEquals(BOB.getEmail().toString(), BOB.gatherEmailsContainsTag(VALID_TAG_HUSBAND));
+    }
+
+    @Test
+    public void gatherByTag_substring_personFound() {
+        // prompt substring
+        String substring = "hus";
+        assertEquals(BOB.getEmail().toString(), BOB.gatherEmailsContainsTag(substring));
+    }
+
+    @Test
+    public void gatherEmailsByTag_noDuplicateEmail() {
+        // prompt is substring for both bobs tags "friend" and "husband"
+        String substringBob = "nd";
+        assertEquals(BOB.getEmail().toString(), BOB.gatherEmailsContainsTag(substringBob));
+    }
+
+    @Test
+    public void gatherEmailsByTag_caseInsensitive() {
+        String uppercaseBob = VALID_TAG_HUSBAND.toUpperCase();
+        String lowercaseBob = VALID_TAG_HUSBAND.toLowerCase();
+        assertEquals(BOB.getEmail().toString(), BOB.gatherEmailsContainsTag(uppercaseBob));
+        assertEquals(BOB.getEmail().toString(), BOB.gatherEmailsContainsTag(lowercaseBob));
     }
 
     @Test
@@ -144,5 +191,31 @@ public class PersonTest {
                 + ", financialPlans=" + ALICE.getFinancialPlans() + ", tags=" + ALICE.getTags()
                 + ", appointment=" + ALICE.getAppointment() + "}";
         assertEquals(expected, ALICE.toString());
+    }
+
+    @Test
+    public void isSameAppointmentDate() {
+        LocalDate matchingDate = LocalDate.of(2023, 05, 01);
+        LocalDate nonMatchingDate = LocalDate.of(2023, 02, 01);
+
+        assertTrue(BENSON.isSameAppointmentDate(matchingDate));
+        assertFalse(BENSON.isSameAppointmentDate(nonMatchingDate));
+    }
+
+    @Test
+    public void hasNullAppointment() {
+        assertFalse(BENSON.hasNullAppointment());
+        assertTrue(ALICE.hasNullAppointment());
+    }
+
+    @Test
+    public void clearAppointment() {
+        Person editedBenson = new PersonBuilder().withName("Benson Meier")
+                .withAddress("311, Clementi Ave 2, #02-25").withEmail("johnd@example.com")
+                .withPhone("98765432").withNextOfKinName("Benson Dad").withNextOfKinPhone("98761111")
+                .withFinancialPlans("Sample Financial Plan 1", "Sample Financial Plan 2")
+                .withTags("owesMoney", "friends").withNullAppointment().build();
+
+        assertEquals(BENSON.clearAppointment(), editedBenson);
     }
 }

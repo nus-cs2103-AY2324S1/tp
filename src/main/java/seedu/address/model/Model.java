@@ -101,10 +101,12 @@ public interface Model {
 
     /**
      * Gathers the emails of person with the given prompt.
-     * @param prompt The user input for command
+     * @param prompt The user input for command.
      * @return The String representation of all the gathered emails.
      */
     String gatherEmails(GatherEmailPrompt prompt);
 
-    boolean clearAppointments(LocalDate date);
+    void clearAppointments(LocalDate date);
+
+    boolean hasAppointmentWithDate(LocalDate date);
 }

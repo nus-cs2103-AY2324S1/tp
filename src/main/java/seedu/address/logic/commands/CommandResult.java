@@ -54,15 +54,15 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showOverride,
+    public CommandResult(String feedbackToUser, boolean exit, boolean showOverride,
                          Person personToEdit, Appointment appointment) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
         this.exit = exit;
         this.showOverride = showOverride;
         this.showClear = false;
-        this.personToEdit = personToEdit;
-        this.appointment = appointment;
+        this.showHelp = false;
+        this.personToEdit = requireNonNull(personToEdit);
+        this.appointment = requireNonNull(appointment);
     }
 
     /**
@@ -105,7 +105,9 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && showClear == otherCommandResult.showClear;
+                && showClear == otherCommandResult.showClear
+                && appointment == otherCommandResult.appointment
+                && personToEdit == otherCommandResult.personToEdit;
     }
 
     @Override

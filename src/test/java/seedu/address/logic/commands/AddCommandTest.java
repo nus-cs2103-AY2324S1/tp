@@ -179,7 +179,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean clearAppointments(LocalDate date) {
+        public void clearAppointments(LocalDate date) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasAppointmentWithDate(LocalDate date) {
             throw new AssertionError("This method should not be called.");
         }
     }

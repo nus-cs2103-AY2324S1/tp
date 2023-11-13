@@ -21,8 +21,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.SortByAppointmentComparator;
-import seedu.address.model.person.SortByNameComparator;
+import seedu.address.model.person.comparator.SortByAppointmentComparator;
+import seedu.address.model.person.comparator.SortByNameComparator;
 
 public class SortCommandTest {
 
@@ -45,22 +45,22 @@ public class SortCommandTest {
         SortByNameComparator nameComparator = new SortByNameComparator();
         SortByAppointmentComparator appointmentComparator = new SortByAppointmentComparator();
 
-        SortCommand sortSortCommand = new SortCommand(nameComparator);
+        SortCommand sortNameCommand = new SortCommand(nameComparator);
         SortCommand appointmentSortCommand = new SortCommand(appointmentComparator);
 
         // same object -> returns true
-        assertTrue(sortSortCommand.equals(sortSortCommand));
+        assertTrue(sortNameCommand.equals(sortNameCommand));
         assertTrue(appointmentSortCommand.equals(appointmentSortCommand));
 
         // different types -> returns false
-        assertFalse(sortSortCommand.equals(1));
+        assertFalse(sortNameCommand.equals(1));
 
         // null -> returns false
-        assertFalse(sortSortCommand.equals(null));
+        assertFalse(sortNameCommand.equals(null));
 
         // different command -> returns false
-        assertFalse(sortSortCommand.equals(appointmentSortCommand));
-        assertFalse(appointmentSortCommand.equals(sortSortCommand));
+        assertFalse(sortNameCommand.equals(appointmentSortCommand));
+        assertFalse(appointmentSortCommand.equals(sortNameCommand));
     }
 
     @Test
@@ -79,7 +79,7 @@ public class SortCommandTest {
         expectedModel.sortFilteredPersonList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(model.getAppointmentList(), expectedModel.getAppointmentList());
-        assertEquals(Arrays.asList(CARL, BENSON, GEORGE, FIONA, ELLE, DANIEL, ALICE), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(CARL, BENSON, ALICE, DANIEL, ELLE, FIONA, GEORGE), model.getFilteredPersonList());
     }
 
 }

@@ -5,10 +5,12 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_DATE;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.CompleteByDate;
+import seedu.address.logic.commands.CompleteByIndex;
 import seedu.address.logic.commands.CompleteCommand;
-import seedu.address.logic.commands.CompleteCommand.CompleteDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -26,31 +28,43 @@ public class CompleteCommandParser implements Parser<CompleteCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_APPOINTMENT_DATE);
 
-        CompleteDescriptor completeDescriptor = new CompleteDescriptor();
+        String strIndex = argMultimap.getPreamble().trim();
+        Optional<String> strDate = argMultimap.getValue(PREFIX_APPOINTMENT_DATE);
 
-        Index index;
-        if (!argMultimap.getPreamble().trim().isEmpty()) {
+        if (!isValidArguments(strIndex, strDate)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    CompleteCommand.MESSAGE_USAGE));
+        }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_APPOINTMENT_DATE);
+
+        if (strDate.isPresent()) {
+            LocalDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_APPOINTMENT_DATE).get());
+            return new CompleteByDate(date);
+        } else {
             try {
-                index = ParserUtil.parseIndex(argMultimap.getPreamble());
-                completeDescriptor.setIndex(index);
+                Index index = ParserUtil.parseIndex(strIndex);
+                return new CompleteByIndex(index);
             } catch (ParseException pe) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         CompleteCommand.MESSAGE_USAGE), pe);
             }
         }
+    }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_APPOINTMENT_DATE);
-
-        if (argMultimap.getValue(PREFIX_APPOINTMENT_DATE).isPresent()) {
-            LocalDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_APPOINTMENT_DATE).get());
-            completeDescriptor.setDate(date);
+    /**
+     * Checks if either {@code strIndex} or {@code strDate} is present but not both.
+     */
+    public static boolean isValidArguments(String strIndex, Optional<String> strDate) {
+        //if no input
+        if (strIndex.isEmpty() && strDate.isEmpty()) {
+            return false;
+        }
+        //if both date and index given
+        if (!strIndex.isEmpty() && strDate.isPresent()) {
+            return false;
         }
 
-        if (!completeDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    CompleteCommand.MESSAGE_USAGE));
-        }
-
-        return new CompleteCommand(completeDescriptor);
+        return true;
     }
 }

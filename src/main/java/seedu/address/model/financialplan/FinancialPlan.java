@@ -8,7 +8,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; name is valid as declared in {@link #isValidFinancialPlanName(String)}
  */
 public class FinancialPlan {
-    public static final String MESSAGE_CONSTRAINTS = "Financial plan names should be alphanumeric or space characters";
+
+    public static final String MESSAGE_CONSTRAINTS = "Financial plan names should be alphanumeric or space characters, "
+                                                        + "and it should not be blank";
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9\\s]+";
 
     public final String financialPlanName;
@@ -32,7 +34,7 @@ public class FinancialPlan {
     }
 
     /**
-     * Returns true if the given string is a substring of {@code financialPlanName}
+     * Returns true if the given string is a substring of {@code financialPlanName}.
      */
     public boolean containsSubstring(String substring) {
         return financialPlanName.toLowerCase().contains(substring.toLowerCase());
@@ -59,7 +61,7 @@ public class FinancialPlan {
     }
 
     /**
-     * Format state as text for viewing.
+     * Formats state as text for viewing.
      */
     public String toString() {
         return '[' + financialPlanName + ']';

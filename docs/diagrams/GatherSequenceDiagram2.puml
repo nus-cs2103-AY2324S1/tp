@@ -1,0 +1,41 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+participant ":UniquePersonsList" as UniquePersonsList MODEL_COLOR
+participant "prompt:GatherEmailByFinancialPlan" as GatherEmailByFinancialPlan MODEL_COLOR
+participant ":Person" as Person MODEL_COLOR
+end box
+
+[-> ModelManager: gatherEmails(prompt)
+activate ModelManager
+
+ModelManager -> AddressBook: gatherEmails(prompt)
+activate AddressBook
+
+AddressBook -> UniquePersonsList: gatherEmails(prompt)
+activate UniquePersonsList
+
+loop through internalList
+    UniquePersonsList -> GatherEmailByFinancialPlan: gatherEmails(person)
+    activate GatherEmailByFinancialPlan
+    GatherEmailByFinancialPlan -> Person: gatherEmailsContainsFinancialPlan("Financial Plan A")
+    activate Person
+    Person --> GatherEmailByFinancialPlan: email (or Empty String)
+    deactivate Person
+    GatherEmailByFinancialPlan --> UniquePersonsList: email (or Empty String)
+    deactivate GatherEmailByFinancialPlan
+end loop
+
+UniquePersonsList --> AddressBook: emails (or Empty String)
+deactivate UniquePersonsList
+
+AddressBook --> ModelManager: emails (or Empty String)
+deactivate AddressBook
+
+[<-- ModelManager : emails (or Empty String)
+deactivate ModelManager
+@enduml

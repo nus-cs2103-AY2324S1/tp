@@ -27,7 +27,6 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_NEXT_OF_KIN_NAME = "R@chel";
     private static final String INVALID_NEXT_OF_KIN_PHONE = "+651234";
     private static final String INVALID_TAG = "#friend";
-
     private static final String INVALID_FINANCIAL_PLAN = "#plan";
 
     private static final String VALID_NAME = BENSON.getName().toString();
@@ -193,4 +192,25 @@ public class JsonAdaptedPersonTest {
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 
+    @Test
+    public void toModelType_invalidAppointment_throwsIllegalValueException() {
+        String invalidAppointmentName = "Review Insur@nce, 01-01-2023 10:00";
+        String invalidAppointmentDateTime = "Review Insurance, 01-01-2020";
+
+        JsonAdaptedAppointment invalidAppointment1 = new JsonAdaptedAppointment(invalidAppointmentName);
+        JsonAdaptedAppointment invalidAppointment2 = new JsonAdaptedAppointment(invalidAppointmentDateTime);
+
+        JsonAdaptedPerson person1 =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        VALID_NEXT_OF_KIN_NAME, VALID_NEXT_OF_KIN_PHONE,
+                        VALID_FINANCIAL_PLANS, VALID_TAGS, invalidAppointment1);
+
+        JsonAdaptedPerson person2 =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        VALID_NEXT_OF_KIN_NAME, VALID_NEXT_OF_KIN_PHONE,
+                        VALID_FINANCIAL_PLANS, VALID_TAGS, invalidAppointment2);
+
+        assertThrows(IllegalValueException.class, person1::toModelType);
+        assertThrows(IllegalValueException.class, person2::toModelType);
+    }
 }

@@ -29,7 +29,7 @@ public class GatherCommandTest {
 
     @Test
     void execute_gatherEmailsByFinancialPlan_success() {
-        String message = ALICE.getEmail() + " " + BENSON.getEmail() + " " + GEORGE.getEmail();
+        String message = ALICE.getEmail() + "; " + BENSON.getEmail() + "; " + GEORGE.getEmail() + ";";
         GatherEmailByFinancialPlan prompt = new GatherEmailByFinancialPlan("Sample Financial Plan 1");
         String expectedMessage = expectedModel.gatherEmails(prompt);
         GatherCommand command = new GatherCommand(prompt);
@@ -39,7 +39,7 @@ public class GatherCommandTest {
 
     @Test
     void execute_gatherEmailsByTag_success() {
-        String message = ALICE.getEmail() + " " + BENSON.getEmail() + " " + DANIEL.getEmail();
+        String message = ALICE.getEmail() + "; " + BENSON.getEmail() + "; " + DANIEL.getEmail() + ";";
         GatherEmailByTag prompt = new GatherEmailByTag("friends");
         String expectedMessage = expectedModel.gatherEmails(prompt);
         GatherCommand command = new GatherCommand(prompt);

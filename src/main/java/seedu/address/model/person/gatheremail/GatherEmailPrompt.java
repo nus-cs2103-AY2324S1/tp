@@ -1,3 +1,4 @@
+//@@author AlyssaPng
 package seedu.address.model.person.gatheremail;
 
 import seedu.address.model.person.Person;
@@ -7,7 +8,7 @@ import seedu.address.model.person.Person;
  */
 public interface GatherEmailPrompt {
     /**
-     * Gathers the email of {@code person} if {@code person}'s financial plan or tag names matches a specific prompt.
+     * Gathers the email of {@code person} if prompt is a substring of any {@code person}'s financial plan or tag names
      */
     public String gatherEmails(Person person);
 }

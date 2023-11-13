@@ -21,8 +21,6 @@ Class Phone
 Class Tag
 Class FinancialPlan
 abstract Class ScheduleItem
-Class NullAppointment
-Class Appointment
 Class NextOfKinName
 Class NextOfKinPhone
 Class I #FFFFFF
@@ -52,16 +50,12 @@ Person *--> ScheduleItem
 Person *--> NextOfKinName
 Person *--> NextOfKinPhone
 
-Appointment -up-|> ScheduleItem
-NullAppointment --|> ScheduleItem
-
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
-Appointment -[hidden]right-> NullAppointment
 
 ModelManager --> "~* filtered" Person
 @enduml

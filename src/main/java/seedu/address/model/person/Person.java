@@ -106,34 +106,38 @@ public class Person {
     }
 
     /**
-     * Checks if the given {@code prompt} is a substring of {@code financialPlan} name in {@code financialPlans}
+     * Checks if the given {@code prompt} is a substring of {@code financialPlan} names in {@code financialPlans}
      * and returns the email if true.
      */
     public String gatherEmailsContainsFinancialPlan(String prompt) {
         StringBuilder result = new StringBuilder();
-
         for (FinancialPlan financialPlan : financialPlans) {
-            // Perform a case-insensitive check if the financial plan contains the prompt as a substring
+            // Check if the financialPlan contains the prompt as a substring
             if (financialPlan.containsSubstring(prompt)) {
-                result.append(email); // Add the email to the result string
+                result.append(email);
+                break; // Should only add email to result once
             }
+            assert result.length() == 0 : "Results string should be empty";
         }
         return result.toString();
     }
 
     /**
-     * Checks if the given {@code prompt} is a substring of {@code tag} name in {@code Tags}
+     * Checks if the given {@code prompt} is a substring of {@code tag} names in {@code Tags}
      * and returns the email if true.
      */
     public String gatherEmailsContainsTag(String prompt) {
         StringBuilder result = new StringBuilder();
 
         for (Tag tag : tags) {
-            // Perform a case-insensitive check if the tag contains the prompt substring
+            // Check if the tag contains the prompt substring
             if (tag.containsSubstring(prompt)) {
-                result.append(email); // Add the email to the result string
+                result.append(email);
+                break; // Should only add email to result once
             }
+            assert result.length() == 0 : "Results string should be empty";
         }
+
         return result.toString();
     }
 
@@ -150,6 +154,9 @@ public class Person {
                 tags, NullAppointment.getNullAppointment());
     }
 
+    /**
+     * Checks if {@code Person} appoint is a NullAppointment object.
+     */
     public boolean hasNullAppointment() {
         return appointment.equals(NullAppointment.getNullAppointment());
     }

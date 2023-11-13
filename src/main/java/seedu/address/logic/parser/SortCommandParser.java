@@ -4,8 +4,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.SortByAppointmentComparator;
-import seedu.address.model.person.SortByNameComparator;
+import seedu.address.model.person.comparator.SortByAppointmentComparator;
+import seedu.address.model.person.comparator.SortByNameComparator;
 
 /**
  * Parses input arguments and creates a new SortCommand object
@@ -19,14 +19,12 @@ public class SortCommandParser implements Parser<SortCommand> {
      */
     public SortCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
-        } else if (trimmedArgs.equals("name")) { //sort name by lexicographical order
+        switch (trimmedArgs) {
+        case "name":
             return new SortCommand(new SortByNameComparator());
-        } else if (trimmedArgs.equals("appointment")) { //sort appointments by time
+        case "appointment":
             return new SortCommand(new SortByAppointmentComparator());
-        } else {
+        default:
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }

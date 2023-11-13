@@ -15,7 +15,7 @@ class Appointment {
     person : Person
 }
 
-class NullAppointment {
+class NullAppointment <<Singleton>> {
     value : String
 }
 class Person {}
@@ -23,7 +23,9 @@ class Person {}
 Appointment -up-|> ScheduleItem
 NullAppointment -up-|> ScheduleItem
 
-Person -down- "1" ScheduleItem
+Person "1" *-down-> "1" ScheduleItem
+Person -[hidden]down-> NullAppointment
+Person -[hidden]down-> ScheduleItem
 Appointment -[hidden]left-> NullAppointment
 
 @enduml

@@ -84,7 +84,7 @@ public class ModelManagerTest {
         FinancialPlan elleFinancialPlan = ELLE.getFinancialPlans().iterator().next();
         String fpDescription = elleFinancialPlan.toString().replaceAll("[\\[\\]\\(\\)]", "");
         GatherEmailByFinancialPlan prompt = new GatherEmailByFinancialPlan(fpDescription);
-        assertEquals(ELLE.getEmail().toString(), modelManager.gatherEmails(prompt));
+        assertEquals(ELLE.getEmail().toString() + ";", modelManager.gatherEmails(prompt));
     }
 
     @Test
@@ -98,7 +98,7 @@ public class ModelManagerTest {
     public void gatherByTag_personFound() {
         modelManager.addPerson(BOB);
         GatherEmailByTag prompt = new GatherEmailByTag(VALID_TAG_HUSBAND);
-        assertEquals(BOB.getEmail().toString(), modelManager.gatherEmails(prompt));
+        assertEquals(BOB.getEmail().toString() + ";", modelManager.gatherEmails(prompt));
     }
 
     @Test
