@@ -657,6 +657,19 @@ This is especially useful if you find yourself having to re-enter a command that
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
+# Glossary
+* **Lead**: Refers to the potential of a client to become a buying customer
+* **Client**: Refers to a person whom the user is conducting his/her business with
+* **Interaction**: A business meeting with the **Client** to discuss sales
+* **Follow-Ups**: Synonymous to Future **Interactions**
+* **UTC**: [Coordinated Universal Time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time)
+* **Mainstream OS**: Windows, Linux, Unix, macOS
+
+[↑ Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 # FAQ
 
 **Q**: How do I save my progress?
