@@ -263,6 +263,14 @@ The following activity diagram shows how the schedule operation works:
 
 ![ScheduleCommandActivityDiagram](images/ScheduleCommandActivityDiagram.png)
 
+#### Design considerations:
+1. We decided to make the Schedule Feature case-sensitive. The patient name provided by the user must match the patient name in MediFlowR's
+records (even case sensitivity). The rationale is as such:
+   * Currently, in our application, it is possible for 2 patients to be created with names 'John Doe' and 'John doe'. 
+A case-insensitive Schedule command for 'John Doe' will cause a conflict. Thus, we have mandated that for the Schedule Feature, 
+the patient name have an exact match with the patient name in our database. This also reduces the chances of the user accidentally
+scheduling an appointment for the wrong patient but ensuring that the user conscientiously schedules an appointment for the specific patient.
+
 
 ### Reschedule feature
 
