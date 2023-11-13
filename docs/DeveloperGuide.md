@@ -127,7 +127,7 @@ from the `Storage` component to save the data to local storage each time the dat
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
-Inside the `Logic` component, there are 3 main components: `LogicManager`, `AddressBookParser` and `Command`.
+Inside the `Logic` component, there are 4 main components: `LogicManager`, `AddressBookParser`, `Parser` classes and `Command` classes.
 
 The `Command` class will do the actual modification of the data, when executed by the LogicManager, and communicate its execution result via the CommandResult class with the Logic manager. 
 
