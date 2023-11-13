@@ -1,0 +1,44 @@
+@startuml Update Attendee LastContactedTime
+!include ../style.puml
+
+title Update Attendee LastContactedTime
+
+box Logic LOGIC_COLOR_T1
+participant "command:MarkMeetingCommand" as MarkMeetingCommand LOGIC_COLOR
+endbox
+
+box Model MODEL_COLOR_T1
+participant "updatedPerson:Person" as Person MODEL_COLOR
+participant ":Model" as Model MODEL_COLOR
+end box
+
+activate MarkMeetingCommand
+
+loop for each attendee
+
+MarkMeetingCommand -> Model : getPerson(attendee)
+activate Model
+
+Model --> MarkMeetingCommand : person
+deactivate Model
+
+MarkMeetingCommand -> MarkMeetingCommand : updateLastContactedTime(person, time)
+activate MarkMeetingCommand
+
+create Person
+MarkMeetingCommand -> Person
+activate Person
+
+Person -> MarkMeetingCommand : updatedPerson
+deactivate Person
+
+MarkMeetingCommand --> MarkMeetingCommand : updatedPerson
+deactivate MarkMeetingCommand
+
+MarkMeetingCommand -> Model : setPerson(person, updatedPerson)
+activate Model
+
+Model --> MarkMeetingCommand
+deactivate Model
+
+end

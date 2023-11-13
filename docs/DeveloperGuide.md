@@ -28,11 +28,11 @@ title: OutBook Developer Guide
 - [Appendix: Requirements](#appendix-requirements)
   - [Product scope](#product-scope)
   - [User stories](#user-stories)
-  - [Use case](#use-case)
+  - [Use cases](#use-cases)
   - [Non-Functional Requirements](#non-functional-requirements)
   - [Glossary](#glossary)
 - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
-  - [Launch and shutdown](#launch-and-shutdown) 
+  - [Launch and shutdown](#launch-and-shutdown)
   - [Adding a person](#adding-a-person)
   - [Editing a person](#editing-a-person)
   - [Deleting a person](#deleting-a-person)
@@ -65,6 +65,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` & `.uxf` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides (for `.puml`)](https://se-education.org/guides/tutorials/plantUml.html) or [_UMLet_ (for `.uxf`)](https://www.umlet.com) to learn how to create and edit diagrams.
+
 </div>
 
 <div style="page-break-after: always;"></div>
@@ -336,7 +337,7 @@ User can specify a Person to add as an Attendee to a specified Meeting.
 
 To avoid storing an entire `JsonAdaptedPerson` object within the `JsonAdaptedMeeting` every time a `Person` is added to a `Meeting`,
 an `Attendee` class is created to store a unique identifier for the `Person` added.
-As every `Person` has a unique name in the current iteration of OutBook, it is used as the unique identifier. 
+As every `Person` has a unique name in the current iteration of OutBook, it is used as the unique identifier.
 `Attendee` is implemented in the following way:
 
 - `Attendee(attendeeName)` -- Initialized with a String obtained from `Person.getName().toString()`
@@ -364,7 +365,7 @@ The following sequence diagram shows how the remove attendee operation works:
 
 <div style="page-break-after: always;"></div>
 
-### Keeping track of last meeting with contact
+### Last Contacted Time feature
 
 Keeping track of the user's last meeting with their contact is facilitated by the addition of a `LastContactedTime` object to `Person`.
 Thus, each instance of `Person` will contain an immutable `LastContactedTime` object that stores the user's last meeting with that contact.
@@ -376,29 +377,54 @@ The following diagram summarizes steps 2 to 6:
 <img src="images/LastContactedTime1.png" width="1000" />
 
 Step 2. Entering a correct command with the `Enter` key then calls `execute` on `LogicManager`.
+
 Step 3. `LogicManager` then calls `AddressBookParser#parseCommand(commandText)` on the `commandText` String, which recognizes that it is an `addc` command.
+
 Step 4. `AddressBookParser` then calls `AddCommandParser#parse()` on the command arguments.
+
 Step 5. `AddCommandParser` then calls `ParserUtil#parseContactTime()` which parses the last contacted time and returns a `LocalDateTime` object called `lastContactedTime`.
+
 Step 6. The `lastContactedTime` object is then passed to the `Person` constructor, which creates a new `Person` that calls the `LastContactedTime` constructor with it.
 
 The following diagram summarizes steps 7 and 8:
 <img src="images/LastContactedTime2.png" width="1000" />
 
 Step 7. The completed `Person` is passed to an `AddCommand` constructor which return a new `AddCommand` that can be executed.
+
 Step 8. `LogicManager` then executes the `AddCommand` on the application model.
+
 Step 9. Further execution is carried out, which like before adds the `Person` object to the list of `Person`s in the `Model`, and updates the `Storage` with this new `Person`.
 
-#### Design Consideration: Updating last meeting with contact
+### Mark meeting as complete feature
 
-Solution:
-This is facilitated by the addition of the `MarkDoneCommand`. When a meeting is marked as done, the attendees of the meeting will be updated with their LastContactedTime field updated to the end time of the meeting.
+A meeting can be marked as complete using the `mark` command. The command also updates the last contacted time of its attendees to the ending time of the meeting, if the meeting end time is after the attendees current last contacted time.
+
+This is the overall sequence diagram of marking a meeting as complete.
+
+<img src="images/mark/Execute MarkMeetingCommand.png" width=1000/>
+
+When a mark command is entered, it is first parsed by the respective `Parser`s to create a `MarkMeetingCommand` object.
+
+<img src="images/mark/CreateMarkMeetingCommand.png" width=1000 />
+
+When the command is executed, the meeting is marked as complete by creating a new `Meeting` with the same fields except for status, and this meeting is updated to the `Model`.
+
+<img src="images/mark/MarkMeeting.png" width=1000 />
+
+Following this, the last contacted time of all the attendees of the meeting are updated to the end time of the meeting.
+
+<img src="images/mark/Update Attendee LastContactedTime.png" width=1000 />
+
+Finally, a `CommandResult` is produced and returned to the `LogicManager`.
 
 <div style="page-break-after: always;"></div>
 
 ### Keeping track of the status of a contact
+
 Each instance of `Person` contains an immutable `Status` object that allows the user to specify which stage of the insurance sales process a contact is at, if applicable.
 At the current iteration of OutBook, a status must be one of `NIL`, `Prospective`, `Active`, `Inactive`, `Renewal`, `Claimant` (case-insensitive).
 This is tailored according to the responsibilities of an insurance agent, which include:
+
 - Promoting relevant insurance policies to prospective clients
 - Keeping active clients updated on their policies
 - Finding out why inactive clients did not renew their policies
@@ -406,10 +432,23 @@ This is tailored according to the responsibilities of an insurance agent, which 
 - Filing and following up on claims on behalf of their clients
 
 The list of valid statuses is stored as an `Enumeration` object for the following benefits:
+
 - Readability: e.g. `StatusList.NIL` is self-explanatory and easier to understand than something like `StatusList[0]` if an index data structure were to be used.
 - Maintainability: If the list of valid statuses changes or expands in the future, it's much easier to update an enumeration. This centralizes the changes in one place, making the code more maintainable compared to scattered string constants.
 
 `Status` is implemented and utilized in a similar manner to [`LastContactedTime`](#keeping-track-of-last-meeting-with-contact).
+
+### Saving data
+
+- The address book is saved in a JSON file after every command execution. The default path for this file is `/data/outbook.json`, found in the same directly as the application JAR file.
+
+- The JSON file should not be directly edited. Incorrectly editing the file will result in OutBook not being able to load the address book and data will be lost. If directly editing the file is deemed necessary, create a backup before doing so.
+
+- Under normal operation through the application, the JSON file will not become corrupted. If for any reason the file does become corrupted, OutBook will not be able to load the data and will display a blank address book.
+
+  - If data recovery is to be attempted, do not execute any commands. Exit the application. Try to edit the JSON file such that it adheres to the parameters for each field. If data recovery is successful, OutBook will load the address book on boot.
+
+  - If not, the data will be lost. The address book has can only be restored by executing commands through the application.
 
 <div style="page-break-after: always;"></div>
 
@@ -503,6 +542,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 As described in the implementation notes for `viewc` and `viewm` above, the currently displayed `Person` and `Meeting` objects will be cleared when certain commands such as `deletec` and `deletem` are used on a separate object, which is necessary due to the way the view commands are currently implemented. Additional details are in the implementation section referenced above.
 
 We plan to remove the need to handle such edge cases by modifying the way both view commands are implemented. One potential method is as follows:
+
 - Revert the implementation of `viewc` and `viewm` to the original method of storing a copy of the viewed object, rather than the viewed index.
 - Modify the behaviour of `editc`, `editm`, `deletec` and `deletem` such that when they are used on the original object currently being viewed, the stored copy will be edited/deleted accordingly.
 - This allows the currently viewed `Person` or `Meeting` object to persist regardless of command usage, and only be cleared when the object is deleted, or everything is cleared via the `clear` command.
@@ -514,15 +554,19 @@ We plan to remove the need to handle such edge cases by modifying the way both v
 ## **Effort**
 
 ### Effort in Model and Storage
+
 Compared to AB3, which only deals with 1 entity type, Person. OutBook deals with 2 entity types and allows significant interaction between them. This means that the model had to be extended and storage had to follow along with it. jackson does not allow storage of pointers, thus it became necessary to work around that using the unique fields on both Person and Meeting.
 
 ### Effort in reducing coupling
+
 Compared to AB3, where there were no interaction between entities. OutBook was designed for professionals to manage both their contacts and their meetings, this inherently means that there needs to be interaction between both entities. This interaction increases coupling and decreases cohesion. In order to combat this, many instances of facade, command and observer design patterns were used.
 
 ### Effort in implementing many features
+
 OutBook needed to make managing contacts and meetings an efficient process, this meant that there needed to be many quality of life features to make the professional's life easier. Therefore, much effort was dedicated to making data easily retrievable by making almost every field searchable.
 
 ### Effort in managing interactions between entities
+
 OutBook required one meeting to interact with many other contacts and for one contact to interact with many other meetings. Because of the interactions between both classes, a change in 1 object must be reflected in everything that references the object while still being immutable. This required thorough testing and analysis to keep track of the interactions and account for them while we were adding more features.
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -554,7 +598,7 @@ OutBook required one meeting to interact with many other contacts and for one co
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                | I want to …​                 | So that I can…​                    |
+| Priority | As a …​                                   | I want to …​                    | So that I can…​                       |
 | -------- | ----------------------------------------- | ------------------------------- | ------------------------------------- |
 | `[EPIC]` | agent who has meetings                    | have a meeting schedule         | keep track of them                    |
 | `* * *`  | agent                                     | create new meetings             |                                       |
@@ -581,7 +625,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <div style="page-break-after: always;"></div>
 
-### Use case
+### Use cases
 
 **Use case: Add a contact to a meeting**
 
@@ -718,7 +762,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 
-
 <div style="page-break-after: always;"></div>
 
 ### Glossary
@@ -731,170 +774,193 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Private contact detail**: A contact detail that is not meant to be shared with others
 
 ---
+
 <div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info"> </div>
+<div markdown="span" class="alert alert-info">
 :information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
-
-
+</div>
 
 ### Launch and shutdown
 
-1. Initial launch
+Initial launch
 
-   1. Download the jar file and copy into an empty folder
+1. Download the jar file and copy into an empty folder
 
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-      1. If this fails, open command prompt and navigate to the empty folder you just created.
-      2. use command `java -jar OutBook.jar` to see if it runs. If it runs continue as per normal.
+2. In your terminal, navigate to the folder.
 
-2. Saving window preferences
+3. Run the file with `java -jar OutBook.jar`.
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+Saving window preferences
 
-   2. Re-launch the app by double-clicking the jar file.<br>
-      Expected: The most recent window size and location is retained.
+1. Resize the window and/or move the window.
 
-3. Exiting
-    1. input command `exit`. <br> Expected: OutBook closes and shutdown.
+2. Close the window.
+
+3. Re-launch the app by double-clicking the jar file. <br>
+   Expected: The most recent window size and location is retained.
+
+Exiting
+
+1. Input command `exit`. <br>
+   Expected: OutBook closes and shutdown.
 
 <div style="page-break-after: always;"></div>
 
 ### Adding a person
 
-1. Adding a person while all persons are being shown
+Adding a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `listc` command. Multiple persons in the list.
+1. Prerequisites: List all persons using the `listc` command. Multiple persons in the list.
 
-    2. Test case: `addc n/John Doe p/12345678 e/JohnDoe@gmail.com`<br>
-       Expected: Contact John Doe is created wth phone number 12345678 and email JohnDoe@gmail.com. The contact should be the first in the list as it does not have a last contacted date. Details of the added contact shown in the status message.
+2. Test case: `addc n/John Doe p/12345678 e/JohnDoe@gmail.com`<br>
+   Expected: Contact John Doe is created wth phone number 12345678 and email JohnDoe@gmail.com. The contact should be the first in the list as it does not have a last contacted date. Details of the added contact shown in the status message.
 
-    3. Test case: `addc n/John Not Doe p/87654321 e/JohnNotDoe@gmail.com lc/10.10.2023 1000 s/Active t/tagOne` <br> Expected: Contact John Not Doe is created wth phone number 87654321, email JohnNotDoe@gmail.com, last contacted at 10.10.2023 1000, status as Active and is tagged with tagOne. Details of the added contact shown in the status message.
+3. Test case: `addc n/John Not Doe p/87654321 e/JohnNotDoe@gmail.com lc/10.10.2023 1000 s/Active t/tagOne` <br> Expected: Details of the added contact shown in the status message.
 
-    4. If you were to repeat any of the test cases above, you will encounter a duplicate error
+4. If you were to repeat 2 or 3 above, an error while be shown due to duplicate entries.
 
-    5. Test case: `addc n/John Doe`<br>
-       Expected: No person is added. Error details shown in the status message.
+5. Test case: `addc n/John Doe`<br>
+   Expected: No person is added. Error details shown in the status message.
 
-    6. Test case: `addc p/12345678` <br> Expected: Similar to previous.
+6. Test case: `addc p/12345678` <br> Expected: Similar to 5.
 
-    7. Test case: `addc e/JohnDoe@gmail.com` <br> Expected: Similar to previous.
+7. Test case: `addc e/JohnDoe@gmail.com` <br> Expected: Similar to 5.
 
-    8. Other incorrect delete commands to try: `addc`, `addc 1` and any `addc` command that does not have `n/NAME`, `p/PHONE_NUMBER` & `e/EMAIL` <br>
-       Expected: Similar to previous.
+8. Other incorrect delete commands to try: `addc`, `addc 1` and any `addc` command that does not have `n/NAME`, `p/PHONE_NUMBER` & `e/EMAIL` <br>
+   Expected: Similar to 5.
 
-2. Adding a person while not all persons are being shown.
-    1. Prerequisites: Filter the contact list by using the `findc` command. If you are using the default data given, input `findc n/Yu`. <br> Expected: Only Bernice Yu is shown in the contact list.
+Adding a person while not all persons are being shown.
 
-    2. Repeat Test case from `Adding a person 1.2`. <br>
-       Expected: similar to 1.2.
+1.  Prerequisites: Filter the contact list by using the `findc` command. If you are using the default data given, input `findc n/Yu`. <br> Expected: Only Bernice Yu is shown in the contact list.
 
-    3. Adding a contact automatically list all contact after it is done.
+2.  Add a person using the `addc` command with correct parameters.
+
+3.  Adding a contact automatically shows all contacts.
 
 ### Editing a person
 
-1. Editing a person
+1. Test case: `editc 1 n/John Doe p/12345678 e/JohnDoe@gmail.com`<br>
+   Expected: The first person in the contact list is has its details replaced with the given arguments. Details of the added contact shown in the status message.
 
-    1. Test case: `editc 1 n/John Doe p/12345678 e/JohnDoe@gmail.com`<br>
-       Expected: The first person in the contact list is has its details replaced with the given arguments. Details of the added contact shown in the status message.
+2. If you were to edit a contact so that it has the same name or phone number or email to any other contact, you will encounter a duplicate error
 
-    2. If you were to edit a contact so that it has the same name or phone number or email to any other contact, you will encounter a duplicate error
-
-    3. Other incorrect delete commands to try: `editc` and `editc 1`, you will receive a required index error and a required field error.
+3. Other incorrect delete commands to try: `editc` and `editc 1`, you will receive a required index error and a required field error.
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+Deleting a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `listc` command. Multiple persons in the list.
+1. Prerequisites: List all persons using the `listc` command. Multiple persons in the list.
 
-   2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+2. Test case: `delete 1`<br>
+   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   3. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message.
+3. Test case: `delete 0`<br>
+   Expected: No person is deleted. Error details shown in the status message.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to 3.
 
-2. Deleting a person while not all persons are being shown.
-    1. Prerequisites: Filter the contact list by using the `findc` command. If you are using the default data given, input `findc n/Yu`. <br> Expected: Only Bernice Yu is shown in the contact list.
+Deleting a person while the list of persons is filtered.
 
-    2. Test case: `delete 1`<br>
-       Expected: Bernice Yu is deleted from the list. Nothing should be shown in the list. Details of the deleted contact shown in the status message.
+1. Prerequisites: Filter the contact list by using the `findc` command. If you are using the default data given, input `findc n/Yu`. <br> Expected: Only Bernice Yu is shown in the contact list.
 
-    3. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message.
+2. Test case: `delete 1`<br>
+   Expected: Bernice Yu is deleted from the list. Nothing should be shown in the list. Details of the deleted contact shown in the status message.
 
-    4. Other incorrect delete commands to try: `delete`, `deletec` `delete x` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+3. Test case: `delete 0`<br>
+   Expected: No person is deleted. Error details shown in the status message.
+
+4. Other incorrect delete commands to try: `delete`, `deletec X` (where X is larger than the list size)<br>
+   Expected: Similar to 3.
 
 <div style="page-break-after: always;"></div>
 
 ### View Contact
 
-1. View contact without list changing
-    1. use `viewc 1` to view the first contact <br>
-       Expected: the first contact will have its details shown on the details panel.
-2. View contact with list changing
-    1. Do the same test as before
-    2. Edit the first contact to have a later last contacted date than the second contact. <br>
-       Expected: The second contact will now take first place in the list and the details panel will change to show the new first place contact.
+View contact
+
+1. Use `viewc 1` to view the first contact <br>
+   Expected: the first contact will have its details shown on the details panel.
+
+View contact while contact is being edited
+
+1. Use `viewc 1` to view the first contact <br>
+2. Edit the first contact to have a later last contacted date than the second contact. <br>
+   Expected: The second contact will be sorted to the top of the list, and the details of this contact will be displayed instead.
 
 ### Meeting Tests
 
 Repeat the contact test cases with meeting commands
-1. Add Meeting commands
-    - `adddm m/Test Meeting 1 a/Test Location 1 s/02.10.2023 1000 e/02.10.2023 1200`
-2. Find Meeting commands
-    - `findm m/Meeting`
-3. Edit Meeting commands
-    - `editm m/Changed Meeting Name`
-4. Delete Meeting commands
-    - `deletem 1`
-5. View Meeting commands
-    - `viewm 1`
+
+1. Add Meeting commands <br>
+   `addm m/Test Meeting 1 a/Test Location 1 s/02.10.2023 1000 e/02.10.2023 1200`
+2. Find Meeting commands <br>
+   `findm m/Meeting`
+3. Edit Meeting commands <br>
+   `editm m/Changed Meeting Name`
+4. Delete Meeting commands <br>
+   `deletem 1`
+5. View Meeting commands <br>
+   `viewm 1`
 
 <div style="page-break-after: always;"></div>
 
 ### Meeting Attendees
 
-1. Add Meeting Attendee
-    1. Use `addmc 1 2` <br>
-       Expected: The second person in the current person list will be added to the first meeting in the current meeting list.
-    2. Instead of using 1 or 2, use indexes that are more than the amount of meetings or persons. <br>
-       Expected: An error will be shown which indicated the index which is out of bounds.
-    3. Repeat 1 and 2 with filtered lists using `findc` and `findm`
-2. Remove Meeting Attendee
-    1. Prerequisite: There must be an attendee in the meeting you are looking at. To look at the attendees for a meeting, use `viewm` on the meeting. In this case we will look at the first meeting.
-    2. The attendees will be listed with an index in the meeting. Use `rmmc 1 1`. <br>
-       Expected: The meeting will have its first attendee removed.
+Add Meeting Attendee
+
+1. Use `addmc 1 2` <br>
+   Expected: The second person in the current person list will be added to the first meeting in the current meeting list.
+2. Instead of using 1 or 2, use indexes that are more than the amount of meetings or persons. <br>
+   Expected: An error will be shown which indicated the index which is out of bounds.
+3. Repeat 1 and 2 with filtered lists using `findc` and `findm`
+
+Remove Meeting Attendee
+
+1. Prerequisite: There must be an attendee in the meeting you are looking at. To look at the attendees for a meeting, use `viewm` on the meeting. In this case we will look at the first meeting.
+2. The attendees will be listed with an index in the meeting. Use `rmmc 1 1`. <br>
+   Expected: The meeting will have its first attendee removed.
 
 ### Mark Meetings
 
-1. Mark a Meeting as completed
-    1. Use `mark 1` to mark the first meeting as completed <br>
-       Expected: Meeting will be shown as completed and the attendees that are in the meeting will have their last contacted updated to the end time of the meeting.
+Mark a Meeting as completed
 
 <div style="page-break-after: always;"></div>
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Use `mark 1` to mark the first meeting as completed <br>
+   Expected: Meeting will be shown as completed and the attendees that are in the meeting will have their last contacted updated to the end time of the meeting.
 
-   1. If you have added, edited or deleted anything, there should be a new folder that appears in the folder that you placed OutBook.jar in.
-   2. Open file and open the `outbook.json` file. In the persons section, delete any line that has name, phone, email, etc...
-   3. Run the program again with `java -jar OutBook.jar` <br>
-   Expected: You will open up to a blank OutBook. At this point if you were to add, edit or delete anything, the data you had previously will be deleted and saved over with the new data you just added, losing all you data.
+### Data Storage
 
-2. Recovering from missing/corrupted data files
+No save file
 
-   1. After completed the test above, add back the field that was deleted in step 2. If you do not know what was deleted, place a placeholder for that specific field.
-      1. All persons will have a name, phone, email, lastContactedTime, status, remark and tags.
-      2. Meetings have a similar structure with title, location, start, end, attendees, tags, status.
-   2. Run the program again, and you will see the rest of the data with the placeholder that you put.
+1. Launch OutBook <br>
+   Expected: The default address book is loaded.
+
+2. Execute a command <br>
+   Expected: A JSON file is created at the save location, by default `/data/outbook.json`
+
+Save file present
+
+1. Launch OutBook <br>
+   Expected: The saved address book is loaded.
+
+2. Execute a command <br>
+   Expected: The JSON is updated according to the command.
+
+Save file present but corrupted
+
+1. Launch OutBook <br>
+   Expected: A blank address book is loaded.
+
+2. Execute a command <br>
+   Expected: The save file is overridden with the new address book.
