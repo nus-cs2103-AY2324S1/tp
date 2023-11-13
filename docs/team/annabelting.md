@@ -13,7 +13,8 @@ Given below are my contributions to the project.
 
 * **New Feature**: (Coming Soon) Set-up command to allow users to customise the app to their infrastructure.
 
-* **Code contributed**: [Reposense Link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=Annabel&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2023-09-22&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=AnnabelTing&tabRepo=AY2324S1-CS2103T-F10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
+* **Code contributed**: 
+  * [Reposense Link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=Annabel&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2023-09-22&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=AnnabelTing&tabRepo=AY2324S1-CS2103T-F10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
 * **Project management**: Managed issues and tested out release.
 

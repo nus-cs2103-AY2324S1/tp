@@ -24,7 +24,8 @@ Given below are my contributions to the project.
   * Highlights: Simple to implement, and picked this up during the training provided for NUS Bug Bounty 2023.
 
 
-* **Code contributed**: [Reposense Link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=markgcera&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
+* **Code contributed**: 
+  * [Reposense Link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=markgcera&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
 
 
 * **Project management**: 
