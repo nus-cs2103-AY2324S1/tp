@@ -182,11 +182,11 @@ All the attributes except Departments and Superiors are compulsory fields.
 
 #### Overview
 
-The `ListCommand` displays the `Employee` objects currently stored in `UniqueEmployeeList` object.
+The `ListCommand` displays all the `Employee` objects currently stored in `UniqueEmployeeList` object.
 
 The following sequence diagram shows how the different components of ManageHR interact with each other.
 
-<img src="images/ManageHR/ListCommandSequenceDiagram.png" width="700" />
+<img src="images/ManageHR/ListSequenceDiagram.png" width="700" />
 
 The above sequence diagram omits details on the internal implementations within each directory in order to improve
 overall readability of the diagram.
@@ -300,8 +300,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `***`    | Beginner user     | There is a ‘help’ command to list functions/features | Know how to use the app                                        |
 | `***`    | Beginner user     | Exception handling                                   | Handle invalid inputs                                          |
 | `***`    | Intermediate user | Filter employee by parameters                        | Easily search/track certain details of employees               |
-
-*{More to be added}*
 
 ### Use cases
 

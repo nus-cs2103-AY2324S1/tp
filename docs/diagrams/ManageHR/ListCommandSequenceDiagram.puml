@@ -2,25 +2,52 @@
 !include ../style.puml
 skinparam ArrowFontStyle plain
 
-Actor User as user USER_COLOR
-Participant ":UI" as ui UI_COLOR
-Participant ":Logic" as logic LOGIC_COLOR
-Participant ":Model" as model MODEL_COLOR
-user -[USER_COLOR]> ui : "list"
-activate ui UI_COLOR
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ManageHrParser" as ManageHrParser LOGIC_COLOR
+participant "list:ListCommand" as ListCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
 
-ui -[UI_COLOR]> logic : execute("list")
-activate logic LOGIC_COLOR
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
 
-logic -[LOGIC_COLOR]> model : updateFilteredEmployeeList(() -> true)
-activate model MODEL_COLOR
+[-> LogicManager : execute("list")
+activate LogicManager
 
-model -[MODEL_COLOR]-> logic
-deactivate model
+LogicManager -> ManageHrParser : parseCommand("list")
+activate ManageHrParser
 
-logic --[LOGIC_COLOR]> ui
-deactivate logic
+create ListCommand
+ManageHrParser -> ListCommand
+activate ListCommand
 
-ui--[UI_COLOR]> user
-deactivate ui
+ListCommand --> ManageHrParser
+deactivate ListCommand
+
+ManageHrParser --> LogicManager : list
+deactivate ManageHrParser
+
+LogicManager -> ListCommand : execute()
+activate ListCommand
+
+ListCommand -> Model : updateFilteredEmployeeList(..)
+activate Model
+
+Model --> ListCommand
+deactivate Model
+
+create CommandResult
+ListCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ListCommand
+deactivate CommandResult
+
+ListCommand --> LogicManager : result
+deactivate ListCommand
+
+[<--LogicManager
+deactivate LogicManager
 @enduml
