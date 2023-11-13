@@ -50,7 +50,8 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where
+the user issues the command `delete n/Alex` to delete `Alex` from HealthSync.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -117,23 +118,16 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="650" />
 
 
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the log book data i.e., all `Person` objects (filtered as `foundPersonsList` by `ModelManager`). 
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
 
 
 ### Storage component
@@ -157,94 +151,48 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+###  Undo feature
 
-#### Proposed Implementation
+#### Description
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The Undo feature allows users to revert an undo-able command. The `UndoCommand` serves as the entry point for users to
+initiate the undo process.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+#### Implentation details
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+The `UndoCommand` is implemented as follows:
+- **Command Word**: `undo` or `u`
+- **Usage**: `undo [number]`
+- **Command Format**
+    - `undo`: Undoes the last undo-able command
+    - `undo [number]`: Undoes the specified number of undo-able commands
+- **Validation**: The `UndoCommandParser` parses user input, ensuring it adheres to the expected format.
+  If the input is invalid or incomplete, appropriate error messages are generated.
+- **Execution**: Upon successful validation, the `UndoCommandParser` returns a `UndoCommand` object. The object
+  then interacts with the model to identify and undo the desired number of previous commands
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+<puml src=diagrams/UndoSequenceDiagram.puml width="250"/>
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+#### Rationale:
 
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how the undo operation works:
-
-<puml src="diagrams/UndoSequenceDiagram.puml" alt="UndoSequenceDiagram" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
+In the current implementation, the `UndoCommand` relies on undoable commands storing the previous details of the patient as fields.
+For example, the undo of an "add" command stores the details of the added patient and undoing it will simply delete the added patient,
+representing a reversal of the addition. This approach prioritizes simplicity and efficiency, ensuring a quick and reliable undo operation.
+By leveraging the existing structures and operations in the application, this method avoids the need for additional data storage and processing.
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+<puml src=diagrams/UndoActivityDiagram.puml width="250"/>
 
-#### Design considerations:
 
-**Aspect: How undo & redo executes:**
+#### Alternative Implementation
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+**Alternative 1:**: Explore more sophisticated undo strategies, such as storing the state of the address book after each command.
+* Pros: Accuracy: This approach ensures a more precise representation of the application's history, capturing nuanced changes in the address book. It is particularly beneficial in scenarios where specific details matter.
+* Cons:
+    1. Increased Complexity: Implementing a system to capture and manage snapshots of the address book after every command introduces additional complexity to the codebase.
+    2. Resource Overhead:  Storing snapshots after each command may increase the application's resource usage,
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
 
 ### Implementation of Singular, Optional Fields
 
@@ -255,20 +203,20 @@ field implementation. While optional fields like `MedicalHistory` exist in Healt
 Collections, and can natively handle the empty state. Singular optional properties can be added this way,
 but is hard to distinguish between properties that allow for multiple entries and fields that don't.
 
-<puml src="diagrams/AppointmentClassDiagram0.puml" width="250" />
+<puml src="diagrams/AppointmentClassDiagram0.puml"/>
 
 The optional fields could be implemented directly to `Person` as shown in the partial class diagram above.
 However, several other packages depend upon `Person` as well, including `UI` and `Storage`.
 These packages already make assumptions on the `non-null` property on the variables of `Person`.
 
-<puml src="diagrams/AppointmentSequence0.puml" width="250" />
+<puml src="diagrams/AppointmentSequence0.puml" />
 
 The diagram above illustrates a possible path that may arise if the optional property of the field is
 not explicitly defined. There is a need to explicitly denote that our optional field is possibly an
 empty value without having its implementers perform the check themselves, so that the compiler is
 able to assist in our coding.
 
-<puml src="diagrams/AppointmentClassDiagram1.puml" width="250" />
+<puml src="diagrams/AppointmentClassDiagram1.puml" />
 
 Therefore, the implementation of optional fields now return its value wrapped in the Java
 `Optional` wrapper. In this example, when `getAppointment` is called now, the implementer will be
@@ -300,7 +248,7 @@ relationship within itself.
 `Appointment` is distinctly different from other fields in `Person` in that it cannot store its values as
 a String directly - otherwise, this would complicate the process of defining temporal relationships within itself.
 
-<puml src="diagrams/AppointmentClassDiagram2.puml" width="250" />
+<puml src="diagrams/AppointmentClassDiagram2.puml" />
 
 Above is a partial class diagram of `Appointment`. Note that several static members were excluded as they are not
 relevant to its data-structure properties in `HealthSync`.
@@ -318,7 +266,7 @@ HealthSync requests of its users.
 
 Therefore, `Appointment` uses a combination of `regex` and `DateTimeFormatter` to resolve its user input.
 
-<puml src="diagrams/AppointmentActivity0.puml" width="250" />
+<puml src="diagrams/AppointmentActivity0.puml" />
 
 A partial activity diagram illustrating the relevant segment of the parse process.
 
@@ -380,8 +328,11 @@ The `DeleteCommand` allows users to delete a patient's profile or a specified fi
 The `DeleteCommand` is implemented as follows:
 - **Command Word**: The command word for this feature is `delete`
 - **Usage**: Users invoke the `DeleteCommand` by specifying the command word, followed by the name or IC of the person they wish to delete and any fields they wish to delete.
-- **Command Format**: `delete n/Name or id/IC_Number[Fields] ...`
-- **DeletePersonDescriptor**: The `DeleteCommand` relies on an `DeletePersonDescriptor` to capture which fields the user wishes to delete from the patient's profile. The descriptor will be passed to the `DeleteCommand` to execute the deletion.
+- **Command Format**: 
+  - `delete n/Name [Fields] ...`
+  - `delete id/IC_Number [Fields] ...`
+  - `delete n/Name id/IC_Number [Fields] ...`
+- **DeletePersonDescriptor**: The `DeleteCommand` relies on an `DeletePersonDescriptor` to capture which fields the user wishes to delete from the patient's profile. The descriptor will be passed to the `DeleteCommand` to execute the deletion. Currently, only `Appointment` and `MedicalHistory` can be deleted as they are optional.
 - **Validation**: The `DeleteCommand` performs validation to ensure that the IC or Name provided is valid.
 - **Execution**: When executed, the `DeleteCommand` identifies the patient to be deleted based on the provided name or IC. When the patient is found, if no there are no specified fields to delete, the entire patient profile will be deleted from the database. Otherwise, the specified fields will be deleted from the patient's profile.
 
@@ -422,13 +373,13 @@ The primary layout structure for the HealthSync GUI is based on HBox and VBox co
 StackPane
 The StackPane is used to organize specific UI elements within the VBox containers. It allows for the layering of elements and effective management of screen real estate.
 
-1. StackPane (Person List)
+1. StackPane (PersonListPanel)
 
-   Location: Inside the first VBox (fx:id="personList").
-2. StackPane (Logger Panel)
+   Location: Inside the first VBox (`fx:id="personListPanelPlaceholder"`).
+2. StackPane (LoggedPersonlListPanel)
 
-    Location: Also inside the first VBox (fx:id="personList").
-3. StackPane (Result Display, Command Box, and Status Bar)
+    Location: Also inside the first VBox (`fx:id="loggerPanelPlaceholder"`).
+3. StackPane (ResultDisplay, CommandBox, and StatusBarFooter)
 
     Location: These StackPanes are located inside the second VBox
 
@@ -436,8 +387,8 @@ The StackPane is used to organize specific UI elements within the VBox container
 
 The HealthSync GUI utilizes specific color choices to create a visually pleasing and organized interface, while still maintaining the original Dark Theme.
 
-1. Primary Colour: #43314E
-2. Secondary Colour: #231335
+1. Primary Colour: `#43314E`
+2. Secondary Colour: `#231335`
 
 
 ### Edit Feature
@@ -451,7 +402,10 @@ The `EditCommand` allows users to modify the details of an existing person withi
 The `EditCommand` is implemented as follows:
 - **Command Word**: The command word for this feature is `edit`.
 - **Usage**: Users invoke the `EditCommand` by specifying the command word, followed by the name or IC of the person they wish to edit and the fields they wish to modify.
-    - The command format is: `edit n/NAME or id/ID_NUMBER [Fields] ...`.
+- **Command Format**: 
+  - `edit n/Name [Fields] ...`
+  - `edit id/IC_Number [Fields] ...`
+  - `edit n/Name id/IC_Number [Fields] ...`
 - **EditPersonDescriptor**: The `EditCommand` relies on an `EditPersonDescriptor` to capture the details to edit the person with. This descriptor allows for updating various attributes of the person, such as phone, email, address, appointment, and medical histories.
 - **Validation**: The `EditCommand` performs validation to ensure at least one field to edit is provided. It also checks for consistency when both a name and IC are provided.
 - **Execution**: When executed, the `EditCommand` identifies the person to edit based on the provided name and/or IC. If the person is found, it creates an `editedPerson` with the desired changes. The person is then updated with the new details.
@@ -477,25 +431,51 @@ The following activity diagram summarizes what happens when a user executes a ne
          - **Potential Errors**: If the list of persons changes (e.g., due to deletions or additions), the numbering index could become outdated, leading to errors.
          - **Limited Identifiability**: Index numbers do not provide any context about the person, which may be confusing when there are multiple people with the same name or similar information.
 
-### Find Feature
+### Find Feature and its related Predicate classes
 
-#### Description
-
-The `FindCommand` allows users to find existing person(s) within the patient list, using their name or ID, and view their field data.
+The `FindCommand` allows users to find existing person(s) within the patient list,
+using their Name, NRIC and/or Appointment, and view their field data. This is done with aid by the concreted `Predicate`
+classes, that directly implement the `Predicate` functional interface given by the Java package.
 
 #### Implementation Details
 
 The `FindCommand` is implemented as follows:
 - **Command Word**: The command word for this feature is `find`.
-- **Usage**: Users invoke the `FindCommand` by specifying the command word, followed by the name and/or ID of the person(s) they wish to find.
-    - The command format is: `find n/NAME` or `find id/ID_NUMBER` or `find n/Name id/ID_NUMBER`.
-- **`execute` method**: The `FindCommand` executes the search by using the specified predicates (`NameContainsKeywordsPredicate` or `IdContainsKeywordsPredicate`) to filter and list all persons matching the search criteria. // to be edited based on newer imp
-- **Validation**: The `FindCommand` performs validation to ensure at least one keyword is provided. It searches based on either name or ID, or both. The entered name and ID have to match to the same patient.
-- **Execution**: When executed, the `FindCommand` identifies the person(s) being searched for based on the provided name or ID. If a name is provided as keyword, a `FindCommand(NameContainsKeywordsPredicate)` is created, and if an ID is provided as keyword, a `FindCommand(IdContainsKeywordsPredicate)` is created. `updateFilteredPersonList` will then update the filter of the filtered person list to filter by the given name or ID predicate (keyword). // to be edited based on newer imp
+- **Usage**: Users invoke the `FindCommand` by specifying the command word,
+  followed by the Name, NRIC and/or Appointment period of the person(s) they wish to find.
+- **Command Format**:
+    - `find n/Name [Fields] ...`
+    - `find id/IC_Number [Fields] ...`
+    - `find n/Name id/IC_Number [Fields] ...`
+- **`execute` method**: The `FindCommand` executes the search by using the specified predicates generated from
+  the fields (`NameContainsKeywordsPredicate`/`IdContainsKeywordsPredicate`/`AppointmentOverlapsPredicate`).
+  These predicates are composited into `CompositePredicate` to filter and list all persons matching the search criteria.
+    - `CompositePredicate` is a collection of `Predicate<Person>` objects that itself implements the `Predicate<Person>`
+  interface. The collection is stored in a Set, and `test()` calls will perform a logical AND on all values in its
+  collection. By default, `CompositePredicate` will have an instance of `IdentityPredicate` which always returns `true`.
+        - <puml src="diagrams/PredicateClassDiagram.puml"/>
+    - The following object diagram illustrates how `FindCommand` instances handles its `Predicate` values internally.
 
-The following sequence diagram shows how the find operation works:
+<puml src="diagrams/FindWithPredicateObjectDiagram.puml" width="950" />
+
+As observed in the diagram above, each field provided will generate the appropriate `Predicate` value and add it to the
+`CompositePredicate` collection, and each field not provided adds an instance of an `IdentityPredicate` instead.
+As the Set implementation enforces no duplicate Predicates, this means that collections with fewer fields provided
+will also store less values in the collection overall.
+
+- **Validation**: The `FindCommand` performs validation to ensure at least one field is provided. For Appointment,
+  it asks for a valid Appointment format to be given.
+
+The following sequence diagram shows how the find operation works in the successful case:
 
 <puml src="diagrams/FindSequenceDiagram.puml"/>
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `FindCommandParser` and `FindCommand` should end at the destroy marker (X) but due to a
+limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
@@ -503,31 +483,61 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Rationale
 
-- **Flexibility**: The `FindCommand` provides flexibility to users by allowing them to choose whether to find a person by name or ID, or both, whichever is faster or available.
+- **Flexibility**: The `FindCommand` provides flexibility to users by allowing them to choose whether to find a person
+  by name, NRIC or Appointment timeslot, whichever is faster or available.
 - **User Experience**: The keyword matching is case-insensitive, making the search faster and more user-friendly.
-- **Data Integrity**: The feature is designed to maintain the integrity of the patient list by not changing any of the patient data.
+- **Data Integrity**: The feature is designed to maintain the integrity of the patient list
+  by not changing any of the patient data.
 
 #### Alternatives Considered
 
-- **Alternative 1**: Using only name to find patients.
+What Fields to use as part of query
+- **Alternative 1**: Using existing implementation of only name to find patients
     - **Pros**:
-        - **Standardisation**: The command format is fixed and will always only be `find n/NAME`, which may be easier to remember.
-        - **User Convenience**: Searching primarily by name is a common way to look up a patient in a healthcare system and users may be more familiar with this method.
-
+        - The command format is fixed and will always only be `find n/NAME` which is easier to remember.
+        - Searching primarily by name is a common way to look up a patient in a healthcare system
+          and users may be more familiar with this method.
     - **Cons**:
-        - **Potential Errors**: If patients' names change over time, there may be failed searches and other identifiers, like ID, may be needed.
-        - **Limited Identifiability**: If multiple patients share the same name, they will be indistinguishable name-wise and other identifiers, like ID, may be needed.
+        - If multiple patients share the same name for a future extension, they will be indistinguishable name-wise and
+          other identifiers, like ID, may be needed.
+        - Lack of flexibility in search term may become a pain point for a service that provides for a lot of people.
 
+- **Alternative 2**: Search through all fields
+    - **Pros**:
+        - Extreme flexibility in searching for patients
+        - Ease of use by users, as there will not be a specific format to adhere to if all fields are allowed
+    - **Cons**:
+        - Have to account for multiple field queries
+        - Searching through some fields are irrelevant - it is rare to search for a patient via address for example - so
+          it might not be worthwhile to implement
 
-- **Alternative 2**: Requiring both name and ID keywords to find patients within a single find command, for every command.
+- **Alternative 3 (current choice)**: Searching through ID, Name and Appointment
   - **Pros**:
-    - **Enhanced Precision**: Combining both name and ID is a more unique identification method, making it easier to find a patient sharing a name with other patients.
-    - **Patient Verification**: Searching by both criteria adds a layer of verification, ensuring the correct patient is selected.
+    - More precise searching for a particular person
+    - Added flexibility to searching without using some less relevant fields
 
   - **Cons**:
-    - **Additional User Effort**: Users need to provide both name and ID, which may take longer or require extra effort, especially if they only have one piece of information readily available.
+    - Have to account for multiple field queries
 
-    
+Handling multiple field queries
+- **Alternative 1 (current choice)**: Logical AND
+    - **Pros**:
+        - Allows user to narrow down a search in a large `find` result
+        - In line with most filter functions in searches
+        - Scales up better when queries are done on less unique fields
+    - **Cons**:
+        - May be confusing when comparing with internal implementations of ID and Name `find`
+        - Low value when 2 of the queries are unique (this is mitigated by the
+          [extension proposed in a later update](#appendix-planned-enhancements))
+
+- **Alternative 2**: Logical OR
+  - **Pros**:
+    - Allows a user to cast out a wider net
+    - Potentially lets a user find multiple fields at once
+    - Consistent with individual keyword matches for internal implementation of ID and Name `find`.
+  - **Cons**:
+    - For larger databases, Logical OR adds little value to a filter function
+  
 ### Log Feature
 
 #### Description
@@ -661,7 +671,6 @@ The following sequence diagram shows how the clog operation works:
         - **User Experience**: If the user wants to clear the Logger Tab, they need to delete each patient profile individually, which may be very inconvenient especially with a large list in Logger Tab.
         - **Altered Functionality**: The Logger Tab is meant to be a temporary snapshot of patient profiles at the time at which they were logged, not a subset version of the existing patient list.
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -739,17 +748,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The user does not specify one or more of the compulsory fields.
-
-  * 1a1. HealthSync shows an error message.
-
-    Use case ends.
-
-  * 1b. The user specifies an IC that is already exists in the current list.
-
-    * 1b1. HealthSync shows an error message.
-
-      Use case ends.
+  * 1a. HealthSync detects an error in the input.
+  
+    * 1a1. HealthSync shows an error message.
+    * 1a2. User corrects the input.
+    
+      Steps 1a1-1a2 repeat until the user inputs all the fields correctly.
+      
+      Use case continues from step 2.
 
 **Use case: UC2 - Delete a patient**
 
@@ -764,18 +770,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The user does not exist in the list.
+* 1a. HealthSync detects an error in the identifier input.
+
+    * 1a1. HealthSync shows an error message.
+    * 1a2. User corrects the input.
+
+    Steps 1a1-1a2 repeat until the user inputs all the fields correctly.
+  
+    Use case continues from step 2.
+
+* 1b. User also inputs non-identifier fields as well.
+
+    * 1b1. HealthSync <u>deletes the patient fields from the patient instead (UC3).</u>
+
+      Use case ends.
+
+* 2a. The patient does not exist in the list.
 
     * 2a1. HealthSync shows an error message.
 
       Use case ends.
-
-* 2b. HealthSync finds more than 1 patient for the list.
-
-    * 2b1. HealthSync shows a list of patients matching the identifier in the list.
-    * 2b2. User indicates the patient to delete in the list.
-
-      Use case continues from step 3.
 
 **Use case: UC3 - Delete fields from a patient**
 
@@ -791,15 +805,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The user does not specify any fields they want to delete.
+* 1a. HealthSync detects an error in the identifier input.
 
-    * 1a1. HealthSync <u>deletes the patient from the list instead (UC2).</u>
+    * 1a1. HealthSync shows an error message.
+    * 1a2. User corrects the input.
 
-      Use case ends.
+      Steps 1a1-1a2 repeat until the user inputs all the fields correctly.
+    
+      Use case continues from step 2.
 
-* 1b. The user attempts to delete a name/IC field.
+* 1b. The user does not specify any fields they want to delete.
 
-    * 1b1. HealthSync shows an error message.
+    * 1b1. HealthSync <u>deletes the patient from the list instead (UC2).</u>
 
       Use case ends.
 
@@ -809,19 +826,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 2b. HealthSync finds more than 1 patient for the list.
-
-    * 2b1. HealthSync shows a list of patients matching the identifier in the list.
-    * 2b2. User indicates the patient to delete from in the list.
-
-      Use case continues from step 3.
-
 **Use case: UC4 - Edit a patient**
 
 **MSS**
 
-1.  User requests to change a specific user's fields
-based on an identifier
+1.  User requests to change a specific user's fields based on an identifier
     with a new value in the list.
 2.  HealthSync searches for the patient in the list.
 3.  HealthSync edits the specified patient's fields in the list.
@@ -831,30 +840,14 @@ based on an identifier
 
 **Extensions**
 
-* 1a. The user does not specify any fields they want to edit.
+* 1a. HealthSync detects an error in the input.
 
     * 1a1. HealthSync shows an error message.
+    * 1a2. User corrects the input.
 
-      Use case ends.
+      Steps 1a1-1a2 repeat until the user inputs all the fields correctly.
 
-* 1b. The user specifies duplicate fields they want to edit.
-
-    * 1b1. HealthSync shows an error message.
-
-      Use case ends.
-
-* 1c. The user specifies no value in a name/IC field that they wish to edit.
-
-    * 1c1. HealthSync shows an error message.
-
-      Use case ends.
-
-* 1d. The user attempts to change the IC of the patient to one that already
-      exists in the list.
-
-    * 1d1. HealthSync shows an error message.
-
-      Use case ends.
+      Use case continues from step 2.
 
 * 2a. The user does not exist in the list.
 
@@ -862,29 +855,31 @@ based on an identifier
 
       Use case ends.
 
-* 2b. HealthSync finds more than 1 patient for the list.
-
-    * 2b1. HealthSync shows a list of patients matching the identifier in the list.
-    * 2b2. User indicates the patient to edit in the list.
-
-      Use case continues from step 3.
-
 **Use case: UC5 - Find a patient**
 
 **MSS**
 
-1.  User requests for matches to the given query.
+1.  User requests for matches to the given query for a particular field.
 2.  HealthSync displays the list of patients matching the query.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. No matches exist in the list.
+* 1a. HealthSync detects an error in the input.
 
-    * 1a1. HealthSync displays a "no matches found" message.
+    * 1a1. HealthSync shows an error message.
+    * 1a2. User corrects the input.
 
-      Use case ends.
+      Steps 1a1-1a2 repeat until the user inputs all the fields correctly.
+
+      Use case continues from step 2.
+
+* 1b. User specifies multiple fields to query.
+
+    * 1b1. HealthSync combines the fields into a query that matches all the conditions given.
+  
+      Use case continues from step 2.
 
 **Use case: UC6 - Log patient(s)**
 
@@ -986,13 +981,19 @@ based on an identifier
 
 ### Non-Functional Requirements
 
-1. The application should be compatible with the designated operating systems and hardware configurations, as specified in the system requirements.
-2. The application should respond promptly to user inputs, with minimal latency and loading times for data retrieval and processing.
-3. The user interface should be user-friendly and intuitive, designed to optimize the workflow of frontdesk staff who need to complete tasks within 2-3 minutes.
-4. The application should be designed to handle an increasing volume of patient records efficiently without noticeable performance degradation.
-5. Ensure that the application complies with PDPA and healthcare regulations.
-
-*{More to be added}*
+1. The application should be compatible with the designated operating systems and hardware configurations, as specified 
+   in the system requirements ie Mac, Windows and Linux systems running Java 11.
+2. The application should respond promptly to user inputs, with minimal latency and loading times for data retrieval
+   and processing.
+3. The user interface should be user-friendly and intuitive for fast typists, designed to optimize the workflow of
+   front-desk staff who need to complete tasks within 2-3 minutes.
+4. The application should be stable for a clientele of roughly 300 to 500 patients (estimated from ~20 patients per day
+   for a GP, for a month with 50% returning patients).
+5. The application should be designed to handle an increasing volume of patient records efficiently
+   without noticeable performance degradation.
+6. The application should comply with healthcare regulations.
+7. The application is not required to handle communications on a local database/internet.
+8. The application is designed to be used by exactly 1 front-desk staff.
 
 ### Glossary
 

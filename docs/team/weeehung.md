@@ -36,12 +36,13 @@ Given below are my contributions to the project.
 * **Project management**:
   * Managed releases [`v1.2.1`](https://github.com/AY2324S1-CS2103T-T14-3/tp/releases/tag/v1.2.1) (1 release) on GitHub
   * Assisted in Jar Release [`v1.3`](https://github.com/AY2324S1-CS2103T-T14-3/tp/releases/tag/v1.3) (1 release) on GitHub
+  * Tagged relevant labels and milestones for various Issues and PRs to aid project management 
 
 * **Enhancements to existing features**:
   * Added new fields necessary for patient tracking.
   * Updated the GUI color scheme (Pull requests [\#107](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/107))
   * Updated the frontend design of application, including menu sidebar, medical history tags and logger tabs.
-  * Wrote additional tests for existing features to increase coverage from 75% to XX% (Pull requests [\#63](), [\#38]())
+  * Wrote additional tests for existing features to increase coverage from 75% to 76% (Pull requests [\#63](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/63))
   * Refactor File Names to be more consistent (Pull requests [\#209](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/209))
 
 * **Documentation**:
@@ -51,9 +52,18 @@ Given below are my contributions to the project.
     * Added Autosave explanation to mention what is saved in the hard disk [\#209](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/209)
     * Added explanation for edge case of appointment field (0-minute appointment) [\#209](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/209)
     * Added description for archiving data files (Future implementation) [\#209](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/209)
+    * Replaced all Screenshots of HealthSync GUI (v1.4) [\#228](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/228)
+    * Added necessary breaklines to make sections more readable [\#228](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/228)
+    * Added HealthSync Logo to User Guide [\#228](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/228)
+    * Added `spacebar` key shortcut Tip to User Guide [\#228](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/228)
+    * Added `Patient Card` in Glossary to orientate users on the fields present in the card [\#228](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/228)
+
   * Developer Guide:
     * Added Product Scope which includes target user profile and value proposition.
     * Added user stories and sort them in terms of priority
+    * Updated UML Diagrams for UI Component to include LoggedPersonListPanel [\#252](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/252)
+    * Updated UML Diagrams for Model Component to include New Fields for `Person` and New Class `LogBook` [\#252](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/252)
+    * Updated UML Diagrams for Storage Component to replace deprecated `JsonAdaptedTags` to `JsonAdaptedMedicalHistory` [\#252](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/252)
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#74](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/74), [\#82](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/82)
@@ -62,7 +72,9 @@ Given below are my contributions to the project.
   * New fields implemented by me are adopted by the team ([#63](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/63))
 
 * **Tools**:
-  * Utitlised JavaFx Scene Builder for building the frontend of the project ([\#107](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/107))
+  * Utilised JavaFx Scene Builder for building the frontend of the project ([\#107](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/107))
+  * Utilised Markbind CLI to preview PUML diagrams and web changes locally [\#252](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/252)
+
 
 
 ### **References**:
@@ -71,5 +83,11 @@ Given below are my contributions to the project.
 ![Usage of JavaFx Scene Builder](../images/SceneBuilder.png)
 
 
+#### _Markbind CLI Usage_
+![Markbind CLI Usage](../images/MarkbindUsage.jpg)
+
+
 #### _Changes to GUI_
 ![GUI Changes](../images/HealthSyncGUI_v1.4.png)
+
+
