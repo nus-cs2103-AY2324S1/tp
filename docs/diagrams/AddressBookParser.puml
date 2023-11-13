@@ -12,10 +12,10 @@ start
 'diamond we place it as the true branch instead.
 
 switch ()
-case ( prefix = "add", "delete", "create", "filter", "sort", "edit")
+case ( [prefix = "add", "delete", "create", "filter", "sort", "edit"])
     :Parse remaining input with relevant
     Parser and return Command object;
-case ( prefix = "help", "redo", "undo", "save", "clear", "list", "exit")
+case ( [prefix = "help", "redo", "undo", "save", "clear", "list", "exit"])
     :Return the relevant Command object,
     while ignoring the remaining input;
 case ( [prefix not recognized])
@@ -25,11 +25,11 @@ endswitch
 
 :Check if parsing was successful;
 
-if () is (yes) then
+if () is ([yes]) then
   :Execute the command and
   update the status of the Model
   to the user;
-else (no)
+else ([no])
   :Send the parsing error
   message to UI to inform user;
 endif
