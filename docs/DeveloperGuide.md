@@ -1230,6 +1230,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 	- `Effective Layout with GridPane`: Despite the initial challenges, adopting GridPane significantly improved the layout efficiency of our calendar component, ensuring a visually appealing and well-organized interface.
 	- `Successful Synchronization`: Overcoming synchronization complexities, we successfully implemented a calendar component that accurately reflects the local date and dynamically displays the number of employees on leave.
 
+### Generation of PDF Payslips
+
+1. Challenges faced:
+   - `Printing information onto a PDF template`: The crux of this feature is to collect different deductions, benefits, and payment dates of an employee's payroll, and print them onto a PDF template. As such, we decided to use the `itext7` library to print information onto the template.
+   - `Reading template file`: The template file is a PDF file, and we had to find a way to read the file and obtain the fields in the template. Since we are releasing ManaGease as a single JAR file, we are not supposed to require our users to download the template file from somewhere else.
+
+2. Effort required:
+   - `Understanding itext7 APIs`: We then spent some time learning how to use the `itext7` library to print information onto a PDF template, by reading the Developer's Documentation and JavaDoc.
+   - `Maintaining a map between fields and contents`: Since the library only acts as a PDF reader and writer, we must manually obtain all fields (blank spaces) in the template and fill them with the appropriate information. To do so, we created a `HashMap<String, String>` to map the fields to their respective contents. This map is then passed to the `itext7` library to print the information onto the template.
+   - `Reading template file`: We have tried many methods to read the template file, e.g., reading it as a `File` object, or an `InputStream` object. However, the file could not be read when using the JAR file to test.
+
+3. Achievements:
+   - `Reading template file`: We managed to read the template file by using the `PaySlipGenerator.class.getClassLoader().getResource("template.pdf").toString()`, which returns a `String`. The `String` is then passed into the `PdfReader` object. This method allows us to read the template file from the JAR file.
+   - `Printing information onto a PDF template`: We managed to print information onto a PDF template using the `itext7` library, and the `payslip` command works as intended.
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
