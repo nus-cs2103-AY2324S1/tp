@@ -25,6 +25,7 @@ public class FindBandCommand extends Command {
         + "Example: " + COMMAND_WORD + " BlackPink";
 
     public static final String MESSAGE_SUCCESS = "There are %1$d musicians in the band %2$s";
+    public static final String MESSAGE_NO_BAND_IN_LIST = "No bands yet." + "\n" + "Please create a band first!";
     private final Predicate<Band> predicate;
 
     public FindBandCommand(Predicate<Band> predicate) {
@@ -34,8 +35,11 @@ public class FindBandCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredBandMusicianList(predicate);
+        if (model.getFilteredBandList().isEmpty()) {
+            throw new CommandException(MESSAGE_NO_BAND_IN_LIST);
+        }
 
+        model.updateFilteredBandMusicianList(predicate);
         // If the band exists, filtered band list is guaranteed to have only one band,
         // (because add a band enforce no band with the same name (case-insensitive) is allowed).
         // If filtered band list size > 1 or size == 1 but the band filtered does not pass the predicate,
