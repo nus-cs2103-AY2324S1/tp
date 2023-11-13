@@ -176,7 +176,7 @@ Here’s how you can use it:<br>
 `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
 
 Here is an example command where we enrol the member at **member index** 1 to the event at **event index** 1, where our member
-has contributed 2 **hours**, and we want to make a "Role: Photographer" **remark** to reflect their role as a photographer:<br>
+has contributed 2 **hours**, and we want to leave a "Role: Photographer" **remark** to reflect their role as a photographer:<br>
 `enrol m/1 e/1 h/2 r/Role: Photographer`
 
 <hr class="command-separator">
@@ -204,7 +204,7 @@ If your member is no longer involved in a particular event, you can easily remov
 Here’s how you can use it:<br>
 `unenrol m/MEMBER_INDEX e/EVENT_INDEX`
 
-Here is an example command where we want to unenrol the **member** at index 1 from the **event** at index 1:<br>
+Here is an example command where we unenrol the **member** at index 1 from the **event** at index 1:<br>
 `unenrol m/1 e/1`
 
 <div markdown="block" class="alert alert-info">:information_source: The `MEMBER_INDEX`/`EVENT_INDEX` parameter refers to the index number shown in the **currently displayed** member/event list.
