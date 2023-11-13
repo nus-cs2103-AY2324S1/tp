@@ -186,20 +186,19 @@ For more details about command-specific parsing and execution, refer to "[Implem
 **API:**
 [`Model.java`](https://github.com/AY2324S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/application/model/Model.java)
 
-**Description:**
 The `Model` component is reponsible for encapsulating data and providing methods to modify the data.
 
-**Functionality:**
 The `Model` component,
-* stores the application book data i.e., all `Job` objects (which are contained in a `UniqueJobList` object).
-* stores the currently 'selected' `Job` objects 
-  (e.g., results of a `FindCommand`) as a separate _filtered_ list which is exposed to outsiders as 
-  an unmodifiable `ObservableList<Job>` that can be 'observed' 
-  e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. 
-  This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components 
-  (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* Stores the application book data i.e., all `Job` objects (which are contained in a `UniqueJobList` object).
+* stores the currently 'selected' `Job` objects (e.g., results of a `FindCommand`) as a separate _filtered_ list which
+  is exposed to outsiders as an unmodifiable `ObservableList<Job>` that can be 'observed' (e.g. the UI can be bound to
+  this list so that the UI automatically updates when the data in the list change.
+* Stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a
+  `ReadOnlyUserPref` object.
+* Does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
+  should make sense on their own without depending on other components).
+
+The following is a class diagram of the `Model` component:
 
 <img src="images/developer-guide/ModelClassDiagram.png" width="450" />
 
@@ -221,7 +220,7 @@ The `Storage` component,
 
 The following is a class diagram of the `Storage` component:
 
-<img src="images/developer-guide/StorageClassDiagram.png" width="500"/>
+<img src="images/developer-guide/StorageClassDiagram.png" width="600"/>
 
 ### Common Classes
 
@@ -309,31 +308,32 @@ The delete command allows the user to delete a job application using its index.
 
 #### Implementation
 
-The Delete feature is implemented through the `DeleteCommand` class along with `DeleteCommandParser` to parse the arguments
-for the command from the user input. 
+The Delete command is implemented through the `DeleteCommand` class along with `DeleteCommandParser` to parse the
+arguments for the command from the user input.
 
-The following sequence diagram illustrates the process of executing a valid `delete` command.
+The following sequence diagrams illustrate the process of executing a valid `delete` command:
 
-<img src="images/developer-guide/DeleteCommandParserSequenceDiagram.png" />
+<img src="images/developer-guide/DeleteCommandParserSequenceDiagram.png" width="400"/>
+<br>
+<img src="images/developer-guide/DeleteCommandSequenceDiagram.png" width="400"/>
 
-<img src="images/developer-guide/DeleteCommandSequenceDiagram.png" />
+The `DeleteCommandParser` class parses the user input and creates a `DeleteCommand` object with the specified index.
+If the user input does not conform to the expected format (e.g. the index is out of bounds), a `ParseException` is
+thrown.
 
-The `DeleteCommandParser` class parses the user input and creates an `DeleteCommand` object with the specified index.
-If the user input does not conform to the expected format e.g. the index is out of bounds, a `ParseException` is thrown.
-
-The `execute` method in `DeleteCommand` is then called, which retrieves the current list of jobs and deletes the job at 
-the specified index in the job list with `Model::deleteJob`.
+`DeleteCommand::execute` is then called, which retrieves the current list of jobs and deletes the job at the specified
+index in the job list with `Model::deleteJob`.
 
 #### Design considerations
 
-1. **How to Delete Fields**
-* *Chosen implementation*: Only supports deleting the entire Job Application including all its fields.
-* *Alternative*: To enable the `delete` command to parse and delete specific optional fields of the application at the 
-  specified index, allow users to input specifiers (e.g. `delete 1 s/`) and modify `DeleteCommandParser` to parse the 
-  specifiers, removing the ones corresponding to the specifiers.
-  * *Pros*: More flexibility in changing the fields of an application.
-  * *Cons*: Good to have but not a necessary feature as users can simply `edit` the fields and set them to 
-    the default (eg. TO_ADD_STATUS)
+1. **How to delete fields**
+   * *Chosen implementation*: Only supports deleting the entire Job Application including all its fields.
+   * *Alternative*: To enable the `delete` command to parse and delete specific optional fields of the application at the 
+     specified index, allow users to input specifiers (e.g. `delete 1 s/`) and modify `DeleteCommandParser` to parse the 
+     specifiers, removing the ones corresponding to the specifiers.
+       * *Pros*: More flexibility in changing the fields of an application.
+       * *Cons*: Good to have but not a necessary feature as users can simply `edit` the fields and set them to 
+    the default (eg. TO_ADD_STATUS).
 
 ---
 
@@ -343,7 +343,7 @@ The list command allows the user to view the list of all job applications.
 
 #### Implementation
 
-The following sequence diagram illustrates the process of invocation for the command:
+The following sequence diagram illustrates the process of execution for the command:
 
 <img src="images/developer-guide/ListCommandSequenceDiagram.png" />
 
@@ -355,9 +355,9 @@ The `ListCommand` class implements this command. It sets the predicate for the `
 1. **Implementing listing by `sort` order**
     * Lists all applications by the date added if no `sort` command was performed, 
       otherwise lists by the most recent `sort` order. 
-    * *Pros*: User is able to maintain the list in the preferred sorted order even after performing other commands such 
+      * *Pros*: User is able to maintain the list in the preferred sorted order even after performing other commands such 
       as `delete` and `find`.
-    * *Cons*: The sorting order by date added is lost once `sort` by other fields is performed.
+      * *Cons*: The sorting order by date added is lost once `sort` by other fields is performed.
 
 ---
 
@@ -534,7 +534,7 @@ deletion of the `Interview` from the `Job`.
 Editing of an interview from a specified `Job` is implemented with `InterviewEditCommand` and 
 `InterviewEditCommandParser`.
 
-The following sequence diagram illustrates the process of parsing and invocation for the command:
+The following sequence diagrams illustrate the process of parsing and invocation for the command:
 <img src="images/developer-guide/InterviewEditCommandParserSequenceDiagram.png" width="700"/>
 <br>
 <img src="images/developer-guide/InterviewEditCommandSequenceDiagram.png" width="500"/>
