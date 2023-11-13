@@ -339,8 +339,8 @@ searching for keywords in multiple fields at the same time. We also allow the us
 can search for multiple terms belonging to the same field.
 
 For now, we only allow for searching for `Name`, `FinancialPlan` and `Tag` fields because they are the most commonly
-searched fields, but extending the feature to search in other fields is possible by creating the `Predicate` class and
-modifying the `FindCommandParser`.
+searched fields, but extending the feature to search in other fields is possible by creating the appropriate
+`Predicate` class and modifying the `FindCommandParser`.
 
 #### Design Considerations:
 
@@ -932,7 +932,7 @@ point for testers to work on; testers are expected to do more *exploratory* test
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Appendix: Effort
+## **Appendix: Effort**
 This project required a substantial effort to design and implement various features aimed at enhancing
 the functionality of the software system. It was quite hard at the beginning because we were not well-versed with the 
 codebase. After understanding some pertinent classes to implement our enhancements, we also had to refactor and 
