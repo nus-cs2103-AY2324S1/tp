@@ -301,7 +301,7 @@ The following sequence diagram shows how the flow of the example execution:
 #### Background
 To boost usability and support more functionalities, many commands in TutorMate support multiple forms of valid user input.
 
-For example, when editing a person, the "INDEX" parameter can be conditionally omitted when editing the currently shown entry, the "edit" command word is overloaded for both "editLesson" and "editPerson" command, and for each of these two commands, many optional flags are available.
+For example, when editing a person, the `INDEX` parameter can be conditionally omitted when editing the currently shown entry, the "edit" command word is overloaded for both "editLesson" and "editPerson" command, and for each of these two commands, many optional flags are available.
 
 Given this flexibility and variety of valid user input, it is a challenge to parse all form of valid user input correctly and efficiently. 
 
