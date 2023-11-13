@@ -998,6 +998,10 @@ Listed below are the enhancements we managed to add into Tutorium.
     incorrectly-entered data in the case of user error. In the future, we will introduce validity checks
     to reduce the likelihood of such mistakes.
 * Disallow the use of invalid character inputs in the search command.
-  *  Although only alphanumeric names are allowed, the search command allows the user to search for names
+  * Although only alphanumeric names are allowed, the search command allows the user to search for names
      containing non-alphanumeric characters. Our team plans to improve the design of this feature by
      disallowing such inputs in a future version of the product.
+* Add a validation check to the phone number field to accept only phone numbers with 8 digits.
+  * Valid phone numbers in Singapore are 8 digits long, but Tutorium accepts any number that is longer than 3 digits, even
+    if it would be considered an invalid phone number. We will add a validation check to restrict inputs to 8-digit phone numbers
+    in future versions of the app.
