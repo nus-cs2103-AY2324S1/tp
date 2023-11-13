@@ -145,6 +145,8 @@ The `Person` component,
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 #### Design considerations
 **Aspect: Whether `Policy` should be a class of its own**
 * Alternative 1: Add policy fields directly as attributes of `Person`
@@ -282,6 +284,8 @@ The following sequence diagram shows how the `remind` command works:
 
 ![RemindSequenceDiagram2](images/RemindSequenceDiagram2.png)
 
+<div style="page-break-after: always;"></div>
+
 The following activity diagram summarises what happens when a user executes the command `remind 30`:
 
 ![RemindActivityDiagram](images/RemindActivityDiagram.png)
@@ -410,6 +414,8 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the client list, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
+
+<div style="page-break-after: always;"></div>
 
 Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all client list states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
