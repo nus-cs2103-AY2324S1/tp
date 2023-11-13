@@ -120,11 +120,9 @@ Welcome back to ProjectPRO. Simply head over to our Features section to gain ins
    - For Windows Users:
 
 4. Launch ProjectPRO.
-   - For Mac users:
-     1. Open a command terminal
-     2. type `cd Desktop` , followed by `cd ProjectPro`
-     3. type `java -jar ProjectPRO.jar` to run the application.
-   - For Windows users: Double-click the ProjectPRO.jar file to launch the application.
+   1. Open a command terminal
+   2. type `cd Desktop` , followed by `cd ProjectPro`
+   3. type `java -jar ProjectPRO.jar` to run the application.
 
 5. Start using ProjectPRO!
 
@@ -191,14 +189,14 @@ You can create a contact in your contact list.
 
 <p></p>
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
-  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h5>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">NAME</code>
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;"> :heavycheckmark: Acceptable values</h5>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">NAME</code>
     must be alphanumeric, cannot be blank and must not exist in the contact list.</p>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">PHONE</code>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">PHONE</code>
     must be a positive integer with at least 3 digits and must not exist in the contact list.</p>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">EMAIL</code>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">EMAIL</code>
     must be alphanumeric with a @ domain, end with a domain label at least 2 characters long and must not exist in the contact list.</p>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
     must be alphanumeric. This is an optional parameter.</p>
 </div>
 
@@ -210,7 +208,9 @@ You can create a contact in your contact list.
   This creates a contact in the contact list, named John Doe, who is not in any group.
 
 ![Manage Contacts: Add](images/features/Managecontacts_add.png)
-
+<div align="center">
+  <p style="font-size: 11px; font-style: italic;">You have added John Doe to your contacts, at contact number 7</p>
+</div>
 
 **Potential error(s):**
 - Incorrect format (e.g., no prefix, duplicate prefixes).
@@ -226,14 +226,24 @@ You can delete a contact from your contact list.
 **Format:** `delete n/NAME`
 
 
-**Acceptable values:**
-- `NAME` must be alphanumeric and cannot be blank.
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;"> :heavycheckmark: Acceptable values</h5>
+  <p style="font-size: 13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">NAME</code>
+    must be alphanumeric and cannot be blank.</p>
+  <p style="font-size: 13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">NAME</code>
+    must be an existing contact in the contact list.</p>
+</div>
 
 
 **Example(s):**
-- `delete n/Nicholas Lee`
-  This deletes Nicholas Lee from the contact list.
+- `delete n/John Doe`
+  This deletes John Doe from the contact list.
 
+![Manage Contacts: Delete](images/features/Managecontacts_delete.png)
+<div align="center">
+  <p style="font-size: 11px; font-style: italic;">You have deleted John Doe, previously contact number 7, from your contacts</p>
+</div>
 
 **Potential error(s):**
 - Invalid format (e.g., no prefix, duplicate prefixes).
@@ -248,15 +258,24 @@ You can find all the contacts from your contact list with the matching keywords.
 
 **Format:** `find n/KEYWORDS_IN_NAME`
 
-
-**Acceptable values:**
-- `KEYWORDS_IN_NAME` must be alphanumeric and cannot be blank, and it is not case sensitive.
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;"> :heavycheckmark: Acceptable values</h5>
+  <p style="font-size: 13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">KEYWORDS_IN_NAME</code>
+    must be alphanumeric and cannot be blank.</p>
+  <p style="font-size: 13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">KEYWORDS_IN_NAME</code>
+    is not case-sensitive.</p>
+</div>
 
 
 **Example(s):**
-- `find n/alice alex john`
-  This returns all the contacts with names of Alice, Alex, and John.
+- `find n/alex bernice`
+  This displays all the contacts with names containing Alex or Bernice.
 
+![Manage Contacts: Find](images/features/Managecontacts_find.png)
+<div align="center">
+  <p style="font-size: 11px; font-style: italic;">You have found all your contacts with the name Alex or Bernice</p>
+</div>
 
 **Potential error(s):**
 - Invalid format (e.g., no prefix, duplicate prefixes).
@@ -270,14 +289,21 @@ You can list all the contacts in your contact list.
 
 **Format:** `list`
 
-
-**Acceptable values:**
-No additional parameters.
-
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;"> :heavycheckmark: Acceptable values</h5>
+  <p style="font-size: 13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">User Input</code>
+    No additional input required.</p>
+</div>
 
 **Example(s):**
 - `list`
-  This lists all the contacts in the group.
+  This displays all the contacts in the contact list.
+
+![Manage Contacts: List](images/features/Managecontacts_list.png)
+<div align="center">
+  <p style="font-size: 11px; font-style: italic;">You can view all the contacts in your contact list</p>
+</div>
 
 
 **Potential error(s):**
@@ -288,20 +314,26 @@ No additional parameters.
 
 
 ### Adding a group `new`
-You can create a group in your contact list.
+You can create a new group in your contact list.
 
 
 **Format:** `new g/GROUP_NAME`
 
-
-**Acceptable values:**
-- `GROUP_NAME` must be alphanumeric and cannot be blank.
-- `GROUP_NAME` must not be an existing group in your contact list.
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;"> :heavycheckmark: Acceptable values</h5>
+  <p style="font-size: 13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
+    must be alphanumeric, cannot be blank, and must not exist in the contact list.</p>
+</div>
 
 
 **Example(s):**
 - `new g/CS2103T tp` This creates a new group named "CS2103T tp".
 
+![Manage Groups: New](images/features/Managegroup_new.png)
+<div align="center">
+  <p style="font-size: 11px; font-style: italic;">You have created a new group called 'CS2103T tp'</p>
+</div>
 
 **Potential error(s):**
 - Invalid command format (e.g., no prefix, duplicate prefixes).
@@ -370,7 +402,7 @@ You can find a group in your contact list. This allows you to view the group's m
 
 **Example(s):**
 - `find g/CS2103T`
-  This returns the members and remarks of the existing "CS2103T" group in your contact list.
+  This displays the members and remarks of the existing "CS2103T" group in your contact list.
 
 
 **Potential error(s):**
@@ -539,7 +571,7 @@ You list all available time slots of your contacts.
 ![](images/features/Managetime_listtimecontact.png)
 
 <div align="center">
-  <p style="font-size: 11px; font-style: italic;">We see that Alex Yeoh free on Mondays from 1400 - 1600</p>
+  <p style="font-size: 11px; font-style: italic;">We see that Alex Yeoh is free on Mondays from 1400 - 1600</p>
 </div>
 
 **Potential error(s):**
@@ -709,7 +741,7 @@ You can view the link to our UserGuide.
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
   <h3 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h3>
   <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">User Input</code>
-    No additional input required</p>
+    No additional input required.</p>
 </div>
 <p></p>
 
@@ -738,7 +770,7 @@ Clears all entries from the contact list.
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
   <h3 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h3>
   <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">User Input</code>
-    No additional input required</p>
+    No additional input required.</p>
 </div>
 <p></p>
 
@@ -769,7 +801,7 @@ You can exit ProjectPRO.
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
   <h3 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h3>
   <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">User Input</code>
-    No additional input required</p>
+    No additional input required.</p>
 </div>
 <p></p>
 
