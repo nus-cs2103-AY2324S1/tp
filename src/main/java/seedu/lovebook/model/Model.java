@@ -84,7 +84,7 @@ public interface Model {
     /**
      * Returns a random date from the date list.
      */
-    public void getRandomDate() throws CommandException;
+    public void getBlindDate() throws CommandException;
 
     /**
      * Updates the filter of the filtered date list to filter by the given {@code predicate}.

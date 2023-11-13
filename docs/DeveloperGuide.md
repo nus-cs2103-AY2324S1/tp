@@ -290,41 +290,54 @@ The sequence diagram notation of the above steps is shown below. <br>
   * Cons: Not very visually appealing (since the list appears to be unsorted and non uniform)
 
 ### Filter dates
-The filter feature is implemented using the `FilterCommand` class. The `FilterCommand` class takes in a `Predicate`
-object as a parameter. The `Predicate` object is used to filter the `Date` objects in the `Model` component.
-The `FilterCommand` class then returns a `CommandResult` object that contains the filtered `Date` objects.
+1. The user specifies a metric (eg. name/) and a valid value (eg. Emily) to filter by.
+2. If the metric is invalid or the value is not valid, the user will be prompted to enter the command correctly via an error message.
+3. The value will then be cross-referenced with the current list of dates in the `Model` component.
+4. The model then filters the date list for dates that contain the value in the specified metric.
+5. If step 1 - 4 are successfully completed, the displayed date list in the GUI will be updated to only display dates that match the filter criteria.
 
 The _Activity_ diagram summarises what happens after the user enters a filter command.
 
 <puml src="diagrams/FilterActivity.puml" width="550" />
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
-the command `filter name/ John`
+the command `filter name/John`
 
 <puml src="diagrams/FilterSequence.puml" width="550" />
 
+#### Design Considerations
+
+**Aspect: Error handling**
+* **Alternative 1 (current choice):** Returns specific error messages for each type of error.
+  * Pros: More user-friendly (since user can easily identify the error.
+  * Cons: Some users might want to see a more comprehensive error message which includes an example of a valid input.
+* **Alternative 2:** Returns a generic error message for all types of errors.
+  * Pros: Easier to implement (since all you have to do is return a generic error message for any argument error encountered). User gets to see a more comprehensive error message.
+  * Cons: Less user-friendly (since user cannot easily identify the error).
+
 ### Sort dates
 
-The sort feature is implemented using the `SortCommand` class. The `SortCommand` class takes in a `Comparator`
-object as a parameter. The `Comparator` object is used to sort the `Date` objects in the `Model` component.
-The `SortCommand` class then returns a `CommandResult` object that contains the sorted `Date` objects.
+1. The user specifies a metric (eg. name/) and a sorting order (increasing/ decreasing) to sort by.
+2. If the metric is invalid or the sorting order is invalid, the user will be prompted to enter the command correctly via an error message.
+3. The model date will then sort the dates by the specified metric and order, via the use of `Comparator`.
+4. If the step 1 - 3 are successfully completed, the displayed list of dates will be sorted by the specified metric and order.
 
 The _Activity_ diagram summarises what happens after the user enters a sort command.
 
 <puml src="diagrams/SortActivity.puml" width="550" />
 
-
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
-the command `sort name/ increasing`
+the command `sort name/increasing`
 
 <puml src="diagrams/SortSequence.puml" width="550" />
 
 ### Get Blind Date
 
-The random date feature is implemented using the 'RandomCommand' class. The 'RandomCommand' class calls a
-getRandomPerson() method from the model class. Within the getRandomPerson method, a 'Predicate' object is created and
-used to filter the 'Date' objects in the 'Model component'. The 'RandomCommand' class then returns a 'CommandResult'
-object that contains the random 'Date' object.
+The blind date feature is implemented using the `BlindDateCommand` class. The `BlindDateCommand` class calls a
+getBlindDate() method from the `ModelManager` class. Within the getRandomPerson method, a 'Predicate' object is created and
+used to filter the `Date` objects in the `Model` component. The `BlindDateCommand` class then returns a `CommandResult`
+object that contains the randomly selected `Date` object.
+
 
 ### Get best match
 

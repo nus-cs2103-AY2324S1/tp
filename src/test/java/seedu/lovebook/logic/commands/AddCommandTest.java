@@ -157,7 +157,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void getRandomDate() {
+        public void getBlindDate() {
             throw new AssertionError("This method should not be called.");
         }
 
