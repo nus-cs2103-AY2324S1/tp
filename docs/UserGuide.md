@@ -612,7 +612,7 @@ Format: `tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…​`
 
 </box>
 
-<box type="tip" seamlesss>
+<box type="tip" seamless>
 
 **Tip:** You can remove all the student’s tags by typing `t/` without specifying any tags after it.
 
