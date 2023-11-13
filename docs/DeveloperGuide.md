@@ -224,7 +224,7 @@ Given below is an example usage scenario and how the `start/end` mechanism behav
 **Step 2:** The user executes the `start` command by interacting with the command line. This will make `FlashlingoParser` class to create its `SessionManager` instance.
 
 <div align="center">
-  <img src="images/SessionManagerClass.png" width="350" height="300" alt="Session Manager Class">
+  <img src="images/SessionManagerClass.png" width="460" height="300" alt="Session Manager Class">
 </div>
 
 <br>
