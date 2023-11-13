@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import java.util.List;
 
+import seedu.address.model.person.IdentityCode;
 import seedu.address.model.person.Person;
 
 /**
@@ -31,5 +32,16 @@ public class IdentityCodeManager {
                 .mapToInt(person -> person.getIdentityCode().getValue())
                 .max()
                 .orElse(0);
+    }
+
+    /**
+     * Update max identity code.
+     *
+     * @param identityCode the identity code
+     */
+    public static void updateMaxIdentityCode(IdentityCode identityCode) {
+        if (identityCode.getValue() > currentMaxID) {
+            currentMaxID = identityCode.getValue();
+        }
     }
 }

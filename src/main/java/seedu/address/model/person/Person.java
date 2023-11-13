@@ -70,8 +70,10 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.remark = remark;
+        IdentityCodeManager.updateMaxIdentityCode(identityCode);
         this.identitycode = identityCode;
     }
+
 
     /**
      * Retrieves the name of the person.

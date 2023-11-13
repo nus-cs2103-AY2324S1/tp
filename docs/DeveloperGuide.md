@@ -11,9 +11,12 @@
 
 --------------------------------------------------------------------------------------------------------------------
 
+<br>
+
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project and developer guide is based on [_AB3_](https://github.com/se-edu/addressbook-level3)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -24,6 +27,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Design**
+<br>
 
 ### Architecture
 
@@ -87,6 +91,7 @@ The `UI` component,
 displays the statistical information of how many developers and teams are there at the moment.
 * depends on some classes in the `Model` component, as it displays `Person` and `Team` object residing in the `Model`.
 
+<br>
 
 ### Logic component
 
@@ -125,6 +130,8 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<br>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-W11-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
@@ -143,6 +150,7 @@ The `Model` component:
 
 </box>
 
+<br>
 
 ### Storage component
 
@@ -161,6 +169,7 @@ The `Storage` component:
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+<br>
 
 ## **Implementation**
 
@@ -193,6 +202,8 @@ Step 3. LinkTree provides a feedback based on whether the operation was successf
 
 **Note:** If a command fails its execution, it will not call `Model#addTeam()`, so the `team` will not be saved to `TeamBook`.
 
+</box>
+
 #### Step-by-Step Implementation
 
 1. Create a newteam parser class called `AddTeamCommandParser` to parse input from user. This implements the `Parser` interface for type `AddTeamCommand`
@@ -206,7 +217,9 @@ Step 3. LinkTree provides a feedback based on whether the operation was successf
 9. If not such exception is thrown, create the new team at this point. 
 10. Run the `Model#addTeam` method to add the created team to TeamBook.
 11. `Model#addTeam` calls `TeamBook#addTeam` which in turn calls `UniqueTeamList#add`. Finally this method calls the `ObservableList#add` which adds the `team` to the list.
-</box>
+
+<puml src="diagrams/AddTeamCommandDiagram.puml" width="574" />
+
 
 #### Design considerations:
 
@@ -219,6 +232,64 @@ Step 3. LinkTree provides a feedback based on whether the operation was successf
 * **Alternative 2:** Store the teams in the same class as Persons in the class AddressBook.
   * Pros: Easier implementation.
   * Cons: Breaks principle of abstraction and OOP. Information hiding is also not done.
+
+
+### Feature: Add developers to an existing team
+
+####  Introduction
+
+The add dev to team feature is facilitated by the AddDevToTeamCommand. It extends `Command` class.
+
+The operations are exposed in the `Model` interface as `Model#addToTeam()`.
+
+#### Usage
+Given below is an example usage scenario and how the add team behaves at each step.
+
+Step 1. The user launches the application and uses the `dev2team` command and specifies a `teamname` and `developer` name.
+
+
+
+Step 2. The user executes the `dev2team` command `dev2team tn/Team1 n/Jason` to add a developer `Jason` to the team `Team1`.
+
+
+
+Step 3. LinkTree provides a feedback based on whether the operation was successful or not.
+
+
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, it will not call `Model#addToTeam()`, so the specified `developer` will not be added to the `team`.
+
+</box>
+
+#### Step-by-Step Implementation
+
+1. Create a dev2team parser class called `AddDevToTeamParser` to parse input from user. This implements the `Parser` interface for type `AddDevToTeamCommand`
+2. Create a `parse` method in `AddDevToTeamParser` that parses the user input and specify the user flags that are used `tn/` for teamName and `n/` for developer name.
+3. The flags for user input can be added to class `CliSyntax`.
+4. For the `AddDevToTeamCommand` class, specify the Command Word. In this case, it is `dev2team`.
+5. Add relevant messages for use cases like `Team not found`, `Duplicate developer`, `Developer is the teamleader` and `Developer not found` errors.
+6. Implement the `execute` method in `AddDevToTeamCommand`. Handle the cases where a team with specified `teamName` does not exist and also one where specified developer to be added does not exist. 
+7. You will also need to handle the cases where either the given developer is already in the team or the developer is currently the leader of the given team.
+7. Use the `Model#InvalidAddToTeam`, `Model#containsPerson`, `Model#personAlreadyInTeam` and `Model#isLeaderOfTeam` methods to do these checks.
+8. Throw exceptions in the cases where adding the developer is not possible.
+9. If not such exception is thrown, add the developer to the given team at this point.
+10. The `Model#addToTeam` method performs the addition of the developer to the specified team.
+
+<puml src="diagrams/AddDevToTeamCommandDiagram.puml" width="1100"/>
+
+
+#### Design considerations:
+
+**Aspect: Can a team leader also be a developer in his team? :**
+
+* **Alternative 1 (current choice):** Team leader of a team cannot be added as a developer in his team.
+
+* **Alternative 2:** Store the teams in the same class as Persons in the class AddressBook.
+* Generally, though a team leader also works on the code that he is in charge of, adding himself as a developer in the team that he manages would be redundant. Hence we settled with this current design.
+
+<br>
 
 ### Feature: Remove an existing Team
 
@@ -306,7 +377,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **Appendix A: Requirements**
 
 ### Product scope
 
@@ -535,16 +606,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix B: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
-< box type="info" seamless>
+<box type="info" seamless>
 
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
-</ box>
+</box>
 
 ### Launch and shutdown
 
@@ -587,3 +658,15 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix C: Effort**
+(...Please add to this...)
+
+## **Appendix D: Future Enhancements**
+**We have several feature enhancements and quality of life improvements in the pipeline.**
+**Some of them are as follows:**
+
+1. Currently, a new person can be added to the addressbook if they have the same phone number of email as another existing person. We plan to fix this in a future release to make sure that persons with the same phone number/email as an existing person cannot be added even if they have a different name.
+2. Currently, when the tree is displayed, if there are not enough teams to display to fill the windows, a white background fills up the empty space by default. This will be patched in a future release so that the empty space will carry the same default colour as the UI.
+3. Currently, when the tree is actively being displayed, it does not get refreshed when commands are run. For example, when a new developer is added to the addressbook, it does not reflect on the tree even though there is a feedback in the UI stating success. The tree gets refreshed only upon closing and reopening the tree. The auto-refresh feature will be implemented in a future release.
+4. When `delete 0` command is run, the command error stating `invalid command format` is too general. Even though it specifies that the index has to be a positive integer, we can change it in the future to give better information to specify that the index number has to be positive. So when typing this command, the new error would be like `Index provided is incorrect. It has to be a positive integer. Please try again.`
