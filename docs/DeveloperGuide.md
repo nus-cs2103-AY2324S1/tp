@@ -6,6 +6,8 @@ pageNav: 3
 
 # Tutorium Developer Guide
 
+# Table of Contents
+
 <!-- * Table of Contents -->
 <page-nav-print />
 
@@ -123,8 +125,6 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 [↑ Back to table of contents](#table-of-contents)
-
-<div style="page-break-after: always;"></div>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
