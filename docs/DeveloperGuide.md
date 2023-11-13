@@ -74,7 +74,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-F11-1/tp/blob/master/src/main/java/seedu/ccacommander/ui/Ui.java)
 
-<img src="images/UiClassDiagram.png" width="1200px" style="margin-left:-130px; max-width:1000px" alt="Structure of the UI Component"/>
+<img src="images/UiClassDiagram.png" width="1000px" style="margin-left:-130px; max-width:1000px" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `MemberListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -121,7 +121,7 @@ How the parsing works:
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-F11-1/tp/blob/master/src/main/java/seedu/ccacommander/model/Model.java)
 * The class diagram below gives an overview of the model package.<br/>
 *Details of the `Member`, `Event`, and `Enrolment` packages have be omitted for brevity.
-Please refer to the [Member](#member-class-diagram), [Event](#event-class-diagram) and [Enrolment](#enrolment-model) diagrams for more information.*
+Please refer to the [Member](#member-model), [Event](#event-model) and [Enrolment](#enrolment-model) diagrams for more information.*
 
 <img src="images/ModelClassDiagram.png" width="740px" />
 
@@ -166,7 +166,7 @@ The class diagram below shows the current implementation of `Member` model.
 ![MemberClassDiagram](images/MemberClassDiagram.png)
 Every `Member` contains a `Name`,`Gender`, `Optional<Phone>`, `Optional<Email>`, `Optional<Address>`, `Optional<Hours>`, `Optional<Remark>` and a set of `Tags`
 
-**Design Considerations**
+#### Design Considerations
 
 This section elaborates further on why we chose to adopt a `Name` over other potential
 solutions.
