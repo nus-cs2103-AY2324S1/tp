@@ -1,0 +1,20 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User enters command to add an applicant;
+
+if () then ([invalid command])
+    : Invalid command error message is shown;
+else ([else])
+    if () then ([duplicate applicant exists])
+        : Duplicate applicant error message is shown;
+    else ([else])
+        :Applicant is added to AddressBook;
+        : Success message is shown;
+    endif
+
+endif
+stop
+@enduml

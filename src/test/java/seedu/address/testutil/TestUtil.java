@@ -33,23 +33,44 @@ public class TestUtil {
     }
 
     /**
-     * Returns the middle index of the person in the {@code model}'s person list.
+     * Returns the middle index of the member in the {@code model}'s member list.
      */
-    public static Index getMidIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredPersonList().size() / 2);
+    public static Index getMidIndexMember(Model model) {
+        return Index.fromOneBased(model.getFilteredMemberList().size() / 2);
     }
 
     /**
-     * Returns the last index of the person in the {@code model}'s person list.
+     * Returns the middle index of the applicant in the {@code model}'s applicant list.
      */
-    public static Index getLastIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredPersonList().size());
+    public static Index getMidIndexApplicant(Model model) {
+        return Index.fromOneBased(model.getFilteredApplicantList().size() / 2);
     }
 
     /**
-     * Returns the person in the {@code model}'s person list at {@code index}.
+     * Returns the last index of the member in the {@code model}'s member list.
      */
-    public static Person getPerson(Model model, Index index) {
-        return model.getFilteredPersonList().get(index.getZeroBased());
+    public static Index getLastIndexMember(Model model) {
+        return Index.fromOneBased(model.getFilteredMemberList().size());
+    }
+
+    /**
+     * Returns the last index of the applicant in the {@code model}'s applicant list.
+     */
+    public static Index getLastIndexApplicant(Model model) {
+        return Index.fromOneBased(model.getFilteredApplicantList().size());
+    }
+
+    /**
+     * Returns the member in the {@code model}'s member list at {@code index}.
+     */
+    public static Person getMember(Model model, Index index) {
+        return model.getFilteredMemberList().get(index.getZeroBased());
+    }
+
+    /**
+     * Returns the applicant in the {@code model}'s applicant list at {@code index}.
+     */
+    public static Person getApplicant(Model model, Index index) {
+        return model.getFilteredApplicantList().get(index.getZeroBased());
     }
 }

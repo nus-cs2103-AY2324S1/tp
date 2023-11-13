@@ -1,0 +1,18 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User enters command to view task assigned to a member;
+
+if () then ([invalid command])
+    : Invalid command error message is shown;
+else ([else])
+    if () then ([invalid member])
+        : Invalid Member error message is shown;
+    else ([else])
+        : Task assigned to member updated to show in the GUI;
+    endif
+endif
+stop
+@enduml

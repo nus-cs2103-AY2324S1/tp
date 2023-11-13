@@ -1,0 +1,24 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User enters command to add a task to a member;
+
+if () then ([invalid command])
+    : Invalid command error message is shown;
+else ([else])
+    if () then ([invalid member])
+        : Invalid Member Index error message is shown;
+    else ([else])
+        if () then ([invalid task])
+            : Invalid Task Index error message is shown;
+        else ([else])
+            :Task is added to member;
+            :Update the tasklist for the member in the GUI;
+            :Success message is shown;
+           endif
+    endif
+endif
+stop
+@enduml

@@ -3,10 +3,10 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.HOON;
-import static seedu.address.testutil.TypicalPersons.IDA;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalApplicants.ALICE_APPLICANT;
+import static seedu.address.testutil.TypicalApplicants.HOON_APPLICANT;
+import static seedu.address.testutil.TypicalMembers.HUGO_MEMBER;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithMembersApplicants;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -63,24 +63,30 @@ public class JsonAddressBookStorageTest {
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempAddressBook.json");
-        AddressBook original = getTypicalAddressBook();
+        AddressBook original = getTypicalAddressBookWithMembersApplicants();
         JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(filePath);
 
         // Save in new file and read back
         jsonAddressBookStorage.saveAddressBook(original, filePath);
+
+        assert jsonAddressBookStorage.readAddressBook(filePath).isPresent();
+
         ReadOnlyAddressBook readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new AddressBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addPerson(HOON);
-        original.removePerson(ALICE);
+        original.addApplicant(HOON_APPLICANT);
+        original.removeApplicant(ALICE_APPLICANT);
         jsonAddressBookStorage.saveAddressBook(original, filePath);
         readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new AddressBook(readBack));
 
         // Save and read without specifying file path
-        original.addPerson(IDA);
+        original.addMember(HUGO_MEMBER);
         jsonAddressBookStorage.saveAddressBook(original); // file path not specified
+
+        assert jsonAddressBookStorage.readAddressBook().isPresent();
+
         readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
         assertEquals(original, new AddressBook(readBack));
 

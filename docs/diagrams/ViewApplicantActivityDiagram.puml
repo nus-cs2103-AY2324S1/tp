@@ -1,0 +1,15 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User enters command to view all applicants;
+
+if () then ([invalid command])
+    : Invalid command error message is shown;
+else ([else])
+        : Update the applicant list in the GUI;
+        :Success message is shown;
+endif
+stop
+@enduml

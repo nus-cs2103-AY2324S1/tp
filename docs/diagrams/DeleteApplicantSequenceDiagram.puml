@@ -1,0 +1,77 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeleteApplicantCommandParser" as DeleteApplicantCommandParser LOGIC_COLOR
+participant "d:DeleteApplicantCommand" as DeleteApplicantCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("dela 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("dela 1")
+activate AddressBookParser
+
+create DeleteApplicantCommandParser
+AddressBookParser -> DeleteApplicantCommandParser
+activate DeleteApplicantCommandParser
+
+DeleteApplicantCommandParser --> AddressBookParser
+deactivate DeleteApplicantCommandParser
+
+AddressBookParser -> DeleteApplicantCommandParser : parse("1")
+activate DeleteApplicantCommandParser
+
+create DeleteApplicantCommand
+DeleteApplicantCommandParser -> DeleteApplicantCommand
+activate DeleteApplicantCommand
+
+DeleteApplicantCommand --> DeleteApplicantCommandParser : d
+deactivate DeleteApplicantCommand
+
+DeleteApplicantCommandParser --> AddressBookParser : d
+deactivate DeleteApplicantCommandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteApplicantCommandParser -[hidden]-> AddressBookParser
+destroy DeleteApplicantCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> DeleteApplicantCommand : execute()
+activate DeleteApplicantCommand
+
+DeleteApplicantCommand -> Model : getFilteredApplicantList()
+activate Model
+
+Model --> DeleteApplicantCommand
+deactivate Model
+
+DeleteApplicantCommand -> Model : deleteApplicant(1)
+activate Model
+
+Model --> DeleteApplicantCommand
+deactivate Model
+
+create CommandResult
+DeleteApplicantCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteApplicantCommand : result
+deactivate CommandResult
+
+DeleteApplicantCommand --> LogicManager : result
+deactivate DeleteApplicantCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

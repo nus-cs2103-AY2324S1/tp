@@ -5,14 +5,21 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Applicant;
+import seedu.address.model.person.Member;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Tag> PREDICATE_SHOW_ALL_TAGS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -49,39 +56,132 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
-    /** Returns the AddressBook */
+    /**
+     * Returns the AddressBook
+     */
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a member with the same identity as {@code member} exists in the address book.
+     *
+     * @param member The member to check.
+     * @return True if the member exists, false otherwise.
      */
-    boolean hasPerson(Person person);
+    boolean hasMember(Member member);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Returns true if an applicant with the same identity as {@code applicant} exists in the address book.
+     *
+     * @param applicant The applicant to check.
+     * @return True if the applicant exists, false otherwise.
      */
-    void deletePerson(Person target);
+    boolean hasApplicant(Applicant applicant);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Deletes the given member.
+     * The member must exist in the address book.
+     *
+     * @param target The member to delete.
      */
-    void addPerson(Person person);
+    void deleteMember(Member target);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Deletes the given applicant.
+     * The applicant must exist in the address book.
+     *
+     * @param target The applicant to delete.
+     */
+    void deleteApplicant(Applicant target);
+
+    /**
+     * Adds the given member.
+     * {@code member} must not already exist in the address book.
+     *
+     * @param toAdd The member to add.
+     */
+    void addMember(Member toAdd);
+
+    /**
+     * Adds the given applicant.
+     * {@code applicant} must not already exist in the address book.
+     *
+     * @param toAdd The applicant to add.
+     */
+    void addApplicant(Applicant toAdd);
+
+    /**
+     * Replaces the given member {@code target} with {@code editedMember}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The member identity of {@code editedMember} must not be the same as another existing member in the
+     * address book.
+     *
+     * @param target       The member to replace.
+     * @param editedMember The member to replace with.
      */
-    void setPerson(Person target, Person editedPerson);
-
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    void setMember(Member target, Member editedMember);
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Replaces the given applicant {@code target} with {@code editedApplicant}.
+     * {@code target} must exist in the address book.
+     * The applicant identity of {@code editedApplicant} must not be the same as another existing applicant in the
+     * address book.
+     *
+     * @param target          The applicant to replace.
+     * @param editedApplicant The applicant to replace with.
+     */
+    void setApplicant(Applicant target, Applicant editedApplicant);
+
+    /**
+     * Returns an unmodifiable view of the filtered person list
+     */
+    ObservableList<Member> getFilteredMemberList();
+
+    /**
+     * Returns an unmodifiable view of the filtered applicant list
+     */
+    ObservableList<Applicant> getFilteredApplicantList();
+
+    /**
+     * Returns an unmodifiable view of the filtered tag list
+     */
+    ObservableList<Tag> getFilteredTagList();
+
+    /**
+     * Returns an unmodifiable view of the filtered task list
+     */
+    ObservableList<Task> getFilteredTaskList();
+
+    /**
+     * Sets the task list for the member.
+     */
+    void setTaskListForMember(Member member);
+
+    /**
+     * Clears the task list.
+     */
+    void clearTaskList();
+
+    /**
+     * Updates the filter of the filtered member list to filter by the given {@code predicate}.
+     *
+     * @param predicate The predicate to filter by.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredMemberList(Predicate<? super Member> predicate);
+
+    /**
+     * Updates the filter of the filtered applicant list to filter by the given {@code predicate}.
+     *
+     * @param predicate The predicate to filter by.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredApplicantList(Predicate<? super Applicant> predicate);
+
+    /**
+     * Updates the filter of the filtered tag list to filter by the given {@code predicate}.
+     *
+     * @param predicate The predicate to filter by.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredTagList(Predicate<? super Tag> predicate);
 }

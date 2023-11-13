@@ -1,0 +1,53 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "v:ViewApplicantCommand" as ViewApplicantCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("viewa")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("viewa")
+activate AddressBookParser
+
+create ViewApplicantCommand
+AddressBookParser -> ViewApplicantCommand
+activate ViewApplicantCommand
+
+ViewApplicantCommand --> AddressBookParser : v
+deactivate ViewApplicantCommand
+
+AddressBookParser --> LogicManager : v
+deactivate AddressBookParser
+
+LogicManager -> ViewApplicantCommand : execute()
+activate ViewApplicantCommand
+
+ViewApplicantCommand -> Model : updateFilteredApplicantList(PREDICATE_SHOW_ALL_PERSONS)
+activate Model
+
+Model --> ViewApplicantCommand
+deactivate Model
+
+create CommandResult
+ViewApplicantCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ViewApplicantCommand : result
+deactivate CommandResult
+
+ViewApplicantCommand --> LogicManager : result
+deactivate ViewApplicantCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
