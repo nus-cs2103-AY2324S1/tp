@@ -436,8 +436,7 @@ You can list all the groups in your contact list.
 <p></p>
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
   <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h5>
-  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;"></code>
-   No additional parameters.</p>
+   No additional parameters.
 </div>
 
 
