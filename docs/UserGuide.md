@@ -59,6 +59,7 @@ Upgrade your hiring process with **JABPro (JobApplicationsBook Pro)**, a CLI bas
 * easily manage candidate applications
 * schedule interviews
 * gain valuable insights on their interview performance
+
 From interns to full-time roles, software to marketing, JABPro’s versatile interface allows you to keep track of all kinds of job applicants in various industries. 
 
 **If you are a Hiring Manager, looking to improve your applications management workflow, JABPro is the tool for you!**
@@ -121,6 +122,23 @@ Go to the [Table of Contents](#table-of-contents) to navigate to the feature tha
 
     ![Ui](images/main.png)  
    
+    <box type="warning" seamless>
+
+    Ensure your JABPro contains some sample data. If it starts off empty then there might be some issues with the launch which might result in 
+    some commands to not run properly. See below to learn how to troubleshoot this problem!
+
+<box type="tip" seamless>
+
+**My app does not contain any sample data!**
+Not to worry, here are some steps you can take to fix this:
+1. On your command terminal, `cd` into the folder where you put the jar file in.
+2. Run `cd Data` to navigate to the `Data` folder. This is the folder where JABPro stores the application data on your computer.
+3. Run `ls` to view all the files stored in this folder.
+4. You should be able to see a file titled `addressbook.json`. Run `rm addressbook.json` to delete this file.
+5. Run `cd ..` to navigate back to the folder you were in before.
+6. Run `java -jar jabpro.jar` to relaunch the application. You should be able to see a GUI similar to the one above.
+<box>
+ 
 5. If your UI looks **compressed and words are being cut off such as that seen below**, you should **resize** the window to a larger size by dragging the corners of the application window. The UI should now look like the example given above.
    <br>
   
@@ -952,6 +970,7 @@ It is generated for tags that are categorised under the `assessment` category.
 | `percentile`       | The percentile of the candidate for that tag.  |
 
 <box type="warning" seamless>
+
 You should ensure that you have **sufficient candidates of more than 20** with a score for the tag you are interested in, before using the summary statistics to make comparisons.  
 </box> 
 
@@ -1006,11 +1025,16 @@ _Details coming soon ..._
 
 ## FAQ
 
+**Q**: What would happen if I used JABPro for the first time without the sample data? Would the app break?
+**A**: Not necessarily, we've tested out the JABPro launch without any sample data and basic functionalities are working fine. However, 
+we do not recommend this because there could be unexpected behaviours that we might have not accounted for. It is always advisable to follow
+the [quickstart instructions](#quick-start) and launch JABPro with the sample data!
+
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous JABPro home folder.
 
 **Q**: What's the difference between *tip* and *note*?<br>
-**A**: *Tip* is something useful to know and can be done beforehand, while *note* is something you have to be concious about and take into account. 
+**A**: *Tip* is something useful to know and can be done beforehand, while *note* is something you have to be conscious about and take into account. 
 
 --------------------------------------------------------------------------------------------------------------------
 
