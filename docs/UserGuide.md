@@ -868,20 +868,23 @@ If the sort is done in an ascending manner, and if your tasks are not consistent
 For example, if your list looks like this:
 
 * `post on the forum for help`
+* `Presentation`
 * `complete OP2`
 * `Complete OP3`
 
 after sorting your list in ascending order by the Task Description, it will now look like this:
 
+* `Complete OP3`
+* `Presentation`
 * `complete OP2`
 * `post on the forum for help`
-* `Complete OP3`
 
 rather than:
 
 * `complete OP2`
 * `Complete OP3`
 * `post on the forum for help`
+* `Presentation`
 
 which is probably what you expect the command to do!
 
