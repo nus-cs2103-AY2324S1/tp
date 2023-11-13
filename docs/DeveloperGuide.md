@@ -752,7 +752,7 @@ The Tag commands can be used in the following ways:
 - `editTag 2 ot/Rare rt/Uncommon` - Changes the 'Rare' tag to 'Uncommon' on the flashcard at index 2.
 - `delTag 3 tg/Essentials` - Deletes the 'Essentials' tag from the flashcard at index 3.
 
-#### Design Considerations
+**Design Considerations**
 
 **Aspect: What is the most effective method of tagging Flashcards:**
 In enhancing the functionality of our flashcard system, we considered how users could tag flashcards to optimize their learning experience.
@@ -842,8 +842,6 @@ Given below are instructions to test the app manually.
 testers are expected to do more *exploratory* testing.
 
 </div>
-
-### Launch and shutdown
 
 1. Initial launch
 
