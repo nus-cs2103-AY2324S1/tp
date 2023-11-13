@@ -167,7 +167,7 @@ value, is not an acceptable value and will result in a warning.
 | `n/`   | NAME                  | Alphabets, numbers, and space characters only                                                                             |
 | `p/`   | PHONE_NUMBER          | Numbers only and at least 3 digits long                                                                                   |
 | `e/`   | EMAIL                 | Alphabets, numbers, and symbols only in a valid email format                                                              |
-| `a/`   | ADDRESS               | Any value is possible                                                                                                     |
+| `a/`   | ADDRESS               | Alphabets, numbers, space characters and symbols only                                                                     |
 | `nk/`  | NEXT_KIN              | Alphabets, numbers, and space characters only                                                                             |
 | `nkp/` | NEXT_KIN_PHONE        | Numbers only and at least 3 digits long                                                                                   |
 | `fp/`  | FINANCIAL_PLAN        | Alphabets, numbers, and space characters only. Empty value is accepted when using [Edit](#editing-a-client-contact--edit) |
