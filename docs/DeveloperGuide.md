@@ -200,7 +200,6 @@ The `add-t` command was designed this way to ensure consistency with the previou
     * Pros: Easier to implement, and less error prone.
     * Cons: Users must have every field filled before they can add a tutor.
 
-<div style="page-break-after: always;"></div>
 **Aspect: Non-unique phone number and email restriction**
 * **Alternative 1:** Allow only unique phone numbers and emails or tutors.
     * Pros: Decreases erroneous user input when duplicated tutors are entered.
@@ -547,6 +546,8 @@ The "Edit Schedule" feature allows users to edit an existing schedule in the add
 usage scenario and a detailed description of how the edit schedule mechanism behaves at each step.
 
 ![EditScheduleActivityDiagram](images/EditScheduleActivityDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 #### Implementation details
 {:.no_toc}
@@ -977,7 +978,7 @@ the lifeline reaches the end of diagram.
     - Cons: May not be as suitable for administrators or users managing multiple tutors, as they may need to switch 
       between tutors to view their respective schedules.
     - Cons: Users may need to specify the tutor they want to view, requiring additional input.
-<div style="page-break-after: always;"></div>
+
 ### Change theme feature
 
 The "Change Theme" feature allows users to change the colour theme of the address book. Below, we provide an example 
@@ -1417,7 +1418,7 @@ otherwise.
 1.  Should work on any _mainstream OS_ as long as it has Java `11` installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. Should work without requiring an installer
+4. Should work without requiring an installer.
 5. _GUI_ should work well for standard screen resolutions 1920x1080 and higher, and, for screen scales 100% and 125%.
 6. _GUI_ should be usable for resolutions 1280x720 and higher, and, for screen scales 150%.
 7. Should not require the user to have an internet connection to use.
