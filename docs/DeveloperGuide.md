@@ -328,7 +328,9 @@ For _FindAppointment_ command, the noteworthy classes involved are:
 
 - [`FindAppointmentCommand.java`][FindAppointmentCommand.java] - This command object executes to update the filtered appointments list to show all appointments that is tagged to a patient whose named is specified through the keyword. 
 
--- user input --  
+Let's take a valid user input, `find-a John`, as an example.
+
+-- user input: `find-a John` --  
 Step 1. Logic Manager parses the user input through the AddressBookParser.
 
 -- `AddressBookParser` --  
