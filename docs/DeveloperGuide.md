@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+* https://github.com/rrice/java-string-similarity. Reused the sourcecode of this library to measure string similarity for the `help` command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -532,16 +532,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. Extra argument is a command word.
 
         * KeepInTouch returns documentation on that command word.
+          
+          Use case ends.
 
     * 1b2. Extra argument is not a command word, but is quite similar to a command.
 
         * KeepInTouch suggests the command word with the highest degree of similarity to the command input.
 
+          Use case resumes at step 1.
+
     * 1b3. Extra argument is not a command word, and isn't recognizably close to a command word.
 
         * KeepInTouch lets the user know that the command is unrecognizable.
 
-      Use case ends.
+          Use case resumes at step 1.
 
 **Use case: UC02 - Add a new contact**
 
@@ -575,7 +579,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. User inputs a contact that does not exist.
 
     * 1a1. KeepInTouch shows a message indicating that the contact cannot be found.
-      Use case ends.
+      
+      Use case resumes at step 1.
 
 **Use case: UC04 - View all contacts**
 
@@ -633,19 +638,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. KeepInTouch shows a message indicating incomplete data.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. User inputs a contact that does not exist.
 
     * 1b1. KeepInTouch shows a message indicating that the contact cannot be found.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1c. User inputs a note that does not exist.
 
     * 1c1. KeepInTouch shows a message indicating that the note cannot be found.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 **Use case: UC08 - Add an event**
 
@@ -679,13 +684,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. KeepInTouch shows a message indicating incomplete data.
 
-      Use case ends.
+      Use case reusmes at step 1.
 
 * 1b. User inputs an event that does not exist.
 
     * 1b1. KeepInTouch shows a message indicating that the event cannot be found.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 **Use case: UC10 - Filter events**
 
@@ -702,23 +707,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. KeepInTouch shows a message indicating incomplete or invalid data.
 
-      Use case ends.
-
-* 1b. User inputs with an extra argument corresponding to a command.
-
-    * 1b1. Extra argument is a command word.
-
-      * KeepInTouch returns documentation on that command word.
-
-    * 1b2. Extra argument is not a command word, but is quite similar to a command.
-
-      * KeepInTouch suggests the command word with the highest degree of similarity to the command input.
-
-    * 1b3. Extra argument is not a command word, and isn't recognizably close to a command word.
-
-      * KeepInTouch lets the user know that the command is unrecognizable.
-
-      Use case ends.
+      Use case resumes at step 1.
 
 **Use case: UC10 - Adding tags to a contact**
 
@@ -735,18 +724,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. KeepInTouch shows a message indicating incomplete data.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. User inputs a non-alphanumeric tag.
     * 1b1. KeepInTouch shows a message indicating that tags should be alphanumeric.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1c. User inputs a contact that does not exist.
 
     * 1c1. KeepInTouch shows a message indicating that the contact cannot be found.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 **Use case: UC12 - Delete tags from a contact**
 
@@ -763,18 +752,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. KeepInTouch shows a message indicating incomplete data.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1b. User inputs a non-alphanumeric tag.
     * 1b1. KeepInTouch shows a message indicating that tags should be alphanumeric.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 1c. User inputs a contact that does not exist.
 
     * 1c1. KeepInTouch shows a message indicating that the contact cannot be found.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 **Use case: UC13 - Filter contacts based on tags**
 
@@ -840,13 +829,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -857,21 +846,19 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `delete 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `delete 0`<br>
+      Expected: No person is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. Deleting a person while event list is showing
 
-### Saving data
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Add events to the first person in the index and remove all event from the second person in the index.
 
-1. Dealing with missing/corrupted data files
+    2. Test case: `delete 1`<br>
+        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. All events related to the first contact should be deleted from the event list as well
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
