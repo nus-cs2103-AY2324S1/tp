@@ -202,7 +202,7 @@ Data visualisation of student's class information is automatically generated in 
 
 **Class Manager 2023's** data is saved as a JSON file at `[JAR file location]/data/classmanager.json`. Advanced users are welcome to update data directly by editing that data file. You can refer to a valid sample of the JSON file in the image below. 
 
-<img alt="sample_contents" src="images/sample-contents.png" width="750"> <br><br>
+<img alt="sample_contents" src="images/sample-contents.png" width="750"> <br>
 
 The size of the `attendanceTracker` and `classParticipationTracker` arrays must match the configured tutorial count. Similarly, the size of the `assignmentTracker` array must match the configured assignment count. **Class Manager 2023** is configured to have 13 tutorials and 6 assignments by default. Before loading the edited data file, you can configure **Class Manager 2023** using the `config` command.
 
@@ -273,7 +273,7 @@ Format: `help`
 
 After `help` is executed successfully:
 
-<img alt="help message" src="images/helpMessage.png" width="700">
+<img alt="help message" src="images/helpMessage.png" width="700"><br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -321,11 +321,11 @@ Example:
 
 Before `load f/sample` is executed:
 
-<img alt="load before" src="images/load-before.png" width="700"> <br><br>
+<img alt="load before" src="images/load-before.png" width="700"> <br>
 
 After `load f/sample` is executed successfully:
 
-<img alt="load success" src="images/load-outcome.png" width="700"> <br><br>
+<img alt="load success" src="images/load-outcome.png" width="700"> <br>
 
 The file path at the bottom left of the application is updated to `.\data\sample.json`.
 
@@ -350,6 +350,8 @@ Format: `random NUMBER_OF_STUDENTS`
 Example:
 
 * `random 2`
+
+<img alt="result for 'random 2'" src="images/random-success.png" width="700"> </br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -419,11 +421,11 @@ Toggles between light and dark colour themes.
 
 Format: `theme`
 
-#### Dark theme
+##### Dark theme
 <img alt="theme_dark" src="images/theme-dark.png" width="700" > <br><br>
 
-#### Light theme
-<img alt="theme_light" src="images/theme-light.png" width="700" >
+##### Light theme
+<img alt="theme_light" src="images/theme-light.png" width="700" ><br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -505,7 +507,9 @@ Format: `delete s/STUDENT_NUMBER`
 * The [`STUDENT_NUMBER`](#student-number) must be valid and exist in **Class Manager 2023**.
 
 Example:
-* `delete s/A0249112A`
+* `delete s/A0247243A`
+
+<img alt="delete-success" src="images/delete-success.png" width="700" ><br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -544,6 +548,10 @@ The student number entered __without__ the `s/` prefix is the **current** studen
 * Existing values will be updated to the input values.
 * The `NEW_STUDENT_NUMBER` must be valid and unique (does not exist in **Class Manager 2023**).
 
+The following image shows a successful execution of the `edit` command.
+
+<img alt="edit-success" src="images/edit-success.png" width="700" ><br>
+
 Examples:
 *  `edit A0245234A p/91234567 e/johndoe@example.com` Edits the phone number and email address of the student with `STUDENT_NUMBER` A0245234A to be `91234567` and `johndoe@example.com` respectively.
 *  `edit A0223344A n/Betsy Crower` Edits the name of the student with `STUDENT_NUMBER` A0223344A to be `Betsy Crower`.
@@ -560,7 +568,7 @@ Format: `list`
 
 The following image shows a successful execution of the `list` command.
 
-<img alt="list-student-success" src="images/list-success.png" width="700" >
+<img alt="list-student-success" src="images/list-success.png" width="700" ><br>
 
 [Back to Table of Contents](#table-of-contents)
 
