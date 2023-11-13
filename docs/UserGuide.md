@@ -29,11 +29,15 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 
 --------------------------------------------------------------------------------------------------------------------
 <!-- * Table of Contents to be removed after PDF conversion -->
+<div style="page-break-after: always;"></div>
+
 ## Table of Contents
 
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Quick Start
 
@@ -65,10 +69,7 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 7. Refer to the [Command Summary](#command-summary) below for the summary of all commands.
 8. Refer to the [Glossary](#glossary) below for definitions of glossary terms.
 
-[Back to Table of Contents](#table-of-contents)
-
 --------------------------------------------------------------------------------------------------------------------
-
 ## Important Notes
 
 ### Basic Usage
@@ -86,6 +87,8 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 
 [Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Terminologies / Symbols
 * Flag: A flag is a word starting with a dash "-" that is used to identify the type of information that is being provided e.g. -name.
 
@@ -98,6 +101,8 @@ This box denotes command outputs.
 ```
 
 [Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Notes on Command Format
 <box type="info" seamless>
@@ -123,6 +128,8 @@ This box denotes command outputs.
 
 [Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Other Notes
 <box type="warning" seamless>
 
@@ -137,6 +144,8 @@ This box denotes command outputs.
 </box>
 
 [Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Parameter Summary
 
@@ -161,6 +170,8 @@ This box denotes command outputs.
 [Back to Table of Contents](#table-of-contents)
  
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -243,6 +254,7 @@ Failure outputs:
 
 [Back to Table of Contents](#table-of-contents)
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Show Feature
 
@@ -322,6 +334,7 @@ The lesson index provided is invalid
 
 [Back to Table of Contents](#table-of-contents)
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Add Feature
 
@@ -458,6 +471,7 @@ Example1: addtask 1 do homework
 
 [Back to Table of Contents](#table-of-contents)
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Delete Feature
 
@@ -589,6 +603,7 @@ Please use show lessonIndex before deleting task!
 
 [Back to Table of Contents](#table-of-contents)
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Edit Feature
 
@@ -711,6 +726,7 @@ Editing of 💼 ___TASKS list___ is not supported at this time!
 
 [Back to Table of Contents](#table-of-contents)
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Find Feature
 
@@ -784,6 +800,7 @@ Unknown command
 
 [Back to Table of Contents](#table-of-contents)
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Filter Feature
 
@@ -889,6 +906,7 @@ Note you should only use one of -before, -on, -after at a time.
 
 [Back to Table of Contents](#table-of-contents)
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Link Feature
 
@@ -1037,6 +1055,7 @@ This feature is not used for tasks!
 
 [Back to Table of Contents](#table-of-contents)
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Navigate Feature
 
@@ -1134,6 +1153,7 @@ This feature is not used for tasks!
 
 [Back to Table of Contents](#table-of-contents)
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Command History Feature
 
@@ -1168,6 +1188,7 @@ Example usages:
 
 [Back to Table of Contents](#table-of-contents)
 <br>
+<div style="page-break-after: always;"></div>
 
 ### Clearing Data
 
