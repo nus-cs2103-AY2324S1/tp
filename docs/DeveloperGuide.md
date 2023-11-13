@@ -155,17 +155,24 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Enhanced help feature
 
-#### Design considerations:
-
 **Rationale**
 
-  * Previous help feature simply opens a page with a link to the website, this is bad because:
-    * The flow is lengthy
-    * User may not be able to access website when operating without the internet
+  Previous help feature simply opens a page with a link to the website, this is bad because:
+  * The flow is lengthy
+  * User may not be able to access website when operating without the internet
 
-    Therefore, we want to make this better by simplifying the flow. We do this by adding:
-    * Making the help command return things in the application console
-    * Letting users enter an extra argument to specify what command they need guiding on
+  Therefore, we want to make this better by simplifying the flow. We do this by adding:
+  * Making the help command return things in the application console
+  * Letting users enter an extra argument to specify what command they need guiding 
+  * Give suggestions to users in case of a mistake in the extra argument, i.e. typo
+
+**Implementation details**
+
+  Since the previous help feature needs to let the UI know that it wants to open the help window, this requires the `CommandResult` to have a special boolean attribute for capturing this event. We don't need this anymore, and thus we can perform a refactor to get rid of this attribute.
+
+  Since we want to directly display the help message to the user, we can use the `DisplayResult` UI component to show the message. It is convenient that every `Command` subclasses already has the `MESSAGE_USAGE` string attribute to indicate how the command should be used. Therefore, we can just directly fetch this from the `Command` subclasses if the extra argument the user inputs is valid.
+
+  Finally, we want to give suggestions if the user makes a typo. To do this, we must first be able to recognize if a user-made input is similar to a valid command word. To do this, we can utilise one of the many coefficients out there that can measure the degree of similarity between two strings, For this particular implementation, we will go with the [Sorensen-Dice coefficient](https://en.wikipedia.org/wiki/S%c3%b8rensen%e2%80%93Dice_coefficient). The idea is to check if the maximum degree of similarity between the input and each one of the command words exceeds a certain threshold and, if so, suggest to the user what inputs they need to make. Otherwise, the `ResultDisplay` will just give out an error that the input is unrecognizable.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -498,15 +505,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       * KeepInTouch returns documentation on that command word.
 
+        Use case ends.
+
     * 1b2. Extra argument is not a command word, but is quite similar to a command.
 
       * KeepInTouch suggests the command word with the highest degree of similarity to the command input.
+
+        Use case ends.
 
     * 1b3. Extra argument is not a command word, and isn't recognizably close to a command word.
 
       * KeepInTouch lets the user know that the command is unrecognizable.
 
-      Use case ends.
+         Use case ends.
 
 **Use case: UC10 - Adding tags to a contact**
 
