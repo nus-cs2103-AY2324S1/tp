@@ -14,7 +14,7 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=nananakx-x&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos)
 
 * **New Feature**: Added the ability to sort the fosterers list in the main window.
-    * What it does: Sorts the list of fosterers alphabetically, by name.
+    * What it does: Sorts the list of fosterers alphabetically by name (uppercase letters come before lowercase letters).
     * Justification: This feature improves the product because it allows the foster manager to retrieve information efficiently at a glance, without having to type 
   the `find` command if the name of the fosterer is known.
     * Highlights: This feature requires the use of a comparator, specified based on the person's name. It can be easily extended in the future to account for new sorting criteria.

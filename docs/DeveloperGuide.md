@@ -1079,7 +1079,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. Foster Manager lists fosterers (UC2).
 2. Foster Manager requests to sort the list of fosterers.
-3. System displays the updated list of fosterers, sorted alphabetically by name.
+3. System displays the updated list of fosterers, sorted alphabetically by name, where uppercase letters come before lowercase letters.
 
    Use case ends.
 
