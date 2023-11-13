@@ -641,7 +641,7 @@ Step 2. Type in the name of the field you want to edit onto the command box. Thi
 
 <div style="page-break-after: always;"></div>
 
-Step 3. Edit the original value to a new value. e.g. From Alex Yeoh to 'Bob Yeoh'.
+Step 3. Edit the original value to a new value. e.g. From 'Alex Yeoh' to 'Bob Yeoh'.
 
 <div style="text-align: center">
 <img src="images/screenshots/ChangeNameToBobYeoh.png" height="480" class="center"/>
