@@ -111,7 +111,7 @@ Welcome back to ProjectPRO. Simply head over to our Features section to gain ins
 
 
 1. Ensure you have Java 11 or above installed on your computer.
-   - Simply go to your terminal and type `java -version`. ![here](images/UG/QUICKSTART1.png)
+   - Simply go to your terminal and type `java -version`. ![here](images/UG/QuickStart1.png)
 
 2. Download the latest ProjectPRO.jar from [here](https://github.com/AY2324S1-CS2103T-T10-3/tp/releases).
    - ![here](images/UG/QUICKSTART2.png)
