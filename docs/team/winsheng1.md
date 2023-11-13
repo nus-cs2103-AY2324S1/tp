@@ -37,7 +37,7 @@ Below is a summary of my contributions to the project.
     * Drew Activity Diagrams and Sequence Diagrams for this section.
     * Wrote manual user testing sections for edit member/applicant commands.
 * **Review/mentoring contributions**:
-  * Helped team members with some of the problems they encountered with their code.
+  * Helped team members with some of the problems they encountered wth their code.
     * i.e. Helped a peer with `Add Task` function.
   * Reviewed members PRs and gave comments about their code when needed.
   * Here are the PRs that I have reviewed :
