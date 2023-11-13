@@ -1,6 +1,7 @@
 package seedu.ccacommander.ui;
 
 /**
+ * Solution below adapted from [Tutor's Pet](https://github.com/AY2021S1-CS2103T-T10-4/tp/)
  * A class to encapsulate the stylesheet setting and path.
  */
 public enum Stylesheet {

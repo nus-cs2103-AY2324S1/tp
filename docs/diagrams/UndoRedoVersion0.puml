@@ -3,21 +3,20 @@
 skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
 skinparam ClassBackgroundColor #FFFFAA
-hide <<tag>>
+skinparam ClassFontColor<<Hide>> #FFFFFF
+skinparam ClassBorderColor<<Hide>> #FFFFFF
+skinparam ClassBackgroundColor<<Hide>> #FFFFFF
 
 title Initial Version
 
 package Versions {
     class Version1 as "<u>cc0:CcaCommander</u>"
-    class Version2 as "<u>cc1:CcaCommander</u>"
-    class Version3 as "<u>cc2:CcaCommander</u>"
+    class Version2 as "<u>cc1:CcaCommander</u>" <<hide>>
+    class Version3 as "<u>cc2:CcaCommander</u>" <<hide>>
 }
 
 Version1 -[hidden]right-> Version2
 Version2 -[hidden]right-> Version3
-
-hide Version.Version2
-hide Version.Version3
 
 class Pointer as "Current Version" #FFFFFF
 Pointer -up-> Version1

@@ -7,9 +7,9 @@ skinparam ClassBackgroundColor #FFFFAA
 title After command "list"
 
 package Versions <<rectangle>> {
-    class Version1 as "<u>cc0:CCACommander</u>"
-    class Version2 as "<u>cc1:CCACommander</u>"
-    class Version3 as "<u>cc2:CCACommander</u>"
+    class Version1 as "<u>cc0:CcaCommander</u>"
+    class Version2 as "<u>cc1:CcaCommander</u>"
+    class Version3 as "<u>cc2:CcaCommander</u>"
 }
 
 Version1 -[hidden]right-> Version2

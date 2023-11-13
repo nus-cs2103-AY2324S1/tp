@@ -164,6 +164,9 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.show();
     }
 
+    /**
+     * Stylesheet method below adapted from [Tutor's Pet](https://github.com/AY2021S1-CS2103T-T10-4/tp/)
+     */
     private void applyStylesheet(Stylesheet newStylesheet) {
         ObservableList<String> uiStyleSheet = primaryStage.getScene().getStylesheets();
         uiStyleSheet.clear();

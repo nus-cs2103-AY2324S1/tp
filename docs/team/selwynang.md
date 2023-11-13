@@ -48,7 +48,7 @@ and managing milestones on [GitHub's issue tracker](https://github.com/AY2324S1-
 
 ### Documentation
 * **User Guide**
-  * Updated UI screenshot in the Quick Start section.
+  * Created the annotated screenshots for Navigating User Interface, light/dark themes, `createMember`, `createEvent`, `viewMember` and `viewEvent`.
   * Added command details and summaries for the following commands: `deleteMember`, `deleteEvent`, `findMember`, `findEvent`,
   `unenrol`, `undo` and `redo`.
 * **Developer Guide**

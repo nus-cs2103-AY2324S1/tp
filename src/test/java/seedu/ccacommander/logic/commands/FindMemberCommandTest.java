@@ -65,6 +65,26 @@ public class FindMemberCommandTest {
     }
 
     @Test
+    public void execute_oneKeyword_oneMemberFound() {
+        String expectedMessage = String.format(MESSAGE_MEMBERS_LISTED_OVERVIEW, 1);
+        MemberNameContainsKeywordsPredicate predicate = preparePredicate("Carl");
+        FindMemberCommand command = new FindMemberCommand(predicate);
+        expectedModel.updateFilteredMemberList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL), model.getFilteredMemberList());
+    }
+
+    @Test
+    public void execute_notFirstNameKeyword_oneMemberFound() {
+        String expectedMessage = String.format(MESSAGE_MEMBERS_LISTED_OVERVIEW, 1);
+        MemberNameContainsKeywordsPredicate predicate = preparePredicate("Kurz");
+        FindMemberCommand command = new FindMemberCommand(predicate);
+        expectedModel.updateFilteredMemberList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL), model.getFilteredMemberList());
+    }
+
+    @Test
     public void execute_multipleKeywords_multipleMembersFound() {
         String expectedMessage = String.format(MESSAGE_MEMBERS_LISTED_OVERVIEW, 3);
         MemberNameContainsKeywordsPredicate predicate = preparePredicate("Carl Elle Fiona");
@@ -72,6 +92,16 @@ public class FindMemberCommandTest {
         expectedModel.updateFilteredMemberList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredMemberList());
+    }
+
+    @Test
+    public void execute_oneKeywordWithDifferentCapitalisation_oneMemberFound() {
+        String expectedMessage = String.format(MESSAGE_MEMBERS_LISTED_OVERVIEW, 1);
+        MemberNameContainsKeywordsPredicate predicate = preparePredicate("cArL");
+        FindMemberCommand command = new FindMemberCommand(predicate);
+        expectedModel.updateFilteredMemberList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL), model.getFilteredMemberList());
     }
 
     @Test

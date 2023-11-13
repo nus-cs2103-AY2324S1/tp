@@ -3,17 +3,17 @@ skin rose
 skinparam ActivityFontSize 15
 skinparam ArrowFontSize 12
 start
-:User presses '↓' or '↑' while \nthe command box is selected.;
+:User enters key while \nthe command box is selected.;
 
 switch ()
 case ( [↑])
     if() then ([has previous\ncommand])
-    :Set the previous command\n in commandBox;
+    :Set the previous command;
     else ([else])
     endif
 case ( [↓])
     if() then ([has next\ncommand])
-    :Set the next command\n in commandBox;
+    :Set the next command;
     else ([else])
     endif
 case ( [↵ or ⌫])
