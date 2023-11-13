@@ -534,20 +534,14 @@ otherwise)
 
 **MSS**
 
-1. User requests to add a patient by specifying details about the patient.
-2. Medilink Contacts adds the patient to the database.
-
+1. User requests for help.
+2. Medilink Contacts displays usage instructions.
    Use case ends.
 
 **Extensions**
 
 * 1a. Medilink Contacts detects error in command.
     * 1a1. Medilink Contacts prompts user to correct the format of the command.
-      Use case ends.
-
-
-* 1b. Medilink Contacts detects duplicate patient entry by checking the NRIC.
-    * 1b1. Medilink Contacts prompts user patient already exists.
       Use case ends.
 
 **Use case: UC2 - Add Patient**
