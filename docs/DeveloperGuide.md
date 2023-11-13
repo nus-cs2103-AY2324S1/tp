@@ -197,11 +197,11 @@ Step 4. The filtered list and success message will be reflected in the UI.
 
 The following sequence diagram shows how the `list contact` command works:
 
-![list-contact-sequence-diagram](diagrams/ListContactSequenceDiagram.png)
+<puml src="diagrams/tag/ListContactSequenceDiagram.puml"/>
 
 The following activity diagram shows how the `list contact` command works:
 
-![list-contact-activity-diagram](diagrams/ListContactActivityDiagram.png)
+<puml src="diagrams/tag/ListContactActivityDiagram.puml"/>
 
 ### Tag feature
 This feature allows users to add and remove `Tag` to any `Person` in the contact list. It provides an easy way for users to catrgorize their contacts.
@@ -830,20 +830,38 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a contact while all contacts are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all contacts using the `list contact` command. Multiple contacts will be shown in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `delete contact 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Test case: `delete contact 0`<br>
+      Expected: No contact is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete contact commands to try: `delete contact`, `delete contact x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Deleting an event
+
+1. Deleting an event while all events are being shown
+
+    1. Prerequisites: List all contacts and events using the `list contact` command. This will show every contact and its respective events.
+    Use the `list events` command to open a new events window showing all events (without the contacts).
+
+    1. Test case: `delete event -id 2 -eid 1`<br> 
+       Expected: First event of the second contact is deleted. Title of the deleted event shown in the status message.
+       Event deleted from the list in the events window.
+
+    1. Test case: `delete event -id 0 -eid 1`<br>
+       Expected: No event is deleted. Error details (contact not found) shown in the status message.
+   
+    1. Test case: `delete event -id 1 -eid 0`<br>
+       Expected: No event is deleted. Error details (event not found) shown in the status message.
+
+    1. Other incorrect delete commands to try: `delete event`, `delete event -id x -eid 1`, `delete event -id 1 -eid x`, `...` (where x is larger than the size of contacts/events)<br>
+       Expected: Similar to previous test cases.
 
 ### Saving data
 
