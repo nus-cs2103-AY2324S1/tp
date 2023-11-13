@@ -11,7 +11,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import org.junit.jupiter.api.Test;
-import seedu.address.model.person.Phone;
 
 public class EventTimeTest {
     @Test
