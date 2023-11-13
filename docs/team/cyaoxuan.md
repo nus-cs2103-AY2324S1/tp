@@ -25,13 +25,17 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
     * Added documentation for `remark` feature
+    * Checked through format and content
   * Developer Guide:
     * Added implementation for `remark` feature
-    * Extended documentation for the Model component on the new attributes added and design considerations
-    * Add use cases for features in MVP
+    * Extended documentation for the `Model` component on the new attributes added and design considerations
+    * Add use cases for features in MVP (UC1 - 5)
+    * Extend glossary
+    * Add Appendix: Effort section
+    * Checked through format and content
 
 * **Project management**:
-  * Assigned issues to the team and manage milestones in `v1.1` 
+  * Assigned issues to the team and manage milestones in `v1.1` and `v1.4`
 
 * **Community**:
   * PRs reviewed (with non-trivial comments): [\#74](https://github.com/AY2324S1-CS2103T-W16-3/tp/pull/74), [\#77](https://github.com/AY2324S1-CS2103T-W16-3/tp/pull/77)

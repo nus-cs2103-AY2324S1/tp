@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-InsureIQ is a **contact management system of large car owners database with policies bought by them** optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, InsureIQ can get your contact management tasks done faster than traditional GUI apps.
+InsureIQ is a **contact management system for car insurance agents to keep track of multiple clients' details and policies** optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, InsureIQ can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -14,7 +14,7 @@ InsureIQ is a **contact management system of large car owners database with poli
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `insureiq.jar` from here. [link coming soon]
+1. Download the latest `insureiq.jar` from [here](https://github.com/AY2324S1-CS2103T-W16-3/tp/releases/tag/v1.4).
 
 1. Copy the file to the folder you want to use as the _home folder_ for InsureIQ.
 
@@ -118,6 +118,15 @@ You are missing the following: - Policy Expiry Date(pe/)
 ```
 Error: The policy number is already in use
 ```
+* Adding a client that already exists:<br>
+```
+Error: This person already exists in the address book
+```
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Adding clients with duplicate fields:** The above error will only be raised when ALL fields are the same. This is to support clients with multiple insurance policies.
+
+</div>
 
 
 ### Listing all clients : `list`
@@ -147,7 +156,7 @@ Format: `edit INDEX [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [e/EMAIL] [a/ADDRESS] [
   * `c/!@#NO_COMPANY!@#` or 
   * `pi/01-01-1000` or 
   * `pe/01-01-1000` or 
-  * `pn/NO_POLICY`, as per the 'Format' mentioned above.
+  * `pn/NOPOLICY`, as per the 'Format' mentioned above.
 
 </div>
 
@@ -179,8 +188,7 @@ Expected output upon failure:
 ```
 Invalid command format! 
 edit: Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values.
-Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...
-[i/NRIC] [l/LICENCE_PLATE] [c/COMPANY] [pn/POLICY_NUMBER] [pi/POLICY_ISSUE_DATE] [pe/POLICY_EXPIRY_DATE] Example: edit 1 p/91234567 e/johndoe@example.com
+Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]... [i/NRIC] [l/LICENCE_PLATE] [c/COMPANY] [pn/POLICY_NUMBER] [pi/POLICY_ISSUE_DATE] [pe/POLICY_EXPIRY_DATE] Example: edit 1 p/91234567 e/johndoe@example.com
 ```
 * No specified `INDEX` or negative `INDEX` or no field provided:<br>
 ```
@@ -368,7 +376,7 @@ Expected output upon success: <br>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
 Even if no clients are deleted, 
-InsureIQ will still show a confirmation message to let you know that the `batch delete` command has been successfully processed.
+InsureIQ will still show a confirmation message to let you know that the `batchdelete` command has been successfully processed.
 
 </div>
 
@@ -421,11 +429,6 @@ InsureIQ data are saved automatically as a JSON file `[JAR file location]/data/i
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, InsureIQ will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
-
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
