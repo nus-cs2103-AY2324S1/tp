@@ -277,7 +277,7 @@ Examples:
 | `TAG`            | The tag you want to associate with the meeting, if any. A meeting can have more than 1 tag. <br/> <br/> It must be alphanumeric, i.e. special and non-alphanumeric characters (including spaces) are not allowed.                                | • `Casual` <br> • `Remote`                          |
 | `ATTENDEE_NAME`  | The name of the contact added to the meeting as an attendee via the [`addmc`](#adding-contact-to-meeting--addmc) command.                                                                                                                        | -                                                   |
 | `ATTENDEE_INDEX` | The number shown beside each attendee's name in the detailed view of the meeting (as described [here](#viewing-detailed-meeting-information--viewm)). <br/> <br/> It must be a positive integer and not more than the total number of attendees. | • `2`                                               |
-| `MEETING_INDEX`  | The number shown beside each meeting's title in the displayed meetings list. <br/> <br/> It must be a positive integer and not more than the total number of meetings.                                                                           | • `1`                                               |                                                                      |
+| `MEETING_INDEX`  | The number shown beside each meeting's title in the displayed meetings list. <br/> <br/> It must be a positive integer and not more than the total number of meetings.                                                                           | • `1`                                               |
 
 
 ### Adding a meeting: `addm`
