@@ -7,6 +7,8 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Acknowledgements**
 * [File icon](https://www.flaticon.com/free-icon/document_2258853?term=file&page=1&position=6&origin=search&related_id=2258853) and [Help icon](https://www.flaticon.com/free-icon/question_471664?term=help&page=1&position=2&origin=search&related_id=471664) used in the main window are from Flaticon.
 * Useful notations in the User Guide was inspired from a past project [TaskBook](https://ay2223s1-cs2103t-t13-4.github.io/tp/UserGuide.html#useful-notations).
@@ -19,6 +21,8 @@ title: Developer Guide
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -151,6 +155,8 @@ The `Storage` component,
 Classes used by multiple components are in the [commons](https://github.com/AY2324S1-CS2103T-T13-4/tp/tree/master/src/main/java/seedu/address/commons) package.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Selected Implementation**
 
@@ -503,7 +509,10 @@ The other commands `stats current` and `stats housing` have a similar execution 
     * Cons: Less flexibility for the user.
 
 --------------------------------------------------------------------------------------------------------------------
-## Planned Enhancements
+
+<div style="page-break-after: always;"></div>
+
+## **Planned Enhancements**
 
 ### Shorter Command Formats
 Currently, the default add command may be too long for an average typer to key in quickly. A future enhancement we are planning would be to allow the addition of a fosterer with just the basic details, such as their name, phone number, email, housing type and availability. The rest of the fields will be set to `nil` by default.
@@ -630,6 +639,8 @@ required to read long error messages with details that might be irrelevant to th
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
@@ -950,6 +961,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Current list**: The currently displayed list obtained from a list command or its variants
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
