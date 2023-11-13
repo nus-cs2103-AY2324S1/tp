@@ -63,7 +63,7 @@ deactivate Model
 BenefitCommand -> Person : getPayrollStorage()
 activate Person
 
-ref over Person : **addDeduction()**
+ref over Person : **addBenefit()**
 
 Person --> BenefitCommand :
 deactivate Person
