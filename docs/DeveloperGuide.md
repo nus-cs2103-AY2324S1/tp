@@ -196,7 +196,27 @@ The `ListCommand` extends the `Command` class. Both the `ListByDayCommand` and t
 The `ListCommandParser` is responsible for returning the appropriate `ListCommand`  based on the command format.
 
 
-The `ListByDayCommand`  is initialised with a `DayPredicate` and updates
+
+The `ListByDayCommand`  is initialised with a `DayPredicate` and updates the `FilteredPersonList` to only display Persons whose `Day` field matches the specified input.
+
+The following sequence diagram shows how the list by day command works.
+
+![ListByDaySequenceDiagram](images/ListByDaySequenceDiagram.png)
+
+The `ListUnPaidCommand`  follows a similar implementation to `ListByDayCommand`. It is initialised with a `PaidPredicate` instead and updates
+the `FilteredPersonList` to only display Persons whose `isPaid` field is false.
+
+#### Design considerations:
+
+**Aspect: How to implement `ListByDayCommand` and `ListUnPaidCommand`:**
+
+* **Alternative 1 (current choice):** Extend the `ListCommand` class.
+  * Pros: Greater use of OOP.
+  * Cons: Harder to implement.
+
+* **Alternative 2:** Individual command class without extending `ListCommand`.
+  * Pros: Easier to implement.
+  * Cons: Less abstraction.
 
 ### Find feature
 The `FindCommand` extends the `Command` class. It allows the user to find for tutees by specifying their names and/or 
@@ -255,20 +275,6 @@ The following activity diagram summarizes what happens when a user executes an e
 of tutees whenever changes are necessary.
     * Pros: Less prone to bugs, and is simpler for developers to implement.
     * Cons: Not user-friendly and takes multiple steps for the user.
-
-### List by day feature
-The `ListByDayCommand` extends the `ListCommand` class. It is initialised with a `DayPredicate` and updates
-
-the `FilteredPersonList` to only display Persons whose `Day` field matches the specified input.
-
-The `ListByDayCommand`  is initialised with a `DayPredicate` and updates the `FilteredPersonList` to only display Persons whose `Day` field matches the specified input.
-
-The following sequence diagram shows how the list by day command works.
-
-![ListByDaySequenceDiagram](images/ListByDaySequenceDiagram.png)
-
-The `ListUnPaidCommand`  follows a similar implementation to `ListByDayCommand`. It is initialised with a `PaidPredicate` instead and updates
-the `FilteredPersonList` to only display Persons whose `isPaid` field is false.
 
 #### Design considerations:
 
