@@ -91,9 +91,9 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete st/interviewed t/developer")` API call as an example.
 
-<puml src="diagrams/DeleteByIndexSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
 <box type="info" seamless>
 
@@ -235,7 +235,7 @@ Pros: This accounts for candidates that do not have those social profiles, and a
 
 Cons: With defensive programming in mind, not the best approach having to deal with null values.
 
-=======
+
 ### View feature
 
 #### Implementation
@@ -343,6 +343,54 @@ Step 3. The user should see the UI below upon entering `search n/john st/intervi
 
 **Note:** The current implementation of search allows users to search by any of the categories individually or by different combinations of the categories.
 It also allows users to specify more than one search parameter for each category e.g. `search n/alex bernice`
+
+## Delete feature
+
+### Implementation
+
+The delete feature is implemented using the `DeleteCommand` class. It extends `Command` and overrides the `execute()` method to
+filter users by the specified parameters.
+
+The delete parameters from the user input are parsed using the parse method in the `DeleteCommandParser` class. `DeleteCommandParser::Parse`
+takes in the search parameters from the user input and, depending on the input, either leave it as a number (for delete by index) or combines them into a list of predicates
+(for delete tags & status).
+
+The `DeleteCommand` constructor can take either a positive integer number (for delete by index) or a list of predicates (for delete by tags & status) and both constructor
+will always return a `DeleteCommand` instance with a number and a list of predicates.
+For delete by index, the constructor will return a `DeleteCommand` instance with the associated input number and an empty list of predicates.
+For delete by tags & status, the constructor will return a `DeleteCommand` instance with a default index and the associated list of predicates.
+
+Currently, the delete parameters for delete by tags & status could only belong to either `Tag` or `Status`. 
+Prefixes `t/` and `st/` are used to denote the category of the delete parameters respectively. E.g. `delete st/interviewed t/developer`
+
+The list of predicates is a list comprising predicate objects whose classes implement the `Predicate` class in Java.
+Each category has its own predicate class i.e. `TagContainsKeywordPredicate`,  `StatusContainsKeywordPredicate`,
+and each class overrides the `test` method which returns true if the persons list contains any of the given tags/status.
+
+Finally, the execute method in `DeleteCommand` class retrieves a person or a list of persons to delete and 
+invokes the `deletePerson(personToDelete)` method from the Model class that deletes the associated person(s).
+Additionally, it also retrieves a list of events associated with the person(s) to delete and 
+invokes the `deleteEvent(eventToDelete)` method from the Model class that deletes the event(s) associated with the deleted person(s).
+
+Given below is an example usage scenario and how the search mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes `delete st/interviewed t/developer` command to delete applicants that has been interviewed and tagged as swe.
+
+The following sequence diagram shows how the search operation works:
+
+**Note:** The lifeline for `DeleteCommand` and `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="DeleteSequenceDiagram" />
+
+Step 3. Assuming Bernice is the applicant matching the requirements, the user should see the UI below upon entering `delete st/interviewed t/developer`.
+
+![View](images/delete.png)
+
+**Note:** The current implementation of delete by tags & status allows users to search by any of the categories individually or by different combinations of the categories.
+It also allows users to specify more than one delete parameter for each category e.g. `delete t/intern manager`
+
 
 ## Events feature
 
