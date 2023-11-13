@@ -43,6 +43,7 @@ KeepInTouch is a desktop app for managing contacts for job-seekers. It can also 
     * Added implementation section for add and delete tag feature([\#181](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/181))
     * Added use cases for adding and deleting tag ([\#63](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/63))
     * Updated storage component ([\#54](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/54))
+    * Added section for manual testing of adding and deleting tag ([\#186](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/186))
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#33](https://github.com/AY2324S1-CS2103T-W16-1/tp/pull/33)
