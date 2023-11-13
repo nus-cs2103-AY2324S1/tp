@@ -6,28 +6,36 @@ skinparam classBackgroundColor STORAGE_COLOR
 
 package Storage as StoragePackage {
 
-Class "<<interface>>\nApplicationBookStorage" as ApplicationBookStorage
+package "UserPrefs Storage" #F4F6F6 {
+    Class "<<interface>>\nUserPrefsStorage" as UserPrefsStorage
+    Class JsonUserPrefsStorage
+}
+
+package "ApplicationBook Storage" #F4F6F6 {
+    Class "<<interface>>\nApplicationBookStorage" as ApplicationBookStorage
+    Class JsonAdaptedInterview
+    Class JsonAdaptedJob
+    Class JsonSerializableApplicationBook
+    Class JsonApplicationBookStorage
+}
+
 Class "<<interface>>\nStorage" as Storage
-Class "<<interface>>\nUserPrefsStorage" as UserPrefsStorage
-Class JsonAdaptedInterview
-Class JsonAdaptedJob
-Class JsonSerializableApplicationBook
-Class JsonApplicationBookStorage
-Class JsonUserPrefsStorage
 Class StorageManager
 
-StorageManager .up.|> Storage
-StorageManager *-up-> "1" ApplicationBookStorage
-StorageManager *-up-> "1" UserPrefsStorage
-
-JsonUserPrefsStorage .down.|> UserPrefsStorage
-
-JsonApplicationBookStorage ..|> ApplicationBookStorage
-JsonApplicationBookStorage ..> JsonSerializableApplicationBook
-
-JsonSerializableApplicationBook ..> JsonAdaptedJob
-JsonAdaptedJob ..> JsonAdaptedInterview
-
 }
+
+Class HiddenOutside #FFFFFF
+HiddenOutside .down.> Storage
+Storage -left-|> ApplicationBookStorage
+Storage -right-|> UserPrefsStorage
+StorageManager -up-> "1" ApplicationBookStorage
+StorageManager -up-> "1" UserPrefsStorage
+StorageManager .up.|> Storage
+JsonApplicationBookStorage .up.|> ApplicationBookStorage
+JsonApplicationBookStorage .down.> JsonSerializableApplicationBook
+JsonSerializableApplicationBook -down-> "*" JsonAdaptedJob
+JsonAdaptedJob -down-> "*" JsonAdaptedInterview
+JsonUserPrefsStorage .up.|> UserPrefsStorage
+
 
 @enduml

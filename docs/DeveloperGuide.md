@@ -73,7 +73,6 @@ Refer to the guide [Setting up and getting started].
 **API:**
 [`Ui.java`](https://github.com/AY2324S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/application/ui/Ui.java)
 
-**Description:**
 
 The `UI` component is responsible for managing the user interface of the application so that it can respond according to
 the user's actions or commands entered.
@@ -84,8 +83,6 @@ the [`MainWindow`](https://github.com/AY2324S1-CS2103T-W12-3/tp/blob/master/src/
 is specified
 in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-W12-3/tp/blob/master/src/main/resources/view/MainWindow.fxml).
 
-**Functionality:**
-
 The UI component,
 
 * Executes user commands using the `Logic` component.
@@ -93,17 +90,15 @@ The UI component,
 * Keeps a reference to the `Logic` component, because the UI relies on the Logic to execute commands.
 * Depends on some classes in the `Model` component, as it displays `Job` objects residing in the Model.
 
-**Component Structure:**
+The following is a class diagram of the `UI` component:
 
 <img src="images/developer-guide/UiClassDiagram.png" width="900" />
 
-The UI consists of a `MainWindow` that is made up of parts like `CommandBox` and `ResultDisplay`.
-These parts are always being shown in `MainWindow`, while other parts like `JobListPanel`, `JobDetailsPanel` are only
-visible
-to the user depending on the state of the application e.g. when the job list if not empty, when a job is selected.
-
-etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities
-between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts like `CommandBox` and `ResultDisplay`. These parts are always
+being shown in `MainWindow`, while other parts like `JobListPanel`, `JobDetailsPanel` are only visible to the user
+depending on the state of the application (e.g. when the job list is not empty, or when a job is selected). All these,
+including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes
+that represent parts of the visible GUI.
 
 ### Logic Component
 
@@ -120,7 +115,7 @@ The following is a partial class diagram of the `Logic` component:
 The following depicts the sequence of interactions within the `Logic` component taking `execute("delete 1")` API call as
 an example:
 
-<img src="images/developer-guide/LogicSequenceDiagram.png" />
+<img src="images/developer-guide/LogicSequenceDiagram.png" width="900"/>
 
 The Logic component,
 
@@ -135,7 +130,7 @@ The Logic component,
 The following are other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user
 command:
 
-<img src="images/developer-guide/ParserClasses.png"/>
+<img src="images/developer-guide/ParserClasses.png" width="900"/>
 
 For more details about command-specific parsing and execution, refer to "[Implementation](#implementation)".
 
@@ -145,16 +140,21 @@ For more details about command-specific parsing and execution, refer to "[Implem
 **API:**
 [`Storage.java`](https://github.com/AY2324S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/application/storage/Storage.java)
 
-**Description:**
-The `Storage` component is responsible for storing the job applications data in JSON format.
+The `Storage` component is responsible for storing the job application data in JSON format.
 
-**Functionality:**
 The `Storage` component,
-* can save `Userpref` objects in json format and read it back.
-* can save the job application data in json format and read it back.
 
-**Component Structure:**
-<img src="images/developer-guide/StorageClassDiagram.png" width="900" />
+* Can save both address book data and user preference data in JSON format, and read them back into corresponding
+  objects.
+* Inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
+  the functionality of only one is needed).
+* Depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
+  that belong to the `Model`).
+
+The following is a class diagram of the `Storage` component:
+
+<img src="images/developer-guide/StorageClassDiagram.png" width="900"/>
+
 ### Common Classes
 
 Classes used by multiple components are in the `seedu.applicationbook.commons` package.

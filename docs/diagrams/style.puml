@@ -76,3 +76,4 @@ skinparam packageStyle Rectangle
 
 hide footbox
 hide circle
+hide members
