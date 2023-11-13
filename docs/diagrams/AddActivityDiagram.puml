@@ -24,7 +24,7 @@ if () then ([command recognised])
             :LogicManager parses CommandResult instance;
             :Display result to user;
         else ([else])
-            :Display task already exists error message;
+            :Display error message;
         endif
     else ([else])
         :Display error message;
