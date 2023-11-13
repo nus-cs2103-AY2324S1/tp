@@ -418,46 +418,45 @@ If your changes to the data file makes its format invalid, MediLink Contacts may
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
-
-## FAQ
-
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous MediLink Contacts home folder.
-
---------------------------------------------------------------------------------------------------------------------
 ## Common PitFalls
 
 ### Invalid Command Format
-   All fields are mandatory except the tag field. Omission of the fields will throw an error stating
-   that an invalid command has been given, and specify the correct format for the `add-doctor command`. <br>
-   Example: `add-doctor ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon`<br>
-   Error Message: `Invalid command format!` <br>
-   `add-doctor: Adds a person to MediLink Contacts. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS g/GENDER ic/NRIC [t/TAG]...` <br>
-   Reason: mandatory field NAME is not specified. Note that different Invalid Commands will have slightly different Error Messages.
+All fields are mandatory except the tag field. Omission of the fields will throw an error stating
+that an invalid command has been given, and specify the correct format for the `add-doctor command`. <br>
+Example: `add-doctor ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon`<br>
+Error Message: `Invalid command format!` <br>
+`add-doctor: Adds a person to MediLink Contacts. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS g/GENDER ic/NRIC [t/TAG]...` <br>
+Reason: mandatory field NAME is not specified. Note that different Invalid Commands will have slightly different Error Messages.
 
 ### Invalid Field
-   Fields have specific formats to be followed. Failure to adhere to this format will lead to an error message
-   that specifies the format to be used for that field. Common cases of Invalid Fields:
+Fields have specific formats to be followed. Failure to adhere to this format will lead to an error message
+that specifies the format to be used for that field. Common cases of Invalid Fields:
 1. Empty flags<br>
-Example: `new-appt pic/ dic/S9851586G time/2023-10-30 13:00` <br>
-Reason: PATIENT IC field is empty.
+   Example: `new-appt pic/ dic/S9851586G time/2023-10-30 13:00` <br>
+   Reason: PATIENT IC field is empty.
 2. Prefixes not associated with the command<br>
-Adding custom prefixes will mostly cause the preceding flag to become invalid. Note that custom prefixes refer to prefixes
-not recognised by the specific command. Although `b/` refers to BLOODTYPE and is a valid flag, it is only a valid flag in
-the context of Patients. It will be recognised as invalid in other commands such as `add-doctor`<br>
+   Adding custom prefixes will mostly cause the preceding flag to become invalid. Note that custom prefixes refer to prefixes
+   not recognised by the specific command. Although `b/` refers to BLOODTYPE and is a valid flag, it is only a valid flag in
+   the context of Patients. It will be recognised as invalid in other commands such as `add-doctor`<br>
    Exceptions:
     * Adding 'custom' flags after the address or condition field will, however, be accepted as
       addresses or conditions may involve the usage of the `/` character. Hence, take note to use these fields carefully.
     * However, adding the remark prefix `r/` and everything attached to it will be ignored by the system.
     * Adding the 'custom' flag before any other field will recognise the input to be of Invalid Command Format.<br>
-Examples:
+      Examples:
     * `add-patient n/John Doe custom/ ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 c/pneumothorax b/O+ t/Low`
-    <br>Reason: custom flag `custom/` causes NAME field to become invalid.
+      <br>Reason: custom flag `custom/` causes NAME field to become invalid.
     * `add-doctor ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104/C, Wakanda St 42 t/Surgeon`
-    <br>Reason: custom flag `/C` taken as part of a valid address, and does not show any Error.
+      <br>Reason: custom flag `/C` taken as part of a valid address, and does not show any Error.
     * `new-appt b/ dic/S9851586G time/2023-10-30 13:00`
-    <br>Reason: custom flag `b/` causes input to be of invalid command format.
+      <br>Reason: custom flag `b/` causes input to be of invalid command format.
+
+--------------------------------------------------------------------------------------------------------------------
+## FAQ
+
+**Q**: How do I transfer my data to another Computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
+the data of your previous MediLink Contacts home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Known issues
