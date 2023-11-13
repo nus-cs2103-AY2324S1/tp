@@ -13,7 +13,10 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.AnimalType;
+import seedu.address.model.person.Availability;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Housing;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 
@@ -23,6 +26,10 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_ANIMAL_NAME = "S#$w";
+    private static final String INVALID_ANIMAL_TYPE = "cat";
+    private static final String INVALID_AVAILABILITY = "notavailable";
+    private static final String INVALID_HOUSING = "rocket";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -124,6 +131,78 @@ public class JsonAdaptedPersonTest {
                         VALID_ADDRESS, invalidTags, VALID_ANIMAL_NAME, VALID_AVAILABILITY, VALID_ANIMAL_TYPE,
                         VALID_HOUSING);
         assertThrows(IllegalValueException.class, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidAnimalName_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                        VALID_ADDRESS, VALID_TAGS, INVALID_ANIMAL_NAME, VALID_AVAILABILITY, VALID_ANIMAL_TYPE,
+                        VALID_HOUSING);
+        String expectedMessage = Name.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullAnimalName_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_TAGS, null, VALID_AVAILABILITY, VALID_ANIMAL_TYPE, VALID_HOUSING);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidAnimalType_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                        VALID_ADDRESS, VALID_TAGS, VALID_ANIMAL_NAME, VALID_AVAILABILITY, INVALID_ANIMAL_TYPE,
+                        VALID_HOUSING);
+        String expectedMessage = AnimalType.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullAnimalType_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_TAGS, VALID_ANIMAL_NAME, VALID_AVAILABILITY, null, VALID_HOUSING);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, AnimalType.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidAvailability_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                        VALID_ADDRESS, VALID_TAGS, VALID_ANIMAL_NAME, INVALID_AVAILABILITY, VALID_ANIMAL_TYPE,
+                        VALID_HOUSING);
+        String expectedMessage = Availability.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullAvailability_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_TAGS, VALID_ANIMAL_NAME, null, VALID_ANIMAL_TYPE, VALID_HOUSING);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Availability.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidHousing_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                        VALID_ADDRESS, VALID_TAGS, VALID_ANIMAL_NAME, VALID_AVAILABILITY, VALID_ANIMAL_TYPE,
+                        INVALID_HOUSING);
+        String expectedMessage = Housing.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullHousing_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_TAGS, VALID_ANIMAL_NAME, VALID_AVAILABILITY, VALID_ANIMAL_TYPE, null);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Housing.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
 }

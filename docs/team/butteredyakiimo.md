@@ -17,6 +17,7 @@ Given below are my contributions to the project.
   * Highlights: This features requires access to the different fields of a fosterer, which may have resulted in slightly tedious code to adhere to the SLAP principle. The implementation was also challenging, as it was built on top of new fields, requiring changes to existing classes. However, this feature can be easily extended in the future to account for new information that the foster manager wants to know about.
   * Pull requests: [#86](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/86), [#96](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/96)
 
+<div></div>
 
 * **Enhancement to existing feature**: Allow for mass deletions
   * What it does: Allows the foster manager to enter more than one fosterer to delete. Extra blank spaces and duplicate indices will be ignored. 
@@ -24,20 +25,22 @@ Given below are my contributions to the project.
   * Highlights: This feature requires tweaks to the existing `DeleteCommand`, and also a new class to encapsulate the multiple indices inputted.
   * Pull requests: [#59](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/59), [#80](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/80)
 
+<div style="page-break-after: always;"></div>
 
 * **Other enhancements to existing features**:
   * Designed the draft UI
   * Updated main window GUI to follow draft UI, except tags (Pull requests: [#66](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/66))
   * Updated sample persons data for testing (Pull requests: [#86](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/86))
 
-  
+<div></div>
+
 * **Documentation**:
     * User Guide: 
         * Added documentation for the feature `delete`
         * Added documentation for the feature `stats`
         * Added useful notations for better readability
         * Modified quick-start section to fit current project context and for better clarity
-        * Did cosmetic tweaks to existing documentation
+        * Did cosmetic tweaks to existing documentation, for conversion to pdf
       
     * Developer Guide: 
         * Added implementation details of the `delete` feature
@@ -54,15 +57,16 @@ Given below are my contributions to the project.
           * Allowing one fosterer to care for more than one animal
           * Case-sensitivity of inputs
           * Allowing symbols in name
-  * Pull requests: [#24](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/24), [#51](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/51), [#80](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/80), [#139](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/139)
-  
+  * Pull requests: [#24](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/24), [#51](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/51), [#80](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/80), [#139](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/139), [#148](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/148)
 
+<div></div>
 
 * **Project management**:
     * Kept track of deliverables and deadlines
     * Helped to maintain the issue tracker for milestones
     * Managed releases `v1.2.1` and `v1.3.1` on GitHub
 
+<div></div>
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [#63](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/63), [#73](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/73), [#82](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/82)
+  * PRs reviewed (with non-trivial review comments): [#63](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/63), [#73](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/73), [#82](https://github.com/AY2324S1-CS2103T-T13-4/tp/pull/82), 

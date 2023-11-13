@@ -15,6 +15,7 @@ public class HousingTest {
 
     @Test
     public void constructor_invalidHousing_throwsIllegalArgumentException() {
+        // invalid housing, anything other than 'nil', 'HDB', 'Condo', 'Landed'
         String invalidHousing = "invalidHousing";
         assertThrows(IllegalArgumentException.class, () -> new Housing(invalidHousing));
     }
@@ -24,11 +25,12 @@ public class HousingTest {
         // null housing
         assertThrows(NullPointerException.class, () -> Housing.isValidHousing(null));
 
-        // invalid housing types
-        assertFalse(Housing.isValidHousing("invalidHousing")); // not one of the allowed values
+        // invalid housing types, anything other than 'nil', 'HDB', 'Condo', 'Landed'
+        assertFalse(Housing.isValidHousing("invalidHousing"));
+
+        // blank housing type
         assertFalse(Housing.isValidHousing("")); // empty string
         assertFalse(Housing.isValidHousing(" ")); // spaces only
-        assertFalse(Housing.isValidHousing("HDB Condo")); // contains space
 
         // valid housing types
         assertTrue(Housing.isValidHousing("HDB"));

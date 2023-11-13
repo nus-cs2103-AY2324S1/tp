@@ -1,0 +1,22 @@
+@startuml
+
+object SearchPredicate
+object "<u>and:AndSearchMatcher" as and
+object "<u>john:SingleTextSearchMatcher" as john {
+  textToFind = "John"
+}
+object "<u>or:OrSearchMatcher" as or
+object "<u>doe:SingleTextSearchMatcher" as doe {
+  textToFind = "Doe"
+}
+object "<u>mae:SingleTextSearchMatcher" as mae {
+  textToFind = "Mae"
+}
+
+SearchPredicate --> and
+and -down-> john : a
+and -down-> or : b
+or -down-> doe : a
+or -down-> mae : b
+
+@enduml

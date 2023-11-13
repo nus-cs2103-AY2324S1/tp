@@ -4,8 +4,8 @@ title: User Guide
 ---
 **Foster Family** is a desktop app built for the **foster managers of cat and dog shelters** to help them perform **foster family management tasks**. 
 
-Some tasks Foster Family can help you with: 
-* **Store and update** the important details of animal fosterers (people who temporarily cares for an animal in their own homes)
+Here are some tasks which Foster Family can help you with: 
+* **Store and update** the important details of animal fosterers (people who temporarily care for an animal in their own homes)
 * Search for a fosterer using _**any**_ detail you can remember of them
 * **Gain insights** on the current status of fosterers
 
@@ -13,26 +13,39 @@ Foster Family is **optimised for use** via a Command Line Interface (CLI). This 
 
 This user guide contains **all** the commands available to you, along with **step-by-step explanations** and **examples** to help you master the use of Foster Family. If you are a _new user_, simply head over to [Quick Start](#quick-start) to begin your journey with us. For those who are _already acquainted_, you can refer to the [Table of Contents](#table-of-contents) below to navigate to your command of interest.
 
-## Table of Contents
+<div style="page-break-after: always;"></div>
+
+## **Table of Contents**
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick Start
-1. Ensure you have Java `11` or above installed in your computer. You can download it from [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
+<div style="page-break-after: always;"></div>
 
-2. Download the latest `FosterFamily.jar` from [here](https://github.com/AY2324S1-CS2103T-T13-4/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for Foster Family.
+## **Quick Start**
 
-4. Open a command terminal.
-5. Navigate to the home folder you put the jar file in using the command `cd <path_to_home_folder>`, replacing `<path_to_home_folder>`  with your file path. 
-6. Use the `java -jar FosterFamily.jar` command to run the application.<br>
+Step 1. Ensure you have Java `11` or above installed in your computer. You can download it from [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
+
+Step 2. Download the latest `FosterFamily.jar` from [here](https://github.com/AY2324S1-CS2103T-T13-4/tp/releases).
+
+Step 3. Copy the file to the folder you want to use as the _home folder_ for Foster Family.
+
+Step 4. Open a command terminal.
+
+Step 5. Navigate to the home folder you put the jar file in using the command `cd <path_to_home_folder>`, replacing `<path_to_home_folder>`  with your file path. 
+
+Step 6. Use the `java -jar FosterFamily.jar` command to run the application.<br>
+
    The Foster Family GUI should appear on screen, similar to the screenshot attached below. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/Ui.png) 
 
-7. Type a command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
+<div style="page-break-after: always;"></div>
+
+
+Step 7. Type a command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
+
    Some example commands you can try:
 
 * `list` : Lists all fosterers.
@@ -43,33 +56,41 @@ This user guide contains **all** the commands available to you, along with **ste
 
 * `reset`, followed by `reset confirm` : Deletes all fosterers.
 
-* `exit` : Exits Foster Family.
+* `exit` : Exits Foster Family.<br>
 
-8. Refer to the [Features](#features) section for details of each command.
+Please refer to the [Features](#features) section for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
-## Useful Notations
+
+<div style="page-break-after: always;"></div>
+
+## **Useful Notations**
 These are symbols we will be using to highlight certain information to you.
 
-| Symbol               | Meaning                                                                          |
-|----------------------|----------------------------------------------------------------------------------|
-| :information_source: | General notes about command                                                      |
-| :exclamation:        | Important notes about command                                                    |
-| :warning:            | Warnings about command, where action may lead to data loss or  misinterpretation |
-| :bulb:               | Tips to optimise the use of Foster Family                                        |
-
-## Technical Terms
-These are the explanations of some technical terms you may come across in this user guide.
-
-| Term                 | Definition                                                                                 |
-|----------------------|--------------------------------------------------------------------------------------------|
-| Command              | Keywords that Foster Family recognises to invoke specific functions                        |
-| Parameter / Argument | Information to be passed to the commands as inputs                                         |
-| Index                | The number next to a fosterer's name in the list shown in the main window                  |
-| Field                | Attributes associated with a fosterer entry in Foster Family, such as name and email, etc. |
+| Symbol               | Meaning                                                                           |
+|----------------------|-----------------------------------------------------------------------------------|
+| :information_source: | General notes about command                                                       |
+| :exclamation:        | Important notes about command                                                     |
+| :warning:            | Warnings about command, where action may lead to data loss or  misinterpretation  |
+| :bulb:               | Tips to optimise the use of Foster Family                                         |
 
 --------------------------------------------------------------------------------------------------------------------
-## User Interface (UI)
+
+## **Technical Terms**
+These are some technical terms you may come across in this user guide.
+
+| Term                  | Definition                                                                                 |
+|-----------------------|--------------------------------------------------------------------------------------------|
+| Command               | Keywords that Foster Family recognises to invoke specific functions                        |
+| Parameter / Argument  | Information to be passed to commands as inputs                                             |
+| Index                 | The number next to a fosterer's name in the list shown in the main window                  |
+| Field                 | Attributes associated with a fosterer entry in Foster Family, such as name and email, etc. |
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+## **User Interface (UI)**
 
 These are the two different screens you will be interacting with in Foster Family. 
 
@@ -79,53 +100,66 @@ These are the two different screens you will be interacting with in Foster Famil
 
 This is the main view that welcomes you when you start up Foster Family.
 
-<br>
+<div style="page-break-after: always;"></div>
 
 ### The Profile Page 
+![ProfileExample](images/screenshots/EditExample.png)
 
 This is the profile view that you can use to add a fosterer or edit the details of an existing fosterer. 
 
-<br>
-
-#### How to open the profile page
+#### Opening the profile page
 There are two ways you can use to navigate to the profile page. 
 1. Enter <code>add</code> to view an _empty_ profile page to [add](#adding-a-fosterer-through-the-profile-page-add) a fosterer.
-2. Enter either <code>edit INDEX</code> or <code>view INDEX</code> to [edit](#editing-a-fosterers-detail-through-the-profile-page-edit) or [view](#viewing-a-fosterers-detail-view) the fosterer at index <code>INDEX</code> in Foster Family.
+2. Enter either <code>edit INDEX</code> or <code>view INDEX</code> to [edit](#editing-a-fosterers-details-through-the-profile-page--edit) or [view](#viewing-a-fosterers-detail-view) the fosterer at index <code>INDEX</code> in Foster Family.
 
-Let's say you want to open the profile page of a fosterer name Benson Meie who is currently at index 1. 
-![Benson](images/screenshots/BensonMeieView.png)
+<div style="page-break-after: always;"></div>
 
-<br>
+Let's say you want to open the profile page of a fosterer named Alex Yeoh who is currently at index 1. 
 
-
-To do so, enter <code>view 1</code> as shown in the image above, which opens the profile page of the fosterer at index 1, Benson Meie. 
-
-![Example profile](images/screenshots/EditExample.png)
+<div style="text-align: center">
+<img src="images/screenshots/ViewCommandExample.png" height="380" class="center"/>
+</div>
 
 <br>
 
-#### Navigating through the fields
+To do so, enter <code>view 1</code> as shown in the image above, which opens the profile page of the fosterer at index 1, Alex Yeoh. 
+
+<div style="text-align: center">
+<img src="images/screenshots/EditExample.png" height="420" class="center"/>
+</div>
+
+<br>
+
+<div style="page-break-after: always;"></div>
+
+#### Navigating through fields
 Typing in the name of the field you want to edit, or substrings of the field, directs your cursor to the textbox, allowing you to make changes.
 
-![Before typing name](images/screenshots/BeforeEnteringName.png)
+<div style="text-align: center">
+<img src="images/screenshots/BeforeEnteringName.png" class="center"/>
+</div>
 
 <br>
 
-In the example above, entering <code>name</code>, or a substring of name like <code>nam</code> brings the focus to the name field.
+In the example above, entering <code>name</code>, or a substring of name like <code>nam</code>, brings the focus to the name field.
 
-<br>
+<div style="text-align: center">
+<img src="images/screenshots/NavigatingFields.png" class="center"/>
+</div>
 
-![Profile navigate field](images/screenshots/NavigatingFields.png)
+<div style="page-break-after: always;"></div>
 
+After you are done editing, pressing the Enter key on your keyboard brings your cursor back to the command box with your new changes intact. 
 
-After you are done editing, pressing the Enter key on your keyboard brings your cursor back to the command box with your new changes intact. <br>
-If you wish to revert back to the original value of the field while editing in the textbox, press the Esc key to undo the changes and direct your cursor back to the command box. 
+<div></div>
 
-<br>
+If you wish to revert back to the original value of the field while editing in the textbox, press the Esc key to undo the changes and direct your cursor back to the command box.
 
-![Cursor back to commandbox](images/screenshots/CursorBackToCommandbox.png)
+<div style="text-align: center">
+<img src="images/screenshots/CursorBackToCommandbox.png" class="center"/>
+</div>
 
-In the example above, after changing name from 'Meie' to 'Mei' the Enter key was pressed. 
+In the example above, after changing name from 'Yeoh' to 'Yeo', the Enter key was pressed. 
 
 The same process can be applied to other fields.
 
@@ -133,11 +167,13 @@ The same process can be applied to other fields.
 
 #### Saving changes
 
-Entering <code>save</code> saves the changes you made into the storage.
+Entering <code>save</code> saves the changes you have made into storage.
 
-Let's say after changing the name, you want to save your changes.
+Let's say after changing the name of the fosterer, you want to save your changes.
 
-![Cursor back to commandbox](images/screenshots/SaveCommandBefore.png)
+<div style="text-align: center">
+<img src="images/screenshots/SaveCommandBefore.png" class="center"/>
+</div>
 
 <br>
 
@@ -145,10 +181,15 @@ Key in <code>save</code> and press Enter to save the changes.
 
 <br>
 
-![Save command after](images/screenshots/SaveCommandAfter.png)
+<div style="page-break-after: always;"></div>
+
+<div style="text-align: center">
+<img src="images/screenshots/SaveCommandAfter.png" class="center"/>
+</div>
 
 <br/>
-This saves the changes you have made and updates the details of a fosterer, or adds a new fosterer with the details inputted (depending on the command used to open the profile page). 
+
+This saves the changes you have made and updates the details of a fosterer, or adds a new fosterer with the inputted details (depending on whether the profile page was used for an `edit` or `add`).
 
 <br>
 
@@ -163,9 +204,11 @@ Attempting to exit without saving your changes will give you a warning message, 
 
 Let's say you have already saved your changes.
 
-![Exit command saved before](images/screenshots/ExitCommandSavedBefore.png)
+![Exit command saved after](images/screenshots/ExitCommandSavedBefore.png)
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 Key in <code>exit</code> and press Enter to close the profile page.
 
@@ -181,21 +224,28 @@ Let's say you did not save your changes and entered <code>exit</code>.
 
 <br>
 
-If you press Enter again, your changes are discarded and you are redirected back to the main window.
-If you press the Esc key, the exit is cancelled and you can continue working on your changes in the profile page.
+<div style="page-break-after: always;"></div>
 
-<br>
+If you press Enter again, your changes are discarded and you will be redirected back to the main window.
+
+<div></div>
+
+If you press the Esc key, the exit is cancelled and you can continue working on your changes in the profile page.
 
 ![Exit command not saved cancel](images/screenshots/ExitCommandNotSavedCancel.png)
 
 The example above is the result of pressing the Esc key after you are warned.
 
 To learn more about **adding a new fosterer through the profile page**, refer to the section [Adding a fosterer through the profile page: add](#adding-a-fosterer-through-the-profile-page-add). <br>
-To learn more about **editing a fosterer through the profile page**, refer to the section [Editing a fosterer's detail through the profile page: edit](#editing-a-fosterers-detail-through-the-profile-page-edit).
+To learn more about **editing a fosterer through the profile page**, refer to the section [Editing a fosterer's detail through the profile page: edit](#editing-a-fosterers-details-through-the-profile-page--edit).
 
 <br>
 
-## Features
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+## **Features**
 
 <div markdown="block" class="alert alert-info">
 
@@ -208,7 +258,7 @@ To learn more about **editing a fosterer through the profile page**, refer to th
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/urgent` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times, _**including zero times**_.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. zero times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. zero times), `t/urgent`, `t/urgent t/experienced` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -221,7 +271,7 @@ To learn more about **editing a fosterer through the profile page**, refer to th
 
 <br> 
 
-### Viewing Help for Commands : `help`
+### Viewing help for Commands : `help`
 
 Opens a pop-up window, providing you with the link to our User Guide for help.
 
@@ -230,6 +280,8 @@ Format: `help`
 ![Help](images/screenshots/HelpWindow.png)
 
 <br> 
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a fosterer through the main window: `add`
 
@@ -247,7 +299,7 @@ Parameters:
 | `ADDRESS`        | Address of the fosterer                                                                                                                                                                                                                                                     | `Orchard road, Blk 8, #13-04`                               |
 | `HOUSING_TYPE`   | - Housing type of the fosterer<br/> - Case-sensitive<br/> - Can be HDB / Condo / Landed / nil                                                                                                                                                                               | `HDB`, `Condo`, `Landed`, `nil`                             |
 | `AVAILABILITY`   | - Availability of the fosterer<br/> - Case-sensitive<br/> - Can be Available / NotAvailable / nil                                                                                                                                                                           | `NotAvailable`, `Available`, `nil`                          |
-| `ANIMAL_NAME`    | - If `availability/NotAvailable`: Name of the animal fostered<br/> - If `availability/Available`: nil<br/> - If `availability/nil`: nil                                                                                                                                     | `Fluffball`, `nil`                                          |
+| `ANIMAL_NAME`    | - If `availability/NotAvailable`: Name of the animal fostered / nil<br/> - If `availability/Available`: nil<br/> - If `availability/nil`: nil                                                                                                                               | `Fluffball`, `nil`                                          |
 | `TYPE_OF_ANIMAL` | - Type of animal which the fosterer is currently fostering, or prefer to foster<br/> - Case-sensitive<br/> - If `availability/NotAvailable`: current.Dog / current.Cat / nil<br/> - If `availability/Available`: able.Dog / able.Cat / nil<br/> - If `availability/nil`: nil | `current.Dog`, `current.Cat`, `able.Dog`, `able.Cat`, `nil` |
 | `TAG`            | Tag to be associated with the fosterer                                                                                                                                                                                                                                      | `experienced`, `urgent`                                     |
 
@@ -260,9 +312,11 @@ Parameters:
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Valid cases:
 
-| No. | Scenario                                                    | `AVAILABILITY` | `ANIMAL_TYPE`     | `ANIMAL_NAME` |
+| No. | Scenario                                                    | `AVAILABILITY` | `TYPE_OF_ANIMAL`     | `ANIMAL_NAME` |
 |-----|-------------------------------------------------------------|-------------|-------------------|---------------|
 | 1   | Not fostering, insufficient info collected                  | `nil`         | `nil`             | `nil`         |
 | 2   | Not fostering, insufficient info collected                  | `Available`   | `nil`             | `nil`         |
@@ -273,15 +327,16 @@ Valid cases:
 * For invalid cases, error messages will be shown when you enter the invalid commands. For example:
   ![Add](images/screenshots/AddErrorMessage.png)
 
-<div markdown="span" class="alert alert-danger">
+<div style="page-break-after: always;"></div>
+
+<div markdown="block" class="alert alert-danger">
 
 **:exclamation: Important:**<br>
 
 You cannot add duplicate fosterers. This is detected using the fosterer's name.<br>
 e.g. <code>"Anne Tay"</code> is the same person as <code>"anne tay"</code> and <code>"anne  (multiple spaces)  tay"</code>.
 
-</div> 
-
+</div>
 
 Examples:
 * `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB availability/NotAvailable animal/Dexter animalType/current.Cat t/Urgent`
@@ -289,15 +344,20 @@ Examples:
     <br/><br/>
     ![Add](images/screenshots/AddJerry.png)
     <br/><br/>
+
 * `add n/Pete Tay p/98765411 e/pete@example.com a/Happy street, block 5, #27-01 housing/Condo availability/Available animal/nil animalType/able.Cat`
   * adds a fosterer named Pete Tay with the following details:
     <br/><br/>
     ![Add](images/screenshots/AddPete.png)
+  
+<div style="page-break-after: always;"></div>
 
-In the case where duplicates field descriptions are given, the last one will be chosen:
+In the case where duplicate field descriptions or values for `HOUSING_TYPE`, `AVAILABILITY`, `ANIMAL_NAME` and `TYPE_OF_ANIMAL` are given, the last one will be chosen:
 * `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB housing/Condo availability/Available availability/NotAvailable animal/Dexter animal/Happy animalType/able.Dog animalType/current.Cat t/Urgent`
   * adds a fosterer named Jerry Tan, who lives in a Condo and is fostering a cat named Happy.
     ![Add](images/screenshots/AddDuplicate.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a fosterer through the profile page: `add`
 
@@ -313,14 +373,17 @@ Format: `add`
 *  The restrictions imposed on what makes a valid fosterer, as explained in the section [Adding a fosterer through the main window: add](#adding-a-fosterer-through-the-main-window-add), still applies in this alternative way of adding a fosterer.
 </div>
 
-Here is the profile page you can see after entering <code>add</code>: 
+Here is the profile page you will see after entering <code>add</code>: 
 
-![Profile](images/screenshots/ProfilePage.png)
+<div style="text-align: center">
+<img src="images/screenshots/ProfilePage.png" height="480" class="center"/>
+</div>
 
 To learn more about the profile page, please refer to the section [User Interface: The Profile Page](#the-profile-page).  
 
 <br> 
 
+<div style="page-break-after: always;"></div>
 
 ### Listing fosterers: `list` (Alias: `find`)
 
@@ -340,7 +403,11 @@ Alias: `find`
 
 * All fields are searched (including tags).
 
-* Keywords can match as parts of words. e.g. `john` will match `Johnny`.
+* For most fields, keywords can match as parts of words. e.g. `john` will match `Johnny`.
+
+* However, for the `Housing` and `Availability` fields, as well as for tags, keywords must match the entire field. <br>
+  e.g. `available` will not match `NotAvailable`.
+  
 * Keywords can overlap. e.g. `samm my` will match `Sammy`.
 
 * Fosterers must match all keywords (i.e. `AND` search).<br>
@@ -355,24 +422,37 @@ Alias: `find`
 |-------------------|--------------------------|------------|
 | `&`               | Logical AND              | lowest     |
 | `/`               | Logical OR               | low        |
-| `' '` (space)     | Logical AND              | high       |
+| '` `' (space)     | Logical AND              | high       |
 | `(` and `)`       | Parentheses for grouping | highest    |
 
 e.g. `a & b / c d` is the same as `a & (b / (c & d))`.
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `list`
     * lists all fosterers in the address book.
+  
+<div></div>
+
 * `list john doe`
     * lists entries which match "John Doe", "Doe John", "Johnny Doe", and "Mary" who lives on "John Doe Street".
+  
+<div></div>
+
 * `find john john doe`
     * is redundant and gives the same result as `find john doe`.
+  
+<div></div>
+
 * `list "John" / zam & doe`
     * lists entries which match "John Doe" and "Doe Shazam", but not "John Grahm".
 
 <br> 
+
+<div style="page-break-after: always;"></div>
 
 ### Viewing a fosterer's detail: `view`
 
@@ -386,7 +466,7 @@ Parameters:
 |-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
 | `INDEX`     | - Index of a fosterer displayed in the list obtained from a `list`/`find` command <br/> - Index must be a positive integer | `1`, `2`, `3` |
 
-<div markdown="span" class="alert alert-danger">
+<div markdown="block" class="alert alert-danger">
 
 **:exclamation: Important:**<br>
 
@@ -397,48 +477,17 @@ The list of available commands are <code>help</code>, <code>save</code>, and <co
 
 Examples:
 * `list` followed by `view 2`
-  * views the profile of the 2nd fosterer in the address book.
+  * views the profile of the 2nd fosterer in your address book.
 
 To learn more about profile page, please refer to the section [User Interface: The Profile Page](#the-profile-page). 
 
-<br> 
-
-#### Editing a fosterer’s details in profile page:
-
-
-Here is a step-by-step explanation of how you can edit a fosterer's details in profile page. 
-
-1. Enter a fosterer’s profile page with `view INDEX`. e.g. `view 1`.
-
-![view 1](images/screenshots/View1.png)
-
 <br>
 
-2. Type in the name of the field you want to edit onto the command box. This will make the textbox visible next to the field and automatically set the text cursor to the textbox. e.g. Enter 'name'.
-
-![enter name](images/screenshots/EnterName.png)
-
-<br>
-
-3. Edit the original value to a new value. e.g. From Alex Yeoh to 'Bob Yeoh'.
-
-![change name](images/screenshots/ChangeNameToBobYeoh.png)
-
-<br>
-
-4. Press Enter to return the text cursor back to the command box. This makes the textbox disappear. 
-
-![press enter](images/screenshots/BobYeoh.png)
-
-<br>
-
-![save bob](images/screenshots/SaveBobYeoh.png)
-
-<br> 
+<div style="page-break-after: always;"></div>
 
 ### Saving changes in a fosterer's details: `save`
 
-Saves changes in details of the fosterer which you have made in the profile page.
+Saves changes to details of the fosterer which you have made in the profile page.
 
 <div markdown="block" class="alert alert-danger">
 
@@ -456,16 +505,20 @@ Format: `save`
 **:information_source: Notes about the command:**<br>
 
 *  Entering <code>save</code> in [the profile of a new fosterer](#adding-a-fosterer-through-the-profile-page-add) saves the new fosterer and exits the profile page.
-*  Entering <code>save</code> in [the profile of an already existing fosterer](#editing-a-fosterers-detail-through-the-profile-page-edit) saves the changes but does not exit the profile page, in case you want to edit more details. 
+*  Entering <code>save</code> in [the profile of an already existing fosterer](#editing-a-fosterers-details-through-the-profile-page--edit) saves the changes but does not exit the profile page, in case you want to edit more details. 
 </div>
 
-Here is the result of entering <code>save</code> a new fosterer name John: 
+<div style="page-break-after: always;"></div>
+
+Here is the result of entering <code>save</code> after adding a new fosterer name John: 
 
 ![Save a new fosterer](images/screenshots/SaveNewFosterer.png)
 
 As you can see, entering <code>save</code> for a new fosterer exits the profile page. 
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 Here is the result of entering <code>save</code> after changing the name from John to John Kim: 
 
@@ -475,7 +528,9 @@ As you can see, entering <code>save</code> for an already existing fosterer does
 
 <br> 
 
-### Editing a fosterer's detail through the main window: `edit`
+<div style="page-break-after: always;"></div>
+
+### Editing a fosterer's details through the main window: `edit`
 
 Edits the details of the index-th fosterer in the list currently displayed in your address book, done through the main window.
 
@@ -483,24 +538,24 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [housing/HOU
 
 Parameters:
 
-| Parameter        | About                                                                                                                                                                                                                                                                              | Example                                                     |
-|------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------|
-| `INDEX`     | - The index of a fosterer displayed in the list obtained from a `list`/`find` command<br/> - Index must be a positive integer                                                                                                                                                      | `1`, `2`, `3`                                               |
-| `NAME`           | Updated name of the fosterer                                                                                                                                                                                                                                                       | `Alice Tan`, `Harry Yeo`                                    |
-| `PHONE_NUMBER`   | Updated Phone number of the fosterer                                                                                                                                                                                                                                               | `93456778`, `89067547`                                      |
-| `EMAIL`          | Updated email of the fosterer                                                                                                                                                                                                                                                      | `thomas718@gmail.com`, `kate@yahoo.com.sg`                  |
-| `ADDRESS`        | Updated address of the fosterer                                                                                                                                                                                                                                                    | `Orchard road, Blk 8, #13-04`                               |
-| `HOUSING_TYPE`   | - Updated housing type of the fosterer<br/> - Case-sensitive<br/> - Can be HDB / Condo / Landed / nil                                                                                                                                                                              | `HDB`, `Condo`, `Landed`, `nil`                             |
-| `AVAILABILITY`   | - Updated availability of the fosterer<br/> - Case-sensitive<br/> - Can be Available / NotAvailable / nil                                                                                                                                                                          | `NotAvailable`, `Available`, `nil`                          |
-| `ANIMAL_NAME`    | - If `availability/NotAvailable`: Updated name of animal fostered<br/> - If `availability/Available`: nil<br/> - If `availability/nil`: nil                                                                                                                                        | `Fluffball`, `nil`                                          |
+| Parameter        | About                                                                                                                                                                                                                                                                                | Example                                                     |
+|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------|
+| `INDEX`     | - The index of a fosterer displayed in the list obtained from a `list`/`find` command<br/> - Index must be a positive integer                                                                                                                                                        | `1`, `2`, `3`                                               |
+| `NAME`           | Updated name of the fosterer                                                                                                                                                                                                                                                         | `Alice Tan`, `Harry Yeo`                                    |
+| `PHONE_NUMBER`   | Updated Phone number of the fosterer                                                                                                                                                                                                                                                 | `93456778`, `89067547`                                      |
+| `EMAIL`          | Updated email of the fosterer                                                                                                                                                                                                                                                        | `thomas718@gmail.com`, `kate@yahoo.com.sg`                  |
+| `ADDRESS`        | Updated address of the fosterer                                                                                                                                                                                                                                                      | `Orchard road, Blk 8, #13-04`                               |
+| `HOUSING_TYPE`   | - Updated housing type of the fosterer<br/> - Case-sensitive<br/> - Can be HDB / Condo / Landed / nil                                                                                                                                                                                | `HDB`, `Condo`, `Landed`, `nil`                             |
+| `AVAILABILITY`   | - Updated availability of the fosterer<br/> - Case-sensitive<br/> - Can be Available / NotAvailable / nil                                                                                                                                                                            | `NotAvailable`, `Available`, `nil`                          |
+| `ANIMAL_NAME`    | - If `availability/NotAvailable`: Updated name of animal fostered / nil<br/> - If `availability/Available`: nil<br/> - If `availability/nil`: nil                                                                                                                                    | `Fluffball`, `nil`                                          |
 | `TYPE_OF_ANIMAL` | - Updated type of animal which the fosterer is currently fostering, or prefer to foster<br/> - Case-sensitive<br/> - If `availability/NotAvailable`: current.Dog / current.Cat / nil<br/> - If `availability/Available`: able.Dog / able.Cat / nil<br/> - If `availability/nil`: nil | `current.Dog`, `current.Cat`, `able.Dog`, `able.Cat`, `nil` |
-| `TAG`            | Tag to be associated with the fosterer                                                                                                                                                                                                                                             | `experienced`, `urgent`                                     |
+| `TAG`            | Tag to be associated with the fosterer                                                                                                                                                                                                                                               | `experienced`, `urgent`                                     |
 
 <div markdown="block" class="alert alert-primary">
 
 **:bulb: Tip:**<br>
 
-* The index of the fosterer has to be provided, however the number of parameters to be edited can vary from zero to all fields.
+* The index of the fosterer has to be provided. However, the number of parameters to be edited can vary from zero to all fields.
 
 </div>
 
@@ -508,33 +563,43 @@ Parameters:
 
 **:exclamation: Important:**<br>
 
-* If the parameters are not provided, <b><code>edit INDEX</code> operates the same way as <code>view INDEX</code></b>, leading you to the profile page of the person at index <code>INDEX</code> in the addressbook. 
-* If you ran the same `edit` command multiple times consecutively (resulting in no visible change after the first run), the `undo` command would not be able to revert the data back to the original state 
+* If the parameters are not provided, <b><code>edit INDEX</code> operates the same way as <code>view INDEX</code></b>, leading you to the profile page of the person at index <code>INDEX</code> in the address book. 
+* If you run the same `edit` command multiple times consecutively (resulting in no visible change after the first run), the `undo` command will not be able to revert the data back to the original state, 
 since it can only undo the last _valid_ command ran.
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 *  `find` or `list` followed by `edit 3 n/John` 
-   * edits the name of the 3rd fosterer in the address book to John.
-*  `find` or `list` followed by `edit 1 p/12345678 animal/Bob` 
-   * edits the phone number and the pet name of the 1st fosterer in the address book to 12345678 and Bob respectively.
-   ![edit 1 example](images/screenshots/EditExample2.png)
-*  `find` or `list` followed by `edit 2` 
-   * opens the profile page of the 2nd fosterer in the address book since parameters are not provided.
+   * edits the name of the 3rd fosterer in your address book to John.
 
-<div markdown="span" class="alert alert-warning">
+<div></div>
+
+*  `find` or `list` followed by `edit 1 p/12345678 animal/Bob` 
+   * edits the phone number and the pet name of the 1st fosterer in your address book to 12345678 and Bob respectively.
+   ![edit 1 example](images/screenshots/EditExample2.png) <br>
+
+<div></div>
+
+*  `find` or `list` followed by `edit 2` 
+   * opens the profile page of the 2nd fosterer in your address book, since parameters are not provided.
+
+<div markdown="block" class="alert alert-warning">
 
 **:warning: Caution:**<br>
 
-Edit may cause information loss. 
+Edit may cause **information loss**. 
 Before you type the save command, make sure there is no accidental overwrite with faulty information. 
 
 </div>
 
 <br>
 
-### Editing a fosterer's detail through the profile page: `edit`
+<div style="page-break-after: always;"></div>
+
+### Editing a fosterer's details through the profile page: `edit`
 
 Edits the details of the index-th fosterer in the list currently displayed in your address book, done through the profile page.
 
@@ -553,34 +618,82 @@ Parameters:
 
 * Apart from the details added by the add command, we also provide an optional **notes feature** in the profile page for 
 more flexibility.
-* You can use this to include additional details(non-exhaustive) such as: 
+  ![notes example](images/screenshots/Notes.png)
+
+* You can use this to include _additional details_(non-exhaustive) such as: 
   * Health condition of the animal
   * Foster period of the animal
   * Identifiable physical traits of the animal
-*  Just like the other fields, remember to save the changes using the `save` command.
-  * Please refer to the section [Viewing a fosterer's detail: Editing a fosterer’s details in profile page](#editing-a-fosterers-details-in-profile-page) for the specific steps on how to edit a fosterer in their 
-profile page.
+*  Just like the other fields, remember to **save** the changes using the `save` command.
  
 </div>
 
-<div markdown="span" class="alert alert-warning">
+<div style="page-break-after: always;"></div>
+
+<div markdown="block" class="alert alert-warning">
 
 **:warning: Caution:**<br>
 
-Edit may cause information loss. 
+Edit may cause **information loss**. 
 Before you type the save command, make sure there is no accidental overwrite with faulty information. 
 
 </div>
 
 <br/>
 
-Here is an example of entering <code>edit 1</code> to edit a fosterer name Benson Meie who is currently at index 1:
+Here is a summary of how to edit a fosterer Alex Yeoh who is currently at index 1:
 
-![Example profile 1](images/screenshots/EditExample.png)
+Step 1. Enter the profile page with `view INDEX` or `edit INDEX`. e.g. `view 1` or `edit 1`.
+
+<div style="text-align: center">
+<img src="images/screenshots/View1.png" height="480" class="center"/>
+</div>
+
+<div style="page-break-after: always;"></div>
+
+Step 2. Type in the name of the field you want to edit onto the command box. This will make the textbox visible next to the field and automatically set the text cursor to the textbox. e.g. Enter 'name'.
+
+<div style="text-align: center">
+<img src="images/screenshots/EnterName.png" height="480" class="center"/>
+</div>
+
+<br>
+
+<div style="page-break-after: always;"></div>
+
+Step 3. Edit the original value to a new value. e.g. From Alex Yeoh to 'Bob Yeoh'.
+
+<div style="text-align: center">
+<img src="images/screenshots/ChangeNameToBobYeoh.png" height="480" class="center"/>
+</div>
+
+<br>
+
+<div style="page-break-after: always;"></div>
+
+Step 4. Press Enter to return the text cursor back to the command box. This makes the textbox disappear.
+
+<div style="text-align: center">
+<img src="images/screenshots/BobYeoh.png" height="480" class="center"/>
+</div>
+
+<br>
+
+<div style="page-break-after: always;"></div>
+
+Step 5. Enter `save` to save your changes.
+
+<div style="text-align: center">
+<img src="images/screenshots/SaveBobYeoh.png" height="480" class="center"/>
+</div>
+
+<br> 
 
 To learn more about the profile page, please refer to the section [User Interface: The Profile Page](#the-profile-page). 
 
 <br> 
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a fosterer : `delete`
 
@@ -588,46 +701,57 @@ Deletes the index-th fosterer in the list currently displayed in your address bo
 
 Format: `delete INDEX [INDEX...]`
 
-<div markdown="span" class="alert alert-danger">
+<div markdown="block" class="alert alert-warning">
 
-**:exclamation: Important:**<br>
+**:warning: Caution:**<br>
 
-The index of a fosterer is not fixed. It is relative to the current list of fosterers you are handling.
+The **index of a fosterer is not fixed**. It is relative to the current list of fosterers you are handling.
 
 </div>
 
 Parameters:
 
-| Parameter | About                                                                                                                                                                     | Example |
-|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
-| `INDEX`     | - The index of a fosterer displayed in the list obtained from a `list`/`find` command <br/> - At least one index must be provided<br/> - Index must be a positive integer | `1`, `2`, `3` |
+| Parameter  | About                                                                                                                                                                      | Example       |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+| `INDEX`    | - The index of a fosterer displayed in the list obtained from a `list`/`find` command <br/> - At least one index must be provided<br/> - Index must be a positive integer  | `1`, `2`, `3` |
 
 <div markdown="block" class="alert alert-primary">
 
 **:bulb: Tip:**<br>
 
-You can delete multiple fosterers at once.<br> 
+You can **delete multiple fosterers at once**.<br> 
 
 * Each index needs to be separated by a white space.<br>
 * Any duplicates and extra white spaces will be ignored.
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `list` followed by `delete 2` 
   * deletes the 2nd fosterer in your address book.
+
+<div></div>
+
 * `find Jerry` or `list Jerry`, followed by `delete 1`
   * deletes the 1st fosterer in the result list of your `find` / `list` query
+
+<div></div>
+
 * `list` followed by `delete 1 3 7` 
   * deletes the 1st, 3rd and 7th fosterers in your address book.
     ![Delete](images/screenshots/Delete.png)
-In this example, Alex, Bernice and Charlotte are the fosterers deleted. <br>
+In the example above, Alex, Bernice and Charlotte are the fosterers deleted. 
   
+<div></div>
 
 * `list` followed by `delete 3 3 3 3` 
   * deletes the 3rd fosterer in your address book.
 
 <br> 
+
+<div style="page-break-after: always;"></div>
 
 ### Sorting fosterers: `sort`
 
@@ -639,7 +763,7 @@ Format: `sort`
 
 <br> 
 
-<div markdown="span" class="alert alert-danger">
+<div markdown="block" class="alert alert-danger">
 
 **:exclamation: Important:**<br>
 
@@ -648,7 +772,9 @@ since it can only undo the last _valid_ command ran.
 
 </div> 
 
-### Viewing Statistics of Available Fosterers : `stats avail`
+<div style="page-break-after: always;"></div>
+
+### Viewing statistics of available fosterers : `stats avail`
 
 Helps you calculate statistics about fosterers who are available to foster, and the animals they can foster. Percentages are calculated to 2 decimal places.
 
@@ -658,36 +784,60 @@ Format: `stats avail`
 
 **:information_source: Notes about the command:**<br>
 
-All statistic commands are calculated based on the list currently displayed in your address book.<br>
+* All statistic commands are **calculated based on the list currently displayed in your address book**.<br>
 In the example below, `find available` was first entered, resulting in a list of 2 available fosterers. <br>
 `stats avail` was then entered, and we see the resulting statistic reporting all listed fosterers as available. <br>
 
 ![Stats](images/screenshots/StatsAllAvail.png)<br>
 
-Therefore, please ensure that the current list is the list you want your statistics to be calculated from.<br>
+Therefore, remember to use the `find` or `list` commands to get the list you want your statistics to be calculated from first, before using the statistic commands.<br>
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `list` followed by `stats avail` 
-  * calculates statistics of available fosterers, based on all fosterers in your address book.<br>
-  Here, your have 6 fosterers in your address book, and 3 of them are available to foster.
+  * calculates statistics of available fosterers, based on all fosterers in your address book.
+  
+  <div></div>
+  
+  ![Stats](images/screenshots/StatsAvail.png)
 
-    ![Stats](images/screenshots/StatsAvail.png)<br>
+  In the example above, you have 6 fosterers in your address book, and 3 of them are available to foster.
 
+  <div></div>
 
 * `find cat` followed by `stats avail` 
   * calculates statistics of available fosterers, based on fosterers who are either currently fostering a cat or are able to foster a cat.
 
+<div></div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command:**<br>
+
+For all statistic commands,<br>
+
+* Extra white spaces are ignored.<br>
+  * `stats (multiple spaces) avail` is a valid `stats avail` command, while `statsavail` is not valid.<br>
+
+* Extra parameters after the valid statistic command will be ignored.<br>
+  * `stats avail current` and `stats avail 123` are valid `stats avail` commands, while `stats 123 avail` is not valid.<br>
+
+</div>
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-warning">
 
 **:warning: Caution:**<br>
 
-For all stat commands, percentages may not add up to 100.00%.<br>
+For all statistic commands, **percentages may not add up to 100.00%**.<br>
+
 Suppose you have 3 available fosterers: 1 can foster a dog, 1 can foster a cat and 1 unknown.<br>
 * The calculated percentages will add up to 99.99%, instead of 100.00%.<br> 
-* Hence, it can be assumed that each group takes up 1/3 of 100.00%.
+* In this case, you can assume that each group takes up 1/3 of 100.00%.
 
 ![Stats](images/screenshots/StatsTotalPercent.png)
 
@@ -695,43 +845,60 @@ Suppose you have 3 available fosterers: 1 can foster a dog, 1 can foster a cat a
 
 <br> 
 
-### Viewing Statistics of Current Fosterers : `stats current`
+<div style="page-break-after: always;"></div>
+
+### Viewing statistics of current fosterers : `stats current`
 Helps you calculate statistics about fosterers who are currently fostering, and the type of animals they are fostering. Percentages are calculated to 2 decimal places.
 
 Format: `stats current`
 
 Examples:
 * `list` followed by `stats current` 
-  * calculates statistics of current fosterers, based on all fosterers in your address book. <br>
-  Here, you have 6 fosterers in your address book, and 2 of them are currently fostering.
-  ![Stats](images/screenshots/StatsCurrent.png)<br>
+  * calculates statistics of current fosterers, based on all fosterers in your address book.
 
+  <div></div>
+
+  ![Stats](images/screenshots/StatsCurrent.png)
+
+  In the example above, you have 6 fosterers in your address book, and 2 of them are currently fostering.
+
+  <div></div>
 
 * `find dog` followed by `stats current`
   * calculates statistics of current fosterers, based on fosterers who are either currently fostering a dog,  or are able to foster a dog.
 
 <br> 
 
-### Viewing Housing Statistics : `stats housing`
+<div style="page-break-after: always;"></div>
+
+### Viewing statistics of housing types: `stats housing`
 Helps you calculate statistics about the various housing types of fosterers. Percentages are calculated to 2 decimal places.
 
 Format: `stats housing`
 
 Examples:
 * `list` followed by `stats housing`
-  * calculates housing statistics based on all fosterers in your address book.<br>
-  Here, out of the 6 fosterers in your address book, 3 live in HDBs, 1 live in a Condo, and 2 live in Landed properties.
-    ![Stats](images/screenshots/StatsHousing.png)<br>
+  * calculates housing statistics based on all fosterers in your address book.
   
+  <div></div>
+  
+  ![Stats](images/screenshots/StatsHousing.png)
+
+  In the example above, out of the 6 fosterers in your address book, 3 live in HDBs, 1 live in a Condo, and 2 live in Landed properties.
+
+  <div></div>
 
 * `find available` followed by `stats housing` 
   * calculates housing statistics based on fosterers who are available.
 
 <br> 
 
+<div style="page-break-after: always;"></div>
+
 ### Undoing the previous command : `undo`
 
 Undoes your previous command, given that the previous command successfully executed is either `add`, `delete`, `edit`, or `sort`.
+
 
 Format: `undo`
 
@@ -747,6 +914,8 @@ Format: `undo`
 </div>
 
 <br> 
+
+<div style="page-break-after: always;"></div>
 
 ### Clearing all entries : `reset`, followed by `reset confirm`
 
@@ -764,11 +933,13 @@ Format: `reset`, followed by `reset confirm`
 
    * User is prompted to enter `reset confirm` to confirm and execute the deletion of all data entries.
 ![Reset](images/screenshots/ResetConfirm.png)
-   * In the case where the user wishes to cancel the reset, he/she just has to proceed and type any other command in the command box.
+   * In the case where the user wishes to **cancel the reset**, he/she just has to proceed and type any other **valid command** in the command box.
 
 </div>
 
 <br> 
+
+<div style="page-break-after: always;"></div>
 
 ### Exiting Foster Family : `exit`
 
@@ -780,48 +951,55 @@ Format: `exit`
 
 **:information_source: Notes about the command:**<br>
 
-* On the profile page, entering <code>exit</code> leads you out of the page back to the main window. 
-* On the profile page, attempting to <code>exit</code> without saving changes with <code>save</code> prompts a warning message (refer to [User Interface: The Profile Page: Exiting the profile page](#exiting-the-profile-page)). 
-</div>
+On the profile page,<br>
 
-<br> 
+* Entering <code>exit</code> leads you out of the page back to the main window. 
+* Attempting to <code>exit</code> **without first saving changes** with <code>save</code> prompts a warning message (please refer to [User Interface: The Profile Page: Exiting the profile page](#exiting-the-profile-page) for more information). 
+</div>
+ 
 
 ### Saving data
 
-In the main window, your Foster Family data is saved in the hard disk automatically after any command that changes the data, so no manual saving is needed. However, edits made in the profile page have to be saved via the `save` command. Else, changes will be discarded once you exit out of that fosterer's profile page.
-
-<br> 
+In the **main window**, your Foster Family data is **saved in the hard disk automatically** after any command that changes the data, so no manual saving is needed. However, **edits made in the profile page have to be saved** via the `save` command. Else, changes will be **discarded** once you exit out of that fosterer's profile page.
 
 ### Editing data file
 
 Your Foster Family data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. We strongly
-advise you to update the data file directly only if you are an advanced user. Otherwise, we highly recommend you to perform 
-edits using our user-friendly interface instead.
+advise you to update the data file directly **only if you are an advanced user**. 
 
-<div markdown="block" class="alert alert-warning">
+Otherwise, we highly recommend you to perform edits using our user-friendly interface instead.
+
+<div markdown="span" class="alert alert-warning">
 
 **:warning: Caution:**<br>
 
-* If your changes to the data file makes its format invalid, Foster Family will discard all data and start with an empty data file at the next run. Hence, it is recommended to make a backup of the file before editing it.<br>
-* If your changes create an [invalid fosterer](#adding-a-fosterer-through-the-main-window--add), the app will not start. You will have to rectify the error in order to restart the app.
+If your changes to the data file makes its **format invalid**, Foster Family will **discard all data** and start with an empty data file at the next run. Hence, it is recommended to make a **backup** of the file before editing it.<br>
 
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
-## FAQ
+
+<div style="page-break-after: always;"></div>
+
+## **FAQ**
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer, and overwrite the empty data file it creates with the file that contains the data of your previous Foster Family home folder.
 
+**Q**: How do I know which version of Java I am using / have installed on my Computer?<br>
+**A**: Open a command terminal, type `java -version` and press Enter. The Java version in use will be displayed as a response message.
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## **Known issues**
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The solution is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+<div style="page-break-after: always;"></div>
+
+## **Command summary**
 
 | Action                                   | Format                                                                                                                                                                    | Examples                                                                                                                                                                |
 |------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -839,5 +1017,5 @@ edits using our user-friendly interface instead.
 | **View Current Fosterer Statistics**     | `stats current`                                                                                                                                                           | -                                                                                                                                                                       |
 | **View Housing Statistics**              | `stats housing`                                                                                                                                                           | -                                                                                                                                                                       |
 | **Undo**                                 | `undo`                                                                                                                                                                    | -                                                                                                                                                                       |
-| **Reset**                                | `reset`, followed by `reset confirm`                                                                                                                                      | -                                                                                                                                                                       |
+| **Clear all data entries**               | `reset`, followed by `reset confirm`                                                                                                                                      | -                                                                                                                                                                       |
 | **Exit** from application / profile page | `exit`                                                                                                                                                                    | -                                                                                                                                                                       |

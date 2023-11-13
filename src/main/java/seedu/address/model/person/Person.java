@@ -65,6 +65,7 @@ public class Person {
         if (!isAvailabilityValidWhenAnimalNameNotNil()) {
             throw new IllegalArgumentException(AVAILABLE_WHILE_ANIMAL_NAMED_MESSAGE);
         }
+
         if (!isAnimalNameTypeValidWhenNotAvailable()) {
             throw new IllegalArgumentException(ANIMAL_NAME_TYPE_MISMATCH_WHEN_UNAVAILABLE_MESSAGE);
         }
@@ -79,11 +80,11 @@ public class Person {
     }
 
     /**
-     * Returns boolean value to check if animal name is valid based on availability status.
+     * Returns boolean value to check if availability is valid based on presence of animal name.
      *
-     * @return a boolean value which represents if animal name is valid.
+     * @return a boolean value which represents if availability is valid.
      */
-    boolean isAvailabilityValidWhenAnimalNameNotNil() {
+    public boolean isAvailabilityValidWhenAnimalNameNotNil() {
         String avail = availability.value;
         if (!animalName.fullName.equals(Person.NIL_WORD)) {
             return !(avail.equals("Available") || avail.equals(Person.NIL_WORD));
@@ -96,7 +97,7 @@ public class Person {
      *
      * @return a boolean value which represents if animal name and type are valid.
      */
-    boolean isAnimalNameTypeValidWhenNotAvailable() {
+    public boolean isAnimalNameTypeValidWhenNotAvailable() {
         String avail = availability.value;
         if (avail.equals("NotAvailable")) {
             String type = animalType.value;

@@ -29,6 +29,9 @@ public class Housing {
         this.value = value;
     }
 
+    /**
+     * Returns true if a given string is a valid housing type.
+     */
     public static boolean isValidHousing(String test) {
         return test.matches(VALIDATION_REGEX);
     }
