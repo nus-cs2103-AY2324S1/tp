@@ -1,0 +1,85 @@
+@startuml
+
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ClearScheduleCommandParser" as ClearScheduleCommandParser LOGIC_COLOR
+participant "cs:ClearScheduleCommand" as ClearScheduleCommand LOGIC_COLOR
+
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant "csd: ClearScheduleDescriptor" as Person LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("clearschedule 1")
+activate LogicManager
+
+
+LogicManager -> AddressBookParser : parseCommand("clearschedule 1")
+activate AddressBookParser
+
+create ClearScheduleCommandParser
+AddressBookParser -> ClearScheduleCommandParser
+activate ClearScheduleCommandParser
+
+ClearScheduleCommandParser --> AddressBookParser
+deactivate ClearScheduleCommandParser
+
+AddressBookParser -> ClearScheduleCommandParser : parse("1")
+activate ClearScheduleCommandParser
+
+
+
+create Person
+ClearScheduleCommandParser -> Person : LastModifiedDateTime
+activate Person
+Person --> ClearScheduleCommandParser
+deactivate Person
+
+create ClearScheduleCommand
+ClearScheduleCommandParser -> ClearScheduleCommand : index, csd
+activate ClearScheduleCommand
+
+ClearScheduleCommand --> ClearScheduleCommandParser : cs
+deactivate ClearScheduleCommand
+
+ClearScheduleCommandParser --> AddressBookParser : cs
+deactivate ClearScheduleCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ClearScheduleCommandParser -[hidden]-> AddressBookParser
+destroy ClearScheduleCommandParser
+
+AddressBookParser --> LogicManager : cs
+deactivate AddressBookParser
+
+LogicManager -> ClearScheduleCommand : execute()
+activate ClearScheduleCommand
+
+
+ClearScheduleCommand -> Model : setPerson(person)
+activate Model
+
+Model --> ClearScheduleCommand
+deactivate Model
+
+create CommandResult
+ClearScheduleCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ClearScheduleCommand
+deactivate CommandResult
+
+ClearScheduleCommand --> LogicManager : result
+deactivate ClearScheduleCommand
+
+[<--LogicManager
+deactivate LogicManager
+
+@enduml

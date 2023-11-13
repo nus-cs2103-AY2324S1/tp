@@ -3,12 +3,24 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
-    "address": "123, Jurong West Ave 6, #08-111",
-    "tags": [ "friends" ]
+    "company": "Directions Group",
+    "job": "AI Engineer",
+    "tags": [ "friends" ],
+    "mark": "\u2606",
+    "schedule": "",
+    "scheduleName": "",
+    "note" : "",
+    "last_modified" : "10 Oct 2000, 10:10:00"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "address": "4th street"
+    "company": "Changi Airport Group",
+    "job": "AI Engineer",
+    "mark": "\u2606",
+    "schedule": "",
+    "scheduleName": "",
+    "note" : "",
+    "last_modified" : "10 Oct 2000, 10:10:00"
   } ]
 }

@@ -1,0 +1,31 @@
+@startuml
+!include style.puml
+
+start
+:User inputs a command;
+
+:Logic component passes clock to AddressBookParser;
+
+:Type of command determined;
+
+:Parser instantiated;
+
+If () then ([Clock-Dependent])
+
+:Command-specific parser instantiated
+with passed clock;
+
+:Parser extracts current time from clock;
+
+
+else ([else])
+    :Command-specific parser instantiated;
+endif
+
+:Parser extracts parameters from input;
+:Command executed (including data updates);
+:Results are displayed to user
+(Including modified Person data, if applicable);
+
+stop
+@enduml

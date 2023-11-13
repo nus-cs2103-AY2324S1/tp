@@ -14,11 +14,17 @@ Class UserPrefs
 
 Class UniquePersonList
 Class Person
-Class Address
 Class Email
 Class Name
 Class Phone
+Class Company
+Class Job
 Class Tag
+Class Mark
+Class LastModifiedDateTime
+Class Note
+Class Schedule
+Class ScheduleName
 
 Class I #FFFFFF
 }
@@ -36,19 +42,27 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
+AddressBook *--> "detailedPerson      " Person
+UniquePersonList --> Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+Person *--> Company
+Person *--> Job
+Person *-right> "*" Tag
+Person *--> Mark
+Person *-left> LastModifiedDateTime
+Person *--> Note
+Person *--> "0..1" Schedule
+Person *--> "0..1" ScheduleName
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
-
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Phone -[hidden]right-> Email
+Email -[hidden]right-> Company
 
-ModelManager --> "~* filtered" Person
+
+ModelManager -[hidden]-> "~* filtered" Person
+ModelManager -->  Person
 @enduml
