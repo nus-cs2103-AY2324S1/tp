@@ -6,6 +6,7 @@ pageNav: 4
 
 # LoveBook User Guide
 
+## **Overview**
 LoveBook, is a **dating-focused** application, revolving around providing **serial daters** with a **convenient**
 and **enjoyable** tool to enhance their dating experiences. Featuring **user preferences management**, **date
 organization**,
@@ -13,7 +14,7 @@ organization**,
 *effectiveness** of your
 online dating journey.
 
-## Table of Contents
+## **Table of Contents**
 
 * [Glossary](#glossary)
     * [Common Symbols](#common-symbols)
