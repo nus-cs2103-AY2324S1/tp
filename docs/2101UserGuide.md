@@ -7,8 +7,7 @@ title: User Guide
 
 <figure>
     <img src="images/logo_removebg.png"
-         alt="CCACommander Logo"
-         style="centralise-img">
+         alt="CCACommander Logo">
 </figure>
 
 ## Introduction
@@ -322,15 +321,13 @@ Here is an example command where we want to view the events in which the **membe
 
 <figure>
     <img src="images/viewMemberPreCommand.png"
-         alt="viewMember Pre Command"
-         style="centralise-img">
+         alt="viewMember Pre Command">
     <figcaption>Before executing the <code>viewMember</code> command</figcaption>
 </figure>
 <br>
 <figure>
     <img src="images/viewMemberPostCommand.png"
-         alt="viewMember Post Command"
-         style="centralise-img">
+         alt="viewMember Post Command">
     <figcaption>After executing the <code>viewMember</code> command</figcaption>
 </figure>
 
@@ -349,15 +346,13 @@ Here is an example command where we want to view the members that the **event** 
 
 <figure>
     <img src="images/viewEventPreCommand.png"
-         alt="viewEvent Pre Command"
-         style="centralise-img">
+         alt="viewEvent Pre Command">
     <figcaption>Before executing the <code>viewEvent</code> command</figcaption>
 </figure>
 <br>
 <figure>
     <img src="images/viewEventPostCommand.png"
-         alt="viewEvent Post Command"
-         style="centralise-img">
+         alt="viewEvent Post Command">
     <figcaption>After executing the <code>viewEvent</code> command</figcaption>
 </figure>
 
@@ -464,8 +459,7 @@ Here’s how you can use it: `help`
 
 <figure>
     <img src="images/helpWindow.png"
-         alt="Help Window"
-         style="centralise-img">
+         alt="Help Window">
     <figcaption>A help pop-up window will appear upon entering the <code>help</code> command</figcaption>
 </figure>
 
