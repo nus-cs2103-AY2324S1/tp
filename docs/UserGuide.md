@@ -160,7 +160,7 @@ We can break the GUI into several parts:
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[s/SUBJECT]…​` can be used as ` ` (i.e. 0 times), `s/English`, `s/English s/Chinese` etc.
 
-* When providing parameters starting with any of the prefixes used by Tutorium `(n/, p/, e/, a/, g/, l/, n/, s/ and d/)` to fields,
+* When providing parameters starting with any of the prefixes used by Tutorium `(n/, p/, e/, a/, g/, l/, n/, s/, d/ and y/)` to fields,
   users should not add spaces between the prefix for that field and the input value.
   e.g. Filtering students with the address `e/house` should be done with the command `filter a/e/house` rather than `filter a/ e/house`.
 
