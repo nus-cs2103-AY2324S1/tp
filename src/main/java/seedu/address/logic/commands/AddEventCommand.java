@@ -36,7 +36,7 @@ public class AddEventCommand extends Command {
             + "[" + PREFIX_GROUP + "GROUP]... \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_EVENT_NAME + "FumbleLog Meeting "
-            + PREFIX_DATE + "2020-10-30 "
+            + PREFIX_DATE + "2024-01-30 "
             + PREFIX_START_TIME + "1000 "
             + PREFIX_END_TIME + "1200 "
             + PREFIX_NAME + "Ken "

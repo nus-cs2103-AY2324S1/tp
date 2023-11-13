@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNASSIGN_GROUPS;
 
 import java.time.LocalDate;
@@ -50,6 +51,7 @@ public class EditPersonCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_BIRTHDAY + "BIRTHDAY] "
+            + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_GROUP + "GROUP]... "
             + "[" + PREFIX_UNASSIGN_GROUPS + "GROUP]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -112,7 +114,6 @@ public class EditPersonCommand extends Command {
         } else {
             model.updateGroups();
         }
-
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
@@ -130,6 +131,7 @@ public class EditPersonCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Birthday updatedBirthday = editPersonDescriptor.getBirthday().orElse(personToEdit.getBirthday());
+        Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
 
         Set<Group> updatedGroups = new HashSet<>();
 
@@ -158,8 +160,6 @@ public class EditPersonCommand extends Command {
             }
             updatedGroups.removeAll(editPersonDescriptor.getUnassignGroups().get());
         }
-
-        Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
 
 
         Optional<Phone> phone = Optional.ofNullable(updatedPhone);
@@ -252,7 +252,7 @@ public class EditPersonCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, birthday, groups, unassignGroups);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, birthday, remark, groups, unassignGroups);
         }
 
         public void setName(Name name) {
