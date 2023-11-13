@@ -397,6 +397,7 @@ Alias: `find`
 * All fields are searched (including tags).
 
 * Keywords can match as parts of words. e.g. `john` will match `Johnny`.
+
 * Keywords can overlap. e.g. `samm my` will match `Sammy`.
 
 * Fosterers must match all keywords (i.e. `AND` search).<br>
@@ -411,7 +412,7 @@ Alias: `find`
 |-------------------|--------------------------|------------|
 | `&`               | Logical AND              | lowest     |
 | `/`               | Logical OR               | low        |
-| `' '` (space)     | Logical AND              | high       |
+| '` `' (space)     | Logical AND              | high       |
 | `(` and `)`       | Parentheses for grouping | highest    |
 
 e.g. `a & b / c d` is the same as `a & (b / (c & d))`.
