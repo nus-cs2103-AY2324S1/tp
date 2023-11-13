@@ -902,7 +902,7 @@ testers are expected to do more *exploratory* testing.
        2. `createMember n/Andy Tan g/Male p/91234567 e/andytan@gmail.com a/10 Kent Ridge Crescent, Singapore 119278 t/logs` has been entered once before.
     2. Test case: `editMember 1 n/Andy Tan`<br>
        Expected: No member is edited. Error details shown in the result display. Command box remains the same.
-    3. Other incorrect editMember commands to try: `editMember 1`, `editMember` with valid index, but invalid values in fields to be edited (For invalid values of fields, refer to User Guide).<br>
+    3. Other incorrect `editMember` commands to try: `editMember 1`, `editMember` with valid index, but invalid values in fields to be edited (For invalid values of fields, refer to User Guide).<br>
        Expected: Similar to previous.
 
 ### Deleting a member
@@ -944,7 +944,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all events using the `list` command. Multiple events in the list.
     2. Test case: `editEvent 1 l/Pioneer House d/2023-10-25`<br>
        Expected: Location and date of first event is edited. Details of event edited shown in the result display. Command box is cleared.
-    3. For other positive test cases, try `editMember` with a valid index and at least one field to edit with a valid input.<br>
+    3. For other positive test cases, try `editEvent` with a valid index and at least one field to edit with a valid input.<br>
        Expected: Similar to previous.
 
 1. Unsuccessfully editing an event
@@ -953,7 +953,7 @@ testers are expected to do more *exploratory* testing.
         2. `createEvent n/Run l/NUS Track d/2023-09-20 t/Training` has been entered once before.
     2. Test case: `editEvent 1 n/Run`<br>
        Expected: No event is edited. Error details shown in the result display. Command box remains the same.
-    3. Other incorrect editEvent commands to try: `editMember 1`, `editMember` with valid index, but invalid values in fields to be edited (For invalid values of fields, refer to User Guide).<br>
+    3. Other incorrect editEvent commands to try: `editEvent 1`, `editEvent` with valid index, but invalid values in fields to be edited (For invalid values of fields, refer to User Guide).<br>
        Expected: Similar to previous.
 
 ### Deleting an event
@@ -995,7 +995,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Successfully editing an enrolment
     1. Prerequisites: List all members and events using the `list` command. Multiple members and events in the list.
-   1. Prerequisite: `enrol m/1 e/1 h/3 r/Role: Social Media Manager` has been entered once before.
+    1. Prerequisite: `enrol m/1 e/1 h/3 r/Role: Social Media Manager` has been entered once before.
 
     2. Test case: `editEnrolment m/1 e/1 h/5 r/Role: Project Director`<br>
        Expected: Number of hours and remark of the enrolment of first member to first event is edited. Details of enrolment edited shown in the result display. Command box is cleared.
@@ -1038,7 +1038,7 @@ testers are expected to do more *exploratory* testing.
 1. Unsuccessfully viewing a member
 
     1. Prerequisites: List all members using the `list` command. Multiple members in the list.
-    1. Test case: `deleteEvent 0`<br>
+    1. Test case: `viewMember 0`<br>
        Expected: No member is viewed. Error details shown in the result display. Command box remains the same.
 
     1. Other incorrect viewMember commands to try: `viewMember`, `viewMember x` (where x is larger than the list size)<br>
@@ -1053,7 +1053,7 @@ testers are expected to do more *exploratory* testing.
 1. Unsuccessfully viewing an event
 
     1. Prerequisites: List all events using the `list` command. Multiple events in the list.
-    1. Test case: `deleteEvent 0`<br>
+    1. Test case: `viewEvent 0`<br>
        Expected: No event is viewed. Error details shown in the result display. Command box remains the same.
 
     1. Other incorrect viewEvent commands to try: `viewEvent`, `viewEvent x` (where x is larger than the list size)<br>
@@ -1073,8 +1073,8 @@ testers are expected to do more *exploratory* testing.
 1. Successfully finding an event
     1. Test case: `findEvent Training`<br>
        Expected: Event list updated with all events with name matching the word "Training". Number of events with name "Training" shown in the result display. Command box is cleared.
-2. Unsuccessfully finding a member
-    1. Test case: `findMember`<br>
+2. Unsuccessfully finding an event
+    1. Test case: `findEvent`<br>
        Expected: Event list is not updated. Error details shown in the result display. Command box remains the same.
 
 ### Undo
@@ -1094,7 +1094,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisite: The last command to be successfully executed is `undo`.
     2. Test case: `redo`<br>
        Expected: Previous state before the `undo` will be restored. Command that was redone shown in the result display. Command box is cleared.
-3. Unsuccesfully undo a command
+3. Unsuccesfully redo a command
     1. Prerequisite: The last command to be successfully executed is a command that can be undone (View User Guide for list of commands that can be undone).
     2. Test case: `redo`<br>
        Expected: No command is redone. Error details shown in the result display. Command box remains the same.
