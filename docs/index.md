@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default.md
 title: UniMate
 ---
 [![Java CI](https://github.com/AY2324S1-CS2103-F13-4/tp/actions/workflows/gradle.yml/badge.svg?branch=master)](https://github.com/AY2324S1-CS2103-F13-4/tp/actions/workflows/gradle.yml)
