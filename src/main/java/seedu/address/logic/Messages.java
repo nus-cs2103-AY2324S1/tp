@@ -78,6 +78,10 @@ public class Messages {
             builder.append("; Birthday: ")
                     .append(person.getBirthday().forDisplay());
         }
+        if (person.hasRemark()) {
+            builder.append("; Remark: ")
+                    .append(person.getRemark());
+        }
         if (person.hasGroups()) {
             builder.append("; Groups: ");
             person.getGroups().forEach(builder::append);

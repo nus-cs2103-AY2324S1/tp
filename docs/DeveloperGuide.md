@@ -265,12 +265,23 @@ The [**`java.util.Optional<T>`**](https://docs.oracle.com/javase/8/docs/api/java
 To add a person, the user must specify the name of the person using the `n/` prefix. The user can then specify the optional attributes of the person using the following prefixes:
 
 <box type="info">
+
 Except for the `Name`, all the fields given to the `add_person` command are optional.
+
 </box>
 
 The flow for the `add_person` command is described by the following sequence diagram:
 
 <img src="images/AddPersonSequenceDiagram2.png" alt="AddPersonSequenceDiagram2" width=600 />
+
+Step 1:
+The `LogicManager` invokes `AddPersonCommand::execute`, which in turn calls `Model::addPerson`.
+
+Step 2:
+The `Model` will invoke `addPerson` in `AddressBook`, which in turn calls `add` in `UniquePersonList` to add the person to the list.
+
+Step 3:
+The `AddPersonCommand` then continues its execution as defined by [this](#parser-commands) sequence diagram.
 
 #### Feature details
 1. The application will validate the arguments supplied by the user; whether the `Name` is unique and supplied, and whether the optional fields follow the correct format. 
@@ -408,12 +419,12 @@ when a group is added, duplicate persons will be deleted from the individual per
 
 ### Ability to find persons and events
 
-The `find` commands in our application displays persons and/or events that fit the keyword(s).
+The `find_XYZ` commands in our application displays persons and/or events that fit the keyword(s).
 
 #### Implementation
 
 The original `find` command has been split into three new commands, `find_person`, `find_event`, and `find_all`, which
-are collectively called `find` commands.
+are collectively called `find_XYZ` commands.
 * `find_person` command allows the user to find persons with fitting name or groups.
 * `find_event` command allows the user to find events with fitting name, assigned persons and groups, or person under assigned groups.
 * `find_all` command allows the user to find persons and events, which includes the criteria mentioned above.
@@ -428,18 +439,24 @@ class. The predicate is then passed to `Model#updateFilteredEventList(Predicate<
 
 `find_all` command covers the mechanism of both commands mentioned above, which uses both predicates and calls both functions in `Model`.
 
-As a result, the `ObservableList<Person>` and/or `ObservableList<Event>` is updated with the filtered lists of persons and events.
+As a result, the `ObservableList<Person>` and/or `ObservableList<Event>` are updated with the filtered lists of persons and events.
 The `UI` component is notified of these new changes to the lists and updates the UI accordingly, which will show the updated lists.
 
 #### Feature details
-1. The `find` commands can accept one or more parameter `keyword` for searching persons and/or events.
-2. A `PersonNameOrGroupContainsKeywordsPredicate` and/or `EventNameOrGroupContainsKeywordsPredicate` will be created and a `find` command will be created with the predicates.
-3. The `find` command will then be executed and the `UI` will be updated with the filtered lists of persons and/or events.
 
-The flow for the `find` commands are described by the following sequence diagrams:
+1. The `find_XYZ` commands can accept one or more parameter `keyword` for searching persons and/or events.
+2. A `PersonNameOrGroupContainsKeywordsPredicate` and/or `EventNameOrGroupContainsKeywordsPredicate` will be created and a `FindXYZ` command will be created with the predicates.
+3. The `FindXYZ` command will then be executed and the `UI` will be updated with the filtered lists of persons and/or events.
 
+The flow for the `find_XYZ` commands are described by the following sequence diagrams:
+
+#### `find_person`
 ![FindPersonSequenceDiagram](images/FindPersonSequenceDiagram.png)
+
+#### `find_event`
 ![FindEventSequenceDiagram](images/FindEventSequenceDiagram.png)
+
+#### `find_all`
 ![FindAllSequenceDiagram](images/FindAllSequenceDiagram.png)
 
 #### General design considerations
