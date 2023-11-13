@@ -107,7 +107,8 @@ public class EditTeamLeaderCommandTest {
 
 
         //Change the teamLeader back to original
-        EditTeamLeaderCommand reverseEditTeamLeaderCommand = new EditTeamLeaderCommand(teamName, originalTeamLeaderName);
+        EditTeamLeaderCommand reverseEditTeamLeaderCommand = new EditTeamLeaderCommand(teamName,
+                originalTeamLeaderName);
 
         String expectedReverseMessage = String.format(EditTeamLeaderCommand.MESSAGE_EDIT_TEAM_LEADER_SUCCESS,
                 Messages.editTeamLeaderFormat(teamName, newTeamLeaderName, originalTeamLeaderName));
