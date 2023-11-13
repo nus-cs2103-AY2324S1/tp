@@ -387,7 +387,7 @@ handling it for you.
 
 <box type="info" header="**Note**">
 The name change is permanent so removing previous interviews will not change back the name. That is if both
-`technical1` and `technical2` exist, deleting `technical1` will not change `technical2` back to `technical1`.
+<code>technical1</code> and <code>technical2</code> exist, deleting <code>technical1</code> will not change <code>technical2</code> back to <code>technical1</code>.
 </box>
 
 Duplicate handling: 
