@@ -494,7 +494,7 @@ Current displayed contacts:
 
 **Step 3.** The user enters `sort /by name /order desc` to sort the filtered list by name in descending order.
 The NetworkBook parser parses this into a sort command using a sort command parser.
-The sort command parser calls `PersonSortComparator#generateComparator()` to generate the appropriate comparator.
+The sort command parser constructs a new `PersonSortComparator`, which uses the static method `generateComparator()` to generate the appropriate comparator.
 
 ![SortingParsingSequenceDiagram](images/SortingParsingSequenceDiagram.png)
 
@@ -502,7 +502,7 @@ The sort command parser calls `PersonSortComparator#generateComparator()` to gen
 
 </div>
 
-**Step 4.** The sort command is executed. It calls `Model#updateDisplayedPersonList()`, updating the predicate of the `SortedList`.
+**Step 4.** The sort command is executed. It calls `updateDisplayedPersonList()` of the model, updating the predicate of the `SortedList`.
 This newly sorted list is then rendered in the main UI upon updating of the model.
 
 Current displayed contacts:
@@ -557,7 +557,6 @@ The following activity diagram summarizes what happens when a command is execute
     * The sorting and filtering is controlled by a `NetworkBook` instance.
     * The status bar could read the sorting and filtering predicate/comparator directly.
     * However, this increases coupling between model and UI which is undesirable. Hence, this alternative was not chosen.
-
 
 --------------------------------------------------------------------------------------------------------------------
 
