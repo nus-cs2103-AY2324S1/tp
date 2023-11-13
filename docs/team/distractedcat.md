@@ -5,7 +5,7 @@ title: Guo Yuheng's Project Portfolio Page
 
 ### Project: Fumblelog
 
-FFumbleLog is a desktop productivity application used for managing contacts and events. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+FumbleLog is a desktop productivity application used for managing contacts and events. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 **Given below are my contributions to the project:**
  
 * **Code contributed**: [DistractedCat](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=distractedcat&breakdown=true)
