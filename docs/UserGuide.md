@@ -482,7 +482,7 @@ fp
 
 This command hides all persons that do not match the search criteria. <br>
 (i.e. If no persons match the search criteria, the list will be empty.)<br><br>
-To reset the persons view, simply run the <code>listPerson</code> command to list all persons.
+To reset the persons view, simply run the <a href='#12-listing-all-persons-listperson'><code>listPerson</code> command</a> to list all persons.
 
 " %}
 
@@ -751,7 +751,7 @@ ft
 
 This command hides all tasks that do not match the search criteria. <br>
 (i.e. If no tasks match the search criteria, the list will be empty.)<br><br>
-To reset the tasks view, simply run the <code>listTask</code> command to list all tasks.
+To reset the tasks view, simply run the <a href='#22-listing-all-tasks-listtask'><code>listTask</code> command</a> to list all tasks.
 
 " %}
 
@@ -964,7 +964,7 @@ fd
 
 This command hides all tasks that are not done. <br>
 (i.e. If no tasks are not done, the list will be empty.)<br><br>
-To reset the tasks view, simply run the <code>listTask</code> command to list all tasks.
+To reset the tasks view, simply run the <a href='#22-listing-all-tasks-listtask'><code>listTask</code> command</a> to list all tasks.
 
 " %}
 
@@ -999,7 +999,7 @@ fnd
 
 This command hides all tasks that are done. <br>
 (i.e. If no tasks are done, the list will be empty.)<br><br>
-To reset the tasks view, simply run the <code>listTask</code> command to list all tasks.
+To reset the tasks view, simply run the <a href='#22-listing-all-tasks-listtask'><code>listTask</code> command</a> to list all tasks.
 
 " %}
 
@@ -1213,7 +1213,7 @@ ftag
 
 This command hides all persons and tasks that do not match the search criteria. <br>
 (i.e. If no persons or tasks match the search criteria, the list will be empty.)<br><br>
-To reset the persons and tasks view, simply run the <code>listAll</code> command to list all persons and tasks.
+To reset the persons and tasks view, simply run the <a href='#42-listing-all-persons-and-tasks-listall'><code>listAll</code> command</a> to list all persons and tasks.
 
 " %}
 
@@ -1265,7 +1265,7 @@ fatag
 
 This command hides all persons and tasks that do not match the search criteria. <br>
 (i.e. If no persons or tasks match the search criteria, the list will be empty.)<br><br>
-To reset the persons and tasks view, simply run the <code>listAll</code> command to list all persons and tasks.
+To reset the persons and tasks view, simply run the <a href='#42-listing-all-persons-and-tasks-listall'><code>listAll</code> command</a> to list all persons and tasks.
 
 " %}
 
