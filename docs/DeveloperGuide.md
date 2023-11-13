@@ -414,9 +414,9 @@ Here is the activity diagram from when a user inputs an add command:
 ![Add Activity Diagram](images/AddActivityDiagram.png)
 
 ### Alternatives Considered
-We considered allowing the add feature to add `Notes`, `Member`, `Deadline`, and `Priority` at one go. However, we also needed to consider ease of use by the user when entering all these attributes at one go using the `add` command. Therefore, we concluded that these 4 attributes should be optional to be entered all at once using `add`.
+We considered allowing the add feature to add `Member`, `Deadline`, and `Priority` at one go. However, we also needed to consider ease of use by the user when entering all these attributes at one go using the `add` command. Therefore, we concluded that these 3 attributes should be optional to be entered all at once using `add`.
 
-Only the `Description` has been made compulsory. The `Edit` feature will allow users to add and update `Deadline`, `Priority`. The `Note` and `Assign` features will allow for `note` and `member` to be added respectively.
+Only the `Description` has been made compulsory. The `Edit` feature will allow users to add and update `Deadline`, `Priority` and `Member`. The `Note` feature will allow for `note` to be added.
 
 
 ## Mark Feature
