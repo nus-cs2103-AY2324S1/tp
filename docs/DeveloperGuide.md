@@ -563,29 +563,30 @@ HealthSync caters to clinic assistants in small private clinic, enabling them to
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                         | I want to …​                                        | So that I can…​                                                           |
+| Priority | As a...                                        | I can...                                           | So that I can...                                                         |
 |----------|------------------------------------------------|----------------------------------------------------|--------------------------------------------------------------------------|
 | `* * *`  | beginner of the app for an important operation | auto-save all my data                              | not lose my data when something goes wrong                               |
-| `* * *`  | busy frontdesk worker                          | retrieve patient information                       | answer their queries                                                     |
+| `* * *`  | frontdesk worker                               | retrieve patient information                       | make use of the patient data when I need them                            |
 | `* * *`  | frontdesk worker                               | create patient entries                             | add entries when new patients visit                                      |
-| `* * *`  | frontdesk worker                               | find a patient by name                             | locate details of persons without having to go through the entire list   |
+| `* * *`  | frontdesk worker                               | find a patient by some field they possess          | locate details of persons without having to go through the entire list   |
 | `* * *`  | frontdesk worker                               | delete a patient entry                             | clean and update the database when patient no longer exist               |
 | `* * *`  | frontdesk worker                               | edit patient entries                               | update their details, especially for upcoming appointment dates          |
-| `* * `   | a new user of the app                          | view hints on commonly used commands               | be familiar with the app as soon as possible                             |
+| `* * *`  | frontdesk worker                               | store patient appointment information              | track when they next come to the clinic                                  |
 | `* * `   | a new user of the app                          | view preloaded sample data                         | know how the basic UI look like when it is populated                     |
+| `* * `   | a new user of the app                          | purge all sample data from the app                 | add my own data easily when I want to use the app                        |
+| `* * `   | a new user of the app                          | have easy access to a help sheet                   | check what commands I can and cannot use in a situation                  |
+| `* * `   | frontdesk worker                               | add medical histories to patients                  | view and filter patients accordingly                                     |
+| `* * `   | frontdesk worker                               | document patient encounters                        | maintain up-to-date records of patient information                       |
 | `* * `   | frontdesk worker                               | use app with shortcuts                             | get my task done very quickly                                            |
-| `* * `   | frontdesk worker                               | have calendar-like UI to create appointments       | show calendar to patients and allow smoother appointment booking process |
 | `* * `   | frontdesk worker                               | see conflicts in appointment schedules             | seamlessly schedule appointments for patients                            |
-| `* * `   | frontdesk worker                               | reminder when patient's appointment is coming soon | call and remind patients accordingly                                     |
-| `* * `   | healthcare provider                            | document patient encounters(ie. exam notes)        | maintain up-to-date records of patient information                       |
-| `* `     | a new user of the app                          | have physical UI Buttons                           | use to execute tasks before I'm familiar with shortcuts                  |
-| `* `     | frontdesk worker                               | have a very optimised app                          | do my task and have data reading almost instantly (O(1))                 |
-| `* `     | frontdesk worker                               | add tags to patients                               | view and filter patients accordingly                                     |
-| `* `     | frontdesk worker                               | leverage on database statistics                    | analyse data (ie. how many appointments booked/ month for doctors)        |
+| `* * `   | frontdesk worker                               | reminder when patient's appointment is coming soon | call-up and remind patients, and prepare for the day accordingly         |
+| `* `     | a new user of the app                          | have physical UI Buttons                           | use them to execute tasks before I'm familiar with shortcuts             |
+| `* `     | a new user of the app                          | access an in-app help sheet                        | easily see what to do when I need help without opening another program   |
+| `* `     | a new user of the app                          | get in-app hints as I use the app                  | quickly acclimatise to using the app as I use it                         |
+| `* `     | frontdesk worker                               | have a very optimised app                          | do my task and have data reading almost instantly                        |
+| `* `     | frontdesk worker                               | leverage on statistics in my patient list          | analyse data (ie. how many appointments booked/ month for doctors)       |
 | `* `     | frontdesk worker                               | save back-up or archive patient details somewhere  | maintain a fast application while still having data securely stored      |
-
-
-*{More to be added}*
+| `* `     | frontdesk worker                               | have calendar-like UI to create appointments       | show calendar to patients and allow smoother appointment booking process |
 
 ### Use cases
 
