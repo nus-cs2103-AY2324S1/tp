@@ -374,6 +374,15 @@ Now, with all the musician contacts in your list, you are ready to create your f
 
 **Things to Note:**
 * The name of the band must be unique.
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Note:**
+
+Conditions for **unique** band name: Unique sequence of alphanumeric characters (case-insensitive)
+
+</div>
+
 * To add the genres the band specialises in using the `g/` prefix, you can only add the ones included in a [pre-defined list](#list-of-valid-instrumentsgenres) of genres.
 
 
@@ -758,8 +767,6 @@ The list of valid instruments and genres accept **only lowercase letters**. For 
 | **[Find Musicians](#find-musicians-find)**    | `find [n/NAME]…​ [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`                                 | `find n/John i/Piano`                                                                                           |
 
 [Back To ToC](#table-of-contents)
-
-<div style="page-break-after: always;"></div>
 
 ### Band Command summary
 

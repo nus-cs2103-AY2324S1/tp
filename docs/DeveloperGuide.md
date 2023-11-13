@@ -814,3 +814,5 @@ Given below are the planned enhancements for our project.
 5. The current `findb` command is a bit confusing because its main use case is to list all members in a specific band. It has little relevance to finding bands containing a specific keyword. We plan to rename this command to `showmembers` to make it more intuitive to the user.
 
 6. The application currently allows unlimited input length for the name and tag of musicians and bands, e.g. name, email. As a result, the GUI truncates the unusually long input. We plan to limit the length of fields to 100 characters to prevent the UI from breaking.
+
+7. The current design of UI is not intuitive enough for the user. There are times when the two panels are not synced. For example, when the user is filtering musician panel, the band panel remains idle. We propose to improve the UI design by having a home page, a musician page and a band page. By switching between pages, redundant information will be hidden and the user will be able to view only the information of interest.
