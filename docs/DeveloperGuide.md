@@ -849,7 +849,7 @@ Here is the mapping between original command keywords and shortcuts:
    3. Test case: `edit id/S7654321B m/cancer m/diabetes`
       Expected: The medical histories of John Doe is updated to `cancer` and `diabetes`
    4. Other valid commands to try:  Edit command with any combination of editable fields, as long as at most one prefix of the fields to be edited is 
-   provided. Note that for the medical history (m/) prefix, more than one prefix can be provided.
+   provided. Note that for the medical history (m/) prefix, multiple prefixes can be provided.
       Expected: The corresponding fields are updated
 
 3. Undo Editing of Patient
