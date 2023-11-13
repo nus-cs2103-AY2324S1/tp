@@ -1,0 +1,74 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box UI  UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+participant ":PersonProfile" as PersonProfile UI_COLOR
+participant ":CommandBox" as CommandBox UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ViewModeParser" as ViewModeParser LOGIC_COLOR
+participant "e:ViewExitCommand" as ViewExitCommand LOGIC_COLOR
+participant "commandResult:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> MainWindow : executeCommand("exit")
+activate MainWindow
+
+MainWindow -> PersonProfile : getPerson()
+activate PersonProfile
+
+PersonProfile --> MainWindow : get personToEdit
+deactivate PersonProfile
+
+MainWindow -> LogicManager : executeInView("exit", personToEdit, targetIndex)
+activate LogicManager
+
+LogicManager -> ViewModeParser : parseCommand("exit", personToEdit, targetIndex)
+activate ViewModeParser
+
+create ViewExitCommand
+ViewModeParser -> ViewExitCommand
+activate ViewExitCommand
+
+ViewExitCommand --> ViewModeParser : s
+deactivate ViewExitCommand
+
+ViewModeParser --> LogicManager : s
+deactivate ViewModeParser
+
+LogicManager -> ViewExitCommand : execute()
+activate ViewExitCommand
+
+ViewExitCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> ViewExitCommand
+deactivate Model
+
+create CommandResult
+ViewExitCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ViewExitCommand :
+deactivate CommandResult
+
+
+ViewExitCommand --> LogicManager : commandResult
+deactivate ViewExitCommand
+
+LogicManager --> MainWindow : commandResult
+deactivate LogicManager
+
+group ref [Handle View Exit]
+    MainWindow -[hidden]-> CommandBox
+end
+
+@enduml
