@@ -233,7 +233,7 @@ Output:
 
 ### Filtering list with specified language : `language`
 
-Filter the list of flash cards by the specified language. All the flash cards whose word or translation is in the specified language will be displayed.
+Filters the list of flash cards by the specified language. All the flash cards whose word or translation is in the specified language will be displayed.
 * The search is case-insensitive. e.g `french` will match `French`
 
 [Command Format](#commands): `language [<SPECIFIED_LANGUAGE>]`
@@ -287,7 +287,7 @@ Output: `Review Session has ended.`
 
 ### Revealing the other side of the flash card: `reveal`
 
-Shows the translation of the flash card given by index if it is hidden. Otherwise, hides the translation of the flash card if it is revealed.
+Shows the translation of the flash card given by index if it is hidden. Otherwise, hides the translation of the flash card.
 
 [Command Format](#commands): `reveal [<INDEX>]`
 
