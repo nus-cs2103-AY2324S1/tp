@@ -329,6 +329,7 @@ public class VersionedClassManagerTest {
 
         versionedClassManager.configReset();
         assertEquals(versionedClassManager, new VersionedClassManager(emptyClassManager));
+        assert versionedClassManager.getClassManagerStateList().size() == 1;
     }
 
     @Test
@@ -337,6 +338,7 @@ public class VersionedClassManagerTest {
 
         versionedClassManager.configReset();
         assertEquals(versionedClassManager, new VersionedClassManager(classManagerWithAmy));
+        assert versionedClassManager.getClassManagerStateList().size() == 1;
     }
 
     @Test
@@ -346,6 +348,7 @@ public class VersionedClassManagerTest {
 
         versionedClassManager.configReset();
         assertEquals(versionedClassManager, new VersionedClassManager(classManagerWithBob));
+        assert versionedClassManager.getClassManagerStateList().size() == 1;
     }
 
     @Test
@@ -355,6 +358,7 @@ public class VersionedClassManagerTest {
 
         versionedClassManager.configReset();
         assertEquals(versionedClassManager, new VersionedClassManager(classManagerWithCarl));
+        assert versionedClassManager.getClassManagerStateList().size() == 1;
     }
 
     @Test
@@ -367,6 +371,7 @@ public class VersionedClassManagerTest {
         versionedClassManager.undo();
         versionedClassManager.configReset();
         assertEquals(versionedClassManager, new VersionedClassManager(emptyClassManager));
+        assert versionedClassManager.getClassManagerStateList().size() == 1;
     }
 
     @Test
@@ -378,6 +383,7 @@ public class VersionedClassManagerTest {
         versionedClassManager.undo();
         versionedClassManager.configReset();
         assertEquals(versionedClassManager, new VersionedClassManager(classManagerWithAmy));
+        assert versionedClassManager.getClassManagerStateList().size() == 1;
     }
 
     @Test
@@ -388,6 +394,16 @@ public class VersionedClassManagerTest {
         versionedClassManager.undo();
         versionedClassManager.configReset();
         assertEquals(versionedClassManager, new VersionedClassManager(classManagerWithBob));
+        assert versionedClassManager.getClassManagerStateList().size() == 1;
+    }
+
+    @Test
+    public void loadReset_success() {
+        VersionedClassManager versionedClassManager = prepareClassManagerList(emptyClassManager, classManagerWithAmy);
+
+        versionedClassManager.loadReset(classManagerWithBob);
+        assertEquals(versionedClassManager, new VersionedClassManager(classManagerWithBob));
+        assert versionedClassManager.getClassManagerStateList().size() == 1;
     }
 }
 

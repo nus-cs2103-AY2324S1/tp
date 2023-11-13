@@ -111,6 +111,14 @@ public class VersionedClassManager extends ClassManager {
         return currentStatePointer < classManagerStateList.size() - 1;
     }
 
+    /**
+     * Returns current list of {@code ReadOnlyClassManager} objects in state list.
+     * @return list of ReadOnlyClassManager objects
+     */
+    public List<ReadOnlyClassManager> getClassManagerStateList() {
+        return classManagerStateList;
+    }
+
     @Override
     public boolean equals(Object other) {
         // short circuit if same object

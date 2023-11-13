@@ -81,7 +81,7 @@ Before reading our User Guide, here are some quick tips:
 
      </box>
 
-2. Words that are <span style="color:#0d6efd">in blue</span> are hyperlinks. They will redirect you to a different part of the User Guide or an external link when you click on them. For example, [this hyperlink](#welcome-to-class-manager-2023) will redirect you to the first page of the User Guide.
+2. Words that are <span style="color:#0d6efd">in blue</span> are hyperlinks. They will redirect you to a different part of the User Guide or an external link when you click on them. For example, [this hyperlink](#welcome-to-class-manager-2023) will redirect you to the top of the User Guide.
 
    <box type="tip" seamless>
 
