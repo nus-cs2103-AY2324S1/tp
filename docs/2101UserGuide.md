@@ -101,6 +101,9 @@ This guide uses the following features to make it easier for you to navigate aro
 
 
 --------------------------------------------------------------------------------------------------------------------
+
+> [Back to top](#)
+
 <div style="page-break-after: always;"></div>
 
 ## Navigating User Interface
@@ -141,7 +144,11 @@ Example:
 Upon entering the <kbd>⌫ Backspace</kbd> or the <kbd>↵ Enter</kbd> key, users will have to re-navigate from the most recent command as it will be treated as an edit or entry of command.
 </div>
 
+
 --------------------------------------------------------------------------------------------------------------------
+
+> [Back to top](#)
+
 <div style="page-break-after: always;"></div>
 
 ## Features
@@ -172,6 +179,8 @@ Upon entering the <kbd>⌫ Backspace</kbd> or the <kbd>↵ Enter</kbd> key, user
 </div>
 
 <hr class="feature-class-separator">
+
+> [Back to top](#)
 
 <div style="page-break-after: always;"></div>
 
@@ -228,6 +237,8 @@ Here is an example command where we delete the member at **index** 1:
 </div>
 
 <hr class="feature-class-separator">
+
+> [Back to top](#)
 
 <div style="page-break-after: always;"></div>
 
@@ -291,6 +302,8 @@ Here is an example command where we delete the event at **index** 1:
 
 <hr class="feature-class-separator">
 
+> [Back to top](#)
+
 <div style="page-break-after: always;"></div>
 
 ### Enrolment Commands
@@ -342,7 +355,10 @@ Here is an example command where we unenrol the member at **member index** 1 fro
 
 <div markdown="block" class="alert alert-info">:information_source: The `MEMBER_INDEX`/`EVENT_INDEX` parameter refers to the index number shown in the **currently displayed** member/event list.
 </div>
+
 <hr class="feature-class-separator">
+
+> [Back to top](#)
 
 <div style="page-break-after: always;"></div>
 
@@ -429,7 +445,7 @@ Here is an example command where we find all events with the event name of "Part
 
 <div markdown="block" class="alert alert-info">:information_source:
 The find commands require the names to be typed in full, meaning "Nich" will not suffice for finding "Nicholas". 
-To make it convenient for you, the names do not have to be capitalised! 
+The names do not have to be capitalised too! 
 </div>
 
 <div markdown="block" class="alert alert-primary">:bulb:
@@ -447,7 +463,8 @@ Here’s how you use it: `list`
 
 <hr class="feature-class-separator">
 
-<div style="page-break-after: always;"></div>
+> [Back to top](#)
+
 ### Utility Commands
 CCACommander provides you with powerful utility commands to make your admin tasks even more of a breeze than it was.
 
@@ -531,6 +548,8 @@ CCACommander data are saved automatically after any command that changes the dat
 
 <hr class="feature-class-separator">
 
+> [Back to top](#)
+
 <div style="page-break-after: always;"></div>
 ## FAQ
 
@@ -570,6 +589,7 @@ This glossary provides definitions for the special terms used in this user guide
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
+
 ## Command Summary
 
 Action | Format, Examples
@@ -594,7 +614,10 @@ Action | Format, Examples
 [**Help**](#help-help) | `help`
 [**Exit**](#exit-exit) | `exit`
 
+> [Back to top](#)
+
 <div style="page-break-after: always;"></div>
+
 ## List of Acceptable Values
 
 <table class="tg">
@@ -678,3 +701,5 @@ Action | Format, Examples
   </tr>
 </tbody>
 </table>
+
+> [Back to top](#)
