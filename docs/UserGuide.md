@@ -184,6 +184,7 @@ Format: `import FILENAME.csv`
 - The columns should be "Name", "Phone", "Email", "Address", "Gender", "Sec level", "Nearest Mrt Station", "Subject", "Enrol Date"
 - Enrol Date can be left blank
 - There must be a Enrol Date header after every Subject header
+- You can use the sample [student_data_test.csv](https://github.com/AY2324S1-CS2103T-W13-2/tp/files/13331810/student_data_test.csv) file provided to try this feature. However, noted that the date format may be different in different devices, make sure they are in the format MMM YYYY (e.g. Jul 2023) before importing the file.
 - Example:
 ![.csv file for 'import student_data.csv'](images/ug_images/fileExample.png)
 </box>
