@@ -14,10 +14,13 @@ import seedu.flashlingo.model.flashcard.words.TranslatedWord;
  */
 public class SampleDataUtil {
     public static FlashCard[] getSampleFlashCards() {
-        return new FlashCard[]{new FlashCard(new OriginalWord("sorry", "eng"),
-            new TranslatedWord("gomen", "jap"), new Date(), new ProficiencyLevel(6)),
-            new FlashCard(new OriginalWord("hi", "eng"),
-                    new TranslatedWord("konnichiwa", "jap"), new Date(), new ProficiencyLevel(1))
+        return new FlashCard[]{
+            new FlashCard(new OriginalWord("Welcome", "English"),
+                new TranslatedWord("欢迎", "Chinese"), new Date(), new ProficiencyLevel(1)),
+            new FlashCard(new OriginalWord("to", "English"), new TranslatedWord("来", "Chinese"),
+                new Date(), new ProficiencyLevel(1)),
+            new FlashCard(new OriginalWord("Flashlingo", "English"),
+                new TranslatedWord("闪邻国", "Chinese"), new Date(), new ProficiencyLevel(1))
         };
     }
 

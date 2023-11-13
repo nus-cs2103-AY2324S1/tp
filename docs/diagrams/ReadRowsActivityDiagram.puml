@@ -1,0 +1,27 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 14
+
+left header <font size=14 color=black>Activity: Read rows and update model</font>
+
+start
+while () is ([Have filled row])
+    :Read row from the first sheet;
+    :Trim the words;
+      if () then ([Word is invalid])
+        :Throw exception "empty word";
+        stop
+      else ()
+        :Create FlashCard object;
+        :Add the object to temporary list;
+      endif
+    endwhile
+  :Add list of FlashCards to the model;
+  if () then ([Duplicate card])
+          :Throw exception "duplicate";
+        else ()
+          :Return CommandResult;
+           endif
+stop
+@enduml

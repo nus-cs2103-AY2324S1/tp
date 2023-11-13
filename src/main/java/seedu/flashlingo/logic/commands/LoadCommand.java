@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -69,9 +70,10 @@ public class LoadCommand extends Command {
 
         Workbook workbook = new XSSFWorkbook(fis);
         Sheet sheet = workbook.getSheetAt(0);
+        DataFormatter formatter = new DataFormatter();
         for (Row row : sheet) {
-            String originalWordValue = row.getCell(0) == null ? "" : row.getCell(0).getStringCellValue();
-            String translatedWordValue = row.getCell(1) == null ? "" : row.getCell(1).getStringCellValue();
+            String originalWordValue = formatter.formatCellValue(row.getCell(0));
+            String translatedWordValue = formatter.formatCellValue(row.getCell(1));
             ArrayList<String> validWords = trimAndVerifyWords(originalWordValue, translatedWordValue);
             String originalWord = validWords.get(0);
             String translatedWord = validWords.get(1);
