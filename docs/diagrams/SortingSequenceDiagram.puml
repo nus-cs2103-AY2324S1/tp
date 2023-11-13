@@ -2,6 +2,7 @@
 'https://plantuml.com/sequence-diagram
 !include style.puml
 skinparam ArrowFontStyle plain
+skinparam sequenceReferenceBackgroundColor white
 
 box UI UI_COLOR_T1
 Participant ":MainWindow" as MainWindow UI_COLOR
