@@ -294,7 +294,4 @@ public class Group {
             .toString();
     }
 
-    public int size() {
-        return listOfGroupMates.size();
-    }
 }

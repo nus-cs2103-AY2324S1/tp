@@ -21,7 +21,6 @@ public class ListGroupCommandParser implements Parser<ListGroupCommand> {
         if (args.length() != 0) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListGroupCommand.MESSAGE_USAGE));
         }
-
         return new ListGroupCommand();
     }
 }

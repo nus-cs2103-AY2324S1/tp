@@ -58,7 +58,6 @@
     -fx-opacity: 1;
 }
 
-// to separate the contact boxes
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
@@ -298,13 +297,11 @@
     -fx-background-color: #D2B48C
 }
 
-
 #resultDisplay .content{
     -fx-background-color: #9B6572;
     border-color: #B88491;
     border-radius: 0;
 }
-
 
 #groups {
     -fx-hgap: 7;

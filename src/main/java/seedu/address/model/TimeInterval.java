@@ -151,18 +151,20 @@ public class TimeInterval {
     }
 
     /**
+     * Check whether start if before, equal or after otherTime.
+     * @param otherTime is the TimeInterval that we want to compare to.
      *
-     * @param otherTime
-     * @return
+     * @return int representing whether this TimeInterval start is before, equal to, or after otherTime TimeInterval.
      */
     public int compareStart(TimeInterval otherTime) {
         return this.start.compareTo(otherTime.start);
     }
 
-    public int compareEnd(TimeInterval otherTime) {
-        return this.end.compareTo(otherTime.end);
-    }
-
+    /**
+     * Return the DayOfWeek for start of TimeInterval
+     *
+     * @return DayOfWeek for the start
+     */
     public DayOfWeek getStartTimeDay() {
         return this.start.getDay();
     }
