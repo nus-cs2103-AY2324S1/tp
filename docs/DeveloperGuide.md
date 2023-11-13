@@ -998,8 +998,13 @@ Use case ends.
 **Extensions**
 
 
-* 2a. There are no persons matching the specified keywords
+* 2a. There are no persons matching the specified keywords.
     * UniMate displays a message that 0 people have been displayed.
+
+      Use case ends.
+* 2b. All indicated fields are left empty instead.
+    * UniMate displays all available contacts.
+
       Use case ends.
 
 //@author nicrandomlee
@@ -1016,6 +1021,99 @@ Use case ends.
 
 - 1a. User uses the wrong delimiter or makes a spelling mistake, or provides incorrect number of arguments
     - UniMate displays a message to show a helper message outlining the correct syntax and available sort options
+
+//@author Fallman2
+
+**Use case: UC15 Adding a Task.**
+
+**MSS**
+
+1. User requests to add a Task.
+2. UniMate adds the task.
+
+  Use case ends.
+
+**Extensions**
+
+* 1a. User leaves the description field empty.
+  * UniMate displays a message to indicate that the description cannot be empty.
+  
+  Use case ends.
+* 1b. User attempts to create a Task that is identical to another Task in the Task Manager.
+  * UniMate displays a message to indicate that there is already a duplicate task present.
+
+  Use case ends.
+
+**Use case: UC16 Viewing the task list.**
+
+**MSS**
+
+1. User requests to switch the list from the event list to the task list.
+2. UniMate switches the list.
+
+  Use case ends.
+
+**Extensions**
+
+* 1a. The list displayed is already the task list.
+  * UniMate displays the event list instead.
+
+  Use case ends.
+
+**Use case: UC17 Deleting a task.**
+
+**MSS**
+
+1. User switches the event list to the task list to view it (UC17).
+2. User requests to delete a task.
+3. UniMate deletes the task from the TaskManager.
+
+  Use case ends.
+
+**Extensions**
+
+* 2a. There are no tasks to delete .
+  * UniMate displays an error message indicating that the index indicated is invalid.
+
+  Use case ends.
+
+**Use case: UC18 Sorting Tasks.**
+
+**MSS**
+
+1. User switches the event list to the task list to view it (UC17).
+2. User requests to sort the tasks by description.
+3. UniMate sorts the tasks displayed by description alphabetically.
+
+  Use case ends.
+
+**Extensions**
+
+* 2a. User requests to sort the tasks by deadline instead.
+  * UniMate sorts the tasks displayed by deadline from earliest to latest.
+  
+  Use case ends.
+
+**Use case: UC19 Clearing Events within a Time Range.**
+
+**MSS**
+
+1. User requests to clear all events within a time range.
+2. UniMate deletes all events that overlap with the time range.
+
+  Use case ends.
+
+**Extensions**
+
+* 1a. Time range provided has a start time after the end time.
+  * UniMate displays an error message indicating that the start time must be before the end time.
+
+  Use case ends.
+* 1b. There are no events within the time range.
+  * UniMate displays an error message indicating that there are no events within the indicated times.
+
+  Use case ends.
+
 //@author
 
 ### Non-Functional Requirements

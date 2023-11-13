@@ -83,7 +83,7 @@ Given below are my contributions to the project.
   * Credits: Code for this command was written by me, with assistance from lihongguang00.
 
 
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=authorship&tabAuthor=Fallman2&tabRepo=AY2324S1-CS2103-F13-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
 * **Project management**:
     * Managed releases `v1.2` - `v1.4` (3 releases) on GitHub
@@ -94,14 +94,20 @@ Given below are my contributions to the project.
         * Added UG documentation for the features `clearEvents`, `addTasks`, `deleteTasks`, `sortTasks`, `switchList` 
       and `viewContactEvents` [\#86](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/86)
     * Developer Guide:
-        * `to be added soon,`
+        * Added DG documentation of Use Cases 4 to 7 and UC 12.
+        * Added DG documentation of Use Cases 15 to 19 [\#188](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/188).
+        * Added DG documentation on the implementation of `TaskManager`, Adding Tasks, Deleting Tasks, Sorting Tasks [\#168](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/168/files), Filtering Persons and Deleting events [\#52](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/52).
+        * Added DG sequence diagram for ClearEventsCommand and edited the class diagram for Model [\#176](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/176).
+        * Wrote DG documentation on Manual Testing Instructions for all newly implemented features, except Storage related features [\#179](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/179).
+        * Wrote 2 Planned Enhancements for DG [\#182](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/182).
+        * Wrote on the implementation of TaskList and EventList in the Effort section of the DG [\#182](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/182/files).
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#2](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/2), 
   [\#26](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/26), [\#42](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/42)
   , [\#44](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/44), [\#51](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/51)
   , [\#63](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/63), [\#70](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/70)
-  , [\#75](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/75), [\#149](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/149).
+  , [\#75](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/75), [\#149](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/149), [\#167](https://github.com/AY2324S1-CS2103-F13-4/tp/pull/167).
     * Reported bugs and suggestions for other teams in the class (examples: [\#1](https://github.com/Fallman2/ped/issues/1), 
   [\#2](https://github.com/Fallman2/ped/issues/2), [\#3](https://github.com/Fallman2/ped/issues/3), [\#4](https://github.com/Fallman2/ped/issues/4)
   , [\#5](https://github.com/Fallman2/ped/issues/5), [\#6](https://github.com/Fallman2/ped/issues/6), [\#7](https://github.com/Fallman2/ped/issues/7)
