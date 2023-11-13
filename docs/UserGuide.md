@@ -23,21 +23,21 @@ solution to manage your student details, including attendance records and assign
 - [4. Features](#4-features)
   - [4.1 Viewing Help](#41-viewing-help)
   - [4.2 Basic Course Management](#42-basic-course-management)
-    - [4.2.1 Creating an address book: `course create`](#421-creating-an-address-book--course-create)
-    - [4.2.2 Deleting an address book: `course delete`](#422-deleting-an-address-book--course-delete)
-    - [4.2.3 Switching an address book: `course switch`](#423-switching-an-address-book--course-switch)
-    - [4.2.4 Editing an address book: `course edit`](#424-editing-an-address-book--course-edit)
+    - [4.2.1 Creating an address book: `course create`](#421-creating-an-address-book-course-create)
+    - [4.2.2 Deleting an address book: `course delete`](#422-deleting-an-address-book-course-delete)
+    - [4.2.3 Switching an address book: `course switch`](#423-switching-an-address-book-course-switch)
+    - [4.2.4 Editing an address book: `course edit`](#424-editing-an-address-book-course-edit)
   - [4.3 Basic Student Management](#43-basic-student-management)
-    - [4.3.1 Adding a new contact: `add`](#431-adding-a-new-contact--add)
-    - [4.3.2 Editing a contact : `edit`](#432-editing-a-contact--edit)
-    - [4.3.3 Marking attendance of student: `mark`](#433-marking-attendance-of-student--mark)
-    - [4.3.4 Viewing summary of attendance : `list attendance`](#434-viewing-summary-of-attendance--list-attendance)
-    - [4.3.5 Searching for student's contact via keyword : `find`](#435-searching-for-students-contact-via-keyword--find)
-    - [4.3.6 Listing students : `list students`](#436-listing-students--list-students)
-    - [4.3.7 Deleting a student : `delete`](#437-deleting-a-student--delete)
-    - [4.3.8 Deleting multiple students : `delete all`](#438-deleting-multiple-students--delete-all)
-    - [4.3.9 Merging two students : `merge`](#439-merging-two-students--merge)
-    - [4.3.10 Viewing detailed attendance records : `view`](#4310-viewing-detailed-attendance-records--view)
+    - [4.3.1 Adding a new contact: `add`](#431-adding-a-new-contact-add)
+    - [4.3.2 Editing a contact : `edit`](#432-editing-a-contact-edit)
+    - [4.3.3 Marking attendance of student: `mark`](#433-marking-attendance-of-student-mark)
+    - [4.3.4 Viewing summary of attendance : `list attendance`](#434-viewing-summary-of-attendance-list-attendance)
+    - [4.3.5 Searching for student's contact via keyword : `find`](#435-searching-for-students-contact-via-keyword-find)
+    - [4.3.6 Listing students : `list students`](#436-listing-students-list-students)
+    - [4.3.7 Deleting a student : `delete`](#437-deleting-a-student-delete)
+    - [4.3.8 Deleting multiple students : `delete all`](#438-deleting-multiple-students-delete-all)
+    - [4.3.9 Merging two students : `merge`](#439-merging-two-students-merge)
+    - [4.3.10 Viewing detailed attendance records : `view`](#4310-viewing-detailed-attendance-records-view)
   - [4.4 Exiting Program](#44-exiting-program)
   - [4.5 Data Management](#45-data-management)
     - [4.5.1 Saving the data](#451-saving-the-data)
@@ -341,7 +341,7 @@ Creates a new contact in the course with the specified name and details.
 
 </div>
 
-#### 4.3.2 Editing a contact : `edit`
+#### 4.3.2 Editing a contact: `edit`
 
 ![edit contact](images/editContact.png)
 
@@ -439,7 +439,7 @@ Marks the attendance of one or more student.
 
 </div>
 
-#### 4.3.4 Viewing summary of attendance : `list attendance`
+#### 4.3.4 Viewing summary of attendance: `list attendance`
 
 ![list attendance](images/listAttendance.png)
 
@@ -479,7 +479,7 @@ Shows a summary of attendance records including list of absentees.
 
 </div>
 
-#### 4.3.5 Searching for student's contact via keyword : `find`
+#### 4.3.5 Searching for student's contact via keyword: `find`
 
 ![find command](images/findCommand.png)
 
@@ -510,7 +510,7 @@ Finds a student's or multiple students' contact either via their name or student
 
 </div>
 
-#### 4.3.6 Listing students : `list students`
+#### 4.3.6 Listing students: `list students`
 
 ![list students](images/listStudents.png)
 
@@ -521,7 +521,7 @@ Shows a list of students in the course.
 *  Shows a list of all students in the course.
 
 
-#### 4.3.7 Deleting a student : `delete`
+#### 4.3.7 Deleting a student: `delete`
 
 ![delete contact](images/deleteContact.png)
 
@@ -553,7 +553,7 @@ Deletes the specified person from TAvigator.
 
 </div>
 
-#### 4.3.8 Deleting multiple students : `delete all`
+#### 4.3.8 Deleting multiple students: `delete all`
 
 ![delete all](images/deleteAll.png)
 
@@ -586,7 +586,7 @@ Deletes all students from the course or all students from the specified tutorial
 
 </div>
 
-#### 4.3.9 Merging two students : `merge`
+#### 4.3.9 Merging two students: `merge`
 
 ![merge](images/mergeCommand.png)
 
@@ -613,7 +613,7 @@ Merges two students in the current address book.
 
 </div>
 
-#### 4.3.10 Viewing detailed attendance records : `view`
+#### 4.3.10 Viewing detailed attendance records: `view`
 
 ![view](images/viewCommand.png)
 
