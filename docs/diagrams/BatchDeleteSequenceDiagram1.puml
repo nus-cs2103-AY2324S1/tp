@@ -32,7 +32,7 @@ DeleteMonth --> BatchDeleteCommandParser : deleteMonth
 deactivate DeleteMonth
 
 create BatchDeleteCommand
-BatchDeleteCommandParser -> BatchDeleteCommand : BatchDeleteCommand(deleteMonth)
+BatchDeleteCommandParser -> BatchDeleteCommand : BatchDeleteCommand(deleteMonth, null)
 activate BatchDeleteCommand
 
 BatchDeleteCommand --> BatchDeleteCommandParser : b
