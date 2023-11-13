@@ -207,6 +207,7 @@ Classes used by multiple components are in the `seedu.networkbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+<!-- @@author awhb -->
 ### Create new contact
 
 The implementation of the create command follows the convention of a normal command,
@@ -381,7 +382,7 @@ The `Person` opens the link by first detects which OS the application is running
 * On Mac OS, the `Person` executes the `open` command in the terminal through the [`Runtime`](https://docs.oracle.com/javase%2F7%2Fdocs%2Fapi%2F%2F/java/lang/Runtime.html) class, which is a built-in class in java language. The `open` command in the terminal opens the computer's default browser if the `URI` supplied is correctly formatted to be a web link.
 * On Ubuntu, the `Person` executes the `xdg-open` command in the terminal through the [`Runtime`](https://docs.oracle.com/javase%2F7%2Fdocs%2Fapi%2F%2F/java/lang/Runtime.html) class.
 
-
+<!-- @@author awhb -->
 ### Undo/redo
 
 The undo/redo mechanism is facilitated by `VersionedNetworkBook`. It extends `NetworkBook` with an undo/redo history of its state (encompassing list of all contacts and displayed list of contacts), stored internally as an `networkBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
@@ -466,7 +467,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 _{Explain here how the data archiving feature will be implemented}_
 
 <!-- @@author xenosf -->
-
 ### Sorting feature
 
 #### Implementation
@@ -514,7 +514,6 @@ The sort command parser constructs a new `PersonSortComparator`, which uses the 
 ![SortingParsingSequenceDiagram](images/SortingParsingSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SortCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
 </div>
 
 **Step 4.** The sort command is executed. It calls `updateDisplayedPersonList()` of the model, updating the predicate of the `SortedList`.
@@ -572,6 +571,31 @@ The following activity diagram summarizes what happens when a command is execute
     * The sorting and filtering is controlled by a `NetworkBook` instance.
     * The status bar could read the sorting and filtering predicate/comparator directly.
     * However, this increases coupling between model and UI which is undesirable. Hence, this alternative was not chosen.
+  
+<!-- @@author awhb -->
+### Find contacts by name
+
+The implementation of the command to find contacts by their names follows the convention of a normal command, where `FindCommandParser` class is responsible for parsing the user input string into an executable command. 
+
+![find diagram](images/find/FindDiagram.png)
+
+`FindCommandParser` first obtains the values input by the user after the keyword `find`.
+`FindCommandParser` ensures that there is at least one key term value after trimming the user input for space characters.
+If the above constraint is violated, `FindCommandParser` throws a `ParseException`.
+Otherwise, it creates a new instance of `FindCommand` that corresponds to the user input.
+
+`FindCommand` stores an instance of `NameContainsKeyTermsPredicate`, which represents a predicate that checks if a person's name contains at least one of the space-separated key terms the user has input. (Note: contains is defined here as a case-insensitive, antisymmetric relation; that is, A may contain B even if B does not contain A).
+
+Examples: 
+* "Ben" is contained in "Ben Leong".
+* "al" is contained in both "Alex Yeoh" and "Jiale".
+* "BenL" is not contained in "Ben Leong" because the 'space' character between the words in the name invalidates the contains relationship.
+
+Upon execution, `FindCommand` passes the instance of `NameContainsKeyTermsPredicate` to the model through the method `model::updateDisplayedPersonList`. The model then uses the predicate internally to update the displayed list of contacts. 
+
+We have considered the following alternative implementations:
+* Do not implement a separate command to find contact by name i.e. use the `filter` command where the `name` field is passed to the `/by` flag instead as the way to find contacts by their name.
+  * This is not optimal for our use case as the `find` command is a command we expect users to use often to search for contacts via their name. Hence simplifying the command call usage would make the experience more efficient for users. 
 
 <!-- @@author -->
 
@@ -638,6 +662,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
+<!-- @@author awhb -->
 **Use case: Create a new contact**
 
 **MSS**
