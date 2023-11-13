@@ -15,16 +15,19 @@ Given below are my contributions to the project.
 * **Add Contact Event Command**
   * What it does: Facilitates the overall functionality of the calendar by adding events.
   * Justification: Facilitates the overall functionality of comparing calendars between user and contact.
+  * Highlights: Maintains syntactic consistency with the "Add Event" command, ensuring that users can confidently engage with the application in a seamless and intuitive manner.
   * Credits: The command uses some methods and modified code implemented by lihongguang00 for the Calendar class.
 
 * **Delete Contact Event Command**
   * What it does: Adds an event to the personal calendar of a contact.
   * Justification: Facilitates the overall functionality of the calendar by deleting events.
+  * Highlights: Maintains syntactic consistency with the "Delete Event" command, ensuring that users can confidently engage with the application in a seamless and intuitive manner.
   * Credits: The command uses some methods and modified code implemented by fallman2 and lihongguang00.
 
 * **Storage classes**
   * What it does: Manages the storage for the TaskList, Calendar and contact's Calendars.
   * Justification: Facilitates the overall functionality of the application by maintaining proper storage of data.
+  * Highlights: This feature integrates with the current storage class, ensuring compatibility without disrupting the existing implementation or future iterations. The design prioritizes a non-intrusive collaboration, allowing the new functionality to coexist harmoniously with the established storage infrastructure.
   * Credits: Adapted code from AB3 addressbook's storage.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=authorship&tabAuthor=junhonglow&tabRepo=AY2324S1-CS2103-F13-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
