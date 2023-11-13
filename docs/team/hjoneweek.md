@@ -24,13 +24,13 @@ title: "Hanjoo's Project Portfolio Page"
   - Created the `RecordContainsKeywordPredicate` class, `FindRecordCommandParser` class, and the `FindRecordCommand` class to execute the `searchrecord` command.
 
 - **New Feature 3** Delete Record Feature [#88](https://github.com/AY2324S1-CS2103T-T12-4/tp/pull/88)
-  - Allows doctors to delete records of patients if necessary
+  - Allows doctors to delete records of patients if necessary.
   - Created the `DeleteRecordCommandParser` class and the `DeleteRecordCommand` class to execute the `deleterecord` command.
 
 - **Documentation**
   - User Guide
     - Added new sections explaining how to use the newly implemented features and commands, which are `addrecord`, `searchrecord`, and `deleterecord` command.
-    - Modified `addpatient` command (originally `addperson` command) section according to the updated attributes of the patient.
+    - Modified `addpatient` command (which was originally `add` command) section according to the updated attributes of the patient.
     - Reviewed the User Guide altogether as a team.
     
   - Developer Guide
