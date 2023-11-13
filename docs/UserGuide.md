@@ -104,8 +104,8 @@ Here's a quick guide to help you understand what they mean.
 
 1. Ensure that you have Java `11` or above installed in your Computer.
 2. Download the latest `LoveBook.jar` from [here](https://github.com/AY2324S1-CS2103T-F10-2/tp).
-3. Double-click the file to start the app. The window that appears will be similar to the one below. Note that in this case, we have sample data.<br>
-   ![Ui](images/Ui.png)
+3. Double-click the file to start the app. The window that appears will be similar to the one below.<br>
+   ![emptyLoveBook](images/emptyLoveBook.png)
 4. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing `Enter` to
    open the help window.<br>
    Some commands you can try:
@@ -210,7 +210,7 @@ Here's to you embarking on your LoveBook journey!
 
 <box type="tip">
 
-**Notes about the command format:**
+**Caution:**
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `edit INDEX METRIC/NEW_ARG`, `INDEX`, `NEW_ARG` and `METRIC` are parameters which can be used as
@@ -479,9 +479,11 @@ Order is limited to `increasing` or `decreasing` only
 </box>
 
 <box type="important">
+
 When sorting dates by a field where both have an equal value, say Kevin and Wayne are sorted by income and both have
 an income of 2000, applying commands such as edit or star, can affect the stability of the sort. However, the overall
 sorting order by value is preserved.
+             
 </box>
 
 Example:

@@ -540,6 +540,21 @@ the command `showP`
 
 <puml src="diagrams/ShowPrefSequenceDiagram.puml" width="600" />
 
+#### Design Considerations
+
+**Aspect: Choosing star to be an additional field for the add dates command**
+
+- **Alternative 1 (current choice):** Dates are starred only through the star command (
+  see [this](UserGuide.md#managing-preferences-and-getting-matches))
+    - Pros: Users can easily modify the starred status for any one of the dates by calling `star INDEX`
+    - Cons: Users cannot create a date and star it in one go using a single add dates command
+- **Alternative 2:** Let star be a field for the add dates command
+    - Pros: You can create a date and star the date in one go
+    - Cons: Makes the add command extra lengthy. Furthermore, the premise of the star command is that it's to be used on
+            an exceptional few dates. Hence, the time taken to fill in the extra star field, each time the user uses the 
+            add dates command, will exceed any potential time savings.
+      
+
 [Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Unstar dates

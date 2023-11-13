@@ -14,18 +14,18 @@ online dating journey.
 
 Given below are my contributions to the project.
 
-* **Star Command**:
+* **New Feature**: Star Command
     * What it does: Enables the starring of a date
     * Justification: To make it easier to identify a date who you like
     * Highlights: Created new classes and fields to implement the feature
 
 
-* **Unstar Command**:
+* **New Feature**: Unstar Command
   * What it does: Enables the unstarring of a date
   * Justification: To unstar dates that we no longer like
   * Highlights: Created new classes and fields to implement the feature
 
-* **Income field**:
+* **New Feature**: Income Field for each date
   * What it does: Added income field for each date
   * Justification: Income is an important factor as well in dating.
   * Highlights: Created new classes and fields to implement the feature
@@ -50,10 +50,11 @@ Given below are my contributions to the project.
     - Added documentation for star, unstar commands
     - Added quickstart tutorial
     - Ensured standardisation of format and commands
+    - Added tips and caution boxes
   * Developer Guide:
     - Added Sequence and Activity Diagrams for the `star` and `unstar` commands
     
 
 * **Community**:
+  * Reviewed PRs and gave constructive feedback to my teammates (PR(s) [#79](https://github.com/AY2324S1-CS2103T-F10-2/tp/pull/79))
 
-* **Tools**:
