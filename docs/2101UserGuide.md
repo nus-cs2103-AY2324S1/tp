@@ -130,7 +130,7 @@ Here are the important components of CCACommander that you will use and interact
 
 ## Command History
 You can quickly recall previously entered commands for convenience as CCACommander stores almost all (see the info card below to see what commands are stored) commands entered by the user. <br/>
-Upon selecting the command box, you can use the <kbd>↑</kbd> to <kbd>↓</kbd> key to navigate through the commands entered .
+Upon selecting the command box, you can use the <kbd>↑</kbd> to <kbd>↓</kbd> key to navigate through the commands entered.
 
 Example:
 1. You have just marked attendance for the first member in the member list using the `editEnrolment m/1 e/1 r/Present` command.
