@@ -12,6 +12,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.student.Student;
+import seedu.address.ui.StudentCard.CommandExecutor;
 
 /**
  * Panel containing the list of students.
@@ -20,6 +21,7 @@ public class StudentListPanel extends UiPart<Region> {
     private static final String FXML = "StudentListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(StudentListPanel.class);
 
+    private CommandExecutor showNote;
     @FXML
     private VBox columnContainer;
     @FXML
@@ -30,8 +32,9 @@ public class StudentListPanel extends UiPart<Region> {
     /**
      * Creates a {@code StudentListPanel} with the given {@code ObservableList}.
      */
-    public StudentListPanel(ObservableList<Student> studentList) {
+    public StudentListPanel(ObservableList<Student> studentList, CommandExecutor showNote) {
         super(FXML);
+        this.showNote = showNote;
         columnContainer.setAlignment(Pos.CENTER);
         studentListView.setItems(studentList);
         studentListView.setCellFactory(listView -> new StudentListViewCell());
@@ -49,7 +52,7 @@ public class StudentListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new StudentCard(student, getIndex() + 1).getRoot());
+                setGraphic(new StudentCard(student, getIndex() + 1, showNote).getRoot());
             }
         }
     }

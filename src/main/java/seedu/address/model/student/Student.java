@@ -22,17 +22,21 @@ public class Student {
 
     // Data fields
     private final Address address;
-    private final Set<RiskLevel> riskLevel = new LimitedHashSet<>(3);
+
+    // Each student should only have 1 risk level
+    private final Set<RiskLevel> riskLevel = new LimitedHashSet<>(1);
+    private final Note note;
 
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Address address, Set<RiskLevel> riskLevel) {
+    public Student(Name name, Phone phone, Address address, Set<RiskLevel> riskLevel, Note note) {
         requireAllNonNull(name, phone, address, riskLevel);
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.riskLevel.addAll(riskLevel);
+        this.note = note;
     }
 
     public Name getName() {
@@ -53,6 +57,10 @@ public class Student {
      */
     public Set<RiskLevel> getTags() {
         return Collections.unmodifiableSet(riskLevel);
+    }
+
+    public Note getNote() {
+        return note;
     }
 
     /**
@@ -102,7 +110,8 @@ public class Student {
                 .add("name", name)
                 .add("phone", phone)
                 .add("address", address)
-                .add("tags", riskLevel)
+                .add("risk level", riskLevel)
+                .add("note", note)
                 .toString();
     }
 

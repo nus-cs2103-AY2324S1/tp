@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalWellNus.getTypicalWellNus;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.WellNus;
-import seedu.address.testutil.TypicalStudents;
 
 public class JsonSerializableWellNusTest {
 
@@ -21,14 +21,15 @@ public class JsonSerializableWellNusTest {
     private static final Path DUPLICATE_STUDENT_FILE = TEST_DATA_FOLDER.resolve("duplicateStudentWellNus.json");
     private static final Path INVALID_APPOINTMENT_FILE = TEST_DATA_FOLDER.resolve("invalidAppointmentWellNus.json");
     private static final Path DUPLICATE_APPOINTMENT_FILE = TEST_DATA_FOLDER.resolve("duplicateAppointmentWellNus.json");
-
+    private static final Path APPOINTMENT_STUDENT_NOT_FOUND_FILE = TEST_DATA_FOLDER
+            .resolve("appointmentStudentNotFoundWellNus.json");
 
     @Test
     public void toModelType_typicalWellNusFile_success() throws Exception {
         JsonSerializableWellNus dataFromFile = JsonUtil.readJsonFile(TYPICAL_WELLNUS_FILE,
                 JsonSerializableWellNus.class).get();
         WellNus wellNusFromFile = dataFromFile.toModelType();
-        WellNus typicalStudentsWellNus = TypicalStudents.getTypicalAddressBook();
+        WellNus typicalStudentsWellNus = getTypicalWellNus();
         assertEquals(wellNusFromFile, typicalStudentsWellNus);
     }
 
@@ -59,6 +60,14 @@ public class JsonSerializableWellNusTest {
         JsonSerializableWellNus dataFromFile = JsonUtil.readJsonFile(DUPLICATE_APPOINTMENT_FILE,
                 JsonSerializableWellNus.class).get();
         assertThrows(IllegalValueException.class, JsonSerializableWellNus.MESSAGE_DUPLICATE_APPOINTMENT,
+                dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_appointmentStudentNotFound_throwsIllegalValueException() throws Exception {
+        JsonSerializableWellNus dataFromFile = JsonUtil.readJsonFile(APPOINTMENT_STUDENT_NOT_FOUND_FILE,
+                JsonSerializableWellNus.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializableWellNus.MESSAGE_STUDENT_NOT_FOUND,
                 dataFromFile::toModelType);
     }
 }

@@ -13,7 +13,7 @@ import java.time.LocalDate;
  */
 public class Date {
     public static final String MESSAGE_CONSTRAINTS =
-            "Date should follow yyyy-MM-dd";
+            "Date should follow yyyy-MM-dd and must be a valid calendar date.";
     public static final String VALIDATION_REGEX =
             "^(20[0-9]{2})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$";
     public final String value;
@@ -50,8 +50,14 @@ public class Date {
     }
 
 
+
+
     public String getDate() {
         return value;
+    }
+
+    public LocalDate getLocalDate() {
+        return localDate;
     }
 
     @Override

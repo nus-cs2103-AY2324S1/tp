@@ -16,6 +16,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyWellNus;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Note;
 import seedu.address.model.student.Student;
 import seedu.address.storage.Storage;
 
@@ -52,7 +54,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            storage.saveWellNus(model.getAddressBook());
+            storage.saveWellNus(model.getWellNusData());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -64,7 +66,7 @@ public class LogicManager implements Logic {
 
     @Override
     public ReadOnlyWellNus getAddressBook() {
-        return model.getAddressBook();
+        return model.getWellNusData();
     }
 
     @Override
@@ -78,8 +80,18 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public Note getStudentNote(int studentIndex) {
+        return getFilteredStudentList().get(studentIndex - 1).getNote();
+    }
+
+    @Override
+    public Name getStudentName(int studentIndex) {
+        return getFilteredStudentList().get(studentIndex - 1).getName();
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+        return model.getWellNusFilePath();
     }
 
     @Override

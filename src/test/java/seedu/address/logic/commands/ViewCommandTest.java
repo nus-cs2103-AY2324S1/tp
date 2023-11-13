@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_APPOINTMENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CATEGORY_STUDENT;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalWellNus.getTypicalWellNus;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,8 +22,8 @@ public class ViewCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalWellNus(), new UserPrefs());
+        expectedModel = new ModelManager(model.getWellNusData(), new UserPrefs());
     }
 
     @Test
@@ -57,6 +57,12 @@ public class ViewCommandTest {
     public void execute_viewStudents() {
         assertCommandSuccess(new ViewCommand("students"), model,
                 ViewCommand.MESSAGE_SUCCESS_STUDENT, expectedModel);
+    }
+
+    @Test
+    public void execute_viewAll() {
+        assertCommandSuccess(new ViewCommand("all"), model,
+                ViewCommand.MESSAGE_SUCCESS_ALL, expectedModel);
     }
 
     @Test

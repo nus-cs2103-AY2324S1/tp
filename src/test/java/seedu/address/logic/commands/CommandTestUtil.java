@@ -8,8 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RISK_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -30,6 +30,8 @@ import seedu.address.testutil.EditStudentDescriptorBuilder;
 public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
+
+    public static final String VALID_NAME_ALICE = "Alice Pauline";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
@@ -37,6 +39,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_RISK_LEVEL_LOW = "low";
     public static final String VALID_RISK_LEVEL_HIGH = "high";
+    public static final String VALID_NOTE_AMY = "course: psychology";
+    public static final String VALID_NOTE_BOB = "likes playing football";
     public static final String VALID_CATEGORY_APPOINTMENT = "appointments";
     public static final String VALID_CATEGORY_STUDENT = "students";
 
@@ -57,8 +61,8 @@ public class CommandTestUtil {
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
-    public static final String RISK_DESC_HIGH = " " + PREFIX_TAG + VALID_RISK_LEVEL_HIGH;
-    public static final String RISK_DESC_LOW = " " + PREFIX_TAG + VALID_RISK_LEVEL_LOW;
+    public static final String RISK_DESC_HIGH = " " + PREFIX_RISK_LEVEL + VALID_RISK_LEVEL_HIGH;
+    public static final String RISK_DESC_LOW = " " + PREFIX_RISK_LEVEL + VALID_RISK_LEVEL_LOW;
 
     public static final String DATE_DESC_AMY = " " + PREFIX_DATE + VALID_DATE_AMY;
     public static final String DATE_DESC_BOB = " " + PREFIX_DATE + VALID_DATE_BOB;
@@ -73,7 +77,8 @@ public class CommandTestUtil {
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_RISK_LEVEL_DESC = " "
+            + PREFIX_RISK_LEVEL + "dangerous"; // only 'high', 'medium', or 'low' allowed for risk level
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE
             + "2023-12-31a"; // 'a' not allowed in date
     public static final String INVALID_START_TIME_DESC = " " + PREFIX_START_TIME
@@ -90,12 +95,8 @@ public class CommandTestUtil {
     public static final EditCommand.EditStudentDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_RISK_LEVEL_HIGH).build();
-        DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_RISK_LEVEL_LOW).build();
+        DESC_AMY = new EditStudentDescriptorBuilder().withPhone(VALID_PHONE_AMY).withAddress(VALID_ADDRESS_AMY).build();
+        DESC_BOB = new EditStudentDescriptorBuilder().withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_BOB).build();
     }
 
     /**
@@ -133,10 +134,10 @@ public class CommandTestUtil {
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        WellNus expectedWellNus = new WellNus(actualModel.getAddressBook());
+        WellNus expectedWellNus = new WellNus(actualModel.getWellNusData());
         List<Student> expectedFilteredList = new ArrayList<>(actualModel.getFilteredStudentList());
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedWellNus, actualModel.getAddressBook());
+        assertEquals(expectedWellNus, actualModel.getWellNusData());
         assertEquals(expectedFilteredList, actualModel.getFilteredStudentList());
     }
     /**
@@ -147,7 +148,7 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredStudentList().size());
 
         Student student = model.getFilteredStudentList().get(targetIndex.getZeroBased());
-        final String[] splitName = student.getName().fullName.split("\\s+");
+        final String[] splitName = student.getName().value.split("\\s+");
         model.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredStudentList().size());

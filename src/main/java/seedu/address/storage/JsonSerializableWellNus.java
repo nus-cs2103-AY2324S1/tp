@@ -21,8 +21,11 @@ import seedu.address.model.student.Student;
 class JsonSerializableWellNus {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
-    public static final String MESSAGE_DUPLICATE_APPOINTMENT = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_APPOINTMENT = "Appointments list contains duplicate appointment(s).";
+    public static final String MESSAGE_STUDENT_NOT_FOUND = "Appointments list contains appointment(s) whose "
+            + "corresponding student is not found in students list";
 
+    public static final String MESSAGE_OVERLAPPING_APPOINTMENT = "Appointments list contains overlapping appointments.";
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
     private final List<JsonAdaptedAppointment> appointments = new ArrayList<>();
 
@@ -59,6 +62,7 @@ class JsonSerializableWellNus {
             if (wellNus.hasStudent(student)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
             }
+
             wellNus.addStudent(student);
         }
         for (JsonAdaptedAppointment jsonAdaptedAppointment : appointments) {
@@ -66,9 +70,16 @@ class JsonSerializableWellNus {
             if (wellNus.hasAppointment(appointment)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_APPOINTMENT);
             }
+            if (wellNus.hasNoStudentForAppointment(appointment)) {
+                throw new IllegalValueException(MESSAGE_STUDENT_NOT_FOUND);
+            }
+
+            if (wellNus.hasOverlapsWithAppointments(appointment)) {
+                throw new IllegalValueException(MESSAGE_OVERLAPPING_APPOINTMENT);
+            }
+
             wellNus.addAppointment(appointment);
         }
         return wellNus;
     }
-
 }

@@ -35,6 +35,10 @@ public class UniqueStudentList implements Iterable<Student> {
         return internalList.stream().anyMatch(toCheck::isSameStudent);
     }
 
+    public boolean hasName(Name name) {
+        return internalList.stream().anyMatch(student -> student.getName().equals(name));
+    }
+
     /**
      * Adds a student to the list.
      * The student must not already exist in the list.

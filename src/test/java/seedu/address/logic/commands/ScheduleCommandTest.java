@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalStudents.JON_ANG;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +18,7 @@ import seedu.address.model.ReadOnlyWellNus;
 import seedu.address.model.WellNus;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.exceptions.InvalidStartEndTimeException;
+import seedu.address.model.student.Student;
 import seedu.address.testutil.AppointmentBuilder;
 import seedu.address.testutil.ModelStub;
 
@@ -105,11 +107,27 @@ public class ScheduleCommandTest {
      */
     private class ModelStubAcceptingAppointmentAdded extends ModelStub {
         final ArrayList<Appointment> appointmentsAdded = new ArrayList<>();
+        final ArrayList<Student> studentsAdded = new ArrayList<>();
+        public ModelStubAcceptingAppointmentAdded() {
+            studentsAdded.add(JON_ANG);
+        }
 
         @Override
         public boolean hasAppointment(Appointment appointment) {
             requireNonNull(appointment);
             return appointmentsAdded.stream().anyMatch(appointment::isSameAppointment);
+        }
+
+        @Override
+        public boolean hasOverlapsWithAppointments(Appointment appointment) {
+            requireNonNull(appointment);
+            return appointmentsAdded.stream().anyMatch(appointment::isOverlappingAppointment);
+        }
+
+        @Override
+        public boolean hasNoStudentForAppointment(Appointment appointment) {
+            requireNonNull(appointment);
+            return studentsAdded.stream().anyMatch(student -> !student.getName().equals(appointment.getName()));
         }
 
         @Override
@@ -119,7 +137,7 @@ public class ScheduleCommandTest {
         }
 
         @Override
-        public ReadOnlyWellNus getAddressBook() {
+        public ReadOnlyWellNus getWellNusData() {
             return new WellNus();
         }
     }

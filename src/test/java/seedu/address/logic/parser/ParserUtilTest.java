@@ -25,6 +25,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_RISK_LEVEL = "#friend";
     private static final String VALID_NAME = "Rachel Walker";
+    private static final String VALID_NAME_2 = "Ben";
     private static final String VALID_PHONE = "12345678";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_RISK_LEVEL_1 = "high";
@@ -73,6 +74,14 @@ public class ParserUtilTest {
         String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
         Name expectedName = new Name(VALID_NAME);
         assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
+    }
+
+    @Test
+    public void parseName_validValueWithExtraWhitespace_returnsTrimmedName() throws Exception {
+        String nameWithExtraWhitespace = VALID_NAME + WHITESPACE + WHITESPACE + VALID_NAME_2;
+        String nameWithoutExtraWhitespace = VALID_NAME + " " + VALID_NAME_2;
+        Name expectedName = new Name(nameWithoutExtraWhitespace);
+        assertEquals(expectedName, ParserUtil.parseName(nameWithExtraWhitespace));
     }
 
     @Test
@@ -164,10 +173,9 @@ public class ParserUtilTest {
 
     @Test
     public void parseRiskLevel_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<RiskLevel> actualTagSet = ParserUtil.parseRiskLevel(Arrays.asList(VALID_RISK_LEVEL_1, VALID_RISK_LEVEL_2));
+        Set<RiskLevel> actualTagSet = ParserUtil.parseRiskLevel(Arrays.asList(VALID_RISK_LEVEL_1));
         Set<RiskLevel> expectedTagSet = new HashSet<RiskLevel>(Arrays.asList(
-                                                               new RiskLevel(VALID_RISK_LEVEL_1),
-                                                               new RiskLevel(VALID_RISK_LEVEL_2)));
+                                                               new RiskLevel(VALID_RISK_LEVEL_1)));
 
         assertEquals(expectedTagSet, actualTagSet);
     }

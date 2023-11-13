@@ -119,6 +119,21 @@ public class WellNus implements ReadOnlyWellNus {
     }
 
     /**
+     * Returns true if an appointment overlaps with {@code appointment} in the appointment list.
+     *
+     * @param appointment The appointment potentially added
+     * @return true if overlaps, false otherwise.
+     */
+    public boolean hasOverlapsWithAppointments(Appointment appointment) {
+        requireNonNull(appointment);
+        return appointments.overlaps(appointment);
+    }
+
+    public boolean hasNoStudentForAppointment(Appointment appointment) {
+        return !students.hasName(appointment.getName());
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */

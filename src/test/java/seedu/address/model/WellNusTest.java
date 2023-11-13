@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RISK_LEVEL_LOW;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudents.ALICE;
-import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalWellNus.getTypicalWellNus;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -39,7 +39,7 @@ public class WellNusTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        WellNus newData = getTypicalAddressBook();
+        WellNus newData = getTypicalWellNus();
         wellNus.resetData(newData);
         assertEquals(newData, wellNus);
     }

@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.risklevel.RiskLevel;
 import seedu.address.model.student.Address;
 import seedu.address.model.student.Name;
+import seedu.address.model.student.Note;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
 
@@ -22,11 +23,13 @@ import seedu.address.model.student.Student;
 class JsonAdaptedStudent {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Student's %s field is missing!";
+    public static final String EXCEED_RISK_LEVEL_SIZE_MESSAGE = "Student has more than one risk levels!";
 
     private final String name;
     private final String phone;
     private final String address;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedRiskLevel> tags = new ArrayList<>();
+    private final String note;
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
@@ -34,25 +37,28 @@ class JsonAdaptedStudent {
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("address") String address,
-                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                              @JsonProperty("tags") List<JsonAdaptedRiskLevel> tags,
+                              @JsonProperty("note") String note) {
         this.name = name;
         this.phone = phone;
         this.address = address;
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.note = note;
     }
 
     /**
      * Converts a given {@code Student} into this class for Jackson use.
      */
     public JsonAdaptedStudent(Student source) {
-        name = source.getName().fullName;
+        name = source.getName().value;
         phone = source.getPhone().value;
         address = source.getAddress().value;
         tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+                .map(JsonAdaptedRiskLevel::new)
                 .collect(Collectors.toList()));
+        note = source.getNote().value;
     }
 
     /**
@@ -62,9 +68,7 @@ class JsonAdaptedStudent {
      */
     public Student toModelType() throws IllegalValueException {
         final List<RiskLevel> studentRiskLevel = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            studentRiskLevel.add(tag.toModelType());
-        }
+
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -88,9 +92,30 @@ class JsonAdaptedStudent {
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
+
+        if (note == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName()));
+        }
+
+        if (!Note.isValidNote(note)) {
+            throw new IllegalValueException(Note.MESSAGE_CONSTRAINTS);
+        }
+
+        if (tags.size() > 1) {
+            throw new IllegalValueException(EXCEED_RISK_LEVEL_SIZE_MESSAGE);
+        }
+
+        assert tags != null;
+
+        for (JsonAdaptedRiskLevel riskLevel : tags) {
+            studentRiskLevel.add(riskLevel.toModelType());
+        }
+
+        final Note modelNote = new Note(note);
+
         final Address modelAddress = new Address(address);
         final Set<RiskLevel> modelTags = new HashSet<>(studentRiskLevel);
-        return new Student(modelName, modelPhone, modelAddress, modelTags);
+        return new Student(modelName, modelPhone, modelAddress, modelTags, modelNote);
     }
 
 }

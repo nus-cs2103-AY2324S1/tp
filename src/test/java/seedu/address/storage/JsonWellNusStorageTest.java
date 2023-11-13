@@ -3,10 +3,10 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalStudents.ALICE;
+import static seedu.address.testutil.TypicalStudents.ELLE;
 import static seedu.address.testutil.TypicalStudents.HOON;
 import static seedu.address.testutil.TypicalStudents.IDA;
-import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalWellNus.getTypicalWellNus;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -73,7 +73,7 @@ public class JsonWellNusStorageTest {
     @Test
     public void readAndSaveWellNus_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempWellNus.json");
-        WellNus original = getTypicalAddressBook();
+        WellNus original = getTypicalWellNus();
         JsonWellNusStorage jsonWellNusStorage = new JsonWellNusStorage(filePath);
 
         // Save in new file and read back
@@ -83,7 +83,7 @@ public class JsonWellNusStorageTest {
 
         // Modify data, overwrite exiting file, and read back
         original.addStudent(HOON);
-        original.removeStudent(ALICE);
+        original.removeStudent(ELLE);
         jsonWellNusStorage.saveWellNus(original, filePath);
         readBack = jsonWellNusStorage.readWellNus(filePath).get();
         assertEquals(original, new WellNus(readBack));

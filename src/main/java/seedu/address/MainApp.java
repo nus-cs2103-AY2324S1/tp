@@ -57,7 +57,7 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        WellNusStorage wellNusStorage = new JsonWellNusStorage(userPrefs.getAddressBookFilePath());
+        WellNusStorage wellNusStorage = new JsonWellNusStorage(userPrefs.getWellNusFilePath());
         storage = new StorageManager(wellNusStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
@@ -83,7 +83,7 @@ public class MainApp extends Application {
                 logger.info("Creating a new data file " + storage.getWellNusFilePath()
                         + " populated with a sample AddressBook.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleWellNus);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getWellNusFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
