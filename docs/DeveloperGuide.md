@@ -1052,7 +1052,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User leaves out parameters.
+* 1a. User leaves out at least one of field or order.
     * 1a1. HouR shows an error message.
 
   Use case returns back to step 1.
@@ -1080,7 +1080,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User leaves out parameters.
+* 1a. User leaves out at least one of employee id, start date, or end date.
   * 1a1. HouR shows an error message.
 
   Use case returns back to step 1.
@@ -1092,6 +1092,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1c. Dates are of invalid order or format.
   * 1c1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1d. Leave date to be added already exists.
+  * 1d1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1e. Adding the leave date causes number of leaves
+  for employee with given employee id to be over 14 days .
+  * 1e1. HouR shows an error message.
 
   Use case returns back to step 1.
 
@@ -1108,7 +1119,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User leaves out parameters.
+* 1a. User leaves out at least one of employee id, start date, or end date.
   * 1a1. HouR shows an error message.
 
   Use case returns back to step 1.
@@ -1139,7 +1150,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User leaves out parameters.
+* 1a. User leaves out at least one of employee id, old leave date, or new leave date.
   * 1a1. HouR shows an error message.
 
   Use case returns back to step 1.
@@ -1164,7 +1175,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case returns back to step 1.
 
-**Use case: Listing employees on leave**
+**Use case: List employees on leave**
 
 **MSS**
 
@@ -1175,7 +1186,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User leaves out parameters.
+* 1a. User leaves out date.
   * 1a1. HouR shows an error message.
 
   Use case returns back to step 1.
@@ -1185,19 +1196,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case returns back to step 1.
 
-**Use case: Adding a remark for an employee**
+**Use case: Add a remark for an employee**
 
 **MSS**
 
 1.  User requests to add a given remark to an employee with a given employee id.
-2.  HouR adds the remark to the list of remarks associated with the employee with the given employee id.
-3.  HouR shows the list of remarks associated with the employee with the given employee id.
+2.  HouR adds the remark to the list of remarks associated with the employee with the given employee id and
+    shows the list to the user.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User leaves out parameters.
+* 1a. User leaves out at least one of employee id or remark.
   * 1a1. HouR shows an error message.
 
   Use case returns back to step 1.
@@ -1207,19 +1218,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case returns back to step 1.
 
-**Use case: Deleting a remark for an employee**
+* 1c. Remark to be added already exists.
+  * 1c1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+**Use case: Delete a remark for an employee**
 
 **MSS**
 
 1.  User requests to delete a given remark from an employee with a given employee id.
-2.  HouR deletes the remark from the list of remarks associated with the employee with the given employee id.
-3.  HouR shows the list of remarks associated with the employee with the given employee id.
+2.  HouR deletes the remark from the list of remarks associated with the employee with the given employee id
+    and shows it to the user.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User leaves out parameters.
+* 1a. User leaves out at least one of employee id or remark.
   * 1a1. HouR shows an error message.
 
   Use case returns back to step 1.
@@ -1238,14 +1254,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to increase or decrease number of overtime hours taken by employee with given employee id by a given amount.
-2.  HouR updates the number of overtime hours taken by employee with given employee id by the given amount.
+1.  User requests to increase number of overtime hours taken by employee with given employee id by a given amount.
+2.  HouR increases the number of overtime hours taken by employee with given employee id by the given amount.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User leaves out parameters.
+* 1a. User leaves out at least one of employee id, operation (inc or dec), and amount.
   * 1a1. HouR shows an error message.
 
   Use case returns back to step 1.
@@ -1262,6 +1278,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1d. Amount given is not a positive integer.
   * 1d1. HouR shows an error message.
+
+  Use case returns back to step 1.
+
+* 1e. Updating the number of leaves causes the number to exceed 72 or fall below 0.
+  * 1e1. HouR shows an error message.
 
   Use case returns back to step 1.
 
