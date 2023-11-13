@@ -49,4 +49,4 @@ This project was done by a team of 4 members.
 [[portfolio](team/nicrandomlee.md)]
 
 - Role: Developer
-- Responsibilities: TBD
+- Responsibilities: Product Feature Enhancements
