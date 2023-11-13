@@ -223,7 +223,6 @@ Examples:
 * `add n/John Doe p/12345678 e/johnd@example.com a/John street, block 123, #01-01 g/M l/2 m/KR mrt s/Chemistry s/Physics`
 * `add n/Betsy Crowe p/87654321 e/betsycrowe@example.com a/Newgate Prison g/F l/2 m/KR mrt s/Chinese`
   <br>
-  ![result for 'add n/Betsy Crowe p/87654321 e/betsycrowe@example.com a/Newgate Prison g/F l/2 m/KR mrt s/Mathematics'](images/ug_images/addedResult.png)
 
 [↑ Back to table of contents](#table-of-contents)
 
@@ -272,7 +271,6 @@ Examples:
 *  `edit John Doe n/Joe` edits John Doe's name to "Joe".
 *  `edit 2 n/joey e/joey123@example.com` Edits the student (with index 2)'s name and email to be `joey` and `joey123@example.com` respectively.
    <br>
-   ![result for 'edit John Doe n/Joe'](images/ug_images/editedResult.png)
 
 [↑ Back to table of contents](#table-of-contents)
 
@@ -291,9 +289,9 @@ Format: `search KEYWORD`
   e.g. `Alfred` will return `alfred`, `Alfred Tan`
 
 Examples:
-* `search Lee` returns `Benjamin Lee` and `Eva Lee`<br>
+* `search Yu` returns `Bernice Yu` and `Betsy Yu`<br>
   <br>
-  ![result for 'search Lee'](images/ug_images/searchResult.png)
+  ![result for 'search Yu'](images/ug_images/searchResult.png)
 
 [↑ Back to table of contents](#table-of-contents)
 
@@ -312,7 +310,6 @@ Examples:
 * `delete John Doe`
 * `delete 1`
   <br>
-  ![result for 'delete John Doe'](images/ug_images/deletedResult.png)
 
 [↑ Back to table of contents](#table-of-contents)
 
@@ -332,12 +329,6 @@ Examples:
 * `undolevel` can be performed only when there is / are `uplevel` performed (and has not been undone) since user open application.
 
 Examples: `uplevel`, `undolevel`
-
-  ![before entering 'uplevel'](images/ug_images/beforeUpdate.png)
-
-  ![after entering 'uplevel'](images/ug_images/afterUpdate.png)
-
-  ![after entering 'undolevel'](images/ug_images/undoUpdate.png)
 
 [↑ Back to table of contents](#table-of-contents)
 
@@ -403,6 +394,9 @@ Examples:
 * `table s/` will show a table of students categorized by subject.
 * `table d/2023` will show a table of students categorized by earliest enrol month in 2023.
 
+Below is the table generated after entering `table l/`.
+    ![result for 'table l/'](images/ug_images/tableResult.png)
+
 [↑ Back to table of contents](#table-of-contents)
 
 <div style="page-break-after: always;"></div>
@@ -424,9 +418,9 @@ Examples:
 * `bar s/` will show a bar chart categorized by student subject.
 * `bar d/2023` will show a bar chart of students categorized by earliest enrol month in 2023.
 
-Below is the chart generated after entering `bar l/`.
+Below is the chart generated after entering `bar s/`.
 
-  ![result for 'bar l/'](images/ug_images/barResult.png)
+  ![result for 'bar s/'](images/ug_images/barResult.png)
 
 [↑ Back to table of contents](#table-of-contents)
 
