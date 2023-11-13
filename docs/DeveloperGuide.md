@@ -802,7 +802,7 @@ stringent enough, accepting invalid email formats. We plan to implement more tho
 email validation to ensure only valid email addresses are accepted.
 
 6. **Consistent Capitalization of Patient IDs:**
-While NRICs are case-insensitive, HealthSync does not enforce consistent capitalization 
+While IDs are case-insensitive, HealthSync does not enforce consistent capitalization 
 of patient IDs in the patient list. This is a cosmetic enhancement to maintain 
 uniformity in the application.
 
