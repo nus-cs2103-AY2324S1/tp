@@ -9,8 +9,6 @@ pageNav: 3
 <!-- * Table of Contents -->
 <page-nav-print />
 
---------------------------------------------------------------------------------------------------------------------
-
 <div style="page-break-after: always;"></div>
 
 ## **Setting up, getting started**
@@ -56,6 +54,8 @@ Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
+
+<div style="page-break-after: always;"></div>
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -142,6 +142,8 @@ The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Common classes
 
@@ -274,7 +276,7 @@ The following activity diagram summarizes what happens when a user executes a `s
   * Pros:
     * Enable users to view the unsorted student list for every launch.
   * Cons:
-    * Users have to resort the student list for every launch.
+    * Users have to re-sort the student list for every launch.
 * We made the choice of Alternative 1 over Alternative 2 as we insist on providing greater convenience.
 
 <div style="page-break-after: always;"></div>
@@ -320,13 +322,13 @@ The following activity diagram summarizes what happens when a user executes a `i
 ### Table feature
 
 #### Implementation
-The `table` command allows users to generate a statistical table either categorised by `gender`, `subject`, `sec level` or `enrol date`.
+The `table` command allows users to generate a statistical table categorised by `gender`, `subject`, `sec level` or `enrol date`.
 
 When the user enters a table command, the `AddressBookParser` parses the user's input and return a `TableCommand`.
 
-Note that there is no specifically a TableCommandParser for `TableCommand` just like `ListCommand`, `ExitCommand` and `HelpCommand`. The `AddressBookParser` can parse and return a `TableCommand`directly.
+Note that there is no specific TableCommandParser for `TableCommand` just like `ListCommand`, `ExitCommand` and `HelpCommand`. The `AddressBookParser` can parse and return a `TableCommand`directly.
 
-The parameters entered by user expected for a table command are either `g/`, `s/`, `l/` or `d/`. When the `TableCommand` instance created by `AddressBookParser` executes, it will return the corresponding CommandResult. E.g. `GenderTableCommandResult` created for the case `table g/` is entered by user. This `XXXTableCommandResult` carries the counts for each category that will be used for generating the table.
+The parameters entered by user expected for a table command are either `g/`, `s/`, `l/` or `d/`. When the `TableCommand` instance created by `AddressBookParser` executes, it will return the corresponding CommandResult. e.g. `GenderTableCommandResult` created when `table g/` is entered. This `XXXTableCommandResult` carries the counts for each category that will be used for generating the table.
 
 The following sequence diagram shows how the `table` command works. In this example, the user is executing the following command: `table s/`
 
@@ -792,6 +794,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Steps 1a1-1a2 are repeated until the command entered is correctly formatted. <br>
     Use case resumes from step 2.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC12 - Update the sec levels of students**
 
 **MSS**
@@ -927,6 +931,8 @@ testers are expected to do more *exploratory* testing.
   3. Test case: `filter l/3 s/Physics`<br>
       Expected: A list of all Secondary 3 students who study Physics is shown.
 
+<div style="page-break-after: always;"></div>
+
 ### Sorting the list of students
 
 1. Sorting the list of students.
@@ -1043,5 +1049,5 @@ Listed below are the enhancements we managed to add into Tutorium.
     if it would be considered an invalid phone number. We will add a validation check to restrict inputs to 8-digit phone numbers
     in future versions of the app.
 * Standardise prefix for year in data visualisation features.
-  * In the table and chart feature, the prefix used to indicate the year is `d/`, but for the line graph feature, it is `y\`. We
+  * In the table and chart feature, the prefix used to indicate the year is `d/`, but for the line graph feature, it is `y/`. We
     plan to standardise the prefix used to `y/` to make these commands more intuitive and easier to learn.

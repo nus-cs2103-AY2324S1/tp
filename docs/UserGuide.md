@@ -81,19 +81,12 @@ Info:<br>
 
 1. Copy the file to the folder you want to use as the _home folder_ for the Tutorium app.
 
-1. Double-click the file to launch it.
-
-<box type="info" seamless>
-Alternately, you can use the CLI to launch Tutorium.
-
 1. Open a command terminal. If you are using Windows, press the Windows key + R on your keyboard, type `cmd` and press Enter.
 If you are using Mac, click on the Launchpad icon in the Dock, type Terminal in the search field, and then click Terminal.
 
-1. "Go into" the folder you put the `tutorium.jar` file in using cd command. For example, if you put it in a folder named `Downloa`, then type this command into the terminal: `cd Tutorium`
+1. "Go into" the folder you put the `tutorium.jar` file in using cd command. For example, if you put it in a folder named `Download`, then type this command into the terminal: `cd Download`
 
 1. Key the `java -jar tutorium.jar` command in the terminal to run the application.<br>
-
-</box>
 
 <box type="tip" seamless>
 
@@ -231,7 +224,7 @@ Examples:
 ### Import data from .csv file: `import`
 
 Imports students' data into Tutorium.
-1. Move your .csv file into the folder containing Tutorium.
+1. Move your .csv file into the folder containing Tutorium.jar.
 2. Enter the import command with the following format (shown below).
 
 Format: `import FILENAME.csv`
@@ -517,14 +510,14 @@ Action     | Format, Examples
 **Import** | `import FILENAME.csv`<br> e.g., `import student_data_test.csv`
 **Edit**   | `edit INDEX prefix1/[field1] prefix2/[field2]`  <br> or `edit NAME prefix/[field] prefix/[field] prefix/[field]` <br> e.g., `edit John Doe n/Joe e/johndoe@example.com t/English`
 **Search** | `search [KEYWORD]`<br> e.g., `search Lee`
-**Delete** | `delete INDEX`<br> or `delete NAME` <br> e.g., `delete Joe`
-**Update** | `uplevel`<br> or `undolevel` <br>
+**Delete** | `delete INDEX` or `delete NAME` <br> e.g., `delete Joe`
+**Update** | `uplevel` or `undolevel`
 **Filter** | `filter prefix/FIELD_VALUE [MORE FIELDS]` <br> e.g., `filter g/F s/English s/Physics`
 **Sort**   | `sort in/[DESCRIPTION]` <br> e.g., `sort in/ASC`
 **Clear**  | `clear`
-**Show Table** | `table prefix/`<br> or `table d/YEAR` <br>
-**Show Bar Chart** | `bar prefix/`<br> or `bar d/YEAR` <br>
-**Show Line Chart** | `trend y/YEAR`
+**Show Table** | `table prefix/` or `table d/YEAR` <br> e.g., `table d/2023`
+**Show Bar Chart** | `bar prefix/` or `bar d/YEAR` <br> e.g., `bar d/2023`
+**Show Line Chart** | `trend y/YEAR` <br> e.g., `trend y/2023`
 **Export**   | `export v/VISUAL` <br> e.g., `export v/table`
 **Exit**   | `exit`
 
