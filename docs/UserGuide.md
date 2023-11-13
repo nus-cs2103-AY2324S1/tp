@@ -410,7 +410,6 @@ ep
 | `TAG` | `t/` | <img width=33px src='assets/svg/ug/not_required.svg'> | Tag(s) for the individual.|
 {: .field-table}
 
-<!-- editPerson -->
 - At least one of the optional fields must be provided for the command to be valid.
 - Fields that are not specified will preserve their existing values.
 - A person is uniquely identified by their `NAME`. This field is case sensitive.
@@ -1510,9 +1509,9 @@ To restore from a backup data file:<br>
 
 A combination of letters and numbers only, no spaces or special characters.
 
-For more information, see <a href='https://en.wikipedia.org/wiki/Alphanumericals' rel='noopener noreferrer' target='_blank'>Alphanumericals</a> on Wikipedia.
-
 Example: For tags, entries like `day1` or `day2` are valid, while entries like `day 1` or `day-2` are invalid.
+
+For more information, see <a href='https://en.wikipedia.org/wiki/Alphanumericals' rel='noopener noreferrer' target='_blank'>Alphanumericals</a> on Wikipedia.
 
 ### American Standard Code for Information Interchange (ASCII)
 
