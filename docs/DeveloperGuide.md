@@ -1543,28 +1543,37 @@ testers are expected to do more <i>exploratory testing</i>.
 ## **Appendix: Effort**
 
 ### 1. Feature-rich selection of commands
+
 Tailored for the SoC Computing Club event planners, CoordiMate has expanded from the initial 8 commands in AB3 to a robust suite of 27. Each command was crafted to optimise the event planning workflow, addressing the need for quick and efficient management of contacts and tasks. Our enhancements were directed towards providing practical solutions within the event planning sphere.
 
 With the addition of a new `Task` class and an improved support for managing tags for both tasks and contacts, CoordiMate delivers a selection of commands that each serve a strategic function in the planning of SoC events. Every enhancement has been thoughtfully integrated to support the SoC event planners in creating and managing events that are as organised as they are impactful.
 
-### 2. Multiple Classes
-TODO
+### 2. Creation of Multiple Classes
+
+In order for CoordiMate to track tasks, we had to create new classes that encapsulated the various elements of a task, such as the title, note and status. This was done to ensure that tasks can also be modelled in an object-oriented manner, just like the existing `Person` class.
+
+Furthermore, these classes needed to be integrated into the existing codebase, so that CoordiMate can keep track of the various tasks in the user's task list, as well as which tasks to show in the GUI.
+
+Lastly, to ensure that the tasks are saved and loaded correctly, the Storage class had to be modified to support the new `Task` class. This required the team to design how these tasks were to be stored in the data file, and the creation of the necessary helper classes to parse the tasks into JSON strings and vice versa.
 
 ### 3. User Centric
+
 TODO
 
 ### 4. Improved UI
-The original AB3 program only displayed the list of persons which is not very useful for a contact and task management application. To make our app effective, we created additional panels for tasks, besides the original 
+
+The original AB3 program only displayed the list of persons which is not very useful for a contact and task management application. To make our app effective, we created additional panels for tasks, besides the original
 panel for persons. This allows the user to view all the tasks and persons at a glance. Event planners can also easily track the status of their tasks through the status symbol we use to mark tasks as completed or not completed.
 
-To customise the application and set it apart from the original implementation of AB3, we also included our own enhance unique features. First and foremost, we have our own icon for the application that can be seen when opening 
-the application or any of the documents such as User Guide or Developer Guide. Next, we also included the feature to be able to drag the dividers across the screen. We understand that our output messages can be long at 
-times, especially for commands such as `listTag`. Hence, we wanted to give the user the ability to adjust the size of the output box according to their preference and the specific command they are using. For users who want to focus 
+To customise the application and set it apart from the original implementation of AB3, we also included our own enhance unique features. First and foremost, we have our own icon for the application that can be seen when opening
+the application or any of the documents such as User Guide or Developer Guide. Next, we also included the feature to be able to drag the dividers across the screen. We understand that our output messages can be long at
+times, especially for commands such as `listTag`. Hence, we wanted to give the user the ability to adjust the size of the output box according to their preference and the specific command they are using. For users who want to focus
 more on their tasks at hand, they can drag the divider between the contact list and task list so that their screen can show more of the task list. This is also useful for users who have a smaller screen size and would like to view more of the application at once.
 
 ### 5. Extensive Testing
+
 TODO
 
 ### 6. Software Engineering Practices
-TODO
 
+TODO
