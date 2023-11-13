@@ -57,7 +57,7 @@ public class VersionedAddressBook extends AddressBook {
     // Commits a copy of current address book so that the saved state is immutable
 
     /**
-     * Commits a copy of current {@code AddressBook} to {@code addressBookStateList}
+     * Commits a defensive copy of current {@code AddressBook} to {@code addressBookStateList}
      * so that the saved state is immutable
      */
     public void commit() {
