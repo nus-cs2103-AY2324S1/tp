@@ -40,10 +40,10 @@ title: Developer Guide
   - [Glossary](#glossary)
 - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
 - [Appendix: Efforts](#appendix-efforts)
-  - [Difficulty Level & Challenges Faces](#difficulty-level-and-challenges-faced)
+  - [Difficulty Level & Challenges Faced](#difficulty-level-and-challenges-faced)
   - [Effort Required](#effort-required)
   - [Achievements of the Project](#achievements-of-the-project)
-- [Planned Enhancements](#planned-enhancements)
+- [Appendix: Planned Enhancements](#appendix-planned-enhancements)
 
 <div style="page-break-after: always;"></div>
 
@@ -1841,7 +1841,7 @@ Overall, we are proud of our project, and we believe that we have done our best 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Planned Enhancements
+## **Appendix: Planned Enhancements**
 
 ### Remark not shown in GUI employee list
 
