@@ -26,8 +26,9 @@ public class FindCommand extends Command {
 
     private final Predicate<Person> predicate;
     /**
-     * Finds and lists all persons in address book whose attributes match the predicate.
-     *  Keyword matching is case insensitive.
+     * Creates a new FindCommand with the given predicate.
+     *
+     * @param predicate The predicate used to filter persons.
      */
     public FindCommand(Predicate<Person> predicate) {
         requireNonNull(predicate);

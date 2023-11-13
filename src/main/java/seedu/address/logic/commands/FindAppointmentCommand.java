@@ -12,8 +12,8 @@ import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
 
 /**
- * Finds and lists all persons in in address book whose attributes match the predicate.
- * Keyword matching is case insensitive.
+ * Finds and lists all appointments in the address book whose attributes match the specified predicate.
+ * Keyword matching is case-insensitive.
  */
 public class FindAppointmentCommand extends Command {
 
@@ -26,8 +26,9 @@ public class FindAppointmentCommand extends Command {
 
     private final Predicate<Appointment> predicate;
     /**
-     * Finds and lists all persons in address book whose attributes match the predicate.
-     *  Keyword matching is case-insensitive.
+     * Creates a new FindAppointmentCommand with the given predicate.
+     *
+     * @param predicate The predicate used to filter appointments.
      */
     public FindAppointmentCommand(Predicate<Appointment> predicate) {
         requireNonNull(predicate);
