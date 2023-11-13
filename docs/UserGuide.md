@@ -241,7 +241,7 @@ output: `Edited transaction: <ID>; TransactionType: <TYPE>; Description: <DESCRI
 
 Examples:
 
-- `edit 1 ty/Income amt/5000`
+- `edit 1 ty/R amt/5000`
 - `edit 2 d/NewDescription on/03/10/23`
 
 ### Sorting transactions : `sort`
@@ -386,6 +386,8 @@ Format: `find KEYWORD [KEYWORDS...]`
 
 Success output: `<Number of persons> persons listed`
 
+> ❗ Use `view s` to list all staff members after using `find`.
+
 Examples:
 
 - `find John` returns `john` and `John Doe`
@@ -414,6 +416,8 @@ Removes all entries in the transaction list.
 Format: `cleartransaction`
 
 Success output: `Transaction list has been cleared`
+
+> ❗ When all transactions are cleared, the overview page may not reflect the correct revenue, expenses. This is a known bug and will be fixed in a future release.
 
 ### Help: `help`
 
