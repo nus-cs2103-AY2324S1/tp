@@ -514,11 +514,11 @@ The _Sequence_ Diagram notation of the above steps is shown below.
 
 The _Activity_ Diagram notation of the above steps is shown below.
 
-<puml src="diagrams/SetPrefActivity.puml" width="600" />
+<puml src="diagrams/SetPrefActivity.puml" />
 
 The _Sequence_ Diagram notation of the above steps is shown below.
 
-<puml src="diagrams/SetPrefSequence.puml" width="600" />
+<puml src="diagrams/SetPrefSequence.puml" />
 
 [Scroll back to *Table of Contents*](#table-of-contents)
 
@@ -538,7 +538,7 @@ The _Sequence_ Diagram notation of the above steps is shown below.
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `showP`
 
-<puml src="diagrams/ShowPrefSequenceDiagram.puml" width="600" />
+<puml src="diagrams/StarSequence.puml" />
 
 #### Design Considerations
 
