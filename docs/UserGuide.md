@@ -433,7 +433,7 @@ Please do not use negative integers, non-integers and extremely large integers(i
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tips!** <br>
 Before deleting leave, you can utilize the command `read x /l` (where x is the index of the employee for whom you intend to delete leave) to verify that the leave taken matches the leave you wish to delete. This ensures you avoid errors due to insufficient leave balance for the specified employee.
-</div> <br>
+</div>
 
 **Examples:**
 * `deleteleave 3 /on 01/01/2024` deletes a single day of leave of `01/01/2024` from the third employee in the most recently displayed list.
