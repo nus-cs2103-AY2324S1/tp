@@ -180,7 +180,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Adding a Person
+### 3.1. Adding a Person
 
 #### Implementation
 
@@ -188,13 +188,11 @@ The `add` feature is facilitated by a number of classes such as `Person` and `Mo
 
 Step 1. The user launches the application for the first time.
 
-Step 2. The user executes `“add n/John Doe p/98765432 e/johnd@example.com g/CS2103T”` command to add a new person. `LogicManager#execute` is called which then calls `AddressBookParser#parseCommand` to decide on the type of command. `AddressBookParse`r` then calls `AddCommandParser`,
+Step 2. The user executes `“add n/John Doe p/98765432 e/johnd@example.com g/CS2103T”` command to add a new person. 
 
-Step 3, The `AddCommandParser` is called to read the user input. `AddCommandParser` calls `ArgumentTokenizer#tokenize` to check the prefixes of the user input. `AddCommandParser` then calls `ArgumentMultimap#getValue()` to get inputs after each prefix.
-The result of it is then passed to `ParserUtil#parse` methods to parse each attributes such as `Name`. `AddCommandParser` then makes new person object. `AddCommandParser` then calls `AddCommand` and passes `Person` inside.
+Step 3, The `AddCommandParser` is called to read the user input. `AddCommandParser` parses the input and calls `AddCommand`.
 
-Step.4 `AddCommand` then calls `Model#addPerson()` which then calls `AddressBook#addPerson()`. The latter method will add person inside the `uniquePersonList` in `addressBook`. `AddCommand` also calls `Model#addGroup` which then calls `AddressBook#addGroup` to add the group inside `grouplist` if the group does not exist.
-Lastly, `AddCommand` adds the person inside the group
+Step.4 `AddCommand` then calls `Model#addPerson()` which then calls `AddressBook#addPerson()`. The latter method will add person inside the `uniquePersonList` in `addressBook`. `AddCommand` also calls `Model#addGroup` which then calls `AddressBook#addGroup` to add the group inside `grouplist` if the group does not exist. Lastly, `AddCommand` adds the person inside the group
 
 **Note** No duplication is allowed in addressbook for name, email and phone number field.
 
@@ -210,42 +208,12 @@ The following sequence diagram describes the process of `add` command:
     * Cons: User will have to type more inputs to add more groups.
   
 * **Alternative 2:** Allow user to add as many groups as required for each `add` Command
-    * Pros: Reduces number of inputs needed to add multiple groups to a contact.
-    * Cons: User input can get potentially very long, increasing the chance of invalid input.
-
---------------------------------------------------------------------------------------------------------------------
-### Adding Free Time to a Person
-
-#### Implementation
-
-The `addtime` feature is facilitated by a number of classes such as `Person`, `Model` and `TimeInterval`
-
-Step 1. User launches the application.
-
-Step 2. The user executes `“addtime n/Alex Yeoh t/mon 1200 - mon 1400 t/tue 1000 - wed 1600”` command to add time slots to the person, Alex Yeoh. 
-
-Step 3, The `AddTimeCommandParser` is called to read the user input. `AddTimeCommandParser` calls `ArgumentTokenizer#tokenize` to check the prefixes of the user input. `AddTimeCommandParser` then calls `ArgumentMultimap#getValue()` to get inputs after each unique single prefix and `ArgumentMultimap#getAllValues()` to get inputs from prefix that are used more than once.
-The result of it is then passed to `ParserUtil#parse()` methods to parse each attributes such as `Name`. `AddTimeCommandParser` then calls `AddTimeCommand`.
-
-Step.4 `AddTimeCommand` then calls `Model#addTimeToPerson()` which then calls `AddressBook#addTimeToPerson()`. The latter method will add time to the person.
-
-The following sequence diagram describes the process of `addtime` command:
-<puml src="diagrams/AddTimeCommandSequenceDiagram.puml" alt="AddCommandSeqDiagram" />
-
-#### Design consideration:
-
-**Aspect: Handling group attribute in user input**
-
-* **Alternative 1 (Current Choice):** Allows user to add more than one time intervals in each `addtime` command.
-  * Pros: Conveniently adds a multiple time intervals into person.
-  * Cons: User input may get relatively longer, relatively harder to implement parser.
-* **Alternative 2:** Allow user to only add single time interval in each `addtime` Command
-  * Pros: Conveniently adds a person into group while creating a new contact at the same time, relatively easier to implement parser.
-  * Cons: User input can get potentially very long, increasing the chance of invalid input.
+    * Pros: Conveniently adds a person into multiple group while creating a new contact at the same time.
+    * Cons: User input can get potentially very long, increasing the chance of invalid input, relatively harder to implement parser. The implementation of it will get more complex.
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Adding a Group
+### 3.2. Adding a Group
 
 #### Proposed Implementation
 
@@ -279,138 +247,79 @@ Below is a sequence diagram that summarizes how a user creates a new group:
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Group Remark Feature
+### 3.3. Delete Person and Group
 
 #### Implementation
 
-The proposed group remark feature is facilitated by the `Group` class. It includes a `Group Remark` field and implements the `Group#setGroupRemark()` operation. This feature is exposed in the `Model` interface as `Model#addGroupRemark()`.
+The Delete person/group mechanisms are facilitated by `Model` class, which accesses the `AddressBook` class. It implements the following operations:
 
-Here's an example usage scenario and how the group remark mechanism behaves at each step:
+* `AddressBook#removePerson(Person p)` — Removes Person p from the address book.
+* `AddressBook#removeGroup(Group g)` — Removes Group g from the address book.
 
-**Step 1.** The user creates a group called `CS2103T`. The `Group` is initialized with an empty `groupRemark`.
+These operations are exposed in the `Model` interface as `Model#deletePerson()`, `Model#deleteGroup()` respectively.
 
-**Step 2.** The user executes the `remark g/CS2103T r/Quiz tomorrow` command to add the remark "Quiz tomorrow" to the `CS2103T` group. The `GroupRemarkCommandParser` extracts the group and remark from the input and creates a `GroupRemarkCommand`, which calls `Model#addGroupRemark(groupName, groupRemark)`. The model retrieves the existing `CS2103T` group from the database and calls the group's `Group#setRemark(groupRemark)`, adding the `groupRemark` to the group.
+Both `DeletePersonCommand` and `DeleteGroupCommand` implement an abstract class `DeleteCommand`, which helps to encapsulate the similarities between these two commands.
 
-**Note:** If the user wants to modify the group remark, they can execute the same command with the new remark. The existing remark will be deleted and overwritten, and the new remark is stored in the group.
+Since both Delete Person and Delete Group commands utilise the same command word, the `DeleteCommandParser` will create either a `DeletePersonCommand` or  `DeleteGroupCommand` and return it as a `DeleteCommand` after parsing the user input.
 
-The following activity diagram summarizes what happens when a user executes a new command:
+The following activity diagram summarizes what happens when a user executes a delete command:
 
-<puml src="diagrams/GroupRemarkSequenceDiagram.puml" alt="GroupRemarkSequenceDiagram" />
+<puml src="diagrams/DeleteCommandActivityDiagram.puml" alt="DeleteCommandActivity" />
+
+### Delete Person
+
+Given below is an example usage scenario and how the Delete Person mechanism behaves at each step.
+
+Step 1. The user executes `delete n/Alex Yeoh` command to delete a person named 'Alex Yeoh' in the contact list. After parsing, a new `DeletePersonCommand` object will be returned.
+
+Step 2. `DeletePersonCommand` is executed, in which `Model#deletePerson("Alex Yeoh")` is called.
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `GroupRemarkCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** If no such person named 'Alex Yeoh' exists, a `CommandException` will be thrown.
 
 </box>
 
-#### Design Considerations
+Step 3. `Model#deletePerson()` will also call `AddressBook#removePerson(Alex Yeoh)` which will remove the target contact from the contact list while removing it from all the groups it was part of.
 
-**Aspects:**
+The following sequence diagram shows how the Delete Person operation works:
 
-- **Alternative 1 (current choice):** Overrides original remark
-    - Pros: Easy to implement.
-    - Cons: May be troublesome if the user wants to keep contents from the original remark.
-- **Alternative 2:** Edits original remark
-    - Pros: Easy to add more information.
-    - Cons: Could be confusing to edit if there are many changes or remark is too long.
+<puml src="diagrams/DeletePersonSequenceDiagram.puml" alt="DeletePersonSequence" />
 
-### Delete Time Feature
+<box type="info" seamless>
 
-#### Implementation
+**Note:** The lifeline for `DeletePersonCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
-The proposed delete time feature is facilitated by the `timeIntervalList` and `Person` class. It accesses the `timeIntervalList` from the `Person` class and deletes a time interval with `Person#deleteFreeTime()`. The operation is exposed in the `Model` interface as `Model#deleteTimeFromPerson`.
+</box>
 
-Step 1. The user launches the application. The `AddressBook` will be initialized with the free time of its contacts.
+### Delete Group
 
-Step 2. The user executes the command `deleteTime n/Alex Yeoh t/mon 1200 - mon 1400 t/tue 1000 - wed 1600`. The `deleteTimeCommandParser` will be called to parse the inputs and call the `deletePersonTimeCommand`. The `deletePersonTime` command calls `Model#deleteTimeFromPerson()`, which will call `Person#deleteFreeTime()`.
+The Delete Group command mechanism behaves the same as the Delete Person command above, except it deletes the target `Group` object instead of the `Person` object.
 
-**Note:** Since multiple inputs are allowed, an array list of time intervals are passed around, each of which is to be deleted.
-
-Step 3. The function will be called in the person's `timeInterval` list. The application will loop through each time interval that is to be deleted and in the person's `timeInterval` list. Each time interval will be compared to see whether the `timeIntervalList` contains the time interval to be deleted. Afterwards, the new `timeInterval` list will be saved.
-
-**Note:** If a time interval is not in the person's list, that interval will be collated and printed to specifically notify the user which time intervals are not in the list. The other time intervals that are in the list will still be deleted.
-
-Similarly, the group command does the same, except for the `Group` class.
-
-The following sequence diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/DeletePersonTimeDiagram.puml" alt="DeletePersonTimeDiagram"/>
-
-Below is an activity diagram that illustrates the control flow for Delete Person Time feature.
-
-<puml src="diagrams/DeletePersonTimeActivityDiagram.puml" alt="DeletePersonTimeActivityDiagram"/>
+Additionally, `AddressBook#removeGroup(Group g)` will remove the target group 'g' from the group lists of all the members that were a part of it.
 
 #### Design Considerations
 
-**Aspect: Error Messages**
+**Aspect: How to handle two similar but different commands (delete group and delete person)**
 
-* Alternative 1 (current choice): Print specific error messages.
-  Pros: Allow users to understand which inputs went wrong.
-  Cons: May have performance issues in terms of runtime as more functions will be used to craft the error message. Currently, we utilized a `StringBuilder` to craft the message and did extra checks to see whether there had been any errors appended to the error message.
+* **Alternative 1 (current choice):** Use the same command word
+  * Pros: Reduces the amount of command words that users have to remember
+  * Cons: Users may get confused because one command word can be used for different things
 
-* Alternative 2: Generalized error message.
-  Pros: Will be faster to implement.
-  Cons: User might be unsure why the function went wrong.
-
-**Aspect: How to Handle Multiple Time Inputs**
-
-* Alternative 1 (current choice): Parse each time input one by one and execute the commands.
-  Pros: More user-friendly and efficient as users can delete more time intervals at once.
-  Cons: More expensive as more functions will be called to parse the inputs.
-
-* Alternative 2: Allow only single input.
-  Pros: Faster as fewer functions are called.
-  Cons: Not as user-friendly since users will have to delete time intervals one by one.
-
-**Aspect: How to Handle Errors in Time Intervals**
-
-* Alternative 1 (current choice): Delete the time intervals that are correct and return the intervals that are wrong.
-  Pros: Better user experience as users need not rewrite intervals that were right.
-  Cons: Increased memory usage to store the errors.
-
-* Alternative 2: Do not carry out the delete at all.
-  Pros: More time and memory efficient.
-  Cons: Not as user-friendly since users will have to delete time intervals that were originally correct, wasting their time.
+* **Alternative 2:** Use different command words for both commands
+  * Pros: Less confusing as it is intuitive that different command words are used for different commands
+  * Cons: Users have to remember more command words which may take more time to get used to
 
 --------------------------------------------------------------------------------------------------------------------
+### 3.4. List Person and list group
 
-### Group Person
-
-#### Implementation
-
-The group remark mechanism is facilitated by `Group`. It is stored internally as a `Group Remark`. This operation is exposed in the `Model` interface as `Model#groupPerson(personName, groupName)`.
-
-Given below is an example usage scenario and how the group remark mechanism behaves at each step.
-
-**Step 1:** User launches the application.
-
-**Step 2:** The user executes `group n/personName g/groupName` to group a person `personName` into group `groupName`. `GroupPersonCommandParser` parses the personName and groupName ensuring the input is valid and creates a `GroupPersonCommand`, which calls `Model#groupPerson(personName, groupName)`. The model retrieves the existing person and group from the addressBook. Should a person or group not exist, it throws an error. Model calls `Model#assignGroup(Person person, Group group)` which adds a group to a person's groupList and person to the personList in group.
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-#### Design Considerations:
-
-**Aspect: Whether to store references in both person and group**
-
-* **Alternative 1 (current choice):** Store references in both person and group
-    * Pros: Easy to implement. More efficient when searching.
-    * Cons: More bug-prone. May have object referencing and loading from storage issues as both the person reference to group, and group reference to person has to be loaded properly.
-
-* **Alternative 2:** Store reference to the other entity, e.g. store a list of groups in person.
-    * Pros: Easier to load from storage. One centralized place to store data. Less coupling.
-    * Cons: Searching might become more costly.
-
---------------------------------------------------------------------------------------------------------------------
-
-### List
-
-#### Implementation
+### List Person
 
 The List mechanism is facilitated by the `Model` class.
 
 The operation it utilises is exposed in the `Model` interface as `Model#updateFilteredPersonList(Predicate<Person> predicate)`.
 
-Given below is an example usage scenario and how the laist mechanism behaves at each step.
+Given below is an example usage scenario and how the list mechanism behaves at each step.
 
 **Step 1:** User executes `list` command to view all contacts. After parsing, a new `ListCommand` object will be returned.
 
@@ -426,13 +335,10 @@ The following activity diagram summarizes what happens when a user executes a li
 
 </box>
 
---------------------------------------------------------------------------------------------------------------------
 
-### Listgroup
+#### List Group
 
-#### Implementation
-
-The Listgroup mechanism is facilitated by the `Model` class.
+The List Group mechanism is facilitated by the `Model` class.
 
 The operation it utilises is exposed in the `Model` interface as `Model#getFilteredGroupList()`.
 
@@ -456,7 +362,7 @@ The following activity diagram summarizes what happens when a user executes a li
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Find Person and Find Group features
+### 3.5. Find Person and Find Group features
 
 #### Implementation
 
@@ -527,68 +433,289 @@ Additionally, it calls on an extra method `Group#getGroupRemark()`. `Group#getGr
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Delete Person and Delete Group features
+### 3.6. Group Person
 
 #### Implementation
 
-The Delete person/group mechanisms are facilitated by `Model` class, which accesses the `AddressBook` class. It implements the following operations:
+The group mechanism is facilitated by `Group`. It is stored internally as a `Group`. This operation is exposed in the `Model` interface as `Model#groupPerson(personName, groupName)`.
 
-* `AddressBook#removePerson(Person p)` — Removes Person p from the address book.
-* `AddressBook#removeGroup(Group g)` — Removes Group g from the address book.
+Given below is an example usage scenario and how the group mechanism behaves at each step.
 
-These operations are exposed in the `Model` interface as `Model#deletePerson()`, `Model#deleteGroup()` respectively.
+**Step 1:** User launches the application.
 
-Both `DeletePersonCommand` and `DeleteGroupCommand` implement an abstract class `DeleteCommand`, which helps to encapsulate the similarities between these two commands.
+**Step 2:** The user executes `group n/personName g/groupName` to group a person `personName` into group `groupName`. `GroupPersonCommandParser` parses the personName and groupName ensuring the input is valid and creates a `GroupPersonCommand`, which calls `Model#groupPerson(personName, groupName)`. The model retrieves the existing person and group from the addressBook. Should a person or group not exist, it throws an error. Model calls `Model#assignGroup(Person person, Group group)` which adds a group to a person's groupList and person to the personList in group.
 
-Since both Delete Person and Delete Group commands utilise the same command word, the `DeleteCommandParser` will create either a `DeletePersonCommand` or  `DeleteGroupCommand` and return it as a `DeleteCommand` after parsing the user input.
+The following activity diagram summarizes what happens when a user executes a new command:
+<puml src="diagrams/GroupPersonActivityDiagram.puml" alt="GroupPersonActivityDiagram"/>
 
-The following activity diagram summarizes what happens when a user executes a delete command:
+#### Design Considerations:
 
-<puml src="diagrams/DeleteCommandActivityDiagram.puml" alt="DeleteCommandActivity" />
+**Aspect: Whether to store references in both person and group**
 
-### Delete Person
+* **Alternative 1 (current choice):** Store references in both person and group
+  * Pros: Easy to implement. More efficient when searching.
+  * Cons: More bug-prone. May have object referencing and loading from storage issues as both the person reference to group, and group reference to person has to be loaded properly.
 
-Given below is an example usage scenario and how the Delete Person mechanism behaves at each step.
+* **Alternative 2:** Store reference to the other entity, e.g. store a list of groups in person.
+  * Pros: Easier to load from storage. One centralized place to store data. Less coupling.
+  * Cons: Searching might become more costly.
 
-Step 1. The user executes `delete n/Alex Yeoh` command to delete a person named 'Alex Yeoh' in the address book. After parsing, a new `DeletePersonCommand` object will be returned.
+--------------------------------------------------------------------------------------------------------------------
 
-Step 2. `DeletePersonCommand` is executed, in which `Model#deletePerson("Alex Yeoh")` is called.
+### 3.7. Adding a Group Remark
+
+#### Implementation
+
+The Group Remark mechanism is facilitated by the `Group Remark` class, involving other classes like `Group`. It implements the following operation:
+
+* `Group#setGroupRemark()` — Sets the group's remark.
+
+This operation is exposed in the `Model` interface as `Model#addGroupRemark()`.
+
+Here's an example usage scenario and how the group remark mechanism behaves at each step:
+
+**Step 1.** The user creates a group called "CS2103T". The group is initialized with an empty `groupRemark`.
+
+**Step 2.** The user executes the `remark g/CS2103T r/Quiz tomorrow` command to add the remark "Quiz tomorrow" to the "CS2103T" group. The `GroupRemarkCommandParser` extracts the group and remark from the input and creates a `GroupRemarkCommand`, which calls `Model#addGroupRemark(groupName, groupRemark)`. The model retrieves the existing "CS2103T" group from the database and calls the group's `Group#setGroupRemark(groupRemark)`, setting the "Quiz tomorrow" as the `groupRemark` of the group.
+
+**Note:** If the user wants to modify the group remark, they can execute the same command with the new remark. The existing remark will be overwritten, and the new remark is stored in the group.
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<puml src="diagrams/GroupRemarkSequenceDiagram.puml" alt="GroupRemarkSequenceDiagram" />
 
 <box type="info" seamless>
 
-**Note:** If no such person named 'Alex Yeoh' exists, a `CommandException` will be thrown.
+**Note:** The lifeline for `GroupRemarkCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
-
-Step 3. `Model#deletePerson()` will also call `AddressBook#removePerson(Alex Yeoh)` which will remove the target contact from the contact list while removing it from all the groups it was part of.
-
-The following sequence diagram shows how the Delete Person operation works:
-
-<puml src="diagrams/DeletePersonSequenceDiagram.puml" alt="DeletePersonSequence" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `DeletePersonCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-### Delete Group
-
-The Delete Group command mechanism behaves the same as the Delete Person command above, except it deletes the target `Group` object instead of the `Person` object.
-
-Additionally, `AddressBook#removeGroup(Group g)` will remove the target group 'g' from the group lists of all the members that were a part of it.
 
 #### Design Considerations
 
-**Aspect: How to handle two similar but different commands (delete group and delete person)**
+**Aspects: How to change the group remark**
 
-* **Alternative 1 (current choice):** Use the same command word
-  * Pros: Reduces the amount of command words that users have to remember
-  * Cons: Users may get confused because one command word can be used for different things
+- **Alternative 1 (current choice):** Override the original remark
+  - Pros: Easy to implement.
+  - Cons: May be troublesome if the user wants to keep contents from the original remark.
 
-* **Alternative 2:** Use different command words for both commands
-  * Pros: Less confusing as it is intuitive that different command words are used for different commands
-  * Cons: Users have to remember more command words which may take more time to get used to
+- **Alternative 2:** Edit the original remark
+  - Pros: Easy to add more information.
+  - Cons: May be confusing to edit if there are many changes or remark is too long.
+
+--------------------------------------------------------------------------------------------------------------------
+
+### 3.8. Adding Time to a Person or Group
+
+#### Implementation
+
+The Add Time to person/group mechanisms are facilitated by the `TimeInterval` class, involving other classes like `Person` and `Group`. It implements the following operations:
+
+* `Person#addFreeTime()` — Adds the inputted time intervals to the person.
+* `Group#addTime()` — Adds the inputted time intervals to the group.
+
+These operations are exposed in the `Model` interface as `Model#addTimeToPerson()`, `Model#addTimeToGroup()` respectively.
+
+The following activity diagram summarizes what happens when a user executes an add time command:
+
+<puml src="diagrams/AddTimeActivityDiagram.puml" alt="AddTimeActivity" />
+
+### Adding Time to a Person
+
+Given below is an example usage scenario and how the Add Time to Person mechanism behaves at each step.
+
+Step 1. The user executes `addtime n/Alex Yeoh t/mon 1300 - mon 1400 t/tue 1300 - tue 1400` command to add the free time intervals of Monday 1 pm to 2 pm and Tuesday 1 pm to 2 pm to a person named "Alex Yeoh" in the contact list. The `AddTimeCommandParser` will be called to parse the inputs and check if any of the inputted times clash with each other. It will then call the `AddTimeCommand`.
+
+**Note:** Since multiple inputs are allowed, an array list of time intervals is passed around, each of which is to be added.
+
+Step 2. `AddTimeCommand` is executed, in which `Model#addTimeToPerson()` is called.
+
+<box type="info" seamless>
+
+**Note:** If no such person named "Alex Yeoh" exists, a `CommandException` will be thrown.
+
+</box>
+
+Step 3. `Model#addTimeToPerson()` will also call `Person#addFreeTime()` which will add all times stored in the array list to the person's list of free times, given that none of the times clash with the person's existing free time intervals. If clashes do occur, the user will be notified of the problematic time intervals while the problem-free intervals will be added.
+
+The following sequence diagram shows how the Add Time to Person operation works:
+
+<puml src="diagrams/AddTimeSequenceDiagram.puml" alt="AddTimeSequence" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `AddTimeCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+### Adding Time to a Group
+
+The Add Time to Group command mechanism behaves the same as the Add Time to Person command above, except it uses the `Group` class instead of the `Person` class.
+
+#### Design Considerations
+
+**Aspect: How to handle two similar but different commands (add meeting time to group and add free time to person)**
+
+* **Alternative 1 (current choice):** Use different command words for both commands
+  * Pros: Less confusing as the 2 commands add different types of times.
+  * Cons: Users have to remember more command words which may take more time to get used to.
+
+* **Alternative 2:** Use the same command word
+  * Pros: Reduces the amount of command words that users have to remember.
+  * Cons: Users may get confused because the 2 commands do not add the same types of times.
+
+**Aspect: How to handle time clashes**
+
+* **Alternative 1 (current choice):** Add all non-clashing time intervals
+  * Pros: More convenient as users will not need to retype the entire command if there is a clash.
+  * Cons: May no longer want to add certain non-clashing inputs after encountering this clash.
+
+* **Alternative 2:** Reject all time intervals
+  * Pros: Allows users to (heavily) edit their inputted time intervals accordingly to resolve clashes.
+  * Cons: May be troublesome to retype the entire command, especially if it is very long.
+
+--------------------------------------------------------------------------------------------------------------------
+
+### 3.9. Delete Time Feature
+
+#### Implementation
+
+The Delete Time from person/group mechanisms are facilitated by the `TimeInterval` class, involving other classes like `Person` and `Group`. It implements the following operations:
+
+* `Person#deleteFreeTime()` — Deletes the inputted time intervals from the person.
+* `Group#deleteTime()` — Deletes the inputted time intervals from the group.
+
+These operations are exposed in the `Model` interface as `Model#deleteTimeFromPerson()`, `Model#deleteTimeFromGroup()` respectively.
+
+Below is an activity diagram that illustrates the control flow for Delete Person Time feature.
+
+<puml src="diagrams/DeletePersonTimeActivityDiagram.puml" alt="DeletePersonTimeActivityDiagram"/>
+
+### Deleting Time from a Person
+
+The proposed delete time feature is facilitated by the `timeIntervalList` and `Person` class. It accesses the `timeIntervalList` from the `Person` class and deletes a time interval with `Person#deleteFreeTime()`. The operation is exposed in the `Model` interface as `Model#deleteTimeFromPerson`.
+
+Step 1. The user launches the application. The `AddressBook` will be initialized with the free time of its contacts.
+
+Step 2. The user executes the command `deleteTime n/Alex Yeoh t/mon 1200 - mon 1400 t/tue 1000 - wed 1600`. The `deleteTimeCommandParser` will be called to parse the inputs and call the `deletePersonTimeCommand`. The `deletePersonTime` command calls `Model#deleteTimeFromPerson()`, which will call `Person#deleteFreeTime()`.
+
+**Note:** Since multiple inputs are allowed, an array list of time intervals are passed around, each of which is to be deleted.
+
+Step 3. The function will be called in the person's `timeInterval` list. The application will loop through each time interval that is to be deleted and in the person's `timeInterval` list. Each time interval will be compared to see whether the `timeIntervalList` contains the time interval to be deleted. Afterwards, the new `timeInterval` list will be saved.
+
+**Note:** If a time interval is not in the person's list, that interval will be collated and printed to specifically notify the user which time intervals are not in the list. The other time intervals that are in the list will still be deleted.
+
+The following sequence diagram summarizes what happens when a user executes a new command:
+
+<puml src="diagrams/DeletePersonTimeDiagram.puml" alt="DeletePersonSequenceTimeDiagram"/>
+
+### Deleting Time from a Group
+
+The Delete Time from Group command mechanism behaves the same as the Delete Time from Person command above, except it uses the `Group` class instead of the `Person` class.
+
+#### Design Considerations
+
+**Aspect: Error Messages**
+
+* Alternative 1 (current choice): Print specific error messages.
+  * Pros: Allow users to understand which inputs went wrong.
+  * Cons: May have performance issues in terms of runtime as more functions will be used to craft the error message. Currently, we utilized a `StringBuilder` to craft the message and did extra checks to see whether there had been any errors appended to the error message.
+
+* Alternative 2: Generalized error message.
+  * Pros: Will be faster to implement.
+  * Cons: User might be unsure why the function went wrong.
+
+**Aspect: How to Handle Multiple Time Inputs**
+
+* Alternative 1 (current choice): Parse each time input one by one and execute the commands.
+  * Pros: More user-friendly and efficient as users can delete more time intervals at once.
+  * Cons: More expensive as more functions will be called to parse the inputs.
+
+* Alternative 2: Allow only single input.
+  * Pros: Faster as fewer functions are called.
+  * Cons: Not as user-friendly since users will have to delete time intervals one by one.
+
+**Aspect: How to Handle Errors in Time Intervals**
+
+* Alternative 1 (current choice): Delete the time intervals that are correct and return the intervals that are wrong.
+  Pros: Better user experience as users need not rewrite intervals that were right.
+  Cons: Increased memory usage to store the errors.
+
+* Alternative 2: Do not carry out the delete at all.
+  Pros: More time and memory efficient.
+  Cons: Not as user-friendly since users will have to re-input the time intervals that were originally correct.
+
+--------------------------------------------------------------------------------------------------------------------
+
+### 3.10. Listing Time for a Person or Group
+
+#### Implementation
+
+The List Time for person/group mechanisms are facilitated by the `TimeInterval` class, involving other classes like `Person` and `Group`. It implements the following operations:
+
+* `Person#getTime()` — Shows the person's time intervals.
+* `Group#getTime()` — Shows the group's time intervals.
+
+These operations are exposed in the `Model` interface as `Model#getTimeFromPerson()`, `Model#getTimeFromGroup()` respectively.
+
+Both `ListTimePersonCommand` and `ListTimeGroupCommand` implement an abstract class `ListTimeCommand`, which helps to encapsulate the similarities between these two commands.
+
+Since both List Time Person and List Time Group commands utilise the same command word `listtime`, the `ListTimeCommandParser` will create either a `ListTimePersonCommand` or  `ListTimeGroupCommand` and return it as a `ListTimeCommand` after parsing the user input.
+
+The following activity diagram summarizes what happens when a user executes an add time command:
+
+<puml src="diagrams/ListTimeActivityDiagram.puml" alt="ListTimeActivity" />
+
+### Listing Time from a Person
+
+Given below is an example usage scenario and how the List Time from Person mechanism behaves at each step.
+
+Step 1. The user executes `listtime n/Alex Yeoh` command to list the free time intervals of a person named "Alex Yeoh" in the contact list. The `ListTimeCommandParser` will be called to parse the inputs. It will then call the `ListTimePersonCommand`.
+
+Step 2. `ListTimePersonCommand` is executed, in which `Model#getTimeFromPerson()` is called.
+
+<box type="info" seamless>
+
+**Note:** If no such person named "Alex Yeoh" exists, a `CommandException` will be thrown.
+
+</box>
+
+Step 3. `Model#getTimeFromPerson()` will also call `Person#getTime()` which will parse all times stored in the array list into an easy-to-read chunk using a StringBuilder, and show it in the output box.
+
+The following sequence diagram shows how the List Time from Person operation works:
+
+<puml src="diagrams/ListTimePersonSequenceDiagram.puml" alt="ListTimePersonSequence" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `ListTimePersonCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+### Listing Time from a Group
+
+The List Time from Group command mechanism behaves the same as the List Time from Person command above, except it uses the `Group` class instead of the `Person` class.
+
+#### Design Considerations
+
+**Aspect: How to handle two similar but different commands (add meeting time to group and add free time to person)**
+
+* **Alternative 1 (current choice):** Use different command words for both commands
+  * Pros: Less confusing as the 2 commands add different types of times.
+  * Cons: Users have to remember more command words which may take more time to get used to.
+
+* **Alternative 2:** Use the same command word
+  * Pros: Reduces the amount of command words that users have to remember.
+  * Cons: Users may get confused because the 2 commands do not add the same types of times.
+
+**Aspect: Display format**
+
+* **Alternative 1 (current choice):** Print raw list of times
+  * Pros: Allows users to copy and paste the intervals shown as they are in the correct format.
+  * Cons: May be too convoluted due to repeated information caused by reiterating the day of the time interval.
+
+* **Alternative 2:** Organise time intervals by day.
+  * Pros: Allows users to better see the intervals in each day.
+  * Cons: May cause inconvenience to users when they need to copy and paste time chunks should they need it again.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -617,8 +744,6 @@ Enabling users to customize input requirements for functions within ProjectPRO w
 In the `addmeeting` feature, user can add free time intervals to a group. Currently, user can add same free time intervals for 2 separate groups or overlapping time intervals between 2 or more groups, causing a clash in their schedule. (Eg. `Group A: Mon 1200 - Mon 1400`; `Group B: Mon 1300 - Mon 1500`). These clashes are not detected and will allow this state to exist. We plan to not allow this, so user cannot insert time intervals that are overlapping with other groups. Eg. `Group A: Mon 1200 - Mon 1400`; `Group B: Mon 1300 - Mon 1500` will not be allowed.
 
 --------------------------------------------------------------------------------------------------------------------
-
-
 
 ## **5. Documentation, logging, testing, configuration, dev-ops**
 
@@ -993,7 +1118,6 @@ Given below are instructions to test the app manually.
 testers are expected to do more *exploratory* testing.
 
 </box>
-
 
 ### 7.1. Launch and shutdown
 

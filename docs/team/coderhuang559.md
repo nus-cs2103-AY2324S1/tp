@@ -36,9 +36,9 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `remark` for contacts, `listtime` for contacts, `addmeeting` for groups and `deletetime` for groups. [\#145](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/145)
+    * Added documentation for the features `remark` for contacts, `listtime` for contacts, `addmeeting` for groups and `deletetime` for groups. [\#144](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/145)
   * Developer Guide:
-    * Added implementation details of the `remark` [\#112](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/112/files) and `addgroup` [\#226](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/226/files) feature.
+    * Added implementation details of the `remark` [\#112](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/112/files), `listtime` [\#226](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/226/files), and `addmeeting` features.
     * Added activity and sequence diagrams for the above functions. This includes for delete person time command, shown here.
     * <puml src="diagrams/GroupRemarkSequenceDiagram.puml" alt="GroupRemarkSequenceDiagram"/>
 
