@@ -45,7 +45,7 @@ Given below are my contributions to the project.
     * Check through overall formatting and content of UG
   * Developer Guide:
     * Added implementation and testing guide for add leave and list leave feature
-    * Created UML diagrams to illustrate method implementations
+    * Created UML diagrams to illustrate implementations
     * Updated the user stories
     * Check through overall formatting and content of DG
 

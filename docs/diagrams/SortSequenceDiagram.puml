@@ -11,8 +11,6 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant ":AddressBook" as AddressBook MODEL_COLOR
-participant ":UniqueEmployeeList" as UniqueEmployeeList MODEL_COLOR
 end box
 [-> LogicManager : execute("sort f/salary in/asc")
 activate LogicManager
@@ -49,26 +47,8 @@ deactivate AddressBookParser
 LogicManager -> SortCommand : execute()
 activate SortCommand
 
-SortCommand -> SortCommand : handleSortingOrder(model, "salary", "asc")
-activate SortCommand
-
-SortCommand --> SortCommand
-deactivate SortCommand
-
 SortCommand -> Model : updateSortedEmployeeListAscending("salary");
 activate Model
-
-Model -> AddressBook : updateSortedEmployeeListAscending("salary")
-activate AddressBook
-
-AddressBook -> UniqueEmployeeList : sortEmployeesAscending("salary");
-activate UniqueEmployeeList
-
-UniqueEmployeeList --> AddressBook
-deactivate UniqueEmployeeList
-
-AddressBook --> Model
-deactivate AddressBook
 
 Model --> SortCommand
 deactivate Model

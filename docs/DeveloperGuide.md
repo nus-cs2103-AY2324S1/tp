@@ -40,11 +40,12 @@ title: Developer Guide
   - [Glossary](#glossary)
 - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
 - [Appendix: Efforts](#appendix-efforts)
-  - [Difficulty Level](#difficulty-level)
-  - [Challenges Faced](#challenges-faced)
+  - [Difficulty Level & Challenges Faces](#difficulty-level-and-challenges-faced)
   - [Effort Required](#effort-required)
   - [Achievements of the Project](#achievements-of-the-project)
 - [Planned Enhancements](#planned-enhancements)
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -52,11 +53,15 @@ title: Developer Guide
 
 * Adapted from [AB3](https://se-education.org/addressbook-level3/)
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -189,6 +194,8 @@ The `Storage` component,
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -572,7 +579,7 @@ The add remark command mechanism is facilitated by `AddRemarkCommandParser` clas
 
 `AddRemarkCommandParser` implements the following operations:
 * `AddRemarkCommandParser#parse()` — Parses the input arguments by storing the index and the prefix of its respective values as an `ArgumentMultimap`,
-  and creates a new `AddRemarkCommand` object with the parsed id and remark.
+  and creates a new `AddRemarkCommand` object with the parsed ID and remark.
 
 The `AddRemarkCommand` object then communicates with the `Model` API by calling the following methods:
 * `Model#setEmployee(Employee, Employee)` — Sets the employee in the existing employee list to the new `Employee` object which has been edited by `AddRemarkCommand#execute()`.
@@ -590,7 +597,7 @@ Given below is an example usage scenario for the command:
 
 **Step 2**: The user executes the `addremark id/EMPLOYEE_ID r/REMARK` command in the CLI.
 
-**Step 3**: The given remark will be added to the remark list of the employee with the given id.
+**Step 3**: The given remark will be added to the remark list of the employee with the given ID.
 
 **Aspect: Model-Employee Interaction:**
 
@@ -614,7 +621,7 @@ The delete remark command mechanism is facilitated by `DeleteRemarkCommandParser
 
 `DeleteRemarkCommandParser` implements the following operations:
 * `DeleteRemarkCommandParser#parse()` — Parses the input arguments by storing the index and the prefix of its respective values as an `ArgumentMultimap`,
-  and creates a new `DeleteRemarkCommand` object with the parsed id and remark.
+  and creates a new `DeleteRemarkCommand` object with the parsed ID and remark.
 
 The `DeleteRemarkCommand` object then communicates with the `Model` API by calling the following methods:
 * `Model#setEmployee(Employee, Employee)` — Sets the employee in the existing employee list to the new `Employee` object which has been edited by `DeleteRemarkCommand#execute()`.
@@ -632,7 +639,7 @@ Given below is an example usage scenario for the command:
 
 **Step 2**: The user executes the `deleteremark id/EMPLOYEE_ID r/REMARK` command in the CLI.
 
-**Step 3**: The given remark will be deleted from the remark list of the employee with the given id.
+**Step 3**: The given remark will be deleted from the remark list of the employee with the given ID.
 
 **Aspect: Model-Employee Interaction:**
 
@@ -875,7 +882,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the employee being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -885,6 +891,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -978,7 +986,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given employee id is invalid.
+* 3a. The given employee ID is invalid.
 
     * 3a1. HouR shows an error message.
 
@@ -1073,21 +1081,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add a leave period for an employee with a given id from given start date
+1.  User requests to add a leave period for an employee with a given ID from given start date
     to given end date.
 2.  HouR adds the individual dates between the given start and end dates inclusive
-    as leave appointments for the employee with given id.
+    as leave dates for the employee with given ID.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User leaves out at least one of employee id, start date, or end date.
+* 1a. User leaves out at least one of employee ID, start date, or end date.
   * 1a1. HouR shows an error message.
 
   Use case returns back to step 1.
 
-* 1b. No employee matches given id.
+* 1b. No employee matches given ID.
   * 1b1. HouR shows an error message.
 
   Use case returns back to step 1.
@@ -1103,7 +1111,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case returns back to step 1.
 
 * 1e. Adding the leave date causes number of leaves
-  for employee with given employee id to be over 14 days .
+  for employee with given employee ID to be over 14 days .
   * 1e1. HouR shows an error message.
 
   Use case returns back to step 1.
@@ -1112,21 +1120,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to delete allocated leaves for an employee with a given id that falls between
+1.  User requests to delete allocated leaves for an employee with a given ID that falls between
     given start and end dates.
 2.  HouR deletes the allocated leave dates that fall between the given start and end dates inclusive
-    for the employee with given id.
+    for the employee with given ID.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User leaves out at least one of employee id, start date, or end date.
+* 1a. User leaves out at least one of employee ID, start date, or end date.
   * 1a1. HouR shows an error message.
 
   Use case returns back to step 1.
 
-* 1b. No employee matches given id.
+* 1b. No employee matches given ID.
   * 1b1. HouR shows an error message.
 
   Use case returns back to step 1.
@@ -1145,19 +1153,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to edit a given allocated leave date for an employee with a given id to the given new leave date.
-2.  HouR edits the given allocated leave date to the given new leave date for the employee with given id.
+1.  User requests to edit a given allocated leave date for an employee with a given ID to the given new leave date.
+2.  HouR edits the given allocated leave date to the given new leave date for the employee with given ID.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User leaves out at least one of employee id, old leave date, or new leave date.
+* 1a. User leaves out at least one of employee ID, old leave date, or new leave date.
   * 1a1. HouR shows an error message.
 
   Use case returns back to step 1.
 
-* 1b. No employee matches given id.
+* 1b. No employee matches given ID.
   * 1b1. HouR shows an error message.
 
   Use case returns back to step 1.
@@ -1202,20 +1210,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add a given remark to an employee with a given employee id.
-2.  HouR adds the remark to the list of remarks associated with the employee with the given employee id and
+1.  User requests to add a given remark to an employee with a given employee ID.
+2.  HouR adds the remark to the list of remarks associated with the employee with the given employee ID and
     shows the list to the user.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User leaves out at least one of employee id or remark.
+* 1a. User leaves out at least one of employee ID or remark.
   * 1a1. HouR shows an error message.
 
   Use case returns back to step 1.
 
-* 1b. No employee matches given employee id.
+* 1b. No employee matches given employee ID.
   * 1b1. HouR shows an error message.
 
   Use case returns back to step 1.
@@ -1229,25 +1237,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to delete a given remark from an employee with a given employee id.
-2.  HouR deletes the remark from the list of remarks associated with the employee with the given employee id
+1.  User requests to delete a given remark from an employee with a given employee ID.
+2.  HouR deletes the remark from the list of remarks associated with the employee with the given employee ID
     and shows it to the user.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User leaves out at least one of employee id or remark.
+* 1a. User leaves out at least one of employee ID or remark.
   * 1a1. HouR shows an error message.
 
   Use case returns back to step 1.
 
-* 1b. No employee matches given employee id.
+* 1b. No employee matches given employee ID.
   * 1b1. HouR shows an error message.
 
   Use case returns back to step 1.
 
-* 1c. Remark does not exist in the list of remarks associated with employee with given employee id.
+* 1c. Remark does not exist in the list of remarks associated with employee with given employee ID.
   * 1c1. HouR shows an error message.
 
   Use case returns back to step 1.
@@ -1256,19 +1264,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to increase number of overtime hours taken by employee with given employee id by a given amount.
-2.  HouR increases the number of overtime hours taken by employee with given employee id by the given amount.
+1.  User requests to increase number of overtime hours taken by employee with given employee ID by a given amount.
+2.  HouR increases the number of overtime hours taken by employee with given employee ID by the given amount.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User leaves out at least one of employee id, operation (inc or dec), and amount.
+* 1a. User leaves out at least one of employee ID, operation (inc or dec), and amount.
   * 1a1. HouR shows an error message.
 
   Use case returns back to step 1.
 
-* 1b. No employee matches given employee id.
+* 1b. No employee matches given employee ID.
   * 1b1. HouR shows an error message.
 
   Use case returns back to step 1.
@@ -1376,8 +1384,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Employee**: A worker in the company
-
-*{More to be added}*
+* **Employee book**: The database of employees
+* **CLI**: Command Line Interface
+* **GUI**: Graphical User Interface
+* **MSS**: Main Success Scenario
+* **PDPA**: Personal Data Protection Act
+* **SRP**: Single Responsibility Principle
+* **API**: Application Programming Interface
+* **JSON**: JavaScript Object Notation
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1396,7 +1410,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   2. Double-click the jar file.<br>Expected: Shows the GUI with a set of sample employees. The window size may not be optimum.
+   2. Double-click the jar file.<br>
+       Expected: Shows the GUI with a set of sample employees. The window size may not be optimum.
 
 2. Saving window preferences
 
@@ -1452,7 +1467,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List only some employees using the `find manager` command. Multiple employees in the list. Employee with name "Alex" is in the list. Three employees with position "manager" are in the list. Employee with employee ID "EID1234-5678" is in the list. Employee with employee ID "EID0000-0000" is not in the list. Employee with position "notAManager" is not in the list.
 
-   2. Try the test cases in the previous section (Finding an employee while all employees are being shown)
+   2. Try the test cases in the previous section (Finding an employee while all employees are being shown)<br>
       Expected: Same as the previous section.
 
 3. Finding an employee in an empty employee book
@@ -1543,7 +1558,7 @@ _{other invalid inputs are possible}_
 2. Adding leave while only some employees are being shown 
 
    1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
-   Employee with id "EID1234-5678" has leaves "2023-11-11" and "2023-11-12" and is not in displayed list.
+   Employee with ID "EID1234-5678" has leaves "2023-11-11" and "2023-11-12" and is not in displayed list.
 
    2. Try the test cases in the previous section (Adding leave while all employees are being shown)
    Expected: Same as the previous section
@@ -1576,7 +1591,7 @@ _{other invalid inputs are possible}_
 2. Deleting leave while only some employees are being shown
 
    1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
-      Employee with id "EID1234-5678" has leaves "2023-12-01", "2023-12-02", and "2023-12-03" and is not in displayed list.
+      Employee with ID "EID1234-5678" has leaves "2023-12-01", "2023-12-02", and "2023-12-03" and is not in displayed list.
 
    2. Try the test cases in the previous section (Deleting leave while all employees are being shown)
       Expected: Same as the previous section
@@ -1588,10 +1603,10 @@ _{other invalid inputs are possible}_
 1. Editing leave while all employees are being shown
 
    1. Prerequisites: List all employees using the `list` command. Multiple employees in the list.
-      Employee with id "EID1234-5678" has leaves "2023-11-01" and "2023-11-02".
+      Employee with ID "EID1234-5678" has leaves "2023-11-01" and "2023-11-02".
 
    2. Test case: `editleave id/EID1234-5678 old/2023-11-01 new/2023-11-03`<br>
-      Expected: The previous leave date "2023-11-01" of the employee with id "EID1234-5678" will be changed to "2023-11-03". 
+      Expected: The previous leave date "2023-11-01" of the employee with ID "EID1234-5678" will be changed to "2023-11-03". 
       Details of the edited employee shown in the result display.
    
    3. Test case: `editleave id/EID0000-0000 old/2023-11-01 new/2023-11-03`<br>
@@ -1609,7 +1624,7 @@ _{other invalid inputs are possible}_
 2. Editing leave while only some employees are being shown  
 
    1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
-      Employee with id "EID1234-5678" has leaves "2023-11-01" and "2023-11-02" and is not in displayed list.
+      Employee with ID "EID1234-5678" has leaves "2023-11-01" and "2023-11-02" and is not in displayed list.
 
    2. Try the test cases in the previous section (Editing leave while all employees are being shown)
       Expected: Same as the previous section
@@ -1621,7 +1636,7 @@ _{other invalid inputs are possible}_
 1. Listing employees on leave while all employees are being shown 
 
    1. Prerequisites: List all employees using the `list` command. At least one employee in the list.
-   Employee with id "EID1234-5678" has leaves "2023-11-01" and "2023-11-02". No employees on leave on "2023-11-11".
+   Employee with ID "EID1234-5678" has leaves "2023-11-01" and "2023-11-02". No employees on leave on "2023-11-11".
 
    2. Test case: `listleave on/2023-11-01`<br>
    Expected: The employees on leave on the specified date are displayed in the employee list.
@@ -1637,7 +1652,7 @@ _{other invalid inputs are possible}_
 2. Listing employees on leave while only some employees are being shown
 
    1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
-      Employee with id "EID1234-5678" has leaves "2023-11-01" and "2023-11-02" and is not in displayed list.
+      Employee with ID "EID1234-5678" has leaves "2023-11-01" and "2023-11-02" and is not in displayed list.
 
    2. Try the test cases in the previous section (Listing employees on leave while all employees are being shown)
       Expected: Same as the previous section
@@ -1649,14 +1664,14 @@ _{other invalid inputs are possible}_
 1. Adding remark while all employees are being shown
 
     1. Prerequisites: List all employees using the `list` command. Multiple employees in the list.
-       Employee with id "EID1234-5678" has remarks "team player" and "slow on deadlines".
+       Employee with ID "EID1234-5678" has remarks "team player" and "slow on deadlines".
 
     2. Test case: `addremark id/EID1234-5678 r/good leader` or `addremark id/EID1234-5678 r/GOOD LEADER`<br>
        Expected: The remark "good leader" or "GOOD LEADER" will be added to the remark list of the employee with id "EID1234-5678".
        Details of the edited employee shown in the result display.
 
     3. Test case: `addremark id/EID0000-0000 r/good leader`<br>
-       Expected: No remark is added (no existing id). Error details shown in the result display.
+       Expected: No remark is added (no existing ID). Error details shown in the result display.
 
     4. Test case: `addremark id/EID1234-5678 r/team player` or `addremark id/EID1234-5678 r/TEAM PLAYER`<br>
        Expected: No remark is added (remark already exists). Error details shown in the result display.
@@ -1664,7 +1679,7 @@ _{other invalid inputs are possible}_
 2. Adding remark while only some employees are being shown
 
     1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
-       Employee with id "EID1234-5678" has remarks "team player" and "slow on deadlines", and is not in displayed list.
+       Employee with ID "EID1234-5678" has remarks "team player" and "slow on deadlines", and is not in displayed list.
 
     2. Try the test cases in the previous section (Adding remark while all employees are being shown)
        Expected: Same as the previous section
@@ -1676,14 +1691,14 @@ _{other invalid inputs are possible}_
 1. Deleting remark while all employees are being shown
 
     1. Prerequisites: List all employees using the `list` command. Multiple employees in the list.
-       Employee with id "EID1234-5678" has remarks "team player" and "slow on deadlines".
+       Employee with ID "EID1234-5678" has remarks "team player" and "slow on deadlines".
 
     2. Test case: `deleteremark id/EID1234-5678 r/slow on deadlines` or `addremark id/EID1234-5678 r/SLOW ON DEADLINES`<br>
-       Expected: The remark "slow on deadlines" will be deleted from the remark list of the employee with id "EID1234-5678".
+       Expected: The remark "slow on deadlines" will be deleted from the remark list of the employee with ID "EID1234-5678".
        Details of the edited employee shown in the result display.
 
     3. Test case: `deleteremark id/EID0000-0000 r/slow on deadlines`<br>
-       Expected: No remark is deleted (no existing id). Error details shown in the result display.
+       Expected: No remark is deleted (no existing ID). Error details shown in the result display.
 
     4. Test case: `deleteremark id/EID1234-5678 r/bad worker` or `deleteremark id/EID1234-5678 r/BAD WORKER`<br>
        Expected: No remark is deleted (remark doesn't exist). Error details shown in the result display.
@@ -1691,7 +1706,7 @@ _{other invalid inputs are possible}_
 2. Deleting remark while only some employees are being shown
 
     1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
-       Employee with id "EID1234-5678" has remarks "team player" and "slow on deadlines", and is not in displayed list.
+       Employee with ID "EID1234-5678" has remarks "team player" and "slow on deadlines", and is not in displayed list.
 
     2. Try the test cases in the previous section (Deleting remark while all employees are being shown)
        Expected: Same as the previous section
@@ -1724,14 +1739,14 @@ _{other invalid inputs are possible}_
 1. Updating overtime hours while all employees are being shown
 
     1. Prerequisites: List all employees using the `list` command. Multiple employees in the list.
-       Employee with id "EID1234-5678" has overtime hours 0.
+       Employee with ID "EID1234-5678" has overtime hours 0.
 
     2. Test case: `overtime id/EID1234-5678 o/inc a/20`<br>
-       Expected: The overtime hours of the employee with id "EID1234-5678" will increase by 20.
+       Expected: The overtime hours of the employee with ID "EID1234-5678" will increase by 20.
        Details of the edited employee shown in the result display.
 
     3. Test case: `overtime id/EID0000-0000 o/inc a/20`<br>
-       Expected: No overtime hours is updated (no existing id). Error details shown in the result display.
+       Expected: No overtime hours is updated (no existing ID). Error details shown in the result display.
 
     4. Test case: `overtime id/ o/inc a/20` or `overtime id/EID1234-5678 o/ a/20` or `overtime id/EID1234-5678 o/inc`<br>
        Expected: No overtime hours is updated (empty fields). Error details shown in the result display.
@@ -1739,7 +1754,7 @@ _{other invalid inputs are possible}_
 2. Updating overtime hours while only some employees are being shown
 
     1. Prerequisites: Filter some employees using the `find Marketing` command. Some employees in the list.
-       Employee with id "EID1234-5678" has overtime hours 10, and is not in displayed list.
+       Employee with ID "EID1234-5678" has overtime hours 10, and is not in displayed list.
 
     2. Try the test cases in the previous section (Updating overtime hours while all employees are being shown)
        Expected: Same as the previous section
@@ -1778,15 +1793,21 @@ _{other invalid inputs are possible}_
       Expected: The app should detect the corrupted file and show an error message in the console. 
       The app should create a new **hour.json** file with an empty employee book in the **data** folder.
 
+<div style="page-break-after: always;"></div>
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Appendix: Efforts**
 
 This section documents the efforts that went into the development of this project, as well as the challenges faced.
 
-### Difficulty Level
+### Difficulty Level and Challenges Faced
 
 We would rate the difficulty level of this project as **π/5**.
 
 This is because the project codebase and architecture were initially quite challenging to understand, and we had to spend a significant amount of time tracing through the code and understanding how the different components of the project interacted with each other. However, once we understood the architecture of the project, it was relatively straightforward to add most of the new features and modify existing features.
+
+The initial use of a forking workflow was extremely tedious and time-consuming, with lots of merge conflicts, slowing down our progress. However, we decided to switch over to a branching workflow, increasing our productivity and efficiency when delivering v1.3 and v1.4.
 
 There were a few challenging features, such as the `sort` command, which required us to modify the code at multiple layers of abstraction, and the `report` command, which was one of the few commands that required its own storage class and methods. However, we were able to implement these features successfully after some effort.
 
@@ -1795,38 +1816,6 @@ Writing our own tests as well as modifying existing tests, while not particularl
 Finally, writing documentation was a novel experience to us, and necessitated both a deep understanding of the codebase and a good grasp of documentation best practices. Making UML diagrams for the documentation was a particular challenge because of our inexperience with coding in UML. However, after writing the documentation for a few methods, the rest were relatively straightforward to write.
 
 Given the challenges we faced and the novelty of some parts of the project, we would rate the difficulty level of this project as **π/5**.
-
-### Challenges Faced
-
-We faced the following challenges during the development of this project:
-
-* **Understanding the architecture of the project**
-
-Initially, we had a hard time understanding the architecture of the project. We were not sure how the different components of the project interacted with each other, and why some classes, such as `ModelManager` were even necessary. However, as we added more modifications and features to the project, we were able to understand the architecture better.
-
-* **Forking workflow**
-
-Initially, we started with the forking workflow for our project, which was extremely tedious and time-consuming, and led to a lot of merge conflicts. We had to spend a lot of time resolving merge conflicts, and this slowed down our development process. Also, it was difficult to contribute to each other's code, and even minor revisions required a long, inefficient process of syncing the fork, resolving merge conflicts, making the revision, creating a pull request, and merging it. We eventually switched to the branching workflow for v1.3, which was much more efficient and streamlined while maintaining our code quality.
-
-* **Renaming `person` to `employee`**
-
-Since our app was focussed on HR management, we decided to rename the `person` class to `employee`. However, this was not as simple as it seemed. We had to rename the class, as well as all the methods and variables that were related to the `person` class, which was a tedious process. This introduced lots of often-mysterious bugs and errors in our code, which we had to spend a lot of time debugging. It also involved making changes to the test data and documentation, which was also a time-consuming process.
-
-* **Adding and modifying fields in the `employee` class**
-
-Adding and modifying fields in the `employee` class was a challenge because we had to ensure that the new fields were compatible with the existing code. We had to ensure that the new fields were properly initialised new `employee` constructors, and that they were properly handled in the model, logic, and storage classes. We also had to ensure that the new fields were properly handled in the parser and the UI. This was a challenge because we had to ensure that the new fields were properly handled in all the different components of the project.
-
-* **Storing reports**
-
-For the `report` command, we had to store the reports in a separate folder. We had to figure out how to create a new folder and store the reports in it within the patterns and constraints of the existing storage classes. This was a challenge because we were not familiar with the storage classes, and we had to figure out how to store the reports in a way that was consistent with the existing storage classes.
-
-* **Implementing the `sort` command**
-
-For the `sort` command, after exploring and struggling with various approaches from creating separate list views to copying the list, we decided to go ahead with modifying the existing list. This involved adding methods at various layers of abstraction all the way down to the `UniqueEmployeeList` class, which implemented the actual sorting. This was a challenge as it was initially difficult to understand how the different components of the project interacted with each other at each layer of abstraction. This change also broke all of the methods that relied on index for employee selection by making their results unpredictable, and we had to go through all of the methods to change the index to the employee ID. This was a tedious process, and we had to spend a lot of time modifying methods such as `delete` to use the employee ID instead of index, and then debugging them.
-
-* **Documentation**
-
-Being new to writing user and developer guides or creating UML diagrams, we had to spend a significant amount of time looking at existing docs and learning to write our own. We also had to spend a lot of time ensuring that the documentation was consistent with the code and our implementation. This was a challenge because it required an in-depth understanding of the codebase, and so we had to defer most of the technical parts of our documentation towards the end of the project.
 
 ### Effort Required
 In the project, we invested a moderate level of effort to ensure the successful development and delivery of our product. Here are some of the different aspects of our team efforts:
@@ -1848,6 +1837,9 @@ Another feature we are proud of is our `report` feature that allows our users to
 
 Overall, we are proud of our project, and we believe that we have done our best with all the constraints and challenges we faced. We are happy with the result and believe that our product will meet the needs of our target audience.
 
+<div style="page-break-after: always;"></div>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Planned Enhancements
 
@@ -1871,7 +1863,7 @@ Overall, we are proud of our project, and we believe that we have done our best 
 **Solution:**
 * A solution is to address a remark by its index (based on date added) instead of its value, so that
   `deleteremark id/EMPLOYEE_ID 1` is enough to delete the first remark of employee with
-  employee id EMPLOYEE_ID.
+  employee ID EMPLOYEE_ID.
 
 ### Adding a leave with a date far in the past and future
 
@@ -1901,11 +1893,11 @@ Overall, we are proud of our project, and we believe that we have done our best 
 
 **Problem:**
 * In our current implementation, adding an employee with the same phone number or email as another existing employee is allowed.
-* This is caused by our decision to only check same employee by comparing by employee id.
+* This is caused by our decision to only check same employee by comparing by employee ID.
 * This might lead to unintended duplicates.
 
-**Solution:**
-* We will update the check for the same employee to check not only by employee id but also by phone number and email.
+Solution:
+* We will update the check for the same employee to check not only by employee ID but also by phone number and email.
 
 ### Unable to view the number of leaves remaining when adding a leave period that exceeds maximum number of leaves
 
@@ -1921,6 +1913,22 @@ Overall, we are proud of our project, and we believe that we have done our best 
 * In this case, it is to change the error message into this:<br>
   `This leave period exceeds the number of leaves remaining for this employee`<br>
   `Number of leaves remaining: 1`
+
+### Unable to view the number of overtime hours remaining when updating overtime hours that exceeds the range of allowed number of overtime hours
+
+Problem:
+* In our current implementation, if a user tries to update the number of overtime hours for an employee and exceeds the
+  maximum number of allowed overtime hours or make it fall below zero, the app only displays an error message
+  telling the user it exceeds the range of allowed number of overtime hours.
+* However, the app does not show the remaining number of overtime hours, so the fastest method is to use report command to display the current amount of
+  overtime hours taken by the employee and perform manual subtraction to obtain remaining number of overtime hours.
+
+Solution:
+* We plan to revamp the error messages pertaining to this issue to display as much information as possible to the user,
+  in this case the remaining number of overtime hours.
+* In this case, it is to change the error message into this:<br>
+  `Number of overtime hours should not be above 72 or below 0`<br>
+  `Number of overtime hours remaining: 2`
 
 ### Unclear error message for invalid email address
 
@@ -1939,7 +1947,7 @@ Overall, we are proud of our project, and we believe that we have done our best 
      `- end with a domain label at least 2 characters long.`<br>
      `- have each domain label contain only alphanumeric characters.`<br>
 
-### Edit command error message is inconsistent with respect to invalid id
+### Edit command error message is inconsistent with respect to invalid ID
 
 **Problem:**
 * In our current implementation, when a user inputs an invalid index in an edit command, the error messages
