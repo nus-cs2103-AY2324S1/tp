@@ -91,6 +91,7 @@ This **darker blue box** with the **lightbulb icon** provides you **extra useful
 </div>
 
 ---
+<div class="pagebreak"></div>
 
 # Table of Contents
 1. [Quick Start](#quick-start)
@@ -122,6 +123,8 @@ This **darker blue box** with the **lightbulb icon** provides you **extra useful
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div class="pagebreak"></div>
+
 # Quick Start
 
 1. Ensure you have Java `11` or above installed in your Computer.
@@ -152,6 +155,8 @@ This **darker blue box** with the **lightbulb icon** provides you **extra useful
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div class="pagebreak"></div>
+
 # Interface Overview
 
 CampusConnect's **Graphical User Interface (GUI)** allows users to access contacts through an intuitive display with seamless interaction.
@@ -170,6 +175,8 @@ Here is an overview of the main elements of the interface you should be familiar
   * Use commands such as [`list`](#list-all-contacts-list) and [`find`](#contact-search) to dynamically adjust the actively displayed contacts in the *contact directory*.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div class="pagebreak"></div>
 
 # Features
 
@@ -194,6 +201,8 @@ Here is an overview of the main elements of the interface you should be familiar
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
+
+<div class="pagebreak"></div>
 
 ## Contact Management
 
@@ -237,11 +246,13 @@ Refer to [properties of contact](#properties-of-contact) on the accepted formats
 
 </box>
 
+<div class="pagebreak"></div>
+
 Here is what CampusConnect looks like when you execute the `add` command.
 
 <div style="display:flex; justify-content:space-around; align-items:center;">
-  <img src="images/before_add.png" alt="Before add command" style="height:400px; margin:10px;">
-  <img src="images/after_add.png" alt="After add command" style="height:400px; margin:10px;">
+  <img src="images/before_add.png" alt="Before add command" style="height:300px; margin:10px;">
+  <img src="images/after_add.png" alt="After add command" style="height:300px; margin:10px;">
 </div>
 
 <box type="warning">
@@ -334,6 +345,8 @@ Below are some examples on how to use the command:
 
 </box>
 
+<div class="pagebreak"></div>
+
 ###  List all contacts: `list`
 
 After using CampusConnect's [find contact](#find-contacts) feature that filters the contacts you are looking for, you may want to have an overview of all your contacts again! Thus, CampusConnect allows you to list all your contacts.
@@ -411,6 +424,7 @@ Below are some examples on how to use the commands:
 
 </box>
 
+<div class="pagebreak"></div>
 
 ### Remove note from contact: `removenote`
 You can remove notes from a person with the `removenote` command.
@@ -434,6 +448,9 @@ Below are some examples on how to use the commands:
 You can view notes by one of two ways: by using the `viewnotes` command, or by clicking on the `Notes` button in the person's information window. The notes window can be closed by either clicking the `Close` button or by pressing the `ESC` key, making it convenient for both CLI and GUI users to use the notes feature.
 
 Format: `viewnotes PERSON_INDEX`
+
+<div class="pagebreak"></div>
+
 <box type="info" icon=":fa-solid-magnifying-glass:">
 Below are some examples on how to use the commands:
 
@@ -488,6 +505,7 @@ We enforce this with a **strict payment tracking limit** of a maximum of **$10,0
 If you attempt to record a payment that would cause a contact's balance to exceed this limit, you will see an error message stating that the payment cannot be recorded for this reason.
 </box>
 
+<div class="pagebreak"></div>
 
 ### Money Amount Format
 
@@ -604,7 +622,7 @@ Find expressions have a low barrier to entry that allows for simple filtering by
 
 If you then find that the basic filtering is insufficient for your use case, you can read the [advanced filtering](#advanced-filtering) section to learn how to perform more complex filtering.
 
-
+<div class="pagebreak"></div>
 
 <panel header=":fa-solid-book: **Supported Fields**" type="secondary" id="find-fields-table" expanded no-close>
 Across both basic and advanced filtering, the following fields are supported:<br><br>
@@ -657,6 +675,8 @@ For now, there is no way to search for the double-quote character (`"`) itself.
 This functionality will be added in a future release.
 </box>
 
+<div class="pagebreak"></div>
+
 <box theme="info" icon=":fa-solid-magnifying-glass:">
 
 For example, given the following contacts (some fields omitted for brevity):
@@ -690,6 +710,8 @@ Additionally, **using the double-quote characters**, valid **find conditions** i
 While basic filtering is sufficient for most use cases, you may find that you need to perform more complex filtering. For example, you may want to find all contacts who have the tag `"friend"` *and* whose names contain the substring `"do"`. Or you may want to find all contacts whose addresses contain the substring `"street"` *or* whose names *do not* contain the substring `"ye"`.
 
 You can accomplish this and more using our powerful advanced filtering syntax, which supports arbitrarily-complex **`FIND_EXPRESSION`**, which can be composed of many **find conditions** combined or transformed by **logical operators**.
+
+<div class="pagebreak"></div>
 
 <panel header=":fa-solid-book: **Supported Logical Operators**" type="secondary" id="find-logical-operators-table" expanded no-close>
 
@@ -742,6 +764,8 @@ Note that the last example is **not equivalent** to `n/do && t/friend || t/colle
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div class="pagebreak"></div>
+
 # Command summary
 
 Action        | Format, Examples
@@ -793,5 +817,8 @@ div.visual-components div.box-container {
   margin-bottom: 0;
 }
 
+@media print {
+    .pagebreak { page-break-before: always; } /* page-break-after works, as well */
+}
 
 </style>
