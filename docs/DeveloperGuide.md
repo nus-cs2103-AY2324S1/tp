@@ -248,6 +248,9 @@ When executed, `ViewCommand` saves the index of the person to be viewed as `Last
 
 By having a `isView` property in `CommandResult`, the `MainWindow` component is able to toggle the `UI` to the view the person of the `LastViewedPersonIndex` after the command has been executed.
 
+Additionally by allowing `isView` as a property in `CommandResult`, we are able to view the person's profile after executing other commands such as `add`, `edit`, `set`, `remark`, `addL`, `addG` without having to enter the `view` command again.
+
+We only need to set the `isView` property to true in the `CommandResult` object if the command being executed targets a person. This is because the `ViewCommand` itself originally require an index to be specified to view the person's profile. Thus, if the command does not target a person, the view command will not be triggered and the Person Information Panel and Summary Statistic Screen will not be updated.
 
 Given below is an example usage scenario and how the view feature behaves at each step.
 
@@ -292,6 +295,12 @@ Pros: Arguably a more OOP approach since all commands that trigger view IS-A `Vi
 
 Cons: You cannot implement any command that does not involve viewing but inherits from any command that is a children of `ViewCommand`.  
 An example could be trying to create identical commands that does not toggle the UI after execution. This would require duplication of the exact same command code but inheriting from `Command` instead of `ViewCommand`.
+
+
+
+The following activity diagram shows how command such as `add`, `edit`, `set`, `remark`, `addL`, `addG` (Commands that trigger view) lead to the update of the Person Information Panel in the UI.
+This is done by setting the `isView` property to true in the `CommandResult` object.
+<puml src="diagrams/ViewActivityDiagram.puml" alt="Event Activity Diagram"></puml>
 
 
 ### Search feature
@@ -524,6 +533,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Hiring Manager   | update the application status for a candidate (e.g. "Interviewed", "Rejected", "Offered")                        | I can keep track of each candidate's progress in the hiring process                                                                        |
 | `* * *`  | Hiring Manager   | record the score of the different activities such as interviewsor assessments that an applicant might go through | I can use them for effective comparison and filter the candidates easily                                                                   |
 | `* * *`  | Hiring Manager   | compare candidates using their performance in their assessments or interviews                                    | I can choose the best candidates to move to the next stage of the hiring process and get the best performing candidates objectively        |
+| `* * *` | Hiring Manager | add social profile [LinkedIn/Github]  candidate's information and view with ease                                 | I can get a more holistic view of the candidate's abilities |
 | `* *`    | Hiring Manager | view a schedule/summary of events relating to the candidates                                                     | I can make preparations and arrangements for the events beforehand, and also get an idea of where each candidate is in the hiring process. |
 | `**`     | Hiring Manager   | export candidate information and application data to a spreadsheet        <br/>                                  | I can perform further analysis using alternate tools on candidate data                                                                     |
 | `*`      | Hiring Manager   | get data on which positions are lacking job applicants                                                           | I can update the external recruitment team to focus on head hunting applicants for these roles                                             |
@@ -1056,3 +1066,46 @@ Both Person List and Person Information Panel is updated to reflect the new `Int
     `filter t/Interview met/percentile` 
     **Expected**: No person is filtered. Error details shown in the status message. Person list remains the same.
 
+### Adding LinkedIn/Github username to a person while all persons are being shown ###
+
+1. Adding LinkedIn/Github username to a person while all persons are being shown
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    2. Test case (Positive test case): `addL 1 u/alexyeoh`
+       **Expected:** LinkedIn username added to the person's profile. Displayed in person card.
+    3. Test case (Negative test case): `addG -1 u/madlad`
+       **Expected:** No Github username is added to any person. Error details shown in the status message. Person information panel remains the same.
+    4. Test case (Negative test case): `addL u/maxcodes`
+       **Expected:** No LinkedIn username is added to any person. Error details shown in the status message. Person information panel remains the same.
+    5. Test case (Negative test case): `addG 1`
+       **Expected:** No Github username is added to any person. Error details shown in the status message. Person information panel remains the same.
+
+### Viewing person's social profile ###
+
+1. Viewing a person's social profile
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list, with their usernames previously added.
+    2. Test case (Positive test case): `linkedin 1`
+       **Expected:** Redirected to LinkedIn profile of the person, in the browser. Success message displayed on JABPro.
+    3. Test case (Negative test case): `github 0`
+       **Expected:** No Github profile shown. Error details shown in the status message.
+    4. Test case (Negative test case): `linkedin 2`
+       [Assumption: LinkedIn username has not been previously added for candidate 2]
+       **Expected:** No LInkedin profile shown. Error details shown in the status message.
+    5. Test case (Negative test case): `github`
+       **Expected:** No Github profile shown. Error details shown in the status message.
+
+### Adding Event relating to a candidate ###
+
+1. Adding event relating to a candidate
+    1. Prerequisites: List all persons using the `list` command. Multiple person in the list.
+    2. Test case (Positive test case): `event 1 d/Interview bt/2023-11-12 10:00 et/2023-11-12 12:00`
+       **Expected:** Event added to EventBook. Success message displayed. Event visible in Events window.
+    3. Test case (Negative test case): `event 0 d/Interview bt/2023-11-12 10:00 et/2023-11-12 12:00`
+       **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
+    4. Test case (Negative test case): `event 1 bt/2023-11-12 10:00 et/2023-11-12 12:00`
+       **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
+    5. Test case (Negative test case): `event 1 d/Interview bt/12-11-2023 10:00 et/12-11-2023 12:00`
+       **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
+    6. Test case (Negative test case): `event 1 d/Interview bt/2023-11-12 12:00 et/2023-11-12 10:00`
+       **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
+    7. Test case (Negative test case): `event 1 d/Interview bt/2023-11-31 10:00 et/2023-12-01 10:00`
+       **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
