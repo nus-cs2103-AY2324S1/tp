@@ -47,12 +47,12 @@ you can access contacts by roles and responsibilities instantly.
   * [Help Command](#help-command)
   * [Reset the project](#reset-the-project)
   * [Exit the application](#exit-the-application)
-* [Troubleshooting](#troubleshooting)
 * [FAQs](#faqs)
 * [Support](#support)
 * [Known issues](#known-issues)
 * [Command Summary](#command-summary)
 * [Future Enhancement](#future-enhancement)
+* [Glossary](#glossary)
 
 <page-nav-print />
 
@@ -603,10 +603,10 @@ This command can be used when you want to restart the project.
 
 #### Example usage:
 * Type `exit` and the application will close automatically.
---------------------------------------------------------------------------------------------------------------------
 
-## Troubleshooting
-- Details coming soon...
+<br>
+
+This is all the features that we have implementated in our application.
 
 Click [here](#table-of-contents) to go back to contents.
 
@@ -681,9 +681,30 @@ Click [here](#table-of-contents) to go back to contents.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Support
-- Details coming soon...
+If you encounter any issues or have questions about LinkTree, we're here to help. Please find the relevant support resources below:
 
-Click [here](#table-of-contents) to go back to contents.
+### Contact Information
+For personalized assistance, you can reach out to our support team via email at [linktreeltd@gmail.com](mailto:linktreeltd@gmail.com). We aim to respond within [3 business days].
+
+### Frequently Asked Questions (FAQs)
+Check our [FAQs section](#faq) for answers to common questions and solutions to known problems.
+
+### Software Updates
+
+Stay informed about the latest releases, bug fixes, and new features by checking our [Releases](https://github.com/AY2324S1-CS2103T-W11-4/tp/releases) regularly.
+
+
+### Feedback and Suggestions
+
+We value your feedback and suggestions. Share your ideas for improvement or new features through our feedback portal given below. Also, if you come across a bug or unexpected behavior, help us improve by reporting it in the feedback portal as well.
+[Feedback Portal](https://docs.google.com/forms/d/e/1FAIpQLSc4rIrGgKWQBDKxmMKP7S0pmuI42OEoxZ00Qaxo0K2rvlVLag/viewform?usp=sf_link)
+
+**Note:** Before reaching out for support, please ensure that you have checked our documentation for relevant information.
+
+We appreciate your continued support and strive to provide the best user experience possible.
+
+
+Click_ [here](#table-of-contents) to go back to contents.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -733,6 +754,25 @@ Click [here](#table-of-contents) to go back to contents.
 
 
 <br>
+
+Click [here](#table-of-contents) to go back to contents.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+| Term        | Definition                                                                                                                                                                                           |
+|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| CLI         | Command Line Interface - A text-based interface where users interact with the application by typing commands into a terminal or command prompt.                                                      |
+| GUI         | Graphical User Interface - The visual interface that allows users to interact with the application.                                                                                                  |
+| .jar        | Java Archive - A file format used to package Java class files, associated metadata, and resources into a single archive file. It is a common format for distributing Java applications or libraries. |
+| Addressbook | A file that stores the list of developers in the application.                                                                                                                                        |
+| Teambook    | A file that stores the list of teams in the application.                                                                                                                                             |
+| Prefix      | A keyword used before certain elements in a command to specify its type or category.                                                                                                                 |                                     
+| Tag         | A label or keyword assigned to developers for categorization and easy identification.                                                                                                                |
+| Tree        | A visual representation of the top-down project's structure, displaying teams and developers.                                                                                                        |
+| Index       | A numerical identifier assigned to developers or teams for reference.                                                                                                                                |             
+| FAQ         | Frequently Asked Questions which users can check out if needed.                                                                                                                                      |
 
 Click [here](#table-of-contents) to go back to contents.
 

@@ -71,7 +71,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-![UI Class Diagram](images/UML_images/UiDiagram.png)
+<puml src="diagrams/UiClassDiagram.puml" width="574" />
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -649,7 +649,7 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+1. _{ more test cases … }_
 
 ### Saving data
 
@@ -657,10 +657,46 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+1. _{ more test cases … }_
 
 ## **Appendix C: Effort**
-(...Please add to this...)
+
+### Overview
+
+
+Our team managed to create this application LinkTree, which is designed to assist **project managers** and **developers** in startups. LinkTree aims to streamline team management, drawing inspiration from the existing AB3 features and introducing unique elements tailored to the needs of project managers and developers. The use of a distinctive tree structure allows startups to easily locate the right person at the right time.
+
+### Challenges and Solutions:
+
+We have made the following efforts to tackle the challenges we faced in this project. With constant discussion among our team members we managed to come with solutions for each problem. 
+1. **Modification of Storage Structure:**
+    - **Challenge:** Initially, we encountered difficulties in modifying the storage structure to accommodate two JSON files - address book to manage developers and team book to manage the teams.
+    - **Solution:** We conducted thorough research and discussions to design a storage system that efficiently separated the address book and team book data. Implementation involved understanding various UML diagrams, and AB3's implementation of addressbook. 
+
+2. **Integration of Team Management Features:**
+    - **Challenge:** Adapting the existing AB3 features, such as `add`, `delete`, `edit`, `find`, and `list`, to incorporate our team management implementation posed a significant challenge.
+    - **Solution:** Through collaborative efforts, we systematically modified each feature to support team-related functionalities. This involved adjusting data manipulation logic, modifying diagrams, and providing new user interfaces for team-related operations.
+
+3. **Upgrading the User Interface:**
+    - **Challenge:** Changing the existing UI to display the details of team members was another challenge that we encounterd in this project.
+    - **Solution:** We have decided to create a new panel beside developers panel to display the team name, team leader name and developer names in the team.
+
+4. **Design and Implementation of Tree Structure:**
+    - **Challenge:** Designing the tree structure for effective team hierarchy was a conceptual challenge. The practical implementation proved more complex than anticipated.
+    - **Solution:** After finalizing the conceptual design, we engaged in iterative development and testing. Refinements were made to the implementation based on feedback, resulting in a simple tree structure that displays all the developers and teams in the addressbook and teambook.
+
+5. **Testing and Documentation:**
+    - **Challenge:** The final stages of testing and documentation required meticulous attention to detail and comprehensive coverage.
+    - **Solution:** We established a comprehensive testing framework, including unit tests, integration tests, and user acceptance testing to maximise our test coverage. Documentation was created concurrently with development, ensuring that each feature, modification, and usage scenario was well-documented for our target users.
+
+### Results and Achievements
+
+1. **Timely Feature Implementation:** All planned features, including the innovative tree structure, were successfully implemented within the given deadline.
+
+2. **Effective Tree Structure and UI Implementation:** The implementation of the unique tree structure proved to be a success and  providing an intuitive UI was one of the efficient way to manage teams within the application.
+
+3. **Testing Process:** We have done enough testing procedures to ensure the reliability and stability of the application. This included unit testing, integration testing, and user acceptance testing that we have learnt CS2103T.
+
 
 ## **Appendix D: Future Enhancements**
 **We have several feature enhancements and quality of life improvements in the pipeline.**
