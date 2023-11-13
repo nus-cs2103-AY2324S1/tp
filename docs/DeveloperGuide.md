@@ -536,14 +536,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Hiring Manager | compare candidates using their performance in their assessments or interviews                                    | I can choose the best candidates to move to the next stage of the hiring process and get the best performing candidates objectively        |
 | `* * *`  | Hiring Manager | add social profile [LinkedIn/Github]  candidate's information and view with ease                                 | I can get a more holistic view of the candidate's abilities                                                                                |
 | `* *`    | Hiring Manager | view a schedule/summary of events relating to the candidates                                                     | I can make preparations and arrangements for the events beforehand, and also get an idea of where each candidate is in the hiring process. |
-<<<<<<< HEAD
 | `* *`    | Hiring Manager   | export candidate information and application data to a spreadsheet        <br/>                                  | I can perform further analysis using alternate tools on candidate data                                                                     |
 | `*`      | Hiring Manager   | get data on which positions are lacking job applicants                                                           | I can update the external recruitment team to focus on head hunting applicants for these roles                                             |
 | `*`      | Hiring Manager   | get data on which positions already have too many applicants                                                     | I can forward this to the department heads to see if they still want to keep the job posting or close it                                   |
-=======
-| `**`     | Hiring Manager | export candidate information and application data to a spreadsheet        <br/>                                  | I can perform further analysis using alternate tools on candidate data                                                                     |
 
->>>>>>> 34bac4504270b5927f51ab1064e8c2a5b4f3ef00
+
 
 ### Use cases
 
@@ -858,12 +855,9 @@ Additionally, you can only use the summary statistic table for comparison after 
 Currently, the filter feature might be too flexible for the user. That is it works on the displayed list and not across the board. We would like to improve on this by implementing a filter feature that works across the database.  
 This makes it more intuitive and logical for the user to use since the user would expect the filter feature to work across the database and not just the displayed list.
 
-<<<<<<< HEAD
 ### Disabling view when using `search` and `filter`
 **Improve the search and filter feature**
 Currently, the UI does not update and will remain unchanged from the previous command. This may be confusing or inaccurate and thus it should remain blank
-=======
->>>>>>> 34bac4504270b5927f51ab1064e8c2a5b4f3ef00
 
 ## **Appendix: Effort**
 

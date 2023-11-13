@@ -352,6 +352,7 @@ An example of the `remark` command being successfully executed with the **REMARK
 | Missing remark keyword: `remark`              | Unknown command                       | Follow the command format of `remark INDEX r/[REMARK]` closely                                  |
 | Missing Index                                 | Invalid command format!               | Ensure that the index is filled up.                                                             |
 | Invalid Index                                 | The person index provided is invalid  | Ensure that the index is valid. That is it is a number that is on the displayed applicant list. |
+ | Negative or 0 Index | Invalid command format! | Ensure that the index is a positive integer and is also a number that is on the displayed applicant list. |
 
 <box type="tip" seamless>
 
