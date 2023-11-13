@@ -22,6 +22,7 @@ effortlessly.
 ## Summary of Contributions
 
 ### Enhancements
+
 1. Added `status` field
   * **What it does**: Users can indicate whether the application is `PENDING`, `APPROVED`, `REJECTED`.
   * **Justification**: Users should be able to add the status so that they can better track and decide on the next 
@@ -33,8 +34,10 @@ effortlessly.
   * **What it does**: The feature enables users to add interviews to a job application.
   * **Justification**: Since interviews are almost always the mandatory next step after applying for a job, 
     it is significant that users are able to add interview details to their applications.
-  * **Highlights**: Implementing the command from scratch posed many issues, for instance Storage had to be modified to 
-    save interviews, and files such as TypicalInterviews had to be added for testing purposes.
+  * **Highlights**: Implementing the command from scratch posed many issues. For instance, Storage had to be modified to 
+    save interviews. This was challenging as previous commands did not require us to look into the Storage section, 
+    hence a lot of time was spent scrutinising the section in order to modify it.  
+    Files such as TypicalInterviews also had to be added for testing purposes.
     <br><br>
 3. Improved `sort` command to sort by `status`
   * **What it does**: The `sort` command is now able to take in the status prefix and sort the application list by status.
