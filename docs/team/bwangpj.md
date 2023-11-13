@@ -37,7 +37,7 @@ While it has a Graphical User Interface, most of its user interactions happen vi
 - Describe implementation of:
   - `edit` command
   - `filter` command
-  - navigation between command history using up/down arrow keys; including the UI component as well as description of how the feature is implemented
+  - navigation between command history using up/down arrow keys; including the `UI` component as well as description of how the feature is implemented using `CommandBoxHistory`
   
   and their associated UML diagrams.
 - Add Planned Enhancements appendix to the DG
