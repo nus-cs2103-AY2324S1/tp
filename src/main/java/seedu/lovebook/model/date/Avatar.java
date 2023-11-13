@@ -36,6 +36,8 @@ public class Avatar {
      * @return the avatar number
      */
     public String getAvatarNumber() {
+        int val = Integer.parseInt(value);
+        assert val >= LOWER_BOUND && val < UPPER_BOUND : "Avatar number is not valid";
         return value;
     }
 

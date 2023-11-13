@@ -92,10 +92,13 @@ public class Date implements Comparable<Date> {
     }
 
     public Age getAge() {
-        return age;
+        int age = Integer.parseInt(this.age.value);
+        assert age >= 18 && age <= 150 : "Invalid Age!";
+        return this.age;
     }
 
     public Gender getGender() {
+        assert gender.toString().equals(Gender.MALE) || gender.toString().equals(Gender.FEMALE) : "Invalid Gender!";
         return gender;
     }
 
