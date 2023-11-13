@@ -1204,10 +1204,10 @@ Testers are expected to do more *exploratory* testing.
 
 </box>
 
-1. Mark a student as present in Class Manager
+1. Mark a student as present in Class Manager.
 
    1. Test case: `present s/STUDENT_NUMBER tut/1`<br>
-      Expected:The student with STUDENT_NUMBER is marked as present for the first tutorial.
+      Expected: The student with STUDENT_NUMBER is marked as present for the first tutorial.
       <br><br>
 
 ### Mark all displayed students as present
@@ -1218,11 +1218,19 @@ Testers are expected to do more *exploratory* testing.
 
 </box>
 
-1. Mark all displayed students as present in Class Manager
+1. Mark all displayed students as present in Class Manager.
 
    1. Test case: `present-all tut/1`<br>
-      Expected:All displayed students are marked as present for the first tutorial.
+      Expected: All displayed students are marked as present for the first tutorial.
       <br><br>
+
+### Randomly select students
+
+1. Randomly select a specific number of students from all students displayed.
+
+  1. Test case: `random 2`<br>
+     Expected: Two student from all students displayed are selected randomly.(Ensure at least two students are displayed.)
+     <br><br>
 
 ### View a student
 
