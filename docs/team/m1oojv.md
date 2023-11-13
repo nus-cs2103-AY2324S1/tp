@@ -43,7 +43,7 @@ Given below are my contributions to the project.
   * Opened issues for each milestones (Issue [#41](https://github.com/AY2324S1-CS2103T-T10-2/tp/issues/41), [#98](https://github.com/AY2324S1-CS2103T-T10-2/tp/issues/98), [#114](https://github.com/AY2324S1-CS2103T-T10-2/tp/issues/114))<br><br>
 
 * **Enhancements to existing features**:
-  * Revise help messages to incorporate authentic event planning terminology and context, providing users with a more relevant and intuitive experience. (PR [#108](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/108)) <br><br> 
+  * Revise help messages with authentic event planning terminology and context. (PR [#108](https://github.com/AY2324S1-CS2103T-T10-2/tp/pull/108)) <br><br> 
 
 * **Documentation**:
   * User Guide:
