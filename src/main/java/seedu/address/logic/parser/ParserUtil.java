@@ -242,4 +242,25 @@ public class ParserUtil {
         String trimmedDateTime = dateTime.trim();
         return LocalDateTime.parse(trimmedDateTime, DATE_TIME_STRING_FORMATTER);
     }
+
+    /**
+     * Parses given DateTime String into a LocalDateTime object.
+     *
+     * @param dateTime a date time string in 'yyyy-MM-dd HH:mm' format.
+     * @return LocalDateTime object describing the time and date.
+     */
+    public static LocalDateTime parseDateTimeNonNull(String dateTime) {
+        String trimmedDateTime = dateTime.trim();
+        return LocalDateTime.parse(trimmedDateTime, DATE_TIME_STRING_FORMATTER);
+    }
+
+    /**
+     * Parses given LocalDateTime into a String object.
+     *
+     * @param dateTime a LocalDateTime object.
+     * @return String object describing the time and date in the format of 'yyyy-MM-dd HH:mm'.
+     */
+    public static String parseDateTimeToString(LocalDateTime dateTime) {
+        return dateTime.format(DATE_TIME_STRING_FORMATTER);
+    }
 }

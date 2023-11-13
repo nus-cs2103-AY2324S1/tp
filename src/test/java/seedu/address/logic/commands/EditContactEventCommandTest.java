@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.parser.ParserUtil.parseDateTimeNonNull;
 import static seedu.address.testutil.TypicalEvents.getTypicalCalendar;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -13,7 +14,6 @@ import static seedu.address.testutil.TypicalIndexes.INVALID_INDEX;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
@@ -75,10 +75,8 @@ public class EditContactEventCommandTest {
         editEventDescriptor.setStart(startDateTimeString);
         editEventDescriptor.setEnd(endDateTimeString);
         editEventDescriptor.setEventDescription(new EventDescription(desc));
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime startDateTime = LocalDateTime.parse(startDateTimeString, formatter);
-        LocalDateTime endDateTime = LocalDateTime.parse(endDateTimeString, formatter);
+        LocalDateTime startDateTime = parseDateTimeNonNull(startDateTimeString);
+        LocalDateTime endDateTime = parseDateTimeNonNull(endDateTimeString);
 
         assertEquals(editEventDescriptor.getStart().get(), startDateTime);
         assertEquals(editEventDescriptor.getEnd().get(), endDateTime);
