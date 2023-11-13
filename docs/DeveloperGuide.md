@@ -182,7 +182,7 @@ Step 3: The user executes a `view 1` command to view the 1st person in the addre
 
 **Note:** If the index given is more than the size of the list or when the index given is 0, `ViewCommand` will not call `Model#view(Person personToView)`. Instead, a `MESSAGE_INVALID_PERSON_DISPLAYED_INDEX` exception will be thrown. The Main Window display continue displaying the `PersonListPanel` UI instead of the  `ViewWindow` UI.
 
-The following sequence diagram shows how the View Command works:
+The following sequence diagram shows how the `view` operation works:
 <div align="center">
     <img src="diagrams/ViewSequenceDiagram.png" alt= "ViewSequenceDiagram" width="650"/>
 </div>
