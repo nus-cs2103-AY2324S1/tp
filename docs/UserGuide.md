@@ -312,7 +312,7 @@ Format: `enrol m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
 * Enrols the member at the specified `MEMBER_INDEX` to the event at the specified `EVENT_INDEX` with `NUMBER_OF_HOURS` specifying the number of hours that the member contributed and `REMARK` stating extra remarks about the member and event.
 
 Examples:
-* `enrol m/1 e/1 h/2 r/Role: Photographer` enrols member at **member index** 1 in the member list to the event at **event index** 5 in the event list, where the member had 3 **hours** of contributions to that event and has a **remark** stating that the member "did planning".
+* `enrol m/1 e/1 h/2 r/Role: Photographer` enrols member at **member index** 1 in the member list to the event at **event index** 1 in the event list, where the member had 2 **hours** of contributions to that event and has a **remark** of "Role: Photographer".
 * `enrol m/5 e/1` enrols the member at **member index** 5 in the member list to the event at **event index** 1 in the event list.
 
 <hr class="command-separator">
@@ -450,14 +450,12 @@ List all members and all events in the CCA in two separate columns.
 
 Format: `list`
 
-A GUI similar to the one below will be shown after entering the command.
-
 <hr class="feature-class-separator">
 
 <div style="page-break-after: always;"></div>
 
 ### Utility Commands
-CCACommander provides you with powerful utility commands to make your admin tasks even more of a breeze than it was.
+CCACommander provides you with powerful utility commands to make your admin tasks even more of a breeze than it was before.
 
 #### Undoing a command: `undo`
 
