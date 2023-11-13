@@ -11,11 +11,11 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
+ * A list of Doctors that enforces uniqueness between its elements and does not allow nulls.
+ * A x is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
+ * Doctors uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
+ * unique in terms of identity in the UniqueDoctorList. However, the removal of a Doctor uses Person#equals(Object) so
+ * as to ensure that the Doctor with exactly the same fields will be removed.
  * <p>
  * Supports a minimal set of list operations.
  *
@@ -49,8 +49,8 @@ public class UniqueDoctorList extends UniqueObjectList<Doctor> {
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds a Doctor to the list.
+     * The Doctor must not already exist in the list.
      */
     @Override
     public void add(Doctor toAdd) {
@@ -62,9 +62,9 @@ public class UniqueDoctorList extends UniqueObjectList<Doctor> {
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * Replaces the Doctor {@code target} in the list with {@code editedDoctor}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The Doctor identity of {@code editedDoctor} must not be the same as another existing Doctor in the list.
      */
     @Override
     public void setObject(Doctor target, Doctor editedDoctor) {
@@ -83,8 +83,8 @@ public class UniqueDoctorList extends UniqueObjectList<Doctor> {
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent Doctor from the list.
+     * The Doctor must exist in the list.
      */
     @Override
     public void remove(Doctor toRemove) {
@@ -95,8 +95,8 @@ public class UniqueDoctorList extends UniqueObjectList<Doctor> {
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code Doctors}.
+     * {@code Doctors} must not contain duplicate Doctors.
      */
     @Override
     public void setObjects(List<Doctor> doctors) {
@@ -114,7 +114,7 @@ public class UniqueDoctorList extends UniqueObjectList<Doctor> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code Doctors} contains only unique Doctors.
      */
     @Override
     protected boolean objectsAreUnique(List<Doctor> doctors) {

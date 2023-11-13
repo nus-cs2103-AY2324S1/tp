@@ -12,21 +12,21 @@ import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
 
 /**
- * Finds and lists all persons in in address book whose attributes match the predicate.
+ * Finds and lists all appointments in address book that has personnel that match the Ic query.
  * Keyword matching is case insensitive.
  */
 public class FindAppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "find-appt";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all appointments who involve the "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all appointments that involve the "
             + "the specified case-sensitive NRIC and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " T1234567Z";
 
     private final Predicate<Appointment> predicate;
     /**
-     * Finds and lists all persons in address book whose attributes match the predicate.
+     * Finds and lists all appointments in address book that has personnel matching the Ic query.
      *  Keyword matching is case-insensitive.
      */
     public FindAppointmentCommand(Predicate<Appointment> predicate) {

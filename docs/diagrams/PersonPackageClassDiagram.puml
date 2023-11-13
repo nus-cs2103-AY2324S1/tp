@@ -1,0 +1,39 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Person {
+    Class Person
+    Class Email
+    Class Name
+    Class Address
+    Class Phone
+    Class Tag
+    Class Appointments
+
+    Person *--> "1" Email
+    Person *--> "1" Name
+    Person *--> "1" Phone
+    Person *--> "1" Address
+    Person *--> "*" Appointments
+    Person *--> "*" Tag
+
+        Package Doctor {
+            Class Doctor
+
+            Doctor -up---|> Person.Person
+
+        }
+
+        Package Patient {
+            Class Condition
+            Class BloodType
+
+            Patient -up---|> Person.Person
+            Patient *--> "1" Condition
+            Patient *--> "1" BloodType
+        }
+}
+@enduml

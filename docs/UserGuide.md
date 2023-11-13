@@ -40,7 +40,7 @@ hospital management tasks done faster than current GUI apps in the industry.
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar MediLink.jar` command
    to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![quickview](images/quickorientation.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
    open the help window.<br>
@@ -283,6 +283,9 @@ Finds persons that match the query.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
+<div markdown="block" class="alert alert-info">
+**:information_source: Take Note:**<br>
+
 * When searching names, the search is case-insensitive. e.g `hans` will match `Hans`.
 * When searching names, the order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * When searching names, only full words will be matched e.g. `Han` will not match `Hans`.
@@ -290,6 +293,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 * Note that if the name coincides with other find commands, it will be interpreted as the other find command first and extraneous paremeters will be ignored. e.g. `find F Kennedy John` will search for all female persons.
 * It is recommended to use `list` to restore the view of all data after a `find` command.
+
+</div>
 
 Examples:
 
@@ -304,8 +309,13 @@ Finds person that matches the NRIC query.
 
 Format: `find NRIC`
 
+<div markdown="block" class="alert alert-info">
+**:information_source: Take Note:**<br>
+
 * NRIC input must be capitalised!
 * It is recommended to use `list` to restore the view of all data after a `find` command.
+
+</div>
 
 Examples:
 
@@ -317,24 +327,17 @@ Finds all persons with matching gender.
 
 Format: `find M` or `find F`
 
+<div markdown="block" class="alert alert-info">
+**:information_source: Take Note:**<br>
+
 * M and F must be capitalised.
 * It is recommended to use `list` to restore the view of all data after a `find` command.
+
+</div>
 
 Examples:
 
 * `find M` returns all male persons.
-
-### Locating people by blood types : `find Blood Type` ###
-
-Finds all Patients with query blood type.
-
-Format: `find Blood Type QUERY`
-
-* It is recommended to use `list` to restore the view of all data after a `find` command.
-
-Examples:
-
-* `find Blood Type A+` returns all Patients with blood type A+.
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Take Note:**<br>
