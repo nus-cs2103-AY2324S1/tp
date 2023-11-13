@@ -161,7 +161,7 @@ Tagging a student with `Tag` is facilitated by `TagCommand`, `AddTagCommand`, `D
 * `TagCommand` will replace all existing tags of a student with input tags.
 * `AddTagCommand` will add input tags to existing tags of the student.
 * `DeleteTagCommand` will delete input tags from the existing tags of the student.
-* `TagCommandParser` will be parse the user input and create the correct command object to execute.
+* `TagCommandParser` will parse the user input and create the correct command object to execute.
 
 <box type="info" seamless>
 
@@ -291,7 +291,7 @@ In order to implement `undo` and `redo` in Class Manager, `load` and `config` co
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+<puml src="diagrams/CommitActivityDiagram.puml" width="450" />
 
 #### Design considerations:
 
@@ -353,7 +353,7 @@ The `load` command is facilitated by `LoadCommand` and `LoadCommandParser`. `Loa
 1. The user inputs the `load` command.
 2. The `ClassManagerParser` processes the input and creates a new `LoadCommandParser`.
 3. The `LoadCommandParser` then calls ArgumentTokenizer#tokenize(String argString, Prefix... prefixes) to extract the file name. If there are duplicate prefixes, a ParseException would be thrown.
-4. The file name is then check to ensure that it is valid. If the file name is missing, null or contains a forward slash, a ParseException would be thrown.
+4. The file name is then checked to ensure that it is valid. If the file name is missing, null or contains a forward slash, a ParseException would be thrown.
 5. The `LoadCommandParser` then creates the `LoadCommand` based on the processed input.
 
 #### Design considerations:
@@ -382,18 +382,18 @@ The `config` command is facilitated by `ConfigCommand` and `ConfigCommandParser`
 1. The user inputs the `config` command.
 2. The `ClassManagerParser` processes the input and creates a new `ConfigCommandParser`.
 3. The `ConfigCommandParser` then calls ArgumentTokenizer#tokenize(String argString, Prefix... prefixes) to extract the tutorial count and assignment count. If there are duplicate prefixes, a ParseException would be thrown.
-4. The tutorial and assignment counts are then check to ensure that they are integers between 1 and 40 inclusive. If any of the counts are not valid, a ParseException would be thrown.
+4. The tutorial and assignment counts are then checked to ensure that they are integers between 1 and 40 inclusive. If any of the counts are not valid, a ParseException would be thrown.
 5. The `ConfigCommandParser` then creates the `ConfigCommand` based on the processed input.
 
 #### Design considerations:
 
-Initially in v1.3, `config` was implemented as a command that users could only execute once before they started using Class Manager. This allows `ClassDetails` to create fixed length arrays for `AssignmentTracker`, `AttendanceTracker` and `ClassParticipationTracker`. 
+Initially in v1.2, `config` was implemented as a command that users could only execute once before they started using Class Manager. This allows `ClassDetails` to create fixed length arrays for `AssignmentTracker`, `AttendanceTracker` and `ClassParticipationTracker`. 
 
-However, this implementation was changed in v1.4 to allow users to execute `config` multiple times. This allows users to reconfigure Class Manager if they have entered the wrong information previously. We decided to reset the class information of a student back to the default values of 0 for attendance, class participation and assignment grades, as it ensures a consistent implementation of `config` regardless of whether the new tutorial count and assignment count was smaller or larger than the previous configuration.
+However, this implementation was changed in v1.3 to allow users to execute `config` multiple times. This allows users to reconfigure Class Manager if they have entered the wrong information previously. We decided to reset the class information of a student back to the default values of 0 for attendance, class participation and assignment grades, as it ensures a consistent implementation of `config` regardless of whether the new tutorial count and assignment count was smaller or larger than the previous configuration.
 
 In addition, the tutorial and assignment count was limited to an integer between 1 and 40 inclusive in v1.4. This prevents division by zero bugs encountered in data visualisation, as well as Class Manager being unresponsive when the user enters a large number of tutorials and assignments.
 
-**Aspect: Number of times Class Manager can be configured:**
+**Aspect: Number of times Class Manager can be configured**
 
 * **Alternative 1 (current choice):** Class Manager can be configured multiple times.
   * Pros: Provides more flexibility to TAs as they may enter the wrong information when configuring.
@@ -401,6 +401,102 @@ In addition, the tutorial and assignment count was limited to an integer between
 * **Alternative 2:** Class Manager can only be configured once.
   * Pros: Ensures that Class Manager will not run into issues with data visualisation.
   * Cons: Unable to change the tutorial and assignment count of Class Manager after it has been configured.
+
+
+### Lookup feature
+
+The `lookup` command allows TAs to search and filter for students in the Class Manager. This allows TAs to quickly find the student they are looking for, and do subsequent operations such as editing class information for student(s). This also provides more flexibility to TAs as they may want to search for students based on different criteria.
+
+#### How it is implemented
+
+<puml src="diagrams/LookupCommand.puml" alt="Lookup Command" />
+
+The `lookup` command is facilitated by `LookupCommand` and `LookupCommandParser`. 
+
+`LookupCommandParser` will parse the user input and create a corresponding `StudentContainsKeywordsPredicate`, which implements the `Predicate<Student>` _interface_.
+
+`LookupCommand` will then call `Model#updateFilteredStudentList()` to update the student list by utilizing the `StudentContainsKeywordsPredicate` to test whether a student satisfies the given criteria or not. The filtered list will then be displayed in the UI.
+
+#### Parsing user input
+
+1. The user inputs the `lookup` command.
+2. The `ClassManagerParser` processes the input and creates a new `LookupCommandParser`.
+3. The `LookupCommandParser` then calls `ArgumentTokenizer#tokenize(String argString, Prefix... prefixes)` to extract the criteria provided by the user. If there are duplicate prefixes, a ParseException would be thrown.
+4. A `StudentContainsKeywordsPredicate` is then created based on the processed input.
+5. The `LookupCommandParser` then creates the `LookupCommand` based on the processed input.
+
+#### Design considerations:
+
+**Aspect: Criteria for lookup**
+* **Alternative 1 (current choice):** Only basic student information can be used as criteria for lookup.
+    * Pros: Easy to implement.
+    * Cons: Users may want to use other types of student information as criteria for lookup.
+* **Alternative 2:** Allows users to use any type of student information (Including class information) as criteria for lookup.
+    * Pros: Users have more flexibility when searching for students.
+    * Cons: There will be more coupling between classes.
+
+**Aspect: Criteria Validation**
+* **Alternative 1 (current choice):** The `LookupCommandParser` does not apply any validation to the user input.
+    * Pros: Easy to implement.
+    * Cons: Users may enter invalid criteria for lookup, and the `LookupCommand` will still be executed. This can cause some confusion for the user.
+
+* **Alternative 2:** The `LookupCommandParser` will apply validation to the user input.
+    * Pros: Less confusion for the user, and behaviour is consistent with other commands.
+    * Cons: The implementation will be more complicated.
+
+**Aspect: Criteria Combination for complicated lookup**
+
+* **Alternative 1 (current choice):** Within a field the operation is _OR_, and between fields the operation is _AND_.
+
+    For example, `lookup n/alex david c/T11 T12` will have the criteria:
+    ```
+    (name contains alex OR david) AND (class number is T11 OR T12)
+    ```
+
+    * Pros: The behaviour is consistent with other commands.
+    * Cons: This combination may not be intuitive for the user.
+
+* **Alternative 2:** The combination can be specified by the user.
+
+    For example (Proposed), `lookup n/alex \AND david \OR c/T11 \OR T12` will have the criteria:
+    ```
+    (name contains alex AND david) OR (class number is T11 OR T12)
+    ```
+
+    * Pros: The user can specify any combination of criteria.
+    * Cons: The command will be more complicated to implement. As it involves changing the `LookupCommandParser` and the `StudentContainsKeywordsPredicate` class. In addition, the syntax can be confusing for the user.
+
+
+### Theme feature
+
+The `theme` command allows TAs to toggle/switch between _light_ and _dark_ themes.
+
+#### Implementation
+The `theme` feature is facilitated by the `ThemeCommand`, and inside the `Model` component, the `UserPrefs` class stores the current color theme settings. 
+
+Here is a step by step example of how the theme command might be executed.
+
+1. The user inputs the `theme` command.
+2. The `Logic` component will receive the input and create a new `ThemeCommand` object.
+3. When `ThemeCommand` is executed, it will call `Model#toggleTheme()` to update the color theme settings in the `UserPrefs` class.
+4. The `MainWindow` class in the `UI` component will then fetch the new color theme settings from the `UserPrefs` class.
+5. The `MainWindow` class will then update the GUI color theme accordingly.
+
+Below is a sequence diagram that shows how the `theme` command is executed.
+
+<puml src="diagrams/ThemeSequenceDiagram.puml" alt="Theme Sequence Diagram" />
+
+#### Design considerations:
+
+**Aspect: Fetching the new color theme setting**
+
+* **Alternative 1 (current choice):** The `MainWindow` class fetches the new color theme through the `Logic` component.
+  * Pros: Easy to implement.
+  * Cons: Additional operations are required to fetch the new setting from the `UserPrefs` class.
+
+* **Alternative 2:** The new setting is contained in the `CommandResult` object.
+  * Pros: The `MainWindow` class can use the new setting directly from the `CommandResult` object.
+  * Cons: The `CommandResult` class will be modified to contain the new setting.
 
 
 ### Class Details feature
@@ -438,6 +534,7 @@ The tracker classes will be stored in the `ClassDetails` class, which will be co
 These tracker classes will inherit from a `tracker` *interface*. They will also support the following operations:
 * `getPercentage()` - Returns the average grade of the student for the specific tracker class. For example, the average
 tutorial attendance percentage, or the average assignment score.
+* `getJson()` - Returns a Json Friendly representation of the tracker.
 
 Each of these tracker classes will be able to be initialized with a specific size, which will be the number of tutorials
 or assignment grade.
@@ -537,7 +634,7 @@ The following sequence diagram will show what happens when a user executes a `vi
 
 The following activity diagram will show what happens when a user executes a `view` command:
 
-<puml src="diagrams/ViewCommandActivityDiagram/puml" alt="ViewCommandActivityDiagram" />
+<puml src="diagrams/ViewCommandActivityDiagram.puml" alt="ViewCommandActivityDiagram" />
 
 #### Design Considerations
 
@@ -915,7 +1012,7 @@ Testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
+      <br><br>
 
 ### Deleting a student
 
@@ -923,19 +1020,19 @@ Testers are expected to do more *exploratory* testing.
 
    1. Test case: `delete s/STUDENT_NUMBER`<br>
       Expected: STUDENT_NUMBER is a valid Student Number that exists in the Class Manager. The student with STUDENT_NUMBER is deleted from the list. Details of the deleted student shown in the result display box.
-
+      <br><br>
 2. Deleting a student that is not in Class Manager.
 
    1. Test case: `delete s/vnqvq1924`<br>
       Expected: No student is deleted. Student Number error details shown in the result display box.
-
+      <br><br>
 3. Deleting a student with an invalid student number.
 
    1. Other incorrect delete commands to try: `delete`, `delete s/x`, `...` (where x is an invalid student number)<br>
       Expected: No student is deleted. Command format error details shown in the result display box.
    2. Test case: `delete`<br>
       Expected: No student is deleted. Command format error details shown in the result display box.
-
+      <br><br>
 
 ### Loading data files
 ###### Setup
@@ -959,7 +1056,8 @@ Testers are expected to do more *exploratory* testing.
 3. Loading a missing data file
    - Enter: `load f/t3`<br>
        Expected: The status bar on the bottom left is unchanged. File error details shown in the result display box.
-
+     <br><br>
+   
 ### Undo/redo commands
 ###### Test cases
 1. Undoing a command
@@ -975,7 +1073,8 @@ Testers are expected to do more *exploratory* testing.
 
     2.  Test case: `add` -> `add` -> `undo` -> `undo` -> `redo` (Add 2 students, and then 2 undo with 1 redo)<br>
         Expected: The first `add` command is redone. The first student is added back to the list of students.
-
+        <br><br>
+   
 ### Configuring Class Manager
 
 ###### Setup
@@ -1001,7 +1100,7 @@ Testers are expected to do more *exploratory* testing.
 2. Configuring Class Manager with tutorial count less than 1
     - Enter: `config #t/0 #a/3`<br>
       Expected: Error message `Invalid count values! The count value of tutorials cannot be less than 1.`
-
+      <br><br>
 3. Configuring Class Manager with valid tutorial count but missing assignment count
     - Enter: `config #t/10`<br>
       Expected: Error message: `Invalid command format!
@@ -1010,7 +1109,8 @@ Testers are expected to do more *exploratory* testing.
                                 The default Class Manager is configured with 13 tutorials and 6 assignments.
                                 Parameters: #t/TUTORIAL_COUNT #a/ASSIGNMENT_COUNT
                                 Example: config #t/10 #a/4`
-
+      <br><br>
+   
 ### History
 
 ###### Setup
@@ -1019,14 +1119,15 @@ Testers are expected to do more *exploratory* testing.
 ###### Test cases
 1. Viewing command history
     - Enter: `history`<br>
-        Expected: The command history is shown in the result display box. The command history is empty.
+      Expected: The command history is shown in the result display box. The command history is empty.
     - Enter: `list`<br>
-      - Expected: The list of students is shown in the student list. The command history is updated to show the command `list`.
+      Expected: The list of students is shown in the student list. The command history is updated to show the command `list`.
     - Enter: `help`<br>
-      - Expected: The help window is shown. The command history is updated to show the command `help`.
+      Expected: The help window is shown. The command history is updated to show the command `help`.
     - Enter: `history`<br>
-      - Expected: The command history is shown in the result display box. The command history shows `help` as the most recent command at the top of the list, followed by `list` below it.
-
+      Expected: The command history is shown in the result display box. The command history shows `help` as the most recent command at the top of the list, followed by `list` below it.
+    <br><br>
+      
 ### Launch with erroneous data files
 ###### Setup
 - Move the JAR file to a fresh directory.
@@ -1082,7 +1183,8 @@ Testers are expected to do more *exploratory* testing.
 3. Adding a student without some required fields <br>
    1. Test Case: `add n/NAME s/STUDENT_NUMBER e/EMAIL`, `add n/NAME s/PHONE e/EMAIL`<br>
       Expected: No student is added. Error details shown in the result display box.
-
+      <br><br>
+   
 ### Editing a student
 
 1. Editing a student's details in the current students list.
@@ -1096,14 +1198,16 @@ Testers are expected to do more *exploratory* testing.
 
    1. Test case: Edit command with Student Number that is not present in the list <br>
       Expected: No student is edited. Error details shown in the result display box.
-
+      <br><br>
+   
 ### Adding a comment to a student
 
 1. Adding a comment to a student in Class Manager.
 
    1. Test case: `comment s/STUDENT_NUMBER cm/COMMENT`<br>
       Expected: The student with STUDENT_NUMBER is edited to have the new COMMENT.
-
+      <br><br>
+   
 2. Adding a comment to a student where the student is not in Class Manager (Invalid Student Number). 
 
    1. Test case: Comment command with Student Number that is not present in the list <br>
@@ -1114,14 +1218,15 @@ Testers are expected to do more *exploratory* testing.
 
    1. Test case: `comment s/STUDENT_NUMBER cm/`<br>
       Expected: Student is edited to have an empty comment.
-
+      <br><br>
+   
 ### Tagging a student
 
 1. Tagging an existing student in the current students list.
 
    1. Test case: `tag s/STUDENT_NUMBER t/TAG`<br>
       Expected: All tags of student with STUDENT_NUMBER will be replaced with TAG.
-
+      <br><br>
 2. Adding a tags to student.
 
    1. Test case: `tag s/STUDENT_NUMBER /add t/TAG`<br>
@@ -1143,33 +1248,68 @@ Testers are expected to do more *exploratory* testing.
     **Note:** Even if the student does not have TAG tagged, the command ensures that the student will not have TAG as one of the tags.
 
     </box>
-
 4. Deleting all tags from student.
 
    1. Test case: `tag s/STUDENT_NUMBER t/`<br>
       Expected: The student with STUDENT_NUMBER will have all tags removed.
-
+      <br><br>
 5. Attempt to tag a student not in the currently student list.
 
    1. Test case: `tag` command with a student number that is not in the list.
       Expected: Error message is shown in the display result.
-
+      <br><br>
+   
 ### Viewing a student
 
 1. Viewing a student in Class Manager
 
    1. Test case: `view s/STUDENT_NUMBER`<br>
       Expected: The class information of the student with STUDENT_NUMBER will be displayed in the class information panel on the right.
-
+      <br><br>
 2. Viewing a student not in Class Manager
 
    1. Test case: `view` command with a student number not in Class Manager<br>
       Expected: Error message shown in the display result.
-
+      <br><br>
 3. Invalid Student number
 
-   1. Test case: `view s/b012345N`<br>
+   1. Test case: `view s/x` (where x is an invalid student number)<br>
       Expected: Error message shown in the display result.
+      <br><br>
+
+### Lookup students
+
+1. Lookup students in Class Manager using valid criteria.
+
+   1. Test case: `lookup n/NAME`<br>
+      Expected: The list of students with NAME will be displayed in the student list.
+   2. Test case: `lookup c/CLASS_NUMBER`<br>
+      Expected: The list of students in CLASS_NUMBER will be displayed in the student list.
+   3. Test case: `lookup t/TAG c/CLASS_NUMBER`<br>
+      Expected: The list of students with TAG and in CLASS_NUMBER will be displayed in the student list.
+      <br><br>
+2. Lookup students in Class Manager using invalid criteria.
+
+   1. Test case: `lookup s/x` (where x is an invalid student number)<br>
+      Expected: The display result will show `No match found!`. This is because the lookup command does not do field validation.
+   2. Test case: `lookup c/class 11 n/john` (where "class 11" is an invalid class number)<br>
+      Expected: The display result will show `No match found!`. This is because the lookup command does not do field validation.
+      <br><br>
+3. Lookup with no criteria given.
+
+   1. Test case: `lookup`<br>
+      Expected: Error message shown in the display result.
+   2. Test case: `lookup c/`<br>
+      Expected: Error message shown in the display result.
+      <br><br>
+
+### Toggling color theme
+
+1. Toggle color theme
+
+   1. Test case: `theme`<br>
+      Expected: The color theme of the app will be switched. If the current theme is dark, it will be switched to light and vice versa.
+      <br><br>
 
 ### Listing students
 
@@ -1203,3 +1343,5 @@ Testers are expected to do more *exploratory* testing.
 2. Class Numbers are currently limited to tutorials that begin with T. We plan to allow Class Numbers to be any sensible alphanumeric string, such as `R15` and `SG06`.
 3. Clicking on a student in the student list currently highlights the student's card. We plan to disable this interaction as it affects the visibility of the student's contact details and visualised graphs.
 4. Class Participation is currently limited to being true or false for each tutorial session. We plan to allow Class Participation to be an enum level instead, such as `NONE`, `MINIMAL`, `SUFFICIENT`, `ACTIVE`, `VERY_ACTIVE` etc. to allow for better representation of student's efforts in class.
+5. Users currently can only search for basic student information. We plan to allow users to search based on class information in the future. For example, users can search for students with a certain grade or attendance percentage.
+6. The lookup command currently does not check for invalid fields. We plan to add field validation to the lookup command in the future.

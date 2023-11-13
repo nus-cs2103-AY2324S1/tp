@@ -6,6 +6,8 @@ import static seedu.classmanager.logic.parser.ArgumentMultimap.areAdditionalPref
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_COUNT;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_COUNT;
 
+import java.math.BigInteger;
+
 import seedu.classmanager.logic.commands.ConfigCommand;
 import seedu.classmanager.logic.parser.exceptions.ParseException;
 
@@ -37,17 +39,17 @@ public class ConfigCommandParser implements Parser<ConfigCommand> {
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TUTORIAL_COUNT, PREFIX_ASSIGNMENT_COUNT);
 
-        int tutorialCount;
-        int assignmentCount;
+        BigInteger tutorialCount;
+        BigInteger assignmentCount;
         try {
-            tutorialCount = Integer.parseInt(argMultimap.getValue(PREFIX_TUTORIAL_COUNT).get());
-            assignmentCount = Integer.parseInt(argMultimap.getValue(PREFIX_ASSIGNMENT_COUNT).get());
+            tutorialCount = new BigInteger(argMultimap.getValue(PREFIX_TUTORIAL_COUNT).get());
+            assignmentCount = new BigInteger(argMultimap.getValue(PREFIX_ASSIGNMENT_COUNT).get());
         } catch (NumberFormatException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_CONFIG_COMMAND_FORMAT, ConfigCommand.MESSAGE_USAGE));
         }
         validCountParser(tutorialCount, "tutorials");
         validCountParser(assignmentCount, "assignments");
-        return new ConfigCommand(tutorialCount, assignmentCount);
+        return new ConfigCommand(tutorialCount.intValue(), assignmentCount.intValue());
     }
 
     /**
@@ -56,10 +58,10 @@ public class ConfigCommandParser implements Parser<ConfigCommand> {
      * @param count Count value of tutorials or assignments.
      * @throws ParseException if the count value is less than 0.
      */
-    private void validCountParser(int count, String attribute) throws ParseException {
-        if (count < 1) {
+    private void validCountParser(BigInteger count, String attribute) throws ParseException {
+        if (count.compareTo(BigInteger.ONE) < 0) {
             throw new ParseException(String.format(MESSAGE_INVALID_COUNT_VALUE_TOO_SMALL, attribute));
-        } else if (count > 40) {
+        } else if (count.compareTo(new BigInteger("40")) > 0) {
             throw new ParseException(String.format(MESSAGE_INVALID_COUNT_VALUE_TOO_LARGE, attribute));
         }
     }
