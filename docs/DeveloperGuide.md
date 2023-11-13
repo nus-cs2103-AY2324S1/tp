@@ -9,8 +9,9 @@ pageNav: 3
 <!-- * Table of Contents -->
 <page-nav-print />
 
-<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Setting up, getting started**
 
@@ -33,6 +34,8 @@ Given below is a quick overview of main components and how they interact with ea
 **`Main`** (consisting of classes [`Main`](https://github.com/AY2324S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2324S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
+
+<div style="page-break-after: always;"></div>
 
 The bulk of the app's work is done by the following four components:
 
@@ -167,6 +170,8 @@ The following sequence diagram shows how the `filter` command works. In this exa
 When the `FilterCommandParser` parses the arguments to the `FilterCommand`, it creates a `StudentPredicateList`, to which the relevant predicates specified within the command are added. For example, using the example command given above, the `StudentPredicateList` would consist of 2 predicates: a `StudentTakesSubjectPredicate` and a `StudentIsGenderPredicate`.
 These predicates are then combined into a single `Predicate<Student>`, using the `and()` method from the `Predicate` interface.
 
+<div style="page-break-after: always;"></div>
+
 The following activity diagram summarizes what happens when a user executes a `filter` command:
 
 <puml src="diagrams/FilterActivityDiagram.puml" alt="FilterActivityDiagram" width="300" />
@@ -209,6 +214,8 @@ The following activity diagram summarizes what happen when a user executes a `Up
 
 <puml src="diagrams/UpdateSecLevelActivityDiagram.puml" alt="UpdateSecLevelActivityDiagram" width="750" />
 
+<div style="page-break-after: always;"></div>
+
 #### Design considerations:
 
 **Aspect: How other commands executed after `uplevel` and before `undolevel` should be addressed.**
@@ -250,6 +257,8 @@ This predicate is then passed into the current model, using the `updateSortedPer
 The following activity diagram summarizes what happens when a user executes a `sort` command:
 
 <puml src="diagrams/SortActivityDiagram.puml" alt="SortActivityDiagram" width="250" />
+
+<div style="page-break-after: always;"></div>
 
 #### Design considerations:
 
@@ -325,6 +334,8 @@ The following sequence diagram shows how the `table` command works. In this exam
 
 As shown in the sequence diagram, when the `AddressBookParser` parses the arguments to the TableCommand, it creates a TableCommand instance by passing in `s/` as argument so that when this `TableCommand` execute, it will return a `SubjectTableCommandResult` instance as specified by `s/`.
 
+<div style="page-break-after: always;"></div>
+
 The following activity diagram summarizes what happens when a user executes a `table` command:
 
 <puml src="diagrams/TableActivityDiagram.puml" alt="TableActivityDiagram" width="300" />
@@ -365,6 +376,8 @@ This predicate is then passed into the current model, using the `export()` metho
 The following activity diagram summarizes what happens when a user executes a `export` command:
 
 <puml src="diagrams/ExportActivityDiagram.puml" alt="ExportActivityDiagram" width="300" />
+
+<div style="page-break-after: always;"></div>
 
 #### Design considerations:
 
@@ -429,6 +442,8 @@ Step 4. The user now decides that adding the student was a mistake, and decides 
 than attempting to perform the undo.
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 The following sequence diagram shows how the undo operation works:
 
