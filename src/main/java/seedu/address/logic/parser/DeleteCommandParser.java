@@ -48,10 +48,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             return new DeleteCommand(tag, new ContainsTagPredicate(tag));
         }
 
-        if (!argMultimap.getValue(PREFIX_TUTORIAL_GROUP).isPresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
-        }
-
         tag = Optional.of(ParserUtil.parseTag(argMultimap.getValue(PREFIX_TUTORIAL_GROUP).get()));
         logger.fine("Parsing delete all: " + tag.get().getTagName());
         return new DeleteCommand(tag, new ContainsTagPredicate(tag));
