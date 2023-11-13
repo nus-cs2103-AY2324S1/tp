@@ -86,7 +86,7 @@ Known issues that you may face when using CoordiMate and how to resolve them.
 Throughout this guide, you will see different text styles that are used to highlight important information.
 
 - <a href="javascript: void(0)">Text in blue</a> are links which you can click on to jump to the relevant section.
-- `Text with light blue background` are commands or file names which are used for CoordiMate.
+- `Text with background` are commands or file names which are used for CoordiMate.
 
 ---
 
