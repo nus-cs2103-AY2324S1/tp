@@ -426,10 +426,19 @@ e.g. `a & b / c d` is the same as `a & (b / (c & d))`.
 Examples:
 * `list`
     * lists all fosterers in the address book.
+  
+<div></div>
+
 * `list john doe`
     * lists entries which match "John Doe", "Doe John", "Johnny Doe", and "Mary" who lives on "John Doe Street".
+  
+<div></div>
+
 * `find john john doe`
     * is redundant and gives the same result as `find john doe`.
+  
+<div></div>
+
 * `list "John" / zam & doe`
     * lists entries which match "John Doe" and "Doe Shazam", but not "John Grahm".
 
@@ -557,10 +566,14 @@ since it can only undo the last _valid_ command ran.
 Examples:
 *  `find` or `list` followed by `edit 3 n/John` 
    * edits the name of the 3rd fosterer in your address book to John.
+
+<div></div>
+
 *  `find` or `list` followed by `edit 1 p/12345678 animal/Bob` 
    * edits the phone number and the pet name of the 1st fosterer in your address book to 12345678 and Bob respectively.
    ![edit 1 example](images/screenshots/EditExample2.png) <br>
 
+<div></div>
 
 *  `find` or `list` followed by `edit 2` 
    * opens the profile page of the 2nd fosterer in your address book since parameters are not provided.
@@ -710,14 +723,20 @@ You can delete multiple fosterers at once.<br>
 Examples:
 * `list` followed by `delete 2` 
   * deletes the 2nd fosterer in your address book.
+
+<div></div>
+
 * `find Jerry` or `list Jerry`, followed by `delete 1`
   * deletes the 1st fosterer in the result list of your `find` / `list` query
+
+<div></div>
+
 * `list` followed by `delete 1 3 7` 
   * deletes the 1st, 3rd and 7th fosterers in your address book.
     ![Delete](images/screenshots/Delete.png)
 In this example, Alex, Bernice and Charlotte are the fosterers deleted. 
-<br>
   
+<div></div>
 
 * `list` followed by `delete 3 3 3 3` 
   * deletes the 3rd fosterer in your address book.
@@ -778,9 +797,12 @@ Here, you have 6 fosterers in your address book, and 3 of them are available to 
 ![Stats](images/screenshots/StatsAvail.png)
 <br>
 
+<div></div>
 
 * `find cat` followed by `stats avail` 
   * calculates statistics of available fosterers, based on fosterers who are either currently fostering a cat or are able to foster a cat.
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-warning">
 
@@ -797,6 +819,8 @@ Suppose you have 3 available fosterers: 1 can foster a dog, 1 can foster a cat a
 
 <br> 
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing statistics of current fosterers : `stats current`
 Helps you calculate statistics about fosterers who are currently fostering, and the type of animals they are fostering. Percentages are calculated to 2 decimal places.
 
@@ -806,11 +830,13 @@ Examples:
 * `list` followed by `stats current` 
   * calculates statistics of current fosterers, based on all fosterers in your address book.
 
+<div></div>
 
   Here, you have 6 fosterers in your address book, and 2 of them are currently fostering.
-  ![Stats](images/screenshots/StatsCurrent.png)
-<br>
 
+  ![Stats](images/screenshots/StatsCurrent.png)
+
+<div></div>
 
 * `find dog` followed by `stats current`
   * calculates statistics of current fosterers, based on fosterers who are either currently fostering a dog,  or are able to foster a dog.
@@ -831,8 +857,8 @@ Examples:
 
 Here, out of the 6 fosterers in your address book, 3 live in HDBs, 1 live in a Condo, and 2 live in Landed properties.
     ![Stats](images/screenshots/StatsHousing.png)
-<br>
-  
+
+<div></div>
 
 * `find available` followed by `stats housing` 
   * calculates housing statistics based on fosterers who are available.
