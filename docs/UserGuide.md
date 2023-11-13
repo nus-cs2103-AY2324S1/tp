@@ -44,8 +44,8 @@ Flashlingo predominantly consists of two main features: **Managing flash cards**
 
 </div>
 
-**With each review frequency scientifically determined by Flashlingo, it will make your vocabulary learning an absolute breeze,**
-**meaning you can spend less time and memorize things more enduringly**
+With each review frequency scientifically determined by **Flashlingo**, it will make your vocabulary learning an absolute breeze,
+meaning you can **spend less time and memorize things more enduringly.**
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -366,6 +366,7 @@ review session automatically.
 **:information_source: Notes about the file input:**<br>
 * **File format:** The file must be an Excel Workbook with the `.xlsx` extension.
 * **File location:** The file must be located in the **same folder** as the `flashlingo.jar` file.
+* **File name:** The file names, with and without the `.xlsx` extension depend on different systems, cannot contain leading or trailing spaces.
 * **File content:** The app would only read the **first two columns** of the **first sheet** of the workbook.
   * The sheet must contain only the following two columns (cannot have blank columns on the left):
     1. Column A - The original words
