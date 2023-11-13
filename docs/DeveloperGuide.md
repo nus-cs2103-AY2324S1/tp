@@ -433,8 +433,8 @@ The `UI` component is notified of these new changes to the lists and updates the
 
 #### Feature details
 1. The `find` commands can accept one or more parameter `keyword` for searching persons and/or events.
-2. A `PersonNameOrGroupContainsKeywordsPredicate` and/or `EventNameOrGroupContainsKeywordsPredicate` will be created and a `Find` command will be created with the predicates.
-3. The `Find` command will then be executed and the `UI` will be updated with the filtered lists of persons and/or events.
+2. A `PersonNameOrGroupContainsKeywordsPredicate` and/or `EventNameOrGroupContainsKeywordsPredicate` will be created and a `find` command will be created with the predicates.
+3. The `find` command will then be executed and the `UI` will be updated with the filtered lists of persons and/or events.
 
 The flow for the `find` commands are described by the following sequence diagrams:
 
