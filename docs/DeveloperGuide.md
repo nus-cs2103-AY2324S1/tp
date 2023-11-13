@@ -221,7 +221,7 @@ The following activity diagram summarises what happens the user executes a sched
 
 <img src="images/ScheduleActivityDiagram.png" width="400"/>
 
-#### **Design Considerations**
+#### Design Considerations
 
 **Aspect: How to implement appointment for Person**
 
@@ -293,7 +293,7 @@ The following activity diagram illustrates how the complete operation is execute
 
 <img src="images/CompleteActivityDiagram.png" width="800"/>
 
-#### **Design Considerations**
+#### Design Considerations
 
 Alternative 1 (Previous Design): Use a `CompleteCommandDescriptor` that has a `Date` and `Index` field wrapped by Java `Optional`.
 
