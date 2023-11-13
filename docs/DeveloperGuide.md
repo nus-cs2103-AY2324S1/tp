@@ -387,6 +387,81 @@ The following activity diagram summarizes what happens when the `DeleteNoteComma
 
 <puml src="diagrams/note/DeleteNoteActivityDiagram.puml"/>
 
+
+### Events feature
+
+This feature allows users to add and remove `Event` to any `Person` in the contact list. It provides an easy way for users to keep track of events with the contacts.
+
+#### Overview:
+The adding and removing of `Event` begins with the parsing of the `AddEventCommand` and `DeleteEventCommand` using the `AddEventCommandParser` and `DeleteEventCommandParser` respectively.
+The `AddEventCommand` and `DeleteEventCommand` will then be constructed and executed by the `Model`.
+
+The activity diagram below shows the action sequence of adding an `Event` to a contact.
+
+<puml src="diagrams/event/EventSequenceDiagram.puml"/>
+
+<box type="info" seamless>
+
+**Note:** 
+The sequence diagram for deleting `Event` is similar to adding `Event`. 
+Simply replace `AddCommandParser` with `DeleteCommandParser`, `AddEventCommandParser` with `DeleteEventCommandParser`, and `AddEventCommand` with `DeleteEventCommand`.
+
+</box>
+
+##### Implementing `AddEventCommandParser`
+Implements the `Parser` interface, parsing these arguments:
+1. `contactId`: the one-based index of the contact shown in the GUI.
+2. `eventName`: the name of the event.
+3. `eventStartTime`: the start time of the event.
+4. `eventEndTime`: the end time of the event.
+5. `eventLocation`: the location of where the event will be held.
+6. `eventInformation`: the description of the event.
+
+`eventName`, `eventStartTime`, `eventEndTime`, `eventLocation`, and `eventInformation`are then used to create the `Event` object.
+After that, `contactId` and the `Event` object created are then used to create the `AddEventCommand` object.
+
+For the details of how parsing works, see the section on [Logic Component](#logic-component).
+
+##### Implementing `DeleteEventCommandParser`
+Implements the `Parser` interface, parsing two main arguments:
+1. `contactId`: the one-based index of the contact shown in the GUI.
+2. `eventId`: the one-based index of the event shown in the GUI.
+
+`contactId` and `eventId` are then used to create the `DeleteEventCommand` object.
+
+For the details of how parsing works, see the section on [Logic Component](#logic-component).
+
+##### Implementing `AddEventCommand`
+`AddEventCommand` extends from the abstract class `AddCommand`,
+inheriting `add` as the primary command word and having `event` as its secondary command word.
+It internally stores `contactId` (the index of the contact) and `toAdd` (the `Event` to add) which is given by the [parser](#implementing-addeventcommandparser).
+
+When the command is executed, it carries out the following operations:
+1. Using the `contactId`, it will first check if the `Person` exist in the address book by calling `Model`'s `findPersonByUserFriendlyId` method.
+    * A `CommandException` is thrown if the person does not exist.
+2. The `Event` is then added to the person's note list by calling the `addEvent` method in `Person`.
+3. Lastly a `CommandResult` with the success message is returned.
+
+The following activity diagram summarizes what happens when `AddEventCommand` is executed:
+
+<puml src="diagrams/event/AddEventActivityDiagram.puml"/>
+
+##### Implementing `DeleteEventCommand`
+`DeleteEventCommand` extends from the abstract class `DeleteCommand`,
+inheriting `delete` as the primary command word and having `event` as its secondary command word.
+It internally stores `contactId` (the index of the contact) and `eventIdToDelete` (the `Event` to delete) which is given by the [parser](#implementing-deleteeventcommandparser).
+
+When the command is executed, it carries out the following operations:
+1. Using the `contactId`, it will first check if the `Person` exist in the address book by calling `Model`'s `findPersonByUserFriendlyId` method.
+    * A `CommandException` is thrown if the person does not exist.
+2. Using the `eventIdToDelete`, it will delete the event from the person in the address book by calling `Person`'s `removeEventByUserFriendlyId` method.
+    * A `CommandException` is thrown if the event does not exist.
+3. Lastly a `CommandResult` with the success message is returned.
+
+The following activity diagram summarizes what happens when the `DeleteEventCommand` is executed:
+
+<puml src="diagrams/event/DeleteEventActivityDiagram.puml"/>
+
 ### Enhanced help feature
 
 **Rationale**
