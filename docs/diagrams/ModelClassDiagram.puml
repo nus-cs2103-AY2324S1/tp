@@ -38,10 +38,10 @@ Settings .up.|> ReadOnlySettings
 
 Contacts *--> "1" UniqueContactList
 UniqueContactList --> "~* all" Contact
-Contact *--> Name
-Contact *--> Phone
-Contact *--> Email
-Contact *--> Note
+Contact *--> "1" Name
+Contact *--> "1" Phone
+Contact *--> "1" Email
+Contact *--> "0..1" Note
 Contact *--> "*" Tag
 Contact *--> "*" AlternatePlatform
 
