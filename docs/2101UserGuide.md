@@ -255,7 +255,7 @@ Here is an example command where we create an event **named** "Party" held at th
 <div style="page-break-after: always;"></div>
 #### Edit an Event : `editEvent`
 
-If you forgot to note any important details, or realise that you made a mistake in any field of the event created,
+If you forget to note any important details, or realise that you made a mistake in any field of the event created,
 the `editEvent` command is here to help.
 
 Here's how you can use it:<br>
