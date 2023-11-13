@@ -715,7 +715,8 @@ This is especially useful if you find yourself having to re-enter a command that
     <details>
     <summary>Details</summary>
     <br>
-    When follow-ups are updated overnight, a long follow-up list might be compressed into "...", just click on it to fix the issue.
+    When follow-ups are updated overnight, a long follow-up list might be compressed into "...". 
+    To fix the issue, just click on the "...".
     </details>
 
 [↑ Back to Table of Contents](#table-of-contents)
