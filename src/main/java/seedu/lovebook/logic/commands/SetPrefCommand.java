@@ -50,6 +50,7 @@ public class SetPrefCommand extends Command {
     private final SetPreferenceDescriptor setPreferenceDescriptor;
 
     /**
+     * Creates a SetPrefCommand to edit the specified {@code DatePrefs}
      * @param setPreferenceDescriptor details to edit the preferences with
      */
     public SetPrefCommand(SetPreferenceDescriptor setPreferenceDescriptor) {
@@ -74,6 +75,8 @@ public class SetPrefCommand extends Command {
     /**
      * Creates and returns a {@code DatePrefs} with the details of {@code datePrefsToEdit}
      * edited with {@code setPreferenceDescriptor}.
+     * @param datePrefsToEdit the datePrefs to edit
+     * @param setPreferenceDescriptor the descriptor to edit the datePrefs with
      */
     private static DatePrefs createEditedPreference(
             DatePrefs datePrefsToEdit, SetPreferenceDescriptor setPreferenceDescriptor) {

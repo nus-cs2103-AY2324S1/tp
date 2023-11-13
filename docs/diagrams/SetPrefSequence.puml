@@ -7,11 +7,13 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":LoveBookParser" as LoveBookParser LOGIC_COLOR
 participant ":SetPrefCommandParser" as SetPrefCommandParser LOGIC_COLOR
 participant "d:SetPrefCommand" as SetPrefCommand LOGIC_COLOR
+participant ":SetPreferenceDescriptor" as SetPreferenceDescriptor LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
+participant "ed:DatePrefs" as DatePrefs MODEL_COLOR
 end box
 
 [-> LogicManager : execute("setP age/20")
@@ -34,6 +36,13 @@ create SetPrefCommand
 SetPrefCommandParser -> SetPrefCommand
 activate SetPrefCommand
 
+create SetPreferenceDescriptor
+SetPrefCommand -> SetPreferenceDescriptor
+activate SetPreferenceDescriptor
+
+SetPreferenceDescriptor --> SetPrefCommand : setPreferenceDescriptor
+deactivate SetPreferenceDescriptor
+
 SetPrefCommand --> SetPrefCommandParser : d
 deactivate SetPrefCommand
 
@@ -49,7 +58,29 @@ deactivate LoveBookParser
 LogicManager -> SetPrefCommand : execute()
 activate SetPrefCommand
 
-SetPrefCommand -> Model : setDatePrefs()
+'model.getDatePrefs() -> return datePrefsToEdit
+'createEditedPrefs(datePrefsToEdit, setPreferenceDescriptor) -> return editedDatePreferences
+
+SetPrefCommand -> Model : getDatePrefs()
+activate Model
+
+Model --> SetPrefCommand : datePrefsToEdit
+deactivate Model
+
+SetPrefCommand -> SetPrefCommand : createEditedPreference(datePrefsToEdit, setPreferenceDescriptor)
+activate SetPrefCommand
+
+create DatePrefs
+SetPrefCommand -> DatePrefs
+activate DatePrefs
+
+DatePrefs --> SetPrefCommand : ed
+deactivate DatePrefs
+
+SetPrefCommand -> SetPrefCommand : ed
+deactivate SetPrefCommand
+
+SetPrefCommand -> Model : setDatePrefs(ed)
 activate Model
 
 Model --> SetPrefCommand
