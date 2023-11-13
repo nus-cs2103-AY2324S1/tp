@@ -263,42 +263,38 @@ The following activity diagram illustrates how the complete operation is execute
 
 ### Gather Emails Feature
 
-The **Gather Emails** feature in our software system is designed to efficiently collect email addresses.
-The **Gather Emails** feature is facilitated by the `GatherCommand`, which plays a central role in the process. Below is the class diagram of the gather emails feature.
+The **Gather Emails** feature in our software system is designed to efficiently collect email addresses. This feature is facilitated by the `GatherCommand` and `GatherCommandParser`. Below is the class diagram of the gather emails feature.
 
 ![GatherClassDiagram](images/GatherClassDiagram.png)
 
 #### Implementation Overview
 
-The `GatherCommand` is initiated by the `GatherCommandParser`. The `GatherCommandParser` checks for the prefix `fp/` or `t/` in the user's input and creates either a `GatherEmailByFinancialPlan` or `GatherEmailByTag` object accordingly.
-Both `GatherEmailByFinancialPlan` or `GatherEmailByTag` implements the `GatherEmailPrompt` interface. This interface helps with future scalability of this feature to gather emails by more fields. 
+The `GatherCommand` is initiated by the `GatherCommandParser`. The `GatherCommandParser` checks for the prefixes `fp/` or `t/` in the user's input and creates either a `GatherEmailByFinancialPlan` or `GatherEmailByTag` object respectively.
+Both `GatherEmailByFinancialPlan` or `GatherEmailByTag` implements the `GatherEmailPrompt` interface.
 
-The `GatherCommand` takes in the `GatherEmailPrompt` object and passes it into the current `Model` model, subsequently
-interacting with the `AddressBook` and `UniquePersonsList` classes. The `GatherCommand#execute()` executes the gathering operation by calling
-`Model#gatherEmails(GatherEmailPrompt prompt)`.
-
-The following sequence diagram shows how the gather operation works as described above:
+The `GatherCommand` takes in the `GatherEmailPrompt` object and passes it into the current `Model` model, subsequently interacting with the `AddressBook` class. 
+The `GatherCommand#execute()` executes the gather operation by calling `Model#gatherEmails(GatherEmailPrompt prompt)`. Below shows how the gather operation logic works as described above:
 
 ![GatherSequenceDiagram1](images/GatherSequenceDiagram1.png)
 
-The `Model` interface is implemented by the `ModelManager`, representing the in-memory model of the address book data.
-The `ModelManager#gatherEmails(GatherEmailPrompt prompt)` calls `AddressBook#gatherEmails(GatherEmailPrompt prompt)`. 
-This operation is exposed in the `AddressBook` class as `AddressBook#gatherEmails(GatherEmailsPrompt prompt)`, and
-in the `UniquePersonsList` class as `UniquePersonsList#gatherEmails(GatherEmailsPrompt prompt)`.
+The `ModelManager#gatherEmails(GatherEmailPrompt prompt)` calls the `AddressBook#gatherEmails(GatherEmailPrompt prompt)` method, which subsequently calls the `UniquePersonsList#gatherEmails(GatherEmailsPrompt prompt)` method.
 
-The `UniquePersonsList` class maintains a list of unique persons and `UniquePersonsList#gatherEmails(GatherEmailPrompt prompt)` iterates through the persons list
-and calls `GatherEmailPrompt#gatherEmails(Person person)`, passing in each person. Depending on the type of `GatherEmailPrompt`, it triggers either: 
+The `UniquePersonsList` class maintains a list of unique persons. The `UniquePersonsList` class implements the following operation:
 
-* `Person#gatherEmailsContainsTag(String prompt)` —  This method calls the `Tag#containsSubstring(String substring)` to checks if the given prompt is a substring of any Tag names in the `Set<Tag>` of the current person.
-* `Person#gatherEmailsContainsFinancialPlan(String prompt)` —  This method calls the `FinancialPlan#containsSubstring(String substring)` to checks if the given prompt is a substring of any Financial Plan names in the `Set<FinancialPlan>` of the current person.
+- `UniquePersonsList#gatherEmails(GatherEmailPrompt prompt)` —  Iterates through the persons list and calls `GatherEmailPrompt#gatherEmails(Person person)`, passing in each person. 
 
-To allow gather email feature to be case-insensitive, the prompt and financial plan/tag names converted to lowercase when compared.
-The following sequence diagram shows how the gathering of emails by financial plan operation works:
+Depending on the type of `GatherEmailPrompt`, it triggers either: 
+
+- `Person#gatherEmailsContainsTag(String prompt)` —  Checks if the given prompt is a substring of any Tag names in the `Set<Tag>` of the current person. 
+- `Person#gatherEmailsContainsFinancialPlan(String prompt)` —  Checks if the given prompt is a substring of any Financial Plan names in the `Set<FinancialPlan>` of the current person.
+
+These methods internally utilize `Tag#containsSubstring(String substring)` and `FinancialPlan#containsSubstring(String substring)`, respectively. These substring comparisons are performed in a case-insensitive manner by converting both the prompt and the financial plan/tag names to lowercase before the check. 
+Currently, we only allow gathering emails by `FinancialPlan` and `Tag` as these are the more likely to be searched to gather emails by. This is to make gathering of emails more convenient and flexible. However, more classes implementing the `GatherEmailPromt` can be added
+to facilitate the gathering of emails by more fields. 
+
+The following sequence diagram shows how the gather emails by financial plan operation works:
 
 ![GatherSequenceDiagram2](images/GatherSequenceDiagram2.png)
-
-Currently, we only allow gathering emails by `FinancialPlan` and `Tag` as these are the more likely to be searched to gather emails by. However, we can add more classes implementing the `GatherEmailPromt`
-to facilitate the gathering of emails by more fields.
 
 #### Design Considerations
 
@@ -376,17 +372,17 @@ The following diagram summarises what happens when the user executes a sort comm
 The `SortCommand` class is instantiated by the `SortCommandParser`, which parses user input commands. The
 `SortCommandParser` class implements the following operations:
 
-- **`SortCommandParser#parse(String args)` —  Checks the sort command keyword passed in by the user.
+- `SortCommandParser#parse(String args)` —  Checks the sort command keyword passed in by the user.
 
 The `SortCommand` takes in a `Comparator<Person>` object and passes it into the current `Model` model. The
 `SortCommand` class implements the following operations:
 
-- **`SortCommand#execute()` —  Executes the sort operation by calling `model.sortFilteredPersonList(comparator)`.
+- `SortCommand#execute()` —  Executes the sort operation by calling `model.sortFilteredPersonList(comparator)`.
 
 The `Model` interface is implemented by the `ModelManager`, representing the in-memory model of the address book data.
 It contains the following method:
 
-- **`ModelManager#sortFilteredPersonList(Comparator<Person> comparator)` —  Carries out the sorting operation by
+- ModelManager#sortFilteredPersonList(Comparator<Person> comparator)` —  Carries out the sorting operation by
 setting the comparator on the list of clients wrapped in a SortedList wrapper.
 
 A `CommandResult` class is created and returned

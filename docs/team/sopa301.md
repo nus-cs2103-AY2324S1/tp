@@ -15,6 +15,7 @@ Given below are my contributions to the project.
 
 * **Code Contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=sopa301&breakdown=true)
 
+
 * **Enhancements Implemented**:
   * Added `next-of-kin` and `next-of-kin phone` fields and wrote tests
     * Justification: As a financial advisor, it would be convenient to have a person's next-of-kin details available for
@@ -33,8 +34,10 @@ Given below are my contributions to the project.
     niche uses and can be easily supported.
     * Pull request [#125](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/125)
 
+
 * **Contributions to the UG**:
   * Updated commands for `add`, `clear`, `edit`, `find` and `help`.
+
 
 * **Contributions to the DG**:
   * Updated references to code files in the `Design` section.
@@ -42,15 +45,16 @@ Given below are my contributions to the project.
   * Drafted Planned Enhancements section.
   * Contributed to `Instructions for manual testing` in DG.
 
+
+* **Community**:
+  * PRs reviewed (with non-trivial comments): [#70](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/70),
+    [#256](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/256),
+    [#109](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/109),
+    [#110](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/110)
+
+
 * **Contributions to team-based tasks**:
   * Maintained issue tracker.
   * Released product for `v1.1` and `v1.3.trial`.
   * Refactored `AddCommandParser` and `EditCommandParser` for better SLAP.
   [#258](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/258)
-
-* **Review/mentoring contributions**:
-  * PRs reviewed (with non-trivial comments): [#70](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/70),
-[#256](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/256),
-[#109](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/109),
-[#110](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/110)
-
