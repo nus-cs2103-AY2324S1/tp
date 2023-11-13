@@ -50,7 +50,7 @@ deactivate AddressBookParser
 LogicManager -> ListCommand : execute()
 activate ListCommand
 
-ListCommand -> Model : updateFilteredPersonList(PREDICATESHOW_ALL_PERSONS)
+ListCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
 activate Model
 
 Model --> ListCommand

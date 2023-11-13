@@ -147,14 +147,6 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 
-<box type="info" seamless>
-
-**Note:** A more in depth model is given below. It has a `Group` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Group` object per unique tag, instead of each `Person` needing their own `Group` objects.<br>
-</box>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-
 ### 2.5. Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
@@ -199,6 +191,12 @@ Step.4 `AddCommand` then calls `Model#addPerson()` which then calls `AddressBook
 The following sequence diagram describes the process of `add` command:
 <puml src="diagrams/AddCommandSequenceDiagram.puml" alt="AddCommandSeqDiagram" />
 
+<box type="info" seamless>
+
+**Note:** The lifeline for `AddCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
 #### Design consideration:
 
 **Aspect: Handling group attribute in user input**
@@ -232,6 +230,12 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 Below is a sequence diagram that summarizes how a user creates a new group:
 <puml src="diagrams/CreateGroupSequenceDiagram.puml" alt="CreateGroupSequenceDiagram"/>
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `CreateGroupCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
 
 #### Design Considerations
 
@@ -280,7 +284,7 @@ Step 2. `DeletePersonCommand` is executed, in which `Model#deletePerson("Alex Ye
 
 </box>
 
-Step 3. `Model#deletePerson()` will also call `AddressBook#removePerson(Alex Yeoh)` which will remove the target contact from the contact list while removing it from all the groups it was part of.
+Step 3. `Model#deletePerson()` will also call `AddressBook#removePerson(Alex Yeoh)` which will remove the target contact from the contact list while removing it from all the groups it was part of by calling `Group#removePerson(Alex Yeoh)`.
 
 The following sequence diagram shows how the Delete Person operation works:
 
@@ -288,7 +292,7 @@ The following sequence diagram shows how the Delete Person operation works:
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeletePersonCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
 
@@ -296,7 +300,7 @@ The following sequence diagram shows how the Delete Person operation works:
 
 The Delete Group command mechanism behaves the same as the Delete Person command above, except it deletes the target `Group` object instead of the `Person` object.
 
-Additionally, `AddressBook#removeGroup(Group g)` will remove the target group 'g' from the group lists of all the members that were a part of it.
+Additionally, `AddressBook#removeGroup(Group g)` will remove the target group 'g' from the group lists of all the members that were a part of it by calling `Person#removeGroup(Group g)`.
 
 #### Design Considerations
 
@@ -331,7 +335,7 @@ The following activity diagram summarizes what happens when a user executes a li
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `ListCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** The lifeline for `ListCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
 
@@ -356,7 +360,7 @@ The following activity diagram summarizes what happens when a user executes a li
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `ListGroupCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** The lifeline for `ListGroupCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
 
@@ -399,7 +403,7 @@ The following sequence diagram shows how the Find Person operation works:
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `FindPersonCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
 
@@ -496,7 +500,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `GroupRemarkCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** The lifeline for `GroupRemarkCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
 
@@ -553,7 +557,7 @@ The following sequence diagram shows how the Add Time to Person operation works:
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `AddTimeCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** The lifeline for `AddTimeCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
 
@@ -617,6 +621,12 @@ Step 3. The function will be called in the person's `timeInterval` list. The app
 The following sequence diagram summarizes what happens when a user executes a new command:
 
 <puml src="diagrams/DeletePersonTimeDiagram.puml" alt="DeletePersonSequenceTimeDiagram"/>
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `DeleteTimeCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
 
 ### Deleting Time from a Group
 
@@ -697,7 +707,7 @@ The following sequence diagram shows how the List Time from Person operation wor
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `ListTimePersonCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** The lifeline for `ListTimeCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
 
@@ -729,40 +739,24 @@ The List Time from Group command mechanism behaves the same as the List Time fro
 
 --------------------------------------------------------------------------------------------------------------------
 
-### 3.11. FindFreeTime 
-
+### 3.11. Find Free Time
 #### Implementation
 
-The FindFreeTime mechanism is facilitated by the `Model`, `Group` and  `Person` class.
-It retrieves `Group` from `Model` to find a free time between group members in `listOfGroupMates` in `Group` 
-with a duration specified, `Duration`.
-The operation is exposed to `Model` interface as `Model#findGroup`.
+The FindFreeTime mechanism is facilitated by the `Model`, `Group` and  `Person` class. It retrieves `Group` from `Model` to find a free time between group members in `listOfGroupMates` in `Group` with a duration specified, `Duration`. The operation is exposed to `Model` interface as `Model#findGroup`.
 
 
 Given below is an example usage scenario and how the list mechanism behaves at each step.
 
-**Step 1:** User launches the application. 
-
-**Step 2:** User executes `findfreetime g/CS2103 d/60` command to find a common meeting time with duration 60 minutes 
-for group CS2103.
-
-**Step 3:** FindFreeTimeCommandParser parses the group name CS2103 and duration 60, ensuring that duration 
-is a valid integer in terms of minutes, and returns a FindFreeTimeCommand.
-
-**Step 4:** FindFreeTimeCommand calls `Model#findGroup(groupName)` to retrieve the group with matching name.
-If group does not exist, then an error is thrown.
-
-**Step 4:** FindFreeTimeCommand calls `Group#findFreeTime(duration)`, to retrieve the all common timeslots between 
-`listOfGroupMates` in `Group` and return them in a list should they accommodate the duration stated.
-
+**Step 1:** User launches the application.
+**Step 2:** User executes `findfreetime g/CS2103 d/60` command to find a common meeting time with duration 60 minutes for group CS2103.
+**Step 3:** FindFreeTimeCommandParser parses the group name CS2103 and duration 60, ensuring that duration is a valid integer in terms of minutes, and returns a FindFreeTimeCommand.
+**Step 4:** FindFreeTimeCommand calls `Model#findGroup(groupName)` to retrieve the group with matching name. If group does not exist, then an error is thrown.
+**Step 4:** FindFreeTimeCommand calls `Group#findFreeTime(duration)`, to retrieve the all common timeslots between `listOfGroupMates` in `Group` and return them in a list should they accommodate the duration stated.
 **Note:**
-If group is empty, having no group mates in `listOfGroupMates` an error is thrown. 
-<br>
-If any group mate has not key in their free time slots using `addtime`, an error is thrown. 
-
+If group is empty, having no group mates in `listOfGroupMates` an error is thrown. If any group mate has not key in their free time slots using `addtime`, an error is thrown. 
 
 The following activity diagram summarizes what happens when a user executes a FindFreeTime command:
-
+<puml src="diagrams/FindFreeTimeActivityDiagram.puml" alt="FindFreeTimeActivityDiagram" />
 --------------------------------------------------------------------------------------------------------------------
 
 ## 4. Planned Enhancements

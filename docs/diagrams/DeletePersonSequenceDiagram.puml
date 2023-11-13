@@ -12,6 +12,8 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+participant ":Group" as Group MODEL_COLOR
 end box
 
 [-> LogicManager : execute("delete n/Alex Yeoh")
@@ -51,6 +53,18 @@ activate DeletePersonCommand
 
 DeletePersonCommand -> Model : deletePerson("Alex Yeoh")
 activate Model
+
+Model -> AddressBook : removePerson(Alex Yeoh)
+activate AddressBook
+
+AddressBook -> Group : removePerson(Alex Yeoh)
+activate Group
+
+Group --> AddressBook
+deactivate Group
+
+AddressBook --> Model
+deactivate AddressBook
 
 Model --> DeletePersonCommand
 deactivate Model
