@@ -85,7 +85,7 @@ Now let’s set the breakpoint. First, double-click the item to reach the corres
 
 ## Tracing the execution path
 
-Recall from the User Guide that the `edit` command has the format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` For this tutorial we will be issuing the command `edit 1 n/Alice Yeoh`.
+Recall from the User Guide that the `edit_person` command has the format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [r/REMARK] [g/GROUP]…​ [ug/GROUP]…​` For this tutorial we will be issuing the command `edit_person 1 n/Alice Yeoh`.
 
 <div markdown="span" class="alert alert-primary">
 
@@ -94,7 +94,7 @@ Recall from the User Guide that the `edit` command has the format: `edit INDEX [
 
 1. To start the debugging session, simply `Run` \> `Debug Main`
 
-1. When the GUI appears, enter `edit 1 n/Alice Yeoh` into the command box and press `Enter`.
+1. When the GUI appears, enter `edit_person 1 n/Alice Yeoh` into the command box and press `Enter`.
 
 1. The Debugger tool window should show up and show something like this:<br>
    ![DebuggerStep1](../images/tracing/DebuggerStep1.png)
@@ -159,12 +159,12 @@ Recall from the User Guide that the `edit` command has the format: `edit INDEX [
 
     ``` java
     ...
-    case EditCommand.COMMAND_WORD:
-        return new EditCommandParser().parse(arguments);
+    case EditPersonCommand.COMMAND_WORD:
+        return new EditPersonCommandParser().parse(arguments);
     ...
     ```
 
-1. Let’s see what `EditCommandParser#parse()` does by stepping into it. You might have to click the 'step into' button multiple times here because there are two method calls in that statement: `EditCommandParser()` and `parse()`.
+1. Let’s see what `EditPersonCommandParser#parse()` does by stepping into it. You might have to click the 'step into' button multiple times here because there are two method calls in that statement: `EditCommandParser()` and `parse()`.
 
    <div markdown="span" class="alert alert-primary">:bulb: **Intellij Tip:** Sometimes, you might end up stepping into functions that are not of interest. Simply use the `step out` button to get out of them!
    </div>
@@ -184,31 +184,50 @@ Recall from the User Guide that the `edit` command has the format: `edit INDEX [
 
 1. Now, step over until you read the statement that calls the `execute()` method of the `EditCommand` object received, and step into that `execute()` method (partial code given below):
 
-   **`EditCommand#execute()`:**
+   **`EditPersonCommand#execute()`:**
    ``` java
    @Override
    public CommandResult execute(Model model) throws CommandException {
        ...
        Person personToEdit = lastShownList.get(index.getZeroBased());
-       Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-       if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-           throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-       }
-       model.setPerson(personToEdit, editedPerson);
-       model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-       return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+
+        // This check must happen first to check duplicate persons
+        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+            System.out.println("duplicate detected 2");
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        model.setPerson(personToEdit, editedPerson);
+
+        // Update assigned persons in the event list
+        model.updateAssignedPersons(personToEdit, editedPerson);
+
+        /* Remove empty groups from event when un-assigning groups from persons
+            and that person is the last member of the group
+        */
+        Set<Group> emptyGroups = model.getEmptyGroups(personToEdit);
+        if (!emptyGroups.isEmpty()) {
+            for (Group group : emptyGroups) {
+                logger.info(String.format("Removing empty group: %s", group));
+            }
+            model.removeEmptyGroups(emptyGroups);
+        } else {
+            model.updateGroups();
+        }
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
    }
    ```
 
 1. As suspected, `command#execute()` does indeed make changes to the `model` object. Specifically,
    * it uses the `setPerson()` method (defined in the interface `Model` and implemented in `ModelManager` as per the usual pattern) to update the person data.
    * it uses the `updateFilteredPersonList` method to ask the `Model` to populate the 'filtered list' with _all_ persons.<br>
-     FYI, The 'filtered list' is the list of persons resulting from the most recent operation that will be shown to the user immediately after. For the `edit` command, we populate it with all the persons so that the user can see the edited person along with all other persons. If this was a `find` command, we would be setting that list to contain the search results instead.<br>
+     FYI, The 'filtered list' is the list of persons resulting from the most recent operation that will be shown to the user immediately after. For the `edit_person` command, we populate it with all the persons so that the user can see the edited person along with all other persons. If this was a `find` command, we would be setting that list to contain the search results instead.<br>
      To provide some context, given below is the class diagram of the `Model` component. See if you can figure out where the 'filtered list' of persons is being tracked.
      <img src="../images/ModelClassDiagram.png" width="450" /><br>
    * :bulb: This may be a good time to read through the [`Model` component section of the DG](../DeveloperGuide.html#model-component)
 
-1. As you step through the rest of the statements in the `EditCommand#execute()` method, you'll see that it creates a `CommandResult` object (containing information about the result of the execution) and returns it.<br>
+1. As you step through the rest of the statements in the `EditPersonCommand#execute()` method, you'll see that it creates a `CommandResult` object (containing information about the result of the execution) and returns it.<br>
    Advancing the debugger by one more step should take you back to the middle of the `LogicManager#execute()` method.<br>
 
 1. Given that you have already seen quite a few classes in the `Logic` component in action, see if you can identify in this partial class diagram some of the classes you've encountered so far, and see how they fit into the class structure of the `Logic` component:
@@ -273,24 +292,24 @@ Here are some quick questions you can try to answer based on your execution path
     instead? What exceptions do you think will be thrown (if any), where
     will the exceptions be thrown and where will they be handled?
 
-    1.  `redit 1 n/Alice Yu`
+    1.  `edit_person 1 n/Alice Yu`
 
-    2.  `edit 0 n/Alice Yu`
+    2.  `edit_person 0 n/Alice Yu`
 
-    3.  `edit 1 n/Alex Yeoh`
+    3.  `edit_person 1 n/Alex Yeoh`
 
-    4.  `edit 1`
+    4.  `edit_person 1`
 
-    5.  `edit 1 n/アリス ユー`
+    5.  `edit_person 1 n/アリス ユー`
 
-    6.  `edit 1 t/one t/two t/three t/one`
+    6.  `edit_person 1 t/one t/two t/three t/one`
 
 2.  What components will you have to modify to perform the following
     enhancements to the application?
 
     1.  Make command words case-insensitive
 
-    2.  Allow `delete` to remove more than one index at a time
+    2.  Allow `delete_person` to remove more than one index at a time
 
     3.  Save the address book in the CSV format instead
 

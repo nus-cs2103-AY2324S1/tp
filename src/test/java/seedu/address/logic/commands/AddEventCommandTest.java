@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -101,6 +102,32 @@ public class AddEventCommandTest {
         assertEquals(List.of(validEvent), modelStub.eventsAdded);
     }
 
+    @Test
+    public void equalsMethod() throws Exception {
+        ModelStubAcceptingEvent modelStub = new ModelStubAcceptingEvent();
+
+        Meeting validEvent = new MeetingBuilder().withEventName("TP MEETING TEST")
+                .withEventDate("2025-11-11")
+                .build();
+
+        AddEventCommand addEventCommand = new AddEventCommand(validEvent);
+
+        assertEquals(addEventCommand, new AddEventCommand(validEvent));
+    }
+
+    @Test
+    public void equalsNullMethod() throws Exception {
+        ModelStubAcceptingEvent modelStub = new ModelStubAcceptingEvent();
+
+        Meeting validEvent = new MeetingBuilder().withEventName("TP MEETING TEST")
+                .withEventDate("2025-11-11")
+                .build();
+
+        AddEventCommand addEventCommand = new AddEventCommand(validEvent);
+
+        assertNotEquals(null, addEventCommand);
+    }
+
 
 
     private String listInvalidNames(Set<Name> invalidNames) {
@@ -191,6 +218,11 @@ public class AddEventCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getFullPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredEventList(Predicate<Event> predicates) {
             throw new AssertionError("This method should not be called.");
         }
@@ -225,7 +257,7 @@ public class AddEventCommandTest {
         }
 
         @Override
-        public ObservableList<Event> getEventList() {
+        public ObservableList<Event> getFilteredEventList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -252,11 +284,6 @@ public class AddEventCommandTest {
         @Override
         public void updateGroups() {
             return;
-        }
-
-        @Override
-        public void updateFilteredEventListOnly(Predicate<Event> predicate) {
-            throw new AssertionError("This method should not be called.");
         }
     }
 

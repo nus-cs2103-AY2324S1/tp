@@ -25,7 +25,7 @@ import seedu.address.model.person.Name;
  * Parses input arguments and creates a new AddMeetingCommand object
  * @author Yuheng
  */
-public class AddMeetingCommandParser implements Parser<AddEventCommand> {
+public class AddEventCommandParser implements Parser<AddEventCommand> {
     @Override
     public AddEventCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
@@ -52,7 +52,6 @@ public class AddMeetingCommandParser implements Parser<AddEventCommand> {
         if (argMultimap.getValue(PREFIX_END_TIME).isPresent()) {
             meetingEndTime = ParserUtil.parseEventTime(argMultimap.getValue(PREFIX_END_TIME).get());
         }
-
 
         Meeting meeting = new Meeting(meetingName, eventDate,
                 Optional.of(meetingStartTime), Optional.of(meetingEndTime), nameList, groupList);

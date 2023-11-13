@@ -7,9 +7,9 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Person}'s {@code Name} or {@code Group} matches any of the keywords given.
  */
-public class NameContainsKeywordsPredicate implements Predicate<Person> {
+public class PersonNameOrGroupContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
     /**
@@ -17,7 +17,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
      *
      * @param keywords keywords from user input.
      */
-    public NameContainsKeywordsPredicate(List<String> keywords) {
+    public PersonNameOrGroupContainsKeywordsPredicate(List<String> keywords) {
         assert keywords != null;
 
         this.keywords = keywords;
@@ -26,7 +26,9 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
+                .anyMatch(keyword -> (StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword)
+                        || person.getGroups().stream().anyMatch(
+                                group -> StringUtil.containsWordIgnoreCase(group.groupName, keyword))));
     }
 
     @Override
@@ -36,12 +38,13 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NameContainsKeywordsPredicate)) {
+        if (!(other instanceof PersonNameOrGroupContainsKeywordsPredicate)) {
             return false;
         }
 
-        NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
-        return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
+        PersonNameOrGroupContainsKeywordsPredicate otherNameOrGroupContainsKeywordsPredicate =
+                (PersonNameOrGroupContainsKeywordsPredicate) other;
+        return keywords.equals(otherNameOrGroupContainsKeywordsPredicate.keywords);
     }
 
     @Override

@@ -15,14 +15,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javafx.collections.FXCollections;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventNameContainsKeywordsPredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.event.EventNameOrGroupContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonNameOrGroupContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -140,7 +141,7 @@ public class CommandTestUtil {
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredPersonList(new PersonNameOrGroupContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
@@ -149,11 +150,14 @@ public class CommandTestUtil {
      * Updates the model's event list to show only the event at the given index.
      */
     public static void showEventAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getEventList().size());
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredEventList().size());
 
-        Event event = model.getEventList().get(targetIndex.getZeroBased());
+        Event event = model.getFilteredEventList().get(targetIndex.getZeroBased());
         final String[] splitName = event.getName().toString().split("\\s+");
-        model.updateFilteredEventList(new EventNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        EventNameOrGroupContainsKeywordsPredicate predicate =
+                new EventNameOrGroupContainsKeywordsPredicate(Arrays.asList(splitName[0]));
+        predicate.setPersonList(FXCollections.observableArrayList());
+        model.updateFilteredEventList(predicate);
     }
 
 }

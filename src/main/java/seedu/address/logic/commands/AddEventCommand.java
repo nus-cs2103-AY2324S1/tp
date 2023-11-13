@@ -20,7 +20,7 @@ import seedu.address.model.person.Name;
 
 
 /**
- * Adds a meeting.
+ * Adds an event.
  * @author Yuheng
  */
 public class AddEventCommand extends Command {
@@ -36,7 +36,7 @@ public class AddEventCommand extends Command {
             + "[" + PREFIX_GROUP + "GROUP]... \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_EVENT_NAME + "FumbleLog Meeting "
-            + PREFIX_DATE + "2020-10-30 "
+            + PREFIX_DATE + "2024-01-30 "
             + PREFIX_START_TIME + "1000 "
             + PREFIX_END_TIME + "1200 "
             + PREFIX_NAME + "Ken "
@@ -47,7 +47,7 @@ public class AddEventCommand extends Command {
     private final Meeting toAdd;
 
     /**
-     * Creates an AddMeetingCommand to add the specified {@code Meeting}
+     * Creates an AddEventCommand to add the specified {@code Meeting}
      */
     public AddEventCommand(Meeting meeting) {
         requireAllNonNull(meeting);
@@ -66,7 +66,6 @@ public class AddEventCommand extends Command {
             throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON,
                     listInvalidNames(invalidNames)));
         }
-        model.addEvent(this.toAdd); //else, all the names exist
 
         Set<Group> invalidGroups = model.findInvalidGroups(this.toAdd.getGroups());
 
@@ -74,6 +73,10 @@ public class AddEventCommand extends Command {
             throw new CommandException(String.format(Messages.MESSAGE_INVALID_GROUP,
                     listInvalidGroups(invalidGroups)));
         }
+
+        // This line must be at the end
+        assert invalidNames.isEmpty() || invalidGroups.isEmpty() : "Invalid names and groups should be checked first";
+        model.addEvent(this.toAdd);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatEvent(toAdd)));
     }
@@ -94,10 +97,19 @@ public class AddEventCommand extends Command {
             builder.append(group.toString());
             builder.append(", ");
         }
-
         builder.delete(builder.length() - 2, builder.length()); //removes the last comma
         return builder.toString();
     }
 
-
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        } else if (!(other instanceof AddEventCommand)) {
+            return false;
+        } else {
+            AddEventCommand otherAddEventCommand = (AddEventCommand) other;
+            return this.toAdd.equals(otherAddEventCommand.toAdd);
+        }
+    }
 }

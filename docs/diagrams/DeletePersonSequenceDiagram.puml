@@ -1,0 +1,37 @@
+@startuml
+!include style.puml
+
+mainframe **sd** execute DeletePersonCommand
+
+participant "d:DeletePersonCommand" as DeletePersonCommand LOGIC_COLOR
+
+participant ":Model" as Model MODEL_COLOR
+
+participant ":AddressBook" as TaskListBook MODEL_COLOR_T2
+
+participant ":UniquePersonList" as TaskList MODEL_COLOR_T3
+
+[-> DeletePersonCommand : execute()
+activate DeletePersonCommand
+
+DeletePersonCommand -> Model : deletePerson(person)
+
+Model -> TaskListBook : removePerson(person)
+activate TaskListBook
+
+TaskListBook -> TaskList : remove(person)
+activate TaskList
+
+TaskList --> TaskListBook
+deactivate TaskList
+
+TaskListBook ---> Model
+deactivate TaskListBook
+
+Model --> DeletePersonCommand
+deactivate Model
+
+[<-- DeletePersonCommand
+deactivate DeletePersonCommand
+
+@enduml

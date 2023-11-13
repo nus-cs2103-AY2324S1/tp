@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeleteEventCommand;
 
-public class DeleteMeetingCommandParserTest {
+public class DeleteEventCommandParserTest {
 
-    private final DeleteMeetingCommandParser parser = new DeleteMeetingCommandParser();
+    private final DeleteEventCommandParser parser = new DeleteEventCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -37,12 +37,28 @@ public class DeleteMeetingCommandParserTest {
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteEventCommand.MESSAGE_USAGE));
+
+        // invalid prefix being parsed as preamble
+        assertParseFailure(parser, "1 i/string",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteEventCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidValue_failure() {
         // invalid index
         assertParseFailure(parser, "a" + VALID_EVENT_NAME,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteEventCommand.MESSAGE_USAGE));
+
+        // invalid name
+        assertParseFailure(parser, "1" + " " + VALID_EVENT_NAME,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteEventCommand.MESSAGE_USAGE));
+
+        // invalid name and invalid index
+        assertParseFailure(parser, "a" + " " + VALID_EVENT_NAME,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteEventCommand.MESSAGE_USAGE));
+
+        // invalid start time
+        assertParseFailure(parser, "1" + " " + VALID_EVENT_NAME,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteEventCommand.MESSAGE_USAGE));
     }
 

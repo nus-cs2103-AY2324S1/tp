@@ -19,7 +19,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new EditMeetingCommand object
  */
-public class EditMeetingCommandParser implements Parser<EditEventCommand> {
+public class EditEventCommandParser implements Parser<EditEventCommand> {
 
     @Override
     public EditEventCommand parse(String args) throws ParseException {

@@ -13,9 +13,9 @@
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "birthday" : "1998-01-02",
+    "birthday": "1998-01-02",
     "remark" : "He owes me money",
-    "groups" : [ "owesMoney", "friends" ]
+    "groups" : [ "owesMoney", "friends", "teammates" ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
@@ -23,7 +23,7 @@
     "address" : "wall street",
     "birthday": "1998-01-03",
     "remark" : "He likes to swim",
-    "groups" : [ ]
+    "groups" : [ "family" ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
@@ -37,9 +37,9 @@
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "birthday" : "1998-01-05",
+    "birthday": "1998-01-05",
     "remark" : "She likes to eat cheese",
-    "groups" : [ ]
+    "groups" : [ "teammates" ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",

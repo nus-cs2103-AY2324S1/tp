@@ -7,7 +7,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UNASSIGN_GROUPS;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -48,7 +51,9 @@ public class EditPersonCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_BIRTHDAY + "BIRTHDAY] "
-            + "[" + PREFIX_GROUP + "GROUP]...\n"
+            + "[" + PREFIX_REMARK + "REMARK] "
+            + "[" + PREFIX_GROUP + "GROUP]... "
+            + "[" + PREFIX_UNASSIGN_GROUPS + "GROUP]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -86,20 +91,21 @@ public class EditPersonCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (editPersonDescriptor.getName().isPresent()) {
-            model.updateAssignedPersons(personToEdit, editedPerson);
-        }
-
+        // This check must happen first to check duplicate persons
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+            System.out.println("duplicate detected 2");
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
         model.setPerson(personToEdit, editedPerson);
+
+        // Update assigned persons in the event list
         model.updateAssignedPersons(personToEdit, editedPerson);
 
-
+        /* Remove empty groups from event when un-assigning groups from persons
+            and that person is the last member of the group
+        */
         Set<Group> emptyGroups = model.getEmptyGroups(personToEdit);
-
         if (!emptyGroups.isEmpty()) {
             for (Group group : emptyGroups) {
                 logger.info(String.format("Removing empty group: %s", group));
@@ -125,8 +131,15 @@ public class EditPersonCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Birthday updatedBirthday = editPersonDescriptor.getBirthday().orElse(personToEdit.getBirthday());
+        Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
 
         Set<Group> updatedGroups = new HashSet<>();
+
+        LocalDate bd = updatedBirthday.getValue();
+        if (bd != null && bd.isAfter(LocalDate.now())) {
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_BIRTHDAY,
+                    updatedBirthday.getStringValue()));
+        }
 
         if (editPersonDescriptor.getGroups().isPresent()) {
             updatedGroups.addAll(personToEdit.getGroups());
@@ -147,8 +160,6 @@ public class EditPersonCommand extends Command {
             }
             updatedGroups.removeAll(editPersonDescriptor.getUnassignGroups().get());
         }
-
-        Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
 
 
         Optional<Phone> phone = Optional.ofNullable(updatedPhone);
@@ -241,7 +252,7 @@ public class EditPersonCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, birthday, groups, unassignGroups);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, birthday, remark, groups, unassignGroups);
         }
 
         public void setName(Name name) {
