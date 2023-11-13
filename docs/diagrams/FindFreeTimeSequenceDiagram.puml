@@ -75,4 +75,5 @@ activate CommandResult
 
 CommandResult --> FindFreeTimeCommand
 deactivate CommandResult
+
 @enduml

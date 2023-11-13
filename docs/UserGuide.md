@@ -146,7 +146,6 @@ Welcome back to ProjectPRO. Simply head over to our Features section to gain ins
      - ![MACGUIDE](images/UG/QUICKSTART3.png)
    - For Windows Users:
      - ![WINDOWSGUIDE](images/UG/QUICKSTART4.png)
-   
 4. Launch ProjectPRO.
    1. Open a command terminal
    2. type `cd Desktop` , followed by `cd ProjectPro`

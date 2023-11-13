@@ -756,16 +756,13 @@ The FindFreeTime mechanism is facilitated by the `Model`, `Group` and  `Person` 
 Given below is an example usage scenario and how the list mechanism behaves at each step.
 
 **Step 1:** User launches the application.
-**Step 2:** User executes `findfreetime g/CS2103 d/60` command to find a common meeting time with duration 60 minutes 
-for group CS2103.
+**Step 2:** User executes `findfreetime g/CS2103 d/60` command to find a common meeting time with duration 60 minutes for group CS2103.
 **Step 3:** FindFreeTimeCommandParser parses the group name CS2103 and duration 60, ensuring that duration is a valid integer in terms of minutes, and returns a FindFreeTimeCommand.
 **Step 4:** FindFreeTimeCommand calls `Model#findGroup(groupName)` to retrieve the group with matching name. If group does not exist, then an error is thrown.
 **Step 4:** FindFreeTimeCommand calls `Group#findFreeTime(duration)`, to retrieve the all common timeslots between `listOfGroupMates` in `Group` and return them in a list should they accommodate the duration stated.
 **Note:**
-If group is empty, having no group mates in `listOfGroupMates` an error is thrown.
-<br>
-If any group mate has not key in their free time slots using `addtime`, an error is thrown. 
-<br>
+If group is empty, having no group mates in `listOfGroupMates` an error is thrown. If any group mate has not key in their free time slots using `addtime`, an error is thrown. 
+
 The following activity diagram summarizes what happens when a user executes a FindFreeTime command:
 <puml src="diagrams/FindFreeTimeActivityDiagram.puml" alt="FindFreeTimeActivityDiagram" />
 --------------------------------------------------------------------------------------------------------------------
