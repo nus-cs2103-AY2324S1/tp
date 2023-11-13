@@ -14,9 +14,9 @@ import seedu.address.model.person.exceptions.ObjectNotFoundException;
 
 /**
  * A list of Appointments that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Appointment#equals(Appointment)} As such, adding and updating of
- * Appointments uses Appointment#equals(Appointment) for equality to ensure that the person being added or updated is
- * unique in terms of identity in the UniqueAppointmentList.
+ * A person is considered unique by comparing using {@code Appointment#equals(Appointment)} As such, adding
+ * and updating of Appointments uses Appointment#equals(Appointment) for equality
+ * to ensure that the person being added or updated is unique in terms of identity in the UniqueAppointmentList.
  *
  * Supports a minimal set of list operations.
  *
