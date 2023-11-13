@@ -4,7 +4,7 @@ title: Tran$act User Guide
 ---
 
 Welcome to **Tran$act**, your solution for effortless transaction recording and management.
-Tran$act is a desktop application designed to cater to the needs of startup or small scale
+Tran$act is a desktop application designed to cater to the needs of startups or small scale
 retailers looking for a cheap and efficient way to record daily transactions.
 
 Here's an overview of our main features:
@@ -65,7 +65,7 @@ to help you streamline your accounting.
 
 8. Congratulations, you have successfully added a staff member and a transaction!
 
-9. Once you have familarized yourself with Tran$act and want to begin inputting your own data, feel free to
+9. Once you have familiarized yourself with Tran$act and want to begin inputting your own data, feel free to
    type `clearstaff` and press Enter followed by `cleartransaction` and press Enter to clear the transaction book and
    staff list.
 
@@ -157,7 +157,7 @@ Tran$act allows users to edit existing staff in the staff list in case any of th
 
 **9. Deleting Staff**
 
-Anybody leave the business? Tran$act supports functionality to remove staff who may have left the company or are no
+Someone left the business? Tran$act supports functionality to remove staff who may have left the company or are no
 longer associated with it, reducing bloat.
 
 **10. Dashboard Display**
@@ -179,23 +179,23 @@ file.
 
 <div markdown="block" class="alert alert-info">
 
-| Parameter      | Description                                                     |
-|----------------|-----------------------------------------------------------------|
-| [ ]            | Optional field                                                  |
-| \<DESCRIPTION> | Any string                                                      |
-| \<NAME>        | Any string                                                      |
-| \<PHONE>       | Number with at least 3 digits (trailing zeroes are allowed)     |
-| \<EMAIL>       | Any string                                                      |
-| \<ADDRESS>     | Any string                                                      |
-| \<TAG>         | A single word with only alphabets and/or digits, with no spaces |
-| \<KEYWORD>     | A single word with no spaces                                    |
-| \<TYPE>        | R (for Revenue), or E (for Expense)                             |
-| \<AMOUNT>      | Any number                                                      |
-| \<DATE>        | In dd/MM/yy format                                              |
-| \<ID>          | ID of a transaction, an integer                                 |
-| \<STAFF ID>    | ID of staff, an integer                                         |
-| \<SORT TYPE>   | asc (ascending) or desc (descending)                            |
-| ...            | Multiple entries allowed, separated by a space                  |
+| Parameter      | Description                                                          |
+|----------------|----------------------------------------------------------------------|
+| [ ]            | Optional field                                                       |
+| \<DESCRIPTION> | Any string without `/`                                               |
+| \<NAME>        | String containing only letters and/or digits                         |
+| \<PHONE>       | Number with at least 3 digits (trailing zeroes are allowed)          |
+| \<EMAIL>       | See the [addstaff](#adding-staff--addstaff) command for full details |
+| \<ADDRESS>     | Any string without `/`                                               |
+| \<TAG>         | A single word with only alphabets and/or digits, with no spaces      |
+| \<KEYWORD>     | A single word with no spaces                                         |
+| \<TYPE>        | R (for Revenue), or E (for Expense) - case insensitive               |
+| \<AMOUNT>      | Any number                                                           |
+| \<DATE>        | In dd/MM/yy format                                                   |
+| \<ID>          | ID of a transaction, an integer                                      |
+| \<STAFF ID>    | ID of staff, an integer                                              |
+| \<SORT TYPE>   | asc (ascending) or desc (descending)                                 |
+| ...            | Multiple entries allowed, separated by a space                       |
 
 > ❗ Extraneous parameters for commands that do not take in parameters (such as view, help, list, exit, clearstaff,
 > cleartransaction, and clear) will be ignored. For example, if the command `help 123` is entered, it will be interpreted
@@ -282,7 +282,7 @@ Format: `filter [ty/<TYPE>] [has/<KEYWORDS...>] [after/<DATE>] [before/<DATE>] [
     - `R` will match revenue
     - `E` will match expense
 - `has` will match descriptions containing the keyword(s)
-    - The search is case-insensitive. e.g `hans` will match `Hans`
+    - The search is case-insensitive. e.g. `hans` will match `Hans`
     - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
     - Only the description is searched.
     - Only full words will be matched e.g. `Han` will not match `Hans`
@@ -333,6 +333,15 @@ Adds a new staff member.
 
 Format: `addstaff n/<NAME> p/<PHONE> e/<EMAIL> a/<ADDRESS> [t/<TAG>...]`
 
+- `EMAIL` should be of the format `local-part@domain` where:
+  - `local-part`:
+    - can only contain alphanumeric characters and `+`, `_`, `.`, `-`.
+    - should not start or end with any special characters.
+  - `domain` is made up of domain labels separated by periods, and must:
+      - end with a domain label at least 2 characters long
+      - have each domain label start and end with alphanumeric characters
+      - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+
 Success output: `New person added: <NAME>; Phone: <PHONE>; Email: <EMAIL>; Address: <ADDRESS>; [Tags: <TAG>...]`
 
 Example: `addstaff n/John Doe p/91234567 e/johndoe@gmail.com a/Blk 123, Pasir Ris St 32 t/manager`
@@ -368,7 +377,7 @@ Finds staff whose names contain any of the given keywords.
 
 Format: `find KEYWORD [KEYWORDS...]`
 
-- The search is case-insensitive. e.g `hans` will match `Hans`
+- The search is case-insensitive. e.g. `hans` will match `Hans`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 - Only the name is searched.
 - Only full words will be matched e.g. `Han` will not match `Hans`
@@ -439,8 +448,8 @@ Tran$act's data is saved in the hard disk automatically after any command that c
       Enter to run the application.
     - If this doesn't work, check our GitHub to make sure you have the latest version of Tran$act downloaded.
 4. Can I import my own data into Tran$act?
-    - Tran$act currently does not support file importing. However, if have data in Tran$act on another computer, you can
-      manually copy the `\data` folder to to this computer and place it in the same folder as Tran$act and your data
+    - Tran$act currently does not support file importing. However, if you have data in Tran$act on another computer, you can
+      manually copy the `\data` folder to this computer and place it in the same folder as Tran$act and your data
       will be transferred over.
 5. The Tran$act window is too small. Can I change its size?
     - Yes, you can change Tran$act's window size by hovering your cursor over the border's of Tran$act's window. You'll
