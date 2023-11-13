@@ -342,8 +342,8 @@ start time, end time, persons involved and groups involved.
 
 - Events stores a list of `Name` and a list of `Group` that are involved in the event. 
 This is to facilitate the ability to track persons and groups involved in the event.
-The `Name` class is used to represent the name of the person involved in the event, as names are unique in the `UniquePersonList
-- We have also made `Event` an abstract class so as to increase extensibility of FumbleLog in the future. For now, when an event is created (i.e. using the AddEventCommand), it defaults to adding a `Meeting` into FumbleLog's `Event` List. Future support for other kinds of `Event` can be possible (i.e. Recurring event) by directly inheriting from `Event`.
+The `Name` class is used to represent the name of the person involved in the event, as names are unique in the `UniquePersonList`.
+- We have also made `Event` an abstract class so as to increase extensibility of FumbleLog in the future. For now, when an event is created (i.e. using the `AddEventCommand`), it defaults to adding a `Meeting` into FumbleLog's `Event` List. Future support for other kinds of `Event` can be possible (i.e. Recurring event) by directly inheriting from `Event`.
 - To track events, we implement an `EventList` to store all events to be displayed in FumbleLog.
 
 [Scroll back to Table of Contents](#table-of-contents)
