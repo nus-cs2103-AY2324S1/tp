@@ -499,7 +499,6 @@ Cons: It restricts users from entering data that might be understandable or conv
 * wants an organized way to keep track of candidates information
 * wants to view and manage candidates information in a single place
 * wants to filter and sort candidates based on their details
-* wants to compare candidates using their information
 * wants to view a schedule/summary of events relating to the candidates
 * wants to attach a score to candidate performance over interview and assessments
 * wants to be able to use scores in order to quantitatively compare candidates
