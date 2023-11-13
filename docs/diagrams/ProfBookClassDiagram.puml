@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package ProfBook as ProfBookPackage <<Rectangle>>{
+Class "ChildManager" as ChildrenManager
+Class "<<interface>>\nIChildElement" as IChildElement
+Class "<<interface>>\nIChildManager" as IChildManager
+Class "{abstract}\nChildAndTaskListManager" as ChildrenAndTaskListManager
+Class Root
+Class Group
+Class Student
+Class Id
+Class Name
+Class Address
+Class Email
+Class Phone
+}
+
+package "Task" as TaskPackage #F4F6F6 {
+Class "<<interface>>\nReadOnlyTaskList" as ReadOnlyTaskList
+Class "<<interface>>\nITaskListManager" as ITaskListManager
+Class TaskListManager
+Class "{abstract}\nTask" as Task
+Class Deadline
+Class ToDo
+
+ITaskListManager -up-|> ReadOnlyTaskList
+TaskListManager .up.|> ITaskListManager
+TaskListManager -down-> "*" Task
+
+Task <|-- Deadline
+Task <|-- ToDo
+
+}
+
+
+
+Class HiddenOutside #FFFFFF
+
+HiddenOutside .down.> Root
+
+ChildrenManager .up.|> IChildManager
+ChildrenAndTaskListManager .up.|> IChildManager
+
+ChildrenAndTaskListManager .up.|> IChildElement
+Student -up-|> TaskListManager
+Student .up.|> IChildElement
+
+Group *--> "1" Id
+Student *--> "1" Id
+
+Group *--> "1" Name
+Student *--> "1" Name
+
+Student *--> "0...1" Email
+Student *--> "0...1" Address
+Student *--> "0...1" Phone
+
+ChildrenAndTaskListManager .up.|> ITaskListManager
+ChildrenAndTaskListManager -right-> TaskListManager
+ChildrenAndTaskListManager -left-> ChildrenManager
+
+Root -up-|> ChildrenManager
+Group -up-|> ChildrenAndTaskListManager
+Root -left-> "*" Group : Parent of >
+Group -left-> "*" Student : Parent of >
+@enduml

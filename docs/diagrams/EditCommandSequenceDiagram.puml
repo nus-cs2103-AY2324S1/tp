@@ -1,0 +1,60 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Command LOGIC_COLOR_T1
+participant ":EditCommand" as EditCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManagerStatic MODEL_COLOR
+participant "opr:RootChildOperation" as RootChildOperation MODEL_COLOR
+participant "oldGroup:Group" as oldGroup MODEL_COLOR
+participant "editedGroup:Group" as newGroup MODEL_COLOR
+end box
+
+[->  EditCommand : execute()
+activate EditCommand
+
+EditCommand -> ModelManagerStatic : taskOperation(path)
+activate ModelManagerStatic
+
+create RootChildOperation
+ModelManagerStatic -> RootChildOperation
+activate RootChildOperation
+
+RootChildOperation --> ModelManagerStatic : opr
+deactivate RootChildOperation
+
+ModelManagerStatic --> EditCommand :opr
+deactivate ModelManagerStatic
+
+EditCommand -> RootChildOperation : editChild(groupId, editDescriptor)
+activate RootChildOperation
+
+RootChildOperation -> oldGroup : getName()
+activate oldGroup
+
+oldGroup --> RootChildOperation : name
+deactivate oldGroup
+
+RootChildOperation -> oldGroup : getId()
+activate oldGroup
+
+oldGroup --> RootChildOperation : id
+destroy oldGroup
+
+create newGroup
+RootChildOperation -> newGroup
+activate newGroup
+
+newGroup --> RootChildOperation :editedGroup
+deactivate newGroup
+
+RootChildOperation --> EditCommand
+
+destroy RootChildOperation
+
+[<--EditCommand
+destroy EditCommand
+@enduml

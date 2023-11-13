@@ -3,36 +3,41 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.model.path.AbsolutePath.ROOT_PATH;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalGroups.GROUP_ONE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalPaths.PATH_TO_ALICE;
+import static seedu.address.testutil.TypicalPaths.PATH_TO_GROUP_ONE;
+import static seedu.address.testutil.TypicalStudents.ALICE;
+import static seedu.address.testutil.TypicalTasks.DEADLINE_1;
+import static seedu.address.testutil.TypicalTasks.TODO_1;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.Category;
+import seedu.address.logic.commands.CommandTestUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.path.AbsolutePath;
+import seedu.address.model.path.RelativePath;
+import seedu.address.model.path.exceptions.InvalidPathException;
+import seedu.address.model.profbook.Address;
+import seedu.address.model.profbook.Email;
+import seedu.address.model.profbook.Name;
+import seedu.address.model.profbook.Phone;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_TAG_1 = "friend";
-    private static final String VALID_TAG_2 = "neighbour";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -149,48 +154,149 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTag_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
+    public void parseRelativePath_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRelativePath(null));
     }
 
     @Test
-    public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG));
+    public void parseRelativePath_invalidPath_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRelativePath("invalidPath"));
     }
 
     @Test
-    public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1));
+    public void parseRelativePath_validPath_returnsRelativePath() throws InvalidPathException, ParseException {
+        RelativePath expectedPath = new RelativePath(PATH_TO_GROUP_ONE.toString());
+        assertEquals(expectedPath, ParserUtil.parseRelativePath(PATH_TO_GROUP_ONE.toString()));
     }
 
     @Test
-    public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
+    public void resolvePath_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.resolvePath(ROOT_PATH, null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.resolvePath(null,
+                CommandTestUtil.getValidGroupRelativePath().toString()));
+        assertThrows(NullPointerException.class, () -> ParserUtil.resolvePath(null, null));
     }
 
     @Test
-    public void parseTags_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(null));
+    public void resolvePath_invalidPath_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.resolvePath(ROOT_PATH, RelativePath.PARENT.toString()));
     }
 
     @Test
-    public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
+    public void resolvePath_validPath_returnsResolvedPath() throws InvalidPathException, ParseException {
+        RelativePath target = new RelativePath(GROUP_ONE.getId().toString());
+        assertEquals(PATH_TO_GROUP_ONE, ParserUtil.resolvePath(ROOT_PATH, target.toString()));
     }
 
     @Test
-    public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
-        assertTrue(ParserUtil.parseTags(Collections.emptyList()).isEmpty());
+    public void parseStudentId_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseStudentId((AbsolutePath) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseStudentId((String) null));
     }
 
     @Test
-    public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+    public void parseStudentId_invalidPath_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseStudentId(ROOT_PATH));
+        assertThrows(ParseException.class, () -> ParserUtil.parseStudentId(PATH_TO_GROUP_ONE));
+    }
 
-        assertEquals(expectedTagSet, actualTagSet);
+    @Test
+    public void parseStudentId_validPath_returnsStudentId() throws ParseException {
+        assertEquals(ALICE.getId(), ParserUtil.parseStudentId(PATH_TO_ALICE));
+    }
+
+    @Test
+    public void parseStudentId_invalidIdString_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseStudentId("invalidId"));
+    }
+
+    @Test
+    public void parseStudentId_validIdString_returnsStudentId() throws ParseException {
+        assertEquals(ALICE.getId(), ParserUtil.parseStudentId(ALICE.getId().toString()));
+    }
+
+    @Test
+    public void parseGroupId_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseGroupId((AbsolutePath) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseGroupId((String) null));
+    }
+
+    @Test
+    public void parseGroupId_invalidPath_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseGroupId(ROOT_PATH));
+    }
+
+    @Test
+    public void parseGroupId_validPath_returnsGroupId() throws ParseException {
+        assertEquals(GROUP_ONE.getId(), ParserUtil.parseGroupId(PATH_TO_ALICE));
+        assertEquals(GROUP_ONE.getId(), ParserUtil.parseGroupId(PATH_TO_GROUP_ONE));
+    }
+
+    @Test
+    public void parseGroupId_invalidIdString_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseGroupId("invalidId"));
+    }
+
+    @Test
+    public void parseGroupId_validIdString_returnsGroupId() throws ParseException {
+        assertEquals(GROUP_ONE.getId(), ParserUtil.parseGroupId(GROUP_ONE.getId().toString()));
+    }
+
+    @Test
+    public void parseDateTime_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDateTime(null));
+    }
+
+    @Test
+    public void parseDateTime_invalidFormat_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDateTime("2023-09-22"));
+    }
+
+    @Test
+    public void parseDateTime_invalidDateTime_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDateTime("2023-02-31 11:59"));
+    }
+
+    @Test
+    public void parseDateTime_validDateTime_returnsDateTime() throws ParseException {
+        assertTrue(ParserUtil.parseDateTime("2023-11-06 15:42") instanceof LocalDateTime);
+    }
+
+    @Test
+    public void parseCategory_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCategory(null));
+    }
+
+    @Test
+    public void parseCategory_invalidCategory_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCategory("Invalid Category"));
+    }
+
+    @Test
+    public void parseCategory_validCategory_returnsCategory() throws ParseException {
+        assertEquals(Category.ALLGRP, ParserUtil.parseCategory("allGrp"));
+        assertEquals(Category.ALLSTU, ParserUtil.parseCategory("allStu"));
+    }
+
+    @Test
+    public void parseToDo_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseToDo(null));
+    }
+
+    @Test
+    public void parseToDo_validArg_returnsToDo() throws ParseException {
+        assertEquals(TODO_1, ParserUtil.parseToDo(TODO_1.getDesc()));
+    }
+
+    @Test
+    public void parseDeadline_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDeadline(null, null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDeadline(DEADLINE_1.getDesc(), null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDeadline(null, DEADLINE_1.formatDueBy()));
+    }
+
+    @Test
+    public void parseDeadline_validArg_returnsDeadline() throws ParseException {
+        assertEquals(DEADLINE_1, ParserUtil.parseDeadline(DEADLINE_1.getDesc(), DEADLINE_1.formatDueBy()));
     }
 }

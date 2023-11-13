@@ -3,6 +3,9 @@
 /build/
 src/main/resources/docs/
 
+# VSCODE
+.vscode
+
 # IDEA files
 /.idea/
 /out/
@@ -12,6 +15,7 @@ src/main/resources/docs/
 /data/
 /config.json
 /preferences.json
+/profbook.json
 /*.log.*
 hs_err_pid[0-9]*.log
 
@@ -21,3 +25,7 @@ src/test/data/sandbox/
 # MacOS custom attributes files created by Finder
 .DS_Store
 docs/_site/
+
+# Bin folder
+bin/
+docs/_markbind/logs/

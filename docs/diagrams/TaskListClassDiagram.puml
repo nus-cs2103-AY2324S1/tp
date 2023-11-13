@@ -1,0 +1,28 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+
+
+
+package "Task" as TaskPackage #F4F6F6 {
+Class "<<interface>>\nReadOnlyTaskList" as ReadOnlyTaskList
+Class "<<interface>>\nITaskListManager" as ITaskListManager
+Class TaskListManager
+Class "{abstract}\nTask" as Task
+Class Deadline
+Class ToDo
+ITaskListManager .up.|> ReadOnlyTaskList
+TaskListManager .up.|> ITaskListManager
+TaskListManager -down-> "*" Task
+
+Task <|-- Deadline
+Task <|-- ToDo
+
+}
+
+
+
+@enduml
