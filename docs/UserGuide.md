@@ -45,6 +45,7 @@ This user guide will teach you how to install **TuitionConnect** from scratch, a
   * [FAQ](#faq)
   * [Known issues](#known-issues)
   * [Command summary](#command-summary)
+  * [Glossary](#glossary)
 <!-- TOC -->
 
 --------------------------------------------------------------------------------------------------------------------
@@ -68,6 +69,24 @@ paired up with simple and beginner-friendly features, anyone can learn how to us
 Transform your tutoring experience with **TuitionConnect!** Jump straight to the [Quick Start Section](#quick-start) and experience **TuitionConnect** today!
 
 ## Using this guide
+If you're feeling a bit lost, worry not!
+This user guide is to assist you seamlessly incorporate this application into your private tutoring business operations.
+
+For first-time users, we understand how it feels to open up an application without proper instructions. Thus, we have
+carefully crafted a [Quick Start](#quick-start) section in this guide to provide you with the knowledge it takes to 
+start using TuitionConnect for your business.
+
+Eager to learn more about what our application can do? Head over to the [Command Format](#command-format) section to 
+learn more about the general formats of the commands and getting yourself prepared before 
+delving into the [Features](#features) section where you are in for the ride of your life! The Features section contains
+the in-depth explanation for each command's format and use cases.
+
+At last, we have also included a [Command Summary](#command-summary) section for when you become proficient at using
+TuitionConnect to refer quickly to any commands that you may need!
+
+Still unsure about the more technical terms used in this guide? Fret not, as we also provide a [glossary](#glossary)
+to better understand all the technical jargons!
+
 
 ## Symbols and Syntax
 
@@ -153,7 +172,7 @@ Shows a message that helps redirects you to the user guide.
 * **Name (Compulsory field)**: String composed of character between A-Z and a-z.
 * **Phone number (Compulsory field)**: Any number at least 3 digits long.
 * **Address (Compulsory field)**: String without restriction in characters.
-* **Email (Compulsory field)** String with restrictions in characters (XXXXXXXX@emaildomain)
+* **Email (Compulsory field)** String with restrictions in characters (XXXXXXXX@emaildomain).
 * **Subject (Compulsory field)**: String without restriction in characters.
 * **Day (Compulsory field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).* **Begin (Compulsory field)**: String with restrictions (HHMM).
 * **End (Compulsory field)**: String with restrictions (HHMM).
@@ -208,6 +227,7 @@ Format: `list [DAY]`
 
 **Format**: `find n/[NAME] sb/[SUBJECT]`
 
+> [!NOTE]  
 > Find takes at least one of the two fields to be able to find for tutees.
 
 **Expected input:**
@@ -215,23 +235,22 @@ Format: `list [DAY]`
 * **Name (Optional field)**: String composed of character between A-Z and a-z
 * **Subject (Optional field)**: String without restriction in characters
 
+> [!NOTE]  
+> Both n/ and sb/ prefixes take one word as input.
+
 **Expected Output when the command succeeds:** X tutees listed!
 
 **Expected Output when the command fails:**
 
-> [!WARNING]
-> Inputting an invalid prefix after a valid prefix will result in the invalid prefix being read as
-> part of the input for the valid prefix.
->
-> Example: `find n/Abc abc/B` will read `Abc abc/B` as its input.
->
-> The outputting error message would be depending on the valid prefix specified.
+* **More than one word input for prefix n/**: Name can only take one word.
+* **More than one word input for prefix sb/**: Subject can only take one word.
+* **More than one word input for both prefix n/ and sb/**: Name can only take one word.
 
-* **Invalid Input for prefix n/**:
+* **Invalid Input for prefix name n/**:
 Names should only contain alphanumeric characters and spaces,
   and it should not be blank
-* **Invalid Input for prefix sb/**: Subject can take any values, and it should not be blank.
-* **Invalid Prefix other than n/ and sb/**:
+* **Invalid Input for prefix subject sb/**: Subject can take any values, and it should not be blank.
+* **Invalid Prefix other than name n/ and subject sb/**:
 
   Invalid command format!
   find: Find persons with names or subjects matching the specified keywords (case-insensitive).
@@ -245,7 +264,7 @@ Names should only contain alphanumeric characters and spaces,
 * **No input after prefix name n/**: Names should only contain alphanumeric characters and spaces,
 and it should not be blank
 * **No input after prefix subject sb/**: Subject can take any values, and it should not be blank.
-* **No input after prefixes name and subject n/ sb/**: Names should only contain alphanumeric characters and spaces,
+* **No input after prefixes name n/ and subject sb/**: Names should only contain alphanumeric characters and spaces,
   and it should not be blank
 
 ### Editing a tutee : `edit`
@@ -463,3 +482,48 @@ Format: `exit`
 | **redo**        | `redo`                                                                                                                                                                                                                                 |
 | **rev**         | `rev`                                                                                                                                                                                                                                  |
 | **exit**        | `exit`                                                                                                                                                                                                                                 |
+
+## Glossary
+
+### CLI
+
+`CLI` is short for `Command Line Interface`, which is a text-based user interface where a program connects to the user.
+Users interact with a system or application by the use of text commands, where the system will respond accordingly
+depending on the command specified.
+
+### Command
+
+The specific instruction for the application to carry out.
+
+### GUI
+
+`GUI` is short for `Graphical User Interface`, which is a user interface that incorporates interactive visual 
+components _(such as icons, etc)_. Users interact with a system or application by clicking on these components, where 
+the system will respond accordingly to the user's actions by updating the user interface.
+
+### Index
+
+`Index` is the position of an item inside the list. If the `item` is at index 1, then we say that it is the first 
+item on the list.
+
+### JAR file
+
+`JAR` is short for `Java ARchive`, which is a file format that is used to package the files to run TuitionConnect. 
+Not only that, `JAR` files are also executables, meaning that it can be run by simply double-clicking the `JAR` file.
+
+### Java
+`Java` is the programming language used to develop TuitionConnect. 
+A version of `Java` which is `Java 11` or higher is a requisite to run TuitionConnect on your devices.
+
+### JSON file
+
+`JSON` is short for JavaScript Object Notation, mainly utilized for storing data of users in TuitionConnect. 
+These type of files are lightweight and text-based, making it suitable for both humans to read and write, 
+as well as machines to parse and generate.
+
+### Parameter
+
+`Parameter`s are the inputs that a user can provide for a particular part of a command. As an example, for the field 
+`n/NAME` of add command, `NAME` can be substituted with the input that you want to specify (such as n/John or n/Alice). 
+
+[Back to top &#8593;](#welcome-to-tuitionconnects-user-guide-)

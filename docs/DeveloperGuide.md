@@ -180,6 +180,10 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Easy to implement.
     * Cons: Command input may be too long and less user-friendly.
 
+* **Alternative 2**: Allow for optional parameters with default values, with the tutee's name and phone being the compulsory ones.
+  * Pros: More user-friendly, command will not be too lengthy.
+  * Cons: Harder to implement. 
+
 ### List feature
 
 There are three commands that deal with listing tutees:
@@ -190,6 +194,7 @@ There are three commands that deal with listing tutees:
 
 The `ListCommand` extends the `Command` class. Both the `ListByDayCommand` and the `ListUnPaidCommand` extend the `ListCommand` class. All three commands override `Command#execute`.
 The `ListCommandParser` is responsible for returning the appropriate `ListCommand`  based on the command format.
+
 
 The `ListByDayCommand`  is initialised with a `DayPredicate` and updates
 
@@ -207,10 +212,15 @@ of the tutee.
 The following sequence diagram shows how the edit command works.
 ![EditSequenceDiagram](images/EditSequenceDiagram.png)
 
+The following activity diagram summarizes what happens when a user executes an edit command:
+![EditActivityDiagram](images/EditActivityDiagram.png)
+
 ### List by day feature
 The `ListByDayCommand` extends the `ListCommand` class. It is initialised with a `DayPredicate` and updates
 
 the `FilteredPersonList` to only display Persons whose `Day` field matches the specified input.
+
+The `ListByDayCommand`  is initialised with a `DayPredicate` and updates the `FilteredPersonList` to only display Persons whose `Day` field matches the specified input.
 
 The following sequence diagram shows how the list by day command works.
 
@@ -231,14 +241,32 @@ the `FilteredPersonList` to only display Persons whose `isPaid` field is false.
 
 ### Find Free Time feature
 
-The `FreeTimeCommand` extends the `Command` class. The command first finds timeslots when the user is busy by looking at
-the tutees' schedules inside the `UniquePersonList`. The TimeSlot class then finds free time based on the list of
-timeslots when the user is busy.
+The `freeTime` Command extends the `Command` class.
+
+`freeTime` takes in the following fields: 
+* **Day (Compulsory field)**: String with restrictions in characters, non-case sensitive (Mon/MondayTue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).
+* **Duration (Compulsory field)**: Positive Integer to represent duration in **minutes**.
+* **Begin (Compulsory field)**: String with restrictions (HHMM).
+* **End (Compulsory field)**: String with restrictions (HHMM).
+
+It displays a list of timeslots where the user is free on that _Day_, starting from _Begin_ to _End_. The timeslots listed down
+must also be greater than the duration provided. 
 
 The following sequence diagram shows how the freeTime command works.
 ![FreeTimeSequenceDiagram](images/FreeTimeSequenceDiagram.png)
 
 #### Design Considerations
+**Aspect: How `freeTime` executes:**
+
+* **Alternative 1 (current choice):** The command first finds timeslots when the user is busy on that _Day_ by looking at the tutees' schedules inside the
+  `UniquePersonList`. The TimeSlot Class finds free time based on the list of
+  timeslots when the user is busy, and then returns a list of timeslots where the user is free. (Each timeslot is between _Begin_ and _End_,
+and is at least _Duration_ long)
+  * Pros: Command is short and simple to use.
+  * Cons: During the first round of user-testing, some new users were confused on how to use the command. 
+
+The following activity diagram summarizes what happens when a user executes a new command:
+![FreeTimeActivityDiagram](images/FreeTimeActivityDiagram.png)
 
 ### Calculate total revenue for the month
 
@@ -577,6 +605,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+**Use case: UC08 - Finding free time**
+
+**MSS**
+1. User requests to find free time
+2. System shows the list of available free time
+
+**Extensions**
+- 2a. The user does not have any free slots available.
+  - 2a1. System informs that the user has no available timeslots.
 
 
 ### Non-Functional Requirements
