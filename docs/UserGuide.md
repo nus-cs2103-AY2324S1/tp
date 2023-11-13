@@ -127,7 +127,7 @@ Before reading our User Guide, here are some quick tips:
 
 The blurred image below shows an annotated overview of **Class Manager 2023's** GUI:
 
-<img alt="Gui" src="images/GUI-overview-blur.png" width="700"> </br>
+<img alt="Gui" src="images/GUI-overview-blur.png" width="700"> <br>
 
 The **GUI** has 6 notable sections:
 
@@ -242,11 +242,11 @@ Examples:
 
 Before `config #t/6 #a/5` is executed:
 
-<img alt="config before" src="images/config-before.png" width="700">
+<img alt="config before" src="images/config-before.png" width="700"> <br>
 
 After `config #t/6 #a/5` is executed successfully and `view s/A0247243A` is executed to view the first student's class information:
 
-<img alt="config success" src="images/config-success.png" width="700">
+<img alt="config success" src="images/config-success.png" width="700"> <br>
 
 Possible errors and their corresponding error messages:
 * If `TUTORIAL_COUNT` or `ASSIGNMENT_COUNT` is missing
@@ -273,7 +273,7 @@ Format: `help`
 
 After `help` is executed successfully:
 
-<img alt="help message" src="images/helpMessage.png" width="700"><br>
+<img alt="help message" src="images/helpMessage.png" width="700"> <br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -353,7 +353,7 @@ Example:
 
 The following image shows a successful execution of the `random 1` command.
 
-<img src="images/random-success.png" alt="result for `random 1" width="700" />
+<img src="images/random-success.png" alt="result for `random 1" width="700" /> <br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -424,10 +424,12 @@ Toggles between light and dark colour themes.
 Format: `theme`
 
 ##### Dark theme
-<img alt="theme_dark" src="images/theme-dark.png" width="700" > <br><br>
+
+<img alt="theme_dark" src="images/theme-dark.png" width="700" > <br>
 
 ##### Light theme
-<img alt="theme_light" src="images/theme-light.png" width="700" ><br>
+
+<img alt="theme_light" src="images/theme-light.png" width="700" > <br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -450,7 +452,7 @@ Format: `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]â€¦â€
 
 The following image shows a successful execution of the `add` command.
 
-<img alt="add-student-success" src="images/add-student-success.png" width="700" >
+<img alt="add-student-success" src="images/add-student-success.png" width="700" > <br>
 
 <box type="tip" seamless>
 
@@ -513,7 +515,7 @@ Example:
 
 The following image shows a successful execution of the `delete s/A0245234A` command.
 
-<img src="images/delete-success.png" alt="result for `delete s/A0245234A" width="700" />
+<img src="images/delete-success.png" alt="result for `delete s/A0245234A" width="700" /> <br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -552,17 +554,13 @@ The student number entered __without__ the `s/` prefix is the **current** studen
 * Existing values will be updated to the input values.
 * The `NEW_STUDENT_NUMBER` must be valid and unique (does not exist in **Class Manager 2023**).
 
-The following image shows a successful execution of the `edit A0245234A n/Bob` command.
-
-<img alt="edit-success" src="images/edit-success.png" width="700" ><br>
-
 Examples:
 *  `edit A0245234A p/91234567 e/johndoe@example.com` Edits the phone number and email address of the student with `STUDENT_NUMBER` A0245234A to be `91234567` and `johndoe@example.com` respectively.
 *  `edit A0223344A n/Betsy Crower` Edits the name of the student with `STUDENT_NUMBER` A0223344A to be `Betsy Crower`.
 
 The following image shows a successful execution of the `edit A0249112A n/Bob` command.
 
-<img src="images/edit-success.png" alt="result for `edit A0249112A n/Bob" width="700" />
+<img src="images/edit-success.png" alt="result for `edit A0249112A n/Bob" width="700" /> <br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -576,7 +574,7 @@ Format: `list`
 
 The following image shows a successful execution of the `list` command.
 
-<img alt="list-student-success" src="images/list-success.png" width="700" ><br>
+<img alt="list-student-success" src="images/list-success.png" width="700" > <br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -608,10 +606,10 @@ Examples:
 
 * `lookup n/alex david` returns `Alex Yeoh`, `David Li`<br>
 
-<img alt="result for 'lookup n/alex david'" src="images/lookupNameResult.png" width="700"> </br>
+<img alt="result for 'lookup n/alex david'" src="images/lookupNameResult.png" width="700"> <br>
 * `lookup c/T11` returns all students in class number T11<br>
 
-<img alt="result for 'lookup c/T11'" src="images/lookupClassResult.png" width="700"> </br>
+<img alt="result for 'lookup c/T11'" src="images/lookupClassResult.png" width="700"> <br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -645,7 +643,7 @@ Examples:
 
 The following image shows a successful execution of the `tag` command that replaces all the student's tags.
 
-<img src="images/tag-success.png" alt="result for 'tag s/A0247243A t/smart'" width="700" />
+<img src="images/tag-success.png" alt="result for 'tag s/A0247243A t/smart'" width="700" /> <br>
 
 <box type="info" seamless>
 
@@ -686,7 +684,7 @@ Examples:
 
 The following image shows a successful execution of the `present s/A0245234A tut/1` command.
 
-<img src="images/present-success.png" alt="result for `present s/A0245234A tut/1" width="700" />
+<img src="images/present-success.png" alt="result for `present s/A0245234A tut/1" width="700" /> <br>
 
 <box type="info" seamless>
 
@@ -767,7 +765,7 @@ Format: `class-part s/STUDENT_NUMBER tut/TUTORIAL_SESSION part/PARTICIPATION`
 Examples:
 * `class-part s/A0245234A tut/1 part/true`
 
-<img alt="class-part-success" src="images/class-part-success.png" width="700" /><br>
+<img alt="class-part-success" src="images/class-part-success.png" width="700" /> <br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -802,7 +800,7 @@ Example:
 
 * `view s/A0241243A`
 
-<img alt="result for 'view s/A0241243A'" src="images/ViewCommand.png" width="700" />
+<img alt="result for 'view s/A0241243A'" src="images/ViewCommand.png" width="700" /> <br>
 
 Possible error and their corresponding message:
 * If [`STUDENT_NUMBER`](#student-number) does not belong to any student in **Class Manager 2023**.
