@@ -1112,6 +1112,7 @@ No student is currently displayed
 ```
 This student has no linked lessons
 ```
+<div style="page-break-after: always;"></div>
 
 #### For Schedule:
 <box type="info" seamless>
