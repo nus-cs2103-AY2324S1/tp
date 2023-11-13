@@ -1,0 +1,55 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+skinparam ArrowFontStyle plain
+
+mainframe **sd** Parse sort command
+
+box Logic LOGIC_COLOR_T1
+Participant ":NetworkBookParser" as mainParser LOGIC_COLOR
+Participant ":SortCommandParser" as commandParser LOGIC_COLOR
+Participant ":PersonSortComparator" as comparator LOGIC_COLOR
+Participant "<<class>>\nPersonSortComparator" as comparatorClass LOGIC_COLOR
+Participant ":SortCommand" as command LOGIC_COLOR
+end box
+
+activate mainParser
+
+create commandParser
+mainParser -> commandParser
+activate commandParser
+
+commandParser --> mainParser : parser
+deactivate commandParser
+
+mainParser -> commandParser : parse()
+activate commandParser
+
+create comparator
+commandParser -> comparator
+activate comparator
+
+comparator -> comparatorClass : generateComparator(field, order)
+activate comparatorClass
+
+comparatorClass --> comparator
+deactivate comparatorClass
+
+comparator --> commandParser : comparator
+deactivate comparator
+
+create command
+commandParser -> command : new SortCommand(comparator)
+activate command
+
+command --> commandParser : command
+deactivate command
+
+commandParser --> mainParser : command
+deactivate commandParser
+
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+commandParser -[hidden]-> commandParser
+destroy commandParser
+
+@enduml
