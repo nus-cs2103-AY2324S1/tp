@@ -89,6 +89,16 @@ public class LogicManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
     }
 
+    @Test
+    public void getFilteredEventList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredEventList().remove(0));
+    }
+
+    @Test
+    public void getSortedFilteredEventList_throwsNullPointerExceptionWhenListNotGenerated() {
+        assertThrows(NullPointerException.class, () -> logic.getSortedFilteredEventList());
+    }
+
     /**
      * Executes the command and confirms that
      * - no exceptions are thrown <br>
