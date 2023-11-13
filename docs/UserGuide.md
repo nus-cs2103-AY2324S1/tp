@@ -425,8 +425,7 @@ specified above.
 
     List of options:
 
-    * `true` - Remove contacts whose courses' start and end date range are outside 
-    your system's current date.
+    * `true` - Remove contacts who have finished/haven't started the course as of the current date of your system.
     * `false` - (default). Include contacts who have finished/haven't started taking the course
   as of the current date.
     * NOTE: `[taken]` compares the dates of the course with the current date of
