@@ -17,32 +17,33 @@
 * [Features Overview](#overview-of-main-features)
 * [Quick Start Guide](#quick-start)
 * [Features](#features)
+  * [Command Failures](#command-failure) 
   * Managing Applicants
     * [Adding an applicant](#adding-an-applicant-add)
     * [Adding a remark to an applicant](#adding-a-remark-to-an-applicant-remark)
     * [Adding applicant's LinkedIn/GitHub](#adding-linkedingithub-username-for-a-user-addl-or-addg)
     * [Opening applicant's LinkedIn/GitHub](#opening-user-linkedin-or-github-account-linkedin-or-github)
-    * [Setting an applicant's status](#setting-an-applicants-status--set)
+    * [Setting an applicant's status](#setting-an-applicants-status-set)
     * [Viewing an applicant's details](#viewing-a-applicants-details-view)
-    * [Editing an applicant's detail](#editing-a-applicant--edit)
-    * [Deleting an applicant](#deleting-job-applicants--delete)
+    * [Editing an applicant's detail](#editing-a-applicant-edit)
+    * [Deleting an applicant](#deleting-job-applicants-delete)
   * Tag Colouring and Categorisation
     * [Creating tags](#creating-tags-create)
     * [Listing all tags](#listing-all-tags-listt)
   * Searching through and Arranging Applicants
     * [Searching for applicants](#searching-job-applicants-by-category-search)
     * [Filtering applicants](#filter-job-applicants-by-statistics-filter)
-    * [Listing all applicants](#listing-all-applicant--list)
+    * [Listing all applicants](#listing-all-applicant-list)
     * [Delete by tags](#deleting-job-applicants-by-tag)
     * [Delete by status](#deleting-job-applicants-by-status)
   * Event Management and Scheduling
     * [Adding an event](#adding-an-event-event)
     * [Viewing all events](#viewing-events-schedule)
   * Others
-    * [Viewing help](#viewing-help--help)
-    * [Exporting all entries](#exporting-all-entries--export)
-    * [Clear all entries](#clearing-all-entries--clear)
-    * [Exiting the program](#exiting-the-program--exit)
+    * [Viewing help](#viewing-help-help)
+    * [Exporting all entries](#exporting-all-entries-export)
+    * [Clear all entries](#clearing-all-entries-clear)
+    * [Exiting the program](#exiting-the-program-exit)
 * [Summary Statistics](#summary-statistics)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
@@ -166,9 +167,9 @@ Go to the [Table of Contents](#table-of-contents) to navigate to the feature tha
 
     * `search n/John`: Searches for applicants whose names contain the keyword `John`
 
-    * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete 3`: Deletes the 3rd contact shown in the current list.
 
-      * `set` : sets the applicant status to either of: (`Preliminary`, `Interviewed`, `Rejected`, `Offered`).
+      * `set`: sets the applicant status to either of: (`Preliminary`, `Interviewed`, `Rejected`, `Offered`).
 
     * `add linkedin 1 alexyeoh`: Adds LinkedIn account to applicant's existing contact information.
 
@@ -203,9 +204,24 @@ Go to the [Table of Contents](#table-of-contents) to navigate to the feature tha
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
 
+### Command Failure
+<box type="warning" seamless>
+
+**How to know if your command has failed?** 
+1. You will see the command that you have entered being highlighted in red. 
+2. The command will not be cleared from the command box. 
+3. The error message will be shown in the result display panel. 
+4. The UI below will not be updated if your command has failed.
+</box>
+
+![CommandFailure](images/view-command-failure.png)
+<br> 
+
+
 ### 1. Managing Applicants
 
 ### Adding an applicant: `add`
+<a name="adding-an-applicant-add"></a>
 
 Adds a applicant to JABPro.
 
@@ -259,6 +275,7 @@ An example of trying to add a applicant with the same name as an existing applic
     ![Add-Fail](images/add-command-duplicate-person.png)
 
 ### Adding a remark to an applicant: `remark`
+<a name="adding-a-remark-to-an-applicant-remark"></a>
 
 Edits a remark of an existing applicant in JABPro.
 Format: `remark INDEX r/REMARK`
@@ -297,6 +314,7 @@ Additional Examples:
 *  `remark 1` Empties the remark of the 1st applicant. It is equivalent to `remark 1 r/`.
 
 ### Adding LinkedIn/GitHub username for a user: `addL` or `addG`
+<a name="adding-linkedingithub-username-for-a-user-addl-or-addg"></a>
 
 Adds the username for their social profile [LinkedIn/GitHub] to the existing contact details of applicants.
 
@@ -330,6 +348,7 @@ Format: `addL INDEX u/USERNAME` or `addG INDEX u/USERNAME`
 ![AddGFailure](images/addLfail.png)
 
 ### Opening user LinkedIn or GitHub account: `linkedin` or `github`
+<a name="opening-user-linkedin-or-github-account-linkedin-or-github"></a>
 
 Redirects user to applicant's LinkedIn or GitHub account.
 
@@ -366,7 +385,8 @@ The GitHub window opens as follows, displaying the profile with the specified us
 
 `github` commands reacts in the same way in case of missing account.
 
-### Setting an applicant's status : `set`
+### Setting an applicant's status: `set`
+<a name="setting-an-applicants-status-set"></a>
 
 Format: `set INDEX STATUS`
 
@@ -382,6 +402,7 @@ Examples:
 * `find Betsy` followed by `set 1 Interviewed` sets the status of 1st applicant in the results of the `find` command.
 
 ### Viewing a applicant's details: `view`
+<a name="viewing-a-applicants-details-view"></a>
 
 Creates a complete view for details of an applicant in the second main panel and summary statistics (if applicable) of an applicant in the third main panel.
 
@@ -425,7 +446,8 @@ An example of the `view` command failing to execute due to wrong index:
    ![View-Fail](images/view-command-failure.png)
 <br>
 
-### Editing a applicant : `edit`
+### Editing a applicant: `edit`
+<a name="editing-a-applicant-edit"></a>
 
 Edits an existing applicant's detail in JABPro
 
@@ -504,7 +526,8 @@ An example of the `edit` command being wrongly executed due to trying to attach 
    ![Edit-Fail](images/edit-command-failure.png)
 <br>
 
-### Deleting job applicants : `delete`
+### Deleting job applicants: `delete`
+<a name="deleting-job-applicants-delete"></a>
 
 Deletes the specified job applicants from the address book.
 
@@ -536,6 +559,7 @@ Example:
 
 
 ### Creating tags: `create`
+<a name="creating-tags-create"></a>
 
 Creates a tag and categorises it to the specified category.
 
@@ -575,6 +599,7 @@ Format: `create t/CATEGORY TAGNAME…​`
 
 
 ### Listing all tags: `listT`
+<a name="listing-all-tags-listt"></a>
 
 Shows a list of all tags in JABPro
 
@@ -591,6 +616,7 @@ Format: `listT`
 ### 3. Searching and Arranging Applicants
 
 ### Searching job applicants by category: `search`
+<a name="searching-job-applicants-by-category-search"></a>
 
 Finds job applicants whose profiles match the specified categories' keywords. The search categories are: name, status, tag.
 
@@ -651,6 +677,7 @@ Failed to execute the `search` command? Here are some possible reasons why:
 4. Using commas as delimiters of different parameters instead of spaces i.e. `search n/alex, bernice`
 
 ### Filter job applicants by statistics: `filter`
+<a name="filter-job-applicants-by-statistics-filter"></a>
 
 Filters and display applicants in the current displayed applicant list using statistical metrics and values.
 
@@ -709,24 +736,8 @@ An example of the `filter` command being successfully executed with `median`:
    ![Filter-Success](images/filter-command-median-success.png)
 <br>
 
-An example of the `filter` command being incorrectly executed due to non-existent tag:
-1. Enter the command `list`
-2. Enter the command `filter t/techlead met/percentile val/80` (**Tag `techlead` does not exist**)
-3. This is the result of the failed `filter` command:
-   
-    ![Filter-Fail](images/filter-command-failure.png)
-<br>
-
-An example of the `filter` command being incorrectly executed due to an invalid value for `val/VALUE`:
-1. Enter the command `list`
-2. Enter the command `filter t/interview met/percentile val/-1` (**Negative value for percentile**)
-3. This is the result of the failed `filter` command:
-   
-    ![Filter-Fail](images/filter-command-failure-2.png)
-<br>
-
-Failed to execute the `filter` command? Here are some possible reasons why:
-1. Missing filter keyword i.e. `filter`
+Failed to execute the `filter` command? Here are some possible reasons why and how to remedy them:
+1. Missing filter keyword i.e. `filter`. Follow the command format strictly of `filter t/TAGNAME met/METRIC val/VALUE` for score and percentile or `filter t/TAGNAME met/METRIC` for mean or median.
 2. Invalid tag as tag has wrong category or does not exist i.e. `filter t/techlead met/percentile val/80`
 3. Invalid metric i.e. `filter t/interview met/average val/80`
 4. Invalid value i.e. `filter t/interview met/percentile val/-1`
@@ -734,11 +745,32 @@ Failed to execute the `filter` command? Here are some possible reasons why:
 6. Using commas as delimiters of different parameters instead of spaces i.e. `filter t/interview, t/techlead met/percentile val/80`
 
 
+An example of the `filter` command being incorrectly executed due to non-existent tag:
+1. Enter the command `list`
+2. Enter the command `filter t/techlead met/percentile val/80` (**Tag `techlead` does not exist**)
+3. The result of the failed `filter` command: 
+   * The Command entered will light up in red. It remains in the command box.
+   * The error message: `Tag does not exist!` will be displayed in the result display box.
+   * The UI will not change.
+<br>
+
+An example of the `filter` command being incorrectly executed due to an invalid value for `val/VALUE`:
+1. Enter the command `list`
+2. Enter the command `filter t/interview met/percentile val/-1` (**Negative value for percentile**)
+3. This is the result of the failed `filter` command:
+    * The Command entered will light up in red. It remains in the command box.
+    * The error message: `Invalid value provided. Needs to be a non negative integer that is more than or equal to 0` will be displayed in the result display box.
+    * The UI will not change.   
+<br>
+
+
+
 **Significance of using `filter` with the metrics `score`, `percentile`, `mean` and `median`:**
 In essence, this allows you to find job applicants whose performance rating is above a certain percentile, score or mean/median score for that tag.  
 Ideally, this feature can then be used to find the best applicant easily and quickly without having to manually look through the list of applicant.
 
-### Listing all applicant : `list`
+### Listing all applicant: `list`
+<a name="listing-all-applicant-list"></a>
 
 Shows a list of all applicant in JABPro
 
@@ -754,7 +786,8 @@ Format:
 * The sorting algorithm is case-sensitive, which means it will treat uppercase and
   lowercase letters as distinct. This may result in names being sorted as A B C a b c, rather than A a B b C c.
 
-### Deleting job applicants : `delete`
+### Deleting job applicants: `delete`
+<a name="deleting-job-applicants-delete"></a>
 
 Deletes the specified job applicants from the address book.
 
@@ -778,6 +811,7 @@ Example:
 * `find Betsy` followed by `delete 1` deletes the 1st applicant in the results of the `find` command.
 
 #### Deleting job applicants by tag
+<a name="deleting-job-applicants-by-tag"></a>
 
 Deletes job applicants whose tag(s) match any of the given tag keywords
 
@@ -787,6 +821,7 @@ Example:
 * `delete t/hardworking`
 
 #### Deleting job applicants by status
+<a name="deleting-job-applicants-by-status"></a>
 
 Deletes job applicants whose status match any of the given keywords.
 
@@ -813,6 +848,7 @@ Example:
 ### 4. Event Management and Scheduling
 
 ### Adding an Event: `event`
+<a name="adding-an-event-event"></a>
 
 Adds an event, associated with an applicant, to JABPro.
 
@@ -848,6 +884,7 @@ The changes in UI take place in the `Events Window`. Please find more details in
 ![EventFailure](images/eventfail.png)
 
 ### Viewing events: `schedule`
+<a name="viewing-events-schedule"></a>
 
 Displays all events that have been added to JABPro.
 
@@ -878,7 +915,8 @@ There is no possibility of a "failed" execution of the `schedule` command.
 
 ### 5. Others
 
-### Viewing help : `help`
+### Viewing help: `help`
+<a name="viewing-help-help"></a>
 
 Opens the `Help window` that leads you to the User Guide for assistance on working with JABPro.
 
@@ -907,7 +945,8 @@ The `Help Window` opens up as follows:
 
 Format: `help`
 
-### Exporting all entries : `export`
+### Exporting all entries: `export`
+<a name="exporting-all-entries-export"></a>
 
 Exports the entries into a .csv file located in the current directory as (/data/export.csv)
 
@@ -918,7 +957,8 @@ Format: `export`
 * Usage Note: JABPro must have write permissions, this means that if the .csv file is open,
   exporting again will not be possible.
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
+<a name="clearing-all-entries-clear"></a>
 
 Clears all entries from JABPro - including applicant and events.
 
@@ -933,7 +973,8 @@ Format: `clear`
 
 ![Clear](images/clear.png)
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
+<a name="exiting-the-program-exit"></a>
 
 Exits the program.
 
