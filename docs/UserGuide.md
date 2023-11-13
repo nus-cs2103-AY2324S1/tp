@@ -771,26 +771,26 @@ Click [here](#table-of-contents) to go back to contents.
 
 ## Command summary
 
-| Command            | Format and Example                                                                                                                                                         |
-|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Hi`               | Format: `Hi`<br/>Example: `Hi`                                                                                                                                             |
-| `add`              | Format: `add n/[Developer Name] p/[Phone] e/[Email] a/[Address] (OPTIONAL r/[Remark] t/[Tags])`<br/>Example: `add n/John p/89789678 e/John@gmail.com a/Singapore t/friend` |
-| `delete`           | Format: `delete [index number]`<br/> Example: `delete 7`                                                                                                                   |
-| `edit`             | Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]...`<br/>Example: `edit 1 n/John Wick e/new.email@example.com`                              |
-| `find`             | Format: `find [KEYWORD]`<br/>Example: `find John`                                                                                                                          |
-| `list`             | Format: `list`<br/>Example: `list`                                                                                                                                         |
-| `newteam`          | Format: `newteam tn/[TeamName] tl/[TeamLeader]`<br/> Example: `newteam tn/Team Delta tl/David Li`                                                                          |
-| `dev2team`         | Format: `dev2team tn/[TeamName] n/[Developer Name]`<br/>Example: `dev2team tn/Team Delta n/Irfan Ibrahim`                                                                  |
-| `deleteteam`       | Format: `deleteteam tn/[TeamName]`<br/>Example: `deleteteam tn/Team Alpha`                                                                                                 |
-| `deletedev`        | Format: `deletedev tn/[TeamName] n/[Developer Name]`<br/>Example: `deletedev tn/Team Alpha n/Roy Balakrishnan`                                                             |
-| `editTeamName`     | Format: `editTeamName tn/[Original Team Name] tn/[New Team Name]`<br/>Example: `editTeamName tn/Alpha Team tn/Beta Team`                                                   |
-| `editTeamLeader`   | Format: `editTeamLeader tn/[TeamName] tl/[TeamLeader]`<br/>Example: `editTeamLeader tn/Alpha Team tl/Bob`                                                                  |
-| `findteam`         | Format: `findteam [KEYWORD]`<br/> Example: `findteam Alpha`                                                                                                                |
-| `listt`            | Format: `listt`<br/>Example: `listt`                                                                                                                                       |
-| `tree`             | Format: `tree`<br/>Example: `tree`                                                                                                                                         |
-| `help` or Press F1 | Format: `help`<br/>Example: `help`                                                                                                                                         |
-| `clear`            | Format: `clear`<br/>Example: `clear`                                                                                                                                       |
-| `exit`             | Format: `exit`<br/>Example: `exit`                                                                                                                                         |
+| Command            | Format and Example                                                                                                                                                          |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Hi`               | Format: `Hi`<br/>Example: `Hi`                                                                                                                                              |
+| `add`              | Format: `add n/[Developer Name] p/[Phone] e/[Email] a/[Address] (OPTIONAL r/[Remark] t/[Tags])`<br/>Example: `add n/John p/89789678 e/John@gmail.com a/Singapore t/friend`  |
+| `delete`           | Format: `delete [index number]`<br/> Example: `delete 7`                                                                                                                    |
+| `edit`             | Format: `edit [Index number] (OPTIONAL n/[Developer Name] p/[Phone] e/[Email] a/[Address] r/[Remark] t/[Tag]...)`<br/>Example: `edit 1 n/John Wick e/new.email@example.com` |
+| `find`             | Format: `find [KEYWORD...]`<br/>Example: `find John`                                                                                                                        |
+| `list`             | Format: `list`<br/>Example: `list`                                                                                                                                          |
+| `newteam`          | Format: `newteam tn/[TeamName] tl/[TeamLeader]`<br/> Example: `newteam tn/Team Delta tl/David Li`                                                                           |
+| `dev2team`         | Format: `dev2team tn/[TeamName] n/[Developer Name]`<br/>Example: `dev2team tn/Team Delta n/Irfan Ibrahim`                                                                   |
+| `deleteteam`       | Format: `deleteteam tn/[TeamName]`<br/>Example: `deleteteam tn/Team Alpha`                                                                                                  |
+| `deletedev`        | Format: `deletedev tn/[TeamName] n/[Developer Name]`<br/>Example: `deletedev tn/Team Alpha n/Roy Balakrishnan`                                                              |
+| `editTeamName`     | Format: `editTeamName tn/[Original Team Name] tn/[New Team Name]`<br/>Example: `editTeamName tn/Alpha Team tn/Beta Team`                                                    |
+| `editTeamLeader`   | Format: `editTeamLeader tn/[TeamName] tl/[TeamLeader]`<br/>Example: `editTeamLeader tn/Alpha Team tl/Bob`                                                                   |
+| `findteam`         | Format: `findteam [KEYWORD]`<br/> Example: `findteam Alpha`                                                                                                                 |
+| `listt`            | Format: `listt`<br/>Example: `listt`                                                                                                                                        |
+| `tree`             | Format: `tree`<br/>Example: `tree`                                                                                                                                          |
+| `help` or Press F1 | Format: `help`<br/>Example: `help`                                                                                                                                          |
+| `clear`            | Format: `clear`<br/>Example: `clear`                                                                                                                                        |
+| `exit`             | Format: `exit`<br/>Example: `exit`                                                                                                                                          |
 
 Click [here](#table-of-contents) to go back to contents.
 
