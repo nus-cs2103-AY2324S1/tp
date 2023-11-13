@@ -9,13 +9,13 @@ import seedu.address.logic.commands.DeleteAppointmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new DeleteCommand object
+ * Parses input arguments and creates a new DeleteAppointmentCommand object
  */
 public class DeleteAppointmentCommandParser implements Parser<DeleteAppointmentCommand> {
     private static final Logger logger = LogsCenter.getLogger(DeleteCommandParser.class);
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteCommand
-     * and returns a DeleteCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DeleteAppointmentCommand
+     * and returns a DeleteAppointmentCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
