@@ -349,7 +349,11 @@ Format: `random NUMBER_OF_STUDENTS`
 
 Example:
 
-* `random 2`
+* `random 1`
+
+The following image shows a successful execution of the `random 1` command.
+
+<img src="images/random-success.png" alt="result for `random 1" width="700" />
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -554,7 +558,7 @@ Examples:
 
 The following image shows a successful execution of the `edit A0249112A n/Bob` command.
 
-<img src="images/edit-success.png" alt="result for `edit A0249112A" width="700" />
+<img src="images/edit-success.png" alt="result for `edit A0249112A n/Bob" width="700" />
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -845,7 +849,7 @@ Possible error and their corresponding message:
 | [**Exit Class Manager 2023**](#exit-class-manager-2023-exit)     | `exit`                                           |
 | [**View command history**](#view-command-history-history)        | `history`                                        |
 | [**Load a save file**](#load-a-save-file-load)                   | `load f/FILE_NAME`<br> e.g. `load f/sample`      |
-| [**Randomly select students**](#randomly-select-students-random) | `random NUMBER_OF_STUDENTS` <br> e.g. `random 2` |
+| [**Randomly select students**](#randomly-select-students-random) | `random NUMBER_OF_STUDENTS` <br> e.g. `random 1` |
 | [**Redo a command**](#redo-a-command-redo)                       | `redo`                                           |
 | [**Undo a command**](#undo-a-command-undo)                       | `undo`                                           |
 | [**Toggle UI theme**](#toggle-ui-theme-theme)                    | `theme`                                          |

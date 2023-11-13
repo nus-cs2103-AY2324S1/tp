@@ -1364,7 +1364,7 @@ Testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Planned Enhancements**
 
-1. The current keywords are case-sensitive. We plan to make keywords not case-sensitive in the future iteration. For example, `add` is currently case-sensitive. We will accept keywords such as `Add` in the future.
+1. The current keywords are case-sensitive. We plan to make keywords not case-sensitive in the future iteration. For example, `add` is currently case-sensitive. We will accept keywords such as `Add` and `ADD` in the future.
 2. Class Numbers are currently limited to tutorials that begin with T. We plan to allow Class Numbers to be any sensible alphanumeric string, such as `R15` and `SG06`.
 3. Clicking on a student in the student list currently highlights the student's card. We plan to remove this interaction as it affects the visibility of the student's contact details and visualised graphs.
 4. Class Participation is currently limited to being true or false for each tutorial session. We plan to allow Class Participation to be an enum level instead, such as `NONE`, `MINIMAL`, `SUFFICIENT`, `ACTIVE`, `VERY_ACTIVE` etc., to allow for better representation of student's efforts in class.
