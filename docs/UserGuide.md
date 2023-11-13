@@ -21,7 +21,7 @@ If you can type fast, KeepInTouch can get your contact management tasks done fas
   * [Finding a contact: `find`](#finding-a-contact-find)
   * [Adding tags: `add tag`](#adding-tags-add-tag)
   * [Deleting tags: `delete tag`](#deleting-tags-delete-tag)
-  * [Adding notes to a contact: `add note`](#adding-notes-to-a-contact-add-note)
+  * [Adding a note to a contact: `add note`](#adding-a-note-to-a-contact-add-note)
   * [Deleting a note: `delete note`](#deleting-a-note-delete-note)
   * [Listing events: `list events`](#listing-events-list-events)
   * [Adding an event: `add event`](#adding-an-event-add-event)

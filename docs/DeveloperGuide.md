@@ -974,6 +974,64 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `add tag -id 1 -t x`, when at least 1 contact is shown and `x` is a non-existing tag in the first contact. <br>
     Expected: The tag `x` is no longer below the name of the first contact in the list. The list of tags deleted is shown in the status message. List will go back to showing all contacts.
 
+### Adding note
+
+1. Adding note while all contacts is shown.
+    1. Prerequisites: List all contacts using the list command. At least one contact shown in the list.<br>
+
+    2. Test case: `add note -id 1 -tit Meeting Topics -con The topic is about the framework design of the project`<br>
+       Expected: The new note appears in the Notes column of the contact. The note added is shown in the status message.
+
+    3. Test case: `add note -id 0 -tit Meeting Topics -con The topic is about the framework design of the project`<br>
+       Expected: No note is added. Error details shown in the status message.
+
+    4. Test case: `add note -id 1 -tit Meeting Topics`<br>
+       Expected: No note is added as a note should have a note content. Error details shown in the status message.<br>
+
+2. Adding duplicate note to a contact
+    1. Prerequisites: List all contacts using the list command. At least one contact shown in the list has at least one note.
+
+    2. Test case: `add note -id 1 -tit Open Position -con Applications for SWE full-time positions will open soon`, where x is an already existing tag in the first contact.<br>
+       Expected: The new note appears in the Notes column of the contact. The note added is shown in the status message.
+
+3. Adding note while contact list is being filtered
+    1. Prerequisites: Filter the list of contacts by calling `find KEYWORD [OTHER_KEYWORDS...]`.
+
+    2. Test case: `add note -id 1 -tit Meeting Topics -con The topic is about the framework design of the project`, when no contact is shown<br>
+       Expected: No note is added. Error details shown in the status message.
+
+    3. Test case: `add note -id 1 -tit Meeting Topics -con The topic is about the framework design of the project`, when at least 1 contact is shown<br>
+       Expected: The new note appears in the Notes column of the contact. The note added is shown in the status message. List will go back to showing all contacts.
+
+### Deleting note
+
+1. Deleting note while all contacts is shown and note exists.
+    1. Prerequisites: List all contacts using the list command. At least one contact shown in the list has at least one note.
+
+    2. Test case: `delete note -id 1 -nid 0`<br>
+       Expected: No note is deleted as note id is invalid. Error details shown in the status message.
+
+    3. Test case: `delete note -id 1 -nid 1`<br>
+       Expected: The note with id 1 is no longer shown in the first contact in the list. The note deleted is shown in the status message.
+
+2. Deleting note while all contacts is shown but note does not exist.
+    1. Prerequisites: List all contacts using the list command. At least one contact is shown in the list.<br>
+
+    2. Test case: `delete note -id 1 -nid 100`, where the number of notes in the first contact is less than 100.<br>
+       Expected: No note is deleted. Error details shown in the status message.
+
+3. Deleting note while contact list is being filtered
+    1. Prerequisites: Filter the list of contacts by calling `find KEYWORD [OTHER_KEYWORDS...]`.
+
+    2. Test case: `delete note -id 1 -nid 1`, when no contact is shown.<br>
+       Expected: No note is deleted. Error details shown in the status message.
+
+    3. Test case: `delete note -id 1 -nid 1`, when at least 1 contact is shown but has no notes.<br>
+       Expected: No note is deleted. Error details shown in the status message.
+
+    4. Test case: `delete note -id 1 -nid 1`, when at least 1 contact is shown has at least 1 note.<br>
+       Expected: The note with id 1 is no longer shown in the first contact in the list. The note deleted is shown in the status message. List will go back to showing all contacts.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix C: Planned Enhancements**
