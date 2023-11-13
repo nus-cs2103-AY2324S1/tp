@@ -64,6 +64,7 @@ Keep an eye out for them!
 1. Ensure you have [Java 11](#glossary) or above installed in your Computer. If you have never downloaded it before, download from [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
 
+
 2. Download the latest version of [BandConnect++](https://github.com/AY2324S1-CS2103T-W11-3/tp/releases/latest).
 
 
@@ -338,6 +339,7 @@ For example, when the input command is `find g/rock i/guitar i/piano`
 --------------------------------------------------------------------------------------------------------------------
 
 ### Features for managing bands
+[Back to Table of Contents](#table-of-contents)
 
 #### Create band: `addb`
 
@@ -675,14 +677,50 @@ If you wish, please refer to the below section for a more succinct [command summ
 
 ## Frequently Asked Questions
 
-[to be added soon]
+**Q**: How do I install Java 11?<br>
+**A**: Follow this [link](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A) for steps to download Java 11.
+
+**Q**: How do I transfer my data to another Computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Addressbook home folder.
+
+**Q**: Why is BandConnect++ not displaying all musicians/bands?<br>
+**A**:  It's possible that the application may not be displaying all musicians/bands due to previous commands that have filtered either of the lists. If you're encountering this issue, consider using the [list command](#list-all-musicians-and-bands--list) to display all musicians and bands.
+
+**Q**: What if I accidentally close BandConnect++ without using the exit command? Do I lost all my data?<br>
+**A**: Not to worry! BandConnect++ automatically saves all data after each change you make, so no data is lost.
+
+**Q**: What if I encounter a bug or want to suggest a new feature?<br>
+**A**: We value all feedback from our users! Please open an issue to report a bug or suggest a feature on our [GitHub Repository](https://github.com/AY2324S1-CS2103T-W11-3/tp)
+
+**Q**: Do I need an active internet connection to use BandConnect++?<br>
+**A**: No, BandConnect++ does not require an internet connection to be used. However, you'll need an internet connection to download it.
+
+**Q**: How do I check if I am using Java 11? <br>
+**A**: The method to check the Java version you use will be different for every operating system.
+* **Windows** users: <br>
+  Click on the '**Windows**' key and search for '**Command Prompt**' <br>
+* **Mac** users: <br>
+  Click on '**F4**' and search for '**Terminal**'
+* **Linux** users: <br>
+  Click on '**Ctrl**' + '**Alt**' + '**T**' keys simultaneously
+* Once the application is open, type `java -version` and hit '**Enter/ Return**'.
+* The application should state your Java version, as shown below:
+  ![java_version.png](images%2Fjava_version.png)
+* If you do not see `11.__.__`, or if you do not have Java installed, follow the instructions [here](https://www.codejava.net/java-se/download-and-install-java-11-openjdk-and-oracle-jdk) to download **Java 11**.
+
 
 [Back To ToC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Troubleshooting
-Some Mac users have encountered issues when attempting to launch BandConnect++. If you face any issues, visit [this](https://nus-cs2103-ay2324s1.github.io/website/admin/programmingLanguages.html) website for instructions on how to fix it.
+[Back to Table of Contents](#table-of-contents)
+
+| Issue                            | Possible Reason                                                                                       | What to do now                                                                                                           |
+|----------------------------------|-------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| **Unable to launch application** | Java version is incompatible for some Mac users                                                       | Visit [this website](https://nus-cs2103-ay2324s1.github.io/website/admin/programmingLanguages.html) for further details. |
+| **Application opens off-screen** | Preferences are incorrectly formatted when using multiple screens before switching to one screen only | Delete the `preferences.json` file created by the application before running the application again.                      |
+
 
 [Back To ToC](#table-of-contents)
 
@@ -690,10 +728,15 @@ Some Mac users have encountered issues when attempting to launch BandConnect++. 
 
 ## Glossary
 
-| Term | Definition                                                                                                                                                                                                                                                                   |
-|------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| CLI  | Command Line Interface (CLI) is a text-based user interface that allows users to interact with a computer program by typing in commands through a keyboard. <br/> Since a mouse is not needed for CLI, it is often **a more efficient interaction method for fast typists.** |
-| GUI  | GUI is a user interface that allows users to interact with the application using graphical elements like text fields, buttons, and menus.                                                                                                                                    |
-| Java | Java is the primary programming language used to develop and use **_BandConnect++_**. Installation of Java is required to successfully run the application.                                                                                                                  |
+| Term      | Definition                                                                                                                                                                                                                                                                   |
+|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| CLI       | Command Line Interface (CLI) is a text-based user interface that allows users to interact with a computer program by typing in commands through a keyboard. <br/> Since a mouse is not needed for CLI, it is often **a more efficient interaction method for fast typists.** |
+| GUI       | Graphical User Interface (GUI) is a user interface that allows users to interact with the application using graphical elements like text fields, buttons, and menus.                                                                                                         |
+| Parameter | Parameters are specific settings for you to customise your command. For example, the name and phone number of a musician are parameters.                                                                                                                                     |
+| Command   | A command is an instruction given to the application to perform a specific action. For example, `list` is a command that displays all musicians and bands.                                                                                                                   |
+| JAR       | A package of all resources for BandConnect++ to run. The only thing you need to download is the BandConnect++ JAR file!                                                                                                                                                      |
+| JSON      | JSON stands for JavaScript Object Notation. JSON is a lightweight format for storing and transporting data                                                                                                                                                                   |
+| Index     | The position of something in a list. For example, the first item on your list in Bandconnect++ has an index of 1.                                                                                                                                                            |
+| Java      | Java is the primary programming language used to develop and use **_BandConnect++_**. Installation of Java is required to successfully run the application.                                                                                                                  |
 
 [Back To ToC](#table-of-contents)
