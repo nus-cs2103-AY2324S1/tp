@@ -1,17 +1,17 @@
 ---
   layout: default.md
-  title: "Setting up and getting started"
+  title: "Setting Up and Getting Started"
   pageNav: 3
 ---
 
-# Setting up and getting started
+# Setting Up and Getting started
 
 <!-- * Table of Contents -->
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Setting up the project in your computer
+## Setting Up the Project in your Computer
 
 <box type="warning" seamless>
 

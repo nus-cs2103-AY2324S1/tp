@@ -1,10 +1,10 @@
 ---
   layout: default.md
-  title: "DevOps guide"
+  title: "DevOps Guide"
   pageNav: 3
 ---
 
-# DevOps guide
+# DevOps Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />

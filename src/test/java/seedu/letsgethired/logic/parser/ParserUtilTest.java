@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import seedu.letsgethired.logic.parser.exceptions.ParseException;
 import seedu.letsgethired.model.application.Company;
 import seedu.letsgethired.model.application.Cycle;
+import seedu.letsgethired.model.application.Deadline;
 import seedu.letsgethired.model.application.Note;
 import seedu.letsgethired.model.application.Role;
 import seedu.letsgethired.model.application.Status;
@@ -19,13 +20,18 @@ public class ParserUtilTest {
     private static final String INVALID_ROLE = " ";
     private static final String INVALID_STATUS = " ";
     private static final String INVALID_CYCLE = "Summer!2024";
+    private static final String INVALID_NOTE_EMPTY = "";
+    private static final String INVALID_NOTE_SLASH = "slashes /";
+    private static final String INVALID_SORT_ORDER = "b";
+    private static final String INVALID_DEADLINE = "25/03/2024";
     private static final String VALID_COMPANY = "Jane Street";
     private static final String VALID_ROLE = "Full Stack Developer";
     private static final String VALID_STATUS = "Accepted";
     private static final String VALID_CYCLE = "Summer 2024";
     private static final String VALID_NOTE = "Need to brush up on leetcode hard";
-    private static final String INVALID_NOTE_EMPTY = "";
-    private static final String INVALID_NOTE_SLASH = "slashes /";
+    private static final String VALID_SORT_ORDER_ASCENDING = "a";
+    private static final String VALID_SORT_ORDER_DESCENDING = "d";
+    private static final String VALID_DEADLINE = "25 Mar 2024";
 
 
     private static final String WHITESPACE = " \t\r\n";
@@ -177,5 +183,34 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_APPLICATION, ParserUtil.parseNoteIndex("  1  "));
+    }
+
+    @Test
+    public void parseSortOrder_validInput_success() throws Exception {
+        // No whitespaces
+        assertEquals(SortOrder.ASCENDING, ParserUtil.parseSortOrder(VALID_SORT_ORDER_ASCENDING));
+
+        // Leading and trailing whitespaces
+        assertEquals(SortOrder.DESCENDING, ParserUtil.parseSortOrder(VALID_SORT_ORDER_DESCENDING));
+    }
+
+    @Test
+    public void parseSortOrder_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSortOrder(INVALID_SORT_ORDER));
+    }
+
+    @Test
+    public void parseDeadline_validInput_success() throws Exception {
+        Deadline expectedDeadline = new Deadline(VALID_DEADLINE);
+        // No whitespaces
+        assertEquals(expectedDeadline, ParserUtil.parseDeadline(VALID_DEADLINE));
+
+        // Leading and trailing whitespaces
+        assertEquals(expectedDeadline, ParserUtil.parseDeadline(WHITESPACE + VALID_DEADLINE + WHITESPACE));
+    }
+
+    @Test
+    public void parseDeadline_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDeadline(INVALID_DEADLINE));
     }
 }

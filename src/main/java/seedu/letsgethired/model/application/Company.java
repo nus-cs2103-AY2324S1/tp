@@ -66,6 +66,6 @@ public class Company implements Comparable<Company> {
 
     @Override
     public int compareTo(Company other) {
-        return this.value.compareTo(other.value);
+        return this.value.toUpperCase().compareTo(other.value.toUpperCase());
     }
 }

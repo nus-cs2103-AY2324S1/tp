@@ -1,10 +1,10 @@
 ---
   layout: default.md
-  title: "Testing guide"
+  title: "Testing Guide"
   pageNav: 3
 ---
 
-# Testing guide
+# Testing Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -34,8 +34,8 @@ There are two ways to run tests.
 This project has three types of tests:
 
 1. *Unit tests* targeting the lowest level methods/classes.<br>
-   e.g. `letsgethired.status.commons.StringUtilTest`
-1. *Integration tests* that are checking the integration of multiple code units (those code units are assumed to be working).<br>
-   e.g. `letsgethired.status.storage.StorageManagerTest`
-1. Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected together.<br>
-   e.g. `letsgethired.status.logic.LogicManagerTest`
+   e.g. `seedu.letsgethired.commons.StringUtilTest`
+2. *Integration tests* that are checking the integration of multiple code units (those code units are assumed to be working).<br>
+   e.g. `seedu.letsgethired.storage.StorageManagerTest`
+3. Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected together.<br>
+   e.g. `seedu.letsgethired.logic.LogicManagerTest`

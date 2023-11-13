@@ -6,6 +6,7 @@ import static seedu.letsgethired.logic.parser.CliSyntax.PREFIX_CYCLE;
 import static seedu.letsgethired.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.letsgethired.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.letsgethired.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.letsgethired.model.application.Deadline.DEFAULT_DATE;
 
 import java.util.stream.Stream;
 
@@ -55,7 +56,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS)
                 .orElse("Pending"));
         Deadline deadline = ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_DEADLINE)
-                .orElse("No deadline"));
+                .orElse(DEFAULT_DATE));
 
         InternApplication internApplication = new InternApplication(company, role, cycle, status, deadline);
 

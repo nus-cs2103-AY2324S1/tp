@@ -26,7 +26,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/zhengyup.png" width="200px">
 
-[[github](http://github.com/zhengyup)] [[portfolio](team/zhengyup.md)]
+[[github](http://github.com/zhengyup)]
+[[portfolio](team/zhengyup.md)]
+
+* **Role**:
+  * Developer
+* **Responsibilities**:
+  * UI and Model
 
 ### Timothy Putra Prasetio
 
@@ -35,8 +41,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/tim-pipi)]
 [[portfolio](team/tim-pipi.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* **Role**:
+  * Project Manager
+* **Responsibilities**:
+  * Meeting Organization
+  * Deadline Management and Tracking
+  * Innovation and Feature Enhancement
+  * GitHub Repository Management
 
 ### Aprup Kale
 

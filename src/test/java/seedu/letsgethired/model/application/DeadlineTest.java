@@ -35,6 +35,13 @@ public class DeadlineTest {
         // valid deadline
         assertTrue(Deadline.isValidDeadline("25 Mar 2024"));
         assertTrue(Deadline.isValidDeadline("12 Apr 2024"));
+
+        // Edge cases for dates
+        assertFalse(Deadline.isValidDeadline("31 Feb 2024"));
+        assertFalse(Deadline.isValidDeadline("31 Apr 2024"));
+        assertTrue(Deadline.isValidDeadline("29 Feb 2024"));
+        assertFalse(Deadline.isValidDeadline("29 Feb 1900"));
+        assertTrue(Deadline.isValidDeadline("29 Feb 2000"));
     }
 
     @Test

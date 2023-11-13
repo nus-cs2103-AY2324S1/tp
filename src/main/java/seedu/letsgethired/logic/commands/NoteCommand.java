@@ -18,12 +18,12 @@ public abstract class NoteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add or Delete a note to the internship application "
             + "identified by the index number used in the last intern application listing.\n"
-            + "Parameters: INDEX_OF_APPLICATION (must be a positive integer) "
-            + PREFIX_NOTE_INSERT + "[NOTE]\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + PREFIX_NOTE_INSERT + "NOTE\n"
             + "Add Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NOTE_INSERT + "John Street is the leading market maker in the APAC region\n"
-            + "Parameters: INDEX_OF_APPLICATION (must be a positive integer) "
-            + PREFIX_NOTE_DELETE + "[INDEX_OF_NOTE] (must be a positive integer)\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + PREFIX_NOTE_DELETE + "NOTE_INDEX (must be a positive integer)\n"
             + "Delete Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NOTE_DELETE + "1";
 

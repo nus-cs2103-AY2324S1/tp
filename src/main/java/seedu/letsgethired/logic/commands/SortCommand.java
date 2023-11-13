@@ -3,6 +3,7 @@ package seedu.letsgethired.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.letsgethired.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.letsgethired.logic.parser.CliSyntax.PREFIX_CYCLE;
+import static seedu.letsgethired.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.letsgethired.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.letsgethired.logic.parser.CliSyntax.PREFIX_STATUS;
 
@@ -21,11 +22,12 @@ public class SortCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts the applications in the intern tracker.\n"
             + "Parameters: "
-            + "[" + PREFIX_COMPANY + "ASC/DESC] "
-            + "[" + PREFIX_ROLE + "ASC/DESC] "
-            + "[" + PREFIX_CYCLE + "ASC/DESC] "
-            + "[" + PREFIX_STATUS + "ASC/DESC] "
-            + "Example: " + COMMAND_WORD + " "
+            + "[" + PREFIX_COMPANY + "ORDER] "
+            + "[" + PREFIX_ROLE + "ORDER] "
+            + "[" + PREFIX_CYCLE + "ORDER] "
+            + "[" + PREFIX_STATUS + "ORDER] "
+            + "[" + PREFIX_DEADLINE + "ORDER] "
+            + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_COMPANY + "a";
 
     public static final String MESSAGE_SUCCESS = "Intern applications sorted";

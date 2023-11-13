@@ -19,7 +19,7 @@ Given below are my contributions to the project.
       more organised manner
 
 * **Enhancements to existing feature**: Add `Cycle`
-  field (https://github.com/AY2324S1-CS2103T-W17-2/tp/pull/46)
+  field [#46](https://github.com/AY2324S1-CS2103T-W17-2/tp/pull/46)
     * _What it does_: Allows users to input the cycle of the internship
       application
 
