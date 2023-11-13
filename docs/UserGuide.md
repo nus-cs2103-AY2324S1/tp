@@ -288,9 +288,48 @@ To view all our features, you may visit out [features section](#features).
 [Scroll back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## Features
 
 ## Assignment Features
+
+### Listing and Filtering assignments
+
+```list-a [s/YYYY-MM-DD [HH:mm]] [e/YYYY-MM-DD [HH:mm]]```
+
+To view assignment parameter information, click [here](#assignment-parameters).
+
+**Purpose:** To list all the assignments with deadline between the given start date and end date.
+This command also changes the view to assignments tab (if the view is not currently at the assignments tab).
+
+<div markdown="block" class="alert alert-info">
+
+**Note:**
+- In order to use any of the assignment related commands below, you must be in the assignment view. In particular, you must use
+  list-a to switch to assignment view. This is to prevent you from performing commands while you are not looking at the correct list.
+- The start time and end time is optional. If not provided, start time will default to 00:00 and end time will default to 23:59.
+</div>
+
+**Examples:**
+
+| Combination                                                                                                           | Example                                          | What is displayed to you                                                          |
+|-----------------------------------------------------------------------------------------------------------------------|--------------------------------------------------|-----------------------------------------------------------------------------------|
+| **None** present                                                                                                      | ``list-a``                                       | **All** assignments that are saved in CampusCompanion.                            |
+| **Only** _start date with time_ present                                                                               | ``list-a s/2023-12-10 18:00``                    | **All** assignments with deadline **later** than or equal 10 Dec 2023 18:00       |
+| **Only** _start date without time_ present                                                                            | ``list-a s/2023-12-10``                          | **All** assignments with deadline **later** than or equal 10 Dec 2023 00:00       |
+| **Only** _end date with time_ present                                                                                 | ``list-a e/2023-12-10 18:00``                    | **All** assignments with deadline **earlier** than or equal to 10 Dec 2023 18:00  |
+| **Only** _end date without time_ present                                                                              | ``list-a e/2023-12-10``                          | **All** assignments with deadline **earlier** than or equal to 10 Dec 2023 23:59  |
+| **Both** _start date_ and _end date_ present (Example not shown for this combination without timing, but it is valid) | ``list-a s/2023-12-10 18:00 e/2023-12-17 18:00`` | **All** assignments with deadline between 10 Dec 2023 18:00 and 17 Dec 2023 18:00 |
+
+**When you might use it**:
+- If you want to see all your current assignments.
+- If you want to filter your current assignments by date, and view the assignments only within a specified time frame.
+
+[Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Adding an assignment
 
@@ -332,6 +371,8 @@ If not provided, start time will default to 00:00 and end time will default to 2
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Editing an assignment
 
 ```edit-a i/INDEX d/DESCRIPTION```
@@ -358,6 +399,8 @@ to edit the description of the assignment at **index** 1.
 - If the requirements of the assignment has changed since you last added it.
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting an assignment
 
@@ -398,6 +441,8 @@ For information on which details can be edited, [refer here](#editing-an-assignm
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Marking an assignment as complete
 
 ```mark-a INDEX```
@@ -423,6 +468,8 @@ Assuming the assignment to mark is at index 1, you can use `mark-a 1` to mark it
 **When you might use it:**
 - When you complete an assignment, and you want to mark it.
 - When you wrongly unmark a completed assignment, and want to mark it again.
+
+<div style="page-break-after: always;"></div>
 
 ### Marking an assignment as incomplete
 
@@ -455,40 +502,7 @@ regarding the assignment and want to continue working on it.
 
 [Scroll back to Table of Contents](#table-of-contents)
 
-
-### Listing and Filtering assignments
-
-```list-a [s/YYYY-MM-DD [HH:mm]] [e/YYYY-MM-DD [HH:mm]]```
-
-To view assignment parameter information, click [here](#assignment-parameters).
-
-**Purpose:** To list all the assignments with deadline between the given start date and end date.
-This command also changes the view to assignments tab (if the view is not currently at the assignments tab).
-
-<div markdown="block" class="alert alert-info">
-
-**Note:**
-- In order to use any of the assignment related commands below, you must be in the assignment view. In particular, you must use
-  list-a to switch to assignment view. This is to prevent you from performing commands while you are not looking at the correct list.
-- The start time and end time is optional. If not provided, start time will default to 00:00 and end time will default to 23:59.
-</div>
-
-**Examples:**
-
-| Combination                                                                                                           | Example                                          | What is displayed to you                                                          |
-|-----------------------------------------------------------------------------------------------------------------------|--------------------------------------------------|-----------------------------------------------------------------------------------|
-| **None** present                                                                                                      | ``list-a``                                       | **All** assignments that are saved in CampusCompanion.                            |
-| **Only** _start date with time_ present                                                                               | ``list-a s/2023-12-10 18:00``                    | **All** assignments with deadline **later** than or equal 10 Dec 2023 18:00       |
-| **Only** _start date without time_ present                                                                            | ``list-a s/2023-12-10``                          | **All** assignments with deadline **later** than or equal 10 Dec 2023 00:00       |
-| **Only** _end date with time_ present                                                                                 | ``list-a e/2023-12-10 18:00``                    | **All** assignments with deadline **earlier** than or equal to 10 Dec 2023 18:00  |
-| **Only** _end date without time_ present                                                                              | ``list-a e/2023-12-10``                          | **All** assignments with deadline **earlier** than or equal to 10 Dec 2023 23:59  |
-| **Both** _start date_ and _end date_ present (Example not shown for this combination without timing, but it is valid) | ``list-a s/2023-12-10 18:00 e/2023-12-17 18:00`` | **All** assignments with deadline between 10 Dec 2023 18:00 and 17 Dec 2023 18:00 |
-
-**When you might use it**:
-- If you want to see all your current assignments.
-- If you want to filter your current assignments by date, and view the assignments only within a specified time frame.
-
-[Scroll back to Table of Contents](#table-of-contents)
+<div style="page-break-after: always;"></div>
 
 ### Finding an assignment by keywords
 
@@ -519,6 +533,8 @@ are all equivalent and will match with this assignment
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ## Internship Features
 
 ### Common internship features
@@ -545,6 +561,8 @@ list-i to switch to internship view. This is to prevent you from performing comm
 - If you want to switch from assignment view to internship view. 
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Internship Role 
 
@@ -583,6 +601,8 @@ To add an internship role into CampusCompanion.
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 #### Editing an internship role
 
 ```edit-i-role i/INDEX [c/CYCLE] [d/DESCRIPTION] [p/PAY] [o/OUTCOME] [l/LOCATION]```
@@ -602,6 +622,8 @@ To view internship role parameter information, click [here](#internship-role-par
 - If you imported old internship application information, and want to update the current outcome of that application.
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 #### Deleting an internship role 
 
@@ -642,6 +664,8 @@ all its associated tasks using ``add-i-task``.
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 #### Finding an internship role by keywords
 
 ```find-i-role KEYWORD```
@@ -670,6 +694,8 @@ for example, if you had an internship role with the name "TikTok", using the com
 - If you want to find information about specific internship role, but you don't remember the company's exact name.
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Internship Task
 
@@ -704,6 +730,8 @@ To add an internship task, associated to an internship role into CampusCompanion
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 #### Editing an internship task
 
 ```edit-i-task i/INDEX o/OUTCOME```
@@ -723,6 +751,8 @@ is at **index** 1, use `edit-i-task i/1 o/rejected` to edit its outcome to rejec
 - If you imported old internship application information, and want to update the current outcome of that application.
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 #### Deleting an internship task
 
@@ -759,6 +789,8 @@ This command cannot be undone. If you remove the wrong internship task, you will
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 #### Marking an internship task as complete
 
 ```mark-i INDEX```
@@ -783,6 +815,10 @@ To mark a specific internship task in CampusCompanion as complete.
 **When you might use it:**
 - When you complete an internship task, and you want to mark it.
 - When you wrongly unmark a completed internship task, and want to mark it again.
+
+[Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 #### Marking an internship task as incomplete
 
@@ -810,6 +846,8 @@ To mark a specific internship task in CampusCompanion as incomplete.
 
 [Scroll back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 #### Finding an internship task by keywords
 
 ```find-i-task KEYWORD```
@@ -836,6 +874,8 @@ will match with this internship task.
 - If you want to find information about specific internship task, but you don't remember the task's exact name.
 
 [Scroll back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ## General Commands
 
@@ -887,6 +927,9 @@ application, and the application may not be able to load subsequently.
 [Scroll back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## Command Summary
 
 This section provides a summary of the **commands**. 
@@ -951,6 +994,9 @@ or [feature](#features) section, for detailed information about each feature.
 [Scroll back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## Parameter Summary
 
 [Scroll back to Table of Contents](#table-of-contents)
@@ -1019,6 +1065,8 @@ The information below specifies parameter description, constraints and usage thr
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## FAQ
 
 ### Launching CampusCompanion
@@ -1033,14 +1081,11 @@ Method 1: For users familiar with the command prompt
 
 Method 2: For users that wish to create a script to launch CampusCompanion (**Recommended**)
 1. Create a new text file
-2. Copy and paste the following into the text file:
-```
-java -jar [JAR file location]/campusCompanion.jar
-```
+2. Copy and paste the following into the text file: <br> ``` java -jar [JAR file location]/campusCompanion.jar``` <br>
 3. Save the text file as `campusCompanion.bat` (Windows) or `campusCompanion.sh` (MacOS/Linux)
 4. Change the admin settings of the script to allow it to run as a program:
-  1. Windows: Right-click on the script and select `Properties`. Under `General`, check the box that says `Allow this file to run as a program`.
-  2. MacOS/Linux: Open the terminal and navigate to the directory where the script is located. Type `chmod +x [script name]` and press enter. (`chmod +x` changes permissions of the script to allow it to be executed.)
+   1. Windows: Right-click on the script and select `Properties`. Under `General`, check the box that says `Allow this file to run as a program`.
+   2. MacOS/Linux: Open the terminal and navigate to the directory where the script is located. Type `chmod +x [script name]` and press enter. (`chmod +x` changes permissions of the script to allow it to be executed.)
 5. Double-click on the script to launch CampusCompanion
 6. CampusCompanion should launch
 
