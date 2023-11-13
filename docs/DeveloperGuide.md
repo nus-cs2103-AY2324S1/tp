@@ -406,27 +406,41 @@ when a group is added, duplicate persons will be deleted from the individual per
 
 [Scroll back to Table of Contents](#table-of-contents)
 
-### Improved find feature
+### Ability to find persons and events
 
-The `find` command in our application displays persons that fit the keyword(s)
+The `find` commands in our application displays persons and/or events that fit the keyword(s).
 
 #### Implementation
 
-The `find` feature involves checking the current filtered list of persons and filtering out persons with fitting names 
-or groups. This is done using `NameOrGroupContainsKeywordsPredicate`, which enhanced from the original 
+The original `find` command has been split into three new commands, `find_person`, `find_event`, and `find_all`, which
+are collectively called `find` commands.
+* `find_person` command allows the user to find persons with fitting name or groups.
+* `find_event` command allows the user to find events with fitting name, assigned persons and groups, or person under assigned groups.
+* `find_all` command allows the user to find persons and events, which includes the criteria mentioned above.
+
+The `find_person` command involves checking the current full list of persons and filtering out persons with fitting names 
+or groups. This is done using `PersonNameOrGroupContainsKeywordsPredicate`, which enhanced from the original 
 `NameContainsKeywordsPredicate` class. The predicate is then passed to `Model#updateFilteredPersonList(Predicate<Person> predicate)`.
 
-As a result, the `ObservableList<Person>` is updated with the filtered lists of persons.
-The `UI` component is notified of these new changes to the lists and updates the UI accordingly, which will show the updated persons.
+Meanwhile, the `find_event` command involves checking the current full list of events and filtering out event with fitting names, groups or persons.
+This is done using `EventNameOrGroupContainsKeywordsPredicate`, which also enhanced from `NameContainsKeywordsPredicate` 
+class. The predicate is then passed to `Model#updateFilteredEventList(Predicate<Event> predicate)`.
 
-The enhanced `find` command remains its original ability i.e. find the person whose name fits the keyword. Except it will also
-find person whose group(s) fits the keyword. If a person's group name fits the keyword, it will be shown on the UI, 
-even though the person's name does not fit the keyword(s).
+`find_all` command covers the mechanism of both commands mentioned above, which uses both predicates and calls both functions in `Model`.
+
+As a result, the `ObservableList<Person>` and/or `ObservableList<Event>` is updated with the filtered lists of persons and events.
+The `UI` component is notified of these new changes to the lists and updates the UI accordingly, which will show the updated lists.
 
 #### Feature details
-1. The `find` command can accept one or more parameter `keyword` for searching person and events.
-2. A `NameOrGroupContainsKeywordsPredicate` will be created and a `Find` command will be created with the predicates.
-3. The `Find` command will then be executed and the `UI` will be updated with the filtered lists of persons.
+1. The `find` commands can accept one or more parameter `keyword` for searching persons and/or events.
+2. A `PersonNameOrGroupContainsKeywordsPredicate` and/or `EventNameOrGroupContainsKeywordsPredicate` will be created and a `Find` command will be created with the predicates.
+3. The `Find` command will then be executed and the `UI` will be updated with the filtered lists of persons and/or events.
+
+The flow for the `find` commands are described by the following sequence diagrams:
+
+![FindPersonSequenceDiagram](images/FindPersonSequenceDiagram.png)
+![FindEventSequenceDiagram](images/FindEventSequenceDiagram.png)
+![FindAllSequenceDiagram](images/FindAllSequenceDiagram.png)
 
 #### General design considerations
 
@@ -475,7 +489,7 @@ The flow for the `remind` command is described by the following sequence diagram
 
 - **Alternative 1 (Current choice): Updating list with predicate.**
     - Pros:
-        - Reuses the logic for the `find` command.
+        - Reuses the logic of the original `find` command.
         - The `UI` component is notified of the changes to the list and updates the UI accordingly.
     - Cons:
         - The `Model` component is tightly coupled with the `UI` component.
