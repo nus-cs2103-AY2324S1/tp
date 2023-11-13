@@ -141,12 +141,20 @@ Always make a backup before you edit!
 
 3. Copy `CoordiMate.jar` to the folder you want to use as the _home folder_ for CoordiMate. This folder will be used by CoordiMate to store its data.
 
-4. Open a command terminal, `cd` into the folder you put `CoordiMate.jar` in, and use the `java -jar CoordiMate.jar` command to start CoordiMate.<br>
+4. Open a command terminal. 
 
-   A GUI similar to the below screenshot should appear in a few seconds. Note how the app contains some sample data.<br><br>
-   ![Ui](images/Ui.png)
+5. Change the directory to the folder where you have placed `CoordiMate.jar`. If it is in your `Downloads` folder, type the command below and press `Enter`:
+    ```
+    cd Downloads
+    ```
+6. To launch CoordiMate, type the following command and press `Enter`:
+    ```
+    java -jar CoordiMate.jar
+    ```
+    After a few seconds, a GUI should appear, showing some sample data, as in the screenshot below. <br><br>
+    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br><br>
+7. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br><br>
 
    Some example commands you can try:
 
@@ -166,7 +174,7 @@ Always make a backup before you edit!
 
    - `exit` : Exits the app.
 
-6. Refer to the [Usage](#usage) section below for details of each command.
+8. Refer to the [Usage](#usage) section below for details of each command.
 
 ---
 
