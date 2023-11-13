@@ -891,11 +891,24 @@ Command: `help`
 
 ### Adding a member
 
-### Deleting a member
-
 ### Editing a member
 
 ### Finding a member
+This uses the `findm` command. You can refer to the command [here](#https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#412-finding-members-findmember-or-findm).
+
+1. Prerequisites: There are 3 previously added members named `Alice Tan`, `Brendan Tan`and `Charlie Chan`. `Alice Tan` is tagged with `SWE`, `Brendan Tan` is tagged with `Product`, and `Charlie Chan` is tagged with `SWE`.
+
+2. Test case 1: `findm Tan`
+   Expected Outcome: All members whose details contain the `KEYWORD` `Tan` will be shown. `Alice Tan` and `Brendan Tan` will be shown on the members list.
+
+3. Test case 2: `findm SWE Tan`
+   Expected Outcome: All members whose details contain either the `KEYWORD`s `SWE` and/or `Tan` will be shown. `Alice Tan`, `Brendan Tan` and `Charlie Chan` will be shown on the member list.
+
+4. Test case 3: `findm empty`
+   Expected Outcome: None of the members have any fields that contain the `KEYWORD` `empty`. No members will be listed in the member list.
+
+5. Test case 4: `findm`
+   Expected Outcome: The `KEYWORD` is missing from the command. An invalid command message will be shown. Member list remains the same.
 
 ### Viewing all members
 
@@ -905,9 +918,22 @@ Command: `help`
 
 ### Delete member task
 
+### Deleting a member
+Command: `delm` or `deletemember`. You can refer to the command [here](#https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#415-deleting-a-member-deletemember-or-delm).
+
+1. Prerequisites : At least one member must be in the member list. You can add a member via the `adda` command. You can here to this command [here.](#https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#411-adding-a-member-addmember-or-addm)
+
+2. Test case 1 : `delm 1`.
+   Expected Outcome: The first member is deleted from the shown member list. The name of the deleted member is shown in the status message.
+
+3. Test case 2: `delm 0`.
+   Expected Outcome: The `MEMBER_INDEX` is invalid. An invalid index message is shown. Member list remains the same.
+
+4. Other incorrect delete commands to try: `delm`, `delm1`, `deletemember x` (where x is any non-integer or integer bigger than the member list size).
+
 ### Adding an applicant
 
-Command: `adda` or `addapplicant`
+Command: `adda` or `addapplicant`. You can refer to the command [here](#https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#421-adding-an-applicant-addapplicant-or-adda).
 1. Adding a new applicant
    1. Prerequisites: Existing list of applicants do not contain applicant with the same phone number
    2. Test case: `adda /name John Doe /phone 91234567`<br>
@@ -925,18 +951,44 @@ Command: `adda` or `addapplicant`
       message will be shown with the details.
 3. Adding an applicant while the applicant list is being filtered
    1. Prerequisites: Filter the applicant list by keyword using the `finda` command.
-   2. Test case: Similar to test cases above
+   2. Test case: Similar to test cases above.  
       Expected: Similar to each respective test cases. The applicant list will remain filtered.
-
-### Deleting an applicant
 
 ### Editing an applicant
 
 ### Finding an applicant
+This uses the `finda` command. You can refer to the command [here](#https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#422-finding-applicants-findapplicant-or-finda).
+
+1. Prerequisites: There are 3 previously added applicants named `Ryan Tan`, `Ryan Lee`, and `Sarah Lee`. `Ryan Tan` and `Sarah Lee` both have an interview scheduled on 12 December 2023. `Ryan Lee` has not yet scheduled an interview.
+
+2. Test case 1: `finda Ryan`
+   Expected Outcome: All applicants whose details contain the `KEYWORD` `Ryan` will be shown. `Ryan Tan` and `Ryan Lee` will be shown on the applicant list.
+
+3. Test case 2: `finda Lee December`
+   Expected Outcome: All applicants whose details contain the `KEYWORD`s `Lee` and `December` will be shown. `Ryan Tan`, `Ryan Lee` and `Sarah Lee` will be shown on the applicant list.
+
+4. Test case 3: `finda empty`
+   Expected Outcome: None of the applicants have any fields that contain the `KEYWORD` `empty`. No applicants will be listed in the applicant list.
+
+5. Test case 4: `finda`
+   Expected Outcome: The `KEYWORD` is missing from the command. An invalid command message will be shown. Applicant list remains the same.
 
 ### Viewing all applicants
 
 ### Copy an applicant
+
+### Deleting an applicant
+Command: `dela` or `deleteapplicant`. You can refer to the command [here](#https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#425-deleting-an-applicant-deleteapplicant-or-dela).
+
+1. Prerequisites : At least one member must be in the member list. You can add a member via the `adda` command. You can here to this command [here.](#https://ay2324s1-cs2103t-w15-3.github.io/tp/UserGuide.html#411-adding-a-member-addmember-or-addm)
+
+2. Test case 1 : `dela 1`.
+   Expected: The first applicant is deleted from the shown applicant list. The name of the deleted applicant is shown in the status message.
+
+3. Test case 2: `dela 0`.
+   Expected: The `APPLICANT_INDEX` is invalid. An invalid index message is shown. Applicant list remains the same.
+
+4. Other incorrect delete commands to try: `dela`, `dela1`, `deleteapplicant x` (where x is any non-integer or integer bigger than the applicant list size).
 
 --------------------------------------------------------------------------------------------------------------------
 
