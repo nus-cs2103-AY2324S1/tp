@@ -380,7 +380,8 @@ Format: `editpatient PATIENTID PREFIX/NEWVALUE...`
 - Edits the details of the patient with the corresponding `PATIENTID`. <br>
 
 - Acceptable fields: `NAME`, `EMAIL`, `PHONE`, `GENDER`, `AGE`, `BLOODTYPE`, `ALLERGY`. <br>
-  <box type="info">
+  
+<box type="info">
 
 **Note**: `NRIC` cannot be edited.
 
