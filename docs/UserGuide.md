@@ -52,7 +52,7 @@ indicating the type of information present.
 
 <box type="tip" seamless>
 **Note:**<br>
-Notes empower you make full use of Tutorium.
+Notes empower you to make full use of Tutorium.
 </box>
 
 <box type="info" seamless>
