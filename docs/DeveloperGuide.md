@@ -776,13 +776,19 @@ based on an identifier
 
 ### Non-Functional Requirements
 
-1. The application should be compatible with the designated operating systems and hardware configurations, as specified in the system requirements.
-2. The application should respond promptly to user inputs, with minimal latency and loading times for data retrieval and processing.
-3. The user interface should be user-friendly and intuitive, designed to optimize the workflow of frontdesk staff who need to complete tasks within 2-3 minutes.
-4. The application should be designed to handle an increasing volume of patient records efficiently without noticeable performance degradation.
-5. Ensure that the application complies with PDPA and healthcare regulations.
-
-*{More to be added}*
+1. The application should be compatible with the designated operating systems and hardware configurations, as specified 
+   in the system requirements ie Mac, Windows and Linux systems running Java 11.
+2. The application should respond promptly to user inputs, with minimal latency and loading times for data retrieval
+   and processing.
+3. The user interface should be user-friendly and intuitive for fast typists, designed to optimize the workflow of
+   front-desk staff who need to complete tasks within 2-3 minutes.
+4. The application should be stable for a clientele of roughly 300 to 500 patients (estimated from ~20 patients per day
+   for a GP, for a month with 50% returning patients).
+5. The application should be designed to handle an increasing volume of patient records efficiently
+   without noticeable performance degradation.
+6. The application should comply with healthcare regulations.
+7. The application is not required to handle communications on a local database/internet.
+8. The application is designed to be used by exactly 1 front-desk staff.
 
 ### Glossary
 
