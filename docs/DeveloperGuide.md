@@ -1272,14 +1272,56 @@ testers are expected to do more *exploratory* testing.
 
 2. Deleting fosterers while only some fosterers are shown follows similar test cases.
 
+### Listing a fosterer
+
+1. Find through an exact, quoted match with `"`.
+
+   1. Test case: `list "Pete"` <br>
+     Expected: Shown fosterers include "Pete" but not "Peter".
+
+2. Verify operator precedence and parentheses.
+
+   1. Test case: `list Doe & Sam / John` <br>
+     Expected: Equivalent to `list Doe & (Sam / John)`. Shown fosterers include "John Doe" but not "John Snow".
+
+   2. Test case: `list (Doe & Sam) / John` <br>
+     Expected: Shown fosterers include "Sam Doe" and "John Snow".
+
+### Saving changes in details of fosterer when add is done in the profile page
+
+1. Saving the new fosterer added through the profile page
+
+   1. Test case: `save`<br>
+   Expected: Exits the profile page. Fosterer will be successfully added to the address book.
+
+### Saving changes in details of fosterer when edit is done in the profile page
+
+1. Saving the edits made to a fosterer in the profile page
+
+   1. Test case: `save`<br>
+     Expected: Fosterer's details will be successfully edited and saved if they are valid. Command success message is shown.
+
 ### Sorting the list of fosterers
 
-1. Sorting the list of fosterers in the main window by name alphabetically
+1. Sorting the list of fosterers in the main window alphabetically by name, where uppercase letters come before lowercase letters
 
     1. Test case: `sort`<br>
        Expected: The whole list of fosterers will be sorted alphabetically. Command success message is shown.
 
-<div style="page-break-after: always;"></div>
+    1. Test case: `sort 12345`<br>
+       Expected: The whole list of fosterers will be sorted alphabetically. Command success message is shown.
+
+### Undoing the previous command
+
+1. Undoing the previous command successfully executed
+
+   1. Prerequisites: The previous command successfully executed is either `add`, `delete`, `edit`, `sort` or a successful execution of the `reset` command.
+
+   1. Test case: `undo`<br>
+     Expected: Previous command will be undone. Command success message is shown.
+
+   1. Test case: `undo 12345`<br>
+     Expected: Previous command will be undone. Command success message is shown.
 
 ### Viewing Statistics of Fosterers
 1. Viewing statistics of available fosterers
