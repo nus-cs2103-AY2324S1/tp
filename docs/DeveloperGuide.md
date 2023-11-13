@@ -484,59 +484,113 @@ The following activity diagram summarizes what happens when a user executes a ne
          - **Potential Errors**: If the list of persons changes (e.g., due to deletions or additions), the numbering index could become outdated, leading to errors.
          - **Limited Identifiability**: Index numbers do not provide any context about the person, which may be confusing when there are multiple people with the same name or similar information.
 
-### Find Feature
+### Find Feature and its related Predicate classes
 
-#### Description
-
-The `FindCommand` allows users to find existing person(s) within the patient list, using their name or NRIC, and view their field data.
+The `FindCommand` allows users to find existing person(s) within the patient list,
+using their Name, NRIC and/or Appointment, and view their field data. This is done with aid by the concreted `Predicate`
+classes, that directly implement the `Predicate` functional interface given by the Java package.
 
 #### Implementation Details
 
 The `FindCommand` is implemented as follows:
 - **Command Word**: The command word for this feature is `find`.
-- **Usage**: Users invoke the `FindCommand` by specifying the command word, followed by the name or NRIC of the person(s) they wish to find.
-- **Command Format**: 
-  - `find n/Name [Fields] ...`
-  - `find id/IC_Number [Fields] ...`
-  - `find n/Name id/IC_Number [Fields] ...`
-- **`execute` method**: The `FindCommand` executes the search by using the specified predicates (`NameContainsKeywordsPredicate` or `IdContainsKeywordsPredicate`) to filter and list all persons matching the search criteria.
-- **Validation**: The `FindCommand` performs validation to ensure at least one keyword is provided. It searches based on either name or NRIC, to speed up the search and prevent possible conflicts if name and NRIC do not match each other.
-- **Execution**: When executed, the `FindCommand` identifies the person(s) being searched for based on the provided name or NRIC. If a name is provided as keyword, a `FindCommand(NameContainsKeywordsPredicate)` is created, and if an NRIC is provided as keyword, a `FindCommand(IdContainsKeywordsPredicate)` is created. `updateFilteredPersonList` will then update the filter of the filtered person list to filter by the given name or NRIC predicate (keyword).
+- **Usage**: Users invoke the `FindCommand` by specifying the command word,
+  followed by the Name, NRIC and/or Appointment period of the person(s) they wish to find.
+- **Command Format**:
+    - `find n/Name [Fields] ...`
+    - `find id/IC_Number [Fields] ...`
+    - `find n/Name id/IC_Number [Fields] ...`
+- **`execute` method**: The `FindCommand` executes the search by using the specified predicates generated from
+  the fields (`NameContainsKeywordsPredicate`/`IdContainsKeywordsPredicate`/`AppointmentOverlapsPredicate`).
+  These predicates are composited into `CompositePredicate` to filter and list all persons matching the search criteria.
+    - `CompositePredicate` is a collection of `Predicate<Person>` objects that itself implements the `Predicate<Person>`
+  interface. The collection is stored in a Set, and `test()` calls will perform a logical AND on all values in its
+  collection. By default, `CompositePredicate` will have an instance of `IdentityPredicate` which always returns `true`.
+        - <puml src="diagrams/PredicateClassDiagram.puml"/>
+    - The following object diagram illustrates how `FindCommand` instances handles its `Predicate` values internally.
 
-The following sequence diagram shows how the find operation works:
+<puml src="diagrams/FindWithPredicateObjectDiagram.puml" width="950" />
 
-<puml src="diagrams/FindSequenceDiagram.puml" width="400" />
+As observed in the diagram above, each field provided will generate the appropriate `Predicate` value and add it to the
+`CompositePredicate` collection, and each field not provided adds an instance of an `IdentityPredicate` instead.
+As the Set implementation enforces no duplicate Predicates, this means that collections with fewer fields provided
+will also store less values in the collection overall.
+
+- **Validation**: The `FindCommand` performs validation to ensure at least one field is provided. For Appointment,
+  it asks for a valid Appointment format to be given.
+
+The following sequence diagram shows how the find operation works in the successful case:
+
+<puml src="diagrams/FindSequenceDiagram.puml"/>
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `FindCommandParser` and `FindCommand` should end at the destroy marker (X) but due to a
+limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<puml src="diagrams/FindActivityDiagram.puml" width="500" />
+<puml src="diagrams/FindActivityDiagram.puml"/>
 
 #### Rationale
 
-- **Flexibility**: The `FindCommand` provides flexibility to users by allowing them to choose whether to find a person by name or NRIC, whichever is faster or available.
+- **Flexibility**: The `FindCommand` provides flexibility to users by allowing them to choose whether to find a person
+  by name, NRIC or Appointment timeslot, whichever is faster or available.
 - **User Experience**: The keyword matching is case-insensitive, making the search faster and more user-friendly.
-- **Data Integrity**: The feature is designed to maintain the integrity of the patient list by not changing any of the patient data.
+- **Data Integrity**: The feature is designed to maintain the integrity of the patient list
+  by not changing any of the patient data.
 
 #### Alternatives Considered
 
-- **Alternative 1**: Using only name to find patients.
+What Fields to use as part of query
+- **Alternative 1**: Using existing implementation of only name to find patients
     - **Pros**:
-        - **Standardisation**: The command format is fixed and will always only be `find n/NAME`, which may be easier to remember.
-        - **User Convenience**: Searching primarily by name is a common way to look up a patient in a healthcare system and users may be more familiar with this method.
-
+        - The command format is fixed and will always only be `find n/NAME` which is easier to remember.
+        - Searching primarily by name is a common way to look up a patient in a healthcare system
+          and users may be more familiar with this method.
     - **Cons**:
-        - **Potential Errors**: If patients' names change over time, there may be failed searches and other identifiers, like NRIC, may be needed.
-        - **Limited Identifiability**: If multiple patients share the same name, they will be indistinguishable name-wise and other identifiers, like NRIC, may be needed.
+        - If multiple patients share the same name for a future extension, they will be indistinguishable name-wise and
+          other identifiers, like ID, may be needed.
+        - Lack of flexibility in search term may become a pain point for a service that provides for a lot of people.
 
+- **Alternative 2**: Search through all fields
+    - **Pros**:
+        - Extreme flexibility in searching for patients
+        - Ease of use by users, as there will not be a specific format to adhere to if all fields are allowed
+    - **Cons**:
+        - Have to account for multiple field queries
+        - Searching through some fields are irrelevant - it is rare to search for a patient via address for example - so
+          it might not be worthwhile to implement
 
-- **Alternative 2**: Requiring both name and NRIC keywords to find patients within a single find command.
+- **Alternative 3 (current choice)**: Searching through ID, Name and Appointment
   - **Pros**:
-    - **Enhanced Precision**: Combining both name and NRIC is a more unique identification method, making it easier to find a patient sharing a name with other patients.
-    - **Patient Verification**: Searching by both criteria adds a layer of verification, ensuring the correct patient is selected.
+    - More precise searching for a particular person
+    - Added flexibility to searching without using some less relevant fields
 
   - **Cons**:
-    - **Additional User Effort**: Users need to provide both name and NRIC, which may take longer or require extra effort, especially if they only have one piece of information readily available.
-    - **Increased Ambiguity**: If the name keyword does not match the NRIC keyword, this may lead to potential confusion in which patient is being searched for.
+    - Have to account for multiple field queries
+
+Handling multiple field queries
+- **Alternative 1 (current choice)**: Logical AND
+    - **Pros**:
+        - Allows user to narrow down a search in a large `find` result
+        - In line with most filter functions in searches
+        - Scales up better when queries are done on less unique fields
+    - **Cons**:
+        - May be confusing when comparing with internal implementations of ID and Name `find`
+        - Low value when 2 of the queries are unique (this is mitigated by the
+          [extension proposed in a later update](#appendix-planned-enhancements))
+
+- **Alternative 2**: Logical OR
+  - **Pros**:
+    - Allows a user to cast out a wider net
+    - Potentially lets a user find multiple fields at once
+    - Consistent with individual keyword matches for internal implementation of ID and Name `find`.
+  - **Cons**:
+    - For larger databases, Logical OR adds little value to a filter function
+
 
 --------------------------------------------------------------------------------------------------------------------
 
