@@ -58,6 +58,13 @@ deactivate Model
 AddCommand -> Model : addPerson(toAdd)
 activate Model
 
+note right
+toAdd:
+Person object containing
+all the information parsed
+from command input
+end note
+
 Model --> AddCommand
 deactivate Model
 

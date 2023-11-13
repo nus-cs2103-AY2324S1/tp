@@ -28,9 +28,9 @@ public class RevenueCommand extends Command {
         // for every person, find revenue, add them tgt
         for (Person tutee : fullList) {
             // get revenue per lesson
-            double lessonRevenue = tutee.getMonthlyRevenue();
-            assert lessonRevenue >= 0;
-            totalRevenue += lessonRevenue;
+            double individualMonthlyFee = tutee.getMonthlyFee();
+            assert individualMonthlyFee >= 0 : "monthly fee cannot be negative";
+            totalRevenue += individualMonthlyFee;
         }
 
         String formattedTotalRevenue = String.format("%.2f", totalRevenue);

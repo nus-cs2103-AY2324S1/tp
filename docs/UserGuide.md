@@ -2,15 +2,26 @@
 layout: page
 title: User Guide
 ---
-# TuitionConnect User Guide
+# Welcome to TuitionConnect's User Guide!
+:rocket: Introducing **TuitionConnect**: Revolutionizing your Tutoring Business! :rocket:
 
-TuitionConnect is a **desktop app for simplifying the process of administration and finance management for private tutors, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, you can maximise tracking tutee-specific details, teaching-schedule management, and finance management.
+Fed up with setting up numerous unorganized spreadsheets on Microsoft Excel or Google Sheets to handle the administrative side of you tutoring business?
+
+Or feeling overwhelmed with the ugly-looking chaos of your Google Calendar as your number of teaching schedules increase?
+
+Say goodbye to all this mess with the help of **TuitionConnect**: the ultimate desktop app designed to streamline the administrative and financial tasks of your tuition business!
+
+This user guide will teach you how to install **TuitionConnect** from scratch, as well as providing information about the interesting features of **TuitionConnect**. 
 
 ## Table of Contents
 
 <!-- TOC -->
 * [TuitionConnect User Guide](#tuitionconnect-user-guide)
   * [Table of Contents](#table-of-contents)
+  * [Introduction](#introduction)
+  * [Using this guide](#using-this-guide)
+  * [Symbols and Syntax](#symbols-and-syntax)
+  * [Layout](#layout)
   * [Quick start](#quick-start)
   * [Input Formats](#input-formats)
     * [Command Format](#command-format)
@@ -35,9 +46,67 @@ TuitionConnect is a **desktop app for simplifying the process of administration 
   * [FAQ](#faq)
   * [Known issues](#known-issues)
   * [Command summary](#command-summary)
+  * [Glossary](#glossary)
 <!-- TOC -->
 
 --------------------------------------------------------------------------------------------------------------------
+## Introduction
+TuitionConnect is a **desktop app** built for tutors and tutoring businesses or simplifying the process of 
+administration and finance management for private tutors, optimized for use via a **Command Line Interface** (CLI) while 
+still having the benefits of a Graphical User Interface (GUI). 
+
+If you love to type, then **TuitionConnect** is the app for you! It helps you to track tutee-specific details, teaching-schedule management,
+and other financial and administrative tasks faster than your old and conventional apps like Google Calendar or Microsoft Excel
+
+Even if you are not a huge fan of typing, panic not! **TuitionConnect** was designed with you in mind! With this comprehensive User Guide,
+paired up with simple and beginner-friendly features, anyone can learn how to use **TuitionConnect** in no time!
+
+:sparkles: **Key Features:**
+1. **Effortless Administration:** Manage your tutoring schedules, student details, and lesson plans in one central hub. No more endless scrolling through messy spreadsheets or confusing calendar views!
+2. **Finance Made Easy**: Keep track of payments, and monitor your earnings effortlessly. 
+3. **Calendar Sanity**: Prevent clashes in your schedules, and find slots where you are available!
+
+:bulb: **Make the Switch Today!**
+Transform your tutoring experience with **TuitionConnect!** Jump straight to the [Quick Start Section](#quick-start) and experience **TuitionConnect** today!
+
+## Using this guide
+If you're feeling a bit lost, worry not!
+This user guide is to assist you seamlessly incorporate this application into your private tutoring business operations.
+
+For first-time users, we understand how it feels to open up an application without proper instructions. Thus, we have
+carefully crafted a [Quick Start](#quick-start) section in this guide to provide you with the knowledge it takes to 
+start using TuitionConnect for your business.
+
+The [Layout](#layout) will also help you understand the different components of TuitionConnect's GUI.
+
+Eager to learn more about what our application can do? Head over to the [Command Format](#command-format) section to 
+learn more about the general formats of the commands and getting yourself prepared before 
+delving into the [Features](#features) section where you are in for the ride of your life! The Features section contains
+the in-depth explanation for each command's format and use cases.
+
+At last, we have also included a [Command Summary](#command-summary) section for when you become proficient at using
+TuitionConnect to refer quickly to any commands that you may need!
+
+Still unsure about the more technical terms used in this guide? Fret not, as we also provide a [glossary](#glossary)
+to better understand all the technical jargons!
+
+
+## Symbols and Syntax
+
+Throughout this User Guide, there might 
+
+| Symbol/Syntax                                   | Meaning                                                                                                                                         |
+|-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| :information_source: **Notes**                  | Information that you need to pay attention to.                                                                                                  |
+| :bulb: **Tip**                                  | Information that you may find helpful.                                                                                                          |
+| :exclamation: **Caution**                       | Information that you need to know before executing a [command](#command)                                                                        |
+| `Highlighted text block`                        | [Commands](#command) or [parameters](#parameter) that you can enter into our application, or text that is directly displayed in our application |
+| [Hyperlinked text in blue](#symbols-and-syntax) | When it is pressed, it should lead you to another section in the document or to an external link.                                               |
+
+## Layout
+The image below describes TuitionConnect's layout with some description for each component.
+![Layout](images/Layout.png)
+
 
 ## Quick start
 
@@ -62,14 +131,7 @@ TuitionConnect is a **desktop app for simplifying the process of administration 
 
 6. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
-<details open>
-<summary><strong>Formats</strong></summary>
-<div markdown="1">
-
 ## Input Formats
-
-<div markdown="block" class="alert alert-info">
 
 ### Command Format
 
@@ -84,14 +146,23 @@ TuitionConnect is a **desktop app for simplifying the process of administration 
 
 * Extraneous parameters added after commands that do not take in parameters (such as `help`, `list`, `exit`, `undo`, `redo` and `clear`) will be ignored.<br>
   e.g. if the command typed is `undo 123`, it will be interpreted as `undo`.
-</div>
 
-</div>
-</details>
---------------------------------------------------------------------------------------------------------------------
-<details open>
-<summary><strong>Features</strong></summary>
-<div markdown="1">
+## Parameters Requirement
+Here are the [parameter](#glossary) requirements of commonly used parameters by [commands](#glossary) in the [**Features**](#features) section below.
+
+| Parameter     | Description                                                 | Requirement / Remarks                                                                                                                                                                                                                                |
+|---------------|-------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **`NAME`**    | Name of tutee                                               | [Alphanumeric](#glossary) and may contain spaces                                                                                                                                                                                                     |
+| **`DATE`**    | Date of the upcoming application task                       | In **dd-mm-yyyy** format                                                                                                                                                                                                                             |
+| **`PHONE`**   | Contact number of tutee                                     | Any number at least 3 digits long                                                                                                                                                                                                                    |
+| **`EMAIL`**   | Email address of tutee                                      | In **XXXXXXXX@emaildomain** format <br> Example: `johndoee@gmail.com`                                                                                                                                                                                |
+| **`ADDRESS`** | Address of the tutee                                        | [Alphanumeric](#glossary) and may contain spaces                                                                                                                                                                                                     |
+| **`SUBJECT`** | Subject of the tutee                                        | [Alphanumeric](#glossary) and may contain spaces                                                                                                                                                                                                     |
+| **`DAY`**     | Day of weekly recurring lesson of the tutee                 | Full name of day or first three letters of the full name <br> **Non-case sensitive** <br> Example: `Mon`/`Monday`/`monday`                                                                                                                           |
+| **`BEGIN`**   | Begin time of a tutee's weekly recurring lesson             | In **HHMM** format                                                                                                                                                                                                                                   |
+| **`END`**     | End time of a tutee's weekly recurring lesson               | In **HHMM** format                                                                                                                                                                                                                                   |
+| **`PAYRATE`** | dollars per hour you make teaching this tutee               | Numbers only <br> Numbers must be **non-negative**                                                                                                                                                                                                   |
+| **`INDEX`**   | The index number of the tutee shown in the tutee list panel | Used in [`delete`](#deleting-a-tutee-delete) [`edit`](#editing-a-tutee--edit) [`unpaid`](#marking-a-tutee-as-unpaid--unpaid) and [`paid`](#marking-a-tutee-as-paid--paid) commands <br> Must be a **positive number** <br> Example: (1,2,3,...) <br> |
 
 ## Features
 
@@ -109,11 +180,11 @@ Shows a message that helps redirects you to the user guide.
 
 **Expected Input**:
 * **Name (Compulsory field)**: String composed of character between A-Z and a-z.
-* **Phone number (Compulsory field)**: Any number.
+* **Phone number (Compulsory field)**: Any number at least 3 digits long.
 * **Address (Compulsory field)**: String without restriction in characters.
-* **Email (Compulsory field)** String with restrictions in characters (XXXXXXXX@emaildomain.com)
+* **Email (Compulsory field)** String with restrictions in characters (XXXXXXXX@emaildomain).
 * **Subject (Compulsory field)**: String without restriction in characters.
-* **Day (Compulsory field)**: String with restrictions in characters, non-case sensitive (Mon/Tue/Wed/Thu/Fri/Sat/Sun).
+* **Day (Compulsory field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).
 * **Begin (Compulsory field)**: String with restrictions (HHMM).
 * **End (Compulsory field)**: String with restrictions (HHMM).
 * **PayRate (Compulsory field)**: String with restrictions in characters, only numbers allowed (no negative numbers).
@@ -122,35 +193,46 @@ Shows a message that helps redirects you to the user guide.
 
 **Expected Output when the command fails**:
 
-* **Missing name**: Please input a name
+
+* **Invalid Name**: Names should only contain alphanumeric characters and spaces, and it should not be blank
 * **Duplicate tutee**: This tutee already exists
-* **Invalid Phone number**: Please provide a valid phone number
-* **Invalid Day**: Please input a valid day
-* **Invalid Begin**: Please input a valid time for Begin in HHMM
-* **Invalid End**: Please input a valid time for End in HHMM
+* **Invalid Phone number**: Phone numbers should only contain numbers, and it should be at least 3 digits long
+* **Invalid Email**: Emails should be of the format local-part@domain and adhere to the following constraints:  
+  1\. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.  
+  2\. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+* **Invalid Address**: Addresses can take any values, and it should not be blank
+* **Invalid Day**: Days should be written using their full names or their first three letters, and it should not be blank
+* **Invalid Begin**: Begin has a format of HHMM
+* **Invalid End**: That is not a valid time format. End has a format of HHMM
 * **Invalid PayRate**: PayRate can be either integers or decimals of up to 2 decimal places. It cannot be negative
+* **Duplicate tutee**: This tutee already exists
+* **Clashing Schedules**: This date and time clashes with an existing schedule. 
+  * This error occurs if the tutee that is
+  trying to be added has DAY/BEGIN/END fields that overlaps with an exisiting tutee.
 
 **Examples**:
 * `add n/John Doe p/98765432 e/johnny@example.com a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 end/1600 pr/20.00`
 * `add n/Betsy Crowe p/92939402 e/betsycrowe@example.com a/Newgate Prison sb/Secondary 3 Physics d/mon b/1900 end/1930 pr/35.00`
 
+### Listing tutees : `list`
 
-### View the list : `list`
-
-**Description** : Shows the current list of tutees in your list.
-
-Format: `list`
-
-
-### View the list of tutees specified by day : `list [DAY]`
-
-**Description** : Shows the current list of tutees filtered by the specified day.
+View the tutees that you are currently teaching.
 
 Format: `list [DAY]`
 
-**Expected Input**:
-* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Tue/Wed/Thu/Fri/Sat/Sun).
+* The `DAY` parameter is optional.
+  * Without stating a specified `DAY`, `list` will display all of your tutees
+  * When `DAY` is specified, only tutees whose lessons matches the specified `DAY` will be displayed
 
+Examples:
+* `list`
+* `list monday`
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Info:** If the `DAY` parameter does not adhere to the specified format, the system will treat this as an invalid command
+</div>
+
+_Executing command:  `list monday`_
 
 ### Finding a tutee : `find`
 
@@ -158,6 +240,7 @@ Format: `list [DAY]`
 
 **Format**: `find n/[NAME] sb/[SUBJECT]`
 
+> [!NOTE]  
 > Find takes at least one of the two fields to be able to find for tutees.
 
 **Expected input:**
@@ -165,23 +248,22 @@ Format: `list [DAY]`
 * **Name (Optional field)**: String composed of character between A-Z and a-z
 * **Subject (Optional field)**: String without restriction in characters
 
+> [!NOTE]  
+> Both n/ and sb/ prefixes take one word as input.
+
 **Expected Output when the command succeeds:** X tutees listed!
 
 **Expected Output when the command fails:**
 
-> [!WARNING]
-> Inputting an invalid prefix after a valid prefix will result in the invalid prefix being read as
-> part of the input for the valid prefix.
->
-> Example: `find n/Abc abc/B` will read `Abc abc/B` as its input.
->
-> The outputting error message would be depending on the valid prefix specified.
+* **More than one word input for prefix n/**: Name can only take one word.
+* **More than one word input for prefix sb/**: Subject can only take one word.
+* **More than one word input for both prefix n/ and sb/**: Name can only take one word.
 
-* **Invalid Input for prefix n/**:
+* **Invalid Input for prefix name n/**:
 Names should only contain alphanumeric characters and spaces,
   and it should not be blank
-* **Invalid Input for prefix sb/**: Subject can take any values, and it should not be blank.
-* **Invalid Prefix other than n/ and sb/**:
+* **Invalid Input for prefix subject sb/**: Subject can take any values, and it should not be blank.
+* **Invalid Prefix other than name n/ and subject sb/**:
 
   Invalid command format!
   find: Find persons with names or subjects matching the specified keywords (case-insensitive).
@@ -195,12 +277,12 @@ Names should only contain alphanumeric characters and spaces,
 * **No input after prefix name n/**: Names should only contain alphanumeric characters and spaces,
 and it should not be blank
 * **No input after prefix subject sb/**: Subject can take any values, and it should not be blank.
-* **No input after prefixes name and subject n/ sb/**: Names should only contain alphanumeric characters and spaces,
+* **No input after prefixes name n/ and subject sb/**: Names should only contain alphanumeric characters and spaces,
   and it should not be blank
 
 ### Editing a tutee : `edit`
 
-**Description** : Edit a tutee in the current list.
+**Description**: Edit a tutee in the current list.
 
 **Format**: `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SUBJECTS d/DAY b/BEGIN end/END pr/PAYRATE`
 
@@ -208,10 +290,10 @@ and it should not be blank
 * **Index (Compulsory Field)**: Numbers between 1 to the number of people inside the list.
 * **Name (Optional field)**: String composed of character between A-Z and a-z.
 * **Phone number (Optional field)**: 8 digit number.
+* **Email (Optional field)** String with restrictions in characters (XXXXXXXX@emaildomain)
 * **Address (Optional field)**: String without restriction in characters.
-* **Email (Optional field)** String with restrictions in characters (XXXXXXXX@emaildomain.com)
 * **Subject (Optional field)**: String without restriction in characters.
-* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Tue/Wed/Thu/Fri/Sat/Sun).
+* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).
 * **Begin (Optional field)**: String with restrictions (HHMM).
 * **End (Optional field)**: String with restrictions (HHMM).
 * **PayRate (Optional field)** String with restrictions in characters, only numbers allowed (no negative numbers).
@@ -220,10 +302,16 @@ and it should not be blank
 
 **Expected Output when the command fails**:
 
-* **Invalid Phone number**: Please provide a valid phone number.
-* **Invalid Day**: Please input a valid day.
-* **Invalid Begin**: Please input a valid time for Begin in HHMM.
-* **Invalid End**: Please input a valid time for End in HHMM.
+* **Invalid Name**: Names should only contain alphanumeric characters and spaces, and it should not be blank
+* **Duplicate tutee**: This tutee already exists
+* **Invalid Phone number**: Phone numbers should only contain numbers, and it should be at least 3 digits long
+* **Invalid Email**: Emails should be of the format local-part@domain and adhere to the following constraints:  
+  1\. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.  
+  2\. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+* **Invalid Address**: Addresses can take any values, and it should not be blank
+* **Invalid Day**: Days should be written using their full names or their first three letters, and it should not be blank
+* **Invalid Begin**: Begin has a format of HHMM
+* **Invalid End**: That is not a valid time format. End has a format of HHMM
 * **Invalid PayRate**: PayRate can be either integers or decimals of up to 2 decimal places. It cannot be negative
 
 **Examples**:
@@ -235,7 +323,7 @@ To edit name and address of your second tutee in list:
 *  `edit 2 n/Betsy Crower a/Betsy street, block 110, #03-02`
 
 
-### Deleting a person: `delete`
+### Deleting a tutee: `delete`
 
 **Description**: Deletes the specific tutee from the list.
 
@@ -263,7 +351,7 @@ Examples:
 * Example image above shows the result of command `clear
 
 
-### Marking a person as paid : `paid`
+### Marking a tutee as paid : `paid`
 
 **Description**: Mark the specific tutee as paid in the list.
 
@@ -274,7 +362,7 @@ Examples:
 Examples:
 * `list` followed by `paid 1` marks the first person as paid in the list.
 
-### Marking a person as unpaid : `unpaid`
+### Marking a tutee as unpaid : `unpaid`
 
 **Description**: Mark the specific tutee as not paid in the list.
 
@@ -285,13 +373,13 @@ Examples:
 Examples:
 * `list` followed by `unpaid 2` marks the 2nd person as not paid in the list.
 
-### Show all the unpaid persons : `list unpaid`
+### Show all the unpaid tutees : `list unpaid`
 
 **Description**: Shows all the unpaid tutees in your list.
 
 Format: `list unpaid`
 
-### Mark all persons as unpaid: `unpaidAll`
+### Mark all tutee as unpaid: `unpaidAll`
 
 **Description** : Mark all tutees in the current displayed list as not paid.
 
@@ -316,37 +404,38 @@ Format: `unpaidAll`
 * **Invalid Day**: Days should be written using their full names or their first three letters, and it should not be blank.
 * **Duration**: The duration must be a positive integer
 * **Invalid Begin**: Begin has a format of HHMM
-* **Invalid End**: End has a format of HHMM
-
+* **Invalid End**: That is not a valid time format. End has a format of HHMM
 
 ### Undo previous command : `undo`
 
-**Description**: Undo the previous command that modifies the data of tutees.
+Typed something wrong? Undo the most recent command that can modify the tutee data.
 
-**Format**: `undo`
+Format: `undo`
 
-**Expected Output when the command succeeds**: Successfully undo previous command
+<div markdown="block" class="alert alert-info">
+**:information_source: Info:** <br>
+You can only undo `add`,`clear`,`delete`,`edit`,`redo`,`paid',`unpaid` and `unpaidAll` commands
+</div>
 
-**Expected Output when the command fails**: Nothing to undo!
+_Executing command:  `undo`_
 
-### Redo previous command : `redo`
+### Redo previous undone command : `redo`
 
-**Description**: Reverses previously undone commands, restoring the data to a state before an undo operation.
+Changed your mind again? Redo the most recent command that was undone.
 
-**Format**: `redo`
-
-**Expected Output when the command succeeds**: Successfully redo previous command
-
-**Expected Output when the command fails**: Nothing to redo!
+Format: `redo`
 
 
 ### Calculating Monthly Revenue: `rev`
 
-**Description**: Displays the total revenue monthly calculated from all tutees.
+**Description**: Displays the total monthly revenue calculated from all tutees.
 
 **Format**: `rev`
 
-**Expected Output**: Successfully calculated!! Total monthly revenue: *$monthlyrevenue*
+**Expected Output**: Successfully calculated <br>
+&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+Total monthly revenue: *$monthlyrevenue*
 
 ### Exiting the program : `exit`
 
@@ -357,8 +446,7 @@ Format: `exit`
 * The application window closes automatically after you type the command `exit`
 
 
-</div>
-</details>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -395,3 +483,48 @@ Format: `exit`
 | **redo**        | `redo`                                                                                                                                                                                                                                 |
 | **rev**         | `rev`                                                                                                                                                                                                                                  |
 | **exit**        | `exit`                                                                                                                                                                                                                                 |
+
+## Glossary
+
+### CLI
+
+`CLI` is short for `Command Line Interface`, which is a text-based user interface where a program connects to the user.
+Users interact with a system or application by the use of text commands, where the system will respond accordingly
+depending on the command specified.
+
+### Command
+
+The specific instruction for the application to carry out.
+
+### GUI
+
+`GUI` is short for `Graphical User Interface`, which is a user interface that incorporates interactive visual 
+components _(such as icons, etc)_. Users interact with a system or application by clicking on these components, where 
+the system will respond accordingly to the user's actions by updating the user interface.
+
+### Index
+
+`Index` is the position of an item inside the list. If the `item` is at index 1, then we say that it is the first 
+item on the list.
+
+### JAR file
+
+`JAR` is short for `Java ARchive`, which is a file format that is used to package the files to run TuitionConnect. 
+Not only that, `JAR` files are also executables, meaning that it can be run by simply double-clicking the `JAR` file.
+
+### Java
+`Java` is the programming language used to develop TuitionConnect. 
+A version of `Java` which is `Java 11` or higher is a requisite to run TuitionConnect on your devices.
+
+### JSON file
+
+`JSON` is short for JavaScript Object Notation, mainly utilized for storing data of users in TuitionConnect. 
+These type of files are lightweight and text-based, making it suitable for both humans to read and write, 
+as well as machines to parse and generate.
+
+### Parameter
+
+`Parameter`s are the inputs that a user can provide for a particular part of a command. As an example, for the field 
+`n/NAME` of add command, `NAME` can be substituted with the input that you want to specify (such as n/John or n/Alice). 
+
+[Back to top &#8593;](#welcome-to-tuitionconnects-user-guide-)

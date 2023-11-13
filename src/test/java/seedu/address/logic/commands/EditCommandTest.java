@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_BEGIN_AFTER_END;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -11,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -162,15 +162,13 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_invalidBeginAndEndTimes_failure() {
-        Person invalidPerson = new PersonBuilder()
-                .withBegin("1500")
-                .withEnd("1400")
-                .build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(invalidPerson).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
-
-        assertCommandFailure(editCommand, model, MESSAGE_BEGIN_AFTER_END);
+    public void execute_invalidBeginAndEndTimes_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> {
+            new EditPersonDescriptorBuilder(new PersonBuilder()
+                    .withBegin("2200")
+                    .withEnd("2100")
+                    .build()).build();
+        });
     }
 
     @Test

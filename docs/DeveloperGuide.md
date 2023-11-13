@@ -155,14 +155,14 @@ If it passes these checks, the person is added into the system.
 
 `AddCommand` takes in the following fields:
 * **Name (Compulsory field)**: String composed of character between A-Z and a-z.
-* **Phone number (Compulsory field)**: Any number.
+* **Phone number (Compulsory field)**: Any number at least 3 digits long.
+* **Email (Compulsory field)** String with restrictions in characters (XXXXXXXX@emaildomain)
 * **Address (Compulsory field)**: String without restriction in characters.
-* **Email (Compulsory field)** String with restrictions in characters (XXXXXXXX@emaildomain.com)
 * **Subject (Compulsory field)**: String without restriction in characters.
-* **Day (Compulsory field)**: String with restrictions in characters, non-case sensitive (Mon/Tue/Wed/Thu/Fri/Sat/Sun).
+* **Day (Compulsory field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).
 * **Begin (Compulsory field)**: String with restrictions (HHMM).
 * **End (Compulsory field)**: String with restrictions (HHMM).
-* **PayRate (Compulsory field)**: String with restrictions in characters, only numbers allowed (no negative numbers).
+* **PayRate (Compulsory field)**: String with restrictions in characters, only numbers allowed (no negative numbers)
 
 The following sequence diagram shows how the add command works.
 
@@ -180,6 +180,10 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Easy to implement.
     * Cons: Command input may be too long and less user-friendly.
 
+* **Alternative 2**: Allow for optional parameters with default values, with the tutee's name and phone being the compulsory ones.
+  * Pros: More user-friendly, command will not be too lengthy.
+  * Cons: Harder to implement. 
+
 ### List feature
 
 There are three commands that deal with listing tutees:
@@ -189,29 +193,9 @@ There are three commands that deal with listing tutees:
 3. `ListUnPaidCommand` - Shows the current list of tutees who have not paid
 
 The `ListCommand` extends the `Command` class. Both the `ListByDayCommand` and the `ListUnPaidCommand` extend the `ListCommand` class. All three commands override `Command#execute`.
-The `ListCommandParser` is responsible for returning the appropriate `ListCommand`  based on the command format
+The `ListCommandParser` is responsible for returning the appropriate `ListCommand`  based on the command format.
 
-
-The `ListByDayCommand`  is initialised with a `DayPredicate` and updates
-
-### Find feature
-The `findCommand` extends the `Command` class. It allows the user to find for tutees by specifying their names and/or 
-subject using their prefixes.
-
-The following sequence diagram shows how the edit command works.
-![FindSequenceDiagram](images/FindSequenceDiagram.png)
-
-### Edit feature
-The `editCommand` extends the `Command` class. It allows the user to edit fields of the tutee by specifying the index
-of the tutee.
-
-The following sequence diagram shows how the edit command works.
-![EditSequenceDiagram](images/EditSequenceDiagram.png)
-
-### List by day feature
-The `ListByDayCommand` extends the `ListCommand` class. It is initialised with a `DayPredicate` and updates
->>>>>>> master
-the `FilteredPersonList` to only display Persons whose `Day` field matches the specified input.
+The `ListByDayCommand`  is initialised with a `DayPredicate` and updates the `FilteredPersonList` to only display Persons whose `Day` field matches the specified input.
 
 The following sequence diagram shows how the list by day command works.
 
@@ -230,29 +214,75 @@ the `FilteredPersonList` to only display Persons whose `isPaid` field is false.
     * Pros: Easier to implement.
     * Cons: Less abstraction.
 
+### Find feature
+The `findCommand` extends the `Command` class. It allows the user to find for tutees by specifying their names and/or 
+subject using their prefixes.
+
+The following sequence diagram shows how the find command works.
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
+
+### Edit feature
+The `editCommand` extends the `Command` class. It allows the user to edit fields of the tutee by specifying the index
+of the tutee.
+
+The following sequence diagram shows how the edit command works.
+![EditSequenceDiagram](images/EditSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes an edit command:
+![EditActivityDiagram](images/EditActivityDiagram.png)
+
 ### Find Free Time feature
 
-The `FreeTimeCommand` extends the `Command` class. The command first finds timeslots when the user is busy by looking at
-the tutees' schedules inside the `UniquePersonList`. The TimeSlot class then finds free time based on the list of
-timeslots when the user is busy.
+The `freeTime` Command extends the `Command` class.
+
+`freeTime` takes in the following fields: 
+* **Day (Compulsory field)**: String with restrictions in characters, non-case sensitive (Mon/MondayTue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).
+* **Duration (Compulsory field)**: Positive Integer to represent duration in **minutes**.
+* **Begin (Compulsory field)**: String with restrictions (HHMM).
+* **End (Compulsory field)**: String with restrictions (HHMM).
+
+It displays a list of timeslots where the user is free on that _Day_, starting from _Begin_ to _End_. The timeslots listed down
+must also be greater than the duration provided. 
 
 The following sequence diagram shows how the freeTime command works.
 ![FreeTimeSequenceDiagram](images/FreeTimeSequenceDiagram.png)
 
 #### Design Considerations
+**Aspect: How `freeTime` executes:**
+
+* **Alternative 1 (current choice):** The command first finds timeslots when the user is busy on that _Day_ by looking at the tutees' schedules inside the
+  `UniquePersonList`. The TimeSlot Class finds free time based on the list of
+  timeslots when the user is busy, and then returns a list of timeslots where the user is free. (Each timeslot is between _Begin_ and _End_,
+and is at least _Duration_ long)
+  * Pros: Command is short and simple to use.
+  * Cons: During the first round of user-testing, some new users were confused on how to use the command. 
+
+The following activity diagram summarizes what happens when a user executes a new command:
+![FreeTimeActivityDiagram](images/FreeTimeActivityDiagram.png)
 
 ### Calculate total revenue for the month
 
 
-The 'RevenueCommand' extends the 'command class'. The command first gets a list containing all tutees.
-The total revenue monthly can be calculated now by iterating through the list and calling 'getMonthlyRevenue()' on each
-tutee.
+The `RevenueCommand` extends the `command class`. The command first gets a list containing all tutees.
+The total revenue monthly can be calculated now by iterating through the list and calling `Person#getMonthlyFee`. <br>
 
-*Total Revenue* = number of tutees x tutee.getMonthlyRevenue()
-
+The total monthly revenue is calculated as such: <br> 
+*Total Monthly Revenue* = Sum of every tutee's `monthlyFee`
 
 The following sequence diagram shows how the total revenue command works:
 ![RevenueSequenceDiagram.png](images/RevenueSequenceDiagram.png)
+
+#### Design Considerations
+**Aspect: How `monthlyFee` is calculated:**
+
+* **Alternative 1 (current choice):** Calculate `monthlyFee` only when executing `RevenueCommand`.
+    * Pros: Up-to-date revenue figure as `PayRate` value and number of lessons monthly may change over time.
+    * Cons: Potentially more method calls to generate same value.
+
+* **Alternative 2:** Calculate `monthlyFee` when instantiating `Person` and include it as a field in `Person`.
+    * Pros: Readily accessible `monthlyFee` value.
+    * Cons: Have to implement logic to update `monthlyFee` when `PayRate` value and number of lessons monthly changes.
+
 
 ### Undo/redo feature
 
@@ -405,16 +435,19 @@ The following sequence diagram shows how unpaidAll command works:
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                | So that I can…​                                                       |
-| ------ |--------------------------------------------|---------------------------------------------|-----------------------------------------------------------------------|
-| `* * *` | tutor                                      | view a list of all tutees                   |                                                                       |
-| `* *`  | tutor                                      | view a list tutees on a specified day       | so that I can be reminded if I have any classes on that particular day |
-| `* * *` | tutor                                      | view the specific details of a single tutee |                                                                       |
-| `* * *` | tutor                                      | add a new tutee                             |                                                                       |
-| `* * *` | tutor                                      | edit their details                          | account for changes in their information e.g. change in address       |
-| `* *`  | tutor                                      | remove tutees from the list                 | keep track of tutees that I have stopped teaching                     |
-| `* *`  | tutor                                      | mark students that have already paid        | keep track of students' payment statuses                              |
-| `* *`  | tutor                                      | check all students who haven't paid         | easily remind students who haven't paid                               |
+
+| Priority | As a …​                                        | I want to …​                                    | So that I can…​                                                        |
+| ------ |------------------------------------------------|-------------------------------------------------|------------------------------------------------------------------------|
+| `* * *` | tutor                                          | view a list of all tutees                       |                                                                        |
+| `* *`  | tutor                                          | view a list tutees on a specified day           | so that I can be reminded if I have any classes on that particular day |
+| `* * *` | tutor                                          | view the specific details of a single tutee     |                                                                        |
+| `* * *` | tutor                                          | add a new tutee                                 |                                                                        |
+| `* * *` | tutor                                          | edit their details                              | account for changes in their information e.g. change in address        |
+| `* *`  | tutor                                          | remove tutees from the list                     | keep track of tutees that I have stopped teaching                      |
+| `* *`  | tutor                                          | mark students that have already paid            | keep track of students' payment statuses                               |
+| `* *`  | tutor                                          | check all students who haven't paid             | easily remind students who haven't paid                                |
+| `* *`  | tutor                                          | undo and redo commands I made in the application | easily revert any mistakes                                             |
+| `* *`  | tutor                                          | calculate my total monthly revnue               | better financially plan for my tutoring business                       |
 
 *{More to be added}*
 
@@ -437,6 +470,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - 2a1. System informs the user that the list is empty.
 	
     Use case ends.
+    <br>
+    <br>
 
 **Use case: UC02 - Add a tutee**
 
@@ -468,6 +503,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 1d1. System informs that begin time must be smaller than the end time.
 
     Use case resumes at 1.
+
+    <br>
+    <br>
   
 **Use case: UC03 - Delete a tutee**
 
@@ -483,6 +521,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 2a. The tutee that the user is trying to delete does not exist in the list.
     - 2a1. System informs that user does not exist.
+
+      <br>
+      <br>
 
 **Use case: UC04 - Editing a tutee**
 
@@ -516,6 +557,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 2d1. System informs that begin time must be smaller than the end time.
     
     Use case resumes at 2.
+    <br>
+    <br>
 
 **Use case: UC05 - Mark a tutee as paid**
 
@@ -532,6 +575,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 2a. The tutee that the user is trying to mark as paid does not exist in the list.
     - 2a1. System informs that user does not exist.
 
+  <br>
+  <br>
+
 **Use case: UC06 - Reset all tutees in the list to not paid**
 
 **MSS**
@@ -541,6 +587,65 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  System marks all the tutee in the list as not paid.
 
     Use case ends.
+    <br>
+    <br>
+
+**Use case: UC07 - Undo a command**
+
+**MSS**
+1. User requests to undo.
+2. System updates the tutee data to the previous state.
+3. System informs user that the command is undone.
+
+   Use case ends.
+
+**Extensions**
+* 1a. No command to be undone.
+    * 1a1. System informs user that there is nothing to undo.
+
+  Use case ends.
+  <br>
+  <br>
+
+**Use case: UC07 - Redo a command**
+
+**MSS**
+1. User requests to redo.
+2. System updates the tutee data to the next state.
+3. System informs user that the command is redone.
+
+   Use case ends.
+
+**Extensions**
+* 1a. No command to be redone.
+    * 1a1. System informs user that there is nothing to redo.
+
+  Use case ends.
+  <br>
+  <br>
+
+*{More to be added}*
+
+
+**Use case: UC07 - Finding free time**
+
+**MSS**
+1. User requests to find free time
+2. System shows the list of available free time
+
+**Extensions**
+- 2a. The user does not have any free slots available.
+  - 2a1. System informs that the user has no available timeslots.
+
+**Use case: UC08 - Get monthly revenue**
+
+**MSS**
+
+1. User requests for monthly revenue.
+2. User receives monthly revenue figure.
+
+   Use case ends.
+
 
 ### Non-Functional Requirements
 
@@ -635,3 +740,9 @@ Idea: Modify the paid command parser to accept a list of person identifiers (e.g
 Reason: Introduce a scheduling feature within the unpaid command to set future unpaid statuses for individuals. This would be beneficial for scenarios where payments should automatically lapse after a set period.
 
 Idea: Add a scheduling mechanism within the command execution to mark individuals as unpaid after a specified future date or duration.
+
+### Maximum PayRate
+
+Reason: PayRate that are extremely high may not be displayed properly by GUI and are unlikely to be realistic PayRates per hour anyway.
+
+Idea: Modify the VALIDATION_REGEX of PayRate such that it only accepts values up to 9999.99.
