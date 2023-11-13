@@ -831,7 +831,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to randomly select a specific number of students.
-2.  Class Manager randomly selects the students from the list.
+2.  Class Manager randomly selects the students from all students displayed.
 3.  Class Manager shows a list of students that are randomly selected.
 
     Use case ends.
