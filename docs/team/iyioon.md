@@ -23,6 +23,8 @@ Given below are my contributions to the project.
 
 * **Project management**:
   * Managed release `v1.2`
+  * Created and assigned some issues to teammates.
+  * Created tasks for each iteration.
 
 * **Enhancements to existing features**:
   * Provided initial skeleton consisting of booking and room model (Pull request [#99](https://github.com/AY2324S1-CS2103T-F10-1/tp/pull/99))
