@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.model.person.BloodTypePredicate;
 import seedu.address.model.person.GenderPredicate;
 import seedu.address.model.person.IcContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -27,15 +26,6 @@ public class KeywordParser {
 
         Matcher genderMatcher = genderPattern.matcher(input[0]);
         Matcher nricMatcher = nricPattern.matcher(input[0]);
-
-        if (input.length >= 3) {
-            Matcher bloodTypeMatcher = bloodTypePattern.matcher(input[2]);
-            if (bloodTypeMatcher.matches()) {
-                return new BloodTypePredicate(input[2]);
-            } else {
-                return new NameContainsKeywordsPredicate(Arrays.asList(input));
-            }
-        }
 
         if (nricMatcher.matches()) {
             return new IcContainsKeywordsPredicate(input[0]);

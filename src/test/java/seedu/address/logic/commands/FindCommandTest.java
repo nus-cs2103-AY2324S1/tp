@@ -106,16 +106,6 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_findBloodType_personFound() throws ParseException {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
-        Predicate<Person> predicate = preparePredicate("Blood Type AB+");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL), model.getFilteredPatientList());
-    }
-
-    @Test
     public void toStringMethod() {
         IcContainsKeywordsPredicate predicate = new IcContainsKeywordsPredicate("keyword");
         FindCommand findCommand = new FindCommand(predicate);
