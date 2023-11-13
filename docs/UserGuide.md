@@ -60,8 +60,8 @@ This user guide will teach you how to install **TuitionConnect** from scratch, a
 
 --------------------------------------------------------------------------------------------------------------------
 ## Introduction
-TuitionConnect is a **desktop app** built for tutors and tutoring businesses or simplifying the process of 
-administration and finance management for private tutors, optimized for use via a **Command Line Interface** (CLI) while 
+TuitionConnect is a **desktop app** built for tutors and tutoring businesses to simplify the process of 
+administration and finance management, optimized for use via a **Command Line Interface** (CLI) while 
 still having the benefits of a Graphical User Interface (GUI). 
 
 If you love to type, then **TuitionConnect** is the app for you! It helps you to track tutee-specific details, teaching-schedule management,
