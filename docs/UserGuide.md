@@ -483,7 +483,7 @@ editft INDEX d/DAY from/FROM to/TO
 </div>
 
 ##### Example:
-- `editft 1 d/2 from/13:00 to/15:00` updates the free time of the TA at index <code>1</code> to be from <code>13:00</code> to <code>15:00</code> on Tuesday.
+- `editft 1 d/2 from/13:00 to/15:00` updates the free time of the TA at index `1` to be from `13:00` to `15:00` on Tuesday.
 
 ![update Hour](images/editFreeTime.png)
 *<center>TAManager edits the free time of the teaching assistant at index <code>1</code> to be from <code>13:00</code> to <code>15:00</code> on Tuesday.</center>*
@@ -545,15 +545,15 @@ You can view the information for a specific course and its tutorial timings.
 course c/COURSE_CODE
 ```
 
-| Fields        | Format                                                                                 | Remarks                                                                                                    |
-|---------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
-| `COURSE_CODE` | Starts with 2-3 alphabets, followed by 4 numbers, and optionally ends with an alphabet | Course code of the course the teaching assistant is teaching and it should be one of the available courses |
+| Fields        | Format                                 | Remarks                                                                                                    |
+|---------------|----------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `COURSE_CODE` | String in valid NUS course code format | Course code of the course the teaching assistant is teaching and it should be one of the available courses |
 
 ##### Example: 
 - `course c/CS2103T` returns the course information and tutorial timings for CS2103T.
 
 ![view course](images/viewCourse.png)
-*<center>TAManager displays the information for the specified course.</center>*
+*<center>TAManager displays the information for the CS2103T.</center>*
 
 <div markdown="block" class="command-succeed">
 <div class="alert alert-success">
@@ -593,9 +593,9 @@ This will automatically filter the list of TAs teaching under the default course
 teach c/COURSE_CODE
 ```
 
-| Fields        | Format                                                                                 | Remarks                                                                                                    |
-|---------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
-| `COURSE_CODE` | Starts with 2-3 alphabets, followed by 4 numbers, and optionally ends with an alphabet | Course code of the course the teaching assistant is teaching and it should be one of the available courses |
+| Fields        | Format                                 | Remarks                                                                                                    |
+|---------------|----------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `COURSE_CODE` | String in valid NUS course code format | Course code of the course the teaching assistant is teaching and it should be one of the available courses |
 
 <div markdown="block" class="alert alert-info">
 
@@ -608,7 +608,7 @@ teach c/COURSE_CODE
 - `teach c/CS2103T` sets the default course to the course CS2103T.
 
 ![teach command](images/teachCourse.png)
-*<center>TAManager successfully added the default course.</center>*
+*<center>TAManager sets the default course to CS2103T.</center>*
 
 <div markdown="block" class="command-succeed">
 <div class="alert alert-success">
@@ -648,7 +648,7 @@ clearteach
 ```
 
 ![clearteach command](images/clearTeach.png)
-*<center>TAManager successfully reset the default course.</center>*
+*<center>TAManager resets the default course.</center>*
 
 <div class="command-succeed">
 <div markdown="block" class="alert alert-success">
@@ -675,6 +675,7 @@ help
 ```
 
 ![help message](images/helpMessage.png)
+*<center>TAManager brings up a help window.</center>*
 
 <div class="command-succeed">
 <div markdown="block" class="alert alert-success">
