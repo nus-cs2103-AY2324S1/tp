@@ -76,6 +76,8 @@ The sections below give more details of each component.
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
+<puml src="diagrams/BottomListPanelClassDiagram.puml" alt="Structure of the UI Component"/>
+
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -149,8 +151,8 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save address book data, calendar data, task manager data and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from `AddressBookStorage`,`CalendarStorage`, `TaskManagerStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -1293,6 +1295,68 @@ Prerequisite: Multiple tasks in the task list.
    Expected: Tasks are sorted by deadline.
 3. Test case: `sortTasks 1askdj`
    Expected: Error message displayed indicating that the sorting order indicated is invalid.
+
+### Saving data
+Prerequisites: Have all three json data files present.
+  * addressbook.json
+  * calendar.json
+  * taskmanager.json
+    <br><br>
+
+Some sample storage json files for the tests can be found in the link [here](https://github.com/AY2324S1-CS2103-F13-4/tp/tree/master/src/test/data/ManualTestingSampleStorageFiles).<br>
+Rename the files to their respective data files and replace the original files (if any) found in the original directory.<br>
+1. Test case: Navigate to the addressbook.json file and delete the file.<br>
+   Expected: The AddressBook (Contact List) in UniMate should be populated with sample data.
+
+2. Test case: Single or multiple deletion of the different data files.<br>
+   Expected: Similar to previous.
+
+3. Test case: Navigate to the addressbook.json file and edit any of the fields to become an invalid field.<br>
+   Example: Modify the events field of a contact to the following. <br>
+   {<br>
+   "persons" : [ {<br>
+   "name" : "Alex Yeoh",<br>
+   "phone" : "87438807",<br>
+   "email" : "alexyeoh@example.com",<br>
+   "address" : "Blk 30 Geylang Street 29, #06-40",<br>
+   "tags" : [ "friends" ],<br>
+   "events" : [ {<br>
+   "description" : "Nap",<br>
+   "eventPeriod" : "2024-01-03 12:00 - 2024-01-03 18:00"<br>
+   } ]<br>
+   }<br>
+   Expected: The AddressBook (Contact List) in UniMate should be blank as UniMate will discard all data.<br>
+   Note: In this scenario, the event period is invalid.
+
+4. Test case: Single or multiple corruption of the different data files.<br>
+   Expected: Similar to previous.
+
+5. Test case: Navigate to the addressbook.json file and duplicate a person in the file.<br>
+   Example:<br>
+   {<br>
+   "persons" : [ {<br>
+   "name" : "Bernice Yu",<br>
+   "phone" : "99272758",<br>
+   "email" : "berniceyu@example.com",<br>
+   "address" : "Blk 30 Lorong 3 Serangoon Gardens, #07-18",<br>
+   "tags" : [ "colleagues", "friends" ],<br>
+   "events" : [ ]<br>
+   }, {<br>
+   "name" : "Bernice Yu",<br>
+   "phone" : "99272758",<br>
+   "email" : "berniceyu@example.com",<br>
+   "address" : "Blk 30 Lorong 3 Serangoon Gardens, #07-18",<br>
+   "tags" : [ "colleagues", "friends" ],<br>
+   "events" : [ ]<br>
+   } ]<br>
+   }<br>
+   Expected: The AddressBook (Contact List) in UniMate should be blank as UniMate will discard all data.<br>
+
+6. Test case: Duplication of the fields in the different data files.<br>
+   Expected: Similar to previous.
+
+7. Test case: Other invalid storage formats: Not a JSON format.
+   Expected: Similar to previous.
 
 ## **Appendix: Effort**
 ### Main Difficulty: Building User Calendar

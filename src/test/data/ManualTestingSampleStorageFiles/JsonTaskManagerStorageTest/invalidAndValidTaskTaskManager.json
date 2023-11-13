@@ -1,0 +1,9 @@
+{
+  "tasks" : [ {
+    "description" : "Drink Water",
+    "deadline" : "-"
+  }, {
+    "description" : "Task with invalid deadline",
+    "deadline" : "Invalid Deadline"
+  } ]
+}
