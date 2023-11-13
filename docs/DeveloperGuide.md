@@ -452,6 +452,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{Explain here how the data archiving feature will be implemented}_
 
+<!-- @@author xenosf -->
+
 ### Sorting feature
 
 #### Implementation
@@ -557,6 +559,8 @@ The following activity diagram summarizes what happens when a command is execute
     * The sorting and filtering is controlled by a `NetworkBook` instance.
     * The status bar could read the sorting and filtering predicate/comparator directly.
     * However, this increases coupling between model and UI which is undesirable. Hence, this alternative was not chosen.
+
+<!-- @@author -->
 
 --------------------------------------------------------------------------------------------------------------------
 
