@@ -14,6 +14,8 @@ pageNav: 3
 ## **Acknowledgements**
 
 This project is based on [AB-3](https://github.com/se-edu/addressbook-level3).
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5).
+
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Setting up, getting started**
@@ -174,6 +176,9 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 ### View Specific Person feature
+
+#### Implementation
+
 Step 1: The user launches the application for the first time. The `SampleAddressBook` will be initialised.
 
 Step 2: The user executes `addclient n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` to add a new Client.
