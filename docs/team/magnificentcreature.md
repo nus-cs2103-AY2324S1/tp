@@ -44,9 +44,10 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `interaction` and `edit single field` (Pull requests [\#31](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/31), [\#68](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/68), [\#194](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/194))
-    * Documented known issue of changing lead unintentionally affecting follow-ups [#215]() (Pull request [\#216](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/216))
+    * Documented known issues [\#215](https://github.com/AY2324S1-CS2103T-F11-4/tp/issue/215) and [\#219](https://github.com/AY2324S1-CS2103T-F11-4/tp/issues/219) (Pull request [\#216](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/216), [\#220](https://github.com/AY2324S1-CS2103T-F11-4/tp/issues/220))
     * Improved readability and user friendliness by restructuring and tweaking the user guide (Pull request [\#194](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/194), [\#202](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/202))
     * Added the ***If you're new*** sections and other tips which to help less technical readers (Pull request [\#194](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/194), [\#207](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/207), [\#218](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/218))
+    * Added ***Glossary*** section to define technical terms used in the UG [\#220](https://github.com/AY2324S1-CS2103T-F11-4/tp/issues/220) 
   * Developer Guide:
     * Added user stories [\#16](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/16)
     * Added simple uses cases for adding `interaction` and marking `lead` [\#22](https://github.com/AY2324S1-CS2103T-F11-4/tp/pull/22)  
