@@ -7,7 +7,7 @@ title: Annabel Ting's Project Portfolio Page
 
 CheckMate is designed to streamline the process of room bookings by hotel employees. With a Graphical User Interface (GUI) that provides the necessary information needed at a glance, and the application
 being optimised for use via a Command Line Interface (CLI), we have combined elegance and efficiency when it comes to
-the process of room booking for hotel receptionists.
+the process of room booking by hotel receptionists.
 
 Given below are my contributions to the project.
 
