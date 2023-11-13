@@ -340,7 +340,8 @@ Example usage:
 
 #### Find a contact: `find [name]`
 
-You can use the `find` command to search for contacts by their name if you wish to quickly reference a particular contact's details, so that you can locate details of contacts more efficiently.
+You can use the `find` command to search for contacts by their name, so that you can quickly reference a particular contact's details. 
+If the list is currently sorted in a particular manner (using [`sort`](#sort-contacts-list-sort-by-field-name-order-ascdesc)), the updated list will also be sorted in the same manner.
 
 Format: `find [name]`
 
@@ -354,13 +355,18 @@ Example usage:
     ![search](images/find/find.png)
 * `find Kai Jie`
 
+<div markdown="span" class="alert alert-secondary">:information_source: **Note:**
+Using the find command will update the filter status to `Filter by: name`. The find command will also override a filter command if you used it, and vice versa.
+</div>
+
 [Table of Contents](#table-of-contents)
 
 <!-- @@author xenosf -->
 
 #### Sort contacts list: `sort /by [field name] /order [asc/desc]`
 
-You can use the `sort` command to sort your list of contacts so that you can efficiently locate contacts with special characteristics that you are looking for. If the list is currently filtered (using [`find`](#find-a-contact-find-name) or [`filter`](#filter-contacts-list-filter-by-field-with-term)), the filtered list will be sorted in your chosen manner.
+You can use the `sort` command to sort your list of contacts so that you can efficiently locate contacts with special characteristics that you are looking for. 
+If the list is currently filtered in a certain manner (using [`find`](#find-a-contact-find-name) or [`filter`](#filter-contacts-list-filter-by-field-with-term)), the updated list will also be filtered in the same manner.
 
 <div markdown="span" class="alert alert-secondary">:information_source: **Note:**
 When you first open NetworkBook, the list starts off sorted by **name** in **ascending** order.

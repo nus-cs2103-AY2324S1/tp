@@ -1,0 +1,80 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+    Participant ":NetworkBookParser" as nbp LOGIC_COLOR
+    Participant ":FilterCommandParser" as fcp LOGIC_COLOR
+    Participant ":ArgumentTokenizer" as at LOGIC_COLOR
+    Participant ":ArgumentMultimap" as am LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+    Participant ":Model" as m MODEL_COLOR
+end box
+
+-> nbp : "filter" + arguments
+activate nbp
+
+create fcp
+nbp -> fcp : new FilterCommandParser()
+activate fcp
+
+fcp --> nbp
+deactivate fcp
+
+nbp -> fcp : parse(arguments)
+activate fcp
+
+fcp -> fcp : parse(arguments)
+activate fcp
+
+fcp -> at : tokenise(arguments, "/by", "/with")
+activate at
+
+create am
+at -> am : new ArgumentMultimap()
+activate am
+
+am --> at : argMultimap
+deactivate am
+
+at --> fcp : argMultimap
+deactivate at
+
+fcp -> am : argMultimap.getValue(field)
+activate am
+
+am --> fcp : field
+deactivate am
+
+skinparam sequenceReferenceBackgroundColor white
+
+ref over fcp, am
+    Infer the type of filterCommand to return
+    based on the "field" value.
+end ref
+fcp --> fcp : filterCommand
+deactivate fcp
+
+fcp --> nbp : filterCommand
+deactivate fcp
+
+nbp -> m : execute(filterCommand)
+activate m
+
+m -> m : updateDisplayedPersonList()
+activate m
+
+note left of m : Details of how the command tests\neach person is omitted for simplicity
+
+m --> m : displayedPersonList
+deactivate m
+
+m --> nbp : displayedPersonList.details
+deactivate m
+
+<-- nbp : Send details of\ndisplayedPersonList to UI
+deactivate nbp
+
+@enduml
