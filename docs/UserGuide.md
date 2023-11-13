@@ -89,14 +89,14 @@ Should you need to make changes to an existing contact, use the `edit` command a
 **Format:**
 `add n/NAME p/PHONE_NUMBER e/EMAIL [o/NOTE] [t/TAG]... [a/ALTERNATE_CONTACT]...`
 
-<div markdown="span" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 :information_source: **About tags:**
 
 - Duplicate tags are only counted once.
 - Specifying empty tags (`t/` with no value) is not allowed when adding contacts. If you wish to specify no tags, you may simply leave out the `t/` parameter.
 </div>
 
-<div markdown="span" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 :information_source: **About the alternate contact format:**
 
 - The format for `ALTERNATE_CONTACT` is `TYPE: USERNAME`, roughly looking like `SocialMedia: Username`. Ensure to include a space between the colon `:` and the `Username`.
