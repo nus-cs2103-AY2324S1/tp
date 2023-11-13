@@ -942,7 +942,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: Viewing a student's class information**
+**Use case: UC11 - Viewing a student's class information**
 
 **MSS**
 
@@ -1010,7 +1010,7 @@ Testers are expected to do more *exploratory* testing.
 
    1. Resize the window to an optimal size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
       <br><br>
 
