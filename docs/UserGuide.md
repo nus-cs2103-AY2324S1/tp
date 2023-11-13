@@ -86,6 +86,7 @@ Throughout our guide, you will see the following annotations:
    - [Course Management Commands](#2-course-management-commands)
    - [Utility Commands](#3-utility-commands)
 
+7. You're all set! Use the `clear` command to clear the sample data and embark on your journey with TAManager!
 
 <span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
 
@@ -693,7 +694,7 @@ Opened help window.
 You can clear all entries from TAManager, so that you can quickly reset the TA contact list.
 
 <div markdown="block" class="alert alert-warning">
-**:exclamation: Caution:** This is a dangerous command that will delete all TA data and is irreversible. Please ensure that you have backed up your data.
+**:exclamation: Caution:** This is a dangerous command that will delete all TA data and is irreversible. Please ensure that you have backed up your data before executing this command.
 </div>
 
 ##### Format: 
