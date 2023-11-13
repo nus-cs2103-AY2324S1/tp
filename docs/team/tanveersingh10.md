@@ -27,8 +27,8 @@ Given below are my contributions to the project.
   person's details change over time, such as their condition or remarks, and there needs to be a quick way to update the information.
 
 * **Project management**:
-  * Led the ideation process. Had to find a balance between new features and ensuring current features are bug free.
-  * Helped delegate issues and tickets
+  * Contributed to ideation process. Had to find a balance between new features and ensuring current features are bug free.
+  * Helped delegate issues
   * Did Peer Reviews on other teammates' Pull Requests
   * Resolved Merge Conflicts where applicable
 
