@@ -133,7 +133,7 @@ Examples:
 * `add w/雪 t/snow` saves the translation of **雪** as **snow**
 * `add w/雪 wl/Chinese t/snow tl/English` saves the translation of the **Chinese** word **雪** as an **English** word **snow**
 
-Output:  
+Output:
 
 ![img.png](images/AddCommand.png)
 
@@ -256,14 +256,13 @@ Displays the flash cards of all the words to be reviewed that day
 
 [Command Format](#commands): `review ...`
 
-Output:  
+Output:
 
 ![img.png](images/ReviewSuccess.png)
 
 **Note**
 * The message `0 flashcards listed!` occurs when:
     * There are no flash cards scheduled for review at the time when the command is executed.
-    
 
 ###  Starts review session : `start`
 
@@ -315,7 +314,7 @@ they will be automatically shown in the section below. Otherwise, review session
 
 [Command Format](#commands): `yes ...`
 
-Output:  
+Output:
 
 ![img.png](images/Yes.png)
 
@@ -330,7 +329,7 @@ they will be automatically shown in the section below. Otherwise, review session
 
 [Command Format](#commands): `no ...`
 
-Output:  
+Output:
 
 ![img.png](images/No.png)
 
@@ -352,7 +351,7 @@ Output:
 ![img.png](images/Stats.png)
 
 **Note**
-* The success rate is calculated solely on the basis of the current session.  
+* The success rate is calculated solely on the basis of the current session.
 
 
 <div id="load">
@@ -369,7 +368,7 @@ review session automatically.
 **:information_source: Notes about the file input:**<br>
 * **File format:** The file must be an Excel Workbook with the `.xlsx` extension.
 * **File location:** The file must be located in the **same folder** as the `flashlingo.jar` file.
-* **File content:** The app would only read the **first two columns** of the **first sheet** of the workbook. 
+* **File content:** The app would only read the **first two columns** of the **first sheet** of the workbook.
   * The sheet must contain only the following two columns (cannot have blank columns on the left):
     1. Column A - The original words
     2. Column B - The translation of the words
@@ -379,13 +378,13 @@ review session automatically.
 
 Output:
 * `You have successfully loaded file: ...`: Successful loading.
-* `File not found or accessible`:  
+* `File not found or accessible`:<br>
 ⚠️ Make sure the file is in the correct directory with read permission.
-* `File cannot be read due to invalid content or format`:  
+* `File cannot be read due to invalid content or format`:<br>
 ⚠️ Make sure the file contains only two columns with the valid words/translations.
-* `... flash card already exists!`:  
+* `... flash card already exists!`:<br>
 ⚠️ Modify the duplicated word/translation in the file to avoid duplication with the flash cards in the app.
-* `Word/translation cannot be empty!`:  
+* `Word/translation cannot be empty!`:<br>
 ⚠️ Ensure all words and translations are not empty spaces.
 
 ### Switching color theme : `switch`
@@ -431,7 +430,7 @@ If your changes to the data file makes its format invalid, Flashlingo will disca
 ## FAQ
 
 **Q: How can I check if I have installed and am using the Java `11` version?**<br>
-**A**: 
+**A**:
 * Open up the terminal. Run the `java -version` command. The output should contain similar information to the following:
 `version "11.0.X"`.
 * If Java `11` is not installed, you may download it again.
@@ -446,7 +445,7 @@ If your changes to the data file makes its format invalid, Flashlingo will disca
 Then, use the `load` command to import the data.
 
 **Q: What may be the reasons why my data cannot be loaded into the app?**<br>
-**A**: 
+**A**:
 * First, check your file name by opening the located folder. The file name should be directly displayed. Also, you can right-click the file to view the file name in its detailed info.
 * If Flashlingo still cannot read the file, try inputting file name with and without the extension `.xlsx` in the `load` command. This may solve potential issues with file name loading within different systems.
 * Secondly, ensure the content in your file is correctly formatted and valid. All rules can be found [here](#load).
@@ -493,7 +492,7 @@ Refer to [Commands](#commands) if unsure of how to interpret the format.
 
 ## Glossary
 
-| Term               | Definition                                                                                                                                                                                                                                                                      | 
+| Term               | Definition                                                                                                                                                                                                                                                                      |
 |--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **CLI**            | A command line interface (CLI) is a text-based interface where you can input commands that interact with a computer's operating system. You can check the tutorial [**here**](https://tutorials.codebar.io/command-line/introduction/tutorial.html).                            |
 | **GUI**            | A graphical user interface (GUI) is a digital interface in which a user interacts with graphical components such as icons, buttons, and menus.                                                                                                                                  |
