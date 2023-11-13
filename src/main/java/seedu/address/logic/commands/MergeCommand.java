@@ -44,6 +44,9 @@ public class MergeCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
+        assert primaryIndex.getOneBased() > 0;
+        assert secondaryIndex.getOneBased() > 0;
+
         Person primaryPerson = lastShownList.get(primaryIndex.getZeroBased());
         Person secondaryPerson = lastShownList.get(secondaryIndex.getZeroBased());
         Person newPerson = primaryPerson.mergePersons(secondaryPerson);
