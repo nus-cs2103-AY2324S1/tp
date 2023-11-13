@@ -756,19 +756,19 @@ If your changes to the data file makes its format invalid, TAManager will discar
 **A**: Install the app in your other computer and overwrite the empty data file it creates with the file that contains the data of your previous TAManager.
 
 **Q**: What is default course?<br>
-**A**: The default course is the course that you are currently managing or teaching. It is a useful setting to personalize your TAManager experience.
+**A**: The default course is the course that you are currently managing or teaching. It is a useful setting to personalize your TAManager experience. After setting your default course, the list of teaching assistants will be filtered to only show teaching assistants that are teaching the default course on startup.
 
 **Q**: Why can't I add a course to the course list?<br>
 **A**: At the moment, TAManager does not support adding course to the course list. However, advanced users can edit the course list directly by editing the `courses.json` file.
 
 **Q**: Why is free time only available from Monday to Friday?<br>
-**A**: At the moment, TAManager only supports free time from Monday to Friday. As TAs are usually not working on weekends, we have decided to not include weekends in the free time feature.
+**A**: At the moment, TAManager only supports free time from Monday to Friday. As teaching assistants are usually not working on weekends, we have decided to not include weekends in the free time feature.
 
 **Q**: Why can't I add a teaching assistant with the same name as an existing teaching assistant?<br>
 **A**: TAManager does not allow duplicate teaching assistants. This is to prevent confusion when you are managing your teaching assistants.
 
 **Q**: What if I teach multiple courses?<br>
-**A**: Currently TAManager only supports one default course. To manage multiple courses, you can run multiple instances of TAManager as a workaround.
+**A**: Instead of the [`teach`](#22-adding-a-default-course--teach) command, you might opt to filter the list of TAs each time using the [`find`](#14-finding-a-teaching-assistant-find) command.
 
 <span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
 
