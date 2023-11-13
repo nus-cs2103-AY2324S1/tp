@@ -72,4 +72,3 @@ Given below are my contributions to the project.
 * **Contributions beyond the project team**:
     * Reported bugs found in other teams' JAR files and User Guide during the PE Dry Run. [Link to issues reported](https://github.com/KamJiaYue/ped/issues?q=is:issue+is:open)
     * Represents the whole team whenever contacting with tutor and prof.
-
