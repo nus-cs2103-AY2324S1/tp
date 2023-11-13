@@ -215,7 +215,7 @@ command for both assignments and internships.
 
 1. Launch CampusCompanion. You may refer to the instructions [here](#getting-started).
 
-2. Let's change the view to see assignments first. Enter the command `list-a` <br> <img src="images/NewUserTutListA.png" width="550" /> <br> <div style="page-break-after: always;"></div>
+2. Let's change the view to see assignments first. Enter the command `list-a` <br> <img src="images/NewUserTutListA.png" width="550" /> <br> <br> <div style="page-break-after: always;"></div>
 
 3. Let's try **adding an assignment** to CampusCompanion. Enter the command
 `add-a n/CC tutorial 1 e/2023-11-29` <br> <img src="images/NewUserTutAdd1.png" width="550" /> <br>
@@ -252,18 +252,13 @@ With reference the picture above, we will do `delete-a 2` <br> <img src="images/
     _ `add-i-task n/OA i/2 e/2023-11-29 17:30 s/complete o/follow-up` <br> <img src="images/NewUserTutAddITasks.png" width="550" /> <br> <div style="page-break-after: always;"></div>
 
 13. We can also mark tasks as complete with `mark-i` and edit tasks and roles using `edit-i-task` and `edit-i-role` respectively. Let's try!
- - `mark-i 2`
- - `edit-i-task i/1 o/awaiting`
- - `edit-i-role i/1 c/Winter 2024 d/Prepare for google questions p/12500 l/Labrador Park` <br> <img src="images/NewUserTutMarkEditI.png" width="550" /> <br>
+    _ `mark-i 2`
+    _ `edit-i-task i/1 o/awaiting`
+    _ `edit-i-role i/1 c/Winter 2024 d/Prepare for google questions p/12500 l/Labrador Park` <br> <img src="images/NewUserTutMarkEditI.png" width="550" /> <br>
 
+14. Lastly, let's find Google with `find-i-role google` and delete the completed Google OA task with `delete-i-task 1` <br> <img src="images/NewUserTutFindDeleteI.png" width="550" /> <br> <div style="page-break-after: always;"></div>
 
-14. Lastly, let's find Google with `find-i-role google` and delete the completed Google OA task with `delete-i-task 1`
-
-<img src="images/NewUserTutFindDeleteI.png" width="550" />
-
-15. We can view our internships list again with `list-i`
-
-<img src="images/NewUserTutLastListI.png" width="550" />
+15. We can view our internships list again with `list-i` <br> <img src="images/NewUserTutLastListI.png" width="550" />
 
 16. Congratulations! You are now ready to use CampusCompanion.
 
