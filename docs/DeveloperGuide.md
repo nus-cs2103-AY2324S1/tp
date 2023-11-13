@@ -481,6 +481,9 @@ Step 6. The `list` command stops here, and execution is returned to the `LogicMa
 
 The following diagram ignores details for `SearchPredicate`, which will be covered shortly:
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Lifelines in the following sequence diagrams should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
 ![FindCommandSequenceDiagram.png](images/FindCommandSequenceDiagram.png)
 
 

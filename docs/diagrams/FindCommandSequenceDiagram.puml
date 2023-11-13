@@ -8,7 +8,7 @@ Participant ":LogicManager" as lm LOGIC_COLOR
 Participant ":AddressBookParser" as abp LOGIC_COLOR_T2
 Participant ":FindCommandParser" as fcp LOGIC_COLOR_T3
 Participant ":FindCommandArgumentParser" as argp LOGIC_COLOR_T4
-Participant ":FindCommand" as cmd MODEL_COLOR
+Participant "cmd:FindCommand" as cmd MODEL_COLOR
 Participant ":Model" as model STORAGE_COLOR
 
 user -[USER_COLOR]> mw : "list Tom/Sam"
@@ -40,12 +40,12 @@ destroy argp
 create cmd
 fcp -[LOGIC_COLOR_T3]> cmd
 
-fcp --[LOGIC_COLOR_T3]-> abp : FindCommand
+fcp --[LOGIC_COLOR_T3]-> abp : cmd
 deactivate fcp LOGIC_COLOR_T3
 fcp -[hidden]-> abp
 destroy fcp
 
-abp --[LOGIC_COLOR_T2]-> lm : FindCommand
+abp --[LOGIC_COLOR_T2]-> lm : cmd
 deactivate abp LOGIC_COLOR_T2
 
 lm -[LOGIC_COLOR]> cmd : execute(Model)
