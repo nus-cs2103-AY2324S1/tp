@@ -229,6 +229,8 @@ The following sequence diagram shows how the list by day command works.
 The `ListUnPaidCommand`  follows a similar implementation to `ListByDayCommand`. It is initialised with a `PaidPredicate` instead and updates
 the `FilteredPersonList` to only display Persons whose `isPaid` field is false.
 
+#### Design considerations:
+
 **Aspect: How to implement `ListByDayCommand` and `ListUnPaidCommand`:**
 
 * **Alternative 1 (current choice):** Extend the `ListCommand` class.
@@ -364,7 +366,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: How undo & redo executes**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
   * Pros: Easy to implement.
@@ -451,20 +453,19 @@ x
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 
-| Priority | As a …​   | I want to …​                                    | So that I can…​                                                 |
-| ------ |-----------|-------------------------------------------------|-----------------------------------------------------------------|
-| `* * *` | tutor     | view a list of all tutees                       | see whoever are my tutees that I teach                          |
-| `* *`  | tutor     | view a list tutees on a specified day           | be reminded if I have any classes on that particular day        |
-| `* * *` | tutor     | view the specific details of a single tutee     | see the different informations tailored to the tutee            |
-| `* * *` | tutor     | add a new tutee                                 | keep track of my tutees that I teach                            |
-| `* * *` | tutor     | find a tutee                                     | search for a specific tutee that I teach                        
-| `* * *` | tutor     | edit their details                              | account for changes in their information e.g. change in address |
-| `* *`  | tutor     | remove tutees from the list                     | keep track of tutees that I have stopped teaching               |
-| `* *`  | tutor     | mark students that have already paid            | keep track of students' payment statuses                        |
-| `* *`  | tutor     | check all students who haven't paid             | easily remind students who haven't paid                         |
-| `* *`  | tutor     | undo and redo commands I made in the application | easily revert any mistakes                                      |
-| `* *`  | tutor     | calculate my total monthly revnue               | better financially plan for my tutoring business                |
-
+| Priority | As a …​ | I want to …​                                            | So that I can…​                                                 |
+|----------|---------|---------------------------------------------------------|-----------------------------------------------------------------|
+| `* * *`  | tutor   | view a list of all tutees                               | see whoever are my tutees that I teach                          |
+| `* * *`  | tutor   | view the specific details of a single tutee             | see the different informations tailored to the tutee            |
+| `* * *`  | tutor   | add a new tutee                                         | keep track of my tutees that I teach                            |
+| `* * *`  | tutor   | find a tutee                                            | search for a specific tutee that I teach                        |
+| `* * *`  | tutor   | edit their details                                      | account for changes in their information e.g. change in address |
+| `* *`    | tutor   | remove tutees from the list                             | keep track of tutees that I have stopped teaching               |
+| `* *`    | tutor   | mark students that have already paid                    | keep track of students' payment statuses                        |
+| `* *`    | tutor   | check all students who haven't paid                     | easily remind students who haven't paid                         |
+| `* *`    | tutor   | undo and redo commands I made in the application        | easily revert any mistakes                                      |
+| `* *`    | tutor   | calculate my total monthly revenue                      | better financially plan for my tutoring business                |
+| `* *`    | tutor   | view a list tutees whose lessons fall on a specific day | be reminded if I have any classes on that particular day        |
 *{More to be added}*
 
 ### Use cases
@@ -477,6 +478,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list all tutees.
 2.  System shows all tutees.
+3.  System displays the success message.
 	
     Use case ends.
 
@@ -489,12 +491,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     <br>
     <br>
 
-**Use case: UC02 - Add a tutee**
+**Use case: UC02 - List tutees whose lessons are on a specified day**
+
+**MSS**
+
+1.  User requests to list all tutees whose lessons are on Monday.
+2.  System shows all tutees whose lessons are on Monday.
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. The list of tutees is empty.
+    - 2a1. System informs the user that the list is empty.
+
+  Use case ends.
+  <br>
+  <br>
+
+**Use case: UC03 - Add a tutee**
 
 **MSS**
 
 1. User requests to add a tutee.
 2. System adds a tutee.
+3. System displays the success message.
 
    Use case ends.
 
@@ -523,13 +544,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     <br>
     <br>
   
-**Use case: UC03 - Delete a tutee**
+**Use case: UC04 - Delete a tutee**
 
 **MSS**
 
 1.  User views the list of tutees.
 2.  User requests to delete a tutee.
 3.  System deletes the tutee.
+4.  System displays the success message.
 
     Use case ends.
 
@@ -540,13 +562,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       <br>
       <br>
   
-**Use case: UC04 - Edit a tutee**
+**Use case: UC05 - Edit a tutee**
 
 **MSS**
 
 1.  User views the list of tutees.
 2.  User requests to edit a tutee.
 3.  System edits the tutee.
+4.  System displays the success message.
 
     Use case ends.
 
@@ -574,12 +597,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     <br>
     <br>
 
-**Use case: UC05 - Find a tutee**
+**Use case: UC06 - Find a tutee**
 
 **MSS**
 
 1. User requests to find a tutee.
 2. System finds the tutee.
+3. System displays the success message.
 
 **Extensions**
 
@@ -610,13 +634,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     <br>
     <br>
   
-**Use case: UC06 - Mark a tutee as paid**
+**Use case: UC07 - Mark a tutee as paid**
 
 **MSS**
 
 1.  User views the list of tutees.
 2.  User requests mark the specific tutee as paid.
 3.  System marks the tutee as paid.
+4.  System displays the success message.
 
     Use case ends.
 
@@ -627,19 +652,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       <br>
       <br>
 
-**Use case: UC07 - Reset all tutees in the list to not paid**
+**Use case: UC08 - Reset all tutees in the list to not paid**
 
 **MSS**
 
 1.  User views the list of tutees.
 2.  User requests mark all the tutees in the current list as not paid.
 3.  System marks all the tutee in the list as not paid.
+4.  System displays the success message.
 
     Use case ends.
     <br>
     <br>
 
-**Use case: UC08 - Undo a command**
+**Use case: UC09 - Undo a command**
 
 **MSS**
 1. User requests to undo.
@@ -656,7 +682,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   <br>
   <br>
 
-**Use case: UC09 - Redo a command**
+**Use case: UC10 - Redo a command**
 
 **MSS**
 1. User requests to redo.
@@ -670,13 +696,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. System informs user that there is nothing to redo.
 
   Use case ends.
-
-*{More to be added}*
 <br>
 <br>
 
 
-**Use case: UC10 - Finding free time**
+**Use case: UC11 - Finding free time**
 
 **MSS**
 1. User requests to find free time
@@ -688,14 +712,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     <br>
     <br>
   
-**Use case: UC11 - Get monthly revenue**
+**Use case: UC12 - Get monthly revenue**
 
 **MSS**
 
 1. User requests for monthly revenue.
-2. User receives monthly revenue figure.
+2. System displays the monthly revenue figure.
 
    Use case ends.
+
+*{More to be added}*
    <br>
    <br>
 
@@ -703,7 +729,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  The software should be platform independent (i.e. work on the Windows, Linux, and OS-X platforms).
-3. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. Should be able to hold up to 1000 tutees without a noticeable sluggishness in performance for typical usage.
 4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 5. The product is a single user product (i.e. The data file created by one user cannot be accessed by another user during regular operations)
 6. The data should be stored locally and should be in a human editable text file.
@@ -713,12 +739,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 10. The GUI should work well (i.e., should not cause any resolution-related inconveniences to the user) for, standard screen resolutions 1920x1080 and higher, and, for screen scales 100% and 125%.
 11. the GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for, resolutions 1280x720 and higher, and, for screen scales 150%.
 12. The product should be packaged into a single JAR file.
-13. The DG and UG should be PDF-friendly. Expandable panels, embedded videos, animated GIFs should not be used.
-14. The file sizes of the deliverables should be reasonable and not exceed the limits given below:
-
-    - Product (i.e., the JAR/ZIP file): 100MB
-
-    - Documents (i.e., PDF files): 15MB/file
 
 ### Glossary
 
@@ -728,7 +748,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * Command: An instruction for the application to execute
 * Timeslot: An interval of time from HH:MM to HH:MM
 * Prefix: An abbreviation for the name of the parameter. Prefix should be entered before the actual parameter in a command and always ends with a slash (/).
-* MSS: Main success scenario 
+* MSS: Main success scenario
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -754,6 +774,21 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+
+### List tutee(s)
+
+1. Listing tutee(s)
+
+    1. Prerequisites: At least one tutee in the tutee list.
+
+    2. Test case: `list`<br>
+       Expected: Shows the full list of tutees in the tutee list.
+
+    3. Test case: `list mon`<br>
+       Expected: Shows tutees whose lessons fall on Monday in the tutee list.
+
+    4. Test case: `list unpaid`<br>
+       Expected: Shows tutees who have yet to pay for their lessons in the tutee list.
 
 ### Adding a tutee
 
@@ -867,6 +902,38 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `list unpaid`<br>
        Expected: All tutees who haven't paid will be shown. The message of how many tutees are unpaid will be shown. Timestamp in the status bar is updated.
 
+### Undo command
+
+1. Undo previous commands that can modify the data of tutees.
+
+    1. Prerequisites: At least one tutee is present in the tutee list. Execute any command that modify tutee data. In this instruction, `clear` is used.
+
+    2. Test case: `undo`<br>
+       Expected: Restore all tutees that were cleared. A message informing the user that the command is successfully undone is displayed.
+
+2. Undo when there are no previous commands that modify the data of tutees.
+
+    1. Prerequisites: Launch the application. Ensure no commands that modify the tutee data is executed.
+
+    2. Test case: `undo`<br>
+       Expected: No command is undone. Error details shown in the status message.
+
+### Redo command
+
+1. Redo a command when there is a undo command executed previously.
+
+    1. At least one tutee is present in the tutee list. Execute any command that modify tutee data. In this instruction, `clear` is used followed by `undo`.
+
+    2. Test case: `redo`<br>
+       Expected: Clear the tutee list again. 
+
+2. Redo a command when there is no undo command executed previously to redo.
+
+    1. Prerequisites: Ensure no `undo` command is executed after launching the application.
+
+    2. Test case: `redo`<br>
+       Expected: No command is redone. Error details shown in the status message.
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
@@ -901,3 +968,12 @@ Reason: PayRate that are extremely high may not be displayed properly by GUI and
 
 Idea: Modify the VALIDATION_REGEX of PayRate such that it only accepts values up to 9999.99.
 
+### Prevent Commands meant to Modify Tutee Data from Not Changing the Data
+
+Reason: `clear`,`edit`, `paid`, `delete`,`unpaidAll` are commands that deal with modifying tutee data. If the tutee's `isPaid` status is true,
+the system permits the user to execute the `paid` command even though this will not change the `isPaid` status of the tutee. If these commands
+do not change the tutee data in any way but still allowed to be executed, when the user executes `undo`, there will be no changes since there are now duplicate states of the `VersionedAddressBook`
+is saved. The system should inform the user that this command will not modify any data and prevent the command from executing. 
+
+Idea: Create a `Model#isSameData()` to compare whether the state of the tutee data before and after the command execution will be the same. If
+`Model#isSameData()` returns true, a `CommandException` should be thrown and the system should inform the user that this command will not modify any data.
