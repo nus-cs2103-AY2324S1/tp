@@ -884,3 +884,37 @@ Deleting a member while all members are being shown
 
 4. Other incorrect delete commands to try: `delm`, `dela`, `deletemember x`, `...` (where x is larger than the list size)<br>
    Expected: Similar to previous.
+
+--------------------------------------------------------------------------------------------------------------------
+
+Appendix: Effort
+
+Overall, we felt the difficulty level for ClubMembersContacts was moderately high. When creating the project, we had to,
+which evolved from AB-3, we meticulously considered the overall design, architecture and testing aspects to ensure the
+project was well-designed and robust. This was a challenging task as we had to consider the various components and
+classes that would be required to implement the project. We also had to consider the various use cases and user stories
+to ensure that the project was able to meet the requirements. 
+
+Justification for effort:
+* **Changing existing commands** - We had to tweak and rewrite almost all of the commands from AB3 since we wanted to
+have two different classes of `Member` and `Applicant` extending from the original `Person` class. This required us to 
+think carefully about the best way to implement the classes to reduce duplication of code. For example, we adapted the
+`UniquePersonList` to be generic so that it could take in both `Member` and `Applicant` objects to prevent the need to 
+create two separate lists for each class.
+* **Creating new classes** - We created new classes (such as `Telegram`) to allow new fields to be added to the `member`
+class.
+* **Implementing new features** - We implemented new features such as `Task` for `Member` and `Interview` for 
+`Applicant`. We had to first spend time thinking about how the logic was going to work and also how it was going to 
+show up on the UI. Debugging took the longest time since we used the `Task` similar to the one we used for our iP to
+but had to modify the classes to made sure that it worked properly and made sense in the context of the project.
+Similarly, for `Interview`, we had to make tweaks to integrate it into our project.
+
+Challenges faced in the project:
+* **Improvement to the UI** - Changing the UI to suit the new requirements of the project was a challenging task. We
+were unfamiliar with JavaFX which made it difficult to understand how the various components interacted with one another.
+Tracing the code was not enough to understand what was happening and we needed to spend time reading the documentation on
+how the components worked.
+* **Writing test cases** - When we first saw the implementation of the test cases in AB3, we were very confused what
+many of the methods were doing and there were so many abstractions that required us to trace the code to really 
+understand what was happening. We had to spend a lot of time tracing the code and understanding how to make use of the
+same level of abstraction for our own test cases to ensure they were robust and well-written.
