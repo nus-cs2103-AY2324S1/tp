@@ -320,7 +320,7 @@ Example:
 
 Before `load f/sample` is executed:
 
-<img alt="load before" src="images/theme-light.png" width="700"> <br><br>
+<img alt="load before" src="images/load-before.png" width="700"> <br><br>
 
 After `load f/sample` is executed successfully:
 
@@ -483,16 +483,6 @@ Examples:
 
 ---
 
-### Delete all students : `clear`
-
-Deletes all existing students from **Class Manager 2023**. This command will not delete the data file. Use the `undo` command to undo this command.
-
-Format: `clear`
-
-[Back to Table of Contents](#table-of-contents)
-
----
-
 ### Delete one student : `delete`
 
 Deletes an existing student in **Class Manager 2023** by specifying the student number.
@@ -503,6 +493,16 @@ Format: `delete s/STUDENT_NUMBER`
 
 Example:
 * `delete s/A0249112A`
+
+[Back to Table of Contents](#table-of-contents)
+
+---
+
+### Delete all students : `clear`
+
+Deletes all existing students from **Class Manager 2023**. This command will not delete the data file. Use the `undo` command to undo this command.
+
+Format: `clear`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -572,9 +572,11 @@ Format: `lookup [c/CLASS_NUMBER] [p/PHONE] [n/NAME] [e/EMAIL] [s/STUDENT_NUMBER]
 Examples:
 
 * `lookup n/alex david` returns `Alex Yeoh`, `David Li`<br>
-  <img alt="result for 'lookup n/alex david'" src="images/lookupNameResult.png" width="680"> </br></br>
+
+<img alt="result for 'lookup n/alex david'" src="images/lookupNameResult.png" width="700"> </br></br>
 * `lookup c/T11` returns all students in class number T11<br>
-  <img alt="result for 'lookup c/T11'" src="images/lookupClassResult.png" width="680"> </br></br>
+
+<img alt="result for 'lookup c/T11'" src="images/lookupClassResult.png" width="700"> </br></br>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -635,30 +637,13 @@ Possible errors and their corresponding error messages:
 
 ## Class information commands
 
-
-### Mark a student as absent : `absent`
-
-Mark the tutorial attendance for an existing student as absent in **Class Manager 2023**.
-
-Format: `absent s/STUDENT_NUMBER tut/TUTORIAL_INDEX`
-
-* The [`STUDENT_NUMBER`](#student-number) must be valid and exist.
-* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**`config`**](#configure-class-manager-2023--config) command.
-
-Examples:
-* `absent s/A0245234A tut/1`
-
-[Back to Table of Contents](#table-of-contents)
-
----
-
 ### Mark a student as present : `present`
 
 Mark the tutorial attendance for an existing student as present in **Class Manager 2023**.
 
 Format: `present s/STUDENT_NUMBER tut/TUTORIAL_INDEX`
 
-* The [`STUDENT_NUMBER`](#student-number) must be valid and exist.
+* The [`STUDENT_NUMBER`](#student-number) must be valid and exist in **Class Manager 2023**.
 * The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**`config`**](#configure-class-manager-2023--config) command.
 
 Examples:
@@ -668,16 +653,17 @@ Examples:
 
 ---
 
-### Mark all displayed students as absent : `absent-all`
+### Mark a student as absent : `absent`
 
-Mark the tutorial attendance for all students in the current list displayed as absent in **Class Manager 2023**.
+Mark the tutorial attendance for an existing student as absent in **Class Manager 2023**.
 
-Format: `absent-all tut/TUTORIAL_INDEX`
+Format: `absent s/STUDENT_NUMBER tut/TUTORIAL_INDEX`
 
-* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**`config`**](#configure-class-manager-2023-config) command.
+* The [`STUDENT_NUMBER`](#student-number) must be valid and exist in **Class Manager 2023**.
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**`config`**](#configure-class-manager-2023--config) command.
 
 Examples:
-* `absent-all tut/1`
+* `absent s/A0245234A tut/1`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -693,6 +679,21 @@ Format: `present-all tut/TUTORIAL_INDEX`
 
 Examples:
 * `present-all tut/1`
+
+[Back to Table of Contents](#table-of-contents)
+
+---
+
+### Mark all displayed students as absent : `absent-all`
+
+Mark the tutorial attendance for all students in the current list displayed as absent in **Class Manager 2023**.
+
+Format: `absent-all tut/TUTORIAL_INDEX`
+
+* The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**`config`**](#configure-class-manager-2023-config) command.
+
+Examples:
+* `absent-all tut/1`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -752,9 +753,9 @@ Format: `view s/STUDENT_NUMBER`
 
 Example:
 
-* `view s/A0245234A`
+* `view s/A0241243A`
 
-<img alt="result for 'view s/A0245234A'" src="images/ViewCommand.png" width="700" >
+<img alt="result for 'view s/A0241243A'" src="images/ViewCommand.png" width="700" >
 
 Possible error and their corresponding message:
 * If [`STUDENT_NUMBER`](#student-number) does not belong to any student in **Class Manager 2023**.
@@ -811,24 +812,24 @@ Possible error and their corresponding message:
 | [**Toggle UI theme**](#toggle-ui-theme-theme)                    | `theme`                                          |
 
 ## Student list commands
-| Action                                                         | Format, Examples                                                                                                                                             |
-|----------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [**Add a student**](#add-a-student-add)                        | `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com s/A0245234A c/T11 t/friend` |
-| [**Comment on a student**](#comment-on-a-student-comment)      | `comment s/STUDENT_NUMBER cm/COMMENT` <br> e.g. `comment s/A0249112A cm/This student is very hardworking.`                                                   |
-| [**Delete all students**](#delete-all-students-clear)          | `clear`                                                                                                                                                      |
-| [**Delete one student**](#delete-one-student-delete)           | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                                      |
-| [**Edit a student's details**](#edit-a-student-s-details-edit) | `edit STUDENT_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`<br> e.g.`edit A0245234A n/John Bob p/98761234 e/johnd@exp.com`    |
-| [**List all students**](#list-all-students-list)               | `list`                                                                                                                                                       |
-| [**Lookup students**](#lookup-students-lookup)                 | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                                                   |
-| [**Tag a student**](#tag-a-student-tag)                        | `tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag s/A0123456N t/smart t/shy`                                                                  |
+| Action                                                         | Format, Examples                                                                                                                                              |
+|----------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [**Add a student**](#add-a-student-add)                        | `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com s/A0245234A c/T11 t/friend`  |
+| [**Comment on a student**](#comment-on-a-student-comment)      | `comment s/STUDENT_NUMBER cm/COMMENT` <br> e.g. `comment s/A0249112A cm/This student is very hardworking.`                                                    |
+| [**Delete one student**](#delete-one-student-delete)           | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                                       |
+| [**Delete all students**](#delete-all-students-clear)          | `clear`                                                                                                                                                       |
+| [**Edit a student's details**](#edit-a-student-s-details-edit) | `edit STUDENT_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`<br> e.g.`edit A0245234A n/John Doe p/98761234 e/johnd@example.com` |
+| [**List all students**](#list-all-students-list)               | `list`                                                                                                                                                        |
+| [**Lookup students**](#lookup-students-lookup)                 | `lookup [c/CLASS_NUMBER] [n/NAME] [p/PHONE] [e/EMAIL] [s/STUDENT_NUMBER] [t/TAG]` <br> e.g. `lookup c/T11`                                                    |
+| [**Tag a student**](#tag-a-student-tag)                        | `tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…​` <br> e.g. `tag s/A0123456N t/smart t/shy`                                                                   |
 
 ## Class information commands
 | Action                                                                                               | Format, Examples                                                                                                         |
 |------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
-| [**Mark a student as absent**](#mark-a-student-as-absent-absent)                                     | `absent s/STUDENT_NUMBER tut/TUTORIAL_SESSION` <br> e.g. `absent s/A0245234A tut/1`                                      |
 | [**Mark a student as present**](#mark-a-student-as-present-present)                                  | `present s/STUDENT_NUMBER tut/TUTORIAL_SESSION` <br> e.g. `present s/A0245234A tut/1`                                    |
-| [**Mark all displayed students as absent**](#mark-all-displayed-students-as-absent-absent-all)       | `absent-all tut/TUTORIAL_SESSION` <br> e.g. `absent-all tut/1`                                                           |
+| [**Mark a student as absent**](#mark-a-student-as-absent-absent)                                     | `absent s/STUDENT_NUMBER tut/TUTORIAL_SESSION` <br> e.g. `absent s/A0245234A tut/1`                                      |
 | [**Mark all displayed students as present**](#mark-all-displayed-students-as-present-present-all)    | `present-all tut/TUTORIAL_SESSION` <br> e.g. `present-all tut/1`                                                         |
+| [**Mark all displayed students as absent**](#mark-all-displayed-students-as-absent-absent-all)       | `absent-all tut/TUTORIAL_SESSION` <br> e.g. `absent-all tut/1`                                                           |
 | [**Record class participation for a student**](#record-class-participation-for-a-student-class-part) | `class-part s/STUDENT_NUMBER tut/TUTORIAL_SESSION part/PARTICIPATION` <br> e.g. `class-part s/A0245234A tut/1 part/true` |
 | [**Set assignment grade for a student**](#set-assignment-grade-for-a-student-grade)                  | `grade s/STUDENT_NUMBER a/ASSIGNMENT_NUMBER g/GRADE` <br> e.g. `grade s/A0245234A a/1 g/100`                             |
 | [**View a student's class information**](#view-a-student-s-class-information-view)                   | `view s/STUDENT_NUMBER` <br> e.g. `view s/A0245234A`                                                                     |
