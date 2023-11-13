@@ -504,9 +504,9 @@ The ability to delete multiple students was chosen as it provides greater effici
 
   The current implementation is preferred as it is more user-friendly, and provides the user with valuable information. Listing the information of students deleted allows the user to be able to check if they deleted the correct students. If a student was deleted by mistake, the user can easily reference the UI message containing the student's information to add them back, ensuring a more reliable and user-friendly experience.
 
-### \[Proposed\] Multiple Address Books for each Course
+### Separate Address Book for each Course
 
-#### Proposed Implementation
+#### Implementation
 
 In the `ModelManager` class, instead of storing an `AddressBook`, we instead store a `AddressBookManager`.
 
@@ -515,9 +515,18 @@ The `AddressBookManager` has a few responsibilities:
 - Setting the active `AddressBook`
 - Getting the active `AddressBook`
 
-The `getAddressBook` method in `ModelManager` is now a wrapper for the `getActiveAddressBook` method in
-`AddressBookManager`. This ensures that any existing commands will still "see" the model as having one `AddressBook`,
-and not break any existing functionality.
+Existing methods such as `saveAddressBook` in `AddressBookStorage` have been modified to store an `AddressBookManager` instead. The serialization and deserialization of `AddressBookManager` is also now handled by the nested `AddressBookManagerSerializer` class as well as `AddressBookManagerDeserializer` class within `AddressBookManager`. A `CourseCommand` is also added to facilitate the user switching address book, creating, deleting and editing them.
+
+Course commands are parsed with `CourseCommandParser`. If parsed successfully, it returns a `CourseCommand`.
+
+The following sequence diagram shows how `CourseCommand` works:
+
+![CourseCommandSeqDiagram](images/CourseCommandSeqDiagram.png)
+
+In this example, the user enters `course switch course/CS2103T`, to switch to another valid address book with course code "CS2103T".
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 #### Design considerations:
 
@@ -534,7 +543,7 @@ and not break any existing functionality.
 
   **Pros:**
     - Easier to understand: Developers who are new to the codebase do not need to learn and understand the
-    `AddressBookManager` class and its interactions, which could potentially increase the learning curve.
+    `AddressBookManager` class and its interactions, which could potentially increase the learning curve for the codebase.
 
   **Cons:**
     - Harder to maintain: In the future, should any changes be needed for address book management, there may need to refactor a significant portion of the codebase, as the logic is distributed. This can be error-prone and time-consuming.
