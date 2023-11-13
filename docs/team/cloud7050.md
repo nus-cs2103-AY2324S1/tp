@@ -3,6 +3,13 @@ layout: page
 title: Cloud7050's Project Portfolio Page
 ---
 
+<style>
+  h2, h3, h4 {
+    /* Greatly reduce, to same as margin-bottom */
+    margin-top: 15px !important;
+  }
+</style>
+
 <!-- NOTE After PDF conversion, overview + summary must not exceed 2 pages! -->
 
 ## Overview
