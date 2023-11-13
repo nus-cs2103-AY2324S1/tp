@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User uses department command;
+if () then ([add])
+    :Check duplicate name;
+    if (duplicate name) then (true)
+    :Invoke error;
+    else (false)
+    :Add Department;
+    endif
+else ([delete])
+    :Check name exists;
+    if (name exists) then (true)
+    fork
+        :Delete Department;
+    fork again
+        :Remove Department from
+        employees who are currently
+        in specific department;
+    end fork
+    else (false)
+    :Invoke error;
+    endif
+endif
+:ManageHR UI displays result of DepartmentCommand;
+stop
+@enduml

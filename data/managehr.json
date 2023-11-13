@@ -23,5 +23,8 @@
   "departments" : [ {
     "name" : "Janitor",
     "employees" : [ "Second Dude" ]
+  }, {
+    "name" : "s",
+    "employees" : [ ]
   } ]
 }
