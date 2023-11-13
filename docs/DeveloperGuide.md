@@ -1035,6 +1035,7 @@ Use case ends.
 
 - 2b. User inputs the invalid arguments for the command.
   - UniMate displays the user's calendar only, ignoring all the invalid arguments
+  - Use case ends.
 
 ### Non-Functional Requirements
 
