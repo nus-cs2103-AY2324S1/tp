@@ -290,7 +290,7 @@ Here is an example command where we delete the event at **index** 1:
 <div style="page-break-after: always;"></div>
 ### Enrolment Commands
 
-Enrolments are a way for you to manage your members’ involvement in your events. The enrolment commands below are the bread-and-butter for your participation tracking needs:
+Enrolments are a way for you to manage your members’ involvements in your events. The enrolment commands below are the bread-and-butter for your participation tracking needs:
 
 #### Enrol a Member to an Event: `enrol`
 
