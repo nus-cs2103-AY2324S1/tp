@@ -229,6 +229,8 @@ The following sequence diagram shows how the list by day command works.
 The `ListUnPaidCommand`  follows a similar implementation to `ListByDayCommand`. It is initialised with a `PaidPredicate` instead and updates
 the `FilteredPersonList` to only display Persons whose `isPaid` field is false.
 
+#### Design considerations:
+
 **Aspect: How to implement `ListByDayCommand` and `ListUnPaidCommand`:**
 
 * **Alternative 1 (current choice):** Extend the `ListCommand` class.
@@ -357,7 +359,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: How undo & redo executes**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
   * Pros: Easy to implement.
