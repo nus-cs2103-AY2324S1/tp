@@ -30,9 +30,29 @@ title: Developer Guide
     4. [Non-Functional Requirements](#non-functional-requirements)
     5. [Glossary](#glossary)
 7. [Appendix B: Instructions for Manual Testing](#appendix-b-instructions-for-manual-testing)
+   1. [B.1. Launch and Shutdown](#b1-launch-and-shutdown)
+   2. [B.2. View Sample Job Application List](#b2-view-sample-job-application-list)
+   3. [B.3. View Job Application List](#b3-view-job-application-list)
+   4. [B.4. Add Job Application](#b4-add-job-application)
+   5. [B.5. Delete Job Application](#b5-delete-job-application)
+   6. [B.6. Edit Job Application](#b6-edit-job-application)
+   7. [B.7. Add Interview to Job Application](#b7-add-interview-to-job-application)
+   8. [B.8. Delete Interview from Job Application](#b8-delete-interview-from-job-application)
+   9. [B.9. Edit Interview from Job Application](#b9-edit-interview-from-job-application)
+   10. [B.10. Sort Job Application List](#b10-sort-job-application-list)
+   11. [B.11. Find Job Application](#b11-find-job-application)
+   12. [B.12. Clear Job Application List](#b12-clear-job-application-list)
+   13. [B.13. Exit JobFindr](#b13-exit-jobfindr)
+   14. [B.14. Help](#b14-help)
 8. [Appendix C: Effort](#appendix-c-effort)
 9. [Appendix D: Planned Enhancements](#appendix-d-planned-enhancements)
-   1. 
+   1. [D.1. Warning for Clear Command](#d1-warning-for-clear-command)
+   2. [D.2. Enhanced Sort Feature](#d2-enhanced-sort-feature)
+   3. [D.3. Arrange Interviews in Chronological Order](#d3-arrange-interviews-in-chronological-order)
+   4. [D.4. Allow Interviews to have Multiple Types](#d4-allow-interviews-to-have-multiple-types)
+   5. [D.5. Enhanced User Customization](#d5-enhanced-user-customization)
+   6. [D.6. Improve Keyboard Functionality](#d6-improve-keyboard-functionality)
+   7. [D.7. Implement an Integrated Dashboard](#d7-implement-an-integrated-dashboard)
 
 ---
 
@@ -164,8 +184,24 @@ For more details about command-specific parsing and execution, refer to "[Implem
 ### Model Component
 
 **API:**
-[`Model.java`](https://github.com/migfoo02/tp/blob/master/src/main/java/seedu/application/model/Model.java)
+[`Model.java`](https://github.com/AY2324S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/application/model/Model.java)
 
+**Description:**
+The `Model` component is reponsible for encapsulating data and providing methods to modify the data.
+
+**Functionality:**
+The `Model` component,
+* stores the application book data i.e., all `Job` objects (which are contained in a `UniqueJobList` object).
+* stores the currently 'selected' `Job` objects 
+  (e.g., results of a `FindCommand`) as a separate _filtered_ list which is exposed to outsiders as 
+  an unmodifiable `ObservableList<Job>` that can be 'observed' 
+  e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores a `UserPref` object that represents the user’s preferences. 
+  This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* does not depend on any of the other three components 
+  (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+
+<img src="images/developer-guide/ModelClassDiagram.png" width="450" />
 
 
 ### Storage Component
@@ -273,20 +309,31 @@ The delete command allows the user to delete a job application using its index.
 
 #### Implementation
 
-The following sequence diagram illustrates the process of invocation for the command:
+The Delete feature is implemented through the `DeleteCommand` class along with `DeleteCommandParser` to parse the arguments
+for the command from the user input. 
 
-(insert UML sequence diagram)
+The following sequence diagram illustrates the process of executing a valid `delete` command.
 
-The `DeleteCommand` class implements this command. It accepts an index and deletes the job application at the specified
-index.
+<img src="images/developer-guide/DeleteCommandParserSequenceDiagram.png" />
 
-The `DeleteCommandParser` class is used to parse the arguments for the command from the user input. If the user input
-does not conform to the expected format e.g. the index is out of bounds, a `ParseException` is thrown. If the user input
-is
-valid,
-then `DeleteCommandParser` returns the corresponding `DeleteCommand`.
+<img src="images/developer-guide/DeleteCommandSequenceDiagram.png" />
+
+The `DeleteCommandParser` class parses the user input and creates an `DeleteCommand` object with the specified index.
+If the user input does not conform to the expected format e.g. the index is out of bounds, a `ParseException` is thrown.
+
+The `execute` method in `DeleteCommand` is then called, which retrieves the current list of jobs and deletes the job at 
+the specified index in the job list with `Model::deleteJob`.
 
 #### Design considerations
+
+1. **How to Delete Fields**
+* *Chosen implementation*: Only supports deleting the entire Job Application including all its fields.
+* *Alternative*: To enable the `delete` command to parse and delete specific optional fields of the application at the 
+  specified index, allow users to input specifiers (e.g. `delete 1 s/`) and modify `DeleteCommandParser` to parse the 
+  specifiers, removing the ones corresponding to the specifiers.
+  * *Pros*: More flexibility in changing the fields of an application.
+  * *Cons*: Good to have but not a necessary feature as users can simply `edit` the fields and set them to 
+    the default (eg. TO_ADD_STATUS)
 
 ---
 
@@ -298,12 +345,19 @@ The list command allows the user to view the list of all job applications.
 
 The following sequence diagram illustrates the process of invocation for the command:
 
-(insert UML diagram here)
+<img src="images/developer-guide/ListCommandSequenceDiagram.png" />
 
 The `ListCommand` class implements this command. It sets the predicate for the `filteredList` of `Model` to
 `PREDICATE_SHOW_ALL_JOBS` which evaluates any `Job` to true.
 
 #### Design Considerations
+
+1. **Implementing listing by `sort` order**
+    * Lists all applications by the date added if no `sort` command was performed, 
+      otherwise lists by the most recent `sort` order. 
+    * *Pros*: User is able to maintain the list in the preferred sorted order even after performing other commands such 
+      as `delete` and `find`.
+    * *Cons*: The sorting order by date added is lost once `sort` by other fields is performed.
 
 ---
 
@@ -545,8 +599,6 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 | `***`    | user   | mark the status of each application                                               | keep track of application progress               |
 | `***`    | user   | delete job applications that are no longer relevant                               | update my list according to my current interests |
 | `***`    | user   | view all applications I have added                                                |                                                  |
-
-*{More to be added}*
 
 ---
 
@@ -855,8 +907,8 @@ otherwise.
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **CLI**: Command Line Interface
-* **GUI**: Graphical User Interface
+* **CLI**: Command Line Interface. A user interface that allows users to interact with the software using text commands via a console or terminal.
+* **GUI**: Graphical User Interface. A user interface that allows users to interact with the software through graphical icons and visual indicators, as opposed to text-based interfaces.
 * **UI**: User Interface
 * **MSS**: Main Success Scenario
 * **Job Application**: A record of a job application that contains relevant information.
@@ -1087,7 +1139,14 @@ Given below are instructions to test the app manually.
 
 ## **Appendix C: Effort**
 
-Explain the difficulty level, challenges faced, effort required, and achievements of the project.
+### Working with JavaFX
+
+JavaFX is a GUI library that was briefly taught as part of our individual project. While the tutorial was helpful in giving us a basic understanding of JavaFX, we still had to spend a significant amount of time learning how to use JavaFX to implement the GUI for JobFindr. This was especially challenging as we had to learn how to use JavaFX while implementing the GUI for JobFindr at the same time. Challenges include:
+* **Learning how to use SceneBuilder:** SceneBuilder was introduced as a useful framework to expedite the process of using JavaFX to implement the GUI. However, SceneBuilder proved to be difficult to use as it was not intuitive and lacks the flexibility needed to implement certain features that we wanted to include. For example, we wanted to include a `JobDetailsPanel` to display the fields and interviews of a job application. However, SceneBuilder lacked the necessary tools to allow us to customize the `JobDetailsPanel` to our liking. We ended up having to implement the `JobDetailsPanel` manually using JavaFX.
+* **Learning how to use CSS:** We wanted to use CSS to customize the look and feel of the GUI. However, we had no prior experience with CSS and had to spend a significant amount of time learning how to use CSS to customize the GUI. We also had to learn how to use CSS with JavaFX as there were some differences between using CSS with JavaFX and using CSS with HTML.
+* **Overall Steep Learning Curve:** There are many intricacies within JavaFX that were not extensively covered in the tutorials provided. We had to do a lot of research to figure out how to implement JavaFX features. For example, we had to modify the `CommandResult` class to support updating the `JobDetailsPanel` whenever an interview is added, edited or deleted. 
+
+
 
 ---
 
@@ -1095,7 +1154,7 @@ Explain the difficulty level, challenges faced, effort required, and achievement
 
 The current implementation of JobFindr allows users to manage their job applications relatively efficiently through a CLI. However, we have identified several areas for improvement in terms of flexibility, efficiency and organization. As such, our proposed enhancements are targeted at improving these areas.
 
-### Warning for Clear Command
+### D.1. Warning for Clear Command
    
 #### Current State
 The `clear` command executes without any prior warning, risking accidental deletion of all job applications without warning.
@@ -1107,7 +1166,7 @@ We plan to introduce a confirmation step before the execution of the `clear` com
 * **Confirmation Prompt:** Introduce an interactive prompt requiring explicit user confirmation before executing the `clear` command.
 * **Command-Line Argument:** Optionally, provide a command-line argument to bypass the confirmation for automated scripts.
 
-### Enhanced Sort Feature
+### D.2. Enhanced Sort Feature
 
 #### Current State
 
@@ -1123,7 +1182,7 @@ We plan to make `sort` show all the job applications with empty optional fields 
 * **Updated User Interface:** Update the user interface to show all the job applications with empty optional fields at the top of the list after sorting based on an optional field.
 * **Performance Considerations:** The sorting algorithm should be efficient enough to handle a large number of job applications.
 
-### Arrange Interviews in Chronological Order
+### D.3. Arrange Interviews in Chronological Order
 
 #### Current State
 
@@ -1137,7 +1196,7 @@ We plan to arrange interviews in chronological order for each job application.
 
 * **Add Field Comparator:** Add a field comparator to sort the interviews in chronological order, much like how `deadline` is sorted.
 
-### Allow Interviews to have Multiple Types
+### D.4. Allow Interviews to have Multiple Types
 
 #### Current State
 
@@ -1152,13 +1211,47 @@ We plan to allow users to add multiple types to each interview. An interview can
 * **Modify Interview Type Field:** Modify the interview type field to be a `Set` instead of a `String`. This allows users to add multiple types to each interview.
 * **Update User Interface:** Update the user interface to support displaying the multiple interview types as a `String`.
 
-1. User Customisation
-* Allow users to add their own fields to the job application
-* Allows users to choose which fields are shown.
+### D.5. Enhanced User Customization
 
-2. Keyboard Shortcuts
-* Allow users to use keyboard shortcuts to execute commands for faster execution.
+#### Current State
 
-3. Integrated Dashboard
-* Allow users to view their job applications on a dashboard, enabling them to view their progress at a glance.
+The`add` command only allows users to add fields that are already defined in the `Job` class. This is not flexible enough as users may want to add their own fields to the job application. Moreover, users are unable to choose which fields are shown in the job application list.
 
+#### Planned Enhancement
+
+We plan to allow users to add their own fields to the job application and choose which fields are shown in the job application list.
+
+#### Implementation Details
+
+* **Add Custom Fields:** Allow users to add their own fields to the job application.
+* **Choose Fields to Show:** Add a toggle that allows users to choose which fields are shown in the job application list.
+
+### D.6. Improve Keyboard Functionality
+
+#### Current State
+
+The `JobFindr` application currently does not support keyboard shortcuts. This is not ideal as experienced users may want to execute commands using keyboard shortcuts for faster execution.
+
+#### Planned Enhancement
+
+We plan to allow users to use keyboard shortcuts to execute commands for faster execution.
+
+#### Implementation Details
+
+* **Add Keyboard Shortcuts:** Add specific listeners to the `JobFindr` application to listen for keyboard shortcuts. When a keyboard shortcut is detected, the corresponding command is executed.
+* **Update User Interface:** Update the user interface to support keyboard shortcuts.
+
+### D.7. Implement an Integrated Dashboard
+
+#### Current State
+
+The `JobFindr` application currently only displays a list of job applications. This is not ideal as users may want to view their job applications in a more organized manner. For example, users may want to view their job applications categorized by a specified field.
+
+#### Planned Enhancement
+
+We plan to implement an integrated dashboard that allows users to view their job applications in a more organized manner.
+
+#### Implementation Details
+
+* **Update User Interface:** Update the user interface to support the integrated dashboard. This involves adding panels to display multiple lists of job applications categorized by a specified field.
+* **Modify `Sort` command:** Modify the `sort` command to support sorting by multiple fields. This allows users to sort the job applications in the integrated dashboard by multiple fields.
