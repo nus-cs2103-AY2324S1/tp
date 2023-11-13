@@ -331,7 +331,16 @@ public class ParserUtil {
         if (tagScorePairArr.length != 2) {
             throw new ParseException("Invalid score, score must be non-negative integer.");
         }
-        Tag tag = parseTag(tagScorePairArr[0], "");
+
+        UniqueTagList uniqueTagList = new UniqueTagList();
+        String tagName = tagScorePairArr[0];
+        String tagCategory = "";
+        if (uniqueTagList.contains(new Tag(tagName, "assessment"))) {
+            tagCategory = "assessment";
+        }
+        Tag tag = parseTag(tagName, tagCategory);
+
+
         if (!ScoreList.isValidScoreTag(tag)) {
             throw new ParseException("Invalid score tag, tag must a tag of the category "
                     + "assessment and must exist on the applicant" + " (made using "
