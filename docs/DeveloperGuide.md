@@ -351,6 +351,7 @@ Step 3. `EditFieldCommand` is executed, and with the `CommandType.EDIT_FIELD` ca
 ![EditFieldSequenceDiagram.png](images/EditFieldSequenceDiagram.png)
 
 <br>
+<div style="page-break-after: always;"></div>
 
 #### Saving the Changes in Profile Page Feature 
 
@@ -1277,6 +1278,8 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `sort`<br>
        Expected: The whole list of fosterers will be sorted alphabetically. Command success message is shown.
+
+<div style="page-break-after: always;"></div>
 
 ### Viewing Statistics of Fosterers
 1. Viewing statistics of available fosterers
