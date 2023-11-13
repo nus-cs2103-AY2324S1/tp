@@ -21,7 +21,7 @@
       </padding>
       <HBox alignment="CENTER_LEFT" spacing="5">
 
-        <VBox prefWidth="300">
+        <VBox prefWidth="300" minWidth="175">
           <HBox>
             <Label fx:id="id" styleClass="cell_big_label">
               <minWidth>
@@ -46,12 +46,12 @@
           <Label fx:id="nric" styleClass="cell_medium_label" text="\$nric" />
           </HBox>
         </VBox>
-        <VBox prefWidth="300">
+        <VBox prefWidth="300" minWidth="200">
           <Label styleClass="cell_big_label" text="Contacts" />
           <Label fx:id="phone" styleClass="cell_small_label" text="\$phone"/>
           <Label fx:id="email" styleClass="cell_small_label" text="\$email"/>
         </VBox>
-        <VBox prefWidth="300">
+        <VBox prefWidth="300" maxWidth="300">
           <Label styleClass="cell_big_label" text="Allergies" />
           <FlowPane fx:id="allergies" />
         </VBox>
