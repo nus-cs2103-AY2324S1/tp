@@ -201,11 +201,13 @@ This is a tutorial for new CampusCompanion users. This tutorial will provide you
 command for both assignments and internships. 
 
 1. Launch CampusCompanion. You may refer to the instructions [here](#getting-started).
+
 2. Let's change the view to see assignments first. Enter the command `list-a`
-![NewUserTutListA.png](images%2FNewUserTutListA.png)
+<img src="images/NewUserTutListA.png" width="500" />
+
 3. Let's try **adding an assignment** to CampusCompanion. Enter the command
 `add-a n/CC tutorial 1 e/2023-11-29`
-![NewUserTutAdd1.png](images%2FNewUserTutAdd1.png)
+<img src="images/NewUserTutAdd1.png" width="500" />
 
 4. Add a few more assignments. Try out filling optional parameters as well, etc
  - `add-a n/CS2100 Assignment 1 e/2023-11-30 13:00 t/Coding`
@@ -213,52 +215,63 @@ command for both assignments and internships.
    - Note: On adding assignments, they will automatically be sorted by their deadlines.
    The assignment due earliest will be first in the assignments list, which can be viewed using `list-a`
 
-   ![NewUserTutAddMoreAssgn.png](images%2FNewUserTutAddMoreAssgn.png)
+ <img src="images/NewUserTutAddMoreAssgn.png" width="500" />
 
 5. Let us try editing the description of `CC tutorial 1` to say `nice descriptive description!`.
 In the example above, `CC tutorial 1` is in index 2, so we do `edit-a i/2 d/nice descriptive description!`
-![NewUserTutEdit.png](images%2FNewUserTutEdit.png)
+
+<img src="images/NewUserTutEdit.png" width="500" />
 
 6. We are done with `CC tutorial 1`! Let's now mark it as complete. First, let's try using `find-a` to filter and narrow
 down the list. We can do `find-a tutorial` to filter the assignments list to show only assignments that
 contain `tutorial`
-![NewUserTutFind.png](images%2FNewUserTutFind.png)
+
+<img src="images/NewUserTutFind.png" width="500" />
 
 7. Then, we use the index shown in the list (in this case, `CC tutorial 1` is at index 1) and do `mark-a 1` to mark the assignment as completed
-![NewUserTutMark.png](images%2FNewUserTutMark.png)
+
+<img src="images/NewUserTutMark.png" width="500" />
 
 8. To see all our assignments again, let's do `list-a`
-![NewUserTutList.png](images%2FNewUserTutList.png)
+
+<img src="images/NewUserTutList.png" width="500" />
 
 9. Lastly for our assignments, let's delete our `CC tutorial 1` as we no longer want to track it.
 With reference the picture above, we will do `delete-a 2`
-![NewUserTutDelete.png](images%2FNewUserTutDelete.png)
+
+<img src="images/NewUserTutDelete.png" width="500" />
 
 10. Now, let's change the view to see internships. Enter the command `list-i`
-![NewUserTutListI.png](images%2FNewUserTutListI.png)
+
+<img src="images/NewUserTutListI.png" width="500" />
 
 11. Similar to assignments, we can add internship roles (under applications) and tasks! Let's add a few roles now using the command `add-i-role`
  - `add-i-role n/Google r/SWE c/Summer 2024`
  - `add-i-role n/FaceBook r/DevOps c/Winter 2024 d/Impress Mr Mark p/9500 o/follow-up l/Florida`
-![NewUserTutAddIRoles.png](images%2FNewUserTutAddIRoles.png)
+
+<img src="images/NewUserTutAddIRoles.png" width="500" />
 
 12. Now, let's add in some tasks relating to our roles, with `add-i-task`
  - `add-i-task n/OA i/1  e/2023-11-30 11:30` 
  - `add-i-task n/Interview i/1 e/2023-12-10 16:00 o/follow-up`
  - `add-i-task n/OA i/2 e/2023-11-29 17:30 s/complete o/follow-up`
-![NewUserTutAddITasks.png](images%2FNewUserTutAddITasks.png)
+
+<img src="images/NewUserTutAddITasks.png" width="500" />
 
 13. We can also mark tasks as complete with `mark-i` and edit tasks and roles using `edit-i-task` and `edit-i-role` respectively. Let's try!
  - `mark-i 2`
  - `edit-i-task i/1 o/awaiting`
  - `edit-i-role i/1 c/Winter 2024 d/Prepare for google questions p/12500 l/Labrador Park`
-![NewUserTutMarkEditI.png](images%2FNewUserTutMarkEditI.png)
+
+<img src="images/NewUserTutMarkEditI.png" width="500" />
 
 14. Lastly, let's find Google with `find-i-role google` and delete the completed Google OA task with `delete-i-task 1`
-![NewUserTutFindDeleteI.png](images%2FNewUserTutFindDeleteI.png)
+
+<img src="images/NewUserTutFindDeleteI.png" width="500" />
 
 15. We can view our internships list again with `list-i`
-![NewUserTutLastListI.png](images%2FNewUserTutLastListI.png)
+
+<img src="images/NewUserTutLastListI.png" width="500" />
 
 16. Congratulations! You are now ready to use CampusCompanion.
 
