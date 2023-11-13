@@ -16,7 +16,7 @@ import java.util.NoSuchElementException;
  * {@code next()} and {@code previous()}, the next and previous elements are returned respectively.
  */
 public class ListElementPointer {
-    private List<String> list;
+    private final List<String> list;
     private int index;
 
     /**
@@ -58,6 +58,11 @@ public class ListElementPointer {
         return isWithinBounds(index);
     }
 
+    /**
+     * Returns true if {@code index} is within the bounds of the list.
+     * @param index must be a non-negative integer.
+     * @return true if {@code index} is within the bounds of the list.
+     */
     private boolean isWithinBounds(int index) {
         return index >= 0 && index < list.size();
     }

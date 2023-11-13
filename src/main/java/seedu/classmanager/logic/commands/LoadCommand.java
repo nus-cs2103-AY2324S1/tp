@@ -63,7 +63,15 @@ public class LoadCommand extends Command {
             throw new CommandException(String.format(MESSAGE_FILE_NOT_FOUND, fileName));
         }
         requireNonNull(model);
+        ReadOnlyClassManager newData = getNewData();
 
+        model.setClassManagerFilePath(filePath);
+        model.loadReset(newData);
+
+        return new CommandResult(String.format(MESSAGE_LOAD_SUCCESS, fileName), false, false, true, false);
+    }
+
+    private ReadOnlyClassManager getNewData() throws CommandException {
         ClassManagerStorage tempClassManagerStorage = new JsonClassManagerStorage(filePath);
         Optional<ReadOnlyClassManager> classManagerOptional;
         ReadOnlyClassManager newData;
@@ -73,11 +81,7 @@ public class LoadCommand extends Command {
         } catch (DataLoadingException e) {
             throw new CommandException(String.format(MESSAGE_FILE_CANNOT_LOAD, fileName));
         }
-
-        model.setClassManagerFilePath(filePath);
-        model.loadReset(newData);
-
-        return new CommandResult(String.format(MESSAGE_LOAD_SUCCESS, fileName), false, false, true, false);
+        return newData;
     }
 
     /**

@@ -35,10 +35,27 @@ public class MarkPresentAllCommand extends Command {
         this.index = index;
     }
 
+    /**
+     * Marks all displayed students' attendance as present.
+     * @param model {@code Model} which the command should operate on.
+     * @param commandHistory The command history to record this command.
+     * @return A {@code CommandResult} with the feedback message of the operation result.
+     * @throws CommandException If an error occurs during command execution.
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
+        markPresentAll(model);
+        model.commitClassManager();
+        return new CommandResult(MESSAGE_MARK_SUCCESS);
+    }
 
+    /**
+     * Helper function to mark all displayed students' attendance as present.
+     * @param model {@code Model} which the command should operate on.
+     * @throws CommandException If an error occurs during command execution.
+     */
+    private void markPresentAll(Model model) throws CommandException {
         List<Student> lastShownList = model.getFilteredStudentList();
 
         for (Student studentToMark : lastShownList) {
@@ -49,9 +66,6 @@ public class MarkPresentAllCommand extends Command {
                 model.setSelectedStudent(markedStudent);
             }
         }
-        model.commitClassManager();
-
-        return new CommandResult(MESSAGE_MARK_SUCCESS);
     }
 
     @Override

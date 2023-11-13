@@ -45,9 +45,11 @@ Given below are my contributions to the project.
     * Viewing Help
     * Adding a Student
     * Adding comment to a student
+    * Add explanation on data visualisation segment
     * Added to glossary
   * Developer Guide:
     * Added explanation and design considerations for the Class Details (Added UML Diagrams in this section)
+    * Added explanation for Data visualisation
     * Added product scope and user stories
     * Added manual testing appendix and test cases
 
