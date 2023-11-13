@@ -348,7 +348,7 @@ The `FindCommand` class, enables keyword-based searches for individuals. This in
 - **Example**: `find Alice Bob`
   - Searches for entries containing 'Alice', 'Bob', or both.
 
-##### feature implementation
+##### Function implementation
 
 - **Execution**: `FindCommand.execute` filters entries using the provided keywords and returns a `CommandResult` with the count of matches.
 - **Filtering**: Uses `NameContainsKeywordsPredicate` to identify matching entries based on names or descriptions.
@@ -552,9 +552,8 @@ LinkTree provides feedback based on whether the operation was successful or not.
 
 The choice between these alternatives depends on your specific project requirements and architectural preferences.
 
-### Feature: Find Team by Keywords
+### Find Team by Keywords
 
-#### Introduction
 The `findteam` command, implemented in the `FindTeamCommand` class, allows users to search for teams using keywords. This command extends the `Command` class and uses `TeamContainsKeywordsPredicate` for keyword-based filtering.
 
 #### Usage
