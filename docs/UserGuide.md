@@ -156,7 +156,7 @@ Format: `edit INDEX [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [e/EMAIL] [a/ADDRESS] [
   * `c/!@#NO_COMPANY!@#` or 
   * `pi/01-01-1000` or 
   * `pe/01-01-1000` or 
-  * `pn/NO_POLICY`, as per the 'Format' mentioned above.
+  * `pn/NOPOLICY`, as per the 'Format' mentioned above.
 
 </div>
 
