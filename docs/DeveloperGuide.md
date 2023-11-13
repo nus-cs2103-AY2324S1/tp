@@ -55,6 +55,8 @@ Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
+<div style="page-break-after: always;"></div>
+
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <puml src="diagrams/ComponentManagers.puml" width="300" />
@@ -170,6 +172,8 @@ The following sequence diagram shows how the `filter` command works. In this exa
 When the `FilterCommandParser` parses the arguments to the `FilterCommand`, it creates a `StudentPredicateList`, to which the relevant predicates specified within the command are added. For example, using the example command given above, the `StudentPredicateList` would consist of 2 predicates: a `StudentTakesSubjectPredicate` and a `StudentIsGenderPredicate`.
 These predicates are then combined into a single `Predicate<Student>`, using the `and()` method from the `Predicate` interface.
 
+<div style="page-break-after: always;"></div>
+
 The following activity diagram summarizes what happens when a user executes a `filter` command:
 
 <puml src="diagrams/FilterActivityDiagram.puml" alt="FilterActivityDiagram" width="300" />
@@ -211,6 +215,8 @@ When the `AddressBookParser` parses the argument, it creates either `UpdateSecLe
 The following activity diagram summarizes what happen when a user executes a `UpdateSecLevelCommand`.
 
 <puml src="diagrams/UpdateSecLevelActivityDiagram.puml" alt="UpdateSecLevelActivityDiagram" width="750" />
+
+<div style="page-break-after: always;"></div>
 
 #### Design considerations:
 
@@ -254,6 +260,8 @@ The following activity diagram summarizes what happens when a user executes a `s
 
 <puml src="diagrams/SortActivityDiagram.puml" alt="SortActivityDiagram" width="250" />
 
+<div style="page-break-after: always;"></div>
+
 #### Design considerations:
 
 **Aspect: How the student list is sorted internally:**
@@ -268,7 +276,7 @@ The following activity diagram summarizes what happens when a user executes a `s
   * Pros:
     * Enable users to view the unsorted student list for every launch.
   * Cons:
-    * Users have to resort the student list for every launch.
+    * Users have to re-sort the student list for every launch.
 * We made the choice of Alternative 1 over Alternative 2 as we insist on providing greater convenience.
 
 <div style="page-break-after: always;"></div>
@@ -328,6 +336,8 @@ The following sequence diagram shows how the `table` command works. In this exam
 
 As shown in the sequence diagram, when the `AddressBookParser` parses the arguments to the TableCommand, it creates a TableCommand instance by passing in `s/` as argument so that when this `TableCommand` execute, it will return a `SubjectTableCommandResult` instance as specified by `s/`.
 
+<div style="page-break-after: always;"></div>
+
 The following activity diagram summarizes what happens when a user executes a `table` command:
 
 <puml src="diagrams/TableActivityDiagram.puml" alt="TableActivityDiagram" width="300" />
@@ -368,6 +378,8 @@ This predicate is then passed into the current model, using the `export()` metho
 The following activity diagram summarizes what happens when a user executes a `export` command:
 
 <puml src="diagrams/ExportActivityDiagram.puml" alt="ExportActivityDiagram" width="300" />
+
+<div style="page-break-after: always;"></div>
 
 #### Design considerations:
 
