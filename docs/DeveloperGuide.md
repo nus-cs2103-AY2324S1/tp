@@ -520,9 +520,9 @@ The main window then updates the sorting status displayed in the status bar.
 
 Current displayed contacts:
 
-| Sorting          | Filter       |
-|------------------|--------------|
-| name, descending | tag "friend" |
+| Sorting          | Filter                  |
+|------------------|-------------------------|
+| name, descending | tag containing "friend" |
 
 The following sequence diagram shows how the sort operation works:
 
