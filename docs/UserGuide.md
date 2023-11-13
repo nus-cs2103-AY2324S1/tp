@@ -1303,7 +1303,8 @@ dtagp
 | Fields | Prefix | Required | Remarks |
 |--------|--------|:--------:|---------|
 | `INDEX` | No prefix | <img width=30px src='assets/svg/ug/required.svg'> | The person at this index in the displayed contact list is edited. The index must be a positive integer (i.e. 1, 2, 3, … , 2147483647). |
-| `TAG` | `t/` | <img width=33px src='assets/svg/ug/required.svg'> | Tag(s) for the person. Tags should only contain alphanumeric characters. |
+| `TAG` | `t/` | <img width=30px src='assets/svg/ug/required.svg'> | Tag to be deleted from the person. Tags should only contain alphanumeric characters. |
+| `MORE_TAGS` | `t/` | <img width=33px src='assets/svg/ug/not_required.svg'> | Additional tag(s) to be deleted from the person. Tags should only contain alphanumeric characters. |
 {: .field-table}
 
 - You may delete multiple tags from a person by specifying the `t/` prefix multiple times.
@@ -1349,7 +1350,8 @@ dtagt
 | Fields | Prefix | Required | Remarks |
 |--------|--------|:--------:|---------|
 | `INDEX` | No prefix | <img width=30px src='assets/svg/ug/required.svg'> | The task at this index in the displayed task list is edited. The index must be a positive integer (i.e. 1, 2, 3, … , 2147483647). |
-| `TAG` | `t/` | <img width=33px src='assets/svg/ug/required.svg'> | Tag(s) for the task. Tags should only contain alphanumeric characters. |
+| `TAG` | `t/` | <img width=30px src='assets/svg/ug/required.svg'> | Tag to be deleted from the task. Tags should only contain alphanumeric characters. |
+| `MORE_TAGS` | `t/` | <img width=33px src='assets/svg/ug/not_required.svg'> | Additional tag(s) to be deleted from the task. Tags should only contain alphanumeric characters. |
 {: .field-table}
 
 - You may delete multiple tags from a task by specifying the `t/` prefix multiple times.
