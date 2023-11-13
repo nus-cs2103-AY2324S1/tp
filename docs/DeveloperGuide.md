@@ -1057,41 +1057,247 @@ testers are expected to do more *exploratory* testing.
 ### Launch and shutdown
 
 1. Initial launch
+  1. Download the jar file and copy into an empty folder
 
-    1. Download the jar file and copy into an empty folder
-
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+  1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+  1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+  2. Re-launch the app by double-clicking the jar file.<br>
+     Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. Shutting down via command
+
+1. Launch the app.
+
+2. Type `exit` into the input box and press `ENTER`.
+
+4. Shutting down via `file`
+
+1. Launch the app.
+
+2. Click on `file` in the top menu bar.
+
+3. Click on `exit` in the dropdown menu.
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+  1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+  2. Test case: `delete 1`<br>
+     Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+  3. Test case: `delete 0`<br>
+     Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
+  4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+     Expected: Similar to previous.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+  1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+### Filtering all persons while all persons are being shown.
+
+Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+1Test case: `filter n/ p/ e/` <br>
+Expected: All persons displayed.
+
+1. Test case: `filter n/o` <br>
+   Expected: All persons with an "o" in their name displayed.
+
+2. Test case: `filter n/o p/8 e/@ t/CS t/10` <br>
+   Expected: All persons with an "o" in their name, an "8" in their phone number, a tag that contains "CS" and a tag
+   that contains "10" displayed.
+
+3. Test case: `filter` <br>
+   Expected: Error message displayed that states that the command format is invalid. all persons shown.
+
+### Sorting all persons while all persons are shown.
+
+Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+1. Test case: `sort /byname` <br>
+   Expected: All persons sorted alphabetically by name.
+
+2. Test case: `sort /byname /reverse` <br>
+   Expected: All persons sorted in reverse alphabetical order by name.
+
+3. Test case: `sort /byemail` <br>
+   Expected: All persons sorted by email.
+
+4. Test case: `sort /byphone` <br>
+   Expected: All persons sorted by phone number.
+
+5. Test case: `sort /byaddress` <br>
+   Expected: All persons sorted by address.
+
+6. Test case: `sort` <br>
+   Expected: Error message displayed indicating invalid command format.
+
+### Adding an event
+
+Prerequisite: Empty event list.
+
+1. Test case: `addEvent d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59` <br>
+   Expected: New event added with description "Cry about deadlines", start date and time "2023-01-01 00:01" and end date
+   and time "2023-12-31 23:59".
+2. Test case: `addEvent d/Laugh about deadlines ts/2023-01-02 00:01 te/2023-01-01 23:59` <br>
+   Expected: Error message displayed indicating invalid event period.
+3. Test case: `addEvent d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59` <br>
+   Then, re-enter: `addEvent d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59` <br>
+   Expected: Error message displayed indicating conflicting event timing.
+
+### Deleting an event
+
+Prerequisite: Empty event list.
+
+1. Test case: Enter `addEvent d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59` <br>
+   Then enter: `deleteEvent 2023-02-02 00:01` <br>
+   Expected: Event is created and then successfully deleted
+2. Test case: `deleteEvent 2023-02-02 00:01` <br>
+   Expected: Error message displayed indicating no event found at specified time.
+
+### Clearing events within time range
+
+Prerequisite: Empty event list.
+
+1. Test case: Enter `addEvent d/Cry about deadlines ts/2023-01-01 00:01 te/2023-01-02 23:59` <br>
+   Enter `addEvent d/Cry about deadlines ts/2023-01-03 00:01 te/2023-01-04 23:59` <br>
+   Enter `clearEvents ts/2023-01-01 00:02 te/2023-01-04 23:00` <br>
+   Expected: All events in Calendar deleted.
+2. Test case: `clearEvents ts/2023-01-01 00:02 te/2023-01-04 23:00` <br>
+   Expected: Error message displayed indicating no events found in time range.
+3. Test case: Enter `addEvent d/Cry about deadlines ts/2023-01-01 00:01 te/2023-01-02 23:59` <br>
+   Enter `clearEvents ts/2023-01-01 00:02 te/2023-01-04 23:00` <br>
+   Expected: All events in Calendar deleted.
+
+### Switching the bottom list display
+
+Prerequisite: Event list currently being displayed.
+
+1. Test case: `switchList` <br>
+   Expected: Task list is displayed.
+2. Test case: `switchList 123` <br>
+   Expected: Task list is displayed.
+
+### Adding an event for another person
+
+Prerequisite: 1 person in AddressBook, person currently has no events.
+
+1. Test case: `addContactEvent 1 d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59` <br>
+   Expected: New event added with description "Cry about deadlines", start date and time "2023-01-01 00:01" and end date
+   and time "2023-12-31 23:59".
+2. Test case: `addContactEvent 1 d/Laugh about deadlines ts/2023-01-02 00:01 te/2023-01-01 23:59` <br>
+   Expected: Error message displayed indicating invalid event period.
+3. Test case: `addContactEvent 1 d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59` <br>
+   Then, re-enter: `addContactEvent 1 d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59` <br>
+   Expected: Error message displayed indicating conflicting event timing.
+
+### Deleting an event for another person
+
+Prerequisite: 1 person in AddressBook, person currently has no events.
+
+1. Test case: Enter `addContactEvent 1 d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59` <br>
+   Then enter: `deleteContactEvent 1 2023-02-02 00:01` <br>
+   Expected: Event is created and then successfully deleted
+2. Test case: `deleteContactEvent 1 2023-02-02 00:01` <br>
+   Expected: Error message displayed indicating no event found at specified time.
+
+### Editing an event for another person
+
+Prerequisite: 1 person in AddressBook, person currently has no events.
+
+1. Test case: `addContactEvent 1 d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59` <br>
+   Then enter: `editContactEvent 1 1 d/Edited Description` <br>
+   Expected: A new event is added for the person in the AddressBook, then the description of that contact is edited to be "Edited Description".
+2. Test case: `addContactEvent 1 d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59` <br>
+   Then enter: `editContactEvent 1 1 ts/2023-01-01 00:20` <br>
+   Expected: A new event is added for the person in the AddressBook, then the start time is edited to be 2023-01-01 00:20
+3. Test case: `addContactEvent 1 d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59` <br>
+   Then enter: `editContactEvent 1 1 ts/2023-01-03 00:20` <br>
+   Expected: Error message is displayed that indicates that the start date should be before the end date.
+4. Test case: `addContactEvent 1 d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59` <br>
+   Then enter: `editContactEvent 1 1 te/2023-01-04 00:20` <br>
+   Expected: A new event is added for the person in the AddressBook, then the end time is edited to be 2023-01-04 00:20.
+5. Test case: `addContactEvent 1 d/Cry about deadlines ts/2023-01-02 00:01 te/2023-12-31 23:59` <br>
+   Then enter: `editContactEvent 1 1 t3/2023-01-01 00:20` <br>
+   Expected: Error message is displayed that indicates that the start date should be before the end date.
+6. Test case: `addContactEven` <br>
+   Expected: Error message displayed indicating that the command format is invalid.
+
+### Viewing events of another person
+
+Prerequisite: 1 person in AddressBook, person currently has no events.
+
+1. Test case: `viewContactEvents 1` <br>
+   Expected: Empty event list is displayed in a pop-up
+2. Test case: Enter `addContactEvent 1 d/Cry about deadlines ts/2023-01-01 00:01 te/2023-12-31 23:59` <br>
+   Then enter: `viewContactEvents 1` <br>
+   Expected: Event list displayed in a pop-up with 1 event listed.
+3. Test case: `viewContactEvents 2` <br>
+   Expected: Error message displayed indicating that the index indicated is invalid.
+4. Test case: `viewContactEvents` <br>
+   Expected: Error message displayed indicating that the command format is invalid.
+
+### Comparing Calendars of multiple people
+
+Prerequisite: 3 persons in AddressBook.
+
+1. Test case: `compareCalendars` <br>
+   Expected: User's calendar is shown.
+2. Test case: `compareCalendars 1 3` <br>
+   Expected: Calendar comparison is shown in a pop-up with the comparison being between the user, the person of index 1 and the person of index 3.
+3. Test case: `compareCalendars 4` <br>
+   Expected: Error message displayed indicating that the index indicated is invalid.
+
+### Comparing Calendars of multiple people via tags
+
+Prerequisite: 3 persons in AddressBook, 2 persons have the tag "CS2103".
+
+1. Test case: `compareGroupCalendars` <br>
+   Expected: User's calendar is shown.
+2. Test case: `compareGroupCalendars CS2103` <br>
+   Expected: Calendar comparison is shown in a pop-up with the comparison being between the user and the two people with the "CS2103" tag.
+
+### Adding a task
+
+Prerequisite: No tasks in the task list.
+
+1. Test case: `addTask d/Hydrate te/2023-11-13 22:30` <br>
+   Expected: A new task is added with description "Hydrate" and deadline of 2023-11-13 22:30.
+2. Test case: `addTask d/Hydrate` <br>
+   Expected: A new task is added with description "Hydrate" and no deadline.
+3. Test case: Enter `addTask d/Hydrate te/2023-11-13 22:30` <br>
+   Then enter: `addTask d/Hydrate te/2023-11-13 22:30` <br>
+   Expected: Error message displayed indicating that there is a conflicting task.
+
+### Deleting a task
+
+Prerequisite: No tasks in the task list.
+
+1. Test case: Enter `addTask d/Hydrate te/2023-11-13 22:30` <br>
+   Then enter: `deleteTask 1` <br>
+   Expected: Task added and then deleted successfully.
+2. Test case: `deleteTask 1` <br>
+   Expected: Error message displayed indicating that the index indicated is invalid.
+
+### Sorting Tasks
+
+Prerequisite: Multiple tasks in the task list.
+
+1. Test case: `sortTasks DESCRIPTION`
+   Expected: Tasks are sorted alphabetically by description.
+2. Test case: `sortTasks DEADLINE`
+   Expected: Tasks are sorted by deadline.
+3. Test case: `sortTasks 1askdj`
+   Expected: Error message displayed indicating that the sorting order indicated is invalid.
