@@ -571,9 +571,9 @@ FIELD INDEX NEW_VALUE
 
 As salespeople, we need to gauge the potential of each client, which represents how likely they are to become a buying customer. We use hot leads to represent a customer with high potential, and cold leads to represent customers with low potential.
 
-You can use the ***lead*** command to mark a client as a **hot**, **warm** or **cold** lead. For example, if you wish to mark the client at index 4 as a cold lead, enter `lead 4 cold`. This changes [the follow-up period of the client.](#follow-up-calculation)
+You can use the ***lead*** command to mark a client as a **hot**, **warm** or **cold** lead. For example, if you wish to mark the client at index 4 as a cold lead, enter `lead 4 cold`. 
 
-[↑ Back to Table of Contents](#table-of-contents)
+Note that this [changes the follow-up period of the client](#follow-up-calculation) and might [unintentionally remove follow-ups](#known-issues).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -683,6 +683,18 @@ This is especially useful if you find yourself having to re-enter a command that
 3. Paste the data folder in the same directory as your `connectify.jar` file in your other computer.
 
 [↑ Back to Table of Contents](#table-of-contents)
+
+# Known Issues
+
+1. Changing Leads to hotter leads (ie **warm** to **hot**) could "silently remove" them from follow-ups.
+    <details>
+    <summary>Details</summary>
+    <br>
+    If the last interaction is 1-8 weeks ago, and the client is a COLD lead it will appear in the follow-ups (since cold 8 weeks + the last interaction date). Upon changing the lead to a HOT lead without any new interactions, the next follow-up will be calculated to be one week afterwards. Since that date has already passed, it will no longer be reflected in the follow-ups section but the user may not have necessarily contacted the client.
+    </details>
+
+[↑ Back to Table of Contents](#table-of-contents)
+
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
