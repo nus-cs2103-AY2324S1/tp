@@ -61,18 +61,17 @@ Given below are my contributions to the project.
     [#248](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/248)
 
 * **Contributions to the DG**:
-  * Added Implementation of Record Command
-    * Wrote implementation details
-    * Wrote design considerations and alternatives
+  * Added Implementation of Record Command (PRs:
+    [#136](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/136),
+    [#235](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/235))
+    * Wrote implementation details, design considerations and alternatives
     * Created UML sequence and activity diagram
-    * Relevant Pull Requests: [#136](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/136),
-      [#235](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/235)
-  * Edited Appendix: instructions for manual testing
+  * Edited & Added Appendix: instructions for manual testing (PRs:
+    [#229](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/229),
+    [#235](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/235))
     * Added: Adding a patient, Viewing a patient, Editing a patient record, Assigning a patient to a department, Sorting
       patients, Undoing and Redoing a command
     * Edited: Deleting a patient, Editing a patient
-    * Relevant Pull Requests: [#229](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/229),
-      [#235](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/235)
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -84,8 +83,8 @@ Given below are my contributions to the project.
 
 * **Review/mentoring contributions**:
   * Reviewed and Merged various PRs from team members
-    * The following are some of the PRs I have reviewed, with non-trivial review comments:
-    * [#153](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/153),
+    * Here are some of the PRs I have reviewed, with non-trivial review comments:
+      [#153](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/153),
       [#161](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/161),
       [#227](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/227),
       [#240](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/240)
