@@ -86,7 +86,7 @@ Here are some annotations used in this guide:
 </div>
 <p></p>
 <div style="border-left: 4px solid #d9534f; background-color: #FFD4D4; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
-  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">:exclaimation: Warning!</h5>
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">:exclamation: Warning!</h5>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;"> inline code</code>
     Pay attention to these points as they could lead to unexpected issues.</p>
 </div>
@@ -111,7 +111,7 @@ Welcome back to ProjectPRO. Simply head over to our Features section to gain ins
 
 
 1. Ensure you have Java 11 or above installed on your computer.
-   - Simply go to your terminal and type `java -version`. ![here](images/UG/QuickStart1.png)
+   - Simply go to your terminal and type `java -version`. ![here](images/UG/QUICKSTART1.png)
 
 2. Download the latest ProjectPRO.jar from [here](https://github.com/AY2324S1-CS2103T-T10-3/tp/releases).
    - ![here](images/UG/QUICKSTART2.png)
@@ -867,3 +867,13 @@ You can exit ProjectPRO.
 
 **Potential error(s):**
 - Extra inputs detected.
+
+### Saving the data
+ProjectPRO saves automatically after any command changes the data. There is no need to save manually.
+
+### Editing the data file
+ProjectPRO's data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+<div style="border-left: 4px solid #d9534f; background-color: #FFD4D4; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">:exclamation: Warning!</h5>
+    If your changes to the data file makes its format invalid, ProjectPRO will discard all data and start with a sample data file. Hence, it is recommended to take a backup of the file before editing it.
+</div>

@@ -114,18 +114,6 @@ public class TimeIntervalList implements Iterable<TimeInterval> {
         return internalList.contains(timeInterval);
     }
 
-<<<<<<< HEAD
-    /**
-     * Removes free time from list.
-     *
-     * @param timeInterval The time interval to remove.
-     */
-    public void removeTime(TimeInterval timeInterval) {
-        internalList.remove(timeInterval);
-    }
-=======
->>>>>>> e46d42d0ae9261a2264a2c9af1882175bae0192f
-
     /**
      * Checks if time interval overlaps with internal list.
      *
