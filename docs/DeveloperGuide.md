@@ -7,6 +7,8 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Acknowledgements**
 * [File icon](https://www.flaticon.com/free-icon/document_2258853?term=file&page=1&position=6&origin=search&related_id=2258853) and [Help icon](https://www.flaticon.com/free-icon/question_471664?term=help&page=1&position=2&origin=search&related_id=471664) used in the main window are from Flaticon.
 * Useful notations in the User Guide was inspired from a past project [TaskBook](https://ay2223s1-cs2103t-t13-4.github.io/tp/UserGuide.html#useful-notations).
@@ -19,6 +21,8 @@ title: Developer Guide
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -151,6 +155,8 @@ The `Storage` component,
 Classes used by multiple components are in the [commons](https://github.com/AY2324S1-CS2103T-T13-4/tp/tree/master/src/main/java/seedu/address/commons) package.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Selected Implementation**
 
@@ -503,7 +509,10 @@ The other commands `stats current` and `stats housing` have a similar execution 
     * Cons: Less flexibility for the user.
 
 --------------------------------------------------------------------------------------------------------------------
-## Planned Enhancements
+
+<div style="page-break-after: always;"></div>
+
+## **Planned Enhancements**
 
 ### Shorter Command Formats
 Currently, the default add command may be too long for an average typer to key in quickly. A future enhancement we are planning would be to allow the addition of a fosterer with just the basic details, such as their name, phone number, email, housing type and availability. The rest of the fields will be set to `nil` by default.
@@ -566,15 +575,15 @@ digits (according to the international phone numbering plan).
 
 e.g. `p/90876534567890234567` is now an invalid phone number parameter.
 
-### Prevent Foster Family from crashing due to the Corruption of Data File 
+### Guide Users on How To Rectify / Preventing the Corruption of Data File 
 
 Currently, the Foster Family data is saved automatically as a JSON file, and in the case where the data file is updated directly
-and made invalid, Foster Family would either discard all data and start with an empty data file at the next run or the app would 
-not start at all. Even though it is advised in the user guide that user should not make changes to the data file directly, one 
-possible improvement to be made to prevent such incidents would be to either use a database with username and password authentication 
-or implement encryption. An alternative solution would be to account for all the cases to handle an invalid fosterer entry in the data file 
-by editing the classes in `storage` (for example, `JsonAdaptedPerson`) such that the user would be informed of the steps to take 
-to rectify the errors made.
+and made invalid, Foster Family would either discard all data and start with an empty data file. Even though it is advised in the 
+user guide that user should not make changes to the data file directly, one possible improvement to be made to prevent such 
+incidents would be to either use a database with username and password authentication or implement encryption. An alternative 
+solution would be to account for all the cases and error messages to handle an invalid fosterer entry in the data file. We can do so 
+by editing the classes in `storage` such that the user would be informed, through the message, of the steps to take to rectify the 
+errors made.
 
 ### Notes Feature as a Separate Command
 
@@ -630,6 +639,8 @@ required to read long error messages with details that might be irrelevant to th
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
@@ -951,6 +962,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -985,7 +998,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case (valid): `add n/Anne Lim p/98765422 e/anne123@example.com a/Baker street, block 6, #27-01 housing/Landed availability/NotAvailable animal/Bucky animalType/current.Dog`<br>
        Expected: Fosterer named Anne Lim is added to the list. Details of the added fosterer are shown in the status message.
 
-    1. Test case (invalid):<br>
+    1. Test case (non-exhaustive list of invalid add commands):<br>
 
 | Scenario                                                                                                                        | Example command                                                                                                                                                                 | Expected Error Message                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 |---------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1021,6 +1034,12 @@ testers are expected to do more *exploratory* testing.
 
 2. Deleting fosterers while only some fosterers are shown follows similar test cases.
 
+### Sorting the list of fosterers
+
+1. Sorting the list of fosterers in the main window by name alphabetically
+
+    1. Test case: `sort`<br>
+       Expected: The whole list of fosterers will be sorted alphabetically. Command success message is shown.
 
 ### Viewing Statistics of Fosterers
 1. Viewing statistics of available fosterers

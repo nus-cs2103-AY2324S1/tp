@@ -16,8 +16,10 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.AnimalType;
 import seedu.address.model.person.Availability;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Housing;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -232,31 +234,94 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseAvailability_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAvailability((String) null));
+    }
+
+    @Test
     public void parseAvailability_invalidInput_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseAvailability(INVALID_AVAILABILITY));
     }
 
     @Test
+    public void parseAvailability_validValueWithoutWhitespace_returnsName() throws Exception {
+        Availability expectedAvailability = new Availability(VALID_AVAILABILITY2);
+        assertEquals(expectedAvailability, ParserUtil.parseAvailability(VALID_AVAILABILITY2));
+    }
+
+    @Test
+    public void parseAvailability_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+        String availabilityWithWhitespace = WHITESPACE + VALID_AVAILABILITY1 + WHITESPACE;
+        Availability expectedAvailability = new Availability(VALID_AVAILABILITY1);
+        assertEquals(expectedAvailability, ParserUtil.parseAvailability(availabilityWithWhitespace));
+    }
+
+    @Test
+    public void parseAnimalType_null_throwsNullPointerException() {
+        Availability validAvailability = new Availability(VALID_AVAILABILITY1);
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAnimalType(((String) null),
+                validAvailability));
+    }
+
+    @Test
     public void parseAnimalType_invalidInputWhenAvailable_throwsParseException() {
+        Availability availableAvailability = new Availability(VALID_AVAILABILITY1);
         assertThrows(ParseException.class, () -> ParserUtil.parseAnimalType(INVALID_ANIMAL_TYPE,
-                new Availability(VALID_AVAILABILITY1)));
+               availableAvailability));
     }
 
     @Test
     public void parseAnimalType_invalidInputWhenNotAvailable_throwsParseException() {
+        Availability notAvailableAvailability = new Availability(VALID_AVAILABILITY2);
         assertThrows(ParseException.class, () -> ParserUtil.parseAnimalType(INVALID_ANIMAL_TYPE,
-                new Availability(VALID_AVAILABILITY2)));
+                notAvailableAvailability));
     }
 
     @Test
     public void parseAnimalType_invalidInputWhenNilAvailable_throwsParseException() {
+        Availability nilAvailability = new Availability(VALID_AVAILABILITY3);
         assertThrows(ParseException.class, () -> ParserUtil.parseAnimalType(INVALID_ANIMAL_TYPE,
-                new Availability(VALID_AVAILABILITY3)));
+                nilAvailability));
+    }
+
+    @Test
+    public void parseAnimalType_validValueWithoutWhitespace_returnsName() throws Exception {
+        Availability availableAvailability = new Availability(VALID_AVAILABILITY1);
+        AnimalType expectedAnimalType = new AnimalType(VALID_ANIMAL_TYPE, availableAvailability);
+        assertEquals(expectedAnimalType, ParserUtil.parseAnimalType(VALID_ANIMAL_TYPE,
+                availableAvailability));
+    }
+
+    @Test
+    public void parseAnimalType_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+        String animalTypeWithWhitespace = WHITESPACE + VALID_ANIMAL_TYPE + WHITESPACE;
+        Availability availableAvailability = new Availability(VALID_AVAILABILITY1);
+        AnimalType expectedAnimalType = new AnimalType(VALID_ANIMAL_TYPE, availableAvailability);
+        assertEquals(expectedAnimalType, ParserUtil.parseAnimalType(animalTypeWithWhitespace,
+                availableAvailability));
+    }
+
+    @Test
+    public void parseHousing_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseHousing((String) null));
     }
 
     @Test
     public void parseHousing_invalidInput_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseHousing(INVALID_HOUSING));
+    }
+
+    @Test
+    public void parseHousing_validValueWithoutWhitespace_returnsName() throws Exception {
+        Housing expectedHousing = new Housing(VALID_HOUSING);
+        assertEquals(expectedHousing, ParserUtil.parseHousing(VALID_HOUSING));
+    }
+
+    @Test
+    public void parseHousing_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+        String housingWithWhitespace = WHITESPACE + VALID_HOUSING + WHITESPACE;
+        Housing expectedHousing = new Housing(VALID_HOUSING);
+        assertEquals(expectedHousing, ParserUtil.parseHousing(housingWithWhitespace));
     }
 
 }

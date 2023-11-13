@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ANIMAL_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ANIMAL_TYPE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AVAILABILITY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
@@ -49,8 +48,13 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
-        // name differs in case, all other attributes same -> returns TRUE (after making changes)
+        // name differs in case, all other attributes same -> returns TRUE (after improving duplicate check)
         Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
+        assertTrue(BOB.isSamePerson(editedBob));
+
+        // name has spaces between words, all other attributes same -> returns TRUE (after improving duplicate check)
+        String nameWithSpacesInbetween = "Bob" + "    " + "Choo";
+        editedBob = new PersonBuilder(BOB).withName(nameWithSpacesInbetween).build();
         assertTrue(BOB.isSamePerson(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
@@ -89,7 +93,7 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different address -> retucrns false
+        // different address -> returns false
         editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
@@ -97,10 +101,8 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        editedAlice = new PersonBuilder(ALICE).withAvailability(VALID_AVAILABILITY_BOB)
-                .withAnimalName(VALID_ANIMAL_NAME_BOB)
-                .withAnimalType(VALID_ANIMAL_TYPE_BOB, new Availability(VALID_AVAILABILITY_BOB))
-                .build();
+        // different animal name -> returns false
+        editedAlice = new PersonBuilder(BOB).withAnimalName("Snow").build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different availability -> returns false
@@ -119,30 +121,106 @@ public class PersonTest {
     }
 
     @Test
-    public void isAvailabilityValidWhenAnimalNameNotNil_validAvailability() {
-        Person person = new PersonBuilder(ALICE)
+    public void isAvailabilityValidWhenAnimalNameNotNil_validCases() {
+        // not available, animal name not nil
+        Person firstPerson = new PersonBuilder(ALICE)
+                .withAnimalType("current.Dog", Availability.NOT_AVAILABLE)
+                .withAnimalName("Dexter")
+                .withAvailability("NotAvailable")
+                .build();
+        assertTrue(firstPerson.isAvailabilityValidWhenAnimalNameNotNil());
+
+        // available, animal name nil
+        Person secondPerson = new PersonBuilder(ALICE)
                 .withAnimalName("nil")
                 .withAvailability("Available")
                 .build();
-        assertTrue(person.isAvailabilityValidWhenAnimalNameNotNil());
+        assertTrue(secondPerson.isAvailabilityValidWhenAnimalNameNotNil());
+
+        // not available, animal name nil
+        Person thirdPerson = new PersonBuilder(ALICE)
+                .withAnimalType("nil", Availability.NOT_AVAILABLE)
+                .withAnimalName("nil")
+                .withAvailability("NotAvailable")
+                .build();
+        assertTrue(thirdPerson.isAvailabilityValidWhenAnimalNameNotNil());
+
+        // nil availability, animal name nil
+        Person fourthPerson = new PersonBuilder(ALICE)
+                .withAnimalName("nil")
+                .withAvailability("nil")
+                .build();
+        assertTrue(fourthPerson.isAvailabilityValidWhenAnimalNameNotNil());
+    }
+
+    @Test
+    public void isAvailabilityValidWhenAnimalNameNotNil_invalidCases() {
+        // available, animal name not nil with animal type nil
+        PersonBuilder firstPerson = new PersonBuilder(ALICE);
+        firstPerson.withAnimalType("nil", Availability.AVAILABLE);
+        firstPerson.withAnimalName("Dexter");
+        firstPerson.withAvailability("Available");
+        assertThrows(IllegalArgumentException.class, () -> firstPerson.build()
+                .isAvailabilityValidWhenAnimalNameNotNil());
+
+        // available, animal name not nil with animal type not nil
+        PersonBuilder secondPerson = new PersonBuilder(ALICE);
+        secondPerson.withAnimalType("able.Dog", Availability.AVAILABLE);
+        secondPerson.withAnimalName("Dexter");
+        secondPerson.withAvailability("Available");
+        assertThrows(IllegalArgumentException.class, () -> secondPerson.build()
+                .isAvailabilityValidWhenAnimalNameNotNil());
+
+        // nil availability, animal name not nil with animal type nil
+        PersonBuilder thirdPerson = new PersonBuilder(ALICE);
+        thirdPerson.withAnimalType("nil", Availability.NIL_AVAILABILITY);
+        thirdPerson.withAnimalName("Dexter");
+        thirdPerson.withAvailability("nil");
+        assertThrows(IllegalArgumentException.class, () -> thirdPerson.build()
+                .isAvailabilityValidWhenAnimalNameNotNil());
+
     }
 
     @Test
     public void isAnimalNameTypeValidWhenNotAvailable_validCases() {
         // when availability is "NotAvailable", animal name and type must be both "nil" or both not "nil"
+
+        // not available, animal name nil with animal type nil
         Person person = new PersonBuilder(ALICE)
                 .withAvailability("NotAvailable")
                 .withAnimalName("nil")
-                .withAnimalType("nil", new Availability("NotAvailable"))
+                .withAnimalType("nil", Availability.NOT_AVAILABLE)
                 .build();
         assertTrue(person.isAnimalNameTypeValidWhenNotAvailable());
 
+        // not available, animal name not nil with animal type not nil
         person = new PersonBuilder(ALICE)
                 .withAvailability("NotAvailable")
                 .withAnimalName("Fluffy")
-                .withAnimalType("current.Dog", new Availability("NotAvailable"))
+                .withAnimalType("current.Dog", Availability.NOT_AVAILABLE)
                 .build();
         assertTrue(person.isAnimalNameTypeValidWhenNotAvailable());
+    }
+
+    @Test
+    public void isAnimalNameTypeValidWhenNotAvailable_invalidCases() {
+        // when availability is "NotAvailable", animal name and type must be both "nil" or both not "nil"
+
+        // not available, animal name not nil with animal type nil
+        PersonBuilder firstPerson = new PersonBuilder(ALICE);
+        firstPerson.withAnimalType("nil", Availability.NOT_AVAILABLE);
+        firstPerson.withAnimalName("Dexter");
+        firstPerson.withAvailability("NotAvailable");
+        assertThrows(IllegalArgumentException.class, () -> firstPerson.build()
+                .isAvailabilityValidWhenAnimalNameNotNil());
+
+        // not available, animal name nil with animal type not nil
+        PersonBuilder secondPerson = new PersonBuilder(ALICE);
+        secondPerson.withAnimalType("current.Cat", Availability.NOT_AVAILABLE);
+        secondPerson.withAnimalName("nil");
+        secondPerson.withAvailability("NotAvailable");
+        assertThrows(IllegalArgumentException.class, () -> secondPerson.build()
+                .isAvailabilityValidWhenAnimalNameNotNil());
     }
 
     @Test
@@ -150,6 +228,11 @@ public class PersonTest {
         assertThrows(IllegalArgumentException.class, () -> new PersonBuilder(ALICE)
                 .withAnimalName("Moon")
                 .withAvailability("Available")
+                .build());
+
+        assertThrows(IllegalArgumentException.class, () -> new PersonBuilder(ALICE)
+                .withAnimalName("Moon")
+                .withAvailability("nil")
                 .build());
 
         assertThrows(IllegalArgumentException.class, () -> new PersonBuilder(ALICE)

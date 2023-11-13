@@ -4,7 +4,7 @@ title: User Guide
 ---
 **Foster Family** is a desktop app built for the **foster managers of cat and dog shelters** to help them perform **foster family management tasks**. 
 
-Some tasks Foster Family can help you with: 
+Here are some tasks which Foster Family can help you with: 
 * **Store and update** the important details of animal fosterers (people who temporarily care for an animal in their own homes)
 * Search for a fosterer using _**any**_ detail you can remember of them
 * **Gain insights** on the current status of fosterers
@@ -15,7 +15,7 @@ This user guide contains **all** the commands available to you, along with **ste
 
 <div style="page-break-after: always;"></div>
 
-## Table of Contents
+## **Table of Contents**
 * Table of Contents
 {:toc}
 
@@ -24,7 +24,7 @@ This user guide contains **all** the commands available to you, along with **ste
 <div style="page-break-after: always;"></div>
 
 
-## Quick Start
+## **Quick Start**
 1. Ensure you have Java `11` or above installed in your computer. You can download it from [here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
 2. Download the latest `FosterFamily.jar` from [here](https://github.com/AY2324S1-CS2103T-T13-4/tp/releases).
@@ -63,7 +63,7 @@ Please refer to the [Features](#features) section for details of each command.
 
 <div style="page-break-after: always;"></div>
 
-## Useful Notations
+## **Useful Notations**
 These are symbols we will be using to highlight certain information to you.
 
 | Symbol               | Meaning                                                                           |
@@ -73,7 +73,9 @@ These are symbols we will be using to highlight certain information to you.
 | :warning:            | Warnings about command, where action may lead to data loss or  misinterpretation  |
 | :bulb:               | Tips to optimise the use of Foster Family                                         |
 
-## Technical Terms
+--------------------------------------------------------------------------------------------------------------------
+
+## **Technical Terms**
 These are some technical terms you may come across in this user guide.
 
 | Term                  | Definition                                                                                 |
@@ -87,7 +89,7 @@ These are some technical terms you may come across in this user guide.
 
 <div style="page-break-after: always;"></div>
 
-## User Interface (UI)
+## **User Interface (UI)**
 
 These are the two different screens you will be interacting with in Foster Family. 
 
@@ -228,7 +230,11 @@ To learn more about **editing a fosterer through the profile page**, refer to th
 
 <br>
 
-## Features
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+## **Features**
 
 <div markdown="block" class="alert alert-info">
 
@@ -899,25 +905,26 @@ Your Foster Family data is saved automatically as a JSON file `[JAR file locatio
 advise you to update the data file directly only if you are an advanced user. Otherwise, we highly recommend you to perform 
 edits using our user-friendly interface instead.
 
-<div markdown="block" class="alert alert-warning">
+<div markdown="span" class="alert alert-warning">
 
 **:warning: Caution:**<br>
 
-* If your changes to the data file makes its format invalid, Foster Family **will discard all data** and start with an empty data file at the next run. Hence, it is recommended to **make a backup of the file** before editing it.<br>
-* If your changes create an invalid fosterer, **the app will not start**. You will have to rectify the error in order to restart the app. <br>
-Please refer to the section [Adding a fosterer through the main window: add](#adding-a-fosterer-through-the-main-window-add) for more details.
+If your changes to the data file makes its format invalid, Foster Family will discard all data and start with an empty data file at the next run. Hence, it is recommended to make a backup of the file before editing it.<br>
 
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
-## FAQ
+
+## **FAQ**
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer, and overwrite the empty data file it creates with the file that contains the data of your previous Foster Family home folder.
 
+**Q**: How do I know which version of Java I am using / have installed on my Computer?<br>
+**A**: Open a command terminal, type `java -version` and press Enter. The Java version in use will be displayed as a response message.
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## **Known issues**
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The solution is to delete the `preferences.json` file created by the application before running the application again.
 
@@ -925,7 +932,7 @@ Please refer to the section [Adding a fosterer through the main window: add](#ad
 
 <div style="page-break-after: always;"></div>
 
-## Command summary
+## **Command summary**
 
 | Action                                   | Format                                                                                                                                                                    | Examples                                                                                                                                                                |
 |------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
