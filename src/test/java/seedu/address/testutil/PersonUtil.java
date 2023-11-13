@@ -1,11 +1,15 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LICENCE_PLATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_EXPIRY_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_ISSUE_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -55,6 +59,14 @@ public class PersonUtil {
         descriptor.getNric().ifPresent(nric -> sb.append(PREFIX_NRIC).append(nric.value).append(" "));
         descriptor.getLicencePlate().ifPresent(licencePlate -> sb.append(PREFIX_LICENCE_PLATE)
                 .append(licencePlate.value).append(" "));
+        descriptor.getPolicyNumber().ifPresent(policyNumber -> sb.append(PREFIX_POLICY_NUMBER)
+                .append(policyNumber.value).append(" "));
+        descriptor.getPolicyIssueDate().ifPresent(policyIssueDate -> sb.append(PREFIX_POLICY_ISSUE_DATE)
+                .append(policyIssueDate).append(" "));
+        descriptor.getPolicyExpiryDate().ifPresent(policyExpiryDate -> sb.append(PREFIX_POLICY_EXPIRY_DATE)
+                .append(policyExpiryDate).append(" "));
+        descriptor.getCompany().ifPresent(company -> sb.append(PREFIX_COMPANY)
+                .append(company.value).append(" "));
 
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();

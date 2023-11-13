@@ -7,9 +7,14 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LicencePlate;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.policy.Company;
+import seedu.address.model.policy.PolicyDate;
+import seedu.address.model.policy.PolicyNumber;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -39,6 +44,10 @@ public class EditPersonDescriptorBuilder {
         descriptor.setTags(person.getTags());
         descriptor.setNric(person.getNric());
         descriptor.setLicencePlate(person.getLicencePlate());
+        descriptor.setCompany(person.getPolicy().getCompany());
+        descriptor.setPolicyNumber(person.getPolicy().getPolicyNumber());
+        descriptor.setPolicyIssueDate(person.getPolicy().getPolicyIssueDate());
+        descriptor.setPolicyExpiryDate(person.getPolicy().getPolicyExpiryDate());
     }
 
     /**
@@ -80,6 +89,54 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Nric} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withNric(String nric) {
+        descriptor.setNric(new Nric(nric));
+        return this;
+    }
+
+    /**
+     * Sets the {@code LicencePlate} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withLicencePlate(String licencePlate) {
+        descriptor.setLicencePlate(new LicencePlate(licencePlate));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Company} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withCompany(String company) {
+        descriptor.setCompany(new Company(company));
+        return this;
+    }
+
+    /**
+     * Sets the {@code PolicyNumber} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withPolicyNumber(String policyNumber) {
+        descriptor.setPolicyNumber(new PolicyNumber(policyNumber));
+        return this;
+    }
+
+    /**
+     * Sets the {@code PolicyIssueDate} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withPolicyIssueDate(String policyIssueDate) {
+        descriptor.setPolicyIssueDate(new PolicyDate(policyIssueDate));
+        return this;
+    }
+
+    /**
+     * Sets the {@code PolicyExpiryDate} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withPolicyExpiryDate(String policyExpiryDate) {
+        descriptor.setPolicyExpiryDate(new PolicyDate(policyExpiryDate));
         return this;
     }
 
