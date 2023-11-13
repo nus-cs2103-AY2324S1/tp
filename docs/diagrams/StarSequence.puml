@@ -49,14 +49,15 @@ deactivate LoveBookParser
 LogicManager -> StarCommand : execute()
 activate StarCommand
 
-StarCommand -> Model : setDate(dateToStar, starredDate)
+
+StarCommand -> Model : setDate()
 activate Model
 
 
 Model --> StarCommand
 deactivate Model
 
-StarCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+StarCommand -> Model : updateFilteredPersonList()
 activate Model
 
 Model --> StarCommand
