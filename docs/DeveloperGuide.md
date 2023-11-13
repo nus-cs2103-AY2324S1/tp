@@ -212,8 +212,8 @@ The following sequence diagram shows how the batch delete operation works:
 * Delete all people in the list and return all people left in client list.
 
 Differences in the case batch delete people whose policy was purchased from a specific company:
-* When construct an instance of `BatchDeleteCommand`, an instance of `Company` is passed as argument instead of `DeleteMonth`.
-* Constructs an instance of  `CompanyContainsKeywordsPredicate` instead of `PolicyExpiryInDeleteMonthPredicate`.
+* When constructing an instance of `BatchDeleteCommand`, an instance of `Company` is passed as argument instead of `DeleteMonth`.
+* Construct an instance of  `CompanyContainsKeywordsPredicate` instead of `PolicyExpiryInDeleteMonthPredicate`.
 * Predicate above is used when calling the method `batchDeleteWithPredicate`.
 
 #### Design considerations
@@ -325,7 +325,7 @@ The following sequence diagram shows how the `sort` command works:
 #### Design considerations
 
 **Aspect: Whether `sort` command should take in a value.**
-* Alternative 1 (current choice): ‘sort’ command does not take in a value but does not throw an exception if an input is produced.
+* Alternative 1 (current choice): `sort` command does not take in a value but does not throw an exception if an input is produced.
   * Pros: Prevents the need for un necessary exceptions that might affect the running of the program
   * Cons: The arguments might be nonsensical, for instance `sort 2` could instead be used to provide the 2 most closely expiring profiles.
 * Alternative 2 : `sort` command does not take in a value and produces exception if an input is produced
@@ -712,6 +712,10 @@ Should work on any _mainstream OS_ as long as it has Java `11` or above installe
 * **Address book**: Same as client list. Kept in code and some explanation as it is the underlying functionality of InsureIQ
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Standard formats**: JSON
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The terms person and client can be used interchangeably.
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
