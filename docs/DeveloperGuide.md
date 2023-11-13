@@ -300,22 +300,33 @@ The following sequence diagram shows how the flow of the example execution:
 
 #### Background
 To boost usability and support more functionalities, many commands in TutorMate support multiple forms of valid user input.
+
 For example, when editing a person, the "INDEX" parameter can be conditionally omitted when editing the currently shown entry, the "edit" command word is overloaded for both "editLesson" and "editPerson" command, and for each of these two commands, many optional flags are available.
-Given this flexibility and variety of valid user input, it is a challenge to parse all form of valid user input correctly and efficiently.
-We believe the implementation of the `EditPersonCommand` and `EditPersonCommandParser` is a good example that represents how we tackle this challenge at command and parser class level to achieve the desired flexibility and usability while keeping the code clean and maintainable.
+
+Given this flexibility and variety of valid user input, it is a challenge to parse all form of valid user input correctly and efficiently. 
+
+The implementation of the `EditPersonCommand` and `EditPersonCommandParser` can serve as a good example to represent how we tackle this challenge at command and parser class level to achieve the desired flexibility and usability while keeping the code clean and maintainable.
 
 #### Implementation
-The parsing and execution process of the `EditPersonCommand` is achieved via the combination of Four groups of classes: `AddressBookParser`, `TypeParsingUtil`, `EditPersonCommandParser` and `EditPersonCommand`, each of which is responsible for a different stage of the parsing process.
+The parsing and execution process of the `EditPersonCommand` is achieved via the combination of Four groups of classes: `AddressBookParser`, `TypeParsingUtil`, `EditPersonCommandParser` and `EditPersonCommand`, each of which is responsible for a different stage of the parsing process. 
+
 Given a user input that is intended to be parsed into an `EditPersonCommand`, a high level description of the parsing process is as follows:
+
 The first stage is to understand that user intends to invoke the `EditPersonCommand` and delegate the parsing to the specialised parser class, `EditPersonCommmandParser`. This step is done by the `AddressBookParser` class, which behave like a "simple factory" via a giant "switch" statement. We will not discuss it in depth here as it is not very interesting.
+
 The second stage is to parse each Parameter and flags. This work is delegated to the `typeParsingUtil` class, which is a utility class that contains many static methods that are responsible for parsing different types of user input that is reused across different command parsers.
+
 Then, the `EditPersonCommandParser` class is responsible for combining the results of the previous stage and construct the `EditPersonCommand` object.
+
 Finally, the `EditPersonCommand` class is responsible for executing the command and updating the model accordingly.
+
 The following section will discuss the implementation of the later three groups of classes in more detail.
 
 #### 1. ListEntry and ListEntryField class
-In TutorMates, Lesson and Person extends `ListEntry` class as they are displayed as items of the ___STUDENTS list___, ___SCHEDULE list___ respectively. 
+In TutorMates, Lesson and Person extends `ListEntry` class as they are displayed as items of the ___STUDENTS list___, ___SCHEDULE list___ respectively.
+
 Each `ListEntry` object contains a list of `ListEntryField` objects, which are the fields of the `ListEntry` object. For example, a `Person` object contains a list of `ListEntryField` objects, which are the fields of the `Person` object, such as name, phone number, email address, etc.
+
 These two classes are used in multiple generic class and methods to achieve the flexibility and robustness of the parsing process.
 
 #### 2. Parsing of Flags and Parameters
@@ -327,7 +338,9 @@ The `TypeParsingUtil` class parse all kinds of flags (which are all `ListEntryFi
                                                           boolean isOptional) throws ParseException
 ```
 The first parameter, `flagName`, is the name of the flag that is being parsed. It will also be used to generate the error message when the parsing fails.
+
 The second parameter, `input`, is the user input that is intended to be parsed into the flag.
+
 The third parameter, `of`, is a self-defined functional interface that is to be used as the "factory" to create the flag object. The `of` method signature is as follows:
 ```
 public interface Of<T extends ListEntryField> {
@@ -336,20 +349,26 @@ public interface Of<T extends ListEntryField> {
 ```
 The last parameter, `isOptional`, is a boolean flag that indicates whether the flag is optional or not. If the flag is not found in the user input, this method will throw a `ParseException` if the flag is not optional, but will return a `null` object if the flag is optional. It is overloaded to has a default value of `true` when omitted.
 
+
 The `parseField` method is reused extensively in multiple parser classes to parse all the flags. The following is an example of how it can be used:
 ```
 // Parse the name flag, which is compulsory
 Name name = TypeParsingUtil.parseField("name", args, Name::of, false);
+
 // Parse the phone flag, which is optional
 Phone phone = TypeParsingUtil.parseField("phone", args, Phone::of);
 ```
 #### 3. Parsing of the EditPersonCommand
 The `EditPersonCommandParser` class will parse the user input into an `EditPersonCommand` object. 
+
 This is achieved by combining the results of parsing flags in the previous stage and construct a `Person` object that contains the updated fields.
+
 Each of the `ListEntryField` has a global and static singleton default instance. For example, the default `Phone` is a `Phone` object with message "To be added."Please also note that it is not possible to create a `Phone` object with such message via public constructor and factory method.
-And each of the `ListEntry` also has a global and static singleton default instance whose fields are all the default `ListEntryField` objects.
-We can obtain a clone of the default `ListEntry` object via a static method in the class method.
-So the `EditPersonCommandParser` class will first obtain a clone of the default `Person` object via the `getDefault` method, and then update the fields of the `Person` object with the results of parsing flags in the previous stage when the corresponding flags are found in the user input.
+
+Each of the `ListEntry` also has a global and static singleton default instance whose fields are all the default `ListEntryField` objects. We can obtain a clone of the default `ListEntry` object via a static method in the class method.
+
+The `EditPersonCommandParser` class will first obtain a clone of the default `Person` object via the `getDefault` method, and then update the fields of the `Person` object with the results of parsing flags in the previous stage when the corresponding flags are found in the user input.
+
 The following is an example of how it can be used:
 ```
 Person person = Person.getDefaultPerson();
@@ -361,14 +380,17 @@ Person person = Person.getDefaultPerson();
             person.setTagsIfNotDefault(parseField("tag", args, Tags::of));
             person.setRemarkIfNotDefault(parseField("remark", args, Remark::of));
 ```
-#### 4. Execution of the EditPersonCommand
+#### 4. EditPersonCommand Implementation
 The `EditPersonCommand` class will execute the command and update the model accordingly.
+
 Realising the commonality between all kinds of edit commands, we have created an abstract generic class, `EditCommand`, to serve as template class containing the logic of editing a `ListEntry` object.
+
 The signature of the `EditCommand` class is as follows:
 ```
 public abstract class AbstractEditCommand<T extends ListEntry<? extends T>> extends Command
 ```
-And the rest of the concrete edit classes can be simply implemented by "filling in the blank". 
+And the concrete edit classes (`EditPersonCommand` class for example) can be simply implemented by "filling in the blank" and providing the correct parameters to the template class.
+
 The template for the edit process is as follows:
 ```
 initModelMethods();
@@ -379,7 +401,8 @@ validateEditedAndWriteBack();
 showMethod.accept(edited);
 return new CommandResult("Edit success.\n from: " + original.toString() + "\n to: " + edited.toString());
 ```
-And the `EditPersonCommand` class can be simply implemented by overriding the abstract methods in the `EditCommand` class.
+The `EditPersonCommand` class can be simply implemented by overriding the abstract methods in the `EditCommand` class.
+
 The most important method to be overridden is the initModelMethods(), which looks like this in the `EditPersonCommand` class:
 ```
  @Override
