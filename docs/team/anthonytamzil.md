@@ -23,7 +23,7 @@ Given below are my contributions to the project.
   * What it does: Allows the user to find a student by their student ID instead of the student's name.
   * Justification: Sometimes, the student's name might be hard to spell or quite lengthy, leading to the user preferring to search for the student via their student ID which is typically less than 10 letters.
   * Highlights: This enhancement affects existing commands and commands to be added in the future. It required an in-depth analysis of the design alternatives.
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=authorship&tabAuthor=anthonytamzil&tabRepo=AY2324S1-CS2103T-T09-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~other~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=authorship&tabAuthor=anthonytamzil&tabRepo=AY2324S1-CS2103T-T09-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 * **Project Management**:
   * Set up 43 issues and managed 21 issues on Github.
   * Managed 5 milestones, `v1.1` to `v1.4`.
