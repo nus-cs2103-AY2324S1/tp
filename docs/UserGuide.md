@@ -11,8 +11,8 @@ doctors details within clinics.
 Hereʼs an overview of how MediLink Contacts can help you streamline your hospital management
 processes:
 
-* Store and edit information about your patients and doctors
-* Create Appointments between Patients and Doctors upon triaging
+* Store and edit information about your patients and doctors.
+* Create appointments between patients and doctors upon triaging.
 
 On top of these functionalities, we believe that **efficiency** in patient management is of utmost importance.
 Hence, MediLink Contacts is **optimized** for use via a **Command Line Interface (CLI)** while still having
@@ -51,7 +51,7 @@ hospital management tasks done faster than current GUI apps in the industry.
     * `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a
       doctor named `John Doe` to MediLink Contacts.
 
-    * `delete ic/S9851386G` : Deletes the person with ic S9851386G.
+    * `delete S9851386G` : Deletes the person with ic S9851386G.
 
     * `clear` : Deletes all contacts.
 
@@ -63,6 +63,8 @@ hospital management tasks done faster than current GUI apps in the industry.
 ## Parameters
 
 The list below contains the parameters that are used in various commands as well as their various constraints. Failing to input valid parameters will lead to errors when entering commands.
+
+**Note**: Certain commands may have special requirements for parameter inputs (eg. `find`) so do please follow them when necessary!
 
 | Parameter           | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Valid Examples                                                                                                  | Invalid Examples                   |
 |:--------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------|:-----------------------------------|
@@ -168,11 +170,6 @@ Format: `add-patient n/NAME ic/IC g/GENDER p/PHONE_NUMBER ec/EMERGENCY_CONTACT e
     as a doctor, it may result in an error.
 - EMERGENCY_CONTACT must contain valid emergency contact number, which needs to be a valid phone number. This number can be the same the person's contact number.
 - A patient can only have up to one tag at any time.
-- Adding additional prefixes (eg. `k/Always Injured`) not specified by the command format above will be considered as a **parameter input**. For example:</br>
-  `add-patient n/John Doe ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 c/pneumothorax k/Always Injured b/O+` will result
-  in Condition inputted as `pneumothorax k/Always Injured`. </br>
-  Do avoid adding  your own prefixes as it may lead to unwanted errors!
-- However, inputting `r/REMARKS` will be ignored and automatically removed by the system. To add remarks, use the Edit Command mentioned later below.
 
 </div>
 
