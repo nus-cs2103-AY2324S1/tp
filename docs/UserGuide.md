@@ -871,7 +871,7 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
-### Viewing housing statistics : `stats housing`
+### Viewing statistics of housing types: `stats housing`
 Helps you calculate statistics about the various housing types of fosterers. Percentages are calculated to 2 decimal places.
 
 Format: `stats housing`
