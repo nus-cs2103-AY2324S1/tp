@@ -59,8 +59,8 @@ public class CommandTestUtil {
     public static final String HOROSCOPE_DESC_BOB = " " + PREFIX_HOROSCOPE + VALID_HOROSCOPE_BOB;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_AGE_DESC = " " + PREFIX_AGE + "911a"; // 'a' not allowed in ages
-    public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_HEIGHT_DESC = " " + PREFIX_HEIGHT; // empty string not allowed for addresses
+    public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "bob!yahoo"; // invalid gender
+    public static final String INVALID_HEIGHT_DESC = " " + PREFIX_HEIGHT; // empty string not allowed for height
     public static final String INVALID_INCOME_DESC = " " + PREFIX_INCOME; // empty string not allowed for income
     public static final String INVALID_HOROSCOPE_DESC =
             " " + PREFIX_HOROSCOPE; // empty string not allowed for horoscope

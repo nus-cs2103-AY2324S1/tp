@@ -9,11 +9,13 @@ import static seedu.lovebook.commons.util.AppUtil.checkArgument;
 public class Gender {
     public static final String MESSAGE_CONSTRAINTS =
             "Gender should be a single character, either M or F";
+    public static final String MALE = "M";
+    public static final String FEMALE = "F";
     public static final String VALIDATION_REGEX = "[MF]{1}";
     public final String value;
 
     /**
-     * Constructs a {@code Age}.
+     * Constructs a {@code Gender}.
      *
      * @param gender A valid gender.
      */

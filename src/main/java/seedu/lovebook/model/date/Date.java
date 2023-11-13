@@ -9,8 +9,7 @@ import seedu.lovebook.model.DatePrefs;
 import seedu.lovebook.model.date.horoscope.Horoscope;
 
 /**
- * Represents a Date in the lovebook.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Represents a Date in the LoveBook.
  */
 public class Date implements Comparable<Date> {
 
@@ -27,7 +26,7 @@ public class Date implements Comparable<Date> {
     private final Avatar avatar;
 
     /**
-     * Every field must be present and not null.
+     * Constructs a {@code Date}.
      */
     public Date(Name name, Age age, Gender gender, Height height, Income income, Horoscope horoscope) {
         requireAllNonNull(name, age, gender, height);
@@ -93,10 +92,13 @@ public class Date implements Comparable<Date> {
     }
 
     public Age getAge() {
-        return age;
+        int age = Integer.parseInt(this.age.value);
+        assert age >= 18 && age <= 150 : "Invalid Age!";
+        return this.age;
     }
 
     public Gender getGender() {
+        assert gender.toString().equals(Gender.MALE) || gender.toString().equals(Gender.FEMALE) : "Invalid Gender!";
         return gender;
     }
 
@@ -134,7 +136,7 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * Returns the score of the date based on how well it mactches the user preferences.
+     * Returns the score of the date based on how well it matches the user preferences.
      *
      * @param prefs User's date preferences
      * @return the score of the date based on how it matches user preferences.
@@ -198,7 +200,6 @@ public class Date implements Comparable<Date> {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing :your own
         return Objects.hash(name, age, gender, height, income, horoscope, avatar);
     }
 
