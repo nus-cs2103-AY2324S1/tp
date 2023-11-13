@@ -6,8 +6,8 @@ title: Developer Guide
 {:toc}
 
 <div style="page-break-after: always;"></div>
-## 1. Introduction
 
+## 1. Introduction
 ### 1.1 Acknowledgements
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
@@ -17,7 +17,6 @@ title: Developer Guide
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
-
 ### 2. Design
 
 <div markdown="span" class="alert alert-primary">
@@ -161,7 +160,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## 3. WellNus Implementation
 
 This section describes some noteworthy details on how certain features of WellNus are implemented.
-
 ### 3.1 Cancelling an Appointment
 
 The canceling of an appointment is facilitated by the `CancelCommand`. It extends `Command` and allows the user to cancel an appointment at a specified index.
