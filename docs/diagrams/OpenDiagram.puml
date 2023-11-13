@@ -2,31 +2,36 @@
 !include style.puml
 skinparam ArrowFontStyle plain
 
+box Logic LOGIC_COLOR_T1
 Participant ":Logic" as logic LOGIC_COLOR
 Participant ":NetworkBookParser" as networkBookParser LOGIC_COLOR
-Participant ":OpenLinkCommandParser" as openLinkCommandParser LOGIC_COLOR_T1
-Participant ":OpenLinkCommand" as openLinkCommand LOGIC_COLOR_T1
+Participant ":OpenLinkCommandParser" as openLinkCommandParser LOGIC_COLOR
+Participant ":OpenLinkCommand" as openLinkCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
 Participant ":Model" as model MODEL_COLOR
+end box
 
 -> logic : execute("open" + details)
-activate logic LOGIC_COLOR
+activate logic
 
 logic -> networkBookParser : "open" + details
-activate networkBookParser LOGIC_COLOR
+activate networkBookParser
 
 create openLinkCommandParser
 networkBookParser -> openLinkCommandParser
-activate openLinkCommandParser LOGIC_COLOR_T1
+activate openLinkCommandParser
 
 openLinkCommandParser --> networkBookParser
 deactivate openLinkCommandParser
 
 networkBookParser -> openLinkCommandParser : parse(details)
-activate openLinkCommandParser LOGIC_COLOR_T1
+activate openLinkCommandParser
 
 create openLinkCommand
 openLinkCommandParser -> openLinkCommand : personIndex, linkIndex
-activate openLinkCommand LOGIC_COLOR_T1
+activate openLinkCommand
 
 openLinkCommand --> openLinkCommandParser : openLinkCommand
 deactivate openLinkCommand
@@ -38,10 +43,10 @@ networkBookParser --> logic : openLinkCommand
 deactivate networkBookParser
 
 logic -> openLinkCommand: execute(model)
-activate openLinkCommand LOGIC_COLOR_T1
+activate openLinkCommand
 
 openLinkCommand -> model: openLink(personIndex, linkIndex)
-activate model MODEL_COLOR
+activate model
 
 model --> openLinkCommand: link opened
 deactivate model
@@ -50,5 +55,6 @@ openLinkCommand --> logic : command success
 deactivate openLinkCommand
 
 <-- logic : command success
+deactivate logic
 
 @enduml

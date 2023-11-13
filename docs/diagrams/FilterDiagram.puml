@@ -1,0 +1,68 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+Participant ":Logic" as logic LOGIC_COLOR
+Participant ":NetworkBookParser" as networkBookParser LOGIC_COLOR
+Participant ":FilterCommandParser" as filterCommandParser LOGIC_COLOR
+Participant ":Predicate<Person>" as predicate LOGIC_COLOR
+Participant ":FilterCommand" as filterCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+Participant ":Model" as model MODEL_COLOR
+end box
+
+-> logic : execute("filter" + details)
+activate logic
+
+logic -> networkBookParser : "filter" + details
+activate networkBookParser
+
+create filterCommandParser
+networkBookParser -> filterCommandParser
+activate filterCommandParser
+
+filterCommandParser --> networkBookParser
+deactivate filterCommandParser
+
+networkBookParser -> filterCommandParser : parse(details)
+activate filterCommandParser
+
+create predicate
+filterCommandParser -> predicate
+activate predicate
+
+predicate --> filterCommandParser : predicate
+deactivate predicate
+
+create filterCommand
+filterCommandParser -> filterCommand : predicate
+activate filterCommand
+
+filterCommand --> filterCommandParser : filterCommand
+deactivate filterCommand
+
+filterCommandParser --> networkBookParser : filterCommand
+deactivate filterCommandParser
+
+networkBookParser --> logic : filterCommand
+deactivate networkBookParser
+
+logic -> filterCommand : execute(model)
+activate filterCommand
+
+filterCommand -> model : updateDisplayedPersonList(predicate)
+activate model
+
+model --> filterCommand : predicate updated
+deactivate model
+
+filterCommand --> logic : command success
+deactivate filterCommand
+
+<-- logic : command success
+deactivate logic
+
+@enduml
