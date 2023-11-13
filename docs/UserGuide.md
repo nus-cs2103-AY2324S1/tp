@@ -79,6 +79,13 @@ Refer to the table below for details on each GUI component
 | Event list        | Displays the list of events in FumbleLog. You can scroll through the list of events using the scroll bar on the right of the list.                       |
 | Index             | Displays the index of the person or event in their respective lists. This index is used in certain commands. i.e. editing persons or events.             |
 
+![Expired Event](images/ExpiredEvent.png)
+
+<div markdown="block" class="alert alert-warning">
+<i class="fa fa-warning-circle"></i> **Note about red coloured events:**<br>
+An expired event will appear red in the event list. This is to highlight to you that the event has passed.
+</div>
+
 [Scroll back to Table of Contents](#table-of-contents)
 
 
@@ -230,6 +237,7 @@ Format: `edit_person PERSON_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/BI
   * Parameter `g/` is used to **assign a person** to a group. If the person is already assigned to the group, the group will not be added again.
   * Parameter `ug/` is used to **unassign a person** from a group. Once unassigned, the person's name will not be displayed in events that the group is assigned to.
 * When you edit a person's name, the person's name will be updated in all [events](#commands-for-events) that the person is assigned to. Same for groups if the person's group is assigned to events.
+* There will not be an error shown in the case that you edit a person's values to be the same as it currently is. i.e. if the first person's name on the person list is Alex, `edit_person 1 n/Alex` is a valid command and will not show an error message.
 
 </div>
 
