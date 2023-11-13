@@ -445,7 +445,7 @@ You can add remarks to a group in your contact list.
 </div>
 
 
-**Example:**
+**Example(s):**
 - `remark g/CS2103T r/quiz tomorrow`  
   This adds the remark "quiz tomorrow" to the existing "CS2103T" group in your contact list.
 
@@ -626,8 +626,6 @@ It is <strong>not case-sensitive</strong>.</p>
     <img src="icons/exclamation.png" width="20" height="20" style="margin-right: 5px;">
     <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;;">Warning</h5>
   </div>
-  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">NAME</code>
-  ensure the contact exists in your contact list.</p>
   <p style="font-size:13px; color: #000; margin: 8px 0;">
 <code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">FREE_TIME</code>
   must not clash with the other inputted/existing time slots of the contact. Eg. If time slot <code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">Mon 1200 - Mon 1300</code> has been added, then<code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">Mon 1300 - Mon 1400</code> can not be added. 
@@ -661,7 +659,7 @@ You can remove available time slots of your contacts.
     <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
   </div>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">    NAME</code>
-     must be alphanumeric and cannot be blank.
+     must be alphanumeric, cannot be blank and must be an existing contact in your contact list.
   </p>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">FREE_TIME</code>
   must match the contact's existing time. It is <strong>not case-sensitive</strong>.</p>
@@ -673,8 +671,6 @@ You can remove available time slots of your contacts.
     <img src="icons/exclamation.png" width="20" height="20" style="margin-right: 5px;">
     <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;;">Warning</h5>
   </div>
-  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">NAME</code>
-  ensure the contact exists in your contact list.</p>
  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">FREE_TIME</code>
   If more than one time slot are to be deleted, they must not clash with one another.</p>
 </div>
@@ -742,7 +738,7 @@ You can add a meeting time slot for your group.
     <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
   </div>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
-    must be alphanumeric and cannot be blank.</p>
+    must be alphanumeric, cannot be blank and must be an existing group in your contact list.</p>
 <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">MEETING_TIME</code>
     must be a time slot within the weekly schedule and must not clash with the group's existing meeting times.  It is <strong>not case-sensitive</strong>.</p>
 </div>
@@ -785,7 +781,7 @@ You can remove meeting times from your groups.
     <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
   </div>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
-    must be alphanumeric and cannot be blank.</p>
+    must be alphanumeric, cannot be blank and must be an existing group in your contact list.</p>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">MEETING_TIME</code>
     must be a time slot within a weekly schedule and must be an existing meeting slot of the group. It is <strong>not case-sensitive</strong>.</p>
 </div>
@@ -820,7 +816,7 @@ You list meeting time for your groups.
     <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
   </div>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
-    must be alphanumeric and cannot be blank.</p>
+    must be alphanumeric, cannot be blank and must be an existing group in your contact list.</p>
 </div>
 <p></p>
 
@@ -853,7 +849,7 @@ You can find a meeting time slot for your group where everyone is available.
     <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
   </div>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
-    must be alphanumeric and cannot be blank.</p>
+    must be alphanumeric, cannot be blank and must be an existing group in your contact list.</p>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">DURATION</code>
     must be a whole number representing the meeting duration in minutes.</p>
 </div>
