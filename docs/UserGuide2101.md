@@ -129,7 +129,7 @@ After a transaction, each payer in the list of portions owes the payee a fractio
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar spendnsplit.jar`
    command to run the application.<br>
-   A GUI similar to the one shown below should appear in a few seconds. Note how the application contains some sample data.<br>
+   An interface similar to the one shown below should appear in a few seconds. Note how the application contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 5. Type the command in the Command Input Field and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
@@ -389,6 +389,7 @@ Transaction details that can be edited:
 * Description
 * Cost
 * Payee
+* Timestamp
 
 Format: `editTransaction INDEX [d=DESCRIPTION] [c=COST] [n=PAYEE] [ts=TIME]`
 
@@ -451,6 +452,7 @@ Transaction details that can be changed when duplicating:
 * Description
 * Cost
 * Payee
+* Timestamp
 
 Format: `duplicateTransaction INDEX [d=DESCRIPTION] [c=COST] [n=PAYEE] [ts=TIME]`
 
@@ -791,7 +793,7 @@ A label that can be applied to a person to provide additional details about them
 A unique identifier for a Telegram account. E.g. @ryanlim123
 #### Timestamp
 Refers to the time the transaction occurred. Timestamps in our application are displayed in the "DD/MM/YYYY HH:MM" format. DD refers to Day, MM refers to Month,
-YYYY refers to Year, HH refers to Hour, and MM refers to Minute.
+YYYY refers to Year, HH refers to the 24-hour notation for Hour, and MM refers to Minute.
 #### Transaction
 An interaction of buying or selling something where the exchange of money occurs.
 #### Weight
