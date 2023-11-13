@@ -23,7 +23,9 @@ case ( [prefix not recognized])
     that command does not exist;
 endswitch
 
-if (Parsing successful?) is (yes) then
+:Check if parsing was successful;
+
+if () is (yes) then
   :Execute the command and
   update the status of the Model
   to the user;
