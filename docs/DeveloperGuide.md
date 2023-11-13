@@ -17,6 +17,20 @@ title: Developer Guide
   - [Storage component](#storage-component)
   - [Common classes](#common-classes)
 - [Implementation](#implementation)
+  - [Add Employee feature](#add-employee-feature)
+  - [Delete Employee feature](#delete-employee-feature)
+  - [Find Employee feature](#find-employee-feature)
+  - [Sort feature](#sort-feature)
+  - [Add leave feature](#add-leave-feature)
+  - [Delete leave feature](#delete-leave-feature)
+  - [Edit leave feature](#edit-leave-feature)
+  - [List leave feature](#list-leave-feature)
+  - [Add remark feature](#add-remark-feature)
+  - [Delete remark feature](#delete-remark-feature)
+  - [Overtime feature](#overtime-feature)
+  - [Report feature](#report-feature)
+  - [Reset feature](#reset-feature)
+  - [Proposed Undo/Redo feature](#proposed-undoredo-feature)
 - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 - [Appendix: Requirements](#appendix-requirements)
   - [Product scope](#product-scope)
@@ -37,7 +51,6 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * Adapted from [AB3](https://se-education.org/addressbook-level3/)
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -183,129 +196,6 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete EID1234-5678` command to delete an employee in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete EID1234-5678` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<img src="images/UndoRedoState1.png" width="500" />
-
-Step 3. The user executes `add n/David …​` to add a new employee. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<img src="images/UndoRedoState2.png" width="500" />
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the employee was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the employee being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-
-### Sort feature
-
-#### Implementation
-
-The sorting mechanism is facilitated by `SortCommandParser`. It implements the following operations:
-
-* `SortCommandParser#parse()` — Parses the input arguments by storing the prefixes of its respective values as an `ArgumentMultimap`,
-and creates a new `SortCommand` object with the parsed field and order.
-
-The `SortCommand` object then communicates with the `Model` API by calling the following methods:
-
-* `Model#updateSortedEmployeeList(field, order)` — Calls `sortEmployees` method of `AddressBook` class.
-* `AddressBook#sortEmployees(field, order)` — Calls `sortEmployees` method of `UniqueEmployeeList` class.
-* `UniqueEmployeeList#sortEmployees(field, order)` — Sorts the internal list according to the field and order given.
-
-The following sequence diagram below shows how the sort operation works:
-
-![Sort Sequence Diagram](images/SortSequenceDiagram.png)
-
-Given below is an example usage scenario for the command:
-
-**Step 1**: The user launches the application.
-
-**Step 2**: The user executes the `sort f/FIELD in/ORDER` command in the CLI
-(note that only `name`, `salary`, `overtime` and `leaves` fields, as well as `asc` and `desc` orders are valid).
-
-**Step 3**: The list of all employees in the employee book will be sorted accordingly.
-
-The following activity diagram summarizes what happens when a user executes the sort command:
-
-![Sort Activity Diagram](images/SortActivityDiagram.png)
-
-#### Design considerations:
-
-**Aspect: How sort executes:**
-
-* **Alternative 1 (current choice):** Sorts the internal list directly
-    * Pros: Easy to implement.
-    * Cons: Disable the ability to list by order of employee added.
-
-* **Alternative 2:** Performs a sort on a copied list in `ModelManager`.
-    * Pros: Allows the `list` command to list all employees by the order they were added.
-    * Cons: Different lists in the `ModelManager` class may cause inconsistencies when `find` and `sort` commands are called consecutively.
-
 ### Add Employee feature
 
 The add employee feature allows HouR to add employees to the employee list.
@@ -398,61 +288,6 @@ The following activity diagram summarises what happens when a user executes the 
     * Pros: Shorter command execution, one less point of failure by eliminating the `model` class.
     * Cons: May violate immutability within Employee and Model classes as well as SLAP by having `DeleteCommand#execute()` perform the editing directly.
 
-
-### Report feature
-
-#### Implementation
-
-The proposed reporting mechanism is facilitated by `ReportCommandParser`. It implements the following operations:
-
-* `ReportCommandParser#parse()` — Parses the input employee ID and creates a new `ReportCommand` object with the parsed employee ID.
-
-The `ReportCommand` object then communicates with the `Model` and `ReportStorage` APIs by calling the following methods:
-
-* `Model#getFilteredEmployeeList()` — Gets the existing employee list, which is then looped through to get the employee with the given employee ID.
-
-* `ReportStorage#saveReport(Report)` — Saves the report generated in `ReportCommand#execute()` by `ReportCommand#generateReport(employee)`, which is then stored on the hard disk as a `.txt` file.
-
-The method `ReportCommand#execute()` returns a `CommandResult` object, which stores information about the completion of the command.
-
-The following sequence diagram below shows how the report operation works:
-
-![Report Sequence Diagram](images/ReportSequenceDiagram.png)
-
-Given below is an example usage scenario for the command:
-
-**Step 1**: The user launches the application.
-
-**Step 2**: The user executes the `report EMPLOYEE_ID` command in the CLI.
-
-**Step 3**: A report will be generated for the employee with the given ID.
-
-The following activity diagram summarises what happens when a user executes the report command:
-
-![Report Activity Diagram](images/ReportActivityDiagram.png)
-
-#### Design considerations:
-
-**Aspect: Command-Model Interaction**
-
-* **Alternative 1 (current choice):** Utilise `Model#getFilteredEmployeeList()` to get the existing employee list, which is then looped through to get the employee with the given employee ID.
-    * Pros: Maintain immutability within Employee and Model classes.
-    * Cons: Longer command execution, requiring more parts to work together.
-
-* **Alternative 2:** Create methods in `Model` class specifically to get the employee with the given employee ID.
-    * Pros: Shorter command execution.
-    * Cons: May reduce immutability between Employee and Model classes.
-
-**Aspect: Command-Storage Interaction**
-
-* **Alternative 1 (current choice):** Utilise a dedicated storage class `ReportStorage` with the method `ReportStorage#saveReport(Report)` to save the report.
-    * Pros: Maintain SRP and SLAP within the command class.
-    * Cons: Longer command execution, requiring more parts to work together.
-
-* **Alternative 2:** Create methods in `ReportCommand` class to write and save the report.
-    * Pros: Shorter command execution, one less point of failure by eliminating the `ReportStorage` class.
-    * Cons: Less OOP, may violate SLAP within the command class.
-
 ### Find Employee feature
 
 The find employee feature allows HouR to find employees that match the given search criteria from the employee list.
@@ -499,53 +334,231 @@ The following activity diagram summarises what happens when a user executes the 
    * Pros: Shorter command execution, one less point of failure by eliminating the `model` class.
    * Cons: May violate immutability within FindCommand and Model classes as well as SLAP by having `FindCommand#execute()` perform the editing directly.
 
-### Reset feature
-
-The reset feature allows HouR to reset employee overtime hours and leaves.
+### Sort feature
 
 #### Implementation
 
-The reset command mechanism is facilitated by `ResetCommandParser` class which implements the `Parser` interface.
+The sorting mechanism is facilitated by `SortCommandParser`. It implements the following operations:
 
-`ResetCommandParser#parse()` is exposed in the `Parser` interface as `Parse#parse()`.
+* `SortCommandParser#parse()` — Parses the input arguments by storing the prefixes of its respective values as an `ArgumentMultimap`,
+and creates a new `SortCommand` object with the parsed field and order.
 
-`ResetCommandParser` implements the following operations:
-* `ResetCommandParser#parse()` — Parses the input arguments by storing the index and the prefix of its respective values as an `ArgumentMultimap`,
-and creates a new `ResetCommand` object with the parsed field.
+The `SortCommand` object then communicates with the `Model` API by calling the following methods:
 
-The `ResetCommand` object then communicates with the `Model` API by calling the following methods:
-* `Model#setEmployee(Employee, Employee)` — Sets the employee in the existing employee list to the new `Employee` object which has been edited by `ResetCommand#execute()`.
-* `Model#updateFilteredEmployeeList(Predicate)` — Updates the view of the application to show all employees.
+* `Model#updateSortedEmployeeList(field, order)` — Calls `sortEmployees` method of `AddressBook` class.
+* `AddressBook#sortEmployees(field, order)` — Calls `sortEmployees` method of `UniqueEmployeeList` class.
+* `UniqueEmployeeList#sortEmployees(field, order)` — Sorts the internal list according to the field and order given.
 
-The method `ResetCommand#execute()` returns a new `CommandResult` object, which stores information about the completion of the command.
+The following sequence diagram below shows how the sort operation works:
 
-The following sequence diagram below shows how the reset operation works:
-
-![Reset Sequence Diagram](images/ResetSequenceDiagram.png)
+![Sort Sequence Diagram](images/SortSequenceDiagram.png)
 
 Given below is an example usage scenario for the command:
 
 **Step 1**: The user launches the application.
 
-**Step 2**: The user executes the `reset f/FIELD` command in the CLI (note that only `overtime` and `leaves` are valid).
+**Step 2**: The user executes the `sort f/FIELD in/ORDER` command in the CLI
+(note that only `name`, `salary`, `overtime` and `leaves` fields, as well as `asc` and `desc` orders are valid).
 
-**Step 3**: The given field of all employees in the employee book will be reset to their default value.
+**Step 3**: The list of all employees in the employee book will be sorted accordingly.
 
-The following activity diagram summarizes what happens when a user executes the reset command:
+The following activity diagram summarizes what happens when a user executes the sort command:
 
-![Reset Activity Diagram](images/ResetActivityDiagram.png)
+![Sort Activity Diagram](images/SortActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How sort executes:**
+
+* **Alternative 1 (current choice):** Sorts the internal list directly
+    * Pros: Easy to implement.
+    * Cons: Disable the ability to list by order of employee added.
+
+* **Alternative 2:** Performs a sort on a copied list in `ModelManager`.
+    * Pros: Allows the `list` command to list all employees by the order they were added.
+    * Cons: Different lists in the `ModelManager` class may cause inconsistencies when `find` and `sort` commands are called consecutively.
+
+### Add Leave feature
+
+The add leave feature allows HouR to manage employee leaves.
+
+#### Implementation
+
+The add leave command mechanism is facilitated by the `AddLeaveCommandParser` class which extends the `AddressbookParser`.
+
+`AddLeaveCommandParser#parse()` overrides  `Parser#parse()` in the Parser interface.
+
+`AddLeaveCommandParser` implements the following operations:
+
+* `AddLeaveCommandParser#parse()` — Parses the input arguments by storing the prefixes of its respective values as an `ArgumentMultimap`, and creates a new `AddLeaveCommand` object with the parsed employee ID, start date and end date.
+
+The `AddLeaveCommand` object then communicates with the `Model` API by calling the following methods:
+
+* `Model#setEmployee(Employee, Employee)` — Sets the employee in the existing employee list to the new `Employee` object which has been edited by `AddLeaveCommand#execute()`.
+* `Model#updateFilteredEmployeeList(Predicate)` — Updates the view of the application to show all employees.
+
+The method `AddLeaveCommand#execute()` returns a `CommandResult` object, which stores information about the completion of the command.
+
+The diagram below details how the operation of adding leave date(s) works.
+
+![Add Leave Sequence Diagram](images/uml-diagrams/AddLeaveSequenceDiagram.png)
+
+Given below is an example usage scenario for the command.
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `addleave id/EMPLOYEE_ID from/START_DATE to/END_DATE` command in the CLI.
+* `START_DATE` and `END_DATE` are inputs of format `yyyy-MM-dd`.
+
+**Step 3**: A leave period will be assigned to the employee specified with the employee ID input.
+* The leave period is added as a list of `Leave` dates in the Employee's `leaveList`.
 
 #### Design considerations:
 
 **Aspect: Model-Employee Interaction:**
 
-* **Alternative 1 (current choice):** Utilise `Model#setEmployee` to add the edited employee into the model, doing the direct editing in `ResetCommand#execute()`.
+* **Alternative 1 (current choice)**: Utilise `model#setEmployee` to add the edited employee into the model, doing the direct editing in AddLeaveCommand#execute().
+    * Pros: Maintain immutability within Employee and Model classes.
+    * Cons: Potentially violates the Single Responsibility Principle.
+
+* **Alternative 2**: Create methods in model specifically to edit the `leaveList` attribute of the employee.
+    * Pros: More OOP, follows the Single Responsibility Principle by not having `AddLeaveCommand#execute()` perform the editing directly.
+    * Cons: Longer command execution, requires more parts to work together.
+
+### Delete Leave feature
+
+The delete leave feature allows HouR to delete employee leaves.
+
+#### Implementation
+
+The delete leave command mechanism is facilitated by `DeleteLeaveCommandParser`. It implements the following operations:
+
+The delete leave command mechanism is facilitated by the `DeleteLeaveCommandParser` class which extends the `AddressbookParser`.
+
+`DeleteLeaveCommandParser#parse()` overrides  `Parser#parse()` in the Parser interface.
+
+`DeleteLeaveCommandParser` implements the following operations:
+
+* `DeleteLeaveCommandParser#parse()` — Parses the input arguments by storing the prefixes of its respective values as an `ArgumentMultimap`, and creates a new `DeleteLeaveCommand` object with the parsed employee ID, start date and end date.
+
+The `DeleteLeaveCommand` object then communicates with the `Model` API by calling the following methods:
+
+* `Model#setEmployee(Employee, Employee)` — Sets the employee in the existing employee list to the new `Employee` object which has been edited by `DeleteLeaveCommand#execute()`.
+* `Model#updateFilteredEmployeeList(Predicate)` — Updates the view of the application to show all employees.
+
+The method `DeleteLeaveCommand#execute()` returns a `CommandResult` object, which stores information about the completion of the command.
+
+The following sequence diagram below shows how the operation of deleting a leave appointment works:
+
+![Delete Leave Sequence Diagram](images/DeleteLeaveSequenceDiagram.png)
+
+Given below is an example usage scenario for the command:
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `deleteleave id/EMPLOYEE_ID from/START_DATE to/END_DATE` command in the CLI.
+* `START_DATE` and `END_DATE` are inputs of format `yyyy-MM-dd`.
+
+**Step 3**: Leave appointments that fall between the start and end dates will be deleted from the employee specified with the employee ID input.
+* If no leave appointments exist between the start and end dates, an error will be produced and shown to the user.
+
+The following activity diagram summarizes what happens when a user executes the delete leave command:
+
+![Delete Leave Activity Diagram](images/DeleteLeaveActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: Model-Employee Interaction:**
+
+* **Alternative 1 (current choice)**: Utilise `model#setEmployee` to add the edited employee into the model, doing the direct editing in AddLeaveCommand#execute().
+    * Pros: Maintain immutability within Employee and Model classes.
+    * Cons: Potentially violates the Single Responsibility Principle.
+
+* **Alternative 2**: Create methods in model specifically to edit the `leaveList` attribute of the employee.
+    * Pros: More OOP, follows the Single Responsibility Principle by not having `DeleteLeaveCommand#execute()` perform the editing directly.
+    * Cons: Longer command execution, requires more parts to work together, which can cause more bugs.
+
+### Edit Leave feature
+
+The edit leave feature allows HouR to edit employee leaves.
+
+#### Implementation
+
+The edit leave command mechanism is facilitated by `EditLeaveCommandParser` class which implements the `Parser` interface.
+
+`EditLeaveCommandParser#parse()` is exposed in the `Parser` interface as `Parse#parse()`.
+
+`EditLeaveCommandParser` implements the following operations:
+* `EditLeaveCommandParser#parse()` — Parses the input arguments by storing the index and the prefix of its respective values as an `ArgumentMultimap`,
+  and creates a new `EditLeaveCommand` object with the parsed id, old and new leave dates.
+
+The `EditLeaveCommand` object then communicates with the `Model` API by calling the following methods:
+* `Model#setEmployee(Employee, Employee)` — Sets the employee in the existing employee list to the new `Employee` object which has been edited by `EditLeaveCommand#execute()`.
+* `Model#updateFilteredEmployeeList(Predicate)` — Updates the view of the application to show all employees.
+
+The method `EditLeaveCommand#execute()` returns a new `CommandResult` object, which stores information about the completion of the command.
+
+The following sequence diagram below shows how the edit leave operation works:
+
+![Edit Leave Sequence Diagram](images/EditLeaveSequenceDiagram.png)
+
+Given below is an example usage scenario for the command:
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `editleave id/EMPLOYEE_ID old/OLD_DATE new/NEW_DATE` command in the CLI.
+
+**Step 3**: The given remark will be deleted from the remark list of the employee with the given id.
+
+The following activity diagram summarizes what happens when a user executes the edit leave command:
+
+![Edit Leave Activity Diagram](images/EditLeaveActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: Model-Employee Interaction:**
+
+* **Alternative 1 (current choice)**: Utilise `model#setEmployee` to add the edited employee into the model, doing the direct editing in `DeleteRemarkCommand#execute()`.
     * Pros: Maintain immutability within Employee and Model classes.
     * Cons: Potentially violates SRP.
 
-* **Alternative 2:** Create methods in `Model` class specifically to edit the fields of the employees.
-    * Pros: More OOP, follows SRP by not having `ResetCommand#execute()` perform the editing directly.
-    * Cons: Longer command execution, requiring more parts to work together.
+* **Alternative 2**: Create methods in model specifically to edit the `remarkList` attribute of the employee.
+    * Pros: More OOP, follows SRP by not having `DeleteRemarkCommand#execute()` perform the editing directly.
+    * Cons: Longer command execution, requires more parts to work together.
+
+### List Leave feature
+
+The list leave feature allows HouR user to view employees on leave on the specified date.
+
+#### Implementation
+
+The list leave command mechanism is facilitated by the `ListLeaveCommandParser` class which extends the `AddressbookParser`.
+
+`ListLeaveCommandParser#parse()` overrides  `Parser#parse()` in the Parser interface.
+
+`ListLeaveCommandParser` implements the following operations:
+
+* `ListLeaveCommandParser#parse()` — Parses the input arguments by storing the prefixes of its respective values as an `ArgumentMultimap`, and creates a new `ListLeaveCommand` object with the parsed employee ID, start date and end date.
+
+The `ListLeaveCommand` object then communicates with the `Model` API by calling the following methods:
+
+* `Model#updateFilteredEmployeeList(Predicate)` — Updates the view of the application to show all employees.
+
+The method `ListLeaveCommand#execute()` returns a `CommandResult` object, which stores information about the completion of the command.
+
+The diagram below details how the operation of listing employees on leave on the specified date works.
+
+![List Leave Sequence Diagram](images/uml-diagrams/ListLeaveSequenceDiagram.png)
+
+Given below is an example usage scenario for the command.
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `listleave on/DATE` command in the CLI.
+* `DATE` is an input of format `yyyy-MM-dd`.
+
+**Step 3**: Employees will be filtered based on whether they are on leave on the specified date.
+* The Employee List will be updated to contain only employees which have leaves taken on the specified date.
 
 ### Add Remark feature
 
@@ -631,192 +644,6 @@ Given below is an example usage scenario for the command:
     * Pros: More OOP, follows SRP by not having `DeleteRemarkCommand#execute()` perform the editing directly.
     * Cons: Longer command execution, requires more parts to work together.
 
-### Add Leave feature
-
-The add leave feature allows HouR to manage employee leaves.
-
-#### Implementation
-
-The add leave command mechanism is facilitated by the `AddLeaveCommandParser` class which extends the `AddressbookParser`.
-
-`AddLeaveCommandParser#parse()` overrides  `Parser#parse()` in the Parser interface.
-
-`AddLeaveCommandParser` implements the following operations:
-
-* `AddLeaveCommandParser#parse()` — Parses the input arguments by storing the prefixes of its respective values as an `ArgumentMultimap`, and creates a new `AddLeaveCommand` object with the parsed employee ID, start date and end date.
-
-The `AddLeaveCommand` object then communicates with the `Model` API by calling the following methods:
-
-* `Model#setEmployee(Employee, Employee)` — Sets the employee in the existing employee list to the new `Employee` object which has been edited by `AddLeaveCommand#execute()`.
-* `Model#updateFilteredEmployeeList(Predicate)` — Updates the view of the application to show all employees.
-
-The method `AddLeaveCommand#execute()` returns a `CommandResult` object, which stores information about the completion of the command.
-
-The diagram below details how the operation of adding leave date(s) works.
-
-![Add Leave Sequence Diagram](images/uml-diagrams/AddLeaveSequenceDiagram.png)
-
-Given below is an example usage scenario for the command.
-
-**Step 1**: The user launches the application.
-
-**Step 2**: The user executes the `addleave id/EMPLOYEE_ID from/START_DATE to/END_DATE` command in the CLI.
-* `START_DATE` and `END_DATE` are inputs of format `yyyy-MM-dd`.
-
-**Step 3**: A leave period will be assigned to the employee specified with the employee ID input.
-* The leave period is added as a list of `Leave` dates in the Employee's `leaveList`.
-
-#### Design considerations:
-
-**Aspect: Model-Employee Interaction:**
-
-* **Alternative 1 (current choice)**: Utilise `model#setEmployee` to add the edited employee into the model, doing the direct editing in AddLeaveCommand#execute().
-    * Pros: Maintain immutability within Employee and Model classes.
-    * Cons: Potentially violates the Single Responsibility Principle.
-
-* **Alternative 2**: Create methods in model specifically to edit the `leaveList` attribute of the employee.
-    * Pros: More OOP, follows the Single Responsibility Principle by not having `AddLeaveCommand#execute()` perform the editing directly.
-    * Cons: Longer command execution, requires more parts to work together.
-
-
-### Delete Leave feature
-
-The delete leave feature allows HouR to delete employee leaves.
-
-#### Implementation
-
-The delete leave command mechanism is facilitated by `DeleteLeaveCommandParser`. It implements the following operations:
-
-The delete leave command mechanism is facilitated by the `DeleteLeaveCommandParser` class which extends the `AddressbookParser`.
-
-`DeleteLeaveCommandParser#parse()` overrides  `Parser#parse()` in the Parser interface.
-
-`DeleteLeaveCommandParser` implements the following operations:
-
-* `DeleteLeaveCommandParser#parse()` — Parses the input arguments by storing the prefixes of its respective values as an `ArgumentMultimap`, and creates a new `DeleteLeaveCommand` object with the parsed employee ID, start date and end date.
-
-The `DeleteLeaveCommand` object then communicates with the `Model` API by calling the following methods:
-
-* `Model#setEmployee(Employee, Employee)` — Sets the employee in the existing employee list to the new `Employee` object which has been edited by `DeleteLeaveCommand#execute()`.
-* `Model#updateFilteredEmployeeList(Predicate)` — Updates the view of the application to show all employees.
-
-The method `DeleteLeaveCommand#execute()` returns a `CommandResult` object, which stores information about the completion of the command.
-
-The following sequence diagram below shows how the operation of deleting a leave appointment works:
-
-![Delete Leave Sequence Diagram](images/DeleteLeaveSequenceDiagram.png)
-
-Given below is an example usage scenario for the command:
-
-**Step 1**: The user launches the application.
-
-**Step 2**: The user executes the `deleteleave id/EMPLOYEE_ID from/START_DATE to/END_DATE` command in the CLI.
-* `START_DATE` and `END_DATE` are inputs of format `yyyy-MM-dd`.
-
-**Step 3**: Leave appointments that fall between the start and end dates will be deleted from the employee specified with the employee ID input.
-* If no leave appointments exist between the start and end dates, an error will be produced and shown to the user.
-
-The following activity diagram summarizes what happens when a user executes the delete leave command:
-
-![Delete Leave Activity Diagram](images/DeleteLeaveActivityDiagram.png)
-
-#### Design considerations:
-
-**Aspect: Model-Employee Interaction:**
-
-* **Alternative 1 (current choice)**: Utilise `model#setEmployee` to add the edited employee into the model, doing the direct editing in AddLeaveCommand#execute().
-    * Pros: Maintain immutability within Employee and Model classes.
-    * Cons: Potentially violates the Single Responsibility Principle.
-
-* **Alternative 2**: Create methods in model specifically to edit the `leaveList` attribute of the employee.
-    * Pros: More OOP, follows the Single Responsibility Principle by not having `DeleteLeaveCommand#execute()` perform the editing directly.
-    * Cons: Longer command execution, requires more parts to work together, which can cause more bugs.
-
-
-### Edit Leave feature
-
-The edit leave feature allows HouR to edit employee leaves.
-
-#### Implementation
-
-The edit leave command mechanism is facilitated by `EditLeaveCommandParser` class which implements the `Parser` interface.
-
-`EditLeaveCommandParser#parse()` is exposed in the `Parser` interface as `Parse#parse()`.
-
-`EditLeaveCommandParser` implements the following operations:
-* `EditLeaveCommandParser#parse()` — Parses the input arguments by storing the index and the prefix of its respective values as an `ArgumentMultimap`,
-  and creates a new `EditLeaveCommand` object with the parsed id, old and new leave dates.
-
-The `EditLeaveCommand` object then communicates with the `Model` API by calling the following methods:
-* `Model#setEmployee(Employee, Employee)` — Sets the employee in the existing employee list to the new `Employee` object which has been edited by `EditLeaveCommand#execute()`.
-* `Model#updateFilteredEmployeeList(Predicate)` — Updates the view of the application to show all employees.
-
-The method `EditLeaveCommand#execute()` returns a new `CommandResult` object, which stores information about the completion of the command.
-
-The following sequence diagram below shows how the edit leave operation works:
-
-![Edit Leave Sequence Diagram](images/EditLeaveSequenceDiagram.png)
-
-Given below is an example usage scenario for the command:
-
-**Step 1**: The user launches the application.
-
-**Step 2**: The user executes the `editleave id/EMPLOYEE_ID old/OLD_DATE new/NEW_DATE` command in the CLI.
-
-**Step 3**: The given remark will be deleted from the remark list of the employee with the given id.
-
-The following activity diagram summarizes what happens when a user executes the edit leave command:
-
-![Edit Leave Activity Diagram](images/EditLeaveActivityDiagram.png)
-
-#### Design considerations:
-
-**Aspect: Model-Employee Interaction:**
-
-* **Alternative 1 (current choice)**: Utilise `model#setEmployee` to add the edited employee into the model, doing the direct editing in `DeleteRemarkCommand#execute()`.
-    * Pros: Maintain immutability within Employee and Model classes.
-    * Cons: Potentially violates SRP.
-
-* **Alternative 2**: Create methods in model specifically to edit the `remarkList` attribute of the employee.
-    * Pros: More OOP, follows SRP by not having `DeleteRemarkCommand#execute()` perform the editing directly.
-    * Cons: Longer command execution, requires more parts to work together.
-
-
-### List Leave feature
-
-The list leave feature allows HouR user to view employees on leave on the specified date.
-
-#### Implementation
-
-The list leave command mechanism is facilitated by the `ListLeaveCommandParser` class which extends the `AddressbookParser`.
-
-`ListLeaveCommandParser#parse()` overrides  `Parser#parse()` in the Parser interface.
-
-`ListLeaveCommandParser` implements the following operations:
-
-* `ListLeaveCommandParser#parse()` — Parses the input arguments by storing the prefixes of its respective values as an `ArgumentMultimap`, and creates a new `ListLeaveCommand` object with the parsed employee ID, start date and end date.
-
-The `ListLeaveCommand` object then communicates with the `Model` API by calling the following methods:
-
-* `Model#updateFilteredEmployeeList(Predicate)` — Updates the view of the application to show all employees.
-
-The method `ListLeaveCommand#execute()` returns a `CommandResult` object, which stores information about the completion of the command.
-
-The diagram below details how the operation of listing employees on leave on the specified date works.
-
-![List Leave Sequence Diagram](images/uml-diagrams/ListLeaveSequenceDiagram.png)
-
-Given below is an example usage scenario for the command.
-
-**Step 1**: The user launches the application.
-
-**Step 2**: The user executes the `listleave on/DATE` command in the CLI.
-* `DATE` is an input of format `yyyy-MM-dd`.
-
-**Step 3**: Employees will be filtered based on whether they are on leave on the specified date.
-* The Employee List will be updated to contain only employees which have leaves taken on the specified date.
-
-
 ### Overtime feature
 
 The overtime feature allows HouR users to manage employee overtime hours.
@@ -869,8 +696,185 @@ The following activity diagram summarizes what happens when a user executes the 
 
 ![Overtime Activity Diagram](images/OvertimeActivityDiagram.png)
 
+### Report feature
 
+#### Implementation
 
+The proposed reporting mechanism is facilitated by `ReportCommandParser`. It implements the following operations:
+
+* `ReportCommandParser#parse()` — Parses the input employee ID and creates a new `ReportCommand` object with the parsed employee ID.
+
+The `ReportCommand` object then communicates with the `Model` and `ReportStorage` APIs by calling the following methods:
+
+* `Model#getFilteredEmployeeList()` — Gets the existing employee list, which is then looped through to get the employee with the given employee ID.
+
+* `ReportStorage#saveReport(Report)` — Saves the report generated in `ReportCommand#execute()` by `ReportCommand#generateReport(employee)`, which is then stored on the hard disk as a `.txt` file.
+
+The method `ReportCommand#execute()` returns a `CommandResult` object, which stores information about the completion of the command.
+
+The following sequence diagram below shows how the report operation works:
+
+![Report Sequence Diagram](images/ReportSequenceDiagram.png)
+
+Given below is an example usage scenario for the command:
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `report EMPLOYEE_ID` command in the CLI.
+
+**Step 3**: A report will be generated for the employee with the given ID.
+
+The following activity diagram summarises what happens when a user executes the report command:
+
+![Report Activity Diagram](images/ReportActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: Command-Model Interaction**
+
+* **Alternative 1 (current choice):** Utilise `Model#getFilteredEmployeeList()` to get the existing employee list, which is then looped through to get the employee with the given employee ID.
+    * Pros: Maintain immutability within Employee and Model classes.
+    * Cons: Longer command execution, requiring more parts to work together.
+
+* **Alternative 2:** Create methods in `Model` class specifically to get the employee with the given employee ID.
+    * Pros: Shorter command execution.
+    * Cons: May reduce immutability between Employee and Model classes.
+
+**Aspect: Command-Storage Interaction**
+
+* **Alternative 1 (current choice):** Utilise a dedicated storage class `ReportStorage` with the method `ReportStorage#saveReport(Report)` to save the report.
+    * Pros: Maintain SRP and SLAP within the command class.
+    * Cons: Longer command execution, requiring more parts to work together.
+
+* **Alternative 2:** Create methods in `ReportCommand` class to write and save the report.
+    * Pros: Shorter command execution, one less point of failure by eliminating the `ReportStorage` class.
+    * Cons: Less OOP, may violate SLAP within the command class.
+
+### Reset feature
+
+The reset feature allows HouR to reset employee overtime hours and leaves.
+
+#### Implementation
+
+The reset command mechanism is facilitated by `ResetCommandParser` class which implements the `Parser` interface.
+
+`ResetCommandParser#parse()` is exposed in the `Parser` interface as `Parse#parse()`.
+
+`ResetCommandParser` implements the following operations:
+* `ResetCommandParser#parse()` — Parses the input arguments by storing the index and the prefix of its respective values as an `ArgumentMultimap`,
+and creates a new `ResetCommand` object with the parsed field.
+
+The `ResetCommand` object then communicates with the `Model` API by calling the following methods:
+* `Model#setEmployee(Employee, Employee)` — Sets the employee in the existing employee list to the new `Employee` object which has been edited by `ResetCommand#execute()`.
+* `Model#updateFilteredEmployeeList(Predicate)` — Updates the view of the application to show all employees.
+
+The method `ResetCommand#execute()` returns a new `CommandResult` object, which stores information about the completion of the command.
+
+The following sequence diagram below shows how the reset operation works:
+
+![Reset Sequence Diagram](images/ResetSequenceDiagram.png)
+
+Given below is an example usage scenario for the command:
+
+**Step 1**: The user launches the application.
+
+**Step 2**: The user executes the `reset f/FIELD` command in the CLI (note that only `overtime` and `leaves` are valid).
+
+**Step 3**: The given field of all employees in the employee book will be reset to their default value.
+
+The following activity diagram summarizes what happens when a user executes the reset command:
+
+![Reset Activity Diagram](images/ResetActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: Model-Employee Interaction:**
+
+* **Alternative 1 (current choice):** Utilise `Model#setEmployee` to add the edited employee into the model, doing the direct editing in `ResetCommand#execute()`.
+    * Pros: Maintain immutability within Employee and Model classes.
+    * Cons: Potentially violates SRP.
+
+* **Alternative 2:** Create methods in `Model` class specifically to edit the fields of the employees.
+    * Pros: More OOP, follows SRP by not having `ResetCommand#execute()` perform the editing directly.
+    * Cons: Longer command execution, requiring more parts to work together.
+
+### \[Proposed\] Undo/redo feature
+
+#### Proposed Implementation
+
+The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+
+* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
+* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
+* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+
+These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+
+Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+
+![UndoRedoState0](images/UndoRedoState0.png)
+
+Step 2. The user executes `delete EID1234-5678` command to delete an employee in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete EID1234-5678` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+
+<img src="images/UndoRedoState1.png" width="500" />
+
+Step 3. The user executes `add n/David …​` to add a new employee. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+
+<img src="images/UndoRedoState2.png" width="500" />
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+
+</div>
+
+Step 4. The user now decides that adding the employee was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+
+![UndoRedoState3](images/UndoRedoState3.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+than attempting to perform the undo.
+
+</div>
+
+The following sequence diagram shows how the undo operation works:
+
+![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+
+</div>
+
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+
+![UndoRedoState4](images/UndoRedoState4.png)
+
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+
+![UndoRedoState5](images/UndoRedoState5.png)
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<img src="images/CommitActivityDiagram.png" width="250" />
+
+#### Design considerations:
+
+**Aspect: How undo & redo executes:**
+
+* **Alternative 1 (current choice):** Saves the entire address book.
+  * Pros: Easy to implement.
+  * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2:** Individual command knows how to undo/redo by
+  itself.
+  * Pros: Will use less memory (e.g. for `delete`, just save the employee being deleted).
+  * Cons: We must ensure that the implementation of each individual command are correct.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1849,35 +1853,35 @@ Overall, we are proud of our project, and we believe that we have done our best 
 
 ### Remark not shown in GUI employee list
 
-Problem:
+**Problem:**
 * In our current implementation, the remark is not displayed on the employee list in GUI. 
 * Users have to use report command to display employee remarks in message box.
 
-Solution:
+**Solution:**
 * We will update the employee card in the GUI to display remarks of the employees upon clicking on it.
 * This is to ensure the displayed employee card is not cluttered with too much information.
 
 ### Deleting a remark requires typing the whole remark
 
-Problem:
+**Problem:**
 * In our current implementation, deleting a remark requires the user to type in the remark exactly as it is
   typed in when added, i.e. exactly as it is shown in the message box.
 * This can be tedious, especially for long remarks.
 
-Solution:
+**Solution:**
 * A solution is to address a remark by its index (based on date added) instead of its value, so that
   `deleteremark id/EMPLOYEE_ID 1` is enough to delete the first remark of employee with
   employee id EMPLOYEE_ID.
 
 ### Adding a leave with a date far in the past and future
 
-Problem:
+**Problem:**
 * In our current implementation, users are able to add a leave for an employee with date that is too far in the past
   and in the future, such as `1111-11-11` and `2222-12-12`.
 * While users should be able to add a past and future dates as leaves for record keeping purposes,
   we see that being able to input a date this extreme is excessive and highly unrealistic.
 
-Solution:
+**Solution:**
 * We will enhance the leave list so that there are three separate lists, one for the current year, one for the previous year, and one for the following year.
 * Users will only be allowed to add leave dates that fall within the time period of the beginning of the previous year to the end of the following year,
   and the number of annual leaves allocated will be calculated accordingly.
@@ -1885,33 +1889,33 @@ Solution:
 
 ### No efficient way to view a specific employee's leave dates
 
-Problem:
+**Problem:**
 * In our current implementation, users can only view which employees are on leave on specific dates using `listleave` command.
   There is currently no specific command that allows users to view leave dates taken by a specific employee.
 * The list of an employee's leave date can only be displayed when a user adds, edits, or deletes a leave date of that employee.
 
-Solution:
+**Solution:**
 * A possible solution is to display the leaves taken by an employee when the user executes a report command on the employee.
 
 ### Two employees are allowed to have the same phone number or email
 
-Problem:
+**Problem:**
 * In our current implementation, adding an employee with the same phone number or email as another existing employee is allowed.
 * This is caused by our decision to only check same employee by comparing by employee id.
 * This might lead to unintended duplicates.
 
-Solution:
+**Solution:**
 * We will update the check for the same employee to check not only by employee id but also by phone number and email.
 
 ### Unable to view the number of leaves remaining when adding a leave period that exceeds maximum number of leaves
 
-Problem:
+**Problem:**
 * In our current implementation, if a user tries to add a leave for an employee but that exceeds the maximum number of allowed employee leaves,
   the app only displays an error message telling the user it exceeds the remaining number of leaves.
 * However, the app does not show the remaining number of leaves, so the fastest method is to use report command to display the current amount of
   leaves taken by the employee and perform manual subtraction to obtain remaining number of leaves.
 
-Solution:
+**Solution:**
 * We plan to revamp the error messages pertaining to this issue to display as much information as possible to the user, 
   in this case the remaining number of leaves.
 * In this case, it is to change the error message into this:<br>
@@ -1920,11 +1924,11 @@ Solution:
 
 ### Unclear error message for invalid email address
 
-Problem:
+**Problem:**
 * In our current implementation, when a user keys in an invalid email address, the error message shown is very long and slightly inconsistent.
 * This will highly confuse users who have very complex email addresses and keys the wrong email address by mistake.
 
-Solution:
+**Solution:**
 * We intend to keep error messages as short but as unambiguous as possible, so that users are able to identify
   their misinputs and fix them accordingly.
 * In this case, it is to shorten the email error message into this:<br>
@@ -1937,7 +1941,7 @@ Solution:
 
 ### Edit command error message is inconsistent with respect to invalid id
 
-Problem:
+**Problem:**
 * In our current implementation, when a user inputs an invalid index in an edit command, the error messages
   differ with different user inputs.
 * If index is less than one, i.e. 0 and below, the error message indicates an invalid command format due to the parser
@@ -1946,7 +1950,7 @@ Problem:
   command class being the one checking if index is too high.
 * This inconsistency between error messages on the same issue can be confusing for users.
 
-Solution:
+**Solution:**
 * We plan to let the command class take care of determining whether an index is invalid or not while the parser class
   only needs to check if index is an integer.
 * This will establish consistency when a user inputs a wrong index regardless if it's below one or above current number
@@ -1955,12 +1959,12 @@ Solution:
 
 ### Inconsistent arrangement of leaves in the leave list
 
-Problem:
+**Problem:**
 * In our current implementation, the leaves in the leave list shown in the result display are sorted according to when they were added to the employee.
 * Moreover, editing a leave date replaces the previous date with the new date, rather than deleting the previous date and adding the new date to the end of the leave list.
 * Such inconsistency can be confusing for users, and the current arrangement might lead to trouble finding specific leave dates in a long list of dates.
 
-Solution:
+**Solution:**
 * We plan to standardise the arrangement of the leave dates, such that they are sorted in chronological order.
 * After any command that changes the leave list (e.g. `addleave`, `editleave`), the leave list will be re-sorted,
   with the earliest date at the top of the list and the latest date at the end of the list.
