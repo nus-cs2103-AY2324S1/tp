@@ -313,7 +313,7 @@ Both commands can be executed with the following command words:
 - For indicating successful memorization: `yes`
 - For indicating unsuccessful memorization: `no`
 
-### **Code Structure**
+#### **Code Structure**
 
 The YesCommand and NoCommand classes consist of important methods:
 
