@@ -263,6 +263,14 @@ The following activity diagram shows how the schedule operation works:
 
 ![ScheduleCommandActivityDiagram](images/ScheduleCommandActivityDiagram.png)
 
+#### Design considerations:
+1. We decided to make the Schedule Feature case-sensitive. The patient name provided by the user must match the patient name in MediFlowR's
+records (even case sensitivity). The rationale is as such:
+   * Currently, in our application, it is possible for 2 patients to be created with names 'John Doe' and 'John doe'. 
+A case-insensitive Schedule command for 'John Doe' will cause a conflict. Thus, we have mandated that for the Schedule Feature, 
+the patient name have an exact match with the patient name in our database. This also reduces the chances of the user accidentally
+scheduling an appointment for the wrong patient but ensuring that the user conscientiously schedules an appointment for the specific patient.
+
 
 ### Reschedule feature
 
@@ -1169,19 +1177,15 @@ can be added to the same patient. However, that can be very confusing for users,
 a duplicate illness to the same patient but with a different casing for the illness name. We plan to make the checking for any
 duplicates in illness names case-insensitive so that this will no longer be an issue.
 
-5. Similar to Point 2, currently to schedule an appointment for a patient, the full name of the patient including the correct casing
-must be provided to the `schedule` command. We plan to change the `schedule`command such that it will accept the full name of a patient
-in any casing.
-
-6. Currently, gender can only be `MALE` or `FEMALE`, and the input has to match the words exactly, meaning that the input has to
+5. Currently, gender can only be `MALE` or `FEMALE`, and the input has to match the words exactly, meaning that the input has to
 be uppercase. However, in order to optimise for fast typists, we plan to treat the gender attribute as case-insensitive, so that
 any input that is either `male` or `female` will be accepted without worrying about the casing.
 
-7. Currently, a patient's birthdate can be set after the current date that the command is executed on. For example, `2023/10/20`
+6. Currently, a patient's birthdate can be set after the current date that the command is executed on. For example, `2023/10/20`
 can be added as a patient's birthdate even though the current date might be `2023/08/08`. We plan to add a validation for birthdates
 such that birthdates after the current date will not be considered a valid birthdate.
 
-8. Currently, the find command only is able to find by name. We plan to add the functionality to find anything that 
+7. Currently, the find command only is able to find by name. We plan to add the functionality to find anything that 
 matches the given conditions that could be other variables of a patient or appointment such as range of birthdays.
 
 --------------------------------------------------------------------------------------------------------------------
