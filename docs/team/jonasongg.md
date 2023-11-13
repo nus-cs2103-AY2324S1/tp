@@ -41,6 +41,9 @@ Below is a summary of my contributions to the project.
     `DeleteMemberCommand` classes and more
   * Wrote sections and added UML diagrams created with PlantUML explaining the view and copy commands and their
     processes
+  * Added view and copy commands' relevant portions for use cases and manual testing
+  * Added user stories
+  * Added planned enhancements
 * Contributions to team-based tasks:
     * Created the team repo and added the team members to it
     * Set up the project website for the team
