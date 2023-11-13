@@ -194,12 +194,13 @@ For example:
 [Scroll back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;">
+
+<div style="page-break-after: always;"></div>
 
 ## CampusCompanion Tutorial (for new users)
 
 This is a tutorial for new CampusCompanion users. This tutorial will provide you step-by-step instructions for how to use each
-command for both assignments and internships.
+command for both assignments and internships. 
 
 1. Launch CampusCompanion. You may refer to the instructions [here](#getting-started).
 
@@ -208,33 +209,29 @@ command for both assignments and internships.
 <img src="images/NewUserTutListA.png" width="550" />
 
 3. Let's try **adding an assignment** to CampusCompanion. Enter the command
-   `add-a n/CC tutorial 1 e/2023-11-29`
+`add-a n/CC tutorial 1 e/2023-11-29` 
 
 <img src="images/NewUserTutAdd1.png" width="550" />
 
-</div>
-
-<div style="page-break-after: always;">
+<div style="page-break-after: always;"></div>
 
 4. Add a few more assignments. Try out filling optional parameters as well, etc
 - `add-a n/CS2100 Assignment 1 e/2023-11-30 13:00 t/Coding`
-- `add-a n/CC optional 1 e/2023-11-29 16:00 d/try this out! s/complete p/2023-11-27 t/Optional`
-    - Note: On adding assignments, they will automatically be sorted by their deadlines. The assignment due earliest will be first in the assignments list, which can be viewed using `list-a`
+- `add-a n/CC optional 1 e/2023-11-29 16:00 d/try this out! s/complete p/2023-11-27 t/Optional` 
+  - Note: On adding assignments, they will automatically be sorted by their deadlines. The assignment due earliest will be first in the assignments list, which can be viewed using `list-a`
 
 <img src="images/NewUserTutAddMoreAssgn.png" width="550" />
 
 5. Let us try editing the description of `CC tutorial 1` to say `nice descriptive description!`.
-   In the example above, `CC tutorial 1` is in index 2, so we do `edit-a i/2 d/nice descriptive description!`
+In the example above, `CC tutorial 1` is in index 2, so we do `edit-a i/2 d/nice descriptive description!`
 
 <img src="images/NewUserTutEdit.png" width="550" /> <br/>
 
-</div>
-
-<div style="page-break-after: always;">
+<div style="page-break-after: always;"></div>
 
 6. We are done with `CC tutorial 1`! Let's now mark it as complete. First, let's try using `find-a` to filter and narrow
-   down the list. We can do `find-a tutorial` to filter the assignments list to show only assignments that
-   contain `tutorial`
+down the list. We can do `find-a tutorial` to filter the assignments list to show only assignments that
+contain `tutorial`
 
 <img src="images/NewUserTutFind.png" width="550" />
 
@@ -242,56 +239,46 @@ command for both assignments and internships.
 
 <img src="images/NewUserTutMark.png" width="550" /> <br/>
 
-</div>
-
-
-<div style="page-break-after: always;">
+<div style="page-break-after: always;"></div>
 
 8. To see all our assignments again, let's do `list-a`
 
 <img src="images/NewUserTutList.png" width="550" />
 
 9. Lastly for our assignments, let's delete our `CC tutorial 1` as we no longer want to track it.
-   With reference the picture above, we will do `delete-a 2`
+With reference the picture above, we will do `delete-a 2`
 
 <img src="images/NewUserTutDelete.png" width="550" /> <br/>
 
-</div>
-
-<div style="page-break-after: always;">
+<div style="page-break-after: always;"></div>
 
 10. Now, let's change the view to see internships. Enter the command `list-i`
 
 <img src="images/NewUserTutListI.png" width="550" />
 
 11. Similar to assignments, we can add internship roles (under applications) and tasks! Let's add a few roles now using the command `add-i-role`
-- `add-i-role n/Google r/SWE c/Summer 2024`
-- `add-i-role n/FaceBook r/DevOps c/Winter 2024 d/Impress Mr Mark p/9500 o/follow-up l/Florida`
+ - `add-i-role n/Google r/SWE c/Summer 2024`
+ - `add-i-role n/FaceBook r/DevOps c/Winter 2024 d/Impress Mr Mark p/9500 o/follow-up l/Florida`
 
 <img src="images/NewUserTutAddIRoles.png" width="550" /> <br/>
 
-</div>
-
-
-<div style="page-break-after: always;">
+<div style="page-break-after: always;"></div>
 
 12. Now, let's add in some tasks relating to our roles, with `add-i-task`
-- `add-i-task n/OA i/1  e/2023-11-30 11:30`
-- `add-i-task n/Interview i/1 e/2023-12-10 16:00 o/follow-up`
-- `add-i-task n/OA i/2 e/2023-11-29 17:30 s/complete o/follow-up`
+ - `add-i-task n/OA i/1  e/2023-11-30 11:30` 
+ - `add-i-task n/Interview i/1 e/2023-12-10 16:00 o/follow-up`
+ - `add-i-task n/OA i/2 e/2023-11-29 17:30 s/complete o/follow-up`
 
 <img src="images/NewUserTutAddITasks.png" width="550" />
 
 13. We can also mark tasks as complete with `mark-i` and edit tasks and roles using `edit-i-task` and `edit-i-role` respectively. Let's try!
-- `mark-i 2`
-- `edit-i-task i/1 o/awaiting`
-- `edit-i-role i/1 c/Winter 2024 d/Prepare for google questions p/12500 l/Labrador Park`
+ - `mark-i 2`
+ - `edit-i-task i/1 o/awaiting`
+ - `edit-i-role i/1 c/Winter 2024 d/Prepare for google questions p/12500 l/Labrador Park`
 
 <img src="images/NewUserTutMarkEditI.png" width="550" /> <br/>
 
-</div>
-
-<div style="page-break-after: always;">
+<div style="page-break-after: always;"></div>
 
 14. Lastly, let's find Google with `find-i-role google` and delete the completed Google OA task with `delete-i-task 1`
 
@@ -308,9 +295,6 @@ To view all our features, you may visit out [features section](#features).
 [Scroll back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
-
-</div>
-
 ## Features
 
 ## Assignment Features
