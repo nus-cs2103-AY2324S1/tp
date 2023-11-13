@@ -6,7 +6,7 @@ title: HouR
 [![CI Status](https://github.com/AY2324S1-CS2103T-W12-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2324S1-CS2103T-W12-1/tp/actions)
 [![codecov](https://codecov.io/gh/AY2324S1-CS2103T-W12-1/tp/branch/master/graph/badge.svg)](https://codecov.io/gh/AY2324S1-CS2103T-W12-1/tp)
 
-![Ui](images/ug-pics/Ui.png)
+![Ui](images/Ui.png)
 
 **HouR is a desktop application for managing your employee records.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
