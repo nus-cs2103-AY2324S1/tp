@@ -33,7 +33,7 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 
 1. Ensure you have _Java_ <sup>[3](#glossary)</sup>  11 or above installed in your Computer. You can check by opening a _command terminal_ <sup>[4](#glossary)</sup> and typing `java -version`.
 
-2. Download the latest `tutormate.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-3/tp/releases).
+2. Download the latest `tutormate.jar` from [here](https://github.com/AY2324S1-CS2103T-T11-3/tp/releases/latest).
 
 3. Copy the file to the folder you want to use as the _home folder_ <sup>[5](#glossary)</sup> for your TutorMate.
 
@@ -77,8 +77,8 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 ![Ui](images/Ui.png)
 
 ### Terminologies / Symbols
-* Flag: A flag is a tab started with dash "-" that is used to identify the type of information that is being provided e.g. -name.
-<!-- todo, validate that all boxes thing works, as IDE does not show it -->
+* Flag: A flag is a word starting with a dash "-" that is used to identify the type of information that is being provided e.g. -name.
+
 * Text formatted as code snippets are either commands e.g. `list schedule`, command formats e.g. `list [LIST][KEYWORDS]` or parameters e.g. `NAME`.
 * <box type="info" seamless>This box denotes additional information.</box>
 * <box type="tip" seamless>This box denotes tips to improve usability.</box>
@@ -99,11 +99,14 @@ This box denotes command outputs.
   e.g. both `link -student student name -lesson lesson name` and `link -lesson lesson name -student student name` are acceptable.
 * Parameters without a flag need to strictly follow the order specified.<br>
   e.g. For delete command which specifies `delete INDEX`, the "index" parameter must immediately follow the command name "delete".<br>
-* All command name are case-insensitive. <br>
+* All command names are case-insensitive. <br>
   e.g. `linkTo` is the same as `linkto` or `LiNkTo`.
 * When applicable, extraneous parameters and flags for commands will be ignored .<br>
   e.g. if the command entered is `add info -name new name -notValid flagBody -subject physics`, it will be interpreted as `add -name new name -subject physics`. "info " and "-notValid flagBody" will be ignored. <br>
+  e.g. if the command entered is `delete 3 extra`, it will be interpreted as `delete 3`<br>
   e.g. However, `delete extra 3` will not be accepted as delete command specifies that the index parameter must immediately follow the command name.
+
+
 </box>
 
 ### Other Notes
@@ -119,23 +122,23 @@ This box denotes command outputs.
 
 ### Parameter Summary
 
-| Parameter       | Used in                                                                                             | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Valid examples                                                                                                  | Invalid examples             |
-|-----------------|-----------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|------------------------------|
-| `INDEX`         | `show`<br/>`editPerson` `deletePerson`<br/>`editLesson` `deleteLesson` <br/> `addTask` `deleteTask` | Must be a positive integer in the range of 1 to 99999 inclusive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | "1", "24", "12"                                                                                                 | "-1", "2147483648", "100000" |
-| `LIST`          | `list`                                                                                              | Must be either "Students", "Schedule", "Tasks". Parameter is case-insensitive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | "STUDENTS", "stuDEnts"                                                                                          | "task", "student"            |
-| `KEYWORDS`      | `list`                                                                                              | Must be either "phone", "email", "address", "tags", "subjects", "remark", "none", or "all"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | "none", "all", "subJeCts"                                                                                       | "subject", ""                |
-| `NAME`          | `addLesson` `editLesson`<br/>`addPerson` `editPerson`<br/>`filter` `find`                           | Must not be empty. <br/>Must only contain alphanumeric characters.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "John", "Elton"                                                                                                 | "", "jo!"                    |   
-| `SUBJECT`       | `addLesson` `editLesson`                                                                            | Must be either "Mathematics", "Physics", <br/>"Biology", "Chemistry" or "English".                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "mathematics", "MATHEMATICS",                                                                                   | "math"                       |
-| `SUBJECTS`      | `addPerson` `editPerson`<br/>`filter`                                                               | Must be a valid SUBJECT (see row above) or multiple entries of SUBJECT separated using a comma (,).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | "mathematics", "mathematics, physics"                                                                           | "math, physics"              | 
-| `PHONE`         | `addPerson` `editPerson`                                                                            | Should be at least 3 characters long, and can only contain numbers.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | "96681234", "823234"                                                                                            | "+6592212341", "98"          |
-| `EMAIL`         | `addPerson` `editPerson`                                                                            | Should follow the format localpart@domain.<br/>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.<br/>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.<br/>The domain name must:<br/>- end with a domain label at least 2 characters long<br/>- have each domain label start and end with alphanumeric characters<br/>- have each domain label consist of alphanumeric characters, separated only by hyphens, if any. | "hello@gmail.com", "test@g.com"                                                                                 | "hello.com", "f@f"           |
-| `ADDRESS`       | `addPerson` `editPerson`                                                                            | Must not be empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "Bedok", "25 Lower Kent Ridge Road"                                                                             | ""                           |  
-| `TAG`           | `addPerson` `editPerson`<br/>`filter`                                                               | Must not be empty and cannot contain any spaces. Multiple tags can be specified at once by using a comma (,) as a separator.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | "jc,express", "weak"                                                                                            | "junior college"             |
-| `DATE`          | `addLesson` `editLesson`<br/>`filter`                                                               | Must follow either the date format **yyyy/MM/dd**, **yy/MM/dd**, **MM/dd**, **dd**. See [here](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table) for an exhaustive explanation of the allowable formats.                                                                                                                                                                                                                                                                                                                                                                                               | To represent the date 13/08/2023 and assuming today is 07/08/2023: <br/>"2023/08/13", "23/08/13", "08/13", "13" | "20222/08/2", "13/1"         | 
-| `TIME`          | `addLesson` `editLesson`<br/>`filter`                                                               | Must follow either HH:mm or H:mm (only for 0:00 to 9:59) See [here](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table) for an exhaustive explanation of the allowable formats.                                                                                                                                                                                                                                                                                                                                                                                                                          | "13:30", "9:17"                                                                                                 | "9:1", "13:70"               |
-| `DESCRIPTION`   | `addTask`                                                                                           | Must not be empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "Mark Alkanes Extra Practice", "Make Forces Notes"                                                              | ""                           |
-| `SEARCH_STRING` | `find`                                                                                              | Must not be empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "Alex", "alex yeoh", "+asdf-"                                                                                   | ""                           |
-
+| Parameter                             | Used in                                                                                | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Valid examples                                                                                                  | Invalid examples            |
+|---------------------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|-----------------------------|
+| `INDEX`                               | `show`<br/>`editPerson` `deletePerson`<br/>`editLesson` `deleteLesson`                 | Must be a positive integer in the range of 1 to 99999 inclusive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | "1", "24", "12"                                                                                                 | "-1", "2147483648", "10000" |
+| `LIST`                                | `list`                                                                                 | Must be either "Students", "Schedule", "Tasks". Parameter is case-insensitive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | "STUDENTS", "stuDEnts"                                                                                          | "task", "student"           |
+| `KEYWORDS`                            | `list`                                                                                 | Must be either "phone", "email", "address", "tags", "subjects", "remark", "none", or "all"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | "none", "all", "subJeCts"                                                                                       | "subject", ""               |
+| `NAME`, `LESSON_NAME`, `STUDENT_NAME` | `addLesson` `editLesson`<br/>`addPerson` `editPerson`<br/>`filter` `find`<br/>`linkTo` | Must not be empty. <br/>Must only contain alphanumeric characters.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "John", "Elton"                                                                                                 | "", "jo!"                   |   
+| `SUBJECT`                             | `addLesson` `editLesson`                                                               | Must be either "Mathematics", "Physics", <br/>"Biology", "Chemistry" or "English".                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "mathematics", "MATHEMATICS",                                                                                   | "math"                      |
+| `SUBJECTS`                            | `addPerson` `editPerson`<br/>`filter`                                                  | Must be a valid SUBJECT (see row above) or multiple entries of SUBJECT separated using a comma (,).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | "mathematics", "mathematics, physics"                                                                           | "math, physics"             | 
+| `PHONE`                               | `addPerson` `editPerson`                                                               | Should be at least 3 characters long, and can only contain numbers.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | "96681234", "823234"                                                                                            | "+6592212341", "98"         |
+| `EMAIL`                               | `addPerson` `editPerson`                                                               | Should follow the format localpart@domain.<br/>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.<br/>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.<br/>The domain name must:<br/>- end with a domain label at least 2 characters long<br/>- have each domain label start and end with alphanumeric characters<br/>- have each domain label consist of alphanumeric characters, separated only by hyphens, if any. | "hello@gmail.com", "test@g.com"                                                                                 | "hello.com", "f@f"          |
+| `ADDRESS`                             | `addPerson` `editPerson`                                                               | Must not be empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "Bedok", "25 Lower Kent Ridge Road"                                                                             | ""                          |  
+| `TAG`                                 | `addPerson` `editPerson`<br/>`filter`                                                  | Must not be empty and cannot contain any spaces. Multiple tags can be specified at once by using a comma (,) as a separator.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | "jc,express", "weak"                                                                                            | "junior college"            |
+| `DATE`                                | `addLesson` `editLesson`<br/>`filter`                                                  | Must follow either the date format **yyyy/MM/dd**, **yy/MM/dd**, **MM/dd**, **dd**. See [here](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table) for an exhaustive explanation of the allowable formats.                                                                                                                                                                                                                                                                                                                                                                                               | To represent the date 13/08/2023 and assuming today is 07/08/2023: <br/>"2023/08/13", "23/08/13", "08/13", "13" | "20222/08/2", "13/1"        | 
+| `TIME`                                | `addLesson` `editLesson`<br/>`filter`                                                  | Must follow either HH:MM or H:MM (only for 0:00 to 9:59)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | "13:30", "9:17"                                                                                                 | "9:1", "13:70"              |
+| `SEARCH_STRING`                       | `find`                                                                                 | Must not be empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "Alex", "alex yeoh", "+asdf-"                                                                                   | ""                          |
+| `DESCRIPTION`                         | `addTask`                                                                              | Must not be empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "Mark Alkanes Extra Practice", "Make Forces Notes"                                                              | ""                          |
+ 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -147,7 +150,7 @@ It will display the specified list and its corresponding details panel.
 
 Format: `list [LIST] [KEYWORDS]`
 * Shows the list and associated detail panel for the specified `[LIST]`.
-* The `[KEYWORDS]` is for which specifying student details to display, and is only valid for ___STUDENTS list___. When used for ___SCHEDULE list___ and ___TASKS list___, they will be ignored.
+* The `[KEYWORDS]` parameter is for specifying which student details to display, and is only valid for ___STUDENTS list___. When used for ___SCHEDULE list___ and ___TASKS list___, they will be ignored.
 * Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
@@ -161,7 +164,7 @@ Format: `list [LIST] [KEYWORDS]`
 
 Example usages:
 * `list students` displays all the students with their names (including previously specified fields).
-* `list students subjects email` displays all the students with their names, a list of subjects for each student and their email.
+* `list students subjects email` displays all the students with their names, the list of subjects for each student and their email.
 
 Success outputs:
 * Input: `list students` (with no additional student details):
@@ -299,7 +302,7 @@ The lesson index provided is invalid
 
 ### Add Feature
 
-Adds a student/lesson/task to the students/schedule list of the application or the task list of a lesson in the application.
+Adds a student/lesson/task to the ___STUDENTS list___, ___SCHEDULE list___ or the task list of a lesson in the application.
 
 #### For Student:
 
@@ -343,7 +346,6 @@ For example, addPerson -name John -phone 91234567
 If you are currently displaying student list, you could use 'add' inplace of 'addPerson'. 
 Note you must provide a 'name' not already in the address book.
  ```
-![Failure for addPerson](images/add-person/add_person_failure.png)
 
 
 #### For Schedule:
@@ -459,7 +461,8 @@ Format: `deletePerson INDEX`
 
 Example usages:
 * `deletePerson 1`
-* In ___STUDENTS list___ : `delete 1`
+* In ___STUDENTS list___ : 
+  * `delete 1`
 
 Success outputs:
 * Input: `deletePerson 1`
@@ -753,391 +756,290 @@ Unknown command
 
 ### Filter Feature : `filter`
 
-About the feature (generally that is similar across states)
-<!-- use "SUBJECTS" as parameter here -->
-Format: `command COMPULSORY [optional]` (if same command format across states)
-* Format info 1
-* Format info 2
-
-<box type="tip" seamless> 
-
-**Tips:**
-- Tip 1
-- Tip 2
-
-</box>
-
-
 #### For Student:
+<box type="info" seamless>
 
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
+You must be in the ___STUDENTS list___ to run this command. Type `list students` to go to the ___STUDENTS list___.</box>
+Format: `[-name NAME] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]`
+* Multiple fields can be specified at the same time.
+* Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
 
 **Tips:**
-- Tip 1
-- Tip 2
-
+- When filtering by multiple fields, only the students which match all the fields are returned.
+- To reset the view to an unfiltered state, type `list students`.
+- If no students that match the filters are found, an empty list will be shown.
 </box>
 
 Example usages:
-* `some code here`
-* `another code here`
+* `filter -name Alex -tag primary -subject Mathematics`
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `filter -name Alex -tag primary -subject Mathematics`
+* Input: `filter -name Brian`
 ```
-This block of code is for success outputs
+Filtered student list successfully!
 ```
-Failure outputs:
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
+![Success for filter 1](images/filter/filter_positive_1.png)
 
-* Input: `invalid command code here`
-*   Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+Failure outputs:
+* Input: `filter -name Alan!`
+  * Error: The non-alphanumeric character "!" is used. To fix the error, remove all non-alphanumeric characters.
 ```
-Invalid command with the error message here
+Invalid filter format: Names should only contain alphanumeric characters and spaces, and it should not be blank. 
+Usage: filter (any number of unique -[name|subject|tag|remark] [value]). 
+For example, filter -name John -subject physics,english
 ```
 
 #### For Schedule:
+<box type="info" seamless>
 
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
+You must be in the **_SCHEDULE list_** to run this command. Type `list schedule` to go to the **_SCHEDULE list_**.</box>
+Format: `filter [-name NAME] [-subject SUBJECTS] [-before DATE] [-on DATE] [-after DATE] [-remark REMARK]`
+* Only one of `-before`, `-on`, `-after` can be used at once. For example, you cannot use both `-before` and `-after` in the same filter command.
+* The dates specified in `-before` and `-after` are exclusive. For example, specifying `-before 2023/05/01` will find lessons before but not on 2023/05/01.
+* Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
 
 **Tips:**
-- Tip 1
-- Tip 2
+- When filtering by multiple fields, only the lessons which match all the fields are returned.
+- To reset the view to an unfiltered state, type `list schedule`.
+- If no lessons that match the filters are found, an empty list will be shown.
 
 </box>
 
 Example usages:
-* `some code here`
-* `another code here`
+* `filter -before 2022/10/10 -subject Mathematics`
+* `filter -name CS2103T Lab`
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `filter -before 2023/12/20 -subject Mathematics`
 ```
-This block of code is for success outputs
+Filtered schedule list successfully!
 ```
+![Success for filter 2](images/filter/filter_positive_2.png)
 Failure outputs:
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Input: `filter -before 2022/10/10 -after 2022/01/01`
+  * Error: Both the `-before` and `-after` flags are specified. Use only one of `-before`, `-after`, and `-on` in the same command.
 ```
-Invalid command with the error message here
+TODO
 ```
 
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Input: `filter -on 2/2/2`
+  * Error: The date given is invalid. Please specify a date using the correct format (see [here](#parameter-summary))
 ```
-Invalid command with the error message here
+Invalid lesson format: 2/2/2 is not a valid date, please use yyyy/mm/dd or mm/dd or dd
+for example, assume today is 2023/11/3, to add 2023/11/29, could use 29, 11/29, 2023/11/29 or 23/11/29. 
+Usage: filter -(at least one of unique [-name|subject|before|on|after|remark VALUE]). 
+For example, filter -before 2023/10/10 -subject physics
+Note you should only use one of -before, -on, -after at a time.
 ```
 
 #### For Task:
-
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
-
-<box type="tip" seamless>
-
-**Tips:**
-- Tip 1
-- Tip 2
-
-</box>
-
-Example usages:
-* `some code here`
-* `another code here`
-
-Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
-```
-This block of code is for success outputs
-```
-Failure outputs:
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
-
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
+Filtering is not supported in the Task List at this time!
 
 <br>
 
 ### Link Feature : `linkTo`
-
-About the feature (generally that is similar across states)
-
-Format: `command COMPULSORY [optional]` (if same command format across states)
-* Format info 1
-* Format info 2
-
-<box type="tip" seamless> 
-
-**Tips:**
-- Tip 1
-- Tip 2
-
-</box>
-
+You can link lessons to students, and vice versa. For example, if a lesson has a few students, you can link each of the students to the lesson, so that you can quickly see who is attending this specific lesson.  
 
 #### For Student:
+<box type="info" seamless>
 
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
+You must be in the **_STUDENTS list_** and are viewing a student to run this command. Type `list students` to go to the **_STUDENTS list_**, then type `show INDEX` to select a student to link lessons to.</box>
+Format: `linkTo [LESSON_NAME]`
+* `LESSON_NAME` is the name of the lesson you would like to link to.
+* * Refer to `LESSON_NAME`'s constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
 
 **Tips:**
-- Tip 1
-- Tip 2
+- You can link a student to multiple lessons. Simply run the `linkTo` command repeatedly.
+- `LESSON_NAME` is case-insensitive. This means that "CS2103T Lab" and "cs2103T lab" are treated as the same lesson.
+
+</box>
+
+<box type="warning" seamless>
+
+As of now, you **cannot** unlink a lesson from a student. Use caution when running the `linkTo` command.
 
 </box>
 
 Example usages:
-* `some code here`
-* `another code here`
+* `linkTo CS2103T Lab`
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `linkTo CS2103T Lab`
 ```
-This block of code is for success outputs
+Linked Alex Wong to CS2103T Lab
 ```
+![Success for linking to lesson](images/linkTo/linkTo_lesson_positive.png)
 Failure outputs:
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Current state: In the ___STUDENTS list___ and no student is selected
+* Input: `linkTo CS2103T Lab`
+  * Error: A student is not yet selected. Select a student using `show INDEX` first.
 ```
-Invalid command with the error message here
+No student is shown
+LinkTo command usage: linkTo [LESSON_NAME]
+Example: linkTo CS2103T lab1
+Note: This command is only available when a student is shown
 ```
 
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Current state: In the ___STUDENTS list___ and a student is selected
+* Input: `linkTo CS2109 Lab`
+  * Error: No such lesson with the name "CS2109 Lab". Make sure the lesson's name is correct and try again.
 ```
-Invalid command with the error message here
+No such lesson
 ```
 
 #### For Schedule:
+<box type="info" seamless>
 
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
+You must be in the **_SCHEDULE list_** and are viewing a lesson to run this command. Type `list schedule` to go to the **_SCHEDULE list_**, then type `show INDEX` to select a lesson to link students to.</box>
+Format: `linkTo STUDENT_NAME`
+* `STUDENT_NAME` is the name of the student you would like to link to.
+* Refer to `STUDENT_NAME`'s constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
 
 **Tips:**
-- Tip 1
-- Tip 2
+- You can link a lesson to multiple students. Simply run the `linkTo` command repeatedly.
+- `STUDENT_NAME` is case-insensitive. This means that "Alex Yeoh" and "alex yeoh" are treated as the same student.
 
 </box>
 
+
+<box type="warning" seamless>
+
+As of now, you **cannot** unlink a student from a lesson. Use caution when running the `linkTo` command.
+</box>
+
 Example usages:
-* `some code here`
-* `another code here`
+* `linkTo Bernice Yu`
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `linkTo Bernice Yu`
 ```
-This block of code is for success outputs
+Linked Bernice Yu to CS2103T Lab
 ```
+![Success for linking to lesson](images/linkTo/linkTo_lesson_positive.png)
 Failure outputs:
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Current state: In the ___SCHEDULE list___ and no lesson is selected
+* Input: `linkTo Bernice Yu`
+  * Error: A lesson is not yet selected. Select a lesson using `show INDEX` first.
 ```
-Invalid command with the error message here
+No lesson is shown
+LinkTo command usage: linkTo [STUDENT_NAME]
+Example: linkTo Alice Pauline
+Note: This command is only available when a lesson is shown
 ```
 
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Current state: In the ___SCHEDULE list___ and a lesson is selected
+* Input: `linkTo Bernice Yong`
+  * Error: No such student with the name "Bernice Yong". Make sure the student's name is correct and try again.
 ```
-Invalid command with the error message here
+No such student with name Bernice Yong found
 ```
 
 #### For Task:
-
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
-
-<box type="tip" seamless>
-
-**Tips:**
-- Tip 1
-- Tip 2
-
-</box>
-
-Example usages:
-* `some code here`
-* `another code here`
-
-Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
-```
-This block of code is for success outputs
-```
-Failure outputs:
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
-
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
+This feature is not used for tasks!
 
 <br>
 
 ### Navigate Feature : `nav`
 
-About the feature (generally that is similar across states)
+After linking students to lessons or vice versa, you can "navigate" between the student and their linked lessons, or the lesson and its linked students.
+This comes in handy when you want to view the details of students in a lesson, or see what lessons a student has upcoming.
 
-Format: `command COMPULSORY [optional]` (if same command format across states)
-* Format info 1
-* Format info 2
-
-<box type="tip" seamless> 
-
-**Tips:**
-- Tip 1
-- Tip 2
-
-</box>
-
+Format: `nav` 
 
 #### For Student:
+<box type="info" seamless>
 
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
-
-<box type="tip" seamless>
-
-**Tips:**
-- Tip 1
-- Tip 2
-
-</box>
-
-Example usages:
-* `some code here`
-* `another code here`
-
-Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
-```
-This block of code is for success outputs
-```
-Failure outputs:
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
-
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
-
-#### For Schedule:
-
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
+You must be in the **_STUDENTS list_** and are viewing a student to run this command. Type `list students` to go to the **_STUDENTS list_**, then type `show INDEX` to select a student.</box>
 
 <box type="tip" seamless>
 
 **Tips:**
-- Tip 1
-- Tip 2
+- The student must have at least one linked lesson for the command to work.
 
 </box>
 
 Example usages:
-* `some code here`
-* `another code here`
+* `nav`
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `nav`
 ```
-This block of code is for success outputs
+Navigated to student's lessons
 ```
+![Success for navigating to lessons](images/nav/nav_fromStudent_positive.png)
 Failure outputs:
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Current state: In the ___STUDENTS list___ and a student is not selected
+* Input: `nav`
+  * Error: `nav` only works when a student is selected. Select a student with the `show INDEX` command and try again.
 ```
-Invalid command with the error message here
+No student is currently displayed
+```
+* Current state: In the ___STUDENTS list___ and a student without any linked lessons is selected
+* Input: `nav`
+  * Error: `nav` only works when a student has linked lessons. Link a lesson with the `linkTo` command.
+```
+This student has no linked lessons
 ```
 
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
+<box type="info" seamless>
 
-#### For Task:
-
-Format: `command COMPULSORY [optional]` (for list specific format)
-* Format info 1
-* Format info 2
+You must be in the **_SCHEDULE list_** and are viewing a lesson to run this command. Type `list schedule` to go to the **_SCHEDULE list_**, then type `show INDEX` to select a lesson.</box>
 
 <box type="tip" seamless>
 
 **Tips:**
-- Tip 1
-- Tip 2
+- The lesson must have at least one linked student for the command to work.
 
 </box>
 
 Example usages:
-* `some code here`
-* `another code here`
+* `nav`
 
 Success outputs:
-* Input: `code with compulsory parameters`
-* Input: `code with compulsory and optional parameters`
+* Input: `nav`
 ```
-This block of code is for success outputs
+Navigated to lesson's students
 ```
+![Success for navigating to students](images/nav/nav_fromLesson_positive.png)
 Failure outputs:
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
+* Current state: In the ___SCHEDULE list___ and a lesson is not selected
+* Input: `nav`
+  * Error: `nav` only works when a lesson is selected. Select a lesson with the `show INDEX` command and try again.
 ```
-Invalid command with the error message here
+No lesson is currently displayed
+```
+* Current state: In the ___SCHEDULE list___ and a lesson without any linked students is selected
+* Input: `nav`
+  * Error: `nav` only works when a lesson has linked students. Link a student with the `linkTo` command.
+```
+This lesson has no linked students
+```
+* Current state: In the ___STUDENTS list___ and a student is not selected
+* Input: `nav`
+  * Error: `nav` only works when a student is selected. Select a student with the `show INDEX` command and try again.
+```
+No student is currently displayed
+```
+* Current state: In the ___STUDENTS list___ and a student without any lessons students is selected
+* Input: `nav`
+  * Error: `nav` only works when a student has linked lessons. Link a lesson with the `linkTo` command.
+```
+This student has no linked lessons
 ```
 
-* Input: `invalid command code here`
-  * Error: Explanation and solution here, this is because the flag has an incorrect value, bla bla bla
-```
-Invalid command with the error message here
-```
+
+#### For task list:
+This feature is not used for tasks!
+
 
 <br>
 
@@ -1245,19 +1147,21 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 
 ## Command Summary
 
-| Action      | List                               | Format                                                                                                                                    | Examples                                                                                                       | Remarks                                                              |
-|-------------|------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------|
-| **List**    | Any                                | `list [LIST] [KEYWORDS]`                                                                                                                  | `list students email`, `list schedule`, `list tasks`                                                           | `list` without optional parameters displays the ___SCHEDULE list___  |
-| **Add**     | Students(add), Any(addPerson)      | `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]`            | `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS` | NA                                                                   |
-| **Add**     | Schedule(add), Any(addLesson)      | `addLesson -name NAME [-day DATE] [-start TIME] [-end TIME] [-subject SUBJECT]`                                                           | `addLesson -name Lesson at Tai Seng -start 09:00 -end 11:00 -day 03/21 -subject physics`                       | NA                                                                   |
-| **Add**     | Schedule                           | `addTask [INDEX] DESCRIPTION`                                                                                                             | `addTask 1 Make Forces Notes`                                                                                  | NA                                                                   |
-| **Delete**  | Students(delete),Any(deletePerson) | `deletePerson INDEX`                                                                                                                      | `deletePerson 1`                                                                                               | NA                                                                   |
-| **Delete**  | Schedule(delete),Any(deleteLesson) | `deleteLesson INDEX`                                                                                                                      | `deleteLesson 1`                                                                                               | NA                                                                   |
-| **Delete**  | Schedule                           | `deleteTask INDEX`                                                                                                                        | `deleteTask 1`                                                                                                 | `show INDEX` to show the lesson has to be used prior to `deleteTask` |
-| **Edit**    | Students(edit), Any(editPerson)    | `editPerson [INDEX] [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]` | `editPerson 1 -subject physics -remark need urgent help`                                                       | "INDEX" can be  omitted when editing the currently shown person      |
-| **Edit**    | Schedule(edit), Any(editLesson)    | `editLesson [INDEX] [-name NAME] [-day DATE] [-start TIME] [-end TIME] [-subject SUBJECT]`                                                | `editLesson 2 -day 11/29 -start 14:30 -end 15:30`                                                              | "INDEX" can be  omitted when editing the currently shown lesson      |
-| **Find**    | Students, Schedule                 | `find SEARCH_STRING`                                                                                                                      | `find bernice`, `find lesson`                                                                                  | Disabled in ___TASKS list___                                         |
-| **Feature** | Any                                | `command format`                                                                                                                          | `sample valid command`                                                                                         | Any additional remarks here                                          |
+| Action      | List                               | Format                                                                                                                                    | Examples                                                                                                       | Remarks                                                                    |
+|-------------|------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
+| **List**    | Any                                | `list [LIST] [KEYWORDS]`                                                                                                                  | `list students email`, `list schedule`, `list tasks`                                                           | `list` without optional parameters displays the ___SCHEDULE list___        |
+| **Show**    | Any                                | `show INDEX`                                                                                                                              | `show 1`, `show 3`                                                                                             | `show` will show the specified item at the given index of the current list |
+| **Add**     | Students(add), Any(addPerson)      | `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]`            | `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS` | NA                                                                         |
+| **Add**     | Schedule(add), Any(addLesson)      | `addLesson -name NAME [-day DATE] [-start TIME] [-end TIME] [-subject SUBJECT]`                                                           | `addLesson -name Lesson at Tai Seng -start 09:00 -end 11:00 -day 03/21 -subject physics`                       | NA                                                                         |
+| **Add**     | Schedule                           | `addTask [INDEX] DESCRIPTION`                                                                                                             | `addTask 1 Make Forces Notes`                                                                                  | NA                                                                         |
+| **Delete**  | Students(delete),Any(deletePerson) | `deletePerson INDEX`                                                                                                                      | `deletePerson 1`                                                                                               | NA                                                                         |
+| **Delete**  | Schedule(delete),Any(deleteLesson) | `deleteLesson INDEX`                                                                                                                      | `deleteLesson 1`                                                                                               | NA                                                                         |
+| **Delete**  | Schedule                           | `deleteTask INDEX`                                                                                                                        | `deleteTask 1`                                                                                                 | `show INDEX` to show the lesson has to be used prior to `deleteTask`       |
+| **Edit**    | Students(edit), Any(editPerson)    | `editPerson [INDEX] [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]` | `editPerson 1 -subject physics -remark need urgent help`                                                       | "INDEX" can be  omitted when editing the currently shown person            |
+| **Edit**    | Schedule(edit), Any(editLesson)    | `editLesson [INDEX] [-name NAME] [-day DATE] [-start TIME] [-end TIME] [-subject SUBJECT]`                                                | `editLesson 2 -day 11/29 -start 14:30 -end 15:30`                                                              | "INDEX" can be  omitted when editing the currently shown lesson            |
+| **Find**    | Students, Schedule                 | `find SEARCH_STRING`                                                                                                                      | `find bernice`, `find lesson`                                                                                  | Disabled in ___TASKS list___                                               |
+| **Feature** | Any                                | `command format`                                                                                                                          | `sample valid command`                                                                                         | Any additional remarks here                                                |
+
 
 --------------------------------------------------------------------------------------------------------------------
 
