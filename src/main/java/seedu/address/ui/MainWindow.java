@@ -2,8 +2,11 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -16,6 +19,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Theme;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -27,6 +31,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
+
     private Stage primaryStage;
     private Logic logic;
 
@@ -34,6 +39,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ViewPersonPanel viewPersonPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -45,10 +51,19 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
+    private StackPane viewPersonPanelPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane statusbarPlaceholder2;
+
+    @FXML
+    private Scene scene;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -62,6 +77,7 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
+        addThemeListener();
 
         setAccelerators();
 
@@ -113,13 +129,19 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        viewPersonPanel = ViewPatientPanel.updatePerson(logic.getSelectedPerson());
+        if (viewPersonPanel != null) {
+            viewPersonPanelPlaceholder.getChildren().add(viewPersonPanel.getRoot());
+        }
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this::executeCommand,
+                logic::getPrevCommandString, logic::getPassedCommandString);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -175,8 +197,14 @@ public class MainWindow extends UiPart<Stage> {
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
+            logic.addCommandString(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            viewPersonPanel = ViewPatientPanel.updatePerson(logic.getSelectedPerson());
+            viewPersonPanelPlaceholder.getChildren().clear();
+            if (viewPersonPanel != null) {
+                viewPersonPanelPlaceholder.getChildren().add(viewPersonPanel.getRoot());
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -192,5 +220,23 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    private void addThemeListener() {
+        logic.addThemeListener(new ChangeListener<Theme>() {
+            @Override
+            public void changed(ObservableValue<? extends Theme> observable, Theme oldValue, Theme newValue) {
+                if (oldValue == newValue) {
+                    return;
+                }
+                scene.getStylesheets().clear();
+                scene.getStylesheets().add(getClass().getResource("/view/Extensions.css").toExternalForm());
+                if (newValue.equals(Theme.DARK)) {
+                    scene.getStylesheets().add(getClass().getResource("/view/DarkTheme.css").toExternalForm());
+                } else {
+                    scene.getStylesheets().add(getClass().getResource("/view/LightTheme.css").toExternalForm());
+                }
+            }
+        });
     }
 }

@@ -67,6 +67,11 @@ skinparam Participant {
     Padding 20
 }
 
+skinparam Object {
+    FontSize 15
+    FontName Arial
+}
+
 skinparam ArrowFontStyle bold
 skinparam MinClassWidth 50
 skinparam ParticipantPadding 10

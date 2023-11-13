@@ -1,0 +1,78 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam defaultFontSize 20
+'
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddShortcutCommandParser" as AddShortcutCommandParser  LOGIC_COLOR
+participant "a:AddShortcutCommand" as AddShortcutCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":ShortcutSettings" as ShortcutSettings MODEL_COLOR
+end box
+
+[-> LogicManager : execute\n("addsc sc/del kw/delete")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand\n("addsc sc/del kw/delete")
+activate AddressBookParser
+
+create AddShortcutCommandParser
+AddressBookParser -> AddShortcutCommandParser
+activate AddShortcutCommandParser
+
+AddShortcutCommandParser --> AddressBookParser
+deactivate AddShortcutCommandParser
+
+AddressBookParser -> AddShortcutCommandParser : parse\n("sc/del kw/delete")
+activate AddShortcutCommandParser
+
+create AddShortcutCommand
+AddShortcutCommandParser -> AddShortcutCommand
+activate AddShortcutCommand
+
+AddShortcutCommand --> AddShortcutCommandParser : a
+deactivate AddShortcutCommand
+
+AddShortcutCommandParser --> AddressBookParser : a
+deactivate AddShortcutCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddShortcutCommandParser -[hidden]-> AddressBookParser
+destroy AddShortcutCommandParser
+
+AddressBookParser --> LogicManager : a
+deactivate AddressBookParser
+
+LogicManager -> AddShortcutCommand : execute()
+activate AddShortcutCommand
+
+AddShortcutCommand -> Model : registerShortcut\n(del, delete)
+activate Model
+
+Model -> ShortcutSettings : registerShortcut\n(del, delete)
+activate ShortcutSettings
+
+ShortcutSettings --> Model
+deactivate ShortcutSettings
+
+Model --> AddShortcutCommand
+deactivate Model
+
+create CommandResult
+AddShortcutCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddShortcutCommand
+deactivate CommandResult
+
+AddShortcutCommand --> LogicManager : result
+deactivate AddShortcutCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

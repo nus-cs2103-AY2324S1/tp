@@ -5,9 +5,11 @@ import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.ShortcutSettings;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -15,8 +17,10 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.Theme;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
+
 
 /**
  * The main LogicManager of the app.
@@ -39,7 +43,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        addressBookParser = new AddressBookParser(model);
     }
 
     @Override
@@ -85,4 +89,50 @@ public class LogicManager implements Logic {
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
     }
+
+    @Override
+    public Person getSelectedPerson() {
+        return model.getSelectedPerson();
+    }
+
+    @Override
+    public void updateSelectedPerson(Person person) {
+        model.updateSelectedPerson(person);
+    }
+
+    @Override
+    public ShortcutSettings getShortcutSettings() {
+        return model.getShortcutSettings();
+    }
+
+    @Override
+    public void setShortcutSettings(ShortcutSettings shortcutSettings) {
+        model.setShortcutSettings(shortcutSettings);
+    }
+
+    @Override
+    public String getPrevCommandString(String currentCommandString) {
+        return model.getPrevCommandString(currentCommandString);
+    }
+
+    @Override
+    public String getPassedCommandString(String currentCommandString) {
+        return model.getPassedCommandString(currentCommandString);
+    }
+
+    @Override
+    public void addCommandString(String commandString) {
+        model.addCommandString(commandString);
+    }
+
+    @Override
+    public void setTheme(Theme theme) {
+        model.setTheme(theme);
+    }
+
+    @Override
+    public void addThemeListener(ChangeListener<? super Theme> changeListener) {
+        model.addThemeListener(changeListener);
+    }
+
 }

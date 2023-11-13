@@ -39,6 +39,31 @@ public class StringUtil {
     }
 
     /**
+     * Returns true if the words in {@code sentence} contains the {@code substring}.
+     *   Ignores case and a full word match is not required.
+     *   <br>examples:<pre>
+     *       wordsContainSubstringIgnoreCase("ABc def", "abc") == true
+     *       wordsContainSubstringIgnoreCase("ABc def", "De") == true
+     *       wordsContainSubstringIgnoreCase("ABc def", "c de") == false //only searches for substrings within words
+     *       </pre>
+     * @param sentence cannot be null
+     * @param substring cannot be null, cannot be empty
+     */
+    public static boolean wordsContainSubstringIgnoreCase(String sentence, String substring) {
+        requireNonNull(sentence);
+        requireNonNull(substring);
+
+        String preppedWord = substring.trim();
+        checkArgument(!preppedWord.isEmpty(), "Substring parameter cannot be empty");
+
+        String preppedSentence = sentence;
+        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
+
+        return Arrays.stream(wordsInPreppedSentence)
+                .anyMatch(sentenceWord -> sentenceWord.toLowerCase().contains(preppedWord.toLowerCase()));
+    }
+
+    /**
      * Returns a detailed message of the t, including the stack trace.
      */
     public static String getDetails(Throwable t) {
@@ -64,5 +89,20 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    /**
+     * Adds specified String to the end of the toString return while keeping the format constant
+     * @param stringToAdd string to be added
+     * @param originalToString string to be added to
+     * @return String consistent with Person#toString() format
+     */
+    public static String addFieldToPersonToString(String stringToAdd, String originalToString) {
+        StringBuilder stringBuilder = new StringBuilder(originalToString);
+
+        int insertIndex = originalToString.length() - 1;
+        stringBuilder.insert(insertIndex, stringToAdd);
+
+        return (stringBuilder.toString());
     }
 }

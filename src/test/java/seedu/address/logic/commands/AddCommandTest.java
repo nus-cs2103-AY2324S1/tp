@@ -14,16 +14,19 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.ShortcutSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.Theme;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.PatientBuilder;
 
 public class AddCommandTest {
 
@@ -35,7 +38,7 @@ public class AddCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+        Person validPerson = new PatientBuilder().build();
 
         CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
 
@@ -46,17 +49,18 @@ public class AddCommandTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
+        Person validPerson = new PatientBuilder().build();
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () ->
+                addCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
+        Person alice = new PatientBuilder().withName("Alice").build();
+        Person bob = new PatientBuilder().withName("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
@@ -85,7 +89,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that have all of the methods failing
      */
     private class ModelStub implements Model {
         @Override
@@ -134,6 +138,31 @@ public class AddCommandTest {
         }
 
         @Override
+        public ShortcutSettings getShortcutSettings() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setShortcutSettings(ShortcutSettings shortcutSettings) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String registerShortcut(ShortcutAlias shortcutAlias, CommandWord commandWord) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String removeShortcut(ShortcutAlias shortcutAlias) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getShortcut(String alias) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
@@ -155,6 +184,70 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person getSelectedPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateSelectedPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isSelectedEmpty() {
+            throw new AssertionError("This method should not be called");
+        }
+        @Override
+        public boolean hasHistory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commit() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getPrevCommandString(String currentCommandString) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getPassedCommandString(String currentCommandString) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addCommandString(String commandString) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setTheme(Theme theme) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addThemeListener(ChangeListener<? super Theme> changeListener) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -194,10 +287,22 @@ public class AddCommandTest {
             requireNonNull(person);
             personsAdded.add(person);
         }
+        @Override
+        public void updateFilteredPersonList(Predicate<Person> predicate) {
+            // Allow this method to be called as AddCommand::execute now affects the filtered list.
+            return;
+        }
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        /**
+         * override ModelStub to not throw an error, but does nothing
+         */
+        @Override
+        public void commit() {
         }
     }
 

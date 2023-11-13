@@ -1,0 +1,27 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title FindPredicateMap Example
+
+hide members
+
+object "<u>:FindPredicateMap</u>" as FindPredicateMap #FFFFAA
+
+object "<u>p0:NameContainsKeywordPredicate</u>" as p1 {
+    keywords = {"Tim"}
+}
+
+object "<u>p1:MedHistoryContainsKeywordsPredicate</u>" as p0 {
+    keywords = {"Anaemia"}
+}
+
+show p0 member
+show p1 member
+
+FindPredicateMap-down->p0
+FindPredicateMap-down->p1
+
+@end

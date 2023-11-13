@@ -1,0 +1,21 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title Initial state
+
+package List {
+    class Person1 as "<u>p1:Person</u>"
+    class Person2 as "<u>p2:Person</u>"
+    class Person3 as "<u>p3:Person</u>"
+}
+Person1 -[hidden]right-> Person2
+Person2 -[hidden]right-> Person3
+hide Person2
+hide Person3
+
+class Pointer as "Current Selected Person" #FFFFFF
+Pointer -up-> Person1
+@end

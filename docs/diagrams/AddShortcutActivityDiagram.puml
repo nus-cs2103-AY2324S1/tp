@@ -1,0 +1,24 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 13
+start
+:User requests to add shortcut;
+
+if () then ([Request parsed successfully])
+    switch ()
+    case ([Shortcut alias already mapped])
+        :Notify user of existing shortcut to be overwritten;
+        :Register new shortcut;
+    case ([Mapping already exists])
+        :Notify user of existing mapping;
+    case ([else])
+        :Register new shortcut;
+    endswitch
+else ([else])
+    :Show error and usage message;
+endif
+
+
+stop
+@enduml

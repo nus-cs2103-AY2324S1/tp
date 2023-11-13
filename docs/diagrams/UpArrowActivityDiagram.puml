@@ -1,0 +1,21 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User presses up arrow;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+:Decrement currentCmdIndex;
+if () then ([currentCmdIndex points
+to valid command string])
+    :return the command string
+    pointed to by currentCmdIndex ;
+else ([else])
+    :return the command string
+    currently in the CLI textbox ;
+endif
+stop
+@enduml
