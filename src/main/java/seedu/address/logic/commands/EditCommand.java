@@ -2,12 +2,17 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ETHNIC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -21,9 +26,15 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.doctor.Doctor;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Ethnicity;
+import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -42,6 +53,10 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_GENDER + "GENDER] "
+            + "[" + PREFIX_AGE + "AGE] "
+            + "[" + PREFIX_ETHNIC + "ETHNIC] "
+            + "[" + PREFIX_NRIC + "NRIC] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -71,6 +86,7 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        List<Doctor> doctorList = model.getFilteredDoctorList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -79,13 +95,53 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
+        // Retrieve appointments associated with the person
+        ArrayList<Appointment> personAppointments = personToEdit.getAppointments();
+
+        // Create a list to store edited appointments
+        ArrayList<Appointment> updatedAppointments = new ArrayList<>();
+        updateAppointment(personAppointments, editedPerson, doctorList, updatedAppointments);
+
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-
+        editedPerson.setAppointments(updatedAppointments);
+        model.editedPersonAppointments(personAppointments, updatedAppointments);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+    }
+
+    /**
+     * Updates the appointments inside patient and appointments inside doctors.
+     */
+    public void updateAppointment(ArrayList<Appointment> personAppointments, Person editedPerson,
+                                  List<Doctor> doctorList, ArrayList<Appointment> updatedAppointments) {
+        for (Appointment appointment : personAppointments) {
+            // Create a new appointment with the edited person details
+            Appointment editedAppointment = new Appointment(appointment.getDescription(), appointment.getDateTime(),
+                    editedPerson, appointment.getName());
+            updateDoctorAppointment(doctorList, appointment, editedAppointment);
+            updatedAppointments.add(editedAppointment);
+        }
+    }
+    /**
+     * Updates the appointment inside a doctor.
+     */
+    public void updateDoctorAppointment(List<Doctor> doctorList, Appointment appointment,
+                                        Appointment editedAppointment) {
+        Doctor targetDoctor = getDoctor(doctorList, new Name(appointment.getName()));
+        ArrayList<Appointment> updatedDoctorAppointments = new ArrayList<>();
+        int count = 0;
+        for (Appointment doctorAppointment : targetDoctor.getAppointments()) {
+            if (appointment.equals(doctorAppointment)) {
+                updatedDoctorAppointments.add(editedAppointment);
+                count++;
+            } else {
+                updatedDoctorAppointments.add(doctorAppointment);
+            }
+        }
+        targetDoctor.setAppointments(updatedDoctorAppointments);
     }
 
     /**
@@ -98,10 +154,29 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Gender updatedGender = editPersonDescriptor.getGender().orElse(personToEdit.getGender());
+        Age updatedAge = editPersonDescriptor.getAge().orElse(personToEdit.getAge());
+        Ethnicity updatedEthnic = editPersonDescriptor.getEthnic().orElse(personToEdit.getEthnic());
+        Nric updatedNric = editPersonDescriptor.getNric().orElse(personToEdit.getNric());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedGender, updatedAge, updatedEthnic,
+                updatedNric, updatedAddress, updatedTags);
+    }
+
+    public Doctor getDoctor(List<Doctor> doctorList, Name doctorName) {
+        Doctor targetDoctor = null;
+        for (Doctor doctor : doctorList) {
+            if (doctor.getName().equals(doctorName)) {
+                targetDoctor = doctor;
+                break;
+            }
+        }
+        if (targetDoctor == null) {
+            throw new RuntimeException();
+        }
+        return targetDoctor;
     }
 
     @Override
@@ -136,7 +211,11 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
+        private Gender gender;
+        private Age age;
+        private Ethnicity ethnic;
         private Address address;
+        private Nric nric;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -149,6 +228,10 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
+            setGender(toCopy.gender);
+            setAge(toCopy.age);
+            setEthnic(toCopy.ethnic);
+            setNric(toCopy.nric);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
         }
@@ -157,7 +240,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, age, gender, ethnic, address, nric, tags);
         }
 
         public void setName(Name name) {
@@ -183,7 +266,31 @@ public class EditCommand extends Command {
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
         }
+        public void setGender(Gender gender) {
+            this.gender = gender;
+        }
+        public Optional<Gender> getGender() {
+            return Optional.ofNullable(gender);
+        }
+        public void setAge(Age age) {
+            this.age = age;
+        }
+        public Optional<Age> getAge() {
+            return Optional.ofNullable(age);
+        }
+        public void setEthnic(Ethnicity ethnic) {
+            this.ethnic = ethnic;
+        }
+        public Optional<Ethnicity> getEthnic() {
+            return Optional.ofNullable(ethnic);
+        }
 
+        public void setNric(Nric nric) {
+            this.nric = nric;
+        }
+        public Optional<Nric> getNric() {
+            return Optional.ofNullable(nric);
+        }
         public void setAddress(Address address) {
             this.address = address;
         }
@@ -224,6 +331,10 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
+                    && Objects.equals(gender, otherEditPersonDescriptor.gender)
+                    && Objects.equals(age, otherEditPersonDescriptor.age)
+                    && Objects.equals(ethnic, otherEditPersonDescriptor.ethnic)
+                    && Objects.equals(nric, otherEditPersonDescriptor.nric)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
@@ -234,6 +345,10 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)
+                    .add("gender", gender)
+                    .add("age", age)
+                    .add("ethnic", ethnic)
+                    .add("nric", nric)
                     .add("address", address)
                     .add("tags", tags)
                     .toString();

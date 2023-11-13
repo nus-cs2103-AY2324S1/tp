@@ -2,29 +2,36 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.doctor.Doctor;
 import seedu.address.model.person.Person;
+import seedu.address.model.timeslots.Timeslot;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a patient identified using its displayed index in the clinic records.
  */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + ": Deletes the patient with the index number used in the clinic records.\n"
+            + "Parameters: INDEX (must be a positive integer in the list)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
-
+    public static final String MESSAGE_DELETE_PATIENT_SUCCESS = "Deleted Person: %1$s from clinic records";
+    private static Logger logger = Logger.getLogger("DeleteCommandLogger");
     private final Index targetIndex;
 
     public DeleteCommand(Index targetIndex) {
@@ -35,14 +42,58 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        List<Doctor> doctorList = model.getFilteredDoctorList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        assert personToDelete != null : "Person to delete is null!";
         model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+
+        ArrayList<Appointment> patientAppointments = personToDelete.getAppointments();
+        for (Appointment appointment : patientAppointments) {
+            model.deleteAppointment(appointment);
+
+            Doctor targetDoctor = targetDoctor(doctorList, appointment);
+            int appointmentIndex = targetDoctor.getAppointments().indexOf(appointment);
+            targetDoctor.deleteAppointment(appointmentIndex);
+
+            updateModelTimeslotList(model, appointment);
+        }
+
+        return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS, Messages.format(personToDelete)));
+    }
+
+    private void updateModelTimeslotList(Model model, Appointment appointment) {
+        if (model.getAvailableTimeSlotList().size() > 0) {
+            logger.log(Level.INFO, "Updating Timeslot List!");
+            LocalDate currDate = model.getAvailableTimeSlotList().get(0).getDate();
+            LocalDate apptDate = appointment.getDateTime().toLocalDate();
+
+            if (apptDate.equals(currDate)) {
+                Timeslot timeslotToAdd = new Timeslot(apptDate, appointment.getDateTime().getHour());
+                model.addAvailableTimeSlot(timeslotToAdd);
+            }
+        }
+    }
+
+    /**
+     * Returns the doctor that contains the given appointment.
+     */
+    public Doctor targetDoctor(List<Doctor> doctorList, Appointment appointment) {
+        Doctor targetDoctor = null;
+        for (Doctor doctor : doctorList) {
+            if (doctor.hasAppointment(appointment)) {
+                targetDoctor = doctor;
+                break;
+            }
+        }
+        if (targetDoctor == null) {
+            throw new RuntimeException();
+        }
+        return targetDoctor;
     }
 
     @Override

@@ -16,7 +16,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.timeslots.exceptions.TimeSlotNotFoundException;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.TypicalTimeslots;
 
 public class ModelManagerTest {
 
@@ -26,7 +28,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new ClinicAssistant(), new ClinicAssistant(modelManager.getAddressBook()));
     }
 
     @Test
@@ -87,6 +89,52 @@ public class ModelManagerTest {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
     }
+    //Heuristic: equivalence partitioning: null/valid/duplicate timeslots
+    @Test
+    public void addAvailableTimeSlot_success() {
+        assertTrue(modelManager.getAvailableTimeSlotList().size() == 0);
+        modelManager.addAvailableTimeSlot(TypicalTimeslots.DEFAULT_TIMESLOT);
+        assertTrue(modelManager.getAvailableTimeSlotList().size() == 1);
+    }
+
+    @Test
+    public void addDuplicateTimeSlot_failure() {
+        assertTrue(modelManager.getAvailableTimeSlotList().size() == 0);
+        modelManager.addAvailableTimeSlot(TypicalTimeslots.DEFAULT_TIMESLOT);
+        modelManager.addAvailableTimeSlot(TypicalTimeslots.DEFAULT_TIMESLOT);
+        assertTrue(modelManager.getAvailableTimeSlotList().size() == 1);
+    }
+
+    @Test
+    public void addNullTimeSlot_failure() {
+        assertTrue(modelManager.getAvailableTimeSlotList().size() == 0);
+        assertThrows(NullPointerException.class, () -> modelManager.addAvailableTimeSlot(null));
+    }
+    ///Heuristic: equivalence partitioning: null/valid/non existing timeslots
+    @Test
+    public void removeAvailableTimeSlot_success() { //valid
+        assertTrue(modelManager.getAvailableTimeSlotList().size() == 0);
+        modelManager.addAvailableTimeSlot(TypicalTimeslots.DEFAULT_TIMESLOT);
+        assertTrue(modelManager.getAvailableTimeSlotList().size() == 1);
+        modelManager.removeAvailableTimeSlot(TypicalTimeslots.DEFAULT_TIMESLOT);
+        assertTrue(modelManager.getAvailableTimeSlotList().size() == 0);
+    }
+
+    @Test
+    public void removeNotFoundAvailableTimeSlot_failure() { //non existing
+        assertTrue(modelManager.getAvailableTimeSlotList().size() == 0);
+        modelManager.addAvailableTimeSlot(TypicalTimeslots.TIMESLOT_ONE);
+        assertThrows(TimeSlotNotFoundException.class, () ->
+                modelManager.removeAvailableTimeSlot(TypicalTimeslots.TIMESLOT_TWO));
+    }
+
+    @Test
+    public void removeNullAvailableTimeSlot_failure() { //null
+        assertTrue(modelManager.getAvailableTimeSlotList().size() == 0);
+        modelManager.addAvailableTimeSlot(TypicalTimeslots.TIMESLOT_ONE);
+        assertThrows(NullPointerException.class, () ->
+                modelManager.removeAvailableTimeSlot(null));
+    }
 
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
@@ -95,13 +143,13 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
-        AddressBook differentAddressBook = new AddressBook();
+        ClinicAssistant clinicAssistant = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        ClinicAssistant differentClinicAssistant = new ClinicAssistant();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(clinicAssistant, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(clinicAssistant, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -114,12 +162,12 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentClinicAssistant, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(clinicAssistant, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -127,6 +175,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(clinicAssistant, differentUserPrefs)));
     }
 }

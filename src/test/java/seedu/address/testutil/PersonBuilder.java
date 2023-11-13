@@ -1,11 +1,17 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Ethnicity;
+import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -19,13 +25,22 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_GENDER = "M";
+    public static final int DEFAULT_AGE = 21;
+    public static final String DEFAULT_ETHNIC = "Chinese";
+    public static final String DEFAULT_NRIC = "T0123456E";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private Phone phone;
     private Email email;
+    private Gender gender;
+    private Age age;
+    private Ethnicity ethnic;
+    private Nric nric;
     private Address address;
     private Set<Tag> tags;
+    private ArrayList<Appointment> appointments;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -34,8 +49,13 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
+        gender = new Gender(DEFAULT_GENDER);
+        age = new Age(DEFAULT_AGE);
+        ethnic = new Ethnicity(DEFAULT_ETHNIC);
+        nric = new Nric(DEFAULT_NRIC);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        appointments = new ArrayList<>();
     }
 
     /**
@@ -45,8 +65,13 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
+        gender = personToCopy.getGender();
+        age = personToCopy.getAge();
+        ethnic = personToCopy.getEthnic();
+        nric = personToCopy.getNric();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        appointments = new ArrayList<>(personToCopy.getAppointments());
     }
 
     /**
@@ -88,9 +113,39 @@ public class PersonBuilder {
         this.email = new Email(email);
         return this;
     }
+    /**
+     * Sets the {@code Gender} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withGender(String gender) {
+        this.gender = new Gender(gender);
+        return this;
+    }
+    /**
+     * Sets the {@code Age} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAge(int age) {
+        this.age = new Age(age);
+        return this;
+    }
+    /**
+     * Sets the {@code Ethnic} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withEthnic(String ethnic) {
+        this.ethnic = new Ethnicity(ethnic);
+        return this;
+    }
+
+
+    /**
+     * Sets the {@code NRIC} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withNric(String nric) {
+        this.nric = new Nric(nric);
+        return this;
+    }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, gender, age, ethnic, nric, address, tags);
     }
 
 }
