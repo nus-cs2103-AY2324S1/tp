@@ -16,9 +16,14 @@ Given below are my contributions to the project.
   * Implemented Appointment and AppointmentTime classes
   * Implemented the UserHistoryManager to keep track of user history in the application
   * Implemented the `undo` and `redo` commands
+  * Implemented parsers for the following commands: `clear`, `exit`, `help`, `list`, `mode`, `redo`, `undo`, `patients`, `appointments`, `today`, `upcoming` 
 * **Project management**:
- 
+  * Created issues for task management and helped with the maintenance of the issue tracker
+  * Helped review code and merge PRs
 * **Contributions to the UG**:
   * Added the "Navigating the application" section
+  * Added documentation for the features
 * **Contributions to the DG**:
-  * Added the undo/redo features to the "Implementation" section
+  * Added Use Cases
+  * Added the UML diagrams and implementation for the undo/redo commands
+  * Added the "Appendix: Instructions for manual testing" section
