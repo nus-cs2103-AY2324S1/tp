@@ -240,15 +240,9 @@ Format: `new-appt pic/IC dic/IC time/yyyy-MM-dd HH:mm`
 **:information_source: Take Note:**<br>
 
 - All fields are Required.
-<<<<<<< HEAD
 - PATIENT must contain the valid IC of a Patient in MediLink Contacts.
 - DOCTOR must contain the valid IC of a Doctor in MediLink Contacts.
 - There must not be conflicting Appointments. (eg. the doctor already has an appointment with another patient at the same time) However, the duration of each appointment is flexible and up to the users. As long as appointments are not at the exact same time, users can add it in.
-=======
-- PATIENT must contain the valid IC of a Patient in the Database.
-- DOCTOR must contain the valid IC of a Doctor in the Database.
-- There must not be conflicting Appointments. (eg. the doctor already has an appointment with another patient at the same time). However, the duration of each appointment is flexible and up to the users. As long as appointments are not at the exact same time, users can add it in.
->>>>>>> 79834ba482dc1ae273fbd830a30673b3804f0c01
 
 </div>
 
@@ -274,7 +268,7 @@ Examples:
 
 * `delete-appt 1`
 
-### Finding a Appointment : `find-appt`
+### Finding an Appointment : `find-appt`
 
 Finds all appointments that involve a specific patient/doctor.
 
@@ -284,11 +278,7 @@ Format: `find-appt NRIC`
 **:information_source: Take Note:**<br>
 
 - All fields are Required.
-<<<<<<< HEAD
-- NRIC must contain the valid NRIC of a Patient or Doctor in MediLink Contacts.
-=======
-- NRIC must contain the valid NRIC of a Patient or Doctor in the Database and **must** be in caps.
->>>>>>> 79834ba482dc1ae273fbd830a30673b3804f0c01
+- NRIC must contain the valid NRIC of a Patient or Doctor in MediLink Contacts and **must** be in caps.
 - Either Doctor NRIC or Patient NRIC can be used in the search
 - It is recommended to use `list` to restore the view of all data after a `find` command.
 
@@ -310,16 +300,24 @@ Edits an existing person in the MediLink Contacts.
 
 Format: `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
+<div markdown="block" class="alert alert-info">
+**:information_source: Take Note:**<br>
+
 * Edits the person with the specified `NRIC`. The NRIC provided **must be a valid IC number** and is not case-sensitive.
 * At least one of the optional fields must be provided.
 * If the provided fields are the same as the original, the command will still work.
-* Must edit appropriate fields based on whether the person is a patient or doctor (e.g. can't update condition of a
-  doctor).
-* Existing values will be updated to the input values.
+* You cannot change a person's IC number. If the provided ic number is the same as the original it will work.
+However, if it is different, there will be an error.
+* Must edit appropriate fields based on whether the person is a patient or doctor (e.g. can't update condition, blood type or 
+emergency contact of a doctor).
+* Existing values will be updated to the input values.g
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
+* If extraneous parameters are provided, it may lead to an error.
 * Note: In our app, the Remark Section will be left blank by default. The edit Command can be used to add any miscellaneous info not captured by other fields such as possible allergies, medical history, etc.
+
+</div>
 
 Examples:
 
