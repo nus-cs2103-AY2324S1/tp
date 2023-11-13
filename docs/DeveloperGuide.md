@@ -123,7 +123,7 @@ Here is a step-by-step explanation of how the `Logic` component works when it us
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic` to `UI`.
 
 Here is a step-by-step explanation of how the `Logic` component works when it uses `ViewModeParser`: 
 
@@ -327,7 +327,7 @@ The mechanism allows the user to edit details of a fosterer in their profile pag
 
 Given below is an example usage scenario and how the mechanism behaves at each step, given that the user already opened person profile page:
 
-Step 1. The user enters the name of the field. e.g. "name". Since the normal person list is invisible, "name" is passed to `executeInView()` method in `MainWindow` class (refer to the explanation in the section of [**Logic Component:AddressBookParser and ViewModeParser Classes**](#addressbookparser-and-viewmodeparser-classes)).
+Step 1. The user enters the name of the field. e.g. "name". Since the fosterer list is invisible, "name" is passed to `executeInView()` method in `MainWindow` class (refer to the explanation in the section of [**Logic Component:AddressBookParser and ViewModeParser Classes**](#addressbookparser-and-viewmodeparser-classes)).
 
 ![EditFieldSequenceDiagramStep1.png](images/EditFieldSequenceDiagramStep1.png)
 
@@ -381,7 +381,7 @@ The mechanism ensures the user to save the edited details of a fosterer in their
 
 Given below is an example usage scenario and how this mechanism behaves at each step, given that the user already opened person profile page and did not save the edit:
 
-Step 1. The user enters `exit` command in the profile page. Since the normal person list is invisible, the command text "exit" is passed to `executeInView()` method in `MainWindow` class (refer to the explanation in the section of [**Logic Component:AddressBookParser and ViewModeParser Classes**](#addressbookparser-and-viewmodeparser-classes)). 
+Step 1. The user enters `exit` command in the profile page. Since the fosterer list is invisible, the command text "exit" is passed to `executeInView()` method in `MainWindow` class (refer to the explanation in the section of [**Logic Component:AddressBookParser and ViewModeParser Classes**](#addressbookparser-and-viewmodeparser-classes)). 
 
 ![ViewExitSequenceDiagram1.png](images/ViewExitSequenceDiagram1.png)
 
@@ -393,11 +393,11 @@ Step 3. `ViewExitCommand` is executed, and `getFilteredPersonList()` method in `
 
 ![ViewExitSequenceDiagram3.png](images/ViewExitSequenceDiagram3.png)
 
-Step 4. From `MainWindow`, `handleViewExit()` handler method is called. The `getInConfirmationDialog()` method in `CommandBox` UI class is used to check if the user is seeing the confirmation message. If the user already saved the fosterer or is already in confirmation dialog, `exitProfilePage()` is called and user exits the profile. Otherwise, the user is shown the confirmation message telling that they did not save the details. 
+Step 4. From `MainWindow`, `handleViewExit()` handler method is called. The `getInConfirmationDialog()` method in `CommandBox` UI class is used to check if the user is seeing the confirmation message. If the user already saved the fosterer or is already in confirmation dialog, `exitProfilePage()` is called and user exits the profile. Otherwise, the user is shown the confirmation message alerting them that they did not save the details. 
 
 ![HandleViewExitSequenceDiagram.png](images/HandleViewExitSequenceDiagram.png)
 
-Step 5. If the user presses Enter in the `CommandBox`, `handleViewExit()` method is called again. This time, the screen is already showing the confirmation message, so isShowingConfirmationMessage is true. Thus, the user is exited out of the profile page. If the user presses Esc instead, `handleCancelViewExit()` method is called lets the user stays in the profile page. 
+Step 5. If the user presses Enter in the `CommandBox`, `handleViewExit()` method is called again. This time, the screen is already showing the confirmation message, so isShowingConfirmationMessage is true. Thus, the user is exited out of the profile page. If the user presses Esc instead, `handleCancelViewExit()` method is called and lets the user stays in the profile page. 
 
 ![ViewExitSequenceDiagram.png](images/ViewExitSequenceDiagram.png)
 
@@ -408,7 +408,7 @@ Step 5. If the user presses Enter in the `CommandBox`, `handleViewExit()` method
 Here are the justifications of why `SaveCommand` exits the profile page when adding a new fosterer but does not when editing a fosterer's details. 
 
 * **Alternative 1 (current choice):** Executing `SaveCommand` exits directly when adding a new fosterer, but does not exit when editing a fosterer on their profile page. 
-    * Pros: Less error prone. Duplicate fosterers are checked with the names. If the user edits the person's name and enters save again, it would create another fosterer. 
+    * Pros: Less error-prone. Duplicate fosterers are checked with the names. If the user edits the person's name and enters save again, it would create another fosterer. 
     * Cons: May be cumbersome for users who want to edit the user's details on the same page. 
 
 * **Alternative 2:** Users are able to continue adding details when adding or editing a fosterer. 
@@ -416,7 +416,7 @@ Here are the justifications of why `SaveCommand` exits the profile page when add
     * Cons: Harder to implement without making it error prone. 
 
 * **Alternative 3:** `SaveCommand` exits the profile page for both adding and editing a fosterer. 
-    * Pros: Least error prone and less confusing because of its consistent behavior. 
+    * Pros: Least error-prone and less confusing because of its consistent behavior. 
     * Cons: Users have to exit and re-enter profile page several times. 
 
 **Aspect 2: How displaying confirmation message is implemented:**
@@ -427,7 +427,7 @@ Here are the justifications of why `SaveCommand` exits the profile page when add
 
 * **Alternative 2:** Create another command for confirming or cancelling exit. 
     * Pros: Easy to implement. Utilizes the current architecture and does not add additional coupling between `MainWindow` and `CommandBox`. 
-    * Cons: May potential cause errors since users may type in different commands.
+    * Cons: May potentially cause errors since users may type in different commands.
 
 
 ### Delete feature
