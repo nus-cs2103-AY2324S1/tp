@@ -9,8 +9,6 @@ pageNav: 3
 <!-- * Table of Contents -->
 <page-nav-print />
 
---------------------------------------------------------------------------------------------------------------------
-
 <div style="page-break-after: always;"></div>
 
 ## **Setting up, getting started**
@@ -143,6 +141,8 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+--------------------------------------------------------------------------------------------------------------------
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
@@ -169,8 +169,6 @@ The following sequence diagram shows how the `filter` command works. In this exa
 
 When the `FilterCommandParser` parses the arguments to the `FilterCommand`, it creates a `StudentPredicateList`, to which the relevant predicates specified within the command are added. For example, using the example command given above, the `StudentPredicateList` would consist of 2 predicates: a `StudentTakesSubjectPredicate` and a `StudentIsGenderPredicate`.
 These predicates are then combined into a single `Predicate<Student>`, using the `and()` method from the `Predicate` interface.
-
-<div style="page-break-after: always;"></div>
 
 The following activity diagram summarizes what happens when a user executes a `filter` command:
 
@@ -214,8 +212,6 @@ The following activity diagram summarizes what happen when a user executes a `Up
 
 <puml src="diagrams/UpdateSecLevelActivityDiagram.puml" alt="UpdateSecLevelActivityDiagram" width="750" />
 
-<div style="page-break-after: always;"></div>
-
 #### Design considerations:
 
 **Aspect: How other commands executed after `uplevel` and before `undolevel` should be addressed.**
@@ -257,8 +253,6 @@ This predicate is then passed into the current model, using the `updateSortedPer
 The following activity diagram summarizes what happens when a user executes a `sort` command:
 
 <puml src="diagrams/SortActivityDiagram.puml" alt="SortActivityDiagram" width="250" />
-
-<div style="page-break-after: always;"></div>
 
 #### Design considerations:
 
@@ -320,21 +314,19 @@ The following activity diagram summarizes what happens when a user executes a `i
 ### Table feature
 
 #### Implementation
-The `table` command allows users to generate a statistical table either categorised by `gender`, `subject`, `sec level` or `enrol date`.
+The `table` command allows users to generate a statistical table categorised by `gender`, `subject`, `sec level` or `enrol date`.
 
 When the user enters a table command, the `AddressBookParser` parses the user's input and return a `TableCommand`.
 
-Note that there is no specifically a TableCommandParser for `TableCommand` just like `ListCommand`, `ExitCommand` and `HelpCommand`. The `AddressBookParser` can parse and return a `TableCommand`directly.
+Note that there is no specific TableCommandParser for `TableCommand` just like `ListCommand`, `ExitCommand` and `HelpCommand`. The `AddressBookParser` can parse and return a `TableCommand`directly.
 
-The parameters entered by user expected for a table command are either `g/`, `s/`, `l/` or `d/`. When the `TableCommand` instance created by `AddressBookParser` executes, it will return the corresponding CommandResult. E.g. `GenderTableCommandResult` created for the case `table g/` is entered by user. This `XXXTableCommandResult` carries the counts for each category that will be used for generating the table.
+The parameters entered by user expected for a table command are either `g/`, `s/`, `l/` or `d/`. When the `TableCommand` instance created by `AddressBookParser` executes, it will return the corresponding CommandResult. e.g. `GenderTableCommandResult` created when `table g/` is entered. This `XXXTableCommandResult` carries the counts for each category that will be used for generating the table.
 
 The following sequence diagram shows how the `table` command works. In this example, the user is executing the following command: `table s/`
 
 <puml src="diagrams/TableSequenceDiagram.puml" alt="TableSequenceDiagram" />
 
 As shown in the sequence diagram, when the `AddressBookParser` parses the arguments to the TableCommand, it creates a TableCommand instance by passing in `s/` as argument so that when this `TableCommand` execute, it will return a `SubjectTableCommandResult` instance as specified by `s/`.
-
-<div style="page-break-after: always;"></div>
 
 The following activity diagram summarizes what happens when a user executes a `table` command:
 
@@ -376,8 +368,6 @@ This predicate is then passed into the current model, using the `export()` metho
 The following activity diagram summarizes what happens when a user executes a `export` command:
 
 <puml src="diagrams/ExportActivityDiagram.puml" alt="ExportActivityDiagram" width="300" />
-
-<div style="page-break-after: always;"></div>
 
 #### Design considerations:
 
@@ -792,6 +782,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Steps 1a1-1a2 are repeated until the command entered is correctly formatted. <br>
     Use case resumes from step 2.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC12 - Update the sec levels of students**
 
 **MSS**
@@ -927,6 +919,8 @@ testers are expected to do more *exploratory* testing.
   3. Test case: `filter l/3 s/Physics`<br>
       Expected: A list of all Secondary 3 students who study Physics is shown.
 
+<div style="page-break-after: always;"></div>
+
 ### Sorting the list of students
 
 1. Sorting the list of students.
@@ -1043,5 +1037,5 @@ Listed below are the enhancements we managed to add into Tutorium.
     if it would be considered an invalid phone number. We will add a validation check to restrict inputs to 8-digit phone numbers
     in future versions of the app.
 * Standardise prefix for year in data visualisation features.
-  * In the table and chart feature, the prefix used to indicate the year is `d/`, but for the line graph feature, it is `y\`. We
+  * In the table and chart feature, the prefix used to indicate the year is `d/`, but for the line graph feature, it is `y/`. We
     plan to standardise the prefix used to `y/` to make these commands more intuitive and easier to learn.
