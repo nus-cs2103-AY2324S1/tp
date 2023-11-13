@@ -33,7 +33,38 @@ With MedBook, experience a new level of convenience and control:
 
 ## Table of Contents
 
-<page-nav-print/>
+- [Welcome to MedBook](#welcome-to-medbook)
+- [Table of Contents](#table-of-contents)
+- [Navigating the User Guide](#navigating-the-user-guide)
+- [Quick Start](#quick-start)
+- [Glossary](#glossary)
+- [Navigating the GUI](#navigating-the-gui)
+- [MedBook Tutorial](#medbook-tutorial)
+- [Features](#features)
+  - [Parameters](#parameters)
+  - [Viewing help](#viewing-help--help)
+  - [Adding a patient](#adding-a-patient-addpatient)
+  - [Adding a medical record](#adding-a-medical-record-addrecord)
+  - [Adding an appointment](#adding-an-appointment-addappointment)
+  - [Listing all patients](#listing-all-patients-list)
+  - [Viewing patient medical records](#viewing-patient-medical-records-view)
+  - [Viewing appointments](#viewing-appointments-viewappointment)
+  - [Editing a patient](#editing-a-patient-editpatient)
+  - [Editing a medical record](#editing-a-medical-record-editrecord)
+  - [Locating patients by keywords](#locating-patients-by-keywords-search)
+  - [Locating medical records by keywords](#locating-medical-records-by-keywords-searchrecord)
+  - [Deleting a patient](#deleting-a-patient-delete)
+  - [Deleting a medical record](#deleting-a-medical-record-deleterecord)
+  - [Deleting an appointment](#deleting-an-appointment-deleteappointment)
+  - [Pinning a patient](#pinning-a-patient-pin)
+  - [Unpinning a patient](#unpinning-a-patient-unpin)
+  - [Attaching files to a patient's medical record](#attaching-files-to-a-patients-medical-record)
+  - [Exiting the program](#exiting-the-program-exit)
+  - [Saving the data](#saving-the-data)
+  - [Editing the data file](#editing-the-data-file)
+- [FAQ](#faq)
+- [Known Issues](#known-issues)
+- [Command Summary](#command-summary)
 
 ---
 
@@ -66,14 +97,16 @@ We're here to make your experience as user-friendly as possible. Let's get start
 3. **Set Up Your Workspace**:
 
    - Choose a folder where you'd like to manage your patient data.
-     <box type="tip" seamless>
+
+<box type="tip" seamless>
 
 **Tip**: Create a new folder named `MedBook` for easy organization.
 
 </box>
-   - Move `medbook.jar` into the folder as shown below.
-     - **Windows Users**:![Ui](images/WinUserDir.png)
-     - **Mac Users**:![Ui](images/MacUserDir.png)
+
+- Move `medbook.jar` into the folder as shown below.
+  - **Windows Users**:![Ui](images/WinUserDir.png)
+  - **Mac Users**:![Ui](images/MacUserDir.png)
 
 4. **Accessing Terminal**:
 
@@ -82,7 +115,7 @@ We're here to make your experience as user-friendly as possible. Let's get start
      - Search for "Terminal" in the Windows search bar and launch it.
 
    - **Mac Users**:
-     - Find **Terminal** in "Utilities" under "Applications". Or, you can use Spotlight Search (Command + Spacebar) and typing "Terminal".
+     - Find **Terminal** in "Utilities" under "Applications". Or, you can use Spotlight Search (Command + Spacebar) and type "Terminal".
 
 5. **Launch MedBook**:
 
@@ -99,8 +132,8 @@ Once launched, MedBook will look like this:
 ![Ui](images/MedBookUi.png)
 
 - **Exploring Further**:
-  - Learn more about navigating the GUI [here](#navigating-the-graphical-user-interface-gui).
-  - For new users, learn how to use MedBook [here](#medBook-tutorial).
+  - Learn more about navigating the GUI [here](#navigating-the-gui).
+  - For new users, learn how to use MedBook [here](#medbook-tutorial).
   - For advanced users, view all the available features [here](#features).
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
@@ -109,16 +142,14 @@ Once launched, MedBook will look like this:
 
 ## Glossary
 
-### Definitions
-
 Here are some definitions of the terms used throughout this user guide.
 
 | **Term**                       | **Definition**                                                                                                                                                                           |
 | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Graphical User Interface (GUI) | The GUI allows you to interact with the application through things you can click, instead of typing commands. It also provides visual display for information stored in the application. |
 | Command Line Interface (CLI)   | The CLI is a way of interacting with the application using typed text commands.                                                                                                          |
-| Command                        | A Command is a textual input that users type into the Command Line Interface to interact with the application.                                                                           |
-| Parameter                      | A parameter is a specific piece of information or data that you provide to a Command in a Command Line Interface to customize the Command's action.                                      |
+| Command                        | A command is a textual input that users type into the Command Line Interface to interact with the application.                                                                           |
+| Parameter                      | A parameter is a specific piece of information or data that you provide to a command in a Command Line Interface to customize the command's action.                                      |
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
@@ -131,7 +162,7 @@ Here are some definitions of the terms used throughout this user guide.
 
 Here is a brief summary of the GUI components in MedBook.
 
-| **Name of component** | **Description**                                                                                          |
+| **Name of Component** | **Description**                                                                                          |
 | --------------------- | -------------------------------------------------------------------------------------------------------- |
 | Menu Bar              | Displays the drop down menus for MedBook, such as **File** and **Help**                                  |
 | Message Display Box   | Display the message output for every command. It can either can be an error or success message           |
@@ -146,7 +177,7 @@ Here is a brief summary of the GUI components in MedBook.
 **Appointment Window**
 ![Appointment Window](images/ViewAppointmentWindow.png)
 
-| **Name of component** | **Description**                                                                                                                                              |
+| **Name of Component** | **Description**                                                                                                                                              |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Appointment Card      | Contains information of the appointment including name, date and time and NRIC                                                                               |
 | Appointment List      | Displays a list of Appointment Cards                                                                                                                         |
@@ -166,7 +197,7 @@ Here is a brief summary of the GUI components in MedBook.
 
     <box type="info" seamless>
 
-   **Info**: Upon starting, MedBook will display some sample data to help you get familiar.
+   **Note**: Upon starting, MedBook will display some sample data to help you get familiar.
 
     </box>
 
@@ -290,11 +321,13 @@ The **domain** name must: <br>
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
+---
+
 ### Viewing help : `help`
 
 <box type="tip" seamless>
 
-  **Tip**:If you get stuck while using MedBook, use the help command to get a quick overview of all commands!
+**Tip**: If you get stuck while using MedBook, use the help command to get a quick overview of all commands!
 
 </box>
 
@@ -304,11 +337,13 @@ Format: `help`
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
+---
+
 ### Adding a patient: `addpatient`
 
 <box type="tip" seamless>
 
-**Tip**:Wants to add a new patient?  Try out the `addpatient` command!
+**Tip**: Wants to add a new patient? Try out the `addpatient` command!
 
 </box>
 
@@ -316,7 +351,7 @@ Adds a new patient to the system.
 
 Format: `addpatient n/NAME i/NRIC e/EMAIL p/PHONE g/GENDER a/AGE bt/BLOODTYPE [al/ALLERGY]...`
 
-- Adds a patient with information including: `NAME`, `NRIC`, `EMAIL`, `GENDER`, `PHONE`, `AGE`, `BLOODTYPE`, `ALLERGY`.
+- Adds a patient with information including: `NAME`, `NRIC`, `EMAIL`, `PHONE`, `GENDER`, `AGE`, `BLOODTYPE`, `ALLERGY`.
 
 Example:
 
@@ -331,11 +366,13 @@ Screenshots:
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
+---
+
 ### Adding a medical record: `addrecord`
 
 <box type="tip" seamless>
 
-**Tip**:Don't know how to add a medical record to the patient? Check out the `addrecord` command!
+**Tip**: Don't know how to add a medical record to the patient? Check out the `addrecord` command!
 
 </box>
 
@@ -361,11 +398,13 @@ Screenshots:
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
+---
+
 ### Adding an appointment: `addappointment`
 
 <box type="tip" seamless>
 
-**Tip**:Wants to add an appointment? The `addappointment` command is here to help you!
+**Tip**: Wants to add an appointment? The `addappointment` command is here to help you!
 
 </box>
 
@@ -382,16 +421,35 @@ Example:
 Screenshots:
 
 ![AddAppointment Screenshots](images/screenshots/addAppointment.png)
-![AddAppointment Screenshots](images/screenshots/addAppointment%20-%20after.png)
 ![AddAppointment Screenshots](images/screenshots/viewAppointment.png)
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
+
+---
+
+### Listing all patients: `list`
+
+Shows a list of all patients.
+
+Format: `list`
+
+- **All** patients will be shown in the **Patient List**.
+
+<box type="tip" seamless>
+
+**Tip**: The `list` command allows you to easily view all the patients in the **Patient List**. For instance, after you've used the `search` command to find specific patients, you can use the `list` command to gather all the patients conveniently!
+
+</box>
+
+<u>[Back to Table Of Contents](#table-of-contents)</u>
+
+---
 
 ### Viewing patient medical records: `view`
 
 <box type="tip" seamless>
 
-**Tip**:Don't know how to display medical records? Easily view them by `view` command!
+**Tip**: Don't know how to display medical records? Easily view them by `view` command!
 
 </box>
 
@@ -407,11 +465,11 @@ Examples:
 
 - `view 2` displays the medical records of the patient with the `PATIENTID` of **2**. The medical records will be displayed in the **Medical Record List** and patient information will be in the **Patient Being Viewed** section.
 
-    <box type="info" seamless>
+<box type="info" seamless>
 
-  **Info**: The PATIENTID in the Patient Being Viewed section will display **1**. If you wish to perform commands on the patient, use the PATIENTID displayed in the Patient List.
+**Note**: The `PATIENTID` in the **Patient Being Viewed** section will display **1**. If you wish to perform commands on the patient, use the `PATIENTID` displayed in the **Patient List**.
 
-    </box>
+</box>
 
 Screenshots:
 
@@ -420,11 +478,13 @@ Screenshots:
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
+---
+
 ### Viewing appointments: `viewappointment`
 
 <box type="tip" seamless>
 
-**Tip**:Wish to know about the upcoming appointments? Simply type in `viewappointment`! 
+**Tip**: Wish to know about the upcoming appointments? Simply type in `viewappointment`!
 
 </box>
 
@@ -434,11 +494,13 @@ Format: `viewappointment`
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
+---
+
 ### Editing a patient: `editpatient`
 
 <box type="tip" seamless>
 
-**Tip**:Just entered a wrong detail of the patient? Use `editpatient` to correct it!
+**Tip**: Just entered a wrong detail of the patient? Use `editpatient` to correct it!
 
 </box>
 
@@ -458,11 +520,12 @@ Format: `editpatient PATIENTID PREFIX/NEWVALUE...`
 - Existing values in the respective fields will be updated to the `NEWVALUE`. <br>
 
 - Multiple entries of `ALLERGY` are allowed i.e `editpatient 1 al/Seafood al/Dust`. <br>
-  <box type="info" seamless>
 
-  **Note**: When editing `ALLERGY`, the existing allergies of the patient will be removed i.e adding of allergies is not cumulative.
+<box type="info" seamless>
 
-  </box>
+**Note**: When editing `ALLERGY`, the existing allergies of the patient will be removed i.e adding of allergies is not cumulative.
+
+</box>
 
 Examples:
 
@@ -481,11 +544,13 @@ Screenshots:
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
+---
+
 ### Editing a medical record: `editrecord`
 
 <box type="tip" seamless>
 
-**Tip**:Spotted an error in the medical record? Fret not, the `editrecord` is here!
+**Tip**: Spotted an error in the medical record? Fret not, the `editrecord` is here!
 
 </box>
 
@@ -501,6 +566,12 @@ Format: `editrecord PATIENTID/RECORDID PREFIX/NEWVALUE...`
 
 - Multiple entries of `CONDITION` and `MEDICATION` are allowed i.e `editrecord 1/1 c/Flu c/Fever m/Panadol m/Ibuprofen`. <br>
 
+<box type="info" seamless>
+
+**Note**: When editing `CONDITION` and `MEDICATION`, the existing conditions and medications of the record will be removed i.e adding of conditions and medications is not cumulative.
+
+</box>
+
 Examples:
 
 - `editrecord 1/1 d/25-10-2023 1200` Edits the `DATETIME` of the medical record with the `RECORDID` of **1** of the patient with the `PATIENTID` of **1** to **25-10-2023 1200**. <br>
@@ -511,11 +582,13 @@ Examples:
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
+---
+
 ### Locating patients by keywords: `search`
 
 <box type="tip" seamless>
 
-**Tip**:Cannot find the patient you're looking for? If you remember one of his/her details, `search` will help you find him/her!
+**Tip**: Cannot find the patient you're looking for? If you remember one of his/her details, `search` will help you find him/her!
 
 </box>
 
@@ -556,11 +629,13 @@ Screenshots:
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
+---
+
 ### Locating medical records by keywords: `searchrecord`
 
 <box type="tip" seamless>
 
-**Tip**:Feeling frustrated by the huge amount of records? Use `searchrecord` to locate the ones you need!
+**Tip**: Feeling frustrated by the huge amount of records? Use `searchrecord` to locate the ones you need!
 
 </box>
 
@@ -590,23 +665,13 @@ Examples:
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
-### Listing all patients: `list`
+---
+
+### Deleting a patient: `delete`
 
 <box type="tip" seamless>
 
-**Tip**:Just used `search` command and don't know how to get back? Simply type `list` to display all patients!
-
-</box>
-
-Shows a list of all patients.
-
-Format: `list`
-
-- **All** patients will be shown in the **Patient List**.
-
-<box type="tip" seamless>
-
-**Tip**: The `list` command allows you to easily view all the patients in the **Patient List**. For instance, after you've used the `search` command to find specific patients, you can use the `list` command to gather all the patients conveniently!
+**Tip**: Wants to remove irrelevant patient? `delete` is here to help you!
 
 </box>
 
@@ -616,7 +681,7 @@ Format: `list`
 
 <box type="tip" seamless>
 
-**Tip**:Wants to remove irrelevant patient? `delete` is here to help you!
+**Tip**: Wants to remove irrelevant patient? `delete` is here to help you!
 
 </box>
 
@@ -636,6 +701,8 @@ Screenshots:
 ![Delete Screenshots](images/screenshots/delete%20-%20after.jpg)
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
+
+---
 
 ### Deleting a medical record: `deleterecord`
 
@@ -657,11 +724,13 @@ Example:
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
+---
+
 ### Deleting an appointment: `deleteappointment`
 
 <box type="tip" seamless>
 
-**Tip**:A patient cannot attend an appointment? Use `deleteappointment` to cancel it!
+**Tip**: A patient cannot attend an appointment? Use `deleteappointment` to cancel it!
 
 </box>
 
@@ -677,7 +746,9 @@ Example:
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
-### Pinning a Patient: `pin`
+---
+
+### Pinning a patient: `pin`
 
 <box type="tip" seamless>
 
@@ -702,11 +773,13 @@ Screenshots:
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
-### Unpinning a Patient: `unpin`
+---
+
+### Unpinning a patient: `unpin`
 
 <box type="tip" seamless>
 
-**Tip**:A patient no longer needs extra attention? Easily remove them from *Pinned Patient List* by `unpin` command!
+**Tip**: A patient no longer needs extra attention? Easily remove them from _Pinned Patient List_ by `unpin` command!
 
 </box>
 
@@ -722,11 +795,13 @@ Examples:
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
+---
+
 ### Attaching files to a patient's medical record
 
 <box type="tip" seamless>
 
-**Tip**:A patient's report just comes out? The `attach file` feature can help you keep documents in an organised manner!
+**Tip**: A patient's report just comes out? The `attach file` feature can help you keep documents in an organised manner!
 
 </box>
 
@@ -749,6 +824,8 @@ Screenshots:
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
+---
+
 ### Exiting the program: `exit`
 
 Exits the program.
@@ -757,11 +834,15 @@ Format: `exit`
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
+---
+
 ### Saving the data
 
 MedBook data is saved in the `data` folder automatically after any command that changes the data. This ensures the safety of your data. When MedBook is restarted, the data is loaded back into the application automatically.
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
+
+---
 
 ### Editing the data file
 
@@ -785,8 +866,9 @@ MedBook data is saved automatically as a JSON file located in `[jar file locatio
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and copy the `data` folder over to the folder of the installed jar file in the other computer.
 
-**Q**: I just entered a very long allergy and the format of *Patient Card* goes messy.
-**A**: MedBook does not accept extreme inputs. Try resizing the window and see if that helps. We also aim to amend this issue in next iteration.
+**Q**: I just entered a very long allergy and the format of _Patient Card_ goes messy.<br>
+**A**: MedBook does not accept extreme inputs. Try resizing the window and see if that helps. We also aim to amend this issue in next iteration.<br>
+
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ---
@@ -817,8 +899,8 @@ MedBook data is saved automatically as a JSON file located in `[jar file locatio
 | **Delete Patient**         | `delete PATIENTID`<br> e.g., `delete 3`                                                                                                                                                             |
 | **Delete Medical Record**  | `deleterecord PATIENTID/RECORDID`<br> e.g., `deleterecord 2/1`                                                                                                                                      |
 | **Delete Appointment**     | `deleteappointment APPOINTMENTID`<br> e.g., `deleteappointment 1`                                                                                                                                   |
-| **Pin**                    | `pin PATIENTID`<br> e.g., `pin 2`                                                                                                                                                                   |
-| **Unpin**                  | `unpin PINNEDID`<br> e.g. `unpin 2`                                                                                                                                                                 |
+| **Pin Patient**            | `pin PATIENTID`<br> e.g., `pin 2`                                                                                                                                                                   |
+| **Unpin Patient**          | `unpin PINNEDID`<br> e.g. `unpin 2`                                                                                                                                                                 |
 | **Exit**                   | `exit`                                                                                                                                                                                              |
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
