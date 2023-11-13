@@ -101,9 +101,9 @@ Throughout this guide, you will see different text styles that are used to highl
 
 <div style="page-break-after: always;"></div>
 
-## Features
-
 [Back to Table of Contents](#table-of-contents)
+
+## Features
 
   1. **Easy Management of People**:
       - Seamlessly create, update, and delete your contacts, ensuring your contact list is always up-to-date.<br><br>
@@ -121,9 +121,9 @@ Throughout this guide, you will see different text styles that are used to highl
 
 <div style="page-break-after: always;"></div>
 
-## Quick Start
-
 [Back to Table of Contents](#table-of-contents)
+
+## Quick Start
 
 1. Ensure you have Java `11` or above installed in your computer.
 
@@ -170,9 +170,9 @@ Throughout this guide, you will see different text styles that are used to highl
 
 <div style="page-break-after: always;"></div>
 
-## Usage
-
 [Back to Table of Contents](#table-of-contents)
+
+## Usage
 
 The commands are split into 4 main sections:
 
@@ -231,9 +231,9 @@ If you are using a PDF version of this document, be careful when copying and pas
 
 <div style="page-break-after: always;"></div>
 
-### Command Aliases
-
 [Back to Table of Contents](#table-of-contents)
+
+### Command Aliases
 
 CoordiMate supports predefined aliases for commands, so that you can get things done faster!<br>
 
@@ -275,9 +275,9 @@ A summary of valid aliases is shown in the [Command Summary](#command-summary) s
 
 <div style="page-break-after: always;"></div>
 
-### Understanding Our GUI
-
 [Back to Table of Contents](#table-of-contents)
+
+### Understanding Our GUI
 
 ![Ui](images/Ui_explanation.png)
 
@@ -298,11 +298,11 @@ Here's a handy trick – you can easily resize sections like Command Result, Con
 
 <div style="page-break-after: always;"></div>
 
+[Back to Table of Contents](#table-of-contents)
+
 ### 1. Commands to Manage Persons
 
 #### 1.1. Adding a person: `addPerson`
-
-[Back to Table of Contents](#table-of-contents)
 
 You can add new persons to your contact list, so that you can remember details of new people you meet.
 
@@ -353,9 +353,9 @@ ap
 
 <div style="page-break-after: always;"></div>
 
-#### 1.2. Listing all persons: `listPerson`
-
 [Back to Table of Contents](#table-of-contents)
+
+#### 1.2. Listing all persons: `listPerson`
 
 You can view your entire contact list, so that you can quickly access and manage your connections.
 
@@ -380,9 +380,9 @@ lp
 
 <div style="page-break-after: always;"></div>
 
-#### 1.3. Editing a person: `editPerson`
-
 [Back to Table of Contents](#table-of-contents)
+
+#### 1.3. Editing a person: `editPerson`
 
 You can change the details of an existing person in your contact list, so that you can keep information in your contact list constantly up-to-date.
 
@@ -440,9 +440,9 @@ ep
 
 <div style="page-break-after: always;"></div>
 
-#### 1.4. Finding a specific person: `findPerson`
-
 [Back to Table of Contents](#table-of-contents)
+
+#### 1.4. Finding a specific person: `findPerson`
 
 You can find a person by their name, so that you can quickly locate their contact details.
 
@@ -493,9 +493,9 @@ To reset the persons view, simply run the <code>listPerson</code> command to lis
 
 <div style="page-break-after: always;"></div>
 
-#### 1.5. Deleting a person entry: `deletePerson`
-
 [Back to Table of Contents](#table-of-contents)
+
+#### 1.5. Deleting a person entry: `deletePerson`
 
 You can remove a person from your contact list, so that you can remove contacts that you no longer need.
 
@@ -540,9 +540,9 @@ This person will be removed from your contact list immediately. This action is i
 
 <div style="page-break-after: always;"></div>
 
-#### 1.6. Deleting all person entries: `deleteAllPerson`
-
 [Back to Table of Contents](#table-of-contents)
+
+#### 1.6. Deleting all person entries: `deleteAllPerson`
 
 You can delete all persons in your contact list, so that you can restart easily with a clean slate and an empty contact list.
 
@@ -575,11 +575,11 @@ All persons will be removed from your contact list immediately. This action is i
 
 <div style="page-break-after: always;"></div>
 
+[Back to Table of Contents](#table-of-contents)
+
 ### 2. Commands to Manage Tasks
 
 #### 2.1. Adding a task: `addTask`
-
-[Back to Table of Contents](#table-of-contents)
 
 You can add a task to your task list, so that you can keep track of important things to do.
 
@@ -626,9 +626,9 @@ at
 
 <div style="page-break-after: always;"></div>
 
-#### 2.2. Listing all tasks: `listTask`
-
 [Back to Table of Contents](#table-of-contents)
+
+#### 2.2. Listing all tasks: `listTask`
 
 You can view your entire task list, so that you can stay organized and on top of your responsibilities.
 
@@ -653,9 +653,9 @@ lt
 
 <div style="page-break-after: always;"></div>
 
-#### 2.3. Editing a task: `editTask`
-
 [Back to Table of Contents](#table-of-contents)
+
+#### 2.3. Editing a task: `editTask`
 
 You can edit a task in your task list, so that you can ensure task details are up-to-date with the latest information.
 
@@ -707,9 +707,9 @@ et
 
 <div style="page-break-after: always;"></div>
 
-#### 2.4. Finding a specific task: `findTask`
-
 [Back to Table of Contents](#table-of-contents)
+
+#### 2.4. Finding a specific task: `findTask`
 
 You can quickly locate tasks that contains your specified keywords in their title and/or note.
 
@@ -759,9 +759,9 @@ To reset the tasks view, simply run the <code>listTask</code> command to list al
 
 <div style="page-break-after: always;"></div>
 
-#### 2.5 Deleting a task entry: `deleteTask`
-
 [Back to Table of Contents](#table-of-contents)
+
+#### 2.5. Deleting a task entry: `deleteTask`
 
 You can remove a task from your task list, so that you can remove tasks that you no longer need.
 
@@ -810,9 +810,9 @@ The task will be removed from your task list immediately. This action is irrever
 
 <div style="page-break-after: always;"></div>
 
-#### 2.6. Deleting all task entries: `deleteAllTask`
-
 [Back to Table of Contents](#table-of-contents)
+
+#### 2.6. Deleting all task entries: `deleteAllTask`
 
 You can remove all tasks from your task list, so that you can restart easily with a clean slate and an empty task list.
 
@@ -843,9 +843,9 @@ All tasks will be removed from your task list immediately. This action is irreve
 
 <div style="page-break-after: always;"></div>
 
-#### 2.7. Marking a task as done: `markTask`
-
 [Back to Table of Contents](#table-of-contents)
+
+#### 2.7. Marking a task as done: `markTask`
 
 You can indicate that a specific task as completed, so that you can keep track of task progress and identify tasks that are done.
 
@@ -887,9 +887,9 @@ mt
 
 <div style="page-break-after: always;"></div>
 
-#### 2.8. Marking a task as not done: `unmarkTask`
-
 [Back to Table of Contents](#table-of-contents)
+
+#### 2.8. Marking a task as not done: `unmarkTask`
 
 You can indicate that a specific task as not completed, so that you can keep track of task progress and identify tasks that are pending further action or completion.
 
@@ -931,9 +931,9 @@ ut
 
 <div style="page-break-after: always;"></div>
 
-#### 2.9. Finding all tasks that are done: `findDone`
-
 [Back to Table of Contents](#table-of-contents)
+
+#### 2.9. Finding all tasks that are done: `findDone`
 
 You can filter the task list to locate all completed tasks, so that you can keep track of task progress and the number of completed tasks with ease.
 
@@ -966,9 +966,9 @@ To reset the tasks view, simply run the <code>listTask</code> command to list al
 
 <div style="page-break-after: always;"></div>
 
-#### 2.10. Finding all tasks that are not done: `findNotDone`
-
 [Back to Table of Contents](#table-of-contents)
+
+#### 2.10. Finding all tasks that are not done: `findNotDone`
 
 You can filter the task list to locate all not completed tasks, so that you can keep track of task progress and the number of not completed tasks with ease.
 
@@ -1001,9 +1001,9 @@ To reset the tasks view, simply run the <code>listTask</code> command to list al
 
 <div style="page-break-after: always;"></div>
 
-#### 2.11. Deleting all tasks that are done: `deleteAllDone`
-
 [Back to Table of Contents](#table-of-contents)
+
+#### 2.11. Deleting all tasks that are done: `deleteAllDone`
 
 You can remove all completed tasks in the task list, so that you can focus on not completed tasks and maintain an organized and clutter-free task list.
 
@@ -1044,11 +1044,11 @@ All completed tasks will be removed from your task list immediately. This action
 
 <div style="page-break-after: always;"></div>
 
+[Back to Table of Contents](#table-of-contents)
+
 ### 3. Commands to Manage Tags
 
 #### 3.1. Adding tag(s) to a person: `addTagPerson`
-
-[Back to Table of Contents](#table-of-contents)
 
 You can add tag(s) to a person, so that you can simply add to the existing list of tags of the indexed person.
 
@@ -1092,9 +1092,9 @@ atagp
 
 <div style="page-break-after: always;"></div>
 
-#### 3.2. Adding tag(s) to a task: `addTagTask`
-
 [Back to Table of Contents](#table-of-contents)
+
+#### 3.2. Adding tag(s) to a task: `addTagTask`
 
 You can add tag(s) to a task, so that you can simply add to the existing list of tags of the indexed task.
 
@@ -1138,9 +1138,9 @@ atagt
 
 <div style="page-break-after: always;"></div>
 
-#### 3.3. Listing all tags: `listTag`
-
 [Back to Table of Contents](#table-of-contents)
+
+#### 3.3. Listing all tags: `listTag`
 
 You can view the tags in your contact list and task list, along with their frequencies, so that you can keep track of the tags you have used.
 
@@ -1169,9 +1169,9 @@ ltag
 
 <div style="page-break-after: always;"></div>
 
-#### 3.4. Finding persons and tasks with any matching tag(s): `findTag`
-
 [Back to Table of Contents](#table-of-contents)
+
+#### 3.4. Finding persons and tasks with any matching tag(s): `findTag`
 
 You can extend your search with keywords, so that you can locate any person or task with at least one matching tag.
 
@@ -1221,9 +1221,9 @@ To reset the persons and tasks view, simply run the <code>listAll</code> command
 
 <div style="page-break-after: always;"></div>
 
-#### 3.5. Finding persons and tasks with all matching tag(s): `findAllTag`
-
 [Back to Table of Contents](#table-of-contents)
+
+#### 3.5. Finding persons and tasks with all matching tag(s): `findAllTag`
 
 You can narrow your search using multiple keywords, so that you can find only those contacts and tasks that include every tag you need.
 
@@ -1273,9 +1273,9 @@ To reset the persons and tasks view, simply run the <code>listAll</code> command
 
 <div style="page-break-after: always;"></div>
 
-#### 3.6. Deleting tag(s) from a person: `deleteTagPerson`
-
 [Back to Table of Contents](#table-of-contents)
+
+#### 3.6. Deleting tag(s) from a person: `deleteTagPerson`
 
 You can delete tag(s) from a person in your contacts list, so that you can remove unwanted or irrelevant tags.
 
@@ -1319,9 +1319,9 @@ dtagp
 
 <div style="page-break-after: always;"></div>
 
-#### 3.7. Deleting tag(s) from a task: `deleteTagTask`
-
 [Back to Table of Contents](#table-of-contents)
+
+#### 3.7. Deleting tag(s) from a task: `deleteTagTask`
 
 You can delete tag(s) from a task in your task list, so that you can remove unwanted or irrelevant tags.
 
@@ -1367,11 +1367,11 @@ dtagt
 
 <div style="page-break-after: always;"></div>
 
+[Back to Table of Contents](#table-of-contents)
+
 ### 4. General Commands
 
 #### 4.1. Viewing help: `help`
-
-[Back to Table of Contents](#table-of-contents)
 
 You can view a link to access the user guide at any time, so that you can refer to documentation to understand the existing features.
 
@@ -1396,9 +1396,9 @@ h
 
 <div style="page-break-after: always;"></div>
 
-#### 4.2. Listing all persons and tasks: `listAll`
-
 [Back to Table of Contents](#table-of-contents)
+
+#### 4.2. Listing all persons and tasks: `listAll`
 
 You can list all persons and tasks in your contact list and task list at the same time.
 
@@ -1423,9 +1423,9 @@ la
 
 <div style="page-break-after: always;"></div>
 
-#### 4.3. Exiting the program: `exit`
-
 [Back to Table of Contents](#table-of-contents)
+
+#### 4.3. Exiting the program: `exit`
 
 You can exit the application, so that you can close the application window and stop the program.
 
@@ -1473,9 +1473,9 @@ Always make a backup before you edit!
 
 <div style="page-break-after: always;"></div>
 
-## FAQ
-
 [Back to Table of Contents](#table-of-contents)
+
+## FAQ
 
 {% include admonition.html type="question" title="Question" body="
 
@@ -1499,9 +1499,9 @@ To restore from a backup data file:<br>
 
 <div style="page-break-after: always;"></div>
 
-## Glossary
-
 [Back to Table of Contents](#table-of-contents)
+
+## Glossary
 
 ### Alphanumeric
 
@@ -1553,9 +1553,9 @@ Example: In a list of 3 alphabets containing (“a”, “b”, “c”) in that
 
 <div style="page-break-after: always;"></div>
 
-## Known Issues
-
 [Back to Table of Contents](#table-of-contents)
+
+## Known Issues
 
 {% include admonition.html type="bug" title="Known Issue" body="
 
@@ -1587,11 +1587,11 @@ Example: In a list of 3 alphabets containing (“a”, “b”, “c”) in that
 
 <div style="page-break-after: always;"></div>
 
+[Back to Table of Contents](#table-of-contents)
+
 ## Command Summary
 
 ### Managing Persons
-
-[Back to Table of Contents](#table-of-contents)
 
  Action | Format | Example | Alias
 --------|--------|---------|------
@@ -1604,9 +1604,9 @@ Example: In a list of 3 alphabets containing (“a”, “b”, “c”) in that
 
 <div style="page-break-after: always;"></div>
 
-### Managing Tasks
-
 [Back to Table of Contents](#table-of-contents)
+
+### Managing Tasks
 
  Action | Format | Example | Alias
 --------|--------|---------|------
@@ -1624,9 +1624,9 @@ Example: In a list of 3 alphabets containing (“a”, “b”, “c”) in that
 
 <div style="page-break-after: always;"></div>
 
-### Managing Tags
-
 [Back to Table of Contents](#table-of-contents)
+
+### Managing Tags
 
  Action | Format | Example | Alias
 --------|--------|---------|------
@@ -1640,9 +1640,9 @@ Example: In a list of 3 alphabets containing (“a”, “b”, “c”) in that
 
 <div style="page-break-after: always;"></div>
 
-### General
-
 [Back to Table of Contents](#table-of-contents)
+
+### General
 
  Action | Format | Example | Alias
 --------|--------|---------|------
