@@ -65,10 +65,10 @@ alt "course"
     am --> fcp : taken
     deactivate am
     alt taken exists
-        fcp -> fcp : new FilterCourseCommand(args, false) as filterCommand
+        fcp -> fcp : new FilterCourseCommand(args, taken) as filterCommand
         note right : "taken" can be true or false
     else taken does not exist
-        fcp -> fcp : new FilterCourseCommand(args, taken) as filterCommand
+        fcp -> fcp : new FilterCourseCommand(args, false) as filterCommand
     end
     fcp --> fcp : filterCommand
     deactivate fcp
@@ -93,7 +93,8 @@ fcp --> fcp : filterCommand
 deactivate fcp
 
 break ParserException thrown
-    fcp --> nbp : Send error message to user
+    fcp --> nbp : ParserException
+    <-- nbp : Send error message\nto UI
 end
 note left : Execution stops here in this case
 
