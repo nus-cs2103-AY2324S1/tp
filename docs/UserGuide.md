@@ -557,8 +557,8 @@ If you wish to access the **User Guide**, simply type:
 help
 ```
 
-Upon hitting `Enter`, the application will display the link to this **User Guide
-**, offering details and examples for all available commands.
+Upon hitting `Enter`, the application will display the link to this **User Guide**, 
+offering details and examples for all available commands.
 
 ![Help Command Result](images/commands/helpCommandResult.png)
 
@@ -578,8 +578,7 @@ ________________________________________________________________________________
 
 ### Listing Your Internship Applications: `list`
 
-The `list` command is your quick snapshot tool, providing a **comprehensive view
-** of all your internship applications.
+The `list` command is your quick snapshot tool, providing a **comprehensive view** of all your internship applications.
 
 It conveniently presents every application you've added, helping you gain a
 holistic perspective of your internship search and manage your applications
@@ -892,7 +891,7 @@ note INDEX o/NOTE_INDEX
 ##### Example:
 
 Suppose you just had an interview for the third internship application on your
-list, and you'd like to delete the third note in your second internship
+list, and you'd like to delete the third note in your third internship
 application in the tracker. The command would look like this:
 
 ```
