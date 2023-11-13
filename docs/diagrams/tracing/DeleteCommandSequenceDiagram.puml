@@ -13,7 +13,7 @@ end box
 [-> dc ++: execute()
 dc -> m ++: getFilteredJobList()
 m --> dc --: lastShownList
-dc -> m ++: deleteJob()
+dc -> m ++: deleteJob(jobToDelete)
 deactivate m
 create cr
 dc -> cr ++: CommandResult()

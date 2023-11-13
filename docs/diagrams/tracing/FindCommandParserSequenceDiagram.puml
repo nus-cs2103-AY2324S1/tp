@@ -11,6 +11,9 @@ Participant "command:FindCommand" as fc LOGIC_COLOR
 [-> fcp ++: parse(args)
 fcp -> at ++: tokenize user input
 at --> fcp --: argMultimap
+create pl
+fcp -> pl ++
+pl --> fcp --
 loop for each entry in argMultimap
     fcp -> pl ++: add(predicate)
     pl --> fcp --
