@@ -210,10 +210,10 @@ Not to worry, here are some steps you can take to fix this:
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * When using parentheses ( ) with items separated by the slash symbol /, at least one item must be included. <br>
-  e.g in the command `search (n/KEYWORD [MORE KEYWORDS] / st/KEYWORD [MORE KEYWORDS] / t/KEYWORD [MORE KEYWORDS])`, it is necessary to specify at least one search category.
+  e.g. in the command `search (n/KEYWORD [MORE KEYWORDS] / st/KEYWORD [MORE KEYWORDS] / t/KEYWORD [MORE KEYWORDS])`, it is necessary to specify at least one search category.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
    e.g. `t/TAGNAME…​` can be used as ` ` (i.e. 0 times), `t/swe t/intern` for `add` commands or `t/swe intern` for `search` and `delete` commands.
@@ -253,8 +253,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/[CATEGORY] TAGNAME]…�
 **Notes on adding tags:**
 * If you would like to tag a user with a tag that has not been categorised yet using the `create` command,
   you can specify the category that you would like it to be categorised to in the `add` command. e.g. `...t/role swe`
-* If you are using a tag that has not been categorised yet and you did not specify its category in the `add` command,
-  the tag would still be saved but it would be "uncategorised" by default.
+* If you are using a tag that has not been categorised yet, and you did not specify its category in the `add` command,
+  the tag would still be saved, but it would be "uncategorized" by default.
 * If you have multiple tags in different categories with the same name, you must specify the category when you want to
   add one of these tags to the applicant you are adding.
 
@@ -278,7 +278,7 @@ An example of the `add` command failing to execute due to missing mandatory fiel
     ![Add-Fail](images/add-command-failure.png)
 <br>
 
-An example of trying to add a applicant with the same name as an existing applicant:
+An example of trying to add an applicant with the same name as an existing applicant:
 1. Enter the command `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/dept finance` (**Same name as existing applicant**)
 2. This is the result of the failed `add` command:
    
@@ -337,9 +337,11 @@ Format: `addL INDEX u/USERNAME` or `addG INDEX u/USERNAME`
 
 **Notes regarding `addL` and `addG` command:**
 
+* Any set of characters entered after the prefix `u/` is taken to be the username, except if the prefix `u/` occurs multiple times.
+* User may provide the username multiple times with the prefix `u/`, however, JABPro only considers the set of characters entered after the last occurring instance of `u/` as the username.
 * User is expected to ensure that `USERNAME` is a valid username for the respective social profile. If it is not a valid username, user will be redirected to the error page of the corresponding social profile when `linkedin` or `github` command is invoked. JABPro does not perform checks for the validity of the username for the corresponding social profile.
 * Invoking the `addL` or `addG` command for an applicant for whom a username has already been added, will simply overwrite the existing username with the new one.
-* User may run the command `addL INDEX u/` or `addG INDEX u/`, i.e providing no username, or simply providing blanks for the username. Such inputs are accepted by JABPro. However, it will prove to be erroneous when `linkedin` or `github` command is invoked.
+* User may run the command `addL INDEX u/` or `addG INDEX u/`, i.e. providing no username, or simply providing blanks for the username. Such inputs are accepted by JABPro. However, it will prove to be erroneous when `linkedin` or `github` command is invoked.
 
 **Example of successful execution of the `addL` command:**
 
@@ -424,7 +426,7 @@ Examples:
 
 [Jump back to Table of Contents](#table-of-contents)
 
-### Viewing a applicant's details: `view`
+### Viewing an applicant's details: `view`
 
 Creates a complete view for details of an applicant in the second main panel and summary statistics (if applicable) of an applicant in the third main panel.
 
@@ -470,7 +472,7 @@ An example of the `view` command failing to execute due to wrong index:
 
 [Jump back to Table of Contents](#table-of-contents)
 
-### Editing a applicant : `edit`
+### Editing an applicant : `edit`
 
 Edits an existing applicant's detail in JABPro
 
@@ -492,7 +494,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAGNAME]…​ [
 * There is a way to edit tags and their categories at the same time. Look at the notes for editing tags with categories `t/[CATEGORY] TAGNAME` for more details.
 
 **Notes on editing the tags of the specified applicant for `t/TAGNAME`**:
-* When editing tags, the existing tags of the applicant will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the applicant will be removed i.e. adding of tags is not cumulative.
 * You can remove all the applicant’s tags by typing `t/` without
   specifying any tags after it.
 * There is no current way to keep the existing tags and add new tags to the applicant. You will have to re-tag the applicant with the existing tags and the new tags.
@@ -508,8 +510,8 @@ Notes on rules for `edit` command involving tags with categories for `t/[CATEGOR
 * Consequently, similar rules for `add` apply to the `edit` command involving tags:
     * If you would like to tag a user with a tag that has not been categorised yet using the `create` command,
       you can specify the category that you would like it to be categorised to in the `edit` command. e.g. `edit 1 t/role swe`
-    * If you are using a tag that has not been categorised yet and you did not specify its category in the `add` command,
-      the tag would still be saved but it would be "uncategorised" by default.
+    * If you are using a tag that has not been categorised yet, and you did not specify its category in the `add` command,
+      the tag would still be saved, but it would be "uncategorized" by default.
     * If you have multiple tags in different categories with the same name, you must specify the category when you want to
       tag the specified applicant with one of these tags.
 
@@ -593,7 +595,7 @@ Format: `create t/CATEGORY TAGNAME…​`
 **Note:**
 * JABPro offers 3 predefined tag categories namely `employment`, `role`, and `dept`. However, you can define up to 3 more tag categories of your own!
 * The tags created using this command can be used to tag applicants using the `add` or `edit` command. Tagging
-  applicant without previously categorising the tags using `create` would still work but the tags would be *uncategorised*.
+  applicant without previously categorising the tags using `create` would still work but the tags would be *uncategorized*.
 * `create` only allows tags to be categorised at creation meaning tags that have already been created, cannot be categorised further.
 
   **Tip:**
@@ -855,6 +857,7 @@ Format: `schedule`
 **Note regarding `schedule` command:**
 
 * `schedule` command will open the `Events` window regardless of whether there are events in JABPro or not.
+* Any set of characters added after the `schedule` keyword will be ignored. E.g.: `schedule a1b2c3`
 
 <box type="tip" seamless>
 
@@ -894,6 +897,11 @@ Format: `help`
 Additionally, pressing the `F1` key also opens the `Help Window`.
 
 </box>
+
+**Note regarding `help` command:**
+
+* Any set of characters added after the `help` keyword will be ignored. E.g.: `help a1b2c3`
+
 
 **Example of successful execution of the `help` command:**
 
