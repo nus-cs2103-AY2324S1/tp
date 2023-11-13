@@ -3,13 +3,16 @@ package seedu.classmanager.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_COUNT;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_COUNT;
+import static seedu.classmanager.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
+import java.util.List;
 import java.util.Objects;
 
 import seedu.classmanager.commons.util.ToStringBuilder;
 import seedu.classmanager.logic.CommandHistory;
 import seedu.classmanager.model.Model;
 import seedu.classmanager.model.student.ClassDetails;
+import seedu.classmanager.model.student.Student;
 
 /**
  * Configures Class Manager with the module information.
@@ -19,19 +22,20 @@ public class ConfigCommand extends Command {
     public static final String COMMAND_WORD = "config";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Configures Class Manager with the module information.\n"
+            + "WARNING: Configuring Class Manager resets "
+            + "the grades, attendance and class participation details of all students. This cannot be undone.\n"
+            + "The default Class Manager is configured with 13 tutorials and 6 assignments.\n"
             + "Parameters: "
             + PREFIX_TUTORIAL_COUNT + "TUTORIAL_COUNT "
             + PREFIX_ASSIGNMENT_COUNT + "ASSIGNMENT_COUNT\n"
             + "Example: "
             + COMMAND_WORD + " "
-            + PREFIX_TUTORIAL_COUNT + "13 "
+            + PREFIX_TUTORIAL_COUNT + "10 "
             + PREFIX_ASSIGNMENT_COUNT + "4";
     public static final String MESSAGE_CONFIG_SUCCESS = "Class Manager has been configured with the following "
             + "information:\n"
             + "Tutorial Count: %1$d\n"
             + "Assignment Count: %2$d\n";
-    public static final String MESSAGE_CONFIG_FAILED = "Class Manager has failed to be configured.\n"
-            + "Please try entering the config command again.\n";
 
     private final int tutorialCount;
     private final int assignmentCount;
@@ -53,17 +57,29 @@ public class ConfigCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) {
-        try {
-            requireNonNull(model);
-            ClassDetails.setTutorialCount(tutorialCount);
-            ClassDetails.setAssignmentCount(assignmentCount);
-            model.setConfigured(true);
-            model.setAssignmentCount(assignmentCount);
-            model.setTutorialCount(tutorialCount);
-            return new CommandResult(String.format(MESSAGE_CONFIG_SUCCESS, tutorialCount, assignmentCount));
-        } catch (Exception e) {
-            return new CommandResult(MESSAGE_CONFIG_FAILED);
+        requireNonNull(model);
+        ClassDetails.setTutorialCount(tutorialCount);
+        ClassDetails.setAssignmentCount(assignmentCount);
+        model.setTutorialCount(tutorialCount);
+        model.setAssignmentCount(assignmentCount);
+
+        // This will display the class details of the first student before the configuration is done
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        List<Student> allStudentList = model.getFilteredStudentList();
+        for (Student student : allStudentList) {
+            ClassDetails newClassDetails = new ClassDetails(student.getClassNumber());
+            Student editedStudent = new Student(student.getName(), student.getPhone(), student.getEmail(),
+                    student.getStudentNumber(), newClassDetails, student.getTags(), student.getComment());
+            model.setStudent(student, editedStudent);
         }
+
+        // Clears the view panel after resetting class details of students
+        model.resetSelectedStudent();
+        model.commitClassManager();
+        // Reset the history of the model and prevent any undo commands
+        model.configReset();
+
+        return new CommandResult(String.format(MESSAGE_CONFIG_SUCCESS, tutorialCount, assignmentCount));
     }
 
     /**
@@ -99,6 +115,10 @@ public class ConfigCommand extends Command {
                 && assignmentCount == e.assignmentCount;
     }
 
+    /**
+     * Returns the hashcode of the {@code ConfigCommand}.
+     * @return Hashcode of the {@code ConfigCommand}.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(tutorialCount, assignmentCount);

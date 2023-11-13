@@ -1,9 +1,12 @@
 package seedu.classmanager.logic.parser;
 
 import static seedu.classmanager.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.classmanager.logic.commands.CommandTestUtil.CLASS_NUMBER_DESC_AMY;
 import static seedu.classmanager.logic.commands.CommandTestUtil.INVALID_STUDENT_NUMBER_DESC;
+import static seedu.classmanager.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.classmanager.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC_AMY;
 import static seedu.classmanager.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC_BOB;
+import static seedu.classmanager.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.classmanager.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.classmanager.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_AMY;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_PARTICIPATION;
@@ -54,7 +57,7 @@ public class RecordClassParticipationCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        ClassDetails.setTutorialCount(10);
+        ClassDetails.setTutorialCount(13);
         assertParseFailure(parser, INVALID_STUDENT_NUMBER_DESC + VALID_TUT_DESC + VALID_PARTICIPATION_DESC,
                 StudentNumber.MESSAGE_CONSTRAINTS); // invalid student number
 
@@ -62,8 +65,7 @@ public class RecordClassParticipationCommandParserTest {
                 ClassDetails.getMessageInvalidTutorialIndex()); // invalid tut
 
         assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + VALID_TUT_DESC + INVALID_PARTICIPATION_DESC,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        RecordClassParticipationCommand.MESSAGE_USAGE)); // invalid participation
+                ClassDetails.MESSAGE_INVALID_PARTICIPATION); // invalid participation
     }
 
     @Test
@@ -115,5 +117,27 @@ public class RecordClassParticipationCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TUTORIAL_INDEX,
                         PREFIX_PARTICIPATION,
                         PREFIX_STUDENT_NUMBER));
+    }
+
+    @Test
+    public void parse_additionalPrefix_failure() {
+        // additional prefix at different location
+        assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + VALID_TUT_DESC
+                + NAME_DESC_AMY + VALID_PARTICIPATION_DESC, MESSAGE_INVALID_FORMAT);
+
+        assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + VALID_TUT_DESC
+                + VALID_PARTICIPATION_DESC + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+
+        assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + NAME_DESC_AMY + VALID_TUT_DESC
+                + VALID_PARTICIPATION_DESC, MESSAGE_INVALID_FORMAT);
+
+        assertParseFailure(parser, NAME_DESC_AMY + STUDENT_NUMBER_DESC_AMY + VALID_TUT_DESC
+                + VALID_PARTICIPATION_DESC, MESSAGE_INVALID_FORMAT);
+
+        // different additional prefix
+        assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + VALID_TUT_DESC + TAG_DESC_FRIEND
+                + VALID_PARTICIPATION_DESC, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, STUDENT_NUMBER_DESC_AMY + VALID_TUT_DESC + CLASS_NUMBER_DESC_AMY
+                + VALID_PARTICIPATION_DESC, MESSAGE_INVALID_FORMAT);
     }
 }

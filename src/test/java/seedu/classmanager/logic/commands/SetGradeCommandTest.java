@@ -8,7 +8,6 @@ import static seedu.classmanager.logic.commands.CommandTestUtil.VALID_STUDENT_NU
 import static seedu.classmanager.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.classmanager.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.classmanager.logic.commands.CommandTestUtil.showStudentAtIndex;
-import static seedu.classmanager.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.classmanager.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.classmanager.testutil.TypicalStudents.getTypicalClassManager;
 
@@ -52,7 +51,7 @@ public class SetGradeCommandTest {
         expectedModel.commitClassManager();
 
         assertCommandSuccess(setGradeCommand, model, expectedMessage, expectedModel, commandHistory);
-        assertEquals(editedStudent, model.getSelectedStudent().get(0));
+        assertEquals(editedStudent, model.getSelectedStudent());
     }
 
     @Test
@@ -73,7 +72,6 @@ public class SetGradeCommandTest {
         showStudentAtIndex(expectedModel, INDEX_FIRST_STUDENT);
         expectedModel.setStudent(model.getStudent(editedStudent.getStudentNumber()), editedStudent);
         expectedModel.setSelectedStudent(editedStudent);
-        expectedModel.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         expectedModel.commitClassManager();
 
         assertCommandSuccess(setGradeCommand, model, expectedMessage, expectedModel, commandHistory);

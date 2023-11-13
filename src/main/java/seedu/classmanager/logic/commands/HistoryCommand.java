@@ -1,3 +1,6 @@
+//@@author Cikguseven-reused
+//Reused from AddressBook-Level 4 (https://github.com/se-edu/addressbook-level4)
+// with minor modifications
 package seedu.classmanager.logic.commands;
 
 import static java.util.Objects.requireNonNull;
@@ -9,7 +12,7 @@ import seedu.classmanager.logic.CommandHistory;
 import seedu.classmanager.model.Model;
 
 /**
- * Lists all the commands entered by user from the start of app launch.
+ * Lists all the commands entered by user from the start of Class Manager app launch.
  */
 public class HistoryCommand extends Command {
 
@@ -36,3 +39,4 @@ public class HistoryCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, String.join("\n", previousCommands)));
     }
 }
+//@@author

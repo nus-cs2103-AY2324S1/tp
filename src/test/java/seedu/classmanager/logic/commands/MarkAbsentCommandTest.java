@@ -12,10 +12,10 @@ import static seedu.classmanager.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import org.junit.jupiter.api.Test;
 
 import seedu.classmanager.commons.core.index.Index;
-import seedu.classmanager.commons.exceptions.IllegalValueException;
 import seedu.classmanager.logic.CommandHistory;
 import seedu.classmanager.logic.Messages;
 import seedu.classmanager.logic.commands.exceptions.CommandException;
+import seedu.classmanager.model.ClassManager;
 import seedu.classmanager.model.Model;
 import seedu.classmanager.model.ModelManager;
 import seedu.classmanager.model.UserPrefs;
@@ -32,9 +32,10 @@ public class MarkAbsentCommandTest {
     private final CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_validStudentNumber_success() throws IllegalValueException, CommandException {
+    public void execute_validStudentNumber_success() throws CommandException {
+        // if the student is the selected student to view
         Student studentToMark = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
-        Index i = Index.fromOneBased(ClassDetails.DEFAULT_COUNT);
+        Index i = Index.fromOneBased(ClassDetails.getTutorialCount());
         model.setSelectedStudent(studentToMark);
 
         MarkAbsentCommand markAbsentCommand = new MarkAbsentCommand(i, studentToMark.getStudentNumber());
@@ -45,22 +46,35 @@ public class MarkAbsentCommandTest {
         Student markedStudent = studentToMark.copy();
         markedStudent.markAbsent(i);
         expectedModel.setStudent(studentToMark, markedStudent);
+        expectedModel.setSelectedStudent(markedStudent);
         expectedModel.commitClassManager();
 
         assertCommandSuccess(markAbsentCommand, model, expectedMessage, expectedModel, commandHistory);
-        assertEquals(studentToMark, model.getSelectedStudent().get(0));
+        assertEquals(expectedModel.getSelectedStudent(), model.getSelectedStudent());
+
+        // if the student is not the selected student to view
+        ModelManager otherModel = new ModelManager(new ClassManager(model.getClassManager()), new UserPrefs());
+        otherModel.resetSelectedStudent();
+
+        ModelManager expectedOtherModel = new ModelManager(new ClassManager(model.getClassManager()),
+            new UserPrefs());
+        expectedOtherModel.setStudent(studentToMark, markedStudent);
+        expectedOtherModel.commitClassManager();
+
+        assertCommandSuccess(markAbsentCommand, otherModel, expectedMessage, expectedOtherModel, commandHistory);
+        assertEquals(null, otherModel.getSelectedStudent());
     }
 
     @Test
     public void execute_invalidTutorialIndex_throwsCommandException() {
         Student studentToMark = TypicalStudents.getTypicalStudents().get(INDEX_FIRST_STUDENT.getZeroBased());
-        Index i = Index.fromZeroBased(ClassDetails.DEFAULT_COUNT + 1);
+        Index i = Index.fromZeroBased(ClassDetails.getTutorialCount() + 1);
 
         MarkAbsentCommand markAbsentCommand = new MarkAbsentCommand(i, studentToMark.getStudentNumber());
 
         assertCommandFailure(
                 markAbsentCommand, model,
-                String.format(ClassDetails.MESSAGE_INVALID_TUTORIAL_INDEX, ClassDetails.DEFAULT_COUNT),
+                String.format(ClassDetails.MESSAGE_INVALID_TUTORIAL_INDEX, ClassDetails.getTutorialCount()),
                         commandHistory);
     }
 

@@ -9,7 +9,6 @@ import static seedu.classmanager.logic.commands.CommandTestUtil.assertCommandSuc
 import org.junit.jupiter.api.Test;
 
 import seedu.classmanager.commons.core.index.Index;
-import seedu.classmanager.commons.exceptions.IllegalValueException;
 import seedu.classmanager.logic.CommandHistory;
 import seedu.classmanager.logic.commands.exceptions.CommandException;
 import seedu.classmanager.model.Model;
@@ -28,10 +27,11 @@ public class MarkPresentAllCommandTest {
     private final CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_success() throws IllegalValueException, CommandException {
-        Index i = Index.fromOneBased(ClassDetails.DEFAULT_COUNT);
+    public void execute_success() throws CommandException {
+        Index i = Index.fromOneBased(ClassDetails.getTutorialCount());
         Student selectedStudent = TypicalStudents.getTypicalStudents().get(0);
         model.setSelectedStudent(selectedStudent);
+
         MarkPresentAllCommand markPresentAllCommand = new MarkPresentAllCommand(i);
 
         String expectedMessage = MarkPresentAllCommand.MESSAGE_MARK_SUCCESS;
@@ -45,18 +45,18 @@ public class MarkPresentAllCommandTest {
         expectedModel.commitClassManager();
 
         assertCommandSuccess(markPresentAllCommand, model, expectedMessage, expectedModel, commandHistory);
-        assertEquals(selectedStudent, model.getSelectedStudent().get(0));
+        assertEquals(selectedStudent, model.getSelectedStudent());
     }
 
     @Test
     public void execute_invalidTutorialIndex_throwsCommandException() {
-        Index i = Index.fromZeroBased(ClassDetails.DEFAULT_COUNT + 1);
+        Index i = Index.fromZeroBased(ClassDetails.getTutorialCount() + 1);
 
         MarkPresentAllCommand markPresentAllCommand = new MarkPresentAllCommand(i);
 
         assertCommandFailure(
                 markPresentAllCommand, model,
-                String.format(ClassDetails.MESSAGE_INVALID_TUTORIAL_INDEX, ClassDetails.DEFAULT_COUNT),
+                String.format(ClassDetails.MESSAGE_INVALID_TUTORIAL_INDEX, ClassDetails.getTutorialCount()),
                 commandHistory);
     }
 

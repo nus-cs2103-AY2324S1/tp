@@ -1,3 +1,6 @@
+//@@author Cikguseven-reused
+//Reused from AddressBook-Level 4 (https://github.com/se-edu/addressbook-level4)
+// with minor modifications
 package seedu.classmanager.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -222,7 +225,7 @@ public class VersionedClassManagerTest {
         assertFalse(versionedClassManager.equals(null));
 
         // different types -> returns false
-        assertFalse(versionedClassManager.equals(1));
+        assertFalse(versionedClassManager.equals(0));
 
         // different state list -> returns false
         VersionedClassManager differentClassManagerList =
@@ -318,4 +321,73 @@ public class VersionedClassManagerTest {
         // different value -> returns false;
         assertFalse(versionedClassManager.equals(newVersionedClassManager));
     }
+    //@@author
+
+    @Test
+    public void configReset_stateOneOfOne_success() {
+        VersionedClassManager versionedClassManager = prepareClassManagerList(emptyClassManager);
+
+        versionedClassManager.configReset();
+        assertEquals(versionedClassManager, new VersionedClassManager(emptyClassManager));
+    }
+
+    @Test
+    public void configReset_stateTwoOfTwo_success() {
+        VersionedClassManager versionedClassManager = prepareClassManagerList(emptyClassManager, classManagerWithAmy);
+
+        versionedClassManager.configReset();
+        assertEquals(versionedClassManager, new VersionedClassManager(classManagerWithAmy));
+    }
+
+    @Test
+    public void configReset_stateThreeOfThree_success() {
+        VersionedClassManager versionedClassManager = prepareClassManagerList(emptyClassManager, classManagerWithAmy,
+                classManagerWithBob);
+
+        versionedClassManager.configReset();
+        assertEquals(versionedClassManager, new VersionedClassManager(classManagerWithBob));
+    }
+
+    @Test
+    public void configReset_stateFourOfFour_success() {
+        VersionedClassManager versionedClassManager = prepareClassManagerList(emptyClassManager, classManagerWithAmy,
+                classManagerWithBob, classManagerWithCarl);
+
+        versionedClassManager.configReset();
+        assertEquals(versionedClassManager, new VersionedClassManager(classManagerWithCarl));
+    }
+
+    @Test
+    public void configReset_stateOneOfFour_success() {
+        VersionedClassManager versionedClassManager = prepareClassManagerList(emptyClassManager, classManagerWithAmy,
+                classManagerWithBob, classManagerWithCarl);
+
+        versionedClassManager.undo();
+        versionedClassManager.undo();
+        versionedClassManager.undo();
+        versionedClassManager.configReset();
+        assertEquals(versionedClassManager, new VersionedClassManager(emptyClassManager));
+    }
+
+    @Test
+    public void configReset_stateTwoOfFour_success() {
+        VersionedClassManager versionedClassManager = prepareClassManagerList(emptyClassManager, classManagerWithAmy,
+                classManagerWithBob, classManagerWithCarl);
+
+        versionedClassManager.undo();
+        versionedClassManager.undo();
+        versionedClassManager.configReset();
+        assertEquals(versionedClassManager, new VersionedClassManager(classManagerWithAmy));
+    }
+
+    @Test
+    public void configReset_stateThreeOfFour_success() {
+        VersionedClassManager versionedClassManager = prepareClassManagerList(emptyClassManager, classManagerWithAmy,
+                classManagerWithBob, classManagerWithCarl);
+
+        versionedClassManager.undo();
+        versionedClassManager.configReset();
+        assertEquals(versionedClassManager, new VersionedClassManager(classManagerWithBob));
+    }
 }
+

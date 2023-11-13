@@ -19,20 +19,31 @@ import seedu.classmanager.storage.JsonAdaptedClassDetails;
  */
 public class ClassDetails {
 
-    public static final String MESSAGE_CONSTRAINTS = "Class number can take any values, and it should not be blank";
-    public static final String MESSAGE_INVALID_GRADE = "Grade should be between 0 and 100";
-    public static final String MESSAGE_INVALID_ASSIGNMENT_NUMBER = "Assignment index should an integer "
+    public static final String MESSAGE_CONSTRAINTS = "Class Number must begin with a capital 'T', "
+            + "followed by any number of characters, such as 'T11' or 'TG12'. It must also not be blank.";
+    public static final String MESSAGE_INVALID_GRADE = "Grade should be an integer between 0 and 100.";
+    public static final String MESSAGE_INVALID_ASSIGNMENT_NUMBER = "Assignment index should be an integer "
+            + "between 1 and %s.";
+
+    public static final String MESSAGE_INVALID_TUTORIAL_INDEX = "Tutorial index should be an integer "
             + "between 1 and %s";
-    public static final String MESSAGE_INVALID_TUTORIAL_INDEX = "Tutorial index should an integer "
-            + "between 1 and %s";
+
+    public static final String MESSAGE_INVALID_PARTICIPATION = "Participation should be "
+            + "either 'true' or 'false'.";
     public static final String MESSAGE_UNEQUAL_LENGTH = "The number of tutorial sessions and "
             + "attendance records should be equal.";
+    public static final String MESSAGE_RECONFIGURE = " Please reconfigure Class Manager before "
+            + "loading your file or edit your file.";
+    public static final String MESSAGE_TUTORIAL_COUNT_MISMATCH = "The number of configured tutorial sessions does not"
+            + " match the number of tutorial sessions in the save file." + MESSAGE_RECONFIGURE;
+    public static final String MESSAGE_ASSIGNMENT_COUNT_MISMATCH = "The number of configured assignments does not"
+            + " match the number of assignments in the save file." + MESSAGE_RECONFIGURE;
 
     // The class number should start with "T".
     public static final String VALIDATION_REGEX = "T.*";
-    public static final int DEFAULT_COUNT = 10;
-    private static int tutorialCount = DEFAULT_COUNT;
-    private static int assignmentCount = DEFAULT_COUNT;
+
+    private static int tutorialCount = 13;
+    private static int assignmentCount = 6;
 
     public final String classNumber;
     public final AttendanceTracker attendanceTracker;
@@ -48,6 +59,7 @@ public class ClassDetails {
     public ClassDetails(String classNumber) {
         requireNonNull(classNumber);
         checkArgument(isValidClassDetails(classNumber), MESSAGE_CONSTRAINTS);
+        classNumber = classNumber.toUpperCase().trim();
         this.classNumber = classNumber;
         attendanceTracker = new AttendanceTracker(tutorialCount);
         classParticipationTracker = new ClassParticipationTracker(tutorialCount);
@@ -109,7 +121,6 @@ public class ClassDetails {
     public String getClassNumber() {
         return this.classNumber;
     }
-
     /**
      * Returns true if a given string is a valid class number.
      */
@@ -118,11 +129,21 @@ public class ClassDetails {
     }
 
     public static void setTutorialCount(int tutorialCount) {
+        assert tutorialCount >= 0;
         ClassDetails.tutorialCount = tutorialCount;
     }
 
     public static void setAssignmentCount(int assignmentCount) {
+        assert assignmentCount >= 0;
         ClassDetails.assignmentCount = assignmentCount;
+    }
+
+    public static int getTutorialCount() {
+        return tutorialCount;
+    }
+
+    public static int getAssignmentCount() {
+        return assignmentCount;
     }
 
     /**
@@ -229,6 +250,10 @@ public class ClassDetails {
      * Returns the message for invalid assignment index.
      */
     public static String getMessageInvalidAssignmentIndex() {
+        assert assignmentCount >= 0;
+        if (assignmentCount == 0) {
+            return "There are no assignments configured.";
+        }
         return String.format(MESSAGE_INVALID_ASSIGNMENT_NUMBER, assignmentCount);
     }
 
@@ -236,6 +261,10 @@ public class ClassDetails {
      * Returns the message for invalid tutorial index.
      */
     public static String getMessageInvalidTutorialIndex() {
+        assert tutorialCount >= 0;
+        if (tutorialCount == 0) {
+            return "There are no tutorials configured.";
+        }
         return String.format(MESSAGE_INVALID_TUTORIAL_INDEX, tutorialCount);
     }
 

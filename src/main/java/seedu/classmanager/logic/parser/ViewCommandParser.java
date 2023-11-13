@@ -2,6 +2,7 @@ package seedu.classmanager.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.classmanager.logic.parser.ArgumentMultimap.areAdditionalPrefixesPresent;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 
 import seedu.classmanager.logic.commands.ViewCommand;
@@ -22,12 +23,17 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_NUMBER);
 
-        String number = argMultimap.getValue(PREFIX_STUDENT_NUMBER).orElse("");
-        if (!StudentNumber.isValidStudentNumber(number)) {
+        if (!argMultimap.arePrefixesPresent(PREFIX_STUDENT_NUMBER)
+            || !argMultimap.getPreamble().isEmpty()
+            || areAdditionalPrefixesPresent(args, PREFIX_STUDENT_NUMBER)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         }
 
-        StudentNumber studentNumber = new StudentNumber(number);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_NUMBER);
+
+        StudentNumber studentNumber = ParserUtil.parseStudentNumber(
+            argMultimap.getValue(PREFIX_STUDENT_NUMBER).get()
+        );
 
         return new ViewCommand(studentNumber);
     }

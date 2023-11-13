@@ -2,6 +2,7 @@ package seedu.classmanager.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.classmanager.logic.parser.ArgumentMultimap.areAdditionalPrefixesPresent;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_WILDCARD;
@@ -36,20 +37,18 @@ public class TagCommandParser implements Parser<TagCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_TAG, PREFIX_WILDCARD, PREFIX_STUDENT_NUMBER);
 
-        String number = argMultimap.getValue(PREFIX_STUDENT_NUMBER).orElse("");
-        if (!StudentNumber.isValidStudentNumber(number)) {
+        if (!argMultimap.arePrefixesPresent(PREFIX_STUDENT_NUMBER, PREFIX_TAG)
+            || !argMultimap.getPreamble().isEmpty()
+            || areAdditionalPrefixesPresent(args, PREFIX_TAG, PREFIX_WILDCARD, PREFIX_STUDENT_NUMBER)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     TagCommand.MESSAGE_TAG_FAILED + TagCommand.MESSAGE_USAGE));
         }
 
-        StudentNumber studentNumber = new StudentNumber(number);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_WILDCARD, PREFIX_STUDENT_NUMBER);
+        StudentNumber studentNumber = ParserUtil.parseStudentNumber(
+            argMultimap.getValue(PREFIX_STUDENT_NUMBER).get());
 
         parseTags(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(this::setTags);
-
-        if (this.tags == null) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                TagCommand.MESSAGE_TAG_FAILED + TagCommand.MESSAGE_USAGE));
-        }
 
         String action = argMultimap.getValue(PREFIX_WILDCARD).orElse("");
 
@@ -58,8 +57,10 @@ public class TagCommandParser implements Parser<TagCommand> {
             return new AddTagCommand(studentNumber, this.tags);
         case TagCommand.DELETE_TAGS:
             return new DeleteTagCommand(studentNumber, this.tags);
-        default:
+        case TagCommand.DEFAULT:
             return new TagCommand(studentNumber, this.tags);
+        default:
+            throw new ParseException(TagCommand.MESSAGE_INVALID_ACTION_IDENTIFIER);
         }
     }
 
@@ -70,9 +71,7 @@ public class TagCommandParser implements Parser<TagCommand> {
      */
     private Optional<Set<Tag>> parseTags(Collection<String> tags) throws ParseException {
         assert tags != null;
-        if (tags.isEmpty()) {
-            return Optional.empty();
-        }
+
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }

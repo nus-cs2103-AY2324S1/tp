@@ -53,7 +53,7 @@ public class RecordClassParticipationCommandTest {
         expectedModel.commitClassManager();
 
         assertCommandSuccess(recordClassParticipationCommand, model, expectedMessage, expectedModel, commandHistory);
-        assertEquals(editedStudent, model.getSelectedStudent().get(0));
+        assertEquals(editedStudent, model.getSelectedStudent());
     }
 
     @Test
@@ -75,7 +75,6 @@ public class RecordClassParticipationCommandTest {
         showStudentAtIndex(expectedModel, INDEX_FIRST_STUDENT);
         expectedModel.setStudent(model.getStudent(editedStudent.getStudentNumber()), editedStudent);
         expectedModel.setSelectedStudent(editedStudent);
-        expectedModel.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
         expectedModel.commitClassManager();
 
         assertCommandSuccess(recordClassParticipationCommand, model, expectedMessage, expectedModel, commandHistory);

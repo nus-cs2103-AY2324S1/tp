@@ -12,7 +12,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.classmanager.commons.core.GuiSettings;
 import seedu.classmanager.commons.core.LogsCenter;
-import seedu.classmanager.model.student.ClassDetails;
 import seedu.classmanager.model.student.Student;
 import seedu.classmanager.model.student.StudentNumber;
 
@@ -37,11 +36,6 @@ public class ModelManager implements Model {
         this.versionedClassManager = new VersionedClassManager(classManager);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.versionedClassManager.getStudentList());
-
-        logger.info("Set the tutorial count to " + this.userPrefs.getTutorialCount());
-        logger.info("Set the assignment count to " + this.userPrefs.getAssignmentCount());
-        ClassDetails.setTutorialCount(this.userPrefs.getTutorialCount());
-        ClassDetails.setAssignmentCount(this.userPrefs.getAssignmentCount());
     }
 
     public ModelManager() {
@@ -89,22 +83,6 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Returns true if the user has configured the module information.
-     */
-    @Override
-    public boolean getConfigured() {
-        return userPrefs.getConfigured();
-    }
-
-    /**
-     * User has configured the module information.
-     */
-    @Override
-    public void setConfigured(boolean isConfigured) {
-        userPrefs.setConfigured(isConfigured);
-    }
-
-    /**
      * Assignment count that the user configured.
      */
     @Override
@@ -124,6 +102,7 @@ public class ModelManager implements Model {
     public void toggleColorTheme() {
         userPrefs.toggleColorTheme();
     }
+
     //=========== ClassManager ================================================================================
 
     @Override
@@ -166,13 +145,20 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Student getSelectedStudent() {
+        return versionedClassManager.getSelectedStudent();
+    }
+
+    @Override
     public void setSelectedStudent(Student student) {
+        requireNonNull(student);
         versionedClassManager.setSelectedStudent(student);
     }
 
     @Override
     public boolean isSelectedStudent(Student student) {
-        return !getSelectedStudent().isEmpty() && getSelectedStudent().get(0).equals(student);
+        requireNonNull(student);
+        return student.isSameStudent(getSelectedStudent());
     }
     //=========== Filtered Student List Accessors =============================================================
 
@@ -186,19 +172,19 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Student> getSelectedStudent() {
-        return versionedClassManager.getSelectedStudent();
+    public ObservableList<Student> getObservableSelectedStudent() {
+        return versionedClassManager.getObservableSelectedStudent();
     }
 
     @Override
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
-        if (!filteredStudents.isEmpty()) {
-            versionedClassManager.setSelectedStudent(filteredStudents.get(0));
-        }
     }
 
+    //@@author Cikguseven-reused
+    //Reused from AddressBook-Level 4 (https://github.com/se-edu/addressbook-level4)
+    // with minor modifications
     /**
      * Returns true if the model has previous Class Manager states to restore.
      */
@@ -238,14 +224,23 @@ public class ModelManager implements Model {
     public void commitClassManager() {
         versionedClassManager.commit();
     }
+    //@@author
 
     /**
      * Resets the history of the model after a load command.
      */
     @Override
-    public void reset(ReadOnlyClassManager classManager) {
-        this.versionedClassManager.reset(classManager);
+    public void loadReset(ReadOnlyClassManager classManager) {
+        this.versionedClassManager.loadReset(classManager);
         versionedClassManager.resetSelectedStudent();
+    }
+
+    /**
+     * Resets the history of the model after a config command.
+     */
+    @Override
+    public void configReset() {
+        this.versionedClassManager.configReset();
     }
 
     /**

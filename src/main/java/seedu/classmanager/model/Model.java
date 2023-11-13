@@ -66,16 +66,6 @@ public interface Model {
     void setClassManagerFilePath(Path classManagerFilePath);
 
     /**
-     * Returns true if the user has configured the module information.
-     */
-    boolean getConfigured();
-
-    /**
-     * User has configured the module information.
-     */
-    void setConfigured(boolean isConfigured);
-
-    /**
      * Replaces Class Manager data with the data in {@code classManager}.
      */
     void setClassManager(ReadOnlyClassManager classManager);
@@ -115,16 +105,29 @@ public interface Model {
      */
     Student getStudent(StudentNumber studentNumber);
 
+    /**
+     * Gets the selected student.
+     */
+    Student getSelectedStudent();
+
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();
 
     /** Returns view of selected student. */
-    ObservableList<Student> getSelectedStudent();
+    ObservableList<Student> getObservableSelectedStudent();
 
-    /** Sets a student to be selected to view class details. */
+    /**
+     * Sets a student to be selected to view class details.
+     *
+     * @param student to be set as the selected student.
+     */
     void setSelectedStudent(Student student);
 
-    /** Check if the Student is the selected student. */
+    /**
+     * Check if the Student is the selected student.
+     *
+     * @param student to check if is the selected student.
+     */
     boolean isSelectedStudent(Student student);
 
     /**
@@ -133,6 +136,9 @@ public interface Model {
      */
     void updateFilteredStudentList(Predicate<Student> predicate);
 
+    //@@author Cikguseven-reused
+    //Reused from AddressBook-Level 4 (https://github.com/se-edu/addressbook-level4)
+    // with minor modifications
     /**
      * Returns true if the model has previous Class Manager states to restore.
      */
@@ -157,11 +163,17 @@ public interface Model {
      * Saves the current Class Manager state for undo/redo.
      */
     void commitClassManager();
+    //@@author
 
     /**
      * Resets the history of the model after a load command.
      */
-    void reset(ReadOnlyClassManager classManager);
+    void loadReset(ReadOnlyClassManager classManager);
+
+    /**
+     * Resets the history of the model after a config command.
+     */
+    void configReset();
 
     /**
      * Resets the selected student after a clear command.

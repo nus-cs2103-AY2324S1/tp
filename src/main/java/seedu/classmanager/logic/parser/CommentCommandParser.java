@@ -2,10 +2,10 @@ package seedu.classmanager.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.classmanager.logic.parser.ArgumentMultimap.areAdditionalPrefixesPresent;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 
-import seedu.classmanager.commons.exceptions.IllegalValueException;
 import seedu.classmanager.logic.commands.CommentCommand;
 import seedu.classmanager.logic.parser.exceptions.ParseException;
 import seedu.classmanager.model.student.Comment;
@@ -25,19 +25,15 @@ public class CommentCommandParser implements Parser<CommentCommand> {
     public CommentCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_NUMBER, PREFIX_COMMENT);
-
-        if (!argMultimap.arePrefixesPresent(PREFIX_STUDENT_NUMBER, PREFIX_COMMENT)) {
+        if (!argMultimap.arePrefixesPresent(PREFIX_STUDENT_NUMBER, PREFIX_COMMENT)
+                || !argMultimap.getPreamble().isEmpty()
+                || areAdditionalPrefixesPresent(args, PREFIX_STUDENT_NUMBER, PREFIX_COMMENT)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CommentCommand.MESSAGE_USAGE));
         }
 
         StudentNumber studentNumber;
-        try {
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_NUMBER);
-            studentNumber = ParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_STUDENT_NUMBER).get());
-        } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CommentCommand.MESSAGE_USAGE), ive);
-        }
-
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_NUMBER, PREFIX_COMMENT);
+        studentNumber = ParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_STUDENT_NUMBER).get());
         Comment comment = ParserUtil.parseComment(argMultimap.getValue(PREFIX_COMMENT).orElse(""));
 
         return new CommentCommand(studentNumber, comment);

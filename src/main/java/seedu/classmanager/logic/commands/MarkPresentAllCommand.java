@@ -2,7 +2,6 @@ package seedu.classmanager.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.classmanager.logic.parser.CliSyntax.PREFIX_TUTORIAL_INDEX;
-import static seedu.classmanager.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 
@@ -17,10 +16,12 @@ import seedu.classmanager.model.student.Student;
  */
 public class MarkPresentAllCommand extends Command {
     public static final String COMMAND_WORD = "present-all";
-    public static final String MESSAGE_MARK_SUCCESS = "Successfully mark attendance as present.";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks all the students displayed as present.\n"
+    public static final String MESSAGE_MARK_SUCCESS = "Successfully marked the attendance of all displayed students "
+            + "as present.";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the attendance of all displayed students as "
+            + "present.\n"
             + "Parameters: "
-            + PREFIX_TUTORIAL_INDEX + "TUTORIAL INDEX\n"
+            + PREFIX_TUTORIAL_INDEX + "TUTORIAL_INDEX\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TUTORIAL_INDEX + "1";
     private final Index index;
@@ -48,7 +49,6 @@ public class MarkPresentAllCommand extends Command {
                 model.setSelectedStudent(markedStudent);
             }
         }
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.commitClassManager();
 
         return new CommandResult(MESSAGE_MARK_SUCCESS);
