@@ -43,7 +43,7 @@
     "note" : " "
   } ],
   "appointments" : [ {
-    "name" : "Elle Meyer",
+    "name" : "George Best",
     "date" : "2023-11-30",
     "startTime" : "16:30",
     "endTime" : "17:30",
@@ -57,8 +57,8 @@
   }, {
     "name" : "George Best",
     "date" : "2023-11-30",
-    "startTime" : "17:00",
-    "endTime" : "18:00",
+    "startTime" : "16:30",
+    "endTime" : "17:30",
     "description" : "First Session"
   } ]
 }
