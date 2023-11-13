@@ -50,7 +50,7 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 
     * `list students` : Lists all students with their name.
 
-    * In ___STUDENTS list___:
+    * In 👨‍🎓 ___STUDENTS list___:
 
         * `add -name Leah` : Adds a student named "Leah" to the application.
 
@@ -69,9 +69,9 @@ This project is based on the [AddressBook-Level3 project](https://se-education.o
 ### Basic Usage
 
 <!-- todo, illustrate -->
-* The app is split into 3 states: ___STUDENTS list___, ___SCHEDULE list___ (default) and ___TASKS list___. Each corresponds to the main features of TutorMate.
+* The app is split into 3 states: 👨‍🎓 ___STUDENTS list___, 📅 ___SCHEDULE list___ (default) and 💼 ___TASKS list___. Each corresponds to the main features of TutorMate.
 * Each state has its associated features, while certain features work with all states but has differing functionalities.
-* The ___STUDENTS list___ handles student details management, ___SCHEDULE list___ handles lessons, scheduling and the tasks for each lesson while the full ___TASKS list___ is a view to display all tasks.
+* The 👨‍🎓 ___STUDENTS list___ handles student details management, 📅 ___SCHEDULE list___ handles lessons, scheduling and the tasks for each lesson while the full 💼 ___TASKS list___ is a view to display all tasks.
 * The _GUI_ <sup>[2](#glossary)</sup> has several main components (see _GUI_ <sup>[2](#glossary)</sup> image below):
     * The command box is for users to enter and execute commands.
     * The response box is to display responses for command execution, to indicate success or errors.
@@ -138,6 +138,7 @@ This box denotes command outputs.
 | `PHONE`                               | `addPerson` `editPerson`                                                               | Should be at least 3 characters long, and can only contain numbers.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | "96681234", "823234"                                                                                            | "+6592212341", "98"         |
 | `EMAIL`                               | `addPerson` `editPerson`                                                               | Should follow the format localpart@domain.<br/>The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.<br/>This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.<br/>The domain name must:<br/>- end with a domain label at least 2 characters long<br/>- have each domain label start and end with alphanumeric characters<br/>- have each domain label consist of alphanumeric characters, separated only by hyphens, if any. | "hello@gmail.com", "test@g.com"                                                                                 | "hello.com", "f@f"          |
 | `ADDRESS`                             | `addPerson` `editPerson`                                                               | Must not be empty.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "Bedok", "25 Lower Kent Ridge Road"                                                                             | ""                          |  
+| `REMARK`                              | `addPerson` `editPerson`                                                               | Must be either alphanumeric or a symbol (!, @, #...). Can be empty                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | "Bedok", "25 Lower Kent Ridge Road", "", "@"                                                                    | "💼", "爱"                   |  
 | `TAG`                                 | `addPerson` `editPerson`<br/>`filter`                                                  | Must not be empty and cannot contain any spaces. Multiple tags can be specified at once by using a comma (,) as a separator.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | "jc,express", "weak"                                                                                            | "junior college"            |
 | `DATE`                                | `addLesson` `editLesson`<br/>`filter`                                                  | Must follow either the date format **yyyy/MM/dd**, **yy/MM/dd**, **MM/dd**, **dd**. See [here](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table) for an exhaustive explanation of the allowable formats.                                                                                                                                                                                                                                                                                                                                                                                               | To represent the date 13/08/2023 and assuming today is 07/08/2023: <br/>"2023/08/13", "23/08/13", "08/13", "13" | "20222/08/2", "13/1"        | 
 | `TIME`                                | `addLesson` `editLesson`<br/>`filter`                                                  | Must follow either HH:MM or H:MM (only for 0:00 to 9:59)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | "13:30", "9:17"                                                                                                 | "9:1", "13:70"              |
@@ -155,13 +156,13 @@ It will display the specified list and its corresponding details panel.
 
 Format: `list [LIST] [KEYWORDS]`
 * Shows the list and associated detail panel for the specified `[LIST]`.
-* The `[KEYWORDS]` parameter is for specifying which student details to display, and is only valid for ___STUDENTS list___. When used for ___SCHEDULE list___ and ___TASKS list___, they will be ignored.
+* The `[KEYWORDS]` parameter is for specifying which student details to display, and is only valid for 👨‍🎓 ___STUDENTS list___. When used for 📅 ___SCHEDULE list___ and 💼 ___TASKS list___, they will be ignored.
 * Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
 
 **Tips:**
-- `list` without specifying the `[LIST]` parameter defaults to showing the ___SCHEDULE list___.
+- `list` without specifying the `[LIST]` parameter defaults to showing the 📅 ___SCHEDULE list___.
 
 </box>
 
@@ -181,7 +182,7 @@ Showing list STUDENT
 #### For Schedule:
 
 Example usages:
-* `list` and `list schedule` displays the ___SCHEDULE list___ with all the lessons with their names in time order.
+* `list` and `list schedule` displays the 📅 ___SCHEDULE list___ with all the lessons with their names in time order.
 
 Success outputs:
 * Input: `list` or `list schedule`
@@ -240,10 +241,10 @@ Format: `show INDEX`
 
 #### For Student:
 
-In ___STUDENTS list___, the show command shows the details of the specified student from the ___STUDENTS list___ in the application.
+In 👨‍🎓 ___STUDENTS list___, the show command shows the details of the specified student from the 👨‍🎓 ___STUDENTS list___ in the application.
 
 Example usages:
-* `list STUDENTS` followed by `show 2` shows the details of the 2nd student in the ___STUDENTS list___.
+* `list STUDENTS` followed by `show 2` shows the details of the 2nd student in the 👨‍🎓 ___STUDENTS list___.
 * `find Betsy` followed by `show 1` shows the details of the 1st student in the results of the `find` command.
 
 Success outputs:
@@ -256,10 +257,10 @@ Showing Person: Alex Yeoh; Phone: 87438807; Email: alexyeoh@example.com; Address
 
 #### For Schedule:
 
-In ___SCHEDULE list___, the show command shows the details of the specified lesson from the ___SCHEDULE list___ in the application.
+In 📅 ___SCHEDULE list___, the show command shows the details of the specified lesson from the 📅 ___SCHEDULE list___ in the application.
 
 Example usages:
-*  `list SCHEDULE` followed by `show 2` shows the details of the 2nd lesson in the ___SCHEDULE list___.
+*  `list SCHEDULE` followed by `show 2` shows the details of the 2nd lesson in the 📅 ___SCHEDULE list___.
 * `find lesson1` followed by `show 1` shows the details of the 1st lesson in the results of the `find` command.
 
 Success outputs:
@@ -272,10 +273,10 @@ Showing Lesson: Start: 12:30 PM; End: 2:30 PM
 
 #### For Task:
 
-In ___TASKS list___, the show command shows the details of the specified task from the full ___TASKS list___ in the application.
+In 💼 ___TASKS list___, the show command shows the details of the specified task from the full 💼 ___TASKS list___ in the application.
 
 Example usages:
-* `list TASKS` followed by `show 2` shows the description of the 2nd task in the full ___TASKS list___.
+* `list TASKS` followed by `show 2` shows the description of the 2nd task in the full 💼 ___TASKS list___.
 
 Success outputs:
 * Input: `show 1`
@@ -307,14 +308,14 @@ The lesson index provided is invalid
 
 ### Add Feature
 
-Adds a student/lesson/task to the ___STUDENTS list___, ___SCHEDULE list___ or the task list of a lesson in the application.
+Adds a student/lesson/task to the 👨‍🎓 ___STUDENTS list___, 📅 ___SCHEDULE list___ or the 💼 ___TASKS list___ of a lesson in the application.
 
 #### For Student:
 
 Format: `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS]
 [-subject SUBJECTS] [-tag TAG] [-remark REMARK]`
 
-* A new student cannot have the same name (case-insensitive) as existing students in the ___STUDENTS list___.
+* A new student cannot have the same name (case-insensitive) as existing students in the 👨‍🎓 ___STUDENTS list___.
 * A student can have any number of unique tags (including 0)
 * Duplicate phone numbers are allowed, since it is possible for 2 children to use their parent's number.
 * Refer to the parameter constraints [here](#parameter-summary).
@@ -322,14 +323,14 @@ Format: `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADD
 <box type="tip" seamless>
 
 **Tips:**
-- If the user is currently in ___STUDENTS list___, the command can be shortened to `add`.
+- If the user is currently in 👨‍🎓 ___STUDENTS list___, the command can be shortened to `add`.
 
 </box>
 
 Example usages:
 * `addPerson -name John`
 * `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS`
-* In ___STUDENTS list___ :
+* In 👨‍🎓 ___STUDENTS list___ :
     * `add -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS`
 
 Success outputs:
@@ -365,14 +366,14 @@ Format: `addLesson -name NAME [-day DATE] [-start TIME] [-end TIME] [-subject SU
 <box type="tip" seamless>
 
 **Tips:**
-If the user is currently in ___SCHEDULE list___, the command can be shortened to `add`.
+If the user is currently in 📅 ___SCHEDULE list___, the command can be shortened to `add`.
 
 </box>
 
 Example usages:
 * `addLesson -name Chemistry Lesson at Bishan`
 * `addLesson -name Lesson at Tai Seng -start 09:00 -end 11:00 -day 03/21 -subject physics`
-* In ___SCHEDULE list___ :
+* In 📅 ___SCHEDULE list___ :
     * `add -name Lesson at Yishun -day 21 -subject MATHEMATICS`
 
 
@@ -408,7 +409,7 @@ Usage: addLesson -name NAME (any number of unique [-subject|day|start|end VALUE]
 #### For Task:
 
 Format: `addTask [INDEX] DESCRIPTION`
-* Adds the task to the lesson at specified `INDEX` of the displayed ___SCHEDULE list___ or to the shown lesson (if `INDEX` is omitted).
+* Adds the task to the lesson at specified `INDEX` of the displayed 📅 ___SCHEDULE list___ or to the shown lesson (if `INDEX` is omitted).
 * A new task cannot have the same description as existing tasks in the task list of that specific lesson.
 * Refer to the parameter constraints [here](#parameter-summary).
 
@@ -442,29 +443,29 @@ Example1: addtask 1 do homework
 
 ### Delete Feature
 
-Deletes the specified item in the ___STUDENTS list___ or ___SCHEDULE list___ of the application.
+Deletes the specified item in the 👨‍🎓 ___STUDENTS list___ or 📅 ___SCHEDULE list___ of the application.
 
 
 #### For Student:
 
-Deletes a student in the ___STUDENTS list___ of the application.
+Deletes a student in the 👨‍🎓 ___STUDENTS list___ of the application.
 
 Format: `deletePerson INDEX`
 * Deletes the student at the specified `INDEX`.
-* The index refers to the index number shown in the displayed ___STUDENTS list___.
+* The index refers to the index number shown in the displayed 👨‍🎓 ___STUDENTS list___.
 * The command is case-insensitive: e.g. `deleteperson`, `deletePerson` and `DELETEPERSON` are all valid.
 * Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
 
 **Tips:**
-- If the user is currently in the ___STUDENTS list___, the command can be shortened to `delete`.
+- If the user is currently in the 👨‍🎓 ___STUDENTS list___, the command can be shortened to `delete`.
 
 </box>
 
 Example usages:
 * `deletePerson 1`
-* In ___STUDENTS list___ :
+* In 👨‍🎓 ___STUDENTS list___ :
     * `delete 1`
 
 Success outputs:
@@ -485,25 +486,25 @@ Example: delete 1
 
 #### For Schedule:
 
-Deletes a lesson in the ___SCHEDULE list___ of the application.
+Deletes a lesson in the 📅 ___SCHEDULE list___ of the application.
 
 Format: `deleteLesson INDEX`
 
 * Deletes the lesson at the specified `INDEX`.
-* The index refers to the index number shown in the displayed ___SCHEDULE list___.
+* The index refers to the index number shown in the displayed 📅 ___SCHEDULE list___.
 * The command is case-insensitive: e.g. `deletelesson`, `deleteLesson` and `DELETELESSON` are all valid.
 * Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
 
 **Tips:**
-- If the user is currently in the ___SCHEDULE list___, the command can be shortened to `delete`.
+- If the user is currently in the 📅 ___SCHEDULE list___, the command can be shortened to `delete`.
 
 </box>
 
 Example usages:
 * `deleteLesson 1`
-* In ___SCHEDULE list___ : `delete 1`
+* In 📅 ___SCHEDULE list___ : `delete 1`
 
 Success outputs:
 * Input: `deleteLesson 1`
@@ -523,22 +524,22 @@ Example: deletelesson 1
 
 #### For Task:
 
-Deletes the specified task from the shown lesson in the application. User must be in the ___SCHEDULE list___ and showing a lesson.
+Deletes the specified task from the shown lesson in the application. User must be in the 📅 ___SCHEDULE list___ and showing a lesson.
 
 Format: `deleteTask INDEX`
-* Deletes the task at the specified `INDEX` of the ___TASKS list___ in the shown lesson.
-* The index refers to the index number shown in the displayed ___TASKS list___ of the lesson.
+* Deletes the task at the specified `INDEX` of the 💼 ___TASKS list___ in the shown lesson.
+* The index refers to the index number shown in the displayed 💼 ___TASKS list___ of the lesson.
 * The command is case-insensitive: e.g. `deletetask`, `deleteTask` and `DELETETASK` are all valid.
 * Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="warning" seamless>
 
 **Caution:**
-The deleteTask command can only be used in the ___SCHEDULE list___ and while a lesson is shown.
+The deleteTask command can only be used in the 📅 ___SCHEDULE list___ and while a lesson is shown.
 </box>
 
 Example usages:
-* In ___SCHEDULE list___ : `show 1` followed by `deleteTask 2` deletes the 2nd task of the 1st lesson in the ___SCHEDULE list___.
+* In 📅 ___SCHEDULE list___ : `show 1` followed by `deleteTask 2` deletes the 2nd task of the 1st lesson in the 📅 ___SCHEDULE list___.
 
 Success outputs:
 * Input: `show 1` followed by `deleteTask 1`
@@ -572,7 +573,7 @@ Please use show lessonIndex before deleting task!
 
 ### Edit Feature
 
-Edits the specified item in the  ___STUDENT list___ or ___SCHEDULE list___ of the application.
+Edits the specified item in the  👨‍🎓 ___STUDENTS list___ or 📅 ___SCHEDULE list___ of the application.
 
 #### For Student:
 Format: `editPerson [INDEX] [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS]
@@ -585,13 +586,13 @@ Format: `editPerson [INDEX] [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-
 <box type="tip" seamless>
 
 **Tips:**
-- If you are currently in ___STUDENTS list___, the command can be shortened to `edit`.
+- If you are currently in 👨‍🎓 ___STUDENTS list___, the command can be shortened to `edit`.
 
 </box>
 
 Example usages:
 * `editPerson 1 -name John`
-* To edit the currently shown student in ___STUDENTS list___:
+* To edit the currently shown student in 👨‍🎓 ___STUDENTS list___:
     * `edit -phone 91234567 -tag jc,express`
 
 Success outputs:
@@ -639,13 +640,13 @@ Format: `editLesson [INDEX] [-name NAME] [-start TIME] [-end TIME] [-day DATE] [
 <box type="tip" seamless>
 
 **Tips:**
-- If you are currently in ___SCHEDULE list___, the command can be shortened to `edit`.
+- If you are currently in 📅 ___SCHEDULE list___, the command can be shortened to `edit`.
 
 </box>
 
 Example usages:
 * `editLesson 1 -start 12:35 -end 14:35 -day 2023/11/21 -subject English`
-* To edit the currently shown lesson in ___SCHEDULE list___:
+* To edit the currently shown lesson in 📅 ___SCHEDULE list___:
     * `edit -start 12:30 -end 14:30 -day 2023/11/20 -subject English`
 
 Success outputs:
@@ -687,14 +688,14 @@ Clashes with: Lesson lesson2 from 1:30 PM to 3:30 PM on 21-11-2023 for PHYSICS.
 
 #### For Task:
 
-Editing of ___TASKS list___ is not supported at this time!
+Editing of 💼 ___TASKS list___ is not supported at this time!
 
 
 <br>
 
 ### Find Feature
 
-The find command finds students (in ___STUDENTS list___) or lessons (in ___SCHEDULE list___) whose names contain the search _string_ <sup>[7](#glossary)</sup>.
+The find command finds students (in 👨‍🎓 ___STUDENTS list___) or lessons (in 📅 ___SCHEDULE list___) whose names contain the search _string_ <sup>[7](#glossary)</sup>.
 
 Format: `find SEARCH_STRING`
 * The search is case-insensitive. e.g. `lesson` will match `Lesson`. `hans` will match `Hans`.
@@ -742,7 +743,7 @@ Success outputs:
 
 #### For Task:
 
-Finding in ___TASKS list___ is not supported at this time!
+Finding in 💼 ___TASKS list___ is not supported at this time!
 
 
 #### General Examples
@@ -756,7 +757,7 @@ find: Finds all persons or lesson whose names contains the specified search stri
 Parameter: SEARCH_STRING
 Example: find alex yeoh
 ```
-* Input: `find task1` (in ___TASKS list___)
+* Input: `find task1` (in 💼 ___TASKS list___)
     * Error: Find command is disabled in task list.
 ```
 Unknown command
@@ -769,7 +770,7 @@ Unknown command
 #### For Student:
 <box type="info" seamless>
 
-You must be in the ___STUDENTS list___ to run this command. Type `list students` to go to the ___STUDENTS list___.</box>
+You must be in the 👨‍🎓 ___STUDENTS list___ to run this command. Type `list students` to go to the 👨‍🎓 ___STUDENTS list___.</box>
 Format: `filter [-name NAME] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]`
 * Multiple fields can be specified at the same time.
 * Refer to the parameter constraints [here](#parameter-summary).
@@ -807,7 +808,7 @@ For example, filter -name John -subject physics,english
 #### For Schedule:
 <box type="info" seamless>
 
-You must be in the **_SCHEDULE list_** to run this command. Type `list schedule` to go to the **_SCHEDULE list_**.</box>
+You must be in the 📅 ___SCHEDULE list___ to run this command. Type `list schedule` to go to the 📅 ___SCHEDULE list___.</box>
 Format: `filter [-name NAME] [-subject SUBJECTS] [-before DATE] [-on DATE] [-after DATE]`
 
 * Only one of `-before`, `-on`, `-after` can be used at once. For example, you cannot use both `-before` and `-after` in the same filter command.
@@ -844,7 +845,7 @@ TODO
 * Input: `filter -on 2/2/2`
     * Error: The date given is invalid. Please specify a date using the correct format (see [here](#parameter-summary))
 ```
-Invalid lesson format: 2/2/2 is not a valid date, please use yyyy/mm/dd or mm/dd or dd
+Invalid filter format: 2/2/2 is not a valid date, please use yyyy/mm/dd or mm/dd or dd
 for example, assume today is 2023/11/3, to add 2023/11/29, could use 29, 11/29, 2023/11/29 or 23/11/29. 
 Usage: filter -(at least one of unique [-name|subject|before|on|after VALUE]). 
 For example, filter -before 2023/10/10 -subject physics
@@ -873,7 +874,7 @@ Note you should only use one of -before, -on, -after at a time.
 You can link lessons to students, and vice versa. For example, if a lesson has a few students, you can link each of the students to the lesson, so that you can quickly see who is attending this specific lesson.
 
 #### For Both Student and Schedule:
-You can be in the **_STUDENTS list_** or **_SCHEDULE list_**.
+You can be in the 👨‍🎓 ___STUDENTS list___ or 📅 ___SCHEDULE list___.
 Format: `link -student STUDENT_NAME -lesson LESSON_NAME`
 * `STUDENT_NAME` is the name of the student you would like to link to.
 * `LESSON_NAME` is the name of the lesson you would like to link to.
@@ -911,7 +912,7 @@ No such student with name alexf found
 #### For Student:
 <box type="info" seamless>
 
-You must be in the **_STUDENTS list_** and are viewing a student to run this command. Type `list students` to go to the **_STUDENTS list_**, then type `show INDEX` to select a student to link lessons to.
+You must be in the 👨‍🎓 ___STUDENTS list___ and are viewing a student to run this command. Type `list students` to go to the 👨‍🎓 ___STUDENTS list___, then type `show INDEX` to select a student to link lessons to.
 </box>
 
 Format: `linkTo LESSON_NAME`
@@ -942,7 +943,7 @@ Linked Alex Wong to CS2103T Lab
 ```
 ![Success for linking to lesson](images/linkTo/linkTo_lesson_positive.png)
 Failure outputs:
-* Current state: In the ___STUDENTS list___ and no student is selected
+* Current state: In the 👨‍🎓 ___STUDENTS list___ and no student is selected
 * Input: `linkTo CS2103T Lab`
     * Error: A student is not yet selected. Select a student using `show INDEX` first.
 ```
@@ -952,7 +953,7 @@ Example: linkTo CS2103T lab1
 Note: This command is only available when a student is shown
 ```
 
-* Current state: In the ___STUDENTS list___ and a student is selected
+* Current state: In the 👨‍🎓 ___STUDENTS list___ and a student is selected
 * Input: `linkTo CS2109 Lab`
     * Error: No such lesson with the name "CS2109 Lab". Make sure the lesson's name is correct and try again.
 ```
@@ -962,7 +963,7 @@ No such lesson
 #### For Schedule:
 <box type="info" seamless>
 
-You must be in the **_SCHEDULE list_** and are viewing a lesson to run this command. Type `list schedule` to go to the **_SCHEDULE list_**, then type `show INDEX` to select a lesson to link students to.</box>
+You must be in the 📅 ___SCHEDULE list___ and are viewing a lesson to run this command. Type `list schedule` to go to the 📅 ___SCHEDULE list___, then type `show INDEX` to select a lesson to link students to.</box>
 Format: `linkTo STUDENT_NAME`
 * `STUDENT_NAME` is the name of the student you would like to link to.
 * Refer to `STUDENT_NAME`'s constraints [here](#parameter-summary).
@@ -991,7 +992,7 @@ Linked Bernice Yu to CS2103T Lab
 ```
 ![Success for linking to lesson](images/linkTo/linkTo_lesson_positive.png)
 Failure outputs:
-* Current state: In the ___SCHEDULE list___ and no lesson is selected
+* Current state: In the 📅 ___SCHEDULE list___ and no lesson is selected
 * Input: `linkTo Bernice Yu`
     * Error: A lesson is not yet selected. Select a lesson using `show INDEX` first.
 ```
@@ -1001,7 +1002,7 @@ Example: linkTo Alice Pauline
 Note: This command is only available when a lesson is shown
 ```
 
-* Current state: In the ___SCHEDULE list___ and a lesson is selected
+* Current state: In the 📅 ___SCHEDULE list___ and a lesson is selected
 * Input: `linkTo Bernice Yong`
     * Error: No such student with the name "Bernice Yong". Make sure the student's name is correct and try again.
 ```
@@ -1023,7 +1024,7 @@ Format: `nav`
 #### For Student:
 <box type="info" seamless>
 
-You must be in the **_STUDENTS list_** and are viewing a student to run this command. Type `list students` to go to the **_STUDENTS list_**, then type `show INDEX` to select a student.</box>
+You must be in the 👨‍🎓 ___STUDENTS list___ and are viewing a student to run this command. Type `list students` to go to the 👨‍🎓 ___STUDENTS list___, then type `show INDEX` to select a student.</box>
 
 <box type="tip" seamless>
 
@@ -1042,13 +1043,13 @@ Navigated to student's lessons
 ```
 ![Success for navigating to lessons](images/nav/nav_fromStudent_positive.png)
 Failure outputs:
-* Current state: In the ___STUDENTS list___ and a student is not selected
+* Current state: In the 👨‍🎓 ___STUDENTS list___ and a student is not selected
 * Input: `nav`
     * Error: `nav` only works when a student is selected. Select a student with the `show INDEX` command and try again.
 ```
 No student is currently displayed
 ```
-* Current state: In the ___STUDENTS list___ and a student without any linked lessons is selected
+* Current state: In the 👨‍🎓 ___STUDENTS list___ and a student without any linked lessons is selected
 * Input: `nav`
     * Error: `nav` only works when a student has linked lessons. Link a lesson with the `linkTo` command.
 ```
@@ -1057,7 +1058,7 @@ This student has no linked lessons
 
 <box type="info" seamless>
 
-You must be in the **_SCHEDULE list_** and are viewing a lesson to run this command. Type `list schedule` to go to the **_SCHEDULE list_**, then type `show INDEX` to select a lesson.</box>
+You must be in the 📅 ___SCHEDULE list___ and are viewing a lesson to run this command. Type `list schedule` to go to the 📅 ___SCHEDULE list___, then type `show INDEX` to select a lesson.</box>
 
 <box type="tip" seamless>
 
@@ -1076,25 +1077,25 @@ Navigated to lesson's students
 ```
 ![Success for navigating to students](images/nav/nav_fromLesson_positive.png)
 Failure outputs:
-* Current state: In the ___SCHEDULE list___ and a lesson is not selected
+* Current state: In the 📅 ___SCHEDULE list___ and a lesson is not selected
 * Input: `nav`
     * Error: `nav` only works when a lesson is selected. Select a lesson with the `show INDEX` command and try again.
 ```
 No lesson is currently displayed
 ```
-* Current state: In the ___SCHEDULE list___ and a lesson without any linked students is selected
+* Current state: In the 📅 ___SCHEDULE list___ and a lesson without any linked students is selected
 * Input: `nav`
     * Error: `nav` only works when a lesson has linked students. Link a student with the `linkTo` command.
 ```
 This lesson has no linked students
 ```
-* Current state: In the ___STUDENTS list___ and a student is not selected
+* Current state: In the 👨‍🎓 ___STUDENTS list___ and a student is not selected
 * Input: `nav`
     * Error: `nav` only works when a student is selected. Select a student with the `show INDEX` command and try again.
 ```
 No student is currently displayed
 ```
-* Current state: In the ___STUDENTS list___ and a student without any lessons students is selected
+* Current state: In the 👨‍🎓 ___STUDENTS list___ and a student without any lessons students is selected
 * Input: `nav`
     * Error: `nav` only works when a student has linked lessons. Link a lesson with the `linkTo` command.
 ```
@@ -1102,7 +1103,7 @@ This student has no linked lessons
 ```
 
 
-#### For task list:
+#### For Task:
 This feature is not used for tasks!
 
 
@@ -1214,7 +1215,7 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 
 | Action       | List                                    | Format                                                                                                                                    | Examples                                                                                                       | Remarks                                                                    |
 |--------------|-----------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
-| **List**     | Any                                     | `list [LIST] [KEYWORDS]`                                                                                                                  | `list students email`, `list schedule`, `list tasks`                                                           | `list` without optional parameters displays the ___SCHEDULE list___        |
+| **List**     | Any                                     | `list [LIST] [KEYWORDS]`                                                                                                                  | `list students email`, `list schedule`, `list tasks`                                                           | `list` without optional parameters displays the 📅 ___SCHEDULE list___     |
 | **Show**     | Any                                     | `show INDEX`                                                                                                                              | `show 1`, `show 3`                                                                                             | `show` will show the specified item at the given index of the current list |
 | **Add**      | Students(`add`), Any(`addPerson`)       | `addPerson -name NAME [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]`            | `addPerson -name John -phone 91234567 -email test@gmail.com -address 10 Kent Ridge Drive -subject MATHEMATICS` | NA                                                                         |
 | **Add**      | Schedule(`add`), Any(`addLesson`)       | `addLesson -name NAME [-day DATE] [-start TIME] [-end TIME] [-subject SUBJECT]`                                                           | `addLesson -name Lesson at Tai Seng -start 09:00 -end 11:00 -day 03/21 -subject physics`                       | NA                                                                         |
@@ -1224,7 +1225,7 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 | **Delete**   | Schedule                                | `deleteTask INDEX`                                                                                                                        | `deleteTask 1`                                                                                                 | `show INDEX` to show the lesson has to be used prior to `deleteTask`       |
 | **Edit**     | Students(`edit`), Any(`editPerson`)     | `editPerson [INDEX] [-name NAME] [-phone PHONE_NUMBER] [-email EMAIL] [-address ADDRESS] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]` | `editPerson 1 -subject physics -remark need urgent help`                                                       | `INDEX` can be  omitted when editing the currently shown person            |
 | **Edit**     | Schedule(`edit`), Any(`editLesson`)     | `editLesson [INDEX] [-name NAME] [-day DATE] [-start TIME] [-end TIME] [-subject SUBJECT]`                                                | `editLesson 2 -day 11/29 -start 14:30 -end 15:30`                                                              | `INDEX` can be  omitted when editing the currently shown lesson            |
-| **Find**     | Students, Schedule                      | `find SEARCH_STRING`                                                                                                                      | `find bernice`, `find lesson`                                                                                  | Disabled in ___TASKS list___                                               |
+| **Find**     | Students, Schedule                      | `find SEARCH_STRING`                                                                                                                      | `find bernice`, `find lesson`                                                                                  | Disabled in 💼 ___TASKS list___                                            |
 | **Filter**   | Students                                | `filter [-name NAME] [-subject SUBJECTS] [-tag TAG] [-remark REMARK]`                                                                     | `filter -name Alex -tag primary -subject Mathematics`                                                          | NA                                                                         |
 | **Filter**   | Schedule                                | `filter [-name NAME] [-subject SUBJECTS] [-before DATE] [-on DATE] [-after DATE] [-remark REMARK]`                                        | `filter -before 2023/12/20 -subject Mathematics`                                                               | NA                                                                         |
 | **Link**     | Students                                | `linkTo LESSON_NAME`                                                                                                                      | `linkTo CS2103T Lab`                                                                                           | There is no way to unlink lesson to student                                |
