@@ -1266,15 +1266,17 @@ testers are expected to do more *exploratory* testing.
 ### Saving data
 
 1. Dealing with missing/corrupted data files
-    1. If a missing file is detected, the system will automatically create a .json file.
-   2.  If a corrupted file is detected (i.e. missing any key properties), the system will delete the corrupted file, and replace it with a new one.
-   3. The .json file will be populated with sample content loaded from `SampleDataUtil.java`.
+   1. If a missing file is detected, the system will automatically create the missing .json file and fill up with sample data loaded from `SampleDataUtil.java` after user adds data into the application.
+   2. If a corrupted file is detected (i.e. missing any key properties), the system will delete the corrupted file, and replace it with a new empty file.
 
-2. Saving
-   1. Data is written to the file after every command.
-
-
-1. Test cases
+2. Test cases
+   1. Prerequisites: There are newly added students, lessons and tasks in the application. There are linked lessons and students.
+   2. Test case: Shut down the application and delete `addressbook.json`, `personLessonMap.json` and `schedulelist.json` in the data folder.
+      Expected: Upon the next application start and login, new `addressbook.json`, `personLessonMap.json` and `schedulelist.json` files are created.
+   3. Test case: Close the application and edit `addressbook.json` by changing the name of the first student to Leah_Loh.
+      Expected: Upon the next application start and login, a new `addressbook.json` file is created and replaces the `addressbook.json` corrupted file. 
+   4. Test case: Close the application and edit `schedulelist.json` by deleting the start time of the first lesson.
+      Expected: Upon the next application start and login, a new `schedulelist.json` file is created and delete the `addressbook.json` corrupted file.
 
 
 ## **Appendix: Planned Enhancements**
