@@ -106,18 +106,14 @@ Some fields are **single-valued fields**, meaning that each contact has **only 1
 
 Other fields are **multi-valued fields**. Each contact has a **list** of different values for each of these fields.
 
-| Multi-valued fields | Prefix  | Format                                                       |
-| ------------------- | ------- | ------------------------------------------------------------ |
-| phone numbers       | /phone  | Valid phone number containing numbers and optional country code (1-3 numbers with `+` in front) if applicable<br>At least 3 digits long (excluding country code) |
+| Multi-valued fields | Prefix  | Format                                                       | Remarks                                                         |
+| ------------------- | ------- | ------------------------------------------------------------ | --------------------------------------------------------------- |
+| phone numbers       | /phone  | Valid phone number containing numbers and optional country code (1-3 numbers with `+` in front) if applicable<br>At least 3 digits long (excluding country code) | Phone numbers with and without whitespace character are treated as different (e.g. `+6512345678` and `+65 12345678`). |
 | email addresses     | /email  | Valid email with `@` (at sign) and `.` (period) present after `@` |
-| social links        | /link   | Valid URL link                                               |
+| links        | /link   | Valid URL link                                               | Link must be URL-encoded. That is, it must be the same as the URL that appears on the browser's URL bar after you visit the page. |
 | courses             | /course | `course name [/start date] [/end date]` <br>`/start` and `/end` indicate when the contact started and finished taking the course respectively <br>A course can have no dates, a start date, or a start and end date |
 | specialisations     | /spec   | Any non-empty value                                          |
 | tags                | /tag    | Any non-empty value                                          |
-
-Please take note:
-* Phone numbers with and without whitespace character (to separate country code from the rest) are treated as two different phone numbers. For e.g. `+6587654321` and `+65 87654321` are treated as two different phone numbers. For the best user experience, we advise you to keep a consistent style in keeping phone numbers, i.e. either do not add any space for any phone number, or add space to separate country code for all phone numbers.
-* Link must be URL-encoded. That is, when you key in a web link into the URL bar of the browser, the browser encodes the link by modifying some of the characters in the link, that modified link must match the link you input into the app.
 
 In NetworkBook, you can manage contact information by changing the fields assigned to them. Following are the commands you can use to manage fields of a contact:
 
