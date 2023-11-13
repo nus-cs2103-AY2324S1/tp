@@ -428,9 +428,9 @@ It then returns a `CommandResult` stating that the patient has been edited.
 * **Alternative 1 (current choice):** Create `EditPatientDescriptor` to set the patient attributes
   to their edited values, and create an edited Patient object to replace the target Patient object
   through the `edit` command.
-  * Pros: Better practice in large codebases through defensive programming, ensuring 
+  * Pros: Better practice in large codebases through defensive programming, ensuring
     values of parameters not edited are retained
-  * Cons: Not as easy to implement as it entails making nested classes 
+  * Cons: Not as easy to implement as it entails making nested classes
     for patient descriptors and calling setter methods to make a new edited Patient object
 
 <br>
@@ -439,8 +439,8 @@ It then returns a `CommandResult` stating that the patient has been edited.
   * Pros: Easier to implement as it entails directly calling a Patient constructor
     that accepts the user input. Therefore it modifies the original Patient object
     instead of creating a whole new edited Patient object.
-  * Cons: This may be harmful as the fields that remain unchanged will be overwritten by 
-    default values. The alternative would be to input the values of the unchanged fields into the 
+  * Cons: This may be harmful as the fields that remain unchanged will be overwritten by
+    default values. The alternative would be to input the values of the unchanged fields into the
     Patient constructor as well, but this will be inefficient, repetitive and not be as user-friendly.
 
 <br>
