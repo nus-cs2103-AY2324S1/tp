@@ -663,8 +663,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. System informs user that there is nothing to redo.
 
   Use case ends.
-
-*{More to be added}*
 <br>
 <br>
 
@@ -689,6 +687,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. User receives monthly revenue figure.
 
    Use case ends.
+
+*{More to be added}*
    <br>
    <br>
 
@@ -696,7 +696,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  The software should be platform independent (i.e. work on the Windows, Linux, and OS-X platforms).
-3. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. Should be able to hold up to 1000 tutees without a noticeable sluggishness in performance for typical usage.
 4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 5. The product is a single user product (i.e. The data file created by one user cannot be accessed by another user during regular operations)
 6. The data should be stored locally and should be in a human editable text file.
@@ -706,19 +706,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 10. The GUI should work well (i.e., should not cause any resolution-related inconveniences to the user) for, standard screen resolutions 1920x1080 and higher, and, for screen scales 100% and 125%.
 11. the GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for, resolutions 1280x720 and higher, and, for screen scales 150%.
 12. The product should be packaged into a single JAR file.
-13. The DG and UG should be PDF-friendly. Expandable panels, embedded videos, animated GIFs should not be used.
-14. The file sizes of the deliverables should be reasonable and not exceed the limits given below:
-
-    - Product (i.e., the JAR/ZIP file): 100MB
-
-    - Documents (i.e., PDF files): 15MB/file
 
 ### Glossary
 
 * Calendar Applications: Digital tools for organizing and managing schedules, events, and tasks.
 * Shortcut Commands:  Quick combinations of keystrokes that trigger specific actions in a software application.
-* Participation Grade: The grade used to assess a student's active involvement and engagement during academic activities.
-* Academic Performance: It represents a student's achievements and results in the study, including grades, exam scores, projects and so on.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -798,3 +790,12 @@ Reason: PayRate that are extremely high may not be displayed properly by GUI and
 
 Idea: Modify the VALIDATION_REGEX of PayRate such that it only accepts values up to 9999.99.
 
+### Prevent Commands meant to Modify Tutee Data from Not Changing the Data
+
+Reason: `clear`,`edit`, `paid`, `delete`,`unpaidAll` are commands that deal with modifying tutee data. If the tutee's `isPaid` status is true,
+the system permits the user to execute the `paid` command even though this will not change the `isPaid` status of the tutee. If these commands
+do not change the tutee data in any way but still allowed to be executed, when the user executes `undo`, there will be no changes since there are now duplicate states of the `VersionedAddressBook`
+is saved. The system should inform the user that this command will not modify any data and prevent the command from executing. 
+
+Idea: Create a `Model#isSameData()` to compare whether the state of the tutee data before and after the command execution will be the same. If
+`Model#isSameData()` returns true, a `CommandException` should be thrown and the system should inform the user that this command will not modify any data.
