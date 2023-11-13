@@ -345,7 +345,7 @@ The following sequence diagram shows how the search operation works:
 
 **Note:** The lifeline for `FindCommand` and `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
-<puml src="diagrams/SearchSequenceDiagram.puml" width="550" />
+<puml src="diagrams/SearchSequenceDiagram.puml" alt="SearchSequenceDiagram"/>
 
 Step 3. The user should see the UI below upon entering `search t/intern`.
 
@@ -353,7 +353,7 @@ Step 3. The user should see the UI below upon entering `search t/intern`.
 
 The following activity diagram shows summarizes what happens when a user attempts to execute the `search` command.
 
-<puml src="diagrams/SearchActivityDiagram.puml" width="550" />
+<puml src="diagrams/SearchActivityDiagram.puml" />
 
 **Note:** The current implementation of search allows users to search by any of the categories individually or by different combinations of the categories e.g. `search n/alex bernice st/offered t/intern`
 It also allows users to specify more than one search parameter for each category e.g. `search n/alex bernice`
@@ -404,7 +404,7 @@ Step 3. Assuming Bernice is the applicant matching the requirements, the user sh
 
 The following activity diagram shows summarizes what happens when a user attempts to execute the `delete` command.
 
-<puml src="diagrams/DeleteActivityDiagram.puml" width="550" />
+<puml src="diagrams/DeleteActivityDiagram.puml" />
 
 **Note:** The current implementation of delete by tags & status allows users to search by any of the categories individually or by different combinations of the categories.
 It also allows users to specify more than one delete parameter for each category e.g. `delete t/intern manager`
