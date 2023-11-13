@@ -415,13 +415,26 @@ The sort command updates the predicate of the `SortedList` to a `PersonSortCompa
 
 Given below is an example usage scenario and how the sorting mechanism behaves at each step.
 
-Step 1. The user launches the app. The rendered list is unsorted and unfiltered.
+**Step 1.** The user launches the app. The rendered list is sorted by name in ascending order by default.
 
-Step 2. The user executes `find al` command to filter contacts by name. This updates the predicate of the `FilteredList` to only show contacts with names matching "al".
+Current displayed contacts:
+
+| Sorting         | Filter |
+|-----------------|--------|
+| name, ascending | none   |
+
+**Step 2.** The user executes `find al` command to filter contacts by name. This updates the predicate of the `FilteredList` to only show contacts with names matching "al".
 The `SortedList` predicate remains unchanged.
 
-Step 3. The user executes `sort /by name /order desc` to sort the filtered list by name in descending order.
-The `sort` command parser calls `PersonSortComparator#generateComparator()` to generate the appropriate comparator.
+Current displayed contacts:
+
+| Sorting         | Filter               |
+|-----------------|----------------------|
+| name, ascending | name containing "al" |
+
+**Step 3.** The user enters `sort /by name /order desc` to sort the filtered list by name in descending order.
+The NetworkBook parser parses this into a sort command using a sort command parser.
+The sort command parser calls `PersonSortComparator#generateComparator()` to generate the appropriate comparator.
 
 ![SortingParsingSequenceDiagram](images/SortingParsingSequenceDiagram.png)
 
@@ -429,20 +442,29 @@ The `sort` command parser calls `PersonSortComparator#generateComparator()` to g
 
 </div>
 
-Step 4. The sort command then calls `Model#updateDisplayedPersonList()`, updating the predicate of the `SortedList`.
-This newly sorted list is then rendered in the main UI.
+**Step 4.** The sort command is executed. It calls `Model#updateDisplayedPersonList()`, updating the predicate of the `SortedList`.
+This newly sorted list is then rendered in the main UI upon updating of the model.
 
-Step 5. A `SortCommandResult` is also returned by the command, which is then passed to `MainWindow`.
+Current displayed contacts:
+
+| Sorting          | Filter               |
+|------------------|----------------------|
+| name, descending | name containing "al" |
+
+**Step 5.** A `SortCommandResult` is also returned by the command, which is then passed to `MainWindow`.
 The main window then updates the sorting status displayed in the status bar.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If another `find` or `filter` command is executed, the sorting will persist.
+**Step 6.** The user uses `filter` to filter by tag "friends". The list of contacts is filtered and the sorting remains the same.
 
-</div>
+Current displayed contacts:
+
+| Sorting          | Filter       |
+|------------------|--------------|
+| name, descending | tag "friend" |
 
 The following sequence diagram shows how the sort operation works:
 
 ![SortingSequenceDiagram](images/SortingSequenceDiagram.png)
-
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SortCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
