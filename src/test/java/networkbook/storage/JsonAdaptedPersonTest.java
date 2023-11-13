@@ -277,8 +277,39 @@ public class JsonAdaptedPersonTest {
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONES, VALID_EMAILS,
                         VALID_LINKS, VALID_GRADUATION, INVALID_COURSES,
                         VALID_SPECIALISATIONS, VALID_TAGS, VALID_PRIORITY);
-        String expectedMessage = Course.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Course.NO_COURSE_NAME;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidCourses_throwsIllegalValueExceptionWithCorrectMessage() {
+        JsonAdaptedProperty<Course> invalidCourse1 =
+                new JsonAdaptedProperty<Course>("course /start 32-01-2000");
+        JsonAdaptedProperty<Course> invalidCourse2 =
+                new JsonAdaptedProperty<Course>("course /end 01-01-2000");
+        JsonAdaptedProperty<Course> invalidCourse3 =
+                new JsonAdaptedProperty<Course>("course /start 01-01-2000 /end 01-01-1999");
+
+        JsonAdaptedPerson person1 =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONES, VALID_EMAILS,
+                        VALID_LINKS, VALID_GRADUATION, List.of(invalidCourse1),
+                        VALID_SPECIALISATIONS, VALID_TAGS, VALID_PRIORITY);
+        String expectedMessage1 = Course.DATE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage1, person1::toModelType);
+
+        JsonAdaptedPerson person2 =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONES, VALID_EMAILS,
+                        VALID_LINKS, VALID_GRADUATION, List.of(invalidCourse2),
+                        VALID_SPECIALISATIONS, VALID_TAGS, VALID_PRIORITY);
+        String expectedMessage2 = Course.END_DATE_WITH_NO_START;
+        assertThrows(IllegalValueException.class, expectedMessage2, person2::toModelType);
+
+        JsonAdaptedPerson person3 =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONES, VALID_EMAILS,
+                        VALID_LINKS, VALID_GRADUATION, List.of(invalidCourse3),
+                        VALID_SPECIALISATIONS, VALID_TAGS, VALID_PRIORITY);
+        String expectedMessage3 = Course.DATE_TIMING_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage3, person3::toModelType);
     }
 
     @Test
