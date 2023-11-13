@@ -7,9 +7,10 @@ skinparam classBackgroundColor LOGIC_COLOR
 package Logic as LogicPackage {
 
 Class AddressBookParser
-Class NormalCommand
-Class UndoableCommand
+Class XYZCommand
+Class ABCCommand
 Class CommandResult
+Class "{abstract}\nUndoableCommand" as UndoableCommand
 Class "{abstract}\nCommand" as Command
 
 
@@ -29,11 +30,12 @@ HiddenOutside ..> Logic
 
 LogicManager .right.|> Logic
 LogicManager -right->"1" AddressBookParser
-AddressBookParser ..> NormalCommand : creates >
-AddressBookParser ..> UndoableCommand : creates >
+AddressBookParser ..> ABCCommand : creates >
+AddressBookParser ...> XYZCommand :  creates >
 
 UndoableCommand -up-|> Command
-NormalCommand -up-|> Command
+ABCCommand -up-|> UndoableCommand
+XYZCommand -up-|> Command
 LogicManager .left.> Command : executes >
 
 LogicManager --> Model
@@ -41,8 +43,8 @@ LogicManager --> Storage
 Storage --[hidden] Model
 Command .[hidden]up.> Storage
 Command .right.> Model
-note bottom of NormalCommand: NormalCommand = ListCommand, \nHelpCommand, etc
-note bottom of UndoableCommand: UndoableCommand = AddCommand, \nDeleteCommand, etc
+note bottom of XYZCommand: XYZCommand = ListCommand, \nHelpCommand, etc
+note bottom of ABCCommand: ABCCommand = AddCommand, \nDeleteCommand, etc
 
 Logic ..> CommandResult
 LogicManager .down.> CommandResult
