@@ -529,14 +529,17 @@ The _Sequence_ Diagram notation of the above steps is shown below.
 1. The star dates feature begins by passing the user input obtained from the `CommandBox` class in the `Ui` component to
    the `LogicManager` class in the `Logic` component by invoking the `execute` function.
 2. The `LogicManager` class then passes the user input to the `LoveBookParser` class for parsing and validation.
-
 3. The `LoveBookParser` class then performs polymorphism and creates a `StarCommandParser` object for StarCommand specific parsing.
 4. The `LoveBookParser` class also separates the command word from the user input and passes the arguments from the user input to the `StarCommandParser` object created above for parsing.
 5. The `StarCommandParser` carries out it's validation checks and creates a new `StarCommand` object if the validation checks pass.
 6. The `StarCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function which then updates the isStarred field for the date object with the respective index.
 
+The _Activity_ diagram summarises what happens after the user enters a star command.
+
+<puml src="diagrams/StarActivity.puml" />
+
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
-the command `showP`
+the command `star 1`
 
 <puml src="diagrams/StarSequence.puml" />
 
