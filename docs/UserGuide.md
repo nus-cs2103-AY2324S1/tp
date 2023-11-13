@@ -214,8 +214,6 @@ You can create a contact in your contact list.
 
 **Potential error(s):**
 - Incorrect format (e.g., no prefix, duplicate prefixes).
-
-
 - The contact you are trying to add already exists in your contact list: `This person already exists in your contact list`.
 
 
@@ -247,8 +245,6 @@ You can delete a contact from your contact list.
 
 **Potential error(s):**
 - Invalid format (e.g., no prefix, duplicate prefixes).
-
-
 - The contact you are trying to delete does not exist in your contact list: `No person with such name found. Please provide the person's full name as in the existing contact list`.
 
 
@@ -337,7 +333,6 @@ You can create a new group in your contact list.
 
 **Potential error(s):**
 - Invalid command format (e.g., no prefix, duplicate prefixes).
-
 - The group you are trying to add already exists in your contact list: `This group already exists in the contact list`.
 
 
@@ -347,46 +342,58 @@ You can delete a group in your contact list.
 
 **Format:** `delete g/GROUP_NAME`
 
-
-**Acceptable values:**
-- `GROUP_NAME` must be alphanumeric and cannot be blank.
-- `GROUP_NAME` must be an existing group in your contact list.
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h5>
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
+    must be alphanumeric, cannot be blank and must exist in the contact list.</p>
+</div>
 
 
 **Example(s):**
-- `delete g/CS2103T`
-  This deletes the group "CS2103T" from your contact list, given "CS2103T" is an existing group in your contact list.
+- `delete g/CS2103T tp`
+  This deletes the group "CS2103T tp" from your contact list, given "CS2103T tp" is an existing group in your contact list.
+
+![Manage Group: Delete](images/features/Managegroup_delete.png)
+<div align="center">
+  <p style="font-size: 11px; font-style: italic;">You have deleted the group "CS2103T tp" from your contact list</p>
+</div>
 
 
 **Potential error(s):**
 - Incorrect format (e.g., no prefix, duplicate prefixes).
-
-
 - The group you are trying to delete does not exist in your contact list: `No group with such name found. Please provide the group's full name as in the existing contact list`.
 
 
-
 ### Adding remarks to a group `remark`
+
 You can add remarks to a group in your contact list.
 
 
 **Format:** `remark g/GROUP_NAME r/REMARK`
 
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h5>
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
+    must be alphanumeric, cannot be blank and must exist in the contact list.</p>
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">REMARK</code>
+    can take on any value.</p>
+</div>
 
-**Acceptable values:**
-- `GROUP_NAME` must be alphanumeric and cannot be blank.
-- `GROUP_NAME` must be an existing group in the contact list.
-- `REMARK` must be alphanumeric.
 
-**Example(s):**
+**Example:**
 - `remark g/CS2103T r/quiz tomorrow`
   This adds the remark "quiz tomorrow" to the existing "CS2103T" group in your contact list.
 
+![Manage Group: Remark](images/features/Managegroup_remark.png)
+<div align="center">
+  <p style="font-size: 11px; font-style: italic;">You have added the group remark "quiz tomorrow" to the group "CS2103T" in your contact list</p>
+</div>
 
 **Potential errors(s):**
 - Incorrect format (e.g. no prefix, duplicate prefixes).
-- The group you entered does not exist in your contact list: `No group with such name found. Please provide the group's full name as in the existing contact list`.
-
+- The group you entered does not exist in your contact list: `No group with such name found. Please provide the group's full name as in the existing contact list.`
 
 
 ### Finding a group `find`
@@ -395,14 +402,21 @@ You can find a group in your contact list. This allows you to view the group's m
 
 **Format:** `find g/GROUP_NAME`
 
-
-**Acceptable values:**
-- `GROUP_NAME` must be alphanumeric and cannot be blank.
-- `GROUP_NAME` must be an existing group in the contact list.
+<p></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h5>
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
+    must be alphanumeric, cannot be blank and must exist in the contact list.</p>
+</div>
 
 **Example(s):**
 - `find g/CS2103T`
-  This displays the members and remarks of the existing "CS2103T" group in your contact list.
+  This returns the members and remarks of the existing "CS2103T" group in your contact list.
+
+![Manage Group: Find](images/features/Managegroup_find.png)
+<div align="center">
+  <p style="font-size: 11px; font-style: italic;">You are now able to view all details regarding the group "CS2103T" in your contact list</p>
+</div>
 
 
 **Potential error(s):**
@@ -412,28 +426,28 @@ You can find a group in your contact list. This allows you to view the group's m
 - The group you are trying to find does not exist in your contact list: `No group with such name found. Please provide the group's full name as in the existing contact list`.
 
 
-
-
 ### Listing a group `listgroup`
 You can list all the groups in your contact list.
 
 
 **Format:** `listgroup`
 
+
 <p></p>
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
-  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;"> :heavycheckmark: Acceptable values</h5>
-  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;"> User Input</code>
-    No additional parameters.</p>
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h5>
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;"></code>
+   No additional parameters.</p>
 </div>
 
+
 **Example(s):**
-- `listgroup` This lists all the groups in your contact list.
+- `listgroup`
+  This lists all the groups in your contact list.
 
-![](images/features/Managegroup_listgroup.png)
-
+![Manage Group: List Group](images/features/Managegroup_listgroup.png)
 <div align="center">
-  <p style="font-size: 11px; font-style: italic;">Showing all your groups available in ProjectPRO in the output box</p>
+  <p style="font-size: 11px; font-style: italic;">You have listed all the groups in your contact list</p>
 </div>
 
 
@@ -449,36 +463,23 @@ You can add an existing contact to an existing group.
 
 <p></p>
 <div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
-  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;"> :heavycheckmark: Acceptable values</h5>
-  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">    Name</code>
-     must be alphanumeric and cannot be blank.
-  </p>
-  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">Group_Name</code>
-  must be alphanumeric and cannot be blank.</p>
-  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">NAME</code>
-  must not be a member of <code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code></p>
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h5>
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">NAME</code>
+    must be alphanumeric, cannot be blank, must be an existing contact in your contact list, and must not be a member of GROUP_NAME</code>.</p>
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
+    must be alphanumeric, cannot be blank, and must be an existing group in your contact list.</p>
 </div>
 
-<p></p>
-<div style="border-left: 4px solid #d9534f; background-color: #FFD4D4; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
-  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">:exclaimation: Warning!</h5>
-  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">Name</code>
-  ensure the contact exists in your contact list.</p>
-  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">Group_Name</code>
-  ensure the group exists in your contact list.</p>
-<p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">NAME</code>
-  ensure the contact is not already a member of <code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">GROUP_NAME</code></p>
-</div>
 
 **Example(s):**
-- `group n/Bernice Yu g/CS2103T`
-  This adds your contact "Bernice Yu" into the group "CS2103T".
+- `group n/A g/CS2103T`
+  This adds your contact "Alex Yeoh" into the group "CS2103T".
 
-![](images/features/Managegroup_group.png)
-
+![Manage Group: Group](images/features/Managegroup_group.png)
 <div align="center">
-  <p style="font-size: 11px; font-style: italic;">You just added Bernice Yu into the group CS2103T</p>
+  <p style="font-size: 11px; font-style: italic;">You have added "Bernice Yu" to the group "CS2103T" in your contact list</p>
 </div>
+
 
 **Potential error(s):**
 - Incorrect format (e.g., no prefix, duplicate prefixes).
@@ -486,30 +487,20 @@ You can add an existing contact to an existing group.
 
 
 ### Ungrouping a Contact `ungroup`
+
 You can remove a contact from a group.
 
 
 **Format:** `ungroup n/NAME g/GROUP_NAME`
 
-<p></p>
-<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
-  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;"> :heavycheckmark: Acceptable values</h5>
-  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">    Name</code>
-     must be alphanumeric and cannot be blank.
-  </p>
-  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">Group_Name</code>
-  must be alphanumeric and cannot be blank.</p>
-</div>
 
 <p></p>
-<div style="border-left: 4px solid #d9534f; background-color: #FFD4D4; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
-  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">:exclaimation: Warning!</h5>
-  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">Name</code>
-  ensure the contact exists in your contact list.</p>
-  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">Group_Name</code>
-  ensure the group exists in your contact list.</p>
-<p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">NAME</code>
-  ensure the contact is a member of <code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">GROUP_NAME</code></p>
+<div style="border-left: 4px solid #56494C; background-color: #F1DEC6; color: #000; padding: 10px; margin: 5px 0; border-radius: 6px;">
+  <h5 style="color: #56494C; margin: 0 0 5px 0; padding: 0;">Acceptable values</h5>
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">NAME</code>
+    must be alphanumeric, cannot be blank, must be an existing contact in your contact list, and must be a member of GROUP_NAME</code>.</p>
+  <p style="color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
+    must be alphanumeric, cannot be blank, and must be an existing group in your contact list.</p>
 </div>
 
 
@@ -517,15 +508,15 @@ You can remove a contact from a group.
 - `ungroup n/Alex Yeoh g/CS2103T`
   This removes your contact "Alex Yeoh" from the group "CS2103T".
 
-![](images/features/Managegroup_ungroup.png)
-
+![Manage Group: Ungroup](images/features/Managegroup_ungroup.png)
 <div align="center">
-  <p style="font-size: 11px; font-style: italic;">You just removed Alex Yeoh from the group CS2103T</p>
+  <p style="font-size: 11px; font-style: italic;">You have removed "Alex Yeoh" from the group "CS2103T" in your contact list</p>
 </div>
+
 
 **Potential error(s):**
 - Incorrect format (e.g., no prefix, duplicate prefixes).
-- The contact you are trying to remove is not a member of the group: `Charlotte Oliveiro is not in this group: CS2103T`.
+- The contact you are trying to remove is not a member of the group: `Bernice Yu is not in this group: CS2103T`.
 
 
 ## Commands to Manage Time
