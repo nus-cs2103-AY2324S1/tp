@@ -50,18 +50,18 @@
         * [Feature usage](#usage)
         * [Feature implementation](#step-by-step-implementation)
 * [Documentation, logging, testing, configuration & dev-ops](#documentation-logging-testing-configuration-dev-ops)
-* [Appendix A](#appendix-a-requirements)
+* [Appendix A: Requirements](#appendix-a-requirements)
     * [Product Scope](#product-scope)
     * [User stories](#user-stories)
     * [Use cases](#use-cases)
     * [Non-Functional Requirements](#non-functional-requirements)
     * [Glossary](#glossary)
-* [Appendix B](#appendix-b-instructions-for-manual-testing)
+* [Appendix B: Instructions for manual testing](#appendix-b-instructions-for-manual-testing)
     * [Launch and shutdown](#launch-and-shutdown)
     * [Deleting a developer](#deleting-a-person)
     * [Saving data](#saving-data)
-* [Appendix C](#appendix-c-effort)
-* [Appendix D](#appendix-d-future-enhancements)
+* [Appendix C: Effort](#appendix-c-effort)
+* [Appendix D: Future enhancements](#appendix-d-future-enhancements)
 
 <page-nav-print />
 
