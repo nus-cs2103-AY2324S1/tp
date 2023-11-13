@@ -47,9 +47,6 @@ online dating journey.
   - [Star dates](#star-dates)
   - [Unstar dates](#unstar-dates)
 - [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
-- [**Effort**](#effort)
-  - [Evolving of AB3 into LoveBook](#evolving-of-ab3-into-lovebook)
-  - [Revamping of UI](#revamping-of-ui)
 - [**Appendix: Requirements**](#appendix-requirements)
   - [Product scope](#product-scope)
   - [User stories](#user-stories)
@@ -66,6 +63,9 @@ online dating journey.
   - [Finding a Blind Date](#finding-a-blind-date)
   - [Exiting the Application](#exiting-the-application)
   - [Saving (If you haven't already exited)](#saving-if-you-havent-already-exited)
+- [**Effort**](#effort)
+  - [Evolving of AB3 into LoveBook](#evolving-of-ab3-into-lovebook)
+  - [Revamping of UI](#revamping-of-ui)
 - [**Appendix: Planned Enhancements**](#appendix-planned-enhancements)
 
 ---
@@ -135,7 +135,7 @@ implementation of a component), as illustrated in the (partial) class diagram be
 
 The sections below give more details of each component.
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### UI component
 
@@ -162,7 +162,7 @@ The `UI` component,
 - keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 - depends on some classes in the `Model` component, as it displays `Date` object residing in the `Model`.
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Logic component
 
@@ -206,7 +206,7 @@ How the parsing works:
 - All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Model component
 
@@ -227,7 +227,7 @@ The `Model` component,
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
   should make sense on their own without depending on other components)
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Storage component
 
@@ -244,7 +244,7 @@ The `Storage` component,
 - depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Common classes
 
@@ -268,7 +268,7 @@ The following class diagram shows the new `Date` class after the changes mention
 
 Moving on to the implementation details, the following sections describe how and why the main features of the app work.
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Add Dates Feature
 
@@ -338,7 +338,7 @@ The activity diagram notation of the above steps is shown below. <br>
   - Pros: More user-friendly (since user can easily see the date being added to the end of the list)
   - Cons: Not very visually appealing (since the list appears to be unsorted and non uniform)
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### List Dates
 
@@ -370,7 +370,7 @@ The sequence diagram notation of the above steps is shown below. <br>
     since you don't have to sort the list on every list command)
   - Cons: Not very visually appealing (since the list appears to be unsorted and non uniform)
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Filter dates
 
@@ -393,7 +393,7 @@ the command `filter name/John`
 
 <puml src="diagrams/FilterSequence.puml" width="600" />
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Sort dates
 
@@ -411,7 +411,7 @@ the command `sort name/increasing`.
 
 <puml src="diagrams/SortSequence.puml" width="600" />
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Get Blind Date
 
@@ -426,7 +426,7 @@ The _Activity_ diagram summarises what happens after the user enters a sort comm
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `blindDate`.
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Get best match
 
@@ -459,7 +459,7 @@ the command `bestMatch`
 
 <puml src="diagrams/BestMatchSequence.puml" width="600" />
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Set preferences
 
@@ -491,18 +491,18 @@ The _Sequence_ Diagram notation of the above steps is shown below.
 
 **Aspect: Allowing users to set their date preferences on launch**
 
-* **Alternative 1 (current choice):** Have default date preference (
+- **Alternative 1 (current choice):** Have default date preference (
   see [this](UserGuide.md#managing-preferences-and-getting-matches))
-    * Pros: Easy to implement (since all you have to do is set the default date preference). `bestMatch` works
-      immediately from the start.
-    * Cons: Not very user-friendly (since the user may not know all the details of the date)
-* **Alternative 2:** Allow users to set their date preferences on launch
-    * Pros: More user-friendly (since user has more flexibility in setting their date preferences)
-    * Cons: Slightly harder to implement (since you have to check which fields are present). Will also affect the
-      bestMatch
-      algorithm since users may not know how to set their date preferences first.
+  - Pros: Easy to implement (since all you have to do is set the default date preference). `bestMatch` works
+    immediately from the start.
+  - Cons: Not very user-friendly (since the user may not know all the details of the date)
+- **Alternative 2:** Allow users to set their date preferences on launch
+  - Pros: More user-friendly (since user has more flexibility in setting their date preferences)
+  - Cons: Slightly harder to implement (since you have to check which fields are present). Will also affect the
+    bestMatch
+    algorithm since users may not know how to set their date preferences first.
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Show preferences
 
@@ -543,7 +543,7 @@ the command `showP`
 
 <puml src="diagrams/ShowPrefSequenceDiagram.puml" width="600" />
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Unstar dates
 
@@ -570,8 +570,7 @@ the command `unstar 1`
 
 <puml src="diagrams/UnstarSequence.puml" width="600" />
 
-[Scroll back to *Table of Contents*](#table-of-contents)
-
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ---
 
@@ -583,7 +582,7 @@ the command `unstar 1`
 - [Configuration guide](Configuration.md)
 - [DevOps guide](DevOps.md)
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ---
 
@@ -614,7 +613,7 @@ original UI of AB3 into our own new LoveBook UI. As our team was unfamiliar with
 a great amount of time and effort to produce an eventual satisfactory and working UI that we were proud to adopt and
 incorporate into our application.
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ---
 
@@ -636,7 +635,7 @@ LoveBook simplifies the process of storing information of dates and assessing co
 dates by taking into account the user’s preferences, thereby enhancing the efficiency and effectiveness of finding the
 perfect match.
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### User stories
 
@@ -665,7 +664,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | dater     | to be able to find dates based on their name                                                    | locate a date easily                                                    |
 | `* *`    | lazy user | to be able to clear all the dates in my list                                                    | start afresh with a new date list                                       |
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Use cases
 
@@ -909,7 +908,7 @@ Use case ends. <br>
     1a1. LoveBook displays an error message.
     1a2. Use case ends.
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Non-Functional Requirements
 
@@ -923,7 +922,7 @@ Use case ends. <br>
 4. Portability: The CLI application should be compatible with multiple operating systems, including Windows, macOS, and
    Linux.
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ### Glossary
 
@@ -937,7 +936,7 @@ Use case ends. <br>
 | CLI           | Command Line Interface                                                                                            |
 | Mainstream OS | Windows, Linux, Unix, OS-X                                                                                        |
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ---
 
@@ -1042,11 +1041,12 @@ testers are expected to do more _exploratory_ testing.
    - Close the app.
    - Expected: A `data` folder is created under the current repository where the jar file is located.
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ---
 
 ## **Appendix: Effort**
+
 Implementing LoveBook was not straightforward and often required us to brainstorm as a team to solve the challenges faced. Given below is a summary of the effort our team has put into developing LoveBook.
 
 ### Effort Summary
@@ -1055,7 +1055,7 @@ Our group undertook a significant refactoring effort in the initial codebase, in
 
 Our dedication to enhancing the aesthetics of LoveBook is underscored by our meticulous attention to visual representation. We've transcended conventional textual displays, incorporating visually engaging elements such as gender icons, horoscope symbols, and star command visual cues, all implemented using JavaFX. These features not only contribute to the overall visual appeal of the application but also serve a functional purpose in providing users with quick and intuitive insights into important date attributes. Furthermore, our commitment to a visually pleasing user interface extends to the inclusion of unique avatars for each date, corresponding to their respective genders. This holistic approach to aesthetics reflects our aspiration to create an immersive and enjoyable user experience within the LoveBook application.
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 ## **Appendix: Planned Enhancements**
 
@@ -1090,17 +1090,19 @@ Our dedication to enhancing the aesthetics of LoveBook is underscored by our met
      planning to allow the user to filter by multiple keywords.
 
 5. Improve the error message to be more comprehensive
-    - Currently, the error message for user that key in multiple invalid keywords only spots the first invalid keyword.
-      We are planning to allow the user to know all the invalid keywords that he/she has keyed in.
+
+   - Currently, the error message for user that key in multiple invalid keywords only spots the first invalid keyword.
+     We are planning to allow the user to know all the invalid keywords that he/she has keyed in.
 
 6. Improve the message displayed when the user tries to perform an operation on an empty list
+
    - Currently, for some commands like edit and sort, the message displayed is simply based on the validity check of the parameters and it does not tell the user that the
      list is empty. For instance, when the user sorts an empty list, the message displayed is "Sorted!" which is not very helpful. Hence, we are planning to tell the user that the list is empty and that the operation cannot be performed.
 
 7. Improve the presets bar feature to be more comprehensive and clear
-    - Currently, the presets bar feature only accomodates for the commands: `add`, `edit`, `delete`, `setP` and `showP`.
-    - In the future, we plan to add more presets buttons for all 16 commands in the application.
-    - Furthermore, even though there's `clear` command, the button "clear" removes all text in the command box, making
-      it ambiguous. We plan to change this in a future iteration like a trash can icon.
+   - Currently, the presets bar feature only accomodates for the commands: `add`, `edit`, `delete`, `setP` and `showP`.
+   - In the future, we plan to add more presets buttons for all 16 commands in the application.
+   - Furthermore, even though there's `clear` command, the button "clear" removes all text in the command box, making
+     it ambiguous. We plan to change this in a future iteration like a trash can icon.
 
-[Scroll back to *Table of Contents*](#table-of-contents)
+[Scroll back to _Table of Contents_](#table-of-contents)
