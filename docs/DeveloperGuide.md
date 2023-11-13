@@ -297,20 +297,20 @@ The following activity diagram illustrates how the complete operation is execute
 
 Alternative 1 (Previous Design): Use a `CompleteCommandDescriptor` that has a `Date` and `Index` field wrapped by Java `Optional`.
 
-* Pros: 
+* Pros:
   * Allows for clean, readable code without having to check for null values regardless of whether user inputs a date or index.
-  
+
 * Cons:
   * Have to check for both fields for at every step of the command which is inefficient.
 
 Alternative 2 (Current Choice): Make `CompleteCommand` an abstract class with the subclass `CompleteByIndex` and `CompletebyDate`.
 
-* Pros: 
+* Pros:
   * `LogicManager` can just execute `CompleteCommand` without needing to know if it is `CompleteByIndex` or `CompleteByDate`.
-  * Also eliminates the need to check for null fields, since each `CompleteCommand` subclass only has their required fields. 
+  * Also eliminates the need to check for null fields, since each `CompleteCommand` subclass only has their required fields.
   * This also increases the extensibility of the command, as a new subclass can just be added.
 
-* Cons: 
+* Cons:
   * Increases the amount of code written and testing required.
 
 ### Gather Emails Feature
