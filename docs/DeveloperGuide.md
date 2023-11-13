@@ -13,7 +13,7 @@ pageNav: 3
 
 ## **Acknowledgements**
 
-UniMate is based of the  [AddressBook-Level3](https://github.com/se-edu/addressbook-level3) project created by the [SE-EDU initiative](https://se-education.org/).
+UniMate is based off the [AddressBook-Level3](https://github.com/se-edu/addressbook-level3) project created by the [SE-EDU initiative](https://se-education.org/).
 
 --------------------------------------------------------------------------------------------------------------------
 
