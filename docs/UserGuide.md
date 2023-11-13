@@ -357,6 +357,8 @@ Examples:
 Examples:
 * `list` followed by `paid 1` marks the first person as paid in the list.
 
+![paidexample](images/paidexample.png)
+
 ### Marking a tutee as unpaid : `unpaid`
 
 **Description**: Mark the specific tutee as not paid in the list.
@@ -372,17 +374,23 @@ Examples:
 Examples:
 * `list` followed by `unpaid 2` marks the 2nd person as not paid in the list.
 
+![unpaidexample](images/unpaidexample.png)
+
 ### Show all the unpaid tutees : `list unpaid`
 
 **Description**: Shows all the unpaid tutees in your list.
 
 Format: `list unpaid`
 
+![listunpaidexample](images/listunpaidexample.png)
+
 ### Mark all tutee as unpaid: `unpaidAll`
 
 **Description** : Mark all tutees in the current displayed list as not paid.
 
 Format: `unpaidAll`
+
+![unpaidAllexample](images/unpaidAllexample.png)
 
 ### Finding Free Time : `freeTime`
 
