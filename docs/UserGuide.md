@@ -50,7 +50,7 @@ Choose a topic from the [table of contents](#table-of-contents) below to find ou
 Throughout this user guide, you may observe coloured boxes that provide useful information with an icon on its top-left
 indicating the type of information present.
 
-**<box type="tip" seamless>**<br>
+**<box type="tip" seamless>**
 * Tips empower you to make full use of Tutorium.
 </box>
 
@@ -106,6 +106,9 @@ If you are using Mac, click on the Launchpad icon in the Dock, type Terminal in 
     * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
+
+[↑ Back to table of contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>

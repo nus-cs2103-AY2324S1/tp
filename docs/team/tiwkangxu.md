@@ -16,6 +16,7 @@ Given below are my contributions to the project.
 * **Enhancements implemented**:
     * Added a sort feature to the app.
         * This feature allows the user to sort the list of students by name in alphabetical order to enhance efficiency in searching.
+        * The list can be sorted in ascending or descending order.
     * Added an export feature to the app.
         * This feature allows the user to export a visual representation recently created, be it table or barchart, to an intended destination.
         * The exported chart is saved as a PNG image.
@@ -32,6 +33,7 @@ Given below are my contributions to the project.
         * Added all use cases.
         * Added activity diagrams and sequence diagrams for the sort and export features.
         * Provided details on alternative implementations of the sort and export features.
+        * Justified the current designs for sort and export features.
 
 * **Team-based tasks**:
     * Wrote and improved JUnit tests for enhancements implemented.
