@@ -6,28 +6,109 @@
 
 # Tutorium User Guide
 
-Welcome to Tutorium! Tutorium is a **desktop application for tuition centre administrative staff** to conduct data analysis for the planning of marketing strategies. Users can interact with it using a Command Line Interface (CLI), and it has a Graphical User Interface(GUI) created with JavaFX.
+Welcome to Tutorium! Tutorium is a **desktop application for tuition centre administrative staff** to conduct data analysis for the planning of marketing strategies. Users can interact with it using a Command Line Interface (CLI).
 
-Currently, Tutorium caters to the needs of tuition centre administrative staff under the O-Level and IP systems in Singapore, and supports adding data of students from Secondary 1 up to Secondary 4.
+<box type="info" seamless>
+
+**What is CLI?**<br>
+Command line interface (CLI) is an interface we use to interact with the computer using only the keyboard and text.
+
+In contrast, a graphical user interface (GUI) is how you interact with the computer using a mouse, finding and clicking menus, buttons and icons.
+
+**Why CLI?**<br>
+
+CLI enables you to execute commands quickly and become a more efficient person!
+
+</box>
+
+Tutorium supports administrative work relating to students from Secondary 1 to Secondary 4, under the O-Level and IP systems in Singapore.
+
+In this user guide, you will find instructions on how to install Tutorium and use its many features to manage and make use of the students' data.
+From having Tutorium installed to making the best use out of Tutorium, this user guide has everything you need. Head over to the [Quick Start](#quick-start) section to get onboard!
+
+Choose a topic from the [table of contents](#table-of-contents) below to find out how to use Tutorium!
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+# How to Use This User Guide
+
+1. This user guide consists of four main sections, namely Quick Start, Features, Command Summary, FAQ and Known Issues.
+   1. Quick Start: Guide you to set up Tutorium.
+   2. Features: Guide for using Tutorium features.
+   3. Command Summary: A summary of all available commands. 
+   4. FAQ: List of frequently asked questions. 
+   5. Known Issues: Issues that currently exist which the developer will fix.
+
+1. By clicking the link in Table of Contents, you will be directed to the details of the section you're interested in.
+
+1. By clicking the [↑ Back to table of contents] at the bottom of each section, you will be directed back to the table of contents.
+
+### Icon Coloured Boxes
+
+Throughout this user guide, you may observe coloured boxes that provide useful information with an icon on its top-left
+indicating the type of information present.
+
+<box type="tip" seamless>
+Note:<br>
+- Notes empower you to make full use of Tutorium.
+</box>
+
+<box type="info" seamless>
+Info:<br>
+- Additional information for your better understandings.
+</box>
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+# Table of Contents
 
 <!-- * Table of Contents -->
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+<div style="page-break-after: always;"></div>
 
-1. Ensure you have Java `11` or above installed in your Computer.
+## Quick Start
+
+1. Ensure you have Java `11` or above installed in your computer.
 
 1. Download the latest `tutorium.jar` file from [here](https://github.com/AY2324S1-CS2103T-W13-2/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for the Tutorium app.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tutorium.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br>
+1. Double click the file to launch it.
+
+<box type="info" seamless>
+Alternately, you can use the CLI to launch Tutorium.
+
+1. Open a command terminal. If you are using Windows, press the Windows key + R on your keyboard, type `cmd` and press Enter.
+If you are using Mac, click on the Launchpad icon in the Dock, type Terminal in the search field, and then click Terminal.
+
+1. "Go into" the folder you put the `tutorium.jar` file in using cd command. For example, if you put it in a folder named `Downloa`, then type this command into the terminal: `cd Tutorium`
+
+1. Key the `java -jar tutorium.jar` command in the terminal to run the application.<br>
+
+</box>
+
+<box type="tip" seamless>
+
+**Mac users unable to launch `.jar` file.** <br>
+For Mac users, if you encounter pop-out message `"tutorium.jar" cannot be opened because it is from an unidentified developer.` when launching `Tutorium.jar`:
+
+1. Open Settings -> Privacy & Security.
+2. Scroll down and find the message `"tutorium.jar" was blocked from use ...`, click `Open Anyway`. 
+
+</box>
+
+1. A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command box and press Enter to execute it. i.e. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
     * `list` : Lists all students.
@@ -42,7 +123,27 @@ Currently, Tutorium caters to the needs of tuition centre administrative staff u
 
 1. Refer to the [Features](#features) below for details of each command.
 
+[↑ Back to table of contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+## User Interface Layout
+
+Upon launching Tutorium, you will be greeted by the following Graphical User Interface (GUI).<br>
+![GUIparts](images/GUIparts.png)
+
+We can break the GUI into several parts:
+
+1. **Menu Bar**: This is where you find auxiliary features
+2. **Command Box**: This is where you input commands to interact with Tutorium
+2. **Result Display Box**: This is where you get feedback from the command executed
+3. **Student List**: This is where you view all your students
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -54,26 +155,43 @@ Currently, Tutorium caters to the needs of tuition centre administrative staff u
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [s/SUBJECT]` can be used as `n/John Doe s/English` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[s/SUBJECT]…​` can be used as ` ` (i.e. 0 times), `s/English`, `s/English s/Chinese` etc.
 
 * When providing parameters starting with any of the prefixes used by Tutorium `(n/, p/, e/, a/, g/, l/, n/, s/ and d/)` to fields,
-  users are discouraged from adding spaces between the prefix for that field and the input value. This is because the addition
-  of spaces will cause Tutorium to interpret the prefix in the input value as an actual prefix for a field and not as part of the input value.
+  users should not add spaces between the prefix for that field and the input value.
   e.g. Filtering students with the address `e/house` should be done with the command `filter a/e/house` rather than `filter a/ e/house`.
+
+* Parameters containing words (other than the first word) that start with any of the prefixes used by Tutorium `(n/, p/, e/, a/, g/, l/, n/, s/ and d/)`
+  are not accepted in Tutorium.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
+* For commands that take in index (e.g. delete, edit), the index can only be an integer from 1 to 2,147,483,647, otherwise an invalid command message will be displayed.
+
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* The accepted range of sec levels is from Secondary 1 to Secondary 4.
+
+* If no enrol date is provided, the date on which the command was executed will be applied to all subjects listed in the command.
+    * If only 1 enrol date is provided, the same enrol date will be applied to all subjects listed.
+    * If the number of enrol dates provided is the same as the number of subjects listed, the order in which enrol dates are applied to subjects will be the same as the order in which they are provided.
+    * Any mismatch between the number of subjects and the number of enrol dates provided (other than the cases listed above) will result in an error.
+
+* Simply providing 1 enrol date without providing any corresponding subject(s) will result in an error.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
 
-### Viewing help : `help`
+[↑ Back to table of contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
+
+### View help : `help`
 
 Displays the URL for the User Guide.
 
@@ -81,19 +199,15 @@ Displays the URL for the User Guide.
 
 Format: `help`
 
+[↑ Back to table of contents](#table-of-contents)
 
-### Adding a student's data: `add`
+<div style="page-break-after: always;"></div>
+
+### Add a student's data: `add`
 
 Adds a student's data to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER l/SEC_LEVEL m/MRT STATION [s/SUBJECT]… [d/ENROL_DATE]…​`
-
-* The accepted range of secondary school levels is from Secondary 1 to Secondary 4.
-* When adding subjects, if no enrol date is provided, the date on which the command was executed will be applied to all subjects listed by default.
-  * If only 1 enrol date is provided, the same enrol date will be applied to all subjects listed.
-  * If the number of enrol dates provided is the same as the number of subjects listed, the order in which enrol dates are applied to subjects will be the same as the order in which they are provided.
-  * Any mismatch between the number of subjects and the number of enrol dates provided (other than the cases listed above) will result in an error.
-* Simply providing 1 enrol date without providing any corresponding subject(s) will result in an error.
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER l/SEC_LEVEL m/MRT_STATION [s/SUBJECT]… [d/ENROL_DATE]…​`
 
 Examples:
 * `add n/John Doe p/12345678 e/johnd@example.com a/John street, block 123, #01-01 g/M l/2 m/KR mrt s/Chemistry s/Physics`
@@ -101,7 +215,11 @@ Examples:
   <br>
   ![result for 'add n/Betsy Crowe p/87654321 e/betsycrowe@example.com a/Newgate Prison g/F l/2 m/KR mrt s/Mathematics'](images/ug_images/addedResult.png)
 
-### Importing data from .csv file: `import`
+[↑ Back to table of contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
+
+### Import data from .csv file: `import`
 
 Imports students' data into Tutorium.
 1. Move your .csv file into the folder containing Tutorium.
@@ -114,7 +232,8 @@ Format: `import FILENAME.csv`
 **Note:**
 - The columns should be "Name", "Phone", "Email", "Address", "Gender", "Sec level", "Nearest Mrt Station", "Subject", "Enrol Date"
 - Enrol Date can be left blank
-- There must be a Enrol Date header after Subject header
+- There must be a Enrol Date header after every Subject header
+- You can use the sample [student_data_test.csv](https://github.com/AY2324S1-CS2103T-W13-2/tp/files/13331810/student_data_test.csv) file provided to try this feature. However, noted that the date format may be different in different devices, make sure they are in the format MMM YYYY (e.g. Jul 2023) before importing the file.
 - Example:
 ![.csv file for 'import student_data.csv'](images/ug_images/fileExample.png)
 </box>
@@ -124,33 +243,34 @@ Examples:
   <br>
   ![result for 'import student_data.csv'](images/ug_images/importResult.png)
 
+[↑ Back to table of contents](#table-of-contents)
 
-### Editing a student's data : `edit`
+<div style="page-break-after: always;"></div>
+
+### Edit a student's data : `edit`
 
 Edits an existing student's data in the address book.
 
 Format:
-1. `edit INDEX prefix/[field name]` or `edit NAME prefix/[field name]` (you can either specify the student you want to edit by index or his/her name)
-2. `edit INDEX prefix1/[field1] prefix2/[field2]`  or `edit NAME prefix/[field] prefix/[field] prefix/[field]` (change multiple fields)
+1. `edit INDEX prefix/FIELD_VALUE` or `edit NAME prefix/FIELD_VALUE` (you can specify the student you want to edit by index or by his/her name)
+2. `edit INDEX prefix1/FIELD_1_VALUE prefix2/FIELD_2_VALUE`  or `edit NAME prefix1/FIELD_1_VALUE prefix2/FIELD_2_VALUE prefix3/FIELD_3_VALUE` (change multiple fields)
 
-* At least one of the optional fields must be provided.
+* At least one field to edit must be provided.
 * Existing values will be updated to the input values.
-* The accepted range of secondary school levels is from Secondary 1 to Secondary 4.
-* When editing subjects, if no enrol date is provided, the date on which the command was executed will be applied to all subjects listed by default.
-  * If only 1 enrol date is provided, the same enrol date will be applied to all subjects listed.
-  * If the number of enrol dates provided is the same as the number of subjects listed, the order in which enrol dates are applied to subjects will be the same as the order in which they are provided.
-  * Any mismatch between the number of subjects and the number of enrol dates provided (other than the cases listed above) will result in an error.
-* Simply providing 1 enrol date without providing any corresponding subject(s) will result in an error.
 
 Examples:
-*  `edit John Doe n/Joe` specify that you want to edit John Doe's name to "Joe".
-*  `edit 2 n/joey e/joey123@example.com` Edits the student (with index 2)'s name and email to be `joey` and `joey123@example.com`.
+*  `edit John Doe n/Joe` edits John Doe's name to "Joe".
+*  `edit 2 n/joey e/joey123@example.com` Edits the student (with index 2)'s name and email to be `joey` and `joey123@example.com` respectively.
    <br>
    ![result for 'edit John Doe n/Joe'](images/ug_images/editedResult.png)
 
-### Searching for data : `search`
+[↑ Back to table of contents](#table-of-contents)
 
-Search for people whose names contain the given keyword.
+<div style="page-break-after: always;"></div>
+
+### Search for data : `search`
+
+Searches for people whose names contain the given keyword.
 
 Format: `search KEYWORD`
 
@@ -165,13 +285,17 @@ Examples:
   <br>
   ![result for 'search Lee'](images/ug_images/searchResult.png)
 
-### Deleting data : `delete`
+[↑ Back to table of contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
+
+### Delete data : `delete`
 
 Deletes data of a specified student.
 
-Format: `delete [NAME]` or `delete [INDEX]`
+Format: `delete NAME` or `delete INDEX`
 
-* Deletes the student with the specified `NAME` or `[INDEX]`.
+* Deletes the student with the specified `NAME` or `INDEX`.
 * `NAME`: The deletion is case-insensitive, but it must be the full name of the student.
 
 Examples:
@@ -180,18 +304,22 @@ Examples:
   <br>
   ![result for 'delete John Doe'](images/ug_images/deletedResult.png)
 
+[↑ Back to table of contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
+
 ### Update sec level : `uplevel`, `undolevel`
 
 - `uplevel` : update the sec levels for all students and remove all sec level 4 students.
-  - `undolevel` : revert the student record to be before previous sec level update.
+- `undolevel` : revert the student record to be before previous sec level update (to undo an `uplevel`).
+
   Format: `uplevel`, `undolevel`
 
-* Command is case-sensitive
+* Command is case-sensitive.
 * No prefix is required, only the command.
-* Note that `undolevel` feature is provided in case when the user accidentally enter `uplevel` AND the user do not close application immediately.
-* That means after doing `uplevel`, followed by any other `edit`, `add` or `delete` commands etc and then do `undolevel`, the commands in between will be invalid because the students records are revert back to before previous `uplevel`.
+* Note that `undolevel` feature is provided in case the user accidentally enters `uplevel` AND the user does not close the application immediately.
+* That means after doing `uplevel`, followed by any other `edit`, `add` or `delete` commands etc and then do `undolevel`, the commands in between will be invalid because the students records are reverted back to before the previous `uplevel`.
 * `undolevel` can be performed only when there is / are `uplevel` performed (and has not been undone) since user open application.
-
 
 Examples: `uplevel`, `undolevel`
 
@@ -201,7 +329,11 @@ Examples: `uplevel`, `undolevel`
 
   ![after entering 'undolevel'](images/ug_images/undoUpdate.png)
 
-### Filtering data : `filter`
+[↑ Back to table of contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
+
+### Filter data : `filter`
 
 Shows the list of students data that fulfills all given conditions.
 
@@ -218,33 +350,37 @@ Examples:
   <br>
   ![result for 'filter Physics'](images/ug_images/filterResult.png)
 
-### Sorting data : `sort`
+[↑ Back to table of contents](#table-of-contents)
 
-Sort the list of students data by name.
+<div style="page-break-after: always;"></div>
 
-Format: `sort in/[DESCRIPTION]`
+### Sort data : `sort`
 
-* `DESCRIPTION` should be `ASC` or `DESC`, non-case-sensitive.
+Sorts the list of students data permanently by name in ascending or descending.
+
+Format: `sort in/SEQUENCE`
+
+* `SEQUENCE` should be `ASC` or `DESC`, non-case-sensitive.
 
 Examples:
 * `sort in/ASC` <br>
-  ![result for 'sort in/ ASC'](images/ug_images/sortedResult.png)
 
+[↑ Back to table of contents](#table-of-contents)
 
-### Clearing all entries : `clear`
+<div style="page-break-after: always;"></div>
+
+### Clear all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+[↑ Back to table of contents](#table-of-contents)
 
-Exits the program.
+<div style="page-break-after: always;"></div>
 
-Format: `exit`
-
-### Showing statistical table
-Showing a table either categorized by gender, sec level or subject.
+### Show statistical table: `table`
+Shows a table either categorized by gender, sec level or subject.
 
 Format: `table PREFIX`
 
@@ -259,8 +395,12 @@ Examples:
 * `table s/` will show a table categorized by student subject.
 * `table d/2023` will show a table categorized by months in year 2023.
 
-### Showing bar chart
-Showing a bar chart either categorized by gender, sec level or subject.
+[↑ Back to table of contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
+
+### Show bar chart: `bar`
+Shows a bar chart either categorized by gender, sec level or subject.
 
 Format: `bar PREFIX`
 
@@ -280,12 +420,18 @@ Below is the chart generated after entering `bar l/`.
 
   ![result for 'bar l/'](images/ug_images/barResult.png)
 
-### Showing line chart
-Showing a line chart describing number of students enrolled in each month in a specific year.
+[↑ Back to table of contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
+
+### Show line chart: `trend`
+Shows a line chart describing number of students enrolled in each month in a specific year.
 
 Format: `trend y/YEAR`
-* {year} is a 4 digit number representing year
-* {} is not required
+
+* Students will be categorised according to their earliest enrol date. i.e. if John Doe enrolled in Physics in May 2020
+and Chemistry in July 2021, his data will be found in the line chart shown when `trend y/2020` is used, but not in the line chart shown
+when `trend y/2021` is used.
 
 Examples:
 * `trend y/2023` will show a line chart describing number of students enrolled
@@ -294,58 +440,78 @@ in each month in year 2023.
 Below is the chart generated after typing `trend y/2023`
    ![result for 'trend y/2023'](images/ug_images/trendResult.png)
 
+[↑ Back to table of contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
+
 ### Export visual representation : `export`
 
-Export the statistical table or bar chart into PNG format.
+Exports the statistical table or bar chart into PNG format.
 
 Format: `export v/VISUAL`
 
 * `VISUAL` should be `TABLE` or `BAR`, non-case-sensitive.
 * `TABLE` indicates exporting the table created, while `BAR` indicates exporting the bar chart created.
 * A table should be created before exporting, this applies to exporting bar chart as well.
-* The visual representation exported will be the one that is recently created.
+* The visual representation exported for each type of visual will be the one that is most recently created.
   * i.e. if two bar charts are created consecutively, `export v/BAR` will export the most recent bar chart created (the 2nd bar chart)
 
 Examples:
 * `export v/TABLE` <br>
 
-### Saving the data
+[↑ Back to table of contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
+
+### Exit program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+[↑ Back to table of contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
+
+### Archive data files `[coming in v2.0]`
+
+_Details coming soon ..._
+
+[↑ Back to table of contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+## Additional Info
+
+### Save data
 
 Tutorium data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+[↑ Back to table of contents](#table-of-contents)
+
+### Edit data file
 
 Tutorium data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, Tutorium will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, Tutorium will discard all data and start with an empty data file at the next run.  Hence, it is recommended to make a backup of the file before editing it.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
+[↑ Back to table of contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+<div style="page-break-after: always;"></div>
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Tutorium home folder.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Known issues
-
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Command summary
+## Command Summary
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Help**   | `help`
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER l/SEC_LEVEL m/MRT STATION [s/SUBJECT]…​` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 s/Chemistry`
 **Import** | `import FILENAME.csv`<br> e.g., `import student_data.csv`
 **Edit**   | `edit INDEX prefix1/[field1] prefix2/[field2]`  <br> or `edit NAME prefix/[field] prefix/[field] prefix/[field]` <br> e.g., `edit John Doe n/Joe e/johndoe@example.com t/English`
@@ -353,9 +519,36 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> or `delete NAME` <br> e.g., `delete Joe`
 **Update** | `uplevel`<br> or `undolevel` <br>
 **Filter** | `filter prefix/FIELD_VALUE [MORE FIELDS]` <br> e.g., `filter g/F s/English s/Physics`
-**Sort**   | `sort in/ [DESCRIPTION]` <br> e.g., `sort in/ ASC`
+**Sort**   | `sort in/[DESCRIPTION]` <br> e.g., `sort in/ASC`
 **Clear**  | `clear`
 **Show Table** | `table prefix/`<br> or `table d/YEAR` <br>
 **Show Bar Chart** | `bar prefix/`<br> or `bar d/YEAR` <br>
 **Show Line Chart** | `trend y/{year}`
-**Help**   | `help`
+**Export**   | `export v/VISUAL` <br> e.g., `export v/table`
+**Exit**   | `exit`
+
+[↑ Back to table of contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+## FAQ
+
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Install the app in the other computer. Next, overwrite the data file created on launching the app with the file containing your Tutorium data.
+
+**Q**: How do I save my progress?
+**A**: Your progress is automatically saved after each command.
+
+[↑ Back to table of contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+## Known Issues
+
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+
+[↑ Back to table of contents](#table-of-contents)

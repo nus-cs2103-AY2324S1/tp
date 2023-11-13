@@ -365,19 +365,20 @@ The following activity diagram summarizes what happens when a user executes a `e
 
 #### Design considerations:
 
-**Aspect: How the student list is sorted internally:**
+**Aspect: Where to export the image to:**
 
-* **Alternative 1 (current choice):** Sort the student list in class `UniquePersonList` using method `sort`.
+* **Alternative 1 (current choice):** Allow users to manually choose the destination in GUI to export the image to using method `exportAsPng`.
   * Pros:
-    * Student list is sorted permanently, ensuring no repeated sorting needed in the next launch provided no new student is added or student's name is changed.
-    * Enhance efficiency of looking through the student list, ensure no repeated sorting needed when doing consecutive commands such as `filter`.
+    * Users could confidently navigate into the intended folder to save the image.
   * Cons:
-    * Users would be unable to view the unsorted student list again.
-* Alternative 2: Sort the student list in class `ModelManager` using method `updateSortedPersonList`.
+    * Users have to use touchpad or a mouse to navigate around the folders.
+* Alternative 2: Allow users to type in the path to the intended folder to save the image.
   * Pros:
-    * Enable users to view the unsorted student list for every launch.
+    * Users would not need to find a touchpad or a mouse to use the GUI.
   * Cons:
-    * Users have to resort the student list for every launch.
+    * It takes more time for a user to find out the exact path to save the image.
+    * Getting the exact path is troublesome and significantly drains convenience.
+    * Getting a small typo in the path is frustrating.
 * We made the choice of Alternative 1 over Alternative 2 as we insist on providing greater convenience.
 
 
@@ -836,7 +837,7 @@ testers are expected to do more *exploratory* testing.
 ### Launch and shutdown
 
 1. Initial launch
-  1. Download the jar file and copy into an empty folder. 
+  1. Download the jar file and copy into an empty folder.
   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
@@ -847,7 +848,7 @@ testers are expected to do more *exploratory* testing.
 ### Adding a student
 
 1. Adding a student.
-  1. Prerequisites: None. 
+  1. Prerequisites: None.
   2. Test case: `add n/John Doe p/12345678 e/johnd@example.com a/John street, block 123, #01-01 g/M l/2 m/KR mrt s/Chemistry s/Physics`<br>
      Expected: Adds a student named `John Doe` to the list.
   3. Test case: `add n/Jane Smith p/98765432 e/janes@example.com a/Josh street, block 456, #02-02 l/3 m/Clementi mrt s/English`<br>
@@ -922,7 +923,7 @@ testers are expected to do more *exploratory* testing.
   2. Test case: `export v/BAR`<br>
      Expected: The most recently created bar chart is exported as an image.
   3. Test case: `export v/TABLE`<br>
-     Expected: Since no table has been generated prior to this command, an error message stating that this visual 
+     Expected: Since no table has been generated prior to this command, an error message stating that this visual
      representation must be created before it can be exported is displayed.
 
 ### Creating a line graph

@@ -89,15 +89,22 @@ public class ImportCommandParser implements Parser<ImportCommand> {
                 }
             }
 
+            int count = 1;
             String line = reader.readLine();
             while (line != null) {
                 String[] attributes = line.split(",");
-                Student student = parseStudentFromCsv(attributes);
+                Student student = null;
+                try {
+                    student = parseStudentFromCsv(attributes);
+                } catch (ParseException e) {
+                    throw new ParseException("For student at index " + count + ": " + e.getMessage());
+                }
                 if (student == null) {
                     break;
                 }
                 students.add(student);
                 line = reader.readLine();
+                count++;
             }
         } catch (IOException e) {
             throw new ParseException(MESSAGE_ERROR_READING_FILE + args);
@@ -116,12 +123,11 @@ public class ImportCommandParser implements Parser<ImportCommand> {
 
         int count = 4;
         StringBuilder addr = new StringBuilder(attributes[3]);
-        while (!(attributes[count].equalsIgnoreCase("M")
-                || attributes[count].equalsIgnoreCase("F"))) {
+        while (!(attributes[count - 1].endsWith("\""))) {
             addr.append(", ").append(attributes[count]);
             count++;
         }
-        Address address = ParserUtil.parseAddress(addr.toString());
+        Address address = ParserUtil.parseAddress(addr.toString().replace("\"", ""));
 
         Gender gender = ParserUtil.parseGender(attributes[count]);
         count++;
@@ -130,21 +136,23 @@ public class ImportCommandParser implements Parser<ImportCommand> {
         MrtStation nearestMrtStation = ParserUtil.parseMrtStation(attributes[count]);
         count++;
         List<String> remaining = new ArrayList<>(Arrays.asList(attributes).subList(count, attributes.length));
+
+        int disp = count % 2;
         Iterator<String> remainingIterator = remaining.iterator();
         List<String> subjects = new ArrayList<>();
         List<String> dates = new ArrayList<>();
         while (remainingIterator.hasNext()) {
-            String next = remainingIterator.next();
-            if (Subject.isValidSubjectName(next.trim())) {
+            String next = remainingIterator.next().trim();
+            if (count % 2 == disp) {
                 subjects.add(next);
                 count++;
-            } else if (EnrolDate.isValidDate(next.trim())) {
-                dates.add(next);
-                count++;
-            } else if (next.isEmpty() && subjects.size() > 0) {
-                dates.add(YearMonth.now().format(DateTimeFormatter.ofPattern("MMM yyyy", Locale.ENGLISH)));
             } else {
-                break;
+                if (next.isEmpty() && subjects.size() > 0) {
+                    dates.add(YearMonth.now().format(DateTimeFormatter.ofPattern("MMM yyyy", Locale.ENGLISH)));
+                } else {
+                    dates.add(next);
+                }
+                count++;
             }
         }
 

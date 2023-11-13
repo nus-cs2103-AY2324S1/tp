@@ -54,7 +54,7 @@ public class TableCommandTest {
 
 
     @Test
-    public void executeToCorrectCommandResult() throws CommandException {
+    public void execute_validArg_correctCommandResult() throws CommandException {
         Command command1 = new TableCommand("g/");
         Command command2 = new TableCommand("l/");
         Command command3 = new TableCommand("s/");
