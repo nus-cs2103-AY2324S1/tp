@@ -212,16 +212,20 @@ The `Dashboard` component already has an `isDashboardDirty` flag to indicate if 
 
 As we add more attributes and interactions with clients, we will need a better way to view all of the information associated with a client. Therefore instead of displaying all information in a `PersonCard` within the list of clients, we will need a new component to display the client profile in a better way.
 
-The new `ClientProfilePanel` UI component is the replacement for displaying client profiles. Beside the require and optional fields, the user can also see all of their past interactions with the client.
+#### Current Implementation
 
-The client profile to display is tracked using a `SimpleObjectProperty` inside a `Model`. Since a `SimpleObjectProperty` is an `ObservableValue`, we can add listeners to its change event and update our UI whenever the currently selected profile changes.
+The new `ClientProfilePanel` UI component is the replacement for displaying client profiles. Besides the required and optional fields, the user can also see all of their past interactions with the client.
 
-We currently support 2 ways of viewing a client's profile:
+The UI components uses the observer pattern. The active client profile to display is tracked using a `SimpleObjectProperty` inside a `Model`. Since a `SimpleObjectProperty` is an `ObservableValue`, we can add listeners to its change event and update our UI whenever the currently selected profile changes.
+
+We currently support 2 ways of manually selecting a client's profile to view:
 
 1. By clicking on a client's card from the client list
 2. By using the `view` command
 
 Both methods will update the currently selected client, which will then trigger a listener to update the UI to show the profile panel.
+
+In addition, any command that modifies a client's data (e.g. `interaction`, `edit` etc.) will also cause that client's profile to be set to active and shown.
 
 To exit out of the profile view, the user can enter the `list` command, which will hide the profile panel and restore the client list to occupy the full window width.
 
