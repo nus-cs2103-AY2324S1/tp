@@ -21,10 +21,13 @@ Given below are my contributions to the project.
   * Support the render of subjects in colored boxes in the UI.
 
 * **Contributions to User Guide**:
-    * to be added soon
+    * Wrote the glossary section
+    * Wrote the edit(for editPerson, editLesson) feature section
+    * Wrote a part of the important notes section.
 
 * **Contributions to Developer Guide**:
-    * to be added soon
+    * Refactored the architecture section.
+    * Wrote the editPersonCommand and Parser section.
 
 * **Contributions to team-based tasks**:
   * Actively help with the maintaining of the issue tracker and codebase
