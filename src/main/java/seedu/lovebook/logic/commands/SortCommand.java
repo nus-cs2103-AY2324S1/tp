@@ -19,6 +19,7 @@ import seedu.lovebook.model.date.Date;
 
 /**
  * Sorts all dates in LoveBook alphabetically or numerically.
+ * @author lynnlow175
  */
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";

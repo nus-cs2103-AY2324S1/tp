@@ -15,6 +15,7 @@ import seedu.lovebook.model.date.MetricContainsKeywordPredicate;
 /**
  * Filter based on a specific metric and list the Dates whose metric contains the keyword.
  * Keyword matching is case-insensitive.
+ * @author lynnlow175
  *
  */
 public class FilterCommand extends Command {

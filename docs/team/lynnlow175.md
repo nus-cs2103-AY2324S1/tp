@@ -41,7 +41,8 @@ Given below are my contributions to the project.
       * Added documentation for own features like `filter`, `sort` and `blindDate`.
     * Developer Guide: 
       * Added implementation details of commands like `filter`, `sort` and `blindDate`.
-      * Contributed to Planned Enhancement section (Improve Filter and error message).
+      * Contributed to Planned Enhancement section of Developer Guide.
+      * Contributed to the Effort section.
 
 * **Community**:
   * PRs reviewed: #89, #13

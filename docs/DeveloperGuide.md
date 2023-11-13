@@ -566,39 +566,6 @@ the command `unstar 1`
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
----
-
-## **Effort**
-
-Implementing LoveBook was not a straightforward task. Given below is a summary of the effort our team has put into to
-develop LoveBook as well as some challenges faced.
-
-### Evolving of AB3 into LoveBook
-
-As we wanted to morph AB3 to fit into our idea of LoveBook, we had to refactor a large portion of the initial codebase
-and implement several new classes to get the basic minimum viable product of LoveBook.
-This included creating the Date class and its associated inner field classes. We also had to update how the application
-will store Dates and DatePrefs separately. In addition, many previous commands of AB3 had to be refactored or changed,
-and we added several new commands to LoveBook as well. Eventually, we were able to successfully implement both the Date
-and DatePref classes and all their associated commands.
-
-One challenge we faced was implementing the bestMatch feature. Given the tight timeline of the team project, we decided
-to do a simple implementation of this feature since we would not be able to deliver the full functionality (along with
-updating every other command we have implemented thus far) in time. If given more time, we would like to develop this
-further incorporating the use of artificial intelligence, as it is a relevant feature that will be used in the real
-world and brings value to our target users.
-
-### Revamping of UI
-
-We wanted a simple yet appealing graphical user interface for our application’s users. As such, we decided to change the
-original UI of AB3 into our own new LoveBook UI. As our team was unfamiliar with JavaFX initially, it took us
-a great amount of time and effort to produce an eventual satisfactory and working UI that we were proud to adopt and
-incorporate into our application.
-
-[Scroll back to _Table of Contents_](#table-of-contents)
-
----
-
 ## **Appendix: Requirements**
 
 ### Product scope
@@ -1032,13 +999,33 @@ testers are expected to do more _exploratory_ testing.
 
 ## **Appendix: Effort**
 
-Implementing LoveBook was not straightforward and often required us to brainstorm as a team to solve the challenges faced. Given below is a summary of the effort our team has put into developing LoveBook.
+Implementing LoveBook was not straightforward and often required us to brainstorm as a team to solve the challenges faced. 
+Given below is a summary of the effort our team has put into developing LoveBook as well as challenges faced.
 
-### Effort Summary
+### Evolving of AB3 into LoveBook
 
-Our group undertook a significant refactoring effort in the initial codebase, introducing several new classes and enhancing existing ones to fit into our idea of LoveBook. Noteworthy additions include the creation of the "income" and "horoscope" fields within the Date class, representing crucial attributes for building comprehensive user profiles and calculation of compatibility. Regarding compatibility, our group has spent a tremendous amount of time and effort to brainstorm about the implementation of a compatibility algorithm. The compatibility algorithm is designed to calculate a compatibility score based on user preferences and date attributes. This has proven to be challenging as we had to ensure accuracy in providing the user with the best match by taking into account all the differences between preferences and dates attributes.
+As we wanted to morph AB3 to fit into our idea of LoveBook, we had to refactor a large portion of the initial codebase
+and implement several new classes to get the basic minimum viable product of LoveBook.
+This included creating the Date class and its associated inner field classes. We also had to update how the application
+will store Dates and DatePrefs separately. In addition, many previous commands of AB3 had to be refactored or changed,
+and we added several new commands to LoveBook as well. Eventually, we were able to successfully implement both the Date
+and DatePref classes and all their associated commands.
 
-Our dedication to enhancing the aesthetics of LoveBook is underscored by our meticulous attention to visual representation. We've transcended conventional textual displays, incorporating visually engaging elements such as gender icons, horoscope symbols, and star command visual cues, all implemented using JavaFX. These features not only contribute to the overall visual appeal of the application but also serve a functional purpose in providing users with quick and intuitive insights into important date attributes. Furthermore, our commitment to a visually pleasing user interface extends to the inclusion of unique avatars for each date, corresponding to their respective genders. This holistic approach to aesthetics reflects our aspiration to create an immersive and enjoyable user experience within the LoveBook application.
+One challenge we faced was implementing the bestMatch feature. Given the tight timeline of the team project, we decided
+to do a simple implementation of this feature that does not provide user with much flexibility. If given more time, we would like 
+to develop this further by incorporating the use of artificial intelligence, as it is a relevant feature that will be used in the real
+world and brings value to our target users.
+
+### Revamping of UI
+
+Our dedication to enhancing the aesthetics of LoveBook is highlighted by our attention to visual representation. 
+We went beyond mere textual displays, incorporating visually engaging elements such as gender icons, horoscope symbols, 
+and star command visual cues, all implemented using JavaFX. These features not only contribute to the overall visual 
+appeal of the application but also serve a functional purpose in providing users with quick and intuitive insights into 
+important date attributes. As our team was unfamiliar with JavaFX initially, it took us a great amount of time and 
+effort to produce an eventual satisfactory and working UI that we were proud to adopt and incorporate into our application.
+
+[Scroll back to _Table of Contents_](#table-of-contents)
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 

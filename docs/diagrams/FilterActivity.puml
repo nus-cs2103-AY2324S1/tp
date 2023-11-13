@@ -3,15 +3,28 @@ skin rose
 skinparam ActivityFontSize 15
 skinparam ArrowFontSize 12
 start
-:User enters filter command;
+:User launches LoveBook;
 
-'Since the beta syntax does not support placing the condition outside the
-'diamond we place it as the true branch instead.
+: User enters a command to filter dates in the GUI;
 
-if () then ([All fields are valid])
-    :Filter is applied;
+: Input is passed over to the logic component;
+
+if () then ([command format is valid])
+        if () then ([all fields contain valid values])
+            if () then ([date with same name does not exist])
+                :Save date to LoveBook;
+                :Display success message;
+                stop
+            else ([else])
+                :Display date already exists error message;
+                stop
+            endif
+        else ([else])
+            :Display invalid field value error message;
+            stop
+        endif
 else ([else])
-:Parse Exception is thrown;
+    :Display invalid command format error message;
+    stop
 endif
-stop
 @enduml
