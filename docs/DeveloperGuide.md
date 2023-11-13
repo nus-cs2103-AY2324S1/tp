@@ -622,3 +622,21 @@ testers are expected to do more *exploratory* testing.
 
 ## 8. Appendix: Effort
 
+### 8.1 Design Challenges
+
+* WellNUS, in contrast to AB3 which exclusively manages one entity type: `Person`,
+has the intricate challenge of handling two distinct entity types: `Student` and `Appointment`.
+* One challenge encountered was the need to manage dependencies between the two entity types.
+Specifically, the system had to be designed to prevent the scheduling of appointments unless a corresponding student entity existed. 
+Additionally, to maintain data integrity, the deletion of a student entity necessitated the simultaneous cancellation of all associated appointments.
+* In tackling these challenges, we leveraged existing components to streamline development efforts. 
+Recognising the `Person` entity in AB3, we opted to adapt the `Person` entity and repurpose to `Student` entity within WellNUS.
+* Another challenge we faced was designing a new `Appointment` entity from scratch. The process was challenging and required tedious class refactoring mid implementation.
+Initially, we designed `Appointment` to have an attribute `DateTime` to store the date and time of the appointment. 
+To facilitate the comparison of appointments and prevent overlaps and clashes, we soon realised there was a need for a start and end time.
+However, having `DateTime start` and `DateTime end` results in a duplication of date, as the appointment was bound to be on the same date. 
+Hence, we refactored `DateTime` into `Date` and `Time` to allow for 3 attributes: `Date appointmentDate`, `Time startTime`, `Time endTime`
+
+### 8.2 Technical Challenges
+
+
