@@ -1551,14 +1551,14 @@ For more information on CoordiMate's GUI, read more about it [here](#understandi
 
 ### Integer
 
-A whole number without fractions or decimals, commonly used in CoordiMate to denote the position of an item in a collection or list.
+A whole number without fractions or decimals, commonly used in CoordiMate to indicate the position of an item in a list.
 
 The valid range for accepted integers is 1, 2, 3, … , 2147483647.
 
-Example: In a list of 3 alphabets containing (“a”, “b”, “c”) in that order,
-  - Index 1 refers to “a”
-  - Index 2 refers to “b”
-  - Index 3 refers to “c”
+Example: If you have a list with the letters ("a", "b", "c") in order,
+  - 1 refers to “a”
+  - 2 refers to “b”
+  - 3 refers to “c”
 
 <br><br>
 
