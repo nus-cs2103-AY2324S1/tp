@@ -9,7 +9,7 @@ start
 if () then ([Command valid])
   :Retrieve command history from model;
   if () then ([Valid number of steps])
-    :Execute Undo;
+    :Execute undo;
   else ([else])
     :Return error message;
     stop
@@ -28,9 +28,6 @@ repeat while () is ([More steps to undo])
 
 :Return CommandResult;
   stop
-
-
-
 
 @enduml
 

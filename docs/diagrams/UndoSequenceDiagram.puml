@@ -7,7 +7,6 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":UndoCommandParser" as UndoCommandParser LOGIC_COLOR
 participant "u:UndoCommand" as UndoCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
 participant ":UndoableCommand" as UndoableCommand LOGIC_COLOR
 end box
 
@@ -44,18 +43,20 @@ loop until no more commands to undo
         UndoCommand -> Model : popCommandFromHistory()
         activate Model
 
-        Model -> UndoableCommand : undo(Model)
+        Model --> UndoCommand : command
+
+        UndoCommand -> UndoableCommand : undo()
         activate UndoableCommand
 
-        UndoableCommand --> Model : CommandResult
+
+        UndoableCommand--> UndoCommand : CommandResult
         deactivate UndoableCommand
 
 end
 
-Model --> UndoCommand : CommandResult
 deactivate Model
 
-UndoCommand --> LogicManager : CommandResult
+
 deactivate UndoCommand
 
 deactivate LogicManager
