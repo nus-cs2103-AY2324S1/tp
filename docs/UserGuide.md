@@ -11,7 +11,7 @@ title: User Guide
 ## Introduction
 Flashlingo is a versatile desktop application centered around learning words through flash cards. It is optimized for use via a **Command Line Interface** (CLI),
 while also providing the advantages of a **Graphical User Interface** (GUI). Tailored with a focus on **beginner language
-learners** with beginner level of  proficiency in command line, Flashlingo specializes in expanding vocabulary. If you are not familiar with the command line interface (CLI), you can refer to the [**Glossary**](#glossary) section below,
+learners** with beginner level of proficiency in command line, Flashlingo specializes in expanding vocabulary. If you are not familiar with the command line interface (CLI), you can refer to the [**Glossary**](#glossary) section below,
 and the [**Command Summary**](#command-summary) section for a quick overview of the commands.
 
 
@@ -97,7 +97,7 @@ meaning you can **spend less time and memorize things more enduringly.**
 |------------------|---------------------------------------------------------------|-------------------------------------------------------------------------|---------------------------------|
 | `<PARAMETER>`    | Parameter to be supplied by the user                          | `delete <INDEX>`                                                        | `delete 1`                      |
 | `[<OPTIONAL>]`   | Indicates an optional parameter                               | `add w/<WORD> t/<TRANSLATION> [wl/<WORD_LANG>] [tl/<TRANSLATION_LANG>]` | `add w/Hello t/你好`              |
- | `<PARAMETER...>` | Commands that can take in multiple comma seperated parameters | `find <KEYWORD...>`                                                     | `find hello, bye`                |
+ | `<PARAMETER...>` | Commands that can take in multiple comma separated parameters | `find <KEYWORD...>`                                                     | `find hello, bye`                |
 | `...`            | Parameter that will not be used                               | `help ...`                                                              | `help 123` is the same as `help` |
 
 **:information_source: Notes about the command output:**<br>
@@ -116,7 +116,7 @@ meaning you can **spend less time and memorize things more enduringly.**
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: Notes about adding words:
+**:information_source: Notes about adding words:**
 * In order to give users full customizability, there's no any restriction on input, as long as it is not empty.
 
 </div>
@@ -127,7 +127,7 @@ Adds a word to the flash card with its translation.
 * The already saved translation can be overridden with a new translation in a different language.
 
 [Command Format](#commands): `add w/<WORD> t/<TRANSLATION> [wl/<WORD_LANGUAGE>] [tl/<TRANSLATION_LANGUAGE>]`
-> The default language for both word and translation are blank (`""`)
+> The default language for both word and translation is blank (`""`)
 
 Examples:
 * `add w/雪 t/snow` saves the translation of **雪** as **snow**
@@ -153,9 +153,9 @@ Output:
 * Users are **not allowed** to add a flash card with the **empty word or translation**<br>
 
 
-### Deleting a flash card : `delete`
+### Deleting a flash card: `delete`
 
-Deletes a words and its related information
+Deletes a flash card and its related information
 * Deletes a flash card.
 
 [Command Format](#commands): `delete <INDEX>`
@@ -169,7 +169,7 @@ Output:
 |:----------------:|:-----------------------------------:|
 | **After delete** | ![img.png](images/AfterDelete.png)  |
 
-### Editing a flash card : `edit`
+### Editing a flash card: `edit`
 
 Edits the specified flash card at the given index.
 
@@ -213,7 +213,7 @@ Output:
    * To facilitate learning, only the flash cards - that are to be reviewed - can be seen during the review session.
    * As soon as the review session ends, all the flash cards can be listed once again.
 
-### Finding a flash card : `find`
+### Finding a flash card: `find`
 
 Filters the flash card list by the given keywords. All the flash cards whose word or translation contains at least one of the keywords will be displayed.
 * The search is case-insensitive. e.g `food` will match `Food`
@@ -231,7 +231,7 @@ Output:
 |:---------------:|:---------------------------------:|
 | **After find**  | ![img.png](images/AfterFind.png)  |
 
-### Filtering list with specified language : `language`
+### Filtering list with specified language: `language`
 
 Filter the list of flash cards by the specified language. All the flash cards whose word or translation is in the specified language will be displayed.
 * The search is case-insensitive. e.g `french` will match `French`
@@ -248,7 +248,7 @@ Examples:
         * `w/讀書 t/read book wl/Traditional Chinese tl/English`
 * `language` without any parameter will display all the flash cards with default language `""`.
 
-### Getting list for revision : `review`
+### Getting list for revision: `review`
 
 Displays the flash cards of all the words to be reviewed that day
 * The review command will present flash cards selected by Flashlingo based on your level, as well as the interval between the last review, utilizing the Leitner system.
@@ -264,7 +264,7 @@ Output:
 * The message `0 flashcards listed!` occurs when:
     * There are no flash cards scheduled for review at the time when the command is executed.
 
-###  Starts review session : `start`
+###  Starts review session: `start`
 
 Starts a new review session.
 
@@ -277,7 +277,7 @@ Output: `Review Session has been started.`
   will be displayed.
 
 
-### Ending the current review session : `end`
+### Ending the current review session: `end`
 
 Ends the current review session and returns to the main menu.
 
@@ -307,7 +307,7 @@ Output :
 
 </div>
 
-### Indicating user has memorized the word : `yes`
+### Indicating user has memorized the word: `yes`
 
 Marks the word as memorized and advances the word into the next `level`. If there are still remaining words to review,
 they will be automatically shown in the section below. Otherwise, review session will be closed by default.
@@ -322,7 +322,7 @@ Output:
 * Pressing `yes` button will have the same effect.
 * In the case where there are no more words to review, `The next word is:` will be replaced by `You have no more words to review!`.
 
-###  Indicating user has forgotten the word : `no`
+###  Indicating user has forgotten the word: `no`
 
 Marks the word as not grasped and decreases its `level` by 1. If there are still remaining words to review,
 they will be automatically shown in the section below. Otherwise, review session will be closed by default.
@@ -337,7 +337,7 @@ Output:
 * Pressing `no` button will have the same effect.
 * In the case where there are no more words to review, `The next word is:` will be replaced by `You have no more words to review!`.
 
-### Show learning statistics : `stats`
+### Show learning statistics: `stats`
 
 To help track user progress and inspire continued learning, this command offers detailed statistics:
 * Total Flash Cards: Displays the total count of flash cards you have saved.
@@ -366,8 +366,8 @@ review session automatically.
 **:information_source: Notes about the file input:**<br>
 * **File format:** The file must be an Excel Workbook with the `.xlsx` extension.
 * **File location:** The file must be located in the **same folder** as the `flashlingo.jar` file.
-* **File name:** The file names, with and without the `.xlsx` extension depend on different systems, cannot contain leading or trailing spaces.
-* **File content:** The app would only read the **first two columns** of the **first sheet** of the workbook.
+* **File name:** The file names, with and without the `.xlsx` extension depend on different systems, should not contain leading or trailing spaces.
+* **File content:** The app only reads the **first two columns** of the **first sheet** of the file.
   * The sheet must contain only the following two columns (cannot have blank columns on the left):
     1. Column A - The original words
     2. Column B - The translation of the words
@@ -387,8 +387,8 @@ Output:
 * `Word/translation cannot be empty!`:<br>
 ⚠️ Ensure all words and translations are not empty spaces.
 
-### Switching color theme : `switch`
-Switches between light and dark appearance of UI dashboard.
+### Switching color theme: `switch`
+Switches between light and dark appearance of Flashlingo.
 * The theme will be saved and loaded when Flashlingo is restarted.
 * Default color theme is the **light theme**.
 
@@ -400,13 +400,13 @@ Output:
 |:--------------:|:---------------------------------:|
 | **Dark theme** | ![img.png](images/DarkTheme.png)  |
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Opens a browser with the help page (User Guide). Pressing the `Help` button and then clicking `Help F1` will achieve the same effect.
 
 [Command Format](#commands): `help ...`
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Safely terminates the Flashlingo application and closes the graphical user interface (GUI).
 
@@ -422,7 +422,7 @@ Flashlingo data are saved in the hard disk automatically after any command that 
 Flashlingo data are saved automatically as a JSON file `[JAR file location]/data/flashlingo.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, Flashlingo will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file make its format invalid, Flashlingo will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -430,36 +430,37 @@ If your changes to the data file makes its format invalid, Flashlingo will disca
 ## FAQ
 
 **Q: How can I check if I have installed and am using the Java `11` version?**<br>
-**A**:
-* Open up the terminal. Run the `java -version` command. The output should contain similar information to the following:
+* Open up the terminal. **Run the `java -version` command.** The output should contain similar information to:
 `version "11.0.X"`.
 * If Java `11` is not installed, you may download it again.
 * If you are using lower or higher versions of Java, you may find switch version on [Mac](https://stackoverflow.com/questions/21964709/how-to-set-or-change-the-default-java-jdk-version-on-macos), [Windows](https://stackoverflow.com/questions/26993101/switching-between-different-jdk-versions-in-windows) or [Linux](https://askubuntu.com/questions/740757/switch-between-multiple-java-versions) useful.
 
 
-**Q: How do I transfer my data to another Computer?**<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Flashlingo home folder.
+**Q: How do I transfer my data to another computer?**<br>
+<br>
+Install the app on the other computer and **overwrite the empty data file** it creates with the **file that contains the data of your previous Flashlingo** home folder.
 
 **Q: How can I import my data to the app?**<br>
-**A**: Save your words and translations in the format specified above in an Excel file. Move the file to the same folder with `flashlingo.jar`.
-Then, use the `load` command to import the data.
+<br>
+Save your words and translations in the specified format in an Excel file. Move the file to the same folder with `flashlingo.jar`.
+Then, **use the `load` command to import the data.**
 
 **Q: What may be the reasons why my data cannot be loaded into the app?**<br>
-**A**:
-* First, check your file name by opening the located folder. The file name should be directly displayed. Also, you can right-click the file to view the file name in its detailed info.
-* If Flashlingo still cannot read the file, try inputting file name with and without the extension `.xlsx` in the `load` command. This may solve potential issues with file name loading within different systems.
-* Secondly, ensure the content in your file is correctly formatted and valid. All rules can be found [here](#load).
-* There may be issues with loading Excel if you have tried to delete data without using the delete whole row/column function. Copy the entire data (only valid rows and columns) to a new Excel file and try again.
 
-**Q: After I reviewed a flash card, I edited details of the card by the `edit` command. Will I see these changes immediately reflected in the review session?**<br>
-**A**:
-* Unfortunately, no. The card is updated synchronously in the card list and the review session of Flashlingo. However, since the user has already reviewed the same card on the day, the card will not be included in the review session again.
-* To see the edits made, User can use the `list` or `find` command to locate the specific card in the card list. The changes will also be reflected in the next review session for that flash card.
+* First, **check your file name** by opening the located folder. The file name should be directly displayed. Also, you can right-click the file to view the file name in its detailed info.
+* If Flashlingo still cannot read the file, try inputting the file name with and without the extension `.xlsx` in the `load` command. This may solve potential issues with file name loading within different systems.
+* Secondly, ensure the **content in your file is correctly formatted and valid**. All rules can be found [here](#load).
+* There may be issues with loading Excel if you have tried to delete data without using the _delete whole row/column_ function. Copy the entire data (only valid rows and columns) to a new Excel file and try again.
 
-**Q: If the displayed level of a flash card is "Word Mastered", what can I do if I want to review the card again?**<br>
-**A**:
-* Currently, there's no way for user to manually change the level of a flash card. Flashlingo is designed to automatically remove words that learners are familiar with from the review session.
-* However, if user must review the card, he/she can first use the `delete` command to delete the card and then use the `add` command to re-add the same card. The new card will be reset to level 1 and added in the review session.
+**Q: After I reviewed a flash card, I edited details of the card by the `edit` command. Will I be able to see these changes immediately reflected in the review session?**<br>
+
+* Unfortunately, **no**. The card is updated synchronously in the card list and the review session of Flashlingo. However, since you have already reviewed the same card on the day, the card will not be included in the review session again.
+* To check the card after editing, you can **use the `list` or `find` command** to locate the specific card. The changes will also be reflected in the next review session for that card.
+
+**Q: If the displayed level of a flash card is `Word Mastered`, what can I do if I want to review the card again?**<br>
+
+* Currently, there's no way for you to manually change the level of a flash card. Flashlingo is designed to automatically remove words that learners are familiar with from the review session.
+* However, if you must review the card again, you can first use the `delete` command to delete the card and then use the `add` command to re-add the same card. The new card will be reset to level 1 and added to the review session.
 
 --------------------------------------------------------------------------------------------------------------------
 
