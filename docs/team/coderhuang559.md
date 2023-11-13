@@ -38,7 +38,7 @@ Given below are my contributions to the project.
   * User Guide:
     * Added documentation for the features `remark` for contacts, `listtime` for contacts, `addmeeting` for groups and `deletetime` for groups. [\#144](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/145)
   * Developer Guide:
-    * Added implementation details of the `remark` [\#270](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/270/files), `listtime` [\#270](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/270/files), and `addtime` [\#270](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/270/files) features.
+    * Added implementation details of the `remark`, `listtime` for person and group, `addtime`, and `addmeeting` features [\#270](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/270/files).
     * Added activity and sequence diagrams for the above functions.
 
 * **Contributions beyond project team**
