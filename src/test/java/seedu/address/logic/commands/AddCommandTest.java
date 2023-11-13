@@ -8,8 +8,11 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -22,7 +25,13 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.calendar.ReadOnlyCalendar;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventPeriod;
+import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskManager;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -119,6 +128,26 @@ public class AddCommandTest {
         }
 
         @Override
+        public Path getCalendarFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setCalendarFilePath(Path addressBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Path getTaskManagerFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setTaskManagerFilePath(Path addressBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
@@ -130,6 +159,21 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setCalendar(ReadOnlyCalendar newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyCalendar getCalendar() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Event> getCurrentWeekEventList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -149,12 +193,86 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean canAddEvent(Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addEvent(Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteEventAt(LocalDateTime dateTime) throws EventNotFoundException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Event findEventAt(LocalDateTime dateTime) throws EventNotFoundException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Event> eventsInRange(EventPeriod range) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteEventsInRange(EventPeriod range) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyCalendar getComparisonCalendar() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setComparisonCalendar(ReadOnlyCalendar eventList) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Event> getEventList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Task> getTaskList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
+        public void addTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Task deleteTask(int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public TaskManager getTaskManager() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortTasksBy(String comparatorType) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void sortPersonList(Comparator<Person> personComparator) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -200,5 +318,4 @@ public class AddCommandTest {
             return new AddressBook();
         }
     }
-
 }

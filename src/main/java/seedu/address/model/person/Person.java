@@ -2,12 +2,17 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.calendar.ReadOnlyCalendar;
+import seedu.address.model.calendar.UniMateCalendar;
+import seedu.address.model.event.Event;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,8 +29,10 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final UniMateCalendar calendar = new UniMateCalendar();
 
     /**
+     * Primary constructor for a person object.
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
@@ -36,6 +43,22 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
     }
+
+    /**
+     * Alternative constructor to be used when replacing the calendar of a contact.
+     * Every field must be present and not null.
+     *
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, UniMateCalendar calendar) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.calendar.resetData(calendar);
+    }
+
 
     public Name getName() {
         return name;
@@ -51,6 +74,21 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public UniMateCalendar getCalendar() {
+        return calendar;
+    }
+
+    public ReadOnlyCalendar getReadOnlyCalendar() {
+        return calendar;
+    }
+
+    /**
+     * Returns a view of the events belonging to this person
+     */
+    public ObservableList<Event> getEventList() {
+        return calendar.getEventList();
     }
 
     /**
@@ -72,6 +110,44 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Adds an event to the calendar of this Person.
+     */
+    public void addEvent(Event toAdd) {
+        calendar.addEvent(toAdd);
+    }
+
+    /**
+     * Checks if an event can be added to the calendar of this Person.
+     */
+    public boolean canAddEvent(Event toAdd) {
+        return calendar.canAddEvent(toAdd);
+    }
+
+    /**
+     * Deletes an event at the specified time from the calendar of this person.
+     */
+    public void deleteEvent(LocalDateTime targetTime) {
+        calendar.deleteEventAt(targetTime);
+    }
+
+    /**
+     * Looks for an event at the specified time and returns it.
+     */
+    public Event findEvent(LocalDateTime targetTime) {
+        return calendar.findEventAt(targetTime).get();
+    }
+
+    /**
+     * Checks if the person is tagged with the input tag.
+     *
+     * @param tag input tag to be checked.
+     * @return true if this person is tagged with the input tag.
+     */
+    public boolean hasTag(Tag tag) {
+        return getTags().stream().anyMatch(tag::equals);
     }
 
     /**

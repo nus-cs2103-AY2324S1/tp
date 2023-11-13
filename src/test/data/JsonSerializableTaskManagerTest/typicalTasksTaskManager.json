@@ -1,0 +1,13 @@
+{
+  "_comment": "TaskManager save file which contains the same task values as in TypicalTasks#getTypicalTaskManager()",
+  "tasks" : [ {
+    "description" : "Submit Assignment",
+    "deadline" : "2023-11-15 08:30"
+  }, {
+    "description" : "Drink more water!",
+    "deadline" : "-"
+  }, {
+    "description" : "Lunch",
+    "deadline" : "2023-11-15 15:00"
+  } ]
+}

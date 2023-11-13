@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_END_DATE_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_START_DATE_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -20,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.PersonFilterBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -28,15 +32,28 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
+    public static final String VALID_NAME_BOB_LOWER = "bob Choo";
+    public static final String VALID_NAME_CANDY = "Candy C";
+    public static final String VALID_NAME_DANIEL = "Daniel Mcadoo Dunbar";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
+    public static final String VALID_ADDRESS_BOB_LOWER = "block 123, Bobby Street 3";
+    public static final String VALID_ADDRESS_CANDY = "Block 133, Candy Street 6";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-
+    public static final String VALID_DESCRIPTION = "sleep";
+    public static final String VALID_UNUSED_DESCRIPTION = "THIS IS A PLACEHOLDER";
+    public static final String VALID_START_DATE_EARLIER = "2023-01-01 08:00";
+    public static final String VALID_END_DATE_EARLIER = "2023-01-01 09:00";
+    public static final String VALID_START_DATE_LATER = "2024-01-01 08:00";
+    public static final String VALID_END_DATE_LATER = "2024-01-01 09:00";
+    public static final String EVENT_DESC_SLEEP = " " + PREFIX_EVENT_DESCRIPTION + VALID_DESCRIPTION;
+    public static final String START_DATE_DESC_EARLIER = " " + PREFIX_EVENT_START_DATE_TIME + VALID_START_DATE_EARLIER;
+    public static final String END_DATE_DESC_EARLIER = " " + PREFIX_EVENT_END_DATE_TIME + VALID_END_DATE_EARLIER;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -53,6 +70,13 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_DESCRIPTION = ""; // empty string not allowed.
+    public static final String INVALID_DATE = "2023-13-35 16:80"; // No such time and date exists
+    public static final String INVALID_START_DATE = "2023-99-01 08:00";
+    public static final String INVALID_END_DATE = "01-01-2023 08:00";
+    public static final String INVALID_EVENT = " " + PREFIX_EVENT_DESCRIPTION + INVALID_DESCRIPTION
+            + PREFIX_EVENT_START_DATE_TIME + VALID_START_DATE_EARLIER
+            + PREFIX_EVENT_END_DATE_TIME + VALID_END_DATE_EARLIER;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -60,11 +84,21 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
+    public static final FilterCommand.PersonFilter FILTER_AMY;
+
+    public static final FilterCommand.PersonFilter FILTER_BOB;
+
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        FILTER_AMY = new PersonFilterBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withTags(VALID_TAG_FRIEND).build();
+        FILTER_BOB = new PersonFilterBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }

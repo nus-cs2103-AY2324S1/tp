@@ -1,8 +1,10 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -26,6 +28,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private Optional<UniMateCalendar> calendar = Optional.empty();
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -47,6 +50,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        calendar = Optional.of(personToCopy.getCalendar());
     }
 
     /**
@@ -89,8 +93,22 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Calendar} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withCalendar() {
+        this.calendar = Optional.of(TypicalEvents.getTypicalCalendar());
+        return this;
+    }
+
+    /**
+     * Creates a new Person object using the specified attributes.
+     * If a calendar is present, it is included in the Person object;
+     * otherwise, a Person object is created without a calendar.
+     */
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return this.calendar.map(calendar -> new Person(name, phone, email, address, tags, calendar))
+                .orElseGet(() -> new Person(name, phone, email, address, tags));
     }
 
 }

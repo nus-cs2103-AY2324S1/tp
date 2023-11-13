@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
@@ -18,17 +19,23 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import javafx.collections.FXCollections;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.calendar.UniMateCalendar;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.TaskManager;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonCalendarStorage;
+import seedu.address.storage.JsonTaskManagerStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.PersonBuilder;
@@ -47,8 +54,12 @@ public class LogicManagerTest {
     public void setUp() {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonCalendarStorage calendarStorage = new JsonCalendarStorage(temporaryFolder.resolve("calendar.json"));
+        JsonTaskManagerStorage taskManagerStorage = new JsonTaskManagerStorage(
+                temporaryFolder.resolve("taskManager.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, calendarStorage, taskManagerStorage,
+                userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -62,6 +73,40 @@ public class LogicManagerTest {
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void getEventList() {
+        assertEquals(logic.getEventList(), FXCollections.observableArrayList());
+    }
+
+    @Test
+    public void getTaskList() {
+        assertEquals(logic.getTaskList(), FXCollections.observableArrayList());
+    }
+
+    @Test
+    public void getAddressBook() {
+        assertEquals(logic.getAddressBook(), new AddressBook());
+    }
+
+    @Test
+    public void getCalendar() {
+        assertEquals(logic.getCalendar(), new UniMateCalendar());
+    }
+
+    @Test
+    public void getTaskManager() {
+        assertEquals(logic.getTaskManager(), new TaskManager());
+    }
+
+    @Test
+    public void getCurrentWeekEventList() {
+        assertEquals(logic.getCurrentWeekEventList(), FXCollections.observableArrayList());
+    }
+    @Test
+    public void getAddressBookFilePath() {
+        assertNotNull(logic.getAddressBookFilePath());
     }
 
     @Test
@@ -123,7 +168,8 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getCalendar(), model.getTaskManager(),
+                new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -141,7 +187,8 @@ public class LogicManagerTest {
     }
 
     /**
-     * Tests the Logic component's handling of an {@code IOException} thrown by the Storage component.
+     * Tests the Logic component's handling of an {@code IOException} thrown by the Storage component
+     * when saving an AddressBook.
      *
      * @param e the exception to be thrown by the Storage component
      * @param expectedMessage the message expected inside exception thrown by the Logic component
@@ -158,9 +205,14 @@ public class LogicManagerTest {
             }
         };
 
+        JsonCalendarStorage calendarStorage =
+                new JsonCalendarStorage(temporaryFolder.resolve("ExceptionCalendar.json"));
+        JsonTaskManagerStorage taskManagerStorage =
+                new JsonTaskManagerStorage(temporaryFolder.resolve("taskManager.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, calendarStorage, taskManagerStorage,
+                userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 

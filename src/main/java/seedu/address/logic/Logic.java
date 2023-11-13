@@ -8,7 +8,11 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.calendar.ReadOnlyCalendar;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.ReadOnlyTaskManager;
+import seedu.address.model.task.Task;
 
 /**
  * API of the Logic component
@@ -29,6 +33,32 @@ public interface Logic {
      * @see seedu.address.model.Model#getAddressBook()
      */
     ReadOnlyAddressBook getAddressBook();
+
+    /**
+     * Returns the Calendar.
+     *
+     * @see seedu.address.model.Model#getCalendar()
+     */
+    ReadOnlyCalendar getCalendar();
+
+    /**
+     * Returns the TaskManager.
+     *
+     * @see seedu.address.model.Model#getTaskManager()
+     */
+    ReadOnlyTaskManager getTaskManager();
+
+    /** Returns an unmodifiable view of the filtered list of events */
+    ObservableList<Event> getEventList();
+
+    /** Returns an unmodifiable view of the list of tasks */
+    ObservableList<Task> getTaskList();
+
+    /** Returns an unmodifiable view of the filtered list of events for the week */
+    ObservableList<Event> getCurrentWeekEventList();
+
+    /** Returns the resulting calendar from comparing calendars */
+    ReadOnlyCalendar getComparisonCalendar();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();

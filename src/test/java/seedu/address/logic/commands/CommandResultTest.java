@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
+
 public class CommandResultTest {
     @Test
     public void equals() {
@@ -14,7 +16,7 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", false, false)));
+        assertTrue(commandResult.equals(new CommandResult("feedback", false, false, false, false)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -29,10 +31,13 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("different")));
 
         // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", true, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", true, false, false, false)));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, true)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, false, false)));
+
+        // different switchBottomList value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, false, true)));
     }
 
     @Test
@@ -46,10 +51,37 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
         // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false, false, false).hashCode());
 
         // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true, false, false).hashCode());
+
+        // different switchBottomList value -> returns different hashCode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, false, true).hashCode());
+    }
+
+    @Test
+    public void indicatorViewEvents_validViewEventsIndicator_success() {
+        CommandResult.ViewEventsIndicator viewEventsIndicator = new CommandResult.ViewEventsIndicator(1);
+        assertTrue(viewEventsIndicator.isViewEvents());
+    }
+
+    @Test
+    public void indicatorGetIndex_validViewEventsIndicator_success() {
+        CommandResult.ViewEventsIndicator viewEventsIndicator = new CommandResult.ViewEventsIndicator(1);
+        assertEquals(viewEventsIndicator.getIndex(), Index.fromOneBased(1));
+    }
+
+    @Test
+    public void isViewEvents_validViewEventsIndicator_success() {
+        CommandResult commandResult = new CommandResult("feedback", Index.fromOneBased(1));
+        assertTrue(commandResult.isViewEvents());
+    }
+
+    @Test
+    public void getIndex_validViewEventsIndicator_success() {
+        CommandResult commandResult = new CommandResult("feedback", Index.fromOneBased(1));
+        assertEquals(commandResult.getEventViewIndex(), Index.fromOneBased(1));
     }
 
     @Test
@@ -57,7 +89,8 @@ public class CommandResultTest {
         CommandResult commandResult = new CommandResult("feedback");
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
-                + ", exit=" + commandResult.isExit() + "}";
+                + ", exit=" + commandResult.isExit()
+                + ", switchBottomList=" + commandResult.isSwitchBottomList() + "}";
         assertEquals(expected, commandResult.toString());
     }
 }

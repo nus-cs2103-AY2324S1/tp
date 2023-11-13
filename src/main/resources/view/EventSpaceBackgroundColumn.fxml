@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<VBox fx:id="columnContainer" minWidth="50" HBox.hgrow="NEVER" xmlns="http://javafx.com/javafx/17.0.2-ea"
+      xmlns:fx="http://javafx.com/fxml/1">
+    <StackPane>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="salmon" height="30" width="50" stroke="rosybrown" strokeType="INSIDE"/>
+        <Label fx:id="startTimeLabel" styleClass="cell_small_label" text="\$startTime"
+               StackPane.alignment="BOTTOM_LEFT" />
+    </StackPane>
+</VBox>

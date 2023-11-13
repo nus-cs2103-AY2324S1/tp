@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" HBox.hgrow="NEVER" styleClass="pane-without-border">
+    <ScrollPane fitToHeight="true" maxWidth="550" prefWidth="400" minWidth="250" vbarPolicy="NEVER" hbarPolicy="ALWAYS"
+              VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" styleClass="pane-without-border">
+        <HBox styleClass="pane-without-border" HBox.hgrow="ALWAYS">
+            <StackPane fx:id="calendarLabelPlaceholder" minWidth="50" HBox.hgrow="NEVER" styleClass="pane-without-border"/>
+            <StackPane fx:id="eventSpaceContainer" minWidth="300" HBox.hgrow="ALWAYS" styleClass="pane-without-border">
+                <GridPane fx:id="eventSpaceBackground" HBox.hgrow="ALWAYS"/>
+                <GridPane fx:id="eventSpace" HBox.hgrow="ALWAYS"/>
+            </StackPane>
+        </HBox>
+    </ScrollPane>
+</HBox>

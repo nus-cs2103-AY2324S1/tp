@@ -4,6 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.util.Comparator;
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,7 +15,15 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.calendar.ReadOnlyCalendar;
+import seedu.address.model.calendar.UniMateCalendar;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventPeriod;
+import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.ReadOnlyTaskManager;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskManager;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -20,24 +32,31 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final UniMateCalendar calendar;
+    private final TaskManager taskManager;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private ReadOnlyCalendar comparisonCalendar;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given addressBook, calendar and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyCalendar calendar, ReadOnlyTaskManager taskManager,
+                        ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
+        this.calendar = new UniMateCalendar(calendar);
+        this.taskManager = new TaskManager(taskManager);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        comparisonCalendar = new UniMateCalendar();
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UniMateCalendar(), new TaskManager(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -75,6 +94,29 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
+    @Override
+    public Path getCalendarFilePath() {
+        return userPrefs.getCalendarFilePath();
+    }
+
+    @Override
+    public void setCalendarFilePath(Path calendarFilePath) {
+        requireNonNull(calendarFilePath);
+        userPrefs.setCalendarFilePath(calendarFilePath);
+    }
+
+    @Override
+    public Path getTaskManagerFilePath() {
+        return userPrefs.getTaskManagerFilePath();
+    }
+
+    @Override
+    public void setTaskManagerFilePath(Path taskManagerFilePath) {
+        requireNonNull(taskManagerFilePath);
+        userPrefs.setTaskManagerFilePath(taskManagerFilePath);
+    }
+
+
     //=========== AddressBook ================================================================================
 
     @Override
@@ -111,6 +153,118 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    //=========== Sorted Person List Accessors ===============================================================
+    @Override
+    public void sortPersonList(Comparator<Person> personComparator) {
+        addressBook.sortPersons(personComparator);
+    }
+
+    //=========== Calendar ===================================================================================
+
+    @Override
+    public void setCalendar(ReadOnlyCalendar calendar) {
+        this.calendar.resetData(calendar);
+    }
+
+    @Override
+    public ReadOnlyCalendar getCalendar() {
+        return calendar;
+    }
+    @Override
+    public ObservableList<Event> getEventList() {
+        return calendar.getEventList();
+    }
+
+    @Override
+    public ObservableList<Event> getCurrentWeekEventList() {
+        return calendar.getCurrentWeekEventList();
+    }
+
+    @Override
+    public boolean canAddEvent(Event event) {
+        return calendar.canAddEvent(event);
+    }
+
+    @Override
+    public void addEvent(Event event) {
+        requireNonNull(event);
+
+        calendar.addEvent(event);
+    }
+
+    @Override
+    public void deleteEventAt(LocalDateTime dateTime) throws EventNotFoundException {
+        requireNonNull(dateTime);
+
+        calendar.deleteEventAt(dateTime);
+    }
+
+    @Override
+    public Event findEventAt(LocalDateTime dateTime) throws EventNotFoundException {
+        requireNonNull(dateTime);
+
+        try {
+            return calendar.findEventAt(dateTime).orElseThrow();
+        } catch (NoSuchElementException e) {
+            throw new EventNotFoundException();
+        }
+    }
+
+    @Override
+    public List<Event> eventsInRange(EventPeriod range) {
+        requireNonNull(range);
+
+        return calendar.getEventsInRange(range);
+    }
+
+    @Override
+    public void deleteEventsInRange(EventPeriod range) {
+        requireNonNull(range);
+
+        calendar.deleteEventsInRange(range);
+    }
+
+    @Override
+    public ReadOnlyCalendar getComparisonCalendar() {
+        return comparisonCalendar;
+    }
+
+    @Override
+    public void setComparisonCalendar(ReadOnlyCalendar comparisonCalendar) {
+        requireNonNull(comparisonCalendar);
+
+        this.comparisonCalendar = comparisonCalendar;
+    }
+
+    //=========== TaskManager ================================================================================
+
+    @Override
+    public TaskManager getTaskManager() {
+        return taskManager;
+    }
+
+    @Override
+    public void addTask(Task task) {
+        requireNonNull(task);
+
+        taskManager.addTask(task);
+    }
+
+    @Override
+    public Task deleteTask(int index) {
+        return taskManager.deleteTask(index);
+    }
+
+    @Override
+    public ObservableList<Task> getTaskList() {
+        return taskManager.getTaskList();
+    }
+
+    @Override
+    public void sortTasksBy(String comparatorType) {
+        taskManager.sortTasksBy(comparatorType);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -141,8 +295,9 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
+                && calendar.equals(otherModelManager.calendar)
+                && taskManager.equals(otherModelManager.taskManager)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
-
 }

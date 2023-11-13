@@ -1,0 +1,9 @@
+{
+  "events" : [ {
+    "description" : "Valid",
+    "eventPeriod" : "2023-10-25 09:00 - 2023-10-25 10:30"
+  }, {
+    "description" : "",
+    "eventPeriod" : "2023-11-10 15:15 - 2023-11-10 16:00"
+  } ]
+}
