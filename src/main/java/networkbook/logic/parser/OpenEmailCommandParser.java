@@ -21,18 +21,13 @@ public class OpenEmailCommandParser implements Parser<OpenEmailCommand> {
 
         Index personIndex;
 
-        try {
-            personIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, OpenEmailCommand.MESSAGE_USAGE),
-                    pe
-            );
-        }
+        personIndex = ParserUtil.parseIndex(argMultimap.getPreamble(),
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, OpenEmailCommand.MESSAGE_USAGE));
 
         argMultimap.verifyNoDuplicatePrefixesFor(CliSyntax.PREFIX_INDEX);
 
-        Index emailIndex = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"));
+        Index emailIndex = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"),
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, OpenEmailCommand.MESSAGE_USAGE));
 
         return new OpenEmailCommand(personIndex, emailIndex);
     }

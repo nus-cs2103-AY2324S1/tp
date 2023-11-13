@@ -16,7 +16,7 @@ public class CreateCommand extends Command {
 
     public static final String COMMAND_WORD = "create";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new contact in the network book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new contact in the network book. \n"
             + "Parameters: "
             + "[" + CliSyntax.PREFIX_NAME + " NAME] "
             + "[" + CliSyntax.PREFIX_PHONE + " PHONE] "

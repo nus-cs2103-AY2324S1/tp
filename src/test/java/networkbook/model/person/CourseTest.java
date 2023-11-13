@@ -206,9 +206,10 @@ public class CourseTest {
         Course courseWithStart = new Course("Valid Course", "01-01-2000");
         Course courseWithBothDates = new Course("Valid Course", "01-01-2000", "02-01-2000");
 
-        // similar to equals
-        assertEquals(course.getCourse(), courseWithStart.getCourse());
-        assertEquals(course.getCourse(), courseWithBothDates.getCourse());
+        // not similar to equals - course name, and dates must be equal
+        assertNotEquals(course.getCourse(), courseWithStart.getCourse());
+        assertNotEquals(course.getCourse(), courseWithBothDates.getCourse());
+        assertEquals(courseWithStart.getCourse(), new Course("Valid Course", "01-01-2000").getCourse());
 
         assertNotEquals(course.getCourse(), new Course("Other Valid Course").getCourse());
     }

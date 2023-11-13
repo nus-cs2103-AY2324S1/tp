@@ -5,50 +5,76 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model as ModelPackage <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+Class "<<interface>>\nReadOnlyNetworkBook" as ReadOnlyNetworkBook
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
-Class AddressBook
+Class VersionedNetworkBook
 Class ModelManager
 Class UserPrefs
 
-Class UniqueList<Person>
 Class Person
-Class Address
-Class Email
+Class "UniqueList<Person>"
 Class Name
+Class "UniqueList<Phone>"
 Class Phone
+Class "Identifiable<Phone>"
+Class "UniqueList<Email>"
+Class Email
+Class "Identifiable<Email>"
+Class "UniqueList<Link>"
+Class Link
+Class "Identifiable<Link>"
+Class Graduation
+Class "UniqueList<Course>"
+Class Course
+Class "Identifiable<Course>"
+Class "UniqueList<Specialisation>"
+Class Specialisation
+Class "Identifiable<Specialisation>"
+Class Priority
+Class "UniqueList<Tag>"
 Class Tag
-
-Class I #FFFFFF
+Class "Identifiable<Tag>"
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+VersionedNetworkBook .up.|> ReadOnlyNetworkBook
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyNetworkBook
+ModelManager -left-> "1" VersionedNetworkBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniqueList<Person>
-UniqueList<Person> --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+VersionedNetworkBook -left-> "1" "UniqueList<Person>"
+"UniqueList<Person>" --> "*" Person
+VersionedNetworkBook --> "*" "Person" : filtered
+VersionedNetworkBook --> "*" "Person" : sorted
 
-Person -[hidden]up--> I
-UniqueList<Person> -[hidden]right-> I
+Person --> "1" Name
+Person --> "UniqueList<Phone>"
+Person --> "UniqueList<Email>"
+Person --> "UniqueList<Link>"
+Person --> "0..1" Graduation
+Person --> "UniqueList<Course>"
+Person --> "UniqueList<Specialisation>"
+Person --> "0..1" Priority
+Person --> "UniqueList<Tag>"
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+"UniqueList<Phone>" --> "*" Phone
+"UniqueList<Email>" --> "*" Email
+"UniqueList<Link>" --> "*" Link
+"UniqueList<Course>" --> "*" Course
+"UniqueList<Specialisation>" --> "*" Specialisation
+"UniqueList<Tag>" --> "*" Tag
 
-ModelManager --> "~* filtered" Person
+Phone ..|> "Identifiable<Phone>"
+Email ..|> "Identifiable<Email>"
+Link ..|> "Identifiable<Link>"
+Course ..|> "Identifiable<Course>"
+Specialisation ..|> "Identifiable<Specialisation>"
+Tag ..|> "Identifiable<Tag>"
 @enduml

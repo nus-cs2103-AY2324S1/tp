@@ -1,9 +1,12 @@
 package networkbook.logic.parser;
 
+import static networkbook.logic.parser.CommandParserTestUtil.assertParseFailure;
+
 import org.junit.jupiter.api.Test;
 
 import networkbook.commons.core.index.Index;
 import networkbook.logic.Messages;
+import networkbook.logic.commands.CommandTestUtil;
 import networkbook.logic.commands.delete.DeleteCourseAction;
 import networkbook.logic.commands.delete.DeleteEmailAction;
 import networkbook.logic.commands.delete.DeleteFieldCommand;
@@ -16,12 +19,15 @@ import networkbook.logic.commands.delete.DeleteSpecialisationAction;
 import networkbook.logic.commands.delete.DeleteTagAction;
 import networkbook.testutil.TypicalIndexes;
 
+
 /**
  * Test class that contains unit test cases for {@code DeleteCommandParser}.
  */
 public class DeleteCommandParserTest {
 
     private static final DeleteCommandParser parser = new DeleteCommandParser();
+    private static final String MESSAGE_INVALID_COMMAND = String.format(
+            Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE);
 
     private static final String NAME = CliSyntax.PREFIX_NAME.getPrefix();
     private static final String PHONE = CliSyntax.PREFIX_PHONE.getPrefix();
@@ -69,148 +75,174 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_invalidIndex_throwsParseException() {
-        CommandParserTestUtil.assertParseFailure(parser, "a",
+        assertParseFailure(parser, "a",
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
     }
 
     @Test
+    public void parse_invalidIndexOfContact_failure() {
+        assertParseFailure(parser,
+                CommandTestUtil.INVALID_INDEX_NEGATIVE + WHITESPACE + PRIORITY,
+                MESSAGE_INVALID_COMMAND);
+        assertParseFailure(parser,
+                CommandTestUtil.INVALID_INDEX_ZERO + WHITESPACE + GRADUATION,
+                MESSAGE_INVALID_COMMAND);
+        assertParseFailure(parser,
+                CommandTestUtil.INVALID_INDEX_OVERFLOW,
+                MESSAGE_INVALID_COMMAND);
+    }
+
+    @Test
+    public void parse_invalidIndexOfEntry_failure() {
+        assertParseFailure(parser,
+                "1" + WHITESPACE + COURSE + CommandTestUtil.INVALID_INDEX_DESC_NEGATIVE,
+                MESSAGE_INVALID_COMMAND);
+        assertParseFailure(parser,
+                "1" + WHITESPACE + SPECIALISATION + CommandTestUtil.INVALID_INDEX_DESC_ZERO,
+                MESSAGE_INVALID_COMMAND);
+        assertParseFailure(parser,
+                "1" + WHITESPACE + TAG + CommandTestUtil.INVALID_INDEX_DESC_OVERFLOW,
+                MESSAGE_INVALID_COMMAND);
+    }
+
+    @Test
     public void parse_noPersonIndex_throwsParseException() {
-        CommandParserTestUtil.assertParseFailure(parser, WHITESPACE,
+        assertParseFailure(parser, WHITESPACE,
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(NAME),
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(INDEX, ONE),
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(INDEX),
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(PRIORITY),
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_deleteName_throwsParseException() {
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, NAME),
                 DeleteCommandParser.MESSAGE_DELETE_NAME);
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, PHONE, NAME, RANDOM),
                 DeleteCommandParser.MESSAGE_DELETE_NAME);
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, NAME, INDEX, ONE),
                 DeleteCommandParser.MESSAGE_DELETE_NAME);
     }
 
     @Test
     public void parse_deleteInvalidPrefix_throwsParseException() {
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, INVALID_PREFIX),
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, INVALID_PREFIX, INDEX, ONE),
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, INVALID_PREFIX, GRADUATION),
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, INVALID_PREFIX, TAG, INDEX, ONE),
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, INDEX),
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, INDEX, ONE),
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, INDEX, ONE, INDEX, TWO),
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_deleteMultiplePrefixes_throwsParseException() {
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, GRADUATION, PRIORITY),
                 Messages.MESSAGE_EXACTLY_ONE_FIELD);
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, GRADUATION, TAG),
                 Messages.MESSAGE_EXACTLY_ONE_FIELD);
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, TAG, GRADUATION, PRIORITY),
                 Messages.MESSAGE_EXACTLY_ONE_FIELD);
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, GRADUATION, TAG, INDEX, ONE),
                 Messages.MESSAGE_EXACTLY_ONE_FIELD);
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, GRADUATION, PRIORITY, INDEX, ONE),
                 Messages.MESSAGE_EXACTLY_ONE_FIELD);
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, GRADUATION, INDEX, ONE, PRIORITY),
                 Messages.MESSAGE_EXACTLY_ONE_FIELD);
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, GRADUATION, RANDOM, PRIORITY),
                 Messages.MESSAGE_EXACTLY_ONE_FIELD);
     }
 
     @Test
     public void parse_deleteSamePrefixMultipleTimes_throwsParseException() {
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, PRIORITY, PRIORITY),
                 Messages.MESSAGE_DUPLICATE_PREFIX);
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, EMAIL, INDEX, ONE, EMAIL, INDEX, ONE),
                 Messages.MESSAGE_DUPLICATE_PREFIX);
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, LINK, GRADUATION, LINK),
                 Messages.MESSAGE_DUPLICATE_PREFIX);
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, COURSE, RANDOM, COURSE, INDEX, PRIORITY),
                 Messages.MESSAGE_DUPLICATE_PREFIX);
     }
 
     @Test
     public void parse_deleteMultiValuedFieldInvalidIndex_throwsParseException() {
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, SPECIALISATION, INDEX, ONE, INDEX, TWO),
                 Messages.MESSAGE_DUPLICATE_SINGLE_VALUED_FIELDS + CliSyntax.PREFIX_INDEX);
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, LINK, INDEX, ONE, INDEX, ONE),
                 Messages.MESSAGE_DUPLICATE_SINGLE_VALUED_FIELDS + CliSyntax.PREFIX_INDEX);
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, COURSE, INDEX, INDEX),
                 Messages.MESSAGE_DUPLICATE_SINGLE_VALUED_FIELDS + CliSyntax.PREFIX_INDEX);
     }
 
     @Test
     public void parse_deleteSingleValuedFieldUsingIndex_throwsParseException() {
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, PRIORITY, INDEX, ONE),
                 Messages.MESSAGE_INDEX_CANNOT_BE_PRESENT);
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, PRIORITY, INDEX, ONE, INDEX, TWO),
                 Messages.MESSAGE_INDEX_CANNOT_BE_PRESENT);
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, GRADUATION, INDEX),
                 Messages.MESSAGE_INDEX_CANNOT_BE_PRESENT);
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, GRADUATION, INDEX, RANDOM),
                 Messages.MESSAGE_INDEX_CANNOT_BE_PRESENT);
     }
 
     @Test
     public void parse_deleteWithRedundantValue_throwsParseException() {
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, PRIORITY, RANDOM),
                 String.format(Messages.MESSAGE_VALUE_CANNOT_BE_PRESENT, PRIORITY));
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, GRADUATION, RANDOM),
                 String.format(Messages.MESSAGE_VALUE_CANNOT_BE_PRESENT, GRADUATION));
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, TAG, RANDOM, INDEX, ONE),
                 String.format(Messages.MESSAGE_VALUE_CANNOT_BE_PRESENT, TAG));
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailure(parser,
                 generateUserInput(ONE, INDEX, ONE, LINK, RANDOM),
                 String.format(Messages.MESSAGE_VALUE_CANNOT_BE_PRESENT, LINK));
     }

@@ -52,12 +52,8 @@ public class DeleteCommandParser implements Parser<Command> {
 
         Index index;
 
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE), pe);
-        }
+        index = ParserUtil.parseIndex(argMultimap.getPreamble(),
+                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
 
         Prefix prefix = argMultimap.verifyAtMostOneIsPresent(
             CliSyntax.PREFIX_PHONE,
@@ -118,38 +114,44 @@ public class DeleteCommandParser implements Parser<Command> {
 
     private DeletePhoneAction generatePhoneAction(ArgumentMultimap argMultimap) throws ParseException {
         argMultimap.verifyPrefixHasEmptyValue(CliSyntax.PREFIX_PHONE);
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"));
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"),
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
         return new DeletePhoneAction(index);
     }
 
     private DeleteEmailAction generateEmailAction(ArgumentMultimap argMultimap) throws ParseException {
         argMultimap.verifyPrefixHasEmptyValue(CliSyntax.PREFIX_EMAIL);
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"));
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"),
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
         return new DeleteEmailAction(index);
     }
 
     private DeleteLinkAction generateLinkAction(ArgumentMultimap argMultimap) throws ParseException {
         argMultimap.verifyPrefixHasEmptyValue(CliSyntax.PREFIX_LINK);
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"));
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"),
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
         return new DeleteLinkAction(index);
     }
 
     private DeleteCourseAction generateCourseAction(ArgumentMultimap argMultimap) throws ParseException {
         argMultimap.verifyPrefixHasEmptyValue(CliSyntax.PREFIX_COURSE);
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"));
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"),
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
         return new DeleteCourseAction(index);
     }
 
     private DeleteSpecialisationAction generateSpecialisationAction(ArgumentMultimap argMultimap)
             throws ParseException {
         argMultimap.verifyPrefixHasEmptyValue(CliSyntax.PREFIX_SPECIALISATION);
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"));
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"),
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
         return new DeleteSpecialisationAction(index);
     }
 
     private DeleteTagAction generateTagAction(ArgumentMultimap argMultimap) throws ParseException {
         argMultimap.verifyPrefixHasEmptyValue(CliSyntax.PREFIX_TAG);
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"));
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_INDEX).orElse("1"),
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
         return new DeleteTagAction(index);
     }
 
