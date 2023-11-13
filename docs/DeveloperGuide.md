@@ -598,8 +598,12 @@ testers are expected to do more *exploratory* testing.
    7. Test case: `add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/1111111111111111 e/johnd@gmail.com` <br>
       Expected: No booking is added. Error message shown is `Phone numbers should only contain numbers, and it should be between 3 and 15 digits in length (inclusive)`
    8. Test case: `add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@notallowed.com` <br>
-      Expected: No booking is added. Error message shown is `Emails should be of the format local-part@domain and adhere to the following constraints: The local-part should only contain at most 50 alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
-   The domain name must end with a domain label that is`
+      Expected: No booking is added. Error message shown is
+      `Emails should be of the format local-part@domain and adhere to the following constraints:`
+      `1.` `The local-part should only contain at most 50 alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.`
+      `2.` `This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+         The domain name must end with a domain label that is supported:`
+      `-` `gmail, yahoo, outlook, hotmail, icloud`
 
 
 ### Deleting a Booking
@@ -611,8 +615,8 @@ testers are expected to do more *exploratory* testing.
       For example, `Deleted Booking(s): Room number: 1; Booking Period: 2023-11-08 19:28 to 2023-11-09 11:00; Name: John Doe; Phone: 98765432; Email: johnd@gmail.com; Remark: Requested extra Queen's sized bed; Room Type: NORMAL`
    3. Test case: `delete 0`<br>
        Expected: No booking is deleted. Error message shown is `Index should be a non-zero unsigned integer.`
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+   4. Test case: `delete x` (where x is larger than the list size)<br>
+      Expected: No booking is deleted. Error message shown is `The booking index provided is invalid`
 
 ### Editing a Booking
 
