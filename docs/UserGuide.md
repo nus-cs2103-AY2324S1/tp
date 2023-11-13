@@ -17,7 +17,7 @@ In contrast, a graphical user interface (GUI) is how you interact with the compu
 
 **Why CLI?**<br>
 
-CLI enables you to execute commands quickly and become a more efficient person!
+CLI enables you to execute commands quickly and work more efficiently!
 
 </box>
 
@@ -57,7 +57,7 @@ Note:<br>
 
 <box type="info" seamless>
 Info:<br>
-- Additional information for your better understandings.
+- Additional information for your better understanding.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -105,7 +105,7 @@ For Mac users, if you encounter pop-out message `"tutorium.jar" cannot be opened
 
 </box>
 
-1. A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br>
+1. A GUI similar to the image below should appear in a few seconds. Note that the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. i.e. typing **`help`** and pressing Enter will open the help window.<br>
@@ -121,7 +121,7 @@ For Mac users, if you encounter pop-out message `"tutorium.jar" cannot be opened
 
     * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Features](#features) section for details of each command.
 
 [↑ Back to table of contents](#table-of-contents)
 
@@ -175,6 +175,8 @@ We can break the GUI into several parts:
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* Valid subject names are: `English, Chinese, Elementary Mathematics, Advanced Mathematics, Biology, Chemistry, Physics, History, Geography and Social Studies`.
+
 * The accepted range of sec levels is from Secondary 1 to Secondary 4.
 
 * If no enrol date is provided, the date on which the command was executed will be applied to all subjects listed in the command.
@@ -198,6 +200,14 @@ Displays the URL for the User Guide.
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
+[↑ Back to table of contents](#table-of-contents)
+
+### View a list of all students : `list`
+
+Displays a list of all students.
+
+Format: `list`
 
 [↑ Back to table of contents](#table-of-contents)
 
@@ -230,15 +240,17 @@ Format: `import FILENAME.csv`
 
 **Note:**
 - The columns should be "Name", "Phone", "Email", "Address", "Gender", "Sec level", "Nearest Mrt Station", "Subject", "Enrol Date"
-- Enrol Date can be left blank
-- There must be a Enrol Date header after every Subject header
-- You can use the sample [student_data_test.csv](https://github.com/AY2324S1-CS2103T-W13-2/tp/files/13331810/student_data_test.csv) file provided to try this feature. However, noted that the date format may be different in different devices, make sure they are in the format MMM YYYY (e.g. Jul 2023) before importing the file.
+- Enrol Date can be left blank.
+- There must be a Enrol Date header after every Subject header.
+- You can use the sample [student_data_test.csv](https://github.com/AY2324S1-CS2103T-W13-2/tp/files/13331810/student_data_test.csv) file provided to try this feature. However, as the date format may be different in different devices, ensure that Enrol Dates are in the format MMM YYYY (e.g. Jul 2023) before importing the file.
 - Example:
-![.csv file for 'import student_data.csv'](images/ug_images/fileExample.png)
+![.csv file for 'import student_data_test.csv'](images/ug_images/fileExample.png)
 </box>
 
 Examples:
-* `import student_data.csv`
+* `import student_data_test.csv`
+  <br>
+  ![result for 'import student_data_test.csv'](images/ug_images/importResult.png)
 
 [↑ Back to table of contents](#table-of-contents)
 
@@ -345,18 +357,16 @@ Examples:
 
 ### Sort data : `sort`
 
-Sorts the list of students data permanently by name in ascending or descending.
+Permanently sorts the list of student data by name in ascending or descending order.
 
 Format: `sort in/SEQUENCE`
 
-* `SEQUENCE` should be `ASC` or `DESC`, non-case-sensitive.
+* Valid values for `SEQUENCE` are `ASC` and `DESC` (case-insensitive).
 
 Examples:
 * `sort in/ASC` <br>
 
 [↑ Back to table of contents](#table-of-contents)
-
-<div style="page-break-after: always;"></div>
 
 ### Clear all entries : `clear`
 
@@ -369,20 +379,20 @@ Format: `clear`
 <div style="page-break-after: always;"></div>
 
 ### Show statistical table: `table`
-Shows a table either categorized by gender, sec level or subject.
+Shows a table categorized by gender, sec level, subject or enrol date.
 
 Format: `table PREFIX`
 
-* FIELD_VALUE is not needed.
-* prefix is case-sensitive.
+* FIELD_VALUE is not needed, except for .
+* The PREFIX is case-sensitive.
 * Exactly one of `g/`, `l/`, `s/` or `d/yyyy` must be provided.
 * For `d/yyyy`, `yyyy` represents year in 4 digits.
 
 Examples:
-* `table g/` will show a table categorized by student gender.
-* `table l/` will show a table categorized by student sec level.
-* `table s/` will show a table categorized by student subject.
-* `table d/2023` will show a table categorized by months in year 2023.
+* `table g/` will show a table of students categorized by gender.
+* `table l/` will show a table of students categorized by sec level.
+* `table s/` will show a table of students categorized by subject.
+* `table d/2023` will show a table of students categorized by earliest enrol month in 2023.
 
 Below is the table generated after entering `table l/`.
     ![result for 'table l/'](images/ug_images/tableResult.png)
@@ -392,7 +402,7 @@ Below is the table generated after entering `table l/`.
 <div style="page-break-after: always;"></div>
 
 ### Show bar chart: `bar`
-Shows a bar chart either categorized by gender, sec level or subject.
+Shows a bar chart categorized by gender, sec level, subject or enrol date.
 
 Format: `bar PREFIX`
 
@@ -403,10 +413,10 @@ Format: `bar PREFIX`
 
 
 Examples:
-* `bar g/` will show a bar chart categorized by student gender.
-* `bar l/` will show a bar chart categorized by student sec level.
+* `bar g/` will show a bar chart of students categorized by gender.
+* `bar l/` will show a bar chart of students categorized by sec level.
 * `bar s/` will show a bar chart categorized by student subject.
-* `bar d/2023` will show a bar chart categorized by months in year 2023.
+* `bar d/2023` will show a bar chart of students categorized by earliest enrol month in 2023.
 
 Below is the chart generated after entering `bar s/`.
 
@@ -463,8 +473,6 @@ Format: `exit`
 
 [↑ Back to table of contents](#table-of-contents)
 
-<div style="page-break-after: always;"></div>
-
 ### Archive data files `[coming in v2.0]`
 
 _Details coming soon ..._
@@ -504,8 +512,9 @@ If your changes to the data file makes its format invalid, Tutorium will discard
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Help**   | `help`
+**List**   | `list`
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER l/SEC_LEVEL m/MRT STATION [s/SUBJECT]…​` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 s/Chemistry`
-**Import** | `import FILENAME.csv`<br> e.g., `import student_data.csv`
+**Import** | `import FILENAME.csv`<br> e.g., `import student_data_test.csv`
 **Edit**   | `edit INDEX prefix1/[field1] prefix2/[field2]`  <br> or `edit NAME prefix/[field] prefix/[field] prefix/[field]` <br> e.g., `edit John Doe n/Joe e/johndoe@example.com t/English`
 **Search** | `search [KEYWORD]`<br> e.g., `search Lee`
 **Delete** | `delete INDEX`<br> or `delete NAME` <br> e.g., `delete Joe`
@@ -536,8 +545,6 @@ Action     | Format, Examples
 [↑ Back to table of contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
 
 ## Known Issues
 

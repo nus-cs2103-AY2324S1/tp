@@ -845,6 +845,14 @@ testers are expected to do more *exploratory* testing.
   2. Re-launch the app by double-clicking the jar file.<br>
      Expected: The most recent window size and location is retained.
 
+### Listing all students
+1. Listing all students.
+  1. Prerequisites: Student list contains at least 1 student.
+  2. Test case: `list`<br>
+     Expected: A list of all students is displayed.
+  3. Test case: `list 123`<br>
+     Expected: A list of all students is displayed. Note that the extraneous parameter `123` is ignored.
+
 ### Adding a student
 
 1. Adding a student.
@@ -857,7 +865,7 @@ testers are expected to do more *exploratory* testing.
 ### Importing student data
 
 1. Importing student data.
-  1. Prerequisites: A [sample CSV file](https://github.com/AY2324S1-CS2103T-W13-2/tp/blob/master/student_data_test.csv) has been downloaded into the same folder as Tutorium.
+  1. Prerequisites: A [sample CSV file]([student_data_test.csv](https://github.com/AY2324S1-CS2103T-W13-2/tp/files/13331810/student_data_test.csv)) has been downloaded into the same folder as Tutorium.
   2. Test case: `import student_data_test.csv`<br>
      Expected: All students in the CSV file are added to the list.
 
