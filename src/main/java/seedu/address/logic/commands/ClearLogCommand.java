@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.LogBook;
 import seedu.address.model.Model;
 
@@ -21,6 +22,8 @@ public class ClearLogCommand extends UndoableCommand {
 
     public static final String MESSAGE_SUCCESS = "Logger tab has been cleared!";
 
+    public static final String MESSAGE_FAILURE = "Logger tab is already empty!";
+
     public static final String MESSAGE_UNDO_CLOG_SUCCESS = "Undoing clearing of the logging.";
 
     private LogBook logBookBeforeClear;
@@ -32,12 +35,16 @@ public class ClearLogCommand extends UndoableCommand {
      * @return A CommandResult indicating the success of the operation.
      */
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         // Store a copy of the current logBook before updating it
         logBookBeforeClear = new LogBook(model.getLogBook());
         model.addToHistory(this);
+
+        if (model.getLogBook().getPersonList().isEmpty()) {
+            throw new CommandException(MESSAGE_FAILURE);
+        }
 
         model.setLogBook(new LogBook());
         return new CommandResult(MESSAGE_SUCCESS);
