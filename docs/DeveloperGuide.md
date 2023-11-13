@@ -877,7 +877,13 @@ further analysis outside JABPro if they wish to.
 In relation to saving of data to storage, we largely followed the same format as AB3. The only strict deviation from the AB3 method of saving was using a different data structure.
 In the case of `ScoreList` and `UniqueTagList`, we used a hashmap to save the details of the score and tags for `ScoreList` or tag category and tag name for `Tags`. This was more complicated to implement as the conversion from hashmap to json and vice versa was more complicated than the conversion of a list to json and vice versa.
 
+### Redirection Implementation
 
+Adhering closely to our viewpoint of hiring managers, we realised that JABPro can only add value to their workflows if it goes above and beyond what existing low-level applications such as spreadsheets can provide. This helped us identify a key aspect of reviewing applications - the existence of a social profile linked with candidates.
+At the same time, we were bound by the limitations of what could and could not be implemented. For instance, the use of APIs or external libraries was prohibited. 
+Hence, we stumbled upon the idea of implementing a feature that simply redirects the user to the social profile, without the need for any external libraries.
+
+We believe this highlights the scope of adaptation that AB3 provided, and we could recognise. There still existed the notion of allowing users to provide the link, which could subsequently be copied to view the social profile. However, in lieu of making JABPro user-friendly, we focused on building redirection.
 
 ## **Appendix: Instructions for manual testing**
 
