@@ -856,14 +856,6 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `exit 111`
        **Expected:** Application is closed.
 
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix 3: Effort**
