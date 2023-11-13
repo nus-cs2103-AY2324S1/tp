@@ -20,7 +20,9 @@ Given below are my contributions to the project.
       * Required a deep understanding of interfaces and integration with existing codebase.
     * Pull request [#72](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/72)
 
+
 * **Code Contributed**: [RepoSense](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=alyssapng&breakdown=true)
+
 
 * **Enhancements Implemented**:
   * Gather command to be able to gather emails by tags
@@ -29,22 +31,28 @@ Given below are my contributions to the project.
     * Justification: Provide financial advisors with a more intuitive, visually appealing interface, optimizing content visibility to reduce the likelihood of overlooking crucial details.
     * Pull request [#151](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/151)
 
+
 * **Contributions to the UG**:
   * Updated Title and Introduction
   * Added Argument Summary
   * Added documentation for the features `gather`
 
+
 * **Contributions to the DG**:
   * Added target user profile, value proposition, user stories and user cases.
-  * Added implementation details for gather.
-  * Added planned enhancement.
+  * Added class diagram and sequence diagram for `gather` feature.
+  * Added implementation details for `gather` feature.
+  * Added planned enhancement for `gather` feature.
+
+
+* **Community**:
+  * PRs reviewed (with non-trivial commments):
+    [#108](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/108),
+    [#90](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/90),
+    [#133](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/133)
+
 
 * **Contributions to team-based tasks**:
-  * Release v1.2 JAR file.
-  * Added screenshots into project notes document for v1.2 demo.
+  * Release product for `v1.2`.
+  * Added screenshots into project notes document for `v1.2 demo`.
 
-* **Review/mentoring contributions**:
-* PRs reviewed (with non-trivial commments):
-[#108](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/108),
-[#90](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/90),
-[#133](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/133)
