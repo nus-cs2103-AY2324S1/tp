@@ -4,26 +4,26 @@ import seedu.address.model.WellNus;
 import seedu.address.model.student.Student;
 
 /**
- * A utility class to help with building Addressbook objects.
+ * A utility class to help with building WellNus objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withStudent("John", "Doe").build();}
+ *     {@code WellNus wn = new WellNusBuilder().withStudent("John", "Doe").build();}
  */
-public class AddressBookBuilder {
+public class WellNusBuilder {
 
     private WellNus wellNus;
 
-    public AddressBookBuilder() {
+    public WellNusBuilder() {
         wellNus = new WellNus();
     }
 
-    public AddressBookBuilder(WellNus wellNus) {
+    public WellNusBuilder(WellNus wellNus) {
         this.wellNus = wellNus;
     }
 
     /**
      * Adds a new {@code Student} to the {@code AddressBook} that we are building.
      */
-    public AddressBookBuilder withStudent(Student student) {
+    public WellNusBuilder withStudent(Student student) {
         wellNus.addStudent(student);
         return this;
     }

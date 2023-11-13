@@ -48,9 +48,9 @@ public interface Model {
     void setWellNusFilePath(Path addressBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces WellNus data with the data in {@code wellNus}.
      */
-    void setWellNusData(ReadOnlyWellNus addressBook);
+    void setWellNusData(ReadOnlyWellNus wellNus);
 
     /** Returns the AddressBook */
     ReadOnlyWellNus getWellNusData();

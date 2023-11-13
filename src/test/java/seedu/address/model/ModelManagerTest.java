@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.WellNusBuilder;
 
 public class ModelManagerTest {
 
@@ -95,7 +95,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        WellNus wellNus = new AddressBookBuilder().withStudent(ALICE).withStudent(BENNY).build();
+        WellNus wellNus = new WellNusBuilder().withStudent(ALICE).withStudent(BENNY).build();
         WellNus differentWellNus = new WellNus();
         UserPrefs userPrefs = new UserPrefs();
 

@@ -31,7 +31,7 @@ public interface Logic {
      *
      * @see seedu.address.model.Model#getWellNusData()
      */
-    ReadOnlyWellNus getAddressBook();
+    ReadOnlyWellNus getWellNus();
 
     /** Returns an unmodifiable view of the filtered list of students */
     ObservableList<Student> getFilteredStudentList();
@@ -47,7 +47,7 @@ public interface Logic {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getWellNusFilePath();
 
     /**
      * Returns the user prefs' GUI settings.
