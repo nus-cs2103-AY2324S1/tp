@@ -39,11 +39,4 @@ public class ListByDayCommand extends ListCommand {
         ListByDayCommand otherListByDayCommand = (ListByDayCommand) other;
         return predicate.equals(otherListByDayCommand.predicate);
     }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("predicate", predicate)
-                .toString();
-    }
 }
