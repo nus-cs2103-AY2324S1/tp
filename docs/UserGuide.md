@@ -27,7 +27,7 @@ Ready to revolutionize your teaching assistant game? Let's dive into the world o
 
 ## Using this Guide
 
-Whether you're a new user or an experienced one, this guide is designed to help you make the most of our TAManager. 
+Whether you're a new user or an experienced one, this guide is designed to help you make the most of our TAManager.
 Please follow the instructions below based on your familiarity with TAManager.
 
 - **New Users:** If you're just getting started, we recommend beginning with the [Quick Start](#quick-start) section. This will provide you with a step-by-step introduction to TAManager's essential features.
