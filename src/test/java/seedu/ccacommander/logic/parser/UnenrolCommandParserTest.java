@@ -32,7 +32,7 @@ public class UnenrolCommandParserTest {
         UnenrolCommand expectedUnenrolEventCommand =
                 new UnenrolCommand(VALID_INDEX_ONE, VALID_INDEX_TWO);
 
-        // No preamble
+        // Member index followed by event index
         assertParseSuccess(parser, MEMBER_INDEX_DESC_ONE + EVENT_INDEX_DESC_TWO,
                 expectedUnenrolEventCommand);
 
