@@ -1,0 +1,30 @@
+{
+  "baseUrl": "",
+  "titlePrefix": "Staff-Snap",
+  "titleSuffix": "",
+  "faviconPath": "images/ss_logo.png",
+  "style": {
+    "codeTheme": "light"
+  },
+  "ignore": [
+    "_markbind/layouts/*",
+    "_markbind/logs/*",
+    "_site/*",
+    "site.json",
+    "*.md",
+    "*.njk",
+    ".git/*",
+    "node_modules/*"
+  ],
+  "pagesExclude": ["node_modules/*"],
+  "pages": [
+    {
+      "glob": ["**/index.md", "**/*.md"]
+    }
+  ],
+  "headingIndexingLevel": 4,
+  "deploy": {
+    "message": "Site Update."
+  },
+  "timeZone": "Asia/Singapore"
+}

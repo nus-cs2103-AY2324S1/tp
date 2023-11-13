@@ -1,19 +1,27 @@
 ---
-layout: page
-title: Developer Guide
+  layout: default.md
+  title: "Developer Guide"
+  pageNav: 3
 ---
-* Table of Contents
-{:toc}
+
+# Staff-Snap Developer Guide
+
+<!-- * Table of Contents -->
+
+<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+Staff-Snap is based on the [AddressBook-Level3](https://se-education.org/addressbook-level3/) project created by
+the [SE-EDU initiative](https://se-education.org), and it incorporates the following third-party
+libraries: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://junit.org/junit5/), [OpenCSV](https://opencsv.sourceforge.net/project-info.html), [TestFX](https://testfx.github.io/TestFX/docs/javadoc/testfx-core/javadoc/org.testfx/module-summary.html).
+
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Getting Started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -21,14 +29,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
-
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+<puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -36,7 +39,11 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of
+classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java)
+and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is
+in charge of the app launch and shut down.
+
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -51,37 +58,50 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues
+the command `delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding
+  API `interface` mentioned in the previous point).
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using
+the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component
+through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the
+implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+<puml src="diagrams/ComponentManagers.puml" width="300" />
 
 The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified
+in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts
+e.g.`CommandBox`, `ResultDisplay`, `ApplicantListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`,
+inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the
+visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFX UI framework. The layout of these UI parts are defined in matching `.fxml` files that
+are in the `src/main/resources/view` folder. For example, the layout of
+the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
+is specified
+in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Applicant` object residing in the `Model`.
 
 ### Logic component
 
@@ -89,64 +109,79 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API
+call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</div>
+<box type="info" seamless>
+Note: The lifeline for <code>DeleteCommandParser</code> should end at the destroy marker (X) but due to a limitation of
+PlantUML, the lifeline reaches the end of diagram.
+</box>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+1. When `Logic` is called upon to execute a command, it is passed to an `ApplicantBookParser` object which in turn
+   creates
+   a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which
+   is executed by the `LogicManager`.
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a applicant).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+<puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+* When called upon to parse a user command, the `ApplicantBookParser` class creates an `XYZCommandParser` (`XYZ` is a
+  placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse
+  the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `ApplicantBookParser` returns back as
+  a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
+  interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
+
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
+* stores the applicant book data i.e., all `Applicant` objects (which are contained in a `UniqueApplicantList` object).
+* stores the currently 'selected' `Applicant` objects (e.g., results of a search query) as a separate _filtered_ list
+  which
+  is exposed to outsiders as an unmodifiable `ObservableList<Applicant>` that can be 'observed' e.g. the UI can be bound
+  to
+  this list so that the UI automatically updates when the data in the list change.
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
+  a `ReadOnlyUserPref` objects.
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
+  should make sense on their own without depending on other components)
 
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+* can save both applicant book data and user preference data in JSON format, and read them back into corresponding
+  objects.
+* inherits from both `ApplicantBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
+  the functionality of only one is needed).
+* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
+  that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.staffsnap.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -154,94 +189,441 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+<br>
 
-#### Proposed Implementation
+### Add applicant feature
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+#### Implementation
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+The add applicant feature allows users to add an applicant to the applicant list.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+#### Steps to trigger
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+1. The user launches the application.
+2. The user executes `add n/John Doe hp/98765432 e/jd@gmail.com p/software engineer` to add a new applicant.
+3. The `AddCommandParser#parse()` checks whether all the prefixes and the required values are provided.
+4. If the check is successful, the `AddCommand#execute()` checks if the applicant exists in the applicant list.
+5. If the applicant does not exist, the `Model#addApplicant()` adds the applicant to the applicant list.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+The following sequence diagram shows how the add command works:
 
-![UndoRedoState0](images/UndoRedoState0.png)
+<puml src="diagrams/AddSequenceDiagram.puml" alt="AddSequenceDiagram" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+The following activity diagram summarizes what happens when a user executes the `add` command:
 
-![UndoRedoState1](images/UndoRedoState1.png)
+<puml src="diagrams/AddActivityDiagram.puml" alt="AddActivityDiagram" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+#### Design considerations
 
-![UndoRedoState2](images/UndoRedoState2.png)
+##### Aspect: Format for adding applicants and interviews
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+- Alternative 1 (current choice): Separate command `add` and `addi` for adding applicants and interviews respectively.
+    - Pros: Shorter command for user and easier to handle exceptions.
+    - Cons: Harder to implement.
 
-</div>
+- Alternative 2: Same command `add` for adding applicants and interviews.
+    - Pros: More convenient for user to add an applicant with interviews.
+    - Cons: Still necessary to have a separate `addi` command for user to add a new interview to an existing applicant.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+<br>
 
-![UndoRedoState3](images/UndoRedoState3.png)
+---
+<br>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+### Edit applicant feature
 
-</div>
+#### Implementation
 
-The following sequence diagram shows how the undo operation works:
+The edit applicant feature allows users to edit the details of an applicant.
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+#### Steps to trigger
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+1. The user launches the application.
+2. The user executes `edit 1 hp/87654321 p/front-end engineer` to edit the phone number and position of the first
+   applicant.
+3. The `EditCommandParser#parse()` checks whether the index of the applicant is valid and at least one prefix with the
+   required values are provided.
+4. If the check is successful, the `EditCommand#execute()` checks if the identity of the applicant after the edit is the
+   same as the identity of another existing applicant.
+5. If the identity is not the same, the `Model#setApplicant()` updates the details of the applicant while
+   the `Model#updateFilteredApplicantList()` updates applicant list to display the updated applicant list.
 
-</div>
+#### Design considerations
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+##### Aspect: Syntax for editing applicants
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+- Alternative 1 (current choice): At least one field to edit has to be provided.
+    - Pros: More convenient for user to edit an applicant's details and shorter command. Ensures that field not meant to
+      be edited will remain unchanged.
+    - Cons: Harder to implement due to more validation and checks needed.
 
-</div>
+- Alternative 2:  All fields of the applicant has to be provided, regardless of whether it is edited.
+    - Pros: Easier to implement due to similarity to add feature.
+    - Cons: More areas for error as fields not meant to be edited might be edited due to a typo.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+<br>
 
-![UndoRedoState4](images/UndoRedoState4.png)
+---
+<br>
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+### Help feature
 
-![UndoRedoState5](images/UndoRedoState5.png)
+#### Implementation
 
-The following activity diagram summarizes what happens when a user executes a new command:
+1. When the user enters the term help. it triggers the help feature in the parser under the switch case.
+2. After it is triggered, it will display a short list of possible commands that the user can use.
+3. The user guide will also be opened in their browser
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+#### Steps to trigger
 
-#### Design considerations:
+1. User opens the app.
+2. User keys in `help`.
+3. Command list is shown and opens user guide in browser.
 
-**Aspect: How undo & redo executes:**
+#### Notes
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+1. Help can be called anytime and has no format to follow. The popup screen is disabled to avoid confusion but can be
+   enabled in the future if need be.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+<br>
 
-_{more aspects and alternatives to be added}_
+---
+<br>
 
-### \[Proposed\] Data archiving
+### Confirmation + Clear command
 
-_{Explain here how the data archiving feature will be implemented}_
+#### Implementation
 
+1. This features requires the state of the parser to be known.
+2. The parser is modified to store the previous taken in command, in this case whether the previous command was a
+   successful clear command.
+3. If the previous command is not a clear command, it looks for the keyword clear. Otherwise, it looks for the keyword
+   yes.
+4. Hence, the user will first need to call clear, before calling yes to invoke the clear mechanism, ensuring safety of
+   data.
 
+#### Steps to trigger
+
+1. User opens the app.
+2. User enters `clear` (and subsequently sees a message asking to confirm).
+3. User enters `yes` to confirm the clear.
+
+#### Notes
+
+1. If you would like to extend the code for more features that require state, please do change the case condition for
+   this feature.
+2. Currently, it follows the default commands if a word other than yes is given. But this will be improved in a future
+   update.
+3. The state of the parser, rather than the app is used to reduce the chances of accidental clears.
+
+<br>
+
+---
+<br>
+
+### Interview feature
+
+#### Purpose
+
+As a hiring management software, we need to perform CRUD operations for the interviews of applicants. This allows us to
+add new interviews, view existing interviews, edit current interviews, and delete interviews. As we aim so make our
+program intuitive and efficient, the UI design and data structure used to store these interview objects were crucial
+considerations in the implementation process.
+
+#### Implementation
+
+The `Interview` class is used to store the information of each interview. It contains the following attributes: `type`
+and `rating`. The `type` attribute represents the type of interview, while the `rating` attribute represents how well
+the applicant performed in an interview (out of a score of 10). The CRUD commands involving `Interview` includes
+the `AddInterviewCommand`, `EditInterviewCommand`, and `DeleteInterviewCommand`. These are implemented in a largely
+similar manner to the `Applicant` class. The main difference is in how an `EditInterviewDescriptor` class facilitates
+the editing of an interview and how the edit and delete commands requires 2 indices: the applicant index as well as the
+chosen interview index.
+
+The activity diagram below gives an overview of the behavior when the `DeleteInterviewCommand` is executed:
+
+<puml src="diagrams/DeleteInterviewActivityDiagram.puml" alt="DeleteInterviewActivityDiagram" />
+
+#### Design Considerations
+
+In deciding the data structure to house our Interview objects, we were torn between using a `PriorityQueue` and
+a `List`. A `PriorityQueue` would have been useful in sorting the interviews by rating, but it would have been difficult
+to implement the `EditInterviewCommand` and `DeleteInterviewCommand` as the `PriorityQueue` does not have a `get()`
+method. Also, if we wanted to extend a sorting function for interviews in the future, a `PriorityQueue` would make it
+more difficult for us to change the comparator for `Interview` objects. For the sake of extensibility of the codebase,
+we decided to use a `List` instead. This is because a `List` provides us with greater abstraction and code flexibility
+in extending various functions for the `Interview` class.
+
+<br>
+
+---
+<br>
+
+### Sort feature
+
+#### Implementation
+
+The sort feature is facilitated by `Descriptor`, an enumeration which describes the valid fields which can be used to
+sort an applicant.
+
+To enable sorting, `Applicant` implements `Comparable<Applicant>`, to allow for comparison between applicants. To allow
+for applicants to be sorted by different descriptors, `Applicant` is augmented to contain a static `descriptor` field.
+This is used in `Applicant#compareTo()`, where a switch case checking the state of the `Descriptor` field will then
+compare the specified field of both applicants.
+
+In order to enable comparison of each valid field, these fields will implement the `Comparable` interface. Currently
+valid fields for sorting are
+
+1. Name
+2. Phone
+3. Score
+4. Email
+5. Position
+6. Status
+
+Additionally, a static boolean `Applicant#isDescendingOrder` has been added to keep track of the order to sort the
+applicants.
+
+#### Steps to trigger
+
+1. User opens the app.
+2. User enters `sort d/ [valid field] [dsc/]`, where valid field is one of the fields listed above to be sorted by.
+3. The `SortCommandParser#parse()` checks that the field input is valid and if the `dsc/` flag has been entered to sort
+   in descending order.
+4. If the input is valid, `SortCommand#execute()` updates both the `descriptor` and `isDescendingOrder` fields of
+   the `Applicant` class.
+5. The GUI will update and refresh the applicant list to be sorted by the specified field.
+
+The following diagram summarises what happens when a user executes a Sort command:
+<puml src="diagrams/SortCommandActivityDiagram.puml" alt="SortCommandActivityDiagram" />
+
+#### Design considerations
+
+##### Aspect: How to compare applicants
+
+- Alternative 1 (current choice): use Comparable interface
+    - Pros: Standard method of comparison between objects in Java and implementing it will make it compatible with most
+      other sorting functions in Java. Easily extensible by adding more cases to the switch statement, to compare by
+      other fields when it becomes supported.
+    - Cons: Applicant#compareTo has to return different values depending on which descriptor has been chosen, causing
+      some bugs when working with other Java functions as the order of Objects compared to each other is not meant to
+      change during runtime.
+
+##### Aspect: Command syntax
+
+- Alternative 1: `sort d/ [valid field]`
+    - Pros: Simple and minimal text fields, with a single prefix required to enable sorting.
+    - Cons: Only able to sort in ascending order.
+- Alternative 2: `sort d/ [valid field] [asc/]/[dsc/]`
+    - Pros: Able to sort in either ascending or descending order.
+    - Cons: Requires additional input from the user, slowing down the use of the command.
+- Alternative 3 (current choice): `sort d/ [valid field] [dsc/]` where `dsc/` is optional
+    - Pros: Retains the ability to sort in either order, but also the conciseness of Alternative 1. Also does not
+      require user to type in any flag to sort in ascending order.
+    - Cons: Users who are not aware of the `dsc/` feature may not use it.
+
+<br>
+
+---
+<br>
+
+### Filter feature
+
+#### Implementation
+
+The filter feature works by updating the `Predicate` used in the `FilteredList<Applicant>` of `ModelManager`. Using the
+predicate, minimal changes to the implementation of StaffSnap is required.
+
+To create a single predicate that is able to search and filter for multiple fields, a `CustomFilterPredicate` class is
+created. It currently contains the following fields and is able to filter for applicants which match all specified
+fields.
+
+1. Name
+2. Phone
+3. Email
+4. Position
+5. Status
+6. Less than score
+7. Greater than score
+
+When `CustomFilterPredicate#test()` is called, it will check if the specified fields are a substring of the same field
+of
+the applicant, returning true if all specified fields match, and false otherwise.
+
+#### Steps to trigger
+
+1. User opens the app.
+2. User enters `filter [n/, e/, p/, hp/, s/, lts/, gts/] [term]`, where at least one or more of the prefixes is
+   specified to
+   be filtered by.
+3. The `FilterCommandParser#parse()` checks that all entered fields are valid and creates a new `CustomFilterPredicate`
+   with all the specified fields.
+4. If fields are valid, `FilterCommand#execute()` takes in the `CustomFilterPredicate` and uses it to replace the
+   current predicate in `ModelManager` via `ModelManager#updateFilteredApplicantList()`.
+5. The GUI will update and refresh the applicant list with only applicants which match all specified fields.
+
+The following diagram summarises what happens when a user executes a Filter command:
+
+<puml src="diagrams/FilterCommandActivityDiagram.puml" alt="FilterCommandActivityDiagram" />
+
+#### Design considerations
+
+##### Aspect: How to filter applicants
+
+- Alternative 1 (current choice): use a custom predicate and FilteredList, **compare using strings**
+    - Pros: Current implementation of ModelManager already uses FilteredList, making a custom predicate an easy
+      extension.
+      The `CustomFilterPredicate` can easily be extended when more applicant fields are ready to expand the utility of
+      the
+      filter command.
+    - Cons: Comparison of predicate fields to applicant fields are done using string comparison.
+- Alternative 2: use a custom predicate and FilteredList, **compare within field classes**
+    - Pros: Same as alternative 1, and definition of what is considered a match can be defined in the field class (e.g.
+      Name, Phone, etc).
+    - Cons: Will require greater complexity than alternative 1 in implementation. May be slower to integrate new classes
+      in the future.
+
+##### Aspect: Command syntax
+
+- Alternative 1: `filter n/ [Name] e/ [Email] p/ [Position] hp/ [Phone] s/ [Status] lts/ [Score] gts/ [Score]`
+    - Pros: Unambiguous and forces all fields to be entered, preventing errors.
+    - Cons: Users cannot filter by single fields. Requires more key presses to enter a filter command.
+- Alternative 2: `filter [n/, e/, p/, hp/, s/, lts/, gts/] [term]`, where only one term is allowed
+    - Pros: Quicker to key in command than alternative 1.
+    - Cons: Only allows users to filter by one field at a time, limiting utility of filter command.
+- Alternative 3 (current choice): `filter [n/, e/, p/, hp/, s/, lts/, gts/] [term]`, where at least one term is required
+  and the others are optional
+    - Pros: Provides flexibility in the filter command to filter by one or more fields, while still retaining the speed
+      of alternative 2 when few fields are required.
+    - Cons: Unfamiliar users may not know that fields can be optional anc continue to key in the full command at all
+      times.
+
+<br>
+
+---
+<br>
+
+### Find feature
+
+#### Purpose
+
+The find feature allows HR managers to find applicants by name, allowing for a faster and more efficient way of
+finding and tracking specific candidates.
+
+#### Implementation
+
+After the user enters the find command in the format `find KEYWORD [MORE_KEYWORDS]`,
+the input is passed to the `ApplicantBookParser` class which calls `FindCommandParser#parse()` which parses the keywords
+in the input and creates a list of keywords.
+
+`FindCommandParser` then creates a new instance of `NameContainsKeywordsPredicate` with this list of keywords.
+This `NameContainsKeywordsPredicate` object is then used as the parameter to instantiate a new `FindComand` object.
+`LogicManager#execute()` then calls `FindCommand#execute()` and the current applicant book is updated by calling
+`ModelManager#updateFilteredApplicantList()` which checks which applicant's name contains any of the keywords.
+
+An instance of `CommandResult` is then created which contains the message and information that will be displayed to the
+user.
+The GUI then updates to show this information to the user.
+
+<puml src="diagrams/FindCommandSequenceDiagram.puml" alt="FindCommandSequenceDiagram" />
+
+#### Notes
+
+1. The search is case-insensitive, e.g. `find JOHN` will return both john and John.
+2. The order of the keywords does not matter. e.g. `find Alice Tan` will match Tan Alice.
+3. Only the applicant name is searched.
+4. Any applicant whose name contains the sequence of characters given as the keyword will be given as a result. e.g. Ed
+   will match both Edward and Ed.
+   Applicants matching at least one keyword will be returned (i.e. OR search).
+   e.g. `find Ben Bobby` will return Ben Yang, Bobby Chin.
+
+#### Steps to trigger
+
+1. User opens the app.
+2. User keys in `find KEYWORD [MORE_KEYWORDS]`.
+3. The GUI will update to show a list of applicants with name containing any of the keywords.
+
+<puml src="diagrams/FindCommandActivityDiagram.puml" alt="FindCommandActivityDiagram" />
+
+#### Design considerations
+
+##### Aspect: How to find applicants
+
+- Alternative 1: Find applicants by name using exact match search
+  (e.g. `find Eddy` will only result in applicants whose name is Eddy)
+    - Pros: Users can find applicants by their exact name,
+      allowing for a more specific search
+    - Cons: Users would have to type in the entire name exactly in order to
+      get their desired result. This can result in higher user error and takes more time to type.
+
+- Alternative 2 (current choice): Find applicants by name using partial match search (or "fuzzy" search)
+    - Pros: More inclusive, can find matches that are related but not exactly the same as `KEYWORD`.
+      This is more user-friendly and allows for faster typing as users do not need to type the exact name out in order
+      to find
+      an applicant.
+
+    - Cons: May return a larger number of results, some of which may not be relevant (false positives),
+      potentially requiring additional filtering or sorting which can be inconvenient and time-consuming.
+
+##### Aspect: Command syntax
+
+- Alternative 1: `find n/NAME` where `n/` represents the name to be searched
+    - Pros: Unambiguous that the term to be searched for is the name.
+    - Cons: As the current find function only supports searching by name, adding the additional `n/` is unnecessary.
+
+- Alternative 2 (current choice): `find KEYWORDS [MORE_KEYWORDS]`
+    - Pros: Allows for faster typing as users do not need to input the unnecessary `n/` tag.
+    - Cons: Not immediately clear that the `find` command finds applications by name.
+      This will have to be explained in the user guide.
+
+#### Future Extension:
+
+A future extension to this find command is to allow it to find applicants by other fields such as their email or their
+handphone number.
+As handphone numbers and emails are likely to be distinct for each applicant, it is possible to
+enhance the find feature so that it can also search for applicants by these fields.
+
+<br>
+
+---
+<br>
+
+### Import feature
+
+#### Purpose
+
+The `import` feature allows users to import data from a CSV file into Staff-Snap. This allows users to populate
+Staff-Snap with data from other sources via the commonly used CSV format. By allowing users to import large amounts of
+data from other sources without manually typing it in, Staff-Snap becomes more versatile and useful to users.
+
+#### Implementation
+
+The `import` feature is implemented as a command that takes in a CSV file name as an argument. The command is parsed by
+the `ImportCommandParser` class, which then calls the `ImportCommand` class to execute the command. The `ImportCommand`
+class uses the static `parse()` method under `CsvApplicantParser` to parse the applicant data into
+a `List<CsvApplicant>` with the help of the `CsvToBeanBuilder<T>` class under `com.opencsv.bean` package. If
+the `List<CsvApplicant>` has been successfully parsed, we then call the `ParserUtil::parseApplicantFromCsv()` method to
+convert each `CsvApplicant` into `Applicant`. Lastly, we call the `ModelManager` class to import the data from
+the `List<Applicant>` into Staff-Snap.
+
+Below is the sequence diagram for the `import` feature:
+
+<puml src="diagrams/ImportSequenceDiagram.puml" alt="ImportSequenceDiagram" />
+
+#### Design Considerations
+
+Before initiating the import process, we considered it crucial to perform a thorough validation of the CSV file. This
+included checks for the file's existence, format, and integrity to ensure that the data can be successfully processed.
+
+We also implemented a robust error-handling mechanism to gracefully manage scenarios where the CSV file is malformed or
+contains errors. For example, to address the possibility of duplicate entries, we first check if the CSV contains
+duplicate entries within itself, then we also check if the CSV contains entries which are duplicates with existing
+entries in Staff-Snap. If such duplicates exists, we inform the user of the problematic entries and allow them to
+rectify the entries before importing.
+   
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Documentation, Logging, Testing, Configuration, DevOps**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -253,125 +635,839 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ## **Appendix: Requirements**
 
+<br>
+
 ### Product scope
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* Hiring Manager of a Small Medium Enterprise who has a need to manage a significant number of applicants (around 250 -
+  500 applicants)
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
 
+* Introduces organisation to applicant management, recruitment processes and streamlines hiring decisions for hiring
+  managers
+
+<br>
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | <div style="width:50px">As a …​</div> | I want to …​                                               | So that I can…​                                             |
+|----------|---------------------------------------|------------------------------------------------------------|-------------------------------------------------------------|
+| `* * *`  | user                                  | view all the available commands                            | know how to use the app                                     |
+| `* * *`  | user                                  | add a new applicant                                        | track the the progress of all applicants                    |
+| `* * *`  | user                                  | edit an applicant descriptor                               | maintain an updated database of all applicants              |
+| `* * *`  | user                                  | view the full list of applicants                           | view the overall progress and performance of all applicants |
+| `* * *`  | user                                  | delete an applicant entry                                  | only track valid applicants                                 |
+| `* * *`  | user                                  | add an interview for an applicant                          | plan screenings and keep track of an applicant's interviews |
+| `* * *`  | user                                  | edit an interview for an applicant                         | keep accurate data on an applicant's interview              |
+| `* * *`  | user                                  | delete an interview for an applicant                       | delete incorrect or unnecessary interviews                  |
+| `* * *`  | user                                  | store data locally                                         | use it on a daily basis consistently                        |
+| `* *`    | user                                  | find a specific applicant                                  | access the applicant's information quickly                  |
+| `* *`    | user                                  | sort applicants by a descriptor                            | find relevant applicants quickly                            |
+| `* *`    | user                                  | filter applicants by a descriptor                          | look at applicants of a specific category                   |
+| `* *`    | user                                  | purge all existing data                                    | remove sample data and populate real data                   |
+| `* *`    | user                                  | exit the program                                           | close the program                                           |
+| `* *`    | user                                  | import data from CSV file                                  | access all applicants' details                              |
+| `* *`    | user                                  | mark an applicant as undecided, offered or rejected        | keep track of applicants' application status                |
+| `*`      | user                                  | schedule a date for an interview                           | keep track of all interview timings                         |
+| `*`      | user                                  | view a graphical representation of each applicant's rating | get a quick idea of each applicant's ability                |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Staff-Snap` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add an applicant**
+
+Guarantees: The new applicant will be added to the list of applicants.
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User inputs the command to add an applicant.
+2. Staff-Snap adds the new applicant to the list and displays the updated list.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. User enters an invalid command.
 
-  Use case ends.
+    * 1a1. Staff-Snap shows an error message.
 
-* 3a. The given index is invalid.
+      Use case ends
 
-    * 3a1. AddressBook shows an error message.
+* 1b. User enters an applicant that already exists.
 
-      Use case resumes at step 2.
+    * 1b1. Staff-Snap shows an error message.
 
-*{More to be added}*
+      Use case ends.
+
+* 1c. User does not enter a required field.
+
+    * 1c1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1d. User enters an invalid value for a field.
+
+    * 1d1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+**Use case: UC02 - Edit applicant's information**
+
+Guarantees: The applicant's information will be updated.
+
+**MSS**
+
+1. User inputs the command to edit an applicant's information.
+2. Staff-Snap updates the applicant list with the updated applicant information.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1b. User enters an invalid index for the applicant.
+
+    * 1b1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1c. User does not enter at least one field to edit.
+
+    * 1c1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1d. User enters an invalid value for a field.
+
+    * 1d1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1e. User edits the applicant's phone number or email to be the same as another applicant's.
+
+    * 1e1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+**Use case: UC03 - Delete an applicant**
+
+Guarantees: The applicant will be removed from the list of applicants.
+
+**MSS**
+
+1. User inputs the command to delete an applicant.
+2. Staff-Snap removes the applicant from the list of applicants.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1b. User enters an invalid index for the applicant.
+
+    * 1b1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+**Use case: UC04 - List all applicants**
+
+Guarantees: All applicants will be listed.
+
+**MSS**
+
+1. User inputs the command to view the list of all applicants.
+2. Staff-Snap displays the list of all applicants.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1b. Applicant list is empty.
+
+    * 1b1. Staff-Snap shows an empty applicant list.
+
+      Use case ends.
+
+**Use case: UC05 - Change an applicant's status**
+
+Guarantees: The applicant's status will be updated.
+
+**MSS**
+
+1. User inputs the command to edit the status of an applicant.
+2. Staff-Snap updates the applicant list to display the updated status of the applicant.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1b. User enters an invalid index for the applicant.
+
+    * 1b1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1c. User enters an invalid status.
+
+    * 1c1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+**Use case: UC06 - Add an interview to an applicant**
+
+Guarantees: A new interview will be added to the applicant.
+
+**MSS**
+
+1. User inputs the command to add an interview to an applicant.
+2. Staff-Snap updates the applicant information with the new interview.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends
+
+* 1b. User enters an invalid index for the applicant.
+
+    * 1b1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1c. User does not enter a required field.
+
+    * 1c1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1d. User enters an invalid value for a field.
+
+    * 1d1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1e. User enters a duplicate interview type for the applicant that does not exceeds the maximum length after duplicate
+  handling.
+
+    * 1e1. Staff-Snap increment the last number in the interview type until it hits a unique input, or add 1 if there is
+      no number at the end of the interview type.
+
+      Use case continues at step 2.
+
+* 1f. User enters a duplicate interview type for the applicant that exceeds the maximum length after duplicate handling.
+
+    * 1f1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+**Use case: UC07 - Edit an interview of an applicant**
+
+Guarantees: The specified interview will be updated.
+
+**MSS**
+
+1. User inputs the command to edit an interview of an applicant.
+2. Staff-Snap updates the interview with the new details and updates the applicant information with the new interview.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends
+
+* 1b. User enters an invalid index for the applicant.
+
+    * 1b1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1c. User enters an invalid index for the interview.
+
+    * 1c1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1d. User does not enter a field to edit.
+
+    * 1d1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1e. User enters an invalid value for a field.
+
+    * 1e1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+**Use case: UC08 - Delete an interview from an applicant**
+
+Guarantees: The specified interview will be deleted from the applicant.
+
+**MSS**
+
+1. User inputs the command to delete an interview from an applicant.
+2. Staff-Snap removes the interview from the applicant and updates the applicant information.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends
+
+* 1b. User enters an invalid index for the applicant.
+
+    * 1b1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1c. User enters an invalid index for the interview.
+
+    * 1c1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+**Use case: UC09 - Find an applicant by name**
+
+Guarantees: The applicants whose name matches the search term will be listed.
+
+**MSS**
+
+1. User inputs the command to find an applicant by name.
+2. Staff-Snap displays the list of all applicants that match the search.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1b. No applicant found.
+
+    * 1b1. Staff-Snap shows an empty applicant list.
+
+      Use case ends.
+
+* 1c. No search term provided.
+
+    * 1c1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+**Use case: UC10 - Sort applicants**
+
+Guarantees: The list of applicants will be sorted by the descriptor.
+
+**MSS**
+
+1. User inputs the command to sort the applicants by a particular descriptor.
+2. Staff-Snap displays the list of applicants sorted by the descriptor.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1b. User enters an invalid descriptor.
+
+    * 1b1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1c. No descriptor provided.
+
+    * 1c1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+**Use case: UC11 - Filter applicants**
+
+Guarantees: Only applicants that satisfy the specified criterion will be listed.
+
+**MSS**
+
+1. User inputs the command to filter the list of applicants by a specified criterion.
+2. Staff-Snap displays the list of all applicants that satisfies the specified criterion.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1b. User enters an invalid criterion.
+
+    * 1b1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1c. No criterion provided.
+
+    * 1c1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+**Use case: UC12 - Import CSV file**
+
+Guarantees: The applicant list will be populated with data from the imported CSV file.
+
+**MSS**
+
+1. User inputs the command to import a CSV file.
+2. Staff-Snap updates the applicant list to show the applicant data from the CSV file.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1b. User enters an invalid filename.
+
+    * 1b1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1c. User uses a file with incorrect headers.
+
+    * 1c1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1d. User uses a file with duplicate applicants.
+
+    * 1d1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1e. User uses a file with applicants that are already in Staff-Snap.
+
+    * 1e1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1f. User uses a file with invalid fields.
+
+    * 1f1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+**Use case: UC13 - List all commands**
+
+Guarantees: The list of all available commands will be made accessible.
+
+**MSS**
+
+1. User inputs the command to view the list of all available commands.
+2. Staff-Snap opens the user guide in the default browser.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+**Use case: UC14 - Clear list of applicants**
+
+Guarantees: The list of applicants will be cleared.
+
+**MSS**
+
+1. User inputs the command to clear the list of applicants.
+2. Staff-Snap prompts for confirmation
+3. User confirms the action.
+4. Staff-Snap clears the list of applicants and displays an empty list.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 2a. User rejects the confirmation.
+
+    * 2a1. Staff-Snap clears confirmation message.
+
+      Use case ends.
+
+**Use case: UC15 - Exit the program**
+
+Guarantees: Staff-Snap exits.
+
+**MSS**
+
+1. User inputs the command to exit the program.
+2. Staff-Snap exits and closes.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User enters an invalid command.
+
+    * 1a1. Staff-Snap shows an error message.
+
+      Use case ends.
+
+* 1b. User closes the application window.
+
+  Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. The entire software should be able to be packaged into a single _JAR file_ for users to download.
+3. The file size of the JAR file should not exceed 100MB.
+4. A user who can type fast should be able to accomplish most tasks faster via a _command line interface (CLI)_,
+   compared to a hypothetical GUI-only version of the app.
+5. The product is for single-users. The application should not be running in a shared computer and with
+   different people using it at different times.
+6. The software should respond to user input within 5 seconds under normal load conditions.
+7. There should be no shared file storage mechanism. The data file created by one user should not be accessed by
+   another user during regular operations.
+8. The data should be stored locally and should be in a _human editable text file_.
+9. The software should work without requiring an installer.
+10. The software should not depend on a remote server so that anyone can use the app at anytime.
+11. The _GUI_ should not cause any resolution-related inconveniences to the user for
+    standard screen resolutions 1920x1080 and higher, and for screen scales 100% and 125%.
+12. All functions can be used via the GUI, even if the user experience is not optimal, for resolutions 1280x720 and
+    higher,
+    and for screen scales 150%.
+13. The software should provide error messages which clearly states the error and provides guidance on correcting the
+    error.
+14. The software should provide easily accessible help in the form of documentation for users unfamiliar with the
+    commands.
+15. The software should include automated tests to ensure correctness and reliability.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Mainstream OS**: Windows, Linux, macOS
+* **JAR file**: A package file format that bundles all the components of a Java application into a single file for
+  distribution.
+* **Command Line Interface (CLI)**: A means for users to interact with a software by inputting commands
+* **Human editable text file**: A text file that can be viewed and modified using a standard text editor by a user.
+  (e.g. a `.txt` file)
+* **Graphical User Interface (GUI)**: A type of user interface that allows users to interact with software through
+  graphical icons and visual indicators.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<box type="info" seamless>
+
+**Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
-</div>
+</box>
 
 ### Launch and shutdown
 
 1. Initial launch
+    1. Download the jar file and copy into an empty folder.
+    2. Double-click the jar file. <br> Expected: Shows the GUI with a set of sample contacts. The window size may not be
+       optimum.
 
-   1. Download the jar file and copy into an empty folder
+2. Saving window preferences
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    2. Re-launch the app by double-clicking the jar file.<br> Expected: The most recent window size and location is
+       retained.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+### Adding an applicant
 
-1. Saving window preferences
+1. Adding an applicant
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Test case: `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567`<br>
+       Expected: Applicant is added to the list. Details of the new applicant shown in the response area.
+       Applicant area shows the updated list of applicants.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+    2. Test case: `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com hp/81234567` again (Duplicate applicant)<br>
+       Expected: No applicant is added. Error details shown in the response area. Applicant list in applicant area
+       remains the same.
 
-1. _{ more test cases …​ }_
+    3. Test case: `add n/Jane Greenwood p/Project Manager e/janeg@yahoo.com`<br>
+       Expected: Similar to previous.
 
-### Deleting a person
+    4. Other incorrect add commands to
+       try: `add`, `add -1`, `add n/John Doe e/johndoe@gmail.com p/Software Engineer hp/abc`<br>
+       Expected: Similar to previous.
 
-1. Deleting a person while all persons are being shown
+### Editing an applicant
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+1. Editing an applicant while all applicants are being shown
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    2. Test case: `edit 1 n/Tom Greenwood`<br>
+       Expected: The name of the first applicant is updated to *Tom Greenwood*. Updated details of the applicant shown
+       in the response area.
+       Applicant area shows the updated list of applicants.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    3. Test case: `edit n/Pop Greenwood`<br>
+       Expected: No applicant is edited. Error details shown in the response area. Applicant list in applicant area
+       remains the same.
 
-1. _{ more test cases …​ }_
+    4. Other incorrect edit commands to try: `edit`, `edit -1 n/Jane Doe`, `edit e/email`<br>
+       Expected: Similar to previous.
 
-### Saving data
+### Deleting an applicant
 
-1. Dealing with missing/corrupted data files
+1. Deleting an applicant while all applicants are being shown
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
 
-1. _{ more test cases …​ }_
+    2. Test case: `delete 1`<br>
+       Expected: First applicant is deleted from the list. Details of the deleted applicant shown in the response area.
+       Applicant area shows the updated list of applicants.
+
+    3. Test case: `delete 0`<br>
+       Expected: No applicant is deleted. Error details shown in the response area. Applicant list in applicant area
+       remains the same.
+
+    4. Other incorrect delete commands to try: `delete`, `delete -1`, `delete a`<br>
+       Expected: Similar to previous.
+
+### Editing an applicant's status
+
+1. Editing an applicant's status while all applicants are being shown
+
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
+
+    2. Test case: `status 1 s/o`<br>
+       Expected: The status of the first applicant is updated to _OFFERED_. Updated details of the applicant shown in
+       the response area.
+       Applicant area shows the updated list of applicants.
+
+    3. Test case: `status 1 s/l`<br>
+       Expected: No applicant's status is edited. Error details shown in the response area. Applicant list in applicant
+       area remains the same.
+
+    4. Other incorrect edit status commands to try: `status`, `status -1 s/o`, `status 1 s/`<br>
+       Expected: Similar to previous.
+
+### Adding an interview to an applicant
+
+1. Adding an interview to an applicant while all applicants are being shown
+
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
+
+    2. Test case: `addi 1 t/technical r/8.6`<br>
+       Expected: A technical interview with rating 8.6 is added to the first applicant in the list. Updated details of
+       the applicant shown in the response area.
+       Applicant area shows the updated list of applicants.
+
+    3. Test case: `addi 0`<br>
+       Expected: No interview is added to any applicant. Error details shown in the response area. Applicant list in
+       applicant area remains the same.
+
+    4. Other incorrect add interview commands to
+       try: `addi`, `addi -1`, `addi r/6.0`, `addi 1 t/toolonginterviewtypeeeeeeeeeeeeeeee`<br>
+       Expected: Similar to previous.
+
+### Editing an interview of an applicant
+
+1. Editing an interview to an applicant while all applicants are being shown
+
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list. The first applicant
+       has at least one interview.
+
+    2. Test case: `editi 1 i/1 t/technical r/8.6`<br>
+       Expected: The first interview of the first applicant in the list is updated to a technical interview with rating
+       8.6. Updated details of the applicant shown in the response area.
+       Applicant area shows the updated list of applicants.
+
+    3. Test case: `editi 0`<br>
+       Expected: No interview is added to any applicant. Error details shown in the response area. Applicant list in
+       applicant area remains the same.
+
+    4. Other incorrect edit interview commands to
+       try: `editi`, `editi -1`, `editi 1 i/8 t/technical`, `editi 1 i/1 r/12.0`<br>
+       Expected: Similar to previous.
+
+### Deleting an interview from an applicant
+
+1. Deleting an interview from an applicant while all applicants are being shown
+
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list. The first applicant
+       has at least one interview.
+
+    2. Test case: `deletei 1 i/1`<br>
+       Expected: First interview is deleted from the first applicant in the list. Updated details of the applicant shown
+       in the response area.
+       Applicant area shows the updated list of applicants.
+
+    3. Test case: `deletei 0`<br>
+       Expected: No interview is deleted from any applicant. Error details shown in the response area. Applicant list in
+       applicant area remains the same.
+
+    4. Other incorrect delete interview commands to try: `deletei`, `deletei 1`, `deletei 1 i/8`<br>
+       Expected: Similar to previous.
+
+### Sorting applicants
+
+1. Sorting applicants while all applicants are being shown
+
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
+
+    2. Test case: `sort d/status`<br>
+       Expected: The applicants in the list are sorted by their status, in the order UNDECIDED, OFFERED, REJECTED.
+       Success message shown in the response area.
+       Applicant area shows the updated list of applicants in the sorted order.
+
+    3. Test case: `sort d/i`<br>
+       Expected: The list of applicants is not sorted. Error details shown in the response area. Applicant list in
+       applicant area remains the same.
+
+    4. Other incorrect sort commands to try: `sort`, `sort d/`<br>
+       Expected: Similar to previous.
+
+### Filtering applicants
+
+1. Filtering applicants while all applicants are being shown
+
+    1. Prerequisites: List all applicants using the `list` command. Multiple applicants in the list.
+
+    2. Test case: `filter gts/5.0`<br>
+       Expected: The applicants in the list are filtered by their score, and the updated list contains only applicants
+       with score of at least 5.0.
+       Success message shown in the response area. Applicant area shows the filtered list of applicants.
+
+    3. Test case: `filter name`<br>
+       Expected: The list of applicants is not filtered. Error details shown in the response area. Applicant list in
+       applicant area remains the same.
+
+    4. Other incorrect filter commands to try: `filter`, `filter n/`<br>
+       Expected: Similar to previous.
+
+### Importing from CSV
+
+1. Importing applicants from a CSV file
+
+    1. Prerequisites: Download a sample CSV file [here](demo.csv). The correctly formatted CSV file `demo.csv` should be
+       placed in the home folder of Staff-Snap (i.e. the same folder as the Staff-Snap JAR file).
+
+    2. Test case: `import f/demo.csv`<br>
+       Expected: The applicants are imported into Staff-Snap.
+       Success message shown in the response area. Applicant area shows the updated list of applicants.
+
+    3. Test case: `import f/.csv`<br>
+       Expected: No applicants are not imported. Error details shown in the response area. Applicant list in applicant
+       area remains the same.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+1. Allow users to add applicants whose names include non-alphanumeric characters such as hyphens `-` and slashes `/`.
+2. Provide an error message to the user if the selected CSV file for the `import` command does not contain the correct
+   headers as specified.
+3. Allow for filtering by email without providing a proper domain. This will be done by removing the type checking when
+   entering an email into the `filter` command.
+4. Provide an error message if `s/` in `filter` receives an invalid input, such as `p` or `2`.
+5. When using multiple screens, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The temporary remedy is to delete the `preferences.json` file created by the application before running the application again. We plan to fix this issue in the next iteration.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+### Challenges Faced
+
+Challenges were faced in evolving the AB3 codebase to support the new features. This was especially true when
+implementing the Interview features. Since we evolved the Interview components out of the original Tag components, there
+were many changes that had to be made in order to accommodate the functionalities we intended. For example, we wanted
+the ability to cumulatively add interviews to an applicant, but the original AB3 Tag system would reset the entire Tag
+list whenever it was edited.
+
+We also faced challenges in implementing the `import` feature. This was because we had to learn how to use the OpenCSV
+library and decide which functionalities to include. We also had to learn how to use the `CsvToBeanBuilder<T>` class
+under the `com.opencsv.bean` package to parse the CSV file. While the use of OpenCSV helped to simplify the parsing
+process, there were still many modification we made to enable the `import` feature. For example, we also had to create a
+separate intermediate class `CsvApplicant` to store the data parsed from the CSV file before converting it into
+an `Applicant` object.
+
+### Effort Required
+
+The team implemented proactive strategies such as establishing coding conventions, adopting branching strategies, and
+breaking down
+tasks into manageable units. Regular meetings were held to discuss the progress of the project
+and regular communication channels were maintained for team members to update, seek assistance and share insights.
+
+Regular testing and debugging sessions were conducted to identify and address any issues that arose during the
+integration process. This was crucial to maintain a bug-free, reliable and stable application.
+
+### Achievements
+
+Despite all the challenges faced, we managed to overcome them as a team, picking up valuable skills along the way. We
+are
+proud of what we have achieved and are confident that Staff-Snap will be a useful tool for Hiring Managers to manage the
+hiring and tracking of their applicants.

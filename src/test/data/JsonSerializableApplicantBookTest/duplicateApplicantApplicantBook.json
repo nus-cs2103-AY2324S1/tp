@@ -1,0 +1,17 @@
+{
+  "applicants": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "position": "Software Engineer",
+    "interviews": [ {
+      "type" : "behavioral",
+      "rating" : "7.5"
+    } ]
+  }, {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "pauline@example.com",
+    "position": "4th street"
+  } ]
+}
