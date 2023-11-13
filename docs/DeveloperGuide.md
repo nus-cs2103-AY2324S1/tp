@@ -562,7 +562,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: UC07 - Finding freeTime**
+**Use case: UC07 - Finding free time**
 
 **MSS**
 1. User requests to find free time
