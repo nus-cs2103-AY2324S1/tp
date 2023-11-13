@@ -1,0 +1,30 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Ui UI_COLOR_T1
+participant ":CommandBox" as CommandBox UI_COLOR
+participant ":CommandExecutor" as CommandExecutor UI_COLOR
+participant ":CommandBoxHistory" as CommandBoxHistory UI_COLOR
+end box
+
+create CommandBox
+[-> CommandBox : handleCommandEntered()
+
+CommandBox -> CommandExecutor : execute(commandText)
+activate CommandExecutor
+
+CommandExecutor --> CommandBox
+deactivate CommandExecutor
+
+CommandBox -> CommandBoxHistory : add(commandText)
+activate CommandBoxHistory
+CommandBoxHistory --> CommandBox
+deactivate CommandBoxHistory
+
+CommandBox -> CommandBoxHistory : resetPointer()
+activate CommandBoxHistory
+CommandBoxHistory --> CommandBox
+deactivate CommandBoxHistory
+
+@enduml

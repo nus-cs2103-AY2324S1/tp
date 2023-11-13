@@ -70,6 +70,8 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Contact` object residing in the `Model`.
 
+The `CommandBox` part keeps a reference to a `CommandBoxHistory` object, which stores the history of entered commands, allowing for the functionality of navigating to previous commands using the up/down arrow keys within the `CommandBox`.
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2324S1-CS2103-W14-3/tp/tree/master/src/main/java/swe/context/logic/Logic.java)
@@ -147,7 +149,7 @@ The following activity diagram summarises what happens when a user executes a ne
 
 ### Filter feature
 
-The following sequence diagram shows how the add command works:
+The following sequence diagram shows how the filter command works:
 
 ![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
 
@@ -173,6 +175,25 @@ which replaces the old contact with the edited contact in the `UniqueContactList
 The following activity diagram summarises what happens when a user executes an edit command.
 
 ![EditActivityDiagram](images/EditActivityDiagram.png)
+
+
+### Navigating to previous commands
+
+The feature of navigating between command history using the up/down arrow keys, is facilitated by `CommandBoxHistory`. `CommandBox` keeps a reference to a `CommandBoxHistory` object which stores the history of entered commands. 
+
+`CommandBoxHistory` stores a list of commands, which behaves externally as if its last element is always the empty string. This is so that the user can enter a new command when at the last position in the command history.  
+
+The following sequence diagram summarises what happens when the user presses the up arrow key to navigate to the previous command in history. 
+
+![CommandBoxHistorySequenceDiagram](images/CommandBoxHistorySequenceDiagram.png)
+
+The behaviour is very similar when the user presses the down arrow key to navigate to the next command in history, so we omit the corresponding sequence diagram.
+
+The following sequence diagram summarises what happens when the user successfully executes a new command, and this new command is stored in the command history. 
+
+![CommandBoxHistoryNewSequenceDiagram](images/CommandBoxHistoryNewSequenceDiagram.png)
+
+The command is only stored in history if the execution of the command (by `CommandExecutor`) is successful. The position in history is also reset to the last position (empty string) using `CommandBoxHistory#resetPointer`. 
 
 ---
 

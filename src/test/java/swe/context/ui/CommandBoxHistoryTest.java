@@ -15,18 +15,10 @@ import org.junit.jupiter.api.Test;
 public class CommandBoxHistoryTest {
     private static final String FIRST_COMMAND = "list";
     private static final String SECOND_COMMAND = "clear";
-    private List<String> commandList;
     private CommandBoxHistory commandBoxHistory;
 
-    @BeforeEach
-    public void setUp() {
-        commandList = new ArrayList<>();
-        commandList.add(FIRST_COMMAND);
-        commandList.add(SECOND_COMMAND);
-    }
-
     @Test
-    public void constructor_defensiveCopy_backingListUnmodified() {
+    public void constructor_defensiveCopy() {
         List<String> list = new ArrayList<>();
         commandBoxHistory = new CommandBoxHistory(list);
         list.add(FIRST_COMMAND);
@@ -74,6 +66,10 @@ public class CommandBoxHistoryTest {
 
     @Test
     public void multipleCommandsList() {
+        List<String> commandList = new ArrayList<>();
+        commandList.add(FIRST_COMMAND);
+        commandList.add(SECOND_COMMAND);
+
         commandBoxHistory = new CommandBoxHistory(commandList);
         String thirdElement = "add";
         // simulate adding new command
@@ -95,6 +91,10 @@ public class CommandBoxHistoryTest {
 
     @Test
     public void equals() {
+        List<String> commandList = new ArrayList<>();
+        commandList.add(FIRST_COMMAND);
+        commandList.add(SECOND_COMMAND);
+
         CommandBoxHistory firstHistory = new CommandBoxHistory(commandList);
 
         assertTrue(firstHistory.equals(firstHistory));
