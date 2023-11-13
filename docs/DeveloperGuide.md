@@ -206,18 +206,18 @@ The `editpatient` command facilitates the modification of patient information by
 
 **Alternative 1 (Current Choice)**: Implement an Edit-by-Cloning Strategy
 
-- Pros :
+- _Pros_:
   - **Scalability:** By cloning the `Person` object before editing, the system is better equipped to handle future enhancements that may require complex transactional operations.
   - **Data Integrity:** This method ensures that the original `Person` object remains unaltered during the edit process, which reduces the risk of data corruption in the event of an operation failure.
-- Cons :
+- _Cons_:
   - Adds complexity and has potential performance issues.
 
 **Alternative 2**: Modify the `Person` object directly
 
-- Pros:
+- _Pros_:
   - **Simplicity:** This straightforward approach requires less code, making it easier to implement and understand.
   - **Efficiency:** Operating directly on the `Person` object without cloning can be more performant, especially when dealing with simple edits that do not span multiple data fields.
-- Cons:
+- _Cons_:
   - **Limited Flexibility:** Direct modification constrains the ability to extend the system with complex transactional features or undo/redo capabilities without significant refactoring.
   - **Data Risk:** Without the safeguard of working on a cloned instance, there's a higher risk of inadvertently corrupting data during edit operations.
 
@@ -577,12 +577,15 @@ The `viewappointment` command opens/focuses the `AppointmentsWindow`.
 
 ### Design Considerations
 
-- **Alternative 1 (Current Choice)**: `Model` holds a `UniqueAppointmentList` consisting of all `Appointment` objects, each `Person` also has a `UniqueAppointmentList` consisting of all `Appointment` objects assigned to the `Person`. Each `Appointment` object has the corresponding `Person` `NRIC` as a field.
-  - _Pros_: Operations like searching and filtering for all appointments are easier when a centralised list is available.
-  - _Cons_: Keeping the central `UniqueAppointmentList` in `Model` and individual lists in each `Person` synchronized can be challenging and might lead to data inconsistencies if not managed properly. Any change in an `Appointment` requires updates in two places, adding to the complexity and processing time.
-- **Alternative 2**: Each `Person` holds their own `UniqueAppointmentList` consisting of all `Appointment` objects assigned to the person.
-  - _Pros_: This approach simplifies the data model by avoiding the need for a centralised appointment list.
-  - _Cons_: Operations that require knowledge of all appointments, like finding available slots or generating reports, become more complex, as they need to aggregate data from each Person.
+**Alternative 1 (Current Choice)**: Each `Person` consists of a `UniqueAppointmentList` consisting of all `Appointment` objects assigned to the `Person`. Each `Appointment` object has the corresponding `Person` `NRIC` as a field.
+
+- _Pros_: Operations like searching and filtering for all appointments are easier when a centralised list is available.
+- _Cons_: Keeping the central `UniqueAppointmentList` in `Model` and individual lists in each `Person` synchronized can be challenging and might lead to data inconsistencies if not managed properly. Any change in an `Appointment` requires updates in two places, adding to the complexity and processing time.
+
+**Alternative 2**: Each `Appointment` consists of a `UniqueAppointmentList` consisting of all `Person` objects assigned to the `Appointment`. Each `Person` object has the corresponding `Appointment` id as a field.
+
+- _Pros_: This approach simplifies the data model by avoiding the need for a centralised appointment list.
+- _Cons_: Operations that require knowledge of all appointments, like finding available slots or generating reports, become more complex, as they need to aggregate data from each Person.
 
 ## User Stories
 
