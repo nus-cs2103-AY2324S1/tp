@@ -366,7 +366,9 @@ His email and phone number is **johndoe@gmail.com** and **12345678** respectivel
 
 Screenshots:
 
-![AddPatient Screenshots](images/screenshots/addPatient.png)
+<img src="images/screenshots/addPatient.png" width="500" alt="AddPatient Screenshots">
+<img src="images/screenshots/addPatient%20-%20after.png" width="500" alt="AddPatient Screenshots">
+
 ![AddPatient Screenshots](images/screenshots/addPatient%20-%20after.png)
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
@@ -392,8 +394,8 @@ Example:
 
 Screenshots:
 
-![AddRecord Screenshots](images/screenshots/addRecord.png)
-![AddRecord Screenshots](images/screenshots/addRecord%20-%20after.png)
+<img src="images/screenshots/addRecord.png" height="500">
+<img src="images/screenshots/addRecord%20-%20after.png" height="500">
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
@@ -413,8 +415,8 @@ Example:
 
 Screenshots:
 
-![AddAppointment Screenshots](images/screenshots/addAppointment.png)
-![AddAppointment Screenshots](images/screenshots/viewAppointment.png)
+<img src="images/screenshots/addAppointment.png" width="500">
+<img src="images/screenshots/viewAppointment.png" width="500">
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
@@ -460,8 +462,8 @@ Examples:
 
 Screenshots:
 
-![View Screenshots](images/screenshots/view.png)
-![View Screenshots](images/screenshots/view%20-%20after.png)
+<img src="images/screenshots/view.png" width="500">
+<img src="images/screenshots/view%20-%20after.png" width="500">
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
@@ -520,8 +522,8 @@ Examples:
 
 Screenshots:
 
-![EditPatient Screenshots](images/screenshots/editPatient.png)
-![EditPatient Screenshots](images/screenshots/editPatient%20-%20after.png)
+<img src="images/screenshots/editPatient.png" width="500">
+<img src="images/screenshots/editPatient%20-%20after.png" width="500">
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
@@ -599,8 +601,8 @@ Examples:
 
 Screenshots:
 
-![Search Screenshots](images/screenshots/search.png)
-![Search Screenshots](images/screenshots/search%20-%20after.png)
+<img src="images/screenshots/search.png" width="500">
+<img src="images/screenshots/search%20-%20after.png" width="500">
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
@@ -650,8 +652,8 @@ Example:
 
 Screenshots:
 
-![Delete Screenshots](images/screenshots/delete.jpg)
-![Delete Screenshots](images/screenshots/delete%20-%20after.jpg)
+<img src="images/screenshots/delete.jpg" width="500">
+<img src="images/screenshots/delete%20-%20after.jpg" width="500">
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
@@ -715,8 +717,8 @@ Example:
 
 Screenshots:
 
-![Pin Screenshots](images/screenshots/pin.png)
-![Pin Screenshots](images/screenshots/pin%20-%20after.png)
+<img src="images/screenshots/pin.png" width="500">
+<img src="images/screenshots/pin%20-%20after.png" width="500">
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
@@ -759,9 +761,9 @@ Attach local files to a patient's medical record by clicking on the **Attach** b
 
 Screenshots:
 
-![Attaching File Screenshots](images/screenshots/attachFile%20-%20buttonPress.png)
-![Attaching File Screenshots](images/screenshots/attachFile%20-%20selectFile.png)
-![Attaching File Screenshots](images/screenshots/attachFile%20-%20openFile.png)
+<img src="images/screenshots/attachFile%20-%20buttonPress.png" height="400">
+<img src="images/screenshots/attachFile%20-%20selectFile.png" width="400">
+<img src="images/screenshots/attachFile%20-%20openFile.png" height="400">
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
