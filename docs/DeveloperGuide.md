@@ -94,25 +94,21 @@ The `UI` component,
 
 <!-- @@author -->
 
+<!-- @@author Eola-Z -->
+
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T08-2/tp/blob/master/src/main/java/networkbook/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
-
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</div>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `NetworkBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+1. When `Logic` is called upon to execute a command, it is passed to a `NetworkBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeletePersonCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -153,7 +149,12 @@ The sequence diagram below illustrates the interactions within the
 
 <img src="images/FilterCommandParser.png" width="1200"/>
 
+<!-- @@author -->
+
+<!-- @@author nknguyenhc -->
+
 ### Model component
+
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T08-2/tp/blob/master/src/main/java/networkbook/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="1200" />
@@ -194,6 +195,10 @@ The `UniqueList<T>` class,
 * `UniqueList<T>` supports supplying the object at the specified index to a consumer through the method `consumeItem(int index, ThrowingIoExceptionConsumer<T> consumer)`. The method takes the item at `index` and passes it into the `consumer`.
 * `UniqueList<T>` supports supplying the object at the specified index to a consumer, at the same time applying a function on the same object to produce a value through the method `consumerAndComputeItem(int index, ThrowingIoExceptionConsumer<T> consumer, Function<T, U> function)`. The method works the same as above, and does an extra step of applying `function` on the object and return the computed value of type `U`.
 
+<!-- @@author -->
+
+<!-- @@author Singa-Pirate -->
+
 
 ### Storage component
 
@@ -206,9 +211,11 @@ The `Storage` component,
 * inherits from both `NetworkBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+<!-- @@author -->
+
 ### Common classes
 
-Classes used by multiple components are in the `seedu.networkbook.commons` package.
+Classes used by multiple components are in the `networkbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -225,13 +232,14 @@ into an executable command.
 
 ![create_contact](images/create/CreateDiagram.png)
 
-`CreateCommandParser` first obtains the values corresponding to the flags
-`/name`, `/phone`, `/email`, `/link`, `/grad`, `/course`, `/spec`, `/priority`, `/tag` and `/index`.
+`CreateCommandParser` first obtains the values corresponding to the prefixes
+`/name`, `/phone`, `/email`, `/link`, `/grad`, `/course`, `/spec`, `/priority` and `/tag`.
 `CreateCommandParser` ensures that:
-* There is no preamble text between the `create` keyword and the flags.
-* One and only one of the flag`/name` is present.
-* At most one of the flags `/grad` or `/priority` is present.
-* All values corresponding to the flags `/name`, `/phone`, `/email`, `/link`, `/grad`, `/course`, `/spec`, `/priority`, `/tag` and `/index` are valid.
+
+* There is no preamble text between the `create` keyword and the prefixes.
+* One and only one of the prefix `/name` is present.
+* Each of `/grad` and `/priority` prefixes appears at most once.
+* All values corresponding to the prefixes `/name`, `/phone`, `/email`, `/link`, `/grad`, `/course`, `/spec`, `/priority` and `/tag` are valid.
 
 If any of the above constraints are violated, `CreateCommandParser` throws a `ParseException`.
 Otherwise, it creates a new instance of `CreateCommand` that corresponds to the user input.
@@ -244,6 +252,10 @@ If no such person exists, `CreateCommand` then calls on `model::addPerson` to ad
 We have considered the following alternative implementations:
 * Implement `CreateCommandParser` to parse the arguments using regular expressions.
   This is not optimal for our use case as having a regex expression to parse the field values would be more complicated to scale and debug.
+
+<!-- @@author -->
+
+<!-- @@author Singa-Pirate -->
 
 ### Add details
 
@@ -276,6 +288,10 @@ We have considered the following alternative implementation:
 
   This implementation was not chosen because it creates unnecessary coupling between add and edit commands. Our final implementation of `EditPersonDescriptor` contains optional indices to specify the entry of a multi-valued field to edit, which is much different from `AddPersonDescriptor` and thus they are implemented separately.
 
+<!-- @@author -->
+
+<!-- @@author nknguyenhc -->
+
 ### Edit details
 
 The implementation of the edit command follows the convention of a normal command,
@@ -284,12 +300,13 @@ into an executable command.
 
 <img src="images/edit/EditDiagram.png" width="1200">
 
-`EditCommandParser` first obtains the values corresponding to the flags 
+`EditCommandParser` first obtains the values corresponding to the prefixes 
 `/name`, `/phone`, `/email`, `/link`, `/grad`, `/course`, `/spec`, `/priority`, `/tag` and `/index`.
 `EditCommandParser` ensures that:
+
 * One and only one of `/name`, `/phone`, `/email`, `/link`, `/grad`, `/course`, `/spec`, `/priority`, `/tag` is present.
 * If `/name`, `/priority` or `/grad` is present, then `/index` is not present.
-* If `/phone`, `/email`, `/link`, `/course`, `/spec` or `/tag` is present, then one and only one tag `/index` is present.
+* If `/phone`, `/email`, `/link`, `/course`, `/spec` or `/tag` is present, then at most one prefix `/index` is present.
 
 If any of the above constraints are violated, `EditCommandParser` throws a `ParseException`. 
 Otherwise, it creates a new instance of `EditCommand` that corresponds to the user input.
@@ -337,12 +354,16 @@ The implementation of the filter command follows the convention of a normal comm
 
 ![filter diagram](images/filter/FilterDiagram.png)
 
-`FilterCommandParser` first obtains the values corresponding to the flags `/by` and `/with`, and ensures that each flag is indicated once and only once.
-If the value corresponding to `/by` is `course`, the value of the tag `/taken` is obtained from the value of the tag `/with`.
+`FilterCommandParser` first obtains the values corresponding to the prefixes `/by` and `/with`, and ensures that each prefix is indicated once and only once.
+If the value corresponding to `/by` is `course`, the value of the tag `/taken` is obtained from the value of the prefix `/with`.
 
 A new filter command is then created with the `Predicate<Person>` that corresponds to the values of `/by` and `/with`, and `/taken` if any.
 
 Upon execution, `FilterCommand` passes the instance of `Predicate<Person>` to the model through the method `model::updateDisplayedPersonList`. The model then uses the predicate internally to update the displayed list of contacts.
+
+<!-- @@author -->
+
+<!-- @@author Singa-Pirate -->
 
 ### Delete contact
 
@@ -374,15 +395,20 @@ We have considered the following alternative implementation:
 
   The intention of this alternative is to differentiate the two commands better, so that users would not be confused about their usages. After discussion, it has been noticed that the first suggestion (`delete` and `remove`) does not provide more clarity, and the second suggestion creates unnecessary trouble for advanced users. The current way to differentiate these commands (by the presence or absence of field prefix) is sufficiently intuitive for new users, and can be easily remembered and applied by advanced users.
 
+<!-- @@author -->
+
+<!-- @@author nknguyenhc -->
+
 ### Open link/email
 
 The implementation of the opening link/email command follows the convention of normal command, where `OpenEmailCommandParser`/`OpenLinkCommandParser` is responsible for parsing the user input string into an executable command. Below illustrates the process for open link command. The process of opening email is similar, where the reader can simply replace `link` with `email` to get the process for opening email.
 
 ![open link diagram](images/open/OpenDiagram.png)
 
-`OpenLinkCommandParser` first obtains the values corresponding to the preamble and the flag `/index`, and return an object of class `OpenLinkCommand`.
-* If there are multiple `/index` tags, `OpenLinkCommandParser` throws a `ParseException`.
-* If there is no `/index` tag, the link index takes the default value of `1`.
+`OpenLinkCommandParser` first obtains the values corresponding to the preamble and the prefix `/index`, and return an object of class `OpenLinkCommand`.
+
+* If there are multiple `/index` prefixes, `OpenLinkCommandParser` throws a `ParseException`.
+* If there is no `/index` prefix, the link index takes the default value of `1`.
 
 `OpenLinkCommand` then executes on the `Model` to open the link at `personIndex` (index of contact) and `linkIndex` (index of contact). The `Model` calls on the `NetworkBook`, which then calls on the `Person` at the correct index to open the link at `linkIndex`.
 
@@ -391,19 +417,21 @@ The `Person` opens the link by first detects which OS the application is running
 * On Mac OS, the `Person` executes the `open` command in the terminal through the [`Runtime`](https://docs.oracle.com/javase%2F7%2Fdocs%2Fapi%2F%2F/java/lang/Runtime.html) class, which is a built-in class in java language. The `open` command in the terminal opens the computer's default browser if the `URI` supplied is correctly formatted to be a web link.
 * On Ubuntu, the `Person` executes the `xdg-open` command in the terminal through the [`Runtime`](https://docs.oracle.com/javase%2F7%2Fdocs%2Fapi%2F%2F/java/lang/Runtime.html) class.
 
+<!-- @@author -->
+
 <!-- @@author awhb -->
 ### Undo/redo
 
 The undo/redo mechanism is facilitated by `VersionedNetworkBook`. It extends `NetworkBook` with an undo/redo history of its state (encompassing list of all contacts and displayed list of contacts), stored internally as an `networkBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedNetworkBook#commit()` — Saves the current NetworkBook state in its history.
-* `VersionedNetworkBook#undo()` — Restores the previous NetworkBook state from its history.
-* `VersionedNetworkBook#redo()` — Restores a previously undone NetworkBook state from its history.
+* `VersionedNetworkBook::commit` — Saves the current NetworkBook state in its history.
+* `VersionedNetworkBook::undo` — Restores the previous NetworkBook state from its history.
+* `VersionedNetworkBook::redo` — Restores a previously undone NetworkBook state from its history.
 
 These operations are called in functions of the `Model` interface:
-* `VersionedNetworkBook#undo()` is called in `Model#undoNetworkBook()`.
-* `VersionedNetworkBook#redo()` is called in `Model#redoNetworkBook()`.
-* `VersionedNetworkBook#commit()` is called in `Model#setPerson()`, `Model#addPerson()`, `Model#deletePerson()` and `Model#updateDisplayedPersonList()`.
+* `VersionedNetworkBook::undo` is called in `Model::undoNetworkBook`.
+* `VersionedNetworkBook::redo` is called in `Model::redoNetworkBook`.
+* `VersionedNetworkBook::commit` is called in `Model::setPerson`, `Model::addPerson`, `Model::deletePerson` and `Model::updateDisplayedPersonList`.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
@@ -411,24 +439,26 @@ Step 1. The user launches the application for the first time. The `VersionedNetw
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person displayed in NetworkBook. The `delete` command calls `Model#deletePerson()` which in turn calls `VersionedNetworkBook#commit()`, causing the modified state of the NetworkBook after the `delete 5` command executes to be saved in the `networkBookStateList`, and the `currentStatePointer` is shifted to the newly inserted NetworkBook state.
+Step 2. The user executes `delete 5` command to delete the 5th person displayed in NetworkBook. The `delete` command calls `Model::deletePerson` which in turn calls `VersionedNetworkBook::commit`, causing the modified state of the NetworkBook after the `delete 5` command executes to be saved in the `networkBookStateList`, and the `currentStatePointer` is shifted to the newly inserted NetworkBook state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `create /name David …​` to add a new person. The `create` command also calls `Model#addPerson()` which also in turn calls `VersionedNetworkBook#commit()`, causing another modified NetworkBook state to be saved into the `networkBookStateList`.
+Step 3. The user executes `create /name David …​` to add a new person. The `create` command also calls `Model::addPerson` which also in turn calls `VersionedNetworkBook::commit`, causing another modified NetworkBook state to be saved into the `networkBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `VersionedNetworkBook#commit`, so the NetworkBook state will not be saved into the `networkBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `VersionedNetworkBook::commit`, so the NetworkBook state will not be saved into the `networkBookStateList`.
+
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoNetworkBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous NetworkBook state, and restores the NetworkBook to that state.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model::undoNetworkBook`, which will shift the `currentStatePointer` once to the left, pointing it to the previous NetworkBook state, and restores the NetworkBook to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial state of NetworkBook when the user began the current session, then there are no previous NetworkBook states to restore. The `undo` command uses `Model#canUndoNetworkBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial state of NetworkBook when the user began the current session, then there are no previous NetworkBook states to restore. The `undo` command uses `Model::canUndoNetworkBook` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
+
 
 </div>
 
@@ -440,17 +470,18 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoNetworkBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the NetworkBook to that state.
+The `redo` command does the opposite — it calls `Model::redoNetworkBook`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the NetworkBook to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `networkBookStateList.size() - 1`, pointing to the latest NetworkBook state, then there are no undone NetworkBook states to restore. The `redo` command uses `Model#canRedoNetworkBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `networkBookStateList.size() - 1`, pointing to the latest NetworkBook state, then there are no undone NetworkBook states to restore. The `redo` command uses `Model::canRedoNetworkBook` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+
 
 </div>
 
-Step 5. The user then decides to execute the command `open 1 /index 1`. Commands that do not modify NetworkBook's list of all contacts or displayed contacts, such as `open 1 /index 1`, will usually not call `Model#undoNetworkBook()`, `Model#redoNetworkBook()`, or any `Model` commands that call `VersionedNetworkBook#commit`. Thus, the `networkBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `open 1 /index 1`. Commands that do not modify NetworkBook's list of all contacts or displayed contacts, such as `open 1 /index 1`, will usually not call `Model::undoNetworkBook`, `Model::redoNetworkBook`, or any `Model` commands that call `VersionedNetworkBook::commit`. Thus, the `networkBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#setNetworkBook()` which in turn calls `VersionedNetworkBook#commit()`. Since the `currentStatePointer` is not pointing at the end of the `networkBookStateList`, all NetworkBook states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model::setNetworkBook` which in turn calls `VersionedNetworkBook::commit`. Since the `currentStatePointer` is not pointing at the end of the `networkBookStateList`, all NetworkBook states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -471,9 +502,7 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: Additional implementation of each individual command requires more time and effort spent on achieving undo/redo behaviour for said command.
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
+<!-- @@author -->
 
 <!-- @@author xenosf -->
 
@@ -525,7 +554,6 @@ The sort command parser constructs a new `PersonSortComparator`, which uses the 
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SortCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
-
 **Step 4.** The sort command is executed. It calls `updateDisplayedPersonList()` of the model, updating the predicate of the `SortedList`.
 This newly sorted list is then rendered in the main UI upon updating of the model.
 
@@ -613,7 +641,7 @@ Examples:
 Upon execution, `FindCommand` passes the instance of `NameContainsKeyTermsPredicate` to the model through the method `model::updateDisplayedPersonList`. The model then uses the predicate internally to update the displayed list of contacts. 
 
 We have considered the following alternative implementations:
-* Do not implement a separate command to find contact by name i.e. use the `filter` command where the `name` field is passed to the `/by` flag instead as the way to find contacts by their name.
+* Do not implement a separate command to find contact by name i.e. use the `filter` command where the `name` field is passed to the `/by` prefix instead as the way to find contacts by their name.
   * This is not optimal for our use case as the `find` command is a command we expect users to use often to search for contacts via their name. Hence simplifying the command call usage would make the experience more efficient for users. 
 
 <!-- @@author -->
@@ -648,9 +676,9 @@ We have considered the following alternative implementations:
 
 **Value proposition**: As computing students and professionals network with alumni to expand their career prospects, our app keeps a list of contacts of people that each user networks with.
 
-* Sort users by priority, courses taken/taking, specialization(s) taken/intending to take, graduation year
 * Offline, with a static online page that contains user manual and download link
-* Search by any details, i.e. phone number, email, specialisations, courses taken, graduation year.
+* Sort contacts by name, priority, graduation year
+* Filter contacts by details, e.g. courses taken, graduation year, specialisations, tags.
 
 
 ### User stories
@@ -659,10 +687,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                 | I want to …​                                                                               | So that I can…​                                                          |
 |---------|-------------------------|--------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
-| `* * *` | new user                | see usage instructions in the app                                                          | refer to instructions when I forget how to use the app                |
+| `* * *` | user                | see usage instructions in the app                                                          | refer to instructions when I forget how to use the app                |
 | `* * *` | user                    | create a new contact                                                                       | keep a record of individuals in my network                              |
 | `* * *` | user                    | add more details about an existing contact                                                 | store information about my contacts for future reference                |
-| `* * *` | user                    | edit details of a contact                                                                  | replace outdated details with more accurate information                 |
+| `* * *` | user                    | edit or delete details of a contact                                                        | replace outdated details with more accurate information                 |
 | `* * *` | user                    | delete a contact                                                                           | remove individuals I no longer keep contact with |
 | `* *`   | user                    | find a contact by name                                                                     | locate details of contacts without having to go through the entire list |
 | `* *`   | user with many contacts | sort contacts by their details                                                             | locate contacts with special characteristics that I am looking for      |
@@ -671,9 +699,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`   | user                    | use simple and easy-to-press shortcuts                                                     | remember and execute the shortcuts more easily |
 | `* *`   | user                    | open my email app by clicking on my contact's email                                        | send emails to my contacts more efficiently |
 | `* *`   | user                    | open the relevant website by clicking on my contact's social link                          | conveniently access their social links when needed |
-| `* *`   | user                    | an easily accessible and static online page containing a download link to the mobile app   | quickly download the app on my device when needed                       |
-| `* *`   | new user                | have a quick-start guide                                                                   | start using the basic functionality of the app as soon as possible |
 | `* *`   | user                    | undo and redo my commands                                                                  | revert my changes when I make a mistake |
+| `* *`   | new user                | have a quick-start guide                                                                   | start using the basic functionality of the app as soon as possible |
 | `* *`   | user                    | visit an online page containing the complete user manual                                   | refer to the full set of instructions when needed            |
 | `*`     | user                    | navigate to the relevant section of the online manual directly from the catalogue | quickly find instructions on the feature I want to use       |
 | `*`     | user                    | export my contacts in the form of readable text                                            | easily share my contacts with others                                    |
@@ -681,7 +708,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-<!-- @@author Singa-Pirate -->
+<!-- @@author awhb -->
 **Use case: Create a new contact**
 
 **MSS**
@@ -726,9 +753,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+<!-- @@author -->
+
+<!-- @@author Singa-Pirate -->
+
 **Use case: Add phone numbers to contact**
 
-This use case is also applicable to adding **email, link, course, specialisation, tag** to a contact. For each contact, each of these fields is recorded by a list, and new entries added to a field will be appended to the field's list.
+This use case is also applicable to adding **email, link, course, specialisation, tag** to a contact. For each contact, each of these fields is recorded by a list, and new entries for a field will be appended to the field's list.
 
 **MSS**
 
@@ -764,9 +795,7 @@ This use case is also applicable to adding **email, link, course, specialisation
 
   * 1d1. NetworkBook ignores the present phone number, and adds the other phone numbers to the contact's list of phone numbers.
 
-  * 1d2. NetworkBook updates the displayed contact card with the new phone numbers.
-
-    Use case ends.
+    Use case resumes at step 3.
 
 * 1e. User provides the same phone number more than once.
 
@@ -816,9 +845,11 @@ This use case is also applicable to adding **priority** to a contact. For each c
 
 <!-- @@author -->
 
+<!-- @@author nknguyenhc -->
+
 **Use case: Edit the name of a contact**
 
-This use case is also applicable to editing **graduation, priority** of a contact.
+This use case is also applicable to editing **graduation, priority** of a contact, except for extension 1e. which is specific to the **name** field.
 
 **MSS**
 
@@ -853,6 +884,12 @@ This use case is also applicable to editing **graduation, priority** of a contac
 * 1d. The user provides two name fields.
 
   * 1d1. NetworkBook shows an error message.
+
+    Use case ends.
+
+* 1e. The name provided is taken by another contact of the user
+
+  * 1e1. NetworkBook shows an error message.
 
     Use case ends.
 
@@ -920,6 +957,10 @@ This use case is also applicable to editing **email, link, course, specialisatio
 
       Use case resumes at step 2.
 
+<!-- @@author -->
+
+<!-- @@author Singa-Pirate -->
+
 **Use case: Delete a contact**
 
 **MSS**
@@ -963,21 +1004,21 @@ This use case is applicable to deleting **graduation, priority** of a contact.
     Use case ends.
 
 
-* 3b. User provides multiple fields to delete.
+* 1b. User provides multiple fields to delete.
 
-  * 3b1. NetworkBook shows an error message.
-
-    Use case ends.
-
-* 3c. User provides an index field after the single-valued field to delete.
-
-  * 3c1. NetworkBook shows an error message.
+  * 1b1. NetworkBook shows an error message.
 
     Use case ends.
 
-* 3d. The single-valued field of the contact is empty.
+* 1c. User provides an index field after the single-valued field to delete.
 
-  * 3d1. NetworkBook shows an error message.
+  * 1c1. NetworkBook shows an error message.
+
+    Use case ends.
+
+* 1d. The single-valued field of the contact is empty.
+
+  * 1d1. NetworkBook shows an error message.
 
     Use case ends.
 
@@ -990,6 +1031,8 @@ This use case is applicable to deleting a **phone, email, link, course, speciali
 1. User specifies index of contact, a multi-valued field, and the index of entry to delete.
 
 2. NetworkBook updates the contact by deleting the entry from the field's list.
+
+2. NetworkBook updates the displayed contact card of the person.
 
    Use case ends.
 
@@ -1027,9 +1070,13 @@ This use case is applicable to deleting a **phone, email, link, course, speciali
 
       Use case resumes at step 1c1.
 
-    * 3e1b. The contact's field has an entry at index 1.
+    * 1e1b. The contact's field has an entry at index 1.
 
       Use case resumes at step 2.
+
+<!-- @@author -->
+
+<!-- @@author Eola-Z -->
 
 **Use case: Filter contacts**
 
@@ -1062,6 +1109,8 @@ This user story applies to filtering contacts by **course, specialisation, gradu
   * 1c1. NetworkBook shows an error message.
 
     Use case ends.
+
+<!-- @@author -->
 
 <!-- @@author xenosf -->
 
@@ -1149,7 +1198,7 @@ This user story applies to filtering contacts by **course, specialisation, gradu
     Use case ends.
 
 **Extensions**
-    
+
 * 1a. The contact index is invalid.
   
   * 1a1. NetworkBook shows an error message.
@@ -1248,7 +1297,7 @@ This user story applies to filtering contacts by **course, specialisation, gradu
 
 **Use case: Redo**
 
-**MSSS**
+**MSS**
 
 1. User requests to redo the latest undo command.
 
@@ -1320,6 +1369,8 @@ This user story applies to filtering contacts by **course, specialisation, gradu
 
 <!-- @@author -->
 
+<!-- @@author Singa-Pirate -->
+
 **Use case: Import data from exported contacts**
 
 **MSS**
@@ -1363,6 +1414,8 @@ This user story applies to filtering contacts by **course, specialisation, gradu
   * 3c2. NetworkBook shows the skipped contacts.
 
     Use case ends.
+
+<!-- @@author -->
 
 
 ### Non-Functional Requirements
@@ -1419,7 +1472,7 @@ Given below are the planned enhancements. The _current behaviour_ specifies how 
 
 * Better command format for filtering course.
   * Current behaviour: The command `filter /by course /with CS2103T /taken true` means filtering in all contacts that have course `CS2103T` and are taking the course (i.e. current date is between the start and end date), while `filter /by course /with CS2103T /taken false` means filtering in all contacts that have course `CS2103T` regardless of whether the contact is taking the course. The latter is equivalent to `filter /by course /with CS2103T`, without the `/taken` tag.
-  * Enhanced behaviour: The `/taken` flag can be changed to `/taking`, to clearly suggest filtering in contacts that are taking the course. Furthermore, the presence of the flag `/taking` should indicate filtering in contacts taking the course without the `true` value following the tag, while omitting the flag means no filtering based on whether the contacts are taking the course. This means that `filter /by course /with CS2103T /taking` means filtering in all contacts that are taking `CS2103T`, while `filter /by course /with CS2103T` (without the `/taking` flag) means filtering in all contacts that have course `CS2103T` regardless of whether they are taking the course.
+  * Enhanced behaviour: The `/taken` prefix can be changed to `/taking`, to clearly suggest filtering in contacts that are taking the course. Furthermore, the presence of the prefix `/taking` should indicate filtering in contacts taking the course without the `true` value following the tag, while omitting the prefix means no filtering based on whether the contacts are taking the course. This means that `filter /by course /with CS2103T /taking` means filtering in all contacts that are taking `CS2103T`, while `filter /by course /with CS2103T` (without the `/taking` prefix) means filtering in all contacts that have course `CS2103T` regardless of whether they are taking the course.
 
 * More user-friendly info message.
   * Current behaviour: Upon a successful command dealing with one contact, the info message shows all the information of the contact, which is rather verbose. For example, with command `create /name Nguyen /phone 12345678 /phone 87654321`, the info message is: `Noted, created new contact: Nguyen; Phones: [12345678, 87654321]; Emails: []; Links: []; Courses: []; Specialisations: []; Tags: `.
@@ -1482,7 +1535,6 @@ Given below are instructions to test the app manually.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
-
 </div>
 
 ### Launch and shutdown
@@ -1507,7 +1559,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Create a new contact
 
-    1. Prerequisite: your contact list has no contact with name `Test`. If there is, either edit/delete the contact, or conduct the following test cases with another name not already present in your contact list.
+    1. Prerequisite: Before executing each of the following test cases, your contact list should not have contact with name `Test`. If there is, either edit/delete the contact, or conduct each test cases with another name not already present in your contact list.
 
     1. Test case: `create /name Test`
 
@@ -1538,9 +1590,9 @@ testers are expected to do more *exploratory* testing.
 1. Editing a person's single-value field.
    
     1. Test case: `edit 1 /name Test`
-      
-        Expected: Name of the first contact should change to `Test`. NetworkBook shows the updated details.
-      
+    
+        Expected: If there is another contact with name `Test`, NetworkBook shows an error message. Otherwise, name of the first contact should change to `Test`. NetworkBook shows the updated details.
+    
     1. Test case: `edit 0 /name Test`
 
         Expected: No person is updated. NetworkBook shows an error message.
@@ -1577,7 +1629,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a field from a person
 
-    1. Prerequisite: Your first contact in the list has at least 1 phone number and a graduation semester.
+    1. Prerequisite: Your first contact in the list has at least 1 phone number and a graduation year.
 
     1. Test case: `delete 1 /phone /index 1`
 
