@@ -44,20 +44,25 @@ loop until no more commands to undo
         activate Model
 
         Model --> UndoCommand : command
+        deactivate Model
 
         UndoCommand -> UndoableCommand : undo()
         activate UndoableCommand
 
 
-        UndoableCommand--> UndoCommand : CommandResult
+        UndoableCommand --> UndoCommand : CommandResult
         deactivate UndoableCommand
+
 
 end
 
-deactivate Model
+ UndoCommand --> LogicManager : CommandResult
+ <-- LogicManager:
+ deactivate LogicManager
+
 
 
 deactivate UndoCommand
 
-deactivate LogicManager
+
 @enduml
