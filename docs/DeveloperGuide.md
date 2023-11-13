@@ -1214,16 +1214,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## **Appendix: Effort**
 
-### JavaFX CLock and Calendar Component
+### JavaFX Clock and Calendar Component
 
 1. Challenges faced :
 	- `Component Selection`: AB3 initially uses VBox and HBox for layout, but midway through development, we realized that a GridPane offered a more effective solution, leading to a shift in our approach.
 	- `Synchronization`: Ensuring seamless synchronization with the local date and displaying the number of employees on leave
+	- `Command-Based Month Navigation`: Implementing a command-based system for toggling month changes introduced challenges in managing signals to accurately control the month navigation functionality.
 
 2. Effort required:
 	- `Iterative Development`: The need for constant adjustments to the layout and functionality, especially during the transition from VBox and HBox to GridPane, required iterative development and continuous refinement.
 	- `Restarting for Alignment Checks`: Verifying alignment in the JavaFX calendar component demanded frequent restarts, leading to considerable time investment in the development process.
 	- `CSS File Interpretation`: Reading through and comprehending the extensive CSS file became a significant effort, as it was crucial for styling and maintaining the visual integrity of the JavaFX calendar component.
+	- `Command-Based Navigation`: Developing and refining the command-based month navigation system required careful consideration of signal management and user interface responsiveness.
 
 3. Achievements:
 	- `Effective Layout with GridPane`: Despite the initial challenges, adopting GridPane significantly improved the layout efficiency of our calendar component, ensuring a visually appealing and well-organized interface.
