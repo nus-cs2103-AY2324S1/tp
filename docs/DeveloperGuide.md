@@ -247,67 +247,61 @@ This section describes some noteworthy details on how certain features are imple
 
 ###  **Add a developer**
 
-The add developer feature is facilitated by the AddCommand. It extends `Command` class.
+The `add` command implemented in the AddCommand class, allows users to add new developers to the addressbook. This command extends the`Command` class.
 
-The operations are exposed in the `Model` interface as `Model#addTeam()`.
 
 #### Usage
 Given below is an example usage scenario and how the function behaves at each step.
 
-Step 1. The user launches the application and uses the `newteam` command and specifies a `teamname` and `teamLeader` name.
+- **Command Syntax**: `add n/[Developer Name] p/[Phone Number] e/[Email] a/[Address] (OPTIONAL r/[Remark] t/Tags)`
+- **Example**: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/likes to swim`
+  - Adds a developer called John to the addressbook with the given details(provided there isn't already another developer with the same name).
 
-
-
-Step 2. The user executes the `newteam` command `newteam tn/Team1 tl/John` to create a new team `Team1` with `John` set as team leader.
-
-
-
-Step 3. LinkTree provides a feedback based on whether the operation was successful or not.
+LinkTree provides a feedback based on whether the operation was successful or not.
 
 
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, it will not call `Model#addTeam()`, so the `team` will not be saved to `TeamBook`.
+**Note:** If a command fails its execution, it will not call `Model#addPerson()`, so the `developer` will not be saved to `AddressBook`.
 
 </box>
 
 #### Function Implementation
 
-(Add basic implementation here)
+- AddCommandParser class parses the inputs and checks if the command format is given correctly. It throws an exception if there is any format mismatch. 
+- The `execute` method in AddCommand class first checks if a developer with the specified name already exists in the addressbook. It throws an exception if this is true.
+- Upon successful execution of the `execute` method, a message is displayed to the user confirming that a new developer has been added to the addressbook.
 
 <br>
 
 ###  **Remove a developer**
 
-The add developer feature is facilitated by the AddCommand. It extends `Command` class.
-
-The operations are exposed in the `Model` interface as `Model#addTeam()`.
+The `delete` command implemented in the DeleteCommand class, allows users to remove developers from the addressbook. This command extends the`Command` class.
 
 #### Usage
 Given below is an example usage scenario and how the function behaves at each step.
 
-Step 1. The user launches the application and uses the `newteam` command and specifies a `teamname` and `teamLeader` name.
+- **Command Syntax**: `delete [index]`
+- **Example**: `delete 1`
+  - Deletes a developer with the given index number.
 
-
-
-Step 2. The user executes the `newteam` command `newteam tn/Team1 tl/John` to create a new team `Team1` with `John` set as team leader.
-
-
-
-Step 3. LinkTree provides a feedback based on whether the operation was successful or not.
-
+LinkTree provides a feedback based on whether the operation was successful or not.
 
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, it will not call `Model#addTeam()`, so the `team` will not be saved to `TeamBook`.
+**Note:** The index should be a postive integer. The command will succeed only if such a positive integer is a valid index in the addressbook.
 
 </box>
 
 #### Function Implementation
 
-(Add basic implementation here)
+- DeleteCommandParser class parses the inputs and checks if the command format is given correctly. It throws an exception if there is any format mismatch.
+- The `execute` method in DeleteCommand class first checks if the given index is valid. It throws an exception if this is false.
+- After mapping the given index to the correct developer, checks are done to see if this developer is a teamleader of any team. If they are currently a teamleader, this developer cannot be deleted. An exception is thrown to notify the user of the same. The `Model#developerIsTeamLeader()` method carries out this check. 
+- The `execute` command also checks if this developer is part of any team. If yes, they are deleted from all such teams that they are a developer in. This is carried out by the `Model#removeDeveloperFromAllTeams()` method.
+- Upon successful execution of the `execute` method, a message is displayed to the user confirming that the developer has been deleted, and also been removed from all teams(if any).
 
 <br>
 
@@ -412,23 +406,17 @@ Step 3. LinkTree provides a feedback based on whether the operation was successf
 
 ###  **Create a new team**
 
-The create new team feature is facilitated by the AddTeamCommand. It extends `Command` class.
+The `newteam` command implemented in the AddTeamCommand class, allows users to create new teams which are added to the teambook. This command extends the`Command` class.
 
-The operations are exposed in the `Model` interface as `Model#addTeam()`.
 
 #### Usage
-Given below is an example usage scenario and how the add team behaves at each step.
+Given below is an example usage scenario and how the function behaves at each step.
 
-Step 1. The user launches the application and uses the `newteam` command and specifies a `teamname` and `teamLeader` name.
+- **Command Syntax**: `newteam tn/[TEAMNAME] tl/[TeamLeader]`
+- **Example**: `newteam tn/Test Team 1 tl/John`
+  - Creates a new team called `Test Team 1` with `John` as the leader.
 
-
-
-Step 2. The user executes the `newteam` command `newteam tn/Team1 tl/John` to create a new team `Team1` with `John` set as team leader.
-
-
-
-Step 3. LinkTree provides a feedback based on whether the operation was successful or not.
-
+LinkTree provides a feedback based on whether the operation was successful or not.
 
 
 <box type="info" seamless>
@@ -439,17 +427,11 @@ Step 3. LinkTree provides a feedback based on whether the operation was successf
 
 #### Function Implementation
 
-1. Create a newteam parser class called `AddTeamCommandParser` to parse input from user. This implements the `Parser` interface for type `AddTeamCommand`
-2. Create a `parse` method in `AddTeamCommandParser` that parses the user input and specify the user flags that are used `tn/` for teamName and `tl/` for teamLeader.
-3. The flags for user input can be added to class `CliSyntax`.
-4. For the `AddTeamCommand` class, specify the Command Word. In this case, it is `newteam`.
-5. Add relevant messages for use cases like `Duplicate team creation` and `Person not found error`.
-6. Implement the `execute` method in `AddTeamCommand`. Handle the cases where a team with specified `teamName` already exists and also one where specified `person` with given `teamLeaderName` does not exist.
-7. Use the `Model#addTeam` and `Model#containsPerson` to do these checks.
-8. Throw exception in the case where adding new team is not possible.
-9. If not such exception is thrown, create the new team at this point. 
-10. Run the `Model#addTeam` method to add the created team to TeamBook.
-11. `Model#addTeam` calls `TeamBook#addTeam` which in turn calls `UniqueTeamList#add`. Finally this method calls the `ObservableList#add` which adds the `team` to the list.
+- The `AddTeamCommandParser` class parses inputs from the users and checks if the command is in the correct format. An exception is thrown if there is any format mismatch.
+- The `execute` method checks if the specified teamname has already been taken up by another team. If yes, an exception is thrown to indicate this. The `Model#hasTeam` does this check.
+- The `execute` method also checks if a developer with the given name exists. If no such developer exists, an error message is displayed to indicate this. The `Model#containsPerson` does this check.
+- If no exception is thrown, a new team with specified `teamname` is created and the developer with given name is set as `teamleader`. The `Model#addTeam` carries out this process.
+- A message is displayed to the user to indicate that the team has been created. It can immediately be seen at the bottom of the TeamList in the UI.
 
 <puml src="diagrams/AddTeamCommandDiagram.puml" width="574" />
 
@@ -470,24 +452,17 @@ Step 3. LinkTree provides a feedback based on whether the operation was successf
 
 ###  **Add developers to an existing team**
 
-The add dev to team feature is facilitated by the AddDevToTeamCommand. It extends `Command` class.
+The `dev2team` command implemented in the AddDevToTeamCommand class, allows users to add developers to an existing team in the teambook. This command extends the`Command` class.
 
-The operations are exposed in the `Model` interface as `Model#addToTeam()`.
 
 #### Usage
-Given below is an example usage scenario and how the add team behaves at each step.
+Given below is an example usage scenario and how the function behaves at each step.
 
-Step 1. The user launches the application and uses the `dev2team` command and specifies a `teamname` and `developer` name.
+- **Command Syntax**: `dev2team tn/[TEAMNAME] n/[Developer name]`
+- **Example**: `dev2team tn/Test Team 1 tl/Jason`
+  - Adds `Jason` to a team called `Test Team 1
 
-
-
-Step 2. The user executes the `dev2team` command `dev2team tn/Team1 n/Jason` to add a developer `Jason` to the team `Team1`.
-
-
-
-Step 3. LinkTree provides a feedback based on whether the operation was successful or not.
-
-
+LinkTree provides a feedback based on whether the operation was successful or not.
 
 <box type="info" seamless>
 
@@ -497,17 +472,12 @@ Step 3. LinkTree provides a feedback based on whether the operation was successf
 
 #### Function Implementation
 
-1. Create a dev2team parser class called `AddDevToTeamParser` to parse input from user. This implements the `Parser` interface for type `AddDevToTeamCommand`
-2. Create a `parse` method in `AddDevToTeamParser` that parses the user input and specify the user flags that are used `tn/` for teamName and `n/` for developer name.
-3. The flags for user input can be added to class `CliSyntax`.
-4. For the `AddDevToTeamCommand` class, specify the Command Word. In this case, it is `dev2team`.
-5. Add relevant messages for use cases like `Team not found`, `Duplicate developer`, `Developer is the teamleader` and `Developer not found` errors.
-6. Implement the `execute` method in `AddDevToTeamCommand`. Handle the cases where a team with specified `teamName` does not exist and also one where specified developer to be added does not exist. 
-7. You will also need to handle the cases where either the given developer is already in the team or the developer is currently the leader of the given team.
-7. Use the `Model#InvalidAddToTeam`, `Model#containsPerson`, `Model#personAlreadyInTeam` and `Model#isLeaderOfTeam` methods to do these checks.
-8. Throw exceptions in the cases where adding the developer is not possible.
-9. If not such exception is thrown, add the developer to the given team at this point.
-10. The `Model#addToTeam` method performs the addition of the developer to the specified team.
+- The `AddDevToTeamParser` class parses inputs from the users and checks if the command is in the correct format. An exception is thrown if there is any format mismatch.
+- The `execute` method checks if the specified teamname is valid and exists in the teambook. If no, an exception is thrown to indicate this. The `Model#invalidAddToTeam` does this check.
+- The `execute` method also checks if a developer with the given name exists. If no such developer exists, an error message is displayed to indicate this. The `Model#containsPerson` does this check.
+- In addition, the `execute` method also checks if the given developer is already a teamleader in the same team or already exists as a developer in that team. In both cases, the `excecute` method will throw an exception indicating these scenarios. The `Model#personAlreadyInTeam` and `Model#isLeaderOfTeam` methods carry out these checks.
+- If no exception is thrown, the developer is added to the team. This process is carried out by the `Model#addToTeam`
+- A message is displayed to the user to indicate that the developer has been added to the team. The change can immediately be seen on the TeamBook part of the UI.
 
 <puml src="diagrams/AddDevToTeamCommandDiagram.puml" width="1100"/>
 
