@@ -10,6 +10,7 @@ Given below are my contributions to the project.
 * **Code contributed**:
     * [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=riyamehta2211&breakdown=true)
 
+
 -------
 
 ### New Features
@@ -31,14 +32,12 @@ Given below are my contributions to the project.
       undone modification to the AddressBook. 
       * Added comprehensive Testing for Undo and Redo Command Classes
       ([#224](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/224))
-   
 
    4. **Highlights:** Modified execution of the different Commands to commit 
    to the AddressBook history. This way, the Undo and Redo functions
    are implemented to inherently modify the AddressBook state itself,
    rather than individual Commands.
-   
-   
+
 2. **New Attributes:** Added Birthday and IcNumber Attributes
    ([#89](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/89))
    * **Justification:** Birthdates and IC Numbers are compulsory fields of information 
@@ -46,12 +45,11 @@ Given below are my contributions to the project.
    * **Highlight:** Used LocalDateTime to accept valid birthdates of patients for the logging of 
     patients into the AddressBook. Valid user inputs would be automatically formatted into valid dates.
 
-
-
 3. **New Feature**: Added AssignedDepartment into Storage
    ([#107](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/107))
    * **Justification:** This is to ensure that the department the patient has been assigned to is also saved
    in Storage and available for access when A&E is closed and reopened.
+   
 
 -------
 
@@ -66,6 +64,7 @@ Given below are my contributions to the project.
    * **Enhanced Edit Feature:** ([#145](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/145))
    * **Enhanced Delete Feature:** ([#120](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/120))
 
+
 -------
 
 ### Contributions to Documentation
@@ -73,12 +72,12 @@ Given below are my contributions to the project.
    + Added Documentation for the features `edit`, `delete`, `undo` and `redo`
    + Proofread and formatted sections on `Saving the program`, `Editing the data file`, and `Glossary`
 
-
 2. **Contributions to the DG**: ([#250](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/250))
-  + Added implementation details of `edit` and `delete`
-  + Extended on the implementation description of `undo`&`redo`
-  + Added on to the User Stories and Use Cases
-  + Added on to the planned enhancements section
+   + Added implementation details of `edit` and `delete`
+   + Extended on the implementation description of `undo`&`redo`
+   + Added on to the User Stories and Use Cases
+   + Added on to the planned enhancements section
+
 
 -------
 
@@ -89,6 +88,7 @@ Given below are my contributions to the project.
     * Updating user/developer docs
     * Helped proofread and format the final version of the Developer Guide and User Guide
 
+
 -------
 
 ### Review/Mentoring contributions
@@ -98,5 +98,3 @@ Given below are my contributions to the project.
     * Here are some of the PRs I have reviewed (with non-trivial review comments):
       ([#240](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/240)),
       ([#102](https://github.com/AY2324S1-CS2103T-T14-2/tp/pull/102))
-      
-
