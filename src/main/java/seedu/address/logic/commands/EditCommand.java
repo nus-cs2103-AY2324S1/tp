@@ -170,7 +170,7 @@ public class EditCommand extends Command {
      */
     private static Doctor createEditedDoctor(Doctor personToEdit, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(personToEdit);
-        requireNonNull(personToEdit);
+        requireNonNull(editPersonDescriptor);
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
@@ -191,7 +191,7 @@ public class EditCommand extends Command {
 
     private static Patient createEditedPatient(Patient personToEdit, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(personToEdit);
-        requireNonNull(personToEdit);
+        requireNonNull(editPersonDescriptor);
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
