@@ -52,13 +52,12 @@ public class FindCommandParser implements Parser<FindCommand> {
             setKeywords(nameKeywords, statusKeywords, tagKeywords, argMultimap, PREFIX_TAG);
         }
 
-
         NameContainsKeywordsPredicate namePredicate = new NameContainsKeywordsPredicate(nameKeywords);
         StatusContainsKeywordsPredicate statusPredicate = new StatusContainsKeywordsPredicate(statusKeywords);
         TagContainsKeywordsPredicate tagPredicate = new TagContainsKeywordsPredicate(tagKeywords);
-
-        return new FindCommand(getPredicatesList(nameKeywords, statusKeywords, tagKeywords,
-                namePredicate, statusPredicate, tagPredicate));
+        List<Predicate<Person>> predicateList = getPredicatesList(nameKeywords, statusKeywords, tagKeywords,
+                namePredicate, statusPredicate, tagPredicate);
+        return new FindCommand(predicateList);
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {

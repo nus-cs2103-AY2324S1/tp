@@ -45,7 +45,10 @@
 * [Prefix Summary](#prefix-summary)
 * [Glossary](#glossary)
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
+
 
 ## Product Overview
 
@@ -53,9 +56,9 @@ Are you tired of managing applicant applications through cumbersome spreadsheets
 
 Upgrade your hiring process with **JABPro (JobApplicationsBook Pro)**, a CLI based desktop app that allows you to:
 
-* easily manage applicant applications
-* schedule interviews
-* gain valuable insights on their interview performance
+* easily manage applicant applications,
+* schedule interviews,
+* and gain valuable insights on their interview performance! <br>
 
 From interns to full-time roles, software to marketing, JABPro’s versatile interface allows you to keep track of all kinds of job applicants in various industries. 
 
@@ -64,6 +67,7 @@ From interns to full-time roles, software to marketing, JABPro’s versatile int
 Access our self-curated user guide below to learn more on how you can integrate various JABPro’s functions into your workflow.
 
 [Jump back to Table of Contents](#table-of-contents)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -80,32 +84,33 @@ You are an **advanced** user if ...
 
 [Jump back to Table of Contents](#table-of-contents)
 
+
 --------------------------------------------------------------------------------------------------------------------
 ## Overview of Main Features
 
 While **JABPro** offers a whole range of features, we believe that the following features are likely to be the most useful to you:
 
 **Viewing details of applicants:**
-1. Viewing applicant's information: `view`
+* Viewing applicant's information: `view`
 
 **Tag colouring and categorisation:**
-1. Creating a tag with a specified category: `create`
-2. Listing all tags: `listT`
-3. Adding and editing an applicant's tags and tag scores: `edit`
+* Creating a tag with a specified category: `create`
+* Listing all tags: `listT`
+* Adding and editing an applicant's tags and tag scores: `edit`
 
 **Event management and Scheduling:** 
-1. Adding an event: `event`
-2. Viewing events: `schedule`
+* Adding an event: `event`
+* Viewing events: `schedule`
 
 **Comparing and filtering applicants:**
-1. Filtering applicants by statistics: `filter`
+* Filtering applicants by statistics: `filter`
 
 These features address the complications that Hiring Managers face when managing applicants: 
-1. Visual Noise and Clutter from using other applicant management software like Excel  
+1. **Visual Noise and Clutter** from using other applicant management software like Excel
 
 `Viewing details of applicants` and `Tag colouring and categorisation` address this by creating an organized and intuitive way to view applicants and their details. This is done through colour coding and minimalistic design.
 
-2. Toggling between different software to manage applicants and schedule events   
+2. **Toggling between different software** to manage applicants and schedule events
 
 `Event Management and Scheduling` address this by allowing you to schedule events and view them in the same software. This means that you do not have to toggle between different software to manage applicants and schedule events.
 
@@ -114,6 +119,8 @@ These features address the complications that Hiring Managers face when managing
 
 --------------------------------------------------------------------------------------------------------------------
 Go to the [Table of Contents](#table-of-contents) to navigate to the feature that you are interested in 
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -125,11 +132,12 @@ Go to the [Table of Contents](#table-of-contents) to navigate to the feature tha
 
 3. Copy the file to the folder you want to use as the _home folder_ for your JabPro.
 
+
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jabpro.jar` command to run the application. <br> 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
 
     ![Ui](images/main.png)  
-   
+
 <box type="warning" seamless>
 
 Ensure your JABPro contains some sample data. If it starts off empty then there might be some issues with the launch which might result in 
@@ -149,11 +157,13 @@ Not to worry, here are some steps you can take to fix this:
 6. Run `java -jar jabpro.jar` to relaunch the application. You should be able to see a GUI similar to the one above.
 
 </box>
- 
+
 5. If your UI looks **compressed and words are being cut off such as that seen below**, you should **resize** the window to a larger size by dragging the corners of the application window. The UI should now look like the example given above.
    <br>
   
     ![Ui](images/UICompressed.png)
+
+    <div style="page-break-after: always;"></div>
 
     **Here's what each part of the GUI signifies:** <br>
 
@@ -198,6 +208,8 @@ Not to worry, here are some steps you can take to fix this:
     * `github Alex Yeoh`: Redirects the user to the GitHub account of the applicant (provided github has been added previously).
 
 [Jump back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -328,19 +340,20 @@ Format: `remark INDEX r/REMARK`
 * You can get the remark previously inputted by using the `**REMARK**` keyword. It will be replaced with the previous remark. The keyword `**REMARK**` is case-sensitive. This means that `remark 1 r/**remark**` will just replace the remark with the word `**remark**`.
 * You can use multiple prefix for `remark` but only the last prefix will be used. This means that `remark 1 r/remark r/remark2` will just replace the remark with `remark2`.
 
+<div style="page-break-after: always;"></div>
 
 An example of the `remark` command being successfully executed:
 1. Enter the command `remark 1 r/Great attitude, hardworking`
 2. This is the result of the successful `remark` command (Take note that command entered will not be shown in the result):
-   
-3. ![Remark-Success](images/remark-command-success.png)
-<br>
+   ![Remark-Success](images/remark-command-success.png)
+<br> 
+
+<div style="page-break-after: always;"></div>
 
 An example of the `remark` command being successfully executed with the **REMARK** keyword:
 1. Enter the command `remark 1 r/**REMARK** furthermore he is great at teamwork`
 2. This is the result of the successful `remark` command (Take note that command entered will not be shown in the result):
-   
-    ![Remark-Success](images/remark-command-enhanced-success.png)
+  ![Remark-Success](images/remark-command-enhanced-success.png)
 <br>
 
 **Error Handling Table for `remark` command:**
@@ -586,12 +599,16 @@ Notes on rules for `edit` command involving tags with categories for `t/[CATEGOR
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 An example of the `edit` command being successfully executed:
 1. Enter the command `edit 1 n/Alex Ho p/91234567` (**Edit name and phone number**)
 2. This is the result of the successful `edit` command (Take note that command entered will not be shown in the result):
    
    ![Edit-Success](images/edit-command-success.png)
 <br>
+
+<div style="page-break-after: always;"></div>
 
 An example of the `edit` command being successfully executed with tags and score:
 1. Ensure that you have created a tag `Interview` under the `assessment` category using the `create` command. That is, enter the command `create t/assessment Interview`
@@ -600,6 +617,8 @@ An example of the `edit` command being successfully executed with tags and score
    
    ![Edit-Success](images/edit-command-with-stats-success.png)
 <br>
+
+<div style="page-break-after: always;"></div>
 
 An example of the `edit` command being successfully executed to clear a tags and score:
 1. Enter the command `edit 1 t/` (**Clear all tags**)
@@ -679,30 +698,41 @@ Format: `create t/CATEGORY TAGNAME…​`
 **Note:**
 * JABPro offers 3 predefined tag categories namely `employment`, `role`, and `dept`. However, you can define up to 3 more tag categories of your own!
 * The tags created using this command can be used to tag applicants using the `add` or `edit` command. Tagging
-  applicant without previously categorising the tags using `create` would still work but the tags would be *uncategorized*.
-* `create` only allows tags to be categorised at creation meaning tags that have already been created, cannot be categorised further.
+  applicant without previously creating the tags using `create` would still work but the tags would be *uncategorised*.
+* `create` only allows tags to be categorised at creation meaning tags that have already been created, cannot be categorised further i.e. cannot edit tag categories of tags. 
+* The field `t/CATEGORY TAGNAME` must strictly contain only two words hence it is advisable for you to keep the `TAGNAME` alphanumerical (contains no spaces). Any other word
+  that comes after `t/CATEGORY TAGNAME` that is not preceded by a `t/` prefix would be ignored and the tag for the first valid tag is created.
+  <br> 
+  Example: `create t/role software developer` would create the tag **software** and ignore the word developer.
 
-  **Tip:**
+<box type="tip" seamless>
+
+**Tip:**
 * You can create multiple tags at once i.e. `create t/dept marketing t/role developer ...`
 * Use this command for frequently used tags for better efficiency in tagging applicants.
 * You can view all of your tags by keying in the `listT` command.
-  </box>
+</box>
 
-  Failed to create tags? Here's some possible reasons why:
-1. Missing mandatory field i.e. `create`
-2. Did not specify category i.e. `create t/developer`
-3. Invalid tag name (contained spaces) i.e. `create t/role software developer`
-4. Tag already exists
-
-   An example of the `create` command being successfully executed:
+An example of the `create` command being successfully executed:
 1. Enter the command `create t/dept marketing t/role developer`
 2. This is what you should see upon successful execution of command.
-   
-    ![create-success](images/create-success.png)
+
+   ![create-success](images/create-success.png)
 
 3. View your newly created tags using the `listT` command.
 
-   ![listT-create](Images/listT-create.png)
+   ![listT-create](images/listT-create.png)
+
+Failed to create tags? Here are some possible reasons why
+
+| Reason for Error                                                                                                        | Error Message                                | Remedy / Suggested course of action                                                                                        |
+|-------------------------------------------------------------------------------------------------------------------------|----------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| Missing create keyword: `create`                                                                                        | Unknown command                              | Follow the command format of `create t/CATEGORY TAGNAME…​` closely                                                         |
+| Missing mandatory field e.g. `create`                                                                                   | Invalid command format!                      | Ensure that you specify at least one tag category and tag name of the tag you would like to create.                        |
+| Incomplete field e.g. `create t/test`                                                                                   | Invalid command format!                      | Ensure that both parts of the field are included i.e. specify both tag category and tag name.                              |
+| Invalid tag name e.g. `create t/developer@`                                                                             | Tags names should be alphanumeric.           | Ensure that the tag name does not contain any non-alphanumeric characters i.e. no symbols and whitespaces.                 |
+| Tag already exists                                                                                                      | This tag already exists in the address book! | Since the tag already exists, there is no need for you to create a new one. You can reuse this same tag to tag applicants! |
+| Using commas as delimiters of different prefixes instead of whitespaces e.g. `create t/dept software, t/role marketing` | Invalid command format!                      | Remove the comma(s) e.g. `create t/dept software, t/role marketing`                                                        |                                                                                                  |
 
 [Jump back to Table of Contents](#table-of-contents)
 
@@ -747,24 +777,24 @@ Format: `search (n/NAME [MORE NAME] / st/STATUS [MORE STATUS] / t/TAG [MORE TAGS
 
 **Tip**:
 
-* You can combine multiple search categories in a single `search` command.
-* Search parameters are case-insensitive.
+* You can combine multiple search categories in a single `search` command e.g. `search n/alex st/interviewed t/intern`
+* Search parameters are case-insensitive i.e. doing `search n/aLeX` is the same as `search n/alex`
   
 </box>
 
-Examples of successful command execution:
+Here's what you would see upon successful command execution:
 1. `search n/alex bernice`
    
    ![search-success-1](images/search-success-1.png)
   
    The above `search` command displayed all applicants whose name match ANY of the given keywords. This is because
-   `search` does an `OR` search within a specific category. <br>
+   `search` does an `OR` search **within a specific category**. <br>
 2. `search n/alex bernice st/interviewed t/intern`
    
    ![search-success](images/search-success.png)
   
    Notice how the above `search` command did not display "Alex" despite his profile matching
-   the `name` and `tag` categories. This is because `search` does an `AND` search across multiple categories.<br>
+   the `name` and `tag` categories. This is because `search` does an `AND` search **across multiple categories**.<br>
 
 <box type="tip" seamless>
 
@@ -780,11 +810,18 @@ It's best to explain this by breaking down an example `search` command!
 
 </box>
 
-Failed to execute the `search` command? Here are some possible reasons why:
-1. Missing search category i.e. `search`
-2. Invalid name/status/tag parameters i.e. `search n/@alex st/accepted t/intern#`
-3. Multiple prefixes of the same category used i.e. `search n/alex n/bernice`
-4. Using commas as delimiters of different parameters instead of spaces i.e. `search n/alex, bernice`
+Failed to execute the `search` command? Here are some possible reasons why
+
+| Reason for Error                                                                                    | Error Message                                                                                                                                                                                                                                                   | Remedy / Suggested course of action                                                                                                                    |
+|-----------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Missing search keyword                                                                              | Unknown command!                                                                                                                                                                                                                                                | Follow the command format `search (n/NAME [MORE NAME] / st/STATUS [MORE STATUS] / t/TAG [MORE TAGS)`                                                   |
+| Missing search categories e.g. `search`                                                             | Invalid command format!                                                                                                                                                                                                                                         | Make sure you include **at least one** of the search categories i.e. `/n`, `/st`, `/t`.                                                                |
+| Invalid name e.g. `search n/alex@`, `search n/`                                                     | Names should only contain alphanumeric characters and spaces, and it should not be blank.                                                                                                                                                                       | Ensure that `name` does not contain any non-alphanumeric characters such as &, $, @, -, %, *, _, etc.                                                  |
+| Invalid status e.g. `search st/in`, `search st/`                                                    | Status should be either one of the following: 'Preliminary','Interviewed', 'Offered', 'Rejected' and it should not be blank.                                                                                                                                    | Check that the `status` is one of the following: `preliminary`, `interviewed`, `rejected`, `offered`. Enter the command again with any of the 4 metric |
+| Invalid tag e.g. `search t/intern@`, `search t/`                                                    | Tags names should be alphanumeric.                                                                                                                                                                                                                              | Ensure that `tag` does not contain any non alphanumeric characters such as &, $, @, -, %, *, _, empty space, etc.                                      |
+| Multiple prefixes of the same category being used e.g. `search n/alex n/bernice`                    | Multiple values specified for the following single-valued field(s): `prefix/`.                                                                                                                                                                                  | Remove the duplicate prefix. The command should only have at most **one** of every prefix.                                                             |
+| Using commas as delimiters of different parameters instead of spaces e.g. `search n/alex, bernice`  | Names should only contain alphanumeric characters and spaces, and it should not be blank<br/>Status should be either one of the following: 'Preliminary','Interviewed', 'Offered', 'Rejected' and it should not be blank<br/>Tags names should be alphanumeric. | Remove the comma(s) e.g. `search n/alex yeoh`                                                                                                          |
+| Using commas as delimiters of different parameters instead of spaces e.g. `search n/alex, t/intern` | Should display the error message for either invalid `name`, `status`, or `tag` depending on the first prefix because it will consider the comma and anything that comes after it as part of the first prefix.                                                   | Remove the comma(s) e.g. `search n/alex t/intern`                                                                                                      |
 
 [Jump back to Table of Contents](#table-of-contents)
 
@@ -821,6 +858,8 @@ Read more about this in the [Summary Statistics](#summary-statistics) section.
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 Set up for examples when you first start JABPro with default data:
 1. `list`
 2. `create t/assessment interview` to create a tag `interview` under the `assessment` category.
@@ -832,6 +871,8 @@ Set up for examples when you first start JABPro with default data:
    ![Filter-Setup](images/filter-setup.png)
 <br>
 
+<div style="page-break-after: always;"></div>
+
 An example of the `filter` command being successfully executed:
 1. Enter the command `list`
 2. Enter the command `filter t/interview met/percentile val/80` (**Filter by percentile**)
@@ -839,6 +880,8 @@ An example of the `filter` command being successfully executed:
 
    ![Filter-Success](images/filter-command-success.png)
 <br>
+
+<div style="page-break-after: always;"></div>
 
 An example of the `filter` command being successfully executed with `median`:
 1. Enter the command `list`
@@ -894,6 +937,7 @@ Format:
 * The sorting algorithm is case-sensitive, which means it will treat uppercase and
   lowercase letters as distinct. This may result in names being sorted as A B C a b c, rather than A a B b C c.
 
+[Jump back to Table of Contents](#table-of-contents)
 
 ### 4. Event Management and Scheduling
 
@@ -1026,11 +1070,10 @@ Exports the entries into a .csv file located in the current directory as (/data/
 * JABPro must have write permissions, this means that if the .csv file is open,
     exporting again will not be possible.
 
-Exports to the following location
-* /data/export.csv
-
 Examples:
 * `export` exports the data to /data/export.csv
+
+[Jump back to Table of Contents](#table-of-contents)
 
 ### Clearing all entries: `clear`
 <a name="clearing-all-entries-clear"></a>
@@ -1103,7 +1146,7 @@ You should ensure that you have **sufficient candidates of more than 20** with a
   * Additionally, when the spread of scores is small, the percentile will not be able to differentiate between applicants with similar scores.
 
 
-**Formula used to calculate the summary statistics:**
+**Formula used to calculate the summary statistics:**  
 **mean** is calculated by using the formula `sum of all scores with that tag / number of applicants with that tag`  
 **median** is calculated by using the formula `middle score of all scores with that tag`  
 **minimum** is calculated by using the formula `lowest score of all scores with that tag`  
@@ -1143,6 +1186,10 @@ the [quickstart instructions](#quick-start) and launch JABPro with the sample da
 **A**: *Tip* is something useful to know and can be done beforehand, while *note* is something you have to be conscious about and take into account else it might lead to an error. 
 
 [Jump back to Table of Contents](#table-of-contents)
+
+
+<div style="page-break-after: always;"></div>
+
 
 --------------------------------------------------------------------------------------------------------------------
 
