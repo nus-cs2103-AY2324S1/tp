@@ -857,6 +857,10 @@ This makes it more intuitive and logical for the user to use since the user woul
 **Improve the search and filter feature**
 Currently, the UI does not update and will remain unchanged from the previous command. This may be confusing or inaccurate and thus it should remain blank
 
+### Improve on `remark` feature
+**Improve the remark feature**
+Currently, if you use multiple prefix , it is allowed and only the last prefix will be used. We would like to improve on this by only allowing 1 prefix to be used. Thus we verify for duplicate `r/` prefix since it does not make sense to have multiple remarks for the same person.
+
 ## **Appendix: Effort**
 
 ### ScoreList, Score, Summary Statistic, Filter
