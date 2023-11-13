@@ -71,7 +71,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
+<puml src="/diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `PersonInformationPanel`, `SummaryStatisticScreen` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
@@ -89,11 +89,11 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
+<puml src="diagrams/LogicClassDiagram." width="550"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteByIndexSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" /></puml>
 
 <box type="info" seamless>
 
@@ -192,8 +192,9 @@ User should see the UI as shown below.
 
 The following sequence diagram shows how the AddL and AddG operations work:
 
-<puml src="diagrams/AddLSequenceDiagram.puml" alt="AddLSequenceDiagram" />
-<puml src="diagram/AddGSequenceDiagram.puml" alt="AddGSequenceDiagram" />
+<puml src="diagrams/AddLSequenceDiagram.puml" alt="AddLSequenceDiagram"> </puml>
+
+<puml src="diagrams/AddGSequenceDiagram.puml" alt="AddGSequenceDiagram"> </puml>
 
 User should see the UI as shown below after entering `addL 1 u/alexyeoh`
 
@@ -264,7 +265,7 @@ Step 2. The user wants to see the full information displayed for the first perso
 
 The following sequence diagram shows how the view operation works:
 
-<puml src="diagrams/ViewSequenceDiagram.puml" alt="ViewSequenceDiagram" />
+<puml src="diagrams/ViewSequenceDiagram.puml" alt="ViewSequenceDiagram"></puml>
 
 **Note:** The lifeline for `ViewCommand` and `ViewCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -293,6 +294,8 @@ Pros: Arguably a more OOP approach since all commands that trigger view IS-A `Vi
 
 Cons: You cannot implement any command that does not involve viewing but inherits from any command that is a children of `ViewCommand`.  
 An example could be trying to create identical commands that does not toggle the UI after execution. This would require duplication of the exact same command code but inheriting from `Command` instead of `ViewCommand`.
+
+<div style="page-break-after: always;"></div>
 
 The following activity diagram shows how command such as `add`, `edit`, `set`, `remark`, `addL`, `addG` (Commands that trigger view) lead to the update of the Person Information Panel in the UI.
 This is done by setting the `isView` property to true in the `CommandResult` object.
@@ -349,11 +352,11 @@ It also allows users to specify more than one search parameter for each category
 
 #### Implementation
 
-The search feature is implemented using the `SetCommand` class. It extends `Command` and overrides the `execute()` method to
+The set feature is implemented using the `SetCommand` class. It extends `Command` and overrides the `execute()` method to
 edit the status of the user.
 
-The search parameters from the user input are parsed using the parse method in the `SetCommandParser` class. `SetCommandParser::Parse`
-takes in the search parameters from the user input and combines them into a list of predicates. This list of predicates is then
+The set parameters from the user input are parsed using the parse method in the `SetCommandParser` class. `SetCommandParser::Parse`
+takes in the set parameters from the user input and combines them into a list of predicates. This list of predicates is then
 passed as an argument to the `SetCommand` constructor and the method returns a `SetCommand` instance with the associated list of predicates.
 
 Currently, the parameters are <USERID> <STATUS>, <STATUS> is limited to "Preliminary", "Interviewed", "Rejected", "Accepted".
@@ -361,15 +364,15 @@ Currently, the parameters are <USERID> <STATUS>, <STATUS> is limited to "Prelimi
 Finally, the execute method in `SetCommand` class returns a new updated `Person` which will
 be used to update the status of the Person displayed.
 
-Given below is an example usage scenario and how the search mechanism behaves at each step.
+Given below is an example usage scenario and how the set mechanism behaves at each step.
 
 Step 1. The user launches the application.
 
 Step 2. The user executes `set 1 Interviewed` command to set the first user to "Interviewed".
 
-Step 3. The user should see the update upon calling the `view` command on the Person again.
+Step 3. The user should see the update upon calling the `view` command on the Person again. In this case, `view 1`
 
-The following activity diagram shows how the search operation works:
+The following activity diagram shows how the set operation works:
 
 <puml src="diagrams/SetActivityDiagram.puml" alt="SetActivityDiagram" />
 
@@ -377,16 +380,17 @@ The following activity diagram shows how the search operation works:
 
 #### Implementation
 
-The search feature is implemented using the `ExportCommand` class. It extends `Command` and overrides the `execute()` method to
+The export feature is implemented using the `ExportCommand` class. It extends `Command` and overrides the `execute()` method to
 export to a csv file.
 
-The search parameters from the user input are parsed using the parse method in the `ExportCommandParser` class. `ExportCommandParser::Parse`
-takes in the search parameters from the user input and combines them into a list of predicates. 
-However, export need to be used with any parameters.
+The export parameters from the user input are parsed using the parse method in the `ExportCommandParser` class. `ExportCommandParser::Parse`
+takes in the export parameters from the user input and combines them into a list of predicates. 
+However, export does not need to be used with any parameters.
 
-Finally, the execute method in `ExportCommand` class exports to the /data/export.csv file.
+Finally, the execute method in `ExportCommand` class exports to the /data/export.csv file and returns a `CommandResult` that 
+indicates success or failure.
 
-Given below is an example usage scenario and how the search mechanism behaves at each step.
+Given below is an example usage scenario and how the export mechanism behaves at each step.
 
 Step 1. The user launches the application.
 
@@ -1159,16 +1163,16 @@ testers are expected to do more *exploratory* testing.
 1. Adding LinkedIn/Github username to a person while all persons are being shown
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
    
-    2. Test case (Positive test case): `addL 1 u/alexyeoh`
+    2. Test case (Positive test case): <br>`addL 1 u/alexyeoh` <br>
        **Expected:** LinkedIn username added to the person's profile. Displayed in person card.
    
-    3. Test case (Negative test case): `addG -1 u/madlad`
+    3. Test case (Negative test case): <br>`addG -1 u/madlad` <br>
        **Expected:** No Github username is added to any person. Error details shown in the status message. Person information panel remains the same.
    
-    4. Test case (Negative test case): `addL u/maxcodes`
+    4. Test case (Negative test case): <br>`addL u/maxcodes` <br>
        **Expected:** No LinkedIn username is added to any person. Error details shown in the status message. Person information panel remains the same.
    
-    5. Test case (Negative test case): `addG 1`
+    5. Test case (Negative test case): <br>`addG 1` <br>
        **Expected:** No Github username is added to any person. Error details shown in the status message. Person information panel remains the same.
 
 ### Viewing person's social profile ###
@@ -1176,17 +1180,17 @@ testers are expected to do more *exploratory* testing.
 1. Viewing a person's social profile
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list, with their usernames previously added.
    
-    2. Test case (Positive test case): `linkedin 1`
+    2. Test case (Positive test case): <br> `linkedin 1` <br>
        **Expected:** Redirected to LinkedIn profile of the person, in the browser. Success message displayed on JABPro.
    
-    3. Test case (Negative test case): `github 0`
+    3. Test case (Negative test case): <br> `github 0` <br>
        **Expected:** No Github profile shown. Error details shown in the status message.
    
-    4. Test case (Negative test case): `linkedin 2`
-       [Assumption: LinkedIn username has not been previously added for candidate 2]
+    4. Test case (Negative test case):  <br>`linkedin 2`
+       [Assumption: LinkedIn username has not been previously added for candidate 2] <br>
        **Expected:** No LInkedin profile shown. Error details shown in the status message.
    
-    5. Test case (Negative test case): `github`
+    5. Test case (Negative test case):  <br>`github` <br>
        **Expected:** No Github profile shown. Error details shown in the status message.
 
 ### Adding Event relating to a candidate ###
@@ -1194,22 +1198,22 @@ testers are expected to do more *exploratory* testing.
 1. Adding event relating to a candidate
     1. Prerequisites: List all persons using the `list` command. Multiple person in the list.
    
-    2. Test case (Positive test case): `event 1 d/Interview bt/2023-11-12 10:00 et/2023-11-12 12:00`
+    2. Test case (Positive test case): <br>`event 1 d/Interview bt/2023-11-12 10:00 et/2023-11-12 12:00` <br>
        **Expected:** Event added to EventBook. Success message displayed. Event visible in Events window.
    
-    3. Test case (Negative test case): `event 0 d/Interview bt/2023-11-12 10:00 et/2023-11-12 12:00`
+    3. Test case (Negative test case): <br>`event 0 d/Interview bt/2023-11-12 10:00 et/2023-11-12 12:00` <br>
        **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
    
-    4. Test case (Negative test case): `event 1 bt/2023-11-12 10:00 et/2023-11-12 12:00`
+    4. Test case (Negative test case): <br>`event 1 bt/2023-11-12 10:00 et/2023-11-12 12:00` <br>
        **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
    
-    5. Test case (Negative test case): `event 1 d/Interview bt/12-11-2023 10:00 et/12-11-2023 12:00`
+    5. Test case (Negative test case): <br>`event 1 d/Interview bt/12-11-2023 10:00 et/12-11-2023 12:00` <br>
        **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
    
-    6. Test case (Negative test case): `event 1 d/Interview bt/2023-11-12 12:00 et/2023-11-12 10:00`
+    6. Test case (Negative test case): <br>`event 1 d/Interview bt/2023-11-12 12:00 et/2023-11-12 10:00` <br>
        **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
    
-    7. Test case (Negative test case): `event 1 d/Interview bt/2023-11-31 10:00 et/2023-12-01 10:00`
+    7. Test case (Negative test case): <br>`event 1 d/Interview bt/2023-11-31 10:00 et/2023-12-01 10:00` <br>
        **Expected:** No event added to EventBook. Error details shown in status message. Event Window remains the same.
 
 ### Saving data
