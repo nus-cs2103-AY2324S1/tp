@@ -302,7 +302,7 @@ An example of the `remark` command failing to execute due to wrong index:
 <br>
 
 Additional Examples:
-*  `remark 1` Empties the remark of the 1st applicant. It is equivalent to `remark 1 r/`.
+*  `remark 1` Empties the remark of the 1st applicant. It is equivalent to `remark 1 r/`. <br>
 
 [Jump back to Table of Contents](#table-of-contents)
 
