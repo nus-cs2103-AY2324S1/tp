@@ -44,12 +44,8 @@ public class FindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         model.updateFoundPersonsList(predicate);
-        if (model.getFilteredPersonList().isEmpty()) {
-            return new CommandResult(Messages.MESSAGE_NO_PATIENT_FOUND);
-        } else {
-            return new CommandResult(
-                    String.format(Messages.MESSAGE_PATIENTS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
-        }
+        return new CommandResult(
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
     @Override
