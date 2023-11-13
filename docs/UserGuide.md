@@ -55,7 +55,7 @@ With MedBook, experience a new level of convenience and control:
     - [Viewing patient medical records](#viewing-patient-medical-records-view)
     - [Editing a medical record](#editing-a-medical-record-editrecord)
     - [Deleting a medical record](#deleting-a-medical-record-deleterecord)
-    - [Locaing medical records by keywords](#locating-medical-records-by-keywords-searchrecord)
+    - [Locating medical records by keywords](#locating-medical-records-by-keywords-searchrecord)
     - [Attaching files to a patient's medical record](#attaching-files-to-a-patient-s-medical-record)
   - [Appointment Features](#appointment-features)
     - [Adding an appointment](#adding-an-appointment-addappointment)
