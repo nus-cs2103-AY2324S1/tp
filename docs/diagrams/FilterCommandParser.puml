@@ -3,7 +3,131 @@
 skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
-    Participant ":NetworkBookParser" as nbs LOGIC_COLOR
-
+    Participant ":NetworkBookParser" as nbp LOGIC_COLOR
+    Participant ":FilterCommandParser" as fcp LOGIC_COLOR
+    Participant ":ArgumentTokenizer" as at LOGIC_COLOR
+    Participant ":ArgumentMultimap" as am LOGIC_COLOR
 end box
+
+box Model MODEL_COLOR_T1
+    Participant ":Model" as m MODEL_COLOR
+    Participant ":Person" as p MODEL_COLOR
+end box
+
+-> nbp : "filter" + arguments
+activate nbp
+
+create fcp
+nbp -> fcp : new FilterCommandParser()
+activate fcp
+
+fcp --> nbp
+deactivate fcp
+
+nbp -> fcp : parse(arguments)
+activate fcp
+
+fcp -> fcp : parse(arguments)
+activate fcp
+
+fcp -> at : tokenise(arguments, "/by", "/with")
+activate at
+
+create am
+at -> am : new ArgumentMultimap()
+activate am
+
+am --> at : argMultimap
+deactivate am
+
+at --> fcp : argMultimap
+deactivate at
+
+fcp -> am : argMultimap.getValue(field)
+activate am
+
+am --> fcp : field
+deactivate am
+
+fcp -> am : argMultimap.getValue(args)
+activate am
+
+am --> fcp : args
+deactivate am
+
+fcp -> fcp : field.equals(...)
+
+alt "course"
+    fcp -> fcp : parseCourse(args)
+    activate fcp
+    fcp -> am : argMultimap.getValue(taken)
+    activate am
+    am --> fcp : taken
+    deactivate am
+    alt taken exists
+        fcp -> fcp : new FilterCourseCommand(args, false) as filterCommand
+        note right : "taken" can be true or false
+    else taken does not exist
+        fcp -> fcp : new FilterCourseCommand(args, taken) as filterCommand
+    end
+    fcp --> fcp : filterCommand
+    deactivate fcp
+else "tag"
+    fcp -> fcp : parseTag(args)
+    activate fcp
+    fcp --> fcp : new FilterTagCommand(args) as filterCommand
+    deactivate fcp
+else "spec"
+    fcp -> fcp : parseSpec(args)
+    activate fcp
+    fcp --> fcp : new FilterSpecCommand(args) as filterCommand
+    deactivate fcp
+else "grad"
+    fcp -> fcp : parseGrad(args)
+    activate fcp
+    fcp --> fcp : new FilterGradCommand(args) as filterCommand
+    deactivate fcp
+end
+
+fcp --> fcp : filterCommand
+deactivate fcp
+
+break ParserException thrown
+    fcp --> nbp : Send error message to user
+end
+note left : Execution stops here in this case
+
+fcp --> nbp : filterCommand
+deactivate fcp
+
+nbp -> m : execute(filterCommand)
+activate m
+
+m -> m : updateDisplayedPersonList(filterCommand.predicates)
+activate m
+
+loop for each person in personList
+    note left of p : personList also includes persons who\nare not in displayedPersonList
+    m -> p : filterCommand.predicates.test(person)
+        activate p
+    alt test == true
+        p --> m : displayedPersonList.add(person)
+        note left of p : Only add if\nperson is not\nalready in the list
+    else test == false
+        p --> m : displayedPersonList.remove(person)
+        deactivate p
+    end
+    note right of m : Details of how the predicates\ntest each person is omitted for simplicity
+end
+
+
+m --> m : displayedPersonList
+deactivate m
+
+m --> nbp : displayedPersonList.details
+deactivate m
+
+<-- nbp : Send details of\ndisplayedPersonList to UI
+deactivate nbp
+
 @enduml

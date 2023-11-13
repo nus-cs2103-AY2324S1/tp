@@ -143,7 +143,8 @@ when determining which `Parser` to use:
 The sequence diagram below illustrates the interactions within the
 `FilterCommand` class to generate a `FilterCommand` object, using
 `ArgumentMultiMap` and `ArgumentTokeniser`:
-* `TO BE IMPLEMENTED IN 1.4`
+
+<img src="images/FilterCommandParser.png" width="1200"/>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T08-2/tp/blob/master/src/main/java/networkbook/model/Model.java)
