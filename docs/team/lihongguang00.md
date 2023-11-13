@@ -14,8 +14,12 @@ Given below are my contributions to the project.
   * Justification: Skeleton for the calendar system in UniMate
   * Highlights: The model was highly reusable, being able to be utilised to create both user calendars and contact calendars.
 
-* **New Feature**: Calendar System Commands (AddEvent, CompareCalendars, CompareGroupCalendars)
-  * What it does: Allows the user to interact and manipulate the calendar system through the CLI
+* **New Feature**: AddEvent command
+  * What it does: Allows the user to add events to the calendar system through CLI.
+
+* **New Feature**: CompareCalendars/CompareGroupCalendars command
+  * What it does: Allows the user to compare calendars with contacts of interest.
+  * Highlights: Creates a pop-up of the comparison calendar.
 
 * **New Feature**: Calendar System GUI (User Calendar, Contact Calendar, Comparison Calendar)
   * What it does: Allows the user to view their personal events/their contact's events for the week
