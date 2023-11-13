@@ -3,6 +3,9 @@
 skinparam ArrowFontStyle plain
 
 mainframe ref
+
+participant ":BenefitCommand" as BenefitCommand LOGIC_COLOR
+
 box Person PERSON_COLOR
 participant ":Person" as Person PERSON_COLOR
 participant ":PayrollStorage" as PayrollStorage PERSON_COLOR
@@ -11,23 +14,19 @@ participant ":Salary" as Salary PERSON_COLOR
 participant ":Benefit" as Benefit PERSON_COLOR
 end box
 
+activate BenefitCommand
+BenefitCommand -> Person : getPayrollStorage()
 activate Person
 
-
-create PayrollStorage
 Person -> PayrollStorage
 activate PayrollStorage
 
-Person -> PayrollStorage : getLatestPayroll()
-create Payroll
-PayrollStorage -> Payroll :
+PayrollStorage -> Payroll : getLatestPayroll()
 activate Payroll
 
-PayrollStorage -> Payroll : addBenefit()
-create Salary
-Payroll -> Salary :
-activate Salary
 Payroll -> Salary : addBenefit()
+activate Salary
+
 create Benefit
 Salary -> Benefit : new
 activate Benefit
@@ -35,11 +34,13 @@ Benefit --> Salary
 deactivate Benefit
 Salary --> Payroll :
 deactivate Salary
+
 Payroll --> PayrollStorage :
 deactivate Payroll
 PayrollStorage --> Person :
 deactivate PayrollStorage
 
+Person --> BenefitCommand :
 deactivate Person
 
 @enduml

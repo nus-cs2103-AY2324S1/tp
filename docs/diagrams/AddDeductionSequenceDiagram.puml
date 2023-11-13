@@ -57,17 +57,15 @@ activate DeductCommand
 DeductCommand -> Model : getFilteredPersonList()
 activate Model
 
+Model -> Person : get()
+activate Person
+Person --> Model : employeeToCalculate
+deactivate Person
+
 Model --> DeductCommand:
 deactivate Model
 
-DeductCommand -> Person : getPayrollStorage()
-activate Person
-
-ref over Person : **addDeduction()**
-
-Person --> DeductCommand :
-deactivate Person
-
+ref over DeductCommand, Person: **addDeduction()**
 create CommandResult
 DeductCommand -> CommandResult
 activate CommandResult
