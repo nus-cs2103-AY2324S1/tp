@@ -7,10 +7,11 @@ import static seedu.flashlingo.testutil.TypicalFlashCards.getTypicalFlashlingoWi
 
 import org.junit.jupiter.api.Test;
 
+import seedu.flashlingo.logic.session.SessionManager;
 import seedu.flashlingo.model.Model;
 import seedu.flashlingo.model.ModelManager;
 import seedu.flashlingo.model.UserPrefs;
-import seedu.flashlingo.logic.session.SessionManager;
+
 
 public class EndCommandTest {
 
