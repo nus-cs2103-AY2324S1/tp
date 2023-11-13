@@ -255,7 +255,7 @@ field implementation. While optional fields like `MedicalHistory` exist in Healt
 Collections, and can natively handle the empty state. Singular optional properties can be added this way,
 but is hard to distinguish between properties that allow for multiple entries and fields that don't.
 
-<puml src="diagrams/AppointmentClassDiagram0.puml" />
+<puml src="diagrams/AppointmentClassDiagram0.puml"/>
 
 The optional fields could be implemented directly to `Person` as shown in the partial class diagram above.
 However, several other packages depend upon `Person` as well, including `UI` and `Storage`.
@@ -318,7 +318,7 @@ HealthSync requests of its users.
 
 Therefore, `Appointment` uses a combination of `regex` and `DateTimeFormatter` to resolve its user input.
 
-<puml src="diagrams/AppointmentActivity0.puml" />
+<puml src="diagrams/AppointmentActivity0.puml" width="800"/>
 
 A partial activity diagram illustrating the relevant segment of the parse process.
 
