@@ -1028,8 +1028,6 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `sort`<br>
        Expected: The whole list of fosterers will be sorted alphabetically. Command success message is shown.
 
-2. Deleting fosterers while only some fosterers are shown follows similar test cases.
-
 ### Viewing Statistics of Fosterers
 1. Viewing statistics of available fosterers
    1. Prerequisites: List all fosterers using the list or find command. At least 1 fosterer in the list.
