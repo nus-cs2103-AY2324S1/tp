@@ -350,53 +350,53 @@ Sequence Diagram for FindExpressionParser showing how a sample input is parsed u
 **Aspect: Command Flexibility vs. Complexity**
 
 * **Alternative 1 (current choice)**: Support boolean operations in `FindCommand`.
-  * **Pros**: Provides powerful search capabilities.
-  * **Cons**: Increases code complexity and potential for user input errors.
+  * Pros: Provides powerful search capabilities.
+  * Cons: Increases code complexity and potential for user input errors.
 
 * **Alternative 2**: Only allow simple keyword-based searches.
-  * **Pros**: Easier to implement and use.
-  * **Cons**: Limits user's searching abilities.
+  * Pros: Easier to implement and use.
+  * Cons: Limits user's searching abilities.
 
 
 **Aspect: Tokenizer library**
 
 * **Alternative 1 (current choice):** Custom-built tokenizer.
-  * **Pros:** Allows for more flexibility in terms of the syntax of the search criteria. Can handle our custom-defined terms, operators, and grouping symbols explicitly.
-  * **Cons**: More code required, requires regular maintenance to adapt to new features or changes.
+  * Pros: Allows for more flexibility in terms of the syntax of the search criteria. Can handle our custom-defined terms, operators, and grouping symbols explicitly.
+  * Cons: More code required, requires regular maintenance to adapt to new features or changes.
 
 * **Alternative 2:** Use a third-party library.
-  * **Pros:** Less code required, might be more robust and have additional features.
-  * **Cons**: Less flexibility in terms of the syntax of the search criteria. May not be able to handle our custom-defined terms, operators, and grouping symbols explicitly. Might not cater explicitly to the specific requirements of the Find command. Requires integration efforts.
+  * Pros: Less code required, might be more robust and have additional features.
+  * Cons: Less flexibility in terms of the syntax of the search criteria. May not be able to handle our custom-defined terms, operators, and grouping symbols explicitly. Might not cater explicitly to the specific requirements of the Find command. Requires integration efforts.
 
 **Aspect: Tokenization Strategy**
 
 * **Alternative 1 (current choice)**: Custom tokenizer.
-  * **Pros**: Greater control and flexibility.
-  * **Cons**: More complex to implement and maintain.
+  * Pros: Greater control and flexibility.
+  * Cons: More complex to implement and maintain.
 
 * **Alternative 2**: Regular expression-based tokenizer.
-  * **Pros**: Can be more concise.
-  * **Cons**: May not handle all edge cases or complexities.
+  * Pros: Can be more concise.
+  * Cons: May not handle all edge cases or complexities.
 
 
 **Aspect: Supported Logical Operators**
 
 * **Alternative 1 (current choice):** Use standard boolean operators (`&&`, `||`, `!`).
-  * **Pros:** Universally recognized and understood.
-  * **Cons**: Limited to boolean logic.
+  * Pros: Universally recognized and understood.
+  * Cons: Limited to boolean logic.
 
 * **Alternative 2:** Support more advanced operators or functions (e.g., nearness search, regex patterns).
-  * **Pros:** Provides more power and flexibility to users.
-  * **Cons**: Significantly complicates parsing and understanding for users.
+  * Pros: Provides more power and flexibility to users.
+  * Cons: Significantly complicates parsing and understanding for users.
 
 **Aspect: Handling Invalid Inputs**
 
 * **Alternative 1 (current choice)**: Throw an exception and inform the user.
-  * **Pros**: User is made aware of mistakes immediately.
-  * **Cons**: Stops the command processing.
+  * Pros: User is made aware of mistakes immediately.
+  * Cons: Stops the command processing.
 * **Alternative 2**: Silently ignore or correct invalid inputs.
-  * **Pros**: Smoother user experience.
-  * **Cons**: User might not realize they made a mistake.
+  * Pros: Smoother user experience.
+  * Cons: User might not realize they made a mistake.
 
 ### Update photo feature
 #### Implementation
