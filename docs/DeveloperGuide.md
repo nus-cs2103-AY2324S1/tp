@@ -19,6 +19,8 @@ title: Developer Guide
 <summary><strong>Product Description</strong></summary>
 <div markdown="1">
 
+## **Product Description**
+
 CheckMate is a powerful room booking and management system designed for hotel employees, especially those in administrative and management positions. It streamlines the process of room bookings, offering real-time room data visualization, search functionality, and efficient booking management.
 
 </div>
