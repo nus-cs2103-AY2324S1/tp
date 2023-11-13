@@ -321,7 +321,7 @@ Creates a new contact in the course with the specified name and details.
 * `STUDENT_NAME` should be a string made up of alphanumerical characters, with no special characters.
 * `PHONE_NUMBER` should be a string made up of numbers.
 * `STUDENT_ID` should be unique for all students.
-* `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space. It should begin with the letter 'A', followed by 7 numbers, and end with a letter.
+* `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space. It should begin with the capital letter 'A', followed by 7 numbers, and end with a letter.
 * `TUTORIAL_GROUP_ID` should be a string made up of alphanumeric characters, with no special characters.
 
 </div>
@@ -401,7 +401,7 @@ Marks the attendance of one or more student.
 * If a student is present, `REASON_OF_ABSENCE` is not required.
 * If a student is absent, `REASON_OF_ABSENCE` is mandatory.
 * `STUDENT_NAME` should be a string made up of alphabetical characters, with no numbers or special characters.
-* `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space. It should begin with the letter 'A', followed by 7 numbers, and end with a letter.
+* `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space. It should begin with the capital letter 'A', followed by 7 numbers, and end with a letter.
 * `ATTENDANCE` should only be 0 or 1, where 0 indicates student is absent and 1 indicates student is present.
 * `WEEK_NUMBER` should be an integer from 0 to 13.
 
@@ -482,7 +482,7 @@ Finds a student's or multiple students' contact either via their name or student
 <div markdown="block" class="alert alert-info">
 
 * `STUDENT_NAME` should be a string made up of alphabetical characters, with no numbers or special characters.
-* `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space. It should begin with the letter 'A', followed by 7 numbers, and end with a letter.
+* `STUDENT_ID` should be a string made up of alphanumeric characters, with no special characters or space. It should begin with the capital letter 'A', followed by 7 numbers, and end with a letter.
 
 </div>
 
@@ -681,7 +681,7 @@ _Details coming soon ..._
 |----------------|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | course/ | Course code    | - Can be any string, including empty string `""`. |
 | n/      | Name           | - Should only contain alphanumeric characters and spaces, no special characters.|
-| id/     | Student ID     | - Should be in the format `AxxxxxxxL`, <br>where `x` represents digit and `L` represents capital letters. Student ID is unique for all students. |
+| id/     | Student ID     | - Should be in the format `AxxxxxxxL`, <br>where `x` represents digit and it starts with a capital letter 'A' as well as ending with a letter. Student ID is unique for all students. |
 | p/      | Phone          | - Should only contain digits. |
 | e/      | Email          | - Should only be of the form `local@domain` and only accept alphanumeric characters <br>- `local` allows for special characters `+`, `_`, `.` and `-` as well. <br>- `domain` must be at least 2 letters long<br> |
 | t/      | Tutorial group | - Should only contain alphanumeric characters. <br>- Should not contain spaces.<br>- Used in `add` and `edit` commands.|
