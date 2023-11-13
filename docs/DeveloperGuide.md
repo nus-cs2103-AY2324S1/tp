@@ -116,8 +116,6 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-<div style="page-break-after: always;"></div>
-
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-W16-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -574,6 +572,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 **Extensions**
 
 * 2a. The list is empty.
@@ -719,7 +719,7 @@ Should work on any _mainstream OS_ as long as it has Java `11` or above installe
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Standard formats**: JSON
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The terms person and client can be used interchangeably.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The terms **person** and **client** can be used interchangeably.
 
 </div>
 
@@ -932,6 +932,8 @@ Deleting a person when persons are being shown
 
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Effort**
 
