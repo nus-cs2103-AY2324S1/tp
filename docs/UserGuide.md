@@ -30,6 +30,8 @@ Choose a topic from the [table of contents](#table-of-contents) below to find ou
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 # How to Use This User Guide
 
 1. This user guide consists of four main sections, namely Quick Start, Features, Command Summary, FAQ and Known Issues.
@@ -49,10 +51,12 @@ Throughout this user guide, you may observe coloured boxes that provide useful i
 indicating the type of information present.
 
 **<box type="tip" seamless>**<br>
-Tips empower you to make full use of Tutorium.
+* Tips empower you to make full use of Tutorium.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 # Table of Contents
 
@@ -60,6 +64,8 @@ Tips empower you to make full use of Tutorium.
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Quick Start
 
@@ -101,6 +107,9 @@ If you are using Mac, click on the Launchpad icon in the Dock, type Terminal in 
 
 1. Refer to the [Features](#features) below for details of each command.
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## Features
 
 <box type="info" seamless>
@@ -145,6 +154,8 @@ If you are using Mac, click on the Launchpad icon in the Dock, type Terminal in 
 
 [↑ Back to table of contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### View help : `help`
 
 Displays the URL for the User Guide.
@@ -154,6 +165,8 @@ Displays the URL for the User Guide.
 Format: `help`
 
 [↑ Back to table of contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Add a student's data: `add`
 
@@ -168,6 +181,8 @@ Examples:
   ![result for 'add n/Betsy Crowe p/87654321 e/betsycrowe@example.com a/Newgate Prison g/F l/2 m/KR mrt s/Mathematics'](images/ug_images/addedResult.png)
 
 [↑ Back to table of contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Import data from .csv file: `import`
 
@@ -194,6 +209,8 @@ Examples:
 
 [↑ Back to table of contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Edit a student's data : `edit`
 
 Edits an existing student's data in the address book.
@@ -212,6 +229,8 @@ Examples:
    ![result for 'edit John Doe n/Joe'](images/ug_images/editedResult.png)
 
 [↑ Back to table of contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Search for data : `search`
 
@@ -232,6 +251,8 @@ Examples:
 
 [↑ Back to table of contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Delete data : `delete`
 
 Deletes data of a specified student.
@@ -248,6 +269,8 @@ Examples:
   ![result for 'delete John Doe'](images/ug_images/deletedResult.png)
 
 [↑ Back to table of contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Update sec level : `uplevel`, `undolevel`
 
@@ -272,6 +295,8 @@ Examples: `uplevel`, `undolevel`
 
 [↑ Back to table of contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Filter data : `filter`
 
 Shows the list of students data that fulfills all given conditions.
@@ -291,6 +316,8 @@ Examples:
 
 [↑ Back to table of contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Sort data : `sort`
 
 Sorts the list of students data permanently by name in ascending or descending.
@@ -305,6 +332,8 @@ Examples:
 
 [↑ Back to table of contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Clear all entries : `clear`
 
 Clears all entries from the address book.
@@ -312,6 +341,8 @@ Clears all entries from the address book.
 Format: `clear`
 
 [↑ Back to table of contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Show statistical table: `table`
 Shows a table either categorized by gender, sec level or subject.
@@ -330,6 +361,8 @@ Examples:
 * `table d/2023` will show a table categorized by months in year 2023.
 
 [↑ Back to table of contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ### Show bar chart: `bar`
 Shows a bar chart either categorized by gender, sec level or subject.
@@ -354,6 +387,8 @@ Below is the chart generated after entering `bar l/`.
 
 [↑ Back to table of contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Show line chart: `trend`
 Shows a line chart describing number of students enrolled in each month in a specific year.
 
@@ -372,6 +407,8 @@ Below is the chart generated after typing `trend y/2023`
 
 [↑ Back to table of contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Export visual representation : `export`
 
 Exports the statistical table or bar chart into PNG format.
@@ -389,6 +426,8 @@ Examples:
 
 [↑ Back to table of contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Exit program : `exit`
 
 Exits the program.
@@ -397,6 +436,8 @@ Format: `exit`
 
 [↑ Back to table of contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### Archive data files `[coming in v2.0]`
 
 _Details coming soon ..._
@@ -404,6 +445,8 @@ _Details coming soon ..._
 [↑ Back to table of contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Additional Info
 
@@ -426,6 +469,8 @@ If your changes to the data file makes its format invalid, Tutorium will discard
 [↑ Back to table of contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Command Summary
 
@@ -451,6 +496,8 @@ Action     | Format, Examples
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
@@ -462,6 +509,8 @@ Action     | Format, Examples
 [↑ Back to table of contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Known Issues
 
