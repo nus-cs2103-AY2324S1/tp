@@ -76,13 +76,6 @@ public class ClassManagerParserTest {
     }
 
     @Test
-    public void parseCommand_delete() throws Exception {
-        Student student = new StudentBuilder().build();
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(StudentUtil.getDeleteCommand(student));
-        assertEquals(new DeleteCommand(student.getStudentNumber()), command);
-    }
-
-    @Test
     public void parseCommand_edit() throws Exception {
         Student student = new StudentBuilder().build();
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(student).build();
@@ -101,6 +94,15 @@ public class ClassManagerParserTest {
             + StudentUtil.getTagDetails(TypicalStudents.ALICE));
         assertEquals(new TagCommand(TypicalStudents.ALICE.getStudentNumber(), TypicalStudents.ALICE.getTags()),
             command);
+    }
+
+    //@@author ChangruHenryQian
+
+    @Test
+    public void parseCommand_delete() throws Exception {
+        Student student = new StudentBuilder().build();
+        DeleteCommand command = (DeleteCommand) parser.parseCommand(StudentUtil.getDeleteCommand(student));
+        assertEquals(new DeleteCommand(student.getStudentNumber()), command);
     }
 
     @Test
@@ -138,11 +140,12 @@ public class ClassManagerParserTest {
 
     @Test
     public void parseCommand_random() throws Exception {
-        int num = 1;
-        RandomCommand command = (RandomCommand) parser.parseCommand(RandomCommand.COMMAND_WORD + " "
-                        + num);
+        int num = 2;
+        RandomCommand command = (RandomCommand) parser.parseCommand(RandomCommand.COMMAND_WORD + " " + num);
         assertEquals(new RandomCommand(num), command);
     }
+
+    //@@author
 
     @Test
     public void parseCommand_exit() throws Exception {

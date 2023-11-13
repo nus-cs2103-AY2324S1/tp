@@ -15,6 +15,12 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all students";
 
+    /**
+     * Lists all students in the Student List.
+     * @param model {@code Model} which the command should operate on.
+     * @param commandHistory The command history to record this command.
+     * @return A {@code CommandResult} with the feedback message of the operation result.
+     */
     @Override
     public CommandResult execute(Model model, CommandHistory commandHistory) {
         requireNonNull(model);

@@ -66,20 +66,23 @@ public class ConfigCommand extends Command {
         // This will display the class details of the first student before the configuration is done
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         List<Student> allStudentList = model.getFilteredStudentList();
+        updateClassInformation(model, allStudentList);
+
+        // Clears the view panel after resetting class details of students
+        model.resetSelectedStudent();
+        model.commitClassManager();
+        model.configReset();
+
+        return new CommandResult(String.format(MESSAGE_CONFIG_SUCCESS, tutorialCount, assignmentCount));
+    }
+
+    private static void updateClassInformation(Model model, List<Student> allStudentList) {
         for (Student student : allStudentList) {
             ClassDetails newClassDetails = new ClassDetails(student.getClassNumber());
             Student editedStudent = new Student(student.getName(), student.getPhone(), student.getEmail(),
                     student.getStudentNumber(), newClassDetails, student.getTags(), student.getComment());
             model.setStudent(student, editedStudent);
         }
-
-        // Clears the view panel after resetting class details of students
-        model.resetSelectedStudent();
-        model.commitClassManager();
-        // Reset the history of the model and prevent any undo commands
-        model.configReset();
-
-        return new CommandResult(String.format(MESSAGE_CONFIG_SUCCESS, tutorialCount, assignmentCount));
     }
 
     /**
