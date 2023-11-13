@@ -491,7 +491,9 @@ Saves changes to details of the fosterer which you have made in the profile page
 
 **:exclamation: Important:**<br>
 
-* This command is only available in the profile page of a fosterer.
+* Just like `add` command, changing name to uppercase or to lowercase or adding spaces in names would not be saved 
+e.g. Since "Anne Tay" is the same person as "anne tay" and "anne  (multiple spaces)  tay", such edits would not be saved.
+
 * This command only works in the profile page, which you can navigate to by executing the `view` command.
 
 </div>
