@@ -7,7 +7,7 @@ title: User Guide
 
 ![Ui](images/Ui.png)
 
-Connectify is a **desktop app for managing clients, optimized for use via a Command Line Interface** (CLI). Connectify helps salespersons manage their clients information records and data, boosting their efficiency in building customer relationships! If you can type fast, Connectify can get your client management tasks done faster than traditional GUI apps.
+Connectify is a **desktop app for managing clients, optimized for use via a [Command Line Interface (CLI)](#glossary)**. Connectify helps salespersons manage their clients information records and data, boosting their efficiency in building customer relationships! If you can type fast, Connectify can get your client management tasks done faster than traditional GUI apps.
 
 In this user guide, you will find instructions on how to install Connectify and use its many features to manage your clients.
 
@@ -92,6 +92,24 @@ For most commands, **parameters** are prefixed by **flags**. They are indicators
 [↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+
+# Glossary
+
+This section contains a list of terms used in this user guide. Some terms defined will be repeated here so feel free to refer back to this section if you have forgotten or are unsure of what a term means!
+
+* **Command Line Interface (CLI)**: A type of user interface where the user types in commands to interact with the application.
+* **Commands**: The string of text you type into the command box. They usually start with a command word. Read more about it [here](#if-youre-new-what-are-commands).
+* **Parameters**: Additional information to be supplied by the user into commands.
+* **Flags**: Indicators to differentiate various parts of the command. They consist of a letter, followed by a `/`. e.g. `n/` is the flag for the `NAME` parameter.
+* **Hot/Warm/Cold Lead**: The likelihood of a client to become a buying customer. A hot lead is a potential client who is ready to buy. A warm lead is a potential client who is interested in buying. A cold lead is a potential client who is not ready to buy.
+* **Graphical User Interface (GUI)**: A screen with buttons and windows to interact with the application.
+* **Dashboard**: A screen that displays a summary of your client interactions and important follow-ups. Find out about Connectify's dashboard [here](#graphical-user-interface-components).
+* **Follow-up**: A meeting with a client to follow up on their interest in your product. You can find out about how Connectify calculates follow-up dates [here](#follow-up-calculation).
+
+
+[↑ Back to Table of Contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 # Graphical User Interface Components
@@ -146,7 +164,7 @@ Let's first discuss the top half of the interface.
    - Breakdown of the different interaction outcomes
    - Number of hot / warm / cold [leads](#common-use-case-marking-a-clients-lead)
 
-5. **Upcoming Follow-ups:** upcoming meetings for each client. Follow-up dates are determined automatically by the latest interaction date and the lead of the client. See [how Connectify calculates follow-up dates.](#follow-up-calculation)
+5. **Upcoming Follow-ups:** upcoming meetings for each client. Follow-up dates are determined automatically by the latest interaction date and the lead of the client. They are also updated daily while the app remains open. See [how Connectify calculates follow-up dates.](#follow-up-calculation)
 
     <div style="page-break-after: always;"></div>
 
@@ -567,9 +585,9 @@ FIELD INDEX NEW_VALUE
 
 </div>
 
-#### Common use case: marking a client as a hot, warm, or cold lead
+#### Common use case: marking a client's lead
 
-As salespeople, we need to gauge the potential of each client, which represents how likely they are to become a buying customer. We use hot leads to represent a customer with high potential, and cold leads to represent customers with low potential.
+As salespeople, we need to record the likelihood of a client to become a buying customer, the term for this is leads. We use hot leads to represent a customer with high potential, and cold leads to represent customers with low potential.
 
 You can use the ***lead*** command to mark a client as a **hot**, **warm** or **cold** lead. For example, if you wish to mark the client at index 4 as a cold lead, enter `lead 4 cold`. 
 
@@ -665,7 +683,7 @@ This is especially useful if you find yourself having to re-enter a command that
 
 **Q**: How do I transfer my data to another computer?
 <br>
-**A**:
+**A**: Follow these steps:
 <br>
 1. Find your data folder - it should be in the same directory as your `connectify.jar` file.
 
@@ -693,8 +711,14 @@ This is especially useful if you find yourself having to re-enter a command that
     If the last interaction is 1-8 weeks ago, and the client is a COLD lead it will appear in the follow-ups (since cold 8 weeks + the last interaction date). Upon changing the lead to a HOT lead without any new interactions, the next follow-up will be calculated to be one week afterwards. Since that date has already passed, it will no longer be reflected in the follow-ups section but the user may not have necessarily contacted the client.
     </details>
 
-[↑ Back to Table of Contents](#table-of-contents)
+2. Minor visual bug when follow-ups are updated overnight.
+    <details>
+    <summary>Details</summary>
+    <br>
+    When follow-ups are updated overnight, a long follow-up list might be compressed into "...", just click on it to fix the issue.
+    </details>
 
+[↑ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
