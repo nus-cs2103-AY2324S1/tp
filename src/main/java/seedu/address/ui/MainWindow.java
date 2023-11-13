@@ -305,6 +305,9 @@ public class MainWindow extends UiPart<Stage> {
         lessonDetailListPanel.setLessonDetails(lesson, model);
     }
 
+    /**
+     * Updates the detail panels if there is a detail of lesson or person shown.
+     */
     public void updateDetailPanels() {
         Person currentPerson = model.getCurrentlyDisplayedPerson();
         Lesson currentLesson = model.getCurrentlyDisplayedLesson();
