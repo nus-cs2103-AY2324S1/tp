@@ -109,7 +109,7 @@ Throughout this guide, you will see different text styles that are used to highl
       - Seamlessly create, update, and delete your contacts, ensuring your contact list is always up-to-date.<br><br>
 
   2. **Effortless Task Management**:
-      - CoordiMate records down your tasks and their completion status, allowing you to stay on top of your to-do list.<br><br>
+      - CoordiMate records down your tasks and their completion status, allowing you to stay on top of your task list.<br><br>
 
   3. **Simplified Searching**:
       - Easily locate contacts or tasks based on your criteria. No more scrolling through endless lists!<br><br>
@@ -1019,7 +1019,7 @@ deleteAllDone
 dad
 ```
 
-- After completing the deletion of completed tasks, the task list will automatically revert back to displaying all tasks, ensuring you have a comprehensive overview of your remaining to-dos.
+- After completing the deletion of completed tasks, the task list will automatically revert back to displaying all tasks, ensuring you have a comprehensive overview of your remaining tasks.
 
 {% include admonition.html type="warning" title="Warning" body="
 
@@ -1038,7 +1038,7 @@ All completed tasks will be removed from your task list immediately. This action
 
  Error message | How to resolve
 ---------------|---------------
-`No Done tasks found in task list` | Ensure that there are tasks marked as done in your task list with [`findDone` command](#29-finding-all-tasks-that-are-done-finddone).
+`No Done tasks found in task list` | Ensure that there are tasks marked as done in your task list.
 
 ---
 
