@@ -116,14 +116,18 @@ Go to the [Table of Contents](#table-of-contents) to navigate to the feature tha
 
 3. Copy the file to the folder you want to use as the _home folder_ for your JabPro.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jabpro.jar` command to run the application.<br>  
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>  
-   ![Ui](images/main.png)  
-<br>
-5. If your UI looks **compressed and words are being cut off such as that seen below**, you should **resize** the window to a larger size by dragging the corners of the application window. The UI should now look like the example given above.<br>  
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar jabpro.jar` command to run the application. <br> 
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+
+    ![Ui](images/main.png)  
+   
+5. If your UI looks **compressed and words are being cut off such as that seen below**, you should **resize** the window to a larger size by dragging the corners of the application window. The UI should now look like the example given above.
+   <br>
+  
     ![Ui](images/UICompressed.png)
 
     **Here's what each part of the GUI signifies:** <br>
+
     ![UiBreakdown](images/uibreak.png)
 
    | Colour                                                   | Component                   | Description                                                                                                                                     |
@@ -230,19 +234,22 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/[CATEGORY] TAGNAME]…�
 An example of the `add` command being successfully executed:
 1. Enter the command `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/dept finance`
 2. This is the result of the successful `add` command (Take note that command entered will not be shown in the result):
-   ![Add-Success](images/add-command-success.png)
+   
+    ![Add-Success](images/add-command-success.png)
 <br>
 
 An example of the `add` command failing to execute due to missing mandatory fields:
 1. Enter the command `add n/Betsy Crowe t/friend` (**Missing mandatory fields**)
 2. This is the result of the failed `add` command:
-   ![Add-Fail](images/add-command-failure.png)
+   
+    ![Add-Fail](images/add-command-failure.png)
 <br>
 
 An example of trying to add a person with the same name as an existing person:
 1. Enter the command `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/dept finance` (**Same name as existing applicant**)
 2. This is the result of the failed `add` command:
-   ![Add-Fail](images/add-command-duplicate-person.png)
+   
+    ![Add-Fail](images/add-command-duplicate-person.png)
 
 ### Adding a remark to a applicant: `remark`
 
@@ -268,13 +275,15 @@ An example of the `remark` command being successfully executed:
 An example of the `remark` command being successfully executed with the **REMARK** keyword:
 1. Enter the command `remark 1 r/**REMARK** furthermore he is great at teamwork`
 2. This is the result of the successful `remark` command (Take note that command entered will not be shown in the result):
-   ![Remark-Success](images/remark-command-enhanced-success.png)
+   
+    ![Remark-Success](images/remark-command-enhanced-success.png)
 <br>
 
 An example of the `remark` command failing to execute due to wrong index:
 1. Enter the command `remark 10 r/Great attitude, hardworking` (**Index does not exist on applicant list panel**)
 2. This is the result of the failed `remark` command:
-   ![Remark-Fail](images/remark-command-clear-remark.png)
+   
+    ![Remark-Fail](images/remark-command-clear-remark.png)
 <br>
 
 Additional Examples:
@@ -391,21 +400,23 @@ This means that the view will be updated to reflect the latest changes to the da
 An example of the `view` command being successfully executed:
 1. Enter the command `view 3`
 2. This is the result of the successful `view` command (Take note that command entered will not be shown in the result):
+   
    ![View-Success](images/view-command-success.png)
-   <br>
+<br>
 
 An example of the `view` command being successfully executed for person with tags and score:
 1. Enter the command `view 2` (**Person with tags and score**)
 2. This is the result of the successful `view` command (Take note that command entered will not be shown in the result):
-   ![View-Success](images/view-command-with-stats-success.png)
-   <br>
+   
+    ![View-Success](images/view-command-with-stats-success.png)
+<br>
 
 An example of the `view` command failing to execute due to wrong index:
 1. Enter the command `view 0` (**Index does not exist on applicant list panel**)
 2. This is the result of the failed `view` command:
+   
    ![View-Fail](images/view-command-failure.png)
-   <br>
-   <box type="tip" seamless>
+<br>
 
 ### Editing a person : `edit`
 
@@ -460,25 +471,29 @@ Notes on rules for `edit` command involving tags with categories for `t/[CATEGOR
 An example of the `edit` command being successfully executed:
 1. Enter the command `edit 1 n/Alex Ho p/91234567` (**Edit name and phone number**)
 2. This is the result of the successful `edit` command (Take note that command entered will not be shown in the result):
+   
    ![Edit-Success](images/edit-command-success.png)
-   <br>
+<br>
 
 An example of the `edit` command being successfully executed with tags and score:
 1. Ensure that you have created a tag `Interview` under the `assessment` category using the `create` command. That is, enter the command `create t/assessment Interview`
 2. Enter the command `edit 1 t/Interview sc/Interview 80` (**Edit tag and score**)
 3. This is the result of the successful `edit` command (Take note that command entered will not be shown in the result):
+   
    ![Edit-Success](images/edit-command-with-stats-success.png)
-   <br>
+<br>
 
 An example of the `edit` command being successfully executed to clear a tags and score:
 1. Enter the command `edit 1 t/` (**Clear all tags**)
 2. This is the result of the successful `edit` command (Take note that command entered will not be shown in the result):
+   
    ![Edit-Success](images/edit-command-clear-tags-success.png)
 <br>
 
 An example of the `edit` command being wrongly executed due to trying to attach a score to a tag that is not of the `assessment` category:
 1. Enter the command `edit 1 t/TechLead sc/TechLead 80` (**Tag `TechLead` is not of the assessment category**)
 2. This is the result of the failed `edit` command:
+   
    ![Edit-Fail](images/edit-command-failure.png)
 <br>
 
@@ -542,9 +557,13 @@ Format: `create t/CATEGORY TAGNAME…​`
    An example of the `create` command being successfully executed:
 1. Enter the command `create t/dept marketing t/role developer`
 2. This is what you should see upon successful execution of command.
-   ![create-success](images/create-success.png)
+   
+    ![create-success](images/create-success.png)
+
 3. View your newly created tags using the `listT` command.
+
    ![listT-create](Images/listT-create.png)
+
 
 ### Listing all tags: `listT`
 
@@ -585,30 +604,27 @@ Format: `search (n/NAME [MORE NAME] / st/STATUS [MORE STATUS] / t/TAG [MORE TAGS
 
 * You can combine multiple search categories in a single `search` command.
 * Search parameters are case-insensitive.
+  
+</box>
 
 Examples of successful command execution:
 1. `search n/alex bernice`
-   <br>
-   <br>
+   
    ![search-success-1](images/search-success-1.png)
-   <br>
-   <br>
+  
    The above `search` command displayed all candidates whose name match ANY of the given keywords. This is because
-   `search` does an `OR` search within a specific category.
-   <br>
-   <br>
+   `search` does an `OR` search within a specific category. <br>
 2. `search n/alex bernice st/interviewed t/intern`
-   <br>
-   <br>
+   
    ![search-success](images/search-success.png)
-   <br>
-   <br>
+  
    Notice how the above `search` command did not display "Alex" despite his profile matching
-   the `name` and `tag` categories. This is because `search` does an `AND` search across multiple categories.
+   the `name` and `tag` categories. This is because `search` does an `AND` search across multiple categories.<br>
 
 <box type="tip" seamless>
 
-What does it mean to do an `OR` search within a single category and an `AND` search across multiple categories?
+**What does it mean to do an `OR` search within a single category and an `AND` search across multiple categories?**
+<br>
 <br>
 It's best to explain this by breaking down an example `search` command!
 <br>
@@ -616,6 +632,8 @@ It's best to explain this by breaking down an example `search` command!
 * names contain either Alex `OR` Bernice
 * `AND` status is either interviewed
 * `AND` has a tag `intern`
+
+</box>
 
 Failed to execute the `search` command? Here are some possible reasons why:
 1. Missing search category i.e. `search`
@@ -662,6 +680,7 @@ Set up for examples when you first start JABPro with default data:
 4. `edit 2 t/interview sc/interview 90`
 5. `edit 3 t/interview sc/interview 70`
 6. The result of the above commands should look like this:
+
    ![Filter-Setup](images/filter-setup.png)
 <br>
 
@@ -669,6 +688,7 @@ An example of the `filter` command being successfully executed:
 1. Enter the command `list`
 2. Enter the command `filter t/interview met/percentile val/80` (**Filter by percentile**)
 3. This is the result of the successful `filter` command (Take note that command entered will not be shown in the result):
+
    ![Filter-Success](images/filter-command-success.png)
 <br>
 
@@ -676,6 +696,7 @@ An example of the `filter` command being successfully executed with `median`:
 1. Enter the command `list`
 2. Enter the command `filter t/interview met/median` (**Filter by median**)
 3. This is the result of the successful `filter` command (Take note that command entered will not be shown in the result):
+   
    ![Filter-Success](images/filter-command-median-success.png)
 <br>
 
@@ -683,14 +704,16 @@ An example of the `filter` command being incorrectly executed due to non-existen
 1. Enter the command `list`
 2. Enter the command `filter t/techlead met/percentile val/80` (**Tag `techlead` does not exist**)
 3. This is the result of the failed `filter` command:
-   ![Filter-Fail](images/filter-command-failure.png)
+   
+    ![Filter-Fail](images/filter-command-failure.png)
 <br>
 
 An example of the `filter` command being incorrectly executed due to an invalid value for `val/VALUE`:
 1. Enter the command `list`
 2. Enter the command `filter t/interview met/percentile val/-1` (**Negative value for percentile**)
 3. This is the result of the failed `filter` command:
-   ![Filter-Fail](images/filter-command-failure-2.png)
+   
+    ![Filter-Fail](images/filter-command-failure-2.png)
 <br>
 
 **Significance of using `filter` with the metrics `score`, `percentile`, `mean` and `median`:**
@@ -710,8 +733,74 @@ Format:
 
 * Attribute is case-insensitive: `list so/NAME` and `list so/name` return the same result.
 * The result will be sorted in **ascending** order.
-* The sorting algorithm is case-sensitive, which means it will treat uppercase and 
-lowercase letters as distinct. This may result in names being sorted as A B C a b c, rather than A a B b C c.
+* The sorting algorithm is case-sensitive, which means it will treat uppercase and
+  lowercase letters as distinct. This may result in names being sorted as A B C a b c, rather than A a B b C c.
+
+### Deleting job applicants : `delete`
+
+Deletes the specified job applicants from the address book.
+
+Format: `delete INDEX` or `delete (t/TAGNAME... st/STATUS...)`
+
+Note:
+* User **cannot** delete by index and delete by tags & status in a single command.<br>
+  E.g. `delete 1 t/hardworking` is not allowed. 
+
+#### Deleting job applicants by index
+
+Deletes job applicants at the specified index.
+
+Format `delete INDEX`
+
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Example: 
+* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+#### Deleting job applicants by tag
+
+Deletes job applicants whose tag(s) match any of the given tag keywords
+
+* Keywords are case-insensitive: `delete t/hardworking` and `delete t/HARDWORKING` return the same result.
+
+Example:
+* `delete t/hardworking`
+
+#### Deleting job applicants by status
+
+Deletes job applicants whose status match any of the given keywords.
+
+Format: `delete st/STATUS...`
+
+* Keywords can only be from the following list: `Preliminary`, `Interviewed`, `Rejected`, `Offered`
+  E.g. `delete st/interviewing` will give an error.
+* Keywords are case-insensitive: `delete st/interviewed` and `delete st/INTERVIEWED` return the same result.
+
+Example:
+* `delete st/interviewed`
+
+#### Notes for advanced users:
+* You can combine the status and tags prefixes (e.g. `delete st/offered t/hardworking`) in a single delete command.
+* Each delete category can be used at most once in a single search command.<br>
+  E.g. `delete st/interviewed st/rejected` is not allowed.
+
+Example:
+* `delete st/interviewed rejected t/intern manager` will delete applicants whose:
+    * status is either **interviewed** or **rejected**
+    * AND has a tag `intern` or `manager`
+
+### Setting an applicant's status : `set`
+
+Format: `set INDEX STATUS`
+
+Sets the applicant to a specific status ("Preliminary"/ "Interviewed"/ "Rejected"/ "Offered")
+
+* Sets the person at the specified `INDEX` to a specific hiring status.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The status must be a string of exactly "Preliminary", "Interviewed", "Rejected" or "Offered".
 
 Examples:
 * `list` Shows a list of all persons.
@@ -768,8 +857,6 @@ Format: `schedule`
 
 **Tip:** The `Events` window can also be accessed by clicking `Events > Event` in the menu bar, located at the top of the window.
         <img src="images/eventstab.png">
-
-
 </box>
 
 **Example of successful execution of `schedule` command:**
@@ -883,8 +970,6 @@ You should ensure that you have **sufficient candidates of more than 20** with a
 3. `percentile` as where this candidate stands among all other candidates (treat it like a ranking system, the higher the percentile, the better the candidate is performing)
 
 </box>
-
-
 
 
 **Advanced users**
