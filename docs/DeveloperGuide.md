@@ -1077,3 +1077,6 @@ Given below are some of the possible enhancements that could be added in future 
 9. Improved UI for attendance records
    > Currently, it displays the attendance records in multiple lines and require scrolling, which makes it hard to view all information at a glance.
    > We plan to improve the UI by either showing the attendance records using boxes instead, with colours differentiating the different status for their attendance, such as using green for present, red for absent and grey for unmarked.
+10. Standarise prefix for tutorial group
+   > Currently, `add` and `edit` command uses `t/` prefix while `list attendance` and `delete all` uses the `tg/` prefix.
+   > We plan to standardise the prefix to use the `tg/` prefix to avoid confusion.
