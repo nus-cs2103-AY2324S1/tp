@@ -25,7 +25,7 @@ WellNUS is optimised for use via a **Command Line Interface** (CLI) while still 
 If you can type fast, WellNUS can get your contact management and scheduling tasks done faster than traditional GUI apps.
 </div>
 
-## Table of Contents
+* Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -75,7 +75,15 @@ If you can type fast, WellNUS can get your contact management and scheduling tas
 
 6. Refer to the [Features](#2-features) below for details of each command.
 
-### 1.2 About the command format
+### 1.2 Icons used in this User Guide
+
+| Icons                          | Representation                           |
+|--------------------------------|------------------------------------------|
+| :information_source:  **Note** | Offers additional useful information     |
+| :exclamation: **Caution**      | Warns about common mistakes              |
+| :bulb: **Tip**                 | Provides tips to enhance your experience |
+
+### 1.3 About the command format
 
 All instructions executed in WellNUS generally use the following command format: `COMMAND_WORD PREFIX/PARAMETER`.
 The list of all available prefixes and parameters, as well as constraints of each parameter, is shown in the table below. 
@@ -118,7 +126,7 @@ To see a list of all command words, refer to the [Command Summary](#5-command-su
 </div>
 
 
-### 1.3 About student notes
+### 1.4 About student notes
 
 Student notes of a student can be viewed by double-clicking on the specific student that you want under the "Student"
 column. You can only view student notes for one student at a time. You can refer to the following diagrams below for reference.
@@ -173,7 +181,8 @@ Invalid examples:
 
 #### 2.2.2 Deleting a Student: `delete`
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Be careful when deleting a student!**
+<div markdown="span" class="alert alert-warning">
+:exclamation: **Caution:**
 Deleting a Student also cancels all appointments associated to that Student.
 </div>
 
@@ -193,7 +202,8 @@ Invalid examples:
 * `delete 0` (student index only starts from 1)
 * `delete John` (index should be a number)
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:**
 If you know the name of the student you want to delete, use the `find` command to filter the student list first.
 </div>
 
@@ -201,7 +211,7 @@ If you know the name of the student you want to delete, use the `find` command t
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Note:**<br>
+:information_source: **Note:**
 Double-clicking on the Student card displays the Student notes under the Notes section!
 The “Notes” column will inform you if there are no student notes for a particular Student.
 </div>
@@ -227,7 +237,8 @@ Invalid examples:
 * `note 0` (invalid index)
 * `note Alex note/Likes dogs.` (index should be a number)
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:**
 To delete an existing note, simply use `note STUDENT_INDEX` or `note STUDENT_INDEX note/`
 </div>
 
@@ -252,8 +263,8 @@ Invalid example:
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: How the find command works:**<br>
-The intended behaviour of the find instruction might be confusing. To illustrate the proper behaviour, consider the example scenario below.<br>
+:information_source: **Note:**
+The intended behaviour of the find command might be confusing. To illustrate the proper behaviour, consider the example scenario below.<br>
 Given a Student named `Roy Lee` is in the WellNUS student list:
 * `find Roy`, `find Lee` and `find Roy Lee` will successfully find the Student.
 * `find Royy`, `find Le`, `find Roy L`, `find RoyLee` will not find the Student.
@@ -307,8 +318,8 @@ Format `edit STUDENT_INDEX [c/CONTACT_NUMBER] [a/HOME_ADDRESS]`
 
 
 <div markdown="block" class="alert alert-info">
-**:information_source: Note:**<br>
-- Providing the same field as before (eg. changing contact from 99998888 to 99998888) will not throw an error
+:information_source: **Note:**
+Providing the same field as before (eg. changing contact from 99998888 to 99998888) will not throw an error
 </div>
 
 Valid examples:
@@ -320,13 +331,15 @@ Invalid example:
 
 ### 2.3 Appointment Commands
 
-<div markdown="span" class="alert alert-info">:information_source:
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:**
 Appointments will be **automatically sorted** by Date and Time in **ascending order**.
 </div>
 
 #### 2.3.1 Scheduling an Appointment: `schedule`
 
-<div markdown="span" class="alert alert-warning">:exclamation:
+<div markdown="span" class="alert alert-warning">
+:exclamation: **Caution:**
 The Student must exist before an Appointment can be scheduled for the Student!
 </div>
 
@@ -357,7 +370,8 @@ Invalid examples:
 * `schedule n/Jon date/09-12-2023 from/1100 to/1230 d/first counselling session` (date and time are in the wrong format)
 * `schedule n/Jon date/2023-12-30 from/16:30 to/17:30 d/` (description is empty)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:**
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:**
 WellNUS automatically checks for overlaps between appointments whenever a new appointment is being added. If there is an
 overlap between the new appointment to be scheduled and existing appointments, the new appointment will be **not be scheduled**
 and will inform the user to reschedule the appointment.
@@ -439,7 +453,8 @@ WellNUS data is saved in the hard disk automatically after any command that chan
 #### 2.4.5 Editing the data file
 
 WellNUS data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">
+:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, WellNUS will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
@@ -481,7 +496,7 @@ You can always update the risk level later using the tag command when more infor
 
 ## 5. Command summary
 
-| Action                                                                                     | Format, Valid examples                                                                                                                                                |
+| Action                                                                                     | Format, Valid examples                                                                                                                                          |
 |--------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [Help](#211-viewing-help-help)                                                             | `help`                                                                                                                                                          |
 | [Add Student](#221-adding-a-student-add)                                                   | `add n/STUDENT_NAME c/CONTACT_NUMBER a/HOME_ADDRESS [r/RISK_LEVEL]` <br> e.g., `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07 r/medium`                |
@@ -496,5 +511,4 @@ You can always update the risk level later using the tag command when more infor
 | [View all Students and/or Appointments](#241-viewing-all-students-andor-appointments-view) | `view g/CATEGORY` <br> e.g., `view g/all`                                                                                                                       |
 | [Exit](#242-exiting-the-program-exit)                                                      | `exit`                                                                                                                                                          |
 | [Delete all data](#243-clearing-storage-clear)                                             | `clear`                                                                                                                                                         |
-
 

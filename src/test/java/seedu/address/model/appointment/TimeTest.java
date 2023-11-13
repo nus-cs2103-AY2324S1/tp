@@ -26,12 +26,23 @@ public class TimeTest {
         assertTrue(Time.isValidTime("12:10"));
         assertTrue(Time.isValidTime("00:00"));
 
-        // invalid Time
+        // invalid Time: does not follow HH:mm format
+        // EP: extra characters
         assertFalse(Time.isValidTime("2023-10-14 15:30")); // includes date
-        assertFalse(Time.isValidTime("15:")); // incomplete
         assertFalse(Time.isValidTime("15:301")); // extra digit
-        assertFalse(Time.isValidTime("15:AM")); // contains non-digit
-        assertFalse(Time.isValidTime("25:00")); // hour 25
+
+        // EP: too little characters
+        assertFalse(Time.isValidTime("15:")); // incomplete
+
+        // EP: non-numerical characters
+        assertFalse(Time.isValidTime("15:AM")); // contains alphabetical characters
+        assertFalse(Time.isValidTime("15:##")); // contains special characters
+
+        // EP: outside of 00:00 to 24:00
+        assertFalse(Time.isValidTime("25:00"));
+        assertFalse(Time.isValidTime("24:01"));
+
+        // EP: outside of xx:00 to xx:59
         assertFalse(Time.isValidTime("15:60")); // 60 minutes
     }
 

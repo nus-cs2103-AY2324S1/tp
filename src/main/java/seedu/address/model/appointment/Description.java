@@ -10,7 +10,7 @@ public class Description {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Description should have a minimum length of 1 character and maximum length of 100 characters";
-    public static final String VALIDATION_REGEX = ".{1,100}";
+    public static final String VALIDATION_REGEX = "^(?!\\s*$).{1,100}$";
     public final String value;
 
     /**
