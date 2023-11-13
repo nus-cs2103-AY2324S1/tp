@@ -29,6 +29,8 @@ With MedBook, experience a new level of convenience and control:
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 <!-- * Table of Contents -->
 
 ## Table of Contents
@@ -68,6 +70,8 @@ With MedBook, experience a new level of convenience and control:
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ## Navigating the User Guide
 
 Welcome to the MedBook User Guide! Our goal is to empower you with the knowledge and confidence to make the most of MedBook's features.
@@ -98,7 +102,7 @@ We're here to make your experience as user-friendly as possible. Let's get start
 
    - Choose a folder where you'd like to manage your patient data.
 
-<box type="tip" seamless>
+<box type="tip">
 
 **Tip**: Create a new folder named `MedBook` for easy organization.
 
@@ -120,13 +124,14 @@ We're here to make your experience as user-friendly as possible. Let's get start
 5. **Launch MedBook**:
 
    - Navigate to to the folder where you have stored `medbook.jar` using the `cd` command
-     <box type="tip" seamless>
 
-     **Tip**: Right-click the folder and select `New Terminal at Folder` (**Mac**) or `Open in Terminal` (**Windows**) to instantly navigate to the folder in your **Terminal**!
+<box type="tip">
 
-     </box>
+**Tip**: Right-click the folder and select `New Terminal at Folder` (**Mac**) or `Open in Terminal` (**Windows**) to instantly navigate to the folder in your **Terminal**!
 
-   - Type `java -jar medbook.jar` and hit Enter to start MedBook.<br>
+</box>
+
+- Type `java -jar medbook.jar` and hit Enter to start MedBook.<br>
 
 Once launched, MedBook will look like this:
 ![Ui](images/MedBookUi.png)
@@ -195,11 +200,11 @@ Here is a brief summary of the GUI components in MedBook.
 
    - Launch the MedBook application. You may refer to [here](#quick-start).
 
-    <box type="info" seamless>
+<box type="info">
 
-   **Note**: Upon starting, MedBook will display some sample data to help you get familiar.
+**Note**: Upon starting, MedBook will display some sample data to help you get familiar.
 
-    </box>
+</box>
 
 2. **Opening the Help Window**:
    - Let us try opening the **Help Window**. Type `help` in the Command Input Box and press Enter.
@@ -325,15 +330,15 @@ The **domain** name must: <br>
 
 ### Viewing help : `help`
 
-<box type="tip" seamless>
-
-**Tip**: If you get stuck while using MedBook, use the help command to get a quick overview of all commands!
-
-</box>
-
 Opens/focuses the **Help Window** displaying all commands.
 
 Format: `help`
+
+<box type="tip">
+
+**Tip**: If you get stuck while using MedBook, use the `help` command to get a quick overview of all commands!
+
+</box>
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
@@ -341,17 +346,17 @@ Format: `help`
 
 ### Adding a patient: `addpatient`
 
-<box type="tip" seamless>
-
-**Tip**: Wants to add a new patient? Try out the `addpatient` command!
-
-</box>
-
 Adds a new patient to the system.
 
 Format: `addpatient n/NAME i/NRIC e/EMAIL p/PHONE g/GENDER a/AGE bt/BLOODTYPE [al/ALLERGY]...`
 
 - Adds a patient with information including: `NAME`, `NRIC`, `EMAIL`, `PHONE`, `GENDER`, `AGE`, `BLOODTYPE`, `ALLERGY`.
+
+<box type="tip">
+
+**Tip**: Want to add a new patient to MedBook? Try out the `addpatient` command!
+
+</box>
 
 Example:
 
@@ -361,20 +366,14 @@ His email and phone number is **johndoe@gmail.com** and **12345678** respectivel
 
 Screenshots:
 
-![AddPatient Screenshots](images/screenshots/addPatient.png)
-![AddPatient Screenshots](images/screenshots/addPatient%20-%20after.png)
+<img src="images/screenshots/addPatient.png" width="500" alt="AddPatient Screenshots">
+<img src="images/screenshots/addPatient%20-%20after.png" width="500" alt="AddPatient Screenshots">
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ---
 
 ### Adding a medical record: `addrecord`
-
-<box type="tip" seamless>
-
-**Tip**: Don't know how to add a medical record to the patient? Check out the `addrecord` command!
-
-</box>
 
 Adds a new medical record to the system.
 
@@ -393,20 +392,14 @@ Example:
 
 Screenshots:
 
-![AddRecord Screenshots](images/screenshots/addRecord.png)
-![AddRecord Screenshots](images/screenshots/addRecord%20-%20after.png)
+<img src="images/screenshots/addRecord.png" height="500">
+<img src="images/screenshots/addRecord%20-%20after.png" height="500">
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ---
 
 ### Adding an appointment: `addappointment`
-
-<box type="tip" seamless>
-
-**Tip**: Wants to add an appointment? The `addappointment` command is here to help you!
-
-</box>
 
 Adds a new appointment to the system.
 
@@ -420,8 +413,8 @@ Example:
 
 Screenshots:
 
-![AddAppointment Screenshots](images/screenshots/addAppointment.png)
-![AddAppointment Screenshots](images/screenshots/viewAppointment.png)
+<img src="images/screenshots/addAppointment.png" width="500">
+<img src="images/screenshots/viewAppointment.png" width="500">
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
@@ -435,7 +428,7 @@ Format: `list`
 
 - **All** patients will be shown in the **Patient List**.
 
-<box type="tip" seamless>
+<box type="tip">
 
 **Tip**: The `list` command allows you to easily view all the patients in the **Patient List**. For instance, after you've used the `search` command to find specific patients, you can use the `list` command to gather all the patients conveniently!
 
@@ -446,12 +439,6 @@ Format: `list`
 ---
 
 ### Viewing patient medical records: `view`
-
-<box type="tip" seamless>
-
-**Tip**: Don't know how to display medical records? Easily view them by `view` command!
-
-</box>
 
 Displays the medical records of a specific patient.
 
@@ -473,8 +460,8 @@ Examples:
 
 Screenshots:
 
-![View Screenshots](images/screenshots/view.png)
-![View Screenshots](images/screenshots/view%20-%20after.png)
+<img src="images/screenshots/view.png" width="500">
+<img src="images/screenshots/view%20-%20after.png" width="500">
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
@@ -482,27 +469,21 @@ Screenshots:
 
 ### Viewing appointments: `viewappointment`
 
-<box type="tip" seamless>
-
-**Tip**: Wish to know about the upcoming appointments? Simply type in `viewappointment`!
-
-</box>
-
 Opens/focuses the **Appointment Window**.
 
 Format: `viewappointment`
+
+<box type="tip">
+
+**Tip**: Want to know about upcoming appointments? Simply type in `viewappointment`!
+
+</box>
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ---
 
 ### Editing a patient: `editpatient`
-
-<box type="tip" seamless>
-
-**Tip**: Just entered a wrong detail of the patient? Use `editpatient` to correct it!
-
-</box>
 
 Edits the details of an existing patient.
 
@@ -511,17 +492,17 @@ Format: `editpatient PATIENTID PREFIX/NEWVALUE...`
 - Edits the details of the patient with the corresponding `PATIENTID`. <br>
 
 - Acceptable fields: `NAME`, `EMAIL`, `PHONE`, `GENDER`, `AGE`, `BLOODTYPE`, `ALLERGY`. <br>
-  <box type="info" seamless>
+  <box type="info">
 
-  **Note**: `NRIC` cannot be edited.
+**Note**: `NRIC` cannot be edited.
 
-  </box>
+</box>
 
 - Existing values in the respective fields will be updated to the `NEWVALUE`. <br>
 
 - Multiple entries of `ALLERGY` are allowed i.e `editpatient 1 al/Seafood al/Dust`. <br>
 
-<box type="info" seamless>
+<box type="info">
 
 **Note**: When editing `ALLERGY`, the existing allergies of the patient will be removed i.e adding of allergies is not cumulative.
 
@@ -539,20 +520,14 @@ Examples:
 
 Screenshots:
 
-![EditPatient Screenshots](images/screenshots/editPatient.png)
-![EditPatient Screenshots](images/screenshots/editPatient%20-%20after.png)
+<img src="images/screenshots/editPatient.png" width="500">
+<img src="images/screenshots/editPatient%20-%20after.png" width="500">
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ---
 
 ### Editing a medical record: `editrecord`
-
-<box type="tip" seamless>
-
-**Tip**: Spotted an error in the medical record? Fret not, the `editrecord` is here!
-
-</box>
 
 Edits the details of an existing medical record.
 
@@ -566,9 +541,15 @@ Format: `editrecord PATIENTID/RECORDID PREFIX/NEWVALUE...`
 
 - Multiple entries of `CONDITION` and `MEDICATION` are allowed i.e `editrecord 1/1 c/Flu c/Fever m/Panadol m/Ibuprofen`. <br>
 
-<box type="info" seamless>
+<box type="info">
 
 **Note**: When editing `CONDITION` and `MEDICATION`, the existing conditions and medications of the record will be removed i.e adding of conditions and medications is not cumulative.
+
+</box>
+
+<box type="tip">
+
+**Tip**: Spotted an error in the medical record? Fret not, simply use `editrecord` to quickly make changes!
 
 </box>
 
@@ -586,12 +567,6 @@ Examples:
 
 ### Locating patients by keywords: `search`
 
-<box type="tip" seamless>
-
-**Tip**: Cannot find the patient you're looking for? If you remember one of his/her details, `search` will help you find him/her!
-
-</box>
-
 Searches for patients with details containing the corresponding `KEYWORD`.
 
 Format: `search KEYWORD [MOREKEYWORDS]...`
@@ -604,15 +579,15 @@ Format: `search KEYWORD [MOREKEYWORDS]...`
 
 - Patients with detail that are not exactly the same as the `KEYWORD` searched will not appear. e.g. **Han** will not return **Hans**. <br>
 
-<box type="info" seamless>
+<box type="info">
 
 **Note**: The details of the patient's medical records will not be searched.
 
 </box>
 
-<box type="tip" seamless>
+<box type="tip">
 
-**Tip**: Maximize the efficiency of the `search` command to quickly locate patients. It's perfect for filtering patient lists - for instance, identifying patients with specific allergies.
+**Tip**: Utilise the `search` command to quickly locate patients. It is perfect for filtering patient lists - for instance, identifying patients with specific allergies.
 
 </box>
 
@@ -624,20 +599,14 @@ Examples:
 
 Screenshots:
 
-![Search Screenshots](images/screenshots/search.png)
-![Search Screenshots](images/screenshots/search%20-%20after.png)
+<img src="images/screenshots/search.png" width="500">
+<img src="images/screenshots/search%20-%20after.png" width="500">
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ---
 
 ### Locating medical records by keywords: `searchrecord`
-
-<box type="tip" seamless>
-
-**Tip**: Feeling frustrated by the huge amount of records? Use `searchrecord` to locate the ones you need!
-
-</box>
 
 Searches for medical records of the Patient Being Viewed with details containing the corresponding `KEYWORD`.
 
@@ -649,7 +618,7 @@ Format: `searchrecord KEYWORD [MOREKEYWORDS]...`
 
 - Medical records with detail that are not exactly the same as the **KEYWORD** searched will not appear. e.g. **Head** will not return **Headache**. <br>
 
-  <box type="important" seamless>
+  <box type="important">
 
   **Important**: The **Patient Being Viewed** section should not be empty. Otherwise `searchrecord` command will not return any medical records.
 
@@ -669,22 +638,6 @@ Examples:
 
 ### Deleting a patient: `delete`
 
-<box type="tip" seamless>
-
-**Tip**: Wants to remove irrelevant patient? `delete` is here to help you!
-
-</box>
-
-<u>[Back to Table Of Contents](#table-of-contents)</u>
-
-### Deleting a patient: `delete`
-
-<box type="tip" seamless>
-
-**Tip**: Wants to remove irrelevant patient? `delete` is here to help you!
-
-</box>
-
 Deletes an existing patient from the system.
 
 Format: `delete PATIENTID`
@@ -697,20 +650,14 @@ Example:
 
 Screenshots:
 
-![Delete Screenshots](images/screenshots/delete.jpg)
-![Delete Screenshots](images/screenshots/delete%20-%20after.jpg)
+<img src="images/screenshots/delete.jpg" width="500">
+<img src="images/screenshots/delete%20-%20after.jpg" width="500">
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ---
 
 ### Deleting a medical record: `deleterecord`
-
-<box type="tip" seamless>
-
-**Tip**: The record is faulty and you want to remove it? Enter `deleterecord` to get rid of it!
-
-</box>
 
 Deletes an existing medical record from the system.
 
@@ -728,17 +675,17 @@ Example:
 
 ### Deleting an appointment: `deleteappointment`
 
-<box type="tip" seamless>
-
-**Tip**: A patient cannot attend an appointment? Use `deleteappointment` to cancel it!
-
-</box>
-
 Deletes an appointment from the system.
 
 Format: `deleteappointment APPOINTMENTID`
 
 - Deletes the appointment with the corresponding `APPOINTMENTID`.
+
+<box type="tip">
+
+**Tip**: A patient cannot attend an appointment? Use `deleteappointment` to remove it from your schedule!
+
+</box>
 
 Example:
 
@@ -750,17 +697,17 @@ Example:
 
 ### Pinning a patient: `pin`
 
-<box type="tip" seamless>
-
-**Tip**: A patient requires follow-up? `pin` can help you remember to contact them!
-
-</box>
-
 Pins an existing patient.
 
 Format: `pin PATIENTID`
 
 - Pins the patient with the corresponding `PATIENTID` to the **Pinned Patient List**.
+
+<box type="tip" seamless>
+
+**Tip**: A patient requires follow-up? Use the `pin` command to help you remember to contact them!
+
+</box>
 
 Example:
 
@@ -768,20 +715,14 @@ Example:
 
 Screenshots:
 
-![Pin Screenshots](images/screenshots/pin.png)
-![Pin Screenshots](images/screenshots/pin%20-%20after.png)
+<img src="images/screenshots/pin.png" width="500">
+<img src="images/screenshots/pin%20-%20after.png" width="500">
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ---
 
 ### Unpinning a patient: `unpin`
-
-<box type="tip" seamless>
-
-**Tip**: A patient no longer needs extra attention? Easily remove them from _Pinned Patient List_ by `unpin` command!
-
-</box>
 
 Unpins a pinned patient.
 
@@ -799,15 +740,15 @@ Examples:
 
 ### Attaching files to a patient's medical record
 
-<box type="tip" seamless>
+Attach local files to a patient's medical record by clicking on the **Attach** button located within each **Record Card**.
 
-**Tip**: A patient's report just comes out? The `attach file` feature can help you keep documents in an organised manner!
+<box type="tip">
+
+**Tip**: A patient's report just comes out? The **Attach File** feature can help you keep documents in an organised manner!
 
 </box>
 
-Attach local files to a patient's medical record by clicking on the **Attach** button located within each **Record Card**.
-
-<box type="warning" seamless>
+<box type="warning">
 
 **Caution**:
 
@@ -818,9 +759,9 @@ Attach local files to a patient's medical record by clicking on the **Attach** b
 
 Screenshots:
 
-![Attaching File Screenshots](images/screenshots/attachFile%20-%20buttonPress.png)
-![Attaching File Screenshots](images/screenshots/attachFile%20-%20selectFile.png)
-![Attaching File Screenshots](images/screenshots/attachFile%20-%20openFile.png)
+<img src="images/screenshots/attachFile%20-%20buttonPress.png" height="400">
+<img src="images/screenshots/attachFile%20-%20selectFile.png" width="400">
+<img src="images/screenshots/attachFile%20-%20openFile.png" height="400">
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
@@ -848,7 +789,7 @@ MedBook data is saved in the `data` folder automatically after any command that 
 
 MedBook data is saved automatically as a JSON file located in `[jar file location]/data/medbook.json`. The file can be edited directly to make changes to MedBook data.
 
-<box type="warning" seamless>
+<box type="warning">
 
 **Caution**: Only advanced users are encouraged to make changes to the data file as wrong data formatting may result in the application not working as intended.
 
@@ -865,7 +806,6 @@ MedBook data is saved automatically as a JSON file located in `[jar file locatio
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and copy the `data` folder over to the folder of the installed jar file in the other computer.
-
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
