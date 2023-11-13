@@ -243,20 +243,9 @@ Below is the sequence diagram for the above scenario:
 
 ![StartSequenceModel](images/StartSequenceDiagram.png)
 <br>
-**Recording Vocabulary Review:**
-- The `SessionManager` logs the vocabulary words and phrases reviewed and practiced during the language learning session.
-- This feature provides users with the ability to track their progress and revisit the words they've worked on.
 
 **User Control:**
 - Users can initiate a new language learning session at any time and conclude their session when they have completed their vocabulary review.
-- The option to start and end language learning sessions is typically available in the language learning module or settings.
-
-**Data Retention:**
-- Session data, including start and end times and vocabulary review records, is stored locally on the user's device.
-- Users may have the option to export or clear session data as needed.
-
-**Session Summary:**
-- Users can view a summary of their language learning session, including the start and end times and a list of vocabulary words and phrases reviewed.
 
 **Privacy and Security:**
 - The application should ensure the privacy and security of session data, particularly if it contains sensitive language learning content.
@@ -269,13 +258,9 @@ Below is the sequence diagram for the above scenario:
 
 3. **Ending the Language Learning Session:** When the user is satisfied with their vocabulary review, they conclude the language learning session from the language learning module or settings.
 
-4. **Session Summary:** Users can access a summary of the language learning session, which includes the start and end times and a list of vocabulary words and phrases reviewed.
-
-5. **Reviewing Session History:** Users have the option to revisit their session history, allowing them to track their language learning progress over time.
-
 #### **Design Considerations**
 
-**Aspect: How start & end executes**
+**Aspect: How `start/end` executes**
 * Alternative 1 (current choice): Creating another separate class to manage the logic.
     * Pros: It better adheres to OOP principle and easier to maintain.
     * Cons: It may potentially increase the complexity of codes.
@@ -285,12 +270,12 @@ Below is the sequence diagram for the above scenario:
     * Cons: It doesn't conform to the principle of **Single Responsibility Principle**.
 
 
-**Aspect: Preventing Commands Within a Review Session**
+**Aspect: Preventing Using A Set of Commands Within a Review Session**
 
 * Alternative 1 (Current Choice): Restricting Users with a Subset of Commands
 
     * Pros:
-    - Increased safety: A limited set of commands reduces the risk of unintended actions, making the review session safer for users.
+        - Increased safety: A limited set of commands reduces the risk of unintended actions, making the review session safer for users.
 
     * Cons:
         - Limited flexibility: Users may feel constrained if they need to perform specific actions that are not allowed within the review session.
