@@ -1673,3 +1673,25 @@ testers are expected to do more *exploratory* testing.
     1. Key in command: `save`
 
         Expected: Nothing is changed in the GUI, but a new person object is created in the data file.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Appendix: Effort
+
+The table below summarises the functional codes we have contributed to evolve the original AB3 project:
+
+| Category of achievement                         | Efforts                                                      |
+| ----------------------------------------------- | ------------------------------------------------------------ |
+| More fields that are useful in networking       | Added `grad`, `priority`, `link`, `spec` and `course` <br/>Adapted `phone` and `email` to hold multiple values |
+| More intuitive command words                    | Adapted `create` and `add` commands <br/>Changed field prefix format to be separate from field value |
+| More powerful commands for efficient networking | `edit` and `delete` can be applied to a single item in a list <br/>`find` command can search by fragment of name <br/>`sort` and `filter` commands for efficient searching <br/>`undo` and `redo` commands to help user recover mistakes <br/>`open` and `email` commands to integrate with other apps |
+| More comfortable UI/UX                          | New colour schemes, more spacious organisation, display of item indices in multi-valued fields <br/>Status bar to inform user of current filter and sort status <br/>Keyboard shortcuts and mouse interactions with GUI items |
+
+Apart from these new or adapted features, other note-worthy efforts are listed below:
+
+| Challenge                                                    | Efforts                                                      |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| AB3 only had 1 multi-valued field, `tag`, implemented using `Set`. <br/>The Json-friendly version was `JsonAdaptedTag`. <br/>We wanted to have many of such fields. | We implemented new generic `UniqueList` and `JsonAdaptedProperty` classes for these fields. <br/>`UniqueList` stores values in an internal `ArrayList`, and supports easier interaction with values in the list. <br/>`JsonAdaptedProperty` is similar to `JsonAdaptedTag` except that it works for any identifiable type. |
+| AB3's use of `requireAllNonNull` may throw run-time `NullPointerException`. | We adapted this design by replacing all run-time exceptions with assertion statements. |
+| AB3 does not have GUI testing, which affects code coverage for new UI codes. | We set up headless testing using [TestFX](https://github.com/TestFX/TestFX) library, using `FxRobot` to simulate user actions. <br/>We maintained our code coverage above 87%. |
+
