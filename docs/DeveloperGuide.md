@@ -7,6 +7,8 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Acknowledgements**
 
 * This project uses a third-party library called [itext7](https://github.com/itext/itext7), which can help the target user of our app, HR managers, to easily generate payslips as PDF files. `itext7` is released under the [AGPL license](https://github.com/itext/itext7/blob/develop/LICENSE.md).
@@ -20,8 +22,6 @@ title: Developer Guide
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
 
 ## **Design**
 
