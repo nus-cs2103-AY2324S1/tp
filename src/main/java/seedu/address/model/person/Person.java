@@ -84,7 +84,7 @@ public class Person {
     }
 
     /**
-     * Compares the policy issue date to the policy expiration date to see which comes first.
+     * Compares the policy issue date to the policy expiry date to see which comes first.
      * Returns more than 0 if expiry date is later and less than 0 otherwise
      * @return int
      */

@@ -11,7 +11,7 @@ The user interacts with it using a CLI, and it has a GUI created with JavaFX.
 Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to `sort` the client list.
-    * What it does: Allows the user to `sort` clients based on their policy expiration date, from those expiring earliest to those without policy data.
+    * What it does: Allows the user to `sort` clients based on their policy expiry date, from those expiring earliest to those without policy data.
     * Justification: The feature is useful to car insurance agents who will want to know which policies expiry fast so they can respond appropiately and not risk losing their business.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=RSXIX&breakdown=true)

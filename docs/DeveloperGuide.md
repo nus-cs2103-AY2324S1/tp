@@ -289,7 +289,7 @@ The following activity diagram summarises what happens when a user executes the 
 <br>
 
 ### `sort`
-The `sort` command allows the user to view the profiles arranged in order of earliest to latest policy expiration date, with those profiles that have no policy data placed at the end of the late
+The `sort` command allows the user to view the profiles arranged in order of earliest to latest policy expiry date, with those profiles that have no policy data placed at the end of the late
 
 #### Implementation
 The sorted list will be displayed in the UI. The remind mechanism is facilitated by `Model` through the following operations:
@@ -598,11 +598,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC7 – Get a reminder for clients with approaching policy expiration dates**
+**Use case: UC7 – Get a reminder for clients with approaching policy expiry dates**
 
 **MSS**
 
-1.  User requests to get a reminder for clients with approaching policy expiration dates within a certain number of days.
+1.  User requests to get a reminder for clients with approaching policy expiry dates within a certain number of days.
 2.  InsureIQ filters the list based on the days given.
 3.  InsureIQ shows a confirmation message.
 
@@ -620,7 +620,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to sort clients by policy expiration date.
+1.  User requests to sort clients by policy expiry date.
 2.  InsureIQ sorts the list of clients in the data file from earliest to latest policy expiry date.
 3.  InsureIQ shows a confirmation message that the list was sorted.
 

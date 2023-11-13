@@ -82,7 +82,7 @@ public interface Model {
     void setPerson(Person target, Person editedPerson);
 
     /**
-     * Sorts the list by policy expiration date
+     * Sorts the list by policy expiry date
      */
     void sortData();
 
