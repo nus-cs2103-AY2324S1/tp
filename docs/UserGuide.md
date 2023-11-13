@@ -148,7 +148,8 @@ Not to worry, here are some steps you can take to fix this:
 4. You should be able to see a file titled `addressbook.json`. Run `rm addressbook.json` to delete this file.
 5. Run `cd ..` to navigate back to the folder you were in before.
 6. Run `java -jar jabpro.jar` to relaunch the application. You should be able to see a GUI similar to the one above.
-<box>
+
+</box>
  
 5. If your UI looks **compressed and words are being cut off such as that seen below**, you should **resize** the window to a larger size by dragging the corners of the application window. The UI should now look like the example given above.
    <br>
@@ -240,7 +241,7 @@ Not to worry, here are some steps you can take to fix this:
 4. The UI below will not be updated if your command has failed.
 </box>
 
-** The example below shows a command failure for `view`:**
+**The example below shows a command failure for `view`:**
 ![CommandFailure](images/view-command-failure.png)
 <br>
 
@@ -325,7 +326,7 @@ Format: `remark INDEX r/REMARK`
 **Notes regarding `remark` command:**
 * The previous remark is not saved, and instead is replaced by the inputted remark. The command does not add to the existing remark.
 * You can empty out a remark by inputting `r/` without any text after it or by omitting the `r/` prefix.
-* You can get the remark previously inputted by using the **REMARK** keyword. It will be replaced with the previous remark. The keyword **REMARK** is case-sensitive. This means that `remark 1 r/**remark**` will just replace the remark with the word `**remark**`.
+* You can get the remark previously inputted by using the `**REMARK**` keyword. It will be replaced with the previous remark. The keyword `**REMARK**` is case-sensitive. This means that `remark 1 r/**remark**` will just replace the remark with the word `**remark**`.
 * You can use multiple prefix for `remark` but only the last prefix will be used. This means that `remark 1 r/remark r/remark2` will just replace the remark with `remark2`.
 
 
@@ -462,7 +463,6 @@ Format: `set INDEX STATUS`
 
 **Notes regarding `set` command:**
 * The index used will be the same index as the one shown in the displayed applicant list.
-<box type="tip" seamless>
 
 Sets the applicant to a specific status ("Preliminary"/ "Interviewed"/ "Rejected"/ "Offered")
 
@@ -1105,11 +1105,11 @@ You should ensure that you have **sufficient candidates of more than 20** with a
 
 
 **Formula used to calculate the summary statistics:**
-**mean** is calculated by using the formula `sum of all scores with that tag / number of applicants with that tag`
-**median** is calculated by using the formula `middle score of all scores with that tag`
-**minimum** is calculated by using the formula `lowest score of all scores with that tag`
-**maximum** is calculated by using the formula `highest score of all scores with that tag`
-**percentile** is calculated by using the formula `number of applicants with a score strictly lower than the applicant / total number of applicants with that tag`
+**mean** is calculated by using the formula `sum of all scores with that tag / number of applicants with that tag`  
+**median** is calculated by using the formula `middle score of all scores with that tag`  
+**minimum** is calculated by using the formula `lowest score of all scores with that tag`  
+**maximum** is calculated by using the formula `highest score of all scores with that tag`  
+**percentile** is calculated by using the formula `number of applicants with a score strictly lower than the applicant / total number of applicants with that tag`  
 
 
 ### Saving the data

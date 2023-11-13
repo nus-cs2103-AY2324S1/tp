@@ -499,7 +499,6 @@ Cons: It restricts users from entering data that might be understandable or conv
 * wants an organized way to keep track of candidates information
 * wants to view and manage candidates information in a single place
 * wants to filter and sort candidates based on their details
-* wants to compare candidates using their information
 * wants to view a schedule/summary of events relating to the candidates
 * wants to attach a score to candidate performance over interview and assessments
 * wants to be able to use scores in order to quantitatively compare candidates
@@ -858,9 +857,39 @@ This makes it more intuitive and logical for the user to use since the user woul
 **Improve the search and filter feature**
 Currently, the UI does not update and will remain unchanged from the previous command. This may be confusing or inaccurate and thus it should remain blank
 
+### Improve on `remark` feature
+**Improve the remark feature**
+Currently, if you use multiple prefix , it is allowed and only the last prefix will be used. We would like to improve on this by only allowing 1 prefix to be used. Thus we verify for duplicate `r/` prefix since it does not make sense to have multiple remarks for the same person.
+
 ## **Appendix: Effort**
 
-### Based on over-arching features
+### ScoreList, Score, Summary Statistic, Filter
+In terms of integration of features, this was by far the biggest and most complex. This is due to how `Summary Statistic` relied on `Score`, `ScoreList` and `Tag` to function and Filter requiring all of them to function properly.
+The thought process came when we first tried to implement 1 score for each applicant. This was the naive approach. However, we realise that with only 1 score, would mean that it can only represent 1 thing.
+This means that the Hiring Manager would have to keep track of what each score means individually and any point in arranging these scores would lead to massive confusion. Hence, we decided to attach a score to a tag.
+However, this meant that with optional and possibly multiple tagging, we will need a flexible way of attaching scores to tags. This led to the HashMap implementation of `ScoreList`.
+Additionally, we had to decide on the constraint of scores. While a common approach was to let it be between 0 and 100, we wanted to maintain great flexibility and thus constraint it as a positive integer >= 0.
+
+For storage wise, we had to learn how to store `ScoreList` in a key-value format and also decode it. So that was one big challenge in terms of storing it in a json format that can be decoded.
+
+One of the biggest problem with using the `Parser` and `Command` model is that the `Parser` has no access to the model. So at the parsing stage, you are unable to determine if the tag exists or is valid since we only want to enable it for `assessment` tags.
+This meant that it had to be carried out at the `Command` stage of execution. Additionally, it might have been a misstep trying to implement the editing of scores in the `edit` command.
+This is due to the complexity of how the `edit` command was implemented. Since you could add a tag in edit while simultaneously trying to add a score to the tag, it led to a lot of need to check.
+Additionally since tags can be easily edited, it meant that we needed to check if the ScoreList was updated and if the tag was edited. 
+This also led to many errors, since you could remove all tags, and the ScoreList would still remain. Especially since EditPersonDescriptor did not have access to the tags that the person currently have.
+Additionally, since tag was not cumulative, you would want to keep track of the scores of the current tag if they are being kept. This meant that you would need to keep track of the current tag and the current score while also allowing for changes.
+
+After that, there was the choice of implementing Summary Statistic. A lot of thought went into how we can make the scores useful. What would be a great visualisation. We chose the couple of simple statistic that we thought would be useful.
+However, the calculation of the statistic was not simple since we decided to use streams for implementation. This meant that misconception of how streams work would lead to a lot of errors. The most common 1 being that the stream is closed due to a close operation.
+Additionally, percentile was originally implemented incorrectly. This was because we did not account for the edge case of people scoring the same. This meant that the percentile would vary for same score. This was fixed by then subtracting the number of people with the same score from the total number of people.
+
+
+Following that we had filter which relied on all of the above. This was simpler to implement once all the logic was down.
+Overall, the implementation of the feature was complex due to nature of Streams and UI updates for JavaFX. 
+
+### View 
+UI generation was rather tedious in terms of using CSS and trying to get things to align properly. Additionally, the design implementation using `Commands` meant that commands did not have access to other commands during runtime.  
+This meant that we had to add an extra parameter to the CommandResult in order to get commands to auto execute view after executing the command. The implementation was simple but the design was not.
 
 ###  Flexibility for further analysis
 We acknowledge that there will be some who would prefer to analyse data outside JABPro - and that is completely fine.
