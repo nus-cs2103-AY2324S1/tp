@@ -194,8 +194,6 @@ or go on to learn about [the other commands](#features) you can utilise in JobFi
 
 ## **Key Information**
 
-<div markdown="block" class="alert alert-info">
-
 ### User Interface
 
 We designed our Graphical User Interface(GUI) with both **functionality** and **visual appeal** in mind. To provide a
@@ -322,7 +320,7 @@ The following are valid interview types:
 * `INTERVIEW_INDEX` refers to the index number of the chosen interview of an application and must be a _positive
   integer_ 1, 2, 3, …
 
-</div>
+* JobFindr should be able to store up to 1000 job applications.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
