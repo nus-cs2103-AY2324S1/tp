@@ -315,7 +315,11 @@ The following sequence diagram shows how the gather emails by financial plan ope
 ### Expanded Find feature
 
 The enhanced find mechanism is facilitated by the `CombinedPredicate` and utilises the existing `FindCommand` structure.
-It extends the `find` command with the ability to search for multiple terms at once, implemented using an array
+Here's a sequence diagram that demonstrates how `FindCommand` works.
+
+![FindCommandSequenceDiagram](images/FindCommandSequenceDiagram.png)
+
+The `CombinedPredicate` class gives the `find` command the ability to search for multiple terms at once, implemented using an array
 of `PersonContainsKeywordsPredicate`. Here's a partial class diagram of the `CombinedPredicate`.
 
 ![CombinedPredicateClassDiagram](images/CombinedPredicateClassDiagram.png)
@@ -323,9 +327,6 @@ of `PersonContainsKeywordsPredicate`. Here's a partial class diagram of the `Com
 All `XYZContainsKeywordsPredicate` classes (e.g., `NameContainsKeywordsPredicate`,
 `FinancialPlanContainsKeywordsPredicate`, ...) inherit from the `PersonContainsKeywordsPredicate` interface so that
 they can be treated similarly in the `CombinedPredicate` class.
-
-In the `FindCommandParser`, `CombinedPredicate` is initialised with a `NameContainsKeywordsPredicate`,
-`FinancialPlanContainsKeywordsPredicate` and `TagContainsKeywordsPredicate`. These predicates check a `Person` if the respective field contains any of the keywords supplied to the predicate.
 
 Note that only `NameContainsKeywordsPredicate` checks for whole words, because it is rare to search for people by
 substrings e.g. `Marc` and `Marcus` should not show up in the same search. On the other hand,
