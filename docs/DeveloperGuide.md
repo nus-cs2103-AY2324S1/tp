@@ -456,7 +456,7 @@ The `getAppointmentList()` method is called once during the startup of the progr
 
 Do note that appointments are inherently sorted by their date and time, with the earliest appointment showing up at the top.
 
-The following sequence diagram shows how the appointment list is updated. The `setPerson()` method is being called in the `ScheduleCommand#execute()` method. `ModelManager#addToAppointmentIfPresent()` method adds an `Appointment` object into the `ObservableList<Appointment>` if the `Person` object in `filteredPersons` has a `scheduleItem` object that is an instance of `Appointment`.
+The following sequence diagram shows how the appointment list is updated. The `setPerson()` method is being called in the `ScheduleCommand#execute()` method. The `ModelManager#addToAppointmentIfPresent()` method adds an `Appointment` object into the `ObservableList<Appointment>` if the `Person` object in `filteredPersons` has a `scheduleItem` object that is an instance of `Appointment`.
 
 <img src="images/AppointmentListSequenceDiagram.png" width="700"/>
 
