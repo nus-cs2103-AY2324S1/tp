@@ -63,7 +63,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         if (!editRoomDescriptor.isAnyFieldEdited()) {
-            throw new EditCommandParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            throw new EditCommandParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
         try {
