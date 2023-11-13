@@ -544,8 +544,7 @@ the command `showP`
 
 **Aspect: Choosing star to be an additional field for the add dates command**
 
-- **Alternative 1 (current choice):** Dates are starred only through the star command (
-  see [this](UserGuide.md#managing-preferences-and-getting-matches))
+- **Alternative 1 (current choice):** Dates are starred only through the star command
     - Pros: Users can easily modify the starred status for any one of the dates by calling `star INDEX`
     - Cons: Users cannot create a date and star it in one go using a single add dates command
 - **Alternative 2:** Let star be a field for the add dates command
