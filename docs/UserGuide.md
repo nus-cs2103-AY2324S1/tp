@@ -44,10 +44,13 @@ _Find Your Success with JobFindr_
 7. [Glossary](#glossary)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Introduction**
 
-Are you an NUS Fresh Graduate looking for a job? Are you struggling to use a spreadsheet to keep track of your job applications? Are you looking for a better way to manage your job applications? Well, look no further as **JobFindr** is here to help you!
+Are you an NUS Fresh Graduate looking for a job? Are you struggling to use a spreadsheet to keep track of your job
+applications? Are you looking for a better way to manage your job applications? Well, look no further as **JobFindr** is
+here to help you!
 
 JobFindr is a **Desktop-based Job Application Management App** for NUS Fresh Graduates to record, track and organise
 their job applications.
@@ -100,16 +103,19 @@ _Welcome aboard! We're delighted to be part of your job search journey!_
 2. After setting up JobFindr on your computer, you can get started with a [Quick Tutorial](#quick-tutorial) to get
    familiar with the
    features.
-3. You may also explore JobFindr at your own pace. You can refer to the [Feature](#features) section for all of JobFindr's features.
+3. You may also explore JobFindr at your own pace. You can refer to the [Feature](#features) section for all of
+   JobFindr's features.
 
-If you have any questions or face challenges, our [FAQ](#faq) Section has solutions to common queries. Let's make your JobFindr experience seamless and successful!
+If you have any questions or face challenges, our [FAQ](#faq) Section has solutions to common queries. Let's make your
+JobFindr experience seamless and successful!
 
 ### Returning JobFindr User
 
 _Good to have you back! We're thrilled to have you with us again. How can we help you?_
 
 1. Facing problem with specific command?
-    * You may refer to the detailed instruction for each command in the [Features](#features) section or find direct links in our [Table of Contents](#table-of-contents).
+    * You may refer to the detailed instruction for each command in the [Features](#features) section or find direct
+      links in our [Table of Contents](#table-of-contents).
 2. Forgot the commands available on JobFindr?
     * You may refer to the [Command Summary](#command-summary) for a quick refresher of what you can do on
       JobFindr.
@@ -122,7 +128,9 @@ _Good to have you back! We're thrilled to have you with us again. How can we hel
 
 ## **Quick Start**
 
-We are excited to have you on board! Let us help you get started with JobFindr in a few simple steps. You will need to have some basic knowledge of terminal commands. You can learn how to use the terminal with [this guide](https://www.freecodecamp.org/news/command-line-for-beginners/).
+We are excited to have you on board! Let us help you get started with JobFindr in a few simple steps. You will need to
+have some basic knowledge of terminal commands. You can learn how to use the terminal
+with [this guide](https://www.freecodecamp.org/news/command-line-for-beginners/).
 
 1. Ensure you have **Java 11** or above installed in your computer.
 
@@ -139,7 +147,7 @@ We are excited to have you on board! Let us help you get started with JobFindr i
 4. [Open a command terminal](#2-how-do-i-open-up-terminal-on-my-computer), `cd` into the folder you put the jar file in,
    and enter the command `java -jar JobFindr.jar` to run the application.
 5. A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.
-<br><br>
+   <br><br>
    ![Ui](images/user-guide/QuickStartUi.png)
 6. Get started on JobFindr with our guided [Quick Tutorial](#quick-tutorial) to learn the basics of using JobFindr in a
    few minutes.
@@ -188,7 +196,8 @@ applications with different field inputs. Try entering or copying the following 
 
 ### 2. Edit a field in the newly added application
 
-Now that you have learnt how to add applications in JobFindr, let's explore how to edit or update a specific field in the newly added application!
+Now that you have learnt how to add applications in JobFindr, let's explore how to edit or update a specific field in
+the newly added application!
 
 **Step 1**: Find the [index](#command-format) of the application you want to edit. Let's edit our newly added
 `Google` application for now. <br>
@@ -200,14 +209,16 @@ Now that you have learnt how to add applications in JobFindr, let's explore how 
 application's role.<br>
 <img src="images/user-guide/QuickTutorial4.png" style="display: block; margin: auto;" width="300">
 
-_[Optional]_ Great! You have now edited the `role` field in your application. Try editing other fields by entering the following commands:
+_[Optional]_ Great! You have now edited the `role` field in your application. Try editing other fields by entering the
+following commands:
 
 1. `edit 8 s/PENDING`
 2. `edit 8 d/Dec 02 2023 2359`
 
 ### 3. Delete the application
 
-What if the application is no longer relevant to you? Can we delete the application from our app? Of course! Let's try deleting the application we have just added.
+What if the application is no longer relevant to you? Can we delete the application from our app? Of course! Let's try
+deleting the application we have just added.
 
 **Step 1**: Find the [index](#command-format) of the application you want to edit. Let's edit our newly added
 application to `Google` for now. <br>
