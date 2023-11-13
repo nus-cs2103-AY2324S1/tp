@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import static seedu.address.model.policy.Policy.createNewDefaultPolicy;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -77,6 +79,14 @@ public class PersonBuilder {
         licencePlate = personToCopy.getLicencePlate();
         remark = personToCopy.getRemark();
         policy = personToCopy.getPolicy();
+    }
+
+    /**
+     * Sets the {@code Policy} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withDefaultPolicy() {
+        this.policy = createNewDefaultPolicy();
+        return this;
     }
 
     /**
