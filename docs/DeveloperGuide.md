@@ -17,38 +17,53 @@
     * [Storage component](#storage-component)
     * [Common classes](#common-classes)
 * [Implementation](#implementation)
-    * [Add Related commands](#add-related-commands)
-        * [Feature introduction](#create-a-new-team--introduction)
-        * [Feature usage](#usage)
-        * [Feature implementation](#step-by-step-implementation)
-    * [Delete related commands](#feature--remove-an-existing-team)
-        * [Feature introduction](#create-a-new-team--introduction)
-        * [Feature usage](#usage)
-        * [Feature implementation](#step-by-step-implementation)
-    * [Edit related commands](#edit-developer)
-        * [Feature introduction](#create-a-new-team--introduction)
-        * [Feature usage](#usage)
-        * [Feature implementation](#step-by-step-implementation)
-    * [Find related commands](#find-developer)
-        * [Feature introduction](#create-a-new-team--introduction)
-        * [Feature usage](#usage)
-        * [Feature implementation](#step-by-step-implementation)
-    * [List command](#list-developers)
-        * [Feature introduction](#create-a-new-team--introduction)
-        * [Feature usage](#usage)
-        * [Feature implementation](#step-by-step-implementation)
-    * [Display tree command](#display-tree)
-        * [Feature introduction](#create-a-new-team--introduction)
-        * [Feature usage](#usage)
-        * [Feature implementation](#step-by-step-implementation)
-    * [Help Command](#help-command)
-        * [Feature introduction](#create-a-new-team--introduction)
-        * [Feature usage](#usage)
-        * [Feature implementation](#step-by-step-implementation)
-    * [Clear command](#reset-the-project)
-        * [Feature introduction](#create-a-new-team--introduction)
-        * [Feature usage](#usage)
-        * [Feature implementation](#step-by-step-implementation)
+* [Add developer command](#add-a-developer)
+    * [Feature usage](#usage)
+    * [Feature implementation](#function-implementation)
+* [Remove developer command](#remove-a-developer)
+    * [Feature usage](#usage)
+    * [Feature implementation](#function-implementation-1)
+* [Edit developer command](#)
+    * [Feature usage](#)
+    * [Feature implementation](#)
+* [Find developer command](#)
+    * [Feature usage](#)
+    * [Feature implementation](#)
+* [Create team command](#)
+    * [Feature usage](#)
+    * [Feature implementation](#)
+    * [Design considerations](#)
+* [Add dev to team command](#)
+    * [Feature usage](#)
+    * [Feature implementation](#)
+    * [Design considerations](#)
+* [Delete team command](#)
+    * [Feature usage](#)
+    * [Feature implementation](#)
+* [Remove dev from team command](#)
+    * [Feature usage](#)
+    * [Feature implementation](#)
+* [Edit team name command](#)
+    * [Feature usage](#)
+    * [Feature implementation](#)
+* [Edit team leader command](#)
+    * [Feature usage](#)
+    * [Feature implementation](#)
+* [Find team command](#)
+    * [Feature usage](#)
+    * [Feature implementation](#)
+* [List command](#)
+    * [Feature usage](#)
+    * [Feature implementation](#)
+* [Display tree command](#)
+    * [Feature usage](#)
+    * [Feature implementation](#)
+* [Help Command](#)
+    * [Feature usage](#)
+    * [Feature implementation](#)
+* [Clear command](#)
+    * [Feature usage](#)
+    * [Feature implementation](#)
 * [Documentation, logging, testing, configuration & dev-ops](#documentation-logging-testing-configuration-dev-ops)
 * [Appendix A: Requirements](#appendix-a-requirements)
     * [Product Scope](#product-scope)
@@ -229,9 +244,173 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
-### **Add related commands**
 
-####  Create a new team: Introduction
+###  **Add a developer**
+
+The add developer feature is facilitated by the AddCommand. It extends `Command` class.
+
+The operations are exposed in the `Model` interface as `Model#addTeam()`.
+
+#### Usage
+Given below is an example usage scenario and how the function behaves at each step.
+
+Step 1. The user launches the application and uses the `newteam` command and specifies a `teamname` and `teamLeader` name.
+
+
+
+Step 2. The user executes the `newteam` command `newteam tn/Team1 tl/John` to create a new team `Team1` with `John` set as team leader.
+
+
+
+Step 3. LinkTree provides a feedback based on whether the operation was successful or not.
+
+
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, it will not call `Model#addTeam()`, so the `team` will not be saved to `TeamBook`.
+
+</box>
+
+#### Function Implementation
+
+(Add basic implementation here)
+
+<br>
+
+###  **Remove a developer**
+
+The add developer feature is facilitated by the AddCommand. It extends `Command` class.
+
+The operations are exposed in the `Model` interface as `Model#addTeam()`.
+
+#### Usage
+Given below is an example usage scenario and how the function behaves at each step.
+
+Step 1. The user launches the application and uses the `newteam` command and specifies a `teamname` and `teamLeader` name.
+
+
+
+Step 2. The user executes the `newteam` command `newteam tn/Team1 tl/John` to create a new team `Team1` with `John` set as team leader.
+
+
+
+Step 3. LinkTree provides a feedback based on whether the operation was successful or not.
+
+
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, it will not call `Model#addTeam()`, so the `team` will not be saved to `TeamBook`.
+
+</box>
+
+#### Function Implementation
+
+(Add basic implementation here)
+
+<br>
+
+###  **Edit a developer**
+
+The add developer feature is facilitated by the AddCommand. It extends `Command` class.
+
+The operations are exposed in the `Model` interface as `Model#addTeam()`.
+
+#### Usage
+Given below is an example usage scenario and how the function behaves at each step.
+
+Step 1. The user launches the application and uses the `newteam` command and specifies a `teamname` and `teamLeader` name.
+
+
+
+Step 2. The user executes the `newteam` command `newteam tn/Team1 tl/John` to create a new team `Team1` with `John` set as team leader.
+
+
+
+Step 3. LinkTree provides a feedback based on whether the operation was successful or not.
+
+
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, it will not call `Model#addTeam()`, so the `team` will not be saved to `TeamBook`.
+
+</box>
+
+#### Function Implementation
+
+(Add basic implementation here)
+
+<br>
+
+###  **Find a developer**
+
+The add developer feature is facilitated by the AddCommand. It extends `Command` class.
+
+The operations are exposed in the `Model` interface as `Model#addTeam()`.
+
+#### Usage
+Given below is an example usage scenario and how the function behaves at each step.
+
+Step 1. The user launches the application and uses the `newteam` command and specifies a `teamname` and `teamLeader` name.
+
+
+
+Step 2. The user executes the `newteam` command `newteam tn/Team1 tl/John` to create a new team `Team1` with `John` set as team leader.
+
+
+
+Step 3. LinkTree provides a feedback based on whether the operation was successful or not.
+
+
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, it will not call `Model#addTeam()`, so the `team` will not be saved to `TeamBook`.
+
+</box>
+
+#### Function Implementation
+
+(Add basic implementation here)
+
+<br>
+
+###  **List a developer** (Optional to show implementation?)
+
+The add developer feature is facilitated by the AddCommand. It extends `Command` class.
+
+The operations are exposed in the `Model` interface as `Model#addTeam()`.
+
+#### Usage
+Given below is an example usage scenario and how the function behaves at each step.
+
+Step 1. The user launches the application and uses the `newteam` command and specifies a `teamname` and `teamLeader` name.
+
+
+
+Step 2. The user executes the `newteam` command `newteam tn/Team1 tl/John` to create a new team `Team1` with `John` set as team leader.
+
+
+
+Step 3. LinkTree provides a feedback based on whether the operation was successful or not.
+
+
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, it will not call `Model#addTeam()`, so the `team` will not be saved to `TeamBook`.
+
+</box>
+
+#### Function Implementation
+
+(Add basic implementation here)
+
+<br>
+
+###  **Create a new team**
 
 The create new team feature is facilitated by the AddTeamCommand. It extends `Command` class.
 
@@ -258,7 +437,7 @@ Step 3. LinkTree provides a feedback based on whether the operation was successf
 
 </box>
 
-#### Step-by-Step Implementation
+#### Function Implementation
 
 1. Create a newteam parser class called `AddTeamCommandParser` to parse input from user. This implements the `Parser` interface for type `AddTeamCommand`
 2. Create a `parse` method in `AddTeamCommandParser` that parses the user input and specify the user flags that are used `tn/` for teamName and `tl/` for teamLeader.
@@ -287,9 +466,9 @@ Step 3. LinkTree provides a feedback based on whether the operation was successf
   * Pros: Easier implementation.
   * Cons: Breaks principle of abstraction and OOP. Information hiding is also not done.
 
+<br>
 
-
-####  Add developers to an existing team: Introduction
+###  **Add developers to an existing team**
 
 The add dev to team feature is facilitated by the AddDevToTeamCommand. It extends `Command` class.
 
@@ -316,7 +495,7 @@ Step 3. LinkTree provides a feedback based on whether the operation was successf
 
 </box>
 
-#### Step-by-Step Implementation
+#### Function Implementation
 
 1. Create a dev2team parser class called `AddDevToTeamParser` to parse input from user. This implements the `Parser` interface for type `AddDevToTeamCommand`
 2. Create a `parse` method in `AddDevToTeamParser` that parses the user input and specify the user flags that are used `tn/` for teamName and `n/` for developer name.
@@ -344,9 +523,7 @@ Step 3. LinkTree provides a feedback based on whether the operation was successf
 
 <br>
 
-### Feature: Remove an existing Team
-
-#### Introduction
+### **Remove an existing Team**
 
 Removing an existing team feature is facilitated by the `DeleteTeamCommand`. It extends the `Command` class. 
 
@@ -370,7 +547,7 @@ LinkTree provides feedback based on whether the operation was successful or not.
 
 **Note:** If a command fails its execution, it will not call `Model#deleteTeam()`, so the team will not be removed from `TeamBook`.
 
-#### Step-by-Step Implementation
+#### Function Implementation
 
 1. Create a `deleteteam` parser class called `DeleteTeamCommandParser` to parse input from the user. This class implements the `Parser` interface for the type `DeleteTeamCommand`.
 
