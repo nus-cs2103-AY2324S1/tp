@@ -8,22 +8,22 @@ title: mamayuan's Project Portfolio Page
 **ConText** is a desktop app that allows for managing contacts quickly via text commands, with useful features relevant to NUS SoC students.
 While it has a Graphical User Interface, most of its user interactions happen via an in-app Command Line Interface.
 
-## Summary of contributions
-
 ### Code contributed
 
 [TP RepoSense Code Dashboard](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=mamayuan&breakdown=true)
 
 ### Enhancements implemented
 - Allow multiple indices as input for delete command.
+- Create a `Messages.java` class to prevent incorrect display of messages to the user.
+- Update test cases to various test files.
 
 ### Contributions to the UG
 - Initial set-up of UG
-- Fix consistency issues found throughout UG
+- Fix consistency issues in terms of style and wording found throughout UG
 - Edit section for delete command
 
 ### Contributions to the DG
-- Define `Glossary` section
+- Wrote `Glossary` and `Manual Testing` section
 - Refine `User Stories` section
 - Specify implementation of `delete` command
 - Edit UML diagram of `DeleteSequenceDiagram` based on updated implementation
@@ -34,7 +34,6 @@ While it has a Graphical User Interface, most of its user interactions happen vi
 ### Contributions to team-based tasks
 - Created a `Messages.java` class which groups and handles all the messages to be displayed to user which were previously scattered across different files
 - Removed traces of AB3 in documentations and code
-- Helped to organise weekly meetings
 - Provided feedback for peer PRs
 - Reminded team of deadlines
 - Refactored code for better
