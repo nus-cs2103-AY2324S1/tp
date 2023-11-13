@@ -12,6 +12,7 @@ such as sorting, scheduling and other commands to query information quickly requ
 ### Summary of Contributions
 
 Given below are my contributions to the project.
+
 * **New feature**: Added the ability to gather email of clients by Financial plan and Tag
     * What it does: It takes a prompt as input and retrieves emails of clients where the prompt matches a substring of their Financial Plan or Tag names. 
     * Justification: This feature significantly improves the product's efficiency by allowing financial advisors to consolidate emails effectively. It simplifies communication, enabling advisors to update multiple clients about changes in their financial plans or schedule crucial meetings promptly. 
@@ -36,13 +37,13 @@ Given below are my contributions to the project.
   * Updated Title and Introduction
   * Added Argument Summary
   * Added documentation for the features `gather`
-
+  * Reading through UG and identifying formatting issues
 
 * **Contributions to the DG**:
-  * Added target user profile, value proposition, user stories and user cases.
-  * Added class diagram and sequence diagram for `gather` feature.
-  * Added implementation details for `gather` feature.
-  * Added planned enhancement for `gather` feature.
+  * Added target user profile, value proposition, user stories and user cases
+  * Added class diagram and sequence diagram for `gather` feature
+  * Added implementation details for `gather` feature
+  * Added planned enhancement for `gather` feature
 
 
 * **Community**:
