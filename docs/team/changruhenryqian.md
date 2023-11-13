@@ -26,8 +26,7 @@ Given below are my contributions to the project.
 
 * **New Feature**: Randomly selects a specific number of students from all students displayed.
   * What it does: allows the user to randomly selects a specific number of students.
-  * Justification:
-  * Highlights:
+  * Justification:  This feature improves the product significantly because a common situation in class is when the user wants to select students and no one volunteers. It allows the user to choose students fairly.
 
 * **Enhancements to existing features: `edit`**:
   * Changed the `edit` feature to fit into our product, such as 
@@ -44,7 +43,7 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Added implementation details for the `present` feature.
     * Added user stories.
-    * Added manual testing.
+    * Added manual testing for `present`, `absent`, `present-all`, `absent-all`, `edit`, and `delete`.
     * Added Planned Enhancements section.(PR: [#205](https://github.com/AY2324S1-CS2103T-T11-1/tp/pull/205))
 
 * **Team-based tasks**:
