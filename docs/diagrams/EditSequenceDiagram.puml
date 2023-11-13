@@ -52,7 +52,7 @@ deactivate EditCommandParser
 EditCommandParser -[hidden]->
 destroy EditCommandParser
 
-[<- AddressBookParser : editCommand
+[<-- AddressBookParser : editCommand
 deactivate AddressBookParser
 
 [-> EditCommand : execute()
@@ -73,10 +73,10 @@ create CommandResult
 EditCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> EditCommand
+CommandResult --> EditCommand : result
 deactivate CommandResult
 
-[<- EditCommand : result
+[<-- EditCommand : result
 deactivate EditCommand
 
 

@@ -53,7 +53,7 @@ deactivate AddAltCommandParser
 AddAltCommandParser -[hidden]->
 destroy AddAltCommandParser
 
-[<- AddressBookParser : addAltCommand
+[<-- AddressBookParser : addAltCommand
 deactivate AddressBookParser
 
 [-> AddAltCommand : execute()
@@ -73,10 +73,10 @@ create CommandResult
 AddAltCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> AddAltCommand
+CommandResult --> AddAltCommand : result
 deactivate CommandResult
 
-[<- AddAltCommand : result
+[<-- AddAltCommand : result
 deactivate AddAltCommand
 
 
