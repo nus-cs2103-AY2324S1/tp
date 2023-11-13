@@ -12,8 +12,8 @@ Given below are my contributions to the project.
 * **New Feature**: Added the ability to undo a Command
     * What it does: allows the user to undo an edit, add, delete and clear command.
     * Justification: This feature allows users to be able to quickly recover from errors made without having to go through a series of other commands to achieve the same goal.
-    * Implementation: A new abstract class undo-able command was implemented to do this.
-    * Note: The undo for log, alog and clog was implemented by another team member.
+    * Implementation: A new abstract class undo-able command and a stack to keep track of the history of undo-able commands was implemented to do this. Commands that implement the abstract class must implement the undo() method.
+    * Note: The undo method for log, alog and clog was implemented by another team member.
 
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=kanna-1&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos)
@@ -37,11 +37,14 @@ Given below are my contributions to the project.
         * Added documentation for the features `undo`
         * Re-factored the features description and ordering in the UG ([#137](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/137))
         * Added relevant tips to the UG and the corresponding shorcuts for features ([#137](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/137))
+        * Fixed the PDF formatting of the UG involving page breaks to make it more readable for users
 
     * Developer Guide:
-        * Added implementation details of the `edit` feature
-        * Added implementation details of the `undo` feature
+        * Added implementation details of the `edit` feature and relevant UML diagrams
+        * Added implementation details of the `undo` feature and relevent UML diagrams
         * Added non-functional requirements in the DG
+        * Added Appendix: Instructions for Manual Testing
+        * Added Appendix: Planned Enhancements
 
 
 * **Community**:
