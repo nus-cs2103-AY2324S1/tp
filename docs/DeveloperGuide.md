@@ -118,23 +118,16 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="650" />
 
 
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the log book data i.e., all `Person` objects (filtered as `foundPersonsList` by `ModelManager`). 
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
 
 
 ### Storage component
@@ -426,13 +419,13 @@ The primary layout structure for the HealthSync GUI is based on HBox and VBox co
 StackPane
 The StackPane is used to organize specific UI elements within the VBox containers. It allows for the layering of elements and effective management of screen real estate.
 
-1. StackPane (Person List)
+1. StackPane (PersonListPanel)
 
-   Location: Inside the first VBox (fx:id="personList").
-2. StackPane (Logger Panel)
+   Location: Inside the first VBox (`fx:id="personListPanelPlaceholder"`).
+2. StackPane (LoggedPersonlListPanel)
 
-    Location: Also inside the first VBox (fx:id="personList").
-3. StackPane (Result Display, Command Box, and Status Bar)
+    Location: Also inside the first VBox (`fx:id="loggerPanelPlaceholder"`).
+3. StackPane (ResultDisplay, CommandBox, and StatusBarFooter)
 
     Location: These StackPanes are located inside the second VBox
 
@@ -440,8 +433,8 @@ The StackPane is used to organize specific UI elements within the VBox container
 
 The HealthSync GUI utilizes specific color choices to create a visually pleasing and organized interface, while still maintaining the original Dark Theme.
 
-1. Primary Colour: #43314E
-2. Secondary Colour: #231335
+1. Primary Colour: `#43314E`
+2. Secondary Colour: `#231335`
 
 
 ### Edit Feature
