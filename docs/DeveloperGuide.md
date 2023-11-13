@@ -141,9 +141,17 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 <div style="page-break-after: always;"></div>
+
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:**
+For simplicity, some details such as parsing (`parseIndex`, `parseName`, etc) have been omitted from the implementation details below.
+
+</div>
 
 ### Add tutor feature
 
