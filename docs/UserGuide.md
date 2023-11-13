@@ -33,13 +33,12 @@ If you are a new user, we recommend that you read this guide starting from the [
 
 If you are an experienced user, you can use the [Table of Contents](#table-of-contents) below to quickly locate the relevant section. Alternatively, you can jump to the [Command Summary](#command-summary) section for an overview of the command syntax.
 
-<div markdown="block" class="alert alert-success">
-:heavy_check_mark: This block indicates command success.
-</div>
+Throughout our user guide, you will see the following annotations:
 
-<div markdown="block" class="alert alert-danger">
-:x: This block indicates command failure.
-</div>
+| Annotation                         | Meaning                                                                                    |
+|------------------------------------|--------------------------------------------------------------------------------------------|
+| [Text in blue](javascript: void)   | Clicking on the highlighted text will bring you to the relevant section of the user guide. |
+| `Text with light blue background`  | These are commands that you can type into TAManager.                                       |
 
 ## Table of Contents
 * Table of Contents
@@ -68,7 +67,10 @@ If you are an experienced user, you can use the [Table of Contents](#table-of-co
    - `clear`: Deletes all teaching assistants.
    - `exit`: Exits the app.
 
-6. Refer to the [Features](#features) section below for details on each command.
+6. Refer to the following sections below for details on each command.
+   1. [TA Management Commands](#ta-management-commands)
+   2. [Course Management Commands](#course-management-commands)
+   3. [Utility Commands](#utility-commands)
 
 
 <span style="float:right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
@@ -112,7 +114,7 @@ If you are an experienced user, you can use the [Table of Contents](#table-of-co
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Teaching Assistant Commands
+## TA Management Commands
 
 ### Adding a Teaching Assistant: `add`
 
@@ -126,7 +128,7 @@ Format: `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM h/HOUR [t/TAG]... [c/COURSE_CO
 - `TELEGRAM` should be between 5-32 characters and start with "@", and it cannot contain any special characters except underscore.
 - `HOUR` should be an integer.
 - `TAG` should be an alphanumeric string without spaces.
-- `COURSE_CODE` should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet.
+- `COURSE_CODE` should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet. Needs to be an existing course.
 
 Example:
 `add n/ Rayner Toh p/93812311 e/rayner@example.com tele/@raynertjx h/4 t/parttime c/CS2103T` will add a new teaching assistant named Rayner Toh to TAManager.
@@ -134,9 +136,10 @@ Example:
 ![add TA](images/addTA.png)
 *<center>TAManager adds a new teaching assistant with the corresponding details.</center>*
 
-<div markdown="block" class="alert alert-success">
+<div markdown="block" class="command-succeed">
+<div class="alert alert-success">
 :heavy_check_mark: When the command succeeds:
-<div markdown="block" class="code">
+</div>
 ```
 New teaching assistant added: Rayner Toh; Phone: 93812311; Email: rayner@example.com; Telegram: @raynertjx;
 Free Time:  Tags: [parttime];
@@ -146,16 +149,20 @@ Lessons: [CS2103T Lecture 10:00-12:00, CS2103T Tutorial 10:00-12:00, CS2103T Lab
 Work Hour: 4
 ```
 </div>
-</div>
 
-<div markdown="block" class="alert alert-danger">
+<div markdown="block" class="command-fail">
+<div class="alert alert-danger">
 :x: When the command fails:
-- Incorrect format (e.g., missing information): `Invalid command format!`
-- Duplicate input (the TA is already in the address book): `This TA has been registered.`
-- Invalid parameter: The corresponding error message will be displayed.<br/>
-e.g. Invalid Telegram handle: `Telegram handle should be between 5-32 characters and should start with @, and it cannot contain any special characters except underscore.`
 </div>
 
+| Error                                                        | Resolution                                                       |
+|--------------------------------------------------------------|------------------------------------------------------------------|
+| `Invalid command format!`                                    | Ensure that all required parameters are present .                |
+| `Course not found.`                                          | Ensure that the `COURSE_CODE` is an existing course.             |
+| `This teaching assistant already exists in the address book` | Ensure that the teaching assistant is not already in TAManager.  |
+| Invalid parameter                                            | Ensure that input causing the error follows the required format. |
+
+</div>
 
 ### Editing a Teaching Assistant: `edit`
 
@@ -170,18 +177,18 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [tele/TELEGRAM] [h/HOUR] [t/TAG
 - `TELEGRAM` should be between 5-32 characters and start with "@", and it cannot contain any special characters except underscore.
 - `HOUR` should be an integer.
 - `TAG` should be an alphanumeric string without spaces.
-- `COURSE_CODE` should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet.
+- `COURSE_CODE` should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet. Needs to be an existing course.
 
-Example: `edit INDEX tele/@raynertohjingxiang`
+Example: `edit 7 tele/@raynertohjingxiang`
 
 ![edit TA](images/editTA.png)
 *<center>TAManager edits the telegram handle of the 7th person in the list.</center>*
 
 
-<div markdown="block" class="alert alert-success">
+<div markdown="block" class="command-succeed">
+<div class="alert alert-success">
 :heavy_check_mark: When the command succeeds:
-<div markdown="block" class="code">
-
+</div>
 ```
 Edited Teaching Assistant: Rayner Toh; Phone: 93812311; Email: rayner@example.com; Telegram: @raynertohjingxiang;
 Free Time:
@@ -197,16 +204,87 @@ Lessons: [CS2103T Lecture 10:00-12:00, CS2103T Tutorial 10:00-12:00, CS2103T Lab
 Work Hour: 4
 ```
 </div>
-</div>
 
-<div markdown="block" class="alert alert-danger">
+<div markdown="block" class="command-fail">
+<div class="alert alert-danger">
 :x: When the command fails:
-- Incorrect format (e.g., missing information): `Invalid command format!`
-- Duplicate input (the TA is already in the address book): `This TA has been registered.`
-- Invalid parameter: The corresponding error message will be displayed.<br/>
-e.g. Invalid course code: `Course codes should have 2-3 alphabets, followed by 4 digits, and optionally end with an alphabet.`
 </div>
 
+| Error                                                        | Resolution                                                       |
+|--------------------------------------------------------------|------------------------------------------------------------------|
+| `Invalid command format!`                                    | Ensure that all required parameters are present .                |
+| `Course not found.`                                          | Ensure that the `COURSE_CODE` is an existing course.             |
+| Invalid parameter                                            | Ensure that input causing the error follows the required format. |
+
+</div>
+
+### Viewing Teaching Assistants: `list`
+
+You can view the list of all teaching assistants in TAManager.
+
+Format: `list`
+
+![list TA](images/listTA.png)
+*<center>TAManager shows you the full list of teaching assistants.</center>*
+
+
+<div markdown="block" class="command-succeed">
+<div class="alert alert-success">
+:heavy_check_mark: When the command succeeds:
+</div>
+```
+Listed all teaching assistants
+```
+</div>
+
+### Finding a Teaching Assistant: `find`
+
+You can find specific teaching assistants using various search parameters.
+
+Format: `find [n/NAME] [c/COURSE_CODE] [d/DAY from/FROM to/TO]`
+
+- You can search by name, course or free time, using the prefixes `n/`, `c/` or `d/ from/ to/` respectively.
+- The name prefix `n/` allows for multiple keywords to be used, separated by spaces. e.g. `find n/Alex Bernice` will give you all TAs who have either "Alex" or "Bernice" in their names.
+- The course prefix `c/` and free time prefixes `d/ from/ to/` allows for one keyword to be used for each prefix.  e.g. `find c/CS2103T` or `find d/1 from/10:00 to/12:00`.
+- To search by the free time field, all three prefixes `d/ from/ to/` must be present and all respective parameters need to be correctly given.
+- The search is case-insensitive. e.g. `alex` will match `Alex`, `cs1231s` will match `CS1231S`.
+- Only full words will be matched e.g. `Alex` will not match `Alexis`, `cs1231` will not match `cs1231s`.
+- You can apply multiple search filters to narrow down the search results, through including multiple filters in
+  one command.
+- Teaching assistants matching all the search parameters will be returned.
+- The search filters are applied to the full list of TAs, not the displayed list of TAs.
+
+Examples:
+
+- `find n/Alex` returns all teaching assistants whose names contain `alex` (e.g. `Alex Yeoh`).
+- `find c/cs1231s` returns all teaching assistants that are teaching `cs1231s`.
+- `find d/1 from/10:00 to/12:00` returns all teaching assistants that are free on `Monday` from `10:00` to `12:00`.
+- `find n/Alex c/cs1231s` returns all teaching assistants whose names contain `alex` and are teaching `cs1231s`.
+- `find c/cs2103t d/1 from/10:00 to/12:00` returns all teaching assistants who are teaching `cs2103t` and are free on `Monday` from `10:00` to `12:00`.
+
+![find TA](images/findTA.png)
+*<center>TAManager finds all teaching assistants whose names contain <code>Alex</code>.</center>*
+
+<div markdown="block" class="command-succeed">
+<div class="alert alert-success">
+:heavy_check_mark: When the command succeeds:
+</div>
+```
+Filters applied: [filters applied by the user]
+[number of TAs found] persons listed!
+```
+</div>
+
+<div markdown="block" class="command-fail">
+<div class="alert alert-danger">
+:x: When the command fails:
+</div>
+
+| Error                     | Resolution                                                                                   |
+|---------------------------|----------------------------------------------------------------------------------------------|
+| `Invalid command format!` | Ensure that there is at least one prefix provided and parameter provided follows the format. |
+
+</div>
 
 ### Removing a Teaching Assistant: `delete`
 
@@ -226,9 +304,10 @@ Examples:
 ![remove TA](images/deleteTA.png)
 *<center>TAManager deletes the teaching assistant at the index <code>7</code>.</center>*
 
-<div markdown="block" class="alert alert-success">
+<div markdown="block" class="command-succeed">
+<div  class="alert alert-success">
 :heavy_check_mark: When the command succeeds:
-<div markdown="block" class="code">
+</div>
 ```
 Deleted Teaching Assistant: Rayner Toh; Phone: 93812311; Email: rayner@example.com; Telegram: @raynertohjingxiang;
 Free Time:
@@ -244,147 +323,108 @@ Lessons: [CS2103T Lecture 10:00-12:00, CS2103T Tutorial 10:00-12:00, CS2103T Lab
 Work Hour: 4
 ```
 </div>
-</div>
 
-<div markdown="block" class="alert alert-danger">
+
+<div markdown="block" class="command-fail">
+<div class="alert alert-danger">
 :x: When the command fails:
-- Incorrect format (missing index or index is not a positive integer): `Invalid command format!`
-- Index does not correspond to a TA (there are only 5 TAs but the user tried to delete a TA at index): `The person index provided is invalid`
 </div>
 
-### Finding a Teaching Assistant: `find`
+| Error                                  | Resolution                                                |
+|----------------------------------------|-----------------------------------------------------------|
+| `Invalid command format!`              | Ensure that `INDEX` is present and is a positive integer. |
+| `The person index provided is invalid` | Ensure that `INDEX` corresponds to a TA in the list       |
 
-You can find specific teaching assistants using various search parameters.
-
-Format: `find PREFIX KEYWORD [MORE_KEYWORDS]`
-
-- You can search by name, course or free time, using the prefixes `n/`, `c/` or `d/ from/ to/` respectively.
-- The name prefix `n/` allows for multiple keywords to be used, separated by spaces. e.g. `find n/Alex Bernice`.
-- The course prefix `c/` and free time prefix `d/ from/ to/` allows for one keyword to be used, separated by spaces.
-e.g. `find c/CS2103T` or `find d/1 from/10:00 to/12:00`.
-- For the free time, all three prefixes `d/ from/ to/` must be present and all respective parameters need to be correctly given.
-- The search is case-insensitive. e.g `alex` will match `Alex`, `cs1231s` will match `CS1231S`.
-- Only full words will be matched e.g. `Alex` will not match `Alexis`, `cs1231` will not match `cs1231s`.
-- You can apply multiple search filters to narrow down the search results, through including multiple filters in
-one command.
-- Teaching assistants matching all the search parameters will be returned.
-- The search filters are applied to the original list of TAs, not the current view of TAs.
-
-Examples:
-
-- `find n/Alex` returns all teaching assistants with names containing `alex` (e.g. `Alex Yeoh`).
-- `find c/cs1231s` returns all teaching assistants that are teaching `cs1231s`.
-- `find d/1 from/10:00 to/12:00` returns all teaching assistants that are free on `Monday` from `10:00` to `12:00`.
-- `find n/Alex c/cs1231s` returns all teaching assistants with names containing `alex` and are teaching `cs1231s`.
-- `find c/cs2103t d/1 from/10:00 to/12:00` returns all teaching assistants that are teaching `cs2103t` and are free on `Monday` from `10:00` to `12:00`.
-
-![find TA](images/findTA.png)
-*<center>TAManager finds all teaching assistants whose names contain <code>Alex</code>.</center>*
-
-<div markdown="block" class="alert alert-success">
-:heavy_check_mark: When the command succeeds:
-<div markdown="block" class="code">
-```
-Filters applied: [filters applied by the user]
-[number of TAs found] persons listed!
-```
-</div>
 </div>
 
-<div markdown="block" class="alert alert-danger">
-:x: When the command fails:
-
-- Incorrect format (missing prefix or parameter): `Invalid command format!`
-</div>
-
-### Viewing Teaching Assistants: `list`
-
-You can view the list of all teaching assistants in TAManager.
-
-Format: `list`
-
-![list TA](images/listTA.png)
-*<center>TAManager shows you the full list of teaching assistants.</center>*
-
-
-<div markdown="block" class="alert alert-success">
-:heavy_check_mark: When the command succeeds:
-<div markdown="block" class="code">
-```
-Listed all teaching assistants
-[list of TAs]
-```
-</div>
-</div>
-
-### Updating Hours for All TAs in View: `hour`
+### Updating Hours for Teaching Assistants: `hour`
 
 You can add hours to all teaching assistants in the current list.
 
 Format: `hour HOUR`
 
-- This command update ths hour field for all TAs in view, by adding the `HOUR` value to their current values. This `HOUR` value can be both negative and positive.
-- This command can be applied after the [`find`](#finding-a-teaching-assistant-find) command. e.g First type `find c/ CS2103T` will find all TAs with course
+- This command updates the hour field for all TAs in the currently displayed list, by adding the `HOUR` value to their current values. This `HOUR` value can be both negative and positive.
+- This command can be applied after the [`find`](#finding-a-teaching-assistant-find) command. e.g. First type `find c/ CS2103T` will find all TAs with course
 `CS2103T`, then type `hour 6` will add 6 hours to all `CS2103T` TAs only, other TAs will not be updated.
 - The resulting working hour after updating should still be within range of 0-9999.
 
 Examples:
 
-- `hour 4` will add 4 hours to all TAs in the address book if you are at the default view of all TAs.
+- `hour 4` will add 4 hours to all TAs in the address book.
 - `find c/CS1231S` then `hour 4` will add 4 hours to all `CS1231S` TAs and other TAs will not be affected.
 
 ![update Hour](images/addHours.png)
 *<center>TAManager adds the specified number of hours to all teaching assistants.</center>*
 
-<div markdown="block" class="alert alert-success">
+<div markdown="block" class="command-succeed">
+<div class="alert alert-success">
 :heavy_check_mark: When the command succeeds:
-<div markdown="block" class="code">
+</div>
 ```
 Hour updated to all TAs identified!
 ```
 </div>
-</div>
 
-<div markdown="block" class="alert alert-danger">
+<div markdown="block" class="command-fail">
+<div class="alert alert-danger">
 :x: When the command fails:
-
-- Invalid command format (updated new hour is invalid, either below 0 or above 9999): `Invalid command format!`
 </div>
 
-### Editing free time for a Teaching Assistant: `editft`
+| Error                     | Resolution                                              |
+|---------------------------|---------------------------------------------------------|
+| `Invalid command format!` | Ensure that `HOUR` is present and is between 0 and 9999 |
 
-You can edit the free time on a specified day for a specific teaching assistant.
+</div>
+
+### Editing free time of a Teaching Assistant: `editft`
+
+You can edit the free time of a specific teaching assistant on a specified day.
 
 Format: `editft INDEX d/DAY from/FROM to/TO`
 
-- This command update ths time interval for the TA at the specified `INDEX` for weekday `DAY`.
-- Weekday `DAY` should be between 1 and 5, inclusive, and `FROM` and `TO` should be in "HH:SS" format and `FROM` time should be before `TO` time.
-- All three prefixes must be present and all respective parameters need to be correctly given for the command to be executed.
+- `DAY` should be between 1 and 5, inclusive
+- `FROM` and `TO` should be in "HH:mm" format
+- `FROM` should be before `TO`
 
 Examples:
 
-- `editft 1 d/2 from/13:00 to/15:00` will update the free time of the TA with index 1 by setting his Tuesday free time to be 13:00 to 15:00.
+- `editft 1 d/2 from/13:00 to/15:00` will update the free time of the TA with index 1 by setting his free time on Tuesday to be 13:00 to 15:00.
 
 ![update Hour](images/editFreeTime.png)
 *<center>TAManager edits the free time of the teaching assistant at index <code>1</code> on Tuesday to be from <code>13:00</code> to <code>15:00</code>.</center>*
 
-<div markdown="block" class="alert alert-success">
+<div markdown="block" class="command-succeed">
+<div class="alert alert-success">
 :heavy_check_mark: When the command succeeds:
-<div markdown="block" class="code">
+</div>
 ```
 Edited Teaching Assistant: [Details of TA specified]
 ```
 </div>
-</div>
 
-<div markdown="block" class="alert alert-danger">
+<div markdown="block" class="command-fail">
+<div class="alert alert-danger">
 :x: When the command fails:
-
-- Incorrect format (missing prefix or parameter, or `DAY` out of range, or invalid `FROM` or `TO` format): `Invalid command format!`
-- Index out of range: `The person index provided is invalid`
 </div>
 
-## Course Commands
+| Error                                                             | Resolution                                          |
+|-------------------------------------------------------------------|-----------------------------------------------------|
+| `Invalid command format!`                                         | Ensure that all prefixes are present                |
+| `The person index provided is invalid`                            | Ensure that `INDEX` corresponds to a TA in the list |
+| `TA's free time should have a start and end time in HH:mm format` | Ensure that `FROM` and `TO` follow the format       |
+| `The start time should be before the end time.`                   | Ensure that `FROM` is before `TO`                   |
+
+</div>
+
+## Course Management Commands
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about courses:**<br>
+- At the moment, TAManager does not support adding course to the course list.
+
+- Advanced users can edit the course list directly by editing the `courses.json` file.
+</div>
 
 ### Viewing course information : `course`
 
@@ -392,14 +432,17 @@ You can view the information for a specific course and its tutorial timings.
 
 Format: `course c/COURSE_CODE`
 
+- COURSE_CODE should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet. Needs to be an existing course.
+
 Example: `course c/CS2103T` returns the course information and tutorial timings for CS2103T.
 
 ![view course](images/viewCourse.png)
 *<center>TAManager displays the information for the specified course.</center>*
 
-<div markdown="block" class="alert alert-success">
+<div markdown="block" class="command-succeed">
+<div class="alert alert-success">
 :heavy_check_mark: When the command succeeds:
-<div markdown="block" class="code">
+</div>
 ```
 Course: CS2103T Software Engineering
 CS2103T Lecture 10:00-12:00
@@ -407,16 +450,27 @@ CS2103T Tutorial 10:00-12:00
 CS2103T Laboratory 10:00-12:00
 ```
 </div>
+
+<div markdown="block" class="command-fail">
+<div class="alert alert-danger">
+:x: When the command fails:
+</div>
+
+| Error                                                                                                       | Resolution                                      |
+|-------------------------------------------------------------------------------------------------------------|-------------------------------------------------|
+| `Invalid command format!`                                                                                   | Ensure that prefix `c/` is present              |
+| `Course codes should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet.` | Ensure that `COURSE_CODE` follows the format    |
+| `Course not found.`                                                                                         | Ensure that `COURSE_CODE` is an existing course |
+
 </div>
 
 ### Adding a default course : `teach`
 
-You can add a default course to TAManager.
-
-The default course is usually the course that you are currently teaching.
-
+You can add a default course to TAManager. The default course is the course that you are currently managing or teaching. This is useful when you only want to view TAs that are teaching your default course.
 
 Format: `teach c/COURSE_CODE`
+
+- COURSE_CODE should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet. Needs to be an existing course.
 
 Expected outcome:
 - Updates the name of the window with the default course.
@@ -429,19 +483,26 @@ Example: `teach c/CS2103T` sets the default course to the course CS2103T.
 ![teach command](images/teachCourse.png)
 *<center>TAManager successfully added the default course.</center>*
 
-<div markdown="block" class="alert alert-success">
+<div markdown="block" class="command-succeed">
+<div class="alert alert-success">
 :heavy_check_mark: When the command succeeds:
-<div markdown="block" class="code">
-```CS2103T is successfully added as default course.```
 </div>
+```
+CS2103T is successfully added as default course.
+```
 </div>
 
-<div markdown="block" class="alert alert-danger">
+<div markdown="block" class="command-fail">
+<div class="alert alert-danger">
 :x: When the command fails:
-- Incorrect format (e.g., missing information): `Invalid command format!`
-- Invalid course code: `Course codes should have 2-3 alphabets, followed by 4 digits,
-  and optionally end with an alphabet.`
-- Valid course code, but course not found: `Course not found.`
+</div>
+
+| Error                                                                                                       | Resolution                                      |
+|-------------------------------------------------------------------------------------------------------------|-------------------------------------------------|
+| `Invalid command format!`                                                                                   | Ensure that prefix `c/` is present              |
+| `Course codes should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet.` | Ensure that `COURSE_CODE` follows the format    |
+| `Course not found.`                                                                                         | Ensure that `COURSE_CODE` is an existing course |
+
 </div>
 
 ### Reset the default course : `clearteach`
@@ -457,10 +518,14 @@ Example: `clearteach`
 ![clearteach command](images/clearTeach.png)
 *<center>TAManager successfully reset the default course.</center>*
 
+<div class="command-succeed">
 <div markdown="block" class="alert alert-success">
 :heavy_check_mark: When the command succeeds:
+</div>
 <div markdown="block" class="code">
-```Default course has been cleared!```
+```
+Default course has been cleared!
+```
 </div>
 </div>
 
@@ -468,27 +533,53 @@ Example: `clearteach`
 
 ### Viewing help : `help`
 
-Shows you the link to access the user guide if you need it.
+You can access the link to access this user guide if you need it.
 
 Format: `help`
 
 ![help message](images/helpMessage.png)
 
+<div class="command-succeed">
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: When the command succeeds:
+</div>
+<div markdown="block" class="code">
+```
+Opened help window.
+```
+</div>
+</div>
+
 ### Clearing all entries : `clear`
 
 You can clear all entries from TAManager.
 
+<div markdown="block" class="alert alert-warning">
+**:exclamation: Caution:**This is a dangerous command that will delete all TA data and is irreversible. Please ensure that you have backed up your data.
+</div>
+
 Format: `clear`
+
+<div class="command-succeed">
+<div markdown="block" class="alert alert-success">
+:heavy_check_mark: When the command succeeds:
+</div>
+<div markdown="block" class="code">
+```
+Address book has been cleared!
+```
+</div>
+</div>
 
 ### Exiting the program : `exit`
 
-Exits the program.
+You can safely exit the program.
 
 Format: `exit`
 
-## Saving the data
+## Saving your data
 
-TAManager data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+TAManager data is saved in the hard disk automatically after any command that changes the data. There is no need for you to save manually.
 
 ## Editing the data file
 
@@ -496,37 +587,37 @@ TAManager data are saved automatically as a JSON file `[JAR file location]/data/
 
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file makes its format invalid, TAManager will discard all data and start with an empty data file at the next run. Hence, it is recommended to make a backup of the file before editing it.
 </div>
 
 <span style="float:right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## Frequently Asked Questions
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TAManager.
+**A**: Install the app in your other computer and overwrite the empty data file it creates with the file that contains the data of your previous TAManager.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 Commands are arranged in alphabetical order for your easy reference.
 
-| Action                                                        | Format, Examples                                                                                                                                                                                           |
-|---------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Add](#adding-a-teaching-assistant-add)**                   | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [t/TAG]... [c/COURSE_CODE]... h/HOUR` <br> e.g. `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10`  |
-| **[Clear](#clearing-all-entries--clear)**                     | `clear`                                                                                                                                                                                                    |
-| **[ClearTeach](#reset-the-default-course--clearteach)**       | `clearteach`                                                                                                                                                                                               |
-| **[Course](#viewing-course-information--course)**             | `course c/[COURSE_CODE]`<br> e.g. `course c/CS2103T`                                                                                                                                                       |
-| **[Delete](l#removing-a-teaching-assistant-delete)**          | `delete INDEX`<br> e.g. `delete 3`                                                                                                                                                                         |
-| **[Edit](#editing-a-teaching-assistant-edit)**                | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [t/TAG]... [c/COURSE_CODE]... h/HOUR` <br> e.g. `edit n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10` |
-| **[Editft](#edit-free-time-for-a-teaching-assistant-editft)** | `editft INDEX d/DAY from/FROM to/FROM` <br> e.g. `editft 1 d/2 from/12:30 to/13:30`                                                                                                                        |
-| **[Exit](#exiting-the-program--exit)**                        | `exit`                                                                                                                                                                                                     |
-| **[Find](#finding-a-teaching-assistant-find)**                | `find PREFIX KEYWORD [MORE_KEYWORDS]`<br> e.g. `find n/Alex`, `find c/cs1231s`, `find from/10:00 to/12:00`, `find n/Alex c/cs1231s`, `find c/cs2103t from/10:00 to/12:00`                                  |
-| **[Help](#viewing-help--help)**                               | `help`                                                                                                                                                                                                     |
-| **[Hour](l#updating-hours-for-all-tas-in-view-hour)**         | `hour INTEGER`<br> e.g., `hour 2`                                                                                                                                                                          |
-| **[List](#viewing-teaching-assistants-list)**                 | `list`                                                                                                                                                                                                     |
-| **[Teach](#adding-a-default-course--teach)**                  | `teach c/[COURSE_CODE]`<br> e.g. `teach c/CS2103T`                                                                                                                                                         |
+| Action                                                          | Format, Examples                                                                                                                                                                                           |
+|-----------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Add](#adding-a-teaching-assistant-add)**                     | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [t/TAG]... [c/COURSE_CODE]... h/HOUR` <br> e.g. `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10`  |
+| **[Clear](#clearing-all-entries--clear)**                       | `clear`                                                                                                                                                                                                    |
+| **[ClearTeach](#reset-the-default-course--clearteach)**         | `clearteach`                                                                                                                                                                                               |
+| **[Course](#viewing-course-information--course)**               | `course c/[COURSE_CODE]`<br> e.g. `course c/CS2103T`                                                                                                                                                       |
+| **[Delete](#removing-a-teaching-assistant-delete)**             | `delete INDEX`<br> e.g. `delete 3`                                                                                                                                                                         |
+| **[Edit](#editing-a-teaching-assistant-edit)**                  | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [t/TAG]... [c/COURSE_CODE]... h/HOUR` <br> e.g. `edit n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10` |
+| **[Editft](#editing-free-time-of-a-teaching-assistant-editft)** | `editft INDEX d/DAY from/FROM to/FROM` <br> e.g. `editft 1 d/2 from/12:30 to/13:30`                                                                                                                        |
+| **[Exit](#exiting-the-program--exit)**                          | `exit`                                                                                                                                                                                                     |
+| **[Find](#finding-a-teaching-assistant-find)**                  | `find PREFIX KEYWORD [MORE_KEYWORDS]`<br> e.g. `find n/Alex`, `find c/cs1231s`, `find from/10:00 to/12:00`, `find n/Alex c/cs1231s`, `find c/cs2103t from/10:00 to/12:00`                                  |
+| **[Help](#viewing-help--help)**                                 | `help`                                                                                                                                                                                                     |
+| **[Hour](#updating-hours-for-teaching-assistants-hour)**        | `hour INTEGER`<br> e.g., `hour 2`                                                                                                                                                                          |
+| **[List](#viewing-teaching-assistants-list)**                   | `list`                                                                                                                                                                                                     |
+| **[Teach](#adding-a-default-course--teach)**                    | `teach c/[COURSE_CODE]`<br> e.g. `teach c/CS2103T`                                                                                                                                                         |
 
 <span style="float:right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
