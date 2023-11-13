@@ -17,6 +17,12 @@ _{ list here sources of all reused/adapted ideas, code, documentation, and third
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Note about terms used in DG**
+
+In this document, `UniMateCalendar` and `Calendar` are used synonymously.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
@@ -218,7 +224,6 @@ is a timing conflict will be reflected in the UI status bar.
     * Pros: User only has to type date once when calling command.
     * Cons: For multi-day `Event`, user has to call the command multiple times for all the relevant days
 
-{more aspects and alternatives to be added}
 
 //@@author Fallman2
 ### Deleting Events
@@ -293,6 +298,47 @@ Step 8. The `ClearEventsCommand` calls the `Model#eventsInRange(EventPeriod)` me
 Step 9. For each event in range, the command calls the `Model#deleteEventsInRange(EventPeriod)` which deletes all events within the range.
 
 Step 10. All deleted events are displayed in the command result.
+
+### Calendar Comparison (compareCalendars)
+
+#### Implementation
+
+When the command `compareCalendars` is called, the arguments passed by the users are converted into a list of `Index` in `CompareCalendarByIndexCommandParser#parse()`.
+The list of `Index` is then passed as an argument into the constructor `CompareCalendarByIndexCommand#new()`. Subsequently, when `CompareCalendarByIndexCommand#execute()` is called,
+the list of `Person` stored in the AddressBook is retrieved using `ModelManger#getFilteredPersonList()`, and the `Person` associated with each `Index` is extracted
+with `List#get()`. Their respective `UniMateCalendar` is then extracted with `Person#getCalendar()`, and all the `UniMateCalendar` of the user and relevant contacts are
+merged and reduce into a single `UniMateCalendar` with `UniMateCalendar#combineCalendar()`. This combined `UniMateCalendar` is then used to produce the grey event cards
+seen in the pop-up comparison calendar window displayed to the user with `CalendarEventSpace#addSolidEventCards()`.
+
+Step 1. The user launches the application and creates an event in the current week.
+
+Step 2. The user creates an event in the current week for one of their contact. For this example, let's assume the contact is `Alex Yeoh` at `Index` 1 of the AddressBook.
+
+Step 3. The user executed `compareCalendars 1`. The `CompareCalendarByIndexCommandParser#parse()` creates a list of `Index` containing a single `Index` object from
+ created from the user's argument `1`, and passed it into `CompareCalendarByIndexCommand#new()`.
+
+Step 4. The `CompareCalendarByIndexCommand#execute()` will turn the `Index` list into a `Stream` with `Arrays#stream()`, and each `Index` in the stream will be 
+converted into the `Person` with the given `Index` with `Stream#map()` and `List#get()` as the `map()` function input. 
+
+Step 5. The stream is further converted into a `Stream` of `UniMateCalendar` with `Stream#map()` and `Person#getCalendar()` as the `map()` function input. 
+
+Step 6. Eventually, we call `Stream#reduce()` with the user's `UniMateCalendar` as seed, merging all of the `UniMateCalendar` in the `Stream` into a single one with `UniMateCalendar#combineCalendar()`.
+
+Step 7. The resultant `UniMateCalendar` then has the `Event` stored in it converted into grey event cards with `CalendarEventSpace#addSolidEventCards()`, which
+reflects in the resultant pop-up comparison calendar window.
+
+<puml src="diagrams/CompareCalendarsSequenceDiagram.puml" width="450" />
+
+**Design Consideration**
+
+**Aspect: Whether to show calendar on a new pop-up or in the main GUI:**
+
+* **Alternative 1 (Current choice): Pop-up window**
+    * Pros: Looks cleaner since the comparison calendar is in an isolated window.
+    * Cons: User needs to close the pop-up, which might be inconvenient.
+* **Alternative 2: Display the calendar on the main application GUI**
+    * Pros: Less application tabs for the user to manage.
+    * Cons: More clutter on the main GUI.
 
 ### Contact Filtering
 
