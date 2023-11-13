@@ -923,13 +923,13 @@ Currently, the UI does not update and will remain unchanged from the previous co
 
 ### Improve on `remark` feature
 **Improve the remark feature**
-Currently, if you use multiple prefix , it is allowed and only the last prefix will be used. We would like to improve on this by only allowing 1 prefix to be used. Thus we verify for duplicate `r/` prefix since it does not make sense to have multiple remarks for the same person.
+Currently, if you use multiple prefix , it is allowed and only the last prefix will be used. We would like to improve on this by only allowing 1 prefix to be used. Thus, we verify for duplicate `r/` prefix since it does not make sense to have multiple remarks for the same person.
 
 ### Improve on `edit` feature
 **Improve on the edit feature**
 Currently, for tagging, once you add a tag to a person, it does not update when you add the tag categories to the same tag name using `create`.   
 This is a feature flaw since a user would expect the tag to be updated and would not need to be re-tag again. We would like to improve on this by updating the tag when the tag category is updated.    
-That is if you add an extra category to the tag name, the tag will be updated to include the tag category. Thus a user would not need to re-tag the person again to update the tag category.
+That is if you add an extra category to the tag name, the tag will be updated to include the tag category. Thus, a user would not need to re-tag the person again to update the tag category.
 
 
 ## **Appendix: Effort**
