@@ -1090,3 +1090,37 @@ testers are expected to do more *exploratory* testing.
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix: Effort**
+### Main Difficulty: Building User Calendar
+This part was especially difficult because we wanted to maintain the OOP style of the base `AB3` code, knowing it is a brownfield project. 
+Thus, we wanted to ensure the abstraction granularity of the classes matched that of `AB3` (e.g. Separate classes for every single attribute of `Person`), 
+which explains why the `UniMateCalendar` class is so granular, as seen in the [model class diagram](#model-component).
+
+Furthermore, we knew from the beginning that we wanted to allow users to compare their `Calendar` with that of their contacts.
+Therefore, from the start, we had to write code that would make this feature possible.
+
+The UI for the calendar was also challenging because nobody in the group had experience in desktop application UI development and JavaFx.
+Therefore, this section took many hours of trial and error.
+
+Lastly, the feature where the calendar would "grow" and "shrink" according to the events that the user have in real time
+took a lot of careful problem-solving to avoid breaking abstraction barrier and introducing cyclic dependencies, since
+we had to establish a line of communication between the `UniMateCalendar` of the `Model` interface and the `UI` interface,
+and the `Observable` and `Observer` interfaces were only introduced later into the module, by which we had already implemented
+this feature.
+
+### Other Difficulty: Contact Calendar
+Integrating the calendar into the contacts in the AddressBook was challenging, but was slightly easier as we could just reuse the
+code that we have written for the `UniMateCalendar`. However, we still had to learn how to make the calendar of the contacts show up
+in a new window rather than in the main application GUI.
+
+### Other Difficulty: Task Manager/Event List
+For the Task Manager, the main difficulty lies in following the structure of the `AB3` code.
+
+Additionally, for both `Task List` and `Event List`, making the list update in real time when new `Task`/`Event` are added was also difficult.
+
+### Achievements:
+- Calendar UI that will update in real time when user adds/deletes event
+- Working calendar comparison feature
+- We were able to integrate 2 separate and very different components, `Task manager` and `Calendar`, successfully into the base `AB3` code
+- Live updates for the `Task List` and `Event List`
