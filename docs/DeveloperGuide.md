@@ -579,13 +579,29 @@ The `viewappointment` command opens/focuses the `AppointmentsWindow`.
 
 **Alternative 1 (Current Choice)**: Each `Person` consists of a `UniqueAppointmentList` consisting of all `Appointment` objects assigned to the `Person`. Each `Appointment` object has the corresponding `Person` `NRIC` as a field.
 
-- _Pros_: Operations like searching and filtering for all appointments are easier when a centralised list is available.
-- _Cons_: Keeping the central `UniqueAppointmentList` in `Model` and individual lists in each `Person` synchronized can be challenging and might lead to data inconsistencies if not managed properly. Any change in an `Appointment` requires updates in two places, adding to the complexity and processing time.
+- _Pros_:
 
-**Alternative 2**: Each `Appointment` consists of a `UniqueAppointmentList` consisting of all `Person` objects assigned to the `Appointment`. Each `Person` object has the corresponding `Appointment` id as a field.
+  - **Direct Relationship**: It directly associates appointments with the individual patient, reflecting a real-world scenario where a patient has a list of their appointments.
+  - **Ease of Access**: Retrieving all appointments for a specific person is straightforward.
 
-- _Pros_: This approach simplifies the data model by avoiding the need for a centralised appointment list.
-- _Cons_: Operations that require knowledge of all appointments, like finding available slots or generating reports, become more complex, as they need to aggregate data from each Person.
+- _Cons_:
+  - **Duplication**: Storing `NRIC` in both `Person` and `Appointment` leads to data duplication, going against the principles of data normalization.
+  - **Data Integrity Risks**: If an `NRIC` needs to be updated, it must be changed in each Appointment object, increasing the risk of data inconsistency.
+  - **Complexity**: It complicates the retrieval of information about the `Person` associated with the `Appointment` such as trying to display the `Person` `Name` in the **Appointment Card**.
+
+**Alternative 2**: Each `Appointment` consists of a a `Person` objects. Each `Person` object has the corresponding `Appointment` id as a field.
+
+- _Pros_:
+
+  - **Data Normalization**: This approach avoids duplicating person-specific data (like `NRIC`) within the appointment, adhering to data normalization principles.
+
+- _Cons_:
+
+  - **Complexity**: It complicates the retrieval of all appointments for a single person, requiring more complex queries and potentially impacting performance.
+  - **Data Redundancy**: If an appointments holds a `Person` object, there's a risk of redundancy as the same `Person` object could be stored across multiple appointments.
+  - **Difficult Person Creation**: The dependency of `Person` creation on `Appointment` objects complicates the process, potentially leading to issues when a new patient is registered without an appointment.
+
+Considering MedBook's primary focus on patient management, **Alternative 1** has been selected. This decision prioritizes the ease and intuitiveness of accessing and managing patient-specific information, despite some level of data redundancy, which is often a trade-off in software design for enhanced usability.
 
 ## User Stories
 

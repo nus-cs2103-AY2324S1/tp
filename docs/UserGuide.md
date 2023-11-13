@@ -327,7 +327,7 @@ The **domain** name must: <br>
 
 <box type="tip" seamless>
 
-**Tip**:If you get stuck while using MedBook, use the help command to get a quick overview of all commands!
+**Tip**: If you get stuck while using MedBook, use the help command to get a quick overview of all commands!
 
 </box>
 
@@ -343,7 +343,7 @@ Format: `help`
 
 <box type="tip" seamless>
 
-**Tip**:Wants to add a new patient? Try out the `addpatient` command!
+**Tip**: Wants to add a new patient? Try out the `addpatient` command!
 
 </box>
 
@@ -372,7 +372,7 @@ Screenshots:
 
 <box type="tip" seamless>
 
-**Tip**:Don't know how to add a medical record to the patient? Check out the `addrecord` command!
+**Tip**: Don't know how to add a medical record to the patient? Check out the `addrecord` command!
 
 </box>
 
@@ -404,7 +404,7 @@ Screenshots:
 
 <box type="tip" seamless>
 
-**Tip**:Wants to add an appointment? The `addappointment` command is here to help you!
+**Tip**: Wants to add an appointment? The `addappointment` command is here to help you!
 
 </box>
 
@@ -429,12 +429,6 @@ Screenshots:
 
 ### Listing all patients: `list`
 
-<box type="tip" seamless>
-
-**Tip**:Just used `search` command and don't know how to get back? Simply type `list` to display all patients!
-
-</box>
-
 Shows a list of all patients.
 
 Format: `list`
@@ -455,7 +449,7 @@ Format: `list`
 
 <box type="tip" seamless>
 
-**Tip**:Don't know how to display medical records? Easily view them by `view` command!
+**Tip**: Don't know how to display medical records? Easily view them by `view` command!
 
 </box>
 
@@ -490,7 +484,7 @@ Screenshots:
 
 <box type="tip" seamless>
 
-**Tip**:Wish to know about the upcoming appointments? Simply type in `viewappointment`!
+**Tip**: Wish to know about the upcoming appointments? Simply type in `viewappointment`!
 
 </box>
 
@@ -506,7 +500,7 @@ Format: `viewappointment`
 
 <box type="tip" seamless>
 
-**Tip**:Just entered a wrong detail of the patient? Use `editpatient` to correct it!
+**Tip**: Just entered a wrong detail of the patient? Use `editpatient` to correct it!
 
 </box>
 
@@ -556,7 +550,7 @@ Screenshots:
 
 <box type="tip" seamless>
 
-**Tip**:Spotted an error in the medical record? Fret not, the `editrecord` is here!
+**Tip**: Spotted an error in the medical record? Fret not, the `editrecord` is here!
 
 </box>
 
@@ -594,7 +588,7 @@ Examples:
 
 <box type="tip" seamless>
 
-**Tip**:Cannot find the patient you're looking for? If you remember one of his/her details, `search` will help you find him/her!
+**Tip**: Cannot find the patient you're looking for? If you remember one of his/her details, `search` will help you find him/her!
 
 </box>
 
@@ -641,7 +635,7 @@ Screenshots:
 
 <box type="tip" seamless>
 
-**Tip**:Feeling frustrated by the huge amount of records? Use `searchrecord` to locate the ones you need!
+**Tip**: Feeling frustrated by the huge amount of records? Use `searchrecord` to locate the ones you need!
 
 </box>
 
@@ -677,7 +671,7 @@ Examples:
 
 <box type="tip" seamless>
 
-**Tip**:Wants to remove irrelevant patient? `delete` is here to help you!
+**Tip**: Wants to remove irrelevant patient? `delete` is here to help you!
 
 </box>
 
@@ -687,7 +681,7 @@ Examples:
 
 <box type="tip" seamless>
 
-**Tip**:Wants to remove irrelevant patient? `delete` is here to help you!
+**Tip**: Wants to remove irrelevant patient? `delete` is here to help you!
 
 </box>
 
@@ -736,7 +730,7 @@ Example:
 
 <box type="tip" seamless>
 
-**Tip**:A patient cannot attend an appointment? Use `deleteappointment` to cancel it!
+**Tip**: A patient cannot attend an appointment? Use `deleteappointment` to cancel it!
 
 </box>
 
@@ -785,7 +779,7 @@ Screenshots:
 
 <box type="tip" seamless>
 
-**Tip**:A patient no longer needs extra attention? Easily remove them from _Pinned Patient List_ by `unpin` command!
+**Tip**: A patient no longer needs extra attention? Easily remove them from _Pinned Patient List_ by `unpin` command!
 
 </box>
 
@@ -807,7 +801,7 @@ Examples:
 
 <box type="tip" seamless>
 
-**Tip**:A patient's report just comes out? The `attach file` feature can help you keep documents in an organised manner!
+**Tip**: A patient's report just comes out? The `attach file` feature can help you keep documents in an organised manner!
 
 </box>
 
