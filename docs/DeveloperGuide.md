@@ -1173,26 +1173,62 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Planned enhancement**
-1. Currently, the `add` command allows users to add an employee with the same name as an existing one, but in different cases (e.g. John Tan and john tan), and with other fields identical. However, the two employees should be considered the same as they have the same identity, and the command should be modified. To resolve this, we plan to implement a case-insensitive comparison of the names of the employees.
-    This can be done by modifying the `equals()` method in the [`Person`](https://github.com/AY2324S1-CS2103T-W12-2/tp/blob/master/src/main/java/seedu/address/model/person/Person.java) class to ignore the case of the name, i.e. changing `name.equals(other.name)` to `name.toLowerCase().equals(other.name.toLowerCase())`.
 
-2. Adjust the width and height of the UI boxes to align with our desired specifications, preventing issues such as message wrapping to the next line as shown below and ensuring optimal alignment.
+### Stricter rules for adding employees with an identical name
+
+1. Currently, the `add` command allows users to add an employee with the same name as an existing one, but in different cases (e.g. John Tan and john tan), and with other fields identical. However, the two employees should be considered the same as they have the same identity, and the command should be modified. To resolve this, we plan to implement a case-insensitive comparison of the names of the employees.
+
+2. This can be done by modifying the `equals()` method in the [`Person`](https://github.com/AY2324S1-CS2103T-W12-2/tp/blob/master/src/main/java/seedu/address/model/person/Person.java) class to ignore the case of the name, i.e. changing `name.equals(other.name)` to `name.toLowerCase().equals(other.name.toLowerCase())`.
+
+### Enhancing UI Dimensions for Optimal Alignment 
+
+1. Our current UI exhibits alignment issues, such as message wrapping to the next line as shown below, and we aim to ensure optimal alignment.
    ![Wrapped text in UI](images/Wrapped.png)
 
-   To resolve this, we plan to modify the minWidth, minHeight, maxWidth, and maxHeight parameters of the respective boxes for a more refined and cohesive appearance.
+2. To resolve this, we plan to modify the minWidth, minHeight, maxWidth, and maxHeight parameters of the respective boxes for a more refined and cohesive appearance.
 
-3. Currently, users need to input commands to switch between months in the UI calendar. In our future plans, we intend to implement a user-friendly dropdown menu along with dedicated next and previous buttons, providing a more intuitive interface for toggling between months.
+### Streamlining Calendar Navigation for User Convenience
 
-4. Currently, the `delete` command allows the deletion of employee via index and name. However, for the deletion via name, if there are multiple employees with the same name, i.e., Amy Tan, Amy Teo and Amy Lee, even if you enter the command `delete /n Amy Lee`, which is the full name of one of these employee, it will return a list of these employees with the name "Amy" rather than directly deleting the employee that matches the full name. While this is to allow greater flexibility in searching, in our future implementation, we would allow the deletion of employee using the full name to provide more convenience to the users.
+1. Currently, users need to input commands to switch between months in the UI calendar.
 
-5. The current leave tracking system only allows users to track the data for annual leave. To better cater to the users of ManaGease, we will implement the ability to track leave for other types of leave like sick leave, parental leave, compassionate leave, etc.
+2. In our future plans, we intend to implement a user-friendly dropdown menu along with dedicated next and previous buttons, providing a more intuitive interface for toggling between months.
 
-6. Currently, the `deleteleave` command does not allow users to delete leave from employee if the date of leave to delete is already over. This is to reduce the likelihood of any unintended or intended change in leave data. However, to offer users greater flexibility in editing the leave data, we will implement some form of access control to allow certain users to have the abiltiy to delete leave data for dates that are already over. 
+### Enhancing Deletion Functionality for User Convenience
+
+1. Currently, the `delete` command allows the deletion of employee via index and name. However, for the deletion via name, if there are multiple employees with the same name, i.e., Amy Tan, Amy Teo and Amy Lee, even if you enter the command `delete /n Amy Lee`, which is the full name of one of these employee, it will return a list of these employees with the name "Amy" rather than directly deleting the employee that matches the full name.
+   
+2.  While this is to allow greater flexibility in searching, in our future implementation, we would allow the deletion of employee using the full name to provide more convenience to the users.
+
+### Expanding Leave Tracking Capabilities for Enhanced User Flexibility
+
+1. The current leave tracking system only allows users to track the data for annual leave.
+   
+2. To better cater to the users of ManaGease, we will implement the ability to track leave for other types of leave like sick leave, parental leave, compassionate leave, etc.
+
+### Enhanced Access Control for Leave Deletion
+
+1. Currently, the `deleteleave` command does not allow users to delete leave from employee if the date of leave to delete is already over. This is to reduce the likelihood of any unintended or intended change in leave data. However, to offer users greater flexibility in editing the leave data, we will implement some form of access control to allow certain users to have the ability to delete leave data for dates that are already over. 
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
 
+### JavaFX Clock and Calendar Component
+
+1. Challenges faced :
+	- `Component Selection`: AB3 initially uses VBox and HBox for layout, but midway through development, we realized that a GridPane offered a more effective solution, leading to a shift in our approach.
+	- `Synchronization`: Ensuring seamless synchronization with the local date and displaying the number of employees on leave
+	- `Command-Based Month Navigation`: Implementing a command-based system for toggling month changes introduced challenges in managing signals to accurately control the month navigation functionality.
+
+2. Effort required:
+	- `Iterative Development`: The need for constant adjustments to the layout and functionality, especially during the transition from VBox and HBox to GridPane, required iterative development and continuous refinement.
+	- `Restarting for Alignment Checks`: Verifying alignment in the JavaFX calendar component demanded frequent restarts, leading to considerable time investment in the development process.
+	- `CSS File Interpretation`: Reading through and comprehending the extensive CSS file became a significant effort, as it was crucial for styling and maintaining the visual integrity of the JavaFX calendar component.
+	- `Command-Based Navigation`: Developing and refining the command-based month navigation system required careful consideration of signal management and user interface responsiveness.
+
+3. Achievements:
+	- `Effective Layout with GridPane`: Despite the initial challenges, adopting GridPane significantly improved the layout efficiency of our calendar component, ensuring a visually appealing and well-organized interface.
+	- `Successful Synchronization`: Overcoming synchronization complexities, we successfully implemented a calendar component that accurately reflects the local date and dynamically displays the number of employees on leave.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1403,7 +1439,7 @@ testers are expected to do more *exploratory* testing.
    iv. Other incorrect edit commands to try: `edit 1 /l -15`, `edit x /l 15` (where x is larger than the list size, excluding negative, non-integer and extremely large integers)<br>
    * Expected: Similar to previous.
   
-9. Editing the multiple fields of an employee
+9. Editing multiple fields of an employee
 
    i. Prerequisites:
    * List all employees using the `list` command. Multiple employees in the list.
