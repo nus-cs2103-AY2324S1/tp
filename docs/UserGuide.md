@@ -866,8 +866,6 @@ MedBook data is saved automatically as a JSON file located in `[jar file locatio
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and copy the `data` folder over to the folder of the installed jar file in the other computer.
 
-**Q**: I just entered a very long allergy and the format of _Patient Card_ goes messy.<br>
-**A**: MedBook does not accept extreme inputs. Try resizing the window and see if that helps. We also aim to amend this issue in next iteration.<br>
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
