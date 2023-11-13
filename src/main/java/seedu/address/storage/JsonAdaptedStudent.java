@@ -28,7 +28,7 @@ class JsonAdaptedStudent {
     private final String name;
     private final String phone;
     private final String address;
-    private final List<JsonAdaptedRiskLevel> tags = new ArrayList<>();
+    private final List<JsonAdaptedRiskLevel> risklevel = new ArrayList<>();
     private final String note;
 
     /**
@@ -37,13 +37,13 @@ class JsonAdaptedStudent {
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("address") String address,
-                              @JsonProperty("tags") List<JsonAdaptedRiskLevel> tags,
+                              @JsonProperty("risklevel") List<JsonAdaptedRiskLevel> risklevel,
                               @JsonProperty("note") String note) {
         this.name = name;
         this.phone = phone;
         this.address = address;
-        if (tags != null) {
-            this.tags.addAll(tags);
+        if (risklevel != null) {
+            this.risklevel.addAll(risklevel);
         }
         this.note = note;
     }
@@ -55,7 +55,7 @@ class JsonAdaptedStudent {
         name = source.getName().value;
         phone = source.getPhone().value;
         address = source.getAddress().value;
-        tags.addAll(source.getRiskLevel().stream()
+        risklevel.addAll(source.getRiskLevel().stream()
                 .map(JsonAdaptedRiskLevel::new)
                 .collect(Collectors.toList()));
         note = source.getNote().value;
@@ -101,13 +101,13 @@ class JsonAdaptedStudent {
             throw new IllegalValueException(Note.MESSAGE_CONSTRAINTS);
         }
 
-        if (tags.size() > 1) {
+        if (risklevel.size() > 1) {
             throw new IllegalValueException(EXCEED_RISK_LEVEL_SIZE_MESSAGE);
         }
 
-        assert tags != null;
+        assert risklevel != null;
 
-        for (JsonAdaptedRiskLevel riskLevel : tags) {
+        for (JsonAdaptedRiskLevel riskLevel : risklevel) {
             studentRiskLevel.add(riskLevel.toModelType());
         }
 

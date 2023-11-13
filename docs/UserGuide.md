@@ -447,16 +447,22 @@ WellNUS data is saved in the hard disk automatically after any command that chan
 
 #### 2.4.5 Editing the data file
 
-WellNUS data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file
-<div markdown="span" class="alert alert-warning">
-:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, WellNUS will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+WellNUS data is saved automatically as a JSON file `[JAR file location]/data/wellnus.json`. Advanced users are welcome to update data directly by editing that data file
 
-The following scenarios will render the data file invalid:
-* File contains invalid or missing parameters, see `Parameter Constraints` under the [Command Format](#13-about-the-command-format) section
-* File contains duplicate `Students` and `Appointments`
-* File contains overlapping `Appointments`, or `Appointments` without a corresponding `Student`
+<div markdown="block" class="alert alert-warning">
+:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, WellNUS will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+
+The following scenarios will render the data file invalid:<br>
+
+* File contains invalid or missing parameters, see `Parameter Constraints` under the [Command Format](#13-about-the-command-format) section<br>
+
+* File contains duplicate `Students` and `Appointments`<br>
+
+* File contains overlapping `Appointments`, or `Appointments` without a corresponding `Student`<br>
+
 * File is not in proper JSON format, you may refer to [this guide](https://json.org/example.html)
+
 </div>
 
 ### 2.5 Tracking TODOS `[Coming soon]`
@@ -472,7 +478,7 @@ Install the app in the other computer and overwrite the empty data file it creat
 
 2. **How can I view my appointments scheduled today ?**<br/>
 You can use the filter command with today's date. 
-Here's an example: `filter 2023-12-07`. Replace `2023-12-07` with today's date in `yyyy-mm-dd` format.
+Here's an example: `filter 2023-12-07`. Replace `2023-12-07` with today's date in `yyyy-MM-dd` format.
 
 3. **How do I clear all data in WellNUS ?**<br/>
 To clear all data, use the `clear` command. This resets the storage, deleting all appointments and students. 

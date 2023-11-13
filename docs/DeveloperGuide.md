@@ -122,7 +122,7 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
+* stores the wellnus storage data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
 * stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -135,7 +135,7 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both wellnus storage data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `WellNusStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -207,22 +207,22 @@ to a `Student`.
     * Cons: User will have to type much longer commands, since `Note` can be up to 200 characters long,
   leads to very lengthy commands
       
-### 3.4 \[Proposed\] Check clashing appointments feature
+### 3.4 Check overlapping appointments feature
 
-#### Proposed Implementation
-
-The proposed check clashing appointments mechanism is facilitated by `UniqueAppointmentList`. It implements the `Iterable`
-interface that stores an `ObservableList` of type `Appointment`.
+The *check overlapping appointments* mechanism is facilitated by `UniqueAppointmentList`. It implements the `Iterable`
+interface that stores an `ObservableList` of type `Appointment`. When an `Appointment` is scheduled, the
+`ScheduleCommand#execute(Model model)` method begins the check.
 
 The following methods are implemented to facilitate the check clashing appointments process:
 
-* `UniqueAppointmentList#hasOverlap(Appointment appt1, Appointment appt2)` —  Checks if two appointments have overlapping time.
-* `UniqueAppointmentList#hasOverlappingAppointments(Appointment newAppt)` —  Compares the new appointment to schedule with every other appointment currently in `UniqueAppointmentList`.
+* `Model#hasOverlappingAppointments(Appointment toAdd)` —  The Model responsible for adding the appointment (In this case, `WellNUS.java`).
+* `UniqueAppointmentList#hasOverlapWith(Appointment toAdd)` —  Checks if the appointment to add overlaps with any of the current appointments in the `UniqueAppointmentList`.
+* `Appointments#isOverlappingAppointments(Appointment other)` —  Checks if this `Appointment` overlaps with the given `Appointment` supplied in the parameter.
 
 
 The following sequence diagram shows how the class operates when an appointment is added:
 
-![ClashSequenceDiagram](images/ClashSequenceDiagram.png)
+![OverlapSequenceDiagram](images/OverlapSequenceDiagram.png)
 
 
 When the user schedules a new command, the `UniqueAppointmentList` runs its `hasOverlappingAppointments()` method to check if the
@@ -350,7 +350,7 @@ or address is invalid (> 200 characters long)
 * 2a. The list is empty
   * Use case ends.
 
-### 6.3.3 #UC03: Edit an existing student
+#### 6.3.3 #UC03: Edit an existing student
 
 **MSS**
 
@@ -417,7 +417,7 @@ or address is invalid (> 200 characters long)
   * 4b1. WellNUS shows an error message.
     * Use case resumes from step 3.
 
-### 6.3.6 #UC06: Add student notes for a specific student
+#### 6.3.6 #UC06: Add student notes for a specific student
 
 **MSS**
 
@@ -499,7 +499,7 @@ or address is invalid (> 200 characters long)
 
     Use case resumes from step 3.
 
-### 6.3.10 #UC10: Find students by name together with their appointments
+#### 6.3.10 #UC10: Find students by name together with their appointments
 
 1. User requests to find students using their name
 2. WellNUS shows the list of students that match the given name
@@ -511,9 +511,11 @@ or address is invalid (> 200 characters long)
 **Extensions**
 
 * 4a. User does not see any students and appointments as no students match the given name
+
   Use case ends.
 
-### 6.3.11 #UC11: Filter an appointment by date
+#### 6.3.11 #UC11: Filter an appointment by date
+
 
 1. User requests to list appointments for a given date
 2. WellNUS shows the list of appointments for the date
@@ -524,6 +526,7 @@ or address is invalid (> 200 characters long)
 **Extensions**
 
 * 3a. User does not see any appointments as there are no appointments scheduled on that day
+
   Use case ends.
 
 * 3b. The given date is invalid (wrong date format).
@@ -592,7 +595,7 @@ Format: `add n/STUDENT_NAME c/CONTACT_NUMBER a/HOME_ADDRESS [r/RISK_LEVEL]`
 3. Test Case 2: `add n/Rachel Teo c/87654321 a/Block 30 Kallang Place #01-23/24 r/HIGH`
     1. Expectation: Same as above
 4. Test Case 3: `add n/Ethan Tan c/98765432 a/252 ANG MO KIO AVENUE 4 01-225` again
-    1. Expectation: Warning `This student already exists in the address book`
+    1. Expectation: Warning `This student already exists in the student list`
 5. False commands:
     1. Try missing fields: Get a message stating the format of the input
     2. Incorrect Phone Number: Get a message stating that phone numbers must be 8 digits long

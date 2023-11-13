@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
 
 /**
- * Cancels an appointment identified using it's displayed index from the address book.
+ * Cancels an appointment identified using it's displayed index from the wellnus storage.
  */
 public class CancelCommand extends Command {
 

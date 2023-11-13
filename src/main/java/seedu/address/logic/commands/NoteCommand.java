@@ -14,7 +14,7 @@ import seedu.address.model.student.Note;
 import seedu.address.model.student.Student;
 
 /**
- * Changes the note of an existing person in the address book.
+ * Changes the note of an existing person in the wellnus storage.
  */
 public class NoteCommand extends Command {
 
