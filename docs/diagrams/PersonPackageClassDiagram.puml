@@ -11,13 +11,13 @@ Package Person {
     Class Address
     Class Phone
     Class Tag
-    Class Appointments
+    Class Appointment
 
     Person *--> "1" Email
     Person *--> "1" Name
     Person *--> "1" Phone
     Person *--> "1" Address
-    Person *--> "*" Appointments
+    Person *--> "*" Appointment
     Person *--> "*" Tag
 
         Package Doctor {
