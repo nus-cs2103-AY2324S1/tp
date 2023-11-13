@@ -360,7 +360,7 @@ Action | Format, Examples
   </tr>
   <tr>
     <td class="tg-0pky">GENDER</td>
-    <td class="tg-0pky"><code>Male</code>, <code>Female</code>, <code>Others</code></td>
+    <td class="tg-0pky"><code>Male</code>, <code>Female</code>, <code>Others</code> in any case</td>
   </tr>
   <tr>
     <td class="tg-0pky">PHONE_NUMBER</td>
