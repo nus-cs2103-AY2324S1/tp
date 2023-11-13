@@ -1125,15 +1125,16 @@ Please refer to the [User Guide](https://ay2324s1-cs2103t-t11-2.github.io/tp/Use
 1. Initial launch
 
    1. Download the jar file and copy into an empty folder.
+   
+   2. Open a terminal, and navigate to the folder you put the JAR file in.
 
-   2. Run the application `java -jar InterviewHub.jar` in the folder containing the jar file. <br>Expected: Shows the GUI with a set of sample applicants and interviews. The window size may not be optimum.
+   3. Launch the app by using the command `java -jar InterviewHub.jar` in your terminal. <br>Expected: Shows the GUI with a set of sample applicants and interviews. The window size may not be optimum.
 
 2. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   1. Resize the window to an optimum size. Move the window to your preferred location on the screen. Close the window.
 
-   2. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   2. Re-launch the app by using the command `java -jar InterviewHub.jar` in the same terminal. <br>Expected: The most recent window size and location is retained.
 
 ### Viewing help
 Command: `help`
