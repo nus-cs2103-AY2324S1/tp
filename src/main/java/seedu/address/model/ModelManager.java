@@ -10,6 +10,7 @@ import java.util.function.Predicate;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -30,6 +31,8 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Event> filteredEvents;
+
+    private ObservableList<Event> sortedFilteredEvents;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -149,9 +152,17 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public List<Event> getSortedFilteredEventList(Comparator<? super Event> comparator) {
+    public List<Event> generateSortedFilteredEventList(Comparator<? super Event> comparator) {
         requireNonNull(comparator);
-        return filteredEvents.stream().sorted(comparator).collect(Collectors.toUnmodifiableList());
+        sortedFilteredEvents = FXCollections.observableList(filteredEvents.stream()
+                .sorted(comparator).collect(Collectors.toUnmodifiableList()));
+        return sortedFilteredEvents;
+    }
+
+    @Override
+    public ObservableList<Event> getSortedFilteredEventList() {
+        requireNonNull(sortedFilteredEvents);
+        return this.sortedFilteredEvents;
     }
 
     @Override
