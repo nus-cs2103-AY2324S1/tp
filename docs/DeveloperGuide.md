@@ -400,7 +400,7 @@ Sequence Diagram for FindExpressionParser showing how a sample input is parsed u
 
 ### Update photo feature
 #### Implementation
-##### Commmand logic
+##### Command logic
 The `UpdatePhotoCommand` feature allows users to update photo of a specific contact. This functionality is essential for forgetful users who want to store photos of contacts to remember them easier.
 
 Two key classes are involved in this implementation:
@@ -426,8 +426,8 @@ The process can be summarized in the following logic flow:
 3. Return a `CommandResult` indicating the outcome.
 
 Key methods in this implementation include:
-- `UpdatePhotoCommand(int index, String path)`: Constructor to initialize the command.
-- `execute(Model model)`: Updates the photo as well as the model.
+- `UpdatePhotoCommand::UpdatePhotoCommand(Index index, String path)`: Constructor to initialize the command.
+- `UpdatePhotoCommand::execute(Model model)`: Updates the photo as well as the model.
 
 ### Payments feature
 
