@@ -106,13 +106,13 @@ Throughout this guide, you will see different text styles that are used to highl
 ## Features
 
   1. **Easy Contact Management**:
-      - Seamlessly create, update, and delete your contacts, ensuring your contact list is always up-to-date.<br><br>
+      - CoordiMate seamlessly creates, updates, and deletes your contacts, ensuring that your contact list is always up-to-date.<br><br>
 
   2. **Effortless Task Management**:
-      - CoordiMate records down your tasks and their completion status, allowing you to stay on top of your task list.<br><br>
+      - CoordiMate records your tasks and their completion status, allowing you to stay on top of your task list.<br><br>
 
   3. **Simplified Searching**:
-      - Easily locate contacts or tasks based on your criteria. No more scrolling through endless lists!<br><br>
+      - CoordiMate easily locates contacts or tasks based on your given criteria. No more scrolling through endless lists!<br><br>
 
   4. **Hassle-Free Data Management**:
       - CoordiMate automatically saves your data on every change, so you never have to worry about losing your data.
