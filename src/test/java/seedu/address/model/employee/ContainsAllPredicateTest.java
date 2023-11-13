@@ -23,8 +23,6 @@ public class ContainsAllPredicateTest {
         ContainsAllPredicate predicate = new ContainsAllPredicate(new CustomSet<>(), new CustomSet<>(),
                 new CustomSet<>(), addressSet, new CustomSet<>(), new CustomSet<>(), new CustomSet<>(),
                 new CustomSet<>(), new CustomSet<>());
-        System.out.println(predicate);
-        System.out.println(new EmployeeBuilder().withAddress(keyword).build());
         assertTrue(predicate.test(new EmployeeBuilder().withAddress(keyword).build()));
     }
 
