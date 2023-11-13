@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 # Welcome to TuitionConnect's User Guide!
-:rocket: Introducing **TuitionConnect**: Revolutionizing your Tutoring Business! :teacher:
+:rocket: Introducing **TuitionConnect**: Revolutionizing your Tutoring Business! :rocket:
 
 Fed up with setting up numerous unorganized spreadsheets on Microsoft Excel or Google Sheets to handle the administrative side of you tutoring business?
 
