@@ -25,22 +25,22 @@ Given below are my contributions to the project.
     * Managed releases `v1.2.1`(1 release) on GitHub
 
 * **Enhancements implemented**:
-    * Added tests to ensure correctness (Pull Request [#234](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/234), [#245](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/245)).
-    * Added classes to support lesson and schedule in app (Collaboration) (Pull Request [#74](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/74)).
+    * Added tests to ensure correctness. (Pull Request [#234](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/234), [#245](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/245)).
+    * Added classes to support lesson and schedule in app. (Collaboration) (Pull Request [#74](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/74))
 
 * **Contributions to User Guide**:
-    * Added documentation for the `addTask`, `deleteTask` features. (Pull Request [#153](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/153)).
-    * Updated the FAQ and editing data file section. (Pull Request [#222](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/222)).
+    * Added documentation for the `addTask`, `deleteTask` features. (Pull Request [#153](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/153))
+    * Updated the FAQ and editing data file section. (Pull Request [#222](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/222))
 
 * **Contributions to Developer Guide**:
-    * Added non-functional requirements (Pull Request [#41](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/41)).
-    * Updated user stories and use case. (Pull Request [281](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/281)).
-    * Added Instructions for Manual Testing. (Pull Request [#325](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/325)).
-    * Subject and schedule in ModelClassDiagram (Pull Request [#98](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/98)).
+    * Added non-functional requirements. (Pull Request [#41](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/41))
+    * Updated user stories and use case. (Pull Request [281](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/281))
+    * Added Instructions for Manual Testing. (Pull Request [#325](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/325))
+    * Subject and schedule in ModelClassDiagram. (Pull Request [#98](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/98))
 
 * **Contributions to team-based tasks**:
     * Maintaining the issue tracker.
-    * Enable assertions in Gradle (Pull Request [#105](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/105))
+    * Enable assertions in Gradle. (Pull Request [#105](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/105))
 
 * **Review/mentoring contributions**:
     * 33 PRs reviewed (with non-trivial review comments).
