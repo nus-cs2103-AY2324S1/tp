@@ -165,7 +165,11 @@ implementing this model.
 The class diagram below shows the current implementation of `Member` model.
 
 ![MemberClassDiagram](images/MemberClassDiagram.png)
-Every `Member` contains a `Name`, `Gender`, `Optional<Phone>`, `Optional<Email>`, `Optional<Address>`, `Optional<Hours>`, `Optional<Remark>` and a set of `Tags`
+
+Every `Member` contains a `Name`, `Gender`, `Optional<Phone>`, `Optional<Email>`, `Optional<Address>`, `Optional<Hours>`, `Optional<Remark>` and a set of `Tags`. `UniqueMemberList` stores all unique instances of `Member`.
+
+Note that the `Hours` and a `Remark` fields will only be meaningfully intialised
+when either `viewMember` or `viewEvent` command is called. Hence, these two fields are only tools for UI related purposes.
 
 #### Design Considerations
 
@@ -199,11 +203,16 @@ solutions.
 This section explains how the `Event` model is implemented and the various design consideration when
 implementing this model.
 
-The class diagram below shows the current implementation of `Event` model.
+The `Event` and `UniqueEventList` classes are implemented as shown in the diagram below:
 
 ![EventClassDiagram](images/EventClassDiagram.png)
 
 Every `Event` contains a `Name`, `Location`, `EventDate`, `Optional<Hours>`, `Optional<Remark>` and a set of `Tags`
+`UniqueEventList` stores all unique instances of `Event`.
+
+Note that similar to `Member` class , the `Hours` and a `Remark` fields will only be meaningfully intialised
+when either `viewMember` or `viewEvent` command is called. Hence, these two fields are only tools for UI related purposes.
+
 
 #### Design Considerations
 

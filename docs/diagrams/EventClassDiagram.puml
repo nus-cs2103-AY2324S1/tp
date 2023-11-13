@@ -7,20 +7,14 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-
+Class HiddenOutside #FFFFFF
 package Shared <<Rectangle>> {
-    class Name {
-        name : String
-    }
+    class Name
 }
 package Enrolment <<Rectangle>> {
-    class Hours {
-        value: Integer
-    }
+    class Hours
 
-    class Remark {
-        value: String
-    }
+    class Remark
 }
 
 package Event <<Rectangle>> {
@@ -29,27 +23,20 @@ package Event <<Rectangle>> {
     }
 
 
-    class EventDate {
-        date: LocalDate
-    }
+    class EventDate
 
-    class Location {
-        value: String
-    }
+    class Location
 
-    class Tag {
-        tagName: String
-    }
+    class Tag
+    HiddenOutside ..> UniqueEventList
+    UniqueEventList -down-> "*" Event
+    Event *-down->"1" Name
 
-
-
-    Event -down->"1" Name
-
-    Event -down->"1" EventDate
-    Event -down->"1" Location
-    Event --down->"*" Tag
-    Event ---down->"0..1" Hours
-    Event ---down->"0..1" Remark
+    Event *-down->"1" EventDate
+    Event *-down->"1" Location
+    Event *--down->"*" Tag
+    Event *---down->"0..1" Hours
+    Event *---down->"0..1" Remark
 
 
 
