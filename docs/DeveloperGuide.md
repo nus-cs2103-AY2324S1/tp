@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project uses the [TestFx](https://github.com/TestFX/TestFX) library for automated JavaFX GUI testing.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -24,6 +24,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
+<!-- @@author awhb -->
 
 ### Architecture
 
@@ -66,6 +67,10 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<!-- @@author -->
+
+<!-- @@author xenosf -->
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T08-2/tp/blob/master/src/main/java/networkbook/ui/Ui.java)
@@ -86,6 +91,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+<!-- @@author -->
 
 ### Logic component
 
@@ -142,6 +149,7 @@ when determining which `Parser` to use:
 The sequence diagram below illustrates the interactions within the
 `FilterCommand` class to generate a `FilterCommand` object, using
 `ArgumentMultiMap` and `ArgumentTokeniser`:
+
 * `TO BE IMPLEMENTED IN 1.4`
 
 ### Model component
@@ -467,6 +475,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 _{Explain here how the data archiving feature will be implemented}_
 
 <!-- @@author xenosf -->
+
 ### Sorting feature
 
 #### Implementation
@@ -571,8 +580,11 @@ The following activity diagram summarizes what happens when a command is execute
     * The sorting and filtering is controlled by a `NetworkBook` instance.
     * The status bar could read the sorting and filtering predicate/comparator directly.
     * However, this increases coupling between model and UI which is undesirable. Hence, this alternative was not chosen.
-  
+
+<!-- @@author -->
+
 <!-- @@author awhb -->
+
 ### Find contacts by name
 
 The implementation of the command to find contacts by their names follows the convention of a normal command, where `FindCommandParser` class is responsible for parsing the user input string into an executable command. 
@@ -662,7 +674,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-<!-- @@author awhb -->
+<!-- @@author Singa-Pirate -->
 **Use case: Create a new contact**
 
 **MSS**
@@ -794,6 +806,8 @@ This use case is also applicable to adding **priority** to a contact. For each c
   * 1d1. NetworkBook shows an error message.
 
     Use case ends.
+
+<!-- @@author -->
 
 **Use case: Edit the name of a contact**
 
@@ -1042,6 +1056,8 @@ This user story applies to filtering contacts by **course, specialisation, gradu
 
     Use case ends.
 
+<!-- @@author xenosf -->
+
 **Use case: Sort contacts**
 
 **MSS**
@@ -1108,6 +1124,10 @@ This user story applies to filtering contacts by **course, specialisation, gradu
 
       Use case ends.
 
+<!-- @@author -->
+
+<!-- @@author awhb -->
+
 
 **Use case: Open email app from NetworkBook**
 
@@ -1124,7 +1144,7 @@ This user story applies to filtering contacts by **course, specialisation, gradu
 **Extensions**
     
 * 1a. The contact index is invalid.
-    
+  
   * 1a1. NetworkBook shows an error message.
 
     Use case ends.
@@ -1166,7 +1186,7 @@ This user story applies to filtering contacts by **course, specialisation, gradu
 **Extensions**
 
 * 1a. The contact index is invalid.
-    
+  
   * 1a1. NetworkBook shows an error message.
 
     Use case ends.
@@ -1290,6 +1310,8 @@ This user story applies to filtering contacts by **course, specialisation, gradu
   * 1a1. NetworkBook shows an error message.
 
   Use case ends.
+
+<!-- @@author -->
 
 **Use case: Import data from exported contacts**
 
@@ -1463,7 +1485,7 @@ testers are expected to do more *exploratory* testing.
    1. Download the jar file and copy into an empty folder.
 
    1. Run the jar file with the command in the terminal `java -jar networkbook.jar`.
-    
+   
       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
 1. Saving window preferences.
@@ -1511,7 +1533,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `edit 1 /name Test`
       
         Expected: Name of the first contact should change to `Test`. NetworkBook shows the updated details.
-   
+      
     1. Test case: `edit 0 /name Test`
 
         Expected: No person is updated. NetworkBook shows an error message.
