@@ -249,7 +249,27 @@ The delete feature allows employees to be deleted with just a simple index.
     - expected: Deletes employee with the current index of 4.
     - Shows successful deletion of employee.
 
-This feature is implemented by first 
+A sequence diagram of this deletion is shown below.
+![](images/DeleteEmployeeSequenceDiagram.png)
+
+**Design Considerations:**
+
+The delete command is an essential part of the CRUD process. As such, this is the first few items to implement in ManageHR.
+Initially with barebones functions, each employee effectively had an ID assigned on when they joined ManageHR.
+However, this design has changed, due to the implementation of the filter function, where IDs are no longer unique.
+ManageHR now has to be aware of the state of the program, if there are any filters active, and the IDs and people being shown to the user.
+
+The deletion of an employee is relatively easy compared to the deletion of a department. The removal of an employee does not do any updates
+to the department, as there is only unidirectional dependencies of an employee to a department. No update is required to any departments upon the departure of the last employee.
+
+
+**Mechanism of Action:**
+
+This feature is implemented by first modifying the ID state to use ParserUtil to host the current state, and get the current index's validity at the given state.
+Following that, the parser is able to extract out the appropriate employee to refer to. A DeleteCommand is then created, ready to execute.
+Upon calling execute, the Model returns a filtered employee list, and the deletion is done by the model.
+On completion, a command result is thrown back with the appropriate success/failure values.
+
 
 ### Filter feature
 
