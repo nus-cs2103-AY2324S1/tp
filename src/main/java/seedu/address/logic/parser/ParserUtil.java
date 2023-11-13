@@ -150,10 +150,9 @@ public class ParserUtil {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
 
-        if (uniqueTagList.contains(new Tag(tagName, "assessment"))) {
-            return uniqueTagList.getTag(tagName, "assessment");
+        if (uniqueTagList.contains(new Tag(trimmedTag, "assessment"))) {
+            return uniqueTagList.getTag(trimmedTag, "assessment");
         }
-
         return uniqueTagList.getTag(trimmedTag, tagCategory);
     }
 
