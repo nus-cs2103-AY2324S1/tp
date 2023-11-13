@@ -528,9 +528,11 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Test case: Navigate to the folder with the JAR file, and remove all files and subfolders except the JAR file. Relaunch the app.
+      Expected: The app will launch as per normal, with sample contact data.
 
-1. _{ more test cases …​ }_
+   1. Test case: Navigate to the folder with the JAR file, and make arbitrary changes to the `\data\contacts.json` file. Relaunch the app.
+      Expected: The app will launch with an empty contact list. 
 
 ## Appendix: Effort
 
