@@ -37,7 +37,7 @@ ProjectPRO is optimized for use via a Command Line Interface (CLI) while preserv
 --------------------------------------------------------------------------------------------------------------------
 
 ## Table of Contents
-- [1. Introductions](#introductions)
+- [1. Introduction](#introduction)
 - [2. Table of Contents](#table-of-contents)
 - [3. Using Our Guide](#using-our-guide)
 - [4. Quick Start](#quick-start)
@@ -147,9 +147,10 @@ Welcome back to ProjectPRO. Simply head over to our Features section to gain ins
    - For Windows Users:
      - ![WINDOWSGUIDE](images/UG/QUICKSTART4.png)
 4. Launch ProjectPRO.
-   1. Open a command terminal
-   2. type `cd Desktop` , followed by `cd ProjectPro`
-   3. type `java -jar ProjectPRO.jar` to run the application.
+   1. Open a command terminal.
+   2. Type `cd Desktop` , followed by `cd ProjectPro`.
+   3. Type `java -jar ProjectPRO.jar` to run the application.
+
 
 5. Start using ProjectPRO!
 
@@ -167,11 +168,11 @@ Welcome back to ProjectPRO. Simply head over to our Features section to gain ins
 Written below are the definitions of the terminology used throughout the User Guide:
 
 
-| Term      | Definition                                                                                 |
-|-----------|--------------------------------------------------------------------------------------------|
-| Parameter | Parameter indicates the type of information required for a particular command.             |
-| Command   | A special word used together with parameters to execute a particular action. E.g., `find`. |
-| GUI       | Graphical User Interface, the visual display of ProjectPRO.                                |
+| Term      | Definition                                                                                |
+|-----------|-------------------------------------------------------------------------------------------|
+| Parameter | Parameter indicates the type of information required for a particular command.            |
+| Command   | A special word used together with parameters to execute a particular action. E.g. `find`. |
+| GUI       | Graphical User Interface, the visual display of ProjectPRO.                               |
 
 
 **Parameter Information**
@@ -313,6 +314,7 @@ You can find all the contacts from your contact list with the matching keywords.
 
 **Example(s):**
 - `find n/alex bernice`
+
   This displays all the contacts with names containing Alex or Bernice.
 
 ![Manage Contacts: Find](images/features/Managecontacts_find.png)
@@ -445,7 +447,7 @@ You can add remarks to a group in your contact list.
 </div>
 
 
-**Example:**
+**Example(s):**
 - `remark g/CS2103T r/quiz tomorrow`  
   This adds the remark "quiz tomorrow" to the existing "CS2103T" group in your contact list.
 
@@ -614,7 +616,10 @@ You can add time slots when your contacts are available.
      must be alphanumeric, cannot be blank and must be an existing contact in your contact list.
   </p>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">FREE_TIME</code>
-  must be a time slot within the current weekly schedule. Eg. <code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">Sat 1000 - Mon 1000</code> is not allowed as the monday here refers to next week, violating the current weekly schedule pattern. It is <strong>not case-sensitive</strong>.</p>
+  must be a time slot within the current weekly schedule. E.g. <code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">Sat 1000 - Mon 1000</code> is not allowed as the monday here refers to next week, violating the current weekly schedule pattern.</p>
+  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">FREE_TIME</code>
+  must be a time slot with some duration. E.g. <code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">Mon 1200 - Mon 1200</code> is not valid as there is no duration.<code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">Mon 1300- Mon 1400</code> is valid.
+It is <strong>not case-sensitive</strong>.</p>
 </div>
 
 <p></p>
@@ -623,11 +628,9 @@ You can add time slots when your contacts are available.
     <img src="icons/exclamation.png" width="20" height="20" style="margin-right: 5px;">
     <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;;">Warning</h5>
   </div>
-  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">NAME</code>
-  ensure the contact exists in your contact list.</p>
-  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">FREE_TIME</code>
-  must not clash with the existing time slots of the contact.
-  If more than one time slot are to be added, they must not clash with one another.</p>
+  <p style="font-size:13px; color: #000; margin: 8px 0;">
+<code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">FREE_TIME</code>
+  must not clash with the other inputted/existing time slots of the contact. E.g. If time slot <code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">Mon 1200 - Mon 1300</code> has been added, then<code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">Mon 1300 - Mon 1400</code> can not be added. 
 </div>
 
 **Example(s):**
@@ -658,7 +661,7 @@ You can remove available time slots of your contacts.
     <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
   </div>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">    NAME</code>
-     must be alphanumeric and cannot be blank.
+     must be alphanumeric, cannot be blank and must be an existing contact in your contact list.
   </p>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">FREE_TIME</code>
   must match the contact's existing time. It is <strong>not case-sensitive</strong>.</p>
@@ -670,10 +673,8 @@ You can remove available time slots of your contacts.
     <img src="icons/exclamation.png" width="20" height="20" style="margin-right: 5px;">
     <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;;">Warning</h5>
   </div>
-  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">NAME</code>
-  ensure the contact exists in your contact list.</p>
  <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #FB9A9A; padding: 2px; border-radius: 2px;">FREE_TIME</code>
-  If more than one time slot are to be deleted, they must not clash with one another.</p>
+  must not clash with other inputted time slots.</p>
 </div>
 
 **Example(s):**
@@ -739,7 +740,7 @@ You can add a meeting time slot for your group.
     <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
   </div>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
-    must be alphanumeric and cannot be blank.</p>
+    must be alphanumeric, cannot be blank and must be an existing group in your contact list.</p>
 <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">MEETING_TIME</code>
     must be a time slot within the weekly schedule and must not clash with the group's existing meeting times.  It is <strong>not case-sensitive</strong>.</p>
 </div>
@@ -782,7 +783,7 @@ You can remove meeting times from your groups.
     <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
   </div>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
-    must be alphanumeric and cannot be blank.</p>
+    must be alphanumeric, cannot be blank and must be an existing group in your contact list.</p>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">MEETING_TIME</code>
     must be a time slot within a weekly schedule and must be an existing meeting slot of the group. It is <strong>not case-sensitive</strong>.</p>
 </div>
@@ -817,7 +818,7 @@ You list meeting time for your groups.
     <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
   </div>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
-    must be alphanumeric and cannot be blank.</p>
+    must be alphanumeric, cannot be blank and must be an existing group in your contact list.</p>
 </div>
 <p></p>
 
@@ -850,7 +851,7 @@ You can find a meeting time slot for your group where everyone is available.
     <h5 style="color: #56494C; margin: 0 0 5px 0; padding-top: 5px;"> Acceptable value(s)</h5>
   </div>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">GROUP_NAME</code>
-    must be alphanumeric and cannot be blank.</p>
+    must be alphanumeric, cannot be blank and must be an existing group in your contact list.</p>
   <p style="font-size:13px; color: #000; margin: 8px 0;"><code style="color: #555; background-color: #F0C481; padding: 2px; border-radius: 2px;">DURATION</code>
     must be a whole number representing the meeting duration in minutes.</p>
 </div>
@@ -888,7 +889,7 @@ You can find a meeting time slot for your group where everyone is available.
 --------------------------------------------------------------------------------------------------------------------
 
 ### Viewing Help: `help`
-You can view the link to our UserGuide.
+You can view the link to our User Guide.
 
 
 **Format:** `help`
@@ -907,6 +908,8 @@ You can view the link to our UserGuide.
 
 **Example(s):**
 - `help`
+
+  This displays the link to the User Guide.
 
 ![](images/features/Generalcommand_help.png)
 
@@ -942,6 +945,8 @@ Clears all entries from the contact list.
 
 **Example(s):**
 - `clear`
+
+  This clears all the data in your contact list.
 
 ![](images/features/Generalcommand_clear.png)
 
