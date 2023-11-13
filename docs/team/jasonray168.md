@@ -40,10 +40,11 @@ Given below are my contributions to the project.
     * User Guide: Added guides for sort, add leave, and delete leave features.
     * Developer Guide:
         * Added implementation details for sort and delete leave features.
+        * Added sequence and activity diagrams for sort and delete leave features.
         * Added instructions for manual testing for sort and delete leave features.
         * Added details for planned enhancements.
         * Added details for use cases.
 
 * **Community**:
 
-* **Tools**: Java, JavaFX, IntelliJ, GitHub CLI, GitHub, PlantUML
+* **Tools**: IntelliJ, GitHub CLI, GitHub
