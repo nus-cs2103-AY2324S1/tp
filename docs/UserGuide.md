@@ -24,8 +24,7 @@ This user guide will teach you how to install **TuitionConnect** from scratch, a
   * [Symbols and Syntax](#symbols-and-syntax)
   * [Layout](#layout)
   * [Quick start](#quick-start)
-  * [Input Formats](#input-formats)
-    * [Command Format](#command-format)
+  * [Command Format](#command-format)
   * [Parameters Requirement](#parameters-requirement)
   * [Features](#features)
     * [Viewing help : `help`](#viewing-help--help)
@@ -48,6 +47,7 @@ This user guide will teach you how to install **TuitionConnect** from scratch, a
   * [Known issues](#known-issues)
   * [Command summary](#command-summary)
   * [Glossary](#glossary)
+    * [Alphanumeric](#alphanumeric)
     * [CLI](#cli)
     * [Command](#command)
     * [GUI](#gui)
@@ -140,9 +140,7 @@ The image below describes TuitionConnect's layout with some description for each
 
 6. Refer to the [Features](#features) below for details of each command.
 
-## Input Formats
-
-### Command Format
+## Command Format
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -192,13 +190,13 @@ Shows a message that helps redirects you to the user guide.
 
 **Expected Output when the command succeeds**: Successfully added tutee XXX(Name)
 
-:exclamation: Things that can cause the `add` command to fail:
-1. Putting invalid inputs into the add command.
-   - :bulb: Check the [Parameter Requirements](#parameters-requirement) for valid parameter inputs.
-2. Adding a tutee that will result in duplicate tutees.
-   - :information_source: Two tutees are considered duplicates if they have the same name and phone number
-3. Adding a tutee that will result in clashing schedules.
-   - :bulb: Use the [`freeTime` command](#finding-free-time--freetime) to list down timings when you are available and prevent schedule clashses.
+* :exclamation: Things that can cause the `add` command to fail:
+  1. Putting invalid inputs into the add command.
+     - :bulb: Check the [Parameter Requirements](#parameters-requirement) for valid parameter inputs.
+  2. Adding a tutee that will result in duplicate tutees.
+     - :information_source: Two tutees are considered duplicates if they have the same name and phone number
+  3. Adding a tutee that will result in clashing schedules.
+     - :bulb: Use the [`freeTime` command](#finding-free-time--freetime) to list down timings when you are available and prevent schedule clashses.
 
 **Examples**:
 * `add n/John Doe p/98765432 e/johnny@example.com a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 end/1600 pr/20.00`
@@ -210,23 +208,24 @@ Shows a message that helps redirects you to the user guide.
 
 ### Listing tutees : `list`
 
-View the tutees that you are currently teaching.
+**Description**: View the tutees that you are currently teaching.
 
-Format: `list [DAY]`
+**Format**: `list [DAY]`
 
-* The `DAY` parameter is optional.
+* :information_source: The `DAY` parameter is optional.
   * Without stating a specified `DAY`, `list` will display all of your tutees
   * When `DAY` is specified, only tutees whose lessons matches the specified `DAY` will be displayed
 
-Examples:
+* :exclamation: If the `DAY` parameter does not adhere to the specified format, the system will treat this as an invalid command
+  - :bulb: Check the [Parameter Requirements](#parameters-requirement) for valid parameter inputs.
+
+**Examples**:
 * `list`
 * `list monday`
 
-<div markdown="block" class="alert alert-info">
-**:information_source: Info:** If the `DAY` parameter does not adhere to the specified format, the system will treat this as an invalid command
-</div>
+**Sample Execution**:  `list monday`
 
-_Executing command:  `list monday`_
+![list by day command](images/ListByDayCommand.png)
 
 ### Finding a tutee : `find`
 
@@ -336,14 +335,16 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-**Description**: Clears all entries from the tutee list.
+**Description**: Want to start from scratch? Clears all entries from the tutee list.
 
 **Format**: `clear`
 
+**Examples**:
+* `clear`
+
+**Sample Execution**:  `clear`
+
 ![ClearCommand.png](images/ClearCommand.png)
-
-* Example image above shows the result of command `clear`
-
 
 ### Marking a tutee as paid : `paid`
 
@@ -395,26 +396,34 @@ Format: `unpaidAll`
 
 ![freeTime before and after](images/freeTime%20before%20and%20after.png)
 
-
 ### Undo previous command : `undo`
 
-Typed something wrong? Undo the most recent command that can modify the tutee data.
+**Description**: Typed something wrong? Undo the most recent command that can modify the tutee data.
 
-Format: `undo`
+**Format**: `undo`
 
-<div markdown="block" class="alert alert-info">
-**:information_source: Info:** <br>
-You can only undo `add`,`clear`,`delete`,`edit`,`redo`,`paid',`unpaid` and `unpaidAll` commands
-</div>
+* :information_source: You can only undo `add`,`clear`,`delete`,`edit`,`redo`,`paid`,`unpaid` and `unpaidAll` commands.
 
-_Executing command:  `undo`_
+**Examples**:
+* `undo`
+
+**Sample Execution**:  `clear` followed by `undo`
+1. `clear` deletes all tutee in the tutee list
+
+![clearCommand](images/clearCommand.png)
+
+2. `undo` restores all cleared tutees
+
+![undoCommand](images/undoCommand.png)
 
 ### Redo previous undone command : `redo`
 
-Changed your mind again? Redo the most recent command that was undone.
+**Description**: Changed your mind again? Redo the most recent command that was undone.
 
-Format: `redo`
+**Format**: `redo`
 
+**Examples**:
+* `redo`
 
 ### Calculating Monthly Revenue: `rev`
 
@@ -475,6 +484,10 @@ Format: `exit`
 | **exit**        | `exit`                                                                                                                                                                                                                                 |
 
 ## Glossary
+
+### Alphanumeric
+
+Characters that are either a number or a letter.
 
 ### CLI
 
