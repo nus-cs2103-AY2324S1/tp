@@ -356,6 +356,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to filter the list of contacts by a given tag.
 2. ConText displays a filtered list of contacts based on the given tag.
 
+   Use case ends.
+
 **Extensions**
 
 * 2a. The filtered list is empty.
