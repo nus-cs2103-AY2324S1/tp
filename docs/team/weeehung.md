@@ -3,44 +3,73 @@
   title: "Wee Hung's Project Portfolio Page"
 ---
 
-### Project: HealthSync
+## Project: HealthSync
 
 HealthSync is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+* **New Feature**:
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+  1. Added fields like ID, Appointment and Medical Histories.
+        * What it does: Allows for necessary fields to be included in the profile
+        * Justification: This feature improves the product significantly because a user can now see the ID, appointment timings and medical history at one glance, since all information are bundled in a patient card. This caters to the needs of front desk staff who need to quickly identify patients, their medical histories and arrange appointments.
+        * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing models, commands and test cases.
 
-* **Code contributed**: [RepoSense link]()
+  2. Added logger tab UI to show logged profiles
+      * What it does: Allows for logs to be pinned at the right panel of the application
+      * Justification: This feature improves the product significantly because a user can now utilise the logger like a memo.
+      * Highlights: This enhancement affects log commands. The Person Cards UI are consistent in both the Logger Tab and Patient List View.
+
+  3. Added Menu Sidebar UI
+      * What it does: It shows users miscellaneous actions that can be performed in the application (ie. Help, Settings, Exit).
+      * Justification: This feature provides a more intuitive way for users to navigate the application. It also supports future integration of file settings and help features.
+      * Highlights: The buttons present in this sidebar have their corresponding shortcuts and can be executed through command text box.
+
+  4. Added `spacebar` key shortcut
+      * What it does:  Allows users to jump to command text box without using mouse to click on command text box
+      * Justification: This feature improves the product significantly as it caters to the habits and characteristics of fast typists.
+      * Highlights: This enhancement does not affect other components and is standalone. For future implementations of settings, we can allow users to pick their preferred shortcuts.
+
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=weeehung&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
 
 * **Project management**:
-  * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+  * Managed releases [`v1.2.1`](https://github.com/AY2324S1-CS2103T-T14-3/tp/releases/tag/v1.2.1) (1 release) on GitHub
+  * Assisted in Jar Release [`v1.3`](https://github.com/AY2324S1-CS2103T-T14-3/tp/releases/tag/v1.3) (1 release) on GitHub
 
 * **Enhancements to existing features**:
-  * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-  * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+  * Added new fields necessary for patient tracking.
+  * Updated the GUI color scheme (Pull requests [\#107](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/107))
+  * Updated the frontend design of application, including menu sidebar, medical history tags and logger tabs.
+  * Wrote additional tests for existing features to increase coverage from 75% to XX% (Pull requests [\#63](), [\#38]())
+  * Refactor File Names to be more consistent (Pull requests [\#209](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/209))
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `delete` and `find` [\#72]()
-    * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+    * Added documentation for the features `autosave` [\#30](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/30)
+    * Annotated GUI screenshots with explanations to orientate users [\#209](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/209)
+    * Added Autosave explanation to mention what is saved in the hard disk [\#209](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/209)
+    * Added explanation for edge case of appointment field (0-minute appointment) [\#209](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/209)
+    * Added description for archiving data files (Future implementation) [\#209](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/209)
   * Developer Guide:
-    * Added implementation details of the `delete` feature.
+    * Added Product Scope which includes target user profile and value proposition.
+    * Added user stories and sort them in terms of priority
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
+  * PRs reviewed (with non-trivial review comments): [\#74](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/74), [\#82](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/82)
+  * Contributed to forum discussions (examples: [#253](https://github.com/nus-cs2103-AY2324S1/forum/issues/253))
+  * Reported bugs and suggestions for other teams in the class (Issues examples: [#1](https://github.com/WeeeHung/ped/issues/1), [#2](https://github.com/WeeeHung/ped/issues/2), [#3](https://github.com/WeeeHung/ped/issues/3), [#4](https://github.com/WeeeHung/ped/issues/4),)
+  * New fields implemented by me are adopted by the team ([#63](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/63))
 
 * **Tools**:
-  * Integrated a third party library (Natty) to the project ([\#42]())
-  * Integrated a new Github plugin (CircleCI) to the team repo
+  * Utitlised JavaFx Scene Builder for building the frontend of the project ([\#107](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/107))
 
-* _{you can add/remove categories in the list above}_
+
+### **References**:
+
+#### _Usage of Javafx Scene Builder_
+![Usage of JavaFx Scene Builder](../images/SceneBuilder.png)
+
+
+#### _Changes to GUI_
+![GUI Changes](../images/HealthSyncGUI_v1.4.png)

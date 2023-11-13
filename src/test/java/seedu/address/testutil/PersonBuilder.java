@@ -4,11 +4,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Id;
+import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.enums.InputSource;
+import seedu.address.model.person.exceptions.BadAppointmentFormatException;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -17,25 +21,36 @@ import seedu.address.model.util.SampleDataUtil;
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
+    public static final String DEFAULT_ID = "T4651323H";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_APPOINTMENT = "10-Jan-2023 10:00 12:00";
 
     private Name name;
+    private Id id;
     private Phone phone;
     private Email email;
     private Address address;
-    private Set<Tag> tags;
+    private Appointment appointment;
+    private Set<MedicalHistory> medicalHistories;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
     public PersonBuilder() {
+        try {
+            appointment = Appointment.of(DEFAULT_APPOINTMENT, InputSource.USER_INPUT);
+        } catch (BadAppointmentFormatException e) {
+            throw new IllegalStateException(
+                    "Encountered an error with Appointment for PersonBuilder.", e);
+        }
         name = new Name(DEFAULT_NAME);
+        id = new Id(DEFAULT_ID);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
+        medicalHistories = new HashSet<>();
     }
 
     /**
@@ -43,10 +58,12 @@ public class PersonBuilder {
      */
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
+        id = personToCopy.getId();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
+        medicalHistories = new HashSet<>(personToCopy.getMedicalHistories());
+        appointment = personToCopy.getAppointment().isPresent() ? personToCopy.getAppointment().get() : null;
     }
 
     /**
@@ -58,10 +75,31 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Sets the {@code Id} of the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withId(String id) {
+        this.id = new Id(id);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Appointment} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAppointment(String appointment) {
+        try {
+            this.appointment = Appointment.of(appointment, InputSource.USER_INPUT);
+        } catch (BadAppointmentFormatException e) {
+            throw new IllegalStateException(
+                    "Encountered an error with Appointment for PersonBuilder.", e);
+        }
+        return this;
+    }
+
+    /**
+     * Sets the {@code Appointment} of the {@code Person} that we are building to null.
+     */
+    public PersonBuilder withoutAppointment() {
+        this.appointment = null;
         return this;
     }
 
@@ -89,8 +127,20 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * @return the person.
+     */
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, id, phone, email, address,
+                appointment, medicalHistories);
+
     }
 
+    /**
+     * Sets the {@code MedicalHistory} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withMedical(String... medicalHistories) {
+        this.medicalHistories = SampleDataUtil.getMedicalHistorySet(medicalHistories);
+        return this;
+    }
 }

@@ -31,15 +31,19 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
+    private Label index;
+    @FXML
     private Label id;
     @FXML
     private Label phone;
     @FXML
     private Label address;
     @FXML
+    private Label appointment;
+    @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private FlowPane medicalHistories;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -47,13 +51,16 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
-        id.setText(displayedIndex + ". ");
+        index.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
+        id.setText(person.getId().value);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        person.getAppointment().ifPresentOrElse((appt) ->
+                appointment.setText(appt.toString()), () -> appointment.setText("No appointment found."));
+        person.getMedicalHistories().stream()
+                .sorted(Comparator.comparing(medicalHistory -> medicalHistory.value))
+                .forEach(medicalHistory -> medicalHistories.getChildren().add(new Label(medicalHistory.value)));
     }
 }

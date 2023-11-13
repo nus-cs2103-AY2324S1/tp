@@ -11,22 +11,23 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Wee Hung
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/weeehung.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://github.com/WeeeHung)]
+[[github](https://github.com/WeeeHung)]
+[[portfolio](team/weeehung.md)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities: Deliverables and deadlines
 
 ### Zhang Yiheng
 
-<img src="images/yiheng.jpg" width="200px">
+<img src="images/nubnubyas.png" width="200px">
 
 [[github](http://github.com/nubnubyas)]
-[[portfolio](team/yiheng.md)]
+[[portfolio](team/nubnubyas.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
@@ -50,12 +51,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Wang Zhi, Wren
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wzwren.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/wzwren)]
+[[portfolio](team/wzwren.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Scheduling and Tracking

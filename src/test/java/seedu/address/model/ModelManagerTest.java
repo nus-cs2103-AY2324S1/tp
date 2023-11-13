@@ -11,11 +11,18 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.EmptyStackException;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.LogCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -94,6 +101,11 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getLoggedFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getLoggedFilteredPersonList().remove(0));
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
@@ -129,4 +141,64 @@ public class ModelManagerTest {
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
     }
+
+    @Test
+    public void isCommandHistoryEmpty_emptyStack_returnsTrue() {
+        ModelManager modelManager = new ModelManager();
+        assertTrue(modelManager.isCommandHistoryEmpty());
+    }
+
+    @Test
+    public void popCommandFromHistory_emptyStack_exception() {
+        ModelManager modelManager = new ModelManager();
+        assertThrows(EmptyStackException.class, modelManager::popCommandFromHistory);
+    }
+
+    @Test
+    public void getCommandHistorySize_emptyStack_returnsZero() {
+        ModelManager modelManager = new ModelManager();
+        assertEquals(0, modelManager.getCommandHistorySize());
+    }
+
+    @Test
+    public void popCommandFromHistory_nonEmptyStack_returnsCommand() {
+        ModelManager modelManager = new ModelManager();
+
+        AddCommand addCommand = new AddCommand(ALICE);
+        ClearCommand clearCommand = new ClearCommand();
+        modelManager.addToHistory(addCommand);
+        modelManager.addToHistory(clearCommand);
+
+        assertEquals(clearCommand, modelManager.popCommandFromHistory());
+        assertEquals(addCommand, modelManager.popCommandFromHistory());
+    }
+
+    @Test
+    public void getCommandHistorySize_nonEmptyStack_returnsCorrectSize() {
+        ModelManager modelManager = new ModelManager();
+
+        AddCommand addCommand = new AddCommand(ALICE);
+        ClearCommand clearCommand = new ClearCommand();
+        modelManager.addToHistory(addCommand);
+        modelManager.addToHistory(clearCommand);
+
+        assertEquals(2, modelManager.getCommandHistorySize());
+    }
+
+    @Test
+    public void getFoundPersonsList_nonEmptyList_returnsListWithSameSize() throws CommandException {
+        ModelManager modelManager = new ModelManager();
+
+        modelManager.addPerson(ALICE);
+        modelManager.addPerson(BENSON);
+
+        LogCommand logCommand = new LogCommand();
+        modelManager.updateFoundPersonsList(person -> true);
+        logCommand.execute(modelManager);
+
+        FilteredList<Person> foundPersonsList = modelManager.getFoundPersonsList();
+
+        assertEquals(2, foundPersonsList.size());
+    }
+
 }

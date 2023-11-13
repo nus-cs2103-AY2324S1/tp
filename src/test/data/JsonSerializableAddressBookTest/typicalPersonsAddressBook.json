@@ -2,45 +2,59 @@
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
     "name" : "Alice Pauline",
+    "id": "T7243948H",
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ]
+    "appointment": "12-Dec-2023, 12:00, 15:00",
+    "medicalHistories": [ "tachycardia" ]
   }, {
     "name" : "Benson Meier",
+    "id": "S1234567B",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ]
+    "appointment": "12-Dec-2023, 12:00, 15:00",
+    "medicalHistories": [ "diabetes", "high-risk" ]
   }, {
     "name" : "Carl Kurz",
+    "id": "S8765432B",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "tags" : [ ]
+    "appointment": "01-Jan-2023, 10:00, 12:00",
+    "medicalHistories": [ "O= Blood Type" ]
   }, {
     "name" : "Daniel Meier",
+    "id": "T1234567I",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-    "tags" : [ "friends" ]
+    "appointment": "01-Jan-2023, 10:00, 12:00",
+    "medicalHistories": [ ]
   }, {
     "name" : "Elle Meyer",
+    "id": "T1111111Z",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "tags" : [ ]
+    "appointment": "10-Jan-2023, 10:00, 12:00",
+    "medicalHistories": [ ]
   }, {
     "name" : "Fiona Kunz",
+    "id": "M2222222Z",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
-    "tags" : [ ]
+    "appointment": "10-Jan-2023, 10:00, 12:00",
+    "medicalHistories": [ ]
   }, {
     "name" : "George Best",
+    "id": "G2767543H",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
-    "tags" : [ ]
+    "appointment": "12-Dec-2023, 12:00, 15:00",
+    "medicalHistories": [ ]
   } ]
 }
