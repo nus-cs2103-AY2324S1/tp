@@ -9,9 +9,14 @@ title: CCACommander Ultra Promax Xtra 9000PLUS - User Guide
          alt="CCACommander Logo">
 </figure>
 
-1. Table of content
+<div style="page-break-after: always;"></div>
+
+## Table of Contents
+{: .no_toc }
+1. Table of Contents
 {:toc}
 
+<div style="page-break-after: always;"></div>
 ## Introduction
 As a Co-curricular Activity (CCA) head, do you find yourself struggling to manage your CCA members’ attendance and record the array of events that your CCA has?
 Are the heaps of spreadsheets you are using to manage them making you feel overwhelmed? Well, fear not, **CCACommander Ultra ProMax Xtra 9000PLUS** is here to save the day!
@@ -42,7 +47,6 @@ This guide uses the following features to make it easier for you to navigate aro
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
-
 ## Quick start
 <div markdown="block" class="alert alert-warning">
 
@@ -57,11 +61,11 @@ This guide uses the following features to make it easier for you to navigate aro
 3. Put the downloaded file into a folder of your choice (preferably a new empty folder).
 
 4. Open a command terminal in the folder you put the CCACommander file in, and use the `java -jar ccacommander.jar` command to run the application. A GUI resembling the one shown below should appear in a few seconds. Note how the app contains some sample data.<br>
-<figure>
-    <img src="images/Ui.png"
-         alt="Ui">
-    <figcaption>Fig 1: Application upon running</figcaption>
-</figure>
+    <figure>
+        <img src="images/Ui.png"
+             alt="Ui">
+        <figcaption>Fig 1: Application upon running</figcaption>
+    </figure>
 
 5. Type the command in the command box and press <kbd>↵ Enter</kbd> to execute it. <br> E.g. typing `help` and pressing <kbd>↵ Enter</kbd> will open the help window. <br>
    Some example commands you can try:
@@ -81,7 +85,7 @@ This guide uses the following features to make it easier for you to navigate aro
 
 
 --------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always;"></div>
 ## Navigating User Interface
 <figure>
     <img src="images/ui_breakdown.png"
@@ -121,7 +125,7 @@ Upon entering the <kbd>⌫ Backspace</kbd> or the <kbd>↵ Enter</kbd> key, user
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always;"></div>
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -151,6 +155,7 @@ Upon entering the <kbd>⌫ Backspace</kbd> or the <kbd>↵ Enter</kbd> key, user
 
 <hr class="feature-class-separator">
 
+<div style="page-break-after: always;"></div>
 ### Member Commands
 The vitality of a CCA lies in its members. CCACommander allows you to manage your members with the commands below:
 
@@ -204,6 +209,7 @@ Here is an example command where we delete the member at **index** 1:
 
 <hr class="feature-class-separator">
 
+<div style="page-break-after: always;"></div>
 ### Event Commands
 
 As a CCA head, keeping track of event details is a major responsibility. CCACommander allows you to do so with the event-related commands below:
@@ -228,6 +234,7 @@ Here is an example command where we create an event **named** "Party" held at th
 
 <hr class="command-separator">
 
+<div style="page-break-after: always;"></div>
 #### Edit an Event : `editEvent`
 
 If you forgot to note any important details, or realise that you made a mistake in any field of the event created,
@@ -262,6 +269,7 @@ Here is an example command where we delete the event at **index** 1:
 
 <hr class="feature-class-separator">
 
+<div style="page-break-after: always;"></div>
 ### Enrolment Commands
 
 Enrolments are a way for you to manage your members’ involvement in your events. The enrolment commands below are the bread-and-butter for your participation tracking needs:
@@ -298,6 +306,7 @@ changing the number of **hours** to 5 and the **remark** to "Role: Exco" to refl
 
 <hr class="command-separator">
 
+<div style="page-break-after: always;"></div>
 #### Unenrol a Member from an Event: `unenrol`
 If your member is no longer involved in a particular event, you can easily remove them from the event by using the `unenrol` command!
 
@@ -312,6 +321,7 @@ Here is an example command where we unenrol the member at **member index** 1 fro
 </div>
 <hr class="feature-class-separator">
 
+<div style="page-break-after: always;"></div>
 ### View Commands
 In CCACommander, you can quickly change the view to fit your current use case, be it to check for the enrolment of an event, 
 searching for a member and more!
@@ -413,6 +423,7 @@ Here’s how you use it: `list`
 
 <hr class="feature-class-separator">
 
+<div style="page-break-after: always;"></div>
 ### Utility Commands
 CCACommander provides you with powerful utility commands to make your admin tasks even more of a breeze than it was.
 
@@ -496,6 +507,7 @@ CCACommander data are saved automatically after any command that changes the dat
 
 <hr class="feature-class-separator">
 
+<div style="page-break-after: always;"></div>
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
@@ -533,6 +545,7 @@ This glossary provides definitions for the special terms used in this user guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
 ## Command summary
 
 Action | Format, Examples
@@ -557,6 +570,7 @@ Action | Format, Examples
 **Help** | `help`
 **Exit** | `exit`
 
+<div style="page-break-after: always;"></div>
 ## List of acceptable values
 
 <table class="tg">
