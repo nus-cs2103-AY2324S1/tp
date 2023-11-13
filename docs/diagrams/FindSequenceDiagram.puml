@@ -1,0 +1,50 @@
+@startuml
+!include ./style.puml
+
+participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
+participant ":FindFilterStringTokenizer" as FindFilterStringTokenizer LOGIC_COLOR
+participant ":FindExpressionParser" as FindExpressionParser LOGIC_COLOR
+participant "exprNode:ExprNode" as ExprNode LOGIC_COLOR_T1
+
+note left of FindCommandParser
+  Input: User's find command string
+end note
+
+[-> FindCommandParser : parse(findString)
+activate FindCommandParser
+
+create FindFilterStringTokenizer
+FindCommandParser -> FindFilterStringTokenizer : new(args)
+activate FindFilterStringTokenizer
+FindFilterStringTokenizer --> FindCommandParser : tokenizer
+deactivate FindFilterStringTokenizer
+
+FindCommandParser -> FindFilterStringTokenizer : tokenize()
+activate FindFilterStringTokenizer
+FindFilterStringTokenizer --> FindCommandParser : List<Token>
+deactivate FindFilterStringTokenizer
+
+create FindExpressionParser
+FindCommandParser -> FindExpressionParser : new(List<Token>)
+activate FindExpressionParser
+FindExpressionParser --> FindCommandParser : parser
+deactivate FindExpressionParser
+
+FindCommandParser -> FindExpressionParser : parseToPredicate()
+activate FindExpressionParser
+FindExpressionParser -> ExprNode : parseExpression()
+activate ExprNode
+ExprNode --> FindExpressionParser : exprNode
+deactivate ExprNode
+
+FindExpressionParser -> ExprNode : toPredicate()
+activate ExprNode
+ExprNode --> FindExpressionParser : Predicate<Person>
+deactivate ExprNode
+
+FindExpressionParser --> FindCommandParser : Predicate<Person>
+deactivate FindExpressionParser
+
+[<- FindCommandParser : new FindCommand(Predicate<Person>)
+deactivate FindCommandParser
+@enduml

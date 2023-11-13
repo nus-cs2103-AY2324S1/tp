@@ -320,30 +320,71 @@ Since `edit` command updates attributes of a `Person` object, setting the values
 
 ### Find feature
 
-The find command feature allows users to locate specific Person instances within the application based on keywords provided. Users can input specific terms, and the system will filter and present Person instances that match the given keywords in either their name, address, email, phone number, or tags.
+The find command feature allows users to locate specific Person instances within the application based on keywords provided.
+It is significantly revamped from AB3's implementation in three ways:
 
-The find command is not just a simple string matching utility within our system. It is an advanced search mechanism that employs tokenization, parsing, and supports the evaluation of complex boolean expressions. This makes it an invaluable tool for users who want to execute intricate searches and filter results based on a combination of criteria.
+- Support for all Person fields except photos, with conditions for each field set based on the most appropriate way a user would want to search for contacts using each field (instead of just word-level matching).
+- Support for boolean operators, allowing users to combine multiple search criteria into an arbitrarily-complex boolean expression.
+- Support for quoted strings, which allow for the use of multi-word keywords or keywords with some special characters.
 
-#### Implementation
+This is accomplished using a custom-built tokenizer / lexer (`FindFilterStringTokenizer`) and parser (`FindExpressionParser`).
+The existing `FindCommandParser` is used as a harness to tie the two together and provide a single entry point for the feature.
 
-##### `FindCommand` and `FindCommandParser`
+---
 
-The heart of the Find command system is the combination of `FindCommand` and `FindCommandParser`. The latter is responsible for processing raw user input, tokenizing the search criteria using the `FindFilterStringTokenizer`, and subsequently parsing it with the `FindExpressionParser`. The end product is a `FindCommand` object that executes the search based on a `Predicate<Person>` that checks all relevant fields of a `Person`.
+##### Tokenizing / Lexing
+
+The `FindFilterStringTokenizer` class is responsible for parsing complex boolean find filter strings into tokens, which can later be used to construct a filter expression tree.
+It is reminiscent of lexers used in interpreters and compilers, and is implemented using a state machine.
+
+The class also includes a `Token` inner class that represents a token in the filter string. Each `Token` has a `Type` and a text representing the token in the filter string.
+
+The class takes a filter string as input and tokenizes it into a list of `Token` objects.
+Each `Token` object represents a component in the boolean filter string and has a `Type` (`AND`, `OR`, `NOT`, `LPAREN`, `RPAREN`, `CONDITION`) and a text representing the token in the filter string.
+
+The `tokenize` method is the main method in this class.
+It iterates over the characters in the filter string and based on the current character, it creates a new `Token` object and adds it to the list of tokens.
+The method handles different types of tokens including AND, OR, NOT operators, parentheses for grouping, and conditions in the form of `FIELD/KEYWORD` or `FIELD/"KEYWORDS AS QUOTED STRING"`.
+
+Ultimately, the `tokenize` method returns a list of `Token` objects that represent the tokens in the filter string.
+
+---
+
+##### Parsing
+
+The `FindExpressionParser` class is responsible for constructing a filter expression tree from a list of tokens, which is reminiscent of parsers used in interpreters and compilers.
+The `parseToPredicate` method is the main method in this class.
+It uses a recursive descent parsing algorithm to parse the list of tokens into a filter expression tree.
+The class also converts it into a `Predicate<Person>` that can be directly used to filter the list of persons.
+
+Specifically, the class takes a list of `Token` objects from `FindFilterStringTokenizer` and parses it into a filter expression tree.
+These nodes are represented as subclasses of the `ExprNode` inner class, which is an abstract class that represents a node in the filter expression tree.
+Each `ExprNode` has a `Type` and a `text` representing the node in the filter string, as well as a `toPredicate` method which outlines how to convert that node into a `Predicate<Person>` which can actually be used to filter through a person list.
+The subclasses are:
+
+- `BinaryOpNode`: Represents a binary operation (`AND`, `OR`) between two other nodes (which can be any type of ExprNode).
+- `NotNode`: Represents a `NOT` operation on another node (which can be any type of ExprNode).
+- `ConditionNode`: Represents a condition in the form of `FIELD/KEYWORD` or `FIELD/"KEYWORDS AS QUOTED STRING"`.
 
 
-##### `FindFilterStringTokenizer`
+The parsing conducted by the `parseToPredicate` method follows the structure of a boolean expression grammar, which is defined as follows:
 
-The `FindFilterStringTokenizer` is tailored to break down the user's search criteria, a `String` into meaningful tokens which can later be parsed into a final `Predicate<Person>`. This process includes recognizing individual terms (in the form of conditions of the form `PREFIX/KEYWORD`), Boolean operators (including `!`, `&&`, and `||`), and parentheses (`(` and `)`).
+- Expression: An expression is a term or an expression followed by `OR` and a term.
+- Term: A term is a factor or a term followed by `AND` and a factor.
+- Factor: A factor is a condition, a factor preceded by `NOT`, or an expression enclosed in parentheses.
+
+This structure ensures that the `AND` operator has higher precedence than the `OR` operator, and the `NOT` operator has higher precedence than both `AND` and `OR`.
+This is because a term (which can contain `AND` operations) is treated as a single unit in an expression, and a factor (which can contain `NOT` operations) is treated as a single unit in a term.
 
 
-##### `FindExpressionParser`
+Ultimately, the `parse` method returns an `ExprNode` object that represents the root of the filter expression tree.
+This tree structure represents the logical structure of the user's input and is used to evaluate whether a record matches the filter conditions.
 
-The `FindExpressionParser` ingests the tokens produced by the `FindFilterStringTokenizer` and interprets them, creating a singular complete `Predicate<Person>` that's applied on the PersonList.
+---
 
-FindExpressionParser uses the recursive gradient descent algorithm to parse the tokens into a `Predicate<Person>`.
+The flow of the find feature is described by the following high-level sequence diagram:
 
-Sequence Diagram for FindExpressionParser showing how a sample input is parsed using the recursive gradient descent algorithm:
-
+<puml src="diagrams/FindSequenceDiagram.puml" />
 
 #### Design considerations:
 
@@ -360,7 +401,7 @@ Sequence Diagram for FindExpressionParser showing how a sample input is parsed u
 
 **Aspect: Tokenizer library**
 
-* **Alternative 1 (current choice):** Custom-built tokenizer.
+* **Alternative 1 (current choice):** Custom-built tokenizer and parser.
   * Pros: Allows for more flexibility in terms of the syntax of the search criteria. Can handle our custom-defined terms, operators, and grouping symbols explicitly.
   * Cons: More code required, requires regular maintenance to adapt to new features or changes.
 
