@@ -10,7 +10,7 @@ pageNav: 4
 LoveBook, is a **dating-focused** application, revolving around providing **serial daters** with a **convenient**
 and **enjoyable** tool to enhance their dating experiences. Featuring **user preferences management**, **date
 organization**,
-**customizable filtering options** and **best match algorithms**, LoveBook enhances the **efficiency** and *
+**customizable filtering options** and **best match algorithms**, LoveBook enhances the **efficiency** and 
 **effectiveness** of your online dating journey.
 
 ## **Table of Contents**
@@ -48,17 +48,17 @@ organization**,
 
 ## **Glossary**
 
-| Term                                   | Definition                                                                                                                             |
-|----------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
-| Date                                   | A person that the user is interested in and is currently seeing.                                                                       |
-| Metric                                 | A certain characteristic of a date. (e.g. Gender, Height)                                                                              |
-| Command                                | Text that the user types into the application to perform an action.                                                                    |
-| Parameter                              | A value that the user provides to the application when executing a command. (e.g. in`gender/M` M is a parameter)                       |
-| GUI                                    | Graphical User Interface                                                                                                               |
-| CLI                                    | Command Line Interface                                                                                                                 |
-| Mainstream OS                          | Windows, Linux, Unix, OS-X                                                                                                             |
-| <box type="tip">Tips:</box>            | To provide you with relevant suggestions on how to use the commands as well as address potential confusions when using these commands. |
-| <box type="important">Important:</box> | To inform you of some unintended or unexpected consequences that may occur when you use the commands.                                  |
+| Term                                 | Definition                                                                                                                             |
+|--------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| Date                                 | A person that the user is interested in and is currently seeing.                                                                       |
+| Metric                               | A certain characteristic of a date. (e.g. Gender, Height)                                                                              |
+| Command                              | Text that the user types into the application to perform an action.                                                                    |
+| Parameter                            | A value that the user provides to the application when executing a command. (e.g. in`gender/M` M is a parameter)                       |
+| GUI                                  | Graphical User Interface                                                                                                               |
+| CLI                                  | Command Line Interface                                                                                                                 |
+| Mainstream OS                        | Windows, Linux, Unix, OS-X                                                                                                             |
+| <box type="tip">Tips:</box>          | To provide you with relevant suggestions on how to use the commands as well as address potential confusions when using these commands. |
+| <box type="important">Caution:</box> | To inform you of some unintended or unexpected consequences that may occur when you use the commands.                                  |
 
 [Scroll back to *Table of Contents*](#table-of-contents)
 
@@ -105,10 +105,8 @@ Here's a quick guide to help you understand what they mean.
 
 1. Ensure that you have Java `11` or above installed in your Computer.
 2. Download the latest `LoveBook.jar` from [here](https://github.com/AY2324S1-CS2103T-F10-2/tp).
-3. Double-click the file to start the app. The window that appears will be similar to the below should appear in a few
-   seconds. Note that in this case, we have sample data.<br>
+3. Double-click the file to start the app. The window that appears will be similar to the one below. Note that in this case, we have sample data.<br>
    ![Ui](images/Ui.png)
-   *Figure 1: A view of LoveBook at startup*
 4. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing `Enter` to
    open the help window.<br>
    Some commands you can try:
@@ -151,8 +149,11 @@ Here you can add John to LoveBook using the add command:
 In the command box, enter `add name/John Doe age/21 gender/M height/123 income/3000 horoscope/Libra` and press
 the `enter` key.
 This will add John to LoveBook.
+
 ![addCommandExample](images/user-commands/addCommandExample.png)
+
 Let's imagine you've added a couple of dates to the LoveBook already. It should look something like this now:
+
 ![addCommandExample2](images/user-commands/addCommandExample2.png)
 
 #### 2. Starring a date
@@ -162,6 +163,7 @@ as you go along
 in your journey. Here you can star John for instance, using the star command:
 Enter `star 2`.
 This will star John.
+
 ![starCommandExample](images/user-commands/starCommandExample.png)
 
 #### 3. Filtering dates
@@ -171,6 +173,7 @@ simply filter for
 a specific age. Here you can filter for an age of 21 for instance, using the filter command:
 Enter `filter age/21`.
 This will filter for John.
+
 ![filterCommandExample](images/user-commands/filterCommandExample.png)
 
 #### 4. Set Preferences
@@ -180,12 +183,14 @@ in your preferences using the
 setPreferences command:
 Enter `setP age/22 height/130 income/3200 horoscope/Libra`
 This will set your preferences like so:
+
 ![setPreferencesCommandExample](images/user-commands/setPreferencesCommandExample.png)
 
 #### 5. Best Match
 
 And here it is, to get the match of your dreams, simply use the bestMatch command:
 Enter `bestMatch`
+
 ![bestMatchCommandExample](images/user-commands/bestMatchCommandExample.png)
 
 ### Congrats! You have completed the tutorial!
@@ -247,9 +252,7 @@ Adds a date to the LoveBook.
 
 **Tips:**
 
-Parameter constraints:
-
-* All parameters are compulsory.
+All parameters are compulsory.
 
 </box>
 
@@ -257,7 +260,7 @@ Parameter constraints:
 
 **Caution:**
 
-* The date added must have a unique name that is not already in the LoveBook.
+The date added must have a unique name that is not already in the LoveBook.
 
 </box>
 
@@ -282,22 +285,14 @@ Format: `edit INDEX [name/NAME] [age/AGE] [gender/GENDER] [height/HEIGHT] [incom
 
 **Tips:**
 
-Parameter constraints:
-
 * Metric is limited to `gender, age, horoscope, name, height, income` only.
 * New argument replaces the existing argument for that metric.
 * User can edit up to n number of metrics in one command line, where n refers to the number of metrics available.
-
-</box>
-
-<box type="important">
-
-**Caution:**
-
 * The index must be a positive integer, and be within the range of the recorded dates.
 * For example, if there are 3 Dates in LoveBook, the indices are 1, 2 and 3.
-
 </box>
+
+
 
 Examples:
 
@@ -318,9 +313,9 @@ Deletes the specified date from the LoveBook.
 
 Format: `delete INDEX`
 
-<box type="important">
+<box type="tip">
 
-**Caution:**
+**Tips:**
 
 * The index must be a positive integer, and be within the range of the recorded dates.
 * For example, if there are 3 Dates in LoveBook, the indices are 1, 2 and 3.
@@ -381,9 +376,9 @@ Stars a date in the LoveBook.
 
 Format: `star INDEX`
 
-<box type="important">
+<box type="tip">
 
-**Caution:**
+**Tips:**
 
 * The index must be a positive integer, and be within the range of the recorded dates.
 * For example, if there are 3 Dates in LoveBook, the indices are 1, 2 and 3.
@@ -405,9 +400,9 @@ Unstars a date in the LoveBook.
 
 Format: `unstar INDEX`
 
-<box type="important">
+<box type="tip">
 
-**Caution:**
+**Tips:**
 
 * The index must be a positive integer, and be within the range of the recorded dates.
 * For example, if there are 3 Dates in LoveBook, the indices are 1, 2 and 3.
@@ -435,8 +430,6 @@ Format: `find NAME [MORE_NAMES]`
 
 **Tips:**
 
-Parameter constraints:
-
 * Name should be a non-empty string.
 * More names can be added to the command line, and the search will be conducted for all names provided.
 
@@ -462,20 +455,9 @@ Format: `filter METRIC/ARG`
 
 **Tips:**
 
-Parameter constraints:
-
 * Filter must be from list of metrics
 * Metric is limited to `gender, age, name, height` only
 * Arg can only be one keyword
-
-</box>
-
-<box type="important">
-
-**Caution:**
-
-Unlike the find command, you cannot use filter to filter for more than a single name, like
-so `filter name/kevin name/wayne`
 
 </box>
 
@@ -501,7 +483,6 @@ Format: `sort METRIC/ORDER`
 
 **Tips:**
 
-Parameter constraints:
 The relevant metrics are
 
 * `name/ORDER`
