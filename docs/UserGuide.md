@@ -55,9 +55,10 @@ Are you tired of managing applicant applications through cumbersome spreadsheets
 
 Upgrade your hiring process with **JABPro (JobApplicationsBook Pro)**, a CLI based desktop app that allows you to:
 
-* easily manage applicant applications
-* schedule interviews
-* gain valuable insights on their interview performance
+* easily manage applicant applications,
+* schedule interviews,
+* and gain valuable insights on their interview performance! <br>
+
 From interns to full-time roles, software to marketing, JABPro’s versatile interface allows you to keep track of all kinds of job applicants in various industries. 
 
 **If you are a Hiring Manager, looking to improve your applications management workflow, JABPro is the tool for you!**
@@ -890,6 +891,8 @@ Format: `export`
 
 * Usage Note: JABPro must have write permissions, this means that if the .csv file is open,
   exporting again will not be possible.
+
+[Jump back to Table of Contents](#table-of-contents)
 
 ### Clearing all entries : `clear`
 
