@@ -4,7 +4,7 @@ skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
 Participant ":EditCommand" as fc LOGIC_COLOR
-Participant ":CommandResult" as cr LOGIC_COLOR
+Participant "result:CommandResult" as cr LOGIC_COLOR
 end box
 box Model MODEL_COLOR_T1
 Participant "model:Model" as m MODEL_COLOR
@@ -12,10 +12,10 @@ end box
 
 
 [-> fc ++: execute()
-fc -> m ++: setJob(jobToEdit, editedJob)
+fc -> m ++: setJob()
 deactivate m
 create cr
-fc -> cr ++: CommandResult()
-cr --> fc --: result
+fc -> cr ++
+cr --> fc --
 fc -->[ --: result
 @enduml

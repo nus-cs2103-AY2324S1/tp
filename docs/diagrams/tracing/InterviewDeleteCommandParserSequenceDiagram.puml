@@ -5,10 +5,10 @@ skinparam ArrowFontStyle plain
 Participant ":InterviewDeleteCommandParser" as idcp LOGIC_COLOR
 Participant "<<class>>\nArgumentTokenizer" as at LOGIC_COLOR
 Participant "<<class>>\nParserUtil" as pu LOGIC_COLOR
-Participant ":InterviewDeleteCommand" as idc LOGIC_COLOR
+Participant "command:InterviewDeleteCommand" as idc LOGIC_COLOR
 
 [-> idcp ++: parse(args)
-idcp -> at ++: tokenize()
+idcp -> at ++: tokenize user input
 at --> idcp --: argMultimap
 
 idcp -> pu ++: parseIndex()
@@ -19,6 +19,6 @@ pu --> idcp --: jobIndex
 
 create idc
 idcp -> idc ++: InterviewDeleteCommand(jobIndex, interviewIndex)
-idc --> idcp --: result
-idcp -->[ --: result
+idc --> idcp --
+idcp -->[ --: command
 @enduml
