@@ -320,7 +320,8 @@ Output:
 
 **Note**
 * Pressing `yes` button will have the same effect.
-* In the case where there are no more words to review, `The next word is:` will be replaced by `You have no more words to review!`.
+* In the case where there are no more words to review, `The next word is:` will be replaced by  
+`You have no more words to review!`.
 
 ###  Indicating user has forgotten the word: `no`
 
@@ -335,7 +336,8 @@ Output:
 
 **Note**
 * Pressing `no` button will have the same effect.
-* In the case where there are no more words to review, `The next word is:` will be replaced by `You have no more words to review!`.
+* In the case where there are no more words to review, `The next word is:` will be replaced by  
+`You have no more words to review!`.
 
 ### Show learning statistics: `stats`
 

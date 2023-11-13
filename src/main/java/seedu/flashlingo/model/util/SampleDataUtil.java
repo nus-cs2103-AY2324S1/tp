@@ -17,7 +17,7 @@ public class SampleDataUtil {
         return new FlashCard[]{
             new FlashCard(new OriginalWord("Welcome", "English"),
                 new TranslatedWord("欢迎", "Chinese"), new Date(), new ProficiencyLevel(1)),
-            new FlashCard(new OriginalWord("to", "English"), new TranslatedWord("来", "Chinese"),
+            new FlashCard(new OriginalWord("to", "English"), new TranslatedWord("来到", "Chinese"),
                 new Date(), new ProficiencyLevel(1)),
             new FlashCard(new OriginalWord("Flashlingo", "English"),
                 new TranslatedWord("闪邻国", "Chinese"), new Date(), new ProficiencyLevel(1))
