@@ -7,19 +7,18 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":ConvertLeadToClientCommandParser" as ConvertLeadToClientCommandParser LOGIC_COLOR
 participant "c:ConvertLeadToClientCommand" as ConvertLeadToClientCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant "convertedLead:Person" as Person MODEL_COLOR
+participant ":Person" as Person MODEL_COLOR
 end box
 
 [-> LogicManager : execute("converttoclient 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("converttoclient 1")
+LogicManager -> AddressBookParser : parseCommand()
 activate AddressBookParser
 
 create ConvertLeadToClientCommandParser
@@ -29,7 +28,7 @@ activate ConvertLeadToClientCommandParser
 ConvertLeadToClientCommandParser --> AddressBookParser
 deactivate
 
-AddressBookParser -> ConvertLeadToClientCommandParser : parse("1")
+AddressBookParser -> ConvertLeadToClientCommandParser : parse()
 activate ConvertLeadToClientCommandParser
 
 create ConvertLeadToClientCommand
@@ -53,7 +52,7 @@ activate ConvertLeadToClientCommand
 ConvertLeadToClientCommand -> Model : getFilteredPersonList()
 activate Model
 
-Model --> ConvertLeadToClientCommand : List of Persons
+Model --> ConvertLeadToClientCommand
 deactivate Model
 
 create Person
@@ -63,7 +62,7 @@ activate Person
 Person --> ConvertLeadToClientCommand
 deactivate
 
-ConvertLeadToClientCommand -> Model : setPerson(personToConvert, convertedLead)
+ConvertLeadToClientCommand -> Model : setPerson()
 activate Model
 Model --> ConvertLeadToClientCommand
 deactivate Model
@@ -73,21 +72,10 @@ activate Model
 Model --> ConvertLeadToClientCommand
 deactivate Model
 
-create CommandResult
-ConvertLeadToClientCommand -> CommandResult
-activate CommandResult
-
-CommandResult --> ConvertLeadToClientCommand : result
-deactivate CommandResult
-
-ConvertLeadToClientCommand --> LogicManager : result
+ConvertLeadToClientCommand --> LogicManager : CommandResult
 deactivate ConvertLeadToClientCommand
 deactivate ConvertLeadToClientCommandParser
 deactivate AddressBookParser
-
-
-
-
 
 [<--LogicManager
 deactivate LogicManager

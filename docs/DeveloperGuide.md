@@ -14,6 +14,8 @@ pageNav: 3
 ## **Acknowledgements**
 
 This project is based on [AB-3](https://github.com/se-edu/addressbook-level3).
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5).
+
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Setting up, getting started**
@@ -27,7 +29,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 ### Architecture
 
 <div align="center">
-    <img src="diagrams/ArchitectureDiagram.png" width="314" />
+    <img src="diagrams/ArchitectureDiagram.png" width="250" />
 </div>
 
 
@@ -67,17 +69,17 @@ Each of the four main components (also shown in the diagram above),
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <div align="center">
-    <img src="diagrams/ComponentManagers.png" width="370" />
+    <img src="diagrams/ComponentManagers.png" width="300" />
 </div>
 
 The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-F08-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
+**API**: [`Ui.java`](https://github.com/AY2324S1-CS2103T-F08-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 <div align="center">
-    <img src="diagrams/UiClassDiagram.png" alt="Structure of the UI Component"/>
+    <img src="diagrams/UiClassDiagram.png" alt="Structure of the UI Component" width="650"/>
 </div>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
@@ -98,13 +100,13 @@ The `UI` component,
 Here's a (partial) class diagram of the `Logic` component:
 
 <div align="center">
-    <img src="diagrams/LogicClassDiagram.png" width="629"/>
+    <img src="diagrams/LogicClassDiagram.png" width="400"/>
 </div>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
 <div align="center">
-    <img src="diagrams/DeleteSequenceDiagram.png" alt="Interactions Inside the Logic Component for the `delete 1` Command" width="900"/>
+    <img src="diagrams/DeleteSequenceDiagram.png" alt="Interactions Inside the Logic Component for the `delete 1` Command" width="650"/>
 </div>
 
 <box type="info" seamless>
@@ -122,7 +124,7 @@ How the `Logic` component works:
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <div align="center">
-    <img src="diagrams/ParserClasses.png" width="745"/>
+    <img src="diagrams/ParserClasses.png" width="550"/>
 </div>
 
 How the parsing works:
@@ -133,7 +135,7 @@ How the parsing works:
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-F08-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <div align="center">
-    <img src="diagrams/ModelClassDiagram.png" width="679" />
+    <img src="diagrams/ModelClassDiagram.png" width="550" />
 </div>
 
 The `Model` component,
@@ -141,11 +143,11 @@ The `Model` component,
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search/sort query) as a separate _filtered and sorted_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
 The following diagram shows the classes that extend the abstract `Person` class.
 <div align="center">
-    <img src="diagrams/PersonClassDiagram.png" width="179" />
+    <img src="diagrams/PersonClassDiagram.png" width="150" />
 </div>
 
 The abstract `Person` class is extended by two separate classes, `Lead` and `Client`. These instances are distinguished by their `Type` field in `Person`.
@@ -155,13 +157,13 @@ The abstract `Person` class is extended by two separate classes, `Lead` and `Cli
 **API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-F08-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <div align="center">
-    <img src="diagrams/StorageClassDiagram.png" width="683" />
+    <img src="diagrams/StorageClassDiagram.png" width="550" />
 </div>
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`).
 
 ### Common classes
 
@@ -174,17 +176,20 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 ### View Specific Person feature
+
+#### Implementation
+
 Step 1: The user launches the application for the first time. The `SampleAddressBook` will be initialised.
 
 Step 2: The user executes `addclient n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` to add a new Client.
 
 Step 3: The user executes a `view 1` command to view the 1st person in the address book. The user’s command is parsed by `ViewCommandParser` which extracts the target index. The `ViewCommand` class is instantiated with the extracted index. `ViewCommand` class interacts with `Model#FilteredPersonList` to verify the validity of the index and retrieve the corresponding person’s details. The command execution would be encapsulated as a `CommandResult` object that is then returned back from `Logic`.
 
-**Note:** If the index given is more than the size of the list or when the index given is 0, `ViewCommand` will not call `Model#view(Person personToView)`. Instead, a `MESSAGE_INVALID_PERSON_DISPLAYED_INDEX` exception will be thrown. The Main Window display continue displaying the `PersonListPanel` UI instead of the  `ViewWindow` UI
+**Note:** If the index given is more than the size of the list or when the index given is 0, `ViewCommand` will not call `Model#view(Person personToView)`. Instead, a `MESSAGE_INVALID_PERSON_DISPLAYED_INDEX` exception will be thrown. The Main Window display continue displaying the `PersonListPanel` UI instead of the  `ViewWindow` UI.
 
-The following sequence diagram shows how the View Command works:
+The following sequence diagram shows how the `view` operation works:
 <div align="center">
-    <img src="diagrams/ViewSequenceDiagram.png" alt= "ViewSequenceDiagram" width="900"/>
+    <img src="diagrams/ViewSequenceDiagram.png" alt= "ViewSequenceDiagram" width="650"/>
 </div>
 
 ### Add client/Add lead feature
@@ -220,7 +225,7 @@ Step 2b - `addlead`. The user executes `addlead n/John Doe...` command add a per
 
 The following sequence diagram shows how the `addclient` operation works (Note that `addlead` works in the same way but calls `Model#addLead()` instead):
 <div align="center">
-    <img src="diagrams/AddClientSequenceDiagram.png" width="900"/>
+    <img src="diagrams/AddClientSequenceDiagram.png" width="650"/>
 </div>
 
 The following activity diagram shows the workflow upon execution of the `addclient` command (`addlead` works the same way):
@@ -235,18 +240,18 @@ The following activity diagram shows the workflow upon execution of the `addclie
 The user can specify a meeting time when executing `addclient` or `addlead` command with the `m/` flag or enter the `addmeeting` command to add a meeting time to an existing client or lead.
 The `addmeeting` command takes in the index of the client or lead, and the meeting time in `dd/MM/yyyy HH:mm` format (e.g. `addmeeting 1 12/12/2023 12:00`).
 The `AddMeetingCommand` class facilitates this by copying the person (client/lead) based on the index given, and creates a new person with the meeting time added.
-The `AddMeetingCommand` class then calls `Model#setPerson()` to update the address book with the new person.
+The `AddMeetingCommand` class then calls `Model#setPerson()` to update the address book with the new person. This is followed by a call to `Model#updateFilteredPersonList()` to trigger a UI change.
 
-The following sequence diagram shows how the `addmeeting ...` operation works:
+The following sequence diagram shows how the `addmeeting 1 ...` operation works:
 
 <div align="center">
-    <img src="diagrams/AddMeetingTimeSequenceDiagram.png" width="900"/>
+    <img src="diagrams/AddMeetingTimeSequenceDiagram.png" width="650"/>
 </div>
 
 The following activity diagram shows the workflow of the execution of the `addmeeting ...` command:
 
 <div align="center">
-    <img src="diagrams/AddMeetingTimeActivityDiagram.png" width="700" />
+    <img src="diagrams/AddMeetingTimeActivityDiagram.png" width="650" />
 </div>
 
 ### List clients and leads feature
@@ -268,11 +273,12 @@ Given below is an example usage scenario and how `listclient` and `listlead` beh
 Step 1. The user opens the application to see a list of leads and clients.
 
 Step 2. The user executes `listclient` command to display a filtered list of persons in the address book. The `listclient` command calls `Model#updateFilteredPersonList()`, causing the modified state of the filtered list to be displayed based on the `predicate` passed into the `Model#updateFilteredPersonList()`.
+In this case, the `predicate` returns `true` if the person is a client.
 
-The following sequence diagram shows how the `listclient` operation works (Note that `listlead` works in the same way:
+The following sequence diagram shows how the `listclient` operation works (Note that `listlead` works in the same way):
 
 <div align="center">
-    <img src="diagrams/ListClientCommandSequence.png" width="800" />
+    <img src="diagrams/ListClientCommandSequence.png" width="650" />
     <p>After addlead command</p>
 </div>
 
@@ -284,17 +290,18 @@ The user can convert client to leads  and vice versa, using  the command `conver
 
 The `execute()` command in `ConvertLeadToClientCommand` or `ConvertClientToLeadCommand` is executed.
 
-The `execute()` command in `ConvertLeadToClientCommand` or `ConvertClientToLeadCommand` takes in an argument of type `Index`, and is referred to the list of items
+The `execute()` command in `ConvertLeadToClientCommand` or `ConvertClientToLeadCommand` takes in an argument of type `Index`, and is referred to the list of items.
 
-If the person is a `Lead` when using `converttoclient`, the application would create a new `Client` object with the information from `Lead` class. Similarly, this also would occur for `converttolead`
+If the person is a `Lead` when using `converttoclient`, the application would create a new `Client` object with the information from `Lead` class. Similarly, this also would occur for `converttolead`.
+`Model#setPerson()` is called to update the converted person in the address book, followed by `Model#updateFilteredPersonList()` to trigger a UI change.
 
-Given below is an example usage scenario and how `converttoclient` and `converttolead` behaves at each step
+The following sequence diagram shows how the `converttoclient 1` operation works (Note that `converttolead` works in the same way):
 
 <div align="center">
-    <img src="diagrams/ConvertLeadToClientSequence.png" width = "900"/>
+    <img src="diagrams/ConvertLeadToClientSequence.png" width = "650"/>
 </div>
 
-The following activity diagram shows what happens when a user executes `converttoclient`:
+The following activity diagram shows what happens when a user executes `converttoclient ...`:
 <div align="center">
     <img src="diagrams/ConvertClientToLeadActivity.png" height="300"/>
 </div>
@@ -305,7 +312,7 @@ The following activity diagram shows what happens when a user executes `convertt
 
 The user can view the upcoming meetings scheduled with leads and clients sorted in chronological order. The command is implemented as follows.
 
-The `execute()` command in `SortMeetingTimeCommand` calls the `sortFilteredPersonList()` in `Model`, which first filters and returns a `FilteredList` containing only persons with a meeting time.
+The `execute()` command in `SortMeetingTimeCommand` calls the `Model#sortFilteredPersonList()`, which first filters and returns a `FilteredList` object containing only persons with a meeting time.
 This list is then sorted using the `PersonMeetingTimeComparator` to obtain the desired `SortedList` output, which is then displayed.
 
 Note that in every other operation that updates the `ObservableList` to be displayed, the `null` comparator is used instead of the `PersonMeetingTimeComparator` so no sorting occurs.
@@ -313,7 +320,7 @@ Note that in every other operation that updates the `ObservableList` to be displ
 The following sequence diagram shows how the `sortmeeting` operation works:
 
 <div align="center">
-    <img src="diagrams/SortMeetingTimeSequenceDiagram.png" width = "900"/>
+    <img src="diagrams/SortMeetingTimeSequenceDiagram.png" width = "650"/>
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -334,14 +341,14 @@ The following sequence diagram shows how the `sortmeeting` operation works:
 
 **Target user profile**:
 
-* is a student financial advisor
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
-* needs a solution that offers robust client relationship management
-* needs event and policy tracking
+* is a student financial advisor.
+* has a need to manage a significant number of contacts.
+* prefer desktop apps over other types.
+* can type fast.
+* prefers typing to mouse interactions.
+* is reasonably comfortable using CLI apps.
+* needs a solution that offers robust client relationship management.
+* needs event and policy tracking.
 
 **Value proposition**: to keep track of their leads as well as clients' details such as their insurance policies, expiry, coverage, personal and contact details, to better assist their leads and clients.
 
@@ -722,9 +729,9 @@ Use case ends.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Graceful scaling**: Ability for the system to handle increased user loads without significant performance loss
-* **Integration**: Combining different software components together to easily incorporate additional modules or features as needed
+* **Mainstream OS**: Windows, Linux, Unix, OS-X.
+* **Graceful scaling**: Ability for the system to handle increased user loads without significant performance loss.
+* **Integration**: Combining different software components together to easily incorporate additional modules or features as needed.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -742,7 +749,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-    1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder.
 
     1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
@@ -828,7 +835,7 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect view commands to try: `view`, `view x` (where x is larger than the list size, or x is a negative index)<br>
        Expected: Similar to previous.
     1. Test case: `view 1`, `view x` (where x is an integer within the size of the list) <br>
-       Expected: The full details of the first person is displayed. Success message: `Viewed Person Successfully`
+       Expected: The full details of the first person is displayed. Success message: `Viewed Person Successfully`.
 
 ### Converting a lead to client
 
@@ -840,7 +847,7 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `converttoclient 0`<br>
       Expected: No change to any information. Error details shown in status message. Status bar remains the same.
    4. Other incorrect convert commands to try: `converttoclient`, `converttoclient x` (where x is larger than the list size)<br>
-      Expected: Similar to previous
+      Expected: Similar to previous.
 ### Converting a client to lead
 
 1. Similar to converting a lead to client, but using the `converttolead` command on clients instead.
