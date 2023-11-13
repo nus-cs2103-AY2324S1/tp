@@ -19,15 +19,13 @@ NetworkBook is a desktop contact book application built for NUS Computing studen
 
 Here's an overview of how NetworkBook can help you manage your network of contacts better than existing alternatives:
 
-* You can search for and sort contacts by multiple networking-relevant fields (e.g. priority, courses taken/taking, specialization(s) taken/intending to take, graduation year)
-* You can access this application offline, with a static online page that contains user manual and download link
-* You can record only the information you find relevant on our application (e.g. you can assign one contact only their email and specialisation, and another contact nothing but their course)
+* Search for and sort contacts by multiple networking-relevant fields (e.g. priority, courses taken/taking, specialization(s) taken/intending to take, graduation year)
+* Access this application offline, with a static online page that contains user manual and download link
+* Record only the information you find relevant on our application (e.g. you can assign one contact only their email and specialisation, and another contact nothing but their course)
 
-On top of these advantages, we believe that contact management must be efficient. Therefore, NetworkBook is optimised for use via a Command Line Interface while still having the benefits of a Graphical User Interface. If you type fast, NetworkBook can get your contact managing done faster than existing alternatives performing a similar role.
+On top of these advantages, we believe that contact management must be efficient. Therefore, NetworkBook is optimised for use via fully textual commands while still having an interactive and user-friendly visual interface. For fast typers, NetworkBook can get your contact managing done faster than existing alternatives performing a similar role.
 
 If you are new here, visit our [getting started guide](#getting-started) to start getting connected on NetworkBook!
-
-<!-- @@author -->
 
 ## Table of Contents
 
@@ -41,21 +39,20 @@ If you are new here, visit our [getting started guide](#getting-started) to star
 This user guide provides in-depth documentation on the various commands that are available in NetworkBook.
 If you are familiar with the software, this user guide gives an overview on how to use specific commands.
 
-Additionally, if you are a new user, this user guide provides a quick start guide to aid you with installing the application and getting started.
+Additionally, if you are a new user, this user guide provides a [getting started guide](#getting-started) to aid you with installing the application and the initial setup.
 
 ### What's new in NetworkBook 1.3
 
 NetworkBook 1.3 includes several new features and improvements for ease of use.
 
-* Filter command for more control with finding contacts
-* Edit command to edit contacts' details
-* Error messages are now more specific to give useful information
-* NetworkBook is able to connect with other apps and open links and emails
-* Keyboard shortcuts added for easy access to common commands
-* Undo/redo command to fix mistakes
-* Refinement of user interface to be more clean and usable
+* [Filter](#filter-contacts-list-filter-by-field-with-term) command for more control with finding contacts
+* [Edit](#ucategory-2---edit-contact-detailsu) command to edit contacts' details
+* [Open links and emails](#ucategory-5---open-other-appsu) via NetworkBook connecting to other apps
+* [Undo/redo](#ucategory-4---undoredou) commands to revert mistakes unintentional/temporary command calls
+* [Keyboard shortcuts](#ucategory-6---keyboard-shortcutsu) added for easy access to common commands
+* [User interface](#ucategory-7---mouse-interactionu) is now refined to be more clean and usable
+* Error messages are now more specific to give more helpful information
 
-<!-- @@author -->
 <!-- @@author xenosf -->
 
 ## Getting Started
@@ -83,8 +80,6 @@ NetworkBook 1.3 includes several new features and improvements for ease of use.
     ![Annotated diagram of the NetworkBook window](./images/gui-annotated.png)
 1. You can now start using NetworkBook!
     * Learn more about the commands in the [features](#features) section.
-
-<!-- @@author -->
 
 ## Features
 
@@ -132,13 +127,15 @@ In NetworkBook, you can manage contact information by changing the fields assign
 
 In NetworkBook, you often need to provide an index to specify a contact, or an entry in a multi-valued field of a contact. Indices are **integers counted from 1**.
 
-Make sure to provide indices that has a corresponding item in your book. The exact valid range is from 1 to 2147483647 inclusive. If your command contains an invalid index, it will be considered an invalid command.
+Make sure to provide indices that has a corresponding item in your NetworkBook. The exact valid range is from 1 to 2147483647 inclusive. If your command contains an invalid index, it will be considered an invalid command.
 
 </div>
 
-<!-- @@author -->
+<!-- @@author awhb -->
 
 ### <u>Category 1 - Add contact information</u>
+
+This category involves the addition of contact information using specific commands. Relevant commands and explanations of their functionalities are outlined below:
 
 #### Create new contact: `create /name [name] [optional fields]`
 
@@ -149,13 +146,13 @@ Format: `create /name [name] [optional field prefix] [optional field value] ...`
 Parameters:
 
 * `[name]`  is the name of the contact you wish to add.
-* `[optional fields]` are the non-mandatory fields you can associate with the contact at the point of creation. The fields can also be added using the add command.
+* `[optional fields]` are non-mandatory fields you can associate with the contact at the point of creation (these include every field you can associate with a contact except the `name` field). The fields can also be added using the add command.
 
 <div markdown="block" class="alert alert-info">
 :information_source: To view a comprehensive list of fields and their prefixes, go to the start of the [Features section](#features).
 </div>
 
-When creating a contact, if there is already another contact with the same name, you would be informed that another contact with the same name already exists (not case sensitive)
+When creating a contact, if there is already another contact with the same name, you would be informed that another contact with the same name already exists (not case sensitive).
 
 Example usage:
 
@@ -167,7 +164,7 @@ Example usage:
 
 #### Add details to contact: `add [index] [fields]`
 
-You can use the `add` command to add a contact detail to an existing contact. No new contact will be created.
+You can use the `add` command to add one or more contact details under multi-valued fields associated with an existing contact. No new contact will be created.
 
 Format: `add [index] [field prefix] [field value] ...`
 
@@ -179,7 +176,7 @@ Parameters:
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: To view a comprehensive list of fields and their prefixes, go to the start of the [Features section](#features).
+:information_source: To view a comprehensive list of multi-valued fields and their prefixes, go to the start of the [Features section](#features).
 
 </div>
 
@@ -202,9 +199,11 @@ Example usage:
 
 ### <u>Category 2 - Edit contact details</u>
 
+This category focuses on modifying contact information and managing entries in your NetworkBook. Relevant commands and explanations of their functionalities are outlined below:
+
 #### Edit contact detail: `edit [index] [field] [options]`
 
-You can use the `edit` command to edit contact details of existing contacts in your book.
+You can use the `edit` command to edit contact details of existing contacts in your NetworkBook so that you can update outdated/invalid information in your NetworkBook.
 
 Format:
 
@@ -242,7 +241,7 @@ Example usage:
 
 #### Delete a contact: `delete [index]`
 
-You can remove a contact from your NetworkBook using the `delete` command, so that your book only contains contact details of those relevant.
+You can remove a contact from your NetworkBook using the `delete` command, so that your NetworkBook only contains contact details of those relevant.
 
 Format: `delete [index]`
 
@@ -299,7 +298,7 @@ Example usage:
 
 #### Delete all contacts: `clear`
 
-You can remove all contacts from your NetworkBook using the `clear` command.
+You can remove all contacts from your NetworkBook using the `clear` command, so that you can repopulate NetworkBook with a new set of contact details more efficiently.
 
 <div markdown="span" class="alert alert-warning">:warning: **Warning:**
 This command deletes **all** of your contacts. Only do this if you are sure.
@@ -321,9 +320,11 @@ Example usage:
 
 ### <u>Category 3 - Find/view contacts</u>
 
+This category is centered around managing contacts displayed in your NetworkBook. Relevant commands and explanations of their functionalities are outlined below:
+
 #### List all contacts: `list`
 
-You can use the `list` command to list all of your contacts. This resets any filtering previously applied to the list.
+You can use the `list` command to list all of your contacts. This resets any filtering previously applied to the list, so that you can quickly toggle to see all contacts.
 
 Format: `list`
 
@@ -335,12 +336,11 @@ Example usage:
 
 [Table of Contents](#table-of-contents)
 
-<!-- @@author -->
 <!-- @@author nknguyenhc -->
 
 #### Find a contact: `find [name]`
 
-You can use the `find` command to search for contacts by their name if you wish to quickly reference a particular contact's details.
+You can use the `find` command to search for contacts by their name if you wish to quickly reference a particular contact's details, so that you can locate details of contacts more efficiently.
 
 Format: `find [name]`
 
@@ -356,12 +356,11 @@ Example usage:
 
 [Table of Contents](#table-of-contents)
 
-<!-- @@author -->
 <!-- @@author xenosf -->
 
 #### Sort contacts list: `sort /by [field name] /order [asc/desc]`
 
-You can use the `sort` command to sort your list of contacts. If the list is currently filtered (using [`find`](#find-a-contact-find-name) or [`filter`](#filter-contacts-list-filter-by-field-with-term)), the filtered list will be sorted.
+You can use the `sort` command to sort your list of contacts so that you can efficiently locate contacts with special characteristics that you are looking for. If the list is currently filtered (using [`find`](#find-a-contact-find-name) or [`filter`](#filter-contacts-list-filter-by-field-with-term)), the filtered list will be sorted in your chosen manner.
 
 <div markdown="span" class="alert alert-secondary">:information_source: **Note:**
 When you first open NetworkBook, the list starts off sorted by **name** in **ascending** order.
@@ -387,7 +386,7 @@ Parameters:
     * `desc`/`descending` - Sort in descending order
 
 <div markdown="span" class="alert alert-secondary">:information_source: **Note:**
-If sorting by an optional field (e.g. graduation), all contacts without that field will be placed at the bottom of the sorted list regardless of sorting order.
+If sorting by an optional field (i.e. `graduation` or `priority`), all contacts without that field will be placed at the bottom of the sorted list regardless of sorting order.
 </div>
 
 Example usage:
@@ -399,20 +398,18 @@ Example usage:
 
 [Table of Contents](#table-of-contents)
 
-<!-- @@author -->
 <!-- @@author Eola-Z -->
 
 #### Filter contacts list: `filter /by [field] /with [term]`
 
-You can use the `filter` command to filter your list of contacts,
-temporarily hiding contacts that don't contain certain keywords
-for easy viewing. If the list is currently sorted (using [`sort`](#sort-contacts-list-sort-by-field-name-order-ascdesc)), the filtered list will be sorted.
+You can use the `filter` command to filter your list of contacts, temporarily hiding contacts that don't contain certain keywords
+for easy viewing. If the list is currently sorted (using [`sort`](#sort-contacts-list-sort-by-field-name-order-ascdesc)), the newly filtered list will be still be sorted in the same manner as before.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can undo a filter command using [`undo`](#undo-last-change-to-networkbook-undo). You can reset filtering at any time using [`list`](#list-all-contacts-list).
 </div>
 
-Format: `filter /by [field] /with [term] /taken true/false`
+Format: `filter /by [field] /with [term] /taken [taken]`
 
 Parameters:
 
@@ -450,14 +447,15 @@ Example usage:
 
 [Table of Contents](#table-of-contents)
 
-<!-- @@author -->
 <!-- @@author awhb -->
 
 ### <u>Category 4 - Undo/redo</u>
 
+This category focuses on managing the history of changes made to displayed and/or stored contacts in your NetworkBook. Relevant commands and explanations of their functionalities are outlined below:
+
 #### Undo last change to NetworkBook: `undo`
 
-You can use the `undo` command to undo the last change to the list of contacts stored in NetworkBook and/or the list of contacts displayed by NetworkBook. This command can only undo changes made in your current session on NetworkBook.
+You can use the `undo` command to undo the last change to the list of contacts stored in NetworkBook and/or the list of contacts displayed by NetworkBook, so that you can quickly revert mistaken/temporary NetworkBook commands (excluding `undo`). This command can only undo changes made in your current session on NetworkBook.
 
 Format: `undo`
 
@@ -471,7 +469,7 @@ Example usage:
 
 #### Redo last undone change: `redo`
 
-You can use the `redo` command to redo the last change to the list of contacts stored in NetworkBook and/or the list of contacts displayed by NetworkBook. This command only works if you have previously used `undo` commands in NetworkBook that can be reversed.
+You can use the `redo` command to redo the last change to the list of contacts stored in NetworkBook and/or the list of contacts displayed by NetworkBook, so that you can quickly revert mistaken/temporary `undo` commands. This command only works if you have previously used `undo` commands in NetworkBook that can be reversed.
 
 Format: `redo`
 
@@ -483,14 +481,15 @@ Example usage:
 
 [Table of Contents](#table-of-contents)
 
-<!-- @@author -->
 <!-- @@author nknguyenhc -->
 
 ### <u>Category 5 - Open other apps</u>
 
+This category focuses on the opening of external applications or services associated with contact details. Relevant commands and explanations of their functionalities are outlined below:
+
 #### Open a contact's link: `open [index] /index [link index]`
 
-You can use the `open` command to open a contact's link. This opens the webpage in your default web browser.
+You can use the `open` command to open a contact's link so that you can conveniently access their social links when needed. This opens the webpage in your default web browser.
 
 Format: `open [index] /index [link index]`
 
@@ -516,7 +515,7 @@ Example usage:
 
 #### Send email to a contact's email address: `email [index] /index [email index]`
 
-You can use the `email` command to open the default mailbox application to compose an email to the contact's email at `email index`.
+You can use the `email` command to open the default mailbox application to compose an email to the contact's email at `email index`, so that you can send emails to your contacts more efficiently.
 
 Format: `email [index] /index [email index]`
 
@@ -539,10 +538,11 @@ Example usage:
 
 [Table of Contents](#table-of-contents)
 
-<!-- @@author -->
 <!-- @@author Singa-Pirate -->
 
 ### <u>Category 6 - Keyboard shortcuts</u>
+
+This category introduces keyboard shortcuts to enhance efficiency when interacting with NetworkBook. Relevant commands and explanations of their functionalities are outlined below:
 
 #### Auto-fill command preamble: `ctrl-F/N/G/U/R`
 
@@ -583,12 +583,11 @@ Note that this only works when the command box is not active. If you are typing 
 
 [Table of Contents](#table-of-contents)
 
-<!-- @@author -->
 <!-- @@author xenosf -->
 
 ### <u>Category 7 - Mouse interaction</u>
 
-While NetworkBook is optimised for use with keyboards and text commands, it also has buttons you can click to do certain tasks if you prefer. These buttons function the same as the equivalent commands, so you can use your preferred method.
+While NetworkBook is optimised for use with keyboards and text commands, it also has buttons you can click to execute certain commands. Relevant commands and explanations of their functionalities are outlined below:
 
 #### Filter (equivalent to [`filter` command](#filter-contacts-list-filter-by-field-with-term))
 
@@ -605,6 +604,8 @@ You can click on a contact's email address to email them.
 [Table of Contents](#table-of-contents)
 
 ### <u>Category 8 - Miscellaneous</u>
+
+This category covers miscellaneous commands for additional functionalities in NetworkBook. Relevant commands and explanations of their functionalities are outlined below:
 
 #### View help window: `help`
 
@@ -651,8 +652,6 @@ Example usage:
 * `exit`
 
 [Table of Contents](#table-of-contents)
-
-<!-- @@author -->
 
 ## Command summary
 
@@ -710,5 +709,3 @@ If you have any further issues, please raise an issue on our [GitHub page](https
 **A:** You can edit the data file for NetworkBook manually, but at your own risk (if there are errors in the file related to formatting/invalid data, the app will not read the data file and begin from an empty data file instead.)
 
 [Table of Contents](#table-of-contents)
-
-<!-- @@author -->
