@@ -169,10 +169,12 @@ How the parsing works:
 
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-F12-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="80%" />
+<img src="images/ModelClassDiagram.png" width="90%" />
 <br>
-<img src="images/Person&MeetingClassDiagram.png" width="80%" />
+<img src="images/Person&MeetingClassDiagram.png" width="90%" />
 <br>
+
+<div style="page-break-after: always;"></div>
 
 The `Model` component,
 
@@ -438,6 +440,8 @@ The list of valid statuses is stored as an `Enumeration` object for the followin
 
 `Status` is implemented and utilized in a similar manner to [`LastContactedTime`](#keeping-track-of-last-meeting-with-contact).
 
+<div style="page-break-after: always;"></div>
+
 ### Saving data
 
 - The address book is saved in a JSON file after every command execution. The default path for this file is `/data/outbook.json`, found in the same directly as the application JAR file.
@@ -668,6 +672,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: Remove contact from a meeting**
 
 **MSS**
@@ -710,6 +716,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 5b1. OutBook shows an error message.
 
     Use case resumes at step 3.
+
+<div style="page-break-after: always;"></div>
 
 **Use case: Mark meeting as complete**
 
@@ -843,6 +851,8 @@ Adding a person while not all persons are being shown.
 
 3.  Adding a contact automatically shows all contacts.
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a person
 
 1. Test case: `editc 1 n/John Doe p/12345678 e/JohnDoe@gmail.com`<br>
@@ -932,12 +942,10 @@ Remove Meeting Attendee
 
 Mark a Meeting as completed
 
-<div style="page-break-after: always;"></div>
-
-### Saving data
-
 1. Use `mark 1` to mark the first meeting as completed <br>
    Expected: Meeting will be shown as completed and the attendees that are in the meeting will have their last contacted updated to the end time of the meeting.
+
+<div style="page-break-after: always;"></div>
 
 ### Data Storage
 
