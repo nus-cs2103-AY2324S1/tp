@@ -19,4 +19,9 @@ public class Duration {
         return this.duration;
     }
 
+    public String toString() {
+        return Integer.toString(duration);
+    }
+
+
 }

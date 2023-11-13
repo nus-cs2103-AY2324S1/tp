@@ -7,7 +7,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Time;
 import seedu.address.model.TimeInterval;
@@ -38,19 +37,6 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
-    }
-
-    /**
-     * Parses a {@code String name}.
-     * Leading and trailing whitespaces will be trimmed.
-     */
-    public static String parseGroupName(String name) throws ParseException {
-        requireNonNull(name);
-        String trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Group.MESSAGE_CONSTRAINTS);
-        }
-        return trimmedName;
     }
 
     /**

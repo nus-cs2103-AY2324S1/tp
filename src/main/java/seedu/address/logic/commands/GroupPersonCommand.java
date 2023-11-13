@@ -22,8 +22,6 @@ public class GroupPersonCommand extends Command {
             + "the address book.\n" + "Parameters: " + PREFIX_NAME + "NAME " + PREFIX_GROUPTAG + "GROUP ";
 
     public static final String MESSAGE_SUCCESS = "%1$s is now a part of %2$s";
-    public static final String MESSAGE_DUPLICATE_PERSON_IN_GROUP =
-        "Error, invalid input entered, unable to put the person into group";
 
     private final String personName;
     private final String groupName;

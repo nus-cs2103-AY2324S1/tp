@@ -76,11 +76,18 @@ public class TypicalTimeIntervals {
                 .withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(12, 00)).build(),
                     new TimeBuilder().withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(13, 00))
                         .build()).build();
+    public static final TimeInterval TIME_INTERVAL_FIVE_HALFOVERLAP_A = new TimeIntervalBuilder()
+                .withStartTimeAndEndTime(new TimeBuilder()
+                .withDayAndHour(
+                    DayOfWeek.MONDAY, LocalTime.of(12, 30)).build(),
+                    new TimeBuilder().withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(13, 30))
+                        .build()).build();
 
 
     public static final TimeInterval TIME_INTERVAL_ONE_OVERLAP_B = new TimeIntervalBuilder()
                 .withStartTimeAndEndTime(new TimeBuilder()
-                .withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(5, 00)).build(),
+                .withDayAndHour(
+                    DayOfWeek.MONDAY, LocalTime.of(5, 00)).build(),
                     new TimeBuilder().withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(12, 00))
                         .build()).build();
 
@@ -100,5 +107,40 @@ public class TypicalTimeIntervals {
                 .withStartTimeAndEndTime(new TimeBuilder()
                 .withDayAndHour(DayOfWeek.WEDNESDAY, LocalTime.of(6, 00)).build(),
                     new TimeBuilder().withDayAndHour(DayOfWeek.FRIDAY, LocalTime.of(8, 00))
+                        .build()).build();
+
+    public static final TimeInterval TIME_INTERVAL_MONTUE_ONE = new TimeIntervalBuilder()
+                .withStartTimeAndEndTime(new TimeBuilder()
+                .withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(11, 00)).build(),
+                    new TimeBuilder().withDayAndHour(DayOfWeek.TUESDAY, LocalTime.of(14, 00))
+                        .build()).build();
+
+    public static final TimeInterval TIME_INTERVAL_MONWED_ONE = new TimeIntervalBuilder()
+                .withStartTimeAndEndTime(new TimeBuilder()
+                .withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(12, 00)).build(),
+                    new TimeBuilder().withDayAndHour(DayOfWeek.WEDNESDAY, LocalTime.of(15, 00))
+                        .build()).build();
+
+
+    public static final TimeInterval TIME_INTERVAL_THUSAT_TWO = new TimeIntervalBuilder()
+                .withStartTimeAndEndTime(new TimeBuilder()
+                .withDayAndHour(DayOfWeek.THURSDAY, LocalTime.of(12, 00)).build(),
+                    new TimeBuilder().withDayAndHour(DayOfWeek.SATURDAY, LocalTime.of(18, 00))
+                        .build()).build();
+    public static final TimeInterval TIME_INTERVAL_SATSUN_TWO = new TimeIntervalBuilder()
+                .withStartTimeAndEndTime(new TimeBuilder()
+                .withDayAndHour(DayOfWeek.SATURDAY, LocalTime.of(12, 00)).build(),
+                    new TimeBuilder().withDayAndHour(DayOfWeek.SUNDAY, LocalTime.of(18, 00))
+                        .build()).build();
+
+    public static final TimeInterval TIME_INTERVAL_OVERLAPONE = new TimeIntervalBuilder()
+               .withStartTimeAndEndTime(new TimeBuilder()
+               .withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(11, 00)).build(),
+                    new TimeBuilder().withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(11, 30))
+                        .build()).build();
+    public static final TimeInterval TIME_INTERVAL_OVERLAPTWO = new TimeIntervalBuilder()
+               .withStartTimeAndEndTime(new TimeBuilder()
+               .withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(12, 30)).build(),
+                    new TimeBuilder().withDayAndHour(DayOfWeek.MONDAY, LocalTime.of(13, 00))
                         .build()).build();
 }

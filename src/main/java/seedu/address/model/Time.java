@@ -7,7 +7,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * A class represent a time object
+ * A class representing a time object
  */
 public class Time {
 
@@ -46,7 +46,7 @@ public class Time {
     /**
      * Convert either start or end time of timeInterval into an int
      * Use dayOfWeek enum from 1-7 representing Mon-Sun
-      * @return Int representing duration of interval in minute
+     * @return Int representing duration of interval in minute
      */
     public int getDurationInMin() {
         int durationInMin = this.day.getValue() * 24 * 60 + this.hour.getHour() * 60 + this.hour.getMinute();
@@ -82,9 +82,9 @@ public class Time {
     }
 
     /**
-     * Converts string to DayOfWeek object
-     * @param day In String
-     * @return day in DayOfWeek object
+     * Converts string to DayOfWeek object.
+     * @param day In String.
+     * @return day in DayOfWeek object.
      */
     public static DayOfWeek decodeDay(String day) {
         day = day.toLowerCase();
@@ -105,10 +105,16 @@ public class Time {
         }
     }
 
+    /**
+     * Returns the day of the week.
+     */
     public DayOfWeek getDay() {
         return this.day;
     }
 
+    /**
+     * Returns the time.
+     */
     public LocalTime getTime() {
         return this.hour;
     }

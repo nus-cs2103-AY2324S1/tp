@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FREETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPREMARK;
@@ -12,15 +12,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -95,6 +92,20 @@ public class CommandTestUtil {
     public static final String VALID_GROUP_REMARK_OTHERS = "gU4&😊!";
     public static final String GROUP_REMARK_OTHERS_DESC = " " + PREFIX_GROUPREMARK + VALID_GROUP_REMARK_OTHERS;
 
+    public static final String DURATION_THIRTY = "30";
+    public static final String VALID_DURATION_THIRTY = " " + PREFIX_DURATION + DURATION_THIRTY;
+    public static final String INVALID_DURATION_NEGATIVE = "-1";
+    public static final String INVALID_DURATION_NEGATIVE_DESC = " " + PREFIX_DURATION + INVALID_DURATION_NEGATIVE;
+    public static final String INVALID_DURATION_ZERO = "0";
+    public static final String INVALID_DURATION_ZERO_DESC = " " + PREFIX_DURATION + INVALID_DURATION_ZERO;
+    public static final String INVALID_DURATION_MAX = "10080";
+    public static final String INVALID_DURATION_MAX_DESC = " " + PREFIX_DURATION + INVALID_DURATION_MAX;
+
+    public static final String INVALID_DURATION_CHAR = "aaa";
+    public static final String INVALID_DURATION_CHAR_DESC = " " + PREFIX_DURATION + INVALID_DURATION_CHAR;
+
+
+
 
 
     /**
@@ -141,18 +152,4 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
-    /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
-     * {@code model}'s address book.
-     */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
-
-        Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
-        final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
-
-        assertEquals(1, model.getFilteredPersonList().size());
-    }
-
 }

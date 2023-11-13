@@ -79,22 +79,24 @@ public class FindFreeTimeCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof GroupPersonCommand)) {
+        if (!(other instanceof FindFreeTimeCommand)) {
             return false;
         }
 
-        GroupPersonCommand otherGroupPersonCommand = (GroupPersonCommand) other;
+        FindFreeTimeCommand otherFindFreeTimeCommand = (FindFreeTimeCommand) other;
         // to check
-        return this.equals(otherGroupPersonCommand);
+        return this.duration.getDurationInMin() == otherFindFreeTimeCommand.duration.getDurationInMin()
+                && this.groupName.equals(otherFindFreeTimeCommand.groupName);
 
     }
 
     // to fix
     @Override
-    public java.lang.String toString() {
+    public String toString() {
         return new ToStringBuilder(this)
-            .add("toAddToGroup", "")
-            .toString();
+               .add("group name", groupName)
+               .add("duration", duration.toString())
+               .toString();
     }
 }
 

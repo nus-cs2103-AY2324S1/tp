@@ -29,7 +29,6 @@ public class AddTimeCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Free time status for: %1$s \n";
 
-
     private final ArrayList<TimeInterval> toAddFreeTimes;
     private final Name toAddPerson;
 

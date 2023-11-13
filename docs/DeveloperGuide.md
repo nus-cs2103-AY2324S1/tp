@@ -188,7 +188,7 @@ The `add` feature is facilitated by a number of classes such as `Person` and `Mo
 
 Step 1. The user launches the application for the first time.
 
-Step 2. The user executes `“add n/John Doe p/98765432 e/johnd@example.com g/CS2103T”` command to add a new person. 
+Step 2. The user executes `“add n/John Doe p/98765432 e/johnd@example.com g/CS2103T”` command to add a new person.
 
 Step 3, The `AddCommandParser` is called to read the user input. `AddCommandParser` parses the input and calls `AddCommand`.
 
@@ -204,12 +204,12 @@ The following sequence diagram describes the process of `add` command:
 **Aspect: Handling group attribute in user input**
 
 * **Alternative 1 (Current Choice):** Only allow user to add one group for each `add` Command
-    * Pros: User input length is reduced, lowering the chance of invalid input on the user's side.
-    * Cons: User will have to type more inputs to add more groups.
-  
+  * Pros: User input length is reduced, lowering the chance of invalid input on the user's side.
+  * Cons: User will have to type more inputs to add more groups.
+
 * **Alternative 2:** Allow user to add as many groups as required for each `add` Command
-    * Pros: Conveniently adds a person into multiple group while creating a new contact at the same time.
-    * Cons: User input can get potentially very long, increasing the chance of invalid input, relatively harder to implement parser. The implementation of it will get more complex.
+  * Pros: Conveniently adds a person into multiple group while creating a new contact at the same time.
+  * Cons: User input can get potentially very long, increasing the chance of invalid input, relatively harder to implement parser. The implementation of it will get more complex.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -238,12 +238,12 @@ Below is a sequence diagram that summarizes how a user creates a new group:
 **Aspect: Groups with the same name**
 
 * **Alternative 1 (current choice):** Group names are Unique
-    * Pros: Allow users to create groups with the same name
-    * Cons: User might have to be creative with naming groups
+  * Pros: Allow users to create groups with the same name
+  * Cons: User might have to be creative with naming groups
 
 * **Alternative 2:** Group names are not unique but tagged with an id
-    * Pros: Users can reuse commonly used group names
-    * Cons: Users may get confused as to what each group is meant for
+  * Pros: Users can reuse commonly used group names
+  * Cons: Users may get confused as to what each group is meant for
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -433,7 +433,7 @@ Additionally, it calls on an extra method `Group#getGroupRemark()`. `Group#getGr
 
 --------------------------------------------------------------------------------------------------------------------
 
-### 3.6. Group Person
+### 3.6. Group and Ungrouping Person
 
 #### Implementation
 
@@ -443,7 +443,17 @@ Given below is an example usage scenario and how the group mechanism behaves at 
 
 **Step 1:** User launches the application.
 
-**Step 2:** The user executes `group n/personName g/groupName` to group a person `personName` into group `groupName`. `GroupPersonCommandParser` parses the personName and groupName ensuring the input is valid and creates a `GroupPersonCommand`, which calls `Model#groupPerson(personName, groupName)`. The model retrieves the existing person and group from the addressBook. Should a person or group not exist, it throws an error. Model calls `Model#assignGroup(Person person, Group group)` which adds a group to a person's groupList and person to the personList in group.
+**Step 2:** The user executes `group n/personName g/groupName` to group a person `personName` into group `groupName`. `
+
+**Step 3.** GroupPersonCommandParser` parses the personName and groupName ensuring the input is valid and creates a `GroupPersonCommand`
+
+**Step 4.** GroupPersonCommand calls `Model#groupPerson(personName, groupName)`. The model retrieves the existing person and group from the addressBook.
+
+**Step 5.** Model calls `Model#assignGroup(Person person, Group group)` which adds a group to a person's groupList and person to the personList in group.
+
+**Note:** Should a person or group not exist, an error is thrown, displaying the missing entity to the User.
+
+Ungroup works in the same way as group except the use of Command word ungroup
 
 The following activity diagram summarizes what happens when a user executes a new command:
 <puml src="diagrams/GroupPersonActivityDiagram.puml" alt="GroupPersonActivityDiagram"/>
@@ -716,6 +726,42 @@ The List Time from Group command mechanism behaves the same as the List Time fro
 * **Alternative 2:** Organise time intervals by day.
   * Pros: Allows users to better see the intervals in each day.
   * Cons: May cause inconvenience to users when they need to copy and paste time chunks should they need it again.
+
+--------------------------------------------------------------------------------------------------------------------
+
+### 3.11. FindFreeTime 
+
+#### Implementation
+
+The FindFreeTime mechanism is facilitated by the `Model`, `Group` and  `Person` class.
+It retrieves `Group` from `Model` to find a free time between group members in `listOfGroupMates` in `Group` 
+with a duration specified, `Duration`.
+The operation is exposed to `Model` interface as `Model#findGroup`.
+
+
+Given below is an example usage scenario and how the list mechanism behaves at each step.
+
+**Step 1:** User launches the application. 
+
+**Step 2:** User executes `findfreetime g/CS2103 d/60` command to find a common meeting time with duration 60 minutes 
+for group CS2103.
+
+**Step 3:** FindFreeTimeCommandParser parses the group name CS2103 and duration 60, ensuring that duration 
+is a valid integer in terms of minutes, and returns a FindFreeTimeCommand.
+
+**Step 4:** FindFreeTimeCommand calls `Model#findGroup(groupName)` to retrieve the group with matching name.
+If group does not exist, then an error is thrown.
+
+**Step 4:** FindFreeTimeCommand calls `Group#findFreeTime(duration)`, to retrieve the all common timeslots between 
+`listOfGroupMates` in `Group` and return them in a list should they accommodate the duration stated.
+
+**Note:**
+If group is empty, having no group mates in `listOfGroupMates` an error is thrown. 
+<br>
+If any group mate has not key in their free time slots using `addtime`, an error is thrown. 
+
+
+The following activity diagram summarizes what happens when a user executes a FindFreeTime command:
 
 --------------------------------------------------------------------------------------------------------------------
 
