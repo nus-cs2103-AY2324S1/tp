@@ -39,7 +39,7 @@ public class InterviewAddCommandTest {
     }
 
     @Test
-    public void execute_duplicateInterview_throwsCommandException() throws CommandException {
+    public void execute_duplicateInterview_throwsCommandException() {
         Job job = model.getFilteredJobList().get(0);
         Interview interview = job.getInterview(Index.fromOneBased(1));
         Interview existingInterview = new Interview(interview.getInterviewType(), interview.getInterviewDateTime(),
