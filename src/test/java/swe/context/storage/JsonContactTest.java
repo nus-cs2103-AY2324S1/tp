@@ -1,6 +1,7 @@
 package swe.context.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static swe.context.testutil.Assert.assertThrows;
 import static swe.context.testutil.TestData.Valid.Contact.BENSON;
 
@@ -166,6 +167,40 @@ public class JsonContactTest {
                 invalidAlternateContacts
         );
         assertThrows(IllegalValueException.class, contact::toModelType);
+    }
+
+    // Test for null tags list
+    @Test
+    public void toModelType_nullTags_success() throws Exception {
+        JsonContact contact = new JsonContact(
+                VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_NOTE, null, VALID_ALTERNATECONTACTS);
+        // Assuming null tags are treated as an empty list
+        assertNotNull(contact.toModelType());
+    }
+
+    // Test for null alternate contacts list
+    @Test
+    public void toModelType_nullAlternateContacts_success() throws Exception {
+        JsonContact contact = new JsonContact(
+                VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_NOTE, VALID_TAGS, null);
+        // Assuming null alternate contacts are treated as an empty list
+        assertNotNull(contact.toModelType());
+    }
+
+    // Test for empty tags list
+    @Test
+    public void toModelType_emptyTags_success() throws Exception {
+        JsonContact contact = new JsonContact(
+                VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_NOTE, new ArrayList<>(), VALID_ALTERNATECONTACTS);
+        assertNotNull(contact.toModelType());
+    }
+
+    // Test for empty alternate contacts list
+    @Test
+    public void toModelType_emptyAlternateContacts_success() throws Exception {
+        JsonContact contact = new JsonContact(
+                VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_NOTE, VALID_TAGS, new ArrayList<>());
+        assertNotNull(contact.toModelType());
     }
 
 }

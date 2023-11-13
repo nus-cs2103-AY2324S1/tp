@@ -42,4 +42,20 @@ public class ModelManagerTest {
     public void getFilteredContactList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredContactList().remove(0));
     }
+
+    @Test
+    public void addContact_contactNotPresent_addSuccessful() {
+        assertFalse(modelManager.containsContact(ALICE));
+        modelManager.addContact(ALICE);
+        assertTrue(modelManager.containsContact(ALICE));
+    }
+
+    @Test
+    public void removeContact_contactPresent_removeSuccessful() {
+        modelManager.addContact(ALICE);
+        assertTrue(modelManager.containsContact(ALICE));
+        modelManager.removeContact(ALICE);
+        assertFalse(modelManager.containsContact(ALICE));
+    }
+
 }

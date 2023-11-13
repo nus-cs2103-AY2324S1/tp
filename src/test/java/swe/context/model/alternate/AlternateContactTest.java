@@ -1,6 +1,8 @@
 package swe.context.model.alternate;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -34,7 +36,17 @@ public class AlternateContactTest {
     }
 
     @Test
-    public void equals() {
+    public void isValidName_specialCharacters_true() {
+        assertTrue(AlternateContact.isValid("ContactType: name_with-special.characters"));
+    }
+
+    @Test
+    public void constructorAndEquals() {
+        AlternateContact alternateContact = new AlternateContact("Type: Name");
+        assertEquals("Type: Name", alternateContact.toString());
+        assertEquals(new AlternateContact("Type: Name"), alternateContact);
+        assertNotEquals(new AlternateContact("Different: Name"), alternateContact);
+
         AlternateContact alphanumeric = new AlternateContact(TestData.Valid.AlternateContact.ALPHANUMERIC);
 
         // same values -> return true

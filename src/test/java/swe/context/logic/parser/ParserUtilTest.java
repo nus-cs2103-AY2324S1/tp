@@ -11,6 +11,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import swe.context.commons.core.index.Index;
 import swe.context.logic.parser.exceptions.ParseException;
 import swe.context.model.alternate.AlternateContact;
 import swe.context.model.contact.Email;
@@ -248,4 +249,43 @@ public class ParserUtilTest {
 
         assertEquals(expectedAlternateContactSet, actualAlternateContactSet);
     }
+
+    @Test
+    public void parseIndex_minValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("0"));
+    }
+
+    @Test
+    public void parseIndex_maxValue_success() throws Exception {
+        assertEquals(Index.fromOneBased(Integer.MAX_VALUE),
+                ParserUtil.parseIndex(String.valueOf(Integer.MAX_VALUE)));
+    }
+
+    @Test
+    public void parseName_specialCharacters_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseName("Amy*"));
+    }
+
+    @Test
+    public void parsePhone_specialCharacters_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePhone("+65-1234"));
+    }
+
+    @Test
+    public void parseEmail_specialCharacters_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseEmail("amy#email.com"));
+    }
+
+    @Test
+    public void parseTags_mixedValidAndInvalidTags_throwsParseException() {
+        assertThrows(ParseException.class,
+                () -> ParserUtil.parseTags(Arrays.asList("validTag", "#InvalidTag")));
+    }
+
+    @Test
+    public void parseAlternates_mixedValidAndInvalidAlternateContacts_throwsParseException() {
+        assertThrows(ParseException.class,
+                () -> ParserUtil.parseAlternates(Arrays.asList("Valid: Contact", "Invalid Contact")));
+    }
+
 }
