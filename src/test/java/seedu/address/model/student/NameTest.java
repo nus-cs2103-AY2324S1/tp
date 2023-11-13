@@ -44,7 +44,7 @@ public class NameTest {
 
         // valid names
         // EP: one character alphabet only
-        assertTrue(Name.isValidName("a"));
+        assertTrue(Name.isValidName("A"));
 
         // EP: Alphabetical characters with capital letters
         assertTrue(Name.isValidName("Capital Tan"));
