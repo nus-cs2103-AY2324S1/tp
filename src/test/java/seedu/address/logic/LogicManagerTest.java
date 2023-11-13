@@ -21,17 +21,19 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SaveCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewExitCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -79,6 +81,11 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void equalsAddressBookPath() {
+        assertTrue(logic.getAddressBookFilePath().equals(Paths.get("data", "addressbook.json")));
+    }
+
+    @Test
     public void execute_nonClearCommand_shouldSetFinalConfirmationToFalse() throws Exception {
         try {
             logic.execute("random command");
@@ -116,23 +123,9 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_viewModeParserCommand_success() throws Exception {
+    public void executeInView_viewExitCommand_success() throws Exception {
         String viewExitCommand = ViewExitCommand.COMMAND_WORD;
         assertViewModeCommandSuccess(viewExitCommand, ViewExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT, model);
-    }
-
-    @Test
-    public void execute_getIsViewExitCommandMethod_success() throws CommandException, ParseException,
-            DataLoadingException, IOException {
-        String viewCommand = "view 1";
-        String viewExitCommand = "exit";
-        CommandResult parsedViewCommand = logic.execute(viewCommand);
-        CommandResult parsedViewExitCommand = logic.executeInView(
-                viewExitCommand,
-                parsedViewCommand.getPersonToView(),
-                parsedViewCommand.getTargetIndex()
-        );
-        assertTrue(parsedViewExitCommand.getCommandType() == CommandType.VIEW_EXIT);
     }
 
 
@@ -143,8 +136,20 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void executeInView_storageThrowsIoException_throwsCommandException() {
+        assertViewModeCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION, String.format(
+                LogicManager.FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
+    }
+
+    @Test
     public void execute_storageThrowsAdException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
+                LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
+    }
+
+    @Test
+    public void executeInView_storageThrowsAdException_throwsCommandException() {
+        assertViewModeCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
                 LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
     }
 
@@ -175,7 +180,7 @@ public class LogicManagerTest {
 
         String nonUndoCommand = "list";
         CommandResult nonUndoResult = logic.execute(nonUndoCommand);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(logic.getAddressBook(), new UserPrefs());
         assertNotEquals(nonUndoResult.getFeedbackToUser(), UndoCommand.MESSAGE_SUCCESS);
         assertEquals(model.getAddressBook(), expectedModel.getAddressBook());
     }
@@ -196,12 +201,10 @@ public class LogicManagerTest {
 
         logic.setGuiSettings(guiSettings);
 
-        GuiSettings updatedGuiSettings = model.getGuiSettings();
+        GuiSettings updatedGuiSettings = logic.getGuiSettings();
 
         assertEquals(guiSettings, updatedGuiSettings);
     }
-
-
 
 
     private void assertAddressBookCommandSuccess(String inputCommand, String expectedMessage,
@@ -286,38 +289,15 @@ public class LogicManagerTest {
     }
 
     /**
-     * Executes the command in profile view page,
-     * confirms that a ParseException is thrown and that the result message is correct.
-     * @see #assertViewModeCommandFailure(String, Class, String, Model)
-     */
-    private void assertViewModeParseException(String inputCommand, String expectedMessage)
-            throws CommandException, ParseException, DataLoadingException, IOException {
-        String viewCommand = "view 1";
-        CommandResult viewCommandResult = logic.execute(viewCommand);
-        assertViewModeCommandFailure(inputCommand, ParseException.class, expectedMessage);
-    }
-
-    /**
-     * Executes the command in the profile page,
-     * confirms that the exception is thrown and that the result message is correct.
-     * @see #assertViewModeCommandFailure(String, Class, String, Model)
-     */
-    private void assertViewModeCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
-                                              String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        assertViewModeCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
-    }
-
-    /**
-     * Sets the boolean value isInViewMode to true, representing that the user is in the profile view page,
-     * then executes the command and confirms that
+     * Executes the command in profile page and confirms that
      * - the {@code expectedException} is thrown <br>
      * - the resulting error message is equal to {@code expectedMessage} <br>
      * - the internal model manager state is the same as that in {@code expectedModel} <br>
      */
-    private void assertViewModeCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
-            String expectedMessage, Model expectedModel) {
-        assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
+    private void assertViewModeCommandFailure(String inputCommand, Person p, Index index,
+                                              Class<? extends Throwable> expectedException,
+                                              String expectedMessage, Model expectedModel) {
+        assertThrows(expectedException, expectedMessage, () -> logic.executeInView(inputCommand, p, index));
         assertEquals(expectedModel, model);
     }
 
@@ -352,8 +332,42 @@ public class LogicManagerTest {
                 + ANIMAL_TYPE_DESC_AMY
                 + HOUSING_DESC_AMY;
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-        ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+    }
+
+    /**
+     * Tests the Logic component's handling of an {@code IOException} thrown by the Storage component.
+     *
+     * @param e the exception to be thrown by the Storage component
+     * @param expectedMessage the message expected inside exception thrown by the Logic component
+     */
+    private void assertViewModeCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
+        Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
+
+        // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath) {
+            @Override
+            public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath)
+                    throws IOException {
+                throw e;
+            }
+        };
+
+        JsonUserPrefsStorage userPrefsStorage =
+                new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+
+        logic = new LogicManager(model, storage);
+
+        // Triggers the saveAddressBook method by executing a save command
+        String saveCommand = SaveCommand.SAVE_COMMAND_WORD;
+
+        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.setPerson(expectedModel.getFilteredPersonList().get(0), expectedPerson);
+        assertViewModeCommandFailure(saveCommand, expectedPerson,
+                Index.fromZeroBased(0), CommandException.class, expectedMessage, expectedModel);
     }
 }

@@ -73,10 +73,12 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
+        Availability bobAvailability = new Availability(VALID_AVAILABILITY_BOB);
+
         Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND)
                 .withAnimalName(VALID_ANIMAL_NAME_BOB)
                 .withAvailability(VALID_AVAILABILITY_BOB)
-                .withAnimalType(VALID_ANIMAL_TYPE_BOB, new Availability(VALID_AVAILABILITY_BOB))
+                .withAnimalType(VALID_ANIMAL_TYPE_BOB, bobAvailability)
                 .withHousing(VALID_HOUSING_BOB)
                 .build();
 
@@ -91,7 +93,7 @@ public class AddCommandParserTest {
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .withAnimalName(VALID_ANIMAL_NAME_BOB)
                 .withAvailability(VALID_AVAILABILITY_BOB)
-                .withAnimalType(VALID_ANIMAL_TYPE_BOB, new Availability(VALID_AVAILABILITY_BOB))
+                .withAnimalType(VALID_ANIMAL_TYPE_BOB, bobAvailability)
                 .withHousing(VALID_HOUSING_BOB).build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND
@@ -204,23 +206,48 @@ public class AddCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
+        assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + HOUSING_DESC_BOB + AVAILABILITY_DESC_BOB + ANIMAL_NAME_DESC_BOB + ANIMAL_TYPE_DESC_BOB,
                 expectedMessage);
 
         // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
+        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + HOUSING_DESC_BOB + AVAILABILITY_DESC_BOB + ANIMAL_NAME_DESC_BOB + ANIMAL_TYPE_DESC_BOB,
                 expectedMessage);
 
         // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB,
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB
+                + HOUSING_DESC_BOB + AVAILABILITY_DESC_BOB + ANIMAL_NAME_DESC_BOB + ANIMAL_TYPE_DESC_BOB,
                 expectedMessage);
 
         // missing address prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB,
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
+                + HOUSING_DESC_BOB + AVAILABILITY_DESC_BOB + ANIMAL_NAME_DESC_BOB + ANIMAL_TYPE_DESC_BOB,
+                expectedMessage);
+
+        // missing housing prefix
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + VALID_HOUSING_BOB + AVAILABILITY_DESC_BOB + ANIMAL_NAME_DESC_BOB + ANIMAL_TYPE_DESC_BOB,
+                expectedMessage);
+
+        // missing availability prefix
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + HOUSING_DESC_BOB + VALID_AVAILABILITY_BOB + ANIMAL_NAME_DESC_BOB + ANIMAL_TYPE_DESC_BOB,
+                expectedMessage);
+
+        // missing animal name prefix
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + HOUSING_DESC_BOB + AVAILABILITY_DESC_BOB + VALID_ANIMAL_NAME_BOB + ANIMAL_TYPE_DESC_BOB,
+                expectedMessage);
+
+        // missing animal type prefix
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + HOUSING_DESC_BOB + AVAILABILITY_DESC_BOB + ANIMAL_NAME_DESC_BOB + VALID_ANIMAL_TYPE_BOB,
                 expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB,
+        assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
+                + VALID_HOUSING_BOB + VALID_AVAILABILITY_BOB + VALID_ANIMAL_NAME_BOB + VALID_ANIMAL_TYPE_BOB,
                 expectedMessage);
     }
 
@@ -283,12 +310,4 @@ public class AddCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 
-    @Test
-    public void parse_invalidAnimalNameTypeCombination_throwsParseException() {
-        String expectedMessage = "When availability is 'NotAvailable', animal name and type have to "
-                + "either be both 'nil' or both not 'nil'.";
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + ANIMAL_NAME_DESC_BOB + AVAILABILITY_DESC_BOB + ANIMAL_TYPE_NIL_DESC_BOB
-                + HOUSING_DESC_BOB + TAG_DESC_FRIEND, expectedMessage);
-    }
 }

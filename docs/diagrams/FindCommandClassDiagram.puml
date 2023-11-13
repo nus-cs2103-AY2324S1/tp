@@ -1,0 +1,44 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam classBackgroundColor UI_COLOR
+
+package search <<Rectangle>> {
+    Class FindCommandArgumentParser
+    Class SearchPredicate
+    Class "{abstract}\nSearchMatcher" as SearchMatcher
+    Class "{abstract}\nBinarySearchMatcher" as BinarySearchMatcher
+    Class AndSearchMatcher
+    Class OrSearchMatcher
+    Class NotSearchMatcher
+    Class SingleTextSearchMatcher
+    Class FieldRanges
+    Class Range
+}
+
+package parser <<Rectangle>> {
+    Class FindCommandParser
+}
+
+package commands <<Rectangle>> {
+    Class FindCommand
+}
+
+FindCommandParser .> FindCommandArgumentParser
+FindCommandParser .> FindCommand
+FindCommandArgumentParser .> SearchPredicate
+
+FindCommand *--> SearchPredicate
+SearchPredicate *--> SearchMatcher
+
+FieldRanges *-right-> Range
+
+SearchMatcher .> FieldRanges
+SearchMatcher <|-- BinarySearchMatcher
+SearchMatcher <|-- SingleTextSearchMatcher
+SearchMatcher <|-- NotSearchMatcher
+
+BinarySearchMatcher <|-- AndSearchMatcher
+BinarySearchMatcher <|-- OrSearchMatcher
+
+@enduml
