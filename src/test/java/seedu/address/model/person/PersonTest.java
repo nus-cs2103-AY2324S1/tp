@@ -128,7 +128,7 @@ public class PersonTest {
     }
 
     @Test
-    public void dummyHasDefaultCompanyParameter() {
+    public void hasDefaultCompanyParameter_defaultPolicy_success() {
         Policy defautltPolicy = new Policy(new Company(Company.DEFAULT_VALUE),
                 new PolicyNumber(PolicyNumber.DEFAULT_VALUE),
                 new PolicyDate(PolicyDate.DEFAULT_VALUE),
@@ -146,7 +146,7 @@ public class PersonTest {
     }
 
     @Test
-    public void dummyHasDefaultPolicyNumberParameter() {
+    public void hasDefaultPolicyNumberParameter_defaultPolicy_success() {
         Policy defaultPolicy = new Policy(new Company(Company.DEFAULT_VALUE),
                 new PolicyNumber(PolicyNumber.DEFAULT_VALUE),
                 new PolicyDate(PolicyDate.DEFAULT_VALUE),
@@ -164,7 +164,7 @@ public class PersonTest {
     }
 
     @Test
-    public void dummyHasDefaultPolicyIssueDateParameter() {
+    public void hasDefaultPolicyIssueDateParameter_defaultPolicy_success() {
         Policy defaultPolicy = new Policy(new Company(Company.DEFAULT_VALUE),
                 new PolicyNumber(PolicyNumber.DEFAULT_VALUE),
                 new PolicyDate(PolicyDate.DEFAULT_VALUE),
@@ -182,7 +182,7 @@ public class PersonTest {
     }
 
     @Test
-    public void dummyHasDefaultPolicyExpiryDateParameter() {
+    public void hasDefaultPolicyExpiryDateParameter_defaultPolicy_success() {
         Policy defaultPolicy = new Policy(new Company(Company.DEFAULT_VALUE),
                 new PolicyNumber(PolicyNumber.DEFAULT_VALUE),
                 new PolicyDate(PolicyDate.DEFAULT_VALUE),
@@ -200,7 +200,7 @@ public class PersonTest {
     }
 
     @Test
-    public void deletingPolicy() {
+    public void cloneWithoutPolicy_filledOutPolicy_returnsDefaultPolicy() {
         Policy defaultPolicy = new Policy(new Company(Company.DEFAULT_VALUE),
                 new PolicyNumber(PolicyNumber.DEFAULT_VALUE),
                 new PolicyDate(PolicyDate.DEFAULT_VALUE),
@@ -233,7 +233,7 @@ public class PersonTest {
     }
 
     @Test
-    public void dummyCompareDatesTest() {
+    public void compareDatesTest_comparingPolicyWitIdenticalIssueAndExpiryDate_showsSameDateOuput() {
         Policy defaultPolicy = new Policy(new Company(Company.DEFAULT_VALUE),
                 new PolicyNumber(PolicyNumber.DEFAULT_VALUE),
                 new PolicyDate(PolicyDate.DEFAULT_VALUE),
@@ -251,7 +251,7 @@ public class PersonTest {
     }
 
     @Test
-    public void defaultPolicyDateComparison() {
+    public void compareDatesTest_comparingValidPolicyWithIssueBeforeExpiry_showsValidDateOutput() {
         Policy filledPolicy = new Policy(new Company(VALID_COMPANY_BOB),
                 new PolicyNumber(VALID_POLICY_NO_AMY), new PolicyDate(VALID_POLICY_ISSUE_DATE_AMY),
                 new PolicyDate(VALID_POLICY_EXPIRY_DATE_AMY));

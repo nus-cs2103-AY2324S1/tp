@@ -22,12 +22,16 @@ Given below are my contributions to the project.
     * Add checks in the `Policy` class so that policy expiry date must fall after issue date.
     * Allow duplicate names in `Person` class as long as there is another attribute that does not resemble the existing list of persons in the client list.
     * Disallow policy numbers from being reused in the `Policy` class.
+    * Change `edit` for complete policies to be reverted to default policy if any policy parameter is made to the default value.
+    * Added tests for DeleteCommand, DeleteCommandParser, SortCommand, SortCommandParser, Person, Policy and PolicyExpirationDateComparator classes.
 
 * **Documentation**:
     * User Guide:
         * Added documentation for the `sort` feature.
     * Developer Guide:
         * Added implementation for the `delete` feature.
+        * Added implementation for the `sort` feature.
+        * Added manual testing guidance.
 
 * **Project management**:
     * Added issues for exceptions in the `add` and `edit` features.

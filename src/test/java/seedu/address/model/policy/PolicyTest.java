@@ -108,77 +108,77 @@ public class PolicyTest {
     }
 
     @Test
-    public void policyHasDefaultParameter() {
+    public void policyHasDefaultParameter_policyWithDefaultValues_shouldReturnTrue() {
         Policy amyPolicy = new Policy(new Company(Company.DEFAULT_VALUE), new PolicyNumber(VALID_POLICY_NO_AMY),
                 new PolicyDate(VALID_POLICY_ISSUE_DATE_AMY), new PolicyDate(VALID_POLICY_EXPIRY_DATE_AMY));
         assertEquals(amyPolicy.hasDefaultParameter(), true);
     }
 
     @Test
-    public void policyDoesNotHaveDefaultParameter() {
+    public void policyDoesNotHaveDefaultParameter_policyWithNonDefaultValues_shouldReturnFalse() {
         Policy amyPolicy = new Policy(new Company(VALID_COMPANY_AMY), new PolicyNumber(VALID_POLICY_NO_AMY),
                 new PolicyDate(VALID_POLICY_ISSUE_DATE_AMY), new PolicyDate(VALID_POLICY_EXPIRY_DATE_AMY));
         assertEquals(amyPolicy.hasDefaultParameter(), false);
     }
 
     @Test
-    public void policyHasDefaultCompanyParameter() {
+    public void policyHasDefaultCompanyParameter_policyWithDefaultCompany_shouldReturnTrue() {
         Policy amyPolicy = new Policy(new Company(Company.DEFAULT_VALUE), new PolicyNumber(VALID_POLICY_NO_AMY),
                 new PolicyDate(VALID_POLICY_ISSUE_DATE_AMY), new PolicyDate(VALID_POLICY_EXPIRY_DATE_AMY));
         assertEquals(amyPolicy.hasDefaultCompanyParameter(), true);
     }
 
     @Test
-    public void policyDoesNotHaveDefaultCompanyParameter() {
+    public void policyDoesNotHaveDefaultCompanyParameter_policyWithNonDefaultCompany_shouldReturnFalse() {
         Policy amyPolicy = new Policy(new Company(VALID_COMPANY_AMY), new PolicyNumber(VALID_POLICY_NO_AMY),
                 new PolicyDate(VALID_POLICY_ISSUE_DATE_AMY), new PolicyDate(VALID_POLICY_EXPIRY_DATE_AMY));
         assertEquals(amyPolicy.hasDefaultCompanyParameter(), false);
     }
 
     @Test
-    public void policyHasDefaultNumberParameter() {
+    public void policyHasDefaultNumberParameter_policyWithDefaultNumber_shouldReturnTrue() {
         Policy amyPolicy = new Policy(new Company(VALID_COMPANY_AMY), new PolicyNumber(PolicyNumber.DEFAULT_VALUE),
                 new PolicyDate(VALID_POLICY_ISSUE_DATE_AMY), new PolicyDate(VALID_POLICY_EXPIRY_DATE_AMY));
         assertEquals(amyPolicy.hasDefaultNumberParameter(), true);
     }
 
     @Test
-    public void policyDoesNotHaveDefaultNumberParameter() {
+    public void policyDoesNotHaveDefaultNumberParameter_policyWithNonDefaultNumber_shouldReturnFalse() {
         Policy amyPolicy = new Policy(new Company(VALID_COMPANY_AMY), new PolicyNumber(VALID_POLICY_NO_AMY),
                 new PolicyDate(VALID_POLICY_ISSUE_DATE_AMY), new PolicyDate(VALID_POLICY_EXPIRY_DATE_AMY));
         assertEquals(amyPolicy.hasDefaultCompanyParameter(), false);
     }
 
     @Test
-    public void policyHasDefaultExpiryDateParameter() {
+    public void policyHasDefaultExpiryDateParameter_policyWithDefaultExpiryDate_shouldReturnTrue() {
         Policy amyPolicy = new Policy(new Company(VALID_COMPANY_AMY), new PolicyNumber(VALID_POLICY_NO_AMY),
                 new PolicyDate(VALID_POLICY_ISSUE_DATE_AMY), new PolicyDate(PolicyDate.DEFAULT_VALUE));
         assertEquals(amyPolicy.hasDefaultExpiryDateParameter(), true);
     }
 
     @Test
-    public void policyDoesNotHaveDefaultExpiryDateParameter() {
+    public void policyDoesNotHaveDefaultExpiryDateParameter_policyWithNonDefaultExpiryDate_shouldReturnFalse() {
         Policy amyPolicy = new Policy(new Company(VALID_COMPANY_AMY), new PolicyNumber(VALID_POLICY_NO_AMY),
                 new PolicyDate(VALID_POLICY_ISSUE_DATE_AMY), new PolicyDate(VALID_POLICY_EXPIRY_DATE_AMY));
         assertEquals(amyPolicy.hasDefaultExpiryDateParameter(), false);
     }
 
     @Test
-    public void policyHasDefaultIssueDateParameter() {
+    public void policyHasDefaultIssueDateParameter_policyWithDefaultIssueDate_shouldReturnTrue() {
         Policy amyPolicy = new Policy(new Company(VALID_COMPANY_AMY), new PolicyNumber(VALID_POLICY_NO_AMY),
                 new PolicyDate(PolicyDate.DEFAULT_VALUE), new PolicyDate(VALID_POLICY_EXPIRY_DATE_AMY));
         assertEquals(amyPolicy.hasDefaultIssueDateParameter(), true);
     }
 
     @Test
-    public void policyDoesNotHaveDefaultIssueDateParameter() {
+    public void policyDoesNotHaveDefaultIssueDateParameter_policyWithNonDefaultIssueDate_shouldReturnFalse() {
         Policy amyPolicy = new Policy(new Company(VALID_COMPANY_AMY), new PolicyNumber(VALID_POLICY_NO_AMY),
                 new PolicyDate(VALID_POLICY_ISSUE_DATE_AMY), new PolicyDate(VALID_POLICY_EXPIRY_DATE_AMY));
         assertEquals(amyPolicy.hasDefaultIssueDateParameter(), false);
     }
 
     @Test
-    public void createsDefaultPolicy() {
+    public void createsDefaultPolicy_newDefaultPolicy_shouldEqualExpected() {
         Policy expected = new Policy(new Company(Company.DEFAULT_VALUE),
                 new PolicyNumber(PolicyNumber.DEFAULT_VALUE), new PolicyDate(PolicyDate.DEFAULT_VALUE),
                 new PolicyDate(PolicyDate.DEFAULT_VALUE));
@@ -187,16 +187,17 @@ public class PolicyTest {
     }
 
     @Test
-    public void invalidIssueAndExpiryDate() {
+    public void invalidIssueAndExpiryDate_policyWithInvalidDates_shouldReturnNegativeComparison() {
         Policy invalidAmyPolicy = new Policy(new Company(VALID_COMPANY_AMY), new PolicyNumber(VALID_POLICY_NO_AMY),
                 new PolicyDate(VALID_POLICY_EXPIRY_DATE_AMY), new PolicyDate(VALID_POLICY_ISSUE_DATE_AMY));
         assertTrue(invalidAmyPolicy.compareDates() < 0);
     }
 
     @Test
-    public void validIssueAndExpiryDate() {
+    public void validIssueAndExpiryDate_policyWithValidDates_shouldReturnPositiveComparison() {
         Policy amyPolicy = new Policy(new Company(VALID_COMPANY_AMY), new PolicyNumber(VALID_POLICY_NO_AMY),
                 new PolicyDate(VALID_POLICY_ISSUE_DATE_AMY), new PolicyDate(VALID_POLICY_EXPIRY_DATE_AMY));
         assertTrue(amyPolicy.compareDates() > 0);
     }
+
 }
