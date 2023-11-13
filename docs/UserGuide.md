@@ -51,12 +51,12 @@ Throughout this user guide, you may observe coloured boxes that provide useful i
 indicating the type of information present.
 
 <box type="tip" seamless>
-**Note:**<br>
-Notes empower you to make full use of Tutorium.
+Note:<br>
+- Notes empower you to make full use of Tutorium.
 </box>
 
 <box type="info" seamless>
-**Info:**<br>
+Info:<br>
 - Additional information for your better understandings.
 </box>
 
