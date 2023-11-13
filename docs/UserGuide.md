@@ -18,7 +18,7 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 - [Using this guide](#using-this-guide)
 - [Useful Notations and Glossary](#useful-notations-and-glossary)
 - [Quick Start](#quick-start)
-- [Navigating the GUI](#navigating-the-graphical-user-interface--gui-)
+- [Navigating the GUI](#navigating-the-gui)
 - [Features](#features)
   - [General Commands](#general-commands)
       - [Viewing Help](#viewing-help--help): `help`
@@ -69,7 +69,7 @@ The following glossary table provides clarification on commonly-used terms as we
 |      Symbol      | Meaning                                                                                                                                                                                                                                             |
 |:----------------:|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |       GUI        | GUI stands for Graphical User Interface and it represents the visual display of HouR that users can see when the application is run.                                                                                                                |
-|  GUI component   | A subsection of the GUI. For more information on specific GUI components, refer to this [section](#navigating-the-graphical-user-interface--gui-).                                                                                                  |
+|  GUI component   | A subsection of the GUI. For more information on specific GUI components, refer to this [section](#navigating-the-gui).                                                                                                                             |
 |       CLI        | CLI stands for Command Line Interface and it represents a text-based user interface to interact with the application.                                                                                                                               |
 |     Command      | An input from the user that tells HouR to perform an action. View HouR's [command summary](#command-summary).                                                                                                                                       |
 |    Parameter     | Parameters are like fields in a form you are required to fill up. They are information needed to be passed together with the command so that it can be executed. More information regarding parameters can be found [here](#parameter-information). |
@@ -144,9 +144,9 @@ Performing these instructions may result in non-deterministic behaviour of data 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Navigating the Graphical User Interface (GUI)
+## Navigating the GUI
 
-HouR comes with a GUI to allow for nice visual feedback for our users. Here is a quick run-through of the different sections of our GUI, as well as some notes regarding the use of the GUI.
+HouR comes with a Graphical User Interface (GUI) to allow for nice visual feedback for our users. Here is a quick run-through of the different sections of our GUI, as well as some notes regarding the use of the GUI.
 
 ### Quick Orientation
 
@@ -323,7 +323,7 @@ Format: `list`
 
 ![list success](images/ug-pics/list.png)
 
-### Finding employees: `find`
+### Finding employees : `find`
 
 Finds employees whose name, position, department, phone number, email, or ID contain any of the given keywords.
 
