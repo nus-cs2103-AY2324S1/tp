@@ -122,6 +122,8 @@ It will open a new help window, that shows all the commands in linktree.
 
 3. Refer to the [features](#features) section for details of each command.
 
+<div style="page-break-after: always;"></div>
+
 
 ### Understanding the GUI
 
@@ -239,6 +241,8 @@ Then type `delete 3` to delete that entry.
 * You cannot delete a developer who is a **team leader** for any of the teams. To delete that developer, you will have to change the team leader using `editTeamLeader` command. And then you can remove that developer from the addressbook.
  ![DeleteTeamLeader](images/UG_images/DeleteTeamLeader.png)
 </div>
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-danger">
 
@@ -489,8 +493,8 @@ Click [here](#table-of-contents) to go back to contents.
 - For example, type `findteam Alpha` to find all the teams with keyword **Alpha**.
 - In the following example, you can see that the matching results are **Team Alpha** and **Alpha Squad**.
   ![FindTeamCommand](images/UG_images/FindTeamCommnd.png)
-- You can also use multiple keywords, for example type `findteam Bravo Charlie` which shows the following teams 
-**Bravo Team**, **Charlie Crew** and **Delta Bravo Charlie Team**.
+- You can also use multiple keywords, for example type `findteam Bravo Charlie` which will show the all the teams 
+with keywords Bravo or Charlie.
 
 
 <div markdown="block" class="alert alert-primary">
@@ -784,7 +788,7 @@ Click [here](#table-of-contents) to go back to contents.
 | `deletedev`        | Format: `deletedev tn/[TeamName] n/[Developer Name]`<br/>Example: `deletedev tn/Team Alpha n/Roy Balakrishnan`                                                             |
 | `editTeamName`     | Format: `editTeamName tn/[Original Team Name] tn/[New Team Name]`<br/>Example: `editTeamName tn/Alpha Team tn/Beta Team`                                                   |
 | `editTeamLeader`   | Format: `editTeamLeader tn/[TeamName] tl/[TeamLeader]`<br/>Example: `editTeamLeader tn/Alpha Team tl/Bob`                                                                  |
-| `findteam`         | Format: `findteam [KEYWORD]`<br/> Example: `findteam Alpha`                                                                                                                |
+| `findteam`         | Format: `findteam [KEYWORD]...`<br/> Example: `findteam Alpha`                                                                                                                |
 | `listt`            | Format: `listt`<br/>Example: `listt`                                                                                                                                       |
 | `tree`             | Format: `tree`<br/>Example: `tree`                                                                                                                                         |
 | `help` or Press F1 | Format: `help`<br/>Example: `help`                                                                                                                                         |
@@ -820,7 +824,7 @@ Click [here](#table-of-contents) to go back to contents.
 | .jar        | Java Archive - A file format used to package Java class files, associated metadata, and resources into a single archive file. It is a common format for distributing Java applications or libraries. |
 | Addressbook | A file that stores the list of developers in the application.                                                                                                                                        |
 | Teambook    | A file that stores the list of teams in the application.                                                                                                                                             |
-| Prefix      | A keyword used before certain elements in a command to specify its type or category.                                                                                                                 |                                     
+| Prefix      | A keyword used before certain elements in a command to specify its type or category.                                                                                                                 |                               
 | Tag         | A label or keyword assigned to developers for categorization and easy identification.                                                                                                                |
 | Tree        | A visual representation of the top-down project's structure, displaying teams and developers.                                                                                                        |
 | Index       | A numerical identifier assigned to developers or teams for reference.                                                                                                                                |             
