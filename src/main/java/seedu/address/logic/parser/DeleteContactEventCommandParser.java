@@ -1,7 +1,9 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INTEGER_OVERFLOW;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_START_DATE_TIME;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INDEX_TOO_LARGE;
 import static seedu.address.model.event.EventPeriod.DATE_TIME_STRING_FORMATTER;
 
 import java.time.LocalDateTime;
@@ -29,8 +31,12 @@ public class DeleteContactEventCommandParser implements Parser<DeleteContactEven
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    DeleteContactEventCommand.MESSAGE_USAGE), pe);
+            if (pe.getMessage().equals(MESSAGE_INDEX_TOO_LARGE)) {
+                throw new ParseException(MESSAGE_INTEGER_OVERFLOW);
+            } else {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteContactEventCommand.MESSAGE_USAGE), pe);
+            }
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_EVENT_START_DATE_TIME)) {
@@ -39,11 +45,15 @@ public class DeleteContactEventCommandParser implements Parser<DeleteContactEven
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EVENT_START_DATE_TIME);
-
-        LocalDateTime eventTime = LocalDateTime.parse(
-                argMultimap.getValue(PREFIX_EVENT_START_DATE_TIME).get(),
-                DATE_TIME_STRING_FORMATTER);
-        return new DeleteContactEventCommand(index, eventTime);
+        try {
+            LocalDateTime eventTime = LocalDateTime.parse(
+                    argMultimap.getValue(PREFIX_EVENT_START_DATE_TIME).get(),
+                    DATE_TIME_STRING_FORMATTER);
+            return new DeleteContactEventCommand(index, eventTime);
+        } catch (Exception pe) {
+            throw new ParseException(String.format(
+                    MESSAGE_INVALID_COMMAND_FORMAT, DeleteContactEventCommand.MESSAGE_USAGE));
+        }
     }
 
     /**

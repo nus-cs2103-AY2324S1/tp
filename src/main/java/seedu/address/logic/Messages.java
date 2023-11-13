@@ -22,6 +22,8 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_INTEGER_OVERFLOW =
+            "Provided index is greater than 2147483647. Please use a smaller integer.";
     public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "Event index is out of bounds!";
     public static final String MESSAGE_DATE_CHANGE_SUCCESSFUL = "Successfully changed!";
     private static final String MESSAGE_EVENT_ADDED_SUCCESSFULLY = "Event added successfully!";

@@ -1,9 +1,11 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INTEGER_OVERFLOW;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_END_DATE_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_START_DATE_TIME;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INDEX_TOO_LARGE;
 
 import java.util.stream.Stream;
 
@@ -33,8 +35,12 @@ public class AddContactEventCommandParser implements Parser<AddContactEventComma
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddContactEventCommand.MESSAGE_USAGE), pe);
+            if (pe.getMessage().equals(MESSAGE_INDEX_TOO_LARGE)) {
+                throw new ParseException(MESSAGE_INTEGER_OVERFLOW);
+            } else {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddContactEventCommand.MESSAGE_USAGE), pe);
+            }
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_EVENT_DESCRIPTION, PREFIX_EVENT_START_DATE_TIME,
