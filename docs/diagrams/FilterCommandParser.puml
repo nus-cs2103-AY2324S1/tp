@@ -2,4 +2,8 @@
 !include style.puml
 skinparam ArrowFontStyle plain
 
+box Logic LOGIC_COLOR_T1
+    Participant ":NetworkBookParser" as nbs LOGIC_COLOR
+
+end box
 @enduml
