@@ -633,7 +633,7 @@ Step 3. The `StatsAvailCommand` will then call relevant methods to obtain the ne
 
 Step 4. A success message with the statistics will then be displayed to the user.
 
-The other commands `stats current` and `stats housing` have a similar execution path, replacing `StatsAvailCommand` with `StatsCurrCommand` and `StatsHousingCommand` respectively.
+The other commands `stats current` and `stats housing` have a similar execution path, replacing `StatsAvailCommand` with `StatsCurrentCommand` and `StatsHousingCommand` respectively.
 
 #### Design considerations:
 
