@@ -16,7 +16,7 @@ class JsonAdaptedMedicalHistory {
     private final String medicalHistory;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code JsonAdaptedMedicalHistory} with the given {@code medicalHistory} value.
      */
     @JsonCreator
     public JsonAdaptedMedicalHistory(String medicalHistory) {
