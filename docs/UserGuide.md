@@ -299,7 +299,7 @@ Parameters:
 | `ADDRESS`        | Address of the fosterer                                                                                                                                                                                                                                                     | `Orchard road, Blk 8, #13-04`                               |
 | `HOUSING_TYPE`   | - Housing type of the fosterer<br/> - Case-sensitive<br/> - Can be HDB / Condo / Landed / nil                                                                                                                                                                               | `HDB`, `Condo`, `Landed`, `nil`                             |
 | `AVAILABILITY`   | - Availability of the fosterer<br/> - Case-sensitive<br/> - Can be Available / NotAvailable / nil                                                                                                                                                                           | `NotAvailable`, `Available`, `nil`                          |
-| `ANIMAL_NAME`    | - If `availability/NotAvailable`: Name of the animal fostered<br/> - If `availability/Available`: nil<br/> - If `availability/nil`: nil                                                                                                                                     | `Fluffball`, `nil`                                          |
+| `ANIMAL_NAME`    | - If `availability/NotAvailable`: Name of the animal fostered / nil<br/> - If `availability/Available`: nil<br/> - If `availability/nil`: nil                                                                                                                               | `Fluffball`, `nil`                                          |
 | `TYPE_OF_ANIMAL` | - Type of animal which the fosterer is currently fostering, or prefer to foster<br/> - Case-sensitive<br/> - If `availability/NotAvailable`: current.Dog / current.Cat / nil<br/> - If `availability/Available`: able.Dog / able.Cat / nil<br/> - If `availability/nil`: nil | `current.Dog`, `current.Cat`, `able.Dog`, `able.Cat`, `nil` |
 | `TAG`            | Tag to be associated with the fosterer                                                                                                                                                                                                                                      | `experienced`, `urgent`                                     |
 
@@ -316,7 +316,7 @@ Parameters:
 
 Valid cases:
 
-| No. | Scenario                                                    | `AVAILABILITY` | `ANIMAL_TYPE`     | `ANIMAL_NAME` |
+| No. | Scenario                                                    | `AVAILABILITY` | `TYPE_OF_ANIMAL`     | `ANIMAL_NAME` |
 |-----|-------------------------------------------------------------|-------------|-------------------|---------------|
 | 1   | Not fostering, insufficient info collected                  | `nil`         | `nil`             | `nil`         |
 | 2   | Not fostering, insufficient info collected                  | `Available`   | `nil`             | `nil`         |
@@ -352,7 +352,7 @@ Examples:
   
 <div style="page-break-after: always;"></div>
 
-In the case where duplicates field descriptions are given, the last one will be chosen:
+In the case where duplicate field descriptions or values for `HOUSING_TYPE`, `AVAILABILITY`, `ANIMAL_NAME` and `TYPE_OF_ANIMAL` are given, the last one will be chosen:
 * `add n/Jerry Tan p/98765412 e/jerry123@example.com a/Baker street, block 5, #27-01 housing/HDB housing/Condo availability/Available availability/NotAvailable animal/Dexter animal/Happy animalType/able.Dog animalType/current.Cat t/Urgent`
   * adds a fosterer named Jerry Tan, who lives in a Condo and is fostering a cat named Happy.
     ![Add](images/screenshots/AddDuplicate.png)
@@ -403,8 +403,11 @@ Alias: `find`
 
 * All fields are searched (including tags).
 
-* Keywords can match as parts of words. e.g. `john` will match `Johnny`.
+* For most fields, keywords can match as parts of words. e.g. `john` will match `Johnny`.
 
+* However, for the `Housing` and `Availability` fields, as well as for tags, keywords must match the entire field. <br>
+  e.g. `available` will not match `NotAvailable`.
+  
 * Keywords can overlap. e.g. `samm my` will match `Sammy`.
 
 * Fosterers must match all keywords (i.e. `AND` search).<br>
@@ -535,18 +538,18 @@ Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [housing/HOU
 
 Parameters:
 
-| Parameter        | About                                                                                                                                                                                                                                                                              | Example                                                     |
-|------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------|
-| `INDEX`     | - The index of a fosterer displayed in the list obtained from a `list`/`find` command<br/> - Index must be a positive integer                                                                                                                                                      | `1`, `2`, `3`                                               |
-| `NAME`           | Updated name of the fosterer                                                                                                                                                                                                                                                       | `Alice Tan`, `Harry Yeo`                                    |
-| `PHONE_NUMBER`   | Updated Phone number of the fosterer                                                                                                                                                                                                                                               | `93456778`, `89067547`                                      |
-| `EMAIL`          | Updated email of the fosterer                                                                                                                                                                                                                                                      | `thomas718@gmail.com`, `kate@yahoo.com.sg`                  |
-| `ADDRESS`        | Updated address of the fosterer                                                                                                                                                                                                                                                    | `Orchard road, Blk 8, #13-04`                               |
-| `HOUSING_TYPE`   | - Updated housing type of the fosterer<br/> - Case-sensitive<br/> - Can be HDB / Condo / Landed / nil                                                                                                                                                                              | `HDB`, `Condo`, `Landed`, `nil`                             |
-| `AVAILABILITY`   | - Updated availability of the fosterer<br/> - Case-sensitive<br/> - Can be Available / NotAvailable / nil                                                                                                                                                                          | `NotAvailable`, `Available`, `nil`                          |
-| `ANIMAL_NAME`    | - If `availability/NotAvailable`: Updated name of animal fostered<br/> - If `availability/Available`: nil<br/> - If `availability/nil`: nil                                                                                                                                        | `Fluffball`, `nil`                                          |
+| Parameter        | About                                                                                                                                                                                                                                                                                | Example                                                     |
+|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------|
+| `INDEX`     | - The index of a fosterer displayed in the list obtained from a `list`/`find` command<br/> - Index must be a positive integer                                                                                                                                                        | `1`, `2`, `3`                                               |
+| `NAME`           | Updated name of the fosterer                                                                                                                                                                                                                                                         | `Alice Tan`, `Harry Yeo`                                    |
+| `PHONE_NUMBER`   | Updated Phone number of the fosterer                                                                                                                                                                                                                                                 | `93456778`, `89067547`                                      |
+| `EMAIL`          | Updated email of the fosterer                                                                                                                                                                                                                                                        | `thomas718@gmail.com`, `kate@yahoo.com.sg`                  |
+| `ADDRESS`        | Updated address of the fosterer                                                                                                                                                                                                                                                      | `Orchard road, Blk 8, #13-04`                               |
+| `HOUSING_TYPE`   | - Updated housing type of the fosterer<br/> - Case-sensitive<br/> - Can be HDB / Condo / Landed / nil                                                                                                                                                                                | `HDB`, `Condo`, `Landed`, `nil`                             |
+| `AVAILABILITY`   | - Updated availability of the fosterer<br/> - Case-sensitive<br/> - Can be Available / NotAvailable / nil                                                                                                                                                                            | `NotAvailable`, `Available`, `nil`                          |
+| `ANIMAL_NAME`    | - If `availability/NotAvailable`: Updated name of animal fostered / nil<br/> - If `availability/Available`: nil<br/> - If `availability/nil`: nil                                                                                                                                    | `Fluffball`, `nil`                                          |
 | `TYPE_OF_ANIMAL` | - Updated type of animal which the fosterer is currently fostering, or prefer to foster<br/> - Case-sensitive<br/> - If `availability/NotAvailable`: current.Dog / current.Cat / nil<br/> - If `availability/Available`: able.Dog / able.Cat / nil<br/> - If `availability/nil`: nil | `current.Dog`, `current.Cat`, `able.Dog`, `able.Cat`, `nil` |
-| `TAG`            | Tag to be associated with the fosterer                                                                                                                                                                                                                                             | `experienced`, `urgent`                                     |
+| `TAG`            | Tag to be associated with the fosterer                                                                                                                                                                                                                                               | `experienced`, `urgent`                                     |
 
 <div markdown="block" class="alert alert-primary">
 
@@ -1014,5 +1017,5 @@ If your changes to the data file makes its **format invalid**, Foster Family wil
 | **View Current Fosterer Statistics**     | `stats current`                                                                                                                                                           | -                                                                                                                                                                       |
 | **View Housing Statistics**              | `stats housing`                                                                                                                                                           | -                                                                                                                                                                       |
 | **Undo**                                 | `undo`                                                                                                                                                                    | -                                                                                                                                                                       |
-| **Reset**                                | `reset`, followed by `reset confirm`                                                                                                                                      | -                                                                                                                                                                       |
+| **Clear all data entries**               | `reset`, followed by `reset confirm`                                                                                                                                      | -                                                                                                                                                                       |
 | **Exit** from application / profile page | `exit`                                                                                                                                                                    | -                                                                                                                                                                       |

@@ -48,8 +48,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the feature "Adding a fosterer through the main window: `add`".
-        * Added documentation for the feature "Adding a fosterer through the profile page: `add`".
+        * Added documentation for the feature `add`, through both the main window and profile page
         * Added documentation for the feature `sort`
         * Added documentation for the feature `undo`, `reset` and `reset confirm`
         * Added technical terms section for better readability
