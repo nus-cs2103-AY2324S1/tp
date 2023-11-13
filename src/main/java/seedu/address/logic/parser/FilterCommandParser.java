@@ -14,7 +14,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.CustomSet;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -33,6 +35,7 @@ import seedu.address.model.name.EmployeeName;
  * Parses input arguments and creates a new FilterCommand object.
  */
 public class FilterCommandParser implements Parser<FilterCommand> {
+    private static final Logger logger = LogsCenter.getLogger(ManageHrParser.class);
 
     /**
      * Parses the given {@code String} argument in the context of the FilterCommand
@@ -75,6 +78,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     }
 
     private Set<EmployeeName> parseNamesForFilter(Collection<String> nameSet) throws ParseException {
+        logger.info("Filter name(s) parsed: " + nameSet.toString());
         assert nameSet != null;
         Collection<String> names = nameSet.size() == 1 && nameSet.contains("")
                 ? Collections.emptySet() : nameSet;
@@ -86,6 +90,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     }
 
     private Set<Phone> parsePhonesForFilter(Collection<String> phoneSet) throws ParseException {
+        logger.info("Filter phone number(s) parsed: " + phoneSet.toString());
         assert phoneSet != null;
         Collection<String> phones = phoneSet.size() == 1 && phoneSet.contains("")
                 ? Collections.emptySet() : phoneSet;
@@ -97,6 +102,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     }
 
     private Set<Email> parseEmailsForFilter(Collection<String> emailSet) throws ParseException {
+        logger.info("Filter email(s) parsed: " + emailSet.toString());
         assert emailSet != null;
         Collection<String> emails = emailSet.size() == 1 && emailSet.contains("")
                 ? Collections.emptySet() : emailSet;
@@ -108,6 +114,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     }
 
     private Set<Address> parseAddressesForFilter(Collection<String> addressSet) throws ParseException {
+        logger.info("Filter address(s) parsed: " + addressSet.toString());
         assert addressSet != null;
         Collection<String> addresses = addressSet.size() == 1 && addressSet.contains("")
                 ? Collections.emptySet() : addressSet;
@@ -119,6 +126,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     }
 
     private Set<Salary> parseSalariesForFilter(Collection<String> salarySet) throws ParseException {
+        logger.info("Filter salary(s) parsed: " + salarySet.toString());
         assert salarySet != null;
         Collection<String> salaries = salarySet.size() == 1 && salarySet.contains("")
                 ? Collections.emptySet() : salarySet;
@@ -130,6 +138,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     }
 
     private Set<Leave> parseLeavesForFilter(Collection<String> leaveSet) throws ParseException {
+        logger.info("Filter leave(s) parsed: " + leaveSet.toString());
         assert leaveSet != null;
         Collection<String> leaves = leaveSet.size() == 1 && leaveSet.contains("")
                 ? Collections.emptySet() : leaveSet;
@@ -141,6 +150,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     }
 
     private Set<Role> parseRolesForFilter(Collection<String> roleSet) throws ParseException {
+        logger.info("Filter role(s) parsed: " + roleSet.toString());
         assert roleSet != null;
         Collection<String> roles = roleSet.size() == 1 && roleSet.contains("")
                 ? Collections.emptySet() : roleSet;
@@ -153,6 +163,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
     private Set<EmployeeName> parseSupervisorsForFilter(Collection<String> supervisors)
             throws ParseException {
+        logger.info("Filter supervisor(s) parsed: " + supervisors.toString());
         assert supervisors != null;
 
         Collection<String> supervisorNameSet = supervisors.size() == 1 && supervisors.contains("")
@@ -163,6 +174,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     }
 
     private Set<DepartmentName> parseDepartmentsForFilter(Collection<String> departments) throws ParseException {
+        logger.info("Filter department(s) parsed: " + departments.toString());
         assert departments != null;
 
         Collection<String> departmentSet = departments.size() == 1 && departments.contains("")

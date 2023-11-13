@@ -21,6 +21,7 @@ import seedu.address.model.employee.ContainsAllPredicate;
  * Keyword matching is case-sensitive.
  */
 public class FilterCommand extends Command {
+    // the filter feature was implemented lightly referencing AB3's find and edit feature's design.
     public static final String COMMAND_WORD = "filter";
     //@@author kenvynKwek
     public static final String MESSAGE_EXAMPLE = COMMAND_WORD + " "
@@ -76,9 +77,7 @@ public class FilterCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("predicate", predicate)
-                .toString();
+        return new ToStringBuilder(this).add("predicate", predicate).toString();
     }
 }
 //@@author
