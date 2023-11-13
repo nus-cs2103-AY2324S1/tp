@@ -20,7 +20,7 @@ Given below are my contributions to the project.
   * What it does: Merges two the information of two students. The new student has the name, email, phone number and student id of the primary student. The tags and attendance records of both students are now owned by the new student. 
   * Justification: Allows the tutor to merge duplicated contacts, so that the there is no case of the tutor recording attendance under the wrong student. 
   * Highlights: The implementation of this feature was tricky in that I had to make sure that there are no duplicated records after merging the two students. 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=authorship&tabAuthor=anthonytamzil&tabRepo=AY2324S1-CS2103T-T09-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22&tabOpen=true&tabType=authorship&tabAuthor=fuyiqiao&tabRepo=AY2324S1-CS2103T-T09-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 * **Contributions to team-based tasks**:
   * Managed issues on the issue tracker
   * Released v1.3
