@@ -349,7 +349,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The filtered list is empty.
 
-  Use case ends
+  Use case ends.
 
 **Use case: UC07 - Filter tags**
 
@@ -364,7 +364,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The filtered list is empty.
 
-  Use case ends
+  Use case ends.
 
 ### Non-functional Requirements
 
