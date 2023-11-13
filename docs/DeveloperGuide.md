@@ -92,9 +92,9 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 
 `GroupTimeContainer` is a helper class that process the data from the `model` in `Calendar` and passes the processed data to `DayCard` which will be then displayed in the `UI`.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/resources/view/MainWindow.fxml).
 
-The `UI` component,
+The `UI` component
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
@@ -139,7 +139,7 @@ How the parsing works:
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
-The `Model` component,
+The `Model` component
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
@@ -153,10 +153,10 @@ The `Model` component,
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
-The `Storage` component,
+The `Storage` component
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`).
 
 With the inclusion of `Group` and `TimeIntervals` in our application, more components had to be saved by our storage.
 
