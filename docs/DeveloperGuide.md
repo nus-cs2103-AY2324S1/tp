@@ -663,10 +663,6 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Effort**
 
-<div markdown="span" class="alert alert-info">
-
-</div>
-
 ### Difficulty Level
 * Medium
 * Reason: Compared to AB3 which has one homogenous entity of Persons, CheckMate deals with 2 heterogenous entities of 
@@ -704,10 +700,6 @@ continue to expand upon to allow maximum creativity of the skeletons provided.
 <div markdown="1">
 
 ## **Appendix: Planned Enhancements**
-
-<div markdown="span" class="alert alert-info">
-
-</div>
 
 ### Universal Undo
 * This is an enhancement to the current undo function, which currently only undoes the most recent delete command.
