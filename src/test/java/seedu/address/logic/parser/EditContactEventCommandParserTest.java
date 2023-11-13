@@ -68,12 +68,17 @@ public class EditContactEventCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1 1 " + PREFIX_EVENT_START_DATE_TIME
-                + INVALID_START_DATE, MESSAGE_NOT_EDITED);
+                + INVALID_START_DATE, MESSAGE_WRONG_TIME);
     }
 
     @Test
     public void parse_invalidTimeEnd_failure2() {
         assertParseFailure(parser, "1 1 " + PREFIX_EVENT_START_DATE_TIME, MESSAGE_WRONG_TIME);
+    }
+
+    @Test
+    public void parse_invalidTimeEnd_failure3() {
+        assertParseFailure(parser, "1 1", MESSAGE_NOT_EDITED);
     }
 
     @Test
