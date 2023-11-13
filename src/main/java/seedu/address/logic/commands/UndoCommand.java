@@ -34,7 +34,7 @@ public class UndoCommand extends Command {
     public static final String INVALID_NATURAL_NUMBER_TO_UNDO = "Please provide a valid number of commands to undo, "
             + "not exceeding the available command history size";
 
-    public static final String NO_HISTORY_EXISTS_FAILURE = "There is no history of un-doable commands to be undone.\n"
+    public static final String NO_HISTORY_EXISTS_FAILURE = "There is no history of undo-able commands to be undone.\n"
             + "Please execute some undo-able commands first.\n"
             + "Undo-able commands include add, clear, delete, edit, log, alog, and clog commands.";
 

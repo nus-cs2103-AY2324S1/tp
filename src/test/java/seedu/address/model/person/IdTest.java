@@ -31,7 +31,9 @@ public class IdTest {
         // valid id
         assertTrue(Id.isValidId("S1234567E"));
         assertTrue(Id.isValidId("-")); // one character
-        assertTrue(Id.isValidId("t0987654f")); // long address
+        assertTrue(Id.isValidId("t0987654f")); // long ID
+        assertTrue(Id.isValidId("S123")); // custom ID 1
+        assertTrue(Id.isValidId("S2-1213")); // custom ID 2
     }
 
     @Test

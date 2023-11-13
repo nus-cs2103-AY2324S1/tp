@@ -27,6 +27,8 @@ public class LoggedPersonListPanel extends UiPart<Region> {
         super(FXML);
         loggedPersonListView.setItems(personList);
         loggedPersonListView.setCellFactory(listView -> new LoggedPersonListViewCell());
+        logger.info("Initialised Logger Tab...");
+
     }
 
     /**

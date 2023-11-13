@@ -12,6 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_FIELD_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEDICAL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.MEDICAL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -29,6 +30,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.EditCommand.COMMAND_WORD;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_EMPTY_MEDICAL_HISTORY_TO_EDIT;
 import static seedu.address.logic.commands.EditCommand.MESSAGE_NOT_EDITED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -45,6 +47,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Id;
+import seedu.address.model.person.MedicalHistory;
 import seedu.address.model.person.Name;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
@@ -203,5 +206,17 @@ public class EditCommandParserTest {
         String validInputWithName = COMMAND_WORD + NAME_DESC_AMY + EMAIL_DESC_AMY;
         EditCommand expectedCommandWithName = new EditCommand(new Name(VALID_NAME_AMY), null, descriptor);
         assertEquals(parser.parse(validInputWithName), expectedCommandWithName);
+    }
+
+    @Test
+    public void parse_invalidMedicalHistory_failure() {
+        //invalid
+        String userInput = COMMAND_WORD + ID_DESC_AMY + INVALID_MEDICAL_DESC;
+
+        assertParseFailure(parser, userInput, MESSAGE_EMPTY_MEDICAL_HISTORY_TO_EDIT);
+
+        //valid and invalid
+        userInput = COMMAND_WORD + ID_DESC_AMY + INVALID_MEDICAL_DESC + MEDICAL_DESC_BOB;
+        assertParseFailure(parser, userInput, MedicalHistory.MESSAGE_CONSTRAINTS);
     }
 }

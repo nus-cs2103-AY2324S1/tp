@@ -72,6 +72,15 @@ public interface Model {
      */
     void addPerson(Person person);
 
+
+    /**
+     * Adds the given person at the specified index.
+     * {@code person} must not already exist in the address book.
+     * @param p
+     * @param index
+     */
+    void addPersonAtIndex(Person p, int index);
+
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.

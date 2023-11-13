@@ -96,6 +96,11 @@ public class AppendLogCommandTest {
         }
 
         @Override
+        public void addPersonAtIndex(Person person, int i) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -290,8 +295,8 @@ public class AppendLogCommandTest {
 
         CommandResult commandResult = appendLogCommand.execute(model);
 
-        assertEquals("Person(s) already in list: Alice Pauline, ID: T7243948H. "
-                + "They were not appended to the log.", commandResult.getFeedbackToUser());
+        assertEquals(String.format(AppendLogCommand.MESSAGE_DUPLICATES, "\n  Alice Pauline, ID: T7243948H"),
+                commandResult.getFeedbackToUser());
 
 
         assertEquals(3, model.getLogBook().getPersonList().size());
@@ -306,24 +311,25 @@ public class AppendLogCommandTest {
 
         Person existingPerson1 = new PersonBuilder(ALICE).build();
         Person existingPerson2 = new PersonBuilder(BENSON).build();
-        Person existingPerson3 = new PersonBuilder(CARL).build();
+        Person nonDuplicatePerson = new PersonBuilder(CARL).build();
 
         model.addPerson(existingPerson1);
         model.addPerson(existingPerson2);
-        model.addPerson(existingPerson3);
 
         AppendLogCommand appendLogCommand = new AppendLogCommand();
 
         CommandResult commandResult = appendLogCommand.execute(model);
 
-        assertEquals("Person(s) already in list: Alice Pauline, ID: T7243948H. Benson Meier, ID: S1234567B. "
-                + "Carl Kurz, ID: S8765432B. They were not appended to the log.", commandResult.getFeedbackToUser());
+        assertEquals(
+                String.format(AppendLogCommand.MESSAGE_DUPLICATES,
+                        "\n  Alice Pauline, ID: T7243948H\n  Benson Meier, ID: S1234567B"),
+                commandResult.getFeedbackToUser());
 
 
         assertEquals(3, model.getLogBook().getPersonList().size());
         assertEquals(existingPerson1, model.getLogBook().getPersonList().get(0));
         assertEquals(existingPerson2, model.getLogBook().getPersonList().get(1));
-        assertEquals(existingPerson3, model.getLogBook().getPersonList().get(2));
+        assertEquals(nonDuplicatePerson, model.getLogBook().getPersonList().get(2));
     }
 
     @Test
