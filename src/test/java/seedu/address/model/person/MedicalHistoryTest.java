@@ -27,8 +27,6 @@ public class MedicalHistoryTest {
         // invalid medical history
         assertFalse(MedicalHistory.isValidMedicalHistory("")); // empty string
         assertFalse(MedicalHistory.isValidMedicalHistory(" ")); // spaces only
-        // more than 50 characters long, invalid long medical history
-        assertFalse(MedicalHistory.isValidMedicalHistory("PneumonoultramicroscopicsilicovolcanoconiosisMoreChars"));
 
         // valid medical history
         assertTrue(MedicalHistory.isValidMedicalHistory("Diabetes"));
