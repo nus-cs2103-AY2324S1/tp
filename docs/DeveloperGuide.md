@@ -449,8 +449,7 @@ the command `unstar 1`
 
 <puml src="diagrams/UnstarSequence.puml" width="550" />
 
-
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
