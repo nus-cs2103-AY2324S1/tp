@@ -178,7 +178,7 @@ How the parsing works:
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <p style="text-align: center;">
-<puml src="diagrams/ModelClassDiagram.puml" width="600" />
+<puml src="diagrams/ModelClassDiagram.puml" />
 </p>
 
 The `Model` component,
@@ -208,7 +208,7 @@ The `Model` component,
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <p style="text-align: center;">
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" />
 </p>
 
 The `Storage` component,
