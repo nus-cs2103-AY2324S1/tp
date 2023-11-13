@@ -159,6 +159,31 @@ Examples:
 * `add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@gmail.com`
 * `add r/256 d/2023-02-01 15:00 to 2023-02-02 23:59 n/Betsy Crowe p/99990000 e/betsycrowe@gmail.com`
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your add command is missing one or more parameters except for a remark or has mutliple parameters which do not follow the parameter format, CheckMate will show the following error:
+"Invalid command format!
+      add: Adds a person to the booking book. Parameters: r/ROOM d/BOOKING PERIOD n/NAME p/PHONE e/EMAIL rk/REMARK
+      Example: add r/1 d/2023-01-01 08:00 to 2023-01-02 12:00 n/John Doe p/98765432 e/johnd@gmail.com rk/Requested extra Queen's size bed"
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your add command has a single parameter that does not match the parameter format, CheckMate will show one of the following errors:
+
+"Room number is an integer between 1 and 500 inclusive."
+
+"Booking periods must be in the format 'YYYY-MM-DD HH:MM to YYYY-MM-DD HH:MM', and the end datetime must be after to the start datetime."
+
+"Names should only contain alphanumeric characters and spaces, should not be blank and should be at max 50 characters in length"
+
+"Phone numbers should only contain numbers, and it should be between 3 and 15 digits in length (inclusive)"
+
+"Emails should be of the format local-part@domain and adhere to the following constraints:
+1. The local-part should only contain at most 50 alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+The domain name must end with a domain label that is supported: 
+  - gmail, yahoo, outlook, hotmail, icloud"
+</div>
+
 ### Listing all bookings : `list`
 
 Shows a list of all bookings in the bookings book.
@@ -190,6 +215,22 @@ The **edit** command makes use of the [Prefix Completion feature](#prefix-comple
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@gmail.com` Edits the phone number and email of the 1st booking to be `91234567` and `johndoe@gmail.com` respectively.
+
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your edit command contains an index which is 0 or a negative integer, CheckMate will show the following error:
+"Index should be a non-zero unsigned integer."
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your edit command contains an index which above the number largest index shown in the Current Booking list, CheckMate will show the following error:
+"The booking index provided is invalid."
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your edit command does not change any details of the target booking, CheckMate will show the following error:
+"No changes made. At least one field to edit must be provided."
+</div>
 
 ### Locating bookings by name or room: `find`
 
@@ -231,6 +272,16 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd booking in the bookingPeriod book.
 * `find Betsy` followed by `delete 1` deletes the 1st booking in the results of the `find` command.
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your delete command contains an index which is 0 or a negative integer, CheckMate will show the following error:
+"Index should be a non-zero unsigned integer."
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your delete command contains an index which above the number largest index shown in the Current Booking list, CheckMate will show the following error:
+"The booking index provided is invalid."
+</div>
+
 ### Undo a deletion : `undo`
 
 Adds the most recently deleted booking back to the system.
@@ -241,7 +292,12 @@ Format: `undo`
 
 * Example image above shows the result of command `undo`
 * If the deleted item was manually added back, then undo was performed, the deleted booking will not be added as it 
-* already exists in CheckMate which compares two bookings using their room number and booking period.
+already exists in CheckMate which compares two bookings using their room number and booking period.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If you input an undo command without previously having deleted a booking, CheckMate will show the following error:
+"No deletions to undo."
+</div>
 
 ### Clearing all entries : `clear`
 
