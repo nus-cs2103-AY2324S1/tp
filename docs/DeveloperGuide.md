@@ -442,22 +442,20 @@ characteristics:
 
 ### Address Book
 
-<<<<<<< HEAD
 1. **Exporting Staff List**
 
     - As a user who manages staff, I want to export the staff list into json format.
     - This will help me share contact information with associates in a file format that can be sent.
-=======
-1. **Importing Staff List**
+
+2. **Importing Staff List**
     - As a user who needs efficiency, I want to import a staff list into the address book.
     - This will help me quickly access contact information for employees and associates.
->>>>>>> 56245e78 (Fix some issues)
 
-2. **Adding and Editing People**
+3. **Adding and Editing People**
     - As a user who manages relationships, I need to add, edit, and remove people from the address book.
     - This allows me to keep the address book up to date and accurate.
 
-3. **Viewing Address Book**
+4. **Viewing Address Book**
     - As a user who relies on contact information, I want to view the entire address book.
     - This provides easy access to contact details for individuals in the address book.
 
