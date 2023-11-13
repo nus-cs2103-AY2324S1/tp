@@ -409,7 +409,7 @@ ep
 
 | Fields | Prefix | Required | Remarks |
 |--------|--------|:--------:|---------|
-| `INDEX` | No prefix | <img width=30px src='assets/svg/ug/required.svg'> | The person at this index in the displayed person list is edited. The index must be a positive integer (i.e. 1, 2, 3, … , 2147483647). |
+| `INDEX` | No prefix | <img width=30px src='assets/svg/ug/required.svg'> | The person at this index in the displayed contact list is edited. The index must be a positive integer (i.e. 1, 2, 3, … , 2147483647). |
 | `NAME` | `n/` | <img width=33px src='assets/svg/ug/not_required.svg'> | Full name of the person. The name should only contain alphanumeric characters and spaces.|
 | `PHONE_NUMBER` | `p/` | <img width=33px src='assets/svg/ug/not_required.svg'> | Phone number of the person. The number should only contain numbers, and it should be at least 3 digits long.|
 | `EMAIL` | `e/` | <img width=33px src='assets/svg/ug/not_required.svg'> | Email of the person. The email should match this format: `<local>@<domain>.<label>`. <br>The `<local>` part should only contain alphanumberic characters and these special characters: `+_.-`. <br>The `<domain>` and `<label>` parts should contain only alphanumberic characters.|
