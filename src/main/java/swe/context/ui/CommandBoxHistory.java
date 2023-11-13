@@ -76,8 +76,11 @@ public class CommandBoxHistory {
             throw new NoSuchElementException();
         }
         commandIndex--;
-        assert commandIndex < commandList.size();
-        return commandList.get(commandIndex);
+        if (commandIndex == commandList.size()) {
+            return "";
+        } else {
+            return commandList.get(commandIndex);
+        }
     }
 
     /**
@@ -85,7 +88,9 @@ public class CommandBoxHistory {
      * @throws NoSuchElementException if there is no current command (the commandList is empty).
      */
     public String current() {
-        assert isValidIndex(commandIndex);
+        if (!isValidIndex(commandIndex)) {
+            throw new NoSuchElementException();
+        }
         if (commandIndex == commandList.size()) {
             return "";
         } else {
