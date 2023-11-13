@@ -137,14 +137,19 @@ Format: `edit INDEX [n/NAME] [i/NRIC] [p/CONTACT NUMBER] [e/EMAIL] [a/ADDRESS] [
 * Edits the client policy details at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * **At least one** of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* ❗️**Note:** 
-  * If you are adding a new policy number, you **must** also add the company, policy issue date and policy expiry date.
-  * In case of already existing policy, individual updates to the policy number, company, policy issue date and policy expiry date are allowed.
-  * To delete an existing policy from a user, you may use any one of the following (using more than one of the below, or using while updating another policy field will still result in the deletion of the policy)
-    * `c/!@#NO_COMPANY!@#` or 
-    * `pi/01-01-1000` or 
-    * `pe/01-01-1000` or 
-    * `pn/NO_POLICY`, as per the 'Format' mentioned above.
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Important Notes about usage:**
+
+* If you are adding a new policy number, you **must** also add the company, policy issue date and policy expiry date.
+* In case of already existing policy, individual updates to the policy number, company, policy issue date and policy expiry date are allowed.
+* To delete an existing policy from a user, you may use any one of the following (using more than one of the below, or using while updating another policy field will still result in the deletion of the policy)
+  * `c/!@#NO_COMPANY!@#` or 
+  * `pi/01-01-1000` or 
+  * `pe/01-01-1000` or 
+  * `pn/NO_POLICY`, as per the 'Format' mentioned above.
+
+</div>
 
 
 Examples:
