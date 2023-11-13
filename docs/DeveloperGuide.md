@@ -1005,7 +1005,6 @@ based on an identifier
 * **Latency**: The time delay between user's action or request and the system's response
 * **PDPA**: Stands for Personal Data Protection Act, it is the legislation related to the protection of personal data and privacy
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
