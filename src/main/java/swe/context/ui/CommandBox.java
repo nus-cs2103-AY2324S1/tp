@@ -1,5 +1,7 @@
 package swe.context.ui;
 
+import java.util.NoSuchElementException;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -77,10 +79,11 @@ public class CommandBox extends UiPart<Region> {
      */
     private void switchToPreviousCommand() {
         assert commandBoxHistory != null;
-        if (!commandBoxHistory.hasPrevious()) {
+        try {
+            this.replaceText(commandBoxHistory.previous());
+        } catch (NoSuchElementException e) {
             return;
         }
-        this.replaceText(commandBoxHistory.previous());
     }
 
     /**
@@ -88,10 +91,11 @@ public class CommandBox extends UiPart<Region> {
      */
     private void switchToNextCommand() {
         assert commandBoxHistory != null;
-        if (!commandBoxHistory.hasNext()) {
+        try {
+            this.replaceText(commandBoxHistory.next());
+        } catch (NoSuchElementException e) {
             return;
         }
-        this.replaceText(commandBoxHistory.next());
     }
 
     /**

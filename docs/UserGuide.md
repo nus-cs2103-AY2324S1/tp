@@ -93,15 +93,21 @@ Should you need to make changes to an existing contact, use the `edit` command a
 **Format:**
 `add n/NAME p/PHONE_NUMBER e/EMAIL [o/NOTE] [t/TAG]... [a/ALTERNATE_CONTACT]...`
 
-<div markdown="span" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 :information_source: **About tags:**
-Duplicate tags are only counted once.
+
+- Duplicate tags are only counted once.
+- Specifying empty tags (`t/` with no value) is not allowed when adding contacts. If you wish to specify no tags, you may simply leave out the `t/` parameter.
 </div>
 
-<div markdown="span" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 :information_source: **About the alternate contact format:**
-The format for `ALTERNATE_CONTACT` is `TYPE: USERNAME`, roughly looking like `SocialMedia: Username`. Ensure to include a space between the colon and the Username.
+
+- The format for `ALTERNATE_CONTACT` is `TYPE: USERNAME`, roughly looking like `SocialMedia: Username`. Ensure to include a space between the colon `:` and the `Username`.
+- Specifying empty alternate contacts (`a/` with no value) is not allowed when adding contacts. If you wish to specify no alternate contacts, you may simply leave out the `a/` parameter.
 </div>
+
+
 
 **Examples:**
 
@@ -132,8 +138,8 @@ Please refer to the [above](#adding-a-contact-add).
 - Each specified parameter will have its new value(s) replace all existing value(s) for that parameter.\
 e.g. `edit 1 n/The Myth` will edit the name of contact #`1` to `The Myth`, without changing any other parameter values for that contact.
     - When editing tags, the new specified tag(s) will similarly replace all existing tag(s).\
-    You can specify no tags via a _single_ `t/` without a value.
-    - Likewise, when editing alternate contacts, you can specify no alternate contacts via a _single_ `a/` without a value.
+    You can specify no tags (i.e. clear all tags) via a _single_ `t/` without a value.
+    - Likewise, when editing alternate contacts, you can specify no alternate contacts (i.e. clear all alternate contacts) via a _single_ `a/` without a value.
 
 **Examples:**
 
@@ -156,8 +162,8 @@ Please refer to the [above](#editing-a-contact-edit).
 
 - You can delete multiple contacts at once by specifying multiple indices separated by spaces.
 
-- Duplicate indices are only counted once.
-
+- Duplicate indices are only counted once.\
+e.g. `delete 1 1` will only delete the contact at index #`1`.
 - Invalid indices will cause abortion of the delete command.
 
 
@@ -226,7 +232,7 @@ Shows contacts with a tag that fully matches the specified tag (case-insensitive
 
 - The keyword can contain spaces.\
   e.g. `filter Close Friend` will match the tag `Close Friend` (and this tag only).
-  e.g. <pre>`filter Close           Friend`</pre> will _not_ match the tag `Close Friend`.
+  e.g. `filter Close⠀⠀⠀⠀⠀⠀⠀⠀Friend` will _not_ match the tag `Close Friend`.
 
 - In summary, `filter` looks for tags which are an exact match, ignoring casing only.
 
@@ -260,6 +266,20 @@ The displayed contact list is always automatically sorted in ascending alphabeti
 ### Automatic saving
 
 Your contacts get automatically saved to the file system after each successful command execution. There is no need to save manually.
+
+### Editing the data file
+
+ConText data are saved automatically as a JSON file `[JAR file location]/data/contacts.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, ConText will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+</div>
+
+---
+## FAQ
+
+**Q**: How do I transfer my data to another Computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ConText home folder.
 
 ---
 

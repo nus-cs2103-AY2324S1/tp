@@ -1,0 +1,29 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Ui UI_COLOR_T1
+participant ":CommandBox" as CommandBox UI_COLOR
+participant ":CommandBoxHistory" as CommandBoxHistory UI_COLOR
+end box
+
+create CommandBox
+[-> CommandBox : handleKeyPress(UP)
+
+CommandBox -> CommandBox :switchToPreviousCommand()
+activate CommandBox
+
+CommandBox -> CommandBoxHistory : previous()
+activate CommandBoxHistory
+CommandBoxHistory --> CommandBox : previousCommand
+deactivate CommandBoxHistory
+
+CommandBox -> CommandBox : replaceText(previousCommand)
+activate CommandBox
+CommandBox --> CommandBox
+deactivate CommandBox
+
+CommandBox --> CommandBox
+deactivate CommandBox
+
+@enduml

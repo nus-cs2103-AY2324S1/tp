@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import swe.context.testutil.TestData;
 
 
 public class EmailTest {
@@ -47,5 +48,27 @@ public class EmailTest {
         assertTrue(Email.isValid("if.you.dream.it_you.can.do.it@example.com")); // long local part
         assertTrue(Email.isValid("e1234567@u.nus.edu")); // more than one period in domain
         assertTrue(Email.isValid("cloud@my-domain.x")); // Short top level domain
+    }
+
+    @Test
+    public void equals() {
+        Email amy = new Email(TestData.Valid.EMAIL_AMY);
+
+        // same values -> return true
+        Email amyCopy = new Email(TestData.Valid.EMAIL_AMY);
+        assertTrue(amy.equals(amyCopy));
+
+        // same objects -> return true
+        assertTrue(amy.equals(amy));
+
+        // different type -> return false
+        assertFalse(amy.equals(1));
+
+        // null -> return false
+        assertFalse(amy.equals(null));
+
+        // different email -> return false
+        Email bob = new Email(TestData.Valid.EMAIL_BOB);
+        assertFalse(amy.equals(bob));
     }
 }

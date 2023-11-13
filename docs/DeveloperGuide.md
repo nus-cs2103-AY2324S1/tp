@@ -2,12 +2,13 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
+
+- Table of Contents
 {:toc}
 
 ---
 
-## **Design**
+## Design
 
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document are in the `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
@@ -70,6 +71,8 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Contact` object residing in the `Model`.
 
+The `CommandBox` part keeps a reference to a `CommandBoxHistory` object, which stores the history of entered commands, allowing for the functionality of navigating to previous commands using the up/down arrow keys within the `CommandBox`.
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2324S1-CS2103-W14-3/tp/tree/master/src/main/java/swe/context/logic/Logic.java)
@@ -127,7 +130,7 @@ Classes used by multiple components are in the `swe.context.commons` package.
 
 ---
 
-## **Implementation**
+## Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
 
@@ -147,7 +150,7 @@ The following activity diagram summarises what happens when a user executes a ne
 
 ### Filter feature
 
-The following sequence diagram shows how the add command works:
+The following sequence diagram shows how the filter command works:
 
 ![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
 
@@ -160,7 +163,7 @@ The contact list is automatically kept in a constantly sorted state by leveragin
 
 The Model obtains an unsorted, unmodifiable list from `Contacts` and wraps it in a `SortedList`. We specify an `AlphabeticalComparator` to define our own alphabetical sorting order, which takes capitalization into account. This facilitates the intended propagation of changes from the nested list to the sorted list.
 
-For operability with the find feature, this sorted list is further wrapped in a `FilteredList` to limit the scope of what the user sees as needed. A dummy filter `Predicate` which allows all contacts to pass is used as the default filter. It is this filtered list that the model stores in a field.
+For operability with the find and filter feature, this sorted list is further wrapped in a `FilteredList` to limit the scope of what the user sees as needed. A dummy filter `Predicate` which allows all contacts to pass is used as the default filter. It is this filtered list that the model stores in a field.
 
 ### Edit feature
 
@@ -174,9 +177,28 @@ The following activity diagram summarises what happens when a user executes an e
 
 ![EditActivityDiagram](images/EditActivityDiagram.png)
 
+
+### Navigating to previous commands
+
+The feature of navigating between command history using the up/down arrow keys, is facilitated by `CommandBoxHistory`. `CommandBox` keeps a reference to a `CommandBoxHistory` object which stores the history of entered commands.
+
+`CommandBoxHistory` stores a list of commands, which behaves externally as if its last element is always the empty string. This is so that the user can enter a new command when at the last position in the command history.
+
+The following sequence diagram summarises what happens when the user presses the up arrow key to navigate to the previous command in history.
+
+![CommandBoxHistorySequenceDiagram](images/CommandBoxHistorySequenceDiagram.png)
+
+The behaviour is very similar when the user presses the down arrow key to navigate to the next command in history, so we omit the corresponding sequence diagram.
+
+The following sequence diagram summarises what happens when the user successfully executes a new command, and this new command is stored in the command history.
+
+![CommandBoxHistoryNewSequenceDiagram](images/CommandBoxHistoryNewSequenceDiagram.png)
+
+The command is only stored in history if the execution of the command (by `CommandExecutor`) is successful. The position in history is also reset to the last position (empty string) using `CommandBoxHistory#resetPointer`.
+
 ---
 
-## **Acknowledgements**
+## Acknowledgements
 
 - Libraries: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 - App icon from <http://www.mcdodesign.com/> by Susumu Yoshida
@@ -184,7 +206,7 @@ The following activity diagram summarises what happens when a user executes an e
 
 ---
 
-## **Appendix: Requirements**
+## Appendix: Requirements
 
 ### Product scope
 
@@ -206,33 +228,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                            | add contacts                                                                         | keep track of my friends and schoolmates                                        |
 | `* * *`  | user                            | delete contacts                                                                      | remove my contact with that person                                              |
 | `* * *`  | user                            | view my contacts                                                                     | know who I have as contacts                                                     |
-| `* * `   | user                            | update contacts                                                                      | make changes to my contact info when they occur                                 |
+| `* * `   | user                            | edit contacts                                                                        | make changes to my contact info when they occur                                 |
 | `* *`    | user                            | search for contacts                                                                  | find a specific contact directly and easily                                     |
-| `* *`    | potential user                  | access an easy-to-follow tutorial                                                    | understand the app's core features                                              |
 | `* *`    | user                            | add tags to contacts                                                                 | classify them based on contact type                                             |
-| `* *`    | user                            | attach images to contacts such as a business card scan                               | store all additional or miscellaneous info about a contact                      |
-| `* *`    | user                            | share a contact with other users or apps                                             | transfer my contact info easily                                                 |
-| `* *`    | user                            | merge duplicate contacts                                                             | my contact list stays clean                                                     |
+| `* *`    | user                            | merge duplicate contacts                                                             | my contact list stays clean                                                        |
 | `* *`    | user                            | sort contacts by certain criteria                                                    | find contacts satisfying a certain criteria easily                              |
-| `* *`    | user of many communication apps | enter info about various platforms that my contacts use                              | keep track of all the various ways I can contact the same person                |
-| `* *`    | user                            | indicate whether a contact is from NUS or not                                        | differentiate between NUS and non-NUS contacts                                  |
-| `* *`    | user                            | enter names in a different format depending on contact type                          | maintain respect based on profession (e.g. prefix a professor's name with Prof) |
-| `* *`    | user                            | see my contacts in different formats depending on their profession                   | easily differentiate them in a familiar way                                     |
+| `* *`    | user                            | save alternate contact info for my contacts                                          | keep track of the various ways I can contact the same person                    |
+| `* *`    | user                            | pin frequent contacts so they appear at the top when I open the app                  | access my most important contacts quickly                                       |
 | `* *`    | user                            | indicate where I met each contact                                                    | keep track of people I have various levels of familiarity with                  |
 | `* *`    | user                            | view contacts by groups or type                                                      | more easily manage related contacts                                             |
-| `* *`    | user                            | indicate where I met each contact                                                    | keep track of people I have various levels of familiarity with                  |
-| `* *`    | new user                        | perform functions to a satisfying degree despite only using simple or basic commands | use the app without a steep learning curve                                      |
-| `* *`    | long-time user                  | identify old and/or rarely-used contacts                                             | hide or delete them to reduce clutter                                           |
 | `* *`    | user                            | export my contacts to an external file                                               | backup my contacts’ information                                                 |
 | `* *`    | user                            | import my contacts from an external file                                             | quickly populate the app with my existing contacts                              |
+| `* *`    | user                            | clear all contacts data                                                              | quickly erase all information stored when I will no longer use the app          |
 | `*`      | user who prefers CLI            | use keyboard shortcuts                                                               | perform tasks more efficiently                                                  |
 | `*`      | user                            | see a different background colour for each contact                                   | differentiate between contacts more easily                                      |
-| `*`      | power user with many contacts   | use some scripting capabilities                                                      | automate tedious actions or achieve the exact results I specify                 |
-| `*`      | busy user                       | use icons to denote certain contact information                                      | identify the information I want at a glance                                     |
-| `*`      | user                            | see a log of past interactions with a contact                                        | know my history with my contacts                                                |
+| `*`      | infrequent user                 | view a "cheatsheet" or help dialog for the text commands                             | remember some basic commands I may have forgotten
 | `*`      | advanced user                   | search/filter by specific parts of contacts (e.g. containing certain words)          | narrow down contacts to exactly what I am looking for                           |
 | `*`      | user who prefers CLI            | switch between previously entered commands in history                                | easily repeat previous commands                                                 |
-| `*`      | infrequent user                 | view a “cheatsheet” or help dialog for the text commands                             | remember some basic commands I may have forgotten                               |
+| `*`      | busy user                       | use icons to denote certain contact information                                      | identify the information I want at a glance                                     |
 
 ### Use cases
 
@@ -242,8 +255,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User request to add a contact
-2.  ConText adds the contact
+1.  User requests to add a contact.
+2.  ConText adds the contact.
 
     Use case ends.
 
@@ -259,26 +272,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to view the list of contacts (UC03)
-2.  User requests to delete a specific contact in the list
-3.  ConText deletes the contact
+1. User requests to view the list of contacts (UC03).
+2. User requests to delete a specific contact in the list.
+3. ConText deletes the contact.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The given index is invalid.
+* 2a. An invalid contact to edit is specified.
 
-    * 2a1. ConText shows an error message.
+  * 2a1. ConText shows an error message.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
 
 **Use case: UC03 - List all contacts**
 
 **MSS**
 
-1. User requests to list contacts
-2. ConText shows a list of contacts
+1. User requests to list contacts.
+2. ConText shows a list of contacts.
 
 **Extensions**
 
@@ -286,7 +299,64 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends
 
-*{More to be added}*
+**Use case: UC04 - Edit a contact**
+
+**MSS**
+
+1. User requests to view the list of contacts (UC03).
+2. User requests to edit a contact.
+3. ConText edits the contact.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. An invalid contact to edit is specified.
+
+  * 2a1. ConText shows an error message.
+
+    Use case resumes at step 2.
+
+* 2b. The given data is incorrect.
+
+  * 2b1. ConText shows an error message.
+
+    Use case resumes at step 2.
+
+**Use case: UC05 - Clear all contacts**
+
+**MSS**
+
+1. User requests to clear all contacts.
+2. ConText clears all contacts.
+
+    Use case ends.
+
+**Use case: UC06 - Find a contact**
+
+**MSS**
+
+1. User requests to find a contact.
+2. ConText displays a list of contacts matching the given data.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The filtered list is empty.
+
+  Use case ends
+
+**Use case: UC07 - Filter tags**
+
+1. User requests to filter the list of contacts by a given tag.
+2. ConText displays a filtered list of contacts based on the given tag.
+
+**Extensions**
+
+* 2a. The filtered list is empty.
+
+  Use case ends
 
 ### Non-functional Requirements
 
@@ -375,7 +445,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-## **Appendix: Instructions for manual testing**
+## Appendix: Instructions for manual testing
 
 //TODO
 
@@ -434,10 +504,52 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-## **Appendix: Effort**
+## Appendix: Effort
 
 //TODO
 
-## **Appendix: Planned enhancements**
+## Appendix: Planned enhancements
 
-1. Add a boolean field to the `DeleteCommand` class to indicate whether the user has entered duplicate indices in the command. If so, display an additional message to remind the user about the duplication.
+1. Currently, error messages displayed in ConText are generic.
+For example, if a user enters a negative index, the error message `Invalid command format` is displayed, even if the command format is technically correct.
+We plan to add more specific error messages for invalid indices (e.g. non-positive, too large, or does not exist in the list), to let the user know that the index itself is invalid, and why.
+
+1. Currently, special characters such as `-` and `/` are not allowed in names, even though they could conceivably be part of a contact's legal name.
+We plan to allow for special characters to be included in a contact's name.
+
+1. Currently, the `find` command only allows for matching of full words.
+For example, the input keyword `John` will not match the name `Johnny` stored in the list.
+This may lead to unintended behaviour for some users. We plan to allow partial matches of contact names for `find`.
+
+1. Currently, duplicate contacts are only detected by contacts having completely identical names, and not by other fields such as email address.
+Although this is meant to remove ambiguity in duplicate detection, it may be counter-intuitive for some users.
+We plan to include additional warning messages for the detection of duplicate contacts.
+We will warn users if they are adding contacts with duplicate information, such as duplicate email address, or names which differ only by whitespace (in the middle).
+The user can then confirm whether they would like the duplicate contact to go through, or whether they would like to make changes to the duplicate contact.
+
+1. Currently, duplicate values for deletion indices, as well as parameters like `t/` and `a/`, get silently merged.
+This is not outright rejected for the convenience of users.
+However, users may have accidentally entered such duplicate values, which may result in the app's behaviour differing from users' expectations.
+In such cases, we plan to display additional warning messages for commands like `add`, `edit`, and `delete`, so that users may check if their specifying of duplicate values is intentional.
+Users may then press enter again to confirm the command's execution, or edit the command.
+
+1. Currently, if no note (i.e. no `o/` parameter) is specified when adding a contact, the note's value defaults to being empty (`""`).
+The UI accounts for empty notes by not taking up an extra line to display the empty note.
+When users do specify a note, they may explicitly specify an empty note (i.e. `o/` with no value).
+This is not outright rejected for the convenience of users, since empty notes are allowed.
+However, users may have forgotten to specify a value for the note, which may result in the app's behaviour differing from users' expectations.
+In such cases, we plan to display an additional warning message for commands like `add`, so that users may check if their specifying of empty notes is intentional.
+
+1. Currently, users are allowed to enter very flexible phone number values.
+The only validation requirement is that the phone number begins with 3 digits.
+This allows users to use the feature as they wish.
+For example, although the standard intended usage is for users to enter just the digits of a phone number (e.g. `98765432`), they are also allowed to enter a value such as `65432109 (office); 98765432 (mobile)`.
+However, this flexibility may result in users accidentally entering invalid phone numbers, such as `9876p/5432`.
+Therefore, if users enter a phone number that does not contain only 3-15 digits, we plan to display an additional warning message for commands like `add` and `edit`, so that users may check if their specifying of such a value is intentional.
+Users may then press enter again to confirm the command's execution, or edit the command.
+The added need to confirm non-standard phone numbers nudges users towards using the alternate contacts feature for additional phone numbers instead.
+
+1. Currently, alternate contacts do not allow spaces in the "type" portion, and do not allow special characters such as `@` in the "username" portion.
+We plan to allow spaces in the "type" portion for added flexibility.
+We also plan to allow special characters in the "username" portion, by allowing username values which match existing phone number/email validation.
+Similarly, we would also allow all phone numbers to optionally start with the special character `+` before the required digits.

@@ -75,6 +75,36 @@ public class FindCommandTest {
     }
 
     @Test
+    public void execute_caseInsensitiveKeyword_contactFound() {
+        String expectedMessage = Messages.contactsListedOverview(1);
+        NameContainsKeywordsPredicate predicate = preparePredicate("aLiCe");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.setContactsFilter(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(TestData.Valid.Contact.ALICE), model.getFilteredContactList());
+    }
+
+    @Test
+    public void execute_partialWordMatch_noContactFound() {
+        String expectedMessage = Messages.contactsListedOverview(0);
+        NameContainsKeywordsPredicate predicate = preparePredicate("Ali");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.setContactsFilter(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredContactList());
+    }
+
+    @Test
+    public void execute_specialCharactersInKeywords_noContactFound() {
+        String expectedMessage = Messages.contactsListedOverview(0);
+        NameContainsKeywordsPredicate predicate = preparePredicate("@lice! #Bob");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.setContactsFilter(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredContactList());
+    }
+
+    @Test
     public void toStringMethod() {
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
         FindCommand findCommand = new FindCommand(predicate);
