@@ -85,6 +85,7 @@ public class ListAttendanceCommand extends ListCommand {
         ArrayList<Person> unmarkedPersons = new ArrayList<>();
         for (Person p : personList) {
             if (!p.getAttendanceRecords().stream().anyMatch(atd -> atd.getWeek().equals(week))) {
+                // Since all persons in personList are unique, p should never be in unmarkedPersons already
                 assert !unmarkedPersons.contains(p);
                 unmarkedPersons.add(p);
             }

@@ -66,6 +66,7 @@ public class DeleteCommand extends Command {
     }
 
     private CommandResult executeDeleteOne(Model model) throws CommandException {
+        assert targetIndex.getOneBased() > 0;
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -86,7 +87,7 @@ public class DeleteCommand extends Command {
 
         List<Person> toDeleteList = model.getFilteredPersonList();
         List<Person> copyDeleteList = new ArrayList<>(toDeleteList);
-        
+
         if (toDeleteList.isEmpty()) {
             String toDeleteListDesc = tag.isPresent()
                     ? String.format("%s Tutorial Group %s", courseCode, tag.get().getTagName()) : courseCode;
