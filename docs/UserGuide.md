@@ -7,7 +7,7 @@
 
 ## Welcome to Class Manager 2023!
 
-To all CS2103/T Teaching Assistants (TAs), 
+To all CS2103/T Teaching Assistants, 
 
 We understand your struggles in managing your students' information. We know it is difficult to keep track of your students' contact information, attendance, class participation, and assignment grades. This is even more challenging when you teach multiple classes while juggling your schoolwork and other commitments.
 
@@ -225,6 +225,7 @@ If your changes to the data file make its format invalid (missing value pairs or
 
 **Warning:**
 Configuring **Class Manager 2023** resets all students' class information (grades, attendance and class participation details), as well as the past states of **Class Manager 2023**. This **cannot** be undone using the `undo` command. It is recommended to configure **Class Manager 2023** before adding students.
+
 </box>
 
 Before you begin using **Class Manager 2023**, it is recommended that you configure the number of tutorials and assignments that your module has. This can be done using the `config` command, which allows **Class Manager 2023** to automatically generate the correct number of class information fields for each student. <br><br>
@@ -463,7 +464,7 @@ Examples:
 
 ### Comment on a student : `comment`
 
-Adds or replaces a comment of an existing student in **Class Manager 2023**.
+Adds or replaces a comment of an existing student in **Class Manager 2023**. The comment of a student appears at the bottom of their contact information card.
 
 Format: `comment s/STUDENT_NUMBER cm/COMMENT`
 
@@ -495,13 +496,13 @@ Possible errors and their corresponding error messages:
 
 ---
 
-### Delete one student : `delete`
+### Delete a student : `delete`
 
 Deletes an existing student in **Class Manager 2023** by specifying the student number.
 
 Format: `delete s/STUDENT_NUMBER`
 
-* The [`STUDENT_NUMBER`](#student-number) must be valid and exist.
+* The [`STUDENT_NUMBER`](#student-number) must be valid and exist in **Class Manager 2023**.
 
 Example:
 * `delete s/A0249112A`
@@ -612,7 +613,7 @@ Format: `tag s/STUDENT_NUMBER [/add] [/delete] t/[TAG]…​`
 
 </box>
 
-<box type="tip" seamlesss>
+<box type="tip" seamless>
 
 **Tip:** You can remove all the student’s tags by typing `t/` without specifying any tags after it.
 
@@ -663,11 +664,11 @@ Format: `present s/STUDENT_NUMBER tut/TUTORIAL_INDEX`
 * The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**`config`**](#configure-class-manager-2023--config) command.
 
 Examples:
-* `present s/A0245234A tut/2`
+* `present s/A0245234A tut/1`
 
-The following image shows a successful execution of the `present s/A0245234A tut/2` command.
+The following image shows a successful execution of the `present s/A0245234A tut/1` command.
 
-<img src="images/present-success.png" alt="result for `present s/A0245234A tut/2" width="700" />
+<img src="images/present-success.png" alt="result for `present s/A0245234A tut/1" width="700" />
 
 <box type="info" seamless>
 
@@ -689,7 +690,7 @@ Format: `absent s/STUDENT_NUMBER tut/TUTORIAL_INDEX`
 * The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**`config`**](#configure-class-manager-2023--config) command.
 
 Examples:
-* `absent s/A0245234A tut/2`
+* `absent s/A0245234A tut/1`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -704,7 +705,7 @@ Format: `present-all tut/TUTORIAL_INDEX`
 * The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**`config`**](#configure-class-manager-2023-config) command.
 
 Examples:
-* `present-all tut/2`
+* `present-all tut/1`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -719,7 +720,7 @@ Format: `absent-all tut/TUTORIAL_INDEX`
 * The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**`config`**](#configure-class-manager-2023-config) command.
 
 Examples:
-* `absent-all tut/2`
+* `absent-all tut/1`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -781,7 +782,7 @@ Example:
 
 * `view s/A0241243A`
 
-<img alt="result for 'view s/A0241243A'" src="images/ViewCommand.png" width="700" >
+<img alt="result for 'view s/A0241243A'" src="images/ViewCommand.png" width="700" />
 
 Possible error and their corresponding message:
 * If [`STUDENT_NUMBER`](#student-number) does not belong to any student in **Class Manager 2023**.
@@ -842,7 +843,7 @@ Possible error and their corresponding message:
 |----------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [**Add a student**](#add-a-student-add)                        | `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com s/A0245234A c/T11 t/friend`  |
 | [**Comment on a student**](#comment-on-a-student-comment)      | `comment s/STUDENT_NUMBER cm/COMMENT` <br> e.g. `comment s/A0249112A cm/This student is very hardworking.`                                                    |
-| [**Delete one student**](#delete-one-student-delete)           | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                                       |
+| [**Delete a student**](#delete-a-student-delete)               | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                                       |
 | [**Delete all students**](#delete-all-students-clear)          | `clear`                                                                                                                                                       |
 | [**Edit a student's details**](#edit-a-student-s-details-edit) | `edit STUDENT_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`<br> e.g.`edit A0245234A n/John Doe p/98761234 e/johnd@example.com` |
 | [**List all students**](#list-all-students-list)               | `list`                                                                                                                                                        |
@@ -852,10 +853,10 @@ Possible error and their corresponding message:
 ## Class information commands
 | Action                                                                                               | Format, Examples                                                                                                         |
 |------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
-| [**Mark a student as present**](#mark-a-student-as-present-present)                                  | `present s/STUDENT_NUMBER tut/TUTORIAL_SESSION` <br> e.g. `present s/A0245234A tut/2`                                    |
-| [**Mark a student as absent**](#mark-a-student-as-absent-absent)                                     | `absent s/STUDENT_NUMBER tut/TUTORIAL_SESSION` <br> e.g. `absent s/A0245234A tut/2`                                      |
-| [**Mark all displayed students as present**](#mark-all-displayed-students-as-present-present-all)    | `present-all tut/TUTORIAL_SESSION` <br> e.g. `present-all tut/2`                                                         |
-| [**Mark all displayed students as absent**](#mark-all-displayed-students-as-absent-absent-all)       | `absent-all tut/TUTORIAL_SESSION` <br> e.g. `absent-all tut/2`                                                           |
+| [**Mark a student as present**](#mark-a-student-as-present-present)                                  | `present s/STUDENT_NUMBER tut/TUTORIAL_SESSION` <br> e.g. `present s/A0245234A tut/1`                                    |
+| [**Mark a student as absent**](#mark-a-student-as-absent-absent)                                     | `absent s/STUDENT_NUMBER tut/TUTORIAL_SESSION` <br> e.g. `absent s/A0245234A tut/1`                                      |
+| [**Mark all displayed students as present**](#mark-all-displayed-students-as-present-present-all)    | `present-all tut/TUTORIAL_SESSION` <br> e.g. `present-all tut/1`                                                         |
+| [**Mark all displayed students as absent**](#mark-all-displayed-students-as-absent-absent-all)       | `absent-all tut/TUTORIAL_SESSION` <br> e.g. `absent-all tut/1`                                                           |
 | [**Record class participation for a student**](#record-class-participation-for-a-student-class-part) | `class-part s/STUDENT_NUMBER tut/TUTORIAL_SESSION part/PARTICIPATION` <br> e.g. `class-part s/A0245234A tut/1 part/true` |
 | [**Set assignment grade for a student**](#set-assignment-grade-for-a-student-grade)                  | `grade s/STUDENT_NUMBER a/ASSIGNMENT_NUMBER g/GRADE` <br> e.g. `grade s/A0245234A a/1 g/100`                             |
 | [**View a student's class information**](#view-a-student-s-class-information-view)                   | `view s/STUDENT_NUMBER` <br> e.g. `view s/A0245234A`                                                                     |
@@ -866,13 +867,13 @@ Possible error and their corresponding message:
 
 # Glossary
 
-* **cd**: Change directory command in terminal/command line. cd takes folder name you want to navigate to as an argument. The full command is cd `your-directory`.
-* **Student Number**: Unique matriculation number of an NUS student. In **Class Manager 2023**, it must begin with the capital letter 'A', followed by 1 or more consecutive digits, and end with a single alphabetical character. Student Numbers must not be blank as well.
-* **Email**: Any valid electronic mail address, such as NUS email address (eXXXXXXX@u.nus.edu).
+* **cd**: Change directory command in command terminal. cd takes folder name you want to navigate to as an argument. The full command is cd `your-directory`.
 * **CLI**: Command Line Interface.
-* **GUI**: Graphical User Interface.
-* **JSON**: JavaScript Object Notation, a lightweight data-interchange format.
-* **JAR**: Java Archive, a package file format used to aggregate many Java class files and associated metadata and resources (text, images, etc.) into one file to distribute application software or libraries on the Java platform.
 * **Class information**: The grades, attendance and class participation details of a student in **Class Manager 2023**.
+* **Email**: An electronic mail address, such as NUS email addresses (eXXXXXXX@u.nus.edu).
+* **GUI**: Graphical User Interface.
+* **JAR**: Java Archive, a package file format used to aggregate many Java class files and associated metadata and resources (text, images, etc.) into one file to distribute application software or libraries on the Java platform.
+* **JSON**: JavaScript Object Notation, a lightweight data-interchange format.
+* **Student Number**: Unique matriculation number of an NUS student. In **Class Manager 2023**, it must begin with the capital letter 'A', followed by 1 or more consecutive digits, and end with a single alphabetical character. Student Numbers must not be blank as well.
 
 [Back to Table of Contents](#table-of-contents)
