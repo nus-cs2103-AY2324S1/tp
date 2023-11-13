@@ -306,7 +306,7 @@ for empty/null inputs in the Person object by checking if the optional field is 
 
 ### Ability to delete persons
 
-This section explains the implementation of the Delete Task feature via the `delete_person` command. The `DeletePersonCommand` causes the specified `Task` identified using the `Index` to be deleted from the Unique Person List in the application. There is one compulsory field which is the Index of the Task to delete.
+This section explains the implementation of the Delete Person feature via the `delete_person` command. The `DeletePersonCommand` causes the specified `Person` identified using the `Index` to be deleted from the UniquePerson List in the application. There is one compulsory field which is the Index of the Person to delete.
 
 Below is the sequence diagram outlining the execution of `DeletePersonCommand`.
 
@@ -348,7 +348,7 @@ The `Name` class is used to represent the name of the person involved in the eve
 
 [Scroll back to Table of Contents](#table-of-contents)
 
-### Ability to assign persons to an event
+### Ability to assign/unassign persons from an event
 
 #### Implementation
 
@@ -368,6 +368,8 @@ i.e the `Name` currently exists in FumbleLog.
 - When editing the event, specifying `n/` with a `Name` will append this new name to the current list rather than replace the previous names. 
 This is to facilitate the user to assign more persons without accidentally deleting the previous persons assigned. 
   - To un-assign a `Person`, the user must manually specify `u/` with the `Name` to un-assign the `Person` from the `Event`.
+  - The `ModelManager` will perform checks on whether the names supplied are valid,
+    i.e the `Name` currently exists in FumbleLog, and that the `Name` is currently assigned to the `Event`.
 
 [Scroll back to Table of Contents](#table-of-contents)
 
@@ -380,7 +382,12 @@ This is to facilitate the user to assign more persons without accidentally delet
   - That is, when a `Group` is assigned to an `Event`, a `Group`object is stored a `Set` of `Group`. 
   - When un-assigned, the corresponding groups are then removed from the `Set`.
 - To make it easier for the users to assign groups, this action is done through the `AddEventCommand` and `EditEventCommand`, with the `g/` prefix.
+  - Users can assign multiple groups to an event by using multiple `g/` identifiers following
+    with the `Group` specified. The `ModelManager` will perform checks on whether the names supplied are valid,
+    i.e the `Group` currently exists in FumbleLog.
 - To un-assign a `Group`, the user must manually specify `ug/` with the `Group` to un-assign it from the `Event`.
+  - The `ModelManager` will perform checks on whether the groups supplied are valid,
+    i.e the `Group` currently exists in FumbleLog, and that the `Group` is currently assigned to the `Event`.
 - With the `Group` name, person(s) with that specific `Group` in their `Group` list is displayed with the `Event`.
 - After a `Group` has been assigned to an `Event`, all `Person` in that `Group` will be displayed with the `Event` on FumbleLog.
 
