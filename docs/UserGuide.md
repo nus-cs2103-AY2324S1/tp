@@ -93,6 +93,12 @@ Should you need to make changes to an existing contact, use the `edit` command a
 **Format:**
 `add n/NAME p/PHONE_NUMBER e/EMAIL [o/NOTE] [t/TAG]... [a/ALTERNATE_CONTACT]...`
 
+<div markdown="span" class="alert alert-info">
+:information_source: **About phone number**
+Phone numbers must contain at least 3 digits. You can add extra information after digits for you to keep track of what the number is for.
+For additional phone numbers, please make use of `ALTERNATE_CONTACT`
+</div>
+
 <div markdown="block" class="alert alert-info">
 :information_source: **About tags:**
 
@@ -102,8 +108,8 @@ Should you need to make changes to an existing contact, use the `edit` command a
 
 <div markdown="block" class="alert alert-info">
 :information_source: **About the alternate contact format:**
-
 - The format for `ALTERNATE_CONTACT` is `TYPE: USERNAME`, roughly looking like `SocialMedia: Username`. Ensure to include a space between the colon `:` and the `Username`.
+- Do note at this moment whitespace is not supported for `TYPE` and `USERNAME`. `USERNAME` only supports alphanumerics and some special characters `.`, `_` and `-`.
 - Specifying empty alternate contacts (`a/` with no value) is not allowed when adding contacts. If you wish to specify no alternate contacts, you may simply leave out the `a/` parameter.
 </div>
 
@@ -111,8 +117,10 @@ Should you need to make changes to an existing contact, use the `edit` command a
 
 **Examples:**
 
-- `add n/John Doe p/98765432 e/john.doe@email.com`
+- `add n/John Doe p/98765432 e/john.doe@email.com` 
+(Adds a contact with the name `John Doe`, phone `98765432` and email `john.doe@email.com`)
 - `add n/John Doe p/98765432 e/john.doe@email.com o/Likes SE. t/NUS t/CS2103 course a/Telegram: JohnDoe`
+(Adds a contact with the name `John Doe`, phone `98765432`, email `john.doe@email.com`, note `Likes SE.`, tags `NUS` and `CS2103 course` and alternate contact `Telegram: JohnDoe`)
 
 ### Editing a contact: `edit`
 
@@ -129,7 +137,7 @@ Contacts are 1-indexed, that is, the first contact has index number 1. Index num
 </div>
 
 <div markdown="span" class="alert alert-info">
-:information_source: **About tags/the alternate contact format:**
+:information_source: **About phone/tags/the alternate contact format:**
 Please refer to the [above](#adding-a-contact-add).
 </div>
 

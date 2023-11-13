@@ -17,6 +17,7 @@ public class PhoneTest {
         assertFalse(Phone.isValid("91")); // Less than 3 digits
         assertFalse(Phone.isValid("phone")); // Does not start with digits
 
+
         // valid phone numbers
         assertTrue(Phone.isValid("911")); // Starts with 3 digits
         assertTrue(Phone.isValid("93121534"));
