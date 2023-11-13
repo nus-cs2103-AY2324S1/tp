@@ -210,11 +210,11 @@ The following sequence diagram shows how the edit command works.
 **Aspect: How find executes:**
 
 * **Alternative 1 (current choice):** Find tutees based on inputs for prefixes n/ and sb/.
-    * Pros: More sophisticated as it can search for subjects rather than only by name.
+    * Pros: More sophisticated as it can search for subjects rather than only for name.
     * Cons: Less user-friendly for beginners as it requires an extra step of inputting prefixes.
 * **Alternative 2:** Find tutees based on their name.
-    * Pros: More user-friendly as the command format would only be `find [input]`.
-    * Cons: Users can not search for tutees by subject.
+    * Pros: More user-friendly as the command format would only be `find [name]`.
+    * Cons: Users cannot search for tutees by subject.
 
 ### Edit feature
 The `editCommand` extends the `Command` class. It allows the user to edit fields of the tutee by specifying the index
@@ -231,11 +231,11 @@ The following activity diagram summarizes what happens when a user executes an e
 **Aspect: How edit executes:**
 
 * **Alternative 1 (current choice):** User specify which fields to edit by their prefixes.
-    * Pros: Easy to implement.
+    * Pros: User can edit the fields that require changes by specifying their prefix.
     * Cons: Command input may be too long and less user-friendly.
 * **Alternative 2:** Users cannot edit tutees that are already added, and can only do delete and re-adding 
-of tutees if changes are necessary.
-    * Pros: Less prone to bugs, and is simpler for developers to implement
+of tutees whenever changes are necessary.
+    * Pros: Less prone to bugs, and is simpler for developers to implement.
     * Cons: Not user-friendly and takes multiple steps for the user.
 
 ### List by day feature
@@ -492,7 +492,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list all tutees.
-2.  System informs user that it shows all tutees.
+2.  System shows all tutees.
 	
     Use case ends.
 
@@ -510,7 +510,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to add a tutee.
-2. System informs user that it has successfully added a tutee.
+2. System adds a tutee.
 
    Use case ends.
 
@@ -545,7 +545,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User views the list of tutees.
 2.  User requests to delete a tutee.
-3.  System informs user that it deleted the tutee.
+3.  System deletes a tutee.
 
     Use case ends.
 
@@ -562,7 +562,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User views the list of tutees.
 2.  User requests to edit a tutee.
-3.  System informs user that it edited the tutee.
+3.  System edits the tutee.
 
     Use case ends.
 
@@ -595,7 +595,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to find a tutee.
-2. System informs user that it found the tutee.
+2. System finds the tutee.
 
 **Extensions**
 
@@ -632,7 +632,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User views the list of tutees.
 2.  User requests mark the specific tutee as paid.
-3.  System informs user that it marked the tutee as paid.
+3.  System marks the tutee as paid.
 
     Use case ends.
 
@@ -649,7 +649,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User views the list of tutees.
 2.  User requests mark all the tutees in the current list as not paid.
-3.  System informs user that it marked all the tutees in the list as not paid.
+3.  System marks all the tutee in the list as not paid.
 
     Use case ends.
     <br>
@@ -695,7 +695,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User requests to find free time
-2. System informs user that it showed the list of available free time
+2. System shows the list of available free time
 
 **Extensions**
 - 2a. The user does not have any free slots available.
@@ -708,7 +708,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests for monthly revenue.
-2. System informs user that it showed monthly revenue figure.
+2. User receives monthly revenue figure.
 
    Use case ends.
    <br>
