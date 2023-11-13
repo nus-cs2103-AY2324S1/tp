@@ -93,15 +93,21 @@ Should you need to make changes to an existing contact, use the `edit` command a
 **Format:**
 `add n/NAME p/PHONE_NUMBER e/EMAIL [o/NOTE] [t/TAG]... [a/ALTERNATE_CONTACT]...`
 
-<div markdown="span" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 :information_source: **About tags:**
-Duplicate tags are only counted once.
+
+- Duplicate tags are only counted once.
+- Specifying empty tags (`t/` with no value) is not allowed when adding contacts. If you wish to specify no tags, you may simply leave out the `t/` parameter.
 </div>
 
-<div markdown="span" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 :information_source: **About the alternate contact format:**
-The format for `ALTERNATE_CONTACT` is `TYPE: USERNAME`, roughly looking like `SocialMedia: Username`. Ensure to include a space between the colon and the Username.
+
+- The format for `ALTERNATE_CONTACT` is `TYPE: USERNAME`, roughly looking like `SocialMedia: Username`. Ensure to include a space between the colon `:` and the `Username`.
+- Specifying empty alternate contacts (`a/` with no value) is not allowed when adding contacts. If you wish to specify no alternate contacts, you may simply leave out the `a/` parameter.
 </div>
+
+
 
 **Examples:**
 
@@ -132,8 +138,8 @@ Please refer to the [above](#adding-a-contact-add).
 - Each specified parameter will have its new value(s) replace all existing value(s) for that parameter.\
 e.g. `edit 1 n/The Myth` will edit the name of contact #`1` to `The Myth`, without changing any other parameter values for that contact.
     - When editing tags, the new specified tag(s) will similarly replace all existing tag(s).\
-    You can specify no tags via a _single_ `t/` without a value.
-    - Likewise, when editing alternate contacts, you can specify no alternate contacts via a _single_ `a/` without a value.
+    You can specify no tags (i.e. clear all tags) via a _single_ `t/` without a value.
+    - Likewise, when editing alternate contacts, you can specify no alternate contacts (i.e. clear all alternate contacts) via a _single_ `a/` without a value.
 
 **Examples:**
 
