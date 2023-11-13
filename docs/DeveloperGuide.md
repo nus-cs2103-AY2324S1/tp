@@ -416,6 +416,8 @@ or address is invalid (> 200 characters long)
   * 4a1. WellNUS shows an error message.
     * Use case resumes from step 3.
 
+<div style="page-break-after: always;"></div>
+
 #### 6.3.5 #UC05: Tag student to risk level
 
 **MSS**
@@ -460,6 +462,7 @@ or address is invalid (> 200 characters long)
     * 4b1. WellNUS shows an error message.
         * Use case resumes from step 3.
 
+<div style="page-break-after: always;"></div>
 
 #### 6.3.7 #UC07: Schedule an appointment
 
@@ -503,6 +506,8 @@ or address is invalid (> 200 characters long)
 
     Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 #### 6.3.9 #UC09: Cancel an existing appointment
 
 **MSS**
@@ -544,6 +549,8 @@ or address is invalid (> 200 characters long)
 
     Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 **Extensions**
 
 * 3a. User does not see any appointments as there are no appointments scheduled on that day
@@ -578,7 +585,7 @@ or address is invalid (> 200 characters long)
 * **GUI**: Graphical User Interface.
 * **Risk Level**: Students can be classified as high, medium, or low-risk level determined by the counsellor.
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 7. Appendix: Instructions for manual testing
 
@@ -772,6 +779,7 @@ Resets the storage, deleting **all** Appointments and Students.
 
 Format: `clear`
 
+<div style="page-break-after: always;"></div>
 
 ## 8. Appendix: Effort
 
