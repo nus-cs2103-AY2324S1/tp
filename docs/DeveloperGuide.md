@@ -344,30 +344,39 @@ Step 3. LinkTree provides a feedback based on whether the operation was successf
 
 <br>
 
-###  **Find a developer**
+### "Find by Keywords"
 
-The add developer feature is facilitated by the AddCommand. It extends `Command` class.
-
-The operations are exposed in the `Model` interface as `Model#addTeam()`.
+#### Introduction
+The `FindCommand` class, enables keyword-based searches for individuals. This intuitive command extends `Command` and utilizes `NameContainsKeywordsPredicate`.
 
 #### Usage
-Given below is an example usage scenario and how the function behaves at each step.
+- **Syntax**: `find KEYWORD [MORE_KEYWORDS]...`
+- **Example**: `find Alice Bob`
+  - Searches for entries containing 'Alice', 'Bob', or both.
 
-Step 1. The user launches the application and uses the `newteam` command and specifies a `teamname` and `teamLeader` name.
+#### Implementation Overview
 
+- **Execution**: `FindCommand.execute` filters entries using the provided keywords and returns a `CommandResult` with the count of matches.
+- **Filtering**: Uses `NameContainsKeywordsPredicate` to identify matching entries based on names or descriptions.
 
+#### Design and Functionality
 
-Step 2. The user executes the `newteam` command `newteam tn/Team1 tl/John` to create a new team `Team1` with `John` set as team leader.
+- **Flexibility**: Supports partial keyword matching for broader search results, accommodating memory gaps or partial information.
+- **User Experience**: Case-insensitive search enhances usability.
+- **Error Handling**: Provides clear feedback for invalid inputs or no keyword scenarios.
 
+#### Model Integration
+- Leverages `ModelManager` to update and retrieve filtered lists, crucial for the command's functionality.
 
+#### Considerations
 
-Step 3. LinkTree provides a feedback based on whether the operation was successful or not.
+- **Search Methodology**:
+  - **Partial Keyword Matching**: Default choice for its user-friendly approach and broader match potential.
 
-
+#### Conclusion
+The `FindCommand`'s user-centric design ensures an efficient and friendly search experience, demonstrating careful consideration of user needs and practical functionality.
 
 <box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#addTeam()`, so the `team` will not be saved to `TeamBook`.
 
 </box>
 
