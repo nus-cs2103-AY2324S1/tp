@@ -102,7 +102,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel` etc. Some parts are made up of even smaller parts. All of these parts, including the `MainWindow`, are subclasses of the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI. 
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel` etc. Some parts are made up of even smaller parts. All of these parts, including the `MainWindow`, are subclasses of the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 Some parts (`PersonListPanel`, `TransactionListPanel`, `PersonCard`, `CommandBox`, `ResultDisplay`, `HelpWindow`) inherit from `UiPartFocusable` (a subclass of `UiPart`) which enables the to be focused on. This is used for the keyboard navigation feature as `MainWindow` keeps track of the currently focused part and can switch focus to another part when certain keyboard shortcuts are pressed.
 
@@ -262,7 +262,7 @@ The overall flow of the `editPerson` command is as follows:
 2. The parsers check for the presence of the mandatory index field as well as the validity of all provided fields. Errors are raised if any of the fields are invalid.
 3. Upon successful parsing, the `EditPersonCommand` is created with the index of the person to be edited and the details to be edited expressed as an `PersonDescriptor` object.
 4. The `EditPersonCommand` is executed by the `LogicManager`, which attempts to edit the person in the model through `Model::setPerson(personToEdit, editedPerson)`. Errors are raised if the index exceeds the number of persons currently displayed in `Model::getFilteredPersonList()` or if the edited person already exists in the model (duplicate name).
-5. Upon successful execution, a `CommandResult` object is returned which contains the success message to be displayed to the user. 
+5. Upon successful execution, a `CommandResult` object is returned which contains the success message to be displayed to the user.
 6. Note that the displayed list of persons will be updated to show all persons in the model after the edit through `Model::updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)`.
 
 #### Deleting a Person
@@ -337,35 +337,121 @@ The overall flow of the `sortPerson` command is as follows:
 
 ### Transaction-related Features
 
+#### General Implementation Details
+
+The class diagram for transactions is represented below:
+
+![Transaction Class Diagram](images/TransactionClassDiagram.png)
+
+Transactions are immutable. Hence, editing a transaction invloves removing the original transaction and adding the edited transaction.
+
+The activity diagram below descibes the validation steps taken when adding a `Transaction` to the `UniqueTransactionList` to ensure the validity of the data stored:
+
+![Transaction List Activity Diagram](images/TransactionListActivityDiagram.png)
+
 #### Adding Transactions
 
-##### Settling Balances
+In general, transactions are added using the `addTransaction` command.
+
+Users key in the description of the transaction, the payee, the cost, and a list of payers and weights. Additionally, users may key in an optional timestamp.
+
+The activity diagram is as follows:
+
+![addTransaction Activity Diagram](images/AddTransactionActivityDiagram.png)
+
+The sequence diagram is as follows:
+
+![addTransaction Sequence Diagram](images/AddTransactionSequenceDiagram.png)
+
+#### Settling Balances
+
+The app also provides a way to add a special transaction that settles balances, using the command word `settlePerson`.
+
+Users key in the index of the person with whom they want to settle their balance, and an optional timestamp.
+
+The amount of the settled balance would be equal to the negative of the sum of all transactions with that person before or at the timestamp.
+
+The activity diagram is as follows:
+
+![settlePerson Activity Diagram](images/settlePersonActivityDiagram.png)
+
+The sequence diagram is as follows:
+
+![settlePerson Sequence Diagram](images/settlePersonSequenceDiagram.png)
 
 #### Editing Transactions
 
-Editing transactions mechanism is facilitated by `EditTransactionCommand`. It extends `Command` with the ability to edit a transaction.
+Two commands are responsible for editing transactions, namely `editTransaction` and `updatePortion`.
 
-It consists of the following classes:
+##### Editing description, payee, amount or timestamp: `editTransaction`
 
-* `EditTransactionCommand`— Represents a command to edit a transaction.
-* `EditTransactionCommandParser`— Parses user input into a `EditTransactionCommand`.
-* `EditTransactionDescriptor`— Stores the details to edit the transaction with. Each non-empty field value will replace the corresponding field value of the transaction.
+Users key in the index of the transaction they want to edit, along with the optional fields for description, payee, amount and/or timestamp.
 
-![EditTransaction Command Diagram](images/EditTransactionCommandDiagram.png)
+At least one of these fields has to be edited.
 
-**Note**: The above class diagram is to be updated to reflect the new implementation, with the addition of `UpdateExpenseCommand`.
+The activity diagram is as follows:
 
-Upon execution, `EditTransactionCommand` will retrieve the transaction to be edited from `filteredTransactionList` from `Model`, create a copy of the `Transaction` object with the new details, then replace the old `Transaction` object with the new one in `filteredTransactionList`.
+![editTransaction Activity Diagram](images/editTransactionActivityDiagram.png)
 
-We chose this method of execution instead of directly editing the `Transaction` object in `filteredTransactionList` because `Model` re-renders the UI only when `filteredTransactionList` is updated. If we were to edit the `Transaction` object directly, `Model` would not be able to detect the change and re-render the UI.
+The sequence diagram is as follows:
 
-##### Updating Portions
+![editTransaction Sequence Diagram](images/editTransactionSequenceDiagram.png)
+
+##### Updating weights and payers: `updatePortion`
+
+Users key in the index of the transaction they want to edit, the payer and a weight.
+
+Given that the stored weights are not displayed to users, the weight entered is as a proportion of the total amount.
+
+The activity diagram is as follows:
+
+![updatePortion Activity Diagram](images/updatePortionActivityDiagram.png)
+
+The sequence diagram is as follows:
+
+![updatePortion Sequence Diagram](images/updatePortionSequenceDiagram.png)
 
 #### Deleting Transactions
 
+Users key in the index of the transaction they want to delete.
+
+The activity diagram is as follows:
+
+![deleteTransaction Activity Diagram](images/deleteTransactionActivityDiagram.png)
+
+The sequence diagram is as follows:
+
+![deleteTransaction Sequence Diagram](images/deleteTransactionSequenceDiagram.png)
+
 #### Duplicating Transactions
 
+Users key in the index of the transaction they want to duplicate, along with the optional fields for description, payee, amount and/or timestamp.
+
+This feature is made to support recurring shared transactions, such as rental.
+
+If no timestamp is keyed in, the current system time will be used. For other fields, the default values are that of the transaction being duplicated.
+
+The activity diagram is as follows:
+
+![editTransaction Activity Diagram](images/editTransactionActivityDiagram.png)
+
+The sequence diagram is as follows:
+
+![editTransaction Sequence Diagram](images/editTransactionSequenceDiagram.png)
+
 #### Filtering Transactions
+
+Transactions displayed are filtered based on keywords in the description, or by the people involved, using the `listTransaction` command.
+
+Users key in a list of keywords and names. If none are provided, all transactions are displayed.
+
+The activity diagram is as follows:
+
+![listTransaction Activity Diagram](images/listTransactionActivityDiagram.png)
+
+The sequence diagram is as follows:
+
+![listTransaction Sequence Diagram](images/listTransactionSequenceDiagram.png)
 
 ### Other Features
 
@@ -395,12 +481,12 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 ##### Implementation Considerations
 
-All existing commands are stored in a hashset. Newly created shorthands are stored in a hashmap. 
+All existing commands are stored in a hashset. Newly created shorthands are stored in a hashmap.
 Upon executing a new command, the parser looks up the command word in the existing commands hashset first.
 If the command word does not exist within the hashset, the parser then looks up the command word in the shorthands hashmap.
 
 The shorthand allows each original command to have up to one and only one shorthand.
-This is to prevent ambiguity when the user enters a shorthand that is used by multiple original commands, 
+This is to prevent ambiguity when the user enters a shorthand that is used by multiple original commands,
 as well as confusion when an original command could have multiple shorthands.
 
 #### Clearing App Data
@@ -412,7 +498,7 @@ This includes all persons and transactions in the `spendnsplitbook.json` file,
 as well as all shorthands in the `preferences.json` file.
 
 This command is irreversible, and should be used with caution. This command is introduced for new users to be able to quickly
-clear the sample data and start using the app with their own data. 
+clear the sample data and start using the app with their own data.
 Should the user ever wish to clear the data and start afresh again in the future, they can also use this command.
 
 The sequence diagram below illustrates the interactions within the `Logic` component and `Model` component:
@@ -517,23 +603,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use Case: UC1 - Listing all Persons**
-
-**MSS**
-
-1. User requests to view all contacts in the contact list.
-2. Spend n Split shows a list of contacts.
-
-Use case ends.
-
-Extensions:
-* 1a. The user can include a flag to sort the list by name.
-  * 1a1. Spend n Split shows the list of contacts now sorted by name.
-  * 1a2. Use case resumes at step 4.
-
----
-
-**Use Case: UC2 - Adding a New Person**
+**Use Case: UC1 - Adding a New Person**
 
 **MSS**
 
@@ -543,17 +613,19 @@ Extensions:
 
 Use case ends.
 
-Extensions:
+**Extensions**
 * 1a. Spend n Split detects that the person already exists in the contact list.
-  * 1a1. Spend n Split informs the user that the person already exists in the contact list.
-  * 1a2. Use case resumes at step 1.
+    * 1a1. Spend n Split informs the user that the person already exists in the contact list.
+    * Use case ends.
 * 1b. Spend n Split detects an error in the entered data for the new person.
-  * 1b1. Spend n Split informs the user that the data entered is invalid.
-  * 1b2. Use case resumes at step 1.
+    * 1b1. Spend n Split informs the user that the data entered is invalid and requests for correct data.
+    * 1b2. User enters new data.
+    * Steps 1b1 - 1b2 are repeated until the data entered is correct.
+    * Use case resumes at step 2.
 
 ---
 
-**Use Case: UC3 - Editing a Person**
+**Use Case: UC2 - Editing a Person**
 
 **MSS**
 
@@ -563,17 +635,19 @@ Extensions:
 
 Use case ends.
 
-Extensions:
+**Extensions**
 * 1a. Spend n Split detects that the person does not exist in the contact list.
-  * 1a1. Spend n Split informs the user that the person does not exist in the contact list.
-  * 1a2. Use case resumes at step 1.
+    * 1a1. Spend n Split informs the user that the person does not exist in the contact list.
+    * Use case ends.
 * 1b. Spend n Split detects an error in the entered data for the person.
-  * 1b1. Spend n Split informs the user that the data entered is invalid.
-  * 1b2. Use case resumes at step 1.
+    * 1b1. Spend n Split informs the user that the data entered is invalid and requests for correct data.
+    * 1b2. User enters new data.
+    * Steps 1b1 - 1b2 are repeated until the data entered is correct
+    * Use case resumes at step 2.
 
 ---
 
-**Use Case: UC4 - Deleting a Person**
+**Use Case: UC3 - Deleting a Person**
 
 **MSS**
 
@@ -583,49 +657,25 @@ Extensions:
 
 Use case ends.
 
-Extensions:
+**Extensions**
 * 1a. Spend n Split detects that the person does not exist in the contact list.
-  * 1a1. Spend n Split informs the user that the person does not exist in the contact list.
-  * 1a2. Use case resumes at step 1.
+    * 1a1. Spend n Split informs the user that the person does not exist in the contact list.
+    * Use case ends.
 
 ---
 
-**Use Case: UC5 - Finding a Person**
+**Use Case: UC4 - Listing all Persons**
 
 **MSS**
 
-1. User requests to find a person.
-2. Spend n Split shows the list of persons that match the search query.
+1. User requests to view all contacts in the contact list with optional keywords to filter by names.
+2. Spend n Split shows a list of contacts, filtered by names if optional keywords were included.
 
 Use case ends.
 
-**Use Case: UC# - Clear All Persons**
-
-TODO: Internal note: let's remove / amend this feature, this command is too powerful and destructive.
-
 ---
 
-**Use Case: UC6 - Listing all Transactions with a Person**
-
-Preconditions: Person exists in the contact list.
-
-**MSS**
-
-1. User requests to view the transaction list involving a person.
-2. Spend n Split shows the list of transactions involving that person.
-
-Use case ends.
-
-Extensions:
-* 1a. Person does not exist in the contact list.
-  * 1a1. Spend n Split informs the user that the person does not exist in the contact list.
-  * 1a2. Use case resumes at step 1.
-
----
-
-**Use Case: UC7 - Add a New Transaction**
-
-Preconditions: Person exists in the contact list.
+**Use Case: UC5 - Add a New Transaction**
 
 **MSS**
 
@@ -635,45 +685,60 @@ Preconditions: Person exists in the contact list.
 
 Use case ends.
 
-Extensions:
-* 1a. Person does not exist in the contact list.
-  * 1a1. Spend n Split informs the user that the person does not exist in the contact list.
-  * 1a2. Use case resumes at step 1.
+**Extensions**
+* 1a. At least one person in the transaction does not exist in the contact list.
+    * 1a1. Spend n Split informs the user that there are persons that do not exist in the contact list.
+    * Use case ends
 
-* 1b. Spend n Split detects an error in the request for the new person.
-  * 1b1. Spend n Split informs the user that the request is invalid.
-  * 1b2. Use case resumes at step 1.
+* 1b. Spend n Split detects an error in the entered data for the new transaction.
+    * 1b1. Spend n Split informs the user that the data entered is invalid and requests for the correct data.
+    * 1b2. User enters new data.
+    * Steps 1b1 - 1b2 are repeated until the data entered is correct.
+    * Use case resumes at step 2.
 
 ---
 
-**Use Case: UC8 - Edit a Transaction**
-
-Preconditions: Transaction exists in the transaction list.
+**Use Case: UC6 - Edit a Transaction**
 
 **MSS**
 
-1. User requests to view the transaction list.
-2. Spend n Split shows a list of transaction.
-3. User requests to edit a transaction.
-4. Spend n Split informs the user that the transaction has been edited.
-5. Spend n Split shows the updated transaction list.
+1. User requests to edit a transaction.
+2. Spend n Split informs the user that the transaction has been edited.
+3. Spend n Split shows the updated transaction list.
 
 Use case ends.
 
-Extensions:
-* 4a. Transaction does not exist in the portion list.
-  * 4a1. Spend n Split informs the user that the transaction does not exist in the transaction list.
-  * 4a2. Use case resumes at step 3.
+**Extensions**
+* 1a. Transaction does not exist in the transactions list.
+  * 1a1. Spend n Split informs the user that the transaction does not exist in the transactions list.
+  * Use case ends.
 
-* 4b. Spend n Split detects an error in the request.
-  * 4b1. Spend n Split informs the user that request is invalid.
-  * 4b2. Use case resumes at step 3.
+* 1b. Spend n Split detects an error in the entered data for the transaction.
+  * 1b1. Spend n Split informs the user that the data entered is invalid and requests for correct data.
+  * 1b2. User enters new data.
+  * Steps 1b1 - 1b2 are repeated until the data entered is correct.
+  * Use case resumes at step 2.
 
 ---
 
-**Use Case: UC9 - Settle with a person**
+**Use Case: UC7 - Delete a Transaction**
 
-Preconditions: Person exists in the contact list.
+**MSS**
+
+1. User requests to delete a transaction.
+2. Spend n Split informs the user that the transaction has been deleted.
+3. Spend n Split shows the updated transaction list.
+
+Use case ends.
+
+**Extensions**
+* 1a. Spend n Split detects that the transaction does not exist in the portion list.
+    * 1a1. Spend n Split informs the user that the transaction does not exist in the transaction list.
+    * Use case ends.
+    
+---
+
+**Use Case: UC8 - Settle with a person**
 
 **MSS**
 
@@ -683,35 +748,55 @@ Preconditions: Person exists in the contact list.
 
 Use case ends.
 
-Extensions:
+**Extensions**
 * 1a. Person does not exist in the contact list.
   * 1a1. Spend n Split informs the user that the person does not exist in the contact list.
-  * 1a2. Use case resumes at step 2.
+  * Use case ends.
+
 * 1b. User does not have an outstanding balance with the person.
   * 1b1. Spend n Split informs the user that there is no outstanding balance with that person.
-  * 1b2. Use case resumes at step 3.
+  * Use case ends.
+
 ---
 
-**Use Case: UC10 - Delete a Transaction**
-
-Preconditions: Transaction exists in the transaction list.
+**Use Case: UC9 - Duplicate a Transaction**
 
 **MSS**
 
-1. User requests to view the transaction list.
-2. Spend n Split shows a list of transactions.
-3. User requests to delete a transaction.
-4. Spend n Split informs the user that the transaction has been deleted.
-5. Spend n Split shows the updated transaction list.
+1. User requests to duplicate a transaction.
+2. Spend n Split informs the user that all the new duplicated transaction has been added.
+3. Spend n Split shows the updated list of transactions.
 
 Use case ends.
 
-Extensions:
-* 3a. Transaction does not exist in the portion list.
-    * 3a1. Spend n Split informs the user that the transaction does not exist in the transaction list.
-    * 3a2. Use case resumes at step 2.
+**Extensions**
+* 1a. Spend n Split detects that the transaction does not exist in the portion list.
+    * 1a1. Spend n Split informs the user that the transaction does not exist in the transaction list.
+    * Use case ends.
+
+* 1b. Spend n Split detects an error in the entered data for the duplicated transaction.
+    * 1b1. Spend n Split informs the user that the data entered is invalid and requests for correct data.
+    * 1b2. User enters new data.
+    * Steps 1b1 - 1b2 are repeated until the data entered is correct.
+    * Use case resumes at step 2.
+
+* 1c. Spend n Split detects that the duplicated transaction already exists in the transactions list.
+    * 1c1. Spend n Split informs the user that the duplicated transaction already exists in the transactions list.
+    * Use case ends.
 
 ---
+
+**Use Case: UC10 - Listing Transactions**
+
+**MSS**
+
+1. User requests to view the transaction list with optional keywords and names to filter the list.
+2. Spend n Split shows the list of transactions, which is filtered if optional keywords and / or names were included.
+
+Use case ends.
+
+---
+
 
 ### Non-Functional Requirements
 
@@ -1247,4 +1332,115 @@ $ addTransaction d=Bread n=John c=10 ts=25/06/2023 25:61 n=Self w=1
 The time you entered does not exist. Please use a valid time in HH:MM format between
 00:00 to 23:59.
 Example: addTransaction d=Bread n=John c=10 ts=25/06/2020 09:05 n=Self w=1
+```
+
+### Extending Reserved Names
+
+- **Background**: Currently, we have reserved some values for `Name` as they have
+semantic meaning to our application. Specifically, we have 2 reserved names: `Self`
+representing the user, and `Others` representing unknown parties. `Self` is appropriate
+for commands as it refers to the user typing the command, but it will be labelled as
+`You` when referred to in the UI as it is more user-friendly. `You` is currently not a
+reserved name.
+
+- **Issue**: Users can name a `Person` in the person list `You`, potentially making it confusing whether
+it would refer to a person, or the user.
+
+- **Enhancement**: We plan on making `You` a part of our reserved names to prevent
+this issue, and disallow users from creating `Name` with that value.
+
+### More Descriptive `Person` UI Card
+
+- **Background**: Currently, when displaying a `Person` in the person UI card, person fields
+like `Address`, `Email`, etc are displayed as is, separated by line. However, there
+are no labels for the field names
+
+- **Issue**: This can be potentially confusing as users would not know which line
+represents a certain field. For example, if a user had an `Address` with the value
+of `DaCondo@changi.sg`, it will be displayed in the UI card as is with no label
+to let the user know that it represents an `Address`. Hence, this could be confused
+with an `Email`.
+
+- **Enhancement**: In the person UI card, we plan on including the field names
+on each line so that the user can better associate each of the person's detail with
+the appropriate field to prevent confusion in cases such as the one mentioned above.
+
+### Better Handling of Screen Resolution Changes
+
+**Background**: As our application displays a person list and transaction list
+with many details, we dynamically fix the minimum window size based on the user's
+screen resolution.
+
+**Issue**: It is possible for the user to decrease the screen resolution, making
+the window size of their screen smaller than the initially set minimum window size
+of our application. This makes the application unusable. The current workaround
+would be to quit the application and relaunch again.
+
+**Enhancement**: We plan on adding event listeners and triggers to our application
+to detect changes in screen resolution, and dynamically adjust the minimum window size
+of our application. Hence, users need not restart the application anymore should they
+change the screen resolution.
+
+
+### Allow the deletion of optional `Person` fields
+
+- **Background**: Currently, the only mandatory field in `Person` is `Name`.
+This means that user can choose to exclude fields like `Phone`, `Email`, etc.
+While the `editPerson` command allows users to update fields, or add in optional fields
+that were previously not included for the person. However, there is no means to
+remove an optional field from the person.
+
+- **Issue**: In order for the user to remove an optional field for the person, the
+currently only way to is to delete the person, then add him again without the optional
+field. Subsequently, this affects the transaction history which the user would need
+to update as well. This is a cumbersome process.
+
+- **Enhancement**: We plan on allowing the `editPerson` to take in an empty parameter
+to represent that the user wants to remove an optional field.
+
+Example: Removing the Telegram Handle via `tg` parameter
+
+```
+$ editPerson 1 tg=
+
+Edited Person: Alex Yeoh;
+```
+
+### Better UI Representation for Long Fields
+
+- **Background**: Currently, we have `String` and `BigFraction` fields on our
+`Person`, `Transaction` and `Portion`. Some `String` fields do not necessarily have a maximum
+limit. Similarly, the size of `BigFraction` is only limited by the system memory constraints
+and Java Virtual Machine.
+
+- **Issue**: For `String`, any long input in `Name`, `Description`, etc. will
+be truncated by our UI. Similarly, for `BigFraction` like `Amount` or `Weight`,
+large numbers can also be truncated by our UI. While this issue is primarily
+cosmetic, it can result in important information being cut off. For example,
+some `Transaction` may require long `Description`.
+
+- **Enhancement**: We plan on updating our UI to better handle cases of truncation with
+long fields. Specifically, we want to impose a 3-line limit where long inputs will
+be wrapped for up to 3 lines in our UI lists before being truncated. While this 3
+line limit should handle most ordinary cases, some long inputs may still need more
+than 3 lines. In such cases, we plan on implementing a `displayPerson INDEX` and
+`displayTransaction INDEX` to fully display the details in the command output,
+where long details will be wrapped with no line limit.
+
+
+Example: Person with long name and address (output shown in command output box)
+```
+$ displayPerson 1
+
+Name: Long Name Example Long Name Example Long Name Example Long Name Example Long
+Name Example Long Name Example Long Name Example Long Name Example Long Name Example
+Long Name Example Long Name Example Long Name Example Long Name Example Long Name
+Example Long Name Example Long Name Example Long Name Example Long Name Example Long
+Name Example Long Name Example Long Name Example Long Name Example Long Name Example;
+
+Address: Long Address Example Long Address Example Long Address Example Long Address
+Example Long Address Example Long Address Example Long Address Example Long Address
+Example Long Address Example Long Address Example Long Address Example Long Address
+Example Long Address Example Long Address Example Long Address Example Long Address
+Example Long Address Example Long Address Example Long Address Example Long Address;
 ```
