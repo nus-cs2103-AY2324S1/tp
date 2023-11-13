@@ -218,8 +218,6 @@ is a timing conflict will be reflected in the UI status bar.
     * Pros: User only has to type date once when calling command.
     * Cons: For multi-day `Event`, user has to call the command multiple times for all the relevant days
 
-{more aspects and alternatives to be added}
-
 //@@author Fallman2
 ### Deleting Events
 
@@ -294,6 +292,8 @@ Step 9. For each event in range, the command calls the `Model#deleteEventsInRang
 
 Step 10. All deleted events are displayed in the command result.
 
+<puml src="diagrams/ClearEventsSequenceDiagram.puml" alt="ClearEventsSequenceDiagram"/>
+
 ### Contact Filtering
 
 #### Implementation
@@ -366,11 +366,11 @@ Here's a sequence diagram to summarise the steps above:
 The task list feature is facilitated by 'TaskManager'. It extends a ReadOnlyTaskManager that will be used for 
 saving users' tasks. The data of the TaskManager is contained in a `TaskList` object. Additionally, it implements the following operations:
 
-*`TaskManager#addTask(Task)` -- Adds a task to the current task list and saves it to memory.
-*`TaskManager#deleteTask(int)` -- Delete an existing task from the current task list as indicated by its index and saves the change to memory.
-*`TaskManager#sortTasksBy(String)` -- Sets the comparator by which the internal TaskList is sorted to one of two preset options. 
+* `TaskManager#addTask(Task)` -- Adds a task to the current task list and saves it to memory.
+* `TaskManager#deleteTask(int)` -- Delete an existing task from the current task list as indicated by its index and saves the change to memory.
+* `TaskManager#sortTasksBy(String)` -- Sets the comparator by which the internal TaskList is sorted to one of two preset options. 
 This method only accepts the strings `"Description"` or `"Deadline"` as input and throws an error otherwise.
-*`TaskManager#getTaskList()` -- Returns and exposes the internal `TaskList` as an unmodifiable `ObservableList<Task>` that can be 'observed'.
+* `TaskManager#getTaskList()` -- Returns and exposes the internal `TaskList` as an unmodifiable `ObservableList<Task>` that can be 'observed'.
 
 These operations are exposed in the `Model` interface as `Model#addTask(Task)`, `Model#deleteTask(int)`, `Model#sortTasksBy` and `Model#getTaskList` respectively.
 
