@@ -79,7 +79,8 @@ This guide uses the following features to make it easier for you to navigate aro
 4. Open a command terminal in the folder you put the CCACommander file in, and use the `java -jar ccacommander.jar` command to run the application. A GUI resembling the one shown below should appear in a few seconds. Note how the app contains some sample data.<br>
     <figure>
         <img src="images/Ui.png"
-             alt="Ui">
+             alt="Ui"
+             style="margin-top:10px; max-width: 90%">
         <figcaption>Fig 1: Initial application display</figcaption>
     </figure>
 
@@ -118,7 +119,9 @@ Here are the important components of CCACommander that you will use and interact
 1. File: Exit the program
 2. Theme: Toggle between light and dark themes
     <figure>
-        <img src="images/light_dark_theme.png">
+        <img src="images/light_dark_theme.png"
+             alt="Light and dark themes"
+             style="margin-top:10px; max-width: 90%">
         <figcaption>Fig 3: Light and dark theme</figcaption>
    </figure>
 3. Help: Access our user guide
@@ -204,6 +207,8 @@ Here is an example command where we create a member **named** "Lim Jun Jie" with
 </figure>
 
 <hr class="command-separator">
+
+<div style="page-break-after: always;"></div>
 
 #### Edit a Member: `editMember`
 If you accidentally make a typo while creating your member, do not worry! You can quickly fix it with the `editMember` command.
@@ -465,6 +470,8 @@ Here’s how you use it: `list`
 
 > [Back to top](#)
 
+<div style="page-break-after: always;"></div>
+
 ### Utility Commands
 CCACommander provides you with powerful utility commands to make your admin tasks even more of a breeze than it was.
 
@@ -550,7 +557,6 @@ CCACommander data are saved automatically after any command that changes the dat
 
 > [Back to top](#)
 
-<div style="page-break-after: always;"></div>
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
