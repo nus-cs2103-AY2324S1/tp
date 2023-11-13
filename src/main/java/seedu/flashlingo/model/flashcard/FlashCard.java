@@ -66,7 +66,7 @@ public class FlashCard {
     public TranslatedWord getTranslatedWord() {
         return translatedWord;
     }
-
+    //@@author
     public Date getWhenToReview() {
         return whenToReview;
     }
