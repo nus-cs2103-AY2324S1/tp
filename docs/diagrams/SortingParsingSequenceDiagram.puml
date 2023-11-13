@@ -3,7 +3,7 @@
 !include style.puml
 skinparam ArrowFontStyle plain
 
-mainframe sd Parse sort command
+mainframe **sd** Parse sort command
 
 box Logic LOGIC_COLOR_T1
 Participant ":NetworkBookParser" as mainParser LOGIC_COLOR
