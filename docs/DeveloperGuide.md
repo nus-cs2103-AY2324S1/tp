@@ -63,17 +63,17 @@ For example, the `Logic` component's API is defined in `Logic.java`, and its fun
 #### UI Component
 
 - **API**: [`Ui.java`](https://github.com/AY2324S1-CS2103T-T12-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
-- The UI component is responsible for handling all user interface operations.
+- The `UI` component is responsible for handling all user interface operations.
 
-- Class Diagram - Core UI Components:
+- Core `UI` Components:
   <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-- Class Diagram - Supplementary UI Components:
+- Supplementary `UI` Components:
   <puml src="diagrams/UiDetailedClassDiagram.puml" alt=""/>
 
-The UI is composed of various components such as `MainWindow`, `CommandBox`, `ResultDisplay`, `PersonListPanel`, and `StatusBarFooter`, all of which inherit from the `UiPart` class.
+The `UI` is composed of various components such as `MainWindow`, `CommandBox`, `ResultDisplay`, `PersonListPanel`, and `StatusBarFooter`, all of which inherit from the `UiPart` class.
 
-The UI layouts are defined in corresponding `.fxml` files located in the `src/main/resources/view` folder.
+The `UI` layouts are defined in corresponding `.fxml` files located in the `src/main/resources/view` folder.
 
 Key responsibilities include:
 
