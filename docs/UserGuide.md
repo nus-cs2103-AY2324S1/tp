@@ -146,60 +146,11 @@ Examples:
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Common Errors:**<br>
-1. Invalid Command Format <br>
-All fields are mandatory except the tag field. Omission of the fields will throw an error stating
-that an invalid command has been given, and specify the correct format for the `add-doctor command`. <br>
-Example: `add-doctor ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon`<br>
-Error Message: `Invalid command format!` <br>
-   `add-doctor: Adds a person to MediLink Contacts. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS g/GENDER ic/NRIC [t/TAG]...`
-2. Invalid/Empty Field <br>
-   Fields have specific formats to be followed. Failure to adhere to this format will lead to an error message
-that specifies the format to be used for that field. Usage of flags without any message will lead to the same
-corresponding error message since no field supports empty inputs.
-   ```
-   add-doctor n/ ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon
-   Names should only contain alphanumeric characters and spaces, and it should not be blank
 
-   add-doctor n/Betsy Crowe ic/999 g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon
-   Ic should start with S or T, followed by 7 numbers, and ends with a letter. Letters inputs are case-insensitive. Empty strings are not allowed
-
-   add-doctor n/Betsy Crowe ic/S9851586G g/B p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon
-   Gender should only be M for Male or F for Female 
-
-   add-doctor n/Betsy Crowe ic/S9851586G g/F p/phoneNumber e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon
-   Phone numbers should only contain numbers, and it should be at least 3 digits long
- 
-   add-doctor n/Betsy Crowe ic/S9851586G g/F p/98765433 e/ a/#104-C, Wakanda St 42 t/Surgeon
-   Emails should be of the format local-part@domain and adhere to the following constraints:
-   1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
-   2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
-      The domain name must:
-       - end with a domain label at least 2 characters long
-       - have each domain label start and end with alphanumeric characters
-       - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
-
-   add-doctor n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/ t/Surgeon
-   Addresses can take any values, and it should not be blank
-
-   add-doctor n/Betsy Crowe ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/BestDoctor
-   Doctor tag should be a valid specialisation.
-      ```
-3. Adding custom prefixes <br>
-Adding custom prefixes will mostly cause the preceding flag to become invalid. <br>
-Exceptions:
-   * Adding 'custom' flags after the address or condition field will, however, be accepted as
-addresses or conditions may involve the usage of the `/` character. Hence, take note to use these fields carefully.
-   * However, adding the remark prefix `r/` and everything attached to it will be ignored by the system.
-   * Adding the 'custom' flag after any other field will recognise the input to be of Invalid Command Format.
-<br>
-Examples:
-   * `add-doctor pic/ n/Faiz ic/S9851486G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/surgeon`
-   * `add-doctor n/Faiz pic/ ic/S9851486G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/surgeon`
-   * `add-doctor n/Faiz ic/S9851486G g/F p/98765433 e/betsycrowe@example.com a/#104/C, Wakanda St 42 t/surgeon`
-4. Special Cases <br>
-Names with special characters may not adhere to the current format for names, and may be recognised as an invalid input.
-Example:
-   * `add-doctor n/David s/o Beckham ic/S9851486G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/surgeon`
+Refer to the [Common Pitfalls](#common-pitfalls) to ensure you do not make any of those errors, which may cause errant
+behaviour of MediLink Contacts. The exceptions to this section, as well as additional pitfalls are detailed below. <br> 
+* Names with special characters may not adhere to the current format for names, and may be recognised as an invalid input. 
+  * Example:`add-doctor n/David s/o Beckham ic/S9851486G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/surgeon`
 </div>
 
 ### Adding a Patient: `add-patient`
@@ -475,7 +426,40 @@ _Details coming soon ..._
 the data of your previous MediLink Contacts home folder.
 
 --------------------------------------------------------------------------------------------------------------------
+## Common PitFalls
 
+### Invalid Command Format
+   All fields are mandatory except the tag field. Omission of the fields will throw an error stating
+   that an invalid command has been given, and specify the correct format for the `add-doctor command`. <br>
+   Example: `add-doctor ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon`<br>
+   Error Message: `Invalid command format!` <br>
+   `add-doctor: Adds a person to MediLink Contacts. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS g/GENDER ic/NRIC [t/TAG]...` <br>
+   Reason: mandatory field NAME is not specified. Note that different Invalid Commands will have slightly different Error Messages.
+
+### Invalid Field
+   Fields have specific formats to be followed. Failure to adhere to this format will lead to an error message
+   that specifies the format to be used for that field. Common cases of Invalid Fields:
+1. Empty flags<br>
+Example: `new-appt pic/ dic/S9851586G time/2023-10-30 13:00` <br>
+Reason: PATIENT IC field is empty.
+2. Prefixes not associated with the command<br>
+Adding custom prefixes will mostly cause the preceding flag to become invalid. Note that custom prefixes refer to prefixes
+not recognised by the specific command. Although `b/` refers to BLOODTYPE and is a valid flag, it is only a valid flag in
+the context of Patients. It will be recognised as invalid in other commands such as `add-doctor`<br>
+   Exceptions:
+    * Adding 'custom' flags after the address or condition field will, however, be accepted as
+      addresses or conditions may involve the usage of the `/` character. Hence, take note to use these fields carefully.
+    * However, adding the remark prefix `r/` and everything attached to it will be ignored by the system.
+    * Adding the 'custom' flag before any other field will recognise the input to be of Invalid Command Format.<br>
+Examples:
+    * `add-patient n/John Doe custom/ ic/S9851386G g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 c/pneumothorax b/O+ t/Low`
+    <br>Reason: custom flag `custom/` causes NAME field to become invalid.
+    * `add-doctor ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104/C, Wakanda St 42 t/Surgeon`
+    <br>Reason: custom flag `/C` taken as part of a valid address, and does not show any Error.
+    * `new-appt b/ dic/S9851586G time/2023-10-30 13:00`
+    <br>Reason: custom flag `b/` causes input to be of invalid command format.
+
+--------------------------------------------------------------------------------------------------------------------
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only

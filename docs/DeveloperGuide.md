@@ -535,8 +535,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified
 otherwise)
+**Use case: UC1 - See Usage Instructions**
 
-**Use case: UC1 - Add Patient**
+**MSS**
+
+1. User requests for help.
+2. Medilink Contacts displays usage instructions.
+   Use case ends.
+
+**Extensions**
+
+* 1a. Medilink Contacts detects error in command.
+    * 1a1. Medilink Contacts prompts user to correct the format of the command.
+      Use case ends.
+
+**Use case: UC2 - Add Patient**
 
 **MSS**
 
@@ -556,7 +569,27 @@ otherwise)
     * 1b1. Medilink Contacts prompts user patient already exists.
       Use case ends.
 
-**Use case: UC2 - Delete a person**
+**Use case: UC3 - Add Doctor**
+
+**MSS**
+
+1. User requests to add a doctor by specifying details about the doctor.
+2. Medilink Contacts adds the doctor to the database.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Medilink Contacts detects error in command.
+    * 1a1. Medilink Contacts prompts user to correct the format of the command.
+      Use case ends.
+
+
+* 1b. Medilink Contacts detects duplicate doctor entry by checking the NRIC.
+    * 1b1. Medilink Contacts prompts user doctor already exists.
+      Use case ends.
+
+**Use case: UC4 - Delete a person**
 
 **MSS**
 
@@ -579,22 +612,30 @@ otherwise)
 
       Use case resumes at step 2.
 
-**Use case: UC3 - Find Patient**
+**Use case: UC5 - Add Appointment**
 
 **MSS**
 
-1. User inputs a query for a patient or doctor with an attribute.
-2. Medilink Contacts lists all patients or doctors with matching attribute.
+1. User requests to create a new appointment between a patient and doctor by specifying details of the appointment.
+2. Medilink Contacts creates a new appointment and adds it to the database.
    Use case ends.
 
 **Extensions**
 
-* 1a. No person with matching attribute found.
-    * 1a1. Medilink Contacts lists 0 persons.
-
+* 1a. No patient matching the details specified is found.
+    * 1a1. Medilink Contacts informs the user that the patient does not exist.
       Use case ends.
+* 1b. No doctor matching the details specified is found.
+    * 1b1. Medilink Contacts informs the user that the doctor does not exist.
+      Use case ends.
+* 1c. The patient specified already has another appointment at the time.
+  * 1c1. Medilink Contacts informs the user that the patient has a conflicting appointment.
+    Use case ends.
+* 1d. The doctor specified already has another appointment at the time.
+  * 1d1. Medilink Contacts informs the user that the doctor has a conflicting appointment.
+        Use case ends.
 
-**Use case: UC4 - Edit a person**
+**Use case: UC6 - Edit a person**
 
 **MSS**
 
@@ -629,7 +670,22 @@ otherwise)
 
       Use case resumes at step 2.
 
-**Use case: UC5 - Undo a command**
+**Use case: UC7 - Find Patient**
+
+**MSS**
+
+1. User inputs a query for a patient or doctor with an attribute.
+2. Medilink Contacts lists all patients or doctors with matching attribute.
+   Use case ends.
+
+**Extensions**
+
+* 1a. No person with matching attribute found.
+    * 1a1. Medilink Contacts lists 0 persons. 
+
+      Use case ends.
+
+**Use case: UC8 - Undo a command**
 
 **MSS**
 
