@@ -25,6 +25,7 @@ WellNUS is optimised for use via a **Command Line Interface** (CLI) while still 
 If you can type fast, WellNUS can get your contact management and scheduling tasks done faster than traditional GUI apps.
 </div>
 
+## Table of Contents
 * Table of Contents
 {:toc}
 
@@ -501,7 +502,7 @@ You can always update the risk level later using the tag command when more infor
 | [Help](#211-viewing-help-help)                                                             | `help`                                                                                                                                                          |
 | [Add Student](#221-adding-a-student-add)                                                   | `add n/STUDENT_NAME c/CONTACT_NUMBER a/HOME_ADDRESS [r/RISK_LEVEL]` <br> e.g., `add n/John c/81349705 a/Yishun Street 56 Blk 21 #05-07 r/medium`                |
 | [Delete Student](#222-deleting-a-student-delete)                                           | `delete STUDENT_INDEX`<br> e.g., `delete 3`                                                                                                                     |
-| [Add Student Note](#223-adding-notes-for-a-student-note)                                   | `note STUDENT_INDEX note/NOTE` <br> e.g., `note 1 note/Likes dogs`                                                                                              |
+| [Add/Delete Student Note](#223-addingdeleting-notes-for-a-student-note)                    | `note STUDENT_INDEX note/NOTE` <br> e.g., `note 1 note/Likes dogs`                                                                                              |
 | [Find Students](#224-finding-students-by-name-find)                                        | `find STUDENT_NAME` <br> e.g., `find John`                                                                                                                      |
 | [Assign Risk Level to Student](#225-assigning-risk-level-to-student-tag)                   | `tag STUDENT_INDEX r/RISK_LEVEL`<br> e.g.,`tag 4 r/high`                                                                                                        |
 | [Edit Student details](#226-editing-student-details-edit)                                  | `edit STUDENT_INDEX c/CONTACT_NUMBER A/HOME_ADDRESS`<br> e.g.,`edit 1 c/91234567`                                                                               |
