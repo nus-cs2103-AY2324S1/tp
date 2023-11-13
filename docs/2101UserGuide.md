@@ -80,7 +80,7 @@ This guide uses the following features to make it easier for you to navigate aro
     <figure>
         <img src="images/Ui.png"
              alt="Ui">
-        <figcaption>Fig 1: Application upon running</figcaption>
+        <figcaption>Fig 1: Initial application display</figcaption>
     </figure>
 
 5. Type the command in the command box and press <kbd>↵ Enter</kbd> to execute it. <br> E.g. typing `help` and pressing <kbd>↵ Enter</kbd> will open the help window. <br>
