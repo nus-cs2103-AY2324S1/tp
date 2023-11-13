@@ -4,32 +4,32 @@ title: Developer Guide
 ---
 ## Table of Contents
 1. [Acknowledgements](#acknowledgements)
-2. [Setting up](#setting-up-getting-started)
-3. [Design](#design)
+1. [Setting up](#setting-up-getting-started)
+1. [Design](#design)
     1. [Architecture](#architecture)
     2. [UI](#ui-component)
     3. [Logic](#logic-component)
     4. [Model](#model-component)
     5. [Storage](#storage-component)
     6. [Common Classes](#common-classes)
-4. [Implementation](#implementation)
+1. [Implementation](#implementation)
     1. [Listing](#listx)
     2. [Viewing](#viewx-feature)
     3. [Edit Person](#edit-person-feature)
-    4. [Add Medicine Short Form](#add-medicine-short-form-feature-)
-    5. [Delete Medicine Short Form](#delete-medicine-short-form-feature-)
+    4. [Add Medicine Short Form](#add-medicine-short-form-feature)
+    5. [Delete Medicine Short Form](#delete-medicine-short-form-feature)
     6. [Adding an Order](#adding-an-order-feature)
     7. [Finding an Order Feature](#finding-an-order-feature)
-5. [Documentation](#documentation-logging-testing-configuration-dev-ops)
-6. [Appendix: Requirements](#appendix-requirements)
+1. [Documentation](#documentation-logging-testing-configuration-dev-ops)
+1. [Appendix: Requirements](#appendix-requirements)
     1. [Product scope](#product-scope)
     2. [User Stories](#user-stories)
     3. [Use Cases](#use-cases)
     4. [Non-Functional Requirements](#non-functional-requirements)
-7. [Appendix: Instruction for Manual Testing](#appendix-instructions-for-manual-testing)
-8. [Appendix: Planned Enhancements](#appendix-planned-enhancements)
-9. [Appendix: Effort](#appendix-effort)
-10. [Glossary](#glossary)
+1. [Appendix: Instruction for Manual Testing](#appendix-instructions-for-manual-testing)
+1. [Appendix: Planned Enhancements](#appendix-planned-enhancements)
+1. [Appendix: Effort](#appendix-effort)
+1. [Glossary](#glossary)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
@@ -312,7 +312,7 @@ Step 7: An error message is shown to warn the user that the person's new allergy
     }
 ```
 
-### Add medicine short form feature  
+### Add medicine short form feature
 
 #### Implementation
 After the creation of new `Medicine`, a short form can be assigned to that `Medicine` using the `sfm` command.  
@@ -349,7 +349,8 @@ public boolean isSameMedicine(Medicine m) {
 }
 ```
 
-### Delete medicine short form feature  
+### Delete medicine short form feature
+
 #### Implementation
 `sfm` can also be used to delete the short form of a medicine by providing the `d/` flag.
 If the `d/` flag is provided any provided medicine names using `m/` will be ignored.   
