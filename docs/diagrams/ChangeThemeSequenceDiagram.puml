@@ -64,7 +64,7 @@ deactivate ThemeCommand
 LogicManager --> Ui : result
 deactivate LogicManager
 
-Ui --> Ui : handle\nChange\nTheme()
+Ui -> Ui : handle\nChange\nTheme()
 
 [<--Ui
 deactivate Ui
