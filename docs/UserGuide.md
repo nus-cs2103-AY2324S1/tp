@@ -178,9 +178,13 @@ Here are the [parameter](#glossary) requirements of commonly used parameters by 
 
 ### Viewing help : `help`
 
-Shows a message that helps redirects you to the user guide.
+**Description**: Shows a message that helps redirects you to the user guide.
 
 **Format**: `help`
+
+**Sample Execution**: `help`
+
+![Help after](images/HelpAfter.png)
 
 ### Adding a tutee : `add`
 
@@ -189,7 +193,7 @@ Shows a message that helps redirects you to the user guide.
 **Format**: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS sb/SUBJECT d/DAY b/BEGIN e/END pr/PAYRATE`
 
 :exclamation: Things that can cause the `add` command to fail:
-1. Putting invalid inputs into the add command.
+1. Inserting invalid inputs into the add command.
    - :bulb: Check the [Parameter Requirements](#parameters-requirement) for valid parameter inputs.
 2. Adding a tutee that will result in duplicate tutees.
    - :information_source: Two tutees are considered duplicates if they have the same name and phone number
@@ -227,49 +231,29 @@ Shows a message that helps redirects you to the user guide.
 
 ### Finding a tutee : `find`
 
-**Description** : Find tutees in the current list.
+**Description** : Find tutees in the current list by specifying their names and/or subject.
 
 **Format**: `find n/[NAME] sb/[SUBJECT]`
 
-> [!NOTE]  
-> Find takes at least one of the two fields to be able to find for tutees.
+:information_source: Find requires at least one of the two fields to be able to find for tutees.
 
-**Expected input:**
+:information_source: Both n/ and sb/ prefixes take one word as input each.
 
-* **Name (Optional field)**: String composed of character between A-Z and a-z
-* **Subject (Optional field)**: String without restriction in characters
+:exclamation: Things that can cause `find` command to fail:
+1. Inserting invalid inputs into the find command.
+   - :bulb: Check the [Parameter Requirements](#parameters-requirement) for valid parameter inputs.
+2. Inserting multiple word inputs for any of the two fields
+   - :exclamation: As mentioned above, both prefixes can only take one word each as input.
 
-> [!NOTE]  
-> Both n/ and sb/ prefixes take one word as input.
+**Examples**:
+* `find n/Alex`
+* `find sb/Maths`
+* `find n/Alex sb/Maths`
 
-**Expected Output when the command succeeds:** X tutees listed!
+**Sample Execution**: `find n/Alex sb/Maths`
 
-**Expected Output when the command fails:**
+![findAfter](images/findAfter.png)
 
-* **More than one word input for prefix n/**: Name can only take one word.
-* **More than one word input for prefix sb/**: Subject can only take one word.
-* **More than one word input for both prefix n/ and sb/**: Name can only take one word.
-
-* **Invalid Input for prefix name n/**:
-Names should only contain alphanumeric characters and spaces,
-  and it should not be blank
-* **Invalid Input for prefix subject sb/**: Subject can take any values, and it should not be blank.
-* **Invalid Prefix other than name n/ and subject sb/**:
-
-  Invalid command format!
-  find: Find persons with names or subjects matching the specified keywords (case-insensitive).
-  Parameters: n/NAME sb/SUBJECT
-
-  Examples:
-1. find n/Alice sb/Maths
-2. find n/Alice
-3. find sb/Maths
-
-* **No input after prefix name n/**: Names should only contain alphanumeric characters and spaces,
-and it should not be blank
-* **No input after prefix subject sb/**: Subject can take any values, and it should not be blank.
-* **No input after prefixes name n/ and subject sb/**: Names should only contain alphanumeric characters and spaces,
-  and it should not be blank
 
 ### Editing a tutee : `edit`
 
@@ -277,41 +261,21 @@ and it should not be blank
 
 **Format**: `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SUBJECTS d/DAY b/BEGIN end/END pr/PAYRATE`
 
-**Expected Input**:
-* **Index (Compulsory Field)**: Numbers between 1 to the number of people inside the list.
-* **Name (Optional field)**: String composed of character between A-Z and a-z.
-* **Phone number (Optional field)**: 8 digit number.
-* **Email (Optional field)** String with restrictions in characters (XXXXXXXX@emaildomain)
-* **Address (Optional field)**: String without restriction in characters.
-* **Subject (Optional field)**: String without restriction in characters.
-* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).
-* **Begin (Optional field)**: String with restrictions (HHMM).
-* **End (Optional field)**: String with restrictions (HHMM).
-* **PayRate (Optional field)** String with restrictions in characters, only numbers allowed (no negative numbers).
-
-**Expected Output when the command succeeds**: Successfully edited XXX(Name)
-
-**Expected Output when the command fails**:
-
-* **Invalid Name**: Names should only contain alphanumeric characters and spaces, and it should not be blank
-* **Duplicate tutee**: This tutee already exists
-* **Invalid Phone number**: Phone numbers should only contain numbers, and it should be at least 3 digits long
-* **Invalid Email**: Emails should be of the format local-part@domain and adhere to the following constraints:  
-  1\. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.  
-  2\. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
-* **Invalid Address**: Addresses can take any values, and it should not be blank
-* **Invalid Day**: Days should be written using their full names or their first three letters, and it should not be blank
-* **Invalid Begin**: Begin has a format of HHMM
-* **Invalid End**: That is not a valid time format. End has a format of HHMM
-* **Invalid PayRate**: PayRate can be either integers or decimals of up to 2 decimal places. It cannot be negative
+:exclamation: Things that can cause `edit` command to fail:
+1. Inserting invalid inputs into the find command.
+    - :bulb: Check the [Parameter Requirements](#parameters-requirement) for valid parameter inputs.
+2. Editing a tutee that will result in duplicate tutees.
+    - :information_source: Two tutees are considered duplicates if they have the same name and phone number
+3. Editing a tutee that will result in clashing schedules.
+    - :bulb: Use the [`freeTime` command](#finding-free-time--freetime) to list down timings when you are available and prevent schedule clashses.
 
 **Examples**:
+* `edit 1 p/91234567 d/Sun`
+* `edit 2 n/Betsy Crower a/Betsy street, block 110, #03-02`
 
-To edit the phone number and day of tutoring of your first tutee in list:
-*  `edit 1 p/91234567 d/Sun`
+**Sample Execution**: 
 
-To edit name and address of your second tutee in list:
-*  `edit 2 n/Betsy Crower a/Betsy street, block 110, #03-02`
+![editAfter](images/editAfter.png)
 
 
 ### Deleting a tutee: `delete`
@@ -320,16 +284,17 @@ To edit name and address of your second tutee in list:
 
 **Format**: `delete INDEX`
 
-**Expected Input**:
+:exclamation: Things that can cause `delete` command to fail:
+1. Inserting invalid index into the delete command.
+    - :information_source: Index should not be smaller than 1 and larger than
+             the number of tutees in the list.
 
-* **Index (Compulsory Field)**: Numbers between 1 to the number of people inside the list.
-
-**Expected Output when the command succeeds**: Successfully deleted NAME from the list
-
-**Expected Output when the command fails**: The tutee index provided is invalid
-
-Examples:
+**Examples**:
 * `list` followed by `delete 2` deletes the 2nd person in the list.
+
+**Sample Execution**:
+
+![deleteAfter](images/DeleteAfter.png)
 
 ### Clearing all entries : `clear`
 
