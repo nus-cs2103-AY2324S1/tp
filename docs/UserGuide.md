@@ -624,7 +624,7 @@ Edited: David Li; Phone: 91234567; Email: berniceyu@example.com; Address: Blk 30
 Clashes with: David Li; Phone: 91031282; Email: lidavid@example.com; Address: Blk 436 Serangoon Gardens Street 26, #16-43; Subjects: BIOLOGY; Tags: [family]; Remark: .
 ```
 * Input: `editPerson -phone 91234567 -tag jc,express` (assuming no student is currently shown)
-    * Error: Duplicate tags detected. Please remove duplicate tags.
+    * Error: If `editPerson` is used without specifying `INDEX`, then a student must be selected via the `show INDEX` command.
 ```
 Using edit command without specifying index when no entry is shown. 
 Usage: edit [INDEX] (at least one of unique [-name|phone|email|address|subject|tag|remark VALUE]). 
