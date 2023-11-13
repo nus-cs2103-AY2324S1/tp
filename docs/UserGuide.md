@@ -21,6 +21,7 @@ This user guide will teach you how to install **TuitionConnect** from scratch, a
   * [Introduction](#introduction)
   * [Using this guide](#using-this-guide)
   * [Symbols and Syntax](#symbols-and-syntax)
+  * [Layout](#layout)
   * [Quick start](#quick-start)
   * [Input Formats](#input-formats)
     * [Command Format](#command-format)
@@ -76,6 +77,8 @@ For first-time users, we understand how it feels to open up an application witho
 carefully crafted a [Quick Start](#quick-start) section in this guide to provide you with the knowledge it takes to 
 start using TuitionConnect for your business.
 
+The [Layout](#layout) will also help you understand the different components of TuitionConnect's GUI.
+
 Eager to learn more about what our application can do? Head over to the [Command Format](#command-format) section to 
 learn more about the general formats of the commands and getting yourself prepared before 
 delving into the [Features](#features) section where you are in for the ride of your life! The Features section contains
@@ -99,6 +102,11 @@ Throughout this User Guide, there might
 | :exclamation: **Caution**                      | Information that you need to know before executing a [command](#command)                                                                        |
 | `Highlighted text block`                       | [Commands](#command) or [parameters](#parameter) that you can enter into our application, or text that is directly displayed in our application |
 | [Hyperlinked text in blue](#symbols-and-syntax) | When it is pressed, it should lead you to another section in the document or to an external link.                                               |
+
+## Layout
+The image below describes TuitionConnect's layout with some description for each component.
+![Layout](images/Layout.png)
+
 
 ## Quick start
 
