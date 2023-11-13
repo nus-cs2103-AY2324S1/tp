@@ -563,14 +563,20 @@ The following activity diagram summarizes what happens when a command is execute
 **Aspect: How to update when sort or filter status changes:**
 
 * **Alternative 1 (current choice):** Return subclass of `CommandResult` upon execution.
-    * This makes use of polymorphism.
     * After command execution, the command result is returned to `MainWindow`, which has access to the status bar element.
-    * By adding information to the command result, `MainWindow` can update the status bar accordingly.
+    * By using polymorphism, additional information can be added to the command results of relevant commands.
+    * As `MainWindow` already receives the command results in order to update the text result box, the simplest way of implementing the status bar update would be to use the command results to update the status bar as well.
 
 * **Alternative 2:** Directly read status of model.
     * The sorting and filtering is controlled by a `NetworkBook` instance.
     * The status bar could read the sorting and filtering predicate/comparator directly.
     * However, this increases coupling between model and UI which is undesirable. Hence, this alternative was not chosen.
+
+* **Alternative 3:** Implement observer pattern to allow UI updates on model status change.
+    * The sorting and filtering is controlled by a `NetworkBook` instance.
+    * The observer design pattern could be implemented to update the status bar when the filtering predicate/comparator updates, without increasing coupling.
+    * However, this introduces some complexity as there needs to be new observer and observable interfaces, as well as their corresponding method implementations.
+    * Since commands are currently the only way to change the sort or filter status, alternative 1 is a simpler way to implement the feature.
   
 <!-- @@author awhb -->
 ### Find contacts by name
@@ -586,7 +592,7 @@ Otherwise, it creates a new instance of `FindCommand` that corresponds to the us
 
 `FindCommand` stores an instance of `NameContainsKeyTermsPredicate`, which represents a predicate that checks if a person's name contains at least one of the space-separated key terms the user has input. (Note: contains is defined here as a case-insensitive, antisymmetric relation; that is, A may contain B even if B does not contain A).
 
-Examples: 
+Examples:
 * "Ben" is contained in "Ben Leong".
 * "al" is contained in both "Alex Yeoh" and "Jiale".
 * "BenL" is not contained in "Ben Leong" because the 'space' character between the words in the name invalidates the contains relationship.
