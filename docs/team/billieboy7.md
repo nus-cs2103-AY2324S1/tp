@@ -20,7 +20,7 @@ Given below are my contributions to the project.
 * Created issues to delegate tasks and helped with the maintenance of the issue tracker
 * Helped merge PRs
 
-* **Enhancements to existing features**:
+* **Enhancements to existing features**: 
 * Implemented the Priority Tag Feature for Appointments to indicate severity of appointment
 * Implemented the JavaFX for the Priority Tag - Adding a box to display Priority Tag with different colours to denote severity
 
@@ -28,12 +28,13 @@ Given below are my contributions to the project.
   * User Guide:
     * Worked on the 'Welcome' and 'Key Features' section
     * Added documentation for the features `add` [\#28](https://github.com/AY2324S1-CS2103T-T08-4/tp/pull/28)
+    * Worked on explanation for find illness command
   
   * Developer Guide:
     * Ideated and updated the target user and value proposition
-    * Added the UML diagrams and explanations for `schedule` command
-    * Added the UML diagrams and explanations for `find illness` command (Upcoming)
-    * Added the UML diagrams and explanations for `find patient appointment` command (Upcoming)
+    * Added the UML diagrams, implementation explanations and design considerations for `schedule` command
+    * Added the UML diagrams and implementation explanations for `find illness` command 
+    * Added the UML diagrams and implementation explanations for `find patient appointment` command
     * Added the Efforts section to the end 
 
 * **Community**:
