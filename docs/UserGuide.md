@@ -725,15 +725,15 @@ _Details coming soon ..._
 
 #### 7.2.2 Basic Student Management Commands
 
-| Action     | Format, Examples                                                                                                                                                                                               |
-|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Help**   | `help`                                                                                                                                                                                                         |
-| **Add**    | `add n/STUDENT_NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/TUTORIAL_GROUP_ID]…` <br> <br> e.g. `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E t/G2`                                                 |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/TUTORIAL_GROUP_ID]...`<br> <br> e.g. `edit 1 n/Tan Liyan` <br> `edit 2 p/92345678 t/`                                                                |
+| Action     | Format, Examples                                                                                                                                                                                                      |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**   | `help`                                                                                                                                                                                                                |
+| **Add**    | `add n/STUDENT_NAME p/PHONE_NUMBER e/EMAIL id/STUDENT_ID [t/TUTORIAL_GROUP_ID]…` <br> <br> e.g. `add n/Fu Yiqiao p/91234567 e/fyq@gmail.com id/A1234567E t/G2`                                                        |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [id/STUDENT_ID] [t/TUTORIAL_GROUP_ID]...`<br> <br> e.g. `edit 1 n/Tan Liyan` <br> `edit 2 p/92345678 t/`                                                                     |
 | **Mark**   | `mark n/STUDENT_NAME[, STUDENT_NAME]… / id/STUDENT_ID[, STUDENT_ID]… a/ATTENDANCE w/WEEK_NUMBER [r/REASON_OF_ABSENCE]` <br> <br> e.g. `mark n/Zong Jin, Fu Yiqiao a/1 w/1` <br> `mark id/A0123456E, A0123457E a/1 w/1` |
-| **Find**   | `find n/STUDENT_NAME [STUDENT_NAME]… / id/STUDENT_ID [STUDENT_ID]…` <br> <br> e.g. `find n/Anthony Yiqiao`                                                                                                     |
-| **List**   | `list attendance w/WEEK_NUMBER [tg/TUTORIAL_GROUP_ID]`<br> <br> e.g. `list students`                                                                                                                           |
-| **Delete** | `delete all [tg/TUTORIAL_GROUP_ID]` `delete INDEX` <br> <br> e.g. `delete all tg/G10` <br> `delete 3`                                                                                                            |
-| **Merge**  | `merge [PRIMARY_INDEX] [SECONDARY_INDEX]` <br> <br> e.g. `merge 1 2`                                                                                                                                           |
-| **View**   | `view INDEX`  <br> <br> e.g. `view 1`                                                                                                                                                                          |
-| **Exit**   | `exit`                                                                                                                                                                                                         |
+| **Find**   | `find n/STUDENT_NAME [STUDENT_NAME]… / id/STUDENT_ID [STUDENT_ID]…` <br> <br> e.g. `find n/Anthony Yiqiao`                                                                                                            |
+| **List**   | `list attendance w/WEEK_NUMBER [tg/TUTORIAL_GROUP_ID]` `list students` <br> <br> e.g. `list attendance w/1 tg/G2`                                                                                                     |
+| **Delete** | `delete all [tg/TUTORIAL_GROUP_ID]` `delete INDEX` <br> <br> e.g. `delete all tg/G10` <br> `delete 3`                                                                                                                 |
+| **Merge**  | `merge [PRIMARY_INDEX] [SECONDARY_INDEX]` <br> <br> e.g. `merge 1 2`                                                                                                                                                  |
+| **View**   | `view INDEX`  <br> <br> e.g. `view 1`                                                                                                                                                                                 |
+| **Exit**   | `exit`                                                                                                                                                                                                                |
