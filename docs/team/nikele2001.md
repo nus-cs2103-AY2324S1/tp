@@ -37,6 +37,9 @@ Given below are my contributions to the project.
   * Added use cases for `schedule` command, `sort` command, `complete` command and adding financial plans via the `fp/` prefix.
   * Updated user stories.
   * Updated UML class diagrams for `Model` and `UI` components.
+  * Added sequence diagram for the `setPerson()` method in the `ScheduleCommand#execute()` method to illustrate how the appointment list is being updated.
+  * Added activity diagram for the `gather` command.
+  * Contributed to `Instructions for manual testing` in DG.
   * Added effort section. 
 
 
