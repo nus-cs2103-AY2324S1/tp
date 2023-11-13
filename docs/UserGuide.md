@@ -288,8 +288,9 @@ If index of a multi-valued field is not specified, it will **default to 1**.
 
 Example usage:
 
-* `delete 1 /link /index 2`
-* `delete 5 /spec`
+* `delete 1 /phone`
+    ![delete phone](images/delete/delete-phone.png)
+* `delete 5 /link /index 2`
 * `delete 10 /priority`
 
 [Table of Contents](#table-of-contents)
@@ -403,7 +404,7 @@ Example usage:
 
 #### Filter contacts list: `filter /by [field] /with [term]`
 
-You can use the `filter` command to filter your list of conatacts,
+You can use the `filter` command to filter your list of contacts,
 temporarily hiding contacts that don't contain certain keywords
 for easy viewing. If the list is currently sorted (using [`sort`](#sort-contacts-list-sort-by-field-name-order-ascdesc)), the filtered list will be sorted.
 
@@ -428,12 +429,15 @@ Parameters:
 in the filtered contact list must have part of the `[term]` in the `[field]`
 specified above.
 * `[taken]` (optional). Only for filtering by `course`, this parameter additionally filters
-  out contacts who have finished the course.
+  out contacts who have finished/haven't started the course as of the current date of your system.
 
     List of options:
 
-    * `true` - Remove contacts that have finished taking the course.
-    * `false` - (default). Include contacts who have finished taking the course.
+    * `true` - Remove contacts who have finished/haven't started the course as of the current date of your system.
+    * `false` - (default). Include contacts who have finished/haven't started taking the course
+  as of the current date.
+    * NOTE: `[taken]` compares the dates of the course with the current date of
+    your system. It does not factor in other fields like graduation year.
 
 Example usage:
 

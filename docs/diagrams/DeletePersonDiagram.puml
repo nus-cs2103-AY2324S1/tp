@@ -1,0 +1,64 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+Participant ":Logic" as logic LOGIC_COLOR
+Participant ":NetworkBookParser" as networkBookParser LOGIC_COLOR
+
+Participant ":DeleteCommandParser" as deleteCommandParser LOGIC_COLOR
+Participant ":DeletePersonCommand" as deletePersonCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+Participant ":Model" as model MODEL_COLOR
+end box
+
+-> logic : execute("delete" + index)
+activate logic
+
+logic -> networkBookParser : "delete" + index
+activate networkBookParser
+
+create deleteCommandParser
+networkBookParser -> deleteCommandParser
+activate deleteCommandParser
+
+deleteCommandParser --> networkBookParser
+deactivate deleteCommandParser
+
+networkBookParser -> deleteCommandParser : parse(index)
+activate deleteCommandParser
+
+create deletePersonCommand
+deleteCommandParser -> deletePersonCommand : new deletePersonCommand(index)
+activate deletePersonCommand
+
+deletePersonCommand --> deleteCommandParser
+deactivate deletePersonCommand
+
+deleteCommandParser --> networkBookParser
+deactivate deleteCommandParser
+
+networkBookParser --> logic
+deactivate networkBookParser
+
+logic -> deletePersonCommand : execute(model)
+activate deletePersonCommand
+
+deletePersonCommand -> model : get p at index
+activate model
+
+model --> deletePersonCommand : p
+deactivate model
+
+deletePersonCommand -> model : deletePerson(p)
+deletePersonCommand -> model : update list
+
+deletePersonCommand --> logic : command success
+deactivate deletePersonCommand
+
+<-- logic : command success
+deactivate logic
+
+@enduml
