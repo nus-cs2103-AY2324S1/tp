@@ -942,9 +942,9 @@ fd
 
 {% include admonition.html type="note" title="Note" body="
 
-This command hides all Tasks that are not done. <br>
-(i.e. If no Tasks are not done, the list will be empty.)<br><br>
-To reset the Tasks view, simply run the <code>listTask</code> command to list all Tasks.
+This command hides all tasks that are not done. <br>
+(i.e. If no tasks are not done, the list will be empty.)<br><br>
+To reset the tasks view, simply run the <code>listTask</code> command to list all tasks.
 
 " %}
 
@@ -977,9 +977,9 @@ fnd
 
 {% include admonition.html type="note" title="Note" body="
 
-This command hides all Tasks that are done. <br>
-(i.e. If no Tasks are done, the list will be empty.)<br><br>
-To reset the Tasks view, simply run the <code>listTask</code> command to list all Tasks.
+This command hides all tasks that are done. <br>
+(i.e. If no tasks are done, the list will be empty.)<br><br>
+To reset the tasks view, simply run the <code>listTask</code> command to list all tasks.
 
 " %}
 
@@ -1193,7 +1193,7 @@ ftag
 
 This command hides all persons and tasks that do not match the search criteria. <br>
 (i.e. If no persons or tasks match the search criteria, the list will be empty.)<br><br>
-To reset the Persons and Tasks view, simply run the <code>listAll</code> command to list all persons and tasks.
+To reset the persons and tasks view, simply run the <code>listAll</code> command to list all persons and tasks.
 
 " %}
 
@@ -1245,7 +1245,7 @@ fatag
 
 This command hides all persons and tasks that do not match the search criteria. <br>
 (i.e. If no persons or tasks match the search criteria, the list will be empty.)<br><br>
-To reset the Persons and Tasks view, simply run the <code>listAll</code> command to list all persons and tasks.
+To reset the persons and tasks view, simply run the <code>listAll</code> command to list all persons and tasks.
 
 " %}
 
