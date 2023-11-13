@@ -17,6 +17,7 @@ Class EventListPanel
 Class EventCard
 Class StatusBarFooter
 Class CommandBox
+Class Stylesheet <<enumeration>>
 }
 
 package Model <<Rectangle>> {
@@ -37,6 +38,7 @@ MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" MemberListPanel
 MainWindow *-down-> "1" EventListPanel
 MainWindow *-down-> "1" StatusBarFooter
+MainWindow *-down-> "1" Stylesheet
 MainWindow --> "0..1" HelpWindow
 
 MemberListPanel -down-> "*" MemberCard
