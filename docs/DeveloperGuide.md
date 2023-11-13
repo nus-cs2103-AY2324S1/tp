@@ -115,7 +115,7 @@ call as an example.
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
 <box type="info" seamless>
-Note: The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of
+Note: The lifeline for <code>DeleteCommandParser</code> should end at the destroy marker (X) but due to a limitation of
 PlantUML, the lifeline reaches the end of diagram.
 </box>
 
@@ -332,7 +332,7 @@ In deciding the data structure to house our Interview objects, we were torn betw
 
 The sort feature is facilitated by `Descriptor`, an enumeration which describes the valid fields which can be used to sort an applicant.
 
-To enable sorting, `Applicant` implements `Comparable<Applicant>`, to allow for comparison between applicants. To allow for applicants to be sorted by different descriptors, `Applicant` is augmented to contain a static `Descriptor` field. This is used in `Applicant#compareTo()`, where a switch case checking the state of the `Descriptor` field will then compare the specified field of both applicants.
+To enable sorting, `Applicant` implements `Comparable<Applicant>`, to allow for comparison between applicants. To allow for applicants to be sorted by different descriptors, `Applicant` is augmented to contain a static `descriptor` field. This is used in `Applicant#compareTo()`, where a switch case checking the state of the `Descriptor` field will then compare the specified field of both applicants.
 
 In order to enable comparison of each valid field, these fields will implement the `Comparable` interface. Currently valid fields for sorting are
 
@@ -343,12 +343,15 @@ In order to enable comparison of each valid field, these fields will implement t
 5. Position
 6. Status
 
+Additionally, a static boolean `Applicant#isDescendingOrder` has been added to keep track of the order to sort the applicants. 
+
 #### Steps to trigger
 
-1. User opens the app
-2. User enters `sort d/ [valid field]`, where valid field is one of the fields listed above to be sorted by
-
-Once step 2 has been completed, the GUI will update and refresh the applicant list to be sorted by the specified field.
+1. User opens the app.
+2. User enters `sort d/ [valid field] [dsc/]`, where valid field is one of the fields listed above to be sorted by.
+3. The `SortCommandParser#parse()` checks that the field input is valid and if the `dsc/` flag has been entered to sort in descending order.
+4. If the input is valid, `SortCommand#execute()` updates both the `descriptor` and `isDescendingOrder` fields of the `Applicant` class.
+5. The GUI will update and refresh the applicant list to be sorted by the specified field.
 
 The following diagram summarises what happens when a user executes a Sort command:
 <puml src="diagrams/SortCommandActivityDiagram.puml" alt="SortCommandActivityDiagram" />
@@ -367,13 +370,13 @@ The following diagram summarises what happens when a user executes a Sort comman
 
 ##### Aspect: Command syntax
 
-- Alternative 1 (current choice): `sort d/ [valid field]`
+- Alternative 1: `sort d/ [valid field]`
     - Pros: Simple and minimal text fields, with a single prefix required to enable sorting.
     - Cons: Only able to sort in ascending order.
 - Alternative 2: `sort d/ [valid field] [asc/]/[dsc/]`
     - Pros: Able to sort in either ascending or descending order.
     - Cons: Requires additional input from the user, slowing down the use of the command.
-- Alternative 3: `sort d/ [valid field] [dsc/]` where `dsc/` is optional
+- Alternative 3 (current choice): `sort d/ [valid field] [dsc/]` where `dsc/` is optional
     - Pros: Retains the ability to sort in either order, but also the conciseness of Alternative 1. Also does not require user to type in any flag to sort in ascending order.
     - Cons: Users who are not aware of the `dsc/` feature may not use it.
 
@@ -398,14 +401,14 @@ To create a single predicate that is able to search and filter for multiple fiel
 6. Less than score
 7. Greater than score
 
-When `CustomFilterPredicate#test` is called, it will check if the specified fields are a substring of the same field of
+When `CustomFilterPredicate#test()` is called, it will check if the specified fields are a substring of the same field of
 the applicant, returning true if all specified fields match, and false otherwise.
 
 #### Steps to trigger
 
-1. User opens the app
+1. User opens the app.
 2. User enters `filter [n/, e/, p/, hp/, s/, lts/, gts/] [term]`, where one or more of the prefixes can be specified to
-   be filtered by
+   be filtered by.
 
 Once step 2 is complete, the GUI will update and refresh the applicant list with only applicants which match all
 specified fields. 
