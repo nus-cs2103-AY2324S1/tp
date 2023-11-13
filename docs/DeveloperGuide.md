@@ -37,9 +37,9 @@ This Developer Guide will help you get familiar with the architecture of CoordiM
 
 <div style="page-break-after: always;"></div>
 
-## **Acknowledgements**
-
 [Back to Table of Contents](#table-of-contents)
+
+## **Acknowledgements**
 
 * CoordiMate is based on the [AddressBook-Level3](https://github.com/se-edu/addressbook-level3) project created by the [SE-EDU initiative](https://se-education.org).
 * CoordiMate makes use of the following open source libraries:
@@ -51,9 +51,9 @@ This Developer Guide will help you get familiar with the architecture of CoordiM
 
 <div style="page-break-after: always;"></div>
 
-## **Setting up, getting started**
-
 [Back to Table of Contents](#table-of-contents)
+
+## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -61,9 +61,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div style="page-break-after: always;"></div>
 
-## **Design**
-
 [Back to Table of Contents](#table-of-contents)
+
+## **Design**
 
 {% include admonition.html type="note" title="Note" body="
 
@@ -72,9 +72,9 @@ Refer to the <a href='https://se-education.org/guides/tutorials/plantUml.html'><
 
 " %}
 
-### Architecture
-
 [Back to Table of Contents](#table-of-contents)
+
+### Architecture
 
 <img src="assets/svg/dg/ArchitectureDiagram.svg" width="280" />
 
@@ -117,9 +117,9 @@ The sections below give more details of each component.
 
 <div style="page-break-after: always;"></div>
 
-### UI component
-
 [Back to Table of Contents](#table-of-contents)
+
+### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T10-2/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -138,9 +138,9 @@ The `UI` component,
 
 <div style="page-break-after: always;"></div>
 
-### Logic component
-
 [Back to Table of Contents](#table-of-contents)
+
+### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T10-2/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -181,9 +181,9 @@ How the parsing works:
 
 <div style="page-break-after: always;"></div>
 
-### Model component
-
 [Back to Table of Contents](#table-of-contents)
+
+### Model component
 
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T10-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -210,9 +210,9 @@ Without loss of generality, this model can be extended to <code>Task</code> enti
 
 <div style="page-break-after: always;"></div>
 
-### Storage component
-
 [Back to Table of Contents](#table-of-contents)
+
+### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T10-2/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -225,9 +225,9 @@ The `Storage` component,
 
 <div style="page-break-after: always;"></div>
 
-### Common classes
-
 [Back to Table of Contents](#table-of-contents)
+
+### Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
@@ -235,15 +235,15 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 ---
 
-## **Implementation**
-
 [Back to Table of Contents](#table-of-contents)
+
+## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Add Tag(s) To Person feature
-
 [Back to Table of Contents](#table-of-contents)
+
+### Add Tag(s) To Person feature
 
 #### Implementation
 
@@ -280,9 +280,9 @@ The sequence diagrams below show the details of the respective reference frames.
 
 <div style="page-break-after: always;"></div>
 
-### List Task feature
-
 [Back to Table of Contents](#table-of-contents)
+
+### List Task feature
 
 #### Implementation
 
@@ -312,9 +312,9 @@ The lifeline for <code>ListTaskCommand</code> should end at the destroy marker (
 
 <div style="page-break-after: always;"></div>
 
-### Edit Task feature
-
 [Back to Table of Contents](#table-of-contents)
+
+### Edit Task feature
 
 #### Implementation
 
@@ -353,9 +353,9 @@ The sequence diagrams below show the details of the respective reference frames.
 
 <div style="page-break-after: always;"></div>
 
-### Find Task feature
-
 [Back to Table of Contents](#table-of-contents)
+
+### Find Task feature
 
 #### Implementation
 
@@ -402,9 +402,9 @@ These two predicates are used to filter the list of tasks in the `Model` compone
 
 <div style="page-break-after: always;"></div>
 
-### Mark Task feature
-
 [Back to Table of Contents](#table-of-contents)
+
+### Mark Task feature
 
 #### Implementation
 
@@ -462,9 +462,9 @@ Any string can be passed as a status, potentially resulting in invalid or unexpe
 
 <div style="page-break-after: always;"></div>
 
-### Delete Task feature
-
 [Back to Table of Contents](#table-of-contents)
+
+### Delete Task feature
 
 #### Implementation
 
@@ -502,9 +502,9 @@ The sequence diagrams below show the details of the respective reference frames.
 
 <div style="page-break-after: always;"></div>
 
-## **Documentation, Logging, Testing, Configuration, Dev-Ops**
-
 [Back to Table of Contents](#table-of-contents)
+
+## **Documentation, Logging, Testing, Configuration, Dev-Ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -516,13 +516,11 @@ The sequence diagrams below show the details of the respective reference frames.
 
 <div style="page-break-after: always;"></div>
 
+[Back to Table of Contents](#table-of-contents)
+
 ## **Appendix: Requirements**
 
-[Back to Table of Contents](#table-of-contents)
-
 ### Product scope
-
-[Back to Table of Contents](#table-of-contents)
 
 **Target user profile**:
 
@@ -537,9 +535,9 @@ CoordiMate helps event planners to easily keep track of contact details as well 
 
 <div style="page-break-after: always;"></div>
 
-### User stories
-
 [Back to Table of Contents](#table-of-contents)
+
+### User stories
 
 Priorities:
 
@@ -582,9 +580,9 @@ Priorities:
 
 <div style="page-break-after: always;"></div>
 
-### Use cases
-
 [Back to Table of Contents](#table-of-contents)
+
+### Use cases
 
 For all use cases below, the **System** is `CoordiMate` and the **Actor** is the `user`, unless specified otherwise.
 
@@ -1209,9 +1207,9 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 
 <div style="page-break-after: always;"></div>
 
-### Non-Functional Requirements
-
 [Back to Table of Contents](#table-of-contents)
+
+### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 persons and tasks without a noticeable sluggishness in performance for typical usage.
@@ -1224,9 +1222,9 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 9. GUI should be usable for resolutions of 1280x720 and higher, and for screen scales of 150%.
 10. Application should be packaged and delivered to user in a single JAR file under 100MB.
 
-### Glossary
-
 [Back to Table of Contents](#table-of-contents)
+
+### Glossary
 
 * **API**: Application Programming Interface, a set of predefined functions that a software program can use to interact with another software program.
 * **CLI**: Command Line Interface, a way of interacting with a computer program by typing commands and receiving text responses.
@@ -1240,9 +1238,9 @@ For all use cases below, the **System** is `CoordiMate` and the **Actor** is the
 
 ---
 
-## **Appendix: Instructions for manual testing**
-
 [Back to Table of Contents](#table-of-contents)
+
+## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -1457,9 +1455,9 @@ testers are expected to do more <i>exploratory testing</i>.
 
 <div style="page-break-after: always;"></div>
 
-## **Appendix: Planned Enhancements**
-
 [Back to Table of Contents](#table-of-contents)
+
+## **Appendix: Planned Enhancements**
 
 ### 1. Character limits for person fields and tasks
 
@@ -1540,9 +1538,9 @@ testers are expected to do more <i>exploratory testing</i>.
 
 <div style="page-break-after: always;"></div>
 
-## **Appendix: Effort**
-
 [Back to Table of Contents](#table-of-contents)
+
+## **Appendix: Effort**
 
 ### 1. Feature-rich selection of commands
 Tailored for the SoC Computing Club event planners, CoordiMate has expanded from the initial 8 commands in AB3 to a robust suite of 27. Each command was crafted to optimise the event planning workflow, addressing the need for quick and efficient management of contacts and tasks. Our enhancements were directed towards providing practical solutions within the event planning sphere.
