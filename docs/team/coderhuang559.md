@@ -38,18 +38,8 @@ Given below are my contributions to the project.
   * User Guide:
     * Added documentation for the features `remark` for contacts, `listtime` for contacts, `addmeeting` for groups and `deletetime` for groups. [\#144](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/145)
   * Developer Guide:
-    * Added implementation details of the `remark` [\#112](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/112/files), `listtime` [\#226](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/226/files), and `addmeeting` features.
-    * Added activity and sequence diagrams for the above functions. This includes for delete person time command, shown here.
-    * <puml src="diagrams/GroupRemarkSequenceDiagram.puml" alt="GroupRemarkSequenceDiagram"/>
+    * Added implementation details of the `remark` [\#270](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/270/files), `listtime` [\#270](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/270/files), and `addtime` [\#270](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/270/files) features.
+    * Added activity and sequence diagrams for the above functions.
 
 * **Contributions beyond project team**
-  * Meticulously review other groups work and provided feedback on potential bugs and how they could imrpove their product [here](https://github.com/nicholastng010601/ped/tree/main/files).
-
-
-[//]: # (* **Community**:)
-[//]: # (  * PRs reviewed &#40;with non-trivial review comments&#41;: [\#89]&#40;https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/89&#41;)
-
-[//]: # (  * Reported bugs and suggestions for other teams in the class &#40;examples: [1]&#40;&#41;, [2]&#40;&#41;, [3]&#40;&#41;&#41;)
-[//]: # (  * Some parts of the history feature I added was adopted by several other class mates &#40;[1]&#40;&#41;, [2]&#40;&#41;&#41;)
-
-
+  * Meticulously review other groups work and provided feedback on potential bugs and how they could improve their product [here](https://github.com/coderhuang559/ped/tree/main/files).
