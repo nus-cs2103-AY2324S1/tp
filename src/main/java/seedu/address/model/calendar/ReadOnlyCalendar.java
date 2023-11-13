@@ -37,4 +37,12 @@ public interface ReadOnlyCalendar {
      * @return the latest ending time of any event for the current week in a LocalTime object.
      */
     Optional<LocalTime> getLatestEventEndTimeInCurrentWeek();
+
+    /**
+     * Combine this calendar with another calendar, disregarding conflicts in events.
+     *
+     * @param other other calendar to be combined.
+     * @return new calendar with events from both calendars.
+     */
+    ReadOnlyCalendar getCombinedCalendar(ReadOnlyCalendar other);
 }

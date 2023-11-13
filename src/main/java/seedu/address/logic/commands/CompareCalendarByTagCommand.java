@@ -37,7 +37,7 @@ public class CompareCalendarByTagCommand extends Command {
 
         ReadOnlyCalendar comparisonCalendar = lastShownList.stream().filter(person -> {
             return tagList.stream().anyMatch(person::hasTag);
-        }).map(Person::getCalendar).reduce(model.getUnderlyingCalendar(), UniMateCalendar::combineCalendar);
+        }).map(Person::getReadOnlyCalendar).reduce(model.getCalendar(), ReadOnlyCalendar::getCombinedCalendar);
 
         model.setComparisonCalendar(comparisonCalendar);
 
