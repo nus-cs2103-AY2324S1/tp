@@ -52,18 +52,18 @@ public class AppendLogCommand extends UndoableCommand {
         model.addToHistory(this);
 
 
-        boolean hasDuplicates = false;
+        boolean hasDupes = false;
         String duplicateClause = "";
         for (Person person : model.getFoundPersonsList()) {
             if (model.getLogBook().hasPerson(person)) {
-                hasDuplicates = true;
+                hasDupes = true;
                 duplicateClause += "\n  " + person.getName() + ", ID: " + person.getId();
                 continue;
             }
             model.getLogBook().addPerson(person);
         }
 
-        return hasDuplicates
+        return hasDupes
                 ? new CommandResult(String.format(MESSAGE_DUPLICATES, duplicateClause))
                 : new CommandResult(MESSAGE_SUCCESS);
 
