@@ -152,7 +152,7 @@ Throughout this guide, you will see different text styles that are used to highl
 
    - `addPerson n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a new contact named `John Doe` with the specified details.
 
-   - `deletePerson 3` : Deletes the 3rd contact shown in the current contact list.
+   - `deletePerson 3` : Deletes the 3rd person shown in the current contact list.
 
    - `findTask caterer` : Finds all tasks with the word `caterer` in their title or note.
 
@@ -877,7 +877,7 @@ mt
 - `listTask` followed by `markTask 1`<br><br>
   ![markTask_success](images/output/markTask_success.png)
 
-  *<center>CoordiMate marks the task at the index <code>1</code> in the task list as done.</center>*
+  *<center>CoordiMate marks the 1st task in the task list as done.</center>*
 
 <h4>Potential Errors:</h4>
 
@@ -921,7 +921,7 @@ ut
 - `listTask` followed by `unmarkTask 1`<br><br>
   ![unmarkTask_success](images/output/unmarkTask_success.png)
 
-  *<center>CoordiMate marks the task at the index <code>1</code> in the task list as not done.</center>*
+  *<center>CoordiMate marks the 1st task in the task list as not done.</center>*
 
 <h4>Potential Errors:</h4>
 
