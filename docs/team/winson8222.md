@@ -14,25 +14,21 @@ Given below are my contributions to the project.
 * **New Feature**: Deck and Cards Operations [#66](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/66):
   * What it does: Allow the user to perform the basic operations based on the Card class by taking in the
   parameters required,
-  * Highlights: Users can now input add and edit based on the parameters specified by each
-  command. Remove some trace of ab3 to conform to lesSON requirements.
-  Added Deck Class to contain the list of cards. Added EditCommand and EditCommandParser classes to be able to parse and handle 
-  edit command to change the question and answer of a flashcard.
+  * Highlights: Users can now input add and edit commands based on the parameters specified by each
+  command. 
 
 
 * **New Feature**: Practise ([#71](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/71), [#92](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/92))
-  * What it does: Allows user to look at the question of a specific card using its index.
-  * Justification: It is the main practical function of a flashcard application for users to test his knowledge.
+  * What it does: Allows users to look at the question of a specific card using its index.
+  * Justification: It allows users to test his knowledge under exam condition.
   * Highlights: Practise allows users to access only the question of a flashcard, if command is entered without index, the flashcard at the top of the list will be practised.
-  PractiseCommandParser and PractiseCommand are created to parse and handle practise commands 
 
 
 
 * **New Feature**: Solve ([#92](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/92), [#95](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/95))
   * What it does: Allows user to look at the answer of a specific card  using its index.
   * Justification: It is the main practical function of a flashcard application for users to learn from his mistake
-  * Highlights: Solve reveals the answer to a flashcard to the users.
-  SolveCommand and SolveCommandParser are created to parse and handle solve commands.
+  * Highlights: Solve command reveals the answer to a flashcard to the users.
 
 
 * **New Feature**: Set Difficulty [#95](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/95)
@@ -40,7 +36,6 @@ Given below are my contributions to the project.
   * Justification: It is the main practical function of a flashcard application for users to evaluate the question
   solving process and the application and schedule their next practise based on the difficulty input.
   * Highlights: Users set a level of difficulty (easy, medium or hard) for a question using `set` command, the deck of card will then be rearranged according to the new schedule.
-    SetDifficultyCommand and SetDifficultyCommandParser are created to parse and handle set commands.
 
 
 * **New Feature** MarkDown Syntax [#117](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/117)
@@ -62,31 +57,23 @@ Given below are my contributions to the project.
 * **Enhancements to existing features**:
   * Card Class is changed to include difficulty attribute [#71](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/71)
   * Deck Class is created to contain a list of Cards [#66](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/66)
-  * DisplayResult can now support MarkDown syntax: bold, italic and underline. [#117](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/117)
-  * CardDisplay can now support MarkDown syntax: bold, italic and underline. [#117](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/117)
+  * Enhanced DisplayResult and CardDisplay to support MarkDown syntax: bold, italic and underline. [#117](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/117)
   * Fixed bug where application does not start without existing JSON file [#71](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/71)
-  * Created test cases for PractiseCommand [#92](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/92)
-  * Created test cases for SolveCommand [#92](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/92)
-  * Created test cases for SetDifficultyCommand [#190](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/190)
-  * Created test cases to increase Code Coverage from 60% to 65% (Pull requests: [#204](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/204), [#206](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/206))
+  * Created test cases to increase code coverage to 65% (Pull Requests [#92](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/92), [#190](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/190), [#204](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/204), [#206](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/206))
   * Fixed bug where JSON format is wrong for the new JSON file created [#206](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/206)
-
 
 
 * **Documentation**:
   * User Guide:
-    * Added documentations and screenshots for the features `practise`. [#111](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/111)
-    * Added documentations and screenshots for the features `solve`. [#111](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/111)
-    * Added documentations and screenshots for the features `set`.[#111](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/111)
+    * Added documentations and screenshots for the features `practise`, `solve` and `set` . [#111](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/111)
     * Added documentations for MarkDown Syntax feature. (Pull requests [#122](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/122), [#126](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/126/files),
     [#189](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/189))
-    * Added screenshots with labels to describe the outcome of each MarkDown syntax [#126](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/126/files)
+    * Added labelled screenshots to describe the outcome of MarkDown syntaxes [#126](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/126/files)
     * Added notes to warn users to not stack MarkDown Syntax [#192](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/192/files)
   * Developer Guide:
     * Added documentation to explain the functions and design consideration of `practise`,
     `solve` and `set` and how they synergise with Spaced-Repetition. [#112](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/112)
-    * Added extensions to use cases (add, edit, delete, practise, solve, set), to describe the cases
-    when invalid parameters or incorrect command format is entered by the users. [#131](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/131)
+    * Added extensions to use cases, to describe the cases when invalid parameters or incorrect command format is entered by the users. [#131](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/131)
     * Added Planed Enhancement to support Markdown Syntax stacking [#225](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/225)
   *  README:
     * Removed trace of ab3 and revamped README file for lesSON. [#50](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/50)
@@ -95,14 +82,11 @@ Given below are my contributions to the project.
 * **Community**:
   * Reviewed PR with Non-Trivial Comments
     * Removal of irrelevant test cases[#68](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/68)
-    * Modification of error messages [#74](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/74)
-    * Adding NextPractiseDate to a Card and give advice to improve the feature further
-    [#93](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/93)
+    * Modifications of error messages [#74](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/74)
+    * Adding NextPractiseDate and give advice to improve the feature further [#93](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/93)
     * Filtering function based on tag and question [#93](https://github.com/AY2324S1-CS2103T-W17-4/tp/pull/93)
   * Wrote further test cases of code implemented by other team member
-  * Reported bugs and provide suggestions for other teams (Issues: [1](https://github.com/winson8222/ped/issues/1),
-  [2](https://github.com/winson8222/ped/issues/2), [3](https://github.com/winson8222/ped/issues/3),
-  [4](https://github.com/winson8222/ped/issues/4))
+  * Reported bugs and provide suggestions for other teams (Issues: [1](https://github.com/winson8222/ped/issues/1), [2](https://github.com/winson8222/ped/issues/2), [3](https://github.com/winson8222/ped/issues/3),[4](https://github.com/winson8222/ped/issues/4))
 
 
 * **Tools**:
