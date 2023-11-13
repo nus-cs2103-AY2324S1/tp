@@ -168,7 +168,9 @@ Go to the [Table of Contents](#table-of-contents) to navigate to the feature tha
 
     * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-      * `set` : sets the applicant status to either of: (`Preliminary`, `Interviewed`, `Rejected`, `Offered`).
+    * `set` : sets the applicant status to either of: (`Preliminary`, `Interviewed`, `Rejected`, `Offered`).
+   
+    * `export` : exports name, phone, email, address, tags, linkedin, github, remark, status to /data/export.csv
 
     * `add linkedin 1 alexyeoh`: Adds LinkedIn account to applicant's existing contact information.
 
@@ -370,6 +372,16 @@ The GitHub window opens as follows, displaying the profile with the specified us
 
 Format: `set INDEX STATUS`
 
+
+| Type      | Prefix   | Constraints                                                                                                                                |
+|-----------|----------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| Mandatory | `INDEX`  | `INDEX` must be an existing index in the displayed applicant list and it must not be greater than the total number of applicant in JABPro. |
+| Mandatory | `STATUS` | `STATUS` must be one of the following - "Preliminary", "Interviewed", "Rejected", "Accepted".                                              |
+
+**Notes regarding `set` command:**
+* The index used will be the same index as the one shown in the displayed applicant list.
+<box type="tip" seamless>
+
 Sets the applicant to a specific status ("Preliminary"/ "Interviewed"/ "Rejected"/ "Offered")
 
 * Sets the applicant at the specified `INDEX` to a specific hiring status.
@@ -379,7 +391,6 @@ Sets the applicant to a specific status ("Preliminary"/ "Interviewed"/ "Rejected
 
 Examples:
 * `list` followed by `set 2 Interviewed` sets the 2nd applicant in the address book to "Interviewed".
-* `find Betsy` followed by `set 1 Interviewed` sets the status of 1st applicant in the results of the `find` command.
 
 ### Viewing a applicant's details: `view`
 
@@ -907,16 +918,23 @@ The `Help Window` opens up as follows:
 
 Format: `help`
 
-### Exporting all entries : `export`
-
-Exports the entries into a .csv file located in the current directory as (/data/export.csv)
+### Exporting the existing data to csv : `export`
 
 Format: `export`
 
-* Note: Export currently does not support Events.
+Exports the entries into a .csv file located in the current directory as (/data/export.csv)
 
-* Usage Note: JABPro must have write permissions, this means that if the .csv file is open,
-  exporting again will not be possible.
+**Notes regarding `csv` command:**
+* Export only exports the following: Name, Phone, Email, Address, Tags, Linkedin, Github, Remark, Status.
+  <box type="tip" seamless>
+* JABPro must have write permissions, this means that if the .csv file is open,
+    exporting again will not be possible.
+
+Exports to the following location
+* /data/export.csv
+
+Examples:
+* `export` exports the data to /data/export.csv
 
 ### Clearing all entries : `clear`
 
