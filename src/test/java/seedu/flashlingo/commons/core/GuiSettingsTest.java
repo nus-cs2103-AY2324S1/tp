@@ -11,6 +11,7 @@ public class GuiSettingsTest {
         String expected = GuiSettings.class.getCanonicalName() + "{windowWidth=" + guiSettings.getWindowWidth()
                 + ", windowHeight=" + guiSettings.getWindowHeight() + ", windowCoordinates="
                 + guiSettings.getWindowCoordinates() + "}";
+        //Test for equality against the expected String representation of a GuiSettings object
         assertEquals(expected, guiSettings.toString());
     }
 }

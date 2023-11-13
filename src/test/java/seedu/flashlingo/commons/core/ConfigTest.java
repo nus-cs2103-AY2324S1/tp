@@ -14,6 +14,7 @@ public class ConfigTest {
         Config config = new Config();
         String expected = Config.class.getCanonicalName() + "{logLevel=" + config.getLogLevel()
                 + ", userPrefsFilePath=" + config.getUserPrefsFilePath() + "}";
+        //Test for equality against the expected String representation of a Config object
         assertEquals(expected, config.toString());
     }
 
@@ -21,6 +22,7 @@ public class ConfigTest {
     public void equalsMethod() {
         Config defaultConfig = new Config();
         assertNotNull(defaultConfig);
+        //Test for equality against an identical ConfigTest object
         assertTrue(defaultConfig.equals(defaultConfig));
     }
 
