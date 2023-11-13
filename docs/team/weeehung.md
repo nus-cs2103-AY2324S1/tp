@@ -73,7 +73,7 @@ Given below are my contributions to the project.
 
 * **Tools**:
   * Utitlised JavaFx Scene Builder for building the frontend of the project ([\#107](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/107))
-  * Utitlised Markbind CLI to preview PUML diagrams and web changes locally [\#252](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/252)
+  * Utilised Markbind CLI to preview PUML diagrams and web changes locally [\#252](https://github.com/AY2324S1-CS2103T-T14-3/tp/pull/252)
 
 
 
