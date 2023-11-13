@@ -762,6 +762,7 @@ If any group mate has not key in their free time slots using `addtime`, an error
 
 
 The following activity diagram summarizes what happens when a user executes a FindFreeTime command:
+<puml src="diagrams/FindFreeTimeActivityDiagram.puml" alt="FindFreeTimeActivityDiagram" />
 
 --------------------------------------------------------------------------------------------------------------------
 
