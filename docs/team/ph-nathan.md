@@ -44,7 +44,7 @@ Relevant tests were added for these commands.
   * **Enhancement details:** Users can toggle between light and dark mode.
   * **Justification:** To adapt to the needs of CCA heads, who may want to work on CCA tasks during both day and night. Dark mode can reduce blue light
     that can interrupt sleep, it also saves energy because less power usage to display darker background.
-  * **Credits:** Implementation is inspired by Tutor’s Pet
+  * **Credits:** Implementation is adapted by Tutor’s Pet
 
 * **Fix `editEnrolment` command** [#265](https://github.com/AY2324S1-CS2103T-F11-1/tp/pull/265)
   * **Enhancement details:** The hours and remarks fields will be reflected in UI when edited via `editEnrolment` command.
