@@ -13,7 +13,7 @@ pageNav: 3
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+UniMate is based of the  [AddressBook-Level3](https://github.com/se-edu/addressbook-level3) project created by the [SE-EDU initiative](https://se-education.org/).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1322,7 +1322,7 @@ Rename the files to their respective data files and replace the original files (
    "tags" : [ "friends" ],<br>
    "events" : [ {<br>
    "description" : "Nap",<br>
-   "eventPeriod" : "2024-01-03 12:00 - 2024-01-03 18:00"<br>
+   "eventPeriod" : "Invalid Period - 2024-01-03 18:00"<br>
    } ]<br>
    }<br>
    Expected: The AddressBook (Contact List) in UniMate should be blank as UniMate will discard all data.<br>
