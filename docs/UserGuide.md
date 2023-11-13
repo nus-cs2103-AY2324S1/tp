@@ -81,19 +81,12 @@ Info:<br>
 
 1. Copy the file to the folder you want to use as the _home folder_ for the Tutorium app.
 
-1. Double-click the file to launch it.
-
-<box type="info" seamless>
-Alternately, you can use the CLI to launch Tutorium.
-
 1. Open a command terminal. If you are using Windows, press the Windows key + R on your keyboard, type `cmd` and press Enter.
 If you are using Mac, click on the Launchpad icon in the Dock, type Terminal in the search field, and then click Terminal.
 
-1. "Go into" the folder you put the `tutorium.jar` file in using cd command. For example, if you put it in a folder named `Downloa`, then type this command into the terminal: `cd Tutorium`
+1. "Go into" the folder you put the `tutorium.jar` file in using cd command. For example, if you put it in a folder named `Download`, then type this command into the terminal: `cd Download`
 
 1. Key the `java -jar tutorium.jar` command in the terminal to run the application.<br>
-
-</box>
 
 <box type="tip" seamless>
 
@@ -231,7 +224,7 @@ Examples:
 ### Import data from .csv file: `import`
 
 Imports students' data into Tutorium.
-1. Move your .csv file into the folder containing Tutorium.
+1. Move your .csv file into the folder containing Tutorium.jar.
 2. Enter the import command with the following format (shown below).
 
 Format: `import FILENAME.csv`
