@@ -450,8 +450,6 @@ The list of valid statuses is stored as an `Enumeration` object for the followin
 
 <div style="page-break-after: always;"></div>
 
-<div style="page-break-after: always;"></div>
-
 ### Saving data
 
 - The address book is saved in a JSON file after every command execution. The default path for this file is `/data/outbook.json`, found in the same directly as the application JAR file.
