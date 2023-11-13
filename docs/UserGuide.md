@@ -407,9 +407,9 @@ Examples:
 * `bar s/` will show a bar chart categorized by student subject.
 * `bar d/2023` will show a bar chart categorized by months in year 2023.
 
-Below is the chart generated after entering `bar l/`.
+Below is the chart generated after entering `bar s/`.
 
-  ![result for 'bar l/'](images/ug_images/barResult.png)
+  ![result for 'bar s/'](images/ug_images/barResult.png)
 
 [↑ Back to table of contents](#table-of-contents)
 
