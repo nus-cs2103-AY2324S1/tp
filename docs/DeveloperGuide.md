@@ -79,7 +79,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 <puml src="diagrams/BottomListPanelClassDiagram.puml" alt="Structure of the UI Component"/>
 
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BottomListPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -692,7 +692,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
 
-//@author lihongguang00
+//@@author lihongguang00
 | Priority | As a …                                                              | I want to …                                                                  | So that I can…                                                                          |
 | -------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
 | `* * *`  | NUS student                                                         | search for the contacts of other students within my university               | contact them for group projects                                                         |
@@ -823,7 +823,8 @@ Use case ends.
 
       Use case ends.
 
-//@author Fallman2
+//@@author Fallman2
+
 **Use case: UC4 Clear All Entries**
 
 
@@ -982,7 +983,8 @@ Use case ends.
 
     Use case ends.
 
-//@author Fallman2
+//@@author Fallman2
+
 **Use case: UC12 Filter by fields.**
 
 
@@ -1008,7 +1010,8 @@ Use case ends.
 
       Use case ends.
 
-//@author nicrandomlee
+//@@author nicrandomlee
+
 **Use case: UC13 Sort by fields.**
 
 **MSS**
@@ -1023,9 +1026,10 @@ Use case ends.
 - 1a. User uses the wrong delimiter or makes a spelling mistake, or provides incorrect number of arguments
     - UniMate displays a message to show a helper message outlining the correct syntax and available sort options
 
-//@author
+//@@author
 
-//@author lihongguang00
+//@@author lihongguang00
+
 **Use case: UC14 Compare calendars**
 
 **MSS**
@@ -1045,9 +1049,9 @@ Use case ends.
   - UniMate displays the user's calendar only, ignoring all the invalid arguments
   - Use case ends.
   - 
-//@author
+//@@author
 
-//@author Fallman2
+//@@author Fallman2
 
 **Use case: UC15 Adding a Task.**
 
@@ -1139,7 +1143,7 @@ Use case ends.
 
   Use case ends.
 
-//@author
+//@@author
 
 ### Non-Functional Requirements
 
@@ -1161,8 +1165,8 @@ Process Requirements:
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* * **Event**: An activity to be marked on the calendar with a specified time frame.
+* **Event**: An activity to be marked on the calendar with a specified time frame, with a description, some start date and time, and some end date and time.
+* **Task**: An activity that has a description, and an optional deadline date and time.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1476,7 +1480,7 @@ Rename the files to their respective data files and replace the original files (
 6. Test case: Duplication of the fields in the different data files.<br>
    Expected: Similar to previous.
 
-7. Test case: Other invalid storage formats: Not a JSON format.
+7. Test case: Other invalid storage formats: Not a JSON format.<br>
    Expected: Similar to previous.
 
 ## **Appendix: Effort**
@@ -1551,6 +1555,16 @@ Currently, the user can only compare calendars with their contacts for the curre
 schedule a meeting in a week beyond the current one, they might have difficulty as they might not be able to compare
 their calendars with their contacts for that specific week. Therefore, allowing the user to navigate beyond the current
 week restriction for the compare calendar feature will be hugely beneficial to the user.
+
+### Allow users to add single day events without typing the date twice
+Currently, when the user wants to add an `Event` into their `Calendar`, they have to type the date of the event twice
+(once in start date and time and another in end date and time). For single day events, this can be inconvenient. Hence,
+we hope to introduce a command that will allow users to add a single day event without typing the date twice.
+
+### Allow users to add recurring events
+Currently, our `Calendar` only supports adding of singular events. We hope to allow users to add recurring events in the future
+to more accurately simulate the events that the user might have in a University context, where they might have recurring classes
+every week.
 
 ### Allow users to import .ics format files
 Currently, UniMate has no support for importing of external files. Allowing users to import .ics files, which is a common export
