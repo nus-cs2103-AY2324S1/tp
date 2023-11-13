@@ -206,33 +206,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                            | add contacts                                                                         | keep track of my friends and schoolmates                                        |
 | `* * *`  | user                            | delete contacts                                                                      | remove my contact with that person                                              |
 | `* * *`  | user                            | view my contacts                                                                     | know who I have as contacts                                                     |
-| `* * `   | user                            | update contacts                                                                      | make changes to my contact info when they occur                                 |
+| `* * `   | user                            | edit contacts                                                                        | make changes to my contact info when they occur                                 |
 | `* *`    | user                            | search for contacts                                                                  | find a specific contact directly and easily                                     |
-| `* *`    | potential user                  | access an easy-to-follow tutorial                                                    | understand the app's core features                                              |
 | `* *`    | user                            | add tags to contacts                                                                 | classify them based on contact type                                             |
-| `* *`    | user                            | attach images to contacts such as a business card scan                               | store all additional or miscellaneous info about a contact                      |
-| `* *`    | user                            | share a contact with other users or apps                                             | transfer my contact info easily                                                 |
-| `* *`    | user                            | merge duplicate contacts                                                             | my contact list stays clean                                                     |
+| `* *`    | user                            | merge duplicate contacts                                                             | my contact list stays clean                                                        |
 | `* *`    | user                            | sort contacts by certain criteria                                                    | find contacts satisfying a certain criteria easily                              |
-| `* *`    | user of many communication apps | enter info about various platforms that my contacts use                              | keep track of all the various ways I can contact the same person                |
-| `* *`    | user                            | indicate whether a contact is from NUS or not                                        | differentiate between NUS and non-NUS contacts                                  |
-| `* *`    | user                            | enter names in a different format depending on contact type                          | maintain respect based on profession (e.g. prefix a professor's name with Prof) |
-| `* *`    | user                            | see my contacts in different formats depending on their profession                   | easily differentiate them in a familiar way                                     |
+| `* *`    | user                            | save alternate contact info for my contacts                                          | keep track of the various ways I can contact the same person                    |
+| `* *`    | user                            | pin frequent contacts so they appear at the top when I open the app                  | access my most important contacts quickly                                       |
 | `* *`    | user                            | indicate where I met each contact                                                    | keep track of people I have various levels of familiarity with                  |
 | `* *`    | user                            | view contacts by groups or type                                                      | more easily manage related contacts                                             |
-| `* *`    | user                            | indicate where I met each contact                                                    | keep track of people I have various levels of familiarity with                  |
-| `* *`    | new user                        | perform functions to a satisfying degree despite only using simple or basic commands | use the app without a steep learning curve                                      |
-| `* *`    | long-time user                  | identify old and/or rarely-used contacts                                             | hide or delete them to reduce clutter                                           |
 | `* *`    | user                            | export my contacts to an external file                                               | backup my contacts’ information                                                 |
 | `* *`    | user                            | import my contacts from an external file                                             | quickly populate the app with my existing contacts                              |
+| `* *`    | user                            | clear all contacts data                                                              | quickly erase all information stored when I will no longer use the app          |
 | `*`      | user who prefers CLI            | use keyboard shortcuts                                                               | perform tasks more efficiently                                                  |
 | `*`      | user                            | see a different background colour for each contact                                   | differentiate between contacts more easily                                      |
-| `*`      | power user with many contacts   | use some scripting capabilities                                                      | automate tedious actions or achieve the exact results I specify                 |
-| `*`      | busy user                       | use icons to denote certain contact information                                      | identify the information I want at a glance                                     |
-| `*`      | user                            | see a log of past interactions with a contact                                        | know my history with my contacts                                                |
+| `*`      | infrequent user                 | view a "cheatsheet" or help dialog for the text commands                             | remember some basic commands I may have forgotten
 | `*`      | advanced user                   | search/filter by specific parts of contacts (e.g. containing certain words)          | narrow down contacts to exactly what I am looking for                           |
 | `*`      | user who prefers CLI            | switch between previously entered commands in history                                | easily repeat previous commands                                                 |
-| `*`      | infrequent user                 | view a “cheatsheet” or help dialog for the text commands                             | remember some basic commands I may have forgotten                               |
+| `*`      | busy user                       | use icons to denote certain contact information                                      | identify the information I want at a glance                                     |
 
 ### Use cases
 
