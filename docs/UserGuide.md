@@ -95,12 +95,12 @@ to better understand all the technical jargons!
 
 Throughout this User Guide, there might 
 
-| Symbol/Syntax                                  | Meaning                                                                                                                                         |
-|------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
-| :information_source: **Notes**                 | Information that you need to pay attention to.                                                                                                  |
-| :bulb: **Tip**                                 | Information that you may find helpful.                                                                                                          |
-| :exclamation: **Caution**                      | Information that you need to know before executing a [command](#command)                                                                        |
-| `Highlighted text block`                       | [Commands](#command) or [parameters](#parameter) that you can enter into our application, or text that is directly displayed in our application |
+| Symbol/Syntax                                   | Meaning                                                                                                                                         |
+|-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| :information_source: **Notes**                  | Information that you need to pay attention to.                                                                                                  |
+| :bulb: **Tip**                                  | Information that you may find helpful.                                                                                                          |
+| :exclamation: **Caution**                       | Information that you need to know before executing a [command](#command)                                                                        |
+| `Highlighted text block`                        | [Commands](#command) or [parameters](#parameter) that you can enter into our application, or text that is directly displayed in our application |
 | [Hyperlinked text in blue](#symbols-and-syntax) | When it is pressed, it should lead you to another section in the document or to an external link.                                               |
 
 ## Layout
@@ -131,14 +131,7 @@ The image below describes TuitionConnect's layout with some description for each
 
 6. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
-<details open>
-<summary><strong>Formats</strong></summary>
-<div markdown="1">
-
 ## Input Formats
-
-<div markdown="block" class="alert alert-info">
 
 ### Command Format
 
@@ -153,14 +146,23 @@ The image below describes TuitionConnect's layout with some description for each
 
 * Extraneous parameters added after commands that do not take in parameters (such as `help`, `list`, `exit`, `undo`, `redo` and `clear`) will be ignored.<br>
   e.g. if the command typed is `undo 123`, it will be interpreted as `undo`.
-</div>
 
-</div>
-</details>
---------------------------------------------------------------------------------------------------------------------
-<details open>
-<summary><strong>Features</strong></summary>
-<div markdown="1">
+## Parameters Requirement
+Here are the [parameter](#glossary) requirements of commonly used parameters by [commands](#glossary) in the [**Features**](#features) section below.
+
+| Parameter     | Description                                                 | Requirement / Remarks                                                                                                                                                                                                                                |
+|---------------|-------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **`NAME`**    | Name of tutee                                               | [Alphanumeric](#glossary) and may contain spaces                                                                                                                                                                                                     |
+| **`DATE`**    | Date of the upcoming application task                       | In **dd-mm-yyyy** format                                                                                                                                                                                                                             |
+| **`PHONE`**   | Contact number of tutee                                     | Any number at least 3 digits long                                                                                                                                                                                                                    |
+| **`EMAIL`**   | Email address of tutee                                      | In **XXXXXXXX@emaildomain** format <br> Example: `johndoee@gmail.com`                                                                                                                                                                                |
+| **`ADDRESS`** | Address of the tutee                                        | [Alphanumeric](#glossary) and may contain spaces                                                                                                                                                                                                     |
+| **`SUBJECT`** | Subject of the tutee                                        | [Alphanumeric](#glossary) and may contain spaces                                                                                                                                                                                                     |
+| **`DAY`**     | Day of weekly recurring lesson of the tutee                 | Full name of day or first three letters of the full name <br> **Non-case sensitive** <br> Example: `Mon`/`Monday`/`monday`                                                                                                                           |
+| **`BEGIN`**   | Begin time of a tutee's weekly recurring lesson             | In **HHMM** format                                                                                                                                                                                                                                   |
+| **`END`**     | End time of a tutee's weekly recurring lesson               | In **HHMM** format                                                                                                                                                                                                                                   |
+| **`PAYRATE`** | dollars per hour you make teaching this tutee               | Numbers only <br> Numbers must be **non-negative**                                                                                                                                                                                                   |
+| **`INDEX`**   | The index number of the tutee shown in the tutee list panel | Used in [`delete`](#deleting-a-tutee-delete) [`edit`](#editing-a-tutee--edit) [`unpaid`](#marking-a-tutee-as-unpaid--unpaid) and [`paid`](#marking-a-tutee-as-paid--paid) commands <br> Must be a **positive number** <br> Example: (1,2,3,...) <br> |
 
 ## Features
 
@@ -182,7 +184,8 @@ Shows a message that helps redirects you to the user guide.
 * **Address (Compulsory field)**: String without restriction in characters.
 * **Email (Compulsory field)** String with restrictions in characters (XXXXXXXX@emaildomain).
 * **Subject (Compulsory field)**: String without restriction in characters.
-* **Day (Compulsory field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).* **Begin (Compulsory field)**: String with restrictions (HHMM).
+* **Day (Compulsory field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).
+* **Begin (Compulsory field)**: String with restrictions (HHMM).
 * **End (Compulsory field)**: String with restrictions (HHMM).
 * **PayRate (Compulsory field)**: String with restrictions in characters, only numbers allowed (no negative numbers).
 
@@ -197,7 +200,7 @@ Shows a message that helps redirects you to the user guide.
 * **Invalid Email**: Emails should be of the format local-part@domain and adhere to the following constraints:  
   1\. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.  
   2\. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
-* **Empty Address**: Addresses can take any values, and it should not be blank
+* **Invalid Address**: Addresses can take any values, and it should not be blank
 * **Invalid Day**: Days should be written using their full names or their first three letters, and it should not be blank
 * **Invalid Begin**: Begin has a format of HHMM
 * **Invalid End**: That is not a valid time format. End has a format of HHMM
@@ -211,23 +214,25 @@ Shows a message that helps redirects you to the user guide.
 * `add n/John Doe p/98765432 e/johnny@example.com a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 end/1600 pr/20.00`
 * `add n/Betsy Crowe p/92939402 e/betsycrowe@example.com a/Newgate Prison sb/Secondary 3 Physics d/mon b/1900 end/1930 pr/35.00`
 
+### Listing tutees : `list`
 
-### View the list : `list`
-
-**Description** : Shows the current list of tutees in your list.
-
-Format: `list`
-
-
-### View the list of tutees specified by day : `list [DAY]`
-
-**Description** : Shows the current list of tutees filtered by the specified day.
+View the tutees that you are currently teaching.
 
 Format: `list [DAY]`
 
-**Expected Input**:
-* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Tue/Wed/Thu/Fri/Sat/Sun).
+* The `DAY` parameter is optional.
+  * Without stating a specified `DAY`, `list` will display all of your tutees
+  * When `DAY` is specified, only tutees whose lessons matches the specified `DAY` will be displayed
 
+Examples:
+* `list`
+* `list monday`
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Info:** If the `DAY` parameter does not adhere to the specified format, the system will treat this as an invalid command
+</div>
+
+_Executing command:  `list monday`_
 
 ### Finding a tutee : `find`
 
@@ -277,7 +282,7 @@ and it should not be blank
 
 ### Editing a tutee : `edit`
 
-**Description** : Edit a tutee in the current list.
+**Description**: Edit a tutee in the current list.
 
 **Format**: `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SUBJECTS d/DAY b/BEGIN end/END pr/PAYRATE`
 
@@ -285,10 +290,11 @@ and it should not be blank
 * **Index (Compulsory Field)**: Numbers between 1 to the number of people inside the list.
 * **Name (Optional field)**: String composed of character between A-Z and a-z.
 * **Phone number (Optional field)**: 8 digit number.
-* **Address (Optional field)**: String without restriction in characters.
 * **Email (Optional field)** String with restrictions in characters (XXXXXXXX@emaildomain)
+* **Address (Optional field)**: String without restriction in characters.
 * **Subject (Optional field)**: String without restriction in characters.
-* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).* **Begin (Optional field)**: String with restrictions (HHMM).
+* **Day (Optional field)**: String with restrictions in characters, non-case sensitive (Mon/Monday/Tue/Tuesday/Wed/Wednesday/Thu/Thursday/Fri/Friday/Sat/Saturday/Sun/Sunday).
+* **Begin (Optional field)**: String with restrictions (HHMM).
 * **End (Optional field)**: String with restrictions (HHMM).
 * **PayRate (Optional field)** String with restrictions in characters, only numbers allowed (no negative numbers).
 
@@ -302,7 +308,7 @@ and it should not be blank
 * **Invalid Email**: Emails should be of the format local-part@domain and adhere to the following constraints:  
   1\. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.  
   2\. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
-* **Empty Address**: Addresses can take any values, and it should not be blank
+* **Invalid Address**: Addresses can take any values, and it should not be blank
 * **Invalid Day**: Days should be written using their full names or their first three letters, and it should not be blank
 * **Invalid Begin**: Begin has a format of HHMM
 * **Invalid End**: That is not a valid time format. End has a format of HHMM
@@ -317,7 +323,7 @@ To edit name and address of your second tutee in list:
 *  `edit 2 n/Betsy Crower a/Betsy street, block 110, #03-02`
 
 
-### Deleting a person: `delete`
+### Deleting a tutee: `delete`
 
 **Description**: Deletes the specific tutee from the list.
 
@@ -345,7 +351,7 @@ Examples:
 * Example image above shows the result of command `clear
 
 
-### Marking a person as paid : `paid`
+### Marking a tutee as paid : `paid`
 
 **Description**: Mark the specific tutee as paid in the list.
 
@@ -362,7 +368,7 @@ Examples:
 Examples:
 * `list` followed by `paid 1` marks the first person as paid in the list.
 
-### Marking a person as unpaid : `unpaid`
+### Marking a tutee as unpaid : `unpaid`
 
 **Description**: Mark the specific tutee as not paid in the list.
 
@@ -380,13 +386,13 @@ Examples:
 * `list` followed by `unpaid 2` marks the 2nd person as not paid in the list.
 
 
-### Show all the unpaid persons : `list unpaid`
+### Show all the unpaid tutees : `list unpaid`
 
 **Description**: Shows all the unpaid tutees in your list.
 
 Format: `list unpaid`
 
-### Mark all persons as unpaid: `unpaidAll`
+### Mark all tutee as unpaid: `unpaidAll`
 
 **Description** : Mark all tutees in the current displayed list as not paid.
 
@@ -413,35 +419,36 @@ Format: `unpaidAll`
 * **Invalid Begin**: Begin has a format of HHMM
 * **Invalid End**: That is not a valid time format. End has a format of HHMM
 
-
 ### Undo previous command : `undo`
 
-**Description**: Undo the previous command that modifies the data of tutees.
+Typed something wrong? Undo the most recent command that can modify the tutee data.
 
-**Format**: `undo`
+Format: `undo`
 
-**Expected Output when the command succeeds**: Successfully undo previous command
+<div markdown="block" class="alert alert-info">
+**:information_source: Info:** <br>
+You can only undo `add`,`clear`,`delete`,`edit`,`redo`,`paid',`unpaid` and `unpaidAll` commands
+</div>
 
-**Expected Output when the command fails**: Nothing to undo!
+_Executing command:  `undo`_
 
-### Redo previous command : `redo`
+### Redo previous undone command : `redo`
 
-**Description**: Reverses previously undone commands, restoring the data to a state before an undo operation.
+Changed your mind again? Redo the most recent command that was undone.
 
-**Format**: `redo`
-
-**Expected Output when the command succeeds**: Successfully redo previous command
-
-**Expected Output when the command fails**: Nothing to redo!
+Format: `redo`
 
 
 ### Calculating Monthly Revenue: `rev`
 
-**Description**: Displays the total revenue monthly calculated from all tutees.
+**Description**: Displays the total monthly revenue calculated from all tutees.
 
 **Format**: `rev`
 
-**Expected Output**: Successfully calculated!! Total monthly revenue: *$monthlyrevenue*
+**Expected Output**: Successfully calculated <br>
+&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+Total monthly revenue: *$monthlyrevenue*
 
 ### Exiting the program : `exit`
 
@@ -452,8 +459,7 @@ Format: `exit`
 * The application window closes automatically after you type the command `exit`
 
 
-</div>
-</details>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
