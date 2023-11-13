@@ -33,7 +33,7 @@ Given below are my contributions to the project.
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `list`, `new`, `delete`, `find`. [\#145](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/146)
-    * Made some updates to the documentation for the final release. [\#290](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/290), [\#277](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/277), [\#271](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/271/files#diff-b50feaf9240709b6b02fb9584696b012c2a69feeba89e409952cc2f401f373fb) 
+    * Made some updates to the documentation for the final release. [\#290](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/290), [\#277](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/277), [\#271](https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/271)
   * Developer Guide:
     * Added implementation details of the `add` and `addtime`feature. [\#271] (https://github.com/AY2324S1-CS2103T-T10-3/tp/pull/271/files)
     * Made diagrams for `add` and `addtime` feature.

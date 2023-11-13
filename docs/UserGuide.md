@@ -150,8 +150,7 @@ Welcome back to ProjectPRO. Simply head over to our Features section to gain ins
    1. Open a command terminal.
    2. Type `cd Desktop` , followed by `cd ProjectPro`.
    3. Type `java -jar ProjectPRO.jar` to run the application.
-
-
+<p></p>
 5. Start using ProjectPRO!
 
 --------------------------------------------------------------------------------------------------------------------

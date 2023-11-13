@@ -11,7 +11,7 @@ pageNav: 3
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **1. Introduction**
+## 1-Introduction
 
 ### **1.1. Product Overview**
 ProjectPro is a contacts organisation application designed for university students.
@@ -25,22 +25,22 @@ This app can help to save time by:
 
 --------------------------------------------------------------------------------------------------------------------
 
-### **1.2. Setting up, getting started**
+### **1.2-Setting-up-getting-started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-### **1.3. Acknowledgements**
+### **1.3-Acknowledgements**
 
 ProjectPro is a brownfield Java Project based on the AB3 project template created by the [SE-EDU initiative](https://se-education.org).
 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **2. Design**
+## 2-Design
 
-### 2.1. Architecture
+### 2.1-Architecture
 
 <puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
@@ -82,7 +82,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### 2.2. UI component
+### 2.2-UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -101,7 +101,7 @@ The `UI` component
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
-### 2.3. Logic component
+### 2.3-Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -133,7 +133,7 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### 2.4. Model component
+### 2.4-Model component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
@@ -147,7 +147,7 @@ The `Model` component
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 
-### 2.5. Storage component
+### 2.5-Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T10-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -162,17 +162,17 @@ With the inclusion of `Group` and `TimeIntervals` in our application, more compo
 
 To address this requirement, we updated our storage to save both classes in JSON format.
 
-### 2.6. Common classes
+### 2.6-Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **3. Implementation**
+## 3-Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### 3.1. Adding a Person
+### 3.1-Adding a Person
 
 #### Implementation
 
@@ -197,7 +197,7 @@ The following sequence diagram describes the process of `add` command:
 
 </box>
 
-#### Design consideration:
+#### Design-consideration
 
 **Aspect: Handling group attribute in user input**
 
@@ -211,9 +211,9 @@ The following sequence diagram describes the process of `add` command:
 
 --------------------------------------------------------------------------------------------------------------------
 
-### 3.2. Adding a Group
+### 3.2-Adding-a-Group
 
-#### Proposed Implementation
+#### Proposed-Implementation
 
 The Add Group mechanism is facilitated by `Group` class. This operation is exposed in the `Model` interface as `Model#addGroup()`.
 
@@ -237,7 +237,7 @@ Below is a sequence diagram that summarizes how a user creates a new group:
 
 </box>
 
-#### Design Considerations
+#### Design-Considerations
 
 **Aspect: Groups with the same name**
 
@@ -251,7 +251,7 @@ Below is a sequence diagram that summarizes how a user creates a new group:
 
 --------------------------------------------------------------------------------------------------------------------
 
-### 3.3. Delete Person and Group
+### 3.3-Delete-Person-and-Group
 
 #### Implementation
 
@@ -270,7 +270,7 @@ The following activity diagram summarizes what happens when a user executes a de
 
 <puml src="diagrams/DeleteCommandActivityDiagram.puml" alt="DeleteCommandActivity" />
 
-### Delete Person
+### Delete-Person
 
 Given below is an example usage scenario and how the Delete Person mechanism behaves at each step.
 
@@ -296,13 +296,13 @@ The following sequence diagram shows how the Delete Person operation works:
 
 </box>
 
-### Delete Group
+### Delete-Group
 
 The Delete Group command mechanism behaves the same as the Delete Person command above, except it deletes the target `Group` object instead of the `Person` object.
 
 Additionally, `AddressBook#removeGroup(Group g)` will remove the target group 'g' from the group lists of all the members that were a part of it by calling `Person#removeGroup(Group g)`.
 
-#### Design Considerations
+#### Design-Considerations
 
 **Aspect: How to handle two similar but different commands (delete group and delete person)**
 
@@ -315,9 +315,9 @@ Additionally, `AddressBook#removeGroup(Group g)` will remove the target group 'g
   * Cons: Users have to remember more command words which may take more time to get used to
 
 --------------------------------------------------------------------------------------------------------------------
-### 3.4. List Person and list group
+### 3.4-List-Person-and-list-group
 
-### List Person
+### List-Person
 
 The List mechanism is facilitated by the `Model` class.
 
@@ -340,7 +340,7 @@ The following activity diagram summarizes what happens when a user executes a li
 </box>
 
 
-#### List Group
+#### List-Group
 
 The List Group mechanism is facilitated by the `Model` class.
 
@@ -366,7 +366,7 @@ The following activity diagram summarizes what happens when a user executes a li
 
 --------------------------------------------------------------------------------------------------------------------
 
-### 3.5. Find Person and Find Group features
+### 3.5-Find-Person-and-Find-Group-features
 
 #### Implementation
 
@@ -382,7 +382,7 @@ The following activity diagram summarizes what happens when a user executes a fi
 
 <puml src="diagrams/FindCommandActivityDiagram.puml" alt="FindCommandActivity" />
 
-### Find Person
+### Find-Person
 
 Given below is an example usage scenario and how the Find Person mechanism behaves at each step.
 
@@ -407,13 +407,13 @@ The following sequence diagram shows how the Find Person operation works:
 
 </box>
 
-### Find Group
+### Find-Group
 
 The Find Group mechanism works like the Find Person mechanism, expect it filters contacts by a different `Predicate<Person>` which will filter for contacts who are a part of the target group.
 
 Additionally, it calls on an extra method `Group#getGroupRemark()`. `Group#getGroupRemarks()` will be called to display the previously saved group remarks to the user.
 
-#### Design Considerations
+#### Design-Considerations
 
 **Aspect: How to handle two similar but different commands (find by group and find by name)**
 
@@ -437,7 +437,7 @@ Additionally, it calls on an extra method `Group#getGroupRemark()`. `Group#getGr
 
 --------------------------------------------------------------------------------------------------------------------
 
-### 3.6. Group and Ungrouping Person
+### 3.6-Group-and-Ungrouping-Person
 
 #### Implementation
 
@@ -462,7 +462,7 @@ Ungroup works in the same way as group except the use of Command word ungroup
 The following activity diagram summarizes what happens when a user executes a new command:
 <puml src="diagrams/GroupPersonActivityDiagram.puml" alt="GroupPersonActivityDiagram"/>
 
-#### Design Considerations:
+#### Design-Considerations
 
 **Aspect: Whether to store references in both person and group**
 
@@ -476,7 +476,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 --------------------------------------------------------------------------------------------------------------------
 
-### 3.7. Adding a Group Remark
+### 3.7-Adding-a-Group-Remark
 
 #### Implementation
 
@@ -518,7 +518,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 --------------------------------------------------------------------------------------------------------------------
 
-### 3.8. Adding Time to a Person or Group
+### 3.8-Adding-Time-to-a-Person-or-Group
 
 #### Implementation
 
@@ -533,7 +533,7 @@ The following activity diagram summarizes what happens when a user executes an a
 
 <puml src="diagrams/AddTimeActivityDiagram.puml" alt="AddTimeActivity" />
 
-### Adding Time to a Person
+### Adding-Time-to-a-Person
 
 Given below is an example usage scenario and how the Add Time to Person mechanism behaves at each step.
 
@@ -561,7 +561,7 @@ The following sequence diagram shows how the Add Time to Person operation works:
 
 </box>
 
-### Adding Time to a Group
+### Adding-Time-to-a-Group
 
 The Add Time to Group command mechanism behaves the same as the Add Time to Person command above, except it uses the `Group` class instead of the `Person` class.
 
@@ -589,7 +589,7 @@ The Add Time to Group command mechanism behaves the same as the Add Time to Pers
 
 --------------------------------------------------------------------------------------------------------------------
 
-### 3.9. Delete Time Feature
+### 3.9-Delete-Time-Feature
 
 #### Implementation
 
@@ -604,7 +604,7 @@ Below is an activity diagram that illustrates the control flow for Delete Person
 
 <puml src="diagrams/DeletePersonTimeActivityDiagram.puml" alt="DeletePersonTimeActivityDiagram"/>
 
-### Deleting Time from a Person
+### Deleting-Time-from-a-Person
 
 The proposed delete time feature is facilitated by the `timeIntervalList` and `Person` class. It accesses the `timeIntervalList` from the `Person` class and deletes a time interval with `Person#deleteFreeTime()`. The operation is exposed in the `Model` interface as `Model#deleteTimeFromPerson`.
 
@@ -628,7 +628,7 @@ The following sequence diagram summarizes what happens when a user executes a ne
 
 </box>
 
-### Deleting Time from a Group
+### Deleting-Time-from-a-Group
 
 The Delete Time from Group command mechanism behaves the same as the Delete Time from Person command above, except it uses the `Group` class instead of the `Person` class.
 
@@ -666,7 +666,7 @@ The Delete Time from Group command mechanism behaves the same as the Delete Time
 
 --------------------------------------------------------------------------------------------------------------------
 
-### 3.10. Listing Time for a Person or Group
+### 3.10-Listing-Time-for-a-Person-or-Group
 
 #### Implementation
 
@@ -685,7 +685,7 @@ The following activity diagram summarizes what happens when a user executes an a
 
 <puml src="diagrams/ListTimeActivityDiagram.puml" alt="ListTimeActivity" />
 
-### Listing Time from a Person
+### Listing-Time-from-a-Person
 
 Given below is an example usage scenario and how the List Time from Person mechanism behaves at each step.
 
@@ -711,7 +711,7 @@ The following sequence diagram shows how the List Time from Person operation wor
 
 </box>
 
-### Listing Time from a Group
+### Listing-Time-from-a-Group
 
 The List Time from Group command mechanism behaves the same as the List Time from Person command above, except it uses the `Group` class instead of the `Person` class.
 
@@ -739,7 +739,7 @@ The List Time from Group command mechanism behaves the same as the List Time fro
 
 --------------------------------------------------------------------------------------------------------------------
 
-### 3.11. Find Free Time
+### 3.11-Find-Free-Time
 #### Implementation
 
 The FindFreeTime mechanism is facilitated by the `Model`, `Group` and  `Person` class. It retrieves `Group` from `Model` to find a free time between group members in `listOfGroupMates` in `Group` with a duration specified, `Duration`. The operation is exposed to `Model` interface as `Model#findGroup`.
@@ -759,9 +759,9 @@ The following activity diagram summarizes what happens when a user executes a Fi
 <puml src="diagrams/FindFreeTimeActivityDiagram.puml" alt="FindFreeTimeActivityDiagram" />
 --------------------------------------------------------------------------------------------------------------------
 
-## 4. Planned Enhancements
+## 4-Planned-Enhancements
 
-### 4.1. Undo/redo feature
+### 4.1-Undo/redo-feature
 
 Currently, we do not have undo and redo feature which open rooms for users to accidentally have typos in their command messages, causing certain unwanted commands to be executed. This can cause an array of problems,
 from deleting important data along with the contact, to inconvenience for the users themselves. As such, we plan to implement undo and redo feature in the future to provide a better user experience for our users.
@@ -785,7 +785,7 @@ In the `addmeeting` feature, user can add free time intervals to a group. Curren
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **5. Documentation, logging, testing, configuration, dev-ops**
+## 5-Documentation_logging_testing_configuration_dev-ops
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -795,7 +795,7 @@ In the `addmeeting` feature, user can add free time intervals to a group. Curren
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **6. Appendix: Requirements**
+## 6-Appendix-Requirements
 
 ### 6.1. Product scope
 
@@ -1148,7 +1148,7 @@ Use Case ends.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **7. Appendix: Instructions for manual testing**
+## 7-Appendix-Instructions-for-manual-testing
 
 Given below are instructions to test the app manually.
 
@@ -1451,7 +1451,7 @@ testers are expected to do more *exploratory* testing.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **8. Appendix: Effort**
+## 8-Appendix-Effort
 
 ProjectPRO is a project built upon AB3, which was built out of the SE-EDU initiative. Our group has been actively working on ProjectPRO this semester, meeting regularly to discuss about our application to meet deadlines punctually.
 
