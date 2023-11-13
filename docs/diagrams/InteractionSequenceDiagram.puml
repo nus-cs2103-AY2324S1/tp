@@ -1,121 +1,98 @@
-@startuml
-!include style.puml
-skinparam ArrowFontStyle plain
-
-box Logic LOGIC_COLOR_T1
-participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":InteractionCommandParser" as InteractionCommandParser LOGIC_COLOR
-participant "d:InteractionCommand" as InteractionCommand LOGIC_COLOR
-participant ":CommandResult" as CommandResult LOGIC_COLOR
-end box
-
-box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
-end box
-
-[-> LogicManager : execute("Interaction 1")
-activate LogicManager
-
-LogicManager -> AddressBookParser : parseCommand("Interaction 1")
-activate AddressBookParser
-
-create InteractionCommandParser
-AddressBookParser -> InteractionCommandParser
-activate InteractionCommandParser
-
-InteractionCommandParser --> AddressBookParser
-deactivate InteractionCommandParser
-
-AddressBookParser -> InteractionCommandParser : parse("1")
-activate InteractionCommandParser
-
-create InteractionCommand
-InteractionCommandParser -> InteractionCommand
-activate InteractionCommand
-
-InteractionCommand --> InteractionCommandParser : d
-deactivate InteractionCommand
-
-InteractionCommandParser --> AddressBookParser : d
-deactivate InteractionCommandParser
-'Hidden arrow to position the destroy marker below the end of the activation bar.
-InteractionCommandParser -[hidden]-> AddressBookParser
-destroy InteractionCommandParser
-
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
-
-LogicManager -> InteractionCommand : execute()
-activate InteractionCommand
-
-InteractionCommand -> Model : InteractionPerson(1)
-activate Model
-
-Model --> InteractionCommand
-deactivate Model
-
-create CommandResult
-InteractionCommand -> CommandResult
-activate CommandResult
-
-CommandResult --> InteractionCommand
-deactivate CommandResult
-
-InteractionCommand --> LogicManager : result
-deactivate InteractionCommand
-
-[<--LogicManager
-deactivate LogicManager
-@enduml
 ' @startuml
-' participant ":InteractionCommand" as InteractionCommand
-' participant ":Model" as Model
-' participant ":Person" as Person
-' participant ":PersonBuilder" as PersonBuilder
+' !include style.puml
+' skinparam ArrowFontStyle plain
 
-' User -> InteractionCommand: execute(model)
+' box Logic LOGIC_COLOR_T1
+' participant ":LogicManager" as LogicManager LOGIC_COLOR
+' participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+' participant ":InteractionCommandParser" as InteractionCommandParser LOGIC_COLOR
+' participant "d:InteractionCommand" as InteractionCommand LOGIC_COLOR
+' participant ":CommandResult" as CommandResult LOGIC_COLOR
+' end box
+
+' box Model MODEL_COLOR_T1
+' participant ":Model" as Model MODEL_COLOR
+' end box
+
+' [-> LogicManager : execute("Interaction 1")
+' activate LogicManager
+
+' LogicManager -> AddressBookParser : parseCommand("Interaction 1")
+' activate AddressBookParser
+
+' create InteractionCommandParser
+' AddressBookParser -> InteractionCommandParser
+' activate InteractionCommandParser
+
+' InteractionCommandParser --> AddressBookParser
+' deactivate InteractionCommandParser
+
+' AddressBookParser -> InteractionCommandParser : parse("1")
+' activate InteractionCommandParser
+
+' create InteractionCommand
+' InteractionCommandParser -> InteractionCommand
 ' activate InteractionCommand
-' InteractionCommand -> Model: getFilteredPersonList()
-' activate Model
-' Model --> InteractionCommand: lastShownList
-' deactivate Model
-' InteractionCommand -> InteractionCommand: getZeroBased()
-' activate InteractionCommand
-' InteractionCommand --> InteractionCommand: zeroBasedIndex
+
+' InteractionCommand --> InteractionCommandParser : d
 ' deactivate InteractionCommand
-' InteractionCommand -> ":lastShownList": get(zeroBasedIndex)
-' activate ":lastShownList"
-' ":lastShownList" --> InteractionCommand: personToEdit
-' deactivate ":lastShownList"
-' InteractionCommand -> Person: getInteractions()
-' activate Person
-' Person --> InteractionCommand: editInteractions
-' deactivate Person
-' InteractionCommand -> ":editInteractions": add(interaction)
-' activate ":editInteractions"
-' ":editInteractions" --> InteractionCommand
-' deactivate ":editInteractions"
-' InteractionCommand -> PersonBuilder: withInteractions(editInteractions)
-' activate PersonBuilder
-' PersonBuilder --> InteractionCommand: PersonBuilder
-' deactivate PersonBuilder
-' InteractionCommand -> PersonBuilder: build()
-' activate PersonBuilder
-' PersonBuilder --> InteractionCommand: editedPerson
-' deactivate PersonBuilder
-' InteractionCommand -> Model: setPerson(personToEdit, editedPerson)
+
+' InteractionCommandParser --> AddressBookParser : d
+' deactivate InteractionCommandParser
+' 'Hidden arrow to position the destroy marker below the end of the activation bar.
+' InteractionCommandParser -[hidden]-> AddressBookParser
+' destroy InteractionCommandParser
+
+' AddressBookParser --> LogicManager : d
+' deactivate AddressBookParser
+
+' LogicManager -> InteractionCommand : execute()
+' activate InteractionCommand
+
+' InteractionCommand -> Model : InteractionPerson(1)
 ' activate Model
+
 ' Model --> InteractionCommand
 ' deactivate Model
-' InteractionCommand -> Model: updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
-' activate Model
-' Model --> InteractionCommand
-' deactivate Model
-' InteractionCommand -> InteractionCommand: new CommandResult(String.format(MESSAGE_INTERACTION_SUCCESS, editedPerson))
-' activate InteractionCommand
-' InteractionCommand --> InteractionCommand: CommandResult
+
+' create CommandResult
+' InteractionCommand -> CommandResult
+' activate CommandResult
+
+' CommandResult --> InteractionCommand
+' deactivate CommandResult
+
+' InteractionCommand --> LogicManager : result
 ' deactivate InteractionCommand
-' InteractionCommand --> User: CommandResult
-' deactivate InteractionCommand
+
+' [<--LogicManager
+' deactivate LogicManager
 ' @enduml
+@startuml
+participant "Command Parser" as Parser
+participant "Interaction Command" as Command
+participant Person
+participant Interaction
+participant "PersonCard UI" as UI
+
+User -> Parser : interaction command
+activate Parser
+Parser -> Command : create()
+activate Command
+Command -> Person : addInteraction()
+activate Person
+Person -> Interaction : new()
+activate Interaction
+Interaction --> Person : return interaction
+deactivate Interaction
+Person --> Command : return success
+deactivate Person
+Command --> Parser : return success
+deactivate Command
+Parser --> User : return success
+deactivate Parser
+User -> UI : update()
+activate UI
+UI --> User : display interaction
+deactivate UI
+@enduml
