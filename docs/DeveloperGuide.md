@@ -9,9 +9,14 @@ pageNav: 3
 ## **Overview**
 
 LoveBook, is a **dating-focused** application, revolving around providing **online daters** with a **convenient**
-and **enjoyable** tool to enhance their dating experiences. Featuring **user preferences management**, **date organization**,
-**customizable filtering options** and **best match algorithms**, LoveBook enhances the **efficiency** and **effectiveness** of your
+and **enjoyable** tool to enhance their dating experiences. Featuring **user preferences management**, **date
+organization**,
+**customizable filtering options** and **best match algorithms**, LoveBook enhances the **efficiency** and \*
+\*effectiveness\*\* of your
 online dating journey.
+
+[//]: # "<!-- * Table of Contents -->"
+[//]: # "<page-nav-print />"
 
 ## **Acknowledgements**
 
@@ -163,7 +168,8 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/logic/Logic.java)
+**API
+** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -207,7 +213,8 @@ How the parsing works:
 
 ### Model component
 
-**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/model/Model.java)
+**API
+** : [`Model.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="550" />
 
@@ -228,7 +235,8 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/storage/Storage.java)
+**API
+** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/lovebook/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -349,7 +357,7 @@ The activity diagram notation of the above steps is shown below. <br>
 
 The sequence diagram notation of the above steps is shown below. <br>
 
-<puml src="diagrams/ListSequenceDiagram.puml" width="600" />
+<puml src="diagrams/ListSequenceDiagram.puml" />
 
 #### Design Considerations
 
@@ -382,12 +390,12 @@ The sequence diagram notation of the above steps is shown below. <br>
 
 The _Activity_ diagram summarises what happens after the user enters a filter command. <br>
 
-<puml src="diagrams/FilterActivity.puml" width="600" />
+<puml src="diagrams/FilterActivity.puml" />
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `filter name/John`. <br>
 
-<puml src="diagrams/FilterSequence.puml" width="600" />
+<puml src="diagrams/FilterSequence.puml" />
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
@@ -406,12 +414,12 @@ the command `filter name/John`. <br>
 
 The _Activity_ diagram summarises what happens after the user enters a sort command. <br>
 
-<puml src="diagrams/SortActivity.puml" width="550" />
+<puml src="diagrams/SortActivity.puml" />
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `sort name/increasing`. <br>
 
-<puml src="diagrams/SortSequence.puml" width="600" />
+<puml src="diagrams/SortSequence.puml" />
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
@@ -467,7 +475,7 @@ income.
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `bestMatch`
 
-<puml src="diagrams/BestMatchSequence.puml" width="600" />
+<puml src="diagrams/BestMatchSequence.puml" />
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
@@ -486,16 +494,17 @@ the command `bestMatch`
    validation checks pass.
 6. The `SetPrefCommand` object is then passed back to the `LogicManager` class for invocation of the `execute` function
    which then updates the date preferences in the `Model` component.
+7. (For simplicity sake, this is kept at high level; Refer to the sequence diagram below for more details)
 
 The `edit` feature is also implemented in a similar manner.
 
 The _Activity_ Diagram notation of the above steps is shown below.
 
-<puml src="diagrams/SetPrefActivity.puml" width="600" />
+<puml src="diagrams/SetPrefActivity.puml" />
 
 The _Sequence_ Diagram notation of the above steps is shown below.
 
-<puml src="diagrams/SetPrefSequence.puml" width="600" />
+<puml src="diagrams/SetPrefSequence.puml" />
 
 #### Design Considerations
 
@@ -589,12 +598,12 @@ the command `star 1`
 
 The _Activity_ diagram summarises what happens after the user enters a star command.
 
-<puml src="diagrams/UnstarActivity.puml" width="600" />
+<puml src="diagrams/UnstarActivity.puml" />
 
 The _Sequence_ Diagram below shows how the components interact with each other for the scenario where the user issues
 the command `unstar 1`
 
-<puml src="diagrams/UnstarSequence.puml" width="600" />
+<puml src="diagrams/UnstarSequence.puml" />
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
@@ -790,6 +799,11 @@ Use case ends. <br>
     2c1. LoveBook displays an error message.
     2c2. Use case ends.
 
+2d. There are multiple values for a single field
+
+- LoveBook displays a message indicating that there are multiple values for a single field.
+- Use case ends.
+
 #### Use Case: Show Preferences
 
 **Main Success Scenario (MSS):**
@@ -945,94 +959,118 @@ testers are expected to do more _exploratory_ testing.
 
 ### Launch
 
-1. Initial Launch
-   - Download the jar file and copy it into an empty folder.
-   - Double-click the jar file.
-     - Expected output: The program runs and shows the GUI. Note that the window size may not be optimum.
+1. Initial Launch.
+2. Download the jar file and copy it into an empty folder.
+3. Double-click the jar file.
+4. Expected output: The program runs and shows the GUI. Note that the window size may not be optimum.
 
 ### Viewing Help
 
-1. Opening the Help window
-   - Type the following help command into the text field.<br>
-     `help`
-   - Press enter.
-   - Expected: The GUI shows a popup with a message and a link to the User Guide.
+1. Opening the Help window.
+2. Type the following help command into the text field.<br>
+   `help`
+3. Press enter.
+4. Expected Output: The GUI shows a popup with a message and a link to the User Guide.
 
 ### Adding Dates
 
-1. Adding a Date
-   - Type the following add command into the text field.<br>
-     `add name/Cleon age/22 gender/F height/176 horoscope/Taurus income/3000`
-   - Press enter.
-   - Expected: The GUI shows the added date in the LoveBook.
+1. Adding a Date.
+2. Type the following add command into the text field.<br>
+   `add name/Cleon age/22 gender/F height/176 horoscope/Taurus income/3000`
+3. Press enter.
+4. Expected Output: The GUI shows the added date in the LoveBook.
 
 ### Editing Dates
 
-1. Editing a Date by index
-   - Type the following edit date command into the text field.<br>
-     `edit 1 horoscope/Cancer name/John`
-   - Press enter.
-   - Expected: The GUI shows the newly-edited fields for the Date at the specified index. (Sequence doesn't matter)
+<box type="tip">
+
+_Prerequisites:_ Have at least 1 date in the LoveBook.
+
+</box>
+
+1. Editing a Date by index.
+2. Type the following edit date command into the text field.<br>
+   `edit 1 horoscope/Cancer name/John`
+3. Press enter.
+4. Expected Output: The GUI shows the newly-edited fields for the Date at the specified index. (Sequence doesn't matter)
 
 ### Finding Dates
 
-1. Finding Dates by name
+#### Finding Dates by single name
 
-   - Type the following find command into the text field.<br>
-     `find John`
-   - Press enter.
-   - Expected: The date with specified name shown.
+<box type="tip">
 
-2. Finding Dates by multiple names
+_Prerequisites:_ Have at least 1 date with name containing "John" in the LoveBook.
 
-   - Type the following find command into the text field.<br>
-     `find John Cleon`
-   - Press enter.
-   - Expected: The dates with the specified names shown.
+</box>
 
-3. Listing all Dates
-   - Type the following list command into the text field.<br>
-     `list`
-   - Press enter.
-   - Expected: The GUI shows all dates in LoveBook.
+1. Type the following find command into the text field.<br>
+   `find John`
+2. Press enter.
+3. Expected Output: The date with specified name shown.
+
+#### Finding Dates by multiple names
+
+<box type="tip">
+
+_Prerequisites:_ Have at least 2 dates (named "John" and "Cleon") in the LoveBook.
+
+</box>
+
+1. Type the following find command into the text field.<br>
+   `find John Cleon`
+2. Press enter.
+3. Expected Output: The dates with the specified names shown.
+
+#### Listing all Dates
+
+1. Type the following list command into the text field.<br>
+   `list`
+2. Press enter.
+3. Expected Output: The GUI shows all dates in LoveBook.
 
 ### Filtering Dates
 
-1. Filtering Dates by metric (e.g. name, age, height)
-   - Type the following filter command into the text field.<br>
-     `filter age/22`
-   - Press enter.
-   - Expected: The GUI shows all dates with age 22 in LoveBook.
+1. Filtering Dates by metric (e.g. name, age, height).
+2. Type the following filter command into the text field.<br>
+   `filter age/22`
+3. Press enter.
+4. Expected Output: The GUI shows all dates with age 22 in LoveBook.
 
 ### Finding a Blind Date
 
+<box type="tip">
+
+_Prerequisites:_ Have at least 1 date in the LoveBook. Best to have more than 5 dates.
+
+</box>
+
 1. Finding a Blind Date
-   - Prerequisites: Have >1 dates in the LoveBook.
-   - Type the following command into the text field.<br>
-     `blindDate`
-   - Press enter.
-   - Expected: The GUI shows a blind date in LoveBook.
+2. Type the following command into the text field.<br>
+   `blindDate`
+3. Press enter.
+4. Expected Output: The GUI shows a blind date in LoveBook.
 
 ### Exiting the Application
 
 1. Exiting the app
-   - Use the `exit` command or click the 'X' button in the top right corner.<br>
-   - Expected: The app closes.
+2. Use the `exit` command or click the 'X' button in the top right corner.
+3. Expected: The app closes.
 
 ### Saving (If you haven't already exited)
 
 1. Saving window preferences
 
-   - Resize the window to an optimum size, preferably full screen. Close the window.
-   - Re-launch the app by double-clicking the jar file.
-   - Expected: The most recent window size and location is retained.
-   - Note: The window looks best under 1920 x 1080 resolution, 125% scale.
+   1. Resize the window to an optimum size, preferably full screen. Close the window.
+   2. Re-launch the app by double-clicking the jar file.
+   3. Expected Output: The most recent window size and location is retained.
+   4. Note: The window looks best under 1920 x 1080 resolution, 125% scale.
 
 2. Saving data
-   - Launch the app by double-clicking the jar file.
-   - Execute an add command to add a `Date` in the database.
-   - Close the app.
-   - Expected: A `data` folder is created under the current repository where the jar file is located.
+   1. Launch the app by double-clicking the jar file.
+   2. Execute an add command to add a `Date` in the database.
+   3. Close the app.
+   4. Expected: A `data` folder is created under the current repository where the jar file is located.
 
 [Scroll back to _Table of Contents_](#table-of-contents)
 
