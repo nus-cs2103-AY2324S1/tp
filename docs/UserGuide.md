@@ -495,13 +495,13 @@ Possible errors and their corresponding error messages:
 
 ---
 
-### Delete one student : `delete`
+### Delete a student : `delete`
 
 Deletes an existing student in **Class Manager 2023** by specifying the student number.
 
 Format: `delete s/STUDENT_NUMBER`
 
-* The [`STUDENT_NUMBER`](#student-number) must be valid and exist.
+* The [`STUDENT_NUMBER`](#student-number) must be valid and exist in **Class Manager 2023**.
 
 Example:
 * `delete s/A0249112A`
@@ -663,11 +663,11 @@ Format: `present s/STUDENT_NUMBER tut/TUTORIAL_INDEX`
 * The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**`config`**](#configure-class-manager-2023--config) command.
 
 Examples:
-* `present s/A0245234A tut/2`
+* `present s/A0245234A tut/1`
 
-The following image shows a successful execution of the `present s/A0245234A tut/2` command.
+The following image shows a successful execution of the `present s/A0245234A tut/1` command.
 
-<img src="images/present-success.png" alt="result for `present s/A0245234A tut/2" width="700" />
+<img src="images/present-success.png" alt="result for `present s/A0245234A tut/1" width="700" />
 
 <box type="info" seamless>
 
@@ -689,7 +689,7 @@ Format: `absent s/STUDENT_NUMBER tut/TUTORIAL_INDEX`
 * The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**`config`**](#configure-class-manager-2023--config) command.
 
 Examples:
-* `absent s/A0245234A tut/2`
+* `absent s/A0245234A tut/1`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -704,7 +704,7 @@ Format: `present-all tut/TUTORIAL_INDEX`
 * The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**`config`**](#configure-class-manager-2023-config) command.
 
 Examples:
-* `present-all tut/2`
+* `present-all tut/1`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -719,7 +719,7 @@ Format: `absent-all tut/TUTORIAL_INDEX`
 * The `TUTORIAL_INDEX` must be a valid positive integer, within the configured tutorial count given in the [**`config`**](#configure-class-manager-2023-config) command.
 
 Examples:
-* `absent-all tut/2`
+* `absent-all tut/1`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -842,7 +842,7 @@ Possible error and their corresponding message:
 |----------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [**Add a student**](#add-a-student-add)                        | `add n/NAME p/PHONE e/EMAIL s/STUDENT_NUMBER c/CLASS_NUMBER [t/TAG]…​` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com s/A0245234A c/T11 t/friend`  |
 | [**Comment on a student**](#comment-on-a-student-comment)      | `comment s/STUDENT_NUMBER cm/COMMENT` <br> e.g. `comment s/A0249112A cm/This student is very hardworking.`                                                    |
-| [**Delete one student**](#delete-one-student-delete)           | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                                       |
+| [**Delete a student**](#delete-a-student-delete)               | `delete s/STUDENT_NUMBER`<br> e.g. `delete s/A0249112A`                                                                                                       |
 | [**Delete all students**](#delete-all-students-clear)          | `clear`                                                                                                                                                       |
 | [**Edit a student's details**](#edit-a-student-s-details-edit) | `edit STUDENT_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [s/NEW_STUDENT_NUMBER] [c/CLASS_NUMBER]`<br> e.g.`edit A0245234A n/John Doe p/98761234 e/johnd@example.com` |
 | [**List all students**](#list-all-students-list)               | `list`                                                                                                                                                        |
@@ -852,10 +852,10 @@ Possible error and their corresponding message:
 ## Class information commands
 | Action                                                                                               | Format, Examples                                                                                                         |
 |------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
-| [**Mark a student as present**](#mark-a-student-as-present-present)                                  | `present s/STUDENT_NUMBER tut/TUTORIAL_SESSION` <br> e.g. `present s/A0245234A tut/2`                                    |
-| [**Mark a student as absent**](#mark-a-student-as-absent-absent)                                     | `absent s/STUDENT_NUMBER tut/TUTORIAL_SESSION` <br> e.g. `absent s/A0245234A tut/2`                                      |
-| [**Mark all displayed students as present**](#mark-all-displayed-students-as-present-present-all)    | `present-all tut/TUTORIAL_SESSION` <br> e.g. `present-all tut/2`                                                         |
-| [**Mark all displayed students as absent**](#mark-all-displayed-students-as-absent-absent-all)       | `absent-all tut/TUTORIAL_SESSION` <br> e.g. `absent-all tut/2`                                                           |
+| [**Mark a student as present**](#mark-a-student-as-present-present)                                  | `present s/STUDENT_NUMBER tut/TUTORIAL_SESSION` <br> e.g. `present s/A0245234A tut/1`                                    |
+| [**Mark a student as absent**](#mark-a-student-as-absent-absent)                                     | `absent s/STUDENT_NUMBER tut/TUTORIAL_SESSION` <br> e.g. `absent s/A0245234A tut/1`                                      |
+| [**Mark all displayed students as present**](#mark-all-displayed-students-as-present-present-all)    | `present-all tut/TUTORIAL_SESSION` <br> e.g. `present-all tut/1`                                                         |
+| [**Mark all displayed students as absent**](#mark-all-displayed-students-as-absent-absent-all)       | `absent-all tut/TUTORIAL_SESSION` <br> e.g. `absent-all tut/1`                                                           |
 | [**Record class participation for a student**](#record-class-participation-for-a-student-class-part) | `class-part s/STUDENT_NUMBER tut/TUTORIAL_SESSION part/PARTICIPATION` <br> e.g. `class-part s/A0245234A tut/1 part/true` |
 | [**Set assignment grade for a student**](#set-assignment-grade-for-a-student-grade)                  | `grade s/STUDENT_NUMBER a/ASSIGNMENT_NUMBER g/GRADE` <br> e.g. `grade s/A0245234A a/1 g/100`                             |
 | [**View a student's class information**](#view-a-student-s-class-information-view)                   | `view s/STUDENT_NUMBER` <br> e.g. `view s/A0245234A`                                                                     |
