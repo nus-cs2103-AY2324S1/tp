@@ -10,7 +10,10 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant ":VersionedAddressBook" as VersionedAddressBook MODEL_COLOR
+participant ":AddressBook" as NewAddressBook MODEL_COLOR
+participant "addressBook:AddressBook" as AddressBook MODEL_COLOR
+participant "redoList:ArrayList<AddressBook>" as RedoList MODEL_COLOR
+participant "undoList:ArrayList<AddressBook>" as UndoList MODEL_COLOR
 end box
 [-> LogicManager : execute(undo)
 activate LogicManager
@@ -31,15 +34,32 @@ deactivate AddressBookParser
 LogicManager -> UndoCommand : execute()
 activate UndoCommand
 
-UndoCommand -> Model : undoAddressBook()
+UndoCommand -> Model : undo()
 activate Model
 
-Model -> VersionedAddressBook : undo()
-activate VersionedAddressBook
+create NewAddressBook
+Model -> NewAddressBook : new AddressBook(addressBook)
+activate NewAddressBook
 
-VersionedAddressBook -> VersionedAddressBook :resetData(ReadOnlyAddressBook)
-VersionedAddressBook --> Model :
-deactivate VersionedAddressBook
+NewAddressBook --> Model : newAddressBook
+deactivate NewAddressBook
+
+Model -> RedoList : add()
+activate RedoList
+
+RedoList -> RedoList : add(newAddressBook)
+RedoList --> Model
+deactivate RedoList
+
+Model -> UndoList : remove(index)
+activate UndoList
+UndoList --> Model : d
+deactivate
+
+Model -> AddressBook : resetData(d)
+activate AddressBook
+AddressBook --> Model
+deactivate AddressBook
 
 Model --> UndoCommand
 deactivate Model

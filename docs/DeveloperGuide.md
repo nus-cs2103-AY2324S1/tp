@@ -75,7 +75,7 @@ The bulk of the app's work is done by the following four components:
 
 The *Sequence
 Diagram* below shows how the components interact with each other for the scenario where the user issues the
-command `delete 1`.
+command `delete NRIC`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -96,8 +96,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API
-** of this component is specified
+The **API** of this component is specified
 in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
@@ -122,8 +121,7 @@ The `UI` component,
 
 ### Logic component
 
-**API
-** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -161,8 +159,7 @@ How the parsing works:
 
 ### Model component
 
-**API
-** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -186,8 +183,7 @@ The `Model` component,
 
 ### Storage component
 
-**API
-** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -263,8 +259,8 @@ The following sequence diagram shows how the add patient works:
 ### Edit Patient/Doctor Feature
 
 This feature allows users to edit patients or doctors to the address book. The person must already
-exist in the address book. There
-are many fields for each patient/doctor to be edited which can be found in the user guide.
+exist in the address book. There are many fields for each patient/doctor to be
+edited which can be found in the user guide.
 
 #### Implementation
 
@@ -279,16 +275,16 @@ address book state.
 Step 2. The user types `edit T0123456H` (or the relevant ic number) as command, with the appropriate arguments for the person, for
 example, `edit T0123456H n/John Doe g/M p/98765432 ec/90123456 e/johnd@example.com a/John street, block 123, #01-01 d/T0123456H c/pneumothorax b/O+`.
 
-Step 3. The `AddressBookParser` parses the arguments and determine the required command parser based on the first word
+Step 3. The `AddressBookParser` parses the arguments and determines the that EditCommandParser is required based on the first word
 of the arguments.
 
 Step 4. Then `editCommandParser` parses the remaining arguments and creates an `EditCommand` with the
 details of the patient given.
 
-:information_source: **Note:** If the details of the person added does not match the correct format for any fields,
-there will be an error telling user that the attributes are in the wrong format. Also, if there are no edited fields,
-i.e. no attributes provided or the edited attributes are the same as the original attributes, there will be an error.
-Lastly, if the nric cannot be found within the list of doctors and patients, there will be an error.
+:information_source: **Note:**  If the details of the person added does not match the correct format for any fields,
+there will be an error telling user that the attributes are in the wrong format. Also, if there are no attributes passed there will be an error.
+It's ok if the attributes are the same as the original attributes. 
+Lastly, an NRIC must be provided and if the nric cannot be found within the list of doctors and patients, there will be an error.
 
 Step 5. The `EditCommand` then gets executed and calls the Model#setPerson() with the original person and the new
 edited person. The original person will be replaced by the edited person.
@@ -296,20 +292,26 @@ edited person. The original person will be replaced by the edited person.
 Step 6. The UI should display using the updated list of patients and the newly edited person should reflect the changes
 in the GUI.
 
+The following sequence diagram shows how the add patient works:
+
+![EditPatientSequenceDiagram](images/EditPatientSequenceDiagram.png)
+
 ### Design Considerations
 
 1. Option 1 (Current Choice): Use a single EditCommand for both doctors and patients
-    - Pros: Easier for the user. Can use a single command to edit both. 
-    - Cons: The program has to check whether the person is a doctor or patient. This uses the assumption that 
-      a person cannot be both. The program might be slightly slower since it has to check through both lists.
+    - Pros: Easier for the user. Can use a single command to edit both.
+    - Cons: The program has to check whether the person is a doctor or patient. This mandates that a person cannot
+    be both a patient as a doctor, as patients have additional attributes. The program also might be slightly slower 
+   since it has to check through both the doctors and patients list to locate the person.
 2. Option 2: Use 2 commands edit-patient and edit-doctor
     - Pros: The program might be faster. If you call edit-doctor you only need to search through a few doctors
       rather than all the patients as well.
     - Cons: Harder to implement, and there's a need to create new classes and add repeated code.
+      More commands for the user to remember as well.
 
 ### Delete Patient/Doctor Feature
 
-This feature allows users to delete the desired patient or doctor based on the 
+This feature allows users to delete the desired patient or doctor based on the
 nric provided.
 
 #### Implementation
@@ -319,18 +321,18 @@ of Index.
 
 Given below is an example usage scenario and how the delete mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The AddressBook will be initialized with the initial 
+Step 1. The user launches the application for the first time. The AddressBook will be initialized with the initial
 address book state.
 
-Step 2. The user populates the AddressBook with patients and doctors using the appropriate commands, if not already 
+Step 2. The user populates the AddressBook with patients and doctors using the appropriate commands, if not already
 done.
 
-Step 3. The user types `delete` as the command, with the appropriate nric of the patient/doctor to be deleted, for 
+Step 3. The user types `delete` as the command, with the appropriate nric of the patient/doctor to be deleted, for
 example `delete S9567312G`.
 
 Step 4. The `deleteCommandParser` parses the delete command and creates a `deleteCommand` with the target Ic.
 
-Step 5. The PatientCard / DoctorCard then processes the deletion and The UI should display the updated list without the 
+Step 5. The PatientCard / DoctorCard then processes the deletion and The UI should display the updated list without the
 deleted Doctor/Patient.
 
 ### Create New Appointment Feature
@@ -374,52 +376,49 @@ The following sequence diagram shows how the New Appointment works:
 ![AddPatientSequenceDiagram](images/AddPatientSequenceDiagram.png) //change this
 
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo
-history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the
-following operations:
+The proposed undo/redo mechanism is facilitated by two ArrayLists of AddressBooks stored in the Model Manager class,
+which are the redoList and the undoList. Each time an action is performed, the two lists are updated accordingly
+by the following three methods:
 
-* `VersionedAddressBook#commit()`— Saves the current address book state in its history.
-* `VersionedAddressBook#undo()`— Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()`— Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()`
-and `Model#redoAddressBook()` respectively.
+* `Model#updateBackup()`— Saves the current address book state in its history.
+* `Model#undo()`— Restores the previous address book state by retrieving it from the undoList.
+* `Model#redo()`— Restores a previously undone address book state by retrieving it from the redoList.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the
-initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The undoList and RedoList will both be initialised as
+empty ArrayLists, and the `addressBook` instance, `ab0`,  stores the current AddressBook.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command
-calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes
-to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book
-state.
+Step 2. The user executes `delete NRIC` command to delete a person in the address book. The `delete` command
+calls `Model#updateBackup()`, causing the current `addressBook` instance, `ab0`, to be added to the undoList while the 
+model now stores the updated address book with the deleted person, `ab1`,  as the new `addressBook` instance.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also
-calls `Model#commitAddressBook()`, causing another modified address book state to be saved into
-the `addressBookStateList`.
+Step 3. The user executes `add-patient n/David …​` to add a new patient. The `add` command also
+calls `Model#updateBackup()`, causing another modified address book state to be saved into undoList, `ab1`, and the 
+current `addressBook` instance to be updated to the new `ab2`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#updateBackup()`, so the address book state will not be saved into the undoList.
 
 </div>
 
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing
-the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer`
-once to the left, pointing it to the previous address book state, and restores the address book to that state.
+the `undo` command. The `undo` command will call `Model#undo()`, which will add the current `addressBook` instance,
+`ab2` to redoList, as well as removing the most recently added AddressBook, `ab1`, from the undoList and setting it as 
+the new `addressBook` instance.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the undoList is empty, then there are no previous AddressBook states to restore. The `undo` command checks if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -432,10 +431,10 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once
-to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redo()`, which restores the addressBook to its previous state 
+before the `undo` command.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the redoList is empty, then there are no undone AddressBook states to restore. The `redo` command checks if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
@@ -445,12 +444,18 @@ Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not
-pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be
-purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern
-desktop applications follow.
+Step 6. The user then decides that the person he added in step 3 was not a mistake, and executes the command `redo`.
+The `redo` command will call `Model#redo()`, which will add the current `addressBook` instance,
+`ab1` to undoList, as well as removing the most recently added AddressBook, `ab2`, from the redoList and setting it as
+the new `addressBook` instance. Notice that the current state has been restored to the state at the end of step 3.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the number of AddressBook states stored
+in the undoList reaches 5, any additional commands that makes changes to the address book will lead to the least
+recently added state in the undoList to be purged as a redundant state and will no longer be accessible via `undo`.
+
+</div>
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
@@ -516,7 +521,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Hospital Staff                    | delete a patient/doctor             | remove entries that I no longer need                                   |
 | `* * *`  | Hospital Staff                    | add an appointment                  | tell which patient/doctor is coming at what time                       |
 | `* * *`  | Hospital Staff                    | update patient's details            | information remains accurate                                           |
-| `* * *`  | Hospital Staff                    | update doctor's details             | information remains accurate                                           |   
+| `* * *`  | Hospital Staff                    | update doctor's details             | information remains accurate                                           |
 | `* * *`  | Hospital Staff                    | find a patient/doctor by NRIC       | locate details of persons without having to go through the entire list |
 | `* * *`  | Hospital Staff                    | reassign patients to doctors/nurses | account for changes in the people treating the patients                |
 | `* *`    | Hospital Staff                    | hide private contact details        | minimize chance of someone else seeing them by accident                |
