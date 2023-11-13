@@ -62,7 +62,7 @@ Throughout our user guide, you will see the following annotations:
 
 ## Quick Start
 
-1. Ensure you have Java `11` or above installed on your computer.
+1. Ensure you have Java `11` or above installed on your computer. To check, run the command `java -version` in the terminal.
 
 2. Download the latest `TAManager.jar` from [here](https://github.com/AY2324S1-CS2103T-T10-1/tp/releases).
 
@@ -144,7 +144,7 @@ You can add a new teaching assistant into TAManager, so that you can keep track 
 
 ##### Format: 
 ```
-add n/NAME p/PHONE e/EMAIL tele/TELEGRAM h/HOUR [t/TAG]... [c/COURSE_CODE]...
+add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [h/HOUR] [t/TAG]... [c/COURSE_CODE]...
 ```
 
 | Fields        | Format                                                                                 | Remarks                                                                                                    |
@@ -153,7 +153,7 @@ add n/NAME p/PHONE e/EMAIL tele/TELEGRAM h/HOUR [t/TAG]... [c/COURSE_CODE]...
 | `PHONE`       | Integer of 3-10 digits                                                                 | Phone number of the teaching assistant                                                                     |
 | `EMAIL`       | Contains "@"                                                                           | Email address of the teaching assistant                                                                    |
 | `TELEGRAM`    | String of 5-32 characters and starts with "@"                                          | Telegram handle of the teaching assistant                                                                  |
-| `HOUR`        | Integer between 0 and 9999                                                             | Total working hours of the teaching assistant                                                              |
+| `HOUR`        | Integer between 0 and 9999                                                             | Total working hours of the teaching assistant - defaults to 0 if not provided                              |
 | `TAG`         | Alphanumeric string without spaces                                                     | Tag(s) of the teaching assistant                                                                           |
 | `COURSE_CODE` | Starts with 2-3 alphabets, followed by 4 numbers, and optionally ends with an alphabet | Course code of the course the teaching assistant is teaching and it should be one of the available courses |
 

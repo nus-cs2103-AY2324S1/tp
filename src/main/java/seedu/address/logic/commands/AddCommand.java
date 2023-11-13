@@ -31,7 +31,7 @@ public class AddCommand extends Command {
             + PREFIX_TELEGRAM + "TELEGRAM "
             + "[" + PREFIX_TAG + "TAG]... "
             + "[" + PREFIX_COURSE + "COURSE]... "
-            + PREFIX_HOUR + "HOUR \n"
+            + "[" + PREFIX_HOUR + "HOUR] \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
