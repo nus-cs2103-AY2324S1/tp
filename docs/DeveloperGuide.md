@@ -937,7 +937,7 @@ add test cases to ensure the functionalities of our enhancements.
 
 In v1.2, we implemented the Sort command to allow users to sort his clients' contacts in alphabetical order with 
 respect to their names, or with respect to their appointment time in chronological order. This posed a significant
-challenge as there was no documentation that provided aid as to how we should implement both the filtering function (via
+challenge as there was no clear documentation that provided aid as to how we should implement both the filtering function (via
 the find command) and the sort command at the same time. We had to spend time understanding the inner workings of 
 JavaFX's `filteredList` and `sortedList` classes to finally come up with a solution to return a sorted and filtered
 list of clients.
@@ -946,6 +946,10 @@ In v1.3, we updated the GUI to include an appointment sidebar to show upcoming a
 financial advisor. We found out that the appointment sidebar is not properly updated when there are changes made to the
 data, and they are only updated upon restarting the application. We had to spend time understanding how the Observer
 Pattern works so that changes to the appointment sidebar are being reflected instantaneously. 
+
+Moreover, we decided to implement safety features like the clear and override prompts that prevent accidental command executions
+by the user. This required having to trace the entire code logic to understand how commands were executed and also how to 
+pause and split execution of commands to make sure that no bugs were introduced into the code.
 
 The project's difficulty level was notably high due to the complexity of implementing features such as scheduling
 appointments, gathering emails, expanded find functionality, sorting, and the introduction of an appointment sidebar.
