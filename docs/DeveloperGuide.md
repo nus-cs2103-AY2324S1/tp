@@ -350,53 +350,53 @@ Sequence Diagram for FindExpressionParser showing how a sample input is parsed u
 **Aspect: Command Flexibility vs. Complexity**
 
 * **Alternative 1 (current choice)**: Support boolean operations in `FindCommand`.
-  * **Pros**: Provides powerful search capabilities.
-  * **Cons**: Increases code complexity and potential for user input errors.
+  * Pros: Provides powerful search capabilities.
+  * Cons: Increases code complexity and potential for user input errors.
 
 * **Alternative 2**: Only allow simple keyword-based searches.
-  * **Pros**: Easier to implement and use.
-  * **Cons**: Limits user's searching abilities.
+  * Pros: Easier to implement and use.
+  * Cons: Limits user's searching abilities.
 
 
 **Aspect: Tokenizer library**
 
 * **Alternative 1 (current choice):** Custom-built tokenizer.
-  * **Pros:** Allows for more flexibility in terms of the syntax of the search criteria. Can handle our custom-defined terms, operators, and grouping symbols explicitly.
-  * **Cons**: More code required, requires regular maintenance to adapt to new features or changes.
+  * Pros: Allows for more flexibility in terms of the syntax of the search criteria. Can handle our custom-defined terms, operators, and grouping symbols explicitly.
+  * Cons: More code required, requires regular maintenance to adapt to new features or changes.
 
 * **Alternative 2:** Use a third-party library.
-  * **Pros:** Less code required, might be more robust and have additional features.
-  * **Cons**: Less flexibility in terms of the syntax of the search criteria. May not be able to handle our custom-defined terms, operators, and grouping symbols explicitly. Might not cater explicitly to the specific requirements of the Find command. Requires integration efforts.
+  * Pros: Less code required, might be more robust and have additional features.
+  * Cons: Less flexibility in terms of the syntax of the search criteria. May not be able to handle our custom-defined terms, operators, and grouping symbols explicitly. Might not cater explicitly to the specific requirements of the Find command. Requires integration efforts.
 
 **Aspect: Tokenization Strategy**
 
 * **Alternative 1 (current choice)**: Custom tokenizer.
-  * **Pros**: Greater control and flexibility.
-  * **Cons**: More complex to implement and maintain.
+  * Pros: Greater control and flexibility.
+  * Cons: More complex to implement and maintain.
 
 * **Alternative 2**: Regular expression-based tokenizer.
-  * **Pros**: Can be more concise.
-  * **Cons**: May not handle all edge cases or complexities.
+  * Pros: Can be more concise.
+  * Cons: May not handle all edge cases or complexities.
 
 
 **Aspect: Supported Logical Operators**
 
 * **Alternative 1 (current choice):** Use standard boolean operators (`&&`, `||`, `!`).
-  * **Pros:** Universally recognized and understood.
-  * **Cons**: Limited to boolean logic.
+  * Pros: Universally recognized and understood.
+  * Cons: Limited to boolean logic.
 
 * **Alternative 2:** Support more advanced operators or functions (e.g., nearness search, regex patterns).
-  * **Pros:** Provides more power and flexibility to users.
-  * **Cons**: Significantly complicates parsing and understanding for users.
+  * Pros: Provides more power and flexibility to users.
+  * Cons: Significantly complicates parsing and understanding for users.
 
 **Aspect: Handling Invalid Inputs**
 
 * **Alternative 1 (current choice)**: Throw an exception and inform the user.
-  * **Pros**: User is made aware of mistakes immediately.
-  * **Cons**: Stops the command processing.
+  * Pros: User is made aware of mistakes immediately.
+  * Cons: Stops the command processing.
 * **Alternative 2**: Silently ignore or correct invalid inputs.
-  * **Pros**: Smoother user experience.
-  * **Cons**: User might not realize they made a mistake.
+  * Pros: Smoother user experience.
+  * Cons: User might not realize they made a mistake.
 
 ### Update photo feature
 #### Implementation
@@ -433,21 +433,54 @@ Key methods in this implementation include:
 
 #### Implementation
 
-The Payments feature allows users to keep track of the money they owe to and are owed by their contacts. This feature is useful for users who wish to keep track of their financial transactions with their contacts.
+The Payments feature allows users to keep track of the money they owe to and are owed by their contacts.
+This feature is useful for users who want an easy way to figure out how to settle their payments in one future transaction, and ensure that all transactions are tracked and eventually settled.
 
-Money is represented with a `Balance` class, which is effectively a wrapper around an `int` value representing a monetary value in cents. Validation, including ensuring that values of balances cannot exceed the transaction limit of CampusConnect (currently set at $10,000), is handled by the `Balance` class.
+Three key classes are involved in this implementation:
+- `Balance`: Represents money amounts owed by or to a contact.
+- `PayCommand`: Handles the logic to track that you have paid / lent money to a contact.
+- `PaybackCommand`: Handles the logic to track that you have received / borrowed money from a contact.
+
+Additionally, the `ParserUtil::parseBalance` method is used to parse a human-friendly string representation of a balance into an `int` value representing a monetary value in cents.
+
+Money is represented with a `Balance` class, which is effectively a wrapper around an `int` value representing a monetary value in cents. However, users interact with the `Balance` class through a human-friendly string representation, with a dollars and cents component, that may optionally include a dollar sign.
+
+Most validation is handled by the `Balance` class, through three static methods:
+- `isValidDollarString(String test)`: Checks if a given string is a valid human-friendly string representation of a balance using a validation regex.
+- `isWithinBalanceLimit(Integer balanceInCents)`: Checks if a given integer is a valid balance value that is a field of a contact. CampusConnect restricts users to only be able to track a maximum payment owed to / from a contact of $10,000.
+- `isWithinTransactionLimit(Integer amountInCents)`: Checks if a given integer is a valid money value that is used in a single transaction. Due to the $10,000 balance limit, any individual transaction cannot transact more than $20,000, since that will always lead to the balance limit being exceeded. This check occurs whenever a `Balance` object is instantiated, since there should never be any `Balance` objects with a value greater than $20,000.
+
+The `PayCommand` and `OweCommand` classes are extremely similar. Both classes simply update the Person's balance with the amount given.
+
+The following activity diagram shows the logic of the validation checks that occur when a user uses the `pay` command:
+
+<puml src="diagrams/PayActivityDiagram.puml" alt="PayActivityDiagram" />
+
+The series of validation checks in the activity diagram also applies to the `owe` command.
 
 #### Design considerations
 
-**Aspect: Using integers to represent money value**
+**Aspect: Money representation data type**
+
+There are multiple options to represent money values in the application within the Balance class.
 
 * **Alternative 1 (current choice):** Use `int` to represent money value in cents.
-  * **Pros**: Simple and straightforward.
-  * **Cons**: Requires more complex processing when converting to human-friendly string representations.
+  * Pros: Simple and straightforward, and not vulnerable to floating-point precision errors.
+  * Cons: Requires more complex processing when converting to human-friendly string representations.
 * **Alternative 2:** Use `double` to represent money value in dollars.
-  * **Pros**: More human-friendly.
-  * **Cons**: Vulnerable to floating-point precision errors.
+  * Pros: More human-friendly.
+  * Cons: Vulnerable to floating-point precision errors.
 
+**Aspect: Specialization of commands**
+
+The payments feature could be implemented as a single command, with a negative sign to specify whether the payment is a `pay` or `owe` command.
+
+* **Alternative 1 (current choice):** Use two separate `pay` and `owe` commands to represent positive and negative transactions.
+  * Pros: Make the concept more straightforward for a human to understand; humans verbalize their thoughts by saying "I pay $X to contact Y" or "I owe $X to contact Y".
+  * Cons: Requires users to remember two separate commands, and requires more code to implement and be maintained.
+* **Alternative 2:** Use a single command that takes in values with negative signs.
+  * Pros: Only requires users to remember a single command, and less code maintenance required by maintainers.
+  * Cons: Less human-readable, and requires more complex processing to handle negative signs.
 
 ### Notes feature
 #### Implementation

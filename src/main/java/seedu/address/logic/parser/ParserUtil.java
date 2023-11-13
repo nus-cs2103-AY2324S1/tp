@@ -210,7 +210,7 @@ public class ParserUtil {
         // This prevents integer overflow when converting to cents and when
         // performing validation in subsequent pay / owe operations.
         if (parts[0].length() > 5) {
-            throw new ParseException(Balance.MESSAGE_BALANCE_LIMIT_EXCEEDED);
+            throw new ParseException(Balance.MESSAGE_TRANSACTION_LIMIT_EXCEEDED);
         }
 
         // Convert the dollar part to cents
