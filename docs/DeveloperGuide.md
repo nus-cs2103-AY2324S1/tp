@@ -26,8 +26,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 ## **Design**
 
 ### Architecture
-
+<p style="text-align: center;">
 <puml src="diagrams/ArchitectureDiagram.puml" width="280" />
+</p>
 
 The ***Architecture Diagram*** given above illustrates the high-level design of the App. 
 
@@ -73,7 +74,7 @@ You can see that the bulk of the app's works are done by the UI, Logic, Model an
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<p align="center">
+<p style="text-align: center;">
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 </p>
 
@@ -85,8 +86,10 @@ The *Sequence Diagram* below shows how the components interact with each other f
    
    For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class.
 2. The team has decided to force all components to interact via interfaces rather than the concrete classes as illustrated in the (partial) class diagram below (reason: to prevent outside component's being coupled to the implementation of a component).
-   <puml src="diagrams/ComponentManagers.puml" width="300" />
-   
+<p style="text-align: center;">
+<puml src="diagrams/ComponentManagers.puml" width="300" />
+</p>
+
 If you are to contribute to this project, please align with this group decision.
 
 3. There are other components that are not shown in the diagram above. These components are: 
@@ -102,7 +105,9 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
+<p style="text-align: center;">
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
+</p>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -129,7 +134,9 @@ It also calls APIs (addPerson, deleteLesson for example) from the `Model` compon
 from the `Storage` component to save the data to local storage each time the data is modified.
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+<p style="text-align: center;">
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+</p>
 
 Inside the `Logic` component, there are 3 main components: `LogicManager`, `AddressBookParser` and `Command`.
 
@@ -142,7 +149,9 @@ AddressBookParser is responsible for parsing the user input for finding the corr
 LogicManager will perform the actual execution of the command, and update the ui and storage.
 
 Here's a (partial) class diagram of the `Logic` component:
+<p style="text-align: center;">
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
+</p>
 
 <box type="info" seamless>
 
@@ -157,8 +166,9 @@ How the `Logic` component works:
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
-
+<p style="text-align: center;">
 <puml src="diagrams/ParserClasses.puml" width="600"/>
+</p>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
@@ -167,8 +177,9 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
+<p style="text-align: center;">
 <puml src="diagrams/ModelClassDiagram.puml" width="600" />
-
+</p>
 
 The `Model` component,
 
@@ -185,7 +196,9 @@ The `Model` component,
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
+<p style="text-align: center;">
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+</p>
 
 </box>
 
@@ -194,7 +207,9 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
+<p style="text-align: center;">
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
+</p>
 
 The `Storage` component,
 * can save both address book data, user preference data, and schedule data in JSON format, and read them back into corresponding objects.
@@ -276,7 +291,9 @@ Step 6. `AddPersonCommand` will then call the `ModelManager#showPerson()` method
 
 The following sequence diagram shows how the flow of the example execution:
 
+<p style="text-align: center;">
 <puml src="diagrams/AddSequenceDiagram.puml" alt="AddSequenceDiagram" />
+</p>
 
 <box type="info" seamless>
 
@@ -332,7 +349,9 @@ Step 4. The user executes show 1 command to show the details of the 1st person i
 
 The following sequence diagram shows how the show operation works for showing a person from the `STUDENT` list:
 
+<p style="text-align: center;">
 <puml src="diagrams/ShowSequenceDiagram.puml" alt="ShowSequenceDiagram" />
+</p>
 
 <box type="info" seamless>
 
