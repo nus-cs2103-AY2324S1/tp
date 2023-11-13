@@ -41,6 +41,13 @@ Table of Contents
 
 6. Refer to the [Features](#features) below for details of each command.
 
+<div markdown="block" class="alert alert-info">
+
+**:memo: Sample data provided**<br>
+
+A reference for the sample data provided by default is available [here](SampleInputs.md).
+
+</div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
