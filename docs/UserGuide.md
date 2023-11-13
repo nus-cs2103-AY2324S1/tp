@@ -3,27 +3,34 @@ layout: page
 title: User Guide
 ---
 
-Teaching Assistant Manager (TAManager) is a desktop application for managing teaching assistants (TAs), optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TAM can help you manage your teaching assistant tasks more efficiently than traditional GUI apps.
+Hello School of Computing (SoC) Professors! Have you ever felt that managing your teaching assistants (TAs) manually is a chore? Do you wish that you could have a tool that helps you manage your TAs more efficiently? 
 
+If so, **TAManager** is the tool for you! 
 
-### 🌟 Welcome to TAManager - Your Teaching Assistant's Best Friend! 🌟
+TAManager, or Teaching Assistant Manager, is your reliable desktop application that helps you manage your TAs, so you can focus on what matters most - **teaching**!
 
-Are you ready to turbocharge your teaching assistant management experience? Meet TAManager - the desktop application designed to make your life easier, whether you're a seasoned pro or just starting out.
+While TAManager mainly focuses on targeting SoC Professors, all educators are welcomed to use TAManager too! With our **user-centric** design, TAManager is crafted with both experienced educators and newbies in mind.
 
-### 🚀 Why TAManager?
-TAManager isn't your average app. It's like having a teaching assistant for your teaching assistants! Imagine a tool that's as fast as typing and as intuitive as a friendly chat. That's TAManager for you.
+Gone are the days of having to manually managed your TAs. TAManager is here to help you manage your TAs with ease!
 
-### 💡 Who is it for?
-TAManager is crafted with both experienced educators and newbies in mind. If you're someone who types faster than you can click, this is the tool for you! Whether you're managing one assistant or a whole team, TAManager is your go-to solution.
-
+### 💡 Why choose TAManager?
+{:.no_toc}
+- **Easy-to-use**: TAManager is optimized for use via a [Command Line Interface (CLI)](#command-line-interface--cli-), with all the benefits of a [Graphical User Interface (GUI)](#graphical-user-interface--gui-), making it intuitive to use.
+- **Efficient**: If you can type fast, TAManager can help you manage your TAs faster than traditional GUI apps, allowing you to save more time.
 
 ### 🎉 What can TAManager do for you?
-- Effortlessly manage teaching assistant tasks
-- Navigate tasks with the speed of a command line interface
-- Enjoy the perks of a sleek graphical user interface
+{:.no_toc}
+- Effortlessly manage your TAs contact list
+- Efficiently track the total working hours of your TAs
+- Conveniently find replacement for your absent TAs
 
-Ready to revolutionize your teaching assistant game? Let's dive into the world of TAManager and make managing tasks a breeze! 🚀
+<br/>
 
+Don't let the stress of administrative work affect your teaching quality. 
+
+Let TAManager handles all your TA management needs, while you power up your lectures and tutorials with your teaching prowess!
+
+---
 
 ## Using this Guide
 
@@ -40,9 +47,15 @@ Throughout our user guide, you will see the following annotations:
 | [Text in blue](javascript: void)   | Clicking on the highlighted text will bring you to the relevant section of the user guide. |
 | `Text with light blue background`  | These are commands that you can type into TAManager.                                       |
 
+<br/>
+
+---
+
 ## Table of Contents
 * Table of Contents
 {:toc}
+
+<br/>
 
 ---
 
@@ -68,12 +81,12 @@ Throughout our user guide, you will see the following annotations:
    - `exit`: Exits the app.
 
 6. Refer to the following sections below for details on each command.
-   1. [TA Management Commands](#ta-management-commands)
-   2. [Course Management Commands](#course-management-commands)
-   3. [Utility Commands](#utility-commands)
+   - [TA Management Commands](#1-ta-management-commands)
+   - [Course Management Commands](#2-course-management-commands)
+   - [Utility Commands](#3-utility-commands)
 
 
-<span style="float:right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
+<span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -102,6 +115,10 @@ Throughout our user guide, you will see the following annotations:
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+<span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
+
+---
+
 ## Understanding Our GUI
 
 ![understandGUI](images/understandGUI.png)
@@ -112,26 +129,34 @@ Throughout our user guide, you will see the following annotations:
 4. Teaching Assistant List: View and manage teaching assistants here.
 5. Data Storage: Displays the path where your data is stored.
 
+<span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
+
 --------------------------------------------------------------------------------------------------------------------
+## Commands 
 
-## TA Management Commands
+## 1. TA Management Commands
 
-### Adding a Teaching Assistant: `add`
+### 1.1 Adding a Teaching Assistant: `add`
 
-You can add a new teaching assistant to TAManager.
+You can add a new teaching assistant into TAManager, so that you can keep track of the team of teaching assistants you are managing.
 
-Format: `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM h/HOUR [t/TAG]... [c/COURSE_CODE]...`
+##### Format: 
+```
+add n/NAME p/PHONE e/EMAIL tele/TELEGRAM h/HOUR [t/TAG]... [c/COURSE_CODE]...
+```
 
-- `NAME` should be a string.
-- `PHONE` should be a 3-10 digits integer.
-- `EMAIL` should contain "@".
-- `TELEGRAM` should be between 5-32 characters and start with "@", and it cannot contain any special characters except underscore.
-- `HOUR` should be an integer.
-- `TAG` should be an alphanumeric string without spaces.
-- `COURSE_CODE` should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet. Needs to be an existing course.
+| Fields        | Format                                                                                 | Remarks                                                                                                    |
+|---------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `NAME`        | String and case-sensitive                                                              | Full name of the teaching assistant                                                                        |
+| `PHONE`       | Integer of 3-10 digits                                                                 | Phone number of the teaching assistant                                                                     |
+| `EMAIL`       | Contains "@"                                                                           | Email address of the teaching assistant                                                                    |
+| `TELEGRAM`    | String of 5-32 characters and starts with "@"                                          | Telegram handle of the teaching assistant                                                                  |
+| `HOUR`        | Integer between 0 and 9999                                                             | Total working hours of the teaching assistant                                                              |
+| `TAG`         | Alphanumeric string without spaces                                                     | Tag(s) of the teaching assistant                                                                           |
+| `COURSE_CODE` | Starts with 2-3 alphabets, followed by 4 numbers, and optionally ends with an alphabet | Course code of the course the teaching assistant is teaching and it should be one of the available courses |
 
-Example:
-`add n/ Rayner Toh p/93812311 e/rayner@example.com tele/@raynertjx h/4 t/parttime c/CS2103T` will add a new teaching assistant named Rayner Toh to TAManager.
+##### Example:
+- `add n/ Rayner Toh p/93812311 e/rayner@example.com tele/@raynertjx h/4 t/parttime c/CS2103T` adds a new teaching assistant named Rayner Toh to TAManager.
 
 ![add TA](images/addTA.png)
 *<center>TAManager adds a new teaching assistant with the corresponding details.</center>*
@@ -157,32 +182,46 @@ Work Hour: 4
 
 | Error                                                        | Resolution                                                       |
 |--------------------------------------------------------------|------------------------------------------------------------------|
-| `Invalid command format!`                                    | Ensure that all required parameters are present .                |
-| `Course not found.`                                          | Ensure that the `COURSE_CODE` is an existing course.             |
-| `This teaching assistant already exists in the address book` | Ensure that the teaching assistant is not already in TAManager.  |
-| Invalid parameter                                            | Ensure that input causing the error follows the required format. |
+| `Invalid command format!`                                    | Ensure that all required parameters are present                  |
+| `Course not found.`                                          | Ensure that the `COURSE_CODE` is an existing course              |
+| `This teaching assistant already exists in the address book` | Ensure that the teaching assistant is not already in TAManager   |
+| Invalid parameter                                            | Ensure that input causing the error follows the required format  |
 
 </div>
 
-### Editing a Teaching Assistant: `edit`
+<span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
 
-You can change the details of a teaching assistant in TAManager.
+### 1.2 Editing a Teaching Assistant: `edit`
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [tele/TELEGRAM] [h/HOUR] [t/TAG]... [c/COURSE_CODE]...`
+You can change the details of an existing teaching assistant in TAManager, so that you can keep the information in your contact list up-to-date.
 
--  At least one field to edit must be provided.
-- `NAME` should be a string.
-- `PHONE` should be a 3-10 digits integer.
-- `EMAIL` should contain "@".
-- `TELEGRAM` should be between 5-32 characters and start with "@", and it cannot contain any special characters except underscore.
-- `HOUR` should be an integer.
-- `TAG` should be an alphanumeric string without spaces.
-- `COURSE_CODE` should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet. Needs to be an existing course.
+##### Format: 
+```
+edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [tele/TELEGRAM] [h/HOUR] [t/TAG]... [c/COURSE_CODE]...
+```
 
-Example: `edit 7 tele/@raynertohjingxiang`
+| Fields        | Format                                                                                 | Remarks                                                                                                    |
+|---------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `NAME`        | String and case-sensitive                                                              | Full name of the teaching assistant                                                                        |
+| `PHONE`       | Integer of 3-10 digits                                                                 | Phone number of the teaching assistant                                                                     |
+| `EMAIL`       | Contains "@"                                                                           | Email address of the teaching assistant                                                                    |
+| `TELEGRAM`    | String of 5-32 characters and starts with "@"                                          | Telegram handle of the teaching assistant                                                                  |
+| `HOUR`        | Integer between 0 and 9999                                                             | Total working hours of the teaching assistant                                                              |
+| `TAG`         | Alphanumeric string without spaces                                                     | Tag(s) of the teaching assistant                                                                           |
+| `COURSE_CODE` | Starts with 2-3 alphabets, followed by 4 numbers, and optionally ends with an alphabet | Course code of the course the teaching assistant is teaching and it should be one of the available courses |
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes:**<br>
+- At least one field to edit must be provided.
+- After running the `edit` command on a filtered list, the TA list will be updated to the full list of TAs.
+</div>
+
+##### Example: 
+- `edit 7 tele/@raynertohjingxiang` edits the Telegram handle of the 7th person in the list into `@raynertohjingxiang`.
 
 ![edit TA](images/editTA.png)
-*<center>TAManager edits the telegram handle of the 7th person in the list.</center>*
+*<center>TAManager edits the Telegram handle of the 7th person in the list.</center>*
 
 
 <div markdown="block" class="command-succeed">
@@ -210,19 +249,24 @@ Work Hour: 4
 :x: When the command fails:
 </div>
 
-| Error                                                        | Resolution                                                       |
-|--------------------------------------------------------------|------------------------------------------------------------------|
-| `Invalid command format!`                                    | Ensure that all required parameters are present .                |
-| `Course not found.`                                          | Ensure that the `COURSE_CODE` is an existing course.             |
-| Invalid parameter                                            | Ensure that input causing the error follows the required format. |
+| Error                     | Resolution                                                      |
+|---------------------------|-----------------------------------------------------------------|
+| `Invalid command format!` | Ensure that all required parameters are present                 |
+| `Course not found.`       | Ensure that the `COURSE_CODE` is an existing course             |
+| Invalid parameter         | Ensure that input causing the error follows the required format |
 
 </div>
 
-### Viewing Teaching Assistants: `list`
+<span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
 
-You can view the list of all teaching assistants in TAManager.
+### 1.3 Viewing Teaching Assistants: `list`
 
-Format: `list`
+You can view the list of all teaching assistants in TAManager, so that you can conveniently browse through all the teaching assistants you are managing.
+
+##### Format: 
+```
+list
+```
 
 ![list TA](images/listTA.png)
 *<center>TAManager shows you the full list of teaching assistants.</center>*
@@ -237,29 +281,45 @@ Listed all teaching assistants
 ```
 </div>
 
-### Finding a Teaching Assistant: `find`
+<span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
 
-You can find specific teaching assistants using various search parameters.
+### 1.4 Finding a Teaching Assistant: `find`
 
-Format: `find [n/NAME] [c/COURSE_CODE] [d/DAY from/FROM to/TO]`
+You can find specific teaching assistants using various search parameters, so that you can quickly find the specific teaching assistant you are looking for.
 
-- You can search by name, course or free time, using the prefixes `n/`, `c/` or `d/ from/ to/` respectively.
-- The name prefix `n/` allows for multiple keywords to be used, separated by spaces. e.g. `find n/Alex Bernice` will give you all TAs who have either "Alex" or "Bernice" in their names.
-- The course prefix `c/` and free time prefixes `d/ from/ to/` allows for one keyword to be used for each prefix.  e.g. `find c/CS2103T` or `find d/1 from/10:00 to/12:00`.
-- To search by the free time field, all three prefixes `d/ from/ to/` must be present and all respective parameters need to be correctly given.
-- The search is case-insensitive. e.g. `alex` will match `Alex`, `cs1231s` will match `CS1231S`.
-- Only full words will be matched e.g. `Alex` will not match `Alexis`, `cs1231` will not match `cs1231s`.
-- You can apply multiple search filters to narrow down the search results, through including multiple filters in
-  one command.
-- Teaching assistants matching all the search parameters will be returned.
-- The search filters are applied to the full list of TAs, not the displayed list of TAs.
+##### Format: 
+```
+find [n/NAME] [c/COURSE_CODE] [d/DAY from/FROM to/TO] [t/TAG]
+```
 
-Examples:
+| Fields        | Format                                                                                 | Remarks                                                                                                    |
+|---------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `NAME`        | String                                                                                 | Full name of the teaching assistant                                                                        |
+| `COURSE_CODE` | Starts with 2-3 alphabets, followed by 4 numbers, and optionally ends with an alphabet | Course code of the course the teaching assistant is teaching and it should be one of the available courses |
+| `DAY`         | Integer between 1 and 5                                                                | Day of the week (Monday-Friday) the teaching assistant is free                                             |
+| `FROM`        | Time in "HH:mm" format                                                                 | Start time of the free time of the teaching assistant                                                      |
+| `TO`          | Time in "HH:mm" format                                                                 | End time of the free time of the teaching assistant                                                        |
+| `TAG`         | Alphanumeric string without spaces                                                     | Tag(s) of the teaching assistant                                                                           |
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes:**<br>
+- The name prefix `n/` allows for **multiple keywords** to be used, separated by spaces.
+- The course prefix `c/` and free time prefixes `d/ from/ to/` allows for **one keyword** to be used for each prefix.
+- To **search by the free time** field, **all three prefixes** `d/ from/ to/` **must be present** and all respective parameters need to be correctly given.
+- The search is **case-insensitive** (e.g. `alex` will match `Alex`, `cs1231s` will match `CS1231S`).
+- **Only full words** will be matched (e.g. `Alex` will not match `Alexis`, `cs1231` will not match `cs1231s`).
+- You can apply **multiple search filters** to narrow down the search results by **including multiple filters in one command**.
+- The search filters are **applied to the full list of TAs**, not the displayed list of TAs.
+
+</div>
+
+##### Examples:
 - `find n/Alex` returns all teaching assistants whose names contain `alex` (e.g. `Alex Yeoh`).
+- `find n/Alex Bernice` gives all TAs who have either "Alex" or "Bernice" in their names.
 - `find c/cs1231s` returns all teaching assistants that are teaching `cs1231s`.
-- `find d/1 from/10:00 to/12:00` returns all teaching assistants that are free on `Monday` from `10:00` to `12:00`.
 - `find n/Alex c/cs1231s` returns all teaching assistants whose names contain `alex` and are teaching `cs1231s`.
+- `find d/1 from/10:00 to/12:00` returns all teaching assistants that are free on `Monday` from `10:00` to `12:00`.
 - `find c/cs2103t d/1 from/10:00 to/12:00` returns all teaching assistants who are teaching `cs2103t` and are free on `Monday` from `10:00` to `12:00`.
 
 ![find TA](images/findTA.png)
@@ -280,26 +340,30 @@ Filters applied: [filters applied by the user]
 :x: When the command fails:
 </div>
 
-| Error                     | Resolution                                                                                   |
-|---------------------------|----------------------------------------------------------------------------------------------|
-| `Invalid command format!` | Ensure that there is at least one prefix provided and parameter provided follows the format. |
+| Error                     | Resolution                                                                                  |
+|---------------------------|---------------------------------------------------------------------------------------------|
+| `Invalid command format!` | Ensure that there is at least one prefix provided and parameter provided follows the format |
 
 </div>
 
-### Removing a Teaching Assistant: `delete`
+<span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
 
-You can remove a specified teaching assistant from TAManager.
+### 1.5 Removing a Teaching Assistant: `delete`
 
-Format: `delete INDEX`
+You can remove a specified teaching assistant from TAManager, so that you can remove TAs who are no longer part of your teaching team.
 
-- Deletes the teaching assistant at the specified `INDEX`.
-- The index refers to the index number shown in the displayed TA list.
-- The index must be a positive integer (1, 2, 3, ...).
+##### Format: 
+```
+delete INDEX
+```
 
-Examples:
+| Fields  | Format                          | Remarks                                                                                                                  |
+|---------|---------------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| `INDEX` | Positive integer (1, 2, 3, ...) | Index of the teaching assistant in the TA List to be deleted. This index is with reference to the **displayed** TA list. |
 
-- [`list`](#viewing-teaching-assistants-list) followed by `delete 2` deletes the 2nd teaching assistant in the address book.
-- `find n/Betsy` followed by `delete 1` deletes the 1st teaching assistant in the results of the [`find`](#finding-a-teaching-assistant-find) command.
+##### Examples:
+- [`list`](#13-viewing-teaching-assistants--list) followed by `delete 2` deletes the 2nd teaching assistant in the address book.
+- `find n/Betsy` followed by `delete 1` deletes the 1st teaching assistant in the results of the [`find`](#14-finding-a-teaching-assistant--find) command.
 
 ![remove TA](images/deleteTA.png)
 *<center>TAManager deletes the teaching assistant at the index <code>7</code>.</center>*
@@ -330,28 +394,38 @@ Work Hour: 4
 :x: When the command fails:
 </div>
 
-| Error                                  | Resolution                                                |
-|----------------------------------------|-----------------------------------------------------------|
-| `Invalid command format!`              | Ensure that `INDEX` is present and is a positive integer. |
-| `The person index provided is invalid` | Ensure that `INDEX` corresponds to a TA in the list       |
+| Error                                  | Resolution                                               |
+|----------------------------------------|----------------------------------------------------------|
+| `Invalid command format!`              | Ensure that `INDEX` is present and is a positive integer |
+| `The person index provided is invalid` | Ensure that `INDEX` corresponds to a TA in the list      |
 
 </div>
 
-### Updating Hours for Teaching Assistants: `hour`
+<span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
 
-You can add hours to all teaching assistants in the current list.
+### 1.6 Updating Hours for Teaching Assistants: `hour`
 
-Format: `hour HOUR`
+You can add hours to all teaching assistants in the current list, so that you can efficiently update the total working hours of your teaching assistants.
 
-- This command updates the hour field for all TAs in the currently displayed list, by adding the `HOUR` value to their current values. This `HOUR` value can be both negative and positive.
-- This command can be applied after the [`find`](#finding-a-teaching-assistant-find) command. e.g. First type `find c/ CS2103T` will find all TAs with course
-`CS2103T`, then type `hour 6` will add 6 hours to all `CS2103T` TAs only, other TAs will not be updated.
-- The resulting working hour after updating should still be within range of 0-9999.
+##### Format: 
+```
+hour HOUR
+```
 
-Examples:
+| Fields | Format  | Remarks                                                                                                                                                                            |
+|--------|---------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `HOUR` | Integer | The number of hours to be added to all teaching assistants in the current list. `HOUR` can be **positive** to **increment** the value, or **negative** to **decrement** the value. |
 
-- `hour 4` will add 4 hours to all TAs in the address book.
-- `find c/CS1231S` then `hour 4` will add 4 hours to all `CS1231S` TAs and other TAs will not be affected.
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes:**<br>
+- The resulting total working hour after running the `HOUR` command should still be within the range of 0-9999.
+</div>
+
+##### Examples:
+
+- `hour 4` adds 4 hours to all TAs in the TA list.
+- `find c/CS1231S` then `hour 4` adds 4 hours to all `CS1231S` TAs and other TAs will not be affected.
 
 ![update Hour](images/addHours.png)
 *<center>TAManager adds the specified number of hours to all teaching assistants.</center>*
@@ -370,25 +444,39 @@ Hour updated to all TAs identified!
 :x: When the command fails:
 </div>
 
-| Error                     | Resolution                                              |
-|---------------------------|---------------------------------------------------------|
-| `Invalid command format!` | Ensure that `HOUR` is present and is between 0 and 9999 |
+| Error                                                    | Resolution                                                                  |
+|----------------------------------------------------------|-----------------------------------------------------------------------------|
+| `Resulting hours after update should be in range 0-9999` | Ensure that `HOUR` is present and the resulting value is between 0 and 9999 |
 
 </div>
 
-### Editing free time of a Teaching Assistant: `editft`
+<span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
 
-You can edit the free time of a specific teaching assistant on a specified day.
+### 1.7 Editing free time of a Teaching Assistant: `editft`
 
-Format: `editft INDEX d/DAY from/FROM to/TO`
+You can edit the free time of a specific teaching assistant on a specified day, so that you can keep the latest information of your teaching assistants' free time.
 
-- `DAY` should be between 1 and 5, inclusive
-- `FROM` and `TO` should be in "HH:mm" format
-- `FROM` should be before `TO`
+##### Format: 
+```
+editft INDEX d/DAY from/FROM to/TO
+```
 
-Examples:
+| Fields  | Format                          | Remarks                                                                                                                |
+|---------|---------------------------------|------------------------------------------------------------------------------------------------------------------------|
+| `INDEX` | Positive integer (1, 2, 3, ...) | Index of the teaching assistant in the TA List to be edited. This index is with reference to the **displayed** TA list |
+| `DAY`   | Integer between 1 and 5         | Day of the week (Monday-Friday) the teaching assistant is free                                                         |
+| `FROM`  | Time in "HH:mm" format          | Start time of the free time of the teaching assistant                                                                  |
+| `TO`    | Time in "HH:mm" format          | End time of the free time of the teaching assistant                                                                    |
 
-- `editft 1 d/2 from/13:00 to/15:00` will update the free time of the TA with index 1 by setting his free time on Tuesday to be 13:00 to 15:00.
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes:**<br>
+- `FROM` time should be before `TO` time.
+- After running the `editft` command on a filtered list, the TA list will be updated to the full list of TAs.
+</div>
+
+##### Example:
+- `editft 1 d/2 from/13:00 to/15:00` updates the free time of the TA at index 1 to be Tuesday from 13:00 to 15:00.
 
 ![update Hour](images/editFreeTime.png)
 *<center>TAManager edits the free time of the teaching assistant at index <code>1</code> on Tuesday to be from <code>13:00</code> to <code>15:00</code>.</center>*
@@ -416,25 +504,35 @@ Edited Teaching Assistant: [Details of TA specified]
 
 </div>
 
-## Course Management Commands
+<span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
+
+## 2. Course Management Commands
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about courses:**<br>
+- TAManager only contains a fixed list of courses.
+
 - At the moment, TAManager does not support adding course to the course list.
 
 - Advanced users can edit the course list directly by editing the `courses.json` file.
 </div>
 
-### Viewing course information : `course`
+### 2.1 Viewing Course Information : `course`
 
 You can view the information for a specific course and its tutorial timings.
 
-Format: `course c/COURSE_CODE`
+##### Format: 
+```
+course c/COURSE_CODE
+```
 
-- COURSE_CODE should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet. Needs to be an existing course.
+| Fields        | Format                                                                                 | Remarks                                                                                                    |
+|---------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `COURSE_CODE` | Starts with 2-3 alphabets, followed by 4 numbers, and optionally ends with an alphabet | Course code of the course the teaching assistant is teaching and it should be one of the available courses |
 
-Example: `course c/CS2103T` returns the course information and tutorial timings for CS2103T.
+##### Example: 
+- `course c/CS2103T` returns the course information and tutorial timings for CS2103T.
 
 ![view course](images/viewCourse.png)
 *<center>TAManager displays the information for the specified course.</center>*
@@ -464,21 +562,32 @@ CS2103T Laboratory 10:00-12:00
 
 </div>
 
-### Adding a default course : `teach`
+<span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
 
-You can add a default course to TAManager. The default course is the course that you are currently managing or teaching. This is useful when you only want to view TAs that are teaching your default course.
+### 2.2 Adding a Default Course : `teach`
 
-Format: `teach c/COURSE_CODE`
+You can add a default course you are teaching to TAManager. 
 
-- COURSE_CODE should start with 2-3 alphabets, followed by 4 numbers, and optionally end with an alphabet. Needs to be an existing course.
+This will automatically filter the list of TAs teaching under the default course when you launch the app, so that you can easily browse through your team of TAs.
 
-Expected outcome:
-- Updates the name of the window with the default course.
-- Filters the list of TAs teaching under the course automatically.
+##### Format: 
+```
+teach c/COURSE_CODE
+```
+
+| Fields        | Format                                                                                 | Remarks                                                                                                    |
+|---------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `COURSE_CODE` | Starts with 2-3 alphabets, followed by 4 numbers, and optionally ends with an alphabet | Course code of the course the teaching assistant is teaching and it should be one of the available courses |
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes:**<br>
+- This command updates the name of the window with the default course.
 - The default course is saved even after you close the application.
-- The next time you open the application, the list of TAs will be automatically filtered based on your default course.
+</div>
 
-Example: `teach c/CS2103T` sets the default course to the course CS2103T.
+##### Example: 
+- `teach c/CS2103T` sets the default course to the course CS2103T.
 
 ![teach command](images/teachCourse.png)
 *<center>TAManager successfully added the default course.</center>*
@@ -505,15 +614,20 @@ CS2103T is successfully added as default course.
 
 </div>
 
-### Reset the default course : `clearteach`
+<span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
+
+### 2.3 Reset the Default Course : `clearteach`
 
 You can reset the default course in TAManager.
 
-This will revert the changes made by the [`teach`](#adding-a-default-course--teach) command.
+This will revert the changes made by the [`teach`](#22-adding-a-default-course--teach) command.
 
 If no default course is set, the command will execute successfully but nothing will happen.
 
-Example: `clearteach`
+##### Format: 
+```
+clearteach
+```
 
 ![clearteach command](images/clearTeach.png)
 *<center>TAManager successfully reset the default course.</center>*
@@ -529,13 +643,18 @@ Default course has been cleared!
 </div>
 </div>
 
-## Utility Commands
+<span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
 
-### Viewing help : `help`
+## 3. Utility Commands
 
-You can access the link to access this user guide if you need it.
+### 3.1 Viewing Help : `help`
 
-Format: `help`
+You can access the link to access this user guide if you need it while you are using the app.
+
+##### Format: 
+```
+help
+```
 
 ![help message](images/helpMessage.png)
 
@@ -550,15 +669,20 @@ Opened help window.
 </div>
 </div>
 
-### Clearing all entries : `clear`
+<span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span> 
 
-You can clear all entries from TAManager.
+### 3.2 Clearing All Entries : `clear`
+
+You can clear all entries from TAManager, so that you can quickly reset the TA contact list.
 
 <div markdown="block" class="alert alert-warning">
-**:exclamation: Caution:**This is a dangerous command that will delete all TA data and is irreversible. Please ensure that you have backed up your data.
+**:exclamation: Caution:** This is a dangerous command that will delete all TA data and is irreversible. Please ensure that you have backed up your data.
 </div>
 
-Format: `clear`
+##### Format: 
+```
+clear
+```
 
 <div class="command-succeed">
 <div markdown="block" class="alert alert-success">
@@ -571,17 +695,30 @@ Address book has been cleared!
 </div>
 </div>
 
-### Exiting the program : `exit`
+<span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
+
+### 3.3 Exiting the Program : `exit`
 
 You can safely exit the program.
 
-Format: `exit`
+##### Format: 
+``` 
+exit
+```
 
-## Saving your data
+<span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Saving Your Data
 
 TAManager data is saved in the hard disk automatically after any command that changes the data. There is no need for you to save manually.
 
-## Editing the data file
+<span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
+
+---
+
+## Editing the Data File
 
 TAManager data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -590,7 +727,7 @@ TAManager data are saved automatically as a JSON file `[JAR file location]/data/
 If your changes to the data file makes its format invalid, TAManager will discard all data and start with an empty data file at the next run. Hence, it is recommended to make a backup of the file before editing it.
 </div>
 
-<span style="float:right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
+<span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -599,25 +736,46 @@ If your changes to the data file makes its format invalid, TAManager will discar
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in your other computer and overwrite the empty data file it creates with the file that contains the data of your previous TAManager.
 
+**Q**: How do I make backup/restore my data?<br>
+**A**: The data file is automatically saved in the hard disk after any command that changes the data. You can make a backup of this file.
+
+<span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Glossary 
+
+### Command Line Interface (CLI)
+CLI is a text-based interface that allows users to interact with a computer or software application by typing commands into a terminal or command prompt. CLI relies on text commands to perform tasks.
+
+Example: When a user types `hour 2` and presses Enter, the application will add 2 hours to all TAs in the list.
+
+### Graphical User Interface (GUI)
+GUI is a type of interface that facilitates user interactions using visual representations, such as icons, buttons and windows.  
+
+Example: When a user types `list` and presses Enter, the application will list all TAs and user can scroll through the list to view the list.
+
+<span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Command Summary
 Commands are arranged in alphabetical order for your easy reference.
 
-| Action                                                          | Format, Examples                                                                                                                                                                                           |
-|-----------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Add](#adding-a-teaching-assistant-add)**                     | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [t/TAG]... [c/COURSE_CODE]... h/HOUR` <br> e.g. `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10`  |
-| **[Clear](#clearing-all-entries--clear)**                       | `clear`                                                                                                                                                                                                    |
-| **[ClearTeach](#reset-the-default-course--clearteach)**         | `clearteach`                                                                                                                                                                                               |
-| **[Course](#viewing-course-information--course)**               | `course c/[COURSE_CODE]`<br> e.g. `course c/CS2103T`                                                                                                                                                       |
-| **[Delete](#removing-a-teaching-assistant-delete)**             | `delete INDEX`<br> e.g. `delete 3`                                                                                                                                                                         |
-| **[Edit](#editing-a-teaching-assistant-edit)**                  | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [t/TAG]... [c/COURSE_CODE]... h/HOUR` <br> e.g. `edit n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10` |
-| **[Editft](#editing-free-time-of-a-teaching-assistant-editft)** | `editft INDEX d/DAY from/FROM to/FROM` <br> e.g. `editft 1 d/2 from/12:30 to/13:30`                                                                                                                        |
-| **[Exit](#exiting-the-program--exit)**                          | `exit`                                                                                                                                                                                                     |
-| **[Find](#finding-a-teaching-assistant-find)**                  | `find PREFIX KEYWORD [MORE_KEYWORDS]`<br> e.g. `find n/Alex`, `find c/cs1231s`, `find from/10:00 to/12:00`, `find n/Alex c/cs1231s`, `find c/cs2103t from/10:00 to/12:00`                                  |
-| **[Help](#viewing-help--help)**                                 | `help`                                                                                                                                                                                                     |
-| **[Hour](#updating-hours-for-teaching-assistants-hour)**        | `hour INTEGER`<br> e.g., `hour 2`                                                                                                                                                                          |
-| **[List](#viewing-teaching-assistants-list)**                   | `list`                                                                                                                                                                                                     |
-| **[Teach](#adding-a-default-course--teach)**                    | `teach c/[COURSE_CODE]`<br> e.g. `teach c/CS2103T`                                                                                                                                                         |
+| Action                                                                      | Format, Examples                                                                                                                                                                                           |
+|-----------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Add](#11-adding-a-teaching-assistant--add)**                             | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [t/TAG]... [c/COURSE_CODE]... h/HOUR` <br> e.g. `add n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10`  |
+| **[Clear](#32-clearing-all-entries--clear)**                                | `clear`                                                                                                                                                                                                    |
+| **[Clear default course](#23-reset-the-default-course--clearteach)**        | `clearteach`                                                                                                                                                                                               |
+| **[Course](#21-viewing-course-information--course)**                        | `course c/[COURSE_CODE]`<br> e.g. `course c/CS2103T`                                                                                                                                                       |
+| **[Delete](#15-removing-a-teaching-assistant--delete)**                     | `delete INDEX`<br> e.g. `delete 3`                                                                                                                                                                         |
+| **[Edit](#12-editing-a-teaching-assistant--edit)**                          | `add n/NAME p/PHONE e/EMAIL tele/TELEGRAM [t/TAG]... [c/COURSE_CODE]... h/HOUR` <br> e.g. `edit n/Snowball p/98765432 e/snowball@example.com tele/@snowball from/10:00 to/12:00 t/fulltime c/CS1231S h/10` |
+| **[Edit free time](#17-editing-free-time-of-a-teaching-assistant--editft)** | `editft INDEX d/DAY from/FROM to/FROM` <br> e.g. `editft 1 d/2 from/12:30 to/13:30`                                                                                                                        |
+| **[Exit](#33-exiting-the-program--exit)**                                   | `exit`                                                                                                                                                                                                     |
+| **[Find](#14-finding-a-teaching-assistant--find)**                          | `find PREFIX KEYWORD [MORE_KEYWORDS]`<br> e.g. `find n/Alex`, `find c/cs1231s`, `find from/10:00 to/12:00`, `find n/Alex c/cs1231s`, `find c/cs2103t from/10:00 to/12:00`                                  |
+| **[Help](#31-viewing-help--help)**                                          | `help`                                                                                                                                                                                                     |
+| **[Hour](#16-updating-hours-for-teaching-assistants--hour)**                | `hour INTEGER`<br> e.g., `hour 2`                                                                                                                                                                          |
+| **[List](#13-viewing-teaching-assistants--list)**                           | `list`                                                                                                                                                                                                     |
+| **[Teach](#22-adding-a-default-course--teach)**                             | `teach c/[COURSE_CODE]`<br> e.g. `teach c/CS2103T`                                                                                                                                                         |
 
-<span style="float:right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
+<span style="display: flex; justify-content: right; font-size: 0.8em;">[BACK TO TOP](#table-of-contents)</span>
