@@ -369,8 +369,6 @@ Screenshots:
 <img src="images/screenshots/addPatient.png" width="500" alt="AddPatient Screenshots">
 <img src="images/screenshots/addPatient%20-%20after.png" width="500" alt="AddPatient Screenshots">
 
-![AddPatient Screenshots](images/screenshots/addPatient%20-%20after.png)
-
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
 ---
