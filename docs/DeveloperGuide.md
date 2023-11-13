@@ -929,7 +929,7 @@ point for testers to work on; testers are expected to do more *exploratory* test
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Appendix: Effort
+## **Appendix: Effort**
 This project required a substantial effort to design and implement various features aimed at enhancing
 the functionality of the software system. It was quite hard at the beginning because we were not well-versed with the 
 codebase. After understanding some pertinent classes to implement our enhancements, we also had to refactor and 
