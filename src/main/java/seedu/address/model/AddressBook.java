@@ -125,17 +125,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         });
     }
 
-    /**
-     * Adds a person to a group
-     * @param person person to add
-     * @param group group to add person to
-     */
-    public void addPersonToGroup(Person person, Group group) {
-        requireNonNull(person);
-        requireNonNull(group);
-        GroupList groups = person.getGroups();
-    }
-
     public Person getPerson(String personName) throws CommandException {
         // person list get that person object with same name
         return persons.getPerson(personName);
@@ -168,6 +157,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeGroup(Group g) {
         groups.remove(g);
+
+        g.toStream().forEach(p -> {
+            try {
+                p.removeGroup(g);
+            } catch (CommandException e) {
+                throw new RuntimeException();
+            }
+        });
     }
 
     /**

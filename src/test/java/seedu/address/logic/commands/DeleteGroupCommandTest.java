@@ -307,6 +307,13 @@ public class DeleteGroupCommandTest {
             for (Group group : groups) {
                 if (group.getGroupName().equals(groupName)) {
                     groups.remove(group);
+                    persons.forEach(p -> {
+                        try {
+                            p.removeGroup(group);
+                        } catch (CommandException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
                     return group;
                 }
             }
