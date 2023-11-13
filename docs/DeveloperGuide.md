@@ -842,16 +842,28 @@ testers are expected to do more *exploratory* testing.
 1. Adding a tutee into the list.
 
    1. Prerequisites: None
+   
    2. Test case: `add n/Betsy Crowe p/92939402 e/betsycrowe@example.com a/Newgate Prison sb/Secondary 3 Physics d/mon b/1900 end/1930 pr/35.00`<br>
       Expected: The tutee is added into the bottom of the list. Details of the added tutee is shown in the status message.
 
 
+
 2. Adding a duplicate tutee into the list
 
+   1. Prerequisites: Completing the first test case for [Adding a tutee](#adding-a-tutee)
+   
+   2. Test case: `add n/Betsy Crowe p/92939402 e/betsycrowe@example.com a/Newgate Prison sb/Secondary 3 Physics d/mon b/1900 end/1930 pr/35.00`<br>
+      Expected: The error message _This tutee already exists_ should be displayed in the status message.
 
-    1. Prerequisites: Completing the first test case for [Adding a tutee](#adding-a-tutee) 
-    2. Test case: `add n/Betsy Crowe p/92939402 e/betsycrowe@example.com a/Newgate Prison sb/Secondary 3 Physics d/mon b/1900 end/1930 pr/35.00`<br>
-       Expected: The error message _This tutee already exists_ should be displayed in the status message.
+
+
+3. Adding a tutee that has clashing schedules.
+
+   1. Prerequisites: Completing the first test case for [Adding a tutee](#adding-a-tutee)
+   
+   2. Test case: `add n/Jason Antonius p/12345678 e/test@gmail.com a/PGPR Residences sb/CS1101S d/mon b/1900 end/1930 pr/20` <br>
+      Expected: The error message _This date and time clashes with an existing schedule_ should be displayed in the status message.
+ 
 
 ### Deleting a tutee
 
@@ -861,30 +873,32 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `delete 1`<br>
       Expected: First tutee is deleted from the list. Details of the deleted tutee shown in the status message. Timestamp in the status bar is updated.
-=======
 
-3. Adding a tutee that has clashing schedules.
-   1. Prerequisites: Completing the first test case for [Adding a tutee](#adding-a-tutee)
-   2. Test case: `add n/Jason Antonius p/12345678 e/test@gmail.com a/PGPR Residences sb/CS1101S d/mon b/1900 end/1930 pr/20` <br>
-      Expected: The error message _This date and time clashes with an existing schedule_ should be displayed in the status message.
 
 ### Editing a tutee
 
 1. Editing a tutee while all tutees are being shown
 
    1. Prerequisites: Have the default tutee data and list all tutees using the `list` command.
+   
    2. Test case: `edit 2 n/Betsy Crower a/Betsy street, block 110, #03-02` <br>
       Expected: Tutee is successfully edited, and the details of the edited tutee is shown in the status message.
 
 
+
 2. Editing a tutee that causes duplicate tutees
+
    1. Prerequisites: Have the default tutee data and list all tutees using the `list` command.
+   
    2. Test case: `edit 2 n/Alex Yeoh p/87438807` <br>
       Expected: The error message _This tutee already exists_ should be displayed in the status message.
 
 
+
 3. Editing a tutee that causes clashing schedules.
+
    1. Prerequisites: Have the default tutee data and list all tutees using the `list` command.
+   
    2. Test case: `edit 2 d/Mon b/2000 end/2200` <br>
       Expected: The error message _This date clashes with an existing schedule_ should be displayed in the status message.
 
@@ -893,6 +907,7 @@ testers are expected to do more *exploratory* testing.
 1. Finding free time that results in no available timeslots
 
     1. Prerequisites: Have the default tutee data.
+   
     2. Test case: `freeTime d/Mon dur/30 b/2000 end/2100` <br>
        Expected: The result <br>
    _Here is your list of free time:_ <br>
@@ -900,9 +915,11 @@ testers are expected to do more *exploratory* testing.
    should be displayed in the status message.
 
 
+
 2. Finding free time that results in available timeslots
 
     1. Prerequisites: Have the default tutee data.
+   
     2. Test case: `freeTime d/Mon dur/30 b/1930 end/2130` <br>
        Expected: The result <br>
          _Here is your list of free time:_ <br>
@@ -990,6 +1007,10 @@ testers are expected to do more *exploratory* testing.
 1. _{ more test cases …​ }_
 
 ## **Planned Enhancements**
+
+1. To be able to group/tag tutees into "Tutor Groups". These tutees will be able to have the same timeslot if they belong to the same "Tutor Group"
+2. Allow tutees to have multiple lessons. Our current implementation does not allow the same tutee to have multiple lesson as a tutee is uniquely identified by their name and phone number. For example, if the user is teaching John Maths on Monday, he can't teach John Physics on a different day because the system will identify John as a duplicate tutee.
+3. Enhance the edit feature. Currently, our edit feature might result in a bug if the NAME and (DAY/BEGIN/END) fields are edited at the same time. For example, if tutee index 1 has the name John and has a lesson on Monday 20:00 - 21:00, trying to do `edit 1 n/Doe end/2030` will result in an error (throwing the message that this date clashes with an existing scheduke). 
 
 ### Batch Processing for Paid Command
 

@@ -188,15 +188,13 @@ Shows a message that helps redirects you to the user guide.
 
 **Format**: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS sb/SUBJECT d/DAY b/BEGIN e/END pr/PAYRATE`
 
-**Expected Output when the command succeeds**: Successfully added tutee XXX(Name)
-
-* :exclamation: Things that can cause the `add` command to fail:
-  1. Putting invalid inputs into the add command.
-     - :bulb: Check the [Parameter Requirements](#parameters-requirement) for valid parameter inputs.
-  2. Adding a tutee that will result in duplicate tutees.
-     - :information_source: Two tutees are considered duplicates if they have the same name and phone number
-  3. Adding a tutee that will result in clashing schedules.
-     - :bulb: Use the [`freeTime` command](#finding-free-time--freetime) to list down timings when you are available and prevent schedule clashses.
+:exclamation: Things that can cause the `add` command to fail:
+1. Putting invalid inputs into the add command.
+   - :bulb: Check the [Parameter Requirements](#parameters-requirement) for valid parameter inputs.
+2. Adding a tutee that will result in duplicate tutees.
+   - :information_source: Two tutees are considered duplicates if they have the same name and phone number
+3. Adding a tutee that will result in clashing schedules.
+   - :bulb: Use the [`freeTime` command](#finding-free-time--freetime) to list down timings when you are available and prevent schedule clashses.
 
 **Examples**:
 * `add n/John Doe p/98765432 e/johnny@example.com a/John street, block 123, #01-01 sb/Primary 4 Math d/wed b/1500 end/1600 pr/20.00`
@@ -204,7 +202,7 @@ Shows a message that helps redirects you to the user guide.
 
 **Sample Execution**: `add n/Betsy Crowe p/92939402 e/betsycrowe@example.com a/Newgate Prison sb/Secondary 3 Physics d/mon b/1900 end/1930 pr/35.00`
 
-![Add before and after](images/Add%20before%20and%20after.png)
+![Add after](images/Add%20after.png)
 
 ### Listing tutees : `list`
 
@@ -394,7 +392,7 @@ Format: `unpaidAll`
 
 **Sample Execution**: `freeTime d/Sat dur/120 b/0800 end/2200`
 
-![freeTime before and after](images/freeTime%20before%20and%20after.png)
+![freeTime after](images/freeTime%20after.png)
 
 ### Undo previous command : `undo`
 
