@@ -107,10 +107,9 @@ Keep an eye out for them!
 
 **:bulb: How to interpret each feature description:** <br>
 
-The description of each feature is divided into 7 parts:
+The description of each feature is divided into 6 parts:
 
 * **Name** - The name of the feature.
-* **Description** - A brief description of the feature.
 * **Scenario** - A scenario that illustrates when and why the feature is useful.
 * **Format** - The format of the command for the feature.
 * **Examples** - Examples of using the command and their effects.
@@ -131,53 +130,58 @@ add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​  [i/INSTRUMENT]…​  [g/GENRE]
 
 * The first word represents the command name, in this case, `add`.
 
-* The words in uppercase represent the parameters to be provided by the user, and their meanings are self-explanatory. For example, `n/NAME` means you need to provide a name for the contact.
+* The words in uppercase represent the [parameters](#glossary) to be provided by the user, and their meanings are self-explanatory. For example, `n/NAME` means you need to provide a name for the contact.
 
 * The prefixes like `n/`, `p/`, `e/` are used to identify the parameters. So, when typing `add n/John Doe`, the application knows that `John Doe` is the name of the musician.
 
 * The parameters in square brackets like `[g/GENRE]` are optional, while the parameters without square brackets like `n/NAME` are compulsory.
 
-* The parameters in with `…​ ` like `[g/GENRE]…​ ` can be entered multiple times (including zero times). For example, `g/rock g/jazz` or `g/blues` or `` are all valid.
+* The parameters in with `…​` like `[g/GENRE]…​` can be entered multiple times (including zero times). For example, `g/rock g/jazz` or `g/blues` or `​` are all valid.
 
 * The order of the parameters does not affect the result. For example, `p/PHONE_NUMBER` can be entered before `n/NAME`, and the command still works the same.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, or `tags`) will be ignored.
-  
+
+</div>
  
 [Back To ToC](#table-of-contents)
-</div>
-
 
 --------------------------------------------------------------------------------------------------------------------
+
 ### Features for managing musicians
 
 #### Add musician: `add`
 
-Adds one musician to the contact book. 
+**Scenario:** 
 
-Name, phone number, email, tag, instrument, genre about the musician can all be included.
+You have just met a talented musician and see him/her as a potential fit for your dream band. Let's add him/her to your contact list.
 
-**Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​  [i/INSTRUMENT]…​  [g/GENRE]…​ `
+**Format:** 
+
+`add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`
 
 **Examples:**
-* `add n/John Doe p/98765432 e/johnd@example.com t/bestman i/violin g/classical`
-* `add n/Betsy Crowe e/pianistbetsy@smtp.com p/87988039 i/piano g/pop g/rock`
+* `add n/Hans Leonhart p/98765432 e/hansl@music.com t/german i/violin g/classical` 
+
+   This command adds Hans Leonhart to your contact list. He plays the violin and specialises in classical music. He is also one of the few German musicians you know.
 
 **Things to Note**
-* To add the instruments and genres the musician specialises in using the `i/` and `g/` prefixes, you can only add the instruments and genres included in a [pre-defined list](#show-all-valid-instruments-and-genres-tags) of instruments and genres. 
+* To add the instruments and genres the musician specialises in using the `i/` and `g/` prefixes, you can only add the ones included in a [pre-defined list](#list-of-valid-instrumentsgenres) of instruments and genres. 
 
 
 **Upon success:**
+
 A success message like below will be displayed.
 
 ```
-New musician added: John Doe; Phone: 98765432; Email: johnd@example.com; Tags: [bestman]; Instruments: [violin]; Genres: [classical]
+New musician added: Hans Leonhart; Phone: 98765432; 
+Email: hansl@music.com; Tags: [german]; 
+Instruments: [violin]; Genres: [classical]
 ```
-![add_after.png](images%2Fmusician-features%2Fadd_after.png)
 
 **Upon failure:**
 
-If you input a musician which is already in your contact book (i.e. a musician with either the same name, the same phone number, or the same email as an existing contact). You will be shown an error message like below. Please re-enter the correct information.
+If you input a musician which is already in your contact book (i.e. a musician with either the **same name**, the **same phone number**, or the **same email** as an existing contact). You will be shown an error message like below. Please re-enter the correct information.
 ```
 This musician already exists in your contact list
 ```
@@ -185,21 +189,29 @@ This musician already exists in your contact list
 #### Delete musician: `delete`
 
 Deletes a musician from your contact list.
-From the current `My Musicians` panel, find the index of the musician to be deleted.
 
-**Format:** `delete INDEX`
+**Scenario:**
+
+You have just found out that a musician contact is outdated and no longer relevant. Let's find his/her index in the `My Musicians` panel and delete him/her from your list.
+
+**Format:** 
+
+`delete INDEX`
 
 **Examples:**
 * `delete 1`
 
+   This command deletes the musician at index 1 in the `My Musicians` panel.
+
 **Upon success:**
 
-You will see a message indicating successful removal of the first musician contact in the musician panel like below:
+You will see a message indicating successful removal of the musician contact in the musician panel like below:
 
 ```
-Deleted Musician: John Doe; Phone: 98765432; Email: johnd@example.com; Tags: [bestman]; Instruments: [violin]; Genres: [classical]
+Deleted Musician: Hans Leonhart; Phone: 98765432; 
+Email: hansl@music.com; Tags: [german]; 
+Instruments: [violin]; Genres: [classical]
 ```
-![delete_after.png](images%2Fmusician-features%2Fdelete_after.png)
 
 **Upon failure:**
 
@@ -215,35 +227,47 @@ Please verify that the index is correct and try again.
 
 #### Edit musician: `edit`
 
-Edits an existing musician in the contact book referenced by the index.
+**Scenario:**
 
-Name, phone number, email, tag, instrument, genre about the musician can all be included for edit.
+You have just found out that a musician contact has changed his/her phone number and email. Let's edit his/her contact information.
 
-**Format:** `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​  [i/INSTRUMENT]…​  [g/GENRE]…​ `
+**Format:** 
+
+`edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​  [i/INSTRUMENT]…​  [g/GENRE]…​ `
 
 **Examples:**
 * `edit 1 p/98765430 g/pop`
-* `edit 2 e/pianistbetsy@edited.com i/violin t/available`
+
+   This command edits the phone number of the musician at index 1 in the `My Musicians` panel to 98765430 and changes his/her preferred genre to pop.
 
 **Things to Note**
 * At least one of the optional field to edit must be provided.
-* The `INDEX` refer to the index number shown in the currently displayed `My Musicians` list. The index **must be a positive integer** 1, 2, 3, …​
-* If you would like to edit a musician not currently shown, please use the 'list' command first before editing.
+* The `INDEX` refer to the index number shown in the **currently displayed** `My Musicians` list. The index must be a positive integer, e.g. 1, 2, 3, …​
+* If you would like to edit a musician not currently shown, please use the `list` command first before editing.
 * When editing tags/instruments/genres, the existing tags/instruments/genres of the musician will be removed i.e adding of tags/instruments/genres is not cumulative.
 * You can remove all tags/instruments/genres of the musician by inputting an empty tag/instrument/genre field, e.g. `edit 1 t/ i/ g/`.
-* You can only edit the instruments and genres of the musician using the ones included in a pre-defined list. Refer to the [tags](#show-all-valid-instruments-and-genres-tags) command for more information.
+
+    <div markdown="block" class="alert alert-success">
+    
+    **:bulb: Tips:**
+
+     The syntax for `edit` command is identical to the `add` command except for the additional `INDEX` parameter.
+    
+    </div>
 
 **Upon success:**
 A success message like below will be displayed.
 
 ```
-Edited Musician: John Doe; Phone: 98765430; Email: johnd@example.com; Tags: [bestman]; Instruments: [violin]; Genres: [pop]
+Edited Musician: Hans Leonhart; Phone: 98765430; 
+Email: hansl@music.com; Tags: [german]; 
+Instruments: [violin]; Genres: [pop]
 ```
-* Before: From `list` state, John Doe's genre is classical
+* Before: From `list` state, Hans Leonhart's genre is classical and his phone number is 98765432
   ![edit_before.png](images%2Fmusician-features%2Fedit_before.png)
 
 
-* After: John Doe's genre is changed to pop
+* After: Hans Leonhart's genre is changed to pop and his phone number is changed to 98765430
   ![edit_after.png](images%2Fmusician-features%2Fedit_after.png)
 
 
@@ -263,13 +287,22 @@ Edited Musician: John Doe; Phone: 98765430; Email: johnd@example.com; Tags: [bes
 
 #### Find musicians: `find`
 
-Finds all musicians whose names, tags, instruments, AND genres contain ANY of the given keywords.
+**Scenario:**
 
-**Format:** `find [n/NAME]…​  [t/TAG]…​  [i/INSTRUMENT]…​  [g/GENRE]…​ `
+You are about to form a band and are looking for musicians who play certain instruments and specialises in certain genres. Let's find them in your contact list!
+
+**Format:** 
+
+`find [n/NAME]…​  [t/TAG]…​  [i/INSTRUMENT]…​  [g/GENRE]…​`
 
 **Examples:**
-* `find n/John i/violin i/piano` finds all musicians whose names contain "John" AND instruments contain "violin" or "piano".
-* `find t/available t/friendly i/piano g/jazz` finds all musicians whose tags contain "available" or "friendly" AND instruments contain "piano" AND genres contain "jazz".
+* `find n/John n/Joe i/violin` 
+    
+   This command finds all musicians whose names contain "John" or "Joe" AND play the violin.
+
+* `find t/available t/friendly i/piano g/jazz` 
+
+    This command finds all musicians whose tags contain "available" or "friendly" AND play the piano AND specialises in jazz.
 
 **Things to Note**
 * At least one of the optional field to find must be provided.
@@ -298,6 +331,7 @@ For example, when the input command is `find g/rock i/guitar i/piano`
     ```
     The argument(s) provided must not contain more than one word.
     ```
+   Please ensure the argument contains **one and only one word.**
 
 [Back To ToC](#table-of-contents)
 
@@ -585,9 +619,9 @@ Format: `exit`
 
 If you wish, please refer to the below section for a more succinct [command summary](#command-summary).
 
-[Back To ToC](#table-of-contents)
-
 </div>
+
+[Back To ToC](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -600,6 +634,7 @@ If you wish, please refer to the below section for a more succinct [command summ
 | Instruments |  bass, cello, clarinet, drums, flute, guitar, piano, saxophone, trumpet, violin, voice, other   |
 |   Genres    | blues, classical, country, electronic, folk, hiphop, jazz, latin, metal, pop, rock, soul, other |
 
+[Back To ToC](#table-of-contents)
 
 ### Musician Command summary
 
@@ -610,6 +645,7 @@ If you wish, please refer to the below section for a more succinct [command summ
 | **[Edit Musician](#edit-musician-edit)**      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`  | `edit 2 e/pianistbetsy@edited.com i/violin t/available`                                                         |
 | **[Find Musicians](#find-musicians-find)**    | `find [n/NAME]…​ [t/TAG]…​ [i/INSTRUMENT]…​ [g/GENRE]…​`                                 | `find n/John i/Piano`                                                                                           |
 
+[Back To ToC](#table-of-contents)
 
 ### Band Command summary
 
@@ -621,7 +657,9 @@ If you wish, please refer to the below section for a more succinct [command summ
 | **[Add Musicians to Band](#add-musician-to-band-addm)**             | `addm b/BAND_INDEX m/MUSICIAN_INDEX…​`                                                   | `addm b/1 m/1 m/2`                                       |
 | **[Remove Musician from Band](#remove-musician-from-band-removem)** | `removem b/BANDINDEX m/MUSICIANINDEX`                                                    | `removem b/1 m/1`                                        |
 | **[Find Band](#find-band-findb)**                                   | `findb BANDNAME`                                                                         | `findb theory X`                                         |
- 
+
+[Back To ToC](#table-of-contents)
+
 ### General Command summary
 
 | Action                                                                 | Format                                                                                    |
