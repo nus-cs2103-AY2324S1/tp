@@ -29,8 +29,8 @@ you can access contacts by roles and responsibilities instantly.
   * [Understanding the GUI](#understanding-the-gui)
   * [Tutorial on using our Commands](#tutorial-on-using-our-commands)
 * [Features](#features)
-  * [Date & Time Command](#date--time-command)
-  * [Add developer](#add-developer)
+  * [Date & Time Command](#features)
+  * [Add developer](#add-command)
   * [Remove developer](#remove-developer)
   * [Edit developer](#edit-developer)
   * [Find developer](#find-developer)
@@ -47,11 +47,11 @@ you can access contacts by roles and responsibilities instantly.
   * [Help Command](#help-command)
   * [Reset the project](#reset-the-project)
   * [Exit the application](#exit-the-application)
-* [FAQs](#faqs)
+* [FAQs](#faq)
 * [Support](#support)
 * [Known issues](#known-issues)
 * [Command Summary](#command-summary)
-* [Future Enhancement](#future-enhancement)
+* [Future Enhancement](#future-enhancements)
 * [Glossary](#glossary)
 
 <page-nav-print />
@@ -187,7 +187,11 @@ When you enter the command (Hi):
 - Please ensure that the first letter of the command is uppercase. For instance, use `Hi` instead of `hi` or `HI`.
 - The command does not take any additional arguments or keywords.
 </div>
+
+Click [here](#table-of-contents) to go back to contents.
+
 <br>
+
 
 --------------------------------------------------------------------------------------------------------------------
 **The following commands are for managing developers.** 
@@ -198,7 +202,6 @@ When you enter the command (Hi):
 
 #### Command format: 
 * `add n/[Developer Name] p/[Phone Number] e/[Email] a/[Address] (OPTIONAL r/[Remark] t/Tags)`
-* `newdev n/[Developer Name] p/[Phone Number] e/[Email] a/[Address] (OPTIONAL r/[Remark] t/Tags)`
   
 #### Example usage:
 - For example, to add a new developer John to the addressboook, type
@@ -210,6 +213,9 @@ When you enter the command (Hi):
 **:information_source: Note:**<br>
 * The `add` command allows for numbers and other special characters for the `name` parameter. This is to allow for more flexibility with naming.
 </div>
+
+Click [here](#table-of-contents) to go back to contents.
+
 <br>
 
 ### Remove developer
@@ -242,7 +248,11 @@ team.
 * Deleting a developer who is not a team leader will remove that developer from all the teams and also from list
 of developers.
 </div>
+
+Click [here](#table-of-contents) to go back to contents.
+
 <br>
+
 
 ### Edit developer
 #### What this command does:
@@ -272,6 +282,9 @@ of developers.
   so I only provided this person's index `1`, new name `n/John Wick`
   and new email address `e/new.email@example.com`.
 </div>
+
+Click [here](#table-of-contents) to go back to contents.
+
 <br>
 
 
@@ -302,7 +315,11 @@ with first or last name being **Alex** or **David**.
 - The order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
 
 </div>
+
+Click [here](#table-of-contents) to go back to contents.
+
 <br>
+
 
 ### List developers
 #### What this command does:
@@ -332,8 +349,10 @@ Use the same command `list`. You will return to the home page.
 When you are at the main window, type `list` to show the developer list
 and type `list` again when you want to go back to the main window.
 </div>
-<br>
 
+Click [here](#table-of-contents) to go back to contents.
+
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -352,7 +371,10 @@ type `newteam tn/Team Delta tl/David Li`
 * In the following example, you can see new team **Team Delta** is added to the team list.
   ![AddTeamCommand](images/UG_images/AddTeamCommand.png)
 
-  
+Click [here](#table-of-contents) to go back to contents.
+
+<br>
+ 
 ### Add developers to team
 #### What this command does:
 * Helps to add existing developers in the addressbook to a team.
@@ -369,6 +391,9 @@ type `newteam tn/Team Delta tl/David Li`
 **:information_source: Note:**<br>
 * The specified developer and team must already exist in the project!
 </div>
+
+Click [here](#table-of-contents) to go back to contents.
+
 <br>
 
 ### Delete team
@@ -382,6 +407,8 @@ type `newteam tn/Team Delta tl/David Li`
 * For example, if you want to delete **Team Alpha** from the list of teams.
 * You need to type `deleteteam tn/Team Alpha`, then the **Team Alpha** will be deleted from the list of teams.
   ![DeleteTeamCommand](images/UG_images/DeleteTeam.png)
+
+Click [here](#table-of-contents) to go back to contents.
 
 <br>
 
@@ -404,6 +431,9 @@ type `newteam tn/Team Delta tl/David Li`
 * You cannot delete a developer who is **team leader**. In order, delete that developer you need to change the
   team leader using `editTeamLeader` command. Only then you can remove that developer from the team.
 </div>
+
+Click [here](#table-of-contents) to go back to contents.
+
 <br>
 
 ### Edit team name
@@ -423,6 +453,9 @@ type `newteam tn/Team Delta tl/David Li`
 **:information_source: Note:**<br>
 * Remember to check that the new team name that you specify isn't already taken by another team in the teambook.
 </div>
+
+Click [here](#table-of-contents) to go back to contents.
+
 <br>
 
 ### Edit team leader
@@ -442,6 +475,9 @@ type `newteam tn/Team Delta tl/David Li`
 **:information_source: Note:**<br>
 * Remember to check that the new leader specified is a person that already exists in the addressbook.
 </div>
+
+Click [here](#table-of-contents) to go back to contents.
+
 <br>
 
 ### Find Team
@@ -475,6 +511,10 @@ type `newteam tn/Team Delta tl/David Li`
 *  The search is case-insensitive. e.g., "team" will match "Team Alpha."
 </div>
 
+Click [here](#table-of-contents) to go back to contents.
+
+<br>
+
 ### List teams
 #### What this command does:
 * Displays the list of all the teams in this project.
@@ -504,6 +544,9 @@ When you are at the main window, type `listt` to show the team list
 and type `listt` again when you want to go back to the main window.
 </div>
 
+Click [here](#table-of-contents) to go back to contents.
+
+<br>
 
 ### Display tree
 #### What this command does:
@@ -547,11 +590,11 @@ When you are at the main window, type `tree` to show the tree graph
 and type `tree` again when you want to hide the tree and go back to the main window.
 </div>
 
-
---------------------------------------------------------------------------------------------------------------------
+Click [here](#table-of-contents) to go back to contents.
 
 <br>
 
+--------------------------------------------------------------------------------------------------------------------
 
 ### Help Command
 #### What this command does:
@@ -574,6 +617,8 @@ and type `tree` again when you want to hide the tree and go back to the main win
   ![HelpWindow](images/UG_images/HelpWindow.png)
   ![HelpCommandResult](images/UG_images/HelpCommandResult.png)
 
+Click [here](#table-of-contents) to go back to contents.
+
 <br>
 
 ### Reset the project
@@ -593,6 +638,9 @@ This command can be used when you want to restart the project.
 **:exclamation: Warning:**<br>
 * Using the clear command might result in unintended loss of data! Use it only when you intend to remove all of your data!
 </div>
+
+Click [here](#table-of-contents) to go back to contents.
+
 <br>
 
 ### Exit the application
@@ -614,7 +662,7 @@ Click [here](#table-of-contents) to go back to contents.
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
-#### Q: How can I launch Linktree if clicking on the JAR file does not work?
+##### Q: How can I launch Linktree if clicking on the JAR file does not work?
 **A:** Below is the CLI way to launch Linktree when encountering issues with the JAR file.
 1. Open the Command Prompt.
 2. Navigate to the directory where the JAR file is located using the following command:
@@ -622,17 +670,17 @@ Click [here](#table-of-contents) to go back to contents.
 4. Linktree should now launch.
 - If this doesn’t work, check our GitHub to make sure you have the latest version of Tran$act downloaded.
 
-#### Q: How can I transfer my Linktree data to another computer?
+##### Q: How can I transfer my Linktree data to another computer?
 **A:** To transfer your Linktree data, install the jar file on the new computer and replace the empty data files(addressbook.json & teambook.json) with the two from your previous Linktree home directory (tp/data).
 
-#### Q: What are the steps to install Java 11?
+##### Q: What are the steps to install Java 11?
 **A:**  To install Java 11, please refer to the [detailed download instructions available here](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
-#### Q: Is Linktree compatible with Mac and Linux operating systems?
+##### Q: Is Linktree compatible with Mac and Linux operating systems?
 **A:**  Linktree is compatible with a wide range of operating systems,
 including Windows, Mac and Linux, and it runs on systems that support Java 11, so you can use it on your favorite platform.
 
-#### Q: What should I do if a command isn't working?
+##### Q: What should I do if a command isn't working?
 **A:** Below are the 5 potential ways to solve your issue:
 1. **Review the Command Syntax**:
   - Start by carefully reviewing the command you're trying to use. Ensure that you've entered it correctly, including all required components like command names, options, and arguments.
@@ -651,28 +699,28 @@ including Windows, Mac and Linux, and it runs on systems that support Java 11, s
 Reach out to your us in email or Github for assistance.
 Describe the problem in detail, including the command you're using, the error messages received, and any relevant context.
 
-#### Q: Why does Linktree not show all developers/teams in the database?
+##### Q: Why does Linktree not show all developers/teams in the database?
 **A:** If not all customers or properties are appearing, it's likely due to certain commands like find, or findteam. 
 1. *If you wish to view the developer list, you should use the list command.*
 2. *To display the complete list of teams, use the listt command.*
 3. *If you need to list both at the same time, you can use the list command twice or the listt command twice to revert to the default state.*
 
-#### Q: Is there a way to share my Linktree phonebook with others by exporting it to a different format such as a csv file?
+##### Q: Is there a way to share my Linktree phonebook with others by exporting it to a different format such as a csv file?
 **A:** Linktree does not currently support sharing your phonebook with others or exporting it to an external format.
 Its main function is personal communication management for supervisors.
 
-#### Q: I'm confused about some terms in the guide. Where can I find explanations?
+##### Q: I'm confused about some terms in the guide. Where can I find explanations?
 **A:** You can check out the explanation of some of the complicated terms in our glossary
 
-#### Q: I deleted my data file by mistake. Can I recover my lost data?
+##### Q: I deleted my data file by mistake. Can I recover my lost data?
 **A:** If you've accidentally deleted your data file, check your computer's trash or recycle bin.
 Unfortunately, if it's not there, recovering lost data is not possible.
 
-#### Q: How do I uninstall Linktree?
+##### Q: How do I uninstall Linktree?
 **A:** To uninstall Linktree, simply delete the folder that contains `linktree.jar` 
 - no installation on the hard drive means no complex uninstallation process.
 
-#### Q: Do I need to be online to use Linktree?
+##### Q: Do I need to be online to use Linktree?
 **A:** Linktree doesn't require an internet connection for regular use, but you will need to be online to download the application initially.
 
 
@@ -684,28 +732,33 @@ Click [here](#table-of-contents) to go back to contents.
 ## Support
 If you encounter any issues or have questions about LinkTree, we're here to help. Please find the relevant support resources below:
 
-### Contact Information
+##### Contact Information
 For personalized assistance, you can reach out to our support team via email at [linktreeltd@gmail.com](mailto:linktreeltd@gmail.com). We aim to respond within [3 business days].
 
-### Frequently Asked Questions (FAQs)
+##### Frequently Asked Questions (FAQs)
 Check our [FAQs section](#faq) for answers to common questions and solutions to known problems.
 
-### Software Updates
+##### Software Updates
 
 Stay informed about the latest releases, bug fixes, and new features by checking our [Releases](https://github.com/AY2324S1-CS2103T-W11-4/tp/releases) regularly.
 
 
-### Feedback and Suggestions
+##### Feedback and Suggestions
 
 We value your feedback and suggestions. Share your ideas for improvement or new features through our feedback portal given below. Also, if you come across a bug or unexpected behavior, help us improve by reporting it in the feedback portal as well.
 [Feedback Portal](https://docs.google.com/forms/d/e/1FAIpQLSc4rIrGgKWQBDKxmMKP7S0pmuI42OEoxZ00Qaxo0K2rvlVLag/viewform?usp=sf_link)
 
-**Note:** Before reaching out for support, please ensure that you have checked our documentation for relevant information.
+
+<div markdown="block" class="alert alert-warning">
+
+**:bulb: Tips:**<br><br>
+To resolve any issues even faster, try checking out our documentation and FAQs!
+</div>
 
 We appreciate your continued support and strive to provide the best user experience possible.
 
 
-Click_ [here](#table-of-contents) to go back to contents.
+Click [here](#table-of-contents) to go back to contents.
 
 --------------------------------------------------------------------------------------------------------------------
 
