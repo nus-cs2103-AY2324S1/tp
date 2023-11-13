@@ -38,7 +38,7 @@ public class AddPersonCommand extends Command {
         model.addPerson(toAdd);
         model.setState(State.STUDENT);
         model.showPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), State.STUDENT);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
     @Override

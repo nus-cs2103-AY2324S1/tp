@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.state.State;
 
 /**
  * Represents the result of a command execution.
@@ -20,25 +19,21 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
-    /** The state to be set **/
-    private final State state;
-
     /** The parameters on what to display for student details **/
     private final String[] displayParams;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, State state, String[] displayParams) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, String[] displayParams) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.state = state;
         this.displayParams = displayParams;
     }
 
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
-        this(feedbackToUser, showHelp, exit, State.NONE, new String[0]);
+        this(feedbackToUser, showHelp, exit, new String[0]);
     }
 
     /**
@@ -46,19 +41,11 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, State.NONE, new String[0]);
+        this(feedbackToUser, false, false, new String[0]);
     }
 
     public CommandResult(String feedbackToUser, String[] displayParams) {
-        this(feedbackToUser, false, false, State.NONE, displayParams);
-    }
-
-    public CommandResult(String feedbackToUser, State state) {
-        this(feedbackToUser, false, false, state, new String[0]);
-    }
-
-    public CommandResult(String feedbackToUser, State state, String[] displayParams) {
-        this(feedbackToUser, false, false, state, displayParams);
+        this(feedbackToUser, false, false, displayParams);
     }
 
     public String getFeedbackToUser() {
@@ -71,10 +58,6 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
-    }
-
-    public State getState() {
-        return state;
     }
 
     public String[] getDisplayParams() {

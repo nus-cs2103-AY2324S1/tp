@@ -15,6 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.lessons.Task;
 import seedu.address.model.person.Person;
+import seedu.address.model.state.State;
 
 /**
  * The manager of the UI component.
@@ -117,6 +118,15 @@ public class UiManager implements Ui {
      */
     public void showTaskDetails(Task task) {
         mainWindow.handleShowTask(task);
+    }
+
+    /**
+     * Sets the appropriate panels to display, hide all other panels.
+     *
+     * @param state The new state that determines which panels to show.
+     */
+    public void changeLayout(State state) {
+        mainWindow.changeLayout(state);
     }
 
 }

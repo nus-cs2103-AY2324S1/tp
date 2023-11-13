@@ -6,6 +6,5 @@ package seedu.address.model.state;
 public enum State {
     STUDENT,
     SCHEDULE,
-    TASK,
-    NONE;
+    TASK;
 }

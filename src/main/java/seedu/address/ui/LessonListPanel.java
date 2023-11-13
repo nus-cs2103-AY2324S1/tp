@@ -63,7 +63,7 @@ public class LessonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new LessonCard(lesson, getIndex() + 1, logic.getDisplayedFieldsList(), model).getRoot());
+                setGraphic(new LessonCard(lesson, getIndex() + 1, model).getRoot());
             }
         }
     }

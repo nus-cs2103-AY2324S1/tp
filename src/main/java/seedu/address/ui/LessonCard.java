@@ -42,17 +42,13 @@ public class LessonCard extends UiPart<Region> {
     /**
      * Creates a {@code LessonCard} with the given {@code Lesson} and index to display.
      */
-    public LessonCard(Lesson lesson, int displayedIndex, String[] displayFields, Model model) {
+    public LessonCard(Lesson lesson, int displayedIndex, Model model) {
         super(FXML);
         this.lesson = lesson;
         id.setText(displayedIndex + ". ");
         name.setText(lesson.getLessonNameStr());
         date.setText(lesson.getLessonDateStr());
         duration.setText(lesson.getLessonDurationStr());
-        for (String field : displayFields) {
-            // TODO: Implement the schedule detail
-            LessonCardFieldBuilder.build(field, lesson, fields, model);
-        }
     }
 
 

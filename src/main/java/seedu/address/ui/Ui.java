@@ -4,6 +4,7 @@ import javafx.stage.Stage;
 import seedu.address.model.lessons.Lesson;
 import seedu.address.model.lessons.Task;
 import seedu.address.model.person.Person;
+import seedu.address.model.state.State;
 
 /**
  * API of UI component
@@ -33,4 +34,11 @@ public interface Ui {
      * @param task The specified task to show the details of.
      */
     void showTaskDetails(Task task);
+
+    /**
+     * Sets the appropriate panels to display, hide all other panels.
+     *
+     * @param state The new state that determines which panels to show.
+     */
+    void changeLayout(State state);
 }
