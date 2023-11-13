@@ -56,6 +56,6 @@ Given below are my contributions to the project.
 
 
 * **Contributions to team-based tasks**:
-  * Release product for `v1.2`.
+  * Release product for `v1.1`.
   * Added screenshots into project notes document for `v1.2 demo`.
 
