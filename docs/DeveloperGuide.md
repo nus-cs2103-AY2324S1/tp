@@ -1544,9 +1544,11 @@ testers are expected to do more <i>exploratory testing</i>.
 
 ### 1. Feature-rich selection of commands
 
-Tailored for the SoC Computing Club event planners, CoordiMate has expanded from the initial 8 commands in AB3 to a robust suite of 27. Each command was crafted to optimise the event planning workflow, addressing the need for quick and efficient management of contacts and tasks. Our enhancements were directed towards providing practical solutions within the event planning sphere.
+The process of building CoordiMate's command suite began with a structured approach, where we drafted user stories to encapsulate the frequent challenges faced by SoC event planners. This groundwork helped us identify and develop the commands that were critical to the application, particularly the CRUD operations for persons and tasks. Our aim was to ensure these core commands were not only functional but also intuitive for users.
 
-With the addition of a new `Task` class and an improved support for managing tags for both tasks and contacts, CoordiMate delivers a selection of commands that each serve a strategic function in the planning of SoC events. Every enhancement has been thoughtfully integrated to support the SoC event planners in creating and managing events that are as organised as they are impactful.
+Following the first iteration, we presented CoordiMate in a live demo to collect firsthand feedback from our peers. This step was crucial; it enabled us to understand how the app was being received by potential users and which additional features would enhance its value. We used this feedback to inform our development priorities, focusing on the user stories that had the most significant impact on the user experience for subsequent updates.
+
+In the second iteration of development, we honed in on features that were highly requested during peer reviews, such as the ability to filter tasks and contacts by tags and to check the status of tasks as done. These particular commands addressed key concerns from our peers about the ease of organising and tracking progress within the app. By aligning our development efforts with these specific user needs, we expanded from the initial **8** commands in AB3 to a robust suite of **27**, ensuring that each new feature was both meaningful and in direct response to our users' needs.
 
 ### 2. Creation of Multiple Classes
 
