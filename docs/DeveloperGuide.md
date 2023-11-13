@@ -217,13 +217,16 @@ The implementation of the "Start and End Review Session" feature involves the in
 
 In addition to that, `start` and `end` commands and their corresponding parsers are also implemented.
 
-Given below is an example usage scenario and how the start/end mechanism behaves at each step.
+Given below is an example usage scenario and how the `start/end` mechanism behaves at each step.
 
 **Step 1:** The user launches the application for the first time. The `SessionManager` is not yet initialized.
 
-**Step 2:** The user executes the "start" command by interacting with the command line. This will make `FlashlingoParser` class to create its `SessionManager` instance.
+**Step 2:** The user executes the `start` command by interacting with the command line. This will make `FlashlingoParser` class to create its `SessionManager` instance.
 
-![SessionManagerClass](images/SessionManagerClass.png)
+<div align="center">
+  <img src="images/SessionManagerClass.png" width="350" height="300" alt="Session Manager Class">
+</div>
+
 <br>
 **Note**: The `SessionManager` class adheres to the **Singleton pattern**, guaranteeing that only one instance of the class
 can exist. This architectural choice provides a single point of access for managing review sessions and
@@ -236,22 +239,13 @@ management within the application.
 **Step 4:** The user chooses to end the review session by using `end` command. This action will alternate the boolean value
 inside SessionManager class indicating current session is review session or not.
 
+Below is the sequence diagram for the above scenario:
+
 ![StartSequenceModel](images/StartSequenceDiagram.png)
 <br>
-**Recording Vocabulary Review:**
-- The `SessionManager` logs the vocabulary words and phrases reviewed and practiced during the language learning session.
-- This feature provides users with the ability to track their progress and revisit the words they've worked on.
 
 **User Control:**
 - Users can initiate a new language learning session at any time and conclude their session when they have completed their vocabulary review.
-- The option to start and end language learning sessions is typically available in the language learning module or settings.
-
-**Data Retention:**
-- Session data, including start and end times and vocabulary review records, is stored locally on the user's device.
-- Users may have the option to export or clear session data as needed.
-
-**Session Summary:**
-- Users can view a summary of their language learning session, including the start and end times and a list of vocabulary words and phrases reviewed.
 
 **Privacy and Security:**
 - The application should ensure the privacy and security of session data, particularly if it contains sensitive language learning content.
@@ -264,13 +258,9 @@ inside SessionManager class indicating current session is review session or not.
 
 3. **Ending the Language Learning Session:** When the user is satisfied with their vocabulary review, they conclude the language learning session from the language learning module or settings.
 
-4. **Session Summary:** Users can access a summary of the language learning session, which includes the start and end times and a list of vocabulary words and phrases reviewed.
-
-5. **Reviewing Session History:** Users have the option to revisit their session history, allowing them to track their language learning progress over time.
-
 #### **Design Considerations**
 
-**Aspect: How start & end executes**
+**Aspect: How `start/end` executes**
 * Alternative 1 (current choice): Creating another separate class to manage the logic.
     * Pros: It better adheres to OOP principle and easier to maintain.
     * Cons: It may potentially increase the complexity of codes.
@@ -280,12 +270,12 @@ inside SessionManager class indicating current session is review session or not.
     * Cons: It doesn't conform to the principle of **Single Responsibility Principle**.
 
 
-**Aspect: Preventing Commands Within a Review Session**
+**Aspect: Preventing Using A Set of Commands Within a Review Session**
 
 * Alternative 1 (Current Choice): Restricting Users with a Subset of Commands
 
     * Pros:
-    - Increased safety: A limited set of commands reduces the risk of unintended actions, making the review session safer for users.
+        - Increased safety: A limited set of commands reduces the risk of unintended actions, making the review session safer for users.
 
     * Cons:
         - Limited flexibility: Users may feel constrained if they need to perform specific actions that are not allowed within the review session.
@@ -716,6 +706,15 @@ For advanced users who manually edit the data, they may accidentally introduce i
 
 * `Duplicated flash card ... found in flashlingo.json`: Duplicate combination of word and translation is found in the data file.
 * `Invalid flash card ... with invalid ... found in flashlingo.json`: Flash card with invalid word/translation, level or review date found.
+
+### Enhancement 4: Renaming `reveal` command to reduce ambiguity
+
+**Feature Flaw**
+Currently, the `reveal` command is used to reveal or hide the translation of the flash card. However, it may be ambiguous to users as they may think that the command is used to reveal the word itself.
+
+**Proposed Enhancement**
+Renaming the `reveal` command to `flip` to reduce ambiguity.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
