@@ -17,7 +17,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/kb-tay.md)]
 
 * Role: Developer
-* Responsibilities: User Stories
+* Responsibilities: Testing + Debugging
 
 ### Nicholas Chia
 
@@ -26,8 +26,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/nikele2001)]
 [[portfolio](team/nikele2001.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Documentation + UI
 
 ### Poon Yip Hang, Ryan
 
@@ -35,8 +35,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/sopa301)] [[portfolio](team/sopa301.md)]
 
-* Role: Developer
-* Responsibilities: Issue tracking
+* Role: Team Lead
+* Responsibilities: Issue tracking + Documentation
 
 ### Low Jun Yu
 
@@ -46,7 +46,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/jylow.md)]
 
 * Role: Developer
-* Responsibilities: Debugging + Issue tracking
+* Responsibilities: Debugging + Testing
 
 ### Alyssa Png Kai Wen
 
@@ -56,4 +56,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/alyssapng.md)]
 
 * Role: Developer
-* Responsibilities: UI + Debugging
+* Responsibilities: UI + Documentation

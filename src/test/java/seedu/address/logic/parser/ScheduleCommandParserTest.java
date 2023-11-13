@@ -67,6 +67,11 @@ class ScheduleCommandParserTest {
                 + INVALID_APPOINTMENT_TIME_FORMAT;
         assertParseFailure(parser, invalidTimeFormatString, Appointment.MESSAGE_DATE_CONSTRAINTS);
 
+        // invalid index
+        String invalidIndexString = "-1" + APPOINTMENT_NAME_DESC + APPOINTMENT_DATE_DESC;
+        assertParseFailure(parser, invalidIndexString,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
+
         // invalid date format
         String invalidDateFormatString = targetIndex.getOneBased() + APPOINTMENT_NAME_DESC
                 + INVALID_APPOINTMENT_DATE_FORMAT;

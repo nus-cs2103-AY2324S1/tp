@@ -255,7 +255,8 @@ The following sequence diagram illustrates how the complete operation is execute
 
 <img src="images/CompleteSequenceDiagram.png" width="800"/>
 
-> :warn: The lifeline of the diagram should end at the destroyer mark (X) but reaches end of diagram due to limitation of plantUML
+<div markdown="span" class="alert alert-primary">:information_source: The lifeline of the diagram should end at the destroyer mark (X) but reaches end of diagram due to limitation of plantUML
+</div>
 
 The following activity diagram illustrates how the complete operation is executed.
 
@@ -272,7 +273,7 @@ The **Gather Emails** feature in our software system is designed to efficiently 
 The `GatherCommand` is initiated by the `GatherCommandParser`. The `GatherCommandParser` checks for the prefixes `fp/` or `t/` in the user's input and creates either a `GatherEmailByFinancialPlan` or `GatherEmailByTag` object respectively.
 Both `GatherEmailByFinancialPlan` or `GatherEmailByTag` implements the `GatherEmailPrompt` interface.
 
-The `GatherCommand` takes in the `GatherEmailPrompt` object and passes it into the current `Model` model, subsequently interacting with the `AddressBook` class. 
+The `GatherCommand` takes in the `GatherEmailPrompt` object and passes it into the current `Model`, subsequently interacting with the `AddressBook` class. 
 The `GatherCommand#execute()` executes the gather operation by calling `Model#gatherEmails(GatherEmailPrompt prompt)`. Below shows how the gather operation logic works as described above:
 
 ![GatherSequenceDiagram1](images/GatherSequenceDiagram1.png)
@@ -288,9 +289,8 @@ Depending on the type of `GatherEmailPrompt`, it triggers either:
 - `Person#gatherEmailsContainsTag(String prompt)` —  Checks if the given prompt is a substring of any Tag names in the `Set<Tag>` of the current person. 
 - `Person#gatherEmailsContainsFinancialPlan(String prompt)` —  Checks if the given prompt is a substring of any Financial Plan names in the `Set<FinancialPlan>` of the current person.
 
-These methods internally utilize `Tag#containsSubstring(String substring)` and `FinancialPlan#containsSubstring(String substring)`, respectively. These substring comparisons are performed in a case-insensitive manner by converting both the prompt and the financial plan/tag names to lowercase before the check. 
-Currently, we only allow gathering emails by `FinancialPlan` and `Tag` as these are the more likely to be searched to gather emails by. This is to make gathering of emails more convenient and flexible. However, more classes implementing the `GatherEmailPromt` can be added
-to facilitate the gathering of emails by more fields. 
+These methods internally utilize `Tag#containsSubstring(String substring)` and `FinancialPlan#containsSubstring(String substring)`, respectively. These substring comparisons are performed in a case-insensitive manner by converting both the prompt and the financial plan/tag names to lowercase before the check.
+This is to make gathering of emails more convenient and flexible. Currently, we only allow gathering emails by `FinancialPlan` and `Tag` as these are the more likely to be searched to gather emails by. However, additional classes implementing the `GatherEmailPrompt` interface can be added to enable the gathering of emails based on a broader range of fields.
 
 The following sequence diagram shows how the gather emails by financial plan operation works:
 
@@ -426,7 +426,7 @@ The `getAppointmentList()` method is called once during the startup of the progr
 
 Do note that appointments are inherently sorted by their date and time, with the earliest appointment showing up at the top.
 
-#### Design Considerations:
+#### Design Considerations
 
 **Aspect: Where to create** `SortedList<Appointment>`
 * **Alternative 1 (current choice):** Implement it within `modelManager`
@@ -533,10 +533,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to <u>list clients (UC01)</u>
+1. User requests to <u>list clients (UC01)</u>.
 2. User request to edit client’s contacts from the list via the `edit` command.
 3. UNOFAS checks the correctness of the request. 
-4. UNOFAS changes the client’s contacts
+4. UNOFAS changes the client’s contacts.
 
     Use case ends.
 
@@ -601,7 +601,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to <u>list clients (UC01)</u>.
 2.  UNOFAS shows a list of clients.
-3.  User request to <u>add financial plan to client’s contacts (UC03)</u>.
+3.  User request to <u>add financial plan to client’s contacts (UC03)</u>. 
 4. UNOFAS checks for the correctness of the request.
 5. UNOFAS changes the client’s contacts.
 
@@ -727,16 +727,16 @@ resistant to mistakes by having the user key in a specific phrase, or to initial
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **API**: Application Programming Interface that enables application to use capabilities or data from another application
-* **Financial Advisor**: A person who provides financial advice to clients
-* **Financial Products**: A product connected with the way a person manages or uses money(e.g. Insurance)
-* **Client**: A person whose financial products are being managed by a financial advisor
-* **Portfolio value**: The intrinsic value of all financial products being held under a clients name
-* **Central Repository**: A centralised storage location for all user data
-* **Contact details**: Name, email, phone number, next-of-kin name, next-of-kin phone number and home address of a client
-* **Manager**: A person who is a superior in charge of managing and mentoring a group of financial advisors.
+* **Mainstream OS**: Windows, Linux, UNIX, OS-X.
+* **Private contact detail**: A contact detail that is not meant to be shared with others.
+* **API**: Application Programming Interface that enables application to use capabilities or data from another application.
+* **Appointment** : An arrangement to meet someone at a particular time, in this case, a client.
+* **Financial Advisor**: A person who provides financial advice and sells financial plans to prospective clients.
+* **Financial Products**: A product connected with the way a person manages or uses money (e.g. Insurance).
+* **Client**: A person whose financial products are being managed by a financial advisor.
+* **Portfolio value**: The intrinsic value of all financial products being held under a clients name.
+* **Central Repository**: A centralised storage location for all user data.
+* **Contact details**: Name, email, phone number, next-of-kin name, next-of-kin phone number, home address, financial plan(s), tag(s) and appointment(if any) of a client.
 * **Lexicographical**: Generalisation of alphabetical order to include symbols or elements of a totally ordered set.
 
 --------------------------------------------------------------------------------------------------------------------

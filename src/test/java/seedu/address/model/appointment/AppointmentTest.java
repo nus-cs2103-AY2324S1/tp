@@ -17,7 +17,6 @@ class AppointmentTest {
 
     public static final LocalDateTime VALID_DATE_TIME = LocalDateTime.of(2023, 1,
             1, 20, 0);
-
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Appointment(null,

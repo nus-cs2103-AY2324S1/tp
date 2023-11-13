@@ -38,11 +38,13 @@ Given below are my contributions to the project.
 
 * **Enhancements Implemented**: 
   * Added testing for implemented features
-
+  * Refactored `ScheduleItem` class to adhere to LSP. [#108](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/108) [#217](https://github.com/AY2324S1-CS2103T-F12-1/tp/issues/217)
+  * Refactored `CompleteCommand` to better adhere to the command pattern.
+  
 
 * **Contributions to the UG**:
-  * Added documentation for `schedule` command and `complete` under feature section. [#137](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/137) [#135](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/137) [#210](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/210) 
-
+  * Added documentation for `schedule` command and `complete` under feature section. [#137](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/137) [#135](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/137) [#210](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/210)
+  
 
 * **Contributions to the DG**:
   * Added class diagram and sequence diagram for `schedule` feature.
@@ -51,5 +53,10 @@ Given below are my contributions to the project.
   * Added documentation on implementation and design considerations for `complete` feature.
 
 
-* **Contributions to team-based tasks**:
-  * Review PRs of teammates. [#109](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/109) [#205](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/205) [#110](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/110)
+* **Community**:
+  * Review PRs of teammates. [#109](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/109) [#205](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/205) [#110](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/110) [#256](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/256) 
+  * Review DG and suggested bug fixes for teammates. [#285](https://github.com/AY2324S1-CS2103T-F12-1/tp/issues/285) [#278] (https://github.com/AY2324S1-CS2103T-F12-1/tp/issues/278)
+
+
+* **Contributions to team-based tasks**
+  * Update Developer Guide - Update diagrams for the general components.
