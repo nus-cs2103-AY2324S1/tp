@@ -1556,7 +1556,13 @@ TODO
 TODO
 
 ### 4. Improved UI
-TODO
+The original AB3 program only displayed the list of persons which is not very useful for a contact and task management application. To make our app effective, we created additional panels for tasks, besides the original 
+panel for persons. This allows the user to view all the tasks and persons at a glance. Event planners can also easily track the status of their tasks through the status symbol we use to mark tasks as completed or not completed.
+
+To customise the application and set it apart from the original implementation of AB3, we also included our own enhance unique features. First and foremost, we have our own icon for the application that can be seen when opening 
+the application or any of the documents such as User Guide or Developer Guide. Next, we also included the feature to be able to drag the dividers across the screen. We understand that our output messages can be long at 
+times, especially for commands such as `listTag`. Hence, we wanted to give the user the ability to adjust the size of the output box according to their preference and the specific command they are using. For users who want to focus 
+more on their tasks at hand, they can drag the divider between the contact list and task list so that their screen can show more of the task list. This is also useful for users who have a smaller screen size and would like to view more of the application at once.
 
 ### 5. Extensive Testing
 TODO
