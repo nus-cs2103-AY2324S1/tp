@@ -79,7 +79,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete EID1234-5678`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -120,9 +120,9 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete EID1234-5678")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete EID1234-5678` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -145,7 +145,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="600" />
 
 
 The `Model` component,
@@ -155,9 +155,9 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Department` list in the `AddressBook`, which `Employee` references. This allows `AddressBook` to only require one `Department` object per unique tag, instead of each `Employee` needing their own `Department` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Department` list in the `AddressBook`, which `Employee` references. This allows `AddressBook` to only require one `Department` object per unique department, instead of each `Employee` needing their own `Department` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" width="550" />
 
 </div>
 
@@ -203,11 +203,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 Step 2. The user executes `delete EID1234-5678` command to delete an employee in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete EID1234-5678` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+<img src="images/UndoRedoState1.png" width="500" />
 
 Step 3. The user executes `add n/David …​` to add a new employee. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+<img src="images/UndoRedoState2.png" width="500" />
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
@@ -702,7 +702,7 @@ The `DeleteLeaveCommand` object then communicates with the `Model` API by callin
 
 The method `DeleteLeaveCommand#execute()` returns a `CommandResult` object, which stores information about the completion of the command.
 
-The following sequence diagram below shows how the operation of deleting a leave appointment works:
+The following sequence diagram below shows how the operation of deleting a leave date works:
 
 ![Delete Leave Sequence Diagram](images/DeleteLeaveSequenceDiagram.png)
 
@@ -713,8 +713,8 @@ Given below is an example usage scenario for the command:
 **Step 2**: The user executes the `deleteleave id/EMPLOYEE_ID from/START_DATE to/END_DATE` command in the CLI.
 * `START_DATE` and `END_DATE` are inputs of format `yyyy-MM-dd`.
 
-**Step 3**: Leave appointments that fall between the start and end dates will be deleted from the employee specified with the employee ID input.
-* If no leave appointments exist between the start and end dates, an error will be produced and shown to the user.
+**Step 3**: Leave dates that fall between the start and end dates will be deleted from the employee specified with the employee ID input.
+* If no leave dates exist between the start and end dates, an error will be produced and shown to the user.
 
 The following activity diagram summarizes what happens when a user executes the delete leave command:
 
@@ -816,8 +816,6 @@ Given below is an example usage scenario for the command.
 **Step 3**: Employees will be filtered based on whether they are on leave on the specified date.
 * The Employee List will be updated to contain only employees which have leaves taken on the specified date.
 
-
-_{more aspects and alternatives to be added}_
 
 ### Overtime feature
 
@@ -1074,7 +1072,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to add a leave period for an employee with a given id from given start date
     to given end date.
 2.  HouR adds the individual dates between the given start and end dates inclusive
-    as leave appointments for the employee with given id.
+    as leave dates for the employee with given id.
 
     Use case ends.
 
@@ -1846,6 +1844,7 @@ Another feature we are proud of is our `report` feature that allows our users to
 
 Overall, we are proud of our project, and we believe that we have done our best with all the constraints and challenges we faced. We are happy with the result and believe that our product will meet the needs of our target audience.
 
+
 ## Planned Enhancements
 
 ### Remark not shown in GUI employee list
@@ -1953,3 +1952,16 @@ Solution:
 * This will establish consistency when a user inputs a wrong index regardless if it's below one or above current number
   of employees displayed.
 * It will still keep the invalid command format error message if index input is not an integer.
+
+### Inconsistent arrangement of leaves in the leave list
+
+Problem:
+* In our current implementation, the leaves in the leave list shown in the result display are sorted according to when they were added to the employee.
+* Moreover, editing a leave date replaces the previous date with the new date, rather than deleting the previous date and adding the new date to the end of the leave list.
+* Such inconsistency can be confusing for users, and the current arrangement might lead to trouble finding specific leave dates in a long list of dates.
+
+Solution:
+* We plan to standardise the arrangement of the leave dates, such that they are sorted in chronological order.
+* After any command that changes the leave list (e.g. `addleave`, `editleave`), the leave list will be re-sorted,
+  with the earliest date at the top of the list and the latest date at the end of the list.
+* This will reduce any inconsistencies, and make finding specific leave dates easier for users.

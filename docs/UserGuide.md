@@ -3,7 +3,10 @@ layout: page
 title: User Guide
 ---
 
-![HouR](images/ug-pics/HouR.png)
+<div style="text-align:center">
+<img src='images/ug-pics/HouR.png' width='500'>
+</div>
+
 ## Welcome to HouR
 
 HouR is a **desktop app for managing employee records, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HouR can get your HR management tasks done faster than traditional GUI apps.
@@ -15,7 +18,7 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 - [Using this guide](#using-this-guide)
 - [Useful Notations and Glossary](#useful-notations-and-glossary)
 - [Quick Start](#quick-start)
-- [Navigating the GUI](#navigating-the-graphical-user-interface--gui-)
+- [Navigating the GUI](#navigating-the-gui)
 - [Features](#features)
   - [General Commands](#general-commands)
       - [Viewing Help](#viewing-help--help): `help`
@@ -26,7 +29,7 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
       - [Deleting an employee](#deleting-an-employee--delete): `delete`
       - [Editing an employee](#editing-an-employee--edit): `edit`
       - [Listing all employees](#listing-all-employees--list): `list`
-      - [Locating employees](#finding-employees--find): `find`
+      - [Finding employees](#finding-employees--find): `find`
       - [Sorting employees](#sorting-all-employees--sort): `sort`
   - [Employee Metrics Commands](#employee-metrics-commands)
       - [Adding a leave period](#adding-a-leave-period-of-an-employee-addleave): `addleave`
@@ -48,7 +51,6 @@ HouR is a **desktop app for managing employee records, optimized for use via a C
 --------------------------------------------------------------------------------------------------------------------
 
 ## Using this guide
-
 * If you are new here, visit our [quick start](#quick-start) guide to onboard onto HouR smoothly!
 * If you are unsure of how to use HouR, the [Command Summary](#command-summary) is a good place to start. 
 * If you are a developer and want to help out, do take a look at our [Developer Guide](https://ay2324s1-cs2103t-w12-1.github.io/tp/DeveloperGuide.html).
@@ -67,7 +69,7 @@ The following glossary table provides clarification on commonly-used terms as we
 |      Symbol      | Meaning                                                                                                                                                                                                                                             |
 |:----------------:|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |       GUI        | GUI stands for Graphical User Interface and it represents the visual display of HouR that users can see when the application is run.                                                                                                                |
-|  GUI component   | A subsection of the GUI. For more information on specific GUI components, refer to this [section](#navigating-the-graphical-user-interface--gui-).                                                                                                  |
+|  GUI component   | A subsection of the GUI. For more information on specific GUI components, refer to this [section](#navigating-the-gui).                                                                                                                             |
 |       CLI        | CLI stands for Command Line Interface and it represents a text-based user interface to interact with the application.                                                                                                                               |
 |     Command      | An input from the user that tells HouR to perform an action. View HouR's [command summary](#command-summary).                                                                                                                                       |
 |    Parameter     | Parameters are like fields in a form you are required to fill up. They are information needed to be passed together with the command so that it can be executed. More information regarding parameters can be found [here](#parameter-information). |
@@ -91,10 +93,9 @@ The following glossary table provides clarification on commonly-used terms as we
    ![Ui](images/Ui.png)
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution to Mac users:**
-Performing these instructions may result in non-deterministic behaviour of data loading in HouR. This was tested on multiple MacOS Systems: 
-
-* Right-click `hour.jar` > Open With > JavaLauncher.app 
-* First-time users may be prompted with a warning that the file was downloaded from the Internet. Simply click Open in the prompt to continue.
+Performing these instructions may result in non-deterministic behaviour of data loading in HouR. This was tested on multiple MacOS Systems:
+<br/>1. Right-click `hour.jar` > Open With > JavaLauncher.app 
+<br/>2. First-time users may be prompted with a warning that the file was downloaded from the Internet. Simply click Open in the prompt to continue.
 
 </div>
 
@@ -143,9 +144,9 @@ Performing these instructions may result in non-deterministic behaviour of data 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Navigating the Graphical User Interface (GUI)
+## Navigating the GUI
 
-HouR comes with a GUI to allow for nice visual feedback for our users. Here is a quick run-through of the different sections of our GUI, as well as some notes regarding the use of the GUI.
+HouR comes with a Graphical User Interface (GUI) to allow for nice visual feedback for our users. Here is a quick run-through of the different sections of our GUI, as well as some notes regarding the use of the GUI.
 
 ### Quick Orientation
 
@@ -182,6 +183,8 @@ Below is an overview of HouR's features.
 - Clear all employees: `clear`
 - Exit the program: `exit`
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format and commands**<br>
@@ -211,6 +214,8 @@ Below is an overview of HouR's features.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ## General Commands
 
@@ -318,7 +323,7 @@ Format: `list`
 
 ![list success](images/ug-pics/list.png)
 
-### Finding employees: `find`
+### Finding employees : `find`
 
 Finds employees whose name, position, department, phone number, email, or ID contain any of the given keywords.
 
@@ -455,7 +460,7 @@ Conversely, if **NEW_DATE** is the current date, the **leave status** of the emp
 
 Examples:
 * `editleave id/EID1234-5678 old/2023-12-26 new/2023-12-28` edits the leave on 26 December 2023 to 28 December 2023
-  for employee with id EID1234-5678. The old leave date is replaced by the new leave date in the leave list.
+  for employee with id EID1234-5678. The old leave date is **replaced** by the new leave date in the leave list.
 
 ![editleave success](images/ug-pics/editLeaveSuccess.png)
 
@@ -577,6 +582,9 @@ Format: `report EMPLOYEE_ID`
 
       ![overtime pay formula](https://latex.codecogs.com/png.latex?1.5\times%20\frac{12%20\times%20\text{Monthly%20Salary}}{52\times%2044}\times{\text{number%20of%20overtime%20hours}})
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The remarks displayed in the report are arranged in the order they were added, i.e. remarks added later will be added to the end of the remark list.
+</div>
 
 Examples:
 * `report EID1234-5678` generates and downloads a report for the employee with employee id EID1234-5678.
