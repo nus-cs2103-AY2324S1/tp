@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
 
 /**
- * Finds and lists all persons in in address book whose attributes match the predicate.
+ * Finds and lists all appointments in address book that has personnel that match the Ic query.
  * Keyword matching is case insensitive.
  */
 public class FindAppointmentCommand extends Command {
@@ -26,7 +26,7 @@ public class FindAppointmentCommand extends Command {
 
     private final Predicate<Appointment> predicate;
     /**
-     * Finds and lists all persons in address book whose attributes match the predicate.
+     * Finds and lists all appointments in address book that has personnel matching the Ic query.
      *  Keyword matching is case-insensitive.
      */
     public FindAppointmentCommand(Predicate<Appointment> predicate) {

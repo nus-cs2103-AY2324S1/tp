@@ -13,15 +13,13 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.ObjectNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
- * <p>
+ * A list of Appointments that enforces uniqueness between its elements and does not allow nulls.
+ * A person is considered unique by comparing using {@code Appointment#equals(Appointment)} As such, adding and updating of
+ * Appointments uses Appointment#equals(Appointment) for equality to ensure that the person being added or updated is
+ * unique in terms of identity in the UniqueAppointmentList.
+ *
  * Supports a minimal set of list operations.
  *
- * @see Person#isSamePerson(Person)
  */
 public class UniqueAppointmentList extends UniqueObjectList<Appointment> {
 
@@ -35,7 +33,7 @@ public class UniqueAppointmentList extends UniqueObjectList<Appointment> {
     }
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent appointment as the given argument.
      */
     @Override
     public boolean contains(Appointment toCheck) {
@@ -44,8 +42,8 @@ public class UniqueAppointmentList extends UniqueObjectList<Appointment> {
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds an Appointment to the list.
+     * The appointment must not already exist in the list.
      */
     @Override
     public void add(Appointment toAdd) {
@@ -57,9 +55,9 @@ public class UniqueAppointmentList extends UniqueObjectList<Appointment> {
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * Replaces the appointment {@code target} in the list with {@code editedAppointment}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The person identity of {@code editedAppointment} must not be the same as another existing appointment in the list.
      */
     @Override
     public void setObject(Appointment target, Appointment editedAppointment) {
@@ -78,8 +76,8 @@ public class UniqueAppointmentList extends UniqueObjectList<Appointment> {
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent Appointment from the list.
+     * The appointment must exist in the list.
      */
     @Override
     public void remove(Appointment toRemove) {
@@ -90,8 +88,8 @@ public class UniqueAppointmentList extends UniqueObjectList<Appointment> {
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code Appointments}.
+     * {@code Appointments} must not contain duplicate Appointments.
      */
     @Override
     public void setObjects(List<Appointment> appointments) {
@@ -109,7 +107,7 @@ public class UniqueAppointmentList extends UniqueObjectList<Appointment> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code Appointments} contains only unique Appointments.
      */
     @Override
     protected boolean objectsAreUnique(List<Appointment> appointments) {
