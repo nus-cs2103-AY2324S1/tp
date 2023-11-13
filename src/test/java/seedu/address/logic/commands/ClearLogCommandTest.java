@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
@@ -12,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.LogBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -19,6 +22,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
 
 
 public class ClearLogCommandTest {
@@ -83,7 +87,7 @@ public class ClearLogCommandTest {
 
         @Override
         public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
+            logBook.addPerson(person);
         }
 
         @Override
@@ -158,8 +162,9 @@ public class ClearLogCommandTest {
     }
 
     @Test
-    public void execute_clearLogBook_logBookCleared() throws Exception {
+    public void execute_clearNonEmptyLogBook_logBookCleared() throws Exception {
         ModelStub model = new ModelStub();
+        model.addPerson(new PersonBuilder(CARL).build());
         ClearLogCommand clearLogCommand = new ClearLogCommand();
         CommandResult commandResult = clearLogCommand.execute(model);
 
@@ -168,8 +173,19 @@ public class ClearLogCommandTest {
     }
 
     @Test
+    public void execute_clearEmptyLogBook_logBookAlreadyCleared() throws Exception {
+        ModelStub model = new ModelStub();
+        ClearLogCommand clearLogCommand = new ClearLogCommand();
+
+        assertThrows(CommandException.class, () -> clearLogCommand.execute(model));
+        assertEquals(model.getLogBook().getPersons().asUnmodifiableObservableList().size(), 0);
+    }
+
+    @Test
     public void undo_executeCommand_resultsUndone() throws Exception {
         ModelStub model = new ModelStub();
+        model.addPerson(new PersonBuilder(CARL).build());
+
         LogBook logBookBeforeClear = model.getLogBook();
 
         ClearLogCommand clearLogCommand = new ClearLogCommand();
