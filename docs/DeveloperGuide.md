@@ -1354,3 +1354,20 @@ Currently, there are only two ways to sort tasks. This can cause some tasks to b
 prioritized in either sorting method. Being able to sort tasks by proximity to the current date or being able to reverse
 the order of sorting of the tasks may help in making all tasks visible to the user so as to ensure that all tasks are 
 completed on time.
+
+### Allow user to view beyond the current week restriction for the calendar
+Currently, the calendar for the user and contacts is restricted to viewing the current week's events. Therefore, the
+user has no means of navigating looking at their events for other weeks other than the current one. This might impede
+the user experience as the user might want to check their timetable for some timeframe in the near future (e.g. proceeding week).
+Therefore, allowing the user to view their events for any week beyond just the current one might improve user experience,
+reducing the dependency the user has on the `Event List` to view events beyond this chronological restriction.
+
+### Allow users to compare calendars with contacts beyond the current week
+Currently, the user can only compare calendars with their contacts for the current week. Therefore, if the user wants to
+schedule a meeting in a week beyond the current one, they might have difficulty as they might not be able to compare
+their calendars with their contacts for that specific week. Therefore, allowing the user to navigate beyond the current
+week restriction for the compare calendar feature will be hugely beneficial to the user.
+
+### Allow users to import .ics format files
+Currently, UniMate has no support for importing of external files. Allowing users to import .ics files, which is a common export
+format of other calendar platforms, will allow UniMate to integrate more seamlessly with other calendar applications.
