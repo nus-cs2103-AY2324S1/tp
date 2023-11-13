@@ -144,6 +144,12 @@ add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​  [i/INSTRUMENT]…​  [g/GENRE]
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, or `tags`) will be ignored.
 
 </div>
+
+<div markdown="block" class="alert alert-info">
+:information_source: **Information** 
+
+When you use any features with `INDEX` as a parameter, kindly refer to the index in the **current displaying panels**.
+</div>
  
 [Back To ToC](#table-of-contents)
 
