@@ -31,15 +31,13 @@ effortlessly.
     * **Justification**: Since we intended to repurpose the application to cater to NUS fresh graduates who are
       searching
       for jobs, the current fields were irrelevant.
-    * **Highlights**: This was a tedious process as it required many adjustments throughout the whole code. Not only did
-      the
-      classes representing the fields have to change, the command and parser classes had to be changed to interact with
-      the fields differently. Sample data and test cases had to be changed as well.
+    * **Highlights**: This was a tedious process as it required many adjustments throughout the whole code. The field,
+     command and parser classes had to be changed to interact differently. Sample data and test cases had to be changed
+    * as well.
       <br><br>
 2. Improved the `find` command
-    * **What it does**: The `find` command now allows for searching keywords by specific fields when a user provides a
-      prefix. Users can also choose not to provide a prefix if they want to search in all fields. Multiple keywords can
-      be specified, and multiple prefixes can be searched for at the same time.
+    * **What it does**: The `find` command now allows for searching by specific fields. Users can also choose to search
+      in all fields. Multiple keywords and/or prefixes can be searched at the same time.
     * **Justification**: Users might want to search in fields other than company name. By providing flexibility in the
       search process, users can find their job applications more efficiently.
     * **Highlights**: Implementing this functionality required changing the `NameContainsKeywordsPredicate` class to a
