@@ -493,7 +493,7 @@ Fret not as you can use the `undo` command to recover your data!
 
 #### Help: `help`
 
-Forgot how to edit a specific enrolment or how to unenrol members? The `help` command will allow you to clarify and recall any features of the app by providing you a link to our friendly and informative user guide.
+Forgot how to edit a specific enrolment or how to unenrol members? The `help` command will allow you to clarify and recall any features of CCACommander by providing you with a link to our friendly and informative user guide.
 
 Here’s how you can use it:<br>
 `help`
