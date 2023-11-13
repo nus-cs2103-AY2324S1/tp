@@ -95,6 +95,15 @@ If you are using Mac, click on the Launchpad icon in the Dock, type Terminal in 
 
 </box>
 
+<box type="tip" seamless>
+**Mac users unable to launch `.jar` file.** <br>
+For Mac users, if you encounter pop-out message `"tutorium.jar" cannot be opened because it is from an unidentified developer.` when launching `Tutorium.jar`:
+
+1. Open Settings -> Privacy & Security.
+2. Scroll down and find the message `"tutorium.jar" was blocked from use ...`, click `Open Anyway`. 
+
+</box>
+
 1. A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -114,6 +123,22 @@ If you are using Mac, click on the Launchpad icon in the Dock, type Terminal in 
 1. Refer to the [Features](#features) below for details of each command.
 
 [↑ Back to table of contents](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+## User Interface Layout
+
+Upon launching Tutorium, you will be greeted by the following Graphical User Interface (GUI).<br>
+![GUIparts](images/GUIparts.png)
+
+We can break the GUI into several parts:
+
+1. **Menu Bar**: This is where you find auxiliary features
+2. **Command Box**: This is where you input commands to interact with QuickContacts
+2. **Result Display Box**: This is where you get feedback from the command executed
+3. **Student List**: This is where you view all your students
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -338,7 +363,6 @@ Format: `sort in/SEQUENCE`
 
 Examples:
 * `sort in/ASC` <br>
-  ![result for 'sort in/ ASC'](images/ug_images/sortedResult.png)
 
 [↑ Back to table of contents](#table-of-contents)
 
