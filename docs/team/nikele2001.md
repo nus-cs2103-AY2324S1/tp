@@ -16,7 +16,7 @@ Given below are my contributions to the project.
 * **New Feature**: Added appointment list that shows upcoming appointments of clients in chronological order and wrote tests.
     * Justification: Financial advisors may want to view all upcoming appointments easily in chronological order so that it is easier for them to plan their timetables.
     * Highlights: This enhancement creates another UI element to show various other appointment-specific details in the future. It requires an understanding of ObservableList interface and the way the list is being tracked by JavaFX.
-    * (Pull request [#110](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/110))
+    * Pull request [#110](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/110)
 
 
 * **Code Contributed**: [RepoSense](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=nikele2001&breakdown=true)
@@ -25,7 +25,7 @@ Given below are my contributions to the project.
 * **Enhancements Implemented**:
     * Added `FinancialPlan` field and wrote tests.
       * Justification: As a financial advisor, it would be convenient to have a person's current financial plans available for business purposes.
-      * (Pull request [#69](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/69))
+      * Pull request [#69](https://github.com/AY2324S1-CS2103T-F12-1/tp/pull/69)
 
 * **Contributions to the UG**:
   * Added introduction to UG.

@@ -221,7 +221,7 @@ The following activity diagram summarises what happens the user executes a sched
 
 <img src="images/ScheduleActivityDiagram.png" width="400"/>
 
-#### **Design Considerations**
+#### Design Considerations
 
 **Aspect: How to implement appointment for Person**
 
@@ -293,7 +293,7 @@ The following activity diagram illustrates how the complete operation is execute
 
 <img src="images/CompleteActivityDiagram.png" width="800"/>
 
-#### **Design Considerations**
+#### Design Considerations
 
 Alternative 1 (Previous Design): Use a `CompleteCommandDescriptor` that has a `Date` and `Index` field wrapped by Java `Optional`.
 
@@ -476,7 +476,7 @@ The `getAppointmentList()` method is called once during the startup of the progr
 
 Do note that appointments are inherently sorted by their date and time, with the earliest appointment showing up at the top.
 
-The following sequence diagram shows how the appointment list is updated. The `setPerson()` method is being called in the `ScheduleCommand#execute()` method. `ModelManager#addToAppointmentIfPresent()` method adds an `Appointment` object into the `ObservableList<Appointment>` if the `Person` object in `filteredPersons` has a `scheduleItem` object that is an instance of `Appointment`.
+The following sequence diagram shows how the appointment list is updated. The `setPerson()` method is being called in the `ScheduleCommand#execute()` method. The `ModelManager#addToAppointmentIfPresent()` method adds an `Appointment` object into the `ObservableList<Appointment>` if the `Person` object in `filteredPersons` has a `scheduleItem` object that is an instance of `Appointment`.
 
 <img src="images/AppointmentListSequenceDiagram.png" width="700"/>
 
