@@ -144,7 +144,7 @@ Throughout this guide, you will see different text styles that are used to highl
     After a few seconds, a GUI should appear, showing some sample data, as in the screenshot below. <br><br>
     ![Ui](images/Ui.png)
 
-7. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br><br>
+7. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.
 
    Some example commands you can try:
 
@@ -471,7 +471,7 @@ fp
 
 | Fields | Prefix | Required | Remarks |
 |--------|--------|:--------:|---------|
-| `KEYWORD` | No prefix | <img width=30px src='assets/svg/ug/required.svg'> | The keyword to search for. |
+| `KEYWORD` | No prefix | <img width=30px src='assets/svg/ug/required.svg'> | Keyword to search for. |
 | `MORE_KEYWORDS` | No prefix | <img width=33px src='assets/svg/ug/not_required.svg'> | Additional keywords to search for. |
 {: .field-table}
 
@@ -740,7 +740,7 @@ ft
 
 | Fields | Prefix | Required | Remarks |
 |--------|--------|:--------:|---------|
-| `KEYWORD` | No prefix | <img width=30px src='assets/svg/ug/required.svg'> | The keyword to search for. |
+| `KEYWORD` | No prefix | <img width=30px src='assets/svg/ug/required.svg'> | Keyword to search for. |
 | `MORE_KEYWORDS` | No prefix | <img width=33px src='assets/svg/ug/not_required.svg'> | Additional keywords to search for. |
 {: .field-table}
 
@@ -1198,7 +1198,7 @@ ftag
 
 | Fields | Prefix | Required | Remarks |
 |--------|--------|:--------:|---------|
-| `KEYWORD` | No prefix | <img width=30px src='assets/svg/ug/required.svg'> | The keyword to search for tags.|
+| `KEYWORD` | No prefix | <img width=30px src='assets/svg/ug/required.svg'> | Keyword to search for tags.|
 | `MORE_KEYWORDS` | No prefix | <img width=33px src='assets/svg/ug/not_required.svg'> | Additional keyword(s) to search for tags.|
 {: .field-table}
 
@@ -1250,7 +1250,7 @@ fatag
 
 | Fields | Prefix | Required | Remarks |
 |--------|--------|:--------:|---------|
-| `KEYWORD` | No prefix | <img width=30px src='assets/svg/ug/required.svg'>  | The keyword to search for tags.|
+| `KEYWORD` | No prefix | <img width=30px src='assets/svg/ug/required.svg'>  | Keyword to search for tags.|
 | `MORE_KEYWORDS` | No prefix | <img width=33px src='assets/svg/ug/not_required.svg'> | Additional keyword(s) to search for tags.|
 {: .field-table}
 
