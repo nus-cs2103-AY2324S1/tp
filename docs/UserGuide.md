@@ -668,7 +668,7 @@ This is especially useful if you find yourself having to re-enter a command that
 
 **Q**: How do I save my progress?
 <br>
-**A**: Your progress is saved after every command.
+**A**: Your progress is saved after every command automatically. So if you close the app and open it again, your data will still be there!
 
 **Q**: How do I transfer my data to another computer?
 <br>
