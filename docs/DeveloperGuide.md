@@ -747,7 +747,7 @@ The List Time from Group command mechanism behaves the same as the List Time fro
 
 --------------------------------------------------------------------------------------------------------------------
 
-### 3.11. Find Free Time 
+### 3.11. Find Free Time
 
 #### Implementation
 
