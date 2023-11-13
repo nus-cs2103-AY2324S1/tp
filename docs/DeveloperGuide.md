@@ -1091,7 +1091,7 @@ testers are expected to do more *exploratory* testing.
     2. Prerequisite: Filter the list using the `find_person` command or the `remind` command
 
     3. Test case: `add_person n/John`<br>
-        Expected: The contact list shows all persons again. The contact is added to the contact list at the back. The added person's details is shown in the response box.
+        Expected: The contacts list shows all persons again. The contact is added to the contact list at the back. The added person's details is shown in the response box.
 
 3. Adding a person with a group that has been assigned to an event. 
 
@@ -1113,7 +1113,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisite: Filter the list using the `find_person` command or the `remind` command. Ensure that there is at least 1 person in the contact list.
 
     1. Test case: `edit_person 1 n/Johnny`<br>
-        Expected: The contact is stays filtered. If the person's name was the search term in `find_person`, the person should disappear. Used `list_all` to view the edited person. The details of the edited person should be displayed in the response box.
+        Expected: The contact list stays filtered. If the person's name was the search term in `find_person`, the person should disappear. Used `list_all` to view the edited person. The details of the edited person should be displayed in the response box.
 
 3. Editing a person with a group that has already been assigned to an event
 
@@ -1122,7 +1122,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `edit_person 1 n/Johnny g/CS2103T`<br>
         Expected: The person is edited in the contact list. The person's details are shown in the response box. The person is added to the event, under the group that it has been assigned to.
 
-4. Editing a person to remove a group, which group has already been assigned to an event
+4. Editing a person to unassign a group, given that the group has been assigned to an event
 
     1. Prerequisite: The event list has an event with the group `CS2103T` assigned to it. The contact and event list is not filtered.
 
@@ -1186,7 +1186,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisite: Filter the list using the `find_event` command or the `remind` command. Ensure that there is at least 1 event in the event list.
 
     1. Test case: `edit_event 1 m/CS2103T tutorial`<br>
-       Expected: The event stays filtered. If the event's name was the search term in `find_event`, the event should disappear. Used `list_all` to view the edited event. The details of the edited event should be displayed in the response box.
+       Expected: The event list stays filtered. If the event's name was the search term in `find_event`, the event should disappear. Use `list_all` to view the disappeared edited event. The details of the edited event should be displayed in the response box.
 
 3. Editing an event with a new group
 
