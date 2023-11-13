@@ -76,7 +76,6 @@ public class AddTransactionCommandTest {
         assertFalse(addT1Command.equals(addT2Command));
     }
 
-
     /**
      * A Model stub that always accept the transaction being added.
      */
