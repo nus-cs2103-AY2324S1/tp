@@ -464,7 +464,7 @@ Examples:
 
 ### Comment on a student : `comment`
 
-Adds or replaces a comment of an existing student in **Class Manager 2023**.
+Adds or replaces a comment of an existing student in **Class Manager 2023**. The comment of a student appears at the bottom of their contact information card.
 
 Format: `comment s/STUDENT_NUMBER cm/COMMENT`
 
