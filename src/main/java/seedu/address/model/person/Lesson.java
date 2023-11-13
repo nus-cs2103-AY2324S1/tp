@@ -91,12 +91,14 @@ public class Lesson {
      * Calculates the number of occurrences of a specific day of the week
      * within a given month and year.
      *
-     * @param year  The year for which to calculate the occurrences.
+     * @param year  The year (4 digits) for which to calculate the occurrences.
      * @param month The month (1-12) for which to calculate the occurrences.
      * @return The number of occurrences of the specified day in the month.
      */
     public int getNumOfDaysInMonth(int year, int month) {
         requireNonNull(day);
+        assert (1000 <= year) && (year <= 9999) : "Year must be exactly 4 digits";
+        assert (1 <= month) && (month <= 12) : "Month must be from January to December";
 
         LocalDate firstDayOfMonth = LocalDate.of(year, month, 1);
         LocalDate lastDayOfMonth = firstDayOfMonth.with(TemporalAdjusters.lastDayOfMonth());
@@ -128,7 +130,7 @@ public class Lesson {
             assert hours > 0.0 : "hours should be positive";
             return hours;
         } catch (ArithmeticException e) {
-            logger.warning("[Lesson.calculateLessonDuration()]: Duration capacity exceeded");
+            logger.info("[Lesson.calculateLessonDuration()]: Duration capacity exceeded");
             return 1.0;
         }
     }
