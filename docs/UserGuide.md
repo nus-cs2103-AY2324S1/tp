@@ -216,6 +216,8 @@ The alias for this command is `addm`.
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 <h5>Example of usage</h5>
 
 `addm /name Taylor Swift /phone 91691969 /email taylorswift@era.tour /tele @tswift /tag Admin`
@@ -317,6 +319,8 @@ Even though all the fields are optional, **at least one field** has to be specif
   The `PHONE_NUMBER` will have to be **unique**, or it will be flagged by the system as a duplicate member.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 <h5>Example of usage</h5>
 
@@ -513,6 +517,8 @@ The alias for this command is `adda`.
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 <h5>Example of usage</h5>
 
 `adda /name Lady Gaga /phone 99129969`
@@ -612,6 +618,8 @@ You will not be allowed to edit a member's `PHONE_NUMBER` to a `PHONE_NUMBER` th
 The `PHONE_NUMBER` will have to be **unique**, or it will be flagged by the system as a duplicate member.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 <h5>Example of usage</h5>
 
@@ -724,8 +732,6 @@ Exits the application.
 There will be no prompt to confirm this action.
 </div>
 
-<div style="page-break-after: always;"></div>
-
 ## 5 Field Constraints Summary
 
 ### 5.1 `INDEX` format
@@ -745,6 +751,8 @@ There will be no prompt to confirm this action.
 - Phone number:
   - Only numbers are allowed.
   - At least 3 digits are required.
+
+<div style="page-break-after: always;"></div>
 
 ### 5.4 `EMAIL` format
 
