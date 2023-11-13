@@ -359,7 +359,6 @@ Here's a sequence diagram to summarise the steps above:
 * The design of the `sort` command is dependent on the structure of the `AddressBookStorage` object. Should the structure
   of how the AddressBook objects are stored change, a new implementation will be required for the command.
 
-//@@author junhonglow
 ### TaskList Feature
 
 The task list feature is facilitated by 'TaskManager'. It extends a ReadOnlyTaskManager that will be used for 
