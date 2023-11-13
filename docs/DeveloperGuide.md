@@ -171,7 +171,7 @@ The `UndoCommand` is implemented as follows:
 - **Execution**: Upon successful validation, the `UndoCommandParser` returns a `UndoCommand` object. The object
   then interacts with the model to identify and undo the desired number of previous commands
 
-<puml src=diagrams/UndoSequenceDiagram.puml width="250"/>
+<puml src=diagrams/UndoSequenceDiagram.puml width="850"/>
 
 #### Rationale:
 
@@ -182,7 +182,7 @@ By leveraging the existing structures and operations in the application, this me
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<puml src=diagrams/UndoActivityDiagram.puml width="250"/>
+<puml src=diagrams/UndoActivityDiagram.puml width="850"/>
 
 
 #### Alternative Implementation
@@ -339,7 +339,7 @@ The `DeleteCommand` is implemented as follows:
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<puml src=diagrams/DeleteActivityDiagram.puml width="250"/>
+<puml src=diagrams/DeleteActivityDiagram.puml width="850"/>
 
 #### Rationale
 
