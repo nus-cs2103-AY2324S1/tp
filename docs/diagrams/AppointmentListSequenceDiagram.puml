@@ -1,0 +1,31 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant ":ObservableList<Appointment>" as observableAppointments MODEL_COLOR
+end box
+
+[-> ModelManager: setPerson(personToEdit, editedPerson)
+activate ModelManager
+
+ModelManager -> ModelManager: setAppointmentList()
+activate ModelManager
+
+ModelManager -> observableAppointments: clear()
+activate observableAppointments
+observableAppointments --> ModelManager
+deactivate observableAppointments
+
+loop through filteredPersons
+    ModelManager -> ModelManager: addToAppointmentListIfPresent(person)
+    activate ModelManager
+
+    deactivate ModelManager
+end loop
+
+deactivate ModelManager
+[<--ModelManager
+deactivate ModelManager
+@enduml

@@ -45,6 +45,8 @@ Given below are my contributions to the project.
   * Added implementation details for enhanced `find` command.
   * Drafted `Planned Enhancements` section.
   * Contributed to `Instructions for manual testing` in DG.
+  * Added sequence diagram for `find` command.
+  * Added class diagram for `CombinedPredicate` class.
 
 
 * **Community**:
