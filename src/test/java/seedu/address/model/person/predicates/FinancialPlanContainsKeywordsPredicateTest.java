@@ -76,11 +76,11 @@ public class FinancialPlanContainsKeywordsPredicateTest {
         predicate = new FinancialPlanContainsKeywordsPredicate(Arrays.asList("Senior"));
         assertFalse(predicate.test(new PersonBuilder().withFinancialPlans("Child Premium").build()));
 
-        // Keywords match phone, email and address, but does not match financial plans
+        // Keywords match phone and address, but does not match financial plans
         predicate = new FinancialPlanContainsKeywordsPredicate(
-                Arrays.asList("12345", "alice@email.com", "Main", "Street"));
+                Arrays.asList("12345", "Main", "Street"));
         assertFalse(predicate.test(new PersonBuilder().withFinancialPlans("Child").withPhone("12345")
-                .withEmail("alice@email.com").withAddress("Main Street").build()));
+                .withAddress("Main Street").build()));
     }
 
     @Test
