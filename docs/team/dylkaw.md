@@ -43,7 +43,7 @@ Given below is a summary of my contributions to the project. All of my code cont
     * Improve `findMember`/`findEvent` criteria
     * Make UI stay on current view upon `editMember`/`editEvent`
     * Make UI stay on current view upon `undo`/`redo`
-  * Added 3 Use Cases:
+  * Added 2 Use Cases:
     * UC05 - View members of event
     * UC06 - View events of member
   * Added non-functional requirements.
