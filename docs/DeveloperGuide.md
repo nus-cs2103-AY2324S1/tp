@@ -1603,6 +1603,20 @@ testers are expected to do more *exploratory* testing.
    
 ### Calculating the monthly payroll of an employee
 
+1. Calculating payroll for a specific employee
+    i. Prerequisites:
+      * List all employees using the `list` command. Multiple employees in the list.
+      * The employee should exist in the list.
+
+    ii. Test case: `payroll 1` <br>
+      * Expected: A success message showing the payroll details of first employee in the list.
+
+    iii. Test case: `payroll /n` <br>
+      * Expected: Name is missing. Error details are shown in the result box.
+
+    iv. Test case: `payroll`<br>
+      * Expected: Index or name is missing. Error details are shown in the result box.
+
 ### Generating a PDF payslip for a specific employee
 
 1. Generating a PDF payslip for a specific employee
