@@ -12,6 +12,7 @@ Given below are my contributions to the project.
 * [Code Contributed](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=matochichap&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos)
 
 * Enhancements Implemented:
+  * Wrote comprehensive test cases to achieve over 90% coverage for all functional code written by me, excluding functional code related to UI.
   * Major refactoring of code
     * Made `Person` class abstract and removed redundant commands and test cases related to `Person`
     * Wrote outline of methods and TODOs to make it easier for team members to implement the relevant classes and methods they are responsible for.
@@ -27,7 +28,6 @@ Given below are my contributions to the project.
     * Edited Help Window to open UG in their browser.
   * User is able to open the UG in their browser by clicking a button.
     * Edited other related classes like `HelpWindow`
-    * Wrote comprehensive test cases to achieve over 90% coverage for all functional code written by me, excluding functional code related to UI.
 * Contributions to the UG:
   * Wrote the section for adding `Members`
   * Wrote the section for adding `Applicants`
@@ -45,6 +45,10 @@ Given below are my contributions to the project.
     * Added an activity diagram to explain the flow of the command.
   * Wrote the section for viewing all `Tags`.
     * Used a sequence diagram to explain how `Tags` are updated when a `Member` related command is executed.
+  * Wrote entire section for Appendix: Effort section.
+  * Wrote manual testing section for adding an applicant.
+  * Wrote use cases for adding a member and editing a member.
+  * Wrote references from member use case to all applicant use cases.
 * Contributions to team-based tasks:
   * Regularly created new issues and assigned them to respective members.
   * Maintained issue tracker by closing finished issues.
