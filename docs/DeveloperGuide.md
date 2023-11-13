@@ -396,17 +396,17 @@ The following sequence diagram shows how unpaidAll command works:
 
 * **Alternative 2:** Create a new paid class.
     * Pros: Fits the other fields in the class.
-    * Cons: Hard to implement, waste of source.
+    * Cons: Hard to implement, waste of source (such as code storage, might affect the efficiency of the code).
 
 **Aspect: How to implement mark paid features:**
 
 * **Alternative 1 (current choice):** Create a new person, set everything else the same as before, and set paid as true.
-    * Pros: Since we created a new person, the previous person's status will not change, this will benefit the design of undo/redo.
+    * Pros: Since we created a new person, the command works individually and not depends on the other commands.
     * Cons: Hard to implement.
 
-* **Alternative 2:** Change the paid value of the current person.
+* **Alternative 2:** Use the edit command to edit the paid status of the person.
     * Pros: Easy to implement.
-    * Cons: The future design of redo/undo command would be difficult.
+    * Cons: The paid command will rely on the edit commands, which violates the principle to reduce correlation between classes.
 
 
 

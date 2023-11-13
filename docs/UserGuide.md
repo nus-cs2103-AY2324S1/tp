@@ -340,13 +340,7 @@ Examples:
 
 **Format**: `paid INDEX`
 
-**Expected Input**:
-
-* **Index (Compulsory Field)**: Numbers between 1 to the number of people inside the list.
-
-**Expected Output when the command succeeds**: MARK PERSON PAID SUCCESS, Paid: true
-
-**Expected Output when the command fails**: Invalid command format! paidExample: paid 1
+* **`INDEX`**: Numbers between 1 to the number of people inside the list.
 
 Examples:
 * `list` followed by `paid 1` marks the first person as paid in the list.
@@ -357,17 +351,10 @@ Examples:
 
 **Format**: `unpaid INDEX`
 
-**Expected Input**:
-
-* **Index (Compulsory Field)**: Numbers between 1 to the number of people inside the list.
-
-**Expected Output when the command succeeds**: MARK PERSON UNPAID SUCCESS, Paid: false
-
-**Expected Output when the command fails**: Invalid command format! unpaidExample: unpaid 1
+* **Index**: Numbers between 1 to the number of people inside the list.
 
 Examples:
 * `list` followed by `unpaid 2` marks the 2nd person as not paid in the list.
-
 
 ### Show all the unpaid tutees : `list unpaid`
 
