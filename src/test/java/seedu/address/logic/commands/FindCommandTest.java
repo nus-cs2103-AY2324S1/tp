@@ -37,43 +37,43 @@ public class FindCommandTest {
         NameContainsKeywordsPredicate firstNamePredicate =
                 new NameContainsKeywordsPredicate("first");
         NameContainsKeywordsPredicate secondNamePredicate =
-                new NameContainsKeywordsPredicate("second");
+                new NameContainsKeywordsPredicate("");
         LicenceContainsKeywordsPredicate firstLicencePredicate =
                 new LicenceContainsKeywordsPredicate("SAA1A");
         LicenceContainsKeywordsPredicate secondLicencePredicate =
-                new LicenceContainsKeywordsPredicate("SAA1B");
+                new LicenceContainsKeywordsPredicate("");
         NricContainsKeywordsPredicate firstNricPredicate =
                 new NricContainsKeywordsPredicate("000A");
         NricContainsKeywordsPredicate secondNricPredicate =
-                new NricContainsKeywordsPredicate("000B");
+                new NricContainsKeywordsPredicate("");
         PhoneContainsKeywordsPredicate firstPhonePredicate =
                 new PhoneContainsKeywordsPredicate("12345678");
         PhoneContainsKeywordsPredicate secondPhonePredicate =
-                new PhoneContainsKeywordsPredicate("87654321");
+                new PhoneContainsKeywordsPredicate("");
         PolicyNumberContainsKeywordsPredicate firstPolicyNumPredicate =
                 new PolicyNumberContainsKeywordsPredicate("A1234");
         PolicyNumberContainsKeywordsPredicate secondPolicyNumPredicate =
-                new PolicyNumberContainsKeywordsPredicate("B4321");
+                new PolicyNumberContainsKeywordsPredicate("");
         TagContainsKeywordsPredicate firstTagPredicate =
                 new TagContainsKeywordsPredicate("friends");
         TagContainsKeywordsPredicate secondTagPredicate =
-                new TagContainsKeywordsPredicate("colleagues");
+                new TagContainsKeywordsPredicate("");
         PolicyExpiryContainsKeywordsPredicate firstPolicyExpiryPredicate =
                 new PolicyExpiryContainsKeywordsPredicate("25-12-2023");
         PolicyExpiryContainsKeywordsPredicate secondPolicyExpiryPredicate =
-                new PolicyExpiryContainsKeywordsPredicate("14-02-2023");
+                new PolicyExpiryContainsKeywordsPredicate("");
         EmailContainsKeywordsPredicate firstEmailPredicate =
                 new EmailContainsKeywordsPredicate("weewooowaa@example.com");
         EmailContainsKeywordsPredicate secondEmailPredicate =
-                new EmailContainsKeywordsPredicate("heehoohaa@example.com");
+                new EmailContainsKeywordsPredicate("");
         PolicyIssueContainsKeywordsPredicate firstPolicyIssuePredicate =
                 new PolicyIssueContainsKeywordsPredicate("12-12-2022");
         PolicyIssueContainsKeywordsPredicate secondPolicyIssuePredicate =
-                new PolicyIssueContainsKeywordsPredicate("11-11-2022");
+                new PolicyIssueContainsKeywordsPredicate("");
         CompanyContainsKeywordsPredicate firstCompanyPredicate =
                 new CompanyContainsKeywordsPredicate("NTUC");
         CompanyContainsKeywordsPredicate secondCompanyPredicate =
-                new CompanyContainsKeywordsPredicate("InsureMe");
+                new CompanyContainsKeywordsPredicate("");
 
 
         FindCommand findFirstCommand = new FindCommand(firstNamePredicate, firstLicencePredicate,
@@ -103,6 +103,68 @@ public class FindCommandTest {
 
         // different person -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
+
+        // One field different means different person -> return false
+        FindCommand findFirstCommandOneDiffField = new FindCommand(secondNamePredicate, firstLicencePredicate,
+                firstNricPredicate, firstPhonePredicate, firstPolicyNumPredicate, firstTagPredicate,
+                firstPolicyExpiryPredicate, firstEmailPredicate, firstPolicyIssuePredicate,
+                firstCompanyPredicate);
+        assertFalse(findFirstCommand.equals(findFirstCommandOneDiffField));
+
+        findFirstCommandOneDiffField = new FindCommand(firstNamePredicate, secondLicencePredicate,
+                firstNricPredicate, firstPhonePredicate, firstPolicyNumPredicate, firstTagPredicate,
+                firstPolicyExpiryPredicate, firstEmailPredicate, firstPolicyIssuePredicate,
+                firstCompanyPredicate);
+        assertFalse(findFirstCommand.equals(findFirstCommandOneDiffField));
+
+        findFirstCommandOneDiffField = new FindCommand(firstNamePredicate, firstLicencePredicate,
+                secondNricPredicate, firstPhonePredicate, firstPolicyNumPredicate, firstTagPredicate,
+                firstPolicyExpiryPredicate, firstEmailPredicate, firstPolicyIssuePredicate,
+                firstCompanyPredicate);
+        assertFalse(findFirstCommand.equals(findFirstCommandOneDiffField));
+
+        findFirstCommandOneDiffField = new FindCommand(firstNamePredicate, firstLicencePredicate,
+                firstNricPredicate, secondPhonePredicate, firstPolicyNumPredicate, firstTagPredicate,
+                firstPolicyExpiryPredicate, firstEmailPredicate, firstPolicyIssuePredicate,
+                firstCompanyPredicate);
+        assertFalse(findFirstCommand.equals(findFirstCommandOneDiffField));
+
+        findFirstCommandOneDiffField = new FindCommand(firstNamePredicate, firstLicencePredicate,
+                firstNricPredicate, firstPhonePredicate, secondPolicyNumPredicate, firstTagPredicate,
+                firstPolicyExpiryPredicate, firstEmailPredicate, firstPolicyIssuePredicate,
+                firstCompanyPredicate);
+        assertFalse(findFirstCommand.equals(findFirstCommandOneDiffField));
+
+        findFirstCommandOneDiffField = new FindCommand(firstNamePredicate, firstLicencePredicate,
+                firstNricPredicate, firstPhonePredicate, firstPolicyNumPredicate, secondTagPredicate,
+                firstPolicyExpiryPredicate, firstEmailPredicate, firstPolicyIssuePredicate,
+                firstCompanyPredicate);
+        assertFalse(findFirstCommand.equals(findFirstCommandOneDiffField));
+
+        findFirstCommandOneDiffField = new FindCommand(firstNamePredicate, firstLicencePredicate,
+                firstNricPredicate, firstPhonePredicate, firstPolicyNumPredicate, firstTagPredicate,
+               secondPolicyExpiryPredicate, firstEmailPredicate, firstPolicyIssuePredicate,
+                firstCompanyPredicate);
+        assertFalse(findFirstCommand.equals(findFirstCommandOneDiffField));
+
+        findFirstCommandOneDiffField = new FindCommand(firstNamePredicate, firstLicencePredicate,
+                firstNricPredicate, firstPhonePredicate, firstPolicyNumPredicate, firstTagPredicate,
+                firstPolicyExpiryPredicate, secondEmailPredicate, firstPolicyIssuePredicate,
+                firstCompanyPredicate);
+        assertFalse(findFirstCommand.equals(findFirstCommandOneDiffField));
+
+        findFirstCommandOneDiffField = new FindCommand(firstNamePredicate, firstLicencePredicate,
+                firstNricPredicate, firstPhonePredicate, firstPolicyNumPredicate, firstTagPredicate,
+                firstPolicyExpiryPredicate, firstEmailPredicate, secondPolicyIssuePredicate,
+                firstCompanyPredicate);
+        assertFalse(findFirstCommand.equals(findFirstCommandOneDiffField));
+
+        findFirstCommandOneDiffField = new FindCommand(firstNamePredicate, firstLicencePredicate,
+                firstNricPredicate, firstPhonePredicate, firstPolicyNumPredicate, firstTagPredicate,
+                firstPolicyExpiryPredicate, firstEmailPredicate, firstPolicyIssuePredicate,
+                secondCompanyPredicate);
+        assertFalse(findFirstCommand.equals(findFirstCommandOneDiffField));
+
     }
 
     @Test
@@ -112,13 +174,13 @@ public class FindCommandTest {
         LicenceContainsKeywordsPredicate licencePredicate =
                 new LicenceContainsKeywordsPredicate("SAA1B");
         NricContainsKeywordsPredicate nricPredicate =
-                new NricContainsKeywordsPredicate("000A");
+                new NricContainsKeywordsPredicate("111A");
         PhoneContainsKeywordsPredicate phonePredicate =
                 new PhoneContainsKeywordsPredicate("12345678");
         PolicyNumberContainsKeywordsPredicate policyNumPredicate =
                 new PolicyNumberContainsKeywordsPredicate("A1234");
         TagContainsKeywordsPredicate tagPredicate =
-                new TagContainsKeywordsPredicate("friends");
+                new TagContainsKeywordsPredicate("stranger");
         PolicyExpiryContainsKeywordsPredicate policyExpiryPredicate =
                 new PolicyExpiryContainsKeywordsPredicate("25-12-2023");
         EmailContainsKeywordsPredicate emailPredicate =
@@ -126,14 +188,52 @@ public class FindCommandTest {
         PolicyIssueContainsKeywordsPredicate policyIssuePredicate =
                 new PolicyIssueContainsKeywordsPredicate("12-12-2022");
         CompanyContainsKeywordsPredicate companyPredicate =
-                new CompanyContainsKeywordsPredicate("NTUC");
+                new CompanyContainsKeywordsPredicate("AXA");
         FindCommand command = new FindCommand(predicate, licencePredicate, nricPredicate, phonePredicate,
                 policyNumPredicate, tagPredicate, policyExpiryPredicate, emailPredicate, policyIssuePredicate,
                 companyPredicate);
+
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+
+        expectedModel.updateFilteredPersonList(licencePredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+
+        expectedModel.updateFilteredPersonList(nricPredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+
+        expectedModel.updateFilteredPersonList(phonePredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+
+        expectedModel.updateFilteredPersonList(policyNumPredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+
+        expectedModel.updateFilteredPersonList(tagPredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+
+        expectedModel.updateFilteredPersonList(policyExpiryPredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+
+        expectedModel.updateFilteredPersonList(emailPredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+
+        expectedModel.updateFilteredPersonList(policyIssuePredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+
+        expectedModel.updateFilteredPersonList(companyPredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
+
 
     @Test
     public void toStringMethod() {
