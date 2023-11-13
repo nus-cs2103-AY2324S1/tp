@@ -14,7 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.musician.Musician;
 
 /**
- * Deletes a musician identified using it's displayed index from the address book.
+ * Deletes a musician identified using its displayed index from the address book.
  */
 public class DeleteCommand extends Command {
 
@@ -29,6 +29,9 @@ public class DeleteCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Creates a {@code DeleteCommand} to delete the specified {@code Musician}.
+     */
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }

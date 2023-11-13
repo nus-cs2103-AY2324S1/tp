@@ -27,6 +27,9 @@ public class FindBandCommand extends Command {
     public static final String MESSAGE_SUCCESS = "There are %1$d musicians in the band %2$s";
     private final Predicate<Band> predicate;
 
+    /**
+     * Creates a {@code FindBandCommand} to find all {@code Musicians} belonging to the specified {@code Band}.
+     */
     public FindBandCommand(Predicate<Band> predicate) {
         this.predicate = predicate;
     }

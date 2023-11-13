@@ -29,6 +29,9 @@ public class DeleteBandCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Creates a {@code DeleteBandCommand} to delete the specified {@code Band}.
+     */
     public DeleteBandCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }

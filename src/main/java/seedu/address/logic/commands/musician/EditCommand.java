@@ -60,6 +60,8 @@ public class EditCommand extends Command {
     private final EditMusicianDescriptor editMusicianDescriptor;
 
     /**
+     * Creates a {@code EditCommand} to edit one or more fields of the specified {@code Musician}.
+     *
      * @param index of the musician in the filtered musician list to edit
      * @param editMusicianDescriptor details to edit the musician with
      */
