@@ -702,7 +702,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `TAvigator` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Creating and editing a new address book**
+#### **Use case: UC01 - Creating and editing a new address book**
 
 **MSS**
 
@@ -720,7 +720,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
       Use case ends.
 
-**Use case: UC02 - Switching to a different address book**
+#### **Use case: UC02 - Switching to a different address book**
 
 **MSS**
 
@@ -735,7 +735,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC03 - Creating a new contact and editing relevant information**
+#### **Use case: UC03 - Creating a new contact and editing relevant information**
 
 **Precondition**: User is on a course address book.
 
@@ -754,7 +754,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1b1. User merges the duplicated contacts.
       Use case ends. 
 
-**Use case: UC04 - View Summary of Attendance Records**
+#### **Use case: UC04 - View Summary of Attendance Records**
 
 **Precondition**: User is on a course address book. 
 
@@ -787,7 +787,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: UC05 - View List of Students**
+#### **Use case: UC05 - View List of Students**
 
 **Precondition**: User is on a course address book.
 
@@ -798,7 +798,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: UC06 - Mark Student Attendance Separately**
+#### **Use case: UC06 - Mark Student Attendance Separately**
 
 **Precondition**: User is on a course address book.
 
@@ -831,7 +831,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC07 - Search For Contacts via Student Name or ID**
+#### **Use case: UC07 - Search For Contacts via Student Name or ID**
 
 **Precondition**: User is on a course address book.
 
@@ -863,7 +863,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC08 - Delete a Student**
+#### **Use case: UC08 - Delete a Student**
 
 **Precondition**: User is on a course address book.
 
@@ -888,7 +888,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
-**Use case: UC09 - Delete Multiple Students**
+#### **Use case: UC09 - Delete Multiple Students**
 
 **Precondition**: User is on a course address book.
 
