@@ -252,8 +252,17 @@ The `freeTime` Command extends the `Command` class.
 It displays a list of timeslots where the user is free on that _Day_, starting from _Begin_ to _End_. The timeslots listed down
 must also be greater than the duration provided.
 
-The following sequence diagram shows how the freeTime command works.
+The following sequence diagram shows how the `freeTime` command works.
 ![FreeTimeSequenceDiagram](images/FreeTimeSequenceDiagram.png)
+
+Variables inside the sequence diagram:
+* toFind, Interval: Both are instances of the `Interval` Class which encapsulates the `Day`, `Duration`, `Begin`, `End` fields
+* results: A list of strings where the user is busy on the specified given `Interval` class.
+* timeslots: A list of timeslots after parsing the list of strings.
+* availableTime: A list of timeslots where the user is free.
+
+The following activity diagram summarizes what happens when a user executes a `freeTime` command:
+![FreeTimeActivityDiagram](images/FreeTimeActivityDiagram.png)
 
 #### Design Considerations
 **Aspect: How `freeTime` executes:**
@@ -265,8 +274,6 @@ and is at least _Duration_ long)
   * Pros: Command is short and simple to use.
   * Cons: During the first round of user-testing, some new users were confused on how to use the command.
 
-The following activity diagram summarizes what happens when a user executes a new command:
-![FreeTimeActivityDiagram](images/FreeTimeActivityDiagram.png)
 
 ### Calculate total revenue for the month
 
@@ -715,10 +722,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* Calendar Applications: Digital tools for organizing and managing schedules, events, and tasks.
-* Shortcut Commands:  Quick combinations of keystrokes that trigger specific actions in a software application.
-* Participation Grade: The grade used to assess a student's active involvement and engagement during academic activities.
-* Academic Performance: It represents a student's achievements and results in the study, including grades, exam scores, projects and so on.
+* Mainstream OS (Operating System): Windows, Linux, Unix, OS-X
+* CLI: Command Line Interface, receives commands from user in the form of lines of text
+* GUI: Graphical User Interface, a system of interactive user components for computer software
+* Command: An instruction for the application to execute
+* Timeslot: An interval of time from HH:MM to HH:MM
+* Prefix: An abbreviation for the name of the parameter. Prefix should be entered before the actual parameter in a command and always ends with a slash (/).
+* MSS: Main success scenario 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -745,16 +755,37 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a tutee
 
-### Deleting a person
+1. Adding a tutee into the list.
 
-1. Deleting a person while all persons are being shown
+   1. Prerequisites: None
+   2. Test case: `add n/Betsy Crowe p/92939402 e/betsycrowe@example.com a/Newgate Prison sb/Secondary 3 Physics d/mon b/1900 end/1930 pr/35.00`<br>
+      Expected: The tutee is added into the bottom of the list. Details of the added tutee is shown in the status message.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+2. Adding a duplicate tutee into the list
+
+
+    1. Prerequisites: Completing the first test case for [Adding a tutee](#adding-a-tutee) 
+    2. Test case: `add n/Betsy Crowe p/92939402 e/betsycrowe@example.com a/Newgate Prison sb/Secondary 3 Physics d/mon b/1900 end/1930 pr/35.00`<br>
+       Expected: The error message _This tutee already exists_ should be displayed in the status message.
+
+
+3. Adding a tutee that has clashing schedules.
+   1. Prerequisites: Completing the first test case for [Adding a tutee](#adding-a-tutee)
+   2. Test case: `add n/Jason Antonius p/12345678 e/test@gmail.com a/PGPR Residences sb/CS1101S d/mon b/1900 end/1930 pr/20` <br>
+      Expected: The error message _This date and time clashes with an existing schedule_ should be displayed in the status message.
+ 
+
+### Deleting a tutee
+
+1. Deleting a tutee while all tutees are being shown
+
+   1. Prerequisites: List all tutees using the `list` command. Multiple tutees in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First tutee is deleted from the list. Details of the deleted tutee shown in the status message.
 
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
@@ -762,7 +793,48 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Editing a tutee
+
+1. Editing a tutee while all tutees are being shown
+
+   1. Prerequisites: Have the default tutee data and list all tutees using the `list` command.
+   2. Test case: `edit 2 n/Betsy Crower a/Betsy street, block 110, #03-02` <br>
+      Expected: Tutee is successfully edited, and the details of the edited tutee is shown in the status message.
+
+
+2. Editing a tutee that causes duplicate tutees
+   1. Prerequisites: Have the default tutee data and list all tutees using the `list` command.
+   2. Test case: `edit 2 n/Alex Yeoh p/87438807` <br>
+      Expected: The error message _This tutee already exists_ should be displayed in the status message.
+
+
+3. Editing a tutee that causes clashing schedules.
+   1. Prerequisites: Have the default tutee data and list all tutees using the `list` command.
+   2. Test case: `edit 2 d/Mon b/2000 end/2200` <br>
+      Expected: The error message _This date clashes with an existing schedule_ should be displayed in the status message.
+
+### Find free time
+
+1. Finding free time that results in no available timeslots
+
+    1. Prerequisites: Have the default tutee data.
+    2. Test case: `freeTime d/Mon dur/30 b/2000 end/2100` <br>
+       Expected: The result <br>
+   _Here is your list of free time:_ <br>
+   _There are no available timeslots._ <br>
+   should be displayed in the status message.
+
+
+2. Finding free time that results in available timeslots
+
+    1. Prerequisites: Have the default tutee data.
+    2. Test case: `freeTime d/Mon dur/30 b/1930 end/2130` <br>
+       Expected: The result <br>
+         _Here is your list of free time:_ <br>
+         _Free from 19:30 - 20:00_ <br>
+         _Free from 21:00 - 21:30_ <br>
+         should be displayed in the status message.
+
 
 ### Saving data
 
