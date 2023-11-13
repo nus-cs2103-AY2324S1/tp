@@ -1105,4 +1105,8 @@ Our dedication to enhancing the aesthetics of LoveBook is underscored by our met
    - Furthermore, even though there's `clear` command, the button "clear" removes all text in the command box, making
      it ambiguous. We plan to change this in a future iteration like a trash can icon.
 
+8. Improve the best match feature to be more flexible
+   - Currently, the best match feature gives equal weightage to all characteristics: `Income`, `Age`, `Height` and `Horoscope`
+   - To better suit the user preferences, we plan to make the weightage customizable, so users can change the weightage for each characteristic
+
 [Scroll back to _Table of Contents_](#table-of-contents)
