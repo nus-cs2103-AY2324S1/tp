@@ -335,6 +335,60 @@ Step 3. The user should see the UI below upon entering `search n/john st/intervi
 **Note:** The current implementation of search allows users to search by any of the categories individually or by different combinations of the categories.
 It also allows users to specify more than one search parameter for each category e.g. `search n/alex bernice`
 
+### Set feature
+
+#### Implementation
+
+The search feature is implemented using the `SetCommand` class. It extends `Command` and overrides the `execute()` method to
+edit the status of the user.
+
+The search parameters from the user input are parsed using the parse method in the `SetCommandParser` class. `SetCommandParser::Parse`
+takes in the search parameters from the user input and combines them into a list of predicates. This list of predicates is then
+passed as an argument to the `SetCommand` constructor and the method returns a `SetCommand` instance with the associated list of predicates.
+
+Currently, the parameters are <USERID> <STATUS>, <STATUS> is limited to "Preliminary", "Interviewed", "Rejected", "Accepted".
+
+Finally, the execute method in `SetCommand` class returns a new updated `Person` which will
+be used to update the status of the Person displayed.
+
+Given below is an example usage scenario and how the search mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes `set 1 Interviewed` command to set the first user to "Interviewed".
+
+Step 3. The user should see the update upon calling the `view` command on the Person again.
+
+The following activity diagram shows how the search operation works:
+
+<puml src="diagrams/SetActivityDiagram.puml" alt="SetActivityDiagram" />
+
+### Export feature
+
+#### Implementation
+
+The search feature is implemented using the `ExportCommand` class. It extends `Command` and overrides the `execute()` method to
+export to a csv file.
+
+The search parameters from the user input are parsed using the parse method in the `ExportCommandParser` class. `ExportCommandParser::Parse`
+takes in the search parameters from the user input and combines them into a list of predicates. 
+However, export need to be used with any parameters.
+
+Finally, the execute method in `ExportCommand` class exports to the /data/export.csv file.
+
+Given below is an example usage scenario and how the search mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes `export` command.
+
+Step 3. The user should see the exported .csv file in the directory /data/export.csv.
+
+The following activity diagram shows how the export operation works:
+
+<puml src="diagrams/ExportActivityDiagram.puml" alt="ExportActivityDiagram" />
+
+
 ## Events feature
 
 #### Implementation
