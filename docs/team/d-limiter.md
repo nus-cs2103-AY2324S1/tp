@@ -25,9 +25,9 @@ Given below are my contributions to the project.
         * Conducted a thorough review and correction of grammatical errors across various sections of the User Guide to enhance readability and clarity.
         * Authored the comprehensive documentation for `list`, `review`, `stats`, and `exit` commands. [#323](https://github.com/AY2324S1-CS2103T-T11-4/tp/pull/323)
     * Developer Guide:
-        * Developed and integrated comprehensive use cases for various commands within the project. 
-        * Authored documentation for the proposed enhancement of integrating `frequency of usage tags`.
-        * Added documentation for the potential enhancement for adding graphical representations for the `stats` command.
+        * Developed and integrated comprehensive use cases for various commands within the project.[#33](https://github.com/AY2324S1-CS2103T-T11-4/tp/pull/33) 
+        * Authored documentation for the proposed enhancement of integrating `frequency of usage tags`.[#349](https://github.com/AY2324S1-CS2103T-T11-4/tp/pull/349)
+        * Added documentation for the potential enhancement for adding graphical representations for the `stats` command.[#349](https://github.com/AY2324S1-CS2103T-T11-4/tp/pull/349)
 
 * **Contributions to team-based tasks**:
     * Ensured code quality is maintained throughout the project
