@@ -7,7 +7,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":BenefitCommandParser" as BenefitCommandParser LOGIC_COLOR
-participant "dc:BenefitCommand" as BenefitCommand LOGIC_COLOR
+participant "bc:BenefitCommand" as BenefitCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 

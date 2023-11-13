@@ -4,7 +4,7 @@ skinparam ArrowFontStyle plain
 
 mainframe ref
 
-participant ":BenefitCommand" as BenefitCommand LOGIC_COLOR
+participant "bc:BenefitCommand" as BenefitCommand LOGIC_COLOR
 
 box Person PERSON_COLOR
 participant ":Person" as Person PERSON_COLOR
