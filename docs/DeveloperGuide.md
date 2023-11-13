@@ -187,7 +187,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Overview
+### Overview of How Commands Work
 
 The basic idea of what happens when a user types a command:
 1. The LogicManager executes method is called and takes in the user's input.
@@ -423,26 +423,25 @@ is to restart the app at the current moment.
 
 ### Appointment Sidebar Feature
 
-The appointment sidebar is facilitated by `ModelManager`. It extends `Model` and stores an additional
-`SortedList<Appointment>` object that represents all existing appointments.
+The appointment sidebar is facilitated by `ModelManager`. It extends `Model` and stores an additional `SortedList<Appointment>` object that represents all existing appointments.
+The `setAppointmentList()` method checks against `filteredPersons` to look for updates regarding existing `Appointment` objects. The `setAppointmentList()` method is called whenever there is a command that can potentially change the data stored, to ensure that the state of the appointment sidebar is as updated as possible. 
 
-The `setAppointmentList()` method checks against `filteredPersons` to look for updates regarding existing
-`Appointment` objects. The `getAppointmentList()` method is called once during the startup of the program by
-`getAppointmentList()` in `LogicManager`, which is in turn called by `MainWindow`. It returns the
-`sortedList<Appointment>` object within `modelManager`.
+The `getAppointmentList()` method is called once during the startup of the program by `getAppointmentList()` in `LogicManager`, which is in turn called by `MainWindow`. It returns the `sortedList<Appointment>` object within `modelManager`.
+
+Do note that appointments are inherently sorted by their date and time, with the earliest appointment showing up at the top.
 
 #### Design Considerations:
 
-**Aspect: Where to create SortedList<Appointment>**
+**Aspect: Where to create** `SortedList<Appointment>`
 * **Alternative 1 (current choice):** Implement it within `modelManager`
-    * Pros: `SortedAppointments` object references `filteredPersons` which ensures that the appointment sidebar
-    corresponds with `persons` from `addressBook`.
-    * Cons: Errors with respect to `addressBook` will affect the appointment sidebar rendered.
+    - Pros: `SortedAppointments` object references `filteredPersons` which ensures that the appointment sidebar
+    corresponds with `persons` from `addressBook`. In this implementation, `persons` acts as the single source of truth which provides all information to `modelManager`.
+    - Cons: Errors with respect to `addressBook` will affect the appointment sidebar rendered.
 
 * **Alternative 2:** Implement it within `addressBook`
-    * Pros: `persons` and `appointmentList` are handled separately within `addressBook` and hence the appointment
+    - Pros: `persons` and `appointmentList` are handled separately within `addressBook` and hence the appointment
     sidebar is not dependent on `persons` in `addressBook`
-    * Cons: `filteredPersons` and `sortedAppointments` might not correspond since `sortedAppointments` is no longer
+    - Cons: `filteredPersons` and `sortedAppointments` might not correspond since `sortedAppointments` is no longer
     dependent on `filteredPersons`.
 
 --------------------------------------------------------------------------------------------------------------------
