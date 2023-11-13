@@ -704,6 +704,11 @@ If you have any further issues, please raise an issue on our [GitHub page](https
 **Q:** How can I load my contacts stored in NetworkBook used in another device? <br/>
 **A:** Locate the data file stored at `[JAR file location]/data/networkbook.json`. Copy over the data file to the corresponding location on your current device. After that, launch NetworkBook to check whether your contact details have been loaded properly.
 
+### Editing data file manually
+
+**Q:** Can I edit the data file for NetworkBook manually (i.e. from outside the NetworkBook app)? <br/>
+**A:** You can edit the data file for NetworkBook manually, but at your own risk (if there are errors in the file related to formatting/invalid data, the app will not read the data file and begin from an empty data file instead.)
+
 [Table of Contents](#table-of-contents)
 
 <!-- @@author -->
