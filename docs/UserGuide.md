@@ -245,8 +245,6 @@ or go on to learn about [the other commands](#features) you can utilise in JobFi
 
 ## **Key Information**
 
-<div markdown="block" class="alert alert-info">
-
 ### User Interface
 
 We designed our Graphical User Interface(GUI) with both **functionality** and **visual appeal** in mind. To provide a
@@ -268,19 +266,21 @@ Below are the components of our GUI:
 
 ### Structure of a Job Application
 
-| Field    | Prefix | Remarks                                                        | Optional? | Sort Order    |
-|----------|--------|----------------------------------------------------------------|-----------|---------------|
-| Company  | `c/`   | No restrictions                                                | No        | Alphabetical  |
-| Role     | `r/`   | Must only contain alphanumeric characters and spaces           | No        | Alphabetical  |
-| Status   | `s/`   | Possible values in "[Valid statuses](#valid-statuses)"         | Yes       | Alphabetical  |
-| Industry | `i/`   | Must start with an alphanumeric character                      | Yes       | Alphabetical  |
-| Deadline | `d/`   | Must be in the format MMM dd yyyy HHmm (e.g. Dec 01 2030 1200) | Yes       | Chronological |
-| Job Type | `t/`   | Possible values in "[Valid job types](#valid-job-types)"       | Yes       | Alphabetical  |
+| Field    | Prefix | Remarks                                                        | Default value   | Optional? | Sort Order    |
+|----------|--------|----------------------------------------------------------------|-----------------|-----------|---------------|
+| Company  | `c/`   | No restrictions                                                | NA              | No        | Alphabetical  |
+| Role     | `r/`   | Must only contain alphanumeric characters and spaces           | NA              | No        | Alphabetical  |
+| Status   | `s/`   | Possible values in "[Valid statuses](#valid-statuses)"         | TO_ADD_STATUS   | Yes       | Alphabetical  |
+| Industry | `i/`   | Must start with an alphanumeric character                      | TO_ADD_INDUSTRY | Yes       | Alphabetical  |
+| Deadline | `d/`   | Must be in the format MMM dd yyyy HHmm (e.g. Dec 01 2030 1200) | TO_ADD_DEADLINE | Yes       | Chronological |
+| Job Type | `t/`   | Possible values in "[Valid job types](#valid-job-types)"       | TO_ADD_JOB_TYPE | Yes       | Alphabetical  |
 
 * Applications with the same company _AND_ role are considered duplicate jobs.
   JobFindr does not allow the creation of duplicate jobs.
 
 * Deadline refers to the application submission deadline.
+
+* All default values are valid inputs.
 
 ### Valid Statuses
 
@@ -371,7 +371,7 @@ The following are valid interview types:
 * `INTERVIEW_INDEX` refers to the index number of the chosen interview of an application and must be a _positive
   integer_ 1, 2, 3, …
 
-</div>
+* JobFindr should be able to store up to 1000 job applications.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
