@@ -71,10 +71,11 @@ We're here to make your experience as user-friendly as possible. Let's get start
 
 **Tip**: Create a new folder named `MedBook` for easy organization.
 
-</box>
-   - Move `medbook.jar` into the folder as shown below.
-     - **Windows Users**:![Ui](images/WinUserDir.png)
-     - **Mac Users**:![Ui](images/MacUserDir.png)
+    </box>
+
+- Move `medbook.jar` into the folder as shown below.
+  - **Windows Users**:![Ui](images/WinUserDir.png)
+  - **Mac Users**:![Ui](images/MacUserDir.png)
 
 4. **Accessing Terminal**:
 
@@ -83,7 +84,7 @@ We're here to make your experience as user-friendly as possible. Let's get start
      - Search for "Terminal" in the Windows search bar and launch it.
 
    - **Mac Users**:
-     - Find **Terminal** in "Utilities" under "Applications". Or, you can use Spotlight Search (Command + Spacebar) and typing "Terminal".
+     - Find **Terminal** in "Utilities" under "Applications". Or, you can use Spotlight Search (Command + Spacebar) and type "Terminal".
 
 5. **Launch MedBook**:
 
@@ -100,8 +101,8 @@ Once launched, MedBook will look like this:
 ![Ui](images/MedBookUi.png)
 
 - **Exploring Further**:
-  - Learn more about navigating the GUI [here](#navigating-the-graphical-user-interface-gui).
-  - For new users, learn how to use MedBook [here](#medBook-tutorial).
+  - Learn more about navigating the GUI [here](#navigating-the-gui).
+  - For new users, learn how to use MedBook [here](#medbook-tutorial).
   - For advanced users, view all the available features [here](#features).
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
@@ -118,8 +119,8 @@ Here are some definitions of the terms used throughout this user guide.
 | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Graphical User Interface (GUI) | The GUI allows you to interact with the application through things you can click, instead of typing commands. It also provides visual display for information stored in the application. |
 | Command Line Interface (CLI)   | The CLI is a way of interacting with the application using typed text commands.                                                                                                          |
-| Command                        | A Command is a textual input that users type into the Command Line Interface to interact with the application.                                                                           |
-| Parameter                      | A parameter is a specific piece of information or data that you provide to a Command in a Command Line Interface to customize the Command's action.                                      |
+| Command                        | A command is a textual input that users type into the Command Line Interface to interact with the application.                                                                           |
+| Parameter                      | A parameter is a specific piece of information or data that you provide to a command in a Command Line Interface to customize the command's action.                                      |
 
 <u>[Back to Table Of Contents](#table-of-contents)</u>
 
@@ -132,7 +133,7 @@ Here are some definitions of the terms used throughout this user guide.
 
 Here is a brief summary of the GUI components in MedBook.
 
-| **Name of component** | **Description**                                                                                          |
+| **Name of Component** | **Description**                                                                                          |
 | --------------------- | -------------------------------------------------------------------------------------------------------- |
 | Menu Bar              | Displays the drop down menus for MedBook, such as **File** and **Help**                                  |
 | Message Display Box   | Display the message output for every command. It can either can be an error or success message           |
@@ -147,7 +148,7 @@ Here is a brief summary of the GUI components in MedBook.
 **Appointment Window**
 ![Appointment Window](images/ViewAppointmentWindow.png)
 
-| **Name of component** | **Description**                                                                                                                                              |
+| **Name of Component** | **Description**                                                                                                                                              |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Appointment Card      | Contains information of the appointment including name, date and time and NRIC                                                                               |
 | Appointment List      | Displays a list of Appointment Cards                                                                                                                         |
