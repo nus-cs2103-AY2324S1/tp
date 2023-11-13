@@ -78,7 +78,8 @@ used for easy navigation.
 * Already know how to use this guide and can't wait to start? [Get started](#getting-started)!<br>
 * Want an overview of all the commands? Click [here](#command-summary)!<br>
 * Any further questions that are unresolved? Check out our [FAQ](#faq)!<br>
-* You may also contact us at [service@linktree.com](mailto:service@linktree.com) for further doubts!
+* Confused about the terms we have used? Check out our [Glossary](#glossary).<br>
+* You may also contact us at [linktreeltd@gamil.com](mailto:linktreeltd@gamil.com) for further doubts!
 
 **Formatting and Icons**: Throughout the guide, we use bold text and colors to emphasize key points and important terms.
 Icons are used to draw your attention to noteworthy tips and additional information. 
@@ -761,7 +762,7 @@ Click [here](#table-of-contents) to go back to contents.
 
 ## Glossary
 
-| Term        | Definition                                                                                                                                                                                           |
+| Key Terms   | Definition                                                                                                                                                                                           |
 |-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | CLI         | Command Line Interface - A text-based interface where users interact with the application by typing commands into a terminal or command prompt.                                                      |
 | GUI         | Graphical User Interface - The visual interface that allows users to interact with the application.                                                                                                  |
