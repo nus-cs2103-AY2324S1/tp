@@ -24,7 +24,10 @@ will be the least of your worries.
 
 This project is based on the [AddressBook-Level3 project](https://se-education.org).
 
-<!-- * Table of Contents -->
+--------------------------------------------------------------------------------------------------------------------
+<!-- * Table of Contents to be removed after PDF conversion -->
+## Table of Contents
+
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
@@ -222,6 +225,7 @@ Failure outputs:
   Example: list tasks
 ```
 
+[Back to Table of Contents](#table-of-contents)
 <br>
 
 ### Show Feature
@@ -300,6 +304,7 @@ Failure outputs:
 The lesson index provided is invalid
 ```
 
+[Back to Table of Contents](#table-of-contents)
 <br>
 
 ### Add Feature
@@ -435,6 +440,7 @@ Usage: addTask + [lesson index] [description]. You could omit the lesson index w
 Example1: addtask 1 do homework
 ```
 
+[Back to Table of Contents](#table-of-contents)
 <br>
 
 ### Delete Feature
@@ -565,6 +571,7 @@ Example: deletetask 1
 Please use show lessonIndex before deleting task!
 ```
 
+[Back to Table of Contents](#table-of-contents)
 <br>
 
 ### Edit Feature
@@ -685,7 +692,7 @@ Clashes with: Lesson lesson2 from 1:30 PM to 3:30 PM on 21-11-2023 for PHYSICS.
 
 Editing of ___TASKS list___ is not supported at this time!
 
-
+[Back to Table of Contents](#table-of-contents)
 <br>
 
 ### Find Feature
@@ -758,6 +765,7 @@ Example: find alex yeoh
 Unknown command
 ```
 
+[Back to Table of Contents](#table-of-contents)
 <br>
 
 ### Filter Feature
@@ -863,6 +871,7 @@ For example, filter -before 2023/10/10 -subject physics
 Note you should only use one of -before, -on, -after at a time.
 ```
 
+[Back to Table of Contents](#table-of-contents)
 <br>
 
 ### Link Feature
@@ -972,6 +981,7 @@ No such student with name Bernice Yong found
 #### For Task:
 This feature is not used for tasks!
 
+[Back to Table of Contents](#table-of-contents)
 <br>
 
 ### Navigate Feature
@@ -1066,7 +1076,7 @@ This student has no linked lessons
 #### For task list:
 This feature is not used for tasks!
 
-
+[Back to Table of Contents](#table-of-contents)
 <br>
 
 ### Command History Feature
@@ -1100,6 +1110,7 @@ Example usages:
 3. Pressing down arrow will go forward in the command history and retrieve: `list tasks`.
 
 
+[Back to Table of Contents](#table-of-contents)
 <br>
 
 ### Clearing Data
@@ -1162,6 +1173,8 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 **Q**: Can I still use the application without internet connection? <br>
 **A**: Yes, you can. TutorMate is an offline desktop application. The only exception is the `help` command which provides a _URL_<sup>[11](#glossary)</sup> to the user guide.
 
+[Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known Issues
@@ -1192,6 +1205,7 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 | **Link**     | Schedule                            | `linkTo STUDENT_NAME`                                                                                                                     | `linkTo Bernice Yu`                                                                                            | There is no way to unlink student to lesson                                |
 | **Navigate** | Students, Schedule                  | `nav`                                                                                                                                     | `nav`                                                                                                          | Student/Lesson should have at least one linked lesson/student              |
 
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1210,3 +1224,5 @@ If your changes to the data file makes its format invalid, TutorMate will discar
 | 9   | **Hard Disk**        | The long term storage device of the computer. The memory will remain even after the computer is turned off.                                                                                                         |
 | 10  | **JSON**             | Abbreviation for JavaScript Object Notation. It is a format for storing data                                                                                                                                        |
 | 11  | **URL**              | Abbreviation for uniform resource locator. It is a reference to a web resource that specifies its location on a computer network and a mechanism for retrieving it.                                                 |
+
+[Back to Table of Contents](#table-of-contents)
