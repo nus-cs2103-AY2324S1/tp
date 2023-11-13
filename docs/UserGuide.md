@@ -167,22 +167,32 @@ If your add command is missing one or more parameters except for a remark or has
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your add command has a single parameter that does not match the parameter format, CheckMate will show one of the following errors:
-
+If your add command only has the room parameter that does not match the room parameter format, CheckMate will show the following error:
 "Room number is an integer between 1 and 500 inclusive."
+</div>
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your add command only has the booking period parameter that does not match the booking period parameter format, CheckMate will show the following error:
 "Booking periods must be in the format 'YYYY-MM-DD HH:MM to YYYY-MM-DD HH:MM', and the end datetime must be after to the start datetime."
+</div>
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your add command only has the name parameter that does not match the name parameter format, CheckMate will show the following error:
 "Names should only contain alphanumeric characters and spaces, should not be blank and should be at max 50 characters in length"
+</div>
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your add command only has the phone number parameter that does not match the phone number parameter format, CheckMate will show the following error:
 "Phone numbers should only contain numbers, and it should be between 3 and 15 digits in length (inclusive)"
+</div>
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your add command only has the email parameter that does not match the email parameter format, CheckMate will show the following error:
 "Emails should be of the format local-part@domain and adhere to the following constraints:
 1. The local-part should only contain at most 50 alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
 2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
 The domain name must end with a domain label that is supported: 
-  - gmail, yahoo, outlook, hotmail, icloud"
-</div>
+  - gmail, yahoo, outlook, hotmail, icloud"</div>
 
 ### Listing all bookings : `list`
 
