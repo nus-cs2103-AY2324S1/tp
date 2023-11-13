@@ -6,11 +6,66 @@
 
 # LinkTree Developer Guide
 
-<!-- * Table of Contents -->
+## Table of Contents
+* [Acknowledgements](#acknowledgements)
+* [Setting up, getting started](#setting-up-getting-started)
+* [Design](#design)
+    * [Architecture](#architecture)
+    * [Ui component](#ui-component)
+    * [Logic component](#logic-component)
+    * [Model component](#model-component)
+    * [Storage component](#storage-component)
+    * [Common classes](#common-classes)
+* [Implementation](#implementation)
+    * [Add Related commands](#add-related-commands)
+        * [Feature introduction](#create-a-new-team--introduction)
+        * [Feature usage](#usage)
+        * [Feature implementation](#step-by-step-implementation)
+    * [Delete related commands](#feature--remove-an-existing-team)
+        * [Feature introduction](#create-a-new-team--introduction)
+        * [Feature usage](#usage)
+        * [Feature implementation](#step-by-step-implementation)
+    * [Edit related commands](#edit-developer)
+        * [Feature introduction](#create-a-new-team--introduction)
+        * [Feature usage](#usage)
+        * [Feature implementation](#step-by-step-implementation)
+    * [Find related commands](#find-developer)
+        * [Feature introduction](#create-a-new-team--introduction)
+        * [Feature usage](#usage)
+        * [Feature implementation](#step-by-step-implementation)
+    * [List command](#list-developers)
+        * [Feature introduction](#create-a-new-team--introduction)
+        * [Feature usage](#usage)
+        * [Feature implementation](#step-by-step-implementation)
+    * [Display tree command](#display-tree)
+        * [Feature introduction](#create-a-new-team--introduction)
+        * [Feature usage](#usage)
+        * [Feature implementation](#step-by-step-implementation)
+    * [Help Command](#help-command)
+        * [Feature introduction](#create-a-new-team--introduction)
+        * [Feature usage](#usage)
+        * [Feature implementation](#step-by-step-implementation)
+    * [Clear command](#reset-the-project)
+        * [Feature introduction](#create-a-new-team--introduction)
+        * [Feature usage](#usage)
+        * [Feature implementation](#step-by-step-implementation)
+* [Documentation, logging, testing, configuration & dev-ops](#documentation-logging-testing-configuration-dev-ops)
+* [Appendix A](#appendix-a-requirements)
+    * [Product Scope](#product-scope)
+    * [User stories](#user-stories)
+    * [Use cases](#use-cases)
+    * [Non-Functional Requirements](#non-functional-requirements)
+    * [Glossary](#glossary)
+* [Appendix B](#appendix-b-instructions-for-manual-testing)
+    * [Launch and shutdown](#launch-and-shutdown)
+    * [Deleting a developer](#deleting-a-person)
+    * [Saving data](#saving-data)
+* [Appendix C](#appendix-c-effort)
+* [Appendix D](#appendix-d-future-enhancements)
+
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
-
 <br>
 
 ## **Acknowledgements**
@@ -174,10 +229,9 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+### **Add related commands**
 
-### Feature: Create a new team
-
-####  Introduction
+####  Create a new team: Introduction
 
 The create new team feature is facilitated by the AddTeamCommand. It extends `Command` class.
 
@@ -234,9 +288,8 @@ Step 3. LinkTree provides a feedback based on whether the operation was successf
   * Cons: Breaks principle of abstraction and OOP. Information hiding is also not done.
 
 
-### Feature: Add developers to an existing team
 
-####  Introduction
+####  Add developers to an existing team: Introduction
 
 The add dev to team feature is facilitated by the AddDevToTeamCommand. It extends `Command` class.
 

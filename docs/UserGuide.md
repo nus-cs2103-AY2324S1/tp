@@ -52,7 +52,7 @@ you can access contacts by roles and responsibilities instantly.
 * [Support](#support)
 * [Known issues](#known-issues)
 * [Command Summary](#command-summary)
-* [Future Enhancement](#future-enhancement)
+* [Future Enhancement](#future-enhancements)
 
 <page-nav-print />
 
