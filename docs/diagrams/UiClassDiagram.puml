@@ -17,7 +17,6 @@ Class TagListPanel
 Class TaskListPanel
 Class MemberCard
 Class ApplicantCard
-Class TagCard
 Class TaskCard
 Class StatusBarFooter
 Class CommandBox
@@ -47,7 +46,6 @@ MainWindow --> "0..1" HelpWindow
 
 MemberListPanel -down-> "*" MemberCard
 ApplicantListPanel -down-> "*" ApplicantCard
-TagListPanel -down-> "*" TagCard
 TaskListPanel -down-> "*" TaskCard
 
 MainWindow -left-|> UiPart
@@ -60,14 +58,13 @@ TagListPanel --|> UiPart
 TaskListPanel --|> UiPart
 MemberCard --|> UiPart
 ApplicantCard --|> UiPart
-TagCard --|> UiPart
 TaskCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
 MemberCard ..> Model
 ApplicantCard ..> Model
-TagCard ..> Model
+TagListPanel ..> Model
 TaskCard ..> Model
 
 UiManager -right--> Logic

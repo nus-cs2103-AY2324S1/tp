@@ -317,16 +317,13 @@ The view tags mechanism lists all existing tags in the address book that a user 
 All existing tags in the address book are shown to the user in the tags list.
 When a new member is added, deleted or edited, the `updateTags` method is called to update the list of existing tags.
 
+Suppose the DeleteMemberCommand is executed as shown in the diagram below, the following sequence of events will occur:
+1. `DeleteMemberCommand#execute()` method is called.
+2. `Member` is deleted from the `ModelManager` using the `ModelManager#deleteMember()` method.
+3. The `ObservableList<Tags>` is updated in `AddressBook` using the `AddressBook#updateTags()` method.
+4. UI detects change in `ObservableList<Tags>` and updates the `TagListPanel` UI component.
+
 <img src="images/ViewTagsSequenceDiagram.png" width="543" alt="ViewTagsSequenceDiagram"/>
-
-In the above diagram, when the `DeleteMemberCommand::execute` method is called,`Member` is deleted from 
-the `ModelManager` using the `deleteMember()` method, which then updates the `tags` in `AddressBook` using 
-the `updateTags()` method.
-
-`tags` is an `ObservableList` which will update the `TagsListPanel` UI component when there is a change in the `tags`
-list.
-
-### Scheduling an interview for an `Applicant`
 
 ### Allocating tasks to Members
 
@@ -499,13 +496,6 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `delm`, just save the member being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -533,8 +523,14 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers to use a separate app that is made to manage CCA-related contacts efficiently
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: categorises contacts into 'members' and 'applicants' groups, allowing for easier management of
-contacts
+**Value proposition**: 
+* ClubMembersContact is a desktop app that helps the user manage a large number of contacts efficiently. It is
+  optimised for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface
+  (GUI).
+* It categorises contacts into 'members' and 'applicants' groups, allowing for easier management of contacts
+* It allows the user to add, delete, edit, find, view and copy members and applicants contacts
+* Members are able to manage their tasks on the app
+* Applicants are able to schedule interviews
 
 ### User stories
 
@@ -611,7 +607,32 @@ Use case ends.
    <br/>
    Use case ends.
 
+---
+
 **Use case: UC04 - Editing a member**
+
+**MSS**
+
+1. User requests to edit a member
+2. ClubMembersContact edits the member's details
+3. Member list is updated in GUI
+4. ClubMembersContact displays a success message along with the member's details
+   <br/>
+   Use case ends.
+
+**Extensions**
+* 1a. The edit member command format is invalid.
+    * 1a1. ClubMembersContact shows an error message.
+      <br/>
+      Use case resumes at step 1.
+* 1b. The member index is invalid or out of range.
+    * 1b1. ClubMembersContact shows an error message.
+      <br/>
+      Use case resumes at step 1.
+* 1c. No field to edit is entered.
+    * 1c1. ClubMembersContact shows an error message.
+      <br/>
+      Use case resumes at step 1.
 
 ---
 
@@ -848,18 +869,105 @@ testers are expected to do more *exploratory* testing.
     2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+### Clearing data
+
+Command: `clear`
+1. Test case: `clear`<br>
+   Expected: All data is cleared.
+
+### Exiting ClubMembersContacts
+
+Command: `exit`
+1. Test case: `exit`<br>
+   Expected: The app exits, all data is saved.
+
+### Help
+
+Command: `help`
+1. Test case: `help`<br>
+   Expected: Help window pops up.
+2. Test case: Press the `F1` key<br>
+   Expected: Help window pops up.
+
+### Adding a member
+
 ### Deleting a member
 
-Deleting a member while all members are being shown
+### Editing a member
 
-1. Prerequisites: List all members using the `viewm` command. Multiple members in the list.
+### Finding a member
 
-2. Test case: `delm 1`<br>
-   Expected: First member is deleted from the list. Details of the deleted member shown in the status message.
-   Timestamp in the status bar is updated.
+### Viewing all members
 
-3. Test case: `delm 0`<br>
-   Expected: No member is deleted. Error details shown in the status message. Status bar remains the same.
+### Copy a member
 
-4. Other incorrect delete commands to try: `delm`, `dela`, `deletemember x`, `...` (where x is larger than the list size)<br>
-   Expected: Similar to previous.
+### Add member task
+
+### Delete member task
+
+### Adding an applicant
+
+Command: `adda` or `addapplicant`
+1. Adding a new applicant
+   1. Prerequisites: Existing list of applicants do not contain applicant with the same phone number
+   2. Test case: `adda /name John Doe /phone 91234567`<br>
+      Expected: A new applicant is added with the given name and phone number and the interview time is not set. 
+      The applicant is added to the last index of the applicant list. The applicant card will appear at the bottom 
+      of the list. The details of the added applicant will be shown in the success message.
+   3. Test case: `adda /name John Doe /phone 91234567 /interview 01/01/2024 1200`<br>
+      Expected: A new applicant is added with the given name, phone number and interview time. The applicant is
+      added to the last index of the applicant list. The applicant card will appear at the bottom of the list. The
+      details of the added applicant will be shown in the success message.
+2. Adding a duplicate applicant
+   1. Prerequisites: Existing list of applicants contain applicant with the same phone number
+   2. Test case: `adda /name John Doe /phone 91234567` then `adda /name Jack Do /phone 91234567`<br>
+      Expected: No applicant added because the applicant has the same phone number as an existing applicant. An error
+      message will be shown with the details.
+3. Adding an applicant while the applicant list is being filtered
+   1. Prerequisites: Filter the applicant list by keyword using the `finda` command.
+   2. Test case: Similar to test cases above
+      Expected: Similar to each respective test cases. The applicant list will remain filtered.
+
+### Deleting an applicant
+
+### Editing an applicant
+
+### Finding an applicant
+
+### Viewing all applicants
+
+### Copy an applicant
+
+--------------------------------------------------------------------------------------------------------------------
+
+Appendix: Effort
+
+Overall, we felt the difficulty level for ClubMembersContacts was moderately high. When creating the project, we had to,
+which evolved from AB-3, we meticulously considered the overall design, architecture and testing aspects to ensure the
+project was well-designed and robust. This was a challenging task as we had to consider the various components and
+classes that would be required to implement the project. We also had to consider the various use cases and user stories
+to ensure that the project was able to meet the requirements. 
+
+Justification for effort:
+* **Changing existing commands** - We had to tweak and rewrite almost all of the commands from AB3 since we wanted to
+have two different classes of `Member` and `Applicant` extending from the original `Person` class. This required us to 
+think carefully about the best way to implement the classes to reduce duplication of code. For example, we adapted the
+`UniquePersonList` to be generic so that it could take in both `Member` and `Applicant` objects to prevent the need to 
+create two separate lists for each class.
+* **Creating new classes** - We created new classes (such as `Telegram`) to allow new fields to be added to the `member`
+class.
+* **Implementing new features** - We implemented new features such as `Task` for `Member` and `Interview` for 
+`Applicant`. We had to first spend time thinking about how the logic was going to work and also how it was going to 
+show up on the UI. Debugging took the longest time since we used the `Task` similar to the one we used for our iP to
+but had to modify the classes to made sure that it worked properly and made sense in the context of the project.
+Similarly, for `Interview`, we had to make tweaks to integrate it into our project.
+
+Challenges faced in the project:
+* **Improvement to the UI** - Changing the UI to suit the new requirements of the project was a challenging task. We
+were unfamiliar with JavaFX which made it difficult to understand how the various components interacted with one another.
+Tracing the code was not enough to understand what was happening and we needed to spend time reading the documentation on
+how the components worked.
+* **Writing test cases** - When we first saw the implementation of the test cases in AB3, we were very confused what
+many of the methods were doing and there were so many abstractions that required us to trace the code to really 
+understand what was happening. We had to spend a lot of time tracing the code and understanding how to make use of the
+same level of abstraction for our own test cases to ensure they were robust and well-written.
