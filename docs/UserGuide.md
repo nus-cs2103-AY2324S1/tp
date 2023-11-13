@@ -26,6 +26,7 @@ If you can type fast, WellNUS can get your contact management and scheduling tas
 </div>
 
 ## Table of Contents
+* Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -75,7 +76,15 @@ If you can type fast, WellNUS can get your contact management and scheduling tas
 
 6. Refer to the [Features](#2-features) below for details of each command.
 
-### 1.2 About the command format
+### 1.2 Icons used in this User Guide
+
+| Icons                          | Representation                           |
+|--------------------------------|------------------------------------------|
+| :information_source:  **Note** | Offers additional useful information     |
+| :exclamation: **Caution**      | Warns about common mistakes              |
+| :bulb: **Tip**                 | Provides tips to enhance your experience |
+
+### 1.3 About the command format
 
 All instructions executed in WellNUS generally use the following command format: `COMMAND_WORD PREFIX/PARAMETER`.
 The list of all available prefixes and parameters, as well as constraints of each parameter, is shown in the table below. 
@@ -118,7 +127,7 @@ To see a list of all command words, refer to the [Command Summary](#5-command-su
 </div>
 
 
-### 1.3 About student notes
+### 1.4 About student notes
 
 Student notes of a student can be viewed by double-clicking on the specific student that you want under the "Student"
 column. You can only view student notes for one student at a time. You can refer to the following diagrams below for reference.
