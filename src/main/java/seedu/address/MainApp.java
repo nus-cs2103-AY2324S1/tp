@@ -116,7 +116,7 @@ public class MainApp extends Application {
             calendarInitialData = calendarOptional.orElseGet(SampleCalendarUtil::getSampleCalendar);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getCalendarFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
+                    + " Will be starting with an empty Calendar.");
             calendarInitialData = new UniMateCalendar();
         }
 
@@ -129,7 +129,7 @@ public class MainApp extends Application {
             taskManagerInitialData = taskManagerOptional.orElseGet(SampleTaskManagerUtil::getSampleTaskManager);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getTaskManagerFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
+                    + " Will be starting with an empty Task Manager.");
             taskManagerInitialData = new TaskManager();
         }
 
