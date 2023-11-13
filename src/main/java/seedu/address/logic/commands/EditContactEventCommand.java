@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_END_DATE_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_START_DATE_TIME;
+import static seedu.address.logic.parser.ParserUtil.parseDateTimeNonNull;
+import static seedu.address.logic.parser.ParserUtil.parseDateTimeToString;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.LocalDateTime;
@@ -140,9 +142,8 @@ public class EditContactEventCommand extends Command {
         LocalDateTime newEndDateTime = editEventDescriptor.getEnd().orElse(updatePeriod.getEnd());
         EventDescription newEventDescription = editEventDescriptor.getEventDescription()
                 .orElse(updateEvent.getDescription());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        String stringStartDateTime = newStartDateTime.format(formatter);
-        String stringEndDateTime = newEndDateTime.format(formatter);
+        String stringStartDateTime = parseDateTimeToString(newStartDateTime);
+        String stringEndDateTime = parseDateTimeToString(newEndDateTime);
         EventPeriod newEventPeriod = new EventPeriod(stringStartDateTime, stringEndDateTime);
         Event updatedEvent = new Event(newEventDescription, newEventPeriod);
         eventList.set(eventIndex.getZeroBased(), updatedEvent);
@@ -214,8 +215,7 @@ public class EditContactEventCommand extends Command {
             return Optional.ofNullable(eventPeriod);
         }
         public void setStart(String startString) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            LocalDateTime start = LocalDateTime.parse(startString, formatter);
+            LocalDateTime start = parseDateTimeNonNull(startString);
             this.start = start;
         }
 
@@ -228,8 +228,7 @@ public class EditContactEventCommand extends Command {
         }
 
         public void setEnd(String endString) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            LocalDateTime end = LocalDateTime.parse(endString, formatter);
+            LocalDateTime end = parseDateTimeNonNull(endString);
             this.end = end;
         }
 
@@ -263,8 +262,8 @@ public class EditContactEventCommand extends Command {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             return new ToStringBuilder("")
                     .add("eventDescription", eventDescription)
-                    .add("start", formatter.format(eventPeriod.getStart()))
-                    .add("end", formatter.format(eventPeriod.getEnd()))
+                    .add("start", parseDateTimeToString(eventPeriod.getStart()))
+                    .add("end", parseDateTimeToString(eventPeriod.getEnd()))
                     .toString();
         }
     }
