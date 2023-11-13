@@ -32,4 +32,26 @@ public class AlternateContactTest {
     public void isValidName_whitespaceInName_false() {
         assertFalse(AlternateContact.isValid(TestData.Invalid.AlternateContact.WHITESPACE_IN_NAME));
     }
+
+    @Test
+    public void equals() {
+        AlternateContact alphanumeric = new AlternateContact(TestData.Valid.AlternateContact.ALPHANUMERIC);
+
+        // same values -> return true
+        AlternateContact alphanumericCopy = new AlternateContact(TestData.Valid.AlternateContact.ALPHANUMERIC);
+        assertTrue(alphanumeric.equals(alphanumericCopy));
+
+        // same object -> return true
+        assertTrue(alphanumeric.equals(alphanumeric));
+
+        // different type -> return false
+        assertFalse(alphanumeric.equals(1));
+
+        // null -> return false
+        assertFalse(alphanumeric.equals(null));
+
+        // different alternate contact -> return false
+        AlternateContact different = new AlternateContact(TestData.Valid.AlternateContact.ALPHANUMERIC_UNDERSCORE);
+        assertFalse(alphanumeric.equals(different));
+    }
 }
