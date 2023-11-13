@@ -10,6 +10,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/). 
+* The `remark` command was implemented with reference to the [tutorial of adding a command](https://nus-cs2103-ay2324s1.github.io/tp/tutorials/AddRemark.html).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -121,29 +122,20 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the client list data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-The `People` component,
+The `Person` component,
 
-* Has 6 compulsory attributes (`Name`, `Phone`, `Address`, `Email`, `Nric`, `LicencePlate`) and 1 optional attrbiute 
-(`Remark`)
-* Has `Tag` which can store any amount of tags
+* Has 6 compulsory attributes (`Name`, `Phone`, `Address`, `Email`, `Nric`, `LicencePlate`) and 2 optional attributes 
+(`Remark` and `Tag`)
+* `Tag` can store any amount of tags
 * Has a `Policy`, which is optional for a person to have, but is stored in the `Person` class regardless
   * If a person has a policy attached to them, `Policy` will simply hold their information (i.e. `Company`, `PolicyNumber`, 
   policy issue and expiry date as `PolicyDate`)
-  * If a person does not have a policy attached to them, `Policy` will hold default values (`NOCOMPANY` for `Company`, `NOPOLICY` for 
-  `PolicyNumber` and `01-01-1000` for both `PolicyDate`)
-
-#### Design considerations
-  * Defensive programming was used for the handling of persons with no policy over the alternative implementation:
-  * Make `Policy = null` for `Person` with no policy. This was unsafe as when `Person` is displayed in the UI, methods 
-like `toString()` would throw errors, violating type safety.
-  * Make `Company`, `PolicyNumber` and `PolicyDate` be `null`. This was unsafe as the RegEx check (e.g. `isValidPolicyNumber()`)
-  done in the constructors would have to be removed, leading to improper input validation.
-
+  * If a person does not have a policy attached to them, `Policy` will hold default values 
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
@@ -151,6 +143,21 @@ like `toString()` would throw errors, violating type safety.
 
 </div>
 
+#### Design considerations
+**Aspect: Whether `Policy` should be a class of its own**
+* **Alternative 1**: Add policy fields directly as attributes of `Person`
+  * Pros: Less nested classes, easier implementation as AB3 already supports this style
+  * Cons: Hard to extend when more policy fields have to be added in the future (e.g. `PolicyType`)
+* **Alternative 2**: (current choice) Abstract out `Policy` as its own class
+  * Pros: A more OOP implementation and allows for easier extension
+
+**Aspect: How to handle clients with no policy**
+* **Alternative 1**: Make `Policy = null` for `Person` with no policy. 
+  * This was unsafe as when `Person` is displayed in the UI, methods like `toString()` would throw errors, violating type safety.
+* **Alternative 2**: Make policy fields `Company`, `PolicyNumber` and `PolicyDate` be `null`. 
+  * This was unsafe as the RegEx check (e.g. `isValidPolicyNumber()`) done in the constructors would have to be removed, leading to improper input validation.
+* **Alternative 3**: (current choice) Have default policy parameters for policy fields.
+  * Though more checks have to be added when displaying the policies (which is a minor bug), it guarantees type safety and has input validation due to the more defensive programming approach taken
 
 ### Storage component
 
@@ -159,7 +166,7 @@ like `toString()` would throw errors, violating type safety.
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both client list data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -173,18 +180,16 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### _Features in InsureIQ_
-
 ### `batchdelete`
 
 The `batchdelete` command allows users to batch delete people whose policy expiry is in the specified month and year.
 
 
-#### Implementation:
+#### Implementation
 The batch delete mechanism is facilitated by `DeleteMonth`
 
 It is also facilitated by the operation:
-* `ModelManager#batchDeleteWithPredicate(Predicate<Person> predicate)` - batch delete all people in address book who fulfil the given predicate.
+* `ModelManager#batchDeleteWithPredicate(Predicate<Person> predicate)` - batch delete all people in the client list who fulfil the given predicate.
 
 This operation is exposed in the `Model` interface as `Model# batchDeleteWithPredicate(Predicate<Person> predicate)`
 
@@ -200,11 +205,11 @@ The following sequence diagram shows how the batch delete operation works:
 
 ![BatchDeleteSequenceDiagram2](images/BatchDeleteSequenceDiagram2.png)
 
-* Calling method updateFilteredPersonList to get all people in the addressBook
+* Calling method updateFilteredPersonList to get all people in the client list
 * Using predicate p to get list of people to delete
-* Delete all people in the list and return all people left in addressBook
+* Delete all people in the list and return all people left in client list
 
-#### Design consideration:
+#### Design considerations
 * Users may use batch delete to delete all people whose policy expiry is in the specified month and year. For example, delete people didn’t contact the user to renew their policies for one year. 
 * Besides, if users leave an insurance company, they may like to delete people purchase policy from that company. 
 * Therefore, `Model#batchDeleteWithPredicate(Predicate<Person> predicate)` is introduced to allow batch delete by month or company.
@@ -213,17 +218,17 @@ The following sequence diagram shows how the batch delete operation works:
 
 ### `edit`
 
-The `edit` command allows users to edit the details of a person in the address book.
+The `edit` command allows users to edit the details of a person in the client list.
 
-#### Implementation:
+#### Implementation
 
 The edit mechanism is facilitated by `EditCommand`. It extends `Command` with an `EditPersonDescriptor` to store the details of the person to be edited. 
 
 Additionally, it implements the following operations:
 * `EditCommand#createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor)` — Creates and returns a `Person` with the details of `personToEdit` edited with `editPersonDescriptor`.
-* `EditCommand#execute(Model model)` — Edits the details of the `Person` in the address book.
+* `EditCommand#execute(Model model)` — Edits the details of the `Person` in the client list.
 
-The changes are finally made to the address book by calling `Model#setPerson(Person target, Person editedPerson)`.
+The changes are finally made to the client list by calling `Model#setPerson(Person target, Person editedPerson)`.
 
 Given below is the sequence diagram for the `edit` command:
 
@@ -232,19 +237,19 @@ Given below is the sequence diagram for the `edit` command:
 :information_source: **Note:** The lifeline for `EditCommandParser` and `EditCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 ![EditFeatureSequenceDiagram](images/EditFeatureSequenceDiagram2.png)
-* Calling method setPerson to edit the person in addressBook.
-* Calling method updateFilteredPersonList to update the addressBook with the edited person.
+* Calling method setPerson to edit the person in client list.
+* Calling method updateFilteredPersonList to update the client list with the edited person.
 
-#### Design considerations:
-* Users may like to edit the details of a person in the address book, in case of changes in the personal details or policy of the person. For example, users may like to update the policy number of a person.
-* Therefore, `EditCommand` is introduced to allow users to edit the details of a person in the address book.
+#### Design considerations
+* Users may like to edit the details of a person in the client list, in case of changes in the personal details or policy of the person. For example, users may like to update the policy number of a person.
+* Therefore, `EditCommand` is introduced to allow users to edit the details of a person in the client list.
 
 <br>
 
 ### `remind`
 The `remind` command allows the user to filter out people whose policy expiry date is approaching within the given number of days.
 
-#### Implementation:
+#### Implementation
 The filtered list will be displayed in the UI. The remind mechanism is facilitated by `Model` through the following operations:
 * `Model#RemindPredicate(int days)` - The Predicate to be used for filtering. `days` represents the number of days from the current date given by the user.
 * `Model#updateFilteredPersonList(Predicate<Person> p)` - Filters the list of Persons to display by the Predicate `p`.
@@ -286,9 +291,9 @@ The following activity diagram summarises what happens when a user executes the 
 ### `sort`
 The `sort` command allows the user to view the profiles arranged in order of earliest to latest policy expiration date, with those profiles that have no policy data placed at the end of the late
 
-#### Implementation:
+#### Implementation
 The sorted list will be displayed in the UI. The remind mechanism is facilitated by `Model` through the following operations:
-* `Model#SortData()` - The Unique Person List of the Address Book is sorted using a PolicyExpiryDateComparator that implements Comparator<Person>
+* `Model#SortData()` - The Unique Person List of the client list is sorted using a PolicyExpiryDateComparator that implements Comparator<Person>
 
 Given below is an example usage scenario and how the sort mechanism behaves at each step:
 
@@ -319,13 +324,22 @@ The following sequence diagram shows how the `sort` command works:
     * Pros: Provides maximum flexibility and functionality
 
 ### `remark`
-The `remark` command allows the user to add optional remarks / comments to a person.
+The `remark` command allows the user to add optional remarks to a person.
 
-#### Implementation:
+#### Implementation
+This was implemented according to the [tutorial of adding a command](https://nus-cs2103-ay2324s1.github.io/tp/tutorials/AddRemark.html). 
 `remark` works similarly to `edit`, but is only editing the `Remark` attribute of the `Person`. 
 To add this feature, the following were done:
 - Include optional `Remark` attribute in `Person` class
-- Edit existing features to parse remarks (e.g. in `add` and `edit` to have a new CLI flag)
+- Add parsers to handle the `remark` command, with the functionality specified in the user guide
+
+#### Design considerations
+
+**Aspect: Whether the prefix `r/` is necessary.**
+* Alternative: (not taken) To remove the need for the prefix such that the command format is `remark INDEX REMARK`
+  * Pros: For a fast typer, this would save time to not need to type special characters like `/`
+  * Cons: May lead to invalid behaviour not being flagged out appropriately, such as if user type `remark 1 2 Likes hiking!`, thinking it would add remarks to clients 1 and 2.
+  * Cons: Does not leverage on existing `ArgumentMultimap` as a separate parsing of input is necessary, which gives way to more potential errors.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -333,35 +347,35 @@ To add this feature, the following were done:
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedAddressBook#commit()` — Saves the current client list state in its history.
+* `VersionedAddressBook#undo()` — Restores the previous client list state from its history.
+* `VersionedAddressBook#redo()` — Restores a previously undone client list state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial client list state, and the `currentStatePointer` pointing to that single client list state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the client list. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the client list after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted client list state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified client list state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the client list state will not be saved into the `addressBookStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous client list state, and restores the client list to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial state, then there are no previous states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -374,17 +388,17 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the client list to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest client list state, then there are no undone states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the client list, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all client list states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -392,11 +406,11 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire client list.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
@@ -404,13 +418,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -444,30 +451,30 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​          | I want to …​                                                                                        | So that I can…​                                                                      |
-|----------|------------------|-----------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
-| `* * *`  | beginner user    | add a person                                                                                        | expand my client list                                                                |
-| `* * *`  | beginner user    | delete a person                                                                                     | remove entries who I am no longer working with                                       |
-| `* * *`  | beginner user    | find person(s) by fields                                                                            | locate details of persons without having to go through the entire list               |
-| `* * *`  | beginner user    | edit a person                                                                                       | make changes to details of a person                                                  |
-| `* * *`  | expert user      | export the entire database                                                                          | have a secured copy of all my clients information                                    |
-| `* *`    | first-time user  | see the layout of the application filled with dummy data                                            | learn how to use the application without corrupting my own data yet                  |
-| `* *`    | first-time user  | delete all the dummy data                                                                           | start using the application for my own use                                           |
-| `* *`    | first-time user  | import an existing database into the system                                                         | have all my contacts in one place for different insurance companies I am working for |
-| `* *`    | beginner-user    | check which policies are close to completion                                                        | perform follow-up actions outside of the application                                 |
-| `* *`    | experienced-user | have reminders for premium due dates expiry whenever I start the application                        | notify my clients about the upcoming payment                                         |
-| `* *`    | experienced-user | add comments to a person                                                                            |                                                                                      |
-| `* *`    | expert user      | sort persons by premium due date expiry                                                             | locate a person who needs to be urgently contacted                                   |
-| `*`      | first-time user  | have a tutorial function                                                                            | familiarise myself with the features and understand how to use the application       |
-| `*`      | experienced user | schedule follow-up calls or meetings with persons directly from the contact number in their profile | save the hassle of reaching out to them using another avenue                         |
-| `*`      | experienced user | review and categorise persons as leads or clients                                                   | prioritise my outreach efforts                                                       |
-| `*`      | experienced user | categorise persons by insurance company                                                             | easily find out which insurance company the person bought insurance from             |
-| `*`      | experienced user | customise the layout of the application                                                             | better suit my preferences                                                           |
-| `*`      | expert user      | generate reports on policy renewals and customer interactions                                       | assess my performance                                                                |
-| `*`      | expert user      | differentiate between polices based on coverage types                                               | provide tailored advice to clients                                                   |
-| `*`      | expert user      | track communication history with each person                                                        | provide personalised service                                                         |
-| `*`      | expert user      | automatically edit a person who made their payment for the premium before the due date              | save the hassle of editing the person manually                                       |
-| `*`      | expert user      | create custom commands                                                                              | successfully perform tasks in a shorter time                                         |
+| Priority | As a …           | I want to …                                                                                         | So that I can…​                                                                     |
+|----------|------------------|-----------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| `* * *`  | beginner user    | add a client                                                                                        | expand my client list                                                               |
+| `* * *`  | beginner user    | delete a client                                                                                     | remove entries who I am no longer working with                                      |
+| `* * *`  | beginner user    | find client(s) by fields                                                                            | locate details of clients without having to go through the entire list              |
+| `* * *`  | beginner user    | edit a client                                                                                       | make changes to details of a client                                                 |
+| `* * *`  | expert user      | export the InsureIQ data                                                                            | have a secured copy of all my clients' information                                  |
+| `* *`    | first-time user  | see the layout of the application filled with dummy data                                            | learn how to use the application without corrupting my own data yet                 |
+| `* *`    | first-time user  | delete all the dummy data                                                                           | start using the application for my own use                                          |
+| `* *`    | first-time user  | import existing data into the system                                                                | have all my clients in one place for different insurance companies I am working for |
+| `* *`    | beginner-user    | check which policies are close to completion                                                        | perform follow-up actions outside of the application                                |
+| `* *`    | experienced-user | have reminders for premium due dates expiry whenever I start the application                        | notify my clients about the upcoming payment                                        |
+| `* *`    | experienced-user | add remarks to a client                                                                             | better tailor my interactions with them                                             |
+| `* *`    | expert user      | sort clients by premium due date expiry                                                             | locate a client who needs to be urgently contacted                                  |
+| `*`      | first-time user  | have a tutorial function                                                                            | familiarise myself with the features and understand how to use the application      |
+| `*`      | experienced user | schedule follow-up calls or meetings with clients directly from the contact number in their profile | save the hassle of reaching out to them using another avenue                        |
+| `*`      | experienced user | review and categorise clients as leads or clients                                                   | prioritise my outreach efforts                                                      |
+| `*`      | experienced user | categorise clients by insurance company                                                             | easily find out which insurance company the client bought insurance from            |
+| `*`      | experienced user | customise the layout of the application                                                             | better suit my preferences                                                          |
+| `*`      | expert user      | generate reports on policy renewals and customer interactions                                       | assess my performance                                                               |
+| `*`      | expert user      | differentiate between polices based on coverage types                                               | provide tailored advice to clients                                                  |
+| `*`      | expert user      | track communication history with each client                                                        | provide personalised service                                                        |
+| `*`      | expert user      | automatically edit a client who made their payment for the premium before the due date              | save the hassle of editing the person manually                                      |
+| `*`      | expert user      | create custom commands                                                                              | successfully perform tasks in a shorter time                                        |
 
 ### Use cases
 
@@ -667,8 +674,8 @@ Should work on any _mainstream OS_ as long as it has Java `11` or above installe
     - The system should respond to user input within 1 second on average.
 
 2. **Scalability:**
-    - The system should be scalable to accommodate a growing number of car insurance policies and customer records.
-    - It should support at least 1,000 customer profiles and policies initially and be able to scale to 10,000 over time.
+    - The system should be scalable to accommodate a growing number of car insurance policies and client records.
+    - It should support at least 100 client profiles initially and be able to scale to 1,000 over time.
 
 3. **Availability and Reliability:**
     - The system should be available 24/7, with planned maintenance windows communicated in advance.
@@ -691,14 +698,14 @@ Should work on any _mainstream OS_ as long as it has Java `11` or above installe
    - Comprehensive documentation, including user manuals and technical guides, should be available to assist users and administrators.
    - The documentation should be regularly updated to reflect changes and improvements to the system.
 
-8. **Response Time:**
-   - The system should provide real-time updates on policy status and customer information, ensuring that agents can quickly access the information they need.
-   - Queries for customer data should return results in less than 2 seconds.
-
 ### Glossary
 
+* **User**: Car insurance agent using the InsureIQ app
+* **Client**: Buyers / potential buyers that car insurance agent is in contact with, such that it is stored inside InsureIQ
+* **Client list**: List of clients and their personal and policy details in the InsureIQ app
+* **Address book**: Same as client list. Kept in code and some explanation as it is the underlying functionality of InsureIQ
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **standard formats**: CSV, JSON
+* **Standard formats**: CSV, JSON
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -757,7 +764,23 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Effort**
 
-{To be filled by Yao Xuan}
+**Achievements of the project:**
+* `Policy` class was added with 4 attributes (company, policy number, issue date, expiry date)
+* `Person` class was extended to include new attributes (NRIC, licence plate, remark, `Policy`) to cater to car insurance agents managing clients
+* Features added: `batchdelete`, `remark`, `remind`, `sort`
+  * Decided after researching on car insurance and the work of some agents, with more description and justifications found in the main body
+* Enhancements to existing features:
+  * `find` searches by the various fields instead of only name as implemented in AB3 to facilitate car insurance agents' work
+  * Fields are case-insensitive (e.g. licence plate is stored in capital letters, but users can input small letters) to aid a fast typist
+* Enhanced testing of features, which led to code coverage increasing from 75% in AB3 to ~80% in InsureIQ
+* \>7,000 LoCs added
+
+**Challenges faced:**
+The challenges mainly arose due to the major extension of the `Model` class
+  * Decision of how to handle the `Policy` details (design considerations mentioned in [`Model`](#model-component))
+  * Changes in almost all files to accommodate the newly extended fields, including changes in constructors and implementations to support the nested `Policy`
+  * Changes in UI to present the new fields clearly without making everything seemed to cluttered as they are all text based
+  * Testing required a lot more cases to handle different cases with different fields
 
 --------------------------------------------------------------------------------------------------------------------
 
