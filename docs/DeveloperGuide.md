@@ -164,7 +164,7 @@ implementing this model.
 
 The class diagram below shows the current implementation of `Member` model.
 
-![MemberClassDiagram](images/MemberClassDiagram.png)
+<img src="images/MemberClassDiagram.png" width="500px" style="margin-left:120px">
 
 Every `Member` contains a `Name`, `Gender`, `Optional<Phone>`, `Optional<Email>`, `Optional<Address>`, `Optional<Hours>`, `Optional<Remark>` and a set of `Tags`. `UniqueMemberList` stores all unique instances of `Member`.
 
@@ -205,7 +205,7 @@ implementing this model.
 
 The `Event` and `UniqueEventList` classes are implemented as shown in the diagram below:
 
-![EventClassDiagram](images/EventClassDiagram.png)
+<img src="images/EventClassDiagram.png" width="500px" style="margin-left:120px">
 
 Every `Event` contains a `Name`, `Location`, `EventDate`, `Optional<Hours>`, `Optional<Remark>` and a set of `Tags`
 `UniqueEventList` stores all unique instances of `Event`.
@@ -248,7 +248,7 @@ implementing this model.
 #### Implementation
 The `Enrolment` and `UniqueEnrolmentList` classes are implemented as shown in the diagram below:
 
-<img src="images/EnrolmentClassDiagram.png" style="margin-left:258px">
+<img src="images/EnrolmentClassDiagram.png" style="margin-left:223px">
 
 `Enrolment` encapsulates the enrolment of a member into an event. It composes of the `Name` of the member and
 the `Name` of the event enrolled in, number of `Hours` they contributed, and a `Remark` to note for that
