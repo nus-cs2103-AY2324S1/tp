@@ -65,9 +65,9 @@ loop through each Person in currentList
         create Hour
         Person -> Hour : UpdateHour(10)
             activate Hour
-            Hour --> Person : updatedHour
+            Hour --> Person
             deactivate Hour
-        Person --> HourCommand : editedPerson
+        Person --> HourCommand
     deactivate Person
 
     HourCommand -> Model : setPerson(person, editedPerson)
@@ -83,7 +83,7 @@ activate CommandResult
 CommandResult --> HourCommand
 deactivate CommandResult
 
-HourCommand --> LogicManager : result
+HourCommand --> LogicManager
 deactivate HourCommand
 
 [<--LogicManager

@@ -31,10 +31,10 @@ deactivate AddressBookParser
 LogicManager -> TeachCommand : execute()
 activate TeachCommand
 
-TeachCommand -> Model : setTeaching(module)
+TeachCommand -> Model : setTeaching(course)
 activate Model
 
-Model -> UserPrefs : setTeaching(module)
+Model -> UserPrefs : setTeaching(course)
 activate UserPrefs
 
 UserPrefs --> Model :
