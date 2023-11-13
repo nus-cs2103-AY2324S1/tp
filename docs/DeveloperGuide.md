@@ -38,6 +38,9 @@ title: Developer Guide
   * [Saving Data](#saving-data)
 * [**Appendix: Planned Enhancements**](#appendix-planned-enhancements)
 * [**Appendix: Effort**](#appendix-effort)
+  * [Effort Required](#effort-required)
+  * [Challenges Faced](#challenges-faced)
+  * [Achievements](#achievements)
 
 --------------------------------------------------------------------------------------------------------------------
 
