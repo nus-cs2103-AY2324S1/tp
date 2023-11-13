@@ -34,7 +34,7 @@ Our guide is catered to CampusConnect users of all experiences! Here's a quick o
 
 Our guide uses **visual components** to highlight key information for your convenience. Here's a quick overview of what each component means:
 
-<div style="display: grid; grid-template-columns: 25% 75%; grid-template-rows: repeat(5, auto);">
+<div class="visual-components" style="display: grid; grid-template-columns: 25% 75%; grid-template-rows: repeat(5, auto);">
     <div style="font-size: 1.5em; display: flex; align-items: center;">
        <ol start="1">
         <li>Examples</li>
@@ -89,21 +89,6 @@ This **darker blue box** with the **lightbulb icon** provides you **extra useful
         </box>
     </div>
 </div>
-
-
-
-
-<br>
-
-
-
-<br>
-
-
-
-<br>
-
-
 
 ---
 
@@ -188,7 +173,7 @@ Here is an overview of the main elements of the interface you should be familiar
 
 # Features
 
-<box type="info" seamless>
+<box style="margin-top: 0.5rem;" type="info" seamless>
 
 **Notes about the command format:**<br>
 
@@ -401,8 +386,6 @@ The notes feature allows you to add and remove notes for a person, and provides 
 
 The parameters for these commands are `PERSON_INDEX`, `NOTE_INDEX` and `NOTE_CONTENT`. These parameters are explained in detail in the section below.
 
-<br>
-
 <panel header=":fa-solid-book: **Notes Command Parameters**" type="secondary" expanded no-close>
 
 The fields you enter should follow the following format:
@@ -411,7 +394,6 @@ The fields you enter should follow the following format:
 - `NOTE_CONTENT`: The content of the note you want to add. It has to be non-empty, and can contain any printable [ASCII character](http://facweb.cs.depaul.edu/sjost/it212/documents/ascii-pr.htm).
 </panel>
 
-<br>
 <box type="warning">
 Always make sure the indices provided are valid and within the bounds of the list. Invalid indices will result in an error.
 </box>
@@ -643,8 +625,6 @@ Across both basic and advanced filtering, the following fields are supported:<br
 
 </panel>
 
-<br>
-
 <box type="info">
 
 Note that in all cases, the search is case-insensitive for alphabetic characters. For example, `n/Joe` will match contacts who have the name `Joe`, `joE`, `Ajoeia`, `BobJOe Lee`, etc., and `t/friend` will match `friend`, `FriENd`, `FRIEND`, etc.
@@ -724,13 +704,9 @@ The following logical operators are supported, and are listed in order of preced
 
 </panel>
 
-<br>
-
 Note that the smallest possible **find expressions** is simply a **find condition**.
 
 **Find expressions** can be nested arbitrarily deeply, and that parentheses can be used to group  **find expressions** together to specify the order of evaluation.
-
-<br>
 
 <box theme="info" icon=":fa-solid-magnifying-glass:">
 
@@ -796,5 +772,26 @@ Action        | Format, Examples
 #content-wrapper h3 {
   margin-top: 2.5rem;
 }
+
+#content-wrapper hr {
+  margin-top: 2.5rem;
+  margin-bottom: 5rem;
+}
+
+div.box-container {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+div.card-container {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+div.visual-components div.box-container {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 
 </style>
