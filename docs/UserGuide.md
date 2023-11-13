@@ -155,7 +155,7 @@ Here is a short description of what each component can do and how it is supposed
 | Toolbar        | Provides a GUI shortcut for users to access file and help                     | Updates whenever you change task information                                           |
 | Command Box    | Reads the user input and executes it                                          | Key in your commands here and simply press 'enter' or 'return' to run it!              |
 | Task List      | Displays all the task cards                                                   | Provides an ordered snapshot of tasks in your task list                                |
-| Task Card      | Displays the summarised details of the task                                   | Select it to view the task's full detail in the side panel                             |
+| Task Card      | Displays the summarised details of the task, as well as its task number       | Select it to view the task's full detail in the side panel                             |
 | Output Window  | Displays the message from the system based on the execution of the user input | It will update with a message from TaskWise based on the execution of the user's input |
 | Side Panel     | Displays the full details of the selected task                                | It will only show a task's details when you view a task                                |
 
