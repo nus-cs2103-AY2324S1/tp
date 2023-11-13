@@ -288,12 +288,6 @@ The activity diagram below shows the action sequence of adding a `Note` to a con
 
 <puml src="diagrams/note/NoteSequenceDiagram.puml"/>
 
-<box type="info" seamless>
-
-**Note:** The sequence diagram for removing `Note` is similar to adding `Note`. Simply replace `AddCommandParser` with `DeleteCommandParser`, `AddNoteCommandParser` with `DeleteNoteCommandParser`, and `AddNoteCommand` with `DeleteNoteCommand`.
-
-</box>
-
 ##### Implementing `AddNoteCommandParser`
 Implements the `Parser` interface, parsing three main arguments:
 1. `contactId`: the one-based index of the contact shown in the GUI.
