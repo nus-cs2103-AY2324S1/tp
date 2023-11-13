@@ -17,7 +17,7 @@ can get your patients management tasks done faster than traditional GUI apps.
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer. If you don't, install it for your relevant operating
-    system at this link https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html
+    system at this [link](https://www.oracle.com/sg/java/technologies/javase/jdk11-archive-downloads.html).
 
 2. Download the latest `MediLink.jar` from [here](https://github.com/AY2324S1-CS2103T-T09-3/tp/releases).
 
@@ -35,7 +35,7 @@ can get your patients management tasks done faster than traditional GUI apps.
     * `list` : Lists all contacts.
 
     * `add-doctor n/John Doe ic/S9851386G g/M p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a
-      doctor named `John Doe` to the Address Book.
+      doctor named `John Doe` to MediLink Contacts.
 
     * `delete ic/S9851386G` : Deletes the person with ic S9851386G.
 
@@ -141,7 +141,7 @@ All fields are mandatory except the tag field. Omission of the fields will throw
 that an invalid command has been given, and specify the correct format for the `add-doctor command`. <br>
 Example: `add-doctor ic/S9851586G g/F p/98765433 e/betsycrowe@example.com a/#104-C, Wakanda St 42 t/Surgeon`<br>
 Error Message: `Invalid command format!` <br>
-   `add-doctor: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS g/GENDER ic/NRIC [t/TAG]...`
+   `add-doctor: Adds a person to MediLink Contacts. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS g/GENDER ic/NRIC [t/TAG]...`
 2. Invalid/Empty Field <br>
    Fields have specific formats to be followed. Failure to adhere to this format will lead to an error message
 that specifies the format to be used for that field. Usage of flags without any message will lead to the same 
@@ -368,7 +368,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from MediLink Contacts.
 
 Format: `delete NRIC`
 
