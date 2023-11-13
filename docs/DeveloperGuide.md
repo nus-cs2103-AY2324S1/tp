@@ -211,7 +211,7 @@ The `Model` component:
 
 **API**: [`Storage.java`](https://github.com/AY2324S1-CS2103T-W11-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-![Storage UML Diagram](images/UML_images/StorageUML.jpg)  
+<puml src="diagrams/Storage.puml" width="450" /> 
 
 The `Storage` component:
 - Can save address book data, user preference data, and team book data in JSON format, and read them back into corresponding objects.
