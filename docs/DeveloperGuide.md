@@ -58,7 +58,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -94,9 +94,9 @@ Here's a (partial) class diagram of the `Logic` component:
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `ClassManagerParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a student).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a student).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -160,7 +160,7 @@ Tagging a student with `Tag` is facilitated by `TagCommand`, `AddTagCommand`, `D
 
 </box>
 
-Here is a step by step example of how the tag command might be executed.
+Here is a step-by-step example of how the tag command might be executed.
 
 Step 1. User inputs the `tag` command.
 
@@ -465,7 +465,7 @@ The `theme` command allows TAs to toggle/switch between _light_ and _dark_ theme
 #### Implementation
 The `theme` feature is facilitated by the `ThemeCommand`, and inside the `Model` component, the `UserPrefs` class stores the current color theme settings. 
 
-Here is a step by step example of how the theme command might be executed.
+Here is a step-by-step example of how the theme command might be executed.
 
 1. The user inputs the `theme` command.
 2. The `Logic` component will receive the input and create a new `ThemeCommand` object.
@@ -599,6 +599,7 @@ The feature should be implemented upon the current design of Student and ClassDe
 #### About this feature
 
 The view feature allows users to view the class information of their students.
+
 <box type="info" seamless>
 
 **Note:** The `view` command is the only way to change the student being viewed in the `GUI`.
@@ -609,14 +610,11 @@ The view feature allows users to view the class information of their students.
 
 The `view` command is facilitated by the `ViewCommandParser` and the `ViewCommand`. It uses `Model#setSelectedStudent()` to select the student that is to be viewed in the `GUI`.
 
-Here is a step by step example of how a `view` command is executed:
+Here is a step-by-step example of how a `view` command is executed:
 
-Step 1. Users inputs a `view` command.
-
+Step 1. User inputs a `view` command.
 Step 2. `Logic` will receive the input and pass it to a `ClassManagerParser` object which in turn creates a `ViewCommandParser` object to parse the command.
-
 Step 3. `ViewCommandParser` will check if the input is valid. If input is valid, it will create a `ViewCommand` object to execute the command. Else `ParseException` is thrown.
-
 Step 4. `ViewCommand` will use `Model#setSelectedStudent()` to set the requested student to be viewed in the `GUI`.
 
 The following sequence diagram will show what happens when a user executes a `view` command:
@@ -1016,7 +1014,7 @@ Testers are expected to do more *exploratory* testing.
     - Enter: `config #t/3 #a/3`<br>
         Expected: The list of students shown in the GUI is the same as the one in `classmanager.json`.
     - Enter: `add n/John Doe p/999 e/john@gmail.com s/A0981234X c/T11`<br>
-        Expected: The student John Doe is added to the botton of the Student List. Details of John Doe are shown in the result display box.
+        Expected: The student John Doe is added to the bottom of the Student List. Details of John Doe are shown in the result display box.
     - Enter: `view s/A0981234X`<br>
         Expected: The student John Doe is shown in the view panel. The student's class information is shown in the view panel with the tutorial and assignment count both updated to 3.
     - Enter: `present-all tut/1`<br>
@@ -1226,10 +1224,10 @@ Testers are expected to do more *exploratory* testing.
 
 ### Randomly select students
 
-1. Randomly select a specific number of students from all students displayed.
+1. Randomly select a specified number of students from the list of displayed students.
 
    1. Test case: `random 2`<br>
-      Expected: Two student from all students displayed are selected randomly.(Ensure at least two students are displayed.)
+      Expected: Two students from the list of displayed students are selected randomly. Ensure at least two students are displayed.
       <br><br>
 
 ### View a student

@@ -79,8 +79,7 @@ public class RandomCommand extends Command {
             int i = random.nextInt(upper);
             distinctInt.add(i);
         }
-        Integer[] randomInt = distinctInt.toArray(new Integer[0]);
-        return randomInt;
+        return distinctInt.toArray(new Integer[0]);
     }
 
     @Override
