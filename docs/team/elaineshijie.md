@@ -35,7 +35,7 @@ Given below are my contributions to the project.
 * **Contributions to Developer Guide**:
     * Added non-functional requirements (Pull Request [#41](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/41))
     * Updated ser stories and use case. (Pull Request [281](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/281))
-    * Added Instructions for Manual Testing. 
+    * Added Instructions for Manual Testing. (Pull Request [#325](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/325))
     * Subject and schedule in ModelClassDiagram (Pull Request [#98](https://github.com/AY2324S1-CS2103T-T11-3/tp/pull/98))
 
 * **Contributions to team-based tasks**:
