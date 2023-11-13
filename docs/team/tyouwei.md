@@ -57,9 +57,9 @@ Given below are my contributions to the project.
   * Enhanced notes feature implemented by Aprup to allow for multiple notes rather than single note
     [#103](https://github.com/AY2324S1-CS2103T-W17-2/tp/pull/103)
     * _What it does_: Allows each individual `InternApplication` to encapsulate a list of notes 
-    * _Justification_: Allow users to add as many notes as they want, rather than being limited to
-      one single note.
-    * _Highlights_: The `InternApplication` class will hold and `List` of Note instead of `Note`. 
+    * _Justification_: Allow users to add as many notes as they want on each entry, rather than 
+      being limited to one single note per entry.
+    * _Highlights_: The `InternApplication` class will hold a `List<Note` of instead of `Note`. 
       Subsequently, the note field in the json is also modified to hold an array of strings. 
 
 * **Code contributed**:
