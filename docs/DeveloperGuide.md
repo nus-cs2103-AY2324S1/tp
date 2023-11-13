@@ -399,13 +399,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 - **Alternative 1**: The `DeleteCommand` could be implemented as a `DeleteFieldCommand` and a `DeletePersonCommand`. The `DeleteFieldCommand` will delete the specified fields from the patient's profile, while the `DeletePersonCommand` will delete the entire patient profile from the database. This approach will require the user to invoke two commands to delete a patient's profile and the specified fields from the patient's profile. This approach is not chosen as it is less intuitive and requires more effort from the user.
 
-
-### Addition of Interface for Find-type commands
-
-#### Proposed Implementation
-
-_{Explain how there is overlap in function for `find`, `delete`, `edit`}_
-
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
