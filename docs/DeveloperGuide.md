@@ -1534,4 +1534,20 @@ testers are expected to do more <i>exploratory testing</i>.
 
 [Back to Table of Contents](#table-of-contents)
 
+### 1. Multiple Classes
+TODO
+
+### 2. Rich In Features
+TODO
+
+### 3. User Centric
+TODO
+
+### 4. Improved UI
+TODO
+
+### 5. Extensive Testing
+TODO
+
+### 6. Software Engineering Practices
 TODO
