@@ -5,7 +5,7 @@ skinparam ArrowFontSize 12
 start
 :User enters input into UI;
 :Input is passed to the LogicManager;
-:LogicManager sends input to AddressBookParser;
+:LogicManager sends input to NetworkBookParser;
 
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.

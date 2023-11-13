@@ -135,10 +135,10 @@ the user's input into key-value pairs, where the keys are specified using `Argum
   leading/trailing whitespace from text, verifying that there are no 
   duplicate entries in the text, and so on.
 
-The activity diagram below describes the workflow of `AddressBookParser`
+The activity diagram below describes the workflow of `NetworkBookParser`
 when determining which `Parser` to use:
 
-<img src="images/AddressBookParser.png" width="600"/>
+<img src="images/AddressBookParser.png" width="1200"/>
 
 The sequence diagram below illustrates the interactions within the
 `FilterCommand` class to generate a `FilterCommand` object, using
