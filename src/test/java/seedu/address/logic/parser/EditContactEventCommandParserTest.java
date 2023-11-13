@@ -4,9 +4,11 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_START_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_EARLIER;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_START_DATE_LATER;
 import static seedu.address.logic.commands.EditContactEventCommand.MESSAGE_NOT_EDITED;
 import static seedu.address.logic.commands.EditContactEventCommand.MESSAGE_WRONG_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_END_DATE_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_START_DATE_TIME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -93,6 +95,28 @@ public class EditContactEventCommandParserTest {
         EventDescription expectedEventDescription = event.getDescription();
         EditContactEventCommand.EditEventDescriptor descriptor = new EditContactEventCommand.EditEventDescriptor();
         descriptor.setEventDescription(expectedEventDescription);
+        ArrayList<Index> expectedIndexArray = new ArrayList<>();
+        expectedIndexArray.add(INDEX_FIRST_PERSON);
+        expectedIndexArray.add(INDEX_FIRST_EVENT);
+        EditContactEventCommand expectedCommand = new EditContactEventCommand(expectedIndexArray, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_allFieldsSpecified_success2() {
+        Index personIndex = INDEX_FIRST_PERSON;
+        Index eventIndex = INDEX_FIRST_EVENT;
+        String userInput = personIndex.getOneBased() + " " + eventIndex.getOneBased() + " "
+                + PREFIX_EVENT_START_DATE_TIME + VALID_START_DATE_EARLIER + " "
+                + PREFIX_EVENT_END_DATE_TIME + VALID_START_DATE_LATER;
+
+        Person person = new PersonBuilder().withCalendar().build();
+        Event event = person.getCalendar().getEventList().get(INDEX_FIRST_EVENT.getOneBased());
+        EventDescription expectedEventDescription = event.getDescription();
+        EditContactEventCommand.EditEventDescriptor descriptor = new EditContactEventCommand.EditEventDescriptor();
+        descriptor.setStart(VALID_START_DATE_EARLIER);
+        descriptor.setEnd(VALID_START_DATE_LATER);
         ArrayList<Index> expectedIndexArray = new ArrayList<>();
         expectedIndexArray.add(INDEX_FIRST_PERSON);
         expectedIndexArray.add(INDEX_FIRST_EVENT);
