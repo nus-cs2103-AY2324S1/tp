@@ -8,57 +8,37 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 package Shared <<Rectangle>> {
-    class Name {
-        name : String
-    }
+    class Name
 }
 package Enrolment <<Rectangle>> {
-    class Hours {
-        value: Integer
-    }
-
-    class Remark {
-        value: String
-    }
+    class Hours
+    class Remark
 }
 
+Class HiddenOutside #FFFFFF
 package Member <<Rectangle>> {
     class Member {
 
     }
 
+    class Phone
 
+    class Email
+    class Address
+    class Tag
+    class Gender
 
-    class Phone {
-        value: String
-    }
+    HiddenOutside ..> UniqueMemberList
+    UniqueMemberList -down-> "*" Member
+    Member *-down->"1" Name
+    Member *-down->"1" Gender
+    Member *--down->"0..1" Phone
+    Member *--down->"0..1" Email
+    Member *--down->"0..1" Address
+    Member *-down->"*" Tag
 
-
-    class Email {
-        value: String
-    }
-
-    class Address {
-        value: String
-    }
-
-    class Tag {
-        tagName: String
-    }
-    class Gender {
-            value: String
-    }
-
-
-    Member -down->"1" Name
-    Member -down->"1" Gender
-    Member --down->"0..1" Phone
-    Member --down->"0..1" Email
-    Member --down->"0..1" Address
-    Member -down->"*" Tag
-
-    Member ---down->"0..1" Hours
-    Member ---down->"0..1" Remark
+    Member *---down->"0..1" Hours
+    Member *---down->"0..1" Remark
 
 }
 
