@@ -129,12 +129,12 @@ Successful output:
 
 ### Listing [contacts](#contact): `list contact`
 
-Shows a list of all contacts in the contact list if tags not specified. 
-Otherwise, shows a list of contacts which contains any one of the specified tags. 
+Shows a list of all contacts in the contact list if tags not specified.
+Otherwise, shows a list of contacts which contains any one of the specified tags.
 
 Format: `list contact [-t TAGNAME...]`
 
-* Lists all contacts if no tags passed. 
+* Lists all contacts if no tags passed.
 * If tags argument passed, lists only contacts that contain one of the tags.
 
 Examples:
