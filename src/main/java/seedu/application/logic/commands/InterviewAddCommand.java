@@ -32,7 +32,7 @@ public class InterviewAddCommand extends InterviewCommand {
         + PREFIX_INTERVIEW_ADDRESS + "Home\n";
 
     public static final String MESSAGE_SUCCESS = "New interview added: %1$s";
-    public static final String MESSAGE_DUPLICATE_JOB = "This interview already exists in the application";
+    public static final String MESSAGE_DUPLICATE_INTERVIEW = "This interview already exists in the application";
 
     private final Index jobIndex;
     private final Interview toAdd;
@@ -51,7 +51,7 @@ public class InterviewAddCommand extends InterviewCommand {
         Job jobToAddInterview = getJob(model, jobIndex);
 
         if (jobToAddInterview.hasInterview(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_JOB);
+            throw new CommandException(MESSAGE_DUPLICATE_INTERVIEW);
         }
 
         jobToAddInterview.addInterview(toAdd);

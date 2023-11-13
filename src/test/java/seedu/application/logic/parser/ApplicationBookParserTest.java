@@ -50,6 +50,10 @@ public class ApplicationBookParserTest {
     }
 
     @Test
+    public void parseCommand_interview() throws Exception {
+        assertTrue(parser.parseCommand("interview delete 1 from/2") instanceof InterviewCommand);
+    }
+    @Test
     public void parseCommand_edit() throws Exception {
         Job job = new JobBuilder().build();
         EditJobDescriptor descriptor = new EditJobDescriptorBuilder(job).build();
@@ -80,7 +84,6 @@ public class ApplicationBookParserTest {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
     }
-
     @Test
     public void parseCommand_sort() throws Exception {
         assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " "

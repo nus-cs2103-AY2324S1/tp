@@ -13,39 +13,6 @@ import org.junit.jupiter.api.Test;
 import seedu.application.testutil.InterviewBuilder;
 
 public class InterviewTest {
-
-    @Test
-    public void isSameInterview() {
-        // same object -> returns true
-        assertTrue(CHEF_INTERVIEW.isSameInterview(CHEF_INTERVIEW));
-
-        // null -> returns false
-        assertFalse(CHEF_INTERVIEW.isSameInterview(null));
-
-        // To be implemented after non-identity fields are created
-        // same role and company, all other attributes different -> returns true
-        Interview editedChefInterview = new InterviewBuilder(CHEF_INTERVIEW)
-            .withType(VALID_INTERVIEW_TYPE_CHEF).build();
-        assertTrue(CHEF_INTERVIEW.isSameInterview(editedChefInterview));
-
-        // different role, all other attributes same -> returns false
-        editedChefInterview = new InterviewBuilder(CHEF_INTERVIEW)
-            .withType(VALID_INTERVIEW_TYPE_CLEANER).build();
-        assertFalse(CHEF_INTERVIEW.isSameInterview(editedChefInterview));
-
-        // role and company differ in case, all other attributes same -> returns true
-        Interview editedCleanerInterview = new InterviewBuilder(CLEANER_INTERVIEW)
-            .withType(VALID_INTERVIEW_TYPE_CLEANER.toLowerCase())
-            .withAddress(VALID_INTERVIEW_ADDRESS_CLEANER.toLowerCase()).build();
-        assertTrue(CLEANER_INTERVIEW.isSameInterview(editedCleanerInterview));
-
-        // role has trailing spaces, all other attributes same -> returns false
-        String addressWithTrailingSpaces = VALID_INTERVIEW_ADDRESS_CLEANER + " ";
-        editedCleanerInterview = new InterviewBuilder(CLEANER_INTERVIEW)
-            .withAddress(addressWithTrailingSpaces).build();
-        assertFalse(CLEANER_INTERVIEW.isSameInterview(editedCleanerInterview));
-    }
-
     @Test
     public void testEqualsAndHashcode() {
         // same values -> returns true

@@ -10,14 +10,27 @@ import org.junit.jupiter.api.Test;
 
 import seedu.application.commons.core.index.Index;
 import seedu.application.logic.Messages;
+import seedu.application.logic.commands.exceptions.CommandException;
 import seedu.application.model.Model;
 import seedu.application.model.ModelManager;
 import seedu.application.model.UserPrefs;
 import seedu.application.model.job.Job;
+import seedu.application.model.job.interview.Interview;
 
 class InterviewDeleteCommandTest {
 
     private final Model model = new ModelManager(getTypicalApplicationBook(), new UserPrefs());
+
+    @Test
+    public void execute_validInput_success() throws CommandException {
+        InterviewDeleteCommand command = new InterviewDeleteCommand(INDEX_FIRST, INDEX_FIRST);
+        Job jobToDeleteFrom = model.getFilteredJobList().get(INDEX_FIRST.getZeroBased());
+        Interview interviewToBeDeleted = jobToDeleteFrom.getInterview(INDEX_FIRST);
+        String expectedMessage = String.format(InterviewDeleteCommand.MESSAGE_SUCCESS,
+                Messages.format(interviewToBeDeleted));
+        assertEquals(expectedMessage, command.execute(model).getFeedbackToUser());
+    }
+
     @Test
     public void execute_validJobIndexWithInvalidInterviewIndex_throwsCommandException() {
         Index jobIndex = Index.fromOneBased(model.getFilteredJobList().size());

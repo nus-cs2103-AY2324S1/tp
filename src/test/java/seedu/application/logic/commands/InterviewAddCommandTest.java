@@ -2,19 +2,50 @@ package seedu.application.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.application.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.application.testutil.Assert.assertThrows;
+import static seedu.application.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.application.testutil.TypicalInterviews.CHEF_INTERVIEW;
+import static seedu.application.testutil.TypicalJobs.getTypicalApplicationBook;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.application.commons.core.index.Index;
+import seedu.application.logic.Messages;
+import seedu.application.logic.commands.exceptions.CommandException;
+import seedu.application.model.Model;
+import seedu.application.model.ModelManager;
+import seedu.application.model.UserPrefs;
+import seedu.application.model.job.Job;
 import seedu.application.model.job.interview.Interview;
 import seedu.application.testutil.InterviewBuilder;
 
 public class InterviewAddCommandTest {
 
+    private final Model model = new ModelManager(getTypicalApplicationBook(), new UserPrefs());
+
     @Test
     public void constructor_nullInterview_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new InterviewAddCommand(null, null));
+    }
+
+    @Test
+    public void execute_validInput_success() throws CommandException {
+        Interview interviewToAdd = new InterviewBuilder(CHEF_INTERVIEW).build();
+        InterviewAddCommand command = new InterviewAddCommand(INDEX_FIRST, interviewToAdd);
+        String expectedMessage = String.format(InterviewAddCommand.MESSAGE_SUCCESS,
+                Messages.format(interviewToAdd));
+        assertEquals(expectedMessage, command.execute(model).getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_duplicateInterview_throwsCommandException() throws CommandException {
+        Job job = model.getFilteredJobList().get(0);
+        Interview interview = job.getInterview(Index.fromOneBased(1));
+        Interview existingInterview = new Interview(interview.getInterviewType(), interview.getInterviewDateTime(),
+                interview.getInterviewAddress());
+        InterviewAddCommand command = new InterviewAddCommand(INDEX_FIRST, existingInterview);
+        assertCommandFailure(command, model, InterviewAddCommand.MESSAGE_DUPLICATE_INTERVIEW);
     }
 
     @Test

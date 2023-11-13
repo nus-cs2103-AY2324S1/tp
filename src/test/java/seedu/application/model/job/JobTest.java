@@ -1,9 +1,6 @@
 package seedu.application.model.job;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.application.logic.commands.CommandTestUtil.VALID_COMPANY_CHEF;
 import static seedu.application.logic.commands.CommandTestUtil.VALID_COMPANY_CLEANER;
 import static seedu.application.logic.commands.CommandTestUtil.VALID_DEADLINE_CLEANER;
