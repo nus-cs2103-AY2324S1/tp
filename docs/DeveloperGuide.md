@@ -414,9 +414,9 @@ Here is the activity diagram from when a user inputs an add command:
 ![Add Activity Diagram](images/AddActivityDiagram.png)
 
 ### Alternatives Considered
-We considered allowing the add feature to add `Notes`, `Member`, `Deadline`, and `Priority` at one go. However, we also needed to consider ease of use by the user when entering all these attributes at one go using the `add` command. Therefore, we concluded that these 4 attributes should be optional to be entered all at once using `add`.
+We considered allowing the add feature to add `Deadline`, `Priority` and `Member` at one go. However, we also needed to consider ease of use by the user when entering all these attributes at one go using the `add` command. Therefore, we concluded that these 3 attributes should be optional to be entered all at once using `add`.
 
-Only the `Description` has been made compulsory. The `Edit` feature will allow users to add and update `Deadline`, `Priority`. The `Note` and `Assign` features will allow for `note` and `member` to be added respectively.
+Only the `Description` has been made compulsory. The `Edit` feature will allow users to add and update `Deadline`, `Priority` and `Member`.
 
 
 ## Mark Feature
@@ -521,7 +521,7 @@ The updating of `Priority` of existing Tasks is accomplished using the `EditComm
 
 ### Updating Members of Existing Tasks
 
-Assigning group members to an existing task can be done using the `EditCommand` class.
+Assigning group members to an existing task can be done using the `EditCommand` class. When the `EditCommand` is executed, the existing members in the specified task will be completely replaced with the member(s) in the command's arguments. If a single `m/` is used with no given member name, the entire member list of the task will be erased.
 
 ### Updating Note of Existing Tasks
 
@@ -1229,21 +1229,24 @@ The current implementation of the `sort` feature directly compares the ASCII val
 
 For example, if a task list contains:
 
+* `b Task`
 * `a Task`
 * `A Task`
-* `b Task`
+* `B Task`
 
 after sorting the list in **ascending order** by the **task description**, the list turns into:
 
+* `A Task`
+* `B Task`
 * `a Task`
 * `b Task`
-* `A Task`
 
-rather than the natural ordering expected (which is the order in which the list was originally in):
+rather than the natural ordering expected:
 
 * `a Task`
 * `A Task`
 * `b Task`
+* `B Task`
 
 This issue can be boiled down to the wrong choice of comparator method used to compare textual information of the different fields of Task. Currently, `String::compareTo` is used, rather than the case-insensitive version `String::compareToIgnoreCase`. This oversight has resulted in this unexpected behaviour of the `sort` feature.
 

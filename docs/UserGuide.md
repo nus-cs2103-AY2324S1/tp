@@ -185,7 +185,7 @@ By adding tasks to TaskWise, you are able to keep track of all the tasks related
 Within the window, left-click on the command box, and key in the command `add t/Complete CS2103T User Guide d/01-01-2023` into the text box, before pressing the "Enter" or "Return" key.
 
 <div markdown="span" class="alert alert-warning">
-:warning: Due to the current limitations of the features provided in TaskWise in regard to the capitalisation of Task Description, you are encouraged to be consistent with the capitalisation of your Task Descriptions of the Tasks that you create!
+:warning: Due to the current limitations of the sort feature provided in TaskWise with regards to the capitalisation of Task Description, you are encouraged to be consistent with the capitalisation of your Task Descriptions!
 </div>
 
 ![image](images/user_guide/Tutorial_Before.png)
@@ -361,7 +361,7 @@ This is all you really need to add a task! It is the description of your task th
 ANY character is allowed, except for blanks and `/`.
 
 <div markdown="span" class="alert alert-warning">
-:warning: Due to the current limitations of the features provided in TaskWise in regard to the capitalisation of Task Description, you are encouraged to be consistent with the capitalisation of your Task Descriptions of the Tasks that you create!
+:warning: Due to the current limitations of the sort feature provided in TaskWise with regards to the capitalisation of Task Description, you are encouraged to be consistent with the capitalisation of your Task Descriptions!
 <br/><br/>
 Refer to <a href="https://ay2324s1-cs2103t-t17-1.github.io/tp/UserGuide.html#case-insensitive-ordering-of-members">this</a> section for more information on this issue! Rest assured that we are working hard to improve your user experience, and we appreciate your patience on this issue while we work on an appropriate fix for this issue!
 </div>
@@ -405,7 +405,7 @@ This is the last optional field of the `add` command. You can assign 1 or more m
 Refer to <a href="https://ay2324s1-cs2103t-t17-1.github.io/tp/UserGuide.html#case-insensitive-ordering-of-members">this</a> section for more information on this issue! Rest assured that we are working hard on fixing this issue to make your TaskWise experience a more enjoyable and productive one!
 </div>
 
-**Examples of correct usage**
+**Examples**
 
 * `add t/Fix User Interface`
 * `add t/Developer Guide p/medium`
@@ -457,7 +457,7 @@ The `mark` command only consists of 1 parameter, the `TASK_NUMBER`, which is the
 
 Acceptable values to use with the `mark` command will therefore be integers within a range from 1 to the total number of tasks you currently have in TaskWise!
 
-**Examples of correct usage**
+**Examples**
 
 - `mark 1`
 
@@ -492,7 +492,7 @@ The `unmark` command only consists of 1 parameter, the `TASK_NUMBER`, which is t
 
 Acceptable values to use with the `unmark` command will therefore be integers within a range from 1 to the total number of tasks you currently have in TaskWise!
 
-**Examples of correct usage**
+**Examples**
 
 - `unmark 1`
 
@@ -535,10 +535,10 @@ Acceptable values for `TASK_NUMBER` would be integers within a range of 1 to the
 
 You should also make sure the `NOTE` does not contain the `/` symbol, as it might be confused with the prefix command. TaskWise believes in keeping things simple after all!
 
-**Example**
+**Examples**
 
-- note 1 n/check the rubrics
-- note 4 n/make sure that all the deliverables are included in the team directory before the final submission
+- `note 1 n/check the rubrics`
+- `note 4 n/make sure that all the deliverables are included in the team directory before the final submission`
 
 **Common Mistakes**
 
@@ -590,7 +590,7 @@ This is the description of the task that you want to keep track of. You may wish
 ANY character is allowed, except for blanks and `/`.
 
 <div markdown="span" class="alert alert-warning">
-:warning: Due to the current limitations of the features provided in TaskWise in regard to the capitalisation of Task Description, you are encouraged to be consistent with the capitalisation of your Task Descriptions of the Tasks that you create!
+:warning: Due to the current limitations of the sort feature provided in TaskWise with regards to the capitalisation of Task Description, you are encouraged to be consistent with the capitalisation of your Task Descriptions!
 <br/><br/>
 Refer to <a href="https://ay2324s1-cs2103t-t17-1.github.io/tp/UserGuide.html#case-insensitive-sort">this</a> section for more information on this issue! Rest assured that we are working hard to improve your user experience, and we appreciate your patience on this issue while we work on an appropriate fix for this issue!
 </div>
@@ -631,6 +631,11 @@ You can assign 1 or more member to a task. ANY character is allowed, except for 
 Do note that editing members using this command will overwrite any existing members, if any, previously associated with the task.
 
 <div markdown="span" class="alert alert-warning">
+:warning: Simply specifying a single member prefix with no member name will result in the members assigned to the task to be completely removed.
+</div>
+
+
+<div markdown="span" class="alert alert-warning">
 :warning: By default, the edited list of members is also sorted using the same algorithm that is used to sort the tasks by Task Description! You are advised to be consistent in your use of capitalisation in the name of the members you add to your task!
 <br/><br/>
 Refer to <a href="https://ay2324s1-cs2103t-t17-1.github.io/tp/UserGuide.html#case-insensitive-ordering-of-members">this</a> section for more information on this issue! Rest assured that we are working hard on fixing this issue to make your TaskWise experience a more enjoyable and productive one!
@@ -640,7 +645,7 @@ Refer to <a href="https://ay2324s1-cs2103t-t17-1.github.io/tp/UserGuide.html#cas
 
 This is the last field of the `edit` command that you can modify. ANY character is allowed, except for `/`.
 
-**Examples of correct usage**
+**Examples**
 
 * `edit 1 t/New Task Description`
 * `edit 1 m/John m/Jane m/Mary`
@@ -720,7 +725,7 @@ The only parameter you will have here is the keywords that you are trying to fin
 | <img src="images/user_guide/FindCommandParam.png" width=400/> |
 |                       `find [KEYWORD]`                        |
 
-**Example**
+**Examples**
 
 * `find OP2`
 * `find meeting`
@@ -758,10 +763,6 @@ This feature has no parameters involved! Simply type the `list` command. It is c
 <div markdown="span" class="alert alert-info">
 :information_source: If you accidentally, or intentionally, enter any number of parameters with the `list` command, they will be ignored and the command will work as usual!
 </div>
-
-**Example**
-
-* `list`
 
 **Expected Output**
 
@@ -828,7 +829,7 @@ The recognised `SORT_TYPE` parameters are as follows:
 
 By using these two parameters, you are able to sort the task list in ascending or descending order, by the task description, priority, deadline or status!
 
-**Examples of correct usage**
+**Examples**
 
 Now that you have learnt what parameters are accepted by the `sort` command, here are some more examples of how sort can be properly used to help you achieve the order which you are going for!
 
@@ -874,20 +875,23 @@ If the sort is done in an ascending manner, and if your tasks are not consistent
 For example, if your list looks like this:
 
 * `post on the forum for help`
+* `Presentation`
 * `complete OP2`
 * `Complete OP3`
 
 after sorting your list in ascending order by the Task Description, it will now look like this:
 
+* `Complete OP3`
+* `Presentation`
 * `complete OP2`
 * `post on the forum for help`
-* `Complete OP3`
 
 rather than:
 
 * `complete OP2`
 * `Complete OP3`
 * `post on the forum for help`
+* `Presentation`
 
 which is probably what you expect the command to do!
 
@@ -922,9 +926,10 @@ The `delete` command only consists of 1 parameter, the `TASK_NUMBER`, which is t
 
 Acceptable values to use with the `delete` command will therefore be integers within a range from 1 to the total number of tasks you currently have in TaskWise!
 
-**Example**
+**Examples**
 
 - `delete 1`
+- `delete 2`
 
 **Expected Output**
 
@@ -968,10 +973,6 @@ This feature has no parameters involved! Simply type the `clear` command. It is 
 <div markdown="span" class="alert alert-info">
 :information_source: If you accidentally, or intentionally, enter any number of parameters with the `clear` command, they will be ignored and the command will work as usual!
 </div>
-
-**Example**
-
-* `clear`
 
 **Expected Output**
 
@@ -1054,12 +1055,14 @@ Currently, the `sort` feature is not really user-friendly, as it sorts your task
 * `b Task`
 * `a Task`
 * `A Task`
+* `B Task`
 
 after sorting your task list in ascending order by the task description, your task list will look like this:
 
+* `A Task`
+* `B Task`
 * `a Task`
 * `b Task`
-* `A Task`
 
 which is not the expected behaviour you might have for the `sort` feature!
 
@@ -1068,6 +1071,7 @@ In a future iteration of TaskWise, we will amend this feature to allow sorting t
 * `a Task`
 * `A Task`
 * `b Task`
+* `B Task`
 
 which is the intended behaviour of the `sort` feature!
 
