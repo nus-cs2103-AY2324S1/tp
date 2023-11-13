@@ -57,9 +57,13 @@ This guide uses the following features to make it easier for you to navigate aro
 3. Put the downloaded file into a folder of your choice (preferably a new empty folder).
 
 4. Open a command terminal in the folder you put the CCACommander file in, and use the `java -jar ccacommander.jar` command to run the application. A GUI resembling the one shown below should appear in a few seconds. Note how the app contains some sample data.<br>
-![Ui](images/Ui.png)
+<figure>
+    <img src="images/Ui.png"
+         alt="Ui">
+    <figcaption>Fig 1: Application upon running</figcaption>
+</figure>
 
-5. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br> E.g. typing `help` and pressing <kbd>Enter</kbd> will open the help window. <br>
+5. Type the command in the command box and press <kbd>↵ Enter</kbd> to execute it. <br> E.g. typing `help` and pressing <kbd>↵ Enter</kbd> will open the help window. <br>
    Some example commands you can try:
 
     * `list` : Lists all members and events.
@@ -79,10 +83,14 @@ This guide uses the following features to make it easier for you to navigate aro
 --------------------------------------------------------------------------------------------------------------------
 
 ## Navigating User Interface
-![UI_breakdown](images/ui_breakdown.png)
+<figure>
+    <img src="images/ui_breakdown.png"
+         alt="UI_breakdown">
+    <figcaption>Fig 2: Components of CCACommander</figcaption>
+</figure>
 Here are the important components of CCACommander that you will use and interact with.
 
-**Menu**: The CCACommander menu is located at the top-left corner of your screen. Click the sub-menu items to execute the following
+**Menu**: The CCACommander menu is located at the top-left corner of your screen. Click the sub-menu items to execute the following:
 1. File: Exit the program
 2. Theme: Toggle between light and dark themes
 
@@ -98,14 +106,14 @@ Here are the important components of CCACommander that you will use and interact
 **Event List**: View the events stored in CCACommander. <br>
 **Storage Location**: Locate where your CCACommander data is stored in your computer.
 
-### Command History
+## Command History
 You can quickly recall previously entered commands for convenience as CCACommander stores almost all (see the info card below to see what commands are stored) commands entered by the user. <br/>
 Upon selecting the command box, you can use the <kbd>↑</kbd> to <kbd>↓</kbd> key to navigate through the commands entered .
 
 Example:
-1. You have just marked attendance for the first member in the member list using the editEnrolment m/1 e/1 r/Present command.
-2. You can then use <kbd>↑</kbd> to get editEnrolment m/1 e/1 r/Present
-3. You can edit the member index to get editEnrolment m/2 e/1 r/Present to mark the second member as present.
+1. You have just marked attendance for the first member in the member list using the `editEnrolment m/1 e/1 r/Present` command.
+2. You can then use <kbd>↑</kbd> to get `editEnrolment m/1 e/1 r/Present`
+3. You can edit the member index to get `editEnrolment m/2 e/1 r/Present` to mark the second member as present.
 
 <div markdown="block" class="alert alert-info">:information_source: CCACommander will not store 2 of the same commands if they were entered twice in a row. Likewise, "commands" containing exclusively of blank spaces will not be stored as well.
 
@@ -121,22 +129,22 @@ Upon entering the <kbd>⌫ Backspace</kbd> or the <kbd>↵ Enter</kbd> key, user
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `createMember n/NAME`, `NAME` is a parameter which can be used as `createMember n/John Doe`.
+  E.g. in `createMember n/NAME`, `NAME` is a parameter which can be used as `createMember n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  E.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  E.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any given order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  E.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Some parameters of certain commands have constraints on the acceptable inputs. <br>
   You can refer to the [List of acceptable values](#list-of-acceptable-values) section below for more details.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  E.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
@@ -159,7 +167,7 @@ Here is an example command where we create a member **named** "Lim Jun Jie" with
 <figure>
     <img src="images/createMemberPostCommand.png"
          alt="createMember Post Command">
-    <figcaption>After executing the <code>createMember</code> command</figcaption>
+    <figcaption>Fig 3: After executing the <code>createMember</code> command</figcaption>
 </figure>
 
 <hr class="command-separator">
@@ -174,7 +182,7 @@ Here is how you can use it:<br>
 :information_source: Remember to provide at least one field to be edited!
 </div>
 
-Here is an example command where we edit the member at **index** 1 in the displayed list, changing their **phone number** to "91234567" and **email** to "johndoe@example.com":
+Here is an example command where we edit the member at **index** 1, changing their **phone number** to "91234567" and **email** to "johndoe@example.com":
 
 `editMember 1 p/91234567 e/johndoe@example.com`
 
@@ -186,7 +194,7 @@ If a member leaves your CCA, get over the disappointment by swiftly removing the
 Here is how you can use it:<br>
  `deleteMember MEMBER_INDEX`
 
-Here is an example command where we delete the member at **index** 1 in the displayed list:
+Here is an example command where we delete the member at **index** 1:
 
 `deleteMember 1`
 
@@ -214,7 +222,7 @@ Here is an example command where we create an event **named** "Party" held at th
 <figure>
     <img src="images/CreateEventPostCommand.png"
          alt="createEvent Post Command">
-    <figcaption>After executing the `createEvent` command</figcaption>
+    <figcaption>Fig 4: After executing the <code>createEvent</code> command</figcaption>
 </figure>
 
 <hr class="command-separator">
@@ -228,10 +236,10 @@ Here is how you can use it:<br>
 `editEvent EVENT_INDEX [n/EVENT_NAME] [l/LOCATION] [d/DATE] [t/TAG]...`
 
 <div markdown="block" class="alert alert-info">
-:information_source: At least one field must be provided.
+:information_source: Remember to provide at least one field to be edited!
 </div>
 
-Here is an example command where we edit an event at **index** 1, changing the **location** to be "MBS" and the **date** to be "2023-10-20".<br>
+Here is an example command where we edit an event at **index** 1, changing the **location** to be "MBS" and the **date** to be "2023-10-20":<br>
 `editEvent 1 l/MBS d/2023-10-20`
 
 <hr class="command-separator">
@@ -269,14 +277,14 @@ has contributed 2 **hours**, and we want to leave a "Role: Photographer" **remar
 <hr class="command-separator">
 
 #### Edit an enrolment: `editEnrolment`
-Accidentally mixed up two members, and gave them the wrong number of hours or wrong remarks for the event they are involved in?
+Accidentally mixed up two members and gave them the wrong number of hours or wrong remarks for the event they are involved in?
 You can fix this with ease by using the `editEnrolment` command!
 
 Here’s how you can use it:<br>
 `editEnrolment m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]`
 
 <div markdown="block" class="alert alert-info">
-:information_source: At least one field must be provided.
+:information_source: Remember to provide at least one field to be edited!
 </div>
 
 Here is an example command where we edit the enrolment of the member at **member index** 1 to the event at **event index** 2,
@@ -298,7 +306,7 @@ Here is an example command where we unenrol the member at **member index** 1 fro
 </div>
 <hr class="feature-class-separator">
 
-### View commands
+### View Commands
 In CCACommander, you can quickly change the view to fit your current use case, be it to check for the enrolment of an event, 
 searching for a member and more!
 
@@ -316,13 +324,13 @@ Here is an example command where we want to view the events in which the **membe
 <figure>
     <img src="images/viewMemberPreCommand.png"
          alt="viewMember Pre Command">
-    <figcaption>Before executing the <code>viewMember</code> command</figcaption>
+    <figcaption>Fig 5: Before executing the <code>viewMember</code> command</figcaption>
 </figure>
 <br>
 <figure>
     <img src="images/viewMemberPostCommand.png"
          alt="viewMember Post Command">
-    <figcaption>After executing the <code>viewMember</code> command</figcaption>
+    <figcaption>Fig 6: After executing the <code>viewMember</code> command</figcaption>
 </figure>
 
 <hr class="command-separator">
@@ -341,13 +349,13 @@ Here is an example command where we want to view the members that the **event** 
 <figure>
     <img src="images/viewEventPreCommand.png"
          alt="viewEvent Pre Command">
-    <figcaption>Before executing the <code>viewEvent</code> command</figcaption>
+    <figcaption>Fig 7: Before executing the <code>viewEvent</code> command</figcaption>
 </figure>
 <br>
 <figure>
     <img src="images/viewEventPostCommand.png"
          alt="viewEvent Post Command">
-    <figcaption>After executing the <code>viewEvent</code> command</figcaption>
+    <figcaption>Fig 8: After executing the <code>viewEvent</code> command</figcaption>
 </figure>
 
 <hr class="command-separator">
@@ -360,7 +368,7 @@ If your CCA contains many members and you don’t want to scroll past tens or hu
 Do you want to find multiple members? Worry not as you can simply add more names one after another.
 
 Here’s how you can use it:
-`findMember MEMBER_NAME [MORE_NAMES]`
+`findMember MEMBER_NAME [MORE_NAMES]...`
 
 Here is an example command where we find all members with the names of "Anthony" and "Nicholas":
 
@@ -373,7 +381,7 @@ Here is an example command where we find all members with the names of "Anthony"
 Similar to `findMember`, `findEvent` allows you to instantly find your event among your multiple events.
 
 Here’s how you can use it:
-`findEvent EVENT_NAME [MORE_NAMES]`
+`findEvent EVENT_NAME [MORE_NAMES]...`
 
 Here is an example command where we find all events with the event name of "Party":
 
@@ -399,7 +407,7 @@ Here’s how you use it: `list`
 
 <hr class="feature-class-separator">
 
-### Utility commands
+### Utility Commands
 CCACommander provides you with powerful utility commands to make your admin tasks even more of a breeze than it was.
 
 #### Undoing a command: `undo`
@@ -454,7 +462,7 @@ Here’s how you can use it: `help`
 <figure>
     <img src="images/helpWindow.png"
          alt="Help Window">
-    <figcaption>A help pop-up window will appear upon entering the <code>help</code> command</figcaption>
+    <figcaption>Fig 9: A help pop-up window will appear upon entering the <code>help</code> command</figcaption>
 </figure>
 
 <hr class="command-separator">
@@ -466,7 +474,7 @@ If it’s time to call it a day for your CCA tasks, you can use the `exit` comma
 Here’s how you can use it: `exit`
 
 <div markdown="block" class="alert alert-info">:information_source: The exit command exists for your convenience. 
-It performs the same task as the cross in the top bar and the Exit button in the File submenu item
+It performs the same task as the cross in the top bar and the Exit button in the File sub-menu item
 </div>
 
 <hr class="command-separator">
@@ -475,11 +483,11 @@ It performs the same task as the cross in the top bar and the Exit button in the
 
 CCACommander data are saved automatically after any command that changes the data. There is no need to save manually.
 
---------------------------------------------------------------------------------------------------------------------
+<hr class="feature-class-separator">
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CCACommander folder.
 
 **Q**: Do I need Wi-Fi connection to use CCACommander?<br>
@@ -530,8 +538,8 @@ Action | Format, Examples
 **Edit an enrolment** | `editEnrolment m/MEMBER_INDEX e/EVENT_INDEX [h/NUMBER_OF_HOURS] [r/REMARK]` <br> e.g. `editEnrolment m/1 e/1 h/0 r/Absent due to Covid`
 **View members of event** | `viewEvent EVENT_INDEX` <br> e.g.`viewEvent 1`
 **View events of member** | `viewMember MEMBER_INDEX` <br> e.g.`viewMember 1`
-**Find member in list** | `findMember KEYWORD [MORE_KEYWORDS]` <br> e.g.`findMember alice`
-**Find event in list** | `findEvent KEYWORD [MORE_KEYWORDS]` <br> e.g.`findEvent party`
+**Find member in list** | `findMember MEMBER_NAME [MORE_NAMES]...` <br> e.g.`findMember alice`
+**Find event in list** | `findEvent EVENT_NAME [MORE_NAMES]...` <br> e.g.`findEvent party`
 **List all members and all events** | `list`
 **Redo** | `redo`
 **Undo** | `undo`
@@ -616,7 +624,7 @@ Action | Format, Examples
   </tr>
   <tr>
     <td class="tg-0pky command"><code>findMember</code> / <code>findEvent</code></td>
-    <td class="tg-0pky">KEYWORD</td>
+    <td class="tg-0pky">MEMBER_NAME / EVENT_NAME / MORE_NAMES</td>
     <td class="tg-0pky">Any non-blank values</td>
   </tr>
 </tbody>

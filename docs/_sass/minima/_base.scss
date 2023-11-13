@@ -76,10 +76,13 @@ img {
 figure > img {
   display: block;
   margin: 0 auto;
+  margin-bottom: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
 figcaption {
   font-size: $small-font-size;
+  text-align: center;
 }
 
 
