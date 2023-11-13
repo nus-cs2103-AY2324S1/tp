@@ -22,6 +22,7 @@ title: Developer Guide
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -70,6 +71,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S1-CS2103T-F11-1/tp/blob/master/src/main/java/seedu/ccacommander/ui/Ui.java)
@@ -87,6 +90,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Member` and `Event` objects residing in the Model
 
+<div style="page-break-after: always;"></div>
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-F11-1/tp/blob/master/src/main/java/seedu/ccacommander/logic/Logic.java)
@@ -102,6 +106,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteMemberCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
+<div style="page-break-after: always;"></div>
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `CCACommanderParser` object which in turn creates a parser that matches the command (e.g., `DeleteMemberCommandParser`) and uses it to parse the command.
@@ -116,6 +121,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `CcaCommanderParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `CreateMemberCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `CreateMemberCommand`) which the `CcaCommanderParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `CreateMemberCommandParser`, `DeleteMemberCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+<div style="page-break-after: always;"></div>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-F11-1/tp/blob/master/src/main/java/seedu/ccacommander/model/Model.java)
@@ -171,6 +178,8 @@ Every `Member` contains a `Name`, `Gender`, `Optional<Phone>`, `Optional<Email>`
 Note that the `Hours` and a `Remark` fields will only be meaningfully initialised
 when either `viewMember` or `viewEvent` command is called. Hence, these two fields are only tools for UI related purposes.
 
+<div style="page-break-after: always;"></div>
+
 #### Design Considerations
 
 This section elaborates further on why we chose to adopt a `Name` over other potential
@@ -210,6 +219,7 @@ The `Event` and `UniqueEventList` classes are implemented as shown in the diagra
 Every `Event` contains a `Name`, `Location`, `EventDate`, `Optional<Hours>`, `Optional<Remark>` and a set of `Tags`.
 `UniqueEventList` stores all unique instances of `Event`.
 
+<div style="page-break-after: always;"></div>
 Note that similar to `Member` class , the `Hours` and a `Remark` fields will only be meaningfully initialised
 when either `viewMember` or `viewEvent` command is called. Hence, these two fields are only tools for UI related purposes.
 
@@ -254,6 +264,7 @@ The `Enrolment` and `UniqueEnrolmentList` classes are implemented as shown in th
 the `Name` of the event enrolled in, number of `Hours` they contributed, and a `Remark` to note for that
 enrolment. `UniqueEnrolmentList` stores all unique instances of `Enrolment`.
 
+<div style="page-break-after: always;"></div>
 #### Design considerations:
 
 **Aspect: How to store each member's events and each event's members.**
@@ -303,6 +314,7 @@ The sequence diagram below shows how the `Model` and `LogicManager` components i
 1. The change resulting from the command's execution is saved using the `Model#commit(String commitMessage)` method for the `undo`/`redo` feature.
 1. A `CommandResult` object which encapsulates the result of the command execution is passed back to the `Ui`.
 
+<div style="page-break-after: always;"></div>
 The following activity diagram shows how the `EnrolCommand` works.
 
 <img src="images/EnrolActivityDiagram.png" width="860px" style="max-width: 860px; margin-left:-120px"/>
@@ -330,6 +342,7 @@ would require `EnrolCommandParser` to have knowledge of the `Model`. This would 
 then have greater dependence on more modules. Hence, while Alternative 1 would result in the `EnrolCommand` to be not standardised
 with other create commands, it provides a simpler implementation with fewer changes needed while also maintaining ease of testing.
 
+<div style="page-break-after: always;"></div>
 ### Undo/Redo Feature
 
 The Undo/Redo feature allows the user to revert commands that were entered wrongly.
@@ -399,6 +412,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" style="margin-left:241px"/>
 
+<div style="page-break-after: always;"></div>
 #### Design considerations:
 
 **Aspect: How undo & redo executes:**
@@ -466,8 +480,8 @@ but will instead use `CommandHistory#isLastCommand()` to check if the `commandHi
 
 </div>
 
-
-The following activity diagram summarizes what happens when a user executes a new command:
+<div style="page-break-after: always;"></div>
+The following activity diagram summarizes what happens to CommandHistory when a user enters a key in the commandBox:
 
 <img src="images/CommandHistoryActivityDiagram.png"/>
 
@@ -545,6 +559,7 @@ filtered view. This will cause inconvenience for the user as they will have to r
 We propose to change the behaviour of `editMember` and `editEvent` such that calling them will no longer list all members and events,
 and instead remain on the user's current view.
 
+<div style="page-break-after: always;"></div>
 ### Show a more specific error message for negative index in `editMember`, `editEvent`, `viewMember`, `viewEvent`, `deleteMember` and `deleteEvent`
 **Current Implementation:**
 * **Current Issue:** When the user inputs a negative index for the `editMember`, `editEvent`, `viewMember`, `viewEvent`,
@@ -635,6 +650,7 @@ specific exceptions related to such issues.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
 ## **Appendix A: Requirements**
 
 ### Product scope
@@ -705,6 +721,7 @@ Future User Stories to be implemented:
 
       Use case ends.
 
+<div style="page-break-after: always;"></div>
 <ins>**Use case: UC02 - Delete a member**</ins>
 
 **Guarantees: MSS -> Specified member will be deleted.**
@@ -766,6 +783,7 @@ Future User Stories to be implemented:
 
       Use case ends.
 
+<div style="page-break-after: always;"></div>
 <ins>**Use case: UC05 - View members of event**</ins>
 
 **Guarantees: MSS -> All members of the specified event will be listed.**
@@ -898,6 +916,7 @@ Future User Stories to be implemented:
 
       Use case ends.
 
+<div style="page-break-after: always;"></div>
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -948,6 +967,7 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+<div style="page-break-after: always;"></div>
 ### Creating a member
 
 1. Successfully creating a member
@@ -981,6 +1001,7 @@ testers are expected to do more *exploratory* testing.
     3. Other incorrect `editMember` commands to try: `editMember 1`, `editMember` with valid index, but invalid values in fields to be edited (For invalid values of fields, refer to User Guide).<br>
        Expected: Similar to previous.
 
+<div style="page-break-after: always;"></div>
 ### Deleting a member
 
 1. Successfully deleting a member
@@ -989,7 +1010,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `deleteMember 1`<br>
       Expected: First member is deleted from the member list. Details of the deleted member without gender is shown in the result display. Command box is cleared.
-
 1. Unsuccessfully deleting a member
 
    1. Prerequisites: List all members using the `list` command. Multiple members in the list.
@@ -1014,6 +1034,7 @@ testers are expected to do more *exploratory* testing.
     2. For other negative test cases, try to input invalid values into each field. For unacceptable values of each field, refer to the User Guide.<br>
        Expected: Similar to previous.
 
+<div style="page-break-after: always;"></div>
 ### Editing an event
 
 1. Successfully editing an event
@@ -1050,6 +1071,7 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect deleteEvent commands to try: `deleteEvent`, `deleteEvent x` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
+<div style="page-break-after: always;"></div>
 ### Enrolling a member to an event
 
 1. Successfully enrolling a member to an event
@@ -1085,6 +1107,7 @@ testers are expected to do more *exploratory* testing.
     3. For other negative test cases, try to input invalid values into each field. For unacceptable values of each field, refer to the User Guide.<br>
        Expected: Similar to previous.
 
+<div style="page-break-after: always;"></div>
 ### Unenrolling a member from an event
 
 1. Successfully unenrolling a member from an event
@@ -1120,6 +1143,7 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect viewMember commands to try: `viewMember`, `viewMember x` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
+<div style="page-break-after: always;"></div>
 ### Viewing an event
 
 1. Successfully viewing an event
