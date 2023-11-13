@@ -1462,6 +1462,8 @@ e
 
 <div style="page-break-after: always;"></div>
 
+[Back to Table of Contents](#table-of-contents)
+
 ## Editing CoordiMate's Data
 
 CoordiMate's data is stored on your computer as a file located at `[JAR file location]/data/addressbook.json`.
