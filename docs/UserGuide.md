@@ -1122,7 +1122,7 @@ For Mac Users you may wish to follow the instructions listed [here](https://nus-
 
 ### Transferring data to another computer
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Campus Companion home folder.
+**A**: Install the app in the other computer. With Campus Companion closed on your new computer, overwrite the newly created campuscompanion.json with the campuscompanion.json from your previous computer. After that, when you relaunch the application, you should see the new data.
 
 [Scroll back to Table of Contents](#table-of-contents)
 
