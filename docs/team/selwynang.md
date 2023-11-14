@@ -40,7 +40,7 @@ Relevant tests were added for these commands.
 * As the Team Lead, I managed task deadlines. I did so by setting up and managing milestones on 
 [GitHub's issue tracker](https://github.com/AY2324S1-CS2103T-F11-1/tp/milestones).
 * Opened and assigned [issues](https://github.com/AY2324S1-CS2103T-F11-1/tp/issues/created_by/selwynang) to every group member and ensured they are updated on what to do.
-* Released Releases [v1.3](https://github.com/AY2324S1-CS2103T-F11-1/tp/releases/tag/v1.3) and [v1.3.1](https://github.com/AY2324S1-CS2103T-F11-1/tp/releases/tag/v1.3.1) on GitHub.
+* Released Releases [v1.3](https://github.com/AY2324S1-CS2103T-F11-1/tp/releases/tag/v1.3), [v1.3.1](https://github.com/AY2324S1-CS2103T-F11-1/tp/releases/tag/v1.3.1) and [v1.4](https://github.com/AY2324S1-CS2103T-F11-1/tp/releases/tag/v1.4) on GitHub.
 
 ### Documentation
 * **User Guide**
