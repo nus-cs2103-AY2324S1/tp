@@ -40,21 +40,27 @@ TimetaBRO, your ultimate companion for managing your university life, social int
 
 
 **Contributions to the User Guide (UG):**
-* Wrote the introduction
-* Wrote the About section
-* Wrote the Quickstart
+* Wrote the introduction, giving the user a broad overview of the functionality of TimetaBRO in a friendly manner.
+* Wrote the About section, giving the user a broad overview of the purpose of the UG.
+* Wrote the Quickstart, giving example commands and links to aid the user in the use of the product.
 * Updated tone throughout the UG.
+* Proofread and ensured quality of UG.
 
 **Contributions to the Developer Guide (DG):**
 * Updated the diagrams in Storage and Model
 * Added details about UserDataStorage
 * Added implementation of EditUserCommand
+* Created sequence diagrams for EditUserCommand's execution.
+* Added some extensions in use cases.
+* Proofread and ensured quality of DG.
 
 **Contributions to team-based tasks:**
 * Delegated work to teammates
 * Created issues and assigned them to teammates
 * Kept track of code deadlines
-* Reviewed, approved, and merged pull requests from other tea members.
+* Reviewed, approved, and merged pull requests from other tea members. E.g. #93 where I requested change due to code quality transgressions.
+* Created releases for v1.4 and v1.2
+* Ensured labels were correct in PRs I reviewed.
 
 **Contributions beyond the project team:**
 * Took part in Bug CATcher stress test

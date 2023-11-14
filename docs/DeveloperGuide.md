@@ -251,7 +251,6 @@ to call `AddressBookParser#parseCommand()` method, which then calls `EditUserCom
 - The `EditUserCommand` is then passed up to `LogicManager`.
 - `LogicManager#execute(editUserCommand)` is called, which then calls `Model#getUser()`. A new `User` object is created with existing user information and incoming data from the `EditUserDescriptor`.
  - `Model#setUser(editedUser)` is then called to save the updated user into `Model`.
- - `Model` then updates `Storage`, allowing users to save data across sessions.
 
  <img src="images/EditUserSequenceDiagram.png" width="1000" />
 
