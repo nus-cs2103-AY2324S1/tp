@@ -186,7 +186,7 @@ Student Number refers to the unique matriculation number of a NUS student. In **
 
 ## Name
 
-Name can be any alphanumeric string, and must not contain any symbols.
+Names should only contain alphanumeric characters and spaces, and it should not be blank.
 
 ## Data visualisation
 
