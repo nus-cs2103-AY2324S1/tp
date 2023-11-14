@@ -184,7 +184,7 @@ It will display the specified list and its corresponding details panel.
 
 Format: `list [LIST] [KEYWORDS]`
 * Shows the list and associated detail panel for the specified `[LIST]`.
-* The `[KEYWORDS]` parameter is for specifying which student details to display, and is only valid for 👨‍🎓 ___STUDENTS list___. Specifying the `[KEYWORDS]` parameter without specifying the `[LIST]` parameter is not allowed. When used for displayed the 📅 ___SCHEDULE list___ and 💼 ___TASKS list___, they will be ignored.
+* The `[KEYWORDS]` parameter is for specifying which student details to display, and is only valid for 👨‍🎓 ___STUDENTS list___. Specifying the `[KEYWORDS]` parameter without specifying the `[LIST]` parameter is not allowed. When used for displaying the 📅 ___SCHEDULE list___ and 💼 ___TASKS list___, they will be ignored.
 * Refer to the parameter constraints [here](#parameter-summary).
 
 <box type="tip" seamless>
