@@ -52,7 +52,7 @@ You can reach us at the email `e0958427[at]comp.nus.edu.sg`
 <img src="images/ketweeen.png" width="200px">
 
 [[github](http://github.com/ketweeen)]
-[[portfolio](team/ketween.md)]
+[[portfolio](team/ketweeen.md)]
 
 * Role: Developer
 * Responsibilities: Scheduling and tracking

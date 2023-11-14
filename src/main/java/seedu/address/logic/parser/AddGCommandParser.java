@@ -12,13 +12,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Github;
 
 /**
- * Parses input arguments and creates a new AddLCommand object
+ * Parses input arguments and creates a new AddGCommand object
  */
 public class AddGCommandParser implements Parser<AddGCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddLCommand
-     * and returns an AddLCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddGCommand
+     * and returns an AddGCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddGCommand parse(String args) throws ParseException {
