@@ -3,6 +3,10 @@ title: Developer Guide
 show-sticky-toc: true
 ---
 
+{% include toc.md header=true show-in-toc=true ordered=true %}
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Acknowledgements
 
 * Reused code from [ToothTracker](https://github.com/AY2324S1-CS2103T-W10-3/tp) for table of contents, sticky navigation and auto-numbering of headers for website

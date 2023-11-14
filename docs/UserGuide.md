@@ -1,6 +1,6 @@
 ---
 layout: page
-title: TAfinder User Guide
+title: User Guide
 show-sticky-toc: true
 ---
 

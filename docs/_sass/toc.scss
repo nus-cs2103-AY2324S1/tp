@@ -37,7 +37,7 @@ article.post {
   }
 
   h4:not(.no_toc) {
-      counter-increment: subsubsection;
+    counter-reset: subsubsubsection;
   }
 
   h2:not(.no_toc)::before {
