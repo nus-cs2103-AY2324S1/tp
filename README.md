@@ -16,6 +16,6 @@ JobFindr aims to simplify your job application management by targeting the follo
     * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 10 KLoC)
       than what students usually write in beginner-level SE modules, without being overwhelmingly big.
     * It comes with a **reasonable level of user and developer documentation**.
-* For the detailed documentation of this project, see the *
-  *[JobFindr Product Website](https://ay2324s1-cs2103t-w12-3.github.io/tp/)**.
+* For the detailed documentation of this project, see
+  the [JobFindr Product Website](https://ay2324s1-cs2103t-w12-3.github.io/tp/).
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).

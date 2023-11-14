@@ -22,34 +22,31 @@ effortlessly.
 ## Implementation Contribution
 
 1. Programmed the implementation the `Deadline` field
-
-* **What it does**: Implemented the `deadline` field in the job application using the `LocalDateTime` parser, enhancing
-  flexibility in date and time format entry.
-* **Justification**: Users might be unfamiliar with the constraints of Java's `LocalDateTime` format, potentially
-  leading to difficulties in entering the deadline field.
-* **Highlights**: We had to format the input deadline before initializing the `Deadline`instance. A key consideration
-  was maintaining the abstraction of this implementation within the `ParserUtil` class.
-  <br><br>
-
+    * **What it does**: Implemented the `deadline` field in the job application using the `LocalDateTime` parser,
+      enhancing
+      flexibility in date and time format entry.
+    * **Justification**: Users might be unfamiliar with the constraints of Java's `LocalDateTime` format, potentially
+      leading to difficulties in entering the deadline field.
+    * **Highlights**: We had to format the input deadline before initializing the `Deadline`instance. A key
+      consideration
+      was maintaining the abstraction of this implementation within the `ParserUtil` class.
+      <br>
 2. Revamped the User Interface Design for JobFindr
-
-* **What It Does**: This update involves a comprehensive redesign of the visual elements of each JavaFX component in
-  JobFindr, alongside a reformatting and addition of new components to the application's window.
-* **Justification**: Being a CLI-based desktop application, our aim is to develop a user-friendly GUI for our users.
-* **Highlights**: This task was particularly challenging due to the steep learning curve associated with JavaFX and
-  FXML. It required a complete overhaul of the CSS styling and reorganization of each component's styleClass.
-  <br><br>
-
+    * **What It Does**: This update involves a comprehensive redesign of the visual elements of each JavaFX component in
+      JobFindr, alongside a reformatting and addition of new components to the application's window.
+    * **Justification**: Being a CLI-based desktop application, our aim is to develop a user-friendly GUI for our users.
+    * **Highlights**: This task was particularly challenging due to the steep learning curve associated with JavaFX and
+      FXML. It required a complete overhaul of the CSS styling and reorganization of each component's styleClass.
+      <br>
 3. Improved Real-Time GUI Responsiveness in JobFindr by enhancing the MVC Architecture
+    * **What It Does**: Implemented immediate GUI updates in response to user commands, eliminating the need for manual
+      refresh.
+    * **Justification**: Critical for user interface efficiency, this feature provides instant feedback on command
+      execution.
+    * **Highlights**: This marked my initial foray into applying the MVC (Model-View-Controller) architecture.
+      <br>
 
-* **What It Does**: Implemented immediate GUI updates in response to user commands, eliminating the need for manual
-  refresh.
-* **Justification**: Critical for user interface efficiency, this feature provides instant feedback on command
-  execution.
-* **Highlights**: This marked my initial foray into applying the MVC (Model-View-Controller) architecture.
-  <br>
-
-### Other Contributions
+## Other Contributions
 
 * **Code Contributed**:
     * My code contributions can be found
