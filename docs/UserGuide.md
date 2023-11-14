@@ -338,16 +338,16 @@ The following are valid statuses:
 
 The following are valid job types:
 
-| Job Type          | Remarks                               |
-|-------------------|---------------------------------------|
-| `TO_ADD_JOB_TYPE` | The default job type if not specified |
-| `FULL_TIME`       | A full time job                       |
-| `PART_TIME`       | A part time job                       |
-| `INTERNSHIP`      | An internship                         |
-| `TEMPORARY`       | A temporary job                       |
-| `CONTRACT`        | A contract job                        |
-| `FREELANCE`       | A freelance job                       |
-| `VOLUNTEER`       | A volunteered job                     |
+| Job Type          | Remarks                                                                |
+|-------------------|------------------------------------------------------------------------|
+| `TO_ADD_JOB_TYPE` | The default job type if not specified                                  |
+| `FULL_TIME`       | A job with standard working hours                                      |
+| `PART_TIME`       | A job with more flexible schedule than a full time job                 |
+| `INTERNSHIP`      | A job that provides hands on experience and focuses on gaining skills  |
+| `TEMPORARY`       | A job that only lasts for the period of an event                       |
+| `CONTRACT`        | A job that involves a specific agreement until the contract end date   |
+| `FREELANCE`       | A self-employed job that offers services on a project-by-project basis |
+| `VOLUNTEER`       | An unpaid job where time and skills are contributed                    |
 
 <div style="page-break-after: always;">
 
@@ -383,10 +383,6 @@ The following are valid interview types:
 | `ONLINE`       | An online interview                                           |
 | `ONSITE`       | An onsite interview                                           |
 | `OTHER`        | Other interviews that does not fall into any given categories |
-
-<div style="page-break-after: always;">
-
-</div>
 
 ### Command Format
 
@@ -1053,6 +1049,11 @@ On **Windows**:
 
 1. Yes, all features of the application can be used offline except for access to external URLs.
 2. Refer to [Quick Start](#quick-start) to start up JobFindr.
+
+### 6. Can I have multiple Job types and Interview types for a single application?
+
+1. No, only a single job type can be added for each application and only a single interview type can be added for each interview.
+2. Choose the type that best suits the job or interview.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
