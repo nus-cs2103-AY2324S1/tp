@@ -506,6 +506,41 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+#### Use case: UC08 - Adding a department
+
+**MSS**
+
+1. HR Manager adds a department.
+2. ManageHR adds a department, displays success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Duplicate name/Name already exists for departments.
+
+    * 2a1. ManageHR shows an error message.
+
+      Use case ends.
+
+#### Use case: UC09 - Deleting a department
+
+**MSS**
+
+1. HR Manager deletes a department.
+2. ManageHR deletes the department with the exact name that exists, displays success message
+3. ManageHR removes all department names from employees who belonged in the deleted department
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Department name could not be found/Name does not exist in department list
+
+    * 2a1. ManageHR shows an error message.
+
+      Use case ends.
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
