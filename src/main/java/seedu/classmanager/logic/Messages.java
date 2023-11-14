@@ -19,7 +19,7 @@ public class Messages {
             + "%1$d students listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
-    public static final String MESSAGE_STUDENT_DOES_NOT_EXIST = "There is no student with the given student number.";
+    public static final String MESSAGE_STUDENT_DOES_NOT_EXIST = "There is no student with the given Student Number.";
     public static final String MESSAGE_USER_PREFS_CANNOT_LOAD = "Unable to load user preferences from preferences.json";
 
     /**
