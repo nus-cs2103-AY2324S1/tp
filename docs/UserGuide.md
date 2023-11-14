@@ -5,7 +5,13 @@ title: User Guide
 
 # Welcome to JobFindr!
 
+![JobFindr](images/user-guide/JobFindr.png)
+
 _Find Your Success with JobFindr_
+
+<div style="page-break-after: always;">
+
+</div>
 
 ## Table of Contents
 
@@ -43,13 +49,15 @@ _Find Your Success with JobFindr_
 6. [FAQ](#faq)
 7. [Glossary](#glossary)
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;">
+
+</div>
 
 ## **Introduction**
 
 Are you an NUS Fresh Graduate looking for a job? Are you struggling to use a spreadsheet to keep track of your job
-applications? Are you looking for a better way to manage your job applications? Well, look no further as **JobFindr** is
-here to help you!
+applications? Are you looking for a better way to manage your [job applications](#job-application)? 
+Well, look no further as **JobFindr** is here to help you!
 
 JobFindr is a **Desktop-based Job Application Management App** for NUS Fresh Graduates to record, track and organise
 their job applications.
@@ -60,7 +68,7 @@ JobFindr aims to simplify your job application management by targeting the follo
 2. _Efficiency_ in **finding** the specific application with minimal keywords.
 3. _Organisation_ in **sorting** the list of applications to not miss out on key opportunities.
 
-JobFindr combines the rapid efficiency of Command Line Interface (CLI) with the visual clarity of
+JobFindr combines the rapid efficiency of [Command Line Interface (CLI)](#cli) with the visual clarity of
 [Graphical User Interface (GUI)](#user-interface), offering job application management that is suited for your specific
 needs and preferences.
 
@@ -98,6 +106,10 @@ Additionally, you'll encounter different text styles within this guide:
   sections of the guide or to external websites for more information.
 * `Code Text`: Highlighted text that can likely be keyed into the command box or to your computer.
 
+<div style="page-break-after: always;">
+
+</div>
+
 ### First Time using JobFindr
 
 _Welcome aboard! We're delighted to be part of your job search journey!_
@@ -127,7 +139,6 @@ _Good to have you back! We're thrilled to have you with us again. How can we hel
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;">
 
 </div>
@@ -149,9 +160,14 @@ with [this guide](https://www.freecodecamp.org/news/command-line-for-beginners/)
    <br>
    ![DownloadJar](images/user-guide/DownloadJar.png)
    <br>
-3. Copy the file to the folder you want to use as the **home folder** for your AddressBook.
+3. Copy the file to the folder you want to use as the **home folder** for your ApplicationBook.
 4. [Open a command terminal](#2-how-do-i-open-up-terminal-on-my-computer), `cd` into the folder you put the jar file in,
    and enter the command `java -jar JobFindr.jar` to run the application.
+
+<div style="page-break-after: always;">
+
+</div>
+
 5. A GUI similar to the below should appear in a few seconds. Note that the app contains some sample data.
    <br><br>
    ![Ui](images/user-guide/QuickStartUi.png)
@@ -161,7 +177,6 @@ with [this guide](https://www.freecodecamp.org/news/command-line-for-beginners/)
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;">
 
 </div>
@@ -169,7 +184,7 @@ with [this guide](https://www.freecodecamp.org/news/command-line-for-beginners/)
 ## **Quick Tutorial**
 
 Let us help you begin your job search journey with JobFindr. Here is a quick tutorial to help you understand the basic
-features to get started on JobFindr.
+features to get started on JobFindr. You may skip the steps labelled as _[Optional]_.
 
 1. [Add your first job application on JobFindr](#1-add-your-first-job-application-on-jobfindr)
 2. [Edit a field in the newly added application](#2-edit-a-field-in-the-newly-added-application)
@@ -177,7 +192,7 @@ features to get started on JobFindr.
 
 ### 1. Add your first job application on JobFindr
 
-Maximise your flexibility by adding applications with just the essential fields. Now, let us try to add an
+Maximise your flexibility by adding applications with just the essential [fields](#fields). Now, let us try to add an
 application in JobFindr.
 
 **Step 1**: Find the [Command Box](#user-interface) on JobFindr and type in `add c/Google r/Software Engineer` before
@@ -189,6 +204,10 @@ pressing **Enter**.<br>
 <div markdown="block" class="alert alert-info">
 **:information_source: Notes:**<br>
 * Learn more about the structure of a job application [here](#structure-of-a-job-application).
+</div>
+
+<div style="page-break-after: always;">
+
 </div>
 
 **Step 2**: You should see a new entry added to the job list just like this: <br>
@@ -205,14 +224,18 @@ applications with different field inputs. Try entering or copying the following 
 
 ### 2. Edit a field in the newly added application
 
-Now that you have learnt how to add applications in JobFindr, let's explore how to edit or update a specific field in
-the newly added application!
+Now that you have learnt how to add applications in JobFindr, let's explore how to edit or update a specific 
+[field](#fields) in the newly added application!
 
 **Step 1**: Find the [index](#command-format) of the application you want to edit. Let's edit our newly added
 `Google` application for now. <br>
 
 * You may want to enter the [`list`](#listing-all-applications--list) command to list all available applications.
   <img src="images/user-guide/QuickTutorial3.png" style="display: block; margin: auto;" width="300">
+
+<div style="page-break-after: always;">
+
+</div>
 
 **Step 2**: Type `edit 8 r/Java Programmer` into the Command Box and press **Enter**. You should see an update to the
 application's role.<br>
@@ -245,7 +268,6 @@ or go on to learn about [the other commands](#features) you can utilise in JobFi
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;">
 
 </div>
@@ -254,40 +276,52 @@ or go on to learn about [the other commands](#features) you can utilise in JobFi
 
 ### User Interface
 
-We designed our Graphical User Interface(GUI) with both **functionality** and **visual appeal** in mind. To provide a
-seamless experience for you at JobFindr.
+We designed our [Graphical User Interface(GUI)](#gui) with both **functionality** and **visual appeal** in mind, 
+to provide a seamless experience for you at JobFindr.
 
 Below are the components of our GUI:
 ![GUI](images/user-guide/UiStructure.png)
 
-| Index | Component            | Description                                                            |
-|-------|----------------------|------------------------------------------------------------------------|
-| 1     | Menu Bar             | Contains system based features like `exit` and `help`                  |
-| 2     | Job Card             | Displays the specific job application                                  |
-| 3     | Job List Panel       | Displays the list of applications you have added to JobFindr           |
-| 4     | Result Display       | Displays success or error messages of the most recent command          |
-| 5     | Command Box          | Key in your commands here                                              |
-| 6     | Job Details Panel    | Displays detail of the application you have selected                   |
-| 7     | Interview Card       | Displays the specific interview                                        |
-| 8     | Interview List Panel | Displays the list of interviews you have added to that job application |
+<div style="page-break-after: always;">
+
+</div>
+
+| Index |      Component       | Description                                                            |
+|:-----:|:--------------------:|------------------------------------------------------------------------|
+|   1   |       Menu Bar       | Contains system based features like `exit` and `help`                  |
+|   2   |       Job Card       | Displays the specific job application                                  |
+|   3   |    Job List Panel    | Displays the list of applications you have added to JobFindr           |
+|   4   |    Result Display    | Displays success or error messages of the most recent command          |
+|   5   |     Command Box      | Key in your commands here                                              |
+|   6   |  Job Details Panel   | Displays detail of the application you have selected                   |
+|   7   |    Interview Card    | Displays the specific interview                                        |
+|   8   | Interview List Panel | Displays the list of interviews you have added to that job application |
+
+<div style="page-break-after: always;">
+
+</div>
 
 ### Structure of a Job Application
 
-| Field    | Prefix | Remarks                                                        | Default value   | Optional? | Sort Order    |
-|----------|--------|----------------------------------------------------------------|-----------------|-----------|---------------|
-| Company  | `c/`   | No restrictions                                                | NA              | No        | Alphabetical  |
-| Role     | `r/`   | Must only contain alphanumeric characters and spaces           | NA              | No        | Alphabetical  |
-| Status   | `s/`   | Possible values in "[Valid statuses](#valid-statuses)"         | TO_ADD_STATUS   | Yes       | Alphabetical  |
-| Industry | `i/`   | Must start with an alphanumeric character                      | TO_ADD_INDUSTRY | Yes       | Alphabetical  |
-| Deadline | `d/`   | Must be in the format MMM dd yyyy HHmm (e.g. Dec 01 2030 1200) | TO_ADD_DEADLINE | Yes       | Chronological |
-| Job Type | `t/`   | Possible values in "[Valid job types](#valid-job-types)"       | TO_ADD_JOB_TYPE | Yes       | Alphabetical  |
+|  Field   | Prefix | Remarks                                                        |  Default value  | Optional? |              Sort Order               |
+|:--------:|:------:|----------------------------------------------------------------|:---------------:|:---------:|:-------------------------------------:|
+| Company  |  `c/`  | No restrictions                                                |       NA        |    No     |  [Alphabetical](#alphabetical-order)  |
+|   Role   |  `r/`  | Must only contain alphanumeric characters and spaces           |       NA        |    No     |             Alphabetical              |
+|  Status  |  `s/`  | Possible values in "[Valid statuses](#valid-statuses)"         |  TO_ADD_STATUS  |    Yes    |             Alphabetical              |
+| Industry |  `i/`  | Must start with an alphanumeric character                      | TO_ADD_INDUSTRY |    Yes    |             Alphabetical              |
+| Deadline |  `d/`  | Must be in the format MMM dd yyyy HHmm (e.g. Dec 01 2030 1200) | TO_ADD_DEADLINE |    Yes    | [Chronological](#chronological-order) |
+| Job Type |  `t/`  | Possible values in "[Valid job types](#valid-job-types)"       | TO_ADD_JOB_TYPE |    Yes    |             Alphabetical              |
 
 * Applications with the same company _AND_ role are considered duplicate jobs.
   JobFindr does not allow the creation of duplicate jobs.
 
 * Deadline refers to the application submission deadline.
 
-* All default values are valid inputs.
+* All _default values_ are valid inputs.
+
+<div style="page-break-after: always;">
+
+</div>
 
 ### Valid Statuses
 
@@ -314,6 +348,10 @@ The following are valid job types:
 | `CONTRACT`        | A contract job                        |
 | `FREELANCE`       | A freelance job                       |
 | `VOLUNTEER`       | A volunteered job                     |
+
+<div style="page-break-after: always;">
+
+</div>
 
 ### Structure of an Interview
 
@@ -346,6 +384,10 @@ The following are valid interview types:
 | `ONLINE`       | An online interview     |
 | `ONSITE`       | An onsite interview     |
 | `OTHER`        | Other interviews        |
+
+<div style="page-break-after: always;">
+
+</div>
 
 ### Command Format
 
@@ -382,7 +424,6 @@ The following are valid interview types:
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;">
 
 </div>
@@ -406,7 +447,9 @@ The following are valid interview types:
 | **Clear**            | `clear`                                                                                  |
 | **Exit**             | `exit`                                                                                   |
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;">
+
+</div>
 
 ### **General Features**
 
@@ -437,7 +480,6 @@ _Exits the program._
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;">
 
 </div>
@@ -456,6 +498,10 @@ _Shows a list of all job applications in alphabetical order of the company name.
 <img src="images/user-guide/ListCommandEg1.png" style="display: block; margin: auto;" width="700">
 ![ListCommandEg2](images/user-guide/ListCommandEg2.png)
 
+<div style="page-break-after: always;">
+
+</div>
+
 <div markdown="block" class="alert alert-success">
 **:bulb: Useful Tips:**<br>
 * You may navigate through the Job List Panel using the Up/Down arrow keys or use the Scroll Bar. 
@@ -464,9 +510,6 @@ _Shows a list of all job applications in alphabetical order of the company name.
 [&uarr; Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;">
-
-</div>
 
 ### Adding an Application : `add`
 
@@ -489,6 +532,10 @@ _Adds a job application to the list._
 
 ![AddCommandEg1](images/user-guide/AddCommandEg1.png)
 
+<div style="page-break-after: always;">
+
+</div>
+
 **Step 2:** You will see a new [Job Card](#user-interface) added to the Job List Panel. Click on it and will see its Job
 Details Panel appear on the right side of the window.<br>
 
@@ -502,6 +549,10 @@ Details Panel appear on the right side of the window.<br>
 
 ![AddCommandEg3](images/user-guide/AddCommandEg4.png)
 
+<div style="page-break-after: always;">
+
+</div>
+
 * Invalid Job Type: `add c/Apple r/Software Developer t/Part-Time`
     * This command is invalid because `t/t/PART-TIME` is not a valid job type due to the **dash** `-`. It should
       be an **underscore** `_` instead enter `t/PART_TIME`.
@@ -509,9 +560,6 @@ Details Panel appear on the right side of the window.<br>
 ![AddCommandEg4](images/user-guide/AddCommandEg4.png)
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;">
-
-</div>
 
 ### Deleting an Application : `delete`
 
@@ -524,7 +572,7 @@ _Deletes the specified application from the list using the specified `INDEX`._
 * Try using ths list command to display all job applications before deleting an application.
 </div>
 
-**Successful Examples:**
+**Successful Example:**
 
 **Step 1:** Enter the [list command](#listing-all-applications--list) to list all the available job applications.
 
@@ -549,9 +597,6 @@ press **Enter**.
 [&uarr; Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;">
-
-</div>
 
 ### Editing an Application : `edit`
 
@@ -614,9 +659,6 @@ Type `edit 2 c/Amazon r/Product Manager d/Dec 15 2023 1000 s/APPROVED` and press
 [&uarr; Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;">
-
-</div>
 
 ### Clearing all Applications: `clear`
 
@@ -638,7 +680,7 @@ _Clears all job applications from JobFindr._
 
 ### Finding an Application : `find`
 
-_Finds all applications whose fields match the keywords provided._
+_Finds all applications whose [fields](#fields) match the keywords provided._
 
 **Format:** `find [KEYWORDS] [c/COMPANY] [r/ROLE] [s/STATUS] [d/DEADLINE] [i/INDUSTRY] [t/JOB_TYPE]`
 
@@ -651,8 +693,8 @@ _Finds all applications whose fields match the keywords provided._
 <div markdown="block" class="alert alert-info">
 **:information_source: Notes about Command Format:**<br>
 * **No Prefix** - If `KEYWORDS` are provided without [prefix](#prefix), the command will find all applications that contains the `KEYWORDS` in **any field**.
-* **Prefix Given** - If a [prefix](#prefix) is given, the search will only find applications containing the given keywords in the specified
-  field.
+* **Prefix Given** - If a [prefix](#prefix) is given, the search will only find applications containing the given 
+  keywords in the specified field.
 </div>
 
 <div markdown="block" class="alert alert-info">
@@ -714,13 +756,10 @@ Type `find Project c/Deloitte` and press **Enter**.
 [&uarr; Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;">
-
-</div>
 
 ### Sorting all applications : `sort`
 
-_Sorts the list based on the prefix provided._
+_Sorts the list based on the [prefix](#prefix) provided._
 
 **Format:** `sort PREFIX`
 
@@ -777,7 +816,6 @@ _Sorts the list based on the prefix provided._
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;">
 
 </div>
@@ -795,7 +833,7 @@ _Adds an interview to a specified job application._
 * All fields (Index, Type, DateTime, Address) are compulsory.
 </div>
 
-**Successful Examples:**
+**Successful Example:**
 
 **Step 1:** Let us add an interview to the first job application in our list of job application. Start by listing all
 the available jobs on JobFindr. Type `list` and press **Enter**.
@@ -804,6 +842,10 @@ the available jobs on JobFindr. Type `list` and press **Enter**.
 the first job's Job Card to display its Job Details Panel.
 
 ![IntAddCommandEg1](images/user-guide/IntAddCommandEg1.png)
+
+<div style="page-break-after: always;">
+
+</div>
 
 **Step 3:** Type `interview add 1 t/Technical d/Nov 19 2023 1200 a/Home` and press **Enter**.
 
@@ -827,6 +869,10 @@ is for **Shopee**.
 
 ![IntAddCommandEg4](images/user-guide/IntAddCommandEg4.png)
 
+<div style="page-break-after: always;">
+
+</div>
+
 * Invalid/Missing input for any field: `interview add 1 t/NOT SURE a/Office d/Dec 01 2023 1000`
     * If any fields have invalid/missing input, Result Display will show the possible valid inputs for that field.
     * So instead of putting `NOT SURE` for the interview `type`, we can put `OTHER` instead.
@@ -841,7 +887,6 @@ is for **Shopee**.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;">
 
 </div>
@@ -857,7 +902,7 @@ _Deletes the interview at the `INTERVIEW_INDEX` from the job application at `JOB
 * Both indexes for job application and interview must be provided and valid.
 </div>
 
-**Successful Examples:**
+**Successful Example:**
 
 **Step 1:** Identify the interview and its job application that you want to delete. Try using `list` or `find` command
 to find the specific job application. Click on the job's Job Card to display its interview.
@@ -886,7 +931,6 @@ Let's type `interview delete 2 from/ 1` and press **Enter**.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;">
 
 </div>
@@ -902,7 +946,7 @@ _Edits the interview at the `INTERVIEW_INDEX` from the job application at `JOB_I
 * At least one of the optional fields must be provided.
 </div>
 
-**Successful Examples:**
+**Successful Example:**
 
 **Step 1:** Identify the interview and its job application that you want to edit. Try using `list` or `find` command
 to find the specific job application. Click on the job's Job Card to display its interview.
@@ -929,6 +973,10 @@ Let's type `interview edit 2 from/ 1 d/Jan 20 2024 1200` and press **Enter**.
     * Click on the Job Card of the 1st application to check the correct index for interview.
 
 ![IntEditCommandEg4](images/user-guide/IntEditCommandEg4.png)
+
+<div style="page-break-after: always;">
+
+</div>
 
 * Invalid/Missing input for any field: `interview edit 2 from/1 d/Dec 31 2023`
     * If any fields have invalid/missing input, Result Display will show the possible valid inputs for that field.
@@ -979,21 +1027,52 @@ On **Windows**:
 
 ### 3. How do I transfer my data to another Computer?
 
-- Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-  the data of your previous AddressBook home folder.
+1. Install the app in the other computer.
+2. Overwrite the empty data file it creates with the file that contains the data of your previous ApplicationBook home folder.
+
+### 4. How do I load data from another Computer?
+
+1. Delete the applicationbook.json file (stored at [JAR file location]/data/applicationbook.json) from the computer that you wish to use JobFindr on. 
+2. Copy over the applicationbook.json file from the computer which you no longer wish to use JobFindr on. 
+3. Refer to [Quick Start](#quick-start) to start up JobFindr and check whether your applications are properly loaded into the new computer.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;">
 
 </div>
 
 ## **Glossary**
 
+#### Job Application
+
+* A record of a job application that contains relevant information.
+
+#### Fields
+* The attributes of a job application: company, role, status, deadline, job type, industry, interview details
+* The attributes of an interview: interview type, interview datetime, interview address
+
 #### Prefix
 
 * An affix that placed before the field to indicate the type of field
 * Examples: c/ r/ s/ from/
+
+#### Alphabetical order
+
+* The arrangement in the same sequence as the letters of the alphabet (A-Z).
+
+#### Chronological order
+
+* The arrangement in which events that occurred earlier would be placed before events that occurred later.
+
+#### CLI
+
+* Command Line Interface
+* A user interface that allows users to interact with the software using text commands via a console or terminal.
+
+#### GUI
+
+* Graphical User Interface
+* A user interface that allows users to interact with the software through graphical icons and visual indicators, as opposed to text-based interfaces.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
