@@ -12,13 +12,25 @@ Class AddressBook
 Class ModelManager
 Class UserPrefs
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+Package Person as PersonPackage <<Rectangle>> {
+    Class UniquePersonList
+    Class Person
+    Class Gender
+    Class Birthdate
+    Class Address
+    Class Email
+    Class Name
+    Class Phone
+    Class Tag
+}
+
+Package Appointment as AppointmentPackage <<Rectangle>> {
+    Class UniqueAppointmentList
+    Class Appointment
+    Class AppointmentDescription
+    Class AppointmentTime
+    Class PriorityTag
+}
 
 Class I #FFFFFF
 }
@@ -37,6 +49,8 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
+Person *--> Gender
+Person *--> Birthdate
 Person *--> Name
 Person *--> Phone
 Person *--> Email
@@ -51,4 +65,19 @@ Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
+
+AddressBook *--> "1" UniqueAppointmentList
+UniqueAppointmentList --> "~* all" Appointment
+Appointment *--> AppointmentDescription
+Appointment *--> AppointmentTime
+Appointment *--> "1" PriorityTag
+Appointment *--> "1" Person
+
+Appointment -[hidden]up--> I
+UniqueAppointmentList -[hidden]left-> I
+
+AppointmentDescription -[hidden]left-> AppointmentTime
+AppointmentTime -[hidden]right-> PriorityTag
+
+ModelManager --> "~* filtered" Appointment
 @enduml

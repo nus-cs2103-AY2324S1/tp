@@ -1,7 +1,13 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showAppointmentAtIndex;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.TypicalAppointments.APPOINTMENT1;
+import static seedu.address.testutil.TypicalAppointments.APPOINTMENT2;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_APPOINTMENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -23,7 +29,9 @@ public class ListCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model.addAppointment(APPOINTMENT1);
+        model.addAppointment(APPOINTMENT2);
+        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getUserHistoryManager());
     }
 
     @Test
@@ -34,6 +42,25 @@ public class ListCommandTest {
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showAppointmentAtIndex(model, INDEX_FIRST_APPOINTMENT);
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        ListCommand firstListCommand = new ListCommand();
+        ListCommand secondListCommand = new ListCommand();
+
+        // same object -> returns true
+        assertTrue(firstListCommand.equals(firstListCommand));
+
+        // same type -> returns true
+        assertTrue(firstListCommand.equals(secondListCommand));
+
+        // different types -> returns false
+        assertFalse(firstListCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(firstListCommand.equals(null));
     }
 }

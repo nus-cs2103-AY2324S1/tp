@@ -1,14 +1,19 @@
 {
   "persons": [ {
     "name": "Alice Pauline",
+    "gender": "FEMALE",
     "phone": "94351253",
     "email": "alice@example.com",
+    "birthdate": "1999/01/12",
     "address": "123, Jurong West Ave 6, #08-111",
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
+    "gender": "FEMALE",
     "phone": "94351253",
     "email": "pauline@example.com",
+    "birthdate": "1999/01/12",
     "address": "4th street"
-  } ]
+  } ],
+  "appointments": []
 }

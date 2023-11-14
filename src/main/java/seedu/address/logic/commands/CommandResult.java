@@ -19,13 +19,38 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** Toggle between dark/light mode */
+    private final boolean modeToggle;
+
+    /** Whether the command can be undone*/
+    private final boolean canUndo;
+
+    /**
+     * Overloaded constructor for {@code CommandResult} for commands that can be changed later on
+     * @param feedbackToUser
+     * @param showHelp
+     * @param exit
+     * @param modeToggle
+     * @param canUndo
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean modeToggle, boolean canUndo) {
+        requireNonNull(feedbackToUser);
+        this.feedbackToUser = feedbackToUser;
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.modeToggle = modeToggle;
+        this.canUndo = canUndo;
+    }
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean modeToggle) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.modeToggle = modeToggle;
+        this.canUndo = false;
     }
 
     /**
@@ -33,7 +58,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -46,6 +71,14 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isModeToggle() {
+        return modeToggle;
+    }
+
+    public boolean canBeUndone() {
+        return canUndo;
     }
 
     @Override
@@ -62,12 +95,13 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && modeToggle == otherCommandResult.modeToggle;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, modeToggle);
     }
 
     @Override
@@ -76,6 +110,7 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("modeToggle", modeToggle)
                 .toString();
     }
 

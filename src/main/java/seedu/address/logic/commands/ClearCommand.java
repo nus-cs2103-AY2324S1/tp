@@ -11,13 +11,26 @@ import seedu.address.model.Model;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Patient records has been cleared!";
+    /**
+     * The usage syntax and examples for the clear command.
+     */
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears Patient and Appointment lists.\n"
+            + "Example: " + COMMAND_WORD;
 
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setAddressBook(new AddressBook());
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, false, false, false, true);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        return other instanceof ClearCommand;
     }
 }

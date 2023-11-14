@@ -9,51 +9,52 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Gao Tianrun
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/trgao.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/trgao)]
+[[portfolio](team/trgao.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities:
 
-### Johnny Doe
+### Shen Licong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/licongshen12.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/licongshen12)]
+[[portfolio](team/licongshen12.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities:
 
-### James Doe
+### Stalin Muthukumar Bill Kirankumar
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/billieboy7.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/billieboy7)]
+[[portfolio](team/billieboy7.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities:
+
+### Doan Quoc Thinh
+
+<img src="images/dinde2004.png" width="200px">
+
+[[github](http://github.com/dinde2004)]
+[[portfolio](team/dinde2004.md)]
+
+* Role: Developer
+* Responsibilities:
+
+### Kwang Thiag
+
+<img src="images/kwangthiag.png" width="200px">
+
+[[github](http://github.com/kwangthiag)]
+[[portfolio](team/kwangthiag.md)]
+
+* Role: Developer
+* Responsibilities:

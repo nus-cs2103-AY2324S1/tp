@@ -2,17 +2,25 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.DateUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.AppointmentDescription;
+import seedu.address.model.appointment.AppointmentTime;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthdate;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.PriorityTag;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,6 +36,7 @@ public class ParserUtil {
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
+        requireNonNull(oneBasedIndex);
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
@@ -96,6 +105,36 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String birthdate} into a {@code Birthdate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code birthdate} is invalid.
+     */
+    public static Birthdate parseBirthdate(String birthdate) throws ParseException {
+        requireNonNull(birthdate);
+        String trimmedBirthdate = birthdate.trim();
+        if (!Birthdate.isValidBirthdate(trimmedBirthdate)) {
+            throw new ParseException(Birthdate.MESSAGE_CONSTRAINTS);
+        }
+        return new Birthdate(trimmedBirthdate);
+    }
+
+    /**
+     * Parses a {@code String gender} into a {@code Gender}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code gender} is invalid.
+     */
+    public static Gender parseGender(String gender) throws ParseException {
+        requireNonNull(gender);
+        String trimmedGender = gender.trim();
+        if (!Gender.isValidGender(trimmedGender)) {
+            throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
+        }
+        return new Gender(trimmedGender);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -111,6 +150,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String tag} into a {@code PriorityTag}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code priorityTag} is invalid.
+     */
+    public static PriorityTag parsePriorityTag(String priorityTag) throws ParseException {
+        requireNonNull(priorityTag);
+        String trimmedTag = priorityTag.trim();
+        if (!PriorityTag.isValidPriorityTag(trimmedTag)) {
+            throw new ParseException(PriorityTag.MESSAGE_CONSTRAINTS);
+        }
+        return new PriorityTag(trimmedTag);
+    }
+
+    /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
@@ -120,5 +174,68 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code String tags} into a {@code Set<Tag>}.
+     */
+    public static Set<Tag> parseIllnesses(String tags) throws ParseException {
+        requireNonNull(tags);
+        String[] tagsArray = tags.split(",");
+        Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : tagsArray) {
+            tagSet.add(parseTag(tagName));
+        }
+        return tagSet;
+    }
+
+    /**
+     * Parses a {@code String dateAndTime} into a {@code LocalDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dateAndTime} is invalid.
+     */
+    public static LocalDateTime parseDateTime(String dateAndTime) throws ParseException {
+        requireNonNull(dateAndTime);
+        String trimmedDateTime = dateAndTime.trim();
+        LocalDateTime localDateTime;
+        try {
+            localDateTime = DateUtil.parseDateTime(trimmedDateTime);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(AppointmentTime.MESSAGE_CONSTRAINTS);
+        }
+        return localDateTime;
+    }
+
+    /**
+     * Parses a {@code String description} into a {@code AppointmentDescription}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code description} is invalid.
+     */
+    public static AppointmentDescription parseDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+
+        if (!AppointmentDescription.isValidAppointmentDescription(trimmedDescription)) {
+            throw new ParseException(AppointmentDescription.MESSAGE_CONSTRAINTS);
+        }
+        return new AppointmentDescription(trimmedDescription);
+    }
+
+    /**
+     * Parses a {@code String argument} and {@code String preamble} into a {@code int SortType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code description} is invalid.
+     */
+    public static boolean parseIsAscending(String argument) throws ParseException {
+        requireNonNull(argument);
+        if (!argument.equals("asc") && !argument.equals("desc")) {
+            throw new ParseException("This is neither ascending or descending");
+        }
+        boolean isAscending = argument.equals("asc");
+
+        return isAscending;
     }
 }

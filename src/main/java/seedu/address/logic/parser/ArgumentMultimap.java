@@ -63,6 +63,13 @@ public class ArgumentMultimap {
     }
 
     /**
+     * Returns whether the preamble is not a number.
+     */
+    public boolean checkPreambleIsNotNumber() {
+        return !getPreamble().matches("-?\\d+");
+    }
+
+    /**
      * Throws a {@code ParseException} if any of the prefixes given in {@code prefixes} appeared more than
      * once among the arguments.
      */
@@ -74,5 +81,12 @@ public class ArgumentMultimap {
         if (duplicatedPrefixes.length > 0) {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the arguments.
+     */
+    public boolean arePrefixesPresent(Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> getValue(prefix).isPresent());
     }
 }

@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -34,6 +35,14 @@ public class UniquePersonList implements Iterable<Person> {
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
+    }
+
+    /**
+     * Returns true if the list contains a person with the same name as the given argument.
+     */
+    public boolean contains(Name name) {
+        requireNonNull(name);
+        return internalList.stream().anyMatch(person -> person.getName().equals(name));
     }
 
     /**
@@ -96,6 +105,16 @@ public class UniquePersonList implements Iterable<Person> {
 
         internalList.setAll(persons);
     }
+    /**
+     * Replaces the current list with a sorted list based on attribute in isAscending order
+     */
+    public void sort(boolean isAscending, String attribute) {
+        if (attribute.equals("name")) {
+            sortByName(isAscending);
+        } else if (attribute.equals("birthday")) {
+            sortByBirthday(isAscending);
+        }
+    }
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
@@ -146,5 +165,28 @@ public class UniquePersonList implements Iterable<Person> {
             }
         }
         return true;
+    }
+    /**
+     * Sorts Patient List by name in order of {@code isAscending}
+     * @param isAscending
+     */
+    private void sortByName(boolean isAscending) {
+        if (isAscending) {
+            internalList.sort(Comparator.comparing(Person::getName));
+        } else {
+            internalList.sort((patient1, patient2) -> -patient1.getName().compareTo(patient2.getName()));
+        }
+    }
+    /**
+     * Sorts Patient List by priority in order of {@code isAscending}
+     * @param isAscending
+     */
+    private void sortByBirthday(boolean isAscending) {
+        if (isAscending) {
+            internalList.sort(
+                    Comparator.comparing(Person::getBirthdate));
+        } else {
+            internalList.sort((patient1, patient2) -> -patient1.getBirthdate().compareTo(patient2.getBirthdate()));
+        }
     }
 }
