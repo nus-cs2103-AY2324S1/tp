@@ -43,6 +43,7 @@ Given below are my contributions to the project.
 
   * Fixed issue where commands not affecting data storage cannot be executed when the app has no write permission to data file. (Pull request [#160](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/160)) 
   * Fixed issue where keyboard shortcuts do not work properly on macOS (Pull request [#254](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/254))
+  * Fixed inaccurate error message when specifying an out-of-bound index for a multi-valued field entry (Pull request [#286](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/286))
 
 * **Code contributed**: [RepoSense report](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=singa-pirate&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=Singa-pirate&tabRepo=AY2324S1-CS2103T-T08-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
@@ -57,15 +58,20 @@ Given below are my contributions to the project.
     *  [#132](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/132) Added command summary and FAQ sections in the user guide for v1.2
     *  [#175](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/175) Drafted documentation for v1.3 features
     *  [#244](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/244) Made the user guide more concise by formatting explanations of common terms
+    *  [#286](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/286) Added explanation about the valid range for indices used in the application
 
   - Developer Guide:
     - [#29](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/29/commits/1cb161408bbdcb1e941b21987bdc6a9759657ca4) Added user stories and non-functional requirements for v1.2 features
     - [#58](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/58) Added use cases and glossary for `add` command
     - [#105](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/105) Conducted quality assurance on the developer guide for v1.2
     - [#263](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/263) Added use cases for v1.3 features and updated class diagram for `Storage`
+    - [#299](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/299) Added implementation and sequence diagram for `add` command
+    - [#301](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/301) Added implementation and sequence diagram for `delete` command
+    - [#313](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/313) Added appendix section to summarise and highlight efforts by the team
+    - [#316](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/316) Conducted final quality assurance on the developer guide for v1.4
 
 * **Community**:
 
-  * PRs reviewed (with non-trivial review comments): [#34](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/34), [#88](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/88), [#91](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/91), [#92](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/92), [#122](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/122), [#152](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/152), [#161](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/161), [#162](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/162), [#164](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/164), [#173](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/173), [#235](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/235), [#237](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/237), [#245](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/245).
+  * PRs reviewed (with non-trivial review comments): [#34](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/34), [#88](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/88), [#91](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/91), [#92](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/92), [#122](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/122), [#161](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/161), [#162](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/162), [#164](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/164), [#173](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/173), [#237](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/237), [#245](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/245), [#284](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/284), [#287](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/287), [#289](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/289), [#297](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/297), [#312](https://github.com/AY2324S1-CS2103T-T08-2/tp/pull/312).
   * Reported bugs and suggestions for other teams in the class (examples: [bug report 1](https://github.com/Singa-pirate/ped/issues/2), [bug report 2](https://github.com/Singa-pirate/ped/issues/3), [bug report 3](https://github.com/Singa-pirate/ped/issues/5), [bug report 4](https://github.com/Singa-pirate/ped/issues/8))
 
