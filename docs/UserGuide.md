@@ -396,16 +396,18 @@ Format: `unpaidAll`
 **Examples**:
 * `redo`
 
-### Calculating Monthly Revenue: `rev`
+### Calculating monthly revenue: `rev`
 
 **Description**: Displays the total monthly revenue calculated from all tutees.
 
 **Format**: `rev`
 
-**Expected Output**: Successfully calculated <br>
-&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
-&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
-Total monthly revenue: *$monthlyrevenue*
+:bulb: `rev` command is time-sensitive (i.e. If the lesson occurrences varies between months, the value adjusts accordingly)
+
+**Sample Execution:** `rev`
+
+![Revenue Command Success](images/RevenueCommandSuccess.png)
+
 
 ### Exiting the program : `exit`
 

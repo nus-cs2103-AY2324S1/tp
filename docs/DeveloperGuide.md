@@ -312,16 +312,16 @@ The following activity diagram summarizes what happens when a user executes a `f
     * Cons: During the first round of user-testing, some new users were confused on how to use the command.
 
 
-### Calculate total revenue for the month
+### Calculate monthly revenue
 
 
 The `RevenueCommand` extends the `command class`. The command first gets a list containing all tutees.
-The total revenue monthly can be calculated now by iterating through the list and calling `Person#getMonthlyFee`. <br>
+The total monthly revenue can be calculated now by iterating through the list and calling `Person#getMonthlyFee`. <br>
 
 The total monthly revenue is calculated as such: <br>
 *Total Monthly Revenue* = Sum of every tutee's `monthlyFee`
 
-The following sequence diagram shows how the total revenue command works:
+The following sequence diagram shows how the `RevenueCommand` works:
 ![RevenueSequenceDiagram.png](images/RevenueSequenceDiagram.png)
 
 #### Design Considerations
@@ -727,9 +727,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 - 2a. The user does not have any free slots available.
-    - 2a1. System informs user that there is no available timeslots.
-      <br>
-      <br>
+<<<<<<< HEAD
+  - 2a1. System informs user that there is no available timeslots.
+    <br>
+    <br>
 
 **Use case: UC12 - Get monthly revenue**
 
@@ -913,10 +914,12 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case: `freeTime d/Mon dur/30 b/1930 end/2130` <br>
        Expected: The result <br>
+
        _Here is your list of free time:_ <br>
        _Free from 19:30 - 20:00_ <br>
        _Free from 21:00 - 21:30_ <br>
        should be displayed in the status message.
+
 
 ### Marking a tutee as paid
 
@@ -1029,3 +1032,14 @@ is saved. The system should inform the user that this command will not modify an
 
 Idea: Create a `Model#isSameData()` to compare whether the state of the tutee data before and after the command execution will be the same. If
 `Model#isSameData()` returns true, a `CommandException` should be thrown and the system should inform the user that this command will not modify any data.
+
+### Enable Group Lessons
+
+Reason: Current `Lesson` implementation prevents any lessons clashes, that is no two `Person` objects can have lessons that fall in same timeslots.
+However, this is based on the assumption that lessons are carried out on a one-on-one basis. Given the possibility of group lessons, having such a feature
+would allow for more flexibility in the application.
+
+Idea: Create a `GroupTag` field for `Lesson` class which contain an ID for each `Lesson` object if they are group lessons. When checking if two 
+lesson clashes, allow for lesson clash if `Lesson` objects have the same IDs which means they are the same group lesson.
+
+
