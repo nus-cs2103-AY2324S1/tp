@@ -209,6 +209,7 @@ The `Model` component,
 
 </box>
 
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -473,6 +474,8 @@ The most important method to be overridden is the initModelMethods(), which look
         * Many redundant code.
         * Difficult to maintain as the code is not DRY.
 
+<div style="page-break-after: always;"></div>
+
 ### Show feature
 
 #### Implementation
@@ -527,6 +530,8 @@ The following sequence diagram shows how the show operation works for showing a 
     * Pros: No additional coupling created.
     * Cons: Many files will have to be changed and will increase the complexity of the code.
 
+<div style="page-break-after: always;"></div>
+
 ### Task List Feature
 
 #### Implementation
@@ -546,6 +551,8 @@ The `FullTaskList` class is implemented as a list to view all the collective tas
 * **Alternative 2:** Create a central Task List and filter the tasks for each lesson.
     * Pros: May be easier to increase navigability.
     * Cons: May increase code complexity due to filtering the respective tasks.
+
+<div style="page-break-after: always;"></div>
 
 ### Linking Lessons to Students
 
