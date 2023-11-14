@@ -466,3 +466,6 @@ Due to time and resource constraints, we were unable to implement all the featur
 5. There is currently no way to import or export client data. In the future, we will support importing and exporting their data in various formats, such as CSV.
 6. The client list currently only has one fixed order. We plan to implement a feature that allows the user to sort the client list by different fields, such as name, lead category, etc. The command will be in the form of `sort FIELD [ASC|DESC]`.
 7. The `clear` command does not have any confirmation. We plan to implement a confirmation dialog to prevent accidental deletion of data.
+8. Our app current work best at a medium to large window size. Resizing the window to a smaller size will cause the UI to break. We plan to implement a responsive UI that will work well at any window size.
+9. The app currently shows the dashboard view on launch. New users may not be familiar with how to switch to the client view. We plan to implement a welcome screen that will guide new users on how to use the app.
+10. Currently, the app only supports one instance at a time. Making changes to the data from another instance of the app will not be reflected in real-time. We plan to implement a feature that allows multiple instances of the app to run concurrently.
