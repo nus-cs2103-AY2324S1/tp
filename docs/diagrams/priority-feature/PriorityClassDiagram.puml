@@ -1,0 +1,34 @@
+@startuml
+!include ../style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Class Person
+note left of Person
+ A person is associated to other attribute classes such as
+ <b>Name</b>, <b>Phone</b>, <b>Email</b>...
+ which are ommited here as they are irrelevant
+ when discussing about priority.
+end note
+
+Class Level <<enumeration>> {
+HIGH
+MEDIUM
+LOW
+NONE
+}
+
+Class Priority {
+level: Level
+}
+
+Person --> "1" Priority
+
+show Priority members
+hide Priority methods
+
+show Level members
+hide Level methods
+
+@enduml
