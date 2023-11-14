@@ -59,7 +59,7 @@ This user guide will teach you how to install **TuitionConnect** from scratch, a
     * [Parameter](#parameter)
 <!-- TOC -->
 
-<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 ## Introduction
 TuitionConnect is a **desktop app** built for tutors and tutoring businesses to simplify the process of 
@@ -353,9 +353,6 @@ Here are the [parameter](#glossary) requirements of commonly used parameters by 
 **Description**: Clears all entries from your list to start from scratch.
 
 **Format**: `clear`
-
-**Examples**:
-* `clear`
 
 **Sample Execution**:  `clear`
 
