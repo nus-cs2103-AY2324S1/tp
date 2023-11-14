@@ -21,21 +21,21 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=teerenjing&breakdown=true)
 
 * **Enhancements implemented**:
-  * Implemented substring matching for complex medication names (Pull requests [\#157]())
-  * Wrote additional tests for existing features to increase coverage from 68% to 72% (Pull requests [\#208](), [\#209]())
+  * Implemented substring matching for complex medication names (Pull requests [\#157](https://github.com/AY2324S1-CS2103T-T15-2/tp/pull/157))
+  * Wrote additional tests for existing features to increase coverage from 68% to 72% (Pull requests [\#208](https://github.com/AY2324S1-CS2103T-T15-2/tp/pull/208), [\#209](https://github.com/AY2324S1-CS2103T-T15-2/tp/pull/209))
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `listConflicts`, `listAllConflicts`, `find` (Pull requests [\#164](), [\#215]())
-    * Did cosmetic tweaks to existing documentation of features `delete`, `help`, `exit` (Pull requests [\#81](), [\#82](), [\#83](), [\#87]())
-    * Added Known Issues for BayMeds (Pull requests [\#242]())
+    * Added documentation for the features `listConflicts`, `listAllConflicts`, `find` (Pull requests [\#164](https://github.com/AY2324S1-CS2103T-T15-2/tp/pull/164), [\#215](https://github.com/AY2324S1-CS2103T-T15-2/tp/pull/215))
+    * Did cosmetic tweaks to existing documentation of features `delete`, `help`, `exit` (Pull requests [\#81](https://github.com/AY2324S1-CS2103T-T15-2/tp/pull/81), [\#82](https://github.com/AY2324S1-CS2103T-T15-2/tp/pull/82), [\#83](https://github.com/AY2324S1-CS2103T-T15-2/tp/pull/83), [\#87](https://github.com/AY2324S1-CS2103T-T15-2/tp/pull/87))
+    * Added Known Issues for BayMeds (Pull requests [\#242](https://github.com/AY2324S1-CS2103T-T15-2/tp/pull/242))
   * Developer Guide:
     * Added OODM of the conflicting drugs feature.
-    * Added Planned Enhancements for BayMeds (Pull requests [\#242]())
+    * Added Planned Enhancements for BayMeds (Pull requests [\#242](https://github.com/AY2324S1-CS2103T-T15-2/tp/pull/242))
 
 * **Team-based tasks**:
   * Minor admin matters such as setting up the GitHub organisation, tp repository and MarkBind for the product website.
-  * Ran code inspection on entire codebase and removed commented out code (Pull request [\#241](), [\#243]())
+  * Ran code inspection on entire codebase and removed commented out code (Pull request [\#241](https://github.com/AY2324S1-CS2103T-T15-2/tp/pull/241), [\#243](https://github.com/AY2324S1-CS2103T-T15-2/tp/pull/243))
 
 * **Community**:
   * Reported more than 5 bugs and gave suggestions during the PE Dry Run.
