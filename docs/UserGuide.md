@@ -112,7 +112,7 @@ Before reading our User Guide, here are some quick tips:
 
    * `add n/John Doe p/98765432 e/johnd@example.com s/A0245234A c/T11` : Adds a student named `John Doe` to **Class Manager 2023**.
 
-   * `delete s/A0245234A` : Deletes the student with Student number A0245234A from **Class Manager 2023**, who was added in the previous step.
+   * `delete s/A0245234A` : Deletes the student with Student Number A0245234A from **Class Manager 2023**, who was added in the previous step.
 
    * `exit` : Exits **Class Manager 2023** by closing the application window.
 
